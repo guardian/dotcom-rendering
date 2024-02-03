@@ -9,7 +9,6 @@ import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
-import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
 import type {
 	CommentForm,
@@ -96,9 +95,10 @@ type State = {
 	isClosedForComments: boolean;
 	isExpanded: boolean;
 	commentPage: number;
+	commentCount: number;
+	topLevelCommentCount: number;
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
-	totalPages: number;
 	loading: boolean;
 	topForm: CommentForm;
 	replyForm: CommentForm;
@@ -115,9 +115,10 @@ const initialState: State = {
 	isClosedForComments: false,
 	isExpanded: false,
 	commentPage: 1,
+	commentCount: 0,
+	topLevelCommentCount: 0,
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: undefined,
-	totalPages: 0,
 	loading: true,
 	topForm: initialCommentFormState,
 	replyForm: initialCommentFormState,
@@ -129,7 +130,8 @@ type Action =
 			type: 'commentsLoaded';
 			comments: CommentType[];
 			isClosedForComments: boolean;
-			totalPages: number;
+			commentCount: number;
+			topLevelCommentCount: number;
 	  }
 	| { type: 'expandComments' }
 	| { type: 'addComment'; comment: CommentType }
@@ -151,7 +153,8 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				comments: action.comments,
 				isClosedForComments: action.isClosedForComments,
-				totalPages: action.totalPages,
+				commentCount: action.commentCount,
+				topLevelCommentCount: action.topLevelCommentCount,
 				loading: false,
 			};
 		case 'addComment':
@@ -261,16 +264,15 @@ export const Discussion = ({
 			commentPage,
 			filters,
 			hashCommentId,
-			totalPages,
 			loading,
 			topForm,
 			replyForm,
 			bottomForm,
+			topLevelCommentCount,
+			commentCount,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
-
-	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
 	useEffect(() => {
 		const newHashCommentId = commentIdFromUrl();
@@ -291,13 +293,14 @@ export const Discussion = ({
 					return;
 				}
 
-				const { pages, discussion } = result.value;
+				const { discussion } = result.value;
 
 				dispatch({
 					type: 'commentsLoaded',
 					comments: discussion.comments,
 					isClosedForComments: discussion.isClosedForComments,
-					totalPages: pages,
+					topLevelCommentCount: discussion.topLevelCommentCount,
+					commentCount: discussion.commentCount,
 				});
 			})
 			.catch(() => {
@@ -400,9 +403,9 @@ export const Discussion = ({
 						});
 					}}
 					filters={validFilters}
-					commentCount={commentCount ?? 0}
+					commentCount={commentCount}
+					topLevelCommentCount={topLevelCommentCount}
 					loading={loading}
-					totalPages={totalPages}
 					comments={comments}
 					setComment={(comment: CommentType) => {
 						dispatch({ type: 'addComment', comment });

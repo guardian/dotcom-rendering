@@ -74,8 +74,10 @@ export const LoggedOutHiddenPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -124,8 +126,10 @@ export const InitialPage = () => (
 			setPage={() => {}}
 			filters={filters}
 			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -178,8 +182,10 @@ export const LoggedInHiddenNoPicks = () => {
 				setPage={() => {}}
 				filters={filters}
 				commentCount={discussionMock.discussion.commentCount}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionMock.pages}
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
@@ -228,8 +234,10 @@ export const LoggedIn = () => {
 				setPage={() => {}}
 				filters={filters}
 				commentCount={discussionMock.discussion.commentCount}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionMock.pages}
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
@@ -283,8 +291,10 @@ export const LoggedInShortDiscussion = () => {
 				setPage={() => {}}
 				filters={filters}
 				commentCount={discussionWithTwoComments.discussion.commentCount}
+				topLevelCommentCount={
+					discussionWithTwoComments.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionWithTwoComments.pages}
 				comments={discussionWithTwoComments.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
@@ -329,8 +339,10 @@ export const LoggedOutHiddenNoPicks = () => (
 			setPage={() => {}}
 			filters={filters}
 			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={0}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -381,8 +393,10 @@ export const Closed = () => (
 			setPage={() => {}}
 			filters={filters}
 			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -431,8 +445,8 @@ export const NoComments = () => (
 			setPage={() => {}}
 			filters={filters}
 			commentCount={0}
+			topLevelCommentCount={0}
 			loading={false}
-			totalPages={0}
 			comments={[]}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -483,8 +497,10 @@ export const LegacyDiscussion = () => (
 			commentCount={
 				legacyDiscussionWithoutThreading.discussion.commentCount
 			}
+			topLevelCommentCount={
+				legacyDiscussionWithoutThreading.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={legacyDiscussionWithoutThreading.pages}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}

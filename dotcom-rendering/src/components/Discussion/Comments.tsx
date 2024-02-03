@@ -39,8 +39,8 @@ type Props = {
 	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
 	commentCount: number;
+	topLevelCommentCount: number;
 	loading: boolean;
-	totalPages: number;
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
@@ -122,8 +122,8 @@ export const Comments = ({
 	setPage,
 	filters,
 	commentCount,
+	topLevelCommentCount,
 	loading,
-	totalPages,
 	comments,
 	setComment,
 	handleFilterChange,
@@ -236,7 +236,9 @@ export const Comments = ({
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
 
-	const showPagination = totalPages > 1;
+	const totalCount =
+		filters.threads === 'unthreaded' ? commentCount : topLevelCommentCount;
+	const showPagination = totalCount > filters.pageSize;
 
 	if (!expanded && loading) {
 		return <span data-testid="loading-comments"></span>;
@@ -262,10 +264,9 @@ export const Comments = ({
 						/>
 						{showPagination && (
 							<Pagination
-								totalPages={totalPages}
 								currentPage={page}
 								setCurrentPage={onPageChange}
-								commentCount={commentCount}
+								totalCount={totalCount}
 								filters={filters}
 							/>
 						)}
@@ -355,10 +356,9 @@ export const Comments = ({
 			/>
 			{showPagination && (
 				<Pagination
-					totalPages={totalPages}
 					currentPage={page}
 					setCurrentPage={onPageChange}
-					commentCount={commentCount}
+					totalCount={totalCount}
 					filters={filters}
 				/>
 			)}
@@ -407,10 +407,9 @@ export const Comments = ({
 			{showPagination && (
 				<footer css={footerStyles}>
 					<Pagination
-						totalPages={totalPages}
 						currentPage={page}
 						setCurrentPage={onPageChange}
-						commentCount={commentCount}
+						totalCount={totalCount}
 						filters={filters}
 					/>
 				</footer>

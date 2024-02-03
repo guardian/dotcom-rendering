@@ -14,10 +14,9 @@ import { palette as schemedPalette } from '../../palette';
 import type { FilterOptions } from '../../types/discussion';
 
 type Props = {
-	totalPages: number;
 	currentPage: number;
 	setCurrentPage: (currentPage: number) => void;
-	commentCount: number;
+	totalCount: number;
 	filters: FilterOptions;
 };
 
@@ -232,12 +231,12 @@ const decideForthPage = ({
 };
 
 export const Pagination = ({
-	totalPages,
 	currentPage,
 	setCurrentPage,
-	commentCount,
+	totalCount,
 	filters,
 }: Props) => {
+	const totalPages = Math.ceil(totalCount / filters.pageSize);
 	// Make decisions aobut which pagination elements to show
 	const showBackButton = totalPages > 4 && currentPage > 1;
 	const showFirstElipsis = totalPages > 4 && currentPage > 3;
@@ -252,10 +251,25 @@ export const Pagination = ({
 	const showForwardButton = totalPages > 4 && currentPage !== totalPages;
 
 	// Pagination Text
-	const { pageSize } = filters; // e.g: pageSize of 25
-	let endIndex = pageSize * currentPage; // e.g: currentPage is page 2, endIndex is 25 * 2 = 50
-	const startIndex = endIndex - (pageSize - 1); // e.g: 50 - (25 - 1) startIndex is 26. Example page 2 has comments 26 - 50 on it.
-	if (endIndex > commentCount) endIndex = commentCount; // If there are less total comments than allowed on the page, endIndex is total comment count
+	const { pageSize } = filters;
+	/**
+	 * Starting index of **1**
+	 *
+	 * For example, with a page size of 25, and 63 comments total:
+	 * 1. from 1
+	 * 2. from 26
+	 * 3. from 51
+	 */
+	const startIndex = 1 + pageSize * (currentPage - 1);
+	/**
+	 * Starting index of **1**
+	 *
+	 * For example, with a page size of 25, and 63 comments total:
+	 * 1. until 25
+	 * 2. until 50
+	 * 3. until 63
+	 */
+	const endIndex = Math.min(pageSize * currentPage, totalCount);
 
 	return (
 		<div css={wrapperStyles}>
@@ -306,15 +320,11 @@ export const Pagination = ({
 					/>
 				)}
 			</div>
-			{!!commentCount && (
-				<div css={paginationText}>
-					{`Displaying ${
-						filters.threads === 'unthreaded'
-							? 'comments'
-							: 'threads'
-					} ${startIndex} to ${endIndex} of ${commentCount}`}
-				</div>
-			)}
+			<div css={paginationText}>
+				{`Displaying ${
+					filters.threads === 'unthreaded' ? 'comments' : 'threads'
+				} ${startIndex} to ${endIndex} of ${totalCount}`}
+			</div>
 		</div>
 	);
 };
