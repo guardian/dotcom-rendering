@@ -114,6 +114,7 @@ export const LoggedOutHiddenPicks = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -180,6 +181,7 @@ export const InitialPage = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -251,6 +253,7 @@ export const LoggedInHiddenNoPicks = () => {
 				replyForm={{ ...defaultCommentForm, isActive, body }}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -333,6 +336,7 @@ export const LoggedIn = () => {
 					body: bottomFormBody,
 				}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -408,6 +412,7 @@ export const LoggedInShortDiscussion = () => {
 				}}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -467,6 +472,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -535,6 +541,7 @@ export const Closed = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -599,6 +606,7 @@ export const NoComments = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -665,6 +673,7 @@ export const LegacyDiscussion = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );

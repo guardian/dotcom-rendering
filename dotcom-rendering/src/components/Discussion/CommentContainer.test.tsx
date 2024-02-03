@@ -90,6 +90,7 @@ describe('CommentContainer', () => {
 				body={newCommentText}
 				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
 
@@ -142,6 +143,7 @@ describe('CommentContainer', () => {
 				body={''}
 				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
 
@@ -193,6 +195,7 @@ describe('CommentContainer', () => {
 				body={newCommentText}
 				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
 
@@ -245,6 +248,7 @@ describe('CommentContainer', () => {
 				body={''}
 				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
 

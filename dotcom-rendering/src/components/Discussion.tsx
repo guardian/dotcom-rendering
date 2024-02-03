@@ -141,6 +141,11 @@ type Action =
 			topLevelCommentCount: number;
 	  }
 	| { type: 'expandComments' }
+	| {
+			type: 'expandCommentReplies';
+			commentId: number;
+			responses: CommentType[];
+	  }
 	| { type: 'addComment'; comment: CommentType }
 	| { type: 'updateCommentPage'; commentPage: number }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
@@ -372,6 +377,23 @@ const reducer = (state: State, action: Action): State => {
 					...state.bottomForm,
 					error: action.error,
 				},
+			};
+		}
+		case 'expandCommentReplies': {
+			const replaceMatchingComment = (
+				comment: CommentType,
+			): CommentType => {
+				const responses =
+					comment.id === action.commentId
+						? action.responses
+						: comment.responses?.map(replaceMatchingComment);
+				return { ...comment, responses };
+			};
+
+			return {
+				...state,
+				isExpanded: true,
+				comments: state.comments.map(replaceMatchingComment),
 			};
 		}
 
@@ -667,6 +689,13 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormBody',
 							body,
+						})
+					}
+					expandCommentReplies={(commentId, responses) =>
+						dispatch({
+							type: 'expandCommentReplies',
+							commentId,
+							responses,
 						})
 					}
 					topForm={topForm}

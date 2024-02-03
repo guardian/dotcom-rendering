@@ -67,6 +67,7 @@ type Props = {
 	replyForm: Form;
 	bottomForm: Form;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
 };
 
 /**
@@ -178,6 +179,7 @@ export const Comments = ({
 	replyForm,
 	bottomForm,
 	reportAbuse,
+	expandCommentReplies,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -364,6 +366,9 @@ export const Comments = ({
 											body={replyForm.body}
 											setBody={setReplyFormBody}
 											reportAbuse={reportAbuse}
+											expandCommentReplies={
+												expandCommentReplies
+											}
 										/>
 									</li>
 								))}
@@ -458,6 +463,7 @@ export const Comments = ({
 									body={replyForm.body}
 									setBody={setReplyFormBody}
 									reportAbuse={reportAbuse}
+									expandCommentReplies={expandCommentReplies}
 								/>
 							</li>
 						))}
