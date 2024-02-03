@@ -140,7 +140,7 @@ type Action =
 	  }
 	| { type: 'expandComments' }
 	| { type: 'addComment'; comment: CommentType }
-	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
+	| { type: 'updateCommentPage'; commentPage: number }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
@@ -189,7 +189,7 @@ const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				commentPage: action.commentPage,
-				isExpanded: action.shouldExpand ? true : state.isExpanded,
+				isExpanded: true,
 			};
 		case 'filterChange':
 			return {
@@ -412,7 +412,12 @@ export const Discussion = ({
 
 	useEffect(() => {
 		dispatch({ type: 'setLoading', loading: true });
-		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
+
+		void getDiscussion(
+			shortUrlId,
+			commentPage,
+			remapToValidFilters(filters, hashCommentId),
+		)
 			.then((result) => {
 				if (result.kind === 'error') {
 					console.error(`getDiscussion - error: ${result.error}`);
@@ -432,7 +437,7 @@ export const Discussion = ({
 			.catch(() => {
 				// do nothing
 			});
-	}, [filters, commentPage, shortUrlId]);
+	}, [commentPage, filters, hashCommentId, shortUrlId]);
 
 	const validFilters = remapToValidFilters(filters, hashCommentId);
 
@@ -459,19 +464,22 @@ export const Discussion = ({
 	// on.
 	useEffect(() => {
 		if (hashCommentId !== undefined) {
-			getCommentContext(discussionApiUrl, hashCommentId)
+			getCommentContext(
+				discussionApiUrl,
+				hashCommentId,
+				remapToValidFilters(filters, hashCommentId),
+			)
 				.then((context) => {
 					dispatch({
 						type: 'updateCommentPage',
 						commentPage: context.page,
-						shouldExpand: true,
 					});
 				})
 				.catch((e) =>
 					console.error(`getCommentContext - error: ${String(e)}`),
 				);
 		}
-	}, [discussionApiUrl, hashCommentId]);
+	}, [filters, discussionApiUrl, hashCommentId]);
 
 	useEffect(() => {
 		if (window.location.hash === '#comments') {
@@ -522,11 +530,10 @@ export const Discussion = ({
 					apiKey="dotcom-rendering"
 					idApiUrl={idApiUrl}
 					page={commentPage}
-					setPage={(page: number, shouldExpand: boolean) => {
+					setPage={(page: number) => {
 						dispatch({
 							type: 'updateCommentPage',
 							commentPage: page,
-							shouldExpand,
 						});
 					}}
 					filters={validFilters}

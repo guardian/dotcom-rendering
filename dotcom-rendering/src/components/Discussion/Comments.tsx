@@ -36,7 +36,7 @@ type Props = {
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
-	setPage: (page: number, shouldExpand: boolean) => void;
+	setPage: (page: number) => void;
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
@@ -273,7 +273,7 @@ export const Comments = ({
 	};
 
 	const onPageChange = (pageNumber: number) => {
-		setPage(pageNumber, true);
+		setPage(pageNumber);
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
