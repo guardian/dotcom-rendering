@@ -66,11 +66,17 @@ const objAsParams = (obj: any): string => {
 type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
 
 //todo: figure out the different return types and consider error handling
-export const getDiscussion = async (
-	shortUrl: string,
-	page: number,
-	filters: FilterOptions,
-): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
+export const getDiscussion = async ({
+	shortUrl,
+	page,
+	filters,
+	signal,
+}: {
+	shortUrl: string;
+	page: number;
+	filters: FilterOptions;
+	signal: AbortSignal;
+}): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
 		...{
@@ -90,7 +96,10 @@ export const getDiscussion = async (
 
 	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
-	const jsonResult = await fetchJSON(url, { headers: options.headers });
+	const jsonResult = await fetchJSON(url, {
+		headers: options.headers,
+		signal,
+	});
 
 	if (jsonResult.kind === 'error') return jsonResult;
 
@@ -105,9 +114,14 @@ export const getDiscussion = async (
 		// we get the response to tell us
 		result.output.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
 	) {
-		return getDiscussion(shortUrl, page, {
-			...filters,
-			threads: 'unthreaded',
+		return getDiscussion({
+			shortUrl,
+			page,
+			filters: {
+				...filters,
+				threads: 'unthreaded',
+			},
+			signal,
 		});
 	}
 	if (result.output.status === 'error') {

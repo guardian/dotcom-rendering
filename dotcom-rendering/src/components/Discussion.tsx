@@ -423,11 +423,14 @@ export const Discussion = ({
 	useEffect(() => {
 		dispatch({ type: 'setLoading', loading: true });
 
-		void getDiscussion(
-			shortUrlId,
-			commentPage,
-			remapToValidFilters(filters, hashCommentId),
-		)
+		const controller = new AbortController();
+
+		void getDiscussion({
+			shortUrl: shortUrlId,
+			page: commentPage,
+			filters: remapToValidFilters(filters, hashCommentId),
+			signal: controller.signal,
+		})
 			.then((result) => {
 				if (result.kind === 'error') {
 					console.error(`getDiscussion - error: ${result.error}`);
@@ -447,6 +450,8 @@ export const Discussion = ({
 			.catch(() => {
 				// do nothing
 			});
+
+		return () => controller.abort();
 	}, [commentPage, filters, hashCommentId, shortUrlId]);
 
 	const validFilters = remapToValidFilters(filters, hashCommentId);
