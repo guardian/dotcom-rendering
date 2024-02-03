@@ -67,17 +67,27 @@ const buildLightboxImage = (
 
 	if (!isLightboxable(width, height)) return;
 
+	const data = isImage(element)
+		? {
+				alt: element.data.alt,
+				credit: element.data.credit,
+				caption: element.data.caption,
+				title: element.title,
+				starRating: element.starRating,
+		  }
+		: {
+				alt: element.alt,
+				credit: element.credit,
+				caption: element.caption,
+		  };
+
 	return {
 		masterUrl: masterImage.url,
 		width,
 		height,
 		elementId: element.elementId,
-		alt: isImage(element) ? element.data.alt : element.alt,
-		credit: isImage(element) ? element.data.credit : element.credit,
-		caption: isImage(element) ? element.data.caption : element.caption,
 		displayCredit: element.displayCredit,
-		title: isImage(element) ? element.title : undefined,
-		starRating: isImage(element) ? element.starRating : undefined,
+		...data,
 	};
 };
 
