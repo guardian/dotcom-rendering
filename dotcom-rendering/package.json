@@ -228,7 +228,7 @@
 		"typescript": "5.3.3",
 		"typescript-json-schema": "0.58.1",
 		"unified": "10.1.2",
-		"valibot": "0.26.0",
+		"valibot": "0.28.1",
 		"web-vitals": "3.5.1",
 		"webpack": "5.89.0",
 		"webpack-assets-manifest": "5.1.0",

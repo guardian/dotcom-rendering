@@ -346,7 +346,7 @@ importers:
         version: 7.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/braze-components':
         specifier: 18.0.0
-        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
+        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -766,7 +766,7 @@ importers:
         version: 7.1.2
       postcss-styled-syntax:
         specifier: 0.6.3
-        version: 0.6.3(postcss@8.4.33)
+        version: 0.6.3(postcss@8.4.35)
       preact:
         specifier: 10.15.1
         version: 10.15.1
@@ -897,8 +897,8 @@ importers:
         specifier: 10.1.2
         version: 10.1.2
       valibot:
-        specifier: 0.26.0
-        version: 0.26.0
+        specifier: 0.28.1
+        version: 0.28.1
       web-vitals:
         specifier: 3.5.1
         version: 3.5.1
@@ -4432,7 +4432,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
+  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
     resolution: {integrity: sha512-tK0waGQj/dEwpssxEOlHw7/d9XXnkQqZai/2LFUSuHwDtbeTgZZfIsAd9DoX02qFHNZlzvRvbLlS48zKcPKHDw==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
@@ -10910,8 +10910,8 @@ packages:
     requiresBuild: true
     dev: false
 
-  /core-js-pure@3.35.0:
-    resolution: {integrity: sha512-f+eRYmkou59uh7BPcyJ8MC76DiGhspj1KMxVIcF24tzP8NA9HVa1uC7BTW2tgx7E1QVCzDzsgp7kArrzhlz8Ew==}
+  /core-js-pure@3.35.1:
+    resolution: {integrity: sha512-zcIdi/CL3MWbBJYo5YCeVAAx+Sy9yJE9I3/u9LkFABwbeaPhTMRWraM8mYFp9jW5Z50hOy7FVzCc8dCrpZqtIQ==}
     requiresBuild: true
     dev: false
 
@@ -15402,16 +15402,16 @@ packages:
       wrap-ansi: 9.0.0
     dev: false
 
-  /live-connect-common@3.0.3:
-    resolution: {integrity: sha512-ZPycT04ROBUvPiksnLTunrKC3ROhBSeO99fQ+4qMIkgKwP2CvS44L7fK+0WFV4nAi+65KbzSng7JWcSlckfw8w==}
+  /live-connect-common@3.1.1:
+    resolution: {integrity: sha512-sV0oUvJnaTN41f30hOo3wDjZL2y8TYu5BQKvlxmek7Agpe2AGGN/dsPA8i2sHkessRKpcTfrPjmpnG2bIxq7Gg==}
     engines: {node: '>=18'}
     dev: false
 
-  /live-connect-js@6.3.4:
-    resolution: {integrity: sha512-lg2XeCaj/eEbK66QGGDEdz9IdT/K3ExZ83Qo6xGVLdP5XJ33xAUCk/gds34rRTmpIwUfAnboOpyj3UoYtS3QUQ==}
+  /live-connect-js@6.5.0:
+    resolution: {integrity: sha512-gZOKtGjPjTf6JuUtA6OZgg8w/uEP2lEtlAKWSox+rTiTRmD4U6o28MB9WEgSJWlZWwUwmWu9dL8ByxBFbsWZyg==}
     engines: {node: '>=18'}
     dependencies:
-      live-connect-common: 3.0.3
+      live-connect-common: 3.1.1
       tiny-hashes: 1.0.1
     dev: false
 
@@ -17032,13 +17032,13 @@ packages:
       util-deprecate: 1.0.2
     dev: false
 
-  /postcss-styled-syntax@0.6.3(postcss@8.4.33):
+  /postcss-styled-syntax@0.6.3(postcss@8.4.35):
     resolution: {integrity: sha512-woEkwRaHWnVOVjToQKeQkRYasTwa3WY+0A7hcY0HmiBw458nxmWFbt7+XMvuGWwB4VYjNqeWYNr04Hx9/GVTpA==}
     engines: {node: '>=14.17'}
     peerDependencies:
       postcss: ^8.4.21
     dependencies:
-      postcss: 8.4.33
+      postcss: 8.4.35
       typescript: 5.3.3
     dev: false
 
@@ -17055,8 +17055,8 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
-  /postcss@8.4.33:
-    resolution: {integrity: sha512-Kkpbhhdjw2qQs2O2DGX+8m5OVqEcbB9HRBvuYM9pgrjEFUg30A9LmXNlTAUj4S9kgtGyrMbTzVjH7E+s5Re2yg==}
+  /postcss@8.4.35:
+    resolution: {integrity: sha512-u5U8qYpBCpN13BsiEB0CbR1Hhh4Gc0zLFuedrHJKMctHCHAGrMdG0PRM/KErzAL3CU6/eckEtmHNB3x6e3c0vA==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.7
@@ -19925,8 +19925,8 @@ packages:
       convert-source-map: 2.0.0
     dev: false
 
-  /valibot@0.26.0:
-    resolution: {integrity: sha512-cM8VM9jsJGx9P4qarZUBXd0I88OVI4ddtyZ1sAMiofC3Usj7Jxm2c8Xx5accdTrKc3CblO8yyytRaJ6lrsuA+Q==}
+  /valibot@0.28.1:
+    resolution: {integrity: sha512-zQnjwNJuXk6362Leu0+4eFa/SMwRom3/hEvH6s1EGf3oXIPbo2WFKDra9ymnbVh3clLRvd8hw4sKF5ruI2Lyvw==}
     dev: false
 
   /validate-npm-package-license@3.0.4:
@@ -20845,7 +20845,7 @@ packages:
       '@babel/runtime': 7.23.8
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
       core-js: 3.33.3
-      core-js-pure: 3.35.0
+      core-js-pure: 3.35.1
       criteo-direct-rsa-validate: 1.1.0
       crypto-js: 4.2.0
       dlv: 1.1.3
@@ -20853,7 +20853,7 @@ packages:
       express: 4.18.2
       fun-hooks: 0.9.10
       just-clone: 1.0.2
-      live-connect-js: 6.3.4
+      live-connect-js: 6.5.0
     optionalDependencies:
       fsevents: 2.3.3
     transitivePeerDependencies:

@@ -397,7 +397,7 @@ export const getCommentContextResponseSchema = object({
 	discussionKey: string(),
 	discussionWebUrl: string(),
 	discussionApiUrl: string(),
-	orderBy: string(),
-	pageSize: number(),
+	orderBy: picklist(orderBy),
+	pageSize: picklist(pageSize),
 	page: number(),
 });

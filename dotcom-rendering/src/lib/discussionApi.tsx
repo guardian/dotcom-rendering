@@ -466,14 +466,11 @@ export const getCommentContext = async (
 
 	if (jsonResult.kind === 'error') return jsonResult;
 
-	const result = safeParse(getCommentContextResponseSchema, jsonResult);
+	const result = safeParse(getCommentContextResponseSchema, jsonResult.value);
 
 	if (!result.success) {
 		return error('ParsingError');
 	}
-	if (result.output.status !== 'ok') {
-		return error('ApiError');
-	}
 
-	return ok(result.output as CommentContextType);
+	return ok(result.output);
 };
