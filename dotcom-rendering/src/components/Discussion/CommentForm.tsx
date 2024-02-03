@@ -5,7 +5,7 @@ import {
 	text,
 	textSans,
 } from '@guardian/source-foundations';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentType,
 	SignedInUser,
@@ -25,18 +25,12 @@ type Props = {
 	setCommentBeingRepliedTo?: () => void;
 	commentBeingRepliedTo?: CommentType;
 	onPreview?: typeof defaultPreview;
-	showPreview: boolean;
-	setShowPreview: (showPreview: boolean) => void;
-	isActive: boolean;
-	setIsActive: (isActive: boolean) => void;
 	error: string;
 	setError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
-	body: string;
-	setBody: (body: string) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -205,20 +199,21 @@ export const CommentForm = ({
 	setCommentBeingRepliedTo,
 	commentBeingRepliedTo,
 	onPreview,
-	showPreview,
-	setShowPreview,
-	isActive,
-	setIsActive,
 	error,
 	setError,
 	userNameMissing,
 	setUserNameMissing,
 	previewBody,
 	setPreviewBody,
-	body,
-	setBody,
 }: Props) => {
+	const [isActive, setIsActive] = useState(false);
+
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+	const setBody = (body: string) => {
+		if (!textAreaRef.current) return;
+		textAreaRef.current.value = body;
+	};
 
 	useEffect(() => {
 		if (commentBeingRepliedTo) {
@@ -277,6 +272,7 @@ export const CommentForm = ({
 	};
 
 	const fetchShowPreview = async () => {
+		const body = textAreaRef.current?.value;
 		if (!body) return;
 
 		const preview = onPreview ?? defaultPreview;
@@ -285,24 +281,24 @@ export const CommentForm = ({
 		if (response.kind === 'error') {
 			setError('Preview request failed, please try again');
 			setPreviewBody('');
-			setShowPreview(false);
 			return;
 		}
 
 		setPreviewBody(response.value);
-		setShowPreview(true);
 	};
 
 	const resetForm = () => {
 		setError('');
 		setBody('');
-		setShowPreview(false);
+		setPreviewBody('');
 		setIsActive(false);
 		setCommentBeingRepliedTo?.();
 	};
 
 	const submitForm = async () => {
 		setError('');
+
+		const body = textAreaRef.current?.value;
 
 		if (body) {
 			const response = commentBeingRepliedTo
@@ -401,7 +397,7 @@ export const CommentForm = ({
 		}
 	};
 
-	if (userNameMissing && body) {
+	if (isActive && userNameMissing) {
 		return (
 			<FirstCommentWelcome
 				error={error}
@@ -469,10 +465,6 @@ export const CommentForm = ({
 					]}
 					ref={textAreaRef}
 					style={{ height: isActive ? '132px' : '50px' }}
-					onChange={(e) => {
-						setBody(e.target.value || '');
-					}}
-					value={body}
 					onFocus={() => setIsActive(true)}
 				/>
 				<div css={bottomContainer}>
@@ -485,7 +477,7 @@ export const CommentForm = ({
 							>
 								Post your comment
 							</PillarButton>
-							{(isActive || !!body) && (
+							{isActive && (
 								<>
 									<Space amount={3} />
 									<PillarButton
@@ -594,7 +586,7 @@ export const CommentForm = ({
 				</div>
 			</form>
 
-			{showPreview && (
+			{previewBody.trim() !== '' && (
 				<Preview previewHtml={previewBody} showSpout={true} />
 			)}
 		</>

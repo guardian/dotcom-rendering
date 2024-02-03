@@ -27,10 +27,6 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	onPreview?: typeof preview;
-	showPreview: boolean;
-	setShowPreview: (showPreview: boolean) => void;
-	isCommentFormActive: boolean;
-	setIsCommentFormActive: (isActive: boolean) => void;
 	error: string;
 	setError: (error: string) => void;
 	pickError: string;
@@ -39,8 +35,6 @@ type Props = {
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
-	body: string;
-	setBody: (body: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
 };
@@ -91,10 +85,6 @@ export const CommentContainer = ({
 	toggleMuteStatus,
 	onPermalinkClick,
 	onPreview,
-	showPreview,
-	setShowPreview,
-	isCommentFormActive,
-	setIsCommentFormActive,
 	error,
 	setError,
 	pickError,
@@ -103,8 +93,6 @@ export const CommentContainer = ({
 	setUserNameMissing,
 	previewBody,
 	setPreviewBody,
-	body,
-	setBody,
 	reportAbuse,
 	expandCommentReplies,
 }: Props) => {
@@ -241,18 +229,12 @@ export const CommentContainer = ({
 								}
 								commentBeingRepliedTo={commentBeingRepliedTo}
 								onPreview={onPreview}
-								showPreview={showPreview}
-								setShowPreview={setShowPreview}
-								isActive={isCommentFormActive}
-								setIsActive={setIsCommentFormActive}
 								error={error}
 								setError={setError}
 								userNameMissing={userNameMissing}
 								setUserNameMissing={setUserNameMissing}
 								previewBody={previewBody}
 								setPreviewBody={setPreviewBody}
-								body={body}
-								setBody={setBody}
 							/>
 						</div>
 					)}

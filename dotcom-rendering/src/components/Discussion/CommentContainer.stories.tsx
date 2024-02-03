@@ -200,10 +200,6 @@ export const defaultStory = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -212,8 +208,6 @@ export const defaultStory = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
 	/>
@@ -242,10 +236,6 @@ export const threadedComment = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -254,8 +244,6 @@ export const threadedComment = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
 	/>
@@ -284,10 +272,6 @@ export const threadedCommentWithShowMore = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -296,8 +280,6 @@ export const threadedCommentWithShowMore = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
 	/>
@@ -326,10 +308,6 @@ export const threadedCommentWithLongUsernames = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -338,8 +316,6 @@ export const threadedCommentWithLongUsernames = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
 	/>
@@ -368,10 +344,6 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -380,8 +352,6 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
 	/>
