@@ -39,7 +39,7 @@ export const TwoPages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={56}
+			totalCount={49}
 		/>
 	);
 };

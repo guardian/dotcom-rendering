@@ -491,7 +491,7 @@ export const LegacyDiscussion = () => (
 			onPermalinkClick={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
-			page={3}
+			page={2}
 			setPage={() => {}}
 			filters={filters}
 			commentCount={
