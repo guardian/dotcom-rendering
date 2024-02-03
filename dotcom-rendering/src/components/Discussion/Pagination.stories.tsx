@@ -25,7 +25,7 @@ export const Default = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={200}
+			topLevelCommentCount={200}
 		/>
 	);
 };
@@ -39,7 +39,7 @@ export const TwoPages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={49}
+			topLevelCommentCount={49}
 		/>
 	);
 };
@@ -53,7 +53,7 @@ export const ThreePages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={75}
+			topLevelCommentCount={75}
 		/>
 	);
 };
@@ -67,7 +67,7 @@ export const FourPages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={100}
+			topLevelCommentCount={100}
 		/>
 	);
 };
@@ -81,7 +81,7 @@ export const FivePages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={124}
+			topLevelCommentCount={124}
 		/>
 	);
 };
@@ -95,7 +95,7 @@ export const SixPages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={149}
+			topLevelCommentCount={149}
 		/>
 	);
 };
@@ -109,7 +109,7 @@ export const SevenPages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={159}
+			topLevelCommentCount={159}
 		/>
 	);
 };
@@ -123,7 +123,7 @@ export const TwelvePages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={288}
+			topLevelCommentCount={288}
 		/>
 	);
 };
@@ -137,7 +137,7 @@ export const LotsOfPages = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={DEFAULT_FILTERS}
-			totalCount={490_000}
+			topLevelCommentCount={490_000}
 		/>
 	);
 };
@@ -151,7 +151,7 @@ export const WhenExpanded = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={{ ...DEFAULT_FILTERS, threads: 'expanded' }}
-			totalCount={100}
+			topLevelCommentCount={100}
 		/>
 	);
 };
@@ -165,7 +165,7 @@ export const WhenCollapsed = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={{ ...DEFAULT_FILTERS, threads: 'collapsed' }}
-			totalCount={100}
+			topLevelCommentCount={100}
 		/>
 	);
 };
@@ -179,7 +179,7 @@ export const WhenUnthreaded = () => {
 			currentPage={page}
 			setCurrentPage={setCurrentPage}
 			filters={{ ...DEFAULT_FILTERS, threads: 'unthreaded' }}
-			totalCount={100}
+			topLevelCommentCount={100}
 		/>
 	);
 };

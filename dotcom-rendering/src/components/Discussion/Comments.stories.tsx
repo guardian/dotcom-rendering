@@ -73,7 +73,9 @@ export const LoggedOutHiddenPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			totalCount={discussionMock.discussion.topLevelCommentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
@@ -122,7 +124,9 @@ export const InitialPage = () => (
 			page={1}
 			setPage={() => {}}
 			filters={filters}
-			totalCount={discussionMock.discussion.topLevelCommentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
@@ -175,7 +179,9 @@ export const LoggedInHiddenNoPicks = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				totalCount={discussionMock.discussion.topLevelCommentCount}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
 				loading={false}
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
@@ -224,7 +230,9 @@ export const LoggedIn = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				totalCount={discussionMock.discussion.topLevelCommentCount}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
 				loading={false}
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
@@ -278,7 +286,7 @@ export const LoggedInShortDiscussion = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				totalCount={
+				topLevelCommentCount={
 					discussionWithTwoComments.discussion.topLevelCommentCount
 				}
 				loading={false}
@@ -325,7 +333,9 @@ export const LoggedOutHiddenNoPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			totalCount={discussionMock.discussion.topLevelCommentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
@@ -376,7 +386,9 @@ export const Closed = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			totalCount={discussionMock.discussion.topLevelCommentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
@@ -425,7 +437,7 @@ export const NoComments = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			totalCount={0}
+			topLevelCommentCount={0}
 			loading={false}
 			comments={[]}
 			setComment={() => {}}
@@ -474,7 +486,7 @@ export const LegacyDiscussion = () => (
 			page={2}
 			setPage={() => {}}
 			filters={filters}
-			totalCount={
+			topLevelCommentCount={
 				legacyDiscussionWithoutThreading.discussion.commentCount
 			}
 			loading={false}

@@ -38,7 +38,7 @@ type Props = {
 	page: number;
 	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
-	totalCount: number;
+	topLevelCommentCount: number;
 	loading: boolean;
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
@@ -120,7 +120,7 @@ export const Comments = ({
 	page,
 	setPage,
 	filters,
-	totalCount,
+	topLevelCommentCount,
 	loading,
 	comments,
 	setComment,
@@ -195,7 +195,7 @@ export const Comments = ({
 		 */
 
 		const maxPagePossible = Math.ceil(
-			totalCount / newFilterObject.pageSize,
+			topLevelCommentCount / newFilterObject.pageSize,
 		);
 
 		if (page > maxPagePossible) {
@@ -234,7 +234,7 @@ export const Comments = ({
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
 
-	const showPagination = totalCount > filters.pageSize;
+	const showPagination = topLevelCommentCount > filters.pageSize;
 
 	if (!expanded && loading) {
 		return <span data-testid="loading-comments"></span>;
@@ -256,13 +256,13 @@ export const Comments = ({
 						<Filters
 							filters={filters}
 							onFilterChange={onFilterChange}
-							totalCount={totalCount}
+							topLevelCommentCount={topLevelCommentCount}
 						/>
 						{showPagination && (
 							<Pagination
 								currentPage={page}
 								setCurrentPage={onPageChange}
-								totalCount={totalCount}
+								topLevelCommentCount={topLevelCommentCount}
 								filters={filters}
 							/>
 						)}
@@ -348,13 +348,13 @@ export const Comments = ({
 			<Filters
 				filters={filters}
 				onFilterChange={onFilterChange}
-				totalCount={totalCount}
+				topLevelCommentCount={topLevelCommentCount}
 			/>
 			{showPagination && (
 				<Pagination
 					currentPage={page}
 					setCurrentPage={onPageChange}
-					totalCount={totalCount}
+					topLevelCommentCount={topLevelCommentCount}
 					filters={filters}
 				/>
 			)}
@@ -405,7 +405,7 @@ export const Comments = ({
 					<Pagination
 						currentPage={page}
 						setCurrentPage={onPageChange}
-						totalCount={totalCount}
+						topLevelCommentCount={topLevelCommentCount}
 						filters={filters}
 					/>
 				</footer>

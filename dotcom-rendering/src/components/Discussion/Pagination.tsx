@@ -16,7 +16,7 @@ import type { FilterOptions } from '../../types/discussion';
 type Props = {
 	currentPage: number;
 	setCurrentPage: (currentPage: number) => void;
-	totalCount: number;
+	topLevelCommentCount: number;
 	filters: FilterOptions;
 };
 
@@ -233,10 +233,10 @@ const decideForthPage = ({
 export const Pagination = ({
 	currentPage,
 	setCurrentPage,
-	totalCount,
+	topLevelCommentCount,
 	filters,
 }: Props) => {
-	const totalPages = Math.ceil(totalCount / filters.pageSize);
+	const totalPages = Math.ceil(topLevelCommentCount / filters.pageSize);
 	// Make decisions aobut which pagination elements to show
 	const showBackButton = totalPages > 4 && currentPage > 1;
 	const showFirstElipsis = totalPages > 4 && currentPage > 3;
@@ -269,7 +269,7 @@ export const Pagination = ({
 	 * 2. until 50
 	 * 3. until 63
 	 */
-	const endIndex = Math.min(pageSize * currentPage, totalCount);
+	const endIndex = Math.min(pageSize * currentPage, topLevelCommentCount);
 
 	return (
 		<div css={wrapperStyles}>
@@ -323,7 +323,7 @@ export const Pagination = ({
 			<div css={paginationText}>
 				{`Displaying ${
 					filters.threads === 'unthreaded' ? 'comments' : 'threads'
-				} ${startIndex} to ${endIndex} of ${totalCount}`}
+				} ${startIndex} to ${endIndex} of ${topLevelCommentCount}`}
 			</div>
 		</div>
 	);

@@ -11,7 +11,7 @@ import { Dropdown } from './Dropdown';
 type Props = {
 	filters: FilterOptions;
 	onFilterChange: (newFilterObject: FilterOptions) => void;
-	totalCount: number;
+	topLevelCommentCount: number;
 };
 
 const filterBar = css`
@@ -43,7 +43,11 @@ const filterPadding = css`
 	padding-right: ${space[3]}px;
 `;
 
-export const Filters = ({ filters, onFilterChange, totalCount }: Props) => (
+export const Filters = ({
+	filters,
+	onFilterChange,
+	topLevelCommentCount,
+}: Props) => (
 	<div id="comment-filters" css={filterBar}>
 		<div css={filterPadding}>
 			<Dropdown
@@ -83,19 +87,19 @@ export const Filters = ({ filters, onFilterChange, totalCount }: Props) => (
 					{
 						title: '25',
 						value: '25',
-						disabled: totalCount <= 25,
+						disabled: topLevelCommentCount <= 25,
 						isActive: filters.pageSize === 25,
 					},
 					{
 						title: '50',
 						value: '50',
-						disabled: totalCount <= 50,
+						disabled: topLevelCommentCount <= 50,
 						isActive: filters.pageSize === 50,
 					},
 					{
 						title: '100',
 						value: '100',
-						disabled: totalCount <= 100,
+						disabled: topLevelCommentCount <= 100,
 						isActive: filters.pageSize === 100,
 					},
 				]}

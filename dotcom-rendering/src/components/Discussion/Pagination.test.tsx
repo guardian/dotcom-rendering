@@ -15,7 +15,7 @@ describe('Pagination', () => {
 				currentPage={2}
 				setCurrentPage={() => {}}
 				filters={DEFAULT_FILTERS}
-				totalCount={222} // 9 pages: 8.88 = 222 / 25
+				topLevelCommentCount={222} // 9 pages: 8.88 = 222 / 25
 			/>,
 		);
 

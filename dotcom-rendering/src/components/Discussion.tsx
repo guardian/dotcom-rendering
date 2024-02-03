@@ -96,7 +96,7 @@ type State = {
 	isExpanded: boolean;
 	commentPage: number;
 	commentCount: number | undefined;
-	topLevelCommentCount: number | undefined;
+	topLevelCommentCount: number;
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
 	loading: boolean;
@@ -116,7 +116,7 @@ const initialState: State = {
 	isExpanded: false,
 	commentPage: 1,
 	commentCount: undefined,
-	topLevelCommentCount: undefined,
+	topLevelCommentCount: 0,
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: undefined,
 	loading: true,
@@ -274,11 +274,6 @@ export const Discussion = ({
 		dispatch,
 	] = useReducer(reducer, initialState);
 
-	const totalCount =
-		(filters.threads === 'unthreaded'
-			? commentCount
-			: topLevelCommentCount) ?? 0;
-
 	useEffect(() => {
 		const newHashCommentId = commentIdFromUrl();
 		if (newHashCommentId !== undefined) {
@@ -408,7 +403,7 @@ export const Discussion = ({
 						});
 					}}
 					filters={validFilters}
-					totalCount={totalCount}
+					topLevelCommentCount={topLevelCommentCount}
 					loading={loading}
 					comments={comments}
 					setComment={(comment: CommentType) => {
