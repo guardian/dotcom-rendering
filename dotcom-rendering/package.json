@@ -59,7 +59,7 @@
 		"@guardian/libs": "16.0.1",
 		"@guardian/ophan-tracker-js": "2.0.4",
 		"@guardian/shimport": "1.0.2",
-		"@guardian/source-foundations": "14.1.2",
+		"@guardian/source-foundations": "14.1.4",
 		"@guardian/source-react-components": "18.0.0",
 		"@guardian/source-react-components-development-kitchen": "16.0.0",
 		"@guardian/support-dotcom-components": "1.1.1",
