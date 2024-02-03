@@ -422,20 +422,12 @@ const reducer = (state: State, action: Action): State => {
 			};
 		}
 		case 'expandCommentReplies': {
-			const replaceMatchingComment = (
-				comment: CommentType,
-			): CommentType => {
-				const responses =
-					comment.id === action.commentId
-						? action.responses
-						: comment.responses?.map(replaceMatchingComment);
-				return { ...comment, responses };
-			};
-
 			return {
 				...state,
 				isExpanded: true,
-				comments: state.comments.map(replaceMatchingComment),
+				comments: state.comments.map(
+					replaceMatchingCommentResponses(action),
+				),
 			};
 		}
 
