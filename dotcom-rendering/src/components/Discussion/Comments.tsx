@@ -38,8 +38,7 @@ type Props = {
 	page: number;
 	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
-	commentCount: number;
-	topLevelCommentCount: number;
+	totalCount: number;
 	loading: boolean;
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
@@ -121,8 +120,7 @@ export const Comments = ({
 	page,
 	setPage,
 	filters,
-	commentCount,
-	topLevelCommentCount,
+	totalCount,
 	loading,
 	comments,
 	setComment,
@@ -197,7 +195,7 @@ export const Comments = ({
 		 */
 
 		const maxPagePossible = Math.ceil(
-			commentCount / newFilterObject.pageSize,
+			totalCount / newFilterObject.pageSize,
 		);
 
 		if (page > maxPagePossible) {
@@ -236,8 +234,6 @@ export const Comments = ({
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
 
-	const totalCount =
-		filters.threads === 'unthreaded' ? commentCount : topLevelCommentCount;
 	const showPagination = totalCount > filters.pageSize;
 
 	if (!expanded && loading) {
@@ -260,7 +256,7 @@ export const Comments = ({
 						<Filters
 							filters={filters}
 							onFilterChange={onFilterChange}
-							commentCount={commentCount}
+							totalCount={totalCount}
 						/>
 						{showPagination && (
 							<Pagination
@@ -352,7 +348,7 @@ export const Comments = ({
 			<Filters
 				filters={filters}
 				onFilterChange={onFilterChange}
-				commentCount={commentCount}
+				totalCount={totalCount}
 			/>
 			{showPagination && (
 				<Pagination

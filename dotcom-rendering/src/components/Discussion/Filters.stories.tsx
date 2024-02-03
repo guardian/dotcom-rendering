@@ -16,7 +16,7 @@ export const Default = () => {
 		<Filters
 			filters={filters}
 			onFilterChange={setFilters}
-			commentCount={74}
+			totalCount={74}
 		/>
 	);
 };
