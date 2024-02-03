@@ -57,30 +57,37 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		if (!iframe) return;
 		if (!container) return;
 
-		const listener = () => {
+		log('dotcom', '📜', { container });
+
+		const scrollListener = () => {
 			const { top, height } = container.getBoundingClientRect();
 			if (top > 0) return setScroll(0);
 			if (top < -height) return setScroll(1);
 			setScroll(-top);
 		};
-		window.addEventListener('scroll', listener);
 
-		window.addEventListener('message', (event: MessageEvent<unknown>) => {
+		const messageListener = (event: MessageEvent<unknown>) => {
 			log('dotcom', '📜 received message', event.source, event.data);
 
 			if (
 				event.source === iframe.contentWindow &&
 				isObject(event.data) &&
 				'kind' in event.data &&
-				event.data.kind === 'interactive:size' &&
+				event.data.kind === 'interactive:height' &&
 				'height' in event.data &&
 				typeof event.data.height === 'number'
 			) {
 				container.style.height = `${event.data.height}px`;
 			}
-		});
+		};
 
-		return () => window.removeEventListener('scroll', listener);
+		window.addEventListener('scroll', scrollListener);
+		window.addEventListener('message', messageListener);
+
+		return () => {
+			window.removeEventListener('scroll', scrollListener);
+			window.removeEventListener('message', messageListener);
+		};
 	}, [iframe, container]);
 
 	useEffect(() => {

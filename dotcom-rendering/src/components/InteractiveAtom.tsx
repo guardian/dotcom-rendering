@@ -43,6 +43,7 @@ const scrollies = new Set([
 	'interactives/2022/02/orion/project-in-numbers',
 	'interactives/2022/02/interactive-russian-deployments-ukraine-article/default',
 	'interactives/2023/01/colour-of-power/default',
+	'interactives/2024/01/ai2html-scrolly-safe-version-test/default',
 ]);
 
 export const InteractiveAtom = ({
@@ -56,6 +57,8 @@ export const InteractiveAtom = ({
 	const { renderingTarget } = useConfig();
 
 	const isScrolly = scrollies.has(id);
+
+	console.log({ id, isScrolly });
 
 	return (
 		<div
