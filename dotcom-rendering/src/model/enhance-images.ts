@@ -1,5 +1,4 @@
 import { JSDOM } from 'jsdom';
-import { getLargest, getMaster } from '../lib/image';
 import type {
 	CartoonBlockElement,
 	FEElement,
@@ -313,14 +312,8 @@ const addImagePositions = <E extends FEElement>(
 			return element;
 		}
 
-		const allImages = isImage(element)
-			? element.media.allImages
-			: element.variants.flatMap((variant) => variant.images);
-
-		const image = getMaster(allImages) ?? getLargest(allImages);
-
 		const position = imagesForLightbox.find(
-			({ masterUrl }) => image?.url === masterUrl,
+			({ elementId }) => element.elementId === elementId,
 		)?.position;
 
 		return position === undefined ? element : { ...element, position };
