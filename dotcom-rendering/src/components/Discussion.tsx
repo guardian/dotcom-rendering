@@ -108,6 +108,7 @@ type State = {
 const initialCommentFormState = {
 	isActive: false,
 	userNameMissing: false,
+	showPreview: false,
 };
 
 const initialState: State = {
@@ -142,7 +143,10 @@ type Action =
 	| { type: 'setBottomFormActive'; isActive: boolean }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean };
+	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setTopFormShowPreview'; showPreview: boolean }
+	| { type: 'setReplyFormShowPreview'; showPreview: boolean }
+	| { type: 'setBottomFormShowPreview'; showPreview: boolean };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -234,6 +238,33 @@ const reducer = (state: State, action: Action): State => {
 				bottomForm: {
 					...state.bottomForm,
 					userNameMissing: action.userNameMissing,
+				},
+			};
+		}
+		case 'setTopFormShowPreview': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					userNameMissing: action.showPreview,
+				},
+			};
+		}
+		case 'setReplyFormShowPreview': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					showPreview: action.showPreview,
+				},
+			};
+		}
+		case 'setBottomFormShowPreview': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					showPreview: action.showPreview,
 				},
 			};
 		}
@@ -442,6 +473,24 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormUserMissing',
 							userNameMissing,
+						})
+					}
+					setTopFormShowPreview={(showPreview) =>
+						dispatch({
+							type: 'setTopFormShowPreview',
+							showPreview,
+						})
+					}
+					setReplyFormShowPreview={(showPreview) =>
+						dispatch({
+							type: 'setReplyFormShowPreview',
+							showPreview,
+						})
+					}
+					setBottomFormShowPreview={(showPreview) =>
+						dispatch({
+							type: 'setBottomFormShowPreview',
+							showPreview,
 						})
 					}
 					topForm={topForm}
