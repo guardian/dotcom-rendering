@@ -38,9 +38,8 @@ type Props = {
 	page: number;
 	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
-	commentCount: number;
+	topLevelCommentCount: number;
 	loading: boolean;
-	totalPages: number;
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
@@ -127,9 +126,8 @@ export const Comments = ({
 	page,
 	setPage,
 	filters,
-	commentCount,
+	topLevelCommentCount,
 	loading,
-	totalPages,
 	comments,
 	setComment,
 	handleFilterChange,
@@ -207,7 +205,7 @@ export const Comments = ({
 		 */
 
 		const maxPagePossible = Math.ceil(
-			commentCount / newFilterObject.pageSize,
+			topLevelCommentCount / newFilterObject.pageSize,
 		);
 
 		if (page > maxPagePossible) {
@@ -246,7 +244,7 @@ export const Comments = ({
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
 
-	const showPagination = totalPages > 1;
+	const showPagination = topLevelCommentCount > filters.pageSize;
 
 	if (!expanded && loading) {
 		return <span data-testid="loading-comments"></span>;
@@ -268,14 +266,13 @@ export const Comments = ({
 						<Filters
 							filters={filters}
 							onFilterChange={onFilterChange}
-							commentCount={commentCount}
+							topLevelCommentCount={topLevelCommentCount}
 						/>
 						{showPagination && (
 							<Pagination
-								totalPages={totalPages}
 								currentPage={page}
 								setCurrentPage={onPageChange}
-								commentCount={commentCount}
+								topLevelCommentCount={topLevelCommentCount}
 								filters={filters}
 							/>
 						)}
@@ -365,14 +362,13 @@ export const Comments = ({
 			<Filters
 				filters={filters}
 				onFilterChange={onFilterChange}
-				commentCount={commentCount}
+				topLevelCommentCount={topLevelCommentCount}
 			/>
 			{showPagination && (
 				<Pagination
-					totalPages={totalPages}
 					currentPage={page}
 					setCurrentPage={onPageChange}
-					commentCount={commentCount}
+					topLevelCommentCount={topLevelCommentCount}
 					filters={filters}
 				/>
 			)}
@@ -421,10 +417,9 @@ export const Comments = ({
 			{showPagination && (
 				<footer css={footerStyles}>
 					<Pagination
-						totalPages={totalPages}
 						currentPage={page}
 						setCurrentPage={onPageChange}
-						commentCount={commentCount}
+						topLevelCommentCount={topLevelCommentCount}
 						filters={filters}
 					/>
 				</footer>

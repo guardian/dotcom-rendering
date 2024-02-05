@@ -80,9 +80,10 @@ export const LoggedOutHiddenPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -136,9 +137,10 @@ export const InitialPage = () => (
 			page={1}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -196,9 +198,10 @@ export const LoggedInHiddenNoPicks = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				commentCount={discussionMock.discussion.commentCount}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionMock.pages}
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
@@ -252,9 +255,10 @@ export const LoggedIn = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				commentCount={discussionMock.discussion.commentCount}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionMock.pages}
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
@@ -313,9 +317,10 @@ export const LoggedInShortDiscussion = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				commentCount={discussionWithTwoComments.discussion.commentCount}
+				topLevelCommentCount={
+					discussionWithTwoComments.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionWithTwoComments.pages}
 				comments={discussionWithTwoComments.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
@@ -365,9 +370,10 @@ export const LoggedOutHiddenNoPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={0}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -423,9 +429,10 @@ export const Closed = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -479,9 +486,8 @@ export const NoComments = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={0}
+			topLevelCommentCount={0}
 			loading={false}
-			totalPages={0}
 			comments={[]}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -532,14 +538,13 @@ export const LegacyDiscussion = () => (
 			onPermalinkClick={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
-			page={3}
+			page={2}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={
+			topLevelCommentCount={
 				legacyDiscussionWithoutThreading.discussion.commentCount
 			}
 			loading={false}
-			totalPages={legacyDiscussionWithoutThreading.pages}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
