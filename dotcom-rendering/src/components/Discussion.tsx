@@ -250,7 +250,7 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				topForm: {
 					...state.topForm,
-					userNameMissing: action.showPreview,
+					showPreview: action.showPreview,
 				},
 			};
 		}
