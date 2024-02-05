@@ -27,9 +27,12 @@ export const Analytics = ({
 		ipsosSectionName,
 	},
 }: Props) => {
+	// const json = JSON.parse("https://ophan.theguardian.com/amp.json");
+
+	// console.log("JSON", json)/
 	const scripts: string[] = [
-		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-block-on-consent="_till_responded" data-credentials="include">
+		// `<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include">
 			<script type="application/json">
 				{
 					"requests": {
@@ -44,7 +47,9 @@ export const Analytics = ({
 								"consentUUID": "\${clientId(consentUUID)}",
 								"consent": "\${consentString}",
 								"consentJurisdiction": "TCF"
-
+							},
+							"visibilitySpec": {
+								"totalTimeMin": 1000
 							}
 						},
 						"trackPageviewCcpa": {
@@ -56,6 +61,9 @@ export const Analytics = ({
 								"consent": "$EQUALS(\${consentState}, sufficient)",
 								"consentJurisdiction": "CCPA"
 
+							},
+							"visibilitySpec": {
+								"totalTimeMin": 1000
 							}
 						},
 						"trackPageviewAus": {
@@ -66,6 +74,9 @@ export const Analytics = ({
 								"consentUUID": "\${clientId(ccpaUUID)}",
 								"consent": "$EQUALS(\${consentState}, sufficient)",
 								"consentJurisdiction": "AUS"
+							},
+							"visibilitySpec": {
+								"totalTimeMin": 1000
 							}
 						}
 					}
