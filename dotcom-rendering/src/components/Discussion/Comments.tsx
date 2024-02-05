@@ -50,6 +50,9 @@ type Props = {
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	setTopFormShowPreview: (showPreview: boolean) => void;
+	setReplyFormShowPreview: (showPreview: boolean) => void;
+	setBottomFormShowPreview: (showPreview: boolean) => void;
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
@@ -133,6 +136,9 @@ export const Comments = ({
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
 	setBottomFormUserMissing,
+	setTopFormShowPreview,
+	setReplyFormShowPreview,
+	setBottomFormShowPreview,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -142,7 +148,6 @@ export const Comments = ({
 		useState<CommentType>();
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
-	const [showPreview, setShowPreview] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 	const [previewBody, setPreviewBody] = useState<string>('');
 
@@ -292,8 +297,10 @@ export const Comments = ({
 											mutes={mutes}
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
-											showPreview={showPreview}
-											setShowPreview={setShowPreview}
+											showPreview={replyForm.showPreview}
+											setShowPreview={
+												setReplyFormShowPreview
+											}
 											isCommentFormActive={
 												replyForm.isActive
 											}
@@ -329,8 +336,8 @@ export const Comments = ({
 					onAddComment={onAddComment}
 					user={user}
 					onPreview={onPreview}
-					showPreview={showPreview}
-					setShowPreview={setShowPreview}
+					showPreview={topForm.showPreview}
+					setShowPreview={setTopFormShowPreview}
 					isActive={topForm.isActive}
 					setIsActive={setTopFormActive}
 					error={error}
@@ -388,8 +395,8 @@ export const Comments = ({
 									mutes={mutes}
 									toggleMuteStatus={toggleMuteStatus}
 									onPermalinkClick={onPermalinkClick}
-									showPreview={showPreview}
-									setShowPreview={setShowPreview}
+									showPreview={replyForm.showPreview}
+									setShowPreview={setReplyFormShowPreview}
 									isCommentFormActive={replyForm.isActive}
 									setIsCommentFormActive={setReplyFormActive}
 									error={error}
@@ -421,8 +428,8 @@ export const Comments = ({
 					onAddComment={onAddComment}
 					user={user}
 					onPreview={onPreview}
-					showPreview={showPreview}
-					setShowPreview={setShowPreview}
+					showPreview={bottomForm.showPreview}
+					setShowPreview={setBottomFormShowPreview}
 					isActive={bottomForm.isActive}
 					setIsActive={setBottomFormActive}
 					error={error}
