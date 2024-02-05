@@ -46,7 +46,7 @@ const getUser = async ({
 				authStatus,
 		  }
 		: {
-				kind: 'User',
+				kind: 'Reader',
 				profile,
 				onComment: comment(authStatus),
 				onReply: reply(authStatus),

@@ -11,11 +11,7 @@ import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
-import type {
-	CommentType,
-	SignedInUser,
-	StaffUser,
-} from '../../types/discussion';
+import type { CommentType, SignedInUser, Staff } from '../../types/discussion';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -314,7 +310,7 @@ export const Comment = ({
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
 
-	const pick = async (staffUser: StaffUser) => {
+	const pick = async (staffUser: Staff) => {
 		setError('');
 		const response = await staffUser.onPick(comment.id);
 		if (response.kind === 'error') {
@@ -324,7 +320,7 @@ export const Comment = ({
 		}
 	};
 
-	const unPick = async (staffUser: StaffUser) => {
+	const unPick = async (staffUser: Staff) => {
 		setError('');
 		const response = await staffUser.onUnpick(comment.id);
 		if (response.kind === 'error') {

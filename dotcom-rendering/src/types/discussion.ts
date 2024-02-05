@@ -289,8 +289,8 @@ export interface FilterOptions {
 	threads: ThreadsType;
 }
 
-export type User = {
-	kind: 'User';
+export type Reader = {
+	kind: 'Reader';
 	profile: UserProfile;
 	onComment: ReturnType<typeof onComment>;
 	onReply: ReturnType<typeof onReply>;
@@ -298,7 +298,7 @@ export type User = {
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
 
-export type StaffUser = {
+export type Staff = {
 	kind: 'Staff';
 	profile: UserProfile;
 	onComment: ReturnType<typeof onComment>;
@@ -309,7 +309,7 @@ export type StaffUser = {
 	onUnpick: ReturnType<typeof unPickComment>;
 };
 
-export type SignedInUser = User | StaffUser;
+export type SignedInUser = Reader | Staff;
 
 const discussionApiErrorSchema = object({
 	status: literal('error'),
