@@ -32,8 +32,11 @@ const getUser = async ({
 
 	if (!isObject(data)) return;
 	if (!isObject(data.userProfile)) return;
+
 	const profile = data.userProfile as unknown as UserProfile;
+
 	const isStaff = profile.badge.some((e) => e.name === 'Staff');
+
 	return isStaff
 		? {
 				kind: 'Staff',
