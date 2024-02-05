@@ -18,7 +18,7 @@ export const Dialog = () => (
 		<AbuseReportForm
 			toggleSetShowForm={() => {}}
 			commentId={123}
-			authStatus={undefined}
+			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 		/>
 	</div>
 );

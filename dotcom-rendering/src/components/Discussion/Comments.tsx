@@ -6,7 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { preview } from '../../lib/discussionApi';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
@@ -61,6 +61,7 @@ type Props = {
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 /**
@@ -166,6 +167,7 @@ export const Comments = ({
 	topForm,
 	replyForm,
 	bottomForm,
+	reportAbuse,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -350,6 +352,7 @@ export const Comments = ({
 											}
 											body={replyForm.body}
 											setBody={setReplyFormBody}
+											reportAbuse={reportAbuse}
 										/>
 									</li>
 								))}
@@ -441,6 +444,7 @@ export const Comments = ({
 									setPreviewBody={setReplyFormPreviewBody}
 									body={replyForm.body}
 									setBody={setReplyFormBody}
+									reportAbuse={reportAbuse}
 								/>
 							</li>
 						))}

@@ -6,6 +6,7 @@ import {
 	pickComment,
 	recommend,
 	reply,
+	reportAbuse,
 	unPickComment,
 } from '../lib/discussionApi';
 import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
@@ -48,7 +49,7 @@ const getUser = async ({
 				onPick: pickComment(authStatus),
 				onUnpick: unPickComment(authStatus),
 				addUsername: addUserName(authStatus),
-				authStatus,
+				reportAbuse: reportAbuse(authStatus),
 		  }
 		: {
 				kind: 'Reader',
@@ -57,7 +58,7 @@ const getUser = async ({
 				onReply: reply(authStatus),
 				onRecommend: recommend(authStatus),
 				addUsername: addUserName(authStatus),
-				authStatus,
+				reportAbuse: reportAbuse(authStatus),
 		  };
 };
 
@@ -84,7 +85,9 @@ const getUser = async ({
  *
  * (No visual story exist)
  */
-export const DiscussionContainer = (props: Omit<DiscussionProps, 'user'>) => {
+export const DiscussionContainer = (
+	props: Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>,
+) => {
 	const hydrated = useHydrated();
 	const authStatus = useAuthStatus();
 	const [user, setUser] = useState<SignedInUser>();
@@ -103,5 +106,11 @@ export const DiscussionContainer = (props: Omit<DiscussionProps, 'user'>) => {
 
 	if (!hydrated) return <Placeholder height={324} />;
 
-	return <Discussion user={user} {...props} />;
+	return (
+		<Discussion
+			user={user}
+			{...props}
+			reportAbuseUnauthenticated={reportAbuse(undefined)}
+		/>
+	);
 };

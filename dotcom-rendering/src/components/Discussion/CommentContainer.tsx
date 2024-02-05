@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import type { preview } from '../../lib/discussionApi';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import type {
 	CommentType,
@@ -39,6 +39,7 @@ type Props = {
 	setPreviewBody: (previewBody: string) => void;
 	body: string;
 	setBody: (body: string) => void;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 const nestingStyles = css`
@@ -99,6 +100,7 @@ export const CommentContainer = ({
 	setPreviewBody,
 	body,
 	setBody,
+	reportAbuse,
 }: Props) => {
 	// Filter logic
 	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
@@ -153,6 +155,7 @@ export const CommentContainer = ({
 				onPermalinkClick={onPermalinkClick}
 				error={error}
 				setError={setError}
+				reportAbuse={reportAbuse}
 			/>
 
 			<>
@@ -182,6 +185,7 @@ export const CommentContainer = ({
 										onPermalinkClick={onPermalinkClick}
 										error={error}
 										setError={setError}
+										reportAbuse={reportAbuse}
 									/>
 								</li>
 							))}

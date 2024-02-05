@@ -9,6 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
+import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
 import type { CommentType, SignedInUser, Staff } from '../../types/discussion';
@@ -32,6 +33,7 @@ type Props = {
 	onPermalinkClick: (commentId: number) => void;
 	error: string;
 	setError: (error: string) => void;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 const commentControlsLink = css`
@@ -302,6 +304,7 @@ export const Comment = ({
 	onPermalinkClick,
 	error,
 	setError,
+	reportAbuse,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
 		comment.isHighlighted,
@@ -780,7 +783,7 @@ export const Comment = ({
 													toggleSetShowForm
 												}
 												commentId={comment.id}
-												authStatus={user?.authStatus}
+												reportAbuse={reportAbuse}
 											/>
 										</div>
 									)}
