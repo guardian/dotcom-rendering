@@ -12,7 +12,11 @@ import { useState } from 'react';
 import { pickComment, unPickComment } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import type {
+	CommentType,
+	SignedInUser,
+	StaffUser,
+} from '../../types/discussion';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -311,10 +315,9 @@ export const Comment = ({
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
 
-	const pick = async (staffUser: SignedInUser) => {
+	const pick = async (staffUser: StaffUser) => {
 		setError('');
-
-		const response = await pickComment(staffUser.authStatus, comment.id);
+		const response = await staffUser.onPick(comment.id);
 		if (response.kind === 'error') {
 			setError(response.error);
 		} else {
@@ -322,9 +325,9 @@ export const Comment = ({
 		}
 	};
 
-	const unPick = async (staffUser: SignedInUser) => {
+	const unPick = async (staffUser: StaffUser) => {
 		setError('');
-		const response = await unPickComment(staffUser.authStatus, comment.id);
+		const response = await staffUser.onUnpick(comment.id);
 		if (response.kind === 'error') {
 			setError(response.error);
 		} else {
@@ -682,10 +685,8 @@ export const Comment = ({
 										</>
 									)}
 									<Space amount={4} />
-									{/* Only staff can pick, and they cannot pick thier own comment */}
-									{user?.profile.badge.some(
-										(e) => e.name === 'Staff',
-									) &&
+									{/* Only staff can pick, and they cannot pick their own comment */}
+									{user?.kind === 'Staff' &&
 										user.profile.userId !==
 											comment.userProfile.userId && (
 											<div

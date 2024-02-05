@@ -369,65 +369,67 @@ export const addUserName = async (
 	return { kind: 'ok', value: true };
 };
 
-export const pickComment = async (
-	authStatus: SignedInWithCookies | SignedInWithOkta,
-	commentId: number,
-): Promise<Result<GetDiscussionError, true>> => {
-	const url =
-		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
-		objAsParams(defaultParams);
+export const pickComment =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	async (commentId: number): Promise<Result<GetDiscussionError, true>> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'highlight',
+			) + objAsParams(defaultParams);
 
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-			...authOptions.headers,
-		},
-		credentials: authOptions.credentials,
-	});
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...authOptions.headers,
+			},
+			credentials: authOptions.credentials,
+		});
 
-	if (jsonResult.kind === 'error') return jsonResult;
+		if (jsonResult.kind === 'error') return jsonResult;
 
-	const result = safeParse(pickResponseSchema, jsonResult.value);
+		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-	if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return { kind: 'error', error: 'ParsingError' };
 
-	return { kind: 'ok', value: true };
-};
+		return { kind: 'ok', value: true };
+	};
 
-export const unPickComment = async (
-	authStatus: SignedInWithCookies | SignedInWithOkta,
-	commentId: number,
-): Promise<Result<GetDiscussionError, false>> => {
-	const url =
-		joinUrl(
-			options.baseUrl,
-			'comment',
-			commentId.toString(),
-			'unhighlight',
-		) + objAsParams(defaultParams);
+export const unPickComment =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	async (commentId: number): Promise<Result<GetDiscussionError, false>> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'unhighlight',
+			) + objAsParams(defaultParams);
 
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-			...authOptions.headers,
-		},
-		credentials: authOptions.credentials,
-	});
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...authOptions.headers,
+			},
+			credentials: authOptions.credentials,
+		});
 
-	if (jsonResult.kind === 'error') return jsonResult;
+		if (jsonResult.kind === 'error') return jsonResult;
 
-	const result = safeParse(pickResponseSchema, jsonResult.value);
+		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-	if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return { kind: 'error', error: 'ParsingError' };
 
-	return { kind: 'ok', value: false };
-};
+		return { kind: 'ok', value: false };
+	};
 
 export const getMoreResponses = async (
 	commentId: number,
