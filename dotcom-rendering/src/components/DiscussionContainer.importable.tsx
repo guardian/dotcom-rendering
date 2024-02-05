@@ -1,6 +1,7 @@
 import { isObject, joinUrl } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import {
+	addUserName,
 	comment,
 	pickComment,
 	recommend,
@@ -46,6 +47,7 @@ const getUser = async ({
 				onRecommend: recommend(authStatus),
 				onPick: pickComment(authStatus),
 				onUnpick: unPickComment(authStatus),
+				addUsername: addUserName(authStatus),
 				authStatus,
 		  }
 		: {
@@ -54,6 +56,7 @@ const getUser = async ({
 				onComment: comment(authStatus),
 				onReply: reply(authStatus),
 				onRecommend: recommend(authStatus),
+				addUsername: addUserName(authStatus),
 				authStatus,
 		  };
 };

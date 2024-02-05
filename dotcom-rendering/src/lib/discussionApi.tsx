@@ -326,48 +326,47 @@ export const recommend =
 		}).then((resp) => resp.ok);
 	};
 
-export const addUserName = async (
-	authStatus: SignedInWithCookies | SignedInWithOkta,
-	userName: string,
-): Promise<Result<string, true>> => {
-	const url = options.idApiUrl + `/user/me/username`;
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
+export const addUserName =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	async (userName: string): Promise<Result<string, true>> => {
+		const url = options.idApiUrl + `/user/me/username`;
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		body: JSON.stringify({
-			publicFields: {
-				username: userName,
-				displayName: userName,
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			body: JSON.stringify({
+				publicFields: {
+					username: userName,
+					displayName: userName,
+				},
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+				...authOptions.headers,
 			},
-		}),
-		headers: {
-			'Content-Type': 'application/json',
-			...authOptions.headers,
-		},
-		credentials: authOptions.credentials,
-	});
+			credentials: authOptions.credentials,
+		});
 
-	if (jsonResult.kind === 'error') {
-		return jsonResult;
-	}
+		if (jsonResult.kind === 'error') {
+			return jsonResult;
+		}
 
-	const result = safeParse(postUsernameResponseSchema, jsonResult.value);
+		const result = safeParse(postUsernameResponseSchema, jsonResult.value);
 
-	if (!result.success) {
-		return { kind: 'error', error: 'An unknown error occured' };
-	}
-	if (result.output.status === 'error') {
-		return {
-			kind: 'error',
-			error: result.output.errors
-				.map(({ message }) => message)
-				.join('\n'),
-		};
-	}
+		if (!result.success) {
+			return { kind: 'error', error: 'An unknown error occured' };
+		}
+		if (result.output.status === 'error') {
+			return {
+				kind: 'error',
+				error: result.output.errors
+					.map(({ message }) => message)
+					.join('\n'),
+			};
+		}
 
-	return { kind: 'ok', value: true };
-};
+		return { kind: 'ok', value: true };
+	};
 
 export const pickComment =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>

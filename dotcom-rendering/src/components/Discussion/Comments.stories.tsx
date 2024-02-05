@@ -35,6 +35,7 @@ const aUser: Reader = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
