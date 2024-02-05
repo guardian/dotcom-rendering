@@ -358,11 +358,6 @@ export const CommentForm = ({
 				} else if (response.error === 'API_ERROR') {
 					setError(`Sorry, there was a problem posting your comment. Please try
                   another browser or network connection.  Reference code `);
-				} else if (response.error === 'EMAIL_VERIFIED_FAIL') {
-					// TODO: Support resending verification email
-					setError(`We are having technical difficulties. Please try again later or
-            <a href="#">
-            <strong>resend the verification</strong></a>.`);
 				} else if (response.error === 'EMAIL_NOT_VALIDATED') {
 					// TODO: Support resending verification email
 					setError(`Please confirm your email address to comment.<br />
