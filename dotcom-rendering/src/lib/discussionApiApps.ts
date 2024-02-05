@@ -10,6 +10,8 @@ import { Result } from './result';
 
 type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
 
+// We'll need a getUser bridget method
+// export const getUser = ()
 export const getComments = async (
 	shortUrl: string,
 	opts: {

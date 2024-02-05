@@ -25,6 +25,7 @@ import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
 import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 import type { Result } from '../lib/result';
+import { pickComment, unPickComment } from '../lib/discussionApi';
 
 export type CAPIPillar =
 	| 'news'
@@ -293,6 +294,16 @@ export type SignedInUser = {
 	onReply: ReturnType<typeof onReply>;
 	onRecommend: ReturnType<typeof onRecommend>;
 	authStatus: SignedInWithCookies | SignedInWithOkta;
+};
+
+export type StaffUser = {
+	profile: UserProfile;
+	onComment: ReturnType<typeof onComment>;
+	onReply: ReturnType<typeof onReply>;
+	onRecommend: ReturnType<typeof onRecommend>;
+	authStatus: SignedInWithCookies | SignedInWithOkta;
+	pick(commentId: CommentType['id']): ReturnType<typeof pickComment>;
+	unPick(commentId: CommentType['id']): ReturnType<typeof unPickComment>;
 };
 
 const discussionApiErrorSchema = object({
