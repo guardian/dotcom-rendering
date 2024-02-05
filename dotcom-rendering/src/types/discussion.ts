@@ -395,4 +395,5 @@ export type CommentForm = {
 	isActive: boolean;
 	userNameMissing: boolean;
 	showPreview: boolean;
+	previewBody: string;
 };

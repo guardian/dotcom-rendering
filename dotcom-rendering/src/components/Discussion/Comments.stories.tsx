@@ -55,6 +55,7 @@ const defaultCommentForm = {
 	isActive: false,
 	userNameMissing: false,
 	showPreview: false,
+	previewBody: '',
 };
 
 export const LoggedOutHiddenPicks = () => (
@@ -94,6 +95,9 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -147,6 +151,9 @@ export const InitialPage = () => (
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -204,6 +211,9 @@ export const LoggedInHiddenNoPicks = () => {
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={{ ...defaultCommentForm, isActive }}
 				bottomForm={defaultCommentForm}
@@ -257,6 +267,9 @@ export const LoggedIn = () => {
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={{
 					...defaultCommentForm,
@@ -315,6 +328,9 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
 				topForm={{ ...defaultCommentForm, isActive: isTopFormActive }}
 				replyForm={{
 					...defaultCommentForm,
@@ -364,6 +380,9 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -419,6 +438,9 @@ export const Closed = () => (
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -472,6 +494,9 @@ export const NoComments = () => (
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -527,6 +552,9 @@ export const LegacyDiscussion = () => (
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
