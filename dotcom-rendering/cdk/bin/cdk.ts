@@ -15,8 +15,8 @@ new DotcomRendering(cdkApp, 'DotcomRendering-PROD', {
 	...sharedProps,
 	app: 'rendering',
 	stage: 'PROD',
-	minCapacity: 18,
-	maxCapacity: 80,
+	minCapacity: 3,
+	maxCapacity: 12,
 	instanceType: 't4g.small',
 });
 new DotcomRendering(cdkApp, 'DotcomRendering-CODE', {
@@ -76,8 +76,8 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'facia-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 4,
-		maximumInstances: 20,
+		minimumInstances: 6,
+		maximumInstances: 24,
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.3s
@@ -88,10 +88,10 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 				{ lower: 0.4, change: 80 },
 			],
 			scalingStepsIn: [
-				// No scaling down effect when latency is higher than 0.25s
-				{ lower: 0.25, change: 0 },
-				// When latency is lower than 0.25s we scale down by 1
-				{ upper: 0.25, lower: 0, change: -1 },
+				// No scaling down effect when latency is higher than 0.27s
+				{ lower: 0.27, change: 0 },
+				// When latency is lower than 0.27s we scale down by 1
+				{ upper: 0.27, lower: 0, change: -1 },
 			],
 		},
 	},
