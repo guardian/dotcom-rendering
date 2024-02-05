@@ -17,6 +17,7 @@ import {
 	variant,
 } from 'valibot';
 import type {
+	addUserName,
 	comment as onComment,
 	recommend as onRecommend,
 	reply as onReply,
@@ -294,6 +295,7 @@ type UserFields = {
 	onComment: ReturnType<typeof onComment>;
 	onReply: ReturnType<typeof onReply>;
 	onRecommend: ReturnType<typeof onRecommend>;
+	addUsername: ReturnType<typeof addUserName>;
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
 

@@ -6,10 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
-import {
-	addUserName,
-	preview as defaultPreview,
-} from '../../lib/discussionApi';
+import { preview as defaultPreview } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
 import type {
 	CommentType,
@@ -409,7 +406,7 @@ export const CommentForm = ({
 			return;
 		}
 
-		const response = await addUserName(user.authStatus, userName);
+		const response = await user.addUsername(userName);
 		if (response.kind === 'ok') {
 			// If we are able to submit userName we should continue with submitting comment
 			void submitForm();

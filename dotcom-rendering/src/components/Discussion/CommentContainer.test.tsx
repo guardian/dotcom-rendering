@@ -49,6 +49,7 @@ const aUser: SignedInUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseSuccess),
 	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 

@@ -128,6 +128,7 @@ const user: Reader = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -150,6 +151,7 @@ const staffUser: Staff = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
 	onPick: () => Promise.resolve(commentResponseError),
 	onUnpick: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
