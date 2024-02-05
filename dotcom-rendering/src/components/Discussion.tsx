@@ -109,6 +109,7 @@ const initialCommentFormState = {
 	isActive: false,
 	userNameMissing: false,
 	showPreview: false,
+	previewBody: '',
 };
 
 const initialState: State = {
@@ -146,7 +147,10 @@ type Action =
 	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setTopFormShowPreview'; showPreview: boolean }
 	| { type: 'setReplyFormShowPreview'; showPreview: boolean }
-	| { type: 'setBottomFormShowPreview'; showPreview: boolean };
+	| { type: 'setBottomFormShowPreview'; showPreview: boolean }
+	| { type: 'setTopFormPreviewBody'; previewBody: string }
+	| { type: 'setReplyFormPreviewBody'; previewBody: string }
+	| { type: 'setBottomFormPreviewBody'; previewBody: string };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -265,6 +269,33 @@ const reducer = (state: State, action: Action): State => {
 				bottomForm: {
 					...state.bottomForm,
 					showPreview: action.showPreview,
+				},
+			};
+		}
+		case 'setTopFormPreviewBody': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					previewBody: action.previewBody,
+				},
+			};
+		}
+		case 'setReplyFormPreviewBody': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					previewBody: action.previewBody,
+				},
+			};
+		}
+		case 'setBottomFormPreviewBody': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					previewBody: action.previewBody,
 				},
 			};
 		}
@@ -491,6 +522,24 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormShowPreview',
 							showPreview,
+						})
+					}
+					setTopFormPreviewBody={(previewBody) =>
+						dispatch({
+							type: 'setTopFormPreviewBody',
+							previewBody,
+						})
+					}
+					setReplyFormPreviewBody={(previewBody) =>
+						dispatch({
+							type: 'setReplyFormPreviewBody',
+							previewBody,
+						})
+					}
+					setBottomFormPreviewBody={(previewBody) =>
+						dispatch({
+							type: 'setBottomFormPreviewBody',
+							previewBody,
 						})
 					}
 					topForm={topForm}

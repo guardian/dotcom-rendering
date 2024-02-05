@@ -53,6 +53,9 @@ type Props = {
 	setTopFormShowPreview: (showPreview: boolean) => void;
 	setReplyFormShowPreview: (showPreview: boolean) => void;
 	setBottomFormShowPreview: (showPreview: boolean) => void;
+	setTopFormPreviewBody: (previewBody: string) => void;
+	setReplyFormPreviewBody: (previewBody: string) => void;
+	setBottomFormPreviewBody: (previewBody: string) => void;
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
@@ -139,6 +142,9 @@ export const Comments = ({
 	setTopFormShowPreview,
 	setReplyFormShowPreview,
 	setBottomFormShowPreview,
+	setTopFormPreviewBody,
+	setReplyFormPreviewBody,
+	setBottomFormPreviewBody,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -149,7 +155,6 @@ export const Comments = ({
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 	const [error, setError] = useState<string>('');
-	const [previewBody, setPreviewBody] = useState<string>('');
 
 	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
 
@@ -315,8 +320,10 @@ export const Comments = ({
 											setUserNameMissing={
 												setReplyFormUserMissing
 											}
-											previewBody={previewBody}
-											setPreviewBody={setPreviewBody}
+											previewBody={replyForm.previewBody}
+											setPreviewBody={
+												setReplyFormPreviewBody
+											}
 										/>
 									</li>
 								))}
@@ -344,8 +351,8 @@ export const Comments = ({
 					setError={setError}
 					userNameMissing={topForm.userNameMissing}
 					setUserNameMissing={setTopFormUserMissing}
-					previewBody={previewBody}
-					setPreviewBody={setPreviewBody}
+					previewBody={topForm.previewBody}
+					setPreviewBody={setTopFormPreviewBody}
 				/>
 			)}
 			{!!picks.length && (
@@ -403,8 +410,8 @@ export const Comments = ({
 									setError={setError}
 									userNameMissing={replyForm.userNameMissing}
 									setUserNameMissing={setReplyFormUserMissing}
-									previewBody={previewBody}
-									setPreviewBody={setPreviewBody}
+									previewBody={replyForm.previewBody}
+									setPreviewBody={setReplyFormPreviewBody}
 								/>
 							</li>
 						))}
@@ -436,8 +443,8 @@ export const Comments = ({
 					setError={setError}
 					userNameMissing={bottomForm.userNameMissing}
 					setUserNameMissing={setBottomFormUserMissing}
-					previewBody={previewBody}
-					setPreviewBody={setPreviewBody}
+					previewBody={bottomForm.previewBody}
+					setPreviewBody={setBottomFormPreviewBody}
 				/>
 			)}
 		</div>
