@@ -2,6 +2,7 @@ import { css, keyframes } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { Row } from './Row';
 
+/** @TODO adapt for dark mode */
 const BACKGROUND_COLOUR = sourcePalette.neutral[93];
 
 const shimmer = keyframes`
