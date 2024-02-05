@@ -289,8 +289,7 @@ export interface FilterOptions {
 	threads: ThreadsType;
 }
 
-export type Reader = {
-	kind: 'Reader';
+type UserFields = {
 	profile: UserProfile;
 	onComment: ReturnType<typeof onComment>;
 	onReply: ReturnType<typeof onReply>;
@@ -298,13 +297,12 @@ export type Reader = {
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
 
-export type Staff = {
+export type Reader = UserFields & {
+	kind: 'Reader';
+};
+
+export type Staff = UserFields & {
 	kind: 'Staff';
-	profile: UserProfile;
-	onComment: ReturnType<typeof onComment>;
-	onReply: ReturnType<typeof onReply>;
-	onRecommend: ReturnType<typeof onRecommend>;
-	authStatus: SignedInWithCookies | SignedInWithOkta;
 	onPick: ReturnType<typeof pickComment>;
 	onUnpick: ReturnType<typeof unPickComment>;
 };
