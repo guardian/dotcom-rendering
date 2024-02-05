@@ -20,6 +20,8 @@ import type {
 	comment as onComment,
 	recommend as onRecommend,
 	reply as onReply,
+	pickComment,
+	unPickComment,
 } from '../lib/discussionApi';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
@@ -287,13 +289,25 @@ export interface FilterOptions {
 	threads: ThreadsType;
 }
 
-export type SignedInUser = {
+type UserFields = {
 	profile: UserProfile;
 	onComment: ReturnType<typeof onComment>;
 	onReply: ReturnType<typeof onReply>;
 	onRecommend: ReturnType<typeof onRecommend>;
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
+
+export type Reader = UserFields & {
+	kind: 'Reader';
+};
+
+export type Staff = UserFields & {
+	kind: 'Staff';
+	onPick: ReturnType<typeof pickComment>;
+	onUnpick: ReturnType<typeof unPickComment>;
+};
+
+export type SignedInUser = Reader | Staff;
 
 const discussionApiErrorSchema = object({
 	status: literal('error'),

@@ -62,6 +62,7 @@ const commentResponseError = {
 } as const;
 
 const aUser = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',

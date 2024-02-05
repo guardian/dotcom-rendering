@@ -6,7 +6,7 @@ import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
-import type { FilterOptions, SignedInUser } from '../../types/discussion';
+import type { FilterOptions, Reader } from '../../types/discussion';
 import { Comments } from './Comments';
 
 export default { component: Comments, title: 'Discussion/App' };
@@ -16,7 +16,8 @@ const commentResponseError = {
 	error: 'NetworkError',
 } as const;
 
-const aUser: SignedInUser = {
+const aUser: Reader = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',

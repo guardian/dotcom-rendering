@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import type { CommentType, Reader, Staff } from '../../types/discussion';
 import { Comment } from './Comment';
 
 export default { title: 'Discussion/Comment' };
@@ -109,7 +109,8 @@ const commentResponseError = {
 	error: 'NetworkError',
 } as const;
 
-const user: SignedInUser = {
+const user: Reader = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -130,7 +131,8 @@ const user: SignedInUser = {
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
-const staffUser: SignedInUser = {
+const staffUser: Staff = {
+	kind: 'Staff',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -148,6 +150,8 @@ const staffUser: SignedInUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
+	onPick: () => Promise.resolve(commentResponseError),
+	onUnpick: () => Promise.resolve(commentResponseError),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 

@@ -31,6 +31,7 @@ const commentResponseSuccess = {
 } as const satisfies Result<unknown, unknown>;
 
 const aUser: SignedInUser = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
