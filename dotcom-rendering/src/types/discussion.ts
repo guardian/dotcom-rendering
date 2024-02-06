@@ -193,8 +193,6 @@ const errorCodes = [
 	'READ-ONLY-MODE',
 	'API_CORS_BLOCKED',
 	'API_ERROR',
-	'EMAIL_VERIFIED',
-	'EMAIL_VERIFIED_FAIL',
 	'EMAIL_NOT_VALIDATED',
 ] as const;
 
