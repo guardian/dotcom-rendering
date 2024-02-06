@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ok } from '../../lib/result';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { TopPick } from './TopPick';
 
@@ -101,8 +102,8 @@ const aUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 } satisfies SignedInUser;
 
 export const LongPick = () => (

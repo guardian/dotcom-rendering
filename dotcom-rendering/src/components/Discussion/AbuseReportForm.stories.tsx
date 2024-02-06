@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ok } from '../../lib/result';
 import { AbuseReportForm } from './AbuseReportForm';
 
 type Props = Parameters<typeof AbuseReportForm>[0];
@@ -26,7 +27,7 @@ export const Dialog = (args: Props) => (
 		<AbuseReportForm
 			toggleSetShowForm={args.toggleSetShowForm}
 			commentId={123}
-			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );

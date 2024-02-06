@@ -19,7 +19,7 @@ import {
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 import { fetchJSON } from './json';
-import type { Result } from './result';
+import { error, ok, type Result } from './result';
 
 const options = {
 	// Defaults
@@ -101,7 +101,7 @@ export const getDiscussion = async (
 
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (
 		result.output.status === 'error' &&
@@ -116,13 +116,10 @@ export const getDiscussion = async (
 		});
 	}
 	if (result.output.status === 'error') {
-		return {
-			kind: 'error',
-			error: 'ApiError',
-		};
+		return error('ApiError');
 	}
 
-	return { kind: 'ok', value: result.output };
+	return ok(result.output);
 };
 
 export const preview = async (
@@ -146,11 +143,8 @@ export const preview = async (
 	if (jsonResult.kind === 'error') return jsonResult;
 
 	return isObject(jsonResult.value) && isString(jsonResult.value.commentBody)
-		? { kind: 'ok', value: jsonResult.value.commentBody }
-		: {
-				kind: 'error',
-				error: 'ParsingError',
-		  };
+		? ok(jsonResult.value.commentBody)
+		: error('ParsingError');
 };
 
 type CommentResponse = Result<
@@ -241,13 +235,13 @@ export const getPicks = async (
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (result.output.status === 'error') {
-		return { kind: 'error', error: 'ApiError' };
+		return error('ApiError');
 	}
 
-	return { kind: 'ok', value: result.output.discussion.comments };
+	return ok(result.output.discussion.comments);
 };
 
 export const reportAbuse =
@@ -292,10 +286,7 @@ export const reportAbuse =
 		});
 
 		if (jsonResult.kind === 'error') {
-			return {
-				kind: 'error',
-				error: 'An unknown error occured',
-			};
+			return error('An unknown error occured');
 		}
 
 		return parseAbuseResponse(jsonResult.value);
@@ -354,18 +345,15 @@ export const addUserName =
 		const result = safeParse(postUsernameResponseSchema, jsonResult.value);
 
 		if (!result.success) {
-			return { kind: 'error', error: 'An unknown error occured' };
+			return error('An unknown error occured');
 		}
 		if (result.output.status === 'error') {
-			return {
-				kind: 'error',
-				error: result.output.errors
-					.map(({ message }) => message)
-					.join('\n'),
-			};
+			return error(
+				result.output.errors.map(({ message }) => message).join('\n'),
+			);
 		}
 
-		return { kind: 'ok', value: true };
+		return ok(true);
 	};
 
 export const pickComment =
@@ -394,9 +382,9 @@ export const pickComment =
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-		if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return error('ParsingError');
 
-		return { kind: 'ok', value: true };
+		return ok(true);
 	};
 
 export const unPickComment =
@@ -425,9 +413,9 @@ export const unPickComment =
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-		if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return error('ParsingError');
 
-		return { kind: 'ok', value: false };
+		return ok(false);
 	};
 
 export const getMoreResponses = async (

@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ok } from '../../lib/result';
 import type { CommentType, Reader, Staff } from '../../types/discussion';
 import { Comment } from './Comment';
 
@@ -128,8 +129,8 @@ const user: Reader = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const staffUser: Staff = {
@@ -151,10 +152,10 @@ const staffUser: Staff = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
+	addUsername: () => Promise.resolve(ok(true)),
 	onPick: () => Promise.resolve(commentResponseError),
 	onUnpick: () => Promise.resolve(commentResponseError),
-	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const defaultFormat = {

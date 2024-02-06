@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ok } from '../../lib/result';
 import type { CommentType, Reader } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
@@ -157,8 +158,8 @@ const aUser: Reader = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const commentDataThreaded: CommentType = {
@@ -213,7 +214,7 @@ export const defaultStory = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -254,7 +255,7 @@ export const threadedComment = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -295,7 +296,7 @@ export const threadedCommentWithShowMore = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -336,7 +337,7 @@ export const threadedCommentWithLongUsernames = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -377,7 +378,7 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =
