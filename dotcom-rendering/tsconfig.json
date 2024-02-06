@@ -16,5 +16,11 @@
 		},
 		"preserveConstEnums": true
 	},
-	"exclude": ["storybook-static", "target", "dist", "node_modules"]
+	"exclude": [
+		"storybook-static",
+		"target",
+		"dist",
+		"node_modules",
+		"playwright-report"
+	]
 }
