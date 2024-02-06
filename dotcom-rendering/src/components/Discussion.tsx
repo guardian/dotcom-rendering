@@ -109,6 +109,7 @@ type State = {
 const initialCommentFormState = {
 	isActive: false,
 	userNameMissing: false,
+	error: '',
 	showPreview: false,
 	previewBody: '',
 	body: '',
@@ -149,6 +150,9 @@ type Action =
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setTopFormError'; error: string }
+	| { type: 'setReplyFormError'; error: string }
+	| { type: 'setBottomFormError'; error: string }
 	| { type: 'setTopFormShowPreview'; showPreview: boolean }
 	| { type: 'setReplyFormShowPreview'; showPreview: boolean }
 	| { type: 'setBottomFormShowPreview'; showPreview: boolean }
@@ -331,6 +335,33 @@ const reducer = (state: State, action: Action): State => {
 				bottomForm: {
 					...state.bottomForm,
 					body: action.body,
+				},
+			};
+		}
+		case 'setTopFormError': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					error: action.error,
+				},
+			};
+		}
+		case 'setReplyFormError': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					error: action.error,
+				},
+			};
+		}
+		case 'setBottomFormError': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					error: action.error,
 				},
 			};
 		}
@@ -540,6 +571,24 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormUserMissing',
 							userNameMissing,
+						})
+					}
+					setTopFormError={(error) =>
+						dispatch({
+							type: 'setTopFormError',
+							error,
+						})
+					}
+					setReplyFormError={(error) =>
+						dispatch({
+							type: 'setReplyFormError',
+							error,
+						})
+					}
+					setBottomFormError={(error) =>
+						dispatch({
+							type: 'setBottomFormError',
+							error,
 						})
 					}
 					setTopFormShowPreview={(showPreview) =>

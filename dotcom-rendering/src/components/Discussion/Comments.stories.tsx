@@ -54,6 +54,7 @@ const filters: FilterOptions = {
 const defaultCommentForm = {
 	isActive: false,
 	userNameMissing: false,
+	error: '',
 	showPreview: false,
 	previewBody: '',
 	body: '',
@@ -94,6 +95,9 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -155,6 +159,9 @@ export const InitialPage = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -221,6 +228,9 @@ export const LoggedInHiddenNoPicks = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
@@ -286,6 +296,9 @@ export const LoggedIn = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
@@ -360,6 +373,9 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
@@ -422,6 +438,9 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -485,6 +504,9 @@ export const Closed = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -544,6 +566,9 @@ export const NoComments = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -605,6 +630,9 @@ export const LegacyDiscussion = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
