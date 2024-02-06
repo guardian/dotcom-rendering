@@ -1,6 +1,7 @@
 import * as Acquisitions from '@guardian/bridget/Acquisitions';
 import * as Analytics from '@guardian/bridget/Analytics';
 import * as Commercial from '@guardian/bridget/Commercial';
+import * as Discussion from '@guardian/bridget/Discussion';
 import * as Environment from '@guardian/bridget/Environment';
 import * as Gallery from '@guardian/bridget/Gallery';
 import * as Metrics from '@guardian/bridget/Metrics';
@@ -150,4 +151,16 @@ export const getNewslettersClient = (): Newsletters.Client<void> => {
 		);
 	}
 	return newslettersClient;
+};
+
+let discussionClient: Discussion.Client<void> | undefined = undefined;
+export const getDiscussionClient = (): Discussion.Client<void> => {
+	if (!discussionClient) {
+		discussionClient = createAppClient<Discussion.Client<void>>(
+			Discussion.Client,
+			'buffered',
+			'compact',
+		);
+	}
+	return discussionClient;
 };

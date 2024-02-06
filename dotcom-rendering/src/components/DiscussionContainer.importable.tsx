@@ -1,5 +1,6 @@
 import { isObject, joinUrl } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { getDiscussionClient } from '../lib/bridgetApi';
 import {
 	addUserName,
 	comment,
@@ -56,7 +57,8 @@ const getUser = async ({
 				profile,
 				onComment: comment(authStatus),
 				onReply: reply(authStatus),
-				onRecommend: recommend(authStatus),
+				onRecommend: (commentId: number) =>
+					getDiscussionClient().recommend(commentId),
 				addUsername: addUserName(authStatus),
 				reportAbuse: reportAbuse(authStatus),
 		  };

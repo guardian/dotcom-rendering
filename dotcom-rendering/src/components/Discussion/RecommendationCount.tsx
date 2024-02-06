@@ -3,6 +3,7 @@ import { textSans } from '@guardian/source-foundations';
 import { SvgArrowUpStraight } from '@guardian/source-react-components';
 import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
+import { getDiscussionClient } from '../../lib/bridgetApi';
 import { palette as themePalette } from '../../palette';
 import type { SignedInUser } from '../../types/discussion';
 import { Row } from './Row';
@@ -56,22 +57,29 @@ export const RecommendationCount = ({
 	const [count, setCount] = useState(initialCount);
 	const [recommended, setRecommended] = useState(alreadyRecommended);
 
-	const tryToRecommend: MouseEventHandler<HTMLButtonElement> = () => {
-		if (!user) return;
+	// const tryToRecommend: MouseEventHandler<HTMLButtonElement> = () => {
+	// 	if (!user) return;
 
-		const newCount = count + 1;
-		setCount(newCount);
-		setRecommended(true);
+	// 	const newCount = count + 1;
+	// 	setCount(newCount);
+	// 	setRecommended(true);
 
-		user.onRecommend(commentId)
-			.then((accepted) => {
-				if (!accepted) {
-					setCount(newCount - 1);
-					setRecommended(alreadyRecommended);
-				}
-			})
-			// TODO: do some error handling
-			.catch(() => undefined);
+	// 	user.onRecommend(commentId)
+	// 		.then((accepted) => {
+	// 			if (!accepted) {
+	// 				setCount(newCount - 1);
+	// 				setRecommended(alreadyRecommended);
+	// 			}
+	// 		})
+	// 		// TODO: do some error handling
+	// 		.catch(() => undefined);
+	// };
+
+	const tryToRecommend = () => {
+		getDiscussionClient()
+			.recommend(commentId)
+			.then((m) => console.log(m))
+			.catch((e) => console.error(e));
 	};
 
 	return (
@@ -80,7 +88,7 @@ export const RecommendationCount = ({
 			<button
 				css={buttonStyles(recommended, !!user)}
 				onClick={tryToRecommend}
-				disabled={recommended || !user || userMadeComment}
+				// disabled={recommended || !user || userMadeComment}
 				data-link-name="Recommend comment"
 				aria-label="Recommend comment"
 				type="button"
