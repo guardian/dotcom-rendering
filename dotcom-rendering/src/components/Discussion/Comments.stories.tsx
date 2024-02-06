@@ -288,7 +288,7 @@ export const LoggedIn = () => {
 				setTopFormBody={setTopFormBody}
 				setReplyFormBody={setReplyFormBody}
 				setBottomFormBody={setBottomFormBody}
-				topForm={{...defaultCommentForm, body: topFormBody }}
+				topForm={{ ...defaultCommentForm, body: topFormBody }}
 				replyForm={{
 					...defaultCommentForm,
 					body: replyFormBody,
@@ -353,7 +353,7 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormBody={setTopFormBody}
 				setReplyFormBody={setReplyFormBody}
 				setBottomFormBody={() => {}}
-				topForm={{ ...defaultCommentForm, body: topFormBody, }}
+				topForm={{ ...defaultCommentForm, body: topFormBody }}
 				replyForm={{
 					...defaultCommentForm,
 					body: replyFormBody,

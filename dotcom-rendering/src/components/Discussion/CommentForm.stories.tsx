@@ -136,7 +136,7 @@ export const Active = () => {
 
 	return (
 		<CommentForm
-		formId={'top'}
+			formId={'top'}
 			shortUrl={shortUrl}
 			user={aUser}
 			onAddComment={(comment) => {}}
@@ -174,7 +174,7 @@ export const Premoderated = () => {
 
 	return (
 		<CommentForm
-		formId={'top'}
+			formId={'top'}
 			shortUrl={shortUrl}
 			user={{
 				...aUser,

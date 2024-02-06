@@ -151,10 +151,10 @@ type Action =
 			formId: CommentFormId;
 	  }
 	| {
-	type: 'setUserNameMissing';
-	userNameMissing: boolean;
-	formId: CommentFormId;
-		}
+			type: 'setUserNameMissing';
+			userNameMissing: boolean;
+			formId: CommentFormId;
+	  }
 	| { type: 'setTopFormError'; error: string }
 	| { type: 'setReplyFormError'; error: string }
 	| { type: 'setBottomFormError'; error: string }

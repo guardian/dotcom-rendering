@@ -153,7 +153,7 @@ export const Comments = ({
 	setComment,
 	handleFilterChange,
 	setFormActive,
-	 setUserNameMissing,
+	setUserNameMissing,
 	setTopFormError,
 	setReplyFormError,
 	setBottomFormError,
