@@ -174,7 +174,6 @@ export const Comments = ({
 		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 	const [error, setError] = useState<string>('');
-	const [previewBody, setPreviewBody] = useState<string>('');
 
 	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
