@@ -50,7 +50,7 @@ const aUser: SignedInUser = {
 	onReply: () => Promise.resolve(commentResponseSuccess),
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	authStatus: { kind: 'SignedInWithCookies' },
+	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
 };
 
 describe('CommentContainer', () => {
@@ -93,6 +93,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				body={newCommentText}
 				setBody={() => {}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>,
 		);
 
@@ -142,6 +143,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				body={''}
 				setBody={() => {}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>,
 		);
 
@@ -190,6 +192,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				body={newCommentText}
 				setBody={() => {}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>,
 		);
 
@@ -239,6 +242,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				body={''}
 				setBody={() => {}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>,
 		);
 

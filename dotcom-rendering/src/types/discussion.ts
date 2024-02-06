@@ -22,11 +22,11 @@ import type {
 	recommend as onRecommend,
 	reply as onReply,
 	pickComment,
+	reportAbuse,
 	unPickComment,
 } from '../lib/discussionApi';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
-import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 import type { Result } from '../lib/result';
 
 export type CAPIPillar =
@@ -296,7 +296,7 @@ type UserFields = {
 	onReply: ReturnType<typeof onReply>;
 	onRecommend: ReturnType<typeof onRecommend>;
 	addUsername: ReturnType<typeof addUserName>;
-	authStatus: SignedInWithCookies | SignedInWithOkta;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 export type Reader = UserFields & {

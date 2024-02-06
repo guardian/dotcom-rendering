@@ -250,56 +250,56 @@ export const getPicks = async (
 	return { kind: 'ok', value: result.output.discussion.comments };
 };
 
-export const reportAbuse = async ({
-	commentId,
-	categoryId,
-	email,
-	reason,
-	authStatus,
-}: {
-	commentId: number;
-	categoryId: number;
-	reason?: string;
-	email?: string;
-	authStatus?: SignedInWithCookies | SignedInWithOkta;
-}): Promise<Result<string, true>> => {
-	const url =
-		joinUrl(
-			options.baseUrl,
-			'comment',
-			commentId.toString(),
-			'reportAbuse',
-		) + objAsParams(defaultParams);
+export const reportAbuse =
+	(authStatus?: SignedInWithCookies | SignedInWithOkta) =>
+	async ({
+		commentId,
+		categoryId,
+		email,
+		reason,
+	}: {
+		commentId: number;
+		categoryId: number;
+		reason?: string;
+		email?: string;
+	}): Promise<Result<string, true>> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'reportAbuse',
+			) + objAsParams(defaultParams);
 
-	const data = new URLSearchParams();
-	data.append('categoryId', categoryId.toString());
-	email && data.append('email', email.toString());
-	reason && data.append('reason', reason);
+		const data = new URLSearchParams();
+		data.append('categoryId', categoryId.toString());
+		email && data.append('email', email.toString());
+		reason && data.append('reason', reason);
 
-	const authOptions = authStatus
-		? getOptionsHeadersWithOkta(authStatus)
-		: undefined;
+		const authOptions = authStatus
+			? getOptionsHeadersWithOkta(authStatus)
+			: undefined;
 
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		body: data.toString(),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-			...authOptions?.headers,
-		},
-		credentials: authOptions?.credentials,
-	});
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			body: data.toString(),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...authOptions?.headers,
+			},
+			credentials: authOptions?.credentials,
+		});
 
-	if (jsonResult.kind === 'error') {
-		return {
-			kind: 'error',
-			error: 'An unknown error occured',
-		};
-	}
+		if (jsonResult.kind === 'error') {
+			return {
+				kind: 'error',
+				error: 'An unknown error occured',
+			};
+		}
 
-	return parseAbuseResponse(jsonResult.value);
-};
+		return parseAbuseResponse(jsonResult.value);
+	};
 
 export const recommend =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>

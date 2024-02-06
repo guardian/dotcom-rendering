@@ -4,7 +4,7 @@ import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
-import { getDiscussion } from '../lib/discussionApi';
+import { getDiscussion, type reportAbuse } from '../lib/discussionApi';
 import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
@@ -28,6 +28,7 @@ export type Props = {
 	enableDiscussionSwitch: boolean;
 	user?: SignedInUser;
 	idApiUrl: string;
+	reportAbuseUnauthenticated: ReturnType<typeof reportAbuse>;
 };
 
 const overlayStyles = css`
@@ -379,6 +380,7 @@ export const Discussion = ({
 	enableDiscussionSwitch,
 	user,
 	idApiUrl,
+	reportAbuseUnauthenticated,
 }: Props) => {
 	const [
 		{
@@ -646,6 +648,11 @@ export const Discussion = ({
 					topForm={topForm}
 					replyForm={replyForm}
 					bottomForm={bottomForm}
+					reportAbuse={
+						user !== undefined
+							? user.reportAbuse
+							: reportAbuseUnauthenticated
+					}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />
