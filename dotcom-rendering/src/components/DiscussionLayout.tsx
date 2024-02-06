@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { AdSlot, labelStyles } from './AdSlot.web';
+import { useConfig } from './ConfigContext';
 import { DiscussionContainer } from './DiscussionContainer.importable';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 import { Flex } from './Flex';
@@ -21,6 +23,34 @@ type Props = {
 	idApiUrl: string;
 };
 
+const DiscussionIsland = ({
+	renderingTarget,
+	...props
+}: {
+	renderingTarget: RenderingTarget;
+	discussionApiUrl: string;
+	shortUrlId: string;
+	discussionD2Uid: string;
+	discussionApiClientHeader: string;
+	enableDiscussionSwitch: boolean;
+	idApiUrl: string;
+}) => {
+	switch (renderingTarget) {
+		case 'Web':
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<DiscussionContainer {...props} />
+				</Island>
+			);
+		case 'Apps':
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<DiscussionContainer {...props} />
+				</Island>
+			);
+	}
+};
+
 export const DiscussionLayout = ({
 	format,
 	discussionApiUrl,
@@ -33,6 +63,7 @@ export const DiscussionLayout = ({
 	idApiUrl,
 }: Props) => {
 	const hideAd = isAdFreeUser || shouldHideAds;
+	const { renderingTarget } = useConfig();
 
 	return (
 		<>
@@ -68,18 +99,17 @@ export const DiscussionLayout = ({
 							max-width: 100%;
 						`}
 					>
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<DiscussionContainer
-								discussionApiUrl={discussionApiUrl}
-								shortUrlId={shortUrlId}
-								discussionD2Uid={discussionD2Uid}
-								discussionApiClientHeader={
-									discussionApiClientHeader
-								}
-								enableDiscussionSwitch={enableDiscussionSwitch}
-								idApiUrl={idApiUrl}
-							/>
-						</Island>
+						<DiscussionIsland
+							discussionApiUrl={discussionApiUrl}
+							shortUrlId={shortUrlId}
+							discussionD2Uid={discussionD2Uid}
+							discussionApiClientHeader={
+								discussionApiClientHeader
+							}
+							enableDiscussionSwitch={enableDiscussionSwitch}
+							idApiUrl={idApiUrl}
+							renderingTarget={renderingTarget}
+						/>
 					</div>
 					{!hideAd && (
 						<RightColumn>
