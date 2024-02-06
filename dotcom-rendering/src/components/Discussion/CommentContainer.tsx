@@ -229,9 +229,14 @@ export const CommentContainer = ({
 							id={`comment-reply-form-${commentBeingRepliedTo.id}`}
 							css={nestingStyles}
 						>
-							<CommentReplyPreview
-								commentBeingRepliedTo={commentBeingRepliedTo}
-							/>
+							{(commentBeingRepliedTo?.numResponses ?? 0) >=
+								3 && (
+								<CommentReplyPreview
+									commentBeingRepliedTo={
+										commentBeingRepliedTo
+									}
+								/>
+							)}
 							<CommentForm
 								shortUrl={shortUrl}
 								onAddComment={onAddComment}
