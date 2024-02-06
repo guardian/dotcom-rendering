@@ -1833,11 +1833,6 @@ export const Feature: DCRArticle = {
 					],
 					elementId: 'c469e520-fb41-4718-9c3d-fa5e07ac1d7c',
 					position: 1,
-					lightbox: {
-						caption:
-							'‘We can make it here as well’ … Taika Waititi.',
-						credit: 'Photograph: Eric Gaillard/Reuters',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
@@ -2207,11 +2202,6 @@ export const Feature: DCRArticle = {
 					],
 					elementId: '93187a62-5b62-42ea-8c2e-874bde606054',
 					position: 2,
-					lightbox: {
-						caption:
-							'Brie Larson, Sigourney Weaver, and Gal Gadot.',
-						credit: 'Photograph: Kevin Winter/Getty Images',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { Hide } from '@guardian/source-react-components';
-import { isWideEnough } from '../lib/lightbox';
 import type { CartoonBlockElement, Image } from '../types/content';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
@@ -63,17 +62,15 @@ export const CartoonComponent = ({ format, element, lightbox }: Props) => {
 					/>
 				)}
 
-				{webLightbox &&
-					isWideEnough(image) &&
-					element.position !== undefined && (
-						<LightboxLink
-							role={element.role}
-							format={format}
-							elementId={element.elementId}
-							isMainMedia={true}
-							position={element.position}
-						/>
-					)}
+				{webLightbox && element.position !== undefined && (
+					<LightboxLink
+						role={element.role}
+						format={format}
+						elementId={element.elementId}
+						isMainMedia={true}
+						position={element.position}
+					/>
+				)}
 			</>
 		);
 	};

@@ -1759,11 +1759,6 @@ export const Comment: DCRArticle = {
 			],
 			elementId: 'edfd2786-b298-4abd-95cf-c5a8bf58048d',
 			position: 1,
-			lightbox: {
-				caption:
-					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
-				credit: 'Photograph: Mark Pinder/The Guardian',
-			},
 		},
 	],
 	canonicalUrl:

@@ -9,7 +9,6 @@ type Props = {
 	isMainMedia?: boolean;
 	starRating?: number;
 	isAvatar?: boolean;
-	lightbox: boolean;
 };
 
 export const ImageBlockComponent = ({
@@ -20,7 +19,6 @@ export const ImageBlockComponent = ({
 	isMainMedia,
 	starRating,
 	isAvatar,
-	lightbox,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -33,7 +31,6 @@ export const ImageBlockComponent = ({
 			role={role}
 			title={title}
 			isAvatar={isAvatar}
-			lightbox={lightbox}
 		/>
 	);
 };

@@ -1580,9 +1580,6 @@ export const Labs: DCRArticle = {
 			],
 			elementId: '865336e9-211c-44f0-b0ed-86805d48e174',
 			position: 1,
-			lightbox: {
-				credit: 'Illustration: Peter Horvath',
-			},
 		},
 	],
 	canonicalUrl:
@@ -1933,9 +1930,6 @@ export const Labs: DCRArticle = {
 					],
 					elementId: 'fbdd3246-e0c7-4e9f-a286-4282ce46e260',
 					position: 2,
-					lightbox: {
-						credit: 'Composite: Kim Cortes and teekid/Getty images',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -2283,9 +2277,6 @@ export const Labs: DCRArticle = {
 					],
 					elementId: '3048c2ba-c275-4993-80c2-acf5266736c5',
 					position: 3,
-					lightbox: {
-						credit: 'Composite: Kim Cortes and Vicente Méndez/Getty images',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -2644,9 +2635,6 @@ export const Labs: DCRArticle = {
 					],
 					elementId: '5ee40106-bc1c-4ca5-bc3c-f00cf96bd30b',
 					position: 4,
-					lightbox: {
-						credit: 'Composite: Kim Cortes and gionnixxx/Getty images',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
