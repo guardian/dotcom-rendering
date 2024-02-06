@@ -142,7 +142,7 @@ export const preview = async (
 		: error('ParsingError');
 };
 
-type CommentResponse = Result<
+export type CommentResponse = Result<
 	| 'NetworkError'
 	| 'ApiError'
 	| (ReturnType<typeof parseCommentResponse> & { kind: 'error' })['error'],
