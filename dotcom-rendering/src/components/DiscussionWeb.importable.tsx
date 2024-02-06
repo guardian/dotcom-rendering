@@ -85,7 +85,7 @@ const getUser = async ({
  *
  * (No visual story exist)
  */
-export const DiscussionContainer = (
+export const DiscussionWeb = (
 	props: Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>,
 ) => {
 	const hydrated = useHydrated();
