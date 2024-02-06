@@ -5,7 +5,7 @@ import {
 	text,
 	textSans,
 } from '@guardian/source-foundations';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { preview as defaultPreview } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
 import type {
