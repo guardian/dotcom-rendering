@@ -5,6 +5,7 @@ import type {
 import {
 	BrazeCards,
 	BrazeMessages,
+	canRenderBrazeMsg,
 	LocalMessageCache,
 	NullBrazeCards,
 	NullBrazeMessages,
@@ -126,6 +127,7 @@ export const buildBrazeMessaging = async (
 			appboy,
 			LocalMessageCache,
 			errorHandler,
+			canRenderBrazeMsg,
 		);
 		return { brazeMessages, brazeCards };
 	} catch {
