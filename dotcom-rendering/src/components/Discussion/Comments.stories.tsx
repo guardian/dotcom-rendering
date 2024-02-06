@@ -56,6 +56,7 @@ const defaultCommentForm = {
 	userNameMissing: false,
 	showPreview: false,
 	previewBody: '',
+	body: '',
 };
 
 export const LoggedOutHiddenPicks = () => (
@@ -99,6 +100,9 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -156,6 +160,9 @@ export const InitialPage = () => (
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -174,6 +181,7 @@ InitialPage.decorators = [
 
 export const LoggedInHiddenNoPicks = () => {
 	const [isActive, setActive] = useState(false);
+	const [body, setBody] = useState('');
 
 	return (
 		<div
@@ -217,8 +225,11 @@ export const LoggedInHiddenNoPicks = () => {
 				setTopFormPreviewBody={() => {}}
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
+				setTopFormBody={() => {}}
+				setReplyFormBody={setBody}
+				setBottomFormBody={() => {}}
 				topForm={defaultCommentForm}
-				replyForm={{ ...defaultCommentForm, isActive }}
+				replyForm={{ ...defaultCommentForm, isActive, body }}
 				bottomForm={defaultCommentForm}
 			/>
 		</div>
@@ -229,8 +240,12 @@ LoggedInHiddenNoPicks.storyName =
 LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
 export const LoggedIn = () => {
+	const [isTopFormActive, setTopFormActive] = useState(false);
 	const [isReplyFormActive, setReplyFormActive] = useState(false);
 	const [isBottomFormActive, setBottomFormActive] = useState(false);
+	const [topFormBody, setTopFormBody] = useState('');
+	const [replyFormBody, setReplyFormBody] = useState('');
+	const [bottomFormBody, setBottomFormBody] = useState('');
 
 	return (
 		<div
@@ -262,7 +277,7 @@ export const LoggedIn = () => {
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
-				setTopFormActive={() => {}}
+				setTopFormActive={setTopFormActive}
 				setReplyFormActive={setReplyFormActive}
 				setBottomFormActive={setBottomFormActive}
 				setTopFormUserMissing={() => {}}
@@ -274,14 +289,23 @@ export const LoggedIn = () => {
 				setTopFormPreviewBody={() => {}}
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
-				topForm={defaultCommentForm}
+				setTopFormBody={setTopFormBody}
+				setReplyFormBody={setReplyFormBody}
+				setBottomFormBody={setBottomFormBody}
+				topForm={{
+					...defaultCommentForm,
+					isActive: isTopFormActive,
+					body: topFormBody,
+				}}
 				replyForm={{
 					...defaultCommentForm,
 					isActive: isReplyFormActive,
+					body: replyFormBody,
 				}}
 				bottomForm={{
 					...defaultCommentForm,
 					isActive: isBottomFormActive,
+					body: bottomFormBody,
 				}}
 			/>
 		</div>
@@ -293,6 +317,8 @@ LoggedIn.decorators = [lightDecorator([format])];
 export const LoggedInShortDiscussion = () => {
 	const [isTopFormActive, setTopFormActive] = useState(false);
 	const [isReplyFormActive, setReplyFormActive] = useState(false);
+	const [topFormBody, setTopFormBody] = useState('');
+	const [replyFormBody, setReplyFormBody] = useState('');
 
 	return (
 		<div
@@ -336,10 +362,18 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormPreviewBody={() => {}}
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
-				topForm={{ ...defaultCommentForm, isActive: isTopFormActive }}
+				setTopFormBody={setTopFormBody}
+				setReplyFormBody={setReplyFormBody}
+				setBottomFormBody={() => {}}
+				topForm={{
+					...defaultCommentForm,
+					isActive: isTopFormActive,
+					body: topFormBody,
+				}}
 				replyForm={{
 					...defaultCommentForm,
 					isActive: isReplyFormActive,
+					body: replyFormBody,
 				}}
 				bottomForm={defaultCommentForm}
 			/>
@@ -389,6 +423,9 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -448,6 +485,9 @@ export const Closed = () => (
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -503,6 +543,9 @@ export const NoComments = () => (
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -560,6 +603,9 @@ export const LegacyDiscussion = () => (
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
