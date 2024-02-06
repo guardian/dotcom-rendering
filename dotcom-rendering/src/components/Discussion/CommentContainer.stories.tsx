@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import type { CommentType, Reader } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
 export default { title: 'Discussion/CommentContainer' };
@@ -135,10 +135,11 @@ const commentDataWithLongThread: CommentType = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
-const aUser: SignedInUser = {
+const aUser: Reader = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -156,6 +157,7 @@ const aUser: SignedInUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -207,6 +209,8 @@ export const defaultStory = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
+		body={''}
+		setBody={() => {}}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -243,6 +247,8 @@ export const threadedComment = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
+		body={''}
+		setBody={() => {}}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -279,6 +285,8 @@ export const threadedCommentWithShowMore = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
+		body={''}
+		setBody={() => {}}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -315,6 +323,8 @@ export const threadedCommentWithLongUsernames = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
+		body={''}
+		setBody={() => {}}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -351,6 +361,8 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
+		body={''}
+		setBody={() => {}}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =

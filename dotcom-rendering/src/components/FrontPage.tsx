@@ -99,6 +99,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					abTestSwitches={filterABTestSwitches(front.config.switches)}
 					pageIsSensitive={front.config.isSensitive}
 					isDev={!!front.config.isDev}
+					serverSideTests={front.config.abTests}
 				/>
 			</Island>
 

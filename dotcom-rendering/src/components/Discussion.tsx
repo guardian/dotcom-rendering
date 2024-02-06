@@ -9,7 +9,6 @@ import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
-import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
 import type {
 	CommentForm,
@@ -96,9 +95,10 @@ type State = {
 	isClosedForComments: boolean;
 	isExpanded: boolean;
 	commentPage: number;
+	commentCount: number | undefined;
+	topLevelCommentCount: number;
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
-	totalPages: number;
 	loading: boolean;
 	topForm: CommentForm;
 	replyForm: CommentForm;
@@ -108,6 +108,9 @@ type State = {
 const initialCommentFormState = {
 	isActive: false,
 	userNameMissing: false,
+	showPreview: false,
+	previewBody: '',
+	body: '',
 };
 
 const initialState: State = {
@@ -115,9 +118,10 @@ const initialState: State = {
 	isClosedForComments: false,
 	isExpanded: false,
 	commentPage: 1,
+	commentCount: undefined,
+	topLevelCommentCount: 0,
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: undefined,
-	totalPages: 0,
 	loading: true,
 	topForm: initialCommentFormState,
 	replyForm: initialCommentFormState,
@@ -129,7 +133,8 @@ type Action =
 			type: 'commentsLoaded';
 			comments: CommentType[];
 			isClosedForComments: boolean;
-			totalPages: number;
+			commentCount: number;
+			topLevelCommentCount: number;
 	  }
 	| { type: 'expandComments' }
 	| { type: 'addComment'; comment: CommentType }
@@ -142,7 +147,16 @@ type Action =
 	| { type: 'setBottomFormActive'; isActive: boolean }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean };
+	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setTopFormShowPreview'; showPreview: boolean }
+	| { type: 'setReplyFormShowPreview'; showPreview: boolean }
+	| { type: 'setBottomFormShowPreview'; showPreview: boolean }
+	| { type: 'setTopFormPreviewBody'; previewBody: string }
+	| { type: 'setReplyFormPreviewBody'; previewBody: string }
+	| { type: 'setBottomFormPreviewBody'; previewBody: string }
+	| { type: 'setTopFormBody'; body: string }
+	| { type: 'setReplyFormBody'; body: string }
+	| { type: 'setBottomFormBody'; body: string };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -151,7 +165,8 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				comments: action.comments,
 				isClosedForComments: action.isClosedForComments,
-				totalPages: action.totalPages,
+				commentCount: action.commentCount,
+				topLevelCommentCount: action.topLevelCommentCount,
 				loading: false,
 			};
 		case 'addComment':
@@ -237,6 +252,87 @@ const reducer = (state: State, action: Action): State => {
 				},
 			};
 		}
+		case 'setTopFormShowPreview': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					showPreview: action.showPreview,
+				},
+			};
+		}
+		case 'setReplyFormShowPreview': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					showPreview: action.showPreview,
+				},
+			};
+		}
+		case 'setBottomFormShowPreview': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					showPreview: action.showPreview,
+				},
+			};
+		}
+		case 'setTopFormPreviewBody': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					previewBody: action.previewBody,
+				},
+			};
+		}
+		case 'setReplyFormPreviewBody': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					previewBody: action.previewBody,
+				},
+			};
+		}
+		case 'setBottomFormPreviewBody': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					previewBody: action.previewBody,
+				},
+			};
+		}
+		case 'setTopFormBody': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					body: action.body,
+				},
+			};
+		}
+		case 'setReplyFormBody': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					body: action.body,
+				},
+			};
+		}
+		case 'setBottomFormBody': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					body: action.body,
+				},
+			};
+		}
 
 		default:
 			assertUnreachable(action);
@@ -261,16 +357,15 @@ export const Discussion = ({
 			commentPage,
 			filters,
 			hashCommentId,
-			totalPages,
 			loading,
 			topForm,
 			replyForm,
 			bottomForm,
+			topLevelCommentCount,
+			commentCount,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
-
-	const commentCount = useCommentCount(discussionApiUrl, shortUrlId);
 
 	useEffect(() => {
 		const newHashCommentId = commentIdFromUrl();
@@ -281,6 +376,7 @@ export const Discussion = ({
 			});
 		}
 	}, []);
+
 	useEffect(() => {
 		dispatch({ type: 'setLoading', loading: true });
 		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
@@ -290,13 +386,14 @@ export const Discussion = ({
 					return;
 				}
 
-				const { pages, discussion } = result.value;
+				const { discussion } = result.value;
 
 				dispatch({
 					type: 'commentsLoaded',
 					comments: discussion.comments,
 					isClosedForComments: discussion.isClosedForComments,
-					totalPages: pages,
+					topLevelCommentCount: discussion.topLevelCommentCount,
+					commentCount: discussion.commentCount,
 				});
 			})
 			.catch(() => {
@@ -350,6 +447,7 @@ export const Discussion = ({
 	}, []);
 
 	useEffect(() => {
+		console.log({ commentCount });
 		// There's no point showing the view more button if there isn't much more to view
 		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
 			dispatch({ type: 'expandComments' });
@@ -399,9 +497,8 @@ export const Discussion = ({
 						});
 					}}
 					filters={validFilters}
-					commentCount={commentCount ?? 0}
+					topLevelCommentCount={topLevelCommentCount}
 					loading={loading}
-					totalPages={totalPages}
 					comments={comments}
 					setComment={(comment: CommentType) => {
 						dispatch({ type: 'addComment', comment });
@@ -441,6 +538,60 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormUserMissing',
 							userNameMissing,
+						})
+					}
+					setTopFormShowPreview={(showPreview) =>
+						dispatch({
+							type: 'setTopFormShowPreview',
+							showPreview,
+						})
+					}
+					setReplyFormShowPreview={(showPreview) =>
+						dispatch({
+							type: 'setReplyFormShowPreview',
+							showPreview,
+						})
+					}
+					setBottomFormShowPreview={(showPreview) =>
+						dispatch({
+							type: 'setBottomFormShowPreview',
+							showPreview,
+						})
+					}
+					setTopFormPreviewBody={(previewBody) =>
+						dispatch({
+							type: 'setTopFormPreviewBody',
+							previewBody,
+						})
+					}
+					setReplyFormPreviewBody={(previewBody) =>
+						dispatch({
+							type: 'setReplyFormPreviewBody',
+							previewBody,
+						})
+					}
+					setBottomFormPreviewBody={(previewBody) =>
+						dispatch({
+							type: 'setBottomFormPreviewBody',
+							previewBody,
+						})
+					}
+					setTopFormBody={(body) =>
+						dispatch({
+							type: 'setTopFormBody',
+							body,
+						})
+					}
+					setReplyFormBody={(body) =>
+						dispatch({
+							type: 'setReplyFormBody',
+							body,
+						})
+					}
+					setBottomFormBody={(body) =>
+						dispatch({
+							type: 'setBottomFormBody',
+							body,
 						})
 					}
 					topForm={topForm}

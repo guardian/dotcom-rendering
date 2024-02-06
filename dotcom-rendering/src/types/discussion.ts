@@ -17,9 +17,12 @@ import {
 	variant,
 } from 'valibot';
 import type {
+	addUserName,
 	comment as onComment,
 	recommend as onRecommend,
 	reply as onReply,
+	pickComment,
+	unPickComment,
 } from '../lib/discussionApi';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
@@ -198,7 +201,6 @@ const errorCodes = [
 const commentErrorSchema = object({
 	status: literal('error'),
 	errorCode: picklist(errorCodes),
-	message: string(),
 });
 
 const commentResponseSchema = variant('status', [
@@ -217,25 +219,23 @@ const commentResponseSchema = variant('status', [
 
 export const parseCommentResponse = (
 	data: unknown,
-): Result<
-	{ code: CommentResponseErrorCodes | 'ParsingError'; message: string },
-	number
-> => {
-	const { success, issues, output } = safeParse(commentResponseSchema, data);
+): Result<'ParsingError' | CommentResponseErrorCodes, number> => {
+	const { success, output } = safeParse(commentResponseSchema, data);
 	if (!success) {
-		console.log(issues, output);
 		return {
 			kind: 'error',
-			error: { code: 'ParsingError', message: 'An error occured' },
+			error: 'ParsingError',
 		};
 	}
 
-	return output.status === 'error'
-		? {
-				kind: 'error',
-				error: { code: output.errorCode, message: output.message },
-		  }
-		: { kind: 'ok', value: output.message };
+	if (output.status === 'error') {
+		return {
+			kind: 'error',
+			error: output.errorCode,
+		};
+	}
+
+	return { kind: 'ok', value: output.message };
 };
 
 const abuseResponseSchema = variant('status', [
@@ -290,13 +290,26 @@ export interface FilterOptions {
 	threads: ThreadsType;
 }
 
-export type SignedInUser = {
+type UserFields = {
 	profile: UserProfile;
 	onComment: ReturnType<typeof onComment>;
 	onReply: ReturnType<typeof onReply>;
 	onRecommend: ReturnType<typeof onRecommend>;
+	addUsername: ReturnType<typeof addUserName>;
 	authStatus: SignedInWithCookies | SignedInWithOkta;
 };
+
+export type Reader = UserFields & {
+	kind: 'Reader';
+};
+
+export type Staff = UserFields & {
+	kind: 'Staff';
+	onPick: ReturnType<typeof pickComment>;
+	onUnpick: ReturnType<typeof unPickComment>;
+};
+
+export type SignedInUser = Reader | Staff;
 
 const discussionApiErrorSchema = object({
 	status: literal('error'),
@@ -381,4 +394,7 @@ export const pickResponseSchema = object({
 export type CommentForm = {
 	isActive: boolean;
 	userNameMissing: boolean;
+	showPreview: boolean;
+	previewBody: string;
+	body: string;
 };

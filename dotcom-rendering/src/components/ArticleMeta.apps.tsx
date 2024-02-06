@@ -3,6 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { ReactNode } from 'react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
@@ -43,7 +44,8 @@ const metaGridContainer = css`
 		'. avatar   byline   comment-count .'
 		'. avatar   byline   comment-count .'
 		'. .        .        .             .'
-		'. dateline dateline dateline      .';
+		'. dateline dateline dateline      .'
+		'. branding branding branding      .';
 
 	${from.mobileLandscape} {
 		grid-template-columns: 20px auto 1fr auto 20px;
@@ -65,7 +67,7 @@ const metaContainerMargins = css`
 	}
 `;
 
-const MetaGridAvatar = ({ children }: { children: React.ReactNode }) => (
+const MetaGridAvatar = ({ children }: { children: ReactNode }) => (
 	<div
 		css={css`
 			grid-area: avatar;
@@ -89,7 +91,7 @@ const MetaGridByline = ({
 	children,
 	isComment,
 }: {
-	children: React.ReactNode;
+	children: ReactNode;
 	isComment: boolean;
 }) => (
 	// address > div > span > svg:first-of-type - spacing for the Follow Tag buttons in follow wrapper,
@@ -124,7 +126,7 @@ const MetaGridCommentCount = ({
 	isAnalysis,
 	isLiveBlog,
 }: {
-	children: React.ReactNode;
+	children: ReactNode;
 	isPicture: boolean;
 	isComment: boolean;
 	isImmersive: boolean;
@@ -163,7 +165,7 @@ const MetaGridDateline = ({
 	children,
 	isImmersiveOrAnalysisWithMultipleAuthors,
 }: {
-	children: React.ReactNode;
+	children: ReactNode;
 	isImmersiveOrAnalysisWithMultipleAuthors: boolean;
 }) => (
 	<div
@@ -176,6 +178,16 @@ const MetaGridDateline = ({
 				? 'byline'
 				: 'dateline',
 		}}
+	>
+		{children}
+	</div>
+);
+
+const MetaGridBranding = ({ children }: { children: ReactNode }) => (
+	<div
+		css={css`
+			grid-area: branding;
+		`}
 	>
 		{children}
 	</div>
@@ -321,12 +333,14 @@ export const ArticleMetaApps = ({
 						format={format}
 					/>
 				</MetaGridDateline>
+				{branding && (
+					<MetaGridBranding>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<Branding branding={branding} format={format} />
+						</Island>
+					</MetaGridBranding>
+				)}
 			</div>
-			{branding && (
-				<Island priority="feature" defer={{ until: 'visible' }}>
-					<Branding branding={branding} format={format} />
-				</Island>
-			)}
 		</div>
 	);
 };

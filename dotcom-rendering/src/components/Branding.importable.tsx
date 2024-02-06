@@ -63,6 +63,11 @@ const liveBlogAboutLinkStyle = css`
 	}
 `;
 
+const imgStyles = (lightLogoWidth: number) => css`
+	max-width: ${lightLogoWidth}px;
+	height: fit-content;
+`;
+
 function decideLogo(
 	branding: BrandingType,
 	format: ArticleFormat,
@@ -102,6 +107,7 @@ function decideLogo(
 				height={branding.logo.dimensions.height}
 				src={encodeURI(branding.logo.src)}
 				alt={branding.sponsorName}
+				css={imgStyles(branding.logo.dimensions.width)}
 			/>
 		</picture>
 	);

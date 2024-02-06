@@ -79,10 +79,11 @@ const contributorCommentWithShortBody: CommentType = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
 const aUser = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -100,6 +101,7 @@ const aUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
 	authStatus: { kind: 'SignedInWithCookies' },
 } satisfies SignedInUser;
 

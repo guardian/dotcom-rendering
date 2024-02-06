@@ -36,7 +36,6 @@ jobs:
           rm -r rendering/*
           mv rendering.tar.gz rendering/
 
-      # TODO - add other rendering apps when ready
       - name: Compress article-rendering app server files
         run: |
           tar -zcf article-rendering.tar.gz article-rendering
@@ -48,6 +47,12 @@ jobs:
           tar -zcf facia-rendering.tar.gz facia-rendering
           rm -r facia-rendering/*
           mv facia-rendering.tar.gz facia-rendering/
+
+      - name: Compress interactive-rendering app server files
+        run: |
+          tar -zcf interactive-rendering.tar.gz interactive-rendering
+          rm -r interactive-rendering/*
+          mv interactive-rendering.tar.gz interactive-rendering/
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -75,5 +80,9 @@ jobs:
               - facia-rendering-cfn
             facia-rendering:
               - facia-rendering
+            interactive-rendering-cfn:
+              - interactive-rendering-cfn
+            interactive-rendering:
+              - interactive-rendering
             frontend-static:
               - frontend-static

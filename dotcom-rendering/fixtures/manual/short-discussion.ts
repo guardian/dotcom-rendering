@@ -8,13 +8,13 @@ export const shortDiscussion = {
 	orderBy: 'oldest',
 	discussion: {
 		apiUrl: 'https://discussion.guardianapis.com/discussion-api/discussion//p/4v8kk',
-		commentCount: 7,
+		commentCount: 2,
 		isClosedForComments: true,
 		isClosedForRecommendation: true,
 		isThreaded: true,
 		key: '/p/4v8kk',
 		title: 'Stevie Nicks to release double album of songs from her past',
-		topLevelCommentCount: 6,
+		topLevelCommentCount: 2,
 		webUrl: 'https://www.theguardian.com/music/2014/jul/25/stevie-nicks-ro-release-double-album-of-songs-from-her-past',
 		comments: [
 			{
