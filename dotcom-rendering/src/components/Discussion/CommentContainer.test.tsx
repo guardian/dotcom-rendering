@@ -22,7 +22,7 @@ const commentWithoutReply = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const satisfies Result<unknown, unknown>;
 
 const commentResponseSuccess = {
@@ -31,6 +31,7 @@ const commentResponseSuccess = {
 } as const satisfies Result<unknown, unknown>;
 
 const aUser: SignedInUser = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -47,7 +48,9 @@ const aUser: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseSuccess),
-	authStatus: { kind: 'SignedInWithCookies' },
+	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
+	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
 };
 
 describe('CommentContainer', () => {
@@ -88,6 +91,9 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				body={newCommentText}
+				setBody={() => {}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>,
 		);
 
@@ -135,6 +141,9 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				body={''}
+				setBody={() => {}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>,
 		);
 
@@ -181,6 +190,9 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				body={newCommentText}
+				setBody={() => {}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>,
 		);
 
@@ -228,6 +240,9 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				body={''}
+				setBody={() => {}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>,
 		);
 

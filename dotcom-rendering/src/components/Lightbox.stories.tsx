@@ -12,6 +12,7 @@ import type { ImageForLightbox } from '../types/content';
 import { LightboxLayout } from './LightboxLayout.importable';
 
 const testImage: ImageForLightbox = {
+	position: 1,
 	elementId: 'mockId',
 	width: 1200,
 	height: 800,

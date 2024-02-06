@@ -1708,11 +1708,6 @@ export const Editorial: DCRArticle = {
 			],
 			elementId: 'e6374df7-4ada-4452-a370-5678f1ad5343',
 			position: 1,
-			lightbox: {
-				caption:
-					'‘Ministers have said further border measures are required, but cannot say when they will be applied.’',
-				credit: 'Photograph: May James/ZUMA Wire/REX/Shutterstock',
-			},
 		},
 	],
 	canonicalUrl:

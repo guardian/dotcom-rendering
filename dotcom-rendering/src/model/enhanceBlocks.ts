@@ -1,4 +1,4 @@
-import type { Newsletter } from '../types/content';
+import type { ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
@@ -18,19 +18,11 @@ class BlockEnhancer {
 
 	format: FEFormat;
 
-	renderingTarget: RenderingTarget;
-
 	options: Options;
 
-	constructor(
-		blocks: Block[],
-		format: FEFormat,
-		renderingTarget: RenderingTarget,
-		options: Options,
-	) {
+	constructor(blocks: Block[], format: FEFormat, options: Options) {
 		this.blocks = blocks;
 		this.format = format;
-		this.renderingTarget = renderingTarget;
 		this.options = options;
 	}
 
@@ -47,7 +39,7 @@ class BlockEnhancer {
 
 	enhanceAdPlaceholders() {
 		if (
-			this.renderingTarget === 'Apps' &&
+			this.options.renderingTarget === 'Apps' &&
 			!(this.format.design === 'LiveBlogDesign') &&
 			!(this.format.design === 'DeadBlogDesign')
 		) {
@@ -77,7 +69,11 @@ class BlockEnhancer {
 	}
 
 	enhanceImages() {
-		this.blocks = enhanceImages(this.blocks, this.format);
+		this.blocks = enhanceImages(
+			this.blocks,
+			this.format,
+			this.options.imagesForLightbox,
+		);
 		return this;
 	}
 
@@ -103,7 +99,9 @@ class BlockEnhancer {
 }
 
 type Options = {
+	renderingTarget: RenderingTarget;
 	promotedNewsletter: Newsletter | undefined;
+	imagesForLightbox: ImageForLightbox[];
 };
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
@@ -112,15 +110,10 @@ type Options = {
 export const enhanceBlocks = (
 	blocks: Block[],
 	format: FEFormat,
-	renderingTarget: RenderingTarget,
-	options?: Options,
+	options: Options,
 ): Block[] => {
-	const { promotedNewsletter } = options ?? {};
-
 	for (const block of blocks) validateAsBlock(block);
-	return new BlockEnhancer(blocks, format, renderingTarget, {
-		promotedNewsletter,
-	})
+	return new BlockEnhancer(blocks, format, options)
 		.enhanceDividers()
 		.enhanceH2s()
 		.enhanceInteractiveContentsElements()

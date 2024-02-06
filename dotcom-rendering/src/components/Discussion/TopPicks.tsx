@@ -1,15 +1,12 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
-import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
-import type { CommentType, UserProfile } from '../../types/discussion';
+import type { CommentType, SignedInUser } from '../../types/discussion';
 import { TopPick } from './TopPick';
 
 type Props = {
-	user?: UserProfile;
+	user?: SignedInUser;
 	comments: CommentType[];
-	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	onPermalinkClick: (commentId: number) => void;
-	onRecommend?: (commentId: number) => Promise<boolean>;
 };
 
 const columWrapperStyles = css`
@@ -45,13 +42,7 @@ const oneColCommentsStyles = css`
 	}
 `;
 
-export const TopPicks = ({
-	user,
-	comments,
-	authStatus,
-	onPermalinkClick,
-	onRecommend,
-}: Props) => {
+export const TopPicks = ({ user, comments, onPermalinkClick }: Props) => {
 	const leftColComments: CommentType[] = [];
 	const rightColComments: CommentType[] = [];
 	for (const [index, comment] of comments.entries())
@@ -66,13 +57,12 @@ export const TopPicks = ({
 						<TopPick
 							key={comment.id}
 							comment={comment}
-							authStatus={authStatus}
+							user={user}
 							userMadeComment={
-								!!user &&
-								user.userId === comment.userProfile.userId
+								user?.profile.userId ===
+								comment.userProfile.userId
 							}
 							onPermalinkClick={onPermalinkClick}
-							onRecommend={onRecommend}
 						/>
 					))}
 				</div>
@@ -81,13 +71,12 @@ export const TopPicks = ({
 						<TopPick
 							key={comment.id}
 							comment={comment}
-							authStatus={authStatus}
+							user={user}
 							userMadeComment={
-								!!user &&
-								user.userId === comment.userProfile.userId
+								user?.profile.userId ===
+								comment.userProfile.userId
 							}
 							onPermalinkClick={onPermalinkClick}
-							onRecommend={onRecommend}
 						/>
 					))}
 				</div>
@@ -97,12 +86,10 @@ export const TopPicks = ({
 					<TopPick
 						key={comment.id}
 						comment={comment}
-						authStatus={authStatus}
 						userMadeComment={
-							!!user && user.userId === comment.userProfile.userId
+							user?.profile.userId === comment.userProfile.userId
 						}
 						onPermalinkClick={onPermalinkClick}
-						onRecommend={onRecommend}
 					/>
 				))}
 			</div>

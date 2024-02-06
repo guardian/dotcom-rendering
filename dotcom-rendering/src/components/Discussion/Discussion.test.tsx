@@ -20,6 +20,9 @@ describe('App', () => {
 				discussionApiClientHeader="testClientHeader"
 				enableDiscussionSwitch={true}
 				idApiUrl="https://idapi.theguardian.com"
+				reportAbuseUnauthenticated={() =>
+					Promise.resolve({ kind: 'ok', value: true })
+				}
 			/>,
 		);
 

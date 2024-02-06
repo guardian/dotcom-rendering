@@ -1,6 +1,14 @@
 import { isObject, joinUrl } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { comment, reply } from '../lib/discussionApi';
+import {
+	addUserName,
+	comment,
+	pickComment,
+	recommend,
+	reply,
+	reportAbuse,
+	unPickComment,
+} from '../lib/discussionApi';
 import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useAuthStatus } from '../lib/useAuthStatus';
@@ -26,13 +34,32 @@ const getUser = async ({
 
 	if (!isObject(data)) return;
 	if (!isObject(data.userProfile)) return;
+
 	const profile = data.userProfile as unknown as UserProfile;
-	return {
-		profile,
-		onComment: comment(authStatus),
-		onReply: reply(authStatus),
-		authStatus,
-	};
+
+	const isStaff = profile.badge.some((e) => e.name === 'Staff');
+
+	return isStaff
+		? {
+				kind: 'Staff',
+				profile,
+				onComment: comment(authStatus),
+				onReply: reply(authStatus),
+				onRecommend: recommend(authStatus),
+				onPick: pickComment(authStatus),
+				onUnpick: unPickComment(authStatus),
+				addUsername: addUserName(authStatus),
+				reportAbuse: reportAbuse(authStatus),
+		  }
+		: {
+				kind: 'Reader',
+				profile,
+				onComment: comment(authStatus),
+				onReply: reply(authStatus),
+				onRecommend: recommend(authStatus),
+				addUsername: addUserName(authStatus),
+				reportAbuse: reportAbuse(authStatus),
+		  };
 };
 
 /**
@@ -58,7 +85,9 @@ const getUser = async ({
  *
  * (No visual story exist)
  */
-export const DiscussionContainer = (props: Omit<DiscussionProps, 'user'>) => {
+export const DiscussionContainer = (
+	props: Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>,
+) => {
 	const hydrated = useHydrated();
 	const authStatus = useAuthStatus();
 	const [user, setUser] = useState<SignedInUser>();
@@ -77,5 +106,11 @@ export const DiscussionContainer = (props: Omit<DiscussionProps, 'user'>) => {
 
 	if (!hydrated) return <Placeholder height={324} />;
 
-	return <Discussion user={user} {...props} />;
+	return (
+		<Discussion
+			user={user}
+			{...props}
+			reportAbuseUnauthenticated={reportAbuse(undefined)}
+		/>
+	);
 };

@@ -1646,11 +1646,6 @@ export const NewsletterSignup: DCRArticle = {
 			],
 			elementId: '77453a2f-6297-435b-bd16-ec3a8eb073b3',
 			position: 1,
-			lightbox: {
-				caption:
-					'Our new women’s football newsletter will arrive in your inbox every Wednesday.',
-				credit: 'Illustration: Guardian Design',
-			},
 		},
 	],
 	canonicalUrl:

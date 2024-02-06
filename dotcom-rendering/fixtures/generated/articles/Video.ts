@@ -1818,11 +1818,6 @@ export const Video: DCRArticle = {
 			],
 			elementId: '036d3878-73d5-40f9-a48c-85bd88f54ca8',
 			position: 1,
-			lightbox: {
-				caption:
-					'Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP',
-				credit: 'Photograph: Matt Rourke/AP',
-			},
 		},
 	],
 	canonicalUrl:

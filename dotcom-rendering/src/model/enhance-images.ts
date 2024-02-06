@@ -1,8 +1,10 @@
 import { JSDOM } from 'jsdom';
+import { getLargest, getMaster } from '../lib/image';
 import type {
 	CartoonBlockElement,
 	FEElement,
 	ImageBlockElement,
+	ImageForLightbox,
 	MultiImageBlockElement,
 	SubheadingBlockElement,
 	TextBlockElement,
@@ -130,29 +132,6 @@ const constructMultiImageElement = (
 		],
 	};
 };
-
-export const addLightboxData = (elements: FEElement[]): FEElement[] =>
-	elements.map<FEElement>((thisElement) =>
-		isImage(thisElement)
-			? {
-					...thisElement,
-					// Copy caption and credit
-					lightbox: {
-						caption: thisElement.data.caption,
-						credit: thisElement.data.credit,
-					},
-			  }
-			: isCartoon(thisElement)
-			? {
-					...thisElement,
-					// Copy caption and credit
-					lightbox: {
-						caption: thisElement.caption,
-						credit: thisElement.credit,
-					},
-			  }
-			: thisElement,
-	);
 
 const addMultiImageElements = (elements: FEElement[]): FEElement[] => {
 	const withMultiImageElements: FEElement[] = [];
@@ -318,25 +297,40 @@ const removeCredit = (elements: FEElement[]): FEElement[] =>
 		}
 	});
 
+const addImagePositions = <E extends FEElement>(
+	elements: E[],
+	imagesForLightbox: ImageForLightbox[],
+): E[] =>
+	elements.map<E>((element) => {
+		if (isMultiImage(element)) {
+			return {
+				...element,
+				images: addImagePositions(element.images, imagesForLightbox),
+			};
+		}
+
+		if (!isImage(element) && !isCartoon(element)) {
+			return element;
+		}
+
+		const allImages = isImage(element)
+			? element.media.allImages
+			: element.variants.flatMap((variant) => variant.images);
+
+		const image = getMaster(allImages) ?? getLargest(allImages);
+
+		const position = imagesForLightbox.find(
+			({ masterUrl }) => image?.url === masterUrl,
+		)?.position;
+
+		return position === undefined ? element : { ...element, position };
+	});
+
 class Enhancer {
 	elements: FEElement[];
 
 	constructor(elements: FEElement[]) {
 		this.elements = elements;
-	}
-
-	/**
-	 * To support photo essays and multi image elements, some images have their captions
-	 * and credit values remmoved. For example, when we might have two iamges side by side
-	 * we want to display a single caption for both so we remove each images own caption
-	 * and use the ul/li trick to render a new, special caption. (See `stripCaption`)
-	 *
-	 * But for lightbox we still want to show the original caption so we copy it into a new
-	 * property here to preserve it.
-	 */
-	addLightboxData() {
-		this.elements = addLightboxData(this.elements);
-		return this;
 	}
 
 	/**
@@ -388,38 +382,76 @@ class Enhancer {
 		this.elements = removeCredit(this.elements);
 		return this;
 	}
+
+	/**
+	 * This function adds the position property to each image
+	 * element.
+	 *
+	 * This value is used to add an id which means we can add a hash to
+	 * the url, such as #img-2, letting us navigate to that image.
+	 *
+	 * We also use this id to open lightbox when the page is loaded
+	 * with an image hash present on the url
+	 *
+	 */
+	addImagePositions(imagesForLightbox: ImageForLightbox[]) {
+		this.elements = addImagePositions(this.elements, imagesForLightbox);
+		return this;
+	}
 }
 
-const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] => {
+type Options = { isPhotoEssay: boolean; imagesForLightbox: ImageForLightbox[] };
+
+const enhance = (
+	elements: FEElement[],
+	{ isPhotoEssay, imagesForLightbox }: Options,
+): FEElement[] => {
 	if (isPhotoEssay) {
 		return new Enhancer(elements)
-			.addLightboxData()
 			.stripCaptions()
 			.removeCredit()
 			.addMultiImageElements()
 			.addTitles()
 			.addCaptionsToMultis()
-			.addCaptionsToImages().elements;
+			.addCaptionsToImages()
+			.addImagePositions(imagesForLightbox).elements;
 	}
 
 	return (
 		new Enhancer(elements)
-			.addLightboxData()
 			// Replace pairs of halfWidth images with MultiImageBlockElements
 			.addMultiImageElements()
 			// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
 			// element and use the value for the multi image `caption` prop
-			.addCaptionsToMultis().elements
+			.addCaptionsToMultis()
+			.addImagePositions(imagesForLightbox).elements
 	);
 };
 
-export const enhanceImages = (blocks: Block[], format: FEFormat): Block[] => {
+export const enhanceImages = (
+	blocks: Block[],
+	format: FEFormat,
+	imagesForLightbox: ImageForLightbox[],
+): Block[] => {
 	const isPhotoEssay = format.design === 'PhotoEssayDesign';
 
 	return blocks.map((block: Block) => {
 		return {
 			...block,
-			elements: enhance(block.elements, isPhotoEssay),
+			elements: enhance(block.elements, {
+				isPhotoEssay,
+				imagesForLightbox,
+			}),
 		};
 	});
 };
+
+export const enhanceElementsImages = (
+	elements: FEElement[],
+	format: FEFormat,
+	imagesForLightbox: ImageForLightbox[],
+): FEElement[] =>
+	enhance(elements, {
+		isPhotoEssay: format.design === 'PhotoEssayDesign',
+		imagesForLightbox,
+	});

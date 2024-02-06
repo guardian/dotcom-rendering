@@ -11,10 +11,6 @@ const image = {
 		...images[0].data,
 		caption: 'The original caption',
 	},
-	lightbox: {
-		caption: 'The original caption',
-		credit: 'Photograph: Cat Vinton/The Guardian',
-	},
 };
 
 describe('Enhance Images', () => {
@@ -53,7 +49,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -110,7 +106,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -160,7 +156,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -199,7 +195,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -237,7 +233,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -291,7 +287,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -358,7 +354,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -412,7 +408,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -442,7 +438,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -517,7 +513,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -570,7 +566,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -597,7 +593,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -665,11 +661,12 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
-		it('adds the lightbox property with caption and credit values set', () => {
+
+		it('adds the lightbox position for a valid image', () => {
 			const input: Block[] = [
 				{
 					...blockMetaData,
@@ -693,24 +690,29 @@ describe('Enhance Images', () => {
 					elements: [
 						{
 							...image,
+							position: 4,
 							role: 'inline',
 							data: {
 								caption: '',
 								credit: '',
-							},
-							lightbox: {
-								caption:
-									'This text starts in data but gets removed for photo essays',
-								credit: 'but it is copied into the lightbox property so we can use it there',
 							},
 						},
 					],
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(
+				enhanceImages(input, PhotoEssay.format, [
+					{
+						masterUrl:
+							'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/master/3110.jpg',
+						elementId: '12345',
+						width: 3110,
+						height: 2074,
+						position: 4,
+					},
+				]),
+			).toEqual(expectedOutput);
 		});
 
 		it('does not strip the captions from any preceding halfwidth images if the special caption is not placed immediately after them', () => {
@@ -762,7 +764,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -810,7 +812,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -833,7 +835,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -857,7 +859,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -879,7 +881,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -932,7 +934,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -990,7 +992,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
 				expectedOutput,
 			);
 		});

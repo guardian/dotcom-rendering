@@ -2040,10 +2040,6 @@ export const SpecialReport: DCRArticle = {
 			],
 			elementId: '84a1b0b0-0ea3-45f8-bc9b-e4341008498a',
 			position: 1,
-			lightbox: {
-				caption: 'Lindsey oil refinery in north Lincolnshire.',
-				credit: 'Photograph: Christopher Furlong/Getty Images',
-			},
 		},
 	],
 	canonicalUrl:

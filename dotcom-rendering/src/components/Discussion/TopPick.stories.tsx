@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { SignedInWithCookies } from '../../lib/identity';
-import type { CommentType } from '../../types/discussion';
+import type { CommentType, SignedInUser } from '../../types/discussion';
 import { TopPick } from './TopPick';
 
 export default { component: TopPick, title: 'Discussion/TopPick' };
@@ -78,7 +77,33 @@ const contributorCommentWithShortBody: CommentType = {
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 };
 
-const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
+const commentResponseError = {
+	kind: 'error',
+	error: 'NetworkError',
+} as const;
+
+const aUser = {
+	kind: 'Reader',
+	profile: {
+		userId: 'abc123',
+		displayName: 'Jane Smith',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
+	},
+	onComment: () => Promise.resolve(commentResponseError),
+	onReply: () => Promise.resolve(commentResponseError),
+	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
+	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
+} satisfies SignedInUser;
 
 export const LongPick = () => (
 	<div
@@ -106,7 +131,7 @@ export const ShortPick = () => (
 	>
 		<TopPick
 			comment={commentWithShortBody}
-			authStatus={signedInStatus}
+			user={aUser}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
 		/>
@@ -148,7 +173,7 @@ export const ShortPickContributor = () => (
 	>
 		<TopPick
 			comment={contributorCommentWithShortBody}
-			authStatus={signedInStatus}
+			user={aUser}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
 		/>

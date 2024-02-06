@@ -6,9 +6,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
 import { palette as themePalette } from '../../palette';
-import type { CommentType } from '../../types/discussion';
+import type { CommentType, SignedInUser } from '../../types/discussion';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianStaff } from './Badges';
 import { Column } from './Column';
@@ -18,10 +17,9 @@ import { Timestamp } from './Timestamp';
 
 type Props = {
 	comment: CommentType;
-	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	userMadeComment: boolean;
 	onPermalinkClick: (commentId: number) => void;
-	onRecommend?: (commentId: number) => Promise<boolean>;
+	user?: SignedInUser;
 };
 
 const pickStyles = css`
@@ -168,10 +166,9 @@ const truncateText = (input: string, limit: number) => {
 
 export const TopPick = ({
 	comment,
-	authStatus,
+	user,
 	userMadeComment,
 	onPermalinkClick,
-	onRecommend,
 }: Props) => {
 	const showStaffBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Staff',
@@ -247,9 +244,8 @@ export const TopPick = ({
 					commentId={comment.id}
 					initialCount={comment.numRecommends}
 					alreadyRecommended={false}
-					authStatus={authStatus}
+					user={user}
 					userMadeComment={userMadeComment}
-					onRecommend={onRecommend}
 				/>
 			</PickMeta>
 		</div>

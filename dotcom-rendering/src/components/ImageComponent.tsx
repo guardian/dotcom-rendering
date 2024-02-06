@@ -9,7 +9,6 @@ import {
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
-import { isWideEnough } from '../lib/lightbox';
 import { palette as themePalette } from '../palette';
 import type { ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
@@ -31,7 +30,6 @@ type Props = {
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
-	lightbox: boolean;
 };
 
 const starsWrapper = css`
@@ -237,7 +235,6 @@ export const ImageComponent = ({
 	starRating,
 	title,
 	isAvatar,
-	lightbox,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -263,8 +260,7 @@ export const ImageComponent = ({
 		return null;
 	}
 
-	const webLightbox =
-		renderingTarget === 'Web' && lightbox && isWideEnough(image);
+	const isWeb = renderingTarget === 'Web';
 
 	/**
 	 * We use height and width for two things.
@@ -349,7 +345,7 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{webLightbox && !isUndefined(element.position) && (
+				{isWeb && !isUndefined(element.position) && (
 					<LightboxLink
 						role={role}
 						format={format}
@@ -414,7 +410,7 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{webLightbox && !isUndefined(element.position) && (
+				{isWeb && !isUndefined(element.position) && (
 					<LightboxLink
 						role={role}
 						format={format}
@@ -518,7 +514,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 
-				{webLightbox && !isUndefined(element.position) && (
+				{isWeb && !isUndefined(element.position) && (
 					<LightboxLink
 						role={role}
 						format={format}

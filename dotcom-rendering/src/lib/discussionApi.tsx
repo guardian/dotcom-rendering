@@ -2,7 +2,6 @@ import { isObject, isString, joinUrl } from '@guardian/libs';
 import { safeParse } from 'valibot';
 import type {
 	AdditionalHeadersType,
-	CommentResponseErrorCodes,
 	CommentType,
 	DiscussionOptions,
 	GetDiscussionSuccess,
@@ -155,7 +154,9 @@ export const preview = async (
 };
 
 type CommentResponse = Result<
-	{ code: CommentResponseErrorCodes | GetDiscussionError; message: string },
+	| 'NetworkError'
+	| 'ApiError'
+	| (ReturnType<typeof parseCommentResponse> & { kind: 'error' })['error'],
 	number
 >;
 
@@ -181,15 +182,7 @@ export const comment =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') {
-			return {
-				kind: 'error',
-				error: {
-					code: jsonResult.error,
-					message: 'Could not retrieve the comment',
-				},
-			};
-		}
+		if (jsonResult.kind === 'error') return jsonResult;
 
 		return parseCommentResponse(jsonResult.value);
 	};
@@ -225,15 +218,7 @@ export const reply =
 			credentials: authOptions.credentials,
 		});
 
-		if (jsonResult.kind === 'error') {
-			return {
-				kind: 'error',
-				error: {
-					code: jsonResult.error,
-					message: 'Could not retrieve the comment',
-				},
-			};
-		}
+		if (jsonResult.kind === 'error') return jsonResult;
 
 		return parseCommentResponse(jsonResult.value);
 	};
@@ -265,56 +250,56 @@ export const getPicks = async (
 	return { kind: 'ok', value: result.output.discussion.comments };
 };
 
-export const reportAbuse = async ({
-	commentId,
-	categoryId,
-	email,
-	reason,
-	authStatus,
-}: {
-	commentId: number;
-	categoryId: number;
-	reason?: string;
-	email?: string;
-	authStatus?: SignedInWithCookies | SignedInWithOkta;
-}): Promise<Result<string, true>> => {
-	const url =
-		joinUrl(
-			options.baseUrl,
-			'comment',
-			commentId.toString(),
-			'reportAbuse',
-		) + objAsParams(defaultParams);
+export const reportAbuse =
+	(authStatus?: SignedInWithCookies | SignedInWithOkta) =>
+	async ({
+		commentId,
+		categoryId,
+		email,
+		reason,
+	}: {
+		commentId: number;
+		categoryId: number;
+		reason?: string;
+		email?: string;
+	}): Promise<Result<string, true>> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'reportAbuse',
+			) + objAsParams(defaultParams);
 
-	const data = new URLSearchParams();
-	data.append('categoryId', categoryId.toString());
-	email && data.append('email', email.toString());
-	reason && data.append('reason', reason);
+		const data = new URLSearchParams();
+		data.append('categoryId', categoryId.toString());
+		email && data.append('email', email.toString());
+		reason && data.append('reason', reason);
 
-	const authOptions = authStatus
-		? getOptionsHeadersWithOkta(authStatus)
-		: undefined;
+		const authOptions = authStatus
+			? getOptionsHeadersWithOkta(authStatus)
+			: undefined;
 
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		body: data.toString(),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-			...authOptions?.headers,
-		},
-		credentials: authOptions?.credentials,
-	});
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			body: data.toString(),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...authOptions?.headers,
+			},
+			credentials: authOptions?.credentials,
+		});
 
-	if (jsonResult.kind === 'error') {
-		return {
-			kind: 'error',
-			error: 'An unknown error occured',
-		};
-	}
+		if (jsonResult.kind === 'error') {
+			return {
+				kind: 'error',
+				error: 'An unknown error occured',
+			};
+		}
 
-	return parseAbuseResponse(jsonResult.value);
-};
+		return parseAbuseResponse(jsonResult.value);
+	};
 
 export const recommend =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
@@ -341,108 +326,109 @@ export const recommend =
 		}).then((resp) => resp.ok);
 	};
 
-export const addUserName = async (
-	authStatus: SignedInWithCookies | SignedInWithOkta,
-	userName: string,
-): Promise<Result<string, true>> => {
-	const url = options.idApiUrl + `/user/me/username`;
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
+export const addUserName =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	async (userName: string): Promise<Result<string, true>> => {
+		const url = options.idApiUrl + `/user/me/username`;
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		body: JSON.stringify({
-			publicFields: {
-				username: userName,
-				displayName: userName,
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			body: JSON.stringify({
+				publicFields: {
+					username: userName,
+					displayName: userName,
+				},
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+				...authOptions.headers,
 			},
-		}),
-		headers: {
-			'Content-Type': 'application/json',
-			...authOptions.headers,
-		},
-		credentials: authOptions.credentials,
-	});
+			credentials: authOptions.credentials,
+		});
 
-	if (jsonResult.kind === 'error') {
-		return jsonResult;
-	}
+		if (jsonResult.kind === 'error') {
+			return jsonResult;
+		}
 
-	const result = safeParse(postUsernameResponseSchema, jsonResult.value);
+		const result = safeParse(postUsernameResponseSchema, jsonResult.value);
 
-	if (!result.success) {
-		return { kind: 'error', error: 'An unknown error occured' };
-	}
-	if (result.output.status === 'error') {
-		return {
-			kind: 'error',
-			error: result.output.errors
-				.map(({ message }) => message)
-				.join('\n'),
-		};
-	}
+		if (!result.success) {
+			return { kind: 'error', error: 'An unknown error occured' };
+		}
+		if (result.output.status === 'error') {
+			return {
+				kind: 'error',
+				error: result.output.errors
+					.map(({ message }) => message)
+					.join('\n'),
+			};
+		}
 
-	return { kind: 'ok', value: true };
-};
+		return { kind: 'ok', value: true };
+	};
 
-export const pickComment = async (
-	authStatus: SignedInWithCookies | SignedInWithOkta,
-	commentId: number,
-): Promise<Result<GetDiscussionError, true>> => {
-	const url =
-		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
-		objAsParams(defaultParams);
+export const pickComment =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	async (commentId: number): Promise<Result<GetDiscussionError, true>> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'highlight',
+			) + objAsParams(defaultParams);
 
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-			...authOptions.headers,
-		},
-		credentials: authOptions.credentials,
-	});
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...authOptions.headers,
+			},
+			credentials: authOptions.credentials,
+		});
 
-	if (jsonResult.kind === 'error') return jsonResult;
+		if (jsonResult.kind === 'error') return jsonResult;
 
-	const result = safeParse(pickResponseSchema, jsonResult.value);
+		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-	if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return { kind: 'error', error: 'ParsingError' };
 
-	return { kind: 'ok', value: true };
-};
+		return { kind: 'ok', value: true };
+	};
 
-export const unPickComment = async (
-	authStatus: SignedInWithCookies | SignedInWithOkta,
-	commentId: number,
-): Promise<Result<GetDiscussionError, false>> => {
-	const url =
-		joinUrl(
-			options.baseUrl,
-			'comment',
-			commentId.toString(),
-			'unhighlight',
-		) + objAsParams(defaultParams);
+export const unPickComment =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	async (commentId: number): Promise<Result<GetDiscussionError, false>> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'unhighlight',
+			) + objAsParams(defaultParams);
 
-	const authOptions = getOptionsHeadersWithOkta(authStatus);
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-			...authOptions.headers,
-		},
-		credentials: authOptions.credentials,
-	});
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...authOptions.headers,
+			},
+			credentials: authOptions.credentials,
+		});
 
-	if (jsonResult.kind === 'error') return jsonResult;
+		if (jsonResult.kind === 'error') return jsonResult;
 
-	const result = safeParse(pickResponseSchema, jsonResult.value);
+		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-	if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return { kind: 'error', error: 'ParsingError' };
 
-	return { kind: 'ok', value: false };
-};
+		return { kind: 'ok', value: false };
+	};
 
 export const getMoreResponses = async (
 	commentId: number,

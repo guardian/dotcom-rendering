@@ -95,6 +95,7 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 					)}
 					pageIsSensitive={tagFront.config.isSensitive}
 					isDev={!!tagFront.config.isDev}
+					serverSideTests={tagFront.config.abTests}
 				/>
 			</Island>
 			<Island priority="critical">

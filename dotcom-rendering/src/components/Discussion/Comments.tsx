@@ -6,12 +6,13 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { preview } from '../../lib/discussionApi';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
 	CommentType,
 	FilterOptions,
+	CommentForm as Form,
 	SignedInUser,
 } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
@@ -37,13 +38,48 @@ type Props = {
 	page: number;
 	setPage: (page: number, shouldExpand: boolean) => void;
 	filters: FilterOptions;
-	commentCount: number;
+	topLevelCommentCount: number;
 	loading: boolean;
-	totalPages: number;
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
+	setTopFormActive: (isActive: boolean) => void;
+	setReplyFormActive: (isActive: boolean) => void;
+	setBottomFormActive: (isActive: boolean) => void;
+	setTopFormUserMissing: (isUserMissing: boolean) => void;
+	setReplyFormUserMissing: (isUserMissing: boolean) => void;
+	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	setTopFormError: (error: string) => void;
+	setReplyFormError: (error: string) => void;
+	setBottomFormError: (error: string) => void;
+	setTopFormShowPreview: (showPreview: boolean) => void;
+	setReplyFormShowPreview: (showPreview: boolean) => void;
+	setBottomFormShowPreview: (showPreview: boolean) => void;
+	setTopFormPreviewBody: (previewBody: string) => void;
+	setReplyFormPreviewBody: (previewBody: string) => void;
+	setBottomFormPreviewBody: (previewBody: string) => void;
+	setTopFormBody: (body: string) => void;
+	setReplyFormBody: (body: string) => void;
+	setBottomFormBody: (body: string) => void;
+	topForm: Form;
+	replyForm: Form;
+	bottomForm: Form;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
+
+/**
+ * Size of comment batching to speed up rendering.
+ *
+ * We want react to complete the current work and render,
+ * without trying to batch this update before resetting
+ * the number of comments to the total comment amount.
+ *
+ * This allows a quick render of minimal comments and then immediately begin rendering
+ * the remaining comments.
+ *
+ * @see https://github.com/guardian/discussion-rendering/pull/477
+ */
+const COMMENT_BATCH = 10;
 
 const footerStyles = css`
 	display: flex;
@@ -111,41 +147,62 @@ export const Comments = ({
 	page,
 	setPage,
 	filters,
-	commentCount,
+	topLevelCommentCount,
 	loading,
-	totalPages,
 	comments,
 	setComment,
 	handleFilterChange,
+	setTopFormActive,
+	setReplyFormActive,
+	setBottomFormActive,
+	setTopFormUserMissing,
+	setReplyFormUserMissing,
+	setBottomFormUserMissing,
+	setTopFormError,
+	setReplyFormError,
+	setBottomFormError,
+	setTopFormShowPreview,
+	setReplyFormShowPreview,
+	setBottomFormShowPreview,
+	setTopFormPreviewBody,
+	setReplyFormPreviewBody,
+	setBottomFormPreviewBody,
+	setTopFormBody,
+	setReplyFormBody,
+	setBottomFormBody,
+	topForm,
+	replyForm,
+	bottomForm,
+	reportAbuse,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
 		useState<CommentType>();
-	const [numberOfCommentsToShow, setNumberOfCommentsToShow] = useState(10);
+	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
+		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
-	const [showPreview, setShowPreview] = useState<boolean>(false);
-	const [isCommentFormActive, setIsCommentFormActive] = useState<boolean>(
-		!!commentBeingRepliedTo,
-	);
-	const [error, setError] = useState<string>('');
-	const [userNameMissing, setUserNameMissing] = useState<boolean>(false);
-	const [previewBody, setPreviewBody] = useState<string>('');
 
-	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
+	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
 	useEffect(() => {
-		if (expanded) {
-			// We want react to complete the current work and render, without trying to batch this update
-			// before resetting the number of comments
-			// to the total comment amount.
-			// This allows a quick render of minimal comments and then immediately begin rendering
-			// the remaining comments.
-			const timer = setTimeout(() => {
-				setNumberOfCommentsToShow(comments.length);
-			}, 0);
-			return () => clearTimeout(timer);
-		} else return;
-	}, [expanded, comments.length]);
+		setNumberOfCommentsToShow(COMMENT_BATCH);
+	}, [comments]);
+
+	useEffect(() => {
+		if (!expanded) return;
+		if (numberOfCommentsToShow === comments.length) return;
+
+		const newNumberOfCommentsToShow = Math.min(
+			numberOfCommentsToShow + COMMENT_BATCH,
+			comments.length,
+		);
+
+		const timer = setTimeout(() => {
+			setNumberOfCommentsToShow(newNumberOfCommentsToShow);
+		}, 0);
+
+		return () => clearTimeout(timer);
+	}, [expanded, comments.length, numberOfCommentsToShow, loadingMore]);
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
@@ -163,13 +220,13 @@ export const Comments = ({
 	 * page and is added to the DOM later, following an API call.
 	 * */
 	useEffect(() => {
-		if (commentToScrollTo !== undefined) {
-			const commentElement = document.getElementById(
-				`comment-${commentToScrollTo}`,
-			);
-			commentElement?.scrollIntoView();
-		}
-	}, [comments, commentToScrollTo]); // Add comments to deps so we rerun this effect when comments are loaded
+		if (loadingMore) return; // the comment may not yet be in the DOM
+		if (commentToScrollTo === undefined) return;
+
+		document
+			.getElementById(`comment-${commentToScrollTo}`)
+			?.scrollIntoView();
+	}, [loadingMore, commentToScrollTo]);
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
 		/**
@@ -182,7 +239,7 @@ export const Comments = ({
 		 */
 
 		const maxPagePossible = Math.ceil(
-			commentCount / newFilterObject.pageSize,
+			topLevelCommentCount / newFilterObject.pageSize,
 		);
 
 		if (page > maxPagePossible) {
@@ -221,7 +278,7 @@ export const Comments = ({
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
 
-	const showPagination = totalPages > 1;
+	const showPagination = topLevelCommentCount > filters.pageSize;
 
 	if (!expanded && loading) {
 		return <span data-testid="loading-comments"></span>;
@@ -234,9 +291,8 @@ export const Comments = ({
 					<div css={picksWrapper}>
 						<TopPicks
 							comments={picks.slice(0, 2)}
-							authStatus={user?.authStatus}
+							user={user}
 							onPermalinkClick={onPermalinkClick}
-							onRecommend={onRecommend}
 						/>
 					</div>
 				) : (
@@ -244,14 +300,13 @@ export const Comments = ({
 						<Filters
 							filters={filters}
 							onFilterChange={onFilterChange}
-							commentCount={commentCount}
+							topLevelCommentCount={topLevelCommentCount}
 						/>
 						{showPagination && (
 							<Pagination
-								totalPages={totalPages}
 								currentPage={page}
 								setCurrentPage={onPageChange}
-								commentCount={commentCount}
+								topLevelCommentCount={topLevelCommentCount}
 								filters={filters}
 							/>
 						)}
@@ -278,23 +333,31 @@ export const Comments = ({
 											mutes={mutes}
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
-											onRecommend={onRecommend}
-											showPreview={showPreview}
-											setShowPreview={setShowPreview}
+											showPreview={replyForm.showPreview}
+											setShowPreview={
+												setReplyFormShowPreview
+											}
 											isCommentFormActive={
-												isCommentFormActive
+												replyForm.isActive
 											}
 											setIsCommentFormActive={
-												setIsCommentFormActive
+												setReplyFormActive
 											}
-											error={error}
-											setError={setError}
-											userNameMissing={userNameMissing}
+											error={replyForm.error}
+											setError={setReplyFormError}
+											userNameMissing={
+												replyForm.userNameMissing
+											}
 											setUserNameMissing={
-												setUserNameMissing
+												setReplyFormUserMissing
 											}
-											previewBody={previewBody}
-											setPreviewBody={setPreviewBody}
+											previewBody={replyForm.previewBody}
+											setPreviewBody={
+												setReplyFormPreviewBody
+											}
+											body={replyForm.body}
+											setBody={setReplyFormBody}
+											reportAbuse={reportAbuse}
 										/>
 									</li>
 								))}
@@ -314,37 +377,37 @@ export const Comments = ({
 					onAddComment={onAddComment}
 					user={user}
 					onPreview={onPreview}
-					showPreview={showPreview}
-					setShowPreview={setShowPreview}
-					isActive={isCommentFormActive}
-					setIsActive={setIsCommentFormActive}
-					error={error}
-					setError={setError}
-					userNameMissing={userNameMissing}
-					setUserNameMissing={setUserNameMissing}
-					previewBody={previewBody}
-					setPreviewBody={setPreviewBody}
+					showPreview={topForm.showPreview}
+					setShowPreview={setTopFormShowPreview}
+					isActive={topForm.isActive}
+					setIsActive={setTopFormActive}
+					error={topForm.error}
+					setError={setTopFormError}
+					userNameMissing={topForm.userNameMissing}
+					setUserNameMissing={setTopFormUserMissing}
+					previewBody={topForm.previewBody}
+					setPreviewBody={setTopFormPreviewBody}
+					body={topForm.body}
+					setBody={setTopFormBody}
 				/>
 			)}
 			{!!picks.length && (
 				<TopPicks
 					comments={picks}
-					authStatus={user?.authStatus}
+					user={user}
 					onPermalinkClick={onPermalinkClick}
-					onRecommend={onRecommend}
 				/>
 			)}
 			<Filters
 				filters={filters}
 				onFilterChange={onFilterChange}
-				commentCount={commentCount}
+				topLevelCommentCount={topLevelCommentCount}
 			/>
 			{showPagination && (
 				<Pagination
-					totalPages={totalPages}
 					currentPage={page}
 					setCurrentPage={onPageChange}
-					commentCount={commentCount}
+					topLevelCommentCount={topLevelCommentCount}
 					filters={filters}
 				/>
 			)}
@@ -374,19 +437,19 @@ export const Comments = ({
 									mutes={mutes}
 									toggleMuteStatus={toggleMuteStatus}
 									onPermalinkClick={onPermalinkClick}
-									onRecommend={onRecommend}
-									showPreview={showPreview}
-									setShowPreview={setShowPreview}
-									isCommentFormActive={isCommentFormActive}
-									setIsCommentFormActive={
-										setIsCommentFormActive
-									}
-									error={error}
-									setError={setError}
-									userNameMissing={userNameMissing}
-									setUserNameMissing={setUserNameMissing}
-									previewBody={previewBody}
-									setPreviewBody={setPreviewBody}
+									showPreview={replyForm.showPreview}
+									setShowPreview={setReplyFormShowPreview}
+									isCommentFormActive={replyForm.isActive}
+									setIsCommentFormActive={setReplyFormActive}
+									error={replyForm.error}
+									setError={setReplyFormError}
+									userNameMissing={replyForm.userNameMissing}
+									setUserNameMissing={setReplyFormUserMissing}
+									previewBody={replyForm.previewBody}
+									setPreviewBody={setReplyFormPreviewBody}
+									body={replyForm.body}
+									setBody={setReplyFormBody}
+									reportAbuse={reportAbuse}
 								/>
 							</li>
 						))}
@@ -396,10 +459,9 @@ export const Comments = ({
 			{showPagination && (
 				<footer css={footerStyles}>
 					<Pagination
-						totalPages={totalPages}
 						currentPage={page}
 						setCurrentPage={onPageChange}
-						commentCount={commentCount}
+						topLevelCommentCount={topLevelCommentCount}
 						filters={filters}
 					/>
 				</footer>
@@ -410,16 +472,18 @@ export const Comments = ({
 					onAddComment={onAddComment}
 					user={user}
 					onPreview={onPreview}
-					showPreview={showPreview}
-					setShowPreview={setShowPreview}
-					isActive={isCommentFormActive}
-					setIsActive={setIsCommentFormActive}
-					error={error}
-					setError={setError}
-					userNameMissing={userNameMissing}
-					setUserNameMissing={setUserNameMissing}
-					previewBody={previewBody}
-					setPreviewBody={setPreviewBody}
+					showPreview={bottomForm.showPreview}
+					setShowPreview={setBottomFormShowPreview}
+					isActive={bottomForm.isActive}
+					setIsActive={setBottomFormActive}
+					error={bottomForm.error}
+					setError={setBottomFormError}
+					userNameMissing={bottomForm.userNameMissing}
+					setUserNameMissing={setBottomFormUserMissing}
+					previewBody={bottomForm.previewBody}
+					setPreviewBody={setBottomFormPreviewBody}
+					body={bottomForm.body}
+					setBody={setBottomFormBody}
 				/>
 			)}
 		</div>

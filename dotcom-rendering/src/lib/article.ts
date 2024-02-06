@@ -1,7 +1,6 @@
-import { addImageIDs } from '../model/addImageIDs';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
-import { addLightboxData } from '../model/enhance-images';
+import { enhanceElementsImages } from '../model/enhance-images';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
@@ -15,40 +14,39 @@ const enhancePinnedPost = (
 	renderingTarget: RenderingTarget,
 	block?: Block,
 ) => {
-	return block ? enhanceBlocks([block], format, renderingTarget)[0] : block;
+	if (!block) return;
+	return enhanceBlocks([block], format, {
+		renderingTarget,
+		imagesForLightbox: [],
+		promotedNewsletter: undefined,
+	})[0];
 };
 
 export const enhanceArticleType = (
 	body: unknown,
 	renderingTarget: RenderingTarget,
 ): DCRArticle => {
-	const validated = validateAsArticleType(body);
-	// addImageIDs needs to take account of both main media elements
-	// and block elements, so it needs to be executed here
-	const { mainMediaElements, blocks } = addImageIDs(validated);
-	const data = {
-		...validated,
-		mainMediaElements,
-		blocks,
-	};
+	const data = validateAsArticleType(body);
 
-	const enhancedBlocks = enhanceBlocks(
-		data.blocks,
-		data.format,
+	const imagesForLightbox = data.config.switches.lightbox
+		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
+		: [];
+
+	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		renderingTarget,
-		{
-			promotedNewsletter: data.promotedNewsletter,
-		},
-	);
-	const enhancedMainMedia = addLightboxData(data.mainMediaElements);
-	const imagesForLightbox = buildLightboxImages(
+		promotedNewsletter: data.promotedNewsletter,
+		imagesForLightbox,
+	});
+
+	const mainMediaElements = enhanceElementsImages(
+		data.mainMediaElements,
 		data.format,
-		enhancedBlocks,
-		enhancedMainMedia,
+		imagesForLightbox,
 	);
+
 	return {
 		...data,
-		mainMediaElements: enhancedMainMedia,
+		mainMediaElements,
 		blocks: enhancedBlocks,
 		pinnedPost: enhancePinnedPost(
 			data.format,

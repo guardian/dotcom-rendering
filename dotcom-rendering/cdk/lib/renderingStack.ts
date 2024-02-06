@@ -20,16 +20,16 @@ import { Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
 
-type ScalingPolicy = {
-	scalingStepsOut: ScalingInterval[];
-	scalingStepsIn: ScalingInterval[];
-};
-
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
-	guApp: `${'article' | 'facia' | 'misc' | 'interactive'}-rendering`;
+	guApp: `${'article' | 'facia' | 'interactive'}-rendering`;
 	domainName: string;
 	instanceSize: InstanceSize;
-	scaling: GuAsgCapacity & { policy?: ScalingPolicy };
+	scaling: GuAsgCapacity & {
+		policy?: {
+			scalingStepsOut: ScalingInterval[];
+			scalingStepsIn: ScalingInterval[];
+		};
+	};
 }
 
 /** DCR infrastructure provisioning via CDK */
@@ -119,6 +119,16 @@ export class RenderingCDKStack extends CDKStack {
 				artifactsBucket,
 			}),
 		});
+
+		/**
+		 * The default Node server keep alive timeout is 5 seconds
+		 * @see https://nodejs.org/api/http.html#serverkeepalivetimeout
+		 *
+		 * This ensures that the load balancer idle timeout is less than the Node server keep alive timeout
+		 * so that the Node app does not prematurely close the connection before the load balancer can accept the response.
+		 * @see https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#connection-idle-timeout
+		 */
+		ec2App.loadBalancer.setAttribute('idle_timeout.timeout_seconds', '4');
 
 		// Maps the certificate domain name to the load balancer DNS name
 		new GuCname(this, 'LoadBalancerDNS', {

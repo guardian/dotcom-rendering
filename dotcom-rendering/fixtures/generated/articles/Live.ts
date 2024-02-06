@@ -1889,11 +1889,6 @@ export const Live: DCRArticle = {
 			],
 			elementId: '922fe779-9ea0-4202-9cd9-5b6e2857a4ec',
 			position: 1,
-			lightbox: {
-				caption:
-					'Perseverance rover as it touched down in the area known as Jezero crater.',
-				credit: 'Photograph: NASA/Getty Images',
-			},
 		},
 	],
 	canonicalUrl:
@@ -2564,11 +2559,6 @@ export const Live: DCRArticle = {
 					],
 					elementId: '956b0d0c-8f66-4f98-ba2c-5a0faa526126',
 					position: 2,
-					lightbox: {
-						caption:
-							'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
-						credit: 'Photograph: NASA/AFP/Getty Images',
-					},
 				},
 			],
 			attributes: {
@@ -2909,11 +2899,6 @@ export const Live: DCRArticle = {
 					],
 					elementId: 'a46bca6d-7d32-4f98-8ed5-e7f838f0b645',
 					position: 3,
-					lightbox: {
-						caption:
-							'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
-						credit: 'Photograph: Patrick T Fallon/AFP/Getty Images',
-					},
 				},
 			],
 			attributes: {
@@ -3278,11 +3263,6 @@ export const Live: DCRArticle = {
 					],
 					elementId: 'ae6a96e5-ad07-42b7-9b30-b30353866c19',
 					position: 4,
-					lightbox: {
-						caption:
-							'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
-						credit: 'Photograph: NASA/AFP/Getty Images',
-					},
 				},
 			],
 			attributes: {

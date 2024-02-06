@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import type { CommentType, Reader, Staff } from '../../types/discussion';
 import { Comment } from './Comment';
 
 export default { title: 'Discussion/Comment' };
@@ -106,10 +106,11 @@ const longBothReplyCommentData: CommentType = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
-const user: SignedInUser = {
+const user: Reader = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -126,10 +127,13 @@ const user: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
-	authStatus: { kind: 'SignedInWithCookies' },
+	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
+	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
 };
 
-const staffUser: SignedInUser = {
+const staffUser: Staff = {
+	kind: 'Staff',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -146,7 +150,11 @@ const staffUser: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
-	authStatus: { kind: 'SignedInWithCookies' },
+	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
+	onPick: () => Promise.resolve(commentResponseError),
+	onUnpick: () => Promise.resolve(commentResponseError),
+	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
 };
 
 const defaultFormat = {
@@ -166,6 +174,7 @@ export const Root = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 Root.storyName = 'A root comment on desktop view';
@@ -188,6 +197,7 @@ export const RootMobile = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 RootMobile.storyName = 'A root comment on mobile view';
@@ -220,6 +230,7 @@ export const ReplyComment = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 ReplyComment.storyName = 'A reply on desktop view';
@@ -252,6 +263,7 @@ export const MobileReply = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 MobileReply.storyName = 'A reply on mobile view';
@@ -284,6 +296,7 @@ export const LongMobileReply = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 LongMobileReply.storyName = 'A long username reply on mobile view';
@@ -316,6 +329,7 @@ export const LongBothMobileReply = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 LongBothMobileReply.storyName = 'Both long usernames replying on mobile view';
@@ -351,6 +365,7 @@ export const PickedComment = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 PickedComment.storyName = 'Picked Comment';
@@ -377,6 +392,7 @@ export const StaffUserComment = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 StaffUserComment.storyName = 'Staff User Comment';
@@ -403,6 +419,7 @@ export const ContributorUserComment = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 ContributorUserComment.storyName = 'Contributor User Comment';
@@ -432,6 +449,7 @@ export const PickedStaffUserComment = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 PickedStaffUserComment.storyName = 'with staff and picked badges on desktop';
@@ -459,6 +477,7 @@ export const PickedStaffUserCommentMobile = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 PickedStaffUserCommentMobile.storyName =
@@ -495,6 +514,7 @@ export const ContributorUserCommentDesktop = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 ContributorUserCommentDesktop.storyName =
@@ -523,6 +543,7 @@ export const ContributorUserCommentMobile = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 ContributorUserCommentMobile.storyName =
@@ -557,6 +578,7 @@ export const LoggedInAsModerator = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 LoggedInAsModerator.storyName = 'Logged in as moderator';
@@ -584,6 +606,7 @@ export const LoggedInAsUser = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 LoggedInAsUser.storyName = 'Logged in as normal user';
@@ -610,6 +633,7 @@ export const BlockedComment = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 BlockedComment.storyName = 'Blocked comment';
@@ -636,6 +660,7 @@ export const MutedComment = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 MutedComment.storyName = 'Muted comment';
@@ -662,6 +687,7 @@ export const ClosedForComments = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 ClosedForComments.storyName = 'A closed comment on desktop view';

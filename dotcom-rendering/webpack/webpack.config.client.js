@@ -81,6 +81,7 @@ const getLoaders = (build) => {
 		case 'client.apps':
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'client.web.variant':
+		case 'client.web.ophan-next':
 		case 'client.web':
 			return swcLoader(getBrowserTargets());
 	}
@@ -94,6 +95,14 @@ module.exports = ({ build }) => ({
 	entry: {
 		index: getEntryIndex(build),
 		debug: './src/client/debug/debug.ts',
+	},
+	resolve: {
+		alias: {
+			'@guardian/ophan-tracker-js':
+				build === 'client.web.ophan-next'
+					? '@guardian/ophan-tracker-js-next'
+					: '@guardian/ophan-tracker-js',
+		},
 	},
 	optimization:
 		// We don't need chunk optimization for apps as we use the 'LimitChunkCountPlugin' to produce just 1 chunk
