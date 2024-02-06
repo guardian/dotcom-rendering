@@ -28,7 +28,6 @@ export const Analytics = ({
 	},
 }: Props) => {
 	const scripts: string[] = [
-		// `<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include">
 			<script type="application/json">
 				{
