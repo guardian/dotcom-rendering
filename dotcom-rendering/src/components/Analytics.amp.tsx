@@ -27,9 +27,6 @@ export const Analytics = ({
 		ipsosSectionName,
 	},
 }: Props) => {
-	// const json = JSON.parse("https://ophan.theguardian.com/amp.json");
-
-	// console.log("JSON", json)/
 	const scripts: string[] = [
 		// `<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include">
