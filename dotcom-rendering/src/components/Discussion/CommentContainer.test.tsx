@@ -22,7 +22,7 @@ const commentWithoutReply = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const satisfies Result<unknown, unknown>;
 
 const commentResponseSuccess = {
@@ -31,6 +31,7 @@ const commentResponseSuccess = {
 } as const satisfies Result<unknown, unknown>;
 
 const aUser: SignedInUser = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -48,6 +49,7 @@ const aUser: SignedInUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseSuccess),
 	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -89,6 +91,8 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				body={newCommentText}
+				setBody={() => {}}
 			/>,
 		);
 
@@ -136,6 +140,8 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				body={''}
+				setBody={() => {}}
 			/>,
 		);
 
@@ -182,6 +188,8 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				body={newCommentText}
+				setBody={() => {}}
 			/>,
 		);
 
@@ -229,6 +237,8 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
+				body={''}
+				setBody={() => {}}
 			/>,
 		);
 

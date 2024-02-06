@@ -12,11 +12,10 @@ describe('Pagination', () => {
 	it('Render Ophan Data Components as expected', () => {
 		const { asFragment } = render(
 			<Pagination
-				totalPages={9}
 				currentPage={2}
 				setCurrentPage={() => {}}
 				filters={DEFAULT_FILTERS}
-				commentCount={56}
+				topLevelCommentCount={222} // 9 pages: 8.88 = 222 / 25
 			/>,
 		);
 

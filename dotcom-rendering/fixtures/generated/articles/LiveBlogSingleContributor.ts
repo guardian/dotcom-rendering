@@ -1884,10 +1884,6 @@ export const LiveBlogSingleContributor: DCRArticle = {
 			],
 			elementId: 'bdc84e71-abcc-429b-9d5e-f57553ff2299',
 			position: 1,
-			lightbox: {
-				caption: 'Rishi Sunak and Keir Starmer at PMQs.',
-				credit: 'Photograph: Parliament Live',
-			},
 		},
 	],
 	canonicalUrl:
@@ -2209,10 +2205,6 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					],
 					elementId: 'ea09f8a0-be5c-4720-8aee-bc6400db505e',
 					position: 2,
-					lightbox: {
-						caption: 'Keir Starmer at PMQs.',
-						credit: 'Photograph: Jessica Taylor/UK Parliament/Reuters',
-					},
 				},
 			],
 			attributes: {
@@ -2644,10 +2636,6 @@ export const LiveBlogSingleContributor: DCRArticle = {
 					],
 					elementId: '8ee53fbd-063e-40d9-b9dd-6536fe70910a',
 					position: 3,
-					lightbox: {
-						caption: 'Numbers for small boat returns since 2010',
-						credit: 'Photograph: Home Office',
-					},
 				},
 			],
 			attributes: {

@@ -1,12 +1,9 @@
 import type {
-	OphanABEvent,
-	OphanABPayload,
 	OphanABTestMeta,
 	OphanAction,
 	OphanComponentEvent,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
-import type { ServerSideTests } from '../../types/config';
 import type { RenderingTarget } from '../../types/renderingTarget';
 
 export type OphanRecordFunction = (
@@ -127,18 +124,6 @@ export const sendOphanComponentEvent = async (
 	};
 
 	await submitComponentEvent(componentEvent, renderingTarget);
-};
-
-export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
-	const records: { [key: string]: OphanABEvent } = {};
-	for (const [testName, variantName] of Object.entries(tests)) {
-		records[`ab${testName}`] = {
-			variantName,
-			complete: false,
-		};
-	}
-
-	return { abTestRegister: records };
 };
 
 export const recordPerformance = async (

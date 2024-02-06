@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from 'react';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
+import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
 import type {
@@ -25,7 +26,6 @@ import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import type { Loading } from './CardPicture';
-import { useConfig } from './ConfigContext';
 import { ContainerOverrides } from './ContainerOverrides';
 import { FormatBoundary } from './FormatBoundary';
 import { Hide } from './Hide';
@@ -781,14 +781,11 @@ export const Carousel = ({
 	isOnwardContent = true,
 	...props
 }: ArticleProps | FrontProps) => {
-	const { renderingTarget } = useConfig();
-	const isApps = renderingTarget === 'Apps';
-
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(0);
-	const [isAndroid, setIsAndroid] = useState(false);
+	const isAndroid = useIsAndroid();
 
 	const arrowName = 'carousel-small-arrow';
 
@@ -897,12 +894,7 @@ export const Carousel = ({
 	// when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
-	useEffect(
-		() => setIsAndroid(() => /android/i.test(window.navigator.userAgent)),
-		[],
-	);
-
-	if (isApps && isAndroid) {
+	if (isAndroid) {
 		return null;
 	}
 

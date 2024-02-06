@@ -6,17 +6,18 @@ import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
-import type { FilterOptions, SignedInUser } from '../../types/discussion';
+import type { FilterOptions, Reader } from '../../types/discussion';
 import { Comments } from './Comments';
 
 export default { component: Comments, title: 'Discussion/App' };
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
-const aUser: SignedInUser = {
+const aUser: Reader = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -34,6 +35,7 @@ const aUser: SignedInUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
 	authStatus: { kind: 'SignedInWithCookies' },
 };
 
@@ -53,6 +55,9 @@ const defaultCommentForm = {
 	isActive: false,
 	userNameMissing: false,
 	error: '',
+	showPreview: false,
+	previewBody: '',
+	body: '',
 };
 
 export const LoggedOutHiddenPicks = () => (
@@ -77,9 +82,10 @@ export const LoggedOutHiddenPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -92,6 +98,15 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -130,9 +145,10 @@ export const InitialPage = () => (
 			page={1}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -145,6 +161,15 @@ export const InitialPage = () => (
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -163,6 +188,7 @@ InitialPage.decorators = [
 
 export const LoggedInHiddenNoPicks = () => {
 	const [isActive, setActive] = useState(false);
+	const [body, setBody] = useState('');
 
 	return (
 		<div
@@ -187,9 +213,10 @@ export const LoggedInHiddenNoPicks = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				commentCount={discussionMock.discussion.commentCount}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionMock.pages}
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
@@ -202,8 +229,17 @@ export const LoggedInHiddenNoPicks = () => {
 				setTopFormError={() => {}}
 				setReplyFormError={() => {}}
 				setBottomFormError={() => {}}
+				setTopFormShowPreview={() => {}}
+				setReplyFormShowPreview={() => {}}
+				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
+				setTopFormBody={() => {}}
+				setReplyFormBody={setBody}
+				setBottomFormBody={() => {}}
 				topForm={defaultCommentForm}
-				replyForm={{ ...defaultCommentForm, isActive }}
+				replyForm={{ ...defaultCommentForm, isActive, body }}
 				bottomForm={defaultCommentForm}
 			/>
 		</div>
@@ -214,8 +250,12 @@ LoggedInHiddenNoPicks.storyName =
 LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
 export const LoggedIn = () => {
+	const [isTopFormActive, setTopFormActive] = useState(false);
 	const [isReplyFormActive, setReplyFormActive] = useState(false);
 	const [isBottomFormActive, setBottomFormActive] = useState(false);
+	const [topFormBody, setTopFormBody] = useState('');
+	const [replyFormBody, setReplyFormBody] = useState('');
+	const [bottomFormBody, setBottomFormBody] = useState('');
 
 	return (
 		<div
@@ -240,13 +280,14 @@ export const LoggedIn = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				commentCount={discussionMock.discussion.commentCount}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionMock.pages}
 				comments={discussionMock.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
-				setTopFormActive={() => {}}
+				setTopFormActive={setTopFormActive}
 				setReplyFormActive={setReplyFormActive}
 				setBottomFormActive={setBottomFormActive}
 				setTopFormUserMissing={() => {}}
@@ -256,13 +297,29 @@ export const LoggedIn = () => {
 				setReplyFormError={() => {}}
 				setBottomFormError={() => {}}
 				topForm={defaultCommentForm}
+				setTopFormShowPreview={() => {}}
+				setReplyFormShowPreview={() => {}}
+				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
+				setTopFormBody={setTopFormBody}
+				setReplyFormBody={setReplyFormBody}
+				setBottomFormBody={setBottomFormBody}
+				topForm={{
+					...defaultCommentForm,
+					isActive: isTopFormActive,
+					body: topFormBody,
+				}}
 				replyForm={{
 					...defaultCommentForm,
 					isActive: isReplyFormActive,
+					body: replyFormBody,
 				}}
 				bottomForm={{
 					...defaultCommentForm,
 					isActive: isBottomFormActive,
+					body: bottomFormBody,
 				}}
 			/>
 		</div>
@@ -274,6 +331,8 @@ LoggedIn.decorators = [lightDecorator([format])];
 export const LoggedInShortDiscussion = () => {
 	const [isTopFormActive, setTopFormActive] = useState(false);
 	const [isReplyFormActive, setReplyFormActive] = useState(false);
+	const [topFormBody, setTopFormBody] = useState('');
+	const [replyFormBody, setReplyFormBody] = useState('');
 
 	return (
 		<div
@@ -298,9 +357,10 @@ export const LoggedInShortDiscussion = () => {
 				page={3}
 				setPage={() => {}}
 				filters={filters}
-				commentCount={discussionWithTwoComments.discussion.commentCount}
+				topLevelCommentCount={
+					discussionWithTwoComments.discussion.topLevelCommentCount
+				}
 				loading={false}
-				totalPages={discussionWithTwoComments.pages}
 				comments={discussionWithTwoComments.discussion.comments}
 				setComment={() => {}}
 				handleFilterChange={() => {}}
@@ -314,9 +374,24 @@ export const LoggedInShortDiscussion = () => {
 				setReplyFormError={() => {}}
 				setBottomFormError={() => {}}
 				topForm={{ ...defaultCommentForm, isActive: isTopFormActive }}
+				setTopFormShowPreview={() => {}}
+				setReplyFormShowPreview={() => {}}
+				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
+				setTopFormBody={setTopFormBody}
+				setReplyFormBody={setReplyFormBody}
+				setBottomFormBody={() => {}}
+				topForm={{
+					...defaultCommentForm,
+					isActive: isTopFormActive,
+					body: topFormBody,
+				}}
 				replyForm={{
 					...defaultCommentForm,
 					isActive: isReplyFormActive,
+					body: replyFormBody,
 				}}
 				bottomForm={defaultCommentForm}
 			/>
@@ -347,9 +422,10 @@ export const LoggedOutHiddenNoPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={0}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -362,6 +438,15 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -402,9 +487,10 @@ export const Closed = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -417,6 +503,15 @@ export const Closed = () => (
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -455,9 +550,8 @@ export const NoComments = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={0}
+			topLevelCommentCount={0}
 			loading={false}
-			totalPages={0}
 			comments={[]}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -470,6 +564,15 @@ export const NoComments = () => (
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -505,14 +608,13 @@ export const LegacyDiscussion = () => (
 			onPermalinkClick={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
-			page={3}
+			page={2}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={
+			topLevelCommentCount={
 				legacyDiscussionWithoutThreading.discussion.commentCount
 			}
 			loading={false}
-			totalPages={legacyDiscussionWithoutThreading.pages}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
@@ -525,6 +627,15 @@ export const LegacyDiscussion = () => (
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}

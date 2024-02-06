@@ -1591,11 +1591,6 @@ export const Letter: DCRArticle = {
 			],
 			elementId: 'dd8282cf-70a7-46bb-af1b-457a01275815',
 			position: 1,
-			lightbox: {
-				caption:
-					'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
-				credit: 'Photograph: taken from picture library',
-			},
 		},
 	],
 	canonicalUrl:
