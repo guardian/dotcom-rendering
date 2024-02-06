@@ -36,7 +36,7 @@ const aUser: Reader = {
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	authStatus: { kind: 'SignedInWithCookies' },
+	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
 };
 
 const format = {
@@ -106,6 +106,7 @@ export const LoggedOutHiddenPicks = () => (
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 		/>
 	</div>
 );
@@ -166,6 +167,7 @@ export const InitialPage = () => (
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 		/>
 	</div>
 );
@@ -231,6 +233,7 @@ export const LoggedInHiddenNoPicks = () => {
 				topForm={defaultCommentForm}
 				replyForm={{ ...defaultCommentForm, isActive, body }}
 				bottomForm={defaultCommentForm}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>
 		</div>
 	);
@@ -307,6 +310,7 @@ export const LoggedIn = () => {
 					isActive: isBottomFormActive,
 					body: bottomFormBody,
 				}}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>
 		</div>
 	);
@@ -376,6 +380,7 @@ export const LoggedInShortDiscussion = () => {
 					body: replyFormBody,
 				}}
 				bottomForm={defaultCommentForm}
+				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 			/>
 		</div>
 	);
@@ -429,6 +434,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 		/>
 	</div>
 );
@@ -491,6 +497,7 @@ export const Closed = () => (
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 		/>
 	</div>
 );
@@ -549,6 +556,7 @@ export const NoComments = () => (
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 		/>
 	</div>
 );
@@ -609,6 +617,7 @@ export const LegacyDiscussion = () => (
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 		/>
 	</div>
 );

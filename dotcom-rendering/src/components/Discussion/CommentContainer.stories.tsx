@@ -158,7 +158,7 @@ const aUser: Reader = {
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	authStatus: { kind: 'SignedInWithCookies' },
+	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
 };
 
 const commentDataThreaded: CommentType = {
@@ -211,6 +211,7 @@ export const defaultStory = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -249,6 +250,7 @@ export const threadedComment = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -287,6 +289,7 @@ export const threadedCommentWithShowMore = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -325,6 +328,7 @@ export const threadedCommentWithLongUsernames = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -363,6 +367,7 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =

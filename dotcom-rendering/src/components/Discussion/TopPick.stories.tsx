@@ -102,7 +102,7 @@ const aUser = {
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
 	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	authStatus: { kind: 'SignedInWithCookies' },
+	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
 } satisfies SignedInUser;
 
 export const LongPick = () => (
