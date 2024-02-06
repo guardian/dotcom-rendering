@@ -151,7 +151,7 @@ type Action =
 	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setTopFormError'; error: string }
 	| { type: 'setReplyFormError'; error: string }
-	| { type: 'setBottomFormError'; error: string };
+	| { type: 'setBottomFormError'; error: string }
 	| { type: 'setTopFormShowPreview'; showPreview: boolean }
 	| { type: 'setReplyFormShowPreview'; showPreview: boolean }
 	| { type: 'setBottomFormShowPreview'; showPreview: boolean }
@@ -337,7 +337,7 @@ const reducer = (state: State, action: Action): State => {
 				},
 			};
 		}
-      case 'setTopFormError': {
+		case 'setTopFormError': {
 			return {
 				...state,
 				topForm: {
@@ -364,7 +364,6 @@ const reducer = (state: State, action: Action): State => {
 				},
 			};
 		}
-
 
 		default:
 			assertUnreachable(action);
@@ -588,7 +587,7 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormError',
 							error,
-          	})
+						})
 					}
 					setTopFormShowPreview={(showPreview) =>
 						dispatch({
