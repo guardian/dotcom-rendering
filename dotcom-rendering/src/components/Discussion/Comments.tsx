@@ -10,11 +10,11 @@ import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
+	CommentFormId,
 	CommentType,
 	FilterOptions,
 	CommentForm as Form,
 	SignedInUser,
-	CommentFormId,
 } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
