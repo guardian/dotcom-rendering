@@ -296,7 +296,6 @@ export const LoggedIn = () => {
 				setTopFormError={() => {}}
 				setReplyFormError={() => {}}
 				setBottomFormError={() => {}}
-				topForm={defaultCommentForm}
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
@@ -373,7 +372,6 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormError={() => {}}
 				setReplyFormError={() => {}}
 				setBottomFormError={() => {}}
-				topForm={{ ...defaultCommentForm, isActive: isTopFormActive }}
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
