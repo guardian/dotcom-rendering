@@ -405,6 +405,7 @@ export const Discussion = ({
 			bottomForm,
 			topLevelCommentCount,
 			commentCount,
+			pickError,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
@@ -542,6 +543,13 @@ export const Discussion = ({
 					topLevelCommentCount={topLevelCommentCount}
 					loading={loading}
 					comments={comments}
+					pickError={pickError}
+					setPickError={(pickError) =>
+						dispatch({
+							type: 'setPickError',
+							pickError,
+						})
+					}
 					setComment={(comment: CommentType) => {
 						dispatch({ type: 'addComment', comment });
 					}}
@@ -580,12 +588,6 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormUserMissing',
 							userNameMissing,
-						})
-					}
-					setPickError={(pickError) =>
-						dispatch({
-							type: 'setPickError',
-							pickError,
 						})
 					}
 					setTopFormError={(error) =>

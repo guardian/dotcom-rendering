@@ -107,6 +107,8 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -171,6 +173,8 @@ export const InitialPage = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -240,6 +244,8 @@ export const LoggedInHiddenNoPicks = () => {
 				setTopFormBody={() => {}}
 				setReplyFormBody={setBody}
 				setBottomFormBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={{ ...defaultCommentForm, isActive, body }}
 				bottomForm={defaultCommentForm}
@@ -305,6 +311,8 @@ export const LoggedIn = () => {
 				setTopFormPreviewBody={() => {}}
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
 				setTopFormBody={setTopFormBody}
 				setReplyFormBody={setReplyFormBody}
 				setBottomFormBody={setBottomFormBody}
@@ -385,6 +393,8 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormBody={setTopFormBody}
 				setReplyFormBody={setReplyFormBody}
 				setBottomFormBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
 				topForm={{
 					...defaultCommentForm,
 					isActive: isTopFormActive,
@@ -450,6 +460,8 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -516,6 +528,8 @@ export const Closed = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -578,6 +592,8 @@ export const NoComments = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -642,6 +658,8 @@ export const LegacyDiscussion = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
