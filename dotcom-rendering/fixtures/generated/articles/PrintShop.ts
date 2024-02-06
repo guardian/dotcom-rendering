@@ -1677,9 +1677,6 @@ export const PrintShop: DCRArticle = {
 					],
 					elementId: '2ef3bf12-e028-4930-bc12-ea30805e46af',
 					position: 1,
-					lightbox: {
-						credit: 'Photograph: Gerry Cranham/Offside',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',

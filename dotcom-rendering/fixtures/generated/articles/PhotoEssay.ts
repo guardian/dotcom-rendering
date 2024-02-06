@@ -1623,11 +1623,6 @@ export const PhotoEssay: DCRArticle = {
 			],
 			elementId: '0c9220dc-98cb-4b91-a40e-baa9587cd252',
 			position: 1,
-			lightbox: {
-				caption:
-					'Joe Bracegirdle at Lanterdan Quarry, above Vean Hole beach, north Cornwall. All photographs: Cat Vinton/The Guardian',
-				credit: 'Photograph: The Guardian',
-			},
 		},
 	],
 	canonicalUrl:
@@ -1968,9 +1963,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: 'b75eb70e-acbc-4789-aad8-07a0fdccab9e',
 					position: 2,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -2308,9 +2300,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: '86c77c99-8201-4749-b54d-483ebfd38886',
 					position: 3,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2629,9 +2618,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: '39de8633-0628-4b07-9cb6-15ab120c3b00',
 					position: 4,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -2958,9 +2944,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: 'b245b40f-0916-4bca-885b-14ca3c2996ed',
 							position: 5,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton',
-							},
 						},
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3278,9 +3261,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: '9a4e0059-f3dc-4a9b-98e0-fd73fefc85d8',
 							position: 6,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton/The Guardian',
-							},
 						},
 					],
 				},
@@ -3604,9 +3584,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: '5aca4364-e46c-43ea-b682-cd9afcaf8892',
 							position: 7,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton/The Guardian',
-							},
 						},
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3924,9 +3901,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: 'e6b2621c-cd81-43fd-a7e3-6bdff8c40b2e',
 							position: 8,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton/The Guardian',
-							},
 						},
 					],
 					caption:
@@ -4238,9 +4212,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: 'ae93a30d-cb52-412d-8a20-516d7d595363',
 					position: 9,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -4580,9 +4551,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: 'ec750ff4-d069-41a8-9376-055f79221f20',
 					position: 10,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
@@ -4904,9 +4872,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: 'c9d3fea6-24f2-434f-aa13-cddfcd49abce',
 							position: 11,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton/The Guardian',
-							},
 						},
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5224,9 +5189,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: '42a94f34-466a-4f25-af81-3ff58b38e3ec',
 							position: 12,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton/The Guardian',
-							},
 						},
 					],
 					caption:
@@ -5553,9 +5515,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: 'ecc263a7-4a8d-4f96-b93c-440561f6743d',
 					position: 13,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -5884,9 +5843,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: 'f3f4f20f-0521-433b-b2ec-9e88ccf7fdfc',
 					position: 14,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -6216,9 +6172,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: 'ca9d15a5-d7c2-4e22-a330-d4822f53ff78',
 					position: 15,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
@@ -6540,9 +6493,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: 'b57ce6f4-ed87-4ad7-b8e8-1728fb4c7852',
 							position: 16,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton',
-							},
 						},
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6860,10 +6810,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: 'cd9dc8c2-6806-40cf-9e16-dae4f2551853',
 							position: 17,
-							lightbox: {
-								caption: 'Logan Rock, Cornwall',
-								credit: 'Photograph: Cat Vinton/The Guardian',
-							},
 						},
 					],
 					caption:
@@ -7196,9 +7142,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: 'a86b50bf-f5b0-4e20-96ca-b0c64f2568f4',
 					position: 18,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -7521,9 +7464,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: '4f064c76-48f1-46ac-b324-a363750b2a7b',
 					position: 19,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7842,9 +7782,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: 'a70d1492-de7d-4db0-b459-163011caf3e4',
 					position: 20,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -8188,9 +8125,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: 'ec81d5df-af81-4b57-a191-9f61671ed216',
 							position: 21,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton',
-							},
 						},
 						{
 							_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -8508,9 +8442,6 @@ export const PhotoEssay: DCRArticle = {
 							],
 							elementId: 'ee414445-3a19-484a-877b-f92943ae2808',
 							position: 22,
-							lightbox: {
-								credit: 'Photograph: Cat Vinton',
-							},
 						},
 					],
 				},
@@ -8831,9 +8762,6 @@ export const PhotoEssay: DCRArticle = {
 					],
 					elementId: '04e95ea7-fc8e-4eb1-8a07-211c7fac74d2',
 					position: 23,
-					lightbox: {
-						credit: 'Photograph: Cat Vinton/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',

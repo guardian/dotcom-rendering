@@ -1859,11 +1859,6 @@ export const Interview: DCRArticle = {
 			],
 			elementId: 'f3841baa-a558-4d7c-b9bc-6b2219e1bf70',
 			position: 1,
-			lightbox: {
-				caption:
-					'‘The hijab is part of my identity’: Halima Aden wears dress by <a href="http://yufash.com">yufash.com</a>; headscarf by Halima x Modanisa, <a href="http://modanisa.com">modanisa.com</a>; and bracelet by <a href="http://togetherband.org">togetherband.org</a>. ',
-				credit: 'Photograph: Jean-Paul Pietrus/The Observer',
-			},
 		},
 	],
 	canonicalUrl:
@@ -2202,11 +2197,6 @@ export const Interview: DCRArticle = {
 					],
 					elementId: '1665915f-6ce6-43d2-842b-2e66e148583c',
 					position: 2,
-					lightbox: {
-						caption:
-							'Modesty blaze: taking a selfie with Carine Roitfeld and Gigi Hadid at a Business of Fashion event during New York fashion week.',
-						credit: 'Photograph: Dimitrios Kambouris/Getty Images',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -2527,11 +2517,6 @@ export const Interview: DCRArticle = {
 					],
 					elementId: 'd934680c-36e8-496f-8c4a-2f623bbb5885',
 					position: 3,
-					lightbox: {
-						caption:
-							'My story isn’t just: ‘I grew up in a refugee camp’: Halima Aden wears hoodie by <a href="http://rokit.co.uk">rokit.co.uk</a>; dress by Ssōne, <a href="http://matchesfashion.com">matchesfashion.com</a>; glasses by <a href="http://francisdelara.com">francisdelara.com</a>; and bag strap, worn as a headband, <a href="http://bottletop.com">bottletop.com</a>.',
-						credit: 'Photograph: Jean-Paul Pietrus/The Observer',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -2868,11 +2853,6 @@ export const Interview: DCRArticle = {
 					],
 					elementId: '4fba0fc6-f15f-4d6a-a958-44c8a5ee6f34',
 					position: 4,
-					lightbox: {
-						caption:
-							'Listen up: speaking at a Teen Vogue summit in 2018.',
-						credit: 'Photograph: Cindy Ord/Getty Images',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -3193,11 +3173,6 @@ export const Interview: DCRArticle = {
 					],
 					elementId: 'b17395d1-f4cb-4cb8-b7d4-7340997d3e38',
 					position: 5,
-					lightbox: {
-						caption:
-							'Fashion meets activism: Halima Aden wears coat by Gabriela Hearst, <a href="http://selfridges.com/">selfridges.com</a>; top by <a href="http://charlotteknowles.com/">charlotteknowles.com</a>; belt by <a href="http://varanaworld.com/">varanaworld.com</a>; and bag by <a href="http://bottletop.com/">bottletop.com</a>.',
-						credit: 'Photograph: Jean-Paul Pietrus/The Observer',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -3523,11 +3498,6 @@ export const Interview: DCRArticle = {
 					],
 					elementId: 'da1c3a6f-9f79-464d-b4b8-631685fa1f33',
 					position: 6,
-					lightbox: {
-						caption:
-							'‘I want people to see me wearing a hijab in ways they can relate to’: Halima Aden wears jacket, shirt and trousers, all by <a href="http://stellamccartney.com/">stellamccartney.com</a>; trainers by Good News, <a href="http://net-a-porter.com/">net-a-porter.com</a>; bag and brooches by <a href="http://bottletop.com/">bottletop.com</a>; and headscarf by Halima x Modanisa, <a href="http://modanisa.com/">modanisa.com</a>.',
-						credit: 'Photograph: Jean-Paul Pietrus/The Observer',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',

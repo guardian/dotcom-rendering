@@ -35,6 +35,8 @@ type Props = {
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
+	body: string;
+	setBody: (body: string) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -213,8 +215,9 @@ export const CommentForm = ({
 	setUserNameMissing,
 	previewBody,
 	setPreviewBody,
+	body,
+	setBody,
 }: Props) => {
-	const [body, setBody] = useState<string>('');
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
 	useEffect(() => {

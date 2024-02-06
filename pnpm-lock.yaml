@@ -345,8 +345,8 @@ importers:
         specifier: 7.0.1
         version: 7.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/braze-components':
-        specifier: 17.0.0
-        version: 17.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
+        specifier: 18.0.0
+        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -386,6 +386,9 @@ importers:
       '@guardian/ophan-tracker-js':
         specifier: 2.0.4
         version: 2.0.4
+      '@guardian/ophan-tracker-js-next':
+        specifier: npm:@guardian/ophan-tracker-js@2.1.0-next.1
+        version: /@guardian/ophan-tracker-js@2.1.0-next.1
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -4429,8 +4432,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@17.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
-    resolution: {integrity: sha512-Muj2fzd+gTiOEYMyP7BA5mkVMTbcUVK3IWrHUjnivo/d0cqxtSY0GLbhBTQ6MPwYtXe74H+gCWO3HNAujv0R+A==}
+  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
+    resolution: {integrity: sha512-tK0waGQj/dEwpssxEOlHw7/d9XXnkQqZai/2LFUSuHwDtbeTgZZfIsAd9DoX02qFHNZlzvRvbLlS48zKcPKHDw==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
       '@emotion/react': ^11.1.2
@@ -4775,6 +4778,11 @@ packages:
 
   /@guardian/ophan-tracker-js@2.0.4:
     resolution: {integrity: sha512-kwUNUSfnL8SQwzTlVzInYh7a6VSMFy3zEq2A6Hm7cmKSbl8D7ed03y7ANqquViFuPffRZRQ0IrkJHSbMnsRmrA==}
+    engines: {node: '>=16'}
+    dev: false
+
+  /@guardian/ophan-tracker-js@2.1.0-next.1:
+    resolution: {integrity: sha512-Qa2PMhXcGgqTcJtKo5MF0YDbjVl9ivxic7WC6PkxmEkt8h406W8OIxVhSg10RLEZYTIkYg8CRYDqJTdw2vM+Kg==}
     engines: {node: '>=16'}
     dev: false
 

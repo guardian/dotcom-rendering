@@ -110,6 +110,7 @@ const initialCommentFormState = {
 	userNameMissing: false,
 	showPreview: false,
 	previewBody: '',
+	body: '',
 };
 
 const initialState: State = {
@@ -152,7 +153,10 @@ type Action =
 	| { type: 'setBottomFormShowPreview'; showPreview: boolean }
 	| { type: 'setTopFormPreviewBody'; previewBody: string }
 	| { type: 'setReplyFormPreviewBody'; previewBody: string }
-	| { type: 'setBottomFormPreviewBody'; previewBody: string };
+	| { type: 'setBottomFormPreviewBody'; previewBody: string }
+	| { type: 'setTopFormBody'; body: string }
+	| { type: 'setReplyFormBody'; body: string }
+	| { type: 'setBottomFormBody'; body: string };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -299,6 +303,33 @@ const reducer = (state: State, action: Action): State => {
 				bottomForm: {
 					...state.bottomForm,
 					previewBody: action.previewBody,
+				},
+			};
+		}
+		case 'setTopFormBody': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					body: action.body,
+				},
+			};
+		}
+		case 'setReplyFormBody': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					body: action.body,
+				},
+			};
+		}
+		case 'setBottomFormBody': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					body: action.body,
 				},
 			};
 		}
@@ -543,6 +574,24 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormPreviewBody',
 							previewBody,
+						})
+					}
+					setTopFormBody={(body) =>
+						dispatch({
+							type: 'setTopFormBody',
+							body,
+						})
+					}
+					setReplyFormBody={(body) =>
+						dispatch({
+							type: 'setReplyFormBody',
+							body,
+						})
+					}
+					setBottomFormBody={(body) =>
+						dispatch({
+							type: 'setBottomFormBody',
+							body,
 						})
 					}
 					topForm={topForm}

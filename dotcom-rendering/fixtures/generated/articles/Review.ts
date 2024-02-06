@@ -1733,11 +1733,6 @@ export const Review: DCRArticle = {
 			],
 			elementId: 'b4f992ea-6a4c-4717-bfd2-edb0cff41b4e',
 			position: 1,
-			lightbox: {
-				caption:
-					'So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.',
-				credit: 'Photograph: Sam Taylor/Netflix',
-			},
 		},
 	],
 	canonicalUrl:
@@ -2085,11 +2080,6 @@ export const Review: DCRArticle = {
 					],
 					elementId: '6adb295a-27f0-4564-89ba-7c856807bad8',
 					position: 2,
-					lightbox: {
-						caption:
-							'Relishing every moment … Gillian Anderson as Jean.',
-						credit: 'Photograph: Netflix',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',

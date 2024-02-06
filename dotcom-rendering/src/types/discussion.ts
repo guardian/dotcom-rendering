@@ -394,4 +394,5 @@ export type CommentForm = {
 	userNameMissing: boolean;
 	showPreview: boolean;
 	previewBody: string;
+	body: string;
 };
