@@ -146,7 +146,7 @@ type Action =
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
-	| { type: 'setPickError'; pickError: string }
+	| { type: 'setPickError'; error: string }
 	| { type: 'setTopFormActive'; isActive: boolean }
 	| { type: 'setReplyFormActive'; isActive: boolean }
 	| { type: 'setBottomFormActive'; isActive: boolean }
@@ -218,7 +218,7 @@ const reducer = (state: State, action: Action): State => {
 		case 'setPickError': {
 			return {
 				...state,
-				pickError: action.pickError,
+				pickError: action.error,
 			};
 		}
 		case 'setTopFormActive': {
@@ -544,10 +544,10 @@ export const Discussion = ({
 					loading={loading}
 					comments={comments}
 					pickError={pickError}
-					setPickError={(pickError) =>
+					setPickError={(error) =>
 						dispatch({
 							type: 'setPickError',
-							pickError,
+							error,
 						})
 					}
 					setComment={(comment: CommentType) => {

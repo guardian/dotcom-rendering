@@ -172,8 +172,8 @@ export const Root = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -195,8 +195,8 @@ export const RootMobile = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -228,8 +228,8 @@ export const ReplyComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -261,8 +261,8 @@ export const MobileReply = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -294,8 +294,8 @@ export const LongMobileReply = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -327,8 +327,8 @@ export const LongBothMobileReply = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -363,8 +363,8 @@ export const PickedComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -390,8 +390,8 @@ export const StaffUserComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -417,8 +417,8 @@ export const ContributorUserComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -447,8 +447,8 @@ export const PickedStaffUserComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -475,8 +475,8 @@ export const PickedStaffUserCommentMobile = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -512,8 +512,8 @@ export const ContributorUserCommentDesktop = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -541,8 +541,8 @@ export const ContributorUserCommentMobile = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -576,8 +576,8 @@ export const LoggedInAsModerator = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -604,8 +604,8 @@ export const LoggedInAsUser = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -631,8 +631,8 @@ export const BlockedComment = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -658,8 +658,8 @@ export const MutedComment = () => (
 		isMuted={true}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
@@ -685,8 +685,8 @@ export const ClosedForComments = () => (
 		isMuted={false}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 	/>
 );
