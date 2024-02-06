@@ -3,6 +3,7 @@ import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { Column } from './Column';
 import { Row } from './Row';
 
+/** @TODO adapt for dark mode */
 const BACKGROUND_COLOUR = sourcePalette.neutral[93];
 
 const shimmer = keyframes`

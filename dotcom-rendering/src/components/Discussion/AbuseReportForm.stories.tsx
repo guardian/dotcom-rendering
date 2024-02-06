@@ -3,7 +3,15 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { AbuseReportForm } from './AbuseReportForm';
 
-export default { title: 'Discussion/Abuse Report Form' };
+type Props = Parameters<typeof AbuseReportForm>[0];
+
+export default {
+	title: 'Discussion/Abuse Report Form',
+	component: AbuseReportForm,
+	argTypes: {
+		toggleSetShowForm: { action: 'toggleSetShowForm' },
+	},
+};
 
 const wrapperStyles = css`
 	padding: 20px;
@@ -13,10 +21,10 @@ const wrapperStyles = css`
 	position: relative;
 `;
 
-export const Dialog = () => (
+export const Dialog = (args: Props) => (
 	<div css={wrapperStyles}>
 		<AbuseReportForm
-			toggleSetShowForm={() => {}}
+			toggleSetShowForm={args.toggleSetShowForm}
 			commentId={123}
 			reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
 		/>
