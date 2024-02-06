@@ -205,6 +205,8 @@ export const defaultStory = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
@@ -244,6 +246,8 @@ export const threadedComment = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
@@ -283,6 +287,8 @@ export const threadedCommentWithShowMore = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
@@ -322,6 +328,8 @@ export const threadedCommentWithLongUsernames = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
@@ -361,6 +369,8 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
