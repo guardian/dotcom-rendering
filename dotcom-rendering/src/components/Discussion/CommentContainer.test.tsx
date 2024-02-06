@@ -87,6 +87,8 @@ describe('CommentContainer', () => {
 				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				pickError={''}
+				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -137,6 +139,8 @@ describe('CommentContainer', () => {
 				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				pickError={''}
+				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -186,6 +190,8 @@ describe('CommentContainer', () => {
 				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				pickError={''}
+				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -236,6 +242,8 @@ describe('CommentContainer', () => {
 				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				pickError={''}
+				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
