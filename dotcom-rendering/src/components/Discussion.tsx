@@ -100,6 +100,7 @@ type State = {
 	topLevelCommentCount: number;
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
+	pickError: string;
 	loading: boolean;
 	topForm: CommentForm;
 	replyForm: CommentForm;
@@ -124,6 +125,7 @@ const initialState: State = {
 	topLevelCommentCount: 0,
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: undefined,
+	pickError: '',
 	loading: true,
 	topForm: initialCommentFormState,
 	replyForm: initialCommentFormState,
@@ -144,6 +146,7 @@ type Action =
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
+	| { type: 'setPickError'; pickError: string }
 	| { type: 'setTopFormActive'; isActive: boolean }
 	| { type: 'setReplyFormActive'; isActive: boolean }
 	| { type: 'setBottomFormActive'; isActive: boolean }
@@ -210,6 +213,12 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				hashCommentId: action.hashCommentId,
 				isExpanded: true,
+			};
+		}
+		case 'setPickError': {
+			return {
+				...state,
+				pickError: action.pickError,
 			};
 		}
 		case 'setTopFormActive': {
@@ -571,6 +580,12 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormUserMissing',
 							userNameMissing,
+						})
+					}
+					setPickError={(pickError) =>
+						dispatch({
+							type: 'setPickError',
+							pickError,
 						})
 					}
 					setTopFormError={(error) =>

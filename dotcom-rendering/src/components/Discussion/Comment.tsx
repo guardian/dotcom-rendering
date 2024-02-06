@@ -31,8 +31,8 @@ type Props = {
 	isMuted: boolean;
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
-	error: string;
-	setError: (error: string) => void;
+	pickError: string;
+	setPickError: (error: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
@@ -302,8 +302,8 @@ export const Comment = ({
 	isMuted,
 	toggleMuteStatus,
 	onPermalinkClick,
-	error,
-	setError,
+	pickError,
+	setPickError,
 	reportAbuse,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
@@ -314,20 +314,20 @@ export const Comment = ({
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
 
 	const pick = async (staffUser: Staff) => {
-		setError('');
+		setPickError('');
 		const response = await staffUser.onPick(comment.id);
 		if (response.kind === 'error') {
-			setError(response.error);
+			setPickError(response.error);
 		} else {
 			setIsHighlighted(response.value);
 		}
 	};
 
 	const unPick = async (staffUser: Staff) => {
-		setError('');
+		setPickError('');
 		const response = await staffUser.onUnpick(comment.id);
 		if (response.kind === 'error') {
-			setError(response.error);
+			setPickError(response.error);
 		} else {
 			setIsHighlighted(response.value);
 		}
@@ -349,13 +349,13 @@ export const Comment = ({
 
 	return (
 		<>
-			{!!error && (
+			{!!pickError && (
 				<span
 					css={css`
 						color: red;
 					`}
 				>
-					{error}
+					{pickError}
 				</span>
 			)}
 			<div

@@ -33,6 +33,8 @@ type Props = {
 	setIsCommentFormActive: (isActive: boolean) => void;
 	error: string;
 	setError: (error: string) => void;
+	pickError: string;
+	setPickError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
@@ -94,6 +96,8 @@ export const CommentContainer = ({
 	setIsCommentFormActive,
 	error,
 	setError,
+	pickError,
+	setPickError,
 	userNameMissing,
 	setUserNameMissing,
 	previewBody,
@@ -153,8 +157,8 @@ export const CommentContainer = ({
 				isMuted={mutes.includes(comment.userProfile.userId)}
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
-				error={error}
-				setError={setError}
+				pickError={pickError}
+				setPickError={setPickError}
 				reportAbuse={reportAbuse}
 			/>
 
@@ -183,8 +187,8 @@ export const CommentContainer = ({
 										)}
 										toggleMuteStatus={toggleMuteStatus}
 										onPermalinkClick={onPermalinkClick}
-										error={error}
-										setError={setError}
+										pickError={pickError}
+										setPickError={setPickError}
 										reportAbuse={reportAbuse}
 									/>
 								</li>
