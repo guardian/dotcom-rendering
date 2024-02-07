@@ -10,6 +10,7 @@ type Props = {
 	showSpout: boolean;
 };
 
+/** @TODO adapt for dark mode */
 const previewStyle = css`
 	${textSans.small()}
 	padding: ${space[2]}px ${space[4]}px;

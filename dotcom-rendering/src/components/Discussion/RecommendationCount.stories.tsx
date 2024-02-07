@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ok } from '../../lib/result';
 import { palette as themePalette } from '../../palette';
 import type { SignedInUser } from '../../types/discussion';
 import { RecommendationCount } from './RecommendationCount';
@@ -30,8 +31,8 @@ const aUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	authStatus: { kind: 'SignedInWithCookies' },
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 } satisfies SignedInUser;
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (

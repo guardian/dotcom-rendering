@@ -1769,11 +1769,6 @@ export const Explainer: DCRArticle = {
 			],
 			elementId: '14bd19d9-28e0-4d7f-9573-ef9d5db05f8b',
 			position: 1,
-			lightbox: {
-				caption:
-					'Queensland premier Annastacia Palaszczuk co-signs path to treaty documents in Brisbane, 16 August, 2022. A federally negotiated treaty seems a long way off.',
-				credit: 'Photograph: Jono Searle/AAP',
-			},
 		},
 	],
 	canonicalUrl:
@@ -2149,11 +2144,6 @@ export const Explainer: DCRArticle = {
 					],
 					elementId: '2c8e2d40-d12d-487a-b89a-90929997e588',
 					position: 2,
-					lightbox: {
-						caption:
-							'Co-chair of the First Peoples Assembly of Victoria Marcus Stewart address the Victorian parliament in Melbourne, 22 June, 2022.',
-						credit: 'Photograph: Joel Carrett/AAP',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -2588,11 +2578,6 @@ export const Explainer: DCRArticle = {
 					],
 					elementId: '0d59b67f-a8a5-472e-8b03-fd1c1e93973d',
 					position: 3,
-					lightbox: {
-						caption:
-							'Minister for Indigenous Australians Linda Burney and prime minister of Australia Anthony Albanese at Garma festival 2022.',
-						credit: 'Photograph: Carly Earl/The Guardian',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',

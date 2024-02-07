@@ -581,6 +581,10 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
             "Key": "deletion_protection.enabled",
             "Value": "true",
           },
+          {
+            "Key": "idle_timeout.timeout_seconds",
+            "Value": "4",
+          },
         ],
         "Scheme": "internal",
         "SecurityGroups": [
@@ -1646,6 +1650,10 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           {
             "Key": "deletion_protection.enabled",
             "Value": "true",
+          },
+          {
+            "Key": "idle_timeout.timeout_seconds",
+            "Value": "4",
           },
         ],
         "Scheme": "internal",

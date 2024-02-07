@@ -1658,9 +1658,6 @@ export const Picture: DCRArticle = {
 			],
 			elementId: 'ab1de12d-941d-4420-87fb-57990a02b6ba',
 			position: 1,
-			lightbox: {
-				credit: 'Illustration: Nicola Jennings/The Guardian',
-			},
 		},
 	],
 	canonicalUrl:

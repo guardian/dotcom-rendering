@@ -6,6 +6,7 @@ import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
+import { ok } from '../../lib/result';
 import type { FilterOptions, Reader } from '../../types/discussion';
 import { Comments } from './Comments';
 
@@ -35,8 +36,8 @@ const aUser: Reader = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	authStatus: { kind: 'SignedInWithCookies' },
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const format = {
@@ -54,6 +55,7 @@ const filters: FilterOptions = {
 const defaultCommentForm = {
 	isActive: false,
 	userNameMissing: false,
+	error: '',
 	showPreview: false,
 	previewBody: '',
 	body: '',
@@ -94,6 +96,9 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -103,9 +108,12 @@ export const LoggedOutHiddenPicks = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -154,6 +162,9 @@ export const InitialPage = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -163,9 +174,12 @@ export const InitialPage = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -219,6 +233,9 @@ export const LoggedInHiddenNoPicks = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
@@ -228,9 +245,12 @@ export const LoggedInHiddenNoPicks = () => {
 				setTopFormBody={() => {}}
 				setReplyFormBody={setBody}
 				setBottomFormBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={{ ...defaultCommentForm, isActive, body }}
 				bottomForm={defaultCommentForm}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>
 		</div>
 	);
@@ -283,12 +303,17 @@ export const LoggedIn = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
 				setTopFormPreviewBody={() => {}}
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
 				setTopFormBody={setTopFormBody}
 				setReplyFormBody={setReplyFormBody}
 				setBottomFormBody={setBottomFormBody}
@@ -307,6 +332,7 @@ export const LoggedIn = () => {
 					isActive: isBottomFormActive,
 					body: bottomFormBody,
 				}}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>
 		</div>
 	);
@@ -356,6 +382,9 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
 				setTopFormShowPreview={() => {}}
 				setReplyFormShowPreview={() => {}}
 				setBottomFormShowPreview={() => {}}
@@ -365,6 +394,8 @@ export const LoggedInShortDiscussion = () => {
 				setTopFormBody={setTopFormBody}
 				setReplyFormBody={setReplyFormBody}
 				setBottomFormBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
 				topForm={{
 					...defaultCommentForm,
 					isActive: isTopFormActive,
@@ -376,6 +407,7 @@ export const LoggedInShortDiscussion = () => {
 					body: replyFormBody,
 				}}
 				bottomForm={defaultCommentForm}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>
 		</div>
 	);
@@ -417,6 +449,9 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -426,9 +461,12 @@ export const LoggedOutHiddenNoPicks = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -479,6 +517,9 @@ export const Closed = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -488,9 +529,12 @@ export const Closed = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -537,6 +581,9 @@ export const NoComments = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -546,9 +593,12 @@ export const NoComments = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -597,6 +647,9 @@ export const LegacyDiscussion = () => (
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
 			setTopFormShowPreview={() => {}}
 			setReplyFormShowPreview={() => {}}
 			setBottomFormShowPreview={() => {}}
@@ -606,9 +659,12 @@ export const LegacyDiscussion = () => (
 			setTopFormBody={() => {}}
 			setReplyFormBody={() => {}}
 			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );

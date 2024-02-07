@@ -5,7 +5,7 @@ import {
 	text,
 	textSans,
 } from '@guardian/source-foundations';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { preview as defaultPreview } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
 import type {
@@ -93,12 +93,6 @@ const errorTextStyles = css`
 	margin: 0;
 	${textSans.xxsmall()};
 	color: ${text.error};
-`;
-
-const infoTextStyles = css`
-	margin: 0;
-	${textSans.xxsmall()};
-	color: ${text.supporting};
 `;
 
 const msgContainerStyles = css`
@@ -224,7 +218,6 @@ export const CommentForm = ({
 	body,
 	setBody,
 }: Props) => {
-	const [info, setInfo] = useState<string>('');
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
 	useEffect(() => {
@@ -302,7 +295,6 @@ export const CommentForm = ({
 
 	const resetForm = () => {
 		setError('');
-		setInfo('');
 		setBody('');
 		setShowPreview(false);
 		setIsActive(false);
@@ -311,7 +303,6 @@ export const CommentForm = ({
 
 	const submitForm = async () => {
 		setError('');
-		setInfo('');
 
 		if (body) {
 			const response = commentBeingRepliedTo
@@ -367,15 +358,6 @@ export const CommentForm = ({
 				} else if (response.error === 'API_ERROR') {
 					setError(`Sorry, there was a problem posting your comment. Please try
                   another browser or network connection.  Reference code `);
-				} else if (response.error === 'EMAIL_VERIFIED') {
-					setInfo(
-						'Sent. Please check your email to verify your email address. Once verified post your comment.',
-					);
-				} else if (response.error === 'EMAIL_VERIFIED_FAIL') {
-					// TODO: Support resending verification email
-					setError(`We are having technical difficulties. Please try again later or
-            <a href="#">
-            <strong>resend the verification</strong></a>.`);
 				} else if (response.error === 'EMAIL_NOT_VALIDATED') {
 					// TODO: Support resending verification email
 					setError(`Please confirm your email address to comment.<br />
@@ -445,11 +427,6 @@ export const CommentForm = ({
 							css={[errorTextStyles, linkStyles]}
 							dangerouslySetInnerHTML={{ __html: error }}
 						/>
-					</div>
-				)}
-				{!!info && (
-					<div css={msgContainerStyles}>
-						<p css={[infoTextStyles, linkStyles]}>{info}</p>
 					</div>
 				)}
 				{isActive && (

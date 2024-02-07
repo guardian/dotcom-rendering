@@ -51,10 +51,6 @@ export const cartoon: CartoonBlockElement = {
 	displayCredit: true,
 	alt: 'The Mary Poppins Method',
 	position: 1,
-	lightbox: {
-		caption: 'The Mary Poppins Method – cleaning house.',
-		credit: 'Comic by: Simone Lia / The Observer',
-	},
 	variants: [smallVariant, largeVariant],
 };
 

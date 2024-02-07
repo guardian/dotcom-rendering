@@ -4,9 +4,8 @@ import type {
 	AdditionalHeadersType,
 	CommentType,
 	DiscussionOptions,
+	FilterOptions,
 	GetDiscussionSuccess,
-	OrderByType,
-	ThreadsType,
 } from '../types/discussion';
 import {
 	discussionApiResponseSchema,
@@ -19,7 +18,7 @@ import {
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 import { fetchJSON } from './json';
-import type { Result } from './result';
+import { error, ok, type Result } from './result';
 
 const options = {
 	// Defaults
@@ -69,12 +68,8 @@ type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
 //todo: figure out the different return types and consider error handling
 export const getDiscussion = async (
 	shortUrl: string,
-	opts: {
-		orderBy: OrderByType;
-		pageSize: number;
-		threads: ThreadsType;
-		page: number;
-	},
+	page: number,
+	filters: FilterOptions,
 ): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
@@ -82,13 +77,13 @@ export const getDiscussion = async (
 			// Frontend uses the 'recommendations' key to store this options but the api expects
 			// 'mostRecommended' so we have to map here to support both
 			orderBy:
-				opts.orderBy === 'recommendations'
+				filters.orderBy === 'recommendations'
 					? 'mostRecommended'
-					: opts.orderBy,
-			pageSize: opts.pageSize,
-			displayThreaded: opts.threads !== 'unthreaded',
-			maxResponses: opts.threads === 'collapsed' ? 3 : 100,
-			page: opts.page,
+					: filters.orderBy,
+			pageSize: filters.pageSize,
+			displayThreaded: filters.threads !== 'unthreaded',
+			maxResponses: filters.threads === 'collapsed' ? 3 : 100,
+			page,
 		},
 	};
 	const params = objAsParams(apiOpts);
@@ -101,7 +96,7 @@ export const getDiscussion = async (
 
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (
 		result.output.status === 'error' &&
@@ -110,19 +105,16 @@ export const getDiscussion = async (
 		// we get the response to tell us
 		result.output.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
 	) {
-		return getDiscussion(shortUrl, {
-			...opts,
-			...{ threads: 'unthreaded' },
+		return getDiscussion(shortUrl, page, {
+			...filters,
+			threads: 'unthreaded',
 		});
 	}
 	if (result.output.status === 'error') {
-		return {
-			kind: 'error',
-			error: 'ApiError',
-		};
+		return error('ApiError');
 	}
 
-	return { kind: 'ok', value: result.output };
+	return ok(result.output);
 };
 
 export const preview = async (
@@ -146,11 +138,8 @@ export const preview = async (
 	if (jsonResult.kind === 'error') return jsonResult;
 
 	return isObject(jsonResult.value) && isString(jsonResult.value.commentBody)
-		? { kind: 'ok', value: jsonResult.value.commentBody }
-		: {
-				kind: 'error',
-				error: 'ParsingError',
-		  };
+		? ok(jsonResult.value.commentBody)
+		: error('ParsingError');
 };
 
 type CommentResponse = Result<
@@ -241,65 +230,62 @@ export const getPicks = async (
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (result.output.status === 'error') {
-		return { kind: 'error', error: 'ApiError' };
+		return error('ApiError');
 	}
 
-	return { kind: 'ok', value: result.output.discussion.comments };
+	return ok(result.output.discussion.comments);
 };
 
-export const reportAbuse = async ({
-	commentId,
-	categoryId,
-	email,
-	reason,
-	authStatus,
-}: {
-	commentId: number;
-	categoryId: number;
-	reason?: string;
-	email?: string;
-	authStatus?: SignedInWithCookies | SignedInWithOkta;
-}): Promise<Result<string, true>> => {
-	const url =
-		joinUrl(
-			options.baseUrl,
-			'comment',
-			commentId.toString(),
-			'reportAbuse',
-		) + objAsParams(defaultParams);
+export const reportAbuse =
+	(authStatus?: SignedInWithCookies | SignedInWithOkta) =>
+	async ({
+		commentId,
+		categoryId,
+		email,
+		reason,
+	}: {
+		commentId: number;
+		categoryId: number;
+		reason?: string;
+		email?: string;
+	}): Promise<Result<string, true>> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'reportAbuse',
+			) + objAsParams(defaultParams);
 
-	const data = new URLSearchParams();
-	data.append('categoryId', categoryId.toString());
-	email && data.append('email', email.toString());
-	reason && data.append('reason', reason);
+		const data = new URLSearchParams();
+		data.append('categoryId', categoryId.toString());
+		email && data.append('email', email.toString());
+		reason && data.append('reason', reason);
 
-	const authOptions = authStatus
-		? getOptionsHeadersWithOkta(authStatus)
-		: undefined;
+		const authOptions = authStatus
+			? getOptionsHeadersWithOkta(authStatus)
+			: undefined;
 
-	const jsonResult = await fetchJSON(url, {
-		method: 'POST',
-		body: data.toString(),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-			...authOptions?.headers,
-		},
-		credentials: authOptions?.credentials,
-	});
+		const jsonResult = await fetchJSON(url, {
+			method: 'POST',
+			body: data.toString(),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...authOptions?.headers,
+			},
+			credentials: authOptions?.credentials,
+		});
 
-	if (jsonResult.kind === 'error') {
-		return {
-			kind: 'error',
-			error: 'An unknown error occured',
-		};
-	}
+		if (jsonResult.kind === 'error') {
+			return error('An unknown error occured');
+		}
 
-	return parseAbuseResponse(jsonResult.value);
-};
+		return parseAbuseResponse(jsonResult.value);
+	};
 
 export const recommend =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
@@ -354,18 +340,15 @@ export const addUserName =
 		const result = safeParse(postUsernameResponseSchema, jsonResult.value);
 
 		if (!result.success) {
-			return { kind: 'error', error: 'An unknown error occured' };
+			return error('An unknown error occured');
 		}
 		if (result.output.status === 'error') {
-			return {
-				kind: 'error',
-				error: result.output.errors
-					.map(({ message }) => message)
-					.join('\n'),
-			};
+			return error(
+				result.output.errors.map(({ message }) => message).join('\n'),
+			);
 		}
 
-		return { kind: 'ok', value: true };
+		return ok(true);
 	};
 
 export const pickComment =
@@ -394,9 +377,9 @@ export const pickComment =
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-		if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return error('ParsingError');
 
-		return { kind: 'ok', value: true };
+		return ok(true);
 	};
 
 export const unPickComment =
@@ -425,9 +408,9 @@ export const unPickComment =
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-		if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return error('ParsingError');
 
-		return { kind: 'ok', value: false };
+		return ok(false);
 	};
 
 export const getMoreResponses = async (

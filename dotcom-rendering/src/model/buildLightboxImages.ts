@@ -1,7 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { Orientation } from '../components/Picture';
 import { getLargest, getMaster } from '../lib/image';
-import { isHighEnough, isWideEnough } from '../lib/lightbox';
 import type {
 	CartoonBlockElement,
 	FEElement,
@@ -10,56 +8,34 @@ import type {
 } from '../types/content';
 import { isCartoon, isImage } from './enhance-images';
 
+/** Used to determine if a lightbox can be created */
+const THRESHOLD = 620;
+
 /**
- * Only allow the lightbox to show images that have a source with a width greater
- * than a threshold.
+ * Only allow the lightbox to show images whose largest source
+ * is higher than a specific threshold.
  *
  * Frontend has similar logic here:
  * https://github.com/guardian/frontend/blob/126dfcbc1aa961650b7f7ff41ee50a12782bb62e/common/app/model/content.scala#L549
  *
  */
-const isLightboxable = (
-	element: ImageBlockElement | CartoonBlockElement,
-	orientation: Orientation,
-): boolean => {
-	switch (orientation) {
-		case 'landscape':
-			if (
-				element._type ===
-				'model.dotcomrendering.pageElements.CartoonBlockElement'
-			) {
-				return element.variants.some((v) =>
-					v.images.some(isWideEnough),
-				);
-			} else {
-				return element.media.allImages.some(isWideEnough);
-			}
-		case 'portrait':
-			if (
-				element._type ===
-				'model.dotcomrendering.pageElements.CartoonBlockElement'
-			) {
-				return element.variants.some((v) =>
-					v.images.some(isHighEnough),
-				);
-			} else {
-				return element.media.allImages.some(isHighEnough);
-			}
-	}
-};
+const isLightboxable = (width: number, height: number): boolean =>
+	Math.max(width, height) > THRESHOLD;
 
 /**
  * Older legacy images use a different url format so we need to use a different
  * approach when extracting the id of the image
  */
-const decideImageId = (image: ImageForLightbox): string | undefined => {
-	const url = new URL(image.masterUrl);
+const decideImageId = ({
+	masterUrl,
+}: Pick<ImageForLightbox, 'masterUrl'>): string | undefined => {
+	const url = new URL(masterUrl);
 	switch (url.hostname) {
 		case 'media.guim.co.uk': {
 			// E.g.
 			// https://media.guim.co.uk/be634f340e477a975c7352f289c4353105ba9e67/288_121_3702_2221/140.jpg
 			// This bit                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-			return url.pathname.split('/')[1];
+			return url.pathname.split('/').at(1);
 		}
 		case 'i.guim.co.uk':
 		case 'uploads.guim.co.uk':
@@ -68,25 +44,18 @@ const decideImageId = (image: ImageForLightbox): string | undefined => {
 			// E.g.
 			// https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/5/26/1432666797165/59de49e2-553f-4b52-b7ac-09bda7f63e4b-220x132.jpeg
 			// This bit                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-			return url.pathname.split('/').reverse()[0];
+			return url.pathname.split('/').at(-1);
 		default:
-			return;
+			return undefined;
 	}
 };
 
 const buildLightboxImage = (
 	element: ImageBlockElement | CartoonBlockElement,
-): ImageForLightbox | undefined => {
-	const cartoons =
-		element._type ===
-		'model.dotcomrendering.pageElements.CartoonBlockElement'
-			? element.variants.flatMap((v) => v.images)
-			: [];
-	const images =
-		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
-			? element.media.allImages
-			: [];
-	const allImages = images.concat(cartoons);
+): Omit<ImageForLightbox, 'position'> | undefined => {
+	const allImages = isImage(element)
+		? element.media.allImages
+		: element.variants.flatMap(({ images }) => images);
 	const masterImage = getMaster(allImages) ?? getLargest(allImages);
 
 	// Rare, but legacy content might not have a url that we can use with Fastly
@@ -96,33 +65,29 @@ const buildLightboxImage = (
 	const width = parseInt(masterImage.fields.width, 10);
 	const height = parseInt(masterImage.fields.height, 10);
 
-	const orientation = width >= height ? 'landscape' : 'portrait';
-	if (!isLightboxable(element, orientation)) return;
+	if (!isLightboxable(width, height)) return;
+
+	const data = isImage(element)
+		? {
+				alt: element.data.alt,
+				credit: element.data.credit,
+				caption: element.data.caption,
+				title: element.title,
+				starRating: element.starRating,
+		  }
+		: {
+				alt: element.alt,
+				credit: element.credit,
+				caption: element.caption,
+		  };
 
 	return {
 		masterUrl: masterImage.url,
-		position: element.position,
 		width,
 		height,
 		elementId: element.elementId,
-		alt:
-			element._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement'
-				? element.data.alt
-				: element.alt,
-		credit: element.lightbox?.credit,
-		caption: element.lightbox?.caption,
 		displayCredit: element.displayCredit,
-		title:
-			element._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement'
-				? element.title
-				: undefined,
-		starRating:
-			element._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement'
-				? element.starRating
-				: undefined,
+		...data,
 	};
 };
 
@@ -164,32 +129,31 @@ export const buildLightboxImages = (
 	mainMediaElements: FEElement[],
 ): ImageForLightbox[] => {
 	const lightboxImages = mainMediaElements
-		.flatMap<ImageForLightbox>((element) => {
-			if (isImage(element) || isCartoon(element))
-				return buildLightboxImage(element) ?? [];
-			return [];
+		.flatMap<Omit<ImageForLightbox, 'position'>>((element) => {
+			if (!isImage(element) && !isCartoon(element)) return [];
+			const lightboxImage = buildLightboxImage(element);
+			if (!lightboxImage) return [];
+
+			return [lightboxImage];
 		})
 		.concat(
-			blocks.flatMap<ImageForLightbox>((block) =>
-				block.elements.flatMap<ImageForLightbox>((element) =>
-					getImages(element).flatMap<ImageForLightbox>(
-						(multiImage) => {
-							const lightboxImage =
-								buildLightboxImage(multiImage);
-							if (lightboxImage === undefined) return [];
-							return isBlog(format.design)
-								? {
-										...lightboxImage,
-										blockId: block.id,
-										firstPublished:
-											block.blockFirstPublished,
-								  }
-								: lightboxImage;
-						},
-					),
+			blocks.flatMap((block) =>
+				block.elements.flatMap((element) =>
+					getImages(element).flatMap((multiImage) => {
+						const lightboxImage = buildLightboxImage(multiImage);
+						if (lightboxImage === undefined) return [];
+						return isBlog(format.design)
+							? {
+									...lightboxImage,
+									blockId: block.id,
+									firstPublished: block.blockFirstPublished,
+							  }
+							: lightboxImage;
+					}),
 				),
 			),
-		);
+		)
+		.map((image, index) => ({ ...image, position: index + 1 }));
 
 	// On gallery articles the main media is often repeated as an element in the article body so
 	// we deduplicate the array here
@@ -200,5 +164,7 @@ export const buildLightboxImages = (
 				image,
 			]),
 		).values(),
-	];
+	]
+		.sort((a, b) => a.position - b.position)
+		.map((image, index) => ({ ...image, position: index + 1 }));
 };

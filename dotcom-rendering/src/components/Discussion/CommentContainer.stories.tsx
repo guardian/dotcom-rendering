@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { ok } from '../../lib/result';
 import type { CommentType, Reader } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
@@ -157,8 +158,8 @@ const aUser: Reader = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	authStatus: { kind: 'SignedInWithCookies' },
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const commentDataThreaded: CommentType = {
@@ -205,12 +206,15 @@ export const defaultStory = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -243,12 +247,15 @@ export const threadedComment = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -281,12 +288,15 @@ export const threadedCommentWithShowMore = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -319,12 +329,15 @@ export const threadedCommentWithLongUsernames = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -357,12 +370,15 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
 		body={''}
 		setBody={() => {}}
+		reportAbuse={() => Promise.resolve(ok(true))}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =

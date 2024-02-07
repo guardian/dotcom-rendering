@@ -14,7 +14,7 @@ const BASE_URL = `http://localhost:${PORT}`;
 const loadPage = async (
 	page: Page,
 	path: string,
-	waitUntil: 'load' | 'domcontentloaded' = 'load',
+	waitUntil: 'load' | 'domcontentloaded' = 'domcontentloaded',
 	region = 'GB',
 	preventSupportBanner = true,
 ): Promise<void> => {
@@ -34,8 +34,8 @@ const loadPage = async (
 		},
 		{ region, preventSupportBanner },
 	);
-	// The default waitUntil: 'load' ensures all requests have completed
-	// For specific cases that do not rely on JS use 'domcontentloaded' to speed up tests
+	// The default Playwright waitUntil: 'load' ensures all requests have completed
+	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
 	await page.goto(`${BASE_URL}${path}`, { waitUntil });
 };
 
@@ -88,7 +88,7 @@ const loadPageNoOkta = async (
 		switchOverrides?: Record<string, unknown>;
 	},
 ): Promise<void> => {
-	return loadPageWithOverrides(page, article, {
+	await loadPageWithOverrides(page, article, {
 		configOverrides: overrides?.configOverrides,
 		switchOverrides: {
 			...overrides?.switchOverrides,
@@ -113,7 +113,7 @@ const fetchAndloadPageWithOverrides = async (
 	const article = validateAsArticleType(
 		await fetch(`${url}.json?dcr`).then((res) => res.json()),
 	);
-	return loadPageWithOverrides(page, article, {
+	await loadPageWithOverrides(page, article, {
 		configOverrides: overrides?.configOverrides,
 		switchOverrides: {
 			...overrides?.switchOverrides,

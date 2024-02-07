@@ -1998,11 +1998,6 @@ export const Analysis: DCRArticle = {
 			],
 			elementId: '34e6b9e9-dc23-49db-a7f1-66d0481bfd84',
 			position: 1,
-			lightbox: {
-				caption:
-					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
-				credit: 'Photograph: Peter Morrison/AP',
-			},
 		},
 	],
 	canonicalUrl:

@@ -4,7 +4,7 @@ import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
-import { getDiscussion } from '../lib/discussionApi';
+import { getDiscussion, type reportAbuse } from '../lib/discussionApi';
 import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
@@ -28,6 +28,7 @@ export type Props = {
 	enableDiscussionSwitch: boolean;
 	user?: SignedInUser;
 	idApiUrl: string;
+	reportAbuseUnauthenticated: ReturnType<typeof reportAbuse>;
 };
 
 const overlayStyles = css`
@@ -99,6 +100,7 @@ type State = {
 	topLevelCommentCount: number;
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
+	pickError: string;
 	loading: boolean;
 	topForm: CommentForm;
 	replyForm: CommentForm;
@@ -108,6 +110,7 @@ type State = {
 const initialCommentFormState = {
 	isActive: false,
 	userNameMissing: false,
+	error: '',
 	showPreview: false,
 	previewBody: '',
 	body: '',
@@ -122,6 +125,7 @@ const initialState: State = {
 	topLevelCommentCount: 0,
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: undefined,
+	pickError: '',
 	loading: true,
 	topForm: initialCommentFormState,
 	replyForm: initialCommentFormState,
@@ -138,16 +142,20 @@ type Action =
 	  }
 	| { type: 'expandComments' }
 	| { type: 'addComment'; comment: CommentType }
-	| { type: 'updateCommentPage'; commentPage: number; shouldExpand: boolean }
+	| { type: 'updateCommentPage'; commentPage: number }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
+	| { type: 'setPickError'; error: string }
 	| { type: 'setTopFormActive'; isActive: boolean }
 	| { type: 'setReplyFormActive'; isActive: boolean }
 	| { type: 'setBottomFormActive'; isActive: boolean }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
+	| { type: 'setTopFormError'; error: string }
+	| { type: 'setReplyFormError'; error: string }
+	| { type: 'setBottomFormError'; error: string }
 	| { type: 'setTopFormShowPreview'; showPreview: boolean }
 	| { type: 'setReplyFormShowPreview'; showPreview: boolean }
 	| { type: 'setBottomFormShowPreview'; showPreview: boolean }
@@ -184,7 +192,7 @@ const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				commentPage: action.commentPage,
-				isExpanded: action.shouldExpand ? true : state.isExpanded,
+				isExpanded: true,
 			};
 		case 'filterChange':
 			return {
@@ -205,6 +213,12 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				hashCommentId: action.hashCommentId,
 				isExpanded: true,
+			};
+		}
+		case 'setPickError': {
+			return {
+				...state,
+				pickError: action.error,
 			};
 		}
 		case 'setTopFormActive': {
@@ -333,6 +347,33 @@ const reducer = (state: State, action: Action): State => {
 				},
 			};
 		}
+		case 'setTopFormError': {
+			return {
+				...state,
+				topForm: {
+					...state.topForm,
+					error: action.error,
+				},
+			};
+		}
+		case 'setReplyFormError': {
+			return {
+				...state,
+				replyForm: {
+					...state.replyForm,
+					error: action.error,
+				},
+			};
+		}
+		case 'setBottomFormError': {
+			return {
+				...state,
+				bottomForm: {
+					...state.bottomForm,
+					error: action.error,
+				},
+			};
+		}
 
 		default:
 			assertUnreachable(action);
@@ -348,6 +389,7 @@ export const Discussion = ({
 	enableDiscussionSwitch,
 	user,
 	idApiUrl,
+	reportAbuseUnauthenticated,
 }: Props) => {
 	const [
 		{
@@ -363,6 +405,7 @@ export const Discussion = ({
 			bottomForm,
 			topLevelCommentCount,
 			commentCount,
+			pickError,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
@@ -379,7 +422,12 @@ export const Discussion = ({
 
 	useEffect(() => {
 		dispatch({ type: 'setLoading', loading: true });
-		void getDiscussion(shortUrlId, { ...filters, page: commentPage })
+
+		void getDiscussion(
+			shortUrlId,
+			commentPage,
+			remapToValidFilters(filters, hashCommentId),
+		)
 			.then((result) => {
 				if (result.kind === 'error') {
 					console.error(`getDiscussion - error: ${result.error}`);
@@ -399,7 +447,7 @@ export const Discussion = ({
 			.catch(() => {
 				// do nothing
 			});
-	}, [filters, commentPage, shortUrlId]);
+	}, [commentPage, filters, hashCommentId, shortUrlId]);
 
 	const validFilters = remapToValidFilters(filters, hashCommentId);
 
@@ -426,19 +474,22 @@ export const Discussion = ({
 	// on.
 	useEffect(() => {
 		if (hashCommentId !== undefined) {
-			getCommentContext(discussionApiUrl, hashCommentId)
+			getCommentContext(
+				discussionApiUrl,
+				hashCommentId,
+				remapToValidFilters(filters, hashCommentId),
+			)
 				.then((context) => {
 					dispatch({
 						type: 'updateCommentPage',
 						commentPage: context.page,
-						shouldExpand: true,
 					});
 				})
 				.catch((e) =>
 					console.error(`getCommentContext - error: ${String(e)}`),
 				);
 		}
-	}, [discussionApiUrl, hashCommentId]);
+	}, [filters, discussionApiUrl, hashCommentId]);
 
 	useEffect(() => {
 		if (window.location.hash === '#comments') {
@@ -489,17 +540,23 @@ export const Discussion = ({
 					apiKey="dotcom-rendering"
 					idApiUrl={idApiUrl}
 					page={commentPage}
-					setPage={(page: number, shouldExpand: boolean) => {
+					setPage={(page: number) => {
 						dispatch({
 							type: 'updateCommentPage',
 							commentPage: page,
-							shouldExpand,
 						});
 					}}
 					filters={validFilters}
 					topLevelCommentCount={topLevelCommentCount}
 					loading={loading}
 					comments={comments}
+					pickError={pickError}
+					setPickError={(error) =>
+						dispatch({
+							type: 'setPickError',
+							error,
+						})
+					}
 					setComment={(comment: CommentType) => {
 						dispatch({ type: 'addComment', comment });
 					}}
@@ -538,6 +595,24 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormUserMissing',
 							userNameMissing,
+						})
+					}
+					setTopFormError={(error) =>
+						dispatch({
+							type: 'setTopFormError',
+							error,
+						})
+					}
+					setReplyFormError={(error) =>
+						dispatch({
+							type: 'setReplyFormError',
+							error,
+						})
+					}
+					setBottomFormError={(error) =>
+						dispatch({
+							type: 'setBottomFormError',
+							error,
 						})
 					}
 					setTopFormShowPreview={(showPreview) =>
@@ -597,6 +672,11 @@ export const Discussion = ({
 					topForm={topForm}
 					replyForm={replyForm}
 					bottomForm={bottomForm}
+					reportAbuse={
+						user !== undefined
+							? user.reportAbuse
+							: reportAbuseUnauthenticated
+					}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />

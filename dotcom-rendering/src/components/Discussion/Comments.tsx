@@ -6,7 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { preview } from '../../lib/discussionApi';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
@@ -36,19 +36,24 @@ type Props = {
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
-	setPage: (page: number, shouldExpand: boolean) => void;
+	setPage: (page: number) => void;
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
+	pickError: string;
+	setPickError: (error: string) => void;
 	setTopFormActive: (isActive: boolean) => void;
 	setReplyFormActive: (isActive: boolean) => void;
 	setBottomFormActive: (isActive: boolean) => void;
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;
+	setTopFormError: (error: string) => void;
+	setReplyFormError: (error: string) => void;
+	setBottomFormError: (error: string) => void;
 	setTopFormShowPreview: (showPreview: boolean) => void;
 	setReplyFormShowPreview: (showPreview: boolean) => void;
 	setBottomFormShowPreview: (showPreview: boolean) => void;
@@ -61,6 +66,7 @@ type Props = {
 	topForm: Form;
 	replyForm: Form;
 	bottomForm: Form;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 /**
@@ -146,6 +152,8 @@ export const Comments = ({
 	topLevelCommentCount,
 	loading,
 	comments,
+	pickError,
+	setPickError,
 	setComment,
 	handleFilterChange,
 	setTopFormActive,
@@ -154,6 +162,9 @@ export const Comments = ({
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
 	setBottomFormUserMissing,
+	setTopFormError,
+	setReplyFormError,
+	setBottomFormError,
 	setTopFormShowPreview,
 	setReplyFormShowPreview,
 	setBottomFormShowPreview,
@@ -166,6 +177,7 @@ export const Comments = ({
 	topForm,
 	replyForm,
 	bottomForm,
+	reportAbuse,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -173,7 +185,6 @@ export const Comments = ({
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
 		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
-	const [error, setError] = useState<string>('');
 
 	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
@@ -266,7 +277,7 @@ export const Comments = ({
 	};
 
 	const onPageChange = (pageNumber: number) => {
-		setPage(pageNumber, true);
+		setPage(pageNumber);
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
@@ -336,8 +347,10 @@ export const Comments = ({
 											setIsCommentFormActive={
 												setReplyFormActive
 											}
-											error={error}
-											setError={setError}
+											error={replyForm.error}
+											setError={setReplyFormError}
+											pickError={pickError}
+											setPickError={setPickError}
 											userNameMissing={
 												replyForm.userNameMissing
 											}
@@ -350,6 +363,7 @@ export const Comments = ({
 											}
 											body={replyForm.body}
 											setBody={setReplyFormBody}
+											reportAbuse={reportAbuse}
 										/>
 									</li>
 								))}
@@ -373,8 +387,8 @@ export const Comments = ({
 					setShowPreview={setTopFormShowPreview}
 					isActive={topForm.isActive}
 					setIsActive={setTopFormActive}
-					error={error}
-					setError={setError}
+					error={topForm.error}
+					setError={setTopFormError}
 					userNameMissing={topForm.userNameMissing}
 					setUserNameMissing={setTopFormUserMissing}
 					previewBody={topForm.previewBody}
@@ -433,14 +447,17 @@ export const Comments = ({
 									setShowPreview={setReplyFormShowPreview}
 									isCommentFormActive={replyForm.isActive}
 									setIsCommentFormActive={setReplyFormActive}
-									error={error}
-									setError={setError}
+									error={replyForm.error}
+									setError={setReplyFormError}
+									pickError={pickError}
+									setPickError={setPickError}
 									userNameMissing={replyForm.userNameMissing}
 									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={replyForm.previewBody}
 									setPreviewBody={setReplyFormPreviewBody}
 									body={replyForm.body}
 									setBody={setReplyFormBody}
+									reportAbuse={reportAbuse}
 								/>
 							</li>
 						))}
@@ -467,8 +484,8 @@ export const Comments = ({
 					setShowPreview={setBottomFormShowPreview}
 					isActive={bottomForm.isActive}
 					setIsActive={setBottomFormActive}
-					error={error}
-					setError={setError}
+					error={bottomForm.error}
+					setError={setBottomFormError}
 					userNameMissing={bottomForm.userNameMissing}
 					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={bottomForm.previewBody}

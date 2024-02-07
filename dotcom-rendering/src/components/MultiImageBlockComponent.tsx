@@ -9,7 +9,6 @@ type Props = {
 	images: ImageBlockElement[];
 	format: ArticleFormat;
 	caption?: string;
-	lightbox: boolean;
 };
 
 const ieFallback = css`
@@ -103,12 +102,10 @@ const OneImage = ({
 	images,
 	format,
 	caption,
-	lightbox,
 }: {
 	images: [ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	lightbox: boolean;
 }) => (
 	<div css={wrapper}>
 		<ImageComponent
@@ -116,7 +113,6 @@ const OneImage = ({
 			element={images[0]}
 			hideCaption={true}
 			role={images[0].role}
-			lightbox={lightbox}
 		/>
 		{!!caption && (
 			<Caption
@@ -132,12 +128,10 @@ const TwoImage = ({
 	images,
 	format,
 	caption,
-	lightbox,
 }: {
 	images: [ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	lightbox: boolean;
 }) => (
 	<div css={wrapper}>
 		<SideBySideGrid>
@@ -147,7 +141,6 @@ const TwoImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -156,7 +149,6 @@ const TwoImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 		</SideBySideGrid>
@@ -174,12 +166,10 @@ const ThreeImage = ({
 	images,
 	format,
 	caption,
-	lightbox,
 }: {
 	images: [ImageBlockElement, ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
-	lightbox: boolean;
 }) => (
 	<div css={wrapper}>
 		<OneAboveTwoGrid>
@@ -189,7 +179,6 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -198,7 +187,6 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -207,7 +195,6 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[2].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 		</OneAboveTwoGrid>
@@ -225,7 +212,6 @@ const FourImage = ({
 	images,
 	format,
 	caption,
-	lightbox,
 }: {
 	images: [
 		ImageBlockElement,
@@ -235,7 +221,6 @@ const FourImage = ({
 	];
 	format: ArticleFormat;
 	caption?: string;
-	lightbox: boolean;
 }) => (
 	<div css={wrapper}>
 		<GridOfFour>
@@ -245,7 +230,6 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -254,7 +238,6 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -263,7 +246,6 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[2].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 			<GridItem area="forth">
@@ -272,7 +254,6 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[3].role}
-					lightbox={lightbox}
 				/>
 			</GridItem>
 		</GridOfFour>
@@ -290,7 +271,6 @@ export const MultiImageBlockComponent = ({
 	images,
 	format,
 	caption,
-	lightbox,
 }: Props) => {
 	const [one, two, three, four] = images;
 
@@ -300,7 +280,6 @@ export const MultiImageBlockComponent = ({
 				images={[one, two, three, four]}
 				format={format}
 				caption={caption}
-				lightbox={lightbox}
 			/>
 		);
 	}
@@ -311,31 +290,18 @@ export const MultiImageBlockComponent = ({
 				images={[one, two, three]}
 				format={format}
 				caption={caption}
-				lightbox={lightbox}
 			/>
 		);
 	}
 
 	if (one && two) {
 		return (
-			<TwoImage
-				images={[one, two]}
-				format={format}
-				caption={caption}
-				lightbox={lightbox}
-			/>
+			<TwoImage images={[one, two]} format={format} caption={caption} />
 		);
 	}
 
 	if (one) {
-		return (
-			<OneImage
-				images={[one]}
-				format={format}
-				caption={caption}
-				lightbox={lightbox}
-			/>
-		);
+		return <OneImage images={[one]} format={format} caption={caption} />;
 	}
 
 	return null;

@@ -3,8 +3,7 @@ import { log } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
-import { reportAbuse } from '../../lib/discussionApi';
-import type { SignedInWithCookies, SignedInWithOkta } from '../../lib/identity';
+import type { reportAbuse } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
 
 type FormData = {
@@ -59,13 +58,13 @@ const errorMessageStyles = css`
 type Props = {
 	commentId: number;
 	toggleSetShowForm: () => void;
-	authStatus?: SignedInWithCookies | SignedInWithOkta;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 export const AbuseReportForm = ({
 	commentId,
 	toggleSetShowForm,
-	authStatus,
+	reportAbuse,
 }: Props) => {
 	const modalRef = useRef<HTMLDivElement>(null);
 	// TODO: use ref once forwardRef is implemented @guardian/src-button
@@ -164,7 +163,6 @@ export const AbuseReportForm = ({
 			reason,
 			email,
 			commentId,
-			authStatus,
 		})
 			.then((response) => {
 				if (response.kind === 'error') {
