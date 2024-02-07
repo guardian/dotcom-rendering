@@ -27,7 +27,7 @@ import type {
 } from '../lib/discussionApi';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
-import type { Result } from '../lib/result';
+import { error, ok, type Result } from '../lib/result';
 
 export type CAPIPillar =
 	| 'news'
@@ -132,12 +132,12 @@ export const parseCommentRepliesResponse = (
 ): Result<'ParsingError' | 'ApiError', CommentType[]> => {
 	const result = safeParse(discussionApiCommentSuccessSchema, data);
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (result.output.status === 'error') {
-		return { kind: 'error', error: 'ApiError' };
+		return error('ApiError');
 	}
-	return { kind: 'ok', value: result.output.comment.responses ?? [] };
+	return ok(result.output.comment.responses ?? []);
 };
 
 export interface CommentType {
@@ -220,20 +220,14 @@ export const parseCommentResponse = (
 ): Result<'ParsingError' | CommentResponseErrorCodes, number> => {
 	const { success, output } = safeParse(commentResponseSchema, data);
 	if (!success) {
-		return {
-			kind: 'error',
-			error: 'ParsingError',
-		};
+		return error('ParsingError');
 	}
 
 	if (output.status === 'error') {
-		return {
-			kind: 'error',
-			error: output.errorCode,
-		};
+		return error(output.errorCode);
 	}
 
-	return { kind: 'ok', value: output.message };
+	return ok(output.message);
 };
 
 const abuseResponseSchema = variant('status', [
@@ -249,11 +243,9 @@ const abuseResponseSchema = variant('status', [
 export const parseAbuseResponse = (data: unknown): Result<string, true> => {
 	const { success, output } = safeParse(abuseResponseSchema, data);
 	if (!success) {
-		return { kind: 'error', error: 'An unknown error occured' };
+		return error('An unknown error occured');
 	}
-	return output.status === 'ok'
-		? { kind: 'ok', value: true }
-		: { kind: 'error', error: output.message };
+	return output.status === 'ok' ? ok(true) : error(output.message);
 };
 
 export const postUsernameResponseSchema = variant('status', [

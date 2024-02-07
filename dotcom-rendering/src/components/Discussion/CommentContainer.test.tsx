@@ -2,7 +2,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
-import type { Result } from '../../lib/result';
+import { error, ok } from '../../lib/result';
 import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
@@ -20,15 +20,9 @@ const commentWithoutReply = {
 	responses: [],
 } satisfies CommentType;
 
-const commentResponseError = {
-	kind: 'error',
-	error: 'NetworkError',
-} as const satisfies Result<unknown, unknown>;
+const commentResponseError = error<'NetworkError', number>('NetworkError');
 
-const commentResponseSuccess = {
-	kind: 'ok',
-	value: 123456,
-} as const satisfies Result<unknown, unknown>;
+const commentResponseSuccess = ok<'NetworkError', number>(123456);
 
 const aUser: SignedInUser = {
 	kind: 'Reader',
@@ -49,8 +43,8 @@ const aUser: SignedInUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseSuccess),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 describe('CommentContainer', () => {
@@ -95,7 +89,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				body={newCommentText}
 				setBody={() => {}}
-				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>,
 		);
 
@@ -147,7 +141,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				body={''}
 				setBody={() => {}}
-				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>,
 		);
 
@@ -198,7 +192,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				body={newCommentText}
 				setBody={() => {}}
-				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>,
 		);
 
@@ -250,7 +244,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				body={''}
 				setBody={() => {}}
-				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>,
 		);
 
