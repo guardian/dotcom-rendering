@@ -1,4 +1,4 @@
-import { isOneOf, isString, joinUrl, storage } from '@guardian/libs';
+import { isOneOf, isString, storage } from '@guardian/libs';
 
 const orderByTypes = ['newest', 'oldest', 'recommendations'] as const;
 const threadTypes = ['collapsed', 'expanded', 'unthreaded'] as const;
@@ -11,7 +11,7 @@ type PageSizeType = (typeof pageSizeTypes)[number];
 /**
  * @see http://discussion.guardianapis.com/discussion-api/comment/3519111/context
  */
-type CommentContextType = {
+export type CommentContextType = {
 	status: 'ok' | 'error';
 	commentId: number;
 	commentAncestorId: number;
@@ -55,7 +55,7 @@ export const initFiltersFromLocalStorage = (): FilterOptions => {
 	};
 };
 
-const buildParams = (filters: FilterOptions) => {
+export const buildParams = (filters: FilterOptions): URLSearchParams => {
 	return new URLSearchParams({
 		// Frontend uses the 'recommendations' key to store this options but the api expects
 		// 'mostRecommended' so we have to map here to support both
@@ -68,32 +68,4 @@ const buildParams = (filters: FilterOptions) => {
 			filters.threads === 'collapsed' || filters.threads === 'expanded',
 		),
 	});
-};
-
-export const getCommentContext = async (
-	ajaxUrl: string,
-	commentId: number,
-	filters: FilterOptions,
-): Promise<CommentContextType> => {
-	const url = joinUrl(ajaxUrl, 'comment', commentId.toString(), 'context');
-
-	const params = buildParams(filters);
-
-	return fetch(url + '?' + params.toString())
-		.then((response) => {
-			if (!response.ok) {
-				throw Error(
-					response.statusText ||
-						`getCommentContext | An api call returned HTTP status ${response.status}`,
-				);
-			}
-			return response;
-		})
-		.then((response) => response.json())
-		.catch((error) => {
-			window.guardian.modules.sentry.reportError(
-				error,
-				'get-comment-page',
-			);
-		});
 };

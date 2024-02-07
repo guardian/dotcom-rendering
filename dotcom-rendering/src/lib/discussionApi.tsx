@@ -9,12 +9,15 @@ import type {
 } from '../types/discussion';
 import {
 	discussionApiResponseSchema,
+	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentRepliesResponse,
 	parseCommentResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
 } from '../types/discussion';
+import type { CommentContextType } from './discussionFilters';
+import { buildParams } from './discussionFilters';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 import { fetchJSON } from './json';
@@ -435,4 +438,36 @@ export const getMoreResponses = async (
 	if (jsonResult.kind === 'error') return jsonResult;
 
 	return parseCommentRepliesResponse(jsonResult.value);
+};
+
+export const getCommentContext = async (
+	ajaxUrl: string,
+	commentId: number,
+	filters: FilterOptions,
+): Promise<Result<GetDiscussionError, CommentContextType>> => {
+	const url = joinUrl(ajaxUrl, 'comment', commentId.toString(), 'context');
+	const params = buildParams(filters);
+
+	const response = await fetch(url + '?' + params.toString());
+
+	if (!response.ok) {
+		const sentryError = new Error(
+			response.statusText ||
+				`getCommentContext | An api call returned HTTP status ${response.status}`,
+		);
+		window.guardian.modules.sentry.reportError(
+			sentryError,
+			'get-comment-page',
+		);
+		return error('ApiError');
+	}
+
+	const json = await response.json();
+	const result = safeParse(getCommentContextResponseSchema, json);
+
+	if (!result.success) {
+		return error('ParsingError');
+	}
+
+	return ok(result.output as CommentContextType);
 };

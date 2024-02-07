@@ -4,11 +4,12 @@ import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
-import { getDiscussion, type reportAbuse } from '../lib/discussionApi';
 import {
 	getCommentContext,
-	initFiltersFromLocalStorage,
-} from '../lib/getCommentContext';
+	getDiscussion,
+	type reportAbuse,
+} from '../lib/discussionApi';
+import { initFiltersFromLocalStorage } from '../lib/discussionFilters';
 import { palette as themePalette } from '../palette';
 import type {
 	CommentForm,
@@ -480,10 +481,16 @@ export const Discussion = ({
 				remapToValidFilters(filters, hashCommentId),
 			)
 				.then((context) => {
-					dispatch({
-						type: 'updateCommentPage',
-						commentPage: context.page,
-					});
+					if (context.kind === 'ok') {
+						dispatch({
+							type: 'updateCommentPage',
+							commentPage: context.value.page,
+						});
+					} else {
+						console.error(
+							`getCommentContext - error: ${context.error}`,
+						);
+					}
 				})
 				.catch((e) =>
 					console.error(`getCommentContext - error: ${String(e)}`),
