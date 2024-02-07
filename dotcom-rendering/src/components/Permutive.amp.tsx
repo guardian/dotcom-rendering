@@ -37,17 +37,17 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 	return (
 		<>
 			<amp-state
-				data-block-on-consent=""
+				data-block-on-consent="_till_responded"
 				id="permutiveConfig"
 				dangerouslySetInnerHTML={{ __html: permutiveConfig }}
 			/>
 			<amp-analytics
-				data-block-on-consent=""
+				data-block-on-consent="_till_responded"
 				type="permutive-ampscript"
 				dangerouslySetInnerHTML={{ __html: permutiveAmpScript }}
 			/>
 			<amp-script
-				data-block-on-consent=""
+				data-block-on-consent="_till_responded"
 				id="permutiveCachedTargeting"
 				// Empty string required to pass AMP validation
 				sandboxed=""
@@ -63,7 +63,7 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 				}}
 			></script>
 			<amp-script
-				data-block-on-consent=""
+				data-block-on-consent="_till_responded"
 				// Empty string required to pass AMP validation
 				sandboxed=""
 				script="pamp-json"
@@ -78,7 +78,7 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 				}}
 			></script>
 			<amp-script
-				data-block-on-consent=""
+				data-block-on-consent="_till_responded" // TODO: Check if it is IAB Compliant
 				id="permutiveSdk"
 				// Empty string required to pass AMP validation
 				sandboxed=""
