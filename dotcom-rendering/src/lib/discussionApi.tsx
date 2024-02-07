@@ -4,9 +4,8 @@ import type {
 	AdditionalHeadersType,
 	CommentType,
 	DiscussionOptions,
+	FilterOptions,
 	GetDiscussionSuccess,
-	OrderByType,
-	ThreadsType,
 } from '../types/discussion';
 import {
 	discussionApiResponseSchema,
@@ -69,12 +68,8 @@ type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
 //todo: figure out the different return types and consider error handling
 export const getDiscussion = async (
 	shortUrl: string,
-	opts: {
-		orderBy: OrderByType;
-		pageSize: number;
-		threads: ThreadsType;
-		page: number;
-	},
+	page: number,
+	filters: FilterOptions,
 ): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
@@ -82,13 +77,13 @@ export const getDiscussion = async (
 			// Frontend uses the 'recommendations' key to store this options but the api expects
 			// 'mostRecommended' so we have to map here to support both
 			orderBy:
-				opts.orderBy === 'recommendations'
+				filters.orderBy === 'recommendations'
 					? 'mostRecommended'
-					: opts.orderBy,
-			pageSize: opts.pageSize,
-			displayThreaded: opts.threads !== 'unthreaded',
-			maxResponses: opts.threads === 'collapsed' ? 3 : 100,
-			page: opts.page,
+					: filters.orderBy,
+			pageSize: filters.pageSize,
+			displayThreaded: filters.threads !== 'unthreaded',
+			maxResponses: filters.threads === 'collapsed' ? 3 : 100,
+			page,
 		},
 	};
 	const params = objAsParams(apiOpts);
@@ -110,9 +105,9 @@ export const getDiscussion = async (
 		// we get the response to tell us
 		result.output.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
 	) {
-		return getDiscussion(shortUrl, {
-			...opts,
-			...{ threads: 'unthreaded' },
+		return getDiscussion(shortUrl, page, {
+			...filters,
+			threads: 'unthreaded',
 		});
 	}
 	if (result.output.status === 'error') {

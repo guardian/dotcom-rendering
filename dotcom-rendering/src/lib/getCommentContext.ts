@@ -1,20 +1,5 @@
 import { isOneOf, isString, joinUrl, storage } from '@guardian/libs';
 
-// GET http://discussion.guardianapis.com/discussion-api/comment/3519111/context
-// {
-//     status: 'ok',
-//     commentId: 3519111,
-//     commentAncestorId: 3519111,
-//     discussionKey: '/p/27y27',
-//     discussionWebUrl:
-//         'https://www.theguardian.com/commentisfree/cifamerica/2009/may/14/washington-post-torture-libel',
-//     discussionApiUrl:
-//         'https://discussion.guardianapis.com/discussion-api/discussion//p/27y27?orderBy=oldest&pageSize=20&page=1',
-//     orderBy: 'oldest',
-//     pageSize: 20,
-//     page: 1,
-// };
-
 const orderByTypes = ['newest', 'oldest', 'recommendations'] as const;
 const threadTypes = ['collapsed', 'expanded', 'unthreaded'] as const;
 const pageSizeTypes = [25, 50, 100] as const;
@@ -23,6 +8,9 @@ type OrderByType = (typeof orderByTypes)[number];
 type ThreadsType = (typeof threadTypes)[number];
 type PageSizeType = (typeof pageSizeTypes)[number];
 
+/**
+ * @see http://discussion.guardianapis.com/discussion-api/comment/3519111/context
+ */
 type CommentContextType = {
 	status: 'ok' | 'error';
 	commentId: number;
@@ -68,7 +56,7 @@ export const initFiltersFromLocalStorage = (): FilterOptions => {
 };
 
 const buildParams = (filters: FilterOptions) => {
-	return {
+	return new URLSearchParams({
 		// Frontend uses the 'recommendations' key to store this options but the api expects
 		// 'mostRecommended' so we have to map here to support both
 		orderBy:
@@ -79,16 +67,17 @@ const buildParams = (filters: FilterOptions) => {
 		displayThreaded: String(
 			filters.threads === 'collapsed' || filters.threads === 'expanded',
 		),
-	};
+	});
 };
 
 export const getCommentContext = async (
 	ajaxUrl: string,
 	commentId: number,
+	filters: FilterOptions,
 ): Promise<CommentContextType> => {
 	const url = joinUrl(ajaxUrl, 'comment', commentId.toString(), 'context');
-	const filters = initFiltersFromLocalStorage();
-	const params = new URLSearchParams(buildParams(filters));
+
+	const params = buildParams(filters);
 
 	return fetch(url + '?' + params.toString())
 		.then((response) => {
