@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
 	BlockElement,
 	MainMedia,
@@ -26,11 +25,6 @@ export const DefaultStory = (): JSX.Element => {
 				elementJs={js}
 				elementCss={atomCss}
 				title="Superb Stuff"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
 			/>
 		</div>
 	);
@@ -56,11 +50,6 @@ export const ImmersiveMainMediaStory = (): JSX.Element => {
 				elementCss={atomCss}
 				isMainMedia={true}
 				title="Superb Stuff"
-				format={{
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
 			/>
 		</div>
 	);
