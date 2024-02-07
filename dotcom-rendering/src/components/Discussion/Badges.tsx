@@ -32,10 +32,10 @@ const staffIcon = css`
 `;
 
 const staffLabel = css`
-	color: ${themePalette('--discussion-staff-label')};
+	color: ${themePalette('--discussion-staff-label-text')};
 `;
 const guardianPickLabel = css`
-	color: ${themePalette('--discussion-pick-label')};
+	color: ${themePalette('--discussion-pick-label-text')};
 `;
 
 export const GuardianStaff = () => (

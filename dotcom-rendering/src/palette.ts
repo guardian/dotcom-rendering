@@ -4895,6 +4895,8 @@ const interactiveAtomBackgroundDark: PaletteFunction = () =>
 /**
  * A template literal type used to make sure the keys of the palette use the
  * correct CSS custom property syntax.
+ *
+ * IMPORTANT - do use a CSS variable name ending in "label" as Storybook theming will fail
  */
 type CSSCustomProperty = `--${string}`;
 /**
@@ -5605,11 +5607,11 @@ const paletteColours = {
 		light: topPickLinkLight,
 		dark: topPickLinkDark,
 	},
-	'--discussion-staff-label': {
+	'--discussion-staff-label-text': {
 		light: staffLabelLight,
 		dark: staffLabelDark,
 	},
-	'--discussion-pick-label': {
+	'--discussion-pick-label-text': {
 		light: staffPickLight,
 		dark: staffPickDark,
 	},
