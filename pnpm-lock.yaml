@@ -346,7 +346,7 @@ importers:
         version: 7.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/braze-components':
         specifier: 18.0.0
-        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
+        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -357,8 +357,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.3.102)(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
-        specifier: 13.0.0
-        version: 13.0.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.3)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@3.0.0)(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3)
+        specifier: 14.4.0
+        version: 14.4.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.3)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@3.0.0)(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3)
       '@guardian/consent-management-platform':
         specifier: 13.7.3
         version: 13.7.3(@guardian/libs@16.0.1)
@@ -4432,7 +4432,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
+  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
     resolution: {integrity: sha512-tK0waGQj/dEwpssxEOlHw7/d9XXnkQqZai/2LFUSuHwDtbeTgZZfIsAd9DoX02qFHNZlzvRvbLlS48zKcPKHDw==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
@@ -4494,14 +4494,14 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@13.0.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.3)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@3.0.0)(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3):
-    resolution: {integrity: sha512-LtRU1c4qu2WJvByDhAKOjD0U4nRxsv5dtaHqYJfq9ROmtenLTvPbIAAAqnNoUZDxv49mbjG9a5LSPv/DhJgbEw==}
+  /@guardian/commercial@14.4.0(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.3)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@3.0.0)(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3):
+    resolution: {integrity: sha512-TuzcB0CDLv9zeC8fHxPEXgAOzwNeT8NuCBV6nLGz0+4fIxzXKeNCRaU1+0g69WTo4NL+yTMHNgtWtfMJWQ+0VA==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
-      '@guardian/consent-management-platform': ^13.7.1
+      '@guardian/consent-management-platform': ^13.8.0
       '@guardian/core-web-vitals': ^6.0.0
-      '@guardian/identity-auth': ^1.0.0
-      '@guardian/identity-auth-frontend': ^1.0.0
+      '@guardian/identity-auth': ^2.0.1
+      '@guardian/identity-auth-frontend': ^3.0.0
       '@guardian/libs': ^16.0.0
       '@guardian/source-foundations': ^14.1.2
       '@guardian/support-dotcom-components': ^1.0.7
@@ -4514,12 +4514,12 @@ packages:
       '@guardian/identity-auth-frontend': 3.0.0(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js': 2.0.4
+      '@guardian/prebid.js': 8.34.0(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-foundations': 14.1.4(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/support-dotcom-components': 1.1.1
       '@octokit/core': 4.2.4
       fastdom: 1.0.11
       lodash-es: 4.17.21
-      prebid.js: github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3)
       process: 0.11.10
       raven-js: 3.27.2
       tslib: 2.6.2
@@ -4784,6 +4784,33 @@ packages:
   /@guardian/ophan-tracker-js@2.1.0-next.1:
     resolution: {integrity: sha512-Qa2PMhXcGgqTcJtKo5MF0YDbjVl9ivxic7WC6PkxmEkt8h406W8OIxVhSg10RLEZYTIkYg8CRYDqJTdw2vM+Kg==}
     engines: {node: '>=16'}
+    dev: false
+
+  /@guardian/prebid.js@8.34.0(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-DLH/EuWGsM6oZcMVm+qsuWhYPl+TE4nqkDzAVJRjOkiP3AHHOZ7AnQaGzF9Y9tG3EeFU/iJwqJ43JlIjDBOt1A==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      '@babel/core': 7.23.2
+      '@babel/plugin-transform-runtime': 7.19.6(@babel/core@7.23.2)
+      '@babel/preset-env': 7.22.6(@babel/core@7.23.2)
+      '@babel/runtime': 7.23.8
+      '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
+      core-js: 3.33.3
+      core-js-pure: 3.35.0
+      criteo-direct-rsa-validate: 1.1.0
+      crypto-js: 4.2.0
+      dlv: 1.1.3
+      dset: 3.1.2
+      express: 4.18.2
+      fun-hooks: 0.9.10
+      just-clone: 1.0.2
+      live-connect-js: 6.3.4
+    optionalDependencies:
+      fsevents: 2.3.3
+    transitivePeerDependencies:
+      - supports-color
+      - tslib
+      - typescript
     dev: false
 
   /@guardian/prettier@5.0.0(prettier@3.0.3)(tslib@2.6.2):
@@ -20830,34 +20857,4 @@ packages:
     resolution: {tarball: https://codeload.github.com/guardian/babel-plugin-px-to-rem/tar.gz/548c5f5bfdfdfc317b86103d27565868bd7d381c}
     name: babel-plugin-px-to-rem
     version: 0.1.0
-    dev: false
-
-  github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {tarball: https://codeload.github.com/guardian/prebid.js/tar.gz/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4}
-    id: github.com/guardian/prebid.js/91cabf5cdfc3c01745f4b10e55044f95a9d7d1b4
-    name: prebid.js
-    version: 8.24.0
-    engines: {node: '>=8.9.0'}
-    dependencies:
-      '@babel/core': 7.23.2
-      '@babel/plugin-transform-runtime': 7.19.6(@babel/core@7.23.2)
-      '@babel/preset-env': 7.22.6(@babel/core@7.23.2)
-      '@babel/runtime': 7.23.8
-      '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
-      core-js: 3.33.3
-      core-js-pure: 3.35.0
-      criteo-direct-rsa-validate: 1.1.0
-      crypto-js: 4.2.0
-      dlv: 1.1.3
-      dset: 3.1.2
-      express: 4.18.2
-      fun-hooks: 0.9.10
-      just-clone: 1.0.2
-      live-connect-js: 6.3.4
-    optionalDependencies:
-      fsevents: 2.3.3
-    transitivePeerDependencies:
-      - supports-color
-      - tslib
-      - typescript
     dev: false
