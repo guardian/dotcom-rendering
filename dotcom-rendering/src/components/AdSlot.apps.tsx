@@ -79,7 +79,6 @@ const supportBannerStyles = css`
  * Support banner component, used at the bottom of the ad slot
  *
  * @todo Allow this to be used with web ad slots
- * @todo Style for dark mode in apps
  */
 const SupportBanner = ({
 	onClickSupportButton,
@@ -99,8 +98,6 @@ const SupportBanner = ({
  * These slots are dynamically inserted into articles using React portals.
  * The ref is important so that we can provide the location of the slot to
  * the native layer, for it to "paint" an advert over the top of it.
- *
- * @todo Style for dark mode
  */
 export const AdSlot = forwardRef<HTMLDivElement, Props>(
 	({ isFirstAdSlot, onClickSupportButton }, ref) => (

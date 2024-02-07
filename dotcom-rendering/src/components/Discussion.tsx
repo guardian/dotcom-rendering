@@ -35,9 +35,9 @@ export type Props = {
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${themePalette('--article-section-background')},
-		${themePalette('--article-section-background')} 40%,
-		rgba(255, 255, 255, 0)
+		${themePalette('--article-background')},
+		${themePalette('--article-background')} 40%,
+		transparent
 	);
 	height: 80px;
 	position: absolute;

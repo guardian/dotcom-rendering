@@ -14,7 +14,7 @@ type FormData = {
 
 const formWrapper = css`
 	z-index: 1;
-	border: 1px solid ${schemedPalette('--discussion-report-border')};
+	border: 1px solid ${schemedPalette('--discussion-border')};
 	position: absolute;
 	width: 300px;
 	top: 0;
@@ -27,7 +27,7 @@ const formWrapper = css`
 `;
 
 const labelStyles = css`
-	color: ${schemedPalette('--discussion-colour')};
+	color: ${schemedPalette('--discussion-accent-text')};
 	${textSans.small({ fontWeight: 'bold' })}
 `;
 
@@ -46,7 +46,7 @@ const inputWrapper = css`
 		background-color: ${schemedPalette('--discussion-report-background')};
 		min-height: ${space[5]}px;
 		width: 75%;
-		border: 1px solid ${schemedPalette('--discussion-report-border')};
+		border: 1px solid ${schemedPalette('--discussion-border')};
 		color: inherit;
 	}
 `;

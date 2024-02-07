@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import { space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type {
@@ -9,6 +9,7 @@ import type {
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { Comment } from './Comment';
 import { CommentForm } from './CommentForm';
 import { CommentReplyPreview } from './CommentReplyPreview';
@@ -46,7 +47,7 @@ const nestingStyles = css`
 `;
 
 const topBorder = css`
-	border-top: 1px solid ${sourcePalette.neutral[86]};
+	border-top: 1px solid ${schemedPalette('--discussion-border')};
 `;
 
 const commentContainerStyles = css`
@@ -55,7 +56,7 @@ const commentContainerStyles = css`
 `;
 
 const selectedStyles = css`
-	background-color: ${sourcePalette.neutral[97]};
+	background-color: ${schemedPalette('--discussion-selected-background')};
 	margin-left: -${space[2]}px;
 	padding-left: ${space[2]}px;
 	margin-right: -${space[2]}px;
