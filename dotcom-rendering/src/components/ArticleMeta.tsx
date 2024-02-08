@@ -422,6 +422,7 @@ export const ArticleMeta = ({
 								<ShareButton
 									pageId={pageId}
 									webTitle={webTitle}
+									format={format}
 								/>
 							</Island>
 						</div>

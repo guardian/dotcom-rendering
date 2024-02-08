@@ -100,6 +100,7 @@ export const LiveBlock = ({
 						pageId={pageId}
 						blockId={block.id}
 						webTitle={webTitle}
+						format={format}
 					/>
 				</Island>
 				{!isUndefined(lastUpdated) && (

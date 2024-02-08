@@ -428,6 +428,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 									<ShareButton
 										pageId={article.pageId}
 										webTitle={article.webTitle}
+										format={format}
 									/>
 								</Island>
 							</div>

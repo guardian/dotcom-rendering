@@ -3384,6 +3384,19 @@ const pullQuoteIconDark: PaletteFunction = (format: ArticleFormat) => {
 		: text;
 };
 
+const shareButtonLiveBlogMobileLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[7];
+		default:
+			return pillarPalette(theme, 200);
+	}
+};
+
 const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
@@ -5752,6 +5765,10 @@ const paletteColours = {
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
 		dark: interactiveAtomBackgroundDark,
+	},
+	'--share-button-liveblog-mobile': {
+		light: shareButtonLiveBlogMobileLight,
+		dark: shareButtonLiveBlogMobileLight,
 	},
 } satisfies PaletteColours;
 

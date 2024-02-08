@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
+import { palette, until } from '@guardian/source-foundations';
 import type { Size } from '@guardian/source-react-components';
 import {
 	Button,
@@ -15,15 +15,17 @@ type Props = {
 	pageId: string;
 	blockId?: string;
 	webTitle: string;
+	format: ArticleFormat;
 };
 
-const sharedButtonStyles = css`
+const sharedButtonStyles = (blockId: string | undefined) => css`
 	border-color: ${palette.neutral[86]};
-	min-width: 132px;
-	max-width: 132px;
+	min-width: ${blockId ? '101px' : '132px'};
+	max-width: ${blockId ? '101px' : '132px'};
+	font-size: ${blockId ? '14px' : '17px'};
 	svg {
-		width: 18.33px;
-		height: 18.33px;
+		width: ${blockId ? '13.33px' : '16.67px'};
+		height: ${blockId ? '13.33px' : '16.67px'};
 	}
 `;
 
@@ -45,14 +47,14 @@ const buttonStyles = css`
 
 const copiedButtonStyles = css`
 	color: ${palette.neutral[7]};
-	font-size: 16px;
 	svg {
 		fill: ${palette.success[400]};
-		margin-right: 2px;
 	}
 `;
 
-const nativeShare = css`
+const nativeShare = (blockId: string | undefined) => css`
+	min-width: ${blockId ? '79px' : '132px'};
+	max-width: ${blockId ? '79px' : '132px'};
 	${buttonStyles}
 	border-color: ${palette.neutral[86]};
 	max-width: 105px;
@@ -60,6 +62,30 @@ const nativeShare = css`
 		margin-left: 0;
 		width: 18.33px;
 		height: 18.33px;
+	}
+`;
+
+const liveBlogNative = (blockId: string | undefined) => css`
+	${nativeShare(blockId)}
+	${until.desktop} {
+		border-color: rgba(
+			255,
+			255,
+			255,
+			0.4
+		); // combination of neutral[100] and opacity 40%
+		color: ${palette.neutral[100]};
+		svg {
+			fill: ${palette.neutral[100]};
+			margin-left: 0;
+		}
+		:hover {
+			color: ${themePalette('--share-button-liveblog-mobile')};
+			background-color: ${palette.neutral[100]};
+			svg {
+				fill: ${themePalette('--share-button-liveblog-mobile')};
+			}
+		}
 	}
 `;
 
@@ -89,9 +115,12 @@ export const ShareButton = ({
 	pageId,
 	blockId,
 	webTitle,
+	format,
 }: Props) => {
 	const [isCopied, setIsCopied] = useState(false);
 	const [isShareSupported, setIsShareSupported] = useState(false);
+
+	const isLiveBlog = format.design === 11;
 
 	useEffect(() => {
 		setIsShareSupported(
@@ -130,7 +159,11 @@ export const ShareButton = ({
 					priority="tertiary"
 					iconSide="left"
 					icon={<SvgShare />}
-					css={nativeShare}
+					css={
+						isLiveBlog
+							? liveBlogNative(blockId)
+							: nativeShare(blockId)
+					}
 				>
 					Share
 				</Button>
@@ -144,8 +177,8 @@ export const ShareButton = ({
 					icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
 					css={
 						isCopied
-							? [copiedButtonStyles, sharedButtonStyles]
-							: [buttonStyles, sharedButtonStyles]
+							? [copiedButtonStyles, sharedButtonStyles(blockId)]
+							: [buttonStyles, sharedButtonStyles(blockId)]
 					}
 				>
 					{isCopied ? 'Link copied' : 'Copy link'}
