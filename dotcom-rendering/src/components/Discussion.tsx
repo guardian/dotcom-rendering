@@ -498,7 +498,6 @@ export const Discussion = ({
 	}, []);
 
 	useEffect(() => {
-		console.log({ commentCount });
 		// There's no point showing the view more button if there isn't much more to view
 		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
 			dispatch({ type: 'expandComments' });
