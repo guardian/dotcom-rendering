@@ -346,7 +346,7 @@ importers:
         version: 7.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/braze-components':
         specifier: 18.0.0
-        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
+        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -897,8 +897,8 @@ importers:
         specifier: 10.1.2
         version: 10.1.2
       valibot:
-        specifier: 0.26.0
-        version: 0.26.0
+        specifier: 0.28.1
+        version: 0.28.1
       web-vitals:
         specifier: 3.5.1
         version: 3.5.1
@@ -4432,7 +4432,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.2)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
+  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
     resolution: {integrity: sha512-tK0waGQj/dEwpssxEOlHw7/d9XXnkQqZai/2LFUSuHwDtbeTgZZfIsAd9DoX02qFHNZlzvRvbLlS48zKcPKHDw==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
@@ -19925,8 +19925,8 @@ packages:
       convert-source-map: 2.0.0
     dev: false
 
-  /valibot@0.26.0:
-    resolution: {integrity: sha512-cM8VM9jsJGx9P4qarZUBXd0I88OVI4ddtyZ1sAMiofC3Usj7Jxm2c8Xx5accdTrKc3CblO8yyytRaJ6lrsuA+Q==}
+  /valibot@0.28.1:
+    resolution: {integrity: sha512-zQnjwNJuXk6362Leu0+4eFa/SMwRom3/hEvH6s1EGf3oXIPbo2WFKDra9ymnbVh3clLRvd8hw4sKF5ruI2Lyvw==}
     dev: false
 
   /validate-npm-package-license@3.0.4:

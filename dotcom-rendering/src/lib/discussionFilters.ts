@@ -12,7 +12,7 @@ type PageSizeType = (typeof pageSizeTypes)[number];
  * @see http://discussion.guardianapis.com/discussion-api/comment/3519111/context
  */
 export type CommentContextType = {
-	status: 'ok' | 'error';
+	status: 'ok';
 	commentId: number;
 	commentAncestorId: number;
 	discussionKey: string;
