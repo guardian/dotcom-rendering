@@ -54,18 +54,3 @@ export const initFiltersFromLocalStorage = (): FilterOptions => {
 		pageSize,
 	};
 };
-
-export const buildParams = (filters: FilterOptions): URLSearchParams => {
-	return new URLSearchParams({
-		// Frontend uses the 'recommendations' key to store this options but the api expects
-		// 'mostRecommended' so we have to map here to support both
-		orderBy:
-			filters.orderBy === 'recommendations'
-				? 'mostRecommended'
-				: filters.orderBy,
-		pageSize: String(filters.pageSize),
-		displayThreaded: String(
-			filters.threads === 'collapsed' || filters.threads === 'expanded',
-		),
-	});
-};

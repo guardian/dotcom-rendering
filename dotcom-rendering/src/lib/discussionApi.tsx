@@ -17,7 +17,6 @@ import {
 	postUsernameResponseSchema,
 } from '../types/discussion';
 import type { CommentContextType } from './discussionFilters';
-import { buildParams } from './discussionFilters';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 import { fetchJSON } from './json';
@@ -440,6 +439,21 @@ export const getMoreResponses = async (
 	return parseCommentRepliesResponse(jsonResult.value);
 };
 
+const buildParams = (filters: FilterOptions): URLSearchParams => {
+	return new URLSearchParams({
+		// Frontend uses the 'recommendations' key to store this options but the api expects
+		// 'mostRecommended' so we have to map here to support both
+		orderBy:
+			filters.orderBy === 'recommendations'
+				? 'mostRecommended'
+				: filters.orderBy,
+		pageSize: String(filters.pageSize),
+		displayThreaded: String(
+			filters.threads === 'collapsed' || filters.threads === 'expanded',
+		),
+	});
+};
+
 export const getCommentContext = async (
 	ajaxUrl: string,
 	commentId: number,
@@ -448,25 +462,17 @@ export const getCommentContext = async (
 	const url = joinUrl(ajaxUrl, 'comment', commentId.toString(), 'context');
 	const params = buildParams(filters);
 
-	const response = await fetch(url + '?' + params.toString());
+	const jsonResult = await fetchJSON(url + '?' + params.toString());
 
-	if (!response.ok) {
-		const sentryError = new Error(
-			response.statusText ||
-				`getCommentContext | An api call returned HTTP status ${response.status}`,
-		);
-		window.guardian.modules.sentry.reportError(
-			sentryError,
-			'get-comment-page',
-		);
-		return error('ApiError');
-	}
+	if (jsonResult.kind === 'error') return jsonResult;
 
-	const json = await response.json();
-	const result = safeParse(getCommentContextResponseSchema, json);
+	const result = safeParse(getCommentContextResponseSchema, jsonResult);
 
 	if (!result.success) {
 		return error('ParsingError');
+	}
+	if (result.output.status !== 'ok') {
+		return error('ApiError');
 	}
 
 	return ok(result.output as CommentContextType);
