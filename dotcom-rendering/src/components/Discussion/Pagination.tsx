@@ -53,7 +53,7 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 	border-radius: 62.5rem;
 	border-width: 1px;
 	border-style: solid;
-	border-color: ${schemedPalette('--discussion-border')};
+	border-color: ${schemedPalette('--discussion-pagination-border')};
 	background-color: ${isSelected
 		? schemedPalette('--discussion-pagination-text')
 		: schemedPalette('--discussion-pagination-background')};

@@ -4612,7 +4612,7 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 const discussionButtonTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const discussionButtonTextDark: PaletteFunction = () =>
-	sourcePalette.neutral[0];
+	sourcePalette.neutral[100];
 
 const discussionReportBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
