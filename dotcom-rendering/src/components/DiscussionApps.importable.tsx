@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
+import type { Reader, UserProfile } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
 import type { Result } from '../lib/result';
-import type { Reader, UserProfile } from '../types/discussion';
 import { Discussion, type Props as DiscussionProps } from './Discussion';
 
 type Props = Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>;
