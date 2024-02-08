@@ -750,8 +750,8 @@ importers:
         specifier: 4.4.2
         version: 4.4.2
       log4js:
-        specifier: 6.5.1
-        version: 6.5.1
+        specifier: 6.9.1
+        version: 6.9.1
       lz-string:
         specifier: 1.5.0
         version: 1.5.0
@@ -15623,8 +15623,8 @@ packages:
       wrap-ansi: 9.0.0
     dev: false
 
-  /log4js@6.5.1:
-    resolution: {integrity: sha512-z1hRRe5DDPzsP73PgN/GYmeSbIAl/g9kX3GLjABCpcU1ojns8S4cyjpJ21jU1P7z1wWkm69PjyMcEGqYYdDqaA==}
+  /log4js@6.9.1:
+    resolution: {integrity: sha512-1somDdy9sChrr9/f4UlzhdaGfDR2c/SaD2a4T7qEkG4jTS57/B3qmnjLYePwQ8cqWnUHZI0iAKxMBpCZICiZ2g==}
     engines: {node: '>=8.0'}
     dependencies:
       date-format: 4.0.14
