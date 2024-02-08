@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { paletteDeclarations } from '../../src/palette';
+import { storybookPaletteDeclarations as paletteDeclarations } from '../lib/paletteDeclarations';
 import {
 	palette as sourcePalette,
 	space,
