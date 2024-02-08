@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type {
 	CommentType,
 	SignedInUser,
@@ -42,6 +42,7 @@ type Props = {
 	body: string;
 	setBody: (body: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
 };
 
 const nestingStyles = css`
@@ -105,27 +106,23 @@ export const CommentContainer = ({
 	body,
 	setBody,
 	reportAbuse,
+	expandCommentReplies,
 }: Props) => {
+	const responses = comment.responses ?? [];
+	const totalResponseCount = comment.metaData?.responseCount ?? 0;
+
 	// Filter logic
-	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
-	const [responses, setResponses] = useState(comment.responses ?? []);
+	const expanded = responses.length >= totalResponseCount;
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const showResponses = threads !== 'unthreaded';
+	const showResponses = threads !== 'unthreaded' && responses.length > 0;
 
-	/**
-	 * @param responseCount a number > 3
-	 */
-	const decideShowMoreText = (responseCount: number) => {
-		const remainingResponses = responseCount - 3;
+	const decideShowMoreText = () => {
+		const remainingResponses = totalResponseCount - responses.length;
 		return remainingResponses === 1
 			? `Show 1 more reply`
 			: `Show ${remainingResponses} more replies`;
 	};
-
-	useEffect(() => {
-		setResponses(comment.responses ?? []);
-	}, [comment]);
 
 	const expand = (commentId: number) => {
 		setLoading(true);
@@ -135,16 +132,15 @@ export const CommentContainer = ({
 					console.error(result.error);
 					return;
 				}
-				setExpanded(true);
-				setResponses(result.value);
+				expandCommentReplies(commentId, result.value);
 			})
 			.finally(() => {
 				setLoading(false);
 			});
 	};
 
-	const onAddComment = (response: CommentType) =>
-		setResponses([...responses, response]);
+	const onAddComment = (commentId: number, response: CommentType) =>
+		expandCommentReplies(commentId, [...responses, response]);
 
 	return (
 		<div css={[commentToScrollTo === comment.id && selectedStyles]}>
@@ -194,36 +190,30 @@ export const CommentContainer = ({
 								</li>
 							))}
 						</ul>
-						{!expanded &&
-							comment.metaData &&
-							!!comment.metaData.responseCount &&
-							comment.metaData.responseCount > 3 && (
-								<div
-									css={[
-										topBorder,
-										css`
-											padding-top: ${space[3]}px;
-											padding-bottom: ${space[3]}px;
-										`,
-									]}
+						{!expanded && (
+							<div
+								css={[
+									topBorder,
+									css`
+										padding-top: ${space[3]}px;
+										padding-bottom: ${space[3]}px;
+									`,
+								]}
+							>
+								<PillarButton
+									priority="secondary"
+									icon={<SvgPlus />}
+									iconSide="left"
+									linkName="Show more replies"
+									onClick={() => expand(comment.id)}
+									size="xsmall"
 								>
-									<PillarButton
-										priority="secondary"
-										icon={<SvgPlus />}
-										iconSide="left"
-										linkName="Show more replies"
-										onClick={() => expand(comment.id)}
-										size="xsmall"
-									>
-										{loading
-											? 'loading...'
-											: decideShowMoreText(
-													comment.metaData
-														.responseCount,
-											  )}
-									</PillarButton>
-								</div>
-							)}
+									{loading
+										? 'loading...'
+										: decideShowMoreText()}
+								</PillarButton>
+							</div>
+						)}
 					</div>
 				)}
 				{commentBeingRepliedTo &&
@@ -242,7 +232,9 @@ export const CommentContainer = ({
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								onAddComment={onAddComment}
+								onAddComment={(response) =>
+									onAddComment(comment.id, response)
+								}
 								user={user}
 								setCommentBeingRepliedTo={
 									setCommentBeingRepliedTo
