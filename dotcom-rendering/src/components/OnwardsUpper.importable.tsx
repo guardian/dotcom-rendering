@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { joinUrl, Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import { useHydrated } from '../lib/useHydrated';
+import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
@@ -208,7 +209,10 @@ export const OnwardsUpper = ({
 	shortUrlId,
 	discussionApiUrl,
 }: Props) => {
+	const isAndroid = useIsAndroid();
+
 	const hydrated = useHydrated();
+	if (isAndroid) return null;
 	if (!hydrated) return <Placeholder height={600} />;
 
 	// Related content can be a collection of articles based on

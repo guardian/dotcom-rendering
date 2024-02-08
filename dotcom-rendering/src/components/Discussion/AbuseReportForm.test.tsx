@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { reportAbuse } from '../../lib/discussionApi';
 import { mockRESTCalls } from '../../lib/mockRESTCalls';
+import { ok } from '../../lib/result';
 import { AbuseReportForm } from './AbuseReportForm';
 
 const fetchMock = mockRESTCalls();
@@ -12,7 +14,7 @@ describe('Dropdown', () => {
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
 				commentId={123}
-				authStatus={undefined}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>,
 		);
 
@@ -26,7 +28,7 @@ describe('Dropdown', () => {
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
 				commentId={123}
-				authStatus={undefined}
+				reportAbuse={() => Promise.resolve(ok(true))}
 			/>,
 		);
 
@@ -42,7 +44,7 @@ describe('Dropdown', () => {
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
 				commentId={123}
-				authStatus={undefined}
+				reportAbuse={reportAbuse(undefined)}
 			/>,
 		);
 

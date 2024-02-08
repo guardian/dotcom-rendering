@@ -100,6 +100,20 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 			scaling: props.asgCapacity,
 		});
 
+		/**
+		 * The default Node server keep alive timeout is 5 seconds
+		 * @see https://nodejs.org/api/http.html#serverkeepalivetimeout
+		 *
+		 * This ensures that the load balancer idle timeout is less than the Node server keep alive
+		 * timeout so that the Node app does not prematurely close the connection before the load
+		 * balancer can accept the response.
+		 * @see https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#connection-idle-timeout
+		 */
+		appsRenderingApp.loadBalancer.setAttribute(
+			'idle_timeout.timeout_seconds',
+			'4',
+		);
+
 		const asg = appsRenderingApp.autoScalingGroup;
 		asg.scaleOnCpuUtilization('CpuScalingPolicy', {
 			targetUtilizationPercent: scalingTargetCpuUtilisation,

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import type { comment, preview, reply } from '../../lib/discussionApi';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import type {
 	CommentType,
@@ -26,9 +26,6 @@ type Props = {
 	mutes: string[];
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
-	onRecommend?: (commentId: number) => Promise<boolean>;
-	onComment?: ReturnType<typeof comment>;
-	onReply?: ReturnType<typeof reply>;
 	onPreview?: typeof preview;
 	showPreview: boolean;
 	setShowPreview: (showPreview: boolean) => void;
@@ -36,10 +33,15 @@ type Props = {
 	setIsCommentFormActive: (isActive: boolean) => void;
 	error: string;
 	setError: (error: string) => void;
+	pickError: string;
+	setPickError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
+	body: string;
+	setBody: (body: string) => void;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 const nestingStyles = css`
@@ -87,9 +89,6 @@ export const CommentContainer = ({
 	mutes,
 	toggleMuteStatus,
 	onPermalinkClick,
-	onRecommend,
-	onComment,
-	onReply,
 	onPreview,
 	showPreview,
 	setShowPreview,
@@ -97,10 +96,15 @@ export const CommentContainer = ({
 	setIsCommentFormActive,
 	error,
 	setError,
+	pickError,
+	setPickError,
 	userNameMissing,
 	setUserNameMissing,
 	previewBody,
 	setPreviewBody,
+	body,
+	setBody,
+	reportAbuse,
 }: Props) => {
 	// Filter logic
 	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
@@ -153,9 +157,9 @@ export const CommentContainer = ({
 				isMuted={mutes.includes(comment.userProfile.userId)}
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
-				onRecommend={onRecommend}
-				error={error}
-				setError={setError}
+				pickError={pickError}
+				setPickError={setPickError}
+				reportAbuse={reportAbuse}
 			/>
 
 			<>
@@ -183,8 +187,9 @@ export const CommentContainer = ({
 										)}
 										toggleMuteStatus={toggleMuteStatus}
 										onPermalinkClick={onPermalinkClick}
-										error={error}
-										setError={setError}
+										pickError={pickError}
+										setPickError={setPickError}
+										reportAbuse={reportAbuse}
 									/>
 								</li>
 							))}
@@ -254,6 +259,8 @@ export const CommentContainer = ({
 								setUserNameMissing={setUserNameMissing}
 								previewBody={previewBody}
 								setPreviewBody={setPreviewBody}
+								body={body}
+								setBody={setBody}
 							/>
 						</div>
 					)}

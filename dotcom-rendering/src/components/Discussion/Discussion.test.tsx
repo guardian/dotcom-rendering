@@ -5,6 +5,7 @@ import {
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { mockRESTCalls } from '../../lib/mockRESTCalls';
+import { ok } from '../../lib/result';
 import { Discussion } from '../Discussion';
 
 mockRESTCalls();
@@ -20,6 +21,7 @@ describe('App', () => {
 				discussionApiClientHeader="testClientHeader"
 				enableDiscussionSwitch={true}
 				idApiUrl="https://idapi.theguardian.com"
+				reportAbuseUnauthenticated={() => Promise.resolve(ok(true))}
 			/>,
 		);
 

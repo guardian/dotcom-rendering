@@ -9,10 +9,10 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { pickComment, unPickComment } from '../../lib/discussionApi';
+import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import type { CommentType, SignedInUser, Staff } from '../../types/discussion';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -31,9 +31,9 @@ type Props = {
 	isMuted: boolean;
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
-	onRecommend?: (commentId: number) => Promise<boolean>;
-	error: string;
-	setError: (error: string) => void;
+	pickError: string;
+	setPickError: (error: string) => void;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 const commentControlsLink = css`
@@ -302,9 +302,9 @@ export const Comment = ({
 	isMuted,
 	toggleMuteStatus,
 	onPermalinkClick,
-	onRecommend,
-	error,
-	setError,
+	pickError,
+	setPickError,
+	reportAbuse,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
 		comment.isHighlighted,
@@ -313,22 +313,21 @@ export const Comment = ({
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
 
-	const pick = async (staffUser: SignedInUser) => {
-		setError('');
-
-		const response = await pickComment(staffUser.authStatus, comment.id);
+	const pick = async (staffUser: Staff) => {
+		setPickError('');
+		const response = await staffUser.onPick(comment.id);
 		if (response.kind === 'error') {
-			setError(response.error);
+			setPickError(response.error);
 		} else {
 			setIsHighlighted(response.value);
 		}
 	};
 
-	const unPick = async (staffUser: SignedInUser) => {
-		setError('');
-		const response = await unPickComment(staffUser.authStatus, comment.id);
+	const unPick = async (staffUser: Staff) => {
+		setPickError('');
+		const response = await staffUser.onUnpick(comment.id);
 		if (response.kind === 'error') {
-			setError(response.error);
+			setPickError(response.error);
 		} else {
 			setIsHighlighted(response.value);
 		}
@@ -350,13 +349,13 @@ export const Comment = ({
 
 	return (
 		<>
-			{!!error && (
+			{!!pickError && (
 				<span
 					css={css`
 						color: red;
 					`}
 				>
-					{error}
+					{pickError}
 				</span>
 			)}
 			<div
@@ -529,12 +528,10 @@ export const Comment = ({
 								commentId={comment.id}
 								initialCount={comment.numRecommends}
 								alreadyRecommended={false}
-								authStatus={user?.authStatus}
-								onRecommend={onRecommend}
+								user={user}
 								userMadeComment={
-									!!user &&
-									user.profile.userId ===
-										comment.userProfile.userId
+									user?.profile.userId ===
+									comment.userProfile.userId
 								}
 							/>
 						)}
@@ -686,10 +683,8 @@ export const Comment = ({
 										</>
 									)}
 									<Space amount={4} />
-									{/* Only staff can pick, and they cannot pick thier own comment */}
-									{user?.profile.badge.some(
-										(e) => e.name === 'Staff',
-									) &&
+									{/* Only staff can pick, and they cannot pick their own comment */}
+									{user?.kind === 'Staff' &&
 										user.profile.userId !==
 											comment.userProfile.userId && (
 											<div
@@ -788,7 +783,7 @@ export const Comment = ({
 													toggleSetShowForm
 												}
 												commentId={comment.id}
-												authStatus={user?.authStatus}
+												reportAbuse={reportAbuse}
 											/>
 										</div>
 									)}

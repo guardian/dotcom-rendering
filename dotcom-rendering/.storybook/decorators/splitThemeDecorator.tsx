@@ -13,7 +13,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Decorator } from '@storybook/react';
-import { paletteDeclarations } from '../../src/palette';
+import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 
 interface Orientation {
 	orientation?: 'horizontal' | 'vertical';

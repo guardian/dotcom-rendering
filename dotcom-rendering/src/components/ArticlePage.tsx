@@ -149,6 +149,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							)}
 							pageIsSensitive={article.config.isSensitive}
 							isDev={!!article.config.isDev}
+							serverSideTests={article.config.abTests}
 						/>
 					</Island>
 				</>

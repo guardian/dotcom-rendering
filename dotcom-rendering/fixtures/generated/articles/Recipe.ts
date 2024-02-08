@@ -1750,11 +1750,6 @@ export const Recipe: DCRArticle = {
 			],
 			elementId: '52486c38-25c5-47ef-84eb-454a5ca36126',
 			position: 1,
-			lightbox: {
-				caption:
-					'Meera Sodha’s spring onion pancakes with sesame sauce.',
-				credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
-			},
 		},
 	],
 	canonicalUrl:

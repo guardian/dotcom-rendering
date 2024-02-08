@@ -1,9 +1,10 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import { ok } from '../../lib/result';
+import type { CommentType, Reader, Staff } from '../../types/discussion';
 import { Comment } from './Comment';
 
-export default { title: 'Discussion/Comment' };
+type Props = Parameters<typeof Comment>[0];
 
 const commentData: CommentType = {
 	id: 25487686,
@@ -106,10 +107,11 @@ const longBothReplyCommentData: CommentType = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
-const user: SignedInUser = {
+const user: Reader = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -126,10 +128,13 @@ const user: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
-	authStatus: { kind: 'SignedInWithCookies' },
+	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
-const staffUser: SignedInUser = {
+const staffUser: Staff = {
+	kind: 'Staff',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -146,7 +151,11 @@ const staffUser: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
-	authStatus: { kind: 'SignedInWithCookies' },
+	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve(ok(true)),
+	onPick: () => Promise.resolve(commentResponseError),
+	onUnpick: () => Promise.resolve(commentResponseError),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const defaultFormat = {
@@ -155,18 +164,28 @@ const defaultFormat = {
 	theme: Pillar.News,
 };
 
-export const Root = () => (
-	<Comment
-		comment={commentData}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export default {
+	title: 'Discussion/Comment',
+	component: Comment,
+	argTypes: {
+		setCommentBeingRepliedTo: { action: 'setCommentBeingRepliedTo' },
+		toggleMuteStatus: { action: 'toggleMuteStatus' },
+		onPermalinkClick: { action: 'onPermalinkClick' },
+		setPickError: { action: 'setError' },
+		reportAbuse: { action: 'reportAbuse' },
+	},
+	args: {
+		comment: commentData,
+		isClosedForComments: false,
+		isReply: false,
+		isMuted: false,
+		wasScrolledTo: false,
+		pickError: '',
+	},
+};
+
+export const Root = (args: Props) => (
+	<Comment {...args} comment={commentData} />
 );
 Root.storyName = 'A root comment on desktop view';
 Root.story = {
@@ -177,19 +196,7 @@ Root.story = {
 };
 Root.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
-export const RootMobile = () => (
-	<Comment
-		comment={commentData}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isClosedForComments={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
-);
+export const RootMobile = Root.bind({});
 RootMobile.storyName = 'A root comment on mobile view';
 RootMobile.story = {
 	parameters: {
@@ -209,18 +216,8 @@ RootMobile.decorators = [
 	),
 ];
 
-export const ReplyComment = () => (
-	<Comment
-		comment={replyCommentData}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={true}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const ReplyComment = (args: Props) => (
+	<Comment {...args} comment={replyCommentData} isReply={true} />
 );
 ReplyComment.storyName = 'A reply on desktop view';
 ReplyComment.story = {
@@ -241,19 +238,7 @@ ReplyComment.decorators = [
 	),
 ];
 
-export const MobileReply = () => (
-	<Comment
-		comment={replyCommentData}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={true}
-		isClosedForComments={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
-);
+export const MobileReply = ReplyComment.bind({});
 MobileReply.storyName = 'A reply on mobile view';
 MobileReply.story = {
 	parameters: {
@@ -273,19 +258,10 @@ MobileReply.decorators = [
 	),
 ];
 
-export const LongMobileReply = () => (
-	<Comment
-		comment={longReplyCommentData}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={true}
-		isClosedForComments={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const LongMobileReply = (args: Props) => (
+	<Comment {...args} comment={longReplyCommentData} />
 );
+
 LongMobileReply.storyName = 'A long username reply on mobile view';
 LongMobileReply.story = {
 	parameters: {
@@ -305,18 +281,8 @@ LongMobileReply.decorators = [
 	),
 ];
 
-export const LongBothMobileReply = () => (
-	<Comment
-		comment={longBothReplyCommentData}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={true}
-		isClosedForComments={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const LongBothMobileReply = (args: Props) => (
+	<Comment {...args} comment={longBothReplyCommentData} />
 );
 LongBothMobileReply.storyName = 'Both long usernames replying on mobile view';
 LongBothMobileReply.story = {
@@ -337,20 +303,13 @@ LongBothMobileReply.decorators = [
 	),
 ];
 
-export const PickedComment = () => (
+export const PickedComment = (args: Props) => (
 	<Comment
+		{...args}
 		comment={{
 			...commentData,
 			isHighlighted: true,
 		}}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
 	/>
 );
 PickedComment.storyName = 'Picked Comment';
@@ -366,18 +325,8 @@ PickedComment.decorators = [
 	),
 ];
 
-export const StaffUserComment = () => (
-	<Comment
-		comment={commentStaffData}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const StaffUserComment = (args: Props) => (
+	<Comment {...args} comment={commentStaffData} />
 );
 StaffUserComment.storyName = 'Staff User Comment';
 StaffUserComment.decorators = [
@@ -392,18 +341,8 @@ StaffUserComment.decorators = [
 	),
 ];
 
-export const ContributorUserComment = () => (
-	<Comment
-		comment={commentContributorData}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const ContributorUserComment = (args: Props) => (
+	<Comment {...args} comment={commentContributorData} />
 );
 ContributorUserComment.storyName = 'Contributor User Comment';
 ContributorUserComment.decorators = [
@@ -418,20 +357,13 @@ ContributorUserComment.decorators = [
 	),
 ];
 
-export const PickedStaffUserComment = () => (
+export const PickedStaffUserComment = (args: Props) => (
 	<Comment
+		{...args}
 		comment={{
 			...commentStaffData,
 			isHighlighted: true,
 		}}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
 	/>
 );
 PickedStaffUserComment.storyName = 'with staff and picked badges on desktop';
@@ -445,22 +377,7 @@ PickedStaffUserComment.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
 
-export const PickedStaffUserCommentMobile = () => (
-	<Comment
-		comment={{
-			...commentStaffData,
-			isHighlighted: true,
-		}}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
-);
+export const PickedStaffUserCommentMobile = PickedStaffUserComment.bind({});
 PickedStaffUserCommentMobile.storyName =
 	'with staff and picked badges on mobile';
 PickedStaffUserCommentMobile.story = {
@@ -481,20 +398,13 @@ PickedStaffUserCommentMobile.decorators = [
 	),
 ];
 
-export const ContributorUserCommentDesktop = () => (
+export const ContributorUserCommentDesktop = (args: Props) => (
 	<Comment
+		{...args}
 		comment={{
 			...commentContributorData,
 			isHighlighted: true,
 		}}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
 	/>
 );
 ContributorUserCommentDesktop.storyName =
@@ -509,21 +419,8 @@ ContributorUserCommentDesktop.decorators = [
 	splitTheme([defaultFormat], { orientation: 'vertical' }),
 ];
 
-export const ContributorUserCommentMobile = () => (
-	<Comment
-		comment={{
-			...commentContributorData,
-			isHighlighted: true,
-		}}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const ContributorUserCommentMobile = ContributorUserCommentDesktop.bind(
+	{},
 );
 ContributorUserCommentMobile.storyName =
 	'with contributor and picked badges on mobile';
@@ -545,19 +442,8 @@ ContributorUserCommentMobile.decorators = [
 	),
 ];
 
-export const LoggedInAsModerator = () => (
-	<Comment
-		comment={commentData}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		user={staffUser}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const LoggedInAsModerator = (args: Props) => (
+	<Comment {...args} comment={commentData} user={staffUser} />
 );
 LoggedInAsModerator.storyName = 'Logged in as moderator';
 LoggedInAsModerator.decorators = [
@@ -572,19 +458,8 @@ LoggedInAsModerator.decorators = [
 	),
 ];
 
-export const LoggedInAsUser = () => (
-	<Comment
-		comment={commentData}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		user={user}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const LoggedInAsUser = (args: Props) => (
+	<Comment {...args} comment={commentData} user={user} />
 );
 LoggedInAsUser.storyName = 'Logged in as normal user';
 LoggedInAsUser.decorators = [
@@ -599,18 +474,8 @@ LoggedInAsUser.decorators = [
 	),
 ];
 
-export const BlockedComment = () => (
-	<Comment
-		comment={blockedCommentData}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const BlockedComment = (args: Props) => (
+	<Comment {...args} comment={blockedCommentData} />
 );
 BlockedComment.storyName = 'Blocked comment';
 BlockedComment.decorators = [
@@ -625,18 +490,8 @@ BlockedComment.decorators = [
 	),
 ];
 
-export const MutedComment = () => (
-	<Comment
-		comment={blockedCommentData}
-		isClosedForComments={false}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={true}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const MutedComment = (args: Props) => (
+	<Comment {...args} comment={blockedCommentData} isMuted={true} />
 );
 MutedComment.storyName = 'Muted comment';
 MutedComment.decorators = [
@@ -651,18 +506,8 @@ MutedComment.decorators = [
 	),
 ];
 
-export const ClosedForComments = () => (
-	<Comment
-		comment={commentData}
-		isClosedForComments={true}
-		setCommentBeingRepliedTo={() => {}}
-		isReply={false}
-		isMuted={false}
-		toggleMuteStatus={() => {}}
-		onPermalinkClick={() => {}}
-		error={''}
-		setError={() => {}}
-	/>
+export const ClosedForComments = (args: Props) => (
+	<Comment {...args} comment={commentData} isClosedForComments={true} />
 );
 ClosedForComments.storyName = 'A closed comment on desktop view';
 ClosedForComments.story = {

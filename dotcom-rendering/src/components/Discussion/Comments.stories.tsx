@@ -1,21 +1,24 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
-import type { FilterOptions, SignedInUser } from '../../types/discussion';
+import { ok } from '../../lib/result';
+import type { FilterOptions, Reader } from '../../types/discussion';
 import { Comments } from './Comments';
 
 export default { component: Comments, title: 'Discussion/App' };
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
-const aUser: SignedInUser = {
+const aUser: Reader = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -32,7 +35,9 @@ const aUser: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
-	authStatus: { kind: 'SignedInWithCookies' },
+	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const format = {
@@ -45,6 +50,15 @@ const filters: FilterOptions = {
 	threads: 'collapsed',
 	pageSize: 25,
 	orderBy: 'newest',
+};
+
+const defaultCommentForm = {
+	isActive: false,
+	userNameMissing: false,
+	error: '',
+	showPreview: false,
+	previewBody: '',
+	body: '',
 };
 
 export const LoggedOutHiddenPicks = () => (
@@ -69,12 +83,37 @@ export const LoggedOutHiddenPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -110,12 +149,37 @@ export const InitialPage = () => (
 			page={1}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -129,109 +193,225 @@ InitialPage.decorators = [
 	]),
 ];
 
-export const LoggedInHiddenNoPicks = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/abc123"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={false}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
-			loading={false}
-			totalPages={discussionMock.pages}
-			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-		/>
-	</div>
-);
+export const LoggedInHiddenNoPicks = () => {
+	const [isActive, setActive] = useState(false);
+	const [body, setBody] = useState('');
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl="p/abc123"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={false}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
+				loading={false}
+				comments={discussionMock.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={() => {}}
+				setReplyFormActive={setActive}
+				setBottomFormActive={() => {}}
+				setTopFormUserMissing={() => {}}
+				setReplyFormUserMissing={() => {}}
+				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
+				setTopFormShowPreview={() => {}}
+				setReplyFormShowPreview={() => {}}
+				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
+				setTopFormBody={() => {}}
+				setReplyFormBody={setBody}
+				setBottomFormBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
+				topForm={defaultCommentForm}
+				replyForm={{ ...defaultCommentForm, isActive, body }}
+				bottomForm={defaultCommentForm}
+				reportAbuse={() => Promise.resolve(ok(true))}
+			/>
+		</div>
+	);
+};
 LoggedInHiddenNoPicks.storyName =
 	'when logged in, with no picks and not expanded';
 LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
-export const LoggedIn = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl="p/abc123"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
-			loading={false}
-			totalPages={discussionMock.pages}
-			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-		/>
-	</div>
-);
+export const LoggedIn = () => {
+	const [isTopFormActive, setTopFormActive] = useState(false);
+	const [isReplyFormActive, setReplyFormActive] = useState(false);
+	const [isBottomFormActive, setBottomFormActive] = useState(false);
+	const [topFormBody, setTopFormBody] = useState('');
+	const [replyFormBody, setReplyFormBody] = useState('');
+	const [bottomFormBody, setBottomFormBody] = useState('');
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl="p/abc123"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={true}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				topLevelCommentCount={
+					discussionMock.discussion.topLevelCommentCount
+				}
+				loading={false}
+				comments={discussionMock.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={setTopFormActive}
+				setReplyFormActive={setReplyFormActive}
+				setBottomFormActive={setBottomFormActive}
+				setTopFormUserMissing={() => {}}
+				setReplyFormUserMissing={() => {}}
+				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
+				setTopFormShowPreview={() => {}}
+				setReplyFormShowPreview={() => {}}
+				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
+				setTopFormBody={setTopFormBody}
+				setReplyFormBody={setReplyFormBody}
+				setBottomFormBody={setBottomFormBody}
+				topForm={{
+					...defaultCommentForm,
+					isActive: isTopFormActive,
+					body: topFormBody,
+				}}
+				replyForm={{
+					...defaultCommentForm,
+					isActive: isReplyFormActive,
+					body: replyFormBody,
+				}}
+				bottomForm={{
+					...defaultCommentForm,
+					isActive: isBottomFormActive,
+					body: bottomFormBody,
+				}}
+				reportAbuse={() => Promise.resolve(ok(true))}
+			/>
+		</div>
+	);
+};
 LoggedIn.storyName = 'when logged in and expanded';
 LoggedIn.decorators = [lightDecorator([format])];
 
-export const LoggedInShortDiscussion = () => (
-	<div
-		css={css`
-			width: 100%;
-			max-width: 620px;
-		`}
-	>
-		<Comments
-			shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
-			isClosedForComments={false}
-			user={aUser}
-			baseUrl="https://discussion.theguardian.com/discussion-api"
-			additionalHeaders={{
-				'D2-X-UID': 'testD2Header',
-				'GU-Client': 'testClientHeader',
-			}}
-			expanded={true}
-			onPermalinkClick={() => {}}
-			apiKey=""
-			idApiUrl="https://idapi.theguardian.com"
-			page={3}
-			setPage={() => {}}
-			filters={filters}
-			commentCount={discussionWithTwoComments.discussion.commentCount}
-			loading={false}
-			totalPages={discussionWithTwoComments.pages}
-			comments={discussionWithTwoComments.discussion.comments}
-			setComment={() => {}}
-			handleFilterChange={() => {}}
-		/>
-	</div>
-);
+export const LoggedInShortDiscussion = () => {
+	const [isTopFormActive, setTopFormActive] = useState(false);
+	const [isReplyFormActive, setReplyFormActive] = useState(false);
+	const [topFormBody, setTopFormBody] = useState('');
+	const [replyFormBody, setReplyFormBody] = useState('');
+
+	return (
+		<div
+			css={css`
+				width: 100%;
+				max-width: 620px;
+			`}
+		>
+			<Comments
+				shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
+				isClosedForComments={false}
+				user={aUser}
+				baseUrl="https://discussion.theguardian.com/discussion-api"
+				additionalHeaders={{
+					'D2-X-UID': 'testD2Header',
+					'GU-Client': 'testClientHeader',
+				}}
+				expanded={true}
+				onPermalinkClick={() => {}}
+				apiKey=""
+				idApiUrl="https://idapi.theguardian.com"
+				page={3}
+				setPage={() => {}}
+				filters={filters}
+				topLevelCommentCount={
+					discussionWithTwoComments.discussion.topLevelCommentCount
+				}
+				loading={false}
+				comments={discussionWithTwoComments.discussion.comments}
+				setComment={() => {}}
+				handleFilterChange={() => {}}
+				setTopFormActive={setTopFormActive}
+				setReplyFormActive={setReplyFormActive}
+				setBottomFormActive={() => {}}
+				setTopFormUserMissing={() => {}}
+				setReplyFormUserMissing={() => {}}
+				setBottomFormUserMissing={() => {}}
+				setTopFormError={() => {}}
+				setReplyFormError={() => {}}
+				setBottomFormError={() => {}}
+				setTopFormShowPreview={() => {}}
+				setReplyFormShowPreview={() => {}}
+				setBottomFormShowPreview={() => {}}
+				setTopFormPreviewBody={() => {}}
+				setReplyFormPreviewBody={() => {}}
+				setBottomFormPreviewBody={() => {}}
+				setTopFormBody={setTopFormBody}
+				setReplyFormBody={setReplyFormBody}
+				setBottomFormBody={() => {}}
+				pickError=""
+				setPickError={() => {}}
+				topForm={{
+					...defaultCommentForm,
+					isActive: isTopFormActive,
+					body: topFormBody,
+				}}
+				replyForm={{
+					...defaultCommentForm,
+					isActive: isReplyFormActive,
+					body: replyFormBody,
+				}}
+				bottomForm={defaultCommentForm}
+				reportAbuse={() => Promise.resolve(ok(true))}
+			/>
+		</div>
+	);
+};
 LoggedInShortDiscussion.decorators = [splitTheme([format])];
 
 export const LoggedOutHiddenNoPicks = () => (
@@ -256,12 +436,37 @@ export const LoggedOutHiddenNoPicks = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={0}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -299,12 +504,37 @@ export const Closed = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={discussionMock.discussion.commentCount}
+			topLevelCommentCount={
+				discussionMock.discussion.topLevelCommentCount
+			}
 			loading={false}
-			totalPages={discussionMock.pages}
 			comments={discussionMock.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -340,12 +570,35 @@ export const NoComments = () => (
 			page={3}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={0}
+			topLevelCommentCount={0}
 			loading={false}
-			totalPages={0}
 			comments={[]}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );
@@ -378,17 +631,40 @@ export const LegacyDiscussion = () => (
 			onPermalinkClick={() => {}}
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
-			page={3}
+			page={2}
 			setPage={() => {}}
 			filters={filters}
-			commentCount={
+			topLevelCommentCount={
 				legacyDiscussionWithoutThreading.discussion.commentCount
 			}
 			loading={false}
-			totalPages={legacyDiscussionWithoutThreading.pages}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			setComment={() => {}}
 			handleFilterChange={() => {}}
+			setTopFormActive={() => {}}
+			setReplyFormActive={() => {}}
+			setBottomFormActive={() => {}}
+			setTopFormUserMissing={() => {}}
+			setReplyFormUserMissing={() => {}}
+			setBottomFormUserMissing={() => {}}
+			setTopFormError={() => {}}
+			setReplyFormError={() => {}}
+			setBottomFormError={() => {}}
+			setTopFormShowPreview={() => {}}
+			setReplyFormShowPreview={() => {}}
+			setBottomFormShowPreview={() => {}}
+			setTopFormPreviewBody={() => {}}
+			setReplyFormPreviewBody={() => {}}
+			setBottomFormPreviewBody={() => {}}
+			setTopFormBody={() => {}}
+			setReplyFormBody={() => {}}
+			setBottomFormBody={() => {}}
+			pickError=""
+			setPickError={() => {}}
+			topForm={defaultCommentForm}
+			replyForm={defaultCommentForm}
+			bottomForm={defaultCommentForm}
+			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>
 );

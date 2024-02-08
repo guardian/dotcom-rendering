@@ -153,27 +153,31 @@ describe('Island: server-side rendering', () => {
 	test('OnwardsUpper', () => {
 		expect(() =>
 			renderToString(
-				<OnwardsUpper
-					contentType=""
-					tags={[]}
-					isPaidContent={false}
-					pageId=""
-					keywordIds=""
-					ajaxUrl=""
-					hasRelated={true}
-					hasStoryPackage={true}
-					isAdFreeUser={false}
-					showRelatedContent={true}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					pillar={Pillar.News}
-					editionId="UK"
-					shortUrlId=""
-					discussionApiUrl=""
-				/>,
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<OnwardsUpper
+						contentType=""
+						tags={[]}
+						isPaidContent={false}
+						pageId=""
+						keywordIds=""
+						ajaxUrl=""
+						hasRelated={true}
+						hasStoryPackage={true}
+						isAdFreeUser={false}
+						showRelatedContent={true}
+						format={{
+							theme: Pillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
+						}}
+						pillar={Pillar.News}
+						editionId="UK"
+						shortUrlId=""
+						discussionApiUrl=""
+					/>
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});
@@ -326,6 +330,7 @@ describe('Island: server-side rendering', () => {
 						isDev={false}
 						pageIsSensitive={false}
 						abTestSwitches={{}}
+						serverSideTests={{}}
 					/>
 					,
 				</ConfigProvider>,

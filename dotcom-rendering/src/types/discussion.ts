@@ -17,13 +17,17 @@ import {
 	variant,
 } from 'valibot';
 import type {
+	addUserName,
 	comment as onComment,
+	recommend as onRecommend,
 	reply as onReply,
+	pickComment,
+	reportAbuse,
+	unPickComment,
 } from '../lib/discussionApi';
 import type { Guard } from '../lib/guard';
 import { guard } from '../lib/guard';
-import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
-import type { Result } from '../lib/result';
+import { error, ok, type Result } from '../lib/result';
 
 export type CAPIPillar =
 	| 'news'
@@ -128,12 +132,12 @@ export const parseCommentRepliesResponse = (
 ): Result<'ParsingError' | 'ApiError', CommentType[]> => {
 	const result = safeParse(discussionApiCommentSuccessSchema, data);
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (result.output.status === 'error') {
-		return { kind: 'error', error: 'ApiError' };
+		return error('ApiError');
 	}
-	return { kind: 'ok', value: result.output.comment.responses ?? [] };
+	return ok(result.output.comment.responses ?? []);
 };
 
 export interface CommentType {
@@ -189,15 +193,12 @@ const errorCodes = [
 	'READ-ONLY-MODE',
 	'API_CORS_BLOCKED',
 	'API_ERROR',
-	'EMAIL_VERIFIED',
-	'EMAIL_VERIFIED_FAIL',
 	'EMAIL_NOT_VALIDATED',
 ] as const;
 
 const commentErrorSchema = object({
 	status: literal('error'),
 	errorCode: picklist(errorCodes),
-	message: string(),
 });
 
 const commentResponseSchema = variant('status', [
@@ -216,25 +217,17 @@ const commentResponseSchema = variant('status', [
 
 export const parseCommentResponse = (
 	data: unknown,
-): Result<
-	{ code: CommentResponseErrorCodes | 'ParsingError'; message: string },
-	number
-> => {
-	const { success, issues, output } = safeParse(commentResponseSchema, data);
+): Result<'ParsingError' | CommentResponseErrorCodes, number> => {
+	const { success, output } = safeParse(commentResponseSchema, data);
 	if (!success) {
-		console.log(issues, output);
-		return {
-			kind: 'error',
-			error: { code: 'ParsingError', message: 'An error occured' },
-		};
+		return error('ParsingError');
 	}
 
-	return output.status === 'error'
-		? {
-				kind: 'error',
-				error: { code: output.errorCode, message: output.message },
-		  }
-		: { kind: 'ok', value: output.message };
+	if (output.status === 'error') {
+		return error(output.errorCode);
+	}
+
+	return ok(output.message);
 };
 
 const abuseResponseSchema = variant('status', [
@@ -250,11 +243,9 @@ const abuseResponseSchema = variant('status', [
 export const parseAbuseResponse = (data: unknown): Result<string, true> => {
 	const { success, output } = safeParse(abuseResponseSchema, data);
 	if (!success) {
-		return { kind: 'error', error: 'An unknown error occured' };
+		return error('An unknown error occured');
 	}
-	return output.status === 'ok'
-		? { kind: 'ok', value: true }
-		: { kind: 'error', error: output.message };
+	return output.status === 'ok' ? ok(true) : error(output.message);
 };
 
 export const postUsernameResponseSchema = variant('status', [
@@ -289,12 +280,26 @@ export interface FilterOptions {
 	threads: ThreadsType;
 }
 
-export type SignedInUser = {
+type UserFields = {
 	profile: UserProfile;
 	onComment: ReturnType<typeof onComment>;
 	onReply: ReturnType<typeof onReply>;
-	authStatus: SignedInWithCookies | SignedInWithOkta;
+	onRecommend: ReturnType<typeof onRecommend>;
+	addUsername: ReturnType<typeof addUserName>;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
+
+export type Reader = UserFields & {
+	kind: 'Reader';
+};
+
+export type Staff = UserFields & {
+	kind: 'Staff';
+	onPick: ReturnType<typeof pickComment>;
+	onUnpick: ReturnType<typeof unPickComment>;
+};
+
+export type SignedInUser = Reader | Staff;
 
 const discussionApiErrorSchema = object({
 	status: literal('error'),
@@ -375,3 +380,12 @@ export const pickResponseSchema = object({
 	statusCode: literal(200),
 	message: string(),
 });
+
+export type CommentForm = {
+	isActive: boolean;
+	userNameMissing: boolean;
+	error: string;
+	showPreview: boolean;
+	previewBody: string;
+	body: string;
+};

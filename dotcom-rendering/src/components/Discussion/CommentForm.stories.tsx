@@ -1,7 +1,8 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import { ok } from '../../lib/result';
+import type { CommentType, Reader } from '../../types/discussion';
 import { CommentForm } from './CommentForm';
 
 export default { component: CommentForm, title: 'Discussion/CommentForm' };
@@ -16,10 +17,11 @@ const defaultFormat = {
 
 const commentResponseError = {
 	kind: 'error',
-	error: { code: 'NetworkError', message: 'Mocked' },
+	error: 'NetworkError',
 } as const;
 
-const aUser: SignedInUser = {
+const aUser: Reader = {
+	kind: 'Reader',
 	profile: {
 		userId: 'abc123',
 		displayName: 'Jane Smith',
@@ -36,7 +38,9 @@ const aUser: SignedInUser = {
 	},
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
-	authStatus: { kind: 'SignedInWithCookies' },
+	onRecommend: () => Promise.resolve(true),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const aComment: CommentType = {
@@ -70,6 +74,7 @@ const aComment: CommentType = {
 
 export const Default = () => {
 	const [isActive, setIsActive] = useState(false);
+	const [body, setBody] = useState('');
 
 	return (
 		<CommentForm
@@ -86,6 +91,8 @@ export const Default = () => {
 			setError={() => {}}
 			previewBody=""
 			setPreviewBody={() => {}}
+			body={body}
+			setBody={setBody}
 		/>
 	);
 };
@@ -97,6 +104,7 @@ Default.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 export const Error = () => {
 	const [isActive, setIsActive] = useState(false);
 	const [userNameMissing, setUserNameMissing] = useState(false);
+	const [body, setBody] = useState('');
 
 	return (
 		<CommentForm
@@ -113,6 +121,8 @@ export const Error = () => {
 			setError={() => {}}
 			previewBody=""
 			setPreviewBody={() => {}}
+			body={body}
+			setBody={setBody}
 		/>
 	);
 };
@@ -120,24 +130,30 @@ export const Error = () => {
 Error.storyName = 'form with errors';
 Error.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
-export const Active = () => (
-	<CommentForm
-		shortUrl={shortUrl}
-		user={aUser}
-		onAddComment={(comment) => {}}
-		commentBeingRepliedTo={aComment}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isActive={true}
-		setIsActive={() => {}}
-		error={''}
-		setError={() => {}}
-		userNameMissing={false}
-		setUserNameMissing={() => {}}
-		previewBody=""
-		setPreviewBody={() => {}}
-	/>
-);
+export const Active = () => {
+	const [body, setBody] = useState('');
+
+	return (
+		<CommentForm
+			shortUrl={shortUrl}
+			user={aUser}
+			onAddComment={(comment) => {}}
+			commentBeingRepliedTo={aComment}
+			showPreview={false}
+			setShowPreview={() => {}}
+			isActive={true}
+			setIsActive={() => {}}
+			error={''}
+			setError={() => {}}
+			userNameMissing={false}
+			setUserNameMissing={() => {}}
+			previewBody=""
+			setPreviewBody={() => {}}
+			body={body}
+			setBody={setBody}
+		/>
+	);
+};
 Active.storyName = 'form is active';
 Active.decorators = [
 	splitTheme(
@@ -151,34 +167,40 @@ Active.decorators = [
 	),
 ];
 
-export const Premoderated = () => (
-	<CommentForm
-		shortUrl={shortUrl}
-		user={{
-			...aUser,
-			profile: {
-				...aUser.profile,
-				privateFields: {
-					canPostComment: true,
-					isPremoderated: true,
-					hasCommented: true,
+export const Premoderated = () => {
+	const [body, setBody] = useState('');
+
+	return (
+		<CommentForm
+			shortUrl={shortUrl}
+			user={{
+				...aUser,
+				profile: {
+					...aUser.profile,
+					privateFields: {
+						canPostComment: true,
+						isPremoderated: true,
+						hasCommented: true,
+					},
 				},
-			},
-		}}
-		onAddComment={(comment) => {}}
-		commentBeingRepliedTo={aComment}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isActive={true}
-		setIsActive={() => {}}
-		error={''}
-		setError={() => {}}
-		userNameMissing={false}
-		setUserNameMissing={() => {}}
-		previewBody=""
-		setPreviewBody={() => {}}
-	/>
-);
+			}}
+			onAddComment={(comment) => {}}
+			commentBeingRepliedTo={aComment}
+			showPreview={false}
+			setShowPreview={() => {}}
+			isActive={true}
+			setIsActive={() => {}}
+			error={''}
+			setError={() => {}}
+			userNameMissing={false}
+			setUserNameMissing={() => {}}
+			previewBody=""
+			setPreviewBody={() => {}}
+			body={body}
+			setBody={setBody}
+		/>
+	);
+};
 Premoderated.storyName = 'user is premoderated';
 Premoderated.decorators = [
 	splitTheme(
