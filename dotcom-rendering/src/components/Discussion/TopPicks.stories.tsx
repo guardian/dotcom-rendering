@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { CommentType, SignedInUser } from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { CommentType, SignedInUser } from '../../types/discussion';
 import { TopPicks } from './TopPicks';
 
 export default { component: TopPicks, title: 'Discussion/TopPicks' };

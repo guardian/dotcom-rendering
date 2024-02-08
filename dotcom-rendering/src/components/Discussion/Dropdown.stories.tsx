@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { DropdownOptionType } from '../../types/discussion';
+import type { DropdownOptionType } from '../../lib/discussion';
 import { Dropdown } from './Dropdown';
 
 const Container = ({ children }: { children: React.ReactNode }) => (

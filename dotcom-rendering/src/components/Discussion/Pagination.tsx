@@ -10,8 +10,8 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
+import type { FilterOptions } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
-import type { FilterOptions } from '../../types/discussion';
 
 type Props = {
 	currentPage: number;

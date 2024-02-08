@@ -6,7 +6,7 @@ import type {
 	DiscussionOptions,
 	FilterOptions,
 	GetDiscussionSuccess,
-} from '../types/discussion';
+} from './discussion';
 import {
 	discussionApiResponseSchema,
 	parseAbuseResponse,
@@ -14,7 +14,7 @@ import {
 	parseCommentResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
-} from '../types/discussion';
+} from './discussion';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 import { fetchJSON } from './json';

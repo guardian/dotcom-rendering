@@ -1,4 +1,4 @@
-import type { CommentType } from '../../src/types/discussion';
+import type { CommentType } from '../../src/lib/discussion';
 
 export const comment = {
 	id: 138809272,

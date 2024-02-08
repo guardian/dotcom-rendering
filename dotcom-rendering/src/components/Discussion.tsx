@@ -4,18 +4,18 @@ import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
+import type {
+	CommentForm,
+	CommentType,
+	FilterOptions,
+	SignedInUser,
+} from '../lib/discussion';
 import { getDiscussion, type reportAbuse } from '../lib/discussionApi';
 import {
 	getCommentContext,
 	initFiltersFromLocalStorage,
 } from '../lib/getCommentContext';
 import { palette as themePalette } from '../palette';
-import type {
-	CommentForm,
-	CommentType,
-	FilterOptions,
-	SignedInUser,
-} from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';

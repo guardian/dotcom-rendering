@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { CommentType, Reader } from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { CommentType, Reader } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
 export default { title: 'Discussion/CommentContainer' };
