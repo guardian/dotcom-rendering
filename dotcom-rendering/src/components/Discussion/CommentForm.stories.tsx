@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { CommentType, Reader } from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { CommentType, Reader } from '../../types/discussion';
 import { CommentForm } from './CommentForm';
 
 export default { component: CommentForm, title: 'Discussion/CommentForm' };

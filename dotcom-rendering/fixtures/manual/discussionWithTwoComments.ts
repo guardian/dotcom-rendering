@@ -1,4 +1,4 @@
-import type { GetDiscussionSuccess } from '../../src/types/discussion';
+import type { GetDiscussionSuccess } from '../../src/lib/discussion';
 
 export const discussionWithTwoComments = {
 	status: 'ok',

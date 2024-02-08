@@ -6,8 +6,8 @@ import {
 } from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
+import type { CommentType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
-import type { CommentType } from '../../types/discussion';
 import { Row } from './Row';
 
 type Props = {

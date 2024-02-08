@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { CommentType, Reader, Staff } from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { CommentType, Reader, Staff } from '../../types/discussion';
 import { Comment } from './Comment';
 
 type Props = Parameters<typeof Comment>[0];
