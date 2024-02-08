@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
-import { palette as schemedPalette } from '../../palette';
 import type {
 	FilterOptions,
 	OrderByType,
 	PageSizeType,
 	ThreadsType,
 } from '../../lib/discussion';
+import { palette as schemedPalette } from '../../palette';
 import { Dropdown } from './Dropdown';
 
 type Props = {

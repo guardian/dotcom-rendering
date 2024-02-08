@@ -4595,6 +4595,7 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 		case Pillar.Culture:
 			return sourcePalette.culture[400];
 		case Pillar.Opinion:
+			// TODO - check if this is correct since it's the same shade as non-hover
 			return sourcePalette.opinion[400];
 		case Pillar.Lifestyle:
 			return sourcePalette.lifestyle[400];
@@ -5647,7 +5648,7 @@ const paletteColours = {
 		light: discussionPrimaryButtonBackground,
 		dark: discussionPrimaryButtonBackground,
 	},
-	'--discussion-button-hover': {
+	'--discussion-button-background-hover': {
 		light: discussionButtonHover,
 		dark: discussionButtonHover,
 	},

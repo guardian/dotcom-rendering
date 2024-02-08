@@ -27,7 +27,7 @@ const buttonOverrides = (priority: 'primary' | 'secondary' | 'subdued') => {
 
 					:hover {
 						background-color: ${themePalette(
-							'--discussion-button-hover',
+							'--discussion-button-background-hover',
 						)};
 					}
 				}
@@ -44,10 +44,12 @@ const buttonOverrides = (priority: 'primary' | 'secondary' | 'subdued') => {
 
 					:hover {
 						background-color: ${themePalette(
-							'--discussion-button-hover',
+							'--discussion-button-background-hover',
 						)};
 						border: 1px solid
-							${themePalette('--discussion-button-hover')};
+							${themePalette(
+								'--discussion-button-background-hover',
+							)};
 						color: ${themePalette('--discussion-button-text')};
 					}
 				}

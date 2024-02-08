@@ -35,8 +35,8 @@ export type Props = {
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${themePalette('--article-background')},
-		${themePalette('--article-background')} 40%,
+		${themePalette('--article-section-background')},
+		${themePalette('--article-section-background')} 40%,
 		transparent
 	);
 	height: 80px;
@@ -639,10 +639,12 @@ export const Discussion = ({
 						border: 1px solid currentColor;
 						:hover {
 							background-color: ${themePalette(
-								'--discussion-button-hover',
+								'--discussion-button-background-hover',
 							)};
 							border: 1px solid
-								${themePalette('--discussion-button-hover')};
+								${themePalette(
+									'--discussion-button-background-hover',
+								)};
 							color: ${palette.neutral[100]};
 						}
 					`}
