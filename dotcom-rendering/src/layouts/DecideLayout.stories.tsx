@@ -14,7 +14,7 @@ import { Picture as PictureShowcaseOpinionFixture } from '../../fixtures/generat
 import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generated/articles/Recipe';
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/articles/Standard';
 import { embedIframe } from '../client/embedIframe';
-import { decideFormat } from '../lib/decideFormat';
+import { parse as parseFormat } from '../lib/articleFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
@@ -39,7 +39,7 @@ const HydratedLayout: Decorator<
 	DecideLayoutProps & HydratedLayoutDecoratorArgs
 > = (Story, context) => {
 	const { article } = context.args;
-	const format: ArticleFormat = decideFormat(article.format);
+	const format: ArticleFormat = parseFormat(article);
 	const colourScheme =
 		(isObject(context.parameters.config) &&
 		context.parameters.config.renderingTarget === 'Apps'

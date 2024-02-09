@@ -3,6 +3,7 @@ import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
 import { LiveBlogRenderer } from '../components/LiveBlogRenderer';
+import { parse as parseFormat } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -46,7 +47,7 @@ export const renderHtml = ({
 	const title = decideTitle(article);
 	const linkedData = article.linkedData;
 
-	const format: ArticleFormat = decideFormat(article.format);
+	const format: ArticleFormat = parseFormat(article);
 
 	const renderingTarget = 'Web';
 	const config: Config = { renderingTarget, darkModeAvailable: false };

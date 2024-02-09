@@ -4,7 +4,7 @@ import { breakpoints, from } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { browserThemeDecorator } from '../../.storybook/decorators/themeDecorator';
-import { getAllThemes } from '../lib/format';
+import { getAllThemes } from '../lib/articleFormat';
 import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import { ArticleMeta } from './ArticleMeta';

@@ -8,7 +8,7 @@ import {
 import { palette } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { getAllThemes } from '../lib/format';
+import { getAllThemes } from '../lib/articleFormat';
 import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
 import { mainMediaElements } from './ArticleHeadline.mocks';

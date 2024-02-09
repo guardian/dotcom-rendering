@@ -1,12 +1,12 @@
 import { ArticleDesign, isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
+import { parse as parseFormat } from '../lib/articleFormat';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getPathFromManifest,
 } from '../lib/assets';
-import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
@@ -20,7 +20,7 @@ export const renderArticle = (
 	prefetchScripts: string[];
 	html: string;
 } => {
-	const format: ArticleFormat = decideFormat(article.format);
+	const format: ArticleFormat = parseFormat(article);
 
 	const renderingTarget = 'Apps';
 	const config: Config = {

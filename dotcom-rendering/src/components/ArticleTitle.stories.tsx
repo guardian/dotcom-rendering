@@ -7,7 +7,7 @@ import {
 } from '@guardian/libs';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { getThemeNameAsString } from '../lib/format';
+import { getThemeNameAsString } from '../lib/articleFormat';
 import { ArticleTitle } from './ArticleTitle';
 
 interface StoryArgs extends StoryProps {

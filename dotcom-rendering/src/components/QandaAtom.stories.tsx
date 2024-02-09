@@ -6,7 +6,7 @@ import {
 	imageStoryWithCreditExpanded,
 	listStoryExpanded,
 } from '../../fixtures/manual/qandaAtom';
-import { getAllThemes } from '../lib/format';
+import { getAllThemes } from '../lib/articleFormat';
 import { QandaAtom as QandaAtomComponent } from './QandaAtom.importable';
 
 const meta: Meta<typeof QandaAtomComponent> = {

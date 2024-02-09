@@ -3,7 +3,7 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { getAllThemes } from '../lib/format';
+import { getAllThemes } from '../lib/articleFormat';
 import type { Branding as BrandingType } from '../types/branding';
 import { ArticleMetaApps } from './ArticleMeta.apps';
 
