@@ -77,10 +77,6 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				showPreview={false}
-				setShowPreview={() => {}}
-				isCommentFormActive={true}
-				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
 				pickError={''}
@@ -89,8 +85,6 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
-				body={newCommentText}
-				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
 					if (commentBeingRepliedTo?.id !== id) return;
@@ -128,10 +122,6 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				showPreview={false}
-				setShowPreview={() => {}}
-				isCommentFormActive={true}
-				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
 				pickError={''}
@@ -140,8 +130,6 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
-				body={''}
-				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={() => {}}
 			/>,
@@ -185,10 +173,6 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				showPreview={false}
-				setShowPreview={() => {}}
-				isCommentFormActive={true}
-				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
 				pickError={''}
@@ -197,8 +181,6 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
-				body={newCommentText}
-				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
 					if (commentBeingRepliedTo?.id !== id) return;
@@ -236,10 +218,6 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				showPreview={false}
-				setShowPreview={() => {}}
-				isCommentFormActive={true}
-				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
 				pickError={''}
@@ -248,8 +226,6 @@ describe('CommentContainer', () => {
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
-				body={''}
-				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={() => {}}
 			/>,

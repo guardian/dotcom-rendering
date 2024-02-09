@@ -381,13 +381,10 @@ export const pickResponseSchema = object({
 	message: string(),
 });
 
-export type CommentForm = {
-	isActive: boolean;
+export type CommentFormProps = {
 	userNameMissing: boolean;
 	error: string;
-	showPreview: boolean;
 	previewBody: string;
-	body: string;
 };
 
 export const getCommentContextResponseSchema = object({
@@ -401,3 +398,30 @@ export const getCommentContextResponseSchema = object({
 	pageSize: picklist(pageSize),
 	page: number(),
 });
+
+/** for development purposes only! */
+export const stubUser = {
+	kind: 'Reader',
+	addUsername: () => Promise.resolve(error('This is a stub user')),
+	onComment: () =>
+		Promise.resolve(
+			ok(Number.MAX_SAFE_INTEGER - Math.ceil(Math.random() * 12_000)),
+		),
+	onRecommend: () => Promise.resolve(true),
+	onReply: () => Promise.resolve(error('API_ERROR')),
+	reportAbuse: () => Promise.resolve(error('Invalid')),
+	profile: {
+		userId: 'stub-user-000',
+		displayName: 'Stub User',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
+	},
+} satisfies Reader;

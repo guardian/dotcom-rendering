@@ -5,7 +5,7 @@ import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type {
-	CommentForm,
+	CommentFormProps,
 	CommentType,
 	FilterOptions,
 	SignedInUser,
@@ -145,9 +145,9 @@ type State = {
 	hashCommentId: number | undefined;
 	pickError: string;
 	loading: boolean;
-	topForm: CommentForm;
-	replyForm: CommentForm;
-	bottomForm: CommentForm;
+	topForm: CommentFormProps;
+	replyForm: CommentFormProps;
+	bottomForm: CommentFormProps;
 };
 
 const initialCommentFormState = {
@@ -195,24 +195,15 @@ type Action =
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
 	| { type: 'setPickError'; error: string }
-	| { type: 'setTopFormActive'; isActive: boolean }
-	| { type: 'setReplyFormActive'; isActive: boolean }
-	| { type: 'setBottomFormActive'; isActive: boolean }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setTopFormError'; error: string }
 	| { type: 'setReplyFormError'; error: string }
 	| { type: 'setBottomFormError'; error: string }
-	| { type: 'setTopFormShowPreview'; showPreview: boolean }
-	| { type: 'setReplyFormShowPreview'; showPreview: boolean }
-	| { type: 'setBottomFormShowPreview'; showPreview: boolean }
 	| { type: 'setTopFormPreviewBody'; previewBody: string }
 	| { type: 'setReplyFormPreviewBody'; previewBody: string }
-	| { type: 'setBottomFormPreviewBody'; previewBody: string }
-	| { type: 'setTopFormBody'; body: string }
-	| { type: 'setReplyFormBody'; body: string }
-	| { type: 'setBottomFormBody'; body: string };
+	| { type: 'setBottomFormPreviewBody'; previewBody: string };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -269,24 +260,6 @@ const reducer = (state: State, action: Action): State => {
 				pickError: action.error,
 			};
 		}
-		case 'setTopFormActive': {
-			return {
-				...state,
-				topForm: { ...state.topForm, isActive: action.isActive },
-			};
-		}
-		case 'setReplyFormActive': {
-			return {
-				...state,
-				replyForm: { ...state.replyForm, isActive: action.isActive },
-			};
-		}
-		case 'setBottomFormActive': {
-			return {
-				...state,
-				bottomForm: { ...state.bottomForm, isActive: action.isActive },
-			};
-		}
 		case 'setTopFormUserMissing': {
 			return {
 				...state,
@@ -314,33 +287,6 @@ const reducer = (state: State, action: Action): State => {
 				},
 			};
 		}
-		case 'setTopFormShowPreview': {
-			return {
-				...state,
-				topForm: {
-					...state.topForm,
-					showPreview: action.showPreview,
-				},
-			};
-		}
-		case 'setReplyFormShowPreview': {
-			return {
-				...state,
-				replyForm: {
-					...state.replyForm,
-					showPreview: action.showPreview,
-				},
-			};
-		}
-		case 'setBottomFormShowPreview': {
-			return {
-				...state,
-				bottomForm: {
-					...state.bottomForm,
-					showPreview: action.showPreview,
-				},
-			};
-		}
 		case 'setTopFormPreviewBody': {
 			return {
 				...state,
@@ -365,33 +311,6 @@ const reducer = (state: State, action: Action): State => {
 				bottomForm: {
 					...state.bottomForm,
 					previewBody: action.previewBody,
-				},
-			};
-		}
-		case 'setTopFormBody': {
-			return {
-				...state,
-				topForm: {
-					...state.topForm,
-					body: action.body,
-				},
-			};
-		}
-		case 'setReplyFormBody': {
-			return {
-				...state,
-				replyForm: {
-					...state.replyForm,
-					body: action.body,
-				},
-			};
-		}
-		case 'setBottomFormBody': {
-			return {
-				...state,
-				bottomForm: {
-					...state.bottomForm,
-					body: action.body,
 				},
 			};
 		}
@@ -632,15 +551,6 @@ export const Discussion = ({
 							commentPage: page,
 						});
 					}}
-					setTopFormActive={(isActive) =>
-						dispatch({ type: 'setTopFormActive', isActive })
-					}
-					setReplyFormActive={(isActive) =>
-						dispatch({ type: 'setReplyFormActive', isActive })
-					}
-					setBottomFormActive={(isActive) =>
-						dispatch({ type: 'setBottomFormActive', isActive })
-					}
 					setTopFormUserMissing={(userNameMissing) =>
 						dispatch({
 							type: 'setTopFormUserMissing',
@@ -677,24 +587,6 @@ export const Discussion = ({
 							error,
 						})
 					}
-					setTopFormShowPreview={(showPreview) =>
-						dispatch({
-							type: 'setTopFormShowPreview',
-							showPreview,
-						})
-					}
-					setReplyFormShowPreview={(showPreview) =>
-						dispatch({
-							type: 'setReplyFormShowPreview',
-							showPreview,
-						})
-					}
-					setBottomFormShowPreview={(showPreview) =>
-						dispatch({
-							type: 'setBottomFormShowPreview',
-							showPreview,
-						})
-					}
 					setTopFormPreviewBody={(previewBody) =>
 						dispatch({
 							type: 'setTopFormPreviewBody',
@@ -711,24 +603,6 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormPreviewBody',
 							previewBody,
-						})
-					}
-					setTopFormBody={(body) =>
-						dispatch({
-							type: 'setTopFormBody',
-							body,
-						})
-					}
-					setReplyFormBody={(body) =>
-						dispatch({
-							type: 'setReplyFormBody',
-							body,
-						})
-					}
-					setBottomFormBody={(body) =>
-						dispatch({
-							type: 'setBottomFormBody',
-							body,
 						})
 					}
 					expandCommentReplies={(commentId, responses) =>
