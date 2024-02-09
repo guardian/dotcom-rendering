@@ -3,7 +3,11 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { palette as themePalette } from '../palette';
-import { NativeShareButton, ShareButton } from './ShareButton.importable';
+import {
+	CopyLinkButton,
+	NativeShareButton,
+	ShareButton,
+} from './ShareButton.importable';
 
 export default {
 	component: ShareButton,
@@ -29,6 +33,12 @@ export const CopyLink = () => {
 };
 CopyLink.storyName = 'CopyLink';
 CopyLink.decorators = [splitTheme()];
+
+export const LinkCopied = () => {
+	return <CopyLinkButton onShare={async () => {}} isCopied={true} />;
+};
+LinkCopied.storyName = 'LinkCopied';
+LinkCopied.decorators = [splitTheme()];
 
 export const NativeShare = () => {
 	return (

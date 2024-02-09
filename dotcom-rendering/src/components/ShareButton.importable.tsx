@@ -49,6 +49,7 @@ const copiedButtonStyles = css`
 	color: ${palette.neutral[7]};
 	svg {
 		fill: ${palette.success[400]};
+		margin-right: 2px;
 	}
 `;
 
@@ -59,7 +60,7 @@ const nativeShare = (blockId: string | undefined) => css`
 	border-color: ${palette.neutral[86]};
 	max-width: 105px;
 	svg {
-		margin-left: 0;
+		margin-right: 6px;
 		width: 18.33px;
 		height: 18.33px;
 	}
@@ -128,13 +129,15 @@ export const NativeShareButton = ({
 		priority="tertiary"
 		iconSide="left"
 		icon={<SvgShare />}
-		css={isLiveBlog ? liveBlogNative(blockId) : nativeShare(blockId)}
+		cssOverrides={
+			isLiveBlog ? liveBlogNative(blockId) : nativeShare(blockId)
+		}
 	>
 		Share
 	</Button>
 );
 
-const CopyLinkButton = ({
+export const CopyLinkButton = ({
 	onShare,
 	size,
 	isCopied,
@@ -152,7 +155,7 @@ const CopyLinkButton = ({
 		priority="tertiary"
 		iconSide="left"
 		icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
-		css={
+		cssOverrides={
 			isCopied
 				? [copiedButtonStyles, sharedButtonStyles(blockId)]
 				: [buttonStyles, sharedButtonStyles(blockId)]
