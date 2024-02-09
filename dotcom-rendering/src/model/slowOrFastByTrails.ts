@@ -2,14 +2,14 @@ import type { FEFrontCard } from '../types/front';
 
 /**
  * An 'arbitrary list of slow tags' once defined in Frontend.
- * If you have enough of one of these tags on a Tag front then your tag front is considered 'slow'
+ * If you have enough of one of these tags on a Tag page then your tag page is considered 'slow'
  *
  * The reasoning behind why it's these tags remains unclear, so I've written a small song
  * to help you come to terms this
  *
  * 🎶🎵🎶🎵🎶
  * And you may find yourself working on DCR
- * And you may find yourself looking at the tag front code
+ * And you may find yourself looking at the tag page code
  * And you may ask yourself "What is the reason these tags are slow?"
  * And you may tell yourself "The reasoning must be documented somewhere"
  * And you may say to yourself "My god, why are there so many arbitrary rules?"

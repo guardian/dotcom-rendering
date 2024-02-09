@@ -4,7 +4,7 @@ import type { FooterType } from './footer';
 import type { DCRFrontCard, FEFrontCard, FEFrontConfigType } from './front';
 import type { FETagType } from './tag';
 
-export interface FETagFrontType {
+export interface FETagPageType {
 	contents: FEFrontCard[];
 	nav: FENavType;
 	tags: {
@@ -49,7 +49,7 @@ export interface GroupedTrailsSlowMpu extends GroupedTrailsBase {
 	trails: Tuple<DCRFrontCard, 2 | 4 | 5 | 7>;
 }
 
-export interface DCRTagFrontType {
+export interface DCRTagPageType {
 	groupedTrails: Array<
 		GroupedTrails | GroupedTrailsFastMpu | GroupedTrailsSlowMpu
 	>;

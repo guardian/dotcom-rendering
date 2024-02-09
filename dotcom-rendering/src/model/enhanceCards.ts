@@ -160,14 +160,14 @@ const decideImage = (trail: FEFrontCard) => {
 
 const decideKicker = (
 	trail: FEFrontCard,
-	cardInTagFront: boolean,
+	cardInTagPage: boolean,
 	pageId?: string,
 ) => {
 	if (trail.properties.isBreaking) {
 		return 'Breaking news';
 	}
 
-	if (cardInTagFront) {
+	if (cardInTagPage) {
 		return pageId && !pageId.includes('/series')
 			? trail.header.seriesOrBlogKicker?.name
 			: undefined;
@@ -280,14 +280,14 @@ const decideMedia = (
 export const enhanceCards = (
 	collections: FEFrontCard[],
 	{
-		cardInTagFront,
+		cardInTagPage,
 		offset = 0,
 		editionId,
 		containerPalette,
 		pageId,
 		discussionApiUrl,
 	}: {
-		cardInTagFront: boolean;
+		cardInTagPage: boolean;
 		offset?: number;
 		editionId?: EditionId;
 		containerPalette?: DCRContainerPalette;
@@ -338,7 +338,7 @@ export const enhanceCards = (
 							faciaCard.card.webPublicationDateOption,
 					  ).toISOString()
 					: undefined,
-			kickerText: decideKicker(faciaCard, cardInTagFront, pageId),
+			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,

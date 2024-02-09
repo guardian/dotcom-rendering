@@ -106,13 +106,13 @@ export const enhanceCollections = ({
 				containerPalette,
 			),
 			curated: enhanceCards(collection.curated, {
-				cardInTagFront: false,
+				cardInTagPage: false,
 				editionId,
 				containerPalette,
 				discussionApiUrl,
 			}),
 			backfill: enhanceCards(collection.backfill, {
-				cardInTagFront: false,
+				cardInTagPage: false,
 				editionId,
 				containerPalette,
 				discussionApiUrl,

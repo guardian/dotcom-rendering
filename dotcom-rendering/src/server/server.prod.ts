@@ -22,8 +22,8 @@ import {
 import {
 	handleFront,
 	handleFrontJson,
-	handleTagFront,
-	handleTagFrontJson,
+	handleTagPage,
+	handleTagPageJson,
 } from './handler.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -68,8 +68,17 @@ export const prodServer = (): void => {
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
-	app.post('/TagFront', logRenderTime, handleTagFront);
-	app.post('/TagFrontJSON', logRenderTime, handleTagFrontJson);
+	app.post('/TagPage', logRenderTime, handleTagPage);
+	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
+	/** Temporary duplicate while we redirect frontend requests
+	 * to the /TagPage endpoint
+	 *
+	 * @todo 09/02/2024 - remove these
+	 */
+	app.post('/TagFront', logRenderTime, handleTagPage);
+	app.post('/TagFrontJSON', logRenderTime, handleTagPageJson);
+	/** End of duplicated section */
+
 	app.post(
 		'/EmailNewsletters',
 		logRenderTime,
@@ -108,17 +117,36 @@ export const prodServer = (): void => {
 	);
 
 	app.get(
+		'/TagPage/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleTagPage,
+	);
+	app.get(
+		'/TagPageJSON/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleTagPageJson,
+	);
+
+	/** Temporary duplicate while we redirect frontend requests
+	 * to the /TagPage endpoint
+	 *
+	 * @todo 09/02/2024 - remove these
+	 */
+	app.get(
 		'/TagFront/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleTagFront,
+		handleTagPage,
 	);
 	app.get(
 		'/TagFrontJSON/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleTagFrontJson,
+		handleTagPageJson,
 	);
+	/** End of duplicated section */
 
 	app.get(
 		'/EmailNewsletters',
