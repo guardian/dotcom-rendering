@@ -389,3 +389,15 @@ export type CommentForm = {
 	previewBody: string;
 	body: string;
 };
+
+export const getCommentContextResponseSchema = object({
+	status: literal('ok'),
+	commentId: number(),
+	commentAncestorId: number(),
+	discussionKey: string(),
+	discussionWebUrl: string(),
+	discussionApiUrl: string(),
+	orderBy: picklist(orderBy),
+	pageSize: picklist(pageSize),
+	page: number(),
+});

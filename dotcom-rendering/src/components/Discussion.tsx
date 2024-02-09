@@ -10,11 +10,12 @@ import type {
 	FilterOptions,
 	SignedInUser,
 } from '../lib/discussion';
-import { getDiscussion, type reportAbuse } from '../lib/discussionApi';
 import {
 	getCommentContext,
-	initFiltersFromLocalStorage,
-} from '../lib/getCommentContext';
+	getDiscussion,
+	type reportAbuse,
+} from '../lib/discussionApi';
+import { initFiltersFromLocalStorage } from '../lib/discussionFilters';
 import { palette as themePalette } from '../palette';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
@@ -536,10 +537,16 @@ export const Discussion = ({
 				remapToValidFilters(filters, hashCommentId),
 			)
 				.then((context) => {
-					dispatch({
-						type: 'updateCommentPage',
-						commentPage: context.page,
-					});
+					if (context.kind === 'ok') {
+						dispatch({
+							type: 'updateCommentPage',
+							commentPage: context.value.page,
+						});
+					} else {
+						console.error(
+							`getCommentContext - error: ${context.error}`,
+						);
+					}
 				})
 				.catch((e) =>
 					console.error(`getCommentContext - error: ${String(e)}`),

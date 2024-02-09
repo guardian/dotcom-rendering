@@ -897,8 +897,8 @@ importers:
         specifier: 10.1.2
         version: 10.1.2
       valibot:
-        specifier: 0.26.0
-        version: 0.26.0
+        specifier: 0.28.1
+        version: 0.28.1
       web-vitals:
         specifier: 3.5.1
         version: 3.5.1
@@ -19955,8 +19955,8 @@ packages:
       convert-source-map: 2.0.0
     dev: false
 
-  /valibot@0.26.0:
-    resolution: {integrity: sha512-cM8VM9jsJGx9P4qarZUBXd0I88OVI4ddtyZ1sAMiofC3Usj7Jxm2c8Xx5accdTrKc3CblO8yyytRaJ6lrsuA+Q==}
+  /valibot@0.28.1:
+    resolution: {integrity: sha512-zQnjwNJuXk6362Leu0+4eFa/SMwRom3/hEvH6s1EGf3oXIPbo2WFKDra9ymnbVh3clLRvd8hw4sKF5ruI2Lyvw==}
     dev: false
 
   /validate-npm-package-license@3.0.4:

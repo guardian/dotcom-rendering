@@ -9,12 +9,14 @@ import type {
 } from './discussion';
 import {
 	discussionApiResponseSchema,
+	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentRepliesResponse,
 	parseCommentResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
 } from './discussion';
+import type { CommentContextType } from './discussionFilters';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 import { fetchJSON } from './json';
@@ -435,4 +437,40 @@ export const getMoreResponses = async (
 	if (jsonResult.kind === 'error') return jsonResult;
 
 	return parseCommentRepliesResponse(jsonResult.value);
+};
+
+const buildParams = (filters: FilterOptions): URLSearchParams => {
+	return new URLSearchParams({
+		// Frontend uses the 'recommendations' key to store this options but the api expects
+		// 'mostRecommended' so we have to map here to support both
+		orderBy:
+			filters.orderBy === 'recommendations'
+				? 'mostRecommended'
+				: filters.orderBy,
+		pageSize: String(filters.pageSize),
+		displayThreaded: String(
+			filters.threads === 'collapsed' || filters.threads === 'expanded',
+		),
+	});
+};
+
+export const getCommentContext = async (
+	ajaxUrl: string,
+	commentId: number,
+	filters: FilterOptions,
+): Promise<Result<GetDiscussionError, CommentContextType>> => {
+	const url = joinUrl(ajaxUrl, 'comment', commentId.toString(), 'context');
+	const params = buildParams(filters);
+
+	const jsonResult = await fetchJSON(url + '?' + params.toString());
+
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	const result = safeParse(getCommentContextResponseSchema, jsonResult.value);
+
+	if (!result.success) {
+		return error('ParsingError');
+	}
+
+	return ok(result.output);
 };
