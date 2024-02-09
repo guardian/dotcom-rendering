@@ -471,9 +471,6 @@ export const getCommentContext = async (
 	if (!result.success) {
 		return error('ParsingError');
 	}
-	if (result.output.status !== 'ok') {
-		return error('ApiError');
-	}
 
 	return ok(result.output);
 };
