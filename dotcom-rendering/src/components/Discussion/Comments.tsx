@@ -6,15 +6,15 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { preview, reportAbuse } from '../../lib/discussionApi';
-import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
 	CommentType,
 	FilterOptions,
 	CommentForm as Form,
 	SignedInUser,
-} from '../../types/discussion';
+} from '../../lib/discussion';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
+import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -67,6 +67,7 @@ type Props = {
 	replyForm: Form;
 	bottomForm: Form;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
 };
 
 /**
@@ -178,6 +179,7 @@ export const Comments = ({
 	replyForm,
 	bottomForm,
 	reportAbuse,
+	expandCommentReplies,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -364,6 +366,9 @@ export const Comments = ({
 											body={replyForm.body}
 											setBody={setReplyFormBody}
 											reportAbuse={reportAbuse}
+											expandCommentReplies={
+												expandCommentReplies
+											}
 										/>
 									</li>
 								))}
@@ -458,6 +463,7 @@ export const Comments = ({
 									body={replyForm.body}
 									setBody={setReplyFormBody}
 									reportAbuse={reportAbuse}
+									expandCommentReplies={expandCommentReplies}
 								/>
 							</li>
 						))}

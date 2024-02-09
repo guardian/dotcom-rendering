@@ -6,8 +6,8 @@ import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
+import type { FilterOptions, Reader } from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { FilterOptions, Reader } from '../../types/discussion';
 import { Comments } from './Comments';
 
 export default { component: Comments, title: 'Discussion/App' };
@@ -114,6 +114,7 @@ export const LoggedOutHiddenPicks = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -180,6 +181,7 @@ export const InitialPage = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -251,6 +253,7 @@ export const LoggedInHiddenNoPicks = () => {
 				replyForm={{ ...defaultCommentForm, isActive, body }}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -333,6 +336,7 @@ export const LoggedIn = () => {
 					body: bottomFormBody,
 				}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -408,6 +412,7 @@ export const LoggedInShortDiscussion = () => {
 				}}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -467,6 +472,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -535,6 +541,7 @@ export const Closed = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -599,6 +606,7 @@ export const NoComments = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -665,6 +673,7 @@ export const LegacyDiscussion = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );

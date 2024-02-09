@@ -4,6 +4,12 @@ import { palette, space } from '@guardian/source-foundations';
 import { Button, SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
+import type {
+	CommentForm,
+	CommentType,
+	FilterOptions,
+	SignedInUser,
+} from '../lib/discussion';
 import {
 	getCommentContext,
 	getDiscussion,
@@ -11,12 +17,6 @@ import {
 } from '../lib/discussionApi';
 import { initFiltersFromLocalStorage } from '../lib/discussionFilters';
 import { palette as themePalette } from '../palette';
-import type {
-	CommentForm,
-	CommentType,
-	FilterOptions,
-	SignedInUser,
-} from '../types/discussion';
 import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
@@ -92,6 +92,48 @@ const remapToValidFilters = (
 	} satisfies FilterOptions;
 };
 
+/**
+ * Finds the matching comment for which to expand the replies,
+ * and replaces its responses with a new list.
+
+ * @example
+ * ```txt
+ * Comment ID: 1234
+ *
+ * Before
+ * ━━ 1233
+ * ━┳ 1234
+ *  ┣━ 0001
+ *  ┣━ 0002
+ *  ┡━ 0003
+ *  ┆  (show 4 more replies)
+ * ━━ 1235
+ *
+ * After
+ * ━━ 1233
+ * ━┳ 1234
+ *  ┣━ 0001
+ *  ┣━ 0002
+ *  ┣━ 0003
+ *  ┣━ 0004
+ *  ┣━ 0005
+ *  ┣━ 0006
+ *  ┗━ 0007
+ * ━━ 1235
+ * ```
+ */
+export const replaceMatchingCommentResponses =
+	(action: Action & { type: 'expandCommentReplies' }) =>
+	(comment: CommentType): CommentType => {
+		const responses =
+			comment.id === action.commentId
+				? action.responses
+				: comment.responses?.map(
+						replaceMatchingCommentResponses(action),
+				  );
+		return { ...comment, responses };
+	};
+
 type State = {
 	comments: CommentType[];
 	isClosedForComments: boolean;
@@ -142,6 +184,11 @@ type Action =
 			topLevelCommentCount: number;
 	  }
 	| { type: 'expandComments' }
+	| {
+			type: 'expandCommentReplies';
+			commentId: number;
+			responses: CommentType[];
+	  }
 	| { type: 'addComment'; comment: CommentType }
 	| { type: 'updateCommentPage'; commentPage: number }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
@@ -375,6 +422,15 @@ const reducer = (state: State, action: Action): State => {
 				},
 			};
 		}
+		case 'expandCommentReplies': {
+			return {
+				...state,
+				isExpanded: true,
+				comments: state.comments.map(
+					replaceMatchingCommentResponses(action),
+				),
+			};
+		}
 
 		default:
 			assertUnreachable(action);
@@ -505,7 +561,6 @@ export const Discussion = ({
 	}, []);
 
 	useEffect(() => {
-		console.log({ commentCount });
 		// There's no point showing the view more button if there isn't much more to view
 		if (commentCount === 0 || commentCount === 1 || commentCount === 2) {
 			dispatch({ type: 'expandComments' });
@@ -674,6 +729,13 @@ export const Discussion = ({
 						dispatch({
 							type: 'setBottomFormBody',
 							body,
+						})
+					}
+					expandCommentReplies={(commentId, responses) =>
+						dispatch({
+							type: 'expandCommentReplies',
+							commentId,
+							responses,
 						})
 					}
 					topForm={topForm}

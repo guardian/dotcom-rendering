@@ -24,10 +24,10 @@ import type {
 	pickComment,
 	reportAbuse,
 	unPickComment,
-} from '../lib/discussionApi';
-import type { Guard } from '../lib/guard';
-import { guard } from '../lib/guard';
-import { error, ok, type Result } from '../lib/result';
+} from './discussionApi';
+import type { Guard } from './guard';
+import { guard } from './guard';
+import { error, ok, type Result } from './result';
 
 export type CAPIPillar =
 	| 'news'

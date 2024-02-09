@@ -6,7 +6,7 @@ import type {
 	DiscussionOptions,
 	FilterOptions,
 	GetDiscussionSuccess,
-} from '../types/discussion';
+} from './discussion';
 import {
 	discussionApiResponseSchema,
 	getCommentContextResponseSchema,
@@ -15,7 +15,7 @@ import {
 	parseCommentResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
-} from '../types/discussion';
+} from './discussion';
 import type { CommentContextType } from './discussionFilters';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';

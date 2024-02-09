@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
+import type { CommentType, SignedInUser } from '../../lib/discussion';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
 import { error, ok } from '../../lib/result';
-import type { CommentType, SignedInUser } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
 mockRESTCalls();
@@ -13,7 +13,7 @@ const firstCommentResponse = comment.responses[0];
 const commentWithReply = {
 	...comment,
 	responses: [firstCommentResponse],
-} satisfies CommentType;
+};
 
 const commentWithoutReply = {
 	...comment,
@@ -22,7 +22,9 @@ const commentWithoutReply = {
 
 const commentResponseError = error<'NetworkError', number>('NetworkError');
 
-const commentResponseSuccess = ok<'NetworkError', number>(123456);
+const commentResponseSuccess = ok<'NetworkError', number>(
+	Number(mockedMessageID),
+);
 
 const aUser: SignedInUser = {
 	kind: 'Reader',
@@ -90,6 +92,10 @@ describe('CommentContainer', () => {
 				body={newCommentText}
 				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={(id, responses) => {
+					if (commentBeingRepliedTo?.id !== id) return;
+					commentBeingRepliedTo.responses = responses;
+				}}
 			/>,
 		);
 
@@ -108,11 +114,6 @@ describe('CommentContainer', () => {
 		await waitFor(() =>
 			expect(mockSetCommentBeingRepliedTo).toHaveBeenCalledTimes(1),
 		);
-
-		// make sure the new comment appeats
-		await waitFor(() => {
-			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
-		});
 
 		// rerender with updated commentBeingRepliedTo
 		rerender(
@@ -142,8 +143,14 @@ describe('CommentContainer', () => {
 				body={''}
 				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
+
+		// make sure the new comment appears
+		await waitFor(() => {
+			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
+		});
 
 		// make sure the comment form submit button does not appear anymore
 		// note: we need to use queryByText or else we get an error
@@ -193,6 +200,10 @@ describe('CommentContainer', () => {
 				body={newCommentText}
 				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={(id, responses) => {
+					if (commentBeingRepliedTo?.id !== id) return;
+					commentBeingRepliedTo.responses = responses;
+				}}
 			/>,
 		);
 
@@ -211,11 +222,6 @@ describe('CommentContainer', () => {
 		await waitFor(() =>
 			expect(mockSetCommentBeingRepliedTo).toHaveBeenCalledTimes(1),
 		);
-
-		// make sure the new comment appears
-		await waitFor(() => {
-			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
-		});
 
 		// rerender with updated commentBeingRepliedTo
 		rerender(
@@ -245,8 +251,14 @@ describe('CommentContainer', () => {
 				body={''}
 				setBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
+
+		// make sure the new comment appears
+		await waitFor(() => {
+			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
+		});
 
 		// make sure the comment form submit button does not appear anymore
 		// note: we need to use queryByText or else we get an error

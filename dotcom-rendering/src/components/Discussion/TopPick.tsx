@@ -6,8 +6,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
+import type { CommentType, SignedInUser } from '../../lib/discussion';
 import { palette as themePalette } from '../../palette';
-import type { CommentType, SignedInUser } from '../../types/discussion';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianStaff } from './Badges';
 import { Column } from './Column';

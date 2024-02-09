@@ -5,7 +5,7 @@ import type {
 	OrderByType,
 	PageSizeType,
 	ThreadsType,
-} from '../../types/discussion';
+} from '../../lib/discussion';
 import { Dropdown } from './Dropdown';
 
 type Props = {

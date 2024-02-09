@@ -3,8 +3,8 @@ import { textSans } from '@guardian/source-foundations';
 import { SvgArrowUpStraight } from '@guardian/source-react-components';
 import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
+import type { SignedInUser } from '../../lib/discussion';
 import { palette as themePalette } from '../../palette';
-import type { SignedInUser } from '../../types/discussion';
 import { Row } from './Row';
 
 type Props = {
