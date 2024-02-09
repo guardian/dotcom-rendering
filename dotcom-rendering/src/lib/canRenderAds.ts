@@ -1,14 +1,14 @@
 import type { DCRFrontType } from '../types/front';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
-import type { DCRTagFrontType } from '../types/tagFront';
+import type { DCRTagPageType } from '../types/tagPage';
 
 /**
  * Checks the page for a number of conditions that should
  * prevent ads from being displayed.
  */
 export const canRenderAds = (
-	pageData: DCRArticle | DCRFrontType | DCRTagFrontType,
+	pageData: DCRArticle | DCRFrontType | DCRTagPageType,
 	renderingTarget?: RenderingTarget,
 ): boolean => {
 	if (renderingTarget === 'Apps') {

@@ -41,7 +41,7 @@ export const groupCards = (
 				huge: [],
 				veryBig: [],
 				big: enhanceCards(big, {
-					cardInTagFront: false,
+					cardInTagPage: false,
 					editionId,
 					containerPalette,
 					discussionApiUrl,
@@ -52,7 +52,7 @@ export const groupCards = (
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
 					{
-						cardInTagFront: false,
+						cardInTagPage: false,
 						offset: big.length,
 						editionId,
 						containerPalette,
@@ -70,20 +70,20 @@ export const groupCards = (
 				// Snap is not supported on these container types
 				snap: [],
 				huge: enhanceCards(huge, {
-					cardInTagFront: false,
+					cardInTagPage: false,
 					editionId,
 					containerPalette,
 					discussionApiUrl,
 				}),
 				veryBig: enhanceCards(veryBig, {
-					cardInTagFront: false,
+					cardInTagPage: false,
 					offset: huge.length,
 					editionId,
 					containerPalette,
 					discussionApiUrl,
 				}),
 				big: enhanceCards(big, {
-					cardInTagFront: false,
+					cardInTagPage: false,
 					offset: huge.length + veryBig.length,
 					editionId,
 					containerPalette,
@@ -95,7 +95,7 @@ export const groupCards = (
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
 					{
-						cardInTagFront: false,
+						cardInTagPage: false,
 						offset: huge.length + veryBig.length + big.length,
 						editionId,
 						containerPalette,
@@ -112,7 +112,7 @@ export const groupCards = (
 				big: [],
 				// Only 'snap' and 'standard' are supported by dynamic/package
 				snap: enhanceCards(snap, {
-					cardInTagFront: false,
+					cardInTagPage: false,
 					editionId,
 					containerPalette,
 					discussionApiUrl,
@@ -123,7 +123,7 @@ export const groupCards = (
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
 					{
-						cardInTagFront: false,
+						cardInTagPage: false,
 						offset: snap.length,
 						editionId,
 						containerPalette,

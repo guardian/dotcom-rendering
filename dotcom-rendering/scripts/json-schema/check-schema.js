@@ -5,7 +5,7 @@ const {
 	getArticleSchema,
 	getFrontSchema,
 	getNewsletterPageSchema,
-	getTagFrontSchema,
+	getTagPageSchema,
 	getBlockSchema,
 } = require('./get-schema');
 
@@ -19,8 +19,8 @@ const existingFrontSchema = fs.readFileSync(
 	`${root}/src/model/front-schema.json`,
 	{ encoding: 'utf-8' },
 );
-const existingTagFrontSchema = fs.readFileSync(
-	`${root}/src/model/tag-front-schema.json`,
+const existingTagPageSchema = fs.readFileSync(
+	`${root}/src/model/tag-page-schema.json`,
 	{ encoding: 'utf-8' },
 );
 const existingNewsletterSchema = fs.readFileSync(
@@ -34,14 +34,14 @@ const existingBlockSchema = fs.readFileSync(
 
 const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
-const tagFrontSchema = getTagFrontSchema();
+const tagPageSchema = getTagPageSchema();
 const newsletterSchema = getNewsletterPageSchema();
 const blockSchema = getBlockSchema();
 
 if (
 	existingArticleSchema !== articleSchema ||
 	existingFrontSchema !== frontSchema ||
-	existingTagFrontSchema !== tagFrontSchema ||
+	existingTagPageSchema !== tagPageSchema ||
 	existingNewsletterSchema !== newsletterSchema ||
 	existingBlockSchema !== blockSchema
 ) {
