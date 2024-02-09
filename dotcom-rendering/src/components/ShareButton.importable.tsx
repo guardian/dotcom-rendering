@@ -110,6 +110,58 @@ const getUrl = ({
 	).href;
 };
 
+export const NativeShareButton = ({
+	onShare,
+	size,
+	isLiveBlog,
+	blockId,
+}: {
+	onShare: () => Promise<void>;
+	size?: Size | undefined;
+	isLiveBlog: boolean;
+	blockId?: string;
+}) => (
+	<Button
+		onClick={() => onShare().catch(() => {})}
+		size={size}
+		type="button"
+		priority="tertiary"
+		iconSide="left"
+		icon={<SvgShare />}
+		css={isLiveBlog ? liveBlogNative(blockId) : nativeShare(blockId)}
+	>
+		Share
+	</Button>
+);
+
+const CopyLinkButton = ({
+	onShare,
+	size,
+	isCopied,
+	blockId,
+}: {
+	onShare: () => Promise<void>;
+	size?: Size | undefined;
+	isCopied: boolean;
+	blockId?: string;
+}) => (
+	<Button
+		onClick={() => onShare().catch(() => {})}
+		size={size}
+		type="button"
+		priority="tertiary"
+		iconSide="left"
+		icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
+		css={
+			isCopied
+				? [copiedButtonStyles, sharedButtonStyles(blockId)]
+				: [buttonStyles, sharedButtonStyles(blockId)]
+		}
+	>
+		{isCopied ? 'Link copied' : 'Copy link'}
+	</Button>
+);
+
 export const ShareButton = ({
 	size = 'small',
 	pageId,
@@ -149,41 +201,19 @@ export const ShareButton = ({
 		}
 	};
 
-	return (
-		<>
-			{isShareSupported ? (
-				<Button
-					onClick={() => onShare().catch(() => {})}
-					size={size}
-					type="button"
-					priority="tertiary"
-					iconSide="left"
-					icon={<SvgShare />}
-					css={
-						isLiveBlog
-							? liveBlogNative(blockId)
-							: nativeShare(blockId)
-					}
-				>
-					Share
-				</Button>
-			) : (
-				<Button
-					onClick={() => onShare().catch(() => {})}
-					size={size}
-					type="button"
-					priority="tertiary"
-					iconSide="left"
-					icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
-					css={
-						isCopied
-							? [copiedButtonStyles, sharedButtonStyles(blockId)]
-							: [buttonStyles, sharedButtonStyles(blockId)]
-					}
-				>
-					{isCopied ? 'Link copied' : 'Copy link'}
-				</Button>
-			)}
-		</>
+	return isShareSupported ? (
+		<NativeShareButton
+			onShare={onShare}
+			size={size}
+			isLiveBlog={isLiveBlog}
+			blockId={blockId}
+		/>
+	) : (
+		<CopyLinkButton
+			onShare={onShare}
+			size={size}
+			isCopied={isCopied}
+			blockId={blockId}
+		/>
 	);
 };
