@@ -416,7 +416,7 @@ export const Comments = ({
 			) : !comments.length ? (
 				<NoComments />
 			) : (
-				<ul css={commentContainerStyles}>
+				<ul css={commentContainerStyles} className="comments-column">
 					{comments.map((comment) => (
 						<li key={comment.id}>
 							<CommentContainer
