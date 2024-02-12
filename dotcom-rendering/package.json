@@ -58,7 +58,7 @@
 		"@guardian/identity-auth-frontend": "3.0.0",
 		"@guardian/libs": "16.0.1",
 		"@guardian/ophan-tracker-js": "2.0.4",
-		"@guardian/ophan-tracker-js-next": "npm:@guardian/ophan-tracker-js@2.1.0-next.1",
+		"@guardian/ophan-tracker-js-next": "npm:@guardian/ophan-tracker-js@2.1.0-next.2",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source-foundations": "14.1.4",
 		"@guardian/source-react-components": "18.0.0",
