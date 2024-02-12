@@ -11,6 +11,7 @@ import type {
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
+import { useAB } from '../../lib/useAB';
 import { palette as schemedPalette } from '../../palette';
 import { labelStyles } from '../AdSlot.web';
 import { CommentContainer } from './CommentContainer';
@@ -170,6 +171,13 @@ export const Comments = ({
 
 	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
+	const abTests = useAB();
+	const abTestsApi = abTests?.api;
+	const mobileDiscussionAdsEnabled = abTestsApi?.isUserInVariant(
+		'MobileDiscussionAds',
+		'variant',
+	);
+
 	useEffect(() => {
 		setNumberOfCommentsToShow(COMMENT_BATCH);
 	}, [comments]);
@@ -191,15 +199,17 @@ export const Comments = ({
 	}, [expanded, comments.length, numberOfCommentsToShow, loadingMore]);
 
 	useEffect(() => {
-		if (expanded && !loadingMore) {
+		if (expanded && !loadingMore && mobileDiscussionAdsEnabled) {
 			const event = new CustomEvent('comments-loaded');
 			document.dispatchEvent(event);
 		}
-	}, [comments.length, expanded, loadingMore]);
+	}, [comments.length, expanded, loadingMore, mobileDiscussionAdsEnabled]);
 
 	const dispatchCommentsStateChangeEvent = () => {
-		const event = new CustomEvent('comments-state-change');
-		document.dispatchEvent(event);
+		if (mobileDiscussionAdsEnabled) {
+			const event = new CustomEvent('comments-state-change');
+			document.dispatchEvent(event);
+		}
 	};
 
 	useEffect(() => {
