@@ -70,14 +70,6 @@ export const prodServer = (): void => {
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
 	app.post('/TagPage', logRenderTime, handleTagPage);
 	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
-	/** Temporary duplicate while we redirect frontend requests
-	 * to the /TagPage endpoint
-	 *
-	 * @todo 09/02/2024 - remove these
-	 */
-	app.post('/TagFront', logRenderTime, handleTagPage);
-	app.post('/TagFrontJSON', logRenderTime, handleTagPageJson);
-	/** End of duplicated section */
 
 	app.post(
 		'/EmailNewsletters',
@@ -128,25 +120,6 @@ export const prodServer = (): void => {
 		getContentFromURLMiddleware,
 		handleTagPageJson,
 	);
-
-	/** Temporary duplicate while we redirect frontend requests
-	 * to the /TagPage endpoint
-	 *
-	 * @todo 09/02/2024 - remove these
-	 */
-	app.get(
-		'/TagFront/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleTagPage,
-	);
-	app.get(
-		'/TagFrontJSON/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleTagPageJson,
-	);
-	/** End of duplicated section */
 
 	app.get(
 		'/EmailNewsletters',
