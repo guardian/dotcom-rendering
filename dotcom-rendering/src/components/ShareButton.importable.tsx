@@ -66,12 +66,7 @@ const nativeShare = (sizeXSmall: boolean) => css`
 const liveBlogMobile = css`
 	${until.desktop} {
 		color: ${palette.neutral[100]};
-		border-color: rgba(
-			255,
-			255,
-			255,
-			0.4
-		); // combination of neutral[100] and opacity 40%
+		border-color: rgba(255, 255, 255, 0.4);
 		svg {
 			fill: ${palette.neutral[100]};
 			margin-left: 0;
