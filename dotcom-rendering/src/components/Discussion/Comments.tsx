@@ -216,7 +216,6 @@ export const Comments = ({
 	};
 
 	useEffect(() => {
-		// these conditions look good for firing ad load event!
 		if (expanded && !loadingMore) {
 			const event = new CustomEvent('comments-loaded');
 			document.dispatchEvent(event);
