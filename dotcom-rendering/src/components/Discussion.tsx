@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
-import { palette, space } from '@guardian/source-foundations';
-import { Button, SvgPlus } from '@guardian/source-react-components';
+import { space } from '@guardian/source-foundations';
+import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type {
@@ -18,6 +18,7 @@ import {
 import { initFiltersFromLocalStorage } from '../lib/discussionFilters';
 import { palette as themePalette } from '../palette';
 import { Comments } from './Discussion/Comments';
+import { PillarButton } from './Discussion/PillarButton';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
 
@@ -626,31 +627,16 @@ export const Discussion = ({
 				)}
 			</div>
 			{!isExpanded && (
-				<Button
+				<PillarButton
 					onClick={() => {
 						dispatch({ type: 'expandComments' });
 						dispatchCommentsExpandedEvent();
 					}}
 					icon={<SvgPlus />}
-					cssOverrides={css`
-						background-color: ${themePalette(
-							'--discussion-primary-button-background',
-						)};
-						border: 1px solid currentColor;
-						:hover {
-							background-color: ${themePalette(
-								'--discussion-button-background-hover',
-							)};
-							border: 1px solid
-								${themePalette(
-									'--discussion-button-background-hover',
-								)};
-							color: ${palette.neutral[100]};
-						}
-					`}
+					linkName="view-more-comments"
 				>
 					View more comments
-				</Button>
+				</PillarButton>
 			)}
 		</>
 	);
