@@ -18,14 +18,14 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const sharedButtonStyles = (blockId: string | undefined) => css`
-	border-color: ${palette.neutral[86]};
-	min-width: ${blockId ? '101px' : '132px'};
-	max-width: ${blockId ? '101px' : '132px'};
-	font-size: ${blockId ? '14px' : '17px'};
+const sharedButtonStyles = (sizeXSmall: boolean) => css`
+	border-color: ${themePalette('--share-button-border')};
+	min-width: ${sizeXSmall ? '101px' : '132px'};
+	max-width: ${sizeXSmall ? '101px' : '132px'};
+	font-size: ${sizeXSmall ? '14px' : '17px'};
 	svg {
-		width: ${blockId ? '13.33px' : '16.67px'};
-		height: ${blockId ? '13.33px' : '16.67px'};
+		width: ${sizeXSmall ? '13.33px' : '16.67px'};
+		height: ${sizeXSmall ? '13.33px' : '16.67px'};
 	}
 `;
 
@@ -38,44 +38,40 @@ const buttonStyles = css`
 	:hover {
 		background-color: ${themePalette('--share-button')};
 		border-color: ${themePalette('--share-button')};
-		color: ${palette.neutral[100]};
+		color: ${themePalette('--share-button-hover')};
 		svg {
-			fill: ${palette.neutral[100]};
+			fill: ${themePalette('--share-button-hover')};
 		}
 	}
 `;
 
 const copiedButtonStyles = css`
-	color: ${palette.neutral[7]};
+	color: ${themePalette('--share-button-copied')};
 	svg {
 		fill: ${palette.success[400]};
-		margin-right: 2px;
 	}
 `;
 
-const nativeShare = (blockId: string | undefined) => css`
-	min-width: ${blockId ? '79px' : '132px'};
-	max-width: ${blockId ? '79px' : '132px'};
-	${buttonStyles}
-	border-color: ${palette.neutral[86]};
-	max-width: 105px;
+const nativeShare = (sizeXSmall: boolean) => css`
+	min-width: ${sizeXSmall ? '79px' : '105px'};
+	max-width: ${sizeXSmall ? '79px' : '105px'};
 	svg {
 		margin-right: 6px;
 		width: 18.33px;
 		height: 18.33px;
 	}
+	border-color: ${themePalette('--share-button-border')};
 `;
 
-const liveBlogNative = (blockId: string | undefined) => css`
-	${nativeShare(blockId)}
+const liveBlogMobile = css`
 	${until.desktop} {
+		color: ${palette.neutral[100]};
 		border-color: rgba(
 			255,
 			255,
 			255,
 			0.4
 		); // combination of neutral[100] and opacity 40%
-		color: ${palette.neutral[100]};
 		svg {
 			fill: ${palette.neutral[100]};
 			margin-left: 0;
@@ -114,56 +110,67 @@ const getUrl = ({
 export const NativeShareButton = ({
 	onShare,
 	size,
-	isLiveBlog,
-	blockId,
+	isLiveBlogMeta,
 }: {
 	onShare: () => Promise<void>;
 	size?: Size | undefined;
-	isLiveBlog: boolean;
-	blockId?: string;
-}) => (
-	<Button
-		onClick={() => onShare().catch(() => {})}
-		size={size}
-		type="button"
-		priority="tertiary"
-		iconSide="left"
-		icon={<SvgShare />}
-		cssOverrides={
-			isLiveBlog ? liveBlogNative(blockId) : nativeShare(blockId)
-		}
-	>
-		Share
-	</Button>
-);
+	isLiveBlogMeta: boolean;
+}) => {
+	const sizeXSmall = size === 'xsmall';
+
+	return (
+		<Button
+			onClick={() => onShare().catch(() => {})}
+			size={size}
+			type="button"
+			priority="tertiary"
+			iconSide="left"
+			icon={<SvgShare />}
+			css={[
+				buttonStyles,
+				nativeShare(sizeXSmall),
+				isLiveBlogMeta && liveBlogMobile,
+			]}
+		>
+			Share
+		</Button>
+	);
+};
 
 export const CopyLinkButton = ({
 	onShare,
 	size,
+	isLiveBlogMeta,
 	isCopied,
-	blockId,
 }: {
 	onShare: () => Promise<void>;
 	size?: Size | undefined;
+	isLiveBlogMeta: boolean;
 	isCopied: boolean;
-	blockId?: string;
-}) => (
-	<Button
-		onClick={() => onShare().catch(() => {})}
-		size={size}
-		type="button"
-		priority="tertiary"
-		iconSide="left"
-		icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
-		cssOverrides={
-			isCopied
-				? [copiedButtonStyles, sharedButtonStyles(blockId)]
-				: [buttonStyles, sharedButtonStyles(blockId)]
-		}
-	>
-		{isCopied ? 'Link copied' : 'Copy link'}
-	</Button>
-);
+}) => {
+	const sizeXSmall = size === 'xsmall';
+	return (
+		<Button
+			onClick={() => onShare().catch(() => {})}
+			size={size}
+			type="button"
+			priority="tertiary"
+			iconSide="left"
+			icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
+			css={
+				isCopied
+					? [copiedButtonStyles, sharedButtonStyles(sizeXSmall)]
+					: [
+							buttonStyles,
+							sharedButtonStyles(sizeXSmall),
+							isLiveBlogMeta && liveBlogMobile,
+					  ]
+			}
+		>
+			{isCopied ? 'Link copied' : 'Copy link'}
+		</Button>
+	);
+};
 
 export const ShareButton = ({
 	size = 'small',
@@ -175,7 +182,7 @@ export const ShareButton = ({
 	const [isCopied, setIsCopied] = useState(false);
 	const [isShareSupported, setIsShareSupported] = useState(false);
 
-	const isLiveBlog = format.design === 11;
+	const isLiveBlogMeta = format.design === 11 && size !== 'xsmall';
 
 	useEffect(() => {
 		setIsShareSupported(
@@ -208,15 +215,14 @@ export const ShareButton = ({
 		<NativeShareButton
 			onShare={onShare}
 			size={size}
-			isLiveBlog={isLiveBlog}
-			blockId={blockId}
+			isLiveBlogMeta={isLiveBlogMeta}
 		/>
 	) : (
 		<CopyLinkButton
 			onShare={onShare}
 			size={size}
 			isCopied={isCopied}
-			blockId={blockId}
+			isLiveBlogMeta={isLiveBlogMeta}
 		/>
 	);
 };

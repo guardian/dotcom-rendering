@@ -34,25 +34,42 @@ export const CopyLink = () => {
 CopyLink.storyName = 'CopyLink';
 CopyLink.decorators = [splitTheme()];
 
+export const CopyLinkXSmall = () => {
+	return (
+		<ShareButton
+			pageId={'123'}
+			webTitle={'The the'}
+			size="xsmall"
+			format={{
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+				design: ArticleDesign.Standard,
+			}}
+		/>
+	);
+};
+CopyLinkXSmall.storyName = 'CopyLinkXSmall';
+CopyLinkXSmall.decorators = [splitTheme()];
+
 export const LinkCopied = () => {
-	return <CopyLinkButton onShare={async () => {}} isCopied={true} />;
+	return (
+		<CopyLinkButton
+			onShare={async () => {}}
+			isCopied={true}
+			isLiveBlogMeta={true}
+		/>
+	);
 };
 LinkCopied.storyName = 'LinkCopied';
 LinkCopied.decorators = [splitTheme()];
 
 export const NativeShare = () => {
-	return (
-		<NativeShareButton
-			onShare={async () => {}}
-			isLiveBlog={true}
-			blockId={'123'}
-		/>
-	);
+	return <NativeShareButton onShare={async () => {}} isLiveBlogMeta={true} />;
 };
 NativeShare.storyName = 'NativeShare';
 NativeShare.decorators = [splitTheme()];
 
-export const NativeShareLiveBlogMobile = ({ theme }: StoryArgs) => {
+export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 	return (
 		<div
 			css={css`
@@ -61,17 +78,13 @@ export const NativeShareLiveBlogMobile = ({ theme }: StoryArgs) => {
 					: 'inherit'};
 			`}
 		>
-			<NativeShareButton
-				onShare={async () => {}}
-				isLiveBlog={true}
-				blockId={'123'}
-			/>
+			<NativeShareButton onShare={async () => {}} isLiveBlogMeta={true} />
 		</div>
 	);
 };
-NativeShareLiveBlogMobile.storyName = 'NativeShareLiveBlogMobile';
-NativeShareLiveBlogMobile.decorators = [splitTheme()];
-NativeShareLiveBlogMobile.story = {
+LiveBlogMobile.storyName = 'LiveBlogMobile';
+LiveBlogMobile.decorators = [splitTheme()];
+LiveBlogMobile.story = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: { viewports: [375] },

@@ -3405,6 +3405,63 @@ const shareButtonLiveBlogMobileLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
+const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[7];
+		default:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[100];
+				default:
+					return sourcePalette.neutral[100];
+			}
+	}
+};
+
+const shareButtonBorderLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[46];
+		default:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[86];
+			}
+	}
+};
+
+const shareButtonCopiedLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[7];
+			}
+	}
+};
+
 const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
@@ -3436,8 +3493,6 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 				default:
 					return pillarPalette(theme, 400);
 			}
-		case ArticleDesign.Picture:
-			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.Labs:
@@ -3496,6 +3551,7 @@ const shareIconFillBlogLight: PaletteFunction = ({ design, theme }) => {
 };
 
 const shareIconFillBlogDark: PaletteFunction = () => sourcePalette.neutral[60];
+
 const matchNavBackground: PaletteFunction = () => sourcePalette.brandAlt[400];
 
 const matchStatsBackground: PaletteFunction = ({ design }) => {
@@ -5782,6 +5838,18 @@ const paletteColours = {
 	'--share-button-liveblog-mobile': {
 		light: shareButtonLiveBlogMobileLight,
 		dark: shareButtonLiveBlogMobileLight,
+	},
+	'--share-button-border': {
+		light: shareButtonBorderLight,
+		dark: shareButtonBorderLight,
+	},
+	'--share-button-copied': {
+		light: shareButtonCopiedLight,
+		dark: shareButtonCopiedLight,
+	},
+	'--share-button-hover': {
+		light: shareButtonHoverLight,
+		dark: shareButtonHoverLight,
 	},
 } satisfies PaletteColours;
 
