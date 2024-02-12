@@ -191,6 +191,19 @@ export const Comments = ({
 	}, [expanded, comments.length, numberOfCommentsToShow, loadingMore]);
 
 	useEffect(() => {
+		// these conditions look good for firing ad load event!
+		if (expanded && !loadingMore) {
+			const event = new CustomEvent('comments-loaded');
+			document.dispatchEvent(event);
+		}
+	}, [comments.length, expanded, loadingMore]);
+
+	const dispatchCommentsStateChangeEvent = () => {
+		const event = new CustomEvent('comments-state-change');
+		document.dispatchEvent(event);
+	};
+
+	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
 			if (result.kind === 'error') {
 				console.error(result.error);
@@ -230,8 +243,10 @@ export const Comments = ({
 
 		if (page > maxPagePossible) {
 			handleFilterChange(newFilterObject, maxPagePossible);
+			dispatchCommentsStateChangeEvent();
 		} else {
 			handleFilterChange(newFilterObject);
+			dispatchCommentsStateChangeEvent();
 		}
 	};
 
@@ -260,6 +275,7 @@ export const Comments = ({
 
 	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
+		dispatchCommentsStateChangeEvent();
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
