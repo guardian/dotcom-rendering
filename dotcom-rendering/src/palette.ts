@@ -4897,7 +4897,7 @@ const interactiveAtomBackgroundDark: PaletteFunction = () =>
  * A template literal type used to make sure the keys of the palette use the
  * correct CSS custom property syntax.
  *
- * IMPORTANT - do use a CSS variable name ending in "label" as Storybook theming will fail
+ * IMPORTANT - do not use a CSS variable name ending in "label" as Storybook theming will fail
  */
 type CSSCustomProperty = `--${string}`;
 /**
