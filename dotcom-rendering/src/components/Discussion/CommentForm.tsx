@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, text, textSans } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentType,
@@ -54,9 +49,9 @@ const commentTextArea = css`
 	margin-bottom: ${space[3]}px;
 	padding: 8px 10px 10px 8px;
 	${textSans.small()};
-	border-color: ${sourcePalette.neutral[86]};
+	border-color: ${schemedPalette('--discussion-border')};
 	:focus {
-		border-color: ${sourcePalette.neutral[46]};
+		border-color: ${schemedPalette('--discussion-subdued')};
 		outline: none;
 	}
 	color: inherit;
@@ -65,7 +60,7 @@ const commentTextArea = css`
 
 const greyPlaceholder = css`
 	::placeholder {
-		color: ${sourcePalette.neutral[46]};
+		color: ${schemedPalette('--discussion-subdued')};
 	}
 `;
 
@@ -117,7 +112,7 @@ const commentAddOns = css`
 	font-size: 13px;
 	line-height: 17px;
 	border: 1px solid ${schemedPalette('--comment-form-input-background')};
-	background-color: ${schemedPalette('--comment-form-addon-button')};
+	background-color: ${schemedPalette('--discussion-background')};
 	color: inherit;
 	text-align: center;
 	cursor: pointer;

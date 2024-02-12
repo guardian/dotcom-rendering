@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { space, textSans, until } from '@guardian/source-foundations';
 import {
 	Button,
 	SvgChevronLeftSingle,
@@ -58,7 +53,7 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 	border-radius: 62.5rem;
 	border-width: 1px;
 	border-style: solid;
-	border-color: ${sourcePalette.neutral[86]};
+	border-color: ${schemedPalette('--discussion-pagination-border')};
 	background-color: ${isSelected
 		? schemedPalette('--discussion-pagination-text')
 		: schemedPalette('--discussion-pagination-background')};
@@ -75,7 +70,7 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 	}
 
 	:hover {
-		border-color: ${sourcePalette.neutral[60]};
+		border-color: ${schemedPalette('--discussion-pagination-border-hover')};
 	}
 
 	& svg {

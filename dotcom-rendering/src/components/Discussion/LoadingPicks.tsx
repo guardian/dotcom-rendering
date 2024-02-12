@@ -1,9 +1,9 @@
 import { css, keyframes } from '@emotion/react';
-import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import { space } from '@guardian/source-foundations';
+import { palette as schemedPalette } from '../../palette';
 import { Row } from './Row';
 
-/** @TODO adapt for dark mode */
-const BACKGROUND_COLOUR = sourcePalette.neutral[93];
+const BACKGROUND_COLOUR = schemedPalette('--discussion-loading-background');
 
 const shimmer = keyframes`
   0% {
@@ -19,7 +19,7 @@ const shimmerStyles = css`
 	background: linear-gradient(
 		to right,
 		${BACKGROUND_COLOUR} 4%,
-		${sourcePalette.neutral[86]} 25%,
+		${schemedPalette('--discussion-loading-shimmer')} 25%,
 		${BACKGROUND_COLOUR} 36%
 	);
 	background-size: 1500px 100%;
