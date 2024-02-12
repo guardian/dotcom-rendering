@@ -12,6 +12,7 @@ import type {
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
+import { labelStyles } from '../AdSlot.web';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -388,7 +389,10 @@ export const Comments = ({
 			) : !comments.length ? (
 				<NoComments />
 			) : (
-				<ul css={commentContainerStyles} className="comments-column">
+				<ul
+					css={[commentContainerStyles, labelStyles]}
+					className="comments-column"
+				>
 					{comments
 						.slice(0, numberOfCommentsToShow)
 						.map((comment) => (
