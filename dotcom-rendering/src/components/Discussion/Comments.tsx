@@ -12,6 +12,7 @@ import type {
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
+import { useAB } from '../../lib/useAB';
 import { palette as schemedPalette } from '../../palette';
 import { labelStyles } from '../AdSlot.web';
 import { useDispatch } from '../DispatchContext';
@@ -215,16 +216,25 @@ export const Comments = ({
 		dispatch({ type: 'addReply', comment });
 	};
 
+	const abTests = useAB();
+	const abTestsApi = abTests?.api;
+	const mobileDiscussionAdsEnabled = abTestsApi?.isUserInVariant(
+		'MobileDiscussionAds',
+		'variant',
+	);
+
 	useEffect(() => {
-		if (expanded && !loadingMore) {
+		if (expanded && !loadingMore && mobileDiscussionAdsEnabled) {
 			const event = new CustomEvent('comments-loaded');
 			document.dispatchEvent(event);
 		}
-	}, [comments.length, expanded, loadingMore]);
+	}, [comments.length, expanded, loadingMore, mobileDiscussionAdsEnabled]);
 
 	const dispatchCommentsStateChangeEvent = () => {
-		const event = new CustomEvent('comments-state-change');
-		document.dispatchEvent(event);
+		if (mobileDiscussionAdsEnabled) {
+			const event = new CustomEvent('comments-state-change');
+			document.dispatchEvent(event);
+		}
 	};
 
 	useEffect(() => {
