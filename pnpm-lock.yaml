@@ -358,10 +358,10 @@ importers:
         version: 50.13.0(@swc/core@1.4.0)(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
         specifier: 14.4.1
-        version: 14.4.1(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.3)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@3.0.0)(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3)
+        version: 14.4.1(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.10.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@3.0.0)(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3)
       '@guardian/consent-management-platform':
-        specifier: 13.7.3
-        version: 13.7.3(@guardian/libs@16.0.1)
+        specifier: 13.10.0
+        version: 13.10.0(@guardian/libs@16.0.1)
       '@guardian/core-web-vitals':
         specifier: 6.0.0
         version: 6.0.0(@guardian/libs@16.0.1)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
@@ -4494,7 +4494,7 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@14.4.1(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.7.3)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@3.0.0)(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3):
+  /@guardian/commercial@14.4.1(@guardian/ab-core@7.0.1)(@guardian/consent-management-platform@13.10.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@3.0.0)(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.1)(typescript@5.3.3):
     resolution: {integrity: sha512-DG6YgAfl1fRWrD/KI7l+/XeQT3EQSxR9bIwIQq0vCdN6BITutm2AJ6sc3AapuuSpdy8PBPLlrTzwzLkgcIWt3A==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
@@ -4508,7 +4508,7 @@ packages:
     dependencies:
       '@changesets/cli': 2.27.1
       '@guardian/ab-core': 7.0.1(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/consent-management-platform': 13.7.3(@guardian/libs@16.0.1)
+      '@guardian/consent-management-platform': 13.10.0(@guardian/libs@16.0.1)
       '@guardian/core-web-vitals': 6.0.0(@guardian/libs@16.0.1)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
       '@guardian/identity-auth': 2.0.1(@guardian/libs@16.0.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth-frontend': 3.0.0(@guardian/identity-auth@2.0.1)(@guardian/libs@16.0.1)(tslib@2.6.2)(typescript@5.3.3)
@@ -4531,10 +4531,10 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/consent-management-platform@13.7.3(@guardian/libs@16.0.1):
-    resolution: {integrity: sha512-fgA6JE0YYx20cjR2JvNaakvFp5pChic7rCTA99UPV1SO6f5NfX4o9kWL6oByZNA0rxsSLCwbLUiDbeXwe7aVbw==}
+  /@guardian/consent-management-platform@13.10.0(@guardian/libs@16.0.1):
+    resolution: {integrity: sha512-ura73/w9VOOTI+p+h52J+hePq6S4YeIV3iRiUYhc6IdqpdBkJfKKGE3zh9fxd+S/ktH8ZSQR4ebRjM2GKtMJrw==}
     peerDependencies:
-      '@guardian/libs': ^15.0.0
+      '@guardian/libs': ^15.0.0 || ^16.0.0
     dependencies:
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
     dev: false
