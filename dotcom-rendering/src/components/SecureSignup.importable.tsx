@@ -48,21 +48,23 @@ const formStyles = css`
 
 	label {
 		grid-area: label;
-		color: ${palette('--article-text')};
+		div {
+			color: ${palette('--article-text')};
+		}
 	}
 	input {
 		grid-area: input;
+		margin-top: 0;
+		color: ${palette('--article-text')};
+		background-color: ${palette('--article-background')};
 	}
 	button {
 		grid-area: button;
-	}
-`;
-
-const buttonCssOverrides = css`
-	background-color: ${palette('--recaptcha-button')};
-	color: ${palette('--recaptcha-button-text')};
-	:hover {
-		background-color: ${palette('--recaptcha-button-hover')};
+		background-color: ${palette('--recaptcha-button')};
+		color: ${palette('--recaptcha-button-text')};
+		:hover {
+			background-color: ${palette('--recaptcha-button-hover')};
+		}
 	}
 `;
 
@@ -349,12 +351,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 					type="email"
 					value={signedInUserEmail}
 				/>
-				<Button
-					onClick={handleClick}
-					size="small"
-					type="submit"
-					cssOverrides={buttonCssOverrides}
-				>
+				<Button onClick={handleClick} size="small" type="submit">
 					Sign up
 				</Button>
 			</form>
