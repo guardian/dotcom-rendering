@@ -1,7 +1,7 @@
 import { isString, Pillar } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
-import { TagFrontPage } from '../components/TagFrontPage';
+import { TagPage } from '../components/TagPage';
 import {
 	generateScriptTags,
 	getModulesBuild,
@@ -15,7 +15,7 @@ import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import type { DCRFrontType } from '../types/front';
-import type { DCRTagFrontType } from '../types/tagFront';
+import type { DCRTagPageType } from '../types/tagPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
@@ -154,26 +154,26 @@ export const renderFront = ({
 	};
 };
 
-export const renderTagFront = ({
-	tagFront,
+export const renderTagPage = ({
+	tagPage,
 }: {
-	tagFront: DCRTagFrontType;
+	tagPage: DCRTagPageType;
 }): { html: string; prefetchScripts: string[] } => {
-	const title = tagFront.webTitle;
-	const NAV = extractNAV(tagFront.nav);
+	const title = tagPage.webTitle;
+	const NAV = extractNAV(tagPage.nav);
 
 	// Fronts are not supported in Apps
 	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<TagFrontPage tagFront={tagFront} NAV={NAV} />
+			<TagPage tagPage={tagPage} NAV={NAV} />
 		</ConfigProvider>,
 	);
 
 	const build = getModulesBuild({
-		switches: tagFront.config.switches,
-		tests: tagFront.config.abTests,
+		switches: tagPage.config.switches,
+		tests: tagPage.config.abTests,
 	});
 
 	/**
@@ -187,8 +187,7 @@ export const renderTagFront = ({
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		process.env.COMMERCIAL_BUNDLE_URL ??
-			tagFront.config.commercialBundleUrl,
+		process.env.COMMERCIAL_BUNDLE_URL ?? tagPage.config.commercialBundleUrl,
 	].filter(isString);
 	const legacyScripts = [
 		getPathFromManifest('client.web.legacy', 'frameworks.js'),
@@ -200,38 +199,38 @@ export const renderTagFront = ({
 	]);
 
 	const guardian = createGuardian({
-		editionId: tagFront.editionId,
-		stage: tagFront.config.stage,
-		frontendAssetsFullURL: tagFront.config.frontendAssetsFullURL,
-		revisionNumber: tagFront.config.revisionNumber,
-		sentryPublicApiKey: tagFront.config.sentryPublicApiKey,
-		sentryHost: tagFront.config.sentryHost,
-		keywordIds: tagFront.config.keywordIds,
-		dfpAccountId: tagFront.config.dfpAccountId,
-		adUnit: tagFront.config.adUnit,
-		ajaxUrl: tagFront.config.ajaxUrl,
-		googletagUrl: tagFront.config.googletagUrl,
-		switches: tagFront.config.switches,
-		abTests: tagFront.config.abTests,
-		brazeApiKey: tagFront.config.brazeApiKey,
-		googleRecaptchaSiteKey: tagFront.config.googleRecaptchaSiteKey,
+		editionId: tagPage.editionId,
+		stage: tagPage.config.stage,
+		frontendAssetsFullURL: tagPage.config.frontendAssetsFullURL,
+		revisionNumber: tagPage.config.revisionNumber,
+		sentryPublicApiKey: tagPage.config.sentryPublicApiKey,
+		sentryHost: tagPage.config.sentryHost,
+		keywordIds: tagPage.config.keywordIds,
+		dfpAccountId: tagPage.config.dfpAccountId,
+		adUnit: tagPage.config.adUnit,
+		ajaxUrl: tagPage.config.ajaxUrl,
+		googletagUrl: tagPage.config.googletagUrl,
+		switches: tagPage.config.switches,
+		abTests: tagPage.config.abTests,
+		brazeApiKey: tagPage.config.brazeApiKey,
+		googleRecaptchaSiteKey: tagPage.config.googleRecaptchaSiteKey,
 		// Until we understand exactly what config we need to make available client-side,
 		// add everything we haven't explicitly typed as unknown config
-		unknownConfig: tagFront.config,
+		unknownConfig: tagPage.config,
 	});
 
-	const keywords = tagFront.config.keywords;
+	const keywords = tagPage.config.keywords;
 
 	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
 		html,
 		title,
-		description: tagFront.header.description,
+		description: tagPage.header.description,
 		guardian,
 		keywords,
 		renderingTarget: 'Web',
-		weAreHiring: !!tagFront.config.switches.weAreHiring,
+		weAreHiring: !!tagPage.config.switches.weAreHiring,
 	});
 	return {
 		html: pageHtml,

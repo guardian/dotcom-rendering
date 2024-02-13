@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
+import type { CommentType, SignedInUser } from '../../lib/discussion';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
-import type { Result } from '../../lib/result';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
 
 mockRESTCalls();
@@ -13,22 +13,18 @@ const firstCommentResponse = comment.responses[0];
 const commentWithReply = {
 	...comment,
 	responses: [firstCommentResponse],
-} satisfies CommentType;
+};
 
 const commentWithoutReply = {
 	...comment,
 	responses: [],
 } satisfies CommentType;
 
-const commentResponseError = {
-	kind: 'error',
-	error: 'NetworkError',
-} as const satisfies Result<unknown, unknown>;
+const commentResponseError = error<'NetworkError', number>('NetworkError');
 
-const commentResponseSuccess = {
-	kind: 'ok',
-	value: 123456,
-} as const satisfies Result<unknown, unknown>;
+const commentResponseSuccess = ok<'NetworkError', number>(
+	Number(mockedMessageID),
+);
 
 const aUser: SignedInUser = {
 	kind: 'Reader',
@@ -49,8 +45,8 @@ const aUser: SignedInUser = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseSuccess),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 describe('CommentContainer', () => {
@@ -81,19 +77,19 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				showPreview={false}
-				setShowPreview={() => {}}
-				isCommentFormActive={true}
-				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				pickError={''}
+				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
-				body={newCommentText}
-				setBody={() => {}}
-				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={(id, responses) => {
+					if (commentBeingRepliedTo?.id !== id) return;
+					commentBeingRepliedTo.responses = responses;
+				}}
 			/>,
 		);
 
@@ -113,11 +109,6 @@ describe('CommentContainer', () => {
 			expect(mockSetCommentBeingRepliedTo).toHaveBeenCalledTimes(1),
 		);
 
-		// make sure the new comment appeats
-		await waitFor(() => {
-			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
-		});
-
 		// rerender with updated commentBeingRepliedTo
 		rerender(
 			<CommentContainer
@@ -131,21 +122,23 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				showPreview={false}
-				setShowPreview={() => {}}
-				isCommentFormActive={true}
-				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				pickError={''}
+				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
-				body={''}
-				setBody={() => {}}
-				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
+
+		// make sure the new comment appears
+		await waitFor(() => {
+			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
+		});
 
 		// make sure the comment form submit button does not appear anymore
 		// note: we need to use queryByText or else we get an error
@@ -180,19 +173,19 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				showPreview={false}
-				setShowPreview={() => {}}
-				isCommentFormActive={true}
-				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				pickError={''}
+				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
-				body={newCommentText}
-				setBody={() => {}}
-				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={(id, responses) => {
+					if (commentBeingRepliedTo?.id !== id) return;
+					commentBeingRepliedTo.responses = responses;
+				}}
 			/>,
 		);
 
@@ -212,11 +205,6 @@ describe('CommentContainer', () => {
 			expect(mockSetCommentBeingRepliedTo).toHaveBeenCalledTimes(1),
 		);
 
-		// make sure the new comment appears
-		await waitFor(() => {
-			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
-		});
-
 		// rerender with updated commentBeingRepliedTo
 		rerender(
 			<CommentContainer
@@ -230,21 +218,23 @@ describe('CommentContainer', () => {
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
-				showPreview={false}
-				setShowPreview={() => {}}
-				isCommentFormActive={true}
-				setIsCommentFormActive={() => {}}
 				error={''}
 				setError={() => {}}
+				pickError={''}
+				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
 				setPreviewBody={() => {}}
-				body={''}
-				setBody={() => {}}
-				reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
+
+		// make sure the new comment appears
+		await waitFor(() => {
+			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
+		});
 
 		// make sure the comment form submit button does not appear anymore
 		// note: we need to use queryByText or else we get an error

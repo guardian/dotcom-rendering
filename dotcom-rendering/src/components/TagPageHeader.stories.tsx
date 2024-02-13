@@ -1,27 +1,27 @@
-import { TagFrontHeader } from './TagFrontHeader';
+import { TagPageHeader } from './TagPageHeader';
 
 export default {
-	component: TagFrontHeader,
-	title: 'Components/TagFrontHeader',
+	component: TagPageHeader,
+	title: 'Components/TagPageHeader',
 };
 
-export const tagFrontHeader = () => {
+export const tagPageHeader = () => {
 	return (
 		<>
 			<p>Only a title</p>
-			<TagFrontHeader title={'Only a title'} />
+			<TagPageHeader title={'Only a title'} />
 			<p>A title & a description</p>
-			<TagFrontHeader
+			<TagPageHeader
 				title={'Example title'}
 				description="<p>And a much longer description with lots of text, other thoughts and musings</p>"
 			/>
 			<p>A title & a description with links</p>
-			<TagFrontHeader
+			<TagPageHeader
 				title={'Example title'}
 				description={`<p>And a much longer description with lots of text, other thoughts and musings <a href="#">and a link</a></p>`}
 			/>
 			<p>A title & a description & an image</p>
-			<TagFrontHeader
+			<TagPageHeader
 				title={'Example title'}
 				description={`<p>And a much longer description with lots of text, other thoughts and musings <a href="#">and a link</a></p>`}
 				image={

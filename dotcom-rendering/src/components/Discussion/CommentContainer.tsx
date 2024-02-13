@@ -1,14 +1,15 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import { space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
-import type { preview, reportAbuse } from '../../lib/discussionApi';
-import { getMoreResponses } from '../../lib/discussionApi';
+import { useState } from 'react';
 import type {
 	CommentType,
 	SignedInUser,
 	ThreadsType,
-} from '../../types/discussion';
+} from '../../lib/discussion';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
+import { getMoreResponses } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { Comment } from './Comment';
 import { CommentForm } from './CommentForm';
 import { CommentReplyPreview } from './CommentReplyPreview';
@@ -27,19 +28,16 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	onPreview?: typeof preview;
-	showPreview: boolean;
-	setShowPreview: (showPreview: boolean) => void;
-	isCommentFormActive: boolean;
-	setIsCommentFormActive: (isActive: boolean) => void;
 	error: string;
 	setError: (error: string) => void;
+	pickError: string;
+	setPickError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
-	body: string;
-	setBody: (body: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
 };
 
 const nestingStyles = css`
@@ -49,7 +47,7 @@ const nestingStyles = css`
 `;
 
 const topBorder = css`
-	border-top: 1px solid ${sourcePalette.neutral[86]};
+	border-top: 1px solid ${schemedPalette('--discussion-border')};
 `;
 
 const commentContainerStyles = css`
@@ -58,7 +56,7 @@ const commentContainerStyles = css`
 `;
 
 const selectedStyles = css`
-	background-color: ${sourcePalette.neutral[97]};
+	background-color: ${schemedPalette('--discussion-selected-background')};
 	margin-left: -${space[2]}px;
 	padding-left: ${space[2]}px;
 	margin-right: -${space[2]}px;
@@ -88,40 +86,32 @@ export const CommentContainer = ({
 	toggleMuteStatus,
 	onPermalinkClick,
 	onPreview,
-	showPreview,
-	setShowPreview,
-	isCommentFormActive,
-	setIsCommentFormActive,
 	error,
 	setError,
+	pickError,
+	setPickError,
 	userNameMissing,
 	setUserNameMissing,
 	previewBody,
 	setPreviewBody,
-	body,
-	setBody,
 	reportAbuse,
+	expandCommentReplies,
 }: Props) => {
+	const responses = comment.responses ?? [];
+	const totalResponseCount = comment.metaData?.responseCount ?? 0;
+
 	// Filter logic
-	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
-	const [responses, setResponses] = useState(comment.responses ?? []);
+	const expanded = responses.length >= totalResponseCount;
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const showResponses = threads !== 'unthreaded';
+	const showResponses = threads !== 'unthreaded' && responses.length > 0;
 
-	/**
-	 * @param responseCount a number > 3
-	 */
-	const decideShowMoreText = (responseCount: number) => {
-		const remainingResponses = responseCount - 3;
+	const decideShowMoreText = () => {
+		const remainingResponses = totalResponseCount - responses.length;
 		return remainingResponses === 1
 			? `Show 1 more reply`
 			: `Show ${remainingResponses} more replies`;
 	};
-
-	useEffect(() => {
-		setResponses(comment.responses ?? []);
-	}, [comment]);
 
 	const expand = (commentId: number) => {
 		setLoading(true);
@@ -131,16 +121,15 @@ export const CommentContainer = ({
 					console.error(result.error);
 					return;
 				}
-				setExpanded(true);
-				setResponses(result.value);
+				expandCommentReplies(commentId, result.value);
 			})
 			.finally(() => {
 				setLoading(false);
 			});
 	};
 
-	const onAddComment = (response: CommentType) =>
-		setResponses([...responses, response]);
+	const onAddComment = (commentId: number, response: CommentType) =>
+		expandCommentReplies(commentId, [...responses, response]);
 
 	return (
 		<div css={[commentToScrollTo === comment.id && selectedStyles]}>
@@ -153,8 +142,8 @@ export const CommentContainer = ({
 				isMuted={mutes.includes(comment.userProfile.userId)}
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
-				error={error}
-				setError={setError}
+				pickError={pickError}
+				setPickError={setPickError}
 				reportAbuse={reportAbuse}
 			/>
 
@@ -183,43 +172,37 @@ export const CommentContainer = ({
 										)}
 										toggleMuteStatus={toggleMuteStatus}
 										onPermalinkClick={onPermalinkClick}
-										error={error}
-										setError={setError}
+										pickError={pickError}
+										setPickError={setPickError}
 										reportAbuse={reportAbuse}
 									/>
 								</li>
 							))}
 						</ul>
-						{!expanded &&
-							comment.metaData &&
-							!!comment.metaData.responseCount &&
-							comment.metaData.responseCount > 3 && (
-								<div
-									css={[
-										topBorder,
-										css`
-											padding-top: ${space[3]}px;
-											padding-bottom: ${space[3]}px;
-										`,
-									]}
+						{!expanded && (
+							<div
+								css={[
+									topBorder,
+									css`
+										padding-top: ${space[3]}px;
+										padding-bottom: ${space[3]}px;
+									`,
+								]}
+							>
+								<PillarButton
+									priority="secondary"
+									icon={<SvgPlus />}
+									iconSide="left"
+									linkName="Show more replies"
+									onClick={() => expand(comment.id)}
+									size="xsmall"
 								>
-									<PillarButton
-										priority="secondary"
-										icon={<SvgPlus />}
-										iconSide="left"
-										linkName="Show more replies"
-										onClick={() => expand(comment.id)}
-										size="xsmall"
-									>
-										{loading
-											? 'loading...'
-											: decideShowMoreText(
-													comment.metaData
-														.responseCount,
-											  )}
-									</PillarButton>
-								</div>
-							)}
+									{loading
+										? 'loading...'
+										: decideShowMoreText()}
+								</PillarButton>
+							</div>
+						)}
 					</div>
 				)}
 				{commentBeingRepliedTo &&
@@ -238,25 +221,21 @@ export const CommentContainer = ({
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								onAddComment={onAddComment}
+								onAddComment={(response) =>
+									onAddComment(comment.id, response)
+								}
 								user={user}
 								setCommentBeingRepliedTo={
 									setCommentBeingRepliedTo
 								}
 								commentBeingRepliedTo={commentBeingRepliedTo}
 								onPreview={onPreview}
-								showPreview={showPreview}
-								setShowPreview={setShowPreview}
-								isActive={isCommentFormActive}
-								setIsActive={setIsCommentFormActive}
 								error={error}
 								setError={setError}
 								userNameMissing={userNameMissing}
 								setUserNameMissing={setUserNameMissing}
 								previewBody={previewBody}
 								setPreviewBody={setPreviewBody}
-								body={body}
-								setBody={setBody}
 							/>
 						</div>
 					)}

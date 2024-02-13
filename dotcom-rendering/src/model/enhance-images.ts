@@ -452,6 +452,7 @@ export const enhanceElementsImages = (
 	imagesForLightbox: ImageForLightbox[],
 ): FEElement[] =>
 	enhance(elements, {
-		isPhotoEssay: format.design === 'PhotoEssayDesign',
+		isPhotoEssay:
+			format.design === 'PhotoEssayDesign' && format.theme !== 'Labs',
 		imagesForLightbox,
 	});

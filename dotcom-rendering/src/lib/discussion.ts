@@ -24,10 +24,10 @@ import type {
 	pickComment,
 	reportAbuse,
 	unPickComment,
-} from '../lib/discussionApi';
-import type { Guard } from '../lib/guard';
-import { guard } from '../lib/guard';
-import type { Result } from '../lib/result';
+} from './discussionApi';
+import type { Guard } from './guard';
+import { guard } from './guard';
+import { error, ok, type Result } from './result';
 
 export type CAPIPillar =
 	| 'news'
@@ -132,12 +132,12 @@ export const parseCommentRepliesResponse = (
 ): Result<'ParsingError' | 'ApiError', CommentType[]> => {
 	const result = safeParse(discussionApiCommentSuccessSchema, data);
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (result.output.status === 'error') {
-		return { kind: 'error', error: 'ApiError' };
+		return error('ApiError');
 	}
-	return { kind: 'ok', value: result.output.comment.responses ?? [] };
+	return ok(result.output.comment.responses ?? []);
 };
 
 export interface CommentType {
@@ -220,20 +220,14 @@ export const parseCommentResponse = (
 ): Result<'ParsingError' | CommentResponseErrorCodes, number> => {
 	const { success, output } = safeParse(commentResponseSchema, data);
 	if (!success) {
-		return {
-			kind: 'error',
-			error: 'ParsingError',
-		};
+		return error('ParsingError');
 	}
 
 	if (output.status === 'error') {
-		return {
-			kind: 'error',
-			error: output.errorCode,
-		};
+		return error(output.errorCode);
 	}
 
-	return { kind: 'ok', value: output.message };
+	return ok(output.message);
 };
 
 const abuseResponseSchema = variant('status', [
@@ -249,11 +243,9 @@ const abuseResponseSchema = variant('status', [
 export const parseAbuseResponse = (data: unknown): Result<string, true> => {
 	const { success, output } = safeParse(abuseResponseSchema, data);
 	if (!success) {
-		return { kind: 'error', error: 'An unknown error occured' };
+		return error('An unknown error occured');
 	}
-	return output.status === 'ok'
-		? { kind: 'ok', value: true }
-		: { kind: 'error', error: output.message };
+	return output.status === 'ok' ? ok(true) : error(output.message);
 };
 
 export const postUsernameResponseSchema = variant('status', [
@@ -389,11 +381,47 @@ export const pickResponseSchema = object({
 	message: string(),
 });
 
-export type CommentForm = {
-	isActive: boolean;
+export type CommentFormProps = {
 	userNameMissing: boolean;
 	error: string;
-	showPreview: boolean;
 	previewBody: string;
-	body: string;
 };
+
+export const getCommentContextResponseSchema = object({
+	status: literal('ok'),
+	commentId: number(),
+	commentAncestorId: number(),
+	discussionKey: string(),
+	discussionWebUrl: string(),
+	discussionApiUrl: string(),
+	orderBy: picklist(orderBy),
+	pageSize: picklist(pageSize),
+	page: number(),
+});
+
+/** for development purposes only! */
+export const stubUser = {
+	kind: 'Reader',
+	addUsername: () => Promise.resolve(error('This is a stub user')),
+	onComment: () =>
+		Promise.resolve(
+			ok(Number.MAX_SAFE_INTEGER - Math.ceil(Math.random() * 12_000)),
+		),
+	onRecommend: () => Promise.resolve(true),
+	onReply: () => Promise.resolve(error('API_ERROR')),
+	reportAbuse: () => Promise.resolve(error('Invalid')),
+	profile: {
+		userId: 'stub-user-000',
+		displayName: 'Stub User',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
+	},
+} satisfies Reader;

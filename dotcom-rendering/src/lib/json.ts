@@ -1,4 +1,4 @@
-import type { Result } from './result';
+import { error, ok, type Result } from './result';
 
 /**
  * Safely fetch JSON from a URL.
@@ -10,12 +10,12 @@ export const fetchJSON = async (
 ): Promise<Result<'ApiError' | 'NetworkError', unknown>> => {
 	try {
 		const response = await fetch(...args);
-		return { kind: 'ok', value: await response.json() };
-	} catch (error) {
-		if (error instanceof SyntaxError) {
-			return { kind: 'error', error: 'ApiError' };
+		return ok(await response.json());
+	} catch (err) {
+		if (err instanceof SyntaxError) {
+			return error('ApiError');
 		}
 
-		return { kind: 'error', error: 'NetworkError' };
+		return error('NetworkError');
 	}
 };

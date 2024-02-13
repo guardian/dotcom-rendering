@@ -1,20 +1,17 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { preview, reportAbuse } from '../../lib/discussionApi';
-import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
+	CommentFormProps,
 	CommentType,
 	FilterOptions,
-	CommentForm as Form,
 	SignedInUser,
-} from '../../types/discussion';
+} from '../../lib/discussion';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
+import { getPicks, initialiseApi } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -36,35 +33,29 @@ type Props = {
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
-	setPage: (page: number, shouldExpand: boolean) => void;
+	setPage: (page: number) => void;
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
 	comments: CommentType[];
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
-	setTopFormActive: (isActive: boolean) => void;
-	setReplyFormActive: (isActive: boolean) => void;
-	setBottomFormActive: (isActive: boolean) => void;
+	pickError: string;
+	setPickError: (error: string) => void;
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;
 	setTopFormError: (error: string) => void;
 	setReplyFormError: (error: string) => void;
 	setBottomFormError: (error: string) => void;
-	setTopFormShowPreview: (showPreview: boolean) => void;
-	setReplyFormShowPreview: (showPreview: boolean) => void;
-	setBottomFormShowPreview: (showPreview: boolean) => void;
 	setTopFormPreviewBody: (previewBody: string) => void;
 	setReplyFormPreviewBody: (previewBody: string) => void;
 	setBottomFormPreviewBody: (previewBody: string) => void;
-	setTopFormBody: (body: string) => void;
-	setReplyFormBody: (body: string) => void;
-	setBottomFormBody: (body: string) => void;
-	topForm: Form;
-	replyForm: Form;
-	bottomForm: Form;
+	topForm: CommentFormProps;
+	replyForm: CommentFormProps;
+	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
 };
 
 /**
@@ -109,7 +100,7 @@ const picksWrapper = css`
 const NoComments = () => (
 	<div
 		css={css`
-			color: ${sourcePalette.neutral[46]};
+			color: ${schemedPalette('--discussion-subdued')};
 			${textSans.small()}
 			padding-top: ${space[5]}px;
 			padding-left: ${space[1]}px;
@@ -150,30 +141,24 @@ export const Comments = ({
 	topLevelCommentCount,
 	loading,
 	comments,
+	pickError,
+	setPickError,
 	setComment,
 	handleFilterChange,
-	setTopFormActive,
-	setReplyFormActive,
-	setBottomFormActive,
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
 	setBottomFormUserMissing,
 	setTopFormError,
 	setReplyFormError,
 	setBottomFormError,
-	setTopFormShowPreview,
-	setReplyFormShowPreview,
-	setBottomFormShowPreview,
 	setTopFormPreviewBody,
 	setReplyFormPreviewBody,
 	setBottomFormPreviewBody,
-	setTopFormBody,
-	setReplyFormBody,
-	setBottomFormBody,
 	topForm,
 	replyForm,
 	bottomForm,
 	reportAbuse,
+	expandCommentReplies,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -273,7 +258,7 @@ export const Comments = ({
 	};
 
 	const onPageChange = (pageNumber: number) => {
-		setPage(pageNumber, true);
+		setPage(pageNumber);
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
@@ -333,18 +318,10 @@ export const Comments = ({
 											mutes={mutes}
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
-											showPreview={replyForm.showPreview}
-											setShowPreview={
-												setReplyFormShowPreview
-											}
-											isCommentFormActive={
-												replyForm.isActive
-											}
-											setIsCommentFormActive={
-												setReplyFormActive
-											}
 											error={replyForm.error}
 											setError={setReplyFormError}
+											pickError={pickError}
+											setPickError={setPickError}
 											userNameMissing={
 												replyForm.userNameMissing
 											}
@@ -355,9 +332,10 @@ export const Comments = ({
 											setPreviewBody={
 												setReplyFormPreviewBody
 											}
-											body={replyForm.body}
-											setBody={setReplyFormBody}
 											reportAbuse={reportAbuse}
+											expandCommentReplies={
+												expandCommentReplies
+											}
 										/>
 									</li>
 								))}
@@ -377,18 +355,12 @@ export const Comments = ({
 					onAddComment={onAddComment}
 					user={user}
 					onPreview={onPreview}
-					showPreview={topForm.showPreview}
-					setShowPreview={setTopFormShowPreview}
-					isActive={topForm.isActive}
-					setIsActive={setTopFormActive}
 					error={topForm.error}
 					setError={setTopFormError}
 					userNameMissing={topForm.userNameMissing}
 					setUserNameMissing={setTopFormUserMissing}
 					previewBody={topForm.previewBody}
 					setPreviewBody={setTopFormPreviewBody}
-					body={topForm.body}
-					setBody={setTopFormBody}
 				/>
 			)}
 			{!!picks.length && (
@@ -437,19 +409,16 @@ export const Comments = ({
 									mutes={mutes}
 									toggleMuteStatus={toggleMuteStatus}
 									onPermalinkClick={onPermalinkClick}
-									showPreview={replyForm.showPreview}
-									setShowPreview={setReplyFormShowPreview}
-									isCommentFormActive={replyForm.isActive}
-									setIsCommentFormActive={setReplyFormActive}
 									error={replyForm.error}
 									setError={setReplyFormError}
+									pickError={pickError}
+									setPickError={setPickError}
 									userNameMissing={replyForm.userNameMissing}
 									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={replyForm.previewBody}
 									setPreviewBody={setReplyFormPreviewBody}
-									body={replyForm.body}
-									setBody={setReplyFormBody}
 									reportAbuse={reportAbuse}
+									expandCommentReplies={expandCommentReplies}
 								/>
 							</li>
 						))}
@@ -472,18 +441,12 @@ export const Comments = ({
 					onAddComment={onAddComment}
 					user={user}
 					onPreview={onPreview}
-					showPreview={bottomForm.showPreview}
-					setShowPreview={setBottomFormShowPreview}
-					isActive={bottomForm.isActive}
-					setIsActive={setBottomFormActive}
 					error={bottomForm.error}
 					setError={setBottomFormError}
 					userNameMissing={bottomForm.userNameMissing}
 					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={bottomForm.previewBody}
 					setPreviewBody={setBottomFormPreviewBody}
-					body={bottomForm.body}
-					setBody={setBottomFormBody}
 				/>
 			)}
 		</div>

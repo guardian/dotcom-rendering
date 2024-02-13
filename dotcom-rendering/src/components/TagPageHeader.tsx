@@ -227,7 +227,7 @@ const buildElementTree = (node: Node): ReactNode => {
 	} else if (node.nodeType === node.TEXT_NODE) {
 		return node.textContent;
 	} else {
-		logger.warn('TagFrontHeader: Unknown element received', {
+		logger.warn('TagPageHeader: Unknown element received', {
 			isDev: process.env.NODE_ENV !== 'production',
 			element: {
 				name: node.nodeName,
@@ -266,7 +266,7 @@ const Picture = ({ image }: { image: string }) => {
 	);
 };
 
-export const TagFrontHeader = ({
+export const TagPageHeader = ({
 	title,
 	containerPalette,
 	description,

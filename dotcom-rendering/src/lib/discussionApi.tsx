@@ -4,22 +4,23 @@ import type {
 	AdditionalHeadersType,
 	CommentType,
 	DiscussionOptions,
+	FilterOptions,
 	GetDiscussionSuccess,
-	OrderByType,
-	ThreadsType,
-} from '../types/discussion';
+} from './discussion';
 import {
 	discussionApiResponseSchema,
+	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentRepliesResponse,
 	parseCommentResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
-} from '../types/discussion';
+} from './discussion';
+import type { CommentContextType } from './discussionFilters';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
 import { getOptionsHeadersWithOkta } from './identity';
 import { fetchJSON } from './json';
-import type { Result } from './result';
+import { error, ok, type Result } from './result';
 
 const options = {
 	// Defaults
@@ -69,12 +70,8 @@ type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
 //todo: figure out the different return types and consider error handling
 export const getDiscussion = async (
 	shortUrl: string,
-	opts: {
-		orderBy: OrderByType;
-		pageSize: number;
-		threads: ThreadsType;
-		page: number;
-	},
+	page: number,
+	filters: FilterOptions,
 ): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
@@ -82,13 +79,13 @@ export const getDiscussion = async (
 			// Frontend uses the 'recommendations' key to store this options but the api expects
 			// 'mostRecommended' so we have to map here to support both
 			orderBy:
-				opts.orderBy === 'recommendations'
+				filters.orderBy === 'recommendations'
 					? 'mostRecommended'
-					: opts.orderBy,
-			pageSize: opts.pageSize,
-			displayThreaded: opts.threads !== 'unthreaded',
-			maxResponses: opts.threads === 'collapsed' ? 3 : 100,
-			page: opts.page,
+					: filters.orderBy,
+			pageSize: filters.pageSize,
+			displayThreaded: filters.threads !== 'unthreaded',
+			maxResponses: filters.threads === 'collapsed' ? 3 : 100,
+			page,
 		},
 	};
 	const params = objAsParams(apiOpts);
@@ -101,7 +98,7 @@ export const getDiscussion = async (
 
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (
 		result.output.status === 'error' &&
@@ -110,19 +107,16 @@ export const getDiscussion = async (
 		// we get the response to tell us
 		result.output.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
 	) {
-		return getDiscussion(shortUrl, {
-			...opts,
-			...{ threads: 'unthreaded' },
+		return getDiscussion(shortUrl, page, {
+			...filters,
+			threads: 'unthreaded',
 		});
 	}
 	if (result.output.status === 'error') {
-		return {
-			kind: 'error',
-			error: 'ApiError',
-		};
+		return error('ApiError');
 	}
 
-	return { kind: 'ok', value: result.output };
+	return ok(result.output);
 };
 
 export const preview = async (
@@ -146,14 +140,11 @@ export const preview = async (
 	if (jsonResult.kind === 'error') return jsonResult;
 
 	return isObject(jsonResult.value) && isString(jsonResult.value.commentBody)
-		? { kind: 'ok', value: jsonResult.value.commentBody }
-		: {
-				kind: 'error',
-				error: 'ParsingError',
-		  };
+		? ok(jsonResult.value.commentBody)
+		: error('ParsingError');
 };
 
-type CommentResponse = Result<
+export type CommentResponse = Result<
 	| 'NetworkError'
 	| 'ApiError'
 	| (ReturnType<typeof parseCommentResponse> & { kind: 'error' })['error'],
@@ -241,13 +232,13 @@ export const getPicks = async (
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 
 	if (!result.success) {
-		return { kind: 'error', error: 'ParsingError' };
+		return error('ParsingError');
 	}
 	if (result.output.status === 'error') {
-		return { kind: 'error', error: 'ApiError' };
+		return error('ApiError');
 	}
 
-	return { kind: 'ok', value: result.output.discussion.comments };
+	return ok(result.output.discussion.comments);
 };
 
 export const reportAbuse =
@@ -292,10 +283,7 @@ export const reportAbuse =
 		});
 
 		if (jsonResult.kind === 'error') {
-			return {
-				kind: 'error',
-				error: 'An unknown error occured',
-			};
+			return error('An unknown error occured');
 		}
 
 		return parseAbuseResponse(jsonResult.value);
@@ -354,18 +342,15 @@ export const addUserName =
 		const result = safeParse(postUsernameResponseSchema, jsonResult.value);
 
 		if (!result.success) {
-			return { kind: 'error', error: 'An unknown error occured' };
+			return error('An unknown error occured');
 		}
 		if (result.output.status === 'error') {
-			return {
-				kind: 'error',
-				error: result.output.errors
-					.map(({ message }) => message)
-					.join('\n'),
-			};
+			return error(
+				result.output.errors.map(({ message }) => message).join('\n'),
+			);
 		}
 
-		return { kind: 'ok', value: true };
+		return ok(true);
 	};
 
 export const pickComment =
@@ -394,9 +379,9 @@ export const pickComment =
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-		if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return error('ParsingError');
 
-		return { kind: 'ok', value: true };
+		return ok(true);
 	};
 
 export const unPickComment =
@@ -425,9 +410,9 @@ export const unPickComment =
 
 		const result = safeParse(pickResponseSchema, jsonResult.value);
 
-		if (!result.success) return { kind: 'error', error: 'ParsingError' };
+		if (!result.success) return error('ParsingError');
 
-		return { kind: 'ok', value: false };
+		return ok(false);
 	};
 
 export const getMoreResponses = async (
@@ -452,4 +437,40 @@ export const getMoreResponses = async (
 	if (jsonResult.kind === 'error') return jsonResult;
 
 	return parseCommentRepliesResponse(jsonResult.value);
+};
+
+const buildParams = (filters: FilterOptions): URLSearchParams => {
+	return new URLSearchParams({
+		// Frontend uses the 'recommendations' key to store this options but the api expects
+		// 'mostRecommended' so we have to map here to support both
+		orderBy:
+			filters.orderBy === 'recommendations'
+				? 'mostRecommended'
+				: filters.orderBy,
+		pageSize: String(filters.pageSize),
+		displayThreaded: String(
+			filters.threads === 'collapsed' || filters.threads === 'expanded',
+		),
+	});
+};
+
+export const getCommentContext = async (
+	ajaxUrl: string,
+	commentId: number,
+	filters: FilterOptions,
+): Promise<Result<GetDiscussionError, CommentContextType>> => {
+	const url = joinUrl(ajaxUrl, 'comment', commentId.toString(), 'context');
+	const params = buildParams(filters);
+
+	const jsonResult = await fetchJSON(url + '?' + params.toString());
+
+	if (jsonResult.kind === 'error') return jsonResult;
+
+	const result = safeParse(getCommentContextResponseSchema, jsonResult.value);
+
+	if (!result.success) {
+		return error('ParsingError');
+	}
+
+	return ok(result.output);
 };

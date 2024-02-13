@@ -13,7 +13,7 @@ if (pkg.devDependencies) {
  */
 const exceptions = /** @type {const} */ ([
 	'github:guardian/babel-plugin-px-to-rem#v0.1.0',
-	'npm:@guardian/ophan-tracker-js@2.1.0-next.1',
+	'npm:@guardian/ophan-tracker-js@2.1.0-next.2',
 ]);
 
 const mismatches = Object.entries(pkg.dependencies)

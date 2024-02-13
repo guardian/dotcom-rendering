@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { CommentType, Reader } from '../../types/discussion';
+import type { CommentType, Reader } from '../../lib/discussion';
+import { ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
 
 export default { title: 'Discussion/CommentContainer' };
@@ -129,7 +130,7 @@ const commentDataWithLongThread: CommentType = {
 		staffCommenterCount: 1,
 		editorsPickCount: 0,
 		blockedCount: 0,
-		responseCount: 5,
+		responseCount: 3,
 	},
 };
 
@@ -157,8 +158,8 @@ const aUser: Reader = {
 	onComment: () => Promise.resolve(commentResponseError),
 	onReply: () => Promise.resolve(commentResponseError),
 	onRecommend: () => Promise.resolve(true),
-	addUsername: () => Promise.resolve({ kind: 'ok', value: true }),
-	reportAbuse: () => Promise.resolve({ kind: 'ok', value: true }),
+	addUsername: () => Promise.resolve(ok(true)),
+	reportAbuse: () => Promise.resolve(ok(true)),
 };
 
 const commentDataThreaded: CommentType = {
@@ -199,19 +200,16 @@ export const defaultStory = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -238,19 +236,16 @@ export const threadedComment = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -277,19 +272,16 @@ export const threadedCommentWithShowMore = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -316,19 +308,16 @@ export const threadedCommentWithLongUsernames = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -355,19 +344,16 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
+		pickError={''}
+		setPickError={() => {}}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
-		reportAbuse={() => Promise.resolve({ kind: 'ok', value: true })}
+		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =
