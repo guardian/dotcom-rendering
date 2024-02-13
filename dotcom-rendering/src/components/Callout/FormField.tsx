@@ -98,10 +98,11 @@ export const FormField = ({
 				<FileInput
 					label={label}
 					hideLabel={hideLabel}
-					supporting={description}
+					supporting={'Please note, the maximum file size is 5MB.'}
 					optional={!required}
 					error={fieldError}
 					data-testid={`form-field-${formField.id}`}
+					maxFileSize={5000000}
 					onUpload={(file: string | undefined): void =>
 						setFieldInFormData(formField.id, file)
 					}
