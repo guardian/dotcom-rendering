@@ -1,6 +1,7 @@
 import { doHydration } from './islands/doHydration';
 import { getEmotionCache } from './islands/emotion';
 import { getConfig } from './islands/getConfig';
+import { getName } from './islands/getName';
 import { getProps } from './islands/getProps';
 
 const forceHydration = async (): Promise<void> => {
@@ -14,7 +15,7 @@ const forceHydration = async (): Promise<void> => {
 		if (!guElement) return;
 		if (rest.length > 0) return;
 
-		const name = guElement.getAttribute('name');
+		const name = getName(guElement);
 		if (!name) return;
 
 		// Read the props and config from where they have been serialised in the dom using an Island
