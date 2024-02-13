@@ -26,9 +26,7 @@ const sharedButtonStyles = (sizeXSmall: boolean) => css`
 	border-color: ${themePalette('--share-button-border')};
 	min-width: ${sizeXSmall ? '101px' : '132px'};
 	max-width: ${sizeXSmall ? '101px' : '132px'};
-	svg {
-		width: ${sizeXSmall ? '13.33px' : '16.67px'};
-		height: ${sizeXSmall ? '13.33px' : '16.67px'};
+	height: ${sizeXSmall ? '24px' : '36px'} svg {
 		margin-left: ${sizeXSmall ? '' : '0'};
 	}
 `;
@@ -50,7 +48,7 @@ const buttonStyles = css`
 
 const copiedButtonStyles = (sizeXSmall: boolean) => css`
 	color: ${themePalette('--share-button-copied')};
-	padding: ${sizeXSmall ? '0 8px;' : '0 11px;'} svg {
+	padding: ${sizeXSmall ? '0 4px;' : '0 8px;'} svg {
 		fill: ${palette.success[400]};
 	}
 `;
@@ -60,8 +58,6 @@ const nativeShare = (sizeXSmall: boolean) => css`
 	max-width: ${sizeXSmall ? '79px' : '105px'};
 	svg {
 		margin-right: 6px;
-		width: 18.33px;
-		height: 18.33px;
 	}
 	border-color: ${themePalette('--share-button-border')};
 `;
@@ -111,7 +107,7 @@ export const NativeShareButton = ({
 	isLiveBlogMeta,
 }: {
 	onShare: () => Promise<void>;
-	size?: Size | undefined;
+	size?: Size;
 	isLiveBlogMeta: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
@@ -142,7 +138,7 @@ export const CopyLinkButton = ({
 	isCopied,
 }: {
 	onShare: () => Promise<void>;
-	size?: Size | undefined;
+	size?: Size;
 	isLiveBlogMeta: boolean;
 	isCopied: boolean;
 }) => {

@@ -59,6 +59,7 @@ export const LinkCopied = () => {
 			onShare={async () => {}}
 			isCopied={true}
 			isLiveBlogMeta={true}
+			size="small"
 		/>
 	);
 };
@@ -66,7 +67,13 @@ LinkCopied.storyName = 'LinkCopied';
 LinkCopied.decorators = [splitTheme()];
 
 export const NativeShare = () => {
-	return <NativeShareButton onShare={async () => {}} isLiveBlogMeta={true} />;
+	return (
+		<NativeShareButton
+			onShare={async () => {}}
+			isLiveBlogMeta={true}
+			size="small"
+		/>
+	);
 };
 NativeShare.storyName = 'NativeShare';
 NativeShare.decorators = [splitTheme()];
@@ -80,7 +87,11 @@ export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 					: 'inherit'};
 			`}
 		>
-			<NativeShareButton onShare={async () => {}} isLiveBlogMeta={true} />
+			<NativeShareButton
+				onShare={async () => {}}
+				isLiveBlogMeta={true}
+				size="small"
+			/>
 		</div>
 	);
 };
