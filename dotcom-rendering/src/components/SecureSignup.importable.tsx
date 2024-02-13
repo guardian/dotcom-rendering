@@ -43,11 +43,12 @@ const formStyles = css`
 	gap: 0 ${space[3]}px;
 
 	grid-template-areas:
-		'label .'
+		'label label'
 		'input button';
 
 	label {
 		grid-area: label;
+		color: ${palette('--article-text')};
 	}
 	input {
 		grid-area: input;
@@ -333,7 +334,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 						? {
 								gridTemplateColumns: 'auto 1fr',
 								gridTemplateAreas: `
-									". label"
+									"label  label"
 									"button input"`,
 						  }
 						: undefined),
