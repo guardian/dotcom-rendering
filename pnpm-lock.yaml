@@ -402,8 +402,8 @@ importers:
         specifier: 16.0.0
         version: 16.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components@18.0.0)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/support-dotcom-components':
-        specifier: 1.1.1
-        version: 1.1.1
+        specifier: 1.1.2
+        version: 1.1.2
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4315,7 +4315,7 @@ packages:
       '@guardian/ophan-tracker-js': 2.0.4
       '@guardian/prebid.js': 8.34.0(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-foundations': 14.1.4(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/support-dotcom-components': 1.1.1
+      '@guardian/support-dotcom-components': 1.1.2
       '@octokit/core': 4.2.4
       fastdom: 1.0.11
       lodash-es: 4.17.21
@@ -4758,8 +4758,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@1.1.1:
-    resolution: {integrity: sha512-MnplfuFdfzHgxW6Lh3sZiQy/hxSN/rwIVIm0H+mnFiJGfeV5uqfXbwwb8b9HTt9WaO3JxEhoKTvJmCH4nw9lEw==}
+  /@guardian/support-dotcom-components@1.1.2:
+    resolution: {integrity: sha512-qW2H1sMI9v7D0N+TyY/my8l/0tsTG9/ccbaB3dGrAK0druTWw13r1uWDQHTckElNY1zNFItW8JnZjc+nEwLsrQ==}
     dev: false
 
   /@guardian/tsconfig@0.2.0:
