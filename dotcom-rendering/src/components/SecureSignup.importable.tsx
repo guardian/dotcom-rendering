@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import type { OphanAction } from '@guardian/libs';
-import { space, textSans, until } from '@guardian/source-foundations';
+import { space, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
 	InlineSuccess,
-	Label,
 	Link,
 	SvgReload,
 	SvgSpinner,
@@ -36,45 +35,34 @@ type Props = {
 	successDescription: string;
 };
 
-const labelStyles = css`
-	div {
-		${textSans.xsmall({ fontWeight: 'bold' })}
-		color: ${palette('--article-text')};
-		padding-bottom: ${space[1]}px;
+const formStyles = css`
+	display: grid;
+	align-items: center;
+	grid-template-columns: auto min-content;
+	grid-template-rows: 24px 48px;
+	gap: 0 ${space[3]}px;
+
+	grid-template-areas:
+		'label .'
+		'input button';
+
+	label {
+		grid-area: label;
+	}
+	input {
+		grid-area: input;
+	}
+	button {
+		grid-area: button;
 	}
 `;
 
-const flexParentStyles = css`
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	flex-wrap: wrap;
-	gap: ${space[3]}px;
-`;
-
-const inputContainerStyles = css`
-	margin-bottom: ${space[2]}px;
-	flex-shrink: 1;
-	flex-basis: 335px;
-`;
-
-const textInputStyles = css`
-	height: 36px;
-	margin-top: 0;
-	background-color: ${palette('--article-section-background')};
-	color: ${palette('--article-text')};
-`;
-
 const buttonCssOverrides = css`
-	justify-content: center;
 	background-color: ${palette('--recaptcha-button')};
 	color: ${palette('--recaptcha-button-text')};
 	:hover {
 		background-color: ${palette('--recaptcha-button-hover')};
 	}
-	flex-basis: 118px;
-	flex-shrink: 0;
-	margin-bottom: ${space[2]}px;
 `;
 
 const errorContainerStyles = css`
@@ -336,45 +324,38 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			<form
 				onSubmit={handleSubmit}
 				id={`secure-signup-${newsletterId}`}
-				style={
-					hasResponse || isWaitingForResponse
-						? { display: 'none' }
-						: { display: 'block' }
-				}
+				style={{
+					display:
+						hasResponse || isWaitingForResponse
+							? 'none'
+							: undefined,
+					...(signedInUserEmail
+						? {
+								gridTemplateColumns: 'auto 1fr',
+								gridTemplateAreas: `
+									". label"
+									"button input"`,
+						  }
+						: undefined),
+				}}
+				css={formStyles}
 			>
-				<Label
-					text="Enter your email address"
-					cssOverrides={[labelStyles]}
-					style={{
-						display: signedInUserEmail ? 'none' : undefined,
-					}}
+				<TextInput
+					hidden={!!signedInUserEmail}
+					hideLabel={!!signedInUserEmail}
+					name="email"
+					label="Enter your email address"
+					type="email"
+					value={signedInUserEmail}
 				/>
-
-				<div css={flexParentStyles}>
-					<div
-						css={[inputContainerStyles]}
-						style={{
-							display: signedInUserEmail ? 'none' : undefined,
-						}}
-					>
-						<TextInput
-							hideLabel={true}
-							name="email"
-							label="Enter your email address"
-							type="email"
-							value={signedInUserEmail}
-							cssOverrides={[textInputStyles]}
-						/>
-					</div>
-					<Button
-						onClick={handleClick}
-						size="small"
-						type="submit"
-						cssOverrides={buttonCssOverrides}
-					>
-						Sign up
-					</Button>
-				</div>
+				<Button
+					onClick={handleClick}
+					size="small"
+					type="submit"
+					cssOverrides={buttonCssOverrides}
+				>
+					Sign up
+				</Button>
 			</form>
 			{isWaitingForResponse && (
 				<div>
