@@ -429,6 +429,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										format={format}
+										context="ArticleMeta"
 									/>
 								</Island>
 							</div>
