@@ -1,20 +1,16 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
+import { palette as schemedPalette } from '../../palette';
 
 type Props = {
 	previewHtml: string;
 	showSpout: boolean;
 };
 
-/** @TODO adapt for dark mode */
 const previewStyle = css`
 	${textSans.small()}
 	padding: ${space[2]}px ${space[4]}px;
-	background-color: ${sourcePalette.neutral[93]};
+	background-color: ${schemedPalette('--discussion-preview-background')};
 	border-radius: 5px;
 	margin-top: 0;
 	margin-bottom: ${20}px;
@@ -26,7 +22,7 @@ const previewStyle = css`
 		margin-left: ${space[5]}px;
 		margin-right: ${space[5]}px;
 		padding-left: ${space[2]}px;
-		color: ${sourcePalette.neutral[46]};
+		color: ${schemedPalette('--discussion-subdued')};
 	}
 
 	i {
@@ -60,7 +56,7 @@ const spout = css`
 	width: 0;
 	height: 0;
 	border-right: 1rem solid transparent;
-	border-bottom: 1rem solid ${sourcePalette.neutral[93]};
+	border-bottom: 1rem solid ${schemedPalette('--discussion-border')};
 	margin-left: 12.5rem;
 	border-right-style: inset;
 `;

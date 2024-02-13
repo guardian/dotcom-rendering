@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type {
 	AdditionalHeadersType,
@@ -15,6 +11,7 @@ import type {
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -103,7 +100,7 @@ const picksWrapper = css`
 const NoComments = () => (
 	<div
 		css={css`
-			color: ${sourcePalette.neutral[46]};
+			color: ${schemedPalette('--discussion-subdued')};
 			${textSans.small()}
 			padding-top: ${space[5]}px;
 			padding-left: ${space[1]}px;

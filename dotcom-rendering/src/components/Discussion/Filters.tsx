@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import { space } from '@guardian/source-foundations';
 import type {
 	FilterOptions,
 	OrderByType,
 	PageSizeType,
 	ThreadsType,
 } from '../../lib/discussion';
+import { palette as schemedPalette } from '../../palette';
 import { Dropdown } from './Dropdown';
 
 type Props = {
@@ -18,7 +19,7 @@ const filterBar = css`
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[2]}px;
 
-	border-top: 1px solid ${sourcePalette.neutral[86]};
+	border-top: 1px solid ${schemedPalette('--discussion-border')};
 
 	display: flex;
 	flex-direction: row;
@@ -31,7 +32,7 @@ const dividerStyles = css`
 		content: '';
 		display: block;
 		width: 1px;
-		background-color: ${sourcePalette.neutral[86]};
+		background-color: ${schemedPalette('--discussion-border')};
 		position: absolute;
 		top: -${space[1]}px;
 		bottom: ${space[1]}px;
