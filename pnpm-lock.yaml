@@ -387,8 +387,8 @@ importers:
         specifier: 2.0.4
         version: 2.0.4
       '@guardian/ophan-tracker-js-next':
-        specifier: npm:@guardian/ophan-tracker-js@2.1.0-next.2
-        version: /@guardian/ophan-tracker-js@2.1.0-next.2
+        specifier: npm:@guardian/ophan-tracker-js@2.1.0-next.3
+        version: /@guardian/ophan-tracker-js@2.1.0-next.3
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -4781,8 +4781,8 @@ packages:
     engines: {node: '>=16'}
     dev: false
 
-  /@guardian/ophan-tracker-js@2.1.0-next.2:
-    resolution: {integrity: sha512-N5WxkDYuCjhLI6IE3Npyegsr5p/3482f7A1SNxWELJdXHgSrD8wnKQ3K18vwZHv7cJN4iNg7isEtgKsb5H4LZw==}
+  /@guardian/ophan-tracker-js@2.1.0-next.3:
+    resolution: {integrity: sha512-PhkoypSxP4Afjd6OV/D/RXvNQU85qOlhPn1jC7nvp8WjzNHSLVBlnBITQMK3ASbBHBvBuFylLLZTyGAk1SUhIA==}
     engines: {node: '>=16'}
     dev: false
 
