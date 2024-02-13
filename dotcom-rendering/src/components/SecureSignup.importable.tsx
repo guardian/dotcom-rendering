@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { OphanAction } from '@guardian/libs';
+import { isString, type OphanAction } from '@guardian/libs';
 import { space, until } from '@guardian/source-foundations';
 import {
 	Button,
@@ -10,7 +10,7 @@ import {
 	SvgSpinner,
 	TextInput,
 } from '@guardian/source-react-components';
-import type { FormEvent, ReactEventHandler } from 'react';
+import type { CSSProperties, FormEvent, ReactEventHandler } from 'react';
 import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
 // that version will compile and render but is non-functional.
@@ -67,6 +67,15 @@ const formStyles = css`
 		}
 	}
 `;
+
+const formStylesWhenSignedIn = {
+	gridTemplateColumns: 'auto 1fr',
+	gridTemplateAreas: [
+		// this is easier to parse over multiple lines
+		'label  label',
+		'button input',
+	].join(' '),
+} satisfies CSSProperties;
 
 const errorContainerStyles = css`
 	display: flex;
@@ -322,6 +331,9 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 		sendTracking(newsletterId, 'open-captcha', renderingTarget);
 		recaptchaRef.current?.execute();
 	};
+
+	const hideEmailInput = isString(signedInUserEmail);
+
 	return (
 		<>
 			<form
@@ -332,20 +344,13 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 						hasResponse || isWaitingForResponse
 							? 'none'
 							: undefined,
-					...(signedInUserEmail
-						? {
-								gridTemplateColumns: 'auto 1fr',
-								gridTemplateAreas: `
-									"label  label"
-									"button input"`,
-						  }
-						: undefined),
+					...(hideEmailInput ? formStylesWhenSignedIn : undefined),
 				}}
 				css={formStyles}
 			>
 				<TextInput
-					hidden={!!signedInUserEmail}
-					hideLabel={!!signedInUserEmail}
+					hidden={hideEmailInput}
+					hideLabel={hideEmailInput}
 					name="email"
 					label="Enter your email address"
 					type="email"
