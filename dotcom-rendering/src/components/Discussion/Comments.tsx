@@ -8,6 +8,7 @@ import type {
 	CommentType,
 	FilterOptions,
 	SignedInUser,
+	TopLevelCommentType,
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
@@ -38,7 +39,8 @@ type Props = {
 	topLevelCommentCount: number;
 	loading: boolean;
 	comments: CommentType[];
-	setComment: (comment: CommentType) => void;
+	addTopLevelComment: (comment: TopLevelCommentType) => void;
+	addReplyComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	pickError: string;
 	setPickError: (error: string) => void;
@@ -143,7 +145,8 @@ export const Comments = ({
 	comments,
 	pickError,
 	setPickError,
-	setComment,
+	addTopLevelComment,
+	addReplyComment,
 	handleFilterChange,
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
@@ -251,8 +254,12 @@ export const Comments = ({
 
 		setMutes(updatedMutes); // Update local state
 	};
-	const onAddComment = (comment: CommentType) => {
-		setComment(comment);
+	const onAddComment = (comment: TopLevelCommentType | CommentType) => {
+		if ('responses' in comment) {
+			addTopLevelComment(comment);
+		} else {
+			addReplyComment(comment);
+		}
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
 	};

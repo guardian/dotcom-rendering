@@ -1,4 +1,4 @@
-import type { CommentType } from '../../src/lib/discussion';
+import type { TopLevelCommentType } from '../../src/lib/discussion';
 
 export const comment = {
 	id: 138809272,
@@ -156,4 +156,4 @@ export const comment = {
 		blockedCount: 1,
 		responseCount: 4,
 	},
-} as const satisfies CommentType;
+} as const satisfies TopLevelCommentType;

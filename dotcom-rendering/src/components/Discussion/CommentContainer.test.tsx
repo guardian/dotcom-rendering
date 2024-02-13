@@ -1,7 +1,11 @@
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
-import type { CommentType, SignedInUser } from '../../lib/discussion';
+import type {
+	CommentType,
+	SignedInUser,
+	TopLevelCommentType,
+} from '../../lib/discussion';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
@@ -18,7 +22,7 @@ const commentWithReply = {
 const commentWithoutReply = {
 	...comment,
 	responses: [],
-} satisfies CommentType;
+} satisfies TopLevelCommentType;
 
 const commentResponseError = error<'NetworkError', number>('NetworkError');
 
@@ -54,10 +58,12 @@ describe('CommentContainer', () => {
 		const newCommentText = 'A brand new comment';
 
 		// a workaround to emulating hooks outside of render
-		let commentBeingRepliedTo: CommentType | undefined =
-			commentWithoutReply;
+		let commentBeingRepliedTo:
+			| TopLevelCommentType
+			| CommentType
+			| undefined = commentWithoutReply;
 		const mockSetCommentBeingRepliedTo = jest.fn(
-			(newCommentBeingRepliedTo?: CommentType) => {
+			(newCommentBeingRepliedTo?: TopLevelCommentType | CommentType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
 		);
@@ -88,6 +94,7 @@ describe('CommentContainer', () => {
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
 					if (commentBeingRepliedTo?.id !== id) return;
+					if (!('responses' in commentBeingRepliedTo)) return;
 					commentBeingRepliedTo.responses = responses;
 				}}
 			/>,
@@ -184,6 +191,7 @@ describe('CommentContainer', () => {
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
 					if (commentBeingRepliedTo?.id !== id) return;
+					if (!('responses' in commentBeingRepliedTo)) return;
 					commentBeingRepliedTo.responses = responses;
 				}}
 			/>,

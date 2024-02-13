@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentType,
 	SignedInUser,
+	TopLevelCommentType,
 	UserProfile,
 } from '../../lib/discussion';
 import { preview as defaultPreview } from '../../lib/discussionApi';
@@ -16,7 +17,7 @@ import { Row } from './Row';
 type Props = {
 	shortUrl: string;
 	user: SignedInUser;
-	onAddComment: (response: CommentType) => void;
+	onAddComment: (response: TopLevelCommentType | CommentType) => void;
 	setCommentBeingRepliedTo?: () => void;
 	commentBeingRepliedTo?: CommentType;
 	onPreview?: typeof defaultPreview;
@@ -154,38 +155,49 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
  * by the new API response and - if the refresh was within 60 seconds - the
  * reader's comment will not be present. The same edge case exists in frontend.
  */
-const simulateNewComment = (
+const simulateNewTopLevelComment = (
 	commentId: number,
 	body: string,
 	userProfile: UserProfile,
-	commentBeingRepliedTo?: CommentType,
-): CommentType => {
-	const responseTo = commentBeingRepliedTo
-		? {
-				displayName: commentBeingRepliedTo.userProfile.displayName,
-				commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
-				isoDateTime: commentBeingRepliedTo.isoDateTime,
-				date: commentBeingRepliedTo.date,
-				commentId: String(commentBeingRepliedTo.id),
-				commentWebUrl: `https://discussion.theguardian.com/comment-permalink/${commentBeingRepliedTo.id}`,
-		  }
-		: undefined;
+): TopLevelCommentType => ({
+	id: commentId,
+	body,
+	date: Date(),
+	isoDateTime: new Date().toISOString(),
+	status: 'visible',
+	webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
+	apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
+	numRecommends: 0,
+	isHighlighted: false,
+	userProfile,
+	responses: [],
+});
 
-	return {
-		id: commentId,
-		body,
-		date: Date(),
-		isoDateTime: new Date().toISOString(),
-		status: 'visible',
-		webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
-		apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
-		numRecommends: 0,
-		isHighlighted: false,
-		userProfile,
-		responses: [],
-		responseTo,
-	};
-};
+const simulateNewReplyComment = (
+	commentId: number,
+	body: string,
+	userProfile: UserProfile,
+	commentBeingRepliedTo: TopLevelCommentType | CommentType,
+): CommentType => ({
+	id: commentId,
+	body,
+	date: Date(),
+	isoDateTime: new Date().toISOString(),
+	status: 'visible',
+	webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
+	apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
+	numRecommends: 0,
+	isHighlighted: false,
+	userProfile,
+	responseTo: {
+		displayName: commentBeingRepliedTo.userProfile.displayName,
+		commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
+		isoDateTime: commentBeingRepliedTo.isoDateTime,
+		date: commentBeingRepliedTo.date,
+		commentId: String(commentBeingRepliedTo.id),
+		commentWebUrl: `https://discussion.theguardian.com/comment-permalink/${commentBeingRepliedTo.id}`,
+	},
+});
 
 export const CommentForm = ({
 	shortUrl,
@@ -363,12 +375,18 @@ export const CommentForm = ({
 				}
 			} else {
 				onAddComment(
-					simulateNewComment(
-						response.value,
-						body,
-						user.profile,
-						commentBeingRepliedTo,
-					),
+					commentBeingRepliedTo
+						? simulateNewReplyComment(
+								response.value,
+								body,
+								user.profile,
+								commentBeingRepliedTo,
+						  )
+						: simulateNewTopLevelComment(
+								response.value,
+								body,
+								user.profile,
+						  ),
 				);
 				resetForm();
 			}

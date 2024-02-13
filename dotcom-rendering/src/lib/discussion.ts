@@ -1,19 +1,18 @@
-import type { BaseSchema } from 'valibot';
+import type { BaseSchema, Output } from 'valibot';
 import {
 	array,
 	boolean,
 	integer,
 	literal,
+	merge,
 	minLength,
 	number,
 	object,
 	optional,
 	picklist,
-	recursive,
 	safeParse,
 	string,
 	transform,
-	unknown,
 	variant,
 } from 'valibot';
 import type {
@@ -73,7 +72,9 @@ export interface UserProfile {
 	};
 }
 
-const comment: BaseSchema<CommentType> = object({
+export type CommentType = Output<typeof comment>;
+
+const comment = object({
 	id: number(),
 	body: string(),
 	date: string(),
@@ -95,7 +96,7 @@ const comment: BaseSchema<CommentType> = object({
 			commentWebUrl: string(),
 		}),
 	),
-	responses: optional(array(recursive(() => comment))),
+
 	metaData: optional(
 		object({
 			commentCount: number(),
@@ -117,66 +118,37 @@ const comment: BaseSchema<CommentType> = object({
 	),
 });
 
-const discussionApiCommentSuccessSchema = variant('status', [
+export type TopLevelCommentType = Output<typeof topLevelCommentSchema>;
+
+const topLevelCommentSchema = merge([
+	comment,
+	object({
+		responses: optional(array(comment), []),
+	}),
+]);
+
+const commentRepliesResponseSchema = variant('status', [
 	object({
 		status: literal('error'),
 	}),
 	object({
 		status: literal('ok'),
-		comment,
+		comment: topLevelCommentSchema,
 	}),
 ]);
 
 export const parseCommentRepliesResponse = (
 	data: unknown,
 ): Result<'ParsingError' | 'ApiError', CommentType[]> => {
-	const result = safeParse(discussionApiCommentSuccessSchema, data);
+	const result = safeParse(commentRepliesResponseSchema, data);
 	if (!result.success) {
 		return error('ParsingError');
 	}
 	if (result.output.status === 'error') {
 		return error('ApiError');
 	}
-	return ok(result.output.comment.responses ?? []);
+	return ok(result.output.comment.responses);
 };
-
-export interface CommentType {
-	id: number;
-	body: string;
-	date: string;
-	isoDateTime: string;
-	status: string;
-	webUrl: string;
-	apiUrl: string;
-	numResponses?: number;
-	numRecommends: number;
-	isHighlighted: boolean;
-	userProfile: UserProfile;
-	responseTo?: {
-		displayName: string;
-		commentApiUrl: string;
-		isoDateTime: string;
-		date: string;
-		commentId: string;
-		commentWebUrl: string;
-	};
-	responses?: CommentType[];
-	metaData?: {
-		commentCount: number;
-		staffCommenterCount: number;
-		editorsPickCount: number;
-		blockedCount: number;
-		responseCount: number;
-	};
-	discussion?: {
-		key: string;
-		webUrl: string;
-		apiUrl: string;
-		title: string;
-		isClosedForComments: boolean;
-		isClosedForRecommendation: boolean;
-	};
-}
 
 export type CommentResponseErrorCodes = (typeof errorCodes)[number];
 const errorCodes = [
@@ -196,13 +168,11 @@ const errorCodes = [
 	'EMAIL_NOT_VALIDATED',
 ] as const;
 
-const commentErrorSchema = object({
-	status: literal('error'),
-	errorCode: picklist(errorCodes),
-});
-
-const commentResponseSchema = variant('status', [
-	commentErrorSchema,
+const postCommentResponseSchema = variant('status', [
+	object({
+		status: literal('error'),
+		errorCode: picklist(errorCodes),
+	}),
 	object({
 		status: literal('ok'),
 		message: transform(
@@ -218,7 +188,7 @@ const commentResponseSchema = variant('status', [
 export const parseCommentResponse = (
 	data: unknown,
 ): Result<'ParsingError' | CommentResponseErrorCodes, number> => {
-	const { success, output } = safeParse(commentResponseSchema, data);
+	const { success, output } = safeParse(postCommentResponseSchema, data);
 	if (!success) {
 		return error('ParsingError');
 	}
@@ -308,28 +278,7 @@ const discussionApiErrorSchema = object({
 	errorCode: optional(string()),
 });
 
-export type GetDiscussionSuccess = {
-	status: 'ok';
-	currentPage: number;
-	pages: number;
-	pageSize: number;
-	orderBy: string;
-	discussion: DiscussionData;
-	switches?: unknown;
-};
-
-type DiscussionData = {
-	key: string;
-	webUrl: string;
-	apiUrl: string;
-	commentCount: number;
-	topLevelCommentCount: number;
-	isClosedForComments: boolean;
-	isClosedForRecommendation: boolean;
-	isThreaded: boolean;
-	title: string;
-	comments: CommentType[];
-};
+export type GetDiscussionSuccess = Output<typeof discussionApiSuccessSchema>;
 
 const discussionApiSuccessSchema = object({
 	status: literal('ok'),
@@ -347,9 +296,8 @@ const discussionApiSuccessSchema = object({
 		isClosedForRecommendation: boolean(),
 		isThreaded: boolean(),
 		title: string(),
-		comments: array(comment),
+		comments: array(topLevelCommentSchema),
 	}),
-	switches: unknown(),
 });
 
 export const discussionApiResponseSchema = variant('status', [

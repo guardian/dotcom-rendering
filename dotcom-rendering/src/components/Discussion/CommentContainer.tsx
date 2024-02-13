@@ -6,6 +6,7 @@ import type {
 	CommentType,
 	SignedInUser,
 	ThreadsType,
+	TopLevelCommentType,
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
@@ -16,13 +17,15 @@ import { CommentReplyPreview } from './CommentReplyPreview';
 import { PillarButton } from './PillarButton';
 
 type Props = {
-	comment: CommentType;
+	comment: TopLevelCommentType | CommentType;
 	isClosedForComments: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
 	threads: ThreadsType;
-	commentBeingRepliedTo?: CommentType;
-	setCommentBeingRepliedTo: (commentBeingRepliedTo?: CommentType) => void;
+	commentBeingRepliedTo?: TopLevelCommentType | CommentType;
+	setCommentBeingRepliedTo: (
+		commentBeingRepliedTo?: TopLevelCommentType | CommentType,
+	) => void;
 	commentToScrollTo?: number;
 	mutes: string[];
 	toggleMuteStatus: (userId: string) => void;
@@ -97,7 +100,7 @@ export const CommentContainer = ({
 	reportAbuse,
 	expandCommentReplies,
 }: Props) => {
-	const responses = comment.responses ?? [];
+	const responses = 'responses' in comment ? comment.responses : [];
 	const totalResponseCount = comment.metaData?.responseCount ?? 0;
 
 	// Filter logic
