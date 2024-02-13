@@ -417,7 +417,7 @@ export const ArticleMeta = ({
 						>
 							<Island
 								priority="feature"
-								defer={{ until: 'idle' }}
+								defer={{ until: 'visible' }}
 							>
 								<ShareButton
 									pageId={pageId}

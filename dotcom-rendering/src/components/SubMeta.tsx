@@ -171,7 +171,7 @@ export const SubMeta = ({
 						justify-content: space-between;
 					`}
 				>
-					<Island priority="feature" defer={{ until: 'idle' }}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<ShareButton
 							pageId={pageId}
 							webTitle={webTitle}

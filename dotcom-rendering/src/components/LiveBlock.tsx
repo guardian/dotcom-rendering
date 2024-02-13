@@ -94,7 +94,7 @@ export const LiveBlock = ({
 					justify-content: space-between;
 				`}
 			>
-				<Island priority="feature" defer={{ until: 'idle' }}>
+				<Island priority="feature" defer={{ until: 'visible' }}>
 					<ShareButton
 						size="xsmall"
 						pageId={pageId}
