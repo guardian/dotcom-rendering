@@ -62,21 +62,22 @@ const nativeShare = (sizeXSmall: boolean) => css`
 	border-color: ${themePalette('--share-button-border')};
 `;
 
-const liveBlogMobile = css`
+const liveBlogMobile = (isCopied: boolean) => css`
 	${until.desktop} {
 		color: ${palette.neutral[100]};
 		border-color: rgba(255, 255, 255, 0.4);
 		svg {
-			fill: ${palette.neutral[100]};
+			fill: ${isCopied ? palette.success[400] : palette.neutral[100]};
 			margin-left: 0;
 		}
-		:hover {
+		${!isCopied &&
+		`:hover {
 			color: ${themePalette('--share-button-liveblog-mobile')};
 			background-color: ${palette.neutral[100]};
 			svg {
 				fill: ${themePalette('--share-button-liveblog-mobile')};
 			}
-		}
+		}`}
 	}
 `;
 
@@ -123,7 +124,7 @@ export const NativeShareButton = ({
 			css={[
 				buttonStyles,
 				nativeShare(sizeXSmall),
-				isLiveBlogMeta && liveBlogMobile,
+				isLiveBlogMeta && liveBlogMobile(false),
 			]}
 		>
 			Share
@@ -152,10 +153,11 @@ export const CopyLinkButton = ({
 			iconSide="left"
 			icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
 			css={[
-				sharedButtonStyles(sizeXSmall),
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
-					: [buttonStyles, isLiveBlogMeta && liveBlogMobile]),
+					: [buttonStyles]),
+				sharedButtonStyles(sizeXSmall),
+				isLiveBlogMeta && liveBlogMobile(isCopied),
 			]}
 		>
 			{isCopied ? 'Link copied' : 'Copy link'}

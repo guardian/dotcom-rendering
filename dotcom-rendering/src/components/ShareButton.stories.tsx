@@ -78,7 +78,7 @@ export const NativeShare = () => {
 NativeShare.storyName = 'NativeShare';
 NativeShare.decorators = [splitTheme()];
 
-export const LiveBlogMobile = ({ theme }: StoryArgs) => {
+export const LiveBlogMobileNative = ({ theme }: StoryArgs) => {
 	return (
 		<div
 			css={css`
@@ -89,6 +89,33 @@ export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 		>
 			<NativeShareButton
 				onShare={async () => {}}
+				isLiveBlogMeta={true}
+				size="small"
+			/>
+		</div>
+	);
+};
+LiveBlogMobileNative.storyName = 'LiveBlogMobileNative';
+LiveBlogMobileNative.decorators = [splitTheme()];
+LiveBlogMobileNative.story = {
+	parameters: {
+		viewport: { defaultViewport: 'mobileMedium' },
+		chromatic: { viewports: [375] },
+	},
+};
+
+export const LiveBlogMobile = ({ theme }: StoryArgs) => {
+	return (
+		<div
+			css={css`
+				background-color: ${theme === 'light'
+					? themePalette('--share-button-liveblog-mobile')
+					: 'inherit'};
+			`}
+		>
+			<CopyLinkButton
+				onShare={async () => {}}
+				isCopied={true}
 				isLiveBlogMeta={true}
 				size="small"
 			/>
