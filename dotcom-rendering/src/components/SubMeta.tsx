@@ -176,6 +176,7 @@ export const SubMeta = ({
 							pageId={pageId}
 							webTitle={webTitle}
 							format={format}
+							context="SubMeta"
 						/>
 					</Island>
 					<div css={syndicationButtonOverrides}>

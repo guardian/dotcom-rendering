@@ -101,6 +101,7 @@ export const LiveBlock = ({
 						blockId={block.id}
 						webTitle={webTitle}
 						format={format}
+						context="LiveBlock"
 					/>
 				</Island>
 				{!isUndefined(lastUpdated) && (

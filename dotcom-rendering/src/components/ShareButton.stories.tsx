@@ -28,6 +28,7 @@ export const CopyLink = () => {
 				theme: Pillar.News,
 				design: ArticleDesign.Standard,
 			}}
+			context="ArticleMeta"
 		/>
 	);
 };
@@ -45,6 +46,7 @@ export const CopyLinkXSmall = () => {
 				theme: Pillar.News,
 				design: ArticleDesign.Standard,
 			}}
+			context="LiveBlock"
 		/>
 	);
 };

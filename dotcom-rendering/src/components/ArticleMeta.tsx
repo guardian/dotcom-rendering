@@ -423,6 +423,7 @@ export const ArticleMeta = ({
 									pageId={pageId}
 									webTitle={webTitle}
 									format={format}
+									context="ArticleMeta"
 								/>
 							</Island>
 						</div>

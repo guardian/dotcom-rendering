@@ -5845,7 +5845,7 @@ const paletteColours = {
 	},
 	'--share-button-copied': {
 		light: shareButtonCopiedLight,
-		dark: shareButtonCopiedLight,
+		dark: shareButtonDark,
 	},
 	'--share-button-hover': {
 		light: shareButtonHoverLight,

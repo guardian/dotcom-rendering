@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { palette, until } from '@guardian/source-foundations';
 import type { Size } from '@guardian/source-react-components';
 import {
@@ -11,21 +12,24 @@ import { palette as themePalette } from '../palette';
 import LinkIcon from '../static/icons/link-icon.svg';
 
 type Props = {
-	size?: Size | undefined;
+	size?: Size;
 	pageId: string;
 	blockId?: string;
 	webTitle: string;
 	format: ArticleFormat;
+	context: Context;
 };
+
+type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
 
 const sharedButtonStyles = (sizeXSmall: boolean) => css`
 	border-color: ${themePalette('--share-button-border')};
 	min-width: ${sizeXSmall ? '101px' : '132px'};
 	max-width: ${sizeXSmall ? '101px' : '132px'};
-	font-size: ${sizeXSmall ? '14px' : '17px'};
 	svg {
 		width: ${sizeXSmall ? '13.33px' : '16.67px'};
 		height: ${sizeXSmall ? '13.33px' : '16.67px'};
+		margin-left: ${sizeXSmall ? '' : '0'};
 	}
 `;
 
@@ -33,7 +37,6 @@ const buttonStyles = css`
 	color: ${themePalette('--share-button')};
 	svg {
 		fill: ${themePalette('--share-button')};
-		margin-left: 0;
 	}
 	:hover {
 		background-color: ${themePalette('--share-button')};
@@ -45,9 +48,9 @@ const buttonStyles = css`
 	}
 `;
 
-const copiedButtonStyles = css`
+const copiedButtonStyles = (sizeXSmall: boolean) => css`
 	color: ${themePalette('--share-button-copied')};
-	svg {
+	padding: ${sizeXSmall ? '0 8px;' : '0 11px;'} svg {
 		fill: ${palette.success[400]};
 	}
 `;
@@ -152,15 +155,12 @@ export const CopyLinkButton = ({
 			priority="tertiary"
 			iconSide="left"
 			icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
-			css={
-				isCopied
-					? [copiedButtonStyles, sharedButtonStyles(sizeXSmall)]
-					: [
-							buttonStyles,
-							sharedButtonStyles(sizeXSmall),
-							isLiveBlogMeta && liveBlogMobile,
-					  ]
-			}
+			css={[
+				sharedButtonStyles(sizeXSmall),
+				...(isCopied
+					? [copiedButtonStyles(sizeXSmall)]
+					: [buttonStyles, isLiveBlogMeta && liveBlogMobile]),
+			]}
 		>
 			{isCopied ? 'Link copied' : 'Copy link'}
 		</Button>
@@ -173,11 +173,15 @@ export const ShareButton = ({
 	blockId,
 	webTitle,
 	format,
+	context,
 }: Props) => {
 	const [isCopied, setIsCopied] = useState(false);
 	const [isShareSupported, setIsShareSupported] = useState(false);
 
-	const isLiveBlogMeta = format.design === 11 && size !== 'xsmall';
+	const isLiveBlogMeta =
+		(format.design === ArticleDesign.LiveBlog &&
+			context === 'ArticleMeta') ||
+		context === 'SubMeta';
 
 	useEffect(() => {
 		setIsShareSupported(
@@ -189,10 +193,11 @@ export const ShareButton = ({
 		if (isShareSupported) {
 			await navigator.share({
 				title: `${webTitle}`,
-				text: `${webTitle}: ${getUrl({
+				text: `${webTitle}:`,
+				url: getUrl({
 					pageId,
 					blockId,
-				})}`,
+				}),
 			});
 		} else if ('clipboard' in navigator) {
 			await navigator.clipboard.writeText(
