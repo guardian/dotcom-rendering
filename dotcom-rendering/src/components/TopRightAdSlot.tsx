@@ -29,7 +29,7 @@ export const TopRightAdSlot = ({
 				css`
 					position: static;
 					height: 100%;
-					max-height: 100%;
+					max-height: 97%;
 				`,
 				adStyles,
 			]}
