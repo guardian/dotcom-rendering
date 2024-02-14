@@ -33,6 +33,8 @@ export type Props = {
 	reportAbuseUnauthenticated: ReturnType<typeof reportAbuse>;
 };
 
+export const DispatchContext = React.createContext(null);
+
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
@@ -494,155 +496,157 @@ export const Discussion = ({
 
 	return (
 		<>
-			<div css={[positionRelative, !isExpanded && fixHeight]}>
-				<Hide when="above" breakpoint="leftCol">
-					<div
-						data-testid="discussion"
-						css={css`
-							padding-bottom: ${space[2]}px;
-						`}
-					>
-						<SignedInAs
-							enableDiscussionSwitch={enableDiscussionSwitch}
-							user={user?.profile}
-							commentCount={commentCount}
-							isClosedForComments={isClosedForComments}
-						/>
-					</div>
-				</Hide>
-				<Comments
-					user={user}
-					baseUrl={discussionApiUrl}
-					isClosedForComments={
-						!!isClosedForComments || !enableDiscussionSwitch
-					}
-					shortUrl={shortUrlId}
-					additionalHeaders={{
-						'D2-X-UID': discussionD2Uid,
-						'GU-Client': discussionApiClientHeader,
-					}}
-					expanded={isExpanded}
-					commentToScrollTo={hashCommentId}
-					onPermalinkClick={handlePermalink}
-					apiKey="dotcom-rendering"
-					idApiUrl={idApiUrl}
-					page={commentPage}
-					setPage={(page: number) => {
-						dispatch({
-							type: 'updateCommentPage',
-							commentPage: page,
-						});
-					}}
-					filters={validFilters}
-					topLevelCommentCount={topLevelCommentCount}
-					loading={loading}
-					comments={comments}
-					pickError={pickError}
-					setPickError={(error) =>
-						dispatch({
-							type: 'setPickError',
-							error,
-						})
-					}
-					setComment={(comment: CommentType) => {
-						dispatch({ type: 'addComment', comment });
-					}}
-					handleFilterChange={(
-						newFilters: FilterOptions,
-						page?: number,
-					) => {
-						dispatch({
-							type: 'filterChange',
-							filters: newFilters,
-							commentPage: page,
-						});
-					}}
-					setTopFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setTopFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setReplyFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setReplyFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setBottomFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setBottomFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setTopFormError={(error) =>
-						dispatch({
-							type: 'setTopFormError',
-							error,
-						})
-					}
-					setReplyFormError={(error) =>
-						dispatch({
-							type: 'setReplyFormError',
-							error,
-						})
-					}
-					setBottomFormError={(error) =>
-						dispatch({
-							type: 'setBottomFormError',
-							error,
-						})
-					}
-					setTopFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setTopFormPreviewBody',
-							previewBody,
-						})
-					}
-					setReplyFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setReplyFormPreviewBody',
-							previewBody,
-						})
-					}
-					setBottomFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setBottomFormPreviewBody',
-							previewBody,
-						})
-					}
-					expandCommentReplies={(commentId, responses) =>
-						dispatch({
-							type: 'expandCommentReplies',
-							commentId,
-							responses,
-						})
-					}
-					topForm={topForm}
-					replyForm={replyForm}
-					bottomForm={bottomForm}
-					reportAbuse={
-						user !== undefined
-							? user.reportAbuse
-							: reportAbuseUnauthenticated
-					}
-				/>
+			<DispatchContext.Provider value={dispatch}>
+				<div css={[positionRelative, !isExpanded && fixHeight]}>
+					<Hide when="above" breakpoint="leftCol">
+						<div
+							data-testid="discussion"
+							css={css`
+								padding-bottom: ${space[2]}px;
+							`}
+						>
+							<SignedInAs
+								enableDiscussionSwitch={enableDiscussionSwitch}
+								user={user?.profile}
+								commentCount={commentCount}
+								isClosedForComments={isClosedForComments}
+							/>
+						</div>
+					</Hide>
+					<Comments
+						user={user}
+						baseUrl={discussionApiUrl}
+						isClosedForComments={
+							!!isClosedForComments || !enableDiscussionSwitch
+						}
+						shortUrl={shortUrlId}
+						additionalHeaders={{
+							'D2-X-UID': discussionD2Uid,
+							'GU-Client': discussionApiClientHeader,
+						}}
+						expanded={isExpanded}
+						commentToScrollTo={hashCommentId}
+						onPermalinkClick={handlePermalink}
+						apiKey="dotcom-rendering"
+						idApiUrl={idApiUrl}
+						page={commentPage}
+						setPage={(page: number) => {
+							dispatch({
+								type: 'updateCommentPage',
+								commentPage: page,
+							});
+						}}
+						filters={validFilters}
+						topLevelCommentCount={topLevelCommentCount}
+						loading={loading}
+						comments={comments}
+						pickError={pickError}
+						setPickError={(error) =>
+							dispatch({
+								type: 'setPickError',
+								error,
+							})
+						}
+						setComment={(comment: CommentType) => {
+							dispatch({ type: 'addComment', comment });
+						}}
+						handleFilterChange={(
+							newFilters: FilterOptions,
+							page?: number,
+						) => {
+							dispatch({
+								type: 'filterChange',
+								filters: newFilters,
+								commentPage: page,
+							});
+						}}
+						setTopFormUserMissing={(userNameMissing) =>
+							dispatch({
+								type: 'setTopFormUserMissing',
+								userNameMissing,
+							})
+						}
+						setReplyFormUserMissing={(userNameMissing) =>
+							dispatch({
+								type: 'setReplyFormUserMissing',
+								userNameMissing,
+							})
+						}
+						setBottomFormUserMissing={(userNameMissing) =>
+							dispatch({
+								type: 'setBottomFormUserMissing',
+								userNameMissing,
+							})
+						}
+						setTopFormError={(error) =>
+							dispatch({
+								type: 'setTopFormError',
+								error,
+							})
+						}
+						setReplyFormError={(error) =>
+							dispatch({
+								type: 'setReplyFormError',
+								error,
+							})
+						}
+						setBottomFormError={(error) =>
+							dispatch({
+								type: 'setBottomFormError',
+								error,
+							})
+						}
+						setTopFormPreviewBody={(previewBody) =>
+							dispatch({
+								type: 'setTopFormPreviewBody',
+								previewBody,
+							})
+						}
+						setReplyFormPreviewBody={(previewBody) =>
+							dispatch({
+								type: 'setReplyFormPreviewBody',
+								previewBody,
+							})
+						}
+						setBottomFormPreviewBody={(previewBody) =>
+							dispatch({
+								type: 'setBottomFormPreviewBody',
+								previewBody,
+							})
+						}
+						expandCommentReplies={(commentId, responses) =>
+							dispatch({
+								type: 'expandCommentReplies',
+								commentId,
+								responses,
+							})
+						}
+						topForm={topForm}
+						replyForm={replyForm}
+						bottomForm={bottomForm}
+						reportAbuse={
+							user !== undefined
+								? user.reportAbuse
+								: reportAbuseUnauthenticated
+						}
+					/>
+					{!isExpanded && (
+						<div id="discussion-overlay" css={overlayStyles} />
+					)}
+				</div>
 				{!isExpanded && (
-					<div id="discussion-overlay" css={overlayStyles} />
+					<PillarButton
+						onClick={() => {
+							dispatch({ type: 'expandComments' });
+							dispatchCommentsExpandedEvent();
+						}}
+						icon={<SvgPlus />}
+						linkName="view-more-comments"
+					>
+						View more comments
+					</PillarButton>
 				)}
-			</div>
-			{!isExpanded && (
-				<PillarButton
-					onClick={() => {
-						dispatch({ type: 'expandComments' });
-						dispatchCommentsExpandedEvent();
-					}}
-					icon={<SvgPlus />}
-					linkName="view-more-comments"
-				>
-					View more comments
-				</PillarButton>
-			)}
+			</DispatchContext.Provider>
 		</>
 	);
 };
