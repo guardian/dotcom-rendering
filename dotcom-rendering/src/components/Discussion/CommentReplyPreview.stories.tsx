@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { TopLevelCommentType } from '../../lib/discussion';
+import type { CommentType } from '../../lib/discussion';
 import { CommentReplyPreview, Preview } from './CommentReplyPreview';
 
 const defaultFormat = {
@@ -24,7 +24,7 @@ const multiLBlockParagraph = `
   <p>Ut molestie feugiat ligula, at suscipit est eleifend eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec faucibus leo eros, faucibus maximus nisi semper sit amet. Nam eu finibus nibh. Quisque venenatis lacus non velit sagittis ultrices. Duis eget elit congue, molestie odio ut, gravida est. Aliquam erat volutpat. Duis feugiat dolor nulla, non elementum lorem finibus id. Duis non nibh justo. Phasellus dapibus pulvinar nulla, vel euismod magna dapibus ut. Vivamus iaculis eros in nisl ultrices fringilla. Cras ex libero, tristique ornare interdum id, porta a mauris. Praesent nulla enim, rhoncus quis lectus sed, viverra sollicitudin mauris.</p>
 `;
 
-const commentBeingRepliedTo: TopLevelCommentType = {
+const commentBeingRepliedTo: CommentType = {
 	id: 25487686,
 	body: multiLBlockParagraph,
 	date: '26 July 2013 4:13pm',

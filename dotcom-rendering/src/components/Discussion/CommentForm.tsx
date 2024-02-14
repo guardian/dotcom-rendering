@@ -3,8 +3,8 @@ import { space, text, textSans } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentType,
+	ResponseType,
 	SignedInUser,
-	TopLevelCommentType,
 	UserProfile,
 } from '../../lib/discussion';
 import { preview as defaultPreview } from '../../lib/discussionApi';
@@ -17,9 +17,9 @@ import { Row } from './Row';
 type Props = {
 	shortUrl: string;
 	user: SignedInUser;
-	onAddComment: (response: TopLevelCommentType | CommentType) => void;
+	onAddComment: (response: CommentType | ResponseType) => void;
 	setCommentBeingRepliedTo?: () => void;
-	commentBeingRepliedTo?: CommentType;
+	commentBeingRepliedTo?: CommentType | ResponseType;
 	onPreview?: typeof defaultPreview;
 	error: string;
 	setError: (error: string) => void;
@@ -159,7 +159,7 @@ const simulateNewTopLevelComment = (
 	commentId: number,
 	body: string,
 	userProfile: UserProfile,
-): TopLevelCommentType => ({
+): CommentType => ({
 	id: commentId,
 	body,
 	date: Date(),
@@ -177,8 +177,8 @@ const simulateNewReplyComment = (
 	commentId: number,
 	body: string,
 	userProfile: UserProfile,
-	commentBeingRepliedTo: TopLevelCommentType | CommentType,
-): CommentType => ({
+	commentBeingRepliedTo: CommentType | ResponseType,
+): ResponseType => ({
 	id: commentId,
 	body,
 	date: Date(),

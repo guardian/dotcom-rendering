@@ -13,6 +13,7 @@ import {
 	safeParse,
 	string,
 	transform,
+	union,
 	variant,
 } from 'valibot';
 import type {
@@ -72,9 +73,7 @@ export interface UserProfile {
 	};
 }
 
-export type CommentType = Output<typeof comment>;
-
-const comment = object({
+const baseCommentSchema = object({
 	id: number(),
 	body: string(),
 	date: string(),
@@ -86,26 +85,6 @@ const comment = object({
 	numRecommends: number(),
 	isHighlighted: boolean(),
 	userProfile,
-	responseTo: optional(
-		object({
-			displayName: string(),
-			commentApiUrl: string(),
-			isoDateTime: string(),
-			date: string(),
-			commentId: string(),
-			commentWebUrl: string(),
-		}),
-	),
-
-	metaData: optional(
-		object({
-			commentCount: number(),
-			staffCommenterCount: number(),
-			editorsPickCount: number(),
-			blockedCount: number(),
-			responseCount: number(),
-		}),
-	),
 	discussion: optional(
 		object({
 			key: string(),
@@ -116,14 +95,39 @@ const comment = object({
 			isClosedForRecommendation: boolean(),
 		}),
 	),
+	metaData: optional(
+		object({
+			commentCount: number(),
+			staffCommenterCount: number(),
+			editorsPickCount: number(),
+			blockedCount: number(),
+			responseCount: number(),
+		}),
+	),
 });
 
-export type TopLevelCommentType = Output<typeof topLevelCommentSchema>;
+export type ResponseType = Output<typeof responseSchema>;
 
-const topLevelCommentSchema = merge([
-	comment,
+const responseSchema = merge([
+	baseCommentSchema,
 	object({
-		responses: optional(array(comment), []),
+		responseTo: object({
+			displayName: string(),
+			commentApiUrl: string(),
+			isoDateTime: string(),
+			date: string(),
+			commentId: string(),
+			commentWebUrl: string(),
+		}),
+	}),
+]);
+
+export type CommentType = Output<typeof commentSchema>;
+
+const commentSchema = merge([
+	baseCommentSchema,
+	object({
+		responses: optional(array(responseSchema), []),
 	}),
 ]);
 
@@ -133,13 +137,13 @@ const commentRepliesResponseSchema = variant('status', [
 	}),
 	object({
 		status: literal('ok'),
-		comment: topLevelCommentSchema,
+		comment: commentSchema,
 	}),
 ]);
 
 export const parseCommentRepliesResponse = (
 	data: unknown,
-): Result<'ParsingError' | 'ApiError', CommentType[]> => {
+): Result<'ParsingError' | 'ApiError', ResponseType[]> => {
 	const result = safeParse(commentRepliesResponseSchema, data);
 	if (!result.success) {
 		return error('ParsingError');
@@ -296,7 +300,7 @@ const discussionApiSuccessSchema = object({
 		isClosedForRecommendation: boolean(),
 		isThreaded: boolean(),
 		title: string(),
-		comments: array(topLevelCommentSchema),
+		comments: array(union([commentSchema, responseSchema])),
 	}),
 });
 

@@ -1,11 +1,15 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
-import type { CommentType, SignedInUser } from '../../lib/discussion';
+import type {
+	CommentType,
+	ResponseType,
+	SignedInUser,
+} from '../../lib/discussion';
 import { TopPick } from './TopPick';
 
 type Props = {
 	user?: SignedInUser;
-	comments: CommentType[];
+	comments: Array<CommentType | ResponseType>;
 	onPermalinkClick: (commentId: number) => void;
 };
 
@@ -43,8 +47,8 @@ const oneColCommentsStyles = css`
 `;
 
 export const TopPicks = ({ user, comments, onPermalinkClick }: Props) => {
-	const leftColComments: CommentType[] = [];
-	const rightColComments: CommentType[] = [];
+	const leftColComments: Array<CommentType | ResponseType> = [];
+	const rightColComments: Array<CommentType | ResponseType> = [];
 	for (const [index, comment] of comments.entries())
 		index % 2 === 0
 			? leftColComments.push(comment)

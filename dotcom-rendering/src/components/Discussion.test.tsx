@@ -1,8 +1,4 @@
-import type {
-	CommentType,
-	TopLevelCommentType,
-	UserProfile,
-} from '../lib/discussion';
+import type { CommentType, ResponseType, UserProfile } from '../lib/discussion';
 import { replaceMatchingCommentResponses } from './Discussion';
 
 describe('Discussion', () => {
@@ -17,11 +13,11 @@ describe('Discussion', () => {
 			badge: [],
 		} satisfies UserProfile;
 
-		const createTopLevelComment = (
+		const createComment = (
 			id: number,
 			body: string,
-			responses: CommentType[],
-		): TopLevelCommentType => ({
+			responses: ResponseType[],
+		): CommentType => ({
 			id,
 			body,
 			userProfile,
@@ -35,7 +31,7 @@ describe('Discussion', () => {
 			status: 'visible',
 		});
 
-		const createComment = (id: number, body: string): CommentType => ({
+		const createResponse = (id: number, body: string): ResponseType => ({
 			id,
 			body,
 			userProfile,
@@ -46,6 +42,14 @@ describe('Discussion', () => {
 			isoDateTime: '2024-01-01T00:00:01Z',
 			numRecommends: 0,
 			status: 'visible',
+			responseTo: {
+				date: '',
+				isoDateTime: '',
+				displayName: '',
+				commentApiUrl: '',
+				commentId: '',
+				commentWebUrl: '',
+			},
 		});
 
 		it('Will not do anything if no comment matches', () => {
@@ -53,19 +57,19 @@ describe('Discussion', () => {
 				type: 'expandCommentReplies',
 				commentId: 999_999,
 				responses: [
-					createComment(123_001, '<p>A first reply</p>'),
-					createComment(123_002, '<p>A second reply</p>'),
-					createComment(123_003, '<p>A third reply</p>'),
-					createComment(123_004, '<p>A fourth reply</p>'),
-					createComment(123_005, '<p>A fifth reply</p>'),
-					createComment(123_006, '<p>A sixth reply</p>'),
+					createResponse(123_001, '<p>A first reply</p>'),
+					createResponse(123_002, '<p>A second reply</p>'),
+					createResponse(123_003, '<p>A third reply</p>'),
+					createResponse(123_004, '<p>A fourth reply</p>'),
+					createResponse(123_005, '<p>A fifth reply</p>'),
+					createResponse(123_006, '<p>A sixth reply</p>'),
 				],
 			});
 
 			const comments = [
-				createTopLevelComment(123_000, 'Something', []),
-				createTopLevelComment(234_000, 'Or other', []),
-				createTopLevelComment(456_000, 'Is to be said', []),
+				createComment(123_000, 'Something', []),
+				createComment(234_000, 'Or other', []),
+				createComment(456_000, 'Is to be said', []),
 			];
 
 			expect(comments.map(replacer)).toEqual(comments);
@@ -76,32 +80,32 @@ describe('Discussion', () => {
 				type: 'expandCommentReplies',
 				commentId: 123_000,
 				responses: [
-					createComment(123_100, '<p>A first reply</p>'),
-					createComment(123_200, '<p>A second reply</p>'),
-					createComment(123_300, '<p>A third reply</p>'),
-					createComment(123_400, '<p>A fourth reply</p>'),
-					createComment(123_500, '<p>A fifth reply</p>'),
-					createComment(123_600, '<p>A sixth reply</p>'),
+					createResponse(123_100, '<p>A first reply</p>'),
+					createResponse(123_200, '<p>A second reply</p>'),
+					createResponse(123_300, '<p>A third reply</p>'),
+					createResponse(123_400, '<p>A fourth reply</p>'),
+					createResponse(123_500, '<p>A fifth reply</p>'),
+					createResponse(123_600, '<p>A sixth reply</p>'),
 				],
 			});
 
 			const comments = [
-				createTopLevelComment(123_000, 'Something', []),
-				createTopLevelComment(234_000, 'Or other', []),
-				createTopLevelComment(456_000, 'Is to be said', []),
+				createComment(123_000, 'Something', []),
+				createComment(234_000, 'Or other', []),
+				createComment(456_000, 'Is to be said', []),
 			];
 
 			expect(comments.map(replacer)).toEqual([
-				createTopLevelComment(123_000, 'Something', [
-					createComment(123_100, '<p>A first reply</p>'),
-					createComment(123_200, '<p>A second reply</p>'),
-					createComment(123_300, '<p>A third reply</p>'),
-					createComment(123_400, '<p>A fourth reply</p>'),
-					createComment(123_500, '<p>A fifth reply</p>'),
-					createComment(123_600, '<p>A sixth reply</p>'),
+				createComment(123_000, 'Something', [
+					createResponse(123_100, '<p>A first reply</p>'),
+					createResponse(123_200, '<p>A second reply</p>'),
+					createResponse(123_300, '<p>A third reply</p>'),
+					createResponse(123_400, '<p>A fourth reply</p>'),
+					createResponse(123_500, '<p>A fifth reply</p>'),
+					createResponse(123_600, '<p>A sixth reply</p>'),
 				]),
-				createTopLevelComment(234_000, 'Or other', []),
-				createTopLevelComment(456_000, 'Is to be said', []),
+				createComment(234_000, 'Or other', []),
+				createComment(456_000, 'Is to be said', []),
 			]);
 		});
 	});

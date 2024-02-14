@@ -4,9 +4,9 @@ import { SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type {
 	CommentType,
+	ResponseType,
 	SignedInUser,
 	ThreadsType,
-	TopLevelCommentType,
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
@@ -17,14 +17,14 @@ import { CommentReplyPreview } from './CommentReplyPreview';
 import { PillarButton } from './PillarButton';
 
 type Props = {
-	comment: TopLevelCommentType | CommentType;
+	comment: CommentType | ResponseType;
 	isClosedForComments: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
 	threads: ThreadsType;
-	commentBeingRepliedTo?: TopLevelCommentType | CommentType;
+	commentBeingRepliedTo?: CommentType | ResponseType;
 	setCommentBeingRepliedTo: (
-		commentBeingRepliedTo?: TopLevelCommentType | CommentType,
+		commentBeingRepliedTo?: CommentType | ResponseType,
 	) => void;
 	commentToScrollTo?: number;
 	mutes: string[];
@@ -40,7 +40,10 @@ type Props = {
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
+	expandCommentReplies: (
+		commentId: number,
+		responses: ResponseType[],
+	) => void;
 };
 
 const nestingStyles = css`
@@ -131,7 +134,7 @@ export const CommentContainer = ({
 			});
 	};
 
-	const onAddComment = (commentId: number, response: CommentType) =>
+	const onAddResponse = (commentId: number, response: ResponseType) =>
 		expandCommentReplies(commentId, [...responses, response]);
 
 	return (
@@ -211,7 +214,7 @@ export const CommentContainer = ({
 				{commentBeingRepliedTo &&
 					(commentBeingRepliedTo.id === comment.id ||
 						responses.find(
-							(response: CommentType) =>
+							(response: ResponseType) =>
 								response.id === commentBeingRepliedTo.id,
 						)) &&
 					user && (
@@ -224,9 +227,10 @@ export const CommentContainer = ({
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								onAddComment={(response) =>
-									onAddComment(comment.id, response)
-								}
+								onAddComment={(response) => {
+									if ('responses' in response) return;
+									onAddResponse(comment.id, response);
+								}}
 								user={user}
 								setCommentBeingRepliedTo={
 									setCommentBeingRepliedTo

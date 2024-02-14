@@ -8,7 +8,12 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CommentType, SignedInUser, Staff } from '../../lib/discussion';
+import type {
+	CommentType,
+	ResponseType,
+	SignedInUser,
+	Staff,
+} from '../../lib/discussion';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
@@ -22,9 +27,11 @@ import { Timestamp } from './Timestamp';
 
 type Props = {
 	user?: SignedInUser;
-	comment: CommentType;
+	comment: CommentType | ResponseType;
 	isClosedForComments: boolean;
-	setCommentBeingRepliedTo: (commentBeingRepliedTo?: CommentType) => void;
+	setCommentBeingRepliedTo: (
+		commentBeingRepliedTo?: CommentType | ResponseType,
+	) => void;
 	isReply: boolean;
 	wasScrolledTo?: boolean;
 	isMuted: boolean;
@@ -382,7 +389,7 @@ export const Comment = ({
 							<Column>
 								<div
 									css={[
-										comment.responseTo &&
+										'responseTo' in comment &&
 											hideBelowMobileLandscape,
 										hideAboveMobileLandscape,
 									]}
@@ -438,7 +445,7 @@ export const Comment = ({
 								</div>
 								<div
 									css={[
-										!comment.responseTo &&
+										!('responseTo' in comment) &&
 											hideBelowMobileLandscape,
 									]}
 								>
@@ -463,7 +470,7 @@ export const Comment = ({
 												}
 											</Link>
 										</div>
-										{comment.responseTo ? (
+										{'responseTo' in comment ? (
 											<div
 												css={[
 													colourStyles,
@@ -491,7 +498,7 @@ export const Comment = ({
 										<div
 											css={[
 												timestampWrapperStyles,
-												comment.responseTo &&
+												'responseTo' in comment &&
 													hideBelowMobileLandscape,
 											]}
 										>
@@ -544,7 +551,7 @@ export const Comment = ({
 
 					<div
 						css={[
-							comment.responseTo && hideBelowMobileLandscape,
+							'responseTo' in comment && hideBelowMobileLandscape,
 							hideAboveMobileLandscape,
 						]}
 					>

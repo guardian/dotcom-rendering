@@ -7,8 +7,8 @@ import type {
 	CommentFormProps,
 	CommentType,
 	FilterOptions,
+	ResponseType,
 	SignedInUser,
-	TopLevelCommentType,
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
@@ -38,9 +38,9 @@ type Props = {
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
-	comments: CommentType[];
-	addTopLevelComment: (comment: TopLevelCommentType) => void;
-	addReplyComment: (comment: CommentType) => void;
+	comments: Array<CommentType | ResponseType>;
+	addComment: (comment: CommentType) => void;
+	addResponse: (comment: ResponseType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	pickError: string;
 	setPickError: (error: string) => void;
@@ -57,7 +57,10 @@ type Props = {
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
+	expandCommentReplies: (
+		commentId: number,
+		responses: ResponseType[],
+	) => void;
 };
 
 /**
@@ -145,8 +148,8 @@ export const Comments = ({
 	comments,
 	pickError,
 	setPickError,
-	addTopLevelComment,
-	addReplyComment,
+	addComment: addTopLevelComment,
+	addResponse: addReplyComment,
 	handleFilterChange,
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
@@ -163,9 +166,10 @@ export const Comments = ({
 	reportAbuse,
 	expandCommentReplies,
 }: Props) => {
-	const [picks, setPicks] = useState<CommentType[]>([]);
-	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
-		useState<CommentType>();
+	const [picks, setPicks] = useState<Array<CommentType | ResponseType>>([]);
+	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
+		CommentType | ResponseType
+	>();
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
 		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
@@ -254,7 +258,7 @@ export const Comments = ({
 
 		setMutes(updatedMutes); // Update local state
 	};
-	const onAddComment = (comment: TopLevelCommentType | CommentType) => {
+	const onAddComment = (comment: CommentType | ResponseType) => {
 		if ('responses' in comment) {
 			addTopLevelComment(comment);
 		} else {

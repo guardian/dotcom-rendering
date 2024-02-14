@@ -3,8 +3,8 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import type {
 	CommentType,
+	ResponseType,
 	SignedInUser,
-	TopLevelCommentType,
 } from '../../lib/discussion';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
 import { error, ok } from '../../lib/result';
@@ -22,7 +22,7 @@ const commentWithReply = {
 const commentWithoutReply = {
 	...comment,
 	responses: [],
-} satisfies TopLevelCommentType;
+} satisfies CommentType;
 
 const commentResponseError = error<'NetworkError', number>('NetworkError');
 
@@ -58,12 +58,10 @@ describe('CommentContainer', () => {
 		const newCommentText = 'A brand new comment';
 
 		// a workaround to emulating hooks outside of render
-		let commentBeingRepliedTo:
-			| TopLevelCommentType
-			| CommentType
-			| undefined = commentWithoutReply;
+		let commentBeingRepliedTo: CommentType | ResponseType | undefined =
+			commentWithoutReply;
 		const mockSetCommentBeingRepliedTo = jest.fn(
-			(newCommentBeingRepliedTo?: TopLevelCommentType | CommentType) => {
+			(newCommentBeingRepliedTo?: CommentType | ResponseType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
 		);
@@ -157,10 +155,10 @@ describe('CommentContainer', () => {
 		const newCommentText = 'A brand new comment';
 
 		// a workaround to emulating hooks outside of render
-		let commentBeingRepliedTo: CommentType | undefined =
+		let commentBeingRepliedTo: CommentType | ResponseType | undefined =
 			firstCommentResponse;
 		const mockSetCommentBeingRepliedTo = jest.fn(
-			(newCommentBeingRepliedTo?: CommentType) => {
+			(newCommentBeingRepliedTo?: CommentType | ResponseType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
 		);

@@ -3,15 +3,15 @@ import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type {
 	CommentType,
 	Reader,
+	ResponseType,
 	Staff,
-	TopLevelCommentType,
 } from '../../lib/discussion';
 import { ok } from '../../lib/result';
 import { Comment } from './Comment';
 
 type Props = Parameters<typeof Comment>[0];
 
-const commentData: TopLevelCommentType = {
+const commentData: CommentType = {
 	id: 25487686,
 	body: `<p>Beau Jos pizza in Idaho Springs is a great place for <a href="https://www.theguardian.com">mountain pizza pies</a>. Order one with extra thick crust and drizzle it with honey. Y'all can try the Challenge if you fancy, and sketch on your napkins so your art can join their walls. This was 15 years ago, but I hope it's still there! As for music, anything from Boulder's own Big Head Todd &amp; the Monsters - 'Broken Hearted Savior' is a good start, with 'Bittersweet' a good road track. I'm jealous!!!</p>`,
 	date: '26 July 2013 4:13pm',
@@ -70,7 +70,7 @@ const blockedCommentData = {
 	body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 };
 
-const replyCommentData: CommentType = {
+const replyCommentData: ResponseType = {
 	...commentData,
 	responseTo: {
 		displayName: 'ArtVandelay',
@@ -82,7 +82,7 @@ const replyCommentData: CommentType = {
 	},
 };
 
-const longReplyCommentData: CommentType = {
+const longReplyCommentData: ResponseType = {
 	...commentData,
 	responseTo: {
 		displayName: 'ArtVandelayWithAVeryLongUserName',
@@ -94,7 +94,7 @@ const longReplyCommentData: CommentType = {
 	},
 };
 
-const longBothReplyCommentData: CommentType = {
+const longBothReplyCommentData: ResponseType = {
 	...commentData,
 	userProfile: {
 		...commentData.userProfile,
