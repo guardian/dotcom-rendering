@@ -7,25 +7,37 @@ import { Discussion, type Props as DiscussionProps } from './Discussion';
 
 type Props = Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>;
 
-const onComment = async (): Promise<CommentResponse> => {
+const onComment = async (
+	shortUrl: string,
+	body: string,
+): Promise<CommentResponse> => {
 	console.log('onComment');
 	return { kind: 'error', error: 'ApiError' };
 };
 
-const onReply = async (): Promise<CommentResponse> => {
+const onReply = async (
+	shortUrl: string,
+	body: string,
+	parentCommentId: number,
+): Promise<CommentResponse> => {
 	console.log('onReply');
 	return { kind: 'error', error: 'ApiError' };
 };
 
-const onRecommend = async (): Promise<boolean> => {
+const onRecommend = async (commentId: number): Promise<boolean> => {
 	console.log('onRecommend');
 	return false;
 };
-const addUsername = async (): Promise<Result<string, true>> => {
+const addUsername = async (username: string): Promise<Result<string, true>> => {
 	console.log('addUsername');
 	return { kind: 'error', error: 'ApiError' };
 };
-const reportAbuse = async (): Promise<Result<string, true>> => {
+const reportAbuse = async (
+	commentId: number,
+	categoryId: number,
+	reason?: string,
+	email?: string,
+): Promise<Result<string, true>> => {
 	console.log('reportAbuse');
 	return { kind: 'error', error: 'ApiError' };
 };
