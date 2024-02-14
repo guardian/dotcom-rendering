@@ -252,11 +252,11 @@ export const Comments = ({
 
 		if (page > maxPagePossible) {
 			handleFilterChange(newFilterObject, maxPagePossible);
-			dispatchCommentsStateChangeEvent();
 		} else {
 			handleFilterChange(newFilterObject);
-			dispatchCommentsStateChangeEvent();
 		}
+		
+		dispatchCommentsStateChangeEvent();
 	};
 
 	useEffect(() => {
