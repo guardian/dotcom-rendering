@@ -255,7 +255,7 @@ export const Comments = ({
 		} else {
 			handleFilterChange(newFilterObject);
 		}
-		
+
 		dispatchCommentsStateChangeEvent();
 	};
 
