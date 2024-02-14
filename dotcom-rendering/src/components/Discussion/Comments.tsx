@@ -41,7 +41,6 @@ type Props = {
 	setComment: (comment: CommentType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	pickError: string;
-	setPickError: (error: string) => void;
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;
@@ -142,7 +141,6 @@ export const Comments = ({
 	loading,
 	comments,
 	pickError,
-	setPickError,
 	setComment,
 	handleFilterChange,
 	setTopFormUserMissing,
@@ -321,7 +319,6 @@ export const Comments = ({
 											error={replyForm.error}
 											setError={setReplyFormError}
 											pickError={pickError}
-											setPickError={setPickError}
 											userNameMissing={
 												replyForm.userNameMissing
 											}
@@ -412,7 +409,6 @@ export const Comments = ({
 									error={replyForm.error}
 									setError={setReplyFormError}
 									pickError={pickError}
-									setPickError={setPickError}
 									userNameMissing={replyForm.userNameMissing}
 									setUserNameMissing={setReplyFormUserMissing}
 									previewBody={replyForm.previewBody}

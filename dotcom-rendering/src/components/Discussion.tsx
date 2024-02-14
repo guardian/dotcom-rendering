@@ -543,12 +543,6 @@ export const Discussion = ({
 						loading={loading}
 						comments={comments}
 						pickError={pickError}
-						setPickError={(error) =>
-							dispatch({
-								type: 'setPickError',
-								error,
-							})
-						}
 						setComment={(comment: CommentType) => {
 							dispatch({ type: 'addComment', comment });
 						}}
