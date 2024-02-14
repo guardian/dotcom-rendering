@@ -190,7 +190,7 @@ export const ShareButton = ({
 				'share' in navigator &&
 				navigator.canShare(shareData),
 		);
-	}, []);
+	}, [shareData]);
 
 	useEffect(() => {
 		if (!isCopied) return;
