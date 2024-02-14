@@ -175,9 +175,20 @@ export const ShareButton = ({
 			context === 'ArticleMeta') ||
 		context === 'SubMeta';
 
+	const shareData = {
+		title: `${webTitle}`,
+		text: `${webTitle}:`,
+		url: getUrl({
+			pageId,
+			blockId,
+		}),
+	};
+
 	useEffect(() => {
 		setIsShareSupported(
-			typeof navigator !== 'undefined' && 'share' in navigator,
+			typeof navigator !== 'undefined' &&
+				'share' in navigator &&
+				navigator.canShare(shareData),
 		);
 	}, []);
 
@@ -192,14 +203,7 @@ export const ShareButton = ({
 	return isShareSupported ? (
 		<NativeShareButton
 			onShare={() => {
-				void navigator.share({
-					title: `${webTitle}`,
-					text: `${webTitle}:`,
-					url: getUrl({
-						pageId,
-						blockId,
-					}),
-				});
+				navigator.share(shareData).catch(() => {});
 			}}
 			size={size}
 			isLiveBlogMeta={isLiveBlogMeta}
@@ -208,13 +212,17 @@ export const ShareButton = ({
 		<CopyLinkButton
 			onShare={() => {
 				if (!('clipboard' in navigator)) return;
-				void navigator.clipboard.writeText(
-					getUrl({
-						pageId,
-						blockId,
-					}),
-				);
-				setIsCopied(true);
+				navigator.clipboard
+					.writeText(
+						getUrl({
+							pageId,
+							blockId,
+						}),
+					)
+					.then(() => {
+						setIsCopied(true);
+					})
+					.catch(() => {});
 			}}
 			size={size}
 			isCopied={isCopied}
