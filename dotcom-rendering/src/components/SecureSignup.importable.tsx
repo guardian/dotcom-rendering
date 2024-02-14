@@ -72,8 +72,8 @@ const formStylesWhenSignedIn = {
 	gridTemplateColumns: 'auto 1fr',
 	gridTemplateAreas: [
 		// this is easier to parse over multiple lines
-		'label  label',
-		'button input',
+		'"label  label"',
+		'"button input"',
 	].join(' '),
 } satisfies CSSProperties;
 
