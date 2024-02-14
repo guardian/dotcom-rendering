@@ -13,7 +13,7 @@ concurrency:
 permissions:
   id-token: write
   contents: read
-  pull-requests: write # required by guardian/actions-riff-raff@v3
+  pull-requests: write # required by guardian/actions-riff-raff@v4
 
 jobs:
   build:
@@ -47,7 +47,7 @@ jobs:
           mask-aws-account-id: true
 
       - name: Upload to riff-raff
-        uses: guardian/actions-riff-raff@v3
+        uses: guardian/actions-riff-raff@v4
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           configPath: apps-rendering/riff-raff.yaml

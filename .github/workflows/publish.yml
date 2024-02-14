@@ -13,7 +13,7 @@ permissions:
   # Allow GitHub to request an OIDC JWT ID token, for exchange with `aws-actions/configure-aws-credentials`
   # See https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#updating-your-github-actions-workflow
   id-token: write
-  pull-requests: write # required by guardian/actions-riff-raff@v3
+  pull-requests: write # required by guardian/actions-riff-raff@v4
 jobs:
   riffraff:
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
 
       # All rendering apps deployment
       - name: Upload rendering apps to RiffRaff
-        uses: guardian/actions-riff-raff@v3
+        uses: guardian/actions-riff-raff@v4
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: dotcom:rendering-all
