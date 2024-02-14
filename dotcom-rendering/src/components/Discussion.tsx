@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
-import { useEffect, useReducer } from 'react';
+import { Dispatch, useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type {
 	CommentFormProps,
@@ -33,7 +33,9 @@ export type Props = {
 	reportAbuseUnauthenticated: ReturnType<typeof reportAbuse>;
 };
 
-export const DispatchContext = React.createContext(null);
+export const DispatchContext = React.createContext<Dispatch<Action> | null>(
+	null,
+);
 
 const overlayStyles = css`
 	background-image: linear-gradient(
