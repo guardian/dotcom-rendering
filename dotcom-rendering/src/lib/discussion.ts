@@ -106,9 +106,9 @@ const baseCommentSchema = object({
 	),
 });
 
-export type ResponseType = Output<typeof responseSchema>;
+export type ReplyType = Output<typeof replySchema>;
 
-const responseSchema = merge([
+const replySchema = merge([
 	baseCommentSchema,
 	object({
 		responseTo: object({
@@ -127,7 +127,7 @@ export type CommentType = Output<typeof commentSchema>;
 const commentSchema = merge([
 	baseCommentSchema,
 	object({
-		responses: optional(array(responseSchema), []),
+		responses: optional(array(replySchema), []),
 	}),
 ]);
 
@@ -143,7 +143,7 @@ const commentRepliesResponseSchema = variant('status', [
 
 export const parseCommentRepliesResponse = (
 	data: unknown,
-): Result<'ParsingError' | 'ApiError', ResponseType[]> => {
+): Result<'ParsingError' | 'ApiError', ReplyType[]> => {
 	const result = safeParse(commentRepliesResponseSchema, data);
 	if (!result.success) {
 		return error('ParsingError');
@@ -300,7 +300,7 @@ const discussionApiSuccessSchema = object({
 		isClosedForRecommendation: boolean(),
 		isThreaded: boolean(),
 		title: string(),
-		comments: array(union([commentSchema, responseSchema])),
+		comments: array(union([commentSchema, replySchema])),
 	}),
 });
 

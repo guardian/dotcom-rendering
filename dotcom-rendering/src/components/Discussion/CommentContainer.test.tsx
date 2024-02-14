@@ -3,7 +3,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import type {
 	CommentType,
-	ResponseType,
+	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
@@ -58,10 +58,10 @@ describe('CommentContainer', () => {
 		const newCommentText = 'A brand new comment';
 
 		// a workaround to emulating hooks outside of render
-		let commentBeingRepliedTo: CommentType | ResponseType | undefined =
+		let commentBeingRepliedTo: CommentType | ReplyType | undefined =
 			commentWithoutReply;
 		const mockSetCommentBeingRepliedTo = jest.fn(
-			(newCommentBeingRepliedTo?: CommentType | ResponseType) => {
+			(newCommentBeingRepliedTo?: CommentType | ReplyType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
 		);
@@ -155,10 +155,10 @@ describe('CommentContainer', () => {
 		const newCommentText = 'A brand new comment';
 
 		// a workaround to emulating hooks outside of render
-		let commentBeingRepliedTo: CommentType | ResponseType | undefined =
+		let commentBeingRepliedTo: CommentType | ReplyType | undefined =
 			firstCommentResponse;
 		const mockSetCommentBeingRepliedTo = jest.fn(
-			(newCommentBeingRepliedTo?: CommentType | ResponseType) => {
+			(newCommentBeingRepliedTo?: CommentType | ReplyType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
 		);

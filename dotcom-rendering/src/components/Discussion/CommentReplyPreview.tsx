@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { space, textSans } from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CommentType, ResponseType } from '../../lib/discussion';
+import type { CommentType, ReplyType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
 import { Row } from './Row';
 
 type Props = {
-	commentBeingRepliedTo: CommentType | ResponseType;
+	commentBeingRepliedTo: CommentType | ReplyType;
 };
 
 const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
@@ -162,7 +162,7 @@ export const Preview = ({
 	setDisplayReplyComment,
 	displayReplyComment,
 }: {
-	commentBeingRepliedTo: CommentType | ResponseType;
+	commentBeingRepliedTo: CommentType | ReplyType;
 	setDisplayReplyComment: (displayReplyComment: boolean) => void;
 	displayReplyComment: boolean;
 }) => {

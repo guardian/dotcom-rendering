@@ -8,7 +8,7 @@ import type {
 	CommentFormProps,
 	CommentType,
 	FilterOptions,
-	ResponseType,
+	ReplyType,
 	SignedInUser,
 } from '../lib/discussion';
 import {
@@ -126,13 +126,13 @@ const remapToValidFilters = (
  */
 export const replaceMatchingCommentResponses =
 	(action: Action & { type: 'expandCommentReplies' }) =>
-	<T extends CommentType | ResponseType>(comment: T): T =>
+	<T extends CommentType | ReplyType>(comment: T): T =>
 		comment.id === action.commentId
 			? { ...comment, responses: action.responses }
 			: comment;
 
 type State = {
-	comments: Array<CommentType | ResponseType>;
+	comments: Array<CommentType | ReplyType>;
 	isClosedForComments: boolean;
 	isExpanded: boolean;
 	commentPage: number;
@@ -175,7 +175,7 @@ const initialState: State = {
 type Action =
 	| {
 			type: 'commentsLoaded';
-			comments: Array<CommentType | ResponseType>;
+			comments: Array<CommentType | ReplyType>;
 			isClosedForComments: boolean;
 			commentCount: number;
 			topLevelCommentCount: number;
@@ -184,10 +184,10 @@ type Action =
 	| {
 			type: 'expandCommentReplies';
 			commentId: number;
-			responses: ResponseType[];
+			responses: ReplyType[];
 	  }
-	| { type: 'addTopLevelComment'; comment: CommentType }
-	| { type: 'addReplyComment'; comment: ResponseType }
+	| { type: 'addComment'; comment: CommentType }
+	| { type: 'addReply'; comment: ReplyType }
 	| { type: 'updateCommentPage'; commentPage: number }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
@@ -214,13 +214,13 @@ const reducer = (state: State, action: Action): State => {
 				topLevelCommentCount: action.topLevelCommentCount,
 				loading: false,
 			};
-		case 'addTopLevelComment':
+		case 'addComment':
 			return {
 				...state,
 				comments: [action.comment, ...state.comments],
 				isExpanded: true,
 			};
-		case 'addReplyComment':
+		case 'addReply':
 			return {
 				...state,
 				comments: state.comments.map((comment) =>
@@ -559,10 +559,10 @@ export const Discussion = ({
 						})
 					}
 					addComment={(comment) => {
-						dispatch({ type: 'addTopLevelComment', comment });
+						dispatch({ type: 'addComment', comment });
 					}}
 					addResponse={(comment) => {
-						dispatch({ type: 'addReplyComment', comment });
+						dispatch({ type: 'addReply', comment });
 					}}
 					handleFilterChange={(
 						newFilters: FilterOptions,

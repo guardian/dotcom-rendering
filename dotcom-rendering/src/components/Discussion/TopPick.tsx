@@ -3,7 +3,7 @@ import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type {
 	CommentType,
-	ResponseType,
+	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
@@ -15,7 +15,7 @@ import { Row } from './Row';
 import { Timestamp } from './Timestamp';
 
 type Props = {
-	comment: CommentType | ResponseType;
+	comment: CommentType | ReplyType;
 	userMadeComment: boolean;
 	onPermalinkClick: (commentId: number) => void;
 	user?: SignedInUser;

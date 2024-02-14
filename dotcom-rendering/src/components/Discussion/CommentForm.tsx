@@ -3,7 +3,7 @@ import { space, text, textSans } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentType,
-	ResponseType,
+	ReplyType,
 	SignedInUser,
 	UserProfile,
 } from '../../lib/discussion';
@@ -17,9 +17,9 @@ import { Row } from './Row';
 type Props = {
 	shortUrl: string;
 	user: SignedInUser;
-	onAddComment: (response: CommentType | ResponseType) => void;
+	onAddComment: (response: CommentType | ReplyType) => void;
 	setCommentBeingRepliedTo?: () => void;
-	commentBeingRepliedTo?: CommentType | ResponseType;
+	commentBeingRepliedTo?: CommentType | ReplyType;
 	onPreview?: typeof defaultPreview;
 	error: string;
 	setError: (error: string) => void;
@@ -155,7 +155,7 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
  * by the new API response and - if the refresh was within 60 seconds - the
  * reader's comment will not be present. The same edge case exists in frontend.
  */
-const simulateNewTopLevelComment = (
+const simulateNewComment = (
 	commentId: number,
 	body: string,
 	userProfile: UserProfile,
@@ -173,12 +173,12 @@ const simulateNewTopLevelComment = (
 	responses: [],
 });
 
-const simulateNewReplyComment = (
+const simulateNewReply = (
 	commentId: number,
 	body: string,
 	userProfile: UserProfile,
-	commentBeingRepliedTo: CommentType | ResponseType,
-): ResponseType => ({
+	commentBeingRepliedTo: CommentType | ReplyType,
+): ReplyType => ({
 	id: commentId,
 	body,
 	date: Date(),
@@ -376,13 +376,13 @@ export const CommentForm = ({
 			} else {
 				onAddComment(
 					commentBeingRepliedTo
-						? simulateNewReplyComment(
+						? simulateNewReply(
 								response.value,
 								body,
 								user.profile,
 								commentBeingRepliedTo,
 						  )
-						: simulateNewTopLevelComment(
+						: simulateNewComment(
 								response.value,
 								body,
 								user.profile,

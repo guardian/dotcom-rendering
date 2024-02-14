@@ -6,7 +6,7 @@ import type {
 	DiscussionOptions,
 	FilterOptions,
 	GetDiscussionSuccess,
-	ResponseType,
+	ReplyType,
 } from './discussion';
 import {
 	discussionApiResponseSchema,
@@ -231,7 +231,7 @@ export const reply =
 
 export const getPicks = async (
 	shortUrl: string,
-): Promise<Result<GetDiscussionError, Array<CommentType | ResponseType>>> => {
+): Promise<Result<GetDiscussionError, Array<CommentType | ReplyType>>> => {
 	const url =
 		joinUrl(options.baseUrl, 'discussion', shortUrl, 'topcomments') +
 		objAsParams(defaultParams);
@@ -432,7 +432,7 @@ export const unPickComment =
 
 export const getMoreResponses = async (
 	commentId: number,
-): Promise<Result<GetDiscussionError, ResponseType[]>> => {
+): Promise<Result<GetDiscussionError, ReplyType[]>> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString()) +
 		objAsParams({

@@ -3,7 +3,7 @@ import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type {
 	CommentType,
 	Reader,
-	ResponseType,
+	ReplyType,
 	Staff,
 } from '../../lib/discussion';
 import { ok } from '../../lib/result';
@@ -70,7 +70,7 @@ const blockedCommentData = {
 	body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 };
 
-const replyCommentData: ResponseType = {
+const replyCommentData: ReplyType = {
 	...commentData,
 	responseTo: {
 		displayName: 'ArtVandelay',
@@ -82,7 +82,7 @@ const replyCommentData: ResponseType = {
 	},
 };
 
-const longReplyCommentData: ResponseType = {
+const longReplyCommentData: ReplyType = {
 	...commentData,
 	responseTo: {
 		displayName: 'ArtVandelayWithAVeryLongUserName',
@@ -94,7 +94,7 @@ const longReplyCommentData: ResponseType = {
 	},
 };
 
-const longBothReplyCommentData: ResponseType = {
+const longBothReplyCommentData: ReplyType = {
 	...commentData,
 	userProfile: {
 		...commentData.userProfile,

@@ -2,14 +2,14 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
 import type {
 	CommentType,
-	ResponseType,
+	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
 import { TopPick } from './TopPick';
 
 type Props = {
 	user?: SignedInUser;
-	comments: Array<CommentType | ResponseType>;
+	comments: Array<CommentType | ReplyType>;
 	onPermalinkClick: (commentId: number) => void;
 };
 
@@ -47,8 +47,8 @@ const oneColCommentsStyles = css`
 `;
 
 export const TopPicks = ({ user, comments, onPermalinkClick }: Props) => {
-	const leftColComments: Array<CommentType | ResponseType> = [];
-	const rightColComments: Array<CommentType | ResponseType> = [];
+	const leftColComments: Array<CommentType | ReplyType> = [];
+	const rightColComments: Array<CommentType | ReplyType> = [];
 	for (const [index, comment] of comments.entries())
 		index % 2 === 0
 			? leftColComments.push(comment)

@@ -4,7 +4,7 @@ import { SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type {
 	CommentType,
-	ResponseType,
+	ReplyType,
 	SignedInUser,
 	ThreadsType,
 } from '../../lib/discussion';
@@ -17,14 +17,14 @@ import { CommentReplyPreview } from './CommentReplyPreview';
 import { PillarButton } from './PillarButton';
 
 type Props = {
-	comment: CommentType | ResponseType;
+	comment: CommentType | ReplyType;
 	isClosedForComments: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
 	threads: ThreadsType;
-	commentBeingRepliedTo?: CommentType | ResponseType;
+	commentBeingRepliedTo?: CommentType | ReplyType;
 	setCommentBeingRepliedTo: (
-		commentBeingRepliedTo?: CommentType | ResponseType,
+		commentBeingRepliedTo?: CommentType | ReplyType,
 	) => void;
 	commentToScrollTo?: number;
 	mutes: string[];
@@ -40,10 +40,7 @@ type Props = {
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (
-		commentId: number,
-		responses: ResponseType[],
-	) => void;
+	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
 };
 
 const nestingStyles = css`
@@ -134,7 +131,7 @@ export const CommentContainer = ({
 			});
 	};
 
-	const onAddResponse = (commentId: number, response: ResponseType) =>
+	const onAddResponse = (commentId: number, response: ReplyType) =>
 		expandCommentReplies(commentId, [...responses, response]);
 
 	return (
@@ -214,7 +211,7 @@ export const CommentContainer = ({
 				{commentBeingRepliedTo &&
 					(commentBeingRepliedTo.id === comment.id ||
 						responses.find(
-							(response: ResponseType) =>
+							(response: ReplyType) =>
 								response.id === commentBeingRepliedTo.id,
 						)) &&
 					user && (

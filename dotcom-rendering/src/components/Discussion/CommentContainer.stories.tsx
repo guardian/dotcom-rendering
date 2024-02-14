@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import type { CommentType, Reader, ResponseType } from '../../lib/discussion';
+import type { CommentType, Reader, ReplyType } from '../../lib/discussion';
 import { ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
 
@@ -35,7 +35,7 @@ const commentData: CommentType = {
 	},
 };
 
-const threadComment: ResponseType = {
+const threadComment: ReplyType = {
 	id: 25488498,
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 	date: '26 July 2013 4:35pm',
@@ -70,7 +70,7 @@ const threadComment: ResponseType = {
 	},
 };
 
-const threadCommentWithLongUsernames: ResponseType = {
+const threadCommentWithLongUsernames: ReplyType = {
 	id: 25488498,
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 	date: '26 July 2013 4:35pm',

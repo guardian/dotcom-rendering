@@ -7,7 +7,7 @@ import type {
 	CommentFormProps,
 	CommentType,
 	FilterOptions,
-	ResponseType,
+	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
@@ -38,9 +38,9 @@ type Props = {
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
-	comments: Array<CommentType | ResponseType>;
+	comments: Array<CommentType | ReplyType>;
 	addComment: (comment: CommentType) => void;
-	addResponse: (comment: ResponseType) => void;
+	addResponse: (comment: ReplyType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	pickError: string;
 	setPickError: (error: string) => void;
@@ -57,10 +57,7 @@ type Props = {
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (
-		commentId: number,
-		responses: ResponseType[],
-	) => void;
+	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
 };
 
 /**
@@ -166,9 +163,9 @@ export const Comments = ({
 	reportAbuse,
 	expandCommentReplies,
 }: Props) => {
-	const [picks, setPicks] = useState<Array<CommentType | ResponseType>>([]);
+	const [picks, setPicks] = useState<Array<CommentType | ReplyType>>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
-		CommentType | ResponseType
+		CommentType | ReplyType
 	>();
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
 		useState(COMMENT_BATCH);
@@ -258,7 +255,7 @@ export const Comments = ({
 
 		setMutes(updatedMutes); // Update local state
 	};
-	const onAddComment = (comment: CommentType | ResponseType) => {
+	const onAddComment = (comment: CommentType | ReplyType) => {
 		if ('responses' in comment) {
 			addTopLevelComment(comment);
 		} else {

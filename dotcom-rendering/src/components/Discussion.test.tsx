@@ -1,4 +1,4 @@
-import type { CommentType, ResponseType, UserProfile } from '../lib/discussion';
+import type { CommentType, ReplyType, UserProfile } from '../lib/discussion';
 import { replaceMatchingCommentResponses } from './Discussion';
 
 describe('Discussion', () => {
@@ -16,7 +16,7 @@ describe('Discussion', () => {
 		const createComment = (
 			id: number,
 			body: string,
-			responses: ResponseType[],
+			responses: ReplyType[],
 		): CommentType => ({
 			id,
 			body,
@@ -31,7 +31,7 @@ describe('Discussion', () => {
 			status: 'visible',
 		});
 
-		const createResponse = (id: number, body: string): ResponseType => ({
+		const createReply = (id: number, body: string): ReplyType => ({
 			id,
 			body,
 			userProfile,
@@ -57,12 +57,12 @@ describe('Discussion', () => {
 				type: 'expandCommentReplies',
 				commentId: 999_999,
 				responses: [
-					createResponse(123_001, '<p>A first reply</p>'),
-					createResponse(123_002, '<p>A second reply</p>'),
-					createResponse(123_003, '<p>A third reply</p>'),
-					createResponse(123_004, '<p>A fourth reply</p>'),
-					createResponse(123_005, '<p>A fifth reply</p>'),
-					createResponse(123_006, '<p>A sixth reply</p>'),
+					createReply(123_001, '<p>A first reply</p>'),
+					createReply(123_002, '<p>A second reply</p>'),
+					createReply(123_003, '<p>A third reply</p>'),
+					createReply(123_004, '<p>A fourth reply</p>'),
+					createReply(123_005, '<p>A fifth reply</p>'),
+					createReply(123_006, '<p>A sixth reply</p>'),
 				],
 			});
 
@@ -80,12 +80,12 @@ describe('Discussion', () => {
 				type: 'expandCommentReplies',
 				commentId: 123_000,
 				responses: [
-					createResponse(123_100, '<p>A first reply</p>'),
-					createResponse(123_200, '<p>A second reply</p>'),
-					createResponse(123_300, '<p>A third reply</p>'),
-					createResponse(123_400, '<p>A fourth reply</p>'),
-					createResponse(123_500, '<p>A fifth reply</p>'),
-					createResponse(123_600, '<p>A sixth reply</p>'),
+					createReply(123_100, '<p>A first reply</p>'),
+					createReply(123_200, '<p>A second reply</p>'),
+					createReply(123_300, '<p>A third reply</p>'),
+					createReply(123_400, '<p>A fourth reply</p>'),
+					createReply(123_500, '<p>A fifth reply</p>'),
+					createReply(123_600, '<p>A sixth reply</p>'),
 				],
 			});
 
@@ -97,12 +97,12 @@ describe('Discussion', () => {
 
 			expect(comments.map(replacer)).toEqual([
 				createComment(123_000, 'Something', [
-					createResponse(123_100, '<p>A first reply</p>'),
-					createResponse(123_200, '<p>A second reply</p>'),
-					createResponse(123_300, '<p>A third reply</p>'),
-					createResponse(123_400, '<p>A fourth reply</p>'),
-					createResponse(123_500, '<p>A fifth reply</p>'),
-					createResponse(123_600, '<p>A sixth reply</p>'),
+					createReply(123_100, '<p>A first reply</p>'),
+					createReply(123_200, '<p>A second reply</p>'),
+					createReply(123_300, '<p>A third reply</p>'),
+					createReply(123_400, '<p>A fourth reply</p>'),
+					createReply(123_500, '<p>A fifth reply</p>'),
+					createReply(123_600, '<p>A sixth reply</p>'),
 				]),
 				createComment(234_000, 'Or other', []),
 				createComment(456_000, 'Is to be said', []),

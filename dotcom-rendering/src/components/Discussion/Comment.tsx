@@ -10,7 +10,7 @@ import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type {
 	CommentType,
-	ResponseType,
+	ReplyType,
 	SignedInUser,
 	Staff,
 } from '../../lib/discussion';
@@ -27,10 +27,10 @@ import { Timestamp } from './Timestamp';
 
 type Props = {
 	user?: SignedInUser;
-	comment: CommentType | ResponseType;
+	comment: CommentType | ReplyType;
 	isClosedForComments: boolean;
 	setCommentBeingRepliedTo: (
-		commentBeingRepliedTo?: CommentType | ResponseType,
+		commentBeingRepliedTo?: CommentType | ReplyType,
 	) => void;
 	isReply: boolean;
 	wasScrolledTo?: boolean;
