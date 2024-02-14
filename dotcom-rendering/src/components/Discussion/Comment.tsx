@@ -7,7 +7,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import type { CommentType, SignedInUser, Staff } from '../../lib/discussion';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
@@ -19,6 +19,7 @@ import { Column } from './Column';
 import { RecommendationCount } from './RecommendationCount';
 import { Row } from './Row';
 import { Timestamp } from './Timestamp';
+import { DispatchContext } from '../Discussion';
 
 type Props = {
 	user?: SignedInUser;
@@ -31,7 +32,6 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	pickError: string;
-	setPickError: (error: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
@@ -308,7 +308,6 @@ export const Comment = ({
 	toggleMuteStatus,
 	onPermalinkClick,
 	pickError,
-	setPickError,
 	reportAbuse,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
@@ -317,6 +316,17 @@ export const Comment = ({
 
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
+
+	const dispatch = useContext(DispatchContext);
+
+	const setPickError = (error: string) => {
+		if (dispatch) {
+			dispatch({
+				type: 'setPickError',
+				error,
+			});
+		}
+	};
 
 	const pick = async (staffUser: Staff) => {
 		setPickError('');
