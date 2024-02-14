@@ -177,7 +177,7 @@ export const AbuseReportForm = ({
 			});
 	};
 
-	// If the "Other" category is selected, you must supply a reason
+	/** If the "Other" category is selected, you must supply a reason */
 	const otherCategoryId = 9;
 	const isReasonRequired = formVariables.categoryId === otherCategoryId;
 
