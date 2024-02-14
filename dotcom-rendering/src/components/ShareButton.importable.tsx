@@ -184,13 +184,13 @@ export const ShareButton = ({
 		}),
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => {
 		setIsShareSupported(
 			typeof navigator !== 'undefined' &&
 				'share' in navigator &&
 				navigator.canShare(shareData),
 		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
