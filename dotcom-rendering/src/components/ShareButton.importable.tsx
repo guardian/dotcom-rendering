@@ -26,9 +26,7 @@ const sharedButtonStyles = (sizeXSmall: boolean) => css`
 	border-color: ${themePalette('--share-button-border')};
 	min-width: ${sizeXSmall ? '101px' : '132px'};
 	max-width: ${sizeXSmall ? '101px' : '132px'};
-	height: ${sizeXSmall ? '24px' : '36px'} svg {
-		margin-left: ${sizeXSmall ? '' : '0'};
-	}
+	height: ${sizeXSmall ? '24px' : '36px'};
 `;
 
 const buttonStyles = css`
@@ -56,9 +54,6 @@ const copiedButtonStyles = (sizeXSmall: boolean) => css`
 const nativeShare = (sizeXSmall: boolean) => css`
 	min-width: ${sizeXSmall ? '79px' : '105px'};
 	max-width: ${sizeXSmall ? '79px' : '105px'};
-	svg {
-		margin-right: 6px;
-	}
 	border-color: ${themePalette('--share-button-border')};
 `;
 
@@ -68,7 +63,6 @@ const liveBlogMobile = (isCopied: boolean) => css`
 		border-color: rgba(255, 255, 255, 0.4);
 		svg {
 			fill: ${isCopied ? palette.success[500] : palette.neutral[100]};
-			margin-left: 0;
 		}
 		${!isCopied &&
 		`:hover {
