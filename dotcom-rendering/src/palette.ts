@@ -3431,6 +3431,9 @@ const shareButtonBorderLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[46];
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[60];
 		default:
 			switch (theme) {
 				case ArticleSpecial.Labs:

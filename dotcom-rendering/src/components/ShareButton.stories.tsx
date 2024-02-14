@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import {
+	defaultFormats,
+	splitTheme,
+} from '../../.storybook/decorators/splitThemeDecorator';
 import { palette as themePalette } from '../palette';
 import {
 	CopyLinkButton,
@@ -58,7 +61,7 @@ export const LinkCopied = () => {
 		<CopyLinkButton
 			onShare={async () => {}}
 			isCopied={true}
-			isLiveBlogMeta={true}
+			isLiveBlogMeta={false}
 			size="small"
 		/>
 	);
@@ -96,7 +99,13 @@ export const LiveBlogMobileNative = ({ theme }: StoryArgs) => {
 	);
 };
 LiveBlogMobileNative.storyName = 'LiveBlogMobileNative';
-LiveBlogMobileNative.decorators = [splitTheme()];
+LiveBlogMobileNative.decorators = [
+	splitTheme(
+		[...defaultFormats].filter(
+			(format) => format.design !== ArticleDesign.Gallery,
+		),
+	),
+];
 LiveBlogMobileNative.story = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
@@ -123,7 +132,13 @@ export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 	);
 };
 LiveBlogMobile.storyName = 'LiveBlogMobile';
-LiveBlogMobile.decorators = [splitTheme()];
+LiveBlogMobile.decorators = [
+	splitTheme(
+		[...defaultFormats].filter(
+			(format) => format.design !== ArticleDesign.Gallery,
+		),
+	),
+];
 LiveBlogMobile.story = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },

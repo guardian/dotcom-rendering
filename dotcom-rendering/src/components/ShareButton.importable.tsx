@@ -46,7 +46,7 @@ const buttonStyles = css`
 
 const copiedButtonStyles = (sizeXSmall: boolean) => css`
 	color: ${themePalette('--share-button-copied')};
-	padding: ${sizeXSmall ? '0 4px;' : '0 8px;'} svg {
+	padding: ${sizeXSmall ? '0 4px;' : '0 10px;'} svg {
 		fill: ${palette.success[400]};
 	}
 `;
@@ -101,7 +101,7 @@ export const NativeShareButton = ({
 	size,
 	isLiveBlogMeta,
 }: {
-	onShare: () => Promise<void>;
+	onShare: () => void;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 }) => {
@@ -109,7 +109,7 @@ export const NativeShareButton = ({
 
 	return (
 		<Button
-			onClick={() => onShare().catch(() => {})}
+			onClick={() => onShare()}
 			size={size}
 			type="button"
 			priority="tertiary"
@@ -132,7 +132,7 @@ export const CopyLinkButton = ({
 	isLiveBlogMeta,
 	isCopied,
 }: {
-	onShare: () => Promise<void>;
+	onShare: () => void;
 	size?: Size;
 	isLiveBlogMeta: boolean;
 	isCopied: boolean;
@@ -140,7 +140,7 @@ export const CopyLinkButton = ({
 	const sizeXSmall = size === 'xsmall';
 	return (
 		<Button
-			onClick={() => onShare().catch(() => {})}
+			onClick={() => onShare()}
 			size={size}
 			type="button"
 			priority="tertiary"
@@ -181,37 +181,41 @@ export const ShareButton = ({
 		);
 	}, []);
 
-	const onShare = async () => {
-		if (isShareSupported) {
-			await navigator.share({
-				title: `${webTitle}`,
-				text: `${webTitle}:`,
-				url: getUrl({
-					pageId,
-					blockId,
-				}),
-			});
-		} else if ('clipboard' in navigator) {
-			await navigator.clipboard.writeText(
-				getUrl({
-					pageId,
-					blockId,
-				}),
-			);
-			setIsCopied(true);
-			setTimeout(() => setIsCopied(false), 3000);
-		}
-	};
+	useEffect(() => {
+		if (!isCopied) return;
+		const timer = setTimeout(() => {
+			setIsCopied(false);
+		}, 3000);
+		return () => clearTimeout(timer);
+	}, [isCopied]);
 
 	return isShareSupported ? (
 		<NativeShareButton
-			onShare={onShare}
+			onShare={() => {
+				void navigator.share({
+					title: `${webTitle}`,
+					text: `${webTitle}:`,
+					url: getUrl({
+						pageId,
+						blockId,
+					}),
+				});
+			}}
 			size={size}
 			isLiveBlogMeta={isLiveBlogMeta}
 		/>
 	) : (
 		<CopyLinkButton
-			onShare={onShare}
+			onShare={() => {
+				if (!('clipboard' in navigator)) return;
+				void navigator.clipboard.writeText(
+					getUrl({
+						pageId,
+						blockId,
+					}),
+				);
+				setIsCopied(true);
+			}}
 			size={size}
 			isCopied={isCopied}
 			isLiveBlogMeta={isLiveBlogMeta}

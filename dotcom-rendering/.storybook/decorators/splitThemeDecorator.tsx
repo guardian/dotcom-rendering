@@ -51,7 +51,7 @@ const FormatHeading = ({ format }: { format: ArticleFormat }) => (
 // ----- Decorators ----- //
 
 /** A list of the most typical formats */
-const defaultFormats = [
+export const defaultFormats = [
 	{
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
