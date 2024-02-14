@@ -175,22 +175,20 @@ export const ShareButton = ({
 			context === 'ArticleMeta') ||
 		context === 'SubMeta';
 
-	const shareData = {
-		title: `${webTitle}`,
-		text: `${webTitle}:`,
-		url: getUrl({
-			pageId,
-			blockId,
-		}),
-	};
-
 	useEffect(() => {
 		setIsShareSupported(
 			typeof navigator !== 'undefined' &&
 				'share' in navigator &&
-				navigator.canShare(shareData),
+				navigator.canShare({
+					title: `${webTitle}`,
+					text: `${webTitle}:`,
+					url: getUrl({
+						pageId,
+						blockId,
+					}),
+				}),
 		);
-	}, [shareData]);
+	}, []);
 
 	useEffect(() => {
 		if (!isCopied) return;
@@ -203,7 +201,16 @@ export const ShareButton = ({
 	return isShareSupported ? (
 		<NativeShareButton
 			onShare={() => {
-				navigator.share(shareData).catch(() => {});
+				navigator
+					.share({
+						title: `${webTitle}`,
+						text: `${webTitle}:`,
+						url: getUrl({
+							pageId,
+							blockId,
+						}),
+					})
+					.catch(() => {});
 			}}
 			size={size}
 			isLiveBlogMeta={isLiveBlogMeta}
