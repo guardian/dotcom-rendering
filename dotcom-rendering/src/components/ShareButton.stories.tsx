@@ -115,7 +115,7 @@ export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 		>
 			<CopyLinkButton
 				onShare={async () => {}}
-				isCopied={true}
+				isCopied={false}
 				isLiveBlogMeta={true}
 				size="small"
 			/>

@@ -67,7 +67,7 @@ const liveBlogMobile = (isCopied: boolean) => css`
 		color: ${palette.neutral[100]};
 		border-color: rgba(255, 255, 255, 0.4);
 		svg {
-			fill: ${isCopied ? palette.success[400] : palette.neutral[100]};
+			fill: ${isCopied ? palette.success[500] : palette.neutral[100]};
 			margin-left: 0;
 		}
 		${!isCopied &&
