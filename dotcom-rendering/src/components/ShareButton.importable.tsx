@@ -175,18 +175,21 @@ export const ShareButton = ({
 			context === 'ArticleMeta') ||
 		context === 'SubMeta';
 
+	const shareData = {
+		title: `${webTitle}`,
+		text: `${webTitle}:`,
+		url: getUrl({
+			pageId,
+			blockId,
+		}),
+	};
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => {
 		setIsShareSupported(
 			typeof navigator !== 'undefined' &&
 				'share' in navigator &&
-				navigator.canShare({
-					title: `${webTitle}`,
-					text: `${webTitle}:`,
-					url: getUrl({
-						pageId,
-						blockId,
-					}),
-				}),
+				navigator.canShare(shareData),
 		);
 	}, []);
 
@@ -201,16 +204,7 @@ export const ShareButton = ({
 	return isShareSupported ? (
 		<NativeShareButton
 			onShare={() => {
-				navigator
-					.share({
-						title: `${webTitle}`,
-						text: `${webTitle}:`,
-						url: getUrl({
-							pageId,
-							blockId,
-						}),
-					})
-					.catch(() => {});
+				navigator.share(shareData).catch(() => {});
 			}}
 			size={size}
 			isLiveBlogMeta={isLiveBlogMeta}
