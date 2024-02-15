@@ -63,7 +63,7 @@
 		"@guardian/source-foundations": "14.1.4",
 		"@guardian/source-react-components": "18.0.0",
 		"@guardian/source-react-components-development-kitchen": "16.0.0",
-		"@guardian/support-dotcom-components": "1.1.2",
+		"@guardian/support-dotcom-components": "1.1.3",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.40.1",
 		"@sentry/browser": "7.75.1",
