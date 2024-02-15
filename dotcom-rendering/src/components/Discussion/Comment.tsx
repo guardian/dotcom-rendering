@@ -7,12 +7,12 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import type { CommentType, SignedInUser, Staff } from '../../lib/discussion';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
-import { DispatchContext } from '../DispatchContext';
+import { useDispatch } from '../DispatchContext';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -317,7 +317,7 @@ export const Comment = ({
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
 
-	const dispatch = useContext(DispatchContext);
+	const dispatch = useDispatch();
 
 	const setPickError = (error: string) => {
 		dispatch({
