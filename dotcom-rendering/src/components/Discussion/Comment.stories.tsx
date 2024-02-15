@@ -72,6 +72,7 @@ const blockedCommentData = {
 
 const replyCommentData: ReplyType = {
 	...commentData,
+	responses: undefined,
 	responseTo: {
 		displayName: 'ArtVandelay',
 		commentApiUrl: '',
@@ -84,6 +85,7 @@ const replyCommentData: ReplyType = {
 
 const longReplyCommentData: ReplyType = {
 	...commentData,
+	responses: undefined,
 	responseTo: {
 		displayName: 'ArtVandelayWithAVeryLongUserName',
 		commentApiUrl: '',
@@ -96,6 +98,7 @@ const longReplyCommentData: ReplyType = {
 
 const longBothReplyCommentData: ReplyType = {
 	...commentData,
+	responses: undefined,
 	userProfile: {
 		...commentData.userProfile,
 		displayName: 'AVeryLongUserNameForThisUserToo',

@@ -13,6 +13,7 @@ import {
 	safeParse,
 	string,
 	transform,
+	undefined_,
 	union,
 	variant,
 } from 'valibot';
@@ -111,6 +112,7 @@ export type ReplyType = Output<typeof replySchema>;
 const replySchema = merge([
 	baseCommentSchema,
 	object({
+		responses: optional(undefined_(), undefined),
 		responseTo: object({
 			displayName: string(),
 			commentApiUrl: string(),
@@ -128,6 +130,7 @@ const commentSchema = merge([
 	baseCommentSchema,
 	object({
 		responses: optional(array(replySchema), []),
+		responseTo: optional(undefined_(), undefined),
 	}),
 ]);
 
@@ -300,7 +303,7 @@ const discussionApiSuccessSchema = object({
 		isClosedForRecommendation: boolean(),
 		isThreaded: boolean(),
 		title: string(),
-		comments: array(union([commentSchema, replySchema])),
+		comments: array(union([replySchema, commentSchema])),
 	}),
 });
 
