@@ -1,17 +1,13 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CommentType } from '../../lib/discussion';
+import type { CommentType, ReplyType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
 import { Row } from './Row';
 
 type Props = {
-	commentBeingRepliedTo: CommentType;
+	commentBeingRepliedTo: CommentType | ReplyType;
 };
 
 const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
@@ -26,7 +22,7 @@ const indentStyles = css`
 	width: 18px;
 	svg {
 		/* stylelint-disable-next-line declaration-no-important */
-		fill: ${sourcePalette.neutral[46]} !important;
+		fill: ${schemedPalette('--discussion-subdued')} !important;
 	}
 `;
 
@@ -48,7 +44,7 @@ const previewStyle = css`
 	padding-bottom: ${space[3]}px;
 	padding-left: ${space[5]}px;
 	padding-right: ${space[5]}px;
-	background-color: ${schemedPalette('--top-pick-background')};
+	background-color: ${schemedPalette('--discussion-top-pick-background')};
 	margin-top: ${arrowSize}px;
 	margin-bottom: ${arrowSize + 5}px;
 	position: relative;
@@ -58,7 +54,7 @@ const previewStyle = css`
 		content: '';
 		position: absolute;
 		border-left: ${arrowSize}px solid
-			${schemedPalette('--top-pick-background')};
+			${schemedPalette('--discussion-top-pick-background')};
 		border-top: ${arrowSize}px solid transparent;
 		top: -${arrowSize - 1}px;
 		margin-left: ${space[9]}px;
@@ -79,7 +75,7 @@ const blueLink = css`
 
 const buttonLinkPillarBaseStyles = css`
 	button {
-		color: ${schemedPalette('--discussion-colour')};
+		color: ${schemedPalette('--discussion-accent-text')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -88,14 +84,16 @@ const buttonLinkPillarBaseStyles = css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${schemedPalette('--discussion-colour')};
+			text-decoration-color: ${schemedPalette(
+				'--discussion-accent-text',
+			)};
 		}
 	}
 `;
 
 const buttonLinkBaseStyles = css`
 	button {
-		color: ${sourcePalette.neutral[46]};
+		color: ${schemedPalette('--discussion-subdued')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -104,7 +102,7 @@ const buttonLinkBaseStyles = css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${sourcePalette.neutral[46]};
+			text-decoration-color: ${schemedPalette('--discussion-subdued')};
 		}
 	}
 `;
@@ -164,7 +162,7 @@ export const Preview = ({
 	setDisplayReplyComment,
 	displayReplyComment,
 }: {
-	commentBeingRepliedTo: CommentType;
+	commentBeingRepliedTo: CommentType | ReplyType;
 	setDisplayReplyComment: (displayReplyComment: boolean) => void;
 	displayReplyComment: boolean;
 }) => {

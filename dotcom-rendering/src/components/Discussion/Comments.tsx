@@ -1,20 +1,18 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type {
 	AdditionalHeadersType,
 	CommentFormProps,
 	CommentType,
 	FilterOptions,
+	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -40,8 +38,9 @@ type Props = {
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
-	comments: CommentType[];
-	setComment: (comment: CommentType) => void;
+	comments: Array<CommentType | ReplyType>;
+	addComment: (comment: CommentType) => void;
+	addReply: (comment: ReplyType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	pickError: string;
 	setPickError: (error: string) => void;
@@ -58,7 +57,7 @@ type Props = {
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
+	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
 };
 
 /**
@@ -103,7 +102,7 @@ const picksWrapper = css`
 const NoComments = () => (
 	<div
 		css={css`
-			color: ${sourcePalette.neutral[46]};
+			color: ${schemedPalette('--discussion-subdued')};
 			${textSans.small()}
 			padding-top: ${space[5]}px;
 			padding-left: ${space[1]}px;
@@ -146,7 +145,8 @@ export const Comments = ({
 	comments,
 	pickError,
 	setPickError,
-	setComment,
+	addComment: addTopLevelComment,
+	addReply: addReplyComment,
 	handleFilterChange,
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
@@ -163,9 +163,10 @@ export const Comments = ({
 	reportAbuse,
 	expandCommentReplies,
 }: Props) => {
-	const [picks, setPicks] = useState<CommentType[]>([]);
-	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
-		useState<CommentType>();
+	const [picks, setPicks] = useState<Array<CommentType | ReplyType>>([]);
+	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
+		CommentType | ReplyType
+	>();
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
 		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
@@ -254,8 +255,12 @@ export const Comments = ({
 
 		setMutes(updatedMutes); // Update local state
 	};
-	const onAddComment = (comment: CommentType) => {
-		setComment(comment);
+	const onAddComment = (comment: CommentType | ReplyType) => {
+		if ('responses' in comment) {
+			addTopLevelComment(comment);
+		} else {
+			addReplyComment(comment);
+		}
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
 	};

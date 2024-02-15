@@ -2,14 +2,18 @@ import { css } from '@emotion/react';
 import {
 	from,
 	remSpace,
-	palette as sourcePalette,
 	space,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CommentType, SignedInUser, Staff } from '../../lib/discussion';
+import type {
+	CommentType,
+	ReplyType,
+	SignedInUser,
+	Staff,
+} from '../../lib/discussion';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
@@ -23,9 +27,11 @@ import { Timestamp } from './Timestamp';
 
 type Props = {
 	user?: SignedInUser;
-	comment: CommentType;
+	comment: CommentType | ReplyType;
 	isClosedForComments: boolean;
-	setCommentBeingRepliedTo: (commentBeingRepliedTo?: CommentType) => void;
+	setCommentBeingRepliedTo: (
+		commentBeingRepliedTo?: CommentType | ReplyType,
+	) => void;
 	isReply: boolean;
 	wasScrolledTo?: boolean;
 	isMuted: boolean;
@@ -42,7 +48,7 @@ const commentControlsLink = css`
 	a {
 		${textSans.small({ fontWeight: 'bold' })}
 		margin-right: ${space[2]}px;
-		color: ${schemedPalette('--discussion-colour')};
+		color: ${schemedPalette('--discussion-accent-text')};
 		/*
       We do not want underline to be applied to SVG
       therefore we override the styles and apply them to the nested <span>
@@ -51,9 +57,11 @@ const commentControlsLink = css`
 			text-decoration: none;
 			text-decoration-color: none;
 			span {
-				color: ${schemedPalette('--discussion-colour')};
+				color: ${schemedPalette('--discussion-accent-text')};
 				text-decoration: underline;
-				text-decoration-color: ${schemedPalette('--discussion-colour')};
+				text-decoration-color: ${schemedPalette(
+					'--discussion-accent-text',
+				)};
 			}
 		}
 	}
@@ -83,7 +91,7 @@ const commentCss = css`
 		margin-left: ${space[5]}px;
 		margin-right: ${space[5]}px;
 		padding-left: ${space[2]}px;
-		color: ${sourcePalette.neutral[46]};
+		color: ${schemedPalette('--discussion-subdued')};
 	}
 
 	i {
@@ -118,13 +126,13 @@ const commentLinkStyling = css`
 `;
 
 const commentWrapper = css`
-	border-top: 1px solid ${sourcePalette.neutral[86]};
+	border-top: 1px solid ${schemedPalette('--discussion-border')};
 	display: flex;
 	padding: ${space[2]}px 0;
 `;
 
 const selectedStyles = css`
-	background-color: ${sourcePalette.neutral[97]};
+	background-color: ${schemedPalette('--discussion-selected-background')};
 	margin-left: -${space[2]}px;
 	padding-left: ${space[2]}px;
 	margin-right: -${space[2]}px;
@@ -141,11 +149,13 @@ const avatarMargin = css`
 
 const colourStyles = css`
 	a {
-		color: ${schemedPalette('--discussion-colour')};
-		text-decoration-color: ${schemedPalette('--discussion-colour')};
+		color: ${schemedPalette('--discussion-accent-text')};
+		text-decoration-color: ${schemedPalette('--discussion-accent-text')};
 		:hover {
-			color: ${schemedPalette('--discussion-colour')};
-			text-decoration-color: ${schemedPalette('--discussion-colour')};
+			color: ${schemedPalette('--discussion-accent-text')};
+			text-decoration-color: ${schemedPalette(
+				'--discussion-accent-text',
+			)};
 		}
 	}
 `;
@@ -166,7 +176,7 @@ const regularFont = css`
 const svgReplyArrow = css`
 	svg {
 		/* stylelint-disable-next-line declaration-no-important */
-		fill: ${sourcePalette.neutral[46]} !important;
+		fill: ${schemedPalette('--discussion-subdued')} !important;
 	}
 `;
 
@@ -227,7 +237,7 @@ const cssReplyToWrapper = css`
 
 const buttonLinkPillarBaseStyles = css`
 	button {
-		color: ${schemedPalette('--discussion-colour')};
+		color: ${schemedPalette('--discussion-accent-text')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -236,14 +246,16 @@ const buttonLinkPillarBaseStyles = css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${schemedPalette('--discussion-colour')};
+			text-decoration-color: ${schemedPalette(
+				'--discussion-accent-text',
+			)};
 		}
 	}
 `;
 
 const buttonLinkBaseStyles = css`
 	button {
-		color: ${sourcePalette.neutral[46]};
+		color: ${schemedPalette('--discussion-subdued')};
 		background-color: transparent;
 		height: 18px;
 		min-height: 18px;
@@ -252,7 +264,7 @@ const buttonLinkBaseStyles = css`
 
 		:hover {
 			text-decoration: underline;
-			text-decoration-color: ${sourcePalette.neutral[46]};
+			text-decoration-color: ${schemedPalette('--discussion-subdued')};
 		}
 	}
 `;
@@ -377,7 +389,7 @@ export const Comment = ({
 							<Column>
 								<div
 									css={[
-										comment.responseTo &&
+										'responseTo' in comment &&
 											hideBelowMobileLandscape,
 										hideAboveMobileLandscape,
 									]}
@@ -433,7 +445,7 @@ export const Comment = ({
 								</div>
 								<div
 									css={[
-										!comment.responseTo &&
+										!('responseTo' in comment) &&
 											hideBelowMobileLandscape,
 									]}
 								>
@@ -458,7 +470,7 @@ export const Comment = ({
 												}
 											</Link>
 										</div>
-										{comment.responseTo ? (
+										{'responseTo' in comment ? (
 											<div
 												css={[
 													colourStyles,
@@ -486,7 +498,7 @@ export const Comment = ({
 										<div
 											css={[
 												timestampWrapperStyles,
-												comment.responseTo &&
+												'responseTo' in comment &&
 													hideBelowMobileLandscape,
 											]}
 										>
@@ -539,7 +551,7 @@ export const Comment = ({
 
 					<div
 						css={[
-							comment.responseTo && hideBelowMobileLandscape,
+							'responseTo' in comment && hideBelowMobileLandscape,
 							hideAboveMobileLandscape,
 						]}
 					>

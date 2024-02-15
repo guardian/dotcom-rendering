@@ -3724,7 +3724,51 @@ const syndicationButtonBorder: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[86];
 	}
 };
-const interactiveBlockBackground = () => sourcePalette.neutral[100];
+
+const interactiveBlockBackgroundLight: PaletteFunction = ({
+	design,
+	theme,
+	display,
+}) => {
+	switch (design) {
+		case ArticleDesign.Letter:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Comment:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.opinion[800];
+			}
+		case ArticleDesign.Editorial:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.news[800];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				case ArticleSpecial.Labs:
+					switch (display) {
+						case ArticleDisplay.Immersive:
+							return sourcePalette.neutral[100];
+						default:
+							return sourcePalette.neutral[97];
+					}
+				default:
+					return sourcePalette.neutral[100];
+			}
+	}
+};
+
+const interactiveBlockBackgroundDark = () => sourcePalette.neutral[100];
 
 const mostViewedHeadlineLight = (): string => sourcePalette.neutral[7];
 const mostViewedHeadlineDark = (): string => sourcePalette.neutral[86];
@@ -4529,7 +4573,10 @@ const recommendationCountArrowSelectedLight: PaletteFunction = () =>
 const recommendationCountArrowSelectedDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
-const discussionLight: PaletteFunction = ({ theme }) => {
+const discussionTextLight: PaletteFunction = () => sourcePalette.neutral[86];
+const discussionTextDark: PaletteFunction = () => sourcePalette.neutral[20];
+
+const discussionAccentTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.lifestyle[400];
@@ -4545,7 +4592,7 @@ const discussionLight: PaletteFunction = ({ theme }) => {
 			return sourcePalette.news[400];
 	}
 };
-const discussionDark: PaletteFunction = ({ theme }) => {
+const discussionAccentTextDark: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.lifestyle[500];
@@ -4592,6 +4639,7 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 		case Pillar.Culture:
 			return sourcePalette.culture[400];
 		case Pillar.Opinion:
+			// TODO - check if this is correct since it's the same shade as non-hover
 			return sourcePalette.opinion[400];
 		case Pillar.Lifestyle:
 			return sourcePalette.lifestyle[400];
@@ -4606,15 +4654,18 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const discussionButtonTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const discussionButtonTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
 const discussionReportBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const discussionReportBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
-const discussionReportBorderLight: PaletteFunction = () =>
-	sourcePalette.neutral[86];
-const discussionReportBorderDark: PaletteFunction = () =>
-	sourcePalette.neutral[20];
+const discussionBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const discussionBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const commentFormInputBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -4626,14 +4677,19 @@ const commentFormHeaderBackgroundLight: PaletteFunction = () =>
 const commentFormHeaderBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
-const commentFormAddonBackgroundLight: PaletteFunction = () =>
+const discussionBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[93];
-const commentFormAddonBackgroundDark: PaletteFunction = () =>
+const discussionBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[38];
 
-const firstCommentPreviewLight: PaletteFunction = () =>
+const discussionSelectedBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const discussionSelectedBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const discussionPreviewBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[93];
-const firstCommentPreviewDark: PaletteFunction = () =>
+const discussionPreviewBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
 const discussionPaginationTextLight: PaletteFunction = () =>
@@ -4646,10 +4702,23 @@ const discussionPaginationBorderLight: PaletteFunction = () =>
 const discussionPaginationBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 
+const discussionPaginationBorderHover: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 const discussionPaginationBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const discussionPaginationBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
+
+const discussionLoadingBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const discussionLoadingBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
+const discussionLoadingShimmerLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionLoadingShimmerDark: PaletteFunction = () =>
+	sourcePalette.neutral[46];
 
 const paginationTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -4871,6 +4940,8 @@ const interactiveAtomBackgroundDark: PaletteFunction = () =>
 /**
  * A template literal type used to make sure the keys of the palette use the
  * correct CSS custom property syntax.
+ *
+ * IMPORTANT - do not use a CSS variable name ending in "label" as Storybook theming will fail
  */
 type CSSCustomProperty = `--${string}`;
 /**
@@ -5370,8 +5441,8 @@ const paletteColours = {
 		dark: appsEpicBorderDark,
 	},
 	'--interactive-block-background': {
-		light: interactiveBlockBackground,
-		dark: interactiveBlockBackground,
+		light: interactiveBlockBackgroundLight,
+		dark: interactiveBlockBackgroundDark,
 	},
 	'--most-viewed-headline': {
 		light: mostViewedHeadlineLight,
@@ -5573,19 +5644,19 @@ const paletteColours = {
 		light: signInLinkLineLight,
 		dark: signInLinkLineDark,
 	},
-	'--top-pick-background': {
+	'--discussion-top-pick-background': {
 		light: topPickBackgroundLight,
 		dark: topPickBackgroundDark,
 	},
-	'--top-pick-link': {
+	'--discussion-top-pick-link': {
 		light: topPickLinkLight,
 		dark: topPickLinkDark,
 	},
-	'--staff-label-color': {
+	'--discussion-staff-label-text': {
 		light: staffLabelLight,
 		dark: staffLabelDark,
 	},
-	'--pick-label-color': {
+	'--discussion-pick-label-text': {
 		light: staffPickLight,
 		dark: staffPickDark,
 	},
@@ -5605,9 +5676,13 @@ const paletteColours = {
 		light: recommendationCountArrowSelectedLight,
 		dark: recommendationCountArrowSelectedDark,
 	},
-	'--discussion-colour': {
-		light: discussionLight,
-		dark: discussionDark,
+	'--discussion-text': {
+		light: discussionTextLight,
+		dark: discussionTextDark,
+	},
+	'--discussion-accent-text': {
+		light: discussionAccentTextLight,
+		dark: discussionAccentTextDark,
 	},
 	'--discussion-link': {
 		light: discussionLinkLight,
@@ -5617,21 +5692,25 @@ const paletteColours = {
 		light: discussionPrimaryButtonBackground,
 		dark: discussionPrimaryButtonBackground,
 	},
-	'--discussion-button-hover': {
+	'--discussion-button-background-hover': {
 		light: discussionButtonHover,
 		dark: discussionButtonHover,
 	},
-	'--first-comment-preview': {
-		light: firstCommentPreviewLight,
-		dark: firstCommentPreviewDark,
+	'--discussion-button-text': {
+		light: discussionButtonTextLight,
+		dark: discussionButtonTextDark,
+	},
+	'--discussion-preview-background': {
+		light: discussionPreviewBackgroundLight,
+		dark: discussionPreviewBackgroundDark,
 	},
 	'--discussion-report-background': {
 		light: discussionReportBackgroundLight,
 		dark: discussionReportBackgroundDark,
 	},
-	'--discussion-report-border': {
-		light: discussionReportBorderLight,
-		dark: discussionReportBorderDark,
+	'--discussion-border': {
+		light: discussionBorderLight,
+		dark: discussionBorderDark,
 	},
 	'--discussion-pagination-text': {
 		light: discussionPaginationTextLight,
@@ -5645,9 +5724,21 @@ const paletteColours = {
 		light: discussionPaginationBorderLight,
 		dark: discussionPaginationBorderDark,
 	},
+	'--discussion-pagination-border-hover': {
+		light: discussionPaginationBorderHover,
+		dark: discussionPaginationBorderHover,
+	},
 	'--discussion-subdued': {
 		light: discussionSubduedLight,
 		dark: discussionSubduedDark,
+	},
+	'--discussion-loading-background': {
+		light: discussionLoadingBackgroundLight,
+		dark: discussionLoadingBackgroundDark,
+	},
+	'--discussion-loading-shimmer': {
+		light: discussionLoadingShimmerLight,
+		dark: discussionLoadingShimmerDark,
 	},
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
@@ -5657,9 +5748,13 @@ const paletteColours = {
 		light: commentFormHeaderBackgroundLight,
 		dark: commentFormHeaderBackgroundDark,
 	},
-	'--comment-form-addon-button': {
-		light: commentFormAddonBackgroundLight,
-		dark: commentFormAddonBackgroundDark,
+	'--discussion-background': {
+		light: discussionBackgroundLight,
+		dark: discussionBackgroundDark,
+	},
+	'--discussion-selected-background': {
+		light: discussionSelectedBackgroundLight,
+		dark: discussionSelectedBackgroundDark,
 	},
 	'--pagination-text': {
 		light: paginationTextLight,

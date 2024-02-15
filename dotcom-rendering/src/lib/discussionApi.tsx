@@ -6,13 +6,14 @@ import type {
 	DiscussionOptions,
 	FilterOptions,
 	GetDiscussionSuccess,
+	ReplyType,
 } from './discussion';
 import {
 	discussionApiResponseSchema,
 	getCommentContextResponseSchema,
 	parseAbuseResponse,
-	parseCommentRepliesResponse,
 	parseCommentResponse,
+	parseRepliesResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
 } from './discussion';
@@ -68,11 +69,17 @@ const objAsParams = (obj: any): string => {
 type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
 
 //todo: figure out the different return types and consider error handling
-export const getDiscussion = async (
-	shortUrl: string,
-	page: number,
-	filters: FilterOptions,
-): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
+export const getDiscussion = async ({
+	shortUrl,
+	page,
+	filters,
+	signal,
+}: {
+	shortUrl: string;
+	page: number;
+	filters: FilterOptions;
+	signal: AbortSignal;
+}): Promise<Result<GetDiscussionError, GetDiscussionSuccess>> => {
 	const apiOpts: DiscussionOptions = {
 		...defaultParams,
 		...{
@@ -92,7 +99,10 @@ export const getDiscussion = async (
 
 	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
-	const jsonResult = await fetchJSON(url, { headers: options.headers });
+	const jsonResult = await fetchJSON(url, {
+		headers: options.headers,
+		signal,
+	});
 
 	if (jsonResult.kind === 'error') return jsonResult;
 
@@ -107,9 +117,14 @@ export const getDiscussion = async (
 		// we get the response to tell us
 		result.output.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
 	) {
-		return getDiscussion(shortUrl, page, {
-			...filters,
-			threads: 'unthreaded',
+		return getDiscussion({
+			shortUrl,
+			page,
+			filters: {
+				...filters,
+				threads: 'unthreaded',
+			},
+			signal,
 		});
 	}
 	if (result.output.status === 'error') {
@@ -216,7 +231,7 @@ export const reply =
 
 export const getPicks = async (
 	shortUrl: string,
-): Promise<Result<GetDiscussionError, CommentType[]>> => {
+): Promise<Result<GetDiscussionError, Array<CommentType | ReplyType>>> => {
 	const url =
 		joinUrl(options.baseUrl, 'discussion', shortUrl, 'topcomments') +
 		objAsParams(defaultParams);
@@ -415,9 +430,9 @@ export const unPickComment =
 		return ok(false);
 	};
 
-export const getMoreResponses = async (
+export const getAllReplies = async (
 	commentId: number,
-): Promise<Result<GetDiscussionError, CommentType[]>> => {
+): Promise<Result<GetDiscussionError, ReplyType[]>> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString()) +
 		objAsParams({
@@ -436,7 +451,7 @@ export const getMoreResponses = async (
 
 	if (jsonResult.kind === 'error') return jsonResult;
 
-	return parseCommentRepliesResponse(jsonResult.value);
+	return parseRepliesResponse(jsonResult.value);
 };
 
 const buildParams = (filters: FilterOptions): URLSearchParams => {

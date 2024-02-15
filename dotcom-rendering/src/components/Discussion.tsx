@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
-import { palette, space } from '@guardian/source-foundations';
-import { Button, SvgPlus } from '@guardian/source-react-components';
+import { space } from '@guardian/source-foundations';
+import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type {
 	CommentFormProps,
 	CommentType,
 	FilterOptions,
+	ReplyType,
 	SignedInUser,
 } from '../lib/discussion';
 import {
@@ -18,6 +19,7 @@ import {
 import { initFiltersFromLocalStorage } from '../lib/discussionFilters';
 import { palette as themePalette } from '../palette';
 import { Comments } from './Discussion/Comments';
+import { PillarButton } from './Discussion/PillarButton';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
 
@@ -37,7 +39,7 @@ const overlayStyles = css`
 		0deg,
 		${themePalette('--article-section-background')},
 		${themePalette('--article-section-background')} 40%,
-		rgba(255, 255, 255, 0)
+		transparent
 	);
 	height: 80px;
 	position: absolute;
@@ -124,18 +126,13 @@ const remapToValidFilters = (
  */
 export const replaceMatchingCommentResponses =
 	(action: Action & { type: 'expandCommentReplies' }) =>
-	(comment: CommentType): CommentType => {
-		const responses =
-			comment.id === action.commentId
-				? action.responses
-				: comment.responses?.map(
-						replaceMatchingCommentResponses(action),
-				  );
-		return { ...comment, responses };
-	};
+	<T extends CommentType | ReplyType>(comment: T): T =>
+		comment.id === action.commentId
+			? { ...comment, responses: action.responses }
+			: comment;
 
 type State = {
-	comments: CommentType[];
+	comments: Array<CommentType | ReplyType>;
 	isClosedForComments: boolean;
 	isExpanded: boolean;
 	commentPage: number;
@@ -178,7 +175,7 @@ const initialState: State = {
 type Action =
 	| {
 			type: 'commentsLoaded';
-			comments: CommentType[];
+			comments: Array<CommentType | ReplyType>;
 			isClosedForComments: boolean;
 			commentCount: number;
 			topLevelCommentCount: number;
@@ -187,9 +184,10 @@ type Action =
 	| {
 			type: 'expandCommentReplies';
 			commentId: number;
-			responses: CommentType[];
+			responses: ReplyType[];
 	  }
 	| { type: 'addComment'; comment: CommentType }
+	| { type: 'addReply'; comment: ReplyType }
 	| { type: 'updateCommentPage'; commentPage: number }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
@@ -220,6 +218,23 @@ const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				comments: [action.comment, ...state.comments],
+				isExpanded: true,
+			};
+		case 'addReply':
+			return {
+				...state,
+				comments: state.comments.map((comment) =>
+					'responses' in comment &&
+					comment.id === Number(action.comment.responseTo.commentId)
+						? {
+								...comment,
+								responses: [
+									...comment.responses,
+									action.comment,
+								],
+						  }
+						: comment,
+				),
 				isExpanded: true,
 			};
 		case 'expandComments':
@@ -399,11 +414,14 @@ export const Discussion = ({
 	useEffect(() => {
 		dispatch({ type: 'setLoading', loading: true });
 
-		void getDiscussion(
-			shortUrlId,
-			commentPage,
-			remapToValidFilters(filters, hashCommentId),
-		)
+		const controller = new AbortController();
+
+		void getDiscussion({
+			shortUrl: shortUrlId,
+			page: commentPage,
+			filters: remapToValidFilters(filters, hashCommentId),
+			signal: controller.signal,
+		})
 			.then((result) => {
 				if (result.kind === 'error') {
 					console.error(`getDiscussion - error: ${result.error}`);
@@ -423,6 +441,8 @@ export const Discussion = ({
 			.catch(() => {
 				// do nothing
 			});
+
+		return () => controller.abort();
 	}, [commentPage, filters, hashCommentId, shortUrlId]);
 
 	const validFilters = remapToValidFilters(filters, hashCommentId);
@@ -538,8 +558,11 @@ export const Discussion = ({
 							error,
 						})
 					}
-					setComment={(comment: CommentType) => {
+					addComment={(comment) => {
 						dispatch({ type: 'addComment', comment });
+					}}
+					addReply={(comment) => {
+						dispatch({ type: 'addReply', comment });
 					}}
 					handleFilterChange={(
 						newFilters: FilterOptions,
@@ -626,29 +649,16 @@ export const Discussion = ({
 				)}
 			</div>
 			{!isExpanded && (
-				<Button
+				<PillarButton
 					onClick={() => {
 						dispatch({ type: 'expandComments' });
 						dispatchCommentsExpandedEvent();
 					}}
 					icon={<SvgPlus />}
-					cssOverrides={css`
-						background-color: ${themePalette(
-							'--discussion-primary-button-background',
-						)};
-						border: 1px solid currentColor;
-						:hover {
-							background-color: ${themePalette(
-								'--discussion-button-hover',
-							)};
-							border: 1px solid
-								${themePalette('--discussion-button-hover')};
-							color: ${palette.neutral[100]};
-						}
-					`}
+					linkName="view-more-comments"
 				>
 					View more comments
-				</Button>
+				</PillarButton>
 			)}
 		</>
 	);

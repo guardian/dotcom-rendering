@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { EmailSignUpWrapper as SignupComponent } from './EmailSignUpWrapper';
+import { EmailSignUpWrapper } from './EmailSignUpWrapper';
 
-const meta: Meta<typeof SignupComponent> = {
-	title: 'Components/Newsletter Signup',
-	component: SignupComponent,
+const meta: Meta<typeof EmailSignUpWrapper> = {
+	title: 'Components/EmailSignUpWrapper',
+	component: EmailSignUpWrapper,
 };
 
 const defaultArgs = {
@@ -15,8 +15,8 @@ const defaultArgs = {
 	frequency: 'Weekly',
 	successDescription: "We'll send you The Recap every week",
 	theme: 'sport',
-};
-type Story = StoryObj<typeof SignupComponent>;
+} satisfies Story['args'];
+type Story = StoryObj<typeof EmailSignUpWrapper>;
 
 export const DefaultStory: Story = {
 	args: {
