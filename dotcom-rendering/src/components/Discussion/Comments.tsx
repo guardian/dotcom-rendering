@@ -413,7 +413,7 @@ export const Comments = ({
 			) : (
 				<ul
 					css={[commentContainerStyles, labelStyles]}
-					className="comments-column"
+					data-commercial-id="comments-column"
 				>
 					{comments
 						.slice(0, numberOfCommentsToShow)
