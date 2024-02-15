@@ -205,12 +205,7 @@ export const Comments = ({
 		}
 	}, [expanded, loadingMore, mobileDiscussionAdsEnabled]);
 
-	const dispatchCommentsStateChangeEvent = () => {
-		if (mobileDiscussionAdsEnabled) {
-			const event = new CustomEvent('comments-state-change');
-			document.dispatchEvent(event);
-		}
-	};
+	const commentsStateChangeEvent = new CustomEvent('comments-state-change');
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
@@ -256,7 +251,8 @@ export const Comments = ({
 			handleFilterChange(newFilterObject);
 		}
 
-		dispatchCommentsStateChangeEvent();
+		mobileDiscussionAdsEnabled &&
+			document.dispatchEvent(commentsStateChangeEvent);
 	};
 
 	useEffect(() => {
@@ -284,7 +280,8 @@ export const Comments = ({
 
 	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
-		dispatchCommentsStateChangeEvent();
+		mobileDiscussionAdsEnabled &&
+			document.dispatchEvent(commentsStateChangeEvent);
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
