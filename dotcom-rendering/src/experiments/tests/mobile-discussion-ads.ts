@@ -2,7 +2,7 @@ import type { ABTest } from '@guardian/ab-core';
 
 export const mobileDiscussionAds: ABTest = {
 	id: 'MobileDiscussionAds',
-	author: '@commercial-dev',
+	author: '@guardian/commercial-dev',
 	start: '2024-02-05',
 	expiry: '2024-03-05',
 	audience: 0 / 100,
