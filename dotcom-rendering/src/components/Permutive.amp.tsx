@@ -78,7 +78,7 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 				}}
 			></script>
 			<amp-script
-				data-block-on-consent="_till_responded" // TODO: Check if it is IAB Compliant
+				data-block-on-consent="_till_responded"
 				id="permutiveSdk"
 				// Empty string required to pass AMP validation
 				sandboxed=""
