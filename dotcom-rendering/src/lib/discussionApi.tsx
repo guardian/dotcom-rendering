@@ -12,8 +12,8 @@ import {
 	discussionApiResponseSchema,
 	getCommentContextResponseSchema,
 	parseAbuseResponse,
-	parseCommentRepliesResponse,
 	parseCommentResponse,
+	parseRepliesResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
 } from './discussion';
@@ -430,7 +430,7 @@ export const unPickComment =
 		return ok(false);
 	};
 
-export const getMoreResponses = async (
+export const getAllReplies = async (
 	commentId: number,
 ): Promise<Result<GetDiscussionError, ReplyType[]>> => {
 	const url =
@@ -451,7 +451,7 @@ export const getMoreResponses = async (
 
 	if (jsonResult.kind === 'error') return jsonResult;
 
-	return parseCommentRepliesResponse(jsonResult.value);
+	return parseRepliesResponse(jsonResult.value);
 };
 
 const buildParams = (filters: FilterOptions): URLSearchParams => {

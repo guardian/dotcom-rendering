@@ -9,7 +9,7 @@ import type {
 	ThreadsType,
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
-import { getMoreResponses } from '../../lib/discussionApi';
+import { getAllReplies } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
 import { Comment } from './Comment';
 import { CommentForm } from './CommentForm';
@@ -118,7 +118,7 @@ export const CommentContainer = ({
 
 	const expand = (commentId: number) => {
 		setLoading(true);
-		getMoreResponses(commentId)
+		getAllReplies(commentId)
 			.then((result) => {
 				if (result.kind === 'error') {
 					console.error(result.error);
@@ -131,7 +131,7 @@ export const CommentContainer = ({
 			});
 	};
 
-	const onAddResponse = (commentId: number, response: ReplyType) =>
+	const onAddReply = (commentId: number, response: ReplyType) =>
 		expandCommentReplies(commentId, [...responses, response]);
 
 	return (
@@ -226,7 +226,7 @@ export const CommentContainer = ({
 								shortUrl={shortUrl}
 								onAddComment={(response) => {
 									if ('responses' in response) return;
-									onAddResponse(comment.id, response);
+									onAddReply(comment.id, response);
 								}}
 								user={user}
 								setCommentBeingRepliedTo={

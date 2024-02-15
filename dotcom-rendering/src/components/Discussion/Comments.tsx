@@ -40,7 +40,7 @@ type Props = {
 	loading: boolean;
 	comments: Array<CommentType | ReplyType>;
 	addComment: (comment: CommentType) => void;
-	addResponse: (comment: ReplyType) => void;
+	addReply: (comment: ReplyType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	pickError: string;
 	setPickError: (error: string) => void;
@@ -146,7 +146,7 @@ export const Comments = ({
 	pickError,
 	setPickError,
 	addComment: addTopLevelComment,
-	addResponse: addReplyComment,
+	addReply: addReplyComment,
 	handleFilterChange,
 	setTopFormUserMissing,
 	setReplyFormUserMissing,

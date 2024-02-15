@@ -141,7 +141,7 @@ const commentRepliesResponseSchema = variant('status', [
 	}),
 ]);
 
-export const parseCommentRepliesResponse = (
+export const parseRepliesResponse = (
 	data: unknown,
 ): Result<'ParsingError' | 'ApiError', ReplyType[]> => {
 	const result = safeParse(commentRepliesResponseSchema, data);
@@ -172,7 +172,7 @@ const errorCodes = [
 	'EMAIL_NOT_VALIDATED',
 ] as const;
 
-const postCommentResponseSchema = variant('status', [
+const commentResponseSchema = variant('status', [
 	object({
 		status: literal('error'),
 		errorCode: picklist(errorCodes),
@@ -192,7 +192,7 @@ const postCommentResponseSchema = variant('status', [
 export const parseCommentResponse = (
 	data: unknown,
 ): Result<'ParsingError' | CommentResponseErrorCodes, number> => {
-	const { success, output } = safeParse(postCommentResponseSchema, data);
+	const { success, output } = safeParse(commentResponseSchema, data);
 	if (!success) {
 		return error('ParsingError');
 	}

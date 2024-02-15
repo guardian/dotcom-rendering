@@ -561,7 +561,7 @@ export const Discussion = ({
 					addComment={(comment) => {
 						dispatch({ type: 'addComment', comment });
 					}}
-					addResponse={(comment) => {
+					addReply={(comment) => {
 						dispatch({ type: 'addReply', comment });
 					}}
 					handleFilterChange={(

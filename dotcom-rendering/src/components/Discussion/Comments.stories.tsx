@@ -89,7 +89,7 @@ export const LoggedOutHiddenPicks = () => (
 			loading={false}
 			comments={discussionMock.discussion.comments}
 			addComment={() => {}}
-			addResponse={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
@@ -148,7 +148,7 @@ export const InitialPage = () => (
 			loading={false}
 			comments={discussionMock.discussion.comments}
 			addComment={() => {}}
-			addResponse={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
@@ -209,7 +209,7 @@ export const LoggedInHiddenNoPicks = () => {
 				loading={false}
 				comments={discussionMock.discussion.comments}
 				addComment={() => {}}
-				addResponse={() => {}}
+				addReply={() => {}}
 				handleFilterChange={() => {}}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
@@ -265,7 +265,7 @@ export const LoggedIn = () => {
 				loading={false}
 				comments={discussionMock.discussion.comments}
 				addComment={() => {}}
-				addResponse={() => {}}
+				addReply={() => {}}
 				handleFilterChange={() => {}}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
@@ -320,7 +320,7 @@ export const LoggedInShortDiscussion = () => {
 				loading={false}
 				comments={discussionWithTwoComments.discussion.comments}
 				addComment={() => {}}
-				addResponse={() => {}}
+				addReply={() => {}}
 				handleFilterChange={() => {}}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
@@ -372,7 +372,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			loading={false}
 			comments={discussionMock.discussion.comments}
 			addComment={() => {}}
-			addResponse={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
@@ -433,7 +433,7 @@ export const Closed = () => (
 			loading={false}
 			comments={discussionMock.discussion.comments}
 			addComment={() => {}}
-			addResponse={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
@@ -490,7 +490,7 @@ export const NoComments = () => (
 			loading={false}
 			comments={[]}
 			addComment={() => {}}
-			addResponse={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
@@ -549,7 +549,7 @@ export const LegacyDiscussion = () => (
 			loading={false}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
 			addComment={() => {}}
-			addResponse={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
