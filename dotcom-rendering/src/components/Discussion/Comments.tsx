@@ -14,6 +14,7 @@ import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { useAB } from '../../lib/useAB';
 import { palette as schemedPalette } from '../../palette';
 import { labelStyles } from '../AdSlot.web';
+import { useConfig } from '../ConfigContext';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -162,6 +163,9 @@ export const Comments = ({
 	reportAbuse,
 	expandCommentReplies,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
+
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
 		useState<CommentType>();
@@ -173,10 +177,8 @@ export const Comments = ({
 
 	const abTests = useAB();
 	const abTestsApi = abTests?.api;
-	const mobileDiscussionAdsEnabled = abTestsApi?.isUserInVariant(
-		'MobileDiscussionAds',
-		'variant',
-	);
+	const mobileDiscussionAdsEnabled =
+		isWeb && abTestsApi?.isUserInVariant('MobileDiscussionAds', 'variant');
 
 	useEffect(() => {
 		setNumberOfCommentsToShow(COMMENT_BATCH);
