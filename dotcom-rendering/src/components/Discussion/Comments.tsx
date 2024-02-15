@@ -224,11 +224,11 @@ export const Comments = ({
 	);
 
 	useEffect(() => {
-		if (expanded && !loadingMore && mobileDiscussionAdsEnabled) {
+		if (expanded && !loading && mobileDiscussionAdsEnabled) {
 			const event = new CustomEvent('comments-loaded');
 			document.dispatchEvent(event);
 		}
-	}, [expanded, loadingMore, mobileDiscussionAdsEnabled]);
+	}, [expanded, loading, mobileDiscussionAdsEnabled]);
 
 	const commentsStateChangeEvent = new CustomEvent('comments-state-change');
 
