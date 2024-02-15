@@ -20,7 +20,7 @@ import { palette as themePalette } from '../palette';
 import { Comments } from './Discussion/Comments';
 import { PillarButton } from './Discussion/PillarButton';
 import type { Action } from './DispatchContext';
-import { DispatchContext } from './DispatchContext';
+import { DispatchProvider } from './DispatchContext';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
 
@@ -466,7 +466,7 @@ export const Discussion = ({
 
 	return (
 		<>
-			<DispatchContext.Provider value={dispatch}>
+			<DispatchProvider value={dispatch}>
 				<div css={[positionRelative, !isExpanded && fixHeight]}>
 					<Hide when="above" breakpoint="leftCol">
 						<div
@@ -610,7 +610,7 @@ export const Discussion = ({
 						View more comments
 					</PillarButton>
 				)}
-			</DispatchContext.Provider>
+			</DispatchProvider>
 		</>
 	);
 };
