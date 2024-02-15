@@ -100,7 +100,6 @@ export const LoggedOutHiddenPicks = () => (
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
 			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -158,7 +157,6 @@ export const InitialPage = () => (
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
 			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -218,7 +216,6 @@ export const LoggedInHiddenNoPicks = () => {
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
 				pickError=""
-				setPickError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={{ ...defaultCommentForm }}
 				bottomForm={defaultCommentForm}
@@ -273,7 +270,6 @@ export const LoggedIn = () => {
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
 				pickError=""
-				setPickError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
@@ -327,7 +323,6 @@ export const LoggedInShortDiscussion = () => {
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
 				pickError=""
-				setPickError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
@@ -378,7 +373,6 @@ export const LoggedOutHiddenNoPicks = () => (
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
 			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -438,7 +432,6 @@ export const Closed = () => (
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
 			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -494,7 +487,6 @@ export const NoComments = () => (
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
 			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -552,7 +544,6 @@ export const LegacyDiscussion = () => (
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
 			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}

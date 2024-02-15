@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
-import { Dispatch, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type {
 	CommentFormProps,
@@ -19,6 +19,8 @@ import { initFiltersFromLocalStorage } from '../lib/discussionFilters';
 import { palette as themePalette } from '../palette';
 import { Comments } from './Discussion/Comments';
 import { PillarButton } from './Discussion/PillarButton';
+import type { Action } from './DispatchContext';
+import { DispatchContext } from './DispatchContext';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
 
@@ -32,10 +34,6 @@ export type Props = {
 	idApiUrl: string;
 	reportAbuseUnauthenticated: ReturnType<typeof reportAbuse>;
 };
-
-export const DispatchContext = React.createContext<Dispatch<Action> | null>(
-	null,
-);
 
 const overlayStyles = css`
 	background-image: linear-gradient(
@@ -179,36 +177,6 @@ const initialState: State = {
 	replyForm: initialCommentFormState,
 	bottomForm: initialCommentFormState,
 };
-
-type Action =
-	| {
-			type: 'commentsLoaded';
-			comments: CommentType[];
-			isClosedForComments: boolean;
-			commentCount: number;
-			topLevelCommentCount: number;
-	  }
-	| { type: 'expandComments' }
-	| {
-			type: 'expandCommentReplies';
-			commentId: number;
-			responses: CommentType[];
-	  }
-	| { type: 'addComment'; comment: CommentType }
-	| { type: 'updateCommentPage'; commentPage: number }
-	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
-	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
-	| { type: 'setLoading'; loading: boolean }
-	| { type: 'setPickError'; error: string }
-	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setTopFormError'; error: string }
-	| { type: 'setReplyFormError'; error: string }
-	| { type: 'setBottomFormError'; error: string }
-	| { type: 'setTopFormPreviewBody'; previewBody: string }
-	| { type: 'setReplyFormPreviewBody'; previewBody: string }
-	| { type: 'setBottomFormPreviewBody'; previewBody: string };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
