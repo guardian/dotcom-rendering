@@ -12,6 +12,7 @@ import type { CommentType, SignedInUser, Staff } from '../../lib/discussion';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
+import { useDispatch } from '../DispatchContext';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -19,7 +20,6 @@ import { Column } from './Column';
 import { RecommendationCount } from './RecommendationCount';
 import { Row } from './Row';
 import { Timestamp } from './Timestamp';
-import { useDispatch } from '../DispatchContext';
 
 type Props = {
 	user?: SignedInUser;

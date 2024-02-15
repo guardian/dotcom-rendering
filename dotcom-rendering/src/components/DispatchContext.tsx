@@ -1,3 +1,4 @@
+import { debug } from '@guardian/libs';
 import { createContext, useContext } from 'react';
 import type { Dispatch } from 'react';
 import type { CommentType, FilterOptions } from '../lib/discussion';
@@ -32,7 +33,12 @@ export type Action =
 	| { type: 'setReplyFormPreviewBody'; previewBody: string }
 	| { type: 'setBottomFormPreviewBody'; previewBody: string };
 
-const DispatchContext = createContext<Dispatch<Action> | undefined>(undefined);
+const DispatchContext = createContext<Dispatch<Action>>(() => {
+	debug(
+		'dotcom',
+		`The 'dispatch' function in discussion is not defined! Did you remember to include a context provider for it?`,
+	);
+});
 
 export const DispatchProvider = ({
 	value,
@@ -48,12 +54,5 @@ export const DispatchProvider = ({
 
 export const useDispatch = (): Dispatch<Action> => {
 	const context = useContext(DispatchContext);
-
-	if (context === undefined) {
-		throw Error(
-			'useDispatch must be used within the DispatchContext provider',
-		);
-	}
-
 	return context;
 };
