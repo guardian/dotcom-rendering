@@ -100,7 +100,7 @@ export const CommentContainer = ({
 	reportAbuse,
 	expandCommentReplies,
 }: Props) => {
-	const responses = 'responses' in comment ? comment.responses : [];
+	const responses = comment.responses ? comment.responses : [];
 	const totalResponseCount = comment.metaData?.responseCount ?? 0;
 
 	// Filter logic

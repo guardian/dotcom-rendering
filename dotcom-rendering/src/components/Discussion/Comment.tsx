@@ -389,7 +389,7 @@ export const Comment = ({
 							<Column>
 								<div
 									css={[
-										'responseTo' in comment &&
+										comment.responseTo &&
 											hideBelowMobileLandscape,
 										hideAboveMobileLandscape,
 									]}
@@ -445,7 +445,7 @@ export const Comment = ({
 								</div>
 								<div
 									css={[
-										!('responseTo' in comment) &&
+										!comment.responseTo &&
 											hideBelowMobileLandscape,
 									]}
 								>
@@ -470,7 +470,7 @@ export const Comment = ({
 												}
 											</Link>
 										</div>
-										{'responseTo' in comment ? (
+										{comment.responseTo ? (
 											<div
 												css={[
 													colourStyles,
@@ -498,7 +498,7 @@ export const Comment = ({
 										<div
 											css={[
 												timestampWrapperStyles,
-												'responseTo' in comment &&
+												comment.responseTo &&
 													hideBelowMobileLandscape,
 											]}
 										>
@@ -551,7 +551,7 @@ export const Comment = ({
 
 					<div
 						css={[
-							'responseTo' in comment && hideBelowMobileLandscape,
+							comment.responseTo && hideBelowMobileLandscape,
 							hideAboveMobileLandscape,
 						]}
 					>

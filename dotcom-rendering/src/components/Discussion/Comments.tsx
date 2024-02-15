@@ -131,8 +131,8 @@ export const Comments = ({
 	comments,
 	pickError,
 	setPickError,
-	addComment: addTopLevelComment,
-	addReply: addReplyComment,
+	addComment,
+	addReply,
 	handleFilterChange,
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
@@ -218,10 +218,10 @@ export const Comments = ({
 		setMutes(updatedMutes); // Update local state
 	};
 	const onAddComment = (comment: CommentType | ReplyType) => {
-		if ('responses' in comment) {
-			addTopLevelComment(comment);
+		if (comment.responses) {
+			addComment(comment);
 		} else {
-			addReplyComment(comment);
+			addReply(comment);
 		}
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();

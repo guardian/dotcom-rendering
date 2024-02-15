@@ -92,7 +92,7 @@ describe('CommentContainer', () => {
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
 					if (commentBeingRepliedTo?.id !== id) return;
-					if (!('responses' in commentBeingRepliedTo)) return;
+					if (!commentBeingRepliedTo.responses) return;
 					commentBeingRepliedTo.responses = responses;
 				}}
 			/>,
@@ -189,7 +189,7 @@ describe('CommentContainer', () => {
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
 					if (commentBeingRepliedTo?.id !== id) return;
-					if (!('responses' in commentBeingRepliedTo)) return;
+					if (!commentBeingRepliedTo.responses) return;
 					commentBeingRepliedTo.responses = responses;
 				}}
 			/>,

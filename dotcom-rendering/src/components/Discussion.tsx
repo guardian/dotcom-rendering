@@ -224,7 +224,7 @@ const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				comments: state.comments.map((comment) =>
-					'responses' in comment &&
+					comment.responses &&
 					comment.id === Number(action.comment.responseTo.commentId)
 						? {
 								...comment,
