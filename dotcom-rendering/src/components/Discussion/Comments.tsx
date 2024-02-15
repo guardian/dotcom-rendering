@@ -60,20 +60,6 @@ type Props = {
 	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
 };
 
-/**
- * Size of comment batching to speed up rendering.
- *
- * We want react to complete the current work and render,
- * without trying to batch this update before resetting
- * the number of comments to the total comment amount.
- *
- * This allows a quick render of minimal comments and then immediately begin rendering
- * the remaining comments.
- *
- * @see https://github.com/guardian/discussion-rendering/pull/477
- */
-const COMMENT_BATCH = 10;
-
 const footerStyles = css`
 	display: flex;
 	justify-content: flex-end;
@@ -167,31 +153,7 @@ export const Comments = ({
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
 		CommentType | ReplyType
 	>();
-	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
-		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
-
-	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
-
-	useEffect(() => {
-		setNumberOfCommentsToShow(COMMENT_BATCH);
-	}, [comments]);
-
-	useEffect(() => {
-		if (!expanded) return;
-		if (numberOfCommentsToShow === comments.length) return;
-
-		const newNumberOfCommentsToShow = Math.min(
-			numberOfCommentsToShow + COMMENT_BATCH,
-			comments.length,
-		);
-
-		const timer = setTimeout(() => {
-			setNumberOfCommentsToShow(newNumberOfCommentsToShow);
-		}, 0);
-
-		return () => clearTimeout(timer);
-	}, [expanded, comments.length, numberOfCommentsToShow, loadingMore]);
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
@@ -209,13 +171,12 @@ export const Comments = ({
 	 * page and is added to the DOM later, following an API call.
 	 * */
 	useEffect(() => {
-		if (loadingMore) return; // the comment may not yet be in the DOM
 		if (commentToScrollTo === undefined) return;
 
 		document
 			.getElementById(`comment-${commentToScrollTo}`)
 			?.scrollIntoView();
-	}, [loadingMore, commentToScrollTo]);
+	}, [commentToScrollTo]);
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
 		/**
@@ -397,42 +358,37 @@ export const Comments = ({
 				<NoComments />
 			) : (
 				<ul css={commentContainerStyles}>
-					{comments
-						.slice(0, numberOfCommentsToShow)
-						.map((comment) => (
-							<li key={comment.id}>
-								<CommentContainer
-									comment={comment}
-									isClosedForComments={isClosedForComments}
-									shortUrl={shortUrl}
-									user={user}
-									threads={filters.threads}
-									commentBeingRepliedTo={
-										commentBeingRepliedTo
-									}
-									setCommentBeingRepliedTo={
-										setCommentBeingRepliedTo
-									}
-									commentToScrollTo={commentToScrollTo}
-									mutes={mutes}
-									toggleMuteStatus={toggleMuteStatus}
-									onPermalinkClick={onPermalinkClick}
-									error={replyForm.error}
-									setError={setReplyFormError}
-									pickError={pickError}
-									setPickError={setPickError}
-									userNameMissing={replyForm.userNameMissing}
-									setUserNameMissing={setReplyFormUserMissing}
-									previewBody={replyForm.previewBody}
-									setPreviewBody={setReplyFormPreviewBody}
-									reportAbuse={reportAbuse}
-									expandCommentReplies={expandCommentReplies}
-								/>
-							</li>
-						))}
+					{comments.map((comment) => (
+						<li key={comment.id}>
+							<CommentContainer
+								comment={comment}
+								isClosedForComments={isClosedForComments}
+								shortUrl={shortUrl}
+								user={user}
+								threads={filters.threads}
+								commentBeingRepliedTo={commentBeingRepliedTo}
+								setCommentBeingRepliedTo={
+									setCommentBeingRepliedTo
+								}
+								commentToScrollTo={commentToScrollTo}
+								mutes={mutes}
+								toggleMuteStatus={toggleMuteStatus}
+								onPermalinkClick={onPermalinkClick}
+								error={replyForm.error}
+								setError={setReplyFormError}
+								pickError={pickError}
+								setPickError={setPickError}
+								userNameMissing={replyForm.userNameMissing}
+								setUserNameMissing={setReplyFormUserMissing}
+								previewBody={replyForm.previewBody}
+								setPreviewBody={setReplyFormPreviewBody}
+								reportAbuse={reportAbuse}
+								expandCommentReplies={expandCommentReplies}
+							/>
+						</li>
+					))}
 				</ul>
 			)}
-			{loadingMore && <LoadingComments />}
 			{showPagination && (
 				<footer css={footerStyles}>
 					<Pagination
