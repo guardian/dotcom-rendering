@@ -441,7 +441,7 @@ export const Comments = ({
 			) : (
 				<ul
 					css={[commentContainerStyles, labelStyles]}
-					className="comments-column"
+					data-commercial-id="comments-column"
 				>
 					{comments.map((comment) => (
 						<li key={comment.id}>
