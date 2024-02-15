@@ -1,8 +1,8 @@
 import { debug } from '@guardian/libs';
-import type { Dispatch } from 'react';
-import type { CommentType, FilterOptions } from '../lib/discussion';
+import { Dispatch, createContext } from 'react';
+import { CommentType, FilterOptions } from '../lib/discussion';
 
-export const DispatchContext = React.createContext<Dispatch<Action>>(() => {
+export const DispatchContext = createContext<Dispatch<Action>>(() => {
 	debug(
 		'dotcom',
 		`The 'dispatch' function in discussion is not defined! Did you remember to include a context provider for it?`,
