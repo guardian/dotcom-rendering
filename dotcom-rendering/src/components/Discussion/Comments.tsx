@@ -228,7 +228,7 @@ export const Comments = ({
 			const event = new CustomEvent('comments-loaded');
 			document.dispatchEvent(event);
 		}
-	}, [comments.length, expanded, loadingMore, mobileDiscussionAdsEnabled]);
+	}, [expanded, loadingMore, mobileDiscussionAdsEnabled]);
 
 	const dispatchCommentsStateChangeEvent = () => {
 		if (mobileDiscussionAdsEnabled) {
