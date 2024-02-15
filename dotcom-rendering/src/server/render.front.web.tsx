@@ -22,8 +22,8 @@ interface Props {
 	front: DCRFrontType;
 }
 
-const extractFrontNav = (front: DCRFrontType): NavType => {
-	const NAV = extractNAV(front.nav);
+const extractFrontNav = (nav: FENavType): NavType => {
+	const NAV = extractNAV(nav);
 	const { currentNavLink } = NAV;
 
 	// Is the `currentNavLink` a pillar?
@@ -74,7 +74,7 @@ export const renderFront = ({
 	front,
 }: Props): { html: string; prefetchScripts: string[] } => {
 	const title = front.webTitle;
-	const NAV = extractFrontNav(front);
+	const NAV = extractFrontNav(front.nav);
 
 	// Fronts are not supported in Apps
 	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
@@ -160,7 +160,7 @@ export const renderTagPage = ({
 	tagPage: DCRTagPageType;
 }): { html: string; prefetchScripts: string[] } => {
 	const title = tagPage.webTitle;
-	const NAV = extractNAV(tagPage.nav);
+	const NAV = extractFrontNav(tagPage.nav);
 
 	// Fronts are not supported in Apps
 	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
