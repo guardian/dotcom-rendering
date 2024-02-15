@@ -40,6 +40,7 @@ export const discussionWithTwoComments = {
 						},
 					],
 				},
+				responses: [],
 			},
 			{
 				id: 42979860,
@@ -60,6 +61,7 @@ export const discussionWithTwoComments = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/1186733',
 					badge: [],
 				},
+				responses: [],
 			},
 		],
 	},

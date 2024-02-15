@@ -3,6 +3,7 @@ import { space, text, textSans } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentType,
+	ReplyType,
 	SignedInUser,
 	UserProfile,
 } from '../../lib/discussion';
@@ -16,9 +17,9 @@ import { Row } from './Row';
 type Props = {
 	shortUrl: string;
 	user: SignedInUser;
-	onAddComment: (response: CommentType) => void;
+	onAddComment: (response: CommentType | ReplyType) => void;
 	setCommentBeingRepliedTo?: () => void;
-	commentBeingRepliedTo?: CommentType;
+	commentBeingRepliedTo?: CommentType | ReplyType;
 	onPreview?: typeof defaultPreview;
 	error: string;
 	setError: (error: string) => void;
@@ -158,34 +159,45 @@ const simulateNewComment = (
 	commentId: number,
 	body: string,
 	userProfile: UserProfile,
-	commentBeingRepliedTo?: CommentType,
-): CommentType => {
-	const responseTo = commentBeingRepliedTo
-		? {
-				displayName: commentBeingRepliedTo.userProfile.displayName,
-				commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
-				isoDateTime: commentBeingRepliedTo.isoDateTime,
-				date: commentBeingRepliedTo.date,
-				commentId: String(commentBeingRepliedTo.id),
-				commentWebUrl: `https://discussion.theguardian.com/comment-permalink/${commentBeingRepliedTo.id}`,
-		  }
-		: undefined;
+): CommentType => ({
+	id: commentId,
+	body,
+	date: Date(),
+	isoDateTime: new Date().toISOString(),
+	status: 'visible',
+	webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
+	apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
+	numRecommends: 0,
+	isHighlighted: false,
+	userProfile,
+	responses: [],
+});
 
-	return {
-		id: commentId,
-		body,
-		date: Date(),
-		isoDateTime: new Date().toISOString(),
-		status: 'visible',
-		webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
-		apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
-		numRecommends: 0,
-		isHighlighted: false,
-		userProfile,
-		responses: [],
-		responseTo,
-	};
-};
+const simulateNewReply = (
+	commentId: number,
+	body: string,
+	userProfile: UserProfile,
+	commentBeingRepliedTo: CommentType | ReplyType,
+): ReplyType => ({
+	id: commentId,
+	body,
+	date: Date(),
+	isoDateTime: new Date().toISOString(),
+	status: 'visible',
+	webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
+	apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
+	numRecommends: 0,
+	isHighlighted: false,
+	userProfile,
+	responseTo: {
+		displayName: commentBeingRepliedTo.userProfile.displayName,
+		commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
+		isoDateTime: commentBeingRepliedTo.isoDateTime,
+		date: commentBeingRepliedTo.date,
+		commentId: String(commentBeingRepliedTo.id),
+		commentWebUrl: `https://discussion.theguardian.com/comment-permalink/${commentBeingRepliedTo.id}`,
+	},
+});
 
 export const CommentForm = ({
 	shortUrl,
@@ -363,12 +375,18 @@ export const CommentForm = ({
 				}
 			} else {
 				onAddComment(
-					simulateNewComment(
-						response.value,
-						body,
-						user.profile,
-						commentBeingRepliedTo,
-					),
+					commentBeingRepliedTo
+						? simulateNewReply(
+								response.value,
+								body,
+								user.profile,
+								commentBeingRepliedTo,
+						  )
+						: simulateNewComment(
+								response.value,
+								body,
+								user.profile,
+						  ),
 				);
 				resetForm();
 			}
