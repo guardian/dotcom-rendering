@@ -1,6 +1,7 @@
+import { createContext } from 'react';
 import { debug } from '@guardian/libs';
-import { Dispatch, createContext } from 'react';
-import { CommentType, FilterOptions } from '../lib/discussion';
+import type { Dispatch } from 'react';
+import type { CommentType, FilterOptions } from '../lib/discussion';
 
 export const DispatchContext = createContext<Dispatch<Action>>(() => {
 	debug(
