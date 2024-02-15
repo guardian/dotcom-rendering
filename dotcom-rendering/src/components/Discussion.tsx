@@ -499,91 +499,11 @@ export const Discussion = ({
 					apiKey="dotcom-rendering"
 					idApiUrl={idApiUrl}
 					page={commentPage}
-					setPage={(page: number) => {
-						dispatch({
-							type: 'updateCommentPage',
-							commentPage: page,
-						});
-					}}
 					filters={validFilters}
 					topLevelCommentCount={topLevelCommentCount}
 					loading={loading}
 					comments={comments}
 					pickError={pickError}
-					setComment={(comment: CommentType) => {
-						dispatch({ type: 'addComment', comment });
-					}}
-					handleFilterChange={(
-						newFilters: FilterOptions,
-						page?: number,
-					) => {
-						dispatch({
-							type: 'filterChange',
-							filters: newFilters,
-							commentPage: page,
-						});
-					}}
-					setTopFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setTopFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setReplyFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setReplyFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setBottomFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setBottomFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setTopFormError={(error) =>
-						dispatch({
-							type: 'setTopFormError',
-							error,
-						})
-					}
-					setReplyFormError={(error) =>
-						dispatch({
-							type: 'setReplyFormError',
-							error,
-						})
-					}
-					setBottomFormError={(error) =>
-						dispatch({
-							type: 'setBottomFormError',
-							error,
-						})
-					}
-					setTopFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setTopFormPreviewBody',
-							previewBody,
-						})
-					}
-					setReplyFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setReplyFormPreviewBody',
-							previewBody,
-						})
-					}
-					setBottomFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setBottomFormPreviewBody',
-							previewBody,
-						})
-					}
-					expandCommentReplies={(commentId, responses) =>
-						dispatch({
-							type: 'expandCommentReplies',
-							commentId,
-							responses,
-						})
-					}
 					topForm={topForm}
 					replyForm={replyForm}
 					bottomForm={bottomForm}

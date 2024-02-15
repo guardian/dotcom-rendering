@@ -12,6 +12,7 @@ import type {
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
+import { useDispatch } from '../DispatchContext';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -33,28 +34,15 @@ type Props = {
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
-	setPage: (page: number) => void;
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
 	comments: CommentType[];
-	setComment: (comment: CommentType) => void;
-	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	pickError: string;
-	setTopFormUserMissing: (isUserMissing: boolean) => void;
-	setReplyFormUserMissing: (isUserMissing: boolean) => void;
-	setBottomFormUserMissing: (isUserMissing: boolean) => void;
-	setTopFormError: (error: string) => void;
-	setReplyFormError: (error: string) => void;
-	setBottomFormError: (error: string) => void;
-	setTopFormPreviewBody: (previewBody: string) => void;
-	setReplyFormPreviewBody: (previewBody: string) => void;
-	setBottomFormPreviewBody: (previewBody: string) => void;
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
 };
 
 /**
@@ -135,28 +123,15 @@ export const Comments = ({
 	onPreview,
 	idApiUrl,
 	page,
-	setPage,
 	filters,
 	topLevelCommentCount,
 	loading,
 	comments,
 	pickError,
-	setComment,
-	handleFilterChange,
-	setTopFormUserMissing,
-	setReplyFormUserMissing,
-	setBottomFormUserMissing,
-	setTopFormError,
-	setReplyFormError,
-	setBottomFormError,
-	setTopFormPreviewBody,
-	setReplyFormPreviewBody,
-	setBottomFormPreviewBody,
 	topForm,
 	replyForm,
 	bottomForm,
 	reportAbuse,
-	expandCommentReplies,
 }: Props) => {
 	const [picks, setPicks] = useState<CommentType[]>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
@@ -164,6 +139,84 @@ export const Comments = ({
 	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
 		useState(COMMENT_BATCH);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+
+	const dispatch = useDispatch();
+
+	const setComment = (comment: CommentType) => {
+		dispatch({ type: 'addComment', comment });
+	};
+
+	const setPage = (newPage: number) => {
+		dispatch({
+			type: 'updateCommentPage',
+			commentPage: newPage,
+		});
+	};
+
+	const handleFilterChange = (
+		newFilters: FilterOptions,
+		newPage?: number,
+	) => {
+		dispatch({
+			type: 'filterChange',
+			filters: newFilters,
+			commentPage: newPage,
+		});
+	};
+
+	const setTopFormUserMissing = (userNameMissing: boolean) =>
+		dispatch({
+			type: 'setTopFormUserMissing',
+			userNameMissing,
+		});
+
+	const setReplyFormUserMissing = (userNameMissing: boolean) =>
+		dispatch({
+			type: 'setReplyFormUserMissing',
+			userNameMissing,
+		});
+
+	const setBottomFormUserMissing = (userNameMissing: boolean) =>
+		dispatch({
+			type: 'setBottomFormUserMissing',
+			userNameMissing,
+		});
+
+	const setTopFormError = (error: string) =>
+		dispatch({
+			type: 'setTopFormError',
+			error,
+		});
+
+	const setReplyFormError = (error: string) =>
+		dispatch({
+			type: 'setReplyFormError',
+			error,
+		});
+
+	const setBottomFormError = (error: string) =>
+		dispatch({
+			type: 'setBottomFormError',
+			error,
+		});
+
+	const setTopFormPreviewBody = (previewBody: string) =>
+		dispatch({
+			type: 'setTopFormPreviewBody',
+			previewBody,
+		});
+
+	const setReplyFormPreviewBody = (previewBody: string) =>
+		dispatch({
+			type: 'setReplyFormPreviewBody',
+			previewBody,
+		});
+
+	const setBottomFormPreviewBody = (previewBody: string) =>
+		dispatch({
+			type: 'setBottomFormPreviewBody',
+			previewBody,
+		});
 
 	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
@@ -330,9 +383,6 @@ export const Comments = ({
 												setReplyFormPreviewBody
 											}
 											reportAbuse={reportAbuse}
-											expandCommentReplies={
-												expandCommentReplies
-											}
 										/>
 									</li>
 								))}
@@ -414,7 +464,6 @@ export const Comments = ({
 									previewBody={replyForm.previewBody}
 									setPreviewBody={setReplyFormPreviewBody}
 									reportAbuse={reportAbuse}
-									expandCommentReplies={expandCommentReplies}
 								/>
 							</li>
 						))}
