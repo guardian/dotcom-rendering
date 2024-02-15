@@ -172,11 +172,12 @@ export const Comments = ({
 	 * */
 	useEffect(() => {
 		if (commentToScrollTo === undefined) return;
+		if (loading) return;
 
 		document
 			.getElementById(`comment-${commentToScrollTo}`)
 			?.scrollIntoView();
-	}, [commentToScrollTo]);
+	}, [commentToScrollTo, loading]);
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
 		/**
