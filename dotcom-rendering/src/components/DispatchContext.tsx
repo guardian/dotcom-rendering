@@ -1,5 +1,5 @@
-import { createContext } from 'react';
 import { debug } from '@guardian/libs';
+import { createContext } from 'react';
 import type { Dispatch } from 'react';
 import type { CommentType, FilterOptions } from '../lib/discussion';
 
