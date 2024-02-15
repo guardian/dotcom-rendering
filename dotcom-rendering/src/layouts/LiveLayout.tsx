@@ -1170,6 +1170,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											margin-left: 20px;
 											margin-right: -20px;
 											display: none;
+											padding-bottom: 255px;
 										}
 										${from.leftCol} {
 											/* above 1140 */
