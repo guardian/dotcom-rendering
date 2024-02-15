@@ -22,8 +22,10 @@ interface Props {
 	front: DCRFrontType;
 }
 
-const extractFrontNav = (front: DCRFrontType): NavType => {
-	const NAV = extractNAV(front.nav);
+/**
+ * Enhances the NAV object with the selected pillar colour
+ */
+const enhanceNav = (NAV: NavType): NavType => {
 	const { currentNavLink } = NAV;
 
 	// Is the `currentNavLink` a pillar?
@@ -74,14 +76,15 @@ export const renderFront = ({
 	front,
 }: Props): { html: string; prefetchScripts: string[] } => {
 	const title = front.webTitle;
-	const NAV = extractFrontNav(front);
+	const NAV = extractNAV(front.nav);
+	const enhancedNAV = enhanceNav(NAV);
 
 	// Fronts are not supported in Apps
 	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<FrontPage front={front} NAV={NAV} />
+			<FrontPage front={front} NAV={enhancedNAV} />
 		</ConfigProvider>,
 	);
 
@@ -161,13 +164,14 @@ export const renderTagPage = ({
 }): { html: string; prefetchScripts: string[] } => {
 	const title = tagPage.webTitle;
 	const NAV = extractNAV(tagPage.nav);
+	const enhancedNAV = enhanceNav(NAV);
 
 	// Fronts are not supported in Apps
 	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
-			<TagPage tagPage={tagPage} NAV={NAV} />
+			<TagPage tagPage={tagPage} NAV={enhancedNAV} />
 		</ConfigProvider>,
 	);
 
