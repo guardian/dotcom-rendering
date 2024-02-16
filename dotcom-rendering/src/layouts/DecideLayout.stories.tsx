@@ -1,3 +1,4 @@
+import { isObject } from '@guardian/libs';
 import type { Decorator, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
@@ -21,36 +22,48 @@ import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 mockRESTCalls();
 
-export type HydratedLayoutDecoratorArgs =
-	| {
-			renderingTarget?: 'Apps';
-			colourScheme?: 'light' | 'dark';
-	  }
-	| {
-			renderingTarget?: 'Web';
-	  };
+export type HydratedLayoutDecoratorArgs = {
+	colourScheme?: 'light' | 'dark';
+};
 
 /**
  * HydratedLayout is used here to simulated the hydration that happens after we init react on
  * the client. We need a separate component so that we can make use of useEffect to ensure
  * the hydrate step only runs once the dom has been rendered.
  *
- * It also sets up format, populates the palette colours for the layout stories, and adds the
- * nav for web.
+ * It also sets up `format` and `renderingTarget`, populates the palette colours for the layout
+ * stories, and adds the `NAV` for web.
  */
 const HydratedLayout: Decorator<
 	DecideLayoutProps & HydratedLayoutDecoratorArgs
 > = (Story, context) => {
 	const { article } = context.args;
-	const NAV = {
-		...extractNAV(article.nav),
-		selectedPillar: getCurrentPillar(article),
-	};
 	const format: ArticleFormat = decideFormat(article.format);
 	const colourScheme =
-		(context.args.renderingTarget === 'Apps'
+		(isObject(context.parameters.config) &&
+		context.parameters.config.renderingTarget === 'Apps'
 			? context.args.colourScheme
 			: 'light') ?? 'light';
+	const paletteDecorator = colourSchemeDecorator(
+		colourScheme,
+	)<DecideLayoutProps>([format]);
+	const args: DecideLayoutProps =
+		isObject(context.parameters.config) &&
+		context.parameters.config.renderingTarget === 'Apps'
+			? {
+					...context.args,
+					renderingTarget: 'Apps',
+					format,
+			  }
+			: {
+					...context.args,
+					renderingTarget: 'Web',
+					format,
+					NAV: {
+						...extractNAV(article.nav),
+						selectedPillar: getCurrentPillar(article),
+					},
+			  };
 
 	useEffect(() => {
 		embedIframe().catch((e) =>
@@ -58,23 +71,9 @@ const HydratedLayout: Decorator<
 		);
 	}, [article]);
 
-	const paletteDecorator = colourSchemeDecorator(
-		colourScheme,
-	)<DecideLayoutProps>([format]);
-
 	return paletteDecorator(Story, {
 		...context,
-		args:
-			context.args.renderingTarget === 'Web'
-				? {
-						...context.args,
-						NAV,
-						format,
-				  }
-				: {
-						...context.args,
-						format,
-				  },
+		args,
 	});
 };
 
@@ -93,27 +92,41 @@ export default {
 
 type Story = StoryObj<DecideLayoutProps & HydratedLayoutDecoratorArgs>;
 
+const appsParameters = {
+	config: {
+		renderingTarget: 'Apps',
+		darkModeAvailable: true,
+	},
+};
+
+const webParameters = {
+	config: {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+	},
+};
+
 export const WebStandardStandardNewsLight: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: StandardStandardNewsFixture,
 	},
+	parameters: webParameters,
 };
 
 export const AppsStandardStandardNewsLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: StandardStandardNewsFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsStandardStandardNewsDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: StandardStandardNewsFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 const standardImmersiveNewsFixture: DCRArticle = {
@@ -126,55 +139,55 @@ const standardImmersiveNewsFixture: DCRArticle = {
 
 export const AppsStandardImmersiveNewsLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: standardImmersiveNewsFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsStandardImmersiveNewsDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: standardImmersiveNewsFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 export const WebNewsletterSignupStandardSportLight: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: NewsletterSignupStandardSportFixture,
 	},
+	parameters: webParameters,
 };
 
 export const WebPictureShowcaseOpinionLight: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: PictureShowcaseOpinionFixture,
 	},
+	parameters: webParameters,
 };
 
 export const AppsPictureShowcaseOpinionLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: PictureShowcaseOpinionFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsPictureShowcaseOpinionDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: PictureShowcaseOpinionFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: PhotoEssayImmersiveLabsFixture,
 	},
+	parameters: webParameters,
 };
 
 const standardStandardLabsFixture: DCRArticle = {
@@ -187,30 +200,29 @@ const standardStandardLabsFixture: DCRArticle = {
 
 export const WebStandardStandardLabsLight: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: standardStandardLabsFixture,
 	},
+	parameters: webParameters,
 };
 
 export const AppsStandardStandardLabsLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: standardStandardLabsFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsStandardStandardLabsDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: standardStandardLabsFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 export const WebFeatureStandardLabsLight: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: {
 			...FeatureStandardCultureFixture,
 			format: {
@@ -219,11 +231,11 @@ export const WebFeatureStandardLabsLight: Story = {
 			},
 		},
 	},
+	parameters: webParameters,
 };
 
 export const WebRecipeStandardLabsLight: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: {
 			...RecipeStandardLifestyleFixture,
 			format: {
@@ -232,45 +244,46 @@ export const WebRecipeStandardLabsLight: Story = {
 			},
 		},
 	},
+	parameters: webParameters,
 };
 
 export const AppsRecipeStandardLifestyleLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: RecipeStandardLifestyleFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsRecipeStandardLifestyleDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: RecipeStandardLifestyleFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 export const WebLiveBlogStandardNewsLight: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: LiveBlogStandardNewsFixture,
 	},
+	parameters: webParameters,
 };
 
 export const AppsLiveBlogStandardNewsLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: LiveBlogStandardNewsFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsLiveBlogStandardNewsDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: LiveBlogStandardNewsFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 const liveBlogStandardSportFixture: DCRArticle = {
@@ -283,18 +296,18 @@ const liveBlogStandardSportFixture: DCRArticle = {
 
 export const AppsLiveBlogStandardSportLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: liveBlogStandardSportFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsLiveBlogStandardSportDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: liveBlogStandardSportFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 const liveBlogStandardSpecialReportFixture: DCRArticle = {
@@ -307,18 +320,18 @@ const liveBlogStandardSpecialReportFixture: DCRArticle = {
 
 export const AppsLiveBlogStandardSpecialReportLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: liveBlogStandardSpecialReportFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsLiveBlogStandardSpecialReportDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: liveBlogStandardSpecialReportFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 const liveBlogStandardSpecialReportAltFixture: DCRArticle = {
@@ -331,41 +344,41 @@ const liveBlogStandardSpecialReportAltFixture: DCRArticle = {
 
 export const AppsLiveBlogStandardSpecialReportAltLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: liveBlogStandardSpecialReportAltFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsLiveBlogStandardSpecialReportAltDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: liveBlogStandardSpecialReportAltFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 export const WebLiveblogWithNoKeyEvents: Story = {
 	args: {
-		renderingTarget: 'Web',
 		article: { ...LiveBlogStandardNewsFixture, keyEvents: [] },
 	},
+	parameters: webParameters,
 };
 
 export const AppsLiveblogSingleContributorLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: LiveBlogSingleContributorFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsLiveblogSingleContributorDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: LiveBlogSingleContributorFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 const commentStandardNewsFixture: DCRArticle = {
@@ -378,18 +391,18 @@ const commentStandardNewsFixture: DCRArticle = {
 
 export const AppsCommentStandardNewsLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: commentStandardNewsFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsCommentStandardNewsDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: commentStandardNewsFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 const interactiveStandardNewsFixture: DCRArticle = {
@@ -402,34 +415,34 @@ const interactiveStandardNewsFixture: DCRArticle = {
 
 export const AppsInteractiveStandardNewsLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: interactiveStandardNewsFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsInteractiveStandardNewsDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: interactiveStandardNewsFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsAnalysisStandardNewsLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: AnalysisStandardNewsFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsAnalysisStandardNewsDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: AnalysisStandardNewsFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
 
 const analysisStandardCultureFixture: DCRArticle = {
@@ -442,16 +455,16 @@ const analysisStandardCultureFixture: DCRArticle = {
 
 export const AppsAnalysisStandardCultureLight: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: analysisStandardCultureFixture,
 		colourScheme: 'light',
 	},
+	parameters: appsParameters,
 };
 
 export const AppsAnalysisStandardCultureDark: Story = {
 	args: {
-		renderingTarget: 'Apps',
 		article: analysisStandardCultureFixture,
 		colourScheme: 'dark',
 	},
+	parameters: appsParameters,
 };
