@@ -1,5 +1,4 @@
-import type { StoryObj } from '@storybook/react';
-import type { Decorator } from '@storybook/react';
+import type { Decorator, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
 import { colourSchemeDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis as AnalysisStandardNewsFixture } from '../../fixtures/generated/articles/Analysis';
