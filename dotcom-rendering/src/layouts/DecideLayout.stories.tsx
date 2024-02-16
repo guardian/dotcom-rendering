@@ -58,9 +58,9 @@ const HydratedLayout: Decorator<
 		);
 	}, [article]);
 
-	const paletteDecorator = colourSchemeDecorator(colourScheme)<
-		DecideLayoutProps & HydratedLayoutDecoratorArgs
-	>([format]);
+	const paletteDecorator = colourSchemeDecorator(
+		colourScheme,
+	)<DecideLayoutProps>([format]);
 
 	return paletteDecorator(Story, {
 		...context,
