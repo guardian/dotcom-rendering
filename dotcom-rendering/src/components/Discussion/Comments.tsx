@@ -15,6 +15,7 @@ import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { useAB } from '../../lib/useAB';
 import { palette as schemedPalette } from '../../palette';
 import { labelStyles } from '../AdSlot.web';
+import { useConfig } from '../ConfigContext';
 import { useDispatch } from '../DispatchContext';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
@@ -127,6 +128,8 @@ export const Comments = ({
 		CommentType | ReplyType
 	>();
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
 
 	const dispatch = useDispatch();
 
@@ -224,11 +227,11 @@ export const Comments = ({
 	);
 
 	useEffect(() => {
-		if (expanded && !loading && mobileDiscussionAdsEnabled) {
+		if (isWeb && expanded && !loading && mobileDiscussionAdsEnabled) {
 			const event = new CustomEvent('comments-loaded');
 			document.dispatchEvent(event);
 		}
-	}, [expanded, loading, mobileDiscussionAdsEnabled]);
+	}, [isWeb, expanded, loading, mobileDiscussionAdsEnabled]);
 
 	const commentsStateChangeEvent = new CustomEvent('comments-state-change');
 
@@ -276,7 +279,8 @@ export const Comments = ({
 			handleFilterChange(newFilterObject);
 		}
 
-		mobileDiscussionAdsEnabled &&
+		isWeb &&
+			mobileDiscussionAdsEnabled &&
 			document.dispatchEvent(commentsStateChangeEvent);
 	};
 
@@ -309,7 +313,8 @@ export const Comments = ({
 
 	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
-		mobileDiscussionAdsEnabled &&
+		isWeb &&
+			mobileDiscussionAdsEnabled &&
 			document.dispatchEvent(commentsStateChangeEvent);
 	};
 
