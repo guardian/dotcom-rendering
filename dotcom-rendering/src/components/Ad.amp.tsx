@@ -104,7 +104,7 @@ export const Ad = ({
 
 	return (
 		<amp-ad
-			data-block-on-consent="_till_accepted"
+			data-block-on-consent="_till_responded"
 			// Primary ad size width and height
 			width={width}
 			height={height}
