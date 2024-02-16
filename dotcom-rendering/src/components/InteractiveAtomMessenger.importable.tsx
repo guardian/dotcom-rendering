@@ -34,6 +34,7 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 	const [container, setContainer] = useState<HTMLDivElement>();
 	const [iframe, setIframe] = useState<HTMLIFrameElement>();
 	const [scroll, setScroll] = useState(0);
+	const [height, setHeight] = useState(0);
 
 	const postMessage = useCallback(
 		(message: InteractiveMessage) => {
@@ -61,11 +62,13 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		if (!iframe) return;
 		if (!container) return;
 
+		setHeight(container.clientHeight);
+
 		const scrollListener = () => {
-			const { top, height } = container.getBoundingClientRect();
-			if (top > 0) return setScroll(0);
-			if (top < -height) return setScroll(1);
-			setScroll(-top);
+			const rect = container.getBoundingClientRect();
+			if (rect.top > 0) return setScroll(0);
+			if (rect.top < -rect.height) return setScroll(1);
+			setScroll(-rect.top);
 		};
 
 		const messageListener = (event: MessageEvent<unknown>) => {
@@ -77,7 +80,7 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 
 			switch (result.output.kind) {
 				case 'interactive:height': {
-					container.style.height = `${result.output.height}px`;
+					setHeight(result.output.height);
 					return;
 				}
 				case 'interactive:scroll': {
@@ -100,6 +103,12 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 	useEffect(() => {
 		postMessage({ kind: 'interactive:scroll', scroll });
 	}, [postMessage, scroll]);
+
+	useEffect(() => {
+		if (!container) return;
+		container.style.height = `${height}px`;
+		postMessage({ kind: 'interactive:height', height });
+	}, [postMessage, height, container]);
 
 	return null;
 };
