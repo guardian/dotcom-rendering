@@ -58,14 +58,20 @@ export const InteractiveAtom = ({
 
 	const isScrolly = scrollies.has(id);
 
-	console.log({ id, isScrolly });
-
 	return (
 		<div
 			css={[containerStyles, !!isMainMedia && fullHeightStyles]}
 			data-atom-id={id}
 			data-atom-type="interactive"
 		>
+			{isScrolly ? (
+				<Island
+					priority="feature"
+					defer={{ until: 'visible', rootMargin: '200px' }}
+				>
+					<InteractiveAtomMessenger id={id} />
+				</Island>
+			) : null}
 			<iframe
 				title={title}
 				id={id}
@@ -78,11 +84,6 @@ export const InteractiveAtom = ({
 				})}
 				frameBorder="0"
 			/>
-			{isScrolly ? (
-				<Island priority="feature" defer={{ until: 'idle' }}>
-					<InteractiveAtomMessenger id={id} />
-				</Island>
-			) : null}
 		</div>
 	);
 };
