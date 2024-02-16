@@ -15,17 +15,17 @@ const containerStyles = css`
 const iframe = css`
 	width: 100%;
 	background-color: ${palette('--interactive-atom-background')};
+
+	&.scrolly {
+		position: sticky;
+		top: 0;
+		height: 100vh;
+		height: 100dvh;
+		overflow: hidden;
+	}
 `;
 const fullHeightStyles = css`
 	height: 100%;
-`;
-
-const scrollyStyles = css`
-	position: sticky;
-	top: 0;
-	height: 100vh;
-	height: 100dvh;
-	overflow: hidden;
 `;
 
 type InteractiveAtomType = {
@@ -37,15 +37,6 @@ type InteractiveAtomType = {
 	title: string;
 };
 
-/** this hardcoded list is temporary, but we do not currently have a identifying mechanism */
-const scrollies = new Set([
-	'interactives/2018/06/migrant-deaths',
-	'interactives/2022/02/orion/project-in-numbers',
-	'interactives/2022/02/interactive-russian-deployments-ukraine-article/default',
-	'interactives/2023/01/colour-of-power/default',
-	'interactives/2024/01/ai2html-scrolly-safe-version-test/default',
-]);
-
 export const InteractiveAtom = ({
 	id,
 	elementHtml,
@@ -56,26 +47,22 @@ export const InteractiveAtom = ({
 }: InteractiveAtomType) => {
 	const { renderingTarget } = useConfig();
 
-	const isScrolly = scrollies.has(id);
-
 	return (
 		<div
 			css={[containerStyles, !!isMainMedia && fullHeightStyles]}
 			data-atom-id={id}
 			data-atom-type="interactive"
 		>
-			{isScrolly ? (
-				<Island
-					priority="feature"
-					defer={{ until: 'visible', rootMargin: '200px' }}
-				>
-					<InteractiveAtomMessenger id={id} />
-				</Island>
-			) : null}
+			<Island
+				priority="feature"
+				defer={{ until: 'visible', rootMargin: '200px' }}
+			>
+				<InteractiveAtomMessenger id={id} />
+			</Island>
 			<iframe
 				title={title}
 				id={id}
-				css={[iframe, isScrolly && scrollyStyles]}
+				css={iframe}
 				srcDoc={unifyPageContent({
 					elementJs,
 					elementCss,

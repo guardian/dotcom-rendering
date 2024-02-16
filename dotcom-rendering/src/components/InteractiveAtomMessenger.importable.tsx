@@ -1,19 +1,23 @@
-import { isObject, log } from '@guardian/libs';
+import { log } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-
-type InteractiveMessage =
-	| {
-			kind: 'interactive:scroll';
-			scroll: number;
-	  }
-	| {
-			kind: 'interactive:height';
-			height: number;
-	  };
+import type { Output } from 'valibot';
+import { literal, number, object, safeParse, variant } from 'valibot';
 
 type Props = {
 	id: string;
 };
+
+type InteractiveMessage = Output<typeof interactiveMessageSchema>;
+const interactiveMessageSchema = variant('kind', [
+	object({
+		kind: literal('interactive:scroll'),
+		scroll: number(),
+	}),
+	object({
+		kind: literal('interactive:height'),
+		height: number(),
+	}),
+]);
 
 /**
  * Send and receive messages from interactive Atoms.
@@ -57,8 +61,6 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		if (!iframe) return;
 		if (!container) return;
 
-		log('dotcom', '📜', { container });
-
 		const scrollListener = () => {
 			const { top, height } = container.getBoundingClientRect();
 			if (top > 0) return setScroll(0);
@@ -67,17 +69,22 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		};
 
 		const messageListener = (event: MessageEvent<unknown>) => {
-			log('dotcom', '📜 received message', event.source, event.data);
+			if (event.source !== iframe.contentWindow) return;
 
-			if (
-				event.source === iframe.contentWindow &&
-				isObject(event.data) &&
-				'kind' in event.data &&
-				event.data.kind === 'interactive:height' &&
-				'height' in event.data &&
-				typeof event.data.height === 'number'
-			) {
-				container.style.height = `${event.data.height}px`;
+			const result = safeParse(interactiveMessageSchema, event.data);
+
+			if (!result.success) return;
+
+			switch (result.output.kind) {
+				case 'interactive:height': {
+					container.style.height = `${result.output.height}px`;
+					return;
+				}
+				case 'interactive:scroll': {
+					log('dotcom', '📜 scrolly', { container });
+					iframe.classList.add('scrolly');
+					return;
+				}
 			}
 		};
 
