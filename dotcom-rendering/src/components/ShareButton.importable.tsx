@@ -99,17 +99,17 @@ const getUrl = ({
 export const NativeShareButton = ({
 	onShare,
 	size,
-	isLiveBlogMeta,
+	isLiveBlogArticleMeta,
 }: {
 	onShare: () => void;
 	size?: Size;
-	isLiveBlogMeta: boolean;
+	isLiveBlogArticleMeta: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 
 	return (
 		<Button
-			onClick={() => onShare()}
+			onClick={onShare}
 			size={size}
 			type="button"
 			priority="tertiary"
@@ -118,7 +118,7 @@ export const NativeShareButton = ({
 			css={[
 				buttonStyles,
 				nativeShare(sizeXSmall),
-				isLiveBlogMeta && liveBlogMobile(false),
+				isLiveBlogArticleMeta && liveBlogMobile(false),
 			]}
 		>
 			Share
@@ -129,18 +129,18 @@ export const NativeShareButton = ({
 export const CopyLinkButton = ({
 	onShare,
 	size,
-	isLiveBlogMeta,
+	isLiveBlogArticleMeta,
 	isCopied,
 }: {
 	onShare: () => void;
 	size?: Size;
-	isLiveBlogMeta: boolean;
+	isLiveBlogArticleMeta: boolean;
 	isCopied: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 	return (
 		<Button
-			onClick={() => onShare()}
+			onClick={onShare}
 			size={size}
 			type="button"
 			priority="tertiary"
@@ -151,7 +151,7 @@ export const CopyLinkButton = ({
 					? [copiedButtonStyles(sizeXSmall)]
 					: [buttonStyles]),
 				sharedButtonStyles(sizeXSmall),
-				isLiveBlogMeta && liveBlogMobile(isCopied),
+				isLiveBlogArticleMeta && liveBlogMobile(isCopied),
 			]}
 		>
 			{isCopied ? 'Link copied' : 'Copy link'}
@@ -168,30 +168,18 @@ export const ShareButton = ({
 	context,
 }: Props) => {
 	const [isCopied, setIsCopied] = useState(false);
-	const [isShareSupported, setIsShareSupported] = useState(false);
 
-	const isLiveBlogMeta =
-		(format.design === ArticleDesign.LiveBlog &&
-			context === 'ArticleMeta') ||
-		context === 'SubMeta';
+	const isLiveBlogArticleMeta =
+		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
 
 	const shareData = {
-		title: `${webTitle}`,
-		text: `${webTitle}:`,
+		title: webTitle,
+		text: webTitle,
 		url: getUrl({
 			pageId,
 			blockId,
 		}),
 	};
-
-	useEffect(() => {
-		setIsShareSupported(
-			typeof navigator !== 'undefined' &&
-				'share' in navigator &&
-				navigator.canShare(shareData),
-		);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	useEffect(() => {
 		if (!isCopied) return;
@@ -201,18 +189,19 @@ export const ShareButton = ({
 		return () => clearTimeout(timer);
 	}, [isCopied]);
 
-	return isShareSupported ? (
+	return typeof window === 'undefined' || typeof navigator === 'undefined' ? (
+		<></>
+	) : 'share' in navigator && navigator.canShare(shareData) ? (
 		<NativeShareButton
 			onShare={() => {
-				navigator.share(shareData).catch(() => {});
+				navigator.share(shareData).catch(console.error);
 			}}
 			size={size}
-			isLiveBlogMeta={isLiveBlogMeta}
+			isLiveBlogArticleMeta={isLiveBlogArticleMeta}
 		/>
-	) : (
+	) : 'clipboard' in navigator ? (
 		<CopyLinkButton
 			onShare={() => {
-				if (!('clipboard' in navigator)) return;
 				navigator.clipboard
 					.writeText(
 						getUrl({
@@ -223,11 +212,13 @@ export const ShareButton = ({
 					.then(() => {
 						setIsCopied(true);
 					})
-					.catch(() => {});
+					.catch(console.error);
 			}}
 			size={size}
 			isCopied={isCopied}
-			isLiveBlogMeta={isLiveBlogMeta}
+			isLiveBlogArticleMeta={isLiveBlogArticleMeta}
 		/>
+	) : (
+		<></>
 	);
 };

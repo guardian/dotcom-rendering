@@ -21,7 +21,7 @@ interface StoryArgs extends StoryProps {
 	theme: string;
 }
 
-export const CopyLink = () => {
+export const ShareButtonStory = () => {
 	return (
 		<ShareButton
 			pageId={'123'}
@@ -35,10 +35,10 @@ export const CopyLink = () => {
 		/>
 	);
 };
-CopyLink.storyName = 'CopyLink';
-CopyLink.decorators = [splitTheme()];
+ShareButtonStory.storyName = 'ShareButtonStory';
+ShareButtonStory.decorators = [splitTheme()];
 
-export const CopyLinkXSmall = () => {
+export const ShareButtonStoryXSmall = () => {
 	return (
 		<ShareButton
 			pageId={'123'}
@@ -53,15 +53,15 @@ export const CopyLinkXSmall = () => {
 		/>
 	);
 };
-CopyLinkXSmall.storyName = 'CopyLinkXSmall';
-CopyLinkXSmall.decorators = [splitTheme()];
+ShareButtonStoryXSmall.storyName = 'ShareButtonStoryXSmall';
+ShareButtonStoryXSmall.decorators = [splitTheme()];
 
 export const LinkCopied = () => {
 	return (
 		<CopyLinkButton
 			onShare={async () => {}}
 			isCopied={true}
-			isLiveBlogMeta={false}
+			isLiveBlogArticleMeta={false}
 			size="small"
 		/>
 	);
@@ -73,7 +73,7 @@ export const NativeShare = () => {
 	return (
 		<NativeShareButton
 			onShare={async () => {}}
-			isLiveBlogMeta={true}
+			isLiveBlogArticleMeta={true}
 			size="small"
 		/>
 	);
@@ -92,7 +92,7 @@ export const LiveBlogMobileNative = ({ theme }: StoryArgs) => {
 		>
 			<NativeShareButton
 				onShare={async () => {}}
-				isLiveBlogMeta={true}
+				isLiveBlogArticleMeta={true}
 				size="small"
 			/>
 		</div>
@@ -125,7 +125,7 @@ export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 			<CopyLinkButton
 				onShare={async () => {}}
 				isCopied={false}
-				isLiveBlogMeta={true}
+				isLiveBlogArticleMeta={true}
 				size="small"
 			/>
 		</div>
