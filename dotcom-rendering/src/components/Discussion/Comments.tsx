@@ -217,6 +217,15 @@ export const Comments = ({
 			type: 'setBottomFormPreviewBody',
 			previewBody,
 		});
+	const expandCommentReplies = (
+		commentId: number,
+		newResponses: CommentType[],
+	) =>
+		dispatch({
+			type: 'expandCommentReplies',
+			commentId,
+			responses: newResponses,
+		});
 
 	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
 
@@ -383,6 +392,9 @@ export const Comments = ({
 												setReplyFormPreviewBody
 											}
 											reportAbuse={reportAbuse}
+											expandCommentReplies={
+												expandCommentReplies
+											}
 										/>
 									</li>
 								))}
@@ -464,6 +476,7 @@ export const Comments = ({
 									previewBody={replyForm.previewBody}
 									setPreviewBody={setReplyFormPreviewBody}
 									reportAbuse={reportAbuse}
+									expandCommentReplies={expandCommentReplies}
 								/>
 							</li>
 						))}

@@ -10,7 +10,6 @@ import type {
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getMoreResponses } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
-import { useDispatch } from '../DispatchContext';
 import { Comment } from './Comment';
 import { CommentForm } from './CommentForm';
 import { CommentReplyPreview } from './CommentReplyPreview';
@@ -37,6 +36,7 @@ type Props = {
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
 };
 
 const nestingStyles = css`
@@ -93,6 +93,7 @@ export const CommentContainer = ({
 	previewBody,
 	setPreviewBody,
 	reportAbuse,
+	expandCommentReplies,
 }: Props) => {
 	const responses = comment.responses ?? [];
 	const totalResponseCount = comment.metaData?.responseCount ?? 0;
@@ -100,18 +101,6 @@ export const CommentContainer = ({
 	// Filter logic
 	const expanded = responses.length >= totalResponseCount;
 	const [loading, setLoading] = useState<boolean>(false);
-
-	const dispatch = useDispatch();
-
-	const expandCommentReplies = (
-		commentId: number,
-		newResponses: CommentType[],
-	) =>
-		dispatch({
-			type: 'expandCommentReplies',
-			commentId,
-			responses: newResponses,
-		});
 
 	const showResponses = threads !== 'unthreaded' && responses.length > 0;
 

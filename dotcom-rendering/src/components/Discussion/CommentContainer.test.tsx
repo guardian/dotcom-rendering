@@ -85,6 +85,10 @@ describe('CommentContainer', () => {
 				previewBody=""
 				setPreviewBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={(id, responses) => {
+					if (commentBeingRepliedTo?.id !== id) return;
+					commentBeingRepliedTo.responses = responses;
+				}}
 			/>,
 		);
 
@@ -125,6 +129,7 @@ describe('CommentContainer', () => {
 				previewBody=""
 				setPreviewBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
 
@@ -174,6 +179,10 @@ describe('CommentContainer', () => {
 				previewBody=""
 				setPreviewBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={(id, responses) => {
+					if (commentBeingRepliedTo?.id !== id) return;
+					commentBeingRepliedTo.responses = responses;
+				}}
 			/>,
 		);
 
@@ -214,6 +223,7 @@ describe('CommentContainer', () => {
 				previewBody=""
 				setPreviewBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>,
 		);
 
