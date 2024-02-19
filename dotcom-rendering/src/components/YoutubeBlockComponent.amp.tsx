@@ -59,7 +59,7 @@ export const YoutubeBlockComponent = ({
 		layout: 'responsive',
 		width: '16',
 		height: '9',
-		'data-block-on-consent': '', // Block player until consent is obtained
+		'data-block-on-consent': '_till_accepted', // Block player until consent is obtained
 		'data-param-modestbranding': true, // Remove YouTube logo
 		credentials: 'omit',
 	};

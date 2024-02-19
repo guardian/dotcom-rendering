@@ -19,7 +19,7 @@ export const VideoYoutubeBlockComponent = ({ element, pillar }: Props) => {
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>
 			<amp-youtube
-				data-block-on-consent=""
+				data-block-on-consent="_till_accepted"
 				data-videoid={youtubeId}
 				layout="responsive"
 				width={element.width}
