@@ -6,6 +6,7 @@ import {
 } from '@testing-library/react';
 import { mockRESTCalls } from '../../lib/mockRESTCalls';
 import { ok } from '../../lib/result';
+import { ConfigProvider } from '../ConfigContext';
 import { Discussion } from '../Discussion';
 
 mockRESTCalls();
@@ -13,16 +14,21 @@ mockRESTCalls();
 describe('App', () => {
 	it('should not render the comment form if user is logged out', async () => {
 		render(
-			<Discussion
-				user={undefined}
-				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
-				shortUrlId="p/39f5z"
-				discussionD2Uid="testD2Header"
-				discussionApiClientHeader="testClientHeader"
-				enableDiscussionSwitch={true}
-				idApiUrl="https://idapi.theguardian.com"
-				reportAbuseUnauthenticated={() => Promise.resolve(ok(true))}
-			/>,
+			<ConfigProvider
+				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+			>
+				<Discussion
+					user={undefined}
+					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+					shortUrlId="p/39f5z"
+					discussionD2Uid="testD2Header"
+					discussionApiClientHeader="testClientHeader"
+					enableDiscussionSwitch={true}
+					idApiUrl="https://idapi.theguardian.com"
+					reportAbuseUnauthenticated={() => Promise.resolve(ok(true))}
+				/>
+				,
+			</ConfigProvider>,
 		);
 
 		await waitForElementToBeRemoved(() =>
