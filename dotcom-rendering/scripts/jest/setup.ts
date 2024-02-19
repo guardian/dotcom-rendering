@@ -1,6 +1,6 @@
 /* eslint-disable ssr-friendly/no-dom-globals-in-module-scope -- this runs in JSDOM */
 // add some helpful assertions
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { TextDecoder, TextEncoder } from 'node:util';
 import { isServer } from '../../src/lib/isServer';
 import type { Guardian } from '../../src/model/guardian';
