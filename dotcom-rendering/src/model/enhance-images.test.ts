@@ -42,7 +42,7 @@ describe('Enhance Images', () => {
 								...image.data,
 								caption:
 									'<ul><li>This new caption replaces the one on the image object.</li></ul>',
-								credit: '',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -85,7 +85,7 @@ describe('Enhance Images', () => {
 									data: {
 										...image.data,
 										caption: '',
-										credit: '',
+										credit: 'Photograph: Cat Vinton/The Guardian',
 									},
 								},
 								{
@@ -95,7 +95,7 @@ describe('Enhance Images', () => {
 									data: {
 										...image.data,
 										caption: '',
-										credit: '',
+										credit: 'Photograph: Cat Vinton/The Guardian',
 									},
 								},
 							],
@@ -137,8 +137,8 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption: '',
-								credit: '',
+								caption: 'The original caption',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 						{
@@ -149,7 +149,7 @@ describe('Enhance Images', () => {
 								...image.data,
 								caption:
 									'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
-								credit: '',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -188,7 +188,7 @@ describe('Enhance Images', () => {
 								...image.data,
 								caption:
 									'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
-								credit: '',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -224,8 +224,8 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption: '',
-								credit: '',
+								caption: 'The original caption',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 							title: 'Example title text',
 						},
@@ -274,7 +274,7 @@ describe('Enhance Images', () => {
 								...image.data,
 								caption:
 									'<ul><li><p>This is the caption</p></li></ul>',
-								credit: '',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 							title: 'The title',
 						},
@@ -324,7 +324,7 @@ describe('Enhance Images', () => {
 									data: {
 										...image.data,
 										caption: '',
-										credit: '',
+										credit: 'Photograph: Cat Vinton/The Guardian',
 									},
 								},
 								{
@@ -334,7 +334,7 @@ describe('Enhance Images', () => {
 									data: {
 										...image.data,
 										caption: '',
-										credit: '',
+										credit: 'Photograph: Cat Vinton/The Guardian',
 									},
 								},
 							],
@@ -347,7 +347,7 @@ describe('Enhance Images', () => {
 								...image.data,
 								caption:
 									'<ul><li><p>This is the caption</p></li></ul>',
-								credit: '',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -395,7 +395,7 @@ describe('Enhance Images', () => {
 								...image.data,
 								caption:
 									'<ul><li><p>This is the caption</p></li></ul>',
-								credit: '',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 							title: 'The title',
 						},
@@ -430,8 +430,8 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption: '',
-								credit: '',
+								caption: 'The original caption',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -480,7 +480,7 @@ describe('Enhance Images', () => {
 								...image.data,
 								caption:
 									'<ul><li><p>This is the caption</p></li></ul>',
-								credit: '',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 							title: 'The title',
 						},
@@ -495,8 +495,8 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption: '',
-								credit: '',
+								caption: 'The original caption',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 						{
@@ -505,8 +505,8 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption: '',
-								credit: '',
+								caption: 'The original caption',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -557,8 +557,8 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption: '',
-								credit: '',
+								caption: 'The original caption',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 							title: 'The title',
 						},
@@ -675,9 +675,8 @@ describe('Enhance Images', () => {
 							...image,
 							role: 'inline',
 							data: {
-								caption:
-									'This text starts in data but gets removed for photo essays',
-								credit: 'but it is copied into the lightbox property so we can use it there',
+								caption: 'The original caption',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -693,8 +692,8 @@ describe('Enhance Images', () => {
 							position: 4,
 							role: 'inline',
 							data: {
-								caption: '',
-								credit: '',
+								caption: 'The original caption',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
