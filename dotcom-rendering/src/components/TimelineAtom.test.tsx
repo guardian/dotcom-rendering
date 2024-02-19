@@ -1,5 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { noTimelineEventsStory } from '../../fixtures/manual/timelineAtom';
 import { ConfigProvider } from './ConfigContext';
 import { TimelineAtom } from './TimelineAtom.importable';

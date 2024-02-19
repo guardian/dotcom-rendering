@@ -1,5 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { defaultStory } from '../../../fixtures/manual/guideAtom';
 import { ConfigProvider } from '../ConfigContext';
 import { GuideAtom } from './GuideAtom';

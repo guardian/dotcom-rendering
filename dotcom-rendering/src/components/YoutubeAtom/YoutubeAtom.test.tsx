@@ -1,6 +1,6 @@
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import { ConfigProvider } from '../ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom';
