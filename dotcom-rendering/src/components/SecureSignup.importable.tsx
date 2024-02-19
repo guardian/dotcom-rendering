@@ -11,24 +11,12 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import type { CSSProperties, FormEvent, ReactEventHandler } from 'react';
-import { useEffect, useRef, useState } from 'react';
-// Note - the package also exports a component as a named export "ReCAPTCHA",
-// that version will compile and render but is non-functional.
-// Use the default export instead.
-import ReactGoogleRecaptcha from 'react-google-recaptcha';
+import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { lazyFetchEmailWithTimeout } from '../lib/fetchEmail';
 import { palette } from '../palette';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
-
-// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
-// their T+C's must be displayed instead. While this component hides the
-// badge, its parent must include the T+C along side it.
-// The T+C are not included in this componet directly to reduce layout shift
-// from the island hydrating (placeholder height for the text can't
-// be accurately predicated for every breakpoint).
-// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
 type Props = {
 	newsletterId: string;
@@ -119,7 +107,6 @@ const SuccessMessage = ({ text }: { text?: string }) => (
 const buildFormData = (
 	emailAddress: string,
 	newsletterId: string,
-	token: string,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -131,9 +118,6 @@ const buildFormData = (
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
-	if (window.guardian.config.switches.emailSignupRecaptcha) {
-		formData.append('g-recaptcha-response', token); // TO DO - PR on form handlers - is the token verified?
-	}
 
 	return formData;
 };
@@ -175,11 +159,7 @@ type EventDescription =
 	| 'form-submission'
 	| 'submission-confirmed'
 	| 'submission-failed'
-	| 'open-captcha'
-	| 'captcha-load-error'
-	| 'form-submit-error'
-	| 'captcha-not-passed'
-	| 'captcha-passed';
+	| 'form-submit-error';
 
 const sendTracking = (
 	newsletterId: string,
@@ -190,23 +170,17 @@ const sendTracking = (
 
 	switch (eventDescription) {
 		case 'form-submission':
-		case 'captcha-not-passed':
-		case 'captcha-passed':
 			action = 'ANSWER';
 			break;
 		case 'submission-confirmed':
 			action = 'SUBSCRIBE';
 			break;
-		case 'captcha-load-error':
+
 		case 'form-submit-error':
 		case 'submission-failed':
 			action = 'CLOSE';
 			break;
-		case 'open-captcha':
-			action = 'EXPAND';
-			break;
 		case 'click-button':
-		default:
 			action = 'CLICK';
 			break;
 	}
@@ -238,15 +212,18 @@ const sendTracking = (
 /**
  * # Secure Signup
  *
- * We can only inject ReCAPTCHA client-side, and need to respond to user input.
+ * Enables signing up to a newsletter.
+ *
+ * ## Why is this an island?
+ *
+ * - We use the user’s email if signed in
+ * - We respond to user input and submitting AJAX form
  *
  * ---
  *
  * [`EmailSignup` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-emailsignup)
  */
 export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
-	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
-	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [signedInUserEmail, setSignedInUserEmail] = useState<string>();
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
@@ -258,14 +235,13 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	);
 
 	useEffect(() => {
-		setCaptchaSiteKey(window.guardian.config.page.googleRecaptchaSiteKey);
 		void resolveEmailIfSignedIn().then(setSignedInUserEmail);
 	}, []);
 	const { renderingTarget } = useConfig();
 
 	const hasResponse = typeof responseOk === 'boolean';
 
-	const submitForm = async (token: string): Promise<void> => {
+	const submitForm = async (): Promise<void> => {
 		const input: HTMLInputElement | null =
 			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
@@ -273,7 +249,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 		sendTracking(newsletterId, 'form-submission', renderingTarget);
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
-			buildFormData(emailAddress, newsletterId, token),
+			buildFormData(emailAddress, newsletterId),
 		);
 
 		// The response body could be accessed with await response.text()
@@ -293,29 +269,6 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	const resetForm: ReactEventHandler<HTMLButtonElement> = () => {
 		setErrorMessage(undefined);
 		setResponseOk(undefined);
-		recaptchaRef.current?.reset();
-	};
-
-	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
-		sendTracking(newsletterId, 'captcha-load-error', renderingTarget);
-		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
-		recaptchaRef.current?.reset();
-	};
-
-	const handleCaptchaComplete = (token: string | null) => {
-		if (!token) {
-			sendTracking(newsletterId, 'captcha-not-passed', renderingTarget);
-			return;
-		}
-		sendTracking(newsletterId, 'captcha-passed', renderingTarget);
-		setIsWaitingForResponse(true);
-		submitForm(token).catch((error) => {
-			// eslint-disable-next-line no-console -- unexpected error
-			console.error(error);
-			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
-			setErrorMessage(`Sorry, there was an error signing you up.`);
-			setIsWaitingForResponse(false);
-		});
 	};
 
 	const handleClick = (): void => {
@@ -328,8 +281,14 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			return;
 		}
 		setErrorMessage(undefined);
-		sendTracking(newsletterId, 'open-captcha', renderingTarget);
-		recaptchaRef.current?.execute();
+
+		submitForm().catch((error) => {
+			// eslint-disable-next-line no-console -- unexpected error
+			console.error(error);
+			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
+			setErrorMessage(`Sorry, there was an error signing you up.`);
+			setIsWaitingForResponse(false);
+		});
 	};
 
 	const hideEmailInput = isString(signedInUserEmail);
@@ -386,29 +345,6 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 						</Button>
 					</div>
 				))}
-
-			{!!captchaSiteKey && (
-				<div
-					css={css`
-						.grecaptcha-badge {
-							visibility: hidden;
-						}
-					`}
-				>
-					<ReactGoogleRecaptcha
-						sitekey={captchaSiteKey}
-						ref={recaptchaRef}
-						onChange={handleCaptchaComplete}
-						onError={handleCaptchaLoadError}
-						size="invisible"
-						// Note - the component supports an onExpired callback
-						// (for when the user completed a challenge, but did
-						// not submit the form before the token expired.
-						// We don't need that here as completing the captcha
-						// (onChange callback) triggers the submission
-					/>
-				</div>
-			)}
 		</>
 	);
 };
