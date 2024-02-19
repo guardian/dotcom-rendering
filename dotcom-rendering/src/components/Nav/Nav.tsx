@@ -137,16 +137,27 @@ export const Nav = ({
                         var toggleMainMenu = function(e){
                           navInputCheckbox.click()
                         }
-                        // Close hide menu on press enter
-                        var keydownToggleMainMenu = function(e){
-                          // keyCode: 13 => Enter key | keyCode: 32 => Space key
-                          if (e.keyCode === 13 || e.keyCode === 32) {
-                            e.preventDefault()
-                            toggleMainMenu()
-                          }
-                        }
+						// Activate toggle on key input, mimicking the 'click' event on HTML button
+						// elements. For the difference between keydown and keyup, see:
+						// https://adrianroselli.com/2022/04/brief-note-on-buttons-enter-and-space.html
+						var keydownToggleMainMenu = function(e){
+						  // keyCode: 13 => Enter key
+						//   if (e.keyCode === 13) {
+						// 	e.preventDefault()
+						// 	toggleMainMenu()
+						//   }
+						}
+						var keyupToggleMainMenu = function(e){
+						  // keyCode: 32 => Space key
+						  if (e.keyCode === 32) {
+							e.preventDefault()
+							toggleMainMenu()
+						  }
+						}
                         showMoreButton.addEventListener('keydown', keydownToggleMainMenu)
+                        showMoreButton.addEventListener('keyup', keyupToggleMainMenu)
                         veggieBurger.addEventListener('keydown', keydownToggleMainMenu)
+						veggieBurger.addEventListener('keyup', keyupToggleMainMenu)
                         // Accessibility to hide Nav when pressing escape key
                         document.addEventListener('keydown', function(e){
                           // keyCode: 27 => esc
