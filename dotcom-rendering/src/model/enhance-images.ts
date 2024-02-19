@@ -424,8 +424,6 @@ const enhance =
 	(elements: FEElement[]): FEElement[] => {
 		if (isPhotoEssay) {
 			return new Enhancer(elements)
-				.stripCaptions()
-				.removeCredit()
 				.addMultiImageElements()
 				.addTitles()
 				.addCaptionsToMultis()
