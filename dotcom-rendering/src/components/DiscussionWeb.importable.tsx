@@ -1,5 +1,6 @@
 import { isObject, joinUrl } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import type { SignedInUser, UserProfile } from '../lib/discussion';
 import {
 	addUserName,
 	comment,
@@ -13,7 +14,6 @@ import type { SignedInWithCookies, SignedInWithOkta } from '../lib/identity';
 import { getOptionsHeadersWithOkta } from '../lib/identity';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useHydrated } from '../lib/useHydrated';
-import type { SignedInUser, UserProfile } from '../types/discussion';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 import { Placeholder } from './Placeholder';
@@ -85,7 +85,7 @@ const getUser = async ({
  *
  * (No visual story exist)
  */
-export const DiscussionContainer = (
+export const DiscussionWeb = (
 	props: Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>,
 ) => {
 	const hydrated = useHydrated();

@@ -121,7 +121,7 @@ test.describe('Signed in readers', () => {
 		await disableCMP(context);
 		await loadPageNoOkta(page, standardArticle);
 
-		await waitForIsland(page, 'DiscussionContainer');
+		await waitForIsland(page, 'DiscussionWeb');
 
 		// Check that the discussion container is showing the reader as signed out
 		const discussionText = await page

@@ -9,12 +9,12 @@ import {
 } from '../model/extractTrendingTopics';
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
-import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
+import { validateAsFrontType, validateAsTagPageType } from '../model/validate';
 import type { DCRFrontType, FEFrontType } from '../types/front';
-import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
+import type { DCRTagPageType, FETagPageType } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import { renderFront, renderTagFront } from './render.front.web';
+import { renderFront, renderTagPage } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
@@ -50,20 +50,20 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 	};
 };
 
-const tagFrontWebTitle = (tagFront: FETagFrontType) => {
-	const pagination = tagFront.tags.tags[0]?.pagination;
+const tagPageWebTitle = (tagPage: FETagPageType) => {
+	const pagination = tagPage.tags.tags[0]?.pagination;
 	if (pagination !== undefined && pagination.currentPage > 1) {
-		return `${tagFront.webTitle} | Page ${pagination.currentPage} of ${pagination.lastPage} | The Guardian`;
+		return `${tagPage.webTitle} | Page ${pagination.currentPage} of ${pagination.lastPage} | The Guardian`;
 	} else {
-		return `${tagFront.webTitle} | The Guardian`;
+		return `${tagPage.webTitle} | The Guardian`;
 	}
 };
 
-const enhanceTagFront = (body: unknown): DCRTagFrontType => {
-	const data: FETagFrontType = validateAsTagFrontType(body);
+const enhanceTagPage = (body: unknown): DCRTagPageType => {
+	const data: FETagPageType = validateAsTagPageType(body);
 
 	const enhancedCards = enhanceCards(data.contents, {
-		cardInTagFront: true,
+		cardInTagPage: true,
 		pageId: data.pageId,
 		discussionApiUrl: data.config.discussionApiUrl,
 	});
@@ -76,7 +76,7 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 
 	return {
 		...data,
-		webTitle: tagFrontWebTitle(data),
+		webTitle: tagPageWebTitle(data),
 		tags: data.tags.tags,
 		groupedTrails,
 		speed,
@@ -114,15 +114,15 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
 };
 
-export const handleTagFront: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('tagFront');
-	const tagFront = enhanceTagFront(body);
-	const { html, prefetchScripts } = renderTagFront({
-		tagFront,
+export const handleTagPage: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('tagPage');
+	const tagPage = enhanceTagPage(body);
+	const { html, prefetchScripts } = renderTagPage({
+		tagPage,
 	});
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
-export const handleTagFrontJson: RequestHandler = ({ body }, res) => {
-	res.json(enhanceTagFront(body));
+export const handleTagPageJson: RequestHandler = ({ body }, res) => {
+	res.json(enhanceTagPage(body));
 };

@@ -1,19 +1,23 @@
-import { isObject, log } from '@guardian/libs';
+import { log } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
-
-type InteractiveMessage =
-	| {
-			kind: 'interactive:scroll';
-			scroll: number;
-	  }
-	| {
-			kind: 'interactive:height';
-			height: number;
-	  };
+import type { Output } from 'valibot';
+import { literal, number, object, safeParse, variant } from 'valibot';
 
 type Props = {
 	id: string;
 };
+
+type InteractiveMessage = Output<typeof interactiveMessageSchema>;
+const interactiveMessageSchema = variant('kind', [
+	object({
+		kind: literal('interactive:scroll'),
+		scroll: number(),
+	}),
+	object({
+		kind: literal('interactive:height'),
+		height: number(),
+	}),
+]);
 
 /**
  * Send and receive messages from interactive Atoms.
@@ -30,6 +34,7 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 	const [container, setContainer] = useState<HTMLDivElement>();
 	const [iframe, setIframe] = useState<HTMLIFrameElement>();
 	const [scroll, setScroll] = useState(0);
+	const [height, setHeight] = useState(0);
 
 	const postMessage = useCallback(
 		(message: InteractiveMessage) => {
@@ -57,35 +62,53 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		if (!iframe) return;
 		if (!container) return;
 
-		const listener = () => {
-			const { top, height } = container.getBoundingClientRect();
-			if (top > 0) return setScroll(0);
-			if (top < -height) return setScroll(1);
-			setScroll(-top);
+		setHeight(container.clientHeight);
+
+		const scrollListener = () => {
+			const rect = container.getBoundingClientRect();
+			if (rect.top > 0) return setScroll(0);
+			if (rect.top < -rect.height) return setScroll(1);
+			setScroll(-rect.top);
 		};
-		window.addEventListener('scroll', listener);
 
-		window.addEventListener('message', (event: MessageEvent<unknown>) => {
-			log('dotcom', '📜 received message', event.source, event.data);
+		const messageListener = (event: MessageEvent<unknown>) => {
+			if (event.source !== iframe.contentWindow) return;
 
-			if (
-				event.source === iframe.contentWindow &&
-				isObject(event.data) &&
-				'kind' in event.data &&
-				event.data.kind === 'interactive:size' &&
-				'height' in event.data &&
-				typeof event.data.height === 'number'
-			) {
-				container.style.height = `${event.data.height}px`;
+			const result = safeParse(interactiveMessageSchema, event.data);
+
+			if (!result.success) return;
+
+			switch (result.output.kind) {
+				case 'interactive:height': {
+					setHeight(result.output.height);
+					return;
+				}
+				case 'interactive:scroll': {
+					log('dotcom', '📜 scrolly', { container });
+					iframe.classList.add('scrolly');
+					return;
+				}
 			}
-		});
+		};
 
-		return () => window.removeEventListener('scroll', listener);
+		window.addEventListener('scroll', scrollListener);
+		window.addEventListener('message', messageListener);
+
+		return () => {
+			window.removeEventListener('scroll', scrollListener);
+			window.removeEventListener('message', messageListener);
+		};
 	}, [iframe, container]);
 
 	useEffect(() => {
 		postMessage({ kind: 'interactive:scroll', scroll });
 	}, [postMessage, scroll]);
+
+	useEffect(() => {
+		if (!container) return;
+		container.style.height = `${height}px`;
+		postMessage({ kind: 'interactive:height', height });
+	}, [postMessage, height, container]);
 
 	return null;
 };

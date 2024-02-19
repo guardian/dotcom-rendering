@@ -51,7 +51,7 @@ test.describe('Interactivity', () => {
 			await expectToNotBeVisible(page, '[data-testid=discussion]');
 			// Click the comment count
 			await page.locator('[data-testid=comment-counts]').click();
-			await waitForIsland(page, 'DiscussionContainer', {});
+			await waitForIsland(page, 'DiscussionWeb', {});
 			await expectToExist(page, '[data-testid=discussion]');
 		});
 
@@ -76,7 +76,7 @@ test.describe('Interactivity', () => {
 				page,
 				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
 			);
-			await waitForIsland(page, 'DiscussionContainer', {});
+			await waitForIsland(page, 'DiscussionWeb', {});
 			await expectToBeVisible(page, '[id=comment-154433663]');
 		});
 

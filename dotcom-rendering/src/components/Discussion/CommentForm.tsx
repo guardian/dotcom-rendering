@@ -1,18 +1,14 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
-import { useEffect, useRef } from 'react';
-import { preview as defaultPreview } from '../../lib/discussionApi';
-import { palette as schemedPalette } from '../../palette';
+import { space, text, textSans } from '@guardian/source-foundations';
+import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentType,
+	ReplyType,
 	SignedInUser,
 	UserProfile,
-} from '../../types/discussion';
+} from '../../lib/discussion';
+import { preview as defaultPreview } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { FirstCommentWelcome } from './FirstCommentWelcome';
 import { PillarButton } from './PillarButton';
 import { Preview } from './Preview';
@@ -21,22 +17,16 @@ import { Row } from './Row';
 type Props = {
 	shortUrl: string;
 	user: SignedInUser;
-	onAddComment: (response: CommentType) => void;
+	onAddComment: (response: CommentType | ReplyType) => void;
 	setCommentBeingRepliedTo?: () => void;
-	commentBeingRepliedTo?: CommentType;
+	commentBeingRepliedTo?: CommentType | ReplyType;
 	onPreview?: typeof defaultPreview;
-	showPreview: boolean;
-	setShowPreview: (showPreview: boolean) => void;
-	isActive: boolean;
-	setIsActive: (isActive: boolean) => void;
 	error: string;
 	setError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
-	body: string;
-	setBody: (body: string) => void;
 };
 
 const boldString = (str: string) => `<b>${str}</b>`;
@@ -60,9 +50,9 @@ const commentTextArea = css`
 	margin-bottom: ${space[3]}px;
 	padding: 8px 10px 10px 8px;
 	${textSans.small()};
-	border-color: ${sourcePalette.neutral[86]};
+	border-color: ${schemedPalette('--discussion-border')};
 	:focus {
-		border-color: ${sourcePalette.neutral[46]};
+		border-color: ${schemedPalette('--discussion-subdued')};
 		outline: none;
 	}
 	color: inherit;
@@ -71,7 +61,7 @@ const commentTextArea = css`
 
 const greyPlaceholder = css`
 	::placeholder {
-		color: ${sourcePalette.neutral[46]};
+		color: ${schemedPalette('--discussion-subdued')};
 	}
 `;
 
@@ -123,7 +113,7 @@ const commentAddOns = css`
 	font-size: 13px;
 	line-height: 17px;
 	border: 1px solid ${schemedPalette('--comment-form-input-background')};
-	background-color: ${schemedPalette('--comment-form-addon-button')};
+	background-color: ${schemedPalette('--discussion-background')};
 	color: inherit;
 	text-align: center;
 	cursor: pointer;
@@ -169,34 +159,45 @@ const simulateNewComment = (
 	commentId: number,
 	body: string,
 	userProfile: UserProfile,
-	commentBeingRepliedTo?: CommentType,
-): CommentType => {
-	const responseTo = commentBeingRepliedTo
-		? {
-				displayName: commentBeingRepliedTo.userProfile.displayName,
-				commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
-				isoDateTime: commentBeingRepliedTo.isoDateTime,
-				date: commentBeingRepliedTo.date,
-				commentId: String(commentBeingRepliedTo.id),
-				commentWebUrl: `https://discussion.theguardian.com/comment-permalink/${commentBeingRepliedTo.id}`,
-		  }
-		: undefined;
+): CommentType => ({
+	id: commentId,
+	body,
+	date: Date(),
+	isoDateTime: new Date().toISOString(),
+	status: 'visible',
+	webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
+	apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
+	numRecommends: 0,
+	isHighlighted: false,
+	userProfile,
+	responses: [],
+});
 
-	return {
-		id: commentId,
-		body,
-		date: Date(),
-		isoDateTime: new Date().toISOString(),
-		status: 'visible',
-		webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
-		apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
-		numRecommends: 0,
-		isHighlighted: false,
-		userProfile,
-		responses: [],
-		responseTo,
-	};
-};
+const simulateNewReply = (
+	commentId: number,
+	body: string,
+	userProfile: UserProfile,
+	commentBeingRepliedTo: CommentType | ReplyType,
+): ReplyType => ({
+	id: commentId,
+	body,
+	date: Date(),
+	isoDateTime: new Date().toISOString(),
+	status: 'visible',
+	webUrl: `https://discussion.theguardian.com/comment-permalink/${commentId}`,
+	apiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentId}`,
+	numRecommends: 0,
+	isHighlighted: false,
+	userProfile,
+	responseTo: {
+		displayName: commentBeingRepliedTo.userProfile.displayName,
+		commentApiUrl: `https://discussion.guardianapis.com/discussion-api/comment/${commentBeingRepliedTo.id}`,
+		isoDateTime: commentBeingRepliedTo.isoDateTime,
+		date: commentBeingRepliedTo.date,
+		commentId: String(commentBeingRepliedTo.id),
+		commentWebUrl: `https://discussion.theguardian.com/comment-permalink/${commentBeingRepliedTo.id}`,
+	},
+});
 
 export const CommentForm = ({
 	shortUrl,
@@ -205,20 +206,21 @@ export const CommentForm = ({
 	setCommentBeingRepliedTo,
 	commentBeingRepliedTo,
 	onPreview,
-	showPreview,
-	setShowPreview,
-	isActive,
-	setIsActive,
 	error,
 	setError,
 	userNameMissing,
 	setUserNameMissing,
 	previewBody,
 	setPreviewBody,
-	body,
-	setBody,
 }: Props) => {
+	const [isActive, setIsActive] = useState(false);
+
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+	const setBody = (body: string) => {
+		if (!textAreaRef.current) return;
+		textAreaRef.current.value = body;
+	};
 
 	useEffect(() => {
 		if (commentBeingRepliedTo) {
@@ -277,6 +279,7 @@ export const CommentForm = ({
 	};
 
 	const fetchShowPreview = async () => {
+		const body = textAreaRef.current?.value;
 		if (!body) return;
 
 		const preview = onPreview ?? defaultPreview;
@@ -285,24 +288,24 @@ export const CommentForm = ({
 		if (response.kind === 'error') {
 			setError('Preview request failed, please try again');
 			setPreviewBody('');
-			setShowPreview(false);
 			return;
 		}
 
 		setPreviewBody(response.value);
-		setShowPreview(true);
 	};
 
 	const resetForm = () => {
 		setError('');
 		setBody('');
-		setShowPreview(false);
+		setPreviewBody('');
 		setIsActive(false);
 		setCommentBeingRepliedTo?.();
 	};
 
 	const submitForm = async () => {
 		setError('');
+
+		const body = textAreaRef.current?.value;
 
 		if (body) {
 			const response = commentBeingRepliedTo
@@ -372,12 +375,18 @@ export const CommentForm = ({
 				}
 			} else {
 				onAddComment(
-					simulateNewComment(
-						response.value,
-						body,
-						user.profile,
-						commentBeingRepliedTo,
-					),
+					commentBeingRepliedTo
+						? simulateNewReply(
+								response.value,
+								body,
+								user.profile,
+								commentBeingRepliedTo,
+						  )
+						: simulateNewComment(
+								response.value,
+								body,
+								user.profile,
+						  ),
 				);
 				resetForm();
 			}
@@ -401,7 +410,7 @@ export const CommentForm = ({
 		}
 	};
 
-	if (userNameMissing && body) {
+	if (isActive && userNameMissing) {
 		return (
 			<FirstCommentWelcome
 				error={error}
@@ -469,10 +478,6 @@ export const CommentForm = ({
 					]}
 					ref={textAreaRef}
 					style={{ height: isActive ? '132px' : '50px' }}
-					onChange={(e) => {
-						setBody(e.target.value || '');
-					}}
-					value={body}
 					onFocus={() => setIsActive(true)}
 				/>
 				<div css={bottomContainer}>
@@ -485,7 +490,7 @@ export const CommentForm = ({
 							>
 								Post your comment
 							</PillarButton>
-							{(isActive || !!body) && (
+							{isActive && (
 								<>
 									<Space amount={3} />
 									<PillarButton
@@ -594,7 +599,7 @@ export const CommentForm = ({
 				</div>
 			</form>
 
-			{showPreview && (
+			{previewBody.trim() !== '' && (
 				<Preview previewHtml={previewBody} showSpout={true} />
 			)}
 		</>

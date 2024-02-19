@@ -1,20 +1,18 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { preview, reportAbuse } from '../../lib/discussionApi';
-import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import type {
 	AdditionalHeadersType,
+	CommentFormProps,
 	CommentType,
 	FilterOptions,
-	CommentForm as Form,
+	ReplyType,
 	SignedInUser,
-} from '../../types/discussion';
+} from '../../lib/discussion';
+import type { preview, reportAbuse } from '../../lib/discussionApi';
+import { getPicks, initialiseApi } from '../../lib/discussionApi';
+import { palette as schemedPalette } from '../../palette';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -40,48 +38,27 @@ type Props = {
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
-	comments: CommentType[];
-	setComment: (comment: CommentType) => void;
+	comments: Array<CommentType | ReplyType>;
+	addComment: (comment: CommentType) => void;
+	addReply: (comment: ReplyType) => void;
 	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
 	pickError: string;
 	setPickError: (error: string) => void;
-	setTopFormActive: (isActive: boolean) => void;
-	setReplyFormActive: (isActive: boolean) => void;
-	setBottomFormActive: (isActive: boolean) => void;
 	setTopFormUserMissing: (isUserMissing: boolean) => void;
 	setReplyFormUserMissing: (isUserMissing: boolean) => void;
 	setBottomFormUserMissing: (isUserMissing: boolean) => void;
 	setTopFormError: (error: string) => void;
 	setReplyFormError: (error: string) => void;
 	setBottomFormError: (error: string) => void;
-	setTopFormShowPreview: (showPreview: boolean) => void;
-	setReplyFormShowPreview: (showPreview: boolean) => void;
-	setBottomFormShowPreview: (showPreview: boolean) => void;
 	setTopFormPreviewBody: (previewBody: string) => void;
 	setReplyFormPreviewBody: (previewBody: string) => void;
 	setBottomFormPreviewBody: (previewBody: string) => void;
-	setTopFormBody: (body: string) => void;
-	setReplyFormBody: (body: string) => void;
-	setBottomFormBody: (body: string) => void;
-	topForm: Form;
-	replyForm: Form;
-	bottomForm: Form;
+	topForm: CommentFormProps;
+	replyForm: CommentFormProps;
+	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
 };
-
-/**
- * Size of comment batching to speed up rendering.
- *
- * We want react to complete the current work and render,
- * without trying to batch this update before resetting
- * the number of comments to the total comment amount.
- *
- * This allows a quick render of minimal comments and then immediately begin rendering
- * the remaining comments.
- *
- * @see https://github.com/guardian/discussion-rendering/pull/477
- */
-const COMMENT_BATCH = 10;
 
 const footerStyles = css`
 	display: flex;
@@ -111,7 +88,7 @@ const picksWrapper = css`
 const NoComments = () => (
 	<div
 		css={css`
-			color: ${sourcePalette.neutral[46]};
+			color: ${schemedPalette('--discussion-subdued')};
 			${textSans.small()}
 			padding-top: ${space[5]}px;
 			padding-left: ${space[1]}px;
@@ -154,59 +131,29 @@ export const Comments = ({
 	comments,
 	pickError,
 	setPickError,
-	setComment,
+	addComment,
+	addReply,
 	handleFilterChange,
-	setTopFormActive,
-	setReplyFormActive,
-	setBottomFormActive,
 	setTopFormUserMissing,
 	setReplyFormUserMissing,
 	setBottomFormUserMissing,
 	setTopFormError,
 	setReplyFormError,
 	setBottomFormError,
-	setTopFormShowPreview,
-	setReplyFormShowPreview,
-	setBottomFormShowPreview,
 	setTopFormPreviewBody,
 	setReplyFormPreviewBody,
 	setBottomFormPreviewBody,
-	setTopFormBody,
-	setReplyFormBody,
-	setBottomFormBody,
 	topForm,
 	replyForm,
 	bottomForm,
 	reportAbuse,
+	expandCommentReplies,
 }: Props) => {
-	const [picks, setPicks] = useState<CommentType[]>([]);
-	const [commentBeingRepliedTo, setCommentBeingRepliedTo] =
-		useState<CommentType>();
-	const [numberOfCommentsToShow, setNumberOfCommentsToShow] =
-		useState(COMMENT_BATCH);
+	const [picks, setPicks] = useState<Array<CommentType | ReplyType>>([]);
+	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
+		CommentType | ReplyType
+	>();
 	const [mutes, setMutes] = useState<string[]>(readMutes());
-
-	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
-
-	useEffect(() => {
-		setNumberOfCommentsToShow(COMMENT_BATCH);
-	}, [comments]);
-
-	useEffect(() => {
-		if (!expanded) return;
-		if (numberOfCommentsToShow === comments.length) return;
-
-		const newNumberOfCommentsToShow = Math.min(
-			numberOfCommentsToShow + COMMENT_BATCH,
-			comments.length,
-		);
-
-		const timer = setTimeout(() => {
-			setNumberOfCommentsToShow(newNumberOfCommentsToShow);
-		}, 0);
-
-		return () => clearTimeout(timer);
-	}, [expanded, comments.length, numberOfCommentsToShow, loadingMore]);
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
@@ -224,13 +171,13 @@ export const Comments = ({
 	 * page and is added to the DOM later, following an API call.
 	 * */
 	useEffect(() => {
-		if (loadingMore) return; // the comment may not yet be in the DOM
 		if (commentToScrollTo === undefined) return;
+		if (loading) return;
 
 		document
 			.getElementById(`comment-${commentToScrollTo}`)
 			?.scrollIntoView();
-	}, [loadingMore, commentToScrollTo]);
+	}, [commentToScrollTo, loading]);
 
 	const onFilterChange = (newFilterObject: FilterOptions) => {
 		/**
@@ -270,8 +217,12 @@ export const Comments = ({
 
 		setMutes(updatedMutes); // Update local state
 	};
-	const onAddComment = (comment: CommentType) => {
-		setComment(comment);
+	const onAddComment = (comment: CommentType | ReplyType) => {
+		if (comment.responses) {
+			addComment(comment);
+		} else {
+			addReply(comment);
+		}
 		const commentElement = document.getElementById(`comment-${comment.id}`);
 		commentElement?.scrollIntoView();
 	};
@@ -337,16 +288,6 @@ export const Comments = ({
 											mutes={mutes}
 											toggleMuteStatus={toggleMuteStatus}
 											onPermalinkClick={onPermalinkClick}
-											showPreview={replyForm.showPreview}
-											setShowPreview={
-												setReplyFormShowPreview
-											}
-											isCommentFormActive={
-												replyForm.isActive
-											}
-											setIsCommentFormActive={
-												setReplyFormActive
-											}
 											error={replyForm.error}
 											setError={setReplyFormError}
 											pickError={pickError}
@@ -361,9 +302,10 @@ export const Comments = ({
 											setPreviewBody={
 												setReplyFormPreviewBody
 											}
-											body={replyForm.body}
-											setBody={setReplyFormBody}
 											reportAbuse={reportAbuse}
+											expandCommentReplies={
+												expandCommentReplies
+											}
 										/>
 									</li>
 								))}
@@ -383,18 +325,12 @@ export const Comments = ({
 					onAddComment={onAddComment}
 					user={user}
 					onPreview={onPreview}
-					showPreview={topForm.showPreview}
-					setShowPreview={setTopFormShowPreview}
-					isActive={topForm.isActive}
-					setIsActive={setTopFormActive}
 					error={topForm.error}
 					setError={setTopFormError}
 					userNameMissing={topForm.userNameMissing}
 					setUserNameMissing={setTopFormUserMissing}
 					previewBody={topForm.previewBody}
 					setPreviewBody={setTopFormPreviewBody}
-					body={topForm.body}
-					setBody={setTopFormBody}
 				/>
 			)}
 			{!!picks.length && (
@@ -423,47 +359,37 @@ export const Comments = ({
 				<NoComments />
 			) : (
 				<ul css={commentContainerStyles}>
-					{comments
-						.slice(0, numberOfCommentsToShow)
-						.map((comment) => (
-							<li key={comment.id}>
-								<CommentContainer
-									comment={comment}
-									isClosedForComments={isClosedForComments}
-									shortUrl={shortUrl}
-									user={user}
-									threads={filters.threads}
-									commentBeingRepliedTo={
-										commentBeingRepliedTo
-									}
-									setCommentBeingRepliedTo={
-										setCommentBeingRepliedTo
-									}
-									commentToScrollTo={commentToScrollTo}
-									mutes={mutes}
-									toggleMuteStatus={toggleMuteStatus}
-									onPermalinkClick={onPermalinkClick}
-									showPreview={replyForm.showPreview}
-									setShowPreview={setReplyFormShowPreview}
-									isCommentFormActive={replyForm.isActive}
-									setIsCommentFormActive={setReplyFormActive}
-									error={replyForm.error}
-									setError={setReplyFormError}
-									pickError={pickError}
-									setPickError={setPickError}
-									userNameMissing={replyForm.userNameMissing}
-									setUserNameMissing={setReplyFormUserMissing}
-									previewBody={replyForm.previewBody}
-									setPreviewBody={setReplyFormPreviewBody}
-									body={replyForm.body}
-									setBody={setReplyFormBody}
-									reportAbuse={reportAbuse}
-								/>
-							</li>
-						))}
+					{comments.map((comment) => (
+						<li key={comment.id}>
+							<CommentContainer
+								comment={comment}
+								isClosedForComments={isClosedForComments}
+								shortUrl={shortUrl}
+								user={user}
+								threads={filters.threads}
+								commentBeingRepliedTo={commentBeingRepliedTo}
+								setCommentBeingRepliedTo={
+									setCommentBeingRepliedTo
+								}
+								commentToScrollTo={commentToScrollTo}
+								mutes={mutes}
+								toggleMuteStatus={toggleMuteStatus}
+								onPermalinkClick={onPermalinkClick}
+								error={replyForm.error}
+								setError={setReplyFormError}
+								pickError={pickError}
+								setPickError={setPickError}
+								userNameMissing={replyForm.userNameMissing}
+								setUserNameMissing={setReplyFormUserMissing}
+								previewBody={replyForm.previewBody}
+								setPreviewBody={setReplyFormPreviewBody}
+								reportAbuse={reportAbuse}
+								expandCommentReplies={expandCommentReplies}
+							/>
+						</li>
+					))}
 				</ul>
 			)}
-			{loadingMore && <LoadingComments />}
 			{showPagination && (
 				<footer css={footerStyles}>
 					<Pagination
@@ -480,18 +406,12 @@ export const Comments = ({
 					onAddComment={onAddComment}
 					user={user}
 					onPreview={onPreview}
-					showPreview={bottomForm.showPreview}
-					setShowPreview={setBottomFormShowPreview}
-					isActive={bottomForm.isActive}
-					setIsActive={setBottomFormActive}
 					error={bottomForm.error}
 					setError={setBottomFormError}
 					userNameMissing={bottomForm.userNameMissing}
 					setUserNameMissing={setBottomFormUserMissing}
 					previewBody={bottomForm.previewBody}
 					setPreviewBody={setBottomFormPreviewBody}
-					body={bottomForm.body}
-					setBody={setBottomFormBody}
 				/>
 			)}
 		</div>

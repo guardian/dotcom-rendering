@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { CommentType, Reader, ReplyType } from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { CommentType, Reader } from '../../types/discussion';
 import { CommentContainer } from './CommentContainer';
 
 export default { title: 'Discussion/CommentContainer' };
@@ -35,7 +35,7 @@ const commentData: CommentType = {
 	},
 };
 
-const threadComment: CommentType = {
+const threadComment: ReplyType = {
 	id: 25488498,
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 	date: '26 July 2013 4:35pm',
@@ -70,7 +70,7 @@ const threadComment: CommentType = {
 	},
 };
 
-const threadCommentWithLongUsernames: CommentType = {
+const threadCommentWithLongUsernames: ReplyType = {
 	id: 25488498,
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 	date: '26 July 2013 4:35pm',
@@ -130,7 +130,7 @@ const commentDataWithLongThread: CommentType = {
 		staffCommenterCount: 1,
 		editorsPickCount: 0,
 		blockedCount: 0,
-		responseCount: 5,
+		responseCount: 3,
 	},
 };
 
@@ -164,23 +164,17 @@ const aUser: Reader = {
 
 const commentDataThreaded: CommentType = {
 	...commentData,
-	...{
-		responses: [threadComment],
-	},
+	responses: [threadComment],
 };
 
 const commentDataThreadedWithLongThread: CommentType = {
 	...commentDataWithLongThread,
-	...{
-		responses: [threadComment],
-	},
+	responses: [threadComment],
 };
 
 const commentDataThreadedWithLongUserNames: CommentType = {
 	...commentData,
-	...{
-		responses: [threadCommentWithLongUsernames],
-	},
+	responses: [threadCommentWithLongUsernames],
 };
 
 const format = {
@@ -200,10 +194,6 @@ export const defaultStory = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -212,9 +202,8 @@ export const defaultStory = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -241,10 +230,6 @@ export const threadedComment = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -253,9 +238,8 @@ export const threadedComment = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -282,10 +266,6 @@ export const threadedCommentWithShowMore = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -294,9 +274,8 @@ export const threadedCommentWithShowMore = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -323,10 +302,6 @@ export const threadedCommentWithLongUsernames = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -335,9 +310,8 @@ export const threadedCommentWithLongUsernames = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -364,10 +338,6 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
-		showPreview={false}
-		setShowPreview={() => {}}
-		isCommentFormActive={false}
-		setIsCommentFormActive={() => {}}
 		error={''}
 		setError={() => {}}
 		pickError={''}
@@ -376,9 +346,8 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setUserNameMissing={() => {}}
 		previewBody=""
 		setPreviewBody={() => {}}
-		body={''}
-		setBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
+		expandCommentReplies={() => {}}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =

@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { SignedInUser } from '../../lib/discussion';
 import { ok } from '../../lib/result';
 import { palette as themePalette } from '../../palette';
-import type { SignedInUser } from '../../types/discussion';
 import { RecommendationCount } from './RecommendationCount';
 
 export default { title: 'Discussion/RecommendationCount' };

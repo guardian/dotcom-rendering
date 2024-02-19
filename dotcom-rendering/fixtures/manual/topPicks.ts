@@ -1,4 +1,4 @@
-import type { GetDiscussionSuccess } from '../../src/types/discussion';
+import type { GetDiscussionSuccess } from '../../src/lib/discussion';
 
 export const topPicks = {
 	status: 'ok',
@@ -40,6 +40,7 @@ export const topPicks = {
 						},
 					],
 				},
+				responses: [],
 			},
 			{
 				id: 37772513,
@@ -64,6 +65,7 @@ export const topPicks = {
 						},
 					],
 				},
+				responses: [],
 			},
 		],
 	},

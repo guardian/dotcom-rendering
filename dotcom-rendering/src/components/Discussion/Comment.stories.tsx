@@ -1,7 +1,12 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type {
+	CommentType,
+	Reader,
+	ReplyType,
+	Staff,
+} from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { CommentType, Reader, Staff } from '../../types/discussion';
 import { Comment } from './Comment';
 
 type Props = Parameters<typeof Comment>[0];
@@ -65,8 +70,9 @@ const blockedCommentData = {
 	body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 };
 
-const replyCommentData: CommentType = {
+const replyCommentData: ReplyType = {
 	...commentData,
+	responses: undefined,
 	responseTo: {
 		displayName: 'ArtVandelay',
 		commentApiUrl: '',
@@ -77,8 +83,9 @@ const replyCommentData: CommentType = {
 	},
 };
 
-const longReplyCommentData: CommentType = {
+const longReplyCommentData: ReplyType = {
 	...commentData,
+	responses: undefined,
 	responseTo: {
 		displayName: 'ArtVandelayWithAVeryLongUserName',
 		commentApiUrl: '',
@@ -89,8 +96,9 @@ const longReplyCommentData: CommentType = {
 	},
 };
 
-const longBothReplyCommentData: CommentType = {
+const longBothReplyCommentData: ReplyType = {
 	...commentData,
+	responses: undefined,
 	userProfile: {
 		...commentData.userProfile,
 		displayName: 'AVeryLongUserNameForThisUserToo',

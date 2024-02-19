@@ -5,12 +5,12 @@ import {
 	palette as sourcePalette,
 } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
-import { TagFrontLayout } from '../layouts/TagFrontLayout';
+import { TagPageLayout } from '../layouts/TagPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import { paletteDeclarations } from '../palette';
-import type { DCRTagFrontType } from '../types/tagFront';
+import type { DCRTagPageType } from '../types/tagPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -20,7 +20,7 @@ import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	tagFront: DCRTagFrontType;
+	tagPage: DCRTagPageType;
 	NAV: NavType;
 };
 
@@ -32,14 +32,14 @@ type Props = {
  * @param {DCRFrontType} props.front - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * */
-export const TagFrontPage = ({ tagFront, NAV }: Props) => {
+export const TagPage = ({ tagPage, NAV }: Props) => {
 	const adTargeting = buildAdTargeting({
-		isAdFreeUser: tagFront.isAdFreeUser,
-		isSensitive: tagFront.config.isSensitive,
-		edition: tagFront.config.edition,
-		section: tagFront.config.section,
-		sharedAdTargeting: tagFront.config.sharedAdTargeting,
-		adUnit: tagFront.config.adUnit,
+		isAdFreeUser: tagPage.isAdFreeUser,
+		isSensitive: tagPage.config.isSensitive,
+		edition: tagPage.config.edition,
+		section: tagPage.config.section,
+		sharedAdTargeting: tagPage.config.sharedAdTargeting,
+		adUnit: tagPage.config.adUnit,
 	});
 
 	/* We use this as our "base" or default format */
@@ -83,25 +83,25 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 			<Island priority="critical">
 				<Metrics
 					commercialMetricsEnabled={
-						!!tagFront.config.switches.commercialMetrics
+						!!tagPage.config.switches.commercialMetrics
 					}
-					tests={tagFront.config.abTests}
+					tests={tagPage.config.abTests}
 				/>
 			</Island>
 			<Island priority="critical">
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
-						tagFront.config.switches,
+						tagPage.config.switches,
 					)}
-					pageIsSensitive={tagFront.config.isSensitive}
-					isDev={!!tagFront.config.isDev}
-					serverSideTests={tagFront.config.abTests}
+					pageIsSensitive={tagPage.config.isSensitive}
+					isDev={!!tagPage.config.isDev}
+					serverSideTests={tagPage.config.abTests}
 				/>
 			</Island>
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			<TagFrontLayout tagFront={tagFront} NAV={NAV} />
+			<TagPageLayout tagPage={tagPage} NAV={NAV} />
 		</StrictMode>
 	);
 };

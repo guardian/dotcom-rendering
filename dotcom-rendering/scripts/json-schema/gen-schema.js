@@ -5,7 +5,7 @@ const {
 	getArticleSchema,
 	getFrontSchema,
 	getNewsletterPageSchema,
-	getTagFrontSchema,
+	getTagPageSchema,
 	getBlockSchema,
 } = require('./get-schema');
 
@@ -13,7 +13,7 @@ const root = path.resolve(__dirname, '..', '..');
 
 const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
-const tagFrontSchema = getTagFrontSchema();
+const tagPageSchema = getTagPageSchema();
 const newsletterPageSchema = getNewsletterPageSchema();
 const blockSchema = getBlockSchema();
 
@@ -40,8 +40,8 @@ fs.writeFile(
 );
 
 fs.writeFile(
-	`${root}/src/model/tag-front-schema.json`,
-	tagFrontSchema,
+	`${root}/src/model/tag-page-schema.json`,
+	tagPageSchema,
 	'utf8',
 	(err) => {
 		if (err) {

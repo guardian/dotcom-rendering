@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import type { CommentType, Reader } from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { CommentType, Reader } from '../../types/discussion';
 import { CommentForm } from './CommentForm';
 
 export default { component: CommentForm, title: 'Discussion/CommentForm' };
@@ -73,26 +73,17 @@ const aComment: CommentType = {
 };
 
 export const Default = () => {
-	const [isActive, setIsActive] = useState(false);
-	const [body, setBody] = useState('');
-
 	return (
 		<CommentForm
 			shortUrl={shortUrl}
 			user={aUser}
 			onAddComment={(comment) => {}}
-			isActive={isActive}
-			setIsActive={setIsActive}
-			showPreview={false}
-			setShowPreview={() => {}}
 			userNameMissing={false}
 			setUserNameMissing={() => {}}
 			error={''}
 			setError={() => {}}
 			previewBody=""
 			setPreviewBody={() => {}}
-			body={body}
-			setBody={setBody}
 		/>
 	);
 };
@@ -102,27 +93,19 @@ Default.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 // This story has a mocked post endpoint that returns an error, see 97d6eab4a98917f63bc96a7ac64f7ca7
 
 export const Error = () => {
-	const [isActive, setIsActive] = useState(false);
 	const [userNameMissing, setUserNameMissing] = useState(false);
-	const [body, setBody] = useState('');
 
 	return (
 		<CommentForm
 			shortUrl={'/p/g8g7v'}
 			user={aUser}
 			onAddComment={(comment) => {}}
-			isActive={isActive}
-			setIsActive={setIsActive}
-			showPreview={false}
-			setShowPreview={() => {}}
 			userNameMissing={userNameMissing}
 			setUserNameMissing={setUserNameMissing}
 			error={''}
 			setError={() => {}}
 			previewBody=""
 			setPreviewBody={() => {}}
-			body={body}
-			setBody={setBody}
 		/>
 	);
 };
@@ -131,26 +114,18 @@ Error.storyName = 'form with errors';
 Error.decorators = [splitTheme([defaultFormat], { orientation: 'vertical' })];
 
 export const Active = () => {
-	const [body, setBody] = useState('');
-
 	return (
 		<CommentForm
 			shortUrl={shortUrl}
 			user={aUser}
 			onAddComment={(comment) => {}}
 			commentBeingRepliedTo={aComment}
-			showPreview={false}
-			setShowPreview={() => {}}
-			isActive={true}
-			setIsActive={() => {}}
 			error={''}
 			setError={() => {}}
 			userNameMissing={false}
 			setUserNameMissing={() => {}}
 			previewBody=""
 			setPreviewBody={() => {}}
-			body={body}
-			setBody={setBody}
 		/>
 	);
 };
@@ -168,8 +143,6 @@ Active.decorators = [
 ];
 
 export const Premoderated = () => {
-	const [body, setBody] = useState('');
-
 	return (
 		<CommentForm
 			shortUrl={shortUrl}
@@ -186,18 +159,12 @@ export const Premoderated = () => {
 			}}
 			onAddComment={(comment) => {}}
 			commentBeingRepliedTo={aComment}
-			showPreview={false}
-			setShowPreview={() => {}}
-			isActive={true}
-			setIsActive={() => {}}
 			error={''}
 			setError={() => {}}
 			userNameMissing={false}
 			setUserNameMissing={() => {}}
 			previewBody=""
 			setPreviewBody={() => {}}
-			body={body}
-			setBody={setBody}
 		/>
 	);
 };
