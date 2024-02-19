@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { paletteDeclarations } from '../../src/palette';
+import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 import {
 	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Decorator } from '@storybook/react';
+import { Decorator, type StrictArgs } from '@storybook/react';
 import { ArticleFormat } from '@guardian/libs';
 
 const darkStoryCss = css`
@@ -27,7 +27,7 @@ const lightStoryCss = css`
  */
 const colourSchemeDecorator =
 	(colourScheme: 'light' | 'dark') =>
-	(formats: ArticleFormat[]): Decorator =>
+	<Args = StrictArgs,>(formats: ArticleFormat[]): Decorator<Args> =>
 	(Story, context) => (
 		<>
 			{formats.map((format) => (

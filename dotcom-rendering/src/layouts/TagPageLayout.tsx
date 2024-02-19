@@ -23,21 +23,21 @@ import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
-import { TagFrontHeader } from '../components/TagFrontHeader';
+import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getEditionFromId } from '../lib/edition';
 import {
-	getTagFrontMobileAdPositions,
-	getTagFrontsBannerAdPositions,
-} from '../lib/getTagFrontsAdPositions';
+	getTagPageBannerAdPositions,
+	getTagPageMobileAdPositions,
+} from '../lib/getTagPageAdPositions';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { DCRTagFrontType } from '../types/tagFront';
+import type { DCRTagPageType } from '../types/tagPage';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
-	tagFront: DCRTagFrontType;
+	tagPage: DCRTagPageType;
 	NAV: NavType;
 }
 
@@ -105,19 +105,19 @@ const SectionLeftContent = ({
 	);
 };
 
-export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
+export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
-	} = tagFront;
+	} = tagPage;
 
-	const renderAds = canRenderAds(tagFront);
+	const renderAds = canRenderAds(tagPage);
 
 	const desktopAdPositions = renderAds
-		? getTagFrontsBannerAdPositions(tagFront.groupedTrails.length)
+		? getTagPageBannerAdPositions(tagPage.groupedTrails.length)
 		: [];
 
 	const mobileAdPositions = renderAds
-		? getTagFrontMobileAdPositions(tagFront.groupedTrails)
+		? getTagPageMobileAdPositions(tagPage.groupedTrails)
 		: [];
 
 	return (
@@ -148,11 +148,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						element="header"
 					>
 						<Header
-							editionId={tagFront.editionId}
-							idUrl={tagFront.config.idUrl}
-							mmaUrl={tagFront.config.mmaUrl}
-							discussionApiUrl={tagFront.config.discussionApiUrl}
-							urls={tagFront.nav.readerRevenueLinks.header}
+							editionId={tagPage.editionId}
+							idUrl={tagPage.config.idUrl}
+							mmaUrl={tagPage.config.mmaUrl}
+							discussionApiUrl={tagPage.config.discussionApiUrl}
+							urls={tagPage.nav.readerRevenueLinks.header}
 							remoteHeader={!!switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
@@ -175,9 +175,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							displayRoundel={false}
 							selectedPillar={NAV.selectedPillar}
 							subscribeUrl={
-								tagFront.nav.readerRevenueLinks.header.subscribe
+								tagPage.nav.readerRevenueLinks.header.subscribe
 							}
-							editionId={tagFront.editionId}
+							editionId={tagPage.editionId}
 							headerTopBarSwitch={!!switches.headerTopNav}
 						/>
 					</Section>
@@ -224,14 +224,14 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 				</>
 			</div>
 
-			<main data-layout="FrontLayout" id="maincontent">
-				<TagFrontHeader
-					title={tagFront.header.title}
-					description={tagFront.header.description}
-					image={tagFront.header.image}
+			<main data-layout="TagPageLayout" id="maincontent">
+				<TagPageHeader
+					title={tagPage.header.title}
+					description={tagPage.header.description}
+					image={tagPage.header.image}
 				/>
-				{tagFront.groupedTrails.map((groupedTrails, index) => {
-					const locale = getEditionFromId(tagFront.editionId).locale;
+				{tagPage.groupedTrails.map((groupedTrails, index) => {
+					const locale = getEditionFromId(tagPage.editionId).locale;
 					const date = new Date(
 						groupedTrails.year,
 						groupedTrails.month,
@@ -256,7 +256,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 					const url =
 						groupedTrails.day !== undefined
-							? `/${tagFront.pageId}/${groupedTrails.year}/${date
+							? `/${tagPage.pageId}/${groupedTrails.year}/${date
 									.toLocaleDateString(locale, {
 										month: 'long',
 									})
@@ -296,29 +296,29 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								ophanComponentName={containedId}
 								sectionId={containedId}
 								toggleable={false}
-								pageId={tagFront.pageId}
-								editionId={tagFront.editionId}
+								pageId={tagPage.pageId}
+								editionId={tagPage.editionId}
 								canShowMore={false}
-								ajaxUrl={tagFront.config.ajaxUrl}
+								ajaxUrl={tagPage.config.ajaxUrl}
 								pagination={
-									index === tagFront.groupedTrails.length - 1
-										? tagFront.pagination
+									index === tagPage.groupedTrails.length - 1
+										? tagPage.pagination
 										: undefined
 								}
 								discussionApiUrl={
-									tagFront.config.discussionApiUrl
+									tagPage.config.discussionApiUrl
 								}
 							>
 								<DecideContainerByTrails
 									trails={groupedTrails.trails}
-									speed={tagFront.speed}
+									speed={tagPage.speed}
 									imageLoading={imageLoading}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(
 								renderAds,
 								index,
-								tagFront.groupedTrails.length,
+								tagPage.groupedTrails.length,
 								isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
@@ -333,7 +333,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 				showTopBorder={false}
 				data-component="trending-topics"
 			>
-				<TrendingTopics trendingTopics={tagFront.trendingTopics} />
+				<TrendingTopics trendingTopics={tagPage.trendingTopics} />
 			</Section>
 
 			{decideMerchandisingSlot(renderAds, hasPageSkin)}
@@ -368,11 +368,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 				element="footer"
 			>
 				<Footer
-					pageFooter={tagFront.pageFooter}
+					pageFooter={tagPage.pageFooter}
 					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
-					urls={tagFront.nav.readerRevenueLinks.header}
-					editionId={tagFront.editionId}
+					urls={tagPage.nav.readerRevenueLinks.header}
+					editionId={tagPage.editionId}
 					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
 			</Section>

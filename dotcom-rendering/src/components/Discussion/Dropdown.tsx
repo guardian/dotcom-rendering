@@ -1,13 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	palette as sourcePalette,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { from, textSans, until } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
+import type { DropdownOptionType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
-import type { DropdownOptionType } from '../../types/discussion';
 
 type Props = {
 	id: string;
@@ -23,11 +18,11 @@ const containerStyles = css`
 const ulStyles = css`
 	z-index: 2;
 	list-style: none;
-	border: 1px solid ${sourcePalette.neutral[86]};
+	border: 1px solid ${schemedPalette('--discussion-border')};
 	margin-left: -8px;
 	padding: 0px;
 	display: none;
-	background-color: ${sourcePalette.neutral[100]};
+	background-color: ${schemedPalette('--discussion-background')};
 
 	position: absolute;
 
@@ -50,7 +45,9 @@ const ulExpanded = css`
 const linkStyles = (disabled: boolean) => css`
 	${textSans.small()};
 	text-align: left;
-	color: ${disabled ? sourcePalette.neutral[86] : sourcePalette.neutral[46]};
+	color: ${disabled
+		? schemedPalette('--discussion-text')
+		: schemedPalette('--discussion-subdued')};
 	position: relative;
 	text-decoration: none;
 	margin-top: 1px;
@@ -66,7 +63,7 @@ const linkStyles = (disabled: boolean) => css`
 	${!disabled &&
 	`
     :hover {
-      background-color: ${sourcePalette.neutral[93]};
+      background-color: ${schemedPalette('--discussion-background')};
       text-decoration: underline;
     }
 
@@ -85,7 +82,7 @@ const activeStyles = css`
 
 	:after {
 		content: '';
-		border: 2px solid ${schemedPalette('--discussion-colour')};
+		border: 2px solid ${schemedPalette('--discussion-accent-text')};
 		border-top: 0px;
 		border-right: 0px;
 		position: absolute;
@@ -112,8 +109,6 @@ const buttonStyles = css`
 	text-decoration: none;
 
 	:hover {
-		/* color: ${sourcePalette.brandAlt[400]}; */
-
 		:after {
 			transform: translateY(0) rotate(45deg);
 		}

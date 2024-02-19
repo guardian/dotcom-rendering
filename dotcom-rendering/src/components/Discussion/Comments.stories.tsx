@@ -1,13 +1,16 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { useState } from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
 import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
+import type {
+	CommentFormProps,
+	FilterOptions,
+	Reader,
+} from '../../lib/discussion';
 import { ok } from '../../lib/result';
-import type { FilterOptions, Reader } from '../../types/discussion';
 import { Comments } from './Comments';
 
 export default { component: Comments, title: 'Discussion/App' };
@@ -53,13 +56,10 @@ const filters: FilterOptions = {
 };
 
 const defaultCommentForm = {
-	isActive: false,
 	userNameMissing: false,
 	error: '',
-	showPreview: false,
 	previewBody: '',
-	body: '',
-};
+} satisfies CommentFormProps;
 
 export const LoggedOutHiddenPicks = () => (
 	<div
@@ -88,32 +88,25 @@ export const LoggedOutHiddenPicks = () => (
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
+			addComment={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
-			setTopFormShowPreview={() => {}}
-			setReplyFormShowPreview={() => {}}
-			setBottomFormShowPreview={() => {}}
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
-			setTopFormBody={() => {}}
-			setReplyFormBody={() => {}}
-			setBottomFormBody={() => {}}
 			pickError=""
 			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -154,32 +147,25 @@ export const InitialPage = () => (
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
+			addComment={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
-			setTopFormShowPreview={() => {}}
-			setReplyFormShowPreview={() => {}}
-			setBottomFormShowPreview={() => {}}
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
-			setTopFormBody={() => {}}
-			setReplyFormBody={() => {}}
-			setBottomFormBody={() => {}}
 			pickError=""
 			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -194,9 +180,6 @@ InitialPage.decorators = [
 ];
 
 export const LoggedInHiddenNoPicks = () => {
-	const [isActive, setActive] = useState(false);
-	const [body, setBody] = useState('');
-
 	return (
 		<div
 			css={css`
@@ -225,32 +208,25 @@ export const LoggedInHiddenNoPicks = () => {
 				}
 				loading={false}
 				comments={discussionMock.discussion.comments}
-				setComment={() => {}}
+				addComment={() => {}}
+				addReply={() => {}}
 				handleFilterChange={() => {}}
-				setTopFormActive={() => {}}
-				setReplyFormActive={setActive}
-				setBottomFormActive={() => {}}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
 				setTopFormError={() => {}}
 				setReplyFormError={() => {}}
 				setBottomFormError={() => {}}
-				setTopFormShowPreview={() => {}}
-				setReplyFormShowPreview={() => {}}
-				setBottomFormShowPreview={() => {}}
 				setTopFormPreviewBody={() => {}}
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
-				setTopFormBody={() => {}}
-				setReplyFormBody={setBody}
-				setBottomFormBody={() => {}}
 				pickError=""
 				setPickError={() => {}}
 				topForm={defaultCommentForm}
-				replyForm={{ ...defaultCommentForm, isActive, body }}
+				replyForm={{ ...defaultCommentForm }}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -260,13 +236,6 @@ LoggedInHiddenNoPicks.storyName =
 LoggedInHiddenNoPicks.decorators = [splitTheme([format])];
 
 export const LoggedIn = () => {
-	const [isTopFormActive, setTopFormActive] = useState(false);
-	const [isReplyFormActive, setReplyFormActive] = useState(false);
-	const [isBottomFormActive, setBottomFormActive] = useState(false);
-	const [topFormBody, setTopFormBody] = useState('');
-	const [replyFormBody, setReplyFormBody] = useState('');
-	const [bottomFormBody, setBottomFormBody] = useState('');
-
 	return (
 		<div
 			css={css`
@@ -295,44 +264,25 @@ export const LoggedIn = () => {
 				}
 				loading={false}
 				comments={discussionMock.discussion.comments}
-				setComment={() => {}}
+				addComment={() => {}}
+				addReply={() => {}}
 				handleFilterChange={() => {}}
-				setTopFormActive={setTopFormActive}
-				setReplyFormActive={setReplyFormActive}
-				setBottomFormActive={setBottomFormActive}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
 				setTopFormError={() => {}}
 				setReplyFormError={() => {}}
 				setBottomFormError={() => {}}
-				setTopFormShowPreview={() => {}}
-				setReplyFormShowPreview={() => {}}
-				setBottomFormShowPreview={() => {}}
 				setTopFormPreviewBody={() => {}}
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
 				pickError=""
 				setPickError={() => {}}
-				setTopFormBody={setTopFormBody}
-				setReplyFormBody={setReplyFormBody}
-				setBottomFormBody={setBottomFormBody}
-				topForm={{
-					...defaultCommentForm,
-					isActive: isTopFormActive,
-					body: topFormBody,
-				}}
-				replyForm={{
-					...defaultCommentForm,
-					isActive: isReplyFormActive,
-					body: replyFormBody,
-				}}
-				bottomForm={{
-					...defaultCommentForm,
-					isActive: isBottomFormActive,
-					body: bottomFormBody,
-				}}
+				topForm={defaultCommentForm}
+				replyForm={defaultCommentForm}
+				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -341,11 +291,6 @@ LoggedIn.storyName = 'when logged in and expanded';
 LoggedIn.decorators = [lightDecorator([format])];
 
 export const LoggedInShortDiscussion = () => {
-	const [isTopFormActive, setTopFormActive] = useState(false);
-	const [isReplyFormActive, setReplyFormActive] = useState(false);
-	const [topFormBody, setTopFormBody] = useState('');
-	const [replyFormBody, setReplyFormBody] = useState('');
-
 	return (
 		<div
 			css={css`
@@ -374,40 +319,25 @@ export const LoggedInShortDiscussion = () => {
 				}
 				loading={false}
 				comments={discussionWithTwoComments.discussion.comments}
-				setComment={() => {}}
+				addComment={() => {}}
+				addReply={() => {}}
 				handleFilterChange={() => {}}
-				setTopFormActive={setTopFormActive}
-				setReplyFormActive={setReplyFormActive}
-				setBottomFormActive={() => {}}
 				setTopFormUserMissing={() => {}}
 				setReplyFormUserMissing={() => {}}
 				setBottomFormUserMissing={() => {}}
 				setTopFormError={() => {}}
 				setReplyFormError={() => {}}
 				setBottomFormError={() => {}}
-				setTopFormShowPreview={() => {}}
-				setReplyFormShowPreview={() => {}}
-				setBottomFormShowPreview={() => {}}
 				setTopFormPreviewBody={() => {}}
 				setReplyFormPreviewBody={() => {}}
 				setBottomFormPreviewBody={() => {}}
-				setTopFormBody={setTopFormBody}
-				setReplyFormBody={setReplyFormBody}
-				setBottomFormBody={() => {}}
 				pickError=""
 				setPickError={() => {}}
-				topForm={{
-					...defaultCommentForm,
-					isActive: isTopFormActive,
-					body: topFormBody,
-				}}
-				replyForm={{
-					...defaultCommentForm,
-					isActive: isReplyFormActive,
-					body: replyFormBody,
-				}}
+				topForm={defaultCommentForm}
+				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -441,32 +371,25 @@ export const LoggedOutHiddenNoPicks = () => (
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
+			addComment={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
-			setTopFormShowPreview={() => {}}
-			setReplyFormShowPreview={() => {}}
-			setBottomFormShowPreview={() => {}}
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
-			setTopFormBody={() => {}}
-			setReplyFormBody={() => {}}
-			setBottomFormBody={() => {}}
 			pickError=""
 			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -509,32 +432,25 @@ export const Closed = () => (
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			setComment={() => {}}
+			addComment={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
-			setTopFormShowPreview={() => {}}
-			setReplyFormShowPreview={() => {}}
-			setBottomFormShowPreview={() => {}}
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
-			setTopFormBody={() => {}}
-			setReplyFormBody={() => {}}
-			setBottomFormBody={() => {}}
 			pickError=""
 			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -573,32 +489,25 @@ export const NoComments = () => (
 			topLevelCommentCount={0}
 			loading={false}
 			comments={[]}
-			setComment={() => {}}
+			addComment={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
-			setTopFormShowPreview={() => {}}
-			setReplyFormShowPreview={() => {}}
-			setBottomFormShowPreview={() => {}}
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
-			setTopFormBody={() => {}}
-			setReplyFormBody={() => {}}
-			setBottomFormBody={() => {}}
 			pickError=""
 			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -639,32 +548,25 @@ export const LegacyDiscussion = () => (
 			}
 			loading={false}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
-			setComment={() => {}}
+			addComment={() => {}}
+			addReply={() => {}}
 			handleFilterChange={() => {}}
-			setTopFormActive={() => {}}
-			setReplyFormActive={() => {}}
-			setBottomFormActive={() => {}}
 			setTopFormUserMissing={() => {}}
 			setReplyFormUserMissing={() => {}}
 			setBottomFormUserMissing={() => {}}
 			setTopFormError={() => {}}
 			setReplyFormError={() => {}}
 			setBottomFormError={() => {}}
-			setTopFormShowPreview={() => {}}
-			setReplyFormShowPreview={() => {}}
-			setBottomFormShowPreview={() => {}}
 			setTopFormPreviewBody={() => {}}
 			setReplyFormPreviewBody={() => {}}
 			setBottomFormPreviewBody={() => {}}
-			setTopFormBody={() => {}}
-			setReplyFormBody={() => {}}
-			setBottomFormBody={() => {}}
 			pickError=""
 			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			expandCommentReplies={() => {}}
 		/>
 	</div>
 );

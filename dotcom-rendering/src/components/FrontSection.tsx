@@ -14,7 +14,7 @@ import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import type { CollectionBranding } from '../types/branding';
 import type { DCRContainerPalette, TreatType } from '../types/front';
-import type { DCRFrontPagination } from '../types/tagFront';
+import type { DCRFrontPagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 import { ContainerTitle } from './ContainerTitle';

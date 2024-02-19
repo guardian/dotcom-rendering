@@ -14,7 +14,7 @@ type FormData = {
 
 const formWrapper = css`
 	z-index: 1;
-	border: 1px solid ${schemedPalette('--discussion-report-border')};
+	border: 1px solid ${schemedPalette('--discussion-border')};
 	position: absolute;
 	width: 300px;
 	top: 0;
@@ -27,7 +27,7 @@ const formWrapper = css`
 `;
 
 const labelStyles = css`
-	color: ${schemedPalette('--discussion-colour')};
+	color: ${schemedPalette('--discussion-accent-text')};
 	${textSans.small({ fontWeight: 'bold' })}
 `;
 
@@ -46,7 +46,7 @@ const inputWrapper = css`
 		background-color: ${schemedPalette('--discussion-report-background')};
 		min-height: ${space[5]}px;
 		width: 75%;
-		border: 1px solid ${schemedPalette('--discussion-report-border')};
+		border: 1px solid ${schemedPalette('--discussion-border')};
 		color: inherit;
 	}
 `;
@@ -177,6 +177,10 @@ export const AbuseReportForm = ({
 			});
 	};
 
+	/** If the "Other" category is selected, you must supply a reason */
+	const otherCategoryId = 9;
+	const isReasonRequired = formVariables.categoryId === otherCategoryId;
+
 	return (
 		<div aria-modal="true" ref={modalRef}>
 			<form css={formWrapper} onSubmit={onSubmit}>
@@ -208,7 +212,7 @@ export const AbuseReportForm = ({
 						</option>
 						<option value="7">Copyright</option>
 						<option value="8">Spam</option>
-						<option value="9">Other</option>
+						<option value={otherCategoryId}>Other</option>
 					</select>
 					{!!errors.categoryId && (
 						<span css={errorMessageStyles}>
@@ -219,7 +223,7 @@ export const AbuseReportForm = ({
 
 				<div css={inputWrapper}>
 					<label css={labelStyles} htmlFor="reason">
-						Reason (optional)
+						Reason {isReasonRequired ? `` : `(optional)`}
 					</label>
 					<textarea
 						name="reason"
@@ -231,6 +235,7 @@ export const AbuseReportForm = ({
 							})
 						}
 						value={formVariables.reason}
+						required={isReasonRequired}
 					></textarea>
 					{!!errors.reason && (
 						<span css={errorMessageStyles}>{errors.reason}</span>

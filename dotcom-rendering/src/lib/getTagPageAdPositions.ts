@@ -1,4 +1,4 @@
-import type { GroupedTrailsBase } from '../types/tagFront';
+import type { GroupedTrailsBase } from '../types/tagPage';
 import {
 	MAX_FRONTS_BANNER_ADS,
 	MAX_FRONTS_MOBILE_ADS,
@@ -17,7 +17,7 @@ import {
  * The types are also slightly different, as we no longer have
  * specific container IDs, so we use the date which is unique
  */
-const getTagFrontMobileAdPositions = (
+const getTagPageMobileAdPositions = (
 	collections: Array<GroupedTrailsBase>,
 ): number[] => {
 	const merchHighPosition = getMerchHighPosition(collections.length);
@@ -45,7 +45,7 @@ const getTagFrontMobileAdPositions = (
  * Doesn't insert an ad above the final collection. We serve a merchandising slot below the
  * last collection and we don't want to sandwich the last collection between two full-width ads.
  */
-const getTagFrontsBannerAdPositions = (numCollections: number): number[] => {
+const getTagPageBannerAdPositions = (numCollections: number): number[] => {
 	if (numCollections <= 3) {
 		// There are no suitable positions to insert an ad.
 		return [];
@@ -59,4 +59,4 @@ const getTagFrontsBannerAdPositions = (numCollections: number): number[] => {
 	return Array.from({ length: numAdsToInsert }, (_, i) => i * 3 + 2);
 };
 
-export { getTagFrontMobileAdPositions, getTagFrontsBannerAdPositions };
+export { getTagPageMobileAdPositions, getTagPageBannerAdPositions };

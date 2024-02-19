@@ -22,8 +22,8 @@ import {
 import {
 	handleFront,
 	handleFrontJson,
-	handleTagFront,
-	handleTagFrontJson,
+	handleTagPage,
+	handleTagPageJson,
 } from './handler.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -68,8 +68,9 @@ export const prodServer = (): void => {
 	app.post('/Blocks', logRenderTime, handleBlocks);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
-	app.post('/TagFront', logRenderTime, handleTagFront);
-	app.post('/TagFrontJSON', logRenderTime, handleTagFrontJson);
+	app.post('/TagPage', logRenderTime, handleTagPage);
+	app.post('/TagPageJSON', logRenderTime, handleTagPageJson);
+
 	app.post(
 		'/EmailNewsletters',
 		logRenderTime,
@@ -108,16 +109,16 @@ export const prodServer = (): void => {
 	);
 
 	app.get(
-		'/TagFront/*',
+		'/TagPage/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleTagFront,
+		handleTagPage,
 	);
 	app.get(
-		'/TagFrontJSON/*',
+		'/TagPageJSON/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleTagFrontJson,
+		handleTagPageJson,
 	);
 
 	app.get(

@@ -1,17 +1,22 @@
 import { doHydration } from './islands/doHydration';
 import { getEmotionCache } from './islands/emotion';
 import { getConfig } from './islands/getConfig';
+import { getName } from './islands/getName';
 import { getProps } from './islands/getProps';
 
 const forceHydration = async (): Promise<void> => {
 	try {
-		const name = 'DiscussionContainer';
-
 		// Select the Discussion island element
-		const guElement = document.querySelector<HTMLElement>(
-			`gu-island[name=${name}]`,
+		const [guElement, ...rest] = document.querySelectorAll<HTMLElement>(
+			`gu-island[name=DiscussionWeb],gu-island[name=DiscussionApps]`,
 		);
+
+		// If no discussion island is found, or if there are multiple discussion islands, then we don't want to force hydration
 		if (!guElement) return;
+		if (rest.length > 0) return;
+
+		const name = getName(guElement);
+		if (!name) return;
 
 		// Read the props and config from where they have been serialised in the dom using an Island
 		const props = getProps(guElement);

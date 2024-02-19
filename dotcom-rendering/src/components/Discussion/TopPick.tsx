@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { palette as themePalette } from '../../palette';
-import type { CommentType, SignedInUser } from '../../types/discussion';
+import type {
+	CommentType,
+	ReplyType,
+	SignedInUser,
+} from '../../lib/discussion';
+import { palette as schemedPalette } from '../../palette';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianStaff } from './Badges';
 import { Column } from './Column';
@@ -16,7 +15,7 @@ import { Row } from './Row';
 import { Timestamp } from './Timestamp';
 
 type Props = {
-	comment: CommentType;
+	comment: CommentType | ReplyType;
 	userMadeComment: boolean;
 	onPermalinkClick: (commentId: number) => void;
 	user?: SignedInUser;
@@ -36,7 +35,7 @@ const pickStyles = css`
 		margin-left: ${space[5]}px;
 		margin-right: ${space[5]}px;
 		padding-left: ${space[2]}px;
-		color: ${sourcePalette.neutral[46]};
+		color: ${schemedPalette('--discussion-subdued')};
 	}
 `;
 
@@ -46,7 +45,7 @@ const userNameStyles = css`
 	margin-top: 3px;
 	margin-bottom: -6px;
 	font-weight: bold;
-	color: ${themePalette('--discussion-colour')};
+	color: ${schemedPalette('--discussion-accent-text')};
 `;
 
 const avatarMargin = css`
@@ -60,25 +59,25 @@ const smallFontSize = css`
 `;
 
 const linkStyles = css`
-	color: ${themePalette('--top-pick-link')};
+	color: ${schemedPalette('--discussion-top-pick-link')};
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
-		color: ${themePalette('--top-pick-link')};
+		color: ${schemedPalette('--discussion-top-pick-link')};
 	}
 `;
 
 const jumpToLinkStyles = css`
-	color: ${themePalette('--top-pick-link')};
+	color: ${schemedPalette('--discussion-top-pick-link')};
 	:hover {
-		color: ${themePalette('--top-pick-link')};
+		color: ${schemedPalette('--discussion-top-pick-link')};
 	}
 `;
 
 // to override a tag styles from dangerouslySetInnerHTML
 const inCommentLinkStyling = css`
 	a {
-		color: ${themePalette('--top-pick-link')};
+		color: ${schemedPalette('--discussion-top-pick-link')};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -109,7 +108,9 @@ const PickBubble = ({ children }: { children: React.ReactNode }) => (
 			justify-content: space-between;
 
 			padding: ${space[3]}px;
-			background-color: ${themePalette('--top-pick-background')};
+			background-color: ${schemedPalette(
+				'--discussion-top-pick-background',
+			)};
 			border-radius: 15px;
 			margin-bottom: ${arrowSize + 5}px;
 			position: relative;
@@ -124,7 +125,7 @@ const PickBubble = ({ children }: { children: React.ReactNode }) => (
 				position: absolute;
 				border-right: ${arrowSize}px solid transparent;
 				border-top: ${arrowSize}px solid
-					${themePalette('--top-pick-background')};
+					${schemedPalette('--discussion-top-pick-background')};
 				bottom: -${arrowSize - 1}px;
 			}
 

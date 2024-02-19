@@ -5,7 +5,7 @@ export default {
 	title: 'Components/FrontPagination',
 };
 
-export const tagFrontHeader = () => {
+export const tagPageHeader = () => {
 	return (
 		<>
 			<p>1st page, 10 total pages</p>

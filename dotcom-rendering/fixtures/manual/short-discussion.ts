@@ -1,4 +1,4 @@
-import type { GetDiscussionSuccess } from '../../src/types/discussion';
+import type { GetDiscussionSuccess } from '../../src/lib/discussion';
 
 export const shortDiscussion = {
 	status: 'ok',
@@ -36,6 +36,7 @@ export const shortDiscussion = {
 					webUrl: 'https://profile.theguardian.com/user/id/12173512',
 				},
 				webUrl: 'https://discussion.theguardian.com/comment-permalink/38591122',
+				responses: [],
 			},
 			{
 				apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/38649787',
@@ -56,6 +57,7 @@ export const shortDiscussion = {
 					webUrl: 'https://profile.theguardian.com/user/id/4431346',
 				},
 				webUrl: 'https://discussion.theguardian.com/comment-permalink/38649787',
+				responses: [],
 			},
 		],
 	},
