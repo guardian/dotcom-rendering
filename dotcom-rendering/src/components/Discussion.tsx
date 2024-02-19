@@ -8,6 +8,7 @@ import type {
 	CommentFormProps,
 	CommentType,
 	FilterOptions,
+	ReplyType,
 	SignedInUser,
 } from '../lib/discussion';
 import {
@@ -125,18 +126,13 @@ const remapToValidFilters = (
  */
 export const replaceMatchingCommentResponses =
 	(action: Action & { type: 'expandCommentReplies' }) =>
-	(comment: CommentType): CommentType => {
-		const responses =
-			comment.id === action.commentId
-				? action.responses
-				: comment.responses?.map(
-						replaceMatchingCommentResponses(action),
-				  );
-		return { ...comment, responses };
-	};
+	<T extends CommentType | ReplyType>(comment: T): T =>
+		comment.id === action.commentId
+			? { ...comment, responses: action.responses }
+			: comment;
 
 type State = {
-	comments: CommentType[];
+	comments: Array<CommentType | ReplyType>;
 	isClosedForComments: boolean;
 	isExpanded: boolean;
 	commentPage: number;
@@ -179,7 +175,7 @@ const initialState: State = {
 type Action =
 	| {
 			type: 'commentsLoaded';
-			comments: CommentType[];
+			comments: Array<CommentType | ReplyType>;
 			isClosedForComments: boolean;
 			commentCount: number;
 			topLevelCommentCount: number;
@@ -188,9 +184,10 @@ type Action =
 	| {
 			type: 'expandCommentReplies';
 			commentId: number;
-			responses: CommentType[];
+			responses: ReplyType[];
 	  }
 	| { type: 'addComment'; comment: CommentType }
+	| { type: 'addReply'; comment: ReplyType }
 	| { type: 'updateCommentPage'; commentPage: number }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
@@ -221,6 +218,23 @@ const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				comments: [action.comment, ...state.comments],
+				isExpanded: true,
+			};
+		case 'addReply':
+			return {
+				...state,
+				comments: state.comments.map((comment) =>
+					comment.responses &&
+					comment.id === Number(action.comment.responseTo.commentId)
+						? {
+								...comment,
+								responses: [
+									...comment.responses,
+									action.comment,
+								],
+						  }
+						: comment,
+				),
 				isExpanded: true,
 			};
 		case 'expandComments':
@@ -544,8 +558,11 @@ export const Discussion = ({
 							error,
 						})
 					}
-					setComment={(comment: CommentType) => {
+					addComment={(comment) => {
 						dispatch({ type: 'addComment', comment });
+					}}
+					addReply={(comment) => {
+						dispatch({ type: 'addReply', comment });
 					}}
 					handleFilterChange={(
 						newFilters: FilterOptions,

@@ -8,7 +8,12 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CommentType, SignedInUser, Staff } from '../../lib/discussion';
+import type {
+	CommentType,
+	ReplyType,
+	SignedInUser,
+	Staff,
+} from '../../lib/discussion';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
@@ -22,9 +27,11 @@ import { Timestamp } from './Timestamp';
 
 type Props = {
 	user?: SignedInUser;
-	comment: CommentType;
+	comment: CommentType | ReplyType;
 	isClosedForComments: boolean;
-	setCommentBeingRepliedTo: (commentBeingRepliedTo?: CommentType) => void;
+	setCommentBeingRepliedTo: (
+		commentBeingRepliedTo?: CommentType | ReplyType,
+	) => void;
 	isReply: boolean;
 	wasScrolledTo?: boolean;
 	isMuted: boolean;

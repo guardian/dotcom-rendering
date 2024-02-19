@@ -3724,7 +3724,51 @@ const syndicationButtonBorder: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[86];
 	}
 };
-const interactiveBlockBackground = () => sourcePalette.neutral[100];
+
+const interactiveBlockBackgroundLight: PaletteFunction = ({
+	design,
+	theme,
+	display,
+}) => {
+	switch (design) {
+		case ArticleDesign.Letter:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Comment:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.opinion[800];
+			}
+		case ArticleDesign.Editorial:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.news[800];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				case ArticleSpecial.Labs:
+					switch (display) {
+						case ArticleDisplay.Immersive:
+							return sourcePalette.neutral[100];
+						default:
+							return sourcePalette.neutral[97];
+					}
+				default:
+					return sourcePalette.neutral[100];
+			}
+	}
+};
+
+const interactiveBlockBackgroundDark = () => sourcePalette.neutral[100];
 
 const mostViewedHeadlineLight = (): string => sourcePalette.neutral[7];
 const mostViewedHeadlineDark = (): string => sourcePalette.neutral[86];
@@ -5397,8 +5441,8 @@ const paletteColours = {
 		dark: appsEpicBorderDark,
 	},
 	'--interactive-block-background': {
-		light: interactiveBlockBackground,
-		dark: interactiveBlockBackground,
+		light: interactiveBlockBackgroundLight,
+		dark: interactiveBlockBackgroundDark,
 	},
 	'--most-viewed-headline': {
 		light: mostViewedHeadlineLight,

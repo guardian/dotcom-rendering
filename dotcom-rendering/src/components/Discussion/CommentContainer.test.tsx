@@ -1,7 +1,11 @@
 import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
-import type { CommentType, SignedInUser } from '../../lib/discussion';
+import type {
+	CommentType,
+	ReplyType,
+	SignedInUser,
+} from '../../lib/discussion';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
@@ -54,10 +58,10 @@ describe('CommentContainer', () => {
 		const newCommentText = 'A brand new comment';
 
 		// a workaround to emulating hooks outside of render
-		let commentBeingRepliedTo: CommentType | undefined =
+		let commentBeingRepliedTo: CommentType | ReplyType | undefined =
 			commentWithoutReply;
 		const mockSetCommentBeingRepliedTo = jest.fn(
-			(newCommentBeingRepliedTo?: CommentType) => {
+			(newCommentBeingRepliedTo?: CommentType | ReplyType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
 		);
@@ -88,6 +92,7 @@ describe('CommentContainer', () => {
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
 					if (commentBeingRepliedTo?.id !== id) return;
+					if (!commentBeingRepliedTo.responses) return;
 					commentBeingRepliedTo.responses = responses;
 				}}
 			/>,
@@ -150,10 +155,10 @@ describe('CommentContainer', () => {
 		const newCommentText = 'A brand new comment';
 
 		// a workaround to emulating hooks outside of render
-		let commentBeingRepliedTo: CommentType | undefined =
+		let commentBeingRepliedTo: CommentType | ReplyType | undefined =
 			firstCommentResponse;
 		const mockSetCommentBeingRepliedTo = jest.fn(
-			(newCommentBeingRepliedTo?: CommentType) => {
+			(newCommentBeingRepliedTo?: CommentType | ReplyType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
 		);
@@ -184,6 +189,7 @@ describe('CommentContainer', () => {
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={(id, responses) => {
 					if (commentBeingRepliedTo?.id !== id) return;
+					if (!commentBeingRepliedTo.responses) return;
 					commentBeingRepliedTo.responses = responses;
 				}}
 			/>,
