@@ -346,7 +346,7 @@ importers:
         version: 7.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/braze-components':
         specifier: 18.0.0
-        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0)
+        version: 18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@19.0.0)(@guardian/source-react-components@22.0.1)(react@18.2.0)
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -372,8 +372,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/eslint-plugin-source-react-components':
-        specifier: 21.0.1
-        version: 21.0.1(@guardian/libs@16.0.1)(@guardian/source-react-components@18.0.0)(eslint@8.56.0)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 24.0.0
+        version: 24.0.0(@guardian/libs@16.0.1)(@guardian/source-react-components@22.0.1)(eslint@8.56.0)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth':
         specifier: 2.0.1
         version: 2.0.1(@guardian/libs@16.0.1)(tslib@2.6.2)(typescript@5.3.3)
@@ -396,11 +396,11 @@ importers:
         specifier: 14.1.4
         version: 14.1.4(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-react-components':
-        specifier: 18.0.0
-        version: 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 22.0.1
+        version: 22.0.1(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-react-components-development-kitchen':
-        specifier: 16.0.0
-        version: 16.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components@18.0.0)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 19.0.0
+        version: 19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components@22.0.1)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/support-dotcom-components':
         specifier: 1.1.3
         version: 1.1.3
@@ -4228,7 +4228,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@16.0.0)(@guardian/source-react-components@18.0.0)(react@18.2.0):
+  /@guardian/braze-components@18.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@19.0.0)(@guardian/source-react-components@22.0.1)(react@18.2.0):
     resolution: {integrity: sha512-tK0waGQj/dEwpssxEOlHw7/d9XXnkQqZai/2LFUSuHwDtbeTgZZfIsAd9DoX02qFHNZlzvRvbLlS48zKcPKHDw==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
@@ -4242,8 +4242,8 @@ packages:
       '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-foundations': 14.1.4(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components-development-kitchen': 16.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components@18.0.0)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-react-components': 22.0.1(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-react-components-development-kitchen': 19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components@22.0.1)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
       react: 18.2.0
     dev: false
 
@@ -4474,11 +4474,11 @@ packages:
       - supports-color
     dev: false
 
-  /@guardian/eslint-plugin-source-react-components@21.0.1(@guardian/libs@16.0.1)(@guardian/source-react-components@18.0.0)(eslint@8.56.0)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-erMqLMhgGbzJAjViZMNtE8DjrpJuRurreBBeuttbaxrIE3eKX2p3QTYJKxE0fqAyIRhTCV3/M+sil9RTifN1Xw==}
+  /@guardian/eslint-plugin-source-react-components@24.0.0(@guardian/libs@16.0.1)(@guardian/source-react-components@22.0.1)(eslint@8.56.0)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-CQpKTWgDsrRhzQcHEI62EQD36W9jQ/TDfMqF6umkNXyCby/WFs80YrgkkJreQmJJFUc5vXCzVdUXpPfB4mMong==}
     peerDependencies:
       '@guardian/libs': ^16.0.0
-      '@guardian/source-react-components': ^18.0.0
+      '@guardian/source-react-components': ^22.0.1
       eslint: ^8.56.0
       react: ^18.2.0
       tslib: ^2.6.2
@@ -4488,9 +4488,9 @@ packages:
         optional: true
     dependencies:
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
-      '@typescript-eslint/eslint-plugin': 6.18.0(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)(typescript@5.3.3)
-      '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
+      '@guardian/source-react-components': 22.0.1(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
+      '@typescript-eslint/eslint-plugin': 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
       eslint: 8.56.0
       react: 18.2.0
       tslib: 2.6.2
@@ -4682,13 +4682,13 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /@guardian/source-react-components-development-kitchen@16.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components@18.0.0)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-wJgQgPJIuahWS3nvHYhIsb0U/nsmmWyL2F6ID+so8Ft39/gEiyssPK/agqqWA0i/zUyttv5Fn3+Hk0tijau5+A==}
+  /@guardian/source-react-components-development-kitchen@19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.1)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components@22.0.1)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-YPqsLlwbuXNcD6dkUuzCCp/ytkwY7HH8ZozuuxlLhdwMFywFuvLRuCAp0q36gEBzcmuEU3eGjSIE823AKK9pfA==}
     peerDependencies:
       '@emotion/react': ^11.11.1
       '@guardian/libs': ^16.0.0
-      '@guardian/source-foundations': ^14.0.0
-      '@guardian/source-react-components': ^18.0.0
+      '@guardian/source-foundations': ^14.1.4
+      '@guardian/source-react-components': ^22.0.1
       react: ^18.2.0
       tslib: ^2.6.2
       typescript: ~5.3.3
@@ -4699,7 +4699,7 @@ packages:
       '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-foundations': 14.1.4(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-react-components': 22.0.1(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
       react: 18.2.0
       tslib: 2.6.2
       typescript: 5.3.3
@@ -4724,11 +4724,11 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /@guardian/source-react-components@18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-7mt6RDmViRdUKUlU8OaswIsYnR+yFEt5iYbRhmXB+A0XjiTeLYP8EHKmazISRlGXTZjjG701WgY5witaShI1YA==}
+  /@guardian/source-react-components@22.0.1(@emotion/react@11.11.1)(@guardian/source-foundations@14.1.4)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-jpnFdc/fIRQswufgFDjlv0RQvtNpWd5PL7PJa4r7oNp8H8f+LEVn1D/WkuLFQwtP+T3S/wGF5GrcOmTMyFTlYA==}
     peerDependencies:
       '@emotion/react': ^11.11.1
-      '@guardian/source-foundations': ^14.0.0
+      '@guardian/source-foundations': ^14.1.4
       react: ^18.2.0
       tslib: ^2.6.2
       typescript: ~5.3.3
@@ -8721,6 +8721,35 @@ packages:
       - supports-color
     dev: false
 
+  /@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-oy9+hTPCUFpngkEZUSzbf9MxI65wbKFoQYsgPdILTfbUldp5ovUuphZVe4i30emU9M/kP+T64Di0mxl7dSw3MA==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      '@typescript-eslint/parser': ^6.0.0 || ^6.0.0-alpha
+      eslint: ^7.0.0 || ^8.0.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@eslint-community/regexpp': 4.10.0
+      '@typescript-eslint/parser': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/scope-manager': 6.21.0
+      '@typescript-eslint/type-utils': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/utils': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/visitor-keys': 6.21.0
+      debug: 4.3.4(supports-color@8.1.1)
+      eslint: 8.56.0
+      graphemer: 1.4.0
+      ignore: 5.3.0
+      natural-compare: 1.4.0
+      semver: 7.5.4
+      ts-api-utils: 1.0.3(typescript@5.3.3)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@typescript-eslint/experimental-utils@5.62.0(eslint@8.56.0)(typescript@5.3.3):
     resolution: {integrity: sha512-RTXpeB3eMkpoclG3ZHft6vG/Z30azNHuqY6wKPBHlVMZFuEvrtlEDe8gMqDb+SO+9hjC/pLekeSCryf9vMZlCw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -8775,6 +8804,27 @@ packages:
       - supports-color
     dev: false
 
+  /@typescript-eslint/parser@6.21.0(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-tbsV1jPne5CkFQCgPBcDOt30ItF7aJoZL997JSF7MhGQqOeT3svWRYxiqlfA5RUdlHN6Fi+EI9bxqbdyAUZjYQ==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      eslint: ^7.0.0 || ^8.0.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/scope-manager': 6.21.0
+      '@typescript-eslint/types': 6.21.0
+      '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.3.3)
+      '@typescript-eslint/visitor-keys': 6.21.0
+      debug: 4.3.4(supports-color@8.1.1)
+      eslint: 8.56.0
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@typescript-eslint/scope-manager@5.61.0:
     resolution: {integrity: sha512-W8VoMjoSg7f7nqAROEmTt6LoBpn81AegP7uKhhW5KzYlehs8VV0ZW0fIDVbcZRcaP3aPSW+JZFua+ysQN+m/Nw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -8797,6 +8847,14 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.18.0
       '@typescript-eslint/visitor-keys': 6.18.0
+    dev: false
+
+  /@typescript-eslint/scope-manager@6.21.0:
+    resolution: {integrity: sha512-OwLUIWZJry80O99zvqXVEioyniJMa+d2GrqpUTqi5/v5D5rOrppJVBPa0yKCblcigC0/aYAzxxqQ1B+DS2RYsg==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    dependencies:
+      '@typescript-eslint/types': 6.21.0
+      '@typescript-eslint/visitor-keys': 6.21.0
     dev: false
 
   /@typescript-eslint/type-utils@5.61.0(eslint@8.56.0)(typescript@5.3.3):
@@ -8839,6 +8897,26 @@ packages:
       - supports-color
     dev: false
 
+  /@typescript-eslint/type-utils@6.21.0(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-rZQI7wHfao8qMX3Rd3xqeYSMCL3SoiSQLBATSiVKARdFGCYSRvmViieZjqc58jKgs8Y8i9YvVVhRbHSTA4VBag==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      eslint: ^7.0.0 || ^8.0.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.3.3)
+      '@typescript-eslint/utils': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
+      debug: 4.3.4(supports-color@8.1.1)
+      eslint: 8.56.0
+      ts-api-utils: 1.0.3(typescript@5.3.3)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@typescript-eslint/types@5.61.0:
     resolution: {integrity: sha512-ldyueo58KjngXpzloHUog/h9REmHl59G1b3a5Sng1GfBo14BkS3ZbMEb3693gnP1k//97lh7bKsp6/V/0v1veQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -8851,6 +8929,11 @@ packages:
 
   /@typescript-eslint/types@6.18.0:
     resolution: {integrity: sha512-/RFVIccwkwSdW/1zeMx3hADShWbgBxBnV/qSrex6607isYjj05t36P6LyONgqdUrNLl5TYU8NIKdHUYpFvExkA==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    dev: false
+
+  /@typescript-eslint/types@6.21.0:
+    resolution: {integrity: sha512-1kFmZ1rOm5epu9NZEZm1kckCDGj5UJEf7P1kliH4LKu/RkwpsfqqGmY2OOcUs18lSlQBKLDYBOGxRVtrMN5lpg==}
     engines: {node: ^16.0.0 || >=18.0.0}
     dev: false
 
@@ -8907,6 +8990,28 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.18.0
       '@typescript-eslint/visitor-keys': 6.18.0
+      debug: 4.3.4(supports-color@8.1.1)
+      globby: 11.1.0
+      is-glob: 4.0.3
+      minimatch: 9.0.3
+      semver: 7.5.4
+      ts-api-utils: 1.0.3(typescript@5.3.3)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@typescript-eslint/typescript-estree@6.21.0(typescript@5.3.3):
+    resolution: {integrity: sha512-6npJTkZcO+y2/kr+z0hc4HwNfrrP4kNYh57ek7yCNlrBjWQ1Y0OS7jiZTkgumrvkX5HkEKXFZkkdFNkaW2wmUQ==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/types': 6.21.0
+      '@typescript-eslint/visitor-keys': 6.21.0
       debug: 4.3.4(supports-color@8.1.1)
       globby: 11.1.0
       is-glob: 4.0.3
@@ -8977,6 +9082,25 @@ packages:
       - typescript
     dev: false
 
+  /@typescript-eslint/utils@6.21.0(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-NfWVaC8HP9T8cbKQxHcsJBY5YE1O33+jpMwN45qzWWaPDZgLIbo12toGMWnmhvCpd3sIxkpDw3Wv1B3dYrbDQQ==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    peerDependencies:
+      eslint: ^7.0.0 || ^8.0.0
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.56.0)
+      '@types/json-schema': 7.0.15
+      '@types/semver': 7.5.6
+      '@typescript-eslint/scope-manager': 6.21.0
+      '@typescript-eslint/types': 6.21.0
+      '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.3.3)
+      eslint: 8.56.0
+      semver: 7.5.4
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+    dev: false
+
   /@typescript-eslint/visitor-keys@5.61.0:
     resolution: {integrity: sha512-50XQ5VdbWrX06mQXhy93WywSFZZGsv3EOjq+lqp6WC2t+j3mb6A9xYVdrRxafvK88vg9k9u+CT4l6D8PEatjKg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -8998,6 +9122,14 @@ packages:
     engines: {node: ^16.0.0 || >=18.0.0}
     dependencies:
       '@typescript-eslint/types': 6.18.0
+      eslint-visitor-keys: 3.4.3
+    dev: false
+
+  /@typescript-eslint/visitor-keys@6.21.0:
+    resolution: {integrity: sha512-JJtkDduxLi9bivAB+cYOVMtbkqdPOhZ+ZI5LC47MIRrDV4Yn2o+ZnW10Nkmr28xRpSpdJ6Sm42Hjf2+REYXm0A==}
+    engines: {node: ^16.0.0 || >=18.0.0}
+    dependencies:
+      '@typescript-eslint/types': 6.21.0
       eslint-visitor-keys: 3.4.3
     dev: false
 
