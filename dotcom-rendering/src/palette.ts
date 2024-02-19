@@ -2685,24 +2685,7 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 		default:
 			switch (design) {
 				case ArticleDesign.PhotoEssay:
-					switch (theme as ArticleTheme) {
-						case Pillar.News:
-							return sourcePalette.neutral[46];
-						case Pillar.Opinion:
-							return sourcePalette.opinion[300];
-						case Pillar.Sport:
-							return sourcePalette.sport[300];
-						case Pillar.Culture:
-							return sourcePalette.culture[300];
-						case Pillar.Lifestyle:
-							return sourcePalette.lifestyle[300];
-						case ArticleSpecial.Labs:
-							return sourcePalette.labs[300];
-						case ArticleSpecial.SpecialReport:
-							return sourcePalette.specialReport[300];
-						case ArticleSpecial.SpecialReportAlt:
-							return sourcePalette.news[100];
-					}
+					return sourcePalette.neutral[46];
 
 				case ArticleDesign.Picture:
 					return sourcePalette.neutral[86];
