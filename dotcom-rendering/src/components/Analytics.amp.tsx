@@ -79,7 +79,7 @@ export const Analytics = ({
 				}
 			</script>
 		</amp-analytics>`,
-		`<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
+		`<amp-analytics data-block-on-consent="_till_responded" type="googleanalytics" id="google-analytics">
              <script type="application/json">
                {
                  "requests": {
@@ -107,7 +107,7 @@ export const Analytics = ({
                }
                </script>
             </amp-analytics>`,
-		`<amp-analytics data-block-on-consent id="comscore" type="comscore">
+		`<amp-analytics data-block-on-consent="_till_responded" id="comscore" type="comscore">
             <script type="application/json">
                 {
                     "vars": {"c2": "${comscoreID}"},
@@ -128,7 +128,7 @@ export const Analytics = ({
                 }
             </script>
         </amp-analytics>`,
-		`<amp-analytics data-block-on-consent config="https://uk-script.dotmetrics.net/AmpConfig.json?dom=www.theguardian.com&tag=${ipsosSectionName}">
+		`<amp-analytics data-block-on-consent="_till_accepted" config="https://uk-script.dotmetrics.net/AmpConfig.json?dom=www.theguardian.com&tag=${ipsosSectionName}">
             <script type="application/json">
                 {
                     "enabled": "$EQUALS(\${ampGeo(ISOCountry)}, gb)"
