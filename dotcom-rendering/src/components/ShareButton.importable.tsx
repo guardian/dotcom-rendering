@@ -7,7 +7,7 @@ import {
 	SvgCheckmark,
 	SvgShare,
 } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
 import LinkIcon from '../static/icons/link-icon.svg';
@@ -180,14 +180,17 @@ export const ShareButton = ({
 	const isLiveBlogArticleMeta =
 		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
 
-	const shareData = {
-		title: webTitle,
-		text: webTitle,
-		url: getUrl({
-			pageId,
-			blockId,
+	const shareData = useMemo(
+		() => ({
+			title: webTitle,
+			text: webTitle,
+			url: getUrl({
+				pageId,
+				blockId,
+			}),
 		}),
-	};
+		[webTitle, pageId, blockId],
+	);
 
 	useEffect(() => {
 		if ('share' in navigator && navigator.canShare(shareData)) {
