@@ -111,7 +111,7 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'interactive-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 6,
+		minimumInstances: 3,
 		maximumInstances: 24,
 		policy: {
 			scalingStepsOut: [
