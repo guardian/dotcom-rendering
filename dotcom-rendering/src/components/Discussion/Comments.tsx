@@ -12,7 +12,6 @@ import type {
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
-import { useAB } from '../../lib/useAB';
 import { palette as schemedPalette } from '../../palette';
 import { labelStyles } from '../AdSlot.web';
 import { useConfig } from '../ConfigContext';
@@ -47,6 +46,7 @@ type Props = {
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	enableMobileDiscussionAdsSwitch: boolean;
 };
 
 const footerStyles = css`
@@ -122,6 +122,7 @@ export const Comments = ({
 	replyForm,
 	bottomForm,
 	reportAbuse,
+	enableMobileDiscussionAdsSwitch,
 }: Props) => {
 	const [picks, setPicks] = useState<Array<CommentType | ReplyType>>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
@@ -219,19 +220,12 @@ export const Comments = ({
 		dispatch({ type: 'addReply', comment });
 	};
 
-	const abTests = useAB();
-	const abTestsApi = abTests?.api;
-	const mobileDiscussionAdsEnabled = abTestsApi?.isUserInVariant(
-		'MobileDiscussionAds',
-		'variant',
-	);
-
 	useEffect(() => {
-		if (isWeb && expanded && !loading && mobileDiscussionAdsEnabled) {
+		if (isWeb && expanded && !loading && enableMobileDiscussionAdsSwitch) {
 			const event = new CustomEvent('comments-loaded');
 			document.dispatchEvent(event);
 		}
-	}, [isWeb, expanded, loading, mobileDiscussionAdsEnabled]);
+	}, [isWeb, expanded, loading, enableMobileDiscussionAdsSwitch]);
 
 	const commentsStateChangeEvent = new CustomEvent('comments-state-change');
 
@@ -280,7 +274,7 @@ export const Comments = ({
 		}
 
 		isWeb &&
-			mobileDiscussionAdsEnabled &&
+			enableMobileDiscussionAdsSwitch &&
 			document.dispatchEvent(commentsStateChangeEvent);
 	};
 
@@ -314,7 +308,7 @@ export const Comments = ({
 	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
 		isWeb &&
-			mobileDiscussionAdsEnabled &&
+			enableMobileDiscussionAdsSwitch &&
 			document.dispatchEvent(commentsStateChangeEvent);
 	};
 

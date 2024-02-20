@@ -19,6 +19,7 @@ type Props = {
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
+	enableMobileDiscussionAdsSwitch: boolean;
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
 	idApiUrl: string;
@@ -34,6 +35,7 @@ const DiscussionIsland = ({
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
+	enableMobileDiscussionAdsSwitch: boolean;
 	idApiUrl: string;
 }) => {
 	switch (renderingTarget) {
@@ -59,6 +61,7 @@ export const DiscussionLayout = ({
 	discussionD2Uid,
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
+	enableMobileDiscussionAdsSwitch,
 	isAdFreeUser,
 	shouldHideAds,
 	idApiUrl,
@@ -108,6 +111,9 @@ export const DiscussionLayout = ({
 								discussionApiClientHeader
 							}
 							enableDiscussionSwitch={enableDiscussionSwitch}
+							enableMobileDiscussionAdsSwitch={
+								enableMobileDiscussionAdsSwitch
+							}
 							idApiUrl={idApiUrl}
 							renderingTarget={renderingTarget}
 						/>
