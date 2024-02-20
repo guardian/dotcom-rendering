@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from 'react';
 import { palette as themePalette } from '../palette';
 import LinkIcon from '../static/icons/link-icon.svg';
+import { transparentColour } from '../lib/transparentColour';
 
 type Props = {
 	size?: Size;
@@ -22,11 +23,20 @@ type Props = {
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
 
-const sharedButtonStyles = (sizeXSmall: boolean) => css`
+const sharedButtonStyles = (sizeXSmall: boolean, isCopied: boolean) => css`
 	border-color: ${themePalette('--share-button-border')};
-	min-width: ${sizeXSmall ? '101px' : '132px'};
-	max-width: ${sizeXSmall ? '101px' : '132px'};
+	width: ${sizeXSmall ? '101px' : '132px'};
 	height: ${sizeXSmall ? '24px' : '36px'};
+	padding: ${sizeXSmall && !isCopied && '0 10px'};
+`;
+
+const copiedButtonStyles = (sizeXSmall: boolean) => css`
+	color: ${themePalette('--share-button-copied')};
+	padding: ${sizeXSmall ? '0 4px' : '0 10px'};
+
+	svg {
+		fill: ${palette.success[400]};
+	}
 `;
 
 const buttonStyles = css`
@@ -44,34 +54,29 @@ const buttonStyles = css`
 	}
 `;
 
-const copiedButtonStyles = (sizeXSmall: boolean) => css`
-	color: ${themePalette('--share-button-copied')};
-	padding: ${sizeXSmall ? '0 4px;' : '0 10px;'} svg {
-		fill: ${palette.success[400]};
-	}
+const nativeShare = (sizeXSmall: boolean) => css`
+	width: ${sizeXSmall ? '79px' : '105px'};
+	border-color: ${themePalette('--share-button-border')};
 `;
 
-const nativeShare = (sizeXSmall: boolean) => css`
-	min-width: ${sizeXSmall ? '79px' : '105px'};
-	max-width: ${sizeXSmall ? '79px' : '105px'};
-	border-color: ${themePalette('--share-button-border')};
+const hoverStyles = css`
+	:hover {
+		color: ${themePalette('--share-button-liveblog-mobile')};
+		background-color: ${palette.neutral[100]};
+		svg {
+			fill: ${themePalette('--share-button-liveblog-mobile')};
+		}
+	}
 `;
 
 const liveBlogMobile = (isCopied: boolean) => css`
 	${until.desktop} {
 		color: ${palette.neutral[100]};
-		border-color: rgba(255, 255, 255, 0.4);
+		border-color: ${transparentColour(palette.neutral[100], 0.4)};
 		svg {
 			fill: ${isCopied ? palette.success[500] : palette.neutral[100]};
 		}
-		${!isCopied &&
-		`:hover {
-			color: ${themePalette('--share-button-liveblog-mobile')};
-			background-color: ${palette.neutral[100]};
-			svg {
-				fill: ${themePalette('--share-button-liveblog-mobile')};
-			}
-		}`}
+		${!isCopied && hoverStyles}
 	}
 `;
 
@@ -150,7 +155,7 @@ export const CopyLinkButton = ({
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
 					: [buttonStyles]),
-				sharedButtonStyles(sizeXSmall),
+				sharedButtonStyles(sizeXSmall, isCopied),
 				isLiveBlogArticleMeta && liveBlogMobile(isCopied),
 			]}
 		>
