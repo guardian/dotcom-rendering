@@ -40,7 +40,6 @@ type Props = {
 	loading: boolean;
 	comments: Array<CommentType | ReplyType>;
 	pickError: string;
-	addReply: (comment: ReplyType) => void;
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
@@ -116,7 +115,6 @@ export const Comments = ({
 	loading,
 	comments,
 	pickError,
-	addReply,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -211,6 +209,10 @@ export const Comments = ({
 			commentId,
 			responses,
 		});
+
+	const addReply = (comment: ReplyType) => {
+		dispatch({ type: 'addReply', comment });
+	};
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
