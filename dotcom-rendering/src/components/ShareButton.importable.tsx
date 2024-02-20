@@ -21,6 +21,8 @@ type Props = {
 	context: Context;
 };
 
+type ButtonKind = 'native' | 'copy' | 'email';
+
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
 
 const sharedButtonStyles = (sizeXSmall: boolean, isCopied: boolean) => css`
@@ -173,6 +175,7 @@ export const ShareButton = ({
 	context,
 }: Props) => {
 	const [isCopied, setIsCopied] = useState(false);
+	const [buttonKind, setButtonKind] = useState<ButtonKind>('email');
 
 	const isLiveBlogArticleMeta =
 		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
@@ -187,6 +190,16 @@ export const ShareButton = ({
 	};
 
 	useEffect(() => {
+		if ('share' in navigator && navigator.canShare(shareData)) {
+			setButtonKind('native');
+		} else if ('clipboard' in navigator) {
+			setButtonKind('copy');
+		} else {
+			setButtonKind('email');
+		}
+	}, [shareData]);
+
+	useEffect(() => {
 		if (!isCopied) return;
 		const timer = setTimeout(() => {
 			setIsCopied(false);
@@ -194,36 +207,39 @@ export const ShareButton = ({
 		return () => clearTimeout(timer);
 	}, [isCopied]);
 
-	return typeof window === 'undefined' || typeof navigator === 'undefined' ? (
-		<></>
-	) : 'share' in navigator && navigator.canShare(shareData) ? (
-		<NativeShareButton
-			onShare={() => {
-				navigator.share(shareData).catch(console.error);
-			}}
-			size={size}
-			isLiveBlogArticleMeta={isLiveBlogArticleMeta}
-		/>
-	) : 'clipboard' in navigator ? (
-		<CopyLinkButton
-			onShare={() => {
-				navigator.clipboard
-					.writeText(
-						getUrl({
-							pageId,
-							blockId,
-						}),
-					)
-					.then(() => {
-						setIsCopied(true);
-					})
-					.catch(console.error);
-			}}
-			size={size}
-			isCopied={isCopied}
-			isLiveBlogArticleMeta={isLiveBlogArticleMeta}
-		/>
-	) : (
-		<></>
-	);
+	switch (buttonKind) {
+		case 'native':
+			return (
+				<NativeShareButton
+					onShare={() => {
+						navigator.share(shareData).catch(console.error);
+					}}
+					size={size}
+					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+				/>
+			);
+		case 'copy':
+			return (
+				<CopyLinkButton
+					onShare={() => {
+						navigator.clipboard
+							.writeText(
+								getUrl({
+									pageId,
+									blockId,
+								}),
+							)
+							.then(() => {
+								setIsCopied(true);
+							})
+							.catch(console.error);
+					}}
+					size={size}
+					isCopied={isCopied}
+					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+				/>
+			);
+		case 'email':
+			return null;
+	}
 };
