@@ -4,8 +4,8 @@
  *
  * Run: `make gen-stories` in the dotcom-rendering sub-directory
  *
- * This script was created as a replacement for storiesOf to generate all of the possible variants
- * of our Card and Layout components.
+ * This script was created as a replacement for storiesOf. It generates all of
+ * the possible variants of our Card components.
  *
  * It should be run whenever any of the Display, Design, or Theme `format` properties change
  *
@@ -135,7 +135,7 @@ const saveStories = () => {
 	const cardContents = generateCardStories();
 	writeFileSync(CARD_STORIES_FILE, cardContents);
 	success(
-		`[scripts/gen-stories] Saved layout stories to ${CARD_STORIES_FILE}!`,
+		`[scripts/gen-stories] Saved card stories to ${CARD_STORIES_FILE}!`,
 	);
 
 	writeFileSync(README_FILE('Card'), README_TEMPLATE('Card'));
