@@ -39,8 +39,12 @@ type Props = {
 	topLevelCommentCount: number;
 	loading: boolean;
 	comments: Array<CommentType | ReplyType>;
-	addComment: (comment: CommentType) => void;
+	pickError: string;
 	addReply: (comment: ReplyType) => void;
+	topForm: CommentFormProps;
+	replyForm: CommentFormProps;
+	bottomForm: CommentFormProps;
+	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
 const footerStyles = css`
@@ -112,7 +116,6 @@ export const Comments = ({
 	loading,
 	comments,
 	pickError,
-	addComment,
 	addReply,
 	topForm,
 	replyForm,
@@ -127,7 +130,7 @@ export const Comments = ({
 
 	const dispatch = useDispatch();
 
-	const setComment = (comment: CommentType) => {
+	const addComment = (comment: CommentType) => {
 		dispatch({ type: 'addComment', comment });
 	};
 
@@ -202,37 +205,12 @@ export const Comments = ({
 			type: 'setBottomFormPreviewBody',
 			previewBody,
 		});
-	const expandCommentReplies = (
-		commentId: number,
-		newResponses: CommentType[],
-	) =>
+	const expandCommentReplies = (commentId: number, responses: ReplyType[]) =>
 		dispatch({
 			type: 'expandCommentReplies',
 			commentId,
-			responses: newResponses,
+			responses,
 		});
-
-	const loadingMore = !loading && numberOfCommentsToShow < comments.length;
-
-	useEffect(() => {
-		setNumberOfCommentsToShow(COMMENT_BATCH);
-	}, [comments]);
-
-	useEffect(() => {
-		if (!expanded) return;
-		if (numberOfCommentsToShow === comments.length) return;
-
-		const newNumberOfCommentsToShow = Math.min(
-			numberOfCommentsToShow + COMMENT_BATCH,
-			comments.length,
-		);
-
-		const timer = setTimeout(() => {
-			setNumberOfCommentsToShow(newNumberOfCommentsToShow);
-		}, 0);
-
-		return () => clearTimeout(timer);
-	}, [expanded, comments.length, numberOfCommentsToShow, loadingMore]);
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
@@ -456,7 +434,6 @@ export const Comments = ({
 								error={replyForm.error}
 								setError={setReplyFormError}
 								pickError={pickError}
-								setPickError={setPickError}
 								userNameMissing={replyForm.userNameMissing}
 								setUserNameMissing={setReplyFormUserMissing}
 								previewBody={replyForm.previewBody}

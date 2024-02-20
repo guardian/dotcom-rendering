@@ -1,12 +1,12 @@
 import { debug } from '@guardian/libs';
 import { createContext, useContext } from 'react';
 import type { Dispatch } from 'react';
-import type { CommentType, FilterOptions } from '../lib/discussion';
+import type { CommentType, FilterOptions, ReplyType } from '../lib/discussion';
 
 export type Action =
 	| {
 			type: 'commentsLoaded';
-			comments: CommentType[];
+			comments: Array<CommentType | ReplyType>;
 			isClosedForComments: boolean;
 			commentCount: number;
 			topLevelCommentCount: number;
@@ -15,9 +15,10 @@ export type Action =
 	| {
 			type: 'expandCommentReplies';
 			commentId: number;
-			responses: CommentType[];
+			responses: ReplyType[];
 	  }
 	| { type: 'addComment'; comment: CommentType }
+	| { type: 'addReply'; comment: ReplyType }
 	| { type: 'updateCommentPage'; commentPage: number }
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
