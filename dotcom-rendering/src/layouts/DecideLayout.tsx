@@ -28,6 +28,8 @@ interface WebProps extends BaseProps {
 	renderingTarget: 'Web';
 }
 
+export type Props = WebProps | AppProps;
+
 const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 	const notSupported = <pre>Not supported</pre>;
 	switch (format.display) {
@@ -273,7 +275,7 @@ const DecideLayoutWeb = ({
 	}
 };
 
-export const DecideLayout = (props: WebProps | AppProps) => {
+export const DecideLayout = (props: Props) => {
 	const { article, format, renderingTarget } = props;
 
 	switch (renderingTarget) {

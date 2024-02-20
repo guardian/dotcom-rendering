@@ -1178,6 +1178,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										}
 										${from.wide} {
 											display: block;
+											padding-bottom: 255px;
 										}
 									`}
 								>

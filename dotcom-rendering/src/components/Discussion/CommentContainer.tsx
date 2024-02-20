@@ -4,11 +4,12 @@ import { SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type {
 	CommentType,
+	ReplyType,
 	SignedInUser,
 	ThreadsType,
 } from '../../lib/discussion';
 import type { preview, reportAbuse } from '../../lib/discussionApi';
-import { getMoreResponses } from '../../lib/discussionApi';
+import { getAllReplies } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
 import { Comment } from './Comment';
 import { CommentForm } from './CommentForm';
@@ -16,13 +17,15 @@ import { CommentReplyPreview } from './CommentReplyPreview';
 import { PillarButton } from './PillarButton';
 
 type Props = {
-	comment: CommentType;
+	comment: CommentType | ReplyType;
 	isClosedForComments: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
 	threads: ThreadsType;
-	commentBeingRepliedTo?: CommentType;
-	setCommentBeingRepliedTo: (commentBeingRepliedTo?: CommentType) => void;
+	commentBeingRepliedTo?: CommentType | ReplyType;
+	setCommentBeingRepliedTo: (
+		commentBeingRepliedTo?: CommentType | ReplyType,
+	) => void;
 	commentToScrollTo?: number;
 	mutes: string[];
 	toggleMuteStatus: (userId: string) => void;
@@ -36,7 +39,7 @@ type Props = {
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (commentId: number, responses: CommentType[]) => void;
+	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
 };
 
 const nestingStyles = css`
@@ -95,7 +98,7 @@ export const CommentContainer = ({
 	reportAbuse,
 	expandCommentReplies,
 }: Props) => {
-	const responses = comment.responses ?? [];
+	const responses = comment.responses ? comment.responses : [];
 	const totalResponseCount = comment.metaData?.responseCount ?? 0;
 
 	// Filter logic
@@ -113,7 +116,7 @@ export const CommentContainer = ({
 
 	const expand = (commentId: number) => {
 		setLoading(true);
-		getMoreResponses(commentId)
+		getAllReplies(commentId)
 			.then((result) => {
 				if (result.kind === 'error') {
 					console.error(result.error);
@@ -126,7 +129,7 @@ export const CommentContainer = ({
 			});
 	};
 
-	const onAddComment = (commentId: number, response: CommentType) =>
+	const onAddReply = (commentId: number, response: ReplyType) =>
 		expandCommentReplies(commentId, [...responses, response]);
 
 	return (
@@ -204,7 +207,7 @@ export const CommentContainer = ({
 				{commentBeingRepliedTo &&
 					(commentBeingRepliedTo.id === comment.id ||
 						responses.find(
-							(response: CommentType) =>
+							(response: ReplyType) =>
 								response.id === commentBeingRepliedTo.id,
 						)) &&
 					user && (
@@ -217,9 +220,10 @@ export const CommentContainer = ({
 							/>
 							<CommentForm
 								shortUrl={shortUrl}
-								onAddComment={(response) =>
-									onAddComment(comment.id, response)
-								}
+								onAddComment={(response) => {
+									if ('responses' in response) return;
+									onAddReply(comment.id, response);
+								}}
 								user={user}
 								setCommentBeingRepliedTo={
 									setCommentBeingRepliedTo

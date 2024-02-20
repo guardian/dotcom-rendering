@@ -1,7 +1,11 @@
 import { css } from '@emotion/react';
 import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import type { CommentType, SignedInUser } from '../../lib/discussion';
+import type {
+	CommentType,
+	ReplyType,
+	SignedInUser,
+} from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianStaff } from './Badges';
@@ -11,7 +15,7 @@ import { Row } from './Row';
 import { Timestamp } from './Timestamp';
 
 type Props = {
-	comment: CommentType;
+	comment: CommentType | ReplyType;
 	userMadeComment: boolean;
 	onPermalinkClick: (commentId: number) => void;
 	user?: SignedInUser;

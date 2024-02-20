@@ -40,6 +40,7 @@ export const topPicks = {
 						},
 					],
 				},
+				responses: [],
 			},
 			{
 				id: 37772513,
@@ -64,6 +65,7 @@ export const topPicks = {
 						},
 					],
 				},
+				responses: [],
 			},
 		],
 	},

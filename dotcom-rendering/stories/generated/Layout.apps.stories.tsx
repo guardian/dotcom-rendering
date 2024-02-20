@@ -6,7 +6,7 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { darkDecorator, lightDecorator } from '../../.storybook/decorators/themeDecorator';
-import { HydratedLayoutWrapper } from '../../src/layouts/Layout.stories';
+import { HydratedLayoutWrapper } from '../../src/layouts/HydratedLayoutWrapper';
 // eslint-disable-next-line import/no-default-export -- we need a default here
 export default {
 	title: 'Components/Layout/Format Variations Apps',

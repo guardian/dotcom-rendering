@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { Analysis } from '../../fixtures/generated/articles/Analysis';
 import { Audio } from '../../fixtures/generated/articles/Audio';
 import { Comment } from '../../fixtures/generated/articles/Comment';
@@ -125,32 +124,3 @@ export const HydratedLayoutWrapper = ({
 		/>
 	);
 };
-
-export default {
-	title: 'Components/Layout',
-	component: HydratedLayout,
-	// Export used by dotcom-rendering/stories/Card.stories.tsx
-	excludeStories: ['HydratedLayoutWrapper'],
-	parameters: {
-		chromatic: {
-			diffThreshold: 0.2,
-			pauseAnimationAtEnd: true,
-		},
-	},
-};
-
-// Additional stories for edge cases
-export const LiveblogWithNoKeyEvents = () => {
-	return (
-		<HydratedLayout
-			serverArticle={{
-				...Live,
-				keyEvents: [],
-			}}
-			renderingTarget="Web"
-		/>
-	);
-};
-LiveblogWithNoKeyEvents.decorators = [
-	lightDecorator([decideFormat(Live.format)]),
-];

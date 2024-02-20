@@ -1,3 +1,5 @@
+import type { GetDiscussionSuccess } from '../../src/lib/discussion';
+
 export const legacyDiscussionWithoutThreading = {
 	status: 'ok',
 	currentPage: 1,
@@ -35,6 +37,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/2479941',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12468646,
@@ -56,6 +59,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/2870517',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12469052,
@@ -77,6 +81,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/794075',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12469251,
@@ -98,6 +103,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/3111076',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12469484,
@@ -119,6 +125,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/1331497',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12469659,
@@ -140,6 +147,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4279254',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12469806,
@@ -161,6 +169,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4530494',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12469934,
@@ -182,6 +191,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/1954291',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12469981,
@@ -203,6 +213,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4311896',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12470128,
@@ -224,6 +235,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/1301439',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12470152,
@@ -245,6 +257,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/3596779',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12470272,
@@ -266,6 +279,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4387033',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12471548,
@@ -287,6 +301,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/1268926',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12471828,
@@ -308,6 +323,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/3874929',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12471872,
@@ -329,6 +345,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4568262',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12472026,
@@ -354,6 +371,7 @@ export const legacyDiscussionWithoutThreading = {
 						},
 					],
 				},
+				responses: [],
 			},
 			{
 				id: 12472059,
@@ -375,6 +393,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4188282',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12473125,
@@ -396,6 +415,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4573193',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12473463,
@@ -417,6 +437,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4311896',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12473866,
@@ -438,6 +459,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4368868',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12473958,
@@ -459,6 +481,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/3699054',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12473992,
@@ -480,6 +503,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4212243',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12474633,
@@ -501,6 +525,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4311896',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12474814,
@@ -522,6 +547,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4741862',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12475107,
@@ -543,6 +569,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4311896',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12475117,
@@ -564,6 +591,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4641408',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12475461,
@@ -585,6 +613,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4487660',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12475751,
@@ -606,6 +635,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/2411079',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12475801,
@@ -627,6 +657,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4741862',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12475922,
@@ -648,6 +679,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4323663',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12476305,
@@ -669,6 +701,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4742115',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12476413,
@@ -690,6 +723,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4741862',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12476758,
@@ -711,6 +745,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4311896',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12476847,
@@ -732,6 +767,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4641408',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12477021,
@@ -753,6 +789,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4311896',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12477166,
@@ -774,6 +811,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4641408',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12477257,
@@ -795,6 +833,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4741862',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12477258,
@@ -816,6 +855,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4742115',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12477552,
@@ -837,6 +877,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/2411079',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12478723,
@@ -858,6 +899,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/3237256',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12479039,
@@ -879,6 +921,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4323663',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12480749,
@@ -900,6 +943,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/2456210',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12482898,
@@ -921,6 +965,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/3699054',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12483012,
@@ -942,6 +987,7 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/3938636',
 					badge: [],
 				},
+				responses: [],
 			},
 			{
 				id: 12491080,
@@ -963,7 +1009,8 @@ export const legacyDiscussionWithoutThreading = {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/4741862',
 					badge: [],
 				},
+				responses: [],
 			},
 		],
 	},
-};
+} satisfies GetDiscussionSuccess;

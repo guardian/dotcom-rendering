@@ -8,6 +8,7 @@ import type {
 	CommentFormProps,
 	CommentType,
 	FilterOptions,
+	ReplyType,
 	SignedInUser,
 } from '../lib/discussion';
 import {
@@ -127,18 +128,13 @@ const remapToValidFilters = (
  */
 export const replaceMatchingCommentResponses =
 	(action: Action & { type: 'expandCommentReplies' }) =>
-	(comment: CommentType): CommentType => {
-		const responses =
-			comment.id === action.commentId
-				? action.responses
-				: comment.responses?.map(
-						replaceMatchingCommentResponses(action),
-				  );
-		return { ...comment, responses };
-	};
+	<T extends CommentType | ReplyType>(comment: T): T =>
+		comment.id === action.commentId
+			? { ...comment, responses: action.responses }
+			: comment;
 
 type State = {
-	comments: CommentType[];
+	comments: Array<CommentType | ReplyType>;
 	isClosedForComments: boolean;
 	isExpanded: boolean;
 	commentPage: number;
@@ -193,6 +189,23 @@ const reducer = (state: State, action: Action): State => {
 			return {
 				...state,
 				comments: [action.comment, ...state.comments],
+				isExpanded: true,
+			};
+		case 'addReply':
+			return {
+				...state,
+				comments: state.comments.map((comment) =>
+					comment.responses &&
+					comment.id === Number(action.comment.responseTo.commentId)
+						? {
+								...comment,
+								responses: [
+									...comment.responses,
+									action.comment,
+								],
+						  }
+						: comment,
+				),
 				isExpanded: true,
 			};
 		case 'expandComments':
