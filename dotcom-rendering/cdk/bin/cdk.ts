@@ -95,7 +95,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 			],
 		},
 	},
-	instanceSize: InstanceSize.SMALL,
+	instanceSize: InstanceSize.MEDIUM,
 });
 
 /** Interactive */
