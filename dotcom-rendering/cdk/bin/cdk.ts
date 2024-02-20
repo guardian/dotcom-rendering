@@ -95,7 +95,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 			],
 		},
 	},
-	instanceSize: InstanceSize.SMALL,
+	instanceSize: InstanceSize.MEDIUM,
 });
 
 /** Interactive */
@@ -111,7 +111,7 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'interactive-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 6,
+		minimumInstances: 3,
 		maximumInstances: 24,
 		policy: {
 			scalingStepsOut: [
