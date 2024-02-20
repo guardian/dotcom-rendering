@@ -8,9 +8,9 @@ import {
 	SvgShare,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
 import LinkIcon from '../static/icons/link-icon.svg';
-import { transparentColour } from '../lib/transparentColour';
 
 type Props = {
 	size?: Size;
