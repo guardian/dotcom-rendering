@@ -29,12 +29,12 @@ import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
+import { ShareButton } from './ShareButton.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
 import { SupportTheG } from './SupportTheG.importable';
-import { ShareButton } from './ShareButton.importable';
 
 // Type tests
 // Test that impossible prop combinations are caught by TypeScript.
