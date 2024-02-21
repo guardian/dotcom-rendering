@@ -195,3 +195,23 @@ export const decideCollectionBranding = ({
 		hasMultipleBranding,
 	};
 };
+
+export const decideTagPageBranding = ({
+	branding,
+}: {
+	branding: Branding | undefined;
+}): CollectionBranding | undefined => {
+	if (branding === undefined) return undefined;
+
+	// If this tagpage is eligible to display branding
+	// AND there is branding defined, we should display it
+	const kind = getBrandingType([branding]);
+	if (!kind) return undefined;
+	return {
+		kind,
+		isFrontBranding: true,
+		branding,
+		isContainerBranding: false,
+		hasMultipleBranding: false,
+	};
+};

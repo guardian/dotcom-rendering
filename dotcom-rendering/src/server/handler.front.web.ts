@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import { pickBrandingForEdition } from '../lib/branding';
+import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
 import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
@@ -74,6 +74,12 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 		speed === 'slow' || data.forceDay,
 	);
 
+	const branding = data.commercialProperties[data.editionId].branding;
+
+	const tagPageBranding = decideTagPageBranding({
+		branding,
+	});
+
 	return {
 		...data,
 		webTitle: tagPageWebTitle(data),
@@ -98,6 +104,7 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 				data.tags.tags[0]?.properties.description,
 			image: data.tags.tags[0]?.properties.bylineImageUrl,
 		},
+		branding: tagPageBranding,
 	};
 };
 

@@ -1,5 +1,7 @@
 import type { EditionId } from '../lib/edition';
 import type { Tuple } from '../lib/tuple';
+import type { CollectionBranding } from './branding';
+import type { CommercialProperties } from './commercial';
 import type { FooterType } from './footer';
 import type { DCRFrontCard, FEFrontCard, FEFrontConfigType } from './front';
 import type { FETagType } from './tag';
@@ -17,7 +19,7 @@ export interface FETagPageType {
 	webTitle: string;
 	webURL: string;
 	config: FEFrontConfigType;
-	commercialProperties: Record<string, unknown>;
+	commercialProperties: CommercialProperties;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	forceDay: boolean;
@@ -62,7 +64,7 @@ export interface DCRTagPageType {
 	webTitle: string;
 	webURL: string;
 	config: FEFrontConfigType;
-	commercialProperties: Record<string, unknown>;
+	commercialProperties: CommercialProperties;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	trendingTopics?: FETagType[];
@@ -73,6 +75,7 @@ export interface DCRTagPageType {
 		description?: string;
 		image?: string;
 	};
+	branding: CollectionBranding | undefined;
 }
 
 export interface DCRFrontPagination {
