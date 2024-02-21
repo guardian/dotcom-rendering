@@ -4,6 +4,7 @@ import { palette, until } from '@guardian/source-foundations';
 import type { Size } from '@guardian/source-react-components';
 import {
 	Button,
+	LinkButton,
 	SvgCheckmark,
 	SvgEnvelope,
 	SvgShare,
@@ -168,15 +169,18 @@ export const CopyLinkButton = ({
 };
 
 export const EmailLink = ({
+	href,
 	size,
 	isLiveBlogArticleMeta,
 }: {
+	href: string;
 	size?: Size;
 	isLiveBlogArticleMeta: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 	return (
-		<Button
+		<LinkButton
+			href={href}
 			size={size}
 			type="button"
 			priority="tertiary"
@@ -189,7 +193,7 @@ export const EmailLink = ({
 			]}
 		>
 			Email link
-		</Button>
+		</LinkButton>
 	);
 };
 
@@ -271,17 +275,14 @@ export const ShareButton = ({
 			);
 		case 'email':
 			return (
-				<a
+				<EmailLink
 					href={`mailto:?subject=${webTitle}&body=${getUrl({
 						pageId,
 						blockId,
 					})}`}
-				>
-					<EmailLink
-						size={size}
-						isLiveBlogArticleMeta={isLiveBlogArticleMeta}
-					/>
-				</a>
+					size={size}
+					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+				/>
 			);
 	}
 };
