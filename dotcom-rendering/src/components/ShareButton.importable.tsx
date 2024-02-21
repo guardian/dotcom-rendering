@@ -168,18 +168,15 @@ export const CopyLinkButton = ({
 };
 
 export const EmailLink = ({
-	onShare,
 	size,
 	isLiveBlogArticleMeta,
 }: {
-	onShare: () => void;
 	size?: Size;
 	isLiveBlogArticleMeta: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 	return (
 		<Button
-			onClick={onShare}
 			size={size}
 			type="button"
 			priority="tertiary"
@@ -274,18 +271,17 @@ export const ShareButton = ({
 			);
 		case 'email':
 			return (
-				<EmailLink
-					onShare={() => {
-						window.location.href = `mailto:?subject=${webTitle}&body=${getUrl(
-							{
-								pageId,
-								blockId,
-							},
-						)}`;
-					}}
-					size={size}
-					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
-				/>
+				<a
+					href={`mailto:?subject=${webTitle}&body=${getUrl({
+						pageId,
+						blockId,
+					})}`}
+				>
+					<EmailLink
+						size={size}
+						isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+					/>
+				</a>
 			);
 	}
 };
