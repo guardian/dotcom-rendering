@@ -5,10 +5,10 @@ import type { RenderingTarget } from '../types/renderingTarget';
 /**
  * Positioning rules:
  *
- * - Is further than 3 paragraphs in
- * - Is every 6 paragraphs
+ * - Is further than 3 blocks in
+ * - Is at least 6 blocks after the previous ad
  * - No more than 15 ads in an article
- * - Last paragraph should not be followed by an ad
+ * - Last block should not be followed by an ad
  */
 const isSuitablePosition = (
 	blockCounter: number,
@@ -18,7 +18,7 @@ const isSuitablePosition = (
 	isParagraph: boolean,
 ): boolean => {
 	// Rules for ad placement
-	const adEveryNParagraphs = 6;
+	const adEveryNBlocks = 6;
 	const firstAdIndex = 3;
 	const maxAds = 15;
 
@@ -35,10 +35,10 @@ const isSuitablePosition = (
 	const isFirstAdIndex = blockCounter === firstAdIndex;
 
 	const isEnoughBlocksAfter =
-		blockCounter - previousAdIndex >= adEveryNParagraphs;
+		blockCounter - previousAdIndex >= adEveryNBlocks;
 
-	// Insert an ad placeholder every `adEveryNParagraphs` paragraphs,
-	// starting from the paragraph at `firstAdIndex` and only after a paragraph
+	// Insert an ad placeholder when we're at least `adEveryNParagraphs` blocks after the
+	// previous ad, starting from the paragraph at `firstAdIndex` and only after a paragraph
 	return isParagraph && (isFirstAdIndex || isEnoughBlocksAfter);
 };
 
