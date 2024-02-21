@@ -34,6 +34,7 @@ import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
 import { SupportTheG } from './SupportTheG.importable';
+import { ShareButton } from './ShareButton.importable';
 
 // Type tests
 // Test that impossible prop combinations are caught by TypeScript.
@@ -443,6 +444,27 @@ describe('Island: server-side rendering', () => {
 							support: '',
 							contribute: '',
 						}}
+					/>
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
+	test('ShareButton', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<ShareButton
+						pageId={'123'}
+						webTitle={'The the'}
+						format={{
+							display: ArticleDisplay.Standard,
+							theme: Pillar.News,
+							design: ArticleDesign.Standard,
+						}}
+						context="ArticleMeta"
 					/>
 				</ConfigProvider>,
 			),
