@@ -47,6 +47,7 @@ const buttonStyles = css`
 	color: ${themePalette('--share-button')};
 	svg {
 		fill: ${themePalette('--share-button')};
+		transition: inherit;
 	}
 	:hover {
 		background-color: ${themePalette('--share-button')};
