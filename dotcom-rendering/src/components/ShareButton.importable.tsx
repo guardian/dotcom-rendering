@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { palette, until } from '@guardian/source-foundations';
 import type { Size } from '@guardian/source-react-components';
@@ -57,6 +57,13 @@ const buttonStyles = css`
 			fill: ${themePalette('--share-button-hover')};
 		}
 	}
+
+	animation: ${keyframes`
+			0% { opacity: 0; }
+			100% { opacity: 1; }
+		`} 240ms ease-out backwards;
+	/** It is unlikely a user will want to share quicker than this… */
+	animation-delay: 1.2s;
 `;
 
 const nativeShare = (sizeXSmall: boolean) => css`
