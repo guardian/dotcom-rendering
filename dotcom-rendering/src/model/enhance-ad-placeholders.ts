@@ -32,7 +32,9 @@ const isSuitablePosition = (
 		return false;
 	}
 
-	const isFirstAdIndex = blockCounter === firstAdIndex;
+	// Checks that we haven't inserted an ad yet, and that we are far enough in to do so
+	const isFirstAdIndex =
+		blockCounter >= firstAdIndex && previousAdIndex === 0;
 
 	const isEnoughBlocksAfter =
 		blockCounter - previousAdIndex >= adEveryNBlocks;
