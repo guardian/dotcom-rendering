@@ -1,12 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	body,
-	brandBackground,
-	brandBorder,
-	brandLine,
-	palette,
-	space,
-} from '@guardian/source-foundations';
+import { body, palette, space } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
@@ -144,7 +137,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={palette.brand[400]}
 						element="header"
 					>
 						<Header
@@ -163,10 +156,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					</Section>
 					<Section
 						fullWidth={true}
-						borderColour={brandLine.primary}
+						borderColour={palette.brand[600]}
 						showTopBorder={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={palette.brand[400]}
 						element="nav"
 					>
 						<Nav
@@ -361,8 +354,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
+				backgroundColour={palette.brand[400]}
+				borderColour={palette.brand[600]}
 				showSideBorders={false}
 				showTopBorder={false}
 				element="footer"
