@@ -16,7 +16,7 @@ import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
-import { Topic } from 'aws-cdk-lib/aws-sns';
+import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
 
@@ -179,14 +179,16 @@ export class RenderingCDKStack extends CDKStack {
 				},
 			);
 
-			const criticalAlertsTopic = Topic.fromTopicArn(
-				this,
-				'CriticalAlertsTopic',
-				`arn:aws:sns:${region}:${this.account}:Frontend-${stage}-CriticalAlerts`,
-			);
-			const criticalAlertsSnsAction = new SnsAction(criticalAlertsTopic);
+			const scalingAlertsTopic = new Topic(this, 'ScalingAlertsTopic');
+			new Subscription(this, 'ScalingAlertsSubscriptionEmail', {
+				endpoint: 'dotcom.platform@theguardian.com',
+				protocol: SubscriptionProtocol.EMAIL,
+				topic: scalingAlertsTopic,
+			});
 
-			scaleOutPolicy.upperAlarm?.addAlarmAction(criticalAlertsSnsAction);
+			scaleOutPolicy.upperAlarm?.addAlarmAction(
+				new SnsAction(scalingAlertsTopic),
+			);
 
 			/** Scale in policy */
 			new StepScalingPolicy(this, 'LatencyScaleDownPolicy', {
