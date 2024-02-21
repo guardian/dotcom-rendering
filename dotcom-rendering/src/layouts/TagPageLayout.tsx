@@ -5,8 +5,8 @@ import { Fragment } from 'react';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import {
 	decideFrontsBannerAdSlot,
-	decideMerchHighAndMobileAdSlots,
 	decideMerchandisingSlot,
+	decideMerchHighAndMobileAdSlots,
 } from '../components/DecideFrontsAdSlots';
 import { Footer } from '../components/Footer';
 import { FrontSection } from '../components/FrontSection';
