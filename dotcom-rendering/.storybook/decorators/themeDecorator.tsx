@@ -25,7 +25,7 @@ const lightStoryCss = css`
  * Creates storybook decorator used to wrap components in an element
  * containing the light or dark mode palette colours.
  */
-const colourSchemeDecorator =
+export const colourSchemeDecorator =
 	(colourScheme: 'light' | 'dark') =>
 	<Args = StrictArgs,>(formats: ArticleFormat[]): Decorator<Args> =>
 	(Story, context) => (

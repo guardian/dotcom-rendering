@@ -29,6 +29,7 @@ import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
+import { ShareButton } from './ShareButton.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
@@ -443,6 +444,27 @@ describe('Island: server-side rendering', () => {
 							support: '',
 							contribute: '',
 						}}
+					/>
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
+	test('ShareButton', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<ShareButton
+						pageId={'123'}
+						webTitle={'The the'}
+						format={{
+							display: ArticleDisplay.Standard,
+							theme: Pillar.News,
+							design: ArticleDesign.Standard,
+						}}
+						context="ArticleMeta"
 					/>
 				</ConfigProvider>,
 			),
