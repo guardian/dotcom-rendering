@@ -148,13 +148,7 @@ LiveBlogMobile.story = {
 };
 
 export const EmailLinkStory = () => {
-	return (
-		<EmailLink
-			onShare={() => {}}
-			isLiveBlogArticleMeta={true}
-			size="small"
-		/>
-	);
+	return <EmailLink isLiveBlogArticleMeta={true} size="small" />;
 };
 EmailLinkStory.storyName = 'EmailLinkStory';
 EmailLinkStory.decorators = [
