@@ -32,15 +32,15 @@ const isSuitablePosition = (
 		return false;
 	}
 
-	// Checks that we haven't inserted an ad yet, and that we are far enough in to do so
+	// Check that we haven't inserted an ad yet, and that we are far enough in to do so
 	const isFirstAdIndex =
 		blockCounter >= firstAdIndex && previousAdIndex === 0;
 
+	// Check that we are at least `adEveryNParagraphs` blocks after the previous ad
 	const isEnoughBlocksAfter =
 		blockCounter - previousAdIndex >= adEveryNBlocks;
 
-	// Insert an ad placeholder when we're at least `adEveryNParagraphs` blocks after the
-	// previous ad, starting from the paragraph at `firstAdIndex` and only after a paragraph
+	// Insert an ad placeholder if the current element is a paragraph, and if the position is eligible
 	return isParagraph && (isFirstAdIndex || isEnoughBlocksAfter);
 };
 
