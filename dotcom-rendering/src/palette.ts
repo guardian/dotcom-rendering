@@ -3384,8 +3384,73 @@ const pullQuoteIconDark: PaletteFunction = (format: ArticleFormat) => {
 		: text;
 };
 
-const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
+const shareButtonLiveBlogMobileLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return pillarPalette(theme, 200);
+			}
+	}
+};
+
+const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[7];
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const shareButtonBorderLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[46];
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[60];
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const shareButtonCopiedLight: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -3410,8 +3475,6 @@ const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 				default:
 					return pillarPalette(theme, 400);
 			}
-		case ArticleDesign.Picture:
-			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.Labs:
@@ -3438,38 +3501,8 @@ const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 	}
 };
 
-const shareIconFillDark: PaletteFunction = () => sourcePalette.neutral[60];
+const shareButtonDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const shareIconFillBlogLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			switch (theme) {
-				case Pillar.News:
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.news[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
-				default:
-					return pillarPalette(theme, 300);
-			}
-		default:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[300];
-				default:
-					return pillarPalette(theme, 300);
-			}
-	}
-};
-
-const shareIconFillBlogDark: PaletteFunction = () => sourcePalette.neutral[60];
 const matchNavBackground: PaletteFunction = () => sourcePalette.brandAlt[400];
 
 const matchStatsBackground: PaletteFunction = ({ design }) => {
@@ -5368,13 +5401,9 @@ const paletteColours = {
 		light: subNavLink,
 		dark: subNavLink,
 	},
-	'--share-icon-fill': {
-		light: shareIconFillLight,
-		dark: shareIconFillDark,
-	},
-	'--share-icon-blog-fill': {
-		light: shareIconFillBlogLight,
-		dark: shareIconFillBlogDark,
+	'--share-button': {
+		light: shareButtonLight,
+		dark: shareButtonDark,
 	},
 	'--match-nav-background': {
 		light: matchNavBackground,
@@ -5847,6 +5876,22 @@ const paletteColours = {
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
 		dark: interactiveAtomBackgroundDark,
+	},
+	'--share-button-liveblog-mobile': {
+		light: shareButtonLiveBlogMobileLight,
+		dark: shareButtonLiveBlogMobileLight,
+	},
+	'--share-button-border': {
+		light: shareButtonBorderLight,
+		dark: shareButtonBorderLight,
+	},
+	'--share-button-copied': {
+		light: shareButtonCopiedLight,
+		dark: shareButtonDark,
+	},
+	'--share-button-hover': {
+		light: shareButtonHoverLight,
+		dark: shareButtonHoverLight,
 	},
 } satisfies PaletteColours;
 
