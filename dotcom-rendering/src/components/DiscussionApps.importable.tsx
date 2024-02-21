@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getdiscussionClient } from '../lib/bridgetApi';
 import type { Reader, UserProfile } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
@@ -17,9 +18,8 @@ const onReply = async (): Promise<CommentResponse> => {
 	return { kind: 'error', error: 'ApiError' };
 };
 
-const onRecommend = async (): Promise<boolean> => {
-	console.log('onRecommend');
-	return false;
+const onRecommend = async (commentId: number): Promise<boolean> => {
+	return getdiscussionClient().recommend(commentId);
 };
 const addUsername = async (): Promise<Result<string, true>> => {
 	console.log('addUsername');
