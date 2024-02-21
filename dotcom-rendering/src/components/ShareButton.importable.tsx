@@ -5,6 +5,7 @@ import type { Size } from '@guardian/source-react-components';
 import {
 	Button,
 	SvgCheckmark,
+	SvgEnvelope,
 	SvgShare,
 } from '@guardian/source-react-components';
 import { useEffect, useMemo, useState } from 'react';
@@ -166,6 +167,35 @@ export const CopyLinkButton = ({
 	);
 };
 
+export const EmailLink = ({
+	onShare,
+	size,
+	isLiveBlogArticleMeta,
+}: {
+	onShare: () => void;
+	size?: Size;
+	isLiveBlogArticleMeta: boolean;
+}) => {
+	const sizeXSmall = size === 'xsmall';
+	return (
+		<Button
+			onClick={onShare}
+			size={size}
+			type="button"
+			priority="tertiary"
+			iconSide="left"
+			icon={<SvgEnvelope />}
+			css={[
+				buttonStyles,
+				sharedButtonStyles(sizeXSmall, false),
+				isLiveBlogArticleMeta && liveBlogMobile(false),
+			]}
+		>
+			Email link
+		</Button>
+	);
+};
+
 export const ShareButton = ({
 	size = 'small',
 	pageId,
@@ -243,6 +273,19 @@ export const ShareButton = ({
 				/>
 			);
 		case 'email':
-			return null;
+			return (
+				<EmailLink
+					onShare={() => {
+						window.location.href = `mailto:?subject=${webTitle}&body=${getUrl(
+							{
+								pageId,
+								blockId,
+							},
+						)}`;
+					}}
+					size={size}
+					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+				/>
+			);
 	}
 };

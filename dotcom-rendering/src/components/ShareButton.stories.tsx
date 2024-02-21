@@ -8,6 +8,7 @@ import {
 import { palette as themePalette } from '../palette';
 import {
 	CopyLinkButton,
+	EmailLink,
 	NativeShareButton,
 	ShareButton,
 } from './ShareButton.importable';
@@ -59,7 +60,7 @@ ShareButtonStoryXSmall.decorators = [splitTheme()];
 export const LinkCopied = () => {
 	return (
 		<CopyLinkButton
-			onShare={async () => {}}
+			onShare={() => {}}
 			isCopied={true}
 			isLiveBlogArticleMeta={false}
 			size="small"
@@ -72,7 +73,7 @@ LinkCopied.decorators = [splitTheme()];
 export const NativeShare = () => {
 	return (
 		<NativeShareButton
-			onShare={async () => {}}
+			onShare={() => {}}
 			isLiveBlogArticleMeta={true}
 			size="small"
 		/>
@@ -91,7 +92,7 @@ export const LiveBlogMobileNative = ({ theme }: StoryArgs) => {
 			`}
 		>
 			<NativeShareButton
-				onShare={async () => {}}
+				onShare={() => {}}
 				isLiveBlogArticleMeta={true}
 				size="small"
 			/>
@@ -123,7 +124,7 @@ export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 			`}
 		>
 			<CopyLinkButton
-				onShare={async () => {}}
+				onShare={() => {}}
 				isCopied={false}
 				isLiveBlogArticleMeta={true}
 				size="small"
@@ -145,3 +146,21 @@ LiveBlogMobile.story = {
 		chromatic: { viewports: [375] },
 	},
 };
+
+export const EmailLinkStory = () => {
+	return (
+		<EmailLink
+			onShare={() => {}}
+			isLiveBlogArticleMeta={true}
+			size="small"
+		/>
+	);
+};
+EmailLinkStory.storyName = 'EmailLinkStory';
+EmailLinkStory.decorators = [
+	splitTheme(
+		[...defaultFormats].filter(
+			(format) => format.design !== ArticleDesign.Gallery,
+		),
+	),
+];
