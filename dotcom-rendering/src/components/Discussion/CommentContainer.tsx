@@ -34,7 +34,6 @@ type Props = {
 	error: string;
 	setError: (error: string) => void;
 	pickError: string;
-	setPickError: (error: string) => void;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
@@ -92,7 +91,6 @@ export const CommentContainer = ({
 	error,
 	setError,
 	pickError,
-	setPickError,
 	userNameMissing,
 	setUserNameMissing,
 	previewBody,
@@ -146,7 +144,6 @@ export const CommentContainer = ({
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
 				pickError={pickError}
-				setPickError={setPickError}
 				reportAbuse={reportAbuse}
 			/>
 
@@ -176,7 +173,6 @@ export const CommentContainer = ({
 										toggleMuteStatus={toggleMuteStatus}
 										onPermalinkClick={onPermalinkClick}
 										pickError={pickError}
-										setPickError={setPickError}
 										reportAbuse={reportAbuse}
 									/>
 								</li>
