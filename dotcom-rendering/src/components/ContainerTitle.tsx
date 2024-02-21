@@ -21,6 +21,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showDateHeader?: boolean;
 	editionId?: EditionId;
+	lightweightHeader?: boolean;
 };
 
 const linkStyles = css`
@@ -88,6 +89,7 @@ const dateStyles = css`
  */
 export const ContainerTitle = ({
 	title,
+	lightweightHeader,
 	fontColour,
 	description,
 	url,
@@ -112,12 +114,25 @@ export const ContainerTitle = ({
 					href={url}
 					data-link-name="section heading"
 				>
-					<h2 css={[headerStylesWithUrl, headerStyles(fontColour)]}>
+					<h2
+						css={[
+							headerStylesWithUrl,
+							headerStyles(fontColour),
+							lightweightHeader &&
+								body.medium({ fontWeight: 'regular' }),
+						]}
+					>
 						{localisedTitle(title, editionId)}
 					</h2>
 				</a>
 			) : (
-				<h2 css={headerStyles(fontColour)}>
+				<h2
+					css={[
+						headerStyles(fontColour),
+						lightweightHeader &&
+							body.medium({ fontWeight: 'regular' }),
+					]}
+				>
 					{localisedTitle(title, editionId)}
 				</h2>
 			)}

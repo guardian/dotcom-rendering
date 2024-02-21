@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, palette, space } from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
@@ -54,48 +54,6 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 			year: 'numeric',
 		})}`;
 	}
-};
-
-const titleStyle = css`
-	${body.medium({ fontWeight: 'regular' })};
-	color: ${palette.neutral[7]};
-	padding-bottom: ${space[1]}px;
-	padding-top: ${space[1]}px;
-	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
-`;
-
-const linkStyle = css`
-	text-decoration: none;
-	color: ${palette.neutral[7]};
-
-	&:hover {
-		text-decoration: underline;
-	}
-`;
-
-const SectionLeftContent = ({
-	url,
-	title,
-	dateString,
-}: {
-	title: string;
-	dateString: string;
-	url?: string;
-}) => {
-	if (url !== undefined) {
-		return (
-			<header css={titleStyle}>
-				<a href={url} css={linkStyle}>
-					<time dateTime={dateString}>{title}</time>
-				</a>
-			</header>
-		);
-	}
-	return (
-		<header css={titleStyle}>
-			<time dateTime={dateString}>{title}</time>
-		</header>
-	);
 };
 
 export const TagPageLayout = ({ tagPage, NAV }: Props) => {
@@ -271,18 +229,11 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								desktopAdPositions,
 							)}
 							<FrontSection
-								leftContent={
-									<SectionLeftContent
-										url={url}
-										title={title}
-										dateString={`${groupedTrails.year}-${
-											groupedTrails.month
-										}${
-											groupedTrails.day !== undefined
-												? `-${groupedTrails.day}`
-												: ''
-										}`}
-									/>
+								title={title}
+								url={url}
+								isTagPage={true}
+								collectionBranding={
+									index === 0 ? tagPage.branding : undefined
 								}
 								showTopBorder={true}
 								ophanComponentLink={`container-${index} | ${containedId}`}

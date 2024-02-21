@@ -1,5 +1,5 @@
 import type { Branding } from '../types/branding';
-import { decideCollectionBranding } from './branding';
+import { decideCollectionBranding, decideTagPageBranding } from './branding';
 
 // For the purpose of these tests we don't care about the contents of the logo objects
 const logo = {} as Branding['logo'];
@@ -627,5 +627,44 @@ describe('decideCollectionBranding', () => {
 			isContainerBranding: false,
 		});
 		expect(collectionBranding).toBeUndefined();
+	});
+});
+
+describe('decideTagPageBranding', () => {
+	it('picks branding from a tag page by their edition', () => {
+		const branding = {
+			brandingType: { name: 'sponsored' },
+			sponsorName: 'Guardian.org',
+			aboutThisLink: '',
+			logo,
+		} satisfies Branding;
+
+		const tagPageBranding = decideTagPageBranding({
+			branding,
+		});
+
+		expect(tagPageBranding).toMatchObject({
+			kind: 'sponsored',
+			isFrontBranding: true,
+			branding: {
+				brandingType: { name: 'sponsored' },
+				sponsorName: 'Guardian.org',
+				aboutThisLink: '',
+			},
+			isContainerBranding: false,
+			hasMultipleBranding: false,
+		});
+	});
+	it('is undefined when branding does not have a brandingType name present', () => {
+		const branding = {
+			sponsorName: 'Guardian.org',
+			aboutThisLink: '',
+			logo,
+		};
+
+		const tagPageBranding = decideTagPageBranding({
+			branding,
+		});
+		expect(tagPageBranding).toBeUndefined();
 	});
 });
