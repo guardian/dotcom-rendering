@@ -101,6 +101,7 @@ export const FormField = ({
 					supporting={description}
 					optional={!required}
 					error={fieldError}
+					maxFileSize={6_000_000}
 					data-testid={`form-field-${formField.id}`}
 					onUpload={(file: string | undefined): void =>
 						setFieldInFormData(formField.id, file)

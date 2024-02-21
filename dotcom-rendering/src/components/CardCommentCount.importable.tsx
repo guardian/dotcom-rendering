@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { between, textSans } from '@guardian/source-foundations';
+import {
+	between,
+	textSans,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 import { formatCount } from '../lib/formatCount';
 import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
@@ -83,12 +87,18 @@ export const CardCommentCount = ({
 				<div css={svgStyles(isDynamo, isOnwardContent)}>
 					<CommentIcon />
 				</div>
-				<div css={longStyles} aria-hidden="true">
-					{long}
-				</div>
+				<div css={longStyles}>{long}</div>
 				<div css={shortStyles} aria-hidden="true">
 					{short}
 				</div>
+				<span
+					css={css`
+						${visuallyHidden}
+					`}
+				>
+					{' '}
+					comments
+				</span>
 			</div>
 		</ContainerOverrides>
 	);

@@ -86,6 +86,7 @@ type Props = {
 	hasPageSkin?: boolean;
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
+	isTagPage?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -460,6 +461,7 @@ export const FrontSection = ({
 	hasPageSkin = false,
 	discussionApiUrl,
 	collectionBranding,
+	isTagPage = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -526,6 +528,7 @@ export const FrontSection = ({
 					title={
 						<ContainerTitle
 							title={title}
+							lightweightHeader={isTagPage}
 							fontColour={overrides?.text.container}
 							description={description}
 							// On paid fronts the title is not treated as a link
@@ -537,6 +540,7 @@ export const FrontSection = ({
 					}
 					collectionBranding={collectionBranding}
 				/>
+
 				{leftContent}
 			</div>
 

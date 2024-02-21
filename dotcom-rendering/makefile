@@ -178,7 +178,7 @@ gen-schema:
 	@git add src/model/article-schema.json
 	@git add src/model/front-schema.json
 	@git add src/model/block-schema.json
-	@git add src/model/tag-front-schema.json
+	@git add src/model/tag-page-schema.json
 
 check-stories:
 	$(call log, "Checking Storybook stories")

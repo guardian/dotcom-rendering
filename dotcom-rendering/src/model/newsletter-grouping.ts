@@ -12,6 +12,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'morning-briefing', // First Edition
+				'swift-notes',
 				'saturday-edition',
 				'word-of-mouth', // Feast
 				'this-is-europe',
@@ -108,51 +109,48 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'us-morning-newsletter', // First Thing
-				'saturday-edition',
-				'today-us', // Headlines US
-				'trump-on-trial',
 				'reclaim-your-brain',
-				'follow-margaret-sullivan',
-				'follow-robert-reich',
-				'best-of-opinion-us',
-				'headlines-europe',
-				'green-light', // Down to Earth
-				'patriarchy',
-				'bookmarks',
+				'trump-on-trial',
+				'today-us', // Headlines US
+				'soccer-with-jonathan-wilson',
 			],
 		},
 		{
 			title: 'In depth',
 			newsletters: [
+				'green-light', // Down to Earth
+				'soccer-with-jonathan-wilson',
+				'follow-robert-reich',
+				'follow-margaret-sullivan',
+				'patriarchy',
 				'this-is-europe',
-				'the-guide-staying-in',
 				'tech-scape',
 				'fashion-statement',
-				'word-of-mouth', // Feast
-				'pushing-buttons',
 			],
 		},
 		{
 			title: 'Culture picks',
 			newsletters: [
+				'swift-notes',
+				'the-guide-staying-in',
 				'film-today',
 				'sleeve-notes',
 				'whats-on',
 				'hear-here',
 				'art-weekly',
 				'design-review',
+				'documentaries',
 			],
 		},
 		{
 			title: 'Weekend reads',
 			newsletters: [
 				'inside-saturday',
-				'house-to-home',
-				'saved-for-later',
 				'five-great-reads',
 				'the-upside',
 				'the-long-read',
-				'observer-food',
+				'saved-for-later',
+				'house-to-home',
 			],
 		},
 		{
@@ -160,16 +158,14 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'global-dispatch',
 				'cotton-capital',
-				'business-today',
-				'documentaries',
-				'her-stage',
 				'guardian-traveller',
+				'her-stage',
+				'the-crunch',
 			],
 		},
 		{
 			title: 'Sport',
 			newsletters: [
-				'soccer-with-jonathan-wilson',
 				'the-fiver', // Football Daily
 				'moving-the-goalposts',
 				'the-spin',
@@ -181,11 +177,13 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'In brief',
 			newsletters: [
+				'best-of-opinion-us',
 				'today-uk', // Headlines UK
-				'today-au', // Headlines AUS
-				'headlines-europe',
 				'best-of-opinion',
+				'today-au', // Headlines AUS
 				'best-of-opinion-au',
+				'headlines-europe',
+				'business-today',
 			],
 		},
 		{
@@ -195,8 +193,6 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'saturday-edition',
 				'morning-mail',
 				'afternoon-update',
-				'first-dog',
-				'the-rural-network',
 				'australian-politics',
 			],
 		},
@@ -207,6 +203,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'morning-mail',
 				'afternoon-update',
+				'swift-notes',
 				'saturday-edition',
 				'first-dog',
 				'the-rural-network',
