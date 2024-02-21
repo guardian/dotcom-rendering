@@ -199,10 +199,8 @@ export const decideCollectionBranding = ({
 export const decideTagPageBranding = ({
 	branding,
 }: {
-	branding: Branding | undefined;
+	branding: Branding;
 }): CollectionBranding | undefined => {
-	if (branding === undefined) return undefined;
-
 	// If this tagpage is eligible to display branding
 	// AND there is branding defined, we should display it
 	const kind = getBrandingType([branding]);

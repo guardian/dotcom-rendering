@@ -655,9 +655,15 @@ describe('decideTagPageBranding', () => {
 			hasMultipleBranding: false,
 		});
 	});
-	it('is undefined when no branding is present', () => {
+	it('is undefined when branding does not have a brandingType name present', () => {
+		const branding = {
+			sponsorName: 'Guardian.org',
+			aboutThisLink: '',
+			logo,
+		};
+
 		const tagPageBranding = decideTagPageBranding({
-			branding: undefined,
+			branding,
 		});
 		expect(tagPageBranding).toBeUndefined();
 	});

@@ -76,9 +76,11 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 
 	const branding = data.commercialProperties[data.editionId].branding;
 
-	const tagPageBranding = decideTagPageBranding({
-		branding,
-	});
+	const tagPageBranding = branding
+		? decideTagPageBranding({
+				branding,
+		  })
+		: undefined;
 
 	return {
 		...data,
