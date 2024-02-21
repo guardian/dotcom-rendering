@@ -461,7 +461,7 @@ export const FrontSection = ({
 	hasPageSkin = false,
 	discussionApiUrl,
 	collectionBranding,
-	isTagPage,
+	isTagPage = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
