@@ -633,11 +633,12 @@ describe('decideCollectionBranding', () => {
 describe('decideTagPageBranding', () => {
 	it('picks branding from a tag page by their edition', () => {
 		const branding = {
-			brandingType: { name: 'sponsored' as const },
+			brandingType: { name: 'sponsored' },
 			sponsorName: 'Guardian.org',
 			aboutThisLink: '',
 			logo,
-		};
+		} satisfies Branding;
+
 		const tagPageBranding = decideTagPageBranding({
 			branding,
 		});
@@ -646,7 +647,7 @@ describe('decideTagPageBranding', () => {
 			kind: 'sponsored',
 			isFrontBranding: true,
 			branding: {
-				brandingType: { name: 'sponsored' as const },
+				brandingType: { name: 'sponsored' },
 				sponsorName: 'Guardian.org',
 				aboutThisLink: '',
 			},
