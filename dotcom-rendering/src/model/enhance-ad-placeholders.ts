@@ -11,8 +11,9 @@ import type { RenderingTarget } from '../types/renderingTarget';
  * - Last paragraph should not be followed by an ad
  */
 const isSuitablePosition = (
-	paragraphCounter: number,
+	blockCounter: number,
 	numberOfAdsInserted: number,
+	previousAdIndex: number,
 	isLastElement: boolean,
 	isParagraph: boolean,
 ): boolean => {
@@ -31,16 +32,21 @@ const isSuitablePosition = (
 		return false;
 	}
 
+	const isFirstAdIndex = blockCounter === firstAdIndex;
+
+	const isEnoughBlocksAfter =
+		blockCounter - previousAdIndex >= adEveryNParagraphs;
+
 	// Insert an ad placeholder every `adEveryNParagraphs` paragraphs,
 	// starting from the paragraph at `firstAdIndex` and only after a paragraph
-	return (
-		isParagraph &&
-		(paragraphCounter - firstAdIndex) % adEveryNParagraphs === 0
-	);
+	return isParagraph && (isFirstAdIndex || isEnoughBlocksAfter);
 };
 
 const isParagraph = (element: FEElement) =>
 	element._type === 'model.dotcomrendering.pageElements.TextBlockElement';
+
+const isImage = (element: FEElement) =>
+	element._type === 'model.dotcomrendering.pageElements.ImageBlockElement';
 
 const insertPlaceholder = (elements: FEElement[]): FEElement[] => {
 	const placeholder: AdPlaceholderBlockElement = {
@@ -51,7 +57,8 @@ const insertPlaceholder = (elements: FEElement[]): FEElement[] => {
 
 type ReducerAccumulator = {
 	elements: FEElement[];
-	paragraphCounter: number;
+	blockCounter: number;
+	previousAdIndex: number;
 	numberOfAdsInserted: number;
 };
 
@@ -65,13 +72,15 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 			currentElement: FEElement,
 			idx: number,
 		): ReducerAccumulator => {
-			const paragraphCounter = isParagraph(currentElement)
-				? prev.paragraphCounter + 1
-				: prev.paragraphCounter;
+			const blockCounter =
+				isParagraph(currentElement) || isImage(currentElement)
+					? prev.blockCounter + 1
+					: prev.blockCounter;
 
 			const shouldInsertAd = isSuitablePosition(
-				paragraphCounter,
+				blockCounter,
 				prev.numberOfAdsInserted,
+				prev.previousAdIndex,
 				elements.length === idx + 1,
 				isParagraph(currentElement),
 			);
@@ -82,7 +91,10 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 				elements: shouldInsertAd
 					? insertPlaceholder(currentElements)
 					: currentElements,
-				paragraphCounter,
+				blockCounter,
+				previousAdIndex: shouldInsertAd
+					? blockCounter
+					: prev.previousAdIndex,
 				numberOfAdsInserted: shouldInsertAd
 					? prev.numberOfAdsInserted + 1
 					: prev.numberOfAdsInserted,
@@ -91,7 +103,8 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 		// Initial value for reducer function
 		{
 			elements: [],
-			paragraphCounter: 0,
+			blockCounter: 0,
+			previousAdIndex: 0,
 			numberOfAdsInserted: 0,
 		},
 	);
