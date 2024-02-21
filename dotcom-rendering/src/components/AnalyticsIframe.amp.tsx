@@ -17,7 +17,7 @@ export const AnalyticsIframe = ({ url }: Props) => {
 				return (
 					<amp-iframe
 						class={prebidIframeStyle}
-						data-block-on-consent="_till_accepted"
+						data-block-on-consent="_till_responded"
 						title="Analytics Iframe"
 						height="1"
 						width="1"

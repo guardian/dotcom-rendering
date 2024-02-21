@@ -28,8 +28,58 @@ export const Analytics = ({
 	},
 }: Props) => {
 	const scripts: string[] = [
-		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		`<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include">
+			<script type="application/json">
+				{
+					"requests": {
+						"pageViewWithConsent": "\${additionalBase}&consentJurisdiction=\${consentJurisdiction}&consentUUID=\${consentUUID}&consent=\${consent}"
+					},
+					"triggers": {
+						"trackPageviewTcf": {
+							"on": "visible",
+							"request": "pageViewWithConsent",
+							"selector": ".amp-geo-group-eea",
+							"vars": {
+								"consentUUID": "\${clientId(consentUUID)}",
+								"consent": "\${consentString}",
+								"consentJurisdiction": "TCF"
+							},
+							"visibilitySpec": {
+								"totalTimeMin": 1000
+							}
+						},
+						"trackPageviewCcpa": {
+							"on": "visible",
+							"request": "pageViewWithConsent",
+							"selector": ".amp-geo-group-ccpa",
+							"vars": {
+								"consentUUID": "\${clientId(ccpaUUID)}",
+								"consent": "$EQUALS(\${consentState}, sufficient)",
+								"consentJurisdiction": "CCPA"
+
+							},
+							"visibilitySpec": {
+								"totalTimeMin": 1000
+							}
+						},
+						"trackPageviewAus": {
+							"on": "visible",
+							"request": "pageViewWithConsent",
+							"selector": ".amp-geo-group-aus",
+							"vars": {
+								"consentUUID": "\${clientId(ccpaUUID)}",
+								"consent": "$EQUALS(\${consentState}, sufficient)",
+								"consentJurisdiction": "AUS"
+							},
+							"visibilitySpec": {
+								"totalTimeMin": 1000
+							}
+						}
+					}
+				}
+			</script>
+		</amp-analytics>`,
+		`<amp-analytics data-block-on-consent="_till_responded" type="googleanalytics" id="google-analytics">
              <script type="application/json">
                {
                  "requests": {
@@ -57,7 +107,7 @@ export const Analytics = ({
                }
                </script>
             </amp-analytics>`,
-		`<amp-analytics data-block-on-consent id="comscore" type="comscore">
+		`<amp-analytics data-block-on-consent="_till_responded" id="comscore" type="comscore">
             <script type="application/json">
                 {
                     "vars": {"c2": "${comscoreID}"},
@@ -78,7 +128,7 @@ export const Analytics = ({
                 }
             </script>
         </amp-analytics>`,
-		`<amp-analytics data-block-on-consent config="https://uk-script.dotmetrics.net/AmpConfig.json?dom=www.theguardian.com&tag=${ipsosSectionName}">
+		`<amp-analytics data-block-on-consent="_till_accepted" config="https://uk-script.dotmetrics.net/AmpConfig.json?dom=www.theguardian.com&tag=${ipsosSectionName}">
             <script type="application/json">
                 {
                     "enabled": "$EQUALS(\${ampGeo(ISOCountry)}, gb)"

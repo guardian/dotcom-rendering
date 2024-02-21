@@ -17,6 +17,7 @@ import type {
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
+import { useDispatch } from '../DispatchContext';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -38,7 +39,6 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	pickError: string;
-	setPickError: (error: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
@@ -315,7 +315,6 @@ export const Comment = ({
 	toggleMuteStatus,
 	onPermalinkClick,
 	pickError,
-	setPickError,
 	reportAbuse,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
@@ -324,6 +323,15 @@ export const Comment = ({
 
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
+
+	const dispatch = useDispatch();
+
+	const setPickError = (error: string) => {
+		dispatch({
+			type: 'setPickError',
+			error,
+		});
+	};
 
 	const pick = async (staffUser: Staff) => {
 		setPickError('');

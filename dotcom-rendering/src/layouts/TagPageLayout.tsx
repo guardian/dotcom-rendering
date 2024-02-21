@@ -1,12 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	body,
-	brandBackground,
-	brandBorder,
-	brandLine,
-	palette,
-	space,
-} from '@guardian/source-foundations';
+import { palette } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
@@ -63,48 +56,6 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 	}
 };
 
-const titleStyle = css`
-	${body.medium({ fontWeight: 'regular' })};
-	color: ${palette.neutral[7]};
-	padding-bottom: ${space[1]}px;
-	padding-top: ${space[1]}px;
-	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
-`;
-
-const linkStyle = css`
-	text-decoration: none;
-	color: ${palette.neutral[7]};
-
-	&:hover {
-		text-decoration: underline;
-	}
-`;
-
-const SectionLeftContent = ({
-	url,
-	title,
-	dateString,
-}: {
-	title: string;
-	dateString: string;
-	url?: string;
-}) => {
-	if (url !== undefined) {
-		return (
-			<header css={titleStyle}>
-				<a href={url} css={linkStyle}>
-					<time dateTime={dateString}>{title}</time>
-				</a>
-			</header>
-		);
-	}
-	return (
-		<header css={titleStyle}>
-			<time dateTime={dateString}>{title}</time>
-		</header>
-	);
-};
-
 export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const {
 		config: { switches, hasPageSkin, isPaidContent },
@@ -144,7 +95,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={palette.brand[400]}
 						element="header"
 					>
 						<Header
@@ -163,10 +114,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					</Section>
 					<Section
 						fullWidth={true}
-						borderColour={brandLine.primary}
+						borderColour={palette.brand[600]}
 						showTopBorder={false}
 						padSides={false}
-						backgroundColour={brandBackground.primary}
+						backgroundColour={palette.brand[400]}
 						element="nav"
 					>
 						<Nav
@@ -278,18 +229,11 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								desktopAdPositions,
 							)}
 							<FrontSection
-								leftContent={
-									<SectionLeftContent
-										url={url}
-										title={title}
-										dateString={`${groupedTrails.year}-${
-											groupedTrails.month
-										}${
-											groupedTrails.day !== undefined
-												? `-${groupedTrails.day}`
-												: ''
-										}`}
-									/>
+								title={title}
+								url={url}
+								isTagPage={true}
+								collectionBranding={
+									index === 0 ? tagPage.branding : undefined
 								}
 								showTopBorder={true}
 								ophanComponentLink={`container-${index} | ${containedId}`}
@@ -361,8 +305,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
+				backgroundColour={palette.brand[400]}
+				borderColour={palette.brand[600]}
 				showSideBorders={false}
 				showTopBorder={false}
 				element="footer"
