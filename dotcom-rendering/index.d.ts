@@ -71,8 +71,6 @@ type FEFormat = {
 	display: FEDisplay;
 };
 
-type ArticleDisplay = import('@guardian/libs').ArticleDisplay;
-type ArticleDesign = import('@guardian/libs').ArticleDesign;
 type ArticleTheme = import('@guardian/libs').ArticleTheme;
 type ArticleFormat = import('@guardian/libs').ArticleFormat;
 
