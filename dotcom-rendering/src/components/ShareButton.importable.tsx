@@ -37,7 +37,9 @@ const sharedButtonStyles = (sizeXSmall: boolean, isCopied: boolean) => css`
 const copiedButtonStyles = (sizeXSmall: boolean) => css`
 	color: ${themePalette('--share-button-copied')};
 	padding: ${sizeXSmall ? '0 4px' : '0 10px'};
-
+	:hover {
+		color: inherit;
+	}
 	svg {
 		fill: ${palette.success[400]};
 	}
