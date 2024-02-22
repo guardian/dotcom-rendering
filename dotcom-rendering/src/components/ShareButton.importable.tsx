@@ -198,6 +198,21 @@ export const EmailLink = ({
 	);
 };
 
+/**
+ * A button or link for sharing articles:
+ * - if `canShare` is supported, triggers native share
+ * - otherwise if `clipboard` is supported, a copy button
+ * - otherwise a `mailto:` link
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We need JS to identify if the browser supports specific
+ * features, and trigger share or clipboard copy.
+ *
+ * ---
+ *
+ * [`ShareButton` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-sharebutton&buildNumber=6976&k=65d716aedbc77e22153b20a9-1200px-interactive-true&h=13&b=-2)
+ */
 export const ShareButton = ({
 	size = 'small',
 	pageId,
