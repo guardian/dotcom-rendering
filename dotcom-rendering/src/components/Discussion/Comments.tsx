@@ -227,8 +227,6 @@ export const Comments = ({
 		}
 	}, [isWeb, expanded, loading, enableMobileDiscussionAdsSwitch]);
 
-	const commentsStateChangeEvent = new CustomEvent('comments-state-change');
-
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
 			if (result.kind === 'error') {
@@ -275,7 +273,7 @@ export const Comments = ({
 
 		isWeb &&
 			enableMobileDiscussionAdsSwitch &&
-			document.dispatchEvent(commentsStateChangeEvent);
+			document.dispatchEvent(new CustomEvent('comments-state-change'));
 	};
 
 	useEffect(() => {
@@ -309,7 +307,7 @@ export const Comments = ({
 		setPage(pageNumber);
 		isWeb &&
 			enableMobileDiscussionAdsSwitch &&
-			document.dispatchEvent(commentsStateChangeEvent);
+			document.dispatchEvent(new CustomEvent('comments-state-change'));
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
