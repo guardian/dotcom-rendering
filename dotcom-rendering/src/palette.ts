@@ -3720,7 +3720,17 @@ const subMetaTextDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const subMetaTextHoverLight: PaletteFunction = () => sourcePalette.neutral[100];
+const subMetaTextHoverLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[7];
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
 
 const syndicationButtonText: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
