@@ -99,6 +99,14 @@ const writeMutes = (mutes: string[]) => {
 	storage.local.set('gu.prefs.discussion.mutes', mutes);
 };
 
+/**
+ * Dispatches a custom event which is handled by @guardian/commercial
+ *
+ * @see https://github.com/guardian/commercial/blob/9175e572a5a81e334208775c64b7b479dd544c6c/src/insert/comments-expanded-advert.ts#L197
+ */
+const dispatchCommentsStateChange = () =>
+	document.dispatchEvent(new CustomEvent('comments-state-change'));
+
 export const Comments = ({
 	baseUrl,
 	shortUrl,
@@ -273,7 +281,7 @@ export const Comments = ({
 
 		isWeb &&
 			enableMobileDiscussionAdsSwitch &&
-			document.dispatchEvent(new CustomEvent('comments-state-change'));
+			dispatchCommentsStateChange();
 	};
 
 	useEffect(() => {
@@ -307,7 +315,7 @@ export const Comments = ({
 		setPage(pageNumber);
 		isWeb &&
 			enableMobileDiscussionAdsSwitch &&
-			document.dispatchEvent(new CustomEvent('comments-state-change'));
+			dispatchCommentsStateChange();
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
