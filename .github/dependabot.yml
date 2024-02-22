@@ -35,9 +35,11 @@ updates:
       react:
         patterns:
           - 'react*'
-      remark:
+      unified:
         patterns:
+          - 'unified'
           - 'remark*'
+          - 'rehype*'
       storybook:
         patterns:
           - '*storybook*'
