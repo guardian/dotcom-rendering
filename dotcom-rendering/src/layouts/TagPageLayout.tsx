@@ -285,7 +285,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
-					showTopBorder={false}
+					showTopBorder={true}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
