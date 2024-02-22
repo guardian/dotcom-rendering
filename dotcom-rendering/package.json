@@ -74,7 +74,7 @@
 		"@storybook/components": "7.6.17",
 		"@storybook/core-events": "7.6.17",
 		"@storybook/react": "7.6.17",
-		"@storybook/react-webpack5": "7.6.15",
+		"@storybook/react-webpack5": "7.6.17",
 		"@storybook/testing-library": "0.2.2",
 		"@storybook/theming": "7.6.17",
 		"@svgr/webpack": "8.1.0",
