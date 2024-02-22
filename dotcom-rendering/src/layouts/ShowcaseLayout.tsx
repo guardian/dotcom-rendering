@@ -865,9 +865,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							enableDiscussionSwitch={
 								!!article.config.switches.enableDiscussionSwitch
 							}
-							enableMobileDiscussionAdsSwitch={
-								!!article.config.switches.mobileDiscussionAds
-							}
 							isAdFreeUser={article.isAdFreeUser}
 							shouldHideAds={article.shouldHideAds}
 							idApiUrl={article.config.idApiUrl}
