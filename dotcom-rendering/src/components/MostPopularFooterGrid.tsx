@@ -6,9 +6,9 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
-import { Link } from '@guardian/source-react-components';
 
 const gridContainerStyle = css`
 	display: grid;
