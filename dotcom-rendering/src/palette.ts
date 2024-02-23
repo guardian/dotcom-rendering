@@ -4651,8 +4651,8 @@ const discussionSectionBackgroundDark: PaletteFunction = ({
 	}
 };
 
-const discussionTextLight: PaletteFunction = () => sourcePalette.neutral[86];
-const discussionTextDark: PaletteFunction = () => sourcePalette.neutral[20];
+const discussionTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const discussionTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const discussionAccentTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
