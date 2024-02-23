@@ -853,7 +853,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						backgroundColour={themePalette(
 							'--discussion-section-background',
 						)}
-						borderColour={themePalette('--discussion-border')}
+						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--discussion-text')}
 					>
 						<DiscussionLayout

@@ -943,7 +943,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						backgroundColour={themePalette(
 							'--discussion-section-background',
 						)}
-						borderColour={themePalette('--discussion-border')}
+						borderColour={themePalette('--article-border')}
 						fontColour={themePalette('--discussion-text')}
 					>
 						<DiscussionLayout
