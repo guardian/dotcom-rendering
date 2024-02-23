@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleDisplay } from '@guardian/libs';
 import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
