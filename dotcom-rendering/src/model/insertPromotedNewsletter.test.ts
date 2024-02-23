@@ -1,6 +1,7 @@
 import { Live as exampleLiveBlog } from '../../fixtures/generated/articles/Live';
 import { Quiz as exampleQuiz } from '../../fixtures/generated/articles/Quiz';
 import { Standard as exampleStandard } from '../../fixtures/generated/articles/Standard';
+import { decideFormat } from '../lib/decideFormat';
 import type {
 	Newsletter,
 	NewsletterSignupBlockElement,
@@ -23,7 +24,7 @@ describe('Insert Newsletter Signups', () => {
 	it('inserts a NewsletterSignupBlockElement to a standard article if there is a newsletter', () => {
 		const insertedBlock = insertPromotedNewsletter(
 			exampleStandard.blocks,
-			exampleStandard.format,
+			decideFormat(exampleStandard.format),
 			NEWSLETTER,
 		)
 			.flatMap((block) => block.elements)
@@ -43,7 +44,7 @@ describe('Insert Newsletter Signups', () => {
 		expect(
 			insertPromotedNewsletter(
 				exampleLiveBlog.blocks,
-				exampleLiveBlog.format,
+				decideFormat(exampleLiveBlog.format),
 				NEWSLETTER,
 			)
 				.flatMap((block) => block.elements)
@@ -59,7 +60,7 @@ describe('Insert Newsletter Signups', () => {
 		expect(
 			insertPromotedNewsletter(
 				exampleQuiz.blocks,
-				exampleQuiz.format,
+				decideFormat(exampleQuiz.format),
 				NEWSLETTER,
 			)
 				.flatMap((block) => block.elements)

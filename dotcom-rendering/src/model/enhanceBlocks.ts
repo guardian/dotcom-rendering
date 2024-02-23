@@ -1,3 +1,4 @@
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import type { ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
@@ -16,11 +17,11 @@ import { validateAsBlock } from './validate';
 class BlockEnhancer {
 	blocks: Block[];
 
-	format: FEFormat;
+	format: ArticleFormat;
 
 	options: Options;
 
-	constructor(blocks: Block[], format: FEFormat, options: Options) {
+	constructor(blocks: Block[], format: ArticleFormat, options: Options) {
 		this.blocks = blocks;
 		this.format = format;
 		this.options = options;
@@ -40,8 +41,8 @@ class BlockEnhancer {
 	enhanceAdPlaceholders() {
 		if (
 			this.options.renderingTarget === 'Apps' &&
-			!(this.format.design === 'LiveBlogDesign') &&
-			!(this.format.design === 'DeadBlogDesign')
+			!(this.format.design === ArticleDesign.LiveBlog) &&
+			!(this.format.design === ArticleDesign.DeadBlog)
 		) {
 			this.blocks = enhanceAdPlaceholders(this.blocks);
 		}
@@ -109,7 +110,7 @@ type Options = {
 // as they both effect SubheadingBlockElement
 export const enhanceBlocks = (
 	blocks: Block[],
-	format: FEFormat,
+	format: ArticleFormat,
 	options: Options,
 ): Block[] => {
 	for (const block of blocks) validateAsBlock(block);

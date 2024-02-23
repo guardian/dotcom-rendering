@@ -1,6 +1,7 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { enhanceArticleType } from '../lib/article';
+import { decideFormat } from '../lib/decideFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
@@ -69,7 +70,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		// The content if body is not checked
 		body as FEBlocksRequest;
 
-	const enhancedBlocks = enhanceBlocks(blocks, format, {
+	const enhancedBlocks = enhanceBlocks(blocks, decideFormat(format), {
 		renderingTarget: 'Web',
 		promotedNewsletter: undefined,
 		imagesForLightbox: [],
