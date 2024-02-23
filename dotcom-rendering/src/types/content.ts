@@ -357,7 +357,6 @@ interface NumberedTitleBlockElement {
 	elementId: string;
 	position: number;
 	html: string;
-	format: FEFormat;
 }
 
 export interface InteractiveContentsBlockElement {

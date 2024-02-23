@@ -2483,87 +2483,14 @@
                 },
                 "html": {
                     "type": "string"
-                },
-                "format": {
-                    "type": "object",
-                    "properties": {
-                        "design": {
-                            "$ref": "#/definitions/FEDesign"
-                        },
-                        "theme": {
-                            "$ref": "#/definitions/FETheme"
-                        },
-                        "display": {
-                            "$ref": "#/definitions/FEDisplay"
-                        }
-                    },
-                    "required": [
-                        "design",
-                        "display",
-                        "theme"
-                    ]
                 }
             },
             "required": [
                 "_type",
                 "elementId",
-                "format",
                 "html",
                 "position"
             ]
-        },
-        "FEDesign": {
-            "enum": [
-                "AnalysisDesign",
-                "ArticleDesign",
-                "AudioDesign",
-                "CommentDesign",
-                "DeadBlogDesign",
-                "EditorialDesign",
-                "ExplainerDesign",
-                "FeatureDesign",
-                "FullPageInteractiveDesign",
-                "GalleryDesign",
-                "InteractiveDesign",
-                "InterviewDesign",
-                "LetterDesign",
-                "LiveBlogDesign",
-                "MatchReportDesign",
-                "NewsletterSignupDesign",
-                "ObituaryDesign",
-                "PhotoEssayDesign",
-                "PictureDesign",
-                "PrintShopDesign",
-                "ProfileDesign",
-                "QuizDesign",
-                "RecipeDesign",
-                "ReviewDesign",
-                "TimelineDesign",
-                "VideoDesign"
-            ],
-            "type": "string"
-        },
-        "FETheme": {
-            "enum": [
-                "CulturePillar",
-                "Labs",
-                "LifestylePillar",
-                "NewsPillar",
-                "OpinionPillar",
-                "SpecialReportAltTheme",
-                "SpecialReportTheme",
-                "SportPillar"
-            ],
-            "type": "string"
-        },
-        "FEDisplay": {
-            "enum": [
-                "ImmersiveDisplay",
-                "NumberedListDisplay",
-                "ShowcaseDisplay",
-                "StandardDisplay"
-            ],
-            "type": "string"
         },
         "InteractiveContentsBlockElement": {
             "type": "object",
@@ -3804,6 +3731,59 @@
                 "INT",
                 "UK",
                 "US"
+            ],
+            "type": "string"
+        },
+        "FEDesign": {
+            "enum": [
+                "AnalysisDesign",
+                "ArticleDesign",
+                "AudioDesign",
+                "CommentDesign",
+                "DeadBlogDesign",
+                "EditorialDesign",
+                "ExplainerDesign",
+                "FeatureDesign",
+                "FullPageInteractiveDesign",
+                "GalleryDesign",
+                "InteractiveDesign",
+                "InterviewDesign",
+                "LetterDesign",
+                "LiveBlogDesign",
+                "MatchReportDesign",
+                "NewsletterSignupDesign",
+                "ObituaryDesign",
+                "PhotoEssayDesign",
+                "PictureDesign",
+                "PrintShopDesign",
+                "ProfileDesign",
+                "QuizDesign",
+                "RecipeDesign",
+                "ReviewDesign",
+                "TimelineDesign",
+                "VideoDesign"
+            ],
+            "type": "string"
+        },
+        "FETheme": {
+            "enum": [
+                "CulturePillar",
+                "Labs",
+                "LifestylePillar",
+                "NewsPillar",
+                "OpinionPillar",
+                "SpecialReportAltTheme",
+                "SpecialReportTheme",
+                "SportPillar"
+            ],
+            "type": "string"
+        },
+        "FEDisplay": {
+            "enum": [
+                "ImmersiveDisplay",
+                "NumberedListDisplay",
+                "ShowcaseDisplay",
+                "StandardDisplay"
             ],
             "type": "string"
         },
