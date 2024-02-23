@@ -53,6 +53,8 @@ updates:
         patterns:
           - '*webpack*'
           - '*-loader'
+        exclude-patterns:
+          - '@storybook/*'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
