@@ -6,13 +6,11 @@ import {
 	Button,
 	LinkButton,
 	SvgCheckmark,
-	SvgEnvelope,
 	SvgShare,
 } from '@guardian/source-react-components';
 import { useEffect, useMemo, useState } from 'react';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
-import LinkIcon from '../static/icons/link-icon.svg';
 
 type Props = {
 	size?: Size;
@@ -27,15 +25,15 @@ type ButtonKind = 'native' | 'copy' | 'email';
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
 
-const sharedButtonStyles = (sizeXSmall: boolean, isCopied: boolean) => css`
+const sharedButtonStyles = (sizeXSmall: boolean) => css`
+	transition: none;
 	border-color: ${themePalette('--share-button-border')};
-	width: ${sizeXSmall ? '101px' : '132px'};
 	height: ${sizeXSmall ? '24px' : '36px'};
-	padding: ${sizeXSmall && !isCopied && '0 10px'};
 `;
 
 const copiedButtonStyles = (sizeXSmall: boolean) => css`
 	color: ${themePalette('--share-button-copied')};
+	width: ${sizeXSmall ? '101px' : '132px'};
 	padding: ${sizeXSmall ? '0 4px' : '0 10px'};
 	:hover {
 		color: inherit;
@@ -45,8 +43,10 @@ const copiedButtonStyles = (sizeXSmall: boolean) => css`
 	}
 `;
 
-const buttonStyles = css`
+const buttonStyles = (sizeXSmall: boolean) => css`
 	color: ${themePalette('--share-button')};
+	width: ${sizeXSmall ? '79px' : '105px'};
+	padding: ${sizeXSmall && '0 10px'};
 	svg {
 		fill: ${themePalette('--share-button')};
 		transition: inherit;
@@ -59,11 +59,6 @@ const buttonStyles = css`
 			fill: ${themePalette('--share-button-hover')};
 		}
 	}
-`;
-
-const nativeShare = (sizeXSmall: boolean) => css`
-	width: ${sizeXSmall ? '79px' : '105px'};
-	border-color: ${themePalette('--share-button-border')};
 `;
 
 const hoverStyles = css`
@@ -108,37 +103,7 @@ const getUrl = ({
 	).href;
 };
 
-export const NativeShareButton = ({
-	onShare,
-	size,
-	isLiveBlogArticleMeta,
-}: {
-	onShare: () => void;
-	size?: Size;
-	isLiveBlogArticleMeta: boolean;
-}) => {
-	const sizeXSmall = size === 'xsmall';
-
-	return (
-		<Button
-			onClick={onShare}
-			size={size}
-			type="button"
-			priority="tertiary"
-			iconSide="left"
-			icon={<SvgShare />}
-			css={[
-				buttonStyles,
-				nativeShare(sizeXSmall),
-				isLiveBlogArticleMeta && liveBlogMobile(false),
-			]}
-		>
-			Share
-		</Button>
-	);
-};
-
-export const CopyLinkButton = ({
+export const CopyNativeShareButton = ({
 	onShare,
 	size,
 	isLiveBlogArticleMeta,
@@ -157,16 +122,16 @@ export const CopyLinkButton = ({
 			type="button"
 			priority="tertiary"
 			iconSide="left"
-			icon={isCopied ? <SvgCheckmark /> : <LinkIcon />}
+			icon={isCopied ? <SvgCheckmark /> : <SvgShare />}
 			css={[
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
-					: [buttonStyles]),
-				sharedButtonStyles(sizeXSmall, isCopied),
+					: [buttonStyles(sizeXSmall)]),
+				sharedButtonStyles(sizeXSmall),
 				isLiveBlogArticleMeta && liveBlogMobile(isCopied),
 			]}
 		>
-			{isCopied ? 'Link copied' : 'Copy link'}
+			{isCopied ? 'Link copied' : 'Share'}
 		</Button>
 	);
 };
@@ -188,14 +153,14 @@ export const EmailLink = ({
 			type="button"
 			priority="tertiary"
 			iconSide="left"
-			icon={<SvgEnvelope />}
+			icon={<SvgShare />}
 			css={[
-				buttonStyles,
-				sharedButtonStyles(sizeXSmall, false),
+				buttonStyles(sizeXSmall),
+				sharedButtonStyles(sizeXSmall),
 				isLiveBlogArticleMeta && liveBlogMobile(false),
 			]}
 		>
-			Email link
+			Share
 		</LinkButton>
 	);
 };
@@ -262,17 +227,18 @@ export const ShareButton = ({
 	switch (buttonKind) {
 		case 'native':
 			return (
-				<NativeShareButton
+				<CopyNativeShareButton
 					onShare={() => {
 						navigator.share(shareData).catch(console.error);
 					}}
 					size={size}
 					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+					isCopied={isCopied}
 				/>
 			);
 		case 'copy':
 			return (
-				<CopyLinkButton
+				<CopyNativeShareButton
 					onShare={() => {
 						navigator.clipboard
 							.writeText(
@@ -287,8 +253,8 @@ export const ShareButton = ({
 							.catch(console.error);
 					}}
 					size={size}
-					isCopied={isCopied}
 					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+					isCopied={isCopied}
 				/>
 			);
 		case 'email':
