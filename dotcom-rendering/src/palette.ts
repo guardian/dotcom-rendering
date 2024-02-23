@@ -4616,6 +4616,41 @@ const recommendationCountArrowSelectedLight: PaletteFunction = () =>
 const recommendationCountArrowSelectedDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
+const discussionSectionBackgroundLight: PaletteFunction = ({
+	theme,
+	design,
+}) => {
+	switch (theme) {
+		case Pillar.Opinion:
+			return sourcePalette.opinion[800];
+		default:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[97];
+				default:
+					return sourcePalette.neutral[100];
+			}
+	}
+};
+const discussionSectionBackgroundDark: PaletteFunction = ({
+	theme,
+	design,
+}) => {
+	switch (theme) {
+		case Pillar.Opinion:
+			return sourcePalette.neutral[10];
+		default:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[0];
+				default:
+					return sourcePalette.neutral[10];
+			}
+	}
+};
+
 const discussionTextLight: PaletteFunction = () => sourcePalette.neutral[86];
 const discussionTextDark: PaletteFunction = () => sourcePalette.neutral[20];
 
@@ -5682,6 +5717,10 @@ const paletteColours = {
 	'--sign-in-link-underline': {
 		light: signInLinkLineLight,
 		dark: signInLinkLineDark,
+	},
+	'--discussion-section-background': {
+		light: discussionSectionBackgroundLight,
+		dark: discussionSectionBackgroundDark,
 	},
 	'--discussion-top-pick-background': {
 		light: topPickBackgroundLight,

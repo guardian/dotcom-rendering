@@ -876,9 +876,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="aside"
-						backgroundColour={themePalette('--article-background')}
-						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
+						backgroundColour={themePalette(
+							'--discussion-section-background',
+						)}
+						borderColour={themePalette('--discussion-border')}
+						fontColour={themePalette('--discussion-text')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}

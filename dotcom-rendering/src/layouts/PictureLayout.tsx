@@ -743,10 +743,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						sectionId="comments"
 						element="section"
 						backgroundColour={themePalette(
-							'--article-section-background',
+							'--discussion-section-background',
 						)}
-						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
+						borderColour={themePalette('--discussion-border')}
+						fontColour={themePalette('--discussion-text')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
