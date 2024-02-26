@@ -11,7 +11,7 @@ type Props = {
 const skipLinkCss = css`
 	${textSans.medium()}
 	height: 40px;
-	left: -100vw;
+	left: -200vw;
 	line-height: 30px;
 	overflow: hidden;
 	padding: 0;
