@@ -152,10 +152,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const showMostPopular =
-		front.config.switches.deeplyRead &&
-		front.isNetworkFront &&
-		front.deeplyRead &&
-		front.deeplyRead.length > 0;
+		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
