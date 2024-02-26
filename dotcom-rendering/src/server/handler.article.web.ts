@@ -48,6 +48,17 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
 };
 
+export const handleCrossword: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('crossword', 'web');
+
+	const article = enhanceArticleType(body, 'Web');
+	const { html, prefetchScripts } = renderHtml({
+		article,
+	});
+
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
 export const handleBlocks: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('blocks');
 	const {

@@ -9,6 +9,7 @@ import {
 	handleArticle,
 	handleArticleJson,
 	handleBlocks,
+	handleCrossword,
 	handleInteractive,
 } from './handler.article.web';
 import {
@@ -69,6 +70,8 @@ export const devServer = (): Handler => {
 				return handleInteractive(req, res, next);
 			case 'AMPInteractive':
 				return handleAMPArticle(req, res, next);
+			case 'Crossword':
+				return handleCrossword(req, res, next);
 			case 'Blocks':
 				return handleBlocks(req, res, next);
 			case 'Front':
