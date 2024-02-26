@@ -7,9 +7,8 @@ import {
 } from '../../.storybook/decorators/splitThemeDecorator';
 import { palette as themePalette } from '../palette';
 import {
-	CopyLinkButton,
+	CopyNativeShareButton,
 	EmailLink,
-	NativeShareButton,
 	ShareButton,
 } from './ShareButton.importable';
 
@@ -59,7 +58,7 @@ ShareButtonStoryXSmall.decorators = [splitTheme()];
 
 export const LinkCopied = () => {
 	return (
-		<CopyLinkButton
+		<CopyNativeShareButton
 			onShare={() => {}}
 			isCopied={true}
 			isLiveBlogArticleMeta={false}
@@ -70,50 +69,6 @@ export const LinkCopied = () => {
 LinkCopied.storyName = 'LinkCopied';
 LinkCopied.decorators = [splitTheme()];
 
-export const NativeShare = () => {
-	return (
-		<NativeShareButton
-			onShare={() => {}}
-			isLiveBlogArticleMeta={true}
-			size="small"
-		/>
-	);
-};
-NativeShare.storyName = 'NativeShare';
-NativeShare.decorators = [splitTheme()];
-
-export const LiveBlogMobileNative = ({ theme }: StoryArgs) => {
-	return (
-		<div
-			css={css`
-				background-color: ${theme === 'light'
-					? themePalette('--share-button-liveblog-mobile')
-					: 'inherit'};
-			`}
-		>
-			<NativeShareButton
-				onShare={() => {}}
-				isLiveBlogArticleMeta={true}
-				size="small"
-			/>
-		</div>
-	);
-};
-LiveBlogMobileNative.storyName = 'LiveBlogMobileNative';
-LiveBlogMobileNative.decorators = [
-	splitTheme(
-		[...defaultFormats].filter(
-			(format) => format.design !== ArticleDesign.Gallery,
-		),
-	),
-];
-LiveBlogMobileNative.story = {
-	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [375] },
-	},
-};
-
 export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 	return (
 		<div
@@ -123,7 +78,7 @@ export const LiveBlogMobile = ({ theme }: StoryArgs) => {
 					: 'inherit'};
 			`}
 		>
-			<CopyLinkButton
+			<CopyNativeShareButton
 				onShare={() => {}}
 				isCopied={false}
 				isLiveBlogArticleMeta={true}
