@@ -451,10 +451,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (
-						collection.containerPalette === 'Branded' &&
-						renderAds
-					) {
+					if (collection.containerPalette === 'Branded') {
 						return (
 							<Fragment key={ophanName}>
 								<LabsSection
