@@ -656,7 +656,6 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId',
 						position: 1,
 						html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
-						format: NumberedList.format,
 					},
 				],
 			},
@@ -711,7 +710,6 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId1',
 						position: 1,
 						html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
-						format: NumberedList.format,
 					},
 					{
 						...images[0],
@@ -727,7 +725,6 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId2',
 						position: 2,
 						html: '<h2 data-ignore="global-h2-styling">Other text</h2>',
-						format: NumberedList.format,
 					},
 					{
 						_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
@@ -740,7 +737,6 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId3',
 						position: 3,
 						html: '<h2 data-ignore="global-h2-styling">More text</h2>',
-						format: NumberedList.format,
 					},
 				],
 			},

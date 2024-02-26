@@ -291,7 +291,7 @@ const addItemLinks = (elements: FEElement[]): FEElement[] => {
 	return withItemLink;
 };
 
-const addTitles = (elements: FEElement[], format: FEFormat): FEElement[] => {
+const addTitles = (elements: FEElement[]): FEElement[] => {
 	/**
 	 * Why not just add H3s in Composer?
 	 * Truth is, you can't. So to get around this there's a convention that says if
@@ -321,7 +321,6 @@ const addTitles = (elements: FEElement[], format: FEFormat): FEElement[] => {
 					elementId: thisElement.elementId,
 					position,
 					html,
-					format,
 				},
 			);
 			position += 1;
@@ -336,11 +335,8 @@ const addTitles = (elements: FEElement[], format: FEFormat): FEElement[] => {
 class Enhancer {
 	elements: FEElement[];
 
-	format: FEFormat;
-
-	constructor(elements: FEElement[], format: FEFormat) {
+	constructor(elements: FEElement[]) {
 		this.elements = elements;
-		this.format = format;
 	}
 
 	makeThumbnailsRound() {
@@ -349,7 +345,7 @@ class Enhancer {
 	}
 
 	addTitles() {
-		this.elements = addTitles(this.elements, this.format);
+		this.elements = addTitles(this.elements);
 		return this;
 	}
 
@@ -379,9 +375,9 @@ class Enhancer {
 	}
 }
 
-const enhance = (elements: FEElement[], format: FEFormat): FEElement[] => {
+const enhance = (elements: FEElement[]): FEElement[] => {
 	return (
-		new Enhancer(elements, format)
+		new Enhancer(elements)
 			// Add the data-ignore='global-h2-styling' attribute
 			.removeGlobalH2Styles()
 			// Turn false h3s into real ones
@@ -412,7 +408,7 @@ export const enhanceNumberedLists = (
 	return blocks.map((block: Block) => {
 		return {
 			...block,
-			elements: enhance(block.elements, format),
+			elements: enhance(block.elements),
 		};
 	});
 };
