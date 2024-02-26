@@ -1,4 +1,3 @@
-import { Explainer as ExampleArticle } from '../../fixtures/generated/articles/Explainer';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceTableOfContents } from './enhanceTableOfContents';
 
@@ -17,9 +16,7 @@ describe('Enhance Table of Contents', () => {
 			},
 		];
 
-		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual(
-			undefined,
-		);
+		expect(enhanceTableOfContents(input)).toEqual(undefined);
 	});
 
 	it('correctly generate a toc from h2s', () => {
@@ -46,7 +43,7 @@ describe('Enhance Table of Contents', () => {
 			},
 		];
 
-		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual([
+		expect(enhanceTableOfContents(input)).toEqual([
 			{
 				id: 'first-h2-text',
 				title: 'First h2 text',
@@ -81,8 +78,6 @@ describe('Enhance Table of Contents', () => {
 			},
 		];
 
-		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual(
-			undefined,
-		);
+		expect(enhanceTableOfContents(input)).toEqual(undefined);
 	});
 });
