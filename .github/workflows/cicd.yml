@@ -36,7 +36,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-      pull-requests: write # required by guardian/actions-riff-raff@v3
+      pull-requests: write # required by riff-raff action
     needs: [container, prettier, jest, lint, playwright, amp]
     uses: ./.github/workflows/publish.yml
     with:
