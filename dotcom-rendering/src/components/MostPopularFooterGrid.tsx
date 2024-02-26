@@ -6,6 +6,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
@@ -176,7 +177,14 @@ export const MostPopularFooterGrid = ({
 				>
 					<h3 css={titleStyle}>{deeplyRead.heading}</h3>
 					<div css={descriptionStyle}>
-						What readers are spending time with
+						What readers are spending time with (
+						<Link
+							css={descriptionStyle}
+							href="https://www.theguardian.com/info/2024/feb/15/what-is-the-deeply-read-list"
+						>
+							Learn more
+						</Link>
+						)
 					</div>
 				</div>
 				<ol css={displayContent}>
