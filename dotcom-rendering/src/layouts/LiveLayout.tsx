@@ -1275,10 +1275,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							data-print-layout="hide"
 							element="section"
 							backgroundColour={themePalette(
-								'--article-background',
+								'--discussion-section-background',
 							)}
 							borderColour={themePalette('--article-border')}
-							fontColour={themePalette('--article-section-title')}
+							fontColour={themePalette('--discussion-text')}
 						>
 							<DiscussionLayout
 								discussionApiUrl={
