@@ -743,10 +743,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						sectionId="comments"
 						element="section"
 						backgroundColour={themePalette(
-							'--article-section-background',
+							'--discussion-section-background',
 						)}
 						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
+						fontColour={themePalette('--discussion-text')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -758,6 +758,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							}
 							enableDiscussionSwitch={
 								!!article.config.switches.enableDiscussionSwitch
+							}
+							enableMobileDiscussionAdsSwitch={
+								!!article.config.switches.mobileDiscussionAds
 							}
 							isAdFreeUser={article.isAdFreeUser}
 							shouldHideAds={article.shouldHideAds}

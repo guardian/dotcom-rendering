@@ -34,7 +34,6 @@ const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
 };
 
 export const enhanceTableOfContents = (
-	format: FEFormat,
 	blocks: Block[],
 ): TableOfContentsItem[] | undefined => {
 	if (hasInteractiveContentsElement(blocks)) {

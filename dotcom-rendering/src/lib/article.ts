@@ -57,7 +57,7 @@ export const enhanceArticleType = (
 			data.commercialProperties,
 		),
 		tableOfContents: data.showTableOfContents
-			? enhanceTableOfContents(data.format, enhancedBlocks)
+			? enhanceTableOfContents(enhancedBlocks)
 			: undefined,
 		/**
 		 * This function needs to run at a higher level to most other enhancers

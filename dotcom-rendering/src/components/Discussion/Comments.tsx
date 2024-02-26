@@ -13,6 +13,8 @@ import type {
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
+import { labelStyles } from '../AdSlot.web';
+import { useConfig } from '../ConfigContext';
 import { useDispatch } from '../DispatchContext';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
@@ -44,6 +46,7 @@ type Props = {
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	enableMobileDiscussionAdsSwitch: boolean;
 };
 
 const footerStyles = css`
@@ -96,6 +99,10 @@ const writeMutes = (mutes: string[]) => {
 	storage.local.set('gu.prefs.discussion.mutes', mutes);
 };
 
+/** Dispatches a custom event which is handled by @guardian/commercial */
+const dispatchCommentsStateChange = () =>
+	document.dispatchEvent(new CustomEvent('comments-state-change'));
+
 export const Comments = ({
 	baseUrl,
 	shortUrl,
@@ -119,12 +126,15 @@ export const Comments = ({
 	replyForm,
 	bottomForm,
 	reportAbuse,
+	enableMobileDiscussionAdsSwitch,
 }: Props) => {
 	const [picks, setPicks] = useState<Array<CommentType | ReplyType>>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
 		CommentType | ReplyType
 	>();
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
 
 	const dispatch = useDispatch();
 
@@ -215,6 +225,13 @@ export const Comments = ({
 	};
 
 	useEffect(() => {
+		if (isWeb && expanded && !loading && enableMobileDiscussionAdsSwitch) {
+			const event = new CustomEvent('comments-loaded');
+			document.dispatchEvent(event);
+		}
+	}, [isWeb, expanded, loading, enableMobileDiscussionAdsSwitch]);
+
+	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
 			if (result.kind === 'error') {
 				console.error(result.error);
@@ -257,6 +274,10 @@ export const Comments = ({
 		} else {
 			handleFilterChange(newFilterObject);
 		}
+
+		isWeb &&
+			enableMobileDiscussionAdsSwitch &&
+			dispatchCommentsStateChange();
 	};
 
 	useEffect(() => {
@@ -288,6 +309,9 @@ export const Comments = ({
 
 	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
+		isWeb &&
+			enableMobileDiscussionAdsSwitch &&
+			dispatchCommentsStateChange();
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
@@ -416,7 +440,10 @@ export const Comments = ({
 			) : !comments.length ? (
 				<NoComments />
 			) : (
-				<ul css={commentContainerStyles}>
+				<ul
+					css={[commentContainerStyles, labelStyles]}
+					data-commercial-id="comments-column"
+				>
 					{comments.map((comment) => (
 						<li key={comment.id}>
 							<CommentContainer

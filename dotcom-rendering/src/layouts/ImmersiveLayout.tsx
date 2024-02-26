@@ -876,9 +876,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						fullWidth={true}
 						sectionId="comments"
 						element="aside"
-						backgroundColour={themePalette('--article-background')}
+						backgroundColour={themePalette(
+							'--discussion-section-background',
+						)}
 						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
+						fontColour={themePalette('--discussion-text')}
 					>
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
@@ -890,6 +892,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							}
 							enableDiscussionSwitch={
 								!!article.config.switches.enableDiscussionSwitch
+							}
+							enableMobileDiscussionAdsSwitch={
+								!!article.config.switches.mobileDiscussionAds
 							}
 							isAdFreeUser={article.isAdFreeUser}
 							shouldHideAds={article.shouldHideAds}

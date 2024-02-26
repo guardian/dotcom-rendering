@@ -1,4 +1,4 @@
-import type { ArticleDesign } from '@guardian/libs';
+import type { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { ArticleSpecial, isString, Pillar } from '@guardian/libs';
 
 export const getThemeNameAsString = (format: ArticleFormat): string => {

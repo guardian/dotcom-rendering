@@ -1275,10 +1275,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							data-print-layout="hide"
 							element="section"
 							backgroundColour={themePalette(
-								'--article-background',
+								'--discussion-section-background',
 							)}
 							borderColour={themePalette('--article-border')}
-							fontColour={themePalette('--article-section-title')}
+							fontColour={themePalette('--discussion-text')}
 						>
 							<DiscussionLayout
 								discussionApiUrl={
@@ -1293,6 +1293,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								enableDiscussionSwitch={
 									!!article.config.switches
 										.enableDiscussionSwitch
+								}
+								enableMobileDiscussionAdsSwitch={
+									!!article.config.switches
+										.mobileDiscussionAds
 								}
 								isAdFreeUser={article.isAdFreeUser}
 								shouldHideAds={article.shouldHideAds}

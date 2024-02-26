@@ -92,6 +92,7 @@ export const LoggedOutHiddenPicks = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			enableMobileDiscussionAdsSwitch={true}
 		/>
 	</div>
 );
@@ -136,6 +137,7 @@ export const InitialPage = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			enableMobileDiscussionAdsSwitch={true}
 		/>
 	</div>
 );
@@ -182,6 +184,7 @@ export const LoggedInHiddenNoPicks = () => {
 				replyForm={{ ...defaultCommentForm }}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				enableMobileDiscussionAdsSwitch={true}
 			/>
 		</div>
 	);
@@ -223,6 +226,7 @@ export const LoggedIn = () => {
 				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				enableMobileDiscussionAdsSwitch={true}
 			/>
 		</div>
 	);
@@ -263,6 +267,7 @@ export const LoggedInShortDiscussion = () => {
 				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
+				enableMobileDiscussionAdsSwitch={true}
 			/>
 		</div>
 	);
@@ -300,6 +305,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			enableMobileDiscussionAdsSwitch={true}
 		/>
 	</div>
 );
@@ -346,6 +352,7 @@ export const Closed = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			enableMobileDiscussionAdsSwitch={true}
 		/>
 	</div>
 );
@@ -388,6 +395,7 @@ export const NoComments = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			enableMobileDiscussionAdsSwitch={true}
 		/>
 	</div>
 );
@@ -432,6 +440,7 @@ export const LegacyDiscussion = () => (
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
+			enableMobileDiscussionAdsSwitch={true}
 		/>
 	</div>
 );

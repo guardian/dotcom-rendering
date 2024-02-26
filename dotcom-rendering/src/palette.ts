@@ -3405,7 +3405,7 @@ const shareButtonLiveBlogMobileLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
+const shareButtonHoverLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -3417,7 +3417,7 @@ const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const shareButtonBorderLight: PaletteFunction = ({ design, theme }) => {
+const shareButtonBorderLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -3432,7 +3432,19 @@ const shareButtonBorderLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const shareButtonCopiedLight: PaletteFunction = ({ design, theme }) => {
+const shareButtonBorderXSmallLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[46];
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const shareButtonCopiedLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -4616,8 +4628,43 @@ const recommendationCountArrowSelectedLight: PaletteFunction = () =>
 const recommendationCountArrowSelectedDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
-const discussionTextLight: PaletteFunction = () => sourcePalette.neutral[86];
-const discussionTextDark: PaletteFunction = () => sourcePalette.neutral[20];
+const discussionSectionBackgroundLight: PaletteFunction = ({
+	theme,
+	design,
+}) => {
+	switch (theme) {
+		case Pillar.Opinion:
+			return sourcePalette.opinion[800];
+		default:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[97];
+				default:
+					return sourcePalette.neutral[100];
+			}
+	}
+};
+const discussionSectionBackgroundDark: PaletteFunction = ({
+	theme,
+	design,
+}) => {
+	switch (theme) {
+		case Pillar.Opinion:
+			return sourcePalette.neutral[10];
+		default:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[0];
+				default:
+					return sourcePalette.neutral[10];
+			}
+	}
+};
+
+const discussionTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const discussionTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const discussionAccentTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -5683,6 +5730,10 @@ const paletteColours = {
 		light: signInLinkLineLight,
 		dark: signInLinkLineDark,
 	},
+	'--discussion-section-background': {
+		light: discussionSectionBackgroundLight,
+		dark: discussionSectionBackgroundDark,
+	},
 	'--discussion-top-pick-background': {
 		light: topPickBackgroundLight,
 		dark: topPickBackgroundDark,
@@ -5902,6 +5953,10 @@ const paletteColours = {
 	'--share-button-hover': {
 		light: shareButtonHoverLight,
 		dark: shareButtonHoverLight,
+	},
+	'--share-button-xsmall-border': {
+		light: shareButtonBorderXSmallLight,
+		dark: shareButtonBorderXSmallLight,
 	},
 } satisfies PaletteColours;
 

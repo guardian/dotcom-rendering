@@ -31,6 +31,7 @@ export type Props = {
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
+	enableMobileDiscussionAdsSwitch: boolean;
 	user?: SignedInUser;
 	idApiUrl: string;
 	reportAbuseUnauthenticated: ReturnType<typeof reportAbuse>;
@@ -39,8 +40,8 @@ export type Props = {
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${themePalette('--article-section-background')},
-		${themePalette('--article-section-background')} 40%,
+		${themePalette('--discussion-section-background')},
+		${themePalette('--discussion-section-background')} 40%,
 		transparent
 	);
 	height: 80px;
@@ -349,6 +350,7 @@ export const Discussion = ({
 	discussionD2Uid,
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
+	enableMobileDiscussionAdsSwitch,
 	user,
 	idApiUrl,
 	reportAbuseUnauthenticated,
@@ -524,6 +526,9 @@ export const Discussion = ({
 						user !== undefined
 							? user.reportAbuse
 							: reportAbuseUnauthenticated
+					}
+					enableMobileDiscussionAdsSwitch={
+						enableMobileDiscussionAdsSwitch
 					}
 				/>
 				{!isExpanded && (
