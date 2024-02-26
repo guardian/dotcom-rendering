@@ -39,17 +39,11 @@ jobs:
           pnpm synth
           zip -j dist/server/mobile-apps-rendering.zip dist/server/*
 
-      - name: AWS Auth
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
-          aws-region: eu-west-1
-          mask-aws-account-id: true
-
       - name: Upload to riff-raff
-        uses: guardian/actions-riff-raff@v3
+        uses: guardian/actions-riff-raff@v4
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+          roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           configPath: apps-rendering/riff-raff.yaml
           projectName: Mobile::mobile-apps-rendering
           buildNumberOffset: 27000 # This is the last build number from TeamCity
