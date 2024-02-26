@@ -3405,7 +3405,7 @@ const shareButtonLiveBlogMobileLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
+const shareButtonHoverLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -3417,7 +3417,7 @@ const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const shareButtonBorderLight: PaletteFunction = ({ design, theme }) => {
+const shareButtonBorderLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -3432,7 +3432,19 @@ const shareButtonBorderLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const shareButtonCopiedLight: PaletteFunction = ({ design, theme }) => {
+const shareButtonBorderXSmallLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[46];
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const shareButtonCopiedLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -5902,6 +5914,10 @@ const paletteColours = {
 	'--share-button-hover': {
 		light: shareButtonHoverLight,
 		dark: shareButtonHoverLight,
+	},
+	'--share-button-xsmall-border': {
+		light: shareButtonBorderXSmallLight,
+		dark: shareButtonBorderXSmallLight,
 	},
 } satisfies PaletteColours;
 

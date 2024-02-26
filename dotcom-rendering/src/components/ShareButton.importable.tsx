@@ -27,7 +27,9 @@ type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
 
 const sharedButtonStyles = (sizeXSmall: boolean) => css`
 	transition: none;
-	border-color: ${themePalette('--share-button-border')};
+	border-color: ${sizeXSmall
+		? themePalette('--share-button-xsmall-border')
+		: themePalette('--share-button-border')};
 	height: ${sizeXSmall ? '24px' : '36px'};
 `;
 
