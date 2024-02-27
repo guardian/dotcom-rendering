@@ -3,7 +3,7 @@ import { storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect } from 'react';
-import { useEffectReducer } from 'src/lib/UseEffectReducer';
+import { useEffectReducer } from '../lib/UseEffectReducer';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type {
 	CommentFormProps,
