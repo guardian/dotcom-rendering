@@ -134,6 +134,43 @@ export const replaceMatchingCommentResponses =
 			? { ...comment, responses: action.responses }
 			: comment;
 
+const getComments = async (
+	shortUrlId: string,
+	commentPage: number,
+	filters: FilterOptions,
+	hashCommentId: number | undefined,
+): Promise<Action> => {
+	const controller = new AbortController();
+
+	return getDiscussion({
+		shortUrl: shortUrlId,
+		page: commentPage,
+		filters: remapToValidFilters(filters, hashCommentId),
+		signal: controller.signal,
+	})
+		.then((result) => {
+			if (result.kind === 'error') {
+				console.error(`getDiscussion - error: ${result.error}`);
+				return { type: 'commentsLoadedFailed' } satisfies Action;
+			}
+
+			const { discussion } = result.value;
+			controller.abort();
+			return {
+				type: 'commentsLoaded',
+				comments: discussion.comments,
+				isClosedForComments: discussion.isClosedForComments,
+				topLevelCommentCount: discussion.topLevelCommentCount,
+				commentCount: discussion.commentCount,
+			} satisfies Action;
+		})
+		.catch(() => {
+			controller.abort();
+			return { type: 'commentsLoadedFailed' } satisfies Action;
+			// do nothing
+		});
+};
+
 type State = {
 	comments: Array<CommentType | ReplyType>;
 	isClosedForComments: boolean;
@@ -177,12 +214,27 @@ const initialState: State = {
 	shortUrlId: '',
 };
 
-type Effect = { type: 'StoreShortUrlId'; shortUrlId: string };
+type Effect =
+	| { type: 'StoreShortUrlId'; shortUrlId: string }
+	| {
+			type: 'GetDiscussion';
+			shortUrlId: string;
+			commentPage: number;
+			filters: FilterOptions;
+			hashCommentId: number | undefined;
+	  };
 
 const effectReducer = (effect: Effect): Action | Promise<Action> => {
 	switch (effect.type) {
 		case 'StoreShortUrlId':
 			return { type: 'storeShortUrlId', shortUrlId: effect.shortUrlId };
+		case 'GetDiscussion':
+			return getComments(
+				effect.shortUrlId,
+				effect.commentPage,
+				effect.filters,
+				effect.hashCommentId,
+			);
 	}
 };
 
@@ -244,6 +296,13 @@ const reducer = (
 					commentPage: action.commentPage,
 					isExpanded: true,
 				},
+				effect: {
+					type: 'GetDiscussion',
+					shortUrlId: state.shortUrlId,
+					commentPage: state.commentPage,
+					filters: state.filters,
+					hashCommentId: state.hashCommentId,
+				},
 			};
 		case 'filterChange':
 			return {
@@ -253,6 +312,13 @@ const reducer = (
 					hashCommentId: undefined,
 					isExpanded: true,
 					commentPage: action.commentPage ?? state.commentPage,
+				},
+				effect: {
+					type: 'GetDiscussion',
+					shortUrlId: state.shortUrlId,
+					commentPage: action.commentPage ?? state.commentPage,
+					filters: action.filters,
+					hashCommentId: undefined,
 				},
 			};
 		case 'setLoading': {
@@ -269,6 +335,13 @@ const reducer = (
 					...state,
 					hashCommentId: action.hashCommentId,
 					isExpanded: true,
+				},
+				effect: {
+					type: 'GetDiscussion',
+					shortUrlId: state.shortUrlId,
+					commentPage: state.commentPage,
+					filters: state.filters,
+					hashCommentId: action.hashCommentId,
 				},
 			};
 		}
@@ -396,7 +469,17 @@ const reducer = (
 					...state,
 					shortUrlId: action.shortUrlId,
 				},
+				effect: {
+					type: 'GetDiscussion',
+					shortUrlId: action.shortUrlId,
+					commentPage: state.commentPage,
+					filters: state.filters,
+					hashCommentId: undefined,
+				},
 			};
+		}
+		case 'commentsLoadedFailed': {
+			return { state };
 		}
 
 		default:
@@ -447,40 +530,6 @@ export const Discussion = ({
 			});
 		}
 	}, []);
-
-	useEffect(() => {
-		dispatch({ type: 'setLoading', loading: true });
-
-		const controller = new AbortController();
-
-		void getDiscussion({
-			shortUrl: shortUrlId,
-			page: commentPage,
-			filters: remapToValidFilters(filters, hashCommentId),
-			signal: controller.signal,
-		})
-			.then((result) => {
-				if (result.kind === 'error') {
-					console.error(`getDiscussion - error: ${result.error}`);
-					return;
-				}
-
-				const { discussion } = result.value;
-
-				dispatch({
-					type: 'commentsLoaded',
-					comments: discussion.comments,
-					isClosedForComments: discussion.isClosedForComments,
-					topLevelCommentCount: discussion.topLevelCommentCount,
-					commentCount: discussion.commentCount,
-				});
-			})
-			.catch(() => {
-				// do nothing
-			});
-
-		return () => controller.abort();
-	}, [commentPage, filters, hashCommentId, shortUrlId]);
 
 	const validFilters = remapToValidFilters(filters, hashCommentId);
 

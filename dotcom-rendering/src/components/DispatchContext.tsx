@@ -33,7 +33,8 @@ export type Action =
 	| { type: 'setTopFormPreviewBody'; previewBody: string }
 	| { type: 'setReplyFormPreviewBody'; previewBody: string }
 	| { type: 'setBottomFormPreviewBody'; previewBody: string }
-	| { type: 'storeShortUrlId'; shortUrlId: string };
+	| { type: 'storeShortUrlId'; shortUrlId: string }
+	| { type: 'commentsLoadedFailed' };
 
 const DispatchContext = createContext<Dispatch<Action>>(() => {
 	debug(
