@@ -1,3 +1,4 @@
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { getLargest, getMaster } from '../lib/image';
 import type {
@@ -430,10 +431,10 @@ const enhance = (
 
 export const enhanceImages = (
 	blocks: Block[],
-	format: FEFormat,
+	format: ArticleFormat,
 	imagesForLightbox: ImageForLightbox[],
 ): Block[] => {
-	const isPhotoEssay = format.design === 'PhotoEssayDesign';
+	const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
 
 	return blocks.map((block: Block) => {
 		return {

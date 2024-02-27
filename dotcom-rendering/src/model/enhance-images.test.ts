@@ -3,7 +3,11 @@ import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
+import { decideFormat } from '../lib/decideFormat';
 import { enhanceImages } from './enhance-images';
+
+const exampleArticleFormat = decideFormat(ExampleArticle.format);
+const photoEssayFormat = decideFormat(PhotoEssay.format);
 
 const image = {
 	...images[0],
@@ -49,7 +53,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -106,7 +110,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -156,7 +160,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -195,7 +199,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -233,7 +237,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -287,7 +291,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -354,7 +358,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -408,7 +412,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -438,7 +442,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -513,7 +517,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -566,7 +570,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format, [])).toEqual(
+			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -593,7 +597,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -661,7 +665,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -702,7 +706,7 @@ describe('Enhance Images', () => {
 			];
 
 			expect(
-				enhanceImages(input, PhotoEssay.format, [
+				enhanceImages(input, photoEssayFormat, [
 					{
 						masterUrl:
 							'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/master/3110.jpg',
@@ -764,7 +768,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -812,7 +816,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -835,7 +839,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -859,7 +863,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -881,7 +885,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -934,7 +938,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});
@@ -992,7 +996,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, ExampleArticle.format, [])).toEqual(
+			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
 				expectedOutput,
 			);
 		});

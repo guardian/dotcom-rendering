@@ -1,3 +1,4 @@
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import type { BlockquoteBlockElement, FEElement } from '../types/content';
 
@@ -41,9 +42,9 @@ const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] =>
 
 export const enhanceBlockquotes = (
 	blocks: Block[],
-	format: FEFormat,
+	format: ArticleFormat,
 ): Block[] => {
-	const isPhotoEssay = format.design === 'PhotoEssayDesign';
+	const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
 
 	return blocks.map((block: Block) => {
 		return {

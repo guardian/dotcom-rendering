@@ -1,3 +1,4 @@
+import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import type { FEElement, TextBlockElement } from '../types/content';
 
@@ -397,9 +398,9 @@ const enhance = (elements: FEElement[]): FEElement[] => {
 
 export const enhanceNumberedLists = (
 	blocks: Block[],
-	format: FEFormat,
+	format: ArticleFormat,
 ): Block[] => {
-	const isNumberedList = format.display === 'NumberedListDisplay';
+	const isNumberedList = format.display === ArticleDisplay.NumberedList;
 
 	if (!isNumberedList) {
 		return blocks;
