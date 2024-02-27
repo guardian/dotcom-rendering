@@ -32,7 +32,8 @@ export type Action =
 	| { type: 'setBottomFormError'; error: string }
 	| { type: 'setTopFormPreviewBody'; previewBody: string }
 	| { type: 'setReplyFormPreviewBody'; previewBody: string }
-	| { type: 'setBottomFormPreviewBody'; previewBody: string };
+	| { type: 'setBottomFormPreviewBody'; previewBody: string }
+	| { type: 'storeShortUrlId'; shortUrlId: string };
 
 const DispatchContext = createContext<Dispatch<Action>>(() => {
 	debug(

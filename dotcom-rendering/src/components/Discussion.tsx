@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
-import { useEffect, useReducer } from 'react';
+import { useEffect } from 'react';
+import { useEffectReducer } from 'src/lib/UseEffectReducer';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type {
 	CommentFormProps,
@@ -24,7 +25,6 @@ import type { Action } from './DispatchContext';
 import { DispatchProvider } from './DispatchContext';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
-
 export type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
@@ -148,6 +148,7 @@ type State = {
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
+	shortUrlId: string;
 };
 
 const initialCommentFormState = {
@@ -173,174 +174,234 @@ const initialState: State = {
 	topForm: initialCommentFormState,
 	replyForm: initialCommentFormState,
 	bottomForm: initialCommentFormState,
+	shortUrlId: '',
 };
 
-const reducer = (state: State, action: Action): State => {
+type Effect = { type: 'StoreShortUrlId'; shortUrlId: string };
+
+const effectReducer = (effect: Effect): Action | Promise<Action> => {
+	switch (effect.type) {
+		case 'StoreShortUrlId':
+			return { type: 'storeShortUrlId', shortUrlId: effect.shortUrlId };
+	}
+};
+
+const reducer = (
+	state: State,
+	action: Action,
+): { state: State; effect?: Effect } => {
 	switch (action.type) {
 		case 'commentsLoaded':
 			return {
-				...state,
-				comments: action.comments,
-				isClosedForComments: action.isClosedForComments,
-				commentCount: action.commentCount,
-				topLevelCommentCount: action.topLevelCommentCount,
-				loading: false,
+				state: {
+					...state,
+					comments: action.comments,
+					isClosedForComments: action.isClosedForComments,
+					commentCount: action.commentCount,
+					topLevelCommentCount: action.topLevelCommentCount,
+					loading: false,
+				},
 			};
 		case 'addComment':
 			return {
-				...state,
-				comments: [action.comment, ...state.comments],
-				isExpanded: true,
+				state: {
+					...state,
+					comments: [action.comment, ...state.comments],
+					isExpanded: true,
+				},
 			};
 		case 'addReply':
 			return {
-				...state,
-				comments: state.comments.map((comment) =>
-					comment.responses &&
-					comment.id === Number(action.comment.responseTo.commentId)
-						? {
-								...comment,
-								responses: [
-									...comment.responses,
-									action.comment,
-								],
-						  }
-						: comment,
-				),
-				isExpanded: true,
+				state: {
+					...state,
+					comments: state.comments.map((comment) =>
+						comment.responses &&
+						comment.id ===
+							Number(action.comment.responseTo.commentId)
+							? {
+									...comment,
+									responses: [
+										...comment.responses,
+										action.comment,
+									],
+							  }
+							: comment,
+					),
+					isExpanded: true,
+				},
 			};
 		case 'expandComments':
 			return {
-				...state,
-				isExpanded: true,
+				state: {
+					...state,
+					isExpanded: true,
+				},
 			};
 		case 'updateCommentPage':
 			return {
-				...state,
-				commentPage: action.commentPage,
-				isExpanded: true,
+				state: {
+					...state,
+					commentPage: action.commentPage,
+					isExpanded: true,
+				},
 			};
 		case 'filterChange':
 			return {
-				...state,
-				filters: action.filters,
-				hashCommentId: undefined,
-				isExpanded: true,
-				commentPage: action.commentPage ?? state.commentPage,
+				state: {
+					...state,
+					filters: action.filters,
+					hashCommentId: undefined,
+					isExpanded: true,
+					commentPage: action.commentPage ?? state.commentPage,
+				},
 			};
 		case 'setLoading': {
 			return {
-				...state,
-				loading: action.loading,
+				state: {
+					...state,
+					loading: action.loading,
+				},
 			};
 		}
 		case 'updateHashCommentId': {
 			return {
-				...state,
-				hashCommentId: action.hashCommentId,
-				isExpanded: true,
+				state: {
+					...state,
+					hashCommentId: action.hashCommentId,
+					isExpanded: true,
+				},
 			};
 		}
 		case 'setPickError': {
 			return {
-				...state,
-				pickError: action.error,
+				state: {
+					...state,
+					pickError: action.error,
+				},
 			};
 		}
 		case 'setTopFormUserMissing': {
 			return {
-				...state,
-				topForm: {
-					...state.topForm,
-					userNameMissing: action.userNameMissing,
+				state: {
+					...state,
+					topForm: {
+						...state.topForm,
+						userNameMissing: action.userNameMissing,
+					},
 				},
 			};
 		}
 		case 'setReplyFormUserMissing': {
 			return {
-				...state,
-				replyForm: {
-					...state.replyForm,
-					userNameMissing: action.userNameMissing,
+				state: {
+					...state,
+					replyForm: {
+						...state.replyForm,
+						userNameMissing: action.userNameMissing,
+					},
 				},
 			};
 		}
 		case 'setBottomFormUserMissing': {
 			return {
-				...state,
-				bottomForm: {
-					...state.bottomForm,
-					userNameMissing: action.userNameMissing,
+				state: {
+					...state,
+					bottomForm: {
+						...state.bottomForm,
+						userNameMissing: action.userNameMissing,
+					},
 				},
 			};
 		}
 		case 'setTopFormPreviewBody': {
 			return {
-				...state,
-				topForm: {
-					...state.topForm,
-					previewBody: action.previewBody,
+				state: {
+					...state,
+					topForm: {
+						...state.topForm,
+						previewBody: action.previewBody,
+					},
 				},
 			};
 		}
 		case 'setReplyFormPreviewBody': {
 			return {
-				...state,
-				replyForm: {
-					...state.replyForm,
-					previewBody: action.previewBody,
+				state: {
+					...state,
+					replyForm: {
+						...state.replyForm,
+						previewBody: action.previewBody,
+					},
 				},
 			};
 		}
 		case 'setBottomFormPreviewBody': {
 			return {
-				...state,
-				bottomForm: {
-					...state.bottomForm,
-					previewBody: action.previewBody,
+				state: {
+					...state,
+					bottomForm: {
+						...state.bottomForm,
+						previewBody: action.previewBody,
+					},
 				},
 			};
 		}
 		case 'setTopFormError': {
 			return {
-				...state,
-				topForm: {
-					...state.topForm,
-					error: action.error,
+				state: {
+					...state,
+					topForm: {
+						...state.topForm,
+						error: action.error,
+					},
 				},
 			};
 		}
 		case 'setReplyFormError': {
 			return {
-				...state,
-				replyForm: {
-					...state.replyForm,
-					error: action.error,
+				state: {
+					...state,
+					replyForm: {
+						...state.replyForm,
+						error: action.error,
+					},
 				},
 			};
 		}
 		case 'setBottomFormError': {
 			return {
-				...state,
-				bottomForm: {
-					...state.bottomForm,
-					error: action.error,
+				state: {
+					...state,
+					bottomForm: {
+						...state.bottomForm,
+						error: action.error,
+					},
 				},
 			};
 		}
 		case 'expandCommentReplies': {
 			return {
-				...state,
-				isExpanded: true,
-				comments: state.comments.map(
-					replaceMatchingCommentResponses(action),
-				),
+				state: {
+					...state,
+					isExpanded: true,
+					comments: state.comments.map(
+						replaceMatchingCommentResponses(action),
+					),
+				},
+			};
+		}
+		case 'storeShortUrlId': {
+			return {
+				state: {
+					...state,
+					shortUrlId: action.shortUrlId,
+				},
 			};
 		}
 
 		default:
 			assertUnreachable(action);
-			return state;
+			return { state };
 	}
 };
 
@@ -372,7 +433,10 @@ export const Discussion = ({
 			pickError,
 		},
 		dispatch,
-	] = useReducer(reducer, initialState);
+	] = useEffectReducer(reducer, effectReducer, initialState, {
+		type: 'StoreShortUrlId',
+		shortUrlId,
+	});
 
 	useEffect(() => {
 		const newHashCommentId = commentIdFromUrl();
