@@ -37,8 +37,7 @@ const getUser = async ({
 
 	const profile = data.userProfile as unknown as UserProfile;
 
-	// const isStaff = profile.badge.some((e) => e.name === 'Staff');
-	const isStaff = profile.userId === '200134710';
+	const isStaff = profile.badge.some((e) => e.name === 'Staff');
 
 	return isStaff
 		? {
