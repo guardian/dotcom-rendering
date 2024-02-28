@@ -252,6 +252,8 @@ const mobileFrontAdStyles = css`
 `;
 
 const frontsBannerPaddingHeight = 20;
+const frontsBannerMinHeightTablet =
+	adSizes.leaderboard.height + labelHeight + frontsBannerPaddingHeight;
 const frontsBannerMinHeight =
 	adSizes.billboard.height + labelHeight + frontsBannerPaddingHeight;
 
@@ -263,6 +265,9 @@ const frontsBannerAdTopContainerStyles = css`
 
 	${until.tablet} {
 		display: none;
+	}
+	${until.desktop} {
+		min-height: ${frontsBannerMinHeightTablet}px;
 	}
 `;
 
@@ -295,6 +300,7 @@ const frontsBannerAdStyles = css`
 	padding-bottom: ${frontsBannerPaddingHeight}px;
 	${between.tablet.and.desktop} {
 		max-width: ${adSizes.leaderboard.width}px;
+		max-height: ${90 + labelHeight}px;
 	}
 `;
 
