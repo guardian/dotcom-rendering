@@ -196,7 +196,6 @@ export const defaultStory = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
-		pickError={''}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
@@ -231,7 +230,6 @@ export const threadedComment = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
-		pickError={''}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
@@ -266,7 +264,6 @@ export const threadedCommentWithShowMore = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
-		pickError={''}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
@@ -301,7 +298,6 @@ export const threadedCommentWithLongUsernames = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
-		pickError={''}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""
@@ -336,7 +332,6 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		onPermalinkClick={() => {}}
 		error={''}
 		setError={() => {}}
-		pickError={''}
 		userNameMissing={false}
 		setUserNameMissing={() => {}}
 		previewBody=""

@@ -23,7 +23,6 @@ export type Action =
 	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
-	| { type: 'setPickError'; error: string }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
 	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
