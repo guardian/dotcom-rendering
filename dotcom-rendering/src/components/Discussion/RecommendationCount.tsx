@@ -63,7 +63,7 @@ export const RecommendationCount = ({
 		setCount(newCount);
 		setRecommended(true);
 
-		user.onRecommend(commentId)
+		user.onRecommend(commentId.toString())
 			.then((accepted) => {
 				if (!accepted) {
 					setCount(newCount - 1);

@@ -18,8 +18,17 @@ const onReply = async (): Promise<CommentResponse> => {
 	return { kind: 'error', error: 'ApiError' };
 };
 
-const onRecommend = async (commentId: number): Promise<boolean> => {
-	return getdiscussionClient().recommend(commentId);
+const onRecommend = async (commentId: string): Promise<boolean> => {
+	return getdiscussionClient()
+		.recommend(commentId)
+		.then((response) => {
+			if (response.__type === 'error') {
+				return false;
+			} else {
+				if (response.response.statusCode === 200) return true;
+				return false;
+			}
+		});
 };
 const addUsername = async (): Promise<Result<string, true>> => {
 	console.log('addUsername');

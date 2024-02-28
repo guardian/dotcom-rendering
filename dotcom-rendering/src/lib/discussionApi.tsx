@@ -306,14 +306,10 @@ export const reportAbuse =
 
 export const recommend =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	async (commentId: number): Promise<boolean> => {
+	async (commentId: string): Promise<boolean> => {
 		const url =
-			joinUrl(
-				options.baseUrl,
-				'comment',
-				commentId.toString(),
-				'recommend',
-			) + objAsParams(defaultParams);
+			joinUrl(options.baseUrl, 'comment', commentId, 'recommend') +
+			objAsParams(defaultParams);
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
