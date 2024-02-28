@@ -114,7 +114,6 @@ export const Ad = ({
 			// secondary ad sizes that are less than 2/3rds of the
 			// corresponding primary size.
 			data-multi-size-validation="false"
-			data-npa-on-unknown-consent={true}
 			data-loading-strategy="prefer-viewability-over-views"
 			data-enable-refresh={refreshValue}
 			layout="fixed"
