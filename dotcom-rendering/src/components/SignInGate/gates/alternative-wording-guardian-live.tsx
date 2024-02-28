@@ -31,7 +31,7 @@ export const signInGateComponent: SignInGateComponent = {
 				<SignInGateCustomizableText
 					title="Register now and receive an exclusive Guardian Live discount"
 					subtitle="It’s still free to read – this is not a paywall"
-					body="Guardian Live brings you closer to the big stories, award-winning journalists, and leading thinkers in livestreamed and interactive events that you can access from wherever you are in the world."
+					body="Guardian Live brings you closer to the big stories, award-winning journalists, and leading thinkers through livestreamed and interactive events, no matter where you are in the world."
 					ophanComponentId={ophanComponentId}
 					dismissGate={dismissGate}
 					guUrl={guUrl}
