@@ -104,7 +104,7 @@ export const Ad = ({
 
 	return (
 		<amp-ad
-			data-block-on-consent="_till_responded"
+			data-block-on-consent=""
 			// Primary ad size width and height
 			width={width}
 			height={height}
@@ -114,6 +114,7 @@ export const Ad = ({
 			// secondary ad sizes that are less than 2/3rds of the
 			// corresponding primary size.
 			data-multi-size-validation="false"
+			data-npa-on-unknown-consent={true}
 			data-loading-strategy="prefer-viewability-over-views"
 			data-enable-refresh={refreshValue}
 			layout="fixed"
