@@ -180,7 +180,7 @@ export const MostPopularFooterGrid = ({
 						What readers are spending time with (
 						<Link
 							css={descriptionStyle}
-							href="https://www.theguardian.com/info/2024/feb/15/what-is-the-deeply-read-list"
+							href="https://www.theguardian.com/info/2024/feb/28/what-is-the-deeply-read-list"
 						>
 							Learn more
 						</Link>
