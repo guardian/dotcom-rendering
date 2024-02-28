@@ -1,7 +1,14 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
-import { Button, SvgCross } from '@guardian/source-react-components';
+import {
+	Button,
+	Select,
+	SvgCross,
+	Option,
+	TextArea,
+	TextInput,
+} from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
@@ -26,9 +33,10 @@ const formWrapper = css`
 	${textSans.xxsmall()};
 `;
 
-const labelStyles = css`
-	color: ${schemedPalette('--discussion-accent-text')};
-	${textSans.small({ fontWeight: 'bold' })}
+const labelColour = schemedPalette('--discussion-report-label-text');
+
+const buttonStyles = css`
+	background-color: ${schemedPalette('--discussion-report-button')};
 `;
 
 const inputWrapper = css`
@@ -46,8 +54,14 @@ const inputWrapper = css`
 		background-color: ${schemedPalette('--discussion-report-background')};
 		min-height: ${space[5]}px;
 		width: 75%;
-		border: 1px solid ${schemedPalette('--discussion-border')};
+		border: 1px solid ${schemedPalette('--discussion-report-border')};
 		color: inherit;
+	}
+
+	div {
+		svg {
+			right: 80px;
+		}
 	}
 `;
 
@@ -185,12 +199,8 @@ export const AbuseReportForm = ({
 		<div aria-modal="true" ref={modalRef}>
 			<form css={formWrapper} onSubmit={onSubmit}>
 				<div css={inputWrapper}>
-					<label css={labelStyles} htmlFor="category">
-						Category
-					</label>
-					<select
-						name="category"
-						id="category"
+					<Select
+						label={'Category'}
 						onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
 							setFormVariables({
 								...formVariables,
@@ -198,22 +208,24 @@ export const AbuseReportForm = ({
 							})
 						}
 						value={formVariables.categoryId}
-						// TODO: use ref once forwardRef is implemented @guardian/src-button
-						// ref={firstElement}
+						theme={{
+							textLabel: labelColour,
+							textOptional: labelColour,
+						}}
 					>
-						<option value="0">Please select</option>
-						<option value="1">Personal abuse</option>
-						<option value="2">Off topic</option>
-						<option value="3">Legal issue</option>
-						<option value="4">Trolling</option>
-						<option value="5">Hate speech</option>
-						<option value="6">
+						<Option value="0">Please select</Option>
+						<Option value="1">Personal abuse</Option>
+						<Option value="2">Off topic</Option>
+						<Option value="3">Legal issue</Option>
+						<Option value="4">Trolling</Option>
+						<Option value="5">Hate speech</Option>
+						<Option value="6">
 							Offensive/Threatening language
-						</option>
-						<option value="7">Copyright</option>
-						<option value="8">Spam</option>
-						<option value={otherCategoryId}>Other</option>
-					</select>
+						</Option>
+						<Option value="7">Copyright</Option>
+						<Option value="8">Spam</Option>
+						<Option value={otherCategoryId}>Other</Option>
+					</Select>
 					{!!errors.categoryId && (
 						<span css={errorMessageStyles}>
 							{errors.categoryId}
@@ -222,12 +234,11 @@ export const AbuseReportForm = ({
 				</div>
 
 				<div css={inputWrapper}>
-					<label css={labelStyles} htmlFor="reason">
-						Reason {isReasonRequired ? `` : `(optional)`}
-					</label>
-					<textarea
-						name="reason"
+					<TextArea
 						id="reason"
+						size={'medium'}
+						label={'Reason'}
+						optional={!isReasonRequired}
 						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
 							setFormVariables({
 								...formVariables,
@@ -236,19 +247,20 @@ export const AbuseReportForm = ({
 						}
 						value={formVariables.reason}
 						required={isReasonRequired}
-					></textarea>
+						theme={{
+							textLabel: labelColour,
+							textOptional: labelColour,
+						}}
+					/>
 					{!!errors.reason && (
 						<span css={errorMessageStyles}>{errors.reason}</span>
 					)}
 				</div>
 
 				<div css={inputWrapper}>
-					<label css={labelStyles} htmlFor="email">
-						Email (optional)
-					</label>
-					<input
-						type="email"
-						name="email"
+					<TextInput
+						label={'Email'}
+						optional={true}
 						id="email"
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 							setFormVariables({
@@ -257,7 +269,11 @@ export const AbuseReportForm = ({
 							})
 						}
 						value={formVariables.email}
-					></input>
+						theme={{
+							textLabel: labelColour,
+							textOptional: labelColour,
+						}}
+					/>
 					{!!errors.email && (
 						<span css={errorMessageStyles}>{errors.email}</span>
 					)}
@@ -268,6 +284,7 @@ export const AbuseReportForm = ({
 						type="submit"
 						size="small"
 						data-link-name="Post report abuse"
+						cssOverrides={buttonStyles}
 					>
 						Report
 					</Button>
@@ -313,6 +330,7 @@ export const AbuseReportForm = ({
 						onClick={toggleSetShowForm}
 						data-link-name="cancel-report-abuse"
 						hideLabel={true}
+						cssOverrides={buttonStyles}
 					>
 						close report abuse modal
 					</Button>
