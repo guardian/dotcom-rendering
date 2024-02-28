@@ -7,13 +7,16 @@ name: Chromatic Label Helper
 
 on:
   pull_request:
-    types: [synchronize]
+    types: [opened, ready_for_review]
 
 jobs:
   write_comment:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+
+    # We only comment on pull requests that have been marked as ready for review
+    if: ${{ github.event.pull_request.draft == false}}
 
     steps:
       - uses: actions/github-script@v7
