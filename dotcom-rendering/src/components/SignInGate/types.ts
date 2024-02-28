@@ -65,6 +65,12 @@ export type SignInGateProps = {
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 };
 
+export interface SignInGateCustomizableTextProps extends SignInGateProps {
+	title: string;
+	subtitle: string;
+	body: string | JSX.Element;
+}
+
 export type CurrentSignInGateABTest = {
 	name: string;
 	variant: string;
