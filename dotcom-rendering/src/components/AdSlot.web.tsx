@@ -261,7 +261,7 @@ const frontsBannerAdTopContainerStyles = css`
 	min-height: ${frontsBannerMinHeight}px;
 	background-color: ${palette.neutral[97]};
 
-	${until.desktop} {
+	${until.tablet} {
 		display: none;
 	}
 `;
@@ -293,6 +293,9 @@ const frontsBannerAdStyles = css`
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
+	${between.tablet.and.desktop} {
+		max-width: ${adSizes.leaderboard.width}px;
+	}
 `;
 
 const articleEndAdStyles = css`
