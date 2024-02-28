@@ -242,6 +242,7 @@ export const StickyBottomBanner = ({
 		tags,
 		isPaidContent,
 		isPreview,
+		currentLocaleCode: countryCode,
 	});
 
 	useEffect(() => {
