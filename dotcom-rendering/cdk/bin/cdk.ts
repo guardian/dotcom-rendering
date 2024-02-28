@@ -41,8 +41,8 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'article-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 24,
-		maximumInstances: 96,
+		minimumInstances: 30,
+		maximumInstances: 120,
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.2s
@@ -60,7 +60,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 			],
 		},
 	},
-	instanceSize: InstanceSize.MEDIUM,
+	instanceSize: InstanceSize.SMALL,
 });
 
 /** Facia */
