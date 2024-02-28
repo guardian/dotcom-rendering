@@ -4805,7 +4805,7 @@ const discussionPaginationTextDark: PaletteFunction = () =>
 const discussionPaginationBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const discussionPaginationBorderDark: PaletteFunction = () =>
-	sourcePalette.neutral[46];
+	sourcePalette.neutral[20];
 
 const discussionPaginationBorderHover: PaletteFunction = () =>
 	sourcePalette.neutral[60];
