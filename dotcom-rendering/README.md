@@ -2,7 +2,20 @@
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
 
-## Quick start
+## Quick start for first time dev install
+
+```sh
+$ corepack enable
+$ asdf reshim nodejs # if you're using asdf, this step is needed afterwards
+$ git clone git@github.com:guardian/dotcom-rendering.git
+$ nvm use
+$ pnpm install --frozen-lockfile
+$ cd dotcom-rendering
+$ make dev
+```
+Then open [http://localhost:3030](http://localhost:3030)
+
+## Getting started (the longer version)
 
 This guide will help you get the `dotcom-rendering` application running on your development machine.
 
@@ -15,25 +28,23 @@ We recommend using a tool to help manage multiple versions of Node.js on on mach
 [nvm](https://github.com/creationix/nvm) and [asdf](https://github.com/asdf-vm/asdf) are
 also used.
 
+If you are not sure which tool you have in use, the command `which node` can give you a clue.
+
 > If you use nvm, you might find
 > [this gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb) helpful.
 
 Once Node is installed, make sure you're using the correct package manager by [enabling corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#utility-commands):
 
 ```sh
-corepack enable
+$ corepack enable
+$ asdf reshim nodejs # if you're using asdf, this step is needed afterwards
 ```
-
-> [!NOTE]
->
-> If you're using `asdf`, you'll need to run `asdf reshim nodejs` after running `corepack enable`.
 
 ### Running instructions
 
-Clone the repo, run `pnpm install --frozen-lockfile` in the root, then CD into the `dotcom-rendering` subdirectory -
-
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
+$ pnpm install --frozen-lockfile
 $ cd dotcom-rendering
 $ make dev
 ```
