@@ -294,13 +294,13 @@ const frontsBannerAdStyles = css`
 	position: relative;
 	min-height: ${frontsBannerMinHeight}px;
 	/* No banner should be taller than 600px */
-	max-height: ${600 + labelHeight}px;
-	max-width: ${breakpoints['wide']}px;
+	max-width: ${adSizes.leaderboard.width}px;
+	max-height: ${adSizes.leaderboard.height + labelHeight}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
-	${between.tablet.and.desktop} {
-		max-width: ${adSizes.leaderboard.width}px;
-		max-height: ${90 + labelHeight}px;
+	${from.desktop} {
+		max-height: ${600 + labelHeight}px;
+		max-width: ${breakpoints['wide']}px;
 	}
 `;
 
