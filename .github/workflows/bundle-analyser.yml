@@ -20,26 +20,29 @@ jobs:
         working-directory: dotcom-rendering
 
       - name: Archive code coverage results for web bundle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: bundle-analyser-report
+          name: bundle-analyser-report-web-bundles
           path: dotcom-rendering/dist/stats/client.web-bundles.html
           if-no-files-found: error
+
       - name: Archive code coverage results for web legacy bundle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: bundle-analyser-report
+          name: bundle-analyser-report-web-legacy
           path: dotcom-rendering/dist/stats/client.web.legacy-bundles.html
           if-no-files-found: error
+
       - name: Archive code coverage results for web variant bundle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: bundle-analyser-report
+          name: bundle-analyser-report-web
           path: dotcom-rendering/dist/stats/client.web.variant-bundles.html
           if-no-files-found: warn # Variant bundle only exists when an active experiment is going on
+
       - name: Archive code coverage results for apps bundle
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: bundle-analyser-report
+          name: bundle-analyser-report-apps
           path: dotcom-rendering/dist/stats/client.apps-bundles.html
           if-no-files-found: error
