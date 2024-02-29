@@ -11,6 +11,7 @@ import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
+import { enhanceLists } from './enhanceLists';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 import { validateAsBlock } from './validate';
 
@@ -95,6 +96,11 @@ class BlockEnhancer {
 
 	enhanceTweets() {
 		this.blocks = enhanceTweets(this.blocks);
+		return this;
+	}
+
+	enhanceLists() {
+		this.blocks = enhanceLists(this.blocks);
 		return this;
 	}
 }

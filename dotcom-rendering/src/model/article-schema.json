@@ -568,6 +568,18 @@
                     "$ref": "#/definitions/ItemLinkBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/AdPlaceholderBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/InteractiveContentsBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/KeyTakeawaysBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ListBlockElement"
+                },
+                {
                     "$ref": "#/definitions/MapBlockElement"
                 },
                 {
@@ -577,19 +589,10 @@
                     "$ref": "#/definitions/MultiImageBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/NewsletterSignupBlockElement"
-                },
-                {
-                    "$ref": "#/definitions/AdPlaceholderBlockElement"
-                },
-                {
                     "$ref": "#/definitions/NumberedTitleBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/InteractiveContentsBlockElement"
-                },
-                {
-                    "$ref": "#/definitions/SubheadingBlockElement"
+                    "$ref": "#/definitions/NewsletterSignupBlockElement"
                 },
                 {
                     "$ref": "#/definitions/ProfileAtomBlockElement"
@@ -613,6 +616,9 @@
                     "$ref": "#/definitions/StarRatingBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/SubheadingBlockElement"
+                },
+                {
                     "$ref": "#/definitions/TableBlockElement"
                 },
                 {
@@ -625,9 +631,6 @@
                     "$ref": "#/definitions/TweetBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/VineBlockElement"
-                },
-                {
                     "$ref": "#/definitions/VideoBlockElement"
                 },
                 {
@@ -638,6 +641,9 @@
                 },
                 {
                     "$ref": "#/definitions/VideoYoutubeBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/VineBlockElement"
                 },
                 {
                     "$ref": "#/definitions/YoutubeBlockElement"
@@ -2263,6 +2269,145 @@
                 "html"
             ]
         },
+        "AdPlaceholderBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
+                }
+            },
+            "required": [
+                "_type"
+            ]
+        },
+        "InteractiveContentsBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.InteractiveContentsBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "subheadingLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SubheadingBlockElement"
+                    }
+                },
+                "endDocumentElementId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "subheadingLinks"
+            ]
+        },
+        "SubheadingBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.SubheadingBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "html"
+            ]
+        },
+        "KeyTakeawaysBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.KeyTakeawaysBlockElement"
+                },
+                "keyTakeaways": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/KeyTakeaway"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "keyTakeaways"
+            ]
+        },
+        "KeyTakeaway": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                }
+            },
+            "required": [
+                "body",
+                "title"
+            ]
+        },
+        "ListBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.ListBlockElement"
+                },
+                "listElementType": {
+                    "enum": [
+                        "key-takeaways",
+                        "q-and-a-explainer"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ListItem"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "items",
+                "listElementType"
+            ]
+        },
+        "ListItem": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                }
+            },
+            "required": [
+                "list"
+            ]
+        },
         "MapBlockElement": {
             "type": "object",
             "properties": {
@@ -2395,6 +2540,30 @@
                 "images"
             ]
         },
+        "NumberedTitleBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.NumberedTitleBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "number"
+                },
+                "html": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "html",
+                "position"
+            ]
+        },
         "NewsletterSignupBlockElement": {
             "type": "object",
             "properties": {
@@ -2454,88 +2623,6 @@
             "required": [
                 "_type",
                 "newsletter"
-            ]
-        },
-        "AdPlaceholderBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.AdPlaceholderBlockElement"
-                }
-            },
-            "required": [
-                "_type"
-            ]
-        },
-        "NumberedTitleBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.NumberedTitleBlockElement"
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "position": {
-                    "type": "number"
-                },
-                "html": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "elementId",
-                "html",
-                "position"
-            ]
-        },
-        "InteractiveContentsBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.InteractiveContentsBlockElement"
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "subheadingLinks": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/SubheadingBlockElement"
-                    }
-                },
-                "endDocumentElementId": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "elementId",
-                "subheadingLinks"
-            ]
-        },
-        "SubheadingBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.SubheadingBlockElement"
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "html": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "elementId",
-                "html"
             ]
         },
         "ProfileAtomBlockElement": {
@@ -2968,52 +3055,6 @@
                 "url"
             ]
         },
-        "VineBlockElement": {
-            "type": "object",
-            "properties": {
-                "_type": {
-                    "type": "string",
-                    "const": "model.dotcomrendering.pageElements.VineBlockElement"
-                },
-                "elementId": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                },
-                "height": {
-                    "type": "number"
-                },
-                "width": {
-                    "type": "number"
-                },
-                "originalUrl": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "isThirdPartyTracking": {
-                    "type": "boolean"
-                },
-                "source": {
-                    "type": "string"
-                },
-                "sourceDomain": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "_type",
-                "elementId",
-                "height",
-                "isThirdPartyTracking",
-                "originalUrl",
-                "title",
-                "url",
-                "width"
-            ]
-        },
         "VideoBlockElement": {
             "type": "object",
             "properties": {
@@ -3199,6 +3240,52 @@
                 "height",
                 "isThirdPartyTracking",
                 "originalUrl",
+                "url",
+                "width"
+            ]
+        },
+        "VineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.VineBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                },
+                "originalUrl": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "isThirdPartyTracking": {
+                    "type": "boolean"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceDomain": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "height",
+                "isThirdPartyTracking",
+                "originalUrl",
+                "title",
                 "url",
                 "width"
             ]

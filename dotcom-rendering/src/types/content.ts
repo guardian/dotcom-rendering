@@ -309,6 +309,27 @@ interface ItemLinkBlockElement {
 	html: string;
 }
 
+interface KeyTakeaway {
+	title: string;
+	body: FEElement[];
+}
+
+interface KeyTakeawaysBlockElement {
+	_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement';
+	keyTakeaways: KeyTakeaway[];
+}
+
+interface ListItem {
+	title?: string;
+	list: FEElement[];
+}
+
+interface ListBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
+	listElementType: 'KeyTakeaways';
+	items: ListItem[];
+}
+
 export interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	elementId: string;
@@ -647,6 +668,8 @@ export type FEElement =
 	| InteractiveContentsBlockElement
 	| InteractiveBlockElement
 	| ItemLinkBlockElement
+	| KeyTakeawaysBlockElement
+	| ListBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
