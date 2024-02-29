@@ -41,7 +41,6 @@ type Props = {
 	topLevelCommentCount: number;
 	loading: boolean;
 	comments: Array<CommentType | ReplyType>;
-	pickError: string;
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
@@ -121,7 +120,6 @@ export const Comments = ({
 	topLevelCommentCount,
 	loading,
 	comments,
-	pickError,
 	topForm,
 	replyForm,
 	bottomForm,
@@ -373,7 +371,6 @@ export const Comments = ({
 											onPermalinkClick={onPermalinkClick}
 											error={replyForm.error}
 											setError={setReplyFormError}
-											pickError={pickError}
 											userNameMissing={
 												replyForm.userNameMissing
 											}
@@ -462,7 +459,6 @@ export const Comments = ({
 								onPermalinkClick={onPermalinkClick}
 								error={replyForm.error}
 								setError={setReplyFormError}
-								pickError={pickError}
 								userNameMissing={replyForm.userNameMissing}
 								setUserNameMissing={setReplyFormUserMissing}
 								previewBody={replyForm.previewBody}

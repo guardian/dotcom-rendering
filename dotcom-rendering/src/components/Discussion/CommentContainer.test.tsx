@@ -83,7 +83,6 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				error={''}
 				setError={() => {}}
-				pickError={''}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -128,7 +127,6 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				error={''}
 				setError={() => {}}
-				pickError={''}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -178,7 +176,6 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				error={''}
 				setError={() => {}}
-				pickError={''}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -223,7 +220,6 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				error={''}
 				setError={() => {}}
-				pickError={''}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""

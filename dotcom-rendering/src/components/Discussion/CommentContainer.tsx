@@ -33,7 +33,6 @@ type Props = {
 	onPreview?: typeof preview;
 	error: string;
 	setError: (error: string) => void;
-	pickError: string;
 	userNameMissing: boolean;
 	setUserNameMissing: (isUserNameMissing: boolean) => void;
 	previewBody: string;
@@ -90,7 +89,6 @@ export const CommentContainer = ({
 	onPreview,
 	error,
 	setError,
-	pickError,
 	userNameMissing,
 	setUserNameMissing,
 	previewBody,
@@ -143,7 +141,6 @@ export const CommentContainer = ({
 				isMuted={mutes.includes(comment.userProfile.userId)}
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
-				pickError={pickError}
 				reportAbuse={reportAbuse}
 			/>
 
@@ -172,7 +169,6 @@ export const CommentContainer = ({
 										)}
 										toggleMuteStatus={toggleMuteStatus}
 										onPermalinkClick={onPermalinkClick}
-										pickError={pickError}
 										reportAbuse={reportAbuse}
 									/>
 								</li>
