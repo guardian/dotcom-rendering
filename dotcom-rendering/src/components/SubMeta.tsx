@@ -185,7 +185,7 @@ export const SubMeta = ({
 								priority="tertiary"
 								size="xsmall"
 								data-link-name="meta-syndication-article"
-								href={`https://syndication.theguardian.com/automation/?url=${encodeURIComponent(
+								href={`https://syndication.theguardian.com/?url=${encodeURIComponent(
 									webUrl,
 								)}&type=article&internalpagecode=${pageId}`}
 								target="_blank"

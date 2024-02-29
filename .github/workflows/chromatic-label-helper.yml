@@ -7,13 +7,16 @@ name: Chromatic Label Helper
 
 on:
   pull_request:
-    types: [ready_for_review]
+    types: [opened, ready_for_review]
 
 jobs:
   write_comment:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+
+    # We only comment on pull requests that have been marked as ready for review
+    if: ${{ github.event.pull_request.draft == false}}
 
     steps:
       - uses: actions/github-script@v7
@@ -36,10 +39,24 @@ jobs:
                 "Hello :wave:! When you're ready to run Chromatic, please apply the `run_chromatic` label to this PR.",
                 '[Click here to see the Chromatic project.](https://www.chromatic.com/builds?appId=63e251470cfbe61776b0ef19)',
               ];
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
+
+              /** Checks if this label helper has already commented on the pull request */
+              const hasChromaticCommentAlready = await github.rest.issues.listComments({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: commentLines.join('\n\n'),
+                issue_number: context.issue.number,
+              }).then(({ data }) => {
+                return data.some((comment) => {
+                  return comment.body.includes(commentLines[0]);
+                });
               });
+
+              if (!hasChromaticCommentAlready) {
+                  github.rest.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body: commentLines.join('\n\n'),
+                });
+              }
             }

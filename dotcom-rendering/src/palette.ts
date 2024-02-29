@@ -4705,7 +4705,7 @@ const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
-const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
+const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
 			return sourcePalette.news[300];
@@ -4721,6 +4721,21 @@ const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 			return sourcePalette.labs[300];
 		default:
 			return sourcePalette.news[300];
+	}
+};
+
+const discussionPrimaryButtonBackgroundDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		default:
+			return sourcePalette.news[500];
 	}
 };
 
@@ -4747,7 +4762,7 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 const discussionButtonTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const discussionButtonTextDark: PaletteFunction = () =>
-	sourcePalette.neutral[100];
+	sourcePalette.neutral[7];
 
 const discussionReportBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -4790,7 +4805,7 @@ const discussionPaginationTextDark: PaletteFunction = () =>
 const discussionPaginationBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const discussionPaginationBorderDark: PaletteFunction = () =>
-	sourcePalette.neutral[46];
+	sourcePalette.neutral[20];
 
 const discussionPaginationBorderHover: PaletteFunction = () =>
 	sourcePalette.neutral[60];
@@ -5779,8 +5794,8 @@ const paletteColours = {
 		dark: discussionLinkDark,
 	},
 	'--discussion-primary-button-background': {
-		light: discussionPrimaryButtonBackground,
-		dark: discussionPrimaryButtonBackground,
+		light: discussionPrimaryButtonBackgroundLight,
+		dark: discussionPrimaryButtonBackgroundDark,
 	},
 	'--discussion-button-background-hover': {
 		light: discussionButtonHover,
