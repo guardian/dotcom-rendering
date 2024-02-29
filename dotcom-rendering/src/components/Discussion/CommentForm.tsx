@@ -112,7 +112,7 @@ const commentAddOns = css`
 	height: 22px;
 	font-size: 13px;
 	line-height: 17px;
-	border: 1px solid ${schemedPalette('--comment-form-input-background')};
+	border: 1px solid ${schemedPalette('--discussion-background')};
 	background-color: ${schemedPalette('--discussion-background')};
 	color: inherit;
 	text-align: center;
