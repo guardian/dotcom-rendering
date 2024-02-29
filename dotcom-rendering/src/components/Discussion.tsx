@@ -143,7 +143,6 @@ type State = {
 	topLevelCommentCount: number;
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
-	pickError: string;
 	loading: boolean;
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
@@ -168,7 +167,6 @@ const initialState: State = {
 	topLevelCommentCount: 0,
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: undefined,
-	pickError: '',
 	loading: true,
 	topForm: initialCommentFormState,
 	replyForm: initialCommentFormState,
@@ -239,12 +237,6 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				hashCommentId: action.hashCommentId,
 				isExpanded: true,
-			};
-		}
-		case 'setPickError': {
-			return {
-				...state,
-				pickError: action.error,
 			};
 		}
 		case 'setTopFormUserMissing': {
@@ -369,7 +361,6 @@ export const Discussion = ({
 			bottomForm,
 			topLevelCommentCount,
 			commentCount,
-			pickError,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
@@ -518,7 +509,6 @@ export const Discussion = ({
 					topLevelCommentCount={topLevelCommentCount}
 					loading={loading}
 					comments={comments}
-					pickError={pickError}
 					topForm={topForm}
 					replyForm={replyForm}
 					bottomForm={bottomForm}

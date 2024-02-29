@@ -87,7 +87,6 @@ export const LoggedOutHiddenPicks = () => (
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			pickError=""
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -132,7 +131,6 @@ export const InitialPage = () => (
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			pickError=""
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -179,7 +177,6 @@ export const LoggedInHiddenNoPicks = () => {
 				}
 				loading={false}
 				comments={discussionMock.discussion.comments}
-				pickError=""
 				topForm={defaultCommentForm}
 				replyForm={{ ...defaultCommentForm }}
 				bottomForm={defaultCommentForm}
@@ -221,7 +218,6 @@ export const LoggedIn = () => {
 				}
 				loading={false}
 				comments={discussionMock.discussion.comments}
-				pickError=""
 				topForm={defaultCommentForm}
 				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
@@ -262,7 +258,6 @@ export const LoggedInShortDiscussion = () => {
 				}
 				loading={false}
 				comments={discussionWithTwoComments.discussion.comments}
-				pickError=""
 				topForm={defaultCommentForm}
 				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
@@ -300,7 +295,6 @@ export const LoggedOutHiddenNoPicks = () => (
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			pickError=""
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -347,7 +341,6 @@ export const Closed = () => (
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			pickError=""
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -390,7 +383,6 @@ export const NoComments = () => (
 			topLevelCommentCount={0}
 			loading={false}
 			comments={[]}
-			pickError=""
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
@@ -435,7 +427,6 @@ export const LegacyDiscussion = () => (
 			}
 			loading={false}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
-			pickError=""
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
