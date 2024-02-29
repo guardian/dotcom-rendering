@@ -14,8 +14,8 @@ import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
 import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
 import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
-import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
-import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
+import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
+import { Peer } from 'aws-cdk-lib/aws-ec2';
 import { Subscription, SubscriptionProtocol, Topic } from 'aws-cdk-lib/aws-sns';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { getUserData } from './userData';
@@ -23,7 +23,7 @@ import { getUserData } from './userData';
 export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	guApp: `${'article' | 'facia' | 'interactive'}-rendering`;
 	domainName: string;
-	instanceSize: InstanceSize;
+	instanceType: InstanceType;
 	scaling: GuAsgCapacity & {
 		policy?: {
 			scalingStepsOut: ScalingInterval[];
@@ -44,7 +44,7 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		const { stack: guStack, region, account } = this;
-		const { guApp, stage, instanceSize, scaling, domainName } = props;
+		const { guApp, stage, instanceType, scaling, domainName } = props;
 
 		const artifactsBucket =
 			GuDistributionBucketParameter.getInstance(this).valueAsString;
@@ -83,7 +83,7 @@ export class RenderingCDKStack extends CDKStack {
 			// instead of the default 8080 which is unreachable.
 			certificateProps: { domainName },
 			healthcheck: { path: '/_healthcheck' },
-			instanceType: InstanceType.of(InstanceClass.T4G, instanceSize),
+			instanceType,
 			monitoringConfiguration,
 			roleConfiguration: {
 				additionalPolicies: [

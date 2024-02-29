@@ -1,6 +1,6 @@
 import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { InstanceSize } from 'aws-cdk-lib/aws-ec2';
+import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { RenderingCDKStack } from './renderingStack';
 
 /**
@@ -29,7 +29,10 @@ describe('The RenderingCDKStack', () => {
 					],
 				},
 			},
-			instanceSize: InstanceSize.MICRO,
+			instanceType: InstanceType.of(
+				InstanceClass.T4G,
+				InstanceSize.MICRO,
+			),
 		});
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();
