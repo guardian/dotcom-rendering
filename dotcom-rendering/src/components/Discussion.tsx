@@ -422,11 +422,6 @@ export const Discussion = ({
 		return false;
 	};
 
-	const dispatchCommentsExpandedEvent = () => {
-		const event = new CustomEvent('comments-expanded');
-		document.dispatchEvent(event);
-	};
-
 	// Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
 	// If so, make a call to get the context of this comment so we know what page it is
 	// on.
@@ -524,7 +519,6 @@ export const Discussion = ({
 				<PillarButton
 					onClick={() => {
 						dispatch({ type: 'expandComments' });
-						dispatchCommentsExpandedEvent();
 					}}
 					icon={<SvgPlus />}
 					linkName="view-more-comments"
