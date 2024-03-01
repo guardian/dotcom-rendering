@@ -9,11 +9,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
-# Allow GitHub to request an OIDC JWT ID token, to use with aws-actions/configure-aws-credentials
+# Allow GitHub to request an OIDC JWT ID token, and to comment on pull requests
+# as required by guardian/actions-riff-raff
 permissions:
   id-token: write
   contents: read
-  pull-requests: write # required by guardian/actions-riff-raff@v3
+  pull-requests: write
 
 jobs:
   build:
