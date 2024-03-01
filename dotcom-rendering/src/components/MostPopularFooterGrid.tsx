@@ -83,6 +83,10 @@ const descriptionStyle = css`
 	line-height: 125%;
 	color: ${palette.neutral[46]};
 	overflow-wrap: break-word;
+
+	&:hover a {
+		color: ${palette.neutral[7]};
+	}
 `;
 
 const displayContent = css`
