@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
-import { enhanceArticleType } from '../lib/article';
+import { enhanceArticleType, enhanceCrossword } from '../lib/article';
 import { decideFormat } from '../lib/decideFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsBlock } from '../model/validate';
@@ -52,8 +52,9 @@ export const handleCrossword: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('crossword', 'web');
 
 	const article = enhanceArticleType(body, 'Web');
+	const xwArticle = enhanceCrossword(article);
 	const { html, prefetchScripts } = renderHtml({
-		article,
+		article: xwArticle,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);

@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import type { ArticleFormat } from '@guardian/libs';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
@@ -25,6 +26,35 @@ const enhancePinnedPost = (
 	})[0];
 };
 
+export const enhanceCrossword = (article: DCRArticle): DCRArticle => {
+	if (article.crossword) {
+		const element = {
+			_type: 'model.dotcomrendering.pageElements.CrosswordElement' as const,
+			crossword: article.crossword,
+		};
+		return {
+			...article,
+			format: { ...article.format, design: 'InteractiveDesign' },
+			blocks: [
+				{
+					id: randomUUID(),
+					elements: [element],
+					attributes: {
+						pinned: false,
+						keyEvent: false,
+						summary: false,
+					},
+					primaryDateLine: article.webPublicationDateDisplay,
+					secondaryDateLine:
+						article.webPublicationSecondaryDateDisplay,
+				},
+			],
+			crossword: undefined,
+		};
+	}
+
+	throw new TypeError('article did not contain a crossword');
+};
 export const enhanceArticleType = (
 	body: unknown,
 	renderingTarget: RenderingTarget,
