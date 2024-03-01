@@ -1,8 +1,6 @@
 // -------------------------------------
 // Elements
 
-import type { GuardianCrossword } from 'mycrossword';
-
 // -------------------------------------
 interface ThirdPartyEmbeddedContent {
 	isThirdPartyTracking: boolean;

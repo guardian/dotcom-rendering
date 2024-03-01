@@ -74,6 +74,7 @@ type FEFormat = {
 type ArticleTheme = import('@guardian/libs').ArticleTheme;
 type ArticleFormat = import('@guardian/libs').ArticleFormat;
 
+type GuardianCrossword = import('mycrossword').GuardianCrossword;
 type SharePlatform =
 	| 'facebook'
 	| 'twitter'
