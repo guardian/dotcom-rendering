@@ -1307,9 +1307,9 @@ export const Interview: DCRArticle = {
 	designType: 'Interview',
 	editionId: 'UK',
 	format: {
-		design: 'InterviewDesign',
-		theme: 'NewsPillar',
-		display: 'ShowcaseDisplay',
+		display: 2,
+		theme: 0,
+		design: 15,
 	},
 	openGraphData: {
 		'og:url':

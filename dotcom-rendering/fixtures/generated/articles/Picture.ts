@@ -1103,9 +1103,9 @@ export const Picture: DCRArticle = {
 	designType: 'Comment',
 	editionId: 'UK',
 	format: {
-		design: 'PictureDesign',
-		theme: 'OpinionPillar',
-		display: 'ShowcaseDisplay',
+		display: 2,
+		theme: 1,
+		design: 1,
 	},
 	openGraphData: {
 		'og:url':

@@ -6,7 +6,6 @@ import {
 	generateScriptTags,
 	getPathFromManifest,
 } from '../lib/assets';
-import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
@@ -20,7 +19,7 @@ export const renderArticle = (
 	prefetchScripts: string[];
 	html: string;
 } => {
-	const format: ArticleFormat = decideFormat(article.format);
+	const format: ArticleFormat = article.format;
 
 	const renderingTarget = 'Apps';
 	const config: Config = {

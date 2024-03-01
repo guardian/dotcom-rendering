@@ -1113,9 +1113,9 @@ export const Feature: DCRArticle = {
 	designType: 'Feature',
 	editionId: 'UK',
 	format: {
-		design: 'FeatureDesign',
-		theme: 'CulturePillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 3,
+		design: 10,
 	},
 	openGraphData: {
 		'og:url':

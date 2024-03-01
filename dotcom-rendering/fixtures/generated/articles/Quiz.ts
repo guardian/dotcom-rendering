@@ -1115,9 +1115,9 @@ export const Quiz: DCRArticle = {
 	designType: 'Quiz',
 	editionId: 'UK',
 	format: {
-		design: 'QuizDesign',
-		theme: 'SportPillar',
-		display: 'ShowcaseDisplay',
+		display: 2,
+		theme: 2,
+		design: 17,
 	},
 	openGraphData: {
 		'og:url':

@@ -3,6 +3,7 @@ import { Standard as ExampleArticle } from '../../fixtures/generated/articles/St
 import type { AnalyticsModel } from '../components/Analytics.amp';
 import { AmpArticlePage } from '../components/ArticlePage.amp';
 import type { PermutiveModel } from '../components/Permutive.amp';
+import { formatToFEFormat } from '../lib/format';
 import { extractNAV } from '../model/extract-nav';
 import { renderArticle } from './render.article.amp';
 
@@ -60,7 +61,11 @@ test('produces valid AMP doc', async () => {
 		<AmpArticlePage
 			experimentsData={{}}
 			nav={nav}
-			articleData={{ ...ExampleArticle, shouldHideReaderRevenue: false }}
+			articleData={{
+				...ExampleArticle,
+				format: formatToFEFormat(ExampleArticle.format),
+				shouldHideReaderRevenue: false,
+			}}
 			config={config}
 			analytics={analytics}
 			permutive={permutive}

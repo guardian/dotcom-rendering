@@ -1105,9 +1105,9 @@ export const NewsletterSignup: DCRArticle = {
 	designType: 'Article',
 	editionId: 'UK',
 	format: {
-		design: 'NewsletterSignupDesign',
-		theme: 'SportPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 2,
+		design: 24,
 	},
 	openGraphData: {
 		'og:url':

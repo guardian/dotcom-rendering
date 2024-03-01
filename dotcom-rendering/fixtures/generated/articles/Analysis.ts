@@ -1140,9 +1140,9 @@ export const Analysis: DCRArticle = {
 	designType: 'Analysis',
 	editionId: 'UK',
 	format: {
-		design: 'AnalysisDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 0,
+		design: 6,
 	},
 	openGraphData: {
 		'og:url':

@@ -1321,9 +1321,9 @@ export const Dead: DCRArticle = {
 	designType: 'Article',
 	editionId: 'UK',
 	format: {
-		design: 'DeadBlogDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 0,
+		design: 12,
 	},
 	openGraphData: {
 		'og:url':

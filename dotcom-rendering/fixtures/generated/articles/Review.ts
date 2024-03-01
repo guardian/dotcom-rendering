@@ -1141,9 +1141,9 @@ export const Review: DCRArticle = {
 	designType: 'Review',
 	editionId: 'UK',
 	format: {
-		design: 'ReviewDesign',
-		theme: 'CulturePillar',
-		display: 'ShowcaseDisplay',
+		display: 2,
+		theme: 3,
+		design: 5,
 	},
 	openGraphData: {
 		'og:url':

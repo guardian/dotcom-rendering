@@ -3,11 +3,10 @@ import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { decideFormat } from '../lib/decideFormat';
 import { enhanceImages } from './enhance-images';
 
-const exampleArticleFormat = decideFormat(ExampleArticle.format);
-const photoEssayFormat = decideFormat(PhotoEssay.format);
+const exampleArticleFormat = ExampleArticle.format;
+const photoEssayFormat = PhotoEssay.format;
 
 const image = {
 	...images[0],

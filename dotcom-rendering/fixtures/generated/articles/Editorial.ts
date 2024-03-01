@@ -1123,9 +1123,9 @@ export const Editorial: DCRArticle = {
 	designType: 'GuardianView',
 	editionId: 'UK',
 	format: {
-		design: 'CommentDesign',
-		theme: 'OpinionPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 1,
+		design: 8,
 	},
 	openGraphData: {
 		'og:url':
