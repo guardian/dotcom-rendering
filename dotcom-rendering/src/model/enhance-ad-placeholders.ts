@@ -19,7 +19,7 @@ const isSuitablePosition = (
 ): boolean => {
 	// Rules for ad placement
 	const adEveryNBlocks = 6;
-	const firstAdIndex = 3;
+	const firstAdIndex = 4;
 	const maxAds = 15;
 
 	// Don't insert more than `maxAds` ads
@@ -50,11 +50,14 @@ const isParagraph = (element: FEElement) =>
 const isImage = (element: FEElement) =>
 	element._type === 'model.dotcomrendering.pageElements.ImageBlockElement';
 
-const insertPlaceholder = (elements: FEElement[]): FEElement[] => {
+const insertPlaceholder = (
+	prevElements: FEElement[],
+	currentElement: FEElement,
+): FEElement[] => {
 	const placeholder: AdPlaceholderBlockElement = {
 		_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 	};
-	return [...elements, placeholder];
+	return [...prevElements, placeholder, currentElement];
 };
 
 type ReducerAccumulator = {
@@ -91,7 +94,7 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 
 			return {
 				elements: shouldInsertAd
-					? insertPlaceholder(currentElements)
+					? insertPlaceholder(prev.elements, currentElement)
 					: currentElements,
 				blockCounter,
 				previousAdIndex: shouldInsertAd
