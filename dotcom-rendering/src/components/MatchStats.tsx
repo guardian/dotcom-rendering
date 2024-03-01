@@ -20,8 +20,16 @@ import { Lineup } from './Lineup';
 type Props = {
 	home: TeamType;
 	away: TeamType;
+	competition: string;
 	format: ArticleFormat;
 };
+
+//For these three tournaments, we only get data for live goals, bookings and substitutions, and no other type of match stats
+const omitStatsTeams = [
+	"Women's Nations League",
+	'Europa Conference League',
+	"Women's FA Cup",
+];
 
 const StatsGrid = ({
 	children,
@@ -150,7 +158,13 @@ const StatsGrid = ({
 	}
 };
 
-const StretchBackground = ({ children }: { children: React.ReactNode }) => (
+const StretchBackground = ({
+	showStats,
+	children,
+}: {
+	showStats: boolean;
+	children: React.ReactNode;
+}) => (
 	<div
 		css={css`
 			clear: left;
@@ -161,7 +175,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 				margin-left: ${space[3]}px;
 			}
 			/* We use min-height to help reduce our CLS value */
-			min-height: 800px;
+			min-height: ${showStats ? '800px' : '570px'};
 			background-color: ${themePalette('--match-stats-background')};
 
 			${from.leftCol} {
@@ -332,79 +346,85 @@ const DecideDoughnut = ({
 	}
 };
 
-export const MatchStats = ({ home, away, format }: Props) => {
+export const MatchStats = ({ home, away, competition, format }: Props) => {
+	const showStats = !omitStatsTeams.includes(competition);
 	return (
-		<StretchBackground>
+		<StretchBackground showStats={showStats}>
 			<StatsGrid format={format}>
-				<GridItem area="title" element="aside">
-					<ShiftLeft format={format}>
-						{/* Don't show the right border if this text was
+				{showStats && (
+					<>
+						<GridItem area="title" element="aside">
+							<ShiftLeft format={format}>
+								{/* Don't show the right border if this text was
                         shifted into the left column */}
-						<Hide when="above" breakpoint="desktop">
+								<Hide when="above" breakpoint="desktop">
+									<RightBorder>
+										<H3>Match Stats</H3>
+									</RightBorder>
+								</Hide>
+								<Hide when="below" breakpoint="desktop">
+									<H3>Match Stats</H3>
+								</Hide>
+							</ShiftLeft>
+						</GridItem>
+
+						<GridItem area="possession">
 							<RightBorder>
-								<H3>Match Stats</H3>
+								<H4>Possession</H4>
+								<Center>
+									<DecideDoughnut
+										home={home}
+										away={away}
+										format={format}
+									/>
+								</Center>
 							</RightBorder>
-						</Hide>
-						<Hide when="below" breakpoint="desktop">
-							<H3>Match Stats</H3>
-						</Hide>
-					</ShiftLeft>
-				</GridItem>
-				<GridItem area="possession">
-					<RightBorder>
-						<H4>Possession</H4>
-						<Center>
-							<DecideDoughnut
-								home={home}
-								away={away}
-								format={format}
+							<br />
+						</GridItem>
+						<GridItem area="attempts">
+							<H4>Attempts</H4>
+							<GoalAttempts
+								left={{
+									onTarget: home.shotsOn,
+									offTarget: home.shotsOff,
+									color: home.colours,
+								}}
+								right={{
+									onTarget: away.shotsOn,
+									offTarget: away.shotsOff,
+									color: away.colours,
+								}}
 							/>
-						</Center>
-					</RightBorder>
-					<br />
-				</GridItem>
-				<GridItem area="attempts">
-					<H4>Attempts</H4>
-					<GoalAttempts
-						left={{
-							onTarget: home.shotsOn,
-							offTarget: home.shotsOff,
-							color: home.colours,
-						}}
-						right={{
-							onTarget: away.shotsOn,
-							offTarget: away.shotsOff,
-							color: away.colours,
-						}}
-					/>
-				</GridItem>
-				<GridItem area="corners">
-					<H4>Corners</H4>
-					<Distribution
-						left={{
-							value: home.corners,
-							color: home.colours,
-						}}
-						right={{
-							value: away.corners,
-							color: away.colours,
-						}}
-					/>
-				</GridItem>
-				<GridItem area="fouls">
-					<H4>Fouls</H4>
-					<Distribution
-						left={{
-							value: home.fouls,
-							color: home.colours,
-						}}
-						right={{
-							value: away.fouls,
-							color: away.colours,
-						}}
-					/>
-					<br />
-				</GridItem>
+						</GridItem>
+						<GridItem area="corners">
+							<H4>Corners</H4>
+							<Distribution
+								left={{
+									value: home.corners,
+									color: home.colours,
+								}}
+								right={{
+									value: away.corners,
+									color: away.colours,
+								}}
+							/>
+						</GridItem>
+						<GridItem area="fouls">
+							<H4>Fouls</H4>
+							<Distribution
+								left={{
+									value: home.fouls,
+									color: home.colours,
+								}}
+								right={{
+									value: away.fouls,
+									color: away.colours,
+								}}
+							/>
+							<br />
+						</GridItem>
+					</>
+				)}
 				<GridItem area="subtitle">
 					<ShiftLeft format={format}>
 						{/* Don't show the right border if this text was
