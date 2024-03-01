@@ -3,9 +3,9 @@ import { log } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
 import {
 	Button,
+	Option,
 	Select,
 	SvgCross,
-	Option,
 	TextArea,
 	TextInput,
 } from '@guardian/source-react-components';
