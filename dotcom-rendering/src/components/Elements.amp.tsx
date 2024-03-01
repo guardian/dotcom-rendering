@@ -1,4 +1,8 @@
-import { isNonNullable } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	isNonNullable,
+} from '@guardian/libs';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
@@ -66,13 +70,13 @@ export const isAmpSupported = ({
 	switches,
 	main,
 }: {
-	format: FEFormat;
+	format: ArticleFormat;
 	tags: TagType[];
 	elements: FEElement[];
 	switches: Switches;
 	main: string;
 }): boolean => {
-	if (format.design === 'InteractiveDesign') {
+	if (format.design === ArticleDesign.Interactive) {
 		const hasAmpInteractiveTag = tags.some(
 			(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
 		);
@@ -92,7 +96,7 @@ export const isAmpSupported = ({
 			return false;
 	}
 
-	if (format.design === 'LiveBlogDesign') {
+	if (format.design === ArticleDesign.LiveBlog) {
 		const isSwitchedOn = switches.ampLiveblogSwitch;
 		if (!isSwitchedOn) return false;
 	}

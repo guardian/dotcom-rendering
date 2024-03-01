@@ -1,9 +1,11 @@
+import { ArticleDesign } from '@guardian/libs';
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import type { AnalyticsModel } from '../components/Analytics.amp';
 import { AmpArticlePage } from '../components/ArticlePage.amp';
 import { isAmpSupported } from '../components/Elements.amp';
 import type { PermutiveModel } from '../components/Permutive.amp';
+import { decideFormat } from '../lib/decideFormat';
 import { enhance } from '../lib/enhance.amp';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { generatePermutivePayload } from '../lib/permutive.amp';
@@ -19,10 +21,11 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 	(async () => {
 		recordTypeAndPlatform('article', 'amp');
 		const article = validateAsArticleType(body);
+		const format = decideFormat(article.format);
 
 		if (
-			article.format.design === 'InteractiveDesign' ||
-			article.format.design === 'FullPageInteractiveDesign'
+			format.design === ArticleDesign.Interactive ||
+			format.design === ArticleDesign.FullPageInteractive
 		) {
 			throw new NotRenderableInDCR();
 		}
@@ -35,7 +38,7 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 
 		if (
 			!isAmpSupported({
-				format: article.format,
+				format,
 				tags: article.tags,
 				elements,
 				switches: article.config.switches,
