@@ -1,4 +1,5 @@
-import type { ArticleFormat } from '@guardian/libs';
+import { randomUUID } from 'node:crypto';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { decideFormat } from '../lib/decideFormat';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
@@ -50,6 +51,39 @@ const enhancePinnedPost = (
 		promotedNewsletter: undefined,
 		hasAffiliateLinksDisclaimer: false,
 	})[0];
+};
+
+export const enhanceCrossword = (article: Article): Article => {
+	if (article.frontendData.crossword) {
+		const element = {
+			_type: 'model.dotcomrendering.pageElements.CrosswordElement' as const,
+			crossword: article.frontendData.crossword,
+		};
+		return {
+			...article,
+			format: { ...article.format, design: ArticleDesign.Interactive },
+			frontendData: {
+				...article.frontendData,
+				blocks: [
+					{
+						id: randomUUID(),
+						elements: [element],
+						attributes: {
+							pinned: false,
+							keyEvent: false,
+							summary: false,
+						},
+						primaryDateLine: article.frontendData.webPublicationDateDisplay,
+						secondaryDateLine:
+							article.frontendData.webPublicationSecondaryDateDisplay,
+					},
+				],
+				crossword: undefined,
+			}
+		};
+	}
+
+	throw new TypeError('article did not contain a crossword');
 };
 
 export const enhanceArticleType = (
