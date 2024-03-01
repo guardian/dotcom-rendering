@@ -7,8 +7,6 @@ export type BoostLevel = 'default' | 'boost' | 'megaboost' | 'gigaboost';
 // -------------------------------------
 // Elements
 
-import type { GuardianCrossword } from 'mycrossword';
-
 // -------------------------------------
 interface ThirdPartyEmbeddedContent {
 	isThirdPartyTracking: boolean;

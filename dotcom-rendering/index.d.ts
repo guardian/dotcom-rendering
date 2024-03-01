@@ -1,3 +1,5 @@
+type GuardianCrossword = import('mycrossword').GuardianCrossword;
+
 type SharePlatform =
 	| 'facebook'
 	| 'twitter'

@@ -1,4 +1,3 @@
-import type { GuardianCrossword } from 'mycrossword';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from './badge';
