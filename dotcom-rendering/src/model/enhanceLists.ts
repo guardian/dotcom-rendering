@@ -4,7 +4,7 @@ type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 
 const constructKeyTakeaway =
 	(enhanceElements: ElementsEnhancer) =>
-	({ title, list }) => {
+	({ title, list }: { title?: string; list: FEElement[] }) => {
 		if (title !== undefined) {
 			return [
 				{
@@ -18,7 +18,7 @@ const constructKeyTakeaway =
 
 const constructQAndAExplainer =
 	(enhanceElements: ElementsEnhancer) =>
-	({ title, list }) => {
+	({ title, list }: { title?: string; list: FEElement[] }) => {
 		if (title !== undefined) {
 			return [
 				{
