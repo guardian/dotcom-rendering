@@ -227,7 +227,7 @@ export const AbuseReportForm = ({
 						inputWrapper,
 						svgStyles,
 						errorSvgStyles,
-						!!errors.categoryId ? errorBorderColour : borderColour,
+						errors.categoryId ? errorBorderColour : borderColour,
 					]}
 				>
 					<Select
@@ -246,7 +246,7 @@ export const AbuseReportForm = ({
 							borderError: errorColour,
 						}}
 						error={
-							!!errors.categoryId ? errors.categoryId : undefined
+							errors.categoryId ? errors.categoryId : undefined
 						}
 					>
 						<Option value="0">Please select</Option>
@@ -284,7 +284,7 @@ export const AbuseReportForm = ({
 							textError: errorColour,
 							borderError: errorColour,
 						}}
-						error={!!errors.reason ? errors.reason : undefined}
+						error={errors.reason ? errors.reason : undefined}
 					/>
 				</div>
 
@@ -307,7 +307,7 @@ export const AbuseReportForm = ({
 							textError: errorColour,
 							borderError: errorColour,
 						}}
-						error={!!errors.email ? errors.email : undefined}
+						error={errors.email ? errors.email : undefined}
 					/>
 				</div>
 
