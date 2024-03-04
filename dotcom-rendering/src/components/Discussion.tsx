@@ -31,7 +31,6 @@ export type Props = {
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
-	enableMobileDiscussionAdsSwitch: boolean;
 	user?: SignedInUser;
 	idApiUrl: string;
 	reportAbuseUnauthenticated: ReturnType<typeof reportAbuse>;
@@ -342,7 +341,6 @@ export const Discussion = ({
 	discussionD2Uid,
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
-	enableMobileDiscussionAdsSwitch,
 	user,
 	idApiUrl,
 	reportAbuseUnauthenticated,
@@ -422,11 +420,6 @@ export const Discussion = ({
 		// and reload the discussion based on the resuts
 		dispatch({ type: 'updateHashCommentId', hashCommentId: commentId });
 		return false;
-	};
-
-	const dispatchCommentsExpandedEvent = () => {
-		const event = new CustomEvent('comments-expanded');
-		document.dispatchEvent(event);
 	};
 
 	// Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
@@ -517,9 +510,6 @@ export const Discussion = ({
 							? user.reportAbuse
 							: reportAbuseUnauthenticated
 					}
-					enableMobileDiscussionAdsSwitch={
-						enableMobileDiscussionAdsSwitch
-					}
 				/>
 				{!isExpanded && (
 					<div id="discussion-overlay" css={overlayStyles} />
@@ -529,7 +519,6 @@ export const Discussion = ({
 				<PillarButton
 					onClick={() => {
 						dispatch({ type: 'expandComments' });
-						dispatchCommentsExpandedEvent();
 					}}
 					icon={<SvgPlus />}
 					linkName="view-more-comments"

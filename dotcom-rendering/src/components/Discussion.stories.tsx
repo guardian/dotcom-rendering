@@ -44,7 +44,6 @@ export const Basic: StoryObj = ({ format }: StoryProps) => {
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"
 				enableDiscussionSwitch={true}
-				enableMobileDiscussionAdsSwitch={true}
 				isAdFreeUser={false}
 				shouldHideAds={false}
 				idApiUrl="https://idapi.theguardian.com"
@@ -84,7 +83,6 @@ export const Overrides: StoryObj = ({ format }: StoryProps) => {
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"
 				enableDiscussionSwitch={true}
-				enableMobileDiscussionAdsSwitch={true}
 				isAdFreeUser={false}
 				shouldHideAds={false}
 				idApiUrl="https://idapi.theguardian.com"

@@ -45,7 +45,6 @@ type Props = {
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	enableMobileDiscussionAdsSwitch: boolean;
 };
 
 const footerStyles = css`
@@ -124,7 +123,6 @@ export const Comments = ({
 	replyForm,
 	bottomForm,
 	reportAbuse,
-	enableMobileDiscussionAdsSwitch,
 }: Props) => {
 	const [picks, setPicks] = useState<Array<CommentType | ReplyType>>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
@@ -223,11 +221,11 @@ export const Comments = ({
 	};
 
 	useEffect(() => {
-		if (isWeb && expanded && !loading && enableMobileDiscussionAdsSwitch) {
+		if (isWeb && expanded && !loading) {
 			const event = new CustomEvent('comments-loaded');
 			document.dispatchEvent(event);
 		}
-	}, [isWeb, expanded, loading, enableMobileDiscussionAdsSwitch]);
+	}, [isWeb, expanded, loading]);
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
@@ -273,9 +271,7 @@ export const Comments = ({
 			handleFilterChange(newFilterObject);
 		}
 
-		isWeb &&
-			enableMobileDiscussionAdsSwitch &&
-			dispatchCommentsStateChange();
+		isWeb && dispatchCommentsStateChange();
 	};
 
 	useEffect(() => {
@@ -307,9 +303,7 @@ export const Comments = ({
 
 	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
-		isWeb &&
-			enableMobileDiscussionAdsSwitch &&
-			dispatchCommentsStateChange();
+		isWeb && dispatchCommentsStateChange();
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
