@@ -5053,6 +5053,9 @@ const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
 const interactiveAtomBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 
+const discussionPreModLight: PaletteFunction = () => sourcePalette.brand[500];
+const discussionPreModDark: PaletteFunction = () => sourcePalette.brand[800];
+
 // ----- Palette ----- //
 
 /**
@@ -6001,6 +6004,9 @@ const paletteColours = {
 	'--staff-pick-badge-text': {
 		light: staffPickBadgeTextLight,
 		dark: staffPickBadgeTextDark,
+	'--discussion-pre-mod': {
+		light: discussionPreModLight,
+		dark: discussionPreModDark,
 	},
 } satisfies PaletteColours;
 
