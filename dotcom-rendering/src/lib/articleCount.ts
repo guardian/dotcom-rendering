@@ -17,8 +17,6 @@ export interface ArticleCounts {
 	dailyArticleHistory: DailyArticleHistory;
 }
 
-// We should monitor this function call to ensure it only happens within an
-// article pages when other pages are supported by DCR.
 export const getArticleCounts = async (
 	pageId: string,
 	keywordIds: string,
