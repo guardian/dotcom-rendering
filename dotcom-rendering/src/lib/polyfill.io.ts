@@ -1,4 +1,4 @@
-/** Polyfill.io script URL @see https://polyfill.io/v3/api#request */
+/** Polyfill.io script URL @see https://polyfill.io/ */
 export const polyfillIO = `https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?${new URLSearchParams(
 	{
 		/** Undocumented; probably opting out of real user monitoring… */
