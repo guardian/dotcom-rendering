@@ -3,6 +3,8 @@ import { log } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
 import {
 	Button,
+	InlineError,
+	InlineSuccess,
 	Option,
 	Select,
 	SvgCross,
@@ -264,7 +266,14 @@ export const AbuseReportForm = ({
 					</Select>
 				</div>
 
-				<div css={inputWrapper}>
+				<div
+					css={[
+						inputWrapper,
+						svgStyles,
+						errorSvgStyles,
+						errors.reason ? errorBorderColour : borderColour,
+					]}
+				>
 					<TextArea
 						id="reason"
 						size={'medium'}
@@ -288,7 +297,14 @@ export const AbuseReportForm = ({
 					/>
 				</div>
 
-				<div css={inputWrapper}>
+				<div
+					css={[
+						inputWrapper,
+						svgStyles,
+						errorSvgStyles,
+						errors.email ? errorBorderColour : borderColour,
+					]}
+				>
 					<TextInput
 						label={'Email'}
 						optional={true}
@@ -322,29 +338,27 @@ export const AbuseReportForm = ({
 					</Button>
 
 					{!!errors.response && (
-						<span
-							css={[
-								errorColour,
-								css`
-									margin-left: 1em;
-								`,
-							]}
+						<InlineError
+							css={css`
+								color: ${errorColour};
+								padding-top: ${space[2]}px;
+							`}
 						>
 							{errors.response}
-						</span>
+						</InlineError>
 					)}
 
 					{!!successMessage && (
-						<span
+						<InlineSuccess
 							css={css`
 								color: ${schemedPalette(
 									'--discussion-report-success-text',
 								)};
-								margin-left: 1em;
+								padding-top: ${space[2]}px;
 							`}
 						>
 							{successMessage}
-						</span>
+						</InlineSuccess>
 					)}
 				</div>
 				<div
