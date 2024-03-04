@@ -5,6 +5,7 @@ import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main
 import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
 // Sign in Gate Types
 import { signInGateComponent as alternativeWordingGuardianLive } from './gates/alternative-wording-guardian-live';
+import { signInGateComponent as alternativeWordingPersonalise } from './gates/alternative-wording-personalise';
 import { signInGateComponent as alternativeWordingSaturdayEdition } from './gates/alternative-wording-saturday-edition';
 import { signInGateComponent as gateMainControl } from './gates/main-control';
 import { signInGateComponent as gateMainVariant } from './gates/main-variant';
@@ -26,6 +27,7 @@ export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-variant-5': gateMainVariant,
 	'alternative-wording-guardian-live': alternativeWordingGuardianLive,
 	'alternative-wording-saturday-edition': alternativeWordingSaturdayEdition,
+	'alternative-wording-personalise': alternativeWordingPersonalise,
 	'alternative-wording-control': gateMainVariant,
 };
 

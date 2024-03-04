@@ -27,6 +27,10 @@ export const signInGateAlternativeWording: ABTest = {
 			test: (): void => {},
 		},
 		{
+			id: 'alternative-wording-personalise',
+			test: (): void => {},
+		},
+		{
 			id: 'alternative-wording-control',
 			test: (): void => {},
 		},
