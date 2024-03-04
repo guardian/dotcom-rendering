@@ -162,6 +162,7 @@ export const preview = async (
 export type CommentResponse = Result<
 	| 'NetworkError'
 	| 'ApiError'
+	| 'NativeError'
 	| (ReturnType<typeof parseCommentResponse> & { kind: 'error' })['error'],
 	number
 >;
