@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import type {
 	AdPlaceholderBlockElement,
@@ -6,6 +7,12 @@ import type {
 	TextBlockElement,
 } from '../types/content';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
+
+const exampleFormat = {
+	design: ArticleDesign.Feature,
+	display: ArticleDisplay.Immersive,
+	theme: Pillar.Culture,
+};
 
 // Test helper functions
 
@@ -82,7 +89,7 @@ describe('Enhancing ad placeholders', () => {
 				},
 			];
 
-			const output = enhanceAdPlaceholders(input);
+			const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
 			const outputElements = getElementsFromBlocks(output);
 			const placeholderIndices = outputElements.flatMap((el, idx) =>
 				elementIsAdPlaceholder(el) ? [idx] : [],
@@ -118,7 +125,7 @@ describe('Enhancing ad placeholders', () => {
 			},
 		];
 
-		const output = enhanceAdPlaceholders(input);
+		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
 		const outputElements = getElementsFromBlocks(output);
 		const outputPlaceholders = outputElements.filter(
 			elementIsAdPlaceholder,

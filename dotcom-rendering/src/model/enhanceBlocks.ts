@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat } from '@guardian/libs';
 import type { ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
@@ -13,96 +13,18 @@ import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
-class BlockEnhancer {
-	blocks: Block[];
-
-	format: ArticleFormat;
-
-	options: Options;
-
-	constructor(blocks: Block[], format: ArticleFormat, options: Options) {
-		this.blocks = blocks;
-		this.format = format;
-		this.options = options;
-	}
-
-	enhanceNewsletterSignup() {
-		if (this.options.promotedNewsletter) {
-			this.blocks = insertPromotedNewsletter(
-				this.blocks,
-				this.format,
-				this.options.promotedNewsletter,
-			);
-		}
-		return this;
-	}
-
-	enhanceAdPlaceholders() {
-		if (
-			this.options.renderingTarget === 'Apps' &&
-			!(this.format.design === ArticleDesign.LiveBlog) &&
-			!(this.format.design === ArticleDesign.DeadBlog)
-		) {
-			this.blocks = enhanceAdPlaceholders(this.blocks);
-		}
-		return this;
-	}
-
-	enhanceDividers() {
-		this.blocks = enhanceDividers(this.blocks);
-		return this;
-	}
-
-	enhanceDots() {
-		this.blocks = enhanceDots(this.blocks);
-		return this;
-	}
-
-	enhanceH2s() {
-		this.blocks = enhanceH2s(this.blocks);
-		return this;
-	}
-
-	enhanceInteractiveContentsElements() {
-		this.blocks = enhanceInteractiveContentsElements(this.blocks);
-		return this;
-	}
-
-	enhanceImages() {
-		this.blocks = enhanceImages(
-			this.blocks,
-			this.format,
-			this.options.imagesForLightbox,
-		);
-		return this;
-	}
-
-	enhanceNumberedLists() {
-		this.blocks = enhanceNumberedLists(this.blocks, this.format);
-		return this;
-	}
-
-	enhanceBlockquotes() {
-		this.blocks = enhanceBlockquotes(this.blocks, this.format);
-		return this;
-	}
-
-	enhanceEmbeds() {
-		this.blocks = enhanceEmbeds(this.blocks);
-		return this;
-	}
-
-	enhanceTweets() {
-		this.blocks = enhanceTweets(this.blocks);
-		return this;
-	}
-}
-
 type Options = {
 	renderingTarget: RenderingTarget;
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 };
+
+const enhanceNewsletterSignup =
+	(format: ArticleFormat, promotedNewsletter: Newsletter | undefined) =>
+	(blocks: Block[]): Block[] =>
+		promotedNewsletter !== undefined
+			? insertPromotedNewsletter(blocks, format, promotedNewsletter)
+			: blocks;
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
@@ -112,15 +34,16 @@ export const enhanceBlocks = (
 	format: ArticleFormat,
 	options: Options,
 ): Block[] =>
-	new BlockEnhancer(blocks, format, options)
-		.enhanceDividers()
-		.enhanceH2s()
-		.enhanceInteractiveContentsElements()
-		.enhanceBlockquotes()
-		.enhanceDots()
-		.enhanceImages()
-		.enhanceNumberedLists()
-		.enhanceEmbeds()
-		.enhanceTweets()
-		.enhanceNewsletterSignup()
-		.enhanceAdPlaceholders().blocks;
+	[
+		enhanceDividers,
+		enhanceH2s,
+		enhanceInteractiveContentsElements,
+		enhanceBlockquotes(format),
+		enhanceDots,
+		enhanceImages(format, options.imagesForLightbox),
+		enhanceNumberedLists(format),
+		enhanceEmbeds,
+		enhanceTweets,
+		enhanceNewsletterSignup(format, options.promotedNewsletter),
+		enhanceAdPlaceholders(format, options.renderingTarget),
+	].reduce((prevBlocks, enhancer) => enhancer(prevBlocks), blocks);

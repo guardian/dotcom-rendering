@@ -15,10 +15,10 @@ const formatIsPhotoEssay: ArticleFormat = {
 
 describe('Enhancing blockquotes', () => {
 	it('creates an identical but new object when no changes are needed', () => {
-		expect(enhanceBlockquotes(example.blocks, exampleFormat)).not.toBe(
+		expect(enhanceBlockquotes(exampleFormat)(example.blocks)).not.toBe(
 			example.blocks,
 		); // We created a new object
-		expect(enhanceBlockquotes(example.blocks, exampleFormat)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(example.blocks)).toEqual(
 			example.blocks,
 		); // The new object is what we expect
 	});
@@ -51,7 +51,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, exampleFormat)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -83,7 +83,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, formatIsPhotoEssay)).toEqual(
+		expect(enhanceBlockquotes(formatIsPhotoEssay)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -116,7 +116,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, formatIsPhotoEssay)).toEqual(
+		expect(enhanceBlockquotes(formatIsPhotoEssay)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -148,7 +148,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, exampleFormat)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -180,7 +180,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, exampleFormat)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -223,7 +223,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, exampleFormat)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});

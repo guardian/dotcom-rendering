@@ -53,7 +53,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -110,7 +110,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -160,7 +160,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -199,7 +199,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -237,7 +237,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -291,7 +291,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -358,7 +358,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -412,7 +412,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -442,7 +442,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -517,7 +517,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -570,7 +570,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, photoEssayFormat, [])).toEqual(
+			expect(enhanceImages(photoEssayFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -597,7 +597,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -665,7 +665,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -706,7 +706,7 @@ describe('Enhance Images', () => {
 			];
 
 			expect(
-				enhanceImages(input, photoEssayFormat, [
+				enhanceImages(photoEssayFormat, [
 					{
 						masterUrl:
 							'https://media.guim.co.uk/7cffd9d6809318a9d92c719c473d193caf95d601/0_0_3110_2074/master/3110.jpg',
@@ -715,7 +715,7 @@ describe('Enhance Images', () => {
 						height: 2074,
 						position: 4,
 					},
-				]),
+				])(input),
 			).toEqual(expectedOutput);
 		});
 
@@ -768,7 +768,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -816,7 +816,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -839,7 +839,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -863,7 +863,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -885,7 +885,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -938,7 +938,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -996,7 +996,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, exampleArticleFormat, [])).toEqual(
+			expect(enhanceImages(exampleArticleFormat, [])(input)).toEqual(
 				expectedOutput,
 			);
 		});
