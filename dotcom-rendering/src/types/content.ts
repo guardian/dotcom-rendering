@@ -324,7 +324,7 @@ interface ListItem {
 	list: FEElement[];
 }
 
-interface ListBlockElement {
+export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
 	listElementType: 'KeyTakeaways';
 	items: ListItem[];

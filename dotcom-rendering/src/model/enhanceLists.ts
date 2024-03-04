@@ -1,38 +1,50 @@
-import type { FEElement } from '../types/content';
+import type { FEElement, ListBlockElement } from '../types/content';
+
+type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
+
+const constructKeyTakeaway =
+	(enhanceElements: ElementsEnhancer) =>
+	({ title, list }) => {
+		if (title !== undefined) {
+			return [
+				{
+					title,
+					body: enhanceElements(list),
+				},
+			];
+		}
+		return [];
+	};
+
+const enhanceListBlockElement = (
+	element: ListBlockElement,
+	elementsEnhancer: ElementsEnhancer,
+): FEElement[] => {
+	switch (element.listElementType) {
+		case 'KeyTakeaways':
+			return [
+				{
+					_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
+					keyTakeaways: element.items.flatMap(
+						constructKeyTakeaway(elementsEnhancer),
+					),
+				},
+			];
+		/**
+		 * If it's an unsupported list element, ignore the structure
+		 * and return the body elements.
+		 */
+		default:
+			return element.items.flatMap((item) => item.list);
+	}
+};
 
 const enhance =
-	(enhanceElements: (elements: FEElement[]) => FEElement[]) =>
+	(elementsEnhancer: ElementsEnhancer) =>
 	(element: FEElement): FEElement[] => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.ListBlockElement': {
-				switch (element.listElementType) {
-					case 'KeyTakeaways':
-						return [
-							{
-								_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
-								keyTakeaways: element.items.flatMap(
-									({ title, list }) => {
-										if (title !== undefined) {
-											return [
-												{
-													title,
-													body: enhanceElements(list),
-												},
-											];
-										}
-
-										return [];
-									},
-								),
-							},
-						];
-					/**
-					 * If it's an unsupported list element, ignore the structure
-					 * and return the body elements.
-					 */
-					default:
-						return element.items.flatMap((i) => i.list);
-				}
+				return enhanceListBlockElement(element, elementsEnhancer);
 			}
 			default:
 				return [element];
@@ -40,6 +52,6 @@ const enhance =
 	};
 
 export const enhanceLists =
-	(enhanceElements: (elements: FEElement[]) => FEElement[]) =>
+	(elementsEnhancer: ElementsEnhancer) =>
 	(elements: FEElement[]): FEElement[] =>
-		elements.flatMap(enhance(enhanceElements));
+		elements.flatMap(enhance(elementsEnhancer));
