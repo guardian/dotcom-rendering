@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	palette as sourcePalette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { palette as themePalette } from '../../palette';
-
-const white = sourcePalette.neutral[100];
 
 const staffBadge = css`
 	display: flex;
