@@ -25,8 +25,6 @@ There are some conventions that can result in images appearing differently, we n
 Multi images. Consecutive sequences of two halfWidth images will be merged into a MultiImageBlockElement and shown side by side
 Captions. A `ul`/`li` tag directly after an image will replace the preceding image's caption
 
-In particular, Photo essay articles needs a lot of cleaning to achieve the intended designs. They use special caption styles and can sometimes have titles overlaying images.
-
 In DCR we support these conventions using [enhance-images.ts](/dotcom-rendering/src/model/enhance-images.ts)
 
 ## How remove these enhancement functions
