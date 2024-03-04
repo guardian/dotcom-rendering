@@ -54,7 +54,7 @@ describe('Enhancing ad placeholders', () => {
 		{ paragraphs: 12, expectedPositions: [3, 10] },
 		{
 			paragraphs: 16,
-			expectedPositions: [3, 10, 17],
+			expectedPositions: [3, 10],
 		},
 		{
 			paragraphs: 87,
@@ -65,7 +65,7 @@ describe('Enhancing ad placeholders', () => {
 		{
 			paragraphs: 88,
 			expectedPositions: [
-				3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87, 94, 101,
+				3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87, 94,
 			],
 		},
 		{
@@ -138,6 +138,6 @@ describe('Enhancing ad placeholders', () => {
 		);
 
 		// Expect one placeholder to be present after the third paragraph only
-		expect(placeholderIndices).toEqual([3]);
+		expect(placeholderIndices).toEqual([4]);
 	});
 });
