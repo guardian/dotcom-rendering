@@ -396,20 +396,19 @@ const enhance = (elements: FEElement[]): FEElement[] => {
 	);
 };
 
-export const enhanceNumberedLists = (
-	blocks: Block[],
-	format: ArticleFormat,
-): Block[] => {
-	const isNumberedList = format.display === ArticleDisplay.NumberedList;
+export const enhanceNumberedLists =
+	(format: ArticleFormat) =>
+	(blocks: Block[]): Block[] => {
+		const isNumberedList = format.display === ArticleDisplay.NumberedList;
 
-	if (!isNumberedList) {
-		return blocks;
-	}
+		if (!isNumberedList) {
+			return blocks;
+		}
 
-	return blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: enhance(block.elements),
-		};
-	});
-};
+		return blocks.map((block: Block) => {
+			return {
+				...block,
+				elements: enhance(block.elements),
+			};
+		});
+	};

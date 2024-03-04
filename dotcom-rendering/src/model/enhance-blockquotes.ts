@@ -40,16 +40,15 @@ const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] =>
 		}
 	});
 
-export const enhanceBlockquotes = (
-	blocks: Block[],
-	format: ArticleFormat,
-): Block[] => {
-	const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
+export const enhanceBlockquotes =
+	(format: ArticleFormat) =>
+	(blocks: Block[]): Block[] => {
+		const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
 
-	return blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: enhance(block.elements, isPhotoEssay || false),
-		};
-	});
-};
+		return blocks.map((block: Block) => {
+			return {
+				...block,
+				elements: enhance(block.elements, isPhotoEssay || false),
+			};
+		});
+	};

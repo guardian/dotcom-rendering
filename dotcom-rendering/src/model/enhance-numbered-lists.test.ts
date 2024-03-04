@@ -32,7 +32,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, exampleArticleFormat)).toEqual(
+		expect(enhanceNumberedLists(exampleArticleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -67,7 +67,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -102,7 +102,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -137,7 +137,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -172,7 +172,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -202,7 +202,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -232,7 +232,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -262,7 +262,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -292,7 +292,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -337,7 +337,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -382,7 +382,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -415,7 +415,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -436,7 +436,7 @@ describe('Enhance Numbered Lists', () => {
 
 		const expectedOutput: Block[] = input;
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -457,7 +457,7 @@ describe('Enhance Numbered Lists', () => {
 
 		const expectedOutput: Block[] = input;
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -477,7 +477,7 @@ describe('Enhance Numbered Lists', () => {
 		];
 		const expectedOutput: Block[] = input;
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -510,7 +510,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -543,7 +543,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -575,7 +575,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -607,7 +607,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -627,7 +627,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -665,7 +665,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -746,7 +746,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, numberedListFormat)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
