@@ -39,26 +39,30 @@ const enhanceNewsletterSignup =
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
-export const enhanceElements = (
-	elements: FEElement[],
-	format: ArticleFormat,
-	blockId: string,
-	options: Options,
-): FEElement[] =>
-	[
-		enhanceLists,
-		enhanceDividers,
-		enhanceH2s,
-		enhanceInteractiveContentsElements,
-		enhanceBlockquotes(format),
-		enhanceDots,
-		enhanceImages(format, options.imagesForLightbox),
-		enhanceNumberedLists(format),
-		enhanceEmbeds,
-		enhanceTweets,
-		enhanceNewsletterSignup(format, options.promotedNewsletter, blockId),
-		enhanceAdPlaceholders(format, options.renderingTarget),
-	].reduce((enhancedBlocks, enhancer) => enhancer(enhancedBlocks), elements);
+export const enhanceElements =
+	(format: ArticleFormat, blockId: string, options: Options) =>
+	(elements: FEElement[]): FEElement[] =>
+		[
+			enhanceLists(enhanceElements(format, blockId, options)),
+			enhanceDividers,
+			enhanceH2s,
+			enhanceInteractiveContentsElements,
+			enhanceBlockquotes(format),
+			enhanceDots,
+			enhanceImages(format, options.imagesForLightbox),
+			enhanceNumberedLists(format),
+			enhanceEmbeds,
+			enhanceTweets,
+			enhanceNewsletterSignup(
+				format,
+				options.promotedNewsletter,
+				blockId,
+			),
+			enhanceAdPlaceholders(format, options.renderingTarget),
+		].reduce(
+			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
+			elements,
+		);
 
 export const enhanceBlocks = (
 	blocks: Block[],
@@ -67,5 +71,5 @@ export const enhanceBlocks = (
 ): Block[] =>
 	blocks.map((block) => ({
 		...block,
-		elements: enhanceElements(block.elements, format, block.id, options),
+		elements: enhanceElements(format, block.id, options)(block.elements),
 	}));
