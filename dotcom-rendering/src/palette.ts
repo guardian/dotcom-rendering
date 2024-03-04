@@ -5040,6 +5040,9 @@ const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
 const interactiveAtomBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 
+const discussionPreModLight: PaletteFunction = () => sourcePalette.brand[500];
+const discussionPreModDark: PaletteFunction = () => sourcePalette.brand[800];
+
 // ----- Palette ----- //
 
 /**
@@ -5972,6 +5975,10 @@ const paletteColours = {
 	'--share-button-xsmall-border': {
 		light: shareButtonBorderXSmallLight,
 		dark: shareButtonBorderXSmallLight,
+	},
+	'--discussion-pre-mod': {
+		light: discussionPreModLight,
+		dark: discussionPreModDark,
 	},
 } satisfies PaletteColours;
 
