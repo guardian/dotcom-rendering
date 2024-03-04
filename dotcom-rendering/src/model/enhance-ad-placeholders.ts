@@ -9,11 +9,13 @@ import type { RenderingTarget } from '../types/renderingTarget';
  * - Is at least 6 blocks after the previous ad
  * - No more than 15 ads in an article
  * - Last block should not be followed by an ad
+ * - Ad should not appear immediately before an image
  */
 const isSuitablePosition = (
 	blockCounter: number,
 	numberOfAdsInserted: number,
 	previousAdIndex: number,
+	prevIsParagraphOrImage: boolean,
 	isLastElement: boolean,
 	isParagraph: boolean,
 ): boolean => {
@@ -40,8 +42,13 @@ const isSuitablePosition = (
 	const isEnoughBlocksAfter =
 		blockCounter - previousAdIndex >= adEveryNBlocks;
 
-	// Insert an ad placeholder if the current element is a paragraph, and if the position is eligible
-	return isParagraph && (isFirstAdIndex || isEnoughBlocksAfter);
+	// Insert an ad placeholder before the current element if it is a paragraph, the
+	// previous element was an image or a paragraph, and if the position is eligible
+	return (
+		isParagraph &&
+		prevIsParagraphOrImage &&
+		(isFirstAdIndex || isEnoughBlocksAfter)
+	);
 };
 
 const isParagraph = (element: FEElement) =>
@@ -63,8 +70,9 @@ const insertPlaceholder = (
 type ReducerAccumulator = {
 	elements: FEElement[];
 	blockCounter: number;
-	previousAdIndex: number;
+	lastAdIndex: number;
 	numberOfAdsInserted: number;
+	prevIsParagraphOrImage: boolean;
 };
 
 /**
@@ -85,7 +93,8 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 			const shouldInsertAd = isSuitablePosition(
 				blockCounter,
 				prev.numberOfAdsInserted,
-				prev.previousAdIndex,
+				prev.lastAdIndex,
+				prev.prevIsParagraphOrImage,
 				elements.length === idx + 1,
 				isParagraph(currentElement),
 			);
@@ -97,20 +106,21 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 					? insertPlaceholder(prev.elements, currentElement)
 					: currentElements,
 				blockCounter,
-				previousAdIndex: shouldInsertAd
-					? blockCounter
-					: prev.previousAdIndex,
+				lastAdIndex: shouldInsertAd ? blockCounter : prev.lastAdIndex,
 				numberOfAdsInserted: shouldInsertAd
 					? prev.numberOfAdsInserted + 1
 					: prev.numberOfAdsInserted,
+				prevIsParagraphOrImage:
+					isParagraph(currentElement) || isImage(currentElement),
 			};
 		},
 		// Initial value for reducer function
 		{
 			elements: [],
 			blockCounter: 0,
-			previousAdIndex: 0,
+			lastAdIndex: 0,
 			numberOfAdsInserted: 0,
+			prevIsParagraphOrImage: false,
 		},
 	);
 
