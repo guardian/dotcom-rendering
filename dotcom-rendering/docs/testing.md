@@ -75,10 +75,6 @@ Running Playwright locally requires having a DCR server running.
 
 #### Against the PROD server
 
-First create the prod build:
-
-`make build`
-
 To run the tests on the command line in headless mode:
 
 `make playwright`
