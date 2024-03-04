@@ -199,10 +199,11 @@ const tryToInsert = (
 };
 
 export const insertPromotedNewsletter = (
-	blocks: Block[],
+	elements: FEElement[],
+	blockId: string,
 	format: ArticleFormat,
 	promotedNewsletter: Newsletter,
-): Block[] => {
+): FEElement[] => {
 	switch (format.design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Gallery:
@@ -218,17 +219,8 @@ export const insertPromotedNewsletter = (
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Explainer:
-			return blocks.map((block: Block) => {
-				return {
-					...block,
-					elements: tryToInsert(
-						promotedNewsletter,
-						block.elements,
-						block.id,
-					),
-				};
-			});
+			return tryToInsert(promotedNewsletter, elements, blockId);
 		default:
-			return blocks;
+			return elements;
 	}
 };

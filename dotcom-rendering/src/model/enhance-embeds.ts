@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 import type { FEElement } from '../types/content';
 
-const addTitleToIframe = (elements: FEElement[]): FEElement[] =>
+export const enhanceEmbeds = (elements: FEElement[]): FEElement[] =>
 	elements.map<FEElement>((element) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
@@ -25,12 +25,4 @@ const addTitleToIframe = (elements: FEElement[]): FEElement[] =>
 			default:
 				return element;
 		}
-	});
-
-export const enhanceEmbeds = (blocks: Block[]): Block[] =>
-	blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: addTitleToIframe(block.elements),
-		};
 	});
