@@ -71,6 +71,10 @@ We will **not** be writing snaphot test Components for the following reasons:
 
 ### How to run locally
 
+The first time you run Playwright you will be asked to install a local browser, which you can do with the following command:
+
+`pnpm playwright install chromium`
+
 Running Playwright locally requires having a DCR server running.
 
 #### Against the PROD server
