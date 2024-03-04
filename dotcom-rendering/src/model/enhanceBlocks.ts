@@ -12,7 +12,6 @@ import { enhanceInteractiveContentsElements } from './enhance-interactive-conten
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
-import { validateAsBlock } from './validate';
 
 class BlockEnhancer {
 	blocks: Block[];
@@ -112,9 +111,8 @@ export const enhanceBlocks = (
 	blocks: Block[],
 	format: ArticleFormat,
 	options: Options,
-): Block[] => {
-	for (const block of blocks) validateAsBlock(block);
-	return new BlockEnhancer(blocks, format, options)
+): Block[] =>
+	new BlockEnhancer(blocks, format, options)
 		.enhanceDividers()
 		.enhanceH2s()
 		.enhanceInteractiveContentsElements()
@@ -126,4 +124,3 @@ export const enhanceBlocks = (
 		.enhanceTweets()
 		.enhanceNewsletterSignup()
 		.enhanceAdPlaceholders().blocks;
-};

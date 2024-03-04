@@ -3,6 +3,7 @@ import { Standard as ExampleArticle } from '../../fixtures/generated/articles/St
 import { enhanceArticleType } from '../lib/article';
 import { decideFormat } from '../lib/decideFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
+import { validateAsBlock } from '../model/validate';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
@@ -69,6 +70,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 	} =
 		// The content if body is not checked
 		body as FEBlocksRequest;
+	for (const block of blocks) validateAsBlock(block);
 
 	const enhancedBlocks = enhanceBlocks(blocks, decideFormat(format), {
 		renderingTarget: 'Web',
