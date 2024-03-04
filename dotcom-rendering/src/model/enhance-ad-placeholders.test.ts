@@ -4,6 +4,7 @@ import type {
 	AdPlaceholderBlockElement,
 	FEElement,
 	ImageBlockElement,
+	SubheadingBlockElement,
 	TextBlockElement,
 } from '../types/content';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
@@ -31,6 +32,12 @@ const getImageElement = (): ImageBlockElement => ({
 	role: 'supporting',
 	imageSources: [],
 	elementId: '12345',
+});
+
+const getSubheadingElement = (): SubheadingBlockElement => ({
+	_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+	elementId: 'mockId',
+	html: "<h2 id='i-am-a-subheading'>I am a subheading.</h2>",
 });
 
 const elementIsAdPlaceholder = (
@@ -109,7 +116,7 @@ describe('Enhancing ad placeholders', () => {
 		},
 	);
 
-	describe('should not insert an ad placeholder before a non text element', () => {
+	describe('should not insert an ad placeholder before an image element', () => {
 		const threeParagraphs = getTestParagraphElements(3);
 
 		const elements = [
@@ -137,7 +144,39 @@ describe('Enhancing ad placeholders', () => {
 			elementIsAdPlaceholder(el) ? [idx] : [],
 		);
 
-		// Expect one placeholder to be present after the fourth paragraph only
+		// Expect one placeholder to be present after the fourth element only
 		expect(placeholderIndices).toEqual([4]);
+	});
+
+	describe('should not insert an ad placeholder after an element which is not an image or text', () => {
+		const threeParagraphs = getTestParagraphElements(3);
+
+		const elements = [
+			...threeParagraphs,
+			getSubheadingElement(),
+			...threeParagraphs,
+		];
+
+		const input: Block[] = [
+			{
+				...blockMetaData,
+				elements,
+			},
+		];
+
+		const output = enhanceAdPlaceholders(input);
+		const outputElements = getElementsFromBlocks(output);
+		const outputPlaceholders = outputElements.filter(
+			elementIsAdPlaceholder,
+		);
+
+		expect(outputPlaceholders.length).toEqual(1);
+
+		const placeholderIndices = outputElements.flatMap((el, idx) =>
+			elementIsAdPlaceholder(el) ? [idx] : [],
+		);
+
+		// Expect one placeholder to be present after the fifth element only
+		expect(placeholderIndices).toEqual([5]);
 	});
 });
