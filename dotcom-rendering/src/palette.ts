@@ -6004,6 +6004,7 @@ const paletteColours = {
 	'--staff-pick-badge-text': {
 		light: staffPickBadgeTextLight,
 		dark: staffPickBadgeTextDark,
+	},
 	'--discussion-pre-mod': {
 		light: discussionPreModLight,
 		dark: discussionPreModDark,
