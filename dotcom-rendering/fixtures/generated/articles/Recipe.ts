@@ -1182,9 +1182,9 @@ export const Recipe: DCRArticle = {
 	designType: 'Recipe',
 	editionId: 'UK',
 	format: {
-		design: 'RecipeDesign',
-		theme: 'LifestylePillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 4,
+		design: 13,
 	},
 	openGraphData: {
 		'og:url':

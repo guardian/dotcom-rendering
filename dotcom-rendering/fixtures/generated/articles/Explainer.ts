@@ -1212,9 +1212,9 @@ export const Explainer: DCRArticle = {
 	designType: 'Article',
 	editionId: 'UK',
 	format: {
-		design: 'ExplainerDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 0,
+		design: 7,
 	},
 	openGraphData: {
 		'og:url':

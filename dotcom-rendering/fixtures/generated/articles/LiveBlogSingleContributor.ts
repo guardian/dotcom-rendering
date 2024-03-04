@@ -1253,9 +1253,9 @@ export const LiveBlogSingleContributor: DCRArticle = {
 	designType: 'Article',
 	editionId: 'UK',
 	format: {
-		design: 'LiveBlogDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 0,
+		design: 11,
 	},
 	openGraphData: {
 		'og:url':

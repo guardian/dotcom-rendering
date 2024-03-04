@@ -1082,9 +1082,9 @@ export const Labs: DCRArticle = {
 	designType: 'AdvertisementFeature',
 	editionId: 'UK',
 	format: {
-		design: 'PhotoEssayDesign',
-		theme: 'Labs',
-		display: 'ImmersiveDisplay',
+		display: 1,
+		theme: 6,
+		design: 19,
 	},
 	openGraphData: {
 		'og:url':

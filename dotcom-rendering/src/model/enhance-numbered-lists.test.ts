@@ -2,11 +2,10 @@ import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { decideFormat } from '../lib/decideFormat';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 
-const exampleArticleFormat = decideFormat(ExampleArticle.format);
-const numberedListFormat = decideFormat(NumberedList.format);
+const exampleArticleFormat = ExampleArticle.format;
+const numberedListFormat = NumberedList.format;
 
 describe('Enhance Numbered Lists', () => {
 	it('does not enhance articles if they are not numbered lists', () => {

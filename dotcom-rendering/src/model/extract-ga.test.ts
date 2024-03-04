@@ -1,5 +1,4 @@
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import { decideFormat } from '../lib/decideFormat';
 import { extractGA } from './extract-ga';
 
 const pillar: LegacyPillar = 'news';
@@ -33,7 +32,7 @@ const article = {
 		},
 	],
 	...base,
-	format: decideFormat(ExampleArticle.format),
+	format: ExampleArticle.format,
 };
 
 describe('Google Analytics extracts and formats CAPIArticle response correctly', () => {

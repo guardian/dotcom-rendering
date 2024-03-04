@@ -1,12 +1,11 @@
 import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { decideFormat } from '../lib/decideFormat';
 import type { DCRArticle } from '../types/frontend';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
 const example: DCRArticle = ExampleArticle;
-const exampleFormat: ArticleFormat = decideFormat(example.format);
+const exampleFormat: ArticleFormat = example.format;
 
 const formatIsPhotoEssay: ArticleFormat = {
 	...exampleFormat,

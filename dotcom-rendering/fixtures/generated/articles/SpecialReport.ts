@@ -1422,9 +1422,9 @@ export const SpecialReport: DCRArticle = {
 	designType: 'Analysis',
 	editionId: 'UK',
 	format: {
-		design: 'AnalysisDesign',
-		theme: 'SpecialReportTheme',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 5,
+		design: 6,
 	},
 	openGraphData: {
 		'og:url':

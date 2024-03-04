@@ -10,7 +10,6 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
-import { decideTheme } from '../lib/decideTheme';
 import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getCurrentPillar } from '../lib/layoutHelpers';
@@ -29,7 +28,7 @@ interface Props {
 }
 
 const decideTitle = (article: DCRArticle): string => {
-	if (decideTheme(article.format) === Pillar.Opinion && article.byline) {
+	if (article.format.theme === Pillar.Opinion && article.byline) {
 		return `${article.headline} | ${article.byline} | The Guardian`;
 	}
 	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
@@ -46,7 +45,7 @@ export const renderHtml = ({
 	const title = decideTitle(article);
 	const linkedData = article.linkedData;
 
-	const format: ArticleFormat = decideFormat(article.format);
+	const format = article.format;
 
 	const renderingTarget = 'Web';
 	const config: Config = { renderingTarget, darkModeAvailable: false };

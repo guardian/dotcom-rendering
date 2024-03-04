@@ -1,3 +1,4 @@
+import type { ArticleFormat } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
@@ -136,7 +137,8 @@ type PageTypeType = {
  * The `DCRArticle` type models the `FEArticleType` in addition to any enhancements DCR makes after
  * receiving the data from Frontend.
  */
-export type DCRArticle = FEArticleType & {
+export type DCRArticle = Omit<FEArticleType, 'format'> & {
+	format: ArticleFormat;
 	imagesForLightbox: ImageForLightbox[];
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];

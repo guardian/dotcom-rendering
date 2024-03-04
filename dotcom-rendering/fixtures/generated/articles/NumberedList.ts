@@ -1397,9 +1397,9 @@ export const NumberedList: DCRArticle = {
 	designType: 'Review',
 	editionId: 'UK',
 	format: {
-		design: 'ReviewDesign',
-		theme: 'NewsPillar',
-		display: 'NumberedListDisplay',
+		display: 3,
+		theme: 0,
+		design: 5,
 	},
 	openGraphData: {
 		'og:url':

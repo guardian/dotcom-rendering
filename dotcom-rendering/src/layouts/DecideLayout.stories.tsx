@@ -1,4 +1,10 @@
-import { isObject } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isObject,
+	Pillar,
+} from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Decorator, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
@@ -14,7 +20,6 @@ import { Picture as PictureShowcaseOpinionFixture } from '../../fixtures/generat
 import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generated/articles/Recipe';
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/articles/Standard';
 import { embedIframe } from '../client/embedIframe';
-import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
@@ -39,7 +44,7 @@ const HydratedLayout: Decorator<
 	DecideLayoutProps & HydratedLayoutDecoratorArgs
 > = (Story, context) => {
 	const { article } = context.args;
-	const format: ArticleFormat = decideFormat(article.format);
+	const format: ArticleFormat = article.format;
 	const colourScheme =
 		(isObject(context.parameters.config) &&
 		context.parameters.config.renderingTarget === 'Apps'
@@ -137,7 +142,7 @@ const standardImmersiveNewsFixture: DCRArticle = {
 	...StandardStandardNewsFixture,
 	format: {
 		...StandardStandardNewsFixture.format,
-		display: 'ImmersiveDisplay',
+		display: ArticleDisplay.Immersive,
 	},
 };
 
@@ -198,7 +203,7 @@ const standardStandardLabsFixture: DCRArticle = {
 	...StandardStandardNewsFixture,
 	format: {
 		...StandardStandardNewsFixture.format,
-		theme: 'Labs',
+		theme: ArticleSpecial.Labs,
 	},
 };
 
@@ -231,7 +236,7 @@ export const WebFeatureStandardLabsLight: Story = {
 			...FeatureStandardCultureFixture,
 			format: {
 				...FeatureStandardCultureFixture.format,
-				theme: 'Labs',
+				theme: ArticleSpecial.Labs,
 			},
 		},
 	},
@@ -244,7 +249,7 @@ export const WebRecipeStandardLabsLight: Story = {
 			...RecipeStandardLifestyleFixture,
 			format: {
 				...RecipeStandardLifestyleFixture.format,
-				theme: 'Labs',
+				theme: ArticleSpecial.Labs,
 			},
 		},
 	},
@@ -294,7 +299,7 @@ const liveBlogStandardSportFixture: DCRArticle = {
 	...LiveBlogStandardNewsFixture,
 	format: {
 		...LiveBlogStandardNewsFixture.format,
-		theme: 'SportPillar',
+		theme: Pillar.Sport,
 	},
 };
 
@@ -318,7 +323,7 @@ const liveBlogStandardSpecialReportFixture: DCRArticle = {
 	...LiveBlogStandardNewsFixture,
 	format: {
 		...LiveBlogStandardNewsFixture.format,
-		theme: 'SpecialReportTheme',
+		theme: ArticleSpecial.SpecialReport,
 	},
 };
 
@@ -342,7 +347,7 @@ const liveBlogStandardSpecialReportAltFixture: DCRArticle = {
 	...LiveBlogStandardNewsFixture,
 	format: {
 		...LiveBlogStandardNewsFixture.format,
-		theme: 'SpecialReportAltTheme',
+		theme: ArticleSpecial.SpecialReportAlt,
 	},
 };
 
@@ -389,7 +394,7 @@ const commentStandardNewsFixture: DCRArticle = {
 	...CommentStandardOpinionFixture,
 	format: {
 		...CommentStandardOpinionFixture.format,
-		theme: 'NewsPillar',
+		theme: Pillar.News,
 	},
 };
 
@@ -413,7 +418,7 @@ const interactiveStandardNewsFixture: DCRArticle = {
 	...StandardStandardNewsFixture,
 	format: {
 		...StandardStandardNewsFixture.format,
-		design: 'InteractiveDesign',
+		design: ArticleDesign.Interactive,
 	},
 };
 
@@ -453,7 +458,7 @@ const analysisStandardCultureFixture: DCRArticle = {
 	...AnalysisStandardNewsFixture,
 	format: {
 		...AnalysisStandardNewsFixture.format,
-		theme: 'CulturePillar',
+		theme: Pillar.Culture,
 	},
 };
 

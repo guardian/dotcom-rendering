@@ -1085,9 +1085,9 @@ export const PhotoEssay: DCRArticle = {
 	designType: 'Feature',
 	editionId: 'UK',
 	format: {
-		design: 'PhotoEssayDesign',
-		theme: 'LifestylePillar',
-		display: 'ImmersiveDisplay',
+		display: 1,
+		theme: 4,
+		design: 19,
 	},
 	openGraphData: {
 		'og:url':

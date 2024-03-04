@@ -49,6 +49,7 @@ export const enhanceArticleType = (
 
 	return {
 		...data,
+		format,
 		mainMediaElements,
 		blocks: enhancedBlocks,
 		pinnedPost: enhancePinnedPost(format, renderingTarget, data.pinnedPost),

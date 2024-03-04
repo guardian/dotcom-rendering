@@ -1069,9 +1069,9 @@ export const Letter: DCRArticle = {
 	designType: 'Comment',
 	editionId: 'UK',
 	format: {
-		design: 'LetterDesign',
-		theme: 'OpinionPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 1,
+		design: 9,
 	},
 	openGraphData: {
 		'og:url':

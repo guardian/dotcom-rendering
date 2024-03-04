@@ -1110,9 +1110,9 @@ export const MatchReport: DCRArticle = {
 	designType: 'MatchReport',
 	editionId: 'UK',
 	format: {
-		design: 'MatchReportDesign',
-		theme: 'SportPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 2,
+		design: 14,
 	},
 	openGraphData: {
 		'og:url':

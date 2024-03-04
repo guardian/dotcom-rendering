@@ -1076,9 +1076,9 @@ export const PrintShop: DCRArticle = {
 	designType: 'Immersive',
 	editionId: 'UK',
 	format: {
-		design: 'PrintShopDesign',
-		theme: 'CulturePillar',
-		display: 'ImmersiveDisplay',
+		display: 1,
+		theme: 3,
+		design: 20,
 	},
 	openGraphData: {
 		'og:url':

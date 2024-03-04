@@ -1277,9 +1277,9 @@ export const Audio: DCRArticle = {
 	designType: 'Article',
 	editionId: 'UK',
 	format: {
-		design: 'ArticleDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
+		display: 0,
+		theme: 0,
+		design: 0,
 	},
 	openGraphData: {
 		'og:url':
