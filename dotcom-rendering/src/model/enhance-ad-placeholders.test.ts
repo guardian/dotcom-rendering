@@ -109,7 +109,7 @@ describe('Enhancing ad placeholders', () => {
 		},
 	);
 
-	describe('should not insert an ad placeholder after a non text element', () => {
+	describe('should not insert an ad placeholder before a non text element', () => {
 		const threeParagraphs = getTestParagraphElements(3);
 
 		const elements = [
@@ -137,7 +137,7 @@ describe('Enhancing ad placeholders', () => {
 			elementIsAdPlaceholder(el) ? [idx] : [],
 		);
 
-		// Expect one placeholder to be present after the third paragraph only
+		// Expect one placeholder to be present after the fourth paragraph only
 		expect(placeholderIndices).toEqual([4]);
 	});
 });
