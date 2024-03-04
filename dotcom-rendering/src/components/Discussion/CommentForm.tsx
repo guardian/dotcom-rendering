@@ -330,7 +330,11 @@ export const CommentForm = ({
 
 		if (body) {
 			const response = commentBeingRepliedTo
-				? await user.onReply(shortUrl, body, commentBeingRepliedTo.id)
+				? await user.onReply(
+						shortUrl,
+						body,
+						commentBeingRepliedTo.id.toString(),
+				  )
 				: await user.onComment(shortUrl, body);
 			// Check response message for error states
 			if (response.kind === 'error') {

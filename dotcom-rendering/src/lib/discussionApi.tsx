@@ -199,7 +199,7 @@ export const reply =
 	async (
 		shortUrl: string,
 		body: string,
-		parentCommentId: number,
+		parentCommentId: string,
 	): Promise<CommentResponse> => {
 		const url =
 			joinUrl(
@@ -207,7 +207,7 @@ export const reply =
 				'discussion',
 				shortUrl,
 				'comment',
-				parentCommentId.toString(),
+				parentCommentId,
 				'reply',
 			) + objAsParams(defaultParams);
 		const data = new URLSearchParams();

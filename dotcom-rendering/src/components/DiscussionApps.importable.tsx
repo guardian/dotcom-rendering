@@ -33,9 +33,30 @@ const onComment = async (
 		});
 };
 
-const onReply = async (): Promise<CommentResponse> => {
-	console.log('onReply');
-	return { kind: 'error', error: 'ApiError' };
+const onReply = async (
+	shortUrl: string,
+	body: string,
+	parentCommentId: string,
+): Promise<CommentResponse> => {
+	return getdiscussionClient()
+		.reply(shortUrl, body, parentCommentId)
+		.then((response) => {
+			if (response.__type == 'error') {
+				return {
+					kind: 'error',
+					error: 'NativeError',
+				};
+			} else {
+				if (response.response.errorCode) {
+					return {
+						kind: 'error',
+						error: 'ApiError',
+					};
+				}
+
+				return ok(Number(response.response.message));
+			}
+		});
 };
 
 const onRecommend = async (commentId: string): Promise<boolean> => {
