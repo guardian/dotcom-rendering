@@ -61,7 +61,7 @@ const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
  * If our h2 element is a subheading then we want to insert a humanised slug of the header text as its ID.
  * We make sure to store each slug inside an array so that we can verify if this slug already exists as an id. If it does, we add the number of times it appears on the page to make sure the id is always unique.
  */
-const enhance = (elements: FEElement[]): FEElement[] => {
+export const enhanceH2s = (elements: FEElement[]): FEElement[] => {
 	const slugifiedIds: string[] = [];
 	const shouldUseElementId = shouldUseLegacyIDs(elements);
 	return elements.map<FEElement>((element) => {
@@ -86,14 +86,5 @@ const enhance = (elements: FEElement[]): FEElement[] => {
 			// Otherwise, do nothing
 			return element;
 		}
-	});
-};
-
-export const enhanceH2s = (blocks: Block[]): Block[] => {
-	return blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: enhance(block.elements),
-		};
 	});
 };

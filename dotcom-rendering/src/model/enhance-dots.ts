@@ -1,7 +1,7 @@
 import type { FEElement } from '../types/content';
 import { transformDots } from './transformDots';
 
-const checkForDots = (elements: FEElement[]): FEElement[] =>
+export const enhanceDots = (elements: FEElement[]): FEElement[] =>
 	// Loop over elements and check if a dot is in the TextBlockElement
 	elements.map<FEElement>((element, i) => {
 		if (
@@ -23,12 +23,4 @@ const checkForDots = (elements: FEElement[]): FEElement[] =>
 		} else {
 			return element;
 		}
-	});
-
-export const enhanceDots = (blocks: Block[]): Block[] =>
-	blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: checkForDots(block.elements),
-		};
 	});

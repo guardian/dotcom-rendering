@@ -1,4 +1,8 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { getLargest, getMaster } from '../lib/image';
 import type {
@@ -401,59 +405,47 @@ class Enhancer {
 	}
 }
 
-type Options = { isPhotoEssay: boolean; imagesForLightbox: ImageForLightbox[] };
+const enhance =
+	(isPhotoEssay: boolean, imagesForLightbox: ImageForLightbox[]) =>
+	(elements: FEElement[]): FEElement[] => {
+		if (isPhotoEssay) {
+			return new Enhancer(elements)
+				.stripCaptions()
+				.removeCredit()
+				.addMultiImageElements()
+				.addTitles()
+				.addCaptionsToMultis()
+				.addCaptionsToImages()
+				.addImagePositions(imagesForLightbox).elements;
+		}
 
-const enhance = (
-	elements: FEElement[],
-	{ isPhotoEssay, imagesForLightbox }: Options,
-): FEElement[] => {
-	if (isPhotoEssay) {
-		return new Enhancer(elements)
-			.stripCaptions()
-			.removeCredit()
-			.addMultiImageElements()
-			.addTitles()
-			.addCaptionsToMultis()
-			.addCaptionsToImages()
-			.addImagePositions(imagesForLightbox).elements;
-	}
-
-	return (
-		new Enhancer(elements)
-			// Replace pairs of halfWidth images with MultiImageBlockElements
-			.addMultiImageElements()
-			// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
-			// element and use the value for the multi image `caption` prop
-			.addCaptionsToMultis()
-			.addImagePositions(imagesForLightbox).elements
-	);
-};
+		return (
+			new Enhancer(elements)
+				// Replace pairs of halfWidth images with MultiImageBlockElements
+				.addMultiImageElements()
+				// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
+				// element and use the value for the multi image `caption` prop
+				.addCaptionsToMultis()
+				.addImagePositions(imagesForLightbox).elements
+		);
+	};
 
 export const enhanceImages = (
-	blocks: Block[],
 	format: ArticleFormat,
 	imagesForLightbox: ImageForLightbox[],
-): Block[] => {
+): ((elements: FEElement[]) => FEElement[]) => {
 	const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
 
-	return blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: enhance(block.elements, {
-				isPhotoEssay,
-				imagesForLightbox,
-			}),
-		};
-	});
+	return enhance(isPhotoEssay, imagesForLightbox);
 };
 
 export const enhanceElementsImages = (
-	elements: FEElement[],
-	format: FEFormat,
+	format: ArticleFormat,
 	imagesForLightbox: ImageForLightbox[],
-): FEElement[] =>
-	enhance(elements, {
-		isPhotoEssay:
-			format.design === 'PhotoEssayDesign' && format.theme !== 'Labs',
-		imagesForLightbox,
-	});
+): ((elements: FEElement[]) => FEElement[]) => {
+	const isPhotoEssay =
+		format.design === ArticleDesign.PhotoEssay &&
+		format.theme !== ArticleSpecial.Labs;
+
+	return enhance(isPhotoEssay, imagesForLightbox);
+};

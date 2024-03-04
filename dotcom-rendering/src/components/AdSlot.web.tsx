@@ -252,17 +252,21 @@ const mobileFrontAdStyles = css`
 `;
 
 const frontsBannerPaddingHeight = 20;
+const frontsBannerMinHeightTablet =
+	adSizes.leaderboard.height + labelHeight + frontsBannerPaddingHeight;
 const frontsBannerMinHeight =
 	adSizes.billboard.height + labelHeight + frontsBannerPaddingHeight;
 
 const frontsBannerAdTopContainerStyles = css`
-	display: flex;
-	justify-content: center;
-	min-height: ${frontsBannerMinHeight}px;
-	background-color: ${palette.neutral[97]};
-
-	${until.desktop} {
-		display: none;
+	display: none;
+	${from.tablet} {
+		display: flex;
+		justify-content: center;
+		min-height: ${frontsBannerMinHeightTablet}px;
+		background-color: ${palette.neutral[97]};
+	}
+	${from.desktop} {
+		min-height: ${frontsBannerMinHeight}px;
 	}
 `;
 
@@ -287,12 +291,16 @@ const frontsBannerCollapseStyles = css`
 
 const frontsBannerAdStyles = css`
 	position: relative;
-	min-height: ${frontsBannerMinHeight}px;
-	/* No banner should be taller than 600px */
-	max-height: ${600 + labelHeight}px;
-	max-width: ${breakpoints['wide']}px;
+	min-height: ${frontsBannerMinHeightTablet}px;
+	max-width: ${adSizes.leaderboard.width}px;
+	max-height: ${adSizes.leaderboard.height + labelHeight}px;
 	overflow: hidden;
 	padding-bottom: ${frontsBannerPaddingHeight}px;
+	${from.desktop} {
+		/* No banner should be taller than 600px */
+		max-height: ${600 + labelHeight}px;
+		max-width: ${breakpoints['wide']}px;
+	}
 `;
 
 const articleEndAdStyles = css`

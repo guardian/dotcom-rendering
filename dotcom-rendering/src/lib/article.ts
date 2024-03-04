@@ -42,10 +42,9 @@ export const enhanceArticleType = (
 	});
 
 	const mainMediaElements = enhanceElementsImages(
-		data.mainMediaElements,
-		data.format,
+		format,
 		imagesForLightbox,
-	);
+	)(data.mainMediaElements);
 
 	return {
 		...data,

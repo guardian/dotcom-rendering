@@ -1,4 +1,6 @@
+import { ArticleDesign } from '@guardian/libs';
 import type { AdPlaceholderBlockElement, FEElement } from '../types/content';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 /**
  * Positioning rules:
@@ -97,8 +99,11 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 	return elementsWithReducerContext.elements;
 };
 
-export const enhanceAdPlaceholders = (blocks: Block[]): Block[] =>
-	blocks.map((b) => ({
-		...b,
-		elements: insertAdPlaceholders(b.elements),
-	}));
+export const enhanceAdPlaceholders =
+	(format: ArticleFormat, renderingTarget: RenderingTarget) =>
+	(elements: FEElement[]): FEElement[] =>
+		renderingTarget === 'Apps' &&
+		format.design !== ArticleDesign.LiveBlog &&
+		format.design !== ArticleDesign.DeadBlog
+			? insertAdPlaceholders(elements)
+			: elements;

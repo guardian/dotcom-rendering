@@ -42,8 +42,5 @@ const enhance = (element: FEElement): FEElement[] => {
 	}
 };
 
-export const enhanceLists = (blocks: Block[]): Block[] =>
-	blocks.map((block) => ({
-		...block,
-		elements: block.elements.flatMap(enhance),
-	}));
+export const enhanceLists = (elements: FEElement[]): FEElement[] =>
+	elements.flatMap(enhance);

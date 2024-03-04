@@ -71,6 +71,9 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 		id: string;
 		homeTeam: TeamType;
 		awayTeam: TeamType;
+		competition: {
+			fullName: string;
+		};
 	}>(matchUrl, options);
 
 	if (loading || !hydrated) return <Loading />;
@@ -85,6 +88,7 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 			<MatchStats
 				home={cleanTeamData(data.homeTeam)}
 				away={cleanTeamData(data.awayTeam)}
+				competition={data.competition.fullName}
 				format={format}
 			/>
 		);

@@ -21,7 +21,7 @@ const isDinkus = (element: FEElement): boolean => {
 	);
 };
 
-const checkForDividers = (elements: FEElement[]): FEElement[] =>
+export const enhanceDividers = (elements: FEElement[]): FEElement[] =>
 	// checkForDividers loops the array of article elements looking for star flags and
 	// enhancing the data accordingly. In short, if a h2 tag is equal to * * * then we
 	// insert a divider and any the text element immediately afterwards should have dropCap
@@ -52,12 +52,4 @@ const checkForDividers = (elements: FEElement[]): FEElement[] =>
 			// Otherwise, do nothing
 			return element;
 		}
-	});
-
-export const enhanceDividers = (blocks: Block[]): Block[] =>
-	blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: checkForDividers(block.elements),
-		};
 	});

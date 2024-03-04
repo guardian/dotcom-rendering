@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { space, text, textSans } from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
+import { InfoSummary } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentType,
@@ -75,7 +77,7 @@ const blackPlaceholder = css`
 `;
 
 const headerTextStyles = css`
-	margin: 0;
+	margin: 0 0 10px 0;
 	${textSans.xxsmall()};
 `;
 
@@ -121,6 +123,25 @@ const commentAddOns = css`
 	padding: 2px 5px 0px 5px;
 	min-width: 11px;
 	list-style-type: none;
+`;
+
+const preModMessage = css`
+	& div {
+		color: inherit;
+		${textSans.xxsmall({
+			fontWeight: 'bold',
+		})};
+		svg {
+			fill: ${schemedPalette('--discussion-pre-mod')};
+		}
+	}
+`;
+
+const preModLink = css`
+	color: ${schemedPalette('--discussion-pre-mod')};
+	${textSans.xxsmall({
+		fontWeight: 'bold',
+	})};
 `;
 
 const bottomContainer = css`
@@ -449,18 +470,22 @@ export const CommentForm = ({
 						</p>
 
 						{user.profile.privateFields?.isPremoderated && (
-							<p css={[errorTextStyles, linkStyles]}>
-								Your comments are currently being pre-moderated
-								(
-								<a
-									href="/community-faqs#311"
-									target="_blank"
-									rel="nofollow"
-								>
-									why?
-								</a>
-								)
-							</p>
+							<InfoSummary
+								message={
+									'Your comments are currently being pre-moderated'
+								}
+								context={
+									<Link
+										href="/community-faqs#311"
+										target="_blank"
+										rel="nofollow"
+										cssOverrides={preModLink}
+									>
+										(why?)
+									</Link>
+								}
+								cssOverrides={preModMessage}
+							/>
 						)}
 					</div>
 				)}

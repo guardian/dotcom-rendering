@@ -1,4 +1,4 @@
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type {
 	AdPlaceholderBlockElement,
 	FEElement,
@@ -6,6 +6,12 @@ import type {
 	TextBlockElement,
 } from '../types/content';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
+
+const exampleFormat = {
+	design: ArticleDesign.Feature,
+	display: ArticleDisplay.Immersive,
+	theme: Pillar.Culture,
+};
 
 // Test helper functions
 
@@ -31,9 +37,6 @@ const elementIsAdPlaceholder = (
 ): element is AdPlaceholderBlockElement =>
 	element._type ===
 	'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
-
-const getElementsFromBlocks = (blocks: Block[]): FEElement[] =>
-	blocks.flatMap(({ elements }) => elements);
 
 // Tests
 describe('Enhancing ad placeholders', () => {
@@ -74,17 +77,10 @@ describe('Enhancing ad placeholders', () => {
 		({ paragraphs, expectedPositions }) => {
 			const elements = getTestParagraphElements(paragraphs);
 			const expectedPlaceholders = expectedPositions.length;
+			const input: FEElement[] = elements;
 
-			const input: Block[] = [
-				{
-					...blockMetaData,
-					elements,
-				},
-			];
-
-			const output = enhanceAdPlaceholders(input);
-			const outputElements = getElementsFromBlocks(output);
-			const placeholderIndices = outputElements.flatMap((el, idx) =>
+			const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
+			const placeholderIndices = output.flatMap((el, idx) =>
 				elementIsAdPlaceholder(el) ? [idx] : [],
 			);
 
@@ -111,22 +107,14 @@ describe('Enhancing ad placeholders', () => {
 			...threeParagraphs,
 		];
 
-		const input: Block[] = [
-			{
-				...blockMetaData,
-				elements,
-			},
-		];
+		const input: FEElement[] = elements;
 
-		const output = enhanceAdPlaceholders(input);
-		const outputElements = getElementsFromBlocks(output);
-		const outputPlaceholders = outputElements.filter(
-			elementIsAdPlaceholder,
-		);
+		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
+		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
 		expect(outputPlaceholders.length).toEqual(1);
 
-		const placeholderIndices = outputElements.flatMap((el, idx) =>
+		const placeholderIndices = output.flatMap((el, idx) =>
 			elementIsAdPlaceholder(el) ? [idx] : [],
 		);
 

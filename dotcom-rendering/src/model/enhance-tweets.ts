@@ -1,6 +1,6 @@
 import type { FEElement } from '../types/content';
 
-const removeTweetClass = (elements: FEElement[]): FEElement[] =>
+export const enhanceTweets = (elements: FEElement[]): FEElement[] =>
 	elements.map<FEElement>((element) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.TweetBlockElement': {
@@ -20,12 +20,4 @@ const removeTweetClass = (elements: FEElement[]): FEElement[] =>
 			default:
 				return element;
 		}
-	});
-
-export const enhanceTweets = (blocks: Block[]): Block[] =>
-	blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: removeTweetClass(block.elements),
-		};
 	});

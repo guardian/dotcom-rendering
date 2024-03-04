@@ -137,7 +137,7 @@ export const renderHtml = ({
 		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
 		GAData: extractGA({
 			webTitle: article.webTitle,
-			format: article.format,
+			format,
 			sectionName: article.sectionName,
 			contentType: article.contentType,
 			tags: article.tags,
@@ -153,15 +153,15 @@ export const renderHtml = ({
 
 	const getAmpLink = (tags: TagType[]) => {
 		if (
-			article.format.design === 'InteractiveDesign' ||
-			article.format.design === 'FullPageInteractiveDesign'
+			format.design === ArticleDesign.Interactive ||
+			format.design === ArticleDesign.FullPageInteractive
 		) {
 			return undefined;
 		}
 
 		if (
 			!isAmpSupported({
-				format: article.format,
+				format,
 				tags,
 				elements: article.blocks.flatMap((block) => block.elements),
 				switches: article.config.switches,
