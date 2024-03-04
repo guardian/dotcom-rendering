@@ -17,5 +17,10 @@ export const handleAllEditorialNewslettersPage: RequestHandler = (
 	// 	newslettersPage,
 	// });
 	// res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
-	res.status(500).send('Fake 500 error for testing purposes.');
+	// (2);
+	setTimeout(
+		() => res.status(500).send('Fake 500 error for testing purposes.'),
+		3000,
+	);
+	// res.status(500).send('Fake 500 error for testing purposes.');
 };
