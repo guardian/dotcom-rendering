@@ -8,7 +8,7 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 $ corepack enable
 $ asdf reshim nodejs # if you're using asdf, this step is needed afterwards
 $ git clone git@github.com:guardian/dotcom-rendering.git
-$ nvm use
+$ nvm use # not needed if you're using asdf
 $ pnpm install --frozen-lockfile
 $ cd dotcom-rendering
 $ make dev
