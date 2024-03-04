@@ -61,6 +61,7 @@ const inputWrapper = css`
 	div {
 		svg {
 			right: 80px;
+			fill: ${labelColour};
 		}
 	}
 `;
