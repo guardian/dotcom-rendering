@@ -35,8 +35,26 @@ const formWrapper = css`
 
 const labelColour = schemedPalette('--discussion-report-label-text');
 
+const errorColour = schemedPalette('--discussion-report-error-text');
+
 const buttonStyles = css`
 	background-color: ${schemedPalette('--discussion-report-button')};
+`;
+
+const errorBorderColour = css`
+	select,
+	input,
+	textarea {
+		border: 1px solid ${schemedPalette('--discussion-report-error-text')};
+	}
+`;
+
+const borderColour = css`
+	select,
+	input,
+	textarea {
+		border: 1px solid ${schemedPalette('--discussion-report-border')};
+	}
 `;
 
 const inputWrapper = css`
@@ -54,10 +72,11 @@ const inputWrapper = css`
 		background-color: ${schemedPalette('--discussion-report-background')};
 		min-height: ${space[5]}px;
 		width: 75%;
-		border: 1px solid ${schemedPalette('--discussion-report-border')};
 		color: inherit;
 	}
+`;
 
+const svgStyles = css`
 	div {
 		svg {
 			right: 80px;
@@ -66,8 +85,12 @@ const inputWrapper = css`
 	}
 `;
 
-const errorMessageStyles = css`
-	color: red;
+const errorSvgStyles = css`
+	span[role='alert'] {
+		svg {
+			fill: ${errorColour};
+		}
+	}
 `;
 
 type Props = {
@@ -199,7 +222,14 @@ export const AbuseReportForm = ({
 	return (
 		<div aria-modal="true" ref={modalRef}>
 			<form css={formWrapper} onSubmit={onSubmit}>
-				<div css={inputWrapper}>
+				<div
+					css={[
+						inputWrapper,
+						svgStyles,
+						errorSvgStyles,
+						!!errors.categoryId ? errorBorderColour : borderColour,
+					]}
+				>
 					<Select
 						label={'Category'}
 						onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
@@ -212,7 +242,12 @@ export const AbuseReportForm = ({
 						theme={{
 							textLabel: labelColour,
 							textOptional: labelColour,
+							textError: errorColour,
+							borderError: errorColour,
 						}}
+						error={
+							!!errors.categoryId ? errors.categoryId : undefined
+						}
 					>
 						<Option value="0">Please select</Option>
 						<Option value="1">Personal abuse</Option>
@@ -227,11 +262,6 @@ export const AbuseReportForm = ({
 						<Option value="8">Spam</Option>
 						<Option value={otherCategoryId}>Other</Option>
 					</Select>
-					{!!errors.categoryId && (
-						<span css={errorMessageStyles}>
-							{errors.categoryId}
-						</span>
-					)}
 				</div>
 
 				<div css={inputWrapper}>
@@ -251,11 +281,11 @@ export const AbuseReportForm = ({
 						theme={{
 							textLabel: labelColour,
 							textOptional: labelColour,
+							textError: errorColour,
+							borderError: errorColour,
 						}}
+						error={!!errors.reason ? errors.reason : undefined}
 					/>
-					{!!errors.reason && (
-						<span css={errorMessageStyles}>{errors.reason}</span>
-					)}
 				</div>
 
 				<div css={inputWrapper}>
@@ -263,6 +293,7 @@ export const AbuseReportForm = ({
 						label={'Email'}
 						optional={true}
 						id="email"
+						type="email"
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 							setFormVariables({
 								...formVariables,
@@ -273,11 +304,11 @@ export const AbuseReportForm = ({
 						theme={{
 							textLabel: labelColour,
 							textOptional: labelColour,
+							textError: errorColour,
+							borderError: errorColour,
 						}}
+						error={!!errors.email ? errors.email : undefined}
 					/>
-					{!!errors.email && (
-						<span css={errorMessageStyles}>{errors.email}</span>
-					)}
 				</div>
 
 				<div>
@@ -293,7 +324,7 @@ export const AbuseReportForm = ({
 					{!!errors.response && (
 						<span
 							css={[
-								errorMessageStyles,
+								errorColour,
 								css`
 									margin-left: 1em;
 								`,
@@ -306,7 +337,9 @@ export const AbuseReportForm = ({
 					{!!successMessage && (
 						<span
 							css={css`
-								color: green;
+								color: ${schemedPalette(
+									'--discussion-report-success-text',
+								)};
 								margin-left: 1em;
 							`}
 						>

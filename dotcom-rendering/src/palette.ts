@@ -4785,6 +4785,18 @@ const discussionReportButton: PaletteFunction = () => sourcePalette.brand[400];
 const discussionReportButtonDark: PaletteFunction = () =>
 	sourcePalette.brand[600];
 
+const discussionReportErrorText: PaletteFunction = () =>
+	sourcePalette.error[400];
+
+const discussionReportErrorTextDark: PaletteFunction = () =>
+	sourcePalette.error[500];
+
+const discussionReportSuccessText: PaletteFunction = () =>
+	sourcePalette.success[400];
+
+const discussionReportSuccessTextDark: PaletteFunction = () =>
+	sourcePalette.success[500];
+
 const discussionBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 const discussionBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
@@ -5843,6 +5855,14 @@ const paletteColours = {
 	'--discussion-report-button': {
 		light: discussionReportButton,
 		dark: discussionReportButtonDark,
+	},
+	'--discussion-report-error-text': {
+		light: discussionReportErrorText,
+		dark: discussionReportErrorTextDark,
+	},
+	'--discussion-report-success-text': {
+		light: discussionReportSuccessText,
+		dark: discussionReportSuccessTextDark,
 	},
 	'--discussion-border': {
 		light: discussionBorderLight,
