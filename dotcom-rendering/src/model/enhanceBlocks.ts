@@ -46,4 +46,4 @@ export const enhanceBlocks = (
 		enhanceTweets,
 		enhanceNewsletterSignup(format, options.promotedNewsletter),
 		enhanceAdPlaceholders(format, options.renderingTarget),
-	].reduce((prevBlocks, enhancer) => enhancer(prevBlocks), blocks);
+	].reduce((enhancedBlocks, enhancer) => enhancer(enhancedBlocks), blocks);
