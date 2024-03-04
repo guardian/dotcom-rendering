@@ -34,7 +34,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
 	stage: 'CODE',
 	domainName: 'article-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 4 },
-	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
+	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
 });
 new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	guApp: 'article-rendering',
@@ -95,7 +95,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 			],
 		},
 	},
-	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MEDIUM),
+	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
 });
 
 /** Interactive */
@@ -130,5 +130,5 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 			],
 		},
 	},
-	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
+	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
 });
