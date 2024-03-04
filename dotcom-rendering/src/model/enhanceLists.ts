@@ -16,6 +16,20 @@ const constructKeyTakeaway =
 		return [];
 	};
 
+const constructQAndAExplainer =
+	(enhanceElements: ElementsEnhancer) =>
+	({ title, list }) => {
+		if (title !== undefined) {
+			return [
+				{
+					title,
+					body: enhanceElements(list),
+				},
+			];
+		}
+		return [];
+	};
+
 const enhanceListBlockElement = (
 	element: ListBlockElement,
 	elementsEnhancer: ElementsEnhancer,
@@ -27,6 +41,15 @@ const enhanceListBlockElement = (
 					_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
 					keyTakeaways: element.items.flatMap(
 						constructKeyTakeaway(elementsEnhancer),
+					),
+				},
+			];
+		case 'QAndAExplainer':
+			return [
+				{
+					_type: 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
+					qAndAExplainers: element.items.flatMap(
+						constructQAndAExplainer(elementsEnhancer),
 					),
 				},
 			];

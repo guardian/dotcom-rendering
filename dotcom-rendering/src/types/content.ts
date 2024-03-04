@@ -314,9 +314,19 @@ interface KeyTakeaway {
 	body: FEElement[];
 }
 
+interface QAndAExplainer {
+	title: string;
+	body: FEElement[];
+}
+
 interface KeyTakeawaysBlockElement {
 	_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement';
 	keyTakeaways: KeyTakeaway[];
+}
+
+interface QAndAExplainerBlockElement {
+	_type: 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement';
+	qAndAExplainers: QAndAExplainer[];
 }
 
 interface ListItem {
@@ -326,7 +336,7 @@ interface ListItem {
 
 export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
-	listElementType: 'KeyTakeaways';
+	listElementType: 'KeyTakeaways' | 'QAndAExplainer';
 	items: ListItem[];
 }
 
@@ -677,6 +687,7 @@ export type FEElement =
 	| NewsletterSignupBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
+	| QAndAExplainerBlockElement
 	| QABlockElement
 	| QuizAtomBlockElement
 	| RichLinkBlockElement
