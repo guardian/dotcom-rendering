@@ -14,7 +14,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 const isSuitablePosition = (
 	blockCounter: number,
 	numberOfAdsInserted: number,
-	previousAdIndex: number,
+	lastAdIndex: number,
 	prevIsParagraphOrImage: boolean,
 	isLastElement: boolean,
 	isParagraph: boolean,
@@ -35,12 +35,10 @@ const isSuitablePosition = (
 	}
 
 	// Check that we haven't inserted an ad yet, and that we are far enough in to do so
-	const isFirstAdIndex =
-		blockCounter >= firstAdIndex && previousAdIndex === 0;
+	const isFirstAdIndex = blockCounter >= firstAdIndex && lastAdIndex === 0;
 
 	// Check that we are at least `adEveryNParagraphs` blocks after the previous ad
-	const isEnoughBlocksAfter =
-		blockCounter - previousAdIndex >= adEveryNBlocks;
+	const isEnoughBlocksAfter = blockCounter - lastAdIndex >= adEveryNBlocks;
 
 	// Insert an ad placeholder before the current element if it is a paragraph, the
 	// previous element was an image or a paragraph, and if the position is eligible
