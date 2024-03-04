@@ -1,5 +1,6 @@
 // All GA fields should  fall back to default values -
 
+import { type ArticleFormat, type ArticleTheme, Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { DCRArticle } from '../types/frontend';
 import type { TagType } from '../types/tag';
@@ -29,17 +30,17 @@ const getCommissioningDesk = (
 	return tag?.title ?? '';
 };
 
-const convertToLegacyPillar = (theme: FETheme): LegacyPillar => {
+const convertToLegacyPillar = (theme: ArticleTheme): LegacyPillar => {
 	switch (theme) {
-		case 'NewsPillar':
+		case Pillar.News:
 			return 'news';
-		case 'OpinionPillar':
+		case Pillar.Opinion:
 			return 'opinion';
-		case 'SportPillar':
+		case Pillar.Sport:
 			return 'sport';
-		case 'CulturePillar':
+		case Pillar.Culture:
 			return 'culture';
-		case 'LifestylePillar':
+		case Pillar.Lifestyle:
 			return 'lifestyle';
 		default:
 			return 'news';
@@ -76,7 +77,7 @@ export const extractGA = ({
 	beaconURL,
 }: {
 	webTitle: string;
-	format: FEFormat;
+	format: ArticleFormat;
 	sectionName?: string;
 	contentType: string;
 	tags: TagType[];

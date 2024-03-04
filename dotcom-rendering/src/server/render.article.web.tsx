@@ -137,7 +137,7 @@ export const renderHtml = ({
 		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
 		GAData: extractGA({
 			webTitle: article.webTitle,
-			format: article.format,
+			format,
 			sectionName: article.sectionName,
 			contentType: article.contentType,
 			tags: article.tags,
