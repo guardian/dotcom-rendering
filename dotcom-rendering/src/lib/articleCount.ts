@@ -28,13 +28,13 @@ export const getArticleCounts = async (
 
 	// See https://github.com/guardian/frontend/blob/9c8707d894c858dd17de1c7c1499f6b91f5287bc/common/app/model/DotcomContentType.scala#L29
 	const shouldIncrement = [
-		'Article',
-		'LiveBlog',
-		'Gallery',
-		'Video',
-		'Interactive',
-		'Audio',
-	].includes(contentType);
+		'article',
+		'liveblog',
+		'gallery',
+		'video',
+		'interactive',
+		'audio',
+	].includes(contentType.toLowerCase());
 
 	// hasOptedOut needs to be done before we check if articleCount is set in the window
 	// This is because a potential race condition where one invocation of getArticleCounts
