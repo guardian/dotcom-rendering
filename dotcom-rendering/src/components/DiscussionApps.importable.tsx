@@ -3,7 +3,7 @@ import { getdiscussionClient } from '../lib/bridgetApi';
 import type { Reader, UserProfile } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
-import { ok, error, type Result } from '../lib/result';
+import { error, ok, type Result } from '../lib/result';
 import { Discussion, type Props as DiscussionProps } from './Discussion';
 
 type Props = Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>;
@@ -106,15 +106,42 @@ const mockedProfile: UserProfile = {
 };
 
 const getUser = async (): Promise<Reader> => {
-	return {
-		kind: 'Reader',
-		onComment,
-		onReply,
-		onRecommend,
-		addUsername,
-		reportAbuse: reportAbuseWeb(undefined),
-		profile: mockedProfile,
-	};
+	return getdiscussionClient()
+		.getUserProfile()
+		.then((response) => {
+			if (response.__type === 'profile') {
+				const profile = response.profile;
+				const userProfile = {
+					userId: profile.userId,
+					displayName: profile.displayName,
+					webUrl: profile.webUrl,
+					apiUrl: profile.apiUrl,
+					avatar: profile.avatar,
+					secureAvatarUrl: profile.secureAvatarUrl,
+					badge: [],
+				} as UserProfile;
+
+				return {
+					kind: 'Reader',
+					onComment,
+					onReply,
+					onRecommend,
+					addUsername,
+					reportAbuse: reportAbuseWeb(undefined),
+					profile: userProfile,
+				};
+			} else {
+				return {
+					kind: 'Reader',
+					onComment,
+					onReply,
+					onRecommend,
+					addUsername,
+					reportAbuse: reportAbuseWeb(undefined),
+					profile: mockedProfile,
+				};
+			}
+		});
 };
 
 export const DiscussionApps = (props: Props) => {
