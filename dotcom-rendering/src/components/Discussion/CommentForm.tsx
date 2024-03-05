@@ -235,6 +235,7 @@ export const CommentForm = ({
 	setPreviewBody,
 }: Props) => {
 	const [isActive, setIsActive] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(false);
 
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -509,9 +510,16 @@ export const CommentForm = ({
 					<Row>
 						<>
 							<PillarButton
-								type="submit"
+								type={isDisabled ? undefined : 'submit'}
 								linkName="post comment"
 								size="small"
+								onClick={() => {
+									setIsDisabled(true);
+									setTimeout(
+										() => setIsDisabled(false),
+										2000,
+									);
+								}}
 							>
 								Post your comment
 							</PillarButton>
