@@ -190,6 +190,9 @@
                     "$ref": "#/definitions/PullquoteBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/QAndAExplainerBlockElement"
+                },
+                {
                     "$ref": "#/definitions/QABlockElement"
                 },
                 {
@@ -1962,8 +1965,8 @@
                 },
                 "listElementType": {
                     "enum": [
-                        "key-takeaways",
-                        "q-and-a-explainer"
+                        "KeyTakeaways",
+                        "QAndAExplainer"
                     ],
                     "type": "string"
                 },
@@ -2283,6 +2286,43 @@
                 "_type",
                 "elementId",
                 "role"
+            ]
+        },
+        "QAndAExplainerBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.QAndAExplainerBlockElement"
+                },
+                "qAndAExplainers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/QAndAExplainer"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "qAndAExplainers"
+            ]
+        },
+        "QAndAExplainer": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                }
+            },
+            "required": [
+                "body",
+                "title"
             ]
         },
         "QABlockElement": {
