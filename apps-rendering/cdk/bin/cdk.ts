@@ -28,7 +28,7 @@ new MobileAppsRendering(app, 'MobileAppsRendering-PROD', {
 		minimumInstances: 3,
 		maximumInstances: 12,
 	},
-	instanceSize: InstanceSize.SMALL,
+	instanceSize: InstanceSize.MICRO,
 	appsRenderingDomain: 'mobile-aws.guardianapis.com',
 	hostedZoneId: 'Z1EYB4AREPXE3B',
 	targetCpuUtilisation: 20,

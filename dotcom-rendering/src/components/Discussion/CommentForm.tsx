@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, text, textSans } from '@guardian/source-foundations';
+import { space, text, textSans, until } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { InfoSummary } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useRef, useState } from 'react';
@@ -152,10 +152,10 @@ const bottomContainer = css`
 	justify-content: space-between;
 	align-items: stretch;
 	align-content: space-between;
-`;
-
-const wrappingRow = css`
-	flex-flow: wrap;
+	gap: ${space[3]}px;
+	${until.wide} {
+		flex-direction: column-reverse;
+	}
 `;
 
 const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
@@ -506,7 +506,7 @@ export const CommentForm = ({
 					onFocus={() => setIsActive(true)}
 				/>
 				<div css={bottomContainer}>
-					<Row cssOverrides={wrappingRow}>
+					<Row>
 						<>
 							<PillarButton
 								type="submit"
@@ -541,7 +541,7 @@ export const CommentForm = ({
 						</>
 					</Row>
 					{isActive && (
-						<Row cssOverrides={wrappingRow}>
+						<Row>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
