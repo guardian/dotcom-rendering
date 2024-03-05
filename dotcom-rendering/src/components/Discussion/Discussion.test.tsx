@@ -24,7 +24,6 @@ describe('App', () => {
 					discussionD2Uid="testD2Header"
 					discussionApiClientHeader="testClientHeader"
 					enableDiscussionSwitch={true}
-					enableMobileDiscussionAdsSwitch={true}
 					idApiUrl="https://idapi.theguardian.com"
 					reportAbuseUnauthenticated={() => Promise.resolve(ok(true))}
 				/>

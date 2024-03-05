@@ -96,7 +96,7 @@ const usePayload = ({
 	pageId: string;
 	keywordIds: string;
 }): EpicPayload | undefined => {
-	const articleCounts = useArticleCounts(pageId, keywordIds);
+	const articleCounts = useArticleCounts(pageId, keywordIds, 'LiveBlog');
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
 	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();

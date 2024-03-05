@@ -116,7 +116,9 @@ const blockedCommentStyles = css`
 const commentLinkStyling = css`
 	a {
 		color: ${schemedPalette('--discussion-link')};
-		text-decoration: none;
+		text-decoration-color: ${schemedPalette(
+			'--discussion-comment-underline',
+		)};
 		:hover {
 			text-decoration: underline;
 		}
@@ -196,7 +198,6 @@ const iconWrapper = css`
 
 const timestampWrapperStyles = css`
 	margin-left: ${space[2]}px;
-	margin-bottom: -2px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -287,6 +288,7 @@ const cssReplyAlphaDisplayName = css`
 `;
 
 const cssReplyBetaDisplayName = css`
+	margin-top: -2px;
 	${until.mobileLandscape} {
 		${cssTextOverflowElip}
 		min-width: 40%;

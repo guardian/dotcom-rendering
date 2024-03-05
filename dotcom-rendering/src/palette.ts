@@ -4603,10 +4603,23 @@ const topPickLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const topPickLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
-const staffLabelDark: PaletteFunction = () => sourcePalette.brand[600];
+const staffLabelDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const staffPickLight: PaletteFunction = () => sourcePalette.neutral[7];
-const staffPickDark: PaletteFunction = () => sourcePalette.neutral[97];
+const staffPickDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const staffPickBadgeLight: PaletteFunction = () => sourcePalette.neutral[7];
+const staffPickBadgeDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const staffPickBadgeTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const staffPickBadgeTextDark: PaletteFunction = () => sourcePalette.neutral[7];
+
+const staffBadgeLight: PaletteFunction = () => sourcePalette.brand[400];
+const staffBadgeDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const staffBadgeTextLight: PaletteFunction = () => sourcePalette.neutral[100];
+const staffBadgeTextDark: PaletteFunction = () => sourcePalette.brand[400];
 
 const recommendationCountLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
@@ -5042,6 +5055,11 @@ const interactiveAtomBackgroundDark: PaletteFunction = () =>
 
 const discussionPreModLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionPreModDark: PaletteFunction = () => sourcePalette.brand[800];
+
+const discussionCommentUnderlineLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionCommentUnderlineDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[86], 0.5);
 
 // ----- Palette ----- //
 
@@ -5976,9 +5994,29 @@ const paletteColours = {
 		light: shareButtonBorderXSmallLight,
 		dark: shareButtonBorderXSmallLight,
 	},
+	'--staff-contributor-badge': {
+		light: staffBadgeLight,
+		dark: staffBadgeDark,
+	},
+	'--staff-contributor-badge-text': {
+		light: staffBadgeTextLight,
+		dark: staffBadgeTextDark,
+	},
+	'--staff-pick-badge': {
+		light: staffPickBadgeLight,
+		dark: staffPickBadgeDark,
+	},
+	'--staff-pick-badge-text': {
+		light: staffPickBadgeTextLight,
+		dark: staffPickBadgeTextDark,
+	},
 	'--discussion-pre-mod': {
 		light: discussionPreModLight,
 		dark: discussionPreModDark,
+	},
+	'--discussion-comment-underline': {
+		light: discussionCommentUnderlineLight,
+		dark: discussionCommentUnderlineDark,
 	},
 } satisfies PaletteColours;
 
