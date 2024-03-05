@@ -3,7 +3,7 @@ import { getdiscussionClient } from '../lib/bridgetApi';
 import type { Reader, UserProfile } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
-import { ok, type Result } from '../lib/result';
+import { ok, error, type Result } from '../lib/result';
 import { Discussion, type Props as DiscussionProps } from './Discussion';
 
 type Props = Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>;
@@ -71,9 +71,19 @@ const onRecommend = async (commentId: string): Promise<boolean> => {
 			}
 		});
 };
-const addUsername = async (): Promise<Result<string, true>> => {
-	console.log('addUsername');
-	return { kind: 'error', error: 'ApiError' };
+const addUsername = async (username: string): Promise<Result<string, true>> => {
+	return getdiscussionClient()
+		.addUsername(username)
+		.then((response) => {
+			if (response.__type === 'error') {
+				return error('NativeError');
+			} else {
+				if (response.response.errorCode) {
+					return error('ApiError');
+				}
+				return ok(true);
+			}
+		});
 };
 
 /***
