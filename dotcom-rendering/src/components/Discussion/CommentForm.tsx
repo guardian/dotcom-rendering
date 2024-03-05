@@ -510,10 +510,11 @@ export const CommentForm = ({
 					<Row>
 						<>
 							<PillarButton
-								type={isDisabled ? undefined : 'submit'}
+								type="submit"
 								linkName="post comment"
 								size="small"
 								onClick={() => {
+									if (isDisabled) return;
 									setIsDisabled(true);
 									setTimeout(
 										() => setIsDisabled(false),
