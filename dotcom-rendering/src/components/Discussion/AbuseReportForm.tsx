@@ -234,12 +234,15 @@ export const AbuseReportForm = ({
 				>
 					<Select
 						label={'Category'}
-						onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+						onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
 							setFormVariables({
 								...formVariables,
 								categoryId: Number(e.target.value),
-							})
-						}
+							});
+
+							errors.categoryId = '';
+							setErrors(errors);
+						}}
 						value={formVariables.categoryId}
 						theme={{
 							textLabel: labelColour,
