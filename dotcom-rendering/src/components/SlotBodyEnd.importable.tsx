@@ -168,11 +168,11 @@ export const SlotBodyEnd = ({
 
 	useEffect(() => {
 		setAsyncArticleCount(
-			getArticleCounts(pageId, keywordIds).then(
+			getArticleCounts(pageId, keywordIds, contentType).then(
 				(counts) => counts?.weeklyArticleHistory,
 			),
 		);
-	}, [pageId, keywordIds]);
+	}, [contentType, pageId, keywordIds]);
 
 	useOnce(() => {
 		if (isUndefined(countryCode)) return;
