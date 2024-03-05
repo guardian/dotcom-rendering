@@ -82,24 +82,6 @@ export const alternativeTextSaturdayEdition = () => {
 };
 alternativeTextSaturdayEdition.storyName = 'alternative_text_saturday_edition';
 
-export const alternativeTextPersonalise = () => {
-	return (
-		<Section fullWidth={true}>
-			<SignInGateCustomizableText
-				title="Register now and personalise your experience"
-				subtitle="It’s still free to read – this is not a paywall"
-				body="Register today to follow your favourite topics, writers and journalist series in My Guardian – a single destination that helps you get to the journalism you care about faster."
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/signin"
-				registerUrl="https://profile.theguardian.com/register"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-			/>
-		</Section>
-	);
-};
-alternativeTextPersonalise.storyName = 'alternative_text_personalise';
-
 export const fakeSocialStandalone = () => {
 	return (
 		<Section fullWidth={true}>
