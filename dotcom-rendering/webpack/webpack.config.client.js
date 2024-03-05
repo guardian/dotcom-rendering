@@ -182,6 +182,7 @@ module.exports.babelExclude = {
 		/@guardian\/(?!(automat-modules))/,
 		// Include the dynamic-import-polyfill
 		/dynamic-import-polyfill/,
+		/valibot/,
 	],
 };
 

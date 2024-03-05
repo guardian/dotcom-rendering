@@ -11,6 +11,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CardCommentCount } from './CardCommentCount.importable';
 import { CommentCount } from './CommentCount.importable';
 import { ConfigProvider } from './ConfigContext';
+import { DiscussionLayout } from './DiscussionLayout';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FocusStyles } from './FocusStyles.importable';
@@ -29,6 +30,7 @@ import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
+import { ShareButton } from './ShareButton.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
@@ -123,7 +125,33 @@ describe('Island: server-side rendering', () => {
 					enableDiscussionSwitch={false}
 				/>,
 			),
-		);
+		).not.toThrow();
+	});
+
+	test('Discussion', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<DiscussionLayout
+						discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+						shortUrlId="p/39f5z"
+						discussionD2Uid="testD2Header"
+						discussionApiClientHeader="testClientHeader"
+						enableDiscussionSwitch={true}
+						idApiUrl="https://idapi.theguardian.com"
+						format={{
+							theme: Pillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
+						}}
+						isAdFreeUser={false}
+						shouldHideAds={false}
+					/>
+				</ConfigProvider>,
+			),
+		).not.toThrow();
 	});
 
 	test('EnhancePinnedPost', () => {
@@ -443,6 +471,27 @@ describe('Island: server-side rendering', () => {
 							support: '',
 							contribute: '',
 						}}
+					/>
+				</ConfigProvider>,
+			),
+		).not.toThrow();
+	});
+
+	test('ShareButton', () => {
+		expect(() =>
+			renderToString(
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<ShareButton
+						pageId={'123'}
+						webTitle={'The the'}
+						format={{
+							display: ArticleDisplay.Standard,
+							theme: Pillar.News,
+							design: ArticleDesign.Standard,
+						}}
+						context="ArticleMeta"
 					/>
 				</ConfigProvider>,
 			),

@@ -1,21 +1,24 @@
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import type { FEArticleType } from '../types/frontend';
+import { decideFormat } from '../lib/decideFormat';
+import type { DCRArticle } from '../types/frontend';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
-const example: FEArticleType = ExampleArticle;
+const example: DCRArticle = ExampleArticle;
+const exampleFormat: ArticleFormat = decideFormat(example.format);
 
-const formatIsPhotoEssay: FEFormat = {
-	...example.format,
-	design: 'PhotoEssayDesign',
+const formatIsPhotoEssay: ArticleFormat = {
+	...exampleFormat,
+	design: ArticleDesign.PhotoEssay,
 };
 
 describe('Enhancing blockquotes', () => {
 	it('creates an identical but new object when no changes are needed', () => {
-		expect(enhanceBlockquotes(example.blocks, example.format)).not.toBe(
+		expect(enhanceBlockquotes(exampleFormat)(example.blocks)).not.toBe(
 			example.blocks,
 		); // We created a new object
-		expect(enhanceBlockquotes(example.blocks, example.format)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(example.blocks)).toEqual(
 			example.blocks,
 		); // The new object is what we expect
 	});
@@ -48,7 +51,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, ExampleArticle.format)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -80,7 +83,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, formatIsPhotoEssay)).toEqual(
+		expect(enhanceBlockquotes(formatIsPhotoEssay)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -113,7 +116,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, formatIsPhotoEssay)).toEqual(
+		expect(enhanceBlockquotes(formatIsPhotoEssay)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -145,7 +148,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, ExampleArticle.format)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -177,7 +180,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, ExampleArticle.format)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -220,7 +223,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, ExampleArticle.format)).toEqual(
+		expect(enhanceBlockquotes(exampleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});

@@ -82,12 +82,20 @@ const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
 	}
 };
 
-const containerPaletteStyles = (containerPalette: DCRContainerPalette) => css`
-	:hover {
-		filter: brightness(${decidePaletteBrightness(containerPalette)});
+const hoverStyles = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+) => {
+	if (containerPalette) {
+		return css`
+			:hover {
+				filter: brightness(
+					${decidePaletteBrightness(containerPalette)}
+				);
+			}
+		`;
 	}
-`;
-const hoverStyles = (format: ArticleFormat) => {
+
 	if (
 		format.theme === ArticleSpecial.SpecialReport ||
 		format.theme === ArticleSpecial.SpecialReportAlt
@@ -179,12 +187,10 @@ export const CardWrapper = ({
 				<div
 					css={[
 						baseCardStyles(isOnwardContent),
-						containerPalette &&
-							containerPaletteStyles(containerPalette),
 						isOnwardContent ? onwardContentCardStyles : cardStyles,
 						isOnwardContent
 							? onwardContentHoverStyles
-							: hoverStyles(format),
+							: hoverStyles(format, containerPalette),
 						showTopBar && topBarStyles({ isDynamo }),
 					]}
 				>

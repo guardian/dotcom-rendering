@@ -1,3 +1,4 @@
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { logger } from '../server/lib/logging';
 import type { FEElement, Newsletter } from '../types/content';
 
@@ -199,24 +200,24 @@ const tryToInsert = (
 
 export const insertPromotedNewsletter = (
 	blocks: Block[],
-	format: FEFormat,
+	format: ArticleFormat,
 	promotedNewsletter: Newsletter,
 ): Block[] => {
 	switch (format.design) {
-		case 'ArticleDesign':
-		case 'GalleryDesign':
-		case 'AudioDesign':
-		case 'VideoDesign':
-		case 'ReviewDesign':
-		case 'AnalysisDesign':
-		case 'CommentDesign':
-		case 'FeatureDesign':
-		case 'RecipeDesign':
-		case 'MatchReportDesign':
-		case 'InterviewDesign':
-		case 'EditorialDesign':
-		case 'ObituaryDesign':
-		case 'ExplainerDesign':
+		case ArticleDesign.Standard:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Review:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Explainer:
 			return blocks.map((block: Block) => {
 				return {
 					...block,

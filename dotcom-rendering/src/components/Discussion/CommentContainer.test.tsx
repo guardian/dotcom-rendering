@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import type {
@@ -83,8 +83,6 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				error={''}
 				setError={() => {}}
-				pickError={''}
-				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -129,8 +127,6 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				error={''}
 				setError={() => {}}
-				pickError={''}
-				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -180,8 +176,6 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				error={''}
 				setError={() => {}}
-				pickError={''}
-				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""
@@ -226,8 +220,6 @@ describe('CommentContainer', () => {
 				onPermalinkClick={() => {}}
 				error={''}
 				setError={() => {}}
-				pickError={''}
-				setPickError={() => {}}
 				userNameMissing={false}
 				setUserNameMissing={() => {}}
 				previewBody=""

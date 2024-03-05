@@ -13,6 +13,9 @@ import type {
 import type { preview, reportAbuse } from '../../lib/discussionApi';
 import { getPicks, initialiseApi } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
+import { labelStyles } from '../AdSlot.web';
+import { useConfig } from '../ConfigContext';
+import { useDispatch } from '../DispatchContext';
 import { CommentContainer } from './CommentContainer';
 import { CommentForm } from './CommentForm';
 import { Filters } from './Filters';
@@ -34,30 +37,14 @@ type Props = {
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
-	setPage: (page: number) => void;
 	filters: FilterOptions;
 	topLevelCommentCount: number;
 	loading: boolean;
 	comments: Array<CommentType | ReplyType>;
-	addComment: (comment: CommentType) => void;
-	addReply: (comment: ReplyType) => void;
-	handleFilterChange: (newFilters: FilterOptions, page?: number) => void;
-	pickError: string;
-	setPickError: (error: string) => void;
-	setTopFormUserMissing: (isUserMissing: boolean) => void;
-	setReplyFormUserMissing: (isUserMissing: boolean) => void;
-	setBottomFormUserMissing: (isUserMissing: boolean) => void;
-	setTopFormError: (error: string) => void;
-	setReplyFormError: (error: string) => void;
-	setBottomFormError: (error: string) => void;
-	setTopFormPreviewBody: (previewBody: string) => void;
-	setReplyFormPreviewBody: (previewBody: string) => void;
-	setBottomFormPreviewBody: (previewBody: string) => void;
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
 	bottomForm: CommentFormProps;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
 };
 
 const footerStyles = css`
@@ -110,6 +97,10 @@ const writeMutes = (mutes: string[]) => {
 	storage.local.set('gu.prefs.discussion.mutes', mutes);
 };
 
+/** Dispatches a custom event which is handled by @guardian/commercial */
+const dispatchCommentsStateChange = () =>
+	document.dispatchEvent(new CustomEvent('comments-state-change'));
+
 export const Comments = ({
 	baseUrl,
 	shortUrl,
@@ -124,36 +115,117 @@ export const Comments = ({
 	onPreview,
 	idApiUrl,
 	page,
-	setPage,
 	filters,
 	topLevelCommentCount,
 	loading,
 	comments,
-	pickError,
-	setPickError,
-	addComment,
-	addReply,
-	handleFilterChange,
-	setTopFormUserMissing,
-	setReplyFormUserMissing,
-	setBottomFormUserMissing,
-	setTopFormError,
-	setReplyFormError,
-	setBottomFormError,
-	setTopFormPreviewBody,
-	setReplyFormPreviewBody,
-	setBottomFormPreviewBody,
 	topForm,
 	replyForm,
 	bottomForm,
 	reportAbuse,
-	expandCommentReplies,
 }: Props) => {
 	const [picks, setPicks] = useState<Array<CommentType | ReplyType>>([]);
 	const [commentBeingRepliedTo, setCommentBeingRepliedTo] = useState<
 		CommentType | ReplyType
 	>();
 	const [mutes, setMutes] = useState<string[]>(readMutes());
+	const { renderingTarget } = useConfig();
+	const isWeb = renderingTarget === 'Web';
+
+	const dispatch = useDispatch();
+
+	const addComment = (comment: CommentType) => {
+		dispatch({ type: 'addComment', comment });
+	};
+
+	const setPage = (newPage: number) => {
+		dispatch({
+			type: 'updateCommentPage',
+			commentPage: newPage,
+		});
+	};
+
+	const handleFilterChange = (
+		newFilters: FilterOptions,
+		newPage?: number,
+	) => {
+		dispatch({
+			type: 'filterChange',
+			filters: newFilters,
+			commentPage: newPage,
+		});
+	};
+
+	const setTopFormUserMissing = (userNameMissing: boolean) =>
+		dispatch({
+			type: 'setTopFormUserMissing',
+			userNameMissing,
+		});
+
+	const setReplyFormUserMissing = (userNameMissing: boolean) =>
+		dispatch({
+			type: 'setReplyFormUserMissing',
+			userNameMissing,
+		});
+
+	const setBottomFormUserMissing = (userNameMissing: boolean) =>
+		dispatch({
+			type: 'setBottomFormUserMissing',
+			userNameMissing,
+		});
+
+	const setTopFormError = (error: string) =>
+		dispatch({
+			type: 'setTopFormError',
+			error,
+		});
+
+	const setReplyFormError = (error: string) =>
+		dispatch({
+			type: 'setReplyFormError',
+			error,
+		});
+
+	const setBottomFormError = (error: string) =>
+		dispatch({
+			type: 'setBottomFormError',
+			error,
+		});
+
+	const setTopFormPreviewBody = (previewBody: string) =>
+		dispatch({
+			type: 'setTopFormPreviewBody',
+			previewBody,
+		});
+
+	const setReplyFormPreviewBody = (previewBody: string) =>
+		dispatch({
+			type: 'setReplyFormPreviewBody',
+			previewBody,
+		});
+
+	const setBottomFormPreviewBody = (previewBody: string) =>
+		dispatch({
+			type: 'setBottomFormPreviewBody',
+			previewBody,
+		});
+	const expandCommentReplies = (commentId: number, responses: ReplyType[]) =>
+		dispatch({
+			type: 'expandCommentReplies',
+			commentId,
+			responses,
+		});
+
+	const addReply = (comment: ReplyType) => {
+		dispatch({ type: 'addReply', comment });
+	};
+
+	useEffect(() => {
+		if (isWeb && expanded && !loading) {
+			const event = new CustomEvent('comments-loaded');
+			document.dispatchEvent(event);
+		}
+	}, [isWeb, expanded, loading]);
 
 	useEffect(() => {
 		void getPicks(shortUrl).then((result) => {
@@ -198,6 +270,8 @@ export const Comments = ({
 		} else {
 			handleFilterChange(newFilterObject);
 		}
+
+		isWeb && dispatchCommentsStateChange();
 	};
 
 	useEffect(() => {
@@ -229,6 +303,7 @@ export const Comments = ({
 
 	const onPageChange = (pageNumber: number) => {
 		setPage(pageNumber);
+		isWeb && dispatchCommentsStateChange();
 	};
 
 	initialiseApi({ additionalHeaders, baseUrl, apiKey, idApiUrl });
@@ -290,8 +365,6 @@ export const Comments = ({
 											onPermalinkClick={onPermalinkClick}
 											error={replyForm.error}
 											setError={setReplyFormError}
-											pickError={pickError}
-											setPickError={setPickError}
 											userNameMissing={
 												replyForm.userNameMissing
 											}
@@ -358,7 +431,10 @@ export const Comments = ({
 			) : !comments.length ? (
 				<NoComments />
 			) : (
-				<ul css={commentContainerStyles}>
+				<ul
+					css={[commentContainerStyles, labelStyles]}
+					data-commercial-id="comments-column"
+				>
 					{comments.map((comment) => (
 						<li key={comment.id}>
 							<CommentContainer
@@ -377,8 +453,6 @@ export const Comments = ({
 								onPermalinkClick={onPermalinkClick}
 								error={replyForm.error}
 								setError={setReplyFormError}
-								pickError={pickError}
-								setPickError={setPickError}
 								userNameMissing={replyForm.userNameMissing}
 								setUserNameMissing={setReplyFormUserMissing}
 								previewBody={replyForm.previewBody}

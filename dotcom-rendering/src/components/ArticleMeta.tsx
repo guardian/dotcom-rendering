@@ -27,7 +27,7 @@ import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { SendAMessage } from './SendAMessage.importable';
-import { ShareIcons } from './ShareIcons';
+import { ShareButton } from './ShareButton.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -415,14 +415,17 @@ export const ArticleMeta = ({
 									),
 							]}
 						>
-							<ShareIcons
-								pageId={pageId}
-								webTitle={webTitle}
-								format={format}
-								displayIcons={['facebook', 'twitter', 'email']}
-								size="medium"
-								context="ArticleMeta"
-							/>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<ShareButton
+									pageId={pageId}
+									webTitle={webTitle}
+									format={format}
+									context="ArticleMeta"
+								/>
+							</Island>
 						</div>
 					)}
 					<div

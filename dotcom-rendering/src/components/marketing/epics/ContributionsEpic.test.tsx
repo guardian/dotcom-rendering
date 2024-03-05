@@ -4,7 +4,6 @@
  * https://github.com/guardian/support-dotcom-components/blob/fabbe761d4f3090d6417b89b90f785902374f6be/packages/modules/src/modules/epics/ContributionsEpic.test.tsx
  */
 import '@testing-library/jest-dom';
-import '@testing-library/jest-dom/extend-expect';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/src/lib';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types/props/epic';

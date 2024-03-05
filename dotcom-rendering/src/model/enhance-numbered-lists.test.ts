@@ -2,7 +2,11 @@ import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
+import { decideFormat } from '../lib/decideFormat';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
+
+const exampleArticleFormat = decideFormat(ExampleArticle.format);
+const numberedListFormat = decideFormat(NumberedList.format);
 
 describe('Enhance Numbered Lists', () => {
 	it('does not enhance articles if they are not numbered lists', () => {
@@ -28,7 +32,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, ExampleArticle.format)).toEqual(
+		expect(enhanceNumberedLists(exampleArticleFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -63,7 +67,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -98,7 +102,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -133,7 +137,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -168,7 +172,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -198,7 +202,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -228,7 +232,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -258,7 +262,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -288,7 +292,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -333,7 +337,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -378,7 +382,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -411,7 +415,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -432,7 +436,7 @@ describe('Enhance Numbered Lists', () => {
 
 		const expectedOutput: Block[] = input;
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -453,7 +457,7 @@ describe('Enhance Numbered Lists', () => {
 
 		const expectedOutput: Block[] = input;
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -473,7 +477,7 @@ describe('Enhance Numbered Lists', () => {
 		];
 		const expectedOutput: Block[] = input;
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -506,7 +510,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -539,7 +543,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -571,7 +575,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -603,7 +607,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -623,7 +627,7 @@ describe('Enhance Numbered Lists', () => {
 			},
 		];
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -656,13 +660,12 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId',
 						position: 1,
 						html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
-						format: NumberedList.format,
 					},
 				],
 			},
 		];
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -711,7 +714,6 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId1',
 						position: 1,
 						html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
-						format: NumberedList.format,
 					},
 					{
 						...images[0],
@@ -727,7 +729,6 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId2',
 						position: 2,
 						html: '<h2 data-ignore="global-h2-styling">Other text</h2>',
-						format: NumberedList.format,
 					},
 					{
 						_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
@@ -740,13 +741,12 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId3',
 						position: 3,
 						html: '<h2 data-ignore="global-h2-styling">More text</h2>',
-						format: NumberedList.format,
 					},
 				],
 			},
 		];
 
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+		expect(enhanceNumberedLists(numberedListFormat)(input)).toEqual(
 			expectedOutput,
 		);
 	});

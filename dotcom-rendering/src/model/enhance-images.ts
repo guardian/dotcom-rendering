@@ -1,3 +1,4 @@
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { getLargest, getMaster } from '../lib/image';
 import type {
@@ -428,23 +429,21 @@ const enhance = (
 	);
 };
 
-export const enhanceImages = (
-	blocks: Block[],
-	format: FEFormat,
-	imagesForLightbox: ImageForLightbox[],
-): Block[] => {
-	const isPhotoEssay = format.design === 'PhotoEssayDesign';
+export const enhanceImages =
+	(format: ArticleFormat, imagesForLightbox: ImageForLightbox[]) =>
+	(blocks: Block[]): Block[] => {
+		const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
 
-	return blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: enhance(block.elements, {
-				isPhotoEssay,
-				imagesForLightbox,
-			}),
-		};
-	});
-};
+		return blocks.map((block: Block) => {
+			return {
+				...block,
+				elements: enhance(block.elements, {
+					isPhotoEssay,
+					imagesForLightbox,
+				}),
+			};
+		});
+	};
 
 export const enhanceElementsImages = (
 	elements: FEElement[],

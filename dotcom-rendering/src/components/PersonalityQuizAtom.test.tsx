@@ -1,6 +1,6 @@
 import { Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { ensure } from '../../fixtures/manual/ensure';
 import {
 	examplePersonalityQuestions,

@@ -1156,7 +1156,7 @@
             ]
         },
         "commercialProperties": {
-            "$ref": "#/definitions/Record<string,unknown>"
+            "$ref": "#/definitions/CommercialProperties"
         },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
@@ -1717,8 +1717,74 @@
             ],
             "type": "string"
         },
-        "Record<string,unknown>": {
-            "type": "object"
+        "CommercialProperties": {
+            "type": "object",
+            "properties": {
+                "UK": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "US": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "AU": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "INT": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "EUR": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                }
+            },
+            "required": [
+                "AU",
+                "EUR",
+                "INT",
+                "UK",
+                "US"
+            ]
+        },
+        "EditionCommercialProperties": {
+            "type": "object",
+            "properties": {
+                "adTargeting": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdTargetParam"
+                    }
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "adTargeting"
+            ]
+        },
+        "AdTargetParam": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "value"
+            ]
         },
         "FooterType": {
             "type": "object",

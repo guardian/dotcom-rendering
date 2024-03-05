@@ -81,32 +81,16 @@ export const LoggedOutHiddenPicks = () => (
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
-			setPage={() => {}}
 			filters={filters}
 			topLevelCommentCount={
 				discussionMock.discussion.topLevelCommentCount
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			addComment={() => {}}
-			addReply={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
-			setTopFormError={() => {}}
-			setReplyFormError={() => {}}
-			setBottomFormError={() => {}}
-			setTopFormPreviewBody={() => {}}
-			setReplyFormPreviewBody={() => {}}
-			setBottomFormPreviewBody={() => {}}
-			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
-			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -140,32 +124,16 @@ export const InitialPage = () => (
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={1}
-			setPage={() => {}}
 			filters={filters}
 			topLevelCommentCount={
 				discussionMock.discussion.topLevelCommentCount
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			addComment={() => {}}
-			addReply={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
-			setTopFormError={() => {}}
-			setReplyFormError={() => {}}
-			setBottomFormError={() => {}}
-			setTopFormPreviewBody={() => {}}
-			setReplyFormPreviewBody={() => {}}
-			setBottomFormPreviewBody={() => {}}
-			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
-			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -201,32 +169,16 @@ export const LoggedInHiddenNoPicks = () => {
 				apiKey=""
 				idApiUrl="https://idapi.theguardian.com"
 				page={3}
-				setPage={() => {}}
 				filters={filters}
 				topLevelCommentCount={
 					discussionMock.discussion.topLevelCommentCount
 				}
 				loading={false}
 				comments={discussionMock.discussion.comments}
-				addComment={() => {}}
-				addReply={() => {}}
-				handleFilterChange={() => {}}
-				setTopFormUserMissing={() => {}}
-				setReplyFormUserMissing={() => {}}
-				setBottomFormUserMissing={() => {}}
-				setTopFormError={() => {}}
-				setReplyFormError={() => {}}
-				setBottomFormError={() => {}}
-				setTopFormPreviewBody={() => {}}
-				setReplyFormPreviewBody={() => {}}
-				setBottomFormPreviewBody={() => {}}
-				pickError=""
-				setPickError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={{ ...defaultCommentForm }}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
-				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -257,32 +209,16 @@ export const LoggedIn = () => {
 				apiKey=""
 				idApiUrl="https://idapi.theguardian.com"
 				page={3}
-				setPage={() => {}}
 				filters={filters}
 				topLevelCommentCount={
 					discussionMock.discussion.topLevelCommentCount
 				}
 				loading={false}
 				comments={discussionMock.discussion.comments}
-				addComment={() => {}}
-				addReply={() => {}}
-				handleFilterChange={() => {}}
-				setTopFormUserMissing={() => {}}
-				setReplyFormUserMissing={() => {}}
-				setBottomFormUserMissing={() => {}}
-				setTopFormError={() => {}}
-				setReplyFormError={() => {}}
-				setBottomFormError={() => {}}
-				setTopFormPreviewBody={() => {}}
-				setReplyFormPreviewBody={() => {}}
-				setBottomFormPreviewBody={() => {}}
-				pickError=""
-				setPickError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
-				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -312,32 +248,16 @@ export const LoggedInShortDiscussion = () => {
 				apiKey=""
 				idApiUrl="https://idapi.theguardian.com"
 				page={3}
-				setPage={() => {}}
 				filters={filters}
 				topLevelCommentCount={
 					discussionWithTwoComments.discussion.topLevelCommentCount
 				}
 				loading={false}
 				comments={discussionWithTwoComments.discussion.comments}
-				addComment={() => {}}
-				addReply={() => {}}
-				handleFilterChange={() => {}}
-				setTopFormUserMissing={() => {}}
-				setReplyFormUserMissing={() => {}}
-				setBottomFormUserMissing={() => {}}
-				setTopFormError={() => {}}
-				setReplyFormError={() => {}}
-				setBottomFormError={() => {}}
-				setTopFormPreviewBody={() => {}}
-				setReplyFormPreviewBody={() => {}}
-				setBottomFormPreviewBody={() => {}}
-				pickError=""
-				setPickError={() => {}}
 				topForm={defaultCommentForm}
 				replyForm={defaultCommentForm}
 				bottomForm={defaultCommentForm}
 				reportAbuse={() => Promise.resolve(ok(true))}
-				expandCommentReplies={() => {}}
 			/>
 		</div>
 	);
@@ -364,32 +284,16 @@ export const LoggedOutHiddenNoPicks = () => (
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
-			setPage={() => {}}
 			filters={filters}
 			topLevelCommentCount={
 				discussionMock.discussion.topLevelCommentCount
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			addComment={() => {}}
-			addReply={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
-			setTopFormError={() => {}}
-			setReplyFormError={() => {}}
-			setBottomFormError={() => {}}
-			setTopFormPreviewBody={() => {}}
-			setReplyFormPreviewBody={() => {}}
-			setBottomFormPreviewBody={() => {}}
-			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
-			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -425,32 +329,16 @@ export const Closed = () => (
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
-			setPage={() => {}}
 			filters={filters}
 			topLevelCommentCount={
 				discussionMock.discussion.topLevelCommentCount
 			}
 			loading={false}
 			comments={discussionMock.discussion.comments}
-			addComment={() => {}}
-			addReply={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
-			setTopFormError={() => {}}
-			setReplyFormError={() => {}}
-			setBottomFormError={() => {}}
-			setTopFormPreviewBody={() => {}}
-			setReplyFormPreviewBody={() => {}}
-			setBottomFormPreviewBody={() => {}}
-			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
-			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -484,30 +372,14 @@ export const NoComments = () => (
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={3}
-			setPage={() => {}}
 			filters={filters}
 			topLevelCommentCount={0}
 			loading={false}
 			comments={[]}
-			addComment={() => {}}
-			addReply={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
-			setTopFormError={() => {}}
-			setReplyFormError={() => {}}
-			setBottomFormError={() => {}}
-			setTopFormPreviewBody={() => {}}
-			setReplyFormPreviewBody={() => {}}
-			setBottomFormPreviewBody={() => {}}
-			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
-			expandCommentReplies={() => {}}
 		/>
 	</div>
 );
@@ -541,32 +413,16 @@ export const LegacyDiscussion = () => (
 			apiKey=""
 			idApiUrl="https://idapi.theguardian.com"
 			page={2}
-			setPage={() => {}}
 			filters={filters}
 			topLevelCommentCount={
 				legacyDiscussionWithoutThreading.discussion.commentCount
 			}
 			loading={false}
 			comments={legacyDiscussionWithoutThreading.discussion.comments}
-			addComment={() => {}}
-			addReply={() => {}}
-			handleFilterChange={() => {}}
-			setTopFormUserMissing={() => {}}
-			setReplyFormUserMissing={() => {}}
-			setBottomFormUserMissing={() => {}}
-			setTopFormError={() => {}}
-			setReplyFormError={() => {}}
-			setBottomFormError={() => {}}
-			setTopFormPreviewBody={() => {}}
-			setReplyFormPreviewBody={() => {}}
-			setBottomFormPreviewBody={() => {}}
-			pickError=""
-			setPickError={() => {}}
 			topForm={defaultCommentForm}
 			replyForm={defaultCommentForm}
 			bottomForm={defaultCommentForm}
 			reportAbuse={() => Promise.resolve(ok(true))}
-			expandCommentReplies={() => {}}
 		/>
 	</div>
 );

@@ -62,8 +62,6 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 		if (!iframe) return;
 		if (!container) return;
 
-		setHeight(container.clientHeight);
-
 		const scrollListener = () => {
 			const rect = container.getBoundingClientRect();
 			if (rect.top > 0) return setScroll(0);
@@ -106,7 +104,7 @@ export const InteractiveAtomMessenger = ({ id }: Props) => {
 
 	useEffect(() => {
 		if (!container) return;
-		container.style.height = `${height}px`;
+		container.style.height = height > 0 ? `${height}px` : 'auto';
 		postMessage({ kind: 'interactive:height', height });
 	}, [postMessage, height, container]);
 

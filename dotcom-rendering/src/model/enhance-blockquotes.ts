@@ -1,3 +1,4 @@
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import type { BlockquoteBlockElement, FEElement } from '../types/content';
 
@@ -39,16 +40,15 @@ const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] =>
 		}
 	});
 
-export const enhanceBlockquotes = (
-	blocks: Block[],
-	format: FEFormat,
-): Block[] => {
-	const isPhotoEssay = format.design === 'PhotoEssayDesign';
+export const enhanceBlockquotes =
+	(format: ArticleFormat) =>
+	(blocks: Block[]): Block[] => {
+		const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
 
-	return blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: enhance(block.elements, isPhotoEssay || false),
-		};
-	});
-};
+		return blocks.map((block: Block) => {
+			return {
+				...block,
+				elements: enhance(block.elements, isPhotoEssay || false),
+			};
+		});
+	};

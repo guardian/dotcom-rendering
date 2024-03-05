@@ -37,8 +37,6 @@ type Props = {
 	isMuted: boolean;
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
-	pickError: string;
-	setPickError: (error: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 };
 
@@ -296,6 +294,12 @@ const cssReplyBetaDisplayName = css`
 	}
 `;
 
+const spacedColumnStyles = css`
+	display: flex;
+	flex-direction: column;
+	gap: ${space[1]}px;
+`;
+
 const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 	<div
 		css={css`
@@ -314,15 +318,13 @@ export const Comment = ({
 	isMuted,
 	toggleMuteStatus,
 	onPermalinkClick,
-	pickError,
-	setPickError,
 	reportAbuse,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
 		comment.isHighlighted,
 	);
-
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
+	const [pickError, setPickError] = useState('');
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
 
 	const pick = async (staffUser: Staff) => {
@@ -408,7 +410,7 @@ export const Comment = ({
 												size="small"
 											/>
 										</div>
-										<Column>
+										<div css={spacedColumnStyles}>
 											<div
 												css={[
 													colourStyles,
@@ -440,7 +442,7 @@ export const Comment = ({
 													onPermalinkClick
 												}
 											/>
-										</Column>
+										</div>
 									</Row>
 								</div>
 								<div

@@ -20,6 +20,8 @@ import { initFiltersFromLocalStorage } from '../lib/discussionFilters';
 import { palette as themePalette } from '../palette';
 import { Comments } from './Discussion/Comments';
 import { PillarButton } from './Discussion/PillarButton';
+import type { Action } from './DispatchContext';
+import { DispatchProvider } from './DispatchContext';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
 
@@ -37,8 +39,8 @@ export type Props = {
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${themePalette('--article-section-background')},
-		${themePalette('--article-section-background')} 40%,
+		${themePalette('--discussion-section-background')},
+		${themePalette('--discussion-section-background')} 40%,
 		transparent
 	);
 	height: 80px;
@@ -140,7 +142,6 @@ type State = {
 	topLevelCommentCount: number;
 	filters: FilterOptions;
 	hashCommentId: number | undefined;
-	pickError: string;
 	loading: boolean;
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
@@ -165,43 +166,11 @@ const initialState: State = {
 	topLevelCommentCount: 0,
 	filters: initFiltersFromLocalStorage(),
 	hashCommentId: undefined,
-	pickError: '',
 	loading: true,
 	topForm: initialCommentFormState,
 	replyForm: initialCommentFormState,
 	bottomForm: initialCommentFormState,
 };
-
-type Action =
-	| {
-			type: 'commentsLoaded';
-			comments: Array<CommentType | ReplyType>;
-			isClosedForComments: boolean;
-			commentCount: number;
-			topLevelCommentCount: number;
-	  }
-	| { type: 'expandComments' }
-	| {
-			type: 'expandCommentReplies';
-			commentId: number;
-			responses: ReplyType[];
-	  }
-	| { type: 'addComment'; comment: CommentType }
-	| { type: 'addReply'; comment: ReplyType }
-	| { type: 'updateCommentPage'; commentPage: number }
-	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
-	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
-	| { type: 'setLoading'; loading: boolean }
-	| { type: 'setPickError'; error: string }
-	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setReplyFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setBottomFormUserMissing'; userNameMissing: boolean }
-	| { type: 'setTopFormError'; error: string }
-	| { type: 'setReplyFormError'; error: string }
-	| { type: 'setBottomFormError'; error: string }
-	| { type: 'setTopFormPreviewBody'; previewBody: string }
-	| { type: 'setReplyFormPreviewBody'; previewBody: string }
-	| { type: 'setBottomFormPreviewBody'; previewBody: string };
 
 const reducer = (state: State, action: Action): State => {
 	switch (action.type) {
@@ -267,12 +236,6 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				hashCommentId: action.hashCommentId,
 				isExpanded: true,
-			};
-		}
-		case 'setPickError': {
-			return {
-				...state,
-				pickError: action.error,
 			};
 		}
 		case 'setTopFormUserMissing': {
@@ -396,7 +359,6 @@ export const Discussion = ({
 			bottomForm,
 			topLevelCommentCount,
 			commentCount,
-			pickError,
 		},
 		dispatch,
 	] = useReducer(reducer, initialState);
@@ -460,11 +422,6 @@ export const Discussion = ({
 		return false;
 	};
 
-	const dispatchCommentsExpandedEvent = () => {
-		const event = new CustomEvent('comments-expanded');
-		document.dispatchEvent(event);
-	};
-
 	// Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
 	// If so, make a call to get the context of this comment so we know what page it is
 	// on.
@@ -507,7 +464,7 @@ export const Discussion = ({
 	}, [commentCount]);
 
 	return (
-		<>
+		<DispatchProvider value={dispatch}>
 			<div css={[positionRelative, !isExpanded && fixHeight]}>
 				<Hide when="above" breakpoint="leftCol">
 					<div
@@ -541,100 +498,10 @@ export const Discussion = ({
 					apiKey="dotcom-rendering"
 					idApiUrl={idApiUrl}
 					page={commentPage}
-					setPage={(page: number) => {
-						dispatch({
-							type: 'updateCommentPage',
-							commentPage: page,
-						});
-					}}
 					filters={validFilters}
 					topLevelCommentCount={topLevelCommentCount}
 					loading={loading}
 					comments={comments}
-					pickError={pickError}
-					setPickError={(error) =>
-						dispatch({
-							type: 'setPickError',
-							error,
-						})
-					}
-					addComment={(comment) => {
-						dispatch({ type: 'addComment', comment });
-					}}
-					addReply={(comment) => {
-						dispatch({ type: 'addReply', comment });
-					}}
-					handleFilterChange={(
-						newFilters: FilterOptions,
-						page?: number,
-					) => {
-						dispatch({
-							type: 'filterChange',
-							filters: newFilters,
-							commentPage: page,
-						});
-					}}
-					setTopFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setTopFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setReplyFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setReplyFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setBottomFormUserMissing={(userNameMissing) =>
-						dispatch({
-							type: 'setBottomFormUserMissing',
-							userNameMissing,
-						})
-					}
-					setTopFormError={(error) =>
-						dispatch({
-							type: 'setTopFormError',
-							error,
-						})
-					}
-					setReplyFormError={(error) =>
-						dispatch({
-							type: 'setReplyFormError',
-							error,
-						})
-					}
-					setBottomFormError={(error) =>
-						dispatch({
-							type: 'setBottomFormError',
-							error,
-						})
-					}
-					setTopFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setTopFormPreviewBody',
-							previewBody,
-						})
-					}
-					setReplyFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setReplyFormPreviewBody',
-							previewBody,
-						})
-					}
-					setBottomFormPreviewBody={(previewBody) =>
-						dispatch({
-							type: 'setBottomFormPreviewBody',
-							previewBody,
-						})
-					}
-					expandCommentReplies={(commentId, responses) =>
-						dispatch({
-							type: 'expandCommentReplies',
-							commentId,
-							responses,
-						})
-					}
 					topForm={topForm}
 					replyForm={replyForm}
 					bottomForm={bottomForm}
@@ -652,7 +519,6 @@ export const Discussion = ({
 				<PillarButton
 					onClick={() => {
 						dispatch({ type: 'expandComments' });
-						dispatchCommentsExpandedEvent();
 					}}
 					icon={<SvgPlus />}
 					linkName="view-more-comments"
@@ -660,6 +526,6 @@ export const Discussion = ({
 					View more comments
 				</PillarButton>
 			)}
-		</>
+		</DispatchProvider>
 	);
 };

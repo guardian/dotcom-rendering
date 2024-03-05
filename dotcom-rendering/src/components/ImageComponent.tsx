@@ -294,16 +294,12 @@ export const ImageComponent = ({
 					/* These styles depend on the containing layout component wrapping the main media
                     with a div set to 100vh. This is the case for ImmersiveLayout which should
                     always be used if display === 'immersive' */
-					height: 80vh;
+					height: 100%;
 					width: 100%;
 					min-height: 25rem;
 
 					${from.desktop} {
-						height: 100vh;
 						min-height: 31.25rem;
-					}
-					${from.wide} {
-						min-height: 50rem;
 					}
 					img {
 						object-fit: cover;

@@ -2362,11 +2362,6 @@ export const NumberedList: DCRArticle = {
 					elementId: 'ee82ede2-2ead-41d2-b0a6-e0136663aad7',
 					position: 1,
 					html: "<h2 id='ee82ede2-2ead-41d2-b0a6-e0136663aad7'><strong>Best overall: </strong>OnePlus 7T Pro</h2>",
-					format: {
-						design: 'ReviewDesign',
-						theme: 'NewsPillar',
-						display: 'NumberedListDisplay',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -2777,11 +2772,6 @@ export const NumberedList: DCRArticle = {
 					elementId: '181d42e3-e911-4e0f-bbb4-f51a017d2c23',
 					position: 2,
 					html: "<h2 id='181d42e3-e911-4e0f-bbb4-f51a017d2c23'><strong>Best iOS:</strong> Apple iPhone 11 Pro</h2>",
-					format: {
-						design: 'ReviewDesign',
-						theme: 'NewsPillar',
-						display: 'NumberedListDisplay',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -3192,11 +3182,6 @@ export const NumberedList: DCRArticle = {
 					elementId: 'cd0bace7-dc0c-4adf-b2ef-35cfa1c0d051',
 					position: 3,
 					html: "<h2 id='cd0bace7-dc0c-4adf-b2ef-35cfa1c0d051'><strong>Best smaller Android:</strong> Samsung Galaxy S10</h2>",
-					format: {
-						design: 'ReviewDesign',
-						theme: 'NewsPillar',
-						display: 'NumberedListDisplay',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -3602,11 +3587,6 @@ export const NumberedList: DCRArticle = {
 					elementId: '7044a3dc-ad10-4075-a18a-c759d65175d1',
 					position: 4,
 					html: "<h2 id='7044a3dc-ad10-4075-a18a-c759d65175d1'><strong>Best camera: </strong>Huawei P30 Pro</h2>",
-					format: {
-						design: 'ReviewDesign',
-						theme: 'NewsPillar',
-						display: 'NumberedListDisplay',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -4012,11 +3992,6 @@ export const NumberedList: DCRArticle = {
 					elementId: '300cbdad-e842-4cd9-abb3-ba5c66066484',
 					position: 5,
 					html: "<h2 id='300cbdad-e842-4cd9-abb3-ba5c66066484'><strong>Best value:</strong> OnePlus 7T</h2>",
-					format: {
-						design: 'ReviewDesign',
-						theme: 'NewsPillar',
-						display: 'NumberedListDisplay',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -4426,11 +4401,6 @@ export const NumberedList: DCRArticle = {
 					elementId: 'f1ce3426-3fb2-4ab6-afdd-a8e3c3438e68',
 					position: 6,
 					html: "<h2 id='f1ce3426-3fb2-4ab6-afdd-a8e3c3438e68'>Runners up</h2>",
-					format: {
-						design: 'ReviewDesign',
-						theme: 'NewsPillar',
-						display: 'NumberedListDisplay',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -7624,11 +7594,6 @@ export const NumberedList: DCRArticle = {
 					elementId: '4b644a27-f660-4cb7-87c3-78fe5e9cfc95',
 					position: 7,
 					html: "<h2 id='4b644a27-f660-4cb7-87c3-78fe5e9cfc95'>Not recommended</h2>",
-					format: {
-						design: 'ReviewDesign',
-						theme: 'NewsPillar',
-						display: 'NumberedListDisplay',
-					},
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',

@@ -171,6 +171,7 @@ export const ShowMore = ({
 											trail={card}
 											image={undefined}
 											avatarUrl={undefined}
+											slideshowImages={undefined}
 											containerPalette={containerPalette}
 											showAge={showAge}
 											headlineSize="small"

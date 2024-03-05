@@ -1,5 +1,5 @@
 import { App } from 'aws-cdk-lib';
-import { InstanceSize } from 'aws-cdk-lib/aws-ec2';
+import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { DotcomRendering } from '../lib/dotcom-rendering';
 import { RenderingCDKStack } from '../lib/renderingStack';
 
@@ -34,15 +34,15 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
 	stage: 'CODE',
 	domainName: 'article-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 4 },
-	instanceSize: InstanceSize.MICRO,
+	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
 });
 new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	guApp: 'article-rendering',
 	stage: 'PROD',
 	domainName: 'article-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 12,
-		maximumInstances: 120,
+		minimumInstances: 24,
+		maximumInstances: 96,
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.2s
@@ -60,7 +60,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 			],
 		},
 	},
-	instanceSize: InstanceSize.SMALL,
+	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
 });
 
 /** Facia */
@@ -69,15 +69,15 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-CODE', {
 	stage: 'CODE',
 	domainName: 'facia-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 4 },
-	instanceSize: InstanceSize.MICRO,
+	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 });
 new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 	guApp: 'facia-rendering',
 	stage: 'PROD',
 	domainName: 'facia-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 6,
-		maximumInstances: 24,
+		minimumInstances: 12,
+		maximumInstances: 48,
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.4s
@@ -95,7 +95,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 			],
 		},
 	},
-	instanceSize: InstanceSize.SMALL,
+	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
 });
 
 /** Interactive */
@@ -104,14 +104,14 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-CODE', {
 	stage: 'CODE',
 	domainName: 'interactive-rendering.code.dev-guardianapis.com',
 	scaling: { minimumInstances: 1, maximumInstances: 4 },
-	instanceSize: InstanceSize.MICRO,
+	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
 });
 new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 	guApp: 'interactive-rendering',
 	stage: 'PROD',
 	domainName: 'interactive-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 6,
+		minimumInstances: 3,
 		maximumInstances: 24,
 		policy: {
 			scalingStepsOut: [
@@ -130,5 +130,5 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 			],
 		},
 	},
-	instanceSize: InstanceSize.SMALL,
+	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
 });

@@ -25,6 +25,7 @@ const labelStyles = css`
 	padding-right: 0.625rem;
 	padding-bottom: 0.625rem;
 	text-align: left;
+	border-top: 1px dotted ${palette.neutral[86]};
 `;
 
 const aboutThisLinkStyles = css`

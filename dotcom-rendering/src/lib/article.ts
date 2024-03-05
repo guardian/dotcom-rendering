@@ -1,3 +1,4 @@
+import type { ArticleFormat } from '@guardian/libs';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
 import { enhanceElementsImages } from '../model/enhance-images';
@@ -8,9 +9,10 @@ import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
 import { type DCRArticle } from '../types/frontend';
 import { type RenderingTarget } from '../types/renderingTarget';
+import { decideFormat } from './decideFormat';
 
 const enhancePinnedPost = (
-	format: FEFormat,
+	format: ArticleFormat,
 	renderingTarget: RenderingTarget,
 	block?: Block,
 ) => {
@@ -27,12 +29,13 @@ export const enhanceArticleType = (
 	renderingTarget: RenderingTarget,
 ): DCRArticle => {
 	const data = validateAsArticleType(body);
+	const format = decideFormat(data.format);
 
 	const imagesForLightbox = data.config.switches.lightbox
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
 		: [];
 
-	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
+	const enhancedBlocks = enhanceBlocks(data.blocks, format, {
 		renderingTarget,
 		promotedNewsletter: data.promotedNewsletter,
 		imagesForLightbox,
@@ -48,17 +51,13 @@ export const enhanceArticleType = (
 		...data,
 		mainMediaElements,
 		blocks: enhancedBlocks,
-		pinnedPost: enhancePinnedPost(
-			data.format,
-			renderingTarget,
-			data.pinnedPost,
-		),
+		pinnedPost: enhancePinnedPost(format, renderingTarget, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
 		),
 		tableOfContents: data.showTableOfContents
-			? enhanceTableOfContents(data.format, enhancedBlocks)
+			? enhanceTableOfContents(enhancedBlocks)
 			: undefined,
 		/**
 		 * This function needs to run at a higher level to most other enhancers

@@ -3384,8 +3384,85 @@ const pullQuoteIconDark: PaletteFunction = (format: ArticleFormat) => {
 		: text;
 };
 
-const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
+const shareButtonLiveBlogMobileLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return pillarPalette(theme, 200);
+			}
+	}
+};
+
+const shareButtonHoverLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[7];
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
+
+const shareButtonBorderLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[46];
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[60];
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const shareButtonBorderXSmallLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[46];
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const shareButtonCopiedLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.DeadBlog:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -3410,8 +3487,6 @@ const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 				default:
 					return pillarPalette(theme, 400);
 			}
-		case ArticleDesign.Picture:
-			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.Labs:
@@ -3438,38 +3513,8 @@ const shareIconFillLight: PaletteFunction = ({ design, theme, display }) => {
 	}
 };
 
-const shareIconFillDark: PaletteFunction = () => sourcePalette.neutral[60];
+const shareButtonDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const shareIconFillBlogLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			switch (theme) {
-				case Pillar.News:
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.news[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
-				default:
-					return pillarPalette(theme, 300);
-			}
-		default:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[300];
-				default:
-					return pillarPalette(theme, 300);
-			}
-	}
-};
-
-const shareIconFillBlogDark: PaletteFunction = () => sourcePalette.neutral[60];
 const matchNavBackground: PaletteFunction = () => sourcePalette.brandAlt[400];
 
 const matchStatsBackground: PaletteFunction = ({ design }) => {
@@ -3687,7 +3732,17 @@ const subMetaTextDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const subMetaTextHoverLight: PaletteFunction = () => sourcePalette.neutral[100];
+const subMetaTextHoverLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[7];
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
 
 const syndicationButtonText: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
@@ -4573,8 +4628,43 @@ const recommendationCountArrowSelectedLight: PaletteFunction = () =>
 const recommendationCountArrowSelectedDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
-const discussionTextLight: PaletteFunction = () => sourcePalette.neutral[86];
-const discussionTextDark: PaletteFunction = () => sourcePalette.neutral[20];
+const discussionSectionBackgroundLight: PaletteFunction = ({
+	theme,
+	design,
+}) => {
+	switch (theme) {
+		case Pillar.Opinion:
+			return sourcePalette.opinion[800];
+		default:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[97];
+				default:
+					return sourcePalette.neutral[100];
+			}
+	}
+};
+const discussionSectionBackgroundDark: PaletteFunction = ({
+	theme,
+	design,
+}) => {
+	switch (theme) {
+		case Pillar.Opinion:
+			return sourcePalette.neutral[10];
+		default:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[0];
+				default:
+					return sourcePalette.neutral[10];
+			}
+	}
+};
+
+const discussionTextLight: PaletteFunction = () => sourcePalette.neutral[7];
+const discussionTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const discussionAccentTextLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
@@ -4615,7 +4705,7 @@ const discussionSubduedDark: PaletteFunction = () => sourcePalette.neutral[60];
 const discussionLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
-const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
+const discussionPrimaryButtonBackgroundLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
 			return sourcePalette.news[300];
@@ -4631,6 +4721,21 @@ const discussionPrimaryButtonBackground: PaletteFunction = ({ theme }) => {
 			return sourcePalette.labs[300];
 		default:
 			return sourcePalette.news[300];
+	}
+};
+
+const discussionPrimaryButtonBackgroundDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		default:
+			return sourcePalette.news[500];
 	}
 };
 
@@ -4657,7 +4762,7 @@ const discussionButtonHover: PaletteFunction = ({ theme }) => {
 const discussionButtonTextLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const discussionButtonTextDark: PaletteFunction = () =>
-	sourcePalette.neutral[100];
+	sourcePalette.neutral[7];
 
 const discussionReportBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -4700,7 +4805,7 @@ const discussionPaginationTextDark: PaletteFunction = () =>
 const discussionPaginationBorderLight: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 const discussionPaginationBorderDark: PaletteFunction = () =>
-	sourcePalette.neutral[46];
+	sourcePalette.neutral[20];
 
 const discussionPaginationBorderHover: PaletteFunction = () =>
 	sourcePalette.neutral[60];
@@ -4934,6 +5039,9 @@ const lastUpdatedText: PaletteFunction = ({ theme, design }) => {
 const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
 const interactiveAtomBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[100];
+
+const discussionPreModLight: PaletteFunction = () => sourcePalette.brand[500];
+const discussionPreModDark: PaletteFunction = () => sourcePalette.brand[800];
 
 // ----- Palette ----- //
 
@@ -5368,13 +5476,9 @@ const paletteColours = {
 		light: subNavLink,
 		dark: subNavLink,
 	},
-	'--share-icon-fill': {
-		light: shareIconFillLight,
-		dark: shareIconFillDark,
-	},
-	'--share-icon-blog-fill': {
-		light: shareIconFillBlogLight,
-		dark: shareIconFillBlogDark,
+	'--share-button': {
+		light: shareButtonLight,
+		dark: shareButtonDark,
 	},
 	'--match-nav-background': {
 		light: matchNavBackground,
@@ -5644,6 +5748,10 @@ const paletteColours = {
 		light: signInLinkLineLight,
 		dark: signInLinkLineDark,
 	},
+	'--discussion-section-background': {
+		light: discussionSectionBackgroundLight,
+		dark: discussionSectionBackgroundDark,
+	},
 	'--discussion-top-pick-background': {
 		light: topPickBackgroundLight,
 		dark: topPickBackgroundDark,
@@ -5689,8 +5797,8 @@ const paletteColours = {
 		dark: discussionLinkDark,
 	},
 	'--discussion-primary-button-background': {
-		light: discussionPrimaryButtonBackground,
-		dark: discussionPrimaryButtonBackground,
+		light: discussionPrimaryButtonBackgroundLight,
+		dark: discussionPrimaryButtonBackgroundDark,
 	},
 	'--discussion-button-background-hover': {
 		light: discussionButtonHover,
@@ -5847,6 +5955,30 @@ const paletteColours = {
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
 		dark: interactiveAtomBackgroundDark,
+	},
+	'--share-button-liveblog-mobile': {
+		light: shareButtonLiveBlogMobileLight,
+		dark: shareButtonLiveBlogMobileLight,
+	},
+	'--share-button-border': {
+		light: shareButtonBorderLight,
+		dark: shareButtonBorderLight,
+	},
+	'--share-button-copied': {
+		light: shareButtonCopiedLight,
+		dark: shareButtonDark,
+	},
+	'--share-button-hover': {
+		light: shareButtonHoverLight,
+		dark: shareButtonHoverLight,
+	},
+	'--share-button-xsmall-border': {
+		light: shareButtonBorderXSmallLight,
+		dark: shareButtonBorderXSmallLight,
+	},
+	'--discussion-pre-mod': {
+		light: discussionPreModLight,
+		dark: discussionPreModDark,
 	},
 } satisfies PaletteColours;
 
