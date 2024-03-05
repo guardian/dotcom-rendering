@@ -4603,10 +4603,23 @@ const topPickLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const topPickLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
-const staffLabelDark: PaletteFunction = () => sourcePalette.brand[600];
+const staffLabelDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const staffPickLight: PaletteFunction = () => sourcePalette.neutral[7];
-const staffPickDark: PaletteFunction = () => sourcePalette.neutral[97];
+const staffPickDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const staffPickBadgeLight: PaletteFunction = () => sourcePalette.neutral[7];
+const staffPickBadgeDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const staffPickBadgeTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const staffPickBadgeTextDark: PaletteFunction = () => sourcePalette.neutral[7];
+
+const staffBadgeLight: PaletteFunction = () => sourcePalette.brand[400];
+const staffBadgeDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const staffBadgeTextLight: PaletteFunction = () => sourcePalette.neutral[100];
+const staffBadgeTextDark: PaletteFunction = () => sourcePalette.brand[400];
 
 const recommendationCountLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
@@ -5975,6 +5988,22 @@ const paletteColours = {
 	'--share-button-xsmall-border': {
 		light: shareButtonBorderXSmallLight,
 		dark: shareButtonBorderXSmallLight,
+	},
+	'--staff-contributor-badge': {
+		light: staffBadgeLight,
+		dark: staffBadgeDark,
+	},
+	'--staff-contributor-badge-text': {
+		light: staffBadgeTextLight,
+		dark: staffBadgeTextDark,
+	},
+	'--staff-pick-badge': {
+		light: staffPickBadgeLight,
+		dark: staffPickBadgeDark,
+	},
+	'--staff-pick-badge-text': {
+		light: staffPickBadgeTextLight,
+		dark: staffPickBadgeTextDark,
 	},
 	'--discussion-pre-mod': {
 		light: discussionPreModLight,
