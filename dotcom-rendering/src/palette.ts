@@ -5056,6 +5056,11 @@ const interactiveAtomBackgroundDark: PaletteFunction = () =>
 const discussionPreModLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionPreModDark: PaletteFunction = () => sourcePalette.brand[800];
 
+const discussionCommentUnderlineLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionCommentUnderlineDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[86], 0.5);
+
 // ----- Palette ----- //
 
 /**
@@ -6008,6 +6013,10 @@ const paletteColours = {
 	'--discussion-pre-mod': {
 		light: discussionPreModLight,
 		dark: discussionPreModDark,
+	},
+	'--discussion-comment-underline': {
+		light: discussionCommentUnderlineLight,
+		dark: discussionCommentUnderlineDark,
 	},
 } satisfies PaletteColours;
 
