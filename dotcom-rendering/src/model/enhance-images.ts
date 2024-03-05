@@ -429,23 +429,21 @@ const enhance = (
 	);
 };
 
-export const enhanceImages = (
-	blocks: Block[],
-	format: ArticleFormat,
-	imagesForLightbox: ImageForLightbox[],
-): Block[] => {
-	const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
+export const enhanceImages =
+	(format: ArticleFormat, imagesForLightbox: ImageForLightbox[]) =>
+	(blocks: Block[]): Block[] => {
+		const isPhotoEssay = format.design === ArticleDesign.PhotoEssay;
 
-	return blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: enhance(block.elements, {
-				isPhotoEssay,
-				imagesForLightbox,
-			}),
-		};
-	});
-};
+		return blocks.map((block: Block) => {
+			return {
+				...block,
+				elements: enhance(block.elements, {
+					isPhotoEssay,
+					imagesForLightbox,
+				}),
+			};
+		});
+	};
 
 export const enhanceElementsImages = (
 	elements: FEElement[],

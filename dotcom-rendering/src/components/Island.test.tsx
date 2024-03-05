@@ -140,7 +140,6 @@ describe('Island: server-side rendering', () => {
 						discussionD2Uid="testD2Header"
 						discussionApiClientHeader="testClientHeader"
 						enableDiscussionSwitch={true}
-						enableMobileDiscussionAdsSwitch={true}
 						idApiUrl="https://idapi.theguardian.com"
 						format={{
 							theme: Pillar.News,

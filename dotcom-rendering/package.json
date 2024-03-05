@@ -48,7 +48,7 @@
 		"@guardian/bridget": "2.6.0",
 		"@guardian/browserslist-config": "6.1.0",
 		"@guardian/cdk": "50.13.0",
-		"@guardian/commercial": "17.0.0",
+		"@guardian/commercial": "17.1.0",
 		"@guardian/consent-management-platform": "13.11.1",
 		"@guardian/core-web-vitals": "6.0.0",
 		"@guardian/eslint-config": "7.0.1",
