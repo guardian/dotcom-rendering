@@ -116,7 +116,9 @@ const blockedCommentStyles = css`
 const commentLinkStyling = css`
 	a {
 		color: ${schemedPalette('--discussion-link')};
-		text-decoration: none;
+		text-decoration-color: ${schemedPalette(
+			'--discussion-comment-underline',
+		)};
 		:hover {
 			text-decoration: underline;
 		}

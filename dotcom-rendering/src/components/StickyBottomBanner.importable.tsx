@@ -245,8 +245,10 @@ export const StickyBottomBanner = ({
 	});
 
 	useEffect(() => {
-		setAsyncArticleCounts(getArticleCounts(pageId, keywordIds));
-	}, [pageId, keywordIds]);
+		setAsyncArticleCounts(
+			getArticleCounts(pageId, keywordIds, contentType),
+		);
+	}, [contentType, pageId, keywordIds]);
 
 	useOnce(() => {
 		if (!countryCode) return;
