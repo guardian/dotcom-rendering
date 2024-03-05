@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Container Image
         id: build_image
-        uses: redhat-actions/buildah-build@v2.12
+        uses: redhat-actions/buildah-build@v2.13
         with:
           image: dotcom-rendering
           tags: ${{ github.sha }} ${{ env.GITHUB_REF_SLUG }}
