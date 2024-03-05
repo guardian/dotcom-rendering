@@ -84,17 +84,9 @@ const liveBlogMobile = (isCopied: boolean) => css`
 	}
 `;
 
-const getUrl = ({
-	pageId,
-	CMP,
-	blockId,
-}: {
-	pageId: string;
-	CMP?: string;
-	blockId?: string;
-}) => {
+const getUrl = ({ pageId, blockId }: { pageId: string; blockId?: string }) => {
 	const searchParams = new URLSearchParams({});
-	if (CMP) searchParams.append('CMP', CMP); // Do we want to track this?
+	searchParams.append('CMP', 'share_btn_link');
 	if (blockId) searchParams.append('page', `with:block-${blockId}`);
 
 	const blockHash = blockId ? `#block-${blockId}` : '';
