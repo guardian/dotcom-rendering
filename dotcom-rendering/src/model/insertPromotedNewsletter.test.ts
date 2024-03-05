@@ -22,17 +22,17 @@ const NEWSLETTER: Newsletter = {
 
 describe('Insert Newsletter Signups', () => {
 	it('inserts a NewsletterSignupBlockElement to a standard article if there is a newsletter', () => {
+		const elements = exampleStandard.blocks[0]?.elements ?? [];
 		const insertedBlock = insertPromotedNewsletter(
-			exampleStandard.blocks,
+			elements,
+			exampleStandard.blocks[0]?.id ?? 'mock id',
 			decideFormat(exampleStandard.format),
 			NEWSLETTER,
-		)
-			.flatMap((block) => block.elements)
-			.find(
-				(element) =>
-					element._type ===
-					'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
-			);
+		).find(
+			(element) =>
+				element._type ===
+				'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
+		);
 
 		expect(insertedBlock).toBeTruthy();
 		expect(
@@ -41,34 +41,34 @@ describe('Insert Newsletter Signups', () => {
 	});
 
 	it('will not insert a NewsletterSignupBlockElement into a blog', () => {
+		const elements = exampleStandard.blocks[0]?.elements ?? [];
 		expect(
 			insertPromotedNewsletter(
-				exampleLiveBlog.blocks,
+				elements,
+				exampleLiveBlog.blocks[0]?.id ?? 'mock id',
 				decideFormat(exampleLiveBlog.format),
 				NEWSLETTER,
-			)
-				.flatMap((block) => block.elements)
-				.find(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
-				),
+			).find(
+				(element) =>
+					element._type ===
+					'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
+			),
 		).toBeFalsy();
 	});
 
 	it('will not insert a NewsletterSignupBlockElement into a quiz', () => {
+		const elements = exampleStandard.blocks[0]?.elements ?? [];
 		expect(
 			insertPromotedNewsletter(
-				exampleQuiz.blocks,
+				elements,
+				exampleQuiz.blocks[0]?.id ?? 'mock id',
 				decideFormat(exampleQuiz.format),
 				NEWSLETTER,
-			)
-				.flatMap((block) => block.elements)
-				.find(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
-				),
+			).find(
+				(element) =>
+					element._type ===
+					'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
+			),
 		).toBeFalsy();
 	});
 });

@@ -2,7 +2,9 @@ import type { FEElement, SubheadingBlockElement } from '../types/content';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 import { stripHTML } from './sanitise';
 
-const enhance = (elements: FEElement[]): FEElement[] => {
+export const enhanceInteractiveContentsElements = (
+	elements: FEElement[],
+): FEElement[] => {
 	const updatedElements: FEElement[] = [];
 	const hasInteractiveContentsBlockElement = elements.some((element) =>
 		isLegacyTableOfContents(element),
@@ -59,11 +61,3 @@ const enhance = (elements: FEElement[]): FEElement[] => {
 
 	return updatedElements.length ? updatedElements : elements;
 };
-
-export const enhanceInteractiveContentsElements = (blocks: Block[]): Block[] =>
-	blocks.map((block: Block) => {
-		return {
-			...block,
-			elements: enhance(block.elements),
-		};
-	});
