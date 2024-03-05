@@ -164,7 +164,7 @@ describe('Enhancing ad placeholders', () => {
 			},
 		];
 
-		const output = enhanceAdPlaceholders(input);
+		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
 		const outputElements = getElementsFromBlocks(output);
 		const outputPlaceholders = outputElements.filter(
 			elementIsAdPlaceholder,
