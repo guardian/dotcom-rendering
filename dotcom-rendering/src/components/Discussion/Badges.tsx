@@ -29,7 +29,7 @@ const guardianPickLabel = css`
 `;
 
 export const GuardianStaff = () => (
-	<div css={[staffBadge]}>
+	<div css={staffBadge}>
 		<svg
 			width="36"
 			height="36"
@@ -48,7 +48,7 @@ export const GuardianStaff = () => (
 );
 
 export const GuardianContributor = () => (
-	<div css={[staffBadge]}>
+	<div css={staffBadge}>
 		<svg
 			width="36"
 			height="36"
