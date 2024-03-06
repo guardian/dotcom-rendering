@@ -208,6 +208,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'the-crunch',
 				'swift-notes',
 				'first-dog',
+				'reclaim-your-brain',
 				'well-actually',
 			],
 		},
