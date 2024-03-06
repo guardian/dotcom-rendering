@@ -1,3 +1,4 @@
+import type { CountryCode } from '@guardian/libs';
 import { isObject, isString } from '@guardian/libs';
 import type { Guard } from '../../lib/guard';
 import { guard } from '../../lib/guard';
@@ -11,6 +12,7 @@ export type CanShowGateProps = {
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview?: boolean;
+	currentLocaleCode: CountryCode | undefined;
 };
 
 export type SignInGateComponent = {
@@ -62,6 +64,12 @@ export type SignInGateProps = {
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 };
+
+export interface SignInGateCustomizableTextProps extends SignInGateProps {
+	title: string;
+	subtitle: string;
+	body: string | JSX.Element;
+}
 
 export type CurrentSignInGateABTest = {
 	name: string;

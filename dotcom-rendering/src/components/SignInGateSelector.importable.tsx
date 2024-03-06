@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useCountryCode } from '../lib/useCountryCode';
 import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
@@ -229,6 +230,8 @@ export const SignInGateSelector = ({
 	const { personaliseSignInGateAfterCheckout } = switches;
 	// END: Checkout Complete Personalisation
 
+	const countryCode = useCountryCode('sign-in-gate-selector');
+
 	useOnce(() => {
 		// this hook will fire when the sign in gate is dismissed
 		// which will happen when the showGate state is set to false
@@ -268,6 +271,7 @@ export const SignInGateSelector = ({
 					tags,
 					isPaidContent,
 					isPreview,
+					currentLocaleCode: countryCode,
 				})
 				.then(setCanShowGate);
 		}
@@ -280,6 +284,7 @@ export const SignInGateSelector = ({
 		tags,
 		isPaidContent,
 		isPreview,
+		countryCode,
 	]);
 
 	if (!currentTest || !gateVariant || isUndefined(pageViewId)) {
