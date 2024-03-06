@@ -65,6 +65,13 @@ const insertPlaceholder = (
 	return [...prevElements, placeholder, currentElement];
 };
 
+/**
+ * - blockCounter: the number of paragraphs and images that we've counted when considering ad insertion
+ * - lastAdIndex: the index of the most recently inserted ad, used to calculate the blocks between subsequent ads
+ * - numberOfAdsInserted: we use this to make sure that our total number of ads on an article does not exceed maxAds
+ * - prevIsAParagraphOrImage: we use this to check whether or not the previous element is suitable to insert an ad
+ * beneath - we don't want to insert an ad underneath a rich link, for example
+ */
 type ReducerAccumulator = {
 	elements: FEElement[];
 	blockCounter: number;
