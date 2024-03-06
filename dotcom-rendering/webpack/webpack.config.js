@@ -108,7 +108,6 @@ const commonConfigs = ({ platform }) => ({
 /** @type {readonly Build[]} */
 const clientBuilds = [
 	'client.web',
-	'client.web.ophan-next',
 	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? /** @type {const} */ (['client.web.variant'])
 		: []),
