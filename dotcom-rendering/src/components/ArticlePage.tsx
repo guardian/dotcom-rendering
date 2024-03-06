@@ -98,8 +98,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 	const webLightbox =
 		renderingTarget === 'Web' && !!article.config.switches.lightbox;
 
-	console.log(article, format, renderingTarget);
-
 	return (
 		<StrictMode>
 			<Global
