@@ -52,7 +52,7 @@ export const alternativeTextGuardianLive = () => {
 			<SignInGateCustomizableText
 				title="Register now and receive an exclusive Guardian Live discount"
 				subtitle="It’s still free to read – this is not a paywall"
-				body="Guardian Live brings you closer to the big stories, award-winning journalists, and leading thinkers through livestreamed and interactive events, no matter where you are in the world."
+				body="Register now and receive a discount for Guardian Live. Guardian Live brings you closer to the big stories, award-winning journalists, and leading thinkers through livestreamed and interactive events, no matter where you are in the world."
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/signin"
 				registerUrl="https://profile.theguardian.com/register"
