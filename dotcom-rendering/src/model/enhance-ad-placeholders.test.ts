@@ -1,5 +1,4 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import type {
 	AdPlaceholderBlockElement,
 	FEElement,
@@ -46,9 +45,6 @@ const elementIsAdPlaceholder = (
 	element._type ===
 	'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 
-const getElementsFromBlocks = (blocks: Block[]): FEElement[] =>
-	blocks.flatMap(({ elements }) => elements);
-
 // Tests
 describe('Enhancing ad placeholders', () => {
 	const testCases = [
@@ -88,17 +84,10 @@ describe('Enhancing ad placeholders', () => {
 		({ paragraphs, expectedPositions }) => {
 			const elements = getTestParagraphElements(paragraphs);
 			const expectedPlaceholders = expectedPositions.length;
-
-			const input: Block[] = [
-				{
-					...blockMetaData,
-					elements,
-				},
-			];
+			const input: FEElement[] = elements;
 
 			const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
-			const outputElements = getElementsFromBlocks(output);
-			const placeholderIndices = outputElements.flatMap((el, idx) =>
+			const placeholderIndices = output.flatMap((el, idx) =>
 				elementIsAdPlaceholder(el) ? [idx] : [],
 			);
 
@@ -125,22 +114,14 @@ describe('Enhancing ad placeholders', () => {
 			...threeParagraphs,
 		];
 
-		const input: Block[] = [
-			{
-				...blockMetaData,
-				elements,
-			},
-		];
+		const input: FEElement[] = elements;
 
 		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
-		const outputElements = getElementsFromBlocks(output);
-		const outputPlaceholders = outputElements.filter(
-			elementIsAdPlaceholder,
-		);
+		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
 		expect(outputPlaceholders.length).toEqual(1);
 
-		const placeholderIndices = outputElements.flatMap((el, idx) =>
+		const placeholderIndices = output.flatMap((el, idx) =>
 			elementIsAdPlaceholder(el) ? [idx] : [],
 		);
 

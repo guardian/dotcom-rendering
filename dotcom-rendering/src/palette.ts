@@ -4603,10 +4603,23 @@ const topPickLinkLight: PaletteFunction = () => sourcePalette.brand[500];
 const topPickLinkDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const staffLabelLight: PaletteFunction = () => sourcePalette.brand[400];
-const staffLabelDark: PaletteFunction = () => sourcePalette.brand[600];
+const staffLabelDark: PaletteFunction = () => sourcePalette.brand[800];
 
 const staffPickLight: PaletteFunction = () => sourcePalette.neutral[7];
-const staffPickDark: PaletteFunction = () => sourcePalette.neutral[97];
+const staffPickDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const staffPickBadgeLight: PaletteFunction = () => sourcePalette.neutral[7];
+const staffPickBadgeDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const staffPickBadgeTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const staffPickBadgeTextDark: PaletteFunction = () => sourcePalette.neutral[7];
+
+const staffBadgeLight: PaletteFunction = () => sourcePalette.brand[400];
+const staffBadgeDark: PaletteFunction = () => sourcePalette.neutral[100];
+
+const staffBadgeTextLight: PaletteFunction = () => sourcePalette.neutral[100];
+const staffBadgeTextDark: PaletteFunction = () => sourcePalette.brand[400];
 
 const recommendationCountLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
@@ -4768,6 +4781,34 @@ const discussionReportBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const discussionReportBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
+
+const discussionReportAbuseFormLabelText: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const discussionReportAbuseFormLabelTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const discussionReportBorder: PaletteFunction = () => sourcePalette.neutral[38];
+
+const discussionReportBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const discussionReportButton: PaletteFunction = () => sourcePalette.brand[400];
+
+const discussionReportButtonDark: PaletteFunction = () =>
+	sourcePalette.brand[600];
+
+const discussionReportErrorText: PaletteFunction = () =>
+	sourcePalette.error[400];
+
+const discussionReportErrorTextDark: PaletteFunction = () =>
+	sourcePalette.error[500];
+
+const discussionReportSuccessText: PaletteFunction = () =>
+	sourcePalette.success[400];
+
+const discussionReportSuccessTextDark: PaletteFunction = () =>
+	sourcePalette.success[500];
 
 const discussionBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 const discussionBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
@@ -5042,6 +5083,11 @@ const interactiveAtomBackgroundDark: PaletteFunction = () =>
 
 const discussionPreModLight: PaletteFunction = () => sourcePalette.brand[500];
 const discussionPreModDark: PaletteFunction = () => sourcePalette.brand[800];
+
+const discussionCommentUnderlineLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const discussionCommentUnderlineDark: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[86], 0.5);
 
 // ----- Palette ----- //
 
@@ -5816,6 +5862,26 @@ const paletteColours = {
 		light: discussionReportBackgroundLight,
 		dark: discussionReportBackgroundDark,
 	},
+	'--discussion-report-label-text': {
+		light: discussionReportAbuseFormLabelText,
+		dark: discussionReportAbuseFormLabelTextDark,
+	},
+	'--discussion-report-border': {
+		light: discussionReportBorder,
+		dark: discussionReportBorderDark,
+	},
+	'--discussion-report-button': {
+		light: discussionReportButton,
+		dark: discussionReportButtonDark,
+	},
+	'--discussion-report-error-text': {
+		light: discussionReportErrorText,
+		dark: discussionReportErrorTextDark,
+	},
+	'--discussion-report-success-text': {
+		light: discussionReportSuccessText,
+		dark: discussionReportSuccessTextDark,
+	},
 	'--discussion-border': {
 		light: discussionBorderLight,
 		dark: discussionBorderDark,
@@ -5976,9 +6042,29 @@ const paletteColours = {
 		light: shareButtonBorderXSmallLight,
 		dark: shareButtonBorderXSmallLight,
 	},
+	'--staff-contributor-badge': {
+		light: staffBadgeLight,
+		dark: staffBadgeDark,
+	},
+	'--staff-contributor-badge-text': {
+		light: staffBadgeTextLight,
+		dark: staffBadgeTextDark,
+	},
+	'--staff-pick-badge': {
+		light: staffPickBadgeLight,
+		dark: staffPickBadgeDark,
+	},
+	'--staff-pick-badge-text': {
+		light: staffPickBadgeTextLight,
+		dark: staffPickBadgeTextDark,
+	},
 	'--discussion-pre-mod': {
 		light: discussionPreModLight,
 		dark: discussionPreModDark,
+	},
+	'--discussion-comment-underline': {
+		light: discussionCommentUnderlineLight,
+		dark: discussionCommentUnderlineDark,
 	},
 } satisfies PaletteColours;
 

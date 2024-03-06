@@ -10,7 +10,7 @@ const fetchMock = mockRESTCalls();
 
 describe('Dropdown', () => {
 	it('Should show the expected label names', () => {
-		const { getByText } = render(
+		const { getByLabelText } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
 				commentId={123}
@@ -18,9 +18,9 @@ describe('Dropdown', () => {
 			/>,
 		);
 
-		expect(getByText('Category')).toBeInTheDocument();
-		expect(getByText('Reason (optional)')).toBeInTheDocument();
-		expect(getByText('Email (optional)')).toBeInTheDocument();
+		expect(getByLabelText('Category')).toBeInTheDocument();
+		expect(getByLabelText('Reason Optional')).toBeInTheDocument();
+		expect(getByLabelText('Email Optional')).toBeInTheDocument();
 	});
 
 	it('Should show the category error message if not chosen on submit', () => {

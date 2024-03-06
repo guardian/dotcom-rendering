@@ -376,39 +376,30 @@ class Enhancer {
 	}
 }
 
-const enhance = (elements: FEElement[]): FEElement[] => {
-	return (
-		new Enhancer(elements)
-			// Add the data-ignore='global-h2-styling' attribute
-			.removeGlobalH2Styles()
-			// Turn false h3s into real ones
-			.addH3s()
-			// Add item links
-			.addItemLinks()
-			// Add numbered titles
-			.addTitles()
-			// Overlay stars onto images
-			.starifyImages()
-			// Turn ascii stars into components
-			.inlineStarRatings()
-			// Thumbnail images should be round
-			.makeThumbnailsRound().elements
-	);
-};
-
 export const enhanceNumberedLists =
 	(format: ArticleFormat) =>
-	(blocks: Block[]): Block[] => {
+	(elements: FEElement[]): FEElement[] => {
 		const isNumberedList = format.display === ArticleDisplay.NumberedList;
 
 		if (!isNumberedList) {
-			return blocks;
+			return elements;
 		}
 
-		return blocks.map((block: Block) => {
-			return {
-				...block,
-				elements: enhance(block.elements),
-			};
-		});
+		return (
+			new Enhancer(elements)
+				// Add the data-ignore='global-h2-styling' attribute
+				.removeGlobalH2Styles()
+				// Turn false h3s into real ones
+				.addH3s()
+				// Add item links
+				.addItemLinks()
+				// Add numbered titles
+				.addTitles()
+				// Overlay stars onto images
+				.starifyImages()
+				// Turn ascii stars into components
+				.inlineStarRatings()
+				// Thumbnail images should be round
+				.makeThumbnailsRound().elements
+		);
 	};

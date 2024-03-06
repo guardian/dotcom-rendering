@@ -7,10 +7,10 @@ import type { InteractiveContentsBlockElement } from '../types/content';
 import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent.importable';
 
 const interactiveContentsBlock = enhanceInteractiveContentsElements(
-	NumberedList.blocks,
-)[0]?.elements.find(
-	(block): block is InteractiveContentsBlockElement =>
-		block._type ===
+	NumberedList.blocks[0]?.elements ?? [],
+).find(
+	(element): element is InteractiveContentsBlockElement =>
+		element._type ===
 		'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 );
 

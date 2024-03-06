@@ -135,12 +135,9 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 
 export const enhanceAdPlaceholders =
 	(format: ArticleFormat, renderingTarget: RenderingTarget) =>
-	(blocks: Block[]): Block[] =>
+	(elements: FEElement[]): FEElement[] =>
 		renderingTarget === 'Apps' &&
 		format.design !== ArticleDesign.LiveBlog &&
 		format.design !== ArticleDesign.DeadBlog
-			? blocks.map((b) => ({
-					...b,
-					elements: insertAdPlaceholders(b.elements),
-			  }))
-			: blocks;
+			? insertAdPlaceholders(elements)
+			: elements;

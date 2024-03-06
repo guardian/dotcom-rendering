@@ -1,5 +1,6 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
+import { SignInGateCustomizableText } from './gateDesigns/SignInGateCustomizableText';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
@@ -44,6 +45,42 @@ export const mainStandaloneMandatory = () => {
 	);
 };
 mainStandaloneMandatory.storyName = 'main_standalone_mandatory';
+
+export const alternativeTextGuardianLive = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateCustomizableText
+				title="Register now and receive an exclusive Guardian Live discount"
+				subtitle="It’s still free to read – this is not a paywall"
+				body="Register now and receive a discount for Guardian Live. Guardian Live brings you closer to the big stories, award-winning journalists, and leading thinkers through livestreamed and interactive events, no matter where you are in the world."
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+			/>
+		</Section>
+	);
+};
+alternativeTextGuardianLive.storyName = 'alternative_text_guardian_live';
+
+export const alternativeTextSaturdayEdition = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateCustomizableText
+				title="Register now and receive an exclusive, weekly roundup from our editor-in-chief"
+				subtitle="It’s still free to read – this is not a paywall"
+				body="Register now and receive Saturday Edition – a new, weekly email highlighting the week’s best Guardian Journalism from our editor-in-chief, Katharine Viner."
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/signin"
+				registerUrl="https://profile.theguardian.com/register"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+			/>
+		</Section>
+	);
+};
+alternativeTextSaturdayEdition.storyName = 'alternative_text_saturday_edition';
 
 export const fakeSocialStandalone = () => {
 	return (

@@ -1,5 +1,5 @@
 import { type ArticleFormat } from '@guardian/libs';
-import type { ImageForLightbox, Newsletter } from '../types/content';
+import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
@@ -20,20 +20,30 @@ type Options = {
 };
 
 const enhanceNewsletterSignup =
-	(format: ArticleFormat, promotedNewsletter: Newsletter | undefined) =>
-	(blocks: Block[]): Block[] =>
+	(
+		format: ArticleFormat,
+		promotedNewsletter: Newsletter | undefined,
+		blockId: string,
+	) =>
+	(elements: FEElement[]): FEElement[] =>
 		promotedNewsletter !== undefined
-			? insertPromotedNewsletter(blocks, format, promotedNewsletter)
-			: blocks;
+			? insertPromotedNewsletter(
+					elements,
+					blockId,
+					format,
+					promotedNewsletter,
+			  )
+			: elements;
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
-export const enhanceBlocks = (
-	blocks: Block[],
+export const enhanceElements = (
+	elements: FEElement[],
 	format: ArticleFormat,
+	blockId: string,
 	options: Options,
-): Block[] =>
+): FEElement[] =>
 	[
 		enhanceDividers,
 		enhanceH2s,
@@ -44,6 +54,16 @@ export const enhanceBlocks = (
 		enhanceNumberedLists(format),
 		enhanceEmbeds,
 		enhanceTweets,
-		enhanceNewsletterSignup(format, options.promotedNewsletter),
+		enhanceNewsletterSignup(format, options.promotedNewsletter, blockId),
 		enhanceAdPlaceholders(format, options.renderingTarget),
-	].reduce((enhancedBlocks, enhancer) => enhancer(enhancedBlocks), blocks);
+	].reduce((enhancedBlocks, enhancer) => enhancer(enhancedBlocks), elements);
+
+export const enhanceBlocks = (
+	blocks: Block[],
+	format: ArticleFormat,
+	options: Options,
+): Block[] =>
+	blocks.map((block) => ({
+		...block,
+		elements: enhanceElements(block.elements, format, block.id, options),
+	}));
