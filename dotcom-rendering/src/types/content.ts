@@ -309,7 +309,7 @@ interface ItemLinkBlockElement {
 	html: string;
 }
 
-interface KeyTakeaway {
+export interface KeyTakeaway {
 	title: string;
 	body: FEElement[];
 }
