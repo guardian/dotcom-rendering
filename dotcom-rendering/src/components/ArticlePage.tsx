@@ -43,6 +43,44 @@ interface AppProps extends BaseProps {
 
 /**
  * @description
+ * returns global styles for article pages
+ */
+const globalStyles = (
+	format: ArticleFormat,
+	darkModeInApps: boolean | undefined,
+	renderingTarget: string,
+) => css`
+	:root {
+		/* Light palette is default on all platforms */
+		${paletteDeclarations(format, 'light')}
+		body {
+			color: ${sourcePalette.neutral[7]};
+		}
+		/* Dark palette only for apps and only if switch turned on */
+		${darkModeInApps && renderingTarget === 'Apps'
+			? css`
+					@media (prefers-color-scheme: dark) {
+						${paletteDeclarations(format, 'dark')}
+						body {
+							color: ${sourcePalette.neutral[86]};
+						}
+					}
+			  `
+			: ''}
+	}
+	/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
+	/* The not(.src...) selector is to work with Source's FocusStyleManager. */
+	*:focus {
+		${focusHalo}
+	}
+	::selection {
+		background: ${sourcePalette.brandAlt[400]};
+		color: ${sourcePalette.neutral[7]};
+	}
+`;
+
+/**
+ * @description
  * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
  */
 export const ArticlePage = (props: WebProps | AppProps) => {
@@ -60,39 +98,16 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 	const webLightbox =
 		renderingTarget === 'Web' && !!article.config.switches.lightbox;
 
+	console.log(article, format, renderingTarget);
+
 	return (
 		<StrictMode>
 			<Global
-				styles={css`
-					:root {
-						/* Light palette is default on all platforms */
-						${paletteDeclarations(format, 'light')}
-						body {
-							color: ${sourcePalette.neutral[7]};
-						}
-						/* Dark palette only for apps and only if switch turned on */
-						${article.config.switches.darkModeInApps &&
-						renderingTarget === 'Apps'
-							? css`
-									@media (prefers-color-scheme: dark) {
-										${paletteDeclarations(format, 'dark')}
-										body {
-											color: ${sourcePalette.neutral[86]};
-										}
-									}
-							  `
-							: ''}
-					}
-					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-					*:focus {
-						${focusHalo}
-					}
-					::selection {
-						background: ${sourcePalette.brandAlt[400]};
-						color: ${sourcePalette.neutral[7]};
-					}
-				`}
+				styles={globalStyles(
+					format,
+					article.config.switches.darkModeInApps,
+					renderingTarget,
+				)}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
