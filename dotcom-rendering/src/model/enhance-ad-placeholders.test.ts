@@ -138,22 +138,14 @@ describe('Enhancing ad placeholders', () => {
 			...threeParagraphs,
 		];
 
-		const input: Block[] = [
-			{
-				...blockMetaData,
-				elements,
-			},
-		];
+		const input: FEElement[] = elements;
 
 		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
-		const outputElements = getElementsFromBlocks(output);
-		const outputPlaceholders = outputElements.filter(
-			elementIsAdPlaceholder,
-		);
+		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
 
 		expect(outputPlaceholders.length).toEqual(1);
 
-		const placeholderIndices = outputElements.flatMap((el, idx) =>
+		const placeholderIndices = output.flatMap((el, idx) =>
 			elementIsAdPlaceholder(el) ? [idx] : [],
 		);
 
