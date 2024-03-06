@@ -57,7 +57,6 @@ export type Build =
 	| 'client.apps'
 	| 'client.web'
 	| 'client.web.variant'
-	| 'client.web.ophan-next'
 	| 'client.web.legacy';
 
 type ManifestPath = `./manifest.${Build}.json`;
