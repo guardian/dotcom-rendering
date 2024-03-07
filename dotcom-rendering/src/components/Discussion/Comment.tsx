@@ -38,6 +38,7 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	isExpanded: boolean;
 };
 
 const commentControlsLink = css`
@@ -321,6 +322,7 @@ export const Comment = ({
 	toggleMuteStatus,
 	onPermalinkClick,
 	reportAbuse,
+	isExpanded,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
 		comment.isHighlighted,

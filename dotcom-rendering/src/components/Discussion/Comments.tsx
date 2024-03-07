@@ -379,6 +379,7 @@ export const Comments = ({
 											expandCommentReplies={
 												expandCommentReplies
 											}
+											isExpanded={expanded}
 										/>
 									</li>
 								))}

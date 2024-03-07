@@ -39,6 +39,7 @@ type Props = {
 	setPreviewBody: (previewBody: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
+	isExpanded: boolean;
 };
 
 const nestingStyles = css`
@@ -95,6 +96,7 @@ export const CommentContainer = ({
 	setPreviewBody,
 	reportAbuse,
 	expandCommentReplies,
+	isExpanded,
 }: Props) => {
 	const responses = comment.responses ? comment.responses : [];
 	const totalResponseCount = comment.metaData?.responseCount ?? 0;
@@ -142,6 +144,7 @@ export const CommentContainer = ({
 				toggleMuteStatus={toggleMuteStatus}
 				onPermalinkClick={onPermalinkClick}
 				reportAbuse={reportAbuse}
+				isExpanded={isExpanded}
 			/>
 
 			<>
