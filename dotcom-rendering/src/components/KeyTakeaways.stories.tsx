@@ -1,15 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { KeyTakeaways } from './KeyTakeaways';
-import { TextBlockElement } from '../types/content';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { StandardCard } from './KeyEventCard.stories';
+import type { TextBlockElement } from '../types/content';
+import { KeyTakeaways } from './KeyTakeaways';
 
 const themeVariations = [
 	Pillar.Sport,

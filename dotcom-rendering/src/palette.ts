@@ -994,6 +994,8 @@ const headingLineLight: PaletteFunction = (format: ArticleFormat) => {
 			return sourcePalette.specialReport[200];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
+		default:
+			return sourcePalette.neutral[7];
 	}
 };
 
@@ -1008,7 +1010,9 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[500];
+			return sourcePalette.specialReportAlt[700];
+		default:
+			return sourcePalette.neutral[86];
 	}
 };
 

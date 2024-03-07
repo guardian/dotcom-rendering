@@ -1,11 +1,11 @@
-import { KeyTakeaway } from '../types/content';
-import { RenderArticleElement } from '../lib/renderElement';
-import { ServerSideTests, Switches } from '../types/config';
-import { EditionId } from '../lib/edition';
-import { ArticleFormat } from '@guardian/libs';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
+import type { EditionId } from '../lib/edition';
+import { RenderArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
+import type { ServerSideTests, Switches } from '../types/config';
+import type { KeyTakeaway } from '../types/content';
 
 const headingStyles = css`
 	${headline.xsmall({ fontWeight: 'medium' })};
