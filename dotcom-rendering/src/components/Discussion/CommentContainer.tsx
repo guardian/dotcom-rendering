@@ -173,6 +173,7 @@ export const CommentContainer = ({
 										toggleMuteStatus={toggleMuteStatus}
 										onPermalinkClick={onPermalinkClick}
 										reportAbuse={reportAbuse}
+										isExpanded={isExpanded}
 									/>
 								</li>
 							))}
