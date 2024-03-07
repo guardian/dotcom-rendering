@@ -7,6 +7,7 @@ import { enhanceCommercialProperties } from '../model/enhanceCommercialPropertie
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
+import type { Newsletter } from '../types/content';
 import { type DCRArticle } from '../types/frontend';
 import { type RenderingTarget } from '../types/renderingTarget';
 import { decideFormat } from './decideFormat';
@@ -36,10 +37,10 @@ export const enhanceArticleType = (
 		: [];
 
 	// Tidy up this horror after the Oscars
-	const getOscarsNewsletter = () => {
+	const getOscarsNewsletter = (): Newsletter | undefined => {
 		if (
 			// variant1
-			data.config.abTests.filmTodayVariant
+			data.config.abTests.FilmTodayOscars1Variant
 		) {
 			return {
 				identityName: 'film-today-variant-1',
@@ -55,7 +56,7 @@ export const enhanceArticleType = (
 
 		if (
 			// variant2
-			data.config.abTests.filmTodayControl
+			data.config.abTests.FilmTodayOscars1Control
 		) {
 			return {
 				identityName: 'film-today-variant-2',
@@ -69,17 +70,23 @@ export const enhanceArticleType = (
 			};
 		}
 
-		// control: does this need to be a different x% test bucket?
-		return {
-			identityName: 'film-today-control',
-			name: 'Film Weekly Control',
-			theme: 'news',
-			description: 'All the latest movie news, reviews and features',
-			frequency: 'Every week',
-			listId: 4144,
-			group: 'Culture',
-			successDescription: "We'll send you Film Weekly every Friday",
-		};
+		if (
+			// control: does this need to be a different x% test bucket?
+			data.config.abTests.FilmTodayOscars2Variant
+		) {
+			return {
+				identityName: 'film-today-control',
+				name: 'Film Weekly Control',
+				theme: 'news',
+				description: 'All the latest movie news, reviews and features',
+				frequency: 'Every week',
+				listId: 4144,
+				group: 'Culture',
+				successDescription: "We'll send you Film Weekly every Friday",
+			};
+		}
+
+		return undefined;
 	};
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, format, {
