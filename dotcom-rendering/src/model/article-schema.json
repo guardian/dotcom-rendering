@@ -2400,7 +2400,7 @@
                 "title": {
                     "type": "string"
                 },
-                "list": {
+                "elements": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/FEElement"
@@ -2408,7 +2408,7 @@
                 }
             },
             "required": [
-                "list"
+                "elements"
             ]
         },
         "MapBlockElement": {
