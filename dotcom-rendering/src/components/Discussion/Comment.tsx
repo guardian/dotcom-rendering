@@ -340,9 +340,10 @@ export const Comment = ({
 	const toggleSetShowForm = () => {
 		if (!isExpanded) {
 			expandComments();
+			setAbuseReportForm(true);
+		} else {
 			setAbuseReportForm(!showAbuseReportForm);
 		}
-		setAbuseReportForm(!showAbuseReportForm);
 	};
 
 	const pick = async (staffUser: Staff) => {
