@@ -7,7 +7,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type {
 	CommentType,
 	ReplyType,
@@ -333,6 +333,12 @@ export const Comment = ({
 
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		if (isExpanded) {
+			setAbuseReportForm(true);
+		}
+	}, [isExpanded]);
+
 	const expandComments = () => {
 		dispatch({ type: 'expandComments' });
 	};
@@ -340,7 +346,6 @@ export const Comment = ({
 	const toggleSetShowForm = () => {
 		if (!isExpanded) {
 			expandComments();
-			setAbuseReportForm(true);
 		} else {
 			setAbuseReportForm(!showAbuseReportForm);
 		}
