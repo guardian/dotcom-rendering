@@ -338,12 +338,12 @@ export const Comment = ({
 	};
 
 	const toggleSetShowForm = () => {
-		if (!isExpanded) {
-			setAbuseReportForm(!showAbuseReportForm);
-			expandComments();
-		} else {
-			setAbuseReportForm(!showAbuseReportForm);
-		}
+		setAbuseReportForm((prevState) => {
+			if (!isExpanded) {
+				expandComments();
+			}
+			return !prevState;
+		});
 	};
 
 	const pick = async (staffUser: Staff) => {
