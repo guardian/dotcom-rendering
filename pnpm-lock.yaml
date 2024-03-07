@@ -381,11 +381,8 @@ importers:
         specifier: 16.0.1
         version: 16.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.0.4
-        version: 2.0.4
-      '@guardian/ophan-tracker-js-next':
-        specifier: npm:@guardian/ophan-tracker-js@2.1.0-next.3
-        version: /@guardian/ophan-tracker-js@2.1.0-next.3
+        specifier: 2.1.0
+        version: 2.1.0
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -810,8 +807,8 @@ importers:
         specifier: 2.3.2
         version: 2.3.2
       sanitize-html:
-        specifier: 2.11.0
-        version: 2.11.0
+        specifier: 2.12.1
+        version: 2.12.1
       scheduler:
         specifier: 0.23.0
         version: 0.23.0
@@ -4556,8 +4553,8 @@ packages:
     engines: {node: '>=16'}
     dev: false
 
-  /@guardian/ophan-tracker-js@2.1.0-next.3:
-    resolution: {integrity: sha512-PhkoypSxP4Afjd6OV/D/RXvNQU85qOlhPn1jC7nvp8WjzNHSLVBlnBITQMK3ASbBHBvBuFylLLZTyGAk1SUhIA==}
+  /@guardian/ophan-tracker-js@2.1.0:
+    resolution: {integrity: sha512-VOU94rhjDeDF1kg2htmNu8H+zhL1tHciKtWnp9qr0U7lbpQ6qW+RW/GM5OM3zfXampwk9FzlsTvU05cixB/5Jw==}
     engines: {node: '>=16'}
     dev: false
 
@@ -17839,15 +17836,15 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: false
 
-  /sanitize-html@2.11.0:
-    resolution: {integrity: sha512-BG68EDHRaGKqlsNjJ2xUB7gpInPA8gVx/mvjO743hZaeMCZ2DwzW7xvsqZ+KNU4QKwj86HJ3uu2liISf2qBBUA==}
+  /sanitize-html@2.12.1:
+    resolution: {integrity: sha512-Plh+JAn0UVDpBRP/xEjsk+xDCoOvMBwQUf/K+/cBAVuTbtX8bj2VB7S1sL1dssVpykqp0/KPSesHrqXtokVBpA==}
     dependencies:
       deepmerge: 4.3.1
       escape-string-regexp: 4.0.0
       htmlparser2: 8.0.1
       is-plain-object: 5.0.0
       parse-srcset: 1.0.2
-      postcss: 8.4.32
+      postcss: 8.4.35
     dev: false
 
   /sax@1.2.1:
