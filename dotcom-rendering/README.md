@@ -13,6 +13,7 @@ $ pnpm install --frozen-lockfile
 $ cd dotcom-rendering
 $ make dev
 ```
+
 Then open [http://localhost:3030](http://localhost:3030)
 
 ## Getting started (the longer version)
