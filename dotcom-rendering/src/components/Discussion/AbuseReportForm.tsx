@@ -217,9 +217,12 @@ export const AbuseReportForm = ({
 			});
 	};
 
-	/** If the "Other" category is selected, you must supply a reason */
+	/** If the "Other" or the "Legal Issue" categories are selected, you must supply a reason */
+	const legalIssueCategoryId = 3;
 	const otherCategoryId = 9;
-	const isReasonRequired = formVariables.categoryId === otherCategoryId;
+	const isReasonRequired =
+		formVariables.categoryId === otherCategoryId ||
+		formVariables.categoryId === legalIssueCategoryId;
 
 	return (
 		<div aria-modal="true" ref={modalRef}>
@@ -257,7 +260,9 @@ export const AbuseReportForm = ({
 						<Option value="0">Please select</Option>
 						<Option value="1">Personal abuse</Option>
 						<Option value="2">Off topic</Option>
-						<Option value="3">Legal issue</Option>
+						<Option value={legalIssueCategoryId}>
+							Legal issue
+						</Option>
 						<Option value="4">Trolling</Option>
 						<Option value="5">Hate speech</Option>
 						<Option value="6">
