@@ -82,7 +82,7 @@ const Card100 = ({
 					imagePositionOnMobile="bottom"
 					imageSize="large"
 					isDynamo={containerPalette && true}
-					supportingContent={cards[0].supportingContent}
+					supportingContent={cards[0].supportingContent?.slice(0, 4)}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
 				/>
