@@ -39,7 +39,7 @@ export const enhanceArticleType = (
 	const getOscarsNewsletter = () => {
 		if (
 			// variant1
-			true
+			data.config.abTests.filmTodayVariant
 		) {
 			return {
 				identityName: 'film-today-variant-1',
@@ -55,7 +55,7 @@ export const enhanceArticleType = (
 
 		if (
 			// variant2
-			true
+			data.config.abTests.filmTodayControl
 		) {
 			return {
 				identityName: 'film-today-variant-2',
@@ -69,7 +69,7 @@ export const enhanceArticleType = (
 			};
 		}
 
-		// control
+		// control: does this need to be a different x% test bucket?
 		return {
 			identityName: 'film-today-control',
 			name: 'Film Weekly Control',
