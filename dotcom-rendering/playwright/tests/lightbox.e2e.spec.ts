@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { Live as LiveBlog } from '../../fixtures/generated/fe-articles/Live';
 import { PhotoEssay as photoEssayArticle } from '../../fixtures/generated/fe-articles/PhotoEssay';
-import { cmpAcceptAll, disableCMP } from '../lib/cmp';
+import { disableCMP } from '../lib/cmp';
 import { loadPageWithOverrides } from '../lib/load-page';
 import { expectToBeVisible, expectToNotBeVisible } from '../lib/locators';
 

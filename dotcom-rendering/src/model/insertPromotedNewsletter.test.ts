@@ -1,6 +1,6 @@
-import { Live as exampleLiveBlog } from '../../fixtures/generated/articles/Live';
-import { Quiz as exampleQuiz } from '../../fixtures/generated/articles/Quiz';
-import { Standard as exampleStandard } from '../../fixtures/generated/articles/Standard';
+import { Live as exampleLiveBlog } from '../../fixtures/generated/dcr-articles/Live';
+import { Quiz as exampleQuiz } from '../../fixtures/generated/dcr-articles/Quiz';
+import { Standard as exampleStandard } from '../../fixtures/generated/dcr-articles/Standard';
 import { decideFormat } from '../lib/decideFormat';
 import type {
 	Newsletter,

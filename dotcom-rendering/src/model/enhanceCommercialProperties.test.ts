@@ -1,5 +1,5 @@
-import { Labs } from '../../fixtures/generated/articles/Labs';
-import { Standard } from '../../fixtures/generated/articles/Standard';
+import { Labs } from '../../fixtures/generated/dcr-articles/Labs';
+import { Standard } from '../../fixtures/generated/dcr-articles/Standard';
 import type { CommercialProperties } from '../types/commercial';
 import { enhanceCommercialProperties } from './enhanceCommercialProperties';
 

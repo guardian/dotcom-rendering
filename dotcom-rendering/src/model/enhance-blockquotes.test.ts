@@ -1,5 +1,5 @@
 import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { Standard as ExampleArticle } from '../../fixtures/generated/dcr-articles/Standard';
 import { decideFormat } from '../lib/decideFormat';
 import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';

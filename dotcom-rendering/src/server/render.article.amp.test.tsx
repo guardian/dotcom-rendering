@@ -1,5 +1,5 @@
 import validator from 'amphtml-validator';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { Standard as ExampleArticle } from '../../fixtures/generated/dcr-articles/Standard';
 import type { AnalyticsModel } from '../components/Analytics.amp';
 import { AmpArticlePage } from '../components/ArticlePage.amp';
 import type { PermutiveModel } from '../components/Permutive.amp';

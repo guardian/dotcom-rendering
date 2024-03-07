@@ -1,5 +1,5 @@
-import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { NumberedList } from '../../fixtures/generated/dcr-articles/NumberedList';
+import { Standard as ExampleArticle } from '../../fixtures/generated/dcr-articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { decideFormat } from '../lib/decideFormat';
 import type { FEElement } from '../types/content';
