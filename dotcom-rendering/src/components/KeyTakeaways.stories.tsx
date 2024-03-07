@@ -1,6 +1,32 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { KeyTakeaways } from './KeyTakeaways';
 import { TextBlockElement } from '../types/content';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
+import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { StandardCard } from './KeyEventCard.stories';
+
+const themeVariations = [
+	Pillar.Sport,
+	Pillar.News,
+	Pillar.Culture,
+	Pillar.Opinion,
+	Pillar.Lifestyle,
+	ArticleSpecial.SpecialReport,
+	ArticleSpecial.SpecialReportAlt,
+	ArticleSpecial.Labs,
+];
+
+const allThemeStandardVariations = themeVariations.map((theme) => ({
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme,
+}));
 
 const meta: Meta<typeof KeyTakeaways> = {
 	component: KeyTakeaways,
@@ -25,9 +51,20 @@ export const Default: Story = {
 	args: {
 		keyTakeaways: [
 			{
-				title: 'my first key takeaway',
+				title: 'The first key takeaway',
+				body: [testTextElement],
+			},
+			{
+				title: 'The second key takeaway',
 				body: [testTextElement],
 			},
 		],
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.Opinion,
+		},
 	},
 };
+
+Default.decorators = [splitTheme(allThemeStandardVariations)];

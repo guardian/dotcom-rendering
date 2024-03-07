@@ -982,6 +982,36 @@ const headlineBorder: PaletteFunction = ({ design }) => {
 	}
 };
 
+const headingLineLight: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 200);
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 500);
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[500];
+	}
+};
+
 const avatarLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
@@ -5169,6 +5199,10 @@ const paletteColours = {
 	'--headline-blog-background': {
 		light: headlineBlogBackgroundLight,
 		dark: headlineBlogBackgroundDark,
+	},
+	'--heading-line': {
+		light: headingLineLight,
+		dark: headingLineDark,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
