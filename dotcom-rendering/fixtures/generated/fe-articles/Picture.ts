@@ -88,7 +88,7 @@ export const Picture: FEArticleType = {
 					},
 				],
 			},
-			elementId: '4ba87973-0c24-4afb-b95a-e6c4b37528fc',
+			elementId: 'd700e398-feda-44e5-b4ee-42e207c8f9d4',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -597,6 +597,7 @@ export const Picture: FEArticleType = {
 			inizio: true,
 			prebidHeaderBidding: true,
 			a9HeaderBidding: true,
+			lightbox: true,
 		},
 		keywordIds:
 			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',

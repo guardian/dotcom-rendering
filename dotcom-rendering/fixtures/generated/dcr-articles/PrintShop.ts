@@ -96,7 +96,7 @@ export const PrintShop: DCRArticle = {
 							},
 						],
 					},
-					elementId: '23d43c42-fa0d-41f6-ad26-aab48a386ea1',
+					elementId: 'faabcbc2-a46b-4e51-91b2-833264db067b',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -341,46 +341,47 @@ export const PrintShop: DCRArticle = {
 						alt: 'Bobby Moore in 1973',
 						credit: 'Photograph: Gerry Cranham/Offside',
 					},
+					position: 1,
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
-					elementId: 'e344cce9-db7c-467e-9826-faa97effc3a5',
+					elementId: 'e8aa6f9d-1edc-4f40-851d-696a8a108bd4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
-					elementId: '9fd4155e-1108-4340-94ff-d44777bc6408',
+					elementId: '622cc177-10cf-41e9-9c0d-b51353ef08da',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
-					elementId: '7dea548f-e744-43c7-9371-65659196a34c',
+					elementId: '3d55f2c1-828c-40ed-b3eb-7ba15d1a17c1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
-					elementId: '4791b2a6-0184-46ea-b0c9-6f6ff046a1f6',
+					elementId: '0c70e6c8-0cb6-4957-ab5a-f4e4534625d3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-					elementId: '06dc4936-3ca6-41f3-9457-1d37731fde33',
+					elementId: '03de46fd-ba34-49f2-9c2e-dbabda046dc2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-					elementId: 'a6a6c9aa-4d37-411a-a0c4-671ebf92d3a8',
+					elementId: '5ac34060-1f1e-4aa5-bdd0-61774d42d624',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-					elementId: '0ba47d6e-e1e4-47a6-bc78-97300d3f2da9',
+					elementId: '907f9aca-dd7f-47fa-b3c6-ee01559a3d55',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
-					elementId: '2b29dd03-1aa4-4ce2-a964-673c5a8acf6f',
+					elementId: '821ff031-4dc2-4860-b0b2-4358ccbbeea9',
 				},
 			],
 			attributes: {
@@ -694,6 +695,7 @@ export const PrintShop: DCRArticle = {
 			inizio: true,
 			prebidHeaderBidding: true,
 			a9HeaderBidding: true,
+			lightbox: true,
 		},
 		keywordIds:
 			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
@@ -1970,6 +1972,27 @@ export const PrintShop: DCRArticle = {
 	showTableOfContents: false,
 	lang: 'en',
 	isRightToLeftLang: false,
-	imagesForLightbox: [],
-	imagesForAppsLightbox: [],
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
+			width: 3855,
+			height: 2755,
+			elementId: 'faabcbc2-a46b-4e51-91b2-833264db067b',
+			displayCredit: false,
+			alt: 'Bobby Moore in 1973',
+			credit: 'Photograph: Gerry Cranham/Offside',
+			position: 1,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 3855,
+			height: 2755,
+			credit: 'Photograph: Gerry Cranham/Offside',
+			masterUrl:
+				'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
+			elementId: 'faabcbc2-a46b-4e51-91b2-833264db067b',
+		},
+	],
 };

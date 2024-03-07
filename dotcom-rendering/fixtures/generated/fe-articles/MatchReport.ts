@@ -80,7 +80,7 @@ export const MatchReport: FEArticleType = {
 					},
 				],
 			},
-			elementId: '38adf2f9-fa28-4556-9aec-0a364115ba4e',
+			elementId: '0fec16d9-68e4-4934-adc8-fe832a08bf54',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -280,55 +280,55 @@ export const MatchReport: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
-					elementId: '77963e15-fdad-4300-8206-1396a7b43858',
+					elementId: 'd4eb7d3f-07d9-4e1f-85c9-3b6f48a234e6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
-					elementId: 'a1a3fbdd-5ab4-4cb3-a37d-83c42c2a92d1',
+					elementId: '9079d9e8-c89f-4841-b6f1-f8f6a0890ca3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
-					elementId: '494f6898-4fb7-42c2-9066-1015f0dfa0b1',
+					elementId: '99ebca6a-a914-4561-a73b-b0a8cdc9bcbd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 					prefix: 'Related: ',
 					text: "Tim Krul: 'The way we play at Norwich is similar to Holland'",
-					elementId: '48ce01eb-039e-439f-82ed-6410db678753',
+					elementId: 'b770bfc7-2c36-4cbf-81a7-07f3a5530d17',
 					role: 'thumbnail',
 					url: 'https://www.theguardian.com/football/football-league-blog/2021/jan/29/tim-krul-way-we-play-norwich-similar-holland-netherlands-goalkeeper',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
-					elementId: 'a1c159ab-1cff-4ede-90ce-5e0cfaec5319',
+					elementId: '2e2589f8-efff-4d9e-a382-f038398d3d58',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
-					elementId: 'c40dd0b9-8145-44d0-81b6-9b51245c6bb8',
+					elementId: '1f714bee-8420-46b0-93ce-e4a4e646eb42',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
-					elementId: 'fa5e5a89-7f65-4066-b7f3-7aeb69ed167a',
+					elementId: '261874c7-21b6-45d1-9438-04c986c616e3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
-					elementId: 'f2f0c461-0295-4fb4-8b64-bd8dbc595b2e',
+					elementId: 'b94c72cb-0aa5-406d-9d80-13b2298cfc17',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
-					elementId: '320aed4e-2742-4d86-881b-12d1608ce52c',
+					elementId: '39293831-3f6e-4ea3-a645-ee08214a1b1c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
-					elementId: '46e35c45-507e-457e-9de5-5e462e0efeac',
+					elementId: '9798d8bf-b0ef-4c32-8a95-9245cafa4b64',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -339,19 +339,19 @@ export const MatchReport: FEArticleType = {
 					alt: 'Fiver',
 					caption:
 						'<strong>The Fiver: sign up and get our daily football email.</strong>',
-					elementId: '876e1856-6ece-42ca-a2a4-6e8ad5596d0b',
+					elementId: '2dfc476d-a267-4517-8f12-81f329832ec7',
 					isThirdPartyTracking: false,
 					html: '<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver"></iframe>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
-					elementId: 'b219a9f1-aad8-4a16-86cc-ff73b1fb4d86',
+					elementId: 'dbe55c0e-8519-4024-87ed-bde157b5c0e7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
-					elementId: 'cf98b024-62ea-4c91-817c-387876656f18',
+					elementId: '08419e4d-42af-44dc-90c7-17891eae3f0a',
 				},
 			],
 			attributes: {
@@ -683,6 +683,7 @@ export const MatchReport: FEArticleType = {
 			inizio: true,
 			prebidHeaderBidding: true,
 			a9HeaderBidding: true,
+			lightbox: true,
 		},
 		keywordIds:
 			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',

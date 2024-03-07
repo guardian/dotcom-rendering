@@ -88,7 +88,7 @@ export const Picture: DCRArticle = {
 					},
 				],
 			},
-			elementId: '4ba87973-0c24-4afb-b95a-e6c4b37528fc',
+			elementId: 'd700e398-feda-44e5-b4ee-42e207c8f9d4',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -274,6 +274,7 @@ export const Picture: DCRArticle = {
 				alt: "Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with 'Sleaze' paint",
 				credit: 'Illustration: Nicola Jennings/The Guardian',
 			},
+			position: 1,
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="332083af16a1d51a7d6d70e0ad266f19ab57fd96"> <img src="https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/1000.jpg" alt="Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with \'Sleaze\' paint" width="1000" height="600" class="gu-image" /> </figure>',
@@ -597,6 +598,7 @@ export const Picture: DCRArticle = {
 			inizio: true,
 			prebidHeaderBidding: true,
 			a9HeaderBidding: true,
+			lightbox: true,
 		},
 		keywordIds:
 			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
@@ -1892,6 +1894,27 @@ export const Picture: DCRArticle = {
 	showTableOfContents: false,
 	lang: 'en',
 	isRightToLeftLang: false,
-	imagesForLightbox: [],
-	imagesForAppsLightbox: [],
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
+			width: 3031,
+			height: 1819,
+			elementId: 'd700e398-feda-44e5-b4ee-42e207c8f9d4',
+			displayCredit: true,
+			alt: "Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with 'Sleaze' paint",
+			credit: 'Illustration: Nicola Jennings/The Guardian',
+			position: 1,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 3031,
+			height: 1819,
+			credit: 'Illustration: Nicola Jennings/The Guardian',
+			masterUrl:
+				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
+			elementId: 'd700e398-feda-44e5-b4ee-42e207c8f9d4',
+		},
+	],
 };

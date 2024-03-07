@@ -80,7 +80,7 @@ export const Recipe: DCRArticle = {
 					},
 				],
 			},
-			elementId: '7c7c096c-73ef-49cc-b91d-7010d9955e9f',
+			elementId: '607ce0af-2485-478f-8884-084e9437c320',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -268,6 +268,7 @@ export const Recipe: DCRArticle = {
 					'Meera Sodha’s spring onion pancakes with sesame sauce.',
 				credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
 			},
+			position: 1,
 		},
 	],
 	main: '<figure class="element element-image" data-media-id="e5a2cb2a63b788eae68ff654f739eff53a0cee28"> <img src="https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg" alt="Meera Sodha’s spring onion pancakes with sesame sauce" width="851" height="1000" class="gu-image" /> <figcaption> <span class="element-image__caption">Meera Sodha’s spring onion pancakes with sesame sauce.</span> <span class="element-image__credit">Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.</span> </figcaption> </figure>',
@@ -280,62 +281,62 @@ export const Recipe: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
-					elementId: 'ee5e7dd3-24a6-4d67-bda9-3a1c42baafe9',
+					elementId: 'b5d337bf-08ce-4660-bf63-1961d049a9b3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='spring-onion-pancakes-with-sesame-sauce'>Spring onion pancakes with sesame sauce</h2>",
-					elementId: 'bc073579-7711-4baf-82c3-67dfbc5b6ca6',
+					elementId: 'e82a7e8e-bb75-4c1d-802c-fc5224e14c9d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
-					elementId: '82e477d3-5f36-4367-a476-fbf1bdbe54e8',
+					elementId: '7618a696-a5da-469d-aae5-191244098ba9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
-					elementId: '60e5608f-57fc-42fd-8e55-85bc9e769b88',
+					elementId: 'a399b942-2727-4d10-a26b-af8227f5890d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
-					elementId: 'c8c86536-4709-4d43-b131-4777ed4340ca',
+					elementId: '3fa6f627-822c-4d58-8e08-3658a5b242d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
-					elementId: '3fa06e96-bcf2-4de8-90fa-c95e129ee35a',
+					elementId: '57d24543-8710-435d-b802-c1b2a56505a3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
-					elementId: '0ddbf2e6-4a9f-4ae7-9d56-076c792bdb43',
+					elementId: '788f5b01-149f-4f1f-999e-df74f936029e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
-					elementId: '0ff38fcb-3b38-47ff-b406-e380221fbcc9',
+					elementId: '9bbefeca-e661-4730-8ed5-6528f8ede8e7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
-					elementId: 'b163ba19-f0a4-4257-b1fe-b57eed19c0a2',
+					elementId: 'b24cbdbb-da0f-48d6-921a-7206cf12d0b8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
-					elementId: '93ebed95-2c8f-420f-8446-f062295cc806',
+					elementId: 'ce4f1f12-16a0-4d24-98a5-2dcc0fafce95',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
-					elementId: '22fef5c1-cf98-4e62-b76e-8b20f0ff0583',
+					elementId: 'b6a19d3b-7a35-45a8-827e-035add7620e1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
-					elementId: '2a96b463-1559-4168-8f75-69baeb9ac5d0',
+					elementId: 'bfd48d03-ffd0-4555-9a87-d8568e5a974f',
 				},
 			],
 			attributes: {
@@ -717,6 +718,7 @@ export const Recipe: DCRArticle = {
 			inizio: true,
 			prebidHeaderBidding: true,
 			a9HeaderBidding: true,
+			lightbox: true,
 		},
 		keywordIds:
 			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
@@ -2076,6 +2078,29 @@ export const Recipe: DCRArticle = {
 	showTableOfContents: false,
 	lang: 'en',
 	isRightToLeftLang: false,
-	imagesForLightbox: [],
-	imagesForAppsLightbox: [],
+	imagesForLightbox: [
+		{
+			masterUrl:
+				'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
+			width: 3731,
+			height: 4384,
+			elementId: '607ce0af-2485-478f-8884-084e9437c320',
+			displayCredit: true,
+			alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
+			credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
+			caption: 'Meera Sodha’s spring onion pancakes with sesame sauce.',
+			position: 1,
+		},
+	],
+	imagesForAppsLightbox: [
+		{
+			width: 3731,
+			height: 4384,
+			credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
+			caption: 'Meera Sodha’s spring onion pancakes with sesame sauce.',
+			masterUrl:
+				'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
+			elementId: '607ce0af-2485-478f-8884-084e9437c320',
+		},
+	],
 };

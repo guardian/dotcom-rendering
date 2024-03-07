@@ -89,7 +89,7 @@ export const Quiz: FEArticleType = {
 					},
 				],
 			},
-			elementId: 'a6ba3503-0b32-41a4-a2e2-d0292472e964',
+			elementId: '19360d51-1003-4583-8714-f5efa8096a09',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -891,7 +891,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '0d363975-9da4-4f30-ab89-4afd6ef9c933',
+					elementId: '70b18f1a-4147-4da8-aa4e-47d612298fd8',
 					quizType: 'knowledge',
 					id: '2c6bf552-2827-4256-b3a0-f557d215c394',
 				},
@@ -1197,6 +1197,7 @@ export const Quiz: FEArticleType = {
 			inizio: true,
 			prebidHeaderBidding: true,
 			a9HeaderBidding: true,
+			lightbox: true,
 		},
 		keywordIds:
 			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
