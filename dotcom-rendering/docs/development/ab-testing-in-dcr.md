@@ -1,20 +1,18 @@
 # AB Testing in DCR
 
-## Setting up a client-side A/B test using the [A/B Testing Library](https://github.com/guardian/ab-testing)
+> [!NOTE]
+> Setting up a client-side A/B test using the [A/B Testing Library](https://github.com/guardian/csnx/tree/main/libs/%40guardian/ab-core). The library docs explain the integration and the API.
 
-The library docs above explain the integration and the API.
-
-### Quick Start
+## Quick Start
 
 1. [Create a switch in Frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala)
-2. Ensure that you [create an A/B test](https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/tests) on _Frontend_.
-3. Add your test to [concurrent tests](https://github.com/guardian/dotcom-rendering/tree/main/dotcom-rendering/src/experiments/tests) on _Frontend_.
-4. Copy the JS file into DCR (and update to TS types) in [web/experiments/tests](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/experiments/ab-tests.ts)
-5. Add it to the test array in [src/web/experiments/ab-tests.ts](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/experiments/ab-tests.ts)
-6. Use the [A/B test API](https://github.com/guardian/csnx/tree/main/libs/%40guardian/ab-core#the-api)
-7. Force the A/B test (ignoring canRun of A/B test and variant) with the URL opt-in http://local...#ab-yourTest=yourVariant
-8. Set a GU_mvt_id or GU_mvt_id_local cookie with the MVT ID that matches the test Audience and Audience Offset ([Use this calculator](https://ab-tests.netlify.app/))
-9. Check the network tab for the Ophan request _abTestRegister_ has your test and variant
+1. Ensure that you [create an A/B test](https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/tests) on _Frontend_ using the [A/B test API](https://github.com/guardian/csnx/tree/main/libs/%40guardian/ab-core#the-api).
+1. Add your test to [concurrent tests](https://github.com/guardian/frontend/blob/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts) on _Frontend_.
+1. Copy the JS file into DCR (and update to TS types) in [web/experiments/tests](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/experiments/ab-tests.ts)
+1. Add it to the test array in [src/web/experiments/ab-tests.ts](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/experiments/ab-tests.ts)
+1. Force the A/B test (ignoring canRun of A/B test and variant) with the URL opt-in http://local...#ab-yourTest=yourVariant
+1. Set a GU_mvt_id or GU_mvt_id_local cookie with the MVT ID that matches the test Audience and Audience Offset ([Use this calculator](https://ab-tests.netlify.app/))
+1. Check the network tab for the Ophan request _abTestRegister_ has your test and variant
 
 ## Gotchas
 
