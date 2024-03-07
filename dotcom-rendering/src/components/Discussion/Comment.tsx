@@ -333,14 +333,9 @@ export const Comment = ({
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (isExpanded) {
-			setAbuseReportForm(true);
-		}
-	}, [isExpanded]);
-
 	const expandComments = () => {
 		dispatch({ type: 'expandComments' });
+		setAbuseReportForm(!showAbuseReportForm);
 	};
 
 	const toggleSetShowForm = () => {
