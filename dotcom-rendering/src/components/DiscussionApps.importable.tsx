@@ -86,14 +86,31 @@ const addUsername = async (username: string): Promise<Result<string, true>> => {
 		});
 };
 
-/***
- *  Currently we are using the web handler for both authenticated and unauthenticated users.
- *  Once we have knowlege of if the user is authenticated from bridget, we can implement an apps-specific function below, to allow us to send user data to analytics.
- */
-// const reportAbuse = async (): Promise<Result<string, true>> => {
-// 	console.log('reportAbuse');
-// 	return { kind: 'error', error: 'ApiError' };
-// };
+const reportAbuse = async ({
+	commentId,
+	categoryId,
+	reason,
+	email,
+}: {
+	commentId: string;
+	categoryId: string;
+	reason?: string;
+	email?: string;
+}): Promise<Result<string, true>> => {
+	return getdiscussionClient()
+		.reportAbuse({ commentId, categoryId, reason, email })
+		.then((response) => {
+			if (response.__type == 'error') {
+				return error('NativeError');
+			} else {
+				if (response.response.errorCode) {
+					return error('ApiError');
+				}
+
+				return ok(true);
+			}
+		});
+};
 
 const mockedProfile: UserProfile = {
 	userId: 'userId',
@@ -127,17 +144,18 @@ const getUser = async (): Promise<Reader> => {
 					onReply,
 					onRecommend,
 					addUsername,
-					reportAbuse: reportAbuseWeb(undefined),
+					reportAbuse,
 					profile: userProfile,
 				};
 			} else {
+				// TODO: Handle the error properly
 				return {
 					kind: 'Reader',
 					onComment,
 					onReply,
 					onRecommend,
 					addUsername,
-					reportAbuse: reportAbuseWeb(undefined),
+					reportAbuse,
 					profile: mockedProfile,
 				};
 			}

@@ -265,22 +265,18 @@ export const reportAbuse =
 		email,
 		reason,
 	}: {
-		commentId: number;
-		categoryId: number;
+		commentId: string;
+		categoryId: string;
 		reason?: string;
 		email?: string;
 	}): Promise<Result<string, true>> => {
 		const url =
-			joinUrl(
-				options.baseUrl,
-				'comment',
-				commentId.toString(),
-				'reportAbuse',
-			) + objAsParams(defaultParams);
+			joinUrl(options.baseUrl, 'comment', commentId, 'reportAbuse') +
+			objAsParams(defaultParams);
 
 		const data = new URLSearchParams();
-		data.append('categoryId', categoryId.toString());
-		email && data.append('email', email.toString());
+		data.append('categoryId', categoryId);
+		email && data.append('email', email);
 		reason && data.append('reason', reason);
 
 		const authOptions = authStatus

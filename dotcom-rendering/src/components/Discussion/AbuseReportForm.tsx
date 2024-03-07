@@ -159,10 +159,10 @@ export const AbuseReportForm = ({
 		}
 
 		reportAbuse({
-			categoryId,
+			categoryId: categoryId.toString(),
 			reason,
 			email,
-			commentId,
+			commentId: commentId.toString(),
 		})
 			.then((response) => {
 				if (response.kind === 'error') {
