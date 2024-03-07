@@ -35,9 +35,60 @@ export const enhanceArticleType = (
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
 		: [];
 
+	// Tidy up this horror after the Oscars
+	const getOscarsNewsletter = () => {
+		if (
+			// variant1
+			true
+		) {
+			return {
+				identityName: 'film-today-variant-1',
+				name: 'Film Weekly Variant 1',
+				theme: 'news',
+				description: 'All the latest movie news, reviews and features',
+				frequency: 'Every week',
+				listId: 4144,
+				group: 'Culture',
+				successDescription: "We'll send you Film Weekly every Friday",
+			};
+		}
+
+		if (
+			// variant2
+			true
+		) {
+			return {
+				identityName: 'film-today-variant-2',
+				name: 'Film Weekly Variant 2',
+				theme: 'news',
+				description: 'All the latest movie news, reviews and features',
+				frequency: 'Every week',
+				listId: 4144,
+				group: 'Culture',
+				successDescription: "We'll send you Film Weekly every Friday",
+			};
+		}
+
+		// control
+		return {
+			identityName: 'film-today-control',
+			name: 'Film Weekly Control',
+			theme: 'news',
+			description: 'All the latest movie news, reviews and features',
+			frequency: 'Every week',
+			listId: 4144,
+			group: 'Culture',
+			successDescription: "We'll send you Film Weekly every Friday",
+		};
+	};
+
 	const enhancedBlocks = enhanceBlocks(data.blocks, format, {
 		renderingTarget,
-		promotedNewsletter: data.promotedNewsletter,
+		promotedNewsletter:
+			data.webURL ===
+			'https://www.theguardian.com/film/2023/mar/12/oscars-winners-2023-list-in-full-latest-awards-actor-best-picture'
+				? getOscarsNewsletter()
+				: data.promotedNewsletter,
 		imagesForLightbox,
 	});
 
