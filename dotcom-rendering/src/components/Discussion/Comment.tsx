@@ -340,6 +340,7 @@ export const Comment = ({
 	const toggleSetShowForm = () => {
 		if (!isExpanded) {
 			expandComments();
+			setAbuseReportForm(!showAbuseReportForm);
 		}
 		setAbuseReportForm(!showAbuseReportForm);
 	};
