@@ -162,6 +162,7 @@ export const preview = async (
 export type CommentResponse = Result<
 	| 'NetworkError'
 	| 'ApiError'
+	| 'NativeError'
 	| (ReturnType<typeof parseCommentResponse> & { kind: 'error' })['error'],
 	number
 >;
@@ -198,7 +199,7 @@ export const reply =
 	async (
 		shortUrl: string,
 		body: string,
-		parentCommentId: number,
+		parentCommentId: string,
 	): Promise<CommentResponse> => {
 		const url =
 			joinUrl(
@@ -206,7 +207,7 @@ export const reply =
 				'discussion',
 				shortUrl,
 				'comment',
-				parentCommentId.toString(),
+				parentCommentId,
 				'reply',
 			) + objAsParams(defaultParams);
 		const data = new URLSearchParams();
@@ -264,22 +265,18 @@ export const reportAbuse =
 		email,
 		reason,
 	}: {
-		commentId: number;
-		categoryId: number;
+		commentId: string;
+		categoryId: string;
 		reason?: string;
 		email?: string;
 	}): Promise<Result<string, true>> => {
 		const url =
-			joinUrl(
-				options.baseUrl,
-				'comment',
-				commentId.toString(),
-				'reportAbuse',
-			) + objAsParams(defaultParams);
+			joinUrl(options.baseUrl, 'comment', commentId, 'reportAbuse') +
+			objAsParams(defaultParams);
 
 		const data = new URLSearchParams();
-		data.append('categoryId', categoryId.toString());
-		email && data.append('email', email.toString());
+		data.append('categoryId', categoryId);
+		email && data.append('email', email);
 		reason && data.append('reason', reason);
 
 		const authOptions = authStatus
@@ -306,14 +303,10 @@ export const reportAbuse =
 
 export const recommend =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	async (commentId: number): Promise<boolean> => {
+	async (commentId: string): Promise<boolean> => {
 		const url =
-			joinUrl(
-				options.baseUrl,
-				'comment',
-				commentId.toString(),
-				'recommend',
-			) + objAsParams(defaultParams);
+			joinUrl(options.baseUrl, 'comment', commentId, 'recommend') +
+			objAsParams(defaultParams);
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
