@@ -990,12 +990,12 @@ const headingLineLight: PaletteFunction = (format: ArticleFormat) => {
 		case Pillar.Culture:
 		case Pillar.Lifestyle:
 			return pillarPalette(format.theme, 200);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[200];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
-		default:
-			return sourcePalette.neutral[7];
 	}
 };
 
@@ -1007,12 +1007,12 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 		case Pillar.Culture:
 		case Pillar.Lifestyle:
 			return pillarPalette(format.theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[700];
-		default:
-			return sourcePalette.neutral[86];
 	}
 };
 

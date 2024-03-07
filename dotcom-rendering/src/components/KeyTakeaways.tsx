@@ -7,6 +7,10 @@ import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { KeyTakeaway } from '../types/content';
 
+const keyTakeawayStyles = css`
+	padding-top: 8px;
+`;
+
 const headingStyles = css`
 	${headline.xsmall({ fontWeight: 'medium' })};
 	padding: 2px 0px;
@@ -27,13 +31,15 @@ const headingLineStyles = css`
 interface CommonProps {
 	format: ArticleFormat;
 	ajaxUrl: string;
-	host: string;
+	host?: string;
 	pageId: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	abTests: ServerSideTests;
 	switches: Switches;
 	editionId: EditionId;
+	hideCaption?: boolean;
+	starRating?: number;
 }
 
 interface KeyTakeawaysProps extends CommonProps {
@@ -57,13 +63,15 @@ const KeyTakeawayComponent = ({
 	abTests,
 	editionId,
 	titleIndex,
+	hideCaption,
+	starRating,
 }: KeyTakeawayProps) => {
 	return (
-		<>
+		<li css={keyTakeawayStyles}>
 			<hr css={headingLineStyles}></hr>
 			<h2 css={headingStyles}>
 				<span css={headingIndexStyles}>{`${titleIndex}. `}</span>
-				keyTakeaway.title
+				{keyTakeaway.title}
 			</h2>
 			{keyTakeaway.body.map((element, index) => (
 				<RenderArticleElement
@@ -74,7 +82,7 @@ const KeyTakeawayComponent = ({
 					ajaxUrl={ajaxUrl}
 					host={host}
 					index={index}
-					isMainMedia={index === 0}
+					isMainMedia={false}
 					pageId={pageId}
 					webTitle={keyTakeaway.title}
 					isAdFreeUser={isAdFreeUser}
@@ -82,9 +90,11 @@ const KeyTakeawayComponent = ({
 					switches={switches}
 					abTests={abTests}
 					editionId={editionId}
+					hideCaption={hideCaption}
+					starRating={starRating}
 				/>
 			))}
-		</>
+		</li>
 	);
 };
 
@@ -99,9 +109,11 @@ export const KeyTakeaways = ({
 	switches,
 	abTests,
 	editionId,
+	hideCaption,
+	starRating,
 }: KeyTakeawaysProps) => {
 	return (
-		<>
+		<ol>
 			{keyTakeaways.map((keyTakeaway, index) => (
 				<KeyTakeawayComponent
 					keyTakeaway={keyTakeaway}
@@ -115,8 +127,10 @@ export const KeyTakeaways = ({
 					abTests={abTests}
 					editionId={editionId}
 					titleIndex={index + 1}
+					hideCaption={hideCaption}
+					starRating={starRating}
 				/>
 			))}
-		</>
+		</ol>
 	);
 };
