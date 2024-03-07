@@ -112,20 +112,13 @@ const reportAbuse = async ({
 		});
 };
 
-const mockedProfile: UserProfile = {
-	userId: 'userId',
-	displayName: 'displayName',
-	webUrl: 'webUrl',
-	apiUrl: 'apiUrl',
-	avatar: 'avatar',
-	secureAvatarUrl: 'secureAvatarUrl',
-	badge: [],
-};
-
 const getUser = async (): Promise<Reader> => {
 	return getdiscussionClient()
 		.getUserProfile()
 		.then((response) => {
+			// TODO: I don't think we're handling a discussion API
+			// error for this request in the Bridget API
+
 			if (response.__type === 'profile') {
 				const profile = response.profile;
 				const userProfile = {
@@ -149,15 +142,7 @@ const getUser = async (): Promise<Reader> => {
 				};
 			} else {
 				// TODO: Handle the error properly
-				return {
-					kind: 'Reader',
-					onComment,
-					onReply,
-					onRecommend,
-					addUsername,
-					reportAbuse,
-					profile: mockedProfile,
-				};
+				throw error('NativeError');
 			}
 		});
 };
