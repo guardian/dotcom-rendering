@@ -38,7 +38,9 @@ export const images: [
 	ImageBlockElement,
 ] = [
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'showcase',
 		media: {
 			allImages: [
 				{
@@ -104,12 +106,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Land Rover parked somewhere on the Roseland Heritage Coast, Cornwall. Image taken at dusk.',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'showcase',
+		elementId: '09c147ca-e08c-44ac-9317-c38dc2d011af',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -350,10 +347,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '0e0b46f3-a809-4a41-9680-78baf77a5f43',
+		data: {
+			alt: 'Land Rover parked somewhere on the Roseland Heritage Coast, Cornwall. Image taken at dusk.',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'inline',
 		media: {
 			allImages: [
 				{
@@ -419,12 +421,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Kudhva, architectural hideouts on the north Cornish coast',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'inline',
+		elementId: '8ce874c6-0e2b-43a0-b1e9-bb52c355e8fa',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -665,10 +662,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'ce748a36-da4a-4d6e-8e42-162e02e9da09',
+		data: {
+			alt: 'Kudhva, architectural hideouts on the north Cornish coast',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'inline',
 		media: {
 			allImages: [
 				{
@@ -734,12 +736,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'The engine House at Kudhva, built in 1871, at sunset over Gull Rock',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'inline',
+		elementId: 'ba4e5b22-2463-4040-b4f1-f6db64dce91e',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -980,10 +977,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '45b982f5-133f-4f09-87cd-586d6ed36927',
+		data: {
+			alt: 'The engine House at Kudhva, built in 1871, at sunset over Gull Rock',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -1049,12 +1051,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Sophie Hellyer',
-			credit: 'Photograph: Cat Vinton',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: '58c5cc84-942c-477f-a01e-50c849e6df01',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -1295,10 +1292,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'fdaf0828-57de-41e1-867a-5ddfcd067f4d',
+		data: {
+			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Sophie Hellyer',
+			credit: 'Photograph: Cat Vinton',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -1364,12 +1366,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Jack Stocker',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: 'f2c8b084-0081-4626-9ec8-a4148aa8b1a2',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -1610,10 +1607,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '594eb68f-4504-494a-9e4f-b414b976a55b',
+		data: {
+			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Jack Stocker',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -1679,12 +1681,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Sophie Hellyer',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: 'db3cfa62-98ae-4dab-9408-923e3e14243d',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -1925,10 +1922,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '7e42067e-ce9d-4ae6-94ed-a1ff2f58bb5d',
+		data: {
+			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Sophie Hellyer',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: true,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -1994,12 +1996,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Marcus Rowe',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: true,
-		role: 'halfWidth',
+		elementId: '58b15cd7-a42a-4089-b0ba-44d3470dfa0c',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -2240,10 +2237,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'e89292b3-b6e2-44d7-9807-c5a1e0605b64',
+		data: {
+			alt: 'Shot at Kudhva and Trebarwith Strand with the locals Marcus Rowe',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'thumbnail',
 		media: {
 			allImages: [
 				{
@@ -2299,12 +2301,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Home. My rig Series 3 Land-Rover',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'thumbnail',
+		elementId: '6236ffcc-63da-4515-b5ae-4518697ccc77',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -2545,10 +2542,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'b76eaddd-1140-448d-b58e-e4e01a4e6c2b',
+		data: {
+			alt: 'Home. My rig Series 3 Land-Rover',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'showcase',
 		media: {
 			allImages: [
 				{
@@ -2614,12 +2616,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Commando Ridge, Penwith Peninsular. A climber’s paradise',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'showcase',
+		elementId: '42bd08af-2c15-4eef-afad-ff6d729eefa6',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -2860,10 +2857,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '484ed157-2380-40f1-9319-0b7637cd5ce7',
+		data: {
+			alt: 'Commando Ridge, Penwith Peninsular. A climber’s paradise',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -2929,12 +2931,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Green pathways, rocky pools and turquoise waters that shape Cornwall’s 400 miles of coastline',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: 'bb19e2cb-445b-4f45-9232-c40cd7ab0524',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -3175,10 +3172,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'e1a87949-e3d9-44c6-8461-42771dd35152',
+		data: {
+			alt: 'Green pathways, rocky pools and turquoise waters that shape Cornwall’s 400 miles of coastline',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -3244,12 +3246,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Green pathways, rocky pools and turquoise waters that shape Cornwall’s 400 miles of coastline',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: '1bb14fee-2ee9-424c-9708-4fd33892341d',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -3490,10 +3487,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '59d1fdbe-6ccf-46e9-866d-b709ab3e7a15',
+		data: {
+			alt: 'Green pathways, rocky pools and turquoise waters that shape Cornwall’s 400 miles of coastline',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: true,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'inline',
 		media: {
 			allImages: [
 				{
@@ -3559,12 +3561,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: '10.The Atlantic Ocean North coast of Cornwall',
-			credit: 'Photograph: Cat Vinton',
-		},
-		displayCredit: true,
-		role: 'inline',
+		elementId: '22802315-3390-4f99-be4a-89b42d1f3f45',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -3805,10 +3802,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '9ed3333f-b5e2-4db1-9bf0-889e8cd24fd5',
+		data: {
+			alt: '10.The Atlantic Ocean North coast of Cornwall',
+			credit: 'Photograph: Cat Vinton',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'immersive',
 		media: {
 			allImages: [
 				{
@@ -3874,12 +3876,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Storm Francis raging across the ocean, 24.08.20, Cornwall, UK.',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'immersive',
+		elementId: '2291376f-f943-42a2-89f7-500d3182e53c',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -4120,10 +4117,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'bf4647e1-0be4-48ff-a33c-41a9cba43bdc',
+		data: {
+			alt: 'Storm Francis raging across the ocean, 24.08.20, Cornwall, UK.',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'inline',
 		media: {
 			allImages: [
 				{
@@ -4189,12 +4191,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'White horses carried on the on-shore wind, Dollar Cove, on the Lizard',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'inline',
+		elementId: '62029de7-e57f-413f-8e70-38e5b060287b',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -4435,10 +4432,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'd4336991-71cb-472f-83cf-11109a086c23',
+		data: {
+			alt: 'White horses carried on the on-shore wind, Dollar Cove, on the Lizard',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -4504,12 +4506,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Logan Rock, Cornwall',
-			credit: 'Photograph: Cat Vinton',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: '64488bb9-9583-4134-9c9f-8a679435fc5f',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -4750,10 +4747,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '50c26100-ab5b-47ce-9694-259beb3ee5d1',
+		data: {
+			alt: 'Logan Rock, Cornwall',
+			credit: 'Photograph: Cat Vinton',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -4819,13 +4821,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Logan Rock, Cornwall',
-			caption: 'Logan Rock, Cornwall',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: '5d3bc5b9-9c15-4fc0-b40d-463cc5822667',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -5066,10 +5062,16 @@ export const images: [
 				],
 			},
 		],
-		elementId: '6b424b6e-22d3-41c4-8b3f-00aa0be291c1',
+		data: {
+			alt: 'Logan Rock, Cornwall',
+			caption: 'Logan Rock, Cornwall',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'inline',
 		media: {
 			allImages: [
 				{
@@ -5135,12 +5137,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Joya Burrow, The Right to Roam Films Shot for Finisterre, at Kudhva and Trebarwith Strand',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'inline',
+		elementId: '2bdd37ee-b486-48e8-9117-89e31496d302',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -5381,10 +5378,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '3007c687-6fac-4626-bbc7-c24995abbfd2',
+		data: {
+			alt: 'Joya Burrow, The Right to Roam Films Shot for Finisterre, at Kudhva and Trebarwith Strand',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'showcase',
 		media: {
 			allImages: [
 				{
@@ -5450,12 +5452,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'showcase',
+		elementId: 'e7fc4f62-dd83-482b-ad57-636f58d2430c',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -5696,10 +5693,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'c9a17a8d-50b0-4849-b37e-15c29e24b2db',
+		data: {
+			alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'inline',
 		media: {
 			allImages: [
 				{
@@ -5765,12 +5767,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'inline',
+		elementId: '85787bae-c7d4-4af3-85f7-3ce6d7cb74d5',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -6011,10 +6008,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'a7dd3b4d-ff13-4333-bf7a-fdeeba552e8f',
+		data: {
+			alt: 'Robin Hanbury-Tenison, Brown Willy, Bodmin Moor',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -6080,12 +6082,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Sunrise at Towan Beach',
-			credit: 'Photograph: Cat Vinton',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: '8e50a0d6-9894-457b-b0f6-7651594752ff',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -6326,10 +6323,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '0ba86c7a-0248-46bb-94a7-6e768578522e',
+		data: {
+			alt: 'Sunrise at Towan Beach',
+			credit: 'Photograph: Cat Vinton',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'halfWidth',
 		media: {
 			allImages: [
 				{
@@ -6395,12 +6397,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'The full Corn moon, Penwith Heritage coast',
-			credit: 'Photograph: Cat Vinton',
-		},
-		displayCredit: false,
-		role: 'halfWidth',
+		elementId: 'e64e3c2c-c96a-452d-a232-2c5f30c48406',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -6641,10 +6638,15 @@ export const images: [
 				],
 			},
 		],
-		elementId: '188c1e27-2e0d-4dc7-ba5f-605f4a53d2e4',
+		data: {
+			alt: 'The full Corn moon, Penwith Heritage coast',
+			credit: 'Photograph: Cat Vinton',
+		},
 	},
 	{
+		displayCredit: false,
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+		role: 'inline',
 		media: {
 			allImages: [
 				{
@@ -6710,12 +6712,7 @@ export const images: [
 				},
 			],
 		},
-		data: {
-			alt: 'Home. My rig Series 3 Land-Rover',
-			credit: 'Photograph: Cat Vinton/The Guardian',
-		},
-		displayCredit: false,
-		role: 'inline',
+		elementId: 'c0cf8aff-3a73-4b28-8924-9284ca38d2c6',
 		imageSources: [
 			{
 				weighting: 'inline',
@@ -6956,6 +6953,9 @@ export const images: [
 				],
 			},
 		],
-		elementId: 'f18cbc85-93aa-4bfe-8c4e-351889bf37b0',
+		data: {
+			alt: 'Home. My rig Series 3 Land-Rover',
+			credit: 'Photograph: Cat Vinton/The Guardian',
+		},
 	},
 ];
