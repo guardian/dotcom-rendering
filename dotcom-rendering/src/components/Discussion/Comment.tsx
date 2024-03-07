@@ -17,6 +17,7 @@ import type {
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
+import { useDispatch } from '../DispatchContext';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -329,7 +330,19 @@ export const Comment = ({
 	);
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const [pickError, setPickError] = useState('');
-	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
+
+	const dispatch = useDispatch();
+
+	const expandComments = () => {
+		dispatch({ type: 'expandComments' });
+	};
+
+	const toggleSetShowForm = () => {
+		if (!isExpanded) {
+			expandComments();
+		}
+		setAbuseReportForm(!showAbuseReportForm);
+	};
 
 	const pick = async (staffUser: Staff) => {
 		setPickError('');
