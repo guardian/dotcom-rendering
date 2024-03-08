@@ -37,7 +37,9 @@ export const enhanceArticleType = (
 		: [];
 
 	// Tidy up this horror after the Oscars
-	const getOscarsNewsletter = (): Newsletter | undefined => {
+	const getOscarsNewsletter = (
+		promotedNewsletter: Newsletter | undefined,
+	): Newsletter | undefined => {
 		if (
 			// variant1
 			data.config.abTests.FilmTodayOscars1Variant
@@ -86,7 +88,7 @@ export const enhanceArticleType = (
 			};
 		}
 
-		return undefined;
+		return promotedNewsletter;
 	};
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, format, {
@@ -94,7 +96,7 @@ export const enhanceArticleType = (
 		promotedNewsletter:
 			data.webURL ===
 			'https://www.theguardian.com/film/2023/mar/12/oscars-winners-2023-list-in-full-latest-awards-actor-best-picture'
-				? getOscarsNewsletter()
+				? getOscarsNewsletter(data.promotedNewsletter)
 				: data.promotedNewsletter,
 		imagesForLightbox,
 	});
