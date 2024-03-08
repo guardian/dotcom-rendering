@@ -475,6 +475,32 @@ const parse =
 				return parseAtom(element, atoms, context.docParser);
 			}
 
+			case ElementType.LIST: {
+				const listTypeData = element.listTypeData;
+
+				if (!listTypeData) {
+					return Result.err('No listTypeData on list element');
+				}
+
+				const parseTitle = (
+					title: string,
+				): Array<Result<string, BodyElement>> => {
+					const doc = context.docParser(`<h2>${title}`);
+					return flattenTextElement(doc).map((elem) =>
+						Result.ok(elem),
+					);
+				};
+
+				const parser = parse(context, campaigns, atoms);
+
+				return listTypeData.items.flatMap((item) => {
+					const titleElements = item.title
+						? parseTitle(item.title)
+						: [];
+					return titleElements.concat(item.elements.flatMap(parser));
+				});
+			}
+
 			default:
 				return Result.err(
 					`I'm afraid I don't understand the element I was given: ${element.type}`,
