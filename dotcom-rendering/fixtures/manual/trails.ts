@@ -2,6 +2,20 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { DCRFrontCard } from '../../src/types/front';
 import { discussionApiUrl } from './discussionApiUrl';
 
+/** Helper to get x number of sublinks */
+const getSublinks = (number: number, format?: ArticleFormat) =>
+	Array.from({ length: number }, (_, i) => ({
+		url: 'https://www.theguardian.com',
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+			...format,
+		},
+		headline: `Headline ${i + 1}`,
+		kickerText: 'Kicker',
+	}));
+
 export const trails: [
 	DCRFrontCard,
 	DCRFrontCard,
@@ -42,39 +56,7 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@1',
 		showQuotedHeadline: true,
-
-		supportingContent: [
-			{
-				url: 'https://www.theguardian.com',
-				format: {
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				},
-				headline: 'Headline 1',
-				kickerText: 'Kicker',
-			},
-			{
-				url: 'https://www.theguardian.com',
-				format: {
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				},
-				headline: 'Headline 2',
-				kickerText: 'Kicker',
-			},
-			{
-				url: 'https://www.theguardian.com',
-				format: {
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				},
-				headline: 'Headline 3',
-				kickerText: 'Kicker',
-			},
-		],
+		supportingContent: getSublinks(3),
 		mainMedia: undefined,
 		isExternalLink: false,
 		showLivePlayable: false,
@@ -546,38 +528,7 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@18',
 		showQuotedHeadline: false,
-		supportingContent: [
-			{
-				url: 'https://www.theguardian.com',
-				format: {
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				},
-				headline: 'Headline 1',
-				kickerText: 'Kicker',
-			},
-			{
-				url: 'https://www.theguardian.com',
-				format: {
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				},
-				headline: 'Headline 2',
-				kickerText: 'Kicker',
-			},
-			{
-				url: 'https://www.theguardian.com',
-				format: {
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: Pillar.News,
-				},
-				headline: 'Headline 3',
-				kickerText: 'Kicker',
-			},
-		],
+		supportingContent: getSublinks(8),
 		mainMedia: {
 			type: 'Video',
 			id: 'abcdef',
