@@ -17,7 +17,6 @@ import type {
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
-import { useDispatch } from '../DispatchContext';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -331,17 +330,8 @@ export const Comment = ({
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const [pickError, setPickError] = useState('');
 
-	const dispatch = useDispatch();
-
-	const expandComments = () => {
-		dispatch({ type: 'expandComments' });
-	};
-
 	const toggleSetShowForm = () => {
 		setAbuseReportForm(!showAbuseReportForm);
-		if (!isExpanded) {
-			expandComments();
-		}
 	};
 
 	const pick = async (staffUser: Staff) => {
@@ -784,25 +774,27 @@ export const Comment = ({
 										<></>
 									)}
 									<Space amount={4} />
-									<div
-										css={[
-											buttonLinkBaseStyles,
-											css`
-												button {
-													${textSans.xxsmall()}
-												}
-											`,
-										]}
-									>
-										<Button
-											priority="subdued"
-											size="small"
-											onClick={toggleSetShowForm}
-											data-link-name="Open report abuse"
+									{isExpanded && (
+										<div
+											css={[
+												buttonLinkBaseStyles,
+												css`
+													button {
+														${textSans.xxsmall()}
+													}
+												`,
+											]}
 										>
-											Report
-										</Button>
-									</div>
+											<Button
+												priority="subdued"
+												size="small"
+												onClick={toggleSetShowForm}
+												data-link-name="Open report abuse"
+											>
+												Report
+											</Button>
+										</div>
+									)}
 									{showAbuseReportForm && (
 										<div
 											css={css`
