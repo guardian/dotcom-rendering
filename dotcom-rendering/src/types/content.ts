@@ -578,6 +578,7 @@ export interface YoutubeBlockElement {
 	assetId: string;
 	mediaTitle: string;
 	id: string;
+	elementId: string;
 	channelId?: string;
 	duration?: number;
 	posterImage?: {
