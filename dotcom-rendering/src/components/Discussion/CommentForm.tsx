@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { space, text, textSans, until } from '@guardian/source-foundations';
 import { Link, TextArea } from '@guardian/source-react-components';
 import { InfoSummary } from '@guardian/source-react-components-development-kitchen';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type {
 	CommentType,
 	ReplyType,
