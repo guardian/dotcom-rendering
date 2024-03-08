@@ -3,6 +3,7 @@ import { abTestTest } from './tests/ab-test-test';
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIma } from './tests/integrate-ima';
 import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
+import { oscarsNewsletterEmbed } from './tests/oscars-newsletter-embed';
 import { sectionAdDensity } from './tests/section-ad-density';
 import { signInGateAlternativeWording } from './tests/sign-in-gate-alternative-wording';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
@@ -19,4 +20,5 @@ export const tests: ABTest[] = [
 	integrateIma,
 	mpuWhenNoEpic,
 	sectionAdDensity,
+	oscarsNewsletterEmbed,
 ];
