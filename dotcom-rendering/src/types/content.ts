@@ -331,7 +331,7 @@ interface QAndAExplainerBlockElement {
 
 interface ListItem {
 	title?: string;
-	list: FEElement[];
+	elements: FEElement[];
 }
 
 export interface ListBlockElement {

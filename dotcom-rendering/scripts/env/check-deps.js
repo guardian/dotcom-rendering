@@ -8,17 +8,9 @@ if (pkg.devDependencies) {
 	process.exit(1);
 }
 
-/**
- * We don't check packages that are not semver-compatible
- */
-const exceptions = /** @type {const} */ ([
-	'github:guardian/babel-plugin-px-to-rem#v0.1.0',
-	'npm:@guardian/ophan-tracker-js@2.1.0-next.3',
-]);
-
-const mismatches = Object.entries(pkg.dependencies)
-	.filter(([, version]) => !exceptions.includes(version))
-	.filter(([, version]) => !semver.valid(version));
+const mismatches = Object.entries(pkg.dependencies).filter(
+	([, version]) => !semver.valid(version),
+);
 
 if (mismatches.length !== 0) {
 	warn('dotcom-rendering dependencies should be pinned.');

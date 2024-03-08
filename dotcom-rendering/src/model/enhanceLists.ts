@@ -4,12 +4,13 @@ type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 
 const constructKeyTakeaway =
 	(enhanceElements: ElementsEnhancer) =>
-	({ title, list }: { title?: string; list: FEElement[] }) => {
+	({ title, elements }: { title?: string; elements: FEElement[] }) => {
+		// if the element is missing its title for any reason, we will skip it
 		if (title !== undefined) {
 			return [
 				{
 					title,
-					body: enhanceElements(list),
+					body: enhanceElements(elements),
 				},
 			];
 		}
@@ -18,12 +19,13 @@ const constructKeyTakeaway =
 
 const constructQAndAExplainer =
 	(enhanceElements: ElementsEnhancer) =>
-	({ title, list }: { title?: string; list: FEElement[] }) => {
+	({ title, elements }: { title?: string; elements: FEElement[] }) => {
+		// if the element is missing its title for any reason, we will skip it
 		if (title !== undefined) {
 			return [
 				{
 					title,
-					body: enhanceElements(list),
+					body: enhanceElements(elements),
 				},
 			];
 		}
@@ -58,7 +60,7 @@ const enhanceListBlockElement = (
 		 * and return the body elements.
 		 */
 		default:
-			return element.items.flatMap((item) => item.list);
+			return element.items.flatMap((item) => item.elements);
 	}
 };
 

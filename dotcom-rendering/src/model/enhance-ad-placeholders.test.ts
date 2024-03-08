@@ -3,6 +3,7 @@ import type {
 	AdPlaceholderBlockElement,
 	FEElement,
 	ImageBlockElement,
+	SubheadingBlockElement,
 	TextBlockElement,
 } from '../types/content';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
@@ -32,6 +33,12 @@ const getImageElement = (): ImageBlockElement => ({
 	elementId: '12345',
 });
 
+const getSubheadingElement = (): SubheadingBlockElement => ({
+	_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+	elementId: 'mockId',
+	html: "<h2 id='i-am-a-subheading'>I am a subheading.</h2>",
+});
+
 const elementIsAdPlaceholder = (
 	element: FEElement,
 ): element is AdPlaceholderBlockElement =>
@@ -50,7 +57,7 @@ describe('Enhancing ad placeholders', () => {
 		{ paragraphs: 12, expectedPositions: [3, 10] },
 		{
 			paragraphs: 16,
-			expectedPositions: [3, 10, 17],
+			expectedPositions: [3, 10],
 		},
 		{
 			paragraphs: 87,
@@ -61,7 +68,7 @@ describe('Enhancing ad placeholders', () => {
 		{
 			paragraphs: 88,
 			expectedPositions: [
-				3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87, 94, 101,
+				3, 10, 17, 24, 31, 38, 45, 52, 59, 66, 73, 80, 87, 94,
 			],
 		},
 		{
@@ -98,7 +105,7 @@ describe('Enhancing ad placeholders', () => {
 		},
 	);
 
-	describe('should not insert an ad placeholder after a non text element', () => {
+	describe('should not insert an ad placeholder before an image element', () => {
 		const threeParagraphs = getTestParagraphElements(3);
 
 		const elements = [
@@ -118,7 +125,31 @@ describe('Enhancing ad placeholders', () => {
 			elementIsAdPlaceholder(el) ? [idx] : [],
 		);
 
-		// Expect one placeholder to be present after the third paragraph only
-		expect(placeholderIndices).toEqual([3]);
+		// Expect one placeholder to be present after the fourth element only
+		expect(placeholderIndices).toEqual([4]);
+	});
+
+	describe('should not insert an ad placeholder after an element which is not an image or text', () => {
+		const threeParagraphs = getTestParagraphElements(3);
+
+		const elements = [
+			...threeParagraphs,
+			getSubheadingElement(),
+			...threeParagraphs,
+		];
+
+		const input: FEElement[] = elements;
+
+		const output = enhanceAdPlaceholders(exampleFormat, 'Apps')(input);
+		const outputPlaceholders = output.filter(elementIsAdPlaceholder);
+
+		expect(outputPlaceholders.length).toEqual(1);
+
+		const placeholderIndices = output.flatMap((el, idx) =>
+			elementIsAdPlaceholder(el) ? [idx] : [],
+		);
+
+		// Expect one placeholder to be present after the fifth element only
+		expect(placeholderIndices).toEqual([5]);
 	});
 });

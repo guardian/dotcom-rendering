@@ -235,6 +235,7 @@ export const CommentForm = ({
 	setPreviewBody,
 }: Props) => {
 	const [isActive, setIsActive] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(false);
 
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -324,6 +325,8 @@ export const CommentForm = ({
 	};
 
 	const submitForm = async () => {
+		if (isDisabled) return;
+		setIsDisabled(true);
 		setError('');
 
 		const body = textAreaRef.current?.value;
@@ -412,6 +415,7 @@ export const CommentForm = ({
 				resetForm();
 			}
 		}
+		setIsDisabled(false);
 	};
 
 	const submitUserName = async (userName: string) => {

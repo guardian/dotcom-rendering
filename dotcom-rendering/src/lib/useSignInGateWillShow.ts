@@ -1,3 +1,4 @@
+import type { CountryCode } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type {
 	CurrentSignInGateABTest,
@@ -14,6 +15,7 @@ type Props = {
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
+	currentLocaleCode: CountryCode | undefined;
 };
 /**
  * @description
@@ -27,6 +29,7 @@ export const useSignInGateWillShow = ({
 	tags,
 	isPaidContent,
 	isPreview,
+	currentLocaleCode,
 }: Props): boolean | undefined => {
 	const [gateVariant, setGateVariant] = useState<
 		SignInGateComponent | null | undefined
@@ -58,6 +61,7 @@ export const useSignInGateWillShow = ({
 					tags,
 					isPaidContent,
 					isPreview,
+					currentLocaleCode,
 				})
 				.then(setCanShowGate);
 		}
@@ -70,6 +74,7 @@ export const useSignInGateWillShow = ({
 		tags,
 		isPaidContent,
 		isPreview,
+		currentLocaleCode,
 	]);
 
 	return canShowGate && !!gateVariant && !!gateVariant.gate;

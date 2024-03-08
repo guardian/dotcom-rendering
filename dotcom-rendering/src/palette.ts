@@ -4816,6 +4816,34 @@ const discussionReportBackgroundLight: PaletteFunction = () =>
 const discussionReportBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[0];
 
+const discussionReportAbuseFormLabelText: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const discussionReportAbuseFormLabelTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const discussionReportBorder: PaletteFunction = () => sourcePalette.neutral[38];
+
+const discussionReportBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
+const discussionReportButton: PaletteFunction = () => sourcePalette.brand[400];
+
+const discussionReportButtonDark: PaletteFunction = () =>
+	sourcePalette.brand[600];
+
+const discussionReportErrorText: PaletteFunction = () =>
+	sourcePalette.error[400];
+
+const discussionReportErrorTextDark: PaletteFunction = () =>
+	sourcePalette.error[500];
+
+const discussionReportSuccessText: PaletteFunction = () =>
+	sourcePalette.success[400];
+
+const discussionReportSuccessTextDark: PaletteFunction = () =>
+	sourcePalette.success[500];
+
 const discussionBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 const discussionBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
@@ -5871,6 +5899,26 @@ const paletteColours = {
 	'--discussion-report-background': {
 		light: discussionReportBackgroundLight,
 		dark: discussionReportBackgroundDark,
+	},
+	'--discussion-report-label-text': {
+		light: discussionReportAbuseFormLabelText,
+		dark: discussionReportAbuseFormLabelTextDark,
+	},
+	'--discussion-report-border': {
+		light: discussionReportBorder,
+		dark: discussionReportBorderDark,
+	},
+	'--discussion-report-button': {
+		light: discussionReportButton,
+		dark: discussionReportButtonDark,
+	},
+	'--discussion-report-error-text': {
+		light: discussionReportErrorText,
+		dark: discussionReportErrorTextDark,
+	},
+	'--discussion-report-success-text': {
+		light: discussionReportSuccessText,
+		dark: discussionReportSuccessTextDark,
 	},
 	'--discussion-border': {
 		light: discussionBorderLight,

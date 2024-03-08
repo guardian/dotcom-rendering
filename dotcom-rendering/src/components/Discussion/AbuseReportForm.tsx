@@ -1,7 +1,16 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
-import { Button, SvgCross } from '@guardian/source-react-components';
+import {
+	Button,
+	InlineError,
+	InlineSuccess,
+	Option,
+	Select,
+	SvgCross,
+	TextArea,
+	TextInput,
+} from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
@@ -26,9 +35,28 @@ const formWrapper = css`
 	${textSans.xxsmall()};
 `;
 
-const labelStyles = css`
-	color: ${schemedPalette('--discussion-accent-text')};
-	${textSans.small({ fontWeight: 'bold' })}
+const labelColour = schemedPalette('--discussion-report-label-text');
+
+const errorColour = schemedPalette('--discussion-report-error-text');
+
+const buttonStyles = css`
+	background-color: ${schemedPalette('--discussion-report-button')};
+`;
+
+const errorBorderColour = css`
+	select,
+	input,
+	textarea {
+		border: 1px solid ${schemedPalette('--discussion-report-error-text')};
+	}
+`;
+
+const borderColour = css`
+	select,
+	input,
+	textarea {
+		border: 1px solid ${schemedPalette('--discussion-report-border')};
+	}
 `;
 
 const inputWrapper = css`
@@ -46,13 +74,25 @@ const inputWrapper = css`
 		background-color: ${schemedPalette('--discussion-report-background')};
 		min-height: ${space[5]}px;
 		width: 75%;
-		border: 1px solid ${schemedPalette('--discussion-border')};
 		color: inherit;
 	}
 `;
 
-const errorMessageStyles = css`
-	color: red;
+const svgStyles = css`
+	div {
+		svg {
+			right: 80px;
+			fill: ${labelColour};
+		}
+	}
+`;
+
+const errorSvgStyles = css`
+	span[role='alert'] {
+		svg {
+			fill: ${errorColour};
+		}
+	}
 `;
 
 type Props = {
@@ -177,57 +217,76 @@ export const AbuseReportForm = ({
 			});
 	};
 
-	/** If the "Other" category is selected, you must supply a reason */
+	/** If the "Other" or the "Legal Issue" categories are selected, you must supply a reason */
+	const legalIssueCategoryId = 3;
 	const otherCategoryId = 9;
-	const isReasonRequired = formVariables.categoryId === otherCategoryId;
+	const isReasonRequired =
+		formVariables.categoryId === otherCategoryId ||
+		formVariables.categoryId === legalIssueCategoryId;
 
 	return (
 		<div aria-modal="true" ref={modalRef}>
 			<form css={formWrapper} onSubmit={onSubmit}>
-				<div css={inputWrapper}>
-					<label css={labelStyles} htmlFor="category">
-						Category
-					</label>
-					<select
-						name="category"
-						id="category"
-						onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+				<div
+					css={[
+						inputWrapper,
+						svgStyles,
+						errorSvgStyles,
+						errors.categoryId ? errorBorderColour : borderColour,
+					]}
+				>
+					<Select
+						label={'Category'}
+						onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
 							setFormVariables({
 								...formVariables,
 								categoryId: Number(e.target.value),
-							})
-						}
+							});
+
+							errors.categoryId = '';
+							setErrors(errors);
+						}}
 						value={formVariables.categoryId}
-						// TODO: use ref once forwardRef is implemented @guardian/src-button
-						// ref={firstElement}
+						theme={{
+							textLabel: labelColour,
+							textOptional: labelColour,
+							textError: errorColour,
+							borderError: errorColour,
+						}}
+						error={
+							errors.categoryId ? errors.categoryId : undefined
+						}
 					>
-						<option value="0">Please select</option>
-						<option value="1">Personal abuse</option>
-						<option value="2">Off topic</option>
-						<option value="3">Legal issue</option>
-						<option value="4">Trolling</option>
-						<option value="5">Hate speech</option>
-						<option value="6">
+						<Option value="0">Please select</Option>
+						<Option value="1">Personal abuse</Option>
+						<Option value="2">Off topic</Option>
+						<Option value={legalIssueCategoryId}>
+							Legal issue
+						</Option>
+						<Option value="4">Trolling</Option>
+						<Option value="5">Hate speech</Option>
+						<Option value="6">
 							Offensive/Threatening language
-						</option>
-						<option value="7">Copyright</option>
-						<option value="8">Spam</option>
-						<option value={otherCategoryId}>Other</option>
-					</select>
-					{!!errors.categoryId && (
-						<span css={errorMessageStyles}>
-							{errors.categoryId}
-						</span>
-					)}
+						</Option>
+						<Option value="7">Copyright</Option>
+						<Option value="8">Spam</Option>
+						<Option value={otherCategoryId}>Other</Option>
+					</Select>
 				</div>
 
-				<div css={inputWrapper}>
-					<label css={labelStyles} htmlFor="reason">
-						Reason {isReasonRequired ? `` : `(optional)`}
-					</label>
-					<textarea
-						name="reason"
+				<div
+					css={[
+						inputWrapper,
+						svgStyles,
+						errorSvgStyles,
+						errors.reason ? errorBorderColour : borderColour,
+					]}
+				>
+					<TextArea
 						id="reason"
+						size={'medium'}
+						label={'Reason'}
+						optional={!isReasonRequired}
 						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
 							setFormVariables({
 								...formVariables,
@@ -236,20 +295,29 @@ export const AbuseReportForm = ({
 						}
 						value={formVariables.reason}
 						required={isReasonRequired}
-					></textarea>
-					{!!errors.reason && (
-						<span css={errorMessageStyles}>{errors.reason}</span>
-					)}
+						theme={{
+							textLabel: labelColour,
+							textOptional: labelColour,
+							textError: errorColour,
+							borderError: errorColour,
+						}}
+						error={errors.reason ? errors.reason : undefined}
+					/>
 				</div>
 
-				<div css={inputWrapper}>
-					<label css={labelStyles} htmlFor="email">
-						Email (optional)
-					</label>
-					<input
-						type="email"
-						name="email"
+				<div
+					css={[
+						inputWrapper,
+						svgStyles,
+						errorSvgStyles,
+						errors.email ? errorBorderColour : borderColour,
+					]}
+				>
+					<TextInput
+						label={'Email'}
+						optional={true}
 						id="email"
+						type="email"
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 							setFormVariables({
 								...formVariables,
@@ -257,10 +325,14 @@ export const AbuseReportForm = ({
 							})
 						}
 						value={formVariables.email}
-					></input>
-					{!!errors.email && (
-						<span css={errorMessageStyles}>{errors.email}</span>
-					)}
+						theme={{
+							textLabel: labelColour,
+							textOptional: labelColour,
+							textError: errorColour,
+							borderError: errorColour,
+						}}
+						error={errors.email ? errors.email : undefined}
+					/>
 				</div>
 
 				<div>
@@ -268,32 +340,33 @@ export const AbuseReportForm = ({
 						type="submit"
 						size="small"
 						data-link-name="Post report abuse"
+						cssOverrides={buttonStyles}
 					>
 						Report
 					</Button>
 
 					{!!errors.response && (
-						<span
-							css={[
-								errorMessageStyles,
-								css`
-									margin-left: 1em;
-								`,
-							]}
+						<InlineError
+							css={css`
+								color: ${errorColour};
+								padding-top: ${space[2]}px;
+							`}
 						>
 							{errors.response}
-						</span>
+						</InlineError>
 					)}
 
 					{!!successMessage && (
-						<span
+						<InlineSuccess
 							css={css`
-								color: green;
-								margin-left: 1em;
+								color: ${schemedPalette(
+									'--discussion-report-success-text',
+								)};
+								padding-top: ${space[2]}px;
 							`}
 						>
 							{successMessage}
-						</span>
+						</InlineSuccess>
 					)}
 				</div>
 				<div
@@ -313,6 +386,7 @@ export const AbuseReportForm = ({
 						onClick={toggleSetShowForm}
 						data-link-name="cancel-report-abuse"
 						hideLabel={true}
+						cssOverrides={buttonStyles}
 					>
 						close report abuse modal
 					</Button>
