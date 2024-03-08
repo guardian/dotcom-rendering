@@ -26,9 +26,6 @@ updates:
       eslint:
         patterns:
           - '*eslint*'
-      guardian:
-        patterns:
-          - '@guardian/*'
       jest:
         patterns:
           - 'jest*'
