@@ -27,6 +27,7 @@ import { InteractiveContentsBlockComponent } from '../components/InteractiveCont
 import { InteractiveLayoutAtom } from '../components/InteractiveLayoutAtom';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
+import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
@@ -65,7 +66,6 @@ import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import type { EditionId } from './edition';
-import { KeyTakeaways } from '../components/KeyTakeaways';
 
 type Props = {
 	format: ArticleFormat;
