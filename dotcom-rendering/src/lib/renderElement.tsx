@@ -65,6 +65,7 @@ import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import type { EditionId } from './edition';
+import { KeyTakeaways } from '../components/KeyTakeaways';
 
 type Props = {
 	format: ArticleFormat;
@@ -416,6 +417,20 @@ export const renderElement = ({
 						/>
 					</Island>
 				</div>
+			);
+		case 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement':
+			return (
+				<KeyTakeaways
+					keyTakeaways={element.keyTakeaways}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return (
