@@ -5,20 +5,23 @@ import type { RenderingTarget } from '../types/renderingTarget';
 /**
  * Positioning rules:
  *
- * - Is further than 3 paragraphs in
- * - Is every 6 paragraphs
+ * - Is further than 3 elements in
+ * - Is at least 6 elements after the previous ad
  * - No more than 15 ads in an article
- * - Last paragraph should not be followed by an ad
+ * - Last element should not be followed by an ad
+ * - Ad should not appear immediately before an image
  */
 const isSuitablePosition = (
-	paragraphCounter: number,
+	elementCounter: number,
 	numberOfAdsInserted: number,
+	lastAdIndex: number,
+	prevIsParagraphOrImage: boolean,
 	isLastElement: boolean,
 	isParagraph: boolean,
 ): boolean => {
 	// Rules for ad placement
-	const adEveryNParagraphs = 6;
-	const firstAdIndex = 3;
+	const adEveryNElements = 6;
+	const firstAdIndex = 4;
 	const maxAds = 15;
 
 	// Don't insert more than `maxAds` ads
@@ -31,28 +34,51 @@ const isSuitablePosition = (
 		return false;
 	}
 
-	// Insert an ad placeholder every `adEveryNParagraphs` paragraphs,
-	// starting from the paragraph at `firstAdIndex` and only after a paragraph
+	// Check that we haven't inserted an ad yet, and that we are far enough in to do so
+	const isFirstAdIndex = elementCounter >= firstAdIndex && lastAdIndex === 0;
+
+	// Check that we are at least `adEveryNElements` elements after the previous ad
+	const isEnoughElementsAfter =
+		elementCounter - lastAdIndex >= adEveryNElements;
+
+	// Insert an ad placeholder before the current element if it is a paragraph, the
+	// previous element was an image or a paragraph, and if the position is eligible
 	return (
 		isParagraph &&
-		(paragraphCounter - firstAdIndex) % adEveryNParagraphs === 0
+		prevIsParagraphOrImage &&
+		(isFirstAdIndex || isEnoughElementsAfter)
 	);
 };
 
 const isParagraph = (element: FEElement) =>
 	element._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 
-const insertPlaceholder = (elements: FEElement[]): FEElement[] => {
+const isImage = (element: FEElement) =>
+	element._type === 'model.dotcomrendering.pageElements.ImageBlockElement';
+
+const insertPlaceholder = (
+	prevElements: FEElement[],
+	currentElement: FEElement,
+): FEElement[] => {
 	const placeholder: AdPlaceholderBlockElement = {
 		_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement',
 	};
-	return [...elements, placeholder];
+	return [...prevElements, placeholder, currentElement];
 };
 
+/**
+ * - elementCounter: the number of paragraphs and images that we've counted when considering ad insertion
+ * - lastAdIndex: the index of the most recently inserted ad, used to calculate the elements between subsequent ads
+ * - numberOfAdsInserted: we use this to make sure that our total number of ads on an article does not exceed maxAds
+ * - prevIsAParagraphOrImage: we use this to check whether or not the previous element is suitable to insert an ad
+ * beneath - we don't want to insert an ad underneath a rich link, for example
+ */
 type ReducerAccumulator = {
 	elements: FEElement[];
-	paragraphCounter: number;
+	elementCounter: number;
+	lastAdIndex: number;
 	numberOfAdsInserted: number;
+	prevIsParagraphOrImage: boolean;
 };
 
 /**
@@ -65,13 +91,16 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 			currentElement: FEElement,
 			idx: number,
 		): ReducerAccumulator => {
-			const paragraphCounter = isParagraph(currentElement)
-				? prev.paragraphCounter + 1
-				: prev.paragraphCounter;
+			const elementCounter =
+				isParagraph(currentElement) || isImage(currentElement)
+					? prev.elementCounter + 1
+					: prev.elementCounter;
 
 			const shouldInsertAd = isSuitablePosition(
-				paragraphCounter,
+				elementCounter,
 				prev.numberOfAdsInserted,
+				prev.lastAdIndex,
+				prev.prevIsParagraphOrImage,
 				elements.length === idx + 1,
 				isParagraph(currentElement),
 			);
@@ -80,19 +109,24 @@ const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 
 			return {
 				elements: shouldInsertAd
-					? insertPlaceholder(currentElements)
+					? insertPlaceholder(prev.elements, currentElement)
 					: currentElements,
-				paragraphCounter,
+				elementCounter,
+				lastAdIndex: shouldInsertAd ? elementCounter : prev.lastAdIndex,
 				numberOfAdsInserted: shouldInsertAd
 					? prev.numberOfAdsInserted + 1
 					: prev.numberOfAdsInserted,
+				prevIsParagraphOrImage:
+					isParagraph(currentElement) || isImage(currentElement),
 			};
 		},
 		// Initial value for reducer function
 		{
 			elements: [],
-			paragraphCounter: 0,
+			elementCounter: 0,
+			lastAdIndex: 0,
 			numberOfAdsInserted: 0,
+			prevIsParagraphOrImage: false,
 		},
 	);
 

@@ -6,6 +6,7 @@ import { YoutubeAtom } from './YoutubeAtom';
 export default {
 	title: 'YoutubeAtom',
 	component: YoutubeAtom,
+	tags: ['autodocs'],
 };
 
 const containerStyle = { width: '800px', margin: '24px' };
