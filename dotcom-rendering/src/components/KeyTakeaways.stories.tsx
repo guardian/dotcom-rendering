@@ -6,14 +6,14 @@ import { KeyTakeaways } from './KeyTakeaways';
 import { getAllThemes } from '../lib/format';
 import { images } from '../../fixtures/generated/images';
 
-const meta: Meta<typeof KeyTakeaways> = {
+const meta = {
 	component: KeyTakeaways,
 	title: 'Components/KeyTakeaways',
-};
+} satisfies Meta<typeof KeyTakeaways>;
 
 export default meta;
 
-type Story = StoryObj<typeof KeyTakeaways>;
+type Story = StoryObj<typeof meta>;
 
 const html =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
@@ -25,7 +25,7 @@ const testTextElement: TextBlockElement = {
 	html,
 };
 
-export const Default: Story = {
+export const AllThemes = {
 	args: {
 		keyTakeaways: [
 			{
@@ -37,6 +37,26 @@ export const Default: Story = {
 				body: [testTextElement],
 			},
 		],
+		/**
+		 * This will be replaced by the `splitTheme` decorator, but it's
+		 * required by the type.
+		 */
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
+		abTests: {},
+		/**
+		 * This is used for rich links. An empty string isn't technically valid,
+		 * but there are no rich links in this example.
+		 */
+		ajaxUrl: '',
+		editionId: 'UK',
+		isAdFreeUser: false,
+		isSensitive: false,
+		pageId: 'testID',
+		switches: {},
 	},
 	decorators: [
 		splitTheme(
@@ -46,9 +66,9 @@ export const Default: Story = {
 			}),
 		),
 	],
-};
+} satisfies Story;
 
-export const Images: Story = {
+export const Images = {
 	args: {
 		keyTakeaways: [
 			{
@@ -60,6 +80,26 @@ export const Images: Story = {
 				body: [testTextElement, ...images.slice(2, 3)],
 			},
 		],
+		/**
+		 * This will be replaced by the `splitTheme` decorator, but it's
+		 * required by the type.
+		 */
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
+		abTests: {},
+		/**
+		 * This is used for rich links. An empty string isn't technically valid,
+		 * but there are no rich links in this example.
+		 */
+		ajaxUrl: '',
+		editionId: 'UK',
+		isAdFreeUser: false,
+		isSensitive: false,
+		pageId: 'testID',
+		switches: {},
 	},
 	decorators: [
 		splitTheme(
@@ -73,4 +113,4 @@ export const Images: Story = {
 			{ orientation: 'vertical' },
 		),
 	],
-};
+} satisfies Story;
