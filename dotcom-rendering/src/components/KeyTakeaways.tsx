@@ -128,6 +128,7 @@ export const KeyTakeaways = ({
 					titleIndex={index + 1}
 					hideCaption={hideCaption}
 					starRating={starRating}
+					key={index}
 				/>
 			))}
 		</ol>

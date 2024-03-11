@@ -1,10 +1,10 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { images } from '../../fixtures/generated/images';
+import { getAllThemes } from '../lib/format';
 import type { TextBlockElement } from '../types/content';
 import { KeyTakeaways } from './KeyTakeaways';
-import { getAllThemes } from '../lib/format';
-import { images } from '../../fixtures/generated/images';
 
 const meta = {
 	component: KeyTakeaways,
