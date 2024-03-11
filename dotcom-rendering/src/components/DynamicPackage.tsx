@@ -23,6 +23,10 @@ type Props = {
  * in other front containers
  */
 
+/** Supporting content is limited to a maximum of n items (defaults to four) */
+const limitSupportingContent = (card: DCRFrontCard, items = 4) =>
+	card.supportingContent?.slice(0, items) ?? [];
+
 const Snap100 = ({
 	snaps,
 	containerPalette,
@@ -69,6 +73,7 @@ const Card100 = ({
 	showAge?: boolean;
 }) => {
 	if (!cards[0]) return null;
+
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
@@ -82,7 +87,7 @@ const Card100 = ({
 					imagePositionOnMobile="bottom"
 					imageSize="large"
 					isDynamo={containerPalette && true}
-					supportingContent={cards[0].supportingContent}
+					supportingContent={limitSupportingContent(cards[0])}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
 				/>
@@ -176,7 +181,7 @@ const Card25_Card25_Card25_Card25 = ({
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
-							supportingContent={card.supportingContent}
+							supportingContent={limitSupportingContent(card)}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
 						/>
@@ -217,7 +222,7 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
-							supportingContent={card.supportingContent}
+							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -241,7 +246,9 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
-									supportingContent={card.supportingContent}
+									supportingContent={limitSupportingContent(
+										card,
+									)}
 									image={undefined}
 									imageLoading={imageLoading}
 								/>
@@ -284,7 +291,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
-							supportingContent={card.supportingContent}
+							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -315,7 +322,9 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
-									supportingContent={card.supportingContent}
+									supportingContent={limitSupportingContent(
+										card,
+									)}
 									image={undefined}
 									imageLoading={imageLoading}
 								/>
@@ -352,7 +361,7 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
-							supportingContent={card.supportingContent}
+							supportingContent={limitSupportingContent(card)}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -383,7 +392,9 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
-									supportingContent={card.supportingContent}
+									supportingContent={limitSupportingContent(
+										card,
+									)}
 									image={undefined}
 									imageLoading={imageLoading}
 								/>
@@ -423,7 +434,7 @@ const Card75_ColumnOfCards25 = ({
 						imagePosition="bottom"
 						imagePositionOnMobile="bottom"
 						imageSize="large"
-						supportingContent={card.supportingContent}
+						supportingContent={limitSupportingContent(card)}
 						isDynamo={true}
 						imageLoading={imageLoading}
 					/>
@@ -457,7 +468,9 @@ const Card75_ColumnOfCards25 = ({
 											? 'medium'
 											: 'small'
 									}
-									supportingContent={card.supportingContent}
+									supportingContent={limitSupportingContent(
+										card,
+									)}
 									imageLoading={imageLoading}
 								/>
 							</LI>

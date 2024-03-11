@@ -21,9 +21,9 @@ type Props = {
 const wrapperStyles = css`
 	position: relative;
 	display: flex;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-bottom: 5px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 4px;
 	@media (pointer: coarse) {
 		padding-bottom: 0;
 	}
@@ -47,12 +47,12 @@ const directionStyles = (alignment: Alignment) => {
 
 const dynamoStyles = css`
 	flex-direction: column;
-	column-gap: 5px;
+	column-gap: 4px;
 	width: 100%;
 	padding: 0;
 
 	${from.tablet} {
-		margin-top: 5px;
+		margin-top: 4px;
 		flex-direction: row;
 		position: relative;
 	}
@@ -87,9 +87,13 @@ const dynamoLiStyles = (
 	/* Creates a containing block which allows Ophan heatmap to place bubbles correctly. */
 	position: relative;
 	border-top: 1px solid;
-	/* 20% is arbitrary, but the cards should expand thanks for flex-grow */
-	flex: 1 0 20%;
-	margin: 0;
+	/* 25% is arbitrary, but the cards should expand thanks for flex-grow */
+	flex: 1 1 25%;
+	margin-right: 4px;
+
+	&:last-of-type {
+		margin-right: 0;
+	}
 `;
 
 const bottomMargin = css`

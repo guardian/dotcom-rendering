@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { trails } from '../../fixtures/manual/trails';
-import type { DCRGroupedTrails } from '../types/front';
+import { getSublinks, trails } from '../../fixtures/manual/trails';
+import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
 import { DynamicPackage } from './DynamicPackage';
 import { FrontSection } from './FrontSection';
 
@@ -46,6 +46,35 @@ export const One = () => (
 	</FrontSection>
 );
 One.storyName = 'With one standard card';
+
+export const OneWithManySublinks = () => {
+	const standardWithSixSublinks: DCRFrontCard[] = [
+		{
+			...trails[0],
+			supportingContent: getSublinks(6),
+		},
+	];
+
+	return (
+		<FrontSection
+			title="Dynamic Package"
+			showTopBorder={true}
+			discussionApiUrl={discussionApiUrl}
+		>
+			<DynamicPackage
+				groupedTrails={{
+					...defaultGroupedTrails,
+					snap: [],
+					standard: standardWithSixSublinks,
+				}}
+				containerPalette="LongRunningPalette"
+				imageLoading="eager"
+			/>
+		</FrontSection>
+	);
+};
+OneWithManySublinks.storyName =
+	'With one standard card and many supporting content items';
 
 export const Two = () => (
 	<FrontSection
