@@ -21,10 +21,9 @@ const headingIndexStyles = css`
 `;
 
 const headingLineStyles = css`
-	height: 8px;
 	width: 140px;
 	margin: 0px;
-	border: 0px;
+	border: none;
 	border-top: 8px solid ${palette('--heading-line')};
 `;
 
