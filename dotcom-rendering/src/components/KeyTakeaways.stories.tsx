@@ -4,6 +4,7 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { TextBlockElement } from '../types/content';
 import { KeyTakeaways } from './KeyTakeaways';
 import { getAllThemes } from '../lib/format';
+import { images } from '../../fixtures/generated/images';
 
 const meta: Meta<typeof KeyTakeaways> = {
 	component: KeyTakeaways,
@@ -43,6 +44,33 @@ export const Default: Story = {
 				design: ArticleDesign.Standard,
 				display: ArticleDisplay.Standard,
 			}),
+		),
+	],
+};
+
+export const Images: Story = {
+	args: {
+		keyTakeaways: [
+			{
+				title: 'The first key takeaway',
+				body: [testTextElement, ...images.slice(0, 2)],
+			},
+			{
+				title: 'The second key takeaway',
+				body: [testTextElement, ...images.slice(2, 3)],
+			},
+		],
+	},
+	decorators: [
+		splitTheme(
+			[
+				{
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: Pillar.Culture,
+				},
+			],
+			{ orientation: 'vertical' },
 		),
 	],
 };
