@@ -137,6 +137,7 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
+	abTests,
 	editionId,
 }: Props) => {
 	const isBlog =
