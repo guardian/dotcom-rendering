@@ -1,5 +1,5 @@
 import { RenderArticleElement } from '../lib/renderElement';
-import { KeyTakeaway, QAndAExplainer } from '../types/content';
+import { QAndAExplainer } from '../types/content';
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import { palette } from '../palette';

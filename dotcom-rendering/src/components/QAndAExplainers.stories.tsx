@@ -54,6 +54,7 @@ export const AllThemes = {
 		ajaxUrl: '',
 		editionId: 'UK',
 		isAdFreeUser: false,
+		isSensitive: false,
 		pageId: 'testID',
 		switches: {},
 	},
