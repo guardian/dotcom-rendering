@@ -1,11 +1,11 @@
-import { RenderArticleElement } from '../lib/renderElement';
-import { QAndAExplainer } from '../types/content';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
+import type { EditionId } from '../lib/edition';
+import { RenderArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
-import { ArticleFormat } from '@guardian/libs';
-import { ServerSideTests, Switches } from '../types/config';
-import { EditionId } from '../lib/edition';
+import type { ServerSideTests, Switches } from '../types/config';
+import type { QAndAExplainer } from '../types/content';
 
 const qAndAExplainerStyles = css`
 	padding-top: 8px;
