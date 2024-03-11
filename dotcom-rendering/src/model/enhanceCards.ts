@@ -325,10 +325,6 @@ export const enhanceCards = (
 
 		const imageSrc = decideImage(faciaCard);
 
-		/** We do not allow more than 5 sublinks to be rendered
-		 *  so we truncate the supporting content array here */
-		const supportingContent = faciaCard.supportingContent?.slice(0, 5);
-
 		return {
 			format,
 			dataLinkName,
@@ -343,9 +339,9 @@ export const enhanceCards = (
 					  ).toISOString()
 					: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
-			supportingContent: supportingContent
+			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
-						supportingContent,
+						faciaCard.supportingContent,
 						format,
 						containerPalette,
 				  )
