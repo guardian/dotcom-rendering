@@ -3,7 +3,10 @@ import type { DCRFrontCard } from '../../src/types/front';
 import { discussionApiUrl } from './discussionApiUrl';
 
 /** Helper to get x number of sublinks */
-const getSublinks = (number: number, format?: ArticleFormat) =>
+export const getSublinks = (
+	number: number,
+	format?: ArticleFormat,
+): DCRFrontCard['supportingContent'] =>
 	Array.from({ length: number }, (_, i) => ({
 		url: 'https://www.theguardian.com',
 		format: {
@@ -528,7 +531,7 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@18',
 		showQuotedHeadline: false,
-		supportingContent: getSublinks(8),
+		supportingContent: getSublinks(3),
 		mainMedia: {
 			type: 'Video',
 			id: 'abcdef',
