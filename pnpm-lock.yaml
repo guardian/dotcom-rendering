@@ -516,8 +516,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0
       '@types/prop-types':
-        specifier: 15.7.5
-        version: 15.7.5
+        specifier: 15.7.11
+        version: 15.7.11
       '@types/qs':
         specifier: 6.9.7
         version: 6.9.7
@@ -8391,6 +8391,10 @@ packages:
 
   /@types/pretty-hrtime@1.0.3:
     resolution: {integrity: sha512-nj39q0wAIdhwn7DGUyT9irmsKK1tV0bd5WFEhgpqNTMFZ8cE+jieuTphCW0tfdm47S2zVT5mr09B28b1chmQMA==}
+    dev: false
+
+  /@types/prop-types@15.7.11:
+    resolution: {integrity: sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==}
     dev: false
 
   /@types/prop-types@15.7.5:

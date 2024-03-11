@@ -102,7 +102,7 @@
 		"@types/lodash.get": "4.4.7",
 		"@types/node": "18.18.14",
 		"@types/parse5": "7.0.0",
-		"@types/prop-types": "15.7.5",
+		"@types/prop-types": "15.7.11",
 		"@types/qs": "6.9.7",
 		"@types/react": "18.2.45",
 		"@types/react-dom": "18.2.17",
