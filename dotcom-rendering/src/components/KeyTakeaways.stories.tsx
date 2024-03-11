@@ -1,30 +1,9 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { TextBlockElement } from '../types/content';
 import { KeyTakeaways } from './KeyTakeaways';
-
-const themeVariations = [
-	Pillar.Sport,
-	Pillar.News,
-	Pillar.Culture,
-	Pillar.Opinion,
-	Pillar.Lifestyle,
-	ArticleSpecial.SpecialReport,
-	ArticleSpecial.SpecialReportAlt,
-	ArticleSpecial.Labs,
-];
-
-const allThemeStandardVariations = themeVariations.map((theme) => ({
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme,
-}));
+import { getAllThemes } from '../lib/format';
 
 const meta: Meta<typeof KeyTakeaways> = {
 	component: KeyTakeaways,
@@ -57,12 +36,13 @@ export const Default: Story = {
 				body: [testTextElement],
 			},
 		],
-		format: {
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Analysis,
-			theme: Pillar.Opinion,
-		},
 	},
+	decorators: [
+		splitTheme(
+			getAllThemes({
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+			}),
+		),
+	],
 };
-
-Default.decorators = [splitTheme(allThemeStandardVariations)];
