@@ -519,21 +519,21 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
-			return news[400];
+			return news[500];
 		case Pillar.Opinion:
-			return news[400];
+			return news[500];
 		case Pillar.Sport:
-			return sport[400];
+			return sport[500];
 		case Pillar.Culture:
-			return culture[400];
+			return culture[500];
 		case Pillar.Lifestyle:
-			return lifestyle[400];
+			return lifestyle[500];
 		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
+			return specialReport[500];
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return news[500];
 	}
 };
 
