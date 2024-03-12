@@ -403,17 +403,18 @@ export const CommentForm = ({
 			if (response.kind === 'error') {
 				handleError(response.error);
 			} else {
+				fetchShowPreview;
 				onAddComment(
 					commentBeingRepliedTo
 						? simulateNewReply(
 								response.value,
-								body,
+								previewBody,
 								user.profile,
 								commentBeingRepliedTo,
 						  )
 						: simulateNewComment(
 								response.value,
-								body,
+								previewBody,
 								user.profile,
 						  ),
 				);
