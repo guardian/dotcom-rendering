@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { space, text, textSans, until } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+import { space, textSans, until } from '@guardian/source-foundations';
+import { Link, TextArea } from '@guardian/source-react-components';
 import { InfoSummary } from '@guardian/source-react-components-development-kitchen';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type {
 	CommentType,
 	ReplyType,
@@ -79,16 +79,6 @@ const blackPlaceholder = css`
 const headerTextStyles = css`
 	margin: 0 0 10px 0;
 	${textSans.xxsmall()};
-`;
-
-const errorTextStyles = css`
-	margin: 0;
-	${textSans.xxsmall()};
-	color: ${text.error};
-`;
-
-const msgContainerStyles = css`
-	margin-top: 8px;
 `;
 
 const linkStyles = css`
@@ -236,12 +226,23 @@ export const CommentForm = ({
 }: Props) => {
 	const [isActive, setIsActive] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
+	const [selectionStart, setSelectionStart] = useState(0);
+	const [selectionEnd, setSelectionEnd] = useState(0);
+	const [textValue, setTextValue] = useState('');
 
-	const textAreaRef = useRef<HTMLTextAreaElement>(null);
+	const handleSelect = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+		setSelectionStart(event.target.selectionStart);
+		setSelectionEnd(event.target.selectionEnd);
+	};
+
+	const handleTextChange = (
+		event: React.ChangeEvent<HTMLTextAreaElement>,
+	) => {
+		setTextValue(event.target.value);
+	};
 
 	const setBody = (body: string) => {
-		if (!textAreaRef.current) return;
-		textAreaRef.current.value = body;
+		setTextValue(body);
 	};
 
 	useEffect(() => {
@@ -264,10 +265,7 @@ export const CommentForm = ({
 				endString: string;
 		  }
 		| undefined => {
-		if (!textAreaRef.current) return;
-		const selectionStart = textAreaRef.current.selectionStart;
-		const selectionEnd = textAreaRef.current.selectionEnd;
-		const value = textAreaRef.current.value;
+		const value = textValue;
 
 		const startString = value.substring(0, selectionStart);
 		const highlightedString = value.substring(selectionStart, selectionEnd);
@@ -301,7 +299,7 @@ export const CommentForm = ({
 	};
 
 	const fetchShowPreview = async () => {
-		const body = textAreaRef.current?.value;
+		const body = textValue;
 		if (!body) return;
 
 		const preview = onPreview ?? defaultPreview;
@@ -393,7 +391,7 @@ export const CommentForm = ({
 		setIsDisabled(true);
 		setError('');
 
-		const body = textAreaRef.current?.value;
+		const body = textValue;
 
 		if (body) {
 			const response = commentBeingRepliedTo
@@ -461,14 +459,6 @@ export const CommentForm = ({
 					void submitForm();
 				}}
 			>
-				{!!error && (
-					<div css={msgContainerStyles}>
-						<p
-							css={[errorTextStyles, linkStyles]}
-							dangerouslySetInnerHTML={{ __html: error }}
-						/>
-					</div>
-				)}
 				{isActive && (
 					<div css={wrapperHeaderTextStyles}>
 						<p css={[headerTextStyles, linkStyles]}>
@@ -478,7 +468,6 @@ export const CommentForm = ({
 							</a>
 							.
 						</p>
-
 						{user.profile.privateFields?.isPremoderated && (
 							<InfoSummary
 								message={
@@ -499,7 +488,7 @@ export const CommentForm = ({
 						)}
 					</div>
 				)}
-				<textarea
+				<TextArea
 					data-testid="comment-input"
 					placeholder={
 						commentBeingRepliedTo || !isActive
@@ -511,9 +500,13 @@ export const CommentForm = ({
 						commentBeingRepliedTo && isActive && greyPlaceholder,
 						!commentBeingRepliedTo && !isActive && blackPlaceholder,
 					]}
-					ref={textAreaRef}
 					style={{ height: isActive ? '132px' : '50px' }}
 					onFocus={() => setIsActive(true)}
+					value={textValue}
+					onChange={handleTextChange}
+					onSelect={handleSelect}
+					label={''}
+					error={error}
 				/>
 				<div css={bottomContainer}>
 					<Row>
