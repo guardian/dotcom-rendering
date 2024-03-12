@@ -189,6 +189,7 @@ export default {
 		isMuted: false,
 		wasScrolledTo: false,
 		pickError: '',
+		isExpanded: true,
 	},
 };
 

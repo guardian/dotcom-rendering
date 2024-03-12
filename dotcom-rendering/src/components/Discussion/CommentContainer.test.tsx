@@ -93,6 +93,7 @@ describe('CommentContainer', () => {
 					if (!commentBeingRepliedTo.responses) return;
 					commentBeingRepliedTo.responses = responses;
 				}}
+				isExpanded={true}
 			/>,
 		);
 
@@ -133,6 +134,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={() => {}}
+				isExpanded={true}
 			/>,
 		);
 
@@ -186,6 +188,7 @@ describe('CommentContainer', () => {
 					if (!commentBeingRepliedTo.responses) return;
 					commentBeingRepliedTo.responses = responses;
 				}}
+				isExpanded={true}
 			/>,
 		);
 
@@ -226,6 +229,7 @@ describe('CommentContainer', () => {
 				setPreviewBody={() => {}}
 				reportAbuse={() => Promise.resolve(ok(true))}
 				expandCommentReplies={() => {}}
+				isExpanded={true}
 			/>,
 		);
 
