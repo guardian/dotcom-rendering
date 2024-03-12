@@ -552,11 +552,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						</GridItem>
 						<GridItem area="disclaimer">
 							{hasAffiliateLinksDisclaimer && (
-								<Disclaimer
-									html={
-										article.affiliateLinksDisclaimer ?? ''
-									}
-								></Disclaimer>
+								<Disclaimer></Disclaimer>
 							)}
 						</GridItem>
 						<GridItem area="byline">

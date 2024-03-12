@@ -709,11 +709,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									/>
 									<Hide until="leftCol">
 										{!!article.affiliateLinksDisclaimer && (
-											<Disclaimer
-												html={
-													article.affiliateLinksDisclaimer
-												}
-											></Disclaimer>
+											<Disclaimer></Disclaimer>
 										)}
 									</Hide>
 								</div>

@@ -561,9 +561,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						</GridItem>
 						<GridItem area="disclaimer">
 							{!!article.affiliateLinksDisclaimer && (
-								<Disclaimer
-									html={article.affiliateLinksDisclaimer}
-								></Disclaimer>
+								<Disclaimer></Disclaimer>
 							)}
 						</GridItem>
 						<GridItem area="lines">

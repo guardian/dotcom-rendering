@@ -3,6 +3,7 @@ import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
 import { enhanceBlockquotes } from './enhance-blockquotes';
+import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
@@ -18,6 +19,7 @@ type Options = {
 	renderingTarget: RenderingTarget;
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
+	hasAffiliateLinksDisclaimer: boolean;
 };
 
 const enhanceNewsletterSignup =
@@ -59,6 +61,7 @@ export const enhanceElements =
 				blockId,
 			),
 			enhanceAdPlaceholders(format, options.renderingTarget),
+			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

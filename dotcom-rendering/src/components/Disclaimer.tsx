@@ -12,16 +12,17 @@ const disclaimerStyles = css`
 	margin-bottom: 16px;
 `;
 
-type Props = {
-	html: string;
-};
+const disclaimerHTML =
+	'\n\n\n\n\n\n\n    <p><sup>\n        The Guardian’s product and service reviews are independent and are\n        in no way influenced by any advertiser or commercial initiative. We\n        will earn a commission from the retailer if you buy something\n        through an affiliate link.\n        <a\n            href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links"\n            data-link-name="in body link"\n            class="u-underline"\n            >Learn more</a\n        >.\n    </sup></p>\n\n';
 
-export const Disclaimer = ({ html }: Props) => (
+const Disclaimer = () => (
 	<aside
 		css={disclaimerStyles}
 		data-testid="affiliate-disclaimer"
 		dangerouslySetInnerHTML={{
-			__html: html,
+			__html: disclaimerHTML,
 		}}
 	/>
 );
+
+export { Disclaimer };
