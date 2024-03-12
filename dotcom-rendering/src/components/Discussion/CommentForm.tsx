@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, text, textSans, until } from '@guardian/source-foundations';
+import { space, textSans, until } from '@guardian/source-foundations';
 import { Link, TextArea } from '@guardian/source-react-components';
 import { InfoSummary } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
