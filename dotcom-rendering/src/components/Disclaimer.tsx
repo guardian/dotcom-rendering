@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
+import { palette as themePalette } from '../palette';
 
 const disclaimerStyles = css`
 	${textSans.medium({ lineHeight: 'regular' })};
@@ -12,17 +14,62 @@ const disclaimerStyles = css`
 	margin-bottom: 16px;
 `;
 
-const disclaimerHTML =
-	'\n\n\n\n\n\n\n    <p><sup>\n        The Guardian’s product and service reviews are independent and are\n        in no way influenced by any advertiser or commercial initiative. We\n        will earn a commission from the retailer if you buy something\n        through an affiliate link.\n        <a\n            href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links"\n            data-link-name="in body link"\n            class="u-underline"\n            >Learn more</a\n        >.\n    </sup></p>\n\n';
+const disclaimerInlineStyles = css`
+	margin-bottom: ${space[1]}px;
+	float: left;
+	clear: left;
+	width: 8.75rem;
+	margin-right: 20px;
+`;
+
+const backgroundStyles = css`
+	background-color: ${themePalette('--rich-link-background')};
+	:hover {
+		background-color: ${themePalette('--rich-link-background-hover')};
+	}
+`;
+
+const linkStyles = css`
+	color: inherit;
+	text-decoration: none;
+`;
+
+const paddingStyles = css`
+	padding-top: 2px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+`;
+
+const DisclaimerText = () => (
+	<p>
+		<sup>
+			The Guardian’s product and service reviews are independent and are
+			in no way influenced by any advertiser or commercial initiative. We
+			will earn a commission from the retailer if you buy something
+			through an affiliate link.&nbsp;
+			<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
+				Learn more.
+			</a>
+		</sup>
+	</p>
+);
 
 const Disclaimer = () => (
 	<aside
-		css={disclaimerStyles}
+		css={[disclaimerStyles, linkStyles]}
 		data-testid="affiliate-disclaimer"
-		dangerouslySetInnerHTML={{
-			__html: disclaimerHTML,
-		}}
-	/>
+	>
+		<DisclaimerText />
+	</aside>
 );
 
-export { Disclaimer };
+const DisclaimerInline = () => (
+	<Hide from="leftCol">
+		<div css={[disclaimerInlineStyles, backgroundStyles, paddingStyles]}>
+			<Disclaimer />
+		</div>
+	</Hide>
+);
+
+export { Disclaimer, DisclaimerInline };
