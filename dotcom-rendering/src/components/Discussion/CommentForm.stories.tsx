@@ -102,7 +102,7 @@ export const Error = () => {
 			onAddComment={(comment) => {}}
 			userNameMissing={userNameMissing}
 			setUserNameMissing={setUserNameMissing}
-			error={''}
+			error={'Please write a comment.'}
 			setError={() => {}}
 			previewBody=""
 			setPreviewBody={() => {}}

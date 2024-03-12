@@ -81,16 +81,6 @@ const headerTextStyles = css`
 	${textSans.xxsmall()};
 `;
 
-const errorTextStyles = css`
-	margin: 0;
-	${textSans.xxsmall()};
-	color: ${text.error};
-`;
-
-const msgContainerStyles = css`
-	margin-top: 8px;
-`;
-
 const linkStyles = css`
 	a {
 		color: ${schemedPalette('--discussion-link')};
@@ -463,14 +453,6 @@ export const CommentForm = ({
 					void submitForm();
 				}}
 			>
-				{!!error && (
-					<div css={msgContainerStyles}>
-						<p
-							css={[errorTextStyles, linkStyles]}
-							dangerouslySetInnerHTML={{ __html: error }}
-						/>
-					</div>
-				)}
 				{isActive && (
 					<div css={wrapperHeaderTextStyles}>
 						<p css={[headerTextStyles, linkStyles]}>
@@ -480,7 +462,6 @@ export const CommentForm = ({
 							</a>
 							.
 						</p>
-
 						{user.profile.privateFields?.isPremoderated && (
 							<InfoSummary
 								message={
@@ -519,6 +500,7 @@ export const CommentForm = ({
 					onChange={handleTextChange}
 					onSelect={handleSelect}
 					label={''}
+					error={error}
 				/>
 				<div css={bottomContainer}>
 					<Row>
