@@ -403,7 +403,7 @@ export const CommentForm = ({
 			if (response.kind === 'error') {
 				handleError(response.error);
 			} else {
-				fetchShowPreview;
+				await fetchShowPreview();
 				onAddComment(
 					commentBeingRepliedTo
 						? simulateNewReply(
