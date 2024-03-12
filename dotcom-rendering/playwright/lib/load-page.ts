@@ -31,9 +31,6 @@ const loadPage = async (
 					`{"value":"${new Date().toISOString()}"}`,
 				);
 			}
-			// force Ophan to use the https endpoint
-			// @ts-expect-error - window type
-			window.ophanRemoteHost = 'https://ophan.theguardian.com';
 		},
 		{ region, preventSupportBanner },
 	);
