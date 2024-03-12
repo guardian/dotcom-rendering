@@ -79,7 +79,7 @@ export const Letter: DCRArticle = {
 					},
 				],
 			},
-			elementId: 'da338233-f52c-4f13-94eb-9a0ff6e325fe',
+			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -280,17 +280,17 @@ export const Letter: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: '7c9bf4a1-5422-447a-9ff2-474e9c5091fb',
+					elementId: 'c52adb05-ed65-44c1-a62e-4a793b027137',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><span data-dcr-style="bullet"></span> In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: '17d97756-3f50-456a-a554-cce998bdd172',
+					elementId: 'e7170df5-9abf-4fde-82b5-cd10f6b9c5ef',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<footer><p><span data-dcr-style="bullet"></span> Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p></footer>',
-					elementId: 'c450dfe8-20c0-4537-a17e-017824db57bc',
+					elementId: '97d6fd58-76d9-4345-b45c-c3bc0aa6f989',
 				},
 			],
 			attributes: {
@@ -1274,10 +1274,6 @@ export const Letter: DCRArticle = {
 				iconName: 'home',
 				children: [
 					{
-						title: 'Oscars 2024',
-						url: '/film/oscars-2024',
-					},
-					{
 						title: 'Film',
 						url: '/film',
 					},
@@ -1868,7 +1864,7 @@ export const Letter: DCRArticle = {
 				'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
 			width: 1969,
 			height: 1569,
-			elementId: 'da338233-f52c-4f13-94eb-9a0ff6e325fe',
+			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
 			displayCredit: true,
 			alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
 			credit: 'Photograph: taken from picture library',
@@ -1886,7 +1882,7 @@ export const Letter: DCRArticle = {
 				'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
 			masterUrl:
 				'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
-			elementId: 'da338233-f52c-4f13-94eb-9a0ff6e325fe',
+			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
 		},
 	],
 };

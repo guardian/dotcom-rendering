@@ -88,7 +88,7 @@ export const Picture: FEArticleType = {
 					},
 				],
 			},
-			elementId: 'd700e398-feda-44e5-b4ee-42e207c8f9d4',
+			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1360,10 +1360,6 @@ export const Picture: FEArticleType = {
 				longTitle: 'Culture home',
 				iconName: 'home',
 				children: [
-					{
-						title: 'Oscars 2024',
-						url: '/film/oscars-2024',
-					},
 					{
 						title: 'Film',
 						url: '/film',

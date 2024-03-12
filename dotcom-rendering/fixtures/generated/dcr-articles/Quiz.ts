@@ -89,7 +89,7 @@ export const Quiz: DCRArticle = {
 					},
 				],
 			},
-			elementId: '19360d51-1003-4583-8714-f5efa8096a09',
+			elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -892,7 +892,7 @@ export const Quiz: DCRArticle = {
 							minScore: 2,
 						},
 					],
-					elementId: '70b18f1a-4147-4da8-aa4e-47d612298fd8',
+					elementId: '878e43c5-e2d8-4762-9cbc-73033c0e882d',
 					quizType: 'knowledge',
 					id: '2c6bf552-2827-4256-b3a0-f557d215c394',
 				},
@@ -1932,10 +1932,6 @@ export const Quiz: DCRArticle = {
 				iconName: 'home',
 				children: [
 					{
-						title: 'Oscars 2024',
-						url: '/film/oscars-2024',
-					},
-					{
 						title: 'Film',
 						url: '/film',
 					},
@@ -2516,7 +2512,7 @@ export const Quiz: DCRArticle = {
 				'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
 			width: 3020,
 			height: 1814,
-			elementId: '19360d51-1003-4583-8714-f5efa8096a09',
+			elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
 			displayCredit: true,
 			alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
 			credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
@@ -2534,7 +2530,7 @@ export const Quiz: DCRArticle = {
 				'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
 			masterUrl:
 				'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
-			elementId: '19360d51-1003-4583-8714-f5efa8096a09',
+			elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
 		},
 	],
 };

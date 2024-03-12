@@ -88,7 +88,7 @@ export const Picture: DCRArticle = {
 					},
 				],
 			},
-			elementId: 'd700e398-feda-44e5-b4ee-42e207c8f9d4',
+			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1362,10 +1362,6 @@ export const Picture: DCRArticle = {
 				iconName: 'home',
 				children: [
 					{
-						title: 'Oscars 2024',
-						url: '/film/oscars-2024',
-					},
-					{
 						title: 'Film',
 						url: '/film',
 					},
@@ -1900,7 +1896,7 @@ export const Picture: DCRArticle = {
 				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
 			width: 3031,
 			height: 1819,
-			elementId: 'd700e398-feda-44e5-b4ee-42e207c8f9d4',
+			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
 			displayCredit: true,
 			alt: "Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with 'Sleaze' paint",
 			credit: 'Illustration: Nicola Jennings/The Guardian',
@@ -1914,7 +1910,7 @@ export const Picture: DCRArticle = {
 			credit: 'Illustration: Nicola Jennings/The Guardian',
 			masterUrl:
 				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
-			elementId: 'd700e398-feda-44e5-b4ee-42e207c8f9d4',
+			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
 		},
 	],
 };

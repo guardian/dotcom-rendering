@@ -88,7 +88,7 @@ export const Labs: DCRArticle = {
 					},
 				],
 			},
-			elementId: '6fa7d38c-2f24-4225-bd12-7599976bcd90',
+			elementId: '9e36c28a-7231-4a26-8fad-0586f8c1b64c',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -287,37 +287,37 @@ export const Labs: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>What are the odds that you have royal blood? It’s a question more and more of us are asking these days. As genetic testing gets faster, cheaper and more accurate, the age-old fantasy of suddenly learning you’re descended from a king or a queen – the premise of countless movies, books and daydreams – is inching closer to reality.</p>',
-					elementId: '61484411-604f-4828-b340-29cf35ce7c8b',
+					elementId: '640e95c6-33a5-4334-a8ff-f03bdce3061a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But we’re not there just yet. While a genetic test can tell us a lot – 23andme can even pinpoint how much Neanderthal we have in us – there’s still no single test for royal blood.</p>',
-					elementId: '4b12fec8-0385-4813-8a3e-f8adcea4eb50',
+					elementId: 'd5280200-4531-40dd-acd7-dc2ac9e44dc8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“DNA testing only reveals a general ethnic breakdown that changes over time, as the science becomes further refined,” says<a href="https://www.djoshuataylor.com/" rel="nofollow"> Joshua Taylor</a>, president of the New York Genealogical &amp; Biographical Society. It “might identify that two individuals share a common ancestor within a certain number of generations, but research is still needed to identify <em>who</em> that common ancestor might be.”</p>',
-					elementId: 'a3c0a087-6a47-4bec-8d06-34222bcf185a',
+					elementId: 'b401c8e2-59d6-4a5e-906d-ea2f5316614d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>And ancestral math is messy. The number of ancestors we have increases exponentially, not linearly — more like a meshed web than a branched family tree, says the geneticist<a href="http://adamrutherford.com/" rel="nofollow"> Adam Rutherford</a>. If we went back a thousand years, each of us would have over a trillion direct ancestors, which is more than all the humans who have ever lived. This paradox exists because, as Rutherford writes: “Pedigrees begin to fold in on themselves a few generations back.” Meaning “you can be, and in fact are, descended from the same individual many times over”.</p>',
-					elementId: 'ff72d700-56f5-4a7c-92f5-429048f1b304',
+					elementId: '7203eeb1-44f4-4831-bd55-345455b7747c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Throw in other factors that enlarge and complicate lineage – invasions and migrations, wars and revolutions – and you can see that humanity is indeed a web of overlapping and enmeshed networks of descent.</p>',
-					elementId: '8be6687e-80bb-4157-8f24-b13509662ccd',
+					elementId: 'c5b475d8-5a75-439d-855a-c56445322cb9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Genealogists say that the work of identifying royal lineage – whether to establish “direct descent” (a key to inheritance and social status) or simply to satisfy curiosity – is helped and hindered by a number of factors. If you’re thinking of climbing your family tree in search of royal fruit, here are a few things to consider.</p>',
-					elementId: 'ad27a49f-ff7a-42f8-9310-183bff7a8949',
+					elementId: 'e73ed887-c705-431d-b509-b03fdbe52950',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='1-if-youre-european-or-even-descended-from-europeans-youre-probably-related-to-royalty'><strong>1. If you’re European – or even descended from Europeans – you’re probably related to royalty</strong></h2>",
-					elementId: '2f940c00-e1b7-4384-a75d-9a1d47b84c87',
+					elementId: '231c078e-4de5-4bc2-a19f-ccf0fae04feb',
 				},
 				{
 					displayCredit: true,
@@ -378,7 +378,7 @@ export const Labs: DCRArticle = {
 							},
 						],
 					},
-					elementId: 'a5a7645f-124b-4034-b898-f0d9aab2064a',
+					elementId: '87744452-aa05-4850-b0f1-937d59294475',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -630,52 +630,52 @@ export const Labs: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In 1999, the <a href="http://www.stat.yale.edu/~jtc5/papers/CommonAncestors/AAP_99_CommonAncestors_paper.pdf" rel="nofollow">Yale statistician Joseph Chang</a> showed that if you go back far enough – say, 32 generations, or 900 years – you’d find that everyone alive today shares a common ancestor. In Europe, where lineages have been closely studied, that ancestor was someone who lived just 600 years ago.</p>',
-					elementId: '7aa6c801-812d-490a-9bbe-5e414bc4b7a4',
+					elementId: '001429b4-5b40-455e-ad27-299a4e985c0f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001555" rel="nofollow">2013 study from Peter Ralph and Graham Coop</a> built on Chang’s research, proving that all Europeans come from the same people. More recently, Rutherford has demonstrated that virtually everyone in Europe is indeed descended from royalty – specifically from Charlemagne, who ruled western Europe from 768 to 814.</p>',
-					elementId: '9f198ce3-8378-402d-9630-e0282234ee28',
+					elementId: 'fe7e69ad-9b7b-4666-a9c3-52a66421d235',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A <a href="https://www.theatlantic.com/magazine/archive/2002/05/the-royal-we/302497/" rel="nofollow">2002 article</a> offers more clarifying examples: “Almost everyone in the New World [aka the Americas, including Bermuda and the Caribbean] must be descended from English royalty – even people of predominantly African or Native American ancestry, because of the long history of intermarriage in the Americas. Similarly, everyone of European ancestry must descend from Muhammad.” Meanwhile, “Confucius, Nefertiti, and just about any other ancient historical figure who was even moderately prolific must today be counted among everyone’s ancestors”.</p>',
-					elementId: '582b9bab-78ee-4d72-80ff-056ff3e3fe6a',
+					elementId: '1281810e-b4db-4261-8e85-31cef717097a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In other words, mathematically speaking, we’re all related to royalty.</p>',
-					elementId: '77c37a2c-4c1f-4eec-a8de-84ae4230c477',
+					elementId: '215f764d-74a9-45d1-9cc7-d395b5c8dac2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='2-royal-commoner-intermarriage-higher-odds-of-regal-descent'><strong>2. Royal + commoner + intermarriage = higher odds of regal descent</strong></h2>",
-					elementId: '97d798a3-7afd-4ffe-9c14-7ebb7fe2a265',
+					elementId: '60cd0606-d7ec-4e62-b765-4aff3720f9a8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As Chang acknowledged in his study, most mating isn’t random – it’s assortative. That means that people tend to mate with those who are most like themselves in terms of geography, language and socioeconomic status. A wealthy Scandinavian man is far more likely to marry a well-to-do woman from Sweden or Norway than a poor one from Saskatchewan.</p>',
-					elementId: 'b7fa854e-293d-4a72-aec1-22af3fa40dcb',
+					elementId: '06ca70d2-5f33-4702-905f-fbdef25ff05b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“In most cases,” says Taylor, “royal families work to marry within the same social circle.” <a href="http://faculty.econ.ucdavis.edu/faculty/gclark/" rel="nofollow">Gregory Clark</a>, an economics professor at UC Davis who studies the genealogy of social mobility, says that means “the likelihood that you are related to royalty, if you went back as far as 1300 or 1066, depends on how closed a class nobles were”.</p>',
-					elementId: '5b1eee40-dbfc-4268-954e-f6236f9520b5',
+					elementId: 'ec413ead-f859-4e60-a429-c4a63e6dc1e5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In some countries, that class door is firmly shut. But in England, says Clark, the “noble classes have always been fairly open to incorporating wealthy commoners … So a large share of the modern English will be related to someone in the past who was part of the nobility.”</p>',
-					elementId: '3f13048b-e314-48c4-97ad-30d9d8c96252',
+					elementId: '9b12f588-226c-4cdb-9a1b-ebafb685a986',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Translation: if your ancestors hailed from a country or region where royals and commoners intermarried, you have a better chance of being descended from royalty.</p>',
-					elementId: '1cb05c15-99f7-4d44-8fe4-0265a0b01840',
+					elementId: '38ea5096-bb09-4d96-8242-3ab3acf55fcf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='3-you-dont-need-to-be-fully-or-even-legitimately-royal-to-have-royal-blood'><strong>3. You don’t need to be fully – or even legitimately – royal to have royal blood</strong></h2>",
-					elementId: '59157645-0258-42ae-ab3e-6c87ae5bb968',
+					elementId: 'd4daad08-30c3-45cb-b485-1ad0b4468e37',
 				},
 				{
 					displayCredit: true,
@@ -726,7 +726,7 @@ export const Labs: DCRArticle = {
 							},
 						],
 					},
-					elementId: '7a47925a-4a2b-483d-99db-84fa81a4169e',
+					elementId: '2ea83387-74dd-4174-a8a4-aff4591c3dee',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -977,52 +977,52 @@ export const Labs: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Here’s another way to look at it: if you’re descended from royalty, it might be via a prince, a princess – or a pauper. In recent years morganatic marriages – aka when a royal marries someone of lesser status, à la Prince William and Kate Middleton – have become more and more common around the world, increasing the number of people with a royal claim.</p>',
-					elementId: '2a6870ab-d4c5-452e-ac18-fa0509b38a0b',
+					elementId: 'f0b22b03-4192-4d18-85d8-dce6f73f7a37',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><a href="https://twitter.com/rusgenproject?lang=en" rel="nofollow">Kirill Chashchin</a>, a Russian genealogical researcher, says that “almost royals” – illegitimate children and those (like Princess Diana) who show <em>some</em> royal connections but not a clear lineage – have muddied the waters. <a href="https://www.cgr2018.com/" rel="nofollow">Dale Myers</a>, founder of the Colorado Genealogical Research Company, agrees. “Kings tended to have a wife and many consorts or mistresses,” he says. “As a result, King Richard I … may not [have been] related to King Edward after all.”</p>',
-					elementId: '7fb53b38-75e3-453e-aaab-f9a0a94e981c',
+					elementId: '24180009-7ede-47e0-96a2-fed1bfe6fbaa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Plus, royalty isn’t necessarily static. “In the US,” Taylor says, “millions can trace their ancestry back to European royalty through ‘gateway ancestors’ — early colonial Americans with documented lineage to royal lines.” Today, “these ancestors often have millions of living descendants who can claim royal descent. The odds are increased the longer a family has been in a country or region.”</p>',
-					elementId: 'c1a9703f-f74b-4a1b-836c-49aa9a8d672f',
+					elementId: 'f6ef1bab-58db-4971-8cff-ec4b78d2eae2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The bottom line: if someone in your family mated with a royal, or was born to one, it may be enough to link you to a throne.</p>',
-					elementId: '1570981e-0280-4ad1-bd50-bf6d96af407c',
+					elementId: '424a1a0e-05fe-45cd-b437-e9be4a9429be',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='4-can-you-find-your-familys-name-in-a-historical-record-it-could-be-the-link-to-a-royal-ancestry'><strong>4. Can you find your family’s name in a historical record? It could be the link to a royal ancestry</strong></h2>",
-					elementId: '6a9b8b79-f8b8-470c-966a-9cf6195fc4dc',
+					elementId: '03ab6f40-2910-470f-8dd6-859f318e49b1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In many places a dearth of historical records makes it tricky to track royal lines. “If you consider that those of noble birth or wealth were often the only individuals that had written records that were created (and have survived),” says Taylor, “it makes a lot of sense as to why those royal lines are some of the earliest lineages an individual can connect to. While church records might take a family back to the 1600s, landownership and other materials can trace a family back centuries before that date.”</p>',
-					elementId: 'a87ff83b-33f7-48fa-80dc-fbd6d76c1781',
+					elementId: '98deb3b9-ff21-4600-903e-30ac092e06f3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In non-European cultures, he says, “accessible records to connect living individuals to those lines differ … Some areas of the world where oral histories and traditions are prevalent make it even more difficult, as the lineage itself might only exist in the memories of elders.”</p>',
-					elementId: '79183a95-7901-4726-9852-8e8e6f7358c6',
+					elementId: '83c5aa74-1a6f-4dd0-bbe4-ac7f288c7831',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><a href="http://www.doorstothepast.com/" rel="nofollow">Nydia Hanna</a>, who runs the genealogical research firm Doors to the Past, says: “Connecting genealogies in the New World to the Old World may be difficult for several reasons.” Central America and the Caribbean, for instance, have been afflicted by “many wars and changeovers as far as governing bodies. Although documents and vital records were kept in the Old World, some of those documents were not kept in the New World unless for tax purposes. This meant that only the upper class have records, in most cases.”</p>',
-					elementId: '8bac862b-bef0-4acf-a5d9-5a02aff56fcc',
+					elementId: '60e0cdb7-f87c-4fd6-9f63-ad322782da45',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Think of it this way: if you’re able to find a paper trail, you might want to see where it leads.</p>',
-					elementId: '49ef53e7-3602-4f78-b4fc-bc6592de8b05',
+					elementId: 'b59d7f2e-3e75-420a-9c4d-7b845caa43d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='5-europe-doesnt-have-a-monopoly-on-royalty'><strong>5. Europe doesn’t have a monopoly on royalty</strong></h2>",
-					elementId: '85150c48-91f9-41a5-8be1-f66e3f689851',
+					elementId: 'be76d7c7-8b77-4041-9298-d7f1a499dd11',
 				},
 				{
 					displayCredit: true,
@@ -1083,7 +1083,7 @@ export const Labs: DCRArticle = {
 							},
 						],
 					},
-					elementId: 'd5804c02-c56c-4f37-92cb-caca5ef04cc4',
+					elementId: '672d45fd-0481-4ac2-8620-797195ebd511',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -1335,69 +1335,69 @@ export const Labs: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Of course, not all royal roots reach back to Europe. It may be where many records have survived, and the subject of much genealogical research. But if your family origins can be traced elsewhere, you may still be in luck – here are a few notable findings.</p>',
-					elementId: '63fb9c1b-c551-41ca-8e2e-5f5c2a5115a8',
+					elementId: '1b8253fb-469b-4368-9453-71663f93bfb4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In 2003, a<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1180246/" rel="nofollow"> groundbreaking study</a> showed that one in every 200 men worldwide (and 16 million in central Asia) are direct-line descendants of the 12th-century Mongolian emperor Genghis Khan. Yet Khan’s not the only Asian ruler responsible for millions of Y-chromosome lineages. According to an<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1285168/" rel="nofollow"> international study in 2005</a>, 10 other men living in Asia and the Middle East between 2100 BC and 700 AD left behind prolific royal lines. One of them was a 16th-century Qing dynasty ruler named Giocangga, whose descendants include 1.5 million men in modern northern China.</p>',
-					elementId: '512ff996-b66f-43f1-aa04-ceca06239fd5',
+					elementId: 'c49919aa-0547-4608-8051-7cb34bcc2d68',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Over in South America, <a href="https://link.springer.com/article/10.1007/s00438-018-1427-4" rel="nofollow">genetic and historical research</a> has found noble bloodlines directly connecting Atahualpa, the last Incan emperor (who died 1533), to some of modern Peru’s humblest families.</p>',
-					elementId: 'd9e4eb4c-361d-4a46-b604-6f64cfdbaa4d',
+					elementId: 'fa3a3445-ac7c-42f5-a402-9dd10dd13e27',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>And don’t forget about the Egyptian pharaoh Tutankhamun, aka King Tut. Half of all men living in western Europe are related to him, <a href="https://uk.reuters.com/article/oukoe-uk-britain-tutankhamun-dna/half-of-european-men-share-king-tuts-dna-idUKTRE7704OR20110801" rel="nofollow">geneticists in Switzerland say</a>, including up to 70% of men in Great Britain.</p>',
-					elementId: '8bd7c900-0191-4e92-b9b8-86478ed27b14',
+					elementId: 'ac4ad627-f99b-4e4a-96d5-9e85e240be4d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='6-a-royal-lineage-may-be-the-culprit-for-spreading-certain-undesirable-traits'><strong>6. A royal lineage may be the culprit for spreading certain undesirable traits</strong></h2>",
-					elementId: '2d26b878-f02c-4f2c-a216-8cb60451493a',
+					elementId: '4ff59813-7414-48a4-9d3e-c6bb7444c930',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>King Tut left something else behind as well: a legacy of inbreeding, genetic deformities and recessive ailments.</p>',
-					elementId: '7066accc-b645-4f6f-b5ce-b48b61cc008c',
+					elementId: '97553250-6518-4de6-b6a0-c072831f2846',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In royal families in ancient Egypt – and in many dynasties around the world, for much of human history – brothers and sisters were expected to marry, to keep the bloodline pure. This led to homozygosity — two identical forms of a gene, one inherited from each parent — which can cause a host of genetic woes: hemophilia, cystic fibrosis, Habsburg jaw, facial asymmetry, suppressed immune systems and certain kinds of cancer.</p>',
-					elementId: '82dde8d1-4dbc-432f-ba55-746084a9970c',
+					elementId: 'b909e5cf-cbbf-4cc2-a5cd-cda8a4ed9d03',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>King Tut himself is an example. Born to parents who were brother and sister, he had a club foot, a cleft palate, scoliosis and missing bones in his feet. Geneticists think that when he died, around 1324 BC, sickle-cell disease – an inherited blood disorder – was the culprit. (Cleopatra, the last pharaoh, was married to her own brother, too.)</p>',
-					elementId: '8f86b77d-fb90-4fa8-bcfb-51206d5e7aa7',
+					elementId: '6cd5d1b7-6a87-4e4c-bad9-b7d4bd71b0bb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The jutting Habsburg jaw is another well-known woe. The first royal to have one was the Roman Emperor Maximilian I, who ruled from 1486 to 1519. But soon it turned up all over medieval Europe. Switzerland’s House of Habsburg got stuck with the name because so many of its members had the condition. (Spain’s current ruler, King Juan Carlos I, a distant descendant of the House of Hapsburg, has a correspondingly mild case of Habsburg Jaw.)</p>',
-					elementId: 'fff23acf-bcfe-4ad9-8bb5-7d842e5436ba',
+					elementId: '8745cc8f-edfd-4cb0-8b0b-5f46567cff38',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Then there’s hemophilia. While it’s not necessarily the direct product of inbreeding, it does stem from a gene carried by the incestuous monarchies of Europe, who spread the disease far and wide. Queen Victoria, “the grandmother of modern Europe” who ruled England from 1837 to 1901, is said to have inherited the gene from her father, Prince Edward. She in turn passed it along to her son, Leopold, and to some of her daughters, who then passed it on as well — sometimes beyond continental Europe.<strong> </strong>Tsarevich Alexei Nikolaevich, the heir apparent to the Russian Empire, inherited hemophilia from his mother, the Empress Alexandra Feodorovna (a granddaughter of Queen Victoria).</p>',
-					elementId: 'f2210152-2878-4c27-af66-59f8818301a3',
+					elementId: 'b9a969df-f487-47a2-be0e-2498691ed9a0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>So what does all this mean for today’s royal descendants? “Traits like the Hapsburg jaw, hemophilia, etc, <em>are</em> certainly seen in individuals today,” says Taylor. But while these ailments have spread, at least in part, via royalty, they’re not definite indicators of monarchic ties today.</p>',
-					elementId: '646192a7-08eb-4e15-83b6-830fad247a24',
+					elementId: '0aacb1b2-f69f-4806-828b-43e61028a14b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>In other words, when it comes to royal descent, not every past is prologue.</p>',
-					elementId: 'ea0c5cfb-a5a8-437f-918b-6ce0ca3f0cae',
+					elementId: 'dbdd1834-6d02-44c7-a3f6-ead3ee7135f1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					alt: 'action button emebed',
 					scriptUrl:
 						'https://labs.theguardian.com/2021/test/action_buttons/v2/boot.js',
-					elementId: 'a263184b-10dd-4e79-8302-9671398dc487',
+					elementId: 'ba0cdc41-1dc5-4238-83d3-326e7a0c7f38',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1406,7 +1406,7 @@ export const Labs: DCRArticle = {
 					sourceDomain: 'youtube-nocookie.com',
 					safe: false,
 					alt: 'Watch The Romanoffs trailer',
-					elementId: '8335408a-e43f-45e3-906d-52d42fba5fbd',
+					elementId: '6a4212ec-42f1-473c-b1ce-a3285d21cf16',
 					isThirdPartyTracking: false,
 					html: '<iframe class="iframe" src="https://www.youtube-nocookie.com/embed/Y2qWLttWvYI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="Watch The Romanoffs trailer"></iframe>',
 				},
@@ -1415,7 +1415,7 @@ export const Labs: DCRArticle = {
 					alt: 'Amazon The Romanoffs footer',
 					scriptUrl:
 						'https://labs.theguardian.com/2018/amazon_romanoffs/footer/boot.js',
-					elementId: 'a7eda6e5-206b-4335-89a9-5b6438b8d0c8',
+					elementId: 'c7243cb2-b4a6-435f-9f78-4f4ce653d789',
 				},
 			],
 			attributes: {
@@ -2463,10 +2463,6 @@ export const Labs: DCRArticle = {
 				iconName: 'home',
 				children: [
 					{
-						title: 'Oscars 2024',
-						url: '/film/oscars-2024',
-					},
-					{
 						title: 'Film',
 						url: '/film',
 					},
@@ -2975,7 +2971,7 @@ export const Labs: DCRArticle = {
 				'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg',
 			width: 3000,
 			height: 1800,
-			elementId: '6fa7d38c-2f24-4225-bd12-7599976bcd90',
+			elementId: '9e36c28a-7231-4a26-8fad-0586f8c1b64c',
 			displayCredit: true,
 			alt: 'Are you royal?',
 			credit: 'Illustration: Peter Horvath',
@@ -2986,7 +2982,7 @@ export const Labs: DCRArticle = {
 				'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg',
 			width: 1500,
 			height: 657,
-			elementId: 'a5a7645f-124b-4034-b898-f0d9aab2064a',
+			elementId: '87744452-aa05-4850-b0f1-937d59294475',
 			displayCredit: true,
 			alt: 'Map of Europe',
 			credit: 'Composite: Kim Cortes and teekid/Getty images',
@@ -2997,7 +2993,7 @@ export const Labs: DCRArticle = {
 				'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg',
 			width: 974,
 			height: 1218,
-			elementId: '7a47925a-4a2b-483d-99db-84fa81a4169e',
+			elementId: '2ea83387-74dd-4174-a8a4-aff4591c3dee',
 			displayCredit: true,
 			alt: 'Statue of Queen Elizabeth II',
 			credit: 'Composite: Kim Cortes and Vicente Méndez/Getty images',
@@ -3008,7 +3004,7 @@ export const Labs: DCRArticle = {
 				'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg',
 			width: 1400,
 			height: 840,
-			elementId: 'd5804c02-c56c-4f37-92cb-caca5ef04cc4',
+			elementId: '672d45fd-0481-4ac2-8620-797195ebd511',
 			displayCredit: true,
 			alt: 'Genghis Khan statue',
 			credit: 'Composite: Kim Cortes and gionnixxx/Getty images',
@@ -3022,7 +3018,7 @@ export const Labs: DCRArticle = {
 			credit: 'Illustration: Peter Horvath',
 			masterUrl:
 				'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg',
-			elementId: '6fa7d38c-2f24-4225-bd12-7599976bcd90',
+			elementId: '9e36c28a-7231-4a26-8fad-0586f8c1b64c',
 		},
 		{
 			width: 1500,
@@ -3030,7 +3026,7 @@ export const Labs: DCRArticle = {
 			credit: 'Composite: Kim Cortes and teekid/Getty images',
 			masterUrl:
 				'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg',
-			elementId: 'a5a7645f-124b-4034-b898-f0d9aab2064a',
+			elementId: '87744452-aa05-4850-b0f1-937d59294475',
 		},
 		{
 			width: 974,
@@ -3038,7 +3034,7 @@ export const Labs: DCRArticle = {
 			credit: 'Composite: Kim Cortes and Vicente Méndez/Getty images',
 			masterUrl:
 				'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg',
-			elementId: '7a47925a-4a2b-483d-99db-84fa81a4169e',
+			elementId: '2ea83387-74dd-4174-a8a4-aff4591c3dee',
 		},
 		{
 			width: 1400,
@@ -3046,7 +3042,7 @@ export const Labs: DCRArticle = {
 			credit: 'Composite: Kim Cortes and gionnixxx/Getty images',
 			masterUrl:
 				'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg',
-			elementId: 'd5804c02-c56c-4f37-92cb-caca5ef04cc4',
+			elementId: '672d45fd-0481-4ac2-8620-797195ebd511',
 		},
 	],
 };
