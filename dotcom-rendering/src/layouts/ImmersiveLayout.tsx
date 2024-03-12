@@ -91,7 +91,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
-						'.          border      disclaimer  right-column'
 						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
@@ -115,7 +114,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
-						'.          border      disclaimer  right-column'
 						'.          border      byline      right-column'
 						'lines      border      body        right-column'
 						'meta       border      body        right-column'
@@ -137,7 +135,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'title       right-column'
 						'headline    right-column'
 						'standfirst  right-column'
-						'disclaimer  right-column'
 						'byline      right-column'
 						'caption     right-column'
 						'lines       right-column'
@@ -152,7 +149,6 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
-						'disclaimer'
 						'byline'
 						'caption'
 						'lines'
@@ -271,8 +267,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const navAndLabsHeaderHeight = isLabs
 		? `${combinedHeight}px`
 		: `${minNavHeightPx}px`;
-
-	const hasAffiliateLinksDisclaimer = !!article.affiliateLinksDisclaimer;
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
@@ -550,11 +544,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="disclaimer">
-							{hasAffiliateLinksDisclaimer && (
-								<Disclaimer></Disclaimer>
-							)}
-						</GridItem>
 						<GridItem area="byline">
 							{!!article.byline && (
 								<HeadlineByline
@@ -646,26 +635,37 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										</Hide>
 									</>
 								) : (
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
-									/>
+									<>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+										/>
+										<Hide when="below" breakpoint="leftCol">
+											{!!article.affiliateLinksDisclaimer && (
+												<Disclaimer />
+											)}
+										</Hide>
+									</>
 								)}
 							</div>
 						</GridItem>
