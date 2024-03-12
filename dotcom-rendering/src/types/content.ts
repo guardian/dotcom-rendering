@@ -314,7 +314,7 @@ export interface KeyTakeaway {
 	body: FEElement[];
 }
 
-interface QAndAExplainer {
+export interface QAndAExplainer {
 	title: string;
 	body: FEElement[];
 }
