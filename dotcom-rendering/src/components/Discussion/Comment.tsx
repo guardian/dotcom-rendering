@@ -38,6 +38,7 @@ type Props = {
 	toggleMuteStatus: (userId: string) => void;
 	onPermalinkClick: (commentId: number) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
+	isExpanded: boolean;
 };
 
 const commentControlsLink = css`
@@ -321,13 +322,17 @@ export const Comment = ({
 	toggleMuteStatus,
 	onPermalinkClick,
 	reportAbuse,
+	isExpanded,
 }: Props) => {
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
 		comment.isHighlighted,
 	);
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const [pickError, setPickError] = useState('');
-	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
+
+	const toggleSetShowForm = () => {
+		setAbuseReportForm(!showAbuseReportForm);
+	};
 
 	const pick = async (staffUser: Staff) => {
 		setPickError('');
@@ -769,25 +774,27 @@ export const Comment = ({
 										<></>
 									)}
 									<Space amount={4} />
-									<div
-										css={[
-											buttonLinkBaseStyles,
-											css`
-												button {
-													${textSans.xxsmall()}
-												}
-											`,
-										]}
-									>
-										<Button
-											priority="subdued"
-											size="small"
-											onClick={toggleSetShowForm}
-											data-link-name="Open report abuse"
+									{isExpanded && (
+										<div
+											css={[
+												buttonLinkBaseStyles,
+												css`
+													button {
+														${textSans.xxsmall()}
+													}
+												`,
+											]}
 										>
-											Report
-										</Button>
-									</div>
+											<Button
+												priority="subdued"
+												size="small"
+												onClick={toggleSetShowForm}
+												data-link-name="Open report abuse"
+											>
+												Report
+											</Button>
+										</div>
+									)}
 									{showAbuseReportForm && (
 										<div
 											css={css`

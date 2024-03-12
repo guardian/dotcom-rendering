@@ -379,6 +379,7 @@ export const Comments = ({
 											expandCommentReplies={
 												expandCommentReplies
 											}
+											isExpanded={expanded}
 										/>
 									</li>
 								))}
@@ -459,6 +460,7 @@ export const Comments = ({
 								setPreviewBody={setReplyFormPreviewBody}
 								reportAbuse={reportAbuse}
 								expandCommentReplies={expandCommentReplies}
+								isExpanded={expanded}
 							/>
 						</li>
 					))}
