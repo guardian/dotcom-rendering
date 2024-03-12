@@ -38,7 +38,7 @@ export const signInGateComponent: SignInGateComponent = {
 					signInUrl={signInUrl}
 					registerUrl={registerUrl}
 					abTest={abTest}
-					isMandatory={true}
+					isMandatory={false}
 				/>
 			</Suspense>
 		</Lazy>

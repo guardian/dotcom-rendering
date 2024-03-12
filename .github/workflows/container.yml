@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Container Image
         id: build_image
-        uses: redhat-actions/buildah-build@v2.12
+        uses: redhat-actions/buildah-build@v2.13
         with:
           image: dotcom-rendering
           tags: ${{ github.sha }} ${{ env.GITHUB_REF_SLUG }}
@@ -44,7 +44,7 @@ jobs:
           containerfiles: ./dotcom-rendering/Containerfile
 
       - name: Push Image To GHCR
-        uses: redhat-actions/push-to-registry@v2.7
+        uses: redhat-actions/push-to-registry@v2.8
         id: push
         with:
           image: ${{ steps.build_image.outputs.image }}

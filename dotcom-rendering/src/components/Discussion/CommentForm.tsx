@@ -314,6 +314,70 @@ export const CommentForm = ({
 		setPreviewBody(response.value);
 	};
 
+	const handleError = (commentError: string) => {
+		switch (commentError) {
+			// Reader has never posted before and needs to choose a username
+			case 'USERNAME_MISSING':
+				return setUserNameMissing(true);
+			case 'EMPTY_COMMENT_BODY':
+				return setError('Please write a comment.');
+			case 'COMMENT_TOO_LONG':
+				return setError(
+					'Your comment must be fewer than 5000 characters long.',
+				);
+			case 'USER_BANNED':
+				return setError(
+					'Commenting has been disabled for this account (<a href="/community-faqs#321a">why?</a>).',
+				);
+			case 'IP_THROTTLED':
+				return setError(
+					'Commenting has been temporarily blocked for this IP address (<a href="/community-faqs">why?</a>).',
+				);
+			case 'DISCUSSION_CLOSED':
+				return setError(
+					'Sorry your comment can not be published as the discussion is now closed for comments.',
+				);
+			case 'PARENT_COMMENT_MODERATED':
+				return setError(
+					'Sorry the comment can not be published as the comment you replied to has been moderated since.',
+				);
+			case 'COMMENT_RATE_LIMIT_EXCEEDED':
+				return setError(
+					'You can only post one comment every minute. Please try again in a moment.',
+				);
+			case 'INVALID_PROTOCOL':
+				return setError(`Sorry your comment can not be published as it was not sent over
+					a secure channel. Please report us this issue using the technical issue link
+					in the page footer.`);
+			case 'AUTH_COOKIE_INVALID':
+				return setError(
+					'Sorry, your comment was not published as you are no longer signed in. Please sign in and try again.',
+				);
+			case 'READ-ONLY-MODE':
+				return setError(`Sorry your comment can not currently be published as
+					commenting is undergoing maintenance but will be back shortly. Please try
+					again in a moment.`);
+			case 'API_CORS_BLOCKED':
+				return setError(`Could not post due to your internet settings, which might be
+				   controlled by your provider. Please contact your administrator
+				   or disable any proxy servers or VPNs and try again.`);
+			case 'API_ERROR':
+				return setError(`Sorry, there was a problem posting your comment. Please try
+					another browser or network connection.  Reference code `);
+			case 'EMAIL_NOT_VALIDATED':
+				// TODO: Support resending verification email
+				return setError(`Please confirm your email address to comment.<br />
+					If you can't find the email, we can
+					<a href="#">
+					<strong>resend the verification email</strong></a> to your email
+					address.`);
+			default:
+				return setError(
+					'Sorry, there was a problem posting your comment.',
+				);
+		}
+	};
+
 	const resetForm = () => {
 		setError('');
 		setBody('');
@@ -335,66 +399,7 @@ export const CommentForm = ({
 				: await user.onComment(shortUrl, body);
 			// Check response message for error states
 			if (response.kind === 'error') {
-				if (response.error === 'USERNAME_MISSING') {
-					// Reader has never posted before and needs to choose a username
-					setUserNameMissing(true);
-				} else if (response.error === 'EMPTY_COMMENT_BODY') {
-					setError('Please write a comment.');
-				} else if (response.error === 'COMMENT_TOO_LONG') {
-					setError(
-						'Your comment must be fewer than 5000 characters long.',
-					);
-				} else if (response.error === 'USER_BANNED') {
-					setError(
-						'Commenting has been disabled for this account (<a href="/community-faqs#321a">why?</a>).',
-					);
-				} else if (response.error === 'IP_THROTTLED') {
-					setError(
-						'Commenting has been temporarily blocked for this IP address (<a href="/community-faqs">why?</a>).',
-					);
-				} else if (response.error === 'DISCUSSION_CLOSED') {
-					setError(
-						'Sorry your comment can not be published as the discussion is now closed for comments.',
-					);
-				} else if (response.error === 'PARENT_COMMENT_MODERATED') {
-					setError(
-						'Sorry the comment can not be published as the comment you replied to has been moderated since.',
-					);
-				} else if (response.error === 'COMMENT_RATE_LIMIT_EXCEEDED') {
-					setError(
-						'You can only post one comment every minute. Please try again in a moment.',
-					);
-				} else if (response.error === 'INVALID_PROTOCOL') {
-					setError(`Sorry your comment can not be published as it was not sent over
-                  a secure channel. Please report us this issue using the technical issue link
-                  in the page footer.`);
-				} else if (response.error === 'AUTH_COOKIE_INVALID') {
-					setError(
-						'Sorry, your comment was not published as you are no longer signed in. Please sign in and try again.',
-					);
-				} else if (response.error === 'READ-ONLY-MODE') {
-					setError(`Sorry your comment can not currently be published as
-                  commenting is undergoing maintenance but will be back shortly. Please try
-                  again in a moment.`);
-				} else if (response.error === 'API_CORS_BLOCKED') {
-					setError(`Could not post due to your internet settings, which might be
-                 controlled by your provider. Please contact your administrator
-                 or disable any proxy servers or VPNs and try again.`);
-				} else if (response.error === 'API_ERROR') {
-					setError(`Sorry, there was a problem posting your comment. Please try
-                  another browser or network connection.  Reference code `);
-				} else if (response.error === 'EMAIL_NOT_VALIDATED') {
-					// TODO: Support resending verification email
-					setError(`Please confirm your email address to comment.<br />
-            If you can't find the email, we can
-            <a href="#">
-            <strong>resend the verification email</strong></a> to your email
-            address.`);
-				} else {
-					setError(
-						'Sorry, there was a problem posting your comment.',
-					);
-				}
+				handleError(response.error);
 			} else {
 				onAddComment(
 					commentBeingRepliedTo
