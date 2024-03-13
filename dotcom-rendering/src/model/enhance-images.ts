@@ -8,6 +8,7 @@ import { getLargest, getMaster } from '../lib/image';
 import type {
 	CartoonBlockElement,
 	FEElement,
+	Image,
 	ImageBlockElement,
 	ImageForLightbox,
 	MultiImageBlockElement,
@@ -18,6 +19,19 @@ import type {
 interface HalfWidthImageBlockElement extends ImageBlockElement {
 	role: 'halfWidth';
 }
+
+/**
+ * When opening cartoons in the lightbox we always want the entire cartoon,
+ * i.e. the desktop version stored in the large variant
+ */
+export const getCartoonImageForLightbox = (
+	element: CartoonBlockElement,
+): Image[] => {
+	const largeVariant = element.variants.find(
+		(variant) => variant.viewportSize === 'large',
+	);
+	return largeVariant?.images ?? [];
+};
 
 const isHalfWidthImage = (
 	element?: FEElement,
@@ -320,7 +334,7 @@ const addImagePositions = <E extends FEElement>(
 
 		const allImages = isImage(element)
 			? element.media.allImages
-			: element.variants.flatMap((variant) => variant.images);
+			: getCartoonImageForLightbox(element);
 
 		const image = getMaster(allImages) ?? getLargest(allImages);
 
