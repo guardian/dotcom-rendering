@@ -23,7 +23,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
-import { Disclaimer } from '../components/Disclaimer';
+import { AffiliateDisclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -709,7 +709,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									/>
 									<Hide until="leftCol">
 										{!!article.affiliateLinksDisclaimer && (
-											<Disclaimer />
+											<AffiliateDisclaimer />
 										)}
 									</Hide>
 								</div>

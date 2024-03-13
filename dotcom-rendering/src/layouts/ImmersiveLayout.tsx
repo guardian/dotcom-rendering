@@ -22,7 +22,7 @@ import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
-import { Disclaimer } from '../components/Disclaimer';
+import { AffiliateDisclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -662,7 +662,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										/>
 										<Hide when="below" breakpoint="leftCol">
 											{!!article.affiliateLinksDisclaimer && (
-												<Disclaimer />
+												<AffiliateDisclaimer />
 											)}
 										</Hide>
 									</>
