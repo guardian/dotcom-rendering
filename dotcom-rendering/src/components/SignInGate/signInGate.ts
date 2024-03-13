@@ -4,6 +4,7 @@ import { signInGateAlternativeWording } from '../../experiments/tests/sign-in-ga
 import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
 // Sign in Gate Types
+import { signInGateComponent as alternativeWordingControl } from './gates/alternative-wording-control';
 import { signInGateComponent as alternativeWordingGuardianLive } from './gates/alternative-wording-guardian-live';
 import { signInGateComponent as alternativeWordingSaturdayEdition } from './gates/alternative-wording-saturday-edition';
 import { signInGateComponent as gateMainControl } from './gates/main-control';
@@ -26,7 +27,7 @@ export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-variant-5': gateMainVariant,
 	'alternative-wording-guardian-live': alternativeWordingGuardianLive,
 	'alternative-wording-saturday-edition': alternativeWordingSaturdayEdition,
-	'alternative-wording-control': gateMainVariant,
+	'alternative-wording-control': alternativeWordingControl,
 };
 
 // Component Id does not need to match gate test name, as ab test info passed separately to ophan
