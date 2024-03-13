@@ -6,7 +6,11 @@ import type {
 	ImageBlockElement,
 	ImageForLightbox,
 } from '../types/content';
-import { isCartoon, isImage } from './enhance-images';
+import {
+	getCartoonImageForLightbox,
+	isCartoon,
+	isImage,
+} from './enhance-images';
 
 /** Used to determine if a lightbox can be created */
 const THRESHOLD = 620;
@@ -55,7 +59,7 @@ const buildLightboxImage = (
 ): Omit<ImageForLightbox, 'position'> | undefined => {
 	const allImages = isImage(element)
 		? element.media.allImages
-		: element.variants.flatMap(({ images }) => images);
+		: getCartoonImageForLightbox(element);
 	const masterImage = getMaster(allImages) ?? getLargest(allImages);
 
 	// Rare, but legacy content might not have a url that we can use with Fastly
