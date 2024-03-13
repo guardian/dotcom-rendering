@@ -24,7 +24,7 @@ const headingLineStyles = css`
 	width: 140px;
 	margin: 0px;
 	border: none;
-	border-top: 8px solid ${palette('--heading-line')};
+	border-top: 4px solid ${palette('--heading-line')};
 `;
 
 interface KeyTakeawayProps {
