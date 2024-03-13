@@ -13,7 +13,6 @@ type Props = {
 	isNetworkFront: boolean;
 	deeplyRead?: TrailType[];
 	editionId?: EditionId;
-	hasPageSkin?: boolean;
 };
 
 export const GeneratedSummary = ({
@@ -23,7 +22,6 @@ export const GeneratedSummary = ({
 	isNetworkFront,
 	deeplyRead,
 	editionId,
-	hasPageSkin,
 }: Props) => {
 	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
 	const sectionName = displayName.replace('Most viewed ', '');
@@ -66,11 +64,7 @@ export const GeneratedSummary = ({
 				`}
 			>
 				<Island priority="feature" defer={{ until: 'idle' }}>
-					<GeneratedSummaryGrid
-						data={tabs}
-						sectionId="sectionId"
-						hasPageSkin={hasPageSkin}
-					/>
+					<GeneratedSummaryGrid data={tabs} sectionId="sectionId" />
 				</Island>
 			</div>
 		</>

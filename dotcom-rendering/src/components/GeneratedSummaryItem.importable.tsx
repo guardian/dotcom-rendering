@@ -2,9 +2,9 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { body, headline, until } from '@guardian/source-foundations';
+import { body, until } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { palette } from '../palette';
 import type { DCRFrontImage } from '../types/front';
 import { AgeWarning } from './AgeWarning';
@@ -13,17 +13,13 @@ import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 import { ShareButton } from './ShareButton.importable';
 
-const gridItem = (position: number, hasPageSkin: boolean) => {
-	const borderTop = hasPageSkin
-		? css`
-				border-top: 1px solid ${palette('--article-border')};
-		  `
-		: css`
-				/* Below leftCol always set top border */
-				${until.leftCol} {
-					border-top: 1px solid ${palette('--article-border')};
-				}
-		  `;
+const gridItem = (position: number) => {
+	const borderTop = css`
+		/* Below leftCol always set top border */
+		${until.leftCol} {
+			border-top: 1px solid ${palette('--article-border')};
+		}
+	`;
 	return css`
 		position: relative;
 
@@ -121,7 +117,6 @@ type Props = {
 	headlineText: string;
 	ageWarning?: string;
 	cssOverrides?: SerializedStyles | SerializedStyles[];
-	hasPageSkin?: boolean;
 	image?: DCRFrontImage;
 	webPublicationDate: string;
 };
@@ -181,39 +176,9 @@ export const GeneratedSummaryItem = ({
 	headlineText,
 	ageWarning,
 	cssOverrides,
-	hasPageSkin = false,
 	image,
 	webPublicationDate,
 }: Props) => {
-	//quick hack to get the date in the right format
-	const originalDate = new Date(webPublicationDate);
-
-	const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-	const months = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec',
-	];
-
-	const dayOfWeek = days[originalDate.getUTCDay()];
-	const dayOfMonth = originalDate.getUTCDate();
-	const month = months[originalDate.getUTCMonth()];
-	const year = originalDate.getUTCFullYear();
-	const hours = originalDate.getUTCHours().toString().padStart(2, '0');
-	const minutes = originalDate.getUTCMinutes().toString().padStart(2, '0');
-	const seconds = originalDate.getUTCSeconds().toString().padStart(2, '0');
-
-	const formattedDateString = `${dayOfWeek} ${dayOfMonth} ${month} ${year} ${hours}:${minutes}:${seconds} GMT`;
-
 	const summaryText = 'summary text here';
 	const readMorePrompt = 'read more here';
 
@@ -239,7 +204,7 @@ export const GeneratedSummaryItem = ({
 
 	return (
 		<li
-			css={[gridItem(position, hasPageSkin), cssOverrides]}
+			css={[gridItem(position), cssOverrides]}
 			data-link-name={`${position} | text`}
 		>
 			{/* <a css={headlineLink} href={url} data-link-name="article"> */}

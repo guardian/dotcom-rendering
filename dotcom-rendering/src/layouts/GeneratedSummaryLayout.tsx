@@ -282,7 +282,6 @@ export const GeneratedSummaryLayout = ({ front, NAV }: Props) => {
 									isNetworkFront={front.isNetworkFront}
 									deeplyRead={deeplyReadData}
 									editionId={front.editionId}
-									hasPageSkin={hasPageSkin}
 								/>
 							</GeneratedSummarySection>
 							{decideMerchHighAndMobileAdSlots(
