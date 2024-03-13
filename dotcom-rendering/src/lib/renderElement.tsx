@@ -27,6 +27,7 @@ import { InteractiveContentsBlockComponent } from '../components/InteractiveCont
 import { InteractiveLayoutAtom } from '../components/InteractiveLayoutAtom';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
+import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
@@ -136,6 +137,7 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
+	abTests,
 	editionId,
 }: Props) => {
 	const isBlog =
@@ -416,6 +418,20 @@ export const renderElement = ({
 						/>
 					</Island>
 				</div>
+			);
+		case 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement':
+			return (
+				<KeyTakeaways
+					keyTakeaways={element.keyTakeaways}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return (
