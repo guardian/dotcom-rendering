@@ -485,7 +485,7 @@ const parse =
 				const parseTitle = (
 					title: string,
 				): Array<Result<string, BodyElement>> => {
-					const doc = context.docParser(`<h2>${title}`);
+					const doc = context.docParser(`<h2>${title}</h2>`);
 					return flattenTextElement(doc).map((elem) =>
 						Result.ok(elem),
 					);
