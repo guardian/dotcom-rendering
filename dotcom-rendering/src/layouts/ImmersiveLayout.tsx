@@ -101,9 +101,9 @@ const ImmersiveGrid = ({
 									'.          border      standfirst '
 									'.          border      disclaimer '
 									'.          border      byline     '
-									'lines      border      byline       '
-									'meta       border      byline       '
-									'meta       border      byline       '
+									'.      border      byline       '
+									' .      border      meta       '
+									'lines     border      meta       '
 									'.          border      body       '
 									'.          border      .          ';
 						  `
@@ -144,8 +144,8 @@ const ImmersiveGrid = ({
 										'.          border      disclaimer '
 										'.          border      byline     '
 										'lines      border      byline       '
-										'meta       border      byline       '
-										'meta       border      byline       '
+										'.       border      meta       '
+										'.      border      meta       '
 										'.          border      body       '
 										'.          border      .          ';
 								}
