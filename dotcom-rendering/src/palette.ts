@@ -2704,7 +2704,7 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.news[100];
 					}
-
+				case ArticleDesign.Gallery:
 				case ArticleDesign.Picture:
 					return sourcePalette.neutral[86];
 				default:
