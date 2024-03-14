@@ -221,6 +221,17 @@ const VideoIcon = ({ format }: IconProps) => {
 	);
 };
 
+const displayIcon = (mediaType: MediaType, format: ArticleFormat) => {
+	switch (mediaType) {
+		case 'Gallery':
+			return null;
+		case 'Video':
+			return <VideoIcon format={format} />;
+		default:
+			return <CameraIcon format={format} />;
+	}
+};
+
 export const Caption = ({
 	captionText,
 	format,
@@ -254,11 +265,8 @@ export const Caption = ({
 				mediaType === 'Video' && videoPadding,
 			]}
 		>
-			{mediaType === 'Video' ? (
-				<VideoIcon format={format} />
-			) : (
-				<CameraIcon format={format} />
-			)}
+			{displayIcon(mediaType, format)}
+
 			{!!captionText && (
 				<span
 					css={captionLink}
