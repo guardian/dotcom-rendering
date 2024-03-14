@@ -64,6 +64,16 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (design) {
+				case ArticleDesign.Gallery: {
+					return css`
+						${headline.xxxsmall({
+							fontWeight: 'bold',
+						})};
+						margin-bottom: ${space[3]}px;
+						max-width: 540px;
+						color: ${palette('--standfirst-text')};
+					`;
+				}
 				case ArticleDesign.PhotoEssay:
 					if (theme === ArticleSpecial.Labs) {
 						return css`
