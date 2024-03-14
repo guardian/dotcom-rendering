@@ -2,8 +2,26 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { body, breakpoints, from, space } from '@guardian/source-foundations';
+import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { Accordion } from './Accordion';
+import { Accordion as AccordionComponent } from './Accordion';
+
+const meta = {
+	component: AccordionComponent,
+	parameters: {
+		backgrounds: {
+			default: 'grey',
+			values: [{ name: 'grey', value: 'lightgrey' }],
+		},
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.tablet],
+		},
+	},
+} satisfies Meta<typeof AccordionComponent>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const textStyle = css`
 	${body.medium({ lineHeight: 'loose' })};
@@ -55,23 +73,11 @@ const accordionContent = (
 	</>
 );
 
-export default {
-	component: Accordion,
-	title: 'Components/Accordion',
-	parameters: {
-		backgrounds: {
-			default: 'grey',
-			values: [{ name: 'grey', value: 'lightgrey' }],
-		},
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.tablet],
-		},
+export const Accordion = {
+	args: {
+		accordionTitle: 'Live feed',
+		context: 'keyEvents',
+		children: accordionContent,
 	},
 	decorators: [splitTheme([articleFormat])],
-};
-
-export const Default = () => (
-	<Accordion accordionTitle="Live feed" context="keyEvents">
-		{accordionContent}
-	</Accordion>
-);
+} satisfies Story;

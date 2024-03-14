@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
-import { palette, text, textSans } from '@guardian/source-foundations';
+import { text, textSans } from '@guardian/source-foundations';
 import {
 	neutralBorder,
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
 } from '../lib/pillars';
 import ClockIcon from '../static/icons/clock.svg';
-import TwitterIcon from '../static/icons/twitter.svg';
 import { ShareIcons } from './ShareIcons.amp';
 
 const pillarColours = pillarMap(
@@ -57,13 +56,6 @@ const metaStyle = css`
 	text-decoration: none;
 `;
 
-const twitterIcon = css`
-	fill: ${palette.neutral[46]};
-	height: 12px;
-	margin-bottom: -2px;
-	width: 12px;
-`;
-
 type WebPublicationDateProps = {
 	date: string;
 };
@@ -89,28 +81,11 @@ const AgeWarning = ({ warning, pillar }: AgeWarningProps) => {
 	);
 };
 
-type TwitterHandleProps = {
-	handle?: string;
-};
-
-const TwitterHandle = ({ handle }: TwitterHandleProps) => {
-	if (!handle) {
-		return null;
-	}
-
-	return (
-		<a css={metaStyle} href={`https://twitter.com/${handle}`}>
-			<TwitterIcon css={twitterIcon} /> @{handle}
-		</a>
-	);
-};
-
 type TopMetaExtrasProps = {
 	sharingUrls: SharingURLs;
 	pillar: ArticleTheme;
 	webPublicationDate: string;
 	ageWarning?: string;
-	twitterHandle?: string;
 };
 
 export const TopMetaExtras = ({
@@ -118,10 +93,8 @@ export const TopMetaExtras = ({
 	pillar,
 	webPublicationDate,
 	ageWarning,
-	twitterHandle,
 }: TopMetaExtrasProps) => (
 	<div css={metaExtras}>
-		<TwitterHandle handle={twitterHandle} />
 		<WebPublicationDate date={webPublicationDate} />
 
 		<div css={borders(pillar)}>

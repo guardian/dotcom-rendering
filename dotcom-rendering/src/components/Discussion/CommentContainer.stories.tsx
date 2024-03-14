@@ -202,6 +202,7 @@ export const defaultStory = () => (
 		setPreviewBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
+		isExpanded={true}
 	/>
 );
 defaultStory.storyName = 'default';
@@ -236,6 +237,7 @@ export const threadedComment = () => (
 		setPreviewBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
+		isExpanded={true}
 	/>
 );
 threadedComment.storyName = 'threaded';
@@ -270,6 +272,7 @@ export const threadedCommentWithShowMore = () => (
 		setPreviewBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
+		isExpanded={true}
 	/>
 );
 threadedCommentWithShowMore.storyName = 'threaded with show more button';
@@ -304,6 +307,7 @@ export const threadedCommentWithLongUsernames = () => (
 		setPreviewBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
+		isExpanded={true}
 	/>
 );
 threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
@@ -338,6 +342,7 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		setPreviewBody={() => {}}
 		reportAbuse={() => Promise.resolve(ok(true))}
 		expandCommentReplies={() => {}}
+		isExpanded={true}
 	/>
 );
 threadedCommentWithLongUsernamesMobile.storyName =

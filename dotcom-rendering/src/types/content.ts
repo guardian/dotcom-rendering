@@ -309,6 +309,37 @@ interface ItemLinkBlockElement {
 	html: string;
 }
 
+export interface KeyTakeaway {
+	title: string;
+	body: FEElement[];
+}
+
+export interface QAndAExplainer {
+	title: string;
+	body: FEElement[];
+}
+
+interface KeyTakeawaysBlockElement {
+	_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement';
+	keyTakeaways: KeyTakeaway[];
+}
+
+interface QAndAExplainerBlockElement {
+	_type: 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement';
+	qAndAExplainers: QAndAExplainer[];
+}
+
+interface ListItem {
+	title?: string;
+	elements: FEElement[];
+}
+
+export interface ListBlockElement {
+	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
+	listElementType: 'KeyTakeaways' | 'QAndAExplainer';
+	items: ListItem[];
+}
+
 export interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	elementId: string;
@@ -647,6 +678,8 @@ export type FEElement =
 	| InteractiveContentsBlockElement
 	| InteractiveBlockElement
 	| ItemLinkBlockElement
+	| KeyTakeawaysBlockElement
+	| ListBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
@@ -654,6 +687,7 @@ export type FEElement =
 	| NewsletterSignupBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
+	| QAndAExplainerBlockElement
 	| QABlockElement
 	| QuizAtomBlockElement
 	| RichLinkBlockElement

@@ -982,6 +982,40 @@ const headlineBorder: PaletteFunction = ({ design }) => {
 	}
 };
 
+const headingLineLight: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 200);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
+	}
+};
+
 const avatarLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
@@ -2133,32 +2167,6 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 			}
 
 			return sourcePalette.neutral[60];
-		default:
-			return sourcePalette.neutral[60];
-	}
-};
-
-const twitterHandleLight: PaletteFunction = ({ theme }) => {
-	switch (theme) {
-		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[0];
-		case ArticleSpecial.SpecialReport:
-			return sourcePalette.specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[100];
-		default:
-			return sourcePalette.neutral[46];
-	}
-};
-
-const twitterHandleDark: PaletteFunction = ({ theme }) => {
-	switch (theme) {
-		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[86];
-		case ArticleSpecial.SpecialReport:
-			return sourcePalette.specialReport[700];
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[700];
 		default:
 			return sourcePalette.neutral[60];
 	}
@@ -5198,6 +5206,10 @@ const paletteColours = {
 		light: headlineBlogBackgroundLight,
 		dark: headlineBlogBackgroundDark,
 	},
+	'--heading-line': {
+		light: headingLineLight,
+		dark: headingLineDark,
+	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
 		dark: starRatingFillColourDark,
@@ -5205,10 +5217,6 @@ const paletteColours = {
 	'--star-rating-background': {
 		light: starRatingBackgroundColourLight,
 		dark: starRatingBackgroundColourDark,
-	},
-	'--twitter-handle': {
-		light: twitterHandleLight,
-		dark: twitterHandleDark,
 	},
 	'--block-quote-fill': {
 		light: blockQuoteFillLight,
