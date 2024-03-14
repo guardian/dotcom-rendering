@@ -62,8 +62,8 @@ export const KeyTakeaway = ({
 }: KeyTakeawayProps) => {
 	return (
 		<>
-			<hr css={headingLineStyles} />
 			<li css={keyTakeawayStyles}>
+				<hr css={headingLineStyles} />
 				<h2 css={headingStyles}>
 					<span css={headingIndexStyles}>{`${titleIndex}. `}</span>
 					{keyTakeaway.title}
