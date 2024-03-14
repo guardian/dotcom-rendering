@@ -3,7 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	headline,
-	palette,
+	palette as sourcePalette,
 	space,
 	textSans,
 	until,
@@ -97,7 +97,7 @@ const analysisStyles = css`
 		}
 	}
 	span {
-		color: ${palette.neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 `;
 
@@ -131,6 +131,10 @@ const immersiveLinkStyles = css`
 	}
 `;
 
+const galleryStyles = css`
+	color: ${sourcePalette.neutral[100]};
+`;
+
 // If there is an image reduce the width of the author div
 const authorBylineWithImage = css`
 	width: 68%;
@@ -152,7 +156,13 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return (
-				<div css={immersiveStyles(format)}>
+				<div
+					css={[
+						immersiveStyles(format),
+						format.design === ArticleDesign.Gallery &&
+							galleryStyles,
+					]}
+				>
 					by{' '}
 					<span css={immersiveLinkStyles}>
 						<BylineLink
