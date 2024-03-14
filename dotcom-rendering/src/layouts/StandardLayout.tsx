@@ -101,44 +101,43 @@ const StandardGrid = ({
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr 300px;
 
-					${
-						isMatchReport
-							? css`
-									grid-template-areas:
-										'title  border  matchNav     right-column'
-										'title  border  matchtabs    right-column'
-										'.      border  headline     right-column'
-										'.      border  standfirst   right-column'
-										'lines  border  media        right-column'
-										'meta   border  media        right-column'
-										'meta   border  body         right-column'
-										'.      border  .            right-column';
-							  `
-							: isMedia
-							? css`
-									grid-template-areas:
-										'title  border  headline     right-column'
-										'.      border  disclaimer   right-column'
-										'lines  border  media        right-column'
-										'meta   border  media        right-column'
-										'meta   border  standfirst   right-column'
-										'.      border  body         right-column'
-										'.      border  .            right-column';
-							  `
-							: css`
-									grid-template-areas:
-										'title  border  headline     right-column'
-										'.      border  standfirst   right-column'
-										'.      border  disclaimer   right-column'
-										'lines  border  media        right-column'
-										'meta   border  media        right-column'
-										'meta   border  body         right-column'
-										'.      border  .            right-column';
-							  `
-					}}
+					${isMatchReport
+						? css`
+								grid-template-areas:
+									'title  border  matchNav     right-column'
+									'title  border  matchtabs    right-column'
+									'.      border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `
+						: isMedia
+						? css`
+								grid-template-areas:
+									'title  border  headline     right-column'
+									'.      border  disclaimer   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  standfirst   right-column'
+									'.      border  body         right-column'
+									'.      border  .            right-column';
+						  `
+						: css`
+								grid-template-areas:
+									'title  border  headline     right-column'
+									'.      border  standfirst   right-column'
+									'.      border  disclaimer   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  body         right-column'
+									'.      border  .            right-column';
+						  `}
 				}
+			}
 
-				/*
+			/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column
@@ -146,115 +145,110 @@ const StandardGrid = ({
 					Main content
 					Right Column
 				*/
-				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+			${until.wide} {
+				grid-template-columns: 140px 1px 1fr 300px;
 
-					${
-						isMatchReport
-							? css`
-									grid-template-areas:
-										'title  border  matchNav     right-column'
-										'title  border  matchtabs    right-column'
-										'.      border  headline     right-column'
-										'.      border  standfirst   right-column'
-										'lines  border  media        right-column'
-										'meta   border  media        right-column'
-										'meta   border  body         right-column'
-										'.      border  .            right-column';
-							  `
-							: isMedia
-							? css`
-									grid-template-areas:
-										'title  border  headline     right-column'
-										'.      border  disclaimer   right-column'
-										'lines  border  media        right-column'
-										'meta   border  media        right-column'
-										'meta   border  standfirst   right-column'
-										'.      border  body         right-column'
-										'.      border  .            right-column';
-							  `
-							: css`
-									grid-template-areas:
-										'title  border  headline     right-column'
-										'.      border  standfirst   right-column'
-										'.      border  disclaimer   right-column'
-										'lines  border  media        right-column'
-										'meta   border  media        right-column'
-										'meta   border  body         right-column'
-										'.      border  .            right-column';
-							  `
-					}
-				}
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'title  border  matchNav     right-column'
+								'title  border  matchtabs    right-column'
+								'.      border  headline     right-column'
+								'.      border  standfirst   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  body         right-column'
+								'.      border  .            right-column';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title  border  headline     right-column'
+								'.      border  disclaimer   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  standfirst   right-column'
+								'.      border  body         right-column'
+								'.      border  .            right-column';
+					  `
+					: css`
+							grid-template-areas:
+								'title  border  headline     right-column'
+								'.      border  standfirst   right-column'
+								'.      border  disclaimer   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  body         right-column'
+								'.      border  .            right-column';
+					  `}
+			}
 
-				/*
+			/*
 					Explanation of each unit of grid-template-columns
 
 					Main content
 					Right Column
 				*/
-				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
-					${
-						isMatchReport
-							? css`
-									grid-template-areas:
-										'matchNav      right-column'
-										'matchtabs	   right-column'
-										'title         right-column'
-										'headline      right-column'
-										'standfirst    right-column'
-										'media         right-column'
-										'lines         right-column'
-										'meta          right-column'
-										'body          right-column'
-										'.             right-column';
-							  `
-							: isMedia
-							? css`
-									grid-template-areas:
-										'title         right-column'
-										'headline      right-column'
-										'disclaimer    right-column'
-										'media         right-column'
-										'standfirst    right-column'
-										'lines         right-column'
-										'meta          right-column'
-										'body          right-column'
-										'.             right-column';
-							  `
-							: css`
-									grid-template-areas:
-										'title         right-column'
-										'headline      right-column'
-										'standfirst    right-column'
-										'disclaimer    right-column'
-										'media         right-column'
-										'lines         right-column'
-										'meta          right-column'
-										'body          right-column'
-										'.             right-column';
-							  `
-					}
-				}
+			${until.leftCol} {
+				grid-template-columns: 1fr 300px;
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav      right-column'
+								'matchtabs	   right-column'
+								'title         right-column'
+								'headline      right-column'
+								'standfirst    right-column'
+								'media         right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title         right-column'
+								'headline      right-column'
+								'disclaimer    right-column'
+								'media         right-column'
+								'standfirst    right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `
+					: css`
+							grid-template-areas:
+								'title         right-column'
+								'headline      right-column'
+								'standfirst    right-column'
+								'disclaimer    right-column'
+								'media         right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `}
+			}
 
-				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
-					${
-						isMatchReport
-							? css`
-									grid-template-areas:
-										'matchNav'
-										'matchtabs'
-										'title'
-										'headline'
-										'standfirst'
-										'media'
-										'lines'
-										'meta'
-										'body';
-							  `
-							: isMedia
-							? `grid-template-areas:
+			${until.desktop} {
+				grid-template-columns: 1fr; /* Main content */
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav'
+								'matchtabs'
+								'title'
+								'headline'
+								'standfirst'
+								'media'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: isMedia
+					? `grid-template-areas:
 										'title'
 										'headline'
 										'disclaimer'
@@ -264,63 +258,59 @@ const StandardGrid = ({
 										'meta'
 										'body';
 							  `
-							: css`
-									grid-template-areas:
-										'title'
-										'headline'
-										'standfirst'
-										'disclaimer'
-										'media'
-										'lines'
-										'meta'
-										'body';
-							  `
-					}
-				}
+					: css`
+							grid-template-areas:
+								'title'
+								'headline'
+								'standfirst'
+								'disclaimer'
+								'media'
+								'lines'
+								'meta'
+								'body';
+					  `}
+			}
 
-				${until.tablet} {
-					grid-column-gap: 0px;
+			${until.tablet} {
+				grid-column-gap: 0px;
 
-					grid-template-columns: 100%; /* Main content */
-					${
-						isMatchReport
-							? css`
-									grid-template-areas:
-										'matchNav'
-										'matchtabs'
-										'media'
-										'title'
-										'headline'
-										'standfirst'
-										'lines'
-										'meta'
-										'body';
-							  `
-							: isMedia
-							? css`
-									grid-template-areas:
-										'media'
-										'title'
-										'headline'
-										'disclaimer'
-										'standfirst'
-										'lines'
-										'meta'
-										'body';
-							  `
-							: css`
-									grid-template-areas:
-										'media'
-										'title'
-										'headline'
-										'standfirst'
-										'disclaimer'
-										'lines'
-										'meta'
-										'body';
-							  `
-					}
-				}
+				grid-template-columns: 100%; /* Main content */
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav'
+								'matchtabs'
+								'media'
+								'title'
+								'headline'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'media'
+								'title'
+								'headline'
+								'disclaimer'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: css`
+							grid-template-areas:
+								'media'
+								'title'
+								'headline'
+								'standfirst'
+								'disclaimer'
+								'lines'
+								'meta'
+								'body';
+					  `}
 			}
 		`}
 	>

@@ -2350,8 +2350,6 @@ const cardBackgroundDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
-		case ArticleDesign.Video:
-		case ArticleDesign.Audio:
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[10];
 		default:
@@ -3814,8 +3812,6 @@ const subMetaTextHoverLight: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
-		case ArticleDesign.Video:
-		case ArticleDesign.Audio:
 			return sourcePalette.neutral[7];
 		default:
 			return sourcePalette.neutral[100];
