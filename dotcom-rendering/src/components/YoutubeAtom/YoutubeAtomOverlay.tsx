@@ -10,7 +10,7 @@ import {
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import type { Palette } from '../../types/palette';
-import { MediaDuration, secondsToDuration } from '../MediaDuration';
+import { secondsToDuration } from '../MediaDuration';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
