@@ -144,9 +144,9 @@ const ImmersiveGrid = ({
 										'.          border      standfirst '
 										'.          border      disclaimer '
 										'.          border      byline     '
-										'lines      border      byline       '
+										'.      border      byline       '
 										'.       border      meta       '
-										'.      border      meta       '
+										'lines      border      meta       '
 										'.          border      body       '
 										'.          border      .          ';
 								}
@@ -614,8 +614,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							)}
 						</GridItem>
 						<GridItem area="lines">
-							{format.design === ArticleDesign.PhotoEssay &&
-							!isLabs ? (
+							{(format.design === ArticleDesign.PhotoEssay &&
+								!isLabs) ||
+							format.design === ArticleDesign.Gallery ? (
 								<></>
 							) : (
 								<div css={maxWidth}>
