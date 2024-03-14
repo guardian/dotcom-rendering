@@ -2,8 +2,8 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { cmp } from '@guardian/consent-management-platform';
 import type { CountryCode } from '@guardian/libs';
+import { cmp } from '@guardian/libs';
 import { isString, storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/libs';
 import { body, palette, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
@@ -137,9 +137,7 @@ export const YoutubeBlockComponent = ({
 
 	useEffect(() => {
 		const defineConsentState = async () => {
-			const { onConsentChange } = await import(
-				'@guardian/consent-management-platform'
-			);
+			const { onConsentChange } = await import('@guardian/libs');
 			onConsentChange((newConsent: ConsentState) => {
 				setConsentState(newConsent);
 			});

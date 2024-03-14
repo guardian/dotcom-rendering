@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { cmp, onConsent } from '@guardian/consent-management-platform';
-import type { Framework } from '@guardian/consent-management-platform/dist/types';
+import { cmp, onConsent } from '@guardian/libs';
+import type { Framework } from '@guardian/libs';
 import { palette } from '@guardian/source-foundations';
 import { ButtonLink } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
