@@ -119,10 +119,10 @@ const StandardGrid = ({
 									grid-template-areas:
 										'title  border  headline     right-column'
 										'.      border  disclaimer   right-column'
-										'.      border  media        right-column'
 										'lines  border  media        right-column'
+										'meta   border  media        right-column'
 										'meta   border  standfirst   right-column'
-										'meta   border  body         right-column'
+										'.      border  body         right-column'
 										'.      border  .            right-column';
 							  `
 							: css`
@@ -167,10 +167,10 @@ const StandardGrid = ({
 									grid-template-areas:
 										'title  border  headline     right-column'
 										'.      border  disclaimer   right-column'
-										'.      border  media        right-column'
 										'lines  border  media        right-column'
+										'meta   border  media        right-column'
 										'meta   border  standfirst   right-column'
-										'meta   border  body         right-column'
+										'.      border  body         right-column'
 										'.      border  .            right-column';
 							  `
 							: css`
