@@ -62,9 +62,11 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 const StandardGrid = ({
 	children,
 	isMatchReport,
+	isMedia,
 }: {
 	children: React.ReactNode;
 	isMatchReport: boolean;
+	isMedia: boolean;
 }) => (
 	<div
 		css={css`
@@ -99,28 +101,41 @@ const StandardGrid = ({
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr 300px;
 
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'.      border  disclaimer   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					${
+						isMatchReport
+							? css`
+									grid-template-areas:
+										'title  border  matchNav     right-column'
+										'title  border  matchtabs    right-column'
+										'.      border  headline     right-column'
+										'.      border  standfirst   right-column'
+										'lines  border  media        right-column'
+										'meta   border  media        right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `
+							: isMedia
+							? css`
+									grid-template-areas:
+										'title  border  headline     right-column'
+										'.      border  disclaimer   right-column'
+										'.      border  media        right-column'
+										'lines  border  media        right-column'
+										'meta   border  standfirst   right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title  border  headline     right-column'
+										'.      border  standfirst   right-column'
+										'.      border  disclaimer   right-column'
+										'lines  border  media        right-column'
+										'meta   border  media        right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `
+					}}
 				}
 
 				/*
@@ -134,28 +149,41 @@ const StandardGrid = ({
 				${until.wide} {
 					grid-template-columns: 140px 1px 1fr 300px;
 
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'.      border  disclaimer   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					${
+						isMatchReport
+							? css`
+									grid-template-areas:
+										'title  border  matchNav     right-column'
+										'title  border  matchtabs    right-column'
+										'.      border  headline     right-column'
+										'.      border  standfirst   right-column'
+										'lines  border  media        right-column'
+										'meta   border  media        right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `
+							: isMedia
+							? css`
+									grid-template-areas:
+										'title  border  headline     right-column'
+										'.      border  disclaimer   right-column'
+										'.      border  media        right-column'
+										'lines  border  media        right-column'
+										'meta   border  standfirst   right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title  border  headline     right-column'
+										'.      border  standfirst   right-column'
+										'.      border  disclaimer   right-column'
+										'lines  border  media        right-column'
+										'meta   border  media        right-column'
+										'meta   border  body         right-column'
+										'.      border  .            right-column';
+							  `
+					}
 				}
 
 				/*
@@ -166,90 +194,132 @@ const StandardGrid = ({
 				*/
 				${until.leftCol} {
 					grid-template-columns: 1fr 300px;
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav      right-column'
-									'matchtabs	   right-column'
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'disclaimer    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `}
+					${
+						isMatchReport
+							? css`
+									grid-template-areas:
+										'matchNav      right-column'
+										'matchtabs	   right-column'
+										'title         right-column'
+										'headline      right-column'
+										'standfirst    right-column'
+										'media         right-column'
+										'lines         right-column'
+										'meta          right-column'
+										'body          right-column'
+										'.             right-column';
+							  `
+							: isMedia
+							? css`
+									grid-template-areas:
+										'title         right-column'
+										'headline      right-column'
+										'disclaimer    right-column'
+										'media         right-column'
+										'standfirst    right-column'
+										'lines         right-column'
+										'meta          right-column'
+										'body          right-column'
+										'.             right-column';
+							  `
+							: css`
+									grid-template-areas:
+										'title         right-column'
+										'headline      right-column'
+										'standfirst    right-column'
+										'disclaimer    right-column'
+										'media         right-column'
+										'lines         right-column'
+										'meta          right-column'
+										'body          right-column'
+										'.             right-column';
+							  `
+					}
 				}
 
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'matchtabs'
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'title'
-									'headline'
-									'standfirst'
-									'disclaimer'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					${
+						isMatchReport
+							? css`
+									grid-template-areas:
+										'matchNav'
+										'matchtabs'
+										'title'
+										'headline'
+										'standfirst'
+										'media'
+										'lines'
+										'meta'
+										'body';
+							  `
+							: isMedia
+							? `grid-template-areas:
+										'title'
+										'headline'
+										'disclaimer'
+										'media'
+										'standfirst'
+										'lines'
+										'meta'
+										'body';
+							  `
+							: css`
+									grid-template-areas:
+										'title'
+										'headline'
+										'standfirst'
+										'disclaimer'
+										'media'
+										'lines'
+										'meta'
+										'body';
+							  `
+					}
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
 
 					grid-template-columns: 100%; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'matchtabs'
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'disclaimer'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					${
+						isMatchReport
+							? css`
+									grid-template-areas:
+										'matchNav'
+										'matchtabs'
+										'media'
+										'title'
+										'headline'
+										'standfirst'
+										'lines'
+										'meta'
+										'body';
+							  `
+							: isMedia
+							? css`
+									grid-template-areas:
+										'media'
+										'title'
+										'headline'
+										'disclaimer'
+										'standfirst'
+										'lines'
+										'meta'
+										'body';
+							  `
+							: css`
+									grid-template-areas:
+										'media'
+										'title'
+										'headline'
+										'standfirst'
+										'disclaimer'
+										'lines'
+										'meta'
+										'body';
+							  `
+					}
 				}
 			}
 		`}
@@ -309,7 +379,7 @@ interface AppProps extends Props {
 export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, contentType },
 	} = article;
 
 	const isWeb = renderingTarget === 'Web';
@@ -331,6 +401,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+
+	const isMedia = contentType === 'Video' || contentType === 'Audio';
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -507,9 +579,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					fontColour={themePalette('--article-section-title')}
+					innerBackgroundColour={themePalette(
+						'--article-inner-background',
+					)}
 					element="article"
 				>
-					<StandardGrid isMatchReport={isMatchReport}>
+					<StandardGrid
+						isMatchReport={isMatchReport}
+						isMedia={isMedia}
+					>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
