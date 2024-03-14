@@ -514,6 +514,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[86];
 		default:
@@ -783,11 +784,16 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const bylineUnderline: PaletteFunction = ({ theme }) => {
+const bylineUnderline: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.neutral[60];
 		default:
+			switch (design) {
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[86];
+			}
+
 			return 'inherit';
 	}
 };
@@ -2046,6 +2052,8 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -2123,10 +2131,9 @@ const standfirstTextLight: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[100];
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[86];
-		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[100];
 		default:
 			if (
 				format.theme === ArticleSpecial.SpecialReportAlt &&
