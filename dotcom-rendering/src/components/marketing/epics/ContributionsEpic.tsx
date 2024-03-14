@@ -261,8 +261,7 @@ const sendEpicViewEvent = (
 	const eventBody = JSON.stringify({
 		url,
 		countryCode,
-		abTestName,
-		abTestVariant,
+		abTests: [{ name: abTestName, variant: abTestVariant }],
 	});
 
 	void fetch(`${host}/${path}`, {
