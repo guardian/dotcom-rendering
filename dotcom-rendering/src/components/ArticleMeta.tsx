@@ -415,17 +415,19 @@ export const ArticleMeta = ({
 									),
 							]}
 						>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<ShareButton
-									pageId={pageId}
-									webTitle={webTitle}
-									format={format}
-									context="ArticleMeta"
-								/>
-							</Island>
+							{format.design !== ArticleDesign.Gallery && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<ShareButton
+										pageId={pageId}
+										webTitle={webTitle}
+										format={format}
+										context="ArticleMeta"
+									/>
+								</Island>
+							)}
 						</div>
 					)}
 					<div
