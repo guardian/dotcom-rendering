@@ -431,6 +431,7 @@ export const renderElement = ({
 					abTests={abTests}
 					switches={switches}
 					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
@@ -858,3 +859,5 @@ export const RenderArticleElement = ({
 		el
 	);
 };
+
+export type ArticleElementRenderer = typeof RenderArticleElement;

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
-import { RenderArticleElement } from '../lib/renderElement';
+import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { KeyTakeaway as KeyTakeawayModel } from '../types/content';
@@ -41,6 +41,7 @@ interface KeyTakeawayProps {
 	starRating?: number;
 	keyTakeaway: KeyTakeawayModel;
 	titleIndex: number;
+	RenderArticleElement: ArticleElementRenderer;
 }
 
 export const KeyTakeaway = ({
@@ -57,6 +58,7 @@ export const KeyTakeaway = ({
 	titleIndex,
 	hideCaption,
 	starRating,
+	RenderArticleElement,
 }: KeyTakeawayProps) => {
 	return (
 		<>
