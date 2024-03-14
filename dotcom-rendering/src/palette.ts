@@ -2125,6 +2125,8 @@ const standfirstTextLight: PaletteFunction = (format) => {
 			return sourcePalette.neutral[100];
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[86];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[100];
 		default:
 			if (
 				format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -2995,6 +2997,9 @@ const articleBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
+
 		case ArticleDesign.Picture: {
 			return sourcePalette.neutral[0];
 		}
