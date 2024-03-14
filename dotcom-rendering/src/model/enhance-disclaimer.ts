@@ -29,7 +29,7 @@ const insertDisclaimerElement = (elements: FEElement[]): FEElement[] => {
 				: acc.paragraphCounter;
 
 			const newElements =
-				paragraphCounter === 2
+				paragraphCounter === 2 && isParagraph(element)
 					? [...acc.elements, createDisclaimerBlock(), element]
 					: [...acc.elements, element];
 
