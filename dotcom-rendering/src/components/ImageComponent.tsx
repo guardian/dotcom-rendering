@@ -418,6 +418,143 @@ export const ImageComponent = ({
 			</div>
 		);
 	}
+	if (format.design === ArticleDesign.Gallery) {
+		return (
+			<>
+				<div
+					css={css`
+						${from.leftCol} {
+							float: left;
+							margin-left: -160px;
+							width: 140px;
+						}
+						${from.wide} {
+							float: left;
+							margin-left: -240px;
+							width: 200px;
+						}
+					`}
+				>
+					<Caption
+						captionText={element.data.caption ?? ''}
+						format={format}
+						credit={element.data.credit}
+						displayCredit={element.displayCredit}
+						shouldLimitWidth={shouldLimitWidth}
+						isMainMedia={isMainMedia}
+					/>
+				</div>
+
+				<div
+					id={
+						element.position !== undefined
+							? `img-${element.position}`
+							: ''
+					}
+					css={css`
+						position: relative;
+
+						img {
+							height: 100%;
+							width: 100%;
+							object-fit: cover;
+							${isAvatar && 'border-radius: 50%;'}
+						}
+					`}
+				>
+					{renderingTarget === 'Apps' ? (
+						<Island priority="critical">
+							<AppsLightboxImage
+								elementId={element.elementId}
+								role={role}
+								format={format}
+								master={image.url}
+								alt={element.data.alt ?? ''}
+								width={imageWidth}
+								height={imageHeight}
+								loading={loading}
+								isMainMedia={isMainMedia}
+							/>
+						</Island>
+					) : (
+						<Picture
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							loading={loading}
+							isMainMedia={isMainMedia}
+						/>
+					)}
+
+					{isMainMedia && (
+						// Below tablet, main media images show an info toggle at the bottom right of
+						// the image which, when clicked, toggles the caption as an overlay
+						<Hide when="above" breakpoint="tablet">
+							<Row>
+								<div
+									css={css`
+										#the-checkbox {
+											/* Never show the input */
+											display: none;
+										}
+										#the-caption {
+											/* Hide caption by default */
+											display: none;
+										}
+										#the-checkbox:checked + #the-caption {
+											/* Show the caption if the input is checked */
+											display: block;
+										}
+									`}
+								>
+									{/* CaptionToggle contains the input with id #the-checkbox */}
+									<CaptionToggle />{' '}
+									<div id="the-caption">
+										<Caption
+											captionText={
+												element.data.caption ?? ''
+											}
+											format={format}
+											credit={element.data.credit}
+											displayCredit={
+												element.displayCredit
+											}
+											shouldLimitWidth={shouldLimitWidth}
+											isOverlaid={true}
+											isMainMedia={isMainMedia}
+										/>
+									</div>
+								</div>
+							</Row>
+						</Hide>
+					)}
+					{typeof starRating === 'number' && (
+						<PositionStarRating rating={starRating} />
+					)}
+					{!!title && (
+						<ImageTitle
+							title={title}
+							role={role}
+							palette={palette}
+						/>
+					)}
+
+					{isWeb && !isUndefined(element.position) && (
+						<LightboxLink
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+							position={element.position}
+						/>
+					)}
+				</div>
+			</>
+		);
+	}
 
 	return (
 		<>
