@@ -102,15 +102,21 @@ const roleCss = {
 	`,
 
 	gallery: css`
+		border: 1px solid hotpink;
 		margin-top: ${space[2]}px;
-		${from.leftCol} {
+		${until.leftCol} {
 			display: flex;
-			flex-direction: row-reverse;
+			flex-direction: column-reverse;
+		}
+		${from.leftCol} {
+			border: 1px solid aqua;
+			width: fit-content;
 		}
 		figcaption {
 			margin-bottom: ${space[2]}px;
 
 			${from.leftCol} {
+				border: 1px solid orange;
 				float: left;
 				clear: left;
 				margin-right: 20px;
@@ -118,6 +124,7 @@ const roleCss = {
 				width: 210px;
 			}
 			${from.wide} {
+				border: 1px solid yellow;
 				margin-left: -240px;
 			}
 		}

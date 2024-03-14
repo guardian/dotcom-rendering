@@ -461,6 +461,88 @@ export const ImageComponent = ({
 		);
 	}
 
+	if (format.design === ArticleDesign.Gallery) {
+		return (
+			<>
+				<Caption
+					captionText={element.data.caption ?? ''}
+					format={format}
+					credit={element.data.credit}
+					displayCredit={element.displayCredit}
+					shouldLimitWidth={shouldLimitWidth}
+					isMainMedia={isMainMedia}
+				/>
+				<div
+					id={
+						element.position !== undefined
+							? `img-${element.position}`
+							: ''
+					}
+					css={css`
+						position: relative;
+
+						img {
+							${until.leftCol} {
+								width: 90vw;
+								overflow: hidden;
+								height: max-content;
+							}
+
+							display: block;
+							/* object-fit: contain; */
+							height: 90vh;
+							overflow: hidden;
+							width: max-content;
+						}
+					`}
+				>
+					{renderingTarget === 'Apps' ? (
+						<Island priority="critical">
+							<AppsLightboxImage
+								elementId={element.elementId}
+								role={role}
+								format={format}
+								master={image.url}
+								alt={element.data.alt ?? ''}
+								width={imageWidth}
+								height={imageHeight}
+								loading={loading}
+								isMainMedia={isMainMedia}
+							/>
+						</Island>
+					) : (
+						<Picture
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							loading={loading}
+							isMainMedia={isMainMedia}
+						/>
+					)}
+					{!!title && (
+						<ImageTitle
+							title={title}
+							role={role}
+							palette={palette}
+						/>
+					)}
+
+					{isWeb && !isUndefined(element.position) && (
+						<LightboxLink
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+							position={element.position}
+						/>
+					)}
+				</div>
+			</>
+		);
+	}
 	return (
 		<>
 			<div

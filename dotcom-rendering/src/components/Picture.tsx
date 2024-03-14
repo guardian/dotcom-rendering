@@ -55,7 +55,7 @@ const decideImageWidths = ({
 	isLightbox: boolean;
 	orientation: Orientation;
 }): [ImageWidthType, ...ImageWidthType[]] => {
-	if (isLightbox) {
+	if (isLightbox || format.design === ArticleDesign.Gallery) {
 		switch (orientation) {
 			case 'portrait':
 				return [
@@ -81,10 +81,7 @@ const decideImageWidths = ({
 				];
 		}
 	}
-	if (
-		format.design === ArticleDesign.Picture ||
-		format.design === ArticleDesign.Gallery
-	) {
+	if (format.design === ArticleDesign.Picture) {
 		// the order is important here. Picture content type images come through as main media, so needs to appear
 		// above `isMainMedia`, so the images do not appear low quality.
 		return [
