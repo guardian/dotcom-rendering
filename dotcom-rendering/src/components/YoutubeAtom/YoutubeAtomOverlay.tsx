@@ -10,7 +10,7 @@ import {
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import type { Palette } from '../../types/palette';
-import { MediaDuration } from '../MediaDuration';
+import { MediaDuration, secondsToDuration } from '../MediaDuration';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
@@ -215,7 +215,11 @@ export const YoutubeAtomOverlay = ({
 						</div>
 					)}
 					{!!hasDuration && (
-						<MediaDuration mediaDuration={duration} />
+						<div css={pillItemStyles}>
+							<div css={pillTextStyles}>
+								{secondsToDuration(duration)}
+							</div>
+						</div>
 					)}
 				</div>
 			)}
