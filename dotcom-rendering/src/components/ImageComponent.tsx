@@ -418,9 +418,17 @@ export const ImageComponent = ({
 			</div>
 		);
 	}
-	if (format.design === ArticleDesign.Gallery) {
+	if (format.design === ArticleDesign.Gallery && !isMainMedia) {
 		return (
-			<>
+			<div
+				css={css`
+					padding-bottom: 38px;
+					${until.leftCol} {
+						display: flex;
+						flex-direction: column-reverse;
+					}
+				`}
+			>
 				<div
 					css={css`
 						${from.leftCol} {
@@ -489,51 +497,6 @@ export const ImageComponent = ({
 						/>
 					)}
 
-					{isMainMedia && (
-						// Below tablet, main media images show an info toggle at the bottom right of
-						// the image which, when clicked, toggles the caption as an overlay
-						<Hide when="above" breakpoint="tablet">
-							<Row>
-								<div
-									css={css`
-										#the-checkbox {
-											/* Never show the input */
-											display: none;
-										}
-										#the-caption {
-											/* Hide caption by default */
-											display: none;
-										}
-										#the-checkbox:checked + #the-caption {
-											/* Show the caption if the input is checked */
-											display: block;
-										}
-									`}
-								>
-									{/* CaptionToggle contains the input with id #the-checkbox */}
-									<CaptionToggle />{' '}
-									<div id="the-caption">
-										<Caption
-											captionText={
-												element.data.caption ?? ''
-											}
-											format={format}
-											credit={element.data.credit}
-											displayCredit={
-												element.displayCredit
-											}
-											shouldLimitWidth={shouldLimitWidth}
-											isOverlaid={true}
-											isMainMedia={isMainMedia}
-										/>
-									</div>
-								</div>
-							</Row>
-						</Hide>
-					)}
-					{typeof starRating === 'number' && (
-						<PositionStarRating rating={starRating} />
-					)}
 					{!!title && (
 						<ImageTitle
 							title={title}
@@ -552,7 +515,7 @@ export const ImageComponent = ({
 						/>
 					)}
 				</div>
-			</>
+			</div>
 		);
 	}
 
