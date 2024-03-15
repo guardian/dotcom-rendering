@@ -613,6 +613,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[60];
 		default:
@@ -691,6 +692,8 @@ const bylineHoverLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -792,10 +795,10 @@ const bylineUnderline: PaletteFunction = ({ theme, design }) => {
 		default:
 			switch (design) {
 				case ArticleDesign.Gallery:
-					return sourcePalette.neutral[86];
+					return sourcePalette.neutral[46];
+				default:
+					return 'inherit';
 			}
-
-			return 'inherit';
 	}
 };
 
@@ -906,6 +909,7 @@ const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[100];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[46];
 		default:
@@ -939,6 +943,7 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.PhotoEssay:
 		case ArticleDesign.Review:
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[60];
 		case ArticleDesign.Standard:
@@ -1106,9 +1111,8 @@ const avatarDark: PaletteFunction = ({ design, theme }) => {
 
 const followTextLight: PaletteFunction = ({ design }) => {
 	switch (design) {
-		case ArticleDesign.Gallery:
-			return sourcePalette.neutral[86];
 		case ArticleDesign.LiveBlog:
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[97];
 		default:
@@ -3664,6 +3668,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[7];
 		default:
@@ -3722,6 +3727,7 @@ const subMetaTextLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.specialReport[100];
 		default:
 			switch (design) {
+				case ArticleDesign.Gallery:
 				case ArticleDesign.Picture:
 					return sourcePalette.neutral[86];
 				case ArticleDesign.DeadBlog:
@@ -4407,6 +4413,7 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 					}
 				case ArticleDesign.MatchReport:
 					return sourcePalette.neutral[7];
+				case ArticleDesign.Gallery:
 				case ArticleDesign.Picture:
 					return sourcePalette.neutral[86];
 				default:
@@ -4484,6 +4491,7 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[60];
 		default:
