@@ -13,6 +13,7 @@ type Props = {
 	alreadyRecommended: boolean;
 	user?: SignedInUser;
 	userMadeComment: boolean;
+	isClosedForRecommendations: boolean;
 };
 
 const countStyles = css`
@@ -52,6 +53,7 @@ export const RecommendationCount = ({
 	alreadyRecommended,
 	user,
 	userMadeComment,
+	isClosedForRecommendations,
 }: Props) => {
 	const [count, setCount] = useState(initialCount);
 	const [recommended, setRecommended] = useState(alreadyRecommended);
@@ -80,7 +82,12 @@ export const RecommendationCount = ({
 			<button
 				css={buttonStyles(recommended, !!user)}
 				onClick={tryToRecommend}
-				disabled={recommended || !user || userMadeComment}
+				disabled={
+					recommended ||
+					!user ||
+					userMadeComment ||
+					isClosedForRecommendations
+				}
 				data-link-name="Recommend comment"
 				aria-label="Recommend comment"
 				type="button"

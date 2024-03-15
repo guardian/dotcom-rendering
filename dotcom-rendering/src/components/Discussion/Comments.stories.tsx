@@ -72,6 +72,7 @@ export const LoggedOutHiddenPicks = () => (
 			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
+			isClosedForRecommendations={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
 				'GU-Client': 'testClientHeader',
@@ -115,6 +116,7 @@ export const InitialPage = () => (
 			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
+			isClosedForRecommendations={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
 				'GU-Client': 'testClientHeader',
@@ -158,6 +160,7 @@ export const LoggedInHiddenNoPicks = () => {
 			<Comments
 				shortUrl="p/abc123"
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				user={aUser}
 				baseUrl="https://discussion.theguardian.com/discussion-api"
 				additionalHeaders={{
@@ -198,6 +201,7 @@ export const LoggedIn = () => {
 			<Comments
 				shortUrl="p/abc123"
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				user={aUser}
 				baseUrl="https://discussion.theguardian.com/discussion-api"
 				additionalHeaders={{
@@ -237,6 +241,7 @@ export const LoggedInShortDiscussion = () => {
 			<Comments
 				shortUrl={discussionWithTwoComments.discussion.key} // Two comments"
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				user={aUser}
 				baseUrl="https://discussion.theguardian.com/discussion-api"
 				additionalHeaders={{
@@ -274,6 +279,7 @@ export const LoggedOutHiddenNoPicks = () => (
 		<Comments
 			shortUrl="p/abc123"
 			isClosedForComments={false}
+			isClosedForRecommendations={false}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -319,6 +325,7 @@ export const Closed = () => (
 			shortUrl={discussionMock.discussion.key}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={true}
+			isClosedForRecommendations={false}
 			user={aUser}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
@@ -363,6 +370,7 @@ export const NoComments = () => (
 			shortUrl="p/39f5x" // A discussion with zero comments
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
+			isClosedForRecommendations={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
 				'GU-Client': 'testClientHeader',
@@ -404,6 +412,7 @@ export const LegacyDiscussion = () => (
 			shortUrl={legacyDiscussionWithoutThreading.discussion.key} // A 'legacy' discussion that doesn't allow threading
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			isClosedForComments={false}
+			isClosedForRecommendations={false}
 			additionalHeaders={{
 				'D2-X-UID': 'testD2Header',
 				'GU-Client': 'testClientHeader',

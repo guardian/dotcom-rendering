@@ -117,6 +117,7 @@ export const LongPick = () => (
 			comment={comment}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
+			isClosedForRecommendations={false}
 		/>
 	</div>
 );
@@ -135,6 +136,7 @@ export const ShortPick = () => (
 			user={aUser}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
+			isClosedForRecommendations={false}
 		/>
 	</div>
 );
@@ -159,6 +161,7 @@ export const LongPickContributor = () => (
 			comment={commentContributor}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
+			isClosedForRecommendations={false}
 		/>
 	</div>
 );
@@ -177,6 +180,7 @@ export const ShortPickContributor = () => (
 			user={aUser}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
+			isClosedForRecommendations={false}
 		/>
 	</div>
 );
