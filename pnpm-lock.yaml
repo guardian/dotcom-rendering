@@ -515,9 +515,6 @@ importers:
       '@types/parse5':
         specifier: 7.0.0
         version: 7.0.0
-      '@types/prop-types':
-        specifier: 15.7.5
-        version: 15.7.5
       '@types/qs':
         specifier: 6.9.7
         version: 6.9.7
@@ -764,9 +761,6 @@ importers:
       pretty-bytes:
         specifier: 6.1.0
         version: 6.1.0
-      prop-types:
-        specifier: 15.8.1
-        version: 15.8.1
       react:
         specifier: 18.2.0
         version: 18.2.0
