@@ -21,6 +21,7 @@ const enhancePinnedPost = (
 		renderingTarget,
 		imagesForLightbox: [],
 		promotedNewsletter: undefined,
+		hasAffiliateLinksDisclaimer: false,
 	})[0];
 };
 
@@ -39,6 +40,7 @@ export const enhanceArticleType = (
 		renderingTarget,
 		promotedNewsletter: data.promotedNewsletter,
 		imagesForLightbox,
+		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
 	});
 
 	const mainMediaElements = enhanceElementsImages(
