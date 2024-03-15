@@ -3,7 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	headline,
-	palette as sourcePalette,
+	palette,
 	space,
 	textSans,
 	until,
@@ -97,7 +97,7 @@ const analysisStyles = css`
 		}
 	}
 	span {
-		color: ${sourcePalette.neutral[46]};
+		color: ${palette.neutral[46]};
 	}
 `;
 
@@ -153,7 +153,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return (
-				<div css={[immersiveStyles(format)]}>
+				<div css={immersiveStyles(format)}>
 					by{' '}
 					<span css={immersiveLinkStyles}>
 						<BylineLink
