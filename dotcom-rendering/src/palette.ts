@@ -294,6 +294,7 @@ const headlineBlogBackgroundDark: PaletteFunction = ({
 
 const bylineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.Analysis:

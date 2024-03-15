@@ -113,6 +113,7 @@ const immersiveStyles = (format: ArticleFormat) => css`
 				fontWeight: 'light',
 		  })}
 	margin-bottom: ${space[6]}px;
+	color: ${schemedPalette('--byline')};
 `;
 
 const immersiveLinkStyles = css`
@@ -129,11 +130,6 @@ const immersiveLinkStyles = css`
 			text-decoration-color: inherit;
 		}
 	}
-`;
-
-const galleryStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
-	font-style: italic;
 `;
 
 // If there is an image reduce the width of the author div
@@ -156,34 +152,19 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
-			switch (format.design) {
-				case ArticleDesign.Gallery:
-					return (
-						<span css={[immersiveLinkStyles, galleryStyles]}>
-							<BylineLink
-								byline={byline}
-								tags={tags}
-								format={format}
-								isHeadline={true}
-							/>
-						</span>
-					);
-				default:
-					return (
-						<div css={[immersiveStyles(format)]}>
-							by{' '}
-							<span css={immersiveLinkStyles}>
-								<BylineLink
-									byline={byline}
-									tags={tags}
-									format={format}
-									isHeadline={true}
-								/>
-							</span>
-						</div>
-					);
-			}
-
+			return (
+				<div css={[immersiveStyles(format)]}>
+					by{' '}
+					<span css={immersiveLinkStyles}>
+						<BylineLink
+							byline={byline}
+							tags={tags}
+							format={format}
+							isHeadline={true}
+						/>
+					</span>
+				</div>
+			);
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard:

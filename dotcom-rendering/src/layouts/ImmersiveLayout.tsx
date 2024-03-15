@@ -101,9 +101,8 @@ const ImmersiveGrid = ({
 									'.          border      standfirst '
 									'.          border      disclaimer '
 									'.          border      byline     '
-									'.      border      byline       '
-									' .      border      meta       '
-									'lines     border      meta       '
+									'meta       border      byline     '
+									'lines      border      .          '
 									'.          border      body       '
 									'.          border      .          ';
 						  `
@@ -143,10 +142,9 @@ const ImmersiveGrid = ({
 										'.          border      headline   '
 										'.          border      standfirst '
 										'.          border      disclaimer '
-										'.          border      byline     '
-										'.      border      byline       '
-										'.       border      meta       '
-										'lines      border      meta       '
+										'meta       border      byline     '
+										'meta       border      .          '
+										'lines      border      .          '
 										'.          border      body       '
 										'.          border      .          ';
 								}
@@ -161,7 +159,7 @@ const ImmersiveGrid = ({
 									'.          border      byline      right-column'
 									'lines      border      body        right-column'
 									'meta       border      body        right-column'
-									'meta       border      body        right-column'
+									'meta       border   	body        right-column'
 									'.          border      body        right-column'
 									'.          border      .           right-column';
 						  `}
