@@ -100,8 +100,8 @@ const ImmersiveGrid = ({
 									'.          border      headline   '
 									'.          border      standfirst '
 									'.          border      disclaimer '
-									'meta       border      byline     '
 									'lines      border      .          '
+									'meta       border      byline     '
 									'.          border      body       '
 									'.          border      .          ';
 						  `
@@ -141,8 +141,8 @@ const ImmersiveGrid = ({
 										'.          border      headline   '
 										'.          border      standfirst '
 										'.          border      disclaimer '
-										'meta       border      byline     '
 										'lines      border      .          '
+										'meta       border      byline     '
 										'.          border      body       '
 										'.          border      .          ';
 								}
@@ -610,9 +610,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							)}
 						</GridItem>
 						<GridItem area="lines">
-							{(format.design === ArticleDesign.PhotoEssay &&
-								!isLabs) ||
-							format.design === ArticleDesign.Gallery ? (
+							{(format.design === ArticleDesign.PhotoEssay ||
+								format.design === ArticleDesign.Gallery) &&
+							!isLabs ? (
 								<></>
 							) : (
 								<div css={maxWidth}>
