@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
+	ArticleFormat,
 	ArticleSpecial,
 	isString,
 } from '@guardian/libs';
@@ -325,7 +325,11 @@ export const ArticleMeta = ({
 		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
-	const isPictureContent = format.design === ArticleDesign.Picture;
+	const isMediaContent =
+		format.design === ArticleDesign.Picture ||
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video;
 
 	const { renderingTarget } = useConfig();
 
@@ -407,7 +411,7 @@ export const ArticleMeta = ({
 									: ''
 							}
 							css={[
-								metaExtras(isPictureContent),
+								metaExtras(isMediaContent),
 								format.design === ArticleDesign.LiveBlog &&
 									css(
 										borderColourWhenBackgroundDark,
@@ -435,7 +439,7 @@ export const ArticleMeta = ({
 								: ''
 						}
 						css={[
-							metaNumbers(isPictureContent),
+							metaNumbers(isMediaContent),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
 									borderColourWhenBackgroundDark,

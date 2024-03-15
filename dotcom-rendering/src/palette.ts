@@ -896,33 +896,6 @@ export const tabs = {
 	};
 };
 
-const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-			switch (theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 600);
-				default:
-					return sourcePalette.neutral[100];
-			}
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Picture:
-			return sourcePalette.neutral[46];
-		default:
-			if (
-				theme === ArticleSpecial.SpecialReportAlt &&
-				design !== ArticleDesign.DeadBlog
-			) {
-				return sourcePalette.specialReportAlt[100];
-			}
-			return sourcePalette.neutral[46];
-	}
-};
-
 const datelineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Comment:
