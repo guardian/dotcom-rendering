@@ -5208,10 +5208,6 @@ const paletteColours = {
 		light: datelineLight,
 		dark: datelineDark,
 	},
-	'--dateline-mobile': {
-		light: datelineMobileLight,
-		dark: standfirstTextDark,
-	},
 	'--headline-colour': {
 		light: headlineTextLight,
 		dark: headlineTextDark,
