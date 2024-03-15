@@ -90,6 +90,7 @@ export const SingleComment = () => (
 		comments={[commentWithShortBody]}
 		user={aUser}
 		onPermalinkClick={() => {}}
+		isClosedForRecommendations={false}
 	/>
 );
 SingleComment.storyName = 'Single Comment';
@@ -105,6 +106,7 @@ export const MultiColumn = () => (
 		]}
 		user={aUser}
 		onPermalinkClick={() => {}}
+		isClosedForRecommendations={false}
 	/>
 );
 MultiColumn.storyName = 'Multiple Columns Comments';
@@ -130,6 +132,7 @@ export const SingleColumn = () => (
 		]}
 		user={aUser}
 		onPermalinkClick={() => {}}
+		isClosedForRecommendations={false}
 	/>
 );
 SingleColumn.storyName = 'Single Column Comments';
