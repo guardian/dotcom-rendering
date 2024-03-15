@@ -5,6 +5,7 @@ import type { CommentType, FilterOptions, ReplyType } from '../lib/discussion';
 
 export type Action =
 	| {
+			isClosedForRecommendation: boolean;
 			type: 'commentsLoaded';
 			comments: Array<CommentType | ReplyType>;
 			isClosedForComments: boolean;

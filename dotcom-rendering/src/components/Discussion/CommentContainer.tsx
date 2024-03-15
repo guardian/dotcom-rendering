@@ -19,6 +19,7 @@ import { PillarButton } from './PillarButton';
 type Props = {
 	comment: CommentType | ReplyType;
 	isClosedForComments: boolean;
+	isClosedForRecommendations: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
 	threads: ThreadsType;
@@ -78,6 +79,7 @@ export const avatar = (avatarSize: number) => css`
 export const CommentContainer = ({
 	comment,
 	isClosedForComments,
+	isClosedForRecommendations,
 	user,
 	shortUrl,
 	threads,
@@ -137,6 +139,7 @@ export const CommentContainer = ({
 			<Comment
 				comment={comment}
 				isClosedForComments={isClosedForComments}
+				isClosedForRecommendations={isClosedForRecommendations}
 				setCommentBeingRepliedTo={setCommentBeingRepliedTo}
 				user={user}
 				isReply={false}
@@ -157,6 +160,9 @@ export const CommentContainer = ({
 										comment={responseComment}
 										isClosedForComments={
 											isClosedForComments
+										}
+										isClosedForRecommendations={
+											isClosedForRecommendations
 										}
 										setCommentBeingRepliedTo={
 											setCommentBeingRepliedTo

@@ -57,8 +57,8 @@ importers:
         specifier: 11.11.0
         version: 11.11.0
       '@guardian/apps-rendering-api-models':
-        specifier: 6.2.0
-        version: 6.2.0
+        specifier: 8.0.0
+        version: 8.0.0
       '@guardian/bridget':
         specifier: 2.6.0
         version: 2.6.0
@@ -66,11 +66,11 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.4.6)(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/content-api-models':
-        specifier: 17.8.0
-        version: 17.8.0
+        specifier: 20.1.0
+        version: 20.1.0
       '@guardian/content-atom-model':
-        specifier: 3.4.4
-        version: 3.4.4
+        specifier: 4.0.1
+        version: 4.0.1
       '@guardian/eslint-config':
         specifier: 7.0.1
         version: 7.0.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)(tslib@2.6.2)
@@ -381,8 +381,8 @@ importers:
         specifier: 16.0.1
         version: 16.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.1.0
-        version: 2.1.0
+        specifier: 2.1.1
+        version: 2.1.1
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -515,9 +515,6 @@ importers:
       '@types/parse5':
         specifier: 7.0.0
         version: 7.0.0
-      '@types/prop-types':
-        specifier: 15.7.5
-        version: 15.7.5
       '@types/qs':
         specifier: 6.9.7
         version: 6.9.7
@@ -764,9 +761,6 @@ importers:
       pretty-bytes:
         specifier: 6.1.0
         version: 6.1.0
-      prop-types:
-        specifier: 15.8.1
-        version: 15.8.1
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -4200,11 +4194,11 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /@guardian/apps-rendering-api-models@6.2.0:
-    resolution: {integrity: sha512-G055TuAC/nRobB7k9xkdw9SFar+vJWdBPvUqI1iJkd6YvXD7sZNgwDdfR+mIWX2hM+Tafpq/KdoDVW9oM6rhRQ==}
+  /@guardian/apps-rendering-api-models@8.0.0:
+    resolution: {integrity: sha512-Pjgik4bPLWdgZESfBBm9t2W1RNVXBlqT+lzOF/i0OTKpM74EdPtrH397viIY0LKCVBnEWvCj/M6vaxtEMayR9g==}
     dependencies:
-      '@guardian/content-api-models': 17.8.0
-      '@guardian/content-atom-model': 3.4.4
+      '@guardian/content-api-models': 20.1.0
+      '@guardian/content-atom-model': 4.0.1
       '@guardian/content-entity-model': 2.2.1
       '@guardian/story-packages-model': 2.2.0
       '@types/node-int64': 0.4.32
@@ -4323,10 +4317,10 @@ packages:
       '@guardian/libs': 16.0.1(tslib@2.6.2)(typescript@5.3.3)
     dev: false
 
-  /@guardian/content-api-models@17.8.0:
-    resolution: {integrity: sha512-qfYCnrWupF3CncBioFwqxiFAgZt/hD+ax1XH0kMWm1IhkxZXBVV06ZZyk7eUcDUYYyakAgQxIjS8Z0LXy3nHYw==}
+  /@guardian/content-api-models@20.1.0:
+    resolution: {integrity: sha512-Xi4Fl7I1A9/YRv0wRDzb4j3T5kTlDh+i9xmUNQG30vYqOk5CKcjBlmIgpDbLoi1hQHpOnD10wlEQUmOZUy/6FQ==}
     dependencies:
-      '@guardian/content-atom-model': 3.4.4
+      '@guardian/content-atom-model': 4.0.1
       '@guardian/content-entity-model': 2.2.1
       '@guardian/story-packages-model': 2.2.0
       '@types/node-int64': 0.4.32
@@ -4338,8 +4332,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/content-atom-model@3.4.4:
-    resolution: {integrity: sha512-OeLqmQODJPqSa9Y/RhLhJOTIYj0BK07tSZBn71QZ3OstQhcW2nZGxSCN9tbYLYHhj30Uzn6fsLwZcv4JlNTbtg==}
+  /@guardian/content-atom-model@4.0.1:
+    resolution: {integrity: sha512-c2biKd9SPbXiCmN9ZOyYdaiPlwLCJNEzRGqWW0hISq3ELOzqndhTG6/vYrQMp0+7CmDEeQ+4pSzZxPfvIN10Tw==}
     dependencies:
       '@guardian/content-entity-model': 2.2.1
       '@types/node-int64': 0.4.32
@@ -4550,8 +4544,8 @@ packages:
     engines: {node: '>=16'}
     dev: false
 
-  /@guardian/ophan-tracker-js@2.1.0:
-    resolution: {integrity: sha512-VOU94rhjDeDF1kg2htmNu8H+zhL1tHciKtWnp9qr0U7lbpQ6qW+RW/GM5OM3zfXampwk9FzlsTvU05cixB/5Jw==}
+  /@guardian/ophan-tracker-js@2.1.1:
+    resolution: {integrity: sha512-Ktk9kDJfe//NJFfpT15jweTj4KQbgkQuo8pWRYrlNZpq1oaTpSeMtI/eSCtqK8yhXKlBJDsMbEyCYsEgQRYFag==}
     engines: {node: '>=16'}
     dev: false
 

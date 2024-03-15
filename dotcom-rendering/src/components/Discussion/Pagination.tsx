@@ -36,7 +36,7 @@ const pageButtonStyles = (isSelected: boolean) => css`
 		border-color: ${schemedPalette('--discussion-pagination-text')};
 	}
 
-	margin-right: 5px;
+	margin-right: 2px;
 	padding: 0 0.125rem;
 	min-width: 1.5rem;
 	text-align: center;
@@ -92,7 +92,7 @@ const shiftRight = css`
 
 const elipsisStyles = css`
 	line-height: 26px;
-	margin-right: 5px;
+	margin-right: 2px;
 `;
 
 const wrapperStyles = css`
@@ -102,9 +102,7 @@ const wrapperStyles = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	width: 100%;
-	padding-top: ${space[2]}px;
-	padding-bottom: ${space[2]}px;
+	padding: ${space[2]}px 0;
 	border-top: 1px solid ${schemedPalette('--discussion-pagination-border')};
 	${until.mobileLandscape} {
 		flex-direction: column;

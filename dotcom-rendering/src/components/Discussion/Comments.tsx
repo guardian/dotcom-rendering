@@ -27,6 +27,7 @@ type Props = {
 	shortUrl: string;
 	baseUrl: string;
 	isClosedForComments: boolean;
+	isClosedForRecommendations: boolean;
 	commentToScrollTo?: number;
 	user?: SignedInUser;
 	additionalHeaders: AdditionalHeadersType;
@@ -105,6 +106,7 @@ export const Comments = ({
 	baseUrl,
 	shortUrl,
 	isClosedForComments,
+	isClosedForRecommendations,
 	commentToScrollTo,
 	user,
 	additionalHeaders,
@@ -323,6 +325,9 @@ export const Comments = ({
 							comments={picks.slice(0, 2)}
 							user={user}
 							onPermalinkClick={onPermalinkClick}
+							isClosedForRecommendations={
+								isClosedForRecommendations
+							}
 						/>
 					</div>
 				) : (
@@ -350,6 +355,9 @@ export const Comments = ({
 											comment={comment}
 											isClosedForComments={
 												isClosedForComments
+											}
+											isClosedForRecommendations={
+												isClosedForRecommendations
 											}
 											shortUrl={shortUrl}
 											user={user}
@@ -412,6 +420,7 @@ export const Comments = ({
 					comments={picks}
 					user={user}
 					onPermalinkClick={onPermalinkClick}
+					isClosedForRecommendations={isClosedForRecommendations}
 				/>
 			)}
 			<Filters
@@ -441,6 +450,9 @@ export const Comments = ({
 							<CommentContainer
 								comment={comment}
 								isClosedForComments={isClosedForComments}
+								isClosedForRecommendations={
+									isClosedForRecommendations
+								}
 								shortUrl={shortUrl}
 								user={user}
 								threads={filters.threads}

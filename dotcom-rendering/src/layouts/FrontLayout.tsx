@@ -451,10 +451,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (
-						collection.containerPalette === 'Branded' &&
-						renderAds
-					) {
+					if (collection.containerPalette === 'Branded') {
 						return (
 							<Fragment key={ophanName}>
 								<LabsSection
@@ -569,15 +566,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										/>
 									</Island>
 								</Section>
-								{decideMerchHighAndMobileAdSlots(
-									renderAds,
-									index,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									mobileAdPositions,
-									hasPageSkin,
-								)}
+
+								{renderAds &&
+									decideMerchHighAndMobileAdSlots(
+										renderAds,
+										index,
+										front.pressedPage.collections.length,
+										front.pressedPage.frontProperties
+											.isPaidContent,
+										mobileAdPositions,
+										hasPageSkin,
+									)}
 							</Fragment>
 						);
 					}

@@ -10,6 +10,7 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
+import { AffiliateDisclaimerInline } from '../components/Disclaimer';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
@@ -27,6 +28,7 @@ import { InteractiveContentsBlockComponent } from '../components/InteractiveCont
 import { InteractiveLayoutAtom } from '../components/InteractiveLayoutAtom';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
+import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
@@ -136,6 +138,7 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
+	abTests,
 	editionId,
 }: Props) => {
 	const isBlog =
@@ -416,6 +419,21 @@ export const renderElement = ({
 						/>
 					</Island>
 				</div>
+			);
+		case 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement':
+			return (
+				<KeyTakeaways
+					keyTakeaways={element.keyTakeaways}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return (
@@ -750,11 +768,13 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
+		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
+			return <AffiliateDisclaimerInline />;
+		}
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
-		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 		default:
 			return <></>;
 	}
@@ -842,3 +862,5 @@ export const RenderArticleElement = ({
 		el
 	);
 };
+
+export type ArticleElementRenderer = typeof RenderArticleElement;

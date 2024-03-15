@@ -338,6 +338,7 @@ export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
 	listElementType: 'KeyTakeaways' | 'QAndAExplainer';
 	items: ListItem[];
+	elementId: string;
 }
 
 export interface MapBlockElement extends ThirdPartyEmbeddedContent {

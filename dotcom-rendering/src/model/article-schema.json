@@ -2386,10 +2386,14 @@
                     "items": {
                         "$ref": "#/definitions/ListItem"
                     }
+                },
+                "elementId": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "items",
                 "listElementType"
             ]

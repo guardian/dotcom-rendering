@@ -464,6 +464,8 @@ export const LabsSection = ({
 							<Badge
 								imageSrc={badge.imageSrc}
 								href={badge.href}
+								ophanComponentLink={`labs-logo | ${ophanComponentName}`}
+								ophanComponentName={`labs-logo-${ophanComponentName}`}
 								isInLabsSection={true}
 							/>
 						</div>

@@ -187,6 +187,7 @@ export const defaultStory = () => (
 	<CommentContainer
 		comment={commentData}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
@@ -222,6 +223,7 @@ export const threadedComment = () => (
 	<CommentContainer
 		comment={commentDataThreaded}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
@@ -257,6 +259,7 @@ export const threadedCommentWithShowMore = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongThread}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
@@ -292,6 +295,7 @@ export const threadedCommentWithLongUsernames = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
@@ -327,6 +331,7 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"

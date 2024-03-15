@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { body, palette, text, textSans } from '@guardian/source-foundations';
 import { getAgeWarning } from '../lib/age-warning';
-import { getSoleContributor } from '../lib/byline';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';
 import type { Branding } from '../types/branding';
@@ -129,10 +128,6 @@ export const TopMetaPaidContent = ({
 				articleData.webPublicationDateDeprecated,
 			)}
 			webPublicationDate={articleData.webPublicationDateDisplay}
-			twitterHandle={
-				getSoleContributor(articleData.tags, articleData.byline)
-					?.twitterHandle
-			}
 		/>
 	</header>
 );
