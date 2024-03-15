@@ -100,7 +100,6 @@ const ImmersiveGrid = ({
 									'.          border      headline   '
 									'.          border      standfirst '
 									'.          border      disclaimer '
-									'.          border      byline     '
 									'meta       border      byline     '
 									'lines      border      .          '
 									'.          border      body       '
@@ -143,7 +142,6 @@ const ImmersiveGrid = ({
 										'.          border      standfirst '
 										'.          border      disclaimer '
 										'meta       border      byline     '
-										'meta       border      .          '
 										'lines      border      .          '
 										'.          border      body       '
 										'.          border      .          ';

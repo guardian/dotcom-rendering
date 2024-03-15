@@ -33,7 +33,7 @@ const captionStyle = css`
 	${textSans.xsmall()};
 	line-height: 135%;
 	padding-top: 6px;
-	overflow-wrap: break-all;
+	overflow-wrap: break-word;
 	color: ${palette('--caption-text')};
 `;
 
@@ -221,17 +221,6 @@ const VideoIcon = ({ format }: IconProps) => {
 	);
 };
 
-const decideDisplayIcon = (mediaType: MediaType, format: ArticleFormat) => {
-	switch (mediaType) {
-		case 'Gallery':
-			return null;
-		case 'Video':
-			return <VideoIcon format={format} />;
-		default:
-			return <CameraIcon format={format} />;
-	}
-};
-
 export const Caption = ({
 	captionText,
 	format,
@@ -265,7 +254,11 @@ export const Caption = ({
 				mediaType === 'Video' && videoPadding,
 			]}
 		>
-			{decideDisplayIcon(mediaType, format)}
+			{mediaType === 'Video' ? (
+				<VideoIcon format={format} />
+			) : (
+				<CameraIcon format={format} />
+			)}
 
 			{!!captionText && (
 				<span

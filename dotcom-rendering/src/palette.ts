@@ -3241,6 +3241,7 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[60];
 		default:
 			switch (design) {
+				case ArticleDesign.Gallery:
 				case ArticleDesign.Picture:
 					return transparentColour(sourcePalette.neutral[60], 0.5);
 				default:
