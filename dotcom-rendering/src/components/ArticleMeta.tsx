@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticleFormat,
 	ArticleSpecial,
 	isString,
 } from '@guardian/libs';
