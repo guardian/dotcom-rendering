@@ -1016,6 +1016,41 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
+const subheadingTextLight = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Obituary:
+			switch (format.display) {
+				// Authoritative clear
+				case ArticleDisplay.Immersive:
+				case ArticleDisplay.Showcase:
+				case ArticleDisplay.Standard:
+					return sourcePalette.neutral[7];
+
+				default:
+					return ''; // TODO
+			}
+		default:
+			return ''; // TODO
+	}
+};
+
+const subheadingTextDark = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Obituary:
+			switch (format.display) {
+				// Authoritative clear
+				case ArticleDisplay.Immersive:
+				case ArticleDisplay.Showcase:
+				case ArticleDisplay.Standard:
+					return sourcePalette.neutral[60];
+				default:
+					return ''; // TODO
+			}
+		default:
+			return ''; // TODO
+	}
+};
+
 const avatarLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
@@ -5226,6 +5261,10 @@ const paletteColours = {
 	'--heading-line': {
 		light: headingLineLight,
 		dark: headingLineDark,
+	},
+	'--subheading-text': {
+		light: subheadingTextLight,
+		dark: subheadingTextDark,
 	},
 	'--star-rating-fill': {
 		light: starRatingFillColourLight,
