@@ -1,4 +1,5 @@
 import { ArticleSpecial, Pillar } from '@guardian/libs';
+import type { Meta, StoryObj } from '@storybook/react';
 import {
 	examplePersonalityQuestions,
 	exampleResultBuckets,
@@ -6,27 +7,29 @@ import {
 import { sharingUrls } from '../../fixtures/manual/sharingUrls';
 import { PersonalityQuizAtom } from './PersonalityQuizAtom.importable';
 
-export default {
-	title: 'PersonalityQuizAtom',
+const meta = {
+	title: 'Components/PersonalityQuizAtom',
 	component: PersonalityQuizAtom,
-};
+} satisfies Meta<typeof PersonalityQuizAtom>;
 
-export const DefaultRendering = () => (
-	<PersonalityQuizAtom
-		id="quiz-id"
-		questions={examplePersonalityQuestions}
-		resultBuckets={exampleResultBuckets}
-		sharingUrls={sharingUrls}
-		theme={Pillar.News}
-	/>
-);
+export default meta;
 
-export const LabsTheme = () => (
-	<PersonalityQuizAtom
-		id="2c6bf552-2827-4256-b3a0-f557d215c394"
-		questions={examplePersonalityQuestions}
-		resultBuckets={exampleResultBuckets}
-		sharingUrls={sharingUrls}
-		theme={ArticleSpecial.Labs}
-	/>
-);
+type Story = StoryObj<typeof meta>;
+
+export const Default = {
+	args: {
+		id: 'quiz-id',
+		questions: examplePersonalityQuestions,
+		resultBuckets: exampleResultBuckets,
+		sharingUrls,
+		theme: Pillar.News,
+	},
+} satisfies Story;
+
+export const LabsTheme = {
+	args: {
+		...Default.args,
+		id: '2c6bf552-2827-4256-b3a0-f557d215c394',
+		theme: ArticleSpecial.Labs,
+	},
+} satisfies Story;
