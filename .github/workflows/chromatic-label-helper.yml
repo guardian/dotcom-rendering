@@ -29,9 +29,8 @@ jobs:
                 issue_number: context.issue.number,
               })
               .then(({ data }) => data);
-
             const hasChromaticLabel = labels.some(
-              (label) => label.name === 'run-chromatic',
+              (label) => label.name === 'run_chromatic',
             );
 
             if (!hasChromaticLabel) {
