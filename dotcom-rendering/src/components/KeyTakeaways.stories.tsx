@@ -70,6 +70,74 @@ export const AllThemes = {
 	],
 } satisfies Story;
 
+// TODO ensure desktop/mobile variations
+export const SomeDesignsAndDisplays = {
+	args: AllThemes.args,
+	decorators: [
+		splitTheme([
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Profile,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Lifestyle,
+			},
+		]),
+	],
+} satisfies Story;
+
+// Authoritative Clear
+
+// format: {
+// 	design: ArticleDesign.Obituary,
+// 	display: ArticleDisplay.Standard,
+// 	theme: Pillar.News,
+// },
+
+// Authoritative Stand Out
+
+// format: {
+// 	design: ArticleDesign.Editorial,
+// 	display: ArticleDisplay.Standard,
+// 	theme: Pillar.News,
+// },
+
+// Neutral Clear
+
+// format: {
+// 	design: ArticleDesign.Editorial,
+// 	display: ArticleDisplay.Standard,
+// 	theme: Pillar.News,
+// },
+
+// Neutral Stand Out
+
+// Soft Clear
+// Soft Stand Out
+
 export const Images = {
 	args: {
 		keyTakeaways: [
