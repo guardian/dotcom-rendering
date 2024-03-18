@@ -13,12 +13,12 @@ export const useIsAndroid = (): boolean | undefined => {
 		renderingTarget === 'Web' ? false : undefined,
 	);
 
-	useEffect(() => {
-		if (renderingTarget === 'Web') {
-			return setIsAndroid(false);
-		}
-		setIsAndroid(() => /android/i.test(window.navigator.userAgent));
-	}, [renderingTarget]);
+	// useEffect(() => {
+	// 	if (renderingTarget === 'Web') {
+	// 		return setIsAndroid(false);
+	// 	}
+	// 	setIsAndroid(() => /android/i.test(window.navigator.userAgent));
+	// }, [renderingTarget]);
 
 	return isAndroid;
 };
