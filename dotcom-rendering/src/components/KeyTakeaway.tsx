@@ -64,7 +64,7 @@ export const KeyTakeaway = ({
 		<>
 			<li css={keyTakeawayStyles}>
 				<hr css={headingLineStyles} />
-				<h2 css={headingStyles}>
+				<h2 css={headingStyles} data-ignore="global-h2-styling">
 					<span css={headingIndexStyles}>{`${titleIndex}. `}</span>
 					{keyTakeaway.title}
 				</h2>
