@@ -1,10 +1,11 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { AppsFooter } from './AppsFooter.importable';
+import { AppsFooter as AppsFooterComponent } from './AppsFooter.importable';
 
-export default {
-	component: AppsFooter,
-	title: 'AppsFooter',
+const meta = {
+	component: AppsFooterComponent,
+	title: 'Components/AppsFooter',
 	decorators: [
 		splitTheme([
 			{
@@ -14,6 +15,10 @@ export default {
 			},
 		]),
 	],
-};
+} satisfies Meta<typeof AppsFooterComponent>;
 
-export const Default = () => <AppsFooter />;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const AppsFooter = {} satisfies Story;
