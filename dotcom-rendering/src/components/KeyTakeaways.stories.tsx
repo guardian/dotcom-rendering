@@ -106,35 +106,6 @@ export const SomeDesignsAndDisplays = {
 	],
 } satisfies Story;
 
-// Authoritative Clear
-
-// format: {
-// 	design: ArticleDesign.Obituary,
-// 	display: ArticleDisplay.Standard,
-// 	theme: Pillar.News,
-// },
-
-// Authoritative Stand Out
-
-// format: {
-// 	design: ArticleDesign.Editorial,
-// 	display: ArticleDisplay.Standard,
-// 	theme: Pillar.News,
-// },
-
-// Neutral Clear
-
-// format: {
-// 	design: ArticleDesign.Editorial,
-// 	display: ArticleDisplay.Standard,
-// 	theme: Pillar.News,
-// },
-
-// Neutral Stand Out
-
-// Soft Clear
-// Soft Stand Out
-
 export const Images = {
 	args: {
 		...AllThemes.args,
