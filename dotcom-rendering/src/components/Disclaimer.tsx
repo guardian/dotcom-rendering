@@ -33,15 +33,13 @@ const disclaimerInlineStyles = css`
 
 const DisclaimerText = () => (
 	<p>
-		<sup>
-			The Guardian’s product and service reviews are independent and are
-			in no way influenced by any advertiser or commercial initiative. We
-			will earn a commission from the retailer if you buy something
-			through an affiliate link.&nbsp;
-			<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
-				Learn more.
-			</a>
-		</sup>
+		The Guardian’s product and service reviews are independent and are in no
+		way influenced by any advertiser or commercial initiative. We will earn
+		a commission from the retailer if you buy something through an affiliate
+		link.&nbsp;
+		<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
+			Learn more.
+		</a>
 	</p>
 );
 
