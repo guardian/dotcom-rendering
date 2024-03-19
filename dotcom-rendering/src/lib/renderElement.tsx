@@ -38,6 +38,7 @@ import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importabl
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
+import { QAndAExplainers } from '../components/QAndAExplainers';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -525,6 +526,21 @@ export const renderElement = ({
 						credit={element.credit}
 					/>
 				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement':
+			return (
+				<QAndAExplainers
+					qAndAExplainers={element.qAndAExplainers}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return (
