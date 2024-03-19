@@ -8,17 +8,16 @@
 1. [Create a switch in Frontend](https://github.com/guardian/frontend/blob/main/common/app/conf/switches/ABTestSwitches.scala)
 1. Ensure that you [create an A/B test](https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/tests) on _Frontend_ using the [A/B test API](https://github.com/guardian/csnx/tree/main/libs/%40guardian/ab-core#the-api).
 1. Add your test to [concurrent tests](https://github.com/guardian/frontend/blob/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts) on _Frontend_.
-1. Copy the JS file into DCR (and update to TS types) in [web/experiments/tests](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/experiments/ab-tests.ts)
-1. Add it to the test array in [src/web/experiments/ab-tests.ts](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/experiments/ab-tests.ts)
-1. Force the A/B test (ignoring canRun of A/B test and variant) with the URL opt-in http://local...#ab-yourTest=yourVariant
+1. Copy the JS file into DCR (and update to TS types) in [experiments/tests](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/experiments/ab-tests.ts)
+1. Add it to the test array in [src/experiments/ab-tests.ts](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/experiments/ab-tests.ts)
+1. Force the A/B test (ignoring canRun of A/B test and variant) with the URL opt-in http://local...#ab-YourTest=yourVariant
 1. Set a GU_mvt_id or GU_mvt_id_local cookie with the MVT ID that matches the test Audience and Audience Offset ([Use this calculator](https://ab-tests.netlify.app/))
 1. Check the network tab for the Ophan request _abTestRegister_ has your test and variant
 
 ## Gotchas
 
+-   Your ABTest Switch name is hyphenated, lower case and starts with `ab-`. The JS AB test ID is in PascalCase. These _must_ match up: `ab-my-cool-ab-test` (serverside test switch name) === `MyCoolAbTest` (JS AB test ID).
 -   Your ABTest Switch has a sell by date and your abTest has an expiry date. Matching them up avoids confusion.
--   Your ABTest Switch ID is hyphenated and starts with ab- and it must match the JS AB test ID camel cased
--   The aforementioned JS ID _must_ start uppercase. I.E: ab-my-cool-ab-test (serverside test switch ID) === MyCoolAbTest (JS AB test ID)
 
 ## Use in Components
 

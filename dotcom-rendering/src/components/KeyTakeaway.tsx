@@ -1,5 +1,5 @@
-import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { css, type SerializedStyles } from '@emotion/react';
+import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
@@ -11,8 +11,10 @@ const keyTakeawayStyles = css`
 	padding-top: 8px;
 `;
 
-const headingStyles = css`
-	${headline.xsmall({ fontWeight: 'medium' })};
+const headingStyles = (display: ArticleDisplay): SerializedStyles => css`
+	${display === ArticleDisplay.Immersive
+		? headline.medium({ fontWeight: 'light' })
+		: headline.xxsmall({ fontWeight: 'bold' })};
 	padding: 2px 0px;
 `;
 
@@ -64,7 +66,7 @@ export const KeyTakeaway = ({
 		<>
 			<li css={keyTakeawayStyles}>
 				<hr css={headingLineStyles} />
-				<h2 css={headingStyles}>
+				<h2 css={headingStyles(format.display)}>
 					<span css={headingIndexStyles}>{`${titleIndex}. `}</span>
 					{keyTakeaway.title}
 				</h2>
