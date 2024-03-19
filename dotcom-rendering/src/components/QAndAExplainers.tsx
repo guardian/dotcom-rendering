@@ -2,7 +2,7 @@ import { css, type SerializedStyles } from '@emotion/react';
 import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
-import { RenderArticleElement } from '../lib/renderElement';
+import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { QAndAExplainer } from '../types/content';
@@ -37,6 +37,7 @@ interface CommonProps {
 	editionId: EditionId;
 	hideCaption?: boolean;
 	starRating?: number;
+	RenderArticleElement: ArticleElementRenderer;
 }
 
 interface QAndAExplainersProps extends CommonProps {
@@ -60,6 +61,7 @@ const QAndAExplainerComponent = ({
 	editionId,
 	hideCaption,
 	starRating,
+	RenderArticleElement,
 }: QAndAExplainerProps) => {
 	return (
 		<li css={qAndAExplainerStyles}>
@@ -103,6 +105,7 @@ export const QAndAExplainers = ({
 	editionId,
 	hideCaption,
 	starRating,
+	RenderArticleElement,
 }: QAndAExplainersProps) => {
 	return (
 		<ol>
@@ -121,6 +124,7 @@ export const QAndAExplainers = ({
 					hideCaption={hideCaption}
 					starRating={starRating}
 					key={index}
+					RenderArticleElement={RenderArticleElement}
 				/>
 			))}
 		</ol>
