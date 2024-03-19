@@ -12,19 +12,22 @@ const dropCap = css`
 	/* stylelint-disable-next-line property-disallowed-list -- we’re setting custom line height and font weight */
 	font-family: ${fonts.headline};
 	float: left;
-	font-size: 111px;
-	line-height: 92px;
+	font-size: 112px;
+	line-height: 88px;
 	text-transform: uppercase;
 	box-sizing: border-box;
-	margin-right: ${space[2]}px;
+	margin-right: ${space[1]}px;
 	vertical-align: text-top;
 `;
 
 const fontWeight = (format: ArticleFormat) => {
 	switch (format.design) {
+		// "Authoritative" designs
+		case ArticleDesign.Obituary:
 		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
+			return 300;
+		case ArticleDesign.Letter:
 			return 200;
 		default:
 			return 700;
