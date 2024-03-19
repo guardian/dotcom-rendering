@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { images } from '../../fixtures/generated/images';
 import { getAllThemes } from '../lib/format';
+import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { QAndAExplainers } from './QAndAExplainers';
 
@@ -57,6 +58,7 @@ export const AllThemes = {
 		isSensitive: false,
 		pageId: 'testID',
 		switches: {},
+		RenderArticleElement,
 	},
 	decorators: [
 		splitTheme(
@@ -100,6 +102,7 @@ export const Images = {
 		isSensitive: false,
 		pageId: 'testID',
 		switches: {},
+		RenderArticleElement,
 	},
 	decorators: [
 		splitTheme(
