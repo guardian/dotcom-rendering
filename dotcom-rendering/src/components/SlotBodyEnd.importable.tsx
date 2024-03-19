@@ -216,7 +216,8 @@ export const SlotBodyEnd = ({
 		};
 
 		const shouldRemoveEpic =
-			userIsInBlockSupporterRevenueTest && sectionId === 'sport';
+			userIsInBlockSupporterRevenueTest &&
+			(sectionId === 'sport' || sectionId === 'football');
 
 		if (!shouldRemoveEpic) {
 			pickMessage(epicConfig, renderingTarget)

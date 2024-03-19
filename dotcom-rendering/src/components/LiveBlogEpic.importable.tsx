@@ -258,7 +258,8 @@ export const LiveBlogEpic = ({
 	);
 
 	const shouldRemoveEpic =
-		userIsInBlockSupporterRevenueTest && sectionId === 'sport';
+		userIsInBlockSupporterRevenueTest &&
+		(sectionId === 'sport' || sectionId === 'football');
 
 	// First construct the payload
 	const payload = usePayload({
