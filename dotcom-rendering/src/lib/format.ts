@@ -30,21 +30,6 @@ export const getAllThemes = ({
 			design,
 		}));
 
-export const getDesignsWeCareAbout = ({
-	display,
-	design,
-}: {
-	display: ArticleDisplay;
-	design: ArticleDesign;
-}): Array<ArticleFormat> =>
-	Object.values({ ...Pillar, ...ArticleSpecial })
-		.filter(isTheme)
-		.map((theme) => ({
-			theme,
-			display,
-			design,
-		}));
-
 const designToFEDesign = (design: ArticleDesign): FEDesign => {
 	switch (design) {
 		case ArticleDesign.Standard:
