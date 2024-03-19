@@ -99,11 +99,16 @@ const ImmersiveGrid = ({
 									'caption    border      title      '
 									'.          border      headline   '
 									'.          border      standfirst '
+									<<<<<<< HEAD
 									'.          border      disclaimer '
 									'.          border      byline     '
 									'.      border      byline       '
 									' .      border      meta       '
 									'lines     border      meta       '
+									=======
+									'lines      border      .          '
+									'meta       border      byline     '
+									>>>>>>> ab/dcr-galleries-with-dcr-styles
 									'.          border      body       '
 									'.          border      .          ';
 						  `
@@ -141,11 +146,16 @@ const ImmersiveGrid = ({
 										'.          border      title      '
 										'.          border      headline   '
 										'.          border      standfirst '
+										<<<<<<< HEAD
 										'.          border      disclaimer '
 										'.          border      byline     '
 										'.      border      byline       '
 										'.       border      meta       '
 										'lines      border      meta       '
+										=======
+										'lines      border      .          '
+										'meta       border      byline     '
+										>>>>>>> ab/dcr-galleries-with-dcr-styles
 										'.          border      body       '
 										'.          border      .          ';
 								}
@@ -159,7 +169,11 @@ const ImmersiveGrid = ({
 									'.          border      byline      right-column'
 									'lines      border      body        right-column'
 									'meta       border      body        right-column'
+									<<<<<<< HEAD
 									'meta       border      body        right-column'
+									=======
+									'meta       border   	body        right-column'
+									>>>>>>> ab/dcr-galleries-with-dcr-styles
 									'.          border      body        right-column'
 									'.          border      .           right-column';
 						  `}
@@ -599,9 +613,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							)}
 						</GridItem>
 						<GridItem area="lines">
-							{(format.design === ArticleDesign.PhotoEssay &&
-								!isLabs) ||
-							format.design === ArticleDesign.Gallery ? (
+							{(format.design === ArticleDesign.PhotoEssay ||
+								format.design === ArticleDesign.Gallery) &&
+							!isLabs ? (
 								<></>
 							) : (
 								<div css={maxWidth}>

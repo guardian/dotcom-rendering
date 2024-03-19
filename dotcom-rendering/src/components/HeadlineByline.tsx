@@ -113,6 +113,7 @@ const immersiveStyles = (format: ArticleFormat) => css`
 				fontWeight: 'light',
 		  })}
 	margin-bottom: ${space[6]}px;
+	color: ${schemedPalette('--byline')};
 `;
 
 const immersiveLinkStyles = css`

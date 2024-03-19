@@ -33,7 +33,7 @@ const captionStyle = css`
 	${textSans.xsmall()};
 	line-height: 135%;
 	padding-top: 6px;
-	overflow-wrap: break-all;
+	overflow-wrap: break-word;
 	color: ${palette('--caption-text')};
 `;
 
@@ -265,7 +265,11 @@ export const Caption = ({
 				mediaType === 'Video' && videoPadding,
 			]}
 		>
-			{displayIcon(mediaType, format)}
+			{mediaType === 'Video' ? (
+				<VideoIcon format={format} />
+			) : (
+				<CameraIcon format={format} />
+			)}
 
 			{!!captionText && (
 				<span
