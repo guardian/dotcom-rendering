@@ -1,14 +1,37 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { textSans } from '@guardian/source-foundations';
+import { headline, textSans } from '@guardian/source-foundations';
+import { type Decorator } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
-const defaultFormat = {
+const standardFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 	theme: Pillar.News,
 };
+
+const immersiveFormat = {
+	...standardFormat,
+	display: ArticleDisplay.Immersive,
+};
+
+/** Mocking the styles normally inherited via ArticleBody component */
+const GlobalStylesDecorator =
+	(format: ArticleFormat): Decorator =>
+	(Story) => (
+		<div
+			css={css`
+				h2:not([data-ignore='global-h2-styling']) {
+					${format.display === ArticleDisplay.Immersive
+						? headline.medium({ fontWeight: 'light' })
+						: headline.xxsmall({ fontWeight: 'bold' })};
+				}
+			`}
+		>
+			{Story()}
+		</div>
+	);
 
 const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -35,53 +58,26 @@ export default {
 	component: SubheadingBlockComponent,
 	title: 'Components/SubheadingBlockComponent',
 	render: (args: React.ComponentProps<typeof SubheadingBlockComponent>) => {
-		const standardFormat = {
-			...args.format,
-			display: ArticleDisplay.Standard,
-		};
-		const immersiveFormat = {
-			...args.format,
-			display: ArticleDisplay.Immersive,
-		};
 		return (
 			<>
 				<StoryWrapper>
-					<span>Standard</span>
 					<SubheadingBlockComponent
-						format={standardFormat}
+						format={args.format}
 						html="<h2>Basic subheading</h2>"
 					/>
 					<SubheadingBlockComponent
-						format={standardFormat}
+						format={args.format}
 						html="<h2>Subheading <a href='/'>with anchor</a></h2>"
 					/>
 					<SubheadingBlockComponent
-						format={standardFormat}
+						format={args.format}
 						html="<h2>Subheading with HTML comment<!-- HTML comment--></h2>"
 					/>
 					<SubheadingBlockComponent
-						format={standardFormat}
+						format={args.format}
 						html="Subheading text only (no HTML)"
 					/>
-					<hr />
 
-					<span>Immersive</span>
-					<SubheadingBlockComponent
-						format={immersiveFormat}
-						html="<h2>Basic subheading</h2>"
-					/>
-					<SubheadingBlockComponent
-						format={immersiveFormat}
-						html="<h2>Subheading <a href='/'>with anchor</a></h2>"
-					/>
-					<SubheadingBlockComponent
-						format={immersiveFormat}
-						html="<h2>Subheading with HTML comment<!-- HTML comment--></h2>"
-					/>
-					<SubheadingBlockComponent
-						format={immersiveFormat}
-						html="Subheading text only (no HTML)"
-					/>
 					<hr />
 				</StoryWrapper>
 			</>
@@ -89,29 +85,49 @@ export default {
 	},
 	args: {
 		html: '<h2>Subheading</h2>',
-		format: defaultFormat,
+		format: standardFormat,
 	},
 };
 
-export const NewsStandard = {
-	decorators: [splitTheme([defaultFormat])],
+export const StandardDisplay = {
+	decorators: [
+		GlobalStylesDecorator(standardFormat),
+
+		splitTheme([
+			standardFormat,
+			// "Authoritative clear" styles
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+			// "Authoritative stand-out" styles
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Opinion,
+			},
+		]),
+	],
 };
 
-const newsObituaryFormat = {
-	...defaultFormat,
-	design: ArticleDesign.Obituary,
-};
-export const NewsObituary = {
-	args: { format: newsObituaryFormat },
-	decorators: [splitTheme([newsObituaryFormat])],
-};
-
-const opinionCommentFormat = {
-	...defaultFormat,
-	theme: Pillar.Opinion,
-	design: ArticleDesign.Comment,
-};
-export const OpinionComment = {
-	args: { format: opinionCommentFormat },
-	decorators: [splitTheme([opinionCommentFormat])],
+export const ImmersiveDisplay = {
+	decorators: [
+		GlobalStylesDecorator(immersiveFormat),
+		splitTheme([
+			immersiveFormat,
+			// "Authoritative clear" styles
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.News,
+			},
+			// "Authoritative stand-out" styles
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Opinion,
+			},
+		]),
+	],
 };
