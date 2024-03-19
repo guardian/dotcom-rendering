@@ -1,6 +1,7 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
+import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -10,7 +11,6 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
-import { AffiliateDisclaimerInline } from '../components/Disclaimer';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
