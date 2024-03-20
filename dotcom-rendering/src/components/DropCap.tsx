@@ -12,8 +12,8 @@ const dropCap = css`
 	/* stylelint-disable-next-line property-disallowed-list -- we’re setting custom line height and font weight */
 	font-family: ${fonts.headline};
 	float: left;
-	font-size: 112px;
-	line-height: 88px;
+	font-size: 7rem;
+	line-height: 5.75rem;
 	text-transform: uppercase;
 	box-sizing: border-box;
 	margin-right: ${space[1]}px;
