@@ -67,6 +67,47 @@ export const AllThemes = {
 	],
 } satisfies Story;
 
+/* TODO reminder to check desktop/mobile font size variations
+ * remove this comment when https://github.com/guardian/dotcom-rendering/issues/9193 complete
+ */
+export const SomeDesignsAndDisplays = {
+	args: AllThemes.args,
+	decorators: [
+		splitTheme([
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Profile,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Lifestyle,
+			},
+		]),
+	],
+} satisfies Story;
+
 export const Images = {
 	args: {
 		...AllThemes.args,
