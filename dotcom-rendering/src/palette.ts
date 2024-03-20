@@ -1016,85 +1016,56 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
-const subheadingTextLight = ({ design, display, theme }: ArticleFormat) => {
+const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 	switch (design) {
 		// Authoritative clear
 		case ArticleDesign.Obituary:
-			switch (display) {
-				case ArticleDisplay.Immersive:
-				case ArticleDisplay.Showcase:
-				case ArticleDisplay.Standard:
-					return sourcePalette.neutral[7];
-
-				default:
-					return 'unset';
-			}
+			return sourcePalette.neutral[7];
 		// Authoritative stand-out
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
-			switch (display) {
-				case ArticleDisplay.Immersive:
-				case ArticleDisplay.Showcase:
-				case ArticleDisplay.Standard:
-					switch (theme) {
-						case Pillar.News:
-						case Pillar.Opinion:
-						case Pillar.Sport:
-						case Pillar.Culture:
-						case Pillar.Lifestyle:
-							return pillarPalette(theme, 200);
-						case ArticleSpecial.Labs:
-							return sourcePalette.labs[200];
-						case ArticleSpecial.SpecialReport:
-							return sourcePalette.specialReport[200];
-						case ArticleSpecial.SpecialReportAlt:
-							return sourcePalette.specialReportAlt[200];
-					}
-				default:
-					return 'unset';
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 200);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[200];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
 			}
 		default:
 			return 'unset';
 	}
 };
 
-const subheadingTextDark = ({ design, display, theme }: ArticleFormat) => {
+const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 	switch (design) {
 		// Authoritative clear
 		case ArticleDesign.Obituary:
-			switch (display) {
-				case ArticleDisplay.Immersive:
-				case ArticleDisplay.Showcase:
-				case ArticleDisplay.Standard:
-					return sourcePalette.neutral[60];
-				default:
-					return 'unset';
-			}
+			return sourcePalette.neutral[60];
 		// Authoritative stand-out
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
-			switch (display) {
-				case ArticleDisplay.Immersive:
-				case ArticleDisplay.Showcase:
-				case ArticleDisplay.Standard:
-					switch (theme) {
-						case Pillar.News:
-						case Pillar.Opinion:
-						case Pillar.Sport:
-						case Pillar.Culture:
-						case Pillar.Lifestyle:
-							return pillarPalette(theme, 500);
-						case ArticleSpecial.Labs:
-							// TODO - check this (500 does not exist)
-							return sourcePalette.labs[400];
-						case ArticleSpecial.SpecialReport:
-							return sourcePalette.specialReport[500];
-						case ArticleSpecial.SpecialReportAlt:
-							// TODO - check this (500 does not exist)
-							return sourcePalette.specialReportAlt[300];
-					}
-				default:
-					return 'unset';
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.Labs:
+					// TODO - check this (500 does not exist)
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					// TODO - check this (500 does not exist)
+					return sourcePalette.specialReportAlt[300];
 			}
 		default:
 			return 'unset';
