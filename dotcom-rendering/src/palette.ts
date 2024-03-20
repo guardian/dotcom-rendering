@@ -1018,12 +1018,19 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 
 const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 	switch (design) {
-		// Authoritative clear
+		// "Clear" styles
 		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
 			return sourcePalette.neutral[7];
-		// Authoritative stand-out
+		// "Stand-out" styles
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -1045,12 +1052,19 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 
 const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 	switch (design) {
-		// Authoritative clear
+		// "Clear" styles
 		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
 			return sourcePalette.neutral[60];
-		// Authoritative stand-out
+		// "Stand-out" styles
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -1069,7 +1083,6 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 			return 'unset';
 	}
 };
-
 const avatarLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
