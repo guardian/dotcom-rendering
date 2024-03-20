@@ -51,7 +51,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 };
 
 const tagPageWebTitle = (tagPage: FETagPageType) => {
-	const pagination = tagPage.tags.tags[0]?.pagination;
+	const pagination = tagPage.pagination;
 	if (pagination !== undefined && pagination.currentPage > 1) {
 		return `${tagPage.webTitle} | Page ${pagination.currentPage} of ${pagination.lastPage} | The Guardian`;
 	} else {
