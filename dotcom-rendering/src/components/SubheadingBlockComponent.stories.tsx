@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { headline, textSans } from '@guardian/source-foundations';
-import { type Decorator } from '@storybook/react';
+import { headline } from '@guardian/source-foundations';
+import type { Decorator, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
@@ -36,13 +36,10 @@ const GlobalStylesDecorator =
 const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
-			span {
-				${textSans.medium({ fontStyle: 'italic' })};
-				margin-bottom: 4px;
-			}
 			hr {
 				border: 0.5px dashed;
 			}
+
 			margin: 10px;
 
 			* {
@@ -54,33 +51,31 @@ const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export default {
+const meta = {
 	component: SubheadingBlockComponent,
 	title: 'Components/SubheadingBlockComponent',
 	render: (args: React.ComponentProps<typeof SubheadingBlockComponent>) => {
 		return (
-			<>
-				<StoryWrapper>
-					<SubheadingBlockComponent
-						format={args.format}
-						html="<h2>Basic subheading</h2>"
-					/>
-					<SubheadingBlockComponent
-						format={args.format}
-						html="<h2>Subheading <a href='/'>with anchor</a></h2>"
-					/>
-					<SubheadingBlockComponent
-						format={args.format}
-						html="<h2>Subheading with HTML comment<!-- HTML comment--></h2>"
-					/>
-					<SubheadingBlockComponent
-						format={args.format}
-						html="Subheading text only (no HTML)"
-					/>
+			<StoryWrapper>
+				<SubheadingBlockComponent
+					format={args.format}
+					html="<h2>Basic subheading</h2>"
+				/>
+				<SubheadingBlockComponent
+					format={args.format}
+					html="<h2>Subheading <a href='/'>with anchor</a></h2>"
+				/>
+				<SubheadingBlockComponent
+					format={args.format}
+					html="<h2>Subheading with HTML comment<!-- HTML comment--></h2>"
+				/>
+				<SubheadingBlockComponent
+					format={args.format}
+					html="Subheading text only (no HTML)"
+				/>
 
-					<hr />
-				</StoryWrapper>
-			</>
+				<hr />
+			</StoryWrapper>
 		);
 	},
 	args: {
@@ -88,6 +83,9 @@ export default {
 		format: standardFormat,
 	},
 };
+
+type Story = StoryObj<typeof meta>;
+export default meta;
 
 export const StandardDisplay = {
 	decorators: [
@@ -109,7 +107,7 @@ export const StandardDisplay = {
 			},
 		]),
 	],
-};
+} satisfies Story;
 
 export const ImmersiveDisplay = {
 	decorators: [
@@ -130,4 +128,4 @@ export const ImmersiveDisplay = {
 			},
 		]),
 	],
-};
+} satisfies Story;
