@@ -4255,6 +4255,23 @@ const richLinkQuoteFillLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
+const affiliateDisclaimerBackgroundLight: PaletteFunction = ({ design }) => {
+	return design === ArticleDesign.Analysis
+		? '#F2E8E6'
+		: sourcePalette.neutral[97];
+};
+const affiliateDisclaimerBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+const affiliateDisclaimerBackgroundHoverLight: PaletteFunction = ({
+	design,
+}) => {
+	return design === ArticleDesign.Analysis
+		? '#e9d9d5' //not available in colour palette. Check with design to update or change.
+		: sourcePalette.neutral[93];
+};
+const affiliateDisclaimerBackgroundHoverDark: PaletteFunction = () =>
+	sourcePalette.neutral[10];
+
 const seriesTitleBackgroundLight: PaletteFunction = ({ theme, display }) => {
 	if (theme === ArticleSpecial.SpecialReport)
 		return sourcePalette.brandAlt[400];
@@ -6073,6 +6090,14 @@ const paletteColours = {
 	'--discussion-comment-underline': {
 		light: discussionCommentUnderlineLight,
 		dark: discussionCommentUnderlineDark,
+	},
+	'--affiliate-disclaimer-background': {
+		light: affiliateDisclaimerBackgroundLight,
+		dark: affiliateDisclaimerBackgroundDark,
+	},
+	'--affiliate-disclaimer-background-hover': {
+		light: affiliateDisclaimerBackgroundHoverLight,
+		dark: affiliateDisclaimerBackgroundHoverDark,
 	},
 } satisfies PaletteColours;
 
