@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
-import type { Decorator, StoryObj } from '@storybook/react';
+import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
@@ -54,7 +59,7 @@ const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
 const meta = {
 	component: SubheadingBlockComponent,
 	title: 'Components/SubheadingBlockComponent',
-	render: (args: React.ComponentProps<typeof SubheadingBlockComponent>) => {
+	render: (args) => {
 		return (
 			<StoryWrapper>
 				<SubheadingBlockComponent
@@ -82,7 +87,7 @@ const meta = {
 		html: '<h2>Subheading</h2>',
 		format: standardFormat,
 	},
-};
+} satisfies Meta<typeof SubheadingBlockComponent>;
 
 type Story = StoryObj<typeof meta>;
 export default meta;
@@ -103,7 +108,17 @@ export const StandardDisplay = {
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Standard,
-				theme: Pillar.Opinion,
+				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.SpecialReportAlt,
 			},
 		]),
 	],
@@ -124,7 +139,17 @@ export const ImmersiveDisplay = {
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Immersive,
-				theme: Pillar.Opinion,
+				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReportAlt,
 			},
 		]),
 	],
