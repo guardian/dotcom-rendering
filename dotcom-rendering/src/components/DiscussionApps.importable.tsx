@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getdiscussionClient } from '../lib/bridgetApi';
+import { getdiscussionClient, getUserClient } from '../lib/bridgetApi';
 import type { Reader, UserProfile } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
@@ -61,7 +61,13 @@ export const DiscussionApps = (props: Props) => {
 	const [user, setUser] = useState<Reader>();
 
 	useEffect(() => {
-		void getUser().then(setUser);
+		void getUserClient()
+			.isSignedIn()
+			.then((signedIn) => {
+				if (signedIn) {
+					void getUser().then(setUser);
+				}
+			});
 	}, [setUser]);
 
 	return (
