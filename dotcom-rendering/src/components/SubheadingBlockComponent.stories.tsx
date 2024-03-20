@@ -114,7 +114,17 @@ export const StandardDisplay = {
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Standard,
-				theme: Pillar.Opinion,
+				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.SpecialReportAlt,
 			},
 			{
 				design: ArticleDesign.Comment,
@@ -159,7 +169,17 @@ export const ImmersiveDisplay = {
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Immersive,
-				theme: Pillar.Opinion,
+				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReportAlt,
 			},
 			{
 				design: ArticleDesign.Comment,
