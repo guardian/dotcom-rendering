@@ -3,32 +3,30 @@ import { space, textSans } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { palette as themePalette } from '../palette';
 
-const disclaimerStyles = css`
-	${textSans.medium({ lineHeight: 'regular' })};
-	max-width: 540px;
-
-	sup {
-		font-size: 85%;
-	}
-	margin-bottom: 16px;
-	color: inherit;
-	text-decoration: none;
+const disclaimerLeftColStyles = css`
+	${textSans.small({ lineHeight: 'tight' })};
+	padding-top: ${space[1]}px;
+	padding-bottom: ${space[1]}px;
 `;
 
 const disclaimerInlineStyles = css`
-	margin-bottom: ${space[1]}px;
+	${textSans.xsmall({ lineHeight: 'tight' })};
 	float: left;
 	clear: left;
 	width: 8.75rem;
-	margin-right: 20px;
-	background-color: ${themePalette('--rich-link-background')};
+	background-color: ${themePalette('--affiliate-disclaimer-background')};
 	:hover {
-		background-color: ${themePalette('--rich-link-background-hover')};
+		background-color: ${themePalette(
+			'--affiliate-disclaimer-background-hover',
+		)};
 	}
-	padding-top: 2px;
+	margin-top: ${space[1]}px;
+	margin-right: ${space[5]}px;
+	margin-bottom: ${space[1]}px;
+	padding-top: ${space[0]}px;
 	padding-right: 5px;
 	padding-left: 5px;
-	padding-bottom: 5px;
+	padding-bottom: ${space[3]}px;
 `;
 
 const DisclaimerText = () => (
@@ -44,19 +42,24 @@ const DisclaimerText = () => (
 );
 
 const AffiliateDisclaimer = () => (
-	<aside css={[disclaimerStyles]} data-testid="affiliate-disclaimer">
-		<DisclaimerText />
-	</aside>
+	<Hide until="leftCol">
+		<aside
+			css={[disclaimerLeftColStyles]}
+			data-testid="affiliate-disclaimer"
+		>
+			<DisclaimerText />
+		</aside>
+	</Hide>
 );
 
 const AffiliateDisclaimerInline = () => (
 	<Hide from="leftCol">
-		<div
+		<aside
 			css={[disclaimerInlineStyles]}
 			data-testid="affiliate-disclaimer-inline"
 		>
-			<AffiliateDisclaimer />
-		</div>
+			<DisclaimerText />
+		</aside>
 	</Hide>
 );
 

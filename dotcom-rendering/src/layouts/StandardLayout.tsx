@@ -707,11 +707,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
 									/>
-									<Hide until="leftCol">
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
-									</Hide>
+									{!!article.affiliateLinksDisclaimer && (
+										<AffiliateDisclaimer />
+									)}
 								</div>
 							)}
 						</GridItem>

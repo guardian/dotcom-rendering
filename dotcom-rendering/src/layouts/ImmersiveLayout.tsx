@@ -660,11 +660,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											}
 											ajaxUrl={article.config.ajaxUrl}
 										/>
-										<Hide when="below" breakpoint="leftCol">
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
-										</Hide>
+										{!!article.affiliateLinksDisclaimer && (
+											<AffiliateDisclaimer />
+										)}
 									</>
 								)}
 							</div>

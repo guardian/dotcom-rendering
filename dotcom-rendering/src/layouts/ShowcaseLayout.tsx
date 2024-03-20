@@ -649,11 +649,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											}
 											ajaxUrl={article.config.ajaxUrl}
 										/>
-										<Hide until="leftCol">
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
-										</Hide>
+										{!!article.affiliateLinksDisclaimer && (
+											<AffiliateDisclaimer />
+										)}
 									</>
 								)}
 							</div>
