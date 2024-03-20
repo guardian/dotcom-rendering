@@ -60,7 +60,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 			],
 		},
 	},
-	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
+	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
 });
 
 /** Facia */
