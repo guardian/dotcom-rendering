@@ -1,4 +1,6 @@
 import { css } from '@emotion/react';
+import { SignInScreenReason } from '@guardian/bridget/SignInScreenReason';
+import { SignInScreenReferrer } from '@guardian/bridget/SignInScreenReferrer';
 import {
 	headline,
 	palette as sourcePalette,
@@ -11,8 +13,6 @@ import type { UserProfile } from '../lib/discussion';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import { palette as themePalette } from '../palette';
 import { useConfig } from './ConfigContext';
-import { SignInScreenReason } from '@guardian/bridget/SignInScreenReason';
-import { SignInScreenReferrer } from '@guardian/bridget/SignInScreenReferrer';
 
 const signIn = async (): Promise<void> => {
 	void getUserClient().signIn(
@@ -105,6 +105,31 @@ const Heading = ({ count }: { count?: number }) => {
 	);
 };
 
+const linkButton = css`
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: none;
+`;
+const LinkButton = ({
+	onClick,
+	children,
+}: {
+	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	children: string;
+}) => {
+	return (
+		<button
+			css={[linkButton, linkStyles]}
+			className="link-button"
+			onClick={onClick}
+		>
+			{children}
+		</button>
+	);
+};
 export const SignedInAs = ({
 	commentCount,
 	enableDiscussionSwitch,
@@ -119,13 +144,10 @@ export const SignedInAs = ({
 	const SignInApps = () => {
 		return (
 			<>
-				<a role="button" css={linkStyles} onClick={signIn}>
-					sign in
-				</a>{' '}
-				or{' '}
-				<a role="button" css={linkStyles} onClick={signIn}>
+				<LinkButton onClick={signIn}>sign in</LinkButton> or{' '}
+				<LinkButton onClick={signIn}>
 					create your Guardian account
-				</a>{' '}
+				</LinkButton>{' '}
 			</>
 		);
 	};
