@@ -249,6 +249,8 @@ const EpicBody: ReactComponent<BodyProps> = ({
 
 const sendEpicViewEvent = (
 	url: string,
+	abTestName: string,
+	abTestVariant: string,
 	stage?: Stage,
 	countryCode?: string,
 ): void => {
@@ -259,6 +261,7 @@ const sendEpicViewEvent = (
 	const eventBody = JSON.stringify({
 		url,
 		countryCode,
+		abTests: [{ name: abTestName, variant: abTestVariant }],
 	});
 
 	void fetch(`${host}/${path}`, {
@@ -320,7 +323,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 		if (hasBeenSeen) {
 			// For the event stream
 			if (!window?.guardian?.config?.isDev && stage !== 'DEV') {
-				sendEpicViewEvent(tracking.referrerUrl, stage, countryCode);
+				sendEpicViewEvent(
+					tracking.referrerUrl,
+					tracking.abTestName,
+					tracking.abTestVariant,
+					stage,
+					countryCode,
+				);
 			}
 
 			// For epic view count

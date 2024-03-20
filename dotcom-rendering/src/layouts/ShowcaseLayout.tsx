@@ -21,7 +21,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
-import { Disclaimer } from '../components/Disclaimer';
+import { AffiliateDisclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -92,7 +92,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines  border  media       media'
 						'meta   border  media       media'
 						'meta   border  standfirst  right-column'
-						'meta   border  disclaimer  right-column'
 						'.      border  body        right-column'
 						'.      border  .           right-column';
 				}
@@ -104,7 +103,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines  border  media       media'
 						'meta   border  media       media'
 						'meta   border  standfirst  right-column'
-						'meta   border  disclaimer  right-column'
 						'.      border  body        right-column'
 						'.      border  .           right-column';
 				}
@@ -121,7 +119,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title      right-column'
 						'headline   right-column'
 						'standfirst right-column'
-						'disclaimer right-column'
 						'media      right-column'
 						'lines      right-column'
 						'meta       right-column'
@@ -136,7 +133,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
-						'disclaimer'
 						'media'
 						'lines'
 						'meta'
@@ -151,7 +147,6 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'title'
 						'headline'
 						'standfirst'
-						'disclaimer'
 						'lines'
 						'meta'
 						'body';
@@ -559,13 +554,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="disclaimer">
-							{!!article.affiliateLinksDisclaimer && (
-								<Disclaimer
-									html={article.affiliateLinksDisclaimer}
-								></Disclaimer>
-							)}
-						</GridItem>
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
@@ -636,26 +624,37 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										</Hide>
 									</>
 								) : (
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										byline={article.byline}
-										tags={article.tags}
-										primaryDateline={
-											article.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											article.webPublicationSecondaryDateDisplay
-										}
-										isCommentable={article.isCommentable}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
-									/>
+									<>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={article.pageId}
+											webTitle={article.webTitle}
+											byline={article.byline}
+											tags={article.tags}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												article.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
+											ajaxUrl={article.config.ajaxUrl}
+										/>
+										<Hide until="leftCol">
+											{!!article.affiliateLinksDisclaimer && (
+												<AffiliateDisclaimer />
+											)}
+										</Hide>
+									</>
 								)}
 							</div>
 						</GridItem>

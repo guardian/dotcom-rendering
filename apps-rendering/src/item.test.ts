@@ -569,6 +569,75 @@ describe('embed elements', () => {
 	});
 });
 
+describe('list elements', () => {
+	test('parses list elements', () => {
+		const embedElement = {
+			type: ElementType.EMBED,
+			assets: [],
+			embedTypeData: {
+				html: '<p>Embed element<p>',
+				source: 'mockSource',
+				sourceDomain: 'mockSourceDomain',
+			},
+		};
+
+		const textElement = {
+			type: ElementType.TEXT,
+			assets: [],
+			textTypeData: {
+				html: '<p>paragraph</p>',
+			},
+		};
+
+		const listElement = {
+			type: ElementType.LIST,
+			assets: [],
+			listTypeData: {
+				items: [
+					{
+						title: 'Some title 1',
+						elements: [embedElement, textElement, textElement],
+					},
+					{
+						title: 'Some title 2',
+						elements: [textElement],
+					},
+					{
+						title: 'Some title 3',
+						elements: [embedElement, textElement, textElement],
+					},
+				],
+			},
+		};
+		const item = f(articleContentWith(listElement)) as Standard;
+
+		expect(
+			item.body[0].kind === ElementKind.HeadingTwo &&
+				item.body[0].doc.firstChild?.textContent == 'Some title 1',
+		);
+		expect(item.body[1].kind).toBe(ElementKind.Embed);
+		expect(
+			item.body[4].kind === ElementKind.HeadingTwo &&
+				item.body[4].doc.firstChild?.textContent == 'Some title 2',
+		);
+		expect(item.body[5].kind === ElementKind.Text);
+		expect(
+			item.body[6].kind === ElementKind.HeadingTwo &&
+				item.body[6].doc.firstChild?.textContent == 'Some title 3',
+		);
+	});
+
+	test('filters list elements without listTypeData', () => {
+		const listElement = {
+			type: ElementType.LIST,
+			assets: [],
+		};
+		const item = f(articleContentWith(listElement)) as Standard;
+		const element = getFirstBody(item);
+		expect(element.kind).toBe(ElementKind.Interactive);
+	});
+});
+
 describe('audio elements', () => {
 	test('filters out audio elements with no src attributes on iframe', () => {
 		const audioElement = {

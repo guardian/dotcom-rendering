@@ -76,6 +76,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		renderingTarget: 'Web',
 		promotedNewsletter: undefined,
 		imagesForLightbox: [],
+		hasAffiliateLinksDisclaimer: false,
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,

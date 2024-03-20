@@ -60,6 +60,7 @@ export const NeverRecommended = () => (
 			alreadyRecommended={false}
 			user={aUser}
 			userMadeComment={false}
+			isClosedForRecommendations={false}
 		/>
 	</Wrapper>
 );
@@ -73,6 +74,7 @@ export const AlreadyRecommended = () => (
 			alreadyRecommended={true}
 			user={aUser}
 			userMadeComment={false}
+			isClosedForRecommendations={false}
 		/>
 	</Wrapper>
 );
@@ -85,6 +87,7 @@ export const NotSignedIn = () => (
 			initialCount={83}
 			alreadyRecommended={false}
 			userMadeComment={false}
+			isClosedForRecommendations={false}
 		/>
 	</Wrapper>
 );
@@ -98,6 +101,7 @@ export const OwnPost = () => (
 			alreadyRecommended={false}
 			user={aUser}
 			userMadeComment={true}
+			isClosedForRecommendations={false}
 		/>
 	</Wrapper>
 );
