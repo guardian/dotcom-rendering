@@ -101,7 +101,6 @@ export const StandardDisplay = {
 		GlobalStylesDecorator(standardFormat),
 
 		splitTheme([
-			standardFormat,
 			// "Authoritative clear" styles
 			{
 				design: ArticleDesign.Obituary,
@@ -142,7 +141,6 @@ export const ImmersiveDisplay = {
 	decorators: [
 		GlobalStylesDecorator(immersiveFormat),
 		splitTheme([
-			immersiveFormat,
 			// "Authoritative clear" styles
 			{
 				design: ArticleDesign.Obituary,
