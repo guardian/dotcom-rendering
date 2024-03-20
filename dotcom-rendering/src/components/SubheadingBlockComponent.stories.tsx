@@ -96,9 +96,6 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-export default meta;
-
 export const StandardDisplay = {
 	decorators: [
 		GlobalStylesDecorator(standardFormat),
