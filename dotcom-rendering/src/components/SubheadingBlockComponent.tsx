@@ -10,38 +10,31 @@ import { logger } from '../server/lib/logging';
 
 type Props = { html: string; format: ArticleFormat };
 
-const getAuthoritativeStyles = (format: ArticleFormat) => {
-	if (format.display === ArticleDisplay.NumberedList) {
-		// ! Not implemented
-		return css``; // TODO
+const getAuthoritativeStyles = (format: ArticleFormat) => css`
+	${format.display === ArticleDisplay.Immersive
+		? headline.small({ fontWeight: 'regular', lineHeight: 'tight' })
+		: headline.xsmall({ fontWeight: 'regular', lineHeight: 'tight' })}
+
+	${from.tablet} {
+		${format.display === ArticleDisplay.Immersive
+			? headline.medium({
+					fontWeight: 'regular',
+					lineHeight: 'tight',
+			  })
+			: headline.small({
+					fontWeight: 'regular',
+					lineHeight: 'tight',
+			  })}
 	}
 
-	return css`
-		${format.display === ArticleDisplay.Immersive
-			? headline.small({ fontWeight: 'regular', lineHeight: 'tight' })
-			: headline.xsmall({ fontWeight: 'regular', lineHeight: 'tight' })}
+	color: ${palette('--subheading-text')};
+	padding-top: 8px;
+	padding-bottom: 2px;
 
-		${from.tablet} {
-			${format.display === ArticleDisplay.Immersive
-				? headline.medium({
-						fontWeight: 'regular',
-						lineHeight: 'tight',
-				  })
-				: headline.small({
-						fontWeight: 'regular',
-						lineHeight: 'tight',
-				  })}
-		}
-
-		color: ${palette('--subheading-text')};
-		padding-top: 8px;
-		padding-bottom: 2px;
-
-		${from.tablet} {
-			padding-bottom: 4px;
-		}
-	`;
-};
+	${from.tablet} {
+		padding-bottom: 4px;
+	}
+`;
 
 const getStyles = (format: ArticleFormat) => {
 	switch (format.design) {
@@ -61,26 +54,10 @@ const ignoreGlobalH2Styling = (format: ArticleFormat) => {
 	switch (format.design) {
 		// Authoritative clear
 		case ArticleDesign.Obituary:
-			switch (format.display) {
-				case ArticleDisplay.Immersive:
-				case ArticleDisplay.Showcase:
-				case ArticleDisplay.Standard:
-					return true;
-
-				default:
-					return false;
-			}
 		// Authoritative stand-out
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
-			switch (format.display) {
-				case ArticleDisplay.Immersive:
-				case ArticleDisplay.Showcase:
-				case ArticleDisplay.Standard:
-					return true;
-				default:
-					return false;
-			}
+			return true;
 		default:
 			return false;
 	}
