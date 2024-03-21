@@ -12,10 +12,10 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(prettier@3.0.3)(tslib@2.6.2)
       chromatic:
-        specifier: ^11.0.8
+        specifier: 11.0.8
         version: 11.0.8
       husky:
-        specifier: ^8.0.3
+        specifier: 8.0.3
         version: 8.0.3
       lint-staged:
         specifier: 15.2.0
