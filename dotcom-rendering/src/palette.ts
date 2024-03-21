@@ -3974,20 +3974,6 @@ const dropCapDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Analysis:
-			switch (theme) {
-				case Pillar.Opinion:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				case Pillar.Sport:
-				case Pillar.News:
-					return pillarPalette(theme, 500);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[500];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[700];
-			}
 		// "Authoritative" designs
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Editorial:
@@ -4000,7 +3986,7 @@ const dropCapDark: PaletteFunction = ({ design, theme }) => {
 				case Pillar.News:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
