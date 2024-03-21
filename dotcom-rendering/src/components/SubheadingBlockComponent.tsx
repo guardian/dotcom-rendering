@@ -1,7 +1,8 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { from, headline } from '@guardian/source-foundations';
+import { textSans } from '@guardian/source-foundations/cjs/source-foundations/src/typography/api';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { isElement, parseHtml } from '../lib/domUtils';
@@ -10,31 +11,46 @@ import { logger } from '../server/lib/logging';
 
 type Props = { html: string; format: ArticleFormat };
 
-const getAuthoritativeStyles = (format: ArticleFormat) => css`
-	${format.display === ArticleDisplay.Immersive
-		? headline.small({ fontWeight: 'regular', lineHeight: 'tight' })
-		: headline.xsmall({ fontWeight: 'regular', lineHeight: 'tight' })}
+const getAuthoritativeStyles = (format: ArticleFormat) => {
+	/** TODO !
+	 * This is temporary until https://github.com/guardian/dotcom-rendering/pull/10989 has been merged.
+	 * The desired font weight is "regular" */
+	const fontWeight = 'light';
 
-	${from.tablet} {
+	return css`
 		${format.display === ArticleDisplay.Immersive
-			? headline.medium({
-					fontWeight: 'regular',
-					lineHeight: 'tight',
-			  })
-			: headline.small({
-					fontWeight: 'regular',
-					lineHeight: 'tight',
-			  })}
-	}
+			? headline.small({ fontWeight, lineHeight: 'tight' })
+			: headline.xsmall({ fontWeight, lineHeight: 'tight' })}
 
-	color: ${palette('--subheading-text')};
-	padding-top: 8px;
-	padding-bottom: 2px;
+		${from.tablet} {
+			${format.display === ArticleDisplay.Immersive
+				? headline.medium({ fontWeight, lineHeight: 'tight' })
+				: headline.small({ fontWeight, lineHeight: 'tight' })}
+		}
 
-	${from.tablet} {
-		padding-bottom: 4px;
-	}
-`;
+		/** Labs uses sans text */
+		${format.theme === ArticleSpecial.Labs &&
+		css`
+			${format.display === ArticleDisplay.Immersive
+				? textSans.xxlarge({ fontWeight, lineHeight: 'tight' })
+				: textSans.xlarge({ fontWeight, lineHeight: 'tight' })}
+
+			${from.tablet} {
+				${format.display === ArticleDisplay.Immersive
+					? textSans.xxxlarge({ fontWeight, lineHeight: 'tight' })
+					: textSans.xxlarge({ fontWeight, lineHeight: 'tight' })}
+			}
+		`}
+
+		color: ${palette('--subheading-text')};
+		padding-top: 8px;
+		padding-bottom: 2px;
+
+		${from.tablet} {
+			padding-bottom: 4px;
+		}
+	`;
+};
 
 const getStyles = (format: ArticleFormat) => {
 	switch (format.design) {
