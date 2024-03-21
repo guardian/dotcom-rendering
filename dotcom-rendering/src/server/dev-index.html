@@ -267,9 +267,9 @@
 							<th colspan="3">Links</th>
 						</tr>
 						<tr>
-							<th>PROD</th>
-							<th>CODE</th>
 							<th>DEV</th>
+							<th>CODE</th>
+							<th>PROD</th>
 						</tr>
 					</thead>
 					<tbody></tbody>
@@ -293,12 +293,9 @@
 						</dl>
 					</td>
 					<td class="links">
-						<article-link
-							product="dotcom"
-							env="PROD"
-						></article-link>
-						<article-link product="apps" env="PROD"></article-link>
-						<article-link product="amp" env="PROD"></article-link>
+						<article-link product="dotcom" env="DEV"></article-link>
+						<article-link product="apps" env="DEV"></article-link>
+						<article-link product="amp" env="DEV"></article-link>
 					</td>
 					<td class="links">
 						<article-link
@@ -309,9 +306,12 @@
 						<article-link product="amp" env="CODE"></article-link>
 					</td>
 					<td class="links">
-						<article-link product="dotcom" env="DEV"></article-link>
-						<article-link product="apps" env="DEV"></article-link>
-						<article-link product="amp" env="DEV"></article-link>
+						<article-link
+							product="dotcom"
+							env="PROD"
+						></article-link>
+						<article-link product="apps" env="PROD"></article-link>
+						<article-link product="amp" env="PROD"></article-link>
 					</td>
 				</tr>
 			</template>
