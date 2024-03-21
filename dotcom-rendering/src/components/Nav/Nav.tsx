@@ -73,6 +73,7 @@ export const Nav = ({
 					.nav-is-open {
 						${until.desktop} {
 							overflow: hidden;
+							height: 100vh;
 						}
 					}
 				`}
