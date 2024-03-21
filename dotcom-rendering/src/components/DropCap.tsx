@@ -27,6 +27,15 @@ const fontWeight = (format: ArticleFormat) => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Comment:
 			return 300;
+		// "Neutral" designs
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+			return 500;
 		case ArticleDesign.Letter:
 			return 200;
 		default:
