@@ -2566,7 +2566,11 @@
                     "type": "string"
                 },
                 "dropCap": {
-                    "type": "boolean"
+                    "enum": [
+                        "off",
+                        "on"
+                    ],
+                    "type": "string"
                 },
                 "html": {
                     "type": "string"
