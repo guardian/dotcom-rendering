@@ -16,14 +16,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const html =
-	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
-
 const testTextElement: TextBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 	elementId: 'test-text-element-id-1',
 	dropCap: false,
-	html,
+	html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>',
 };
 
 export const AllThemes = {
@@ -70,8 +67,50 @@ export const AllThemes = {
 	],
 } satisfies Story;
 
+/* TODO reminder to check desktop/mobile font size variations
+ * remove this comment when https://github.com/guardian/dotcom-rendering/issues/9193 complete
+ */
+export const SomeDesignsAndDisplays = {
+	args: AllThemes.args,
+	decorators: [
+		splitTheme([
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Profile,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Lifestyle,
+			},
+		]),
+	],
+} satisfies Story;
+
 export const Images = {
 	args: {
+		...AllThemes.args,
 		keyTakeaways: [
 			{
 				title: 'The first key takeaway',
@@ -82,27 +121,6 @@ export const Images = {
 				body: [testTextElement, ...images.slice(2, 3)],
 			},
 		],
-		/**
-		 * This will be replaced by the `splitTheme` decorator, but it's
-		 * required by the type.
-		 */
-		format: {
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		},
-		abTests: {},
-		/**
-		 * This is used for rich links. An empty string isn't technically valid,
-		 * but there are no rich links in this example.
-		 */
-		ajaxUrl: '',
-		editionId: 'UK',
-		isAdFreeUser: false,
-		isSensitive: false,
-		pageId: 'testID',
-		switches: {},
-		RenderArticleElement,
 	},
 	decorators: [
 		splitTheme(
