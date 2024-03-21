@@ -46,7 +46,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				dropCap: true,
+				dropCap: 'on',
 				elementId: 'mockId',
 				html: '<p>I should become a drop cap.</p>',
 			},
@@ -90,7 +90,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				dropCap: true,
+				dropCap: 'on',
 				elementId: 'mockId',
 				html: '<p>I should become a drop cap.</p>',
 			},
@@ -129,7 +129,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				dropCap: true,
+				dropCap: 'on',
 				elementId: 'mockId',
 				html: '<p>I should become a drop cap.</p>',
 			},
@@ -173,7 +173,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				dropCap: true,
+				dropCap: 'on',
 				elementId: 'mockId',
 				html: '<p>I should become a drop cap.</p>',
 			},
@@ -232,7 +232,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				dropCap: true,
+				dropCap: 'on',
 				elementId: 'mockId',
 				html: '<p>I should become a drop cap.</p>',
 			},
@@ -241,7 +241,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				dropCap: true,
+				dropCap: 'on',
 				elementId: 'mockId',
 				html: '<p>I should also become a drop cap.</p>',
 			},
@@ -360,7 +360,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 			{
 				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				dropCap: true,
+				dropCap: 'on',
 				elementId: 'mockId',
 				html: '<p>I should become a drop cap.</p>',
 			},

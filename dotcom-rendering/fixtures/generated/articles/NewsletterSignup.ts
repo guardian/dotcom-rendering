@@ -1682,7 +1682,7 @@ export const NewsletterSignup: DCRArticle = {
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
 					elementId: '11223aca-9c98-4aba-9bc1-8420b0b804b6',
-					dropCap: true,
+					dropCap: 'on',
 				},
 			],
 			attributes: {

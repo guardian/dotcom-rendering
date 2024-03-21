@@ -86,6 +86,7 @@ type Props = {
 	isPinnedPost?: boolean;
 	abTests: ServerSideTests;
 	editionId: EditionId;
+	forceDropCap?: 'on' | 'off';
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -141,6 +142,7 @@ export const renderElement = ({
 	isPinnedPost,
 	abTests,
 	editionId,
+	forceDropCap,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -627,7 +629,11 @@ export const renderElement = ({
 					isFirstParagraph={index === 0}
 					html={element.html}
 					format={format}
-					forceDropCap={element.dropCap}
+					forceDropCap={
+						forceDropCap !== undefined
+							? forceDropCap
+							: element.dropCap
+					}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
@@ -833,6 +839,7 @@ export const RenderArticleElement = ({
 	isPinnedPost,
 	abTests,
 	editionId,
+	forceDropCap,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -853,6 +860,7 @@ export const RenderArticleElement = ({
 		isPinnedPost,
 		abTests,
 		editionId,
+		forceDropCap,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

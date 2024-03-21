@@ -484,7 +484,7 @@ export interface TableBlockElement {
 export interface TextBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement';
 	elementId: string;
-	dropCap?: boolean;
+	dropCap?: 'on' | 'off';
 	html: string;
 }
 
