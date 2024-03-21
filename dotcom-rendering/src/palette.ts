@@ -3905,23 +3905,6 @@ const mostViewedHeadlineDark = (): string => sourcePalette.neutral[86];
 
 const dropCapLight: PaletteFunction = (format) => {
 	switch (format.design) {
-		case ArticleDesign.Analysis: {
-			switch (format.theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-					return pillarPalette(format.theme, 300);
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(format.theme, 400);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReport[200];
-			}
-		}
 		case ArticleDesign.Letter:
 			switch (format.theme) {
 				case Pillar.Opinion:
@@ -3942,6 +3925,14 @@ const dropCapLight: PaletteFunction = (format) => {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Comment:
+		// "Neutral" designs
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
 			switch (format.theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -3976,9 +3967,7 @@ const dropCapLight: PaletteFunction = (format) => {
 
 const dropCapDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
-		case ArticleDesign.Explainer:
 		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Interactive:
@@ -3986,11 +3975,18 @@ const dropCapDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.FullPageInteractive:
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.Letter:
-		case ArticleDesign.Analysis:
 		// "Authoritative" designs
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Comment:
+		// "Neutral" designs
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.Opinion:
 				case Pillar.Culture:
