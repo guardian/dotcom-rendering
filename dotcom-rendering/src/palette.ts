@@ -1036,7 +1036,7 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[200];
+					return sourcePalette.neutral[7];
 			}
 		default:
 			return 'unset';
@@ -1059,13 +1059,11 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 				case Pillar.Lifestyle:
 					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
-					// TODO - check this (500 does not exist)
-					return sourcePalette.labs[400];
+					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
-					// TODO - check this (500 does not exist)
-					return sourcePalette.specialReportAlt[300];
+					return sourcePalette.neutral[60];
 			}
 		default:
 			return 'unset';
