@@ -86,6 +86,7 @@ const QAndAExplainerComponent = ({
 					editionId={editionId}
 					hideCaption={hideCaption}
 					starRating={starRating}
+					forceDropCap="off"
 				/>
 			))}
 		</li>

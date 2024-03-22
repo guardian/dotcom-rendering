@@ -15,7 +15,7 @@ type Props = {
 	pillar: ArticleTheme;
 };
 
-export const Disclaimer = ({ html, pillar }: Props) => (
+export const AffiliateDisclaimer = ({ html, pillar }: Props) => (
 	<span
 		css={style(pillar)}
 		dangerouslySetInnerHTML={{
