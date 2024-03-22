@@ -36,13 +36,20 @@ const fixedWidthsPageSkin = css`
 	}
 `;
 
-const mostPopMargin = css`
-	margin-top: 9px;
+const mostPopMargin = (hasHideButton: boolean) => css`
+	margin-top: 10px;
 	${from.desktop} {
-		margin: 9px 0 0 10px;
+		margin-top: 0;
+		margin-left: 10px;
 	}
 	${from.leftCol} {
-		margin: 6px 0 0 10px;
+		margin-top: 10px;
+	}
+	${hasHideButton && from.leftCol} {
+		margin-top: 2px;
+	}
+	${hasHideButton && from.wide} {
+		margin-top: 36px;
 	}
 `;
 
@@ -92,7 +99,13 @@ export const MostViewedFooterLayout = ({
 			>
 				{children}
 			</div>
-			<div css={hasPageSkin ? mostPopMarginWithPageSkin : mostPopMargin}>
+			<div
+				css={
+					hasPageSkin
+						? mostPopMarginWithPageSkin
+						: mostPopMargin(!!isFront)
+				}
+			>
 				{renderAds && <AdSlot position="mostpop" />}
 			</div>
 		</div>
