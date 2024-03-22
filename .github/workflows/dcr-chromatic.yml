@@ -50,6 +50,7 @@ jobs:
           buildScriptName: 'build-storybook'
 
   remove-label:
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     needs: chromatic
     permissions:
