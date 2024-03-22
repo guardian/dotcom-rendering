@@ -36,6 +36,7 @@ jobs:
             if (!hasChromaticLabel) {
               const commentLines = [
                 "Hello :wave:! When you're ready to run Chromatic, please apply the `run_chromatic` label to this PR.",
+                "You will need to reapply the label each time you want to run Chromatic.",
                 '[Click here to see the Chromatic project.](https://www.chromatic.com/builds?appId=63e251470cfbe61776b0ef19)',
               ];
 
@@ -52,10 +53,10 @@ jobs:
 
               if (!hasChromaticCommentAlready) {
                   github.rest.issues.createComment({
-                  issue_number: context.issue.number,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  body: commentLines.join('\n\n'),
+                    issue_number: context.issue.number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    body: commentLines.join('\n\n'),
                 });
               }
             }
