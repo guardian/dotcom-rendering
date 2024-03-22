@@ -21,7 +21,7 @@ import { RichLinkBlockComponent } from './RichLinkBlockComponent.amp';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent.amp';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent.amp';
 import { TextBlockComponent } from './TextBlockComponent.amp';
-import { TimelineBlockComponent } from './TimelineBlockComponent.amp';
+import { TimelineAtom } from './TimelineAtom.amp';
 import { TwitterBlockComponent } from './TwitterBlockComponent.amp';
 import { VideoVimeoBlockComponent } from './VideoVimeoBlockComponent.amp';
 import { VideoYoutubeBlockComponent } from './VideoYoutubeBlockComponent.amp';
@@ -56,6 +56,7 @@ const AMP_SUPPORTED_ELEMENTS = [
 	'model.dotcomrendering.pageElements.SoundcloudBlockElement',
 	'model.dotcomrendering.pageElements.SubheadingBlockElement',
 	'model.dotcomrendering.pageElements.TextBlockElement',
+	'model.dotcomrendering.pageElements.TimelineAtomBlockElement',
 	'model.dotcomrendering.pageElements.TimelineBlockElement',
 	'model.dotcomrendering.pageElements.TweetBlockElement',
 	'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
@@ -311,9 +312,20 @@ export const Elements = (
 						pillar={pillar}
 					/>
 				);
+			case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
+				return (
+					<TimelineAtom
+						key={element.elementId}
+						id={element.id}
+						title={element.title}
+						description={element.description}
+						events={element.events}
+						pillar={pillar}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 				return (
-					<TimelineBlockComponent
+					<TimelineAtom
 						key={element.elementId}
 						id={element.id}
 						title={element.title}
