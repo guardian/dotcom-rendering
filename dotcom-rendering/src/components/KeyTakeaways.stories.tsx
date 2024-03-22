@@ -114,11 +114,23 @@ export const Images = {
 		keyTakeaways: [
 			{
 				title: 'The first key takeaway',
-				body: [testTextElement, ...images.slice(0, 2)],
+				body: [
+					testTextElement,
+					{ ...images[0], displayCredit: true, role: 'inline' },
+					{ ...images[1], displayCredit: true, role: 'thumbnail' },
+					testTextElement,
+				],
 			},
 			{
 				title: 'The second key takeaway',
-				body: [testTextElement, ...images.slice(2, 3)],
+				body: [
+					testTextElement,
+					{
+						...images[2],
+						displayCredit: true,
+						data: { ...images[2].data, caption: 'Sunset' },
+					},
+				],
 			},
 		],
 	},
