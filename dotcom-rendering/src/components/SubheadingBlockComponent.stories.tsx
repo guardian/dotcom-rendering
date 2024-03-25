@@ -175,10 +175,16 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Culture,
 			},
+			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
 			},
 			// "Soft" stand-out styles
 			{
@@ -221,6 +227,7 @@ export const ImmersiveDisplay = {
 				display: ArticleDisplay.Immersive,
 				theme: ArticleSpecial.Labs,
 			},
+			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.Editorial,
 				display: ArticleDisplay.Immersive,
@@ -257,6 +264,11 @@ export const ImmersiveDisplay = {
 				design: ArticleDesign.Interview,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.News,
 			},
 			// "Soft" stand-out styles
 			{
