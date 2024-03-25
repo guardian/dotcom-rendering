@@ -88,7 +88,6 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 		tags: data.tags.tags,
 		groupedTrails,
 		speed,
-		// Pagination information comes from the first tag
 		pagination:
 			data.pagination && data.pagination.lastPage > 1
 				? {
