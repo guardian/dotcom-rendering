@@ -7,6 +7,7 @@ import { enhanceCommercialProperties } from '../model/enhanceCommercialPropertie
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
+import type { ServerSideTests } from '../types/config';
 import { type DCRArticle } from '../types/frontend';
 import { type RenderingTarget } from '../types/renderingTarget';
 import { decideFormat } from './decideFormat';
@@ -14,10 +15,12 @@ import { decideFormat } from './decideFormat';
 const enhancePinnedPost = (
 	format: ArticleFormat,
 	renderingTarget: RenderingTarget,
+	abTests: ServerSideTests,
 	block?: Block,
 ) => {
 	if (!block) return;
-	return enhanceBlocks([block], format, {
+
+	return enhanceBlocks([block], format, abTests, {
 		renderingTarget,
 		imagesForLightbox: [],
 		promotedNewsletter: undefined,
@@ -36,12 +39,17 @@ export const enhanceArticleType = (
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
 		: [];
 
-	const enhancedBlocks = enhanceBlocks(data.blocks, format, {
-		renderingTarget,
-		promotedNewsletter: data.promotedNewsletter,
-		imagesForLightbox,
-		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
-	});
+	const enhancedBlocks = enhanceBlocks(
+		data.blocks,
+		format,
+		data.config.abTests,
+		{
+			renderingTarget,
+			promotedNewsletter: data.promotedNewsletter,
+			imagesForLightbox,
+			hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
+		},
+	);
 
 	const mainMediaElements = enhanceElementsImages(
 		format,
@@ -52,7 +60,12 @@ export const enhanceArticleType = (
 		...data,
 		mainMediaElements,
 		blocks: enhancedBlocks,
-		pinnedPost: enhancePinnedPost(format, renderingTarget, data.pinnedPost),
+		pinnedPost: enhancePinnedPost(
+			format,
+			renderingTarget,
+			data.config.abTests,
+			data.pinnedPost,
+		),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
