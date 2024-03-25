@@ -631,7 +631,118 @@
                     "$ref": "#/definitions/TimelineAtomBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/TimelineBlockElement"
+                    "$ref": "#/definitions/FETimelineBlockElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "_type": {
+                            "type": "string",
+                            "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
+                        },
+                        "timelineKind": {
+                            "type": "string",
+                            "const": "flat"
+                        },
+                        "events": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "main": {
+                                        "$ref": "#/definitions/FEElement"
+                                    },
+                                    "body": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/FEElement"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "body",
+                                    "date"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "_type",
+                        "events",
+                        "timelineKind"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "_type": {
+                            "type": "string",
+                            "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
+                        },
+                        "timelineKind": {
+                            "type": "string",
+                            "const": "sectioned"
+                        },
+                        "sections": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "events": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "date": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "label": {
+                                                    "type": "string"
+                                                },
+                                                "main": {
+                                                    "$ref": "#/definitions/FEElement"
+                                                },
+                                                "body": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/definitions/FEElement"
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "body",
+                                                "date"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "events",
+                                    "title"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "_type",
+                        "sections",
+                        "timelineKind"
+                    ]
                 },
                 {
                     "$ref": "#/definitions/TweetBlockElement"
@@ -3018,7 +3129,7 @@
                 "events": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/TimelineEvent"
+                        "$ref": "#/definitions/TimelineAtomEvent"
                     }
                 },
                 "role": {
@@ -3033,7 +3144,7 @@
                 "title"
             ]
         },
-        "TimelineEvent": {
+        "TimelineAtomEvent": {
             "type": "object",
             "properties": {
                 "title": {
@@ -3061,7 +3172,7 @@
                 "unixDate"
             ]
         },
-        "TimelineBlockElement": {
+        "FETimelineBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
@@ -3071,31 +3182,54 @@
                 "elementId": {
                     "type": "string"
                 },
-                "id": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "events": {
+                "sections": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/TimelineEvent"
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "events": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "date": {
+                                            "type": "string"
+                                        },
+                                        "label": {
+                                            "type": "string"
+                                        },
+                                        "main": {
+                                            "$ref": "#/definitions/FEElement"
+                                        },
+                                        "body": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/FEElement"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "body"
+                                    ]
+                                }
+                            }
+                        },
+                        "required": [
+                            "events"
+                        ]
                     }
-                },
-                "role": {
-                    "$ref": "#/definitions/RoleType"
                 }
             },
             "required": [
                 "_type",
                 "elementId",
-                "events",
-                "id",
-                "title"
+                "sections"
             ]
         },
         "TweetBlockElement": {
