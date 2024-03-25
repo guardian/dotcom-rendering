@@ -77,12 +77,11 @@ const getStyles = (format: ArticleFormat) => {
 			return getFontStyles({ format, fontWeight: 'medium' });
 
 		// "Soft" styles
-		case ArticleDesign.Feature:
+		case ArticleDesign.Feature: {
 			// News features have "neutral" styles, other features are "soft"
-			return getFontStyles({
-				format,
-				fontWeight: format.theme === Pillar.News ? 'medium' : 'bold',
-			});
+			const fontWeight = format.theme === Pillar.News ? 'medium' : 'bold';
+			return getFontStyles({ format, fontWeight });
+		}
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
