@@ -323,7 +323,7 @@ export const Elements = (
 						pillar={pillar}
 					/>
 				);
-			case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+			case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
 				return (
 					<TimelineAtom
 						key={element.elementId}
