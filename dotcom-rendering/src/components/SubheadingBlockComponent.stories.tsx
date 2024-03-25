@@ -114,7 +114,7 @@ export const StandardDisplay = {
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Standard,
-				theme: Pillar.Culture,
+				theme: Pillar.Opinion,
 			},
 			{
 				design: ArticleDesign.Comment,
@@ -169,7 +169,7 @@ export const ImmersiveDisplay = {
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Immersive,
-				theme: Pillar.Culture,
+				theme: Pillar.Opinion,
 			},
 			{
 				design: ArticleDesign.Comment,
