@@ -71,6 +71,12 @@ const getStyles = (format: ArticleFormat) => {
 		case ArticleDesign.Analysis:
 			return getFontStyles({ format, fontWeight: 'medium' });
 
+		// "Soft" styles
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			return getFontStyles({ format, fontWeight: 'bold' });
 		default:
 			// ! Not implemented
 			return css``; // TODO
@@ -91,6 +97,11 @@ const ignoreGlobalH2Styling = (format: ArticleFormat) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
+		// "Soft" styles
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
 			return true;
 
 		default:

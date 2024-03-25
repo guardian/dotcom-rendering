@@ -1031,6 +1031,11 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
+		// "Soft" styles
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -1065,6 +1070,11 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
+		// "Soft" styles
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -3933,6 +3943,11 @@ const dropCapLight: PaletteFunction = (format) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
+		// "Soft" designs
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
 			switch (format.theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -3967,9 +3982,6 @@ const dropCapLight: PaletteFunction = (format) => {
 
 const dropCapDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.Review:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
 		case ArticleDesign.Interactive:
 		case ArticleDesign.PhotoEssay:
 		case ArticleDesign.FullPageInteractive:
@@ -3987,6 +3999,11 @@ const dropCapDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
+		// "Soft" designs
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
 			switch (theme) {
 				case Pillar.Opinion:
 				case Pillar.Culture:
