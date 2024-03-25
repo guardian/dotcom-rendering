@@ -636,6 +636,17 @@ export const renderElement = ({
 					}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<TimelineAtom
+						id={element.id}
+						title={element.title}
+						events={element.events}
+						description={element.description}
+					/>
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>

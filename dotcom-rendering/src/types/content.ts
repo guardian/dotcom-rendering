@@ -498,6 +498,16 @@ export interface TimelineBlockElement {
 	role?: RoleType;
 }
 
+export interface TimelineAtomBlockElement {
+	_type: 'model.dotcomrendering.pageElements.TimelineAtomBlockElement';
+	elementId: string;
+	id: string;
+	title: string;
+	description?: string;
+	events: TimelineEvent[];
+	role?: RoleType;
+}
+
 export interface TweetBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.TweetBlockElement';
 	elementId: string;
@@ -698,6 +708,7 @@ export type FEElement =
 	| SubheadingBlockElement
 	| TableBlockElement
 	| TextBlockElement
+	| TimelineAtomBlockElement
 	| TimelineBlockElement
 	| TweetBlockElement
 	| VideoBlockElement

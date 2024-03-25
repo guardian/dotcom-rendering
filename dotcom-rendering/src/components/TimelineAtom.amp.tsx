@@ -44,7 +44,7 @@ type Props = {
 	pillar: ArticleTheme;
 };
 
-export const TimelineBlockComponent = ({
+export const TimelineAtom = ({
 	id,
 	title,
 	description,
