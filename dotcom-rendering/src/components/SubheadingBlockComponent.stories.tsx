@@ -175,6 +175,11 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Culture,
 			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
 		]),
 	],
 } satisfies Story;
