@@ -136,6 +136,12 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
 			},
+			// "Soft" stand-out styles
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Culture,
+			},
 		]),
 	],
 } satisfies Story;
@@ -178,6 +184,12 @@ export const ImmersiveDisplay = {
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Lifestyle,
+			},
+			// "Soft" stand-out styles
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Culture,
 			},
 		]),
 	],

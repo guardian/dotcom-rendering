@@ -36,6 +36,12 @@ const fontWeight = (format: ArticleFormat) => {
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
 			return 500;
+		// "Soft" designs
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			return 700;
 		case ArticleDesign.Letter:
 			return 200;
 		default:
