@@ -131,6 +131,11 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Sport,
 			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
 		]),
 	],
 } satisfies Story;
@@ -164,6 +169,11 @@ export const ImmersiveDisplay = {
 			// "Neutral clear" styles
 			immersiveFormat,
 			// "Neutral stand-out" styles
+			{
+				design: ArticleDesign.DeadBlog,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Sport,
+			},
 			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Immersive,
