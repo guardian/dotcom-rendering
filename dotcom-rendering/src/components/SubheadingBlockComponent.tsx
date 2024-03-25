@@ -43,9 +43,11 @@ const getAuthoritativeStyles = (format: ArticleFormat) => {
 		`}
 
 		color: ${palette('--subheading-text')};
-		padding-top: 8px;
-		padding-bottom: 2px;
 
+		/* NB. this is overridden for consecutive h2s in ArticleBody global styles */
+		padding-top: 8px;
+
+		padding-bottom: 2px;
 		${from.tablet} {
 			padding-bottom: 4px;
 		}
