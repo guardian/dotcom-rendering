@@ -133,6 +133,11 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: ArticleSpecial.SpecialReportAlt,
 			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
 		]),
 	],
 } satisfies Story;
