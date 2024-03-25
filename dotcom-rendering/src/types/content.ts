@@ -488,14 +488,48 @@ export interface TextBlockElement {
 	html: string;
 }
 
-export interface TimelineBlockElement {
+export type DCRTimelineEvent = {
+	date: string;
+	title?: string;
+	label?: string;
+	main?: FEElement;
+	body: FEElement[];
+};
+
+export type DCRTimelineSection = {
+	title: string;
+	events: DCRTimelineEvent[];
+};
+
+export type DCRTimelineBlockElement =
+	| {
+			_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement';
+			timelineKind: 'flat';
+			events: DCRTimelineEvent[];
+	  }
+	| {
+			_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement';
+			timelineKind: 'sectioned';
+			sections: DCRTimelineSection[];
+	  };
+
+export type FETimelineEvent = {
+	title?: string;
+	date?: string;
+	label?: string;
+	main?: FEElement;
+	body: FEElement[];
+};
+
+export type FETimelineSection = {
+	title?: string;
+	events: FETimelineEvent[];
+};
+
+export interface FETimelineBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TimelineBlockElement';
 	elementId: string;
-	id: string;
-	title: string;
-	description?: string;
-	events: TimelineEvent[];
-	role?: RoleType;
+	sections: FETimelineSection[];
 }
 
 export interface TimelineAtomBlockElement {
@@ -504,7 +538,7 @@ export interface TimelineAtomBlockElement {
 	id: string;
 	title: string;
 	description?: string;
-	events: TimelineEvent[];
+	events: TimelineAtomEvent[];
 	role?: RoleType;
 }
 
@@ -709,7 +743,8 @@ export type FEElement =
 	| TableBlockElement
 	| TextBlockElement
 	| TimelineAtomBlockElement
-	| TimelineBlockElement
+	| FETimelineBlockElement
+	| DCRTimelineBlockElement
 	| TweetBlockElement
 	| VideoBlockElement
 	| VideoFacebookBlockElement
@@ -780,7 +815,7 @@ interface VideoAssets {
 	};
 }
 
-export interface TimelineEvent {
+export interface TimelineAtomEvent {
 	title: string;
 	date: string;
 	unixDate: number;
@@ -791,7 +826,7 @@ export interface TimelineEvent {
 
 export type TimelineAtomType = {
 	id: string;
-	events?: TimelineEvent[];
+	events?: TimelineAtomEvent[];
 	title: string;
 	description?: string;
 	expandForStorybook?: boolean;
