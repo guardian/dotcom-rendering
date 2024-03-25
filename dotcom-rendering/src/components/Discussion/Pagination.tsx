@@ -56,7 +56,7 @@ const theme = {
 	textTertiary: schemedPalette('--discussion-pagination-text'),
 } satisfies Partial<ThemeButton>;
 
-const elipsisStyles = css`
+const ellipsisStyles = css`
 	line-height: 26px;
 	margin-right: 2px;
 `;
@@ -207,7 +207,7 @@ const decideThirdPage = ({
 	return currentPage;
 };
 
-const decideForthPage = ({
+const decideFourthPage = ({
 	currentPage,
 	totalPages,
 }: {
@@ -226,17 +226,17 @@ export const Pagination = ({
 	filters,
 }: Props) => {
 	const totalPages = Math.ceil(topLevelCommentCount / filters.pageSize);
-	// Make decisions aobut which pagination elements to show
+	// Make decisions about which pagination elements to show
 	const showBackButton = totalPages > 4 && currentPage > 1;
-	const showFirstElipsis = totalPages > 4 && currentPage > 3;
+	const showFirstEllipsis = totalPages > 4 && currentPage > 3;
 	const secondPage = decideSecondPage({ currentPage, totalPages });
 	const thirdPage = decideThirdPage({ currentPage, totalPages });
-	const forthPage = decideForthPage({ currentPage, totalPages });
+	const fourthPage = decideFourthPage({ currentPage, totalPages });
 	const showThirdPage = totalPages > 2;
 	const showForthPage = totalPages > 3;
 	const showLastPage = totalPages > 4 && currentPage < totalPages - 1;
 	const lastPage = totalPages;
-	const showSecondElipsis = totalPages > 4 && currentPage < totalPages - 2;
+	const showSecondEllipsis = totalPages > 4 && currentPage < totalPages - 2;
 	const showForwardButton = totalPages > 4 && currentPage !== totalPages;
 
 	// Pagination Text
@@ -274,7 +274,7 @@ export const Pagination = ({
 					setCurrentPage={setCurrentPage}
 					isSelected={currentPage === 1}
 				/>
-				{showFirstElipsis && <div css={elipsisStyles}>&hellip;</div>}
+				{showFirstEllipsis && <div css={ellipsisStyles}>&hellip;</div>}
 				<PageButton
 					currentPage={secondPage}
 					setCurrentPage={setCurrentPage}
@@ -289,12 +289,12 @@ export const Pagination = ({
 				)}
 				{showForthPage && (
 					<PageButton
-						currentPage={forthPage}
+						currentPage={fourthPage}
 						setCurrentPage={setCurrentPage}
-						isSelected={currentPage === forthPage}
+						isSelected={currentPage === fourthPage}
 					/>
 				)}
-				{showSecondElipsis && <div css={elipsisStyles}>&hellip;</div>}
+				{showSecondEllipsis && <div css={ellipsisStyles}>&hellip;</div>}
 				{showLastPage && (
 					<PageButton
 						currentPage={lastPage}
