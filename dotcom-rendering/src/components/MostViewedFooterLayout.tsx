@@ -3,13 +3,6 @@ import type { Breakpoint } from '@guardian/source-foundations';
 import { between, from, space } from '@guardian/source-foundations';
 import { AdSlot } from './AdSlot.web';
 
-type Props = {
-	children: React.ReactNode;
-	hasPageSkin?: boolean;
-	isFront?: boolean;
-	renderAds?: boolean;
-};
-
 const stackBelow = (breakpoint: Breakpoint) => css`
 	display: flex;
 	flex-direction: column;
@@ -36,7 +29,7 @@ const fixedWidthsPageSkin = css`
 	}
 `;
 
-const mostPopMargin = (hasHideButton: boolean) => css`
+const advertMargin = (hasHideButton: boolean, isDeeplyRead: boolean) => css`
 	margin-top: 10px;
 	${from.desktop} {
 		margin-top: 0;
@@ -51,9 +44,18 @@ const mostPopMargin = (hasHideButton: boolean) => css`
 	${hasHideButton && from.wide} {
 		margin-top: 36px;
 	}
+	${hasHideButton && isDeeplyRead && from.desktop} {
+		margin-top: 9px;
+	}
+	${hasHideButton && isDeeplyRead && from.leftCol} {
+		margin-top: 38px;
+	}
+	${hasHideButton && isDeeplyRead && from.wide} {
+		margin-top: 54px;
+	}
 `;
 
-const mostPopMarginWithPageSkin = css`
+const advertMarginWithPageSkin = css`
 	margin: 9px 0 0 10px;
 `;
 
@@ -78,11 +80,20 @@ const adFreeStyles = css`
 	}
 `;
 
+type Props = {
+	children: React.ReactNode;
+	hasPageSkin?: boolean;
+	isFront?: boolean;
+	renderAds?: boolean;
+	isDeeplyRead?: boolean;
+};
+
 export const MostViewedFooterLayout = ({
 	children,
-	hasPageSkin = false,
 	isFront,
 	renderAds,
+	hasPageSkin = false,
+	isDeeplyRead = false,
 }: Props) => {
 	return (
 		<div
@@ -102,8 +113,8 @@ export const MostViewedFooterLayout = ({
 			<div
 				css={
 					hasPageSkin
-						? mostPopMarginWithPageSkin
-						: mostPopMargin(!!isFront)
+						? advertMarginWithPageSkin
+						: advertMargin(!!isFront, isDeeplyRead)
 				}
 			>
 				{renderAds && <AdSlot position="mostpop" />}
