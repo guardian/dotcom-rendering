@@ -1,6 +1,6 @@
 import { Pillar } from '@guardian/libs';
-import { PhotoEssay } from '../../fixtures/generated/dcr-articles/PhotoEssay';
-import { Standard as ExampleArticle } from '../../fixtures/generated/dcr-articles/Standard';
+import { PhotoEssay } from '../../fixtures/generated/fe-articles/PhotoEssay';
+import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { decideFormat } from '../lib/decideFormat';
 import type { FEElement } from '../types/content';

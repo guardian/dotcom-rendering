@@ -1,11 +1,11 @@
 import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
-import { Standard as ExampleArticle } from '../../fixtures/generated/dcr-articles/Standard';
+import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { decideFormat } from '../lib/decideFormat';
 import type { FEElement } from '../types/content';
-import type { DCRArticle } from '../types/frontend';
+import type { FEArticleType } from '../types/frontend';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
-const example: DCRArticle = ExampleArticle;
+const example: FEArticleType = ExampleArticle;
 const exampleFormat: ArticleFormat = decideFormat(example.format);
 
 const formatIsPhotoEssay: ArticleFormat = {

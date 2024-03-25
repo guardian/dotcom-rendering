@@ -1,4 +1,4 @@
-import { Standard as ExampleArticle } from '../../fixtures/generated/dcr-articles/Standard';
+import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import type { FEElement } from '../types/content';
 import { enhanceDividers } from './enhance-dividers';
 
