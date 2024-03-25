@@ -208,10 +208,13 @@ export const AdPortals = ({
 			});
 
 			resizeObserver.observe(document.body);
+			if (rightAdPlaceholder) {
+				resizeObserver.observe(rightAdPlaceholder);
+			}
 		}
 
 		return () => resizeObserver?.disconnect();
-	}, [adPlaceholders]);
+	}, [adPlaceholders, rightAdPlaceholder]);
 
 	const handleClickSupportButton = () => {
 		void getAcquisitionsClient()
