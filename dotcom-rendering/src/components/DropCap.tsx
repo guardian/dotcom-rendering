@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, Pillar } from '@guardian/libs';
 import { fonts, space } from '@guardian/source-foundations';
 import { palette } from '../palette';
 
@@ -38,6 +38,12 @@ const fontWeight = (format: ArticleFormat) => {
 			return 500;
 		// "Soft" designs
 		case ArticleDesign.Feature:
+			// News features have "neutral" styles, other features are "soft"
+			if (format.theme === Pillar.News) {
+				return 500;
+			} else {
+				return 700;
+			}
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
