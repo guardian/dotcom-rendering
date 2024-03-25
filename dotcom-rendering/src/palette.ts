@@ -1024,12 +1024,12 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
 		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[7];
 		// "Stand-out" styles
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.News:
@@ -1058,12 +1058,12 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
 		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
 			return sourcePalette.neutral[60];
 		// "Stand-out" styles
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.News:
