@@ -54,9 +54,8 @@ const globalH2Styles = (display: ArticleDisplay) => css`
 			: headline.xxsmall({ fontWeight: 'bold' })};
 	}
 
-	/* Remove padding-top from consecutive h2s */
-	h2 + h2 {
-		padding-top: 0;
+	p + h2 {
+		padding-top: 8px;
 	}
 `;
 
