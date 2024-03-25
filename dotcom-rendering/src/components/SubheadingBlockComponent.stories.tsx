@@ -180,6 +180,12 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
 			},
+			// "Soft" stand-out styles
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Culture,
+			},
 		]),
 	],
 } satisfies Story;
@@ -245,6 +251,12 @@ export const ImmersiveDisplay = {
 				design: ArticleDesign.Feature,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.News,
+			},
+			// "Soft" stand-out styles
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Culture,
 			},
 			// "Soft" stand-out styles
 			{
