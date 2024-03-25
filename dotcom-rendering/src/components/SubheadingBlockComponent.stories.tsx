@@ -148,6 +148,11 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
 			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
 		]),
 	],
 } satisfies Story;
