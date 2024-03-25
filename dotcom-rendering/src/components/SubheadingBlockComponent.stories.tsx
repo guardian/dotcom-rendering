@@ -125,16 +125,21 @@ export const StandardDisplay = {
 			},
 			// "Neutral clear" styles
 			standardFormat,
-			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.DeadBlog,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Sport,
 			},
+			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
 			},
 			// "Soft" stand-out styles
 			{
@@ -174,16 +179,21 @@ export const ImmersiveDisplay = {
 			},
 			// "Neutral clear" styles
 			immersiveFormat,
-			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.DeadBlog,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Sport,
 			},
+			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.News,
 			},
 			// "Soft" stand-out styles
 			{
