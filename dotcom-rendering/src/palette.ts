@@ -1031,7 +1031,6 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
-		// "Soft" styles
 		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
@@ -1070,7 +1069,6 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
-		// "Soft" styles
 		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:

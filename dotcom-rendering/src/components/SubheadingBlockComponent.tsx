@@ -1,6 +1,11 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import { type FontWeight, from, headline } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations/cjs/source-foundations/src/typography/api';
 import type { ReactNode } from 'react';
@@ -73,6 +78,11 @@ const getStyles = (format: ArticleFormat) => {
 
 		// "Soft" styles
 		case ArticleDesign.Feature:
+			// News features have "neutral" styles, other features are "soft"
+			return getFontStyles({
+				format,
+				fontWeight: format.theme === Pillar.News ? 'medium' : 'bold',
+			});
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
