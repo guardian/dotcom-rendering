@@ -5,42 +5,24 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
-const standardFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
-
-const immersiveFormat = {
-	...standardFormat,
-	display: ArticleDisplay.Immersive,
-};
-
 /** Mocking the styles normally inherited via ArticleBody component */
-const GlobalStylesDecorator =
-	(format: ArticleFormat): Decorator =>
-	(Story) => (
-		<div
-			css={css`
-				h2:not([data-ignore='global-h2-styling']) {
-					${format.display === ArticleDisplay.Immersive
-						? headline.medium({ fontWeight: 'light' })
-						: headline.xxsmall({ fontWeight: 'bold' })};
-				}
-
+const GlobalStylesDecorator = (): Decorator => (Story) => (
+	<div
+		css={css`
+			h2:not([data-ignore='global-h2-styling']) {
 				p + h2 {
 					padding-top: 8px;
 				}
-			`}
-		>
-			{Story()}
-		</div>
-	);
+			}
+		`}
+	>
+		{Story()}
+	</div>
+);
 
 const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -89,7 +71,11 @@ const meta = {
 	},
 	args: {
 		html: '<h2>Subheading</h2>',
-		format: standardFormat,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
 	},
 } satisfies Meta<typeof SubheadingBlockComponent>;
 
@@ -98,16 +84,13 @@ export default meta;
 
 export const StandardDisplay = {
 	decorators: [
-		GlobalStylesDecorator(standardFormat),
-
+		GlobalStylesDecorator(),
 		splitTheme([
-			// "Authoritative clear" styles
 			{
 				design: ArticleDesign.Obituary,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.News,
 			},
-			// "Authoritative stand-out" styles
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Standard,
@@ -123,14 +106,16 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: ArticleSpecial.SpecialReportAlt,
 			},
-			// "Neutral clear" styles
-			standardFormat,
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
 			{
 				design: ArticleDesign.DeadBlog,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Sport,
 			},
-			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
@@ -141,7 +126,6 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.News,
 			},
-			// "Soft" stand-out styles
 			{
 				design: ArticleDesign.Interview,
 				display: ArticleDisplay.Standard,
@@ -153,7 +137,7 @@ export const StandardDisplay = {
 
 export const ImmersiveDisplay = {
 	decorators: [
-		GlobalStylesDecorator(immersiveFormat),
+		GlobalStylesDecorator(),
 		splitTheme([
 			// "Authoritative clear" styles
 			{
@@ -177,14 +161,16 @@ export const ImmersiveDisplay = {
 				display: ArticleDisplay.Immersive,
 				theme: ArticleSpecial.SpecialReportAlt,
 			},
-			// "Neutral clear" styles
-			immersiveFormat,
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.News,
+			},
 			{
 				design: ArticleDesign.DeadBlog,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Sport,
 			},
-			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Immersive,
@@ -195,7 +181,6 @@ export const ImmersiveDisplay = {
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.News,
 			},
-			// "Soft" stand-out styles
 			{
 				design: ArticleDesign.Interview,
 				display: ArticleDisplay.Immersive,

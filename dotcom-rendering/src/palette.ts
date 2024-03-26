@@ -18,6 +18,7 @@ import {
 	tabsDarkTheme,
 	tabsThemeDefault,
 } from '@guardian/source-react-components-development-kitchen';
+import { decideDesignToneColourType } from './lib/decideDesignTone';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -1017,24 +1018,8 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 };
 
 const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
-		// "Clear" styles
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[7];
-		// "Stand-out" styles
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Analysis:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Recipe:
-		case ArticleDesign.Review:
+	switch (decideDesignToneColourType(design)) {
+		case 'stand-out':
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -1049,30 +1034,15 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[7];
 			}
+		case 'clear':
 		default:
-			return 'unset';
+			return sourcePalette.neutral[7];
 	}
 };
 
 const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
-		// "Clear" styles
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[60];
-		// "Stand-out" styles
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Analysis:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Recipe:
-		case ArticleDesign.Review:
+	switch (decideDesignToneColourType(design)) {
+		case 'stand-out':
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -1087,10 +1057,12 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[60];
 			}
+		case 'clear':
 		default:
-			return 'unset';
+			return sourcePalette.neutral[60];
 	}
 };
+
 const avatarLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Standard:
@@ -3913,27 +3885,9 @@ const mostViewedHeadlineDark = (): string => sourcePalette.neutral[86];
 
 const dropCapLight: PaletteFunction = (format) => {
 	switch (format.design) {
-		case ArticleDesign.Letter:
-			switch (format.theme) {
-				case Pillar.Opinion:
-					return sourcePalette.opinion[400];
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(format.theme, 300);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[300];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[300];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReport[100];
-			}
-		// "Authoritative" designs
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Comment:
-		// "Neutral" designs
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
@@ -3941,7 +3895,6 @@ const dropCapLight: PaletteFunction = (format) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
-		// "Soft" designs
 		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
@@ -3959,6 +3912,23 @@ const dropCapLight: PaletteFunction = (format) => {
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReport[200];
+			}
+		// TODO - should these be the same as style above?
+		case ArticleDesign.Letter:
+			switch (format.theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[400];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(format.theme, 300);
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReport[100];
 			}
 		default:
 			switch (format.theme) {
@@ -3985,11 +3955,9 @@ const dropCapDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.FullPageInteractive:
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.Letter:
-		// "Authoritative" designs
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Comment:
-		// "Neutral" designs
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
@@ -3997,7 +3965,6 @@ const dropCapDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
-		// "Soft" designs
 		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
