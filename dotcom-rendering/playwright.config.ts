@@ -1,6 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
 
 /**
+ * The server port for local development or CI
+ */
+const isDev = process.env.NODE_ENV !== 'production';
+export const PORT = isDev ? 3030 : 9000;
+
+/**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
@@ -32,4 +38,12 @@ export default defineConfig({
 			use: { ...devices['Desktop Chrome'] },
 		},
 	],
+	webServer: {
+		// On CI the server is already started so a no-op
+		command: isDev ? 'make dev' : ':',
+		url: `http://localhost:${PORT}`,
+		reuseExistingServer: true,
+		stdout: 'pipe',
+		stderr: 'pipe',
+	},
 });

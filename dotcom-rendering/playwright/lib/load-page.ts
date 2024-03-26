@@ -1,11 +1,8 @@
 import type { Page } from '@playwright/test';
+import { PORT } from 'playwright.config';
 import { validateAsArticleType } from '../../src/model/validate';
 import type { DCRArticle, FEArticleType } from '../../src/types/frontend';
 
-/**
- * The server port for CI or local development
- */
-const PORT = process.env.NODE_ENV === 'production' ? 9000 : 3030;
 const BASE_URL = `http://localhost:${PORT}`;
 
 /**
