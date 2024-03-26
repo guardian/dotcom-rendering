@@ -1,8 +1,8 @@
 import type { Page } from '@playwright/test';
+import { PORT } from 'playwright.config';
 import { validateAsArticleType } from '../../src/model/validate';
 import type { FEArticleType } from '../../src/types/frontend';
 
-const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
 
 /**
