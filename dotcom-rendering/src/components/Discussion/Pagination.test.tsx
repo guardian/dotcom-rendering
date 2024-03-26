@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import type { FilterOptions } from '../../lib/discussion';
-import { Pagination } from './Pagination';
+import { getPages, Pagination } from './Pagination';
 
 const DEFAULT_FILTERS: FilterOptions = {
 	orderBy: 'newest',
@@ -55,4 +55,32 @@ describe('Pagination', () => {
 			).length,
 		).toBe(0); // Page 10 doesn't exist
 	});
+
+	it.each([
+		[1, 1, [1]],
+		[1, 2, [1, 2]],
+		[1, 6, [1, 2, 3, 4, 5, 6]],
+		[2, 6, [1, 2, 3, 4, 5, 6]],
+		[3, 6, [1, 2, 3, 4, 5, 6]],
+		[4, 6, [1, 2, 3, 4, 5, 6]],
+		[5, 6, [1, 2, 3, 4, 5, 6]],
+		[6, 6, [1, 2, 3, 4, 5, 6]],
+		[1, 7, [1, 2, 3, 4, '…', 7]],
+		[2, 7, [1, 2, 3, 4, '…', 7]],
+		[3, 7, [1, 2, 3, 4, '…', 7]],
+		[4, 7, [1, '…', 3, 4, 5, '…', 7]],
+		[5, 7, [1, '…', 4, 5, 6, 7]],
+		[6, 7, [1, '…', 4, 5, 6, 7]],
+		[7, 7, [1, '…', 4, 5, 6, 7]],
+		[1, 99, [1, 2, 3, 4, '…', 99]],
+		[3, 99, [1, 2, 3, 4, '…', 99]],
+		[42, 99, [1, '…', 41, 42, 43, '…', 99]],
+		[97, 99, [1, '…', 96, 97, 98, 99]],
+		[99, 99, [1, '…', 96, 97, 98, 99]],
+	] satisfies [number, number, (number | '…')[]][])(
+		'Works for page %s of %s',
+		(currentPage, totalPages, expected) => {
+			expect(getPages(currentPage, totalPages)).toEqual(expected);
+		},
+	);
 });
