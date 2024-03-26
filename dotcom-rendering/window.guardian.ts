@@ -1,8 +1,8 @@
 import type { EmotionCache } from '@emotion/cache';
 import type {
-	OnConsentChangeCallback,
 	CMP,
 	ConsentState,
+	OnConsentChangeCallback,
 	VendorName,
 } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
