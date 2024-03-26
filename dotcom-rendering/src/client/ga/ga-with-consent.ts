@@ -1,9 +1,5 @@
-import {
-	getConsentFor,
-	onConsent,
-	onConsentChange,
-} from '@guardian/consent-management-platform';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/libs';
+import { getConsentFor, onConsent, onConsentChange } from '@guardian/libs';
 import { loadScript, log } from '@guardian/libs';
 import { init, sendPageView } from './ga';
 

@@ -1,4 +1,4 @@
-import { onConsentChange } from '@guardian/consent-management-platform';
+import { onConsentChange } from '@guardian/libs';
 import { getCookie, storage } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';

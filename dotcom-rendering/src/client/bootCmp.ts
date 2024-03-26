@@ -1,10 +1,10 @@
-import { cmp, onConsent } from '@guardian/consent-management-platform';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/libs';
 import type {
 	OphanAction,
 	OphanComponentEvent,
 	OphanComponentType,
 } from '@guardian/libs';
+import { cmp, onConsent } from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type { RenderingTarget } from '../types/renderingTarget';

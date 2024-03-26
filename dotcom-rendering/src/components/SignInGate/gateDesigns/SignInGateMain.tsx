@@ -1,4 +1,4 @@
-import { cmp } from '@guardian/consent-management-platform';
+import { cmp } from '@guardian/libs';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';

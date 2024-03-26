@@ -1,6 +1,6 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
-import { onConsent } from '@guardian/consent-management-platform';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import { onConsent } from '@guardian/libs';
+import type { ConsentState } from '@guardian/libs';
 import type { CountryCode } from '@guardian/libs';
 import type { DailyArticle } from '../../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../../lib/dailyArticleCount';

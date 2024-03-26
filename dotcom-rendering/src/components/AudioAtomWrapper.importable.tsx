@@ -1,7 +1,4 @@
-import {
-	getConsentFor,
-	onConsentChange,
-} from '@guardian/consent-management-platform';
+import { getConsentFor, onConsentChange } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { AudioAtom } from './AudioAtom/AudioAtom';
