@@ -1,3 +1,4 @@
+import { DiscussionResponseType } from '@guardian/bridget';
 import { useEffect, useState } from 'react';
 import { getDiscussionClient } from '../lib/bridgetApi';
 import type { Reader, UserProfile } from '../lib/discussion';
@@ -19,8 +20,23 @@ const onReply = async (): Promise<CommentResponse> => {
 };
 
 const onRecommend = async (commentId: number): Promise<boolean> => {
-	return getDiscussionClient().recommend(commentId);
+	return getDiscussionClient()
+		.recommend(commentId.toString())
+		.then((discussionApiResponse) => {
+			if (
+				// eslint-disable-next-line no-underscore-dangle -- we don't have control over this name! It comes from the compiled Thrift models
+				discussionApiResponse.__type ===
+				DiscussionResponseType.DiscussionResponseWithResponse
+			) {
+				if (discussionApiResponse.response.statusCode === 200) {
+					return true;
+				}
+			}
+
+			return false;
+		});
 };
+
 const addUsername = async (): Promise<Result<string, true>> => {
 	console.log('addUsername');
 	return { kind: 'error', error: 'ApiError' };
