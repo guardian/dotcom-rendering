@@ -1,9 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const isDev = process.env.NODE_ENV !== 'production';
 /**
  * The server port for local development or CI
  */
-const isDev = process.env.NODE_ENV !== 'production';
 export const PORT = isDev ? 3030 : 9000;
 
 /**
