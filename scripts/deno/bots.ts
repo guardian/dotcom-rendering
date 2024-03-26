@@ -5,11 +5,13 @@ import {
   StartQueryExecutionCommand,
 } from "npm:@aws-sdk/client-athena";
 
-const client = new AthenaClient({
-  region: "eu-west-1",
-});
+const client = new AthenaClient({ region: "eu-west-1" });
 
 Deno.env.set("AWS_PROFILE", "frontend");
+
+const date = "2024-03-20";
+
+const [year, month, day] = date.split("-");
 
 const { QueryExecutionId } = await client.send(
   new StartQueryExecutionCommand({
@@ -18,9 +20,9 @@ const { QueryExecutionId } = await client.send(
 	  COUNT (DISTINCT client_ip) distinct_ip_count,
 	  request_user_agent
   FROM fastly_logs.fastly_www_theguardian_com_logs_json_partitioned
-  WHERE year = 2024
-	  AND month = 03
-	  AND day = 20
+  WHERE year = ${year}
+	  AND month = ${month}
+	  AND day = ${day}
   GROUP BY request_user_agent
   ORDER BY request_count desc
   LIMIT 100`,
@@ -41,13 +43,23 @@ while (true) {
 
   if (QueryExecution?.Status?.State === "SUCCEEDED") break;
 
-  console.info(QueryExecution?.Status?.State)
+  console.info(QueryExecution?.Status);
 
-  await new Promise((resolve) => setTimeout(resolve, 120));
+  await new Promise((resolve) => setTimeout(resolve, 360));
 }
 
-const response = await client.send(
+const { ResultSet } = await client.send(
   new GetQueryResultsCommand({ QueryExecutionId }),
 );
 
-console.info(response);
+if (!ResultSet) throw "Could not get a result";
+
+const csv =
+  ResultSet.Rows?.map(({ Data }) =>
+    Data?.map(({ VarCharValue }) => VarCharValue).join(",\t")
+  ).join("\n") ?? "";
+
+console.log("\n\n");
+console.log(csv);
+
+await Deno.writeTextFile(`./${date}.csv`, csv);
