@@ -183,40 +183,34 @@ const PageButton = ({
 	</button>
 );
 
-const decideSecondPage = ({
-	currentPage,
-	totalPages,
-}: {
-	currentPage: number;
-	totalPages: number;
-}) => {
-	if (currentPage < 4) return 2;
-	if (currentPage > totalPages - 2) return totalPages - 2;
-	return currentPage - 1;
-};
-
-const decideThirdPage = ({
-	currentPage,
-	totalPages,
-}: {
-	currentPage: number;
-	totalPages: number;
-}) => {
-	if (currentPage < 4) return 3;
-	if (currentPage > totalPages - 2) return totalPages - 1;
-	return currentPage;
-};
-
-const decideFourthPage = ({
-	currentPage,
-	totalPages,
-}: {
-	currentPage: number;
-	totalPages: number;
-}) => {
-	if (currentPage < 4) return 4;
-	if (currentPage > totalPages - 2) return totalPages;
-	return currentPage + 1;
+export const getPages = (
+	currentPage: number,
+	totalPages: number,
+): (number | '…')[] => {
+	if (totalPages <= 6) {
+		return [1, 2, 3, 4, 5, 6].filter((page) => page <= totalPages);
+	} else if (currentPage <= 3) {
+		return [1, 2, 3, 4, '…', totalPages];
+	} else if (currentPage <= totalPages - 3) {
+		return [
+			1,
+			'…',
+			currentPage - 1,
+			currentPage,
+			currentPage + 1,
+			'…',
+			totalPages,
+		];
+	} else {
+		return [
+			1,
+			'…',
+			totalPages - 3,
+			totalPages - 2,
+			totalPages - 1,
+			totalPages,
+		];
+	}
 };
 
 export const Pagination = ({
@@ -228,15 +222,6 @@ export const Pagination = ({
 	const totalPages = Math.ceil(topLevelCommentCount / filters.pageSize);
 	// Make decisions about which pagination elements to show
 	const showBackButton = totalPages > 4 && currentPage > 1;
-	const showFirstEllipsis = totalPages > 4 && currentPage > 3;
-	const secondPage = decideSecondPage({ currentPage, totalPages });
-	const thirdPage = decideThirdPage({ currentPage, totalPages });
-	const fourthPage = decideFourthPage({ currentPage, totalPages });
-	const showThirdPage = totalPages > 2;
-	const showForthPage = totalPages > 3;
-	const showLastPage = totalPages > 4 && currentPage < totalPages - 1;
-	const lastPage = totalPages;
-	const showSecondEllipsis = totalPages > 4 && currentPage < totalPages - 2;
 	const showForwardButton = totalPages > 4 && currentPage !== totalPages;
 
 	// Pagination Text
@@ -269,38 +254,19 @@ export const Pagination = ({
 						setCurrentPage={setCurrentPage}
 					/>
 				)}
-				<PageButton
-					currentPage={1}
-					setCurrentPage={setCurrentPage}
-					isSelected={currentPage === 1}
-				/>
-				{showFirstEllipsis && <div css={ellipsisStyles}>&hellip;</div>}
-				<PageButton
-					currentPage={secondPage}
-					setCurrentPage={setCurrentPage}
-					isSelected={currentPage === secondPage}
-				/>
-				{showThirdPage && (
-					<PageButton
-						currentPage={thirdPage}
-						setCurrentPage={setCurrentPage}
-						isSelected={currentPage === thirdPage}
-					/>
-				)}
-				{showForthPage && (
-					<PageButton
-						currentPage={fourthPage}
-						setCurrentPage={setCurrentPage}
-						isSelected={currentPage === fourthPage}
-					/>
-				)}
-				{showSecondEllipsis && <div css={ellipsisStyles}>&hellip;</div>}
-				{showLastPage && (
-					<PageButton
-						currentPage={lastPage}
-						setCurrentPage={setCurrentPage}
-						isSelected={currentPage === lastPage}
-					/>
+				{getPages(currentPage, totalPages).map((page) =>
+					page === '…' ? (
+						<div key={'…'} css={ellipsisStyles}>
+							&hellip;
+						</div>
+					) : (
+						<PageButton
+							key={page}
+							currentPage={page}
+							setCurrentPage={setCurrentPage}
+							isSelected={page === currentPage}
+						/>
+					),
 				)}
 				{showForwardButton && (
 					<Forward
