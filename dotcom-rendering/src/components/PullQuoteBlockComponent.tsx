@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
 import { from, headline, textSans, until } from '@guardian/source-foundations';
+import { decideDesignToneWeighting } from '../lib/decideDesignTone';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
@@ -9,6 +11,16 @@ const pullQuoteCss = css`
 	color: ${palette('--pullquote-text')};
 `;
 
+const getFontWeight = (format: ArticleFormat): FontWeight => {
+	switch (decideDesignToneWeighting(format)) {
+		case 'authoritative':
+			return 'regular';
+		case 'neutral':
+		case 'soft':
+			return 'medium';
+	}
+};
+
 const fontCss = (role: string, format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
@@ -16,122 +28,34 @@ const fontCss = (role: string, format: ArticleFormat) => {
 		`;
 	}
 
+	const fontWeight = getFontWeight(format);
+	const fontScaleArgs: FontScaleArgs = { fontWeight, lineHeight: 'tight' };
+
 	switch (role) {
-		case 'showcase':
-			switch (format.design) {
-				case ArticleDesign.Standard:
-				case ArticleDesign.Profile:
-				case ArticleDesign.Explainer:
-				case ArticleDesign.Timeline:
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog:
-				case ArticleDesign.Analysis:
-				case ArticleDesign.Feature:
-				case ArticleDesign.Interview:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Review:
-					return css`
-						${headline.xsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
-						${from.tablet} {
-							${headline.small({
-								fontWeight: 'medium',
-								lineHeight: 'tight',
-							})};
-						}
-					`;
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				default:
-					return css`
-						${headline.xsmall({
-							fontWeight: 'regular',
-							lineHeight: 'tight',
-						})};
-						${from.tablet} {
-							${headline.small({
-								fontWeight: 'regular',
-								lineHeight: 'tight',
-							})};
-						}
-					`;
-			}
+		case 'showcase': {
+			return css`
+				${headline.xsmall(fontScaleArgs)};
+
+				${from.tablet} {
+					${headline.small(fontScaleArgs)};
+				}
+			`;
+		}
+
 		case 'supporting':
-			switch (format.design) {
-				case ArticleDesign.Standard:
-				case ArticleDesign.Profile:
-				case ArticleDesign.Explainer:
-				case ArticleDesign.Timeline:
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog:
-				case ArticleDesign.Analysis:
-				case ArticleDesign.Feature:
-				case ArticleDesign.Interview:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Review:
-					return css`
-						${headline.xxsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
-					`;
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				default:
-					return css`
-						${headline.xxsmall({
-							fontWeight: 'regular',
-							lineHeight: 'tight',
-						})};
-					`;
-			}
+			return css`
+				${headline.xxsmall(fontScaleArgs)};
+			`;
+
 		// Inline
 		default:
-			switch (format.design) {
-				case ArticleDesign.Standard:
-				case ArticleDesign.Profile:
-				case ArticleDesign.Explainer:
-				case ArticleDesign.Timeline:
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog:
-				case ArticleDesign.Analysis:
-				case ArticleDesign.Feature:
-				case ArticleDesign.Interview:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Review:
-					return css`
-						${headline.xxsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
-						${from.tablet} {
-							${headline.xsmall({
-								fontWeight: 'medium',
-								lineHeight: 'tight',
-							})};
-						}
-					`;
-				case ArticleDesign.Obituary:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Comment:
-				default:
-					return css`
-						${headline.xxsmall({
-							fontWeight: 'regular',
-							lineHeight: 'tight',
-						})};
-						${from.tablet} {
-							${headline.xsmall({
-								fontWeight: 'regular',
-								lineHeight: 'tight',
-							})};
-						}
-					`;
-			}
+			return css`
+				${headline.xxsmall(fontScaleArgs)};
+
+				${from.tablet} {
+					${headline.xsmall(fontScaleArgs)};
+				}
+			`;
 	}
 };
 

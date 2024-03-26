@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, Pillar } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { fonts, space } from '@guardian/source-foundations';
+import { decideDesignToneWeighting } from '../lib/decideDesignTone';
 import { palette } from '../palette';
 
 type Props = {
@@ -21,35 +22,17 @@ const dropCap = css`
 `;
 
 const fontWeight = (format: ArticleFormat) => {
-	switch (format.design) {
-		// "Authoritative" designs
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Comment:
+	// TODO - check letter design
+	if (format.design === ArticleDesign.Letter) {
+		return 200;
+	}
+
+	switch (decideDesignToneWeighting(format)) {
+		case 'authoritative':
 			return 300;
-		// "Neutral" designs
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-		case ArticleDesign.Analysis:
+		case 'neutral':
 			return 500;
-		// "Soft" designs
-		case ArticleDesign.Feature:
-			// News features have "neutral" styles, other features are "soft"
-			if (format.theme === Pillar.News) {
-				return 500;
-			} else {
-				return 700;
-			}
-		case ArticleDesign.Interview:
-		case ArticleDesign.Recipe:
-		case ArticleDesign.Review:
-			return 700;
-		case ArticleDesign.Letter:
-			return 200;
+		case 'soft':
 		default:
 			return 700;
 	}
