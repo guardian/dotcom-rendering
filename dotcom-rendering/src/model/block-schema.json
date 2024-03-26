@@ -2983,6 +2983,9 @@
                 "id": {
                     "type": "string"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "channelId": {
                     "type": "string"
                 },
@@ -3023,6 +3026,7 @@
             "required": [
                 "_type",
                 "assetId",
+                "elementId",
                 "expired",
                 "id",
                 "mediaTitle"
