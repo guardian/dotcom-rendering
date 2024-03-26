@@ -46,7 +46,7 @@ export const enhanceDividers = (elements: FEElement[]): FEElement[] =>
 		) {
 			return {
 				...element,
-				dropCap: true,
+				dropCap: 'on',
 			};
 		} else {
 			// Otherwise, do nothing

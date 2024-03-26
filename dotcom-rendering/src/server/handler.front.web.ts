@@ -51,7 +51,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 };
 
 const tagPageWebTitle = (tagPage: FETagPageType) => {
-	const pagination = tagPage.tags.tags[0]?.pagination;
+	const { pagination } = tagPage;
 	if (pagination !== undefined && pagination.currentPage > 1) {
 		return `${tagPage.webTitle} | Page ${pagination.currentPage} of ${pagination.lastPage} | The Guardian`;
 	} else {
@@ -88,12 +88,10 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 		tags: data.tags.tags,
 		groupedTrails,
 		speed,
-		// Pagination information comes from the first tag
 		pagination:
-			data.tags.tags[0]?.pagination &&
-			data.tags.tags[0].pagination.lastPage > 1
+			data.pagination && data.pagination.lastPage > 1
 				? {
-						...data.tags.tags[0]?.pagination,
+						...data.pagination,
 						sectionName: data.webTitle,
 						pageId: data.pageId,
 				  }

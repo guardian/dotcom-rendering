@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { space, textSans, until } from '@guardian/source-foundations';
+import type { ThemeButton } from '@guardian/source-react-components';
 import {
 	Button,
 	SvgChevronLeftSingle,
@@ -47,50 +48,15 @@ const pageButtonStyles = (isSelected: boolean) => css`
 	text-overflow: ellipsis;
 `;
 
-const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
-	margin-right: ${space[1]}px;
+const theme = {
+	borderTertiary: schemedPalette('--discussion-pagination-border'),
+	backgroundTertiaryHover: schemedPalette(
+		'--discussion-pagination-background',
+	),
+	textTertiary: schemedPalette('--discussion-pagination-text'),
+} satisfies Partial<ThemeButton>;
 
-	border-radius: 62.5rem;
-	border-width: 1px;
-	border-style: solid;
-	border-color: ${schemedPalette('--discussion-pagination-border')};
-	background-color: ${isSelected
-		? schemedPalette('--discussion-pagination-text')
-		: schemedPalette('--discussion-pagination-background')};
-	height: 22px;
-	min-height: 22px;
-	width: 22px;
-
-	/* Override some of src's properties */
-	> button {
-		height: 22px;
-		min-height: 22px;
-		width: 22px;
-		color: ${schemedPalette('--discussion-pagination-text')};
-	}
-
-	:hover {
-		border-color: ${schemedPalette('--discussion-pagination-border-hover')};
-	}
-
-	& svg {
-		/* Make the chevrons grey */
-		fill: currentColor;
-		/* Set the dimensions */
-		width: 22px;
-		height: 22px;
-	}
-`;
-
-const shiftRight = css`
-	/* The right chevron svg positions it's path in such a way that makes the alignment look
-    off. So here we shift it slightly to the right to fix that     */
-	& svg {
-		margin-left: 2px;
-	}
-`;
-
-const elipsisStyles = css`
+const ellipsisStyles = css`
 	line-height: 26px;
 	margin-right: 2px;
 `;
@@ -113,6 +79,10 @@ const paginationButtons = css`
 	display: flex;
 	flex-direction: row;
 	height: 25px;
+
+	button:hover {
+		border-color: ${schemedPalette('--discussion-pagination-border-hover')};
+	}
 `;
 
 const paginationText = css`
@@ -130,17 +100,32 @@ const Forward = ({
 	currentPage: number;
 	setCurrentPage: Props['setCurrentPage'];
 }) => (
-	<div css={[chevronButtonStyles({ isSelected: false }), shiftRight]}>
-		<Button
-			onClick={() => setCurrentPage(currentPage + 1)}
-			aria-label="Previous discussion page"
-			data-link-name={`Pagination view page ${currentPage + 1}`}
-			size="xsmall"
-			priority="subdued"
-		>
-			<SvgChevronRightSingle />
-		</Button>
-	</div>
+	<Button
+		onClick={() => setCurrentPage(currentPage + 1)}
+		data-link-name={`Pagination view page ${currentPage + 1}`}
+		size="xsmall"
+		priority="tertiary"
+		theme={theme}
+		// @TODO: These overrides should be removed once fixed upstream
+		cssOverrides={css`
+			/* theme does not support Tertiary background */
+			background-color: ${schemedPalette(
+				'--discussion-pagination-background',
+			)};
+			/* the icon is not perfectly centred */
+			svg {
+				transform: translateX(1px);
+			}
+		`}
+		icon={
+			<SvgChevronRightSingle
+				theme={{ fill: schemedPalette('--discussion-pagination-text') }}
+			/>
+		}
+		hideLabel={true}
+	>
+		Previous discussion page
+	</Button>
 );
 
 const Back = ({
@@ -149,23 +134,34 @@ const Back = ({
 }: {
 	currentPage: number;
 	setCurrentPage: Props['setCurrentPage'];
-}) => {
-	const newPage = Math.max(0, currentPage - 1);
-
-	return (
-		<div css={chevronButtonStyles({ isSelected: false })}>
-			<Button
-				onClick={() => setCurrentPage(newPage)}
-				aria-label="Previous discussion page"
-				data-link-name={`Pagination view page ${newPage}`}
-				size="xsmall"
-				priority="subdued"
-			>
-				<SvgChevronLeftSingle />
-			</Button>
-		</div>
-	);
-};
+}) => (
+	<Button
+		onClick={() => setCurrentPage(currentPage - 1)}
+		data-link-name={`Pagination view page ${currentPage - 1}`}
+		size="xsmall"
+		priority="tertiary"
+		theme={theme}
+		// @TODO: These overrides should be removed once fixed upstream
+		cssOverrides={css`
+			/* theme does not support Tertiary background */
+			background-color: ${schemedPalette(
+				'--discussion-pagination-background',
+			)};
+			/* the icon is not perfectly centred */
+			svg {
+				transform: translateX(-1px);
+			}
+		`}
+		icon={
+			<SvgChevronLeftSingle
+				theme={{ fill: schemedPalette('--discussion-pagination-text') }}
+			/>
+		}
+		hideLabel={true}
+	>
+		Previous discussion page
+	</Button>
+);
 
 const PageButton = ({
 	currentPage,
@@ -211,7 +207,7 @@ const decideThirdPage = ({
 	return currentPage;
 };
 
-const decideForthPage = ({
+const decideFourthPage = ({
 	currentPage,
 	totalPages,
 }: {
@@ -230,17 +226,17 @@ export const Pagination = ({
 	filters,
 }: Props) => {
 	const totalPages = Math.ceil(topLevelCommentCount / filters.pageSize);
-	// Make decisions aobut which pagination elements to show
+	// Make decisions about which pagination elements to show
 	const showBackButton = totalPages > 4 && currentPage > 1;
-	const showFirstElipsis = totalPages > 4 && currentPage > 3;
+	const showFirstEllipsis = totalPages > 4 && currentPage > 3;
 	const secondPage = decideSecondPage({ currentPage, totalPages });
 	const thirdPage = decideThirdPage({ currentPage, totalPages });
-	const forthPage = decideForthPage({ currentPage, totalPages });
+	const fourthPage = decideFourthPage({ currentPage, totalPages });
 	const showThirdPage = totalPages > 2;
 	const showForthPage = totalPages > 3;
 	const showLastPage = totalPages > 4 && currentPage < totalPages - 1;
 	const lastPage = totalPages;
-	const showSecondElipsis = totalPages > 4 && currentPage < totalPages - 2;
+	const showSecondEllipsis = totalPages > 4 && currentPage < totalPages - 2;
 	const showForwardButton = totalPages > 4 && currentPage !== totalPages;
 
 	// Pagination Text
@@ -278,7 +274,7 @@ export const Pagination = ({
 					setCurrentPage={setCurrentPage}
 					isSelected={currentPage === 1}
 				/>
-				{showFirstElipsis && <div css={elipsisStyles}>&hellip;</div>}
+				{showFirstEllipsis && <div css={ellipsisStyles}>&hellip;</div>}
 				<PageButton
 					currentPage={secondPage}
 					setCurrentPage={setCurrentPage}
@@ -293,12 +289,12 @@ export const Pagination = ({
 				)}
 				{showForthPage && (
 					<PageButton
-						currentPage={forthPage}
+						currentPage={fourthPage}
 						setCurrentPage={setCurrentPage}
-						isSelected={currentPage === forthPage}
+						isSelected={currentPage === fourthPage}
 					/>
 				)}
-				{showSecondElipsis && <div css={elipsisStyles}>&hellip;</div>}
+				{showSecondEllipsis && <div css={ellipsisStyles}>&hellip;</div>}
 				{showLastPage && (
 					<PageButton
 						currentPage={lastPage}

@@ -55,7 +55,6 @@ export const Badge = ({
 			data-link-name={ophanComponentLink}
 			data-component={ophanComponentName}
 			css={badgeLink}
-			role="button"
 		>
 			<img
 				css={[
@@ -65,7 +64,7 @@ export const Badge = ({
 						: frontsSectionBadgeSizingStyles,
 				]}
 				src={imageSrc}
-				alt=""
+				alt={isInLabsSection ? 'Labs sponsor logo' : ''}
 			/>
 		</a>
 	);

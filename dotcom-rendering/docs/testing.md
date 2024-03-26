@@ -75,32 +75,14 @@ The first time you run Playwright you will be asked to install a local browser, 
 
 `pnpm playwright install chromium`
 
-Running Playwright locally requires having a DCR server running.
-
-#### Against the PROD server
+Running Playwright locally will automatically start the dev server.
 
 To run the tests on the command line in headless mode:
 
-`make playwright`
+`make playwright-run`
 
-To run the tests in the Playwright UI:
+To open the tests in the Playwright UI:
 
 `make playwright-open`
 
-Changes to the tests will hot reload in the Playwright UI but not changes to the DCR code.
-
-If you want to update the DCR code the server will need to be re-built using `make build`.
-
-#### Against the DEV server
-
-To enable hot reloading of the DCR code _and_ the test code:
-
-Edit `load-page.ts` to change the port to the dev server port 3030
-
-To run the tests on the command line in headless mode:
-
-`pnpm playwright:run`
-
-To run the tests in the Playwright UI:
-
-`pnpm playwright:open`
+Changes to the tests and implementation code will hot reload.
