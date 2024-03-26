@@ -256,12 +256,12 @@ export const Pagination = ({
 				)}
 				{getPages(currentPage, totalPages).map((page) =>
 					page === '…' ? (
-						<div key={'…'} css={ellipsisStyles}>
+						<div key="page-ellipsis" css={ellipsisStyles}>
 							&hellip;
 						</div>
 					) : (
 						<PageButton
-							key={page}
+							key={`page-${page}`}
 							currentPage={page}
 							setCurrentPage={setCurrentPage}
 							isSelected={page === currentPage}
