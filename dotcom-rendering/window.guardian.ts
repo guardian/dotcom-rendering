@@ -1,5 +1,10 @@
 import type { EmotionCache } from '@emotion/cache';
-import type { Callback, CMP, ConsentState, VendorName } from '@guardian/libs';
+import type {
+	OnConsentChangeCallback,
+	CMP,
+	ConsentState,
+	VendorName,
+} from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { OphanRecordFunction } from './src/client/ophan/ophan';
 import type { google } from './src/components/YoutubeAtom/ima';
@@ -66,7 +71,7 @@ declare global {
 		guCmpHotFix: {
 			initialised?: boolean;
 			cmp: CMP;
-			onConsentChange: (fn: Callback) => void;
+			onConsentChange: (fn: OnConsentChangeCallback) => void;
 			getConsentFor: (
 				vendor: VendorName,
 				consent: ConsentState,
