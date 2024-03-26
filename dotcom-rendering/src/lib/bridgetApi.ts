@@ -154,7 +154,7 @@ export const getNewslettersClient = (): Newsletters.Client<void> => {
 };
 
 let discussionClient: Discussion.Client<void> | undefined = undefined;
-export const getdiscussionClient = (): Discussion.Client<void> => {
+export const getDiscussionClient = (): Discussion.Client<void> => {
 	if (!discussionClient) {
 		discussionClient = createAppClient<Discussion.Client<void>>(
 			Discussion.Client,
