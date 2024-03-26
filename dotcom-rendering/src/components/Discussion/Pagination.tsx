@@ -254,9 +254,14 @@ export const Pagination = ({
 						setCurrentPage={setCurrentPage}
 					/>
 				)}
-				{getPages(currentPage, totalPages).map((page) =>
+				{getPages(currentPage, totalPages).map((page, index) =>
 					page === '…' ? (
-						<div key="page-ellipsis" css={ellipsisStyles}>
+						<div
+							key={
+								index === 1 ? 'first-ellipsis' : 'last-ellipsis'
+							}
+							css={ellipsisStyles}
+						>
 							&hellip;
 						</div>
 					) : (
