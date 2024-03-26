@@ -77,8 +77,8 @@ describe('Pagination', () => {
 		[42, 99, [1, '…', 41, 42, 43, '…', 99]],
 		[97, 99, [1, '…', 96, 97, 98, 99]],
 		[99, 99, [1, '…', 96, 97, 98, 99]],
-	])(
-		'gets the right number of pages for %s in %s',
+	] satisfies [number, number, (number | '…')[]][])(
+		'Works for page %s of %s',
 		(currentPage, totalPages, expected) => {
 			expect(getPages(currentPage, totalPages)).toEqual(expected);
 		},
