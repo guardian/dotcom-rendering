@@ -3,13 +3,32 @@ import { ArticleDesign, type ArticleFormat, Pillar } from '@guardian/libs';
 /**
  * @file Making design decisions based on the tone-tag matrix that design introduced in 2023
  * The addition of these functions should simplify future work on these designs
- *
+ * See https://github.com/guardian/dotcom-rendering/milestone/174
+
+ * ----------------------- Design Tone Matrix -------------------------
+ * |                |                |                |                |
+ * | 	 		    | Authoritative  |  Neutral tone  |  Soft tone     |
+ * | 	 		    |     tone       |                |                |
+ *  -------------------------------------------------------------------
+ * |                |                |                |                |
+ * |                | Light/regular- | Medium weight  |  Bold weight   |
+ * |   Clear        |     weight     |                |                |
+ * |                |                |                |                |
+ * |                | Neutral colour | Neutral colour | Neutral colour |
+ * |                |                |                |                |
+ *  -------------------------------------------------------------------
+ * |                |                |                |                |
+ * |                | Light/regular- | Medium weight  |  Bold weight   |
+ * |  Stand-out     |     weight     |                |                |
+ * |                |                |                |                |
+ * |                | Pillar colour  | Pillar colour  | Pillar colour  |
+ * |                |                |                |                |
+ * ---------------------------------------------------------------------
  */
 
 /**
  * Helper function for deciding the font weighting style from the format design
  * Returns "authoritative" (light/regular), "clear" (medium), or "soft" (bold)
- * See https://github.com/guardian/dotcom-rendering/milestone/174
  */
 export const decideDesignToneWeighting = (
 	format: ArticleFormat,
@@ -51,7 +70,6 @@ export const decideDesignToneWeighting = (
  * Helper function for deciding the colour from the format design
  * Returns either "stand-out" or "clear" to indicate the category of colour to be returned
  * Stand-out tends to use pillar palette colours whereas clear uses neutral colours.
- * See https://github.com/guardian/dotcom-rendering/milestone/174
  */
 export const decideDesignToneColourType = (
 	design: ArticleDesign,
