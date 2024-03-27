@@ -1,7 +1,7 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { from, headline } from '@guardian/source-foundations';
+import { type FontWeight, from, headline } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations/cjs/source-foundations/src/typography/api';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
@@ -11,54 +11,66 @@ import { logger } from '../server/lib/logging';
 
 type Props = { html: string; format: ArticleFormat };
 
-const getAuthoritativeStyles = (format: ArticleFormat) => {
-	/** TODO !
-	 * This is temporary until https://github.com/guardian/dotcom-rendering/pull/10989 has been merged.
-	 * The desired font weight is "regular" */
-	const fontWeight = 'light';
+const getFontStyles = ({
+	format,
+	fontWeight,
+}: {
+	format: ArticleFormat;
+	fontWeight: FontWeight;
+}) => css`
+	${format.display === ArticleDisplay.Immersive
+		? headline.small({ fontWeight, lineHeight: 'tight' })
+		: headline.xsmall({ fontWeight, lineHeight: 'tight' })}
 
-	return css`
+	${from.tablet} {
 		${format.display === ArticleDisplay.Immersive
-			? headline.small({ fontWeight, lineHeight: 'tight' })
-			: headline.xsmall({ fontWeight, lineHeight: 'tight' })}
+			? headline.medium({ fontWeight, lineHeight: 'tight' })
+			: headline.small({ fontWeight, lineHeight: 'tight' })}
+	}
+
+	/** Labs uses sans text */
+	${format.theme === ArticleSpecial.Labs &&
+	css`
+		${format.display === ArticleDisplay.Immersive
+			? textSans.xxlarge({ fontWeight, lineHeight: 'tight' })
+			: textSans.xlarge({ fontWeight, lineHeight: 'tight' })}
 
 		${from.tablet} {
 			${format.display === ArticleDisplay.Immersive
-				? headline.medium({ fontWeight, lineHeight: 'tight' })
-				: headline.small({ fontWeight, lineHeight: 'tight' })}
+				? textSans.xxxlarge({ fontWeight, lineHeight: 'tight' })
+				: textSans.xxlarge({ fontWeight, lineHeight: 'tight' })}
 		}
+	`}
 
-		/** Labs uses sans text */
-		${format.theme === ArticleSpecial.Labs &&
-		css`
-			${format.display === ArticleDisplay.Immersive
-				? textSans.xxlarge({ fontWeight, lineHeight: 'tight' })
-				: textSans.xlarge({ fontWeight, lineHeight: 'tight' })}
+	color: ${palette('--subheading-text')};
 
-			${from.tablet} {
-				${format.display === ArticleDisplay.Immersive
-					? textSans.xxxlarge({ fontWeight, lineHeight: 'tight' })
-					: textSans.xxlarge({ fontWeight, lineHeight: 'tight' })}
-			}
-		`}
-
-		color: ${palette('--subheading-text')};
-
-		padding-bottom: 2px;
-		${from.tablet} {
-			padding-bottom: 4px;
-		}
-	`;
-};
+	padding-bottom: 2px;
+	${from.tablet} {
+		padding-bottom: 4px;
+	}
+`;
 
 const getStyles = (format: ArticleFormat) => {
 	switch (format.design) {
-		// "Authoritative clear" styles
+		// "Authoritative" styles
 		case ArticleDesign.Obituary:
-		// "Authoritative stand-out" styles
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
-			return getAuthoritativeStyles(format);
+			/** TODO !
+			 * This is temporary until https://github.com/guardian/dotcom-rendering/pull/10989 has been merged.
+			 * The desired font weight is "regular" */
+			return getFontStyles({ format, fontWeight: 'light' });
+
+		// "Neutral" styles
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
+			return getFontStyles({ format, fontWeight: 'medium' });
+
 		default:
 			// ! Not implemented
 			return css``; // TODO
@@ -67,12 +79,20 @@ const getStyles = (format: ArticleFormat) => {
 
 const ignoreGlobalH2Styling = (format: ArticleFormat) => {
 	switch (format.design) {
-		// Authoritative clear
+		// "Authoritative" styles
 		case ArticleDesign.Obituary:
-		// Authoritative stand-out
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
+		// "Neutral" styles
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.Analysis:
 			return true;
+
 		default:
 			return false;
 	}
