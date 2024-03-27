@@ -502,6 +502,10 @@ export const Card = ({
 													containerType ===
 													'fixed/video'
 												}
+												imagePositionOnMobile={
+													imagePositionOnMobile
+												}
+												imageSize={imageSize}
 											/>
 										</Island>
 									</div>

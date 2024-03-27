@@ -11,6 +11,10 @@ import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
 import { useConfig } from './ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
+import {
+	ImageSizeType,
+	ImagePositionType,
+} from './Card/components/ImageWrapper';
 
 type Props = {
 	id: string;
@@ -35,6 +39,8 @@ type Props = {
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
 	switches?: Switches;
+	imageSize?: ImageSizeType;
+	imagePositionOnMobile?: ImagePositionType;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -111,6 +117,8 @@ export const YoutubeBlockComponent = ({
 	pauseOffscreenVideo = false,
 	showTextOverlay,
 	switches,
+	imageSize = 'large',
+	imagePositionOnMobile = 'none',
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -239,6 +247,8 @@ export const YoutubeBlockComponent = ({
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
 				showTextOverlay={showTextOverlay}
+				imageSize={imageSize}
+				imagePositionOnMobile={imagePositionOnMobile}
 			/>
 			{!hideCaption && (
 				<Caption

@@ -8,6 +8,10 @@ import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
 import { YoutubeAtomPlaceholder } from './YoutubeAtomPlaceholder';
 import { YoutubeAtomPlayer } from './YoutubeAtomPlayer';
 import { YoutubeAtomSticky } from './YoutubeAtomSticky';
+import {
+	ImageSizeType,
+	ImagePositionType,
+} from '../Card/components/ImageWrapper';
 
 export type VideoEventKey =
 	| 'play'
@@ -43,6 +47,8 @@ type Props = {
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
 	showTextOverlay?: boolean;
+	imageSize: ImageSizeType;
+	imagePositionOnMobile: ImagePositionType;
 };
 
 export const YoutubeAtom = ({
@@ -68,6 +74,8 @@ export const YoutubeAtom = ({
 	format,
 	shouldPauseOutOfView = false,
 	showTextOverlay = false,
+	imageSize,
+	imagePositionOnMobile,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -208,6 +216,8 @@ export const YoutubeAtom = ({
 						kicker={kicker}
 						format={format}
 						showTextOverlay={showTextOverlay}
+						imageSize={imageSize}
+						imagePositionOnMobile={imagePositionOnMobile}
 					/>
 				)}
 				{showPlaceholder && (
