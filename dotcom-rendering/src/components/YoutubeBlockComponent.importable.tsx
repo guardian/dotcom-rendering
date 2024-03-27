@@ -39,6 +39,7 @@ type Props = {
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
 	switches?: Switches;
+	// If the youtube block component is used on a card, we can pass in the image size and position on mobile to get the correct styling for the play icon. If it's not used on a card, we can just pass default values to get the standard large play icon.
 	imageSize?: ImageSizeType;
 	imagePositionOnMobile?: ImagePositionType;
 };
