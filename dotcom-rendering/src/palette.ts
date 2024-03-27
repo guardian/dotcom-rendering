@@ -1018,16 +1018,6 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 
 const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 	switch (design) {
-		// "Clear" styles
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[7];
-		// "Stand-out" styles
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1049,14 +1039,6 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[7];
 			}
-		default:
-			return 'unset';
-	}
-};
-
-const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
-	switch (design) {
-		// "Clear" styles
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
@@ -1064,8 +1046,13 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Timeline:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[60];
-		// "Stand-out" styles
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
+	switch (design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1087,8 +1074,15 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[60];
 			}
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
 		default:
-			return 'unset';
+			return sourcePalette.neutral[60];
 	}
 };
 const avatarLight: PaletteFunction = ({ design, theme }) => {
