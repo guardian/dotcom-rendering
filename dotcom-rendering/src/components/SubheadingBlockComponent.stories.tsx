@@ -101,7 +101,6 @@ export const StandardDisplay = {
 		GlobalStylesDecorator(standardFormat),
 
 		splitTheme([
-			standardFormat,
 			// "Authoritative clear" styles
 			{
 				design: ArticleDesign.Obituary,
@@ -124,6 +123,21 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: ArticleSpecial.SpecialReportAlt,
 			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.SpecialReportAlt,
+			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
 		]),
 	],
 } satisfies Story;
@@ -132,7 +146,6 @@ export const ImmersiveDisplay = {
 	decorators: [
 		GlobalStylesDecorator(immersiveFormat),
 		splitTheme([
-			immersiveFormat,
 			// "Authoritative clear" styles
 			{
 				design: ArticleDesign.Obituary,
@@ -144,6 +157,16 @@ export const ImmersiveDisplay = {
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Opinion,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReportAlt,
 			},
 			{
 				design: ArticleDesign.Comment,
