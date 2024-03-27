@@ -84,10 +84,14 @@ async function* getRows(client: AthenaClient) {
 
   yield* toRow(ResultSet);
 
+  let count = ResultSet?.Rows?.length ?? 0
+
   while (NextToken) {
+	console.info(`Fetched ${count} rows`);
     ({ ResultSet, NextToken } = await client.send(
       new GetQueryResultsCommand({ QueryExecutionId, NextToken }),
     ));
+	count += ResultSet?.Rows?.length ?? 0;
     yield* toRow(ResultSet);
   }
 }
