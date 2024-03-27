@@ -122,6 +122,7 @@ type Props = {
 	sectionName?: string;
 	deeplyRead: TrailTabType;
 	hasPageSkin?: boolean;
+	showTags?: boolean;
 };
 
 export const MostPopularFooterGrid = ({
@@ -129,6 +130,7 @@ export const MostPopularFooterGrid = ({
 	deeplyRead,
 	sectionName = '',
 	hasPageSkin = false,
+	showTags = false,
 }: Props) => {
 	const shortenedMostViewed = mostViewed.trails.slice(0, 10);
 	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 10);
@@ -167,6 +169,8 @@ export const MostPopularFooterGrid = ({
 							ageWarning={trail.ageWarning}
 							cssOverrides={mostViewedOverridesStyle(j)}
 							hasPageSkin={hasPageSkin}
+							showTags={showTags}
+							kickerText={trail.kickerText}
 						/>
 					))}
 				</ol>
@@ -205,6 +209,8 @@ export const MostPopularFooterGrid = ({
 								shortenedMostViewed.length,
 							)}
 							hasPageSkin={hasPageSkin}
+							showTags={showTags}
+							kickerText={trail.kickerText}
 						/>
 					))}
 				</ol>

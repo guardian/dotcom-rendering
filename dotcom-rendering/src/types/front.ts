@@ -392,6 +392,7 @@ export type DCRCollectionType = {
 	href?: string;
 	config: {
 		showDateHeader: boolean;
+		showTags: boolean;
 	};
 	/**
 	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.

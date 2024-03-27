@@ -17,6 +17,7 @@ type Props = {
 	hasPageSkin?: boolean;
 	isFront?: boolean;
 	renderAds?: boolean;
+	showTags: boolean;
 };
 
 export const FrontMostViewed = ({
@@ -29,6 +30,7 @@ export const FrontMostViewed = ({
 	hasPageSkin,
 	isFront,
 	renderAds,
+	showTags = false,
 }: Props) => {
 	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
 	const sectionName = displayName.replace('Most viewed ', '');
@@ -74,6 +76,7 @@ export const FrontMostViewed = ({
 						tabs={tabs}
 						sectionId="Most viewed"
 						hasPageSkin={hasPageSkin}
+						showTags={showTags}
 					/>
 				</Island>
 			) : showMostPopular ? (
@@ -82,12 +85,14 @@ export const FrontMostViewed = ({
 					deeplyRead={deeplyReadType}
 					sectionName="Most popular"
 					hasPageSkin={hasPageSkin}
+					showTags={showTags}
 				/>
 			) : (
 				<MostViewedFooter
 					tabs={tabs}
 					sectionId="Most viewed"
 					hasPageSkin={hasPageSkin}
+					showTags={showTags}
 				/>
 			)}
 		</MostViewedFooterLayout>

@@ -107,6 +107,7 @@ type Props = {
 	sectionId?: string;
 	selectedColour?: string;
 	hasPageSkin?: boolean;
+	showTags: boolean;
 };
 
 // To avoid having to handle multiple ways of reducing the capitalisation styling
@@ -134,6 +135,7 @@ export const MostViewedFooterGrid = ({
 	sectionId = '',
 	selectedColour = sourcePalette.neutral[0],
 	hasPageSkin = false,
+	showTags = false,
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	/**
@@ -241,6 +243,8 @@ export const MostViewedFooterGrid = ({
 								headlineText={trail.headline}
 								ageWarning={trail.ageWarning}
 								hasPageSkin={hasPageSkin}
+								showTags={showTags}
+								kickerText={trail.kickerText}
 							/>
 						))}
 					</ol>
