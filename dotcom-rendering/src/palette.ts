@@ -18,7 +18,7 @@ import {
 	tabsDarkTheme,
 	tabsThemeDefault,
 } from '@guardian/source-react-components-development-kitchen';
-import { decideDesignToneColourType } from './lib/decideDesignTone';
+import { decideDesignGroupColourType } from './lib/decideDesignGroups';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -1018,8 +1018,8 @@ const headingLineDark: PaletteFunction = (format: ArticleFormat) => {
 };
 
 const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
-	switch (decideDesignToneColourType(design)) {
-		case 'stand-out':
+	switch (decideDesignGroupColourType(design)) {
+		case 'colour:stand-out':
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -1034,15 +1034,15 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[7];
 			}
-		case 'clear':
+		case 'colour:clear':
 		default:
 			return sourcePalette.neutral[7];
 	}
 };
 
 const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
-	switch (decideDesignToneColourType(design)) {
-		case 'stand-out':
+	switch (decideDesignGroupColourType(design)) {
+		case 'colour:stand-out':
 			switch (theme) {
 				case Pillar.News:
 				case Pillar.Opinion:
@@ -1057,7 +1057,7 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[60];
 			}
-		case 'clear':
+		case 'colour:clear':
 		default:
 			return sourcePalette.neutral[60];
 	}

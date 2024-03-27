@@ -47,7 +47,7 @@ type Props = {
 	isRightToLeftLang?: boolean;
 };
 
-const globalH2Styles = () => css`
+const globalH2Styles = css`
 	h2:not([data-ignore='global-h2-styling']) {
 		p + h2 {
 			padding-top: 8px;

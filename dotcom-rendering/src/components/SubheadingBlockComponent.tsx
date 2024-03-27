@@ -5,7 +5,7 @@ import { type FontWeight, from, headline } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations/cjs/source-foundations/src/typography/api';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
-import { decideDesignToneWeighting } from '../lib/decideDesignTone';
+import { decideDesignGroupWeighting } from '../lib/decideDesignGroups';
 import { isElement, parseHtml } from '../lib/domUtils';
 import { palette } from '../palette';
 import { logger } from '../server/lib/logging';
@@ -52,16 +52,16 @@ const getFontStyles = ({
 `;
 
 const getStyles = (format: ArticleFormat) => {
-	switch (decideDesignToneWeighting(format)) {
-		case 'authoritative':
+	switch (decideDesignGroupWeighting(format)) {
+		case 'weighting:authoritative':
 			/** TODO see: https://github.com/guardian/dotcom-rendering/pull/10989.
 			 * The desired font weight is "regular" */
 			return getFontStyles({ format, fontWeight: 'light' });
 
-		case 'neutral':
+		case 'weighting:neutral':
 			return getFontStyles({ format, fontWeight: 'medium' });
 
-		case 'soft':
+		case 'weighting:soft':
 			return getFontStyles({ format, fontWeight: 'bold' });
 	}
 };

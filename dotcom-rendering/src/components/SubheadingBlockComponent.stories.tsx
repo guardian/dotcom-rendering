@@ -10,7 +10,7 @@ import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
 /** Mocking the styles normally inherited via ArticleBody component */
-const GlobalStylesDecorator = (): Decorator => (Story) => (
+const GlobalStylesDecorator: Decorator = (Story) => (
 	<div
 		css={css`
 			h2:not([data-ignore='global-h2-styling']) {
@@ -84,7 +84,7 @@ export default meta;
 
 export const StandardDisplay = {
 	decorators: [
-		GlobalStylesDecorator(),
+		GlobalStylesDecorator,
 		splitTheme([
 			{
 				design: ArticleDesign.Obituary,
@@ -137,15 +137,13 @@ export const StandardDisplay = {
 
 export const ImmersiveDisplay = {
 	decorators: [
-		GlobalStylesDecorator(),
+		GlobalStylesDecorator,
 		splitTheme([
-			// "Authoritative clear" styles
 			{
 				design: ArticleDesign.Obituary,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.News,
 			},
-			// "Authoritative stand-out" styles
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Immersive,

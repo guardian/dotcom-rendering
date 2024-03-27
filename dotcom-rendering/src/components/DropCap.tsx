@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import { fonts, space } from '@guardian/source-foundations';
-import { decideDesignToneWeighting } from '../lib/decideDesignTone';
+import { decideDesignGroupWeighting } from '../lib/decideDesignGroups';
 import { palette } from '../palette';
 
 type Props = {
@@ -22,17 +21,12 @@ const dropCap = css`
 `;
 
 const fontWeight = (format: ArticleFormat) => {
-	// TODO - check letter design
-	if (format.design === ArticleDesign.Letter) {
-		return 200;
-	}
-
-	switch (decideDesignToneWeighting(format)) {
-		case 'authoritative':
+	switch (decideDesignGroupWeighting(format)) {
+		case 'weighting:authoritative':
 			return 300;
-		case 'neutral':
+		case 'weighting:neutral':
 			return 500;
-		case 'soft':
+		case 'weighting:soft':
 		default:
 			return 700;
 	}

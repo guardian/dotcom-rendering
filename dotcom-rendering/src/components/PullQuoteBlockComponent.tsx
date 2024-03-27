@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
 import { from, headline, textSans, until } from '@guardian/source-foundations';
-import { decideDesignToneWeighting } from '../lib/decideDesignTone';
+import { decideDesignGroupWeighting } from '../lib/decideDesignGroups';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
@@ -12,11 +12,11 @@ const pullQuoteCss = css`
 `;
 
 const getFontWeight = (format: ArticleFormat): FontWeight => {
-	switch (decideDesignToneWeighting(format)) {
-		case 'authoritative':
+	switch (decideDesignGroupWeighting(format)) {
+		case 'weighting:authoritative':
 			return 'regular';
-		case 'neutral':
-		case 'soft':
+		case 'weighting:neutral':
+		case 'weighting:soft':
 			return 'medium';
 	}
 };
@@ -29,7 +29,10 @@ const fontCss = (role: string, format: ArticleFormat) => {
 	}
 
 	const fontWeight = getFontWeight(format);
-	const fontScaleArgs: FontScaleArgs = { fontWeight, lineHeight: 'tight' };
+	const fontScaleArgs = {
+		fontWeight,
+		lineHeight: 'tight',
+	} satisfies FontScaleArgs;
 
 	switch (role) {
 		case 'showcase': {
