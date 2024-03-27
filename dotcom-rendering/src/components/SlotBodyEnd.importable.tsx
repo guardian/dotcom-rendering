@@ -159,6 +159,10 @@ export const SlotBodyEnd = ({
 		(abTestsApi?.isUserInVariant('MpuWhenNoEpic', 'variant') &&
 			countryCode === 'GB') ??
 		false;
+	const userIsInBlockSupporterRevenueTest = abTestsApi?.isUserInVariant(
+		'BlockSupporterRevenueMessagingSport',
+		'variant',
+	);
 
 	const showArticleEndSlot =
 		renderAds &&
@@ -211,11 +215,23 @@ export const SlotBodyEnd = ({
 			name: 'slotBodyEnd',
 		};
 
-		pickMessage(epicConfig, renderingTarget)
-			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
-			.catch((e) =>
-				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
-			);
+		const shouldRemoveEpic =
+			userIsInBlockSupporterRevenueTest &&
+			(sectionId === 'sport' || sectionId === 'football');
+
+		if (!shouldRemoveEpic) {
+			pickMessage(epicConfig, renderingTarget)
+				.then((PickedEpic: () => MaybeFC) =>
+					setSelectedEpic(PickedEpic),
+				)
+				.catch((e) =>
+					console.error(
+						`SlotBodyEnd pickMessage - error: ${String(e)}`,
+					),
+				);
+		} else {
+			setSelectedEpic(null);
+		}
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount, browserId]);
 
 	useEffect(() => {
