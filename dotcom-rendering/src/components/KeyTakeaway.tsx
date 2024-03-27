@@ -15,7 +15,7 @@ const headingStyles = (display: ArticleDisplay): SerializedStyles => css`
 	${display === ArticleDisplay.Immersive
 		? headline.medium({ fontWeight: 'light' })
 		: headline.xxsmall({ fontWeight: 'bold' })};
-	padding: 2px 0px;
+	padding: 2px 0;
 `;
 
 const headingIndexStyles = css`
@@ -24,7 +24,7 @@ const headingIndexStyles = css`
 
 const headingLineStyles = css`
 	width: 140px;
-	margin: 0px;
+	margin: 0;
 	border: none;
 	border-top: 4px solid ${palette('--heading-line')};
 `;
@@ -89,6 +89,7 @@ export const KeyTakeaway = ({
 						editionId={editionId}
 						hideCaption={hideCaption}
 						starRating={starRating}
+						forceDropCap="off"
 					/>
 				))}
 			</li>

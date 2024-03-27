@@ -21,11 +21,13 @@ export type FETagType = {
 		url?: string;
 		webUrl?: string;
 	};
-	pagination?: {
-		currentPage: number;
-		lastPage: number;
-		totalContent: number;
-	};
+	pagination?: FEPagination;
+};
+
+export type FEPagination = {
+	currentPage: number;
+	lastPage: number;
+	totalContent: number;
 };
 
 export type TagType = {

@@ -317,7 +317,6 @@ const mostPopAdStyles = css`
 	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: ${adSizes.mpu.width}px;
 	max-width: ${adSizes.mpu.width}px;
-	margin: 12px auto;
 	text-align: center;
 	${from.tablet} {
 		max-width: 700px;
@@ -325,9 +324,6 @@ const mostPopAdStyles = css`
 	${from.desktop} {
 		width: auto;
 		max-width: ${adSizes.mpu.width}px;
-	}
-	${from.wide} {
-		margin-top: 25px;
 	}
 `;
 

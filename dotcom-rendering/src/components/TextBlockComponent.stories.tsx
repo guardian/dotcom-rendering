@@ -77,7 +77,7 @@ export const DropCap = () => {
 		<div css={containerStyles}>
 			<TextBlockComponent
 				html={html}
-				forceDropCap={true}
+				forceDropCap="on"
 				format={{
 					theme: Pillar.Culture,
 					design: ArticleDesign.Standard,
@@ -104,7 +104,6 @@ export const QuotedDropCap = () => {
 		<div css={containerStyles}>
 			<TextBlockComponent
 				html={quotedHtml}
-				forceDropCap={false}
 				format={{
 					theme: Pillar.Opinion,
 					design: ArticleDesign.Comment,
@@ -131,7 +130,7 @@ export const ShortText = () => {
 		<div css={containerStyles}>
 			<TextBlockComponent
 				html={shortHtml}
-				forceDropCap={true}
+				forceDropCap="on"
 				format={{
 					theme: Pillar.News,
 					design: ArticleDesign.Standard,
@@ -158,7 +157,7 @@ export const NoTags = () => {
 		<div css={containerStyles}>
 			<TextBlockComponent
 				html={differentWrapperTags}
-				forceDropCap={true}
+				forceDropCap="on"
 				format={{
 					theme: Pillar.News,
 					design: ArticleDesign.Standard,
@@ -185,7 +184,6 @@ export const FeatureDropCap = () => {
 		<div css={containerStyles}>
 			<TextBlockComponent
 				html={html}
-				forceDropCap={false}
 				format={{
 					theme: Pillar.Culture,
 					design: ArticleDesign.Feature,
@@ -212,7 +210,7 @@ export const AList = () => {
 		<div css={containerStyles}>
 			<TextBlockComponent
 				html={aListHtml}
-				forceDropCap={true}
+				forceDropCap="on"
 				format={{
 					theme: Pillar.News,
 					design: ArticleDesign.Standard,
@@ -230,7 +228,6 @@ export const BadMarkup = () => {
 		<div css={containerStyles}>
 			<TextBlockComponent
 				html={badMarkup}
-				forceDropCap={false}
 				format={{
 					theme: Pillar.News,
 					design: ArticleDesign.Standard,
@@ -248,7 +245,6 @@ export const SubSupscript = () => {
 		<div css={containerStyles}>
 			<TextBlockComponent
 				html="<p><strong>P<sub>kj</sub> = (1-r<sub>j</sub>)C<sup>kj</sup> + r<sub>j</sub>(C<sub>kj</sub> + q<sub>kj</sub> - p<sub>kj</sub>)</strong></p><p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>"
-				forceDropCap={false}
 				format={{
 					theme: Pillar.News,
 					design: ArticleDesign.Standard,

@@ -54,6 +54,7 @@ describe('calculateApproximateBlockHeight', () => {
 		{
 			_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 			id: '1',
+			elementId: '2',
 			assetId: '',
 			expired: false,
 			mediaTitle: '',

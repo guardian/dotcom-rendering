@@ -8,6 +8,7 @@ import { addRegionIdToSupportUrl } from '@guardian/support-dotcom-components';
 import type {
 	BannerTest,
 	BannerVariant,
+	ContributionFrequency,
 	EpicTest,
 	EpicVariant,
 	TargetingAbTest,
@@ -211,6 +212,16 @@ export const addProfileTrackingParams = (
 	return `${baseUrl}${alreadyHasQueryString ? '&' : '?'}${queryString.join(
 		'&',
 	)}`;
+};
+
+export const addChoiceCardsParams = (
+	url: string,
+	frequency: ContributionFrequency,
+	amount: number | 'other',
+): string => {
+	const newParams = `selected-contribution-type=${frequency}&selected-amount=${amount}`;
+	const alreadyHasQueryString = url.includes('?');
+	return `${url}${alreadyHasQueryString ? '&' : '?'}${newParams}`;
 };
 
 export const isProfileUrl = (baseUrl: string): boolean =>

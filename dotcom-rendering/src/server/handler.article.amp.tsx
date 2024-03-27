@@ -1,6 +1,6 @@
 import { ArticleDesign } from '@guardian/libs';
 import type { RequestHandler } from 'express';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import type { AnalyticsModel } from '../components/Analytics.amp';
 import { AmpArticlePage } from '../components/ArticlePage.amp';
 import { isAmpSupported } from '../components/Elements.amp';

@@ -1,7 +1,7 @@
 import type { BrowserContext, Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { Labs as labsArticle } from '../../fixtures/generated/articles/Labs';
-import { Standard as standardArticle } from '../../fixtures/generated/articles/Standard';
+import { Labs as labsArticle } from '../../fixtures/generated/fe-articles/Labs';
+import { Standard as standardArticle } from '../../fixtures/generated/fe-articles/Standard';
 import {
 	COMPLETE_REGISTRATION_BUTTON,
 	SIGN_IN_INCENTIVES_DIGITAL,

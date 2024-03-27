@@ -4,10 +4,11 @@ import type { CollectionBranding } from './branding';
 import type { CommercialProperties } from './commercial';
 import type { FooterType } from './footer';
 import type { DCRFrontCard, FEFrontCard, FEFrontConfigType } from './front';
-import type { FETagType } from './tag';
+import type { FEPagination, FETagType } from './tag';
 
 export interface FETagPageType {
 	contents: FEFrontCard[];
+	pagination?: FEPagination;
 	nav: FENavType;
 	tags: {
 		tags: FETagType[];

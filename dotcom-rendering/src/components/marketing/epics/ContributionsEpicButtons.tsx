@@ -18,6 +18,7 @@ import { useIsInView } from '../../../lib/useIsInView';
 import type { ChoiceCardSelection } from '../lib/choiceCards';
 import { hasSetReminder } from '../lib/reminders';
 import {
+	addChoiceCardsParams,
 	addRegionIdAndTrackingParamsToSupportUrl,
 	isSupportUrl,
 } from '../lib/tracking';
@@ -182,7 +183,11 @@ export const ContributionsEpicButtons = ({
 		showChoiceCards && choiceCardSelection
 			? {
 					text: cta.text,
-					baseUrl: `${cta.baseUrl}?selected-contribution-type=${choiceCardSelection.frequency}&selected-amount=${choiceCardSelection.amount}`,
+					baseUrl: addChoiceCardsParams(
+						cta.baseUrl,
+						choiceCardSelection.frequency,
+						choiceCardSelection.amount,
+					),
 			  }
 			: cta;
 

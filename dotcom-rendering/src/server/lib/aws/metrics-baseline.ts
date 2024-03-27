@@ -6,18 +6,12 @@ const stage =
 		? process.env.GU_STAGE.toUpperCase()
 		: 'DEV';
 
-const maxHeapMemory = BytesMetric('rendering', stage, 'max-heap-memory');
-const usedHeapMemory = BytesMetric('rendering', stage, 'used-heap-memory');
-const freePhysicalMemory = BytesMetric(
-	'rendering',
-	stage,
-	'free-physical-memory',
-);
-const totalPhysicalMemory = BytesMetric(
-	'rendering',
-	stage,
-	'total-physical-memory',
-);
+const app = process.env.GU_APP ?? 'rendering';
+
+const maxHeapMemory = BytesMetric(app, stage, 'max-heap-memory');
+const usedHeapMemory = BytesMetric(app, stage, 'used-heap-memory');
+const freePhysicalMemory = BytesMetric(app, stage, 'free-physical-memory');
+const totalPhysicalMemory = BytesMetric(app, stage, 'total-physical-memory');
 
 collectAndSendAWSMetrics(
 	maxHeapMemory,

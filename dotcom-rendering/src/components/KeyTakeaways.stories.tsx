@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 const testTextElement: TextBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 	elementId: 'test-text-element-id-1',
-	dropCap: false,
+	dropCap: 'on', // this should be overruled by key takeaway which always sets forceDropCap="off"
 	html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>',
 };
 
@@ -67,17 +67,70 @@ export const AllThemes = {
 	],
 } satisfies Story;
 
+/* TODO reminder to check desktop/mobile font size variations
+ * remove this comment when https://github.com/guardian/dotcom-rendering/issues/9193 complete
+ */
+export const SomeDesignsAndDisplays = {
+	args: AllThemes.args,
+	decorators: [
+		splitTheme([
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Profile,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Lifestyle,
+			},
+		]),
+	],
+} satisfies Story;
+
 export const Images = {
 	args: {
 		...AllThemes.args,
 		keyTakeaways: [
 			{
 				title: 'The first key takeaway',
-				body: [testTextElement, ...images.slice(0, 2)],
+				body: [
+					testTextElement,
+					{ ...images[0], displayCredit: true, role: 'inline' },
+					{ ...images[1], displayCredit: true, role: 'thumbnail' },
+					testTextElement,
+				],
 			},
 			{
 				title: 'The second key takeaway',
-				body: [testTextElement, ...images.slice(2, 3)],
+				body: [
+					testTextElement,
+					{
+						...images[2],
+						displayCredit: true,
+						data: { ...images[2].data, caption: 'Sunset' },
+					},
+				],
 			},
 		],
 	},

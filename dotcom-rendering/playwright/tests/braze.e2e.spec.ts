@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 import { test } from '@playwright/test';
-import { Standard as standardArticle } from '../../fixtures/generated/articles/Standard';
+import { Standard as standardArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { cmpAcceptAll } from '../lib/cmp';
 import { addCookie, clearCookie } from '../lib/cookies';
 import { loadPageNoOkta } from '../lib/load-page';

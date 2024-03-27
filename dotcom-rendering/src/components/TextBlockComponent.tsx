@@ -21,7 +21,7 @@ type Props = {
 	html: string;
 	format: ArticleFormat;
 	isFirstParagraph: boolean;
-	forceDropCap?: boolean;
+	forceDropCap?: 'on' | 'off';
 };
 
 const isLetter = (letter: string) => {
@@ -107,8 +107,9 @@ const shouldShowDropCaps = (
 	html: string,
 	format: ArticleFormat,
 	isFirstParagraph: boolean,
-	forceDropCap?: boolean,
+	forceDropCap?: 'on' | 'off',
 ) => {
+	if (forceDropCap === 'off') return false;
 	const validDropCapFormat = isValidFormatForDropCap(format);
 	// We need to strip any markup from our html string so that we accurately measure
 	// the length that the reader will see. Eg. remove link tag html.
@@ -121,7 +122,7 @@ const shouldShowDropCaps = (
 		// For subsequent blocks of text, we only add a dropcap if a dinkus was inserted
 		// prior to it in the article body (Eg: * * *), causing the forceDropCap flag to
 		// be set
-		if (forceDropCap) return true;
+		if (forceDropCap === 'on') return true;
 	}
 
 	return false;

@@ -208,10 +208,18 @@ export const AdPortals = ({
 			});
 
 			resizeObserver.observe(document.body);
+
+			/**
+			 *  Observe the rightAdPlaceholder which contains most viewed, which may render after the
+			 *  ad portals have been set up (pushing down the ad slots)
+			 **/
+			if (tryRightAligned && rightAdPlaceholder) {
+				resizeObserver.observe(rightAdPlaceholder);
+			}
 		}
 
 		return () => resizeObserver?.disconnect();
-	}, [adPlaceholders]);
+	}, [adPlaceholders, rightAdPlaceholder, tryRightAligned]);
 
 	const handleClickSupportButton = () => {
 		void getAcquisitionsClient()

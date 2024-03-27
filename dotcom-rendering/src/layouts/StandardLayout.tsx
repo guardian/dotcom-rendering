@@ -11,6 +11,7 @@ import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
@@ -23,7 +24,6 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
-import { AffiliateDisclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -707,11 +707,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
 									/>
-									<Hide until="leftCol">
-										{!!article.affiliateLinksDisclaimer && (
-											<AffiliateDisclaimer />
-										)}
-									</Hide>
+									{!!article.affiliateLinksDisclaimer && (
+										<AffiliateDisclaimer />
+									)}
 								</div>
 							)}
 						</GridItem>

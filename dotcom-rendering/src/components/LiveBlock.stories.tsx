@@ -150,6 +150,7 @@ export const Video = () => {
 				assetId: 'XmP56yBy-18',
 				_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 				id: '60606947-4f1f-4343-9bb7-000e91502129',
+				elementId: '70606947-4f1f-4343-9bb7-000e91502129',
 				posterImage: [
 					{
 						url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/2000.jpg',

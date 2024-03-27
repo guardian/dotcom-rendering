@@ -60,6 +60,7 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
+	isInBlockSupporterRevenueMessagingTest: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -158,14 +159,20 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	idApiUrl,
 	signInGateWillShow,
 	asyncArticleCounts,
+	isInBlockSupporterRevenueMessagingTest,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
+
+	const shouldHideBannerForTest =
+		isInBlockSupporterRevenueMessagingTest &&
+		(sectionId === 'sport' || sectionId === 'football');
 
 	if (
 		shouldHideReaderRevenue ||
 		isPaidContent ||
 		isPreview ||
-		signInGateWillShow
+		signInGateWillShow ||
+		shouldHideBannerForTest
 	) {
 		// We never serve Reader Revenue banners in this case
 		return { show: false };
