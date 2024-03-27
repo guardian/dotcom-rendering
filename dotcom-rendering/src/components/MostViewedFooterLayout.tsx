@@ -70,13 +70,13 @@ const frontStyles = (hasPageSkin: boolean) => css`
 
 const adFreeStyles = css`
 	${between.desktop.and.leftCol} {
-		min-width: 962px;
+		min-width: 960px;
 	}
 	${between.leftCol.and.wide} {
 		width: 75%;
 	}
 	${from.wide} {
-		min-width: 962px;
+		min-width: 960px;
 	}
 `;
 
@@ -110,15 +110,17 @@ export const MostViewedFooterLayout = ({
 			>
 				{children}
 			</div>
-			<div
-				css={
-					hasPageSkin
-						? advertMarginWithPageSkin
-						: advertMargin(!!isFront, isDeeplyRead)
-				}
-			>
-				{renderAds && <AdSlot position="mostpop" />}
-			</div>
+			{renderAds && (
+				<div
+					css={
+						hasPageSkin
+							? advertMarginWithPageSkin
+							: advertMargin(!!isFront, isDeeplyRead)
+					}
+				>
+					<AdSlot position="mostpop" />
+				</div>
+			)}
 		</div>
 	);
 };
