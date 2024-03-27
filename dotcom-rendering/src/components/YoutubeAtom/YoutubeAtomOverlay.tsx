@@ -150,6 +150,8 @@ export const YoutubeAtomOverlay = ({
 	const isLive = videoCategory === 'live';
 	const dcrPalette = decidePalette(format);
 	const image = overrideImage ?? posterImage;
+	const hidePillOnMobile =
+		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
 	return (
 		<button
@@ -168,7 +170,15 @@ export const YoutubeAtomOverlay = ({
 				/>
 			)}
 			{showPill && (
-				<div css={pillStyles}>
+				<div
+					css={
+						hidePillOnMobile
+							? css`
+									display: none;
+							  `
+							: pillStyles
+					}
+				>
 					{!!videoCategory && (
 						<div css={pillItemStyles}>
 							<div css={[pillTextStyles, isLive && liveStyles]}>
