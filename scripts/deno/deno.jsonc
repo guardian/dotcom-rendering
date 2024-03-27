@@ -4,6 +4,7 @@
 		"lib": ["deno.window"],
 		"strict": true
 	},
+	"unstable": ["temporal"],
 	"fmt": {
 		"useTabs": true,
 		"lineWidth": 80,
