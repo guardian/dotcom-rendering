@@ -53,6 +53,10 @@ const globalH2Styles = (display: ArticleDisplay) => css`
 			? headline.medium({ fontWeight: 'light' })
 			: headline.xxsmall({ fontWeight: 'bold' })};
 	}
+
+	p + h2 {
+		padding-top: 8px;
+	}
 `;
 
 const globalOlStyles = () => css`
