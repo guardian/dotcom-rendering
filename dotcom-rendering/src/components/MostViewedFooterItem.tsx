@@ -85,6 +85,8 @@ type Props = {
 	ageWarning?: string;
 	cssOverrides?: SerializedStyles | SerializedStyles[];
 	hasPageSkin?: boolean;
+	showTags: boolean;
+	kickerText?: string;
 };
 
 export const MostViewedFooterItem = ({
@@ -95,6 +97,8 @@ export const MostViewedFooterItem = ({
 	ageWarning,
 	cssOverrides,
 	hasPageSkin = false,
+	showTags = false,
+	kickerText,
 }: Props) => (
 	<li
 		css={[gridItem(position, hasPageSkin), cssOverrides]}
@@ -124,6 +128,9 @@ export const MostViewedFooterItem = ({
 							showQuotes={
 								format.design === ArticleDesign.Comment ||
 								format.design === ArticleDesign.Letter
+							}
+							kickerText={
+								showTags && kickerText ? kickerText : undefined
 							}
 						/>
 					)}

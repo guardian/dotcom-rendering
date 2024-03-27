@@ -9,6 +9,7 @@ type Props = {
 	variantFromRunnable?: string;
 	sectionId?: string;
 	hasPageSkin?: boolean;
+	showTags?: boolean;
 };
 
 /**
@@ -29,23 +30,23 @@ export const MostViewedFooter = ({
 	sectionId,
 	selectedColour,
 	hasPageSkin = false,
-}: Props) => {
-	return (
-		<div
-			css={css`
-				width: 100%;
-			`}
-			data-testid="mostviewed-footer"
-			data-testid-ab-user-in-variant={abTestCypressDataAttr}
-			data-testid-ab-runnable-test={variantFromRunnable}
-			data-link-name="most popular"
-		>
-			<MostViewedFooterGrid
-				data={tabs}
-				sectionId={sectionId}
-				selectedColour={selectedColour}
-				hasPageSkin={hasPageSkin}
-			/>
-		</div>
-	);
-};
+	showTags = false,
+}: Props) => (
+	<div
+		css={css`
+			width: 100%;
+		`}
+		data-testid="mostviewed-footer"
+		data-testid-ab-user-in-variant={abTestCypressDataAttr}
+		data-testid-ab-runnable-test={variantFromRunnable}
+		data-link-name="most popular"
+	>
+		<MostViewedFooterGrid
+			data={tabs}
+			sectionId={sectionId}
+			selectedColour={selectedColour}
+			hasPageSkin={hasPageSkin}
+			showTags={showTags}
+		/>
+	</div>
+);
