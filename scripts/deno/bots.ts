@@ -5,13 +5,15 @@ import {
   StartQueryExecutionCommand,
 } from "npm:@aws-sdk/client-athena";
 
+const date = Temporal.Now.plainDateISO().subtract(
+  Temporal.Duration.from({ days: 3 }),
+);
+
+console.log("Three days ago:", date.toString());
+
 const client = new AthenaClient({ region: "eu-west-1" });
 
 Deno.env.set("AWS_PROFILE", "frontend");
-
-const date = "2024-03-20";
-
-const [year, month, day] = date.split("-");
 
 const { QueryExecutionId } = await client.send(
   new StartQueryExecutionCommand({
@@ -20,9 +22,9 @@ const { QueryExecutionId } = await client.send(
 	  COUNT (DISTINCT client_ip) distinct_ip_count,
 	  request_user_agent
   FROM fastly_logs.fastly_www_theguardian_com_logs_json_partitioned
-  WHERE year = ${year}
-	  AND month = ${month}
-	  AND day = ${day}
+  WHERE year = ${date.year}
+	  AND month = ${String(date.month).padStart(2, "0")}
+	  AND day = ${String(date.day).padStart(2, "0")}
   GROUP BY request_user_agent
   ORDER BY request_count desc
   LIMIT 100`,
@@ -34,18 +36,24 @@ const { QueryExecutionId } = await client.send(
 
 if (!QueryExecutionId) throw "Could not get an executing ID";
 
-console.info({ QueryExecutionId });
-
 while (true) {
   const { QueryExecution } = await client.send(
     new GetQueryExecutionCommand({ QueryExecutionId }),
   );
 
-  if (QueryExecution?.Status?.State === "SUCCEEDED") break;
+  const state = QueryExecution?.Status?.State;
+  if (state === "SUCCEEDED") {
+    console.info("Finished processing");
+    break;
+  } else if (state === "FAILED") {
+    throw "Executing failed";
+  }
 
-  console.info(QueryExecution?.Status);
+  const delay = state === "RUNNING" ? 2400 : 360;
 
-  await new Promise((resolve) => setTimeout(resolve, 360));
+  console.info(`Currently ${state}, retrying in ${delay}ms`);
+
+  await new Promise((resolve) => setTimeout(resolve, delay));
 }
 
 const { ResultSet } = await client.send(
@@ -59,7 +67,8 @@ const csv =
     Data?.map(({ VarCharValue }) => VarCharValue).join(",\t")
   ).join("\n") ?? "";
 
-console.log("\n\n");
-console.log(csv);
+const filePath = `./${date.toString()}.csv`;
 
-await Deno.writeTextFile(`./${date}.csv`, csv);
+console.log("\nSaved CSV file to:", filePath);
+
+await Deno.writeTextFile(filePath, csv);
