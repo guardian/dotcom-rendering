@@ -134,9 +134,36 @@ export const StandardDisplay = {
 				theme: ArticleSpecial.SpecialReportAlt,
 			},
 			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.SpecialReportAlt,
+			},
+			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
+			},
+			// "Neutral stand-out" styles
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+			// "Soft" stand-out styles
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Culture,
 			},
 		]),
 	],
@@ -173,10 +200,32 @@ export const ImmersiveDisplay = {
 				display: ArticleDisplay.Immersive,
 				theme: ArticleSpecial.Labs,
 			},
+			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.Editorial,
 				display: ArticleDisplay.Immersive,
 				theme: ArticleSpecial.SpecialReportAlt,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReportAlt,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.News,
+			},
+			// "Soft" stand-out styles
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Culture,
 			},
 		]),
 	],
