@@ -93,7 +93,8 @@ async function* getRows(client: AthenaClient) {
   let count = ResultSet?.Rows?.length ?? 0
 
   while (NextToken) {
-	console.info(`Fetched ${count} rows`);
+	// `\r` overwrite the existing line to prevent a long log.
+	await Deno.stdout.write(new TextEncoder().encode(`\rFetched ${count.toLocaleString()} rows`));
     ({ ResultSet, NextToken } = await client.send(
       new GetQueryResultsCommand({ QueryExecutionId, NextToken }),
     ));
