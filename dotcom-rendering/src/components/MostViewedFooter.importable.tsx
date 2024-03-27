@@ -9,7 +9,7 @@ type Props = {
 	variantFromRunnable?: string;
 	sectionId?: string;
 	hasPageSkin?: boolean;
-	showTags?: boolean;
+	showKickers?: boolean;
 };
 
 /**
@@ -30,7 +30,7 @@ export const MostViewedFooter = ({
 	sectionId,
 	selectedColour,
 	hasPageSkin = false,
-	showTags = false,
+	showKickers = false,
 }: Props) => (
 	<div
 		css={css`
@@ -46,7 +46,7 @@ export const MostViewedFooter = ({
 			sectionId={sectionId}
 			selectedColour={selectedColour}
 			hasPageSkin={hasPageSkin}
-			showTags={showTags}
+			showKickers={showKickers}
 		/>
 	</div>
 );
