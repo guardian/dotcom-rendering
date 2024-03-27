@@ -33,7 +33,7 @@ const captionStyle = css`
 	${textSans.xsmall()};
 	line-height: 135%;
 	padding-top: 6px;
-	overflow-wrap: break-all;
+	overflow-wrap: break-word;
 	color: ${palette('--caption-text')};
 `;
 
@@ -259,6 +259,7 @@ export const Caption = ({
 			) : (
 				<CameraIcon format={format} />
 			)}
+
 			{!!captionText && (
 				<span
 					css={captionLink}

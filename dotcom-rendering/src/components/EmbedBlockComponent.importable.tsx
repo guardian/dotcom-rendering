@@ -16,7 +16,7 @@ type Props = {
 
 const emailCaptionStyle = css`
 	${textSans.xxsmall()};
-	word-break: break-all;
+	word-break: break-word;
 	color: ${text.supporting};
 	padding-bottom: ${space[1]}px;
 `;

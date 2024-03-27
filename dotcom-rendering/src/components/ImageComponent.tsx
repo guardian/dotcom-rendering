@@ -418,6 +418,106 @@ export const ImageComponent = ({
 			</div>
 		);
 	}
+	if (format.design === ArticleDesign.Gallery && !isMainMedia) {
+		return (
+			<div
+				css={css`
+					padding-bottom: 38px;
+					${until.leftCol} {
+						display: flex;
+						flex-direction: column-reverse;
+					}
+				`}
+			>
+				<div
+					css={css`
+						${from.leftCol} {
+							float: left;
+							margin-left: -160px;
+							width: 140px;
+						}
+						${from.wide} {
+							float: left;
+							margin-left: -240px;
+							width: 200px;
+						}
+					`}
+				>
+					<Caption
+						captionText={element.data.caption ?? ''}
+						format={format}
+						credit={element.data.credit}
+						displayCredit={element.displayCredit}
+						shouldLimitWidth={shouldLimitWidth}
+						isMainMedia={isMainMedia}
+					/>
+				</div>
+
+				<div
+					id={
+						element.position !== undefined
+							? `img-${element.position}`
+							: ''
+					}
+					css={css`
+						position: relative;
+
+						img {
+							height: 100%;
+							width: 100%;
+							object-fit: cover;
+							${isAvatar && 'border-radius: 50%;'}
+						}
+					`}
+				>
+					{renderingTarget === 'Apps' ? (
+						<Island priority="critical">
+							<AppsLightboxImage
+								elementId={element.elementId}
+								role={role}
+								format={format}
+								master={image.url}
+								alt={element.data.alt ?? ''}
+								width={imageWidth}
+								height={imageHeight}
+								loading={loading}
+								isMainMedia={isMainMedia}
+							/>
+						</Island>
+					) : (
+						<Picture
+							role={role}
+							format={format}
+							master={image.url}
+							alt={element.data.alt ?? ''}
+							width={imageWidth}
+							height={imageHeight}
+							loading={loading}
+							isMainMedia={isMainMedia}
+						/>
+					)}
+
+					{!!title && (
+						<ImageTitle
+							title={title}
+							role={role}
+							palette={palette}
+						/>
+					)}
+
+					{isWeb && !isUndefined(element.position) && (
+						<LightboxLink
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+							position={element.position}
+						/>
+					)}
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<>
