@@ -9,12 +9,12 @@ import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from './Card/components/ImageWrapper';
 import { useConfig } from './ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
-import {
-	ImageSizeType,
-	ImagePositionType,
-} from './Card/components/ImageWrapper';
 
 type Props = {
 	id: string;

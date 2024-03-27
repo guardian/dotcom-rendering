@@ -1,6 +1,6 @@
 import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { isUndefined, type ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import { useCallback, useState } from 'react';
 import type {
 	ImagePositionType,

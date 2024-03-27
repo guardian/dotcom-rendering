@@ -8,13 +8,13 @@ import {
 } from '@guardian/source-foundations';
 import { decidePalette } from '../../lib/decidePalette';
 import type { Palette } from '../../types/palette';
-import { secondsToDuration } from '../MediaDuration';
-import { YoutubeAtomPicture } from './YoutubeAtomPicture';
-import { PlayIcon } from '../Card/components/PlayIcon';
-import {
+import type {
 	ImagePositionType,
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
+import { PlayIcon } from '../Card/components/PlayIcon';
+import { secondsToDuration } from '../MediaDuration';
+import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
 
