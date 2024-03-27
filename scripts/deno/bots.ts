@@ -7,7 +7,10 @@
  * You need Frontend Dev credentials to make the request to Athena.
  *
  * Run with the following command to bypass permission prompts:
- * `deno run --allow-sys=osRelease --allow-env --allow-net=athena.eu-west-1.amazonaws.com --allow-read --allow-write=. ./bots.ts`
+ * `deno run --allow-sys=osRelease --allow-env --allow-net=athena.eu-west-1.amazonaws.com --allow-read --allow-write=. ./bots.ts --date=2024-03-27`
+ *
+ * Note that the selected date should be within the last two weeks,
+ * as older data may not be in the standard storage class.
  */
 
 import {
@@ -17,12 +20,15 @@ import {
   ResultSet,
   StartQueryExecutionCommand,
 } from "npm:@aws-sdk/client-athena";
+import { parseArgs } from "https://deno.land/std@0.207.0/cli/parse_args.ts";
 
-const date = Temporal.Now.plainDateISO().subtract(
-  Temporal.Duration.from({ days: 3 }),
-);
+const flags = parseArgs(Deno.args, {
+	string: ["date"],
+})
 
-console.log("Three days ago:", date.toString());
+const date = Temporal.PlainDate.from(flags.date ?? "")
+
+console.info("Using", date);
 
 const client = new AthenaClient({ region: "eu-west-1" });
 

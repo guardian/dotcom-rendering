@@ -1211,6 +1211,9 @@
     }
   },
   "remote": {
+    "https://deno.land/std@0.207.0/assert/assert.ts": "9a97dad6d98c238938e7540736b826440ad8c1c1e54430ca4c4e623e585607ee",
+    "https://deno.land/std@0.207.0/assert/assertion_error.ts": "4d0bde9b374dfbcbe8ac23f54f567b77024fb67dbb1906a852d67fe050d42f56",
+    "https://deno.land/std@0.207.0/cli/parse_args.ts": "9bea02050b3f302e706871ff87ecfa3ad82cc34249adbe0dcddfaac75bdb48ff",
     "https://deno.land/x/deno_dom@v0.1.22-alpha/build/deno-wasm/deno-wasm.js": "077162a693528034d8ef84b6602e3562db3ce07c15ce2cf547fe76f7ef48f940",
     "https://deno.land/x/deno_dom@v0.1.22-alpha/deno-dom-wasm.ts": "bfd999a493a6974e9fca4d331bee03bfb68cfc600c662cd0b48b21d67a2a8ba0",
     "https://deno.land/x/deno_dom@v0.1.22-alpha/src/api.ts": "cddf406ac2bb73b3b92b1c587acf0a74519884a6e6798b2dbebe9a7ba8842d35",
