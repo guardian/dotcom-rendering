@@ -30,7 +30,7 @@ const fixedWidthsPageSkin = css`
 `;
 
 const advertMargin = (hasHideButton: boolean, isDeeplyRead: boolean) => css`
-	margin-top: 10px;
+	margin-top: 9px;
 	${from.desktop} {
 		margin-top: 0;
 		margin-left: 10px;
