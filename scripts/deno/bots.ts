@@ -27,7 +27,7 @@ const { QueryExecutionId } = await client.send(
 	  AND day = ${String(date.day).padStart(2, "0")}
   GROUP BY request_user_agent
   ORDER BY request_count desc
-  LIMIT 100`,
+  LIMIT ${100_000}`,
     ResultReuseConfiguration: {
       ResultReuseByAgeConfiguration: { Enabled: true, MaxAgeInMinutes: 60 },
     },
