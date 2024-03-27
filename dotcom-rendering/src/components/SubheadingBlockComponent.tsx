@@ -1,6 +1,11 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import { type FontWeight, from, headline } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations/cjs/source-foundations/src/typography/api';
 import type { ReactNode } from 'react';
@@ -71,6 +76,16 @@ const getStyles = (format: ArticleFormat) => {
 		case ArticleDesign.Analysis:
 			return getFontStyles({ format, fontWeight: 'medium' });
 
+		// "Soft" styles
+		case ArticleDesign.Feature: {
+			// News features have "neutral" styles, other features are "soft"
+			const fontWeight = format.theme === Pillar.News ? 'medium' : 'bold';
+			return getFontStyles({ format, fontWeight });
+		}
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			return getFontStyles({ format, fontWeight: 'bold' });
 		default:
 			// ! Not implemented
 			return css``; // TODO
@@ -91,6 +106,11 @@ const ignoreGlobalH2Styling = (format: ArticleFormat) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
+		// "Soft" styles
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
 			return true;
 
 		default:
