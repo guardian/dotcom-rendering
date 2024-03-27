@@ -436,7 +436,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										hasPageSkin={hasPageSkin}
 										isFront={true}
 										renderAds={renderAds}
-										showTags={collection.config.showTags}
+										showKickers={
+											collection.config.showTags ||
+											collection.config.showSections
+										}
 									/>
 								</FrontSection>
 								{decideMerchHighAndMobileAdSlots(

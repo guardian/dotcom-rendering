@@ -126,6 +126,7 @@ export const enhanceCollections = ({
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 				showTags: collection.config.showTags,
+				showSections: collection.config.showSections,
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
