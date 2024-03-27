@@ -14,6 +14,7 @@ import {
   AthenaClient,
   GetQueryExecutionCommand,
   GetQueryResultsCommand,
+  ResultSet,
   StartQueryExecutionCommand,
 } from "npm:@aws-sdk/client-athena";
 
@@ -68,19 +69,33 @@ while (true) {
   await new Promise((resolve) => setTimeout(resolve, delay));
 }
 
-const { ResultSet } = await client.send(
-  new GetQueryResultsCommand({ QueryExecutionId }),
-);
-
-if (!ResultSet) throw "Could not get a result";
-
-const csv =
-  ResultSet.Rows?.map(({ Data }) =>
-    Data?.map(({ VarCharValue }) => VarCharValue).join("\t")
-  ).join("\n") ?? "";
+const csv = await Array.fromAsync(getRows(client));
 
 const filePath = `./${date.toString()}.csv`;
 
 console.log("\nSaved CSV file to:", filePath);
 
-await Deno.writeTextFile(filePath, csv);
+await Deno.writeTextFile(filePath, csv.map((row) => row.join("\t")).join("\n"));
+
+async function* getRows(client: AthenaClient) {
+  let { ResultSet, NextToken } = await client.send(
+    new GetQueryResultsCommand({ QueryExecutionId }),
+  );
+
+  yield* toRow(ResultSet);
+
+  while (NextToken) {
+    ({ ResultSet, NextToken } = await client.send(
+      new GetQueryResultsCommand({ QueryExecutionId, NextToken }),
+    ));
+    yield* toRow(ResultSet);
+  }
+}
+
+function toRow(ResultSet?: ResultSet) {
+  return ResultSet?.Rows?.map(({ Data }) =>
+    Data?.flatMap(({ VarCharValue }) =>
+      typeof VarCharValue === "string" ? [VarCharValue] : []
+    ) ?? []
+  ) ?? [];
+}
