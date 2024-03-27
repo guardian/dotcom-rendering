@@ -1,4 +1,5 @@
 import type {
+	DCRSectionedTimelineBlockElement,
 	DCRTimelineBlockElement,
 	DCRTimelineEvent,
 	DCRTimelineSection,
@@ -54,7 +55,7 @@ const enhanceTimelineSection =
 const enhanceTimelineBlockElement = (
 	element: FETimelineBlockElement,
 	elementsEnhancer: ElementsEnhancer,
-): DCRTimelineBlockElement[] => {
+): DCRTimelineBlockElement[] | DCRSectionedTimelineBlockElement[] => {
 	const [firstSection, ...otherSections] = element.sections;
 
 	// A timeline must have some content! If it doesn't we drop it.
@@ -70,7 +71,6 @@ const enhanceTimelineBlockElement = (
 		return [
 			{
 				_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
-				timelineKind: 'flat',
 				events: firstSection.events.flatMap(
 					enhanceTimelineEvent(elementsEnhancer),
 				),
@@ -80,8 +80,7 @@ const enhanceTimelineBlockElement = (
 
 	return [
 		{
-			_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
-			timelineKind: 'sectioned',
+			_type: 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
 			sections: element.sections.flatMap(
 				enhanceTimelineSection(elementsEnhancer),
 			),

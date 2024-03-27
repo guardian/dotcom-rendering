@@ -501,17 +501,15 @@ export type DCRTimelineSection = {
 	events: DCRTimelineEvent[];
 };
 
-export type DCRTimelineBlockElement =
-	| {
-			_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement';
-			timelineKind: 'flat';
-			events: DCRTimelineEvent[];
-	  }
-	| {
-			_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement';
-			timelineKind: 'sectioned';
-			sections: DCRTimelineSection[];
-	  };
+export type DCRTimelineBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement';
+	events: DCRTimelineEvent[];
+};
+
+export type DCRSectionedTimelineBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement';
+	sections: DCRTimelineSection[];
+};
 
 export type FETimelineEvent = {
 	title?: string;
@@ -745,6 +743,7 @@ export type FEElement =
 	| TimelineAtomBlockElement
 	| FETimelineBlockElement
 	| DCRTimelineBlockElement
+	| DCRSectionedTimelineBlockElement
 	| TweetBlockElement
 	| VideoBlockElement
 	| VideoFacebookBlockElement

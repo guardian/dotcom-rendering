@@ -229,10 +229,6 @@
                             "type": "string",
                             "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
                         },
-                        "timelineKind": {
-                            "type": "string",
-                            "const": "flat"
-                        },
                         "events": {
                             "type": "array",
                             "items": {
@@ -266,8 +262,7 @@
                     },
                     "required": [
                         "_type",
-                        "events",
-                        "timelineKind"
+                        "events"
                     ]
                 },
                 {
@@ -275,11 +270,7 @@
                     "properties": {
                         "_type": {
                             "type": "string",
-                            "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
-                        },
-                        "timelineKind": {
-                            "type": "string",
-                            "const": "sectioned"
+                            "const": "model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement"
                         },
                         "sections": {
                             "type": "array",
@@ -329,8 +320,7 @@
                     },
                     "required": [
                         "_type",
-                        "sections",
-                        "timelineKind"
+                        "sections"
                     ]
                 },
                 {
