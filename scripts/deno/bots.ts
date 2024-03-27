@@ -1,3 +1,15 @@
+/**
+ * @file
+ *
+ * This script is used to generate reports of the most frequent user agents
+ * making request to the Guardian’s website, using the JSON logs from Fastly.
+ *
+ * You need Frontend Dev credentials to make the request to Athena.
+ *
+ * Run with the following command to bypass permission prompts:
+ * `deno run --allow-sys=osRelease --allow-env --allow-net=athena.eu-west-1.amazonaws.com --allow-read --allow-write=. ./bots.ts`
+ */
+
 import {
   AthenaClient,
   GetQueryExecutionCommand,
@@ -64,7 +76,7 @@ if (!ResultSet) throw "Could not get a result";
 
 const csv =
   ResultSet.Rows?.map(({ Data }) =>
-    Data?.map(({ VarCharValue }) => VarCharValue).join(",\t")
+    Data?.map(({ VarCharValue }) => VarCharValue).join("\t")
   ).join("\n") ?? "";
 
 const filePath = `./${date.toString()}.csv`;
