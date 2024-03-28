@@ -75,6 +75,8 @@ export const NoConsent = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -105,6 +107,8 @@ export const NoOverlay = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -141,6 +145,8 @@ export const WithOverrideImage = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -176,6 +182,8 @@ export const WithPosterImage = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -212,6 +220,8 @@ export const WithOverlayAndPosterImage = (): JSX.Element => {
 				adTargeting={adTargeting}
 				kicker="Breaking News"
 				showTextOverlay={true}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -247,6 +257,8 @@ export const GiveConsent = (): JSX.Element => {
 					imaEnabled={false}
 					abTestParticipations={{}}
 					adTargeting={adTargeting}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</div>
 		</>
@@ -281,6 +293,8 @@ export const Sticky = (): JSX.Element => {
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
 				shouldPauseOutOfView={true}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<div style={{ height: '1000px' }}></div>
 		</div>
@@ -314,6 +328,8 @@ export const StickyMainMedia = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<div style={{ height: '1000px' }}></div>
 		</div>
@@ -348,6 +364,8 @@ export const DuplicateVideos = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<br />
 			<YoutubeAtom
@@ -370,6 +388,8 @@ export const DuplicateVideos = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -410,6 +430,8 @@ export const MultipleStickyVideos = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<YoutubeAtom
 				index={456}
@@ -433,6 +455,8 @@ export const MultipleStickyVideos = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<YoutubeAtom
 				index={789}
@@ -456,6 +480,8 @@ export const MultipleStickyVideos = (): JSX.Element => {
 				imaEnabled={false}
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -492,6 +518,8 @@ export const PausesOffscreen = (): JSX.Element => {
 				abTestParticipations={{}}
 				adTargeting={adTargeting}
 				shouldPauseOutOfView={true}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<div style={{ height: '1000px' }}></div>
 			<p>It stopped playing!</p>
@@ -526,6 +554,8 @@ export const NoConsentWithIma = (): JSX.Element => {
 				isMainMedia={false}
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -555,6 +585,8 @@ export const AdFreeWithIma = (): JSX.Element => {
 				isMainMedia={false}
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -585,6 +617,8 @@ export const NoOverlayWithIma = (): JSX.Element => {
 				title="Rayshard Brooks: US justice system treats us like 'animals'"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -614,6 +648,8 @@ export const WithOverrideImageWithIma = (): JSX.Element => {
 				title="How to stop the spread of coronavirus"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -645,6 +681,8 @@ export const WithPosterImageWithIma = (): JSX.Element => {
 				title="How Donald Trump’s broken promises failed Ohio | Anywhere but Washington"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -677,6 +715,8 @@ export const WithOverlayAndPosterImageWithIma = (): JSX.Element => {
 				title="How Donald Trump’s broken promises failed Ohio"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -711,6 +751,8 @@ export const GiveConsentWithIma = (): JSX.Element => {
 					title="How to stop the spread of coronavirus"
 					imaEnabled={true}
 					abTestParticipations={{}}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</div>
 		</>
@@ -744,6 +786,8 @@ export const StickyWithIma = (): JSX.Element => {
 				title="Rayshard Brooks: US justice system treats us like 'animals'"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<div style={{ height: '1000px' }}></div>
 		</div>
@@ -777,6 +821,8 @@ export const StickyMainMediaWithIma = (): JSX.Element => {
 				title="Rayshard Brooks: US justice system treats us like 'animals'"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<div style={{ height: '1000px' }}></div>
 		</div>
@@ -806,6 +852,8 @@ export const DuplicateVideosWithIma = (): JSX.Element => {
 				shouldStick={true}
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<br />
 			<YoutubeAtom
@@ -828,6 +876,8 @@ export const DuplicateVideosWithIma = (): JSX.Element => {
 				shouldStick={true}
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);
@@ -862,6 +912,8 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 				title="Rayshard Brooks: US justice system treats us like 'animals'"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<YoutubeAtom
 				index={456}
@@ -885,6 +937,8 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 				title="Rayshard Brooks: US justice system treats us like 'animals'"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 			<YoutubeAtom
 				index={789}
@@ -908,6 +962,8 @@ export const MultipleStickyVideosWithIma = (): JSX.Element => {
 				title="Rayshard Brooks: US justice system treats us like 'animals'"
 				imaEnabled={true}
 				abTestParticipations={{}}
+				imagePositionOnMobile="none"
+				imageSize="large"
 			/>
 		</div>
 	);

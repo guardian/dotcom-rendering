@@ -436,6 +436,7 @@ export const Card = ({
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
+						isPlayableMediaCard={!!isPlayableMediaCard}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow
@@ -502,6 +503,10 @@ export const Card = ({
 													containerType ===
 													'fixed/video'
 												}
+												imagePositionOnMobile={
+													imagePositionOnMobile
+												}
+												imageSize={imageSize}
 											/>
 										</Island>
 									</div>
