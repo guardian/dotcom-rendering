@@ -53,6 +53,11 @@ const getFontStyles = ({
 	${from.tablet} {
 		padding-bottom: 4px;
 	}
+
+	/* We don't allow additional font weight inside h2 tags */
+	strong {
+		font-weight: inherit;
+	}
 `;
 
 const getStyles = (format: ArticleFormat) => {
