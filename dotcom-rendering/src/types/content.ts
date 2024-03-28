@@ -414,7 +414,7 @@ interface PullquoteBlockElement {
 	_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
 	elementId: string;
 	html?: string;
-	role: string;
+	role: RoleType;
 	attribution?: string;
 	isThirdPartyTracking?: boolean;
 }

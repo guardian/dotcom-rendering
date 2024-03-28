@@ -2792,7 +2792,7 @@
                     "type": "string"
                 },
                 "role": {
-                    "type": "string"
+                    "$ref": "#/definitions/RoleType"
                 },
                 "attribution": {
                     "type": "string"
