@@ -2,16 +2,16 @@ import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import { useCallback, useState } from 'react';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from '../Card/components/ImageWrapper';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import type { VideoCategory } from './YoutubeAtomOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
 import { YoutubeAtomPlaceholder } from './YoutubeAtomPlaceholder';
 import { YoutubeAtomPlayer } from './YoutubeAtomPlayer';
 import { YoutubeAtomSticky } from './YoutubeAtomSticky';
-import {
-	ImageSizeType,
-	ImagePositionType,
-} from '../Card/components/ImageWrapper';
 
 export type VideoEventKey =
 	| 'play'

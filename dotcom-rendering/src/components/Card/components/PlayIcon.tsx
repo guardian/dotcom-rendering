@@ -17,7 +17,16 @@ const iconWrapperStyles = css`
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	margin-top: -20px;
+	margin-left: -20px;
+`;
+
+const iconPulseStyles = css`
+	:focus,
+	:hover {
+		transform: scale(1.15);
+		transition-duration: 300ms;
+	}
 `;
 
 const iconStyles = (
@@ -71,12 +80,14 @@ const getIconSizeOnMobile = (imagePositionOnMobile: ImagePositionType) =>
 export const PlayIcon = ({
 	imageSize,
 	imagePositionOnMobile,
+	isPlayableMediaCard,
 }: {
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
+	isPlayableMediaCard: boolean;
 }) => {
 	return (
-		<div css={iconWrapperStyles}>
+		<div css={[iconWrapperStyles, isPlayableMediaCard && iconPulseStyles]}>
 			<span
 				css={[
 					iconStyles(

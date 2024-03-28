@@ -8,13 +8,13 @@ import {
 } from '@guardian/source-foundations';
 import { decidePalette } from '../../lib/decidePalette';
 import type { Palette } from '../../types/palette';
-import { secondsToDuration } from '../MediaDuration';
-import { YoutubeAtomPicture } from './YoutubeAtomPicture';
-import { PlayIcon } from '../Card/components/PlayIcon';
-import {
+import type {
 	ImagePositionType,
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
+import { PlayIcon } from '../Card/components/PlayIcon';
+import { secondsToDuration } from '../MediaDuration';
+import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
 export type VideoCategory = 'live' | 'documentary' | 'explainer';
 
@@ -150,6 +150,8 @@ export const YoutubeAtomOverlay = ({
 	const isLive = videoCategory === 'live';
 	const dcrPalette = decidePalette(format);
 	const image = overrideImage ?? posterImage;
+	const hidePillOnMobile =
+		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
 	return (
 		<button
@@ -168,7 +170,15 @@ export const YoutubeAtomOverlay = ({
 				/>
 			)}
 			{showPill && (
-				<div css={pillStyles}>
+				<div
+					css={
+						hidePillOnMobile
+							? css`
+									display: none;
+							  `
+							: pillStyles
+					}
+				>
 					{!!videoCategory && (
 						<div css={pillItemStyles}>
 							<div css={[pillTextStyles, isLive && liveStyles]}>
