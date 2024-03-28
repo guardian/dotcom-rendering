@@ -36,7 +36,6 @@ import { YoutubeBlockComponent } from './YoutubeBlockComponent.amp';
 const AMP_SUPPORTED_ELEMENTS = [
 	'model.dotcomrendering.pageElements.AudioAtomBlockElement',
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-	'model.dotcomrendering.pageElements.ChartAtomBlockElement',
 	'model.dotcomrendering.pageElements.CommentBlockElement',
 	'model.dotcomrendering.pageElements.ContentAtomBlockElement',
 	'model.dotcomrendering.pageElements.DisclaimerBlockElement',
@@ -46,7 +45,6 @@ const AMP_SUPPORTED_ELEMENTS = [
 	'model.dotcomrendering.pageElements.GuideAtomBlockElement',
 	'model.dotcomrendering.pageElements.GuVideoBlockElement',
 	'model.dotcomrendering.pageElements.ImageBlockElement',
-	'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 	// We do not support InteractiveBlockElement's when they are mandatory
 	// 'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
