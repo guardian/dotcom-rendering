@@ -11,10 +11,7 @@ const sizes = {
 } as const satisfies Record<string, { button: number; icon: number }>;
 
 const iconPulseStyles = css`
-	:focus {
-		transform: scale(1.15);
-		transition-duration: 300ms;
-	}
+	:focus,
 	:hover {
 		transform: scale(1.15);
 		transition-duration: 300ms;
