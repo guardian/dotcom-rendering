@@ -5114,6 +5114,12 @@ const discussionCommentUnderlineLight: PaletteFunction = () =>
 const discussionCommentUnderlineDark: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[86], 0.5);
 
+const timelineEventBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const timelineEventBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
 // ----- Palette ----- //
 
 /**
@@ -6098,6 +6104,10 @@ const paletteColours = {
 	'--affiliate-disclaimer-background-hover': {
 		light: affiliateDisclaimerBackgroundHoverLight,
 		dark: affiliateDisclaimerBackgroundHoverDark,
+	},
+	'--timeline-event-border': {
+		light: timelineEventBorderLight,
+		dark: timelineEventBorderDark,
 	},
 } satisfies PaletteColours;
 
