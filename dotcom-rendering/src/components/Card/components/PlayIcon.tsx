@@ -13,18 +13,17 @@ const sizes = {
 } as const satisfies Record<string, { button: number; icon: number }>;
 
 const iconWrapperStyles = css`
-	display: flex; /* Fixes the div mis-sizing itself */
+	display: flex;
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-top: -20px;
-	margin-left: -20px;
+	transform: translate(-50%, -50%);
 `;
 
 const iconPulseStyles = css`
 	:focus,
 	:hover {
-		transform: scale(1.15);
+		transform: translate(-50%, -50%) scale(1.15);
 		transition-duration: 300ms;
 	}
 `;
@@ -62,13 +61,12 @@ const iconStyles = (
 const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
 	switch (imageSize) {
 		case 'jumbo':
-			return 'xlarge';
 		case 'large':
 		case 'carousel':
 			return 'large';
 		case 'medium':
 		case 'small':
-			return imageSize;
+			return 'small';
 	}
 };
 
