@@ -44,28 +44,28 @@ const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const subheadingHtmlStrings = [
+	'<h2>Basic subheading</h2>',
+	'<h2>Subheading with <strong>strong</strong> tags</h2>',
+	"<h2>Subheading <a href='/'>with anchor</a></h2>",
+	'<h2>Subheading with HTML comment<!-- HTML comment--></h2>',
+	'Subheading text only (no HTML)',
+];
+
 const meta = {
 	component: SubheadingBlockComponent,
 	title: 'Components/SubheadingBlockComponent',
 	render: (args) => {
 		return (
 			<StoryWrapper>
-				<SubheadingBlockComponent
-					format={args.format}
-					html="<h2>Basic subheading</h2>"
-				/>
-				<SubheadingBlockComponent
-					format={args.format}
-					html="<h2>Subheading <a href='/'>with anchor</a></h2>"
-				/>
-				<SubheadingBlockComponent
-					format={args.format}
-					html="<h2>Subheading with HTML comment<!-- HTML comment--></h2>"
-				/>
-				<SubheadingBlockComponent
-					format={args.format}
-					html="Subheading text only (no HTML)"
-				/>
+				{subheadingHtmlStrings.map((html, index) => (
+					<SubheadingBlockComponent
+						// eslint-disable-next-line react/no-array-index-key -- ignore for Story only
+						key={index}
+						format={args.format}
+						html={html}
+					/>
+				))}
 
 				<hr />
 			</StoryWrapper>
