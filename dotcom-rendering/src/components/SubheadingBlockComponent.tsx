@@ -57,7 +57,6 @@ const getFontStyles = ({
 
 const getStyles = (format: ArticleFormat) => {
 	switch (format.design) {
-		// "Authoritative" styles
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -66,7 +65,6 @@ const getStyles = (format: ArticleFormat) => {
 			 * The desired font weight is "regular" */
 			return getFontStyles({ format, fontWeight: 'light' });
 
-		// "Neutral" styles
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
@@ -76,9 +74,7 @@ const getStyles = (format: ArticleFormat) => {
 		case ArticleDesign.Analysis:
 			return getFontStyles({ format, fontWeight: 'medium' });
 
-		// "Soft" styles
 		case ArticleDesign.Feature: {
-			// News features have "neutral" styles, other features are "soft"
 			const fontWeight = format.theme === Pillar.News ? 'medium' : 'bold';
 			return getFontStyles({ format, fontWeight });
 		}
@@ -86,47 +82,10 @@ const getStyles = (format: ArticleFormat) => {
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
 			return getFontStyles({ format, fontWeight: 'bold' });
-		default:
-			// ! Not implemented
-			return css``; // TODO
-	}
-};
-
-const ignoreGlobalH2Styling = (format: ArticleFormat) => {
-	switch (format.design) {
-		// "Authoritative" styles
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
-		// "Neutral" styles
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-		case ArticleDesign.Analysis:
-		// "Soft" styles
-		case ArticleDesign.Feature:
-		case ArticleDesign.Interview:
-		case ArticleDesign.Recipe:
-		case ArticleDesign.Review:
-			return true;
 
 		default:
-			return false;
+			return getFontStyles({ format, fontWeight: 'medium' });
 	}
-};
-
-const getStyleAttributes = (format: ArticleFormat) => {
-	return {
-		css: getStyles(format),
-		/** While working on the new styles for formats, we ignore the global styling in
-		 * ArticleBody.tsx but continue using it for the formats not using new styling yet */
-		...(ignoreGlobalH2Styling(format) && {
-			'data-ignore': 'global-h2-styling',
-		}),
-	};
 };
 
 const buildElementTree =
@@ -152,7 +111,7 @@ const buildElementTree =
 					return (
 						<h2
 							id={attributes.getNamedItem('id')?.value}
-							{...getStyleAttributes(format)}
+							css={getStyles(format)}
 						>
 							{Array.from(node.childNodes).map(
 								buildElementTree(format),
