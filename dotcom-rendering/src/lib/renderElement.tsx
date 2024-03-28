@@ -46,6 +46,7 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
+import { Timeline } from '../components/Timeline';
 import { TimelineAtom } from '../components/TimelineAtom.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
@@ -647,6 +648,28 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
+		case 'model.dotcomrendering.pageElements.DCRTimelineBlockElement':
+		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement':
+			return (
+				<Timeline
+					timeline={element}
+					ArticleElementComponent={getNestedArticleElement({
+						abTests,
+						ajaxUrl,
+						editionId,
+						isAdFreeUser,
+						isMainMedia,
+						isSensitive,
+						pageId,
+						switches,
+						webTitle,
+						host,
+						isPinnedPost,
+						starRating,
+					})}
+					format={format}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			if (switches.enhanceTweets) {
 				return (
@@ -886,5 +909,21 @@ export const RenderArticleElement = ({
 		el
 	);
 };
+
+type ElementLevelPropNames =
+	| 'element'
+	| 'index'
+	| 'forceDropCap'
+	| 'hideCaption'
+	| 'format';
+type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
+type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
+
+export const getNestedArticleElement =
+	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
+		<RenderArticleElement {...articleProps} {...elementProps} />
+	);
+
+export type NestedArticleElement = ReturnType<typeof getNestedArticleElement>;
 
 export type ArticleElementRenderer = typeof RenderArticleElement;

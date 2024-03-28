@@ -1,0 +1,226 @@
+import { css, type SerializedStyles } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
+import { from, headline, space, textSans } from '@guardian/source-foundations';
+import type { NestedArticleElement } from '../lib/renderElement';
+import { palette } from '../palette';
+import type {
+	DCRSectionedTimelineBlockElement,
+	DCRTimelineBlockElement,
+	DCRTimelineEvent,
+	FEElement,
+} from '../types/content';
+import { Heading } from './Heading';
+
+// ----- Helpers ----- //
+
+const hasTitle = (event: DCRTimelineEvent): boolean =>
+	event.title !== undefined && event.title.trim() !== '';
+
+const hasImmersiveRole = (element: FEElement): boolean =>
+	'role' in element && element.role === 'immersive';
+
+// ----- EventHeader ----- //
+
+const smallDateStyles = css`
+	display: block;
+	${textSans.small({ fontWeight: 'bold' })}
+
+	${from.desktop} {
+		${textSans.medium({ fontWeight: 'bold' })}
+	}
+`;
+
+const titleWeight = ({ design }: ArticleFormat): 'bold' | 'medium' => {
+	switch (design) {
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review:
+			return 'bold';
+		default:
+			return 'medium';
+	}
+};
+
+const titleStyles = (format: ArticleFormat): SerializedStyles => css`
+	${headline.xxsmall({ fontWeight: titleWeight(format) })}
+
+	${from.desktop} {
+		${headline.xsmall({ fontWeight: titleWeight(format) })}
+	}
+`;
+
+type EventHeaderProps = {
+	event: DCRTimelineEvent;
+	ArticleElementComponent: NestedArticleElement;
+	sectioned: boolean;
+	smallDates: boolean;
+	format: ArticleFormat;
+};
+
+const EventHeader = ({
+	event,
+	ArticleElementComponent,
+	format,
+	sectioned,
+	smallDates,
+}: EventHeaderProps) => {
+	const heading = (
+		<Heading level={sectioned ? 3 : 2}>
+			<span css={smallDates ? smallDateStyles : titleStyles(format)}>
+				{event.date}
+			</span>
+			{event.title !== undefined ? (
+				<span css={titleStyles(format)}>{event.title}</span>
+			) : null}
+		</Heading>
+	);
+
+	if (event.main !== undefined && hasImmersiveRole(event.main)) {
+		return (
+			<header>
+				<ArticleElementComponent
+					index={0}
+					element={event.main}
+					format={format}
+				/>
+				{heading}
+			</header>
+		);
+	} else if (event.main !== undefined) {
+		return (
+			<header>
+				{heading}
+				<ArticleElementComponent
+					index={0}
+					element={event.main}
+					format={format}
+				/>
+			</header>
+		);
+	} else {
+		return heading;
+	}
+};
+
+// ----- TimelineEvent ----- //
+
+const eventStyles = css`
+	border: 1px solid ${palette('--timeline-event-border')};
+	padding: ${space[1]}px 10px ${space[6]}px 10px;
+	margin-bottom: ${space[5]}px;
+`;
+
+const immersiveMainElementEventStyles = css`
+	padding-top: 0;
+`;
+
+type TimelineEventProps = {
+	event: DCRTimelineEvent;
+	ArticleElementComponent: NestedArticleElement;
+	sectioned: boolean;
+	smallDates: boolean;
+	format: ArticleFormat;
+};
+
+const TimelineEvent = ({
+	event,
+	ArticleElementComponent,
+	sectioned,
+	smallDates,
+	format,
+}: TimelineEventProps) => (
+	<section
+		css={[
+			eventStyles,
+			event.main !== undefined && hasImmersiveRole(event.main)
+				? immersiveMainElementEventStyles
+				: undefined,
+		]}
+	>
+		<EventHeader
+			event={event}
+			ArticleElementComponent={ArticleElementComponent}
+			sectioned={sectioned}
+			smallDates={smallDates}
+			format={format}
+		/>
+		{event.body.map((element, index) => (
+			<ArticleElementComponent
+				// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+				index={index}
+				key={index}
+				element={element}
+				forceDropCap="off"
+				format={format}
+			/>
+		))}
+	</section>
+);
+
+// ----- Timeline ----- //
+
+const sectionTitleStyles = css`
+	${headline.xsmall({ fontWeight: 'medium' })}
+	margin: ${space[8]}px 0 ${space[4]}px;
+`;
+
+type Props = {
+	timeline: DCRTimelineBlockElement | DCRSectionedTimelineBlockElement;
+	ArticleElementComponent: NestedArticleElement;
+	format: ArticleFormat;
+};
+
+export const Timeline = ({
+	timeline,
+	format,
+	ArticleElementComponent,
+}: Props) => {
+	switch (timeline._type) {
+		case 'model.dotcomrendering.pageElements.DCRTimelineBlockElement': {
+			const someEventsHaveTitles = timeline.events.some(hasTitle);
+
+			return (
+				<>
+					{timeline.events.map((event) => (
+						<TimelineEvent
+							event={event}
+							ArticleElementComponent={ArticleElementComponent}
+							sectioned={false}
+							key={event.date}
+							smallDates={someEventsHaveTitles}
+							format={format}
+						/>
+					))}
+				</>
+			);
+		}
+		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement': {
+			const someEventsHaveTitles = timeline.sections.some((section) =>
+				section.events.some(hasTitle),
+			);
+
+			return (
+				<>
+					{timeline.sections.map((section) => (
+						<section key={section.title}>
+							<h2 css={sectionTitleStyles}>{section.title}</h2>
+							{section.events.map((event) => (
+								<TimelineEvent
+									event={event}
+									ArticleElementComponent={
+										ArticleElementComponent
+									}
+									sectioned={true}
+									key={event.date}
+									smallDates={someEventsHaveTitles}
+									format={format}
+								/>
+							))}
+						</section>
+					))}
+				</>
+			);
+		}
+	}
+};
