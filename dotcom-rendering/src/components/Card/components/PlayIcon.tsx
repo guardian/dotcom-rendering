@@ -7,19 +7,8 @@ type PlayButtonSize = keyof typeof sizes;
 
 const sizes = {
 	small: { button: 40, icon: 32 },
-	medium: { button: 80, icon: 72 },
 	large: { button: 80, icon: 72 },
-	xlarge: { button: 80, icon: 72 },
 } as const satisfies Record<string, { button: number; icon: number }>;
-
-const iconWrapperStyles = css`
-	display: flex; /* Fixes the div mis-sizing itself */
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -20px;
-	margin-left: -20px;
-`;
 
 const iconPulseStyles = css`
 	:focus {
@@ -65,13 +54,12 @@ const iconStyles = (
 const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
 	switch (imageSize) {
 		case 'jumbo':
-			return 'xlarge';
 		case 'large':
 		case 'carousel':
 			return 'large';
 		case 'medium':
 		case 'small':
-			return imageSize;
+			return 'small';
 	}
 };
 
