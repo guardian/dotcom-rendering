@@ -1,29 +1,22 @@
 import { css } from '@emotion/react';
+import type { CSSProperties } from 'react';
 
 type Props = {
 	children: React.ReactNode;
-	direction?: 'row' | 'column';
-	justify?: 'space-between' | 'flex-start'; // Extend as required
-	gap?: 'initial' | string;
+	gap?: CSSProperties['gap'];
 };
 
-export const Flex = ({
-	children,
-	direction = 'row',
-	justify = 'space-between',
-	gap = 'initial',
-}: Props) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: ${direction};
-			justify-content: ${justify};
-			gap: ${gap};
-			/* Fixes IE 10/11 bug that collapses this container by default: */
-			/* stylelint-disable-next-line property-no-vendor-prefix */
-			-ms-flex-positive: 1;
-		`}
-	>
+const styles = css`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	/* Fixes IE 10/11 bug that collapses this container by default: */
+	/* stylelint-disable-next-line property-no-vendor-prefix */
+	-ms-flex-positive: 1;
+`;
+
+export const Flex = ({ children, gap }: Props) => (
+	<div css={styles} style={{ gap }}>
 		{children}
 	</div>
 );
