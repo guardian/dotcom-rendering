@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, palette } from '@guardian/source-foundations';
+import type { ThemeIcon } from '@guardian/source-react-components';
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
@@ -22,6 +23,14 @@ const iconStyles = (
 	size: PlayButtonSize,
 	sizeOnMobile: Extract<PlayButtonSize, 'small' | 'large'>,
 ) => css`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -20px;
+	margin-left: -20px;
 	background-color: rgba(18, 18, 18, 0.6);
 	border-radius: 50%;
 	width: ${sizes[sizeOnMobile].button}px;
@@ -31,13 +40,7 @@ const iconStyles = (
 		height: ${sizes[size].button}px;
 	}
 
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
 	svg {
-		/* Visual centering */
-		fill: ${palette.neutral[100]};
 		transform: translateX(1px);
 		width: ${sizes[sizeOnMobile].icon}px;
 		height: ${sizes[sizeOnMobile].icon}px;
@@ -47,6 +50,10 @@ const iconStyles = (
 		}
 	}
 `;
+
+const theme = {
+	fill: palette.neutral[100],
+} satisfies Partial<ThemeIcon>;
 
 const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
 	switch (imageSize) {
@@ -75,17 +82,16 @@ export const PlayIcon = ({
 	isPlayableMediaCard: boolean;
 }) => {
 	return (
-		<div css={[iconWrapperStyles, isPlayableMediaCard && iconPulseStyles]}>
-			<span
-				css={[
-					iconStyles(
-						getIconSizeOnDesktop(imageSize),
-						getIconSizeOnMobile(imagePositionOnMobile),
-					),
-				]}
-			>
-				<SvgMediaControlsPlay />
-			</span>
+		<div
+			css={[
+				iconStyles(
+					getIconSizeOnDesktop(imageSize),
+					getIconSizeOnMobile(imagePositionOnMobile),
+				),
+				isPlayableMediaCard && iconPulseStyles,
+			]}
+		>
+			<SvgMediaControlsPlay theme={theme} />
 		</div>
 	);
 };
