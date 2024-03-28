@@ -81,9 +81,6 @@ type ReducerAccumulator = {
 	prevIsParagraphOrImage: boolean;
 };
 
-/**
- * Inserts advert placeholders
- */
 const insertAdPlaceholders = (elements: FEElement[]): FEElement[] => {
 	const elementsWithReducerContext = elements.reduce(
 		(
