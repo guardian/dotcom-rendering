@@ -1,10 +1,11 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { AppsEpic } from './AppsEpic.importable';
+import { AppsEpic as AppsEpicComponent } from './AppsEpic.importable';
 
-export default {
-	component: AppsEpic,
-	title: 'AppsEpic',
+const meta = {
+	component: AppsEpicComponent,
+	title: 'Components/AppsEpic',
 	decorators: [
 		splitTheme([
 			{
@@ -14,6 +15,10 @@ export default {
 			},
 		]),
 	],
-};
+} satisfies Meta<typeof AppsEpicComponent>;
 
-export const defaultStory = () => <AppsEpic />;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const AppsEpic = {} satisfies Story;

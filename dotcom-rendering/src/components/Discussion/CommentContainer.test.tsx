@@ -78,6 +78,7 @@ describe('CommentContainer', () => {
 				commentBeingRepliedTo={commentBeingRepliedTo}
 				setCommentBeingRepliedTo={mockSetCommentBeingRepliedTo}
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
@@ -123,6 +124,7 @@ describe('CommentContainer', () => {
 				commentBeingRepliedTo={commentBeingRepliedTo}
 				setCommentBeingRepliedTo={mockSetCommentBeingRepliedTo}
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
@@ -173,6 +175,7 @@ describe('CommentContainer', () => {
 				commentBeingRepliedTo={commentBeingRepliedTo}
 				setCommentBeingRepliedTo={mockSetCommentBeingRepliedTo}
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
@@ -218,6 +221,7 @@ describe('CommentContainer', () => {
 				commentBeingRepliedTo={commentBeingRepliedTo}
 				setCommentBeingRepliedTo={mockSetCommentBeingRepliedTo}
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}

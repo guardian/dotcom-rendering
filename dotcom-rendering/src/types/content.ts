@@ -338,6 +338,7 @@ export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
 	listElementType: 'KeyTakeaways' | 'QAndAExplainer';
 	items: ListItem[];
+	elementId: string;
 }
 
 export interface MapBlockElement extends ThirdPartyEmbeddedContent {
@@ -483,12 +484,22 @@ export interface TableBlockElement {
 export interface TextBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement';
 	elementId: string;
-	dropCap?: boolean;
+	dropCap?: 'on' | 'off';
 	html: string;
 }
 
 export interface TimelineBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TimelineBlockElement';
+	elementId: string;
+	id: string;
+	title: string;
+	description?: string;
+	events: TimelineEvent[];
+	role?: RoleType;
+}
+
+export interface TimelineAtomBlockElement {
+	_type: 'model.dotcomrendering.pageElements.TimelineAtomBlockElement';
 	elementId: string;
 	id: string;
 	title: string;
@@ -567,6 +578,7 @@ export interface YoutubeBlockElement {
 	assetId: string;
 	mediaTitle: string;
 	id: string;
+	elementId: string;
 	channelId?: string;
 	duration?: number;
 	posterImage?: {
@@ -697,6 +709,7 @@ export type FEElement =
 	| SubheadingBlockElement
 	| TableBlockElement
 	| TextBlockElement
+	| TimelineAtomBlockElement
 	| TimelineBlockElement
 	| TweetBlockElement
 	| VideoBlockElement

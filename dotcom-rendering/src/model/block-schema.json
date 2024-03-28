@@ -217,6 +217,9 @@
                     "$ref": "#/definitions/TextBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/TimelineAtomBlockElement"
+                },
+                {
                     "$ref": "#/definitions/TimelineBlockElement"
                 },
                 {
@@ -1975,10 +1978,14 @@
                     "items": {
                         "$ref": "#/definitions/ListItem"
                     }
+                },
+                "elementId": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "items",
                 "listElementType"
             ]
@@ -2562,7 +2569,11 @@
                     "type": "string"
                 },
                 "dropCap": {
-                    "type": "boolean"
+                    "enum": [
+                        "off",
+                        "on"
+                    ],
+                    "type": "string"
                 },
                 "html": {
                     "type": "string"
@@ -2574,12 +2585,12 @@
                 "html"
             ]
         },
-        "TimelineBlockElement": {
+        "TimelineAtomBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.TimelineBlockElement"
+                    "const": "model.dotcomrendering.pageElements.TimelineAtomBlockElement"
                 },
                 "elementId": {
                     "type": "string"
@@ -2637,6 +2648,43 @@
                 "date",
                 "title",
                 "unixDate"
+            ]
+        },
+        "TimelineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.TimelineBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TimelineEvent"
+                    }
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "events",
+                "id",
+                "title"
             ]
         },
         "TweetBlockElement": {
@@ -2935,6 +2983,9 @@
                 "id": {
                     "type": "string"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "channelId": {
                     "type": "string"
                 },
@@ -2975,6 +3026,7 @@
             "required": [
                 "_type",
                 "assetId",
+                "elementId",
                 "expired",
                 "id",
                 "mediaTitle"

@@ -11,6 +11,7 @@ type Props = {
 	user?: SignedInUser;
 	comments: Array<CommentType | ReplyType>;
 	onPermalinkClick: (commentId: number) => void;
+	isClosedForRecommendations: boolean;
 };
 
 const columWrapperStyles = css`
@@ -46,7 +47,12 @@ const oneColCommentsStyles = css`
 	}
 `;
 
-export const TopPicks = ({ user, comments, onPermalinkClick }: Props) => {
+export const TopPicks = ({
+	user,
+	comments,
+	onPermalinkClick,
+	isClosedForRecommendations,
+}: Props) => {
 	const leftColComments: Array<CommentType | ReplyType> = [];
 	const rightColComments: Array<CommentType | ReplyType> = [];
 	for (const [index, comment] of comments.entries())
@@ -67,6 +73,9 @@ export const TopPicks = ({ user, comments, onPermalinkClick }: Props) => {
 								comment.userProfile.userId
 							}
 							onPermalinkClick={onPermalinkClick}
+							isClosedForRecommendations={
+								isClosedForRecommendations
+							}
 						/>
 					))}
 				</div>
@@ -81,6 +90,9 @@ export const TopPicks = ({ user, comments, onPermalinkClick }: Props) => {
 								comment.userProfile.userId
 							}
 							onPermalinkClick={onPermalinkClick}
+							isClosedForRecommendations={
+								isClosedForRecommendations
+							}
 						/>
 					))}
 				</div>
@@ -94,6 +106,7 @@ export const TopPicks = ({ user, comments, onPermalinkClick }: Props) => {
 							user?.profile.userId === comment.userProfile.userId
 						}
 						onPermalinkClick={onPermalinkClick}
+						isClosedForRecommendations={isClosedForRecommendations}
 					/>
 				))}
 			</div>

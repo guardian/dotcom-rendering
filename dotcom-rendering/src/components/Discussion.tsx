@@ -136,6 +136,7 @@ export const replaceMatchingCommentResponses =
 type State = {
 	comments: Array<CommentType | ReplyType>;
 	isClosedForComments: boolean;
+	isClosedForRecommendation: boolean;
 	isExpanded: boolean;
 	commentPage: number;
 	commentCount: number | undefined;
@@ -160,6 +161,7 @@ const initialCommentFormState = {
 const initialState: State = {
 	comments: [],
 	isClosedForComments: false,
+	isClosedForRecommendation: false,
 	isExpanded: false,
 	commentPage: 1,
 	commentCount: undefined,
@@ -179,6 +181,7 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				comments: action.comments,
 				isClosedForComments: action.isClosedForComments,
+				isClosedForRecommendation: action.isClosedForRecommendation,
 				commentCount: action.commentCount,
 				topLevelCommentCount: action.topLevelCommentCount,
 				loading: false,
@@ -349,6 +352,7 @@ export const Discussion = ({
 		{
 			comments,
 			isClosedForComments,
+			isClosedForRecommendation,
 			isExpanded,
 			commentPage,
 			filters,
@@ -396,6 +400,8 @@ export const Discussion = ({
 					type: 'commentsLoaded',
 					comments: discussion.comments,
 					isClosedForComments: discussion.isClosedForComments,
+					isClosedForRecommendation:
+						discussion.isClosedForRecommendation,
 					topLevelCommentCount: discussion.topLevelCommentCount,
 					commentCount: discussion.commentCount,
 				});
@@ -487,6 +493,7 @@ export const Discussion = ({
 					isClosedForComments={
 						!!isClosedForComments || !enableDiscussionSwitch
 					}
+					isClosedForRecommendations={!!isClosedForRecommendation}
 					shortUrl={shortUrlId}
 					additionalHeaders={{
 						'D2-X-UID': discussionD2Uid,

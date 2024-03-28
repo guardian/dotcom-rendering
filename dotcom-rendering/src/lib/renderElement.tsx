@@ -1,6 +1,7 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
+import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -27,6 +28,7 @@ import { InteractiveContentsBlockComponent } from '../components/InteractiveCont
 import { InteractiveLayoutAtom } from '../components/InteractiveLayoutAtom';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
+import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
@@ -36,6 +38,7 @@ import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importabl
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtom } from '../components/QandaAtom.importable';
+import { QAndAExplainers } from '../components/QAndAExplainers';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -83,6 +86,7 @@ type Props = {
 	isPinnedPost?: boolean;
 	abTests: ServerSideTests;
 	editionId: EditionId;
+	forceDropCap?: 'on' | 'off';
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -136,7 +140,9 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
+	abTests,
 	editionId,
+	forceDropCap,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -417,6 +423,21 @@ export const renderElement = ({
 					</Island>
 				</div>
 			);
+		case 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement':
+			return (
+				<KeyTakeaways
+					keyTakeaways={element.keyTakeaways}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
@@ -508,6 +529,21 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
+		case 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement':
+			return (
+				<QAndAExplainers
+					qAndAExplainers={element.qAndAExplainers}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return (
 				<>
@@ -593,8 +629,23 @@ export const renderElement = ({
 					isFirstParagraph={index === 0}
 					html={element.html}
 					format={format}
-					forceDropCap={element.dropCap}
+					forceDropCap={
+						forceDropCap !== undefined
+							? forceDropCap
+							: element.dropCap
+					}
 				/>
+			);
+		case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<TimelineAtom
+						id={element.id}
+						title={element.title}
+						events={element.events}
+						description={element.description}
+					/>
+				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return (
@@ -750,11 +801,13 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
+		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement': {
+			return <AffiliateDisclaimerInline />;
+		}
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
-		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 		default:
 			return <></>;
 	}
@@ -797,6 +850,7 @@ export const RenderArticleElement = ({
 	isPinnedPost,
 	abTests,
 	editionId,
+	forceDropCap,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -817,6 +871,7 @@ export const RenderArticleElement = ({
 		isPinnedPost,
 		abTests,
 		editionId,
+		forceDropCap,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
@@ -842,3 +897,5 @@ export const RenderArticleElement = ({
 		el
 	);
 };
+
+export type ArticleElementRenderer = typeof RenderArticleElement;

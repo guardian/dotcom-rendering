@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable no-console -- script */
+/* eslint-disable @typescript-eslint/unbound-method -- path.resolve */
 
 const fs = require('node:fs/promises');
 const { resolve } = require('node:path');
@@ -146,12 +147,12 @@ const HEADER = `/**
 const requests = articles.map((article) => {
 	return fetch(`${article.url}.json?dcr`)
 		.then((res) => res.json())
-		.then((json) => {
+		.then((frontendJson) => {
 			// Override config
-			json.config = { ...config, ...configOverrides };
+			frontendJson.config = { ...config, ...configOverrides };
 			// Override switches
-			json.config.switches = {
-				...json.config.switches,
+			frontendJson.config.switches = {
+				...frontendJson.config.switches,
 				...switchOverrides,
 			};
 
@@ -159,8 +160,8 @@ const requests = articles.map((article) => {
 			// TODO: Remove this once we are fully typing the config property
 			// and no longer need to use a fixed `config.js` object to replace
 			// the live one
-			if (json.format.theme === 'Labs') {
-				json.config.isPaidContent = true;
+			if (frontendJson.format.theme === 'Labs') {
+				frontendJson.config.isPaidContent = true;
 			}
 
 			// Manual hack for LiveBlog vs DeadBlog
@@ -168,26 +169,46 @@ const requests = articles.map((article) => {
 				article.name === 'Live' ||
 				article.name === 'LiveBlogSingleContributor'
 			) {
-				json.format.design = 'LiveBlogDesign';
+				frontendJson.format.design = 'LiveBlogDesign';
 			}
 
-			const enhancedArticle = enhanceArticleType(json);
+			const dcrArticle = enhanceArticleType(frontendJson);
 
-			// Write the new fixture data
-			const contents = `${HEADER}
+			// Write the new DCR fixture data
+			const dcrContents = `${HEADER}
+				import type { DCRArticle } from '../../../src/types/frontend';
 
-			import type { DCRArticle } from '../../../src/types/frontend';
+				export const ${article.name}: DCRArticle = ${JSON.stringify(
+					dcrArticle,
+					null,
+					4,
+				)}
+			`;
 
-			export const ${article.name}: DCRArticle = ${JSON.stringify(
-				enhancedArticle,
-				null,
-				4,
-			)}`;
-			return fs.writeFile(
-				`${root}/fixtures/generated/articles/${article.name}.ts`,
-				contents,
+			const dcrTypeFile = fs.writeFile(
+				`${root}/fixtures/generated/dcr-articles/${article.name}.ts`,
+				dcrContents,
 				'utf8',
 			);
+
+			// Write the new frontend fixture data
+			const frontendContents = `${HEADER}
+				import type { FEArticleType } from '../../../src/types/frontend';
+
+				export const ${article.name}: FEArticleType = ${JSON.stringify(
+					frontendJson,
+					null,
+					4,
+				)}
+			`;
+
+			const frontendTypeFile = fs.writeFile(
+				`${root}/fixtures/generated/fe-articles/${article.name}.ts`,
+				frontendContents,
+				'utf8',
+			);
+
+			return Promise.all([frontendTypeFile, dcrTypeFile]);
 		})
 		.then(() => `${article.name}.ts`)
 		.catch((err) => {
@@ -331,7 +352,12 @@ Promise.allSettled(requests)
 		}
 
 		console.log('Generation complete, formatting successful fixtures...');
-		execa('prettier', ['./fixtures/**/*', '--write', '--loglevel', 'error'])
+		execa('prettier', [
+			'./fixtures/**/*',
+			'--write',
+			'--log-level',
+			'error',
+		])
 			.then(() => {
 				console.log('✅ Formatting complete.');
 			})

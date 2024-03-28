@@ -62,9 +62,10 @@ export const FrontMostViewed = ({
 
 	return (
 		<MostViewedFooterLayout
-			hasPageSkin={hasPageSkin}
 			isFront={isFront}
 			renderAds={renderAds}
+			hasPageSkin={hasPageSkin}
+			isDeeplyRead={!!deeplyReadType}
 		>
 			{/* We only need hydration if there are multiple tabs */}
 			{showMostViewedTab ? (
