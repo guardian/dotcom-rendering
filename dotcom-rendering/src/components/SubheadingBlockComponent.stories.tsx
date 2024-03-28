@@ -5,42 +5,26 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
-const standardFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
+const globalH2Styles = css`
+	p + h2 {
+		padding-top: 8px;
+	}
+`;
 
-const immersiveFormat = {
-	...standardFormat,
-	display: ArticleDisplay.Immersive,
-};
+const globalStrongStyles = css`
+	strong {
+		font-weight: bold;
+	}
+`;
 
 /** Mocking the styles normally inherited via ArticleBody component */
-const GlobalStylesDecorator =
-	(format: ArticleFormat): Decorator =>
-	(Story) => (
-		<div
-			css={css`
-				h2:not([data-ignore='global-h2-styling']) {
-					${format.display === ArticleDisplay.Immersive
-						? headline.medium({ fontWeight: 'light' })
-						: headline.xxsmall({ fontWeight: 'bold' })};
-				}
-
-				p + h2 {
-					padding-top: 8px;
-				}
-			`}
-		>
-			{Story()}
-		</div>
-	);
+const GlobalStylesDecorator: Decorator = (Story) => (
+	<div css={[globalH2Styles, globalStrongStyles]}>{Story()}</div>
+);
 
 const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -89,7 +73,11 @@ const meta = {
 	},
 	args: {
 		html: '<h2>Subheading</h2>',
-		format: standardFormat,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
 	},
 } satisfies Meta<typeof SubheadingBlockComponent>;
 
@@ -98,16 +86,13 @@ export default meta;
 
 export const StandardDisplay = {
 	decorators: [
-		GlobalStylesDecorator(standardFormat),
-
+		GlobalStylesDecorator,
 		splitTheme([
-			// "Authoritative clear" styles
 			{
 				design: ArticleDesign.Obituary,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.News,
 			},
-			// "Authoritative stand-out" styles
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Standard,
@@ -144,11 +129,20 @@ export const StandardDisplay = {
 				theme: ArticleSpecial.SpecialReportAlt,
 			},
 			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.Labs,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: ArticleSpecial.SpecialReportAlt,
+			},
+			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
 			},
-			// "Neutral stand-out" styles
 			{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
@@ -159,7 +153,21 @@ export const StandardDisplay = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.News,
 			},
-			// "Soft" stand-out styles
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
 			{
 				design: ArticleDesign.Interview,
 				display: ArticleDisplay.Standard,
@@ -171,15 +179,13 @@ export const StandardDisplay = {
 
 export const ImmersiveDisplay = {
 	decorators: [
-		GlobalStylesDecorator(immersiveFormat),
+		GlobalStylesDecorator,
 		splitTheme([
-			// "Authoritative clear" styles
 			{
 				design: ArticleDesign.Obituary,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.News,
 			},
-			// "Authoritative stand-out" styles
 			{
 				design: ArticleDesign.Comment,
 				display: ArticleDisplay.Immersive,
@@ -200,7 +206,16 @@ export const ImmersiveDisplay = {
 				display: ArticleDisplay.Immersive,
 				theme: ArticleSpecial.Labs,
 			},
-			// "Neutral stand-out" styles
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReportAlt,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.Labs,
+			},
 			{
 				design: ArticleDesign.Editorial,
 				display: ArticleDisplay.Immersive,
@@ -221,7 +236,16 @@ export const ImmersiveDisplay = {
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.News,
 			},
-			// "Soft" stand-out styles
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.News,
+			},
 			{
 				design: ArticleDesign.Interview,
 				display: ArticleDisplay.Immersive,

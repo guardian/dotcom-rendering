@@ -22,12 +22,10 @@ const dropCap = css`
 
 const fontWeight = (format: ArticleFormat) => {
 	switch (format.design) {
-		// "Authoritative" designs
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Comment:
 			return 300;
-		// "Neutral" designs
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
@@ -36,9 +34,7 @@ const fontWeight = (format: ArticleFormat) => {
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
 			return 500;
-		// "Soft" designs
 		case ArticleDesign.Feature:
-			// News features have "neutral" styles, other features are "soft"
 			if (format.theme === Pillar.News) {
 				return 500;
 			} else {
@@ -48,10 +44,8 @@ const fontWeight = (format: ArticleFormat) => {
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
 			return 700;
-		case ArticleDesign.Letter:
-			return 200;
 		default:
-			return 700;
+			return 500;
 	}
 };
 
