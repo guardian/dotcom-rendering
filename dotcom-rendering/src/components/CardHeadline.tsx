@@ -76,7 +76,7 @@ const fontStyles = ({
 		case 'tiny':
 			return css`
 				${headline.xxxsmall(options)};
-				font-size: 14px;
+				font-size: 0.875rem;
 			`;
 	}
 };
@@ -150,7 +150,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 		case 'tiny':
 			return css`
 				${textSans.xxsmall()};
-				font-size: 14px;
+				font-size: 0.875rem;
 			`;
 	}
 };
