@@ -113,6 +113,15 @@ function decideLogo(
 	);
 }
 
+const getOphanComponents = (branding: BrandingType) => {
+	const formattedSponsorName = branding.sponsorName.toLowerCase();
+	const componentName = `article-${formattedSponsorName}`;
+	return {
+		ophanComponentName: `labs-logo | ${componentName}`,
+		ophanLinkName: `labs-logo-${componentName}`,
+	};
+};
+
 type Props = {
 	branding: BrandingType;
 	format: ArticleFormat;
@@ -132,6 +141,7 @@ type Props = {
 export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+	const { ophanComponentName, ophanLinkName } = getOphanComponents(branding);
 
 	const { darkModeAvailable } = useConfig();
 
@@ -148,6 +158,8 @@ export const Branding = ({ branding, format }: Props) => {
 					aria-label={`Visit the ${branding.sponsorName} website`}
 					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
 					data-testid="branding-logo"
+					data-component={ophanComponentName}
+					data-link-name={ophanLinkName}
 				>
 					{decideLogo(branding, format, darkModeAvailable)}
 				</a>
