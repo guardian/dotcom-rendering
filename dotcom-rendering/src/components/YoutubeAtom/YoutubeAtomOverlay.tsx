@@ -60,6 +60,11 @@ const overlayStyles = css`
 		transform: translate(-50%, -50%) scale(1.15);
 		transition-duration: 300ms;
 	}
+
+	/* This makes the transition smoother when we stop focusing or hovering the element */
+	.play-icon {
+		transition: transform 300ms;
+	}
 `;
 
 const pillStyles = css`
