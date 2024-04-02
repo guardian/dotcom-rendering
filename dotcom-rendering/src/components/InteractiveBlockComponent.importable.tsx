@@ -107,6 +107,8 @@ const wrapperStyle = ({
 	background-color: ${themePalette('--interactive-block-background')};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
+	display: flex;
+	flex-direction: column-reverse;
 `;
 
 const placeholderLinkStyle = css`
@@ -327,14 +329,14 @@ export const InteractiveBlockComponent = ({
 						</a>
 					</>
 				)}
+				{!!caption && (
+					<Caption
+						captionText={caption}
+						format={format}
+						isMainMedia={isMainMedia}
+					/>
+				)}
 			</figure>
-			{!!caption && (
-				<Caption
-					captionText={caption}
-					format={format}
-					isMainMedia={isMainMedia}
-				/>
-			)}
 		</>
 	);
 };
