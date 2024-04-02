@@ -20,18 +20,18 @@ const determineSize = (size: RatingSizeType) => {
 			`;
 		case 'medium':
 			return css`
-				padding: 1px;
+				padding: 2px;
 				svg {
-					width: 16px;
-					height: 16px;
+					width: 15px;
+					height: 15px;
 				}
 			`;
 		case 'large':
 			return css`
 				padding: 2px 1px 2px 2px;
 				svg {
-					width: 20px;
-					height: 20px;
+					width: 18px;
+					height: 18px;
 				}
 			`;
 	}
