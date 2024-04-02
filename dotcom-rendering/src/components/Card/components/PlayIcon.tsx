@@ -13,11 +13,19 @@ const sizes = {
 } as const satisfies Record<string, { button: number; icon: number }>;
 
 const iconWrapperStyles = css`
-	display: flex; /* Fixes the div mis-sizing itself */
+	display: flex;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+`;
+
+const iconPulseStyles = css`
+	:focus,
+	:hover {
+		transform: translate(-50%, -50%) scale(1.15);
+		transition-duration: 300ms;
+	}
 `;
 
 const iconStyles = (
@@ -53,13 +61,12 @@ const iconStyles = (
 const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
 	switch (imageSize) {
 		case 'jumbo':
-			return 'xlarge';
 		case 'large':
 		case 'carousel':
 			return 'large';
 		case 'medium':
 		case 'small':
-			return imageSize;
+			return 'small';
 	}
 };
 
@@ -71,12 +78,14 @@ const getIconSizeOnMobile = (imagePositionOnMobile: ImagePositionType) =>
 export const PlayIcon = ({
 	imageSize,
 	imagePositionOnMobile,
+	isPlayableMediaCard,
 }: {
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
+	isPlayableMediaCard: boolean;
 }) => {
 	return (
-		<div css={iconWrapperStyles}>
+		<div css={[iconWrapperStyles, isPlayableMediaCard && iconPulseStyles]}>
 			<span
 				css={[
 					iconStyles(

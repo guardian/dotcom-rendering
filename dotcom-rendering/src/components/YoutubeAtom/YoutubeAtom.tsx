@@ -2,6 +2,10 @@ import type { Participations } from '@guardian/ab-core';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import { useCallback, useState } from 'react';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from '../Card/components/ImageWrapper';
 import { MaintainAspectRatio } from '../MaintainAspectRatio';
 import type { VideoCategory } from './YoutubeAtomOverlay';
 import { YoutubeAtomOverlay } from './YoutubeAtomOverlay';
@@ -43,6 +47,8 @@ type Props = {
 	kicker?: string;
 	shouldPauseOutOfView?: boolean;
 	showTextOverlay?: boolean;
+	imageSize: ImageSizeType;
+	imagePositionOnMobile: ImagePositionType;
 };
 
 export const YoutubeAtom = ({
@@ -68,6 +74,8 @@ export const YoutubeAtom = ({
 	format,
 	shouldPauseOutOfView = false,
 	showTextOverlay = false,
+	imageSize,
+	imagePositionOnMobile,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -208,6 +216,8 @@ export const YoutubeAtom = ({
 						kicker={kicker}
 						format={format}
 						showTextOverlay={showTextOverlay}
+						imageSize={imageSize}
+						imagePositionOnMobile={imagePositionOnMobile}
 					/>
 				)}
 				{showPlaceholder && (
