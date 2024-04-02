@@ -6,6 +6,7 @@ import {
 	fontWeights,
 	from,
 	headline,
+	remBodySizes,
 	space,
 	textSans,
 	until,
@@ -76,7 +77,7 @@ const fontStyles = ({
 		case 'tiny':
 			return css`
 				${headline.xxxsmall(options)};
-				font-size: 0.875rem;
+				font-size: ${remBodySizes.xsmall}rem;
 			`;
 	}
 };
@@ -150,7 +151,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 		case 'tiny':
 			return css`
 				${textSans.xxsmall()};
-				font-size: 0.875rem;
+				font-size: ${remBodySizes.xsmall}rem;
 			`;
 	}
 };
