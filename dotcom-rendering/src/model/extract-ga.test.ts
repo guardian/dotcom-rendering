@@ -1,4 +1,4 @@
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { decideFormat } from '../lib/decideFormat';
 import { extractGA } from './extract-ga';
 

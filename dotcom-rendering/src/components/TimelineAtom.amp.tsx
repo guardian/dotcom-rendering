@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { palette } from '@guardian/source-foundations';
-import type { TimelineEvent } from '../types/content';
+import type { TimelineAtomEvent } from '../types/content';
 import { Expandable } from './Expandable.amp';
 
 const eventsWrapper = css`
@@ -40,7 +40,7 @@ type Props = {
 	id: string;
 	title: string;
 	description?: string;
-	events: TimelineEvent[];
+	events: TimelineAtomEvent[];
 	pillar: ArticleTheme;
 };
 

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { body, palette, remSpace, space } from '@guardian/source-foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette as schemedPalette } from '../palette';
-import type { TimelineAtomType, TimelineEvent } from '../types/content';
+import type { TimelineAtomEvent, TimelineAtomType } from '../types/content';
 import { useConfig } from './ConfigContext';
 import { Body } from './ExpandableAtom/Body';
 import { Container } from './ExpandableAtom/Container';
@@ -57,7 +57,7 @@ const EventToDate = css`
 	})};
 `;
 
-const TimelineContents = ({ events }: { events: TimelineEvent[] }) => {
+const TimelineContents = ({ events }: { events: TimelineAtomEvent[] }) => {
 	return (
 		<div>
 			{events.map((event, index) => {

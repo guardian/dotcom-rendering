@@ -34,6 +34,7 @@ export interface Guardian {
 			isPaidContent?: boolean;
 			isDev?: boolean;
 			hasInlineMerchandise?: boolean;
+			section?: string;
 			userAttributesApiUrl?: string;
 			idApiUrl?: string;
 		};
@@ -82,6 +83,7 @@ export const createGuardian = ({
 	brazeApiKey,
 	GAData,
 	hasInlineMerchandise,
+	section,
 	googleRecaptchaSiteKey,
 	unknownConfig = {},
 }: {
@@ -104,6 +106,7 @@ export const createGuardian = ({
 	brazeApiKey?: string;
 	GAData?: GADataType;
 	hasInlineMerchandise?: boolean;
+	section?: string;
 	googleRecaptchaSiteKey?: string;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
@@ -141,6 +144,7 @@ export const createGuardian = ({
 				isPaidContent: !!isPaidContent,
 				brazeApiKey,
 				hasInlineMerchandise,
+				section,
 				googleRecaptchaSiteKey,
 			}),
 			libs: {
