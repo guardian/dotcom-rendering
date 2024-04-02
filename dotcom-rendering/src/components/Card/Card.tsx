@@ -506,7 +506,14 @@ export const Card = ({
 												imagePositionOnMobile={
 													imagePositionOnMobile
 												}
-												imageSize={imageSize}
+												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
+												imageSize={
+													headlineSize === 'huge' ||
+													headlineSize === 'large' ||
+													headlineSize === 'ginormous'
+														? 'large'
+														: imageSize
+												}
 											/>
 										</Island>
 									</div>
