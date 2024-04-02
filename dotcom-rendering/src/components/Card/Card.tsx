@@ -612,7 +612,6 @@ export const Card = ({
 						>
 							{!!trailText && (
 								<TrailTextWrapper
-									containerPalette={containerPalette}
 									imagePosition={imagePosition}
 									imageSize={imageSize}
 									imageType={media?.type}
