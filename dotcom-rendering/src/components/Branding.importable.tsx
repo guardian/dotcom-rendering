@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { breakpoints, from, textSans } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
+import { getOphanComponents } from '../lib/labs';
 import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import { useConfig } from './ConfigContext';
@@ -113,15 +114,6 @@ function decideLogo(
 	);
 }
 
-const getOphanComponents = (branding: BrandingType) => {
-	const formattedSponsorName = branding.sponsorName.toLowerCase();
-	const componentName = `article-${formattedSponsorName}`;
-	return {
-		ophanComponentName: `labs-logo | ${componentName}`,
-		ophanLinkName: `labs-logo-${componentName}`,
-	};
-};
-
 type Props = {
 	branding: BrandingType;
 	format: ArticleFormat;
@@ -141,7 +133,8 @@ type Props = {
 export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
-	const { ophanComponentName, ophanLinkName } = getOphanComponents(branding);
+	const { ophanComponentName, ophanComponentLink } =
+		getOphanComponents(branding);
 
 	const { darkModeAvailable } = useConfig();
 
@@ -159,7 +152,7 @@ export const Branding = ({ branding, format }: Props) => {
 					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
 					data-testid="branding-logo"
 					data-component={ophanComponentName}
-					data-link-name={ophanLinkName}
+					data-link-name={ophanComponentLink}
 				>
 					{decideLogo(branding, format, darkModeAvailable)}
 				</a>
