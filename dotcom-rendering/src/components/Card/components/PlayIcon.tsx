@@ -8,9 +8,7 @@ type PlayButtonSize = keyof typeof sizes;
 
 const sizes = {
 	small: { button: 40, icon: 32 },
-	medium: { button: 80, icon: 72 },
 	large: { button: 80, icon: 72 },
-	xlarge: { button: 80, icon: 72 },
 } as const satisfies Record<string, { button: number; icon: number }>;
 
 const iconStyles = (
@@ -53,8 +51,8 @@ const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
 		case 'jumbo':
 		case 'large':
 		case 'carousel':
-			return 'large';
 		case 'medium':
+			return 'large';
 		case 'small':
 			return 'small';
 	}
