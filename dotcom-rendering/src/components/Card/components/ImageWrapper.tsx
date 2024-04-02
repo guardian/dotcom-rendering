@@ -14,7 +14,6 @@ type Props = {
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
-	isPlayableMediaCard: boolean;
 };
 
 /**
@@ -61,7 +60,6 @@ export const ImageWrapper = ({
 	imagePosition,
 	imagePositionOnMobile,
 	showPlayIcon,
-	isPlayableMediaCard,
 }: Props) => {
 	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
 	const isHorizontalOnMobile =
@@ -132,7 +130,6 @@ export const ImageWrapper = ({
 					<PlayIcon
 						imageSize={imageSize}
 						imagePositionOnMobile={imagePositionOnMobile}
-						isPlayableMediaCard={isPlayableMediaCard}
 					/>
 				)}
 			</>

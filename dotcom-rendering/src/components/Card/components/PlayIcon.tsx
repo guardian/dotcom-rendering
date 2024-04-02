@@ -13,14 +13,6 @@ const sizes = {
 	xlarge: { button: 80, icon: 72 },
 } as const satisfies Record<string, { button: number; icon: number }>;
 
-const iconPulseStyles = css`
-	:focus,
-	:hover {
-		transform: translate(-50%, -50%) scale(1.15);
-		transition-duration: 300ms;
-	}
-`;
-
 const iconStyles = (
 	size: PlayButtonSize,
 	sizeOnMobile: Extract<PlayButtonSize, 'small' | 'large'>,
@@ -76,20 +68,18 @@ const getIconSizeOnMobile = (imagePositionOnMobile: ImagePositionType) =>
 export const PlayIcon = ({
 	imageSize,
 	imagePositionOnMobile,
-	isPlayableMediaCard,
 }: {
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
-	isPlayableMediaCard: boolean;
 }) => {
 	return (
 		<div
+			className="play-icon"
 			css={[
 				iconStyles(
 					getIconSizeOnDesktop(imageSize),
 					getIconSizeOnMobile(imagePositionOnMobile),
 				),
-				isPlayableMediaCard && iconPulseStyles,
 			]}
 		>
 			<SvgMediaControlsPlay theme={theme} />

@@ -436,7 +436,6 @@ export const Card = ({
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
-						isPlayableMediaCard={!!isPlayableMediaCard}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow
