@@ -159,8 +159,8 @@ const sanitiserOptions: IOptions = {
 };
 
 const styles = (format: ArticleFormat) => css`
-	margin-block: ${space[3]}px;
-	writing-mode: horizontal-tb;
+	margin-top: ${space[3]}px;
+	margin-bottom: ${space[3]}px;
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 
