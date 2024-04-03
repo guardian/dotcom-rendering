@@ -23,6 +23,7 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
+	abTests: ServerSideTests;
 };
 
 const enhanceNewsletterSignup =
@@ -45,18 +46,11 @@ const enhanceNewsletterSignup =
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
 export const enhanceElements =
-	(
-		format: ArticleFormat,
-		blockId: string,
-		abTests: ServerSideTests,
-		options: Options,
-	) =>
+	(format: ArticleFormat, blockId: string, options: Options) =>
 	(elements: FEElement[]): FEElement[] => {
 		return [
-			enhanceLists(enhanceElements(format, blockId, abTests, options)),
-			enhanceTimelines(
-				enhanceElements(format, blockId, abTests, options),
-			),
+			enhanceLists(enhanceElements(format, blockId, options)),
+			enhanceTimelines(enhanceElements(format, blockId, options)),
 			enhanceDividers,
 			enhanceH2s,
 			enhanceInteractiveContentsElements,
@@ -71,7 +65,7 @@ export const enhanceElements =
 				options.promotedNewsletter,
 				blockId,
 			),
-			abTests.commercialMegaTestControl === 'control'
+			options.abTests.commercialMegaTestControl === 'control'
 				? enhanceAdPlaceholders_AB_TEST_CONTROL(
 						format,
 						options.renderingTarget,
@@ -87,15 +81,9 @@ export const enhanceElements =
 export const enhanceBlocks = (
 	blocks: Block[],
 	format: ArticleFormat,
-	abTests: ServerSideTests,
 	options: Options,
 ): Block[] =>
 	blocks.map((block) => ({
 		...block,
-		elements: enhanceElements(
-			format,
-			block.id,
-			abTests,
-			options,
-		)(block.elements),
+		elements: enhanceElements(format, block.id, options)(block.elements),
 	}));

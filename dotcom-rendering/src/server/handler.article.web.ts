@@ -72,17 +72,13 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		body as FEBlocksRequest;
 	for (const block of blocks) validateAsBlock(block);
 
-	const enhancedBlocks = enhanceBlocks(
-		blocks,
-		decideFormat(format),
-		abTests ?? {},
-		{
-			renderingTarget: 'Web',
-			promotedNewsletter: undefined,
-			imagesForLightbox: [],
-			hasAffiliateLinksDisclaimer: false,
-		},
-	);
+	const enhancedBlocks = enhanceBlocks(blocks, decideFormat(format), {
+		renderingTarget: 'Web',
+		promotedNewsletter: undefined,
+		imagesForLightbox: [],
+		hasAffiliateLinksDisclaimer: false,
+		abTests: abTests ?? {},
+	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
 		format,

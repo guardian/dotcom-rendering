@@ -20,11 +20,12 @@ const enhancePinnedPost = (
 ) => {
 	if (!block) return;
 
-	return enhanceBlocks([block], format, abTests, {
+	return enhanceBlocks([block], format, {
 		renderingTarget,
 		imagesForLightbox: [],
 		promotedNewsletter: undefined,
 		hasAffiliateLinksDisclaimer: false,
+		abTests,
 	})[0];
 };
 
@@ -39,17 +40,13 @@ export const enhanceArticleType = (
 		? buildLightboxImages(data.format, data.blocks, data.mainMediaElements)
 		: [];
 
-	const enhancedBlocks = enhanceBlocks(
-		data.blocks,
-		format,
-		data.config.abTests,
-		{
-			renderingTarget,
-			promotedNewsletter: data.promotedNewsletter,
-			imagesForLightbox,
-			hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
-		},
-	);
+	const enhancedBlocks = enhanceBlocks(data.blocks, format, {
+		renderingTarget,
+		promotedNewsletter: data.promotedNewsletter,
+		imagesForLightbox,
+		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
+		abTests: data.config.abTests,
+	});
 
 	const mainMediaElements = enhanceElementsImages(
 		format,
