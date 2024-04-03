@@ -1,18 +1,15 @@
 import { css } from '@emotion/react';
-import type { Breakpoint } from '@guardian/source-foundations';
-import { Star } from '../../static/icons/Star';
+import { SvgStar, SvgStarOutline } from '@guardian/source-react-components';
 import type { RatingSizeType } from '../../types/content';
 
 const starWrapper = css`
 	display: inline-block;
-	padding: 1px;
 `;
 
 const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
 			return css`
-				padding: 0 2px;
 				svg {
 					width: 12px;
 					height: 12px;
@@ -20,7 +17,6 @@ const determineSize = (size: RatingSizeType) => {
 			`;
 		case 'medium':
 			return css`
-				padding: 2px;
 				svg {
 					width: 15px;
 					height: 15px;
@@ -28,7 +24,6 @@ const determineSize = (size: RatingSizeType) => {
 			`;
 		case 'large':
 			return css`
-				padding: 2px 1px 2px 2px;
 				svg {
 					width: 18px;
 					height: 18px;
@@ -37,46 +32,17 @@ const determineSize = (size: RatingSizeType) => {
 	}
 };
 
-const determineBreakpoint = (breakpoint: Breakpoint | undefined) =>
-	breakpoint === undefined ? 'all-breakpoints' : breakpoint;
-
 type Props = {
 	rating: number;
 	size: RatingSizeType;
-	breakpoint?: Breakpoint;
 };
 
-export const StarRating = ({ rating, size, breakpoint }: Props) => (
+export const StarRating = ({ rating, size }: Props) => (
 	<div css={determineSize(size)}>
-		<div css={starWrapper}>
-			<Star
-				starId={`${size}1-${determineBreakpoint(breakpoint)}`}
-				isEmpty={rating < 1}
-			/>
-		</div>
-		<div css={starWrapper}>
-			<Star
-				starId={`${size}2-${determineBreakpoint(breakpoint)}`}
-				isEmpty={rating < 2}
-			/>
-		</div>
-		<div css={starWrapper}>
-			<Star
-				starId={`${size}3-${determineBreakpoint(breakpoint)}`}
-				isEmpty={rating < 3}
-			/>
-		</div>
-		<div css={starWrapper}>
-			<Star
-				starId={`${size}4-${determineBreakpoint(breakpoint)}`}
-				isEmpty={rating < 4}
-			/>
-		</div>
-		<div css={starWrapper}>
-			<Star
-				starId={`${size}5-${determineBreakpoint(breakpoint)}`}
-				isEmpty={rating < 5}
-			/>
-		</div>
+		{Array.from({ length: 5 }, (_, i) => (
+			<div css={starWrapper} key={i}>
+				{i < rating ? <SvgStar /> : <SvgStarOutline />}
+			</div>
+		))}
 	</div>
 );
