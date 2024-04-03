@@ -1,6 +1,6 @@
 import { isUndefined } from '@guardian/libs';
-import type { Page } from '@playwright/test';
 import { test } from '@playwright/test';
+import { interceptOphanRequest } from 'playwright/lib/ophan';
 import { cmpAcceptAll, cmpRejectAll, disableCMP } from '../lib/cmp';
 import { loadPage } from '../lib/load-page';
 
@@ -8,24 +8,6 @@ const articleUrl =
 	'https://www.theguardian.com/politics/2019/oct/29/tories-restore-party-whip-to-10-mps-who-sought-to-block-no-deal-brexit';
 
 const frontUrl = 'https://www.theguardian.com/uk';
-
-const interceptOphanRequest = ({
-	page,
-	path,
-	searchParamMatcher,
-}: {
-	page: Page;
-	path: string;
-	searchParamMatcher: (searchParams: URLSearchParams) => boolean;
-}) => {
-	return page.waitForRequest((request) => {
-		const matchUrl = request
-			.url()
-			.startsWith(`https://ophan.theguardian.com/${path}`);
-		const searchParams = new URLSearchParams(request.url());
-		return matchUrl && searchParamMatcher(searchParams);
-	});
-};
 
 test.describe('Ophan requests', () => {
 	test('should make a view request on an article when consent is rejected', async ({
