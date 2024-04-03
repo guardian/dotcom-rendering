@@ -136,7 +136,7 @@ test.describe('Paid content tests', () => {
 		await expectToBeVisible(page, '[data-testid=card-branding-logo]');
 		await page.locator('[data-testid=card-branding-logo]').first().click();
 
-		// Make sure the request to Google Analytics is made
+		// Make sure the request to Ophan is made
 		await clickEventRequest;
 	});
 });
