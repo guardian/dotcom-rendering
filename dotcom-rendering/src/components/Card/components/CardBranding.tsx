@@ -3,12 +3,15 @@ import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
+import { getOphanComponents } from '../../../lib/labs';
 import { palette as themePalette } from '../../../palette';
 import type { Branding } from '../../../types/branding';
+import type { OnwardsSource } from '../../../types/onwards';
 
 type Props = {
 	branding: Branding;
 	format: ArticleFormat;
+	onwardsSource: OnwardsSource | undefined;
 };
 
 const logoImageStyle = css`
@@ -34,8 +37,20 @@ const labelStyle = css`
 	color: ${themePalette('--card-footer-text')};
 `;
 
-export const CardBranding = ({ branding, format }: Props) => {
+export const CardBranding = ({ branding, format, onwardsSource }: Props) => {
 	const logo = decideLogo(format, branding);
+
+	/**
+	 * Only apply click tracking to branding on related content
+	 */
+	const dataAttributes =
+		onwardsSource === 'related-content'
+			? getOphanComponents({
+					branding,
+					locationPrefix: 'article-related-content',
+			  })
+			: undefined;
+
 	return (
 		<div css={brandingWrapperStyle}>
 			<div css={labelStyle}>{logo.label}</div>
@@ -66,6 +81,8 @@ export const CardBranding = ({ branding, format }: Props) => {
 					alt={branding.sponsorName}
 					width={logo.dimensions.width}
 					height={logo.dimensions.height}
+					data-component={dataAttributes?.ophanComponentName}
+					data-link-name={dataAttributes?.ophanComponentLink}
 				/>
 			</a>
 		</div>

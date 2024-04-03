@@ -376,7 +376,11 @@ export const Card = ({
 				}
 				cardBranding={
 					branding ? (
-						<CardBranding branding={branding} format={format} />
+						<CardBranding
+							branding={branding}
+							format={format}
+							onwardsSource={onwardsSource}
+						/>
 					) : undefined
 				}
 			/>

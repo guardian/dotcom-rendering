@@ -133,8 +133,10 @@ type Props = {
 export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
-	const { ophanComponentName, ophanComponentLink } =
-		getOphanComponents(branding);
+	const { ophanComponentName, ophanComponentLink } = getOphanComponents({
+		branding,
+		locationPrefix: 'article-meta',
+	});
 
 	const { darkModeAvailable } = useConfig();
 
