@@ -117,6 +117,8 @@ const buildElementTree =
 						<h2
 							id={attributes.getNamedItem('id')?.value}
 							css={getStyles(format)}
+							/** We override the h2 styling applied globally in ArticleBody */
+							data-ignore="global-h2-styling"
 						>
 							{Array.from(node.childNodes).map(
 								buildElementTree(format),
