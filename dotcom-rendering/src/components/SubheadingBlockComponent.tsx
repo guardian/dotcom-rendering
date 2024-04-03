@@ -6,7 +6,12 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { type FontWeight, from, headline } from '@guardian/source-foundations';
+import {
+	type FontWeight,
+	from,
+	headline,
+	space,
+} from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations/cjs/source-foundations/src/typography/api';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
@@ -49,9 +54,10 @@ const getFontStyles = ({
 
 	color: ${palette('--subheading-text')};
 
-	padding-bottom: 2px;
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[0]}px;
 	${from.tablet} {
-		padding-bottom: 4px;
+		padding-bottom: ${space[1]}px;
 	}
 
 	/* We don't allow additional font weight inside h2 tags */
@@ -117,6 +123,8 @@ const buildElementTree =
 						<h2
 							id={attributes.getNamedItem('id')?.value}
 							css={getStyles(format)}
+							/** We override the h2 styling applied globally in ArticleBody */
+							data-ignore="global-h2-styling"
 						>
 							{Array.from(node.childNodes).map(
 								buildElementTree(format),

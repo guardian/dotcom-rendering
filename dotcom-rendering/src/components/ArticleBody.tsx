@@ -47,9 +47,12 @@ type Props = {
 	isRightToLeftLang?: boolean;
 };
 
-const globalH2Styles = css`
-	p + h2 {
-		padding-top: 8px;
+const globalH2Styles = (display: ArticleDisplay) => css`
+	/** Base styles for h2 elements which do not render via SubheadingBlockComponent */
+	h2:not([data-ignore='global-h2-styling']) {
+		${display === ArticleDisplay.Immersive
+			? headline.medium({ fontWeight: 'light' })
+			: headline.xxsmall({ fontWeight: 'bold' })};
 	}
 `;
 
@@ -148,7 +151,7 @@ export const ArticleBody = ({
 				className="js-liveblog-body"
 				css={[
 					globalStrongStyles,
-					globalH2Styles,
+					globalH2Styles(format.display),
 					globalH3Styles(format.display),
 					globalLinkStyles(),
 					// revealStyles is used to animate the reveal of new blocks
@@ -200,7 +203,7 @@ export const ArticleBody = ({
 				id="maincontent"
 				css={[
 					isInteractive ? null : bodyPadding,
-					globalH2Styles,
+					globalH2Styles(format.display),
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,
