@@ -53,6 +53,16 @@ const overlayStyles = css`
 		width: 100%;
 		height: 100%;
 	}
+
+	.play-icon {
+		transition: transform 300ms;
+	}
+
+	/* We scale the play icon on hover and focus to indicate it's playable content. */
+	:focus .play-icon,
+	:hover .play-icon {
+		transform: translate(-50%, -50%) scale(1.15);
+	}
 `;
 
 const pillStyles = css`
@@ -198,7 +208,6 @@ export const YoutubeAtomOverlay = ({
 			<PlayIcon
 				imageSize={imageSize}
 				imagePositionOnMobile={imagePositionOnMobile}
-				isPlayableMediaCard={true}
 			/>
 			{showTextOverlay && (
 				<div css={textOverlayStyles}>
