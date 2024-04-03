@@ -96,8 +96,8 @@ test.describe('Paid content tests', () => {
 				const clickComponent = searchParams.get('clickComponent');
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
-					clickComponent === 'labs-logo | article-westfield' &&
-					clickLinkNames === '["labs-logo-article-westfield"]'
+					clickComponent === 'labs-logo | article-meta-westfield' &&
+					clickLinkNames === '["labs-logo-article-meta-westfield"]'
 				);
 			},
 		});
