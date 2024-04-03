@@ -7,6 +7,7 @@ import { enhanceCommercialProperties } from '../model/enhanceCommercialPropertie
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
+import type { ServerSideTests } from '../types/config';
 import { type DCRArticle } from '../types/frontend';
 import { type RenderingTarget } from '../types/renderingTarget';
 import { decideFormat } from './decideFormat';
@@ -14,14 +15,17 @@ import { decideFormat } from './decideFormat';
 const enhancePinnedPost = (
 	format: ArticleFormat,
 	renderingTarget: RenderingTarget,
+	abTests: ServerSideTests,
 	block?: Block,
 ) => {
 	if (!block) return;
+
 	return enhanceBlocks([block], format, {
 		renderingTarget,
 		imagesForLightbox: [],
 		promotedNewsletter: undefined,
 		hasAffiliateLinksDisclaimer: false,
+		abTests,
 	})[0];
 };
 
@@ -41,6 +45,7 @@ export const enhanceArticleType = (
 		promotedNewsletter: data.promotedNewsletter,
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
+		abTests: data.config.abTests,
 	});
 
 	const mainMediaElements = enhanceElementsImages(
@@ -52,7 +57,12 @@ export const enhanceArticleType = (
 		...data,
 		mainMediaElements,
 		blocks: enhancedBlocks,
-		pinnedPost: enhancePinnedPost(format, renderingTarget, data.pinnedPost),
+		pinnedPost: enhancePinnedPost(
+			format,
+			renderingTarget,
+			data.config.abTests,
+			data.pinnedPost,
+		),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
