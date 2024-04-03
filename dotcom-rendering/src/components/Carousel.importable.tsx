@@ -471,7 +471,7 @@ type CarouselCardProps = {
 	/** Only used on Labs cards */
 	branding?: Branding;
 	mainMedia?: MainMedia;
-	onwardsSource?: string;
+	onwardsSource?: OnwardsSource;
 	containerType?: DCRContainerType;
 };
 
