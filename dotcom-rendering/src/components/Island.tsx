@@ -23,8 +23,7 @@ type DeferredProps = {
 type PriorityProps = {
 	critical: {
 		priority: SchedulePriority['critical'];
-		// a critical island should never defer until idle
-		defer?: DeferredProps[Exclude<keyof DeferredProps, 'idle'>];
+		defer?: DeferredProps[keyof DeferredProps];
 	};
 	feature: {
 		priority: SchedulePriority['feature'];
