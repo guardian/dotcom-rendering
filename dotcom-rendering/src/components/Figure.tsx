@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, space, until } from '@guardian/source-foundations';
+import { between, from, space, until } from '@guardian/source-foundations';
 import type { FEElement, RoleType } from '../types/content';
 
 type Props = {
@@ -51,21 +51,9 @@ const roleCss = {
 			margin-left: -10px;
 			margin-right: -10px;
 		}
-		${from.tablet} {
+		${between.tablet.and.desktop} {
 			margin-left: -20px;
 			margin-right: -100px;
-		}
-		${from.desktop} {
-			margin-left: -20px;
-			margin-right: -340px;
-		}
-		${from.leftCol} {
-			margin-left: -160px;
-			margin-right: -320px;
-		}
-		${from.wide} {
-			margin-left: -240px;
-			margin-right: -400px;
 		}
 	`,
 

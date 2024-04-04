@@ -83,18 +83,6 @@ const overlaidStyles = (format: ArticleFormat) => css`
 	min-height: 2.25rem;
 `;
 
-const limitedWidth = css`
-	${from.leftCol} {
-		width: 140px;
-		/* use absolute position here to allow the article text to push up alongside
-           the caption when it is limited in width */
-		position: absolute;
-	}
-	${from.wide} {
-		width: 220px;
-	}
-`;
-
 const veryLimitedWidth = css`
 	${from.leftCol} {
 		width: 120px;
@@ -247,7 +235,6 @@ export const Caption = ({
 		<figcaption
 			css={[
 				captionStyle,
-				shouldLimitWidth && limitedWidth,
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
