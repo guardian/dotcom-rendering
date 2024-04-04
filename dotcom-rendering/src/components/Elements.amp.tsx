@@ -323,17 +323,6 @@ export const Elements = (
 						pillar={pillar}
 					/>
 				);
-			case 'model.dotcomrendering.pageElements.TimelineBlockElement':
-				return (
-					<TimelineAtom
-						key={element.elementId}
-						id={element.id}
-						title={element.title}
-						description={element.description}
-						events={element.events}
-						pillar={pillar}
-					/>
-				);
 			case 'model.dotcomrendering.pageElements.TweetBlockElement':
 				return (
 					<TwitterBlockComponent

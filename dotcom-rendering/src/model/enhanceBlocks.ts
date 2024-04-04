@@ -1,7 +1,9 @@
 import { type ArticleFormat } from '@guardian/libs';
+import type { ServerSideTests } from '../types/config';
 import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
+import { enhanceAdPlaceholders as enhanceAdPlaceholders_AB_TEST_CONTROL } from './enhance-ad-placeholders_AB_TEST_CONTROL';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
@@ -13,6 +15,7 @@ import { enhanceInteractiveContentsElements } from './enhance-interactive-conten
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceLists } from './enhanceLists';
+import { enhanceTimelines } from './enhanceTimelines';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
 type Options = {
@@ -20,6 +23,7 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
+	abTests: ServerSideTests;
 };
 
 const enhanceNewsletterSignup =
@@ -43,9 +47,10 @@ const enhanceNewsletterSignup =
 // as they both effect SubheadingBlockElement
 export const enhanceElements =
 	(format: ArticleFormat, blockId: string, options: Options) =>
-	(elements: FEElement[]): FEElement[] =>
-		[
+	(elements: FEElement[]): FEElement[] => {
+		return [
 			enhanceLists(enhanceElements(format, blockId, options)),
+			enhanceTimelines(enhanceElements(format, blockId, options)),
 			enhanceDividers,
 			enhanceH2s,
 			enhanceInteractiveContentsElements,
@@ -60,12 +65,18 @@ export const enhanceElements =
 				options.promotedNewsletter,
 				blockId,
 			),
-			enhanceAdPlaceholders(format, options.renderingTarget),
+			options.abTests.commercialMegaTestControl === 'control'
+				? enhanceAdPlaceholders_AB_TEST_CONTROL(
+						format,
+						options.renderingTarget,
+				  )
+				: enhanceAdPlaceholders(format, options.renderingTarget),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,
 		);
+	};
 
 export const enhanceBlocks = (
 	blocks: Block[],

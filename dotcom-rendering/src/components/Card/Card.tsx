@@ -20,6 +20,7 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import type { OnwardsSource } from '../../types/onwards';
 import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
@@ -102,7 +103,7 @@ export type Props = {
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable?: boolean;
-	onwardsSource?: string;
+	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
 };
@@ -375,7 +376,11 @@ export const Card = ({
 				}
 				cardBranding={
 					branding ? (
-						<CardBranding branding={branding} format={format} />
+						<CardBranding
+							branding={branding}
+							format={format}
+							onwardsSource={onwardsSource}
+						/>
 					) : undefined
 				}
 			/>
@@ -502,6 +507,17 @@ export const Card = ({
 													containerType ===
 													'fixed/video'
 												}
+												imagePositionOnMobile={
+													imagePositionOnMobile
+												}
+												// image size defaults to small if not provided. However, if the headline size is large or greater, we want to assume the image is also large so that the play icon is correctly sized.
+												imageSize={
+													headlineSize === 'huge' ||
+													headlineSize === 'large' ||
+													headlineSize === 'ginormous'
+														? 'large'
+														: imageSize
+												}
 											/>
 										</Island>
 									</div>
@@ -612,7 +628,6 @@ export const Card = ({
 						>
 							{!!trailText && (
 								<TrailTextWrapper
-									containerPalette={containerPalette}
 									imagePosition={imagePosition}
 									imageSize={imageSize}
 									imageType={media?.type}
