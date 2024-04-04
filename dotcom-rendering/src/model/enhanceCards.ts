@@ -162,6 +162,8 @@ const decideKicker = (
 	trail: FEFrontCard,
 	cardInTagPage: boolean,
 	pageId?: string,
+	isMostViewedContainer?: boolean,
+	showKickers?: boolean,
 ) => {
 	if (trail.properties.isBreaking) {
 		return 'Breaking news';
@@ -173,7 +175,13 @@ const decideKicker = (
 			: undefined;
 	}
 
-	return trail.header.kicker?.item?.properties.kickerText;
+	const kickerText = trail.header.kicker?.item?.properties.kickerText;
+
+	if (isMostViewedContainer) {
+		return showKickers ? kickerText : undefined;
+	}
+
+	return kickerText;
 };
 
 const decideSlideshowImages = (
@@ -286,6 +294,8 @@ export const enhanceCards = (
 		containerPalette,
 		pageId,
 		discussionApiUrl,
+		isMostViewedContainer,
+		showKickers,
 	}: {
 		cardInTagPage: boolean;
 		offset?: number;
@@ -293,6 +303,8 @@ export const enhanceCards = (
 		containerPalette?: DCRContainerPalette;
 		pageId?: string;
 		discussionApiUrl: string;
+		isMostViewedContainer?: boolean;
+		showKickers?: boolean;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -338,7 +350,13 @@ export const enhanceCards = (
 							faciaCard.card.webPublicationDateOption,
 					  ).toISOString()
 					: undefined,
-			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
+			kickerText: decideKicker(
+				faciaCard,
+				cardInTagPage,
+				pageId,
+				isMostViewedContainer,
+				showKickers,
+			),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,

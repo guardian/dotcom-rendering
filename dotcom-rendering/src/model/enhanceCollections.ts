@@ -86,6 +86,11 @@ export const enhanceCollections = ({
 			},
 		);
 
+		const isMostViewedContainer =
+			collection.collectionType === 'news/most-popular';
+		const showKickers =
+			collection.config.showSections || collection.config.showTags;
+
 		return {
 			id,
 			displayName,
@@ -110,12 +115,16 @@ export const enhanceCollections = ({
 				editionId,
 				containerPalette,
 				discussionApiUrl,
+				isMostViewedContainer,
+				showKickers,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
 				editionId,
 				containerPalette,
 				discussionApiUrl,
+				isMostViewedContainer,
+				showKickers,
 			}),
 			treats: enhanceTreats(
 				collection.treats,
@@ -125,8 +134,6 @@ export const enhanceCollections = ({
 			),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
-				showTags: collection.config.showTags,
-				showSections: collection.config.showSections,
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
 			targetedTerritory: collection.targetedTerritory,
