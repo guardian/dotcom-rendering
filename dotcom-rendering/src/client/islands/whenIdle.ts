@@ -4,8 +4,8 @@
  *
  * @param callback the function to execute once the browser is 'idle'
  */
+const timeout = 500;
 export const whenIdle = (callback: () => void): void => {
-	const timeout = 500;
 	if ('requestIdleCallback' in window) {
 		window.requestIdleCallback(callback, { timeout });
 	} else {
