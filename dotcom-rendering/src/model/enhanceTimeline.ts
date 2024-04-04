@@ -96,7 +96,7 @@ const enhance =
 			? enhanceTimelineBlockElement(element, elementsEnhancer)
 			: [element];
 
-export const enhanceTimelines =
+export const enhanceTimeline =
 	(elementsEnhancer: ElementsEnhancer) =>
 	(elements: FEElement[]): FEElement[] =>
 		elements.flatMap(enhance(elementsEnhancer));
