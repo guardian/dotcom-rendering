@@ -107,8 +107,9 @@ const wrapperStyle = ({
 	background-color: ${themePalette('--interactive-block-background')};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
-	display: flex;
-	flex-direction: column-reverse;
+	iframe {
+		margin-bottom: -12px;
+	}
 `;
 
 const placeholderLinkStyle = css`
@@ -265,7 +266,10 @@ export const InteractiveBlockComponent = ({
 
 			setupWindowListeners(iframe);
 
-			wrapperRef.current?.appendChild(iframe);
+			wrapperRef.current?.insertBefore(
+				iframe,
+				wrapperRef.current.firstChild,
+			);
 
 			setLoaded(true);
 		} else if (scriptUrl) {
