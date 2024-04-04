@@ -396,7 +396,7 @@ export const renderElement = ({
 			return (
 				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
 				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
-				<Island priority="critical" defer={{ until: 'visible' }}>
+				<Island priority="critical" defer={{ until: 'idle' }}>
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
