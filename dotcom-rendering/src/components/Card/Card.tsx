@@ -26,7 +26,6 @@ import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
-import { Hide } from '../Hide';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
 import { MediaDuration } from '../MediaDuration';
