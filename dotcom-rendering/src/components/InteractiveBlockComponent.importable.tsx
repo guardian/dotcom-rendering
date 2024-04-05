@@ -266,10 +266,7 @@ export const InteractiveBlockComponent = ({
 
 			setupWindowListeners(iframe);
 
-			wrapperRef.current?.insertBefore(
-				iframe,
-				wrapperRef.current.firstChild,
-			);
+			wrapperRef.current?.prepend(iframe);
 
 			setLoaded(true);
 		} else if (scriptUrl) {
