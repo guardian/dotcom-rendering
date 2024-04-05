@@ -155,25 +155,12 @@ export const WithoutCaption = () => {
 		design: ArticleDesign.Standard,
 		theme: Pillar.News,
 	};
-	const images = [{ ...testImage }];
+	const images = [{ ...testImage, caption: undefined }];
 	return (
 		<Initialise>
 			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
-};
-/**
- * We manually click the [i] button to close the caption
- */
-WithoutCaption.play = async ({
-	canvasElement,
-}: {
-	canvasElement: HTMLElement;
-}) => {
-	const canvas = within(canvasElement);
-	storage.local.clear();
-	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
-	storage.local.clear();
 };
 
 export const WithSport = () => {
@@ -324,7 +311,24 @@ export const WithLabs = () => {
 };
 
 /**
- * with html in caption (links)
- * with a portrait image
- *
+ * We manually click the [i] button to close the caption
  */
+export const ClickInfo = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: Pillar.News,
+	};
+	const images = [{ ...testImage }];
+	return (
+		<Initialise>
+			<LightboxLayout format={format} images={images} />
+		</Initialise>
+	);
+};
+ClickInfo.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+	const canvas = within(canvasElement);
+	storage.local.clear();
+	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
+	storage.local.clear();
+};
