@@ -92,9 +92,9 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
 						'.          border      byline      right-column'
-						'lines      border      body        right-column'
-						'meta       border      body        right-column'
-						'meta       border      body        right-column'
+						'.      	border      lines        right-column'
+						'.  	    border      meta        right-column'
+						'.	        border      body        right-column'
 						'.          border      body        right-column'
 						'.          border      .           right-column';
 				}
@@ -115,9 +115,9 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.          border      headline    right-column'
 						'.          border      standfirst  right-column'
 						'.          border      byline      right-column'
-						'lines      border      body        right-column'
-						'meta       border      body        right-column'
-						'meta       border      body        right-column'
+						'.      	border      lines       right-column'
+						'.       	border      meta        right-column'
+						'.       	border      body        right-column'
 						'.          border      body        right-column'
 						'.          border      .           right-column';
 				}
