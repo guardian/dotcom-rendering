@@ -6,6 +6,7 @@ import {
 	storage,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { expect } from '@storybook/jest';
 import { userEvent, within } from '@storybook/testing-library';
 import { useEffect } from 'react';
 import type { ImageForLightbox } from '../types/content';
@@ -44,6 +45,7 @@ const Initialise = ({ children }: { children: React.ReactNode }) => {
 		const lightbox =
 			document.querySelector<HTMLDialogElement>('#gu-lightbox');
 		lightbox?.removeAttribute('hidden');
+		storage.local.clear();
 	}, []);
 
 	return <div style={{ height: '100vh' }}>{children}</div>;
@@ -311,7 +313,7 @@ export const WithLabs = () => {
 };
 
 /**
- * We manually click the [i] button to close the caption
+ * We toggle the [i] button to close and open the caption
  */
 export const ClickInfo = () => {
 	const format = {
@@ -319,7 +321,7 @@ export const ClickInfo = () => {
 		design: ArticleDesign.Standard,
 		theme: Pillar.News,
 	};
-	const images = [{ ...testImage }];
+	const images = [{ ...testImage, title: 'ClickInfoTest' }];
 	return (
 		<Initialise>
 			<LightboxLayout format={format} images={images} />
@@ -328,7 +330,10 @@ export const ClickInfo = () => {
 };
 ClickInfo.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
 	const canvas = within(canvasElement);
-	storage.local.clear();
+
 	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
-	storage.local.clear();
+	await expect(canvas.getByText(/ClickInfoTest/)).not.toBeVisible();
+
+	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
+	await expect(canvas.getByText(/ClickInfoTest/)).toBeVisible();
 };

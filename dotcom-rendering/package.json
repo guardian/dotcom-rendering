@@ -72,6 +72,7 @@
 		"@storybook/api": "7.6.17",
 		"@storybook/components": "7.6.17",
 		"@storybook/core-events": "7.6.17",
+		"@storybook/jest": "0.2.3",
 		"@storybook/react": "7.6.17",
 		"@storybook/react-webpack5": "7.6.17",
 		"@storybook/testing-library": "0.2.2",
@@ -236,5 +237,8 @@
 		"webpack-node-externals": "3.0.0",
 		"webpack-sources": "3.2.3",
 		"zod": "3.22.3"
+	},
+	"devDependencies": {
+		"@storybook/addon-interactions": "7.6.17"
 	}
 }

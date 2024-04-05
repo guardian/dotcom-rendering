@@ -113,5 +113,8 @@
 		"whatwg-fetch": "3.6.19",
 		"winston": "3.11.0",
 		"winston-daily-rotate-file": "4.7.1"
+	},
+	"devDependencies": {
+		"@storybook/jest": "0.2.3"
 	}
 }

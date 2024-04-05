@@ -21,6 +21,7 @@ const config: StorybookConfig = {
 	staticDirs: ['../src/static'],
 	addons: [
 		'@storybook/addon-essentials',
+		'@storybook/addon-interactions',
 		'storybook-addon-turbo-build',
 		{
 			name: 'storybook-addon-turbo-build',
