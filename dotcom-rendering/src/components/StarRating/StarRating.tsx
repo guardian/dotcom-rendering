@@ -13,7 +13,7 @@ const determineSize = (size: RatingSizeType) => {
 				svg {
 					width: 1.3em;
 					height: 1.3em;
-					margin: 0 -1px;
+					margin: 0 -1px -2px;
 				}
 			`;
 		case 'large':
@@ -21,7 +21,7 @@ const determineSize = (size: RatingSizeType) => {
 				svg {
 					width: 1.6em;
 					height: 1.6em;
-					margin: 0 -2px;
+					margin: 0 -2px -2px;
 				}
 			`;
 	}
