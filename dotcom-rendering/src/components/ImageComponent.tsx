@@ -44,18 +44,12 @@ const starsWrapper = css`
 		top: 0;
 	}
 
-	/* Stars Padding from largest to smallest width */
-	${from.leftCol} {
-		padding-left: 5px;
-	}
-
 	${between.phablet.and.leftCol} {
 		padding-left: 0px;
 		margin-left: -0px;
 	}
 
 	${until.phablet} {
-		padding-left: 10px;
 		margin-left: 0px;
 	}
 `;

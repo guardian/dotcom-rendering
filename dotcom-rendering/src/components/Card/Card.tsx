@@ -126,15 +126,7 @@ const StarRatingComponent = ({
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
-		<Hide when="above" breakpoint="desktop">
-			<StarRating rating={rating} size="small" />
-		</Hide>
-		<Hide when="below" breakpoint="desktop">
-			<StarRating
-				rating={rating}
-				size={cardHasImage ? 'medium' : 'small'}
-			/>
-		</Hide>
+		<StarRating rating={rating} size="small" />
 	</div>
 );
 
