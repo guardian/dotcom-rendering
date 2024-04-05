@@ -2,6 +2,10 @@ import { css } from '@emotion/react';
 import { SvgStar, SvgStarOutline } from '@guardian/source-react-components';
 import type { RatingSizeType } from '../../types/content';
 
+const padding = css`
+	padding: 0 2px;
+`;
+
 const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
@@ -29,7 +33,7 @@ type Props = {
 };
 
 export const StarRating = ({ rating, size }: Props) => (
-	<div css={determineSize(size)}>
+	<div css={[determineSize(size), padding]}>
 		{Array.from({ length: 5 }, (_, i) =>
 			i < rating ? <SvgStar key={i} /> : <SvgStarOutline key={i} />,
 		)}
