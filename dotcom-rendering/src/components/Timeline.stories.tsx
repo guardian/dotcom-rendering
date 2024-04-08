@@ -109,6 +109,7 @@ export const FlatWithNoTitles = {
 				},
 				{
 					date: '19th January 2024',
+					label: 'Label 3',
 					main: testYoutubeElement,
 					body: [testTextElement, testTextElement],
 				},
@@ -143,7 +144,7 @@ export const FlatWithNoTitles = {
 	},
 } satisfies Story;
 
-export const FlatWithSomeTitles = {
+export const FlatWithSomeTitlesAndLabels = {
 	args: {
 		...FlatWithNoTitles.args,
 		timeline: {
@@ -152,10 +153,12 @@ export const FlatWithSomeTitles = {
 				{
 					...FlatWithNoTitles.args.timeline.events[0],
 					title: 'An Event Occurs',
+					label: 'Label 1',
 				},
 				{
 					...FlatWithNoTitles.args.timeline.events[1],
 					title: 'Another Event Occurs',
+					label: 'Label 2',
 				},
 				FlatWithNoTitles.args.timeline.events[2],
 			],
@@ -191,11 +194,16 @@ export const SectionedWithSomeTitles = {
 			sections: [
 				{
 					title: 'January',
-					events: FlatWithSomeTitles.args.timeline.events.slice(0, 2),
+					events: FlatWithSomeTitlesAndLabels.args.timeline.events.slice(
+						0,
+						2,
+					),
 				},
 				{
 					title: 'February',
-					events: FlatWithSomeTitles.args.timeline.events.slice(2),
+					events: FlatWithSomeTitlesAndLabels.args.timeline.events.slice(
+						2,
+					),
 				},
 			],
 		},
