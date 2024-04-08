@@ -315,7 +315,6 @@ export const ClickInfo = () => {
 	);
 };
 ClickInfo.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-	storage.local.clear();
 	const canvas = within(canvasElement);
 
 	await canvas.findByText(/ClickInfoTest/);
