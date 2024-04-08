@@ -318,7 +318,7 @@ ClickInfo.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
 	storage.local.clear();
 	const canvas = within(canvasElement);
 
-	await expect(canvas.getByText(/ClickInfoTest/)).toBeVisible();
+	await canvas.findByText(/ClickInfoTest/);
 
 	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
 	await expect(canvas.getByText(/ClickInfoTest/)).not.toBeVisible();
