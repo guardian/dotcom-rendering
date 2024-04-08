@@ -16,10 +16,34 @@ import { Heading } from './Heading';
 const hasTitle = (event: DCRTimelineEvent): boolean =>
 	event.title !== undefined && event.title.trim() !== '';
 
-const hasImmersiveRole = (element: FEElement): boolean =>
-	'role' in element && element.role === 'immersive';
+const hasImmersiveRole = (element?: FEElement): boolean => {
+	if (element == undefined) return false;
+	return 'role' in element && element.role === 'immersive';
+};
 
 // ----- EventHeader ----- //
+
+const timelineBulletStyles = (format: ArticleFormat) => css`
+	border-radius: 1000px;
+	display: block;
+	position: relative;
+	background-color: ${palette('--timeline-bullet')};
+	width: 12px;
+	height: 12px;
+	content: '';
+	margin: -6px;
+`;
+
+const immersiveTimelineBulletStyles = (format: ArticleFormat) => css`
+	border-radius: 1000px;
+	display: block;
+	position: relative;
+	background-color: ${palette('--timeline-bullet')};
+	width: 12px;
+	height: 12px;
+	content: '';
+	margin: 0 -16px;
+`;
 
 const smallDateStyles = css`
 	display: block;
@@ -84,6 +108,7 @@ const EventHeader = ({
 					element={event.main}
 					format={format}
 				/>
+				<span css={immersiveTimelineBulletStyles(format)} />
 				{heading}
 			</header>
 		);
@@ -111,6 +136,13 @@ const eventStyles = css`
 	margin-bottom: ${space[5]}px;
 `;
 
+const labelStyles = css`
+	border: 1px solid ${palette('--timeline-event-border')};
+	border-bottom: none;
+	padding: 3px 10px 4px 10px;
+	display: inline-block;
+`;
+
 const immersiveMainElementEventStyles = css`
 	padding-top: 0;
 `;
@@ -130,32 +162,40 @@ const TimelineEvent = ({
 	smallDates,
 	format,
 }: TimelineEventProps) => (
-	<section
-		css={[
-			eventStyles,
-			event.main !== undefined && hasImmersiveRole(event.main)
-				? immersiveMainElementEventStyles
-				: undefined,
-		]}
-	>
-		<EventHeader
-			event={event}
-			ArticleElementComponent={ArticleElementComponent}
-			sectioned={sectioned}
-			smallDates={smallDates}
-			format={format}
-		/>
-		{event.body.map((element, index) => (
-			<ArticleElementComponent
-				// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-				index={index}
-				key={index}
-				element={element}
-				forceDropCap="off"
+	<>
+		{event.label !== undefined && (
+			<div css={labelStyles}>{event.label}</div>
+		)}
+		{!hasImmersiveRole(event.main) && (
+			<span css={timelineBulletStyles(format)} />
+		)}
+		<section
+			css={[
+				eventStyles,
+				hasImmersiveRole(event.main)
+					? immersiveMainElementEventStyles
+					: undefined,
+			]}
+		>
+			<EventHeader
+				event={event}
+				ArticleElementComponent={ArticleElementComponent}
+				sectioned={sectioned}
+				smallDates={smallDates}
 				format={format}
 			/>
-		))}
-	</section>
+			{event.body.map((element, index) => (
+				<ArticleElementComponent
+					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+					index={index}
+					key={index}
+					element={element}
+					forceDropCap="off"
+					format={format}
+				/>
+			))}
+		</section>
+	</>
 );
 
 // ----- Timeline ----- //

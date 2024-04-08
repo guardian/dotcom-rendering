@@ -982,6 +982,40 @@ const headlineBorder: PaletteFunction = ({ design }) => {
 	}
 };
 
+const timelineBulletLight: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 200);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const timelineBulletDark: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
+	}
+};
+
 const headingLineLight: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -6008,6 +6042,10 @@ const paletteColours = {
 	'--expandable-atom-button-fill': {
 		light: expandableAtomButtonFillLight,
 		dark: expandableAtomButtonFillDark,
+	},
+	'--timeline-bullet': {
+		light: timelineBulletLight,
+		dark: timelineBulletDark,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,
