@@ -28,6 +28,9 @@ const ieFallback = css`
 const wrapper = css`
 	margin-top: 12px;
 	margin-bottom: 12px;
+	${until.leftCol} {
+		clear: both;
+	}
 	img {
 		object-fit: cover;
 		width: 100%;
