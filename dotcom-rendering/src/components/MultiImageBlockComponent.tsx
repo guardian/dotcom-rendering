@@ -29,7 +29,7 @@ const wrapper = css`
 	margin-top: 12px;
 	margin-bottom: 12px;
 	${until.leftCol} {
-		clear: both;
+		clear: left;
 	}
 	img {
 		object-fit: cover;
