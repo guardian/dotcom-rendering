@@ -151,20 +151,6 @@ export const WithEverything = () => {
 	);
 };
 
-export const WithoutCaption = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-	const images = [{ ...testImage, caption: undefined }];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
-
 export const WithSport = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
