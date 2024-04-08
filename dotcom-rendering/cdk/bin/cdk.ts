@@ -76,8 +76,8 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 	stage: 'PROD',
 	domainName: 'facia-rendering.guardianapis.com',
 	scaling: {
-		minimumInstances: 9,
-		maximumInstances: 45,
+		minimumInstances: 18,
+		maximumInstances: 60,
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.4s

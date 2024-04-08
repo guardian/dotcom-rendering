@@ -9,6 +9,10 @@ import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from './Card/components/ImageWrapper';
 import { useConfig } from './ConfigContext';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
@@ -35,6 +39,9 @@ type Props = {
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
 	switches?: Switches;
+	// If the youtube block component is used on a card, we can pass in the image size and position on mobile to get the correct styling for the play icon. If it's not used on a card, we can just pass default values to get the standard large play icon.
+	imageSize?: ImageSizeType;
+	imagePositionOnMobile?: ImagePositionType;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -111,6 +118,8 @@ export const YoutubeBlockComponent = ({
 	pauseOffscreenVideo = false,
 	showTextOverlay,
 	switches,
+	imageSize = 'large',
+	imagePositionOnMobile = 'none',
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -239,6 +248,8 @@ export const YoutubeBlockComponent = ({
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
 				showTextOverlay={showTextOverlay}
+				imageSize={imageSize}
+				imagePositionOnMobile={imagePositionOnMobile}
 			/>
 			{!hideCaption && (
 				<Caption

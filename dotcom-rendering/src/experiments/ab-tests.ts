@@ -4,7 +4,6 @@ import { blockSupporterRevenueMessagingSport } from './tests/block-supporter-rev
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIma } from './tests/integrate-ima';
 import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
-import { sectionAdDensity } from './tests/section-ad-density';
 import { signInGateAlternativeWording } from './tests/sign-in-gate-alternative-wording';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
@@ -19,6 +18,5 @@ export const tests: ABTest[] = [
 	consentlessAds,
 	integrateIma,
 	mpuWhenNoEpic,
-	sectionAdDensity,
 	blockSupporterRevenueMessagingSport,
 ];
