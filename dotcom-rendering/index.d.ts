@@ -448,6 +448,15 @@ declare namespace JSX {
 		 * link is clicked.
 		 */
 		'data-link-name'?: string;
+		/**
+		 * Ignore a DOM element in Chromatic builds with `data-chromatic="ignore"`.
+		 *
+		 * https://www.chromatic.com/docs/ignoring-elements/#ignore-dom-elements
+		 *
+		 * Note that if the dimensions of the ignored element
+		 * change, Chromatic will still capture the incoming changes.
+		 */
+		'data-chromatic'?: string;
 	}
 }
 
