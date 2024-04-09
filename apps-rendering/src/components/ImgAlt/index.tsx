@@ -100,6 +100,7 @@ const Img: FC<Props> = ({ image, sizes, className, format, lightbox }) => (
 			data-ratio={image.height / image.width}
 			data-caption={getCaption(lightbox)}
 			data-credit={getCredit(lightbox)}
+			data-chromatic="ignore"
 		/>
 	</picture>
 );

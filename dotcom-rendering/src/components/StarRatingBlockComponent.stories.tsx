@@ -20,11 +20,6 @@ export const AllSizes = () => (
 		<StarRatingBlockComponent rating={3} size="small" />
 		<br />
 		<br />
-		<h1>Medium</h1>
-		<br />
-		<StarRatingBlockComponent rating={3} size="medium" />
-		<br />
-		<br />
 		<h1>Large</h1>
 		<br />
 		<StarRatingBlockComponent rating={3} size="large" />
