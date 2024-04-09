@@ -68,6 +68,7 @@
 		"@sentry/browser": "7.75.1",
 		"@sentry/integrations": "7.75.1",
 		"@storybook/addon-essentials": "7.6.17",
+		"@storybook/addon-interactions": "7.6.17",
 		"@storybook/addons": "7.6.17",
 		"@storybook/api": "7.6.17",
 		"@storybook/components": "7.6.17",
