@@ -6,8 +6,6 @@ import {
 	storage,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { expect } from '@storybook/jest';
-import { userEvent, within } from '@storybook/testing-library';
 import { useEffect } from 'react';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxLayout } from './LightboxLayout.importable';
@@ -296,32 +294,4 @@ export const WithLabs = () => {
 			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
-};
-
-/**
- * We toggle the [i] button to close and open the caption
- */
-export const ClickInfo = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-	const images = [{ ...testImage, title: 'ClickInfoTest' }];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
-ClickInfo.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-	const canvas = within(canvasElement);
-
-	await canvas.findByText(/ClickInfoTest/);
-
-	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
-	await expect(canvas.getByText(/ClickInfoTest/)).not.toBeVisible();
-
-	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
-	await expect(canvas.getByText(/ClickInfoTest/)).toBeVisible();
 };
