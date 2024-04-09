@@ -15,8 +15,6 @@ import { related } from '../../fixtures/manual/related';
 import { shortDiscussion } from '../../fixtures/manual/short-discussion';
 import { topPicks } from '../../fixtures/manual/topPicks';
 
-export const mockedMessageID = '123456';
-
 const richLinkCard = {
 	tags: [
 		{

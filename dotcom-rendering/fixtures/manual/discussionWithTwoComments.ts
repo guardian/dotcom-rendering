@@ -18,7 +18,7 @@ export const discussionWithTwoComments = {
 		title: 'Mystery bird: black-and-red broadbill, Cymbirhynchus macrorhynchos story',
 		comments: [
 			{
-				id: 37772513,
+				id: '37772513',
 				body: '<p>Lovely chickens! <a href="http://www.mydomain.com">https://www.supersupersuperlongdomainnameImeanitneverstopsatallevereveritmakesyouwonderiftheremightbealimittothesethings.com</a></p>',
 				date: '04 July 2014 1:57pm',
 				isoDateTime: '2014-07-04T12:57:48Z',
@@ -43,7 +43,7 @@ export const discussionWithTwoComments = {
 				responses: [],
 			},
 			{
-				id: 42979860,
+				id: '42979860',
 				body: '<p>test</p>',
 				date: '30 October 2014 5:24pm',
 				isoDateTime: '2014-10-30T17:24:16Z',

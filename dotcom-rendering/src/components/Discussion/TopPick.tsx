@@ -17,7 +17,7 @@ import { Timestamp } from './Timestamp';
 type Props = {
 	comment: CommentType | ReplyType;
 	userMadeComment: boolean;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	user?: SignedInUser;
 	isClosedForRecommendations: boolean;
 };

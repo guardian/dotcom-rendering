@@ -2,7 +2,6 @@ import type { BaseSchema, Output } from 'valibot';
 import {
 	array,
 	boolean,
-	integer,
 	literal,
 	merge,
 	minLength,
@@ -12,7 +11,6 @@ import {
 	picklist,
 	safeParse,
 	string,
-	transform,
 	undefined_,
 	union,
 	variant,
@@ -75,7 +73,7 @@ export interface UserProfile {
 }
 
 const baseCommentSchema = object({
-	id: number(),
+	id: string(),
 	body: string(),
 	date: string(),
 	isoDateTime: string(),
@@ -182,19 +180,14 @@ const commentResponseSchema = variant('status', [
 	}),
 	object({
 		status: literal('ok'),
-		message: transform(
-			string(),
-			// response.errorCode is the id of the comment that was created on the server
-			// it is returned as a string, so we need to cast to an number to be compatible
-			(input) => Number(input),
-			number([integer()]),
-		),
+		// response.message is the id of the comment that was created on the server
+		message: string(),
 	}),
 ]);
 
 export const parseCommentResponse = (
 	data: unknown,
-): Result<'ParsingError' | CommentResponseErrorCodes, number> => {
+): Result<'ParsingError' | CommentResponseErrorCodes, string> => {
 	const { success, output } = safeParse(commentResponseSchema, data);
 	if (!success) {
 		return error('ParsingError');
@@ -360,7 +353,11 @@ export const stubUser = {
 	addUsername: () => Promise.resolve(error('This is a stub user')),
 	onComment: () =>
 		Promise.resolve(
-			ok(Number.MAX_SAFE_INTEGER - Math.ceil(Math.random() * 12_000)),
+			ok(
+				String(
+					Number.MAX_SAFE_INTEGER - Math.ceil(Math.random() * 12_000),
+				),
+			),
 		),
 	onRecommend: () => Promise.resolve(true),
 	onReply: () => Promise.resolve(error('API_ERROR')),

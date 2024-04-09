@@ -18,7 +18,7 @@ export const discussion = {
 		title: 'Mystery bird: black-and-red broadbill, Cymbirhynchus macrorhynchos story',
 		comments: [
 			{
-				id: 23628300,
+				id: '23628300',
 				body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 				date: '17 May 2013 3:15pm',
 				isoDateTime: '2013-05-17T14:15:14Z',
@@ -39,7 +39,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 37678414,
+				id: '37678414',
 				body: '<p>This is how <code>code</code> looks. And this is how <del>strikethrough</del> looks</p><p><strong>strong</strong></p><p><i>italic</i></p><p><blockquote><p>blockquote</p></blockquote></p><p><a href="http://www.mydomain.com">link to mydomain.com</a></p><p>And this is what get withareallyreallyreallylonglonglongwordthatissupersuperlonglikelonnnnngggggggggImeanreallylong</p></p>',
 				date: '02 July 2014 11:20am',
 				isoDateTime: '2014-07-02T10:20:56Z',
@@ -64,7 +64,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 37772513,
+				id: '37772513',
 				body: '<p>Lovely chickens! <a href="http://www.mydomain.com">https://www.supersupersuperlongdomainnameImeanitneverstopsatallevereveritmakesyouwonderiftheremightbealimittothesethings.com</a></p>',
 				date: '04 July 2014 1:57pm',
 				isoDateTime: '2014-07-04T12:57:48Z',
@@ -89,7 +89,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 42979860,
+				id: '42979860',
 				body: '<p>test</p>',
 				date: '30 October 2014 5:24pm',
 				isoDateTime: '2014-10-30T17:24:16Z',
@@ -110,7 +110,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 46810367,
+				id: '46810367',
 				body: '<p>Test from the API -1503725237</p>',
 				date: '29 January 2015 11:38am',
 				isoDateTime: '2015-01-29T11:38:56Z',
@@ -135,7 +135,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 47135441,
+				id: '47135441',
 				body: '<p>Another comment</p>',
 				date: '05 February 2015 2:53pm',
 				isoDateTime: '2015-02-05T14:53:38Z',
@@ -156,7 +156,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 47135508,
+				id: '47135508',
 				body: '<p>Final comment here</p>',
 				date: '05 February 2015 2:54pm',
 				isoDateTime: '2015-02-05T14:54:50Z',
@@ -177,7 +177,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 47512449,
+				id: '47512449',
 				body: '<p>Test comment.</p>',
 				date: '13 February 2015 2:11pm',
 				isoDateTime: '2015-02-13T14:11:54Z',
@@ -198,7 +198,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 47512495,
+				id: '47512495',
 				body: '<p>And another</p>',
 				date: '13 February 2015 2:12pm',
 				isoDateTime: '2015-02-13T14:12:42Z',
@@ -219,7 +219,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 48058272,
+				id: '48058272',
 				body: '<p>beautiful colours.</p>',
 				date: '25 February 2015 2:37pm',
 				isoDateTime: '2015-02-25T14:37:51Z',
@@ -244,7 +244,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 48058400,
+				id: '48058400',
 				body: '<p>love this bird</p>',
 				date: '25 February 2015 2:41pm',
 				isoDateTime: '2015-02-25T14:41:31Z',
@@ -269,7 +269,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 49450704,
+				id: '49450704',
 				body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 				date: '25 March 2015 3:06pm',
 				isoDateTime: '2015-03-25T15:06:53Z',
@@ -294,7 +294,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 49505722,
+				id: '49505722',
 				body: '<p>Test from the API 1133942872</p>',
 				date: '26 March 2015 4:09pm',
 				isoDateTime: '2015-03-26T16:09:13Z',
@@ -319,7 +319,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 49773224,
+				id: '49773224',
 				body: '<p>Test from the API -2124514465</p>',
 				date: '01 April 2015 12:53pm',
 				isoDateTime: '2015-04-01T11:53:54Z',
@@ -344,7 +344,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 49828269,
+				id: '49828269',
 				body: '<p>Test from the API 2008701699</p>',
 				date: '02 April 2015 3:17pm',
 				isoDateTime: '2015-04-02T14:17:27Z',
@@ -369,7 +369,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 49835646,
+				id: '49835646',
 				body: '<p>test post</p>',
 				date: '02 April 2015 5:53pm',
 				isoDateTime: '2015-04-02T16:53:22Z',
@@ -390,7 +390,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50178110,
+				id: '50178110',
 				body: '<p>Test from the API 24995912</p>',
 				date: '09 April 2015 11:39am',
 				isoDateTime: '2015-04-09T10:39:28Z',
@@ -415,7 +415,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50185580,
+				id: '50185580',
 				body: '<p>Test from the API 1730167644</p>',
 				date: '09 April 2015 1:44pm',
 				isoDateTime: '2015-04-09T12:44:24Z',
@@ -440,7 +440,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50230774,
+				id: '50230774',
 				body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 				date: '10 April 2015 10:43am',
 				isoDateTime: '2015-04-10T09:43:27Z',
@@ -465,7 +465,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50438395,
+				id: '50438395',
 				body: '<p>Test from the API 672270292</p>',
 				date: '14 April 2015 3:30pm',
 				isoDateTime: '2015-04-14T14:30:27Z',
@@ -490,7 +490,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50534761,
+				id: '50534761',
 				body: '<p>My favourite bird!</p>',
 				date: '16 April 2015 12:10pm',
 				isoDateTime: '2015-04-16T11:10:36Z',
@@ -511,7 +511,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50540517,
+				id: '50540517',
 				body: '<p>Cool Broadbill</p>',
 				date: '16 April 2015 1:53pm',
 				isoDateTime: '2015-04-16T12:53:01Z',
@@ -532,7 +532,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50540563,
+				id: '50540563',
 				body: '<p>Cool broadbill</p>',
 				date: '16 April 2015 1:53pm',
 				isoDateTime: '2015-04-16T12:53:43Z',
@@ -553,7 +553,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50543198,
+				id: '50543198',
 				body: '<p>Nice bill!</p>',
 				date: '16 April 2015 2:44pm',
 				isoDateTime: '2015-04-16T13:44:21Z',
@@ -574,7 +574,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50789974,
+				id: '50789974',
 				body: '<p>Test from the API -1474918202</p>',
 				date: '21 April 2015 11:36am',
 				isoDateTime: '2015-04-21T10:36:59Z',
@@ -599,7 +599,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 50793031,
+				id: '50793031',
 				body: '<p>Test from the API -932163313</p>',
 				date: '21 April 2015 12:26pm',
 				isoDateTime: '2015-04-21T11:26:42Z',
@@ -624,7 +624,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 51153735,
+				id: '51153735',
 				body: '<p>What glorious plumage!</p>',
 				date: '28 April 2015 9:48am',
 				isoDateTime: '2015-04-28T08:48:07Z',
@@ -645,7 +645,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 51153843,
+				id: '51153843',
 				body: '<p>Indeed</p>',
 				date: '28 April 2015 9:49am',
 				isoDateTime: '2015-04-28T08:49:53Z',
@@ -666,7 +666,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 51177701,
+				id: '51177701',
 				body: '<p>Test</p>',
 				date: '28 April 2015 4:29pm',
 				isoDateTime: '2015-04-28T15:29:05Z',
@@ -687,7 +687,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 51177755,
+				id: '51177755',
 				body: '<p>Test Post</p>',
 				date: '28 April 2015 4:30pm',
 				isoDateTime: '2015-04-28T15:30:02Z',
@@ -708,7 +708,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 51213229,
+				id: '51213229',
 				body: '<p>Test 6751</p>',
 				date: '29 April 2015 9:21am',
 				isoDateTime: '2015-04-29T08:21:42Z',
@@ -729,7 +729,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 51214557,
+				id: '51214557',
 				body: '<p>Test 8067</p>',
 				date: '29 April 2015 9:44am',
 				isoDateTime: '2015-04-29T08:44:15Z',
@@ -750,7 +750,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 52013677,
+				id: '52013677',
 				body: '<p>Acknowledgement Test</p>',
 				date: '12 May 2015 10:39am',
 				isoDateTime: '2015-05-12T09:39:07Z',
@@ -771,7 +771,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 52412694,
+				id: '52412694',
 				body: '<p>I love this bird</p>',
 				date: '19 May 2015 10:56am',
 				isoDateTime: '2015-05-19T09:56:02Z',
@@ -792,7 +792,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 52412721,
+				id: '52412721',
 				body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 				date: '19 May 2015 10:56am',
 				isoDateTime: '2015-05-19T09:56:47Z',
@@ -813,7 +813,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 52412791,
+				id: '52412791',
 				body: '<p>Test from the API 1236505540</p>',
 				date: '19 May 2015 10:58am',
 				isoDateTime: '2015-05-19T09:58:34Z',
@@ -838,7 +838,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 53902608,
+				id: '53902608',
 				body: '<p>nice article</p>',
 				date: '16 June 2015 1:54pm',
 				isoDateTime: '2015-06-16T12:54:05Z',
@@ -863,7 +863,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 53980488,
+				id: '53980488',
 				body: '<p>very interesting article</p>',
 				date: '17 June 2015 4:59pm',
 				isoDateTime: '2015-06-17T15:59:12Z',
@@ -887,7 +887,7 @@ export const discussion = {
 				},
 				responses: [
 					{
-						id: 53980521,
+						id: '53980521',
 						body: '<p>although that was just for testing commenting</p>',
 						date: '17 June 2015 4:59pm',
 						isoDateTime: '2015-06-17T15:59:53Z',
@@ -931,7 +931,7 @@ export const discussion = {
 				},
 			},
 			{
-				id: 53984125,
+				id: '53984125',
 				body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 				date: '17 June 2015 6:08pm',
 				isoDateTime: '2015-06-17T17:08:32Z',
@@ -956,7 +956,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 53984175,
+				id: '53984175',
 				body: "<p>It's nice to comment on an article again</p>",
 				date: '17 June 2015 6:09pm',
 				isoDateTime: '2015-06-17T17:09:51Z',
@@ -981,7 +981,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54096779,
+				id: '54096779',
 				body: '<p>interesting article</p>',
 				date: '19 June 2015 2:07pm',
 				isoDateTime: '2015-06-19T13:07:13Z',
@@ -1006,7 +1006,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54096834,
+				id: '54096834',
 				body: '<p>this article is quite good</p>',
 				date: '19 June 2015 2:08pm',
 				isoDateTime: '2015-06-19T13:08:02Z',
@@ -1031,7 +1031,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54297937,
+				id: '54297937',
 				body: '<p>nice article</p>',
 				date: '23 June 2015 12:48pm',
 				isoDateTime: '2015-06-23T11:48:17Z',
@@ -1056,7 +1056,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54304818,
+				id: '54304818',
 				body: '<p>Test from the API -1673717805</p>',
 				date: '23 June 2015 2:49pm',
 				isoDateTime: '2015-06-23T13:49:30Z',
@@ -1081,7 +1081,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54305016,
+				id: '54305016',
 				body: '<p>this article is cool</p>',
 				date: '23 June 2015 2:53pm',
 				isoDateTime: '2015-06-23T13:53:29Z',
@@ -1106,7 +1106,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54305061,
+				id: '54305061',
 				body: "<p>I'd like to make a comment here</p>",
 				date: '23 June 2015 2:54pm',
 				isoDateTime: '2015-06-23T13:54:22Z',
@@ -1131,7 +1131,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54305123,
+				id: '54305123',
 				body: '<p>lovely stuff</p>',
 				date: '23 June 2015 2:55pm',
 				isoDateTime: '2015-06-23T13:55:32Z',
@@ -1156,7 +1156,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54305139,
+				id: '54305139',
 				body: '<p>testing dicussion</p>',
 				date: '23 June 2015 2:55pm',
 				isoDateTime: '2015-06-23T13:55:46Z',
@@ -1181,7 +1181,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54305287,
+				id: '54305287',
 				body: '<p>testing again</p>',
 				date: '23 June 2015 2:58pm',
 				isoDateTime: '2015-06-23T13:58:51Z',
@@ -1206,7 +1206,7 @@ export const discussion = {
 				responses: [],
 			},
 			{
-				id: 54351807,
+				id: '54351807',
 				body: '<p>Test from the API 1634173951</p>',
 				date: '24 June 2015 10:31am',
 				isoDateTime: '2015-06-24T09:31:02Z',

@@ -19,9 +19,9 @@ const onReply = async (): Promise<CommentResponse> => {
 	return { kind: 'error', error: 'ApiError' };
 };
 
-const onRecommend = async (commentId: number): Promise<boolean> => {
+const onRecommend = async (commentId: string): Promise<boolean> => {
 	return getDiscussionClient()
-		.recommend(commentId.toString())
+		.recommend(commentId)
 		.then(
 			(discussionApiResponse) =>
 				// eslint-disable-next-line no-underscore-dangle -- we don't have control over this name! It comes from the compiled Thrift models
