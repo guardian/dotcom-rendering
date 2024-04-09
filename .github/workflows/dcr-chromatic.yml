@@ -65,4 +65,8 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
               name: "run_chromatic"
+            }).catch((error) => {
+              // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#remove-a-label-from-an-issue--status-codes
+              if (error.status === 404) return console.warn("No such label!");
+              throw error;
             })
