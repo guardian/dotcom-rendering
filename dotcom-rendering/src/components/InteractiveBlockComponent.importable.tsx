@@ -107,6 +107,9 @@ const wrapperStyle = ({
 	background-color: ${themePalette('--interactive-block-background')};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
+	iframe {
+		margin-bottom: -12px;
+	}
 `;
 
 const placeholderLinkStyle = css`
@@ -263,7 +266,7 @@ export const InteractiveBlockComponent = ({
 
 			setupWindowListeners(iframe);
 
-			wrapperRef.current?.appendChild(iframe);
+			wrapperRef.current?.prepend(iframe);
 
 			setLoaded(true);
 		} else if (scriptUrl) {
@@ -327,14 +330,14 @@ export const InteractiveBlockComponent = ({
 						</a>
 					</>
 				)}
+				{!!caption && (
+					<Caption
+						captionText={caption}
+						format={format}
+						isMainMedia={isMainMedia}
+					/>
+				)}
 			</figure>
-			{!!caption && (
-				<Caption
-					captionText={caption}
-					format={format}
-					isMainMedia={isMainMedia}
-				/>
-			)}
 		</>
 	);
 };

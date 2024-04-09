@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import {
-	between,
 	from,
 	headline,
 	palette as srcPalette,
@@ -42,15 +41,6 @@ const starsWrapper = css`
 	}
 	${from.tablet} {
 		top: 0;
-	}
-
-	${between.phablet.and.leftCol} {
-		padding-left: 0px;
-		margin-left: -0px;
-	}
-
-	${until.phablet} {
-		margin-left: 0px;
 	}
 `;
 
