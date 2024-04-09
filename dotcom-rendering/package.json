@@ -73,7 +73,6 @@
 		"@storybook/api": "7.6.17",
 		"@storybook/components": "7.6.17",
 		"@storybook/core-events": "7.6.17",
-		"@storybook/jest": "0.2.3",
 		"@storybook/react": "7.6.17",
 		"@storybook/react-webpack5": "7.6.17",
 		"@storybook/testing-library": "0.2.2",
