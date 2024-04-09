@@ -11,6 +11,7 @@ import {
 	picklist,
 	safeParse,
 	string,
+	transform,
 	undefined_,
 	union,
 	variant,
@@ -73,7 +74,7 @@ export interface UserProfile {
 }
 
 const baseCommentSchema = object({
-	id: string(),
+	id: transform(number(), (id) => id.toString()),
 	body: string(),
 	date: string(),
 	isoDateTime: string(),
