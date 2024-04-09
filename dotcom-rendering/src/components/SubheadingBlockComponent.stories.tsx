@@ -8,12 +8,7 @@ import {
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent';
-
-const globalH2Styles = css`
-	p + h2 {
-		padding-top: 8px;
-	}
-`;
+import { getAllDesigns, getAllThemes } from '../lib/format';
 
 const globalStrongStyles = css`
 	strong {
@@ -23,7 +18,7 @@ const globalStrongStyles = css`
 
 /** Mocking the styles normally inherited via ArticleBody component */
 const GlobalStylesDecorator: Decorator = (Story) => (
-	<div css={[globalH2Styles, globalStrongStyles]}>{Story()}</div>
+	<div css={[globalStrongStyles]}>{Story()}</div>
 );
 
 const StoryWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -84,173 +79,58 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 export default meta;
 
-export const StandardDisplay = {
+export const StandardDisplayThemeVariation = {
 	decorators: [
 		GlobalStylesDecorator,
-		splitTheme([
-			{
-				design: ArticleDesign.Obituary,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.News,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Opinion,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.Labs,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.Labs,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.Labs,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.Labs,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
-			{
+		splitTheme(
+			getAllThemes({
+				// we need a design that colours h2s to illustrate the theme variation
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Analysis,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Feature,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.News,
-			},
-			{
-				design: ArticleDesign.Interview,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Culture,
-			},
-			{
-				design: ArticleDesign.Analysis,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Feature,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.News,
-			},
-			{
-				design: ArticleDesign.Interview,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Culture,
-			},
-		]),
+			}),
+		),
 	],
 } satisfies Story;
 
-export const ImmersiveDisplay = {
+export const StandardDisplayDesignVariation = {
 	decorators: [
 		GlobalStylesDecorator,
-		splitTheme([
-			{
-				design: ArticleDesign.Obituary,
-				display: ArticleDisplay.Immersive,
+		splitTheme(
+			getAllDesigns({
 				theme: Pillar.News,
-			},
-			{
-				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Standard,
+			}),
+		),
+	],
+} satisfies Story;
+
+export const ImmersiveDisplayThemeVariation = {
+	decorators: [
+		GlobalStylesDecorator,
+		splitTheme(
+			getAllThemes({
+				// we need a design that colours h2s to illustrate the theme variation
+				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Immersive,
-				theme: Pillar.Opinion,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.Labs,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.Labs,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.Labs,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
-			{
-				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.Labs,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
-			{
-				design: ArticleDesign.Feature,
-				display: ArticleDisplay.Immersive,
+			}).concat(
+				getAllThemes({
+					// and a design that does not colour h2s to illustrate the lack of theme variation
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Immersive,
+				}),
+			),
+		),
+	],
+} satisfies Story;
+
+export const ImmersiveDisplayDesignVariation = {
+	decorators: [
+		GlobalStylesDecorator,
+		splitTheme(
+			getAllDesigns({
 				theme: Pillar.News,
-			},
-			{
-				design: ArticleDesign.Interview,
 				display: ArticleDisplay.Immersive,
-				theme: Pillar.Culture,
-			},
-			{
-				design: ArticleDesign.Feature,
-				display: ArticleDisplay.Immersive,
-				theme: Pillar.News,
-			},
-			{
-				design: ArticleDesign.Interview,
-				display: ArticleDisplay.Immersive,
-				theme: Pillar.Culture,
-			},
-		]),
+			}),
+		),
 	],
 } satisfies Story;

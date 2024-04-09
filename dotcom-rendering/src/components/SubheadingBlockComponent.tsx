@@ -60,9 +60,11 @@ const getFontStyles = ({
 		padding-bottom: ${space[1]}px;
 	}
 
-	/* We don't allow additional font weight inside h2 tags */
+	/* We don't allow additional font weight inside h2 tags except for immersive articles */
 	strong {
-		font-weight: inherit;
+		font-weight: ${format.display === ArticleDisplay.Immersive
+			? 'bold'
+			: 'inherit'};
 	}
 `;
 
