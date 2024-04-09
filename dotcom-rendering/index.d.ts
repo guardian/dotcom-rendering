@@ -456,7 +456,7 @@ declare namespace JSX {
 		 * Note that if the dimensions of the ignored element
 		 * change, Chromatic will still capture the incoming changes.
 		 */
-		'data-chromatic'?: string;
+		'data-chromatic'?: 'ignore';
 	}
 }
 
