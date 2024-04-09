@@ -1,14 +1,9 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 import { getAllDesigns, getAllThemes } from '../lib/format';
+import { SubheadingBlockComponent } from './SubheadingBlockComponent';
 
 const globalStrongStyles = css`
 	strong {
