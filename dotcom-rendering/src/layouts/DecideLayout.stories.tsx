@@ -99,7 +99,7 @@ const appsParameters = {
 		darkModeAvailable: true,
 	},
 	chromatic: {
-		viewports: [breakpoints.mobile, breakpoints.tablet],
+		viewports: [breakpoints.mobileMedium, breakpoints.tablet],
 	},
 };
 

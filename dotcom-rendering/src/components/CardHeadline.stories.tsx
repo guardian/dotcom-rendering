@@ -193,7 +193,7 @@ MobileSize.decorators = [
 ];
 MobileSize.parameters = {
 	chromatic: {
-		viewports: [breakpoints.mobile],
+		viewports: [breakpoints.mobileMedium],
 	},
 };
 

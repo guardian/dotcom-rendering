@@ -263,7 +263,7 @@ export default {
 		chromatic: {
 			diffThreshold: 0.4,
 			viewports: [
-				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.tablet,
 				breakpoints.wide,
 			],

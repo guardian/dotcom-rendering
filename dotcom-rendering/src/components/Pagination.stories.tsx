@@ -10,7 +10,7 @@ export default {
 	title: 'Components/Pagination',
 	parameters: {
 		layout: 'padded',
-		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
+		chromatic: { viewports: [breakpoints.mobileMedium, breakpoints.wide] },
 	},
 };
 

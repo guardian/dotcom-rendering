@@ -32,7 +32,7 @@ export default {
 		},
 		chromatic: {
 			viewports: [
-				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.tablet,
 				breakpoints.wide,
 			],

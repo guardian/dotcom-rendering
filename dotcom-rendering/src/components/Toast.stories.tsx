@@ -156,7 +156,7 @@ Mobile.story = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {
-			viewports: [breakpoints.mobile],
+			viewports: [breakpoints.mobileMedium],
 		},
 	},
 };

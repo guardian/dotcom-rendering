@@ -262,7 +262,7 @@ export const HorizontalOnMobile = () => {
 HorizontalOnMobile.story = {
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobile],
+			viewports: [breakpoints.mobileMedium],
 		},
 		viewport: {
 			defaultViewport: 'mobileMedium',

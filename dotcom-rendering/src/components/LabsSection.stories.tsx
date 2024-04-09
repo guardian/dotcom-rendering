@@ -15,7 +15,7 @@ export default {
 		},
 		chromatic: {
 			viewports: [
-				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.tablet,
 				breakpoints.desktop,
 				breakpoints.leftCol,

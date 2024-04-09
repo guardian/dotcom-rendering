@@ -274,7 +274,7 @@ MultipleStory.story = {
 	parameters: {
 		chromatic: {
 			viewports: [
-				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.leftCol,
 				breakpoints.wide,
 			],

@@ -30,7 +30,7 @@ export default {
 	title: 'Components/LightboxLayout',
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.desktop],
+			viewports: [breakpoints.mobileMedium, breakpoints.desktop],
 		},
 		viewport: {
 			// This has the effect of turning off the viewports addon by default

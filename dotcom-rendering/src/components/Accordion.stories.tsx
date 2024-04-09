@@ -14,7 +14,7 @@ const meta = {
 			values: [{ name: 'grey', value: 'lightgrey' }],
 		},
 		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.tablet],
+			viewports: [breakpoints.mobileMedium, breakpoints.tablet],
 		},
 	},
 } satisfies Meta<typeof AccordionComponent>;

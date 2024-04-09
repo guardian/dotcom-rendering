@@ -21,7 +21,7 @@ export default {
 	parameters: {
 		chromatic: {
 			viewports: [
-				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.mobileLandscape,
 				breakpoints.phablet,
 				breakpoints.desktop,

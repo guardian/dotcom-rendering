@@ -14,7 +14,7 @@ export default {
 		},
 		chromatic: {
 			viewports: [
-				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.tablet,
 				breakpoints.desktop,
 				breakpoints.leftCol,
@@ -199,7 +199,7 @@ MultipleStory.story = {
 	parameters: {
 		chromatic: {
 			viewports: [
-				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.leftCol,
 				breakpoints.wide,
 			],

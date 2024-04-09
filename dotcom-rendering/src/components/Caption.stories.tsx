@@ -282,7 +282,7 @@ VideoCaption.story = {
 	parameters: {
 		chromatic: {
 			viewports: [
-				breakpoints.mobile,
+				breakpoints.mobileMedium,
 				breakpoints.mobileLandscape,
 				breakpoints.phablet,
 			],

@@ -14,7 +14,7 @@ export default {
 	component: PullQuoteBlockComponent,
 	title: 'Components/PullQuoteBlockComponent',
 	chromatic: {
-		viewports: [breakpoints.mobile, breakpoints.desktop],
+		viewports: [breakpoints.mobileMedium, breakpoints.desktop],
 	},
 };
 
