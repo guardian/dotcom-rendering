@@ -23,26 +23,17 @@ const hasShowcaseRole = (element?: FEElement): boolean => {
 
 // ----- EventHeader ----- //
 
-const timelineBulletStyles = (format: ArticleFormat) => css`
+const timelineBulletStyles = css`
 	border-radius: 1000px;
 	display: block;
-	position: relative;
 	background-color: ${palette('--timeline-bullet')};
 	width: 12px;
 	height: 12px;
 	content: '';
-	margin: -6px;
-`;
-
-const immersiveTimelineBulletStyles = (format: ArticleFormat) => css`
-	border-radius: 1000px;
-	display: block;
-	position: relative;
-	background-color: ${palette('--timeline-bullet')};
-	width: 12px;
-	height: 12px;
-	content: '';
-	margin: 0 -16px;
+	border: 1px solid ${palette('--timeline-event-border')};
+	position: absolute;
+	left: -7px;
+	top: -6px;
 `;
 
 const smallDateStyles = css`
@@ -108,7 +99,6 @@ const EventHeader = ({
 					element={event.main}
 					format={format}
 				/>
-				<span css={immersiveTimelineBulletStyles(format)} />
 				{heading}
 			</header>
 		);
@@ -134,6 +124,11 @@ const eventStyles = css`
 	border: 1px solid ${palette('--timeline-event-border')};
 	padding: ${space[1]}px 10px ${space[6]}px 10px;
 	margin-bottom: ${space[5]}px;
+	position: relative;
+
+	&:before {
+		${timelineBulletStyles}
+	}
 `;
 
 const labelStyles = css`
@@ -165,9 +160,6 @@ const TimelineEvent = ({
 	<>
 		{event.label !== undefined && (
 			<div css={labelStyles}>{event.label}</div>
-		)}
-		{!hasImmersiveRole(event.main) && (
-			<span css={timelineBulletStyles(format)} />
 		)}
 		<section
 			css={[
