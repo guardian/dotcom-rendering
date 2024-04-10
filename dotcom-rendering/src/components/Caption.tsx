@@ -185,6 +185,7 @@ const CameraIcon = ({ format }: IconProps) => {
 				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 			]}
+			data-chromatic="ignore"
 		>
 			<CameraSvg />
 		</span>
@@ -200,6 +201,7 @@ const VideoIcon = ({ format }: IconProps) => {
 					hideIconBelowLeftCol,
 				videoIconStyle,
 			]}
+			data-chromatic="ignore"
 		>
 			<VideoSvg />
 		</span>
