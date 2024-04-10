@@ -109,7 +109,6 @@ export const FlatWithNoTitles = {
 				},
 				{
 					date: '19th January 2024',
-					label: 'Label 3',
 					main: testYoutubeElement,
 					body: [testTextElement, testTextElement],
 				},
