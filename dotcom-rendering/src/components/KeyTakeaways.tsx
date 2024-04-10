@@ -1,4 +1,6 @@
+import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
+import { palette } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
@@ -20,6 +22,15 @@ interface KeyTakeawaysProps {
 	keyTakeaways: KeyTakeaway[];
 	RenderArticleElement: ArticleElementRenderer;
 }
+
+const lineStyles = css`
+	width: 140px;
+	height: 1px;
+	margin: 0;
+	border: none;
+	border-top: 1px solid ${palette.neutral[86]};
+	padding: 8px 0 2px 0;
+`;
 
 export const KeyTakeaways = ({
 	keyTakeaways,
@@ -57,6 +68,7 @@ export const KeyTakeaways = ({
 					RenderArticleElement={RenderArticleElement}
 				/>
 			))}
+			<hr css={lineStyles} />
 		</ol>
 	);
 };
