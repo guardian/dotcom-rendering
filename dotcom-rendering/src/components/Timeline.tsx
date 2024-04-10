@@ -16,9 +16,9 @@ import { Heading } from './Heading';
 const hasTitle = (event: DCRTimelineEvent): boolean =>
 	event.title !== undefined && event.title.trim() !== '';
 
-const hasImmersiveRole = (element?: FEElement): boolean => {
-	if (element == undefined) return false;
-	return 'role' in element && element.role === 'immersive';
+const hasShowcaseRole = (element?: FEElement): boolean => {
+	if (element === undefined) return false;
+	return 'role' in element && element.role === 'showcase';
 };
 
 // ----- EventHeader ----- //
@@ -100,7 +100,7 @@ const EventHeader = ({
 		</Heading>
 	);
 
-	if (event.main !== undefined && hasImmersiveRole(event.main)) {
+	if (event.main !== undefined && hasShowcaseRole(event.main)) {
 		return (
 			<header>
 				<ArticleElementComponent
@@ -172,7 +172,7 @@ const TimelineEvent = ({
 		<section
 			css={[
 				eventStyles,
-				hasImmersiveRole(event.main)
+				hasShowcaseRole(event.main)
 					? immersiveMainElementEventStyles
 					: undefined,
 			]}
