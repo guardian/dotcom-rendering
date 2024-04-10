@@ -49,7 +49,7 @@ const CaptionIcon = ({ format, variant }: IconProps) => {
 			return null;
 		default:
 			return (
-				<span css={iconStyles}>
+				<span css={iconStyles} data-chromatic="ignore">
 					{variant === CaptionIconVariant.Image ? (
 						<SvgCamera />
 					) : (

@@ -44,7 +44,7 @@ const styles = (
 	width: number,
 	height: number,
 ): SerializedStyles => {
-	const ratio = height / width;
+	const ratio = Number((height / width).toPrecision(3));
 
 	return css`
 		${dimensions(sizes.default, ratio)}

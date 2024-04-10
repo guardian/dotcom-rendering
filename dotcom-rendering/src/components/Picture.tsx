@@ -560,6 +560,7 @@ export const Picture = ({
 				height={fallbackSource.width * ratio}
 				loading={Picture.disableLazyLoading ? undefined : loading}
 				css={isLightbox ? flex : block}
+				data-chromatic="ignore"
 			/>
 		</picture>
 	);
