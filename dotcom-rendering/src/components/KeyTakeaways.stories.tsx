@@ -1,11 +1,12 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+// import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { images } from '../../fixtures/generated/images';
-import { getAllThemes } from '../lib/format';
+// import { getAllThemes } from '../lib/format';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { KeyTakeaways } from './KeyTakeaways';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 
 const meta = {
 	component: KeyTakeaways,
@@ -58,12 +59,13 @@ export const AllThemes = {
 		RenderArticleElement,
 	},
 	decorators: [
-		splitTheme(
-			getAllThemes({
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-		),
+		centreColumnDecorator,
+		// splitTheme(
+		// 	getAllThemes({
+		// 		design: ArticleDesign.Standard,
+		// 		display: ArticleDisplay.Standard,
+		// 	}),
+		// ),
 	],
 } satisfies Story;
 
@@ -73,38 +75,39 @@ export const AllThemes = {
 export const SomeDesignsAndDisplays = {
 	args: AllThemes.args,
 	decorators: [
-		splitTheme([
-			{
-				design: ArticleDesign.Obituary,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Editorial,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Profile,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Analysis,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Interview,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Immersive,
-				theme: Pillar.Lifestyle,
-			},
-		]),
+		// splitTheme([
+		// 	{
+		// 		design: ArticleDesign.Obituary,
+		// 		display: ArticleDisplay.Standard,
+		// 		theme: Pillar.Lifestyle,
+		// 	},
+		// 	{
+		// 		design: ArticleDesign.Editorial,
+		// 		display: ArticleDisplay.Standard,
+		// 		theme: Pillar.Lifestyle,
+		// 	},
+		// 	{
+		// 		design: ArticleDesign.Profile,
+		// 		display: ArticleDisplay.Standard,
+		// 		theme: Pillar.Lifestyle,
+		// 	},
+		// 	{
+		// 		design: ArticleDesign.Analysis,
+		// 		display: ArticleDisplay.Standard,
+		// 		theme: Pillar.Lifestyle,
+		// 	},
+		// 	{
+		// 		design: ArticleDesign.Interview,
+		// 		display: ArticleDisplay.Standard,
+		// 		theme: Pillar.Lifestyle,
+		// 	},
+		// 	{
+		// 		design: ArticleDesign.Standard,
+		// 		display: ArticleDisplay.Immersive,
+		// 		theme: Pillar.Lifestyle,
+		// 	},
+		// ]),
+		centreColumnDecorator,
 	],
 } satisfies Story;
 
@@ -135,15 +138,16 @@ export const Images = {
 		],
 	},
 	decorators: [
-		splitTheme(
-			[
-				{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-				},
-			],
-			{ orientation: 'vertical' },
-		),
+		// splitTheme(
+		// 	[
+		// 		{
+		// 			design: ArticleDesign.Standard,
+		// 			display: ArticleDisplay.Standard,
+		// 			theme: Pillar.Culture,
+		// 		},
+		// 	],
+		// 	{ orientation: 'vertical' },
+		// ),
+		centreColumnDecorator,
 	],
 } satisfies Story;

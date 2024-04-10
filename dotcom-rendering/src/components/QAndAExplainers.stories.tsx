@@ -1,11 +1,12 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+// import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { images } from '../../fixtures/generated/images';
-import { getAllThemes } from '../lib/format';
+// import { getAllThemes } from '../lib/format';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { QAndAExplainers } from './QAndAExplainers';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 
 const meta = {
 	component: QAndAExplainers,
@@ -58,12 +59,13 @@ export const AllThemes = {
 		RenderArticleElement,
 	},
 	decorators: [
-		splitTheme(
-			getAllThemes({
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-		),
+		// splitTheme(
+		// 	getAllThemes({
+		// 		design: ArticleDesign.Standard,
+		// 		display: ArticleDisplay.Standard,
+		// 	}),
+		// ),
+		centreColumnDecorator,
 	],
 } satisfies Story;
 
@@ -94,15 +96,16 @@ export const Images = {
 		],
 	},
 	decorators: [
-		splitTheme(
-			[
-				{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-				},
-			],
-			{ orientation: 'vertical' },
-		),
+		// splitTheme(
+		// 	[
+		// 		{
+		// 			design: ArticleDesign.Standard,
+		// 			display: ArticleDisplay.Standard,
+		// 			theme: Pillar.Culture,
+		// 		},
+		// 	],
+		// 	{ orientation: 'vertical' },
+		// ),
+		centreColumnDecorator,
 	],
 } satisfies Story;
