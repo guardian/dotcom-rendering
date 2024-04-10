@@ -23,13 +23,10 @@ interface KeyTakeawaysProps {
 	RenderArticleElement: ArticleElementRenderer;
 }
 
-const lineStyles = css`
+const finalLineStyles = css`
 	width: 140px;
-	height: 1px;
-	margin: 0;
-	border: none;
+	margin: 8px 0 2px 0;
 	border-top: 1px solid ${palette.neutral[86]};
-	padding: 8px 0 2px 0;
 `;
 
 export const KeyTakeaways = ({
@@ -68,7 +65,7 @@ export const KeyTakeaways = ({
 					RenderArticleElement={RenderArticleElement}
 				/>
 			))}
-			<hr css={lineStyles} />
+			<hr css={finalLineStyles} />
 		</ol>
 	);
 };
