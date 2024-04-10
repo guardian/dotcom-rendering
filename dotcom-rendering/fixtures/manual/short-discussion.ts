@@ -1,4 +1,4 @@
-import type { GetDiscussionSuccess } from '../../src/lib/discussion';
+import type { GetDiscussionResponse } from '../../src/lib/discussion';
 
 export const shortDiscussion = {
 	status: 'ok',
@@ -21,7 +21,7 @@ export const shortDiscussion = {
 				apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/38591122',
 				body: "<p>someone's run out of ideas..!</p>",
 				date: '25 July 2014 9:07am',
-				id: '38591122',
+				id: 38591122,
 				isHighlighted: false,
 				isoDateTime: '2014-07-25T08:07:54Z',
 				numRecommends: 0,
@@ -42,7 +42,7 @@ export const shortDiscussion = {
 				apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/38649787',
 				body: '<p>Edge of seventeen.</p>',
 				date: '26 July 2014 6:37pm',
-				id: '38649787',
+				id: 38649787,
 				isHighlighted: false,
 				isoDateTime: '2014-07-26T17:37:07Z',
 				numRecommends: 0,
@@ -61,4 +61,4 @@ export const shortDiscussion = {
 			},
 		],
 	},
-} satisfies GetDiscussionSuccess;
+} satisfies GetDiscussionResponse;

@@ -1,4 +1,4 @@
-import type { BaseSchema, Output } from 'valibot';
+import type { BaseSchema, Input, Output } from 'valibot';
 import {
 	array,
 	boolean,
@@ -74,7 +74,7 @@ export interface UserProfile {
 }
 
 const baseCommentSchema = object({
-	id: transform(number(), (id) => id.toString()),
+	id: transform(union([number(), string()]), (id) => id.toString()),
 	body: string(),
 	date: string(),
 	isoDateTime: string(),
@@ -305,6 +305,8 @@ export const discussionApiResponseSchema = variant('status', [
 	discussionApiErrorSchema,
 	discussionApiSuccessSchema,
 ]);
+
+export type GetDiscussionResponse = Input<typeof discussionApiResponseSchema>;
 
 export interface DiscussionOptions {
 	orderBy: string;
