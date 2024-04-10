@@ -17,6 +17,7 @@ import type {
 import type { reportAbuse } from '../../lib/discussionApi';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette as schemedPalette } from '../../palette';
+import { useConfig } from '../ConfigContext';
 import { AbuseReportForm } from './AbuseReportForm';
 import { Avatar } from './Avatar';
 import { GuardianContributor, GuardianPick, GuardianStaff } from './Badges';
@@ -326,6 +327,8 @@ export const Comment = ({
 	reportAbuse,
 	isExpanded,
 }: Props) => {
+	const { renderingTarget } = useConfig();
+
 	const [isHighlighted, setIsHighlighted] = useState<boolean>(
 		comment.isHighlighted,
 	);
@@ -369,6 +372,16 @@ export const Comment = ({
 	const showContributorBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Contributor',
 	);
+
+	/* You can't mute:
+	- unless logged in
+	- yourself
+	- on apps (see https://github.com/guardian/dotcom-rendering/issues/11113)
+	*/
+	const showMuteOption =
+		renderingTarget !== 'Apps' &&
+		user &&
+		comment.userProfile.userId !== user.profile.userId;
 
 	return (
 		<>
@@ -747,10 +760,7 @@ export const Comment = ({
 										)}
 								</Row>
 								<Row>
-									{/* You can't mute unless logged in and you can't mute yourself */}
-									{user &&
-									comment.userProfile.userId !==
-										user.profile.userId ? (
+									{showMuteOption ? (
 										<div
 											css={[
 												buttonLinkBaseStyles,
