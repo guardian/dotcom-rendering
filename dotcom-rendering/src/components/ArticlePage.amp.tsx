@@ -75,7 +75,7 @@ export const AmpArticlePage = ({
 			/>
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
-			<AdConsent />
+			<AdConsent abTests={config.abTests} />
 			{experimentsData && (
 				<AmpExperimentComponent experimentsData={experimentsData} />
 			)}
