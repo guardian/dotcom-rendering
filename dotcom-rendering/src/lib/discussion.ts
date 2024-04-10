@@ -74,7 +74,7 @@ export interface UserProfile {
 }
 
 const baseCommentSchema = object({
-	id: transform(number(), (id) => id.toString()),
+	id: transform(union([number(), string()]), (id) => id.toString()),
 	body: string(),
 	date: string(),
 	isoDateTime: string(),
