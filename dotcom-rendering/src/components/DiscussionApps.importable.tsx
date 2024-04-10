@@ -1,6 +1,6 @@
 import {
-	DiscussionApiResponse,
 	DiscussionResponseType,
+	GetUserProfileResponseType,
 } from '@guardian/bridget';
 import { useEffect, useState } from 'react';
 import { getDiscussionClient } from '../lib/bridgetApi';
@@ -11,7 +11,7 @@ import {
 } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
-import { error, ok, type Result } from '../lib/result';
+import { error, type Result } from '../lib/result';
 import { Discussion, type Props as DiscussionProps } from './Discussion';
 
 type Props = Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>;
@@ -23,6 +23,7 @@ const onComment = async (
 	getDiscussionClient()
 		.comment(discussionShortUrl, body)
 		.then((apiResponse) => {
+			console.log(apiResponse);
 			if (
 				apiResponse.__type ===
 				DiscussionResponseType.DiscussionResponseWithError
@@ -37,10 +38,28 @@ const onComment = async (
 			return parsedResponse;
 		});
 
-const onReply = async (): Promise<CommentResponse> => {
-	console.log('onReply');
-	return { kind: 'error', error: 'ApiError' };
-};
+const onReply = async (
+	discussionShortUrl: string,
+	body: string,
+	parentCommentId: number,
+): Promise<CommentResponse> =>
+	getDiscussionClient()
+		.reply(discussionShortUrl, body, parentCommentId.toString())
+		.then((apiResponse) => {
+			console.log(apiResponse);
+			if (
+				apiResponse.__type ===
+				DiscussionResponseType.DiscussionResponseWithError
+			) {
+				return error('ApiError');
+			}
+
+			const parsedResponse = parseCommentResponse({
+				status: apiResponse.response.status,
+				message: apiResponse.response.message,
+			});
+			return parsedResponse;
+		});
 
 const onRecommend = async (commentId: string): Promise<boolean> => {
 	return getDiscussionClient()
@@ -68,33 +87,49 @@ const addUsername = async (): Promise<Result<string, true>> => {
 // 	return { kind: 'error', error: 'ApiError' };
 // };
 
-const mockedProfile: UserProfile = {
-	userId: 'userId',
-	displayName: 'displayName',
-	webUrl: 'webUrl',
-	apiUrl: 'apiUrl',
-	avatar: 'avatar',
-	secureAvatarUrl: 'secureAvatarUrl',
-	badge: [],
-};
-
-const getUser = async (): Promise<Reader> => {
-	return {
-		kind: 'Reader',
-		onComment,
-		onReply,
-		onRecommend,
-		addUsername,
-		reportAbuse: reportAbuseWeb(undefined),
-		profile: mockedProfile,
-	};
-};
-
 export const DiscussionApps = (props: Props) => {
 	const [user, setUser] = useState<Reader>();
 
 	useEffect(() => {
-		void getUser().then(setUser);
+		void getDiscussionClient()
+			.getUserProfile()
+			.then((userProfile) => {
+				console.log(userProfile);
+				if (
+					userProfile.__type ===
+					GetUserProfileResponseType.GetUserProfileResponseWithError
+				) {
+					return undefined;
+				}
+
+				const profile = {
+					userId: userProfile.profile.userId,
+					displayName: userProfile.profile.displayName,
+					webUrl: userProfile.profile.webUrl,
+					apiUrl: userProfile.profile.apiUrl,
+					avatar: userProfile.profile.avatar,
+					secureAvatarUrl: userProfile.profile.secureAvatarUrl,
+					badge: userProfile.profile.badge.map(({ name }) => ({
+						name,
+					})),
+					privateFields: {
+						canPostComment: userProfile.profile.canPostComment,
+						hasCommented: userProfile.profile.hasCommented,
+						isPremoderated: userProfile.profile.isPremoderated,
+					},
+				} satisfies UserProfile;
+
+				return {
+					kind: 'Reader',
+					onComment,
+					onReply,
+					onRecommend,
+					addUsername,
+					reportAbuse: reportAbuseWeb(undefined),
+					profile,
+				} satisfies Reader;
+			})
+			.then(setUser);
 	}, [setUser]);
 
 	return (
