@@ -11,6 +11,22 @@ import type {
 
 type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 
+/**
+ * For a main media element that can have a role, we only support "inline",
+ * "showcase" and "thumbnail". If the main media has a role that isn't one of
+ * these we drop it.
+ */
+const enhanceMainMedia = (
+	mainMedia: FEElement | undefined,
+): FEElement | undefined =>
+	mainMedia !== undefined &&
+	'role' in mainMedia &&
+	mainMedia.role !== 'showcase' &&
+	mainMedia.role !== 'inline' &&
+	mainMedia.role !== 'thumbnail'
+		? undefined
+		: mainMedia;
+
 const enhanceTimelineEvent =
 	(enhanceElements: ElementsEnhancer) =>
 	({
@@ -30,7 +46,7 @@ const enhanceTimelineEvent =
 				date,
 				title,
 				label,
-				main,
+				main: enhanceMainMedia(main),
 				body: enhanceElements(body),
 			},
 		];
