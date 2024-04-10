@@ -5,70 +5,71 @@ type AdConsentProps = {
 	abTests: ServerSideTests;
 };
 
+const sourcepointDomain = 'sourcepoint.theguardian.com';
+
+const pubData = {
+	authId: 'CLIENT_ID',
+	client_id: 'CLIENT_ID',
+	// Matches ampViewId from https://ophan.theguardian.com/amp.json
+	page_view_id: 'PAGE_VIEW_ID',
+	page_view_id_64: 'PAGE_VIEW_ID_64',
+	platform: 'amp',
+	source_url: 'SOURCE_URL',
+};
+
+const queryParams = new URLSearchParams(pubData).toString();
+
+// Default to TCFv2, the CCPA and AUS configs override the options in this config
+const clientConfig = {
+	accountId: 1257,
+	mmsDomain: `https://${sourcepointDomain}`,
+	propertyId: 8791,
+	pmTab: 'purposes',
+	stageCampaign: false,
+	privacyManagerId: 145885,
+	isTCFV2: true,
+	propertyHref: 'https://theguardian.amp',
+	targetingParams: {
+		framework: 'tcfv2',
+	},
+};
+
+const clientConfigCcpa = {
+	privacyManagerId: '5eba7ef78c167c47ca8b433d',
+	isCCPA: true,
+	isTCFV2: false,
+	propertyHref: null,
+	siteHref: 'https://theguardian.amp',
+	getDnsMsgMms: true,
+	alwaysDisplayDns: false,
+	showNoticeUntilAction: true,
+	targetingParams: {
+		framework: 'ccpa',
+	},
+};
+
+const clientConfigAus = {
+	propertyId: 14327,
+	privacyManagerId: '5f859e174ed5055e72ce26a6',
+	isCCPA: true,
+	isTCFV2: false,
+	propertyHref: null,
+	siteHref: 'https://amp.au.theguardian.com',
+	getDnsMsgMms: true,
+	alwaysDisplayDns: false,
+	showNoticeUntilAction: true,
+	targetingParams: {
+		framework: 'aus',
+	},
+};
+
 export const AdConsent = ({ abTests }: AdConsentProps) => {
-	const sourcepointDomain = 'sourcepoint.theguardian.com';
-
-	const pubData = {
-		authId: 'CLIENT_ID',
-		client_id: 'CLIENT_ID',
-		// Matches ampViewId from https://ophan.theguardian.com/amp.json
-		page_view_id: 'PAGE_VIEW_ID',
-		page_view_id_64: 'PAGE_VIEW_ID_64',
-		platform: 'amp',
-		source_url: 'SOURCE_URL',
-	};
-
-	const queryParams = new URLSearchParams(pubData).toString();
-
-	// Default to TCFv2, the CCPA and AUS configs override the options in this config
-	const clientConfig = {
-		accountId: 1257,
-		mmsDomain: `https://${sourcepointDomain}`,
-		propertyId: 8791,
-		pmTab: 'purposes',
-		stageCampaign: false,
-		privacyManagerId: 145885,
-		isTCFV2: true,
-		propertyHref: 'https://theguardian.amp',
-		targetingParams: {
-			framework: 'tcfv2',
-		},
-	};
-
-	const testClientConfig = {
+	const testAlternativeClientConfig = {
 		...clientConfig,
 		propertyId: 16921,
 		propertyHref: 'https://test.theguardian.amp',
 	};
 
-	const clientConfigCcpa: ClientConfig = {
-		privacyManagerId: '5eba7ef78c167c47ca8b433d',
-		isCCPA: true,
-		isTCFV2: false,
-		propertyHref: null,
-		siteHref: 'https://theguardian.amp',
-		getDnsMsgMms: true,
-		alwaysDisplayDns: false,
-		showNoticeUntilAction: true,
-		targetingParams: {
-			framework: 'ccpa',
-		},
-	};
-
-	const clientConfigAus = {
-		propertyId: 14327,
-		privacyManagerId: '5f859e174ed5055e72ce26a6',
-		isCCPA: true,
-		isTCFV2: false,
-		propertyHref: null,
-		siteHref: 'https://amp.au.theguardian.com',
-		getDnsMsgMms: true,
-		alwaysDisplayDns: false,
-		showNoticeUntilAction: true,
-		targetingParams: {
-			framework: 'aus',
-		},
-	};
 	// To debug geolocation in dev, make sure you're on the experimental channel of AMP:
 	// https://cdn.ampproject.org/experiments.html
 	// Then you can load the url with #amp-geo=XX, where XX is the country code
@@ -154,7 +155,7 @@ export const AdConsent = ({ abTests }: AdConsentProps) => {
 						promptUISrc: `https://${sourcepointDomain}/amp/unified/index.html?${queryParams}`,
 						clientConfig:
 							abTests.ampGlobalAddressListVariant === 'variant'
-								? testClientConfig
+								? testAlternativeClientConfig
 								: clientConfig,
 						geoOverride: {
 							ccpa: {
