@@ -136,6 +136,7 @@ const labelStyles = css`
 	border-bottom: none;
 	padding: 3px 10px 4px 10px;
 	display: inline-block;
+	${textSans.small({ fontWeight: 'regular' })}
 `;
 
 const immersiveMainElementEventStyles = css`
