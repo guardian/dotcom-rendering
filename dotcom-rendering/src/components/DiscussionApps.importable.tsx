@@ -1,18 +1,41 @@
-import { DiscussionResponseType } from '@guardian/bridget';
+import {
+	DiscussionApiResponse,
+	DiscussionResponseType,
+} from '@guardian/bridget';
 import { useEffect, useState } from 'react';
 import { getDiscussionClient } from '../lib/bridgetApi';
-import type { Reader, UserProfile } from '../lib/discussion';
+import {
+	parseCommentResponse,
+	type Reader,
+	type UserProfile,
+} from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
-import type { Result } from '../lib/result';
+import { error, ok, type Result } from '../lib/result';
 import { Discussion, type Props as DiscussionProps } from './Discussion';
 
 type Props = Omit<DiscussionProps, 'user' | 'reportAbuseUnauthenticated'>;
 
-const onComment = async (): Promise<CommentResponse> => {
-	console.log('onComment');
-	return { kind: 'error', error: 'ApiError' };
-};
+const onComment = async (
+	discussionShortUrl: string,
+	body: string,
+): Promise<CommentResponse> =>
+	getDiscussionClient()
+		.comment(discussionShortUrl, body)
+		.then((apiResponse) => {
+			if (
+				apiResponse.__type ===
+				DiscussionResponseType.DiscussionResponseWithError
+			) {
+				return error('ApiError');
+			}
+
+			const parsedResponse = parseCommentResponse({
+				status: apiResponse.response.status,
+				message: apiResponse.response.message,
+			});
+			return parsedResponse;
+		});
 
 const onReply = async (): Promise<CommentResponse> => {
 	console.log('onReply');
