@@ -37,7 +37,7 @@ type Props = {
 	wasScrolledTo?: boolean;
 	isMuted: boolean;
 	toggleMuteStatus: (userId: string) => void;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 	isExpanded: boolean;
 };
