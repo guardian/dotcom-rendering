@@ -127,10 +127,17 @@ const Heading = ({ count }: { count?: number }) => {
 };
 
 const signIn = async (): Promise<void> => {
-	void getUserClient().signIn(
-		SignInScreenReason.accessDiscussion,
-		SignInScreenReferrer.accessDiscussion,
-	);
+	console.log('signing in...');
+	void getUserClient()
+		.signIn(
+			SignInScreenReason.accessDiscussion,
+			SignInScreenReferrer.accessDiscussion,
+		)
+		.then((signedIn) => {
+			signedIn
+				? console.log('sign in successful')
+				: console.log('sign in failed');
+		});
 };
 
 export const SignedInAs = ({
@@ -147,7 +154,7 @@ export const SignedInAs = ({
 	const SignInApps = () => {
 		return (
 			<>
-				<LinkButton onClick={signIn}>sign in</LinkButton> or{' '}
+				<LinkButton onClick={signIn}>Sign in</LinkButton> or{' '}
 				<LinkButton onClick={signIn}>
 					create your Guardian account
 				</LinkButton>{' '}
@@ -164,7 +171,7 @@ export const SignedInAs = ({
 					)}`}
 					css={linkStyles}
 				>
-					sign in
+					Sign in
 				</a>
 				or
 				<a
