@@ -38,5 +38,16 @@ export const useAdblockAsk = (): boolean => {
 		void makeRequest();
 	}, [adBlockerDetected, isOnline]);
 
+	/**
+	 * Some ad-blockers will remove slots from the DOM, while others don't
+	 * This clean-up ensures that any space we've reserved for an ad is removed,
+	 * in order to properly layout the ask.
+	 */
+	useEffect(() => {
+		if (adBlockerDetected) {
+			document.querySelector('.ad-slot-container')?.remove();
+		}
+	}, [adBlockerDetected]);
+
 	return isInVariant && adBlockerDetected;
 };
