@@ -23,7 +23,6 @@ const onComment = async (
 	getDiscussionClient()
 		.comment(discussionShortUrl, body)
 		.then((apiResponse) => {
-			console.log(apiResponse);
 			if (
 				apiResponse.__type ===
 				DiscussionResponseType.DiscussionResponseWithError
@@ -31,11 +30,17 @@ const onComment = async (
 				return error('ApiError');
 			}
 
-			const parsedResponse = parseCommentResponse({
+			if (apiResponse.response.status === 'error') {
+				return parseCommentResponse({
+					status: apiResponse.response.status,
+					errorCode: apiResponse.response.errorCode,
+				});
+			}
+
+			return parseCommentResponse({
 				status: apiResponse.response.status,
 				message: apiResponse.response.message,
 			});
-			return parsedResponse;
 		});
 
 const onReply = async (
@@ -46,7 +51,6 @@ const onReply = async (
 	getDiscussionClient()
 		.reply(discussionShortUrl, body, parentCommentId.toString())
 		.then((apiResponse) => {
-			console.log(apiResponse);
 			if (
 				apiResponse.__type ===
 				DiscussionResponseType.DiscussionResponseWithError
@@ -73,10 +77,8 @@ const onRecommend = async (commentId: string): Promise<boolean> => {
 		);
 };
 
-const addUsername = async (): Promise<Result<string, true>> => {
-	console.log('addUsername');
-	return { kind: 'error', error: 'ApiError' };
-};
+const addUsername = async (): Promise<Result<string, true>> =>
+	error('Unimplemented');
 
 /***
  *  Currently we are using the web handler for both authenticated and unauthenticated users.
@@ -94,7 +96,6 @@ export const DiscussionApps = (props: Props) => {
 		void getDiscussionClient()
 			.getUserProfile()
 			.then((userProfile) => {
-				console.log(userProfile);
 				if (
 					userProfile.__type ===
 					GetUserProfileResponseType.GetUserProfileResponseWithError
