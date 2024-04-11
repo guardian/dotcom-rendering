@@ -108,6 +108,7 @@ const wrapperStyle = ({
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
 	display: flex;
+	flex-direction: column;
 `;
 
 const placeholderLinkStyle = css`
