@@ -8,7 +8,6 @@ import { QuoteIcon } from './QuoteIcon';
 const pullQuoteCss = css`
 	color: ${palette('--pullquote-text')};
 	overflow-wrap: break-word;
-	hyphens: auto;
 `;
 
 const fontCss = (role: string, format: ArticleFormat) => {
