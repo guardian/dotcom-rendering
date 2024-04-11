@@ -13,7 +13,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
-import { TopRightAdSlot } from './TopRightAdSlot';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 
 type InlinePosition =
 	| 'fronts-banner'
@@ -463,10 +463,43 @@ export const AdSlot = ({
 				}
 				case ArticleDisplay.Standard: {
 					return (
-						<TopRightAdSlot
-							isPaidContent={isPaidContent}
-							adStyles={[labelStyles]}
-						/>
+						<div
+							id="top-right-ad-slot"
+							className="ad-slot-container"
+							css={[
+								css`
+									position: static;
+									height: 100%;
+									max-height: 100%;
+								`,
+								labelStyles,
+							]}
+						>
+							<div
+								id="dfp-ad--right"
+								className={[
+									'js-ad-slot',
+									'ad-slot',
+									'ad-slot--right',
+									'ad-slot--mpu-banner-ad',
+									'ad-slot--rendered',
+									'js-sticky-mpu',
+								].join(' ')}
+								css={[
+									css`
+										position: sticky;
+										/* Possibly account for the sticky Labs header and 6px of padding */
+										top: ${isPaidContent
+											? LABS_HEADER_HEIGHT + 6
+											: 0}px;
+									`,
+									labelStyles,
+								]}
+								data-link-name="ad slot right"
+								data-name="right"
+								aria-hidden="true"
+							/>
+						</div>
 					);
 				}
 				default:
