@@ -2,6 +2,8 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { headline, textSans } from '@guardian/source-foundations';
 import { palette } from '@guardian/source-foundations/cjs/source-foundations/src/colour/palette';
+import { assertUnreachable } from '../lib/assert-unreachable';
+import { useAdblockAsk } from '../lib/useAdBlockAsk';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import HandsLogoSmall from '../static/logos/hands-small.svg';
 import HandsLogo from '../static/logos/hands.svg';
@@ -92,6 +94,7 @@ export const AdBlockAskLeaderboard = ({
 				width: 728px;
 				height: 114px;
 				background-color: ${palette.sport[300]};
+				margin: 0 auto;
 			`}
 		>
 			<HandsLogoSmall
@@ -164,4 +167,32 @@ export const AdBlockAskMPU = ({
 			</div>
 		</div>
 	);
+};
+
+type Props = {
+	size: AdBlockAskSize;
+};
+
+export const AdBlockAsk = ({ size }: Props) => {
+	const showAdBlockAsk = useAdblockAsk();
+
+	if (!showAdBlockAsk) {
+		return null;
+	}
+
+	const supportButtonHref = '#';
+
+	switch (size) {
+		case 'leaderboard': {
+			return (
+				<AdBlockAskLeaderboard supportButtonHref={supportButtonHref} />
+			);
+		}
+		case 'mpu': {
+			return <AdBlockAskMPU supportButtonHref={supportButtonHref} />;
+		}
+		default: {
+			return assertUnreachable(size);
+		}
+	}
 };
