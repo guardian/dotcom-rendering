@@ -180,6 +180,7 @@ export const AdBlockAsk = ({ size }: Props) => {
 		return null;
 	}
 
+	// TODO: Replace this with an appropriate URL before launch
 	const supportButtonHref = '#';
 
 	switch (size) {
