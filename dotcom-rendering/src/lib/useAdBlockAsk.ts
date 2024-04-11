@@ -45,7 +45,11 @@ export const useAdblockAsk = (): boolean => {
 	 */
 	useEffect(() => {
 		if (adBlockerDetected) {
-			document.querySelector('.ad-slot-container')?.remove();
+			for (const container of document.querySelectorAll(
+				'.ad-slot-container',
+			)) {
+				container.remove();
+			}
 		}
 	}, [adBlockerDetected]);
 
