@@ -1,4 +1,9 @@
+import type { ServerSideTests } from '../types/config';
 import { JsonScript } from './JsonScript.amp';
+
+type AdConsentProps = {
+	abTests: ServerSideTests;
+};
 
 const sourcepointDomain = 'sourcepoint.theguardian.com';
 
@@ -57,7 +62,14 @@ const clientConfigAus = {
 		framework: 'aus',
 	},
 };
-export const AdConsent = () => {
+
+export const AdConsent = ({ abTests }: AdConsentProps) => {
+	const testAlternativeClientConfig = {
+		...clientConfig,
+		propertyId: 16921,
+		propertyHref: 'https://test.theguardian.amp',
+	};
+
 	// To debug geolocation in dev, make sure you're on the experimental channel of AMP:
 	// https://cdn.ampproject.org/experiments.html
 	// Then you can load the url with #amp-geo=XX, where XX is the country code
@@ -141,7 +153,10 @@ export const AdConsent = () => {
 						consentInstanceId: 'sourcepoint',
 						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp-v2?authId=${pubData.authId}`,
 						promptUISrc: `https://${sourcepointDomain}/amp/unified/index.html?${queryParams}`,
-						clientConfig,
+						clientConfig:
+							abTests.ampGlobalAddressListVariant === 'variant'
+								? testAlternativeClientConfig
+								: clientConfig,
 						geoOverride: {
 							ccpa: {
 								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
