@@ -1,6 +1,10 @@
 import { isUndefined } from '@guardian/libs';
 import { test } from '@playwright/test';
-import { interceptOphanRequest } from 'playwright/lib/ophan';
+import {
+	ADDITIONAL_REQUEST_PATH,
+	IMPRESSION_REQUEST_PATH,
+	interceptOphanRequest,
+} from 'playwright/lib/ophan';
 import { cmpAcceptAll, cmpRejectAll, disableCMP } from '../lib/cmp';
 import { loadPage } from '../lib/load-page';
 
@@ -10,12 +14,12 @@ const articleUrl =
 const frontUrl = 'https://www.theguardian.com/uk';
 
 test.describe('Ophan requests', () => {
-	test('should make a view request on an article when consent is rejected', async ({
+	test('should make an IMPRESSION request on an article when consent is rejected', async ({
 		page,
 	}) => {
-		const ophanRequestPromise = interceptOphanRequest({
+		const ophanImpressionRequestPromise = interceptOphanRequest({
 			page,
-			path: 'img/1',
+			path: IMPRESSION_REQUEST_PATH,
 			searchParamMatcher: (searchParams: URLSearchParams) => {
 				const platform = searchParams.get('platform');
 				const url = searchParams.get('url');
@@ -29,15 +33,15 @@ test.describe('Ophan requests', () => {
 		});
 		await loadPage(page, `/Article/${articleUrl}`);
 		await cmpRejectAll(page);
-		await ophanRequestPromise;
+		await ophanImpressionRequestPromise;
 	});
 
-	test('should make a view request on an article when consent is accepted', async ({
+	test('should make an IMPRESSION request on an article when consent is accepted', async ({
 		page,
 	}) => {
-		const ophanRequestPromise = interceptOphanRequest({
+		const ophanImpressionRequestPromise = interceptOphanRequest({
 			page,
-			path: 'img/1',
+			path: IMPRESSION_REQUEST_PATH,
 			searchParamMatcher: (searchParams: URLSearchParams) => {
 				const platform = searchParams.get('platform');
 				const url = searchParams.get('url');
@@ -51,17 +55,17 @@ test.describe('Ophan requests', () => {
 		});
 		await loadPage(page, `/Article/${articleUrl}`);
 		await cmpAcceptAll(page);
-		await ophanRequestPromise;
+		await ophanImpressionRequestPromise;
 	});
 
-	test('should make event requests on an article', async ({
+	test('should make an ADDITIONAL experiences request on an article', async ({
 		context,
 		page,
 	}) => {
 		await disableCMP(context);
 		const ophanExperienceRequestPromise = interceptOphanRequest({
 			page,
-			path: 'img/2',
+			path: ADDITIONAL_REQUEST_PATH,
 			searchParamMatcher: (searchParams: URLSearchParams) => {
 				const experiences = searchParams.get('experiences');
 				return experiences === 'dotcom-rendering';
@@ -71,11 +75,14 @@ test.describe('Ophan requests', () => {
 		await ophanExperienceRequestPromise;
 	});
 
-	test('should make a view request on a front', async ({ context, page }) => {
+	test('should make an IMPRESSION request on a front', async ({
+		context,
+		page,
+	}) => {
 		await disableCMP(context);
-		const ophanRequestPromise = interceptOphanRequest({
+		const ophanImpressionRequestPromise = interceptOphanRequest({
 			page,
-			path: 'img/1',
+			path: IMPRESSION_REQUEST_PATH,
 			searchParamMatcher: (searchParams: URLSearchParams) => {
 				const platform = searchParams.get('platform');
 				const url = searchParams.get('url');
@@ -88,17 +95,17 @@ test.describe('Ophan requests', () => {
 			},
 		});
 		await loadPage(page, `/Front/${frontUrl}`);
-		await ophanRequestPromise;
+		await ophanImpressionRequestPromise;
 	});
 
-	test('should make an event request on a front', async ({
+	test('should make an ADDITIONAL experiences request on a front', async ({
 		context,
 		page,
 	}) => {
 		await disableCMP(context);
 		const ophanExperienceRequestPromise = interceptOphanRequest({
 			page,
-			path: 'img/2',
+			path: ADDITIONAL_REQUEST_PATH,
 			searchParamMatcher: (searchParams: URLSearchParams) => {
 				const experiences = searchParams.get('experiences');
 				return experiences === 'dotcom-rendering';
