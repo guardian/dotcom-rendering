@@ -14,6 +14,8 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { AdBlockAsk } from './AdBlockAsk.importable';
+import { Island } from './Island';
 
 type InlinePosition =
 	| 'fronts-banner'
@@ -463,43 +465,51 @@ export const AdSlot = ({
 				}
 				case ArticleDisplay.Standard: {
 					return (
-						<div
-							id="top-right-ad-slot"
-							className="ad-slot-container"
-							css={[
-								css`
-									position: static;
-									height: 100%;
-									max-height: 100%;
-								`,
-								labelStyles,
-							]}
-						>
+						<>
+							<Island
+								priority="enhancement"
+								defer={{ until: 'visible' }}
+							>
+								<AdBlockAsk size="mpu" />
+							</Island>
 							<div
-								id="dfp-ad--right"
-								className={[
-									'js-ad-slot',
-									'ad-slot',
-									'ad-slot--right',
-									'ad-slot--mpu-banner-ad',
-									'ad-slot--rendered',
-									'js-sticky-mpu',
-								].join(' ')}
+								id="top-right-ad-slot"
+								className="ad-slot-container"
 								css={[
 									css`
-										position: sticky;
-										/* Possibly account for the sticky Labs header and 6px of padding */
-										top: ${isPaidContent
-											? LABS_HEADER_HEIGHT + 6
-											: 0}px;
+										position: static;
+										height: 100%;
+										max-height: 100%;
 									`,
 									labelStyles,
 								]}
-								data-link-name="ad slot right"
-								data-name="right"
-								aria-hidden="true"
-							/>
-						</div>
+							>
+								<div
+									id="dfp-ad--right"
+									className={[
+										'js-ad-slot',
+										'ad-slot',
+										'ad-slot--right',
+										'ad-slot--mpu-banner-ad',
+										'ad-slot--rendered',
+										'js-sticky-mpu',
+									].join(' ')}
+									css={[
+										css`
+											position: sticky;
+											/* Possibly account for the sticky Labs header and 6px of padding */
+											top: ${isPaidContent
+												? LABS_HEADER_HEIGHT + 6
+												: 0}px;
+										`,
+										labelStyles,
+									]}
+									data-link-name="ad slot right"
+									data-name="right"
+									aria-hidden="true"
+								/>
+							</div>
+						</>
 					);
 				}
 				default:
@@ -527,24 +537,25 @@ export const AdSlot = ({
 		}
 		case 'top-above-nav': {
 			return (
-				<div
-					id="dfp-ad--top-above-nav"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--top-above-nav',
-						'ad-slot--mpu-banner-ad',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[
-						fluidAdStyles,
-						fluidFullWidthAdStyles,
-						topAboveNavStyles,
-					]}
-					data-link-name="ad slot top-above-nav"
-					data-name="top-above-nav"
-					aria-hidden="true"
-				></div>
+				<div css={topAboveNavStyles}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
+						<AdBlockAsk size="leaderboard" />
+					</Island>
+					<div
+						id="dfp-ad--top-above-nav"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--top-above-nav',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[fluidAdStyles, fluidFullWidthAdStyles]}
+						data-link-name="ad slot top-above-nav"
+						data-name="top-above-nav"
+						aria-hidden="true"
+					></div>
+				</div>
 			);
 		}
 		case 'mostpop': {
