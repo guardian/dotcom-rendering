@@ -1,4 +1,3 @@
-import assert from 'node:assert';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { parse } from 'valibot';
@@ -19,12 +18,12 @@ import { Comments } from './Comments';
 export default { component: Comments, title: 'Discussion/App' };
 
 const discussionMock = parse(discussionApiResponseSchema, discussion);
-assert(discussionMock.status === 'ok');
+if (discussionMock.status !== 'ok') throw new Error('Invalid mock');
 const discussionWithTwoComments = parse(
 	discussionApiResponseSchema,
 	discussionWithTwoCommentsMock,
 );
-assert(discussionWithTwoComments.status === 'ok');
+if (discussionWithTwoComments.status !== 'ok') throw new Error('Invalid mock');
 
 const commentResponseError = {
 	kind: 'error',
