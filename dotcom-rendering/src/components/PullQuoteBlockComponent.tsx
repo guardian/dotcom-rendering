@@ -7,6 +7,11 @@ import { QuoteIcon } from './QuoteIcon';
 
 const pullQuoteCss = css`
 	color: ${palette('--pullquote-text')};
+	hyphens: none;
+	//allow manual hyphenation + word-break with &shy; markup
+	${until.mobileLandscape} {
+		hyphens: manual;
+	}
 `;
 
 const fontCss = (role: string, format: ArticleFormat) => {
