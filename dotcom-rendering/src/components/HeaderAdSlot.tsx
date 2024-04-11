@@ -1,8 +1,10 @@
 import { css, Global } from '@emotion/react';
-import { constants } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial';
 import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import { AdBlockAsk } from './AdBlockAsk.importable';
 import { adContainerStyles, AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
+import { Island } from './Island';
 
 const headerWrapper = css`
 	position: static;
@@ -39,6 +41,15 @@ const topAboveNavContainer = css`
 	}
 `;
 
+const topAboveNavStyles = css`
+	position: relative;
+	margin: 0 auto;
+	min-height: ${adSizes.leaderboard.height}px;
+	min-width: ${adSizes.leaderboard.width}px;
+	text-align: left;
+	display: block;
+`;
+
 export const HeaderAdSlot = () => (
 	<div css={headerWrapper}>
 		<Global
@@ -56,11 +67,16 @@ export const HeaderAdSlot = () => (
 		/>
 		<Hide when="below" breakpoint="tablet">
 			<div css={[headerAdWrapper]} className="top-banner-ad-container">
-				<div
-					css={[adContainerStyles, topAboveNavContainer]}
-					className="ad-slot-container"
-				>
-					<AdSlot position="top-above-nav" />
+				<div css={topAboveNavStyles}>
+					<Island priority="enhancement" defer={{ until: 'visible' }}>
+						<AdBlockAsk size="leaderboard" />
+					</Island>
+					<div
+						css={[adContainerStyles, topAboveNavContainer]}
+						className="ad-slot-container"
+					>
+						<AdSlot position="top-above-nav" />
+					</div>
 				</div>
 			</div>
 		</Hide>

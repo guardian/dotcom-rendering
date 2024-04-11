@@ -180,15 +180,6 @@ const fluidFullWidthAdStyles = css`
 	}
 `;
 
-const topAboveNavStyles = css`
-	position: relative;
-	margin: 0 auto;
-	min-height: ${adSizes.leaderboard.height}px;
-	min-width: ${adSizes.leaderboard.width}px;
-	text-align: left;
-	display: block;
-`;
-
 const merchandisingAdContainerStyles = css`
 	display: flex;
 	justify-content: center;
@@ -537,25 +528,20 @@ export const AdSlot = ({
 		}
 		case 'top-above-nav': {
 			return (
-				<div css={topAboveNavStyles}>
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<AdBlockAsk size="leaderboard" />
-					</Island>
-					<div
-						id="dfp-ad--top-above-nav"
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							'ad-slot--top-above-nav',
-							'ad-slot--mpu-banner-ad',
-							'ad-slot--rendered',
-						].join(' ')}
-						css={[fluidAdStyles, fluidFullWidthAdStyles]}
-						data-link-name="ad slot top-above-nav"
-						data-name="top-above-nav"
-						aria-hidden="true"
-					></div>
-				</div>
+				<div
+					id="dfp-ad--top-above-nav"
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						'ad-slot--top-above-nav',
+						'ad-slot--mpu-banner-ad',
+						'ad-slot--rendered',
+					].join(' ')}
+					css={[fluidAdStyles, fluidFullWidthAdStyles]}
+					data-link-name="ad slot top-above-nav"
+					data-name="top-above-nav"
+					aria-hidden="true"
+				></div>
 			);
 		}
 		case 'mostpop': {
