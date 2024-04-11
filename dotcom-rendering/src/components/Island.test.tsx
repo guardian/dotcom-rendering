@@ -118,11 +118,16 @@ describe('Island: server-side rendering', () => {
 	test('DiscussionMeta', () => {
 		expect(() =>
 			renderToString(
-				<DiscussionMeta
-					discussionApiUrl={''}
-					shortUrlId={''}
-					enableDiscussionSwitch={false}
-				/>,
+				<ConfigProvider
+					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				>
+					<DiscussionMeta
+						discussionApiUrl={''}
+						shortUrlId={''}
+						enableDiscussionSwitch={false}
+					/>
+					,
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});
