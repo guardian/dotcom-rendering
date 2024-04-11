@@ -180,8 +180,15 @@ export const AdBlockAsk = ({ size }: Props) => {
 		return null;
 	}
 
-	// TODO: Replace this with an appropriate URL before launch
-	const supportButtonHref = '#';
+	const supportButtonHref = `https://support.theguardian.com/contribute?${new URLSearchParams(
+		{
+			utm_campaign: 'shady_pie',
+			utm_source: 'GUARDIAN_WEB',
+			utm_medium: 'ACQUISITIONS_OTHER',
+			utm_content: 'shady_pie',
+			utm_term: 'control',
+		},
+	).toString()}`;
 
 	switch (size) {
 		case 'leaderboard': {
