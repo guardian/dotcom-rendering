@@ -16,7 +16,9 @@ export const useAdblockAsk = (): boolean => {
 	useEffect(() => {
 		const makeRequest = async () => {
 			try {
-				if (isOnline) {
+				// Once we've detected an ad-blocker, we don't care about subsequent detections
+				// Ensure the user is online before performing the detection request
+				if (!adBlockerDetected && isOnline) {
 					const response = await fetch(
 						'https://www3.doubleclick.net',
 						{
@@ -34,7 +36,7 @@ export const useAdblockAsk = (): boolean => {
 			}
 		};
 		void makeRequest();
-	}, [isOnline]);
+	}, [adBlockerDetected, isOnline]);
 
 	return isInVariant && adBlockerDetected;
 };
