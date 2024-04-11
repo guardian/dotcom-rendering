@@ -98,7 +98,7 @@ export const isAmpSupported = ({
 	}
 
 	if (
-		elements.find(
+		elements.some(
 			(element) =>
 				element._type ===
 				'model.dotcomrendering.pageElements.ListBlockElement',
