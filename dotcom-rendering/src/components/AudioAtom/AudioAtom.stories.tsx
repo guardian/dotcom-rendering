@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { defaultFormats } from '../../../.storybook/decorators/splitThemeDecorator';
+import { allModes } from '../../../.storybook/modes';
 import { AudioAtom as AudioAtomComponent } from './AudioAtom';
 
 const meta = {
@@ -36,5 +37,10 @@ export const MultipleFormats = {
 	args: AudioAtom.args,
 	parameters: {
 		formats: defaultFormats,
+		chromatic: {
+			modes: {
+				horizontal: allModes.sideBySideHorizontal,
+			},
+		},
 	},
 } satisfies Story;
