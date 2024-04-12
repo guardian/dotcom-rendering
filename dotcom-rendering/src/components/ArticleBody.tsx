@@ -150,6 +150,7 @@ export const ArticleBody = ({
 				// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
 				className="js-liveblog-body"
 				css={[
+					'margin-top: 14px', // TODO This matches the TextBlockComponent.tsx:162 margin. Confirm with Alex B if this can be 12 or 16 so we can use Source spacing.
 					globalStrongStyles,
 					globalH2Styles(format.display),
 					globalH3Styles(format.display),
