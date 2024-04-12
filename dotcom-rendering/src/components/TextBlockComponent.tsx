@@ -159,8 +159,7 @@ const sanitiserOptions: IOptions = {
 };
 
 const styles = (format: ArticleFormat) => css`
-	margin-top: ${space[3]}px;
-	margin-bottom: ${space[3]}px;
+	margin-bottom: 14px; // TODO Confirm with Alex B if this can be 12 or 16 so we can use Source spacing.
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 

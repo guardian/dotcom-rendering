@@ -202,6 +202,7 @@ export const ArticleBody = ({
 			<div
 				id="maincontent"
 				css={[
+					'margin-top: 14px', // TODO This matches the TextBlockComponent.tsx:162 margin. Confirm with Alex B if this can be 12 or 16 so we can use Source spacing.
 					isInteractive ? null : bodyPadding,
 					globalH2Styles(format.display),
 					globalH3Styles(format.display),
