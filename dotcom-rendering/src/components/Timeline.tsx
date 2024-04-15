@@ -85,7 +85,7 @@ const EventHeader = ({
 			<span css={smallDates ? smallDateStyles : titleStyles(format)}>
 				{event.date}
 			</span>
-			{event.title !== undefined ? (
+			{hasTitle(event) ? (
 				<span css={titleStyles(format)}>{event.title}</span>
 			) : null}
 		</Heading>
