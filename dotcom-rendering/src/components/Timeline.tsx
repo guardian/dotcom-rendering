@@ -98,6 +98,7 @@ const EventHeader = ({
 					index={0}
 					element={event.main}
 					format={format}
+					isTimeline={true}
 				/>
 				{heading}
 			</header>
@@ -110,6 +111,7 @@ const EventHeader = ({
 					index={0}
 					element={event.main}
 					format={format}
+					isTimeline={true}
 				/>
 			</header>
 		);

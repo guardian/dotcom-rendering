@@ -11,6 +11,7 @@ type Props = {
 	id?: string;
 	className?: string;
 	type?: FEElement['_type'];
+	isTimeline?: boolean;
 };
 
 const roleCss = {
@@ -150,6 +151,7 @@ const roleCss = {
 export const defaultRoleStyles = (
 	role: RoleType | 'richLink',
 	format: ArticleFormat,
+	isTimeline: boolean = false,
 ) => {
 	switch (role) {
 		case 'inline':
@@ -159,6 +161,7 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'showcase':
+			if (isTimeline) return roleCss.immersive;
 			return roleCss.showcase;
 		case 'thumbnail':
 			switch (format.design) {
@@ -196,6 +199,7 @@ export const Figure = ({
 	isMainMedia,
 	className = '',
 	type,
+	isTimeline = false,
 }: Props) => {
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
@@ -213,7 +217,7 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			css={defaultRoleStyles(role, format)}
+			css={defaultRoleStyles(role, format, isTimeline)}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}
 			className={className}
