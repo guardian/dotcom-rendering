@@ -3,7 +3,6 @@ import {
 	DiscussionResponse,
 	DiscussionResponseType,
 } from '@guardian/bridget/DiscussionResponse';
-import { DiscussionUserProfile } from '@guardian/bridget/DiscussionUserProfile';
 import { GetUserProfileResponseType } from '@guardian/bridget/GetUserProfileResponse';
 
 type BridgeModule = typeof import('../../src/lib/bridgetApi');
