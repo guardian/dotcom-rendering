@@ -128,7 +128,8 @@ export const Question = ({
 	return (
 		<li
 			css={css`
-				${theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17};
+				${theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17}
+				${theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 			`}
 		>
 			<fieldset css={fieldsetStyle}>
