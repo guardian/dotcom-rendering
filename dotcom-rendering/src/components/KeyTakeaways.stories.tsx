@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { allModes } from '.storybook/modes';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';
 import { getAllThemes } from '../lib/format';
 import { RenderArticleElement } from '../lib/renderElement';
