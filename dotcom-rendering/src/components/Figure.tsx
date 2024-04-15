@@ -151,7 +151,7 @@ const roleCss = {
 export const defaultRoleStyles = (
 	role: RoleType | 'richLink',
 	format: ArticleFormat,
-	isTimeline: boolean = false,
+	isTimeline = false,
 ) => {
 	switch (role) {
 		case 'inline':
