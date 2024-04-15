@@ -178,7 +178,8 @@ export const AdBlockAsk = ({ size, slotId }: Props) => {
 	const showAdBlockAsk = useAdblockAsk(slotId);
 
 	if (!showAdBlockAsk) {
-		return null;
+		// FIXME: Can we use `null` or `<></>` here?
+		return <p>No shady pie</p>;
 	}
 
 	const supportButtonHref = `https://support.theguardian.com/contribute?${new URLSearchParams(
