@@ -29,12 +29,12 @@ export const linkStyles = css`
 
 const calloutStyles = css`
 	padding-bottom: ${space[4]}px;
-	${textEgyptian17};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4 p {
+	* @TODO line height override should be replaced with 'article17' preset
+	*/
+	${textEgyptian17}
+	line-height: 1.4;
+	p {
 		margin-bottom: ${space[3]}px;
 	}
 `;
