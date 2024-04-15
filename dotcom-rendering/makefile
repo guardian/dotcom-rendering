@@ -70,6 +70,8 @@ storybook-dev: clear clean-dist install
 	$(call log, "starting Storybook DEV server")
 	@pnpm storybook
 
+storybook: storybook-dev
+
 # tests #####################################
 
 playwright-run:

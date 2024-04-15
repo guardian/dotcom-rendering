@@ -14,7 +14,7 @@ const userProfile = {
 } satisfies UserProfile;
 
 const createComment = (
-	id: number,
+	id: string,
 	body: string,
 	responses: ReplyType[],
 ): CommentType => ({
@@ -31,7 +31,7 @@ const createComment = (
 	status: 'visible',
 });
 
-const createReply = (id: number, body: string): ReplyType => ({
+const createReply = (id: string, body: string): ReplyType => ({
 	id,
 	body,
 	userProfile,
@@ -57,21 +57,21 @@ describe('Discussion', () => {
 		it('Will not do anything if no comment matches', () => {
 			const replacer = replaceMatchingCommentResponses({
 				type: 'expandCommentReplies',
-				commentId: 999_999,
+				commentId: '999_999',
 				responses: [
-					createReply(123_001, '<p>A first reply</p>'),
-					createReply(123_002, '<p>A second reply</p>'),
-					createReply(123_003, '<p>A third reply</p>'),
-					createReply(123_004, '<p>A fourth reply</p>'),
-					createReply(123_005, '<p>A fifth reply</p>'),
-					createReply(123_006, '<p>A sixth reply</p>'),
+					createReply('123_001', '<p>A first reply</p>'),
+					createReply('123_002', '<p>A second reply</p>'),
+					createReply('123_003', '<p>A third reply</p>'),
+					createReply('123_004', '<p>A fourth reply</p>'),
+					createReply('123_005', '<p>A fifth reply</p>'),
+					createReply('123_006', '<p>A sixth reply</p>'),
 				],
 			});
 
 			const comments = [
-				createComment(123_000, 'Something', []),
-				createComment(234_000, 'Or other', []),
-				createComment(456_000, 'Is to be said', []),
+				createComment('123_000', 'Something', []),
+				createComment('234_000', 'Or other', []),
+				createComment('456_000', 'Is to be said', []),
 			];
 
 			expect(comments.map(replacer)).toEqual(comments);
@@ -80,34 +80,34 @@ describe('Discussion', () => {
 		it('Will update responses to a matching top-level comment', () => {
 			const replacer = replaceMatchingCommentResponses({
 				type: 'expandCommentReplies',
-				commentId: 123_000,
+				commentId: '123_000',
 				responses: [
-					createReply(123_100, '<p>A first reply</p>'),
-					createReply(123_200, '<p>A second reply</p>'),
-					createReply(123_300, '<p>A third reply</p>'),
-					createReply(123_400, '<p>A fourth reply</p>'),
-					createReply(123_500, '<p>A fifth reply</p>'),
-					createReply(123_600, '<p>A sixth reply</p>'),
+					createReply('123_100', '<p>A first reply</p>'),
+					createReply('123_200', '<p>A second reply</p>'),
+					createReply('123_300', '<p>A third reply</p>'),
+					createReply('123_400', '<p>A fourth reply</p>'),
+					createReply('123_500', '<p>A fifth reply</p>'),
+					createReply('123_600', '<p>A sixth reply</p>'),
 				],
 			});
 
 			const comments = [
-				createComment(123_000, 'Something', []),
-				createComment(234_000, 'Or other', []),
-				createComment(456_000, 'Is to be said', []),
+				createComment('123_000', 'Something', []),
+				createComment('234_000', 'Or other', []),
+				createComment('456_000', 'Is to be said', []),
 			];
 
 			expect(comments.map(replacer)).toEqual([
-				createComment(123_000, 'Something', [
-					createReply(123_100, '<p>A first reply</p>'),
-					createReply(123_200, '<p>A second reply</p>'),
-					createReply(123_300, '<p>A third reply</p>'),
-					createReply(123_400, '<p>A fourth reply</p>'),
-					createReply(123_500, '<p>A fifth reply</p>'),
-					createReply(123_600, '<p>A sixth reply</p>'),
+				createComment('123_000', 'Something', [
+					createReply('123_100', '<p>A first reply</p>'),
+					createReply('123_200', '<p>A second reply</p>'),
+					createReply('123_300', '<p>A third reply</p>'),
+					createReply('123_400', '<p>A fourth reply</p>'),
+					createReply('123_500', '<p>A fifth reply</p>'),
+					createReply('123_600', '<p>A sixth reply</p>'),
 				]),
-				createComment(234_000, 'Or other', []),
-				createComment(456_000, 'Is to be said', []),
+				createComment('234_000', 'Or other', []),
+				createComment('456_000', 'Is to be said', []),
 			]);
 		});
 	});
@@ -131,12 +131,12 @@ describe('Discussion', () => {
 					isThreaded: false,
 					title: '',
 					comments: [
-						createComment(10, 'first', []),
-						createComment(20, 'second', [
-							createReply(21, 'second reply'),
+						createComment('10', 'first', []),
+						createComment('20', 'second', [
+							createReply('21', 'second reply'),
 						]),
-						createComment(30, 'third', []),
-						createComment(40, 'fourth', []),
+						createComment('30', 'third', []),
+						createComment('40', 'fourth', []),
 					],
 				},
 			});
@@ -165,11 +165,11 @@ describe('Discussion', () => {
 					isThreaded: false,
 					title: '',
 					comments: [
-						createComment(10, 'first', []),
-						createComment(20, 'second', []),
-						createReply(11, 'first reply'),
-						createReply(21, 'second reply'),
-						createReply(22, 'second reply again'),
+						createComment('10', 'first', []),
+						createComment('20', 'second', []),
+						createReply('11', 'first reply'),
+						createReply('21', 'second reply'),
+						createReply('22', 'second reply again'),
 					],
 				},
 			});

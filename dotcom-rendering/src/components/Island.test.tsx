@@ -56,7 +56,6 @@ const Mock = () => <>🏝️</>;
 );
 
 () => (
-	// @ts-expect-error -- critical island be deferred until idle
 	<Island priority="critical" defer={{ until: 'idle' }}>
 		<Mock />
 	</Island>

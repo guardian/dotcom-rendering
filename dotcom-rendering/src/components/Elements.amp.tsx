@@ -97,6 +97,16 @@ export const isAmpSupported = ({
 			return false;
 	}
 
+	if (
+		elements.some(
+			(element) =>
+				element._type ===
+				'model.dotcomrendering.pageElements.ListBlockElement',
+		)
+	) {
+		return false;
+	}
+
 	if (format.design === ArticleDesign.LiveBlog) {
 		const isSwitchedOn = switches.ampLiveblogSwitch;
 		if (!isSwitchedOn) return false;

@@ -348,7 +348,7 @@ export const FeatureTwoContributors: StoryObj = ({ format }: StoryArgs) => {
 				format={format}
 				pageId=""
 				webTitle=""
-				byline="Lanre Bakare"
+				byline="Lanre Bakare and Another Author"
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"

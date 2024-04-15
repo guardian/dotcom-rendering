@@ -56,7 +56,8 @@ const spout = css`
 	width: 0;
 	height: 0;
 	border-right: 1rem solid transparent;
-	border-bottom: 1rem solid ${schemedPalette('--discussion-border')};
+	border-bottom: 1rem solid
+		${schemedPalette('--discussion-preview-background')};
 	margin-left: 12.5rem;
 	border-right-style: inset;
 `;

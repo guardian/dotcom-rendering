@@ -256,7 +256,7 @@ export const RichLink = ({
 								<div css={starWrapperStyles}>
 									<StarRating
 										rating={starRating}
-										size="medium"
+										size="small"
 									/>
 								</div>
 							)}

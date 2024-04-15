@@ -1,7 +1,7 @@
 import type { CommentType } from '../../src/lib/discussion';
 
 export const comment = {
-	id: 138809272,
+	id: '138809272',
 	body: '<p>Begone ye self-serving Tory isolationists.</p> <p>Never has there been a more significant time for Big Government and public health provision. Nature has spoken.</p>',
 	date: '09 March 2020 7:09pm',
 	isoDateTime: '2020-03-09T19:09:28Z',
@@ -29,7 +29,7 @@ export const comment = {
 	},
 	responses: [
 		{
-			id: 138809396,
+			id: '138809396',
 			body: "This comment was removed by a moderator because it didn't abide by our <a href='http://www.theguardian.com/community-standards'>community standards</a>. Replies may also be deleted. For more detail see <a href='http://www.guardian.co.uk/community-faqs'>our FAQs</a>.",
 			date: '09 March 2020 7:19pm',
 			isoDateTime: '2020-03-09T19:19:03Z',
@@ -59,7 +59,7 @@ export const comment = {
 			},
 		},
 		{
-			id: 138809487,
+			id: '138809487',
 			body: '<p>There are few Libertarians and small government advocates during pandemics.</p>',
 			date: '09 March 2020 7:24pm',
 			isoDateTime: '2020-03-09T19:24:46Z',
@@ -89,7 +89,7 @@ export const comment = {
 			},
 		},
 		{
-			id: 138809896,
+			id: '138809896',
 			body: '<p>What?</p>',
 			date: '09 March 2020 7:48pm',
 			isoDateTime: '2020-03-09T19:48:31Z',
@@ -119,7 +119,7 @@ export const comment = {
 			},
 		},
 		{
-			id: 138810191,
+			id: '138810191',
 			body: '<p>Or at least, they don\'t flaunt their allegiance to <i>Britannia Unchained</i> and Rand quite so obviously. What awaits if we continue to act as if "there are individual men and women and there are families" and no responsibility to a wider society?</p>',
 			date: '09 March 2020 8:05pm',
 			isoDateTime: '2020-03-09T20:05:54Z',
