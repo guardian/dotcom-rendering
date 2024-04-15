@@ -230,6 +230,10 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 							headerTopBarSearchCapiSwitch={
 								!!article.config.switches.headerTopBarSearchCapi
 							}
+							showUpdatedDesign={
+								article.config.abTests
+									.updatedHeaderDesignVariant === 'variant'
+							}
 						/>
 					</Section>
 				</div>

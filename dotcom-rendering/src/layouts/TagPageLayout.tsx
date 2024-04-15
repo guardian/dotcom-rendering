@@ -110,6 +110,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							headerTopBarSearchCapiSwitch={
 								!!switches.headerTopBarSearchCapi
 							}
+							showUpdatedDesign={
+								tagPage.config.abTests
+									.updatedHeaderDesignVariant === 'variant'
+							}
 						/>
 					</Section>
 					<Section

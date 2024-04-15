@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space } from '@guardian/source-foundations';
+import { from, headline, palette, space } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
@@ -21,6 +21,7 @@ interface HeaderTopBarProps {
 	idApiUrl: string;
 	headerTopBarSearchCapiSwitch: boolean;
 	hasPageSkin?: boolean;
+	showUpdatedDesign?: boolean;
 }
 
 const topBarStylesUntilLeftCol = css`
@@ -70,10 +71,41 @@ export const HeaderTopBar = ({
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
 	hasPageSkin = false,
+	showUpdatedDesign = false,
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
 
-	return (
+	return showUpdatedDesign ? (
+		<div
+			css={[
+				css`
+					background-color: ${palette.brand[100]};
+				`,
+				topBarStylesUntilLeftCol,
+				!hasPageSkin && topBarStylesFromLeftCol,
+				hasPageSkin ? pageSkinContainer : center,
+			]}
+		>
+			{/** Support us message (from desktop only) */}
+			<span
+				css={css`
+					${headline.xxxsmall()}
+					color: ${palette.neutral[97]};
+					padding: ${space[1]}px;
+				`}
+			>
+				Support the Guardian
+			</span>
+
+			{/** Support us button */}
+
+			{/** Print subscriptions (from desktop only) */}
+
+			{/** Search jobs (from desktop only) */}
+
+			{/** Sign in / MMA */}
+		</div>
+	) : (
 		<div
 			css={css`
 				background-color: ${palette.brand[300]};

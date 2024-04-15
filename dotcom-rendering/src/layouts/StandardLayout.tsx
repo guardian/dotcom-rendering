@@ -383,6 +383,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									!!article.config.switches
 										.headerTopBarSearchCapi
 								}
+								showUpdatedDesign={
+									article.config.abTests
+										.updatedHeaderDesignVariant ===
+									'variant'
+								}
 							/>
 						</Section>
 					)}

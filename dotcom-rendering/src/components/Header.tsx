@@ -39,6 +39,8 @@ type Props = {
 	idApiUrl: string;
 	headerTopBarSearchCapiSwitch: boolean;
 	hasPageSkin?: boolean;
+	/** Shows header variant as part of AB test 'updated-header-design' */
+	showUpdatedDesign?: boolean;
 };
 
 export const Header = ({
@@ -52,6 +54,7 @@ export const Header = ({
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
 	hasPageSkin = false,
+	showUpdatedDesign = false,
 }: Props) => (
 	<div css={headerStyles} data-component="nav3">
 		<Island priority="critical">
@@ -68,6 +71,7 @@ export const Header = ({
 				idApiUrl={idApiUrl}
 				headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
 				hasPageSkin={hasPageSkin}
+				showUpdatedDesign={showUpdatedDesign}
 			/>
 		</Island>
 

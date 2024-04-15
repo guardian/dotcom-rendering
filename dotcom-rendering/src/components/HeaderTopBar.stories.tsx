@@ -1,22 +1,29 @@
+import type { Meta } from '@storybook/react';
 import { HeaderTopBar } from './HeaderTopBar.importable';
 
-export default {
+const meta = {
 	component: HeaderTopBar,
 	title: 'Components/HeaderTopBar',
+	render: (args) => <HeaderTopBar {...args} />,
+	args: {
+		editionId: 'UK',
+		dataLinkName: 'test',
+		discussionApiUrl: 'discussionApiUrl',
+		idUrl: 'idurl',
+		idApiUrl: 'idApiUrl',
+		mmaUrl: 'mmaUrl',
+		headerTopBarSearchCapiSwitch: false,
+		showUpdatedDesign: false,
+	},
+} satisfies Meta<typeof HeaderTopBar>;
+
+export default meta;
+
+export const defaultStory = {
+	name: 'Header top bar signed out',
 };
 
-export const defaultStory = () => {
-	return (
-		<HeaderTopBar
-			editionId="UK"
-			dataLinkName="test"
-			idUrl="idurl"
-			mmaUrl="mmaUrl"
-			discussionApiUrl="discussionApiUrl"
-			idApiUrl="idApiUrl"
-			headerTopBarSearchCapiSwitch={false}
-		/>
-	);
+export const redesignedTopBar = {
+	name: 'Header top bar signed out with redesign',
+	args: { showUpdatedDesign: true },
 };
-
-defaultStory.storyName = 'Header top bar signed out';

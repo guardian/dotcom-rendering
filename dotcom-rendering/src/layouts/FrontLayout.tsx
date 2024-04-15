@@ -213,6 +213,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.headerTopBarSearchCapi
 								}
 								hasPageSkin={hasPageSkin}
+								showUpdatedDesign={
+									front.config.abTests
+										.updatedHeaderDesignVariant ===
+									'variant'
+								}
 							/>
 						</Section>
 					)}

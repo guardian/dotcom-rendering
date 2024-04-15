@@ -88,6 +88,10 @@ export const AllEditorialNewslettersPageLayout = ({
 								!!newslettersPage.config.switches
 									.headerTopBarSearchCapi
 							}
+							showUpdatedDesign={
+								newslettersPage.config.abTests
+									.updatedHeaderDesignVariant === 'variant'
+							}
 						/>
 					</Section>
 					<Section

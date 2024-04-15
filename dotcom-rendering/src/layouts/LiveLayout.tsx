@@ -358,6 +358,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									!!article.config.switches
 										.headerTopBarSearchCapi
 								}
+								showUpdatedDesign={
+									article.config.abTests
+										.updatedHeaderDesignVariant ===
+									'variant'
+								}
 							/>
 						</Section>
 
