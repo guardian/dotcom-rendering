@@ -170,11 +170,12 @@ export const AdBlockAskMPU = ({
 };
 
 type Props = {
+	slotId: `dfp-ad--${string}`;
 	size: AdBlockAskSize;
 };
 
-export const AdBlockAsk = ({ size }: Props) => {
-	const showAdBlockAsk = useAdblockAsk();
+export const AdBlockAsk = ({ size, slotId }: Props) => {
+	const showAdBlockAsk = useAdblockAsk(slotId);
 
 	if (!showAdBlockAsk) {
 		return null;

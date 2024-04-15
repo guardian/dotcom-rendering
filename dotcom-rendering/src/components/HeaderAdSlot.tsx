@@ -69,7 +69,10 @@ export const HeaderAdSlot = () => (
 			<div css={[headerAdWrapper]} className="top-banner-ad-container">
 				<div css={topAboveNavStyles}>
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
-						<AdBlockAsk size="leaderboard" />
+						<AdBlockAsk
+							size="leaderboard"
+							slotId="dfp-ad--top-above-nav"
+						/>
 					</Island>
 					<div
 						css={[adContainerStyles, topAboveNavContainer]}

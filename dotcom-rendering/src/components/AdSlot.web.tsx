@@ -455,13 +455,14 @@ export const AdSlot = ({
 					);
 				}
 				case ArticleDisplay.Standard: {
+					const slotId = 'dfp-ad--right';
 					return (
 						<>
 							<Island
 								priority="enhancement"
 								defer={{ until: 'visible' }}
 							>
-								<AdBlockAsk size="mpu" />
+								<AdBlockAsk size="mpu" slotId={slotId} />
 							</Island>
 							<div
 								id="top-right-ad-slot"
@@ -476,7 +477,7 @@ export const AdSlot = ({
 								]}
 							>
 								<div
-									id="dfp-ad--right"
+									id={slotId}
 									className={[
 										'js-ad-slot',
 										'ad-slot',
