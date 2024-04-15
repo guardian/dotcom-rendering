@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { from, palette, textSans } from '@guardian/source-foundations';
+import { from, palette, textSans17 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
@@ -58,7 +58,7 @@ const myAccountLinkStyles = css`
 	align-items: center;
 	height: fit-content;
 	position: relative;
-	${textSans.medium()};
+	${textSans17};
 	font-size: 1rem;
 	line-height: 1;
 	color: ${palette.neutral[100]};

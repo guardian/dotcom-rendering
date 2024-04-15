@@ -1,5 +1,5 @@
 import { css, jsx } from '@emotion/react';
-import { body } from '@guardian/source-foundations';
+import { textEgyptian17 } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
@@ -14,11 +14,13 @@ type Props = {
 
 const baseBlockquoteStyles = css`
 	margin-bottom: 14px;
-	${body.medium({
-		fontWeight: 'regular',
-		fontStyle: 'italic',
-		lineHeight: 'loose',
-	})};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
+	font-style: italic;
 
 	color: ${palette('--block-quote-text')};
 

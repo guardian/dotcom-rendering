@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import {
-	body,
 	from,
-	headline,
+	headlineBold28,
+	headlineBold34,
 	palette,
 	space,
+	textEgyptian17,
+	textEgyptianBold17,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import {
@@ -28,17 +30,22 @@ import {
 import { SignInGateMain } from './SignInGateMain';
 
 const personalisedHeadingStyles = css`
-	${headline.small({ fontWeight: 'bold' })};
+	${headlineBold28};
 	border-top: 2px ${palette.brand[400]} solid;
 	${from.phablet} {
 		padding-right: 160px;
-		${headline.medium({ fontWeight: 'bold' })};
+		${headlineBold34};
 	}
 	padding-bottom: ${space[2]}px;
 `;
 
 const personalisedBodyBold = css`
-	${body.medium({ fontWeight: 'bold' })}
+	${textEgyptianBold17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	${from.phablet} {
 		padding-right: 130px;
 	}
@@ -66,7 +73,13 @@ const bulletStyles = css`
 `;
 
 const personalisedBodyTextList = css`
-	${body.medium({ fontWeight: 'medium' })};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	font-weight: 500;
+	line-height: 1.4;
 	color: black;
 `;
 

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { textSans } from '@guardian/source-foundations';
+import { textSans17 } from '@guardian/source-foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type {
@@ -41,7 +41,7 @@ const defaultFormat = {
 };
 
 const paragraphStyle = css`
-	${textSans.medium()};
+	${textSans17};
 	font-weight: 300;
 	margin-top: 0;
 	margin-bottom: 8px;

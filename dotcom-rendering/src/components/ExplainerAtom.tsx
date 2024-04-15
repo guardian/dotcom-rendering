@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { headline, space, textSans } from '@guardian/source-foundations';
+import {
+	headlineBold20,
+	space,
+	textSans15,
+} from '@guardian/source-foundations';
 import { palette } from '../palette';
 
 interface Props {
@@ -43,7 +47,7 @@ const Container = ({
 const Title = ({ title }: { title: string }) => (
 	<h3
 		css={css`
-			${headline.xxsmall({ fontWeight: 'bold' })}
+			${headlineBold20}
 			margin-top: ${space[2]}px;
 		`}
 	>
@@ -54,10 +58,13 @@ const Title = ({ title }: { title: string }) => (
 const Body = ({ html }: { html: string }) => (
 	<div
 		css={css`
-			${textSans.small({
-				fontWeight: 'light',
-				lineHeight: 'tight',
-			})}
+			${textSans15};
+			/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+			font-weight: 300;
+			line-height: 1.15;
 		`}
 		dangerouslySetInnerHTML={{
 			__html: html,

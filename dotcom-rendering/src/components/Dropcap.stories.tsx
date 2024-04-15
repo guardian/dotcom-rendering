@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { body } from '@guardian/source-foundations';
+import { textEgyptian17 } from '@guardian/source-foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { DropCap } from './DropCap';
 
@@ -11,7 +11,12 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 			padding: 20px;
 
 			p {
-				${body.medium()};
+				${textEgyptian17};
+				/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+				line-height: 1.4;
 			}
 		`}
 	>

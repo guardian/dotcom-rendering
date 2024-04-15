@@ -1,7 +1,7 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
+import { headlineBold20, headlineLight34 } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
@@ -25,9 +25,7 @@ interface Props {
 }
 
 const headingStyles = (display: ArticleDisplay): SerializedStyles => css`
-	${display === ArticleDisplay.Immersive
-		? headline.medium({ fontWeight: 'light' })
-		: headline.xxsmall({ fontWeight: 'bold' })};
+	${display === ArticleDisplay.Immersive ? headlineLight34 : headlineBold20};
 	padding: 2px 0px;
 `;
 

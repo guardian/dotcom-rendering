@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { body, palette, text, textSans } from '@guardian/source-foundations';
+import {
+	palette,
+	text,
+	textEgyptian17,
+	textSans12,
+	textSans15,
+} from '@guardian/source-foundations';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { BaseLinkType } from '../model/extract-nav';
 import CommentIcon from '../static/icons/comment.svg';
@@ -26,10 +32,10 @@ const linkStyle = (pillar: ArticleTheme) => css`
 	padding-right: 6px;
 	text-decoration: none;
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
-	${textSans.small()};
+	${textSans15};
 	:after {
 		content: '/';
-		${textSans.small()};
+		${textSans15};
 		position: absolute;
 		pointer-events: none;
 		top: 0;
@@ -61,10 +67,20 @@ const sectionLinkStyle = (pillar: ArticleTheme) => css`
 	padding-right: 6px;
 	text-decoration: none;
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	:after {
 		content: '/';
-		${body.medium()};
+		${textEgyptian17};
+		/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+		line-height: 1.4;
 		position: absolute;
 		pointer-events: none;
 		top: 0;
@@ -79,7 +95,7 @@ const sectionListStyle = css`
 `;
 
 const labelStyle = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	color: ${text.supporting};
 	display: block;
 	margin-bottom: -3px;
@@ -91,7 +107,7 @@ const siteLinks = css`
 `;
 
 const siteLinkStyle = css`
-	${textSans.small()};
+	${textSans15};
 	font-weight: bold;
 	text-decoration: none;
 	color: ${palette.neutral[7]};

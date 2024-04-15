@@ -2,10 +2,14 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	headline,
+	headlineLight24,
+	headlineLight28,
+	headlineLight34,
+	headlineMedium20,
 	palette,
 	space,
-	textSans,
+	textSans20,
+	textSans34,
 	until,
 } from '@guardian/source-foundations';
 import { getSoleContributor } from '../lib/byline';
@@ -21,12 +25,7 @@ const wrapperStyles = css`
 `;
 
 const interviewBylineBoxStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSans.large({ lineHeight: 'regular' })
-		: headline.xxsmall({
-				fontWeight: 'regular',
-				lineHeight: 'loose',
-		  })}
+	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineMedium20}
 	font-style: italic;
 	background-color: ${schemedPalette('--byline-background')};
 	box-shadow:
@@ -49,11 +48,7 @@ const opinionWrapperStyles = css`
 `;
 
 const opinionStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSans.xxxlarge({ lineHeight: 'loose' })
-		: headline.medium({
-				fontWeight: 'light',
-		  })}
+	${format.theme === ArticleSpecial.Labs ? textSans34 : headlineLight34}
 	line-height: 38px;
 	/* Used to prevent the byline stretching full width */
 	display: inline;
@@ -61,9 +56,7 @@ const opinionStyles = (format: ArticleFormat) => css`
 	color: ${schemedPalette('--byline')};
 
 	${until.mobileMedium} {
-		${headline.small({
-			fontWeight: 'light',
-		})}
+		${headlineLight28}
 	}
 
 	a {
@@ -76,17 +69,13 @@ const opinionStyles = (format: ArticleFormat) => css`
 `;
 
 const analysisStyles = css`
-	${headline.medium({
-		fontWeight: 'light',
-	})}
+	${headlineLight34}
 	line-height: 38px;
 	font-style: italic;
 	color: ${schemedPalette('--byline-anchor')};
 
 	${until.tablet} {
-		${headline.small({
-			fontWeight: 'light',
-		})}
+		${headlineLight28}
 	}
 
 	a {
@@ -107,11 +96,7 @@ const analysisSingleContributorStyles = css`
 `;
 
 const immersiveStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSans.large({ lineHeight: 'tight' })
-		: headline.xsmall({
-				fontWeight: 'light',
-		  })}
+	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineLight24}
 	margin-bottom: ${space[6]}px;
 `;
 

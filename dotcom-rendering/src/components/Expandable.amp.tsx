@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	body,
-	headline,
+	headlineMedium20,
 	palette,
-	textSans,
+	textEgyptian17,
+	textSans15,
 } from '@guardian/source-foundations';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
@@ -48,7 +48,12 @@ const TextStyle = (pillar: ArticleTheme) => css`
 	}
 	p {
 		padding: 0 0 12px;
-		${body.medium()};
+		${textEgyptian17};
+		/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+		line-height: 1.4;
 		font-weight: 300;
 		word-wrap: break-word;
 		color: ${palette.neutral[7]};
@@ -59,7 +64,12 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		font-style: italic;
 	}
 
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 
 	${LinkStyle(pillar)};
 	${ListStyle(neutralBorder(pillar))};
@@ -83,7 +93,12 @@ const wrapper = (pillar: ArticleTheme) => css`
 
 	${TextStyle(pillar)}
 
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 `;
 
 const buttonStyles = css`
@@ -92,7 +107,7 @@ const buttonStyles = css`
 	border-radius: 1600px;
 	color: ${palette.neutral[100]};
 	border: none;
-	${textSans.small()};
+	${textSans15};
 	font-weight: 700;
 	padding: 0 15px 0 7px;
 
@@ -117,11 +132,11 @@ const buttonStyles = css`
 `;
 
 const headerStyle = css`
-	${headline.xxsmall()};
+	${headlineMedium20};
 `;
 
 const creditStyle = css`
-	${textSans.small()};
+	${textSans15};
 	display: block;
 	margin: 12px 0;
 `;

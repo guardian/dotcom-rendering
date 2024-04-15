@@ -1,6 +1,15 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import { headline, textSans, until } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	headlineMedium20,
+	headlineMedium24,
+	headlineMedium28,
+	textSans17,
+	textSans20,
+	textSans24,
+	until,
+} from '@guardian/source-foundations';
 import { palette } from '../palette';
 
 type Props = {
@@ -21,67 +30,67 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 		case 'huge':
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans.xlarge()};
+					${textSans24};
 					font-size: 24px;
 					line-height: 24px;
 					${until.desktop} {
-						${textSans.xlarge()};
+						${textSans24};
 						line-height: 20px;
 					}
 				`;
 			}
 			return css`
-				${headline.small()};
+				${headlineMedium28};
 				${until.desktop} {
-					${headline.xsmall()};
+					${headlineMedium24};
 				}
 			`;
 		case 'large': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans.large()};
+					${textSans20};
 					font-size: 24px;
 					line-height: 24px;
 					${until.desktop} {
-						${textSans.large()};
+						${textSans20};
 						line-height: 20px;
 					}
 				`;
 			}
 			return css`
-				${headline.xsmall()};
+				${headlineMedium24};
 				${until.desktop} {
-					${headline.xxsmall()};
+					${headlineMedium20};
 				}
 			`;
 		}
 		case 'medium': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans.large()};
+					${textSans20};
 					line-height: 20px;
 					${until.desktop} {
-						${textSans.medium()};
+						${textSans17};
 						line-height: 18px;
 					}
 				`;
 			}
 			return css`
-				${headline.xxsmall()};
+				${headlineMedium20};
 				${until.desktop} {
-					${headline.xxxsmall()};
+					${headlineMedium17};
 				}
 			`;
 		}
 		case 'small': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans.medium()};
+					${textSans17};
 					line-height: 18px;
 				`;
 			}
 			return css`
-				${headline.xxxsmall()};
+				${headlineMedium17};
 			`;
 		}
 		case 'tiny':

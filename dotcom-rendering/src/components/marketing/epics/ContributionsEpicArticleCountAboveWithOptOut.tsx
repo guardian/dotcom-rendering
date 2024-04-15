@@ -5,9 +5,19 @@
  */
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { from, until } from '@guardian/source-foundations';
+import {
+	from,
+	textEgyptianBold15,
+	textEgyptianBold17,
+	textSans12,
+	textSans14,
+	textSans15,
+	textSansBold12,
+	textSansBold14,
+	textSansBold15,
+	until,
+} from '@guardian/source-foundations';
 import { palette, space } from '@guardian/source-foundations';
-import { body, textSans } from '@guardian/source-foundations';
 import { Button, ButtonLink } from '@guardian/source-react-components';
 import type {
 	ArticleCounts,
@@ -303,10 +313,20 @@ const topContainer = css`
 
 const articleCountAboveContainerStyles = css`
 	font-style: italic;
-	${body.small({ fontWeight: 'bold' })};
+	${textEgyptianBold15};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 
 	${from.tablet} {
-		${body.medium({ fontWeight: 'bold' })};
+		${textEgyptianBold17};
+		/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+		line-height: 1.4;
 	}
 `;
 
@@ -343,21 +363,21 @@ const articleCountWrapperStyles = css`
 `;
 
 const articleCountTextStyles = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	margin-right: ${space[1]}px;
 
 	${from.tablet} {
-		${textSans.small()};
+		${textSans15};
 	}
 `;
 
 const articleCountCtaStyles = css`
 	margin-top: 0;
 
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 
 	${from.tablet} {
-		${textSans.small({ fontWeight: 'bold' })};
+		${textSansBold15};
 	}
 `;
 
@@ -388,7 +408,7 @@ const articleCountDescriptionContainer = css`
 `;
 
 const articleCountBodyTextStyles = css`
-	${textSans.small()};
+	${textSans15};
 	width: 100%;
 
 	${from.tablet} {
@@ -436,18 +456,18 @@ const articleCountOptOutCtaStyles = css`
 
 const trackingSettingsContainerStyles = css`
 	margin: ${space[4]}px auto ${space[3]}px;
-	${textSans.xxsmall()};
+	${textSans12};
 
 	${from.tablet} {
-		${textSans.xsmall()};
+		${textSans14};
 	}
 `;
 
 const privacySettingsLinkStyles = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 
 	${from.tablet} {
-		${textSans.xsmall({ fontWeight: 'bold' })};
+		${textSansBold14};
 	}
 `;
 

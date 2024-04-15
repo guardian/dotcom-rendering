@@ -8,7 +8,10 @@ import {
 	headline,
 	remBodySizes,
 	space,
-	textSans,
+	textSans12,
+	textSans15,
+	textSans17,
+	textSans20,
 	until,
 } from '@guardian/source-foundations';
 import { Link, SvgExternal } from '@guardian/source-react-components';
@@ -54,29 +57,41 @@ const fontStyles = ({
 		case 'ginormous':
 			return css`
 				${from.desktop} {
-					${headline.large(options)};
+					${headline.large(
+						options,
+					)}/** TODO (1) - Unknown argument please manually update */;
 					font-size: 50px;
 				}
 			`;
 		case 'huge':
 			return css`
-				${headline.small(options)};
+				${headline.small(
+					options,
+				)}/** TODO (1) - Unknown argument please manually update */;
 			`;
 		case 'large':
 			return css`
-				${headline.xsmall(options)};
+				${headline.xsmall(
+					options,
+				)}/** TODO (1) - Unknown argument please manually update */;
 			`;
 		case 'medium':
 			return css`
-				${headline.xxsmall(options)};
+				${headline.xxsmall(
+					options,
+				)}/** TODO (1) - Unknown argument please manually update */;
 			`;
 		case 'small':
 			return css`
-				${headline.xxxsmall(options)};
+				${headline.xxxsmall(
+					options,
+				)}/** TODO (1) - Unknown argument please manually update */;
 			`;
 		case 'tiny':
 			return css`
-				${headline.xxxsmall(options)};
+				${headline.xxxsmall(
+					options,
+				)}/** TODO (1) - Unknown argument please manually update */;
 				font-size: ${remBodySizes.xsmall}rem;
 			`;
 	}
@@ -96,28 +111,38 @@ const fontStylesOnMobile = ({
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					${headline.medium(options)};
+					${headline.medium(
+						options,
+					)}/** TODO (1) - Unknown argument please manually update */;
 				}
 				${between.mobileLandscape.and.desktop} {
-					${headline.large(options)};
+					${headline.large(
+						options,
+					)}/** TODO (1) - Unknown argument please manually update */;
 				}
 			`;
 		case 'huge':
 			return css`
 				${until.desktop} {
-					${headline.xsmall(options)};
+					${headline.xsmall(
+						options,
+					)}/** TODO (1) - Unknown argument please manually update */;
 				}
 			`;
 		case 'large':
 			return css`
 				${until.desktop} {
-					${headline.xxsmall(options)};
+					${headline.xxsmall(
+						options,
+					)}/** TODO (1) - Unknown argument please manually update */;
 				}
 			`;
 		case 'medium':
 			return css`
 				${until.desktop} {
-					${headline.xxxsmall(options)};
+					${headline.xxxsmall(
+						options,
+					)}/** TODO (1) - Unknown argument please manually update */;
 				}
 			`;
 		default:
@@ -131,26 +156,36 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 		case 'huge':
 		case 'large':
 			return css`
-				${textSans.large()};
+				${textSans20};
 				${until.desktop} {
-					${textSans.medium()};
+					${textSans17};
 				}
 			`;
 		case 'medium':
 			return css`
-				${textSans.large({ lineHeight: 'tight' })};
+				${textSans20};
+				/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+				line-height: 1.15;
 				${until.desktop} {
-					${textSans.medium({ lineHeight: 'tight' })};
+					${textSans17};
+					/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+					line-height: 1.15;
 				}
 				padding-bottom: ${space[1]}px;
 			`;
 		case 'small':
 			return css`
-				${textSans.small()};
+				${textSans15};
 			`;
 		case 'tiny':
 			return css`
-				${textSans.xxsmall()};
+				${textSans12};
 				font-size: ${remBodySizes.xsmall}rem;
 			`;
 	}

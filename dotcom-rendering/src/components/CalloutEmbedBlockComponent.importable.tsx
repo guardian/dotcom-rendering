@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { palette as srcPalette, textSans } from '@guardian/source-foundations';
+import {
+	palette as srcPalette,
+	textSansBold12,
+	textSansBold17,
+} from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
@@ -38,7 +42,7 @@ const speechBubbleWrapperStyles = css`
 `;
 
 const successTextStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const summaryStyles = css`
@@ -75,7 +79,7 @@ const summaryContentWrapper = css`
 `;
 
 const speechBubbleStyles = (palette: Palette) => css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 	color: ${srcPalette.neutral[100]};
 	background-color: ${palette.background.speechBubble};
 	min-width: 88px;
@@ -93,11 +97,11 @@ const speechBubbleStyles = (palette: Palette) => css`
 `;
 
 const headingTextHeaderStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const descriptionStyles = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })}
+	${textSansBold12}
 `;
 
 const headingTextStyles = css`

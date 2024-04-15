@@ -4,7 +4,11 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/BylineWithHeadshot.tsx
  */
 import { css } from '@emotion/react';
-import { body, palette } from '@guardian/source-foundations';
+import {
+	palette,
+	textEgyptianBold17,
+	textEgyptianItalic17,
+} from '@guardian/source-foundations';
 import type { BylineWithImage } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { ReactComponent } from '../lib/ReactComponent';
 
@@ -36,12 +40,22 @@ const bylineImageContainer = css`
 `;
 
 const bylineName = css`
-	${body.medium({ fontWeight: 'bold' })};
+	${textEgyptianBold17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	margin: 0;
 `;
 
 const bylineDescription = css`
-	${body.medium({ fontStyle: 'italic' })};
+	${textEgyptianItalic17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	margin: 0;
 `;
 

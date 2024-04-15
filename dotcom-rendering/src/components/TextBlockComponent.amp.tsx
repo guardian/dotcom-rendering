@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import { body, palette, textSans } from '@guardian/source-foundations';
+import {
+	palette,
+	textEgyptian17,
+	textSans20,
+} from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
@@ -46,7 +50,12 @@ const TextStyle = (pillar: ArticleTheme) => css`
 	}
 	p {
 		padding: 0 0 12px;
-		${body.medium()};
+		${textEgyptian17};
+		/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+		line-height: 1.4;
 		font-weight: 300;
 		word-wrap: break-word;
 		color: ${palette.neutral[7]};
@@ -57,7 +66,12 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		font-style: italic;
 	}
 
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 
 	${LinkStyle(pillar)};
 	${ListStyle(neutralBorder(pillar))};
@@ -66,7 +80,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 // Labs paid content only
 const textStyleLabs = css`
 	p {
-		${textSans.large()}
+		${textSans20}
 	}
 `;
 

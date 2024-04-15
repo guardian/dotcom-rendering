@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
-import { between, textSans, until } from '@guardian/source-foundations';
+import { between, textSans17, until } from '@guardian/source-foundations';
 import { formatCount } from '../lib/formatCount';
 import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';
@@ -15,7 +15,7 @@ const containerStyles = css`
 	display: flex;
 	align-self: flex-end;
 	flex-direction: column;
-	${textSans.medium()};
+	${textSans17};
 	font-weight: bold;
 	color: ${themePalette('--comment-count-fill')};
 	padding-top: 5px;

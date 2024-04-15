@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	body,
 	palette as sourcePalette,
-	textSans,
+	textEgyptian17,
+	textSans14,
 } from '@guardian/source-foundations';
 import { SvgInfo } from '@guardian/source-react-components';
 import { palette as themePalette } from '../../palette';
@@ -20,7 +20,7 @@ const imageStyling = css`
 `;
 
 const creditStyling = css`
-	${textSans.xsmall()};
+	${textSans14};
 	margin: 12px 0;
 	display: flex;
 	align-items: center;
@@ -31,8 +31,12 @@ const creditStyling = css`
 `;
 
 const bodyStyling = css`
-	${body.medium()}
-	p {
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4 p {
 		margin-bottom: 0.5rem;
 	}
 

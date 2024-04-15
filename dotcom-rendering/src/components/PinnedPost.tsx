@@ -6,7 +6,8 @@ import {
 	height,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSansBold15,
+	textSansBold17,
 	transitions,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -64,7 +65,7 @@ const rowStyles = (palette: Palette) => css`
 `;
 
 const timeAgoStyles = css`
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 	color: ${sourcePalette.neutral[100]};
 	${from.tablet} {
 		margin-left: 28px;
@@ -106,7 +107,7 @@ const fakeButtonStyles = (palette: Palette) => css`
 	margin-left: 10px;
 	position: absolute;
 	bottom: -24px;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	height: ${height.ctaMedium}px;
 	min-height: ${height.ctaMedium}px;
 	padding: 0 ${space[5]}px;

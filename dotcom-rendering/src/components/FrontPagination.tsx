@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans } from '@guardian/source-foundations';
+import {
+	palette,
+	space,
+	textSans14,
+	textSansBold12,
+} from '@guardian/source-foundations';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
@@ -28,7 +33,7 @@ const paginationWrapperCss = css`
 `;
 
 const paginationLegendCss = css`
-	${textSans.xsmall()}
+	${textSans14}
 `;
 
 const paginationItemContainerCss = css`
@@ -47,7 +52,7 @@ const paginationItemCss = css`
 	height: 25px;
 	padding: 3px ${space[1]}px;
 
-	${textSans.xxsmall({ fontWeight: 'bold' })}
+	${textSansBold12}
 	text-decoration: none;
 
 	color: ${palette.neutral[46]};
@@ -70,7 +75,7 @@ const activePaginationItemCss = css`
 `;
 
 const paginationDotsCss = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })}
+	${textSansBold12}
 	color: ${palette.neutral[46]};
 	text-align: center;
 `;

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
+import { headlineBold17 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decideTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
@@ -20,7 +20,7 @@ const stickyStyles = css`
 `;
 
 const headingStyles = css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${headlineBold17}
 	margin-bottom: 8px;
 `;
 

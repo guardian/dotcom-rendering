@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, space, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	space,
+	textSans15,
+	textSansBold14,
+} from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette } from '../palette';
 import { DateTime } from './DateTime';
@@ -89,12 +94,17 @@ const listItemStyles = css`
 `;
 
 const textStyles = css`
-	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
+	${textSans15};
 	color: ${palette('--key-event-text')};
 `;
 
 const timeStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${textSansBold14};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.15;
 	color: ${palette('--key-event-title')};
 	display: block;
 `;

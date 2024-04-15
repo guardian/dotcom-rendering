@@ -4,7 +4,9 @@ import { isString } from '@guardian/libs';
 import {
 	from,
 	palette,
-	textSans,
+	textSans12,
+	textSans17,
+	textSans24,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -50,7 +52,7 @@ const slotCSS = css`
 `;
 
 const timeCSS = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	display: block;
 `;
 
@@ -70,7 +72,7 @@ const nowCSS = [
 const tempCSS = (isNow: boolean) => [
 	css`
 		display: block;
-		${textSans.medium()};
+		${textSans17};
 
 		${from.leftCol} {
 			order: 1;
@@ -80,7 +82,7 @@ const tempCSS = (isNow: boolean) => [
 	isNow &&
 		css`
 			${from.leftCol} {
-				${textSans.xlarge()};
+				${textSans24};
 				line-height: 1;
 			}
 		`,

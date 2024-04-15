@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { body, palette, text, textSans } from '@guardian/source-foundations';
+import {
+	palette,
+	text,
+	textEgyptian17,
+	textSans15,
+	textSans24,
+} from '@guardian/source-foundations';
 import { getAgeWarning } from '../lib/age-warning';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';
@@ -12,7 +18,7 @@ import { Standfirst } from './Standfirst.amp';
 import { TopMetaExtras } from './TopMetaExtras.amp';
 
 const headerStyle = css`
-	${textSans.xlarge()};
+	${textSans24};
 	font-weight: 400;
 	padding-top: 3px;
 	padding-bottom: 27px;
@@ -20,7 +26,12 @@ const headerStyle = css`
 `;
 
 const bylineStyle = css`
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	color: ${palette.neutral[7]};
 	padding-bottom: 8px;
 	font-style: italic;
@@ -37,7 +48,7 @@ const bylineStyle = css`
 `;
 
 const paidForLogoLabelStyle = css`
-	${textSans.small()};
+	${textSans15};
 	font-weight: 700;
 	margin-bottom: 6px;
 	color: ${text.supporting};

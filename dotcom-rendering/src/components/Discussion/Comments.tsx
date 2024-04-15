@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type {
 	AdditionalHeadersType,
@@ -77,7 +77,7 @@ const NoComments = () => (
 	<div
 		css={css`
 			color: ${schemedPalette('--discussion-subdued')};
-			${textSans.small()}
+			${textSans15}
 			padding-top: ${space[5]}px;
 			padding-left: ${space[1]}px;
 			padding-bottom: ${space[9]}px;

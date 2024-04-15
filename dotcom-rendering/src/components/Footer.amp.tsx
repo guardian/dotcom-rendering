@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { body, palette, textSans } from '@guardian/source-foundations';
+import {
+	palette,
+	textEgyptian17,
+	textSans12,
+	textSans17,
+} from '@guardian/source-foundations';
 import type { NavType } from '../model/extract-nav';
 import { useContentABTestGroup } from './ContentABTest.amp';
 import { ReaderRevenueButton } from './ReaderRevenueButton.amp';
@@ -103,7 +108,7 @@ const innerContainerStyles = css`
 const footer = css`
 	background-color: ${palette.brand[400]};
 	color: ${palette.neutral[86]};
-	${textSans.medium()};
+	${textSans17};
 	margin-top: 20px;
 `;
 
@@ -159,7 +164,7 @@ const copyrightContainer = css`
 `;
 
 const copyright = css`
-	${textSans.xxsmall()};
+	${textSans12};
 `;
 
 const iconContainer = css`
@@ -209,7 +214,12 @@ const backToTopText = css`
 
 const supportLink = css`
 	color: ${palette.brandAlt[400]};
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	padding-bottom: 0.375rem;
 `;
 

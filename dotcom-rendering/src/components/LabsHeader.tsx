@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	palette,
+	space,
+	textSans15,
+	textSansBold15,
+} from '@guardian/source-foundations';
 import {
 	Link,
 	LinkButton,
@@ -72,7 +78,7 @@ const HeaderSection = ({
 const Title = () => (
 	<div
 		css={css`
-			${textSans.small({ fontWeight: 'bold' })};
+			${textSansBold15};
 			margin-bottom: 4px;
 		`}
 	>
@@ -83,7 +89,7 @@ const Title = () => (
 const About = () => (
 	<div
 		css={css`
-			${textSans.small()};
+			${textSans15};
 			background-color: ${palette.labs[400]};
 			border-top: 1px solid ${palette.neutral[60]};
 

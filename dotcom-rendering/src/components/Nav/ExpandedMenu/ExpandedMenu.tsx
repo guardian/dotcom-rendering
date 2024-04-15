@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import {
 	brandBackground,
 	from,
-	textSans,
+	textSans20,
 	until,
 } from '@guardian/source-foundations';
 import type { EditionId } from '../../../lib/edition';
@@ -68,7 +68,7 @@ const wrapperMainMenuStyles = css`
 const mainMenuStyles = css`
 	background-color: ${brandBackground.primary};
 	box-sizing: border-box;
-	${textSans.large()};
+	${textSans20};
 	margin-right: 29px;
 	left: 0;
 	top: 0;

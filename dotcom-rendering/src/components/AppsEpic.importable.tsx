@@ -2,12 +2,12 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { IEpic } from '@guardian/bridget/Epic';
 import {
-	body as bodySizes,
 	from,
-	headline,
+	headlineMedium24,
 	palette,
 	remSpace,
-	textSans,
+	textEgyptian17,
+	textSans17,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getAcquisitionsClient, getUserClient } from '../lib/bridgetApi';
@@ -60,13 +60,14 @@ const epicStyles: SerializedStyles = css`
 		border-top: 1px solid ${themePalette('--apps-epic-border')};
 		background: ${themePalette('--apps-epic-background')};
 		padding: ${remSpace[3]};
-		${bodySizes.medium()}
+		${textEgyptian17};
+		line-height: 1.4;
 		clear: left;
 	}
 
 	h1:first-of-type {
 		margin-top: 0;
-		${headline.xsmall()}
+		${headlineMedium24}
 	}
 
 	button {
@@ -108,7 +109,7 @@ const epicStyles: SerializedStyles = css`
 		transition: 0.3s ease-in-out;
 		text-decoration: none;
 		white-space: nowrap;
-		${textSans.medium()}
+		${textSans17}
 		line-height: 1.5;
 		font-weight: 700;
 		height: 44px;

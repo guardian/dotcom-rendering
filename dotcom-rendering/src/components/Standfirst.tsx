@@ -1,6 +1,16 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { from, headline, space, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	headlineBold17,
+	headlineBold20,
+	headlineLight20,
+	headlineLight24,
+	headlineMedium17,
+	space,
+	textSans17,
+	textSans20,
+} from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette } from '../palette';
@@ -67,7 +77,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.PhotoEssay:
 					if (theme === ArticleSpecial.Labs) {
 						return css`
-							${textSans.large({})};
+							${textSans20};
 							margin-top: ${space[2]}px;
 							margin-bottom: ${space[3]}px;
 							line-height: 22px;
@@ -76,7 +86,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						`;
 					}
 					return css`
-						${headline.xxxsmall({})};
+						${headlineMedium17};
 						margin-top: ${space[2]}px;
 						margin-bottom: ${space[3]}px;
 						line-height: 22px;
@@ -86,10 +96,8 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				default:
 					return css`
 						${theme === ArticleSpecial.Labs
-							? textSans.medium()
-							: headline.xsmall({
-									fontWeight: 'light',
-							  })};
+							? textSans17
+							: headlineLight24};
 						padding-top: ${space[4]}px;
 
 						max-width: 280px;
@@ -106,9 +114,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 
 		case ArticleDisplay.NumberedList:
 			return css`
-				${headline.xxsmall({
-					fontWeight: 'bold',
-				})};
+				${headlineBold20};
 				margin-bottom: ${space[3]}px;
 				max-width: 540px;
 				color: ${palette('--standfirst-text')};
@@ -129,10 +135,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Timeline:
 				case ArticleDesign.Profile:
 					return css`
-						${headline.xxsmall({
-							fontWeight: 'light',
-							lineHeight: 'tight',
-						})};
+						${headlineLight20};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
@@ -144,10 +147,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return css`
-						${headline.xxxsmall({
-							fontWeight: 'bold',
-							lineHeight: 'tight',
-						})};
+						${headlineBold17};
 						margin-top: ${space[1]}px;
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
@@ -155,7 +155,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				case ArticleDesign.Analysis:
 					return css`
-						${headline.xxxsmall({ lineHeight: 'tight' })};
+						${headlineMedium17};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
@@ -164,7 +164,12 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					switch (theme) {
 						case ArticleSpecial.Labs:
 							return css`
-								${textSans.medium({ lineHeight: 'tight' })}
+								${textSans17};
+								/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+								line-height: 1.15;
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
@@ -176,10 +181,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 							`;
 						default:
 							return css`
-								${headline.xxxsmall({
-									fontWeight: 'bold',
-									lineHeight: 'tight',
-								})};
+								${headlineBold17};
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};

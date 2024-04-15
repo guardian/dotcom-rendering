@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	body,
-	headline,
+	headlineBold17,
+	headlineBold24,
 	palette,
 	space,
+	textEgyptian17,
 	until,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -29,7 +30,7 @@ const linkStyles = css`
 `;
 
 const headerStyles = (fontColour?: string) => css`
-	${headline.xsmall({ fontWeight: 'bold' })};
+	${headlineBold24};
 	color: ${fontColour ?? palette.neutral[7]};
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
@@ -43,7 +44,13 @@ const headerStylesWithUrl = css`
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
-	${body.medium({ fontWeight: 'medium', lineHeight: 'tight' })};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	font-weight: 500;
+	line-height: 1.15;
 	color: ${fontColour ?? palette.neutral[46]};
 	p {
 		/* Handle paragraphs in the description */
@@ -64,7 +71,7 @@ const marginStyles = css`
 `;
 
 const dateTextStyles = (color: Colour) => css`
-	${headline.xxxsmall({ fontWeight: 'bold' })};
+	${headlineBold17};
 	color: ${color};
 	${until.tablet} {
 		display: none;
@@ -118,8 +125,7 @@ export const ContainerTitle = ({
 						css={[
 							headerStylesWithUrl,
 							headerStyles(fontColour),
-							lightweightHeader &&
-								body.medium({ fontWeight: 'regular' }),
+							lightweightHeader && textEgyptian17,
 						]}
 					>
 						{localisedTitle(title, editionId)}
@@ -129,8 +135,7 @@ export const ContainerTitle = ({
 				<h2
 					css={[
 						headerStyles(fontColour),
-						lightweightHeader &&
-							body.medium({ fontWeight: 'regular' }),
+						lightweightHeader && textEgyptian17,
 					]}
 				>
 					{localisedTitle(title, editionId)}

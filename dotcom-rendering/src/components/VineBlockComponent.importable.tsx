@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { textSans20 } from '@guardian/source-foundations';
 import type { RoleType, VineBlockElement } from '../types/content';
 import { ClickToView } from './ClickToView';
 import { MaintainAspectRatio } from './MaintainAspectRatio';
 
 const titleStyle = css`
 	p {
-		${textSans.large()};
+		${textSans20};
 		font-weight: bold;
 	}
 `;

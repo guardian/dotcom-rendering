@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineBold24,
 	palette as sourcePalette,
 	space,
 	until,
@@ -396,10 +396,10 @@ const headerRowStyles = css`
 `;
 
 const headerStyles = css`
-	${headline.xsmall({ fontWeight: 'bold' })};
+	${headlineBold24};
 	color: ${sourcePalette.neutral[7]};
 	color: ${themePalette('--carousel-text')};
-	${headline.xsmall({ fontWeight: 'bold' })};
+	${headlineBold24};
 	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;
 	margin-left: 0;

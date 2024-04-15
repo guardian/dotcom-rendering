@@ -2,7 +2,9 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineLight17,
+	headlineLight20,
+	headlineLight24,
 	palette as srcPalette,
 	until,
 } from '@guardian/source-foundations';
@@ -100,13 +102,13 @@ const titleWrapper = (palette: Palette) => css`
 	width: 100%;
 
 	${until.desktop} {
-		${headline.xxsmall({ fontWeight: 'light' })}
+		${headlineLight20}
 	}
 	${until.phablet} {
-		${headline.xxxsmall({ fontWeight: 'light' })}
+		${headlineLight17}
 	}
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: 'light' })}
+		${headlineLight24}
 	}
 	color: ${srcPalette.neutral[100]};
 	background: linear-gradient(transparent, ${srcPalette.neutral[0]});

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, palette } from '@guardian/source-foundations';
+import { palette, textEgyptian17 } from '@guardian/source-foundations';
 import { JSDOM } from 'jsdom';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { TweetBlockElement } from '../types/content';
@@ -42,7 +42,12 @@ const TextStyle = (pillar: ArticleTheme) => css`
 	}
 	p {
 		padding: 0 0 12px;
-		${body.medium()};
+		${textEgyptian17};
+		/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+		line-height: 1.4;
 		font-weight: 300;
 		word-wrap: break-word;
 		color: ${palette.neutral[7]};
@@ -53,7 +58,12 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		font-style: italic;
 	}
 
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 
 	${LinkStyle(pillar)};
 	${ListStyle(neutralBorder(pillar))};

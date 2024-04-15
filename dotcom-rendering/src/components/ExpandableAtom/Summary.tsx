@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { body, headline, textSans } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	textEgyptianBold17,
+	textSans15,
+} from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { palette as themePalette } from '../../palette';
@@ -7,9 +11,7 @@ import { palette as themePalette } from '../../palette';
 /// SUMMARY ELEMENT
 
 const titleStyling = css`
-	${headline.xxxsmall({
-		fontWeight: 'medium',
-	})};
+	${headlineMedium17};
 	margin: 0;
 	line-height: 22px;
 `;
@@ -33,7 +35,7 @@ const minusStyling = css`
 const iconSpacing = css`
 	display: inline-flex;
 	align-items: center;
-	${textSans.small()};
+	${textSans15};
 `;
 
 export const Summary = ({
@@ -47,10 +49,12 @@ export const Summary = ({
 }): JSX.Element => {
 	const atomTitleStyling = css`
 		display: block;
-		${body.medium({
-			lineHeight: 'tight',
-			fontWeight: 'bold',
-		})};
+		${textEgyptianBold17};
+		/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+		line-height: 1.15;
 		color: ${themePalette('--expandable-atom-text-hover')};
 	`;
 

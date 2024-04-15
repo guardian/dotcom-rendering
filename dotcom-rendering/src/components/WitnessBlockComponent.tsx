@@ -1,5 +1,12 @@
 import { css } from '@emotion/react';
-import { body, headline, palette, space } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	palette,
+	space,
+	textEgyptian15,
+	textEgyptian17,
+	textEgyptianBold15,
+} from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import { palette as themePalette } from '../palette';
 import type { WitnessAssetType } from '../types/content';
@@ -20,7 +27,12 @@ const mainContentWrapperStyles = css`
 `;
 
 const witnessIconWrapperStyles = css`
-	${body.small()}
+	${textEgyptian15};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
@@ -30,7 +42,12 @@ const witnessIconStyles = css`
 	padding-left: ${space[1]}px;
 
 	color: ${themePalette('--witness-title-icon')};
-	${body.small({ fontWeight: 'bold' })}
+	${textEgyptianBold15};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 `;
 
 const witnessDetailsWrapperStyles = css`
@@ -49,7 +66,7 @@ const captionStyles = css`
 const titleStyles = css`
 	margin-bottom: ${space[2]}px;
 	color: ${themePalette('--witness-title-text')};
-	${headline.xxxsmall()}
+	${headlineMedium17}
 `;
 
 const witnessDetailsSpacingStyles = css`
@@ -62,7 +79,12 @@ const witnessDetailsSpacingStyles = css`
 const authorNameStyles = css`
 	padding-left: 5px;
 	color: ${themePalette('--witness-title-author')};
-	${body.small({ fontWeight: 'bold' })}
+	${textEgyptianBold15};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 `;
 
 type WrapperProps = {
@@ -99,7 +121,12 @@ const WitnessWrapper = ({
 					<div css={witnessDetailsSpacingStyles}>
 						<p
 							css={css`
-								${body.small()}
+								${textEgyptian15};
+								/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+								line-height: 1.4;
 							`}
 						>
 							By
@@ -113,7 +140,12 @@ const WitnessWrapper = ({
 						</p>
 						<p
 							css={css`
-								${body.small()}
+								${textEgyptian15};
+								/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+								line-height: 1.4;
 							`}
 						>
 							<DateTime
@@ -181,7 +213,12 @@ export const WitnessImageBlockComponent = ({
 						<div itemProp="description">
 							<p
 								css={css`
-									${body.medium()}
+									${textEgyptian17};
+									/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+									line-height: 1.4;
 								`}
 								dangerouslySetInnerHTML={{ __html: caption }}
 							/>
@@ -221,7 +258,12 @@ export const WitnessTextBlockComponent = ({
 		<div itemProp="text">
 			<p
 				css={css`
-					${body.medium()}
+					${textEgyptian17};
+					/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+					line-height: 1.4;
 				`}
 				dangerouslySetInnerHTML={{ __html: description }}
 			/>
@@ -268,7 +310,12 @@ export const WitnessVideoBlockComponent = ({
 			<div itemProp="description">
 				<p
 					css={css`
-						${body.medium()}
+						${textEgyptian17};
+						/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+						line-height: 1.4;
 					`}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>

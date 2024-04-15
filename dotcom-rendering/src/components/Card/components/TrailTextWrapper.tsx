@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { body, remBodySizes, until } from '@guardian/source-foundations';
+import {
+	remBodySizes,
+	textEgyptian15,
+	until,
+} from '@guardian/source-foundations';
 import { palette } from '../../../palette';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
@@ -45,7 +49,7 @@ export const TrailTextWrapper = ({
 					display: flex;
 					flex-direction: column;
 					color: ${palette('--card-headline-trail-text')};
-					${body.small({ lineHeight: 'regular' })};
+					${textEgyptian15};
 					font-size: ${remBodySizes.xsmall}rem;
 					padding-left: 5px;
 					padding-right: 5px;

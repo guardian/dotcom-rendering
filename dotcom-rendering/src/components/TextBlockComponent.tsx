@@ -2,10 +2,10 @@ import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	body,
 	from,
 	palette,
-	textSans,
+	textEgyptian17,
+	textSans17,
 	until,
 } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
@@ -160,7 +160,7 @@ const sanitiserOptions: IOptions = {
 const styles = (format: ArticleFormat) => css`
 	margin-bottom: 14px;
 	word-break: break-word;
-	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
+	${format.theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17};
 
 	strong em,
 	strong u {

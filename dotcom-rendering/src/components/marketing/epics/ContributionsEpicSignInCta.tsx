@@ -5,7 +5,7 @@
  */
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { body, neutral } from '@guardian/source-foundations';
+import { neutral, textEgyptianBold17 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { OPHAN_COMPONENT_SIGN_IN } from './utils/ophan';
@@ -16,7 +16,12 @@ const signInLink = css`
 `;
 
 const signInLinkText = css`
-	${body.medium({ fontWeight: 'bold' })};
+	${textEgyptianBold17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 `;
 
 const signInUrl =

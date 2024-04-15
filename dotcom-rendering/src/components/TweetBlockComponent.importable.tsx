@@ -1,5 +1,8 @@
 import { css } from '@emotion/react';
-import { body, palette as sourcePalette } from '@guardian/source-foundations';
+import {
+	palette as sourcePalette,
+	textEgyptian15,
+} from '@guardian/source-foundations';
 import { useEffect } from 'react';
 import { unescapeData } from '../lib/escapeData';
 import type { TweetBlockElement } from '../types/content';
@@ -16,7 +19,12 @@ const noJSStyling = css`
 		padding: 20px;
 		width: 100%;
 		margin-bottom: 16px;
-		${body.small()};
+		${textEgyptian15};
+		/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+		line-height: 1.4;
 	}
 
 	.nojs-tweet iframe {

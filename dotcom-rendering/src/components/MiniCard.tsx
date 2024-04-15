@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, breakpoints } from '@guardian/source-foundations';
+import { breakpoints, textEgyptian17 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
@@ -13,12 +13,17 @@ const imageStyles = css`
 `;
 
 const linkStyles = css`
-	${body.medium()}
-	font-weight: bold;
-	display: flex;
-	align-items: flex-start;
-	text-decoration: none;
-	color: ${palette('--card-headline-trail-text')};
+	${textEgyptian17};
+/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+line-height: 1.4
+    font-weight: bold;
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+    color: ${palette('--card-headline-trail-text')};
 `;
 
 type Props = {

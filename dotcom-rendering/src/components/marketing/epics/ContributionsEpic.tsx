@@ -4,7 +4,11 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpic.tsx
  */
 import { css } from '@emotion/react';
-import { body, headline } from '@guardian/source-foundations';
+import {
+	headlineBold20,
+	textEgyptian17,
+	textEgyptianBold17,
+} from '@guardian/source-foundations';
 import { palette, space } from '@guardian/source-foundations';
 import { from } from '@guardian/source-foundations';
 import {
@@ -64,7 +68,7 @@ const wrapperStyles = css`
 `;
 
 const headingStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 	margin-top: 0;
 	margin-bottom: ${space[3]}px;
 `;
@@ -80,13 +84,22 @@ const linkStyles = css`
 
 const bodyStyles = css`
 	margin: 0 auto ${space[2]}px;
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	${linkStyles}
 `;
 
 const highlightWrapperStyles = css`
-	${body.medium({ fontWeight: 'bold' })}
-	${linkStyles}
+	${textEgyptianBold17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4 ${linkStyles};
 `;
 
 const highlightStyles = css`

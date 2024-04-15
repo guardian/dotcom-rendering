@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import {
-	body,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textEgyptian17,
+	textSans14,
+	textSans15,
 } from '@guardian/source-foundations';
 import {
 	Button,
@@ -28,9 +29,12 @@ export const linkStyles = css`
 
 const calloutStyles = css`
 	padding-bottom: ${space[4]}px;
-	${body.medium()}
-
-	p {
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4 p {
 		margin-bottom: ${space[3]}px;
 	}
 `;
@@ -64,7 +68,7 @@ export const CalloutDescription = ({
 };
 
 const expiredStyles = css`
-	${textSans.small()};
+	${textSans15};
 	color: ${palette('--star-rating-fill')};
 	background-color: ${palette('--star-rating-background')};
 	width: fit-content;
@@ -95,16 +99,16 @@ const shareCalloutStyles = css`
 `;
 
 const shareCalloutTextStyles = css`
-	${textSans.xsmall()}
+	${textSans14}
 `;
 
 const shareCalloutLinkStyles = css`
-	${textSans.xsmall()}
+	${textSans14}
 	color: ${palette('--article-link-text')};
 `;
 
 const sharePopupStyles = css`
-	${textSans.xsmall()};
+	${textSans14};
 	position: absolute;
 	display: flex;
 	align-items: center;
@@ -205,7 +209,7 @@ export const CalloutShare = ({
 };
 
 const termsAndConditionsStyles = css`
-	${textSans.small()}
+	${textSans15}
 	padding-bottom: ${space[4]}px;
 `;
 

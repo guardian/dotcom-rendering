@@ -3,7 +3,7 @@ import {
 	brandText,
 	from,
 	palette as sourcePalette,
-	textSans,
+	textSans17,
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
@@ -19,7 +19,12 @@ const hideDesktop = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans.medium({ lineHeight: 'tight' })};
+	${textSans17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.15;
 	background-color: transparent;
 	text-decoration: none;
 	border: 0;

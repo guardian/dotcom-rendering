@@ -3,7 +3,7 @@ import {
 	brandText,
 	from,
 	palette as sourcePalette,
-	textSans,
+	textSans17,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -20,7 +20,7 @@ const hideDesktop = css`
 `;
 
 const columnStyle = css`
-	${textSans.medium()};
+	${textSans17};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
@@ -96,7 +96,7 @@ const pillarDividerExtended = css`
 `;
 
 const columnLinks = css`
-	${textSans.medium()};
+	${textSans17};
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
@@ -124,7 +124,12 @@ const columnLinks = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans.medium({ lineHeight: 'tight' })};
+	${textSans17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.15;
 	background-color: transparent;
 	text-decoration: none;
 	border: 0;

@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import {
 	brandText,
 	from,
-	headline,
+	headlineMedium24,
 	palette as sourcePalette,
-	textSans,
+	textSans17,
 } from '@guardian/source-foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 
@@ -38,7 +38,7 @@ const collapseColumnButton = css`
 	cursor: pointer;
 	color: ${brandText.primary};
 	display: block;
-	${headline.xsmall()};
+	${headlineMedium24};
 	font-weight: 700;
 	outline: none;
 	padding: 6px 34px 18px 50px;
@@ -70,7 +70,7 @@ const collapseColumnButton = css`
 
 const editionStyle = css`
 	text-transform: none;
-	${textSans.medium()};
+	${textSans17};
 `;
 type Props = {
 	title: string;

@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import {
-	headline,
+	headlineBold20,
+	headlineMedium17,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSans12,
+	textSans15,
 	until,
 } from '@guardian/source-foundations';
 import type { UserProfile } from '../lib/discussion';
@@ -38,21 +40,21 @@ const imageWrapper = css`
 `;
 
 const headingStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })};
+	${headlineBold20};
 	padding-bottom: ${space[1]}px;
 `;
 
 const textStyles = css`
-	${textSans.small()}
+	${textSans15}
 	${until.desktop} {
-		${textSans.xxsmall()}
+		${textSans12}
 	}
 	color: ${sourcePalette.neutral[46]};
 	padding-bottom: ${space[1]}px;
 `;
 
 const headlineStyles = css`
-	${headline.xxxsmall()}
+	${headlineMedium17}
 	color: ${themePalette('--discussion-subdued')};
 	padding-bottom: ${space[1]}px;
 `;

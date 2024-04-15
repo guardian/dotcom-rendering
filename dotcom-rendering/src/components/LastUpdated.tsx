@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textSans } from '@guardian/source-foundations';
+import { palette, textSans12 } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import { DateTime } from './DateTime';
 
@@ -15,11 +15,11 @@ const LastUpdated = ({
 			css={css`
 				display: flex;
 				align-items: flex-end;
-				${textSans.xxsmall()};
+				${textSans12};
 				color: ${palette.neutral[46]};
 			`}
 		>
-			Updated at&nbsp;
+			Updated at
 			<DateTime
 				date={new Date(lastUpdated)}
 				editionId={editionId}

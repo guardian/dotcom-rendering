@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source-foundations';
 import { LinkButton, SvgCross } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
@@ -19,7 +19,7 @@ interface ButtonProps {
 }
 
 const buttonStyles = (palette: Palette) => css`
-	${textSans.small()};
+	${textSans15};
 	height: 24px;
 	min-height: 24px;
 	padding: 2px 12px 4px;

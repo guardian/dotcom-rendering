@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { body, breakpoints, from, space } from '@guardian/source-foundations';
+import {
+	breakpoints,
+	from,
+	space,
+	textEgyptian17,
+} from '@guardian/source-foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Accordion as AccordionComponent } from './Accordion';
@@ -24,7 +29,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const textStyle = css`
-	${body.medium({ lineHeight: 'loose' })};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	margin-bottom: ${space[3]}px;
 `;
 

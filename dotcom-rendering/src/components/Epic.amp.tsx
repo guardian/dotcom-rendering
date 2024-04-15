@@ -1,11 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid -- It’s AMP! */
 import { css } from '@emotion/react';
 import {
-	body,
 	brandBackground,
-	headline,
+	headlineBold17,
+	headlineMedium20,
 	palette,
-	textSans,
+	textEgyptian17,
+	textSans15,
+	textSans17,
+	textSansBold15,
+	textSansBold17,
+	textSansItalic15,
 } from '@guardian/source-foundations';
 import {
 	MoustacheSection,
@@ -73,7 +78,7 @@ const epicStyle = css`
 const epicHeaderStyle = css`
 	font-size: 1.25rem;
 	line-height: 1.4375rem;
-	${headline.xxsmall()};
+	${headlineMedium20};
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
 	font-variant-ligatures: common-ligatures;
@@ -86,7 +91,12 @@ const epicParagraphStyle = css`
 	display: block;
 	margin-block-start: 0.5rem;
 	margin-block-end: 0.5rem;
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
 	font-variant-ligatures: common-ligatures;
@@ -106,7 +116,7 @@ const highlightedTextStyle = css`
 	padding: 0.125rem;
 	margin-left: 5px;
 	color: ${palette.neutral[7]};
-	${headline.xxxsmall({ fontWeight: 'bold' })};
+	${headlineBold17};
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
 	font-variant-ligatures: common-ligatures;
@@ -120,7 +130,7 @@ const genericButtonStyle = css`
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
-	${textSans.medium()};
+	${textSans17};
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
 	font-variant-ligatures: common-ligatures;
@@ -248,13 +258,13 @@ const tickerBackgroundStyle = css`
 	border: none;
 `;
 const topLeftStyle = css`
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 `;
 const topRightStyle = css`
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 `;
 const labelStyle = css`
-	${textSans.small()};
+	${textSans15};
 `;
 const goalExceededMarkerStyle = css`
 	width: 1px;
@@ -286,11 +296,11 @@ const reminderFormTopStyle = css`
 `;
 const inputLabelStyle = css`
 	color: ${palette.neutral[7]};
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	margin-bottom: 4px;
 `;
 const invalidInputLabelStyle = css`
-	${textSans.medium()};
+	${textSans17};
 	color: ${palette.error[400]};
 	display: flex;
 `;
@@ -308,12 +318,12 @@ const emailInputStyle = css`
 	line-height: 1.35;
 	box-sizing: border-box;
 	height: 44px;
-	${textSans.medium()};
+	${textSans17};
 	color: ${palette.neutral[7]};
 	margin-bottom: 10px;
 `;
 const reminderTermsStyle = css`
-	${textSans.small({ fontStyle: 'italic' })};
+	${textSansItalic15};
 	line-height: 1.5;
 
 	a {
@@ -322,7 +332,12 @@ const reminderTermsStyle = css`
 	}
 `;
 const successMessageStyle = css`
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 
 	a {
 		text-decoration: underline;
@@ -330,7 +345,7 @@ const successMessageStyle = css`
 	}
 `;
 const reminderErrorStyle = css`
-	${textSans.small({ fontStyle: 'italic' })};
+	${textSansItalic15};
 	color: ${palette.error[400]};
 	font-weight: 600;
 	margin-bottom: 10px;

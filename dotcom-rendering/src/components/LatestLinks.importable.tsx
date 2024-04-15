@@ -3,7 +3,8 @@ import {
 	lineHeights,
 	palette,
 	space,
-	textSans,
+	textSans14,
+	textSansBold14,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { revealStyles } from '../lib/revealStyles';
@@ -30,7 +31,7 @@ const vertical = css`
 `;
 
 const linkStyles = css`
-	${textSans.xsmall()}
+	${textSans14}
 	overflow: hidden;
 	flex-grow: 1;
 `;
@@ -41,7 +42,7 @@ const dividerStyles = css`
 `;
 
 const bold = css`
-	${textSans.xsmall({ fontWeight: 'bold' })};
+	${textSansBold14};
 
 	:before {
 		content: '';

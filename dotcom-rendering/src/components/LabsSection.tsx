@@ -3,7 +3,10 @@ import {
 	between,
 	from,
 	space,
-	textSans,
+	textSans14,
+	textSansBold12,
+	textSansBold14,
+	textSansBold20,
 	until,
 } from '@guardian/source-foundations';
 import {
@@ -165,7 +168,7 @@ const linkStyles = (textColour?: string) => css`
 `;
 
 const headerStyles = (textColour?: string) => css`
-	${textSans.large({ fontWeight: 'bold' })};
+	${textSansBold20};
 	color: ${textColour ?? 'inherit'};
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
@@ -184,7 +187,7 @@ const badgeStyles = css`
 `;
 
 const paidForByStyles = (textColour?: string) => css`
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 	color: ${textColour};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
@@ -309,7 +312,7 @@ const LabsContainerHeader = ({
 	>
 		<div
 			css={css`
-				${textSans.xsmall({ fontWeight: 'bold' })};
+				${textSansBold14};
 				padding-right: 16px;
 			`}
 		>
@@ -344,7 +347,7 @@ const LabsContainerHeader = ({
 					href="https://www.theguardian.com/info/2016/jan/25/content-funding"
 					cssOverrides={css`
 						color: ${summaryTextSecondaryColour};
-						${textSans.xsmall({ fontWeight: 'regular' })};
+						${textSans14};
 					`}
 				>
 					Learn more about Guardian Labs content

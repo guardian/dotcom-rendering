@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold20,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSans14,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { palette as themePalette } from '../palette';
@@ -42,7 +42,7 @@ const stackBelowTabletStyles = css`
 `;
 
 const titleStyles = (theme: string) => css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 	flex-grow: 1;
 	span {
 		color: ${theme === 'news' ? sourcePalette.sport[400] : 'inherit'};
@@ -66,8 +66,13 @@ const noHeightFromTabletStyles = css`
 
 // max-width is the wdith of the text field, the button and the margin between them
 const descriptionStyles = css`
-	${textSans.xsmall({ lineHeight: 'tight' })}
-	margin-bottom: ${space[2]}px;
+	${textSans14};
+/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+line-height: 1.15
+    margin-bottom: ${space[2]}px;
 	max-width: ${335 + space[3] + 118}px;
 `;
 

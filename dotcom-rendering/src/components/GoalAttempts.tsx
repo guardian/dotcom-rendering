@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	headline,
+	headlineBold34,
 	palette as sourcePalette,
-	textSans,
+	textSans15,
 } from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 import { transparentColour } from '../lib/transparentColour';
@@ -33,7 +33,7 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 
 const offTargetSharedStyles = css`
 	position: relative;
-	${headline.medium({ fontWeight: 'bold' })}
+	${headlineBold34}
 	flex-basis: 50%;
 	line-height: 0.8;
 
@@ -91,7 +91,7 @@ const Side = ({
 			{offTarget}
 			<div
 				css={css`
-					${textSans.small()}
+					${textSans15}
 					padding-top: 4px;
 				`}
 			>
@@ -125,7 +125,7 @@ const Side = ({
 				{onTarget}
 				<div
 					css={css`
-						${textSans.small()}
+						${textSans15}
 						padding-top: 4px;
 					`}
 				>

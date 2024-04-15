@@ -1,6 +1,10 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
+import {
+	headlineBold20,
+	headlineBold24,
+	headlineLight34,
+} from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
@@ -12,14 +16,12 @@ const keyTakeawayStyles = css`
 `;
 
 const headingStyles = (display: ArticleDisplay): SerializedStyles => css`
-	${display === ArticleDisplay.Immersive
-		? headline.medium({ fontWeight: 'light' })
-		: headline.xxsmall({ fontWeight: 'bold' })};
+	${display === ArticleDisplay.Immersive ? headlineLight34 : headlineBold20};
 	padding: 2px 0;
 `;
 
 const headingIndexStyles = css`
-	${headline.xsmall({ fontWeight: 'bold' })};
+	${headlineBold24};
 `;
 
 const headingLineStyles = css`

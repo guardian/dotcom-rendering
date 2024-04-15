@@ -5,12 +5,13 @@
  */
 import { css } from '@emotion/react';
 import {
-	body,
 	from,
-	headline,
+	headlineBold20,
 	palette,
 	space,
-	textSans,
+	textEgyptian17,
+	textSans15,
+	textSansBold15,
 } from '@guardian/source-foundations';
 import {
 	Button,
@@ -44,13 +45,18 @@ const lineWrapperStyles = css`
 `;
 
 const remindHeading = css`
-	${headline.xxsmall({ fontWeight: 'bold' })};
+	${headlineBold20};
 	margin: 0 ${space[5]}px ${space[2]}px 0;
 `;
 
 const successTextStyles = css`
 	margin: 0 auto ${space[2]}px;
-	${body.medium()};
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4;
 `;
 
 const linkStyles = css`
@@ -58,7 +64,7 @@ const linkStyles = css`
 `;
 
 const errorTextStyles = css`
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 	color: ${palette.error[400]};
 	font-style: italic;
 	/* stylelint-disable-next-line declaration-no-important */
@@ -78,15 +84,18 @@ const closeButtonContainerStyles = css`
 `;
 
 const bodyCopyStyles = css`
-	${body.medium()}
-
-	${from.tablet} {
+	${textEgyptian17};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	line-height: 1.4 ${from.tablet} {
 		margin-right: ${space[9]}px;
 	}
 `;
 
 const infoCopyStyles = css`
-	${textSans.small()};
+	${textSans15};
 	font-style: italic;
 	/* stylelint-disable-next-line declaration-no-important */
 	margin-top: ${space[2]}px !important;

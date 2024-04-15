@@ -1,7 +1,14 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, body, headline, space } from '@guardian/source-foundations';
+import {
+	between,
+	headlineBold20,
+	headlineBold24,
+	headlineLight34,
+	space,
+	textEgyptian17,
+} from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
@@ -50,8 +57,8 @@ type Props = {
 const globalH2Styles = (display: ArticleDisplay) => css`
 	h2:not([data-ignore='global-h2-styling']) {
 		${display === ArticleDisplay.Immersive
-			? headline.medium({ fontWeight: 'light' })
-			: headline.xxsmall({ fontWeight: 'bold' })};
+			? headlineLight34
+			: headlineBold20};
 	}
 `;
 
@@ -59,7 +66,12 @@ const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
 		li:before {
-			${body.medium({ lineHeight: 'tight' })};
+			${textEgyptian17};
+			/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+			line-height: 1.15;
 			content: counter(li);
 			counter-increment: li;
 			margin-right: ${space[1]}px;
@@ -71,7 +83,7 @@ const globalH3Styles = (display: ArticleDisplay) => css`
 	${display === ArticleDisplay.NumberedList &&
 	`
 		h3 {
-			${headline.xsmall({ fontWeight: 'bold' })};
+			${headlineBold24};
 			margin-bottom: ${space[2]}px;
 		}
 	`}

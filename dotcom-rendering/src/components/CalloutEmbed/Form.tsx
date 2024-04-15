@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text, textSans } from '@guardian/source-foundations';
+import { text, textSansBold17 } from '@guardian/source-foundations';
 import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../types/content';
@@ -27,7 +27,7 @@ const footerPaddingStyles = css`
 const errorMessagesStyles = css`
 	padding-bottom: 10px;
 	color: ${text.error};
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 `;
 
 const formFieldWrapperStyles = css`
