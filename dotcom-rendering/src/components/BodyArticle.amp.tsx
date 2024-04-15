@@ -15,7 +15,7 @@ import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';
 import type { ConfigType } from '../types/config';
-import { Disclaimer } from './AffiliateDisclaimer.amp';
+import { AffiliateDisclaimerInline } from './AffiliateDisclaimer';
 import { Elements } from './Elements.amp';
 import { Epic } from './Epic.amp';
 import { InlineAd } from './InlineAd.amp';
@@ -182,7 +182,7 @@ export const Body = ({ data, config }: Props) => {
 				if (insertDisclaimerBefore === elementIndex) {
 					return (
 						<React.Fragment key={item.key}>
-							<Disclaimer />
+							<AffiliateDisclaimerInline isAmp={true} />
 							{item}
 						</React.Fragment>
 					);

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
+import { palette, space, textSans } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { palette as themePalette } from '../palette';
 
@@ -29,6 +29,16 @@ const disclaimerInlineStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
+// The normal vars don't work in AMP, so we need to set these styles differently
+const ampStyles = css`
+	background-color: ${palette.neutral[97]};
+	a {
+		text-decoration: none;
+		border-bottom: 1px solid ${palette.lifestyle[300]};
+		color: ${palette.lifestyle[300]};
+	}
+`;
+
 const DisclaimerText = () => (
 	<p>
 		The Guardian’s product and service reviews are independent and are in no
@@ -52,15 +62,23 @@ const AffiliateDisclaimer = () => (
 	</Hide>
 );
 
-const AffiliateDisclaimerInline = () => (
-	<Hide from="leftCol">
+const AffiliateDisclaimerInline = ({ isAmp = false }) =>
+	isAmp ? (
 		<aside
-			css={[disclaimerInlineStyles]}
+			css={[disclaimerInlineStyles, ampStyles]}
 			data-testid="affiliate-disclaimer-inline"
 		>
 			<DisclaimerText />
 		</aside>
-	</Hide>
-);
+	) : (
+		<Hide from="leftCol">
+			<aside
+				css={[disclaimerInlineStyles]}
+				data-testid="affiliate-disclaimer-inline"
+			>
+				<DisclaimerText />
+			</aside>
+		</Hide>
+	);
 
 export { AffiliateDisclaimer, AffiliateDisclaimerInline };
