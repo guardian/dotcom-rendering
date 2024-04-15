@@ -100,6 +100,7 @@ export const ensure_all_exports_are_present = {
 	getNavigationClient,
 	getNewslettersClient,
 	getDiscussionClient,
+	getTagClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;
 };
