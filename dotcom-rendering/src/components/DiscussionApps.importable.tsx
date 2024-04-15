@@ -46,10 +46,10 @@ const onComment = async (
 const onReply = async (
 	discussionShortUrl: string,
 	body: string,
-	parentCommentId: number,
+	parentCommentId: string,
 ): Promise<CommentResponse> =>
 	getDiscussionClient()
-		.reply(discussionShortUrl, body, parentCommentId.toString())
+		.reply(discussionShortUrl, body, parentCommentId)
 		.then((apiResponse) => {
 			if (
 				apiResponse.__type ===
