@@ -10,12 +10,11 @@ import { buildAdTargeting } from '../lib/ad-targeting';
 import { decideDesign } from '../lib/decideDesign';
 import { decideTheme } from '../lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots.amp';
-import { findDisclaimerPosition } from '../lib/find-disclaimer-position.amp';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
+import { insertDisclaimerElement } from '../model/enhance-disclaimer';
 import type { AMPArticleModel } from '../types/article.amp';
 import type { ConfigType } from '../types/config';
-import { AffiliateDisclaimerInline } from './AffiliateDisclaimer';
 import { Elements } from './Elements.amp';
 import { Epic } from './Epic.amp';
 import { InlineAd } from './InlineAd.amp';
@@ -104,6 +103,9 @@ type Props = {
 
 export const Body = ({ data, config }: Props) => {
 	const bodyElements = data.blocks[0] ? data.blocks[0].elements : [];
+	const bodyElementsWithDisclaimer = data.affiliateLinksDisclaimer
+		? insertDisclaimerElement(bodyElements)
+		: bodyElements;
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,
 		isSensitive: config.isSensitive,
@@ -116,7 +118,7 @@ export const Body = ({ data, config }: Props) => {
 	const design = decideDesign(data.format);
 	const pillar = decideTheme(data.format);
 	const elementsWithoutAds = Elements(
-		bodyElements,
+		bodyElementsWithDisclaimer,
 		pillar,
 		data.isImmersive,
 		adTargeting,
@@ -144,9 +146,11 @@ export const Body = ({ data, config }: Props) => {
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
-	const elements = data.shouldHideAds
-		? elementsWithoutAds
-		: elementsWithoutAds.map((item, elementIndex) => {
+	const elements = data.shouldHideAds ? (
+		<>{elementsWithoutAds}</>
+	) : (
+		<>
+			{elementsWithoutAds.map((item, elementIndex) => {
 				if (insertSlotsAfter.includes(elementIndex)) {
 					// Ad slot ids take the form: `ad-1`, `ad-2`, `ad-3`, ...
 					// Looking up the element index in the array of ad insertion points
@@ -173,33 +177,7 @@ export const Body = ({ data, config }: Props) => {
 					);
 				}
 				return item;
-		  });
-
-	const insertDisclaimerBefore = findDisclaimerPosition(bodyElements);
-	const elementsWithDisclaimer = data.affiliateLinksDisclaimer ? (
-		<>
-			{elements.map((item, elementIndex) => {
-				if (insertDisclaimerBefore === elementIndex) {
-					return (
-						<React.Fragment key={item.key}>
-							<AffiliateDisclaimerInline isAmp={true} />
-							{item}
-						</React.Fragment>
-					);
-				}
-				return item;
 			})}
-			<div
-				id="clean-blocks"
-				data-sort-time="1"
-				css={css`
-					clear: both;
-				`}
-			/>
-		</>
-	) : (
-		<>
-			{elements}
 			<div
 				id="clean-blocks"
 				data-sort-time="1"
@@ -235,7 +213,7 @@ export const Body = ({ data, config }: Props) => {
 						pillar={pillar}
 					/>
 				) : (
-					elementsWithDisclaimer
+					elements
 				)
 			}
 
