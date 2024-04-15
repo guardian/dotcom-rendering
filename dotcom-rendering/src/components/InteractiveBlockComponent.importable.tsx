@@ -107,7 +107,8 @@ const wrapperStyle = ({
 	role: RoleType;
 	loaded: boolean;
 }) => css`
-	${format.theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17};
+	${format.theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17}
+	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 	background-color: ${themePalette('--interactive-block-background')};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
