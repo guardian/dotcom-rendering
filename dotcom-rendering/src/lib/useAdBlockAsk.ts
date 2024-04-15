@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAB } from './useAB';
-import { useOnlineStatus } from './useOnlineStatus';
+// import { useOnlineStatus } from './useOnlineStatus';
 
 const useIsInAdBlockAskVariant = (): boolean => {
 	const abTestAPI = useAB()?.api;
@@ -53,7 +53,7 @@ const makeDetectionRequests = async () => {
 export const useAdblockAsk = (slotId: string): boolean => {
 	const isInVariant = useIsInAdBlockAskVariant();
 	const [adBlockerDetected, setAdBlockerDetected] = useState<boolean>(false);
-	const isOnline = useOnlineStatus();
+	// const isOnline = useOnlineStatus();
 
 	useEffect(() => {
 		const makeRequest = async () => {
@@ -61,14 +61,14 @@ export const useAdblockAsk = (slotId: string): boolean => {
 			// Ensure the user is online before performing the detection request
 			if (
 				!adBlockerDetected &&
-				isOnline &&
+				/* isOnline && */
 				(await makeDetectionRequests())
 			) {
 				setAdBlockerDetected(true);
 			}
 		};
 		void makeRequest();
-	}, [adBlockerDetected, isOnline]);
+	}, [adBlockerDetected /* isOnline */]);
 
 	/**
 	 * Some ad-blockers will remove slots from the DOM, while others don't
