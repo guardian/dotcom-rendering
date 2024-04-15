@@ -893,7 +893,7 @@ export const RenderArticleElement = ({
 
 	const needsFigure = !bareElements.has(element._type);
 	const role = 'role' in element ? (element.role as RoleType) : undefined;
-	console.log(element._type);
+
 	return needsFigure ? (
 		<Figure
 			key={'elementId' in element ? element.elementId : index}
