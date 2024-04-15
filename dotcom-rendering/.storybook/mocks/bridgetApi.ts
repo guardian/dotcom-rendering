@@ -1,3 +1,11 @@
+import { DiscussionNativeError } from '@guardian/bridget/DiscussionNativeError';
+import {
+	DiscussionResponse,
+	DiscussionResponseType,
+} from '@guardian/bridget/DiscussionResponse';
+import { DiscussionUserProfile } from '@guardian/bridget/DiscussionUserProfile';
+import { GetUserProfileResponseType } from '@guardian/bridget/GetUserProfileResponse';
+
 type BridgeModule = typeof import('../../src/lib/bridgetApi');
 
 type BridgetApi<T extends keyof BridgeModule> = () => Partial<
@@ -64,6 +72,21 @@ export const getTagClient: BridgetApi<'getTagClient'> = () => ({
 	isFollowing: async () => false,
 });
 
+const discussionErrorResponse = {
+	__type: DiscussionResponseType.DiscussionResponseWithError,
+	error: DiscussionNativeError.UNKNOWN_ERROR,
+} satisfies DiscussionResponse;
+
+export const getDiscussionClient: BridgetApi<'getDiscussionClient'> = () => ({
+	comment: async () => discussionErrorResponse,
+	reply: async () => discussionErrorResponse,
+	getUserProfile: async () => ({
+		__type: GetUserProfileResponseType.GetUserProfileResponseWithError,
+		error: DiscussionNativeError.UNKNOWN_ERROR,
+	}),
+	recommend: async () => discussionErrorResponse,
+});
+
 export const ensure_all_exports_are_present = {
 	getUserClient,
 	getAcquisitionsClient,
@@ -76,6 +99,7 @@ export const ensure_all_exports_are_present = {
 	getAnalyticsClient,
 	getNavigationClient,
 	getNewslettersClient,
+	getDiscussionClient,
 } satisfies {
 	[Method in keyof BridgeModule]: BridgetApi<Method>;
 };
