@@ -14,16 +14,16 @@ const imageStyles = css`
 
 const linkStyles = css`
 	${textEgyptian17};
-/**
+	/**
  * @TODO (2) Typography preset styles should not be overridden.
  * Please speak to your team's designer and update this to use a more appropriate preset.
 */
-line-height: 1.4
-    font-weight: bold;
-    display: flex;
-    align-items: flex-start;
-    text-decoration: none;
-    color: ${palette('--card-headline-trail-text')};
+	line-height: 1.4;
+	font-weight: bold;
+	display: flex;
+	align-items: flex-start;
+	text-decoration: none;
+	color: ${palette('--card-headline-trail-text')};
 `;
 
 type Props = {

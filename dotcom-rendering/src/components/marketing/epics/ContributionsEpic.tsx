@@ -99,7 +99,8 @@ const highlightWrapperStyles = css`
  * @TODO (2) Typography preset styles should not be overridden.
  * Please speak to your team's designer and update this to use a more appropriate preset.
 */
-	line-height: 1.4 ${linkStyles};
+	line-height: 1.4;
+	${linkStyles};
 `;
 
 const highlightStyles = css`

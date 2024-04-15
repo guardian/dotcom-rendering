@@ -89,7 +89,8 @@ const bodyCopyStyles = css`
  * @TODO (2) Typography preset styles should not be overridden.
  * Please speak to your team's designer and update this to use a more appropriate preset.
 */
-	line-height: 1.4 ${from.tablet} {
+	line-height: 1.4;
+	${from.tablet} {
 		margin-right: ${space[9]}px;
 	}
 `;

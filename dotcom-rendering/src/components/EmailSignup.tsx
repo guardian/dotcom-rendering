@@ -67,12 +67,12 @@ const noHeightFromTabletStyles = css`
 // max-width is the wdith of the text field, the button and the margin between them
 const descriptionStyles = css`
 	${textSans14};
-/**
+	/**
  * @TODO (2) Typography preset styles should not be overridden.
  * Please speak to your team's designer and update this to use a more appropriate preset.
 */
-line-height: 1.15
-    margin-bottom: ${space[2]}px;
+	line-height: 1.15;
+	margin-bottom: ${space[2]}px;
 	max-width: ${335 + space[3] + 118}px;
 `;
 

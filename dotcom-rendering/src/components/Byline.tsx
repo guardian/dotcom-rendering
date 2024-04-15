@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import {
-	headlineMedium17,
-	headlineMedium20,
-	headlineMedium24,
-	headlineMedium28,
-	textSans17,
-	textSans20,
-	textSans24,
+	headlineMediumItalic17,
+	headlineMediumItalic20,
+	headlineMediumItalic24,
+	headlineMediumItalic28,
+	textSansItalic17,
+	textSansItalic20,
+	textSansItalic24,
 	until,
 } from '@guardian/source-foundations';
 import { palette } from '../palette';
@@ -30,67 +30,67 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 		case 'huge':
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans24};
+					${textSansItalic24};
 					font-size: 24px;
 					line-height: 24px;
 					${until.desktop} {
-						${textSans24};
+						${textSansItalic24};
 						line-height: 20px;
 					}
 				`;
 			}
 			return css`
-				${headlineMedium28};
+				${headlineMediumItalic28};
 				${until.desktop} {
-					${headlineMedium24};
+					${headlineMediumItalic24};
 				}
 			`;
 		case 'large': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans20};
+					${textSansItalic20};
 					font-size: 24px;
 					line-height: 24px;
 					${until.desktop} {
-						${textSans20};
+						${textSansItalic20};
 						line-height: 20px;
 					}
 				`;
 			}
 			return css`
-				${headlineMedium24};
+				${headlineMediumItalic24};
 				${until.desktop} {
-					${headlineMedium20};
+					${headlineMediumItalic20};
 				}
 			`;
 		}
 		case 'medium': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans20};
+					${textSansItalic20};
 					line-height: 20px;
 					${until.desktop} {
-						${textSans17};
+						${textSansItalic17};
 						line-height: 18px;
 					}
 				`;
 			}
 			return css`
-				${headlineMedium20};
+				${headlineMediumItalic20};
 				${until.desktop} {
-					${headlineMedium17};
+					${headlineMediumItalic17};
 				}
 			`;
 		}
 		case 'small': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans17};
+					${textSansItalic17};
 					line-height: 18px;
 				`;
 			}
 			return css`
-				${headlineMedium17};
+				${headlineMediumItalic17};
 			`;
 		}
 		case 'tiny':

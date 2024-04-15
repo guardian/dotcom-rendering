@@ -26,6 +26,7 @@ const wrapperStyles = css`
 
 const interviewBylineBoxStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineMedium20}
+	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 	font-style: italic;
 	background-color: ${schemedPalette('--byline-background')};
 	box-shadow:
@@ -97,6 +98,7 @@ const analysisSingleContributorStyles = css`
 
 const immersiveStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineLight24}
+	${format.theme === ArticleSpecial.Labs && 'line-height: 1.15;'}
 	margin-bottom: ${space[6]}px;
 `;
 
