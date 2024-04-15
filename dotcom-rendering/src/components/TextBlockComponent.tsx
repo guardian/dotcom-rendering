@@ -261,6 +261,11 @@ const buildElementTree =
 					key,
 					children,
 				});
+			case 'EM':
+				return jsx('em', {
+					key,
+					children,
+				});
 			case 'STRONG':
 				return jsx('strong', {
 					key,
@@ -321,7 +326,6 @@ const buildElementTree =
 			case 'H3':
 			case 'H4':
 			case 'B':
-			case 'EM':
 			case 'UL':
 			case 'LI':
 			case 'MARK':
