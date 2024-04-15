@@ -1,12 +1,12 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-// import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { allModes } from '.storybook/modes';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { images } from '../../fixtures/generated/images';
-// import { getAllThemes } from '../lib/format';
+import { getAllThemes } from '../lib/format';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { KeyTakeaways } from './KeyTakeaways';
-import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 
 const meta = {
 	component: KeyTakeaways,
@@ -37,7 +37,7 @@ export const AllThemes = {
 			},
 		],
 		/**
-		 * This will be replaced by the `splitTheme` decorator, but it's
+		 * This will be replaced by the `formats` parameter, but it's
 		 * required by the type.
 		 */
 		format: {
@@ -58,15 +58,18 @@ export const AllThemes = {
 		switches: {},
 		RenderArticleElement,
 	},
-	decorators: [
-		centreColumnDecorator,
-		// splitTheme(
-		// 	getAllThemes({
-		// 		design: ArticleDesign.Standard,
-		// 		display: ArticleDisplay.Standard,
-		// 	}),
-		// ),
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		}),
+		chromatic: {
+			modes: {
+				horizontal: allModes.sideBySideHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
 /* TODO reminder to check desktop/mobile font size variations
@@ -74,46 +77,56 @@ export const AllThemes = {
  */
 export const SomeDesignsAndDisplays = {
 	args: AllThemes.args,
-	decorators: [
-		// splitTheme([
-		// 	{
-		// 		design: ArticleDesign.Obituary,
-		// 		display: ArticleDisplay.Standard,
-		// 		theme: Pillar.Lifestyle,
-		// 	},
-		// 	{
-		// 		design: ArticleDesign.Editorial,
-		// 		display: ArticleDisplay.Standard,
-		// 		theme: Pillar.Lifestyle,
-		// 	},
-		// 	{
-		// 		design: ArticleDesign.Profile,
-		// 		display: ArticleDisplay.Standard,
-		// 		theme: Pillar.Lifestyle,
-		// 	},
-		// 	{
-		// 		design: ArticleDesign.Analysis,
-		// 		display: ArticleDisplay.Standard,
-		// 		theme: Pillar.Lifestyle,
-		// 	},
-		// 	{
-		// 		design: ArticleDesign.Interview,
-		// 		display: ArticleDisplay.Standard,
-		// 		theme: Pillar.Lifestyle,
-		// 	},
-		// 	{
-		// 		design: ArticleDesign.Standard,
-		// 		display: ArticleDisplay.Immersive,
-		// 		theme: Pillar.Lifestyle,
-		// 	},
-		// ]),
-		centreColumnDecorator,
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: [
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Editorial,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Profile,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Analysis,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Interview,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Lifestyle,
+			},
+		],
+		chromatic: {
+			modes: {
+				horizontal: allModes.sideBySideHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
 export const Images = {
 	args: {
 		...AllThemes.args,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
 		keyTakeaways: [
 			{
 				title: 'The first key takeaway',
@@ -137,17 +150,12 @@ export const Images = {
 			},
 		],
 	},
-	decorators: [
-		// splitTheme(
-		// 	[
-		// 		{
-		// 			design: ArticleDesign.Standard,
-		// 			display: ArticleDisplay.Standard,
-		// 			theme: Pillar.Culture,
-		// 		},
-		// 	],
-		// 	{ orientation: 'vertical' },
-		// ),
-		centreColumnDecorator,
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		chromatic: {
+			modes: {
+				vertical: allModes.sideBySideVertical,
+			},
+		},
+	},
 } satisfies Story;
