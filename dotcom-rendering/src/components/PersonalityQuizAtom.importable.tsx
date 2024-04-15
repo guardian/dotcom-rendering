@@ -26,6 +26,7 @@ const answersWrapperStyle = (theme: ArticleTheme) => css`
 	border: 0px;
 	padding: 0px;
 	${theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17};
+	${theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 
 	label {
 		width: inherit;
