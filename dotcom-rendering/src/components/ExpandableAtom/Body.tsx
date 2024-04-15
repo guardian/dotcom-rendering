@@ -36,7 +36,8 @@ const bodyStyling = css`
  * @TODO (2) Typography preset styles should not be overridden.
  * Please speak to your team's designer and update this to use a more appropriate preset.
 */
-	line-height: 1.4 p {
+	line-height: 1.4;
+	p {
 		margin-bottom: 0.5rem;
 	}
 

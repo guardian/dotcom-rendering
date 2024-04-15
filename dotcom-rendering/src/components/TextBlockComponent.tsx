@@ -161,7 +161,7 @@ const styles = (format: ArticleFormat) => css`
 	margin-bottom: 14px;
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17};
-
+	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'};
 	strong em,
 	strong u {
 		font-weight: bold;

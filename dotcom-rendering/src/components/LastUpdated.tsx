@@ -19,7 +19,7 @@ const LastUpdated = ({
 				color: ${palette.neutral[46]};
 			`}
 		>
-			Updated at
+			Updated at&nbsp;
 			<DateTime
 				date={new Date(lastUpdated)}
 				editionId={editionId}
