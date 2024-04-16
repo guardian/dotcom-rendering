@@ -66,8 +66,7 @@ export const ArticleRenderer = ({
 	abTests,
 	editionId,
 }: Props) => {
-	const totalElements = elements.length;
-	const renderedElements = elements.map((element, index) => {
+	const renderedElements = elements.map((element, index, { length }) => {
 		return (
 			<RenderArticleElement
 				// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
@@ -85,7 +84,7 @@ export const ArticleRenderer = ({
 				switches={switches}
 				abTests={abTests}
 				editionId={editionId}
-				totalElements={totalElements}
+				totalElements={length}
 			/>
 		);
 	});
