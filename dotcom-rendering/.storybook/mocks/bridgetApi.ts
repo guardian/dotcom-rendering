@@ -1,9 +1,8 @@
 import { DiscussionNativeError } from '@guardian/bridget/DiscussionNativeError';
 import {
-	DiscussionResponse,
-	DiscussionResponseType,
-} from '@guardian/bridget/DiscussionResponse';
-import { GetUserProfileResponseType } from '@guardian/bridget/GetUserProfileResponse';
+	DiscussionServiceResponse,
+	DiscussionServiceResponseType,
+} from '@guardian/bridget/DiscussionServiceResponse';
 
 type BridgeModule = typeof import('../../src/lib/bridgetApi');
 
@@ -72,15 +71,15 @@ export const getTagClient: BridgetApi<'getTagClient'> = () => ({
 });
 
 const discussionErrorResponse = {
-	__type: DiscussionResponseType.DiscussionResponseWithError,
+	__type: DiscussionServiceResponseType.DiscussionServiceResponseWithError,
 	error: DiscussionNativeError.UNKNOWN_ERROR,
-} satisfies DiscussionResponse;
+} satisfies DiscussionServiceResponse;
 
 export const getDiscussionClient: BridgetApi<'getDiscussionClient'> = () => ({
 	comment: async () => discussionErrorResponse,
 	reply: async () => discussionErrorResponse,
 	getUserProfile: async () => ({
-		__type: GetUserProfileResponseType.GetUserProfileResponseWithError,
+		__type: DiscussionServiceResponseType.DiscussionServiceResponseWithError,
 		error: DiscussionNativeError.UNKNOWN_ERROR,
 	}),
 	recommend: async () => discussionErrorResponse,
