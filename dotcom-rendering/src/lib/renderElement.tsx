@@ -147,7 +147,7 @@ export const renderElement = ({
 	editionId,
 	forceDropCap,
 	isTimeline = false,
-	totalElements,
+	totalElements = 0,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -442,8 +442,7 @@ export const renderElement = ({
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
-					totalElements={totalElements}
-					index={index}
+					isLastElement={index >= totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':

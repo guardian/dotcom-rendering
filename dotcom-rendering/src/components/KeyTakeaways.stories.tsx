@@ -163,8 +163,7 @@ export const Images = {
 export const WithSeparatorLine = {
 	args: {
 		...AllThemes.args,
-		totalElements: 5,
-		index: 2,
+		isLastElement: false,
 	},
 	decorators: [
 		splitTheme(
