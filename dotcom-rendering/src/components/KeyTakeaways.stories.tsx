@@ -36,6 +36,7 @@ export const AllThemes = {
 				body: [testTextElement],
 			},
 		],
+		isLastElement: true,
 		/**
 		 * This will be replaced by the `formats` parameter, but it's
 		 * required by the type.
