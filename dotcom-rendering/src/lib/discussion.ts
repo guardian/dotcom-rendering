@@ -73,6 +73,16 @@ export interface UserProfile {
 	};
 }
 
+export const parseUserProfile = (
+	data: unknown,
+): Result<'ParsingError', UserProfile> => {
+	const result = safeParse(userProfile, data);
+	if (!result.success) {
+		return error('ParsingError');
+	}
+	return ok(result.output);
+};
+
 const baseCommentSchema = object({
 	id: transform(union([number(), string()]), (id) => id.toString()),
 	body: string(),

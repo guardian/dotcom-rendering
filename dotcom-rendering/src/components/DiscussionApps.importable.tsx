@@ -1,13 +1,10 @@
-import {
-	DiscussionResponseType,
-	GetUserProfileResponseType,
-} from '@guardian/bridget';
+import { DiscussionServiceResponseType } from '@guardian/bridget';
 import { useEffect, useState } from 'react';
 import { getDiscussionClient } from '../lib/bridgetApi';
 import {
 	parseCommentResponse,
+	parseUserProfile,
 	type Reader,
-	type UserProfile,
 } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
@@ -25,7 +22,7 @@ const onComment = async (
 		.then((apiResponse) => {
 			if (
 				apiResponse.__type ===
-				DiscussionResponseType.DiscussionResponseWithError
+				DiscussionServiceResponseType.DiscussionServiceResponseWithError
 			) {
 				return error('ApiError');
 			}
@@ -43,12 +40,12 @@ const onReply = async (
 		.then((apiResponse) => {
 			if (
 				apiResponse.__type ===
-				DiscussionResponseType.DiscussionResponseWithError
+				DiscussionServiceResponseType.DiscussionServiceResponseWithError
 			) {
 				return error('ApiError');
 			}
 
-			return parseCommentResponse(apiResponse.response);
+			return parseCommentResponse(JSON.parse(apiResponse.response));
 		});
 
 const onRecommend = async (commentId: string): Promise<boolean> => {
@@ -58,7 +55,7 @@ const onRecommend = async (commentId: string): Promise<boolean> => {
 			(discussionApiResponse) =>
 				// eslint-disable-next-line no-underscore-dangle -- we don't have control over this name! It comes from the compiled Thrift models
 				discussionApiResponse.__type ===
-					DiscussionResponseType.DiscussionResponseWithResponse &&
+					DiscussionServiceResponseType.DiscussionServiceResponseWithResponse &&
 				discussionApiResponse.response.statusCode === 200,
 		);
 };
@@ -84,39 +81,27 @@ export const DiscussionApps = (props: Props) => {
 			.then((userProfile) => {
 				if (
 					userProfile.__type ===
-					GetUserProfileResponseType.GetUserProfileResponseWithError
+					DiscussionServiceResponseType.DiscussionServiceResponseWithError
 				) {
 					return undefined;
 				}
 
-				const profile = {
-					userId: userProfile.profile.userId,
-					displayName: userProfile.profile.displayName,
-					webUrl: userProfile.profile.webUrl,
-					apiUrl: userProfile.profile.apiUrl,
-					avatar: userProfile.profile.avatar,
-					secureAvatarUrl: userProfile.profile.secureAvatarUrl,
-					badge: userProfile.profile.badge.map(({ name }) => ({
-						name,
-					})),
-					privateFields: {
-						canPostComment: userProfile.profile.canPostComment,
-						hasCommented: userProfile.profile.hasCommented,
-						isPremoderated: userProfile.profile.isPremoderated,
-					},
-				} satisfies UserProfile;
+				const profileResult = parseUserProfile(
+					JSON.parse(userProfile.response),
+				);
 
-				return {
-					kind: 'Reader',
-					onComment,
-					onReply,
-					onRecommend,
-					addUsername,
-					reportAbuse: reportAbuseWeb(undefined),
-					profile,
-				} satisfies Reader;
-			})
-			.then(setUser);
+				if (profileResult.kind === 'ok') {
+					setUser({
+						kind: 'Reader',
+						onComment,
+						onReply,
+						onRecommend,
+						addUsername,
+						reportAbuse: reportAbuseWeb(undefined),
+						profile: profileResult.value,
+					});
+				}
+			});
 	}, [setUser]);
 
 	return (
