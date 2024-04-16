@@ -92,11 +92,6 @@ const epicParagraphStyle = css`
 	margin-block-start: 0.5rem;
 	margin-block-end: 0.5rem;
 	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
 	text-rendering: optimizeLegibility;
 	font-kerning: normal;
 	font-variant-ligatures: common-ligatures;
