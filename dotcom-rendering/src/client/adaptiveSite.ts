@@ -12,10 +12,6 @@ import { recordExperiences } from './ophan/ophan';
  */
 export const shouldAdapt = async (): Promise<boolean> => {
 	if (isServer) return false;
-	if (window.location.hash === '#adapt') return true;
-	if (window.guardian.config.tests.adaptiveSiteVariant !== 'variant') {
-		return false;
-	}
 
 	// only evaluate this code if we want to adapt in response to page performance
 	const { isPerformingPoorly } = await import(
