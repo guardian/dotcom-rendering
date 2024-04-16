@@ -23,7 +23,6 @@ const headerAdWrapper = css`
 	background-color: ${sourcePalette.neutral[97]};
 	min-height: ${headerMinHeight}px;
 	border-bottom: ${borderBottomHeight}px solid ${sourcePalette.neutral[86]};
-	padding-bottom: ${padding}px;
 
 	display: flex;
 	flex-direction: column;
@@ -39,6 +38,7 @@ const topAboveNavContainer = css`
 		width: fit-content;
 		margin: auto;
 	}
+	padding-bottom: ${padding}px;
 `;
 
 const topAboveNavStyles = css`
