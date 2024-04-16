@@ -1,4 +1,3 @@
-import { splitTheme } from '.storybook/decorators/splitThemeDecorator';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
@@ -166,17 +165,11 @@ export const WithSeparatorLine = {
 	args: {
 		...AllThemes.args,
 		isLastElement: false,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
 	},
-	decorators: [
-		splitTheme(
-			[
-				{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-				},
-			],
-			{ orientation: 'horizontal' },
-		),
-	],
+	decorators: [centreColumnDecorator],
 } satisfies Story;
