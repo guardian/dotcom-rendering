@@ -30,17 +30,7 @@ const onComment = async (
 				return error('ApiError');
 			}
 
-			if (apiResponse.response.status === 'error') {
-				return parseCommentResponse({
-					status: apiResponse.response.status,
-					errorCode: apiResponse.response.errorCode,
-				});
-			}
-
-			return parseCommentResponse({
-				status: apiResponse.response.status,
-				message: apiResponse.response.message,
-			});
+			return parseCommentResponse(apiResponse.response);
 		});
 
 const onReply = async (
@@ -58,18 +48,7 @@ const onReply = async (
 				return error('ApiError');
 			}
 
-			if (apiResponse.response.status === 'error') {
-				return parseCommentResponse({
-					status: apiResponse.response.status,
-					errorCode: apiResponse.response.errorCode,
-				});
-			}
-
-			const parsedResponse = parseCommentResponse({
-				status: apiResponse.response.status,
-				message: apiResponse.response.message,
-			});
-			return parsedResponse;
+			return parseCommentResponse(apiResponse.response);
 		});
 
 const onRecommend = async (commentId: string): Promise<boolean> => {
