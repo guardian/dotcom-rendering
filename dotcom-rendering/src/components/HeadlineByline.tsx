@@ -3,13 +3,14 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	headlineLight24,
-	headlineLight28,
-	headlineLight34,
-	headlineMedium20,
+	headlineLightItalic28,
+	headlineLightItalic34,
+	headlineMediumItalic20,
 	palette,
 	space,
 	textSans20,
-	textSans34,
+	textSansItalic20,
+	textSansItalic34,
 	until,
 } from '@guardian/source-foundations';
 import { getSoleContributor } from '../lib/byline';
@@ -25,7 +26,9 @@ const wrapperStyles = css`
 `;
 
 const interviewBylineBoxStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineMedium20}
+	${format.theme === ArticleSpecial.Labs
+		? textSansItalic20
+		: headlineMediumItalic20}
 	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 	font-style: italic;
 	background-color: ${schemedPalette('--byline-background')};
@@ -49,15 +52,16 @@ const opinionWrapperStyles = css`
 `;
 
 const opinionStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs ? textSans34 : headlineLight34}
+	${format.theme === ArticleSpecial.Labs
+		? textSansItalic34
+		: headlineLightItalic34}
 	line-height: 38px;
 	/* Used to prevent the byline stretching full width */
 	display: inline;
-	font-style: italic;
 	color: ${schemedPalette('--byline')};
 
 	${until.mobileMedium} {
-		${headlineLight28}
+		${headlineLightItalic28}
 	}
 
 	a {
@@ -70,13 +74,12 @@ const opinionStyles = (format: ArticleFormat) => css`
 `;
 
 const analysisStyles = css`
-	${headlineLight34}
+	${headlineLightItalic34};
 	line-height: 38px;
-	font-style: italic;
 	color: ${schemedPalette('--byline-anchor')};
 
 	${until.tablet} {
-		${headlineLight28}
+		${headlineLightItalic28}
 	}
 
 	a {

@@ -20,7 +20,6 @@ type Props = {
 
 const baseStyles = css`
 	display: block;
-	font-style: italic;
 	color: ${palette('--byline')};
 `;
 
