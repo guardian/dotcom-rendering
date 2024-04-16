@@ -27,6 +27,7 @@ export const interactiveLegacyFigureClasses = (
 // Classes present in Frontend that we add for legacy interactives.
 export const interactiveLegacyClasses = {
 	contentInteractive: 'content--interactive',
+	contentInteractiveGrid: 'content--interactive-grid',
 	contentLabels: 'content__labels',
 	contentLabelsNotImmersive: 'content__labels--not-immersive',
 	contentMainColumn: 'content__main-column--interactive',
