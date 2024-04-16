@@ -20,6 +20,9 @@ const anchorStyles = css`
 	color: ${palette('--table-of-contents')};
 	text-decoration: none;
 	display: block;
+	width: 100%;
+	padding-bottom: ${space[4]}px;
+	padding-top: ${space[1]}px;
 `;
 
 const listItemStyles = (format: ArticleFormat) => {
@@ -29,8 +32,6 @@ const listItemStyles = (format: ArticleFormat) => {
 		${headline.xxxsmall({ fontWeight })};
 		box-sizing: border-box;
 		border-top: 1px solid ${palette('--table-of-contents-border')};
-		padding-bottom: ${space[4]}px;
-		padding-top: ${space[1]}px;
 		display: flex;
 		position: relative;
 
