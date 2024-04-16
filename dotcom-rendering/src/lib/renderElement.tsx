@@ -88,6 +88,7 @@ type Props = {
 	abTests: ServerSideTests;
 	editionId: EditionId;
 	forceDropCap?: 'on' | 'off';
+	isTimeline?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -144,6 +145,7 @@ export const renderElement = ({
 	abTests,
 	editionId,
 	forceDropCap,
+	isTimeline = false,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -203,7 +205,7 @@ export const renderElement = ({
 					key={index}
 					format={format}
 					captionText={element.captionText}
-					padCaption={element.padCaption}
+					padCaption={isTimeline}
 					credit={element.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
@@ -356,6 +358,7 @@ export const renderElement = ({
 					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
+					isTimeline={isTimeline}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -863,6 +866,7 @@ export const RenderArticleElement = ({
 	abTests,
 	editionId,
 	forceDropCap,
+	isTimeline,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -884,6 +888,7 @@ export const RenderArticleElement = ({
 		abTests,
 		editionId,
 		forceDropCap,
+		isTimeline,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
@@ -902,6 +907,7 @@ export const RenderArticleElement = ({
 			}
 			type={element._type}
 			format={format}
+			isTimeline={isTimeline}
 		>
 			{el}
 		</Figure>
@@ -915,7 +921,8 @@ type ElementLevelPropNames =
 	| 'index'
 	| 'forceDropCap'
 	| 'hideCaption'
-	| 'format';
+	| 'format'
+	| 'isTimeline';
 type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 

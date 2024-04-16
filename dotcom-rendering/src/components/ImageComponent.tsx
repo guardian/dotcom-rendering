@@ -29,6 +29,7 @@ type Props = {
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
+	isTimeline?: boolean;
 };
 
 const starsWrapper = css`
@@ -219,6 +220,7 @@ export const ImageComponent = ({
 	starRating,
 	title,
 	isAvatar,
+	isTimeline = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -523,6 +525,7 @@ export const ImageComponent = ({
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={shouldLimitWidth}
 					isMainMedia={isMainMedia}
+					padCaption={role === 'showcase' && isTimeline}
 				/>
 			)}
 		</>

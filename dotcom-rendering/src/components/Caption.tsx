@@ -102,8 +102,8 @@ const veryLimitedWidth = css`
 `;
 
 const captionPadding = css`
-	padding-left: 8px;
-	padding-right: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
 `;
 
 const tabletCaptionPadding = css`
