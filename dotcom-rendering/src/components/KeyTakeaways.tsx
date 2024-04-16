@@ -49,7 +49,7 @@ export const KeyTakeaways = ({
 }: KeyTakeawaysProps) => {
 	return (
 		<ol data-ignore="global-ol-styling">
-			{keyTakeaways.map((keyTakeaway, i) => (
+			{keyTakeaways.map((keyTakeaway, index) => (
 				<KeyTakeawayComponent
 					keyTakeaway={keyTakeaway}
 					format={format}
@@ -61,10 +61,10 @@ export const KeyTakeaways = ({
 					switches={switches}
 					abTests={abTests}
 					editionId={editionId}
-					titleIndex={i + 1}
+					titleIndex={index + 1}
 					hideCaption={hideCaption}
 					starRating={starRating}
-					key={i}
+					key={index}
 					RenderArticleElement={RenderArticleElement}
 				/>
 			))}
