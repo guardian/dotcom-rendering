@@ -159,3 +159,23 @@ export const Images = {
 		},
 	},
 } satisfies Story;
+
+export const WithSeparatorLine = {
+	args: {
+		...AllThemes.args,
+		totalElements: 5,
+		index: 2,
+	},
+	decorators: [
+		splitTheme(
+			[
+				{
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: Pillar.Culture,
+				},
+			],
+			{ orientation: 'horizontal' },
+		),
+	],
+} satisfies Story;
