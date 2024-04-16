@@ -725,6 +725,9 @@ importers:
       jest-environment-jsdom:
         specifier: 29.7.0
         version: 29.7.0
+      jscodeshift:
+        specifier: 0.15.2
+        version: 0.15.2(@babel/preset-env@7.22.6)
       jsdom:
         specifier: 22.1.0
         version: 22.1.0
@@ -14926,6 +14929,40 @@ packages:
     hasBin: true
     dependencies:
       argparse: 2.0.1
+    dev: false
+
+  /jscodeshift@0.15.2(@babel/preset-env@7.22.6):
+    resolution: {integrity: sha512-FquR7Okgmc4Sd0aEDwqho3rEiKR3BdvuG9jfdHjLJ6JQoWSMpavug3AoIfnfWhxFlf+5pzQh8qjqz0DWFrNQzA==}
+    hasBin: true
+    peerDependencies:
+      '@babel/preset-env': ^7.1.6
+    peerDependenciesMeta:
+      '@babel/preset-env':
+        optional: true
+    dependencies:
+      '@babel/core': 7.23.2
+      '@babel/parser': 7.23.6
+      '@babel/plugin-transform-class-properties': 7.23.3(@babel/core@7.23.2)
+      '@babel/plugin-transform-modules-commonjs': 7.23.3(@babel/core@7.23.2)
+      '@babel/plugin-transform-nullish-coalescing-operator': 7.23.4(@babel/core@7.23.2)
+      '@babel/plugin-transform-optional-chaining': 7.23.4(@babel/core@7.23.2)
+      '@babel/plugin-transform-private-methods': 7.23.3(@babel/core@7.23.2)
+      '@babel/preset-env': 7.22.6(@babel/core@7.23.2)
+      '@babel/preset-flow': 7.23.3(@babel/core@7.23.2)
+      '@babel/preset-typescript': 7.23.3(@babel/core@7.23.2)
+      '@babel/register': 7.22.15(@babel/core@7.23.2)
+      babel-core: 7.0.0-bridge.0(@babel/core@7.23.2)
+      chalk: 4.1.2
+      flow-parser: 0.224.0
+      graceful-fs: 4.2.11
+      micromatch: 4.0.5
+      neo-async: 2.6.2
+      node-dir: 0.1.17
+      recast: 0.23.4
+      temp: 0.8.4
+      write-file-atomic: 2.4.3
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /jscodeshift@0.15.2(@babel/preset-env@7.23.6):
