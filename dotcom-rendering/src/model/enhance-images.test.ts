@@ -38,7 +38,7 @@ describe('Enhance Images', () => {
 						...image.data,
 						caption:
 							'<ul><li>This new caption replaces the one on the image object.</li></ul>',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 			];
@@ -71,7 +71,7 @@ describe('Enhance Images', () => {
 							data: {
 								...image.data,
 								caption: '',
-										credit: 'Photograph: Cat Vinton/The Guardian',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 						{
@@ -81,7 +81,7 @@ describe('Enhance Images', () => {
 							data: {
 								...image.data,
 								caption: '',
-										credit: 'Photograph: Cat Vinton/The Guardian',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -113,8 +113,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption: 'The original caption',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: 'The original caption',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 				{
@@ -125,7 +125,7 @@ describe('Enhance Images', () => {
 						...image.data,
 						caption:
 							'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 			];
@@ -154,7 +154,7 @@ describe('Enhance Images', () => {
 						...image.data,
 						caption:
 							'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 			];
@@ -180,8 +180,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption: 'The original caption',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: 'The original caption',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 					title: 'Example title text',
 				},
@@ -218,9 +218,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption:
-									'<ul><li><p>This is the caption</p></li></ul>',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: '<ul><li><p>This is the caption</p></li></ul>',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 					title: 'The title',
 				},
@@ -260,7 +259,7 @@ describe('Enhance Images', () => {
 							data: {
 								...image.data,
 								caption: '',
-										credit: 'Photograph: Cat Vinton/The Guardian',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 						{
@@ -270,7 +269,7 @@ describe('Enhance Images', () => {
 							data: {
 								...image.data,
 								caption: '',
-										credit: 'Photograph: Cat Vinton/The Guardian',
+								credit: 'Photograph: Cat Vinton/The Guardian',
 							},
 						},
 					],
@@ -281,9 +280,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption:
-									'<ul><li><p>This is the caption</p></li></ul>',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: '<ul><li><p>This is the caption</p></li></ul>',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 			];
@@ -319,9 +317,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption:
-									'<ul><li><p>This is the caption</p></li></ul>',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: '<ul><li><p>This is the caption</p></li></ul>',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 					title: 'The title',
 				},
@@ -346,8 +343,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption: 'The original caption',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: 'The original caption',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 			];
@@ -384,9 +381,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption:
-									'<ul><li><p>This is the caption</p></li></ul>',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: '<ul><li><p>This is the caption</p></li></ul>',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 					title: 'The title',
 				},
@@ -401,8 +397,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption: 'The original caption',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: 'The original caption',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 				{
@@ -411,8 +407,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption: 'The original caption',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: 'The original caption',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 			];
@@ -453,8 +449,8 @@ describe('Enhance Images', () => {
 					displayCredit: false,
 					data: {
 						...image.data,
-								caption: 'The original caption',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: 'The original caption',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 					title: 'The title',
 				},
@@ -545,8 +541,8 @@ describe('Enhance Images', () => {
 					...image,
 					role: 'inline',
 					data: {
-								caption: 'The original caption',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: 'The original caption',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 			];
@@ -557,8 +553,8 @@ describe('Enhance Images', () => {
 					position: 4,
 					role: 'inline',
 					data: {
-								caption: 'The original caption',
-								credit: 'Photograph: Cat Vinton/The Guardian',
+						caption: 'The original caption',
+						credit: 'Photograph: Cat Vinton/The Guardian',
 					},
 				},
 			];
