@@ -58,6 +58,13 @@ const onReply = async (
 				return error('ApiError');
 			}
 
+			if (apiResponse.response.status === 'error') {
+				return parseCommentResponse({
+					status: apiResponse.response.status,
+					errorCode: apiResponse.response.errorCode,
+				});
+			}
+
 			const parsedResponse = parseCommentResponse({
 				status: apiResponse.response.status,
 				message: apiResponse.response.message,
