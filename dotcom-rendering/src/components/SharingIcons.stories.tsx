@@ -1,15 +1,20 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { sharingUrls } from '../../fixtures/manual/sharingUrls';
-import { SharingIcons } from './SharingIcons';
+import { SharingIcons as SharingIconsComponent } from './SharingIcons';
 
-export default {
-	title: 'SharingIcons',
-	component: SharingIcons,
-};
+const meta = {
+	title: 'Components/SharingIcons',
+	component: SharingIconsComponent,
+} satisfies Meta<typeof SharingIconsComponent>;
 
-export const SharingIconsDefault = (): JSX.Element => (
-	<SharingIcons
-		sharingUrls={sharingUrls}
-		displayIcons={[
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const SharingIcons = {
+	args: {
+		sharingUrls,
+		displayIcons: [
 			'facebook',
 			'twitter',
 			'email',
@@ -17,6 +22,6 @@ export const SharingIconsDefault = (): JSX.Element => (
 			'messenger',
 			'pinterest',
 			'linkedIn',
-		]}
-	/>
-);
+		],
+	},
+} satisfies Story;

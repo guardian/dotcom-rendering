@@ -448,6 +448,44 @@ declare namespace JSX {
 		 * link is clicked.
 		 */
 		'data-link-name'?: string;
+		/**
+		 * Ignore a DOM element in Chromatic builds with `data-chromatic="ignore"`.
+		 *
+		 * https://www.chromatic.com/docs/ignoring-elements/#ignore-dom-elements
+		 *
+		 * Note that if the dimensions of the ignored element
+		 * change, Chromatic will still capture the incoming changes.
+		 */
+		'data-chromatic'?: 'ignore';
+
+		/**
+		 * **Spacefinder Role**
+		 *
+		 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
+		 * is a part of the commercial bundle that is used to find positions
+		 * for ad slots within articles.
+		 *
+		 * Spacefinder has rules specified for elements with this data attribute
+		 * that it will use to find positions for ads.
+		 */
+		'data-spacefinder-role'?:
+			| 'nested'
+			| 'immersive'
+			| 'inline'
+			| 'richLink'
+			| 'thumbnail';
+
+		/**
+		 * **Spacefinder Type**
+		 *
+		 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
+		 * is a part of the commercial bundle that is used to find positions
+		 * for ad slots within articles.
+		 *
+		 * Spacefinder has rules specified for elements with this data attribute
+		 * that it will use to find positions for ads.
+		 */
+		'data-spacefinder-type'?: import('./src/types/content').FEElement['_type'];
 	}
 }
 

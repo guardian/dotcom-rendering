@@ -1,4 +1,4 @@
-import type { GetDiscussionSuccess } from '../../src/lib/discussion';
+import type { GetDiscussionResponse } from '../../src/lib/discussion';
 
 export const discussionWithNoComments = {
 	status: 'ok',
@@ -18,4 +18,4 @@ export const discussionWithNoComments = {
 		title: 'Mystery bird: black-and-red broadbill, Cymbirhynchus macrorhynchos story',
 		comments: [],
 	},
-} satisfies GetDiscussionSuccess;
+} satisfies GetDiscussionResponse;

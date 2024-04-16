@@ -15,14 +15,14 @@ const defaultFormat: ArticleFormat = {
 };
 
 /**
- * A global type and toolbar item to control the colour scheme of the story. It
- * offers four options:
+ * A global type and toolbar item to control the colour scheme of the story.
+ * It offers four options:
  *
  * 1. Light mode.
  * 2. Dark mode.
- * 3. Side-by-side Horizontal: display the story twice, on the left in light
+ * 3. Horizontal Split: display the story twice, on the left in light
  * mode and on the right in dark mode.
- * 4. Side-by-side Vertical: display the story twice, on the top in light
+ * 4. Vertical Split: display the story twice, on the top in light
  * mode and on the bottom in dark mode.
  *
  * This is added to `globalTypes` in `preview.ts` to include it in the toolbar.
@@ -44,9 +44,9 @@ export const globalColourScheme = {
 			{
 				value: 'horizontal',
 				left: '◨',
-				title: 'Side-by-side Horizontal',
+				title: 'Horizontal Split',
 			},
-			{ value: 'vertical', left: '⬓', title: 'Side-by-side Vertical' },
+			{ value: 'vertical', left: '⬓', title: 'Vertical Split' },
 		],
 		dynamicTitle: true,
 	},

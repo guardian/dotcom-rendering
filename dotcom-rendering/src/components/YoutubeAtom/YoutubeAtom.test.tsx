@@ -1,4 +1,4 @@
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
@@ -44,6 +44,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					imaEnabled={false}
 					abTestParticipations={{}}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</ConfigProvider>
 		);
@@ -75,6 +77,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					imaEnabled={false}
 					abTestParticipations={{}}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</ConfigProvider>
 		);
@@ -113,6 +117,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					imaEnabled={false}
 					abTestParticipations={{}}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</ConfigProvider>
 		);
@@ -145,6 +151,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					imaEnabled={false}
 					abTestParticipations={{}}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</ConfigProvider>
 		);
@@ -176,6 +184,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					imaEnabled={false}
 					abTestParticipations={{}}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</ConfigProvider>
 		);
@@ -208,6 +218,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					imaEnabled={false}
 					abTestParticipations={{}}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</ConfigProvider>
 		);
@@ -238,6 +250,8 @@ describe('YoutubeAtom', () => {
 					isMainMedia={false}
 					imaEnabled={false}
 					abTestParticipations={{}}
+					imagePositionOnMobile="none"
+					imageSize="large"
 				/>
 			</ConfigProvider>
 		);
@@ -272,6 +286,8 @@ describe('YoutubeAtom', () => {
 						isMainMedia={false}
 						imaEnabled={false}
 						abTestParticipations={{}}
+						imagePositionOnMobile="left"
+						imageSize="small"
 					/>
 					<YoutubeAtom
 						index={123}
@@ -290,6 +306,8 @@ describe('YoutubeAtom', () => {
 						isMainMedia={false}
 						imaEnabled={false}
 						abTestParticipations={{}}
+						imagePositionOnMobile="left"
+						imageSize="small"
 					/>
 				</ConfigProvider>
 			</>
