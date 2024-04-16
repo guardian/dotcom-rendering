@@ -110,25 +110,32 @@ const moreTitlePadding = css`
 	}
 `;
 
-const titleWrapper = (palette: Palette, isImmersive: boolean) => css`
+const immersiveTitleWrapper = css`
+	${until.desktop} {
+		${headline.medium({ fontWeight: 'light' })}
+	}
+
+	${until.phablet} {
+		${headline.medium({ fontWeight: 'light' })}
+	}
+
+	${from.desktop} {
+		${headline.medium({ fontWeight: 'light' })}
+	}
+`;
+const titleWrapper = (palette: Palette) => css`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 
 	${until.desktop} {
-		${isImmersive
-			? headline.medium({ fontWeight: 'light' })
-			: headline.xxsmall({ fontWeight: 'light' })};
+		${headline.xxsmall({ fontWeight: 'light' })};
 	}
 	${until.phablet} {
-		${isImmersive
-			? headline.medium({ fontWeight: 'light' })
-			: headline.xxxsmall({ fontWeight: 'light' })};
+		${headline.xxxsmall({ fontWeight: 'light' })};
 	}
 	${from.desktop} {
-		${isImmersive
-			? headline.medium({ fontWeight: 'light' })
-			: headline.xsmall({ fontWeight: 'light' })};
+		${headline.xsmall({ fontWeight: 'light' })};
 	}
 
 	color: ${srcPalette.neutral[100]};
@@ -165,14 +172,20 @@ const ImageTitle = ({
 		case 'halfWidth':
 		case 'supporting':
 			return (
-				<h2 css={[titleWrapper(palette, false), basicTitlePadding]}>
+				<h2 css={[titleWrapper(palette), basicTitlePadding]}>
 					{title}
 				</h2>
 			);
 		case 'showcase':
 		case 'immersive':
 			return (
-				<h2 css={[titleWrapper(palette, true), moreTitlePadding]}>
+				<h2
+					css={[
+						titleWrapper(palette),
+						immersiveTitleWrapper,
+						moreTitlePadding,
+					]}
+				>
 					{title}
 				</h2>
 			);
