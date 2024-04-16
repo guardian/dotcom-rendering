@@ -172,7 +172,6 @@
 		"is-mobile": "3.1.1",
 		"jest": "29.7.0",
 		"jest-environment-jsdom": "29.7.0",
-		"jscodeshift": "0.15.2",
 		"jsdom": "22.1.0",
 		"load-json-file": "6.2.0",
 		"lodash.debounce": "4.0.8",
