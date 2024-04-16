@@ -53,4 +53,4 @@ const enhanceDisclaimer =
 			? insertDisclaimerElement(elements)
 			: elements;
 
-export { enhanceDisclaimer };
+export { enhanceDisclaimer, insertDisclaimerElement };
