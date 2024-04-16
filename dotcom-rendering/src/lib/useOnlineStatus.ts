@@ -10,13 +10,9 @@ const subscribe = (callback: (this: Window, ev: Event) => void) => {
 };
 
 //  We want to avoid reading from navigator.onLine directly as this is an external, mutable piece of state
-//  See https://react.dev/reference/react/useSyncExternalStore#subscribing-to-a-browser-api
+//  Seehttps://react.dev/reference/react/useSyncExternalStore#subscribing-to-a-browser-api
 const useOnlineStatus = (): boolean => {
-	return useSyncExternalStore(
-		subscribe,
-		() => navigator.onLine,
-		() => true,
-	);
+	return useSyncExternalStore(subscribe, () => navigator.onLine);
 };
 
 export { useOnlineStatus };
