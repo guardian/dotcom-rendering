@@ -31,6 +31,7 @@ import { setAutomat } from '../../lib/setAutomat';
 import { useIsInView } from '../../lib/useIsInView';
 import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
+import { hasRequiredConsents } from '../SignInGate/displayRule';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -51,6 +52,7 @@ type BuildPayloadProps = BaseProps & {
 	countryCode: string;
 	optedOutOfArticleCount: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
+	userConsent: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -98,6 +100,7 @@ const buildPayload = async ({
 	sectionId,
 	tags,
 	contentType,
+	userConsent,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
@@ -136,6 +139,7 @@ const buildPayload = async ({
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
+			hasConsented: userConsent,
 		},
 	};
 };
@@ -202,6 +206,9 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		}
 	}
 
+	//Send user consent status to the banner API
+	const userConsent = await hasRequiredConsents();
+
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
 		isSignedIn,
@@ -219,7 +226,13 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		signInBannerLastClosedAt,
 		optedOutOfArticleCount,
 		asyncArticleCounts,
+		userConsent,
 	});
+
+	console.log(
+		bannerPayload.targeting.hasConsented,
+		'consent status sent in API',
+	);
 
 	const response: ModuleDataResponse = await getBanner(
 		contributionsServiceUrl,
