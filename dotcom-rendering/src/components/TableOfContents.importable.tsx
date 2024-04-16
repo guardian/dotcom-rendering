@@ -21,6 +21,9 @@ const anchorStyles = css`
 	text-decoration: none;
 	display: block;
 	width: 100%;
+`;
+
+const paddingStyles = css`
 	padding-bottom: ${space[4]}px;
 	padding-top: ${space[1]}px;
 `;
@@ -150,13 +153,16 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
 						{format.display === ArticleDisplay.NumberedList && (
-							<>
+							<div css={paddingStyles}>
 								<span css={indexStyle}>{index + 1}</span>
 								<div css={verticalStyle}></div>
-							</>
+							</div>
 						)}
 
-						<a href={`#${item.id}`} css={anchorStyles}>
+						<a
+							href={`#${item.id}`}
+							css={[anchorStyles, paddingStyles]}
+						>
 							{item.title}
 						</a>
 					</li>
