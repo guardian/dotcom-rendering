@@ -32,7 +32,7 @@ const recordAdaptedSite = (renderingTarget: RenderingTarget) =>
 	recordExperiences(renderingTarget, ['adapted']);
 
 export const adaptSite = (renderingTarget: RenderingTarget): void => {
-	log('openJournalism', '🎛️ Adapting');
+	log('dotcom', '🎛️ Adapting');
 
 	// disable all tasks except critical ones
 	setSchedulerPriorityLastStartTime('feature', 0);
