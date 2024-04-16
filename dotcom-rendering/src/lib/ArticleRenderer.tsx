@@ -66,6 +66,7 @@ export const ArticleRenderer = ({
 	abTests,
 	editionId,
 }: Props) => {
+	const totalElements = elements.length;
 	const renderedElements = elements.map((element, index) => {
 		return (
 			<RenderArticleElement
@@ -84,6 +85,7 @@ export const ArticleRenderer = ({
 				switches={switches}
 				abTests={abTests}
 				editionId={editionId}
+				totalElements={totalElements}
 			/>
 		);
 	});

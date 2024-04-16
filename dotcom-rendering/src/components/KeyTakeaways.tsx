@@ -21,9 +21,11 @@ interface KeyTakeawaysProps {
 	starRating?: number;
 	keyTakeaways: KeyTakeaway[];
 	RenderArticleElement: ArticleElementRenderer;
+	totalElements?: number;
+	index?: number;
 }
 
-const finalLineStyles = css`
+const separatorStyles = css`
 	width: 140px;
 	margin: 8px 0 2px 0;
 	border-top: 1px solid ${palette.neutral[86]};
@@ -43,10 +45,13 @@ export const KeyTakeaways = ({
 	hideCaption,
 	starRating,
 	RenderArticleElement,
+	totalElements = 0,
+	index = 0,
 }: KeyTakeawaysProps) => {
+	const lastElement = totalElements <= index + 1;
 	return (
 		<ol data-ignore="global-ol-styling">
-			{keyTakeaways.map((keyTakeaway, index) => (
+			{keyTakeaways.map((keyTakeaway, i) => (
 				<KeyTakeawayComponent
 					keyTakeaway={keyTakeaway}
 					format={format}
@@ -58,14 +63,14 @@ export const KeyTakeaways = ({
 					switches={switches}
 					abTests={abTests}
 					editionId={editionId}
-					titleIndex={index + 1}
+					titleIndex={i + 1}
 					hideCaption={hideCaption}
 					starRating={starRating}
-					key={index}
+					key={i}
 					RenderArticleElement={RenderArticleElement}
 				/>
 			))}
-			<hr css={finalLineStyles} />
+			{!lastElement && <hr css={separatorStyles} />}
 		</ol>
 	);
 };
