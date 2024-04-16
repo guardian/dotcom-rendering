@@ -7,16 +7,20 @@ const useIsInAdBlockAskVariant = (): boolean => {
 	return isInVariant;
 };
 
-const makeDetectionRequests = async () => {
+const detectByRequests = async () => {
+	/**
+	 * Make a HEAD request to a URL that is typically blocked by ad-blockers
+	 */
 	const requestDoubleclick = async () => {
 		try {
 			const response = await fetch('https://www3.doubleclick.net', {
 				method: 'HEAD',
 				mode: 'no-cors',
 				cache: 'no-store',
-				signal: AbortSignal.timeout(150),
+				signal: AbortSignal.timeout(1000),
 			});
 
+			// A redirect is another clue we may be being ad-blocked
 			if (response.redirected) {
 				return false;
 			}
@@ -27,13 +31,21 @@ const makeDetectionRequests = async () => {
 		}
 	};
 
+	/**
+	 * Make a HEAD request to a URL that should succeed, even when using an
+	 * ad-blocker
+	 *
+	 * We set this request with a much smaller timeout than the one we expect to
+	 * be ad-blocked. This should reduce the chance that request fails and this
+	 * one succeeds due to poor network connectivity
+	 */
 	const requestGuardian = async () => {
 		try {
 			await fetch('https://www.theguardian.com', {
 				method: 'HEAD',
 				mode: 'no-cors',
 				cache: 'no-store',
-				signal: AbortSignal.timeout(150),
+				signal: AbortSignal.timeout(250),
 			});
 			return true;
 		} catch (err) {
