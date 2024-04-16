@@ -342,6 +342,11 @@ export const pickResponseSchema = object({
 	message: string(),
 });
 
+export const recommmendResponseSchema = object({
+	status: literal('ok'),
+	statusCode: literal(200),
+});
+
 export type CommentFormProps = {
 	userNameMissing: boolean;
 	error: string;

@@ -16,6 +16,7 @@ import {
 	parseRepliesResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
+	recommmendResponseSchema,
 } from './discussion';
 import type { CommentContextType } from './discussionFilters';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
@@ -309,7 +310,7 @@ export const recommend =
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		return fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			headers: {
 				...options.headers,
@@ -318,7 +319,10 @@ export const recommend =
 					: {}),
 			},
 			credentials: authOptions.credentials,
-		}).then((resp) => resp.ok);
+		});
+
+		if (jsonResult.kind === 'error') return false;
+		return safeParse(recommmendResponseSchema, jsonResult.value).success;
 	};
 
 export const addUserName =
