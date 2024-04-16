@@ -1,7 +1,5 @@
 // ----- Imports ----- //
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta } from '@storybook/react';
-import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { StarRating } from './StarRating';
 
 // ----- Meta ----- //
@@ -13,11 +11,6 @@ const meta: Meta<typeof StarRating> = {
 
 export default meta;
 
-const articleFormat: ArticleFormat = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: Pillar.News,
-};
 // ----- Stories ----- //
 
 export const AllSizeStars = () => (
@@ -27,18 +20,12 @@ export const AllSizeStars = () => (
 		<StarRating rating={3} size="small" />
 		<br />
 		<br />
-		<h1>Medium</h1>
-		<br />
-		<StarRating rating={3} size="medium" />
-		<br />
-		<br />
 		<h1>Large</h1>
 		<br />
 		<StarRating rating={3} size="large" />
 	</>
 );
 AllSizeStars.storyName = 'All Sizes';
-AllSizeStars.decorators = [splitTheme([articleFormat])];
 
 export const SmallStory = () => (
 	<>
@@ -62,31 +49,6 @@ export const SmallStory = () => (
 	</>
 );
 SmallStory.storyName = 'Small Stars';
-SmallStory.decorators = [splitTheme([articleFormat])];
-
-export const MediumStory = () => (
-	<>
-		<h1>0 Star</h1>
-		<StarRating rating={0} size="medium" />
-		<br />
-		<h1>1 Star</h1>
-		<StarRating rating={1} size="medium" />
-		<br />
-		<h1>2 Star</h1>
-		<StarRating rating={2} size="medium" />
-		<br />
-		<h1>3 Star</h1>
-		<StarRating rating={3} size="medium" />
-		<br />
-		<h1>4 Star</h1>
-		<StarRating rating={4} size="medium" />
-		<br />
-		<h1>5 Star</h1>
-		<StarRating rating={5} size="medium" />
-	</>
-);
-MediumStory.storyName = 'Medium stars';
-MediumStory.decorators = [splitTheme([articleFormat])];
 
 export const LargeStory = () => (
 	<>
@@ -110,7 +72,6 @@ export const LargeStory = () => (
 	</>
 );
 LargeStory.storyName = 'Large stars';
-LargeStory.decorators = [splitTheme([articleFormat])];
 
 export const StarColours = () => (
 	<>

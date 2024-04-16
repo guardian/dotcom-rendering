@@ -15,13 +15,13 @@ export type Action =
 	| { type: 'expandComments' }
 	| {
 			type: 'expandCommentReplies';
-			commentId: number;
+			commentId: string;
 			responses: ReplyType[];
 	  }
 	| { type: 'addComment'; comment: CommentType }
 	| { type: 'addReply'; comment: ReplyType }
 	| { type: 'updateCommentPage'; commentPage: number }
-	| { type: 'updateHashCommentId'; hashCommentId: number | undefined }
+	| { type: 'updateHashCommentId'; hashCommentId: string | undefined }
 	| { type: 'filterChange'; filters: FilterOptions; commentPage?: number }
 	| { type: 'setLoading'; loading: boolean }
 	| { type: 'setTopFormUserMissing'; userNameMissing: boolean }

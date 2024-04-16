@@ -1641,7 +1641,6 @@
 			"prebidTriplelift": true,
 			"weather": true,
 			"commercialOutbrainNewids": true,
-			"disableAmpTest": true,
 			"abLimitInlineMerch": false,
 			"serverShareCounts": false,
 			"abAdblockAsk": true,

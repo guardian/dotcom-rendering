@@ -97,6 +97,16 @@ export const isAmpSupported = ({
 			return false;
 	}
 
+	if (
+		elements.some(
+			(element) =>
+				element._type ===
+				'model.dotcomrendering.pageElements.ListBlockElement',
+		)
+	) {
+		return false;
+	}
+
 	if (format.design === ArticleDesign.LiveBlog) {
 		const isSwitchedOn = switches.ampLiveblogSwitch;
 		if (!isSwitchedOn) return false;
@@ -313,17 +323,6 @@ export const Elements = (
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
-				return (
-					<TimelineAtom
-						key={element.elementId}
-						id={element.id}
-						title={element.title}
-						description={element.description}
-						events={element.events}
-						pillar={pillar}
-					/>
-				);
-			case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 				return (
 					<TimelineAtom
 						key={element.elementId}
