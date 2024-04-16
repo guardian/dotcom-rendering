@@ -123,7 +123,7 @@ export const Body = ({ data, config }: Props) => {
 		data.isImmersive,
 		adTargeting,
 	);
-	const insertSlotsAfter = findAdSlots(bodyElements);
+	const insertSlotsAfter = findAdSlots(bodyElementsWithDisclaimer);
 	const adInfo = {
 		adUnit: config.adUnit,
 		section: data.sectionName,
