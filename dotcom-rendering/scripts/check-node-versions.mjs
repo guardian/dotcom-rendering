@@ -39,7 +39,7 @@ const requiredNodeVersionMatches =
 		},
 		{
 			filepath: '../apps-rendering/riff-raff.yaml',
-			pattern: /^ +Recipe: .+-mobile-node(\d+\.\d+\.\d+).*$/m,
+			pattern: /^ +Recipe: apps-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
 		},
 	]);
 

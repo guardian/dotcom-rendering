@@ -12,7 +12,7 @@ templates:
             amiEncrypted: true
             amiTags:
                 # Keep the Node version in sync with `.nvmrc`
-                Recipe: jammy-mobile-node18.18.2-ARM
+                Recipe: apps-rendering-ARM-jammy-node-20.12.2
                 AmigoStage: PROD
 deployments:
     mobile-apps-rendering-cfn:
