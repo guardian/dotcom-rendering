@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { Decorator, Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { VideoAtom } from './VideoAtom';
 
 const meta = {
@@ -16,17 +16,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const sizeDecorator: Decorator = (Story) => (
-	<div
-		css={css`
-			width: 800px;
-			margin: 25px;
-		`}
-	>
-		<Story />
-	</div>
-);
-
 export const Default = {
 	args: {
 		poster: 'https://media.guim.co.uk/29638c3179baea589b10fbd4dbbc223ea77027ae/0_0_3589_2018/master/3589.jpg',
@@ -37,7 +26,18 @@ export const Default = {
 			},
 		],
 	},
-	decorators: [sizeDecorator],
+	decorators: [
+		(Story) => (
+			<div
+				css={css`
+					width: 800px;
+					margin: 25px;
+				`}
+			>
+				<Story />
+			</div>
+		),
+	],
 } satisfies Story;
 
 export const Large = {
