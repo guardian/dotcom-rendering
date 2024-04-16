@@ -15,7 +15,7 @@ import { enhanceInteractiveContentsElements } from './enhance-interactive-conten
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 import { enhanceLists } from './enhanceLists';
-import { enhanceTimelines } from './enhanceTimelines';
+import { enhanceTimeline } from './enhanceTimeline';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
 type Options = {
@@ -50,7 +50,7 @@ export const enhanceElements =
 	(elements: FEElement[]): FEElement[] => {
 		return [
 			enhanceLists(enhanceElements(format, blockId, options)),
-			enhanceTimelines(enhanceElements(format, blockId, options)),
+			enhanceTimeline(enhanceElements(format, blockId, options)),
 			enhanceDividers,
 			enhanceH2s,
 			enhanceInteractiveContentsElements,
