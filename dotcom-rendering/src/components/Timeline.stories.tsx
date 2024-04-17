@@ -1,11 +1,8 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	type ArticleFormat,
-	Pillar,
-} from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';
 import { getNestedArticleElement } from '../lib/renderElement';
 import type { TextBlockElement, YoutubeBlockElement } from '../types/content';
@@ -20,7 +17,14 @@ const format: ArticleFormat = {
 const meta = {
 	component: Timeline,
 	title: 'Components/Timeline',
-	decorators: [splitTheme([format], { orientation: 'vertical' })],
+	parameters: {
+		chromatic: {
+			modes: {
+				vertical: allModes.sideBySideVertical,
+			},
+		},
+	},
+	decorators: [centreColumnDecorator],
 } satisfies Meta<typeof Timeline>;
 
 export default meta;
