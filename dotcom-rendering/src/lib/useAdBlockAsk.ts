@@ -1,3 +1,4 @@
+import { EventTimer } from '@guardian/commercial';
 import { useEffect, useState } from 'react';
 import { useAB } from './useAB';
 
@@ -79,6 +80,9 @@ export const useAdblockAsk = (slotId: string): boolean => {
 					.getElementById(slotId)
 					?.closest('.ad-slot-container')
 					?.remove();
+
+				// Record ad block detection in commercial metrics
+				EventTimer.get().setProperty('detectedAdBlocker', true);
 			}
 		};
 		void makeRequest();

@@ -48,7 +48,7 @@
 		"@guardian/bridget": "3.0.0",
 		"@guardian/browserslist-config": "6.1.0",
 		"@guardian/cdk": "50.13.0",
-		"@guardian/commercial": "17.9.0",
+		"@guardian/commercial": "17.12.0",
 		"@guardian/core-web-vitals": "6.0.0",
 		"@guardian/eslint-config": "7.0.1",
 		"@guardian/eslint-config-typescript": "9.0.1",
