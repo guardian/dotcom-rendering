@@ -106,6 +106,7 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 			image: data.tags.tags[0]?.properties.bylineImageUrl,
 		},
 		branding: tagPageBranding,
+		canonicalUrl: data.canonicalUrl,
 	};
 };
 

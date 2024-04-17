@@ -236,6 +236,7 @@ export const renderTagPage = ({
 		keywords,
 		renderingTarget: 'Web',
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
+		canonicalUrl: tagPage.canonicalUrl,
 	});
 	return {
 		html: pageHtml,
