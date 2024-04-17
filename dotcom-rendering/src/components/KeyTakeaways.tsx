@@ -21,7 +21,9 @@ interface KeyTakeawaysProps {
 	starRating?: number;
 	keyTakeaways: KeyTakeaway[];
 	RenderArticleElement: ArticleElementRenderer;
-	// is this the last element in the article?
+	/**
+	 * Whether this is the last element in the article. If true, no separator will be rendered.
+	 */
 	isLastElement: boolean;
 }
 
