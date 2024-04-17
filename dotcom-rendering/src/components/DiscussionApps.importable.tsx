@@ -6,7 +6,7 @@ import {
 	parseCommentResponse,
 	parseUserProfile,
 	type Reader,
-	recommmendResponseSchema,
+	recommendResponseSchema,
 } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
@@ -81,7 +81,7 @@ const onRecommend = async (commentId: string): Promise<boolean> => {
 			}
 
 			return safeParse(
-				recommmendResponseSchema,
+				recommendResponseSchema,
 				JSON.parse(discussionApiResponse.response),
 			).success;
 		});

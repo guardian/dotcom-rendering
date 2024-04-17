@@ -345,7 +345,7 @@ export const pickResponseSchema = object({
 	message: string(),
 });
 
-export const recommmendResponseSchema = object({
+export const recommendResponseSchema = object({
 	status: literal('ok'),
 	statusCode: literal(200),
 });
