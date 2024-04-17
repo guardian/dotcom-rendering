@@ -47,7 +47,7 @@ interface AppProps extends BaseProps {
  */
 const globalStyles = (
 	format: ArticleFormat,
-	darkModeInApps: boolean | undefined,
+	darkModeInApps: boolean,
 	renderingTarget: string,
 ) => css`
 	:root {
@@ -103,7 +103,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<Global
 				styles={globalStyles(
 					format,
-					article.config.switches.darkModeInApps,
+					!!article.config.switches.darkModeInApps,
 					renderingTarget,
 				)}
 			/>
