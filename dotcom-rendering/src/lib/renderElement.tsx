@@ -442,7 +442,7 @@ export const renderElement = ({
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
-					isLastElement={index >= totalElements - 1}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
