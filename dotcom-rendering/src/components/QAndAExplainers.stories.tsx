@@ -66,7 +66,7 @@ export const AllThemes = {
 		}),
 		chromatic: {
 			modes: {
-				horizontal: allModes.sideBySideHorizontal,
+				horizontal: allModes.splitHorizontal,
 			},
 		},
 	},
@@ -107,7 +107,7 @@ export const Images = {
 	parameters: {
 		chromatic: {
 			modes: {
-				vertical: allModes.sideBySideVertical,
+				vertical: allModes.splitVertical,
 			},
 		},
 	},
