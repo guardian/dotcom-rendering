@@ -46,6 +46,7 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
+import { Timeline } from '../components/Timeline';
 import { TimelineAtom } from '../components/TimelineAtom.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
@@ -87,6 +88,7 @@ type Props = {
 	abTests: ServerSideTests;
 	editionId: EditionId;
 	forceDropCap?: 'on' | 'off';
+	isTimeline?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -143,6 +145,7 @@ export const renderElement = ({
 	abTests,
 	editionId,
 	forceDropCap,
+	isTimeline = false,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -202,7 +205,7 @@ export const renderElement = ({
 					key={index}
 					format={format}
 					captionText={element.captionText}
-					padCaption={element.padCaption}
+					padCaption={isTimeline}
 					credit={element.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
@@ -355,6 +358,7 @@ export const renderElement = ({
 					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
+					isTimeline={isTimeline}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -647,6 +651,28 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
+		case 'model.dotcomrendering.pageElements.DCRTimelineBlockElement':
+		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement':
+			return (
+				<Timeline
+					timeline={element}
+					ArticleElementComponent={getNestedArticleElement({
+						abTests,
+						ajaxUrl,
+						editionId,
+						isAdFreeUser,
+						isMainMedia,
+						isSensitive,
+						pageId,
+						switches,
+						webTitle,
+						host,
+						isPinnedPost,
+						starRating,
+					})}
+					format={format}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			if (switches.enhanceTweets) {
 				return (
@@ -840,6 +866,7 @@ export const RenderArticleElement = ({
 	abTests,
 	editionId,
 	forceDropCap,
+	isTimeline,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -861,6 +888,7 @@ export const RenderArticleElement = ({
 		abTests,
 		editionId,
 		forceDropCap,
+		isTimeline,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
@@ -879,6 +907,7 @@ export const RenderArticleElement = ({
 			}
 			type={element._type}
 			format={format}
+			isTimeline={isTimeline}
 		>
 			{el}
 		</Figure>
@@ -886,5 +915,22 @@ export const RenderArticleElement = ({
 		el
 	);
 };
+
+type ElementLevelPropNames =
+	| 'element'
+	| 'index'
+	| 'forceDropCap'
+	| 'hideCaption'
+	| 'format'
+	| 'isTimeline';
+type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
+type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
+
+export const getNestedArticleElement =
+	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
+		<RenderArticleElement {...articleProps} {...elementProps} />
+	);
+
+export type NestedArticleElement = ReturnType<typeof getNestedArticleElement>;
 
 export type ArticleElementRenderer = typeof RenderArticleElement;
