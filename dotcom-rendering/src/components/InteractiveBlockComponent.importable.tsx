@@ -107,9 +107,8 @@ const wrapperStyle = ({
 	background-color: ${themePalette('--interactive-block-background')};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
-	iframe {
-		margin-bottom: -12px;
-	}
+	display: flex;
+	flex-direction: column;
 `;
 
 const placeholderLinkStyle = css`

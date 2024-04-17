@@ -26,7 +26,7 @@ export const Dialog = (args: Props) => (
 	<div css={wrapperStyles}>
 		<AbuseReportForm
 			toggleSetShowForm={args.toggleSetShowForm}
-			commentId={123}
+			commentId="123"
 			reportAbuse={() => Promise.resolve(ok(true))}
 		/>
 	</div>

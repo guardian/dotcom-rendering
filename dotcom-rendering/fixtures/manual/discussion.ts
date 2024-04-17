@@ -1,4 +1,4 @@
-import type { GetDiscussionSuccess } from '../../src/lib/discussion';
+import type { GetDiscussionResponse } from '../../src/lib/discussion';
 
 export const discussion = {
 	status: 'ok',
@@ -1232,4 +1232,4 @@ export const discussion = {
 			},
 		],
 	},
-} satisfies GetDiscussionSuccess;
+} satisfies GetDiscussionResponse;

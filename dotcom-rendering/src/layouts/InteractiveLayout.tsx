@@ -56,6 +56,7 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
+		className={interactiveLegacyClasses.contentInteractiveGrid}
 		css={css`
 			/* IE Fallback */
 			display: flex;

@@ -14,7 +14,7 @@ const format = {
 };
 
 const comment: ReplyType = {
-	id: 25488498,
+	id: '25488498',
 	body: '<p>Lorem ipsum dolor sit amet, <a href="https://www.theguardian.com">consectetur adipiscing elit</a>. Cras sodales metus magna, et molestie diam gravida quis. Ut ligula libero, condimentum quis elit at</p> <p>dignissim pulvinar enim. Phasellus mattis felis in mi facilisis, ut vulputate ipsum rhoncus. Proin elit sem, venenatis vitae molestie id, posuere non justo. Morbi ac felis quis diam elementum tempus. Suspendisse efficitur consectetur sapien eleifend rhoncus. Aenean tempor leo pharetra, venenatis elit non, porta arcu. Maecenas tempus tellus sit amet iaculis molestie. Praesent id lobortis dolor. Nullam et ipsum ut leo accumsan vehicula vitae a augue. Integer vitae massa a tellus porta tincidunt ac sed tellus. Etiam ac semper lectus. Quisque et dui libero. Maecenas et lobortis nulla. Ut elementum egestas hendrerit.</p>',
 	date: '26 July 2013 4:35pm',
 	isoDateTime: '2013-07-26T15:13:20Z',
