@@ -73,6 +73,19 @@ export interface UserProfile {
 	};
 }
 
+export const parseUserProfile = (
+	data: unknown,
+): Result<'ParsingError', UserProfile> => {
+	const result = safeParse(
+		object({ status: literal('ok'), userProfile }),
+		data,
+	);
+	if (!result.success) {
+		return error('ParsingError');
+	}
+	return ok(result.output.userProfile);
+};
+
 const baseCommentSchema = object({
 	id: transform(union([number(), string()]), (id) => id.toString()),
 	body: string(),
@@ -330,6 +343,11 @@ export const pickResponseSchema = object({
 	status: literal('ok'),
 	statusCode: literal(200),
 	message: string(),
+});
+
+export const recommendResponseSchema = object({
+	status: literal('ok'),
+	statusCode: literal(200),
 });
 
 export type CommentFormProps = {
