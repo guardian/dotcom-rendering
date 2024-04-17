@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, body, headline, space } from '@guardian/source-foundations';
+import {
+	between,
+	body,
+	headline,
+	remSpace,
+} from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
@@ -63,7 +68,7 @@ const globalOlStyles = () => css`
 			${body.medium({ lineHeight: 'tight' })};
 			content: counter(li);
 			counter-increment: li;
-			margin-right: ${space[1]}px;
+			margin-right: ${remSpace[1]}px;
 		}
 	}
 `;
@@ -73,7 +78,7 @@ const globalH3Styles = (display: ArticleDisplay) => css`
 	`
 		h3 {
 			${headline.xsmall({ fontWeight: 'bold' })};
-			margin-bottom: ${space[2]}px;
+			margin-bottom: ${remSpace[2]}px;
 		}
 	`}
 `;
@@ -150,7 +155,7 @@ export const ArticleBody = ({
 				// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
 				className="js-liveblog-body"
 				css={[
-					'margin-top: 14px', // TODO This matches the TextBlockComponent.tsx:162 margin. Confirm with Alex B if this can be 12 or 16 so we can use Source spacing.
+					`margin-top: ${remSpace[3]}rem`,
 					globalStrongStyles,
 					globalH2Styles(format.display),
 					globalH3Styles(format.display),
@@ -203,7 +208,7 @@ export const ArticleBody = ({
 			<div
 				id="maincontent"
 				css={[
-					'margin-top: 14px', // TODO This matches the TextBlockComponent.tsx:162 margin. Confirm with Alex B if this can be 12 or 16 so we can use Source spacing.
+					`margin-top: ${remSpace[3]}rem`,
 					isInteractive ? null : bodyPadding,
 					globalH2Styles(format.display),
 					globalH3Styles(format.display),

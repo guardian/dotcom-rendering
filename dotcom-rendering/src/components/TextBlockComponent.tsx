@@ -5,7 +5,7 @@ import {
 	body,
 	from,
 	palette,
-	space,
+	remSpace,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
@@ -158,9 +158,8 @@ const sanitiserOptions: IOptions = {
 	},
 };
 
-// TODO Confirm with Alex B if this can be 12 or 16 so we can use Source spacing.
 const styles = (format: ArticleFormat) => css`
-	margin-bottom: 14px;
+	margin-bottom: ${remSpace[3]}rem;
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 
@@ -170,18 +169,18 @@ const styles = (format: ArticleFormat) => css`
 	}
 
 	ul {
-		margin-bottom: ${space[3]}px;
+		margin-bottom: ${remSpace[3]}px;
 	}
 
 	${from.tablet} {
 		ul {
-			margin-bottom: ${space[4]}px;
+			margin-bottom: ${remSpace[4]}px;
 		}
 	}
 
 	li {
-		margin-bottom: ${space[1]}px;
-		padding-left: ${space[5]}px;
+		margin-bottom: ${remSpace[1]}px;
+		padding-left: ${remSpace[5]}px;
 		display: flow-root;
 
 		p {
@@ -193,20 +192,20 @@ const styles = (format: ArticleFormat) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: ${space[3]}px;
-		width: ${space[3]}px;
+		height: ${remSpace[3]}px;
+		width: ${remSpace[3]}px;
 		background-color: ${palette.neutral[86]};
-		margin-left: -${space[5]}px;
-		margin-right: ${space[2]}px;
+		margin-left: -${remSpace[5]}px;
+		margin-right: ${remSpace[2]}px;
 	}
 
 	/* Subscript and Superscript styles */
 	sub {
-		bottom: -0.25em;
+		bottom: -${remSpace[1]}rem;
 	}
 
 	sup {
-		top: -0.5em;
+		top: -${remSpace[2]}rem;
 	}
 
 	sub,
@@ -221,8 +220,8 @@ const styles = (format: ArticleFormat) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: ${space[2]}px;
-		width: ${space[2]}px;
+		height: ${remSpace[2]}px;
+		width: ${remSpace[2]}px;
 		background-color: ${decidePalette(format).background.bullet};
 	}
 
