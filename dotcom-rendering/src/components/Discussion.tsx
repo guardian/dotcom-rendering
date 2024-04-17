@@ -389,7 +389,9 @@ export const Discussion = ({
 		})
 			.then((result) => {
 				if (result.kind === 'error') {
-					console.error(`getDiscussion - error: ${result.error}`);
+					if (result.error !== 'AbortedSignal') {
+						console.error(`getDiscussion - error: ${result.error}`);
+					}
 					return;
 				}
 
