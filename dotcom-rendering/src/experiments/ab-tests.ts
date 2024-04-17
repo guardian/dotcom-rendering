@@ -1,5 +1,6 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
+import { adBlockAsk } from './tests/ad-block-ask';
 import { blockSupporterRevenueMessagingSport } from './tests/block-supporter-revenue-messaging-sport';
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIma } from './tests/integrate-ima';
@@ -19,4 +20,5 @@ export const tests: ABTest[] = [
 	integrateIma,
 	mpuWhenNoEpic,
 	blockSupporterRevenueMessagingSport,
+	adBlockAsk,
 ];

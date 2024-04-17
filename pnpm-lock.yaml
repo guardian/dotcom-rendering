@@ -354,8 +354,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.4.8)(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
-        specifier: 17.9.0
-        version: 17.9.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.3)(typescript@5.3.3)
+        specifier: 17.12.0
+        version: 17.12.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.3)(typescript@5.3.3)
       '@guardian/core-web-vitals':
         specifier: 6.0.0
         version: 6.0.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
@@ -4314,8 +4314,8 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@17.9.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.3)(typescript@5.3.3):
-    resolution: {integrity: sha512-XC9SJ7wXgBHbsBdtOY3X4c17CnOvg7XLSAIGSvQWguKnNSCAW2CwG/o6NP4ybJtySPYP5T99n1+6XjpsnNd+2Q==}
+  /@guardian/commercial@17.12.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.3)(typescript@5.3.3):
+    resolution: {integrity: sha512-BLK5F3XrQqhDcL08em7f6zsijlv0epFj2Y2lGxL+sD16eYnug/GYSmXRJJlp1r2vPG1DqG9PbCF8s/awMsLqoQ==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
       '@guardian/core-web-vitals': ^6.0.0
