@@ -1,9 +1,5 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	Pillar,
-	type ArticleFormat,
-} from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
