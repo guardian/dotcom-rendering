@@ -8,6 +8,12 @@ const useIsInAdBlockAskVariant = (): boolean => {
 	return isInVariant;
 };
 
+/**
+ * Attempt to detect presence of an ad-blocker
+ *
+ * This implementation of this is likely to be tweaked before launching the test
+ * proper
+ */
 const detectByRequests = async () => {
 	/**
 	 * Make a HEAD request to a URL that is typically blocked by ad-blockers
