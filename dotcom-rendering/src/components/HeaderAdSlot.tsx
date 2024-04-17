@@ -68,7 +68,7 @@ export const HeaderAdSlot = () => (
 		<Hide when="below" breakpoint="tablet">
 			<div css={[headerAdWrapper]} className="top-banner-ad-container">
 				<div css={topAboveNavStyles}>
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
 						<AdBlockAsk
 							size="leaderboard"
 							slotId="dfp-ad--top-above-nav"

@@ -459,7 +459,7 @@ export const AdSlot = ({
 					return (
 						<>
 							<Island
-								priority="enhancement"
+								priority="feature"
 								defer={{ until: 'visible' }}
 							>
 								<AdBlockAsk size="mpu" slotId={slotId} />
