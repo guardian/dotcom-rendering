@@ -1,20 +1,18 @@
 import type { Meta } from '@storybook/react';
-import { HeaderTopBar } from './TopBar.importable';
+import { TopBar } from './TopBar.importable';
 
 const meta = {
-	component: HeaderTopBar,
+	component: TopBar,
 	title: 'Components/TopBar',
-	render: (args) => <HeaderTopBar {...args} />,
+	render: (args) => <TopBar {...args} />,
 	args: {
 		editionId: 'UK',
-		dataLinkName: 'test',
 		idUrl: 'idurl',
 		mmaUrl: 'mmaUrl',
 		discussionApiUrl: 'discussionApiUrl',
 		idApiUrl: 'idApiUrl',
-		headerTopBarSearchCapiSwitch: false,
 	},
-} satisfies Meta<typeof HeaderTopBar>;
+} satisfies Meta<typeof TopBar>;
 export default meta;
 
 export const Default = {
