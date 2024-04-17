@@ -47,6 +47,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			data.pageId,
 		),
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
+		canonicalUrl: data.canonicalUrl,
 	};
 };
 

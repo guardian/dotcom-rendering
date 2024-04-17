@@ -27,6 +27,7 @@ export interface FEFrontType {
 	mostViewed: FETrailType[];
 	deeplyRead?: FETrailType[];
 	contributionsServiceUrl: string;
+	canonicalUrl?: string;
 }
 
 export interface DCRFrontType {
@@ -42,6 +43,7 @@ export interface DCRFrontType {
 	deeplyRead?: TrailType[];
 	trendingTopics?: FETagType[];
 	contributionsServiceUrl: string;
+	canonicalUrl?: string;
 }
 
 interface FEPressedPageType {
