@@ -29,7 +29,16 @@ const onComment = async (
 				return error('ApiError');
 			}
 
-			return parseCommentResponse(apiResponse.response);
+			const result = parseCommentResponse(
+				JSON.parse(apiResponse.response),
+			);
+			if (result.kind === 'error') {
+				window.guardian.modules.sentry.reportError(
+					Error(`Failed parseCommentResponse: ${result.error}`),
+					'discussion',
+				);
+			}
+			return result;
 		});
 
 const onReply = async (
@@ -47,7 +56,16 @@ const onReply = async (
 				return error('ApiError');
 			}
 
-			return parseCommentResponse(JSON.parse(apiResponse.response));
+			const result = parseCommentResponse(
+				JSON.parse(apiResponse.response),
+			);
+			if (result.kind === 'error') {
+				window.guardian.modules.sentry.reportError(
+					Error(`Failed parseCommentResponse: ${result.error}`),
+					'discussion',
+				);
+			}
+			return result;
 		});
 
 const onRecommend = async (commentId: string): Promise<boolean> => {

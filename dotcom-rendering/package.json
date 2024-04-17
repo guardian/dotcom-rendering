@@ -45,7 +45,7 @@
 		"@emotion/server": "11.11.0",
 		"@guardian/ab-core": "7.0.1",
 		"@guardian/braze-components": "18.1.0",
-		"@guardian/bridget": "5.0.0",
+		"@guardian/bridget": "0.0.0-2024-04-16-snapshot-1",
 		"@guardian/browserslist-config": "6.1.0",
 		"@guardian/cdk": "50.13.0",
 		"@guardian/commercial": "17.9.0",
