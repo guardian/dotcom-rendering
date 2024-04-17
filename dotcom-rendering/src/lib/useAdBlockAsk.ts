@@ -75,9 +75,14 @@ export const useAdblockAsk = (slotId: string): boolean => {
 
 	useEffect(() => {
 		const makeRequest = async () => {
-			// Once we've detected an ad-blocker, we don't care about subsequent detections
-			// Ensure the user is online before performing the detection request
-			if (!adBlockerDetected && (await detectByRequests())) {
+			if (
+				// Only perform the detection check in the variant of the AB test
+				isInVariant &&
+				// Once we've detected an ad-blocker, we don't care about subsequent detections
+				!adBlockerDetected &&
+				// Attempt to detect ad-blocker
+				(await detectByRequests())
+			) {
 				setAdBlockerDetected(true);
 
 				// Some ad-blockers will remove slots from the DOM, while others don't
@@ -93,7 +98,7 @@ export const useAdblockAsk = (slotId: string): boolean => {
 			}
 		};
 		void makeRequest();
-	}, [adBlockerDetected, slotId]);
+	}, [isInVariant, adBlockerDetected, slotId]);
 
-	return isInVariant && adBlockerDetected;
+	return adBlockerDetected;
 };
