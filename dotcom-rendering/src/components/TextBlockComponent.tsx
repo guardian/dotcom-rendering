@@ -201,11 +201,11 @@ const styles = (format: ArticleFormat) => css`
 
 	/* Subscript and Superscript styles */
 	sub {
-		bottom: -${remSpace[1]};
+		bottom: -0.25em;
 	}
 
 	sup {
-		top: -${remSpace[2]};
+		top: -0.5em;
 	}
 
 	sub,
