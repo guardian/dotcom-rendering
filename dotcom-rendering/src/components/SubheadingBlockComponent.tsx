@@ -1,11 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	type FontWeight,
 	from,
@@ -19,14 +14,20 @@ import { isElement, parseHtml } from '../lib/domUtils';
 import { palette } from '../palette';
 import { logger } from '../server/lib/logging';
 
-type Props = { html: string; format: ArticleFormat };
+type Props = {
+	html: string;
+	format: ArticleFormat;
+	topPadding?: boolean;
+};
 
 const getFontStyles = ({
 	format,
 	fontWeight,
+	topPadding,
 }: {
 	format: ArticleFormat;
 	fontWeight: FontWeight;
+	topPadding: boolean;
 }) => css`
 	${format.display === ArticleDisplay.Immersive
 		? headline.small({ fontWeight, lineHeight: 'tight' })
@@ -54,9 +55,8 @@ const getFontStyles = ({
 
 	color: ${palette('--subheading-text')};
 
-	padding-top: ${space[2]}px;
-	padding-bottom: ${space[0]}px;
-	${from.tablet} {
+	${topPadding && `padding-top: ${space[2]}px`};
+	padding-bottom: ${space[0]}px ${from.tablet} {
 		padding-bottom: ${space[1]}px;
 	}
 
@@ -68,7 +68,7 @@ const getFontStyles = ({
 	}
 `;
 
-const getStyles = (format: ArticleFormat) => {
+const getStyles = (format: ArticleFormat, topPadding: boolean) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
@@ -76,7 +76,11 @@ const getStyles = (format: ArticleFormat) => {
 			/** TODO !
 			 * This is temporary until https://github.com/guardian/dotcom-rendering/pull/10989 has been merged.
 			 * The desired font weight is "regular" */
-			return getFontStyles({ format, fontWeight: 'light' });
+			return getFontStyles({
+				format,
+				fontWeight: 'light',
+				topPadding,
+			});
 
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
@@ -85,24 +89,33 @@ const getStyles = (format: ArticleFormat) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
-			return getFontStyles({ format, fontWeight: 'medium' });
+			return getFontStyles({
+				format,
+				fontWeight: 'medium',
+				topPadding,
+			});
 
-		case ArticleDesign.Feature: {
-			const fontWeight = format.theme === Pillar.News ? 'medium' : 'bold';
-			return getFontStyles({ format, fontWeight });
-		}
+		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			return getFontStyles({ format, fontWeight: 'bold' });
+			return getFontStyles({
+				format,
+				fontWeight: 'bold',
+				topPadding,
+			});
 
 		default:
-			return getFontStyles({ format, fontWeight: 'medium' });
+			return getFontStyles({
+				format,
+				fontWeight: 'medium',
+				topPadding,
+			});
 	}
 };
 
 const buildElementTree =
-	(format: ArticleFormat) =>
+	(format: ArticleFormat, topPadding: boolean) =>
 	(node: Node): ReactNode => {
 		if (isElement(node)) {
 			const { attributes } = node;
@@ -115,7 +128,7 @@ const buildElementTree =
 							style={{ color: 'inherit' }}
 						>
 							{Array.from(node.childNodes).map(
-								buildElementTree(format),
+								buildElementTree(format, topPadding),
 							)}
 						</a>
 					);
@@ -124,12 +137,10 @@ const buildElementTree =
 					return (
 						<h2
 							id={attributes.getNamedItem('id')?.value}
-							css={getStyles(format)}
-							/** We override the h2 styling applied globally in ArticleBody */
-							data-ignore="global-h2-styling"
+							css={getStyles(format, topPadding)}
 						>
 							{Array.from(node.childNodes).map(
-								buildElementTree(format),
+								buildElementTree(format, topPadding),
 							)}
 						</h2>
 					);
@@ -137,7 +148,7 @@ const buildElementTree =
 				default:
 					return jsx(node.tagName.toLowerCase(), {
 						children: Array.from(node.childNodes).map(
-							buildElementTree(format),
+							buildElementTree(format, topPadding),
 						),
 					});
 			}
@@ -153,9 +164,15 @@ const buildElementTree =
 		}
 	};
 
-export const SubheadingBlockComponent = ({ html, format }: Props) => {
+export const SubheadingBlockComponent = ({
+	html,
+	format,
+	topPadding = true,
+}: Props) => {
 	const fragment = parseHtml(html);
 	return jsx(Fragment, {
-		children: Array.from(fragment.childNodes).map(buildElementTree(format)),
+		children: Array.from(fragment.childNodes).map(
+			buildElementTree(format, topPadding),
+		),
 	});
 };

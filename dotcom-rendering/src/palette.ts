@@ -1026,26 +1026,15 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
 			switch (theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 200);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[200];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[7];
+				default:
+					return pillarPalette(theme, 200);
 			}
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
 		default:
 			return sourcePalette.neutral[7];
 	}
@@ -1061,26 +1050,15 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
 			switch (theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 500);
 				case ArticleSpecial.Labs:
 					return sourcePalette.labs[300];
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.neutral[60];
+				default:
+					return pillarPalette(theme, 500);
 			}
-		case ArticleDesign.Obituary:
-		case ArticleDesign.Standard:
-		case ArticleDesign.Profile:
-		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
 		default:
 			return sourcePalette.neutral[60];
 	}
