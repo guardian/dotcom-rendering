@@ -265,9 +265,7 @@ export const InteractiveContentsBlockComponent = ({
 			css={wrapperStyles}
 			style={height !== undefined ? { height } : {}}
 		>
-			<h2 css={headerStyles} data-ignore="global-h2-styling">
-				Contents
-			</h2>
+			<h2 css={headerStyles}>Contents</h2>
 			{/* only show sticky nav header if defined */}
 			{stickyNavCurrentHeader && (
 				<button
