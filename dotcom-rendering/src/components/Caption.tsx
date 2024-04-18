@@ -269,7 +269,7 @@ export const Caption = ({
 					key="caption"
 				/>
 			)}
-			{!!credit && displayCredit && ` ${credit}`}
+			{!!credit && displayCredit && <div>{credit}</div>}
 		</figcaption>
 	);
 
