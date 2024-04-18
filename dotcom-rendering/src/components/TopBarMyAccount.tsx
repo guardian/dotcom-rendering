@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { from, palette, textSans } from '@guardian/source-foundations';
+import { from, palette, space, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
@@ -38,6 +38,17 @@ type SignedInProps = MyAccountProps & {
 	renderingTarget: RenderingTarget;
 };
 
+export const verticalDivider = css`
+	:before {
+		content: '';
+		border-left: 1px solid ${palette.brand[600]};
+		position: relative;
+		right: ${space[1]}px;
+		margin-top: -50px;
+		margin-bottom: ${space[1]}px;
+	}
+`;
+
 const myAccountStyles = css`
 	display: flex;
 	align-items: center;
@@ -45,41 +56,23 @@ const myAccountStyles = css`
 		align-items: stretch;
 	}
 	${from.desktop} {
-		:before {
-			content: '';
-			border-left: 1px solid ${palette.brand[600]};
-			height: 40px;
-			margin-top: -16px;
-		}
+		${verticalDivider}
 	}
 `;
 
-const myAccountLinkStyles = css`
+export const sharedLinkStyles = css`
 	display: flex;
 	align-items: center;
 	height: fit-content;
-	position: relative;
-	${textSans.medium()};
-	font-size: 1rem;
-	line-height: 1;
+	${textSans.medium({ fontWeight: 'bold' })};
 	color: ${palette.neutral[100]};
 	transition: color 80ms ease-out;
+	line-height: 1;
 	text-decoration: none;
-	padding: 0;
-
-	${from.tablet} {
-		padding: 7px 10px 7px 6px;
-	}
-
-	${from.desktop} {
-		font-weight: bold;
-	}
-
 	:hover,
 	:focus {
 		text-decoration: underline;
 	}
-
 	svg {
 		fill: currentColor;
 		float: left;
@@ -87,6 +80,10 @@ const myAccountLinkStyles = css`
 		width: 18px;
 		margin: 0 4px 0 0;
 	}
+`;
+
+const myAccountLinkStyles = css`
+	${sharedLinkStyles}
 	${getZIndex('myAccountDropdown')}
 `;
 

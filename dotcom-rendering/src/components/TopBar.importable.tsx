@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans } from '@guardian/source-foundations';
+import { from, palette, space } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
@@ -7,7 +7,11 @@ import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useAuthStatus } from '../lib/useAuthStatus';
-import { MyAccount } from './TopBarMyAccount';
+import {
+	MyAccount,
+	sharedLinkStyles,
+	verticalDivider,
+} from './TopBarMyAccount';
 
 interface Props {
 	editionId: EditionId;
@@ -18,53 +22,14 @@ interface Props {
 	hasPageSkin?: boolean;
 }
 
-const verticalDivider = css`
-	:before {
-		content: '';
-		border-left: 1px solid ${palette.brand[600]};
-		height: 40px;
-		margin-top: -16px;
-	}
-`;
-
-const printSubscriptionStyles = css`
+const collapsibleLinkStyles = css`
+	/** @todo - check accessibility of this */
 	display: none;
 
 	${from.desktop} {
 		display: flex;
 	}
-
 	${verticalDivider}
-`;
-
-const linkStyles = css`
-	display: flex;
-	align-items: center;
-	${textSans.medium({ fontWeight: 'bold' })};
-	font-size: 1rem;
-	height: fit-content;
-	line-height: 1;
-	color: ${palette.neutral[100]};
-	transition: color 80ms ease-out;
-	text-decoration: none;
-	padding: 7px 0;
-
-	${from.tablet} {
-		padding: 7px 10px 7px 6px;
-	}
-
-	:hover,
-	:focus {
-		text-decoration: underline;
-	}
-
-	svg {
-		fill: currentColor;
-		float: left;
-		height: 18px;
-		width: 18px;
-		margin: 0 4px 0 0;
-	}
 `;
 
 const PrintSubscriptions = ({ editionId }: { editionId: EditionId }) => {
@@ -86,10 +51,10 @@ const PrintSubscriptions = ({ editionId }: { editionId: EditionId }) => {
 	});
 
 	return (
-		<div css={printSubscriptionStyles}>
+		<div css={collapsibleLinkStyles}>
 			<a
 				href={href}
-				css={linkStyles}
+				css={sharedLinkStyles}
 				data-link-name={nestedOphanComponents(
 					'nav3',
 					'topbar',
@@ -102,42 +67,12 @@ const PrintSubscriptions = ({ editionId }: { editionId: EditionId }) => {
 	);
 };
 
-const searchJobsStyles = css`
-	/** @todo - check accessibility of this */
-	display: none;
-
-	${from.desktop} {
-		display: flex;
-	}
-
-	${verticalDivider}
-`;
-
-const searchJobsLinkStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })};
-	font-size: 1rem;
-	line-height: 1;
-	color: ${palette.neutral[100]};
-	transition: color 80ms ease-out;
-	text-decoration: none;
-	padding: 7px 0;
-
-	${from.tablet} {
-		padding: 8px 10px 7px 6px;
-	}
-
-	:hover,
-	:focus {
-		text-decoration: underline;
-	}
-`;
-
 const SearchJobs = () => {
 	return (
-		<div css={searchJobsStyles}>
+		<div css={collapsibleLinkStyles}>
 			<a
 				href="https://jobs.theguardian.com"
-				css={searchJobsLinkStyles}
+				css={sharedLinkStyles}
 				data-link-name={nestedOphanComponents('nav3', 'job-cta')}
 			>
 				Search jobs
@@ -146,14 +81,12 @@ const SearchJobs = () => {
 	);
 };
 
-const topBarBackgroundColour = css`
-	background-color: ${palette.brand[300]};
-`;
-
 const topBarStylesUntilLeftCol = css`
+	background-color: ${palette.brand[300]};
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	column-gap: ${space[4]}px;
 
 	align-items: center;
 
@@ -206,28 +139,26 @@ export const TopBar = ({
 	const authStatus = useAuthStatus();
 
 	return (
-		<div css={topBarBackgroundColour}>
-			<div
-				css={[
-					topBarStylesUntilLeftCol,
-					!hasPageSkin && topBarStylesFromLeftCol,
-					hasPageSkin ? pageSkinContainer : center,
-				]}
-			>
-				{/** @todo - Reader revenue support messaging + CTA button */}
+		<div
+			css={[
+				topBarStylesUntilLeftCol,
+				!hasPageSkin && topBarStylesFromLeftCol,
+				hasPageSkin ? pageSkinContainer : center,
+			]}
+		>
+			{/** @todo - Reader revenue support messaging + CTA button */}
 
-				<PrintSubscriptions editionId={editionId} />
+			<PrintSubscriptions editionId={editionId} />
 
-				<SearchJobs />
+			<SearchJobs />
 
-				<MyAccount
-					mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
-					idUrl={idUrl ?? 'https://profile.theguardian.com'}
-					discussionApiUrl={discussionApiUrl}
-					idApiUrl={idApiUrl}
-					authStatus={authStatus}
-				/>
-			</div>
+			<MyAccount
+				mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
+				idUrl={idUrl ?? 'https://profile.theguardian.com'}
+				discussionApiUrl={discussionApiUrl}
+				idApiUrl={idApiUrl}
+				authStatus={authStatus}
+			/>
 		</div>
 	);
 };
