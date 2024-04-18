@@ -54,7 +54,6 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { Article } from 'src/components/Caption.stories';
 
 const ImmersiveGrid = ({
 	children,
