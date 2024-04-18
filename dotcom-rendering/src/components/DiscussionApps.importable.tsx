@@ -1,6 +1,6 @@
 import { DiscussionServiceResponseType } from '@guardian/bridget';
 import { useEffect, useState } from 'react';
-import { getDiscussionClient } from '../lib/bridgetApi';
+import { getDiscussionClient, getUserClient } from '../lib/bridgetApi';
 import {
 	parseCommentResponse,
 	parseRecommendResponse,
@@ -100,9 +100,17 @@ const addUsername = async (): Promise<Result<string, true>> =>
 // };
 
 export const DiscussionApps = (props: Props) => {
+	const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
 	const [user, setUser] = useState<Reader>();
 
 	useEffect(() => {
+		void getUserClient().isSignedIn().then(setIsSignedIn);
+	}, []);
+
+	useEffect(() => {
+		if (!isSignedIn) {
+			return setUser(undefined);
+		}
 		void getDiscussionClient()
 			.getUserProfile()
 			.then((userProfile) => {
@@ -110,26 +118,26 @@ export const DiscussionApps = (props: Props) => {
 					userProfile.__type ===
 					DiscussionServiceResponseType.DiscussionServiceResponseWithError
 				) {
-					return undefined;
+					return setUser(undefined);
 				}
 
 				const profileResult = parseUserProfile(
 					JSON.parse(userProfile.response),
 				);
 
-				if (profileResult.kind === 'ok') {
-					setUser({
-						kind: 'Reader',
-						onComment,
-						onReply,
-						onRecommend,
-						addUsername,
-						reportAbuse: reportAbuseWeb(undefined),
-						profile: profileResult.value,
-					});
-				}
+				if (profileResult.kind !== 'ok') return setUser(undefined);
+
+				setUser({
+					kind: 'Reader',
+					onComment,
+					onReply,
+					onRecommend,
+					addUsername,
+					reportAbuse: reportAbuseWeb(undefined),
+					profile: profileResult.value,
+				});
 			});
-	}, [setUser]);
+	}, [isSignedIn, setUser]);
 
 	return (
 		<Discussion
