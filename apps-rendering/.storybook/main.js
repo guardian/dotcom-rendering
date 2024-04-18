@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 /** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
-	stories: ['../src/**/*.stories.@(js|mdx|ts|tsx)'],
+	stories: ['../src/**/*.@(mdx|stories.@(js|ts|tsx))'],
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',
@@ -26,6 +26,7 @@ module.exports = {
 				},
 			},
 		},
+		'@storybook/addon-webpack5-compiler-swc',
 	],
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
@@ -60,6 +61,9 @@ module.exports = {
 	framework: {
 		name: '@storybook/react-webpack5',
 		options: {},
+	},
+	docs: {
+		autodocs: true,
 	},
 };
 
