@@ -254,7 +254,8 @@ export const Caption = ({
 				mediaType === 'Video' && videoPadding,
 			]}
 		>
-			{mediaType === 'Video' ? (
+			{format.design === ArticleDesign.Gallery ? null : mediaType ===
+			  'Video' ? (
 				<VideoIcon format={format} />
 			) : (
 				<CameraIcon format={format} />
@@ -269,7 +270,15 @@ export const Caption = ({
 					key="caption"
 				/>
 			)}
-			{!!credit && displayCredit && <div>{credit}</div>}
+			{!!credit && displayCredit && (
+				<div
+					css={css`
+						margin-top: 6px;
+					`}
+				>
+					{credit}
+				</div>
+			)}
 		</figcaption>
 	);
 
