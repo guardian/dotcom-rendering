@@ -13,10 +13,10 @@ import {
 	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentResponse,
+	parseRecommendResponse,
 	parseRepliesResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
-	recommendResponseSchema,
 } from './discussion';
 import type { CommentContextType } from './discussionFilters';
 import type { SignedInWithCookies, SignedInWithOkta } from './identity';
@@ -322,7 +322,7 @@ export const recommend =
 		});
 
 		if (jsonResult.kind === 'error') return false;
-		return safeParse(recommendResponseSchema, jsonResult.value).success;
+		return parseRecommendResponse(jsonResult.value).kind === 'ok';
 	};
 
 export const addUserName =

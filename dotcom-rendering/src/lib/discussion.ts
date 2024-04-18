@@ -345,10 +345,17 @@ export const pickResponseSchema = object({
 	message: string(),
 });
 
-export const recommendResponseSchema = object({
+const recommendResponseSchema = object({
 	status: literal('ok'),
 	statusCode: literal(200),
 });
+
+export const parseRecommendResponse = (
+	data: unknown,
+): Result<'ParsingError', true> => {
+	const { success } = safeParse(recommendResponseSchema, data);
+	return success ? ok(true) : error('ParsingError');
+};
 
 export type CommentFormProps = {
 	userNameMissing: boolean;

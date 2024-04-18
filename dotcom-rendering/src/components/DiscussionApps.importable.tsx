@@ -1,12 +1,11 @@
 import { DiscussionServiceResponseType } from '@guardian/bridget';
 import { useEffect, useState } from 'react';
-import { safeParse } from 'valibot';
 import { getDiscussionClient } from '../lib/bridgetApi';
 import {
 	parseCommentResponse,
+	parseRecommendResponse,
 	parseUserProfile,
 	type Reader,
-	recommendResponseSchema,
 } from '../lib/discussion';
 import type { CommentResponse } from '../lib/discussionApi';
 import { reportAbuse as reportAbuseWeb } from '../lib/discussionApi';
@@ -80,10 +79,11 @@ const onRecommend = async (commentId: string): Promise<boolean> => {
 				return false;
 			}
 
-			return safeParse(
-				recommendResponseSchema,
+			const result = parseRecommendResponse(
 				JSON.parse(discussionApiResponse.response),
-			).success;
+			);
+
+			return result.kind === 'ok';
 		});
 };
 
