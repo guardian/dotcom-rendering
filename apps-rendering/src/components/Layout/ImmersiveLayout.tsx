@@ -113,10 +113,10 @@ const ImmersiveLayout: FC<Props> = ({ item }) => {
 							mainMedia={item.mainMedia}
 							format={format}
 						/>
-						<LeftCentreBorder rows={[5, 5]} />
+						<LeftCentreBorder rows={[6, 8]} />
 					</header>
 					<div css={mainContentStyles(format)}>
-						<LeftCentreBorder rows={[1, 5]} />
+						<LeftCentreBorder rows={[1, 7]} />
 						<StraightLines cssOverrides={linesStyles(format)} />
 						<div css={logoStyles}>
 							<Logo item={item} />
