@@ -223,7 +223,12 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot />
+							<HeaderAdSlot
+								isPaidContent={!!article.config.isPaidContent}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+							/>
 						</Section>
 					</Stuck>
 				)}

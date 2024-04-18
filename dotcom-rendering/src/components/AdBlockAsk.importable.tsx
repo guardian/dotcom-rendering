@@ -170,12 +170,23 @@ export const AdBlockAskMPU = ({
 };
 
 type Props = {
-	slotId: `dfp-ad--${string}`;
 	size: AdBlockAskSize;
+	slotId: `dfp-ad--${string}`;
+	shouldHideReaderRevenue: boolean;
+	isPaidContent: boolean;
 };
 
-export const AdBlockAsk = ({ size, slotId }: Props) => {
-	const showAdBlockAsk = useAdblockAsk(slotId);
+export const AdBlockAsk = ({
+	size,
+	slotId,
+	shouldHideReaderRevenue,
+	isPaidContent,
+}: Props) => {
+	const showAdBlockAsk = useAdblockAsk({
+		slotId,
+		shouldHideReaderRevenue,
+		isPaidContent,
+	});
 
 	if (!showAdBlockAsk) {
 		return null;
