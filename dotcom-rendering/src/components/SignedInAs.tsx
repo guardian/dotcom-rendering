@@ -8,12 +8,12 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { LinkButton } from '@guardian/source-react-components';
 import { getUserClient } from '../lib/bridgetApi';
 import type { UserProfile } from '../lib/discussion';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import { palette as themePalette } from '../palette';
 import { useConfig } from './ConfigContext';
-import { LinkButton } from '@guardian/source-react-components';
 
 type Props = {
 	commentCount?: number;
