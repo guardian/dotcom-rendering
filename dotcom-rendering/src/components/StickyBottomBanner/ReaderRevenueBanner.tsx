@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { CountryCode } from '@guardian/libs';
-import { getCookie } from '@guardian/libs';
+import type { ConsentState, CountryCode } from '@guardian/libs';
+import { getCookie, onConsent } from '@guardian/libs';
 import { getBanner } from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
@@ -31,7 +31,6 @@ import { setAutomat } from '../../lib/setAutomat';
 import { useIsInView } from '../../lib/useIsInView';
 import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
-import { hasRequiredConsents } from '../SignInGate/displayRule';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -86,6 +85,11 @@ const getArticleCountToday = (
 	}
 	return undefined;
 };
+
+export const hasRequiredConsents = (): Promise<boolean> =>
+	onConsent()
+		.then(({ canTarget }: ConsentState) => canTarget)
+		.catch(() => false);
 
 const buildPayload = async ({
 	isSignedIn,

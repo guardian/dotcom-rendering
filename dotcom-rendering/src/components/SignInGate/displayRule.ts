@@ -73,8 +73,6 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
 
-//TODO: remove this console.log
-console.log(hasRequiredConsents(), 'Flag set on consent');
 export const canShowSignInGate = ({
 	isSignedIn,
 	currentTest,
