@@ -273,7 +273,7 @@ export const Caption = ({
 			{!!credit && displayCredit && (
 				<div
 					css={css`
-						margin-top: 6px;
+						padding-top: 6px;
 					`}
 				>
 					{credit}
