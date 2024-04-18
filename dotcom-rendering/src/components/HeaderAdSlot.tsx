@@ -41,11 +41,17 @@ const topAboveNavContainer = css`
 	padding-bottom: ${padding}px;
 `;
 
+/**
+ * Ensure the top-above-nav/ad-block-ask containing div is always of a certain minimum height
+ */
+const headerMinSizeStyles = css`
+	min-height: ${adSizes.leaderboard.height}px;
+	min-width: ${adSizes.leaderboard.width}px;
+`;
+
 const topAboveNavStyles = css`
 	position: relative;
 	margin: 0 auto;
-	min-height: ${adSizes.leaderboard.height}px;
-	min-width: ${adSizes.leaderboard.width}px;
 	text-align: left;
 	display: block;
 `;
@@ -67,7 +73,7 @@ export const HeaderAdSlot = () => (
 		/>
 		<Hide when="below" breakpoint="tablet">
 			<div css={[headerAdWrapper]} className="top-banner-ad-container">
-				<div css={topAboveNavStyles}>
+				<div css={headerMinSizeStyles}>
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<AdBlockAsk
 							size="leaderboard"
@@ -75,7 +81,11 @@ export const HeaderAdSlot = () => (
 						/>
 					</Island>
 					<div
-						css={[adContainerStyles, topAboveNavContainer]}
+						css={[
+							adContainerStyles,
+							topAboveNavContainer,
+							topAboveNavStyles,
+						]}
 						className="ad-slot-container"
 					>
 						<AdSlot position="top-above-nav" />
