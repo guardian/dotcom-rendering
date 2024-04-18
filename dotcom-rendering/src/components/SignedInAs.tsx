@@ -125,49 +125,35 @@ const appsStylesOverride = css`
 	vertical-align: inherit;
 `;
 
-const SignInApps = () => (
-	<>
-		<LinkButton
-			priority="subdued"
-			theme={{ textSubdued: themePalette('--sign-in-link') }}
-			cssOverrides={appsStylesOverride}
-			onClick={signIn}
-		>
-			Sign in
-		</LinkButton>{' '}
-		or{' '}
-		<LinkButton
-			priority="subdued"
-			theme={{ textSubdued: themePalette('--sign-in-link') }}
-			cssOverrides={appsStylesOverride}
-			onClick={signIn}
-		>
-			create your Guardian account
-		</LinkButton>{' '}
-	</>
-);
+const SignInButton = ({
+	children,
+	action,
+}: {
+	children: React.ReactNode;
+	action: 'signin_to_comment' | 'register_to_comment';
+}) => {
+	const { renderingTarget } = useConfig();
 
-const SignInWeb = () => (
-	<>
+	return renderingTarget === 'Web' ? (
 		<a
 			href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
-				'signin_to_comment',
+				action,
 			)}`}
 			css={linkStyles}
 		>
-			Sign in
-		</a>{' '}
-		or{' '}
-		<a
-			href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
-				'register_to_comment',
-			)}`}
-			css={linkStyles}
+			{children}
+		</a>
+	) : (
+		<LinkButton
+			priority="subdued"
+			theme={{ textSubdued: themePalette('--sign-in-link') }}
+			cssOverrides={appsStylesOverride}
+			onClick={signIn}
 		>
-			create your Guardian account
-		</a>{' '}
-	</>
-);
+			{children}
+		</LinkButton>
+	);
+};
 
 export const SignedInAs = ({
 	commentCount,
@@ -176,8 +162,6 @@ export const SignedInAs = ({
 	isClosedForComments,
 }: Props) => {
 	const isBanned = user?.privateFields && !user.privateFields.canPostComment;
-	const { renderingTarget } = useConfig();
-	const isWeb = renderingTarget === 'Web';
 
 	if (!enableDiscussionSwitch) {
 		// Discussion is disabled sitewide and user is signed in
@@ -197,7 +181,13 @@ export const SignedInAs = ({
 				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					Commenting has been disabled at this time but you can still{' '}
-					{isWeb ? <SignInWeb /> : <SignInApps />}
+					<SignInButton action="signin_to_comment">
+						sign in
+					</SignInButton>{' '}
+					or{' '}
+					<SignInButton action="register_to_comment">
+						create your Guardian account
+					</SignInButton>{' '}
 					to join the discussion when it&apos;s back
 				</span>
 			</div>
@@ -242,7 +232,13 @@ export const SignedInAs = ({
 				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					This discussion is now closed for comments but you can still{' '}
-					{isWeb ? <SignInWeb /> : <SignInApps />}
+					<SignInButton action="signin_to_comment">
+						sign in
+					</SignInButton>{' '}
+					or{' '}
+					<SignInButton action="register_to_comment">
+						create your Guardian account
+					</SignInButton>{' '}
 					to join the discussion next time
 				</span>
 			</div>
@@ -255,7 +251,13 @@ export const SignedInAs = ({
 			<div css={containerStyles}>
 				<Heading count={commentCount} />
 				<span css={headlineStyles}>
-					{isWeb ? <SignInWeb /> : <SignInApps />}
+					<SignInButton action="signin_to_comment">
+						Sign in
+					</SignInButton>{' '}
+					or{' '}
+					<SignInButton action="register_to_comment">
+						create your Guardian account
+					</SignInButton>{' '}
 					to join the discussion
 				</span>
 			</div>
