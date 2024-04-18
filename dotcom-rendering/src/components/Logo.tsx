@@ -10,7 +10,7 @@ import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo';
-import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo';
+import { SvgGuardianBestWebsiteLogo } from './SvgGuardianBestWebsiteLogo';
 
 const linkStylesUntilLeftCol = css`
 	float: right;
@@ -68,7 +68,7 @@ export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 					>
 						The Guardian - Back to home
 					</span>
-					<SvgGuardianBestNewspaperLogo />
+					<SvgGuardianBestWebsiteLogo />
 				</a>
 			);
 		case 'AU':
