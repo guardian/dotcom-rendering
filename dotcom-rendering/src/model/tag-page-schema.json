@@ -1185,6 +1185,9 @@
         },
         "forceDay": {
             "type": "boolean"
+        },
+        "canonicalUrl": {
+            "type": "string"
         }
     },
     "required": [
