@@ -1,4 +1,9 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { images } from '../../fixtures/generated/images';
@@ -64,6 +69,39 @@ export const AllThemes = {
 				display: ArticleDisplay.Standard,
 			}),
 		),
+	],
+} satisfies Story;
+
+export const OtherFormatVariations = {
+	args: AllThemes.args,
+	decorators: [
+		splitTheme([
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Review,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Sport,
+			},
+			{
+				design: ArticleDesign.Recipe,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReport,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReportAlt,
+			},
+		]),
 	],
 } satisfies Story;
 
