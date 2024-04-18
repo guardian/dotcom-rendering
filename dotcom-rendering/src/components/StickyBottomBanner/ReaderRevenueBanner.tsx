@@ -233,12 +233,6 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		userConsent,
 	});
 
-	//TODO remove this console log
-	console.log(
-		bannerPayload.targeting.hasConsented,
-		'consent status sent in API',
-	);
-
 	const response: ModuleDataResponse = await getBanner(
 		contributionsServiceUrl,
 		bannerPayload,
