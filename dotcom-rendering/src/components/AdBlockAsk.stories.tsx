@@ -1,4 +1,4 @@
-import { AdBlockAskLeaderboard, AdBlockAskMPU } from './AdBlockAsk';
+import { AdBlockAskLeaderboard, AdBlockAskMPU } from './AdBlockAsk.importable';
 
 export default {
 	title: 'Components/AdBlockAsk',

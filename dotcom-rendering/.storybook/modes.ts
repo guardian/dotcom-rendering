@@ -5,10 +5,10 @@ export const allModes = {
 	dark: {
 		globalColourScheme: 'dark',
 	},
-	sideBySideHorizontal: {
+	splitHorizontal: {
 		globalColourScheme: 'horizontal',
 	},
-	sideBySideVertical: {
+	splitVertical: {
 		globalColourScheme: 'vertical',
 	},
 };
