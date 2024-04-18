@@ -159,7 +159,7 @@ const sanitiserOptions: IOptions = {
 };
 
 const styles = (format: ArticleFormat) => css`
-	margin-bottom: ${remSpace[3]}rem;
+	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 
@@ -169,18 +169,18 @@ const styles = (format: ArticleFormat) => css`
 	}
 
 	ul {
-		margin-bottom: ${remSpace[3]}px;
+		margin-bottom: ${remSpace[3]};
 	}
 
 	${from.tablet} {
 		ul {
-			margin-bottom: ${remSpace[4]}px;
+			margin-bottom: ${remSpace[4]};
 		}
 	}
 
 	li {
-		margin-bottom: ${remSpace[1]}px;
-		padding-left: ${remSpace[5]}px;
+		margin-bottom: ${remSpace[1]};
+		padding-left: ${remSpace[5]};
 		display: flow-root;
 
 		p {
@@ -192,20 +192,20 @@ const styles = (format: ArticleFormat) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: ${remSpace[3]}px;
-		width: ${remSpace[3]}px;
+		height: ${remSpace[3]};
+		width: ${remSpace[3]};
 		background-color: ${palette.neutral[86]};
-		margin-left: -${remSpace[5]}px;
-		margin-right: ${remSpace[2]}px;
+		margin-left: -${remSpace[5]};
+		margin-right: ${remSpace[2]};
 	}
 
 	/* Subscript and Superscript styles */
 	sub {
-		bottom: -${remSpace[1]}rem;
+		bottom: -${remSpace[1]};
 	}
 
 	sup {
-		top: -${remSpace[2]}rem;
+		top: -${remSpace[2]};
 	}
 
 	sub,
@@ -220,8 +220,8 @@ const styles = (format: ArticleFormat) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: ${remSpace[2]}px;
-		width: ${remSpace[2]}px;
+		height: ${remSpace[2]};
+		width: ${remSpace[2]};
 		background-color: ${decidePalette(format).background.bullet};
 	}
 
