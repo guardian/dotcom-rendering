@@ -26,6 +26,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
+import { Masthead } from '../components/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -157,6 +158,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const isInABTestForUpdatedHeaderDesign =
+		front.config.abTests.updatedHeaderDesignVariant === 'variant';
+
+	console.log(
+		'isInABTestForUpdatedHeaderDesign',
+		isInABTestForUpdatedHeaderDesign,
+	);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -199,25 +208,47 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							hasPageSkin={hasPageSkin}
 							hasPageSkinContentSelfConstrain={true}
 						>
-							<Header
-								editionId={front.editionId}
-								idUrl={front.config.idUrl}
-								mmaUrl={front.config.mmaUrl}
-								discussionApiUrl={front.config.discussionApiUrl}
-								urls={front.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!front.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={front.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!front.config.switches
-										.headerTopBarSearchCapi
-								}
-								hasPageSkin={hasPageSkin}
-							/>
+							{isInABTestForUpdatedHeaderDesign ? (
+								<Masthead
+									editionId={front.editionId}
+									idUrl={front.config.idUrl}
+									mmaUrl={front.config.mmaUrl}
+									discussionApiUrl={
+										front.config.discussionApiUrl
+									}
+									urls={front.nav.readerRevenueLinks.header}
+									remoteHeader={
+										!!front.config.switches.remoteHeader
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									idApiUrl={front.config.idApiUrl}
+									hasPageSkin={hasPageSkin}
+								/>
+							) : (
+								<Header
+									editionId={front.editionId}
+									idUrl={front.config.idUrl}
+									mmaUrl={front.config.mmaUrl}
+									discussionApiUrl={
+										front.config.discussionApiUrl
+									}
+									urls={front.nav.readerRevenueLinks.header}
+									remoteHeader={
+										!!front.config.switches.remoteHeader
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									idApiUrl={front.config.idApiUrl}
+									headerTopBarSearchCapiSwitch={
+										!!front.config.switches
+											.headerTopBarSearchCapi
+									}
+									hasPageSkin={hasPageSkin}
+								/>
+							)}
 						</Section>
 					)}
 
