@@ -116,10 +116,12 @@ const appsStylesOverride = css`
 	margin: 0;
 	text-decoration-color: ${themePalette('--sign-in-link-underline')};
 	white-space: inherit;
+	/* stylelint-disable -- there’s no Source option for this look */
 	font-family: inherit;
 	font-weight: inherit;
 	font-size: inherit;
 	line-height: inherit;
+	/* stylelint-enable */
 	vertical-align: inherit;
 `;
 
