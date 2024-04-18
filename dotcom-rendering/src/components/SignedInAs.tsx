@@ -126,8 +126,8 @@ const SignInWeb = () => (
 			css={linkStyles}
 		>
 			Sign in
-		</a>
-		or
+		</a>{' '}
+		or{' '}
 		<a
 			href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
 				'register_to_comment',
