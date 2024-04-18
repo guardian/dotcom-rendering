@@ -1,11 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	type FontWeight,
 	from,
@@ -21,7 +16,7 @@ import { logger } from '../server/lib/logging';
 
 type Props = { html: string; format: ArticleFormat };
 
-const getFontStyles = ({
+const fontStyles = ({
 	format,
 	fontWeight,
 }: {
@@ -29,12 +24,12 @@ const getFontStyles = ({
 	fontWeight: FontWeight;
 }) => css`
 	${format.display === ArticleDisplay.Immersive
-		? headline.small({ fontWeight, lineHeight: 'tight' })
+		? headline.small({ fontWeight: 'light', lineHeight: 'tight' })
 		: headline.xsmall({ fontWeight, lineHeight: 'tight' })}
 
 	${from.tablet} {
 		${format.display === ArticleDisplay.Immersive
-			? headline.medium({ fontWeight, lineHeight: 'tight' })
+			? headline.medium({ fontWeight: 'light', lineHeight: 'tight' })
 			: headline.small({ fontWeight, lineHeight: 'tight' })}
 	}
 
@@ -42,23 +37,20 @@ const getFontStyles = ({
 	${format.theme === ArticleSpecial.Labs &&
 	css`
 		${format.display === ArticleDisplay.Immersive
-			? textSans.xxlarge({ fontWeight, lineHeight: 'tight' })
+			? textSans.xxlarge({ fontWeight: 'light', lineHeight: 'tight' })
 			: textSans.xlarge({ fontWeight, lineHeight: 'tight' })}
 
 		${from.tablet} {
 			${format.display === ArticleDisplay.Immersive
-				? textSans.xxxlarge({ fontWeight, lineHeight: 'tight' })
+				? textSans.xxxlarge({
+						fontWeight: 'light',
+						lineHeight: 'tight',
+				  })
 				: textSans.xxlarge({ fontWeight, lineHeight: 'tight' })}
 		}
 	`}
 
 	color: ${palette('--subheading-text')};
-
-	padding-top: ${space[2]}px;
-	padding-bottom: ${space[0]}px;
-	${from.tablet} {
-		padding-bottom: ${space[1]}px;
-	}
 
 	/* We don't allow additional font weight inside h2 tags except for immersive articles */
 	strong {
@@ -68,7 +60,15 @@ const getFontStyles = ({
 	}
 `;
 
-const getStyles = (format: ArticleFormat) => {
+const paddingStyles = css`
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[0]}px;
+	${from.tablet} {
+		padding-bottom: ${space[1]}px;
+	}
+`;
+
+export const subheadingStyles = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
@@ -76,7 +76,7 @@ const getStyles = (format: ArticleFormat) => {
 			/** TODO !
 			 * This is temporary until https://github.com/guardian/dotcom-rendering/pull/10989 has been merged.
 			 * The desired font weight is "regular" */
-			return getFontStyles({ format, fontWeight: 'light' });
+			return fontStyles({ format, fontWeight: 'light' });
 
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
@@ -85,19 +85,16 @@ const getStyles = (format: ArticleFormat) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:
-			return getFontStyles({ format, fontWeight: 'medium' });
+			return fontStyles({ format, fontWeight: 'medium' });
 
-		case ArticleDesign.Feature: {
-			const fontWeight = format.theme === Pillar.News ? 'medium' : 'bold';
-			return getFontStyles({ format, fontWeight });
-		}
+		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Recipe:
 		case ArticleDesign.Review:
-			return getFontStyles({ format, fontWeight: 'bold' });
+			return fontStyles({ format, fontWeight: 'bold' });
 
 		default:
-			return getFontStyles({ format, fontWeight: 'medium' });
+			return fontStyles({ format, fontWeight: 'medium' });
 	}
 };
 
@@ -124,9 +121,7 @@ const buildElementTree =
 					return (
 						<h2
 							id={attributes.getNamedItem('id')?.value}
-							css={getStyles(format)}
-							/** We override the h2 styling applied globally in ArticleBody */
-							data-ignore="global-h2-styling"
+							css={[subheadingStyles(format), paddingStyles]}
 						>
 							{Array.from(node.childNodes).map(
 								buildElementTree(format),
