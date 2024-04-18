@@ -60,7 +60,6 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
-	isInBlockSupporterRevenueMessagingTest: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -159,20 +158,14 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	idApiUrl,
 	signInGateWillShow,
 	asyncArticleCounts,
-	isInBlockSupporterRevenueMessagingTest,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
-
-	const shouldHideBannerForTest =
-		isInBlockSupporterRevenueMessagingTest &&
-		(sectionId === 'sport' || sectionId === 'football');
 
 	if (
 		shouldHideReaderRevenue ||
 		isPaidContent ||
 		isPreview ||
-		signInGateWillShow ||
-		shouldHideBannerForTest
+		signInGateWillShow
 	) {
 		// We never serve Reader Revenue banners in this case
 		return { show: false };
@@ -244,7 +237,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 export type BannerProps = {
 	meta: TestTracking;
 	module: ModuleData;
-	// eslint-disable-next-line react/no-unused-prop-types -- ESLint is wrong: it is used in ReaderRevenueBanner
+
 	fetchEmail?: () => Promise<string | null>;
 };
 
