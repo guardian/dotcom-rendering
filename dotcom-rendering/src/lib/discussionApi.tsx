@@ -13,6 +13,7 @@ import {
 	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentResponse,
+	parseRecommendResponse,
 	parseRepliesResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
@@ -309,7 +310,7 @@ export const recommend =
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		return fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			headers: {
 				...options.headers,
@@ -318,7 +319,10 @@ export const recommend =
 					: {}),
 			},
 			credentials: authOptions.credentials,
-		}).then((resp) => resp.ok);
+		});
+
+		if (jsonResult.kind === 'error') return false;
+		return parseRecommendResponse(jsonResult.value).kind === 'ok';
 	};
 
 export const addUserName =

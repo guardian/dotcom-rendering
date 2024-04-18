@@ -345,8 +345,8 @@ importers:
         specifier: 18.1.0
         version: 18.1.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components-development-kitchen@19.0.0)(@guardian/source-react-components@22.0.1)(react@18.2.0)
       '@guardian/bridget':
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: 6.0.0
+        version: 6.0.0
       '@guardian/browserslist-config':
         specifier: 6.1.0
         version: 6.1.0(browserslist@4.21.9)(tslib@2.6.2)
@@ -4271,8 +4271,8 @@ packages:
     resolution: {integrity: sha512-kYlRZC5/9ImY2wQJfnteanjfLclmSU0wcsyt2CWl5YXHmc3gGnxZM+H/Y6KVqwxj0v5cGrvUuFJ7Zvk570dchQ==}
     dev: false
 
-  /@guardian/bridget@3.0.0:
-    resolution: {integrity: sha512-mXmju3+PB3frDmvBt5D/HkFwCXdGarRsNsgPpKH9XGzTIRAwS25kQbmeRURkchEG1LAQQsIuv9KfZJRPQwetHQ==}
+  /@guardian/bridget@6.0.0:
+    resolution: {integrity: sha512-aiRVLDF/UfNYeoF10ptBDs52Fv1T4sd19uKACTZSr1uMgV2BPmzG+/BiVLi8Q9/6gjS+CTP3Covz62liksAFuQ==}
     dev: false
 
   /@guardian/browserslist-config@6.1.0(browserslist@4.21.9)(tslib@2.6.2):
