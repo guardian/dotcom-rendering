@@ -54,6 +54,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { Article } from 'src/components/Caption.stories';
 
 const ImmersiveGrid = ({
 	children,
@@ -803,45 +804,50 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							</ArticleContainer>
 						</GridItem>
 						<GridItem area="right-column">
-							<div
-								css={css`
-									padding-top: 6px;
-									height: 100%;
-									${from.desktop} {
-										/* above 980 */
-										margin-left: 20px;
-										margin-right: -20px;
-									}
-									${from.leftCol} {
-										/* above 1140 */
-										margin-left: 0px;
-										margin-right: 0px;
-									}
-								`}
-							>
-								<RightColumn>
-									<>
-										{mainMedia && renderAds && (
-											<div
-												css={css`
-													margin-top: ${space[4]}px;
-												`}
-											>
-												{
-													<AdSlot
-														position="right"
-														display={format.display}
-														isPaidContent={
-															article.pageType
-																.isPaidContent
-														}
-													/>
-												}
-											</div>
-										)}
-									</>
-								</RightColumn>
-							</div>
+							{ArticleDesign.Gallery != format.design && (
+								//TODO: work out how to keep the right column here for ads
+								<div
+									css={css`
+										padding-top: 6px;
+										height: 100%;
+										${from.desktop} {
+											/* above 980 */
+											margin-left: 20px;
+											margin-right: -20px;
+										}
+										${from.leftCol} {
+											/* above 1140 */
+											margin-left: 0px;
+											margin-right: 0px;
+										}
+									`}
+								>
+									<RightColumn>
+										<>
+											{mainMedia && renderAds && (
+												<div
+													css={css`
+														margin-top: ${space[4]}px;
+													`}
+												>
+													{
+														<AdSlot
+															position="right"
+															display={
+																format.display
+															}
+															isPaidContent={
+																article.pageType
+																	.isPaidContent
+															}
+														/>
+													}
+												</div>
+											)}
+										</>
+									</RightColumn>
+								</div>
+							)}
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>
