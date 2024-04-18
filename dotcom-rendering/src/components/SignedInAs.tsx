@@ -110,10 +110,38 @@ const signIn = () =>
 			// do nothing
 		});
 
+const appsStylesOverride = css`
+	display: inline;
+	padding: 0;
+	margin: 0;
+	text-decoration-color: ${themePalette('--sign-in-link-underline')};
+	white-space: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	vertical-align: inherit;
+`;
+
 const SignInApps = () => (
 	<>
-		<LinkButton onClick={signIn}>Sign in</LinkButton> or{' '}
-		<LinkButton onClick={signIn}>create your Guardian account</LinkButton>{' '}
+		<LinkButton
+			priority="subdued"
+			theme={{ textSubdued: themePalette('--sign-in-link') }}
+			cssOverrides={appsStylesOverride}
+			onClick={signIn}
+		>
+			Sign in
+		</LinkButton>{' '}
+		or{' '}
+		<LinkButton
+			priority="subdued"
+			theme={{ textSubdued: themePalette('--sign-in-link') }}
+			cssOverrides={appsStylesOverride}
+			onClick={signIn}
+		>
+			create your Guardian account
+		</LinkButton>{' '}
 	</>
 );
 
