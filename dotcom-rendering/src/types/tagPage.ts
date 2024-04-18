@@ -24,6 +24,7 @@ export interface FETagPageType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	forceDay: boolean;
+	canonicalUrl?: string;
 }
 
 /**
@@ -77,6 +78,7 @@ export interface DCRTagPageType {
 		image?: string;
 	};
 	branding: CollectionBranding | undefined;
+	canonicalUrl?: string;
 }
 
 export interface DCRFrontPagination {
