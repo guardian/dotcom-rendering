@@ -277,6 +277,7 @@ export const ImageComponent = ({
 	const palette = decidePalette(format);
 
 	const loading = isMainMedia ? 'eager' : 'lazy';
+	const orientation = imageWidth > imageHeight ? 'landscape' : 'portrait';
 
 	if (
 		isMainMedia &&
@@ -421,13 +422,18 @@ export const ImageComponent = ({
 	if (format.design === ArticleDesign.Gallery && !isMainMedia) {
 		return (
 			<div
-				css={css`
-					padding-bottom: 38px;
-					${until.leftCol} {
-						display: flex;
-						flex-direction: column-reverse;
-					}
-				`}
+				css={[
+					css`
+						${until.leftCol} {
+							display: flex;
+							flex-direction: column-reverse;
+						}
+					`,
+					orientation === 'portrait' &&
+						css`
+							max-width: calc(0.66666 * 96vh);
+						`,
+				]}
 			>
 				<div
 					css={css`
