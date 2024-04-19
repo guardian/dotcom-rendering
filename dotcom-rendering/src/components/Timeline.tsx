@@ -128,6 +128,15 @@ const eventStyles = css`
 	margin-bottom: ${space[5]}px;
 	position: relative;
 
+	${from.tablet} {
+		margin-left: -21px;
+		margin-right: -21px;
+	}
+	${from.leftCol} {
+		margin-left: -11px;
+		margin-right: -11px;
+	}
+
 	&:before {
 		${timelineBulletStyles}
 	}
@@ -139,6 +148,15 @@ const labelStyles = css`
 	padding: 3px 10px 4px 10px;
 	display: inline-block;
 	${textSans.small({ fontWeight: 'regular' })}
+
+	${from.tablet} {
+		margin-left: -21px;
+		margin-right: -21px;
+	}
+	${from.leftCol} {
+		margin-left: -11px;
+		margin-right: -11px;
+	}
 `;
 
 const immersiveMainElementEventStyles = css`
@@ -182,8 +200,8 @@ const TimelineEvent = ({
 			{event.body.map((element, index) => (
 				<ArticleElementComponent
 					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-					index={index}
 					key={index}
+					index={index}
 					element={element}
 					forceDropCap="off"
 					format={format}
