@@ -158,13 +158,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const isInABTestForUpdatedHeaderDesign =
+	const inUpdatedHeaderABTest =
 		front.config.abTests.updatedHeaderDesignVariant === 'variant';
-
-	console.log(
-		'isInABTestForUpdatedHeaderDesign',
-		isInABTestForUpdatedHeaderDesign,
-	);
 
 	return (
 		<>
@@ -196,114 +191,120 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					)}
 
-					{!isPaidContent && (
-						<Section
-							fullWidth={true}
-							shouldCenter={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							backgroundColour={brandBackground.primary}
-							element="header"
-							hasPageSkin={hasPageSkin}
-							hasPageSkinContentSelfConstrain={true}
-						>
-							{isInABTestForUpdatedHeaderDesign ? (
-								<Masthead
-									editionId={front.editionId}
-									idUrl={front.config.idUrl}
-									mmaUrl={front.config.mmaUrl}
-									discussionApiUrl={
-										front.config.discussionApiUrl
-									}
-									urls={front.nav.readerRevenueLinks.header}
-									remoteHeader={
-										!!front.config.switches.remoteHeader
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									idApiUrl={front.config.idApiUrl}
-									hasPageSkin={hasPageSkin}
-								/>
-							) : (
-								<Header
-									editionId={front.editionId}
-									idUrl={front.config.idUrl}
-									mmaUrl={front.config.mmaUrl}
-									discussionApiUrl={
-										front.config.discussionApiUrl
-									}
-									urls={front.nav.readerRevenueLinks.header}
-									remoteHeader={
-										!!front.config.switches.remoteHeader
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									idApiUrl={front.config.idApiUrl}
-									headerTopBarSearchCapiSwitch={
-										!!front.config.switches
-											.headerTopBarSearchCapi
-									}
-									hasPageSkin={hasPageSkin}
-								/>
-							)}
-						</Section>
-					)}
-
-					<Section
-						fullWidth={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={brandBackground.primary}
-						element="nav"
-						hasPageSkin={hasPageSkin}
-						hasPageSkinContentSelfConstrain={true}
-					>
-						<Nav
+					{inUpdatedHeaderABTest ? (
+						<Masthead
 							nav={NAV}
+							editionId={front.editionId}
+							idUrl={front.config.idUrl}
+							mmaUrl={front.config.mmaUrl}
+							discussionApiUrl={front.config.discussionApiUrl}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
-							selectedPillar={NAV.selectedPillar}
-							editionId={front.editionId}
+							idApiUrl={front.config.idApiUrl}
+							showSubNav={!isPaidContent}
 							hasPageSkin={hasPageSkin}
+							hasPageSkinContentSelfConstrain={true}
 						/>
-					</Section>
-					{NAV.subNavSections && (
+					) : (
 						<>
-							<Section
-								fullWidth={true}
-								padSides={false}
-								element="aside"
-								hasPageSkin={hasPageSkin}
-							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
+							{!isPaidContent && (
+								<Section
+									fullWidth={true}
+									shouldCenter={false}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									backgroundColour={brandBackground.primary}
+									element="header"
+									hasPageSkin={hasPageSkin}
+									hasPageSkinContentSelfConstrain={true}
 								>
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										position="header"
+									<Header
+										editionId={front.editionId}
+										idUrl={front.config.idUrl}
+										mmaUrl={front.config.mmaUrl}
+										discussionApiUrl={
+											front.config.discussionApiUrl
+										}
+										urls={
+											front.nav.readerRevenueLinks.header
+										}
+										remoteHeader={
+											!!front.config.switches.remoteHeader
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										idApiUrl={front.config.idApiUrl}
+										headerTopBarSearchCapiSwitch={
+											!!front.config.switches
+												.headerTopBarSearchCapi
+										}
+										hasPageSkin={hasPageSkin}
 									/>
-								</Island>
-							</Section>
+								</Section>
+							)}
+
 							<Section
 								fullWidth={true}
-								padSides={false}
+								borderColour={brandLine.primary}
 								showTopBorder={false}
+								padSides={false}
+								backgroundColour={brandBackground.primary}
+								element="nav"
 								hasPageSkin={hasPageSkin}
+								hasPageSkinContentSelfConstrain={true}
 							>
-								<StraightLines
-									cssOverrides={css`
-										display: block;
-									`}
-									count={4}
+								<Nav
+									nav={NAV}
+									subscribeUrl={
+										front.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									selectedPillar={NAV.selectedPillar}
+									editionId={front.editionId}
+									hasPageSkin={hasPageSkin}
 								/>
 							</Section>
+							{NAV.subNavSections && (
+								<>
+									<Section
+										fullWidth={true}
+										padSides={false}
+										element="aside"
+										hasPageSkin={hasPageSkin}
+									>
+										<Island
+											priority="enhancement"
+											defer={{ until: 'idle' }}
+										>
+											<SubNav
+												subNavSections={
+													NAV.subNavSections
+												}
+												currentNavLink={
+													NAV.currentNavLink
+												}
+												position="header"
+											/>
+										</Island>
+									</Section>
+									<Section
+										fullWidth={true}
+										padSides={false}
+										showTopBorder={false}
+										hasPageSkin={hasPageSkin}
+									>
+										<StraightLines
+											cssOverrides={css`
+												display: block;
+											`}
+											count={4}
+										/>
+									</Section>
+								</>
+							)}
 						</>
 					)}
 
@@ -320,6 +321,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
+
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
