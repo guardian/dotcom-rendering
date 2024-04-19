@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { QAndAExplainer as QAndAExplainerModel } from '../types/content';
-import { subheadingStyles } from './SubheadingBlockComponent';
+import { Subheading } from './Subheading';
 
 interface Props {
 	qAndAExplainer: QAndAExplainerModel;
@@ -49,9 +48,9 @@ export const QAndAExplainer = ({
 	return (
 		<>
 			<hr css={headingLineStyles}></hr>
-			<h2 css={[subheadingStyles(format), `padding: ${remSpace[0]} 0;`]}>
+			<Subheading format={format} topPadding={false}>
 				{qAndAExplainer.title}
-			</h2>
+			</Subheading>
 			{qAndAExplainer.body.map((element, index) => (
 				<RenderArticleElement
 					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
