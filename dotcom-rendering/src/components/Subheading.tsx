@@ -12,13 +12,6 @@ import { textSans } from '@guardian/source-foundations/cjs/source-foundations/sr
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
 
-interface Props {
-	id?: string;
-	format: ArticleFormat;
-	topPadding: boolean;
-	children: ReactNode;
-}
-
 const fontStyles = ({
 	format,
 	fontWeight,
@@ -103,6 +96,13 @@ const subheadingStyles = (format: ArticleFormat) => {
 			return fontStyles({ format, fontWeight: 'medium' });
 	}
 };
+
+interface Props {
+	id?: string;
+	format: ArticleFormat;
+	topPadding: boolean;
+	children: ReactNode;
+}
 
 export const Subheading = ({ id, format, topPadding, children }: Props) => {
 	return (
