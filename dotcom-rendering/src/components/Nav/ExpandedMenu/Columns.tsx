@@ -220,7 +220,6 @@ type Props = {
 	editionId: EditionId;
 	isImmersive?: boolean;
 	nav: NavType;
-	headerTopBarSwitch: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -228,7 +227,6 @@ export const Columns = ({
 	isImmersive = false,
 	nav,
 	editionId,
-	headerTopBarSwitch,
 	hasPageSkin,
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
@@ -313,7 +311,6 @@ export const Columns = ({
 			<ReaderRevenueLinks
 				readerRevenueLinks={nav.readerRevenueLinks}
 				editionId={editionId}
-				headerTopBarSwitch={headerTopBarSwitch}
 			/>
 
 			{/* This is where the edition dropdown is inserted					 */}

@@ -169,9 +169,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 							article.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
 					/>
 				</Section>
 			</div>
@@ -255,7 +252,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						article.nav.readerRevenueLinks.header.subscribe
 					}
 					editionId={article.editionId}
-					headerTopBarSwitch={!!article.config.switches.headerTopNav}
 				/>
 			</Section>
 

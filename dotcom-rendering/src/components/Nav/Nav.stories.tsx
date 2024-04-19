@@ -24,7 +24,6 @@ export const StandardStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 			/>
 		</Section>
 	);
@@ -45,7 +44,6 @@ export const StandardStoryTopBarHeader = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={true}
 			/>
 		</Section>
 	);
@@ -66,7 +64,6 @@ export const OpinionStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 			/>
 		</Section>
 	);
@@ -90,7 +87,6 @@ export const ImmersiveStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 			/>
 		</Section>
 	);
@@ -114,7 +110,6 @@ export const ExpandedMenuStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 			/>
 		</Section>
 	);
@@ -152,7 +147,6 @@ export const ExpandedMenuWithPageSkinStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 				hasPageSkin={true}
 			/>
 		</Section>
