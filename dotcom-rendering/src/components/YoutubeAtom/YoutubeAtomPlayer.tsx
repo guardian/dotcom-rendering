@@ -6,7 +6,7 @@ import {
 	buildImaAdTagUrl,
 	disabledAds,
 } from '@guardian/commercial';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import {
 	useCallback,

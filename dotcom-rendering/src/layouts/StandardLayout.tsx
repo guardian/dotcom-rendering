@@ -408,9 +408,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								article.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={article.editionId}
-							headerTopBarSwitch={
-								!!article.config.switches.headerTopNav
-							}
 						/>
 					</Section>
 					{props.NAV.subNavSections && !isLabs && (

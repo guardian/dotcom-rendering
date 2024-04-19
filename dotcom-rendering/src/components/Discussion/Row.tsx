@@ -2,6 +2,7 @@ import { css, type SerializedStyles } from '@emotion/react';
 
 type Props = {
 	children: React.ReactNode;
+	wrap?: boolean;
 	cssOverrides?: SerializedStyles | SerializedStyles[];
 };
 
@@ -10,6 +11,11 @@ const rowStyles = css`
 	flex-direction: row;
 `;
 
-export const Row = ({ children, cssOverrides }: Props) => (
-	<div css={[rowStyles, cssOverrides]}>{children}</div>
+export const Row = ({ children, wrap = false, cssOverrides }: Props) => (
+	<div
+		css={[rowStyles, cssOverrides]}
+		style={{ flexWrap: wrap ? 'wrap' : undefined }}
+	>
+		{children}
+	</div>
 );

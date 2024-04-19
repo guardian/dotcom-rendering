@@ -149,6 +149,7 @@ export const renderFront = ({
 		renderingTarget: 'Web',
 		hasPageSkin: front.config.hasPageSkin,
 		weAreHiring: !!front.config.switches.weAreHiring,
+		canonicalUrl: front.canonicalUrl,
 	});
 
 	return {
@@ -235,6 +236,7 @@ export const renderTagPage = ({
 		keywords,
 		renderingTarget: 'Web',
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
+		canonicalUrl: tagPage.canonicalUrl,
 	});
 	return {
 		html: pageHtml,

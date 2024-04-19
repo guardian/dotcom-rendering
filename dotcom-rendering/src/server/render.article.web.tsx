@@ -146,7 +146,6 @@ export const renderHtml = ({
 			beaconURL: article.beaconURL,
 		}),
 		hasInlineMerchandise: article.config.hasInlineMerchandise,
-		section: article.config.section,
 		// Until we understand exactly what config we need to make available client-side,
 		// add everything we haven't explicitly typed as unknown config
 		unknownConfig: article.config,

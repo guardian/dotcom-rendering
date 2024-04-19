@@ -5,7 +5,8 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';
 import { getAllDesigns, getAllThemes } from '../lib/format';
 import { RenderArticleElement } from '../lib/renderElement';
@@ -40,8 +41,9 @@ export const ThemeVariations = {
 				body: [testTextElement],
 			},
 		],
+		isLastElement: true,
 		/**
-		 * This will be replaced by the `splitTheme` decorator, but it's
+		 * This will be replaced by the `formats` parameter, but it's
 		 * required by the type.
 		 */
 		format: {
@@ -62,32 +64,41 @@ export const ThemeVariations = {
 		switches: {},
 		RenderArticleElement,
 	},
-	decorators: [
-		splitTheme(
-			getAllThemes({
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-		),
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		}),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
 export const DesignVariations = {
 	args: ThemeVariations.args,
-	decorators: [
-		splitTheme(
-			getAllDesigns({
-				theme: Pillar.News,
-				display: ArticleDisplay.Standard,
-			}),
-		),
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllDesigns({
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+		}),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
 export const OtherVariations = {
 	args: ThemeVariations.args,
-	decorators: [
-		splitTheme([
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: [
 			{
 				design: ArticleDesign.Obituary,
 				display: ArticleDisplay.Standard,
@@ -113,13 +124,23 @@ export const OtherVariations = {
 				display: ArticleDisplay.Immersive,
 				theme: ArticleSpecial.SpecialReportAlt,
 			},
-		]),
-	],
+		],
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
 export const Images = {
 	args: {
 		...ThemeVariations.args,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
 		keyTakeaways: [
 			{
 				title: 'The first key takeaway',
@@ -143,16 +164,25 @@ export const Images = {
 			},
 		],
 	},
-	decorators: [
-		splitTheme(
-			[
-				{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-				},
-			],
-			{ orientation: 'vertical' },
-		),
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		chromatic: {
+			modes: {
+				vertical: allModes.splitVertical,
+			},
+		},
+	},
+} satisfies Story;
+
+export const WithSeparatorLine = {
+	args: {
+		...ThemeVariations.args,
+		isLastElement: false,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
+	},
+	decorators: [centreColumnDecorator],
 } satisfies Story;

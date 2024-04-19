@@ -27,10 +27,10 @@ type Props = {
 	setCommentBeingRepliedTo: (
 		commentBeingRepliedTo?: CommentType | ReplyType,
 	) => void;
-	commentToScrollTo?: number;
+	commentToScrollTo?: string;
 	mutes: string[];
 	toggleMuteStatus: (userId: string) => void;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	onPreview?: typeof preview;
 	error: string;
 	setError: (error: string) => void;
@@ -39,7 +39,7 @@ type Props = {
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
+	expandCommentReplies: (commentId: string, responses: ReplyType[]) => void;
 	isExpanded: boolean;
 };
 
@@ -116,7 +116,7 @@ export const CommentContainer = ({
 			: `Show ${remainingResponses} more replies`;
 	};
 
-	const expand = (commentId: number) => {
+	const expand = (commentId: string) => {
 		setLoading(true);
 		getAllReplies(commentId)
 			.then((result) => {
@@ -131,7 +131,7 @@ export const CommentContainer = ({
 			});
 	};
 
-	const onAddReply = (commentId: number, response: ReplyType) =>
+	const onAddReply = (commentId: string, response: ReplyType) =>
 		expandCommentReplies(commentId, [...responses, response]);
 
 	return (

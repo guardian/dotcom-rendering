@@ -982,6 +982,40 @@ const headlineBorder: PaletteFunction = ({ design }) => {
 	}
 };
 
+const timelineBulletLight: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 200);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const timelineBulletDark: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+			return pillarPalette(format.theme, 500);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
+	}
+};
+
 const headingLineLight: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case Pillar.News:
@@ -5161,6 +5195,12 @@ const discussionCommentUnderlineLight: PaletteFunction = () =>
 const discussionCommentUnderlineDark: PaletteFunction = () =>
 	transparentColour(sourcePalette.neutral[86], 0.5);
 
+const timelineEventBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const timelineEventBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[20];
+
 // ----- Palette ----- //
 
 /**
@@ -6054,6 +6094,10 @@ const paletteColours = {
 		light: expandableAtomButtonFillLight,
 		dark: expandableAtomButtonFillDark,
 	},
+	'--timeline-bullet': {
+		light: timelineBulletLight,
+		dark: timelineBulletDark,
+	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,
 		dark: timelineAtomBulletDark,
@@ -6149,6 +6193,10 @@ const paletteColours = {
 	'--affiliate-disclaimer-background-hover': {
 		light: affiliateDisclaimerBackgroundHoverLight,
 		dark: affiliateDisclaimerBackgroundHoverDark,
+	},
+	'--timeline-event-border': {
+		light: timelineEventBorderLight,
+		dark: timelineEventBorderDark,
 	},
 } satisfies PaletteColours;
 

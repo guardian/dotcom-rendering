@@ -1,19 +1,29 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { parse } from 'valibot';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
-import { discussion as discussionMock } from '../../../fixtures/manual/discussion';
-import { discussionWithTwoComments } from '../../../fixtures/manual/discussionWithTwoComments';
+import { discussion } from '../../../fixtures/manual/discussion';
+import { discussionWithTwoComments as discussionWithTwoCommentsMock } from '../../../fixtures/manual/discussionWithTwoComments';
 import { legacyDiscussionWithoutThreading } from '../../../fixtures/manual/legacyDiscussionWithoutThreading';
 import type {
 	CommentFormProps,
 	FilterOptions,
 	Reader,
 } from '../../lib/discussion';
+import { discussionApiResponseSchema } from '../../lib/discussion';
 import { ok } from '../../lib/result';
 import { Comments } from './Comments';
 
 export default { component: Comments, title: 'Discussion/App' };
+
+const discussionMock = parse(discussionApiResponseSchema, discussion);
+if (discussionMock.status !== 'ok') throw new Error('Invalid mock');
+const discussionWithTwoComments = parse(
+	discussionApiResponseSchema,
+	discussionWithTwoCommentsMock,
+);
+if (discussionWithTwoComments.status !== 'ok') throw new Error('Invalid mock');
 
 const commentResponseError = {
 	kind: 'error',

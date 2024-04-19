@@ -3,13 +3,12 @@ import { hasRequiredConsents } from './hasRequiredConsents';
 const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
 let mockOnConsentChangeResult: any;
-jest.mock('@guardian/consent-management-platform', () => ({
+jest.mock('@guardian/libs', () => ({
+	// eslint-disable-next-line -- ESLint doesn't understand jest.requireActual
+	...jest.requireActual<typeof import('@guardian/libs')>('@guardian/libs'),
 	onConsentChange: (callback: any) => {
 		callback(mockOnConsentChangeResult);
 	},
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	getConsentFor: jest.requireActual('@guardian/consent-management-platform')
-		.getConsentFor,
 }));
 
 afterEach(() => {

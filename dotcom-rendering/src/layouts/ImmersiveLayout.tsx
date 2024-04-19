@@ -337,9 +337,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										.contribute
 								}
 								editionId={article.editionId}
-								headerTopBarSwitch={
-									!!article.config.switches.headerTopNav
-								}
 							/>
 						</Section>
 					</div>

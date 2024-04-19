@@ -57,7 +57,7 @@ export const KeyTakeaway = ({
 }: KeyTakeawayProps) => {
 	return (
 		<>
-			<li css={keyTakeawayStyles}>
+			<li css={keyTakeawayStyles} data-spacefinder-role="nested">
 				<hr css={headingLineStyles} />
 				<Subheading format={format} topPadding={false}>
 					<span css={headingIndexStyles}>{`${titleIndex}. `}</span>

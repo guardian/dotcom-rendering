@@ -8,8 +8,8 @@ import { palette as schemedPalette } from '../../palette';
 type Props = {
 	isoDateTime: string;
 	webUrl: string;
-	commentId: number;
-	onPermalinkClick: (commentId: number) => void;
+	commentId: string;
+	onPermalinkClick: (commentId: string) => void;
 };
 
 const linkStyles = css`

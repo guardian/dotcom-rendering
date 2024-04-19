@@ -13,6 +13,7 @@ import {
 	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentResponse,
+	parseRecommendResponse,
 	parseRepliesResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
@@ -163,7 +164,7 @@ export type CommentResponse = Result<
 	| 'NetworkError'
 	| 'ApiError'
 	| (ReturnType<typeof parseCommentResponse> & { kind: 'error' })['error'],
-	number
+	string
 >;
 
 export const comment =
@@ -198,7 +199,7 @@ export const reply =
 	async (
 		shortUrl: string,
 		body: string,
-		parentCommentId: number,
+		parentCommentId: string,
 	): Promise<CommentResponse> => {
 		const url =
 			joinUrl(
@@ -206,7 +207,7 @@ export const reply =
 				'discussion',
 				shortUrl,
 				'comment',
-				parentCommentId.toString(),
+				parentCommentId,
 				'reply',
 			) + objAsParams(defaultParams);
 		const data = new URLSearchParams();
@@ -264,18 +265,14 @@ export const reportAbuse =
 		email,
 		reason,
 	}: {
-		commentId: number;
+		commentId: string;
 		categoryId: number;
 		reason?: string;
 		email?: string;
 	}): Promise<Result<string, true>> => {
 		const url =
-			joinUrl(
-				options.baseUrl,
-				'comment',
-				commentId.toString(),
-				'reportAbuse',
-			) + objAsParams(defaultParams);
+			joinUrl(options.baseUrl, 'comment', commentId, 'reportAbuse') +
+			objAsParams(defaultParams);
 
 		const data = new URLSearchParams();
 		data.append('categoryId', categoryId.toString());
@@ -306,18 +303,14 @@ export const reportAbuse =
 
 export const recommend =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	async (commentId: number): Promise<boolean> => {
+	async (commentId: string): Promise<boolean> => {
 		const url =
-			joinUrl(
-				options.baseUrl,
-				'comment',
-				commentId.toString(),
-				'recommend',
-			) + objAsParams(defaultParams);
+			joinUrl(options.baseUrl, 'comment', commentId, 'recommend') +
+			objAsParams(defaultParams);
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		return fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			headers: {
 				...options.headers,
@@ -326,7 +319,10 @@ export const recommend =
 					: {}),
 			},
 			credentials: authOptions.credentials,
-		}).then((resp) => resp.ok);
+		});
+
+		if (jsonResult.kind === 'error') return false;
+		return parseRecommendResponse(jsonResult.value).kind === 'ok';
 	};
 
 export const addUserName =
@@ -370,14 +366,10 @@ export const addUserName =
 
 export const pickComment =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	async (commentId: number): Promise<Result<GetDiscussionError, true>> => {
+	async (commentId: string): Promise<Result<GetDiscussionError, true>> => {
 		const url =
-			joinUrl(
-				options.baseUrl,
-				'comment',
-				commentId.toString(),
-				'highlight',
-			) + objAsParams(defaultParams);
+			joinUrl(options.baseUrl, 'comment', commentId, 'highlight') +
+			objAsParams(defaultParams);
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 		const jsonResult = await fetchJSON(url, {
@@ -401,14 +393,10 @@ export const pickComment =
 
 export const unPickComment =
 	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
-	async (commentId: number): Promise<Result<GetDiscussionError, false>> => {
+	async (commentId: string): Promise<Result<GetDiscussionError, false>> => {
 		const url =
-			joinUrl(
-				options.baseUrl,
-				'comment',
-				commentId.toString(),
-				'unhighlight',
-			) + objAsParams(defaultParams);
+			joinUrl(options.baseUrl, 'comment', commentId, 'unhighlight') +
+			objAsParams(defaultParams);
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 		const jsonResult = await fetchJSON(url, {
@@ -431,10 +419,10 @@ export const unPickComment =
 	};
 
 export const getAllReplies = async (
-	commentId: number,
+	commentId: string,
 ): Promise<Result<GetDiscussionError, ReplyType[]>> => {
 	const url =
-		joinUrl(options.baseUrl, 'comment', commentId.toString()) +
+		joinUrl(options.baseUrl, 'comment', commentId) +
 		objAsParams({
 			...defaultParams,
 			...{
@@ -471,10 +459,10 @@ const buildParams = (filters: FilterOptions): URLSearchParams => {
 
 export const getCommentContext = async (
 	ajaxUrl: string,
-	commentId: number,
+	commentId: string,
 	filters: FilterOptions,
 ): Promise<Result<GetDiscussionError, CommentContextType>> => {
-	const url = joinUrl(ajaxUrl, 'comment', commentId.toString(), 'context');
+	const url = joinUrl(ajaxUrl, 'comment', commentId, 'context');
 	const params = buildParams(filters);
 
 	const jsonResult = await fetchJSON(url + '?' + params.toString());

@@ -5,7 +5,8 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';
 import { getAllThemes } from '../lib/format';
 import { RenderArticleElement } from '../lib/renderElement';
@@ -41,7 +42,7 @@ export const AllThemes = {
 			},
 		],
 		/**
-		 * This will be replaced by the `splitTheme` decorator, but it's
+		 * This will be replaced by the `formats` parameter, but it's
 		 * required by the type.
 		 */
 		format: {
@@ -62,14 +63,18 @@ export const AllThemes = {
 		switches: {},
 		RenderArticleElement,
 	},
-	decorators: [
-		splitTheme(
-			getAllThemes({
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-		),
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		}),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
 export const OtherFormatVariations = {
@@ -108,6 +113,11 @@ export const OtherFormatVariations = {
 export const Images = {
 	args: {
 		...AllThemes.args,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
 		qAndAExplainers: [
 			{
 				title: 'The first question',
@@ -131,16 +141,12 @@ export const Images = {
 			},
 		],
 	},
-	decorators: [
-		splitTheme(
-			[
-				{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-				},
-			],
-			{ orientation: 'vertical' },
-		),
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		chromatic: {
+			modes: {
+				vertical: allModes.splitVertical,
+			},
+		},
+	},
 } satisfies Story;
