@@ -79,8 +79,9 @@ export const AllThemes = {
 
 export const OtherFormatVariations = {
 	args: AllThemes.args,
-	decorators: [
-		splitTheme([
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: [
 			{
 				design: ArticleDesign.Obituary,
 				display: ArticleDisplay.Standard,
@@ -106,8 +107,13 @@ export const OtherFormatVariations = {
 				display: ArticleDisplay.Immersive,
 				theme: ArticleSpecial.SpecialReportAlt,
 			},
-		]),
-	],
+		],
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
 export const Images = {
