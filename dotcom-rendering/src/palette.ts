@@ -1037,7 +1037,7 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[200];
 				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.neutral[7];
+					return sourcePalette.specialReportAlt[100];
 			}
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1072,7 +1072,7 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 				case ArticleSpecial.SpecialReport:
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.neutral[60];
+					return sourcePalette.specialReportAlt[800];
 			}
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Standard:
@@ -1082,7 +1082,7 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		default:
-			return sourcePalette.neutral[60];
+			return sourcePalette.neutral[86];
 	}
 };
 const avatarLight: PaletteFunction = ({ design, theme }) => {
