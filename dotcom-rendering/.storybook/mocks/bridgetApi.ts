@@ -19,6 +19,7 @@ type BridgetApi<T extends keyof BridgeModule> = () => Partial<
 export const getUserClient: BridgetApi<'getUserClient'> = () => ({
 	isPremium: async () => false,
 	doesCcpaApply: async () => false,
+	isSignedIn: async () => false,
 });
 
 export const getEnvironmentClient: BridgetApi<'getEnvironmentClient'> = () => ({
