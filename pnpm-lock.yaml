@@ -393,8 +393,8 @@ importers:
         specifier: 19.0.0
         version: 19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/source-react-components@22.0.1)(react@18.2.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/support-dotcom-components':
-        specifier: 1.1.3
-        version: 1.1.3
+        specifier: 2.1.0
+        version: 2.1.0
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4313,7 +4313,6 @@ packages:
       - '@types/node'
       - typescript
     dev: false
-
   /@guardian/commercial@17.12.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@1.1.3)(typescript@5.3.3):
     resolution: {integrity: sha512-BLK5F3XrQqhDcL08em7f6zsijlv0epFj2Y2lGxL+sD16eYnug/GYSmXRJJlp1r2vPG1DqG9PbCF8s/awMsLqoQ==}
     peerDependencies:
@@ -4334,7 +4333,7 @@ packages:
       '@guardian/ophan-tracker-js': 2.0.4
       '@guardian/prebid.js': 8.34.0(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-foundations': 14.1.4(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/support-dotcom-components': 1.1.3
+      '@guardian/support-dotcom-components': 2.1.0
       '@octokit/core': 4.2.4
       fastdom: 1.0.11
       lodash-es: 4.17.21
@@ -4754,8 +4753,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@1.1.3:
-    resolution: {integrity: sha512-EMS7oxOLijCFw9u63BN3Ou+KqMmDiNvDpHZ+vDrdsUhB7bs+eDDRr01Bzg7BokqKQuW0g+oyYOCLctabx8Ngag==}
+  /@guardian/support-dotcom-components@2.1.0:
+    resolution: {integrity: sha512-j+jK/XzPwOcfgpAQ227oApEOpNcUYmsgI98H5uWcrNA1Pm60MA3XzQrkdmUTkJQDTuvisQZgFPfE8e/vAnTV/g==}
     dev: false
 
   /@guardian/tsconfig@0.2.0:
