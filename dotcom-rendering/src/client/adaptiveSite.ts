@@ -14,12 +14,16 @@ export const shouldAdapt = async (): Promise<boolean> => {
 	if (isServer) return false;
 	if (window.location.hash === '#adapt') return true;
 
-	// only evaluate this code if we want to adapt in response to page performance
-	const { isPerformingPoorly } = await import(
-		/* webpackMode: "eager" */ './poorPerformanceMonitoring'
-	);
+	if (window.guardian.config.switches.adaptiveSite) {
+		// only evaluate this code if we want to adapt in response to page performance
+		const { isPerformingPoorly } = await import(
+			/* webpackMode: "eager" */ './poorPerformanceMonitoring'
+		);
 
-	return isPerformingPoorly();
+		return isPerformingPoorly();
+	}
+
+	return false;
 };
 
 /**  Hide all placeholders of non-critical islands */
