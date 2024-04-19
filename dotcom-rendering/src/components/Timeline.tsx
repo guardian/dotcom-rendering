@@ -24,16 +24,19 @@ const hasShowcaseRole = (element?: FEElement): boolean => {
 // ----- EventHeader ----- //
 
 const timelineBulletStyles = css`
-	border-radius: 1000px;
-	display: block;
-	background-color: ${palette('--timeline-bullet')};
-	width: 12px;
-	height: 12px;
-	content: '';
-	border: 1px solid ${palette('--timeline-event-border')};
-	position: absolute;
-	left: -16px;
-	top: -10px;
+	position: relative;
+	::before {
+		border-radius: 1000px;
+		display: block;
+		background-color: ${palette('--timeline-bullet')};
+		width: 12px;
+		height: 12px;
+		content: '';
+		border: 1px solid ${palette('--timeline-event-border')};
+		position: absolute;
+		left: -16px;
+		top: -10px;
+	}
 `;
 
 const smallDateStyles = css`
@@ -67,10 +70,6 @@ const titleStyles = (format: ArticleFormat): SerializedStyles => css`
 
 const headingStyles = css`
 	margin-top: 4px;
-	position: relative;
-	::before {
-		${timelineBulletStyles}
-	}
 `;
 
 type EventHeaderProps = {
@@ -89,7 +88,13 @@ const EventHeader = ({
 	smallDates,
 }: EventHeaderProps) => {
 	const heading = (
-		<Heading css={headingStyles} level={sectioned ? 3 : 2}>
+		<Heading
+			css={[
+				headingStyles,
+				!hasShowcaseRole(event.main) && timelineBulletStyles,
+			]}
+			level={sectioned ? 3 : 2}
+		>
 			<span css={smallDates ? smallDateStyles : titleStyles(format)}>
 				{event.date}
 			</span>
@@ -209,6 +214,7 @@ const TimelineEvent = ({
 					element={element}
 					forceDropCap="off"
 					format={format}
+					isTimeline={true}
 				/>
 			))}
 		</section>

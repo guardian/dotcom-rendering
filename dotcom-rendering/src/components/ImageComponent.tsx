@@ -343,6 +343,7 @@ export const ImageComponent = ({
 						height={imageHeight}
 						loading={loading}
 						isMainMedia={isMainMedia}
+						isTimeline={isTimeline}
 					/>
 				)}
 

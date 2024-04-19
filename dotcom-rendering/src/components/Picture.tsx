@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source-foundations';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { generateImageURL } from '../lib/image';
+import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 import type { Loading } from './CardPicture';
 
@@ -11,6 +12,34 @@ import type { Loading } from './CardPicture';
  **/
 
 export type Orientation = 'portrait' | 'landscape';
+
+const timelineBulletStyles = css`
+	position: relative;
+	::before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 12px;
+		height: 12px;
+		border: 1px solid ${palette('--timeline-event-border')};
+		border-radius: 1000px;
+		background-color: ${palette('--timeline-bullet')};
+		top: -6px;
+		left: -7px;
+
+		${from.mobileLandscape} {
+			left: 4px;
+		}
+
+		${from.leftCol} {
+			left: 144px;
+		}
+
+		${from.wide} {
+			left: 224px;
+		}
+	}
+`;
 
 type Props = {
 	role: RoleType;
@@ -22,6 +51,7 @@ type Props = {
 	loading: Loading;
 	isMainMedia?: boolean;
 	isLightbox?: boolean;
+	isTimeline?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
 };
@@ -319,6 +349,7 @@ export const Picture = ({
 	isMainMedia = false,
 	loading,
 	isLightbox = false,
+	isTimeline = false,
 	orientation = 'landscape',
 	onLoad,
 }: Props) => {
@@ -370,45 +401,50 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={isLightbox ? flex : block}>
-			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
-			{format.display === ArticleDisplay.Immersive && isMainMedia && (
-				<>
-					{/* High resolution (HDPI) portrait sources*/}
-					<source
-						media="(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)"
-						sizes={sizes}
-						srcSet={sources
-							.map(
-								(source) =>
-									`${source.hiResUrl} ${source.width}w`,
-							)
-							.join(',')}
-					/>
-					{/* Low resolution (MDPI) portrait sources*/}
-					<source
-						media="(orientation: portrait)"
-						sizes={sizes}
-						srcSet={sources
-							.map(
-								(source) =>
-									`${source.lowResUrl} ${source.width}w`,
-							)
-							.join(',')}
-					/>
-				</>
-			)}
-			<Sources sources={sources} />
-			<img
-				ref={ref}
-				alt={alt}
-				src={fallbackSource.lowResUrl}
-				width={fallbackSource.width}
-				height={fallbackSource.width * ratio}
-				loading={Picture.disableLazyLoading ? undefined : loading}
-				css={isLightbox ? flex : block}
-			/>
-		</picture>
+		<>
+			<picture css={[isLightbox ? flex : block]}>
+				{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
+				{format.display === ArticleDisplay.Immersive && isMainMedia && (
+					<>
+						{/* High resolution (HDPI) portrait sources*/}
+						<source
+							media="(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)"
+							sizes={sizes}
+							srcSet={sources
+								.map(
+									(source) =>
+										`${source.hiResUrl} ${source.width}w`,
+								)
+								.join(',')}
+						/>
+						{/* Low resolution (MDPI) portrait sources*/}
+						<source
+							media="(orientation: portrait)"
+							sizes={sizes}
+							srcSet={sources
+								.map(
+									(source) =>
+										`${source.lowResUrl} ${source.width}w`,
+								)
+								.join(',')}
+						/>
+					</>
+				)}
+				<Sources sources={sources} />
+				<img
+					ref={ref}
+					alt={alt}
+					src={fallbackSource.lowResUrl}
+					width={fallbackSource.width}
+					height={fallbackSource.width * ratio}
+					loading={Picture.disableLazyLoading ? undefined : loading}
+					css={isLightbox ? flex : block}
+				/>
+			</picture>
+			{isTimeline && isMainMedia && role === 'showcase' ? (
+				<span css={timelineBulletStyles} />
+			) : null}
+		</>
 	);
 };
 
