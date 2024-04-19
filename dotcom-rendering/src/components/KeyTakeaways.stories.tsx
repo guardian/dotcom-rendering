@@ -36,6 +36,7 @@ export const AllThemes = {
 				body: [testTextElement],
 			},
 		],
+		isLastElement: true,
 		/**
 		 * This will be replaced by the `formats` parameter, but it's
 		 * required by the type.
@@ -66,7 +67,7 @@ export const AllThemes = {
 		}),
 		chromatic: {
 			modes: {
-				horizontal: allModes.sideBySideHorizontal,
+				horizontal: allModes.splitHorizontal,
 			},
 		},
 	},
@@ -113,7 +114,7 @@ export const SomeDesignsAndDisplays = {
 		],
 		chromatic: {
 			modes: {
-				horizontal: allModes.sideBySideHorizontal,
+				horizontal: allModes.splitHorizontal,
 			},
 		},
 	},
@@ -154,8 +155,21 @@ export const Images = {
 	parameters: {
 		chromatic: {
 			modes: {
-				vertical: allModes.sideBySideVertical,
+				vertical: allModes.splitVertical,
 			},
 		},
 	},
+} satisfies Story;
+
+export const WithSeparatorLine = {
+	args: {
+		...AllThemes.args,
+		isLastElement: false,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
+	},
+	decorators: [centreColumnDecorator],
 } satisfies Story;

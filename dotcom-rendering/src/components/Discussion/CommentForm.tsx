@@ -508,7 +508,7 @@ export const CommentForm = ({
 					error={error}
 				/>
 				<div css={bottomContainer}>
-					<Row>
+					<Row wrap={true}>
 						<>
 							<PillarButton
 								type="submit"
@@ -543,7 +543,7 @@ export const CommentForm = ({
 						</>
 					</Row>
 					{isActive && (
-						<Row>
+						<Row wrap={true}>
 							<button
 								onClick={(e) => {
 									e.preventDefault();

@@ -89,6 +89,7 @@ type Props = {
 	editionId: EditionId;
 	forceDropCap?: 'on' | 'off';
 	isTimeline?: boolean;
+	totalElements?: number;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -146,6 +147,7 @@ export const renderElement = ({
 	editionId,
 	forceDropCap,
 	isTimeline = false,
+	totalElements = 0,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -440,6 +442,7 @@ export const renderElement = ({
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
@@ -867,6 +870,7 @@ export const RenderArticleElement = ({
 	editionId,
 	forceDropCap,
 	isTimeline,
+	totalElements,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -889,6 +893,7 @@ export const RenderArticleElement = ({
 		editionId,
 		forceDropCap,
 		isTimeline,
+		totalElements,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

@@ -380,6 +380,9 @@
         },
         "contributionsServiceUrl": {
             "type": "string"
+        },
+        "canonicalUrl": {
+            "type": "string"
         }
     },
     "required": [
