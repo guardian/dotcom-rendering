@@ -234,9 +234,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							}
 							selectedPillar={NAV.selectedPillar}
 							editionId={front.editionId}
-							headerTopBarSwitch={
-								!!front.config.switches.headerTopNav
-							}
 							hasPageSkin={hasPageSkin}
 						/>
 					</Section>
