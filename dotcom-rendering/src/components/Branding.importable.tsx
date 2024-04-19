@@ -8,12 +8,24 @@ import type { Branding as BrandingType } from '../types/branding';
 import { useConfig } from './ConfigContext';
 
 const brandingStyle = css`
-	padding-bottom: 10px;
+	padding: 6px 0 6px 6px;
+	border: 1px solid ${palette('--branding-border')};
+	max-width: 150px;
+
+	${from.tablet} {
+		width: 115px;
+	}
+
+	${from.desktop} {
+		padding: 9px 0 9px 9px;
+		width: 220px;
+	}
 `;
 
 const labelStyle = css`
 	${textSans12}
 	color: ${palette('--branding-label-text')};
+	padding-bottom: 1px;
 
 	a {
 		color: inherit;
@@ -29,7 +41,6 @@ const liveBlogLabelStyle = css`
 `;
 
 const brandingLogoStyle = css`
-	padding: 10px 0;
 	display: block;
 
 	& img {
@@ -41,6 +52,7 @@ const aboutLinkStyle = css`
 	${textSans12}
 	display: block;
 	text-decoration: none;
+	padding-top: 1px;
 
 	color: ${palette('--branding-link-text')};
 	a {

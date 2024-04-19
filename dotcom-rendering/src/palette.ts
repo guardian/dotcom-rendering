@@ -1853,6 +1853,8 @@ const brandingLabelLight: PaletteFunction = ({ design }) => {
 	}
 };
 const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
+const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[60];
+const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[100];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -5809,6 +5811,10 @@ const paletteColours = {
 	'--summary-event-bullet-hover': {
 		light: summaryEventBulletHoverLight,
 		dark: summaryEventBulletHoverDark,
+	},
+	'--branding-border': {
+		light: brandingBorderLight,
+		dark: brandingBorderDark,
 	},
 	'--branding-label-text': {
 		light: brandingLabelLight,
