@@ -65,7 +65,10 @@ const loadSentryOnError = (): void => {
 				const queuedError = queue.shift();
 				if (queuedError) reportError(queuedError);
 			}
-			log('dotcom', `Injected Sentry in ${endPerformanceMeasure()}ms`);
+			log(
+				'openJournalism',
+				`Injected Sentry in ${endPerformanceMeasure()}ms`,
+			);
 		};
 
 		// This is how we lazy load Sentry. We setup custom functions and

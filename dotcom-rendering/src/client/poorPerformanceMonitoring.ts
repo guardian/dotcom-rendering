@@ -3,7 +3,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import { recordExperiences } from './ophan/ophan';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
-	log('dotcom', '⏱', name, data);
+	log('openJournalism', '⏱', name, data);
 
 /**
  * @see https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint
@@ -77,7 +77,7 @@ export const recordPoorPerformance = async (
 ): Promise<void> => {
 	try {
 		if (await isPerformingPoorly()) {
-			log('dotcom', `🐌 Poor page performance`);
+			log('openJournalism', `🐌 Poor page performance`);
 			return recordExperiences(renderingTarget, [
 				'poor-page-performance',
 			]);
