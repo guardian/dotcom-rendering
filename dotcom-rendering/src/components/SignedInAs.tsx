@@ -1,4 +1,6 @@
 import { css } from '@emotion/react';
+import { SignInScreenReason } from '@guardian/bridget/SignInScreenReason';
+import { SignInScreenReferrer } from '@guardian/bridget/SignInScreenReferrer';
 import {
 	headline,
 	palette as sourcePalette,
@@ -6,9 +8,12 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { LinkButton } from '@guardian/source-react-components';
+import { getUserClient } from '../lib/bridgetApi';
 import type { UserProfile } from '../lib/discussion';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 import { palette as themePalette } from '../palette';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	commentCount?: number;
@@ -95,6 +100,61 @@ const Heading = ({ count }: { count?: number }) => {
 	);
 };
 
+const signIn = () =>
+	void getUserClient()
+		.signIn(
+			SignInScreenReason.accessDiscussion,
+			SignInScreenReferrer.accessDiscussion,
+		)
+		.catch(() => {
+			// do nothing
+		});
+
+const appsStylesOverride = css`
+	display: inline;
+	padding: 0;
+	margin: 0;
+	text-decoration-color: ${themePalette('--sign-in-link-underline')};
+	white-space: inherit;
+	/* stylelint-disable -- there’s no Source option for this look */
+	font-family: inherit;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	/* stylelint-enable */
+	vertical-align: inherit;
+`;
+
+const SignInButton = ({
+	children,
+	action,
+}: {
+	children: React.ReactNode;
+	action: 'signin_to_comment' | 'register_to_comment';
+}) => {
+	const { renderingTarget } = useConfig();
+
+	return renderingTarget === 'Web' ? (
+		<a
+			href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
+				action,
+			)}`}
+			css={linkStyles}
+		>
+			{children}
+		</a>
+	) : (
+		<LinkButton
+			priority="subdued"
+			theme={{ textSubdued: themePalette('--sign-in-link') }}
+			cssOverrides={appsStylesOverride}
+			onClick={signIn}
+		>
+			{children}
+		</LinkButton>
+	);
+};
+
 export const SignedInAs = ({
 	commentCount,
 	enableDiscussionSwitch,
@@ -121,23 +181,13 @@ export const SignedInAs = ({
 				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					Commenting has been disabled at this time but you can still{' '}
-					<a
-						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
-							'signin_to_comment',
-						)}`}
-						css={linkStyles}
-					>
+					<SignInButton action="signin_to_comment">
 						sign in
-					</a>{' '}
+					</SignInButton>{' '}
 					or{' '}
-					<a
-						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
-							'register_to_comment',
-						)}`}
-						css={linkStyles}
-					>
+					<SignInButton action="register_to_comment">
 						create your Guardian account
-					</a>{' '}
+					</SignInButton>{' '}
 					to join the discussion when it&apos;s back
 				</span>
 			</div>
@@ -182,23 +232,13 @@ export const SignedInAs = ({
 				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					This discussion is now closed for comments but you can still{' '}
-					<a
-						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
-							'signin_to_comment',
-						)}`}
-						css={linkStyles}
-					>
+					<SignInButton action="signin_to_comment">
 						sign in
-					</a>{' '}
+					</SignInButton>{' '}
 					or{' '}
-					<a
-						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
-							'register_to_comment',
-						)}`}
-						css={linkStyles}
-					>
+					<SignInButton action="register_to_comment">
 						create your Guardian account
-					</a>{' '}
+					</SignInButton>{' '}
 					to join the discussion next time
 				</span>
 			</div>
@@ -211,23 +251,13 @@ export const SignedInAs = ({
 			<div css={containerStyles}>
 				<Heading count={commentCount} />
 				<span css={headlineStyles}>
-					<a
-						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
-							'signin_to_comment',
-						)}`}
-						css={linkStyles}
-					>
+					<SignInButton action="signin_to_comment">
 						Sign in
-					</a>{' '}
+					</SignInButton>{' '}
 					or{' '}
-					<a
-						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
-							'register_to_comment',
-						)}`}
-						css={linkStyles}
-					>
+					<SignInButton action="register_to_comment">
 						create your Guardian account
-					</a>{' '}
+					</SignInButton>{' '}
 					to join the discussion
 				</span>
 			</div>
