@@ -48,7 +48,7 @@ interface AppProps extends BaseProps {
 const globalStyles = (
 	format: ArticleFormat,
 	darkModeInApps: boolean,
-	renderingTarget: string,
+	renderingTarget: RenderingTarget,
 ) => css`
 	:root {
 		/* Light palette is default on all platforms */
