@@ -32,8 +32,8 @@ const timelineBulletStyles = css`
 	content: '';
 	border: 1px solid ${palette('--timeline-event-border')};
 	position: absolute;
-	left: -7px;
-	top: -6px;
+	left: -16px;
+	top: -10px;
 `;
 
 const smallDateStyles = css`
@@ -65,6 +65,14 @@ const titleStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
+const headingStyles = css`
+	margin-top: 4px;
+	position: relative;
+	::before {
+		${timelineBulletStyles}
+	}
+`;
+
 type EventHeaderProps = {
 	event: DCRTimelineEvent;
 	ArticleElementComponent: NestedArticleElement;
@@ -81,7 +89,7 @@ const EventHeader = ({
 	smallDates,
 }: EventHeaderProps) => {
 	const heading = (
-		<Heading level={sectioned ? 3 : 2}>
+		<Heading css={headingStyles} level={sectioned ? 3 : 2}>
 			<span css={smallDates ? smallDateStyles : titleStyles(format)}>
 				{event.date}
 			</span>
@@ -124,7 +132,7 @@ const EventHeader = ({
 
 const eventStyles = css`
 	border: 1px solid ${palette('--timeline-event-border')};
-	padding: ${space[1]}px 10px ${space[6]}px 10px;
+	padding: 0 10px ${space[6]}px 10px;
 	margin-bottom: ${space[5]}px;
 	position: relative;
 
@@ -135,10 +143,6 @@ const eventStyles = css`
 	${from.leftCol} {
 		margin-left: -11px;
 		margin-right: -11px;
-	}
-
-	&:before {
-		${timelineBulletStyles}
 	}
 `;
 
