@@ -1,7 +1,5 @@
 import type { CountryCode } from '@guardian/libs';
-import { isObject, isString } from '@guardian/libs';
-import type { Guard } from '../../lib/guard';
-import { guard } from '../../lib/guard';
+import { isObject, isOneOf, isString } from '@guardian/libs';
 import type { TagType } from '../../types/tag';
 
 export type CanShowGateProps = {
@@ -24,9 +22,9 @@ export type SignInGateComponent = {
 };
 
 export const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
-export type UserType = Guard<typeof ALL_USER_TYPES>;
+export type UserType = (typeof ALL_USER_TYPES)[number];
 
-export const isUserType = guard(ALL_USER_TYPES);
+export const isUserType = isOneOf(ALL_USER_TYPES);
 
 export const ALL_PRODUCTS = [
 	'Contribution',
@@ -34,9 +32,9 @@ export const ALL_PRODUCTS = [
 	'Paper',
 	'GuardianWeekly',
 ] as const;
-export type Product = Guard<typeof ALL_PRODUCTS>;
+export type Product = (typeof ALL_PRODUCTS)[number];
 
-export const isProduct = guard(ALL_PRODUCTS);
+export const isProduct = isOneOf(ALL_PRODUCTS);
 export interface CheckoutCompleteCookieData {
 	userType: UserType;
 	product: Product;
