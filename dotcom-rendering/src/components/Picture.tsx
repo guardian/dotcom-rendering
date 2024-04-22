@@ -370,47 +370,45 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<>
-			<picture css={isLightbox ? flex : block}>
-				{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
-				{format.display === ArticleDisplay.Immersive && isMainMedia && (
-					<>
-						{/* High resolution (HDPI) portrait sources*/}
-						<source
-							media="(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)"
-							sizes={sizes}
-							srcSet={sources
-								.map(
-									(source) =>
-										`${source.hiResUrl} ${source.width}w`,
-								)
-								.join(',')}
-						/>
-						{/* Low resolution (MDPI) portrait sources*/}
-						<source
-							media="(orientation: portrait)"
-							sizes={sizes}
-							srcSet={sources
-								.map(
-									(source) =>
-										`${source.lowResUrl} ${source.width}w`,
-								)
-								.join(',')}
-						/>
-					</>
-				)}
-				<Sources sources={sources} />
-				<img
-					ref={ref}
-					alt={alt}
-					src={fallbackSource.lowResUrl}
-					width={fallbackSource.width}
-					height={fallbackSource.width * ratio}
-					loading={Picture.disableLazyLoading ? undefined : loading}
-					css={isLightbox ? flex : block}
-				/>
-			</picture>
-		</>
+		<picture css={isLightbox ? flex : block}>
+			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
+			{format.display === ArticleDisplay.Immersive && isMainMedia && (
+				<>
+					{/* High resolution (HDPI) portrait sources*/}
+					<source
+						media="(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)"
+						sizes={sizes}
+						srcSet={sources
+							.map(
+								(source) =>
+									`${source.hiResUrl} ${source.width}w`,
+							)
+							.join(',')}
+					/>
+					{/* Low resolution (MDPI) portrait sources*/}
+					<source
+						media="(orientation: portrait)"
+						sizes={sizes}
+						srcSet={sources
+							.map(
+								(source) =>
+									`${source.lowResUrl} ${source.width}w`,
+							)
+							.join(',')}
+					/>
+				</>
+			)}
+			<Sources sources={sources} />
+			<img
+				ref={ref}
+				alt={alt}
+				src={fallbackSource.lowResUrl}
+				width={fallbackSource.width}
+				height={fallbackSource.width * ratio}
+				loading={Picture.disableLazyLoading ? undefined : loading}
+				css={isLightbox ? flex : block}
+			/>
+		</picture>
 	);
 };
 
