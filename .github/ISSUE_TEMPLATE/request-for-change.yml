@@ -16,3 +16,13 @@ body:
 
         **Who is responsible for closing this issue?**
         Once the issue is created, it is the responsibility of the _Dotcom team_ (@guardian/dotcom-platform) to provide feedback and help you get your change to the finish line.
+  - type: textarea
+    id: change-description
+    attributes:
+      label: Context
+      description: Please describe the change and why it's needed
+  - type: textarea
+    id: priority
+    attributes:
+      label: Priority
+      description: Please describe how urgent this change is
