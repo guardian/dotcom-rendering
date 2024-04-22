@@ -22,7 +22,7 @@ const timelineBulletStyles = css`
 		width: 12px;
 		height: 12px;
 		border: 1px solid ${palette('--timeline-event-border')};
-		border-radius: 1000px;
+		border-radius: 100%;
 		background-color: ${palette('--timeline-bullet')};
 		top: -6px;
 		left: -6.5px;
@@ -402,7 +402,7 @@ export const Picture = ({
 
 	return (
 		<>
-			<picture css={[isLightbox ? flex : block]}>
+			<picture css={isLightbox ? flex : block}>
 				{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 				{format.display === ArticleDisplay.Immersive && isMainMedia && (
 					<>

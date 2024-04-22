@@ -145,6 +145,11 @@ const roleCss = {
 		clear: left;
 		margin-right: 16px;
 	`,
+
+	showcaseTimeline: css`
+		margin-top: 0;
+		margin-bottom: 0;
+	`,
 };
 
 // Used for vast majority of layouts.
@@ -164,8 +169,7 @@ export const defaultRoleStyles = (
 			if (isTimeline)
 				return css`
 					${roleCss.immersive}
-					margin-top: 0;
-					margin-bottom: 0;
+					${roleCss.showcaseTimeline}
 				`;
 			return roleCss.showcase;
 		case 'thumbnail':

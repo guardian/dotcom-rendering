@@ -26,13 +26,14 @@ const hasShowcaseRole = (element?: FEElement): boolean => {
 const timelineBulletStyles = css`
 	position: relative;
 	::before {
-		border-radius: 1000px;
+		content: '';
+		position: absolute;
 		display: block;
-		background-color: ${palette('--timeline-bullet')};
 		width: 12px;
 		height: 12px;
-		content: '';
 		border: 1px solid ${palette('--timeline-event-border')};
+		border-radius: 100%;
+		background-color: ${palette('--timeline-bullet')};
 		position: absolute;
 		left: -16.5px;
 		top: -10px;
