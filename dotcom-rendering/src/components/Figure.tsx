@@ -14,6 +14,35 @@ type Props = {
 	isTimeline?: boolean;
 };
 
+const immersiveStyles = css`
+	margin-top: ${space[3]}px;
+	margin-bottom: ${space[3]}px;
+	${until.tablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+	${from.tablet} {
+		margin-left: -20px;
+		margin-right: -100px;
+	}
+	${from.desktop} {
+		margin-left: -20px;
+		margin-right: -340px;
+	}
+	${from.leftCol} {
+		margin-left: -160px;
+		margin-right: -320px;
+	}
+	${from.wide} {
+		margin-left: -240px;
+		margin-right: -400px;
+	}
+`;
+
 const roleCss = {
 	inline: css`
 		margin-top: ${space[3]}px;
@@ -42,32 +71,7 @@ const roleCss = {
 	`,
 
 	immersive: css`
-		margin-top: ${space[3]}px;
-		margin-bottom: ${space[3]}px;
-		${until.tablet} {
-			margin-left: -20px;
-			margin-right: -20px;
-		}
-		${until.mobileLandscape} {
-			margin-left: -10px;
-			margin-right: -10px;
-		}
-		${from.tablet} {
-			margin-left: -20px;
-			margin-right: -100px;
-		}
-		${from.desktop} {
-			margin-left: -20px;
-			margin-right: -340px;
-		}
-		${from.leftCol} {
-			margin-left: -160px;
-			margin-right: -320px;
-		}
-		${from.wide} {
-			margin-left: -240px;
-			margin-right: -400px;
-		}
+		${immersiveStyles}
 	`,
 
 	showcase: css`
@@ -80,6 +84,12 @@ const roleCss = {
 		${from.wide} {
 			margin-left: -240px;
 		}
+	`,
+
+	showcaseTimeline: css`
+		${immersiveStyles}
+		margin-top: 0;
+		margin-bottom: 0;
 	`,
 
 	thumbnail: css`
@@ -145,11 +155,6 @@ const roleCss = {
 		clear: left;
 		margin-right: 16px;
 	`,
-
-	showcaseTimeline: css`
-		margin-top: 0;
-		margin-bottom: 0;
-	`,
 };
 
 // Used for vast majority of layouts.
@@ -166,11 +171,9 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'showcase':
-			if (isTimeline)
-				return css`
-					${roleCss.immersive}
-					${roleCss.showcaseTimeline}
-				`;
+			if (isTimeline) {
+				return roleCss.showcaseTimeline;
+			}
 			return roleCss.showcase;
 		case 'thumbnail':
 			switch (format.design) {
