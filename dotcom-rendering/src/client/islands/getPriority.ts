@@ -1,3 +1,4 @@
+import { isString } from '@guardian/libs';
 import type { Priority } from '../../lib/scheduler';
 import { isValidSchedulerPriority } from '../../lib/scheduler';
 
@@ -12,7 +13,7 @@ import { isValidSchedulerPriority } from '../../lib/scheduler';
 export const getPriority = (marker: HTMLElement): Priority | undefined => {
 	const priority = marker.getAttribute('priority');
 
-	if (isValidSchedulerPriority(priority)) {
+	if (isString(priority) && isValidSchedulerPriority(priority)) {
 		return priority;
 	}
 
