@@ -90,6 +90,7 @@ type Props = {
 	forceDropCap?: 'on' | 'off';
 	isTimeline?: boolean;
 	totalElements?: number;
+	isKeyTakeaway?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -148,6 +149,7 @@ export const renderElement = ({
 	forceDropCap,
 	isTimeline = false,
 	totalElements = 0,
+	isKeyTakeaway,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -490,7 +492,7 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 			};
-
+			if (isKeyTakeaway) return null;
 			return <EmailSignUpWrapper {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return <AdPlaceholder />;
@@ -871,6 +873,7 @@ export const RenderArticleElement = ({
 	forceDropCap,
 	isTimeline,
 	totalElements,
+	isKeyTakeaway,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -894,6 +897,7 @@ export const RenderArticleElement = ({
 		forceDropCap,
 		isTimeline,
 		totalElements,
+		isKeyTakeaway,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
@@ -927,7 +931,8 @@ type ElementLevelPropNames =
 	| 'forceDropCap'
 	| 'hideCaption'
 	| 'format'
-	| 'isTimeline';
+	| 'isTimeline'
+	| 'isKeyTakeaway';
 type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 
