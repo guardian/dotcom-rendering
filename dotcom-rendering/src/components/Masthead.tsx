@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
@@ -22,10 +21,6 @@ import { TopBar } from './TopBar.importable';
 // 		height: 150px;
 // 	}
 // `;
-
-const headerStyles = css`
-	background-color: ${sourcePalette.brand[400]};
-`;
 
 type Props = {
 	nav: NavType;
@@ -63,12 +58,12 @@ export const Masthead = ({
 			showSideBorders={false}
 			padSides={false}
 			shouldCenter={false}
-			backgroundColour={sourcePalette.brand[400]}
+			backgroundColour={sourcePalette.brand[300]}
 			element="header"
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
 		>
-			<div css={headerStyles} data-component="nav3">
+			<div data-component="nav3">
 				<Island priority="critical">
 					<TopBar
 						editionId={editionId}
