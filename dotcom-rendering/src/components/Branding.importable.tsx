@@ -8,17 +8,21 @@ import type { Branding as BrandingType } from '../types/branding';
 import { useConfig } from './ConfigContext';
 
 const brandingStyle = css`
-	padding: 6px 0 6px 6px;
+	padding: 6px;
 	border: 1px solid ${palette('--branding-border')};
-	max-width: 150px;
-
-	${from.tablet} {
-		width: 115px;
-	}
+	width: fit-content;
 
 	${from.desktop} {
-		padding: 9px 0 9px 9px;
+		padding: 9px;
 		width: 220px;
+	}
+	${from.leftCol} {
+		padding: 5px;
+		width: fit-content;
+	}
+	${from.wide} {
+		padding: 9px;
+		width: auto;
 	}
 `;
 
