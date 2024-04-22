@@ -1,6 +1,6 @@
 name: DCR Issue
 description: Describe the work that should be completed as part of this ticket
-title: ' '
+title: '[Task]: '
 labels: ['Rota']
 projects: ['guardian/88']
 body:
