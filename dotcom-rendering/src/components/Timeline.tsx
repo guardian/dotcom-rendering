@@ -34,7 +34,6 @@ const timelineBulletStyles = css`
 		border: 1px solid ${palette('--timeline-event-border')};
 		border-radius: 100%;
 		background-color: ${palette('--timeline-bullet')};
-		position: absolute;
 		left: -16.5px;
 		top: -10px;
 	}
