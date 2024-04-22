@@ -25,18 +25,18 @@ const timelineBulletStyles = css`
 		border-radius: 1000px;
 		background-color: ${palette('--timeline-bullet')};
 		top: -6px;
-		left: -7px;
+		left: -6.5px;
 
 		${from.mobileLandscape} {
-			left: 4px;
+			left: 3.5px;
 		}
 
 		${from.leftCol} {
-			left: 144px;
+			left: 143.5px;
 		}
 
 		${from.wide} {
-			left: 224px;
+			left: 223.5px;
 		}
 	}
 `;
@@ -441,9 +441,9 @@ export const Picture = ({
 					css={isLightbox ? flex : block}
 				/>
 			</picture>
-			{isTimeline && isMainMedia && role === 'showcase' ? (
+			{isTimeline && isMainMedia && role === 'showcase' && (
 				<span css={timelineBulletStyles} />
-			) : null}
+			)}
 		</>
 	);
 };

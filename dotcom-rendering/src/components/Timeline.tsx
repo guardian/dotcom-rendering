@@ -34,7 +34,7 @@ const timelineBulletStyles = css`
 		content: '';
 		border: 1px solid ${palette('--timeline-event-border')};
 		position: absolute;
-		left: -16px;
+		left: -16.5px;
 		top: -10px;
 	}
 `;
