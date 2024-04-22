@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid -- It’s AMP! */
 import { css } from '@emotion/react';
 import {
+	article17,
 	brandBackground,
 	headlineBold17,
 	headlineMedium20,
@@ -327,12 +328,7 @@ const reminderTermsStyle = css`
 	}
 `;
 const successMessageStyle = css`
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
 
 	a {
 		text-decoration: underline;

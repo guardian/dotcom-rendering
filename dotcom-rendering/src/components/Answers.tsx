@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import {
+	article17,
 	palette,
 	space,
-	textEgyptian17,
 	textSans14,
 	textSans17,
 } from '@guardian/source-foundations';
@@ -35,9 +35,8 @@ export const radioButtonWrapperStyles = (theme: ArticleTheme) => css`
 `;
 
 const fontStyles = (theme: ArticleTheme) => `
-	${theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17}
-	${theme !== ArticleSpecial.Labs ? 'line-height: 1.4;' : ''}
-	`;
+	${theme === ArticleSpecial.Labs ? textSans17 : article17}
+`;
 
 const answerWithSVGStyles = css`
 	margin-bottom: ${space[2]}px;

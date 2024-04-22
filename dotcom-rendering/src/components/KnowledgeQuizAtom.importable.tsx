@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import {
+	article17,
 	palette,
 	space,
-	textEgyptian17,
 	textSans17,
 	textSansBold17,
 	textSansBold34,
@@ -128,8 +128,7 @@ export const Question = ({
 	return (
 		<li
 			css={css`
-				${theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17}
-				${theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
+				${theme === ArticleSpecial.Labs ? textSans17 : article17}
 			`}
 		>
 			<fieldset css={fieldsetStyle}>

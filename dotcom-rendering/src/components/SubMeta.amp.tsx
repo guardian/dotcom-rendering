@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
+	article17,
 	palette,
 	text,
-	textEgyptian17,
 	textSans12,
 	textSans15,
 } from '@guardian/source-foundations';
@@ -67,20 +67,11 @@ const sectionLinkStyle = (pillar: ArticleTheme) => css`
 	padding-right: 6px;
 	text-decoration: none;
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
+
 	:after {
 		content: '/';
-		${textEgyptian17};
-		/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-		line-height: 1.4;
+		${article17};
 		position: absolute;
 		pointer-events: none;
 		top: 0;

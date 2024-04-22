@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	article17,
 	palette as sourcePalette,
-	textEgyptian17,
 	textSans14,
 } from '@guardian/source-foundations';
 import { SvgInfo } from '@guardian/source-react-components';
@@ -31,12 +31,8 @@ const creditStyling = css`
 `;
 
 const bodyStyling = css`
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
+
 	p {
 		margin-bottom: 0.5rem;
 	}

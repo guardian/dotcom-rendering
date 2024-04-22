@@ -37,9 +37,9 @@ const containerStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
 	flex-direction: row;
 	${textSans12};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+ 	* @TODO (2) Typography preset styles should not be overridden.
+ 	* Please speak to your team's designer and update this to use a more appropriate preset.
+	*/
 	line-height: 1.15;
 	margin-top: -4px;
 	padding-left: 5px;

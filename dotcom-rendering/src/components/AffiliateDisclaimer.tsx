@@ -6,9 +6,9 @@ import { palette as themePalette } from '../palette';
 const disclaimerLeftColStyles = css`
 	${textSans15};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+ 	 * @TODO (2) Typography preset styles should not be overridden.
+ 	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[1]}px;
@@ -17,9 +17,9 @@ const disclaimerLeftColStyles = css`
 const disclaimerInlineStyles = css`
 	${textSans14};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 	float: left;
 	clear: left;

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
+	article17,
 	headlineMedium20,
 	palette,
-	textEgyptian17,
 	textSans15,
 } from '@guardian/source-foundations';
 import React from 'react';
@@ -48,12 +48,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 	}
 	p {
 		padding: 0 0 12px;
-		${textEgyptian17};
-		/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-		line-height: 1.4;
+		${article17};
 		font-weight: 300;
 		word-wrap: break-word;
 		color: ${palette.neutral[7]};
@@ -63,14 +58,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		margin-left: 20px;
 		font-style: italic;
 	}
-
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
-
+	${article17};
 	${LinkStyle(pillar)};
 	${ListStyle(neutralBorder(pillar))};
 `;
@@ -93,12 +81,7 @@ const wrapper = (pillar: ArticleTheme) => css`
 
 	${TextStyle(pillar)}
 
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
 `;
 
 const buttonStyles = css`

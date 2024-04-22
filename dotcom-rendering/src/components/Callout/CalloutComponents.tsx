@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
+	article17,
 	palette as sourcePalette,
 	space,
-	textEgyptian17,
 	textSans14,
 	textSans15,
 } from '@guardian/source-foundations';
@@ -29,11 +29,7 @@ export const linkStyles = css`
 
 const calloutStyles = css`
 	padding-bottom: ${space[4]}px;
-	/**
-	* @TODO line height override should be replaced with 'article17' preset
-	*/
-	${textEgyptian17}
-	line-height: 1.4;
+	${article17}
 	p {
 		margin-bottom: ${space[3]}px;
 	}

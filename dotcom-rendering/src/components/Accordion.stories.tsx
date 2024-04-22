@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
+	article17,
 	breakpoints,
 	from,
 	space,
-	textEgyptian17,
 } from '@guardian/source-foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
@@ -29,12 +29,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const textStyle = css`
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
 	margin-bottom: ${space[3]}px;
 `;
 

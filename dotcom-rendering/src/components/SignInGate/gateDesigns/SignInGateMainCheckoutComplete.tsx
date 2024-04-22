@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import {
+	article17,
+	articleBold17,
 	from,
 	headlineBold28,
 	headlineBold34,
 	palette,
 	space,
-	textEgyptian17,
-	textEgyptianBold17,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import {
@@ -40,12 +40,7 @@ const personalisedHeadingStyles = css`
 `;
 
 const personalisedBodyBold = css`
-	${textEgyptianBold17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${articleBold17};
 	${from.phablet} {
 		padding-right: 130px;
 	}
@@ -73,13 +68,12 @@ const bulletStyles = css`
 `;
 
 const personalisedBodyTextList = css`
-	${textEgyptian17};
+	${article17};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+ 	 * @TODO (2) Typography preset styles should not be overridden.
+ 	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	font-weight: 500;
-	line-height: 1.4;
 	color: black;
 `;
 

@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/ContributionsLiveblogEpic.tsx
  */
 import { css } from '@emotion/react';
-import { headlineBold34, textEgyptian17 } from '@guardian/source-foundations';
+import { article17, headlineBold34 } from '@guardian/source-foundations';
 import { from } from '@guardian/source-foundations';
 import { palette } from '@guardian/source-foundations';
 import { space } from '@guardian/source-foundations';
@@ -53,12 +53,8 @@ const container = (clientName: string) => css`
 `;
 
 const textContainer = css`
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
+
 	font-size: 16px;
 
 	p {

@@ -6,11 +6,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
+	article17,
 	from,
 	headlineBold20,
 	palette,
 	space,
-	textEgyptian17,
 	textSans15,
 	textSansBold15,
 } from '@guardian/source-foundations';
@@ -62,12 +62,7 @@ const remindHeading = css`
 
 const successTextStyles = css`
 	margin: 0 auto ${space[2]}px;
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
 `;
 
 const linkStyles = css`

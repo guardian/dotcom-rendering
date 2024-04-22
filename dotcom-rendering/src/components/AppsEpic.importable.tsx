@@ -2,11 +2,11 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { IEpic } from '@guardian/bridget/Epic';
 import {
+	article17,
 	from,
 	headlineMedium24,
 	palette,
 	remSpace,
-	textEgyptian17,
 	textSans17,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
@@ -60,8 +60,7 @@ const epicStyles: SerializedStyles = css`
 		border-top: 1px solid ${themePalette('--apps-epic-border')};
 		background: ${themePalette('--apps-epic-background')};
 		padding: ${remSpace[3]};
-		${textEgyptian17};
-		line-height: 1.4;
+		${article17};
 		clear: left;
 	}
 

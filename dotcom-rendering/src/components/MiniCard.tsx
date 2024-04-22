@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, textEgyptian17 } from '@guardian/source-foundations';
+import { articleBold17, breakpoints } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
@@ -13,13 +13,7 @@ const imageStyles = css`
 `;
 
 const linkStyles = css`
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
-	font-weight: bold;
+	${articleBold17};
 	display: flex;
 	align-items: flex-start;
 	text-decoration: none;

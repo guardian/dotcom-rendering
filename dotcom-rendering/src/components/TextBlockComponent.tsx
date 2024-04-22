@@ -2,9 +2,9 @@ import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
+	article17,
 	from,
 	palette,
-	textEgyptian17,
 	textSans17,
 	until,
 } from '@guardian/source-foundations';
@@ -160,8 +160,7 @@ const sanitiserOptions: IOptions = {
 const styles = (format: ArticleFormat) => css`
 	margin-bottom: 14px;
 	word-break: break-word;
-	${format.theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17};
-	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'};
+	${format.theme === ArticleSpecial.Labs ? textSans17 : article17};
 	strong em,
 	strong u {
 		font-weight: bold;

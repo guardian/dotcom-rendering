@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	article15,
 	palette as sourcePalette,
-	textEgyptian15,
 } from '@guardian/source-foundations';
 import { useEffect } from 'react';
 import { unescapeData } from '../lib/escapeData';
@@ -19,12 +19,7 @@ const noJSStyling = css`
 		padding: 20px;
 		width: 100%;
 		margin-bottom: 16px;
-		${textEgyptian15};
-		/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-		line-height: 1.4;
+		${article15};
 	}
 
 	.nojs-tweet iframe {

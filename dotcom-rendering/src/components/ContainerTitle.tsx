@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	article17,
 	between,
 	headlineBold17,
 	headlineBold24,
@@ -46,9 +47,9 @@ const headerStylesWithUrl = css`
 const descriptionStyles = (fontColour?: string) => css`
 	${textEgyptian17};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	font-weight: 500;
 	line-height: 1.15;
 	color: ${fontColour ?? palette.neutral[46]};
@@ -125,7 +126,7 @@ export const ContainerTitle = ({
 						css={[
 							headerStylesWithUrl,
 							headerStyles(fontColour),
-							lightweightHeader && textEgyptian17,
+							lightweightHeader && article17,
 						]}
 					>
 						{localisedTitle(title, editionId)}
@@ -135,7 +136,7 @@ export const ContainerTitle = ({
 				<h2
 					css={[
 						headerStyles(fontColour),
-						lightweightHeader && textEgyptian17,
+						lightweightHeader && article17,
 					]}
 				>
 					{localisedTitle(title, editionId)}

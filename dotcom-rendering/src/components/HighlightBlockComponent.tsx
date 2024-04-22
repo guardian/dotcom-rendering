@@ -31,9 +31,9 @@ export const HighlightBlockComponent = ({ html }: Props) => {
 			elCss={css`
 				${textEgyptian17};
 				/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+				 * @TODO (2) Typography preset styles should not be overridden.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
 				line-height: 1.15;
 				background-color: ${palette.neutral[97]};
 				padding-top: 8px;

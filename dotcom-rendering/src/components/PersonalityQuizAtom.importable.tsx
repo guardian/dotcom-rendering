@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import {
+	article17,
 	palette,
 	space,
-	textEgyptian17,
 	textSans17,
 	textSansBold17,
 } from '@guardian/source-foundations';
@@ -25,8 +25,7 @@ const answersWrapperStyle = (theme: ArticleTheme) => css`
 	margin-bottom: 12px;
 	border: 0px;
 	padding: 0px;
-	${theme === ArticleSpecial.Labs ? textSans17 : textEgyptian17};
-	${theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
+	${theme === ArticleSpecial.Labs ? textSans17 : article17};
 
 	label {
 		width: inherit;

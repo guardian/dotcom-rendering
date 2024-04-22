@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import {
+	article15,
+	article17,
+	articleBold15,
 	headlineMedium17,
 	palette,
 	space,
-	textEgyptian15,
-	textEgyptian17,
-	textEgyptianBold15,
 } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import { palette as themePalette } from '../palette';
@@ -27,12 +27,7 @@ const mainContentWrapperStyles = css`
 `;
 
 const witnessIconWrapperStyles = css`
-	${textEgyptian15};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article15};
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
@@ -42,12 +37,7 @@ const witnessIconStyles = css`
 	padding-left: ${space[1]}px;
 
 	color: ${themePalette('--witness-title-icon')};
-	${textEgyptianBold15};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${articleBold15};
 `;
 
 const witnessDetailsWrapperStyles = css`
@@ -79,12 +69,7 @@ const witnessDetailsSpacingStyles = css`
 const authorNameStyles = css`
 	padding-left: 5px;
 	color: ${themePalette('--witness-title-author')};
-	${textEgyptianBold15};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${articleBold15};
 `;
 
 type WrapperProps = {
@@ -121,12 +106,7 @@ const WitnessWrapper = ({
 					<div css={witnessDetailsSpacingStyles}>
 						<p
 							css={css`
-								${textEgyptian15};
-								/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-								line-height: 1.4;
+								${article15};
 							`}
 						>
 							By
@@ -140,12 +120,7 @@ const WitnessWrapper = ({
 						</p>
 						<p
 							css={css`
-								${textEgyptian15};
-								/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-								line-height: 1.4;
+								${article15};
 							`}
 						>
 							<DateTime
@@ -213,12 +188,7 @@ export const WitnessImageBlockComponent = ({
 						<div itemProp="description">
 							<p
 								css={css`
-									${textEgyptian17};
-									/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-									line-height: 1.4;
+									${article17};
 								`}
 								dangerouslySetInnerHTML={{ __html: caption }}
 							/>
@@ -258,12 +228,7 @@ export const WitnessTextBlockComponent = ({
 		<div itemProp="text">
 			<p
 				css={css`
-					${textEgyptian17};
-					/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-					line-height: 1.4;
+					${article17};
 				`}
 				dangerouslySetInnerHTML={{ __html: description }}
 			/>
@@ -310,12 +275,7 @@ export const WitnessVideoBlockComponent = ({
 			<div itemProp="description">
 				<p
 					css={css`
-						${textEgyptian17};
-						/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-						line-height: 1.4;
+						${article17};
 					`}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>

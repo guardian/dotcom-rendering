@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	article17,
 	palette,
-	textEgyptian17,
 	textSans12,
 	textSans17,
 } from '@guardian/source-foundations';
@@ -214,12 +214,7 @@ const backToTopText = css`
 
 const supportLink = css`
 	color: ${palette.brandAlt[400]};
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
 	padding-bottom: 0.375rem;
 `;
 

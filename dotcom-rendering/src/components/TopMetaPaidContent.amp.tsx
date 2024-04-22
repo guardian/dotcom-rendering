@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
+	article17,
 	palette,
 	text,
-	textEgyptian17,
 	textSans15,
 	textSans24,
 } from '@guardian/source-foundations';
@@ -26,12 +26,7 @@ const headerStyle = css`
 `;
 
 const bylineStyle = css`
-	${textEgyptian17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${article17};
 	color: ${palette.neutral[7]};
 	padding-bottom: 8px;
 	font-style: italic;
