@@ -77,6 +77,7 @@ export const QAndAExplainer = ({
 					hideCaption={hideCaption}
 					starRating={starRating}
 					forceDropCap="off"
+					isListElement={true}
 				/>
 			))}
 		</>
