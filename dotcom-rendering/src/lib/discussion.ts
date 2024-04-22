@@ -1,3 +1,4 @@
+import { isOneOf } from '@guardian/libs';
 import type { BaseSchema, Input, Output } from 'valibot';
 import {
 	array,
@@ -25,8 +26,6 @@ import type {
 	reportAbuse,
 	unPickComment,
 } from './discussionApi';
-import type { Guard } from './guard';
-import { guard } from './guard';
 import { error, ok, type Result } from './result';
 
 export type CAPIPillar =
@@ -248,16 +247,16 @@ export const postUsernameResponseSchema = variant('status', [
 ]);
 
 const orderBy = ['newest', 'oldest', 'recommendations'] as const;
-export const isOrderBy = guard(orderBy);
-export type OrderByType = Guard<typeof orderBy>;
+export const isOrderBy = isOneOf(orderBy);
+export type OrderByType = (typeof orderBy)[number];
 
 const threads = ['collapsed', 'expanded', 'unthreaded'] as const;
-export const isThreads = guard(threads);
-export type ThreadsType = Guard<typeof threads>;
+export const isThreads = isOneOf(threads);
+export type ThreadsType = (typeof threads)[number];
 
 const pageSize = [25, 50, 100] as const;
-export const isPageSize = guard(pageSize);
-export type PageSizeType = Guard<typeof pageSize>;
+export const isPageSize = isOneOf(pageSize);
+export type PageSizeType = (typeof pageSize)[number];
 export interface FilterOptions {
 	orderBy: OrderByType;
 	pageSize: PageSizeType;

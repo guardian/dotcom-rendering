@@ -1,13 +1,12 @@
-import type { Guard } from '../lib/guard';
-import { guard } from '../lib/guard';
+import { isOneOf } from '@guardian/libs';
 
 type AmericanTerritories = 'US-East-Coast' | 'US-West-Coast';
 
 type EuropeanTerritories = 'EU-27';
 
 const australianTerritories = ['AU-VIC', 'AU-QLD', 'AU-NSW'] as const;
-export const isAustralianTerritory = guard(australianTerritories);
-export type AustralianTerritory = Guard<typeof australianTerritories>;
+export const isAustralianTerritory = isOneOf(australianTerritories);
+export type AustralianTerritory = (typeof australianTerritories)[number];
 
 type NewZealandTerritories = 'NZ';
 

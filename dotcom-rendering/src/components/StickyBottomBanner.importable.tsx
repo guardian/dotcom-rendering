@@ -3,8 +3,7 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import type { CountryCode } from '@guardian/libs';
-import { cmp } from '@guardian/libs';
-import { isString, storage } from '@guardian/libs';
+import { cmp, isString, storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
@@ -14,7 +13,6 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
@@ -95,7 +93,6 @@ const buildRRBannerConfigWith = ({
 		isPreview,
 		asyncArticleCounts,
 		signInGateWillShow = false,
-		isInBlockSupporterRevenueMessagingTest = false,
 		contentType,
 		sectionId,
 		shouldHideReaderRevenue,
@@ -111,7 +108,6 @@ const buildRRBannerConfigWith = ({
 		isPreview: boolean;
 		asyncArticleCounts: Promise<ArticleCounts | undefined>;
 		signInGateWillShow?: boolean;
-		isInBlockSupporterRevenueMessagingTest?: boolean;
 		contentType: string;
 		sectionId: string;
 		shouldHideReaderRevenue: boolean;
@@ -151,7 +147,6 @@ const buildRRBannerConfigWith = ({
 						idApiUrl,
 						signInGateWillShow,
 						asyncArticleCounts,
-						isInBlockSupporterRevenueMessagingTest,
 					}),
 				show:
 					({ meta, module, fetchEmail }: BannerProps) =>
@@ -248,11 +243,6 @@ export const StickyBottomBanner = ({
 		isPreview,
 		currentLocaleCode: countryCode,
 	});
-	const ABTestAPI = useAB()?.api;
-	const isInBlockSupporterRevenueMessagingTest = ABTestAPI?.isUserInVariant(
-		'BlockSupporterRevenueMessagingSport',
-		'variant',
-	);
 
 	useEffect(() => {
 		setAsyncArticleCounts(
@@ -274,7 +264,6 @@ export const StickyBottomBanner = ({
 				ArticleCounts | undefined
 			>,
 			signInGateWillShow,
-			isInBlockSupporterRevenueMessagingTest,
 			contentType,
 			sectionId,
 			shouldHideReaderRevenue,

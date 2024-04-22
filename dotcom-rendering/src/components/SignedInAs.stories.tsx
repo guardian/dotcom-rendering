@@ -245,3 +245,45 @@ DiscussionDisabledSignedOut.decorators = [
 		},
 	]),
 ];
+
+export const Apps = () => {
+	return (
+		<Wrapper>
+			<SignedInAs
+				enableDiscussionSwitch={false}
+				commentCount={32}
+				isClosedForComments={false}
+			/>
+		</Wrapper>
+	);
+};
+Apps.parameters = { config: { renderingTarget: 'Apps' } };
+Apps.decorators = [
+	splitTheme(
+		[
+			{
+				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+			},
+			{
+				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+			},
+			{
+				theme: Pillar.Sport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+			},
+			{
+				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+			},
+		],
+		{
+			orientation: 'vertical',
+		},
+	),
+];
