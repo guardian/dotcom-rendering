@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source-foundations';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { generateImageURL } from '../lib/image';
-import { palette } from '../palette';
 import type { RoleType } from '../types/content';
 import type { Loading } from './CardPicture';
 
@@ -12,34 +11,6 @@ import type { Loading } from './CardPicture';
  **/
 
 export type Orientation = 'portrait' | 'landscape';
-
-const timelineBulletStyles = css`
-	position: relative;
-	::before {
-		content: '';
-		position: absolute;
-		display: block;
-		width: 12px;
-		height: 12px;
-		border: 1px solid ${palette('--timeline-event-border')};
-		border-radius: 100%;
-		background-color: ${palette('--timeline-bullet')};
-		top: -6px;
-		left: -6.5px;
-
-		${from.mobileLandscape} {
-			left: 3.5px;
-		}
-
-		${from.leftCol} {
-			left: 143.5px;
-		}
-
-		${from.wide} {
-			left: 223.5px;
-		}
-	}
-`;
 
 type Props = {
 	role: RoleType;
@@ -51,7 +22,6 @@ type Props = {
 	loading: Loading;
 	isMainMedia?: boolean;
 	isLightbox?: boolean;
-	isTimeline?: boolean;
 	orientation?: Orientation;
 	onLoad?: () => void;
 };
@@ -349,7 +319,6 @@ export const Picture = ({
 	isMainMedia = false,
 	loading,
 	isLightbox = false,
-	isTimeline = false,
 	orientation = 'landscape',
 	onLoad,
 }: Props) => {
@@ -441,9 +410,6 @@ export const Picture = ({
 					css={isLightbox ? flex : block}
 				/>
 			</picture>
-			{isTimeline && isMainMedia && role === 'showcase' && (
-				<span css={timelineBulletStyles} />
-			)}
 		</>
 	);
 };

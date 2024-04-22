@@ -32,6 +32,34 @@ type Props = {
 	isTimeline?: boolean;
 };
 
+const timelineBulletStyles = css`
+	position: relative;
+	::before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 12px;
+		height: 12px;
+		border: 1px solid ${themePalette('--timeline-event-border')};
+		border-radius: 100%;
+		background-color: ${themePalette('--timeline-bullet')};
+		top: -6px;
+		left: -6.5px;
+
+		${from.mobileLandscape} {
+			left: 3.5px;
+		}
+
+		${from.leftCol} {
+			left: 143.5px;
+		}
+
+		${from.wide} {
+			left: 223.5px;
+		}
+	}
+`;
+
 const starsWrapper = css`
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
@@ -343,7 +371,6 @@ export const ImageComponent = ({
 						height={imageHeight}
 						loading={loading}
 						isMainMedia={isMainMedia}
-						isTimeline={isTimeline}
 					/>
 				)}
 
@@ -409,6 +436,9 @@ export const ImageComponent = ({
 					/>
 				)}
 
+				{isTimeline && isMainMedia && role === 'showcase' && (
+					<span css={timelineBulletStyles} />
+				)}
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
@@ -472,6 +502,9 @@ export const ImageComponent = ({
 						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
+				)}
+				{isTimeline && isMainMedia && role === 'showcase' && (
+					<span css={timelineBulletStyles} />
 				)}
 
 				{isMainMedia && (
