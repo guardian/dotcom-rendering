@@ -3,7 +3,6 @@ import { isString } from '@guardian/libs';
 
 export const getIdFromUrl = (
 	urlString: string,
-	regexFormat: string,
 	tryInPath?: boolean,
 	tryQueryParam?: string,
 ): string => {
@@ -25,21 +24,10 @@ export const getIdFromUrl = (
 		.filter(isString)
 		.map((id) => id.slice(0, 11));
 
-	if (!ids.length)
-		logErr(
+	if (ids.length && ids[0]) return ids[0];
+	else
+		return logErr(
 			'an undefined ID',
 			'Could not get ID from pathname or searchParams.',
 		);
-
-	// Allows for a matching ID to be selected from either (or both) formats
-	const id = ids.find((tryId) => new RegExp(regexFormat).test(tryId));
-
-	if (!id) {
-		return logErr(
-			id ?? ids.join(', '),
-			`Value(s) didn't match regexFormat ${regexFormat}`,
-		);
-	}
-
-	return id;
 };
