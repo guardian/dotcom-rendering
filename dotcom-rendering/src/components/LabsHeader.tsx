@@ -11,6 +11,8 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
+import type { EditionId } from '../lib/edition';
+import { getLabsUrlSuffix } from '../lib/labs';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import { Details } from './Details';
@@ -129,13 +131,17 @@ const About = () => (
 	</div>
 );
 
-const Logo = () => (
-	<Link href="https://www.theguardian.com/guardian-labs">
+const Logo = ({ editionId }: { editionId: EditionId }) => (
+	<Link
+		href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+			editionId,
+		)}`}
+	>
 		<LabsLogo />
 	</Link>
 );
 
-export const LabsHeader = () => (
+export const LabsHeader = ({ editionId }: { editionId: EditionId }) => (
 	<FlexWrapper>
 		<Left>
 			<HeaderSection isFirst={true}>
@@ -163,7 +169,7 @@ export const LabsHeader = () => (
 			</HeaderSection>
 		</Left>
 		<Right>
-			<Logo />
+			<Logo editionId={editionId} />
 		</Right>
 	</FlexWrapper>
 );

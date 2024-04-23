@@ -370,6 +370,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 
 	const isWeb = renderingTarget === 'Web';
@@ -551,7 +552,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader />
+						<LabsHeader editionId={editionId} />
 					</Section>
 				</Stuck>
 			)}

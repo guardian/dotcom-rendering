@@ -222,6 +222,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -472,7 +473,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									borderColour={sourcePalette.neutral[60]}
 									sectionId="labs-header"
 								>
-									<LabsHeader />
+									<LabsHeader editionId={editionId} />
 								</Section>
 							</Stuck>
 						</>

@@ -16,6 +16,7 @@ import {
 } from '@guardian/source-react-components';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
+import { getLabsUrlSuffix } from '../lib/labs';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
@@ -196,17 +197,6 @@ const paidForByStyles = (textColour?: string) => css`
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
 `;
-
-const getLabsUrlSuffix = (editionId: EditionId) => {
-	switch (editionId) {
-		case 'AU':
-			return '-australia';
-		case 'US':
-			return '-us';
-		default:
-			return '';
-	}
-};
 
 const GuardianLabsTitle = ({
 	title,
