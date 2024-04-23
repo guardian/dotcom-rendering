@@ -122,8 +122,9 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				team: 'dotcom',
 			});
 
-			if (bypassSampling || isDev)
+			if (bypassSampling || isDev) {
 				void bypassCoreWebVitalsSampling('commercial');
+			}
 		},
 		[abTestApi, browserId, isDev, pageViewId, shouldBypassSampling],
 	);

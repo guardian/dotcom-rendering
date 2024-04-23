@@ -36,7 +36,7 @@ export const enhanceInteractiveContentsElements = (
 					size: 'full',
 					spaceAbove: 'tight',
 				});
-				if ('elementId' in element && element.elementId)
+				if ('elementId' in element && element.elementId) {
 					updatedElements.push({
 						_type: 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 						elementId: element.elementId,
@@ -51,6 +51,7 @@ export const enhanceInteractiveContentsElements = (
 								? endDocumentElement.elementId
 								: undefined,
 					});
+				}
 			} else {
 				updatedElements.push(element);
 			}
