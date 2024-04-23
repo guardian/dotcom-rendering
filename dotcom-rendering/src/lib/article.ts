@@ -49,6 +49,7 @@ export const enhanceArticleType = (
 
 	const mainMediaElements = enhanceMainMedia(
 		format,
+		true,
 		imagesForLightbox,
 		data.main,
 	)(data.mainMediaElements);
