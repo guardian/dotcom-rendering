@@ -44,7 +44,6 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
-          onlyChanged: true
           untraced: '**/(package*.json|pnpm-lock.yaml|preview.js)'
           workingDir: dotcom-rendering
           buildScriptName: 'build-storybook'
