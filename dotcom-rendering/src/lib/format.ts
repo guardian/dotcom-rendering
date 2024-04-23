@@ -15,6 +15,9 @@ export const getThemeNameAsString = (format: ArticleFormat): string => {
 const isTheme = (theme: string | ArticleTheme): theme is ArticleTheme =>
 	!isString(theme);
 
+const isDesign = (design: string | ArticleDesign): design is ArticleDesign =>
+	!isString(design);
+
 export const getAllThemes = ({
 	display,
 	design,
@@ -25,6 +28,20 @@ export const getAllThemes = ({
 	Object.values({ ...Pillar, ...ArticleSpecial })
 		.filter(isTheme)
 		.map((theme) => ({
+			theme,
+			display,
+			design,
+		}));
+export const getAllDesigns = ({
+	display,
+	theme,
+}: {
+	display: ArticleDisplay;
+	theme: ArticleTheme;
+}): Array<ArticleFormat> =>
+	Object.values({ ...ArticleDesign })
+		.filter(isDesign)
+		.map((design) => ({
 			theme,
 			display,
 			design,
