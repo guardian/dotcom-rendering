@@ -131,7 +131,7 @@
 		"babel-plugin-polyfill-corejs3": "0.6.0",
 		"babel-plugin-transform-runtime": "6.23.0",
 		"body-parser": "1.20.1",
-		"browserslist": "4.21.9",
+		"browserslist": "4.23.0",
 		"buffer": "6.0.3",
 		"chalk": "4.1.2",
 		"clean-css": "5.3.3",
