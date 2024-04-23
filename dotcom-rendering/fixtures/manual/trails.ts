@@ -53,7 +53,8 @@ export const trails: [
 		showByline: false,
 		byline: 'Julia Kollewe',
 		image: {
-			src: 'https://media.guim.co.uk/d4124d7bb89be381cbe9d72c849fad136f843086/0_84_4974_2985/master/4974.jpg',
+			// src: 'https://media.guim.co.uk/d4124d7bb89be381cbe9d72c849fad136f843086/0_84_4974_2985/master/4974.jpg',
+			src: '/images/factory-pollution.jpeg',
 			altText: 'Pollution from a factory',
 		},
 		webPublicationDate: '2019-12-02T09:45:30.000Z',
@@ -143,7 +144,7 @@ export const trails: [
 		showByline: true,
 		byline: 'Damian Carrington Environment editor',
 		image: {
-			src: 'https://media.guim.co.uk/1774967ff6b9127a43b06c0685d1fd499c965141/98_0_3413_2048/master/3413.jpg',
+			src: '/images/factory-pollution.jpeg',
 			altText: 'Some icecaps',
 		},
 		webPublicationDate: '2019-12-02T09:45:30.000Z',
