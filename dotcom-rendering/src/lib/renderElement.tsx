@@ -149,7 +149,7 @@ export const renderElement = ({
 	forceDropCap,
 	isTimeline = false,
 	totalElements = 0,
-	isListElement,
+	isListElement = false,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
