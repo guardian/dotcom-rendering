@@ -82,6 +82,11 @@ const decorators = [
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
 		},
+		{
+			design: ArticleDesign.Interview,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
 	]),
 ];
 

@@ -1,12 +1,11 @@
-import { css, type SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay } from '@guardian/libs';
-import { headlineBold20, headlineLight34 } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { QAndAExplainer as QAndAExplainerModel } from '../types/content';
+import { Subheading } from './Subheading';
 
 interface Props {
 	qAndAExplainer: QAndAExplainerModel;
@@ -23,11 +22,6 @@ interface Props {
 	starRating?: number;
 	RenderArticleElement: ArticleElementRenderer;
 }
-
-const headingStyles = (display: ArticleDisplay): SerializedStyles => css`
-	${display === ArticleDisplay.Immersive ? headlineLight34 : headlineBold20};
-	padding: 2px 0px;
-`;
 
 const headingLineStyles = css`
 	width: 140px;
@@ -54,7 +48,9 @@ export const QAndAExplainer = ({
 	return (
 		<>
 			<hr css={headingLineStyles}></hr>
-			<h2 css={headingStyles(format.display)}>{qAndAExplainer.title}</h2>
+			<Subheading format={format} topPadding={false}>
+				{qAndAExplainer.title}
+			</Subheading>
 			{qAndAExplainer.body.map((element, index) => (
 				<RenderArticleElement
 					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
@@ -75,6 +71,7 @@ export const QAndAExplainer = ({
 					hideCaption={hideCaption}
 					starRating={starRating}
 					forceDropCap="off"
+					isListElement={true}
 				/>
 			))}
 		</>

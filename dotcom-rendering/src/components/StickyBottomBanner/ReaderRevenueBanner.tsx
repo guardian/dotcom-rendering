@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { CountryCode } from '@guardian/libs';
-import { getCookie } from '@guardian/libs';
+import type { ConsentState, CountryCode } from '@guardian/libs';
+import { getCookie, onConsent } from '@guardian/libs';
 import { getBanner } from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
@@ -51,6 +51,7 @@ type BuildPayloadProps = BaseProps & {
 	countryCode: string;
 	optedOutOfArticleCount: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
+	userConsent: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -60,7 +61,6 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
-	isInBlockSupporterRevenueMessagingTest: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -85,6 +85,11 @@ const getArticleCountToday = (
 	return undefined;
 };
 
+export const hasRequiredConsents = (): Promise<boolean> =>
+	onConsent()
+		.then(({ canTarget }: ConsentState) => canTarget)
+		.catch(() => false);
+
 const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
@@ -98,6 +103,7 @@ const buildPayload = async ({
 	sectionId,
 	tags,
 	contentType,
+	userConsent,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
@@ -136,6 +142,7 @@ const buildPayload = async ({
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
+			hasConsented: userConsent,
 		},
 	};
 };
@@ -159,20 +166,14 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	idApiUrl,
 	signInGateWillShow,
 	asyncArticleCounts,
-	isInBlockSupporterRevenueMessagingTest,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
-
-	const shouldHideBannerForTest =
-		isInBlockSupporterRevenueMessagingTest &&
-		(sectionId === 'sport' || sectionId === 'football');
 
 	if (
 		shouldHideReaderRevenue ||
 		isPaidContent ||
 		isPreview ||
-		signInGateWillShow ||
-		shouldHideBannerForTest
+		signInGateWillShow
 	) {
 		// We never serve Reader Revenue banners in this case
 		return { show: false };
@@ -202,6 +203,9 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		}
 	}
 
+	//Send user consent status to the banner API
+	const userConsent = await hasRequiredConsents();
+
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
 		isSignedIn,
@@ -219,6 +223,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		signInBannerLastClosedAt,
 		optedOutOfArticleCount,
 		asyncArticleCounts,
+		userConsent,
 	});
 
 	const response: ModuleDataResponse = await getBanner(
@@ -244,7 +249,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 export type BannerProps = {
 	meta: TestTracking;
 	module: ModuleData;
-	// eslint-disable-next-line react/no-unused-prop-types -- ESLint is wrong: it is used in ReaderRevenueBanner
+
 	fetchEmail?: () => Promise<string | null>;
 };
 

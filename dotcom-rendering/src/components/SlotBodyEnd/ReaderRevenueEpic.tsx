@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { cmp } from '@guardian/consent-management-platform';
 import type { OphanComponentEvent } from '@guardian/libs';
+import { cmp } from '@guardian/libs';
 import { getCookie, startPerformanceMeasure, storage } from '@guardian/libs';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {

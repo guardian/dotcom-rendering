@@ -5,6 +5,7 @@ import {
 	article17,
 	from,
 	palette,
+	remSpace,
 	textSans17,
 	until,
 } from '@guardian/source-foundations';
@@ -158,7 +159,7 @@ const sanitiserOptions: IOptions = {
 };
 
 const styles = (format: ArticleFormat) => css`
-	margin-bottom: 14px;
+	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17};
 	strong em,
@@ -167,18 +168,18 @@ const styles = (format: ArticleFormat) => css`
 	}
 
 	ul {
-		margin-bottom: 12px;
+		margin-bottom: ${remSpace[3]};
 	}
 
 	${from.tablet} {
 		ul {
-			margin-bottom: 16px;
+			margin-bottom: ${remSpace[4]};
 		}
 	}
 
 	li {
-		margin-bottom: 6px;
-		padding-left: 20px;
+		margin-bottom: ${remSpace[1]};
+		padding-left: ${remSpace[5]};
 		display: flow-root;
 
 		p {
@@ -190,11 +191,11 @@ const styles = (format: ArticleFormat) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: 13px;
-		width: 13px;
+		height: ${remSpace[3]};
+		width: ${remSpace[3]};
 		background-color: ${palette.neutral[86]};
-		margin-left: -20px;
-		margin-right: 7px;
+		margin-left: -${remSpace[5]};
+		margin-right: ${remSpace[2]};
 	}
 
 	/* Subscript and Superscript styles */
@@ -218,9 +219,8 @@ const styles = (format: ArticleFormat) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: 13px;
-		width: 13px;
-		margin-right: 0.2px;
+		height: ${remSpace[2]};
+		width: ${remSpace[2]};
 		background-color: ${decidePalette(format).background.bullet};
 	}
 

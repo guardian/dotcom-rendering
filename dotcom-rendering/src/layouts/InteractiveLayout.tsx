@@ -56,6 +56,7 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
+		className={interactiveLegacyClasses.contentInteractiveGrid}
 		css={css`
 			/* IE Fallback */
 			display: flex;
@@ -322,9 +323,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										.subscribe
 								}
 								editionId={article.editionId}
-								headerTopBarSwitch={
-									!!article.config.switches.headerTopNav
-								}
 							/>
 						</Section>
 

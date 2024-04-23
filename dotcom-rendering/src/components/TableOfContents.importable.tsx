@@ -20,6 +20,12 @@ const anchorStyles = css`
 	color: ${palette('--table-of-contents')};
 	text-decoration: none;
 	display: block;
+	width: 100%;
+`;
+
+const paddingStyles = css`
+	padding-bottom: ${space[4]}px;
+	padding-top: ${space[1]}px;
 `;
 
 const listItemStyles = (format: ArticleFormat) => {
@@ -29,8 +35,6 @@ const listItemStyles = (format: ArticleFormat) => {
 		${headline.xxxsmall({ fontWeight })};
 		box-sizing: border-box;
 		border-top: 1px solid ${palette('--table-of-contents-border')};
-		padding-bottom: ${space[4]}px;
-		padding-top: ${space[1]}px;
 		display: flex;
 		position: relative;
 
@@ -149,13 +153,16 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
 						{format.display === ArticleDisplay.NumberedList && (
-							<>
+							<div css={paddingStyles}>
 								<span css={indexStyle}>{index + 1}</span>
 								<div css={verticalStyle}></div>
-							</>
+							</div>
 						)}
 
-						<a href={`#${item.id}`} css={anchorStyles}>
+						<a
+							href={`#${item.id}`}
+							css={[anchorStyles, paddingStyles]}
+						>
 							{item.title}
 						</a>
 					</li>

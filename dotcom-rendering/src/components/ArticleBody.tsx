@@ -3,10 +3,8 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	between,
-	headlineBold20,
 	headlineBold24,
-	headlineLight34,
-	space,
+	remSpace,
 	textEgyptian17,
 } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
@@ -54,14 +52,6 @@ type Props = {
 	isRightToLeftLang?: boolean;
 };
 
-const globalH2Styles = (display: ArticleDisplay) => css`
-	h2:not([data-ignore='global-h2-styling']) {
-		${display === ArticleDisplay.Immersive
-			? headlineLight34
-			: headlineBold20};
-	}
-`;
-
 const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
@@ -74,7 +64,7 @@ const globalOlStyles = () => css`
 			line-height: 1.15;
 			content: counter(li);
 			counter-increment: li;
-			margin-right: ${space[1]}px;
+			margin-right: ${remSpace[1]};
 		}
 	}
 `;
@@ -84,7 +74,7 @@ const globalH3Styles = (display: ArticleDisplay) => css`
 	`
 		h3 {
 			${headlineBold24};
-			margin-bottom: ${space[2]}px;
+			margin-bottom: ${remSpace[2]};
 		}
 	`}
 `;
@@ -161,8 +151,8 @@ export const ArticleBody = ({
 				// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
 				className="js-liveblog-body"
 				css={[
+					`margin-top: ${remSpace[3]}`,
 					globalStrongStyles,
-					globalH2Styles(format.display),
 					globalH3Styles(format.display),
 					globalLinkStyles(),
 					// revealStyles is used to animate the reveal of new blocks
@@ -213,8 +203,8 @@ export const ArticleBody = ({
 			<div
 				id="maincontent"
 				css={[
+					`margin-top: ${remSpace[3]}`,
 					isInteractive ? null : bodyPadding,
-					globalH2Styles(format.display),
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,

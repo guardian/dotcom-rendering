@@ -10,7 +10,7 @@ import { TopPick } from './TopPick';
 type Props = {
 	user?: SignedInUser;
 	comments: Array<CommentType | ReplyType>;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	isClosedForRecommendations: boolean;
 };
 

@@ -5,6 +5,7 @@ import {
 	headlineLight17,
 	headlineLight20,
 	headlineLight24,
+	headlineLight34,
 	palette as srcPalette,
 	until,
 } from '@guardian/source-foundations';
@@ -31,6 +32,7 @@ type Props = {
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
+	isTimeline?: boolean;
 };
 
 const starsWrapper = css`
@@ -96,20 +98,34 @@ const moreTitlePadding = css`
 	}
 `;
 
+const immersiveTitleWrapper = css`
+	${until.desktop} {
+		${headlineLight34};
+	}
+
+	${until.phablet} {
+		${headlineLight34};
+	}
+
+	${from.desktop} {
+		${headlineLight34};
+	}
+`;
 const titleWrapper = (palette: Palette) => css`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 
 	${until.desktop} {
-		${headlineLight20}
+		${headlineLight20};
 	}
 	${until.phablet} {
-		${headlineLight17}
+		${headlineLight17};
 	}
 	${from.desktop} {
-		${headlineLight24}
+		${headlineLight24};
 	}
+
 	color: ${srcPalette.neutral[100]};
 	background: linear-gradient(transparent, ${srcPalette.neutral[0]});
 
@@ -151,7 +167,15 @@ const ImageTitle = ({
 		case 'showcase':
 		case 'immersive':
 			return (
-				<h2 css={[titleWrapper(palette), moreTitlePadding]}>{title}</h2>
+				<h2
+					css={[
+						titleWrapper(palette),
+						immersiveTitleWrapper,
+						moreTitlePadding,
+					]}
+				>
+					{title}
+				</h2>
 			);
 	}
 };
@@ -221,6 +245,7 @@ export const ImageComponent = ({
 	starRating,
 	title,
 	isAvatar,
+	isTimeline = false,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	// Its possible the tools wont send us any images urls
@@ -525,6 +550,7 @@ export const ImageComponent = ({
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={shouldLimitWidth}
 					isMainMedia={isMainMedia}
+					padCaption={role === 'showcase' && isTimeline}
 				/>
 			)}
 		</>

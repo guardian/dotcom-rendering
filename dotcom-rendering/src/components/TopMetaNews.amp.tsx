@@ -9,7 +9,6 @@ import { getAgeWarning } from '../lib/age-warning';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';
-import { AffiliateDisclaimer } from './AffiliateDisclaimer.amp';
 import { Branding, BrandingRegionContainer } from './Branding.amp';
 import { Byline } from './Byline.amp';
 import { MainMedia } from './MainMedia.amp';
@@ -101,13 +100,6 @@ export const TopMetaNews = ({
 			/>
 
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
-
-			{!!articleData.affiliateLinksDisclaimer && (
-				<AffiliateDisclaimer
-					html={articleData.affiliateLinksDisclaimer}
-					pillar={pillar}
-				/>
-			)}
 
 			<BrandingRegionContainer
 				commercialProperties={articleData.commercialProperties}

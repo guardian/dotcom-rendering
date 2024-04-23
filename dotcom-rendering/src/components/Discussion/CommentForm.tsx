@@ -169,7 +169,7 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
  * reader's comment will not be present. The same edge case exists in frontend.
  */
 const simulateNewComment = (
-	commentId: number,
+	commentId: string,
 	body: string,
 	userProfile: UserProfile,
 ): CommentType => ({
@@ -187,7 +187,7 @@ const simulateNewComment = (
 });
 
 const simulateNewReply = (
-	commentId: number,
+	commentId: string,
 	body: string,
 	userProfile: UserProfile,
 	commentBeingRepliedTo: CommentType | ReplyType,
@@ -510,7 +510,7 @@ export const CommentForm = ({
 					error={error}
 				/>
 				<div css={bottomContainer}>
-					<Row>
+					<Row wrap={true}>
 						<>
 							<PillarButton
 								type="submit"
@@ -545,7 +545,7 @@ export const CommentForm = ({
 						</>
 					</Row>
 					{isActive && (
-						<Row>
+						<Row wrap={true}>
 							<button
 								onClick={(e) => {
 									e.preventDefault();

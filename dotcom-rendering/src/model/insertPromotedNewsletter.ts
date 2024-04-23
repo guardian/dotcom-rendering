@@ -7,6 +7,7 @@ type PlaceInArticle = {
 	distanceFromTarget: number;
 	isAfterText: boolean;
 	distanceAfterFloating: number;
+	isAfterListElement: boolean;
 };
 
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 3;
@@ -88,6 +89,21 @@ const checkIfAfterText = (index: number, elements: FEElement[]): boolean =>
 	elements[index - 1]?._type ===
 	'model.dotcomrendering.pageElements.TextBlockElement';
 
+const checkIfAfterNestedListElement = (
+	index: number,
+	elements: FEElement[],
+): boolean => {
+	switch (elements[index - 1]?._type) {
+		case 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement':
+		case 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement':
+		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement':
+		case 'model.dotcomrendering.pageElements.DCRTimelineBlockElement':
+			return true;
+		default:
+			return false;
+	}
+};
+
 const getDistanceAfterFloating = (
 	index: number,
 	elements: FEElement[],
@@ -122,7 +138,7 @@ const getDistanceAfterFloating = (
 };
 
 const placeIsSuitable = (place: PlaceInArticle): boolean =>
-	place.isAfterText &&
+	(place.isAfterText || place.isAfterListElement) &&
 	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT &&
 	place.distanceFromTarget <= MAXIMUM_DISTANCE_FROM_MIDDLE;
 
@@ -154,9 +170,9 @@ const findInsertPosition = (elements: FEElement[]): number | null => {
 		position: index,
 		distanceFromTarget: Math.abs(index - targetPosition),
 		isAfterText: checkIfAfterText(index, elements),
+		isAfterListElement: checkIfAfterNestedListElement(index, elements),
 		distanceAfterFloating: getDistanceAfterFloating(index, elements),
 	}));
-
 	const suitablePlacesInOrderOfPrefence = places
 		.filter(placeIsSuitable)
 		.sort(sortPlaces);

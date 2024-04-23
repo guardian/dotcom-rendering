@@ -13,7 +13,9 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
-import { TopRightAdSlot } from './TopRightAdSlot';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { AdBlockAsk } from './AdBlockAsk.importable';
+import { Island } from './Island';
 
 type InlinePosition =
 	| 'fronts-banner'
@@ -176,15 +178,6 @@ const fluidFullWidthAdStyles = css`
 	&.ad-slot--fluid {
 		width: 100%;
 	}
-`;
-
-const topAboveNavStyles = css`
-	position: relative;
-	margin: 0 auto;
-	min-height: ${adSizes.leaderboard.height}px;
-	min-width: ${adSizes.leaderboard.width}px;
-	text-align: left;
-	display: block;
 `;
 
 const merchandisingAdContainerStyles = css`
@@ -462,11 +455,53 @@ export const AdSlot = ({
 					);
 				}
 				case ArticleDisplay.Standard: {
+					const slotId = 'dfp-ad--right';
 					return (
-						<TopRightAdSlot
-							isPaidContent={isPaidContent}
-							adStyles={[labelStyles]}
-						/>
+						<>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<AdBlockAsk size="mpu" slotId={slotId} />
+							</Island>
+							<div
+								id="top-right-ad-slot"
+								className="ad-slot-container"
+								css={[
+									css`
+										position: static;
+										height: 100%;
+										max-height: 100%;
+									`,
+									labelStyles,
+								]}
+							>
+								<div
+									id={slotId}
+									className={[
+										'js-ad-slot',
+										'ad-slot',
+										'ad-slot--right',
+										'ad-slot--mpu-banner-ad',
+										'ad-slot--rendered',
+										'js-sticky-mpu',
+									].join(' ')}
+									css={[
+										css`
+											position: sticky;
+											/* Possibly account for the sticky Labs header and 6px of padding */
+											top: ${isPaidContent
+												? LABS_HEADER_HEIGHT + 6
+												: 0}px;
+										`,
+										labelStyles,
+									]}
+									data-link-name="ad slot right"
+									data-name="right"
+									aria-hidden="true"
+								/>
+							</div>
+						</>
 					);
 				}
 				default:
@@ -503,11 +538,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[
-						fluidAdStyles,
-						fluidFullWidthAdStyles,
-						topAboveNavStyles,
-					]}
+					css={[fluidAdStyles, fluidFullWidthAdStyles]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
 					aria-hidden="true"

@@ -5,11 +5,8 @@ import {
 	palette as sourcePalette,
 	textSans17,
 } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { LinkType } from '../../../model/extract-nav';
-import FacebookIcon from '../../../static/icons/facebook.svg';
-import TwitterIconPadded from '../../../static/icons/twitter-padded.svg';
 
 const pillarHeight = 42;
 
@@ -173,15 +170,6 @@ const mainMenuLinkStyle = css`
 	}
 `;
 
-const shareIconStyles = css`
-	fill: currentColor;
-	height: 28px;
-	left: 18px;
-	position: absolute;
-	top: 5px;
-	width: 28px;
-`;
-
 type Props = {
 	otherLinks: LinkType[];
 	brandExtensions: LinkType[];
@@ -243,59 +231,6 @@ export const MoreColumn = ({
 					))}
 				</ul>
 			</li>
-			{/** Social buttons hidden from menus from desktop */}
-			<Hide from="desktop">
-				<li
-					css={[columnStyle, !hasPageSkin && columnStyleFromLeftCol]}
-					role="none"
-				>
-					<ul css={[columnLinks]} role="menu">
-						<li
-							key="facebook"
-							css={[mainMenuLinkStyle, hideDesktop]}
-							role="none"
-						>
-							<a
-								className="selectableMenuItem"
-								css={columnLinkTitle}
-								data-link-name={nestedOphanComponents(
-									'nav2',
-									'secondary',
-									'facebook',
-								)}
-								href="https://www.facebook.com/theguardian"
-								role="menuitem"
-								tabIndex={-1}
-							>
-								<FacebookIcon css={shareIconStyles} />
-								Facebook
-							</a>
-						</li>
-
-						<li
-							key="twitter"
-							css={[mainMenuLinkStyle, hideDesktop]}
-							role="none"
-						>
-							<a
-								className="selectableMenuItem"
-								css={columnLinkTitle}
-								data-link-name={nestedOphanComponents(
-									'nav2',
-									'secondary',
-									'twitter',
-								)}
-								href="https://twitter.com/guardian"
-								role="menuitem"
-								tabIndex={-1}
-							>
-								<TwitterIconPadded css={shareIconStyles} />
-								Twitter
-							</a>
-						</li>
-					</ul>
-				</li>
-			</Hide>
 		</>
 	);
 };

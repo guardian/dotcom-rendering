@@ -47,6 +47,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			data.pageId,
 		),
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
+		canonicalUrl: data.canonicalUrl,
 	};
 };
 
@@ -105,6 +106,7 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 			image: data.tags.tags[0]?.properties.bylineImageUrl,
 		},
 		branding: tagPageBranding,
+		canonicalUrl: data.canonicalUrl,
 	};
 };
 

@@ -1,6 +1,9 @@
 import type { Page, Request } from '@playwright/test';
 
-export const interceptOphanRequest = ({
+const IMPRESSION_REQUEST_PATH = 'img/1';
+const ADDITIONAL_REQUEST_PATH = 'img/2';
+
+const interceptOphanRequest = ({
 	page,
 	path,
 	searchParamMatcher,
@@ -16,4 +19,10 @@ export const interceptOphanRequest = ({
 		const searchParams = new URLSearchParams(request.url());
 		return matchUrl && searchParamMatcher(searchParams);
 	});
+};
+
+export {
+	IMPRESSION_REQUEST_PATH,
+	ADDITIONAL_REQUEST_PATH,
+	interceptOphanRequest,
 };

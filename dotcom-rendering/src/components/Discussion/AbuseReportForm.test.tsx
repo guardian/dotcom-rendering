@@ -13,7 +13,7 @@ describe('Dropdown', () => {
 		const { getByLabelText } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				commentId={123}
+				commentId="123"
 				reportAbuse={() => Promise.resolve(ok(true))}
 			/>,
 		);
@@ -27,7 +27,7 @@ describe('Dropdown', () => {
 		const { getByText } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				commentId={123}
+				commentId="123"
 				reportAbuse={() => Promise.resolve(ok(true))}
 			/>,
 		);
@@ -43,7 +43,7 @@ describe('Dropdown', () => {
 		const { getByText, getByLabelText, getByRole } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				commentId={123}
+				commentId="123"
 				reportAbuse={reportAbuse(undefined)}
 			/>,
 		);

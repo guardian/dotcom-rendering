@@ -333,10 +333,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													.header.subscribe
 											}
 											editionId={article.editionId}
-											headerTopBarSwitch={
-												!!article.config.switches
-													.headerTopNav
-											}
 										/>
 									</Section>
 
@@ -446,10 +442,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													.header.subscribe
 											}
 											editionId={article.editionId}
-											headerTopBarSwitch={
-												!!article.config.switches
-													.headerTopNav
-											}
 										/>
 									</Section>
 								</Stuck>

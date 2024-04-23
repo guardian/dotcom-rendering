@@ -1,5 +1,5 @@
+import { isOneOf } from '@guardian/libs';
 import type { EditionLinkType } from '../model/extract-nav';
-import { guard } from './guard';
 
 export type EditionId = (typeof editionList)[number]['editionId'];
 
@@ -66,4 +66,6 @@ export const getRemainingEditions = (
  *
  * @param s The string to test
  */
-export const isEditionId = guard(editionList.map(({ editionId }) => editionId));
+export const isEditionId = isOneOf(
+	editionList.map(({ editionId }) => editionId),
+);

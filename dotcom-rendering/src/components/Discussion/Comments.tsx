@@ -28,13 +28,13 @@ type Props = {
 	baseUrl: string;
 	isClosedForComments: boolean;
 	isClosedForRecommendations: boolean;
-	commentToScrollTo?: number;
+	commentToScrollTo?: string;
 	user?: SignedInUser;
 	additionalHeaders: AdditionalHeadersType;
 	expanded: boolean;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	apiKey: string;
-	onRecommend?: (commentId: number) => Promise<boolean>;
+	onRecommend?: (commentId: string) => Promise<boolean>;
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
@@ -211,7 +211,7 @@ export const Comments = ({
 			type: 'setBottomFormPreviewBody',
 			previewBody,
 		});
-	const expandCommentReplies = (commentId: number, responses: ReplyType[]) =>
+	const expandCommentReplies = (commentId: string, responses: ReplyType[]) =>
 		dispatch({
 			type: 'expandCommentReplies',
 			commentId,

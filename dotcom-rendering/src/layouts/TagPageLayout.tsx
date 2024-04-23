@@ -129,7 +129,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								tagPage.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={tagPage.editionId}
-							headerTopBarSwitch={!!switches.headerTopNav}
 						/>
 					</Section>
 					{NAV.subNavSections && (

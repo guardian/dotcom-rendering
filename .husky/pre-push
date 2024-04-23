@@ -9,4 +9,5 @@ then
 	exit 1
 fi
 
-pnpm --filter @guardian/dotcom-rendering tsc
+cd ./$(dirname "$0")/../dotcom-rendering
+make tsc

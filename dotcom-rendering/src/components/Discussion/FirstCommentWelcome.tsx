@@ -7,6 +7,7 @@ import {
 import { Link, TextInput } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { palette as schemedPalette } from '../../palette';
+import { useConfig } from '../ConfigContext';
 import { PillarButton } from './PillarButton';
 import { Preview } from './Preview';
 import { Row } from './Row';
@@ -35,6 +36,10 @@ const textInputStyles = css`
 	color: inherit;
 `;
 
+const h3Style = css`
+	${headlineBold20};
+`;
+
 type Props = {
 	error?: string;
 	submitForm: (userName: string) => Promise<void>;
@@ -48,7 +53,27 @@ export const FirstCommentWelcome = ({
 	cancelSubmit,
 	previewBody,
 }: Props) => {
+	const { renderingTarget } = useConfig();
 	const [userName, setUserName] = useState<string>('');
+
+	if (renderingTarget === 'Apps') {
+		return (
+			<div
+				css={css`
+					padding: ${space[2]}px;
+				`}
+			>
+				<h3 css={h3Style}>
+					Welcome, you’re about to make your first comment!
+				</h3>
+
+				<Text>
+					Before you can post, you need to choose a username. Please
+					do this in your profile settings.
+				</Text>
+			</div>
+		);
+	}
 
 	return (
 		<div
@@ -62,11 +87,7 @@ export const FirstCommentWelcome = ({
 					void submitForm(userName);
 				}}
 			>
-				<h3
-					css={css`
-						${headlineBold20};
-					`}
-				>
+				<h3 css={h3Style}>
 					Welcome, you’re about to make your first comment!
 				</h3>
 				<Text>

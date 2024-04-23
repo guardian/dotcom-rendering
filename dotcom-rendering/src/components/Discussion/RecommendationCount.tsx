@@ -8,7 +8,7 @@ import { palette as themePalette } from '../../palette';
 import { Row } from './Row';
 
 type Props = {
-	commentId: number;
+	commentId: string;
 	initialCount: number;
 	alreadyRecommended: boolean;
 	user?: SignedInUser;

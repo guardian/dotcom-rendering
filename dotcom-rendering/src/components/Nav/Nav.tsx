@@ -18,7 +18,6 @@ type Props = {
 	displayRoundel?: boolean;
 	isImmersive?: boolean;
 	selectedPillar?: Pillar;
-	headerTopBarSwitch: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -61,7 +60,6 @@ export const Nav = ({
 	displayRoundel,
 	isImmersive,
 	selectedPillar,
-	headerTopBarSwitch,
 	hasPageSkin,
 }: Props) => {
 	return (
@@ -215,7 +213,6 @@ export const Nav = ({
 					editionId={editionId}
 					nav={nav}
 					isImmersive={isImmersive}
-					headerTopBarSwitch={headerTopBarSwitch}
 					hasPageSkin={hasPageSkin}
 				/>
 			</div>
