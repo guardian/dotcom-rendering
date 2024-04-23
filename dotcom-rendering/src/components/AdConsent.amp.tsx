@@ -22,7 +22,7 @@ const clientConfig = {
 	pmTab: 'purposes',
 	stageCampaign: false,
 	privacyManagerId: 145885,
-	initialHeight: 80,
+	initialHeight: 60,
 	isTCFV2: true,
 	propertyHref: 'https://theguardian.amp',
 	targetingParams: {
@@ -134,11 +134,9 @@ export const AdConsent = () => {
 			<amp-consent
 				layout="nodisplay"
 				id="consent"
+				class="i-amphtml-consent-ui-iframe-fullscreen"
 				style={{
 					background: 'none',
-					width: '100% !important',
-					marginBottom: '0 !important',
-					maxWidth: '100%',
 				}}
 			>
 				<JsonScript
