@@ -83,6 +83,7 @@ export const KeyTakeaway = ({
 						hideCaption={hideCaption}
 						starRating={starRating}
 						forceDropCap="off"
+						isListElement={true}
 					/>
 				))}
 			</li>
