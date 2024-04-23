@@ -627,7 +627,13 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-			return <SubheadingBlockComponent key={index} html={element.html} />;
+			return (
+				<SubheadingBlockComponent
+					key={index}
+					format={format}
+					html={element.html}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.TableBlockElement':
 			return <TableBlockComponent element={element} />;
 
