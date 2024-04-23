@@ -10,6 +10,7 @@ import type {
 	FEElement,
 } from '../types/content';
 import { Heading } from './Heading';
+import { Subheading } from './Subheading';
 
 // ----- Helpers ----- //
 
@@ -213,11 +214,6 @@ const TimelineEvent = ({
 
 // ----- Timeline ----- //
 
-const sectionTitleStyles = css`
-	${headline.xsmall({ fontWeight: 'medium' })}
-	margin: ${space[8]}px 0 ${space[4]}px;
-`;
-
 type Props = {
 	timeline: DCRTimelineBlockElement | DCRSectionedTimelineBlockElement;
 	ArticleElementComponent: NestedArticleElement;
@@ -257,7 +253,9 @@ export const Timeline = ({
 				<>
 					{timeline.sections.map((section) => (
 						<section key={section.title}>
-							<h2 css={sectionTitleStyles}>{section.title}</h2>
+							<Subheading format={format} topPadding={false}>
+								{section.title}
+							</Subheading>
 							{section.events.map((event) => (
 								<TimelineEvent
 									event={event}
