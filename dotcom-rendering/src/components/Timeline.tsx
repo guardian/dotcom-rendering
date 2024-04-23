@@ -205,6 +205,7 @@ const TimelineEvent = ({
 					element={element}
 					forceDropCap="off"
 					format={format}
+					isTimeline={true}
 				/>
 			))}
 		</section>
