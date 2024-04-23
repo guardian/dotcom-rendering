@@ -67,6 +67,7 @@ type Props = {
 
 	discussionApiUrl: string;
 
+	/** We use a different link on the logo for US and AUS labs */
 	editionId: EditionId;
 };
 
@@ -195,6 +196,17 @@ const paidForByStyles = (textColour?: string) => css`
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
 `;
+
+const getLabsUrlSuffix = (editionId: EditionId) => {
+	switch (editionId) {
+		case 'AU':
+			return '-australia';
+		case 'US':
+			return '-us';
+		default:
+			return '';
+	}
+};
 
 const GuardianLabsTitle = ({
 	title,
@@ -429,7 +441,9 @@ export const LabsSection = ({
 					</div>
 
 					<Link
-						href="https://www.theguardian.com/guardian-labs"
+						href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+							editionId,
+						)}`}
 						cssOverrides={css`
 							text-align: right;
 						`}
