@@ -437,7 +437,7 @@ export const ImageComponent = ({
 				)}
 
 				{isTimeline && isMainMedia && role === 'showcase' && (
-					<span css={timelineBulletStyles} />
+					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
@@ -504,7 +504,7 @@ export const ImageComponent = ({
 					/>
 				)}
 				{isTimeline && isMainMedia && role === 'showcase' && (
-					<span css={timelineBulletStyles} />
+					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
 
 				{isMainMedia && (
