@@ -139,8 +139,7 @@ export const CardPicture = ({
 				src={fallbackSource.lowResUrl}
 				css={block}
 				loading={loading}
-				// Chromatic inconsistenly loads the image for lazy-loaded images
-				data-chromatic={loading === 'lazy' ? 'ignore' : undefined}
+				data-chromatic="ignore"
 			/>
 		</picture>
 	);
