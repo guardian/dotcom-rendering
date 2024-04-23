@@ -39,7 +39,7 @@ export const MultipleFormats = {
 		formats: defaultFormats,
 		chromatic: {
 			modes: {
-				horizontal: allModes.sideBySideHorizontal,
+				horizontal: allModes.splitHorizontal,
 			},
 		},
 	},

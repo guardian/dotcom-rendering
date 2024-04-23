@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
+import { isOneOf } from '@guardian/libs';
 import React from 'react';
-import { guard } from '../lib/guard';
 import type { Switches } from '../types/config';
 
 const AB_TEST_GROUPS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;
@@ -9,7 +9,7 @@ const NUM_GROUPS = AB_TEST_GROUPS.length;
 
 type ContentABTestGroup = (typeof AB_TEST_GROUPS)[number];
 
-const isContentABTestGroup = guard(AB_TEST_GROUPS);
+const isContentABTestGroup = isOneOf(AB_TEST_GROUPS);
 
 interface ContentABTestContext {
 	group?: ContentABTestGroup;

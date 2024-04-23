@@ -323,9 +323,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										.subscribe
 								}
 								editionId={article.editionId}
-								headerTopBarSwitch={
-									!!article.config.switches.headerTopNav
-								}
 							/>
 						</Section>
 
