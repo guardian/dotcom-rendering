@@ -77,7 +77,7 @@ const headerStyles = css`
 const miniHeadlineOverrideStyles = (fontArgs: FontScaleArgs) => css`
 	${headline.xxxsmall(
 		fontArgs,
-	)}/** TODO (1) - Unknown argument please manually update */;
+	)} /** TODO (1) - Unknown argument please manually update */
 	font-size: 0.875rem;
 `;
 
@@ -91,9 +91,9 @@ const titleStyles = (parentIsBlog: boolean) => css`
 	${from.wide} {
 		${headlineMedium20};
 		/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+		 * @TODO (2) Typography preset styles should not be overridden.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
 		font-weight: 400;
 		padding-bottom: 5px;
 	}

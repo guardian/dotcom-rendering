@@ -31,9 +31,9 @@ const svgStyle = (iconSize: 'normal' | 'small') => css`
 const spanStyle = css`
 	${textSansBold14};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 `;
 

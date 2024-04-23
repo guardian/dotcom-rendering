@@ -6,9 +6,9 @@
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import {
+	articleBoldItalic15,
+	articleBoldItalic17,
 	from,
-	textEgyptianBoldItalic15,
-	textEgyptianBoldItalic17,
 	textSans12,
 	textSans14,
 	textSans15,
@@ -312,20 +312,10 @@ const topContainer = css`
 `;
 
 const articleCountAboveContainerStyles = css`
-	${textEgyptianBoldItalic15};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${articleBoldItalic15};
 
 	${from.tablet} {
-		${textEgyptianBoldItalic17};
-		/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-		line-height: 1.4;
+		${articleBoldItalic17};
 	}
 `;
 

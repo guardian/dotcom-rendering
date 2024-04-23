@@ -60,9 +60,9 @@ const Body = ({ html }: { html: string }) => (
 		css={css`
 			${textSans15};
 			/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+			 * @TODO (2) Typography preset styles should not be overridden.
+			 * Please speak to your team's designer and update this to use a more appropriate preset.
+			 */
 			font-weight: 300;
 			line-height: 1.15;
 		`}

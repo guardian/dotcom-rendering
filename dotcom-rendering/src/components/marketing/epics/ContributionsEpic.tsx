@@ -6,8 +6,8 @@
 import { css } from '@emotion/react';
 import {
 	article17,
+	articleBold17,
 	headlineBold20,
-	textEgyptianBold17,
 } from '@guardian/source-foundations';
 import { palette, space } from '@guardian/source-foundations';
 import { from } from '@guardian/source-foundations';
@@ -89,12 +89,7 @@ const bodyStyles = css`
 `;
 
 const highlightWrapperStyles = css`
-	${textEgyptianBold17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${articleBold17};
 	${linkStyles};
 `;
 

@@ -21,9 +21,9 @@ const hideDesktop = css`
 const columnLinkTitle = css`
 	${textSans17};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 	background-color: transparent;
 	text-decoration: none;

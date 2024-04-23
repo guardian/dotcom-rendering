@@ -21,9 +21,9 @@ const fontCss = (role: string, format: ArticleFormat) => {
 		return css`
 			${textSans20};
 			/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+			 * @TODO (2) Typography preset styles should not be overridden.
+			 * Please speak to your team's designer and update this to use a more appropriate preset.
+			 */
 			font-weight: 500;
 		`;
 	}
@@ -55,16 +55,16 @@ const fontCss = (role: string, format: ArticleFormat) => {
 					return css`
 						${headlineMedium24};
 						/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+						 * @TODO (2) Typography preset styles should not be overridden.
+						 * Please speak to your team's designer and update this to use a more appropriate preset.
+						 */
 						font-weight: 400;
 						${from.tablet} {
 							${headlineMedium28};
 							/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+							 * @TODO (2) Typography preset styles should not be overridden.
+							 * Please speak to your team's designer and update this to use a more appropriate preset.
+							 */
 							font-weight: 400;
 						}
 					`;
@@ -92,9 +92,9 @@ const fontCss = (role: string, format: ArticleFormat) => {
 					return css`
 						${headlineMedium20};
 						/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+						 * @TODO (2) Typography preset styles should not be overridden.
+						 * Please speak to your team's designer and update this to use a more appropriate preset.
+						 */
 						font-weight: 400;
 					`;
 			}
@@ -125,16 +125,16 @@ const fontCss = (role: string, format: ArticleFormat) => {
 					return css`
 						${headlineMedium20};
 						/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+						 * @TODO (2) Typography preset styles should not be overridden.
+						 * Please speak to your team's designer and update this to use a more appropriate preset.
+						 */
 						font-weight: 400;
 						${from.tablet} {
 							${headlineMedium24};
 							/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+							 * @TODO (2) Typography preset styles should not be overridden.
+							 * Please speak to your team's designer and update this to use a more appropriate preset.
+							 */
 							font-weight: 400;
 						}
 					`;

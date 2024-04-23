@@ -130,9 +130,9 @@ const secondaryFontStyles = (format: ArticleFormat) => {
 	return css`
 		${headlineMedium17};
 		/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+		 * @TODO (2) Typography preset styles should not be overridden.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
 		font-weight: 400;
 	`;
 };

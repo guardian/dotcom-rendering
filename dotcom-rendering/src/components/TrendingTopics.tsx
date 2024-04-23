@@ -15,9 +15,9 @@ const linkStyle = css`
 	display: inline-block;
 	${textSans14};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.4;
 	text-decoration: none;
 	top: 0;

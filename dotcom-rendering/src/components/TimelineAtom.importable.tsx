@@ -25,9 +25,9 @@ const Snippet = css`
 const EventTitle = css`
 	${textEgyptianBold17};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 `;
 
@@ -51,9 +51,9 @@ const EventDate = css`
 	color: ${schemedPalette('--timeline-atom-highlight-text')};
 	${textEgyptianBold17};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 `;
 
@@ -62,9 +62,9 @@ const EventToDate = css`
 	color: ${schemedPalette('--timeline-atom-highlight-text')};
 	${textEgyptianBold17};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 `;
 

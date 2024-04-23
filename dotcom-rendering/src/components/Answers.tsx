@@ -34,9 +34,8 @@ export const radioButtonWrapperStyles = (theme: ArticleTheme) => css`
 	}
 `;
 
-const fontStyles = (theme: ArticleTheme) => `
-	${theme === ArticleSpecial.Labs ? textSans17 : article17}
-`;
+const fontStyles = (theme: ArticleTheme) =>
+	theme === ArticleSpecial.Labs ? textSans17 : article17;
 
 const answerWithSVGStyles = css`
 	margin-bottom: ${space[2]}px;

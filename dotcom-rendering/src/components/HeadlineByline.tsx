@@ -30,7 +30,6 @@ const interviewBylineBoxStyles = (format: ArticleFormat) => css`
 		? textSansItalic20
 		: headlineMediumItalic20}
 	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
-	font-style: italic;
 	background-color: ${schemedPalette('--byline-background')};
 	box-shadow:
 		4px 0 0 ${schemedPalette('--byline-background')},

@@ -101,9 +101,9 @@ const textStyles = css`
 const timeStyles = css`
 	${textSansBold14};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 	color: ${palette('--key-event-title')};
 	display: block;

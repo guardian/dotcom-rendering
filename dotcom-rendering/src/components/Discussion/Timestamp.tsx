@@ -23,9 +23,9 @@ const linkStyles = css`
 const timeStyles = css`
 	${textSans12};
 	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	font-weight: 300;
 	min-width: 0.75rem;
 	margin-right: 0.3125rem;

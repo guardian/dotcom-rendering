@@ -5,9 +5,9 @@
  */
 import { css } from '@emotion/react';
 import {
+	articleBold17,
+	articleItalic17,
 	palette,
-	textEgyptianBold17,
-	textEgyptianItalic17,
 } from '@guardian/source-foundations';
 import type { BylineWithImage } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -40,22 +40,12 @@ const bylineImageContainer = css`
 `;
 
 const bylineName = css`
-	${textEgyptianBold17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${articleBold17};
 	margin: 0;
 `;
 
 const bylineDescription = css`
-	${textEgyptianItalic17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	line-height: 1.4;
+	${articleItalic17};
 	margin: 0;
 `;
 
