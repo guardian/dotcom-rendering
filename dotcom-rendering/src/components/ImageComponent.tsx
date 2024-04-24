@@ -276,7 +276,7 @@ export const ImageComponent = ({
 	}
 
 	const shouldLimitWidth =
-		!isMainMedia &&
+		(!isMainMedia || isTimeline) &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
 	const isNotOpinion =
 		format.design !== ArticleDesign.Comment &&
