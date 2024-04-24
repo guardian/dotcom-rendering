@@ -33,7 +33,7 @@ describe('decidePublicPath', () => {
 
 	it('with development flag', () => {
 		process.env.NODE_ENV = 'development';
-		expect(decidePublicPath()).toEqual('/assets/');
+		expect(decidePublicPath()).toEqual('http://localhost:3030/assets/');
 	});
 
 	it('with production flag', () => {
@@ -44,7 +44,7 @@ describe('decidePublicPath', () => {
 	it('with production flag and localhost', () => {
 		process.env.NODE_ENV = 'production';
 		mockHostname('localhost');
-		expect(decidePublicPath()).toEqual('/assets/');
+		expect(decidePublicPath()).toEqual('http://localhost:3030/assets/');
 	});
 
 	it('with no flag', () => {

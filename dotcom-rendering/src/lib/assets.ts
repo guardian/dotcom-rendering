@@ -21,8 +21,14 @@ export const decideAssetOrigin = (stage: string | undefined): string => {
 			return 'https://assets.guim.co.uk/';
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
+		case 'DEV':
+			return 'http://localhost:3030/';
 		default:
-			return '/';
+			if (isDev) {
+				return 'http://localhost:3030/';
+			} else {
+				return '/';
+			}
 	}
 };
 

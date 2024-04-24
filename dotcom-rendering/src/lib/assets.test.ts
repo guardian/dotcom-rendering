@@ -27,8 +27,8 @@ describe('decideAssetOrigin for stage', () => {
 		);
 	});
 	it('DEV', () => {
-		expect(decideAssetOrigin('DEV')).toEqual('/');
-		expect(decideAssetOrigin('dev')).toEqual('/');
+		expect(decideAssetOrigin('DEV')).toEqual('http://localhost:3030/');
+		expect(decideAssetOrigin('dev')).toEqual('http://localhost:3030/');
 		expect(decideAssetOrigin(undefined)).toEqual('/');
 	});
 });
