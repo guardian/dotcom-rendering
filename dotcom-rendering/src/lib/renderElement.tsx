@@ -939,8 +939,9 @@ type ElementLevelPropNames =
 	| 'format'
 	| 'isTimeline'
 	| 'isListElement';
+type CommonPropNames = 'isMainMedia';
 type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
-type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
+type ElementLevelProps = Pick<Props, ElementLevelPropNames | CommonPropNames>;
 
 export const getNestedArticleElement =
 	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (

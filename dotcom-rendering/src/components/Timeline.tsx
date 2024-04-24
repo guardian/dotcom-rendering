@@ -112,6 +112,7 @@ const EventHeader = ({
 					element={event.main}
 					format={format}
 					isTimeline={true}
+					isMainMedia={true}
 				/>
 				{heading}
 			</header>
@@ -125,6 +126,7 @@ const EventHeader = ({
 					element={event.main}
 					format={format}
 					isTimeline={true}
+					isMainMedia={true}
 				/>
 			</header>
 		);
@@ -215,6 +217,7 @@ const TimelineEvent = ({
 					forceDropCap="off"
 					format={format}
 					isTimeline={true}
+					isMainMedia={false}
 				/>
 			))}
 		</section>
