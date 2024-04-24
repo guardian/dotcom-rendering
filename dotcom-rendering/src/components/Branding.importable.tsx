@@ -7,7 +7,20 @@ import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import { useConfig } from './ConfigContext';
 
+const brandingInteractiveStyle = css`{
+	margin: 5px 0 25px;
+	padding: 6px;
+	border: 1px solid ${palette('--branding-border')};
+	width: fit-content;
+
+	${from.desktop} {
+		padding: 9px;
+		width: 220px;
+	}
+}`;
+
 const brandingStyle = css`
+	margin: 5px 0 25px;
 	padding: 6px;
 	border: 1px solid ${palette('--branding-border')};
 	width: fit-content;
@@ -22,7 +35,7 @@ const brandingStyle = css`
 	}
 	${from.wide} {
 		padding: 9px;
-		width: auto;
+		width: 219px;
 	}
 `;
 
@@ -168,6 +181,8 @@ type Props = {
 export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+	const isInteractive = format.design === ArticleDesign.Interactive;
+
 	const { ophanComponentName, ophanComponentLink } = getOphanComponents({
 		branding,
 		locationPrefix: 'article-meta',
@@ -176,7 +191,7 @@ export const Branding = ({ branding, format }: Props) => {
 	const { darkModeAvailable } = useConfig();
 
 	return (
-		<div css={brandingStyle}>
+		<div css={[brandingStyle, isInteractive && brandingInteractiveStyle]}>
 			<div css={[labelStyle, isLiveBlog && liveBlogLabelStyle]}>
 				{branding.logo.label}
 			</div>

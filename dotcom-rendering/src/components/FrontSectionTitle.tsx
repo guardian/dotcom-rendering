@@ -1,7 +1,13 @@
 import { css } from '@emotion/react';
-import { from, palette, textSans12, until } from '@guardian/source-foundations';
+import {
+	from,
+	palette as sourcePalette,
+	textSans12,
+	until,
+} from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
+import { palette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import { Badge } from './Badge';
 
@@ -16,22 +22,45 @@ const titleStyle = css`
 	}
 `;
 
+const borderStyling = css`
+	border: 1px dotted ${sourcePalette.neutral[86]};
+	margin-top: 0.375rem;
+`;
+
+const brandingStyle = css`
+	margin-top: 5px;
+	padding: 6px;
+	border: 1px solid ${palette('--branding-border')};
+	width: fit-content;
+
+	${from.desktop} {
+		padding: 9px;
+		width: 220px;
+	}
+	${from.leftCol} {
+		padding: 5px;
+		width: fit-content;
+	}
+	${from.wide} {
+		padding: 9px;
+		width: auto;
+	}
+`;
+
 const labelStyles = css`
 	${textSans12};
 	line-height: 1rem;
-	color: ${palette.neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	font-weight: bold;
-	margin-top: 0.375rem;
 	padding-right: 0.625rem;
 	padding-bottom: 0.625rem;
 	text-align: left;
-	border-top: 1px dotted ${palette.neutral[86]};
 `;
 
 const aboutThisLinkStyles = css`
 	${textSans12};
 	line-height: 11px;
-	color: ${palette.neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	font-weight: normal;
 	text-decoration: none;
 `;
@@ -76,9 +105,10 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 						<div
 							css={css`
 								display: inline-block;
-								border-top: 1px dotted ${palette.neutral[86]};
+								border-top: 1px dotted
+									${sourcePalette.neutral[86]};
 								${textSans12}
-								color: ${palette.neutral[46]};
+								color: ${sourcePalette.neutral[46]};
 								font-weight: bold;
 
 								${from.leftCol} {
@@ -117,13 +147,14 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 				return (
 					<div css={titleStyle}>
 						{title}
-						<>
+						<div css={borderStyling}></div>
+						<div css={brandingStyle}>
 							<p css={labelStyles}>{logo.label}</p>
 							<Badge imageSrc={logo.src} href={logo.link} />
 							<a href={aboutThisLink} css={aboutThisLinkStyles}>
 								About this content
 							</a>
-						</>
+						</div>
 					</div>
 				);
 			}
