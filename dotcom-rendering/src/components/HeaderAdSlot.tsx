@@ -56,7 +56,13 @@ const topAboveNavStyles = css`
 	display: block;
 `;
 
-export const HeaderAdSlot = () => (
+export const HeaderAdSlot = ({
+	shouldHideReaderRevenue,
+	isPaidContent,
+}: {
+	shouldHideReaderRevenue: boolean;
+	isPaidContent: boolean;
+}) => (
 	<div css={headerWrapper}>
 		<Global
 			styles={css`
@@ -78,6 +84,8 @@ export const HeaderAdSlot = () => (
 						<AdBlockAsk
 							size="leaderboard"
 							slotId="dfp-ad--top-above-nav"
+							shouldHideReaderRevenue={shouldHideReaderRevenue}
+							isPaidContent={isPaidContent}
 						/>
 					</Island>
 					<div

@@ -74,8 +74,9 @@ export const getPathFromManifest = (
 	build: Build,
 	filename: `${string}.js`,
 ): string => {
-	if (!filename.endsWith('.js'))
+	if (!filename.endsWith('.js')) {
 		throw new Error('Invalid filename: extension must be .js');
+	}
 
 	if (isDev) {
 		return `${ASSET_ORIGIN}assets/${filename.replace(

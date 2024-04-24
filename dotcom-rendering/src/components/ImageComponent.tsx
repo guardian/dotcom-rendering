@@ -32,6 +32,34 @@ type Props = {
 	isTimeline?: boolean;
 };
 
+const timelineBulletStyles = css`
+	position: relative;
+	::before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 12px;
+		height: 12px;
+		border: 1px solid ${themePalette('--timeline-event-border')};
+		border-radius: 100%;
+		background-color: ${themePalette('--timeline-bullet')};
+		top: -6px;
+		left: -6.5px;
+
+		${from.mobileLandscape} {
+			left: 3.5px;
+		}
+
+		${from.leftCol} {
+			left: 143.5px;
+		}
+
+		${from.wide} {
+			left: 223.5px;
+		}
+	}
+`;
+
 const starsWrapper = css`
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
@@ -95,20 +123,34 @@ const moreTitlePadding = css`
 	}
 `;
 
+const immersiveTitleWrapper = css`
+	${until.desktop} {
+		${headline.medium({ fontWeight: 'light' })}
+	}
+
+	${until.phablet} {
+		${headline.medium({ fontWeight: 'light' })}
+	}
+
+	${from.desktop} {
+		${headline.medium({ fontWeight: 'light' })}
+	}
+`;
 const titleWrapper = (palette: Palette) => css`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 
 	${until.desktop} {
-		${headline.xxsmall({ fontWeight: 'light' })}
+		${headline.xxsmall({ fontWeight: 'light' })};
 	}
 	${until.phablet} {
-		${headline.xxxsmall({ fontWeight: 'light' })}
+		${headline.xxxsmall({ fontWeight: 'light' })};
 	}
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: 'light' })}
+		${headline.xsmall({ fontWeight: 'light' })};
 	}
+
 	color: ${srcPalette.neutral[100]};
 	background: linear-gradient(transparent, ${srcPalette.neutral[0]});
 
@@ -150,7 +192,15 @@ const ImageTitle = ({
 		case 'showcase':
 		case 'immersive':
 			return (
-				<h2 css={[titleWrapper(palette), moreTitlePadding]}>{title}</h2>
+				<h2
+					css={[
+						titleWrapper(palette),
+						immersiveTitleWrapper,
+						moreTitlePadding,
+					]}
+				>
+					{title}
+				</h2>
 			);
 	}
 };
@@ -386,6 +436,9 @@ export const ImageComponent = ({
 					/>
 				)}
 
+				{isTimeline && isMainMedia && role === 'showcase' && (
+					<div css={timelineBulletStyles} aria-hidden="true" />
+				)}
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
@@ -449,6 +502,9 @@ export const ImageComponent = ({
 						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
+				)}
+				{isTimeline && isMainMedia && role === 'showcase' && (
+					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
 
 				{isMainMedia && (

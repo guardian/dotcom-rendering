@@ -100,7 +100,7 @@ export const FlatWithNoTitles = {
 						displayCredit: true,
 						data: { ...images[1].data, caption: 'Inline image' },
 					},
-					body: [testTextElement, images[0], testTextElement],
+					body: [testTextElement, images[1], testTextElement],
 				},
 				{
 					date: '5th January 2024',
@@ -115,18 +115,6 @@ export const FlatWithNoTitles = {
 					date: '19th January 2024',
 					main: testYoutubeElement,
 					body: [testTextElement, testTextElement],
-				},
-				{
-					date: '8th February 2024',
-					main: {
-						...images[12],
-						displayCredit: true,
-						data: {
-							...images[12].data,
-							caption: 'Immersive image',
-						},
-					},
-					body: [testTextElement, testTextElement, testTextElement],
 				},
 				{
 					date: '9th February 2024',
