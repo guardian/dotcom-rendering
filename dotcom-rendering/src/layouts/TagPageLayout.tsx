@@ -84,7 +84,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									isPaidContent={
+										!!tagPage.config.isPaidContent
+									}
+									shouldHideReaderRevenue={false}
+								/>
 							</Section>
 						</Stuck>
 					)}

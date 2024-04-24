@@ -36,19 +36,29 @@ type SlotNamesWithPageSkin = SlotName | 'pageskin';
 type InlineProps = {
 	position: InlinePosition;
 	index: number;
+	shouldHideReaderRevenue?: never;
 };
 
-type NonInlineProps = {
-	position: Exclude<SlotNamesWithPageSkin, InlinePosition>;
+type RightProps = {
+	position: 'right';
 	index?: never;
+	shouldHideReaderRevenue: boolean;
+};
+
+type RemainingProps = {
+	position: Exclude<SlotNamesWithPageSkin, InlinePosition | 'right'>;
+	index?: never;
+	shouldHideReaderRevenue?: never;
 };
 
 /**
- * This allows us to conditionally require the index property based
- * on position. If `position` is an inline type then we expect the
- * index value. If not, then we explicitly refuse this property
+ * This allows us to conditionally require properties based on position:
+ *
+ * - If `position` is an inline type then we expect the `index` prop.
+ * - If `position` is `right` then we expect the `shouldHideReaderRevenue` prop
+ * - If not, then we explicitly refuse these properties
  */
-type Props = DefaultProps & (InlineProps | NonInlineProps);
+type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
@@ -425,6 +435,7 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	hasPageskin = false,
+	shouldHideReaderRevenue = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -462,7 +473,14 @@ export const AdSlot = ({
 								priority="feature"
 								defer={{ until: 'visible' }}
 							>
-								<AdBlockAsk size="mpu" slotId={slotId} />
+								<AdBlockAsk
+									size="mpu"
+									slotId={slotId}
+									isPaidContent={isPaidContent}
+									shouldHideReaderRevenue={
+										shouldHideReaderRevenue
+									}
+								/>
 							</Island>
 							<div
 								id="top-right-ad-slot"
