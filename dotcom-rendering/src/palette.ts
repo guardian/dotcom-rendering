@@ -48,70 +48,34 @@ const pillarPalette = (
 const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
+			return sourcePalette.neutral[86];
+		default: {
 			switch (design) {
-				case ArticleDesign.PrintShop:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Analysis:
+				case ArticleDesign.Feature:
+				case ArticleDesign.Interview:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Review: {
 					switch (theme) {
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[200];
 						case ArticleSpecial.SpecialReport:
-							return sourcePalette.neutral[100];
+							return sourcePalette.specialReport[200];
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[200];
 						default:
-							return sourcePalette.neutral[7];
+							return pillarPalette(theme, 200);
 					}
-				default: {
-					return sourcePalette.neutral[100];
 				}
+				default:
+					return sourcePalette.neutral[7];
 			}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport: {
-					switch (design) {
-						case ArticleDesign.Interview:
-							return sourcePalette.neutral[100];
-						default:
-							return sourcePalette.specialReport[100];
-					}
-				}
-				case ArticleSpecial.SpecialReportAlt: {
-					switch (design) {
-						case ArticleDesign.Interview:
-							return sourcePalette.specialReport[800];
-						case ArticleDesign.LiveBlog:
-							return sourcePalette.neutral[100];
-						case ArticleDesign.DeadBlog:
-							return sourcePalette.neutral[7];
-						default:
-							return sourcePalette.neutral[7];
-					}
-				}
-				default: {
-					switch (design) {
-						case ArticleDesign.Review:
-						case ArticleDesign.Recipe:
-						case ArticleDesign.Feature:
-							switch (theme) {
-								case Pillar.News:
-								case Pillar.Sport:
-								case Pillar.Culture:
-								case Pillar.Lifestyle:
-								case Pillar.Opinion:
-									return pillarPalette(theme, 300);
-								case ArticleSpecial.Labs:
-									return sourcePalette.labs[300];
-							}
-						case ArticleDesign.Interview:
-						case ArticleDesign.LiveBlog:
-						case ArticleDesign.Picture:
-							return sourcePalette.neutral[100];
-						default:
-							return sourcePalette.neutral[7];
-					}
-				}
-			}
-		default:
-			return sourcePalette.neutral[7];
+		}
 	}
 };
+
 const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
