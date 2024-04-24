@@ -11,6 +11,7 @@ import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsEpic } from '../components/AppsEpic.importable';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
@@ -23,7 +24,6 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
-import { Disclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
@@ -128,7 +128,6 @@ const StandardGrid = ({
 								grid-template-areas:
 									'title  border  headline     right-column'
 									'.      border  standfirst   right-column'
-									'.      border  disclaimer   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -475,9 +474,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								article.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={article.editionId}
-							headerTopBarSwitch={
-								!!article.config.switches.headerTopNav
-							}
 						/>
 					</Section>
 					{props.NAV.subNavSections && !isLabs && (
@@ -679,13 +675,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="disclaimer">
-							{!!article.affiliateLinksDisclaimer && (
-								<Disclaimer
-									html={article.affiliateLinksDisclaimer}
-								></Disclaimer>
-							)}
-						</GridItem>
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
@@ -787,6 +776,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
 									/>
+									{!!article.affiliateLinksDisclaimer && (
+										<AffiliateDisclaimer />
+									)}
 								</div>
 							)}
 						</GridItem>

@@ -4,6 +4,7 @@ import { cmpAcceptAll } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
 import { loadPage } from '../lib/load-page';
 import { expectToBeVisible } from '../lib/locators';
+import { ADDITIONAL_REQUEST_PATH, interceptOphanRequest } from '../lib/ophan';
 
 const paidContentPage =
 	'https://www.theguardian.com/the-future-of-sustainable-entrepreneurship/2023/jun/01/take-your-sustainable-business-to-the-next-level-win-your-own-retail-space-at-one-of-londons-westfield-centres';
@@ -80,5 +81,62 @@ test.describe('Paid content tests', () => {
 
 		// Make sure the request to Google Analytics is made
 		await gaRquestPromise;
+	});
+
+	test('should send Ophan component event on click of sponsor logo in article meta', async ({
+		page,
+	}) => {
+		await loadPage(page, `/Article/${paidContentPage}`);
+		await cmpAcceptAll(page);
+
+		const clickEventRequest = interceptOphanRequest({
+			page,
+			path: ADDITIONAL_REQUEST_PATH,
+			searchParamMatcher: (searchParams) => {
+				const clickComponent = searchParams.get('clickComponent');
+				const clickLinkNames = searchParams.get('clickLinkNames');
+				return (
+					clickComponent === 'labs-logo | article-meta-westfield' &&
+					clickLinkNames === '["labs-logo-article-meta-westfield"]'
+				);
+			},
+		});
+
+		await waitForIsland(page, 'Branding');
+
+		await expectToBeVisible(page, '[data-testid=branding-logo]');
+		await page.locator('[data-testid=branding-logo]').click();
+
+		await clickEventRequest;
+	});
+
+	test('should send Ophan component event on click of sponsor logo in onwards section', async ({
+		page,
+	}) => {
+		await loadPage(page, `/Article/${paidContentPage}`);
+		await cmpAcceptAll(page);
+
+		const clickEventRequest = interceptOphanRequest({
+			page,
+			path: ADDITIONAL_REQUEST_PATH,
+			searchParamMatcher: (searchParams) => {
+				const clickComponent = searchParams.get('clickComponent');
+				const clickLinkNames = searchParams.get('clickLinkNames');
+				return (
+					clickComponent ===
+						'labs-logo | article-related-content-westfield' &&
+					clickLinkNames ===
+						'["labs-logo-article-related-content-westfield","related-content"]'
+				);
+			},
+		});
+
+		await waitForIsland(page, 'OnwardsUpper');
+
+		await expectToBeVisible(page, '[data-testid=card-branding-logo]');
+		await page.locator('[data-testid=card-branding-logo]').first().click();
+
+		// Make sure the request to Ophan is made
+		await clickEventRequest;
 	});
 });

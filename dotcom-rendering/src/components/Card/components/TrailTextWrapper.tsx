@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
-import { body, until } from '@guardian/source-foundations';
+import { body, remBodySizes, until } from '@guardian/source-foundations';
 import { palette } from '../../../palette';
-import type { DCRContainerPalette } from '../../../types/front';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type Props = {
 	children: string | React.ReactNode;
-	containerPalette?: DCRContainerPalette;
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType;
 	imageType?: CardImageType | undefined;
@@ -21,12 +19,13 @@ const showTrailText = (
 		imageSize === 'large' &&
 		imagePosition === 'right' &&
 		imageType !== 'avatar'
-	)
+	) {
 		return css`
 			${until.desktop} {
 				display: none;
 			}
 		`;
+	}
 	return css`
 		${until.tablet} {
 			display: none;
@@ -36,7 +35,6 @@ const showTrailText = (
 
 export const TrailTextWrapper = ({
 	children,
-	containerPalette,
 	imagePosition,
 	imageSize,
 	imageType,
@@ -49,7 +47,7 @@ export const TrailTextWrapper = ({
 					flex-direction: column;
 					color: ${palette('--card-headline-trail-text')};
 					${body.small({ lineHeight: 'regular' })};
-					font-size: 14px;
+					font-size: ${remBodySizes.xsmall}rem;
 					padding-left: 5px;
 					padding-right: 5px;
 					padding-bottom: 8px;

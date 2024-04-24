@@ -37,12 +37,25 @@ const badgeLink = css`
 type Props = {
 	imageSrc: string;
 	href: string;
+	ophanComponentLink?: string;
+	ophanComponentName?: string;
 	isInLabsSection?: boolean;
 };
 
-export const Badge = ({ imageSrc, href, isInLabsSection = false }: Props) => {
+export const Badge = ({
+	imageSrc,
+	href,
+	ophanComponentLink,
+	ophanComponentName,
+	isInLabsSection = false,
+}: Props) => {
 	return (
-		<a href={href} css={badgeLink} role="button">
+		<a
+			href={href}
+			data-link-name={ophanComponentLink}
+			data-component={ophanComponentName}
+			css={badgeLink}
+		>
 			<img
 				css={[
 					imageStyles,
@@ -51,7 +64,7 @@ export const Badge = ({ imageSrc, href, isInLabsSection = false }: Props) => {
 						: frontsSectionBadgeSizingStyles,
 				]}
 				src={imageSrc}
-				alt=""
+				alt={isInLabsSection ? 'Labs sponsor logo' : ''}
 			/>
 		</a>
 	);

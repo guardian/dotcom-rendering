@@ -216,8 +216,9 @@ export const YoutubeAtomSticky = ({
 	 */
 	useEffect(() => {
 		// Sticky-ness should take precedence over pausing
-		if (!shouldStick && shouldPauseOutOfView)
+		if (!shouldStick && shouldPauseOutOfView) {
 			setPauseVideo(isActive && !isIntersecting && !isClosed);
+		}
 	}, [
 		isIntersecting,
 		shouldStick,

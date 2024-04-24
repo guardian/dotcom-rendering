@@ -2,21 +2,7 @@
 
 Frontend rendering framework for theguardian.com. It uses [React](https://reactjs.org/), with [Emotion](https://emotion.sh) for styling.
 
-## Quick start for first time dev install
-
-```sh
-$ corepack enable
-$ asdf reshim nodejs # if you're using asdf, this step is needed afterwards
-$ git clone git@github.com:guardian/dotcom-rendering.git
-$ nvm use # not needed if you're using asdf
-$ pnpm install --frozen-lockfile
-$ cd dotcom-rendering
-$ make dev
-```
-
-Then open [http://localhost:3030](http://localhost:3030)
-
-## Getting started (the longer version)
+## Getting started
 
 This guide will help you get the `dotcom-rendering` application running on your development machine.
 
@@ -38,14 +24,16 @@ Once Node is installed, make sure you're using the correct package manager by [e
 
 ```sh
 $ corepack enable
-$ asdf reshim nodejs # if you're using asdf, this step is needed afterwards
 ```
+
+> [!NOTE]
+>
+> If you're using `asdf`, you'll need to run `asdf reshim nodejs` after running `corepack enable`.
 
 ### Running instructions
 
-```
+```sh
 $ git clone git@github.com:guardian/dotcom-rendering.git
-$ pnpm install --frozen-lockfile
 $ cd dotcom-rendering
 $ make dev
 ```
@@ -130,7 +118,7 @@ One way to verify whether the article you're looking at is being rendered by DCR
 
 You can ensure your code passes code quality tests by running:
 
-```
+```sh
 $ make validate
 ```
 
@@ -138,7 +126,7 @@ This runs our linting tool, the TypeScript compiler and our tests, before finall
 
 You can also run these tasks individually:
 
-```
+```sh
 $ make lint
 $ make stylelint
 $ make tsc
@@ -147,7 +135,7 @@ $ make test
 
 If you get lint errors, you can attempt to automatically fix them with:
 
-```
+```sh
 $ make fix
 ```
 
@@ -161,7 +149,7 @@ See [the makefile](https://github.com/guardian/dotcom-rendering/blob/main/dotcom
 
 To monitor vulnerabilities from GitHub, you can use [Dependabot alerts in the security tab](https://github.com/guardian/dotcom-rendering/security/dependabot).
 
-#### `pnpm audit`
+#### Manual audit
 
 To check for vulnerabilities in development, you can run `pnpm audit`.
 
@@ -188,15 +176,14 @@ To run the prettier check manually, run either of the following commands from th
 
 We recommend you update your workspace settings to automatically fix formatting and linting errors on save, this avoids code style validation failures. These instructions assume you have installed the `esbenp.prettier-vscode` VSCode plugin:
 
-1. Open the Command Palette (`shift + cmd + P`) and type
+1. Open the Command Palette (`shift + cmd + P`) and select:
 
     ```
-    >Preferences: Open Settings (JSON)
+    Preferences: Open Workspace Settings (JSON)
     ```
 
 2. Add the following:
-
-    ```
+    ```json
     "editor.codeActionsOnSave": {
     	"source.fixAll.eslint": true
     }

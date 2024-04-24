@@ -13,7 +13,7 @@ const format = {
 };
 
 const comment: ReplyType = {
-	id: 25488498,
+	id: '25488498',
 	body: '<p>Quisque feugiat odio nibh, ac congue lectus interdum nec. Maecenas ut elit ut turpis fringilla dignissim. Sed molestie vehicula ullamcorper. Cras vulputate augue vel diam tempus pellentesque. Etiam aliquam erat nec imperdiet semper. </p>',
 	date: '26 July 2013 4:35pm',
 	isoDateTime: '2013-07-26T15:13:20Z',
@@ -90,6 +90,7 @@ export const SingleComment = () => (
 		comments={[commentWithShortBody]}
 		user={aUser}
 		onPermalinkClick={() => {}}
+		isClosedForRecommendations={false}
 	/>
 );
 SingleComment.storyName = 'Single Comment';
@@ -105,6 +106,7 @@ export const MultiColumn = () => (
 		]}
 		user={aUser}
 		onPermalinkClick={() => {}}
+		isClosedForRecommendations={false}
 	/>
 );
 MultiColumn.storyName = 'Multiple Columns Comments';
@@ -130,6 +132,7 @@ export const SingleColumn = () => (
 		]}
 		user={aUser}
 		onPermalinkClick={() => {}}
+		isClosedForRecommendations={false}
 	/>
 );
 SingleColumn.storyName = 'Single Column Comments';

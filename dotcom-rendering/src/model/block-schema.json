@@ -217,7 +217,111 @@
                     "$ref": "#/definitions/TextBlockElement"
                 },
                 {
-                    "$ref": "#/definitions/TimelineBlockElement"
+                    "$ref": "#/definitions/TimelineAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/FETimelineBlockElement"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "_type": {
+                            "type": "string",
+                            "const": "model.dotcomrendering.pageElements.DCRTimelineBlockElement"
+                        },
+                        "events": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "main": {
+                                        "$ref": "#/definitions/FEElement"
+                                    },
+                                    "body": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/FEElement"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "body",
+                                    "date"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "_type",
+                        "events"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "_type": {
+                            "type": "string",
+                            "const": "model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement"
+                        },
+                        "sections": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "events": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "date": {
+                                                    "type": "string"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                },
+                                                "label": {
+                                                    "type": "string"
+                                                },
+                                                "main": {
+                                                    "$ref": "#/definitions/FEElement"
+                                                },
+                                                "body": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/definitions/FEElement"
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "body",
+                                                "date"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "events",
+                                    "title"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "_type",
+                        "sections"
+                    ]
                 },
                 {
                     "$ref": "#/definitions/TweetBlockElement"
@@ -1975,10 +2079,14 @@
                     "items": {
                         "$ref": "#/definitions/ListItem"
                     }
+                },
+                "elementId": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "items",
                 "listElementType"
             ]
@@ -2273,7 +2381,7 @@
                     "type": "string"
                 },
                 "role": {
-                    "type": "string"
+                    "$ref": "#/definitions/RoleType"
                 },
                 "attribution": {
                     "type": "string"
@@ -2519,7 +2627,6 @@
         "RatingSizeType": {
             "enum": [
                 "large",
-                "medium",
                 "small"
             ],
             "type": "string"
@@ -2562,7 +2669,11 @@
                     "type": "string"
                 },
                 "dropCap": {
-                    "type": "boolean"
+                    "enum": [
+                        "off",
+                        "on"
+                    ],
+                    "type": "string"
                 },
                 "html": {
                     "type": "string"
@@ -2574,12 +2685,12 @@
                 "html"
             ]
         },
-        "TimelineBlockElement": {
+        "TimelineAtomBlockElement": {
             "type": "object",
             "properties": {
                 "_type": {
                     "type": "string",
-                    "const": "model.dotcomrendering.pageElements.TimelineBlockElement"
+                    "const": "model.dotcomrendering.pageElements.TimelineAtomBlockElement"
                 },
                 "elementId": {
                     "type": "string"
@@ -2596,7 +2707,7 @@
                 "events": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/TimelineEvent"
+                        "$ref": "#/definitions/TimelineAtomEvent"
                     }
                 },
                 "role": {
@@ -2611,7 +2722,7 @@
                 "title"
             ]
         },
-        "TimelineEvent": {
+        "TimelineAtomEvent": {
             "type": "object",
             "properties": {
                 "title": {
@@ -2637,6 +2748,66 @@
                 "date",
                 "title",
                 "unixDate"
+            ]
+        },
+        "FETimelineBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.TimelineBlockElement"
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "sections": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "events": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "date": {
+                                            "type": "string"
+                                        },
+                                        "label": {
+                                            "type": "string"
+                                        },
+                                        "main": {
+                                            "$ref": "#/definitions/FEElement"
+                                        },
+                                        "body": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/FEElement"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "body"
+                                    ]
+                                }
+                            }
+                        },
+                        "required": [
+                            "events"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "sections"
             ]
         },
         "TweetBlockElement": {
@@ -2935,6 +3106,9 @@
                 "id": {
                     "type": "string"
                 },
+                "elementId": {
+                    "type": "string"
+                },
                 "channelId": {
                     "type": "string"
                 },
@@ -2975,6 +3149,7 @@
             "required": [
                 "_type",
                 "assetId",
+                "elementId",
                 "expired",
                 "id",
                 "mediaTitle"

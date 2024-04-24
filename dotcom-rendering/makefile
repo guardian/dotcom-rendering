@@ -70,15 +70,17 @@ storybook-dev: clear clean-dist install
 	$(call log, "starting Storybook DEV server")
 	@pnpm storybook
 
+storybook: storybook-dev
+
 # tests #####################################
 
-playwright: clear clean-dist install build
-	$(call log, "starting PROD server for Playwright")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test'
+playwright-run:
+	$(call log, "starting DEV server and running Playwright tests")
+	@pnpm playwright:run
 
 playwright-open: clear clean-dist install build
-	$(call log, "starting PROD server and opening Playwright")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'playwright test --ui'
+	$(call log, "starting DEV server and opening Playwright UI")
+	@pnpm playwright:open
 
 ampValidation: clean-dist install
 	$(call log, "starting AMP Validation test")

@@ -6,11 +6,12 @@ import type {
 	ReplyType,
 	SignedInUser,
 } from '../../lib/discussion';
-import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';
+import { mockRESTCalls } from '../../lib/mockRESTCalls';
 import { error, ok } from '../../lib/result';
 import { CommentContainer } from './CommentContainer';
 
 mockRESTCalls();
+const mockedCommentID = '123456';
 
 const firstCommentResponse = comment.responses[0];
 
@@ -24,11 +25,9 @@ const commentWithoutReply = {
 	responses: [],
 } satisfies CommentType;
 
-const commentResponseError = error<'NetworkError', number>('NetworkError');
+const commentResponseError = error<'NetworkError', string>('NetworkError');
 
-const commentResponseSuccess = ok<'NetworkError', number>(
-	Number(mockedMessageID),
-);
+const commentResponseSuccess = ok<'NetworkError', string>(mockedCommentID);
 
 const aUser: SignedInUser = {
 	kind: 'Reader',
@@ -78,6 +77,7 @@ describe('CommentContainer', () => {
 				commentBeingRepliedTo={commentBeingRepliedTo}
 				setCommentBeingRepliedTo={mockSetCommentBeingRepliedTo}
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
@@ -123,6 +123,7 @@ describe('CommentContainer', () => {
 				commentBeingRepliedTo={commentBeingRepliedTo}
 				setCommentBeingRepliedTo={mockSetCommentBeingRepliedTo}
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
@@ -140,7 +141,7 @@ describe('CommentContainer', () => {
 
 		// make sure the new comment appears
 		await waitFor(() => {
-			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
+			expect(getByTestId(mockedCommentID)).toBeInTheDocument();
 		});
 
 		// make sure the comment form submit button does not appear anymore
@@ -173,6 +174,7 @@ describe('CommentContainer', () => {
 				commentBeingRepliedTo={commentBeingRepliedTo}
 				setCommentBeingRepliedTo={mockSetCommentBeingRepliedTo}
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
@@ -218,6 +220,7 @@ describe('CommentContainer', () => {
 				commentBeingRepliedTo={commentBeingRepliedTo}
 				setCommentBeingRepliedTo={mockSetCommentBeingRepliedTo}
 				isClosedForComments={false}
+				isClosedForRecommendations={false}
 				mutes={[]}
 				toggleMuteStatus={() => {}}
 				onPermalinkClick={() => {}}
@@ -235,7 +238,7 @@ describe('CommentContainer', () => {
 
 		// make sure the new comment appears
 		await waitFor(() => {
-			expect(getByTestId(mockedMessageID)).toBeInTheDocument();
+			expect(getByTestId(mockedCommentID)).toBeInTheDocument();
 		});
 
 		// make sure the comment form submit button does not appear anymore

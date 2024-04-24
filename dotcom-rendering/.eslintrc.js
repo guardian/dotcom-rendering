@@ -130,6 +130,9 @@ module.exports = {
 
 		'object-shorthand': ['error', 'always'],
 
+		// need to be explicitely added because it is disabled by extending `prettier`
+		curly: ['error', 'multi-line', 'consistent'],
+
 		/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-for-each.md */
 		'unicorn/no-array-for-each': 'error',
 

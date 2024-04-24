@@ -6,7 +6,6 @@ import {
 	storage,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { userEvent, within } from '@storybook/testing-library';
 import { useEffect } from 'react';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxLayout } from './LightboxLayout.importable';
@@ -44,6 +43,7 @@ const Initialise = ({ children }: { children: React.ReactNode }) => {
 		const lightbox =
 			document.querySelector<HTMLDialogElement>('#gu-lightbox');
 		lightbox?.removeAttribute('hidden');
+		storage.local.clear();
 	}, []);
 
 	return <div style={{ height: '100vh' }}>{children}</div>;
@@ -147,33 +147,6 @@ export const WithEverything = () => {
 			<LightboxLayout format={format} images={images} />
 		</Initialise>
 	);
-};
-
-export const WithoutCaption = () => {
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: Pillar.News,
-	};
-	const images = [{ ...testImage }];
-	return (
-		<Initialise>
-			<LightboxLayout format={format} images={images} />
-		</Initialise>
-	);
-};
-/**
- * We manually click the [i] button to close the caption
- */
-WithoutCaption.play = async ({
-	canvasElement,
-}: {
-	canvasElement: HTMLElement;
-}) => {
-	const canvas = within(canvasElement);
-	storage.local.clear();
-	await userEvent.click(canvas.getByTitle('Toggle caption [i]'));
-	storage.local.clear();
 };
 
 export const WithSport = () => {
@@ -322,9 +295,3 @@ export const WithLabs = () => {
 		</Initialise>
 	);
 };
-
-/**
- * with html in caption (links)
- * with a portrait image
- *
- */

@@ -29,6 +29,7 @@ type Props = {
 	user?: SignedInUser;
 	comment: CommentType | ReplyType;
 	isClosedForComments: boolean;
+	isClosedForRecommendations: boolean;
 	setCommentBeingRepliedTo: (
 		commentBeingRepliedTo?: CommentType | ReplyType,
 	) => void;
@@ -36,7 +37,7 @@ type Props = {
 	wasScrolledTo?: boolean;
 	isMuted: boolean;
 	toggleMuteStatus: (userId: string) => void;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 	isExpanded: boolean;
 };
@@ -314,6 +315,7 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 export const Comment = ({
 	comment,
 	isClosedForComments,
+	isClosedForRecommendations,
 	setCommentBeingRepliedTo,
 	user,
 	isReply,
@@ -553,6 +555,9 @@ export const Comment = ({
 								userMadeComment={
 									user?.profile.userId ===
 									comment.userProfile.userId
+								}
+								isClosedForRecommendations={
+									isClosedForRecommendations
 								}
 							/>
 						)}

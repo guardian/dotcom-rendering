@@ -1,8 +1,8 @@
-import type { BaseSchema, Output } from 'valibot';
+import { isOneOf } from '@guardian/libs';
+import type { BaseSchema, Input, Output } from 'valibot';
 import {
 	array,
 	boolean,
-	integer,
 	literal,
 	merge,
 	minLength,
@@ -26,8 +26,6 @@ import type {
 	reportAbuse,
 	unPickComment,
 } from './discussionApi';
-import type { Guard } from './guard';
-import { guard } from './guard';
 import { error, ok, type Result } from './result';
 
 export type CAPIPillar =
@@ -74,8 +72,21 @@ export interface UserProfile {
 	};
 }
 
+export const parseUserProfile = (
+	data: unknown,
+): Result<'ParsingError', UserProfile> => {
+	const result = safeParse(
+		object({ status: literal('ok'), userProfile }),
+		data,
+	);
+	if (!result.success) {
+		return error('ParsingError');
+	}
+	return ok(result.output.userProfile);
+};
+
 const baseCommentSchema = object({
-	id: number(),
+	id: transform(union([number(), string()]), (id) => id.toString()),
 	body: string(),
 	date: string(),
 	isoDateTime: string(),
@@ -182,19 +193,14 @@ const commentResponseSchema = variant('status', [
 	}),
 	object({
 		status: literal('ok'),
-		message: transform(
-			string(),
-			// response.errorCode is the id of the comment that was created on the server
-			// it is returned as a string, so we need to cast to an number to be compatible
-			(input) => Number(input),
-			number([integer()]),
-		),
+		// response.message is the id of the comment that was created on the server
+		message: string(),
 	}),
 ]);
 
 export const parseCommentResponse = (
 	data: unknown,
-): Result<'ParsingError' | CommentResponseErrorCodes, number> => {
+): Result<'ParsingError' | CommentResponseErrorCodes, string> => {
 	const { success, output } = safeParse(commentResponseSchema, data);
 	if (!success) {
 		return error('ParsingError');
@@ -241,16 +247,16 @@ export const postUsernameResponseSchema = variant('status', [
 ]);
 
 const orderBy = ['newest', 'oldest', 'recommendations'] as const;
-export const isOrderBy = guard(orderBy);
-export type OrderByType = Guard<typeof orderBy>;
+export const isOrderBy = isOneOf(orderBy);
+export type OrderByType = (typeof orderBy)[number];
 
 const threads = ['collapsed', 'expanded', 'unthreaded'] as const;
-export const isThreads = guard(threads);
-export type ThreadsType = Guard<typeof threads>;
+export const isThreads = isOneOf(threads);
+export type ThreadsType = (typeof threads)[number];
 
 const pageSize = [25, 50, 100] as const;
-export const isPageSize = guard(pageSize);
-export type PageSizeType = Guard<typeof pageSize>;
+export const isPageSize = isOneOf(pageSize);
+export type PageSizeType = (typeof pageSize)[number];
 export interface FilterOptions {
 	orderBy: OrderByType;
 	pageSize: PageSizeType;
@@ -312,6 +318,8 @@ export const discussionApiResponseSchema = variant('status', [
 	discussionApiSuccessSchema,
 ]);
 
+export type GetDiscussionResponse = Input<typeof discussionApiResponseSchema>;
+
 export interface DiscussionOptions {
 	orderBy: string;
 	pageSize: number;
@@ -335,6 +343,18 @@ export const pickResponseSchema = object({
 	statusCode: literal(200),
 	message: string(),
 });
+
+const recommendResponseSchema = object({
+	status: literal('ok'),
+	statusCode: literal(200),
+});
+
+export const parseRecommendResponse = (
+	data: unknown,
+): Result<'ParsingError', true> => {
+	const { success } = safeParse(recommendResponseSchema, data);
+	return success ? ok(true) : error('ParsingError');
+};
 
 export type CommentFormProps = {
 	userNameMissing: boolean;
@@ -360,7 +380,11 @@ export const stubUser = {
 	addUsername: () => Promise.resolve(error('This is a stub user')),
 	onComment: () =>
 		Promise.resolve(
-			ok(Number.MAX_SAFE_INTEGER - Math.ceil(Math.random() * 12_000)),
+			ok(
+				String(
+					Number.MAX_SAFE_INTEGER - Math.ceil(Math.random() * 12_000),
+				),
+			),
 		),
 	onRecommend: () => Promise.resolve(true),
 	onReply: () => Promise.resolve(error('API_ERROR')),

@@ -99,7 +99,6 @@ export const AllEditorialNewslettersPageLayout = ({
 						element="nav"
 					>
 						<Nav
-							headerTopBarSwitch={false}
 							nav={NAV}
 							subscribeUrl={subscribeUrl}
 							editionId={editionId}

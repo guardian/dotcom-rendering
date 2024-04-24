@@ -1,8 +1,8 @@
 import type { Page } from '@playwright/test';
+import { PORT } from 'playwright.config';
 import { validateAsArticleType } from '../../src/model/validate';
-import type { DCRArticle, FEArticleType } from '../../src/types/frontend';
+import type { FEArticleType } from '../../src/types/frontend';
 
-const PORT = 9000;
 const BASE_URL = `http://localhost:${PORT}`;
 
 /**
@@ -45,7 +45,7 @@ const loadPage = async (
  */
 const loadPageWithOverrides = async (
 	page: Page,
-	article: DCRArticle | FEArticleType,
+	article: FEArticleType,
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;
@@ -82,7 +82,7 @@ const loadPageWithOverrides = async (
  */
 const loadPageNoOkta = async (
 	page: Page,
-	article: DCRArticle,
+	article: FEArticleType,
 	overrides?: {
 		configOverrides?: Record<string, unknown>;
 		switchOverrides?: Record<string, unknown>;

@@ -48,3 +48,25 @@ jobs:
           untraced: '**/(package*.json|pnpm-lock.yaml|preview.js)'
           workingDir: dotcom-rendering
           buildScriptName: 'build-storybook'
+
+  remove-label:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: chromatic
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Remove run_chromatic label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              name: "run_chromatic"
+            }).catch((error) => {
+              // https://docs.github.com/en/rest/issues/labels?apiVersion=2022-11-28#remove-a-label-from-an-issue--status-codes
+              if (error.status === 404) return console.warn("No such label!");
+              throw error;
+            })

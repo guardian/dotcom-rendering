@@ -27,13 +27,14 @@ type Props = {
 	shortUrl: string;
 	baseUrl: string;
 	isClosedForComments: boolean;
-	commentToScrollTo?: number;
+	isClosedForRecommendations: boolean;
+	commentToScrollTo?: string;
 	user?: SignedInUser;
 	additionalHeaders: AdditionalHeadersType;
 	expanded: boolean;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	apiKey: string;
-	onRecommend?: (commentId: number) => Promise<boolean>;
+	onRecommend?: (commentId: string) => Promise<boolean>;
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
@@ -105,6 +106,7 @@ export const Comments = ({
 	baseUrl,
 	shortUrl,
 	isClosedForComments,
+	isClosedForRecommendations,
 	commentToScrollTo,
 	user,
 	additionalHeaders,
@@ -209,7 +211,7 @@ export const Comments = ({
 			type: 'setBottomFormPreviewBody',
 			previewBody,
 		});
-	const expandCommentReplies = (commentId: number, responses: ReplyType[]) =>
+	const expandCommentReplies = (commentId: string, responses: ReplyType[]) =>
 		dispatch({
 			type: 'expandCommentReplies',
 			commentId,
@@ -323,6 +325,9 @@ export const Comments = ({
 							comments={picks.slice(0, 2)}
 							user={user}
 							onPermalinkClick={onPermalinkClick}
+							isClosedForRecommendations={
+								isClosedForRecommendations
+							}
 						/>
 					</div>
 				) : (
@@ -350,6 +355,9 @@ export const Comments = ({
 											comment={comment}
 											isClosedForComments={
 												isClosedForComments
+											}
+											isClosedForRecommendations={
+												isClosedForRecommendations
 											}
 											shortUrl={shortUrl}
 											user={user}
@@ -412,6 +420,7 @@ export const Comments = ({
 					comments={picks}
 					user={user}
 					onPermalinkClick={onPermalinkClick}
+					isClosedForRecommendations={isClosedForRecommendations}
 				/>
 			)}
 			<Filters
@@ -441,6 +450,9 @@ export const Comments = ({
 							<CommentContainer
 								comment={comment}
 								isClosedForComments={isClosedForComments}
+								isClosedForRecommendations={
+									isClosedForRecommendations
+								}
 								shortUrl={shortUrl}
 								user={user}
 								threads={filters.threads}

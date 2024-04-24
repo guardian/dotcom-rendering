@@ -338,6 +338,7 @@ export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
 	listElementType: 'KeyTakeaways' | 'QAndAExplainer';
 	items: ListItem[];
+	elementId: string;
 }
 
 export interface MapBlockElement extends ThirdPartyEmbeddedContent {
@@ -413,7 +414,7 @@ interface PullquoteBlockElement {
 	_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement';
 	elementId: string;
 	html?: string;
-	role: string;
+	role: RoleType;
 	attribution?: string;
 	isThirdPartyTracking?: boolean;
 }
@@ -483,17 +484,59 @@ export interface TableBlockElement {
 export interface TextBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement';
 	elementId: string;
-	dropCap?: boolean;
+	dropCap?: 'on' | 'off';
 	html: string;
 }
 
-export interface TimelineBlockElement {
+export type DCRTimelineEvent = {
+	date: string;
+	title?: string;
+	label?: string;
+	main?: FEElement;
+	body: FEElement[];
+};
+
+export type DCRTimelineSection = {
+	title: string;
+	events: DCRTimelineEvent[];
+};
+
+export type DCRTimelineBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.DCRTimelineBlockElement';
+	events: DCRTimelineEvent[];
+};
+
+export type DCRSectionedTimelineBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement';
+	sections: DCRTimelineSection[];
+};
+
+export type FETimelineEvent = {
+	title?: string;
+	date?: string;
+	label?: string;
+	main?: FEElement;
+	body: FEElement[];
+};
+
+export type FETimelineSection = {
+	title?: string;
+	events: FETimelineEvent[];
+};
+
+export interface FETimelineBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TimelineBlockElement';
+	elementId: string;
+	sections: FETimelineSection[];
+}
+
+export interface TimelineAtomBlockElement {
+	_type: 'model.dotcomrendering.pageElements.TimelineAtomBlockElement';
 	elementId: string;
 	id: string;
 	title: string;
 	description?: string;
-	events: TimelineEvent[];
+	events: TimelineAtomEvent[];
 	role?: RoleType;
 }
 
@@ -567,6 +610,7 @@ export interface YoutubeBlockElement {
 	assetId: string;
 	mediaTitle: string;
 	id: string;
+	elementId: string;
 	channelId?: string;
 	duration?: number;
 	posterImage?: {
@@ -697,7 +741,10 @@ export type FEElement =
 	| SubheadingBlockElement
 	| TableBlockElement
 	| TextBlockElement
-	| TimelineBlockElement
+	| TimelineAtomBlockElement
+	| FETimelineBlockElement
+	| DCRTimelineBlockElement
+	| DCRSectionedTimelineBlockElement
 	| TweetBlockElement
 	| VideoBlockElement
 	| VideoFacebookBlockElement
@@ -768,7 +815,7 @@ interface VideoAssets {
 	};
 }
 
-export interface TimelineEvent {
+export interface TimelineAtomEvent {
 	title: string;
 	date: string;
 	unixDate: number;
@@ -779,7 +826,7 @@ export interface TimelineEvent {
 
 export type TimelineAtomType = {
 	id: string;
-	events?: TimelineEvent[];
+	events?: TimelineAtomEvent[];
 	title: string;
 	description?: string;
 	expandForStorybook?: boolean;
@@ -788,7 +835,7 @@ export type TimelineAtomType = {
 	expandCallback?: () => void;
 };
 
-export type RatingSizeType = 'large' | 'medium' | 'small';
+export type RatingSizeType = 'large' | 'small';
 
 export type ImageForLightbox = {
 	masterUrl: string;

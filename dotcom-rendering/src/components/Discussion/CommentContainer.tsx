@@ -19,6 +19,7 @@ import { PillarButton } from './PillarButton';
 type Props = {
 	comment: CommentType | ReplyType;
 	isClosedForComments: boolean;
+	isClosedForRecommendations: boolean;
 	shortUrl: string;
 	user?: SignedInUser;
 	threads: ThreadsType;
@@ -26,10 +27,10 @@ type Props = {
 	setCommentBeingRepliedTo: (
 		commentBeingRepliedTo?: CommentType | ReplyType,
 	) => void;
-	commentToScrollTo?: number;
+	commentToScrollTo?: string;
 	mutes: string[];
 	toggleMuteStatus: (userId: string) => void;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	onPreview?: typeof preview;
 	error: string;
 	setError: (error: string) => void;
@@ -38,7 +39,7 @@ type Props = {
 	previewBody: string;
 	setPreviewBody: (previewBody: string) => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
-	expandCommentReplies: (commentId: number, responses: ReplyType[]) => void;
+	expandCommentReplies: (commentId: string, responses: ReplyType[]) => void;
 	isExpanded: boolean;
 };
 
@@ -78,6 +79,7 @@ export const avatar = (avatarSize: number) => css`
 export const CommentContainer = ({
 	comment,
 	isClosedForComments,
+	isClosedForRecommendations,
 	user,
 	shortUrl,
 	threads,
@@ -114,7 +116,7 @@ export const CommentContainer = ({
 			: `Show ${remainingResponses} more replies`;
 	};
 
-	const expand = (commentId: number) => {
+	const expand = (commentId: string) => {
 		setLoading(true);
 		getAllReplies(commentId)
 			.then((result) => {
@@ -129,7 +131,7 @@ export const CommentContainer = ({
 			});
 	};
 
-	const onAddReply = (commentId: number, response: ReplyType) =>
+	const onAddReply = (commentId: string, response: ReplyType) =>
 		expandCommentReplies(commentId, [...responses, response]);
 
 	return (
@@ -137,6 +139,7 @@ export const CommentContainer = ({
 			<Comment
 				comment={comment}
 				isClosedForComments={isClosedForComments}
+				isClosedForRecommendations={isClosedForRecommendations}
 				setCommentBeingRepliedTo={setCommentBeingRepliedTo}
 				user={user}
 				isReply={false}
@@ -157,6 +160,9 @@ export const CommentContainer = ({
 										comment={responseComment}
 										isClosedForComments={
 											isClosedForComments
+										}
+										isClosedForRecommendations={
+											isClosedForRecommendations
 										}
 										setCommentBeingRepliedTo={
 											setCommentBeingRepliedTo

@@ -17,8 +17,9 @@ import { Timestamp } from './Timestamp';
 type Props = {
 	comment: CommentType | ReplyType;
 	userMadeComment: boolean;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	user?: SignedInUser;
+	isClosedForRecommendations: boolean;
 };
 
 const pickStyles = css`
@@ -170,6 +171,7 @@ export const TopPick = ({
 	user,
 	userMadeComment,
 	onPermalinkClick,
+	isClosedForRecommendations,
 }: Props) => {
 	const showStaffBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Staff',
@@ -247,6 +249,7 @@ export const TopPick = ({
 					alreadyRecommended={false}
 					user={user}
 					userMadeComment={userMadeComment}
+					isClosedForRecommendations={isClosedForRecommendations}
 				/>
 			</PickMeta>
 		</div>

@@ -49,6 +49,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'inside-saturday',
 				'five-great-reads',
 				'house-to-home',
+				'observed',
 				'saved-for-later',
 				'the-upside',
 				'guardian-traveller',
@@ -153,6 +154,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'the-long-read',
 				'saved-for-later',
 				'house-to-home',
+				'observed',
 			],
 		},
 		{
@@ -247,6 +249,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'house-to-home',
 				'inside-saturday',
 				'observer-food',
+				'observed',
 			],
 		},
 		{

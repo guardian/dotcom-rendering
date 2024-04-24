@@ -55,11 +55,12 @@ const defaultFormat = {
 export const NeverRecommended = () => (
 	<Wrapper>
 		<RecommendationCount
-			commentId={123}
+			commentId="123"
 			initialCount={383}
 			alreadyRecommended={false}
 			user={aUser}
 			userMadeComment={false}
+			isClosedForRecommendations={false}
 		/>
 	</Wrapper>
 );
@@ -68,11 +69,12 @@ NeverRecommended.decorators = [splitTheme([defaultFormat])];
 export const AlreadyRecommended = () => (
 	<Wrapper>
 		<RecommendationCount
-			commentId={123}
+			commentId="123"
 			initialCount={83}
 			alreadyRecommended={true}
 			user={aUser}
 			userMadeComment={false}
+			isClosedForRecommendations={false}
 		/>
 	</Wrapper>
 );
@@ -81,10 +83,11 @@ AlreadyRecommended.decorators = [splitTheme([defaultFormat])];
 export const NotSignedIn = () => (
 	<Wrapper>
 		<RecommendationCount
-			commentId={123}
+			commentId="123"
 			initialCount={83}
 			alreadyRecommended={false}
 			userMadeComment={false}
+			isClosedForRecommendations={false}
 		/>
 	</Wrapper>
 );
@@ -93,11 +96,12 @@ NotSignedIn.decorators = [splitTheme([defaultFormat])];
 export const OwnPost = () => (
 	<Wrapper>
 		<RecommendationCount
-			commentId={123}
+			commentId="123"
 			initialCount={83}
 			alreadyRecommended={false}
 			user={aUser}
 			userMadeComment={true}
+			isClosedForRecommendations={false}
 		/>
 	</Wrapper>
 );

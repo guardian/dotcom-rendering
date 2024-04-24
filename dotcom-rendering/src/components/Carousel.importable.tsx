@@ -471,7 +471,7 @@ type CarouselCardProps = {
 	/** Only used on Labs cards */
 	branding?: Branding;
 	mainMedia?: MainMedia;
-	onwardsSource?: string;
+	onwardsSource?: OnwardsSource;
 	containerType?: DCRContainerType;
 };
 
@@ -515,7 +515,7 @@ const CarouselCard = ({
 				webPublicationDate={webPublicationDate}
 				kickerText={kickerText}
 				image={image}
-				imageSize={'small'}
+				imageSize={'carousel'}
 				showClock={!isOnwardContent && true}
 				showAge={true}
 				pauseOffscreenVideo={isVideoContainer}

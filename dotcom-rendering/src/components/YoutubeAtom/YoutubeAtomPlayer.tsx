@@ -6,7 +6,7 @@ import {
 	buildImaAdTagUrl,
 	disabledAds,
 } from '@guardian/commercial';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import {
 	useCallback,
@@ -152,8 +152,9 @@ const createOnStateChangeListener =
 					msg: 'resume',
 					event,
 				});
-				for (const eventEmitter of eventEmitters)
+				for (const eventEmitter of eventEmitters) {
 					eventEmitter('resume');
+				}
 			}
 
 			const checkProgress = () => {
@@ -171,8 +172,9 @@ const createOnStateChangeListener =
 						msg: 'played 25%',
 						event,
 					});
-					for (const eventEmitter of eventEmitters)
+					for (const eventEmitter of eventEmitters) {
 						eventEmitter('25');
+					}
 					progressEvents.hasSent25Event = true;
 				}
 
@@ -183,8 +185,9 @@ const createOnStateChangeListener =
 						msg: 'played 50%',
 						event,
 					});
-					for (const eventEmitter of eventEmitters)
+					for (const eventEmitter of eventEmitters) {
 						eventEmitter('50');
+					}
 					progressEvents.hasSent50Event = true;
 				}
 
@@ -195,8 +198,9 @@ const createOnStateChangeListener =
 						msg: 'played 75%',
 						event,
 					});
-					for (const eventEmitter of eventEmitters)
+					for (const eventEmitter of eventEmitters) {
 						eventEmitter('75');
+					}
 					progressEvents.hasSent75Event = true;
 				}
 

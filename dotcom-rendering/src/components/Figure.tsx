@@ -11,7 +11,37 @@ type Props = {
 	id?: string;
 	className?: string;
 	type?: FEElement['_type'];
+	isTimeline?: boolean;
 };
+
+const immersiveStyles = css`
+	margin-top: ${space[3]}px;
+	margin-bottom: ${space[3]}px;
+	${until.tablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+	${from.tablet} {
+		margin-left: -20px;
+		margin-right: -100px;
+	}
+	${from.desktop} {
+		margin-left: -20px;
+		margin-right: -340px;
+	}
+	${from.leftCol} {
+		margin-left: -160px;
+		margin-right: -320px;
+	}
+	${from.wide} {
+		margin-left: -240px;
+		margin-right: -400px;
+	}
+`;
 
 const roleCss = {
 	inline: css`
@@ -41,32 +71,7 @@ const roleCss = {
 	`,
 
 	immersive: css`
-		margin-top: ${space[3]}px;
-		margin-bottom: ${space[3]}px;
-		${until.tablet} {
-			margin-left: -20px;
-			margin-right: -20px;
-		}
-		${until.mobileLandscape} {
-			margin-left: -10px;
-			margin-right: -10px;
-		}
-		${from.tablet} {
-			margin-left: -20px;
-			margin-right: -100px;
-		}
-		${from.desktop} {
-			margin-left: -20px;
-			margin-right: -340px;
-		}
-		${from.leftCol} {
-			margin-left: -160px;
-			margin-right: -320px;
-		}
-		${from.wide} {
-			margin-left: -240px;
-			margin-right: -400px;
-		}
+		${immersiveStyles}
 	`,
 
 	showcase: css`
@@ -79,6 +84,12 @@ const roleCss = {
 		${from.wide} {
 			margin-left: -240px;
 		}
+	`,
+
+	showcaseTimeline: css`
+		${immersiveStyles}
+		margin-top: 0;
+		margin-bottom: 0;
 	`,
 
 	thumbnail: css`
@@ -150,6 +161,7 @@ const roleCss = {
 export const defaultRoleStyles = (
 	role: RoleType | 'richLink',
 	format: ArticleFormat,
+	isTimeline = false,
 ) => {
 	switch (role) {
 		case 'inline':
@@ -159,6 +171,9 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'showcase':
+			if (isTimeline) {
+				return roleCss.showcaseTimeline;
+			}
 			return roleCss.showcase;
 		case 'thumbnail':
 			switch (format.design) {
@@ -196,6 +211,7 @@ export const Figure = ({
 	isMainMedia,
 	className = '',
 	type,
+	isTimeline = false,
 }: Props) => {
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
@@ -213,7 +229,7 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			css={defaultRoleStyles(role, format)}
+			css={defaultRoleStyles(role, format, isTimeline)}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}
 			className={className}

@@ -74,7 +74,7 @@ const commentIdFromUrl = () => {
 	const [, commentId] = hash.split('-');
 	if (!commentId) return;
 
-	return parseInt(commentId, 10);
+	return commentId;
 };
 
 /**
@@ -83,10 +83,9 @@ const commentIdFromUrl = () => {
  */
 const remapToValidFilters = (
 	filters: FilterOptions,
-	hashCommentId: number | undefined,
+	hashCommentId: string | undefined,
 ) => {
-	const permalinkBeingUsed =
-		hashCommentId !== undefined && !Number.isNaN(hashCommentId);
+	const permalinkBeingUsed = !!hashCommentId;
 
 	if (!permalinkBeingUsed) return filters;
 	if (filters.threads !== 'collapsed') return filters;
@@ -136,12 +135,13 @@ export const replaceMatchingCommentResponses =
 type State = {
 	comments: Array<CommentType | ReplyType>;
 	isClosedForComments: boolean;
+	isClosedForRecommendation: boolean;
 	isExpanded: boolean;
 	commentPage: number;
 	commentCount: number | undefined;
 	topLevelCommentCount: number;
 	filters: FilterOptions;
-	hashCommentId: number | undefined;
+	hashCommentId: string | undefined;
 	loading: boolean;
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
@@ -160,6 +160,7 @@ const initialCommentFormState = {
 const initialState: State = {
 	comments: [],
 	isClosedForComments: false,
+	isClosedForRecommendation: false,
 	isExpanded: false,
 	commentPage: 1,
 	commentCount: undefined,
@@ -179,6 +180,7 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				comments: action.comments,
 				isClosedForComments: action.isClosedForComments,
+				isClosedForRecommendation: action.isClosedForRecommendation,
 				commentCount: action.commentCount,
 				topLevelCommentCount: action.topLevelCommentCount,
 				loading: false,
@@ -194,7 +196,7 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				comments: state.comments.map((comment) =>
 					comment.responses &&
-					comment.id === Number(action.comment.responseTo.commentId)
+					comment.id === action.comment.responseTo.commentId
 						? {
 								...comment,
 								responses: [
@@ -349,6 +351,7 @@ export const Discussion = ({
 		{
 			comments,
 			isClosedForComments,
+			isClosedForRecommendation,
 			isExpanded,
 			commentPage,
 			filters,
@@ -386,7 +389,9 @@ export const Discussion = ({
 		})
 			.then((result) => {
 				if (result.kind === 'error') {
-					console.error(`getDiscussion - error: ${result.error}`);
+					if (result.error !== 'AbortedSignal') {
+						console.error(`getDiscussion - error: ${result.error}`);
+					}
 					return;
 				}
 
@@ -396,6 +401,8 @@ export const Discussion = ({
 					type: 'commentsLoaded',
 					comments: discussion.comments,
 					isClosedForComments: discussion.isClosedForComments,
+					isClosedForRecommendation:
+						discussion.isClosedForRecommendation,
 					topLevelCommentCount: discussion.topLevelCommentCount,
 					commentCount: discussion.commentCount,
 				});
@@ -413,7 +420,7 @@ export const Discussion = ({
 		rememberFilters(filters);
 	}, [filters]);
 
-	const handlePermalink = (commentId: number) => {
+	const handlePermalink = (commentId: string) => {
 		window.location.hash = `#comment-${commentId}`;
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
@@ -487,6 +494,7 @@ export const Discussion = ({
 					isClosedForComments={
 						!!isClosedForComments || !enableDiscussionSwitch
 					}
+					isClosedForRecommendations={!!isClosedForRecommendation}
 					shortUrl={shortUrlId}
 					additionalHeaders={{
 						'D2-X-UID': discussionD2Uid,

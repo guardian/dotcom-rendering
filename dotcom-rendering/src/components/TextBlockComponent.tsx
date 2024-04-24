@@ -5,6 +5,7 @@ import {
 	body,
 	from,
 	palette,
+	remSpace,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
@@ -21,7 +22,7 @@ type Props = {
 	html: string;
 	format: ArticleFormat;
 	isFirstParagraph: boolean;
-	forceDropCap?: boolean;
+	forceDropCap?: 'on' | 'off';
 };
 
 const isLetter = (letter: string) => {
@@ -107,8 +108,9 @@ const shouldShowDropCaps = (
 	html: string,
 	format: ArticleFormat,
 	isFirstParagraph: boolean,
-	forceDropCap?: boolean,
+	forceDropCap?: 'on' | 'off',
 ) => {
+	if (forceDropCap === 'off') return false;
 	const validDropCapFormat = isValidFormatForDropCap(format);
 	// We need to strip any markup from our html string so that we accurately measure
 	// the length that the reader will see. Eg. remove link tag html.
@@ -121,7 +123,7 @@ const shouldShowDropCaps = (
 		// For subsequent blocks of text, we only add a dropcap if a dinkus was inserted
 		// prior to it in the article body (Eg: * * *), causing the forceDropCap flag to
 		// be set
-		if (forceDropCap) return true;
+		if (forceDropCap === 'on') return true;
 	}
 
 	return false;
@@ -157,7 +159,7 @@ const sanitiserOptions: IOptions = {
 };
 
 const styles = (format: ArticleFormat) => css`
-	margin-bottom: 14px;
+	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 
@@ -167,18 +169,18 @@ const styles = (format: ArticleFormat) => css`
 	}
 
 	ul {
-		margin-bottom: 12px;
+		margin-bottom: ${remSpace[3]};
 	}
 
 	${from.tablet} {
 		ul {
-			margin-bottom: 16px;
+			margin-bottom: ${remSpace[4]};
 		}
 	}
 
 	li {
-		margin-bottom: 6px;
-		padding-left: 20px;
+		margin-bottom: ${remSpace[1]};
+		padding-left: ${remSpace[5]};
 		display: flow-root;
 
 		p {
@@ -190,11 +192,11 @@ const styles = (format: ArticleFormat) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: 13px;
-		width: 13px;
+		height: ${remSpace[3]};
+		width: ${remSpace[3]};
 		background-color: ${palette.neutral[86]};
-		margin-left: -20px;
-		margin-right: 7px;
+		margin-left: -${remSpace[5]};
+		margin-right: ${remSpace[2]};
 	}
 
 	/* Subscript and Superscript styles */
@@ -218,9 +220,8 @@ const styles = (format: ArticleFormat) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: 13px;
-		width: 13px;
-		margin-right: 0.2px;
+		height: ${remSpace[2]};
+		width: ${remSpace[2]};
 		background-color: ${decidePalette(format).background.bullet};
 	}
 

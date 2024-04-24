@@ -7,7 +7,7 @@ import { CommentContainer } from './CommentContainer';
 export default { title: 'Discussion/CommentContainer' };
 
 const commentData: CommentType = {
-	id: 25487686,
+	id: '25487686',
 	body: "<p>Beau Jos pizza in Idaho Springs is a great place for mountain pizza pies. Order one with extra thick crust and drizzle it with honey. Y'all can try the Challenge if you fancy, and sketch on your napkins so your art can join their walls. This was 15 years ago, but I hope it's still there! As for music, anything from Boulder's own Big Head Todd &amp; the Monsters - 'Broken Hearted Savior' is a good start, with 'Bittersweet' a good road track. I'm jealous!!!</p>",
 	date: '26 July 2013 4:13pm',
 	isoDateTime: '2013-07-26T15:13:20Z',
@@ -36,7 +36,7 @@ const commentData: CommentType = {
 };
 
 const threadComment: ReplyType = {
-	id: 25488498,
+	id: '25488498',
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 	date: '26 July 2013 4:35pm',
 	isoDateTime: '2013-07-26T15:13:20Z',
@@ -71,7 +71,7 @@ const threadComment: ReplyType = {
 };
 
 const threadCommentWithLongUsernames: ReplyType = {
-	id: 25488498,
+	id: '25488498',
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 	date: '26 July 2013 4:35pm',
 	isoDateTime: '2013-07-26T15:13:20Z',
@@ -106,7 +106,7 @@ const threadCommentWithLongUsernames: ReplyType = {
 };
 
 const commentDataWithLongThread: CommentType = {
-	id: 25487686,
+	id: '25487686',
 	body: "<p>Beau Jos pizza in Idaho Springs is a great place for mountain pizza pies. Order one with extra thick crust and drizzle it with honey. Y'all can try the Challenge if you fancy, and sketch on your napkins so your art can join their walls. This was 15 years ago, but I hope it's still there! As for music, anything from Boulder's own Big Head Todd &amp; the Monsters - 'Broken Hearted Savior' is a good start, with 'Bittersweet' a good road track. I'm jealous!!!</p>",
 	date: '26 July 2013 4:13pm',
 	isoDateTime: '2013-07-26T15:13:20Z',
@@ -187,6 +187,7 @@ export const defaultStory = () => (
 	<CommentContainer
 		comment={commentData}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
@@ -222,6 +223,7 @@ export const threadedComment = () => (
 	<CommentContainer
 		comment={commentDataThreaded}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
@@ -257,6 +259,7 @@ export const threadedCommentWithShowMore = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongThread}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
@@ -292,6 +295,7 @@ export const threadedCommentWithLongUsernames = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
@@ -327,6 +331,7 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
 		isClosedForComments={false}
+		isClosedForRecommendations={false}
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
