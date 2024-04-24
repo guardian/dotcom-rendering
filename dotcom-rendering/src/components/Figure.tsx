@@ -86,6 +86,12 @@ const roleCss = {
 		}
 	`,
 
+	showcaseTimeline: css`
+		${immersiveStyles}
+		margin-top: 0;
+		margin-bottom: 0;
+	`,
+
 	thumbnail: css`
 		margin-top: ${space[2]}px;
 		margin-bottom: ${space[2]}px;
@@ -166,18 +172,7 @@ export const defaultRoleStyles = (
 			return roleCss.immersive;
 		case 'showcase':
 			if (isTimeline) {
-				return css`
-					margin: 0 -10px;
-					${from.tablet} {
-						position: relative;
-					}
-					${from.leftCol} {
-						margin-left: -160px;
-					}
-					${from.wide} {
-						margin-left: -240px;
-					}
-				`;
+				return roleCss.showcaseTimeline;
 			}
 			return roleCss.showcase;
 		case 'thumbnail':
