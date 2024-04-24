@@ -12,8 +12,9 @@ type Props = {
 	adTargeting?: AdTargeting;
 };
 export const TopMeta = ({ data, design, pillar, adTargeting }: Props) => {
-	if (pillar === ArticleSpecial.Labs)
+	if (pillar === ArticleSpecial.Labs) {
 		return <TopMetaPaidContent articleData={data} pillar={pillar} />;
+	}
 	switch (design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:

@@ -53,8 +53,11 @@ const isStarRating = (element: FEElement): boolean => {
 	};
 
 	// Checks if this element is a 'star rating' based on the convention: <p>★★★★☆</p>
-	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
+	if (
+		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
+	) {
 		return false;
+	}
 	const frag = JSDOM.fragment(element.html);
 	const hasPTags = frag.firstElementChild?.nodeName === 'P';
 	const text = frag.textContent ?? '';

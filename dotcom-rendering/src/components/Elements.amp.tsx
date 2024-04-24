@@ -94,8 +94,14 @@ export const isAmpSupported = ({
 				element._type ===
 				'model.dotcomrendering.pageElements.QuizAtomBlockElement',
 		);
-		if (!isSwitchedOn || hasQuizTag || hasQuizAtoms || elements.length == 0)
+		if (
+			!isSwitchedOn ||
+			hasQuizTag ||
+			hasQuizAtoms ||
+			elements.length == 0
+		) {
 			return false;
+		}
 	}
 
 	if (

@@ -403,8 +403,9 @@ export const SpecialReportAlt = () => {
 	mockCommentCount();
 	const specialReportTrails = [...trails];
 
-	for (const trail of specialReportTrails)
+	for (const trail of specialReportTrails) {
 		trail.format = specialReportAltFormat;
+	}
 
 	return (
 		<Section

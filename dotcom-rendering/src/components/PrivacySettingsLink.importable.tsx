@@ -43,12 +43,13 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 		});
 	}, []);
 
-	if (!framework)
+	if (!framework) {
 		return (
 			<span css={footerLink} style={{ color: 'transparent' }}>
 				&nbsp;
 			</span>
 		);
+	}
 
 	return (
 		<ButtonLink
