@@ -470,6 +470,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
+									editionId={'UK'}
 								>
 									<DecideContainer
 										trails={trailsWithoutBranding}

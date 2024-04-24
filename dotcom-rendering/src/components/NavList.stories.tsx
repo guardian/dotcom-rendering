@@ -19,14 +19,22 @@ export default {
 };
 
 export const Default = () => (
-	<FrontSection title="NavList" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="NavList"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<NavList trails={trails} showImage={false} />
 	</FrontSection>
 );
 Default.storyName = 'NavList';
 
 export const DefaultWithImages = () => (
-	<FrontSection title="Nav Media List" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Nav Media List"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<NavList trails={trails} showImage={true} />
 	</FrontSection>
 );

@@ -79,7 +79,7 @@ export const CardAge = ({
 			<DateTime
 				date={new Date(webPublicationDate)}
 				display="relative"
-				editionId="UK"
+				editionId={'UK'}
 				showWeekday={false}
 				showDate={true}
 				showTime={false}

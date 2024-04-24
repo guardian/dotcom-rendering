@@ -22,6 +22,7 @@ export const FourCards = () => (
 	<FrontSection
 		title="Fixed Small Slow V MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
@@ -37,6 +38,7 @@ export const ThreeCards = () => (
 	<FrontSection
 		title="Fixed Small Slow V MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 3)}
@@ -52,6 +54,7 @@ export const TwoCards = () => (
 	<FrontSection
 		title="Fixed Small Slow V MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 2)}
@@ -67,6 +70,7 @@ export const OneCard = () => (
 	<FrontSection
 		title="Fixed Small Slow V MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 1)}

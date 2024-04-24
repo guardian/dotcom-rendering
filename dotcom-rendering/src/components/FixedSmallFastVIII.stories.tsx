@@ -23,6 +23,7 @@ export const Default = () => (
 		title="Fixed Small Fast VIII"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallFastVIII
 			trails={trails}

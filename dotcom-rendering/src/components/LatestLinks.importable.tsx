@@ -170,7 +170,7 @@ export const LatestLinks = ({
 												)
 											}
 											display="relative"
-											editionId="UK"
+											editionId={'UK'}
 											showWeekday={false}
 											showDate={true}
 											showTime={false}

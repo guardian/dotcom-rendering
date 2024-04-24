@@ -78,6 +78,7 @@ export const ContainerStory = () => {
 			title="Default Container"
 			showTopBorder={false}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -87,7 +88,11 @@ ContainerStory.storyName = 'default container';
 
 export const NoTitleStory = () => {
 	return (
-		<FrontSection showTopBorder={false} discussionApiUrl={discussionApiUrl}>
+		<FrontSection
+			showTopBorder={false}
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+		>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -96,7 +101,11 @@ NoTitleStory.storyName = 'with no title';
 
 export const TopBorderStory = () => {
 	return (
-		<FrontSection title="Borders" discussionApiUrl={discussionApiUrl}>
+		<FrontSection
+			title="Borders"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+		>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -111,6 +120,7 @@ export const LeftContentStory = () => {
 				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
 			}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -126,6 +136,7 @@ export const LeftContentOpinionStory = () => {
 				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
 			}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -142,6 +153,7 @@ export const ToggleableStory = () => {
 			sectionId="section-id"
 			showTopBorder={false}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -156,24 +168,32 @@ export const MultipleStory = () => {
 				title="Page Title"
 				showTopBorder={false}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			/>
-			<FrontSection title="Headlines" discussionApiUrl={discussionApiUrl}>
+			<FrontSection
+				title="Headlines"
+				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
+			>
 				<Placeholder />
 			</FrontSection>
 			<FrontSection
 				title="Useful links"
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			/>
 			<FrontSection
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</FrontSection>
 			<FrontSection
 				showTopBorder={false}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<h2>Insert call to action here</h2>
 			</FrontSection>
@@ -181,6 +201,7 @@ export const MultipleStory = () => {
 				title="Videos"
 				showTopBorder={false}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -188,6 +209,7 @@ export const MultipleStory = () => {
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -233,7 +255,7 @@ export const TreatsStory = () => {
 			]}
 			showTopBorder={false}
 			showDateHeader={true}
-			editionId="UK"
+			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
 			<Placeholder />
@@ -260,6 +282,7 @@ export const WithSponsoredBranding = () => {
 		<FrontSection
 			title="Section"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 			collectionBranding={{
 				kind: 'sponsored',
 				isFrontBranding: false,
@@ -287,6 +310,7 @@ export const WithPaidBranding = () => {
 		<FrontSection
 			title="Section"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 			collectionBranding={{
 				kind: 'paid-content',
 				isFrontBranding: false,
@@ -314,6 +338,7 @@ export const WithPaidContentForWholeFront = () => {
 		<FrontSection
 			title="First Section"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 			collectionBranding={{
 				kind: 'paid-content',
 				isFrontBranding: true,
@@ -342,6 +367,7 @@ export const PageSkinStory = () => {
 			title="Page Skin"
 			hasPageSkin={true}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder text="Page skins constrain my layout to desktop" />
 		</FrontSection>
