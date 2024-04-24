@@ -1,30 +1,23 @@
-import { css, type SerializedStyles } from '@emotion/react';
-import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
+import { css } from '@emotion/react';
+import { type ArticleFormat } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { KeyTakeaway as KeyTakeawayModel } from '../types/content';
+import { Subheading } from './Subheading';
 
 const keyTakeawayStyles = css`
 	padding-top: 8px;
 `;
 
-const headingStyles = (display: ArticleDisplay): SerializedStyles => css`
-	${display === ArticleDisplay.Immersive
-		? headline.medium({ fontWeight: 'light' })
-		: headline.xxsmall({ fontWeight: 'bold' })};
-	padding: 2px 0px;
-`;
-
 const headingIndexStyles = css`
-	${headline.xsmall({ fontWeight: 'bold' })};
+	font-weight: bold;
 `;
 
 const headingLineStyles = css`
 	width: 140px;
-	margin: 0px;
+	margin: 0;
 	border: none;
 	border-top: 4px solid ${palette('--heading-line')};
 `;
@@ -64,12 +57,12 @@ export const KeyTakeaway = ({
 }: KeyTakeawayProps) => {
 	return (
 		<>
-			<li css={keyTakeawayStyles}>
+			<li css={keyTakeawayStyles} data-spacefinder-role="nested">
 				<hr css={headingLineStyles} />
-				<h2 css={headingStyles(format.display)}>
+				<Subheading format={format} topPadding={false}>
 					<span css={headingIndexStyles}>{`${titleIndex}. `}</span>
 					{keyTakeaway.title}
-				</h2>
+				</Subheading>
 				{keyTakeaway.body.map((element, index) => (
 					<RenderArticleElement
 						// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
@@ -89,6 +82,8 @@ export const KeyTakeaway = ({
 						editionId={editionId}
 						hideCaption={hideCaption}
 						starRating={starRating}
+						forceDropCap="off"
+						isListElement={true}
 					/>
 				))}
 			</li>

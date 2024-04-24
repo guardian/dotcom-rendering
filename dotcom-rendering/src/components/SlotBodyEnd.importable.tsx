@@ -210,7 +210,6 @@ export const SlotBodyEnd = ({
 			candidates: [brazeEpic, readerRevenueEpic],
 			name: 'slotBodyEnd',
 		};
-
 		pickMessage(epicConfig, renderingTarget)
 			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
 			.catch((e) =>

@@ -139,6 +139,7 @@ export const CardPicture = ({
 				src={fallbackSource.lowResUrl}
 				css={block}
 				loading={loading}
+				data-chromatic="ignore"
 			/>
 		</picture>
 	);

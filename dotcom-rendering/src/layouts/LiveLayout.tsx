@@ -325,7 +325,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								shouldCenter={false}
 								element="aside"
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									isPaidContent={
+										!!article.config.isPaidContent
+									}
+									shouldHideReaderRevenue={
+										!!article.config.shouldHideReaderRevenue
+									}
+								/>
 							</Section>
 						</Stuck>
 					)}
@@ -377,9 +384,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										.subscribe
 								}
 								editionId={article.editionId}
-								headerTopBarSwitch={
-									!!article.config.switches.headerTopNav
-								}
 							/>
 						</Section>
 
@@ -1188,6 +1192,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												position="right"
 												display={format.display}
 												isPaidContent={isPaidContent}
+												shouldHideReaderRevenue={
+													!!article.config
+														.shouldHideReaderRevenue
+												}
 											/>
 										)}
 

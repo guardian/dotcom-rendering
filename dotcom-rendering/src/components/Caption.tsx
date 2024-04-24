@@ -1,13 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import {
-	between,
-	from,
-	space,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { from, space, textSans, until } from '@guardian/source-foundations';
 import { palette } from '../palette';
 import CameraSvg from '../static/icons/camera.svg';
 import VideoSvg from '../static/icons/video-icon.svg';
@@ -108,22 +102,13 @@ const veryLimitedWidth = css`
 `;
 
 const captionPadding = css`
-	padding-left: 8px;
-	padding-right: 8px;
+	padding-left: 10px;
+	padding-right: 10px;
 `;
 
 const tabletCaptionPadding = css`
 	${until.desktop} {
 		${captionPadding}
-	}
-`;
-
-const videoPadding = css`
-	${until.mobileLandscape} {
-		margin-left: 10px;
-	}
-	${between.mobileLandscape.and.phablet} {
-		margin-left: ${space[5]}px;
 	}
 `;
 
@@ -251,7 +236,6 @@ export const Caption = ({
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
-				mediaType === 'Video' && videoPadding,
 			]}
 		>
 			{format.design === ArticleDesign.Gallery ? null : mediaType ===

@@ -1,15 +1,18 @@
 import { css } from '@emotion/react';
 import {
-	focusHalo,
 	from,
 	headline,
 	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import type { Palette } from '../../types/palette';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from '../Card/components/ImageWrapper';
+import { PlayIcon } from '../Card/components/PlayIcon';
 import { secondsToDuration } from '../MediaDuration';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
@@ -29,6 +32,8 @@ type Props = {
 	kicker?: string;
 	format: ArticleFormat;
 	showTextOverlay?: boolean;
+	imageSize: ImageSizeType;
+	imagePositionOnMobile: ImagePositionType;
 };
 
 const overlayStyles = css`
@@ -49,50 +54,15 @@ const overlayStyles = css`
 		height: 100%;
 	}
 
-	/* hard code "overlay-play-button" to be able to give play button animation on focus/hover of overlay */
-	:focus {
-		${focusHalo}
-		.overlay-play-button {
-			transform: scale(1.15);
-			transition-duration: 300ms;
-		}
+	.play-icon {
+		transition: transform 300ms;
 	}
-	:hover {
-		.overlay-play-button {
-			transform: scale(1.15);
-			transition-duration: 300ms;
-		}
-	}
-`;
 
-const svgStyles = css`
-	/* Nudge Icon to the right, so it appears optically centered
-	/* https://medium.com/design-bridges/optical-effects-9fca82b4cd9a#f9d2 */
-	padding-left: ${space[2]}px;
-	svg {
-		transform-origin: center;
-		fill: ${sourcePalette.neutral[100]};
-		height: 60px;
-		transform: scale(1.15);
-		transition-duration: 300ms;
+	/* We scale the play icon on hover and focus to indicate it's playable content. */
+	:focus .play-icon,
+	:hover .play-icon {
+		transform: translate(-50%, -50%) scale(1.15);
 	}
-`;
-const playButtonStyles = css`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -40px; /* Half the height of the circle */
-	margin-left: -40px;
-	background-color: rgba(18, 18, 18, 0.6);
-	border-radius: 100%;
-	height: 80px;
-	width: 80px;
-	transform: scale(1);
-	transition-duration: 300ms;
-
-	display: flex;
-	align-items: center;
-	justify-content: center;
 `;
 
 const pillStyles = css`
@@ -181,6 +151,8 @@ export const YoutubeAtomOverlay = ({
 	kicker,
 	format,
 	showTextOverlay,
+	imageSize,
+	imagePositionOnMobile,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
 	const hasDuration = duration !== undefined && duration > 0;
@@ -188,6 +160,8 @@ export const YoutubeAtomOverlay = ({
 	const isLive = videoCategory === 'live';
 	const dcrPalette = decidePalette(format);
 	const image = overrideImage ?? posterImage;
+	const hidePillOnMobile =
+		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
 	return (
 		<button
@@ -206,7 +180,15 @@ export const YoutubeAtomOverlay = ({
 				/>
 			)}
 			{showPill && (
-				<div css={pillStyles}>
+				<div
+					css={
+						hidePillOnMobile
+							? css`
+									display: none;
+							  `
+							: pillStyles
+					}
+				>
 					{!!videoCategory && (
 						<div css={pillItemStyles}>
 							<div css={[pillTextStyles, isLive && liveStyles]}>
@@ -223,12 +205,10 @@ export const YoutubeAtomOverlay = ({
 					)}
 				</div>
 			)}
-			<div className="overlay-play-button" css={playButtonStyles}>
-				<span css={svgStyles}>
-					<SvgMediaControlsPlay />
-				</span>
-			</div>
-
+			<PlayIcon
+				imageSize={imageSize}
+				imagePositionOnMobile={imagePositionOnMobile}
+			/>
 			{showTextOverlay && (
 				<div css={textOverlayStyles}>
 					<div css={kickerStyles(dcrPalette)}>{kicker}</div>

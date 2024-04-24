@@ -74,7 +74,7 @@ const commentIdFromUrl = () => {
 	const [, commentId] = hash.split('-');
 	if (!commentId) return;
 
-	return parseInt(commentId, 10);
+	return commentId;
 };
 
 /**
@@ -83,10 +83,9 @@ const commentIdFromUrl = () => {
  */
 const remapToValidFilters = (
 	filters: FilterOptions,
-	hashCommentId: number | undefined,
+	hashCommentId: string | undefined,
 ) => {
-	const permalinkBeingUsed =
-		hashCommentId !== undefined && !Number.isNaN(hashCommentId);
+	const permalinkBeingUsed = !!hashCommentId;
 
 	if (!permalinkBeingUsed) return filters;
 	if (filters.threads !== 'collapsed') return filters;
@@ -142,7 +141,7 @@ type State = {
 	commentCount: number | undefined;
 	topLevelCommentCount: number;
 	filters: FilterOptions;
-	hashCommentId: number | undefined;
+	hashCommentId: string | undefined;
 	loading: boolean;
 	topForm: CommentFormProps;
 	replyForm: CommentFormProps;
@@ -197,7 +196,7 @@ const reducer = (state: State, action: Action): State => {
 				...state,
 				comments: state.comments.map((comment) =>
 					comment.responses &&
-					comment.id === Number(action.comment.responseTo.commentId)
+					comment.id === action.comment.responseTo.commentId
 						? {
 								...comment,
 								responses: [
@@ -390,7 +389,9 @@ export const Discussion = ({
 		})
 			.then((result) => {
 				if (result.kind === 'error') {
-					console.error(`getDiscussion - error: ${result.error}`);
+					if (result.error !== 'AbortedSignal') {
+						console.error(`getDiscussion - error: ${result.error}`);
+					}
 					return;
 				}
 
@@ -419,7 +420,7 @@ export const Discussion = ({
 		rememberFilters(filters);
 	}, [filters]);
 
-	const handlePermalink = (commentId: number) => {
+	const handlePermalink = (commentId: string) => {
 		window.location.hash = `#comment-${commentId}`;
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand

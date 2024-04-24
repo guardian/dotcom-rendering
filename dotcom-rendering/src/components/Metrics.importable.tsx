@@ -9,6 +9,7 @@ import {
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
+import { adBlockAsk } from '../experiments/tests/ad-block-ask';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -29,6 +30,7 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
+	adBlockAsk,
 ];
 
 const useBrowserId = () => {
@@ -120,8 +122,9 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				team: 'dotcom',
 			});
 
-			if (bypassSampling || isDev)
+			if (bypassSampling || isDev) {
 				void bypassCoreWebVitalsSampling('commercial');
+			}
 		},
 		[abTestApi, browserId, isDev, pageViewId, shouldBypassSampling],
 	);

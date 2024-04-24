@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
 import { enhanceArticleType } from '../lib/article';
 import { decideFormat } from '../lib/decideFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
@@ -77,6 +77,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		promotedNewsletter: undefined,
 		imagesForLightbox: [],
 		hasAffiliateLinksDisclaimer: false,
+		abTests: abTests ?? {},
 	});
 	const html = renderBlocks({
 		blocks: enhancedBlocks,

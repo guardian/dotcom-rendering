@@ -58,7 +58,10 @@ export const AllEditorialNewslettersPageLayout = ({
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									isPaidContent={false}
+									shouldHideReaderRevenue={false}
+								/>
 							</Section>
 						</Stuck>
 					)}
@@ -99,7 +102,6 @@ export const AllEditorialNewslettersPageLayout = ({
 						element="nav"
 					>
 						<Nav
-							headerTopBarSwitch={false}
 							nav={NAV}
 							subscribeUrl={subscribeUrl}
 							editionId={editionId}

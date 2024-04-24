@@ -1,6 +1,7 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { AdPlaceholder } from '../components/AdPlaceholder.apps';
+import { AffiliateDisclaimerInline } from '../components/AffiliateDisclaimer';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -10,7 +11,6 @@ import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtom } from '../components/ChartAtom.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
-import { AffiliateDisclaimerInline } from '../components/Disclaimer';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmailSignUpWrapper } from '../components/EmailSignUpWrapper';
@@ -46,6 +46,7 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
+import { Timeline } from '../components/Timeline';
 import { TimelineAtom } from '../components/TimelineAtom.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
@@ -86,6 +87,10 @@ type Props = {
 	isPinnedPost?: boolean;
 	abTests: ServerSideTests;
 	editionId: EditionId;
+	forceDropCap?: 'on' | 'off';
+	isTimeline?: boolean;
+	totalElements?: number;
+	isListElement?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -141,6 +146,10 @@ export const renderElement = ({
 	isPinnedPost,
 	abTests,
 	editionId,
+	forceDropCap,
+	isTimeline = false,
+	totalElements = 0,
+	isListElement = false,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -200,7 +209,7 @@ export const renderElement = ({
 					key={index}
 					format={format}
 					captionText={element.captionText}
-					padCaption={element.padCaption}
+					padCaption={isTimeline}
 					credit={element.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
@@ -353,6 +362,7 @@ export const renderElement = ({
 					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
+					isTimeline={isTimeline}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -394,7 +404,7 @@ export const renderElement = ({
 			return (
 				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
 				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
-				<Island priority="critical" defer={{ until: 'visible' }}>
+				<Island priority="critical" defer={{ until: 'idle' }}>
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
@@ -434,6 +444,7 @@ export const renderElement = ({
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
@@ -481,7 +492,7 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 			};
-
+			if (isListElement || isTimeline) return null;
 			return <EmailSignUpWrapper {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return <AdPlaceholder />;
@@ -616,7 +627,13 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-			return <SubheadingBlockComponent key={index} html={element.html} />;
+			return (
+				<SubheadingBlockComponent
+					key={index}
+					format={format}
+					html={element.html}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.TableBlockElement':
 			return <TableBlockComponent element={element} />;
 
@@ -627,10 +644,14 @@ export const renderElement = ({
 					isFirstParagraph={index === 0}
 					html={element.html}
 					format={format}
-					forceDropCap={element.dropCap}
+					forceDropCap={
+						forceDropCap !== undefined
+							? forceDropCap
+							: element.dropCap
+					}
 				/>
 			);
-		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+		case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
 			return (
 				<Island priority="feature" defer={{ until: 'visible' }}>
 					<TimelineAtom
@@ -640,6 +661,28 @@ export const renderElement = ({
 						description={element.description}
 					/>
 				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.DCRTimelineBlockElement':
+		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement':
+			return (
+				<Timeline
+					timeline={element}
+					ArticleElementComponent={getNestedArticleElement({
+						abTests,
+						ajaxUrl,
+						editionId,
+						isAdFreeUser,
+						isMainMedia,
+						isSensitive,
+						pageId,
+						switches,
+						webTitle,
+						host,
+						isPinnedPost,
+						starRating,
+					})}
+					format={format}
+				/>
 			);
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			if (switches.enhanceTweets) {
@@ -833,6 +876,10 @@ export const RenderArticleElement = ({
 	isPinnedPost,
 	abTests,
 	editionId,
+	forceDropCap,
+	isTimeline,
+	totalElements,
+	isListElement,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -853,6 +900,10 @@ export const RenderArticleElement = ({
 		isPinnedPost,
 		abTests,
 		editionId,
+		forceDropCap,
+		isTimeline,
+		totalElements,
+		isListElement,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
@@ -871,6 +922,7 @@ export const RenderArticleElement = ({
 			}
 			type={element._type}
 			format={format}
+			isTimeline={isTimeline}
 		>
 			{el}
 		</Figure>
@@ -878,5 +930,23 @@ export const RenderArticleElement = ({
 		el
 	);
 };
+
+type ElementLevelPropNames =
+	| 'element'
+	| 'index'
+	| 'forceDropCap'
+	| 'hideCaption'
+	| 'format'
+	| 'isTimeline'
+	| 'isListElement';
+type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
+type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
+
+export const getNestedArticleElement =
+	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
+		<RenderArticleElement {...articleProps} {...elementProps} />
+	);
+
+export type NestedArticleElement = ReturnType<typeof getNestedArticleElement>;
 
 export type ArticleElementRenderer = typeof RenderArticleElement;

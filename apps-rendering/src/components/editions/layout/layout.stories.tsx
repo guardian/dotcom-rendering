@@ -1,10 +1,6 @@
 // ----- Imports ----- //
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import {
-	ArticleDisplay,
-	ArticleElementRole,
-	ArticlePillar,
-} from '@guardian/libs';
+import { ArticleDisplay, ArticleElementRole, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { none, some } from '../../../../vendor/@guardian/types/index';
 import type { Contributor } from 'contributor';
@@ -74,7 +70,7 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			webUrl: 'https://www.theguardian.com',
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -85,7 +81,7 @@ const Analysis = (): ReactElement => (
 			...analysis,
 			webUrl: 'https://www.theguardian.com',
 			tags: [getTag('tone/analysis', 'View from the Guardian ')],
-			theme: ArticlePillar.Lifestyle,
+			theme: Pillar.Lifestyle,
 		}}
 	/>
 );
@@ -96,7 +92,7 @@ const Editorial = (): ReactElement => (
 			...editorial,
 			tags: [getTag('tone/editorials', 'View from the Guardian ')],
 			webUrl: 'https://www.theguardian.com',
-			theme: ArticlePillar.Opinion,
+			theme: Pillar.Opinion,
 		}}
 	/>
 );
@@ -106,7 +102,7 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			webUrl: 'https://www.theguardian.com',
-			theme: ArticlePillar.Sport,
+			theme: Pillar.Sport,
 		}}
 	/>
 );
@@ -116,7 +112,7 @@ const Review = (): ReactElement => (
 		item={{
 			...review,
 			webUrl: 'https://www.theguardian.com',
-			theme: ArticlePillar.Culture,
+			theme: Pillar.Culture,
 		}}
 	/>
 );
@@ -127,7 +123,7 @@ const Showcase = (): ReactElement => (
 			...article,
 			webUrl: 'https://www.theguardian.com',
 			display: ArticleDisplay.Showcase,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -137,7 +133,7 @@ const Interview = (): ReactElement => (
 		item={{
 			...interview,
 			webUrl: 'https://www.theguardian.com',
-			theme: ArticlePillar.Sport,
+			theme: Pillar.Sport,
 		}}
 	/>
 );
@@ -148,7 +144,7 @@ const Comment = (): ReactElement => (
 			...comment,
 			webUrl: 'https://www.theguardian.com',
 			contributors,
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -159,7 +155,7 @@ const Letter = (): ReactElement => (
 			...letter,
 			webUrl: 'https://www.theguardian.com',
 			tags: [getTag('tone/letters', 'Letters ')],
-			theme: ArticlePillar.Opinion,
+			theme: Pillar.Opinion,
 		}}
 	/>
 );
@@ -174,7 +170,7 @@ const Correction = (): ReactElement => (
 					'Corrections and Clarifications ',
 				),
 			],
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );
@@ -185,7 +181,7 @@ const MatchReport = (): ReactElement => (
 			...matchReport,
 			webUrl: 'https://www.theguardian.com',
 			tags: [getTag('tone/sport', 'Sport ')],
-			theme: ArticlePillar.Sport,
+			theme: Pillar.Sport,
 		}}
 	/>
 );
@@ -222,7 +218,7 @@ const Gallery = (): ReactElement => (
 		item={{
 			...media,
 			webUrl: 'https://www.theguardian.com',
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 		}}
 	/>
 );

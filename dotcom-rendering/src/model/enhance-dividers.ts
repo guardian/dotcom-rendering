@@ -7,8 +7,9 @@ const isDinkus = (element: FEElement): boolean => {
 		element._type !==
 			'model.dotcomrendering.pageElements.SubheadingBlockElement' &&
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
-	)
+	) {
 		return false;
+	}
 
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstChild) return false;
@@ -46,7 +47,7 @@ export const enhanceDividers = (elements: FEElement[]): FEElement[] =>
 		) {
 			return {
 				...element,
-				dropCap: true,
+				dropCap: 'on',
 			};
 		} else {
 			// Otherwise, do nothing

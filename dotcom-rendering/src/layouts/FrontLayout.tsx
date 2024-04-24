@@ -169,7 +169,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									isPaidContent={!!front.config.isPaidContent}
+									shouldHideReaderRevenue={false}
+								/>
 							</Section>
 						</Stuck>
 					)}
@@ -234,9 +237,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							}
 							selectedPillar={NAV.selectedPillar}
 							editionId={front.editionId}
-							headerTopBarSwitch={
-								!!front.config.switches.headerTopNav
-							}
 							hasPageSkin={hasPageSkin}
 						/>
 					</Section>

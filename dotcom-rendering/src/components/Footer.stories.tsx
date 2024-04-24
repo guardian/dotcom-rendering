@@ -6,7 +6,7 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Standard } from '../../fixtures/generated/articles/Standard';
+import { Standard } from '../../fixtures/generated/dcr-articles/Standard';
 import { editionList } from '../lib/edition';
 import { extractNAV } from '../model/extract-nav';
 import { Footer } from './Footer';

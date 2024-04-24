@@ -13,7 +13,9 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
-import { TopRightAdSlot } from './TopRightAdSlot';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { AdBlockAsk } from './AdBlockAsk.importable';
+import { Island } from './Island';
 
 type InlinePosition =
 	| 'fronts-banner'
@@ -34,19 +36,29 @@ type SlotNamesWithPageSkin = SlotName | 'pageskin';
 type InlineProps = {
 	position: InlinePosition;
 	index: number;
+	shouldHideReaderRevenue?: never;
 };
 
-type NonInlineProps = {
-	position: Exclude<SlotNamesWithPageSkin, InlinePosition>;
+type RightProps = {
+	position: 'right';
 	index?: never;
+	shouldHideReaderRevenue: boolean;
+};
+
+type RemainingProps = {
+	position: Exclude<SlotNamesWithPageSkin, InlinePosition | 'right'>;
+	index?: never;
+	shouldHideReaderRevenue?: never;
 };
 
 /**
- * This allows us to conditionally require the index property based
- * on position. If `position` is an inline type then we expect the
- * index value. If not, then we explicitly refuse this property
+ * This allows us to conditionally require properties based on position:
+ *
+ * - If `position` is an inline type then we expect the `index` prop.
+ * - If `position` is `right` then we expect the `shouldHideReaderRevenue` prop
+ * - If not, then we explicitly refuse these properties
  */
-type Props = DefaultProps & (InlineProps | NonInlineProps);
+type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
@@ -176,15 +188,6 @@ const fluidFullWidthAdStyles = css`
 	&.ad-slot--fluid {
 		width: 100%;
 	}
-`;
-
-const topAboveNavStyles = css`
-	position: relative;
-	margin: 0 auto;
-	min-height: ${adSizes.leaderboard.height}px;
-	min-width: ${adSizes.leaderboard.width}px;
-	text-align: left;
-	display: block;
 `;
 
 const merchandisingAdContainerStyles = css`
@@ -317,7 +320,6 @@ const mostPopAdStyles = css`
 	min-height: ${adSizes.mpu.height + labelHeight}px;
 	min-width: ${adSizes.mpu.width}px;
 	max-width: ${adSizes.mpu.width}px;
-	margin: 12px auto;
 	text-align: center;
 	${from.tablet} {
 		max-width: 700px;
@@ -325,9 +327,6 @@ const mostPopAdStyles = css`
 	${from.desktop} {
 		width: auto;
 		max-width: ${adSizes.mpu.width}px;
-	}
-	${from.wide} {
-		margin-top: 25px;
 	}
 `;
 
@@ -436,6 +435,7 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	hasPageskin = false,
+	shouldHideReaderRevenue = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -466,11 +466,60 @@ export const AdSlot = ({
 					);
 				}
 				case ArticleDisplay.Standard: {
+					const slotId = 'dfp-ad--right';
 					return (
-						<TopRightAdSlot
-							isPaidContent={isPaidContent}
-							adStyles={[labelStyles]}
-						/>
+						<>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<AdBlockAsk
+									size="mpu"
+									slotId={slotId}
+									isPaidContent={isPaidContent}
+									shouldHideReaderRevenue={
+										shouldHideReaderRevenue
+									}
+								/>
+							</Island>
+							<div
+								id="top-right-ad-slot"
+								className="ad-slot-container"
+								css={[
+									css`
+										position: static;
+										height: 100%;
+										max-height: 100%;
+									`,
+									labelStyles,
+								]}
+							>
+								<div
+									id={slotId}
+									className={[
+										'js-ad-slot',
+										'ad-slot',
+										'ad-slot--right',
+										'ad-slot--mpu-banner-ad',
+										'ad-slot--rendered',
+										'js-sticky-mpu',
+									].join(' ')}
+									css={[
+										css`
+											position: sticky;
+											/* Possibly account for the sticky Labs header and 6px of padding */
+											top: ${isPaidContent
+												? LABS_HEADER_HEIGHT + 6
+												: 0}px;
+										`,
+										labelStyles,
+									]}
+									data-link-name="ad slot right"
+									data-name="right"
+									aria-hidden="true"
+								/>
+							</div>
+						</>
 					);
 				}
 				default:
@@ -507,11 +556,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[
-						fluidAdStyles,
-						fluidFullWidthAdStyles,
-						topAboveNavStyles,
-					]}
+					css={[fluidAdStyles, fluidFullWidthAdStyles]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
 					aria-hidden="true"

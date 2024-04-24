@@ -96,7 +96,7 @@ const errorSvgStyles = css`
 `;
 
 type Props = {
-	commentId: number;
+	commentId: string;
 	toggleSetShowForm: () => void;
 	reportAbuse: ReturnType<typeof reportAbuse>;
 };

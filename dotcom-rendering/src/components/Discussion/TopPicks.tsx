@@ -10,7 +10,7 @@ import { TopPick } from './TopPick';
 type Props = {
 	user?: SignedInUser;
 	comments: Array<CommentType | ReplyType>;
-	onPermalinkClick: (commentId: number) => void;
+	onPermalinkClick: (commentId: string) => void;
 	isClosedForRecommendations: boolean;
 };
 
@@ -55,10 +55,11 @@ export const TopPicks = ({
 }: Props) => {
 	const leftColComments: Array<CommentType | ReplyType> = [];
 	const rightColComments: Array<CommentType | ReplyType> = [];
-	for (const [index, comment] of comments.entries())
+	for (const [index, comment] of comments.entries()) {
 		index % 2 === 0
 			? leftColComments.push(comment)
 			: rightColComments.push(comment);
+	}
 	return (
 		<div css={picksWrapper}>
 			<div css={twoColCommentsStyles}>

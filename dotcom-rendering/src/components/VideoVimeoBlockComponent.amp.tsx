@@ -13,7 +13,7 @@ export const VideoVimeoBlockComponent = ({ element, pillar }: Props) => {
 	// see: https://github.com/guardian/dotcom-rendering/issues/4057
 	// We should remove this once ☝️ is fixed.
 	const url = element.url === '' ? element.originalUrl ?? '' : element.url;
-	const vimeoId = getIdFromUrl(url, '(\\d+)($|\\/)', true);
+	const vimeoId = getIdFromUrl(url, true);
 
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>

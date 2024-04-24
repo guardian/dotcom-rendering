@@ -24,11 +24,11 @@
 	},
 	"dependencies": {
 		"@guardian/prettier": "5.0.0",
-		"chromatic": "^6.19.9",
-		"husky": "^8.0.3",
+		"chromatic": "11.0.8",
+		"husky": "8.0.3",
 		"lint-staged": "15.2.0",
 		"prettier": "3.0.3",
 		"tslib": "2.6.2"
 	},
-	"packageManager": "pnpm@8.14.3"
+	"packageManager": "pnpm@8.15.7"
 }

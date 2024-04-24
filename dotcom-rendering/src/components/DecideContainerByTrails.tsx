@@ -535,7 +535,7 @@ export const EightOrMoreFast = ({
 					<CardDefault trail={trails[6]} showAge={true} />
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
-					<CardDefault trail={trails[6]} showAge={true} />
+					<CardDefault trail={trails[7]} showAge={true} />
 				</LI>
 			</UL>
 			{afterEight.length > 0 ? (

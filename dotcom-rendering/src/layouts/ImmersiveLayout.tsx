@@ -10,6 +10,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
@@ -22,7 +23,6 @@ import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
-import { AffiliateDisclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -205,6 +205,12 @@ const maxWidth = css`
 	}
 `;
 
+const linesMargin = css`
+	${from.leftCol} {
+		margin-top: ${space[5]}px;
+	}
+`;
+
 const stretchLines = css`
 	${until.phablet} {
 		margin-left: -20px;
@@ -374,9 +380,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										.contribute
 								}
 								editionId={article.editionId}
-								headerTopBarSwitch={
-									!!article.config.switches.headerTopNav
-								}
 							/>
 						</Section>
 					</div>
@@ -599,7 +602,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								<></>
 							) : (
 								<div css={maxWidth}>
-									<div css={stretchLines}>
+									<div css={[stretchLines, linesMargin]}>
 										{format.theme ===
 										ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
@@ -700,11 +703,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											}
 											ajaxUrl={article.config.ajaxUrl}
 										/>
-										<Hide when="below" breakpoint="leftCol">
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
-										</Hide>
+										{!!article.affiliateLinksDisclaimer && (
+											<AffiliateDisclaimer />
+										)}
 									</>
 								)}
 							</div>
@@ -803,50 +804,53 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							</ArticleContainer>
 						</GridItem>
 						<GridItem area="right-column">
-							{ArticleDesign.Gallery != format.design && (
+        			{ArticleDesign.Gallery != format.design && (
 								//TODO: work out how to keep the right column here for ads
-								<div
-									css={css`
-										padding-top: 6px;
-										height: 100%;
-										${from.desktop} {
-											/* above 980 */
-											margin-left: 20px;
-											margin-right: -20px;
-										}
-										${from.leftCol} {
-											/* above 1140 */
-											margin-left: 0px;
-											margin-right: 0px;
-										}
-									`}
-								>
-									<RightColumn>
-										<>
-											{mainMedia && renderAds && (
-												<div
-													css={css`
-														margin-top: ${space[4]}px;
-													`}
-												>
-													{
-														<AdSlot
-															position="right"
-															display={
-																format.display
-															}
-															isPaidContent={
-																article.pageType
-																	.isPaidContent
-															}
-														/>
-													}
-												</div>
-											)}
-										</>
-									</RightColumn>
-								</div>
-							)}
+							<div
+								css={css`
+									padding-top: 6px;
+									height: 100%;
+									${from.desktop} {
+										/* above 980 */
+										margin-left: 20px;
+										margin-right: -20px;
+									}
+									${from.leftCol} {
+										/* above 1140 */
+										margin-left: 0px;
+										margin-right: 0px;
+									}
+								`}
+							>
+								<RightColumn>
+									<>
+										{mainMedia && renderAds && (
+											<div
+												css={css`
+													margin-top: ${space[4]}px;
+												`}
+											>
+												{
+													<AdSlot
+														position="right"
+														display={format.display}
+														isPaidContent={
+															article.pageType
+																.isPaidContent
+														}
+														shouldHideReaderRevenue={
+															!!article.config
+																.shouldHideReaderRevenue
+														}
+													/>
+												}
+											</div>
+										)}
+									</>
+								</RightColumn>
+							</div>
+             )}
+
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>

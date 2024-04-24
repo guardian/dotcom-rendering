@@ -223,7 +223,12 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot />
+							<HeaderAdSlot
+								isPaidContent={!!article.config.isPaidContent}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+							/>
 						</Section>
 					</Stuck>
 				)}
@@ -274,9 +279,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							article.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
 					/>
 				</Section>
 

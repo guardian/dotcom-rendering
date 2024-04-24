@@ -10,6 +10,7 @@ import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
+import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
 import { AppsFooter } from '../components/AppsFooter.importable';
 import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
@@ -21,7 +22,6 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
-import { AffiliateDisclaimer } from '../components/Disclaimer';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -261,7 +261,16 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											padSides={false}
 											shouldCenter={false}
 										>
-											<HeaderAdSlot />
+											<HeaderAdSlot
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												shouldHideReaderRevenue={
+													!!article.config
+														.shouldHideReaderRevenue
+												}
+											/>
 										</Section>
 									</Stuck>
 								)}
@@ -333,10 +342,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													.header.subscribe
 											}
 											editionId={article.editionId}
-											headerTopBarSwitch={
-												!!article.config.switches
-													.headerTopNav
-											}
 										/>
 									</Section>
 
@@ -411,7 +416,16 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											showSideBorders={false}
 											padSides={false}
 										>
-											<HeaderAdSlot />
+											<HeaderAdSlot
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												shouldHideReaderRevenue={
+													!!article.config
+														.shouldHideReaderRevenue
+												}
+											/>
 										</Section>
 									</Stuck>
 								)}
@@ -446,10 +460,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													.header.subscribe
 											}
 											editionId={article.editionId}
-											headerTopBarSwitch={
-												!!article.config.switches
-													.headerTopNav
-											}
 										/>
 									</Section>
 								</Stuck>
@@ -649,11 +659,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											}
 											ajaxUrl={article.config.ajaxUrl}
 										/>
-										<Hide until="leftCol">
-											{!!article.affiliateLinksDisclaimer && (
-												<AffiliateDisclaimer />
-											)}
-										</Hide>
+										{!!article.affiliateLinksDisclaimer && (
+											<AffiliateDisclaimer />
+										)}
 									</>
 								)}
 							</div>
@@ -778,6 +786,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
+										shouldHideReaderRevenue={
+											!!article.config
+												.shouldHideReaderRevenue
+										}
 									/>
 								</RightColumn>
 							</div>

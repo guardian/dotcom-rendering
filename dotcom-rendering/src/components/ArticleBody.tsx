@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, body, headline, space } from '@guardian/source-foundations';
+import {
+	between,
+	body,
+	headline,
+	remSpace,
+} from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
@@ -47,14 +52,6 @@ type Props = {
 	isRightToLeftLang?: boolean;
 };
 
-const globalH2Styles = (display: ArticleDisplay) => css`
-	h2:not([data-ignore='global-h2-styling']) {
-		${display === ArticleDisplay.Immersive
-			? headline.medium({ fontWeight: 'light' })
-			: headline.xxsmall({ fontWeight: 'bold' })};
-	}
-`;
-
 const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
@@ -62,7 +59,7 @@ const globalOlStyles = () => css`
 			${body.medium({ lineHeight: 'tight' })};
 			content: counter(li);
 			counter-increment: li;
-			margin-right: ${space[1]}px;
+			margin-right: ${remSpace[1]};
 		}
 	}
 `;
@@ -72,7 +69,7 @@ const globalH3Styles = (display: ArticleDisplay) => css`
 	`
 		h3 {
 			${headline.xsmall({ fontWeight: 'bold' })};
-			margin-bottom: ${space[2]}px;
+			margin-bottom: ${remSpace[2]};
 		}
 	`}
 `;
@@ -149,8 +146,8 @@ export const ArticleBody = ({
 				// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
 				className="js-liveblog-body"
 				css={[
+					`margin-top: ${remSpace[3]}`,
 					globalStrongStyles,
-					globalH2Styles(format.display),
 					globalH3Styles(format.display),
 					globalLinkStyles(),
 					// revealStyles is used to animate the reveal of new blocks
@@ -201,8 +198,8 @@ export const ArticleBody = ({
 			<div
 				id="maincontent"
 				css={[
+					`margin-top: ${remSpace[3]}`,
 					isInteractive ? null : bodyPadding,
-					globalH2Styles(format.display),
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,

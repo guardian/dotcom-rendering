@@ -7,6 +7,7 @@ import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
+import { AffiliateDisclaimerInline } from './AffiliateDisclaimer';
 import { AudioAtomBlockComponent } from './AudioAtomBlockComponent.amp';
 import { CommentBlockComponent } from './CommentBlockComponent.amp';
 import { ContentAtomBlockComponent } from './ContentAtomBlockComponent.amp';
@@ -21,7 +22,7 @@ import { RichLinkBlockComponent } from './RichLinkBlockComponent.amp';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent.amp';
 import { SubheadingBlockComponent } from './SubheadingBlockComponent.amp';
 import { TextBlockComponent } from './TextBlockComponent.amp';
-import { TimelineBlockComponent } from './TimelineBlockComponent.amp';
+import { TimelineAtom } from './TimelineAtom.amp';
 import { TwitterBlockComponent } from './TwitterBlockComponent.amp';
 import { VideoVimeoBlockComponent } from './VideoVimeoBlockComponent.amp';
 import { VideoYoutubeBlockComponent } from './VideoYoutubeBlockComponent.amp';
@@ -56,6 +57,7 @@ const AMP_SUPPORTED_ELEMENTS = [
 	'model.dotcomrendering.pageElements.SoundcloudBlockElement',
 	'model.dotcomrendering.pageElements.SubheadingBlockElement',
 	'model.dotcomrendering.pageElements.TextBlockElement',
+	'model.dotcomrendering.pageElements.TimelineAtomBlockElement',
 	'model.dotcomrendering.pageElements.TimelineBlockElement',
 	'model.dotcomrendering.pageElements.TweetBlockElement',
 	'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
@@ -92,8 +94,24 @@ export const isAmpSupported = ({
 				element._type ===
 				'model.dotcomrendering.pageElements.QuizAtomBlockElement',
 		);
-		if (!isSwitchedOn || hasQuizTag || hasQuizAtoms || elements.length == 0)
+		if (
+			!isSwitchedOn ||
+			hasQuizTag ||
+			hasQuizAtoms ||
+			elements.length == 0
+		) {
 			return false;
+		}
+	}
+
+	if (
+		elements.some(
+			(element) =>
+				element._type ===
+				'model.dotcomrendering.pageElements.ListBlockElement',
+		)
+	) {
+		return false;
 	}
 
 	if (format.design === ArticleDesign.LiveBlog) {
@@ -311,9 +329,9 @@ export const Elements = (
 						pillar={pillar}
 					/>
 				);
-			case 'model.dotcomrendering.pageElements.TimelineBlockElement':
+			case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
 				return (
-					<TimelineBlockComponent
+					<TimelineAtom
 						key={element.elementId}
 						id={element.id}
 						title={element.title}
@@ -356,7 +374,7 @@ export const Elements = (
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-				return <></>;
+				return <AffiliateDisclaimerInline isAmp={true} />;
 			default:
 				console.log('Unsupported Element', JSON.stringify(element));
 				if ((element as { isMandatory?: boolean }).isMandatory) {

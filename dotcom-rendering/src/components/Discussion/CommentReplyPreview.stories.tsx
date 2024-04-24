@@ -25,7 +25,7 @@ const multiLBlockParagraph = `
 `;
 
 const commentBeingRepliedTo: CommentType = {
-	id: 25487686,
+	id: '25487686',
 	body: multiLBlockParagraph,
 	date: '26 July 2013 4:13pm',
 	isoDateTime: '2013-07-26T15:13:20Z',
