@@ -17,7 +17,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideLines } from '../components/DecideLines';
@@ -69,43 +68,28 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Left Column (220 - 1px border)
-					Vertical grey border
-					Main content
-					Right Column
-
-				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-template-columns: 220px 1fr;
 					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'lines  border  media'
-						'meta   border  media'
-						'meta   border  submeta';
+						'title   headline'
+						'.       standfirst'
+						'lines   media'
+						'meta    media'
+						'meta    submeta';
 				}
 
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1fr 300px;
 					grid-template-areas:
-						'title  border  headline    headline'
-						'.      border  standfirst  standfirst'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  submeta     submeta';
+						'title   headline     headline'
+						'.       standfirst   standfirst'
+						'lines   media        media'
+						'meta    media        media'
+						'meta    submeta      submeta';
 				}
 
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Main content
-					Right Column
-				*/
 				${until.leftCol} {
 					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
@@ -451,9 +435,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 							/>
-						</GridItem>
-						<GridItem area="border">
-							<Border />
 						</GridItem>
 
 						{displayAvatarUrl ? (

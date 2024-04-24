@@ -19,7 +19,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -76,48 +75,46 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-template-columns: 220px 1fr;
 
 					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
+						'title  headline'
+						'.      standfirst'
+						'.      media'
+						'.      media'
+						'.      lines'
+						'.      meta'
+						'body   body'
+						'.      .';
 				}
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr;
+					grid-template-columns: 140px 1fr;
 
 					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
+						'title   headline'
+						'.       standfirst'
+						'.       media'
+						'.       media'
+						'.       lines'
+						'.       meta'
+						'body    body'
+						'.       .';
 				}
 
 				${until.leftCol} {
@@ -422,7 +419,12 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						className={interactiveLegacyClasses.contentInteractive}
 					>
 						<InteractiveGrid>
-							<GridItem area="media">
+							<GridItem
+								area="media"
+								hideBorder={
+									format.theme === ArticleSpecial.Labs
+								}
+							>
 								<div css={maxWidth}>
 									<MainMedia
 										format={format}
@@ -454,14 +456,12 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									/>
 								</div>
 							</GridItem>
-							<GridItem area="border">
-								{format.theme === ArticleSpecial.Labs ? (
-									<></>
-								) : (
-									<Border />
-								)}
-							</GridItem>
-							<GridItem area="headline">
+							<GridItem
+								area="headline"
+								hideBorder={
+									format.theme === ArticleSpecial.Labs
+								}
+							>
 								<div css={maxWidth}>
 									<ArticleHeadline
 										format={format}
@@ -488,14 +488,25 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									<></>
 								)}
 							</GridItem>
-							<GridItem area="standfirst">
+							<GridItem
+								area="standfirst"
+								hideBorder={
+									format.theme === ArticleSpecial.Labs
+								}
+							>
 								<Standfirst
 									format={format}
 									standfirst={article.standfirst}
 								/>
 							</GridItem>
 
-							<GridItem area="lines">
+							<GridItem
+								area="lines"
+								layout="interactive"
+								hideBorder={
+									format.theme === ArticleSpecial.Labs
+								}
+							>
 								<div css={maxWidth}>
 									<div css={stretchLines}>
 										<DecideLines
@@ -507,7 +518,14 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									</div>
 								</div>
 							</GridItem>
-							<GridItem area="meta" element="aside">
+							<GridItem
+								area="meta"
+								layout="interactive"
+								element="aside"
+								hideBorder={
+									format.theme === ArticleSpecial.Labs
+								}
+							>
 								<div css={maxWidth}>
 									{isApps ? (
 										<>
@@ -600,7 +618,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									)}
 								</div>
 							</GridItem>
-							<GridItem area="body" element="article">
+							<GridItem
+								area="body"
+								layout="interactive"
+								element="article"
+							>
 								<ArticleContainer format={format}>
 									<ArticleBody
 										format={format}

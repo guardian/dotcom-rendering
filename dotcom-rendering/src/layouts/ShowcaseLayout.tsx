@@ -19,7 +19,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -74,37 +73,36 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
 					Right Column
 
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 220px 1fr 300px;
 					grid-template-areas:
-						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+						'title   headline     headline'
+						'lines   media        media'
+						'meta    media        media'
+						'meta    standfirst   right-column'
+						'.       body         right-column'
+						'.       .            right-column';
 				}
 
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1fr 300px;
 					grid-template-areas:
-						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+						'title   headline     headline'
+						'lines   media        media'
+						'meta    media        media'
+						'meta    standfirst   right-column'
+						'.       body         right-column'
+						'.       .            right-column';
 				}
 
 				/*
@@ -520,9 +518,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 							/>
-						</GridItem>
-						<GridItem area="border">
-							<Border />
 						</GridItem>
 						<GridItem area="headline">
 							<PositionHeadline design={format.design}>

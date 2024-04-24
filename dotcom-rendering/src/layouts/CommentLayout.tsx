@@ -17,7 +17,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -77,70 +76,67 @@ const StandardGrid = ({
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 220px 1fr 300px;
 
 					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
-									'title      border  headline    headline'
-									'lines      border  headline    headline'
-									'meta       border  standfirst  standfirst'
-									'meta       border  media       media'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title   headline     headline'
+									'lines   headline     headline'
+									'meta    standfirst   standfirst'
+									'meta    media        media'
+									'.       body         right-column'
+									'.       .            right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title      border  headline    right-column'
-									'lines      border  headline    right-column'
-									'meta       border  standfirst  right-column'
-									'meta       border  media       right-column'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title   headline     right-column'
+									'lines   headline     right-column'
+									'meta    standfirst   right-column'
+									'meta    media        right-column'
+									'.       body         right-column'
+									'.       .            right-column';
 						  `}
 				}
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
 					Right Column
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1fr 300px;
 
 					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
-									'title      border  headline    headline'
-									'lines      border  headline    headline'
-									'meta       border  standfirst  standfirst'
-									'meta       border  media       media'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title   headline     headline'
+									'lines   headline     headline'
+									'meta    standfirst   standfirst'
+									'meta    media        media'
+									'.       body         right-column'
+									'.       .            right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title      border  headline    right-column'
-									'lines      border  headline    right-column'
-									'meta       border  standfirst  right-column'
-									'meta       border  media       right-column'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title   headline     right-column'
+									'lines   headline     right-column'
+									'meta    standfirst   right-column'
+									'meta    media        right-column'
+									'.       body         right-column'
+									'.       .            right-column';
 						  `}
 				}
 
@@ -490,9 +486,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 							/>
-						</GridItem>
-						<GridItem area="border">
-							<Border />
 						</GridItem>
 						<GridItem area="headline">
 							<div css={maxWidth}>

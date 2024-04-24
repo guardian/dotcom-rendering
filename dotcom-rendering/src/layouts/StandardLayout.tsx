@@ -21,7 +21,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -85,40 +84,38 @@ const StandardGrid = ({
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 220px 1fr 300px;
 
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  matchNav     right-column'
+									'title  matchtabs    right-column'
+									'.      headline     right-column'
+									'.      standfirst   right-column'
+									'lines  media        right-column'
+									'meta   media        right-column'
+									'meta   body         right-column'
+									'.      .            right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  headline     right-column'
+									'.      standfirst   right-column'
+									'lines  media        right-column'
+									'meta   media        right-column'
+									'meta   body         right-column'
+									'.      .            right-column';
 						  `}
 				}
 
@@ -126,33 +123,32 @@ const StandardGrid = ({
 					Explanation of each unit of grid-template-columns
 
 					Left Column
-					Vertical grey border
 					Main content
 					Right Column
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1fr 300px;
 
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title   matchNav     right-column'
+									'title   matchtabs    right-column'
+									'.       headline     right-column'
+									'.       standfirst   right-column'
+									'lines   media        right-column'
+									'meta    media        right-column'
+									'meta    body         right-column'
+									'.       .            right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title   headline     right-column'
+									'.       standfirst   right-column'
+									'lines   media        right-column'
+									'meta    media        right-column'
+									'meta    body         right-column'
+									'.       .            right-column';
 						  `}
 				}
 
@@ -502,7 +498,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					element="article"
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
-						<GridItem area="matchNav" element="aside">
+						<GridItem
+							area="matchNav"
+							element="aside"
+							hideBorder={format.theme === ArticleSpecial.Labs}
+						>
 							<div css={maxWidth}>
 								{isMatchReport && (
 									<Island
@@ -522,7 +522,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								)}
 							</div>
 						</GridItem>
-						<GridItem area="matchtabs" element="aside">
+						<GridItem
+							area="matchtabs"
+							element="aside"
+							hideBorder={format.theme === ArticleSpecial.Labs}
+						>
 							<div css={maxWidth}>
 								{isMatchReport && (
 									<Island
@@ -537,7 +541,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								)}
 							</div>
 						</GridItem>
-						<GridItem area="media">
+						<GridItem
+							area="media"
+							hideBorder={format.theme === ArticleSpecial.Labs}
+						>
 							<div css={maxWidth}>
 								<MainMedia
 									format={format}
@@ -564,14 +571,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
-						<GridItem area="border">
-							{format.theme === ArticleSpecial.Labs ? (
-								<></>
-							) : (
-								<Border />
-							)}
-						</GridItem>
-						<GridItem area="headline">
+						<GridItem
+							area="headline"
+							hideBorder={format.theme === ArticleSpecial.Labs}
+						>
 							<div css={maxWidth}>
 								<ArticleHeadline
 									format={format}
@@ -587,7 +590,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								/>
 							</div>
 						</GridItem>
-						<GridItem area="standfirst">
+						<GridItem
+							area="standfirst"
+							hideBorder={format.theme === ArticleSpecial.Labs}
+						>
 							{article.starRating !== undefined ? (
 								<div css={starWrapper}>
 									<StarRating
@@ -710,7 +716,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								</div>
 							)}
 						</GridItem>
-						<GridItem area="body">
+						<GridItem
+							area="body"
+							hideBorder={format.theme === ArticleSpecial.Labs}
+						>
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}

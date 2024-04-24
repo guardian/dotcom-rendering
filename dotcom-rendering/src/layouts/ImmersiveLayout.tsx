@@ -19,7 +19,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
@@ -79,47 +78,44 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
 					Right Column
 				*/
 				${from.wide} {
-					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-column-gap: 20px;
+					grid-template-columns: 220px 1fr 300px;
 					grid-template-areas:
-						'caption    border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
-						'lines      border      body        right-column'
-						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      body        right-column'
-						'.          border      .           right-column';
+						'caption   title        right-column'
+						'.         headline     right-column'
+						'.         standfirst   right-column'
+						'.         byline       right-column'
+						'lines     body         right-column'
+						'meta      body         right-column'
+						'meta      body         right-column'
+						'.         body         right-column'
+						'.         .            right-column';
 				}
-
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
 					Right Column
 				*/
 				${until.wide} {
-					grid-column-gap: 10px;
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-column-gap: 20px;
+					grid-template-columns: 140px 1fr 300px;
 					grid-template-areas:
-						'.          border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
-						'lines      border      body        right-column'
-						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      body        right-column'
-						'.          border      .           right-column';
+						'.       title        right-column'
+						'.       headline     right-column'
+						'.       standfirst   right-column'
+						'.       byline       right-column'
+						'lines   body         right-column'
+						'meta    body         right-column'
+						'meta    body         right-column'
+						'.       body         right-column'
+						'.       .            right-column';
 				}
 
 				/*
@@ -486,14 +482,13 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								/>
 							</Hide>
 						</GridItem>
-						<GridItem area="border">
-							{format.design === ArticleDesign.PhotoEssay ? (
-								<></>
-							) : (
-								<Border />
-							)}
-						</GridItem>
-						<GridItem area="title" element="aside">
+						<GridItem
+							area="title"
+							element="aside"
+							hideBorder={
+								format.design === ArticleDesign.PhotoEssay
+							}
+						>
 							<>
 								{!mainMedia && (
 									<div
@@ -520,7 +515,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								)}
 							</>
 						</GridItem>
-						<GridItem area="headline">
+						<GridItem
+							area="headline"
+							hideBorder={
+								format.design === ArticleDesign.PhotoEssay
+							}
+						>
 							<>
 								{!mainMedia && (
 									<div css={maxWidth}>
@@ -541,13 +541,23 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								)}
 							</>
 						</GridItem>
-						<GridItem area="standfirst">
+						<GridItem
+							area="standfirst"
+							hideBorder={
+								format.design === ArticleDesign.PhotoEssay
+							}
+						>
 							<Standfirst
 								format={format}
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="byline">
+						<GridItem
+							area="byline"
+							hideBorder={
+								format.design === ArticleDesign.PhotoEssay
+							}
+						>
 							{!!article.byline && (
 								<HeadlineByline
 									format={format}
@@ -670,7 +680,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								)}
 							</div>
 						</GridItem>
-						<GridItem area="body">
+						<GridItem
+							area="body"
+							hideBorder={
+								format.design === ArticleDesign.PhotoEssay
+							}
+						>
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
