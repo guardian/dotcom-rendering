@@ -24,16 +24,19 @@ const hasShowcaseRole = (element?: FEElement): boolean => {
 // ----- EventHeader ----- //
 
 const timelineBulletStyles = css`
-	border-radius: 1000px;
-	display: block;
-	background-color: ${palette('--timeline-bullet')};
-	width: 12px;
-	height: 12px;
-	content: '';
-	border: 1px solid ${palette('--timeline-event-border')};
-	position: absolute;
-	left: -7px;
-	top: -6px;
+	position: relative;
+	::before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 12px;
+		height: 12px;
+		border: 1px solid ${palette('--timeline-event-border')};
+		border-radius: 100%;
+		background-color: ${palette('--timeline-bullet')};
+		left: -16.5px;
+		top: -10px;
+	}
 `;
 
 const smallDateStyles = css`
@@ -65,6 +68,10 @@ const titleStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
+const headingStyles = css`
+	margin-top: 4px;
+`;
+
 type EventHeaderProps = {
 	event: DCRTimelineEvent;
 	ArticleElementComponent: NestedArticleElement;
@@ -81,7 +88,13 @@ const EventHeader = ({
 	smallDates,
 }: EventHeaderProps) => {
 	const heading = (
-		<Heading level={sectioned ? 3 : 2}>
+		<Heading
+			css={[
+				headingStyles,
+				!hasShowcaseRole(event.main) && timelineBulletStyles,
+			]}
+			level={sectioned ? 3 : 2}
+		>
 			<span css={smallDates ? smallDateStyles : titleStyles(format)}>
 				{event.date}
 			</span>
@@ -124,7 +137,7 @@ const EventHeader = ({
 
 const eventStyles = css`
 	border: 1px solid ${palette('--timeline-event-border')};
-	padding: ${space[1]}px 10px ${space[6]}px 10px;
+	padding: 0 10px ${space[6]}px 10px;
 	margin-bottom: ${space[5]}px;
 	position: relative;
 
@@ -135,10 +148,6 @@ const eventStyles = css`
 	${from.leftCol} {
 		margin-left: -11px;
 		margin-right: -11px;
-	}
-
-	&:before {
-		${timelineBulletStyles}
 	}
 `;
 

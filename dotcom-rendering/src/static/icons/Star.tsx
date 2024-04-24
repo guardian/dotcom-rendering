@@ -5,7 +5,7 @@ export const Star = ({
 	starId: string;
 	isEmpty: boolean;
 }) => {
-	if (isEmpty)
+	if (isEmpty) {
 		return (
 			<svg width="14" height="13" viewBox="0 0 14 13">
 				<path
@@ -21,6 +21,7 @@ export const Star = ({
 				</clipPath>
 			</svg>
 		);
+	}
 
 	return (
 		<svg width="14" height="13" viewBox="0 0 14 13">

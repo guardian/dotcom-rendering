@@ -39,6 +39,34 @@ const elements: FEElement[] = [
 							assets: [],
 						},
 					},
+					{
+						title: 'mock event title',
+						date: '10th January 2024',
+						// Inline image
+						body: [images[1]],
+						main: images[0],
+					},
+					{
+						title: 'mock event title',
+						date: '15th January 2024',
+						// Showcase image
+						body: [images[0]],
+						main: images[0],
+					},
+					{
+						title: 'mock event title',
+						date: '15th January 2024',
+						// Media atom (no role)
+						body: [
+							{
+								_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement',
+								elementId: 'mock-id',
+								id: 'mock-id',
+								assets: [],
+							},
+						],
+						main: images[0],
+					},
 				],
 			},
 		],
@@ -80,5 +108,47 @@ describe('enhanceTimeline', () => {
 		const timelineEvent = enhanced[0].events[2];
 		assert.notEqual(timelineEvent, undefined);
 		expect(timelineEvent?.main).toBeDefined();
+	});
+	it('keeps a body element with a role that is valid', () => {
+		const enhanced = enhanceTimeline(identity)(elements);
+		assert.equal(
+			enhanced[0]?._type,
+			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
+		);
+
+		const timelineEvent = enhanced[0].events[3];
+		assert.notEqual(timelineEvent, undefined);
+		expect(timelineEvent?.body).toEqual([images[1]]);
+	});
+
+	it('drops a body element with a role that is not valid', () => {
+		const enhanced = enhanceTimeline(identity)(elements);
+		assert.equal(
+			enhanced[0]?._type,
+			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
+		);
+
+		const timelineEvent = enhanced[0].events[4];
+		assert.notEqual(timelineEvent, undefined);
+		expect(timelineEvent?.body).toEqual([]);
+	});
+
+	it('keeps a body element without a role', () => {
+		const enhanced = enhanceTimeline(identity)(elements);
+		assert.equal(
+			enhanced[0]?._type,
+			'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
+		);
+
+		const timelineEvent = enhanced[0].events[5];
+		assert.notEqual(timelineEvent, undefined);
+		expect(timelineEvent?.body).toEqual([
+			{
+				_type: 'model.dotcomrendering.pageElements.MediaAtomBlockElement',
+				elementId: 'mock-id',
+				id: 'mock-id',
+				assets: [],
+			},
+		]);
 	});
 });

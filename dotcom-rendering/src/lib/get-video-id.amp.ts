@@ -1,4 +1,4 @@
-import { parse, URLSearchParams } from 'node:url';
+import { URL, URLSearchParams } from 'node:url';
 import { isString } from '@guardian/libs';
 
 export const getIdFromUrl = (
@@ -6,28 +6,19 @@ export const getIdFromUrl = (
 	tryInPath?: boolean,
 	tryQueryParam?: string,
 ): string => {
-	const logErr = (actual: string, message: string) => {
-		throw new Error(
-			`validate getIdFromURL error: The URL ${urlString} returned ${actual}. ${message}`,
-		);
-	};
-
 	// Looks for ID in both formats if provided
-	const url = parse(urlString);
+	const url = new URL(urlString);
 
-	const ids = [
+	const id = [
 		tryQueryParam
-			? new URLSearchParams(url.query ?? '').get(tryQueryParam)
+			? new URLSearchParams(url.search).get(tryQueryParam)
 			: undefined,
-		tryInPath ? (url.pathname ?? '').split('/').at(-1) : undefined,
-	]
-		.filter(isString)
-		.map((id) => id.slice(0, 11));
+		tryInPath ? url.pathname.split('/').at(-1) : undefined,
+	].find(isString);
 
-	if (ids.length && ids[0]) return ids[0];
-	else
-		return logErr(
-			'an undefined ID',
-			'Could not get ID from pathname or searchParams.',
-		);
+	if (id !== undefined) return id;
+
+	throw new Error(
+		`getIdFromUrl: The URL ${urlString} did not contain an ID.`,
+	);
 };
