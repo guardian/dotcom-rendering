@@ -46,10 +46,6 @@ const timelineBulletStyles = css`
 		top: -6px;
 		left: -6.5px;
 
-		${from.mobileLandscape} {
-			left: 3.5px;
-		}
-
 		${from.leftCol} {
 			left: 143.5px;
 		}
