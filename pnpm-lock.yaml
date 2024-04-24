@@ -354,8 +354,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.4.8)(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
-        specifier: 17.12.0
-        version: 17.12.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@2.1.0)(typescript@5.3.3)
+        specifier: 17.13.1
+        version: 17.13.1(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(typescript@5.3.3)
       '@guardian/core-web-vitals':
         specifier: 6.0.0
         version: 6.0.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
@@ -4314,8 +4314,8 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@17.12.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(@guardian/support-dotcom-components@2.1.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-BLK5F3XrQqhDcL08em7f6zsijlv0epFj2Y2lGxL+sD16eYnug/GYSmXRJJlp1r2vPG1DqG9PbCF8s/awMsLqoQ==}
+  /@guardian/commercial@17.13.1(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.1.4)(typescript@5.3.3):
+    resolution: {integrity: sha512-hvIg9Dsk7nqbFulT8jLTfv0+Rwtdg5dKMp5Cguki87YF0YCJgZbnaV5uf/OgOWSUyHSblJ10aPtY9hXyCIt8Hg==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
       '@guardian/core-web-vitals': ^6.0.0
@@ -4323,7 +4323,6 @@ packages:
       '@guardian/identity-auth-frontend': ^4.0.0
       '@guardian/libs': ^16.1.0
       '@guardian/source-foundations': ^14.1.2
-      '@guardian/support-dotcom-components': ^1.0.7
     dependencies:
       '@changesets/cli': 2.27.1
       '@guardian/ab-core': 7.0.1(tslib@2.6.2)(typescript@5.3.3)
@@ -4334,7 +4333,6 @@ packages:
       '@guardian/ophan-tracker-js': 2.0.4
       '@guardian/prebid.js': 8.34.0(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-foundations': 14.1.4(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/support-dotcom-components': 2.1.0
       '@octokit/core': 4.2.4
       fastdom: 1.0.11
       lodash-es: 4.17.21
