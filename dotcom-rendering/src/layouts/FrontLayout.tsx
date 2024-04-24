@@ -169,7 +169,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									isPaidContent={!!front.config.isPaidContent}
+									shouldHideReaderRevenue={false}
+								/>
 							</Section>
 						</Stuck>
 					)}

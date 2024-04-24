@@ -10,6 +10,7 @@ type Props = {
 	display: ArticleDisplay;
 	isPaidContent: boolean;
 	renderAds: boolean;
+	shouldHideReaderRevenue: boolean;
 };
 
 /**
@@ -22,6 +23,7 @@ export const MostViewedRightWithAd = ({
 	display,
 	isPaidContent,
 	renderAds,
+	shouldHideReaderRevenue,
 }: Props) => {
 	const componentDataAttribute = 'most-viewed-right-container';
 	const { renderingTarget } = useConfig();
@@ -47,6 +49,7 @@ export const MostViewedRightWithAd = ({
 					position="right"
 					display={display}
 					isPaidContent={isPaidContent}
+					shouldHideReaderRevenue={shouldHideReaderRevenue}
 				/>
 			) : null}
 
