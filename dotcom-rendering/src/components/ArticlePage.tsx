@@ -107,8 +107,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					renderingTarget,
 				)}
 			/>
-			<SkipTo id="maincontent" label="Skip to main content" />
-			{isWeb && <SkipTo id="navigation" label="Skip to navigation" />}
+			{isWeb && (
+				<>
+					<SkipTo id="maincontent" label="Skip to main content" />
+					<SkipTo id="navigation" label="Skip to navigation" />
+				</>
+			)}
 			{webLightbox && article.imagesForLightbox.length > 0 && (
 				<>
 					<Island priority="feature" defer={{ until: 'hash' }}>
