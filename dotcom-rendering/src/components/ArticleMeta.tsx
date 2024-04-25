@@ -34,6 +34,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	byline?: string;
+	source?: string;
 	tags: TagType[];
 	primaryDateline: string;
 	secondaryDateline: string;
@@ -308,6 +309,7 @@ export const ArticleMeta = ({
 	pageId,
 	webTitle,
 	byline,
+	source,
 	tags,
 	primaryDateline,
 	secondaryDateline,
@@ -373,6 +375,7 @@ export const ArticleMeta = ({
 										byline={byline}
 										tags={tags}
 										format={format}
+										source={source}
 									/>
 								)}
 							{messageUs &&

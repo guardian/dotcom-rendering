@@ -15,6 +15,7 @@ import { Island } from './Island';
 type Props = {
 	byline: string;
 	tags: TagType[];
+	source?: string;
 	format: ArticleFormat;
 	isHeadline: boolean;
 };
@@ -113,6 +114,7 @@ function removeComma(bylinePart: string) {
 export const BylineLink = ({
 	byline,
 	tags,
+	source,
 	format,
 	isHeadline = false,
 }: Props) => {
@@ -121,6 +123,9 @@ export const BylineLink = ({
 	const hasSoleContributor = !!soleContributor;
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+	const isMedia =
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio;
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (isString(bylineComponent)) {
@@ -140,6 +145,17 @@ export const BylineLink = ({
 			/>
 		);
 	});
+
+	if (isMedia && source) {
+		renderedTokens.push(
+			<span key="source">
+				{renderedTokens.length > 1 && ', '}
+				{source === 'guardian.co.uk'
+					? 'theguardian.com'
+					: `Source: ${source}`}
+			</span>,
+		);
+	}
 
 	/**
 	 * Where is this coming from?
