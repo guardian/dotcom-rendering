@@ -672,7 +672,6 @@ export const renderElement = ({
 						ajaxUrl,
 						editionId,
 						isAdFreeUser,
-						isMainMedia,
 						isSensitive,
 						pageId,
 						switches,
@@ -938,10 +937,10 @@ type ElementLevelPropNames =
 	| 'hideCaption'
 	| 'format'
 	| 'isTimeline'
-	| 'isListElement';
-type CommonPropNames = 'isMainMedia';
+	| 'isListElement'
+	| 'isMainMedia';
 type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
-type ElementLevelProps = Pick<Props, ElementLevelPropNames | CommonPropNames>;
+type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 
 export const getNestedArticleElement =
 	(articleProps: ArticleLevelProps) => (elementProps: ElementLevelProps) => (
