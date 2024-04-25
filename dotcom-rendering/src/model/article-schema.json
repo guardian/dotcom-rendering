@@ -4299,7 +4299,10 @@
                 },
                 "hasInlineMerchandise": {
                     "type": "boolean"
-                }
+                },
+				"source": {
+					"type": "string"
+				}
             },
             "required": [
                 "abTests",
