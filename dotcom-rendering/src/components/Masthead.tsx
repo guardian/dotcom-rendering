@@ -89,13 +89,15 @@ export const Masthead = ({
 					backgroundColour={sourcePalette.brand[400]}
 					padSides={false}
 					element="aside"
+					borderColour={sourcePalette.brand[600]}
 				>
 					<Island priority="enhancement" defer={{ until: 'idle' }}>
 						<SubNav
 							subNavSections={nav.subNavSections}
 							currentNavLink={nav.currentNavLink}
 							linkHoverColour={sourcePalette.brandAlt[400]}
-							borderColour={sourcePalette.neutral[97]}
+							borderColour={sourcePalette.brand[600]}
+							subNavLinkColour={sourcePalette.neutral[100]}
 						/>
 					</Island>
 				</Section>
