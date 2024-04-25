@@ -108,7 +108,7 @@
 		"@types/react-google-recaptcha": "2.1.5",
 		"@types/react-test-renderer": "18.0.0",
 		"@types/relateurl": "0.2.33",
-		"@types/response-time": "2.3.5",
+		"@types/response-time": "2.3.8",
 		"@types/sanitize-html": "2.9.0",
 		"@types/scheduler": "0.16.2",
 		"@types/semver": "7.5.6",
