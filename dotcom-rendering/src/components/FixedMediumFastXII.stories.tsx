@@ -22,6 +22,7 @@ export const Default = () => (
 	<FrontSection
 		title="Fixed Medium Fast XII"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXII
 			trails={trails}

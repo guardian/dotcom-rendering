@@ -34,6 +34,7 @@ export const OneHugeTwoBigsSixStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: oneHuge</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -54,6 +55,7 @@ export const OneVeryBigTwoBigsSixStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: oneVeryBig</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -75,6 +77,7 @@ export const TwoVeryBigsTwoBigsSixStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -96,6 +99,7 @@ export const TwoVeryBigs1stBoostedTwoBigsSixStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigsFirstBoosted</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -117,6 +121,7 @@ export const TwoVeryBigs2ndBoostedTwoBigsSixStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigsSecondBoosted</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -140,6 +145,7 @@ export const TwoVeryBigsTwelveStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -160,6 +166,7 @@ export const TwoVeryBigsOneBigEightStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -182,6 +189,7 @@ export const TwoVeryBigsOneBigBoostedSixStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: oneBigBoosted`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -204,6 +212,7 @@ export const TwoVeryBigsTwoBigsFiveStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -226,6 +235,7 @@ export const TwoVeryBigsTwoBigsFirstBoostedEightStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: twoOrMoreBigsFirstBoosted`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -248,6 +258,7 @@ export const TwoVeryBigsThreeBigsThreeStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: threeBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -270,6 +281,7 @@ export const TwoVeryBigsFourBigs = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: fourBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -294,6 +306,7 @@ export const OneHugeOneVeryBig7Standards = () => (
 		title="Dynamic Fast"
 		description={`first slice: oneHuge</br>second slice: oneBig`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -316,6 +329,7 @@ export const ThreeVeryBigsFourBigs = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: fourBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -337,6 +351,7 @@ export const TwoBigsFourStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: undefined</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -359,6 +374,7 @@ export const OneVeryBigTwoBigs = () => (
 		title="Dynamic Fast"
 		description={`first slice: oneVeryBig</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -380,6 +396,7 @@ export const OneVeryBig = () => (
 		title="Dynamic Fast"
 		description={`first slice: oneVeryBig</br>second slice: noBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
@@ -400,6 +417,7 @@ export const TwoVeryBigsFourBigsFirstBoostedThreeStandards = () => (
 		title="Dynamic Fast"
 		description={`first slice: twoVeryBigs</br>second slice: twoOrMoreBigsFirstBoosted`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={{
