@@ -36,6 +36,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
@@ -407,6 +408,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = isWeb && canRenderAds(article);
 
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -431,109 +435,141 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</Section>
 						</Stuck>
 					)}
-					{!isLabs && (
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="header"
-						>
-							<Header
-								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
-								}
-							/>
-						</Section>
-					)}
-					<Section
-						fullWidth={true}
-						borderColour={sourcePalette.brand[600]}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={sourcePalette.brand[400]}
-						element="nav"
-					>
-						<Nav
+					{inUpdatedHeaderABTest ? (
+						<Masthead
 							nav={props.NAV}
-							isImmersive={
-								format.display === ArticleDisplay.Immersive
-							}
-							displayRoundel={
-								format.display === ArticleDisplay.Immersive ||
-								format.theme === ArticleSpecial.Labs
-							}
-							selectedPillar={props.NAV.selectedPillar}
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							discussionApiUrl={article.config.discussionApiUrl}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
-							editionId={article.editionId}
+							idApiUrl={article.config.idApiUrl}
+							showSubNav={!isPaidContent}
+							hasPageSkinContentSelfConstrain={true}
 						/>
-					</Section>
-					{props.NAV.subNavSections && !isLabs && (
+					) : (
 						<>
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								borderColour={themePalette('--article-border')}
-								padSides={false}
-								element="aside"
-							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
+							{!isLabs && (
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									shouldCenter={false}
+									backgroundColour={sourcePalette.brand[400]}
+									element="header"
 								>
-									<SubNav
-										subNavSections={
-											props.NAV.subNavSections
+									<Header
+										editionId={article.editionId}
+										idUrl={article.config.idUrl}
+										mmaUrl={article.config.mmaUrl}
+										discussionApiUrl={
+											article.config.discussionApiUrl
 										}
-										currentNavLink={
-											props.NAV.currentNavLink
+										urls={
+											article.nav.readerRevenueLinks
+												.header
 										}
-										position="header"
+										remoteHeader={
+											!!article.config.switches
+												.remoteHeader
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										idApiUrl={article.config.idApiUrl}
+										headerTopBarSearchCapiSwitch={
+											!!article.config.switches
+												.headerTopBarSearchCapi
+										}
 									/>
-								</Island>
-							</Section>
+								</Section>
+							)}
 							<Section
 								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								borderColour={themePalette('--article-border')}
-								padSides={false}
+								borderColour={sourcePalette.brand[600]}
 								showTopBorder={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="nav"
 							>
-								<StraightLines
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--article-border')}
+								<Nav
+									nav={props.NAV}
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={props.NAV.selectedPillar}
+									subscribeUrl={
+										article.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									editionId={article.editionId}
 								/>
 							</Section>
+							{props.NAV.subNavSections && !isLabs && (
+								<>
+									<Section
+										fullWidth={true}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										borderColour={themePalette(
+											'--article-border',
+										)}
+										padSides={false}
+										element="aside"
+									>
+										<Island
+											priority="enhancement"
+											defer={{ until: 'idle' }}
+										>
+											<SubNav
+												subNavSections={
+													props.NAV.subNavSections
+												}
+												currentNavLink={
+													props.NAV.currentNavLink
+												}
+												position="header"
+											/>
+										</Island>
+									</Section>
+									<Section
+										fullWidth={true}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										borderColour={themePalette(
+											'--article-border',
+										)}
+										padSides={false}
+										showTopBorder={false}
+									>
+										<StraightLines
+											count={4}
+											cssOverrides={css`
+												display: block;
+											`}
+											color={themePalette(
+												'--article-border',
+											)}
+										/>
+									</Section>
+								</>
+							)}
 						</>
 					)}
 				</div>
 			)}
+
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
 					<Section
