@@ -14,35 +14,6 @@ type Props = {
 	isTimeline?: boolean;
 };
 
-const immersiveStyles = css`
-	margin-top: ${space[3]}px;
-	margin-bottom: ${space[3]}px;
-	${until.tablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-	${from.tablet} {
-		margin-left: -20px;
-		margin-right: -100px;
-	}
-	${from.desktop} {
-		margin-left: -20px;
-		margin-right: -340px;
-	}
-	${from.leftCol} {
-		margin-left: -160px;
-		margin-right: -320px;
-	}
-	${from.wide} {
-		margin-left: -240px;
-		margin-right: -400px;
-	}
-`;
-
 const roleCss = {
 	inline: css`
 		margin-top: ${space[3]}px;
@@ -71,7 +42,32 @@ const roleCss = {
 	`,
 
 	immersive: css`
-		${immersiveStyles}
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		${until.tablet} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${until.mobileLandscape} {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+		${from.tablet} {
+			margin-left: -20px;
+			margin-right: -100px;
+		}
+		${from.desktop} {
+			margin-left: -20px;
+			margin-right: -340px;
+		}
+		${from.leftCol} {
+			margin-left: -160px;
+			margin-right: -320px;
+		}
+		${from.wide} {
+			margin-left: -240px;
+			margin-right: -400px;
+		}
 	`,
 
 	showcase: css`
@@ -84,12 +80,6 @@ const roleCss = {
 		${from.wide} {
 			margin-left: -240px;
 		}
-	`,
-
-	showcaseTimeline: css`
-		${immersiveStyles}
-		margin-top: 0;
-		margin-bottom: 0;
 	`,
 
 	thumbnail: css`
@@ -172,7 +162,18 @@ export const defaultRoleStyles = (
 			return roleCss.immersive;
 		case 'showcase':
 			if (isTimeline) {
-				return roleCss.showcaseTimeline;
+				return css`
+					margin: 0 -10px;
+					${from.tablet} {
+						position: relative;
+					}
+					${from.leftCol} {
+						margin-left: -160px;
+					}
+					${from.wide} {
+						margin-left: -240px;
+					}
+				`;
 			}
 			return roleCss.showcase;
 		case 'thumbnail':
