@@ -78,6 +78,10 @@ function decideLogo(
 	 *  so fallback to standard logo if not present */
 	const maybeDarkLogo = branding.logoForDarkBackground ?? branding.logo;
 
+	const isMedia =
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio;
+
 	return (
 		<picture>
 			{/**
@@ -103,13 +107,23 @@ function decideLogo(
 				/>
 			)}
 			{/** Default to standard logo for light backgrounds */}
-			<img
-				width={branding.logo.dimensions.width}
-				height={branding.logo.dimensions.height}
-				src={encodeURI(branding.logo.src)}
-				alt={branding.sponsorName}
-				css={imgStyles(branding.logo.dimensions.width)}
-			/>
+			{isMedia && branding.logoForDarkBackground ? (
+				<img
+					width={branding.logoForDarkBackground.dimensions.width}
+					height={branding.logoForDarkBackground.dimensions.height}
+					src={encodeURI(branding.logoForDarkBackground.src)}
+					alt={branding.sponsorName}
+					css={imgStyles(branding.logo.dimensions.width)}
+				/>
+			) : (
+				<img
+					width={branding.logo.dimensions.width}
+					height={branding.logo.dimensions.height}
+					src={encodeURI(branding.logo.src)}
+					alt={branding.sponsorName}
+					css={imgStyles(branding.logo.dimensions.width)}
+				/>
+			)}
 		</picture>
 	);
 }

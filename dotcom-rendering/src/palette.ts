@@ -1842,7 +1842,16 @@ const clickToViewButtonHoverLight: PaletteFunction = () =>
 const clickToViewButtonHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
-const brandingLabelLight: PaletteFunction = () => sourcePalette.neutral[20];
+const brandingLabelLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Picture:
+			return sourcePalette.neutral[60];
+		default:
+			return sourcePalette.neutral[20];
+	}
+};
 const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
