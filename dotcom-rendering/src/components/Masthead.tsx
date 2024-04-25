@@ -7,21 +7,6 @@ import { Section } from './Section';
 import { SubNav } from './SubNav.importable';
 import { TopBar } from './TopBar.importable';
 
-/** Ensures we do not cause CLS from lazy loaded component height */
-// const explicitHeight = css`
-// 	overflow: hidden;
-// 	height: 80px;
-// 	${from.mobileMedium} {
-// 		height: 100px;
-// 	}
-// 	${from.tablet} {
-// 		height: 120px;
-// 	}
-// 	${from.desktop} {
-// 		height: 150px;
-// 	}
-// `;
-
 type Props = {
 	nav: NavType;
 	editionId: EditionId;
