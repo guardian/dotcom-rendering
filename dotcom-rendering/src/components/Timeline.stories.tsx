@@ -84,7 +84,6 @@ const ArticleElementComponent = getNestedArticleElement({
 	isSensitive: false,
 	pageId: 'testID',
 	switches: {},
-	isMainMedia: false,
 	webTitle: 'Storybook page',
 });
 

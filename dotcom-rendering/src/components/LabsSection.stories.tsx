@@ -61,6 +61,7 @@ export const WithoutBadgeStory = () => {
 			ophanComponentName={''}
 			ophanComponentLink={''}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</LabsSection>
@@ -84,6 +85,7 @@ export const WithBadgeStory = () => {
 				href: 'https://www.theguardian.com/guardian-labs',
 			}}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</LabsSection>
@@ -98,6 +100,7 @@ export const InContext = () => {
 				title="Default Container"
 				showTopBorder={false}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -115,6 +118,7 @@ export const InContext = () => {
 					href: 'https://www.theguardian.com/guardian-labs',
 				}}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</LabsSection>
@@ -122,6 +126,7 @@ export const InContext = () => {
 				title="Default Container"
 				showTopBorder={true}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</FrontSection>

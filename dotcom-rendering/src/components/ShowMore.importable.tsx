@@ -70,7 +70,7 @@ type Props = {
 	sectionId: string;
 	showAge: boolean;
 	ajaxUrl: string;
-	editionId?: EditionId;
+	editionId: EditionId;
 	containerPalette?: DCRContainerPalette;
 	discussionApiUrl: string;
 };

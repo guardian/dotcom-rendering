@@ -50,7 +50,7 @@ describe('RegionalAd', () => {
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
 					id="ad-1"
-					editionId="UK"
+					editionId={'UK'}
 					section=""
 					contentType=""
 					config={{
@@ -114,7 +114,7 @@ describe('RegionalAd', () => {
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
 					id="ad-1"
-					editionId="UK"
+					editionId={'UK'}
 					section=""
 					contentType=""
 					config={{
@@ -178,7 +178,7 @@ describe('RegionalAd', () => {
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
 					id="ad-1"
-					editionId="UK"
+					editionId={'UK'}
 					section=""
 					contentType=""
 					config={{
@@ -242,7 +242,7 @@ describe('RegionalAd', () => {
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
 					id="ad-1"
-					editionId="UK"
+					editionId={'UK'}
 					section=""
 					contentType=""
 					config={{
@@ -305,7 +305,7 @@ describe('RegionalAd', () => {
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
 					id="ad-1"
-					editionId="UK"
+					editionId={'UK'}
 					section=""
 					contentType=""
 					config={{

@@ -416,7 +416,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									isPaidContent={
+										!!article.config.isPaidContent
+									}
+									shouldHideReaderRevenue={
+										!!article.config.shouldHideReaderRevenue
+									}
+								/>
 							</Section>
 						</Stuck>
 					)}
@@ -930,6 +937,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
+										shouldHideReaderRevenue={
+											!!article.config
+												.shouldHideReaderRevenue
+										}
 									/>
 								</RightColumn>
 							</div>

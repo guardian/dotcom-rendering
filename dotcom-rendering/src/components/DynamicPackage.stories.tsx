@@ -33,6 +33,7 @@ export const One = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicPackage
 			groupedTrails={{
@@ -60,6 +61,7 @@ export const OneWithManySublinks = () => {
 			title="Dynamic Package"
 			showTopBorder={true}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DynamicPackage
 				groupedTrails={{
@@ -81,6 +83,7 @@ export const Two = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicPackage
 			groupedTrails={{
@@ -96,7 +99,11 @@ export const Two = () => (
 Two.storyName = 'With two standard cards';
 
 export const Three = () => (
-	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Package"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -111,7 +118,11 @@ export const Three = () => (
 Three.storyName = 'With three standard cards';
 
 export const Four = () => (
-	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Package"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -126,7 +137,11 @@ export const Four = () => (
 Four.storyName = 'With four standard cards';
 
 export const Five = () => (
-	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Package"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -145,6 +160,7 @@ export const Six = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicPackage
 			groupedTrails={{
@@ -164,6 +180,7 @@ export const Seven = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicPackage
 			groupedTrails={{
@@ -183,6 +200,7 @@ export const Eight = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicPackage
 			groupedTrails={{
@@ -202,6 +220,7 @@ export const Nine = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicPackage
 			groupedTrails={{
@@ -224,6 +243,7 @@ export const Boosted1 = () => {
 			title="Dynamic Package"
 			showTopBorder={true}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DynamicPackage
 				groupedTrails={{
@@ -249,6 +269,7 @@ export const Boosted2 = () => {
 			title="Dynamic Package"
 			showTopBorder={true}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DynamicPackage
 				groupedTrails={{
@@ -273,6 +294,7 @@ export const Boosted3 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DynamicPackage
 				groupedTrails={{
@@ -297,6 +319,7 @@ export const Boosted4 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DynamicPackage
 				groupedTrails={{
@@ -321,6 +344,7 @@ export const Boosted5 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DynamicPackage
 				groupedTrails={{
@@ -346,6 +370,7 @@ export const Boosted8 = () => {
 			title="Dynamic Package"
 			showTopBorder={true}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DynamicPackage
 				groupedTrails={{
@@ -371,6 +396,7 @@ export const Boosted9 = () => {
 			title="Dynamic Package"
 			showTopBorder={true}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DynamicPackage
 				groupedTrails={{
@@ -388,7 +414,11 @@ export const Boosted9 = () => {
 Boosted9.storyName = 'With nine standard cards - boosted';
 
 export const OneSnapThreeStandard = () => (
-	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Package"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -403,7 +433,11 @@ export const OneSnapThreeStandard = () => (
 OneSnapThreeStandard.storyName = 'With one snap - three standard cards';
 
 export const ThreeSnapTwoStandard = () => (
-	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Package"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -418,7 +452,11 @@ export const ThreeSnapTwoStandard = () => (
 ThreeSnapTwoStandard.storyName = 'With three snaps - two standard cards';
 
 export const ThreeSnapTwoStandard2ndBoosted = () => (
-	<FrontSection title="Dynamic Package" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Package"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -438,6 +476,7 @@ export const SpecialReportWithoutPalette = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicPackage
 			groupedTrails={{
@@ -486,6 +525,7 @@ export const VideoSublinks = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicPackage
 			groupedTrails={{
