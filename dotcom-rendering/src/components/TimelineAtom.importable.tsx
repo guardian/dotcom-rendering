@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette,
-	remSpace,
-	space,
-	textEgyptianBold17,
-} from '@guardian/source-foundations';
+import { body, palette, remSpace, space } from '@guardian/source-foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette as schemedPalette } from '../palette';
 import type { TimelineAtomEvent, TimelineAtomType } from '../types/content';
@@ -23,12 +18,10 @@ const Snippet = css`
 `;
 
 const EventTitle = css`
-	${textEgyptianBold17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${body.medium({
+		lineHeight: 'tight',
+		fontWeight: 'bold',
+	})};
 `;
 
 const EventDateBullet = css`
@@ -49,23 +42,19 @@ const EventDate = css`
 	margin-left: -16px;
 	background: ${schemedPalette('--timeline-atom-highlight-text-background')};
 	color: ${schemedPalette('--timeline-atom-highlight-text')};
-	${textEgyptianBold17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${body.medium({
+		lineHeight: 'tight',
+		fontWeight: 'bold',
+	})};
 `;
 
 const EventToDate = css`
 	background: ${schemedPalette('--timeline-atom-highlight-text-background')};
 	color: ${schemedPalette('--timeline-atom-highlight-text')};
-	${textEgyptianBold17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${body.medium({
+		lineHeight: 'tight',
+		fontWeight: 'bold',
+	})};
 `;
 
 const TimelineContents = ({ events }: { events: TimelineAtomEvent[] }) => {

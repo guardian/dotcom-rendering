@@ -8,6 +8,7 @@ import {
 	headlineLight24,
 	headlineMedium17,
 	space,
+	textSans,
 	textSans17,
 	textSans20,
 } from '@guardian/source-foundations';
@@ -164,12 +165,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					switch (theme) {
 						case ArticleSpecial.Labs:
 							return css`
-								${textSans17};
-								/**
-								 * @TODO (2) Typography preset styles should not be overridden.
-								 * Please speak to your team's designer and update this to use a more appropriate preset.
-								 */
-								line-height: 1.15;
+								${textSans.medium({ lineHeight: 'tight' })}
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};

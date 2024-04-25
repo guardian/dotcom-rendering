@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
-	article17,
 	articleBold17,
+	body,
 	from,
 	headlineBold28,
 	headlineBold34,
@@ -68,12 +68,7 @@ const bulletStyles = css`
 `;
 
 const personalisedBodyTextList = css`
-	${article17};
-	/**
- 	 * @TODO (2) Typography preset styles should not be overridden.
- 	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	font-weight: 500;
+	${body.medium({ fontWeight: 'medium' })};
 	color: black;
 `;
 

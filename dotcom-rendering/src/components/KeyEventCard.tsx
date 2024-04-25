@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	from,
 	space,
+	textSans,
 	textSans15,
-	textSansBold14,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette } from '../palette';
@@ -99,12 +99,7 @@ const textStyles = css`
 `;
 
 const timeStyles = css`
-	${textSansBold14};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${palette('--key-event-title')};
 	display: block;
 `;

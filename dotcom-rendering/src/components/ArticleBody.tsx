@@ -3,9 +3,9 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	between,
+	body,
 	headlineBold24,
 	remSpace,
-	textEgyptian17,
 } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
@@ -56,12 +56,7 @@ const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
 		li:before {
-			${textEgyptian17};
-			/**
-			 * @TODO (2) Typography preset styles should not be overridden.
-			 * Please speak to your team's designer and update this to use a more appropriate preset.
-			 */
-			line-height: 1.15;
+			${body.medium({ lineHeight: 'tight' })};
 			content: counter(li);
 			counter-increment: li;
 			margin-right: ${remSpace[1]};

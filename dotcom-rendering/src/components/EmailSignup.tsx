@@ -4,7 +4,7 @@ import {
 	headlineBold20,
 	palette as sourcePalette,
 	space,
-	textSans14,
+	textSans,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { palette as themePalette } from '../palette';
@@ -42,7 +42,7 @@ const stackBelowTabletStyles = css`
 `;
 
 const titleStyles = (theme: string) => css`
-	${headlineBold20}
+	${headlineBold20};
 	flex-grow: 1;
 	span {
 		color: ${theme === 'news' ? sourcePalette.sport[400] : 'inherit'};
@@ -66,12 +66,7 @@ const noHeightFromTabletStyles = css`
 
 // max-width is the wdith of the text field, the button and the margin between them
 const descriptionStyles = css`
-	${textSans14};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${textSans.xsmall({ lineHeight: 'tight' })}
 	margin-bottom: ${space[2]}px;
 	max-width: ${335 + space[3] + 118}px;
 `;

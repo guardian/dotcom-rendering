@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	textSans,
 	textSans15,
 	textSansBold15,
 	until,
@@ -100,12 +101,7 @@ const activeStyles = css`
 `;
 
 const buttonStyles = css`
-	${textSans15};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	font-weight: 500;
+	${textSans.small({ fontWeight: 'medium' })};
 	display: block;
 	cursor: pointer;
 	background: none;

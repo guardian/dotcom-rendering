@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans12 } from '@guardian/source-foundations';
+import { textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
 import { dateFormatter } from '../../lib/discussionDateFormatter';
 import { useInterval } from '../../lib/useInterval';
@@ -21,12 +21,7 @@ const linkStyles = css`
 	}
 `;
 const timeStyles = css`
-	${textSans12};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	font-weight: 300;
+	${textSans.xxsmall({ fontWeight: 'light' })}
 	min-width: 0.75rem;
 	margin-right: 0.3125rem;
 	white-space: nowrap;

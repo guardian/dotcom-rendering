@@ -3,6 +3,7 @@ import {
 	brandText,
 	from,
 	palette as sourcePalette,
+	textSans,
 	textSans17,
 } from '@guardian/source-foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -121,12 +122,7 @@ const columnLinks = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${textSans.medium({ lineHeight: 'tight' })};
 	background-color: transparent;
 	text-decoration: none;
 	border: 0;

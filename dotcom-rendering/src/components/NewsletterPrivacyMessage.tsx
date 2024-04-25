@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	palette as sourcePalette,
+	textSans,
 	textSans12,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
@@ -30,12 +31,7 @@ const LegalLink = ({ href, children }: LegalLinkProps) => (
 );
 
 const termsStyle = css`
-	${textSans12};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 	a {
 		${textSans12};
 		text-decoration: underline;

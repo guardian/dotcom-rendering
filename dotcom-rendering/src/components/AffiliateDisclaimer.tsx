@@ -1,31 +1,16 @@
 import { css } from '@emotion/react';
-import {
-	palette,
-	space,
-	textSans14,
-	textSans15,
-} from '@guardian/source-foundations';
+import { palette, space, textSans } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
-	${textSans15};
-	/**
- 	 * @TODO (2) Typography preset styles should not be overridden.
- 	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${textSans.small({ lineHeight: 'tight' })};
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[1]}px;
 `;
 
 const disclaimerInlineStyles = css`
-	${textSans14};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${textSans.xsmall({ lineHeight: 'tight' })};
 	float: left;
 	clear: left;
 	width: 8.75rem;

@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import {
 	article17,
 	between,
+	body,
 	headlineBold17,
 	headlineBold24,
 	palette,
 	space,
-	textEgyptian17,
 	until,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -45,13 +45,7 @@ const headerStylesWithUrl = css`
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
-	${textEgyptian17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	font-weight: 500;
-	line-height: 1.15;
+	${body.medium({ fontWeight: 'medium', lineHeight: 'tight' })};
 	color: ${fontColour ?? palette.neutral[46]};
 	p {
 		/* Handle paragraphs in the description */

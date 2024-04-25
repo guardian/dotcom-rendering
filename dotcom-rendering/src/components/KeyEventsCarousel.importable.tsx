@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, headlineBold17, space } from '@guardian/source-foundations';
+import { from, headline, space } from '@guardian/source-foundations';
 import {
 	Button,
 	Hide,
@@ -52,12 +52,7 @@ const marginBottomStyles = css`
 	}
 `;
 const titleStyles = css`
-	${headlineBold17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.3;
+	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'regular' })};
 	padding-top: ${space[3]}px;
 	color: ${palette('--key-event-title')};
 `;

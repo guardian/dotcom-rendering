@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
+	headline,
 	headlineBold17,
 	headlineBold20,
-	headlineMedium17,
 	space,
 	textSans17,
 	textSans20,
@@ -96,7 +96,7 @@ const fontStyles = (format: ArticleFormat) => {
 			switch (format.display) {
 				case ArticleDisplay.Immersive:
 					return css`
-						${textSansBold20}
+						${textSansBold20};
 						line-height: 23px;
 						${from.leftCol} {
 							line-height: 20px;
@@ -104,7 +104,7 @@ const fontStyles = (format: ArticleFormat) => {
 					`;
 				default:
 					return css`
-						${textSans20}
+						${textSans20};
 						line-height: 23px;
 						${from.leftCol} {
 							line-height: 20px;
@@ -128,12 +128,7 @@ const secondaryFontStyles = (format: ArticleFormat) => {
 		`;
 	}
 	return css`
-		${headlineMedium17};
-		/**
-		 * @TODO (2) Typography preset styles should not be overridden.
-		 * Please speak to your team's designer and update this to use a more appropriate preset.
-		 */
-		font-weight: 400;
+		${headline.xxxsmall({ fontWeight: 'regular' })}
 	`;
 };
 
@@ -228,6 +223,7 @@ export const SeriesSectionLink = ({
 								>
 									<span>{tag.title}</span>
 								</a>
+
 								<Hide when="below" breakpoint="tablet">
 									<a
 										href={`${guardianBaseURL}/${sectionUrl}`}
@@ -398,6 +394,7 @@ export const SeriesSectionLink = ({
 						>
 							<span>{tag.title}</span>
 						</a>
+
 						<Hide when="below" breakpoint="tablet">
 							<a
 								href={`${guardianBaseURL}/${sectionUrl}`}

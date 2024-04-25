@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { palette, textSans12, textSans14 } from '@guardian/source-foundations';
+import {
+	palette,
+	textSans,
+	textSans12,
+	textSans14,
+} from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { FETagType } from '../types/tag';
 
@@ -13,19 +18,14 @@ const linkStyle = css`
 	border-radius: 12px;
 	padding: 2px 9px;
 	display: inline-block;
-	${textSans14};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.4;
+	${textSans.xsmall({ lineHeight: 'loose' })}
 	text-decoration: none;
 	top: 0;
 	color: ${palette.neutral[20]};
 `;
 
 const topicLabel = css`
-	${textSans12}
+	${textSans12};
 	color: ${palette.neutral[20]};
 `;
 

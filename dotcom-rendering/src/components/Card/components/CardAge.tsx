@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
-import { textSans, textSans12, until } from '@guardian/source-foundations';
+import { textSans, until } from '@guardian/source-foundations';
 import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../types/front';
@@ -22,12 +22,7 @@ const ageStyles = (
 	isOnwardsContent?: boolean,
 ) => {
 	return css`
-		${textSans12};
-		/**
-		 * @TODO (2) Typography preset styles should not be overridden.
-		 * Please speak to your team's designer and update this to use a more appropriate preset.
-		 */
-		line-height: 1.15;
+		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
 		color: ${isOnwardsContent
 			? palette('--card-footer-onwards-content')

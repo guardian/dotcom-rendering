@@ -2,7 +2,7 @@ import { ClassNames } from '@emotion/react';
 import {
 	headlineMedium24,
 	palette,
-	textSans20,
+	textSans,
 } from '@guardian/source-foundations';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 
@@ -75,12 +75,7 @@ export const Sidebar = () => {
 					color: ${palette.neutral[100]};
 					text-decoration: none;
 					display: block;
-					${textSans20};
-					/**
-					 * @TODO (2) Typography preset styles should not be overridden.
-					 * Please speak to your team's designer and update this to use a more appropriate preset.
-					 */
-					line-height: 1.15;
+					${textSans.large({ lineHeight: 'tight' })};
 					font-weight: 400;
 					outline: none;
 					padding: 8px 10px 8px 50px;

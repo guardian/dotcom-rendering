@@ -8,6 +8,7 @@ import {
 	headline,
 	remBodySizes,
 	space,
+	textSans,
 	textSans12,
 	textSans15,
 	textSans17,
@@ -57,42 +58,30 @@ const fontStyles = ({
 		case 'ginormous':
 			return css`
 				${from.desktop} {
-					${headline.large(
-						options,
-					)} /** TODO (1) - Unknown argument please manually update */
+					${headline.large(options)};
 					font-size: 50px;
 				}
 			`;
 		case 'huge':
 			return css`
-				${headline.small(
-					options,
-				)}/** TODO (1) - Unknown argument please manually update */
+				${headline.small(options)};
 			`;
 		case 'large':
 			return css`
-				${headline.xsmall(
-					options,
-				)}/** TODO (1) - Unknown argument please manually update */
+				${headline.xsmall(options)};
 			`;
 		case 'medium':
 			return css`
-				${headline.xxsmall(
-					options,
-				)}/** TODO (1) - Unknown argument please manually update */
+				${headline.xxsmall(options)};
 			`;
 		case 'small':
 			return css`
-				${headline.xxxsmall(
-					options,
-				)}/** TODO (1) - Unknown argument please manually update */
+				${headline.xxxsmall(options)};
 			`;
 		case 'tiny':
 			return css`
-				${headline.xxxsmall(
-					options,
-				)} /** TODO (1) - Unknown argument please manually update */
-				font-size: ${remBodySizes.xsmall}rem;
+				${headline.xxxsmall(options)};
+				font-size: 14px;
 			`;
 	}
 };
@@ -111,38 +100,28 @@ const fontStylesOnMobile = ({
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					${headline.medium(
-						options,
-					)}/** TODO (1) - Unknown argument please manually update */
+					${headline.medium(options)};
 				}
 				${between.mobileLandscape.and.desktop} {
-					${headline.large(
-						options,
-					)}/** TODO (1) - Unknown argument please manually update */
+					${headline.large(options)};
 				}
 			`;
 		case 'huge':
 			return css`
 				${until.desktop} {
-					${headline.xsmall(
-						options,
-					)}/** TODO (1) - Unknown argument please manually update */
+					${headline.xsmall(options)};
 				}
 			`;
 		case 'large':
 			return css`
 				${until.desktop} {
-					${headline.xxsmall(
-						options,
-					)}/** TODO (1) - Unknown argument please manually update */
+					${headline.xxsmall(options)};
 				}
 			`;
 		case 'medium':
 			return css`
 				${until.desktop} {
-					${headline.xxxsmall(
-						options,
-					)}/** TODO (1) - Unknown argument please manually update */
+					${headline.xxxsmall(options)};
 				}
 			`;
 		default:
@@ -163,19 +142,9 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'medium':
 			return css`
-				${textSans20};
-				/**
- 				 * @TODO (2) Typography preset styles should not be overridden.
- 				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				 */
-				line-height: 1.15;
+				${textSans.large({ lineHeight: 'tight' })};
 				${until.desktop} {
-					${textSans17};
-					/**
- 					 * @TODO (2) Typography preset styles should not be overridden.
- 					 * Please speak to your team's designer and update this to use a more appropriate preset.
-					 */
-					line-height: 1.15;
+					${textSans.medium({ lineHeight: 'tight' })};
 				}
 				padding-bottom: ${space[1]}px;
 			`;

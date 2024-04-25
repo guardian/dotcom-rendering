@@ -3,7 +3,7 @@ import {
 	from,
 	headlineBold17,
 	space,
-	textSans12,
+	textSans,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
@@ -23,18 +23,13 @@ const containerStyles = css`
 	width: 100%;
 `;
 const headlineStyles = css`
-	${headlineBold17}
+	${headlineBold17};
 	padding-bottom: ${space[3]}px;
 `;
 
 const headlineAccentStyles = (palette: Palette) => css`
 	color: ${palette.text.betaLabel};
-	${textSans12};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
+	${textSans.xxsmall({ fontWeight: 'regular', lineHeight: 'tight' })};
 `;
 
 const topicStyles = css`

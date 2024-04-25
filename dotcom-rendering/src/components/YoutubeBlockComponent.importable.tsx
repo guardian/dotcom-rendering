@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ConsentState } from '@guardian/libs';
-import { palette, space, textEgyptian17 } from '@guardian/source-foundations';
+import { body, palette, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import type { Switches } from '../../src/types/config';
@@ -175,12 +175,9 @@ export const YoutubeBlockComponent = ({
 						</div>
 						<p
 							css={css`
-								${textEgyptian17};
-								/**
-								 * @TODO (2) Typography preset styles should not be overridden.
-								 * Please speak to your team's designer and update this to use a more appropriate preset.
-								 */
-								line-height: 1.15;
+								${body.medium({
+									lineHeight: 'tight',
+								})}
 							`}
 						>
 							This video has been removed. This could be because

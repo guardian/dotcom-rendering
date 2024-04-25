@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textEgyptian17 } from '@guardian/source-foundations';
+import { body, palette } from '@guardian/source-foundations';
 import { unwrapHtml } from '../model/unwrapHtml';
 import { RewrappedComponent } from './RewrappedComponent';
 
@@ -29,12 +29,7 @@ export const HighlightBlockComponent = ({ html }: Props) => {
 			isUnwrapped={isUnwrapped}
 			html={unwrappedHtml}
 			elCss={css`
-				${textEgyptian17};
-				/**
-				 * @TODO (2) Typography preset styles should not be overridden.
-				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				 */
-				line-height: 1.15;
+				${body.medium({ lineHeight: 'tight' })};
 				background-color: ${palette.neutral[97]};
 				padding-top: 8px;
 				padding-bottom: 16px;

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	body,
 	headlineMedium17,
-	textEgyptianBold17,
 	textSans15,
 } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
@@ -49,12 +49,10 @@ export const Summary = ({
 }): JSX.Element => {
 	const atomTitleStyling = css`
 		display: block;
-		${textEgyptianBold17};
-		/**
-		 * @TODO (2) Typography preset styles should not be overridden.
-		 * Please speak to your team's designer and update this to use a more appropriate preset.
-		 */
-		line-height: 1.15;
+		${body.medium({
+			lineHeight: 'tight',
+			fontWeight: 'bold',
+		})};
 		color: ${themePalette('--expandable-atom-text-hover')};
 	`;
 
