@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, isOneOf, type ArticleFormat } from '@guardian/libs';
 import { logger } from '../server/lib/logging';
 import type { FEElement, Newsletter } from '../types/content';
 
@@ -89,24 +89,22 @@ const checkIfAfterText = (index: number, elements: FEElement[]): boolean =>
 	elements[index - 1]?._type ===
 	'model.dotcomrendering.pageElements.TextBlockElement';
 
+const listElements = [
+	'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
+	'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
+	'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+	'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
+] as const;
+
+const isListElement = isOneOf(listElements);
+
 const checkIfAfterNestedListElement = (
 	currentIndex: number,
 	elements: FEElement[],
 ): boolean => {
-	const nestedListElementTypes = new Set([
-		'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
-		'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
-		'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
-		'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
-	]);
-
-	for (const [index, element] of elements.entries()) {
-		if (nestedListElementTypes.has(element?._type)) {
-			return currentIndex > index;
-		}
-	}
-
-	return true; // No nested list elements found before the current index, so we consider it after
+	return !elements
+		.slice(currentIndex)
+		.some(({ _type }) => isListElement(_type));
 };
 
 const getDistanceAfterFloating = (
