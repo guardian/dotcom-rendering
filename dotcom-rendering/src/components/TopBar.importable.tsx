@@ -23,7 +23,6 @@ interface Props {
 }
 
 const collapsibleLinkStyles = css`
-	/** @todo - check accessibility of this */
 	display: none;
 
 	${from.desktop} {
@@ -90,23 +89,21 @@ const topBarStylesUntilLeftCol = css`
 
 	align-items: center;
 
-	height: 52px; /** If supporter, height: 44px */
+	height: 52px;
 	box-sizing: border-box;
-	padding-left: 10px;
+	padding: 0 10px;
 
 	${from.mobileLandscape} {
-		padding-left: ${space[5]}px;
+		padding: 0 ${space[5]}px;
 	}
 
 	${from.tablet} {
-		height: 60px; /** If supporter, height: 52px */
-		padding-left: 15px;
+		height: 60px;
 	}
 
 	${from.desktop} {
-		height: 64px; /** If supporter, height: 60px */
+		height: 64px;
 		justify-content: flex-end;
-		padding-right: ${space[5]}px;
 	}
 `;
 
