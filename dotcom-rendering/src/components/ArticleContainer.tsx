@@ -26,6 +26,13 @@ const articleWidth = (format: ArticleFormat) => {
 				}
 			`;
 		}
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+			return css`
+				${from.desktop} {
+					width: 688px;
+				}
+			`;
 		default: {
 			return css`
 				${from.desktop} {

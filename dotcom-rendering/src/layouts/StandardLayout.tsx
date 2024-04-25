@@ -116,7 +116,7 @@ const StandardGrid = ({
 						: isMedia
 						? css`
 								grid-template-areas:
-									'title  border  headline     right-column'
+									'title  border  headline     .'
 									'.      border  disclaimer   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
@@ -162,7 +162,7 @@ const StandardGrid = ({
 					: isMedia
 					? css`
 							grid-template-areas:
-								'title  border  headline     right-column'
+								'title  border  headline     .'
 								'.      border  disclaimer   right-column'
 								'lines  border  media        right-column'
 								'meta   border  media        right-column'
@@ -207,8 +207,8 @@ const StandardGrid = ({
 					: isMedia
 					? css`
 							grid-template-areas:
-								'title         right-column'
-								'headline      right-column'
+								'title         .'
+								'headline      .'
 								'disclaimer    right-column'
 								'media         right-column'
 								'standfirst    right-column'
@@ -483,6 +483,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								backgroundColour={themePalette(
 									'--article-background',
 								)}
+								borderColour={themePalette('--article-border')}
 								padSides={false}
 								element="aside"
 							>
@@ -497,6 +498,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
+										subNavLinkColour={themePalette(
+											'--sub-nav-link',
+										)}
 										linkHoverColour={themePalette(
 											'--article-link-text-hover',
 										)}
@@ -511,6 +515,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								backgroundColour={themePalette(
 									'--article-background',
 								)}
+								borderColour={themePalette('--article-border')}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -610,7 +615,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="media">
-							<div css={maxWidth}>
+							<div css={!isMedia && maxWidth}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -762,6 +767,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										byline={article.byline}
+										source={article.config.source}
 										tags={article.tags}
 										primaryDateline={
 											article.webPublicationDateDisplay
@@ -903,7 +909,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="right-column">
 							<div
 								css={css`
-									padding-top: 6px;
+									padding-top: ${isMedia ? 0 : 6}px;
 									height: 100%;
 									${from.desktop} {
 										/* above 980 */
@@ -1088,6 +1094,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
+									subNavLinkColour={themePalette(
+										'--sub-nav-link',
+									)}
 									linkHoverColour={themePalette(
 										'--article-link-text-hover',
 									)}

@@ -160,6 +160,16 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 					`;
+				case ArticleDesign.Video:
+				case ArticleDesign.Audio:
+					return css`
+						${headline.xxxsmall({
+							fontWeight: 'bold',
+							lineHeight: 'tight',
+						})};
+						margin-bottom: ${space[3]}px;
+						color: ${palette('--standfirst-text')};
+					`;
 				default:
 					switch (theme) {
 						case ArticleSpecial.Labs:

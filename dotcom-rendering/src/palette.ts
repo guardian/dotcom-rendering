@@ -67,6 +67,8 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 				case ArticleSpecial.SpecialReport: {
 					switch (design) {
 						case ArticleDesign.Interview:
+						case ArticleDesign.Video:
+						case ArticleDesign.Audio:
 							return sourcePalette.neutral[100];
 						default:
 							return sourcePalette.specialReport[100];
@@ -77,6 +79,8 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 						case ArticleDesign.Interview:
 							return sourcePalette.specialReport[800];
 						case ArticleDesign.LiveBlog:
+						case ArticleDesign.Video:
+						case ArticleDesign.Audio:
 							return sourcePalette.neutral[100];
 						case ArticleDesign.DeadBlog:
 							return sourcePalette.neutral[7];
@@ -3112,10 +3116,12 @@ const articleBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
-		case ArticleDesign.Picture:
+		case ArticleDesign.Picture: {
+			return sourcePalette.neutral[0];
+		}
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio: {
-			return sourcePalette.neutral[0];
+			return sourcePalette.neutral[7];
 		}
 		default:
 			switch (theme) {
@@ -4496,7 +4502,9 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 	if (
 		theme === ArticleSpecial.SpecialReportAlt &&
 		design !== ArticleDesign.LiveBlog &&
-		design !== ArticleDesign.DeadBlog
+		design !== ArticleDesign.DeadBlog &&
+		design !== ArticleDesign.Video &&
+		design !== ArticleDesign.Audio
 	) {
 		return sourcePalette.specialReportAlt[100];
 	}
