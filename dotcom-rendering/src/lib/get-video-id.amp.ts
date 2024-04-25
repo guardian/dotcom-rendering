@@ -1,45 +1,24 @@
-import { parse, URLSearchParams } from 'node:url';
+import { URL, URLSearchParams } from 'node:url';
 import { isString } from '@guardian/libs';
 
 export const getIdFromUrl = (
 	urlString: string,
-	regexFormat: string,
 	tryInPath?: boolean,
 	tryQueryParam?: string,
 ): string => {
-	const logErr = (actual: string, message: string) => {
-		throw new Error(
-			`validate getIdFromURL error: The URL ${urlString} returned ${actual}. ${message}`,
-		);
-	};
-
 	// Looks for ID in both formats if provided
-	const url = parse(urlString);
+	const url = new URL(urlString);
 
-	const ids = [
+	const id = [
 		tryQueryParam
-			? new URLSearchParams(url.query ?? '').get(tryQueryParam)
+			? new URLSearchParams(url.search).get(tryQueryParam)
 			: undefined,
-		tryInPath ? (url.pathname ?? '').split('/').at(-1) : undefined,
-	]
-		.filter(isString)
-		.map((id) => id.slice(0, 11));
+		tryInPath ? url.pathname.split('/').at(-1) : undefined,
+	].find(isString);
 
-	if (!ids.length)
-		logErr(
-			'an undefined ID',
-			'Could not get ID from pathname or searchParams.',
-		);
+	if (id !== undefined) return id;
 
-	// Allows for a matching ID to be selected from either (or both) formats
-	const id = ids.find((tryId) => new RegExp(regexFormat).test(tryId));
-
-	if (!id) {
-		return logErr(
-			id ?? ids.join(', '),
-			`Value(s) didn't match regexFormat ${regexFormat}`,
-		);
-	}
-
-	return id;
+	throw new Error(
+		`getIdFromUrl: The URL ${urlString} did not contain an ID.`,
+	);
 };

@@ -1,6 +1,7 @@
 import { EventTimer } from '@guardian/commercial';
 import { useEffect, useState } from 'react';
 import { useAB } from './useAB';
+import { useAuthStatus } from './useAuthStatus';
 
 const useIsInAdBlockAskVariant = (): boolean => {
 	const abTestAPI = useAB()?.api;
@@ -69,9 +70,25 @@ const detectByRequests = async () => {
 	return !doubleclickSuccess && guardianSuccess;
 };
 
-export const useAdblockAsk = (slotId: string): boolean => {
+export const useAdblockAsk = ({
+	slotId,
+	shouldHideReaderRevenue,
+	isPaidContent,
+}: {
+	slotId: `dfp-ad--${string}`;
+	shouldHideReaderRevenue: boolean;
+	isPaidContent: boolean;
+}): boolean => {
 	const isInVariant = useIsInAdBlockAskVariant();
 	const [adBlockerDetected, setAdBlockerDetected] = useState<boolean>(false);
+
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
+
+	const canDisplayAdBlockAsk =
+		!shouldHideReaderRevenue && !isPaidContent && !isSignedIn;
 
 	useEffect(() => {
 		const makeRequest = async () => {
@@ -80,7 +97,9 @@ export const useAdblockAsk = (slotId: string): boolean => {
 				isInVariant &&
 				// Once we've detected an ad-blocker, we don't care about subsequent detections
 				!adBlockerDetected &&
-				// Attempt to detect ad-blocker
+				// Is the reader/content eligible for displaying such a message
+				canDisplayAdBlockAsk &&
+				// Actually perform the detection
 				(await detectByRequests())
 			) {
 				setAdBlockerDetected(true);
@@ -98,7 +117,7 @@ export const useAdblockAsk = (slotId: string): boolean => {
 			}
 		};
 		void makeRequest();
-	}, [isInVariant, adBlockerDetected, slotId]);
+	}, [isInVariant, adBlockerDetected, slotId, canDisplayAdBlockAsk]);
 
 	return adBlockerDetected;
 };

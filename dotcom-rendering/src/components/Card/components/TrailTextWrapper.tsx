@@ -19,12 +19,13 @@ const showTrailText = (
 		imageSize === 'large' &&
 		imagePosition === 'right' &&
 		imageType !== 'avatar'
-	)
+	) {
 		return css`
 			${until.desktop} {
 				display: none;
 			}
 		`;
+	}
 	return css`
 		${until.tablet} {
 			display: none;

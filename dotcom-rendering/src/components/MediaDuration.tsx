@@ -50,7 +50,7 @@ export const MediaDuration = ({
 	if (imagePosition === 'left') {
 		return null;
 	}
-	if (imagePositionOnMobile === 'left')
+	if (imagePositionOnMobile === 'left') {
 		return (
 			<Hide until="tablet">
 				<div css={durationStyles}>
@@ -58,6 +58,7 @@ export const MediaDuration = ({
 				</div>
 			</Hide>
 		);
+	}
 
 	return (
 		<div css={durationStyles}>

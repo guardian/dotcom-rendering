@@ -170,8 +170,9 @@ export const CalloutShare = ({
 		}
 	};
 
-	if (typeof window === 'undefined' || typeof navigator === 'undefined')
+	if (typeof window === 'undefined' || typeof navigator === 'undefined') {
 		return <></>;
+	}
 
 	return (
 		<>

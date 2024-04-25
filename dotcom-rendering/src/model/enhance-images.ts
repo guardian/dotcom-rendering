@@ -77,8 +77,9 @@ const isTitle = (element?: FEElement): element is SubheadingBlockElement => {
 	if (
 		element._type !==
 		'model.dotcomrendering.pageElements.SubheadingBlockElement'
-	)
+	) {
 		return false;
+	}
 	const frag = JSDOM.fragment(element.html);
 	return frag.firstElementChild?.nodeName === 'H2';
 };

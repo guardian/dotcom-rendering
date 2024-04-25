@@ -35,6 +35,30 @@ type Props = {
 	isTimeline?: boolean;
 };
 
+const timelineBulletStyles = css`
+	position: relative;
+	::before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 12px;
+		height: 12px;
+		border: 1px solid ${themePalette('--timeline-event-border')};
+		border-radius: 100%;
+		background-color: ${themePalette('--timeline-bullet')};
+		top: -6px;
+		left: -6.5px;
+
+		${from.leftCol} {
+			left: 143.5px;
+		}
+
+		${from.wide} {
+			left: 223.5px;
+		}
+	}
+`;
+
 const starsWrapper = css`
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
@@ -255,7 +279,7 @@ export const ImageComponent = ({
 	}
 
 	const shouldLimitWidth =
-		!isMainMedia &&
+		(!isMainMedia || isTimeline) &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
 	const isNotOpinion =
 		format.design !== ArticleDesign.Comment &&
@@ -411,6 +435,9 @@ export const ImageComponent = ({
 					/>
 				)}
 
+				{isTimeline && isMainMedia && role === 'showcase' && (
+					<div css={timelineBulletStyles} aria-hidden="true" />
+				)}
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
@@ -474,6 +501,9 @@ export const ImageComponent = ({
 						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
+				)}
+				{isTimeline && isMainMedia && role === 'showcase' && (
+					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
 
 				{isMainMedia && (

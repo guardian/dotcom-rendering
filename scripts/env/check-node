@@ -2,6 +2,13 @@
 
 # Check whether the current node version matches the .nvmrc version, and offer some help if not.
 
+# Check if we should skip node-check
+# Required to prevent preactjs/compressed-size-action from failing when on a branch that changes node versions
+if [[ "$SKIP_CHECK_NODE" == "true" ]]; then
+	echo "Skipping check-node"
+	exit 0
+fi
+
 in_terminal() { test -t 1; }
 
 strip_colors() {
