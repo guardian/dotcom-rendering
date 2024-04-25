@@ -100,12 +100,10 @@ const listElements = [
 const isListElement = isOneOf(listElements);
 
 const checkIfAfterNestedListElement = (
-	currentIndex: number,
+	index: number,
 	elements: FEElement[],
 ): boolean => {
-	return !elements
-		.slice(currentIndex)
-		.some(({ _type }) => isListElement(_type));
+	return !elements.slice(index).some(({ _type }) => isListElement(_type));
 };
 
 const getDistanceAfterFloating = (
@@ -225,7 +223,6 @@ export const insertPromotedNewsletter = (
 	format: ArticleFormat,
 	promotedNewsletter: Newsletter,
 ): FEElement[] => {
-	console.log('elements', elements);
 	switch (format.design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Gallery:
