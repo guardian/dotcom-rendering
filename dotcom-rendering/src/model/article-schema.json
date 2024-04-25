@@ -4204,6 +4204,9 @@
                 "section": {
                     "type": "string"
                 },
+                "source": {
+                    "type": "string"
+                },
                 "sharedAdTargeting": {
                     "$ref": "#/definitions/SharedAdTargeting"
                 },
@@ -4299,10 +4302,7 @@
                 },
                 "hasInlineMerchandise": {
                     "type": "boolean"
-                },
-				"source": {
-					"type": "string"
-				}
+                }
             },
             "required": [
                 "abTests",
