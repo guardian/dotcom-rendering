@@ -1,4 +1,5 @@
-import { ArticleDesign, isOneOf, type ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, isOneOf } from '@guardian/libs';
 import { logger } from '../server/lib/logging';
 import type { FEElement, Newsletter } from '../types/content';
 
@@ -224,6 +225,7 @@ export const insertPromotedNewsletter = (
 	format: ArticleFormat,
 	promotedNewsletter: Newsletter,
 ): FEElement[] => {
+	console.log('elements', elements);
 	switch (format.design) {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Gallery:
