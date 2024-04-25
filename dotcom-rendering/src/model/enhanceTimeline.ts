@@ -27,6 +27,20 @@ const enhanceMainMedia = (
 		? undefined
 		: mainMedia;
 
+/**
+ * For a body element that can have a role, we only support "inline"
+ * and "thumbnail". If the element has a role that isn't either
+ * inline or thumbnail we drop it.
+ */
+const filterUnsupportedRoles = (elements: FEElement[]): FEElement[] => {
+	return elements.filter(
+		(element) =>
+			!('role' in element) ||
+			('role' in element &&
+				(element.role === 'inline' || element.role === 'thumbnail')),
+	);
+};
+
 const enhanceTimelineEvent =
 	(enhanceElements: ElementsEnhancer) =>
 	({
@@ -47,7 +61,7 @@ const enhanceTimelineEvent =
 				title,
 				label,
 				main: enhanceMainMedia(main),
-				body: enhanceElements(body),
+				body: enhanceElements(filterUnsupportedRoles(body)),
 			},
 		];
 	};

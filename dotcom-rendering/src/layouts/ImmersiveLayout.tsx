@@ -168,6 +168,12 @@ const maxWidth = css`
 	}
 `;
 
+const linesMargin = css`
+	${from.leftCol} {
+		margin-top: ${space[5]}px;
+	}
+`;
+
 const stretchLines = css`
 	${until.phablet} {
 		margin-left: -20px;
@@ -337,9 +343,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										.contribute
 								}
 								editionId={article.editionId}
-								headerTopBarSwitch={
-									!!article.config.switches.headerTopNav
-								}
 							/>
 						</Section>
 					</div>
@@ -559,7 +562,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								<></>
 							) : (
 								<div css={maxWidth}>
-									<div css={stretchLines}>
+									<div css={[stretchLines, linesMargin]}>
 										{format.theme ===
 										ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
@@ -792,6 +795,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 														isPaidContent={
 															article.pageType
 																.isPaidContent
+														}
+														shouldHideReaderRevenue={
+															!!article.config
+																.shouldHideReaderRevenue
 														}
 													/>
 												}

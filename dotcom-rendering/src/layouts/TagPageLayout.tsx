@@ -84,7 +84,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									isPaidContent={
+										!!tagPage.config.isPaidContent
+									}
+									shouldHideReaderRevenue={false}
+								/>
 							</Section>
 						</Stuck>
 					)}
@@ -129,7 +134,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								tagPage.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={tagPage.editionId}
-							headerTopBarSwitch={!!switches.headerTopNav}
 						/>
 					</Section>
 					{NAV.subNavSections && (

@@ -257,7 +257,9 @@ export const SignInGateSelector = ({
 	useEffect(() => {
 		if (personaliseSignInGateAfterCheckout) {
 			setPersonaliseSwitch(personaliseSignInGateAfterCheckout);
-		} else setPersonaliseSwitch(false);
+		} else {
+			setPersonaliseSwitch(false);
+		}
 	}, [personaliseSignInGateAfterCheckout]);
 
 	useEffect(() => {

@@ -261,7 +261,16 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											padSides={false}
 											shouldCenter={false}
 										>
-											<HeaderAdSlot />
+											<HeaderAdSlot
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												shouldHideReaderRevenue={
+													!!article.config
+														.shouldHideReaderRevenue
+												}
+											/>
 										</Section>
 									</Stuck>
 								)}
@@ -333,10 +342,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													.header.subscribe
 											}
 											editionId={article.editionId}
-											headerTopBarSwitch={
-												!!article.config.switches
-													.headerTopNav
-											}
 										/>
 									</Section>
 
@@ -411,7 +416,16 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											showSideBorders={false}
 											padSides={false}
 										>
-											<HeaderAdSlot />
+											<HeaderAdSlot
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												shouldHideReaderRevenue={
+													!!article.config
+														.shouldHideReaderRevenue
+												}
+											/>
 										</Section>
 									</Stuck>
 								)}
@@ -446,10 +460,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 													.header.subscribe
 											}
 											editionId={article.editionId}
-											headerTopBarSwitch={
-												!!article.config.switches
-													.headerTopNav
-											}
 										/>
 									</Section>
 								</Stuck>
@@ -776,6 +786,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
+										shouldHideReaderRevenue={
+											!!article.config
+												.shouldHideReaderRevenue
+										}
 									/>
 								</RightColumn>
 							</div>

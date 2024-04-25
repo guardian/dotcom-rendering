@@ -28,8 +28,9 @@ export const transparentColour = (
 	opacity = 0.5,
 ): `rgba(${number}, ${number}, ${number}, ${number})` => {
 	// if we have an invalid string,
-	if (!colour.startsWith('#') || ![4, 7].includes(colour.length))
+	if (!colour.startsWith('#') || ![4, 7].includes(colour.length)) {
 		return fallback;
+	}
 
 	const hex = colour.length === 7 ? 2 : 1;
 

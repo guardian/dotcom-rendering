@@ -59,7 +59,7 @@ export const GetMatchNav = ({
 		if (
 			format.design === ArticleDesign.LiveBlog ||
 			format.design === ArticleDesign.DeadBlog
-		)
+		) {
 			return (
 				<div
 					css={css`
@@ -82,6 +82,7 @@ export const GetMatchNav = ({
 					/>
 				</div>
 			);
+		}
 	}
 	if (data) {
 		return (

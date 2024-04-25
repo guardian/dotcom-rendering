@@ -14,7 +14,6 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
@@ -251,16 +250,6 @@ export const LiveBlogEpic = ({
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
 
-	const ABTestAPI = useAB()?.api;
-	const userIsInBlockSupporterRevenueTest = ABTestAPI?.isUserInVariant(
-		'BlockSupporterRevenueMessagingSport',
-		'variant',
-	);
-
-	const shouldRemoveEpic =
-		userIsInBlockSupporterRevenueTest &&
-		(sectionId === 'sport' || sectionId === 'football');
-
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
@@ -271,7 +260,6 @@ export const LiveBlogEpic = ({
 		keywordIds,
 	});
 	if (!payload) return null;
-	if (shouldRemoveEpic) return null;
 
 	/**
 	 * Here we decide where to insert the epic.

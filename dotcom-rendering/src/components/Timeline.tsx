@@ -10,6 +10,7 @@ import type {
 	FEElement,
 } from '../types/content';
 import { Heading } from './Heading';
+import { Subheading } from './Subheading';
 
 // ----- Helpers ----- //
 
@@ -24,16 +25,19 @@ const hasShowcaseRole = (element?: FEElement): boolean => {
 // ----- EventHeader ----- //
 
 const timelineBulletStyles = css`
-	border-radius: 1000px;
-	display: block;
-	background-color: ${palette('--timeline-bullet')};
-	width: 12px;
-	height: 12px;
-	content: '';
-	border: 1px solid ${palette('--timeline-event-border')};
-	position: absolute;
-	left: -7px;
-	top: -6px;
+	position: relative;
+	::before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 12px;
+		height: 12px;
+		border: 1px solid ${palette('--timeline-event-border')};
+		border-radius: 100%;
+		background-color: ${palette('--timeline-bullet')};
+		left: -16.5px;
+		top: -10px;
+	}
 `;
 
 const smallDateStyles = css`
@@ -65,6 +69,10 @@ const titleStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
+const headingStyles = css`
+	margin-top: 4px;
+`;
+
 type EventHeaderProps = {
 	event: DCRTimelineEvent;
 	ArticleElementComponent: NestedArticleElement;
@@ -81,7 +89,13 @@ const EventHeader = ({
 	smallDates,
 }: EventHeaderProps) => {
 	const heading = (
-		<Heading level={sectioned ? 3 : 2}>
+		<Heading
+			css={[
+				headingStyles,
+				!hasShowcaseRole(event.main) && timelineBulletStyles,
+			]}
+			level={sectioned ? 3 : 2}
+		>
 			<span css={smallDates ? smallDateStyles : titleStyles(format)}>
 				{event.date}
 			</span>
@@ -99,6 +113,7 @@ const EventHeader = ({
 					element={event.main}
 					format={format}
 					isTimeline={true}
+					isMainMedia={true}
 				/>
 				{heading}
 			</header>
@@ -112,6 +127,7 @@ const EventHeader = ({
 					element={event.main}
 					format={format}
 					isTimeline={true}
+					isMainMedia={true}
 				/>
 			</header>
 		);
@@ -124,12 +140,17 @@ const EventHeader = ({
 
 const eventStyles = css`
 	border: 1px solid ${palette('--timeline-event-border')};
-	padding: ${space[1]}px 10px ${space[6]}px 10px;
+	padding: 0 10px ${space[6]}px 10px;
 	margin-bottom: ${space[5]}px;
 	position: relative;
 
-	&:before {
-		${timelineBulletStyles}
+	${from.tablet} {
+		margin-left: -21px;
+		margin-right: -21px;
+	}
+	${from.leftCol} {
+		margin-left: -11px;
+		margin-right: -11px;
 	}
 `;
 
@@ -139,6 +160,15 @@ const labelStyles = css`
 	padding: 3px 10px 4px 10px;
 	display: inline-block;
 	${textSans.small({ fontWeight: 'regular' })}
+
+	${from.tablet} {
+		margin-left: -21px;
+		margin-right: -21px;
+	}
+	${from.leftCol} {
+		margin-left: -11px;
+		margin-right: -11px;
+	}
 `;
 
 const immersiveMainElementEventStyles = css`
@@ -182,11 +212,13 @@ const TimelineEvent = ({
 			{event.body.map((element, index) => (
 				<ArticleElementComponent
 					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-					index={index}
 					key={index}
+					index={index}
 					element={element}
 					forceDropCap="off"
 					format={format}
+					isTimeline={true}
+					isMainMedia={false}
 				/>
 			))}
 		</section>
@@ -194,11 +226,6 @@ const TimelineEvent = ({
 );
 
 // ----- Timeline ----- //
-
-const sectionTitleStyles = css`
-	${headline.xsmall({ fontWeight: 'medium' })}
-	margin: ${space[8]}px 0 ${space[4]}px;
-`;
 
 type Props = {
 	timeline: DCRTimelineBlockElement | DCRSectionedTimelineBlockElement;
@@ -239,7 +266,9 @@ export const Timeline = ({
 				<>
 					{timeline.sections.map((section) => (
 						<section key={section.title}>
-							<h2 css={sectionTitleStyles}>{section.title}</h2>
+							<Subheading format={format} topPadding={false}>
+								{section.title}
+							</Subheading>
 							{section.events.map((event) => (
 								<TimelineEvent
 									event={event}
