@@ -804,53 +804,54 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							</ArticleContainer>
 						</GridItem>
 						<GridItem area="right-column">
-        			{ArticleDesign.Gallery != format.design && (
+							{ArticleDesign.Gallery != format.design && (
 								//TODO: work out how to keep the right column here for ads
-							<div
-								css={css`
-									padding-top: 6px;
-									height: 100%;
-									${from.desktop} {
-										/* above 980 */
-										margin-left: 20px;
-										margin-right: -20px;
-									}
-									${from.leftCol} {
-										/* above 1140 */
-										margin-left: 0px;
-										margin-right: 0px;
-									}
-								`}
-							>
-								<RightColumn>
-									<>
-										{mainMedia && renderAds && (
-											<div
-												css={css`
-													margin-top: ${space[4]}px;
-												`}
-											>
-												{
-													<AdSlot
-														position="right"
-														display={format.display}
-														isPaidContent={
-															article.pageType
-																.isPaidContent
-														}
-														shouldHideReaderRevenue={
-															!!article.config
-																.shouldHideReaderRevenue
-														}
-													/>
-												}
-											</div>
-										)}
-									</>
-								</RightColumn>
-							</div>
-             )}
-
+								<div
+									css={css`
+										padding-top: 6px;
+										height: 100%;
+										${from.desktop} {
+											/* above 980 */
+											margin-left: 20px;
+											margin-right: -20px;
+										}
+										${from.leftCol} {
+											/* above 1140 */
+											margin-left: 0px;
+											margin-right: 0px;
+										}
+									`}
+								>
+									<RightColumn>
+										<>
+											{mainMedia && renderAds && (
+												<div
+													css={css`
+														margin-top: ${space[4]}px;
+													`}
+												>
+													{
+														<AdSlot
+															position="right"
+															display={
+																format.display
+															}
+															isPaidContent={
+																article.pageType
+																	.isPaidContent
+															}
+															shouldHideReaderRevenue={
+																!!article.config
+																	.shouldHideReaderRevenue
+															}
+														/>
+													}
+												</div>
+											)}
+										</>
+									</RightColumn>
+								</div>
+							)}
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>

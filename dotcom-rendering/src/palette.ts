@@ -3192,7 +3192,7 @@ const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 		design !== ArticleDesign.LiveBlog
 	) {
 		return transparentColour(sourcePalette.neutral[60], 0.3);
-    }
+	}
 	if (design === ArticleDesign.Gallery) return sourcePalette.neutral[60];
 
 	return sourcePalette.neutral[86];
@@ -3304,7 +3304,7 @@ const articleLinkBorderHoverLight: PaletteFunction = ({ design, theme }) => {
 	}
 	if (theme === ArticleSpecial.SpecialReportAlt) {
 		return sourcePalette.specialReportAlt[200];
-   }
+	}
 	if (design === ArticleDesign.Gallery) return sourcePalette.neutral[86];
 
 	return pillarPalette(theme, 400);
