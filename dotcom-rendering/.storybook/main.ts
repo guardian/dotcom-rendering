@@ -45,6 +45,7 @@ const config: StorybookConfig = {
 				},
 			},
 		},
+		'@storybook/addon-webpack5-compiler-swc',
 	],
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
@@ -82,6 +83,9 @@ const config: StorybookConfig = {
 	framework: {
 		name: '@storybook/react-webpack5',
 		options: { fastRefresh: true },
+	},
+	docs: {
+		autodocs: true,
 	},
 };
 
