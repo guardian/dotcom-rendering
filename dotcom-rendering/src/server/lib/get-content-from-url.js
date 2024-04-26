@@ -33,10 +33,11 @@ async function getContentFromURL(url, _headers) {
 	const { html, ...config } = await fetch(jsonUrl, { headers })
 		.then((response) => response.json())
 		.catch((error) => {
-			if (error?.type === 'invalid-json')
+			if (error?.type === 'invalid-json') {
 				throw new Error(
 					'Did not receive JSON response - are you sure this URL supports .json?dcr requests?',
 				);
+			}
 			throw error;
 		});
 

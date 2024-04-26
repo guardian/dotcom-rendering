@@ -7,9 +7,9 @@
 	"scripts": {
 		"lint": "pnpm '/^lint:(playwright|scripts|src)$/'",
 		"lint:fix": "pnpm lint --fix",
-		"lint:src": "eslint . --ext .ts,.tsx --quiet --cache",
-		"lint:scripts": "eslint scripts --quiet --cache",
-		"lint:playwright": "eslint ./playwright --cache",
+		"lint:src": "eslint src --ignore-pattern src/static/**/*.js --quiet --cache --cache-location src/.eslintcache",
+		"lint:scripts": "eslint scripts --quiet --cache --cache-location scripts/.eslintcache",
+		"lint:playwright": "eslint playwright --quiet --cache --cache-location playwright/.eslintcache",
 		"lintstats": "pnpm lint --format node_modules/eslint-stats/byError.js",
 		"tsc": "tsc",
 		"test": "jest --maxWorkers=50%",
