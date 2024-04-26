@@ -58,6 +58,7 @@ module.exports = {
 		es6: true,
 		node: true,
 	},
+	ignorePatterns: ['src/static/js/curl-with-js-and-domReady.js'],
 	extends: [
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',

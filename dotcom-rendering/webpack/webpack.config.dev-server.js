@@ -39,11 +39,12 @@ module.exports = {
 				if (
 					req.hostname === (process.env.HOSTNAME || 'localhost') &&
 					req.headers.origin
-				)
+				) {
 					res.setHeader(
 						'Access-Control-Allow-Origin',
 						req.headers.origin,
 					);
+				}
 			},
 		},
 		setupMiddlewares: (middlewares, devServer) => {
