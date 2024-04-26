@@ -30,6 +30,9 @@ const articleWidth = (format: ArticleFormat) => {
 		case ArticleDesign.Audio:
 			return css`
 				${from.desktop} {
+					width: 620px;
+				}
+				${from.wide} {
 					width: 688px;
 				}
 			`;

@@ -52,6 +52,8 @@ const chooseWrapper = (format: ArticleFormat) => {
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
+				case ArticleDesign.Video:
+				case ArticleDesign.Audio:
 					return '';
 				default:
 					return noGutters;

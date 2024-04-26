@@ -232,6 +232,7 @@ const StandardGrid = ({
 			}
 
 			${until.desktop} {
+				grid-column-gap: 0px;
 				grid-template-columns: 1fr; /* Main content */
 				${isMatchReport
 					? css`
@@ -247,16 +248,17 @@ const StandardGrid = ({
 								'body';
 					  `
 					: isMedia
-					? `grid-template-areas:
-										'title'
-										'headline'
-										'disclaimer'
-										'media'
-										'standfirst'
-										'lines'
-										'meta'
-										'body';
-							  `
+					? css`
+							grid-template-areas:
+								'title'
+								'headline'
+								'disclaimer'
+								'media'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
 					: css`
 							grid-template-areas:
 								'title'
@@ -290,10 +292,10 @@ const StandardGrid = ({
 					: isMedia
 					? css`
 							grid-template-areas:
-								'media'
 								'title'
 								'headline'
 								'disclaimer'
+								'media'
 								'standfirst'
 								'lines'
 								'meta'
