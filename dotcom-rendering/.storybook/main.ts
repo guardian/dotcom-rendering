@@ -60,18 +60,23 @@ const config: StorybookConfig = {
 		// clean-css will try to import these packages
 		config.resolve.fallback['http'] = false;
 		config.resolve.fallback['https'] = false;
-
-		// Required as otherwise 'process' will not be defined when included on its own (without .env)
-		// e.g process?.env?.SOME_VAR
-		config.plugins?.push(
-			new webpack.DefinePlugin({
-				process: '{}',
-			}),
-			// We rely on Buffer for our bridget thrift client
-			new webpack.ProvidePlugin({
-				Buffer: ['buffer', 'Buffer'],
-			}),
-		);
+		(config.resolve.alias = {
+			...config.resolve.alias,
+			react: 'preact/compat',
+			'react-dom/test-utils': 'preact/test-utils',
+			'react-dom': 'preact/compat',
+		}),
+			// Required as otherwise 'process' will not be defined when included on its own (without .env)
+			// e.g process?.env?.SOME_VAR
+			config.plugins?.push(
+				new webpack.DefinePlugin({
+					process: '{}',
+				}),
+				// We rely on Buffer for our bridget thrift client
+				new webpack.ProvidePlugin({
+					Buffer: ['buffer', 'Buffer'],
+				}),
+			);
 		return config;
 	},
 	env: (config) => ({
