@@ -72,6 +72,7 @@ export const SPECIAL_REGEX_CHARACTERS = new RegExp(/[.+*?^$(){}|[\]]/g);
  * It does this so we can have separate links to both contributors
  */
 export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
+	if (!byline) return [];
 	// Replace special regex characters with their escaped version.
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement
 	const titles = tags
@@ -117,26 +118,16 @@ function removeComma(bylinePart: string) {
 		: bylinePart;
 }
 
-export const BylineLink = ({
-	byline = '',
-	tags,
-	source,
-	format,
-	isHeadline = false,
-}: Props) => {
-	const tokens = bylineAsTokens(byline, tags);
-	const soleContributor = getSoleContributor(tags, byline);
-	const hasSoleContributor = !!soleContributor;
-	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
-	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
-	const isMedia =
-		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.Audio;
-
+export const getRenderedTokens = (
+	bylineComponents: ReturnType<typeof getBylineComponentsFromTokens>,
+	hasSoleContributor: boolean,
+	design: ArticleDesign,
+	source?: string,
+) => {
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (isString(bylineComponent)) {
 			const displayString =
-				format.design === ArticleDesign.Analysis && hasSoleContributor
+				design === ArticleDesign.Analysis && hasSoleContributor
 					? removeComma(bylineComponent)
 					: bylineComponent;
 			return displayString ? (
@@ -152,7 +143,10 @@ export const BylineLink = ({
 		);
 	});
 
-	if (isMedia && source) {
+	if (
+		(design === ArticleDesign.Video || design === ArticleDesign.Audio) &&
+		source
+	) {
 		renderedTokens.push(
 			<>
 				{renderedTokens.length > 0 && ', '}
@@ -160,6 +154,29 @@ export const BylineLink = ({
 			</>,
 		);
 	}
+
+	return renderedTokens;
+};
+
+export const BylineLink = ({
+	byline = '',
+	tags,
+	source,
+	format,
+	isHeadline = false,
+}: Props) => {
+	const tokens = bylineAsTokens(byline, tags);
+	const soleContributor = getSoleContributor(tags, byline);
+	const hasSoleContributor = !!soleContributor;
+	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+
+	const renderedTokens = getRenderedTokens(
+		bylineComponents,
+		hasSoleContributor,
+		format.design,
+		source,
+	);
 
 	/**
 	 * Where is this coming from?
