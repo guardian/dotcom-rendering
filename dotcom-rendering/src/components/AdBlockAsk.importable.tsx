@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { headline, textSans } from '@guardian/source-foundations';
-import { palette } from '@guardian/source-foundations/cjs/source-foundations/src/colour/palette';
+import { headline, palette, textSans } from '@guardian/source-foundations';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { useAdblockAsk } from '../lib/useAdBlockAsk';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
