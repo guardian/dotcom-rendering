@@ -113,7 +113,7 @@
 		"@types/scheduler": "0.16.2",
 		"@types/semver": "7.5.6",
 		"@types/serve-static": "1.15.0",
-		"@types/tough-cookie": "4.0.2",
+		"@types/tough-cookie": "4.0.5",
 		"@types/trusted-types": "2.0.3",
 		"@types/twitter-for-web": "0.0.2",
 		"@types/webpack-bundle-analyzer": "4.7.0",
