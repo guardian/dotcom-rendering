@@ -933,7 +933,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							>
 								<RightColumn>
 									<MostViewedRightWithAd
-										display={format.display}
+										format={format}
 										isPaidContent={
 											article.pageType.isPaidContent
 										}

@@ -37,18 +37,21 @@ type InlineProps = {
 	position: InlinePosition;
 	index: number;
 	shouldHideReaderRevenue?: never;
+	isDark?: never;
 };
 
 type RightProps = {
 	position: 'right';
 	index?: never;
 	shouldHideReaderRevenue: boolean;
+	isDark?: boolean;
 };
 
 type RemainingProps = {
 	position: Exclude<SlotNamesWithPageSkin, InlinePosition | 'right'>;
 	index?: never;
 	shouldHideReaderRevenue?: never;
+	isDark?: never;
 };
 
 /**
@@ -134,6 +137,14 @@ export const labelStyles = css`
 		border: 0;
 		display: block;
 		${individualLabelCSS}
+	}
+`;
+
+const darkLabelStyles = css`
+	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
+		background-color: transparent;
+		border-top-color: ${palette.neutral[20]};
+		color: ${palette.neutral[86]};
 	}
 `;
 
@@ -436,6 +447,7 @@ export const AdSlot = ({
 	index,
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
+	isDark = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -492,6 +504,7 @@ export const AdSlot = ({
 										max-height: 100%;
 									`,
 									labelStyles,
+									isDark && darkLabelStyles,
 								]}
 							>
 								<div
