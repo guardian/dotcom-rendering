@@ -121,7 +121,7 @@ function removeComma(bylinePart: string) {
 		: bylinePart;
 }
 
-export const getRenderedTokens = (
+const getRenderedTokens = (
 	bylineComponents: ReturnType<typeof getBylineComponentsFromTokens>,
 	hasSoleContributor: boolean,
 	design: ArticleDesign,
