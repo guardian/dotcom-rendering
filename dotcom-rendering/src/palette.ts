@@ -2477,6 +2477,36 @@ const cardBackgroundDark: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[0];
 	}
 };
+
+const onwardPlaceholderBackgroundLight: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
+	switch (design) {
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+			return 'transparent';
+		default:
+			return articleBackgroundLight({
+				design,
+				display,
+				theme,
+			});
+	}
+};
+
+const onwardPlaceholderBackgroundDark: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) =>
+	articleBackgroundDark({
+		design,
+		display,
+		theme,
+	});
+
 const onwardContentCardBackgroundLight: PaletteFunction = ({
 	theme,
 	design,
@@ -5604,6 +5634,10 @@ const paletteColours = {
 	'--card-background': {
 		light: cardBackgroundLight,
 		dark: cardBackgroundDark,
+	},
+	'--onward-placeholder-background': {
+		light: onwardPlaceholderBackgroundLight,
+		dark: onwardPlaceholderBackgroundDark,
 	},
 	'--onward-content-card-background': {
 		light: onwardContentCardBackgroundLight,
