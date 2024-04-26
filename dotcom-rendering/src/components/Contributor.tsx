@@ -46,9 +46,9 @@ const labsBylineStyles = css`
 
 type Props = {
 	byline?: string;
+	source?: string;
 	tags: TagType[];
 	format: ArticleFormat;
-	source?: string;
 };
 
 export const Contributor = ({ byline, tags, format, source }: Props) => (

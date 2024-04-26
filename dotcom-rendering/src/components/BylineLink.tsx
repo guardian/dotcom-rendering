@@ -71,7 +71,10 @@ export const SPECIAL_REGEX_CHARACTERS = new RegExp(/[.+*?^$(){}|[\]]/g);
  * 'Jane Doe and John Smith` to ['Jane Doe', ' and ', 'John Smith']
  * It does this so we can have separate links to both contributors
  */
-export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
+export const bylineAsTokens = (
+	byline: string | undefined,
+	tags: TagType[],
+): string[] => {
 	if (!byline) return [];
 	// Replace special regex characters with their escaped version.
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement
@@ -159,7 +162,7 @@ export const getRenderedTokens = (
 };
 
 export const BylineLink = ({
-	byline = '',
+	byline,
 	tags,
 	source,
 	format,

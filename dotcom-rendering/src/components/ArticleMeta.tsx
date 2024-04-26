@@ -369,15 +369,14 @@ export const ArticleMeta = ({
 						)}
 
 						<div>
-							{shouldShowContributor(format) &&
-								(isString(byline) || isString(source)) && (
-									<Contributor
-										byline={byline}
-										tags={tags}
-										format={format}
-										source={source}
-									/>
-								)}
+							{shouldShowContributor(format) && (
+								<Contributor
+									byline={byline}
+									tags={tags}
+									format={format}
+									source={source}
+								/>
+							)}
 							{messageUs &&
 								format.design === ArticleDesign.LiveBlog && (
 									<Island
