@@ -21,9 +21,21 @@ describe('ConfigContext', () => {
 
 	describe('with ConfigProvider', () => {
 		it.each([
-			{ renderingTarget: 'Web', darkModeAvailable: false },
-			{ renderingTarget: 'Apps', darkModeAvailable: true },
-			{ renderingTarget: 'Apps', darkModeAvailable: false },
+			{
+				renderingTarget: 'Web',
+				darkModeAvailable: false,
+				assetOrigin: '/',
+			},
+			{
+				renderingTarget: 'Apps',
+				darkModeAvailable: true,
+				assetOrigin: '/',
+			},
+			{
+				renderingTarget: 'Apps',
+				darkModeAvailable: false,
+				assetOrigin: '/',
+			},
 		] as const satisfies ReadonlyArray<Config>)(
 			'useConfig hook provides correct config: "%o"',
 			(config) => {

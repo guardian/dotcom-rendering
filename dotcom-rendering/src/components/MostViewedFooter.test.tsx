@@ -24,7 +24,11 @@ describe('MostViewedFooterData', () => {
 
 		const { getByText, getAllByText, getByTestId } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
@@ -65,7 +69,11 @@ describe('MostViewedFooterData', () => {
 
 		const { getByTestId, getByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
@@ -127,7 +135,11 @@ describe('MostViewedFooterData', () => {
 
 		const { getByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
@@ -174,7 +186,11 @@ describe('MostViewedFooterData', () => {
 
 		const { queryByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
@@ -197,7 +213,11 @@ describe('MostViewedFooterData', () => {
 
 		const { asFragment } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
