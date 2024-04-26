@@ -12,10 +12,10 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Get started',
 			newsletters: [
 				'morning-briefing', // First Edition
+				'the-stakes-us-election-edition',
 				'swift-notes',
 				'saturday-edition',
 				'word-of-mouth', // Feast
-				'well-actually',
 				'the-guide-staying-in',
 				'the-long-read',
 				'reclaim-your-brain',
@@ -29,6 +29,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'tech-scape',
 				'fashion-statement',
 				'pushing-buttons',
+				'well-actually',
 				'cotton-capital',
 			],
 		},
@@ -110,9 +111,10 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
+				'the-stakes-us-election-edition',
 				'us-morning-newsletter', // First Thing
-				'well-actually',
 				'trump-on-trial',
+				'well-actually',
 				'reclaim-your-brain',
 				'today-us', // Headlines US
 				'soccer-with-jonathan-wilson',
@@ -217,19 +219,20 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'In depth',
 			newsletters: [
+				'the-stakes-us-election-edition',
 				'the-rural-network',
 				'green-light', // Down to Earth
 				'tech-scape',
 				'pushing-buttons',
 				'fashion-statement',
 				'word-of-mouth', // Feast
-				'the-guide-staying-in',
 			],
 		},
 		{
 			title: 'Culture picks',
 			newsletters: [
 				'saved-for-later',
+				'the-guide-staying-in',
 				'hear-here',
 				'sleeve-notes',
 				'film-today',

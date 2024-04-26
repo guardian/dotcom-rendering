@@ -8,6 +8,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { ConfigProvider } from '../components/ConfigContext';
 import { epicChoiceCardCss } from '../components/Epic.amp';
 import { stickyAdLabelCss } from '../components/StickyAd.amp';
+import { ASSET_ORIGIN } from '../lib/assets';
 import { fontsCss } from '../lib/fonts-css';
 import type { Config } from '../types/configContext';
 
@@ -40,7 +41,11 @@ export const renderArticle = ({
 	const { extractCritical } = createEmotionServer(cache);
 
 	// We are currently considering AMP to be a renderingTarget of Web
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+		assetOrigin: ASSET_ORIGIN,
+	};
 
 	const { html, css }: RenderToStringResult = extractCritical(
 		renderToStaticMarkup(
