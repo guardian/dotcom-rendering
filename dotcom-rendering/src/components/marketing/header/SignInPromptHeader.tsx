@@ -7,11 +7,9 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headline,
-	lineHeights,
 	palette,
 	space,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import {
 	Hide,
@@ -40,12 +38,12 @@ const headingStyles = () => css`
 
 const subHeadingStyles = css`
 	color: ${palette.brandAlt[400]};
-	${textSans.small({ fontWeight: 'regular' })};
-	line-height: ${lineHeights.tight} !important;
 	margin: 0;
 
-	${until.desktop} {
-		font-size: 12px;
+	${textSans.xxsmall({ fontWeight: 'regular', lineHeight: 'tight' })};
+
+	${from.desktop} {
+		${textSans.small({ fontWeight: 'regular', lineHeight: 'tight' })};
 	}
 `;
 
@@ -87,12 +85,10 @@ const dotStyles = css`
 
 const benefitTextStyles = css`
 	color: ${palette.neutral[100]};
-	${textSans.small()};
-	line-height: ${lineHeights.regular} !important;
+	${textSans.xxsmall({ lineHeight: 'tight' })};
 
-	${until.desktop} {
-		line-height: 1rem !important;
-		font-size: 12px;
+	${from.desktop} {
+		${textSans.small({ lineHeight: 'regular' })};
 	}
 `;
 
