@@ -106,7 +106,10 @@ function decideLogo(
 					media={'(prefers-color-scheme: dark)'}
 				/>
 			)}
-			{/** Default to standard logo for light backgrounds */}
+			{/**
+			 * Audio/Video articles have a dark background and need a logo designed for dark backgrounds,
+			 * for everything else default to standard logo for light backgrounds
+			 **/}
 			{isMedia && branding.logoForDarkBackground ? (
 				<img
 					width={branding.logoForDarkBackground.dimensions.width}
