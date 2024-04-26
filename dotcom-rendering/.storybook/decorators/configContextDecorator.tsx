@@ -6,6 +6,7 @@ import { Config } from '../../src/types/configContext';
 const defaultConfig = {
 	renderingTarget: 'Web',
 	darkModeAvailable: false,
+	assetOrigin: '/',
 } satisfies Config;
 
 export const ConfigContextDecorator: Decorator<{
