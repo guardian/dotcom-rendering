@@ -5,6 +5,7 @@ import { palette } from '@guardian/source-foundations/cjs/source-foundations/src
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { useAdblockAsk } from '../lib/useAdBlockAsk';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
+import { useConfig } from './ConfigContext';
 
 type AdBlockAskSize = 'leaderboard' | 'mpu';
 
@@ -59,8 +60,7 @@ const adBlockAskTextStyles: Record<AdBlockAskSize, SerializedStyles> = {
 };
 
 const HandsLogo = ({ styles }: { styles: SerializedStyles }) => {
-	// TODO: Get the asset origin for CODE/PROD
-	const assetOrigin = '/';
+	const { assetOrigin } = useConfig();
 	const src = `${assetOrigin}static/frontend/logos/hands.png`;
 	return <img src={src} alt="Guardian logo held up by hands" css={styles} />;
 };
