@@ -309,7 +309,7 @@ export const TreatsStory = () => {
 			showTopBorder={false}
 			showSideBorders={false}
 			showDateHeader={true}
-			editionId="UK"
+			editionId={'UK'}
 		>
 			<Grey />
 		</Section>

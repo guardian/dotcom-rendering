@@ -198,6 +198,7 @@ export const BrandedPalette = () => (
 		ophanComponentName={'branded-palette'}
 		ophanComponentLink={'branded-palette'}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
@@ -235,6 +236,7 @@ export const PodcastPalette = () => (
 		ophanComponentName={'podcast-palette'}
 		ophanComponentLink={'podcast-palette'}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}

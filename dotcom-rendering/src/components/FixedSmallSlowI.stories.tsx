@@ -22,6 +22,7 @@ export const Default = () => (
 	<FrontSection
 		title="Fixed Small Slow I"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallSlowI trails={trails} showAge={true} imageLoading="eager" />
 	</FrontSection>

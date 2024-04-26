@@ -18,6 +18,7 @@ const pageId = 'uk/lifestyle';
 const collectionId = '5011-3940-8793-33a9';
 const ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 const sectionId = 'container-id';
+const editionId = 'UK';
 
 const defaultProps = {
 	title,
@@ -27,6 +28,7 @@ const defaultProps = {
 	sectionId,
 	showAge: false,
 	discussionApiUrl,
+	editionId,
 } satisfies Parameters<typeof ShowMore>[0];
 
 export default {

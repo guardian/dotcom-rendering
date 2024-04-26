@@ -10,7 +10,7 @@ export default {
 };
 
 export const defaultStory = () => {
-	return <HeaderTopBarEditionDropdown editionId="UK" dataLinkName="test" />;
+	return <HeaderTopBarEditionDropdown editionId={'UK'} dataLinkName="test" />;
 };
 
 defaultStory.storyName = 'default';

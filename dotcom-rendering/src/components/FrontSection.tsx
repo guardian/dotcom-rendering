@@ -63,7 +63,7 @@ type Props = {
 	 */
 	showDateHeader?: boolean;
 	/** Used in partnership with `showDateHeader` to localise the date string */
-	editionId?: EditionId;
+	editionId: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
 	/** Enable the "Show More" button on this container to allow readers to load more cards */

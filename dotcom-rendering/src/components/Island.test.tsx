@@ -176,7 +176,7 @@ describe('Island: server-side rendering', () => {
 	test('InteractiveSupportButton', () => {
 		expect(() =>
 			renderToString(
-				<InteractiveSupportButton editionId="UK" subscribeUrl="" />,
+				<InteractiveSupportButton editionId={'UK'} subscribeUrl="" />,
 			),
 		).not.toThrow();
 	});
@@ -204,7 +204,7 @@ describe('Island: server-side rendering', () => {
 							display: ArticleDisplay.Standard,
 						}}
 						pillar={Pillar.News}
-						editionId="UK"
+						editionId={'UK'}
 						shortUrlId=""
 						discussionApiUrl=""
 					/>
