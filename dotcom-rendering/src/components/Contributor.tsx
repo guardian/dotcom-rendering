@@ -45,7 +45,7 @@ const labsBylineStyles = css`
 `;
 
 type Props = {
-	byline: string;
+	byline?: string;
 	tags: TagType[];
 	format: ArticleFormat;
 	source?: string;

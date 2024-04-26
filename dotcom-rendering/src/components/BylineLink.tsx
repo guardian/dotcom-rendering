@@ -13,7 +13,7 @@ import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
 
 type Props = {
-	byline: string;
+	byline?: string;
 	tags: TagType[];
 	source?: string;
 	format: ArticleFormat;
@@ -105,6 +105,12 @@ const ContributorLink = ({
 	</a>
 );
 
+const Source = ({ source }: { source: string }) => (
+	<span>
+		{source === 'guardian.co.uk' ? 'theguardian.com' : `Source: ${source}`}
+	</span>
+);
+
 function removeComma(bylinePart: string) {
 	return bylinePart.startsWith(',')
 		? bylinePart.slice(1).trimStart()
@@ -112,7 +118,7 @@ function removeComma(bylinePart: string) {
 }
 
 export const BylineLink = ({
-	byline,
+	byline = '',
 	tags,
 	source,
 	format,
@@ -148,12 +154,10 @@ export const BylineLink = ({
 
 	if (isMedia && source) {
 		renderedTokens.push(
-			<span key="source">
-				{renderedTokens.length > 1 && ', '}
-				{source === 'guardian.co.uk'
-					? 'theguardian.com'
-					: `Source: ${source}`}
-			</span>,
+			<>
+				{renderedTokens.length > 0 && ', '}
+				<Source key="source" source={source} />
+			</>,
 		);
 	}
 

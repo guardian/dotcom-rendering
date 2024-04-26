@@ -744,6 +744,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												pageId={article.pageId}
 												webTitle={article.webTitle}
 												byline={article.byline}
+												source={article.config.source}
 												tags={article.tags}
 												primaryDateline={
 													article.webPublicationDateDisplay

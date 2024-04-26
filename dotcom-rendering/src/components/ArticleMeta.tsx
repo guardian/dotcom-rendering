@@ -370,7 +370,7 @@ export const ArticleMeta = ({
 
 						<div>
 							{shouldShowContributor(format) &&
-								isString(byline) && (
+								(isString(byline) || isString(source)) && (
 									<Contributor
 										byline={byline}
 										tags={tags}
