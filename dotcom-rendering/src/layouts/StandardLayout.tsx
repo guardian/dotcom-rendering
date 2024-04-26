@@ -637,6 +637,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									editionId={article.editionId}
+									hideCaption={isMedia}
 								/>
 							</div>
 						</GridItem>

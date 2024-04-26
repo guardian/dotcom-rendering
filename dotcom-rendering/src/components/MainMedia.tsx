@@ -33,6 +33,10 @@ const noGutters = css`
 	}
 `;
 
+const padBottom = css`
+	padding-bottom: 6px;
+`;
+
 const immersiveWrapper = css`
 	/*
         Immersive main media is wrapped in a flex div with height 100vw and then
@@ -52,9 +56,10 @@ const chooseWrapper = (format: ArticleFormat) => {
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
+					return '';
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
-					return '';
+					return padBottom;
 				default:
 					return noGutters;
 			}
