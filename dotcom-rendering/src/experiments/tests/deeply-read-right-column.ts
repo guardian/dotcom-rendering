@@ -3,10 +3,10 @@ import type { ABTest } from '@guardian/ab-core';
 export const deeplyReadRightColumn: ABTest = {
 	id: 'DeeplyReadRightColumn',
 	author: '@dotcom-platform',
-	start: '2024-05-01',
-	expiry: '2024-05-31',
-	audience: 0.01,
-	audienceOffset: 0.5,
+	start: '2024-04-30',
+	expiry: '2024-06-30',
+	audience: 0 / 100,
+	audienceOffset: 0 / 100,
 	audienceCriteria: '',
 	successMeasure: 'Improved CTR',
 	description:
@@ -14,15 +14,21 @@ export const deeplyReadRightColumn: ABTest = {
 	variants: [
 		{
 			id: 'control',
-			test: (): void => {},
+			test: (): void => {
+				/* no-op */
+			},
 		},
 		{
 			id: 'deeply-read-and-most-read',
-			test: (): void => {},
+			test: (): void => {
+				/* no-op */
+			},
 		},
 		{
 			id: 'deeply-read-only',
-			test: (): void => {},
+			test: (): void => {
+				/* no-op */
+			},
 		},
 	],
 	canRun: () => true,
