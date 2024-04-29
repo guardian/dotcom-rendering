@@ -3,7 +3,10 @@ import {
 	from,
 	remSpace,
 	space,
-	textSans,
+	textSans12,
+	textSans15,
+	textSansBold12,
+	textSansBold15,
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
@@ -46,7 +49,7 @@ const commentControlsLink = css`
 	margin-top: -2px;
 
 	a {
-		${textSans.small({ fontWeight: 'bold' })}
+		${textSansBold15}
 		margin-right: ${space[2]}px;
 		color: ${schemedPalette('--discussion-accent-text')};
 		/*
@@ -75,7 +78,7 @@ const spaceBetween = css`
 const commentCss = css`
 	display: block;
 	clear: left;
-	${textSans.small()}
+	${textSans15}
 	margin-top: ${remSpace[2]};
 	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
@@ -111,7 +114,7 @@ const commentCss = css`
 
 const blockedCommentStyles = css`
 	color: ${schemedPalette('--discussion-subdued')};
-	${textSans.xxsmall()}
+	${textSans12}
 `;
 
 // to override a tag styles from dangerouslySetInnerHTML
@@ -164,13 +167,13 @@ const colourStyles = css`
 
 const boldFont = css`
 	a {
-		${textSans.small({ fontWeight: 'bold' })}
+		${textSansBold15}
 	}
 `;
 
 const regularFont = css`
 	a {
-		${textSans.small()}
+		${textSans15}
 	}
 `;
 
@@ -602,9 +605,7 @@ export const Comment = ({
 										buttonLinkBaseStyles,
 										css`
 											button {
-												${textSans.xxsmall({
-													fontWeight: 'bold',
-												})}
+												${textSansBold12}
 											}
 										`,
 									]}
@@ -656,12 +657,7 @@ export const Comment = ({
 														buttonLinkPillarBaseStyles,
 														css`
 															button {
-																${textSans.small(
-																	{
-																		fontWeight:
-																			'bold',
-																	},
-																)}
+																${textSansBold15}
 															}
 														`,
 													]}
@@ -718,10 +714,7 @@ export const Comment = ({
 													buttonLinkPillarBaseStyles,
 													css`
 														button {
-															${textSans.small({
-																fontWeight:
-																	'bold',
-															})}
+															${textSansBold15}
 														}
 													`,
 												]}
@@ -756,7 +749,7 @@ export const Comment = ({
 												buttonLinkBaseStyles,
 												css`
 													button {
-														${textSans.xxsmall()}
+														${textSans12}
 													}
 												`,
 											]}
@@ -785,7 +778,7 @@ export const Comment = ({
 												buttonLinkBaseStyles,
 												css`
 													button {
-														${textSans.xxsmall()}
+														${textSans12}
 													}
 												`,
 											]}

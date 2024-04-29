@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { body, breakpoints, from, space } from '@guardian/source-foundations';
+import {
+	article17,
+	breakpoints,
+	from,
+	space,
+} from '@guardian/source-foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Accordion as AccordionComponent } from './Accordion';
@@ -24,7 +29,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const textStyle = css`
-	${body.medium({ lineHeight: 'loose' })};
+	${article17};
 	margin-bottom: ${space[3]}px;
 `;
 

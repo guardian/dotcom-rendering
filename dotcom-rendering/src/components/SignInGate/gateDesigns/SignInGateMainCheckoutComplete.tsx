@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
 import {
+	articleBold17,
 	body,
 	from,
-	headline,
+	headlineBold28,
+	headlineBold34,
 	palette,
 	space,
 } from '@guardian/source-foundations';
@@ -28,17 +30,17 @@ import {
 import { SignInGateMain } from './SignInGateMain';
 
 const personalisedHeadingStyles = css`
-	${headline.small({ fontWeight: 'bold' })};
+	${headlineBold28};
 	border-top: 2px ${palette.brand[400]} solid;
 	${from.phablet} {
 		padding-right: 160px;
-		${headline.medium({ fontWeight: 'bold' })};
+		${headlineBold34};
 	}
 	padding-bottom: ${space[2]}px;
 `;
 
 const personalisedBodyBold = css`
-	${body.medium({ fontWeight: 'bold' })}
+	${articleBold17};
 	${from.phablet} {
 		padding-right: 130px;
 	}

@@ -2,10 +2,15 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	headline,
+	headlineLight24,
+	headlineLightItalic28,
+	headlineLightItalic34,
+	headlineMediumItalic20,
 	palette,
 	space,
-	textSans,
+	textSans20,
+	textSansItalic20,
+	textSansItalic34,
 	until,
 } from '@guardian/source-foundations';
 import { getSoleContributor } from '../lib/byline';
@@ -22,12 +27,9 @@ const wrapperStyles = css`
 
 const interviewBylineBoxStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
-		? textSans.large({ lineHeight: 'regular' })
-		: headline.xxsmall({
-				fontWeight: 'regular',
-				lineHeight: 'loose',
-		  })}
-	font-style: italic;
+		? textSansItalic20
+		: headlineMediumItalic20}
+	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 	background-color: ${schemedPalette('--byline-background')};
 	box-shadow:
 		4px 0 0 ${schemedPalette('--byline-background')},
@@ -50,20 +52,15 @@ const opinionWrapperStyles = css`
 
 const opinionStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
-		? textSans.xxxlarge({ lineHeight: 'loose' })
-		: headline.medium({
-				fontWeight: 'light',
-		  })}
+		? textSansItalic34
+		: headlineLightItalic34}
 	line-height: 38px;
 	/* Used to prevent the byline stretching full width */
 	display: inline;
-	font-style: italic;
 	color: ${schemedPalette('--byline')};
 
 	${until.mobileMedium} {
-		${headline.small({
-			fontWeight: 'light',
-		})}
+		${headlineLightItalic28}
 	}
 
 	a {
@@ -76,17 +73,12 @@ const opinionStyles = (format: ArticleFormat) => css`
 `;
 
 const analysisStyles = css`
-	${headline.medium({
-		fontWeight: 'light',
-	})}
+	${headlineLightItalic34};
 	line-height: 38px;
-	font-style: italic;
 	color: ${schemedPalette('--byline-anchor')};
 
 	${until.tablet} {
-		${headline.small({
-			fontWeight: 'light',
-		})}
+		${headlineLightItalic28}
 	}
 
 	a {
@@ -107,11 +99,8 @@ const analysisSingleContributorStyles = css`
 `;
 
 const immersiveStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs
-		? textSans.large({ lineHeight: 'tight' })
-		: headline.xsmall({
-				fontWeight: 'light',
-		  })}
+	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineLight24}
+	${format.theme === ArticleSpecial.Labs && 'line-height: 1.15;'}
 	margin-bottom: ${space[6]}px;
 `;
 

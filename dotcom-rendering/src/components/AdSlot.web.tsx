@@ -8,7 +8,7 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans12,
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
@@ -63,7 +63,7 @@ type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
 const individualLabelCSS = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
 	background-color: ${palette.neutral[97]};
@@ -115,7 +115,7 @@ export const labelStyles = css`
 	}
 
 	.ad-slot__adtest-cookie-clear-link {
-		${textSans.xxsmall()};
+		${textSans12};
 		text-align: left;
 		position: absolute;
 		left: 268px;

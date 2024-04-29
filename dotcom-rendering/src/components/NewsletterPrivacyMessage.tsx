@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	palette as sourcePalette,
 	textSans,
+	textSans12,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette as themePalette } from '../palette';
@@ -32,7 +33,7 @@ const LegalLink = ({ href, children }: LegalLinkProps) => (
 const termsStyle = css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
 	a {
-		${textSans.xxsmall()};
+		${textSans12};
 		text-decoration: underline;
 		:hover {
 			text-decoration: underline;

@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import {
-	body,
+	article17,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSans14,
+	textSans15,
 } from '@guardian/source-foundations';
 import {
 	Button,
@@ -28,8 +29,7 @@ export const linkStyles = css`
 
 const calloutStyles = css`
 	padding-bottom: ${space[4]}px;
-	${body.medium()}
-
+	${article17}
 	p {
 		margin-bottom: ${space[3]}px;
 	}
@@ -64,7 +64,7 @@ export const CalloutDescription = ({
 };
 
 const expiredStyles = css`
-	${textSans.small()};
+	${textSans15};
 	color: ${palette('--star-rating-fill')};
 	background-color: ${palette('--star-rating-background')};
 	width: fit-content;
@@ -95,16 +95,16 @@ const shareCalloutStyles = css`
 `;
 
 const shareCalloutTextStyles = css`
-	${textSans.xsmall()}
+	${textSans14}
 `;
 
 const shareCalloutLinkStyles = css`
-	${textSans.xsmall()}
+	${textSans14}
 	color: ${palette('--article-link-text')};
 `;
 
 const sharePopupStyles = css`
-	${textSans.xsmall()};
+	${textSans14};
 	position: absolute;
 	display: flex;
 	align-items: center;
@@ -206,7 +206,7 @@ export const CalloutShare = ({
 };
 
 const termsAndConditionsStyles = css`
-	${textSans.small()}
+	${textSans15}
 	padding-bottom: ${space[4]}px;
 `;
 

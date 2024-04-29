@@ -4,7 +4,7 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
-import { palette, text, textSans, until } from '@guardian/source-foundations';
+import { palette, text, textSans12, until } from '@guardian/source-foundations';
 import React from 'react';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { decideDesign } from '../lib/decideDesign';
@@ -80,7 +80,7 @@ const adStyle = css`
 	:before {
 		content: 'Advertisement';
 		display: block;
-		${textSans.xxsmall()};
+		${textSans12};
 		/* Adverts specifcally don't use the GU font branding. */
 		/* stylelint-disable-next-line property-disallowed-list */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',

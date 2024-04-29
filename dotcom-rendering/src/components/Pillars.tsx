@@ -4,7 +4,7 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	brandText,
 	from,
-	headline,
+	headlineMedium17,
 	palette as srcPalette,
 	until,
 } from '@guardian/source-foundations';
@@ -156,7 +156,7 @@ const pillarDivider = css`
 `;
 
 const linkStyle = (isImmersive: boolean) => css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	box-sizing: border-box;
 	font-weight: 900;
 	color: ${brandText.primary};

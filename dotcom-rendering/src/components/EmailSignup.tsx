@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold20,
 	palette as sourcePalette,
 	space,
 	textSans,
@@ -42,7 +42,7 @@ const stackBelowTabletStyles = css`
 `;
 
 const titleStyles = (theme: string) => css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20};
 	flex-grow: 1;
 	span {
 		color: ${theme === 'news' ? sourcePalette.sport[400] : 'inherit'};

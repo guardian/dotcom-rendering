@@ -1,7 +1,13 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { body, palette, space, textSans } from '@guardian/source-foundations';
+import {
+	article17,
+	palette,
+	space,
+	textSans14,
+	textSans17,
+} from '@guardian/source-foundations';
 import { SvgCheckmark, SvgCross } from '@guardian/source-react-components';
 
 // We export Radio wrapper styles to override Source Radio buttons to align
@@ -29,7 +35,7 @@ export const radioButtonWrapperStyles = (theme: ArticleTheme) => css`
 `;
 
 const fontStyles = (theme: ArticleTheme) =>
-	theme === ArticleSpecial.Labs ? textSans.medium() : body.medium();
+	theme === ArticleSpecial.Labs ? textSans17 : article17;
 
 const answerWithSVGStyles = css`
 	margin-bottom: ${space[2]}px;
@@ -125,7 +131,7 @@ const WhiteText = ({
 		{!!supplementText && (
 			<span
 				css={css`
-					${textSans.xsmall()}
+					${textSans14}
 				`}
 			>
 				{supplementText}
@@ -168,7 +174,7 @@ const BlackText = ({
 		{!!supplementText && (
 			<span
 				css={css`
-					${textSans.xsmall()}
+					${textSans14}
 				`}
 			>
 				{supplementText}

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textSans } from '@guardian/source-foundations';
+import { palette, textSans17 } from '@guardian/source-foundations';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 
 type Identifier =
@@ -20,7 +20,7 @@ export const SkipTo = ({ id, label }: Props) => {
 			href={`#${id}`}
 			data-link-name={nestedOphanComponents('skip', ophanComponentId)}
 			css={css`
-				${textSans.medium()}
+				${textSans17}
 				height: 40px;
 				top: -40px;
 				line-height: 30px;

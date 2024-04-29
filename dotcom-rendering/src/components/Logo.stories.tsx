@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans } from '@guardian/source-foundations';
+import { palette, space, textSans34 } from '@guardian/source-foundations';
 import { editionList } from '../lib/edition';
 import { Logo } from './Logo';
 
@@ -26,7 +26,7 @@ export const Logos = () => (
 						top: 20px;
 						left: 20px;
 						color: ${palette.neutral[100]};
-						${textSans.xxxlarge()};
+						${textSans34};
 					`}
 				>
 					{editionId}

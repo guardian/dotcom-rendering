@@ -8,7 +8,8 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans12,
+	textSans17,
 	until,
 } from '@guardian/source-foundations';
 import {
@@ -35,7 +36,7 @@ const footer = css`
 	background-color: ${brandBackground.primary};
 	color: ${brandText.primary};
 	padding-bottom: 6px;
-	${textSans.medium()};
+	${textSans17};
 `;
 
 const pillarWrap = css`
@@ -161,7 +162,7 @@ const readerRevenueLinks = css`
 const acknowledgments = css`
 	grid-area: acknowledgment;
 	align-self: end;
-	${textSans.xxsmall()};
+	${textSans12};
 	padding-top: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 	margin-bottom: ${space[6]}px;
@@ -184,7 +185,7 @@ const acknowledgments = css`
 `;
 
 const copyright = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	padding: ${space[3]}px;
 	padding-left: 20px;
 

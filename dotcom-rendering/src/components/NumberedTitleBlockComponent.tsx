@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
+import {
+	headlineBold34,
+	headlineBold42,
+	headlineLight34,
+} from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { palette as themePalette } from '../palette';
 import type { Palette } from '../types/palette';
@@ -12,19 +16,19 @@ type Props = {
 
 const titleStyles = css`
 	h2 {
-		${headline.medium({ fontWeight: 'light' })}
+		${headlineLight34}
 		color: ${themePalette('--numbered-list-heading')}
 	}
 
 	strong {
-		${headline.medium({ fontWeight: 'bold' })}
+		${headlineBold34}
 		display: block;
 		color: ${themePalette('--numbered-list-title')};
 	}
 `;
 
 const numberStyles = (palette: Palette) => css`
-	${headline.large({ fontWeight: 'bold' })}
+	${headlineBold42}
 	font-size: 56px;
 	color: ${themePalette('--numbered-list-number')};
 `;

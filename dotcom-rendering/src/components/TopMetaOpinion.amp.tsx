@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, palette } from '@guardian/source-foundations';
+import { headlineMedium28, palette } from '@guardian/source-foundations';
 import { getAgeWarning } from '../lib/age-warning';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
@@ -12,14 +12,14 @@ import { Standfirst } from './Standfirst.amp';
 import { TopMetaExtras } from './TopMetaExtras.amp';
 
 const headerStyle = css`
-	${headline.small()};
+	${headlineMedium28};
 	font-weight: 100;
 	padding-top: 3px;
 	color: ${palette.neutral[7]};
 `;
 
 const bylineStyle = (pillar: ArticleTheme) => css`
-	${headline.small()};
+	${headlineMedium28};
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	font-style: italic;
 	font-weight: 100;

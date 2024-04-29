@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans } from '@guardian/source-foundations';
+import { from, palette, space, textSans17 } from '@guardian/source-foundations';
 
 export const DarkModeMessage = () => (
 	<aside
 		css={css`
 			display: none;
 			@media (prefers-color-scheme: dark) {
-				${textSans.medium()}
+				${textSans17}
 				background-color: ${palette.neutral[7]};
 				color: ${palette.neutral[97]};
 

@@ -1,5 +1,8 @@
 import { css } from '@emotion/react';
-import { body, palette as sourcePalette } from '@guardian/source-foundations';
+import {
+	article15,
+	palette as sourcePalette,
+} from '@guardian/source-foundations';
 import { useEffect } from 'react';
 import { unescapeData } from '../lib/escapeData';
 import type { TweetBlockElement } from '../types/content';
@@ -16,7 +19,7 @@ const noJSStyling = css`
 		padding: 20px;
 		width: 100%;
 		margin-bottom: 16px;
-		${body.small()};
+		${article15};
 	}
 
 	.nojs-tweet iframe {

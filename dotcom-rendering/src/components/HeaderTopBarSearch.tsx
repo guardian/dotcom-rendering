@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, textSans } from '@guardian/source-foundations';
+import { from, palette, textSansBold17 } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 import SearchIcon from '../static/icons/search.svg';
 
@@ -11,7 +11,7 @@ interface SearchProps {
 const searchLinkStyles = css`
 	display: flex;
 	align-items: center;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	line-height: 1;
 	font-size: 1rem;
 	height: fit-content;
