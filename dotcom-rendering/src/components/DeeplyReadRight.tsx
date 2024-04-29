@@ -4,7 +4,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { decideTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
-import type { FETrailTabType, TrailType } from '../types/trails';
+import type { FETrailTabType } from '../types/trails';
 import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`
