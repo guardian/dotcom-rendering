@@ -52,7 +52,7 @@
 		"@guardian/eslint-plugin-source-react-components": "24.0.0",
 		"@guardian/identity-auth": "2.1.0",
 		"@guardian/identity-auth-frontend": "4.0.0",
-		"@guardian/libs": "0.0.0-canary-20240429095626",
+		"@guardian/libs": "0.0.0-canary-20240429115029",
 		"@guardian/ophan-tracker-js": "2.1.1",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source-foundations": "14.1.4",
