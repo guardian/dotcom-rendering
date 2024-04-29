@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold17,
+	headlineBold20,
+	headlineBold34,
+	headlineLight20,
 	palette as sourcePalette,
 	space,
 	until,
@@ -33,7 +36,7 @@ const borderRightStyles = css`
 
 const linkStyles = css`
 	display: flex;
-	${headline.xxsmall({ fontWeight: 'light' })}
+	${headlineLight20}
 
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
@@ -47,11 +50,11 @@ const linkStyles = css`
 
 const numberStyles = css`
 	padding-right: ${space[2]}px;
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 `;
 
 const headerStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headlineBold34}
 	padding-left: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 `;
@@ -105,10 +108,10 @@ const stickyNavCurrentHeaderStyles = css`
 
 	display: flex;
 	align-items: center;
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 
 	${until.mobileLandscape} {
-		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${headlineBold17}
 	}
 	position: fixed;
 

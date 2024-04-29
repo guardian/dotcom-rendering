@@ -5,7 +5,7 @@ import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/pa
 import {
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSans15,
 } from '@guardian/source-foundations';
 import { Decorator, type StrictArgs } from '@storybook/react';
 import { ArticleFormat } from '@guardian/libs';
@@ -53,7 +53,7 @@ export const browserThemeDecorator =
 		<>
 			<div
 				css={css`
-					${textSans.small()}
+					${textSans15};
 					background-color: ${sourcePalette.brand[400]};
 					color: ${sourcePalette.neutral[100]};
 					padding: ${space[2]}px;

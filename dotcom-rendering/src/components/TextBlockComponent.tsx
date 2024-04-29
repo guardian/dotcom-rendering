@@ -2,11 +2,11 @@ import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	body,
+	article17,
 	from,
 	palette,
 	remSpace,
-	textSans,
+	textSans17,
 	until,
 } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
@@ -161,8 +161,7 @@ const sanitiserOptions: IOptions = {
 const styles = (format: ArticleFormat) => css`
 	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
-	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
-
+	${format.theme === ArticleSpecial.Labs ? textSans17 : article17};
 	strong em,
 	strong u {
 		font-weight: bold;
@@ -261,6 +260,11 @@ const buildElementTree =
 					key,
 					children,
 				});
+			case 'EM':
+				return jsx('em', {
+					key,
+					children,
+				});
 			case 'STRONG':
 				return jsx('strong', {
 					key,
@@ -321,7 +325,6 @@ const buildElementTree =
 			case 'H3':
 			case 'H4':
 			case 'B':
-			case 'EM':
 			case 'UL':
 			case 'LI':
 			case 'MARK':

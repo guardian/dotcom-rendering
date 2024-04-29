@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
+import {
+	space,
+	textSans12,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -33,7 +37,7 @@ const brandingWrapperStyle = css`
 `;
 
 const labelStyle = css`
-	${textSans.xxsmall()}
+	${textSans12}
 	color: ${themePalette('--card-footer-text')};
 `;
 

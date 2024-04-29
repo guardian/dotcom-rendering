@@ -113,7 +113,7 @@ snapshot: clear clean-dist install
 
 lint: clean-dist install
 	$(call log, "checking for lint errors")
-	@pnpm lint
+	@pnpm lint:check
 
 lint-project: check-env
 	$(call log, "linting project")

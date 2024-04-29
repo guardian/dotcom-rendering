@@ -319,7 +319,7 @@ export interface QAndAExplainer {
 	body: FEElement[];
 }
 
-interface KeyTakeawaysBlockElement {
+export interface KeyTakeawaysBlockElement {
 	_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement';
 	keyTakeaways: KeyTakeaway[];
 }

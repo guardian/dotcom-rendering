@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { headline, palette, textSans } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	headlineMedium20,
+	palette,
+	textSans12,
+} from '@guardian/source-foundations';
 import Camera from '../static/icons/camera.svg';
 import Clock from '../static/icons/clock.svg';
 import Quote from '../static/icons/quote.svg';
@@ -24,7 +29,7 @@ const header = css`
 	padding-bottom: 12px;
 	font-weight: 500;
 	position: relative;
-	${headline.xxsmall()};
+	${headlineMedium20};
 	text-transform: capitalize;
 `;
 const item = css`
@@ -63,10 +68,10 @@ const headlineCSS = css`
 	margin: 1px 0 4px;
 	font-weight: 500;
 	word-wrap: break-word;
-	${headline.xxxsmall()};
+	${headlineMedium17};
 `;
 const description = css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	margin-bottom: 16px;
 `;
 const iconCSS = css`
@@ -88,7 +93,7 @@ const quoteIconCSS = css`
 const ageWarning = css`
 	color: ${palette.neutral[20]};
 	fill: ${palette.neutral[20]};
-	${textSans.xxsmall()};
+	${textSans12};
 `;
 const showMore = css`
 	background-color: ${palette.neutral[100]};

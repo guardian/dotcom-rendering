@@ -4,7 +4,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	between,
 	body,
-	headline,
+	headlineBold24,
 	remSpace,
 } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
@@ -68,7 +68,7 @@ const globalH3Styles = (display: ArticleDisplay) => css`
 	${display === ArticleDisplay.NumberedList &&
 	`
 		h3 {
-			${headline.xsmall({ fontWeight: 'bold' })};
+			${headlineBold24};
 			margin-bottom: ${remSpace[2]};
 		}
 	`}

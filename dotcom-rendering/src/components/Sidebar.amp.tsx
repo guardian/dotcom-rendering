@@ -1,5 +1,9 @@
 import { ClassNames } from '@emotion/react';
-import { headline, palette, textSans } from '@guardian/source-foundations';
+import {
+	headlineMedium24,
+	palette,
+	textSans,
+} from '@guardian/source-foundations';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 
 export const Sidebar = () => {
@@ -53,7 +57,7 @@ export const Sidebar = () => {
 					border: 0;
 					box-sizing: border-box;
 					display: block;
-					${headline.xsmall()};
+					${headlineMedium24};
 					outline: none;
 					padding: 6px 10px 16px 50px;
 					position: relative;

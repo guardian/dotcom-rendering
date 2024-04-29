@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { headline, text, textSans } from '@guardian/source-foundations';
+import {
+	headlineBold28,
+	headlineBold34,
+	text,
+	textSans15,
+} from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
@@ -23,18 +28,18 @@ const TAU = Math.PI * 2;
 const QUARTER_TURN = TAU / 4;
 
 const unitStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headlineBold34}
 	text-anchor: middle;
 `;
 
 const valueStyles = (background: string) => css`
-	${headline.small({ fontWeight: 'bold' })}
+	${headlineBold28}
 	fill: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 	text-anchor: middle;
 `;
 
 const labelStyles = (background: string) => css`
-	${textSans.small()}
+	${textSans15}
 	fill: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 	text-anchor: middle;
 `;

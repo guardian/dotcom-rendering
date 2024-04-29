@@ -4,7 +4,7 @@
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/ContributionsLiveblogEpic.tsx
  */
 import { css } from '@emotion/react';
-import { body, headline } from '@guardian/source-foundations';
+import { article17, headlineBold34 } from '@guardian/source-foundations';
 import { from } from '@guardian/source-foundations';
 import { palette } from '@guardian/source-foundations';
 import { space } from '@guardian/source-foundations';
@@ -53,7 +53,8 @@ const container = (clientName: string) => css`
 `;
 
 const textContainer = css`
-	${body.medium()};
+	${article17};
+
 	font-size: 16px;
 
 	p {
@@ -72,7 +73,7 @@ const textContainer = css`
 `;
 
 const yellowHeading = (clientName: string) => css`
-	${headline.medium({ fontWeight: 'bold' })};
+	${headlineBold34};
 	font-size: 28px;
 	background-color: ${palette.brandAlt[400]};
 	border-top: 1px solid ${palette.neutral[0]};

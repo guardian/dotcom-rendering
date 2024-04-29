@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSansBold12 } from '@guardian/source-foundations';
 import { palette as themePalette } from '../../palette';
 
 const staffBadge = css`
@@ -18,7 +18,7 @@ const labelText = css`
 	display: inline-block;
 	line-height: 15px;
 	margin: 0 0 0 ${space[1]}px;
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 `;
 
 const staffLabel = css`
