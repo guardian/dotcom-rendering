@@ -164,10 +164,7 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 					return css`
-						${headline.xxxsmall({
-							fontWeight: 'bold',
-							lineHeight: 'tight',
-						})};
+						${headlineBold17};
 						margin-bottom: ${space[3]}px;
 						color: ${palette('--standfirst-text')};
 					`;

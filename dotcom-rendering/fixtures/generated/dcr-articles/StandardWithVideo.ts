@@ -13,7 +13,7 @@
 
 import type { DCRArticle } from '../../../src/types/frontend';
 
-export const Standard: DCRArticle = {
+export const StandardWithVideo: DCRArticle = {
 	version: 3,
 	headline:
 		'NSA collecting phone records of millions of Verizon customers daily',

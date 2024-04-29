@@ -232,7 +232,6 @@ const StandardGrid = ({
 			}
 
 			${until.desktop} {
-				grid-column-gap: 0px;
 				grid-template-columns: 1fr; /* Main content */
 				${isMatchReport
 					? css`
@@ -370,7 +369,7 @@ interface AppProps extends Props {
 export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host, contentType },
+		config: { isPaidContent, host },
 	} = article;
 
 	const isWeb = renderingTarget === 'Web';
@@ -393,7 +392,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const isMedia = contentType === 'Video' || contentType === 'Audio';
+	const isMedia =
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio;
 
 	const showComments = article.isCommentable && !isPaidContent;
 

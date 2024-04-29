@@ -88,7 +88,7 @@ export const Picture: DCRArticle = {
 					},
 				],
 			},
-			elementId: '37930c2e-3c3c-4a53-96f0-dbdca55309f8',
+			elementId: '21adb872-2163-4746-90ca-e15f59537edb',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1900,7 +1900,7 @@ export const Picture: DCRArticle = {
 				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
 			width: 3031,
 			height: 1819,
-			elementId: '37930c2e-3c3c-4a53-96f0-dbdca55309f8',
+			elementId: '21adb872-2163-4746-90ca-e15f59537edb',
 			displayCredit: true,
 			alt: "Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with 'Sleaze' paint",
 			credit: 'Illustration: Nicola Jennings/The Guardian',
@@ -1914,7 +1914,7 @@ export const Picture: DCRArticle = {
 			credit: 'Illustration: Nicola Jennings/The Guardian',
 			masterUrl:
 				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
-			elementId: '37930c2e-3c3c-4a53-96f0-dbdca55309f8',
+			elementId: '21adb872-2163-4746-90ca-e15f59537edb',
 		},
 	],
 };

@@ -4151,12 +4151,40 @@ const richLinkFillDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const appsEpicBackgroundLight: PaletteFunction = () =>
-	sourcePalette.neutral[97];
+const appsEpicBackgroundLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+			return sourcePalette.neutral[20];
+		default:
+			return sourcePalette.neutral[97];
+	}
+};
 const appsEpicBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 
-const appsEpicBorderLight: PaletteFunction = () => sourcePalette.brandAlt[400];
+const appsEpicBorderLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+			return sourcePalette.brandAlt[200];
+		default:
+			return sourcePalette.brandAlt[400];
+	}
+};
+
 const appsEpicBorderDark: PaletteFunction = () => sourcePalette.brandAlt[200];
+
+const appsEpicTextLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+			return sourcePalette.neutral[97];
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
+
+const appsEpicTextDark: PaletteFunction = () => sourcePalette.neutral[97];
 
 const linkKickerTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
@@ -5866,6 +5894,10 @@ const paletteColours = {
 	'--apps-epic-border': {
 		light: appsEpicBorderLight,
 		dark: appsEpicBorderDark,
+	},
+	'--apps-epic-text': {
+		light: appsEpicTextLight,
+		dark: appsEpicTextDark,
 	},
 	'--interactive-block-background': {
 		light: interactiveBlockBackgroundLight,
