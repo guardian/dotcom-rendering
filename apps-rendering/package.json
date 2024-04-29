@@ -51,7 +51,7 @@
 		"@guardian/eslint-plugin-source-react-components": "21.0.1",
 		"@guardian/libs": "16.0.0",
 		"@guardian/renditions": "0.2.0",
-		"@guardian/source-foundations": "14.1.2",
+		"@guardian/source-foundations": "14.2.2",
 		"@guardian/source-react-components": "18.0.0",
 		"@guardian/source-react-components-development-kitchen": "16.0.0",
 		"@smithy/property-provider": "2.0.16",
