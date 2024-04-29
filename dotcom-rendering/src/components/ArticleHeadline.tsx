@@ -24,7 +24,6 @@ type Props = {
 	byline?: string;
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
-	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 	isMatch?: boolean;
 };
@@ -289,7 +288,6 @@ export const ArticleHeadline = ({
 	tags,
 	byline,
 	webPublicationDateDeprecated,
-	hasStarRating,
 	hasAvatar,
 	isMatch,
 }: Props) => {
@@ -303,7 +301,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -337,7 +334,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -419,7 +415,6 @@ export const ArticleHeadline = ({
 				<div
 					css={decideBottomPadding({
 						format,
-						hasStarRating,
 						hasAvatar,
 					})}
 				>
@@ -461,7 +456,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -497,7 +491,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -540,7 +533,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -581,7 +573,6 @@ export const ArticleHeadline = ({
 								displayFlex,
 								decideBottomPadding({
 									format,
-									hasStarRating,
 									hasAvatar,
 								}),
 							]}
@@ -633,7 +624,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -676,7 +666,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -714,7 +703,6 @@ export const ArticleHeadline = ({
 							css={[
 								decideBottomPadding({
 									format,
-									hasStarRating,
 									hasAvatar,
 								}),
 								css`
@@ -756,7 +744,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -783,7 +770,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>

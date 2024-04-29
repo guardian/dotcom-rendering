@@ -581,9 +581,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
-									hasStarRating={
-										typeof article.starRating === 'number'
-									}
 								/>
 							</div>
 						</GridItem>

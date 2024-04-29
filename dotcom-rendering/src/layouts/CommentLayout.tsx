@@ -511,10 +511,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
-										hasStarRating={
-											typeof article.starRating ===
-											'number'
-										}
 										hasAvatar={!!avatarUrl}
 									/>
 									{/* BOTTOM */}
