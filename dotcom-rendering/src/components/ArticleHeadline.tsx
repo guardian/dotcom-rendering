@@ -258,71 +258,27 @@ const WithAgeWarning = ({
 
 const decideBottomPadding = ({
 	format,
-	hasStarRating,
 	hasAvatar,
 }: {
 	format: ArticleFormat;
-	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 }) => {
-	const defaultPadding = css`
-		padding-bottom: ${space[6]}px;
-		${from.tablet} {
-			padding-bottom: ${space[9]}px;
-		}
-	`;
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
-			// Immersive articles have no padding
-			return '';
-		case ArticleDisplay.Showcase:
-			switch (format.design) {
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					// Opinion pieces with an avatar have no padding
-					// Those with no avatar always have 43 pixels of bottom padding
-					return hasAvatar
-						? ''
-						: css`
-								padding-bottom: 43px;
-						  `;
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog:
-					// Don't add extra padding
-					return '';
-				default:
-					// Non opinion showcase articles always have 24 pixels
-					return css`
-						padding-bottom: ${space[6]}px;
-					`;
-			}
+			return css`
+				padding-bottom: ${space[6]}px;
+			`;
 		default: {
-			switch (format.design) {
-				case ArticleDesign.Review:
-					if (hasStarRating) {
-						return '';
-					}
-					return defaultPadding;
-
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					// Opinion pieces with an avatar have no padding
-					// Those with no avatar always have 43 pixels of bottom padding
-					return hasAvatar
-						? ''
-						: css`
-								padding-bottom: 43px;
-						  `;
-				case ArticleDesign.Interview:
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog:
-					// Don't add extra padding
-					return '';
-				default:
-					return defaultPadding;
-			}
+			return hasAvatar
+				? ''
+				: css`
+						// This isn't in Source yet
+						padding-bottom: 28px;
+						${from.tablet} {
+							// 36px
+							padding-bottom: ${space[9]}px;
+						}
+				  `;
 		}
 	}
 };
