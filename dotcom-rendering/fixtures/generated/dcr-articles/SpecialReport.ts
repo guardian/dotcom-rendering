@@ -91,7 +91,7 @@ export const SpecialReport: DCRArticle = {
 					},
 				],
 			},
-			elementId: '6df96782-2b90-49b4-aa7e-8bf8b7b26cc3',
+			elementId: '1e932ff5-2c76-4857-9bcc-061c27e43663',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -292,85 +292,85 @@ export const SpecialReport: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='put-climate-on-the-ballot-paper'><strong>Put climate on the ballot paper</strong></h2>",
-					elementId: 'f397339a-5d63-4161-80fb-d3886f9a20a9',
+					elementId: 'd50b7605-96cb-4147-80cb-cd14d4be8099',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Individual actions, such as flying less or buying electric cars, are helpful, but they will be futile without collective political action to slash emissions on a corporate, national and global scale. Politicians need to feel this is a priority for the electorate. That means keeping the subject high on the agenda for MPs with questions, protests, emails, social media posts, lobbying by NGOs and most of all through voting choices. Politicians need to know the public is behind them if they are to take on the petrochemical industry.</p>',
-					elementId: 'eb829008-df58-4d49-8af5-8b981ae1acc6',
+					elementId: 'cc98506e-63dd-45bc-9117-bc1a61f96543',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='end-fossil-fuel-subsidies'><strong>End</strong><strong> fossil fuel subsidies</strong></h2>",
-					elementId: 'cf93740d-8930-4433-936b-4ab599a8406c',
+					elementId: '7a6577c7-2514-409e-b230-8778aead4c8a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The coal, oil and gas industries benefit from <a href="https://www.imf.org/en/Publications/WP/Issues/2019/05/02/Global-Fossil-Fuel-Subsidies-Remain-Large-An-Update-Based-on-Country-Level-Estimates-46509">$5tn dollars a year</a> – $10m a minute – according to the International Monetary Fund, which described its own estimate as “shocking”. Even <a href="https://www.iea.org/newsroom/news/2019/june/fossil-fuel-consumption-subsidies-bounced-back-strongly-in-2018.html">direct consumption subsidies for fossil fuels</a> are double those for renewables, which the International Energy Agency says “greatly complicates the task” of tackling the climate crisis. The biggest subsidisers, the G20 nations, pledged in 2009 to end the handouts, but progress has been very limited. The UN secretary general, António Guterres, <a href="https://uk.reuters.com/article/global-climatechange-energy/fossil-fuel-subsidies-are-wrecking-the-world-says-u-n-chief-idUKL8N2345F6">attacked</a> the incentives in May, saying: “What we are doing is using taxpayers’ money … to destroy the world.” Any change has to include provisions for social justice. Cuts in fuel subsidies should not be used as an austerity measure that hurts the poor most.</p>',
-					elementId: '205df109-7620-4c48-b43d-1d60ca430042',
+					elementId: 'fc9e4025-ca1d-4dfb-817a-4c6da256014e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
 					credit: '',
 					id: 'e182ee5f-c378-4474-b7da-79f6b0a671b3',
-					elementId: 'c876e335-a5c5-47df-bc35-952e17405826',
+					elementId: '4f9a7232-4a8f-4daf-bdbc-30ac2e045db0',
 					title: 'What is the polluters project?',
 					html: '<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='put-a-price-on-carbon'><strong>Put a price on carbon</strong></h2>",
-					elementId: 'd9a7b18e-753b-482a-9d6f-4f6a50bc3126',
+					elementId: 'ac708ce0-24f2-4aad-a7c2-c630b225281f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The idea of putting a price on carbon has been around since the early 1990s and a cap-and-trade system was incorporated into the 1997 Kyoto protocol. Under cap-and-trade, a limit is set on emissions and businesses issued with permits to emit carbon. Those cutting their emissions fastest can sell spare permits to laggards, while the cap is ratcheted down over time. But success depends on a strict cap and a scarcity of permits, and <a href="https://www.carbonbrief.org/qa-will-reformed-eu-emissions-trading-system-raise-carbon-prices">the EU’s scheme</a> has been widely criticised. An alternative is a tax, which forces companies to factor the damage caused by climate change into their business decisions, and should encourage them to cut waste, cut emissions and use clean technology. The danger is of carbon leakage: that the extra cost in one country might encourage businesses to look elsewhere to site their factories. This can be dealt with by a border adjustment tax, as the <a href="https://uk.reuters.com/article/uk-eu-commission-timmermans-border-tax/incoming-top-eu-climate-official-pledges-to-tax-polluting-imports-idUKKBN1WN23F">EU’s new commissioner pledged</a> this week. Carbon taxes don’t have to create economic losers, either – <a href="https://www.theguardian.com/world/2018/dec/04/how-to-make-a-carbon-tax-popular-give-the-profits-to-the-people">revenue neutral taxes</a> redistribute the money to the people and are advocated by many.<strong>Scale back demand for fossil fuels</strong></p>',
-					elementId: '722e0077-f46a-4af2-8c5f-8b02fbee3bee',
+					elementId: '69fda33f-c18a-46a1-9c47-b0ae033eb56a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Oil companies will sell oil for as long as there are buyers. Public shaming and social and political pressure can work to force companies to own up to their activities but most oil and gas around the world is produced by <a href="https://www.theguardian.com/environment/2019/oct/09/secretive-national-oil-companies-climate">national oil companies</a>, and they need no social licence to operate beyond that granted by their governments, which are often autocratic or unresponsive to public opinion. All companies are responsive to economic pressure, however. The only way to cut emissions from oil in the long term is to stop using oil. Reducing demand is driven by government regulation and by technological development (also driven by regulation), such as cheaper solar panels, offshore windfarms, electric cars and improved public transport.</p>',
-					elementId: '6f839d2b-8355-4d37-b57f-63f24e9493d9',
+					elementId: '660e1be3-a480-4961-a9dd-7591f721e1cb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='stop-flaring'><strong>Stop flaring</strong></h2>",
-					elementId: '46693bf0-bcac-492e-8204-9f2fb46c1992',
+					elementId: '268cff81-d430-4250-9c38-650f340ae13c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If oil and gas are to be extracted, the least oil companies can do is extract efficiently. The <a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030">World Bank has estimated</a> that the amount of gas wastefully flared globally each year, if used for power generation instead, could supply all of Africa’s electricity needs. <a href="https://www.ft.com/content/6f8f334e-0ebd-11e9-a3aa-118c761d2745">The FT</a> reported earlier this year that flaring in Texas was lighting up the night sky as producers let off the gas to get the oil to market quickly, to turn a faster buck regardless of the environmental consequences. The World Bank wants an end to routine flaring globally by 2030 – yet <a href="https://www.worldbank.org/en/programs/gasflaringreduction#7">in 2018 it increased</a>.</p>',
-					elementId: 'c14f9094-677f-45ab-b593-93f748266425',
+					elementId: '4ddc7538-da77-41bf-89f1-fd0ce1658ebd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='roll-out-large-scale-carbon-capture-and-storage'><strong>Roll out large scale carbon capture and storage</strong></h2>",
-					elementId: 'b011a0b8-0b2b-41eb-b7a8-29ae429205f1',
+					elementId: '7f8f13c1-687b-4cf7-b47b-9fd234dc08ed',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Trapping and burying the CO2 from fossil fuel burning is possible but not yet deployed at scale. Without this, the Intergovernmental Panel on Climate Change says tackling the climate crisis will be much more expensive. Oil companies have the expertise to roll out CCS but say that without a price on carbon emissions there is no commercial incentive. CCS could be used to actually remove CO2 from the atmosphere by growing trees and plants, burning them for electricity, then sequestering the emissions. But the IPCC has warned that doing this at large scale could conflict with growing food.</p>',
-					elementId: '6d4cd90f-0ab0-4034-b3b4-048e53e7fb90',
+					elementId: '531e7be8-2a0d-41a7-9a52-6fa7aafc03b4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='halt-investment-in-fossil-fuels'><strong>Halt investment in fossil fuels</strong></h2>",
-					elementId: '0d34f79b-3c31-44a1-ba85-c8165e196d85',
+					elementId: '20e06716-5f9f-45ef-a30e-0d5b5e65a0c1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The energy transition poses many risks and opportunities for investors, but it cannot be that well-intentioned savers seeking to use their money to support renewable energy businesses and divest from fossil fuels are still inadvertently investing in oil, gas and coal companies. Green investing must be regulated to ensure it really is green.</p>',
-					elementId: '16ad8f40-86e9-4c7a-be83-bf22feacd42b',
+					elementId: 'd1e5db6c-7c84-4f70-bb40-31ca87ce05ab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: "<h2 id='establish-market-metrics-on-climate-change'><strong>Establish market metrics on climate change</strong></h2>",
-					elementId: '31638137-a77f-46c4-abe2-321974e9478f',
+					elementId: '9373f1e1-5603-4967-b3e4-3fc0d0213059',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Nearly three years after the Paris agreement, world markets still have no mandatory, comparable data to measure the risks posed by the climate crisis at a company level. Regulators must act urgently – slow-moving voluntary schemes are not enough. Last week, <a href="https://www.theguardian.com/business/2019/oct/08/corporations-told-to-draw-up-climate-rules-or-have-them-imposed">the governor of the Bank of England warned</a> major corporations that they had two years to agree rules for reporting climate risks before global regulators devised their own and made them compulsory. If markets do not understand what climate change really means for car manufacturers, fossil fuel companies and energy firms, a climate-induced financial crisis is just a matter of time. Investment in fossil fuels must end. The <a href="https://gofossilfree.org/divestment/commitments/">fossil fuel divestment movement</a> now has $11.5tn of assets under management committed to divestment.</p>',
-					elementId: '2245438d-29f1-44f9-a03e-dba63ddfbf7b',
+					elementId: '9f430997-1c27-414b-87b6-ecc0e551747f',
 				},
 			],
 			attributes: {
@@ -1818,6 +1818,22 @@ export const SpecialReport: DCRArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Quick cryptic',
+						url: '/crosswords/series/quick-cryptic',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1826,28 +1842,16 @@ export const SpecialReport: DCRArticle = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
 					},
 				],
 			},
@@ -2399,7 +2403,7 @@ export const SpecialReport: DCRArticle = {
 				'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg',
 			width: 3000,
 			height: 1800,
-			elementId: '6df96782-2b90-49b4-aa7e-8bf8b7b26cc3',
+			elementId: '1e932ff5-2c76-4857-9bcc-061c27e43663',
 			displayCredit: true,
 			alt: 'Lindsey oil refinery in north Lincolnshire.',
 			credit: 'Photograph: Christopher Furlong/Getty Images',
@@ -2415,7 +2419,7 @@ export const SpecialReport: DCRArticle = {
 			caption: 'Lindsey oil refinery in north Lincolnshire.',
 			masterUrl:
 				'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg',
-			elementId: '6df96782-2b90-49b4-aa7e-8bf8b7b26cc3',
+			elementId: '1e932ff5-2c76-4857-9bcc-061c27e43663',
 		},
 	],
 };

@@ -79,7 +79,7 @@ export const Letter: DCRArticle = {
 					},
 				],
 			},
-			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
+			elementId: '27f093d7-a57f-4655-8dd7-dfe5f9b92317',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -280,17 +280,17 @@ export const Letter: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: 'c52adb05-ed65-44c1-a62e-4a793b027137',
+					elementId: 'decb1b7b-60fe-49a9-8bcc-a1796de40b36',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><span data-dcr-style="bullet"></span> In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: 'e7170df5-9abf-4fde-82b5-cd10f6b9c5ef',
+					elementId: '66f8237d-5889-4322-a170-6df40e89f089',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<footer><p><span data-dcr-style="bullet"></span> Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p></footer>',
-					elementId: '97d6fd58-76d9-4345-b45c-c3bc0aa6f989',
+					elementId: '0e0da4b6-3ada-46ec-88b1-9039765d96c4',
 				},
 			],
 			attributes: {
@@ -1486,6 +1486,22 @@ export const Letter: DCRArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Quick cryptic',
+						url: '/crosswords/series/quick-cryptic',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1494,28 +1510,16 @@ export const Letter: DCRArticle = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
 					},
 				],
 			},
@@ -1572,7 +1576,7 @@ export const Letter: DCRArticle = {
 			links: [
 				{
 					title: 'Wellness',
-					url: '/wellness',
+					url: '/us/wellness',
 				},
 				{
 					title: 'Fashion',
@@ -1864,7 +1868,7 @@ export const Letter: DCRArticle = {
 				'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
 			width: 1969,
 			height: 1569,
-			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
+			elementId: '27f093d7-a57f-4655-8dd7-dfe5f9b92317',
 			displayCredit: true,
 			alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
 			credit: 'Photograph: taken from picture library',
@@ -1882,7 +1886,7 @@ export const Letter: DCRArticle = {
 				'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
 			masterUrl:
 				'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
-			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
+			elementId: '27f093d7-a57f-4655-8dd7-dfe5f9b92317',
 		},
 	],
 };

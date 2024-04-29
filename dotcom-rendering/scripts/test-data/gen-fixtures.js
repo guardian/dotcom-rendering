@@ -126,6 +126,10 @@ const articles = [
 		name: 'Picture',
 		url: 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 	},
+	{
+		name: 'Video',
+		url: 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+	},
 ];
 
 const HEADER = `/**

@@ -96,7 +96,7 @@ export const PrintShop: DCRArticle = {
 							},
 						],
 					},
-					elementId: '64a4456f-7854-49bf-8360-ba4612ff0261',
+					elementId: '284c2df0-8297-40b8-b413-de170b3f016c',
 					imageSources: [
 						{
 							weighting: 'inline',
@@ -346,42 +346,42 @@ export const PrintShop: DCRArticle = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
-					elementId: '19a1b6bd-71df-4cf0-b431-4a57d54f8715',
+					elementId: '5a028528-0e3a-4c90-9638-f809e1d8438a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
-					elementId: '59e32e54-44e0-4a70-8715-922e518b8729',
+					elementId: 'd3539ade-87a8-44d1-8182-f040a180e9e7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
-					elementId: '3bce7a82-3eb6-444f-af80-673a7558045f',
+					elementId: 'e80f724e-7ec7-4a9a-b33f-d8e587330ee0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
-					elementId: 'a38a0761-9fe4-402d-845b-2a1541b6e242',
+					elementId: 'e08830e2-9874-4968-8d90-4bb117f81dd5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-					elementId: '53b69d67-db06-4606-b761-39fe090c31fa',
+					elementId: '45e31135-9b00-496d-9f7e-f536298ffd23',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-					elementId: '661b4502-24f9-477c-a6e2-9116a5fa3d42',
+					elementId: 'ece83346-2572-495d-86c4-829a2011bc84',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-					elementId: '4e7113ec-1a6c-4eb5-9714-15911a784bca',
+					elementId: '6df122f8-f979-408f-8e17-5d15cf43d3ce',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
-					elementId: '2573dc86-eac5-4b22-9503-42e5d8682f62',
+					elementId: 'b23af70a-103e-4b36-8354-85c05e6b5f45',
 				},
 			],
 			attributes: {
@@ -1636,6 +1636,22 @@ export const PrintShop: DCRArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Quick cryptic',
+						url: '/crosswords/series/quick-cryptic',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1644,28 +1660,16 @@ export const PrintShop: DCRArticle = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
 					},
 				],
 			},
@@ -1970,7 +1974,7 @@ export const PrintShop: DCRArticle = {
 				'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
 			width: 3855,
 			height: 2755,
-			elementId: '64a4456f-7854-49bf-8360-ba4612ff0261',
+			elementId: '284c2df0-8297-40b8-b413-de170b3f016c',
 			displayCredit: false,
 			alt: 'Bobby Moore in 1973',
 			credit: 'Photograph: Gerry Cranham/Offside',
@@ -1984,7 +1988,7 @@ export const PrintShop: DCRArticle = {
 			credit: 'Photograph: Gerry Cranham/Offside',
 			masterUrl:
 				'https://media.guim.co.uk/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg',
-			elementId: '64a4456f-7854-49bf-8360-ba4612ff0261',
+			elementId: '284c2df0-8297-40b8-b413-de170b3f016c',
 		},
 	],
 };
