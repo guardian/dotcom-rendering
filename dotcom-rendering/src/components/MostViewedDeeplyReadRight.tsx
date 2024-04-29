@@ -50,10 +50,12 @@ export const MostViewedDeeplyReadRight = ({
 	}
 
 	if (data) {
-		const mostReadTrails =
-			data.tabs[0]?.trails?.slice(0, limitItems)?.map(decideTrail) ?? [];
-		const deeplyReadTrails =
-			data.tabs[1]?.trails?.slice(0, limitItems)?.map(decideTrail) ?? [];
+		const mostReadTrails = data.tabs[0]?.trails
+			?.slice(0, limitItems)
+			?.map(decideTrail);
+		const deeplyReadTrails = data.tabs[1]?.trails
+			?.slice(0, limitItems)
+			?.map(decideTrail);
 
 		return (
 			<div
@@ -69,7 +71,7 @@ export const MostViewedDeeplyReadRight = ({
 				/>
 				<h3 css={headingStyles}>Most viewed</h3>
 				<ul data-link-name="Right hand most read">
-					{mostReadTrails.map((trail, index) => (
+					{mostReadTrails?.map((trail, index) => (
 						<MostViewedRightItem
 							key={trail.url}
 							trail={trail}
@@ -86,7 +88,7 @@ export const MostViewedDeeplyReadRight = ({
 				/>
 				<h3 css={headingStyles}>Deeply read</h3>
 				<ul data-link-name="Right hand deeply read">
-					{deeplyReadTrails.map((trail, index) => (
+					{deeplyReadTrails?.map((trail, index) => (
 						<MostViewedRightItem
 							key={trail.url}
 							trail={trail}

@@ -47,8 +47,9 @@ export const DeeplyReadRight = ({
 	}
 
 	if (data) {
-		const trails =
-			data.tabs[1]?.trails?.slice(0, limitItems)?.map(decideTrail) ?? [];
+		const trails = data.tabs[1]?.trails
+			?.slice(0, limitItems)
+			?.map(decideTrail);
 
 		return (
 			<div
@@ -64,7 +65,7 @@ export const DeeplyReadRight = ({
 				/>
 				<h3 css={headingStyles}>Deeply read</h3>
 				<ul data-link-name="Right hand deeply read">
-					{trails.map((trail, index) => (
+					{trails?.map((trail, index) => (
 						<MostViewedRightItem
 							key={trail.url}
 							trail={trail}
