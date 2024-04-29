@@ -171,7 +171,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 						<DateTime
 							date={new Date(pinnedPost.blockFirstPublished)}
 							display="relative"
-							editionId="UK"
+							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}
 							showTime={false}

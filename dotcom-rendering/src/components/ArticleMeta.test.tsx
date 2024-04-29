@@ -16,7 +16,11 @@ describe('ArticleMeta', () => {
 
 		const { container } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<ArticleMeta
 					format={format}
@@ -59,7 +63,11 @@ describe('ArticleMeta', () => {
 
 		const { container } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<ArticleMeta
 					format={format}

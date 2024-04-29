@@ -7,8 +7,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import type { FontWeight } from '@guardian/source-foundations';
-import { from, headline, space } from '@guardian/source-foundations';
-import { textSans } from '@guardian/source-foundations';
+import { from, headline, space, textSans } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
 

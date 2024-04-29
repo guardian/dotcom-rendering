@@ -127,7 +127,7 @@ export const KeyEventCard = ({
 					<DateTime
 						date={new Date(blockFirstPublished)}
 						display="relative"
-						editionId="UK"
+						editionId={'UK'}
 						showWeekday={false}
 						showDate={true}
 						showTime={false}

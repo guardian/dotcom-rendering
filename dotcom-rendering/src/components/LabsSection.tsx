@@ -15,6 +15,7 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import type { EditionId } from '../lib/edition';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
@@ -65,6 +66,8 @@ type Props = {
 	hasPageSkin?: boolean;
 
 	discussionApiUrl: string;
+
+	editionId: EditionId;
 };
 
 const leftColumnBackground = (backgroundColour?: string) => css`
@@ -381,6 +384,7 @@ export const LabsSection = ({
 	children,
 	hasPageSkin = false,
 	discussionApiUrl,
+	editionId,
 }: Props) => {
 	const overrides = decideContainerOverrides('Branded');
 
@@ -452,6 +456,7 @@ export const LabsSection = ({
 								containerPalette={'Branded'}
 								showAge={true}
 								discussionApiUrl={discussionApiUrl}
+								editionId={editionId}
 							/>
 						</Island>
 					)}

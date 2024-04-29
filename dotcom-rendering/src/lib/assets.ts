@@ -9,13 +9,18 @@ interface AssetHash {
 	[key: string]: string;
 }
 
+export type AssetOrigin =
+	| 'https://assets.guim.co.uk/'
+	| 'https://assets-code.guim.co.uk/'
+	| '/';
+
 /**
  * Decides the url to use for fetching assets
  *
  * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
  * @returns {string}
  */
-export const decideAssetOrigin = (stage: string | undefined): string => {
+export const decideAssetOrigin = (stage: string | undefined): AssetOrigin => {
 	switch (stage?.toUpperCase()) {
 		case 'PROD':
 			return 'https://assets.guim.co.uk/';

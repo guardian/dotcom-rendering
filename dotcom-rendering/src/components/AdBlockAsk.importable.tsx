@@ -2,16 +2,15 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
 	headlineMedium24,
+	palette,
 	textSans14,
 	textSans15,
 	textSans17,
 } from '@guardian/source-foundations';
-import { palette } from '@guardian/source-foundations/cjs/source-foundations/src/colour/palette';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { useAdblockAsk } from '../lib/useAdBlockAsk';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
-import HandsLogoSmall from '../static/logos/hands-small.svg';
-import HandsLogo from '../static/logos/hands.svg';
+import { useConfig } from './ConfigContext';
 
 type AdBlockAskSize = 'leaderboard' | 'mpu';
 
@@ -65,6 +64,12 @@ const adBlockAskTextStyles: Record<AdBlockAskSize, SerializedStyles> = {
 	`,
 };
 
+const HandsLogo = ({ styles }: { styles: SerializedStyles }) => {
+	const { assetOrigin } = useConfig();
+	const src = `${assetOrigin}static/frontend/logos/hands.png`;
+	return <img src={src} alt="Guardian logo held up by hands" css={styles} />;
+};
+
 const SupportButton = ({ href }: { href: string }) => (
 	<a css={linkStyles} href={href}>
 		Support us <ArrowRightIcon />
@@ -102,8 +107,8 @@ export const AdBlockAskLeaderboard = ({
 				margin: 0 auto;
 			`}
 		>
-			<HandsLogoSmall
-				css={css`
+			<HandsLogo
+				styles={css`
 					flex: 0 0 auto;
 					margin: auto 8px -6px 8px;
 					width: 81px;
@@ -158,17 +163,17 @@ export const AdBlockAskMPU = ({
 			>
 				<SupportButton href={supportButtonHref} />
 			</div>
-			<div
-				css={css`
-					width: 128px;
-					height: 68px;
-					background-position: right bottom;
-					position: absolute;
-					bottom: 0;
-					right: 0;
-				`}
-			>
-				<HandsLogo />
+			<div>
+				<HandsLogo
+					styles={css`
+						width: 128px;
+						height: 68px;
+						background-position: right bottom;
+						position: absolute;
+						bottom: 0;
+						right: 0;
+					`}
+				/>
 			</div>
 		</div>
 	);

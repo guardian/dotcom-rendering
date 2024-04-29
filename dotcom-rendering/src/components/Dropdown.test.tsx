@@ -42,7 +42,11 @@ describe('Dropdown', () => {
 	it('should display the given label', () => {
 		const { getByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Dropdown
 					id="abc"
@@ -59,7 +63,11 @@ describe('Dropdown', () => {
 	it('should display link titles', () => {
 		const { getByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Dropdown
 					id="abc"
@@ -79,7 +87,11 @@ describe('Dropdown', () => {
 	it('should render the correct number of link items', () => {
 		const { container } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Dropdown
 					id="abc"
@@ -98,7 +110,11 @@ describe('Dropdown', () => {
 	it('should expand the menu when clicked upon', () => {
 		const { container, getByRole } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Dropdown
 					id="abc"
@@ -119,7 +135,11 @@ describe('Dropdown', () => {
 	it('should close the expanded menu when they click away', () => {
 		const { container, getByRole } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Dropdown
 					id="abc"
@@ -141,7 +161,11 @@ describe('Dropdown', () => {
 	it('should close the expanded menu when blurred', () => {
 		const { container, getByRole } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Dropdown
 					id="abc"

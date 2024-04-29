@@ -69,7 +69,7 @@ const FirstPublished = ({
 						<DateTime
 							date={new Date(firstPublished)}
 							display="relative"
-							editionId="UK"
+							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}
 							showTime={false}

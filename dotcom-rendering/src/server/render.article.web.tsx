@@ -49,7 +49,11 @@ export const renderHtml = ({
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const renderingTarget = 'Web';
-	const config: Config = { renderingTarget, darkModeAvailable: false };
+	const config: Config = {
+		renderingTarget,
+		darkModeAvailable: false,
+		assetOrigin: ASSET_ORIGIN,
+	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -256,7 +260,11 @@ export const renderBlocks = ({
 	const format: ArticleFormat = decideFormat(FEFormat);
 
 	// Only currently supported for Web
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+		assetOrigin: ASSET_ORIGIN,
+	};
 
 	const editionId = isEditionId(edition) ? edition : 'UK';
 
