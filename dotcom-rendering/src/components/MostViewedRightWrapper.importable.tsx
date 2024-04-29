@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
+import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { DeeplyReadRight } from './DeeplyReadRight';
+import { MostViewedDeeplyReadRight } from './MostViewedDeeplyReadRight';
 import { MostViewedRight } from './MostViewedRight';
 
 type Props = {
@@ -29,6 +32,18 @@ export const MostViewedRightWrapper = ({
 	limitItems,
 	renderAds,
 }: Props) => {
+	const ABTestAPI = useAB()?.api;
+	const inDeeplyReadTestVariant =
+		ABTestAPI?.isUserInVariant('DeeplyReadTest', 'deeply-read-only') ??
+		false;
+	const inMostViewedDeeplyReadTestVariant =
+		ABTestAPI?.isUserInVariant(
+			'DeeplyReadTest',
+			'deeply-read-and-most-read',
+		) ?? false;
+	const inControlTestVariant =
+		ABTestAPI?.isUserInVariant('DeeplyReadTest', 'control') ?? false;
+
 	const adBlockerDetected = useAdBlockInUse();
 	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
 
@@ -54,7 +69,26 @@ export const MostViewedRightWrapper = ({
 				height: auto;
 			`}
 		>
-			<MostViewedRight limitItems={limitItems} stickToTop={stickToTop} />
+			{(inControlTestVariant ||
+				(!inDeeplyReadTestVariant &&
+					!inMostViewedDeeplyReadTestVariant)) && (
+				<MostViewedRight
+					limitItems={limitItems}
+					stickToTop={stickToTop}
+				/>
+			)}
+			{inDeeplyReadTestVariant && (
+				<DeeplyReadRight
+					limitItems={limitItems}
+					stickToTop={stickToTop}
+				/>
+			)}
+			{inMostViewedDeeplyReadTestVariant && (
+				<MostViewedDeeplyReadRight
+					limitItems={limitItems}
+					stickToTop={stickToTop}
+				/>
+			)}
 		</div>
 	);
 };
