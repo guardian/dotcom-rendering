@@ -39,7 +39,7 @@ test.describe('E2E Page rendering', () => {
 				(response) =>
 					responseHasJsonProperty(
 						response,
-						/most-read-geo\.json/,
+						/most-read-with-deeply-read.json\.json/,
 						'heading',
 					),
 			);
