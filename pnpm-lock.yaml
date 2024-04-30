@@ -500,9 +500,6 @@ importers:
       '@types/node':
         specifier: 20.12.7
         version: 20.12.7
-      '@types/parse5':
-        specifier: 7.0.0
-        version: 7.0.0
       '@types/qs':
         specifier: 6.9.7
         version: 6.9.7
@@ -7969,13 +7966,6 @@ packages:
 
   /@types/parse5@6.0.3:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
-    dev: false
-
-  /@types/parse5@7.0.0:
-    resolution: {integrity: sha512-f2SeAxumolBmhuR62vNGTsSAvdz/Oj0k682xNrcKJ4dmRnTPODB74j6CPoNPzBPTHsu7Y7W7u93Mgp8Ovo8vWw==}
-    deprecated: This is a stub types definition. parse5 provides its own type definitions, so you do not need this installed.
-    dependencies:
-      parse5: 7.1.2
     dev: false
 
   /@types/pretty-hrtime@1.0.3:
