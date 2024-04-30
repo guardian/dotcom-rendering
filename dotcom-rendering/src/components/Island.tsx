@@ -63,7 +63,17 @@ export const Island = ({ priority, defer, children }: IslandProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
 	const name = String(children.type.name);
 
-	return (
+	return config.renderingTarget === 'Apps' ? (
+		<gu-island
+			name={name}
+			priority={priority}
+			deferUntil={undefined} // never defer on Apps
+			props={JSON.stringify(children.props)}
+			config={JSON.stringify(config)}
+		>
+			{children}
+		</gu-island>
+	) : (
 		<gu-island
 			name={name}
 			priority={priority}
