@@ -151,7 +151,7 @@ const getRenderedTokens = (
 		isString(source) &&
 		source !== ''
 	) {
-		renderedTokens.push(
+		return renderedTokens.concat(
 			<>
 				{renderedTokens.length > 0 && ', '}
 				<Source key="source" source={source} />
