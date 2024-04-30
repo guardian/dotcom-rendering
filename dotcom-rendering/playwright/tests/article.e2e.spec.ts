@@ -34,12 +34,12 @@ test.describe('E2E Page rendering', () => {
 			);
 
 			// most viewed right hand column, response promise
-			// https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true
+			// https://api.nextgen.guardianapps.co.uk/most-read-with-deeply-read.json
 			const mostReadRightResponsePromise = page.waitForResponse(
 				(response) =>
 					responseHasJsonProperty(
 						response,
-						/most-read-with-deeply-read.json\.json/,
+						/most-read-with-deeply-read\.json/,
 						'heading',
 					),
 			);
