@@ -2,9 +2,10 @@ import { css } from '@emotion/react';
 import { headlineBold17 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decideTrail } from '../lib/decideTrail';
+import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
-import type { FETrailTabType, TrailType } from '../types/trails';
+import type { FETrailTabType } from '../types/trails';
 import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`
@@ -29,47 +30,91 @@ interface Props {
 	stickToTop?: boolean;
 }
 
+interface MostViewedRightPayloadType {
+	tabs: FETrailTabType[];
+}
+
 export const MostViewedRight = ({
 	limitItems = 5,
 	stickToTop = false,
 }: Props) => {
+	const ABTestAPI = useAB()?.api;
+	const inDeeplyReadTestVariant =
+		ABTestAPI?.isUserInVariant('DeeplyReadTest', 'deeply-read-only') ??
+		false;
+	const inMostViewedDeeplyReadTestVariant =
+		ABTestAPI?.isUserInVariant(
+			'DeeplyReadTest',
+			'deeply-read-and-most-read',
+		) ?? false;
 	const endpointUrl =
-		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
-	const { data, error } = useApi<FETrailTabType>(endpointUrl);
+		'https://api.nextgen.guardianapps.co.uk/most-read-with-deeply-read.json';
+	const { data, error } = useApi<MostViewedRightPayloadType>(endpointUrl);
 
 	if (error) {
-		window.guardian.modules.sentry.reportError(error, 'most-viewed-right');
+		window.guardian.modules.sentry.reportError(
+			error,
+			'most-viewed-deeply-read-right',
+		);
 		return null;
 	}
 
 	if (data) {
-		const trails: TrailType[] = data.trails
-			.slice(0, limitItems)
-			.map(decideTrail);
+		const mostReadTrails = data.tabs[0]?.trails
+			?.slice(0, limitItems)
+			?.map(decideTrail);
+		const deeplyReadTrails = data.tabs[1]?.trails
+			?.slice(0, limitItems)
+			?.map(decideTrail);
 
-		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
 			<div
 				css={[wrapperStyles, stickToTop && stickyStyles]}
 				data-component="geo-most-popular"
 			>
-				<StraightLines
-					cssOverrides={css`
-						display: block;
-					`}
-					count={4}
-					color={themePalette('--straight-lines')}
-				/>
-				<h3 css={headingStyles}>Most viewed</h3>
-				<ul data-link-name="Right hand most popular geo GB">
-					{trails.map((trail, index) => (
-						<MostViewedRightItem
-							key={trail.url}
-							trail={trail}
-							mostViewedItemIndex={index}
+				{!inDeeplyReadTestVariant && (
+					<>
+						<StraightLines
+							cssOverrides={css`
+								display: block;
+							`}
+							count={4}
+							color={themePalette('--straight-lines')}
 						/>
-					))}
-				</ul>
+						<h3 css={headingStyles}>Most viewed</h3>
+						<ul data-link-name="Right hand most popular geo GB">
+							{mostReadTrails?.map((trail, index) => (
+								<MostViewedRightItem
+									key={trail.url}
+									trail={trail}
+									mostViewedItemIndex={index}
+								/>
+							))}
+						</ul>
+					</>
+				)}
+				{(inMostViewedDeeplyReadTestVariant ||
+					inDeeplyReadTestVariant) && (
+					<>
+						<StraightLines
+							cssOverrides={css`
+								display: block;
+							`}
+							count={4}
+							color={themePalette('--straight-lines')}
+						/>
+						<h3 css={headingStyles}>Deeply read</h3>
+						<ul data-link-name="Right hand deeply read">
+							{deeplyReadTrails?.map((trail, index) => (
+								<MostViewedRightItem
+									key={trail.url}
+									trail={trail}
+									mostViewedItemIndex={index}
+								/>
+							))}
+						</ul>
+					</>
+				)}
 			</div>
 		);
 	}
