@@ -4,7 +4,7 @@ export const deeplyReadRightColumn: ABTest = {
 	id: 'DeeplyReadRightColumn',
 	author: '@dotcom-platform',
 	start: '2024-04-30',
-	expiry: '2024-06-30',
+	expiry: '2024-07-28',
 	audience: 0 / 100,
 	audienceOffset: 0 / 100,
 	audienceCriteria: '',
