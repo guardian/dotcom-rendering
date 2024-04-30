@@ -3,7 +3,6 @@ import webpack from 'webpack';
 import { babelExclude, getLoaders } from '../webpack/webpack.config.client';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
 import type { StorybookConfig } from '@storybook/react-webpack5';
-import { svgr } from '../webpack/svg.cjs';
 import { ReactRefreshPlugin } from '@pmmmwh/react-refresh-webpack-plugin';
 
 // Generate dynamic Card and Layout stories
@@ -141,14 +140,6 @@ const webpackConfig = (config: Configuration) => {
 		use: webpackLoaders,
 	});
 
-	// modify storybook's file-loader rule to avoid conflicts with our svg
-	// https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
-	const fileLoaderRule = rules.find((rule) => rule.test.test('.svg'));
-	fileLoaderRule &&
-		typeof fileLoaderRule !== 'string' &&
-		(fileLoaderRule.exclude = /\.svg$/);
-
-	rules.push(svgr);
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
 	];
