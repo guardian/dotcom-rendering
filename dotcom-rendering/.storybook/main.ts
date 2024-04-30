@@ -4,9 +4,11 @@ import { babelExclude, getLoaders } from '../webpack/webpack.config.client';
 import { saveStories } from '../scripts/gen-stories/get-stories.mjs';
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import { svgr } from '../webpack/svg.cjs';
+import { ReactRefreshPlugin } from '@pmmmwh/react-refresh-webpack-plugin';
 
 // Generate dynamic Card and Layout stories
 saveStories();
+const isProdBuild = process.env.NODE_ENV === 'production';
 
 const config: StorybookConfig = {
 	stories: [
@@ -73,6 +75,15 @@ const config: StorybookConfig = {
 					Buffer: ['buffer', 'Buffer'],
 				}),
 			);
+		// Replaces the `fastRefresh` option which was deprecated in Storybook v8
+		config.plugins?.push(
+			!isProdBuild &&
+				new ReactRefreshPlugin({
+					overlay: {
+						sockIntegration: 'whm',
+					},
+				}),
+		);
 		return config;
 	},
 	env: (config) => ({
@@ -83,7 +94,7 @@ const config: StorybookConfig = {
 	}),
 	framework: {
 		name: '@storybook/react-webpack5',
-		options: { fastRefresh: true },
+		options: {},
 	},
 };
 
