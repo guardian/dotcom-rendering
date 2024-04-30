@@ -165,7 +165,6 @@ export const renderElement = ({
 						kicker={element.kicker}
 						title={element.title}
 						duration={element.duration}
-						format={format}
 						contentIsNotSensitive={!isSensitive}
 						aCastisEnabled={!!switches.acast}
 						readerCanBeShownAds={!isAdFreeUser}
@@ -501,7 +500,6 @@ export const renderElement = ({
 				<NumberedTitleBlockComponent
 					position={element.position}
 					html={element.html}
-					format={format}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
@@ -644,11 +642,7 @@ export const renderElement = ({
 					isFirstParagraph={index === 0}
 					html={element.html}
 					format={format}
-					forceDropCap={
-						forceDropCap !== undefined
-							? forceDropCap
-							: element.dropCap
-					}
+					forceDropCap={forceDropCap ?? element.dropCap}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':

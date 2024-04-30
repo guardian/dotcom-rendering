@@ -37,7 +37,6 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	ajaxUrl: string;
 	messageUs?: MessageUs;
 };
 
@@ -311,7 +310,6 @@ export const ArticleMeta = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
-	ajaxUrl,
 	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
