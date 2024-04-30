@@ -418,33 +418,10 @@ class Enhancer {
 		this.elements = addImagePositions(this.elements, imagesForLightbox);
 		return this;
 	}
-
-	addHtmlToGuVideoBlocks(html?: string) {
-		if (!html) {
-			return this;
-		}
-		this.elements = this.elements.map((element) => {
-			if (
-				element._type ===
-				'model.dotcomrendering.pageElements.GuVideoBlockElement'
-			) {
-				return {
-					...element,
-					html,
-				};
-			}
-			return element;
-		});
-		return this;
-	}
 }
 
 const enhance =
-	(
-		isPhotoEssay: boolean,
-		imagesForLightbox: ImageForLightbox[],
-		html?: string,
-	) =>
+	(isPhotoEssay: boolean, imagesForLightbox: ImageForLightbox[]) =>
 	(elements: FEElement[]): FEElement[] => {
 		if (isPhotoEssay) {
 			return new Enhancer(elements)
@@ -464,8 +441,7 @@ const enhance =
 				// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
 				// element and use the value for the multi image `caption` prop
 				.addCaptionsToMultis()
-				.addImagePositions(imagesForLightbox)
-				.addHtmlToGuVideoBlocks(html).elements
+				.addImagePositions(imagesForLightbox).elements
 		);
 	};
 
@@ -478,14 +454,13 @@ export const enhanceImages = (
 	return enhance(isPhotoEssay, imagesForLightbox);
 };
 
-export const enhanceElementsMedia = (
+export const enhanceElementsImages = (
 	format: ArticleFormat,
 	imagesForLightbox: ImageForLightbox[],
-	mediaHTML: string,
 ): ((elements: FEElement[]) => FEElement[]) => {
 	const isPhotoEssay =
 		format.design === ArticleDesign.PhotoEssay &&
 		format.theme !== ArticleSpecial.Labs;
 
-	return enhance(isPhotoEssay, imagesForLightbox, mediaHTML);
+	return enhance(isPhotoEssay, imagesForLightbox);
 };
