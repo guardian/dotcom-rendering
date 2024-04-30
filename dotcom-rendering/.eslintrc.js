@@ -58,7 +58,10 @@ module.exports = {
 		es6: true,
 		node: true,
 	},
-	ignorePatterns: ['src/static/js/curl-with-js-and-domReady.js'],
+	ignorePatterns: [
+		'src/static/js/curl-with-js-and-domReady.js',
+		'playwright-report/**',
+	],
 	extends: [
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
