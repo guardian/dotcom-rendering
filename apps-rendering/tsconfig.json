@@ -5,6 +5,8 @@
 		"strict": true,
 		// Import non-ES modules as default imports.
 		"esModuleInterop": true,
+		"composite": true,
+		"incremental": true,
 		// Don't transpile jsx (handled by babel w/ emotion)
 		"jsx": "react-jsx",
 		"jsxImportSource": "@emotion/react",

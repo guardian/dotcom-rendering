@@ -3,7 +3,10 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"baseUrl": "./",
+		"composite": true,
+		"rootDir": "../",
 		"forceConsistentCasingInFileNames": true,
+		"incremental": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "@emotion/react",
 		"lib": ["esnext", "es2015", "dom"],
@@ -16,7 +19,7 @@
 		},
 		"preserveConstEnums": true
 	},
-	"include": ["**/*", ".storybook/mocks/bridgetApi.ts"],
+	"include": ["./**/*", ".storybook/**/*", "../scripts/*.js"],
 	"exclude": [
 		"storybook-static",
 		"target",
