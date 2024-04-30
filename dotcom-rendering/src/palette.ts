@@ -55,7 +55,6 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Analysis:
 				case ArticleDesign.Feature:
-				case ArticleDesign.Interview:
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review: {
 					switch (theme) {
