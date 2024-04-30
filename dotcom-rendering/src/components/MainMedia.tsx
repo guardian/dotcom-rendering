@@ -34,7 +34,7 @@ const noGutters = css`
 `;
 
 const padBottom = css`
-	padding-bottom: ${space[1]};
+	padding-bottom: ${space[1]}px;
 `;
 
 const immersiveWrapper = css`
