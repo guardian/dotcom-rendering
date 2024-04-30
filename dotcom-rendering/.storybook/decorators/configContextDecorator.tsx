@@ -1,4 +1,3 @@
-import React from 'react';
 import { ConfigProvider } from '../../src/components/ConfigContext';
 import type { Decorator } from '@storybook/react';
 import { Config } from '../../src/types/configContext';

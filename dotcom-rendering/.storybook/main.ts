@@ -56,6 +56,9 @@ const config: StorybookConfig = {
 		config.resolve.extensions?.push('.ts', '.tsx');
 
 		config.resolve.fallback ??= {};
+		if (Array.isArray(config.resolve.fallback))
+			throw Error('Invalid config.resolve.fallback format');
+
 		// clean-css will try to import these packages
 		config.resolve.fallback['http'] = false;
 		config.resolve.fallback['https'] = false;
@@ -96,6 +99,9 @@ const webpackConfig = (config: Configuration) => {
 	config.resolve ??= {};
 	config.resolve.alias ??= {};
 
+	if (Array.isArray(config.resolve.alias))
+		throw Error('Invalid config.resolve.alias format');
+
 	// Mock JSDOM for storybook - it relies on native node.js packages
 	// Allows us to use enhancers in stories for better testing of components & full articles
 	config.resolve.alias['jsdom$'] = path.resolve(
@@ -115,7 +121,7 @@ const webpackConfig = (config: Configuration) => {
 	const webpackLoaders = getLoaders('client.web');
 
 	// https://swc.rs/docs/usage/swc-loader#with-babel-loader
-	if (webpackLoaders[0].loader.startsWith('swc')) {
+	if (webpackLoaders[0]?.loader.startsWith('swc')) {
 		webpackLoaders[0].options.parseMap = true;
 	}
 
@@ -130,10 +136,12 @@ const webpackConfig = (config: Configuration) => {
 
 	// modify storybook's file-loader rule to avoid conflicts with our svg
 	// https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
-	const fileLoaderRule = rules.find((rule) => rule.test.test('.svg'));
-	fileLoaderRule &&
-		typeof fileLoaderRule !== 'string' &&
-		(fileLoaderRule.exclude = /\.svg$/);
+	for (const rule of rules) {
+		if (!rule || rule === '...') continue;
+		if (!(rule.test instanceof RegExp)) continue;
+		if (rule.test.test('.svg')) continue;
+		rule.exclude = /\.svg$/;
+	}
 
 	rules.push(svgr);
 	config.resolve.modules = [

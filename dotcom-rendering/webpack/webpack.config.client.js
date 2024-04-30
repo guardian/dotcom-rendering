@@ -46,7 +46,7 @@ const getEntryIndex = (build) => {
 
 /**
  * @param {Build} build
- * @returns {{ loader: string, options: Record<string, unknown>}}
+ * @returns {{ loader: string, options: Record<string, unknown>}[]}
  */
 const getLoaders = (build) => {
 	switch (build) {

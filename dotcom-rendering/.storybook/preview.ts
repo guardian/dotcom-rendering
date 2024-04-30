@@ -12,7 +12,7 @@ import { Picture } from '../src/components/Picture';
 import { mockRESTCalls } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
-import { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react';
 import {
 	globalColourScheme,
 	globalColourSchemeDecorator,
@@ -29,21 +29,24 @@ if (isChromatic()) {
 
 mockRESTCalls();
 
-setABTests(
-	new AB({
-		mvtMaxValue: 1_000_000,
-		mvtId: 1234,
-		pageIsSensitive: false,
-		abTestSwitches: {},
-		arrayOfTestObjects: [],
-	}),
-);
+const api = new AB({
+	mvtMaxValue: 1_000_000,
+	mvtId: 1234,
+	pageIsSensitive: false,
+	abTestSwitches: {},
+	arrayOfTestObjects: [],
+	serverSideTests: {},
+	errorReporter() {},
+	ophanRecord() {},
+});
+
+setABTests({ api, participations: {} });
 
 // Add base css for the site
 let css = `${fontsCss}${resets.resetCSS}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
-head.appendChild(style);
+head?.appendChild(style);
 style.type = 'text/css';
 style.appendChild(document.createTextNode(css));
 
@@ -58,14 +61,19 @@ window.guardian = {
 	config: {
 		ophan: {
 			pageViewId: 'mockPageViewId',
+			browserId: 'fakeBrowserId',
 		},
+		// @ts-expect-error -- there’s a lot missing, but it’s fine in practice…
 		page: {
 			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		},
 		tests: {},
 	},
 	ophan: {
-		record: ({}) => {},
+		record() {},
+		setEventEmitter() {},
+		trackComponentAttention() {},
+		viewId: 'storybook-does-not-have-a-page-view-id',
 		pageViewId: 'storybook-does-not-have-a-page-view-id',
 	},
 	modules: {
@@ -138,7 +146,7 @@ const guardianViewports = {
 	},
 };
 
-export default {
+const config: Preview = {
 	args: {
 		config: { renderingTarget: 'Web', darkModeAvailable: false },
 	},
@@ -161,4 +169,6 @@ export default {
 		},
 		layout: 'fullscreen',
 	},
-} satisfies Preview;
+};
+
+export default config;

@@ -12,7 +12,7 @@ export class JSDOM {
 	constructor() {}
 	window = window;
 
-	static fragment(html) {
+	static fragment(html: string) {
 		try {
 			const docNodes = new DOMParser().parseFromString(html, 'text/html')
 				.body.childNodes;
@@ -23,5 +23,6 @@ export class JSDOM {
 		} catch (e) {
 			console.error(e);
 		}
+		return;
 	}
 }
