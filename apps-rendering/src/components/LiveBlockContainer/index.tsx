@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	body,
 	from,
-	headline,
 	neutral,
 	space,
+	article17,
+	headlineBold20,
 } from '@guardian/source-foundations';
 import FirstPublished from 'components/FirstPublished';
 import type { Contributor } from 'contributor';
@@ -52,7 +52,7 @@ const BlockTitle: FC<{ blockTitle: Optional<string> }> = ({ blockTitle }) =>
 	blockTitle.maybeRender((title) => (
 		<h2
 			css={css`
-				${headline.xxsmall({ fontWeight: 'bold' })}
+				${headlineBold20};
 				margin-bottom: ${space[2]}px;
 			`}
 		>
@@ -94,7 +94,7 @@ const BlockByline: FC<{
 			))}
 			<span
 				css={css`
-					${body.medium()}
+					${article17};
 					display: flex;
 					align-items: center;
 					padding-left: ${image.isSome() ? space[1] : 0}px;

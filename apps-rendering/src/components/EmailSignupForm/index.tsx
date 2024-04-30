@@ -7,8 +7,8 @@ import {
 	neutral,
 	pxToRem,
 	remSpace,
-	textSans,
 	until,
+	textSansBold14,
 } from '@guardian/source-foundations';
 import {
 	Button,
@@ -110,11 +110,11 @@ const EmailSignupForm: FC<Props> = ({
 				text="Enter your email address"
 				cssOverrides={css`
 					div {
-						${textSans.xsmall({ fontWeight: 'bold' })};
+						${textSansBold14};
 
 						${darkModeCss`
-							color: ${text.newsletterSignUpFormDark(format)};
-						`}
+                        color: ${text.newsletterSignUpFormDark(format)};
+                    `}
 					}
 				`}
 			/>
@@ -144,9 +144,11 @@ const EmailSignupForm: FC<Props> = ({
 							flex-basis: ${pxToRem(335)}rem;
 
 							${darkModeCss`
-							background-color: ${background.newsletterSignUpFormDark(format)};
-							color: ${text.newsletterSignUpFormDark(format)};
-						`}
+                        background-color: ${background.newsletterSignUpFormDark(
+							format,
+						)};
+                        color: ${text.newsletterSignUpFormDark(format)};
+                    `}
 						`}
 					/>
 					<Button

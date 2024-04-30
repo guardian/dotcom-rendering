@@ -3,12 +3,12 @@ import {
 	brandAlt,
 	neutral,
 	remSpace,
-	textSans,
+	textSans14,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 
 export const highlight = css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${neutral[7]};
 	display: flex;
 	align-items: center;

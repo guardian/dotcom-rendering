@@ -6,8 +6,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	brandAlt,
 	remSpace,
-	textSans,
 	until,
+	textSans14,
+	textSansBold14,
 } from '@guardian/source-foundations';
 import { SvgClock, SvgNewsletter } from '@guardian/source-react-components';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
@@ -57,10 +58,10 @@ const frequencyBlockStyles = css`
 
 	span {
 		margin-left: ${remSpace[1]};
-		${textSans.xsmall()}
+		${textSans14};
 
 		b {
-			${textSans.xsmall({ fontWeight: 'bold' })}
+			${textSansBold14}
 		}
 	}
 `;
@@ -79,7 +80,7 @@ const detailBlockStyles = css`
 	}
 
 	b {
-		${textSans.xsmall({ fontWeight: 'bold' })}
+		${textSansBold14}
 	}
 `;
 

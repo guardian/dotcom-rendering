@@ -9,9 +9,10 @@ import {
 	neutral,
 	remHeight,
 	remSpace,
-	textSans,
 	transitions,
 	visuallyHidden,
+	textSansBold15,
+	textSansBold17,
 } from '@guardian/source-foundations';
 import {
 	SvgMinus,
@@ -72,7 +73,7 @@ const rowStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const timeAgoStyles = css`
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 	color: ${neutral[100]};
 	${from.tablet} {
 		margin-left: 1.75rem;
@@ -120,7 +121,7 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin-left: 0.625rem;
 	position: absolute;
 	bottom: -1.5rem;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	height: ${remHeight.ctaMedium}rem;
 	min-height: ${remHeight.ctaMedium}rem;
 	padding: 0 ${remSpace[5]} 0.125rem;

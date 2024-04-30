@@ -1,12 +1,16 @@
 import { css } from '@emotion/react';
-import { headline, neutral, remSpace } from '@guardian/source-foundations';
+import {
+	neutral,
+	remSpace,
+	headlineMedium17,
+} from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { darkModeCss } from 'styles';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
 const liveBlogStyles = css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	margin-bottom: 0;
 	padding-bottom: ${remSpace[3]};
 

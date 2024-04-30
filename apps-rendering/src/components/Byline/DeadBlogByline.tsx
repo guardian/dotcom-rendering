@@ -1,16 +1,19 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
+import {
+	headlineMediumItalic17,
+	headlineBold17,
+} from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { DefaultByline } from './Byline.defaults';
 import { blogColor } from './LiveBlogByline';
 
 const blogStyles = css`
-	${headline.xxxsmall({ lineHeight: 'tight', fontStyle: 'italic' })}
+	${headlineMediumItalic17}
 `;
 
 const blogAnchorStyles = css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${headlineBold17};
 	font-style: normal;
 	text-decoration: none;
 `;

@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
+import { headlineBold17 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Series } from 'capi';
@@ -11,7 +11,12 @@ import type { FC, ReactElement } from 'react';
 
 const articleSeriesStyles = (format: ArticleFormat): SerializedStyles => css`
 	a {
-		${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
+		${headlineBold17};
+		/**
+		 * @TODO (2) Typography preset styles should not be overridden.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		*/
+		line-height: 1.4;
 		color: ${text.mediaArticleSeries(format)};
 		text-decoration: none;
 	}

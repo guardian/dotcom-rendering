@@ -1,16 +1,20 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
-	body,
 	brand,
 	brandAlt,
 	error,
-	headline,
 	neutral,
 	remSpace,
 	sport,
 	success,
-	textSans,
+	textSans12,
+	textSans14,
+	textSans15,
+	textSans17,
+	headlineMedium20,
+	article17,
+	headlineBold20,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 
@@ -54,7 +58,7 @@ export const calloutInfo = css`
 `;
 
 export const highlight = css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${neutral[7]};
 	padding: 0 ${remSpace[1]};
 	background: ${brandAlt[400]};
@@ -64,7 +68,7 @@ export const highlight = css`
 `;
 
 export const calloutTitle = css`
-	${headline.xxsmall({ fontWeight: 'bold' })};
+	${headlineBold20};
 	color: ${brand[500]};
 
 	${darkModeCss`
@@ -73,11 +77,11 @@ export const calloutTitle = css`
 `;
 
 export const calloutHeadingText = css`
-	${headline.xxsmall()}
+	${headlineMedium20}
 `;
 
 export const calloutDescription = css`
-	${body.medium()}
+	${article17};
 	padding: ${remSpace[3]} 0;
 `;
 
@@ -112,7 +116,7 @@ export const tabIcons = css`
 
 // Callout success Styles
 export const successMessage = css`
-	${textSans.small()};
+	${textSans15};
 	svg {
 		fill: ${success[400]};
 		width: 48px;
@@ -124,7 +128,7 @@ export const successMessage = css`
 `;
 
 export const heading = css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 `;
 
 // Callout Share Link Styles
@@ -134,7 +138,7 @@ export const calloutShare = css`
 	padding-right: ${remSpace[2]};
 	padding-bottom: ${remSpace[2]};
 	color: ${neutral[7]};
-	${textSans.xsmall()}
+	${textSans14}
 
 	${darkModeCss`
 		color: ${neutral[86]};
@@ -142,7 +146,7 @@ export const calloutShare = css`
 `;
 
 export const calloutSharelink = css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${brand[500]};
 	text-decoration: none;
 	border-bottom: 1px solid #12121240;
@@ -175,7 +179,7 @@ export const shareIcon = css`
 `;
 
 export const sharePopup = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	position: absolute;
 	transform: translate(0, 100%);
 	display: flex;
@@ -205,7 +209,7 @@ export const fieldInput = css`
 
 export const textarea = (hasError: boolean): SerializedStyles => css`
 	// Source textarea doesn't have theming
-	${fieldInput}
+	${fieldInput};
 	border: ${hasError
 		? `4px solid ${error[400]}`
 		: `2px solid ${neutral[46]}`};
@@ -221,11 +225,11 @@ export const textarea = (hasError: boolean): SerializedStyles => css`
 
 // Other callout components
 export const info = css`
-	${textSans.xsmall()};
+	${textSans14};
 	margin-bottom: ${remSpace[2]};
 `;
 
 export const termsConditions = css`
-	${textSans.medium()};
+	${textSans17};
 	margin-bottom: ${remSpace[4]};
 `;

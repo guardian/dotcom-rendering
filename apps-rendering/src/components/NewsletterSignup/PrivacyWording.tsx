@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { textSans } from '@guardian/source-foundations';
+import { textSans12, textSansBold12 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { text } from 'palette';
 import type { FC } from 'react';
@@ -17,10 +17,15 @@ interface Props {
 }
 
 const termsStyle = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xxsmall({ lineHeight: 'tight' })}
+	${textSans12};
+	/**
+		 * @TODO (2) Typography preset styles should not be overridden.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		*/
+	line-height: 1.15;
 	color: ${text.privacyMessage(format)};
 	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })};
+		${textSansBold12};
 		color: ${text.newsletterSignUpForm(format)};
 		text-decoration: underline;
 		:hover {

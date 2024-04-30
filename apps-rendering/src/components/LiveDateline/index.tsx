@@ -3,7 +3,7 @@
 import { css, keyframes } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, pxToRem, textSans } from '@guardian/source-foundations';
+import { neutral, pxToRem, textSans12 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { makeRelativeDate } from 'date';
 import { maybeRender } from 'lib';
@@ -21,7 +21,12 @@ const livePulse = keyframes`
 
 const timestampStyles = (isDeadBlog = false): ReturnType<typeof css> => css`
 	color: ${isDeadBlog ? neutral[7] : neutral[100]};
-	${textSans.xxsmall({ lineHeight: 'tight' })}
+	${textSans12};
+	/**
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	*/
+	line-height: 1.15;
 
 	${darkModeCss`
 		color: ${isDeadBlog ? neutral[60] : neutral[100]};

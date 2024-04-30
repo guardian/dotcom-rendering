@@ -1,7 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, space, textSans, until } from '@guardian/source-foundations';
+import {
+	neutral,
+	space,
+	until,
+	textSans15,
+} from '@guardian/source-foundations';
 import {
 	Hide,
 	LinkButton,
@@ -72,7 +77,7 @@ const Position: FC<{
 		css={css`
 			display: flex;
 			flex-direction: row;
-			${textSans.small()}
+			${textSans15}
 
 			${darkModeCss`
 				color: ${neutral[60]};

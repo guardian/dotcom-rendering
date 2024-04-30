@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace } from '@guardian/source-foundations';
+import { remSpace, headlineBold17 } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
@@ -21,7 +21,7 @@ const darkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
 `;
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${headlineBold17};
 	padding: 0;
 	margin-bottom: ${remSpace[3]};
 	color: ${text.standfirst(format)};

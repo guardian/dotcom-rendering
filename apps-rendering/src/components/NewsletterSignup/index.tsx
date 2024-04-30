@@ -7,10 +7,11 @@ import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	brandAlt,
 	from,
-	headline,
 	remSpace,
 	sport,
-	textSans,
+	textSans14,
+	textSansBold14,
+	headlineBold20,
 } from '@guardian/source-foundations';
 import { SvgNewsletter } from '@guardian/source-react-components';
 import type { NewsletterSignUp } from 'bodyElement';
@@ -66,7 +67,7 @@ const stackBelowTabletStyles = css`
 `;
 
 const titleStyles = (theme: ArticleTheme): SerializedStyles => css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20};
 	flex-grow: 1;
 	span {
 		color: ${theme === ArticlePillar.News ? sport[500] : 'inherit'};
@@ -74,7 +75,12 @@ const titleStyles = (theme: ArticleTheme): SerializedStyles => css`
 `;
 
 const descriptionStyles = css`
-	${textSans.xsmall({ lineHeight: 'tight' })}
+	${textSans14};
+	/**
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	*/
+	line-height: 1.15;
 	margin-bottom: ${remSpace[2]};
 `;
 
@@ -88,7 +94,7 @@ const iconHolderStyles = css`
 	}
 
 	b {
-		${textSans.xsmall({ fontWeight: 'bold' })}
+		${textSansBold14}
 	}
 `;
 

@@ -13,7 +13,8 @@ import {
 	opinion,
 	remSpace,
 	sport,
-	textSans,
+	textSansBold14,
+	textSans15,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import Accordion from 'components/Accordion';
@@ -145,7 +146,7 @@ const timeTextWrapperStyles: SerializedStyles = css`
 `;
 
 const textStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
+	${textSans15};
 	color: ${text.keyEventsInline(format)};
 	display: block;
 	text-decoration: none;
@@ -174,7 +175,12 @@ const textStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const timeStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${textSansBold14};
+	/**
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	*/
+	line-height: 1.15;
 	color: ${neutral[7]};
 	display: block;
 	transform: translateY(-4px);

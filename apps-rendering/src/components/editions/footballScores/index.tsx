@@ -6,7 +6,8 @@ import {
 	brandAltBackground,
 	from,
 	remSpace,
-	textSans,
+	textSansBold17,
+	textSans17,
 } from '@guardian/source-foundations';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { FC } from 'react';
@@ -43,11 +44,16 @@ const scoreStyles = css`
 `;
 
 const leagueStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const stadiumStyles = css`
-	${textSans.medium({ fontStyle: 'normal' })}
+	${textSans17};
+	/**
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	*/
+	font-style: normal;
 `;
 
 const FootballScores: FC<Props> = ({ league, homeTeam, awayTeam, stadium }) => (

@@ -1,7 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headline } from '@guardian/source-foundations';
+import {
+	from,
+	headlineMedium20,
+	headlineBold20,
+} from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../../vendor/@guardian/types/index';
@@ -64,7 +68,12 @@ const quoteStyles = (format: ArticleFormat): SerializedStyles => {
 
 	return css`
 		margin: 0;
-		${headline.xxsmall({ fontWeight: 'regular' })}
+		${headlineMedium20};
+		/**
+		 * @TODO (2) Typography preset styles should not be overridden.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		*/
+		font-weight: 400;
 		svg {
 			margin-bottom: -0.6rem;
 			height: 2rem;
@@ -76,7 +85,7 @@ const quoteStyles = (format: ArticleFormat): SerializedStyles => {
 
 const citeStyles = css`
 	font-style: normal;
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 `;
 
 type Props = {

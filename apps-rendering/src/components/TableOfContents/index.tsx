@@ -2,7 +2,13 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { headline, remSpace, textSans } from '@guardian/source-foundations';
+import {
+	remSpace,
+	textSans14,
+	textSansBold17,
+	headlineLight17,
+	headlineBold17,
+} from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -76,20 +82,20 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 const listItemStyles = (format: ArticleFormat): SerializedStyles => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return css`
-			${headline.xxxsmall({ fontWeight: 'light' })}
+			${headlineLight17}
 			${defaultListItemStyles(format)}
 		`;
 	}
 
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
-			${textSans.medium({ fontWeight: 'bold' })}
+			${textSansBold17}
 			${defaultListItemStyles(format)}
 		`;
 	}
 
 	return css`
-		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${headlineBold17}
 		${defaultListItemStyles(format)}
 	`;
 };
@@ -143,7 +149,7 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const titleStyle = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall({ lineHeight: 'regular' })}
+	${textSans14};
 	color: ${text.tableOfContentsTitle(format)};
 	${darkModeCss`
 		color: ${text.tableOfContentsTitleDark(format)};

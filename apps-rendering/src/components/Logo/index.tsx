@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, textSans, until } from '@guardian/source-foundations';
+import { remSpace, until, textSans15 } from '@guardian/source-foundations';
 import Anchor from 'components/Anchor';
 import { getFormat } from 'item';
 import type { Item } from 'item';
@@ -22,7 +22,7 @@ const styles = (
 ): SerializedStyles => {
 	return css`
 		margin: ${remSpace[9]} 0;
-		${textSans.small()}
+		${textSans15};
 		background-color: transparent;
 
 		img {

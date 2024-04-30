@@ -3,11 +3,11 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import {
-	body,
 	breakpoints,
 	from,
 	neutral,
 	space,
+	article17,
 } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -16,7 +16,7 @@ import Accordion from '.';
 // ----- Stories ----- //
 
 const textStyle = css`
-	${body.medium({ lineHeight: 'loose' })};
+	${article17};
 	margin-bottom: ${space[3]}px;
 	${darkModeCss`
 		color: ${neutral[86]};

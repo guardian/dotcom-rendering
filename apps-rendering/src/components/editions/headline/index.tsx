@@ -6,12 +6,13 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { FontWeight, LineHeight } from '@guardian/source-foundations';
 import {
-	border,
-	from,
 	headline,
-	neutral,
-	remSpace,
+	headlineMedium24,
+	headlineMedium34,
+	headlineMedium42,
 } from '@guardian/source-foundations';
+
+import { border, from, neutral, remSpace } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import { OptionKind } from '../../../../vendor/@guardian/types/index';
 import type { Item } from 'item';
@@ -45,16 +46,16 @@ const commentStyles = (hasImage: boolean): SerializedStyles => css`
 `;
 
 const galleryStyles = css`
-	${headline.xsmall()}
+	${headlineMedium24};
 	box-sizing: border-box;
 	padding-bottom: ${remSpace[6]};
 	background-color: ${neutral[7]};
 	border: none;
 	${from.mobileMedium} {
-		${headline.medium()}
+		${headlineMedium34}
 	}
 	${from.tablet} {
-		${headline.large()}
+		${headlineMedium42};
 		width: ${tablet}px;
 		padding-right: ${remSpace[4]};
 		border-right: 1px solid ${neutral[100]};

@@ -4,7 +4,12 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headline, remSpace } from '@guardian/source-foundations';
+import {
+	from,
+	remSpace,
+	headlineBold17,
+	headlineBold20,
+} from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';
@@ -27,7 +32,7 @@ const styles = css`
 const linkStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.seriesTitle(format)};
 	background-color: ${background.series(format)};
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${headlineBold17};
 	line-height: 2;
 	text-decoration: none;
 	display: inline-block;
@@ -47,7 +52,7 @@ const linkStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	${from.wide} {
-		${headline.xxsmall({ fontWeight: 'bold' })}
+		${headlineBold20};
 		line-height: 1.75;
 	}
 `;

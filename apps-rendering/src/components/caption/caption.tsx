@@ -5,10 +5,10 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	headline,
 	neutral,
 	remSpace,
-	textSans,
+	headlineMedium17,
+	textSans14,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';
@@ -22,14 +22,20 @@ import { darkModeCss } from 'styles';
 // ----- Caption Elements ----- //
 
 const headingStyles = css`
-	${headline.xxxsmall()}
+	${headlineMedium17};
 	color: ${neutral[86]};
 	margin: 0 0 ${remSpace[3]};
 	display: block;
 `;
 
 const emStyles = css`
-	${textSans.xsmall({ fontStyle: 'italic', fontWeight: 'bold' })}
+	${textSans14};
+	/**
+ * @TODO (2) Typography preset styles should not be overridden.
+ * Please speak to your team's designer and update this to use a more appropriate preset.
+*/
+	font-weight: 700;
+	font-style: italic;
 `;
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
@@ -43,9 +49,7 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
 		: undefined;
 
 const textStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall({
-		lineHeight: 'regular',
-	})}
+	${textSans14};
 	color: ${text.figCaption(format)};
 
 	${darkModeCss`

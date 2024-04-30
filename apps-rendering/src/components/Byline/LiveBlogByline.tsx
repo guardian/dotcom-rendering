@@ -1,7 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headline } from '@guardian/source-foundations';
+import {
+	from,
+	headlineMediumItalic17,
+	headlineBold17,
+} from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { text } from 'palette';
 import { darkModeCss } from 'styles';
@@ -22,11 +26,11 @@ export const blogColor = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const blogStyles = css`
-	${headline.xxxsmall({ lineHeight: 'tight', fontStyle: 'italic' })}
+	${headlineMediumItalic17}
 `;
 
 const blogAnchorStyles = css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${headlineBold17};
 	font-style: normal;
 	text-decoration: none;
 `;

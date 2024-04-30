@@ -5,7 +5,8 @@ import {
 	from,
 	neutral,
 	remSpace,
-	textSans,
+	textSansBold15,
+	textSans15,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import {
@@ -144,7 +145,7 @@ const CaptionLocation: FC<{ location: string[]; triangleColor: string }> = ({
 	triangleColor,
 }) => {
 	const styles = css`
-		${textSans.small({ fontWeight: 'bold' })}
+		${textSansBold15};
 		color: ${neutral[100]};
 		margin: 0;
 		padding: ${remSpace[1]} 0 0;
@@ -166,7 +167,7 @@ const CaptionLocation: FC<{ location: string[]; triangleColor: string }> = ({
 
 const CaptionDescription: FC<{ description: string[] }> = ({ description }) => {
 	const styles = css`
-		${textSans.small({ lineHeight: 'regular' })};
+		${textSans15};
 		color: ${neutral[100]};
 		margin: 0;
 		padding: 0;

@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, headline, remSpace } from '@guardian/source-foundations';
+import {
+	from,
+	remSpace,
+	headlineBold28,
+	headlineBold34,
+} from '@guardian/source-foundations';
 import DesignTag from 'components/DesignTag';
 import HeadlineByline from 'components/HeadlineByline';
 import type { Item } from 'item';
@@ -13,10 +18,10 @@ interface Props {
 }
 
 const interviewStyles = css`
-	${headline.small({ fontWeight: 'bold' })}
+	${headlineBold28};
 	line-height: 1.25;
 	${from.tablet} {
-		${headline.medium({ fontWeight: 'bold' })}
+		${headlineBold34};
 		line-height: 1.25;
 	}
 `;

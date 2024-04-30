@@ -5,10 +5,10 @@ import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import {
 	from,
-	headline,
 	neutral,
 	remSpace,
 	until,
+	headlineBold24,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, none, withDefault } from '../../../vendor/@guardian/types/index';
@@ -28,7 +28,7 @@ interface Props {
 }
 
 export const defaultHeadingStyles = css`
-	${headline.xsmall({ fontWeight: 'bold' })}
+	${headlineBold24};
 	margin: 0 0 ${remSpace[4]} 0;
 
 	${darkModeCss`

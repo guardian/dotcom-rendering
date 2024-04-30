@@ -4,10 +4,11 @@ import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballT
 import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import {
 	from,
-	headline,
 	neutral,
 	remSpace,
-	textSans,
+	textSans15,
+	headlineBold20,
+	headlineBold42,
 } from '@guardian/source-foundations';
 import { fromNullable } from '../../../../vendor/@guardian/types/index';
 import { TeamLocation } from 'football';
@@ -47,12 +48,12 @@ const styles = (location: TeamLocation): SerializedStyles => css`
 `;
 
 const teamNameStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20};
 	margin: 0;
 `;
 
 const scoreStyles = (location: TeamLocation): SerializedStyles => css`
-	${headline.large({ fontWeight: 'bold' })}
+	${headlineBold42};
 	margin-right: ${remSpace[3]};
 
 	${from.phablet} {
@@ -87,7 +88,7 @@ const infoStyles = (location: TeamLocation): SerializedStyles => css`
 `;
 
 const scorerStyles = (location: TeamLocation): SerializedStyles => css`
-	${textSans.small()}
+	${textSans15};
 	list-style: none;
 	margin: 0;
 	padding: 0;

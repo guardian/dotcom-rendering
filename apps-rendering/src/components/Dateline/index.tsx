@@ -5,7 +5,12 @@ import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	neutral,
+	textSans14,
+	textSans12,
+} from '@guardian/source-foundations';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { datetimeFormat } from 'datetime';
@@ -23,7 +28,7 @@ interface Props {
 }
 
 const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${text.dateline(format)};
 
 	${darkModeCss`
@@ -37,7 +42,12 @@ const getStyles = (
 ): SerializedStyles => css`
 	color: ${colour};
 	display: block;
-	${textSans.xxsmall({ lineHeight: 'tight' })}
+	${textSans12};
+	/**
+	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	*/
+	line-height: 1.15;
 
 	${from.desktop} {
 		color: ${desktopColour};
