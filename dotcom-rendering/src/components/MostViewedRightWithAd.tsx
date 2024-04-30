@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
@@ -7,7 +7,7 @@ import { Island } from './Island';
 import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
 
 type Props = {
-	display: ArticleDisplay;
+	format: ArticleFormat;
 	isPaidContent: boolean;
 	renderAds: boolean;
 	shouldHideReaderRevenue: boolean;
@@ -20,7 +20,7 @@ type Props = {
 const MAX_HEIGHT_PX = 1600;
 
 export const MostViewedRightWithAd = ({
-	display,
+	format,
 	isPaidContent,
 	renderAds,
 	shouldHideReaderRevenue,
@@ -28,6 +28,9 @@ export const MostViewedRightWithAd = ({
 	const componentDataAttribute = 'most-viewed-right-container';
 	const { renderingTarget } = useConfig();
 	const isApps = renderingTarget === 'Apps';
+	const useDarkColourScheme =
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio;
 
 	return (
 		<div
@@ -47,9 +50,10 @@ export const MostViewedRightWithAd = ({
 			{renderAds ? (
 				<AdSlot
 					position="right"
-					display={display}
+					display={format.display}
 					isPaidContent={isPaidContent}
 					shouldHideReaderRevenue={shouldHideReaderRevenue}
+					colourScheme={useDarkColourScheme ? 'dark' : 'light'}
 				/>
 			) : null}
 

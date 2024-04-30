@@ -780,7 +780,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							>
 								<RightColumn>
 									<MostViewedRightWithAd
-										display={format.display}
+										format={format}
 										isPaidContent={
 											article.pageType.isPaidContent
 										}

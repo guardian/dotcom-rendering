@@ -59,6 +59,7 @@ const epicStyles: SerializedStyles = css`
 
 		border-top: 1px solid ${themePalette('--apps-epic-border')};
 		background: ${themePalette('--apps-epic-background')};
+		color: ${themePalette('--apps-epic-text')};
 		padding: ${remSpace[3]};
 		${article17};
 		clear: left;
