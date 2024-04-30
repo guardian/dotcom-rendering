@@ -693,7 +693,6 @@ export const ArticleHeadline = ({
 												: themePalette(
 														'--headline-colour',
 												  )};
-											padding-bottom: ${space[9]}px;
 										`,
 									]}
 								>
