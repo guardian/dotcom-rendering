@@ -1,14 +1,8 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, screen } from '@testing-library/dom';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { AudioAtom } from './AudioAtom';
 
-const format = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
 const title = 'Q&A and Detective Wilson';
 describe('AudioAtom', () => {
 	it('should render', () => {
@@ -22,7 +16,6 @@ describe('AudioAtom', () => {
 				trackUrl="https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3"
 				kicker="Football Weekly Extra Extra"
 				title={title}
-				format={format}
 				duration={898}
 			/>,
 		);
@@ -40,7 +33,6 @@ describe('AudioAtom', () => {
 				trackUrl="https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3"
 				kicker="Football Weekly Extra Extra"
 				title={title}
-				format={format}
 				duration={898}
 			/>,
 		);
@@ -53,7 +45,6 @@ describe('AudioAtom', () => {
 				trackUrl="https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3"
 				kicker="Football Weekly Extra Extra"
 				title={title}
-				format={format}
 				duration={898}
 			/>,
 		);
@@ -67,7 +58,6 @@ describe('AudioAtom', () => {
 				trackUrl="https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3"
 				kicker="Football Weekly Extra Extra"
 				title={title}
-				format={format}
 				duration={898}
 			/>,
 		);

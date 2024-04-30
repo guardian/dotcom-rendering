@@ -70,7 +70,7 @@ export const LiveBlogRenderer = ({
 	const isWeb = renderingTarget === 'Web';
 
 	const filtered =
-		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
+		(!!selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
 
 	return (
 		<>

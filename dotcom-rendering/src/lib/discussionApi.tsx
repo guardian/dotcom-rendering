@@ -320,9 +320,7 @@ export const recommend =
 			method: 'POST',
 			headers: {
 				...options.headers,
-				...(authOptions.headers !== undefined
-					? authOptions.headers
-					: {}),
+				...(authOptions.headers ?? {}),
 			},
 			credentials: authOptions.credentials,
 		});
