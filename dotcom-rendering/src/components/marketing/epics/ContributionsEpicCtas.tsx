@@ -84,7 +84,6 @@ export const ContributionsEpicCtas: ReactComponent<
 				amountsVariantName={amountsVariantName}
 				numArticles={articleCounts.for52Weeks}
 			/>
-
 			{isReminderActive && showReminderFields && (
 				<ContributionsEpicReminder
 					initialEmailAddress={fetchedEmail}

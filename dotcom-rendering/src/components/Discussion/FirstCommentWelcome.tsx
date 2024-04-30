@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { headline, space, textSans } from '@guardian/source-foundations';
+import {
+	headlineBold20,
+	space,
+	textSans15,
+} from '@guardian/source-foundations';
 import { Link, TextInput } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { palette as schemedPalette } from '../../palette';
@@ -9,7 +13,7 @@ import { Preview } from './Preview';
 import { Row } from './Row';
 
 const textStyling = css`
-	${textSans.small()};
+	${textSans15};
 `;
 
 const linkStyles = css`
@@ -33,7 +37,7 @@ const textInputStyles = css`
 `;
 
 const h3Style = css`
-	${headline.xxsmall({ fontWeight: 'bold' })};
+	${headlineBold20};
 `;
 
 type Props = {

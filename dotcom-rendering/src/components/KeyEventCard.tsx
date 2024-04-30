@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, space, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	space,
+	textSans,
+	textSans15,
+} from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette } from '../palette';
 import { DateTime } from './DateTime';
@@ -89,7 +94,7 @@ const listItemStyles = css`
 `;
 
 const textStyles = css`
-	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
+	${textSans15};
 	color: ${palette('--key-event-text')};
 `;
 

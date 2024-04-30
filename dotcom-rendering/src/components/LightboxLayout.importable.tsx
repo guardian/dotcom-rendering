@@ -3,7 +3,7 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans14,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -166,7 +166,7 @@ const Selection = ({
 					padding-top: 2.25rem;
 					margin-bottom: ${space[1]}px;
 				}
-				${textSans.xsmall()};
+				${textSans14};
 				color: ${palette.neutral[86]};
 				${until.tablet} {
 					margin-bottom: ${space[2]}px;

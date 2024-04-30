@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	headline,
+	headlineMedium17,
 	palette,
 	text,
-	textSans,
+	textSans12,
 } from '@guardian/source-foundations';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { RichLinkBlockElement } from '../types/content';
@@ -27,13 +27,13 @@ const richLink = css`
 	font-weight: 500;
 	border: 0;
 	text-decoration: none;
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	word-wrap: break-word;
 	:hover {
 		text-decoration: underline;
 	}
 	::before {
-		${textSans.xxsmall()};
+		${textSans12};
 		content: 'More on this topic';
 		display: block;
 		color: ${text.supporting};

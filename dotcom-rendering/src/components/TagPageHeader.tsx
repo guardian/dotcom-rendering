@@ -2,7 +2,8 @@ import { css, jsx } from '@emotion/react';
 import {
 	breakpoints,
 	from,
-	headline,
+	headlineBold20,
+	headlineMedium17,
 	palette,
 	space,
 	until,
@@ -190,12 +191,12 @@ const titleContainerStyle = css`
 `;
 
 const paragraphStyle = css`
-	${headline.xxxsmall()}
+	${headlineMedium17}
 	color: ${palette.neutral[46]};
 `;
 
 const titleStyle = css`
-	${headline.xxsmall({ fontWeight: 'bold' })};
+	${headlineBold20};
 	color: ${palette.neutral[7]};
 	padding-bottom: ${space[1]}px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, palette, space, textSans } from '@guardian/source-foundations';
+import { from, palette, space, textSans15 } from '@guardian/source-foundations';
 import {
 	Hide,
 	LinkButton,
@@ -120,18 +120,16 @@ export const Pagination = ({
 					)}
 				</section>
 			)}
-
 			<section
 				style={{ gridArea: 'position' }}
 				css={css`
-					${textSans.small()}
+					${textSans15}
 				`}
 			>
 				<strong css={bold}>{currentPage}</strong>
 				&nbsp;of&nbsp;
 				<strong css={bold}>{totalPages}</strong>
 			</section>
-
 			{currentPage !== totalPages && (
 				<section
 					style={{ gridArea: 'older', justifySelf: 'end' }}

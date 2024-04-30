@@ -1,7 +1,13 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { from, space, textSans, until } from '@guardian/source-foundations';
+import {
+	from,
+	space,
+	textSans,
+	textSans14,
+	until,
+} from '@guardian/source-foundations';
 import { palette } from '../palette';
 import CameraSvg from '../static/icons/camera.svg';
 import VideoSvg from '../static/icons/video-icon.svg';
@@ -24,7 +30,7 @@ type IconProps = {
 };
 
 const captionStyle = css`
-	${textSans.xsmall()};
+	${textSans14};
 	line-height: 135%;
 	padding-top: 6px;
 	overflow-wrap: break-word;

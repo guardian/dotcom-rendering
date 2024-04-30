@@ -479,7 +479,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					)}
 				</>
 			)}
-
 			<main
 				data-layout="ShowcaseLayout"
 				id="maincontent"
@@ -932,7 +931,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 			</main>
-
 			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
@@ -947,7 +945,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				</Section>
 			)}
-
 			{isWeb && (
 				<>
 					<Section
@@ -1000,7 +997,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					<MobileStickyContainer />
 				</>
 			)}
-
 			{isApps && (
 				<Section
 					fullWidth={true}

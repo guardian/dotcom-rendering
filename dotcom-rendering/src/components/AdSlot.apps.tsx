@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { remSpace, textSans, until } from '@guardian/source-foundations';
+import {
+	remSpace,
+	textSans14,
+	textSans15,
+	until,
+} from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
@@ -23,7 +28,7 @@ const styles = css`
 `;
 
 const adLabelsStyles = css`
-	${textSans.xsmall()}
+	${textSans14}
 	padding: ${remSpace[3]};
 	float: left;
 
@@ -62,7 +67,7 @@ const supportBannerStyles = css`
 	background-color: ${palette('--ad-support-banner-background')};
 
 	p {
-		${textSans.small()};
+		${textSans15};
 		color: ${palette('--ad-support-banner-text')};
 		font-weight: bold;
 		margin-top: 0;

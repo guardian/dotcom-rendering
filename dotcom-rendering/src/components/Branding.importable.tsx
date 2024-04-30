@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { breakpoints, from, textSans } from '@guardian/source-foundations';
+import { breakpoints, from, textSans12 } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
 import { getOphanComponents } from '../lib/labs';
 import { palette } from '../palette';
@@ -12,7 +12,7 @@ const brandingStyle = css`
 `;
 
 const labelStyle = css`
-	${textSans.xxsmall()}
+	${textSans12}
 	color: ${palette('--branding-label-text')};
 
 	a {
@@ -38,7 +38,7 @@ const brandingLogoStyle = css`
 `;
 
 const aboutLinkStyle = css`
-	${textSans.xxsmall()}
+	${textSans12}
 	display: block;
 	text-decoration: none;
 

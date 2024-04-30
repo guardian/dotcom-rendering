@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { headline, palette, textSans } from '@guardian/source-foundations';
+import {
+	headlineMedium20,
+	palette,
+	textSans12,
+} from '@guardian/source-foundations';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { decideTheme } from '../lib/decideTheme';
 import { getSharingUrls } from '../lib/sharing-urls';
@@ -24,7 +28,7 @@ const bodyStyle = css`
 	background-color: ${palette.neutral[97]};
 
 	h2 {
-		${headline.xxsmall()};
+		${headlineMedium20};
 		font-weight: 500;
 		margin-block-start: 0.83em;
 		margin-block-end: 0.83em;
@@ -55,7 +59,7 @@ const updateButtonStyle = css`
 		background-color: ${palette.news[400]};
 		color: ${palette.neutral[100]};
 		font-weight: bold;
-		${textSans.xxsmall()};
+		${textSans12};
 
 		display: flex;
 		justify-content: space-between;

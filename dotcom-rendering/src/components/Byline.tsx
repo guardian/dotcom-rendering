@@ -1,6 +1,15 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import { headline, textSans, until } from '@guardian/source-foundations';
+import {
+	headlineMediumItalic17,
+	headlineMediumItalic20,
+	headlineMediumItalic24,
+	headlineMediumItalic28,
+	textSansItalic17,
+	textSansItalic20,
+	textSansItalic24,
+	until,
+} from '@guardian/source-foundations';
 import { palette } from '../palette';
 
 type Props = {
@@ -11,7 +20,6 @@ type Props = {
 
 const baseStyles = css`
 	display: block;
-	font-style: italic;
 	color: ${palette('--byline')};
 `;
 
@@ -21,67 +29,67 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 		case 'huge':
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans.xlarge()};
+					${textSansItalic24};
 					font-size: 24px;
 					line-height: 24px;
 					${until.desktop} {
-						${textSans.xlarge()};
+						${textSansItalic24};
 						line-height: 20px;
 					}
 				`;
 			}
 			return css`
-				${headline.small()};
+				${headlineMediumItalic28};
 				${until.desktop} {
-					${headline.xsmall()};
+					${headlineMediumItalic24};
 				}
 			`;
 		case 'large': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans.large()};
+					${textSansItalic20};
 					font-size: 24px;
 					line-height: 24px;
 					${until.desktop} {
-						${textSans.large()};
+						${textSansItalic20};
 						line-height: 20px;
 					}
 				`;
 			}
 			return css`
-				${headline.xsmall()};
+				${headlineMediumItalic24};
 				${until.desktop} {
-					${headline.xxsmall()};
+					${headlineMediumItalic20};
 				}
 			`;
 		}
 		case 'medium': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans.large()};
+					${textSansItalic20};
 					line-height: 20px;
 					${until.desktop} {
-						${textSans.medium()};
+						${textSansItalic17};
 						line-height: 18px;
 					}
 				`;
 			}
 			return css`
-				${headline.xxsmall()};
+				${headlineMediumItalic20};
 				${until.desktop} {
-					${headline.xxxsmall()};
+					${headlineMediumItalic17};
 				}
 			`;
 		}
 		case 'small': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`
-					${textSans.medium()};
+					${textSansItalic17};
 					line-height: 18px;
 				`;
 			}
 			return css`
-				${headline.xxxsmall()};
+				${headlineMediumItalic17};
 			`;
 		}
 		case 'tiny':

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, textSans } from '@guardian/source-foundations';
+import { from, palette, textSansBold17 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import type { EditionId } from '../lib/edition';
@@ -21,7 +21,7 @@ const printSubscriptionStyles = css`
 const linkStyles = css`
 	display: flex;
 	align-items: center;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	font-size: 1rem;
 	height: fit-content;
 	line-height: 1;

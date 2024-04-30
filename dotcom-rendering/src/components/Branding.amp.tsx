@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { textSans12 } from '@guardian/source-foundations';
 import React from 'react';
 import { isEditionId } from '../lib/edition';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
@@ -25,12 +25,12 @@ const brandingStyle = (pillar: ArticleTheme) => css`
 	a, a:hover {
 		display: block;
 		border-bottom: none;
-		${textSans.xxsmall()}
+		${textSans12}
 	}
 `;
 
 const brandingLabelStyle = css`
-	${textSans.xxsmall()};
+	${textSans12};
 `;
 
 const brandingLogoStyle = css`

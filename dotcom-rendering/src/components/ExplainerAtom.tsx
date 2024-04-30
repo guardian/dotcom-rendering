@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, space, textSans } from '@guardian/source-foundations';
+import { headlineBold20, space, textSans } from '@guardian/source-foundations';
 import { palette } from '../palette';
 
 interface Props {
@@ -43,7 +43,7 @@ const Container = ({
 const Title = ({ title }: { title: string }) => (
 	<h3
 		css={css`
-			${headline.xxsmall({ fontWeight: 'bold' })}
+			${headlineBold20};
 			margin-top: ${space[2]}px;
 		`}
 	>

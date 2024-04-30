@@ -2,10 +2,11 @@ import { css } from '@emotion/react';
 import {
 	brandText,
 	from,
-	headline,
+	headlineMedium20,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSans17,
+	textSans20,
 } from '@guardian/source-foundations';
 import {
 	Button,
@@ -63,7 +64,7 @@ const desktopBrandExtensionColumn = css`
 const brandExtensionList = css`
 	width: 131px;
 	box-sizing: border-box;
-	${textSans.medium()};
+	${textSans17};
 	flex-wrap: wrap;
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
@@ -97,7 +98,7 @@ const brandExtensionListItem = css`
 `;
 
 const brandExtensionLink = css`
-	${headline.xxsmall()};
+	${headlineMedium20};
 	font-weight: 700;
 	background-color: transparent;
 	border: 0;
@@ -147,7 +148,7 @@ const searchBar = css`
 `;
 
 const searchInput = css`
-	${textSans.large()}
+	${textSans20}
 	background-color: rgba(255,255,255, .1);
 	border: 0;
 	border-radius: 1000px;

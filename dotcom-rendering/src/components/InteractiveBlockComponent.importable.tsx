@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import { body, space, textSans } from '@guardian/source-foundations';
+import { article17, space, textSans17 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -103,7 +103,7 @@ const wrapperStyle = ({
 	role: RoleType;
 	loaded: boolean;
 }) => css`
-	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
+	${format.theme === ArticleSpecial.Labs ? textSans17 : article17}
 	background-color: ${themePalette('--interactive-block-background')};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;

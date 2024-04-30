@@ -1,21 +1,23 @@
 import { css } from '@emotion/react';
 import {
 	palette as sourcePalette,
-	textSans,
+	textSans17,
+	textSansBold17,
+	textSansItalic15,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import type { CampaignFieldType } from '../../../types/content';
 
 const fieldLabelStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const fieldDescription = css`
-	${textSans.medium()}
+	${textSans17}
 `;
 
 const optionalTextStyles = css`
-	${textSans.small({ fontStyle: 'italic' })}
+	${textSansItalic15}
 	color: ${sourcePalette.neutral[46]};
 	padding-left: 5px;
 `;
