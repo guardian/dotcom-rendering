@@ -32,6 +32,7 @@ const articleWidth = (format: ArticleFormat) => {
 				${from.desktop} {
 					width: 620px;
 				}
+				/* Make the video player as wide as possible on larger screens */
 				${from.wide} {
 					width: 688px;
 				}
