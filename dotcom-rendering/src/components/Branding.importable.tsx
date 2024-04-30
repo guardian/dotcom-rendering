@@ -78,9 +78,11 @@ function decideLogo(
 	 *  so fallback to standard logo if not present */
 	const maybeDarkLogo = branding.logoForDarkBackground ?? branding.logo;
 
-	const isMedia =
+	const useDarkColourScheme =
 		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.Audio;
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Picture;
 
 	return (
 		<picture>
@@ -110,7 +112,7 @@ function decideLogo(
 			 * Audio/Video articles have a dark background and need a logo designed for dark backgrounds,
 			 * for everything else default to standard logo for light backgrounds
 			 **/}
-			{isMedia && branding.logoForDarkBackground ? (
+			{useDarkColourScheme && branding.logoForDarkBackground ? (
 				<img
 					width={branding.logoForDarkBackground.dimensions.width}
 					height={branding.logoForDarkBackground.dimensions.height}
