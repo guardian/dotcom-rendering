@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { until } from '@guardian/source-foundations';
+import { space, until } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
@@ -34,7 +34,7 @@ const noGutters = css`
 `;
 
 const padBottom = css`
-	padding-bottom: 6px;
+	padding-bottom: ${space[1]};
 `;
 
 const immersiveWrapper = css`
