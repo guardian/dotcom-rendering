@@ -9,10 +9,6 @@ import { svgr } from '../webpack/svg.cjs';
 saveStories();
 
 const config: StorybookConfig = {
-	features: {
-		// used in composition
-		buildStoriesJson: true,
-	},
 	stories: [
 		'../src/**/*.stories.@(tsx)',
 		'../stories/**/*.stories.@(tsx)',
