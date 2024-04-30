@@ -94,7 +94,7 @@
 		"@types/lodash.debounce": "4.0.7",
 		"@types/lodash.get": "4.4.7",
 		"@types/node": "20.12.7",
-		"@types/qs": "6.9.7",
+		"@types/qs": "6.9.15",
 		"@types/react": "18.2.45",
 		"@types/react-dom": "18.2.17",
 		"@types/react-google-recaptcha": "2.1.5",
