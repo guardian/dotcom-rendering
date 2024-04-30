@@ -33,25 +33,28 @@ type DefaultProps = {
 // TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
+// for dark ad labels
+type ColourScheme = 'light' | 'dark';
+
 type InlineProps = {
 	position: InlinePosition;
+	colourScheme?: ColourScheme;
 	index: number;
 	shouldHideReaderRevenue?: never;
-	isDark?: never;
 };
 
 type RightProps = {
 	position: 'right';
+	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue: boolean;
-	isDark?: boolean;
 };
 
 type RemainingProps = {
 	position: Exclude<SlotNamesWithPageSkin, InlinePosition | 'right'>;
+	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue?: never;
-	isDark?: never;
 };
 
 /**
@@ -447,7 +450,7 @@ export const AdSlot = ({
 	index,
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
-	isDark = false,
+	colourScheme = 'light',
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -504,7 +507,7 @@ export const AdSlot = ({
 										max-height: 100%;
 									`,
 									labelStyles,
-									isDark && darkLabelStyles,
+									colourScheme === 'dark' && darkLabelStyles,
 								]}
 							>
 								<div

@@ -28,7 +28,7 @@ export const MostViewedRightWithAd = ({
 	const componentDataAttribute = 'most-viewed-right-container';
 	const { renderingTarget } = useConfig();
 	const isApps = renderingTarget === 'Apps';
-	const isMedia =
+	const useDarkColourScheme =
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
 
@@ -53,7 +53,7 @@ export const MostViewedRightWithAd = ({
 					display={format.display}
 					isPaidContent={isPaidContent}
 					shouldHideReaderRevenue={shouldHideReaderRevenue}
-					isDark={isMedia}
+					colourScheme={useDarkColourScheme ? 'dark' : 'light'}
 				/>
 			) : null}
 
