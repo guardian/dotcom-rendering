@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import {
 	brandText,
 	from,
-	headline,
+	headlineMedium24,
 	palette as sourcePalette,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -41,7 +41,7 @@ const showMoreTextStyles = css`
 `;
 
 const openExpandedMenuStyles = (isImmersive: boolean) => css`
-	${headline.xsmall()};
+	${headlineMedium24};
 	font-weight: 300;
 	color: ${brandText.primary};
 	cursor: pointer;

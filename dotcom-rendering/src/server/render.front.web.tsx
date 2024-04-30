@@ -3,6 +3,7 @@ import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
 import { TagPage } from '../components/TagPage';
 import {
+	ASSET_ORIGIN,
 	generateScriptTags,
 	getModulesBuild,
 	getPathFromManifest,
@@ -80,7 +81,11 @@ export const renderFront = ({
 	const enhancedNAV = enhanceNav(NAV);
 
 	// Fronts are not supported in Apps
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+		assetOrigin: ASSET_ORIGIN,
+	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -168,7 +173,11 @@ export const renderTagPage = ({
 	const enhancedNAV = enhanceNav(NAV);
 
 	// Fronts are not supported in Apps
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+		assetOrigin: ASSET_ORIGIN,
+	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>

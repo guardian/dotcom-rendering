@@ -19,7 +19,7 @@ const readerRevenueLinks = {
 export const defaultStory = () => {
 	return (
 		<Header
-			editionId="UK"
+			editionId={'UK'}
 			idUrl="https://profile.theguardian.com"
 			mmaUrl="https://manage.theguardian.com"
 			discussionApiUrl="https://discussion.theguardian.com/discussion-api"

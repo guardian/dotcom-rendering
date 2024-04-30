@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { headline, palette } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	headlineMedium28,
+	palette,
+} from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
 import { getAgeWarning } from '../lib/age-warning';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
@@ -14,14 +18,14 @@ import { StarRating } from './StarRating.amp';
 import { TopMetaExtras } from './TopMetaExtras.amp';
 
 const headerStyle = css`
-	${headline.small()};
+	${headlineMedium28};
 	font-weight: 500;
 	padding-bottom: 24px;
 	padding-top: 3px;
 	color: ${palette.neutral[7]};
 `;
 const bylineStyle = (pillar: ArticleTheme) => css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	padding-bottom: 8px;
 	font-style: italic;

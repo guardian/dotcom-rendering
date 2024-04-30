@@ -22,6 +22,7 @@ export const OneTrail = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 1)}
@@ -36,6 +37,7 @@ export const TwoTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 2)}
@@ -50,6 +52,7 @@ export const ThreeTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 3)}
@@ -64,6 +67,7 @@ export const FourTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 4)}
@@ -78,6 +82,7 @@ export const FiveTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 5)}
@@ -92,6 +97,7 @@ export const SixTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 6)}
@@ -106,6 +112,7 @@ export const SevenTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 7)}
@@ -120,6 +127,7 @@ export const EightTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 8)}
@@ -134,6 +142,7 @@ export const NineTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 9)}

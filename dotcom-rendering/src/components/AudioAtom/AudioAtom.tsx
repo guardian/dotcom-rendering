@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { focusHalo, headline, textSans } from '@guardian/source-foundations';
+import {
+	focusHalo,
+	headlineBold17,
+	headlineMedium17,
+	textSans15,
+} from '@guardian/source-foundations';
 import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { palette } from '../../palette';
@@ -25,11 +30,11 @@ const wrapperStyles = css`
 
 const kickerStyle = css`
 	color: ${palette('--audio-atom-kicker')};
-	${headline.xxxsmall({ fontWeight: 'bold' })};
+	${headlineBold17};
 `;
 
 const titleStyle = css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 `;
 
 const audioBodyStyle = css`
@@ -142,7 +147,7 @@ const timeDurationStyle = css`
 `;
 
 const timeStyles = css`
-	${textSans.small()}
+	${textSans15}
 `;
 
 const formatNum = (t: number) => t.toFixed(0).padStart(2, '0');

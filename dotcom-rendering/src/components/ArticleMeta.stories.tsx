@@ -417,3 +417,32 @@ export const Dateline: StoryObj = ({ format }: StoryArgs) => {
 };
 Dateline.storyName = 'With no secondary dateline';
 Dateline.decorators = [splitTheme()];
+
+export const Video: StoryObj = ({ format }: StoryArgs) => {
+	return (
+		<Wrapper>
+			<ArticleMeta
+				format={format}
+				pageId=""
+				webTitle=""
+				source="TMN"
+				tags={[]}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline=""
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+Video.storyName = 'Video with source';
+Video.decorators = [
+	splitTheme(
+		getAllThemes({
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Video,
+		}),
+	),
+];

@@ -34,7 +34,7 @@ export const Header = () => {
 	return (
 		<Wrapper>
 			<ReaderRevenueLinks
-				editionId="UK"
+				editionId={'UK'}
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={true}
@@ -56,7 +56,7 @@ export const HeaderMobile = () => {
 	return (
 		<Wrapper>
 			<ReaderRevenueLinks
-				editionId="UK"
+				editionId={'UK'}
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={true}
@@ -78,7 +78,7 @@ export const Footer = () => {
 	return (
 		<Wrapper>
 			<ReaderRevenueLinks
-				editionId="UK"
+				editionId={'UK'}
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={false}
@@ -100,7 +100,7 @@ export const FooterMobile = () => {
 	return (
 		<Wrapper>
 			<ReaderRevenueLinks
-				editionId="UK"
+				editionId={'UK'}
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={false}

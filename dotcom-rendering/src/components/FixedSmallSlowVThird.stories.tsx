@@ -22,6 +22,7 @@ export const Default = () => (
 	<FrontSection
 		title="Fixed Small Slow V Third"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallSlowVThird
 			trails={trails}

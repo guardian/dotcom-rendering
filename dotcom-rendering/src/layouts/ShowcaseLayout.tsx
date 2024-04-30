@@ -261,7 +261,16 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											padSides={false}
 											shouldCenter={false}
 										>
-											<HeaderAdSlot />
+											<HeaderAdSlot
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												shouldHideReaderRevenue={
+													!!article.config
+														.shouldHideReaderRevenue
+												}
+											/>
 										</Section>
 									</Stuck>
 								)}
@@ -407,7 +416,16 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											showSideBorders={false}
 											padSides={false}
 										>
-											<HeaderAdSlot />
+											<HeaderAdSlot
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												shouldHideReaderRevenue={
+													!!article.config
+														.shouldHideReaderRevenue
+												}
+											/>
 										</Section>
 									</Stuck>
 								)}
@@ -461,7 +479,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					)}
 				</>
 			)}
-
 			<main
 				data-layout="ShowcaseLayout"
 				id="maincontent"
@@ -760,11 +777,15 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							>
 								<RightColumn>
 									<MostViewedRightWithAd
-										display={format.display}
+										format={format}
 										isPaidContent={
 											article.pageType.isPaidContent
 										}
 										renderAds={renderAds}
+										shouldHideReaderRevenue={
+											!!article.config
+												.shouldHideReaderRevenue
+										}
 									/>
 								</RightColumn>
 							</div>
@@ -907,7 +928,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 			</main>
-
 			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
@@ -922,7 +942,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				</Section>
 			)}
-
 			{isWeb && (
 				<>
 					<Section
@@ -975,7 +994,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					<MobileStickyContainer />
 				</>
 			)}
-
 			{isApps && (
 				<Section
 					fullWidth={true}

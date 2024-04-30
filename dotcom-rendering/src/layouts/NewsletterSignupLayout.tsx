@@ -6,7 +6,7 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSansBold17,
 	until,
 } from '@guardian/source-foundations';
 import {
@@ -129,7 +129,7 @@ const previewCaptionStyle = css`
 	align-items: center;
 	background-color: ${sourcePalette.brandAlt[400]};
 	padding: ${space[1]}px ${space[3]}px;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	text-decoration: none;
 
 	:hover {
@@ -159,7 +159,7 @@ const topMarginStyle = (marginTop: number = space[2]): SerializedStyles => css`
 `;
 
 const shareSpanStyle = css`
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	margin-right: ${space[4]}px;
 `;
 
@@ -223,7 +223,12 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot />
+							<HeaderAdSlot
+								isPaidContent={!!article.config.isPaidContent}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+							/>
 						</Section>
 					</Stuck>
 				)}

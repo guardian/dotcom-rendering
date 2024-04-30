@@ -22,6 +22,7 @@ export const OneTrail = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 1)} imageLoading="eager" />
 	</FrontSection>
@@ -32,6 +33,7 @@ export const TwoTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 2)} imageLoading="eager" />
 	</FrontSection>
@@ -42,6 +44,7 @@ export const ThreeTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 3)} imageLoading="eager" />
 	</FrontSection>
@@ -52,6 +55,7 @@ export const FourTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 4)} imageLoading="eager" />
 	</FrontSection>
@@ -62,6 +66,7 @@ export const FiveTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 5)} imageLoading="eager" />
 	</FrontSection>
@@ -72,6 +77,7 @@ export const SixTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 6)} imageLoading="eager" />
 	</FrontSection>
@@ -82,6 +88,7 @@ export const SevenTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 7)} imageLoading="eager" />
 	</FrontSection>
@@ -92,6 +99,7 @@ export const EightTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 8)} imageLoading="eager" />
 	</FrontSection>
@@ -102,6 +110,7 @@ export const NineTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 9)} imageLoading="eager" />
 	</FrontSection>
@@ -112,6 +121,7 @@ export const TenTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 10)} imageLoading="eager" />
 	</FrontSection>
@@ -122,6 +132,7 @@ export const ElevenTrails = () => (
 	<FrontSection
 		title="Fixed Medium Fast XI"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 11)} imageLoading="eager" />
 	</FrontSection>

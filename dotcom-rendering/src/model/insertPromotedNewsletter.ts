@@ -1,4 +1,5 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, isOneOf } from '@guardian/libs';
 import { logger } from '../server/lib/logging';
 import type { FEElement, Newsletter } from '../types/content';
 
@@ -89,19 +90,20 @@ const checkIfAfterText = (index: number, elements: FEElement[]): boolean =>
 	elements[index - 1]?._type ===
 	'model.dotcomrendering.pageElements.TextBlockElement';
 
+const listElements = [
+	'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
+	'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
+	'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+	'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
+] as const;
+
+const isListElement = isOneOf(listElements);
+
 const checkIfAfterNestedListElement = (
 	index: number,
 	elements: FEElement[],
 ): boolean => {
-	switch (elements[index - 1]?._type) {
-		case 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement':
-		case 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement':
-		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement':
-		case 'model.dotcomrendering.pageElements.DCRTimelineBlockElement':
-			return true;
-		default:
-			return false;
-	}
+	return !elements.slice(index).some(({ _type }) => isListElement(_type));
 };
 
 const getDistanceAfterFloating = (
@@ -138,7 +140,8 @@ const getDistanceAfterFloating = (
 };
 
 const placeIsSuitable = (place: PlaceInArticle): boolean =>
-	(place.isAfterText || place.isAfterListElement) &&
+	place.isAfterText &&
+	place.isAfterListElement &&
 	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT &&
 	place.distanceFromTarget <= MAXIMUM_DISTANCE_FROM_MIDDLE;
 

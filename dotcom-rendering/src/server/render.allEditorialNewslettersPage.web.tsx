@@ -1,6 +1,7 @@
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
+	ASSET_ORIGIN,
 	generateScriptTags,
 	getModulesBuild,
 	getPathFromManifest,
@@ -24,7 +25,11 @@ export const renderEditorialNewslettersPage = ({
 	const NAV = extractNAV(newslettersPage.nav);
 
 	// The newsletters page is currently only supported on Web
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+		assetOrigin: ASSET_ORIGIN,
+	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>

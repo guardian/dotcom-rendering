@@ -67,6 +67,7 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 		cardInTagPage: true,
 		pageId: data.pageId,
 		discussionApiUrl: data.config.discussionApiUrl,
+		editionId: data.editionId,
 	});
 	const speed = getSpeedFromTrails(data.contents);
 

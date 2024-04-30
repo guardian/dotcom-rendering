@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, text } from '@guardian/source-foundations';
+import { headlineBold34, text } from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
@@ -36,7 +36,7 @@ const Bar = ({
 }) => (
 	<div
 		css={css`
-			${headline.medium({ fontWeight: 'bold' })}
+			${headlineBold34}
 			color: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 			background: ${background};
 			flex-grow: ${width};

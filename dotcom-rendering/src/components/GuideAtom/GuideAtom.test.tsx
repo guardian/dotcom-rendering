@@ -8,7 +8,11 @@ describe('GuideAtom', () => {
 	it('should render', () => {
 		const { getByText, queryByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<GuideAtom {...defaultStory} />
 			</ConfigProvider>,
@@ -29,7 +33,11 @@ describe('GuideAtom', () => {
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<GuideAtom {...defaultStory} />
 			</ConfigProvider>,
@@ -51,7 +59,11 @@ describe('GuideAtom', () => {
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<GuideAtom {...defaultStory} />
 			</ConfigProvider>,

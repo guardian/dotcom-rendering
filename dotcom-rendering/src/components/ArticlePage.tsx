@@ -95,8 +95,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
-	const webLightbox =
-		renderingTarget === 'Web' && !!article.config.switches.lightbox;
+	const isWeb = renderingTarget === 'Web';
+	const webLightbox = isWeb && !!article.config.switches.lightbox;
 
 	return (
 		<StrictMode>
@@ -107,8 +107,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					renderingTarget,
 				)}
 			/>
-			<SkipTo id="maincontent" label="Skip to main content" />
-			<SkipTo id="navigation" label="Skip to navigation" />
+			{isWeb && (
+				<>
+					<SkipTo id="maincontent" label="Skip to main content" />
+					<SkipTo id="navigation" label="Skip to navigation" />
+				</>
+			)}
 			{webLightbox && article.imagesForLightbox.length > 0 && (
 				<>
 					<Island priority="feature" defer={{ until: 'hash' }}>

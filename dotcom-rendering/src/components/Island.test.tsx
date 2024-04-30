@@ -93,7 +93,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<BrazeMessaging idApiUrl={''} />
 				</ConfigProvider>,
@@ -119,7 +123,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<DiscussionMeta
 						discussionApiUrl={''}
@@ -135,7 +143,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<DiscussionLayout
 						discussionApiUrl="https://discussion.theguardian.com/discussion-api"
@@ -161,7 +173,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<EnhancePinnedPost />
 				</ConfigProvider>,
@@ -176,7 +192,7 @@ describe('Island: server-side rendering', () => {
 	test('InteractiveSupportButton', () => {
 		expect(() =>
 			renderToString(
-				<InteractiveSupportButton editionId="UK" subscribeUrl="" />,
+				<InteractiveSupportButton editionId={'UK'} subscribeUrl="" />,
 			),
 		).not.toThrow();
 	});
@@ -185,7 +201,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<OnwardsUpper
 						contentType=""
@@ -204,7 +224,7 @@ describe('Island: server-side rendering', () => {
 							display: ArticleDisplay.Standard,
 						}}
 						pillar={Pillar.News}
-						editionId="UK"
+						editionId={'UK'}
 						shortUrlId=""
 						discussionApiUrl=""
 					/>
@@ -274,7 +294,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<Metrics commercialMetricsEnabled={true} tests={{}} />
 				</ConfigProvider>,
@@ -322,7 +346,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<ReaderRevenueLinks
 						editionId={'UK'}
@@ -355,7 +383,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<SetABTests
 						isDev={false}
@@ -389,7 +421,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<SignInGateSelector
 						contentType={''}
@@ -408,7 +444,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<SlotBodyEnd
 						contentType={''}
@@ -435,7 +475,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<StickyBottomBanner
 						contentType=""
@@ -461,7 +505,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<SupportTheG
 						editionId={'UK'}
@@ -484,7 +532,11 @@ describe('Island: server-side rendering', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
 				>
 					<ShareButton
 						pageId={'123'}

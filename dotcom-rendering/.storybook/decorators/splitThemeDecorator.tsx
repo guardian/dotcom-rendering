@@ -10,7 +10,8 @@ import {
 import {
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSans17,
+	textSansBold20,
 } from '@guardian/source-foundations';
 import { Decorator } from '@storybook/react';
 import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
@@ -20,7 +21,7 @@ interface Orientation {
 }
 
 const headerCss = css`
-	${textSans.large({ fontWeight: 'bold' })}
+	${textSansBold20};
 	text-align: center;
 	padding: ${space[2]}px;
 `;
@@ -33,7 +34,7 @@ const styles = css`
 const FormatHeading = ({ format }: { format: ArticleFormat }) => (
 	<h3
 		css={css`
-			${textSans.medium()}
+			${textSans17};
 			text-align: center;
 			padding: ${space[1]}px;
 			opacity: 0.75;

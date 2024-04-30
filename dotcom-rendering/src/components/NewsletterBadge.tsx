@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { headline, palette } from '@guardian/source-foundations';
+import { headlineBold28, palette } from '@guardian/source-foundations';
 
 // Note - the font-size is non-standard since the pixels are
 // relative to the SVG viewbox and need to be this size
 // to fix the design (the text will scale with the SVG)
 const textStyle = css`
-	${headline.small({ fontWeight: 'bold' })};
+	${headlineBold28};
 	font-size: 122%;
 	letter-spacing: -0.5px;
 	fill: ${palette.brandAlt[400]};

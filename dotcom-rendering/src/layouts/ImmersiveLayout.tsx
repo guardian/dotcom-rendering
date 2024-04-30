@@ -789,6 +789,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 															article.pageType
 																.isPaidContent
 														}
+														shouldHideReaderRevenue={
+															!!article.config
+																.shouldHideReaderRevenue
+														}
 													/>
 												}
 											</div>

@@ -15,7 +15,11 @@ describe('App', () => {
 	it('should not render the comment form if user is logged out', async () => {
 		render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Discussion
 					user={undefined}

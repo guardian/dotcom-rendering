@@ -61,6 +61,7 @@ export interface ConfigType extends CommercialConfigType {
 	videoDuration?: number;
 	edition: EditionId;
 	section: string;
+	source?: string;
 
 	sharedAdTargeting: SharedAdTargeting;
 	isPaidContent?: boolean;

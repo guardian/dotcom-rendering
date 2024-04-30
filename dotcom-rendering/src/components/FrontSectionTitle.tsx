@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, textSans, until } from '@guardian/source-foundations';
+import { from, palette, textSans12, until } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type { CollectionBranding } from '../types/branding';
@@ -17,7 +17,7 @@ const titleStyle = css`
 `;
 
 const labelStyles = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	line-height: 1rem;
 	color: ${palette.neutral[46]};
 	font-weight: bold;
@@ -29,7 +29,7 @@ const labelStyles = css`
 `;
 
 const aboutThisLinkStyles = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	line-height: 11px;
 	color: ${palette.neutral[46]};
 	font-weight: normal;
@@ -77,7 +77,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 							css={css`
 								display: inline-block;
 								border-top: 1px dotted ${palette.neutral[86]};
-								${textSans.xxsmall()}
+								${textSans12}
 								color: ${palette.neutral[46]};
 								font-weight: bold;
 
