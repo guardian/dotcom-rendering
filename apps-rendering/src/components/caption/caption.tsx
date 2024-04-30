@@ -9,6 +9,7 @@ import {
 	remSpace,
 	headlineMedium17,
 	textSans14,
+	textSansItalic14,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';
@@ -29,13 +30,10 @@ const headingStyles = css`
 `;
 
 const emStyles = css`
-	${textSans14};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	font-weight: 700;
-	font-style: italic;
+	${textSansItalic14};
+	> span {
+		font-style: italic;
+	}
 `;
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
@@ -51,7 +49,6 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
 const textStyles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans14};
 	color: ${text.figCaption(format)};
-
 	${darkModeCss`
 		color: ${text.figCaptionDark(format)};
 	`}

@@ -5,8 +5,8 @@ import { ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	remSpace,
-	textSans20,
-	headlineMedium20,
+	textSansItalic20,
+	headlineMediumItalic20,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';
@@ -44,9 +44,9 @@ const renderText = (
 
 const headlineBox = (format: ArticleFormat): SerializedStyles => css`
 	${format.theme === ArticleSpecial.Labs
-		? textSans20
-		: headlineMedium20} //@todo - this is incorrect
-	font-style: italic;
+		? textSansItalic20
+		: headlineMediumItalic20}
+	${format.theme !== ArticleSpecial.Labs && 'line-height: 1.4;'}
 
 	a {
 		color: inherit;
