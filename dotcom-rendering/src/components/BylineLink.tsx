@@ -148,7 +148,8 @@ const getRenderedTokens = (
 
 	if (
 		(design === ArticleDesign.Video || design === ArticleDesign.Audio) &&
-		source
+		isString(source) &&
+		source !== ''
 	) {
 		renderedTokens.push(
 			<>
