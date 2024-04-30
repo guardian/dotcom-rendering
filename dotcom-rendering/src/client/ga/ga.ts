@@ -105,7 +105,7 @@ export const sendPageView = async (): Promise<void> => {
 	ga(set, 'dimension9', GAData?.keywordIds);
 	ga(set, 'dimension10', GAData?.toneIds);
 	ga(set, 'dimension11', GAData?.seriesId);
-	ga(set, 'dimension16', !!userCookie ? 'true' : 'false';
+	ga(set, 'dimension16', userCookie ? 'true' : 'false');
 	ga(set, 'dimension21', getQueryParam('INTCMP', window.location.search)); // internal campaign code
 	ga(set, 'dimension22', getQueryParam('CMP_BUNIT', window.location.search)); // campaign business unit
 	ga(set, 'dimension23', getQueryParam('CMP_TU', window.location.search)); // campaign team
