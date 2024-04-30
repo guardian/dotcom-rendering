@@ -278,10 +278,8 @@ const decideBottomPadding = ({
 			return hasAvatar
 				? ''
 				: css`
-						// This isn't in Source yet
 						padding-bottom: 28px;
 						${from.tablet} {
-							// 36px
 							padding-bottom: ${space[9]}px;
 						}
 				  `;
