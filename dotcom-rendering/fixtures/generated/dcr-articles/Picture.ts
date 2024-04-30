@@ -88,7 +88,7 @@ export const Picture: DCRArticle = {
 					},
 				],
 			},
-			elementId: '21adb872-2163-4746-90ca-e15f59537edb',
+			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1574,22 +1574,6 @@ export const Picture: DCRArticle = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Quick cryptic',
-						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-					},
-					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1598,16 +1582,28 @@ export const Picture: DCRArticle = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 				],
 			},
@@ -1900,7 +1896,7 @@ export const Picture: DCRArticle = {
 				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
 			width: 3031,
 			height: 1819,
-			elementId: '21adb872-2163-4746-90ca-e15f59537edb',
+			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
 			displayCredit: true,
 			alt: "Nicola Jennings cartoon 26/4/21: Johnson covering walls of No 10 with 'Sleaze' paint",
 			credit: 'Illustration: Nicola Jennings/The Guardian',
@@ -1914,7 +1910,7 @@ export const Picture: DCRArticle = {
 			credit: 'Illustration: Nicola Jennings/The Guardian',
 			masterUrl:
 				'https://media.guim.co.uk/332083af16a1d51a7d6d70e0ad266f19ab57fd96/2_0_3031_1819/master/3031.jpg',
-			elementId: '21adb872-2163-4746-90ca-e15f59537edb',
+			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
 		},
 	],
 };

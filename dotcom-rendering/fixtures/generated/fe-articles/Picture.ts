@@ -88,7 +88,7 @@ export const Picture: FEArticleType = {
 					},
 				],
 			},
-			elementId: '21adb872-2163-4746-90ca-e15f59537edb',
+			elementId: '217323a6-ddcc-4e7e-b06f-e1ed27e6f344',
 			imageSources: [
 				{
 					weighting: 'inline',
@@ -1573,22 +1573,6 @@ export const Picture: FEArticleType = {
 						url: '/crosswords/series/quick',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Quick cryptic',
-						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-					},
-					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1597,16 +1581,28 @@ export const Picture: FEArticleType = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 				],
 			},
