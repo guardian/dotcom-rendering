@@ -13,6 +13,7 @@ import { adBlockAsk } from '../experiments/tests/ad-block-ask';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
@@ -20,6 +21,14 @@ import { useConfig } from './ConfigContext';
 type Props = {
 	commercialMetricsEnabled: boolean;
 	tests: ServerSideTests;
+};
+
+type AmIUsedLoggingEvent = {
+	label: string;
+	properties?: {
+		name: string;
+		value: string;
+	}[];
 };
 
 const sampling = 1 / 100;
@@ -168,6 +177,45 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 			pageViewId,
 			shouldBypassSampling,
 		],
+	);
+
+	useOnce(
+		function measurePrefersColorScheme() {
+			if (isDev) return;
+
+			if (!window.guardian.config.switches.sentinelLogger) return;
+
+			const endpoint = window.guardian.config.page.isDev
+				? '//logs.code.dev-guardianapis.com/log'
+				: '//logs.guardianapis.com/log';
+
+			const prefersDark = window.matchMedia(
+				'(prefers-color-scheme: dark)',
+			).matches;
+
+			const prefersLight = window.matchMedia(
+				'(prefers-color-scheme: light)',
+			).matches;
+
+			const prefersColorScheme: 'dark' | 'light' | 'unknown' = prefersDark
+				? 'dark'
+				: prefersLight
+				? 'light'
+				: 'unknown';
+
+			const event: AmIUsedLoggingEvent = {
+				label: 'dcr.amiused',
+				properties: [
+					{
+						name: 'prefersColorScheme',
+						value: prefersColorScheme,
+					},
+				],
+			};
+
+			window.navigator.sendBeacon(endpoint, JSON.stringify(event));
+		},
+		[isDev],
 	);
 
 	// We don’t render anything
