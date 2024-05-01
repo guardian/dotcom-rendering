@@ -651,12 +651,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					stretchRight={false}
 					showTopBorder={false}
-					backgroundColour={themePalette(
-						'--article-section-background',
-					)}
+					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					fontColour={themePalette('--article-section-title')}
 					padContent={false}
+					verticalMargins={false}
 				>
 					<div
 						css={css`
