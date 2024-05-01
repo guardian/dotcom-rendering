@@ -275,6 +275,19 @@ export const WebLiveBlogStandardNewsLight: Story = {
 	parameters: webParameters,
 };
 
+export const WebLiveBlogStandardLabsLight: Story = {
+	args: {
+		article: {
+			...LiveBlogStandardNewsFixture,
+			format: {
+				...LiveBlogStandardNewsFixture.format,
+				theme: 'Labs',
+			},
+		},
+	},
+	parameters: webParameters,
+};
+
 export const AppsLiveBlogStandardNewsLight: Story = {
 	args: {
 		article: LiveBlogStandardNewsFixture,
