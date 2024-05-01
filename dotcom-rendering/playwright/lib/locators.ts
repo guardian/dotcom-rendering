@@ -1,7 +1,7 @@
 import type { Locator, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 
-const TEN_SECONDS = 10_000;
+const TWENTY_SECONDS = 10_000;
 
 const expectToBeVisible = async (
 	page: Page,
@@ -9,7 +9,7 @@ const expectToBeVisible = async (
 	nth = 0,
 ): Promise<void> => {
 	await expect(page.locator(selector).nth(nth)).toBeVisible({
-		timeout: TEN_SECONDS,
+		timeout: TWENTY_SECONDS,
 	});
 };
 
@@ -19,7 +19,7 @@ const expectToNotBeVisible = async (
 	nth = 0,
 ): Promise<void> => {
 	await expect(page.locator(selector).nth(nth)).not.toBeVisible({
-		timeout: TEN_SECONDS,
+		timeout: TWENTY_SECONDS,
 	});
 };
 
@@ -29,7 +29,7 @@ const expectToExist = async (
 	count = 1,
 ): Promise<void> => {
 	await expect(page.locator(selector)).toHaveCount(count, {
-		timeout: TEN_SECONDS,
+		timeout: TWENTY_SECONDS,
 	});
 };
 
@@ -38,7 +38,7 @@ const expectToNotExist = async (
 	selector: string,
 ): Promise<void> => {
 	await expect(page.locator(selector)).toHaveCount(0, {
-		timeout: TEN_SECONDS,
+		timeout: TWENTY_SECONDS,
 	});
 };
 
@@ -47,14 +47,14 @@ const expectLocatorToExist = async (
 	locator: Locator,
 	count = 1,
 ): Promise<void> => {
-	await expect(locator).toHaveCount(count, { timeout: TEN_SECONDS });
+	await expect(locator).toHaveCount(count, { timeout: TWENTY_SECONDS });
 };
 
 const expectLocatorToNotExist = async (
 	page: Page,
 	locator: Locator,
 ): Promise<void> => {
-	await expect(locator).toHaveCount(0, { timeout: TEN_SECONDS });
+	await expect(locator).toHaveCount(0, { timeout: TWENTY_SECONDS });
 };
 
 export {
