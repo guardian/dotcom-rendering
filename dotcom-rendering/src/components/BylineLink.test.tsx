@@ -217,4 +217,73 @@ describe('BylineLink', () => {
 		expect(links.item(0).href).toContain(tags[0].id);
 		expect(links.item(1).href).toContain(tags[1].id);
 	});
+
+	it('should append a source on video articles', () => {
+		const byline = 'Eva Smith and friends';
+		const source = 'Reuters';
+		const tags: [TagType] = [
+			{
+				id: 'eva-smith',
+				type: 'Contributor',
+				title: 'Eva Smith',
+			},
+		];
+
+		const { container } = render(
+			<ConfigProvider
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
+			>
+				<BylineLink
+					byline={byline}
+					source={source}
+					tags={tags}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.News,
+					}}
+					isHeadline={false}
+				/>
+			</ConfigProvider>,
+		);
+
+		const links = container.querySelectorAll('a');
+		expect(container).toHaveTextContent(`${byline}, Source: ${source}`);
+		expect(links.length).toBe(1);
+	});
+
+	it('should render only a source on video articles if no byline', () => {
+		const source = 'Reuters';
+		const tags: [] = [];
+
+		const { container } = render(
+			<ConfigProvider
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
+			>
+				<BylineLink
+					source={source}
+					tags={tags}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: Pillar.News,
+					}}
+					isHeadline={false}
+				/>
+			</ConfigProvider>,
+		);
+
+		const links = container.querySelectorAll('a');
+
+		expect(container).toHaveTextContent(`Source: ${source}`);
+		expect(links.length).toBe(0);
+	});
 });
