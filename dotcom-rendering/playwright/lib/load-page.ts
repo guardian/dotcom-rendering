@@ -36,7 +36,7 @@ const loadPage = async (
 	);
 	// The default Playwright waitUntil: 'load' ensures all requests have completed
 	// Use 'domcontentloaded' to speed up tests and prevent hanging requests from timing out tests
-	await page.goto(`${BASE_URL}${path}`, { waitUntil });
+	await page.goto(`${BASE_URL}${path}#noadapt`, { waitUntil });
 };
 
 /**
