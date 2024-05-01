@@ -6,8 +6,8 @@ import {
 	brandAltBackground,
 	from,
 	remSpace,
+	textSans,
 	textSansBold17,
-	textSans17,
 } from '@guardian/source-foundations';
 import { MatchStatusIcon } from 'components/MatchStatusIcon';
 import { TeamScore } from 'components/TeamScore';
@@ -64,12 +64,7 @@ const leagueStyles = css`
 `;
 
 const stadiumStyles = css`
-	${textSans17};
-	/**
- * @TODO (2) Typography preset styles should not be overridden.
- * Please speak to your team's designer and update this to use a more appropriate preset.
-*/
-	font-style: normal;
+	${textSans.medium({ fontStyle: 'normal' })}
 `;
 
 const FootballScores: FC<Props> = ({

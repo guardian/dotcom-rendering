@@ -6,9 +6,10 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
+	headline,
 	neutral,
 	remSpace,
-	textSansBold17,
+	textSans,
 	headlineBold17,
 } from '@guardian/source-foundations';
 import type { Item } from 'item';
@@ -28,12 +29,7 @@ interface Props {
 
 const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
-		${headlineBold17};
-		/**
-		 * @TODO (2) Typography preset styles should not be overridden.
-		 * Please speak to your team's designer and update this to use a more appropriate preset.
-		*/
-		line-height: 1.4;
+		${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
 		color: ${text.seriesTitle(format)};
 		text-decoration: none;
 
@@ -44,12 +40,7 @@ const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const labsLinkStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSansBold17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
-	line-height: 1.4;
+	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
 	color: ${text.seriesTitle(format)};
 	text-decoration: none;
 
@@ -62,21 +53,11 @@ const immersiveLinkStyles = css`
 	color: ${neutral[100]};
 	text-decoration: none;
 	white-space: nowrap;
-	${headlineBold17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
-	line-height: 1.4;
+	${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
 `;
 
 const immersiveLabsLinkStyles = css`
-	${textSansBold17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
-	line-height: 1.4;
+	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
 `;
 
 const blogLinkStyles = (format: ArticleFormat): SerializedStyles => css`

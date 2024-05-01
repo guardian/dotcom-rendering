@@ -1,11 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	from,
-	textSans14,
-	headlineMedium17,
-} from '@guardian/source-foundations';
+import { headline, from, textSans14 } from '@guardian/source-foundations';
 import { CaptionIconVariant } from 'components/CaptionIcon';
 import FigCaption from 'components/FigCaption';
 import Img from 'components/ImgAlt';
@@ -95,12 +91,7 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	h2,
 	h2 > span {
-		${headlineMedium17};
-		/**
-		 * @TODO (2) Typography preset styles should not be overridden.
-		 * Please speak to your team's designer and update this to use a more appropriate preset.
-		*/
-		line-height: 1.3;
+		${headline.xxxsmall({ lineHeight: 'regular' })}
 	}
 
 	${from.leftCol} {

@@ -9,7 +9,7 @@ import {
 	from,
 	remSpace,
 	sport,
-	textSans14,
+	textSans,
 	textSansBold14,
 	headlineBold20,
 } from '@guardian/source-foundations';
@@ -75,12 +75,7 @@ const titleStyles = (theme: ArticleTheme): SerializedStyles => css`
 `;
 
 const descriptionStyles = css`
-	${textSans14};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
-	line-height: 1.15;
+	${textSans.xsmall({ lineHeight: 'tight' })}
 	margin-bottom: ${remSpace[2]};
 `;
 

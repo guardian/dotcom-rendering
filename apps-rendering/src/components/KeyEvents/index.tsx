@@ -13,7 +13,7 @@ import {
 	opinion,
 	remSpace,
 	sport,
-	textSansBold14,
+	textSans,
 	textSans15,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
@@ -175,12 +175,7 @@ const textStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const timeStyles = css`
-	${textSansBold14};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
-	line-height: 1.15;
+	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
 	display: block;
 	transform: translateY(-4px);

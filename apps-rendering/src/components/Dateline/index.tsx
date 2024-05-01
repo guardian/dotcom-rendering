@@ -8,8 +8,8 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	neutral,
+	textSans,
 	textSans14,
-	textSans12,
 } from '@guardian/source-foundations';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
@@ -42,12 +42,7 @@ const getStyles = (
 ): SerializedStyles => css`
 	color: ${colour};
 	display: block;
-	${textSans12};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
-	line-height: 1.15;
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 
 	${from.desktop} {
 		color: ${desktopColour};

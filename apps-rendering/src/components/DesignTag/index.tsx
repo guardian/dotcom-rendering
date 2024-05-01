@@ -2,12 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	from,
-	remSpace,
-	headlineBold17,
-	headlineBold20,
-} from '@guardian/source-foundations';
+import { from, headline, remSpace } from '@guardian/source-foundations';
 import { background, text } from 'palette';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss } from '../../styles';
@@ -19,23 +14,13 @@ const designTagWrapper = css`
 
 const designTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.designTag(format)};
-	${headlineBold17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
-	line-height: 1.4;
+	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	color: ${text.designTag(format)};
 	display: inline-block;
 	box-decoration-break: clone;
 	padding: 0 0.375rem 0.125rem;
 	${from.tablet} {
-		${headlineBold20};
-		/**
-		 * @TODO (2) Typography preset styles should not be overridden.
-		 * Please speak to your team's designer and update this to use a more appropriate preset.
-		*/
-		line-height: 1.4;
+		${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	}
 	${darkModeCss`
 		background-color: ${background.designTagDark(format)};

@@ -2,9 +2,9 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	headline,
 	remSpace,
 	headlineMediumItalic17,
-	headlineMedium17,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { grid } from 'grid/grid';
@@ -25,13 +25,7 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headlineMedium17};
-	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
-	font-weight: 700;
-	font-style: italic;
+	${headline.xxxsmall({ fontWeight: 'bold', fontStyle: 'italic' })}
 	color: ${text.gallery(format)};
 	text-decoration: none;
 	border-bottom: 1px solid ${border.bylineLink(format)};
