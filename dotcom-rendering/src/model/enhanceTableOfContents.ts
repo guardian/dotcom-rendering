@@ -7,7 +7,13 @@ const isH2 = (element: FEElement): element is SubheadingBlockElement => {
 		element._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
 		element._type ===
-			'model.dotcomrendering.pageElements.NumberedTitleBlockElement'
+			'model.dotcomrendering.pageElements.NumberedTitleBlockElement' ||
+		element._type ===
+			'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement' ||
+		element._type ===
+			'model.dotcomrendering.pageElements.QAndAExplainerBlockElement' ||
+		element._type ===
+			'model.dotcomrendering.pageElements.TimelineBlockElement'
 	);
 };
 
