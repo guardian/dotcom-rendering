@@ -9,10 +9,10 @@ import {
 	neutral,
 	remHeight,
 	remSpace,
-	transitions,
-	visuallyHidden,
 	textSansBold15,
 	textSansBold17,
+	transitions,
+	visuallyHidden,
 } from '@guardian/source-foundations';
 import {
 	SvgMinus,

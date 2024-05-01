@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	headline,
-	remSpace,
 	headlineMediumItalic17,
+	remSpace,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { grid } from 'grid/grid';

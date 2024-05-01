@@ -5,9 +5,9 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
+	headlineBold17,
 	neutral,
 	remSpace,
-	headlineBold17,
 } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';

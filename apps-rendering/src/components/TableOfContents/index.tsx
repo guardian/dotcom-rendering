@@ -3,11 +3,11 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
+	headlineBold17,
+	headlineLight17,
 	remSpace,
 	textSans14,
 	textSansBold17,
-	headlineLight17,
-	headlineBold17,
 } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,

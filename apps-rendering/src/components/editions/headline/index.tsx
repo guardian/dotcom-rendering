@@ -6,13 +6,16 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { FontWeight, LineHeight } from '@guardian/source-foundations';
 import {
+	border,
+	from,
 	headline,
 	headlineMedium24,
 	headlineMedium34,
 	headlineMedium42,
+	neutral,
+	remSpace,
 } from '@guardian/source-foundations';
 
-import { border, from, neutral, remSpace } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import { OptionKind } from '../../../../vendor/@guardian/types/index';
 import type { Item } from 'item';

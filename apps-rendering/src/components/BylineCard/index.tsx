@@ -4,10 +4,10 @@ import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedIte
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	remSpace,
-	textSans15,
 	headlineMedium17,
 	headlineMedium20,
+	remSpace,
+	textSans15,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';

@@ -4,11 +4,11 @@ import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballT
 import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import {
 	from,
+	headlineBold20,
+	headlineBold42,
 	neutral,
 	remSpace,
 	textSans15,
-	headlineBold20,
-	headlineBold42,
 } from '@guardian/source-foundations';
 import { fromNullable } from '../../../../vendor/@guardian/types/index';
 import { TeamLocation } from 'football';

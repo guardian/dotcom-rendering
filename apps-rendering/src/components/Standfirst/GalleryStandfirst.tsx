@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace, headlineBold17 } from '@guardian/source-foundations';
+import { from, headlineBold17, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';

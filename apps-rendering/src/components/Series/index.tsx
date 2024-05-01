@@ -7,10 +7,10 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	headline,
+	headlineBold17,
 	neutral,
 	remSpace,
 	textSans,
-	headlineBold17,
 } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';

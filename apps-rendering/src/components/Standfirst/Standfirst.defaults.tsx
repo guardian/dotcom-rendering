@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, headlineBold17 } from '@guardian/source-foundations';
+import { headlineBold17, remSpace } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';

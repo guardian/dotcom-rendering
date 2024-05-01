@@ -11,12 +11,12 @@ import {
 } from '@guardian/libs';
 import {
 	from,
-	remSpace,
-	textSans15,
-	textSans20,
 	headlineMedium17,
 	headlineMedium20,
+	remSpace,
+	textSans15,
 	textSans17,
+	textSans20,
 } from '@guardian/source-foundations';
 import {
 	SvgAudio,

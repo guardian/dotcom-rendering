@@ -4,8 +4,8 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	neutral,
 	space,
-	until,
 	textSans15,
+	until,
 } from '@guardian/source-foundations';
 import {
 	Hide,

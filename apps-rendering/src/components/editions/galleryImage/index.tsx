@@ -5,8 +5,8 @@ import {
 	from,
 	neutral,
 	remSpace,
-	textSansBold15,
 	textSans15,
+	textSansBold15,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import {

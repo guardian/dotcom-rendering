@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, from, headlineBold20 } from '@guardian/source-foundations';
+import { from, headline, headlineBold20 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../../vendor/@guardian/types/index';

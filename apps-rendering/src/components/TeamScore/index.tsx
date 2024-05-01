@@ -3,11 +3,11 @@ import { css } from '@emotion/react';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
 import {
 	from,
+	headlineBold20,
+	headlineBold42,
 	neutral,
 	remSpace,
 	textSans15,
-	headlineBold20,
-	headlineBold42,
 } from '@guardian/source-foundations';
 import { TeamLocation } from 'football';
 import type { FC } from 'react';

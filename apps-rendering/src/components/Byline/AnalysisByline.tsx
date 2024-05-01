@@ -2,10 +2,10 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	remSpace,
-	until,
 	headlineLightItalic28,
 	headlineLightItalic34,
+	remSpace,
+	until,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { text } from 'palette';

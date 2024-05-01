@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, headlineBold20 } from '@guardian/source-foundations';
+import { headlineBold20, remSpace } from '@guardian/source-foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { HeadingTwo as HeadingTwoType } from 'bodyElement';
 import Anchor from 'components/Anchor';

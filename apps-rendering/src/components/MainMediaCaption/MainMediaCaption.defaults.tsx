@@ -7,8 +7,8 @@ import {
 	brandAlt,
 	neutral,
 	remSpace,
-	textSans15,
 	textSans14,
+	textSans15,
 } from '@guardian/source-foundations';
 import { SvgCamera } from '@guardian/source-react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
