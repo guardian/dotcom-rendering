@@ -3749,7 +3749,13 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 
 const shareButtonDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const matchNavBackground: PaletteFunction = () => sourcePalette.brandAlt[400];
+const matchNavBackgroundLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const matchNavBackgroundDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
+
+const matchNavTextLight: PaletteFunction = () => sourcePalette.neutral[86];
+const matchNavTextDark: PaletteFunction = () => sourcePalette.neutral[7];
 
 const matchStatsBackgroundLight: PaletteFunction = ({ design }) => {
 	switch (design) {
@@ -3766,8 +3772,13 @@ const matchStatsBackgroundLight: PaletteFunction = ({ design }) => {
 const matchStatsBackgroundDark: PaletteFunction = () =>
 	sourcePalette.sport[300];
 
-const matchTabBorder: PaletteFunction = () => sourcePalette.neutral[86];
-const matchActiveTabBorder: PaletteFunction = () => sourcePalette.sport[300];
+const matchTabBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const matchTabBorderDark: PaletteFunction = () => sourcePalette.neutral[46];
+
+const matchActiveTabBorderLight: PaletteFunction = () =>
+	sourcePalette.sport[300];
+const matchActiveTabBorderDark: PaletteFunction = () =>
+	sourcePalette.sport[500];
 
 const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -5833,20 +5844,24 @@ const paletteColours = {
 		dark: shareButtonDark,
 	},
 	'--match-nav-background': {
-		light: matchNavBackground,
-		dark: matchNavBackground,
+		light: matchNavBackgroundLight,
+		dark: matchNavBackgroundDark,
+	},
+	'--match-nav-text': {
+		light: matchNavTextLight,
+		dark: matchNavTextDark,
 	},
 	'--match-stats-background': {
 		light: matchStatsBackgroundLight,
 		dark: matchStatsBackgroundDark,
 	},
 	'--match-tab-border': {
-		light: matchTabBorder,
-		dark: matchTabBorder,
+		light: matchTabBorderLight,
+		dark: matchTabBorderDark,
 	},
 	'--match-tab-border-active': {
-		light: matchActiveTabBorder,
-		dark: matchActiveTabBorder,
+		light: matchActiveTabBorderLight,
+		dark: matchActiveTabBorderDark,
 	},
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,
