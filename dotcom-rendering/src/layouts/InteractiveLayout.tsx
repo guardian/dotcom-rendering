@@ -655,9 +655,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					stretchRight={false}
 					showTopBorder={false}
-					backgroundColour={themePalette(
-						'--article-section-background',
-					)}
+					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					fontColour={themePalette('--article-section-title')}
 					padContent={false}
@@ -666,7 +664,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<div
 						css={css`
 							max-width: 620px;
-							min-height: 3px;
 						`}
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
