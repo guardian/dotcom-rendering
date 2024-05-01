@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { headline, space } from '@guardian/source-foundations';
+import {
+	headlineBold20,
+	headlineMedium20,
+	space,
+} from '@guardian/source-foundations';
 import type { TabProps } from '@guardian/source-react-components-development-kitchen';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
@@ -19,11 +23,11 @@ const summaryContentWrapper = css`
 `;
 
 const promptStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })};
+	${headlineBold20};
 `;
 
 const subtitleTextHeaderStyles = css`
-	${headline.xxsmall()}
+	${headlineMedium20}
 	padding-bottom: ${space[3]}px;
 `;
 

@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { headline, textSans, until } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	textSansItalic17,
+	until,
+} from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -22,7 +26,7 @@ const standfirstColourBelowDesktop = css`
 `;
 
 const bylineStyles = css`
-	${headline.xxxsmall()}
+	${headlineMedium17}
 
 	padding-bottom: 8px;
 	font-style: italic;
@@ -41,16 +45,18 @@ const bylineStyles = css`
 `;
 
 const labsBylineStyles = css`
-	${textSans.medium({ lineHeight: 'loose' })}
+	${textSansItalic17};
+	line-height: 1.4;
 `;
 
 type Props = {
-	byline: string;
+	byline?: string;
+	source?: string;
 	tags: TagType[];
 	format: ArticleFormat;
 };
 
-export const Contributor = ({ byline, tags, format }: Props) => (
+export const Contributor = ({ byline, tags, format, source }: Props) => (
 	<address
 		aria-label="Contributor info"
 		data-component="meta-byline"
@@ -73,6 +79,7 @@ export const Contributor = ({ byline, tags, format }: Props) => (
 				<BylineLink
 					byline={byline}
 					tags={tags}
+					source={source}
 					format={format}
 					isHeadline={false}
 				/>

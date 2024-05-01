@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { space, textSans, until } from '@guardian/source-foundations';
+import {
+	space,
+	textSans12,
+	textSans15,
+	textSansBold12,
+	until,
+} from '@guardian/source-foundations';
 import { Link, TextArea } from '@guardian/source-react-components';
 import { InfoSummary } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
@@ -51,7 +57,7 @@ const commentTextArea = css`
 	width: 100%;
 	margin-bottom: ${space[3]}px;
 	padding: 8px 10px 10px 8px;
-	${textSans.small()};
+	${textSans15};
 	border-color: ${schemedPalette('--discussion-border')};
 	:focus {
 		border-color: ${schemedPalette('--discussion-subdued')};
@@ -78,7 +84,7 @@ const blackPlaceholder = css`
 
 const headerTextStyles = css`
 	margin: 0 0 10px 0;
-	${textSans.xxsmall()};
+	${textSans12};
 `;
 
 const linkStyles = css`
@@ -118,9 +124,7 @@ const commentAddOns = css`
 const preModMessage = css`
 	& div {
 		color: inherit;
-		${textSans.xxsmall({
-			fontWeight: 'bold',
-		})};
+		${textSansBold12};
 		svg {
 			fill: ${schemedPalette('--discussion-pre-mod')};
 		}
@@ -129,9 +133,7 @@ const preModMessage = css`
 
 const preModLink = css`
 	color: ${schemedPalette('--discussion-pre-mod')};
-	${textSans.xxsmall({
-		fontWeight: 'bold',
-	})};
+	${textSansBold12};
 `;
 
 const bottomContainer = css`

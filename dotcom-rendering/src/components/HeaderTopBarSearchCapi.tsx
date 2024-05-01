@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineMedium17,
 	palette,
-	textSans,
+	textSans15,
+	textSans17,
+	textSansBold17,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
@@ -16,7 +18,7 @@ import XIcon from '../static/icons/x.svg';
 const searchLinkStyles = css`
 	display: flex;
 	align-items: center;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	line-height: 1;
 	font-size: 1rem;
 	height: fit-content;
@@ -168,7 +170,7 @@ export const HeaderTopBarSearchCapi = () => {
 							type="text"
 							css={css`
 								border: none;
-								${textSans.small()}
+								${textSans15}
 								font-size: 16px;
 								padding: 0px 8px 0px 20px;
 								width: 100%;
@@ -195,7 +197,7 @@ export const HeaderTopBarSearchCapi = () => {
 					{data && data.response.results.length == 0 && (
 						<p
 							css={css`
-								${textSans.medium()};
+								${textSans17};
 								padding: 1rem 25px;
 								color: ${palette.neutral[100]};
 
@@ -222,7 +224,7 @@ export const HeaderTopBarSearchCapi = () => {
 										<a
 											href={result.webUrl}
 											css={css`
-												${headline.xxxsmall()};
+												${headlineMedium17};
 												text-decoration: none;
 												color: ${palette.neutral[100]};
 												display: block;

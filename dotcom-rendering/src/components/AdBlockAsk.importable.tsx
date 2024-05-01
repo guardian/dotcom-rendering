@@ -1,6 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { headline, palette, textSans } from '@guardian/source-foundations';
+import {
+	headlineMedium24,
+	palette,
+	textSans14,
+	textSans15,
+	textSans17,
+} from '@guardian/source-foundations';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { useAdblockAsk } from '../lib/useAdBlockAsk';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
@@ -13,7 +19,7 @@ const linkStyles = css`
 	border-radius: 16px;
 	box-sizing: border-box;
 	color: ${palette.neutral[7]};
-	${textSans.medium()};
+	${textSans17};
 	font-weight: 700;
 	text-decoration: none;
 
@@ -40,7 +46,7 @@ const linkStyles = css`
 `;
 
 const adBlockAskH2Styles = css`
-	${headline.xsmall()}
+	${headlineMedium24}
 	color: ${palette.brandAlt[400]};
 	font-weight: bold;
 `;
@@ -48,12 +54,12 @@ const adBlockAskH2Styles = css`
 const adBlockAskTextStyles: Record<AdBlockAskSize, SerializedStyles> = {
 	leaderboard: css`
 		margin-top: 8px;
-		${textSans.xsmall()};
+		${textSans14};
 		color: ${palette.neutral[100]};
 	`,
 	mpu: css`
 		margin-top: 16px;
-		${textSans.small()};
+		${textSans15};
 		color: ${palette.neutral[100]};
 	`,
 };

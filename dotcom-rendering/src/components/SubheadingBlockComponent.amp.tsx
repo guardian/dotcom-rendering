@@ -1,13 +1,18 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial as Special } from '@guardian/libs';
-import { headline, palette, textSans } from '@guardian/source-foundations';
+import {
+	headlineMedium20,
+	headlineMedium34,
+	palette,
+	textSans20,
+} from '@guardian/source-foundations';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
 const style = (pillar: ArticleTheme) => css`
 	h2 {
 		margin-top: 24px;
 		margin-bottom: 10px;
-		${headline.xxsmall()};
+		${headlineMedium20};
 	}
 	strong {
 		font-weight: 700;
@@ -24,7 +29,7 @@ const style = (pillar: ArticleTheme) => css`
 
 const immersiveBodyStyle = css`
 	h2 {
-		${headline.medium()};
+		${headlineMedium34};
 		font-weight: 200;
 	}
 `;
@@ -33,7 +38,7 @@ const immersiveBodyStyle = css`
 const subHeadingStyleLabs = css`
 	h2 {
 		font-weight: 700;
-		${textSans.large()}
+		${textSans20}
 	}
 `;
 

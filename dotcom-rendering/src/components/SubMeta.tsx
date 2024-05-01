@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, space, textSans, until } from '@guardian/source-foundations';
+import {
+	from,
+	space,
+	textSans12,
+	textSans14,
+	until,
+} from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
@@ -8,7 +14,7 @@ import { Island } from './Island';
 import { ShareButton } from './ShareButton.importable';
 
 const labelStyles = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	display: block;
 	color: ${palette('--sub-meta-label-text')};
 	margin-bottom: 8px;
@@ -80,7 +86,7 @@ const listWrapper = css`
 `;
 
 const listItemStyles = css`
-	${textSans.xsmall()};
+	${textSans14};
 	border: 1px solid ${palette('--sub-meta-text')};
 	border-radius: 12px;
 	padding: 2px 9px;

@@ -1,10 +1,13 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold17,
+	headlineBold20,
+	headlineMedium17,
+	headlineMedium20,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSansBold12,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../../lib/decidePalette';
 import type { Palette } from '../../types/palette';
@@ -69,7 +72,7 @@ const pillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
 	right: ${space[2]}px;
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 	background-color: rgba(0, 0, 0, 0.7);
 	color: ${sourcePalette.neutral[100]};
 	border-radius: ${space[3]}px;
@@ -122,16 +125,16 @@ const textOverlayStyles = css`
 
 const kickerStyles = (dcrPalette: Palette) => css`
 	color: ${dcrPalette.text.youtubeOverlayKicker};
-	${headline.xxxsmall({ fontWeight: 'bold' })};
+	${headlineBold17};
 	${from.tablet} {
-		${headline.xxsmall({ fontWeight: 'bold' })};
+		${headlineBold20};
 	}
 `;
 
 const titleStyles = css`
-	${headline.xxxsmall({ fontWeight: 'medium' })};
+	${headlineMedium17};
 	${from.tablet} {
-		${headline.xxsmall({ fontWeight: 'medium' })};
+		${headlineMedium20};
 	}
 `;
 const capitalise = (str: string): string =>

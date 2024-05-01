@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import {
 	background,
-	headline,
+	headlineBold20,
 	palette,
 	space,
-	textSans,
+	textSans15,
 	until,
 } from '@guardian/source-foundations';
 import { Score } from './Score';
@@ -83,7 +83,7 @@ const Column = ({ children }: { children: React.ReactNode }) => (
 const TeamName = ({ name }: { name: string }) => (
 	<h2
 		css={css`
-			${headline.xxsmall({ fontWeight: 'bold' })}
+			${headlineBold20}
 		`}
 	>
 		{name}
@@ -103,7 +103,7 @@ const Scorers = ({ scorers }: { scorers: string[] }) => (
 				// unless a single player scores twice in the same minute
 				key={player}
 				css={css`
-					${textSans.small()}
+					${textSans15}
 				`}
 			>
 				{player}
@@ -187,7 +187,7 @@ const TeamNav = ({
 const Comments = ({ comments }: { comments: string }) => (
 	<div
 		css={css`
-			${textSans.small()}
+			${textSans15}
 			margin-top: ${space[2]}px;
 			padding-top: ${space[1]}px;
 			font-style: italic;

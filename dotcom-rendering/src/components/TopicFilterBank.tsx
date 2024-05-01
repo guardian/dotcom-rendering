@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, headline, space, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	headlineBold17,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 import { FilterLink } from './FilterLink';
@@ -18,7 +23,7 @@ const containerStyles = css`
 	width: 100%;
 `;
 const headlineStyles = css`
-	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'tight' })}
+	${headlineBold17};
 	padding-bottom: ${space[3]}px;
 `;
 

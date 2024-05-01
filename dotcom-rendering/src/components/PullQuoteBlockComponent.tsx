@@ -1,6 +1,14 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { from, headline, textSans, until } from '@guardian/source-foundations';
+import {
+	from,
+	headline,
+	headlineMedium20,
+	headlineMedium24,
+	headlineMedium28,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
@@ -31,15 +39,9 @@ const fontCss = (role: string, format: ArticleFormat) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 					return css`
-						${headline.xsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium24};
 						${from.tablet} {
-							${headline.small({
-								fontWeight: 'medium',
-								lineHeight: 'tight',
-							})};
+							${headlineMedium28};
 						}
 					`;
 				case ArticleDesign.Obituary:
@@ -73,10 +75,7 @@ const fontCss = (role: string, format: ArticleFormat) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 					return css`
-						${headline.xxsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium20};
 					`;
 				case ArticleDesign.Obituary:
 				case ArticleDesign.Comment:
@@ -104,15 +103,9 @@ const fontCss = (role: string, format: ArticleFormat) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 					return css`
-						${headline.xxsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium20};
 						${from.tablet} {
-							${headline.xsmall({
-								fontWeight: 'medium',
-								lineHeight: 'tight',
-							})};
+							${headlineMedium24};
 						}
 					`;
 				case ArticleDesign.Obituary:

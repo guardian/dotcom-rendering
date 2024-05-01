@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { isString } from '@guardian/libs';
-import { body, from, headline, space } from '@guardian/source-foundations';
+import {
+	article17,
+	from,
+	headlineBold20,
+	space,
+} from '@guardian/source-foundations';
 import { palette } from '../palette';
 import { FirstPublished } from './FirstPublished';
 
@@ -49,7 +54,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 	return (
 		<h2
 			css={css`
-				${headline.xxsmall({ fontWeight: 'bold' })}
+				${headlineBold20}
 				margin-bottom: ${space[2]}px;
 			`}
 		>
@@ -96,7 +101,7 @@ const BlockByline = ({
 			)}
 			<span
 				css={css`
-					${body.medium()}
+					${article17};
 					display: flex;
 					align-items: center;
 					padding-left: ${imageUrl ? space[1] : 0}px;

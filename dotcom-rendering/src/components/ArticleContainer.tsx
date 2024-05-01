@@ -26,6 +26,17 @@ const articleWidth = (format: ArticleFormat) => {
 				}
 			`;
 		}
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+			return css`
+				${from.desktop} {
+					width: 620px;
+				}
+				/* Make the video player as wide as possible on larger screens */
+				${from.wide} {
+					width: 688px;
+				}
+			`;
 		default: {
 			return css`
 				${from.desktop} {

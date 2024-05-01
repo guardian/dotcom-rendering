@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text, textSans } from '@guardian/source-foundations';
+import { text, textSans12 } from '@guardian/source-foundations';
 import {
 	neutralBorder,
 	pillarMap,
@@ -21,7 +21,7 @@ const pillarFill = pillarMap(
 );
 
 const ageWarningCss = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	display: inline-block;
 	margin-bottom: 12px;
 	width: 100%;
@@ -49,7 +49,7 @@ type SharingURLs = {
 
 const metaStyle = css`
 	display: block;
-	${textSans.xxsmall()};
+	${textSans12};
 	color: ${text.supporting};
 	padding-top: 2px;
 	margin-bottom: 6px;

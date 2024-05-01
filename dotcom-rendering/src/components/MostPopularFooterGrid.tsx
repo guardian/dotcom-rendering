@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold17,
 	palette,
-	textSans,
+	textSans14,
 	until,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
@@ -73,13 +73,13 @@ const titleContainerStyleWithPageSkin = css`
 `;
 
 const titleStyle = css`
-	${headline.xxxsmall({ fontWeight: 'bold' })};
+	${headlineBold17};
 	color: ${palette.neutral[7]};
 	overflow-wrap: break-word;
 `;
 
 const descriptionStyle = css`
-	${textSans.xsmall()};
+	${textSans14};
 	line-height: 125%;
 	color: ${palette.neutral[46]};
 	overflow-wrap: break-word;

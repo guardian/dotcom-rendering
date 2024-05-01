@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans14 } from '@guardian/source-foundations';
 import {
 	LinkButton,
 	SvgSignalBrand,
@@ -24,7 +24,7 @@ const calloutPrimaryButtonStyles = css`
 
 const infoStyles = css`
 	margin-bottom: ${space[2]}px;
-	${textSans.xsmall()};
+	${textSans14};
 `;
 
 export const formatContactType = (s: string): string =>
