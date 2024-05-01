@@ -113,8 +113,8 @@ const EmailSignupForm: FC<Props> = ({
 						${textSansBold14};
 
 						${darkModeCss`
-                        color: ${text.newsletterSignUpFormDark(format)};
-                    `}
+							color: ${text.newsletterSignUpFormDark(format)}
+						`}
 					}
 				`}
 			/>
