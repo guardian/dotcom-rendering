@@ -204,7 +204,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				: 'unknown';
 
 			const event: AmIUsedLoggingEvent = {
-				label: 'dcr.amiused',
+				label: 'dotcom.colour-scheme',
 				properties: [
 					{
 						name: 'prefersColorScheme',
