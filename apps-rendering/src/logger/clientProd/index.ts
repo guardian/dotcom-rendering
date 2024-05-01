@@ -5,9 +5,9 @@ class ClientProdLogger implements LoggerFunctions {
 
 	info(message: string): void {}
 
-	warn(message: string, error?: Error | unknown): void {}
+	warn(message: string, error?: unknown): void {}
 
-	error(message: string, error?: Error | unknown): void {}
+	error(message: string, error?: unknown): void {}
 }
 
 export const logger: LoggerFunctions = new ClientProdLogger();
