@@ -111,7 +111,6 @@ const EmailSignupForm: FC<Props> = ({
 				cssOverrides={css`
 					div {
 						${textSansBold14};
-
 						${darkModeCss`
 							color: ${text.newsletterSignUpFormDark(format)}
 						`}
