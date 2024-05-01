@@ -3751,7 +3751,7 @@ const shareButtonDark: PaletteFunction = () => sourcePalette.neutral[60];
 
 const matchNavBackground: PaletteFunction = () => sourcePalette.brandAlt[400];
 
-const matchStatsBackground: PaletteFunction = ({ design }) => {
+const matchStatsBackgroundLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
@@ -3762,6 +3762,9 @@ const matchStatsBackground: PaletteFunction = ({ design }) => {
 			return '#d9edf6';
 	}
 };
+
+const matchStatsBackgroundDark: PaletteFunction = () =>
+	sourcePalette.sport[300];
 
 const matchTabBorder: PaletteFunction = () => sourcePalette.neutral[86];
 const matchActiveTabBorder: PaletteFunction = () => sourcePalette.sport[300];
@@ -5380,6 +5383,11 @@ const timelineEventBorderLight: PaletteFunction = () =>
 const timelineEventBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+const doughnutPercentageIconLight: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+const doughnutPercentageIconDark: PaletteFunction = () =>
+	sourcePalette.sport[800];
+
 // ----- Palette ----- //
 
 /**
@@ -5834,8 +5842,8 @@ const paletteColours = {
 		dark: matchNavBackground,
 	},
 	'--match-stats-background': {
-		light: matchStatsBackground,
-		dark: matchStatsBackground,
+		light: matchStatsBackgroundLight,
+		dark: matchStatsBackgroundDark,
 	},
 	'--match-tab-border': {
 		light: matchTabBorder,
@@ -6388,6 +6396,10 @@ const paletteColours = {
 	'--timeline-event-border': {
 		light: timelineEventBorderLight,
 		dark: timelineEventBorderDark,
+	},
+	'--doughnut-percentage-icon': {
+		light: doughnutPercentageIconLight,
+		dark: doughnutPercentageIconDark,
 	},
 } satisfies PaletteColours;
 
