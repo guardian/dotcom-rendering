@@ -40,7 +40,7 @@ test.describe('E2E Page rendering', () => {
 					responseHasJsonProperty(
 						response,
 						/most-read-with-deeply-read\.json/,
-						'heading',
+						'tabs',
 					),
 			);
 
