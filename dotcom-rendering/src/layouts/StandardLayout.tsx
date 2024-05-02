@@ -4,7 +4,6 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';

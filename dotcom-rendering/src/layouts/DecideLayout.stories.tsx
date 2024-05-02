@@ -187,6 +187,19 @@ export const WebStandardLifestyleReviewLight: Story = {
 	parameters: webParameters,
 };
 
+export const WebStandardNewsInterviewLight: Story = {
+	args: {
+		article: {
+			...StandardStandardNewsFixture,
+			format: {
+				...StandardStandardNewsFixture.format,
+				design: 'InterviewDesign',
+			},
+		},
+	},
+	parameters: webParameters,
+};
+
 export const AppsPictureShowcaseOpinionLight: Story = {
 	args: {
 		article: PictureShowcaseOpinionFixture,
