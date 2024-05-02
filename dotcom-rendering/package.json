@@ -184,7 +184,7 @@
 		"require-from-string": "2.0.2",
 		"response-time": "2.3.2",
 		"sanitize-html": "2.12.1",
-		"scheduler": "0.23.0",
+		"scheduler": "0.23.2",
 		"screenfull": "6.0.2",
 		"semver": "7.5.4",
 		"serve-static": "1.15.0",
