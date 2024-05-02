@@ -5,10 +5,10 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	remSpace,
-	textSans17,
 	article17,
 	headlineBold42,
+	remSpace,
+	textSans17,
 } from '@guardian/source-foundations';
 import { text } from 'palette';
 import type { FC, ReactNode } from 'react';

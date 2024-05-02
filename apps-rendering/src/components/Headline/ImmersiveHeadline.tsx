@@ -5,9 +5,9 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	remSpace,
 	headlineBold34,
 	headlineBold50,
+	remSpace,
 } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { background, text } from 'palette';

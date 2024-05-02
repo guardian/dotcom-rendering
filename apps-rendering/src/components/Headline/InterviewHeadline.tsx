@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	remSpace,
 	headlineBold28,
 	headlineBold34,
+	remSpace,
 } from '@guardian/source-foundations';
 import DesignTag from 'components/DesignTag';
 import HeadlineByline from 'components/HeadlineByline';

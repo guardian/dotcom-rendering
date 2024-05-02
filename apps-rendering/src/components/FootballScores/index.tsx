@@ -6,8 +6,8 @@ import {
 	brandAltBackground,
 	from,
 	remSpace,
-	textSansBold17,
 	textSans17,
+	textSansBold17,
 } from '@guardian/source-foundations';
 import { MatchStatusIcon } from 'components/MatchStatusIcon';
 import { TeamScore } from 'components/TeamScore';

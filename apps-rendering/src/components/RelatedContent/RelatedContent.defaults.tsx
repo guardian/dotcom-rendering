@@ -5,10 +5,10 @@ import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import {
 	from,
+	headlineBold24,
 	neutral,
 	remSpace,
 	until,
-	headlineBold24,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, none, withDefault } from '../../../vendor/@guardian/types/index';

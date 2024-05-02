@@ -2,9 +2,9 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	remSpace,
-	headlineMediumItalic17,
 	headlineMedium17,
+	headlineMediumItalic17,
+	remSpace,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { grid } from 'grid/grid';

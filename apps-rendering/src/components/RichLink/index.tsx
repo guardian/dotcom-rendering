@@ -4,9 +4,9 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	from,
+	headlineBold17,
 	remSpace,
 	textSansBold17,
-	headlineBold17,
 } from '@guardian/source-foundations';
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
 import { background, border, fill, text } from 'palette';

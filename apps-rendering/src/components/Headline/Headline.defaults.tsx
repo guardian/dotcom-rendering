@@ -4,11 +4,11 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
-	remSpace,
-	headlineMedium28,
-	headlineMedium34,
 	headlineBold28,
 	headlineBold34,
+	headlineMedium28,
+	headlineMedium34,
+	remSpace,
 } from '@guardian/source-foundations';
 import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';

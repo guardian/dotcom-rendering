@@ -6,9 +6,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	brandAlt,
 	remSpace,
-	until,
 	textSans14,
 	textSansBold14,
+	until,
 } from '@guardian/source-foundations';
 import { SvgClock, SvgNewsletter } from '@guardian/source-react-components';
 import { OptionKind } from '../../../vendor/@guardian/types/index';

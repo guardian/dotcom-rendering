@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	headlineMedium20,
 	headlineBold20,
+	headlineMedium20,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '../../../../vendor/@guardian/types/index';

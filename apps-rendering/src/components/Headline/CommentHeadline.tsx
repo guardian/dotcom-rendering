@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	remSpace,
 	headlineLight28,
 	headlineLight34,
+	remSpace,
 } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';

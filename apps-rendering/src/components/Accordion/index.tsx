@@ -6,10 +6,10 @@ import {
 	background,
 	focusHalo,
 	from,
+	headlineBold20,
 	line,
 	neutral,
 	remSpace,
-	headlineBold20,
 } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,

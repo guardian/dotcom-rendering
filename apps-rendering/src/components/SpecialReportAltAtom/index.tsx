@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { FC } from 'react';
-import { body, article17 } from '@guardian/source-foundations';
+import { article17, body } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import { background, border, hover, text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';

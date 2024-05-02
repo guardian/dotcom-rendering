@@ -6,8 +6,8 @@ import {
 	brandAltBackground,
 	from,
 	remSpace,
-	textSansBold17,
 	textSans17,
+	textSansBold17,
 } from '@guardian/source-foundations';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { FC } from 'react';

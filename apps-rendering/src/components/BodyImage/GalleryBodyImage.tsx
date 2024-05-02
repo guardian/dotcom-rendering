@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	textSans14,
 	headlineMedium17,
+	textSans14,
 } from '@guardian/source-foundations';
 import { CaptionIconVariant } from 'components/CaptionIcon';
 import FigCaption from 'components/FigCaption';

@@ -8,8 +8,8 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	neutral,
-	textSans14,
 	textSans12,
+	textSans14,
 } from '@guardian/source-foundations';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';

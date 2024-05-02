@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
+	headlineMedium17,
 	neutral,
 	remSpace,
-	headlineMedium17,
 } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';

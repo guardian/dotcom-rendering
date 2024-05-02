@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	article17,
 	from,
+	headlineBold20,
 	neutral,
 	space,
-	article17,
-	headlineBold20,
 } from '@guardian/source-foundations';
 import FirstPublished from 'components/FirstPublished';
 import type { Contributor } from 'contributor';

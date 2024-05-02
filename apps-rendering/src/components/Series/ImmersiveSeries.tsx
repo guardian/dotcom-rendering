@@ -6,9 +6,9 @@ import type { Tag } from '@guardian/content-api-models/v1/tag';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	remSpace,
 	headlineBold17,
 	headlineBold20,
+	remSpace,
 } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';

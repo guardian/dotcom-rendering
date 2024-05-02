@@ -2,8 +2,8 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	headlineMediumItalic17,
 	headlineBold17,
+	headlineMediumItalic17,
 } from '@guardian/source-foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';

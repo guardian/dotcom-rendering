@@ -4,9 +4,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
-	remSpace,
 	headlineBold17,
 	headlineBold20,
+	remSpace,
 } from '@guardian/source-foundations';
 import { background, text } from 'palette';
 import type { FC } from 'react';

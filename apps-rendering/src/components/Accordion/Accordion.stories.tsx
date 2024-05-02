@@ -3,11 +3,11 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import {
+	article17,
 	breakpoints,
 	from,
 	neutral,
 	space,
-	article17,
 } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';

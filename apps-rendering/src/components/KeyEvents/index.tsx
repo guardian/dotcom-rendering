@@ -13,8 +13,8 @@ import {
 	opinion,
 	remSpace,
 	sport,
-	textSansBold14,
 	textSans15,
+	textSansBold14,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import Accordion from 'components/Accordion';

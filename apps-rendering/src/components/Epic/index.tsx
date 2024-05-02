@@ -3,14 +3,14 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
+	article17,
 	brandAlt,
 	brandAltBackground,
 	from,
+	headlineMedium24,
 	neutral,
 	remSpace,
 	textSans17,
-	headlineMedium24,
-	article17,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 

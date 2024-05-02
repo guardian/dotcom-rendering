@@ -1,11 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
+	headlineBold17,
 	neutral,
 	remSpace,
 	textSans14,
 	textSans15,
-	headlineBold17,
 } from '@guardian/source-foundations';
 import { SvgGuardianLiveLogo } from '@guardian/source-react-components';
 import type { ReactElement } from 'react';

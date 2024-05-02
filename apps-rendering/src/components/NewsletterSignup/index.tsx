@@ -7,11 +7,11 @@ import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	brandAlt,
 	from,
+	headlineBold20,
 	remSpace,
 	sport,
 	textSans14,
 	textSansBold14,
-	headlineBold20,
 } from '@guardian/source-foundations';
 import { SvgNewsletter } from '@guardian/source-react-components';
 import type { NewsletterSignUp } from 'bodyElement';

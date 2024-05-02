@@ -1,9 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
+	article17,
 	brand,
 	brandAlt,
 	error,
+	headlineBold20,
+	headlineMedium20,
 	neutral,
 	remSpace,
 	sport,
@@ -12,9 +15,6 @@ import {
 	textSans14,
 	textSans15,
 	textSans17,
-	headlineMedium20,
-	article17,
-	headlineBold20,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 

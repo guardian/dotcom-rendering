@@ -4,9 +4,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import {
 	from,
+	headlineMediumItalic20,
 	remSpace,
 	textSansItalic20,
-	headlineMediumItalic20,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';

@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	headlineMediumItalic17,
 	headlineBold17,
+	headlineMediumItalic17,
 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { text } from 'palette';
