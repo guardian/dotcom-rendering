@@ -7,7 +7,7 @@ import {
 	neutral,
 	pxToRem,
 	remSpace,
-	textSans,
+	textSansBold14,
 	until,
 } from '@guardian/source-foundations';
 import {
@@ -110,8 +110,7 @@ const EmailSignupForm: FC<Props> = ({
 				text="Enter your email address"
 				cssOverrides={css`
 					div {
-						${textSans.xsmall({ fontWeight: 'bold' })};
-
+						${textSansBold14};
 						${darkModeCss`
 							color: ${text.newsletterSignUpFormDark(format)};
 						`}

@@ -4,9 +4,10 @@ import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedIte
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineMedium17,
+	headlineMedium20,
 	remSpace,
-	textSans,
+	textSans15,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
@@ -106,16 +107,16 @@ const headingWrapperStyles = css`
 `;
 
 const headingStyles: SerializedStyles = css`
-	${headline.xxxsmall()}
+	${headlineMedium17};
 	margin: 0;
 
 	${from.desktop} {
-		${headline.xxsmall()}
+		${headlineMedium20}
 	}
 `;
 
 const cardStyles: SerializedStyles = css`
-	${headline.xxsmall()}
+	${headlineMedium20}
 `;
 
 const commentIconStyle = (format: ArticleFormat): SerializedStyles => {
@@ -179,7 +180,7 @@ const cardImage = (
 };
 
 const dateStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small()};
+	${textSans15};
 	color: ${text.relatedCardTimeAgo(format)};
 	text-align: right;
 	vertical-align: top;

@@ -7,6 +7,7 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	headline,
+	headlineBold17,
 	neutral,
 	remSpace,
 	textSans,
@@ -60,7 +61,7 @@ const immersiveLabsLinkStyles = css`
 `;
 
 const blogLinkStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
+	${headlineBold17};
 	color: ${text.seriesTitle(format)};
 	text-decoration: none;
 

@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { labs, textSans } from '@guardian/source-foundations';
+import { labs, textSansItalic17 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
 const labsStyles = css`
-	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
+	${textSansItalic17};
 	color: ${labs[300]};
 
 	${darkModeCss`

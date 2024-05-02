@@ -4,7 +4,7 @@ import {
 	neutral,
 	remSpace,
 	text,
-	textSans,
+	textSans17,
 } from '@guardian/source-foundations';
 import type { Logo as LogoImage } from 'capi';
 import type { FC } from 'react';
@@ -17,7 +17,7 @@ interface Props {
 const styles = css`
 	display: flex;
 	justify-content: space-between;
-	${textSans.medium()}
+	${textSans17};
 	color: ${text.supporting};
 
 	a {
