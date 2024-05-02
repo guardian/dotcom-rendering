@@ -336,7 +336,6 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-top: ${space[4]}px;
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
