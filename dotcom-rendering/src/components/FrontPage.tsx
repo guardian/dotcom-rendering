@@ -13,6 +13,7 @@ import { paletteDeclarations } from '../palette';
 import type { DCRFrontType } from '../types/front';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
+import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -52,6 +53,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
+	const darkModeAvailable =
+		front.config.abTests.darkModeWebVariant === 'variant';
+
 	return (
 		<StrictMode>
 			<Global
@@ -63,6 +67,17 @@ export const FrontPage = ({ front, NAV }: Props) => {
 						body {
 							color: ${sourcePalette.neutral[7]};
 						}
+						/* Dark palette only if supported */
+						${darkModeAvailable
+							? css`
+									@media (prefers-color-scheme: dark) {
+										${paletteDeclarations(format, 'dark')}
+										body {
+											color: ${sourcePalette.neutral[86]};
+										}
+									}
+							  `
+							: ''}
 					}
 					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
@@ -112,6 +127,20 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
+			{darkModeAvailable && (
+				<DarkModeMessage>
+					Dark mode is a work-in-progress.
+					<br />
+					You can{' '}
+					<a
+						style={{ color: 'inherit' }}
+						href="theguardian.com/opt/out/dark-mode-web"
+					>
+						opt out anytime
+					</a>{' '}
+					if anything is unreadable or odd.
+				</DarkModeMessage>
+			)}
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>
 	);

@@ -45,19 +45,15 @@ interface AppProps extends BaseProps {
  * @description
  * returns global styles for article pages
  */
-const globalStyles = (
-	format: ArticleFormat,
-	darkModeInApps: boolean,
-	renderingTarget: RenderingTarget,
-) => css`
+const globalStyles = (format: ArticleFormat, darkModeAvailable: boolean) => css`
 	:root {
 		/* Light palette is default on all platforms */
 		${paletteDeclarations(format, 'light')}
 		body {
 			color: ${sourcePalette.neutral[7]};
 		}
-		/* Dark palette only for apps and only if switch turned on */
-		${darkModeInApps && renderingTarget === 'Apps'
+		/* Dark palette only if supported */
+		${darkModeAvailable
 			? css`
 					@media (prefers-color-scheme: dark) {
 						${paletteDeclarations(format, 'dark')}
@@ -97,16 +93,13 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const webLightbox = isWeb && !!article.config.switches.lightbox;
+	const darkModeAvailable = isWeb
+		? article.config.abTests.darkModeWebVariant === 'variant'
+		: !!article.config.switches.darkModeInApps;
 
 	return (
 		<StrictMode>
-			<Global
-				styles={globalStyles(
-					format,
-					!!article.config.switches.darkModeInApps,
-					renderingTarget,
-				)}
-			/>
+			<Global styles={globalStyles(format, darkModeAvailable)} />
 			{isWeb && (
 				<>
 					<SkipTo id="maincontent" label="Skip to main content" />
@@ -184,8 +177,28 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					/>
 				</Island>
 			)}
-			{renderingTarget === 'Apps' &&
-				!article.config.switches.darkModeInApps && <DarkModeMessage />}
+			{renderingTarget === 'Web' && darkModeAvailable && (
+				<DarkModeMessage>
+					Dark mode is a work-in-progress.
+					<br />
+					You can{' '}
+					<a
+						style={{ color: 'inherit' }}
+						href="theguardian.com/opt/out/dark-mode-web"
+					>
+						opt out anytime
+					</a>{' '}
+					if anything is unreadable or odd.
+				</DarkModeMessage>
+			)}
+			{renderingTarget === 'Apps' && !darkModeAvailable && (
+				<DarkModeMessage>
+					We hope you are enjoying the updates we are implementing on
+					articles. Unfortunately, some are still missing a dark mode
+					view. Rest assured this will be fixed in a forthcoming beta
+					release.
+				</DarkModeMessage>
+			)}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
 					article={article}

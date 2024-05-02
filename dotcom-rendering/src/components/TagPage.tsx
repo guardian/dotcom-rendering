@@ -12,6 +12,7 @@ import type { NavType } from '../model/extract-nav';
 import { paletteDeclarations } from '../palette';
 import type { DCRTagPageType } from '../types/tagPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -49,6 +50,9 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
+	const darkModeAvailable =
+		tagPage.config.abTests.darkModeWebVariant === 'variant';
+
 	return (
 		<StrictMode>
 			<Global
@@ -60,6 +64,17 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 						body {
 							color: ${sourcePalette.neutral[7]};
 						}
+						/* Dark palette only if supported */
+						${darkModeAvailable
+							? css`
+									@media (prefers-color-scheme: dark) {
+										${paletteDeclarations(format, 'dark')}
+										body {
+											color: ${sourcePalette.neutral[86]};
+										}
+									}
+							  `
+							: ''}
 					}
 					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
@@ -101,6 +116,20 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
+			{darkModeAvailable && (
+				<DarkModeMessage>
+					Dark mode is a work-in-progress.
+					<br />
+					You can{' '}
+					<a
+						style={{ color: 'inherit' }}
+						href="theguardian.com/opt/out/dark-mode-web"
+					>
+						opt out anytime
+					</a>{' '}
+					if anything is unreadable or odd.
+				</DarkModeMessage>
+			)}
 			<TagPageLayout tagPage={tagPage} NAV={NAV} />
 		</StrictMode>
 	);
