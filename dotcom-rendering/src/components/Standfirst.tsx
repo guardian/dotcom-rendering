@@ -81,7 +81,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 					return css`
 						padding-bottom: ${space[6]}px;
 						${from.tablet} {
-							padding-bottom: 0px;
+							padding-bottom: none;
 						}
 					`;
 				case ArticleDisplay.Showcase:
@@ -89,7 +89,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 					return css`
 						padding-bottom: 12px;
 						${from.tablet} {
-							padding-bottom: 8px;
+							padding-bottom: ${space[2]}px;
 						}
 					`;
 			}
@@ -98,7 +98,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 			switch (display) {
 				case ArticleDisplay.Showcase:
 					return css`
-						padding-bottom: 8px;
+						padding-bottom: ${space[2]}px;
 
 						${from.tablet} {
 							padding-bottom: 14px;
@@ -109,12 +109,12 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 						padding-bottom: ${space[6]}px;
 
 						${from.tablet} {
-							padding-bottom: 0px;
+							padding-bottom: none;
 						}
 					`;
 				default:
 					return css`
-						padding-bottom: 8px;
+						padding-bottom: ${space[2]}px;
 					`;
 			}
 		}
