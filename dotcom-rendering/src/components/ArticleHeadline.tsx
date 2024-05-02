@@ -120,7 +120,6 @@ const shiftSlightly = css`
 const invertedStyles = css`
 	position: relative;
 	white-space: pre-wrap;
-	padding-bottom: ${space[1]}px;
 	padding-right: ${space[1]}px;
 	box-shadow: -6px 0 0 ${themePalette('--headline-background')};
 	/* Box decoration is required to push the box shadow out on Firefox */
@@ -129,7 +128,7 @@ const invertedStyles = css`
 
 const immersiveStyles = css`
 	min-height: 112px;
-	padding-bottom: ${space[9]}px;
+	padding-bottom: ${space[6]}px;
 	padding-left: ${space[1]}px;
 	${from.mobileLandscape} {
 		padding-left: ${space[3]}px;
@@ -324,7 +323,6 @@ export const ArticleHeadline = ({
 										maxWidth,
 										immersiveStyles,
 										displayBlock,
-										reducedBottomPadding,
 									]}
 								>
 									{headlineString}
