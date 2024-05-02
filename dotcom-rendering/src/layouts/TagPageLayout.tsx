@@ -108,7 +108,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								tagPage.nav.readerRevenueLinks.header.subscribe
 							}
 							discussionApiUrl={tagPage.config.discussionApiUrl}
-							idApiUrl="https://idapi.theguardian.com/"
+							idApiUrl={tagPage.config.idApiUrl}
 							showSubNav={false}
 							isImmersive={false}
 							displayRoundel={false}
@@ -135,7 +135,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									urls={tagPage.nav.readerRevenueLinks.header}
 									remoteHeader={!!switches.remoteHeader}
 									contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
-									idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+									idApiUrl={tagPage.config.idApiUrl}
 									headerTopBarSearchCapiSwitch={
 										!!switches.headerTopBarSearchCapi
 									}
