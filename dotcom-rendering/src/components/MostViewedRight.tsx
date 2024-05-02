@@ -45,17 +45,25 @@ export const MostViewedRight = ({
 		| 'none';
 	const useDeeplyReadTestVariant = (): Variant => {
 		const ABTestAPI = useAB()?.api;
-		if (ABTestAPI?.isUserInVariant('DeeplyReadTest', 'deeply-read-only')) {
+		if (
+			ABTestAPI?.isUserInVariant(
+				'DeeplyReadRightColumn',
+				'deeply-read-only',
+			)
+		) {
 			return 'deeply-read-only';
 		} else if (
 			ABTestAPI?.isUserInVariant(
-				'DeeplyReadTest',
+				'DeeplyReadRightColumn',
 				'deeply-read-and-most-viewed',
 			)
 		) {
 			return 'deeply-read-and-most-viewed';
 		} else if (
-			ABTestAPI?.isUserInVariant('DeeplyReadTest', 'most-viewed-only')
+			ABTestAPI?.isUserInVariant(
+				'DeeplyReadRightColumn',
+				'most-viewed-only',
+			)
 		) {
 			return 'most-viewed-only';
 		} else {
