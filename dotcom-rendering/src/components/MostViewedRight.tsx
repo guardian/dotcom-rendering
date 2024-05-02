@@ -38,15 +38,31 @@ export const MostViewedRight = ({
 	limitItems = 5,
 	stickToTop = false,
 }: Props) => {
-	const ABTestAPI = useAB()?.api;
-	const inDeeplyReadTestVariant =
-		ABTestAPI?.isUserInVariant('DeeplyReadTest', 'deeply-read-only') ??
-		false;
-	const inMostViewedDeeplyReadTestVariant =
-		ABTestAPI?.isUserInVariant(
-			'DeeplyReadTest',
-			'deeply-read-and-most-read',
-		) ?? false;
+	type Variant =
+		| 'deeply-read-only'
+		| 'deeply-read-and-most-viewed'
+		| 'most-viewed-only'
+		| 'none';
+	const useDeeplyReadTestVariant = (): Variant => {
+		const ABTestAPI = useAB()?.api;
+		if (ABTestAPI?.isUserInVariant('DeeplyReadTest', 'deeply-read-only')) {
+			return 'deeply-read-only';
+		} else if (
+			ABTestAPI?.isUserInVariant(
+				'DeeplyReadTest',
+				'deeply-read-and-most-viewed',
+			)
+		) {
+			return 'deeply-read-and-most-viewed';
+		} else if (
+			ABTestAPI?.isUserInVariant('DeeplyReadTest', 'most-viewed-only')
+		) {
+			return 'most-viewed-only';
+		} else {
+			return 'none';
+		}
+	};
+	const testVariant = useDeeplyReadTestVariant();
 	const endpointUrl =
 		'https://api.nextgen.guardianapps.co.uk/most-read-with-deeply-read.json';
 	const { data, error } = useApi<MostViewedRightPayloadType>(endpointUrl);
@@ -72,7 +88,7 @@ export const MostViewedRight = ({
 				css={[wrapperStyles, stickToTop && stickyStyles]}
 				data-component="geo-most-popular"
 			>
-				{!inDeeplyReadTestVariant && (
+				{testVariant !== 'deeply-read-only' && (
 					<>
 						<StraightLines
 							cssOverrides={css`
@@ -93,8 +109,8 @@ export const MostViewedRight = ({
 						</ul>
 					</>
 				)}
-				{(inMostViewedDeeplyReadTestVariant ||
-					inDeeplyReadTestVariant) && (
+				{(testVariant === 'deeply-read-only' ||
+					testVariant === 'deeply-read-and-most-viewed') && (
 					<>
 						<StraightLines
 							cssOverrides={css`
