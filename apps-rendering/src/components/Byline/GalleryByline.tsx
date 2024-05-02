@@ -1,7 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace } from '@guardian/source-foundations';
+import {
+	headline,
+	headlineMediumItalic17,
+	remSpace,
+} from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { grid } from 'grid/grid';
 import { border, text } from 'palette';
@@ -13,7 +17,7 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	grid-row: 8/9;
 	color: ${text.gallery(format)};
-	${headline.xxxsmall({ fontWeight: 'medium', fontStyle: 'italic' })}
+	${headlineMediumItalic17}
 
 	${darkModeCss`
 		color: ${text.galleryDark(format)};

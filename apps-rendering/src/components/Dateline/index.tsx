@@ -5,7 +5,12 @@ import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	neutral,
+	textSans,
+	textSans14,
+} from '@guardian/source-foundations';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { datetimeFormat } from 'datetime';
@@ -23,7 +28,7 @@ interface Props {
 }
 
 const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${text.dateline(format)};
 
 	${darkModeCss`

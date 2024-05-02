@@ -14,6 +14,7 @@ import {
 	remSpace,
 	sport,
 	textSans,
+	textSans15,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import Accordion from 'components/Accordion';
@@ -145,7 +146,7 @@ const timeTextWrapperStyles: SerializedStyles = css`
 `;
 
 const textStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
+	${textSans15};
 	color: ${text.keyEventsInline(format)};
 	display: block;
 	text-decoration: none;

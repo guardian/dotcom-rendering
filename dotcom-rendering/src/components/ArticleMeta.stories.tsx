@@ -88,7 +88,6 @@ export const Web: StoryObj = ({ format }: StoryArgs) => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -136,7 +135,6 @@ export const Branding: StoryObj = ({ format }: StoryArgs) => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -171,7 +169,6 @@ export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 					isCommentable={false}
 					discussionApiUrl=""
 					shortUrlId=""
-					ajaxUrl=""
 				/>
 			</Wrapper>
 		</div>
@@ -210,7 +207,6 @@ export const FeatureWithMismatchedContributor: StoryObj = ({
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -242,7 +238,6 @@ export const FeatureWithSmallBylineImage: StoryObj = ({
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -271,7 +266,6 @@ export const Comment: StoryObj = ({ format }: StoryArgs) => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -299,7 +293,6 @@ export const Interview: StoryObj = ({ format }: StoryArgs) => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -327,7 +320,6 @@ export const Immersive: StoryObj = ({ format }: StoryArgs) => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -355,7 +347,6 @@ export const FeatureTwoContributors: StoryObj = ({ format }: StoryArgs) => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -383,7 +374,6 @@ export const DeadBlog: StoryObj = ({ format }: StoryArgs) => (
 			isCommentable={false}
 			discussionApiUrl=""
 			shortUrlId=""
-			ajaxUrl=""
 		/>
 	</Wrapper>
 );
@@ -410,7 +400,6 @@ export const Dateline: StoryObj = ({ format }: StoryArgs) => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -432,7 +421,6 @@ export const Video: StoryObj = ({ format }: StoryArgs) => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);

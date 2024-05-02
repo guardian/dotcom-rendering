@@ -37,7 +37,7 @@ module.exports = {
 			headers: (req, res) => {
 				// Allow any localhost request from accessing the assets
 				if (
-					req.hostname === (process.env.HOSTNAME || 'localhost') &&
+					req.hostname === (process.env.HOSTNAME ?? 'localhost') &&
 					req.headers.origin
 				) {
 					res.setHeader(

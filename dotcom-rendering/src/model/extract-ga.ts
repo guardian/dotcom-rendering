@@ -8,7 +8,7 @@ import type { TagType } from '../types/tag';
 const filterTags = (
 	tags: DCRArticle['tags'],
 	tagType: 'Contributor' | 'Keyword' | 'Tone' | 'Series', // Let’s make a decision to keep this tag getter small and well defined, we don't really want to use tags
-): TagType['id'] | '' => {
+): TagType['id'] => {
 	const tagArr = tags.filter((tag) => tag.type === tagType);
 	const arrOfvalues =
 		tagArr.length > 0 &&
@@ -21,9 +21,7 @@ const filterTags = (
 };
 
 // Annoyingly we ping GA with commissioningdesk as the title of the tag, not the id so handle that separately
-const getCommissioningDesk = (
-	tags: DCRArticle['tags'],
-): TagType['title'] | '' => {
+const getCommissioningDesk = (tags: DCRArticle['tags']): TagType['title'] => {
 	const tag = tags.find((thisTag) =>
 		thisTag.id.includes('tracking/commissioningdesk'),
 	);

@@ -16,6 +16,7 @@ import {
 } from '@guardian/source-react-components';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
+import { getLabsUrlSuffix } from '../lib/labs';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
@@ -67,6 +68,7 @@ type Props = {
 
 	discussionApiUrl: string;
 
+	/** We use a different link on the logo for US and AUS labs */
 	editionId: EditionId;
 };
 
@@ -429,7 +431,9 @@ export const LabsSection = ({
 					</div>
 
 					<Link
-						href="https://www.theguardian.com/guardian-labs"
+						href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+							editionId,
+						)}`}
 						cssOverrides={css`
 							text-align: right;
 						`}

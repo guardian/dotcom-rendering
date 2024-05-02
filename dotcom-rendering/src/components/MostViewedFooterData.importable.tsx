@@ -11,7 +11,6 @@ import { Placeholder } from './Placeholder';
 
 interface Props {
 	sectionId?: string;
-	format: ArticleFormat;
 	ajaxUrl: string;
 	edition: EditionId;
 }
@@ -52,7 +51,6 @@ interface MostViewedFooterPayloadType {
 
 export const MostViewedFooterData = ({
 	sectionId,
-	format,
 	ajaxUrl,
 	edition,
 }: Props) => {
@@ -60,12 +58,16 @@ export const MostViewedFooterData = ({
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB()?.api;
 
-	const abTestCypressDataAttr =
-		(ABTestAPI?.isUserInVariant('AbTestTest', 'control') &&
-			'ab-test-control') ||
-		(ABTestAPI?.isUserInVariant('AbTestTest', 'variant') &&
-			'ab-test-variant') ||
-		'ab-test-not-in-test';
+	let abTestCypressDataAttr = 'ab-test-not-in-test';
+
+	if (ABTestAPI?.isUserInVariant('AbTestTest', 'control')) {
+		abTestCypressDataAttr = 'ab-test-control';
+	}
+
+	if (ABTestAPI?.isUserInVariant('AbTestTest', 'variant')) {
+		abTestCypressDataAttr = 'ab-test-variant';
+	}
+
 	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 

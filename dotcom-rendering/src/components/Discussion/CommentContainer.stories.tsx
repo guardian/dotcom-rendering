@@ -191,7 +191,7 @@ export const defaultStory = () => (
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
-		setCommentBeingRepliedTo={(comment) => {}}
+		setCommentBeingRepliedTo={() => {}}
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
@@ -227,7 +227,7 @@ export const threadedComment = () => (
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
-		setCommentBeingRepliedTo={(comment) => {}}
+		setCommentBeingRepliedTo={() => {}}
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
@@ -263,7 +263,7 @@ export const threadedCommentWithShowMore = () => (
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
-		setCommentBeingRepliedTo={(comment) => {}}
+		setCommentBeingRepliedTo={() => {}}
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
@@ -299,7 +299,7 @@ export const threadedCommentWithLongUsernames = () => (
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
-		setCommentBeingRepliedTo={(comment) => {}}
+		setCommentBeingRepliedTo={() => {}}
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}
@@ -335,7 +335,7 @@ export const threadedCommentWithLongUsernamesMobile = () => (
 		shortUrl="randomShortURL"
 		user={aUser}
 		threads="collapsed"
-		setCommentBeingRepliedTo={(comment) => {}}
+		setCommentBeingRepliedTo={() => {}}
 		mutes={[]}
 		toggleMuteStatus={() => {}}
 		onPermalinkClick={() => {}}

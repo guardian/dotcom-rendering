@@ -370,6 +370,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 
 	const isWeb = renderingTarget === 'Web';
@@ -551,7 +552,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader />
+						<LabsHeader editionId={editionId} />
 					</Section>
 				</Stuck>
 			)}
@@ -717,7 +718,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												branding={branding}
 												format={format}
 												pageId={article.pageId}
-												webTitle={article.webTitle}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -736,7 +736,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											></ArticleMetaApps>
 										</div>
 									</Hide>
@@ -766,7 +765,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											/>
 										</div>
 									</Hide>
@@ -792,7 +790,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
 									/>
 									{!!article.affiliateLinksDisclaimer && (
 										<AffiliateDisclaimer />
@@ -1068,7 +1065,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>

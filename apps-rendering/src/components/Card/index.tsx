@@ -11,9 +11,12 @@ import {
 } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineMedium17,
+	headlineMedium20,
 	remSpace,
-	textSans,
+	textSans15,
+	textSans17,
+	textSans20,
 } from '@guardian/source-foundations';
 import {
 	SvgAudio,
@@ -81,7 +84,7 @@ const listStyles = (
 		case RelatedItemType.AUDIO:
 		case RelatedItemType.GALLERY: {
 			return css`
-				${listBaseStyles}
+				${listBaseStyles};
 				border-radius: ${remSpace[2]};
 				padding-top: 0.125rem;
 			`;
@@ -89,7 +92,7 @@ const listStyles = (
 
 		case RelatedItemType.LIVE: {
 			return css`
-				${listBaseStyles}
+				${listBaseStyles};
 				border-radius: ${remSpace[2]};
 				padding-top: 0.125rem;
 			`;
@@ -97,7 +100,7 @@ const listStyles = (
 
 		default: {
 			return css`
-				${listBaseStyles}
+				${listBaseStyles};
 				border-top: 1px solid ${border.relatedCard(format)};
 				border-radius: 0 0 ${remSpace[2]} ${remSpace[2]};
 
@@ -126,7 +129,7 @@ const imgStyles = css`
 `;
 
 const timeStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small()};
+	${textSans15};
 	color: ${text.relatedCardTimeAgo(format)};
 	text-align: right;
 	display: inline-block;
@@ -183,16 +186,16 @@ const headingWrapperStyles = (
 const headingStyles = (type: RelatedItemType): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
 		return css`
-			${textSans.medium({ lineHeight: 'regular' })}
+			${textSans17};
 			margin: 0;
 		`;
 	} else {
 		return css`
-			${headline.xxxsmall()}
+			${headlineMedium17};
 			margin: 0;
 
 			${from.desktop} {
-				${headline.xxsmall()}
+				${headlineMedium20}
 			}
 		`;
 	}
@@ -259,14 +262,14 @@ const cardStyles = (
 		case RelatedItemType.ADVERTISEMENT_FEATURE: {
 			return css`
 				background-color: ${background.relatedCard(format)};
-				${textSans.large()}
+				${textSans20}
 			`;
 		}
 
 		case RelatedItemType.COMMENT: {
 			return css`
 				background-color: ${background.relatedCard(format)};
-				${headline.xxsmall()}
+				${headlineMedium20}
 				${darkModeCss`
 					background: ${background.relatedCardDark(format)};
         		`}
