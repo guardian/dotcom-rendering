@@ -6,7 +6,7 @@ import {
 	background,
 	focusHalo,
 	from,
-	headline,
+	headlineBold20,
 	line,
 	neutral,
 	remSpace,
@@ -69,7 +69,7 @@ const titleRowStyles = css`
 `;
 
 const titleStyle = css`
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${headlineBold20};
 	color: ${neutral[7]};
 	${darkModeCss`
 		color: ${neutral[86]};

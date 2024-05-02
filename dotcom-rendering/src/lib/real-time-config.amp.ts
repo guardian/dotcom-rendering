@@ -41,7 +41,7 @@ export const pubmaticRtcParameters = (
 	adType: AdType,
 ): PubmaticRTCParameters => {
 	if (
-		adType.isSticky ||
+		!!adType.isSticky ||
 		adType.adRegion === 'UK' ||
 		adType.adRegion === 'ROW'
 	) {
@@ -96,7 +96,7 @@ export const ozoneRTCParameters = (
 	const ukPlacementId = '0420420507';
 
 	const placementId =
-		adType.isSticky || adType.adRegion === 'UK'
+		!!adType.isSticky || adType.adRegion === 'UK'
 			? ukPlacementId
 			: rowPlacementId;
 

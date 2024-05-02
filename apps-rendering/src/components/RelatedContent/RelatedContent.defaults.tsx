@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import {
 	from,
-	headline,
+	headlineBold24,
 	neutral,
 	remSpace,
 	until,
@@ -28,7 +28,7 @@ interface Props {
 }
 
 export const defaultHeadingStyles = css`
-	${headline.xsmall({ fontWeight: 'bold' })}
+	${headlineBold24};
 	margin: 0 0 ${remSpace[4]} 0;
 
 	${darkModeCss`

@@ -1,29 +1,25 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace, until } from '@guardian/source-foundations';
+import {
+	headlineLightItalic28,
+	headlineLightItalic34,
+	remSpace,
+	until,
+} from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { text } from 'palette';
 import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.medium({
-		fontWeight: 'light',
-		fontStyle: 'italic',
-		lineHeight: 'tight',
-	})}
-
+	${headlineLightItalic34};
 	color: ${text.byline(format)};
 	display: flex;
 	flex-direction: column;
 
 	${until.tablet} {
-		${headline.small({
-			fontWeight: 'light',
-			fontStyle: 'italic',
-			lineHeight: 'tight',
-		})}
+		${headlineLightItalic28}
 	}
 	padding-bottom: ${remSpace[6]};
 

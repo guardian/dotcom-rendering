@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans14 } from '@guardian/source-foundations';
 import CaptionIcon from 'components/CaptionIcon';
 import type { CaptionIconVariant } from 'components/CaptionIcon';
 import type { Styleable } from 'lib';
@@ -22,7 +22,7 @@ type Props = Styleable<{
 }>;
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall({ lineHeight: 'regular' })}
+	${textSans14};
 	padding-top: ${remSpace[1]};
 	color: ${text.figCaption(format)};
 

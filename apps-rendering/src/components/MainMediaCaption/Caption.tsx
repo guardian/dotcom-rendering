@@ -2,7 +2,11 @@
 
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, textSans } from '@guardian/source-foundations';
+import {
+	neutral,
+	textSansBold14,
+	textSansItalic14,
+} from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';
@@ -25,10 +29,7 @@ const captionElement =
 				return (
 					<strong
 						css={css`
-							${textSans.xsmall({
-								lineHeight: 'regular',
-								fontWeight: 'bold',
-							})}
+							${textSansBold14}
 						`}
 						key={key}
 					>
@@ -39,10 +40,7 @@ const captionElement =
 				return (
 					<em
 						css={css`
-							${textSans.xsmall({
-								lineHeight: 'regular',
-								fontStyle: 'italic',
-							})}
+							${textSansItalic14}
 						`}
 						key={key}
 					>

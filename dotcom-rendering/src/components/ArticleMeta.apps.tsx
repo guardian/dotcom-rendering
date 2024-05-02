@@ -22,7 +22,6 @@ import { SendAMessage } from './SendAMessage.importable';
 type Props = {
 	format: ArticleFormat;
 	pageId: string;
-	webTitle: string;
 	byline?: string;
 	tags: TagType[];
 	primaryDateline: string;
@@ -31,7 +30,6 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	ajaxUrl: string;
 	messageUs?: MessageUs;
 };
 
@@ -201,7 +199,6 @@ export const ArticleMetaApps = ({
 	branding,
 	format,
 	pageId,
-	webTitle,
 	byline,
 	tags,
 	primaryDateline,
@@ -209,7 +206,6 @@ export const ArticleMetaApps = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
-	ajaxUrl,
 	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
