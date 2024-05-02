@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, palette, space } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
@@ -7,13 +8,10 @@ import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useAuthStatus } from '../lib/useAuthStatus';
-import {
-	MyAccount,
-	sharedLinkStyles,
-	verticalDivider,
-} from './TopBarMyAccount';
+import { TopBarLink } from './TopBarLink';
+import { TopBarMyAccount } from './TopBarMyAccount';
 
-interface Props {
+interface TopBarProps {
 	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
@@ -22,72 +20,11 @@ interface Props {
 	hasPageSkin?: boolean;
 }
 
-const collapsibleLinkStyles = css`
-	display: none;
-
-	${from.desktop} {
-		display: flex;
-	}
-	${verticalDivider}
-`;
-
-const PrintSubscriptions = ({ editionId }: { editionId: EditionId }) => {
-	const [pageViewId, setPageViewId] = useState('');
-	const [referrerUrl, setReferrerUrl] = useState('');
-	useEffect(() => {
-		setPageViewId(window.guardian.config.ophan.pageViewId);
-		setReferrerUrl(window.location.origin + window.location.pathname);
-	}, []);
-
-	const href = addTrackingCodesToUrl({
-		base: `https://support.theguardian.com/subscribe${
-			editionId === 'UK' ? '' : '/weekly'
-		}`,
-		componentType: 'ACQUISITIONS_HEADER',
-		componentId: 'PrintSubscriptionsHeaderLink',
-		pageViewId,
-		referrerUrl,
-	});
-
-	return (
-		<div css={collapsibleLinkStyles}>
-			<a
-				href={href}
-				css={sharedLinkStyles}
-				data-link-name={nestedOphanComponents(
-					'nav3',
-					'topbar',
-					'printsubs',
-				)}
-			>
-				Print subscriptions
-			</a>
-		</div>
-	);
-};
-
-const SearchJobs = () => {
-	return (
-		<div css={collapsibleLinkStyles}>
-			<a
-				href="https://jobs.theguardian.com"
-				css={sharedLinkStyles}
-				data-link-name={nestedOphanComponents('nav3', 'job-cta')}
-			>
-				Search jobs
-			</a>
-		</div>
-	);
-};
-
 const topBarStylesUntilLeftCol = css`
 	background-color: ${palette.brand[300]};
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	column-gap: ${space[4]}px;
-
-	align-items: center;
 
 	height: 52px;
 	box-sizing: border-box;
@@ -113,6 +50,22 @@ const topBarStylesFromLeftCol = css`
 	}
 `;
 
+const topBarLinkContainerStyles = css`
+	height: 40px;
+	align-items: flex-start;
+	display: flex;
+`;
+
+const leftDividerStyles = css`
+	${from.desktop} {
+		border-left: 1px solid ${palette.brand[600]};
+	}
+`;
+
+const TopBarLinkContainer = ({ children }: { children: React.ReactNode }) => (
+	<div css={[topBarLinkContainerStyles, leftDividerStyles]}>{children}</div>
+);
+
 /**
  * The _new and improved_ slim dark blue top bar at the very top of Guardian pages
  *
@@ -132,8 +85,26 @@ export const TopBar = ({
 	discussionApiUrl,
 	idApiUrl,
 	hasPageSkin = false,
-}: Props) => {
+}: TopBarProps) => {
 	const authStatus = useAuthStatus();
+
+	const [pageViewId, setPageViewId] = useState('');
+	const [referrerUrl, setReferrerUrl] = useState('');
+
+	useEffect(() => {
+		setPageViewId(window.guardian.config.ophan.pageViewId);
+		setReferrerUrl(window.location.origin + window.location.pathname);
+	}, []);
+
+	const printSubscriptionsHref = addTrackingCodesToUrl({
+		base: `https://support.theguardian.com/subscribe${
+			editionId === 'UK' ? '' : '/weekly'
+		}`,
+		componentType: 'ACQUISITIONS_HEADER',
+		componentId: 'PrintSubscriptionsHeaderLink',
+		pageViewId,
+		referrerUrl,
+	});
 
 	return (
 		<div
@@ -145,17 +116,41 @@ export const TopBar = ({
 		>
 			{/** @todo - Reader revenue support messaging + CTA button */}
 
-			<PrintSubscriptions editionId={editionId} />
+			<Hide until="desktop">
+				<TopBarLinkContainer>
+					<TopBarLink
+						dataLinkName={nestedOphanComponents(
+							'nav3',
+							'topbar',
+							'printsubs',
+						)}
+						href={printSubscriptionsHref}
+					>
+						Print subscriptions
+					</TopBarLink>
+				</TopBarLinkContainer>
+			</Hide>
 
-			<SearchJobs />
+			<Hide until="desktop">
+				<TopBarLinkContainer>
+					<TopBarLink
+						dataLinkName={nestedOphanComponents('nav3', 'job-cta')}
+						href="https://jobs.theguardian.com"
+					>
+						Search jobs
+					</TopBarLink>
+				</TopBarLinkContainer>
+			</Hide>
 
-			<MyAccount
-				mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
-				idUrl={idUrl ?? 'https://profile.theguardian.com'}
-				discussionApiUrl={discussionApiUrl}
-				idApiUrl={idApiUrl}
-				authStatus={authStatus}
-			/>
+			<TopBarLinkContainer>
+				<TopBarMyAccount
+					mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
+					idUrl={idUrl ?? 'https://profile.theguardian.com'}
+					discussionApiUrl={discussionApiUrl}
+					idApiUrl={idApiUrl}
+					authStatus={authStatus}
+				/>
+			</TopBarLinkContainer>
 		</div>
 	);
 };

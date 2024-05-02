@@ -1,6 +1,11 @@
+/**
+ * @file
+ * This was largely copied from https://github.com/guardian/dotcom-rendering/blob/68224f48e7b5f3a465884e3f53607a2227eb9494/dotcom-rendering/src/components/HeaderTopBarMyAccount.tsx
+ * For more Git history, please refer to the original file
+ */
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { from, palette, space, textSans } from '@guardian/source-foundations';
+import { from, palette } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
@@ -23,6 +28,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
+import { TopBarLink, topBarLinkStyles } from './TopBarLink';
 
 interface MyAccountProps {
 	mmaUrl: string;
@@ -38,52 +44,8 @@ type SignedInProps = MyAccountProps & {
 	renderingTarget: RenderingTarget;
 };
 
-export const verticalDivider = css`
-	:before {
-		content: '';
-		border-left: 1px solid ${palette.brand[600]};
-		position: relative;
-		right: ${space[1]}px;
-		margin-top: -50px;
-		margin-bottom: ${space[1]}px;
-	}
-`;
-
-const myAccountStyles = css`
-	display: flex;
-	align-items: center;
-	${from.tablet} {
-		align-items: stretch;
-	}
-	${from.desktop} {
-		${verticalDivider}
-	}
-`;
-
-export const sharedLinkStyles = css`
-	display: flex;
-	align-items: center;
-	height: fit-content;
-	${textSans.medium({ fontWeight: 'bold' })};
-	color: ${palette.neutral[100]};
-	transition: color 80ms ease-out;
-	line-height: 1;
-	text-decoration: none;
-	:hover,
-	:focus {
-		text-decoration: underline;
-	}
-	svg {
-		fill: currentColor;
-		float: left;
-		height: 18px;
-		width: 18px;
-		margin: 0 4px 0 0;
-	}
-`;
-
 const myAccountLinkStyles = css`
-	${sharedLinkStyles}
+	${topBarLinkStyles}
 	${getZIndex('myAccountDropdown')}
 `;
 
@@ -155,15 +117,14 @@ export const buildIdentityLinks = (
 };
 
 const SignIn = ({ idUrl }: { idUrl: string }) => (
-	<a
-		css={myAccountLinkStyles}
+	<TopBarLink
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
-		data-link-name={nestedOphanComponents('nav3', 'topbar', 'signin')}
+		dataLinkName={nestedOphanComponents('nav3', 'topbar', 'signin')}
 	>
 		<ProfileIcon /> Sign in
-	</a>
+	</TopBarLink>
 );
 
 export const dropDownOverrides = css`
@@ -286,7 +247,7 @@ const SignedIn = ({
 	);
 };
 
-export const MyAccount = ({
+export const TopBarMyAccount = ({
 	mmaUrl,
 	idUrl,
 	discussionApiUrl,
@@ -296,7 +257,7 @@ export const MyAccount = ({
 	const { renderingTarget } = useConfig();
 
 	return (
-		<div css={myAccountStyles}>
+		<>
 			{authStatus.kind === 'SignedInWithOkta' ||
 			authStatus.kind === 'SignedInWithCookies' ? (
 				<SignedIn
@@ -310,6 +271,6 @@ export const MyAccount = ({
 			) : (
 				<SignIn idUrl={idUrl} />
 			)}
-		</div>
+		</>
 	);
 };
