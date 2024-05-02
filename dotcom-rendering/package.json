@@ -191,7 +191,7 @@
 		"simple-progress-webpack-plugin": "2.0.0",
 		"source-map": "0.7.4",
 		"storybook": "7.6.17",
-		"stylelint": "16.1.0",
+		"stylelint": "16.5.0",
 		"stylelint-config-recommended": "14.0.0",
 		"svg-loader": "0.0.2",
 		"swc-loader": "0.2.6",
