@@ -39,7 +39,6 @@ describe('ArticleMeta', () => {
 					isCommentable={false}
 					discussionApiUrl=""
 					shortUrlId=""
-					ajaxUrl=""
 				/>
 			</ConfigProvider>,
 		);
@@ -86,7 +85,6 @@ describe('ArticleMeta', () => {
 					isCommentable={false}
 					discussionApiUrl=""
 					shortUrlId=""
-					ajaxUrl=""
 				/>
 			</ConfigProvider>,
 		);

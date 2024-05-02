@@ -39,7 +39,7 @@ const articles = [
 		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	},
 	{
-		name: 'Video',
+		name: 'StandardWithVideo',
 		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	},
 	{
@@ -126,6 +126,10 @@ const articles = [
 		name: 'Picture',
 		url: 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 	},
+	{
+		name: 'Video',
+		url: 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+	},
 ];
 
 const HEADER = `/**
@@ -173,6 +177,11 @@ const requests = articles.map((article) => {
 			}
 
 			const dcrArticle = enhanceArticleType(frontendJson);
+
+			// manual hack for Video articles
+			if (article.name === 'Video') {
+				dcrArticle.config.source = 'TMN';
+			}
 
 			// Write the new DCR fixture data
 			const dcrContents = `${HEADER}

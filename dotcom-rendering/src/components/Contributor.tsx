@@ -50,12 +50,13 @@ const labsBylineStyles = css`
 `;
 
 type Props = {
-	byline: string;
+	byline?: string;
+	source?: string;
 	tags: TagType[];
 	format: ArticleFormat;
 };
 
-export const Contributor = ({ byline, tags, format }: Props) => (
+export const Contributor = ({ byline, tags, format, source }: Props) => (
 	<address
 		aria-label="Contributor info"
 		data-component="meta-byline"
@@ -78,6 +79,7 @@ export const Contributor = ({ byline, tags, format }: Props) => (
 				<BylineLink
 					byline={byline}
 					tags={tags}
+					source={source}
 					format={format}
 					isHeadline={false}
 				/>

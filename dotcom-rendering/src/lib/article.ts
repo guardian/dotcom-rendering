@@ -1,8 +1,7 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
-import { enhanceElementsImages } from '../model/enhance-images';
-import { enhanceBlocks } from '../model/enhanceBlocks';
+import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
@@ -48,9 +47,10 @@ export const enhanceArticleType = (
 		abTests: data.config.abTests,
 	});
 
-	const mainMediaElements = enhanceElementsImages(
+	const mainMediaElements = enhanceMainMedia(
 		format,
 		imagesForLightbox,
+		data.main,
 	)(data.mainMediaElements);
 
 	return {

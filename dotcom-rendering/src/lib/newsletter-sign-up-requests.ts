@@ -41,6 +41,7 @@ const postFormData = async (
 	for (const [key, value] of formData.entries()) {
 		requestBodyStrings.push(
 			`${encodeURIComponent(key)}=${encodeURIComponent(
+				// eslint-disable-next-line @typescript-eslint/no-base-to-string -- people can still sign up (apparently)
 				value.toString(),
 			)}`,
 		);

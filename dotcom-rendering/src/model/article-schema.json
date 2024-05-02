@@ -4204,6 +4204,9 @@
                 "section": {
                     "type": "string"
                 },
+                "source": {
+                    "type": "string"
+                },
                 "sharedAdTargeting": {
                     "$ref": "#/definitions/SharedAdTargeting"
                 },

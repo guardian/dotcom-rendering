@@ -78,6 +78,12 @@ function decideLogo(
 	 *  so fallback to standard logo if not present */
 	const maybeDarkLogo = branding.logoForDarkBackground ?? branding.logo;
 
+	const useDarkColourScheme =
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Picture;
+
 	return (
 		<picture>
 			{/**
@@ -102,14 +108,27 @@ function decideLogo(
 					media={'(prefers-color-scheme: dark)'}
 				/>
 			)}
-			{/** Default to standard logo for light backgrounds */}
-			<img
-				width={branding.logo.dimensions.width}
-				height={branding.logo.dimensions.height}
-				src={encodeURI(branding.logo.src)}
-				alt={branding.sponsorName}
-				css={imgStyles(branding.logo.dimensions.width)}
-			/>
+			{/**
+			 * Audio/Video articles have a dark background and need a logo designed for dark backgrounds,
+			 * for everything else default to standard logo for light backgrounds
+			 **/}
+			{useDarkColourScheme && branding.logoForDarkBackground ? (
+				<img
+					width={branding.logoForDarkBackground.dimensions.width}
+					height={branding.logoForDarkBackground.dimensions.height}
+					src={encodeURI(branding.logoForDarkBackground.src)}
+					alt={branding.sponsorName}
+					css={imgStyles(branding.logo.dimensions.width)}
+				/>
+			) : (
+				<img
+					width={branding.logo.dimensions.width}
+					height={branding.logo.dimensions.height}
+					src={encodeURI(branding.logo.src)}
+					alt={branding.sponsorName}
+					css={imgStyles(branding.logo.dimensions.width)}
+				/>
+			)}
 		</picture>
 	);
 }

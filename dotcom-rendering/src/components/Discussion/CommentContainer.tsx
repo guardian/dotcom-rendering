@@ -126,6 +126,9 @@ export const CommentContainer = ({
 				}
 				expandCommentReplies(commentId, result.value);
 			})
+			.catch(() => {
+				// do nothing
+			})
 			.finally(() => {
 				setLoading(false);
 			});

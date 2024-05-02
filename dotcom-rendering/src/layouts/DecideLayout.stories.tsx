@@ -13,6 +13,7 @@ import { NewsletterSignup as NewsletterSignupStandardSportFixture } from '../../
 import { Picture as PictureShowcaseOpinionFixture } from '../../fixtures/generated/dcr-articles/Picture';
 import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generated/dcr-articles/Recipe';
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/dcr-articles/Standard';
+import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/dcr-articles/Video';
 import { embedIframe } from '../client/embedIframe';
 import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
@@ -468,6 +469,29 @@ export const AppsAnalysisStandardCultureLight: Story = {
 export const AppsAnalysisStandardCultureDark: Story = {
 	args: {
 		article: analysisStandardCultureFixture,
+		colourScheme: 'dark',
+	},
+	parameters: appsParameters,
+};
+
+export const WebVideoStandardNewsLight: Story = {
+	args: {
+		article: VideoStandardNewsFixture,
+	},
+	parameters: webParameters,
+};
+
+export const AppsVideoStandardNewsLight: Story = {
+	args: {
+		article: VideoStandardNewsFixture,
+		colourScheme: 'light',
+	},
+	parameters: appsParameters,
+};
+
+export const AppsVideoStandardNewsDark: Story = {
+	args: {
+		article: VideoStandardNewsFixture,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,

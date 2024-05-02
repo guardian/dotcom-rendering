@@ -524,7 +524,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 													branding={branding}
 													format={format}
 													pageId={article.pageId}
-													webTitle={article.webTitle}
 													byline={article.byline}
 													tags={article.tags}
 													primaryDateline={
@@ -543,9 +542,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 													shortUrlId={
 														article.config
 															.shortUrlId
-													}
-													ajaxUrl={
-														article.config.ajaxUrl
 													}
 												></ArticleMetaApps>
 											</Hide>
@@ -574,9 +570,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 														article.config
 															.shortUrlId
 													}
-													ajaxUrl={
-														article.config.ajaxUrl
-													}
 												/>
 											</Hide>
 										</>
@@ -603,7 +596,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											ajaxUrl={article.config.ajaxUrl}
 										/>
 									)}
 								</div>
@@ -655,12 +647,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 				<Section
 					stretchRight={false}
 					showTopBorder={false}
-					backgroundColour={themePalette(
-						'--article-section-background',
-					)}
+					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					fontColour={themePalette('--article-section-title')}
 					padContent={false}
+					verticalMargins={false}
 				>
 					<div
 						css={css`
@@ -843,7 +834,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>
