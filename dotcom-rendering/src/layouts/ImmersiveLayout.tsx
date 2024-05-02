@@ -235,6 +235,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -356,7 +357,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
-								<LabsHeader />
+								<LabsHeader editionId={editionId} />
 							</Section>
 						</Stuck>
 					)}

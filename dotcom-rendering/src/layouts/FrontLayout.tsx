@@ -122,6 +122,7 @@ const decideLeftContent = (
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
+		editionId,
 	} = front;
 
 	const renderAds = canRenderAds(front);
@@ -286,7 +287,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
-							<LabsHeader />
+							<LabsHeader editionId={editionId} />
 						</Section>
 					)}
 				</>
@@ -473,7 +474,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									editionId={'UK'}
+									editionId={editionId}
 								>
 									<DecideContainer
 										trails={trailsWithoutBranding}
