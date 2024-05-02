@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import {
-	background,
 	between,
 	from,
 	palette,
@@ -12,6 +11,7 @@ import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
+import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import type { DCRContainerPalette, TreatType } from '../types/front';
 import type { DCRFrontPagination } from '../types/tagPage';
@@ -348,7 +348,7 @@ const decideBackgroundColour = (
 		return overrideBackgroundColour;
 	}
 	if (hasPageSkin) {
-		return background.primary;
+		return schemePalette('--article-background');
 	}
 	return undefined;
 };
@@ -490,13 +490,14 @@ export const FrontSection = ({
 				containerStylesUntilLeftCol,
 				!hasPageSkin && containerStylesFromLeftCol,
 				hasPageSkin && pageSkinContainer,
-				css`
-					background-color: ${decideBackgroundColour(
+			]}
+			style={{
+				backgroundColor:
+					decideBackgroundColour(
 						overrides?.background.container,
 						hasPageSkin,
-					)};
-				`,
-			]}
+					) ?? schemePalette('--article-background'),
+			}}
 		>
 			<div
 				css={[

@@ -271,10 +271,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={themePalette(
-								'--article-link-text-hover',
-							)}
-							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>
@@ -360,10 +356,6 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={themePalette(
-								'--article-link-text-hover',
-							)}
-							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>

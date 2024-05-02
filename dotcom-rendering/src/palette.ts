@@ -3510,7 +3510,7 @@ const subNavBorder: PaletteFunction = ({ design, theme }) => {
 			}
 	}
 };
-const subNavLink = (format: ArticleFormat) => {
+const subNavLinkLight: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -3519,6 +3519,21 @@ const subNavLink = (format: ArticleFormat) => {
 		default:
 			return sourcePalette.neutral[7];
 	}
+};
+const subNavLinkDark: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+const subNavLinkHoverLight: PaletteFunction = (format) => {
+	return articleLinkHoverLight(format);
+};
+const subNavLinkHoverDark: PaletteFunction = (format) => {
+	return articleLinkHoverDark(format);
+};
+const subNavMoreLight: PaletteFunction = () => {
+	return sourcePalette.neutral[60];
+};
+const subNavMoreDark: PaletteFunction = () => {
+	return sourcePalette.neutral[38];
 };
 
 const pullQuoteTextLight: PaletteFunction = ({
@@ -5417,6 +5432,14 @@ type PaletteColours = Record<
 const paletteColours = {
 	...expandingWrapper,
 	...tabs,
+	'--ad-slot-background': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[0],
+	},
+	'--ad-slot-border': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[0],
@@ -5822,8 +5845,16 @@ const paletteColours = {
 		dark: subNavBorder,
 	},
 	'--sub-nav-link': {
-		light: subNavLink,
-		dark: subNavLink,
+		light: subNavLinkLight,
+		dark: subNavLinkDark,
+	},
+	'--sub-nav-link-hover': {
+		light: subNavLinkHoverLight,
+		dark: subNavLinkHoverDark,
+	},
+	'--sub-nav-more': {
+		light: subNavMoreLight,
+		dark: subNavMoreDark,
 	},
 	'--share-button': {
 		light: shareButtonLight,

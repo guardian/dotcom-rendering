@@ -356,12 +356,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											currentNavLink={
 												props.NAV.currentNavLink
 											}
-											linkHoverColour={themePalette(
-												'--article-link-text-hover',
-											)}
-											borderColour={themePalette(
-												'--sub-nav-border',
-											)}
 										/>
 									</Island>
 								</Section>
@@ -872,10 +866,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={themePalette(
-								'--article-link-text-hover',
-							)}
-							borderColour={themePalette('--sub-nav-border')}
 						/>
 					</Island>
 				</Section>

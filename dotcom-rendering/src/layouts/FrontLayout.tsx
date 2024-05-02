@@ -44,6 +44,7 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
+import { palette } from '../palette';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -248,6 +249,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padSides={false}
 								element="aside"
 								hasPageSkin={hasPageSkin}
+								backgroundColour={palette(
+									'--article-background',
+								)}
 							>
 								<Island
 									priority="enhancement"
@@ -256,10 +260,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={
-											sourcePalette.news[400]
-										}
-										borderColour={sourcePalette.neutral[46]}
 									/>
 								</Island>
 							</Section>
@@ -268,6 +268,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padSides={false}
 								showTopBorder={false}
 								hasPageSkin={hasPageSkin}
+								backgroundColour={palette(
+									'--article-background',
+								)}
 							>
 								<StraightLines
 									cssOverrides={css`
@@ -354,6 +357,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 													collection.collectionType
 												}
 												hasPageSkin={hasPageSkin}
+												backgroundColour={palette(
+													'--article-background',
+												)}
 											>
 												<Snap
 													snapData={trail.snapData}
@@ -687,8 +693,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={sourcePalette.news[400]}
-							borderColour={sourcePalette.neutral[46]}
 						/>
 					</Island>
 				</Section>

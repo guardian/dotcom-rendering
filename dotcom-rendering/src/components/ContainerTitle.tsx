@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { type EditionId, getEditionFromId } from '../lib/edition';
+import { palette as schemePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Colour } from '../types/palette';
 import { localisedTitle } from './Localisation';
@@ -32,7 +33,7 @@ const linkStyles = css`
 
 const headerStyles = (fontColour?: string) => css`
 	${headlineBold24};
-	color: ${fontColour ?? palette.neutral[7]};
+	color: ${fontColour ?? schemePalette('--article-section-title')};
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/

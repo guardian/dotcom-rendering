@@ -10,6 +10,7 @@ import {
 import { Link } from '@guardian/source-react-components';
 import { Fragment } from 'react';
 import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 import type { TreatType } from '../types/front';
 import { generateSources, getFallbackSource } from './Picture';
 import { SvgCrossword } from './SvgCrossword';
@@ -42,7 +43,7 @@ const TextTreat = ({
 			cssOverrides={css`
 				${textSans12}
 				text-decoration: none;
-				color: ${fontColour ?? sourcePalette.neutral[7]};
+				color: inherit;
 			`}
 			href={linkTo}
 			data-link-name={`treat | ${index + 1} | ${text}`}
@@ -142,7 +143,9 @@ const ImageTreat = ({
 									padding: 0 5px 4px;
 									box-decoration-break: clone;
 									position: relative;
-									color: ${sourcePalette.neutral[100]};
+									color: ${palette(
+										'--article-section-title',
+									)};
 									text-decoration: none;
 									:hover {
 										text-decoration: underline;

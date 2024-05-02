@@ -1,6 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial';
-import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import { space } from '@guardian/source-foundations';
+import { palette } from '../palette';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { adContainerStyles, AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
@@ -20,9 +21,9 @@ const headerMinHeight =
 const headerAdWrapper = css`
 	z-index: 1080;
 	width: 100%;
-	background-color: ${sourcePalette.neutral[97]};
+	background-color: ${palette('--ad-slot-background')};
 	min-height: ${headerMinHeight}px;
-	border-bottom: ${borderBottomHeight}px solid ${sourcePalette.neutral[86]};
+	border-bottom: ${borderBottomHeight}px solid ${palette('--ad-slot-border')};
 
 	display: flex;
 	flex-direction: column;
