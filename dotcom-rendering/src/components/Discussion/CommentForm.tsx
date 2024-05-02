@@ -492,7 +492,7 @@ export const CommentForm = ({
 				<TextArea
 					data-testid="comment-input"
 					placeholder={
-						commentBeingRepliedTo || !isActive
+						!!commentBeingRepliedTo || !isActive
 							? 'Join the discussion'
 							: ''
 					}

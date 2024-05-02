@@ -88,7 +88,7 @@ const mainImage = (element: ImageBlockElement) => {
 				srcset={scrsetStringFromImagesSources(element.imageSources)}
 			/>
 			{!!(
-				element.data.caption ||
+				!!element.data.caption ||
 				(element.data.credit && element.displayCredit)
 			) && (
 				<>

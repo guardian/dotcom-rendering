@@ -4,7 +4,7 @@ import {
 	brandAlt,
 	neutral,
 	remSpace,
-	textSans,
+	textSans15,
 } from '@guardian/source-foundations';
 import { SvgCamera } from '@guardian/source-react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
@@ -53,7 +53,7 @@ const HeaderImageCaptionStyles = (
 		padding-right: ${remSpace[12]};
 		z-index: 1;
 		color: ${neutral[100]};
-		${textSans.small()};
+		${textSans15};
 		box-sizing: border-box;
 
 		${isFullWidthImage && articlePaddingStyles}

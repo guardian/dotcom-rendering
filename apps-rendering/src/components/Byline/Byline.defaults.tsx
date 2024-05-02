@@ -1,7 +1,10 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
+import {
+	headlineBold17,
+	headlineMediumItalic17,
+} from '@guardian/source-foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';
@@ -11,7 +14,7 @@ import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxxsmall({ fontStyle: 'italic' })}
+	${headlineMediumItalic17};
 	color: ${text.byline(format)};
 
 	${darkModeCss`
@@ -22,7 +25,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 export const defaultAnchorStyles = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${headlineBold17};
 	font-style: normal;
 	color: ${text.bylineAnchor(format)};
 	text-decoration: none;

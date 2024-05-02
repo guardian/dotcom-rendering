@@ -573,7 +573,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												branding={branding}
 												format={format}
 												pageId={article.pageId}
-												webTitle={article.webTitle}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -592,7 +591,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">
@@ -619,7 +617,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											/>
 										</Hide>
 									</>
@@ -642,7 +639,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
 									/>
 								)}
 							</div>
@@ -901,7 +897,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>

@@ -172,6 +172,34 @@ export const WebPictureShowcaseOpinionLight: Story = {
 	parameters: webParameters,
 };
 
+export const WebStandardLifestyleReviewLight: Story = {
+	args: {
+		article: {
+			...StandardStandardNewsFixture,
+			format: {
+				...StandardStandardNewsFixture.format,
+				theme: 'LifestylePillar',
+				design: 'ReviewDesign',
+			},
+			starRating: 4,
+		},
+	},
+	parameters: webParameters,
+};
+
+export const WebStandardNewsInterviewLight: Story = {
+	args: {
+		article: {
+			...StandardStandardNewsFixture,
+			format: {
+				...StandardStandardNewsFixture.format,
+				design: 'InterviewDesign',
+			},
+		},
+	},
+	parameters: webParameters,
+};
+
 export const AppsPictureShowcaseOpinionLight: Story = {
 	args: {
 		article: PictureShowcaseOpinionFixture,

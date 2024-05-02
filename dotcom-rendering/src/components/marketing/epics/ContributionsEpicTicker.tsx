@@ -155,8 +155,7 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	const runningTotal = useTicker(total, readyToAnimate);
 
 	const goalReached = total >= goal;
-	const currencySymbol =
-		settings.countType === 'money' ? settings.currencySymbol : '';
+	const currencySymbol = settings.currencySymbol;
 
 	// If we've exceeded the goal then extend the bar 15% beyond the total
 	const end = total > goal ? total + total * 0.15 : goal;

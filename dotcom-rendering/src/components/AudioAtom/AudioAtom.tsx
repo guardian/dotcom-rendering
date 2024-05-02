@@ -204,7 +204,6 @@ type Props = {
 	trackUrl: string;
 	kicker: string;
 	title?: string;
-	format: ArticleFormat;
 	shouldUseAcast?: boolean;
 	duration: number;
 };
@@ -214,7 +213,6 @@ export const AudioAtom = ({
 	trackUrl,
 	kicker,
 	title,
-	format,
 	shouldUseAcast,
 	duration,
 }: Props): JSX.Element => {

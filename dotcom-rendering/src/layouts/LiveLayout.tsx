@@ -596,7 +596,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									<ArticleMetaApps
 										format={format}
 										pageId={article.pageId}
-										webTitle={article.webTitle}
 										byline={article.byline}
 										tags={article.tags}
 										primaryDateline={
@@ -610,7 +609,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
 										messageUs={article.messageUs}
 									></ArticleMetaApps>
 								)}
@@ -636,7 +634,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											ajaxUrl={article.config.ajaxUrl}
 											messageUs={article.messageUs}
 										/>
 									</div>
@@ -803,7 +800,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											ajaxUrl={article.config.ajaxUrl}
 											messageUs={article.messageUs}
 										/>
 									</div>
@@ -883,7 +879,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														}
 														newer={pagination.newer}
 														older={pagination.older}
-														format={format}
 													/>
 												)}
 												<ArticleBody
@@ -978,7 +973,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														}
 														newer={pagination.newer}
 														older={pagination.older}
-														format={format}
 													/>
 												)}
 												<StraightLines
@@ -1030,7 +1024,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														}
 														newer={pagination.newer}
 														older={pagination.older}
-														format={format}
 													/>
 												)}
 												<ArticleBody
@@ -1129,7 +1122,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 														}
 														newer={pagination.newer}
 														older={pagination.older}
-														format={format}
 													/>
 												)}
 												<StraightLines
@@ -1328,7 +1320,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								>
 									<MostViewedFooterData
 										sectionId={article.config.section}
-										format={format}
 										ajaxUrl={article.config.ajaxUrl}
 										edition={article.editionId}
 									/>

@@ -1,10 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
-	headline,
+	headlineBold17,
 	neutral,
 	remSpace,
-	textSans,
+	textSans14,
+	textSans15,
 } from '@guardian/source-foundations';
 import { SvgGuardianLiveLogo } from '@guardian/source-react-components';
 import type { ReactElement } from 'react';
@@ -44,11 +45,11 @@ const liveEventLinkStyles: SerializedStyles = css`
 
 		section {
 			padding: ${remSpace[3]};
-			${textSans.xsmall()};
+			${textSans14};
 
 			h1 {
 				margin: 0 0 ${remSpace[3]} 0;
-				${headline.xxxsmall({ fontWeight: 'bold' })}
+				${headlineBold17}
 				hyphens: auto;
 			}
 
@@ -59,7 +60,7 @@ const liveEventLinkStyles: SerializedStyles = css`
 			button {
 				background: none;
 				border: none;
-				${textSans.small()};
+				${textSans15};
 				padding: 0;
 				margin: 0;
 				background: #b84376;

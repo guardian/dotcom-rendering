@@ -286,6 +286,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { host },
+		editionId,
 	} = article;
 
 	return (
@@ -310,7 +311,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
-							<LabsHeader />
+							<LabsHeader editionId={editionId} />
 						</Section>
 					</Stuck>
 				)}
