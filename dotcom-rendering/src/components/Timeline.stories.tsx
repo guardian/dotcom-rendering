@@ -149,16 +149,6 @@ export const FlatWithNoTitles = {
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Opinion,
 			},
-			{
-				design: ArticleDesign.Obituary,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Review,
-				display: ArticleDisplay.Immersive,
-				theme: Pillar.Sport,
-			},
 		],
 		chromatic: {
 			modes: {
