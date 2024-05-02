@@ -294,7 +294,7 @@ export const SeriesSectionLink = ({
 					);
 				}
 				default: {
-					if (hasSeriesTag || isLabs) {
+					if (!!hasSeriesTag || isLabs) {
 						const title = tag?.title ? tag.title : sectionLabel;
 						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (

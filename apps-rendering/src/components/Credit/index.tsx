@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, textSans14 } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
@@ -17,14 +17,12 @@ interface Props {
 }
 
 const mediaStyles = css`
-	${textSans.xsmall()}
+	${textSans14};
 	margin: ${remSpace[1]} 0;
 `;
 
 const defaultStyles = css`
-	${textSans.xsmall({
-		lineHeight: 'regular',
-	})}
+	${textSans14};
 `;
 
 const Credit: FC<Props> = ({ format, credit }) =>

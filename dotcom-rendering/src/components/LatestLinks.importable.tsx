@@ -128,7 +128,9 @@ export const LatestLinks = ({
 			css={[
 				ulStyle,
 				revealStyles,
-				isDynamo || direction === 'horizontal' ? horizontal : vertical,
+				!!isDynamo || direction === 'horizontal'
+					? horizontal
+					: vertical,
 				css`
 					color: ${themePalette('--card-headline-trail-text')};
 				`,
