@@ -12,13 +12,13 @@ import type { NavType } from '../model/extract-nav';
 import { paletteDeclarations } from '../palette';
 import type { DCRTagPageType } from '../types/tagPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
-import { DarkModeMessage } from './DarkModeMessage';
 
 type Props = {
 	tagPage: DCRTagPageType;

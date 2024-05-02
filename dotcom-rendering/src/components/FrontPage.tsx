@@ -13,6 +13,7 @@ import { paletteDeclarations } from '../palette';
 import type { DCRFrontType } from '../types/front';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
+import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -21,7 +22,6 @@ import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
-import { DarkModeMessage } from './DarkModeMessage';
 
 type Props = {
 	front: DCRFrontType;
