@@ -5,7 +5,12 @@
  */
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { from, palette } from '@guardian/source-foundations';
+import {
+	from,
+	palette,
+	space,
+	textSansBold17,
+} from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
@@ -28,7 +33,6 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
-import { TopBarLink, topBarLinkStyles } from './TopBarLink';
 
 interface MyAccountProps {
 	mmaUrl: string;
@@ -45,7 +49,37 @@ type SignedInProps = MyAccountProps & {
 };
 
 const myAccountLinkStyles = css`
-	${topBarLinkStyles}
+	display: flex;
+	align-items: center;
+	${textSansBold17};
+	line-height: 1.5;
+
+	color: ${palette.neutral[100]};
+	transition: color 80ms ease-out;
+	text-decoration: none;
+	padding: ${space[3]}px 0 ${space[1]}px ${space[1]}px;
+
+	${from.tablet} {
+		padding: ${space[4]}px 0 ${space[1]}px ${space[1]}px;
+	}
+
+	${from.desktop} {
+		padding: ${space[5]}px 0 ${space[1]}px ${space[1]}px;
+	}
+
+	:hover,
+	:focus {
+		text-decoration: underline;
+	}
+
+	svg {
+		fill: currentColor;
+		float: left;
+		height: 18px;
+		width: 18px;
+		margin: 0 ${space[1]}px 0 0;
+	}
+
 	${getZIndex('myAccountDropdown')}
 `;
 
@@ -117,14 +151,15 @@ export const buildIdentityLinks = (
 };
 
 const SignIn = ({ idUrl }: { idUrl: string }) => (
-	<TopBarLink
+	<a
+		css={myAccountLinkStyles}
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
-		dataLinkName={nestedOphanComponents('nav3', 'topbar', 'signin')}
+		data-link-name={nestedOphanComponents('nav3', 'topbar', 'signin')}
 	>
 		<ProfileIcon /> Sign in
-	</TopBarLink>
+	</a>
 );
 
 export const dropDownOverrides = css`
@@ -133,8 +168,6 @@ export const dropDownOverrides = css`
 	padding-bottom: 0;
 	margin-top: 0;
 
-	font-size: 1rem;
-
 	&:not(ul):hover {
 		color: ${palette.neutral[100]};
 		text-decoration: underline;
@@ -142,10 +175,6 @@ export const dropDownOverrides = css`
 
 	${from.tablet} {
 		right: 0;
-	}
-
-	${from.desktop} {
-		font-weight: bold;
 	}
 `;
 
