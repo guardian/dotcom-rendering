@@ -248,7 +248,7 @@ export const StickyBottomBanner = ({
 		setAsyncArticleCounts(
 			getArticleCounts(pageId, tags, keywordIds, contentType),
 		);
-	}, [contentType, pageId, keywordIds]);
+	}, [contentType, tags, pageId, keywordIds]);
 
 	useOnce(() => {
 		if (!countryCode) return;
