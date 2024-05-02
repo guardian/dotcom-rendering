@@ -606,8 +606,8 @@ importers:
         specifier: 7.1.1
         version: 7.1.1(webpack@5.91.0)
       csstype:
-        specifier: 3.1.1
-        version: 3.1.1
+        specifier: 3.1.3
+        version: 3.1.3
       curlyquotes:
         specifier: 1.5.5
         version: 1.5.5
@@ -3625,7 +3625,7 @@ packages:
       '@emotion/memoize': 0.8.1
       '@emotion/unitless': 0.8.1
       '@emotion/utils': 1.2.1
-      csstype: 3.1.1
+      csstype: 3.1.3
     dev: false
 
   /@emotion/server@11.11.0:
@@ -10511,6 +10511,10 @@ packages:
 
   /csstype@3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+    dev: false
+
+  /csstype@3.1.3:
+    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
     dev: false
 
   /csv-generate@3.4.3:
