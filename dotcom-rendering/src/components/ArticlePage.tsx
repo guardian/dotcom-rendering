@@ -184,7 +184,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					You can{' '}
 					<a
 						style={{ color: 'inherit' }}
-						href="theguardian.com/opt/out/dark-mode-web"
+						href="/opt/out/dark-mode-web"
 					>
 						opt out anytime
 					</a>{' '}
