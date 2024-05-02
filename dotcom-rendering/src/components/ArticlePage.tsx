@@ -45,19 +45,15 @@ interface AppProps extends BaseProps {
  * @description
  * returns global styles for article pages
  */
-const globalStyles = (
-	format: ArticleFormat,
-	darkModeInApps: boolean,
-	renderingTarget: RenderingTarget,
-) => css`
+const globalStyles = (format: ArticleFormat, darkMode: boolean) => css`
 	:root {
 		/* Light palette is default on all platforms */
 		${paletteDeclarations(format, 'light')}
 		body {
 			color: ${sourcePalette.neutral[7]};
 		}
-		/* Dark palette only for apps and only if switch turned on */
-		${darkModeInApps && renderingTarget === 'Apps'
+		/* Dark palette only if supported */
+		${darkMode
 			? css`
 					@media (prefers-color-scheme: dark) {
 						${paletteDeclarations(format, 'dark')}
@@ -97,16 +93,13 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const webLightbox = isWeb && !!article.config.switches.lightbox;
+	const darkMode = isWeb
+		? article.config.abTests.darkModeWebVariant === 'variant'
+		: !!article.config.switches.darkModeInApps;
 
 	return (
 		<StrictMode>
-			<Global
-				styles={globalStyles(
-					format,
-					!!article.config.switches.darkModeInApps,
-					renderingTarget,
-				)}
-			/>
+			<Global styles={globalStyles(format, darkMode)} />
 			{isWeb && (
 				<>
 					<SkipTo id="maincontent" label="Skip to main content" />

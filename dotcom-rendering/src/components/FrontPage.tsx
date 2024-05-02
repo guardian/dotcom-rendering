@@ -52,6 +52,8 @@ export const FrontPage = ({ front, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
+	const darkMode = front.config.abTests.darkModeWebVariant === 'variant';
+
 	return (
 		<StrictMode>
 			<Global
@@ -63,6 +65,18 @@ export const FrontPage = ({ front, NAV }: Props) => {
 						body {
 							color: ${sourcePalette.neutral[7]};
 						}
+
+						/* Dark palette only if supported */
+						${darkMode
+							? css`
+									@media (prefers-color-scheme: dark) {
+										${paletteDeclarations(format, 'dark')}
+										body {
+											color: ${sourcePalette.neutral[86]};
+										}
+									}
+							  `
+							: ''}
 					}
 					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
