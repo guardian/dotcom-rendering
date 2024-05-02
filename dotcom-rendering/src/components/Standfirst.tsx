@@ -71,6 +71,56 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
+const newStandfirstStyles = ({ display, design }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial: {
+			switch (display) {
+				case ArticleDisplay.Immersive:
+					return css`
+						padding-bottom: ${space[6]}px;
+						${from.tablet} {
+							padding-bottom: 0px;
+						}
+					`;
+				case ArticleDisplay.Showcase:
+				default:
+					return css`
+						padding-bottom: 12px;
+						${from.tablet} {
+							padding-bottom: 8px;
+						}
+					`;
+			}
+		}
+		default: {
+			switch (display) {
+				case ArticleDisplay.Showcase:
+					return css`
+						padding-bottom: 8px;
+
+						${from.tablet} {
+							padding-bottom: 14px;
+						}
+					`;
+				case ArticleDisplay.Immersive:
+					return css`
+						padding-bottom: ${space[6]}px;
+
+						${from.tablet} {
+							padding-bottom: 0px;
+						}
+					`;
+				default:
+					return css`
+						padding-bottom: 8px;
+					`;
+			}
+		}
+	}
+};
+
 const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
@@ -79,8 +129,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					if (theme === ArticleSpecial.Labs) {
 						return css`
 							${textSans20};
-							margin-top: ${space[2]}px;
-							margin-bottom: ${space[3]}px;
 							line-height: 22px;
 							max-width: 540px;
 							color: ${palette('--standfirst-text')};
@@ -88,8 +136,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					}
 					return css`
 						${headlineMedium17};
-						margin-top: ${space[2]}px;
-						margin-bottom: ${space[3]}px;
 						line-height: 22px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
@@ -99,7 +145,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						${theme === ArticleSpecial.Labs
 							? textSans17
 							: headlineLight24};
-						padding-top: ${space[4]}px;
 
 						max-width: 280px;
 						${from.tablet} {
