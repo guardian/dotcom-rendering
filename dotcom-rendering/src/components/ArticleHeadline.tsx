@@ -113,10 +113,6 @@ const displayFlex = css`
 	flex-direction: column;
 `;
 
-const shiftSlightly = css`
-	margin-bottom: 16px;
-`;
-
 const invertedStyles = css`
 	position: relative;
 	white-space: pre-wrap;
@@ -137,10 +133,6 @@ const immersiveStyles = css`
 		padding-left: ${space[1]}px;
 	}
 	margin-right: ${space[5]}px;
-`;
-
-const reducedBottomPadding = css`
-	padding-bottom: ${space[4]}px;
 `;
 
 const darkBackground = css`
@@ -274,14 +266,27 @@ const decideBottomPadding = ({
 				padding-bottom: ${space[6]}px;
 			`;
 		default: {
-			return hasAvatar
-				? ''
-				: css`
-						padding-bottom: 28px;
+			switch (format.design) {
+				case ArticleDesign.Review:
+				case ArticleDesign.Interview: {
+					return css`
+						padding-bottom: ${space[5]}px;
+
 						${from.tablet} {
-							padding-bottom: ${space[9]}px;
+							padding-bottom: ${space[6]}px;
 						}
-				  `;
+					`;
+				}
+				default:
+					return hasAvatar
+						? ''
+						: css`
+								padding-bottom: 28px;
+								${from.tablet} {
+									padding-bottom: ${space[9]}px;
+								}
+						  `;
+			}
 		}
 	}
 };
@@ -571,7 +576,6 @@ export const ArticleHeadline = ({
 						// and a black background (only for the text)
 						<div
 							css={[
-								shiftSlightly,
 								maxWidth,
 								displayFlex,
 								decideBottomPadding({
