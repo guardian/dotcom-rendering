@@ -55,12 +55,12 @@ export const SetABTests = ({
 		if (!ophan) return;
 
 		const mvtId = Number(
-			(isDev &&
-				getCookie({
-					name: 'GU_mvt_id_local',
-					shouldMemoize: true,
-				})) ?? // Simplify localhost testing by creating a different mvt id
-				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+			isDev
+				? getCookie({
+						name: 'GU_mvt_id_local',
+						shouldMemoize: true,
+				  }) // Simplify localhost testing by creating a different mvt id
+				: getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 		);
 		if (!mvtId) {
 			// 0 is default and falsy here
