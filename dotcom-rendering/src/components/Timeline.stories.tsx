@@ -1,5 +1,10 @@
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
@@ -129,8 +134,52 @@ export const FlatWithNoTitles = {
 				},
 			] as const,
 		},
-		ArticleElementComponent,
 		format,
+		ArticleElementComponent,
+	},
+	parameters: {
+		formats: [
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Sport,
+			},
+			{
+				design: ArticleDesign.Obituary,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Review,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Sport,
+			},
+			{
+				design: ArticleDesign.Recipe,
+				display: ArticleDisplay.Immersive,
+				theme: Pillar.Lifestyle,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReport,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReportAlt,
+			},
+		],
 	},
 } satisfies Story;
 
