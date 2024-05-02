@@ -45,7 +45,7 @@ interface AppProps extends BaseProps {
  * @description
  * returns global styles for article pages
  */
-const globalStyles = (format: ArticleFormat, darkMode: boolean) => css`
+const globalStyles = (format: ArticleFormat, darkModeAvailable: boolean) => css`
 	:root {
 		/* Light palette is default on all platforms */
 		${paletteDeclarations(format, 'light')}
@@ -53,7 +53,7 @@ const globalStyles = (format: ArticleFormat, darkMode: boolean) => css`
 			color: ${sourcePalette.neutral[7]};
 		}
 		/* Dark palette only if supported */
-		${darkMode
+		${darkModeAvailable
 			? css`
 					@media (prefers-color-scheme: dark) {
 						${paletteDeclarations(format, 'dark')}
@@ -93,13 +93,13 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const webLightbox = isWeb && !!article.config.switches.lightbox;
-	const darkMode = isWeb
+	const darkModeAvailable = isWeb
 		? article.config.abTests.darkModeWebVariant === 'variant'
 		: !!article.config.switches.darkModeInApps;
 
 	return (
 		<StrictMode>
-			<Global styles={globalStyles(format, darkMode)} />
+			<Global styles={globalStyles(format, darkModeAvailable)} />
 			{isWeb && (
 				<>
 					<SkipTo id="maincontent" label="Skip to main content" />
@@ -177,7 +177,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					/>
 				</Island>
 			)}
-			{renderingTarget === 'Web' && darkMode && (
+			{renderingTarget === 'Web' && darkModeAvailable && (
 				<DarkModeMessage>
 					Dark mode is a work-in-progress.
 					<br />
@@ -191,7 +191,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					if anything is unreadable or odd.
 				</DarkModeMessage>
 			)}
-			{renderingTarget === 'Apps' && !darkMode && (
+			{renderingTarget === 'Apps' && !darkModeAvailable && (
 				<DarkModeMessage>
 					We hope you are enjoying the updates we are implementing on
 					articles. Unfortunately, some are still missing a dark mode

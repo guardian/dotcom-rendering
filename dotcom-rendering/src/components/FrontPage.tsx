@@ -53,7 +53,8 @@ export const FrontPage = ({ front, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
-	const darkMode = front.config.abTests.darkModeWebVariant === 'variant';
+	const darkModeAvailable =
+		front.config.abTests.darkModeWebVariant === 'variant';
 
 	return (
 		<StrictMode>
@@ -67,7 +68,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 							color: ${sourcePalette.neutral[7]};
 						}
 						/* Dark palette only if supported */
-						${darkMode
+						${darkModeAvailable
 							? css`
 									@media (prefers-color-scheme: dark) {
 										${paletteDeclarations(format, 'dark')}
@@ -126,7 +127,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
-			{darkMode && (
+			{darkModeAvailable && (
 				<DarkModeMessage>
 					Dark mode is a work-in-progress.
 					<br />

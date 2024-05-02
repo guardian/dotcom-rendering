@@ -50,7 +50,8 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
-	const darkMode = tagPage.config.abTests.darkModeWebVariant === 'variant';
+	const darkModeAvailable =
+		tagPage.config.abTests.darkModeWebVariant === 'variant';
 
 	return (
 		<StrictMode>
@@ -64,7 +65,7 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 							color: ${sourcePalette.neutral[7]};
 						}
 						/* Dark palette only if supported */
-						${darkMode
+						${darkModeAvailable
 							? css`
 									@media (prefers-color-scheme: dark) {
 										${paletteDeclarations(format, 'dark')}
@@ -115,7 +116,7 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
-			{darkMode && (
+			{darkModeAvailable && (
 				<DarkModeMessage>
 					Dark mode is a work-in-progress.
 					<br />
