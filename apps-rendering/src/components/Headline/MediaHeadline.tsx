@@ -1,12 +1,16 @@
 import { css } from '@emotion/react';
-import { from, headline } from '@guardian/source-foundations';
+import {
+	from,
+	headlineMedium28,
+	headlineMedium34,
+} from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const mediaStyles = css`
-	${headline.small({ fontWeight: 'medium' })}
+	${headlineMedium28}
 	${from.tablet} {
-		${headline.medium({ fontWeight: 'medium' })}
+		${headlineMedium34}
 	}
 `;
 

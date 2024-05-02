@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
+import { headlineLight20 } from '@guardian/source-foundations';
 import StarRating from 'components/StarRating';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
 const reviewStyles = css`
-	${headline.xxsmall({ fontWeight: 'light' })}
+	${headlineLight20}
 	p:first-of-type {
 		padding-top: 0;
 	}

@@ -7,6 +7,7 @@ import {
 	from,
 	remSpace,
 	textSans,
+	textSansBold17,
 } from '@guardian/source-foundations';
 import { MatchStatusIcon } from 'components/MatchStatusIcon';
 import { TeamScore } from 'components/TeamScore';
@@ -59,7 +60,7 @@ const otherMatchStyles = css`
 `;
 
 const leagueStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const stadiumStyles = css`

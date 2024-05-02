@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ConfigProvider } from './ConfigContext';
@@ -32,11 +31,6 @@ describe('MostViewedFooterData', () => {
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>
@@ -77,11 +71,6 @@ describe('MostViewedFooterData', () => {
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>
@@ -143,11 +132,6 @@ describe('MostViewedFooterData', () => {
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>
@@ -194,11 +178,6 @@ describe('MostViewedFooterData', () => {
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>
@@ -221,11 +200,6 @@ describe('MostViewedFooterData', () => {
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>

@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { isString } from '@guardian/libs';
 import {
 	article17,
@@ -19,7 +18,6 @@ type BlockContributor = {
 type Props = {
 	id: string;
 	children: React.ReactNode;
-	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
 	blockFirstPublishedDisplay?: string;
@@ -132,7 +130,6 @@ const liveBlockBorderStyles = css`
 export const LiveBlockContainer = ({
 	id,
 	children,
-	format,
 	blockTitle,
 	blockFirstPublished,
 	blockFirstPublishedDisplay,

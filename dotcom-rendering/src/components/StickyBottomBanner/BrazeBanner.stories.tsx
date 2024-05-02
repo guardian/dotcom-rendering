@@ -7,7 +7,7 @@ type BrazeMessageProps = {
 };
 
 type NewsletterSubscribeCallback = (id: string) => Promise<void>;
-const subscribeToNewsletter: NewsletterSubscribeCallback = (id: string) =>
+const subscribeToNewsletter: NewsletterSubscribeCallback = () =>
 	Promise.resolve();
 
 const fetchEmail: () => Promise<string | null> = () =>

@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headline, remSpace } from '@guardian/source-foundations';
+import { from, headlineLight24, remSpace } from '@guardian/source-foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import { grid } from 'grid/grid';
@@ -51,7 +51,7 @@ const renderContent = (
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
-	${headline.xsmall({ fontWeight: 'light' })}
+	${headlineLight24}
 	padding: ${remSpace[2]} ${remSpace[5]} ${remSpace[9]} 0;
 	color: ${text.standfirst(format)};
 	grid-row: 7/8;

@@ -550,8 +550,7 @@ const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	}
 };
 
-const backgroundDynamoSublink = (_format: ArticleFormat): string =>
-	palette.neutral[97];
+const backgroundDynamoSublink = (): string => palette.neutral[97];
 
 export const decidePalette = (
 	format: ArticleFormat,
@@ -593,7 +592,7 @@ export const decidePalette = (
 			messageForm: backgroundMessageForm(format),
 			dynamoSublink:
 				overrides?.background.dynamoSublink ??
-				backgroundDynamoSublink(format),
+				backgroundDynamoSublink(),
 		},
 		fill: {
 			guardianLogo: fillGuardianLogo(format),

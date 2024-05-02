@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace } from '@guardian/source-foundations';
+import { headlineLight24, remSpace } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
@@ -14,7 +14,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		color: ${text.pullquote(format)};
 		margin: 0 0 ${remSpace[5]};
-		${headline.xsmall({ fontWeight: 'light' })};
+		${headlineLight24};
 		${darkModeCss`color: ${text.pullquoteDark(format)};`}
 	`;
 };

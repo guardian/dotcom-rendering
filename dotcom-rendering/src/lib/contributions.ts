@@ -160,7 +160,7 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 			resolve(true);
 		}
 		onConsentChange(({ ccpa, tcfv2, aus }) => {
-			if (ccpa || aus) {
+			if (ccpa ?? aus) {
 				resolve(true);
 			} else if (tcfv2) {
 				const hasRequiredConsents =
@@ -203,7 +203,7 @@ export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 			resolve(true);
 		}
 		onConsentChange(({ ccpa, tcfv2, aus }) => {
-			if (ccpa || aus) {
+			if (ccpa ?? aus) {
 				resolve(true);
 			} else if (tcfv2) {
 				const hasRequiredConsents =

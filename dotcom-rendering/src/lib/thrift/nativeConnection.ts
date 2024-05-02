@@ -63,7 +63,7 @@ function sendNativeMessage(nativeMessage: NativeMessage): void {
 let uid = 1;
 const getUniqueConnectionId = () => `connection-${uid++}`;
 
-export class NativeConnection<Context = void> extends ThriftConnection {
+export class NativeConnection extends ThriftConnection {
 	connectionId = getUniqueConnectionId();
 	promises: PromiseResponse[] = [];
 	outBuffer: NativeMessage[] = [];
@@ -115,7 +115,7 @@ export class NativeConnection<Context = void> extends ThriftConnection {
 		}
 	}
 
-	send(dataToSend: Buffer, context?: void | undefined): Promise<Buffer> {
+	send(dataToSend: Buffer): Promise<Buffer> {
 		const id = this.connectionId;
 		// eslint-disable-next-line @typescript-eslint/no-this-alias -- Reassign this
 		const connection = this;

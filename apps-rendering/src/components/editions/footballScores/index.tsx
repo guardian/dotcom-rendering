@@ -7,6 +7,7 @@ import {
 	from,
 	remSpace,
 	textSans,
+	textSansBold17,
 } from '@guardian/source-foundations';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { FC } from 'react';
@@ -43,7 +44,7 @@ const scoreStyles = css`
 `;
 
 const leagueStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const stadiumStyles = css`

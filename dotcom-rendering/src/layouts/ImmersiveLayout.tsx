@@ -235,6 +235,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -356,7 +357,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
-								<LabsHeader />
+								<LabsHeader editionId={editionId} />
 							</Section>
 						</Stuck>
 					)}
@@ -580,7 +581,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												branding={branding}
 												format={format}
 												pageId={article.pageId}
-												webTitle={article.webTitle}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -599,7 +599,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">
@@ -626,7 +625,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											/>
 										</Hide>
 									</>
@@ -654,7 +652,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											ajaxUrl={article.config.ajaxUrl}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
 											<AffiliateDisclaimer />
@@ -915,7 +912,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>

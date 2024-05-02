@@ -315,7 +315,7 @@ export const Card = ({
 				displayLines={displayLines}
 				leftAlign={isOnwardContent}
 				age={
-					(!!onwardsSource && webPublicationDate) ||
+					(!!onwardsSource && !!webPublicationDate) ||
 					(showAge &&
 						webPublicationDate &&
 						isWithinTwelveHours(webPublicationDate)) ? (

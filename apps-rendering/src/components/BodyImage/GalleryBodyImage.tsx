@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headline, textSans } from '@guardian/source-foundations';
+import { from, headline, textSans14 } from '@guardian/source-foundations';
 import { CaptionIconVariant } from 'components/CaptionIcon';
 import FigCaption from 'components/FigCaption';
 import Img from 'components/ImgAlt';
@@ -86,7 +86,7 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	span {
-		${textSans.xsmall({ lineHeight: 'regular' })}
+		${textSans14}
 	}
 
 	h2,
