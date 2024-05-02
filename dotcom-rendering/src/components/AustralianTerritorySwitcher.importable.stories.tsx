@@ -1,4 +1,4 @@
-import { userEvent, within } from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/test';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 
 export default {
