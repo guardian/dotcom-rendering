@@ -246,7 +246,7 @@ export const StickyBottomBanner = ({
 
 	useEffect(() => {
 		setAsyncArticleCounts(
-			getArticleCounts(pageId, keywordIds, contentType),
+			getArticleCounts(pageId, tags, keywordIds, contentType),
 		);
 	}, [contentType, pageId, keywordIds]);
 

@@ -54,7 +54,7 @@
 		"@guardian/source-foundations": "14.2.2",
 		"@guardian/source-react-components": "22.1.0",
 		"@guardian/source-react-components-development-kitchen": "19.0.0",
-		"@guardian/support-dotcom-components": "2.1.1",
+		"@guardian/support-dotcom-components": "2.2.0",
 		"@guardian/tsconfig": "0.2.0",
 		"@playwright/test": "1.40.1",
 		"@sentry/browser": "7.75.1",
