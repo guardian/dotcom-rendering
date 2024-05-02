@@ -1,5 +1,4 @@
 import { getConsentFor, onConsentChange } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { AudioAtom } from './AudioAtom/AudioAtom';
 
@@ -9,7 +8,6 @@ type Props = {
 	kicker: string;
 	title?: string | undefined;
 	duration: number;
-	format: ArticleFormat;
 	contentIsNotSensitive: boolean;
 	aCastisEnabled: boolean;
 	readerCanBeShownAds: boolean;
@@ -30,7 +28,6 @@ export const AudioAtomWrapper = ({
 	trackUrl,
 	kicker,
 	title,
-	format,
 	duration,
 	contentIsNotSensitive,
 	aCastisEnabled,
@@ -63,7 +60,6 @@ export const AudioAtomWrapper = ({
 			trackUrl={trackUrl}
 			kicker={kicker}
 			title={title}
-			format={format}
 			duration={duration}
 			shouldUseAcast={shouldUseAcast}
 		/>

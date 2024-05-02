@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineMedium17,
 	palette as sourcePalette,
 	until,
 	visuallyHidden,
@@ -65,7 +65,7 @@ const unselectedStyles = css`
 `;
 
 const buttonStyles = (isSelected: boolean) => css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	color: ${palette('--article-text')};
 	margin: 0;
 	border: 0;

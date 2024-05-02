@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from, palette, text, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	palette,
+	text,
+	textSans15,
+	textSans17,
+} from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { SubNavType } from '../model/extract-nav';
@@ -50,10 +56,10 @@ const collapsedStyles = css`
 `;
 
 const fontStyle = (subNavLinkColour: string) => css`
-	${textSans.small()};
+	${textSans15};
 	font-size: 14px;
 	${from.tablet} {
-		${textSans.medium()};
+		${textSans17};
 		font-size: 16px;
 	}
 	font-weight: 500;

@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	isString,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -34,6 +29,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	byline?: string;
+	source?: string;
 	tags: TagType[];
 	primaryDateline: string;
 	secondaryDateline: string;
@@ -41,7 +37,6 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	ajaxUrl: string;
 	messageUs?: MessageUs;
 };
 
@@ -308,13 +303,13 @@ export const ArticleMeta = ({
 	pageId,
 	webTitle,
 	byline,
+	source,
 	tags,
 	primaryDateline,
 	secondaryDateline,
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
-	ajaxUrl,
 	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
@@ -367,14 +362,14 @@ export const ArticleMeta = ({
 						)}
 
 						<div>
-							{shouldShowContributor(format) &&
-								isString(byline) && (
-									<Contributor
-										byline={byline}
-										tags={tags}
-										format={format}
-									/>
-								)}
+							{shouldShowContributor(format) && (
+								<Contributor
+									byline={byline}
+									tags={tags}
+									format={format}
+									source={source}
+								/>
+							)}
 							{messageUs &&
 								format.design === ArticleDesign.LiveBlog && (
 									<Island

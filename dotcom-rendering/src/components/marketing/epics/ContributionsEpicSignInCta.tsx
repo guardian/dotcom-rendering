@@ -5,7 +5,7 @@
  */
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { body, neutral } from '@guardian/source-foundations';
+import { articleBold17, neutral } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { OPHAN_COMPONENT_SIGN_IN } from './utils/ophan';
@@ -16,7 +16,7 @@ const signInLink = css`
 `;
 
 const signInLinkText = css`
-	${body.medium({ fontWeight: 'bold' })};
+	${articleBold17};
 `;
 
 const signInUrl =

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	palette,
-	textSans,
+	textSans15,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
@@ -30,7 +30,7 @@ const captionStyle = css`
 	padding: 6px 40px 12px 10px;
 	max-width: 100%;
 	min-height: 46px;
-	${textSans.small()};
+	${textSans15};
 `;
 
 const inputStyle = css`
@@ -88,7 +88,7 @@ const mainImage = (element: ImageBlockElement) => {
 				srcset={scrsetStringFromImagesSources(element.imageSources)}
 			/>
 			{!!(
-				element.data.caption ||
+				!!element.data.caption ||
 				(element.data.credit && element.displayCredit)
 			) && (
 				<>

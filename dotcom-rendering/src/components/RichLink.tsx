@@ -2,7 +2,16 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs } from '@guardian/source-foundations';
-import { from, headline, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	headline,
+	headlineMedium17,
+	headlineMediumItalic20,
+	textSans17,
+	textSansBold12,
+	textSansBold15,
+	textSansBold17,
+} from '@guardian/source-foundations';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { TagType } from '../types/tag';
@@ -71,7 +80,7 @@ const miniHeadlineOverrideStyles = (fontArgs: FontScaleArgs) => css`
 
 const titleStyles = (parentIsBlog: boolean) => css`
 	${parentIsBlog
-		? headline.xxxsmall({ fontWeight: 'regular' })
+		? headlineMedium17
 		: miniHeadlineOverrideStyles({ fontWeight: 'regular' })};
 	padding-top: 1px;
 	padding-bottom: 1px;
@@ -83,10 +92,10 @@ const titleStyles = (parentIsBlog: boolean) => css`
 `;
 
 const labsTitleStyles = css`
-	${textSans.small({ fontWeight: 'bold' })}
+	${textSansBold15}
 
 	${from.wide} {
-		${textSans.medium({ fontWeight: 'bold' })}
+		${textSansBold17}
 	}
 `;
 
@@ -95,7 +104,7 @@ const bylineStyles = css`
 	${miniHeadlineOverrideStyles({ fontStyle: 'italic' })};
 
 	${from.wide} {
-		${headline.xxsmall({ fontStyle: 'italic' })};
+		${headlineMediumItalic20};
 	}
 `;
 
@@ -113,7 +122,7 @@ const contributorWrapperStyles = css`
 
 const paidForBrandingStyles = css`
 	color: ${themePalette('--rich-link-branding-text')};
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 `;
 
 const starWrapperStyles = css`
@@ -139,12 +148,12 @@ const readMoreTextStyle = css`
 	text-decoration: none;
 
 	${from.wide} {
-		${headline.xxxsmall({ fontWeight: 'medium' })}
+		${headlineMedium17}
 	}
 `;
 
 const labsReadMoreTextStyle = css`
-	${textSans.medium({ fontWeight: 'regular' })}
+	${textSans17}
 `;
 
 const readMoreText: (contentType: string) => string = (contentType) => {

@@ -9,6 +9,10 @@ import {
 	remBodySizes,
 	space,
 	textSans,
+	textSans12,
+	textSans15,
+	textSans17,
+	textSans20,
 	until,
 } from '@guardian/source-foundations';
 import { Link, SvgExternal } from '@guardian/source-react-components';
@@ -77,7 +81,7 @@ const fontStyles = ({
 		case 'tiny':
 			return css`
 				${headline.xxxsmall(options)};
-				font-size: ${remBodySizes.xsmall}rem;
+				font-size: 14px;
 			`;
 	}
 };
@@ -131,9 +135,9 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 		case 'huge':
 		case 'large':
 			return css`
-				${textSans.large()};
+				${textSans20};
 				${until.desktop} {
-					${textSans.medium()};
+					${textSans17};
 				}
 			`;
 		case 'medium':
@@ -146,11 +150,11 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'small':
 			return css`
-				${textSans.small()};
+				${textSans15};
 			`;
 		case 'tiny':
 			return css`
-				${textSans.xxsmall()};
+				${textSans12};
 				font-size: ${remBodySizes.xsmall}rem;
 			`;
 	}

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { remSpace, text, textSans } from '@guardian/source-foundations';
+import { remSpace, text, textSans14 } from '@guardian/source-foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Generic, TikTok } from 'embed';
 import { maybeRender } from 'lib';
@@ -20,7 +20,7 @@ const styles = css`
 `;
 
 const captionStyles = css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${text.supporting};
 `;
 

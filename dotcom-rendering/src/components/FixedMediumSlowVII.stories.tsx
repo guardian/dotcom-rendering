@@ -23,6 +23,7 @@ export const Default = () => (
 		title="Fixed Medium Slow VII"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowVII
 			trails={trails}

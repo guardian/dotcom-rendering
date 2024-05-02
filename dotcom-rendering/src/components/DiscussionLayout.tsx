@@ -45,7 +45,7 @@ const DiscussionIsland = ({
 			);
 		case 'Apps':
 			return (
-				<Island priority="feature" defer={{ until: 'visible' }}>
+				<Island priority="feature" defer={{ until: 'idle' }}>
 					<DiscussionApps {...props} />
 				</Island>
 			);

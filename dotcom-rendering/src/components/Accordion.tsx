@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { focusHalo, from, headline, space } from '@guardian/source-foundations';
+import {
+	focusHalo,
+	from,
+	headlineBold20,
+	space,
+} from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -50,7 +55,7 @@ const titleRowStyles = css`
 `;
 
 const titleStyle = css`
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${headlineBold20};
 	color: ${palette('--accordion-title')};
 `;
 

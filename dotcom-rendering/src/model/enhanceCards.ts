@@ -291,7 +291,7 @@ export const enhanceCards = (
 	}: {
 		cardInTagPage: boolean;
 		offset?: number;
-		editionId?: EditionId;
+		editionId: EditionId;
 		containerPalette?: DCRContainerPalette;
 		pageId?: string;
 		discussionApiUrl: string;

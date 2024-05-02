@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, textSans } from '@guardian/source-foundations';
+import { from, space, textSans15 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type {
 	CommentType,
@@ -28,7 +28,7 @@ const pickStyles = css`
 	width: 100%;
 	min-width: 250px;
 	margin-bottom: ${space[5]}px;
-	${textSans.small()};
+	${textSans15};
 
 	blockquote {
 		margin-top: ${space[3]}px;
@@ -55,7 +55,7 @@ const avatarMargin = css`
 
 const smallFontSize = css`
 	a {
-		${textSans.small()}
+		${textSans15}
 	}
 `;
 
@@ -87,7 +87,7 @@ const inCommentLinkStyling = css`
 `;
 
 const titleStyles = css`
-	${textSans.small()};
+	${textSans15};
 	font-weight: bold;
 	margin: 0px;
 	margin-bottom: ${space[1]}px;

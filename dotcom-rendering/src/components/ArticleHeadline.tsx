@@ -3,9 +3,16 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineBold28,
+	headlineBold34,
+	headlineBold50,
+	headlineLight28,
+	headlineLight34,
+	headlineMedium28,
+	headlineMedium34,
 	space,
-	textSans,
+	textSansBold24,
+	textSansBold34,
 	until,
 } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -36,61 +43,61 @@ const topPadding = css`
 `;
 
 const standardFont = css`
-	${headline.medium()};
+	${headlineMedium34};
 	${until.tablet} {
-		${headline.small()};
+		${headlineMedium28};
 	}
 `;
 
 const labsFont = css`
-	${textSans.xlarge({ fontWeight: 'bold' })};
+	${textSansBold24};
 	line-height: 2rem;
 	${from.tablet} {
-		${textSans.xxxlarge({ fontWeight: 'bold' })};
+		${textSansBold34};
 		line-height: 2.375rem;
 	}
 `;
 
 const boldFont = css`
-	${headline.medium({ fontWeight: 'bold' })};
+	${headlineBold34};
 	${until.tablet} {
-		${headline.small({ fontWeight: 'bold' })};
+		${headlineBold28};
 	}
 `;
 
 const jumboFont = css`
-	${headline.xlarge({ fontWeight: 'bold' })};
+	${headlineBold50};
 	line-height: 3.5rem;
 	${until.desktop} {
-		${headline.medium({ fontWeight: 'bold' })};
+		${headlineBold34};
 	}
 `;
 
 const jumboLabsFont = css`
-	${textSans.xxxlarge({ fontWeight: 'bold' })};
+	${textSansBold34};
 	font-size: 3.125rem;
 	line-height: 3.5rem;
 	${until.desktop} {
-		${textSans.xxxlarge({ fontWeight: 'bold' })};
+		${textSansBold34};
 		line-height: 2.375rem;
 	}
 `;
 
 const invertedFont = css`
-	${headline.medium({ fontWeight: 'bold' })};
+	${headlineBold34};
 	line-height: 2.625rem;
 	${until.tablet} {
-		${headline.small({ fontWeight: 'bold' })};
+		${headlineBold28};
 		line-height: 2.1875rem;
 	}
 `;
 
 const lightFont = css`
-	${headline.medium({ fontWeight: 'light' })};
+	${headlineLight34};
 	font-size: 2.125rem;
 	line-height: 2.375rem;
 	${until.mobileMedium} {
-		${headline.small({ fontWeight: 'light' })};
+		${headlineLight28};
 	}
 `;
 

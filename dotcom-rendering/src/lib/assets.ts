@@ -9,13 +9,18 @@ interface AssetHash {
 	[key: string]: string;
 }
 
+export type AssetOrigin =
+	| 'https://assets.guim.co.uk/'
+	| 'https://assets-code.guim.co.uk/'
+	| '/';
+
 /**
  * Decides the url to use for fetching assets
  *
  * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
  * @returns {string}
  */
-export const decideAssetOrigin = (stage: string | undefined): string => {
+export const decideAssetOrigin = (stage: string | undefined): AssetOrigin => {
 	switch (stage?.toUpperCase()) {
 		case 'PROD':
 			return 'https://assets.guim.co.uk/';
@@ -116,8 +121,8 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 			return `<script defer nomodule src="${script}"></script>`;
 		}
 		if (
-			script.match(WEB) ||
-			script.match(WEB_VARIANT_SCRIPT) ||
+			script.match(WEB) ??
+			script.match(WEB_VARIANT_SCRIPT) ??
 			script.match(APPS_SCRIPT)
 		) {
 			return `<script type="module" src="${script}"></script>`;

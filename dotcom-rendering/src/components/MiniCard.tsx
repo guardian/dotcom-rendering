@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, breakpoints } from '@guardian/source-foundations';
+import { articleBold17, breakpoints } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
@@ -13,8 +13,7 @@ const imageStyles = css`
 `;
 
 const linkStyles = css`
-	${body.medium()}
-	font-weight: bold;
+	${articleBold17};
 	display: flex;
 	align-items: flex-start;
 	text-decoration: none;

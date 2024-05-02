@@ -8,7 +8,7 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans12,
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
@@ -33,20 +33,26 @@ type DefaultProps = {
 // TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
+// for dark ad labels
+type ColourScheme = 'light' | 'dark';
+
 type InlineProps = {
 	position: InlinePosition;
+	colourScheme?: ColourScheme;
 	index: number;
 	shouldHideReaderRevenue?: never;
 };
 
 type RightProps = {
 	position: 'right';
+	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue: boolean;
 };
 
 type RemainingProps = {
 	position: Exclude<SlotNamesWithPageSkin, InlinePosition | 'right'>;
+	colourScheme?: ColourScheme;
 	index?: never;
 	shouldHideReaderRevenue?: never;
 };
@@ -63,7 +69,7 @@ type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
 const individualLabelCSS = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
 	background-color: ${palette.neutral[97]};
@@ -115,7 +121,7 @@ export const labelStyles = css`
 	}
 
 	.ad-slot__adtest-cookie-clear-link {
-		${textSans.xxsmall()};
+		${textSans12};
 		text-align: left;
 		position: absolute;
 		left: 268px;
@@ -134,6 +140,14 @@ export const labelStyles = css`
 		border: 0;
 		display: block;
 		${individualLabelCSS}
+	}
+`;
+
+const darkLabelStyles = css`
+	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
+		background-color: transparent;
+		border-top-color: ${palette.neutral[20]};
+		color: ${palette.neutral[86]};
 	}
 `;
 
@@ -436,6 +450,7 @@ export const AdSlot = ({
 	index,
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
+	colourScheme = 'light',
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -492,6 +507,7 @@ export const AdSlot = ({
 										max-height: 100%;
 									`,
 									labelStyles,
+									colourScheme === 'dark' && darkLabelStyles,
 								]}
 							>
 								<div

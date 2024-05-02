@@ -13,7 +13,8 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans14,
+	textSans17,
 } from '@guardian/source-foundations';
 import {
 	Button,
@@ -69,7 +70,7 @@ const overlayContainer = (
 	color: ${COLOURS[type]};
 	background: ${BACKGROUND_COLOURS[type]};
 	border: 1px solid ${BORDER_COLOURS[type]};
-	${textSans.medium()}
+	${textSans17}
 	padding: ${space[2]}px;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;
@@ -209,7 +210,7 @@ const PRIMARY_BUTTON_OVERRIDES = {
 
 const overlayNote = (type: ArticleCountOptOutType): SerializedStyles => css`
 	margin-top: ${space[2]}px;
-	${textSans.xsmall()}
+	${textSans14}
 	font-style: italic;
 
 	a {

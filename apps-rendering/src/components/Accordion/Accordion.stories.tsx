@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import {
-	body,
+	article17,
 	breakpoints,
 	from,
 	neutral,
@@ -16,7 +16,7 @@ import Accordion from '.';
 // ----- Stories ----- //
 
 const textStyle = css`
-	${body.medium({ lineHeight: 'loose' })};
+	${article17};
 	margin-bottom: ${space[3]}px;
 	${darkModeCss`
 		color: ${neutral[86]};

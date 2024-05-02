@@ -412,7 +412,7 @@ export const YoutubeAtomPlayer = ({
 				});
 
 				const adsConfig: AdsConfig =
-					adTargeting.disableAds || enableIma
+					!!adTargeting.disableAds || enableIma
 						? disabledAds
 						: buildAdsConfigWithConsent({
 								adUnit: adTargeting.adUnit,
@@ -489,10 +489,7 @@ export const YoutubeAtomPlayer = ({
 							const playerStatePromise =
 								player.current?.getPlayerState();
 							void playerStatePromise?.then((playerState) => {
-								if (
-									playerState &&
-									playerState === YT.PlayerState.PLAYING
-								) {
+								if (playerState === YT.PlayerState.PLAYING) {
 									void player.current?.pauseVideo();
 								}
 							});

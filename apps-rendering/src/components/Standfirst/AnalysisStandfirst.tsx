@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
+import { headlineMedium17 } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const styles = css`
-	${headline.xxxsmall()}
+	${headlineMedium17}
 	p:first-child {
 		padding-top: 0;
 	}

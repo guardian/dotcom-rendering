@@ -222,6 +222,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -472,14 +473,13 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									borderColour={sourcePalette.neutral[60]}
 									sectionId="labs-header"
 								>
-									<LabsHeader />
+									<LabsHeader editionId={editionId} />
 								</Section>
 							</Stuck>
 						</>
 					)}
 				</>
 			)}
-
 			<main
 				data-layout="ShowcaseLayout"
 				id="maincontent"
@@ -583,7 +583,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												branding={branding}
 												format={format}
 												pageId={article.pageId}
-												webTitle={article.webTitle}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -602,7 +601,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide until="leftCol">
@@ -629,7 +627,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											/>
 										</Hide>
 									</>
@@ -657,7 +654,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											ajaxUrl={article.config.ajaxUrl}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
 											<AffiliateDisclaimer />
@@ -781,7 +777,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							>
 								<RightColumn>
 									<MostViewedRightWithAd
-										display={format.display}
+										format={format}
 										isPaidContent={
 											article.pageType.isPaidContent
 										}
@@ -907,7 +903,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>
@@ -932,7 +927,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 			</main>
-
 			{isWeb && props.NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
 					<Island priority="enhancement" defer={{ until: 'visible' }}>
@@ -947,7 +941,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					</Island>
 				</Section>
 			)}
-
 			{isWeb && (
 				<>
 					<Section
@@ -1000,7 +993,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 					<MobileStickyContainer />
 				</>
 			)}
-
 			{isApps && (
 				<Section
 					fullWidth={true}

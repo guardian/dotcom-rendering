@@ -4,6 +4,7 @@ import {
 	from,
 	palette as sourcePalette,
 	textSans,
+	textSans17,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -84,7 +85,7 @@ export const mainMenuLinkStyle = css`
 `;
 
 export const columnLinks = css`
-	${textSans.medium()};
+	${textSans17};
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
@@ -157,7 +158,7 @@ export const lineStyle = css`
 `;
 
 const columnStyle = css`
-	${textSans.medium()};
+	${textSans17};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */

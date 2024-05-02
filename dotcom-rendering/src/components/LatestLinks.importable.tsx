@@ -3,7 +3,8 @@ import {
 	lineHeights,
 	palette,
 	space,
-	textSans,
+	textSans14,
+	textSansBold14,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { revealStyles } from '../lib/revealStyles';
@@ -30,7 +31,7 @@ const vertical = css`
 `;
 
 const linkStyles = css`
-	${textSans.xsmall()}
+	${textSans14}
 	overflow: hidden;
 	flex-grow: 1;
 `;
@@ -41,7 +42,7 @@ const dividerStyles = css`
 `;
 
 const bold = css`
-	${textSans.xsmall({ fontWeight: 'bold' })};
+	${textSansBold14};
 
 	:before {
 		content: '';
@@ -127,7 +128,9 @@ export const LatestLinks = ({
 			css={[
 				ulStyle,
 				revealStyles,
-				isDynamo || direction === 'horizontal' ? horizontal : vertical,
+				!!isDynamo || direction === 'horizontal'
+					? horizontal
+					: vertical,
 				css`
 					color: ${themePalette('--card-headline-trail-text')};
 				`,
@@ -170,7 +173,7 @@ export const LatestLinks = ({
 												)
 											}
 											display="relative"
-											editionId="UK"
+											editionId={'UK'}
 											showWeekday={false}
 											showDate={true}
 											showTime={false}

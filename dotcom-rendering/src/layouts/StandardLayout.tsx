@@ -62,9 +62,11 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 const StandardGrid = ({
 	children,
 	isMatchReport,
+	isMedia,
 }: {
 	children: React.ReactNode;
 	isMatchReport: boolean;
+	isMedia: boolean;
 }) => (
 	<div
 		css={css`
@@ -111,6 +113,17 @@ const StandardGrid = ({
 									'meta   border  body         right-column'
 									'.      border  .            right-column';
 						  `
+						: isMedia
+						? css`
+								grid-template-areas:
+									'title  border  headline     .'
+									'.      border  disclaimer   right-column'
+									'lines  border  media        right-column'
+									'meta   border  media        right-column'
+									'meta   border  standfirst   right-column'
+									'.      border  body         right-column'
+									'.      border  .            right-column';
+						  `
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
@@ -121,8 +134,9 @@ const StandardGrid = ({
 									'.      border  .            right-column';
 						  `}
 				}
+			}
 
-				/*
+			/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column
@@ -130,122 +144,173 @@ const StandardGrid = ({
 					Main content
 					Right Column
 				*/
-				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+			${until.wide} {
+				grid-template-columns: 140px 1px 1fr 300px;
 
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
-				}
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'title  border  matchNav     right-column'
+								'title  border  matchtabs    right-column'
+								'.      border  headline     right-column'
+								'.      border  standfirst   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  body         right-column'
+								'.      border  .            right-column';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title  border  headline     .'
+								'.      border  disclaimer   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  standfirst   right-column'
+								'.      border  body         right-column'
+								'.      border  .            right-column';
+					  `
+					: css`
+							grid-template-areas:
+								'title  border  headline     right-column'
+								'.      border  standfirst   right-column'
+								'.      border  disclaimer   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  body         right-column'
+								'.      border  .            right-column';
+					  `}
+			}
 
-				/*
+			/*
 					Explanation of each unit of grid-template-columns
 
 					Main content
 					Right Column
 				*/
-				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav      right-column'
-									'matchtabs	   right-column'
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `}
-				}
+			${until.leftCol} {
+				grid-template-columns: 1fr 300px;
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav      right-column'
+								'matchtabs	   right-column'
+								'title         right-column'
+								'headline      right-column'
+								'standfirst    right-column'
+								'media         right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title         .'
+								'headline      .'
+								'disclaimer    right-column'
+								'media         right-column'
+								'standfirst    right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `
+					: css`
+							grid-template-areas:
+								'title         right-column'
+								'headline      right-column'
+								'standfirst    right-column'
+								'disclaimer    right-column'
+								'media         right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `}
+			}
 
-				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'matchtabs'
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `}
-				}
+			${until.desktop} {
+				grid-template-columns: 1fr; /* Main content */
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav'
+								'matchtabs'
+								'title'
+								'headline'
+								'standfirst'
+								'media'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title'
+								'headline'
+								'disclaimer'
+								'media'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: css`
+							grid-template-areas:
+								'title'
+								'headline'
+								'standfirst'
+								'disclaimer'
+								'media'
+								'lines'
+								'meta'
+								'body';
+					  `}
+			}
 
-				${until.tablet} {
-					grid-column-gap: 0px;
+			${until.tablet} {
+				grid-column-gap: 0px;
 
-					grid-template-columns: 100%; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'matchtabs'
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `}
-				}
+				grid-template-columns: 100%; /* Main content */
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav'
+								'matchtabs'
+								'media'
+								'title'
+								'headline'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title'
+								'headline'
+								'disclaimer'
+								'media'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: css`
+							grid-template-areas:
+								'media'
+								'title'
+								'headline'
+								'standfirst'
+								'disclaimer'
+								'lines'
+								'meta'
+								'body';
+					  `}
 			}
 		`}
 	>
@@ -305,6 +370,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 
 	const isWeb = renderingTarget === 'Web';
@@ -326,6 +392,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
+
+	const isMedia =
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio;
 
 	const showComments = article.isCommentable && !isPaidContent;
 
@@ -424,6 +494,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								backgroundColour={themePalette(
 									'--article-background',
 								)}
+								borderColour={themePalette('--article-border')}
 								padSides={false}
 								element="aside"
 							>
@@ -438,6 +509,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
+										subNavLinkColour={themePalette(
+											'--sub-nav-link',
+										)}
 										linkHoverColour={themePalette(
 											'--article-link-text-hover',
 										)}
@@ -452,6 +526,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								backgroundColour={themePalette(
 									'--article-background',
 								)}
+								borderColour={themePalette('--article-border')}
 								padSides={false}
 								showTopBorder={false}
 							>
@@ -477,7 +552,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader />
+						<LabsHeader editionId={editionId} />
 					</Section>
 				</Stuck>
 			)}
@@ -506,9 +581,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					fontColour={themePalette('--article-section-title')}
+					innerBackgroundColour={themePalette(
+						'--article-inner-background',
+					)}
 					element="article"
 				>
-					<StandardGrid isMatchReport={isMatchReport}>
+					<StandardGrid
+						isMatchReport={isMatchReport}
+						isMedia={isMedia}
+					>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
@@ -545,7 +626,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="media">
-							<div css={maxWidth}>
+							<div css={!isMedia && maxWidth}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -558,6 +639,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									editionId={article.editionId}
+									hideCaption={isMedia}
 								/>
 							</div>
 						</GridItem>
@@ -636,7 +718,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												branding={branding}
 												format={format}
 												pageId={article.pageId}
-												webTitle={article.webTitle}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -655,7 +736,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											></ArticleMetaApps>
 										</div>
 									</Hide>
@@ -667,6 +747,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												pageId={article.pageId}
 												webTitle={article.webTitle}
 												byline={article.byline}
+												source={article.config.source}
 												tags={article.tags}
 												primaryDateline={
 													article.webPublicationDateDisplay
@@ -684,7 +765,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											/>
 										</div>
 									</Hide>
@@ -697,6 +777,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										byline={article.byline}
+										source={article.config.source}
 										tags={article.tags}
 										primaryDateline={
 											article.webPublicationDateDisplay
@@ -709,7 +790,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
 									/>
 									{!!article.affiliateLinksDisclaimer && (
 										<AffiliateDisclaimer />
@@ -838,7 +918,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="right-column">
 							<div
 								css={css`
-									padding-top: 6px;
+									padding-top: ${isMedia ? 0 : 6}px;
 									height: 100%;
 									${from.desktop} {
 										/* above 980 */
@@ -854,7 +934,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							>
 								<RightColumn>
 									<MostViewedRightWithAd
-										display={format.display}
+										format={format}
 										isPaidContent={
 											article.pageType.isPaidContent
 										}
@@ -985,7 +1065,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>
@@ -1027,6 +1106,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
+									subNavLinkColour={themePalette(
+										'--sub-nav-link',
+									)}
 									linkHoverColour={themePalette(
 										'--article-link-text-hover',
 									)}

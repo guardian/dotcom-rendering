@@ -16,462 +16,91 @@ import type { FEArticleType } from '../../../src/types/frontend';
 export const Video: FEArticleType = {
 	version: 3,
 	headline:
-		'NSA collecting phone records of millions of Verizon customers daily',
+		'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
 	standfirst:
-		'<strong>Exclusive:</strong> Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama<br><br>• <a href="http://www.guardian.co.uk/world/interactive/2013/jun/06/verizon-telephone-data-court-order">Read the Verizon court order in full here</a><br>• <a href="http://www.guardian.co.uk/world/2013/jun/06/obama-administration-nsa-verizon-records">Obama administration justifies surveillance</a>',
+		'<p><a href="https://www.theguardian.com/sport/novak-djokovic">Novak Djokovic</a> defeated Jannik Sinner 6-3, 6-3 to claim his seventh ATP Finals title. Five days after Sinner played some of his best tennis to <a href="https://www.theguardian.com/sport/2023/nov/14/stefanos-tsitsipas-retire-injury-holger-rune-atp-finals-novak-djokovic-jannik-sinner-tennis">edge past Djokovic</a> after three exhausting hours in their round-robin battle, Djokovic simply elevated his level to heights that Sinner could not match.</p>\n<p></p>\n<ul>\n <li><p><a href="https://www.theguardian.com/sport/2023/nov/19/novak-djokovic-claims-seventh-atp-finals-title-with-demolition-of-sinner"><strong>Novak Djokovic claims seventh ATP Finals title with demolition of Sinner</strong></a></p></li>\n</ul>',
 	webTitle:
-		'NSA collecting phone records of millions of Verizon customers daily',
+		'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
 	mainMediaElements: [
 		{
-			displayCredit: false,
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			role: 'inline',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '276',
-							width: '460',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg',
-					},
-				],
-			},
-			elementId: 'fe93003d-a00b-40d3-a7a1-923444b15b0a',
-			imageSources: [
+			expired: false,
+			assetId: 'i9is5y5scGU',
+			altText:
+				'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
+			posterImage: [
 				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=85&auto=format&fit=max&s=2f0303e3a6cfa368bb76b5aa1fe40ba1',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ac282714e74da98178e57aed900667b3',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=85&auto=format&fit=max&s=2f0303e3a6cfa368bb76b5aa1fe40ba1',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ac282714e74da98178e57aed900667b3',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=85&auto=format&fit=max&s=b8c14cbb95296c6ce2c47afd1c74caef',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=db791719b428c3726dd025373b5715c8',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=85&auto=format&fit=max&s=f4afb47d8116bd1c2f9fb126ab2d09ca',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7913b6ad76e99a6811ffc359ead3f1c9',
-							width: 930,
-						},
-					],
+					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/2000.jpg',
+					width: 2000,
 				},
 				{
-					weighting: 'thumbnail',
-					srcSet: [],
+					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/1000.jpg',
+					width: 1000,
 				},
 				{
-					weighting: 'supporting',
-					srcSet: [],
+					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/500.jpg',
+					width: 500,
 				},
 				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1020&quality=85&auto=format&fit=max&s=bb0557a68adb7d01d0294de4ff7c9a38',
-							width: 1020,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=07925e22da45fa157dd39104bea25b07',
-							width: 2040,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=940&quality=85&auto=format&fit=max&s=9e51b0e35b15bda73be0d1cf2a816b06',
-							width: 940,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c91a29662a3b09d053d4d1fd1080db3c',
-							width: 1880,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=85&auto=format&fit=max&s=f6f422301d42da7f16fdf0099e5d2abb',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cd24eea3ca1f24fdeac108251502e520',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=85&auto=format&fit=max&s=b8c14cbb95296c6ce2c47afd1c74caef',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=db791719b428c3726dd025373b5715c8',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=85&auto=format&fit=max&s=f4afb47d8116bd1c2f9fb126ab2d09ca',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7913b6ad76e99a6811ffc359ead3f1c9',
-							width: 930,
-						},
-					],
+					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/140.jpg',
+					width: 140,
 				},
 				{
-					weighting: 'halfwidth',
-					srcSet: [],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1900&quality=85&auto=format&fit=max&s=23200f4fbf312d4cc329b375882540e7',
-							width: 1900,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=5314e4ad4795ffd3aaf1a5c8cfd97be4',
-							width: 3800,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1300&quality=85&auto=format&fit=max&s=ce24ae26bde4f0d84db39460758409d1',
-							width: 1300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f9d8d9013a7e589b772d94a3626c6bb',
-							width: 2600,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1140&quality=85&auto=format&fit=max&s=8501c0e4d7abeb6dbc054c78276f3d0e',
-							width: 1140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3267023b74d0d6b9076ece455c939b03',
-							width: 2280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=980&quality=85&auto=format&fit=max&s=e13cdce4024f0740056c3ca1a00944f1',
-							width: 980,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=7e73c17e8b531b5470a4f312d76851df',
-							width: 1960,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=740&quality=85&auto=format&fit=max&s=3d0f43f5906111bd1d8239acdcf67a9c',
-							width: 740,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=4d1e34d5a6d635b6fec68eb0aabeb97c',
-							width: 1480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=85&auto=format&fit=max&s=f6f422301d42da7f16fdf0099e5d2abb',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cd24eea3ca1f24fdeac108251502e520',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=480&quality=85&auto=format&fit=max&s=a9b086c50aea4bdc186c8e78983a10b9',
-							width: 480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=3db6a06f16d14b55a9c41b96fb84a2aa',
-							width: 960,
-						},
-					],
+					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/6065.jpg',
+					width: 6065,
 				},
 			],
-			data: {
-				alt: 'Phone records data',
-				caption:
-					'Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP',
-				credit: 'Photograph: Matt Rourke/AP',
-			},
+			id: 'b71e095c-8863-4a13-a44d-47a090333c51',
+			elementId: 'cac1c8ed-e9c8-494e-b994-f857922be084',
+			overrideImage:
+				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=700&quality=85&auto=format&fit=max&s=aeafe0f7fe0353c290fceb3b73effa98',
+			duration: 106,
+			_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
+			mediaTitle:
+				'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
+			channelId: 'UCwD9E_QNwFwrQC7OnPnrg2Q',
 		},
 	],
-	main: '<figure class="element element-image" data-media-id="gu-image-410269952"> <img src="http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg" alt="Phone records data" width="460" height="276" class="gu-image" /> <figcaption> <span class="element-image__caption">Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP</span> <span class="element-image__credit">Photograph: Matt Rourke/AP</span> </figcaption> </figure>',
+	main: '<figure class="element element-atom"> <gu-atom data-atom-id="b71e095c-8863-4a13-a44d-47a090333c51" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/i9is5y5scGU?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
 	filterKeyEvents: false,
 	keyEvents: [],
-	blocks: [
-		{
-			id: 'ed4dfa13-125b-4c94-8b82-cc1e2bbb0553',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>The National Security Agency is currently collecting the telephone records of millions of US customers of Verizon, one of America's largest telecoms providers, under a top secret court order issued in April.</p>",
-					elementId: 'a1faf7c8-fd4b-41e6-b579-669f789ab1f0',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The order, a copy of which has been obtained by the Guardian, <a href="https://www.theguardian.com/world/interactive/2013/jun/06/verizon-telephone-data-court-order">requires Verizon on an "ongoing, daily basis" to give the NSA information on all telephone calls in its systems</a>, both within the US and between the US and other countries.</p>',
-					elementId: '8f048ff9-5432-4645-95ed-7693e05c5549',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The document shows for the first time that under the Obama administration the communication records of millions of US citizens are being collected indiscriminately and in bulk – regardless of whether they are suspected of any wrongdoing.</p>',
-					elementId: '986d8704-2695-4a28-848e-456c896721ed',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The secret Foreign Intelligence Surveillance Court (Fisa) granted the order to the FBI on April 25, giving the government unlimited authority to obtain the data for a specified three-month period ending on July 19.</p>',
-					elementId: '733ccfb3-0dbb-4af7-8a81-41ba5dc1e15e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Under the terms of the blanket order, the numbers of both parties on a call are handed over, as is location data, call duration, unique identifiers, and the time and duration of all calls. The contents of the conversation itself are not covered.</p>',
-					elementId: '5b40b289-40c9-48df-9bdc-db9ffe6e3c49',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>The disclosure is likely to reignite longstanding debates in the US over the proper extent of the government's domestic spying powers.</p>",
-					elementId: '3384fb96-a7b4-418f-bcac-f3ea59bc66a9',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Under the Bush administration, officials in security agencies had disclosed to reporters the large-scale collection of call records data by the <a href="https://www.theguardian.com/us-news/nsa" data-component="auto-linked-tag">NSA</a>, but this is the first time significant and top-secret documents have revealed the continuation of the practice on a massive scale under President Obama.</p>',
-					elementId: '0021572d-c0e1-43fd-8442-2ace57c1e70b',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The unlimited nature of the records being handed over to the NSA is extremely unusual. Fisa court orders typically direct the production of records pertaining to a specific named target who is suspected of being an agent of a terrorist group or foreign state, or a finite set of individually named targets.</p>',
-					elementId: 'ff46d02a-6b55-409f-8831-0118d4d68c3e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The Guardian approached the National Security Agency, the White House and the Department of Justice for comment in advance of publication on Wednesday. All declined. The agencies were also offered the opportunity to raise specific security concerns regarding the publication of the court order.</p>',
-					elementId: 'c3000733-fd31-4003-92d0-1758514d41b4',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>The court order expressly bars Verizon from disclosing to the public either the existence of the FBI's request for its customers' records, or the court order itself.</p>",
-					elementId: '5bcc5072-e130-403e-8003-671f8e3a1e8c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>"We decline comment," said Ed McFadden, a Washington-based Verizon spokesman.</p>',
-					elementId: '69d99abc-84f4-4ae4-8fbd-d076b6f5f241',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The order, signed by Judge Roger Vinson, compels Verizon to produce to the NSA electronic copies of "all call detail records or \'telephony metadata\' created by Verizon for communications between the United States and abroad" or "wholly within the United States, including local telephone calls".</p>',
-					elementId: 'b166b82f-194d-4d0f-a63d-bf85f1b230b4',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The order directs Verizon to "continue production on an ongoing daily basis thereafter for the duration of this order". It specifies that the records to be produced include "session identifying information", such as "originating and terminating number", the duration of each call, telephone calling card numbers, trunk identifiers, International Mobile Subscriber Identity (IMSI) number, and "comprehensive communication routing information".</p>',
-					elementId: '82d3fb12-2885-41e7-af89-fbc98ea3be95',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The information is classed as "metadata", or transactional information, rather than communications, and so does not require individual warrants to access. The document also specifies that such "metadata" is not limited to the aforementioned items. A 2005 court ruling judged that cell site location data – the nearest cell tower a phone was connected to – was also transactional data, and so could potentially fall under the scope of the order.</p>',
-					elementId: '7f695243-6b0b-4a31-af21-155574f8422a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>While the order itself does not include either the contents of messages or the personal information of the subscriber of any particular cell number, its collection would allow the NSA to build easily a comprehensive picture of who any individual contacted, how and when, and possibly from where, retrospectively.</p>',
-					elementId: '3dd19dbc-fe2e-4887-aa01-00239fd21180',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>It is not known whether Verizon is the only cell-phone provider to be targeted with such an order, although previous reporting has suggested the NSA has collected cell records from all major mobile networks. It is also unclear from the leaked document whether the three-month order was a one-off, or the latest in a series of similar orders.</p>',
-					elementId: '5f8c2834-a655-4afb-8c04-ca15b39147bd',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>The court order appears to explain the numerous cryptic public warnings by two US senators, Ron Wyden and Mark Udall, about the scope of the Obama administration's surveillance activities.</p>",
-					elementId: '898a1529-9841-47eb-9cf0-1d9d7abb7a51',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>For roughly two years, the two Democrats have been stridently advising the public that the US government is relying on "secret legal interpretations" to claim surveillance powers so broad that the American public would be "stunned" to learn of the kind of domestic spying being conducted.</p>',
-					elementId: 'f94dc981-f4a2-470f-a52e-c7a040d4b202',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Because those activities are classified, the senators, both members of the Senate intelligence committee, have been prevented from specifying which domestic surveillance programs they find so alarming. But the information they have been able to disclose in their public warnings perfectly tracks both the specific law cited by the April 25 court order as well as the vast scope of record-gathering it authorized.</p>',
-					elementId: '027a832c-1002-4dd7-a649-ef2622dc1d1a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>Julian Sanchez, a surveillance expert with the Cato Institute, explained: \"We've certainly seen the government increasingly strain the bounds of 'relevance' to collect large numbers of records at once — everyone at one or two degrees of separation from a target — but vacuuming all metadata up indiscriminately would be an extraordinary repudiation of any pretence of constraint or particularized suspicion.\" The April order requested by the FBI and NSA does precisely that.</p>",
-					elementId: 'da896752-2903-45f4-be9b-66478af861ef',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The law on which the order explicitly relies is the so-called "business records" provision of the Patriot Act, 50 USC section 1861. That is the provision which Wyden and Udall have repeatedly cited when warning the public of what they believe is the Obama administration\'s extreme interpretation of the law to engage in excessive domestic surveillance.</p>',
-					elementId: 'b092272d-0d50-4abe-90fc-0e40621fe70f',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In a letter to attorney general Eric Holder last year, they argued that "there is now a significant gap between what most Americans <em>think</em> the law allows and what the government secretly <em>claims</em> the law allows."</p>',
-					elementId: '648b8e28-3148-4c6b-bad4-092576e7570e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>"We believe," they wrote, "that most Americans would be stunned to learn the details of how these secret court opinions have interpreted" the "business records" provision of the Patriot Act.</p>',
-					elementId: 'b1194cd0-40ac-4035-82bf-efc6a96843a9',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Privacy advocates have long warned that allowing the government to collect and store unlimited "metadata" is a highly invasive form of surveillance of citizens\' communications activities. Those records enable the government to know the identity of every person with whom an individual communicates electronically, how long they spoke, and their location at the time of the communication.</p>',
-					elementId: '57db23d9-36e9-4f2c-96c1-fdc2ca55e52b',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>Such metadata is what the US government has long attempted to obtain in order to discover an individual's network of associations and communication patterns. The request for the bulk collection of all Verizon domestic telephone records indicates that the agency is continuing some version of the data-mining program begun by the Bush administration in the immediate aftermath of the 9/11 attack.</p>",
-					elementId: 'db61285b-27ad-43b5-9eb5-a43bf569a8be',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The NSA, as part of a program secretly authorized by President Bush on 4 October 2001, implemented a bulk collection program of domestic telephone, internet and email records. A furore erupted in 2006 when USA Today reported that the NSA had "been secretly collecting the phone call records of tens of millions of Americans, using data provided by AT&amp;T, Verizon and BellSouth" and was "using the data to analyze calling patterns in an effort to detect terrorist activity." Until now, there has been no indication that the Obama administration implemented a similar program.</p>',
-					elementId: '6b71912c-015d-4a56-99d7-e829054c1eb1',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: "<p>These recent events reflect how profoundly the NSA's mission has transformed from an agency exclusively devoted to foreign intelligence gathering, into one that focuses increasingly on domestic communications. A 30-year employee of the NSA, William Binney, resigned from the agency shortly after 9/11 in protest at the agency's focus on domestic activities.</p>",
-					elementId: 'a7fe892e-c3ef-4360-8fce-0601a7b1617b',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In the mid-1970s, Congress, for the first time, investigated the surveillance activities of the US government. Back then, the mandate of the NSA was that it would never direct its surveillance apparatus domestically.</p>',
-					elementId: '2235da67-f965-4962-98a0-13ff28dddd7b',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>At the conclusion of that investigation, Frank Church, the Democratic senator from Idaho who chaired the investigative committee, warned: "The NSA\'s capability at any time could be turned around on the American people, and no American would have any privacy left, such is the capability to monitor everything: telephone conversations, telegrams, it doesn\'t matter."</p>',
-					elementId: 'd95908de-948c-48b3-865a-b9164d61a60e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><em>Additional reporting by Ewen MacAskill and Spencer Ackerman</em></p>',
-					elementId: '01b8f5f3-87d2-4157-8100-3969438ffe94',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1452843129000,
-			blockCreatedOnDisplay: '07.32 GMT',
-			blockLastUpdated: 1452843129000,
-			blockLastUpdatedDisplay: '07.32 GMT',
-			contributors: [],
-			primaryDateLine: 'Thu 6 Jun 2013 11.05 BST',
-			secondaryDateLine: 'First published on Thu 6 Jun 2013 11.05 BST',
-		},
-	],
-	author: {
-		byline: 'Glenn Greenwald',
-	},
-	byline: 'Glenn Greenwald',
-	webPublicationDate: '2013-06-06T10:05:00.000Z',
-	webPublicationDateDeprecated: '2013-06-06T10:05:00.000Z',
-	webPublicationDateDisplay: 'Thu 6 Jun 2013 11.05 BST',
+	blocks: [],
+	author: {},
+	webPublicationDate: '2023-11-20T10:16:19.000Z',
+	webPublicationDateDeprecated: '2023-11-20T10:16:19.000Z',
+	webPublicationDateDisplay: 'Mon 20 Nov 2023 10.16 GMT',
 	webPublicationSecondaryDateDisplay:
-		'First published on Thu 6 Jun 2013 11.05 BST',
+		'Last modified on Mon 20 Nov 2023 10.16 GMT',
 	editionLongForm: 'UK edition',
 	editionId: 'UK',
-	pageId: 'world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	pageId: 'sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 	canonicalUrl:
-		'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+		'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 	format: {
-		design: 'ArticleDesign',
-		theme: 'NewsPillar',
+		design: 'VideoDesign',
+		theme: 'SportPillar',
 		display: 'StandardDisplay',
 	},
-	designType: 'Article',
+	designType: 'Media',
 	tags: [
 		{
-			id: 'us-news/us-national-security',
+			id: 'sport/novak-djokovic',
 			type: 'Keyword',
-			title: 'US national security',
+			title: 'Novak Djokovic',
 		},
 		{
-			id: 'us-news/us-politics',
+			id: 'sport/atp-world-tour-finals',
 			type: 'Keyword',
-			title: 'US politics',
+			title: 'ATP Finals',
 		},
 		{
-			id: 'world/privacy',
+			id: 'sport/tennis',
 			type: 'Keyword',
-			title: 'Privacy',
+			title: 'Tennis',
 		},
 		{
-			id: 'business/telecoms',
+			id: 'sport/sport',
 			type: 'Keyword',
-			title: 'Telecommunications industry',
-		},
-		{
-			id: 'technology/telecoms',
-			type: 'Keyword',
-			title: 'Telecoms',
-		},
-		{
-			id: 'business/verizon-communications',
-			type: 'Keyword',
-			title: 'Verizon Communications',
-		},
-		{
-			id: 'technology/data-protection',
-			type: 'Keyword',
-			title: 'Data protection',
-		},
-		{
-			id: 'technology/technology',
-			type: 'Keyword',
-			title: 'Technology',
-		},
-		{
-			id: 'business/business',
-			type: 'Keyword',
-			title: 'Business',
-		},
-		{
-			id: 'world/world',
-			type: 'Keyword',
-			title: 'World news',
+			title: 'Sport',
 		},
 		{
 			id: 'tone/news',
@@ -479,107 +108,46 @@ export const Video: FEArticleType = {
 			title: 'News',
 		},
 		{
-			id: 'us-news/us-news',
-			type: 'Keyword',
-			title: 'US news',
-		},
-		{
-			id: 'commentisfree/series/glenn-greenwald-security-liberty',
-			type: 'Series',
-			title: 'Glenn Greenwald on security and liberty',
-		},
-		{
-			id: 'us-news/nsa',
-			type: 'Keyword',
-			title: 'NSA',
-		},
-		{
-			id: 'us-news/the-nsa-files',
-			type: 'Keyword',
-			title: 'The NSA files',
-		},
-		{
-			id: 'type/article',
+			id: 'type/video',
 			type: 'Type',
-			title: 'Article',
+			title: 'Video',
 		},
 		{
-			id: 'profile/glenn-greenwald',
-			type: 'Contributor',
-			title: 'Glenn Greenwald',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2012/8/16/1345126789538/Gleen_Greenwald-140.jpg?width=300&quality=85&auto=format&fit=max&s=e67b2ebc5cf82a3ed2ea1d3cb2f0b268',
-		},
-		{
-			id: 'publication/theguardian',
-			type: 'Publication',
-			title: 'The Guardian',
-		},
-		{
-			id: 'theguardian/mainsection',
-			type: 'NewspaperBook',
-			title: 'Main section',
-		},
-		{
-			id: 'theguardian/mainsection/topstories',
-			type: 'NewspaperBookSection',
-			title: 'Top stories',
+			id: 'tracking/commissioningdesk/uk-video',
+			type: 'Tracking',
+			title: 'UK Video',
 		},
 	],
-	pillar: 'news',
+	pillar: 'sport',
 	isLegacyInteractive: false,
 	isImmersive: false,
-	sectionLabel: 'US national security',
-	sectionUrl: 'us-news/us-national-security',
-	sectionName: 'us-news',
+	sectionLabel: 'Novak Djokovic',
+	sectionUrl: 'sport/novak-djokovic',
+	sectionName: 'sport',
 	subMetaSectionLinks: [
 		{
-			url: '/us-news/us-national-security',
-			title: 'US national security',
-		},
-		{
-			url: '/commentisfree/series/glenn-greenwald-security-liberty',
-			title: 'Glenn Greenwald on security and liberty',
+			url: '/sport/novak-djokovic',
+			title: 'Novak Djokovic',
 		},
 	],
 	subMetaKeywordLinks: [
 		{
-			url: '/us-news/us-politics',
-			title: 'US politics',
+			url: '/sport/atp-world-tour-finals',
+			title: 'ATP Finals',
 		},
 		{
-			url: '/world/privacy',
-			title: 'Privacy',
-		},
-		{
-			url: '/business/telecoms',
-			title: 'Telecommunications industry',
-		},
-		{
-			url: '/technology/telecoms',
-			title: 'Telecoms',
-		},
-		{
-			url: '/business/verizon-communications',
-			title: 'Verizon Communications',
-		},
-		{
-			url: '/technology/data-protection',
-			title: 'Data protection',
-		},
-		{
-			url: '/tone/news',
-			title: 'news',
+			url: '/sport/tennis',
+			title: 'Tennis',
 		},
 	],
 	shouldHideAds: false,
 	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	webURL: 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+			'@id': 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -605,7 +173,7 @@ export const Video: FEArticleType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&enable=upscale&s=2b724110f381774c116ed9e53f249c01',
+				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=068fb79aa05a766277421fbe8d2319d7',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
@@ -613,50 +181,50 @@ export const Video: FEArticleType = {
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Glenn Greenwald',
-					sameAs: 'https://www.theguardian.com/profile/glenn-greenwald',
+					name: 'Guardian staff reporter',
 				},
 			],
-			datePublished: '2013-06-06T10:05:00.000Z',
+			datePublished: '2023-11-20T10:16:19.000Z',
 			headline:
-				'NSA collecting phone records of millions of Verizon customers daily',
-			dateModified: '2019-05-01T17:16:49.000Z',
+				'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
+			dateModified: '2023-11-20T10:16:20.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+			'@id': 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				target: 'android-app://com.guardian/https/www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 			},
 		},
 	],
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
-		'article:author': 'https://www.theguardian.com/profile/glenn-greenwald',
+			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&enable=upscale&s=2b724110f381774c116ed9e53f249c01',
+			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=068fb79aa05a766277421fbe8d2319d7',
 		'al:ios:url':
-			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
+			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=applinks',
 		'og:title':
-			'NSA collecting phone records of millions of Verizon customers daily',
+			'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2019-05-01T17:16:49.000Z',
+		'og:video:url':
+			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+		'article:modified_time': '2023-11-20T10:16:20.000Z',
+		'og:video:secure_url':
+			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 		'og:image:height': '720',
 		'og:description':
-			'Exclusive: Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama administration',
+			'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'US news',
-		'article:published_time': '2013-06-06T10:05:00.000Z',
-		'article:tag':
-			'US national security,US politics,Privacy,Telecommunications industry,Telecoms,Verizon Communications,Data protection,Technology,Business,World news,US news,NSA,The NSA files',
+		'article:section': 'Sport',
+		'article:published_time': '2023-11-20T10:16:19.000Z',
+		'article:tag': 'Novak Djokovic,ATP Finals,Tennis,Sport',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
 	},
@@ -669,14 +237,14 @@ export const Video: FEArticleType = {
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+			'guardian://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 		'twitter:app:url:iphone':
-			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=twitter',
+			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
 		'twitter:image':
-			'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&s=25fcfa670f162b2c5414733152cf57bc',
+			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=cc616ca345f75ebcf90d7da7c1d97390',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=twitter',
+			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
 	},
 	config: {
 		references: [
@@ -843,13 +411,14 @@ export const Video: FEArticleType = {
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
+		source: 'TMN',
 	},
 	guardianBaseURL: 'https://www.theguardian.com',
-	contentType: 'Article',
+	contentType: 'Video',
 	hasRelated: true,
 	hasStoryPackage: false,
 	beaconURL: '//phar.gu-web.net',
-	isCommentable: true,
+	isCommentable: false,
 	commercialProperties: {
 		US: {
 			adTargeting: [
@@ -858,53 +427,37 @@ export const Video: FEArticleType = {
 					value: ['0'],
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/pctba',
+				},
+				{
+					name: 'edition',
+					value: 'us',
+				},
+				{
+					name: 'k',
+					value: [
+						'novak-djokovic',
+						'tennis',
+						'sport',
+						'atp-world-tour-finals',
+					],
 				},
 				{
 					name: 'tn',
 					value: ['news'],
 				},
 				{
-					name: 'co',
-					value: ['glenn-greenwald'],
-				},
-				{
-					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
+					name: 'ct',
+					value: 'video',
 				},
 				{
 					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 				},
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
-				},
-				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
-				},
-				{
-					name: 'edition',
-					value: 'us',
 				},
 			],
 		},
@@ -915,53 +468,37 @@ export const Video: FEArticleType = {
 					value: ['0'],
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/pctba',
+				},
+				{
 					name: 'edition',
 					value: 'au',
 				},
 				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
+					name: 'k',
+					value: [
+						'novak-djokovic',
+						'tennis',
+						'sport',
+						'atp-world-tour-finals',
+					],
 				},
 				{
 					name: 'tn',
 					value: ['news'],
 				},
 				{
-					name: 'co',
-					value: ['glenn-greenwald'],
-				},
-				{
-					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
+					name: 'ct',
+					value: 'video',
 				},
 				{
 					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 				},
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
 				},
 			],
 		},
@@ -972,53 +509,37 @@ export const Video: FEArticleType = {
 					value: ['0'],
 				},
 				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/pctba',
 				},
 				{
 					name: 'edition',
 					value: 'uk',
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					name: 'k',
+					value: [
+						'novak-djokovic',
+						'tennis',
+						'sport',
+						'atp-world-tour-finals',
+					],
 				},
 				{
 					name: 'tn',
 					value: ['news'],
 				},
 				{
-					name: 'co',
-					value: ['glenn-greenwald'],
-				},
-				{
-					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
+					name: 'ct',
+					value: 'video',
 				},
 				{
 					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 				},
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
 				},
 			],
 		},
@@ -1029,41 +550,29 @@ export const Video: FEArticleType = {
 					value: ['0'],
 				},
 				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/pctba',
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					name: 'k',
+					value: [
+						'novak-djokovic',
+						'tennis',
+						'sport',
+						'atp-world-tour-finals',
+					],
 				},
 				{
 					name: 'tn',
 					value: ['news'],
 				},
 				{
-					name: 'co',
-					value: ['glenn-greenwald'],
-				},
-				{
-					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
+					name: 'ct',
+					value: 'video',
 				},
 				{
 					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 				},
 				{
 					name: 'edition',
@@ -1072,10 +581,6 @@ export const Video: FEArticleType = {
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
 				},
 			],
 		},
@@ -1086,53 +591,37 @@ export const Video: FEArticleType = {
 					value: ['0'],
 				},
 				{
-					name: 'se',
-					value: ['glenn-greenwald-security-liberty'],
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/pctba',
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					name: 'k',
+					value: [
+						'novak-djokovic',
+						'tennis',
+						'sport',
+						'atp-world-tour-finals',
+					],
 				},
 				{
 					name: 'tn',
 					value: ['news'],
 				},
 				{
-					name: 'co',
-					value: ['glenn-greenwald'],
+					name: 'edition',
+					value: 'eur',
+				},
+				{
+					name: 'ct',
+					value: 'video',
 				},
 				{
 					name: 'url',
-					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
 				},
 				{
 					name: 'p',
 					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/3gc62',
-				},
-				{
-					name: 'k',
-					value: [
-						'business',
-						'us-national-security',
-						'world',
-						'data-protection',
-						'us-politics',
-						'technology',
-						'nsa',
-						'telecoms',
-						'privacy',
-						'the-nsa-files',
-						'verizon-communications',
-						'us-news',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'eur',
 				},
 			],
 		},
@@ -1147,9 +636,9 @@ export const Video: FEArticleType = {
 		isSensitive: false,
 	},
 	trailText:
-		'<p><strong>Exclusive:</strong> Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama administration</p>',
+		'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
 	nav: {
-		currentUrl: '/us-news/us-politics',
+		currentUrl: '/sport/tennis',
 		pillars: [
 			{
 				title: 'News',
@@ -1764,6 +1253,22 @@ export const Video: FEArticleType = {
 						url: '/crosswords/series/quick',
 					},
 					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Quick cryptic',
+						url: '/crosswords/series/quick-cryptic',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
 						title: 'Cryptic',
 						url: '/crosswords/series/cryptic',
 					},
@@ -1772,28 +1277,16 @@ export const Video: FEArticleType = {
 						url: '/crosswords/series/prize',
 					},
 					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
+						title: 'Azed',
+						url: '/crosswords/series/azed',
 					},
 					{
 						title: 'Genius',
 						url: '/crosswords/series/genius',
 					},
 					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
 					},
 				],
 			},
@@ -1844,6 +1337,88 @@ export const Video: FEArticleType = {
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
+		currentNavLinkTitle: 'Tennis',
+		currentPillarTitle: 'Sport',
+		subNavSections: {
+			links: [
+				{
+					title: 'Football',
+					url: '/football',
+					children: [
+						{
+							title: 'Live scores',
+							url: '/football/live',
+							longTitle: 'football/live',
+						},
+						{
+							title: 'Tables',
+							url: '/football/tables',
+							longTitle: 'football/tables',
+						},
+						{
+							title: 'Fixtures',
+							url: '/football/fixtures',
+							longTitle: 'football/fixtures',
+						},
+						{
+							title: 'Results',
+							url: '/football/results',
+							longTitle: 'football/results',
+						},
+						{
+							title: 'Competitions',
+							url: '/football/competitions',
+							longTitle: 'football/competitions',
+						},
+						{
+							title: 'Clubs',
+							url: '/football/teams',
+							longTitle: 'football/teams',
+						},
+					],
+				},
+				{
+					title: 'Cricket',
+					url: '/sport/cricket',
+				},
+				{
+					title: 'Rugby union',
+					url: '/sport/rugby-union',
+				},
+				{
+					title: 'Tennis',
+					url: '/sport/tennis',
+				},
+				{
+					title: 'Cycling',
+					url: '/sport/cycling',
+				},
+				{
+					title: 'F1',
+					url: '/sport/formulaone',
+				},
+				{
+					title: 'Golf',
+					url: '/sport/golf',
+				},
+				{
+					title: 'Boxing',
+					url: '/sport/boxing',
+				},
+				{
+					title: 'Rugby league',
+					url: '/sport/rugbyleague',
+				},
+				{
+					title: 'Racing',
+					url: '/sport/horse-racing',
+				},
+				{
+					title: 'US sports',
+					url: '/sport/us-sport',
+				},
+			],
+		},
 		readerRevenueLinks: {
 			header: {
 				contribute:
@@ -1897,7 +1472,7 @@ export const Video: FEArticleType = {
 			},
 		},
 	},
-	showBottomSocialButtons: true,
+	showBottomSocialButtons: false,
 	pageFooter: {
 		footerLinks: [
 			[
@@ -2046,7 +1621,7 @@ export const Video: FEArticleType = {
 			],
 		],
 	},
-	publication: 'The Guardian',
+	publication: 'theguardian.com',
 	shouldHideReaderRevenue: false,
 	slotMachineFlags: '',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',

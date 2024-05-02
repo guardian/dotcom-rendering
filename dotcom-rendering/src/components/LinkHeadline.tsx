@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	headlineMedium20,
+	headlineMedium24,
+	headlineMedium28,
+} from '@guardian/source-foundations';
 import { palette } from '../palette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
@@ -29,23 +34,23 @@ const fontStyles = (size: SmallHeadlineSize) => {
 		case 'ginormous':
 		case 'huge':
 			return css`
-				${headline.small()};
+				${headlineMedium28};
 			`;
 		case 'large':
 			return css`
-				${headline.xsmall()};
+				${headlineMedium24};
 			`;
 		case 'medium':
 			return css`
-				${headline.xxsmall()};
+				${headlineMedium20};
 			`;
 		case 'small':
 			return css`
-				${headline.xxxsmall()};
+				${headlineMedium17};
 			`;
 		case 'tiny':
 			return css`
-				${headline.xxxsmall()};
+				${headlineMedium17};
 				font-size: 14px;
 			`;
 	}

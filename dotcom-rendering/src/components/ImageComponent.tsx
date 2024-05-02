@@ -2,7 +2,10 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineLight17,
+	headlineLight20,
+	headlineLight24,
+	headlineLight34,
 	palette as srcPalette,
 	until,
 } from '@guardian/source-foundations';
@@ -45,10 +48,6 @@ const timelineBulletStyles = css`
 		background-color: ${themePalette('--timeline-bullet')};
 		top: -6px;
 		left: -6.5px;
-
-		${from.mobileLandscape} {
-			left: 3.5px;
-		}
 
 		${from.leftCol} {
 			left: 143.5px;
@@ -125,15 +124,15 @@ const moreTitlePadding = css`
 
 const immersiveTitleWrapper = css`
 	${until.desktop} {
-		${headline.medium({ fontWeight: 'light' })}
+		${headlineLight34};
 	}
 
 	${until.phablet} {
-		${headline.medium({ fontWeight: 'light' })}
+		${headlineLight34};
 	}
 
 	${from.desktop} {
-		${headline.medium({ fontWeight: 'light' })}
+		${headlineLight34};
 	}
 `;
 const titleWrapper = (palette: Palette) => css`
@@ -142,13 +141,13 @@ const titleWrapper = (palette: Palette) => css`
 	width: 100%;
 
 	${until.desktop} {
-		${headline.xxsmall({ fontWeight: 'light' })};
+		${headlineLight20};
 	}
 	${until.phablet} {
-		${headline.xxxsmall({ fontWeight: 'light' })};
+		${headlineLight17};
 	}
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: 'light' })};
+		${headlineLight24};
 	}
 
 	color: ${srcPalette.neutral[100]};
@@ -280,7 +279,7 @@ export const ImageComponent = ({
 	}
 
 	const shouldLimitWidth =
-		!isMainMedia &&
+		(!isMainMedia || isTimeline) &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
 	const isNotOpinion =
 		format.design !== ArticleDesign.Comment &&

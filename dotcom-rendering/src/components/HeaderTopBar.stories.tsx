@@ -8,7 +8,7 @@ export default {
 export const defaultStory = () => {
 	return (
 		<HeaderTopBar
-			editionId="UK"
+			editionId={'UK'}
 			dataLinkName="test"
 			idUrl="idurl"
 			mmaUrl="mmaUrl"
