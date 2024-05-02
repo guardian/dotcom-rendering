@@ -1,10 +1,5 @@
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	Pillar,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
@@ -146,13 +141,13 @@ export const FlatWithNoTitles = {
 			},
 			{
 				design: ArticleDesign.Comment,
-				display: ArticleDisplay.Standard,
+				display: ArticleDisplay.Showcase,
 				theme: Pillar.Culture,
 			},
 			{
 				design: ArticleDesign.Feature,
 				display: ArticleDisplay.Standard,
-				theme: Pillar.Sport,
+				theme: Pillar.Opinion,
 			},
 			{
 				design: ArticleDesign.Obituary,
@@ -161,25 +156,15 @@ export const FlatWithNoTitles = {
 			},
 			{
 				design: ArticleDesign.Review,
-				display: ArticleDisplay.Standard,
+				display: ArticleDisplay.Immersive,
 				theme: Pillar.Sport,
 			},
-			{
-				design: ArticleDesign.Recipe,
-				display: ArticleDisplay.Immersive,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Feature,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.SpecialReport,
-			},
-			{
-				design: ArticleDesign.Feature,
-				display: ArticleDisplay.Immersive,
-				theme: ArticleSpecial.SpecialReportAlt,
-			},
 		],
+		chromatic: {
+			modes: {
+				Horizontal: allModes.splitHorizontal,
+			},
+		},
 	},
 } satisfies Story;
 
