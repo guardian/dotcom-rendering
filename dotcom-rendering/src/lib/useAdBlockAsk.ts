@@ -1,7 +1,8 @@
 import { EventTimer } from '@guardian/commercial';
 import { useEffect, useState } from 'react';
 import { useAB } from './useAB';
-import { useAuthStatus } from './useAuthStatus';
+import { getConsentFor, onConsentChange } from '@guardian/libs';
+import { adFreeDataIsPresent } from '../client/userFeatures/user-features-lib';
 
 const useIsInAdBlockAskVariant = (): boolean => {
 	const abTestAPI = useAB()?.api;
@@ -81,14 +82,29 @@ export const useAdblockAsk = ({
 }): boolean => {
 	const isInVariant = useIsInAdBlockAskVariant();
 	const [adBlockerDetected, setAdBlockerDetected] = useState<boolean>(false);
-
-	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const [isAdFree, setIsAdFree] = useState<boolean>(false);
+	const [hasConsentForGoogletag, setHasConsentForGoogletag] = useState(false);
 
 	const canDisplayAdBlockAsk =
-		!shouldHideReaderRevenue && !isPaidContent && !isSignedIn;
+		!shouldHideReaderRevenue &&
+		!isPaidContent &&
+		!isAdFree &&
+		hasConsentForGoogletag;
+
+	useEffect(() => {
+		onConsentChange((consentState) => {
+			if (consentState.tcfv2) {
+				setHasConsentForGoogletag(
+					getConsentFor('googletag', consentState),
+				);
+			}
+			setHasConsentForGoogletag(true);
+		});
+	}, []);
+
+	useEffect(() => {
+		setIsAdFree(adFreeDataIsPresent());
+	});
 
 	useEffect(() => {
 		const makeRequest = async () => {
