@@ -177,8 +177,28 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					/>
 				</Island>
 			)}
-			{renderingTarget === 'Apps' &&
-				!article.config.switches.darkModeInApps && <DarkModeMessage />}
+			{renderingTarget === 'Web' && darkMode && (
+				<DarkModeMessage>
+					Dark mode is a work-in-progress.
+					<br />
+					You can{' '}
+					<a
+						style={{ color: 'inherit' }}
+						href="theguardian.com/opt/out/dark-mode-web"
+					>
+						opt out anytime
+					</a>{' '}
+					if anything is unreadable or odd.
+				</DarkModeMessage>
+			)}
+			{renderingTarget === 'Apps' && !darkMode && (
+				<DarkModeMessage>
+					We hope you are enjoying the updates we are implementing on
+					articles. Unfortunately, some are still missing a dark mode
+					view. Rest assured this will be fixed in a forthcoming beta
+					release.
+				</DarkModeMessage>
+			)}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
 					article={article}

@@ -18,6 +18,7 @@ import { Metrics } from './Metrics.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
+import { DarkModeMessage } from './DarkModeMessage';
 
 type Props = {
 	tagPage: DCRTagPageType;
@@ -49,6 +50,8 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
+	const darkMode = tagPage.config.abTests.darkModeWebVariant === 'variant';
+
 	return (
 		<StrictMode>
 			<Global
@@ -60,6 +63,17 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 						body {
 							color: ${sourcePalette.neutral[7]};
 						}
+						/* Dark palette only if supported */
+						${darkMode
+							? css`
+									@media (prefers-color-scheme: dark) {
+										${paletteDeclarations(format, 'dark')}
+										body {
+											color: ${sourcePalette.neutral[86]};
+										}
+									}
+							  `
+							: ''}
 					}
 					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
@@ -101,6 +115,20 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
+			{darkMode && (
+				<DarkModeMessage>
+					Dark mode is a work-in-progress.
+					<br />
+					You can{' '}
+					<a
+						style={{ color: 'inherit' }}
+						href="theguardian.com/opt/out/dark-mode-web"
+					>
+						opt out anytime
+					</a>{' '}
+					if anything is unreadable or odd.
+				</DarkModeMessage>
+			)}
 			<TagPageLayout tagPage={tagPage} NAV={NAV} />
 		</StrictMode>
 	);

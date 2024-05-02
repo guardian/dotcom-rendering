@@ -21,6 +21,7 @@ import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
+import { DarkModeMessage } from './DarkModeMessage';
 
 type Props = {
 	front: DCRFrontType;
@@ -65,7 +66,6 @@ export const FrontPage = ({ front, NAV }: Props) => {
 						body {
 							color: ${sourcePalette.neutral[7]};
 						}
-
 						/* Dark palette only if supported */
 						${darkMode
 							? css`
@@ -126,6 +126,20 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island priority="feature" defer={{ until: 'idle' }}>
 				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
+			{darkMode && (
+				<DarkModeMessage>
+					Dark mode is a work-in-progress.
+					<br />
+					You can{' '}
+					<a
+						style={{ color: 'inherit' }}
+						href="theguardian.com/opt/out/dark-mode-web"
+					>
+						opt out anytime
+					</a>{' '}
+					if anything is unreadable or odd.
+				</DarkModeMessage>
+			)}
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>
 	);
