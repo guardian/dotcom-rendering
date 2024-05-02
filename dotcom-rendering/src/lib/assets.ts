@@ -115,8 +115,8 @@ export const generateScriptTags = (scripts: string[]): string[] =>
 			return `<script defer nomodule src="${script}"></script>`;
 		}
 		if (
-			script.match(WEB) ||
-			script.match(WEB_VARIANT_SCRIPT) ||
+			script.match(WEB) ??
+			script.match(WEB_VARIANT_SCRIPT) ??
 			script.match(APPS_SCRIPT)
 		) {
 			return `<script type="module" src="${script}"></script>`;

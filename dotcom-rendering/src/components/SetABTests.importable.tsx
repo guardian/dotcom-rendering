@@ -59,6 +59,7 @@ export const SetABTests = ({
 				getCookie({
 					name: 'GU_mvt_id_local',
 					shouldMemoize: true,
+					// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- it would break the logic
 				})) || // Simplify localhost testing by creating a different mvt id
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 		);

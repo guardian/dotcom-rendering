@@ -130,7 +130,6 @@ export const Body = ({ data, config }: Props) => {
 						url={url}
 						shouldHideAds={data.shouldHideAds}
 						adTargeting={adTargeting}
-						pageId={data.pageId}
 					/>
 				</div>
 			</amp-live-list>
