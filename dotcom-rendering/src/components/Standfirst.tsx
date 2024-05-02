@@ -71,7 +71,7 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
-const newStandfirstStyles = ({ display, design }: ArticleFormat) => {
+const decidePadding = ({ display, design }: ArticleFormat) => {
 	switch (design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
@@ -161,7 +161,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 		case ArticleDisplay.NumberedList:
 			return css`
 				${headlineBold20};
-				margin-bottom: ${space[3]}px;
 				max-width: 540px;
 				color: ${palette('--standfirst-text')};
 			`;
@@ -182,7 +181,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Profile:
 					return css`
 						${headlineLight20};
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 						li:before {
@@ -195,14 +193,12 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					return css`
 						${headlineBold17};
 						margin-top: ${space[1]}px;
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 					`;
 				case ArticleDesign.Analysis:
 					return css`
 						${headlineMedium17};
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 					`;
@@ -210,7 +206,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Audio:
 					return css`
 						${headlineBold17};
-						margin-bottom: ${space[3]}px;
 						color: ${palette('--standfirst-text')};
 					`;
 				default:
@@ -218,7 +213,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						case ArticleSpecial.Labs:
 							return css`
 								${textSans.medium({ lineHeight: 'tight' })}
-								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
 								a {
@@ -230,7 +224,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						default:
 							return css`
 								${headlineBold17};
-								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
 							`;
@@ -253,6 +246,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 				css={[
 					nestedStyles(format),
 					standfirstStyles(format),
+					decidePadding(format),
 					hoverStyles,
 				]}
 				className={
