@@ -2,11 +2,10 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
-	headlineBold17,
-	headlineBold20,
-	headlineLight20,
 	headlineLight24,
 	headlineMedium17,
+	headlineMedium20,
+	headlineMedium24,
 	space,
 	textSans,
 	textSans17,
@@ -71,6 +70,52 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
+const decideFont = ({ display, design }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial: {
+			switch (display) {
+				case ArticleDisplay.Immersive:
+					return css`
+						${headlineMedium20};
+						${from.tablet} {
+							${headlineMedium24};
+						}
+					`;
+				case ArticleDisplay.Showcase:
+				default:
+					return css`
+						${headlineMedium17};
+						${from.tablet} {
+							${headlineMedium20};
+						}
+					`;
+			}
+		}
+		default: {
+			switch (display) {
+				case ArticleDisplay.Immersive:
+					return css`
+						${headlineMedium20};
+						${from.tablet} {
+							${headlineMedium24};
+						}
+					`;
+				case ArticleDisplay.Showcase:
+				default:
+					return css`
+						${headlineMedium20};
+
+						${from.tablet} {
+							${headlineMedium17};
+						}
+					`;
+			}
+		}
+	}
+};
+
 const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
@@ -87,7 +132,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						`;
 					}
 					return css`
-						${headlineMedium17};
 						margin-top: ${space[2]}px;
 						margin-bottom: ${space[3]}px;
 						line-height: 22px;
@@ -115,7 +159,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 
 		case ArticleDisplay.NumberedList:
 			return css`
-				${headlineBold20};
 				margin-bottom: ${space[3]}px;
 				max-width: 540px;
 				color: ${palette('--standfirst-text')};
@@ -136,7 +179,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Timeline:
 				case ArticleDesign.Profile:
 					return css`
-						${headlineLight20};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
@@ -148,7 +190,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return css`
-						${headlineBold17};
 						margin-top: ${space[1]}px;
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
@@ -156,7 +197,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				case ArticleDesign.Analysis:
 					return css`
-						${headlineMedium17};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
@@ -164,7 +204,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 					return css`
-						${headlineBold17};
 						margin-bottom: ${space[3]}px;
 						color: ${palette('--standfirst-text')};
 					`;
@@ -184,7 +223,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 							`;
 						default:
 							return css`
-								${headlineBold17};
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
@@ -208,6 +246,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 				css={[
 					nestedStyles(format),
 					standfirstStyles(format),
+					decideFont(format),
 					hoverStyles,
 				]}
 				className={
