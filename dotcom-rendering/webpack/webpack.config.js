@@ -71,7 +71,6 @@ const commonConfigs = ({ platform }) => ({
 		...(DEV
 			? // DEV plugins
 			  [
-					// @ts-expect-error -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 					}),

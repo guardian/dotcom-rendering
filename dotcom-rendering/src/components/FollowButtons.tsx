@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import type { JSX } from '@emotion/react/jsx-runtime';
 import { space, textSans15 } from '@guardian/source-foundations';
 import {
 	SvgCheckmark,
@@ -11,8 +11,8 @@ import { palette } from '../palette';
 
 type IconProps = {
 	isFollowing?: boolean;
-	iconIsFollowing: EmotionJSX.Element;
-	iconIsNotFollowing: EmotionJSX.Element;
+	iconIsFollowing: JSX.Element;
+	iconIsNotFollowing: JSX.Element;
 };
 
 const FollowIcon = ({

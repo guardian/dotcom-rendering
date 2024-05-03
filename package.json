@@ -30,5 +30,10 @@
 		"prettier": "3.0.3",
 		"tslib": "2.6.2"
 	},
-	"packageManager": "pnpm@8.15.7"
+	"packageManager": "pnpm@8.15.7",
+	"pnpm": {
+		"patchedDependencies": {
+			"@guardian/support-dotcom-components@2.1.1": "patches/@guardian__support-dotcom-components@2.1.1.patch"
+		}
+	}
 }
