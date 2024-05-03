@@ -22,6 +22,10 @@ const headingLineStyles = css`
 	border-top: 4px solid ${palette('--heading-line')};
 `;
 
+export const createTitleId = (title: string) => {
+	return title.toLowerCase().replace(' ', '-');
+};
+
 interface KeyTakeawayProps {
 	format: ArticleFormat;
 	ajaxUrl: string;
@@ -59,7 +63,11 @@ export const KeyTakeaway = ({
 		<>
 			<li css={keyTakeawayStyles} data-spacefinder-role="nested">
 				<hr css={headingLineStyles} />
-				<Subheading format={format} topPadding={false}>
+				<Subheading
+					id={createTitleId(keyTakeaway.title)}
+					format={format}
+					topPadding={false}
+				>
 					<span css={headingIndexStyles}>{`${titleIndex}. `}</span>
 					{keyTakeaway.title}
 				</Subheading>

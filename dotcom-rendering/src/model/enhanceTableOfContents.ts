@@ -1,29 +1,22 @@
 import { JSDOM } from 'jsdom';
-import type { FEElement, SubheadingBlockElement } from '../types/content';
+import { createTitleId } from '../components/KeyTakeaway';
+import type {
+	NumberedTitleBlockElement,
+	SubheadingBlockElement,
+} from '../types/content';
 import type { TableOfContentsItem } from '../types/frontend';
 
-const isH2 = (element: FEElement): element is SubheadingBlockElement => {
-	return (
-		element._type ===
-			'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
-		element._type ===
-			'model.dotcomrendering.pageElements.NumberedTitleBlockElement' ||
-		element._type ===
-			'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement' ||
-		element._type ===
-			'model.dotcomrendering.pageElements.QAndAExplainerBlockElement' ||
-		element._type ===
-			'model.dotcomrendering.pageElements.TimelineBlockElement'
-	);
-};
-
-const extractText = (element: SubheadingBlockElement): string => {
+const extractText = (
+	element: SubheadingBlockElement | NumberedTitleBlockElement,
+): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
 	return frag.textContent?.trim() ?? '';
 };
 
-const extractID = (element: SubheadingBlockElement): string => {
+const extractID = (
+	element: SubheadingBlockElement | NumberedTitleBlockElement,
+): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
 	return frag.querySelector('H2')?.getAttribute('id') ?? '';
@@ -50,7 +43,23 @@ export const enhanceTableOfContents = (
 
 	for (const block of blocks) {
 		for (const element of block.elements) {
-			if (isH2(element)) {
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement'
+			) {
+				for (const keyTakeaway of element.keyTakeaways) {
+					console.log(keyTakeaway.title);
+					tocItems.push({
+						id: createTitleId(keyTakeaway.title),
+						title: keyTakeaway.title,
+					});
+				}
+			} else if (
+				element._type ===
+					'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
+				element._type ===
+					'model.dotcomrendering.pageElements.NumberedTitleBlockElement'
+			) {
 				tocItems.push({
 					id: extractID(element),
 					title: extractText(element),
