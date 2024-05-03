@@ -5383,11 +5383,6 @@ const timelineEventBorderLight: PaletteFunction = () =>
 const timelineEventBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
-const doughnutPercentageIconLight: PaletteFunction = () =>
-	sourcePalette.neutral[0];
-const doughnutPercentageIconDark: PaletteFunction = () =>
-	sourcePalette.sport[800];
-
 // ----- Palette ----- //
 
 /**
@@ -6396,10 +6391,6 @@ const paletteColours = {
 	'--timeline-event-border': {
 		light: timelineEventBorderLight,
 		dark: timelineEventBorderDark,
-	},
-	'--doughnut-percentage-icon': {
-		light: doughnutPercentageIconLight,
-		dark: doughnutPercentageIconDark,
 	},
 } satisfies PaletteColours;
 

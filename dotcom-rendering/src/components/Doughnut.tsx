@@ -30,7 +30,7 @@ const QUARTER_TURN = TAU / 4;
 const percentageStyles = css`
 	${headlineBold34}
 	text-anchor: middle;
-	fill: var(--doughnut-percentage-icon);
+	fill: currentColor;
 `;
 
 const valueStyles = (background: string) => css`
