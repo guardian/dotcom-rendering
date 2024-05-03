@@ -2,6 +2,7 @@ import { palette } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { getMerchHighPosition } from '../lib/getFrontsAdPositions';
+import { palette as themePalette } from '../palette';
 import { AdSlot } from './AdSlot.web';
 import { Section } from './Section';
 
@@ -64,7 +65,7 @@ export const decideMerchandisingSlot = (
 			padSides={false}
 			showTopBorder={false}
 			showSideBorders={false}
-			backgroundColour={palette.neutral[97]}
+			backgroundColour={themePalette('--article-section-background')}
 			element="aside"
 		>
 			{children}
