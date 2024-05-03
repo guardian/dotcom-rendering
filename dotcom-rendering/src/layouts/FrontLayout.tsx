@@ -256,10 +256,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={
-											sourcePalette.news[400]
-										}
-										borderColour={sourcePalette.neutral[46]}
 									/>
 								</Island>
 							</Section>
@@ -687,8 +683,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={sourcePalette.news[400]}
-							borderColour={sourcePalette.neutral[46]}
 						/>
 					</Island>
 				</Section>

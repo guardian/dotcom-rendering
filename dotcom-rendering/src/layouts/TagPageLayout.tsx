@@ -154,8 +154,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={palette.news[400]}
-										borderColour={palette.neutral[46]}
 									/>
 								</Island>
 							</Section>
@@ -298,8 +296,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={palette.news[400]}
-							borderColour={palette.neutral[46]}
 						/>
 					</Island>
 				</Section>
