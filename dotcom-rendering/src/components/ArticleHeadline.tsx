@@ -8,8 +8,10 @@ import {
 	headlineBold50,
 	headlineLight28,
 	headlineLight34,
+	headlineLight50,
 	headlineMedium28,
 	headlineMedium34,
+	headlineMedium50,
 	space,
 	textSansBold28,
 	textSansBold34,
@@ -44,6 +46,21 @@ const topPadding = css`
 const decideHeadlineFont = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
+			{
+				switch (format.design) {
+					case ArticleDesign.Obituary:
+					case ArticleDesign.Comment:
+					case ArticleDesign.Editorial:
+						return headlineLight50;
+					case ArticleDesign.Feature:
+					case ArticleDesign.Review:
+					case ArticleDesign.Recipe:
+					case ArticleDesign.Interview:
+						return headlineBold50;
+					default:
+						return headlineMedium50;
+				}
+			}
 			return headlineBold50;
 		default:
 			switch (format.design) {
