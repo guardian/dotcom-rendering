@@ -2344,8 +2344,8 @@ const cardBorderTopLight: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
-const cardBorderTopDark = (): string => {
-	return sourcePalette.neutral[20];
+const cardBorderTopDark: PaletteFunction = (format): string => {
+	return cardBorderTopLight(format);
 };
 const cardAgeTextLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt) {
