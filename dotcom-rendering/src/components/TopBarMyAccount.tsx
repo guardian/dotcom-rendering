@@ -52,20 +52,12 @@ const myAccountLinkStyles = css`
 	display: flex;
 	align-items: center;
 	${textSansBold17};
-	line-height: 1.5;
 
 	color: ${palette.neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
-	padding: ${space[3]}px 0 ${space[1]}px ${space[1]}px;
 
-	${from.tablet} {
-		padding: ${space[4]}px 0 ${space[1]}px ${space[1]}px;
-	}
-
-	${from.desktop} {
-		padding: ${space[5]}px 0 ${space[1]}px ${space[1]}px;
-	}
+	padding: ${space[1]}px;
 
 	:hover,
 	:focus {
@@ -167,6 +159,8 @@ export const dropDownOverrides = css`
 	padding-right: 0;
 	padding-bottom: 0;
 	margin-top: 0;
+
+	font-weight: bold;
 
 	&:not(ul):hover {
 		color: ${palette.neutral[100]};

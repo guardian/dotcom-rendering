@@ -51,19 +51,41 @@ const topBarStylesFromLeftCol = css`
 `;
 
 const topBarLinkContainerStyles = css`
-	height: 40px;
-	align-items: flex-start;
+	height: 100%;
+
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
 `;
 
-const leftDividerStyles = css`
+const paddingRightStyles = css`
+	padding-right: ${space[3]}px;
+`;
+
+const verticalDividerStyles = css`
 	${from.desktop} {
-		border-left: 1px solid ${palette.brand[600]};
+		:before {
+			content: '';
+			border-left: 1px solid ${palette.brand[600]};
+			display: flex;
+			position: relative;
+			height: 38px;
+		}
 	}
 `;
 
-const TopBarLinkContainer = ({ children }: { children: React.ReactNode }) => (
-	<div css={[topBarLinkContainerStyles, leftDividerStyles]}>{children}</div>
+const VerticalDivider = () => <div css={verticalDividerStyles} />;
+
+const TopBarLinkContainer = ({
+	isLastChild = false,
+	children,
+}: {
+	isLastChild?: boolean;
+	children: React.ReactNode;
+}) => (
+	<div css={[topBarLinkContainerStyles, !isLastChild && paddingRightStyles]}>
+		{children}
+	</div>
 );
 
 /**
@@ -116,6 +138,8 @@ export const TopBar = ({
 		>
 			{/** @todo - Reader revenue support messaging + CTA button */}
 
+			<VerticalDivider />
+
 			<Hide until="desktop">
 				<TopBarLinkContainer>
 					<TopBarLink
@@ -131,6 +155,8 @@ export const TopBar = ({
 				</TopBarLinkContainer>
 			</Hide>
 
+			<VerticalDivider />
+
 			<Hide until="desktop">
 				<TopBarLinkContainer>
 					<TopBarLink
@@ -142,7 +168,9 @@ export const TopBar = ({
 				</TopBarLinkContainer>
 			</Hide>
 
-			<TopBarLinkContainer>
+			<VerticalDivider />
+
+			<TopBarLinkContainer isLastChild={true}>
 				<TopBarMyAccount
 					mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
 					idUrl={idUrl ?? 'https://profile.theguardian.com'}
