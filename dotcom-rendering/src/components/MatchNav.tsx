@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import {
 	background,
 	headlineBold20,
-	palette,
 	space,
 	textSans15,
 	until,
@@ -46,7 +45,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 			justify-content: space-between;
 			position: relative;
 			padding: ${space[2]}px;
-			background-color: ${palette.brandAlt[400]};
+			background-color: var(--match-nav-background);
 			margin-bottom: 10px;
 			${until.tablet} {
 				margin: 0 -10px 10px;
@@ -59,7 +58,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 				bottom: 0;
 				width: 100vw;
 				left: -100vw;
-				background-color: ${palette.brandAlt[400]};
+				background-color: var(--match-nav-background);
 				z-index: -1;
 			}
 		`}
@@ -157,6 +156,7 @@ const TeamNav = ({
 			display: flex;
 			flex-grow: 1;
 			flex-basis: 50%;
+			color: var(--match-nav-text);
 		`}
 	>
 		<Column>
