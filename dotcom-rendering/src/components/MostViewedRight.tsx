@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { headlineBold17 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { useEffect, useState } from 'react';
 import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
@@ -44,31 +45,36 @@ export const MostViewedRight = ({
 		| 'most-viewed-only'
 		| 'none';
 	const useDeeplyReadTestVariant = (): Variant => {
+		const [variant, setVariant] = useState<Variant>('none');
 		const ABTestAPI = useAB()?.api;
-		if (
-			ABTestAPI?.isUserInVariant(
-				'DeeplyReadRightColumn',
-				'deeply-read-only',
-			)
-		) {
-			return 'deeply-read-only';
-		} else if (
-			ABTestAPI?.isUserInVariant(
-				'DeeplyReadRightColumn',
-				'deeply-read-and-most-viewed',
-			)
-		) {
-			return 'deeply-read-and-most-viewed';
-		} else if (
-			ABTestAPI?.isUserInVariant(
-				'DeeplyReadRightColumn',
-				'most-viewed-only',
-			)
-		) {
-			return 'most-viewed-only';
-		} else {
-			return 'none';
-		}
+		useEffect(() => {
+			if (
+				ABTestAPI?.isUserInVariant(
+					'DeeplyReadRightColumn',
+					'deeply-read-only',
+				)
+			) {
+				setVariant('deeply-read-only');
+			} else if (
+				ABTestAPI?.isUserInVariant(
+					'DeeplyReadRightColumn',
+					'deeply-read-and-most-viewed',
+				)
+			) {
+				setVariant('deeply-read-and-most-viewed');
+			} else if (
+				ABTestAPI?.isUserInVariant(
+					'DeeplyReadRightColumn',
+					'most-viewed-only',
+				)
+			) {
+				setVariant('most-viewed-only');
+			} else {
+				setVariant('none');
+			}
+		}, [ABTestAPI]);
+
+		return variant;
 	};
 	const testVariant = useDeeplyReadTestVariant();
 	const endpointUrl =
@@ -87,9 +93,11 @@ export const MostViewedRight = ({
 		const mostReadTrails = data.tabs[0]?.trails
 			?.slice(0, limitItems)
 			?.map(decideTrail);
-		const deeplyReadTrails = data.tabs[1]?.trails
-			?.slice(0, limitItems)
-			?.map(decideTrail);
+		const deeplyReadTrails =
+			testVariant === 'deeply-read-and-most-viewed' ||
+			testVariant === 'deeply-read-only'
+				? data.tabs[1]?.trails?.slice(0, limitItems)?.map(decideTrail)
+				: undefined;
 
 		return (
 			<div
