@@ -10,6 +10,7 @@ import {
 	palette,
 	space,
 	textSansBold17,
+	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
@@ -161,6 +162,12 @@ export const dropDownOverrides = css`
 	margin-top: 0;
 
 	font-weight: bold;
+
+	ul {
+		${until.tablet} {
+			top: 52px;
+		}
+	}
 
 	&:not(ul):hover {
 		color: ${palette.neutral[100]};
