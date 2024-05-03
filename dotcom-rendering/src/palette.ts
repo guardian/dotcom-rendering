@@ -3754,8 +3754,7 @@ const matchNavBackgroundLight: PaletteFunction = () =>
 const matchNavBackgroundDark: PaletteFunction = () =>
 	sourcePalette.brandAlt[200];
 
-const matchNavTextLight: PaletteFunction = () => sourcePalette.neutral[86];
-const matchNavTextDark: PaletteFunction = () => sourcePalette.neutral[7];
+const matchNavText: PaletteFunction = () => sourcePalette.neutral[7];
 
 const matchStatsBackgroundLight: PaletteFunction = ({ design }) => {
 	switch (design) {
@@ -5848,8 +5847,8 @@ const paletteColours = {
 		dark: matchNavBackgroundDark,
 	},
 	'--match-nav-text': {
-		light: matchNavTextLight,
-		dark: matchNavTextDark,
+		light: matchNavText,
+		dark: matchNavText,
 	},
 	'--match-stats-background': {
 		light: matchStatsBackgroundLight,
