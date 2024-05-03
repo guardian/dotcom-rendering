@@ -163,15 +163,16 @@ export const dropDownOverrides = css`
 
 	font-weight: bold;
 
-	ul {
-		${until.tablet} {
-			top: 52px;
-		}
-	}
-
 	&:not(ul):hover {
 		color: ${palette.neutral[100]};
 		text-decoration: underline;
+	}
+
+	/** Handles case of *new* top bar being 52px at this breakpoint */
+	${until.tablet} {
+		&:not(button) {
+			top: 48px;
+		}
 	}
 
 	${from.tablet} {
