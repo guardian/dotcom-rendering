@@ -1,15 +1,11 @@
-import { css, Global } from '@emotion/react';
+import { Global } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import {
-	focusHalo,
-	palette as sourcePalette,
-} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { TagPageLayout } from '../layouts/TagPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
+import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import { paletteDeclarations } from '../palette';
 import type { DCRTagPageType } from '../types/tagPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { DarkModeMessage } from './DarkModeMessage';
@@ -55,38 +51,7 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 
 	return (
 		<StrictMode>
-			<Global
-				styles={css`
-					:root {
-						/* Light palette is default on all platforms */
-						/* We do not support dark mode on tag pages */
-						${paletteDeclarations(format, 'light')}
-						body {
-							color: ${sourcePalette.neutral[7]};
-						}
-						/* Dark palette only if supported */
-						${darkModeAvailable
-							? css`
-									@media (prefers-color-scheme: dark) {
-										${paletteDeclarations(format, 'dark')}
-										body {
-											color: ${sourcePalette.neutral[86]};
-										}
-									}
-							  `
-							: ''}
-					}
-					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-					*:focus {
-						${focusHalo}
-					}
-					::selection {
-						background: ${sourcePalette.brandAlt[400]};
-						color: ${sourcePalette.neutral[7]};
-					}
-				`}
-			/>
+			<Global styles={rootStyles(format, darkModeAvailable)} />
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>
