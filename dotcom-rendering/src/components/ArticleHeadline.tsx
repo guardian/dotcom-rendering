@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	headlineBold28,
@@ -8,10 +8,12 @@ import {
 	headlineBold50,
 	headlineLight28,
 	headlineLight34,
+	headlineLight50,
 	headlineMedium28,
 	headlineMedium34,
+	headlineMedium50,
 	space,
-	textSansBold24,
+	textSansBold28,
 	textSansBold34,
 	until,
 } from '@guardian/source-foundations';
@@ -41,34 +43,76 @@ const topPadding = css`
 	}
 `;
 
-const standardFont = css`
-	${headlineMedium34};
-	${until.tablet} {
-		${headlineMedium28};
+const decideHeadlineFont = (format: ArticleFormat) => {
+	switch (format.display) {
+		case ArticleDisplay.Immersive:
+			{
+				switch (format.design) {
+					case ArticleDesign.Obituary:
+					case ArticleDesign.Comment:
+					case ArticleDesign.Editorial:
+						return headlineLight50;
+					case ArticleDesign.Feature:
+					case ArticleDesign.Review:
+					case ArticleDesign.Recipe:
+					case ArticleDesign.Interview:
+						return headlineBold50;
+					default:
+						return headlineMedium50;
+				}
+			}
+			return headlineBold50;
+		default:
+			switch (format.design) {
+				case ArticleDesign.Obituary:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+					return headlineLight34;
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
+					return headlineBold34;
+				default:
+					return headlineMedium34;
+			}
+	}
+};
+const decideMobileHeadlineFont = (format: ArticleFormat) => {
+	switch (format.display) {
+		case ArticleDisplay.Immersive: {
+			return headlineBold34;
+		}
+		default:
+			switch (format.design) {
+				case ArticleDesign.Obituary:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+					return headlineLight28;
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
+					return headlineBold28;
+				default:
+					return headlineMedium28;
+			}
+	}
+};
+const headlineFont = (format: ArticleFormat) => css`
+	${decideMobileHeadlineFont(format)}
+
+	${from.tablet} {
+		${decideHeadlineFont(format)}
 	}
 `;
 
 const labsFont = css`
-	${textSansBold24};
+	${textSansBold28};
 	line-height: 2rem;
 	${from.tablet} {
 		${textSansBold34};
 		line-height: 2.375rem;
-	}
-`;
-
-const boldFont = css`
-	${headlineBold34};
-	${until.tablet} {
-		${headlineBold28};
-	}
-`;
-
-const jumboFont = css`
-	${headlineBold50};
-	line-height: 3.5rem;
-	${until.desktop} {
-		${headlineBold34};
 	}
 `;
 
@@ -79,24 +123,6 @@ const jumboLabsFont = css`
 	${until.desktop} {
 		${textSansBold34};
 		line-height: 2.375rem;
-	}
-`;
-
-const invertedFont = css`
-	${headlineBold34};
-	line-height: 2.625rem;
-	${until.tablet} {
-		${headlineBold28};
-		line-height: 2.1875rem;
-	}
-`;
-
-const lightFont = css`
-	${headlineLight34};
-	font-size: 2.125rem;
-	line-height: 2.375rem;
-	${until.mobileMedium} {
-		${headlineLight28};
 	}
 `;
 
@@ -324,7 +350,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? jumboLabsFont
-											: jumboFont,
+											: headlineFont(format),
 										maxWidth,
 										immersiveStyles,
 										displayBlock,
@@ -356,7 +382,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: lightFont,
+											: headlineFont(format),
 										invertedText,
 										css`
 											color: ${themePalette(
@@ -404,7 +430,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? jumboLabsFont
-											: jumboFont,
+											: headlineFont(format),
 										maxWidth,
 										invertedStyles,
 										immersiveStyles,
@@ -438,7 +464,7 @@ export const ArticleHeadline = ({
 							css={[
 								format.theme === ArticleSpecial.Labs
 									? labsFont
-									: boldFont,
+									: headlineFont(format),
 								topPadding,
 								css`
 									color: ${themePalette('--headline-colour')};
@@ -479,7 +505,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: boldFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -514,7 +540,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: lightFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -556,7 +582,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: lightFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -596,7 +622,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: invertedFont,
+											: headlineFont(format),
 										invertedWrapper,
 										zIndex,
 										css`
@@ -646,7 +672,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: standardFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -688,7 +714,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: standardFont,
+											: headlineFont(format),
 										css`
 											color: ${isMatch
 												? palette.text.headlineWhenMatch
@@ -731,7 +757,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: standardFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -758,7 +784,7 @@ export const ArticleHeadline = ({
 								css={[
 									format.theme === ArticleSpecial.Labs
 										? labsFont
-										: standardFont,
+										: headlineFont(format),
 									topPadding,
 									css`
 										color: ${themePalette(
@@ -791,7 +817,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: standardFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
