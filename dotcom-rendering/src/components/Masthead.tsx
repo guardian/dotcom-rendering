@@ -95,9 +95,7 @@ export const Masthead = ({
 						<SubNav
 							subNavSections={nav.subNavSections}
 							currentNavLink={nav.currentNavLink}
-							linkHoverColour={sourcePalette.brandAlt[400]}
-							borderColour={sourcePalette.brand[600]}
-							subNavLinkColour={sourcePalette.neutral[100]}
+							position="header"
 						/>
 					</Island>
 				</Section>
