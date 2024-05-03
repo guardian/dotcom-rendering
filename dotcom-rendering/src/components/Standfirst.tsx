@@ -80,6 +80,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				case ArticleDisplay.Immersive:
 					return css`
 						padding-bottom: ${space[6]}px;
+						padding-top: ${space[2]}px;
 						${from.tablet} {
 							padding-bottom: none;
 						}
@@ -107,6 +108,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				case ArticleDisplay.Immersive:
 					return css`
 						padding-bottom: ${space[6]}px;
+						padding-top: ${space[2]}px;
 
 						${from.tablet} {
 							padding-bottom: none;
