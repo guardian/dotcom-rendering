@@ -25,13 +25,13 @@ const editions = [
 const pillars = [
 	{ name: 'News', colour: palette.news[500], path: '/news' },
 	{ name: 'Opinion', colour: palette.opinion[500], path: '/commentisfree' },
-	{ name: 'Sport', colour: palette.sport[500], path: '/sport' },
 	{ name: 'Culture', colour: palette.culture[500], path: '/culture' },
 	{
 		name: 'Lifestyle',
 		colour: palette.lifestyle[500],
 		path: '/lifeandstyle',
 	},
+	{ name: 'Sport', colour: palette.sport[500], path: '/sport' },
 ] as const satisfies ReadonlyArray<{
 	name: string;
 	colour: string;
@@ -70,6 +70,7 @@ const guardianLogoStyles = css`
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
+	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
 	margin-right: 50px;
 	svg {
@@ -120,7 +121,6 @@ const pillarsNavStyles = css`
 	border-bottom: 1px solid ${palette.neutral[86]};
 	ul {
 		display: flex;
-		column-gap: ${space[1]}px;
 	}
 	li {
 		height: 28px;
@@ -144,6 +144,21 @@ const pillarsNavStyles = css`
 		li {
 			width: 136px;
 		}
+	}
+`;
+
+const pillarColorStyles = css`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	transform-origin: bottom;
+	transform: scaleY(0);
+	transition: transform 0.3s;
+
+	*:hover > & {
+		transform: scaleY(1);
 	}
 `;
 
@@ -204,25 +219,23 @@ export const Titlepiece = () => {
 					{pillars.map(({ name, path, colour }, index) => (
 						<li
 							key={path}
-							css={
-								index !== pillars.length - 1
-									? css`
-											border-right: 1px solid
-												${palette.neutral[86]};
-									  `
-									: css``
-							}
+							css={css`
+								position: relative;
+								${index !== pillars.length - 1 &&
+								`border-right: 1px solid ${palette.neutral[86]};`}
+								${index > 0 && `padding-left: ${space[1]}px;`}
+							`}
 						>
+							<div
+								style={{
+									backgroundColor: colour,
+								}}
+								css={pillarColorStyles}
+							/>
 							<a
 								key={path}
 								href={`https://www.theguardian.com${path}`}
 							>
-								<div
-									style={{
-										backgroundColor: colour,
-										left: index === 0 ? '-19px' : undefined,
-									}}
-								/>
 								{name}
 							</a>
 						</li>
