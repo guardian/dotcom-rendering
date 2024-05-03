@@ -93,7 +93,10 @@ export const MostViewedRight = ({
 						<StraightLines
 							cssOverrides={css`
 								display: block;
-								margin-top: 30px;
+								margin-top: ${testVariant ===
+								'deeply-read-and-most-viewed'
+									? '30px'
+									: '0'};
 							`}
 							count={4}
 							color={themePalette('--straight-lines')}
