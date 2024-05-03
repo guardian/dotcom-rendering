@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import { headlineBold17 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { useEffect, useState } from 'react';
 import { decideTrail } from '../lib/decideTrail';
-import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
+import { useDeeplyReadTestVariant } from '../lib/useDeeplyReadTestVariant';
 import { palette as themePalette } from '../palette';
 import type { FETrailTabType } from '../types/trails';
 import { MostViewedRightItem } from './MostViewedRightItem';
@@ -39,43 +38,6 @@ export const MostViewedRight = ({
 	limitItems = 5,
 	stickToTop = false,
 }: Props) => {
-	type Variant =
-		| 'deeply-read-only'
-		| 'deeply-read-and-most-viewed'
-		| 'most-viewed-only'
-		| 'none';
-	const useDeeplyReadTestVariant = (): Variant => {
-		const [variant, setVariant] = useState<Variant>('none');
-		const ABTestAPI = useAB()?.api;
-		useEffect(() => {
-			if (
-				ABTestAPI?.isUserInVariant(
-					'DeeplyReadRightColumn',
-					'deeply-read-only',
-				)
-			) {
-				setVariant('deeply-read-only');
-			} else if (
-				ABTestAPI?.isUserInVariant(
-					'DeeplyReadRightColumn',
-					'deeply-read-and-most-viewed',
-				)
-			) {
-				setVariant('deeply-read-and-most-viewed');
-			} else if (
-				ABTestAPI?.isUserInVariant(
-					'DeeplyReadRightColumn',
-					'most-viewed-only',
-				)
-			) {
-				setVariant('most-viewed-only');
-			} else {
-				setVariant('none');
-			}
-		}, [ABTestAPI]);
-
-		return variant;
-	};
 	const testVariant = useDeeplyReadTestVariant();
 	const endpointUrl =
 		'https://api.nextgen.guardianapps.co.uk/most-read-with-deeply-read.json';
@@ -131,6 +93,7 @@ export const MostViewedRight = ({
 						<StraightLines
 							cssOverrides={css`
 								display: block;
+								margin-top: 30px;
 							`}
 							count={4}
 							color={themePalette('--straight-lines')}
