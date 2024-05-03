@@ -1,8 +1,8 @@
 import { EventTimer } from '@guardian/commercial';
-import { useEffect, useState } from 'react';
-import { useAB } from './useAB';
 import { getConsentFor, onConsentChange } from '@guardian/libs';
+import { useEffect, useState } from 'react';
 import { adFreeDataIsPresent } from '../client/userFeatures/user-features-lib';
+import { useAB } from './useAB';
 
 const useIsInAdBlockAskVariant = (): boolean => {
 	const abTestAPI = useAB()?.api;
@@ -104,7 +104,7 @@ export const useAdblockAsk = ({
 
 	useEffect(() => {
 		setIsAdFree(adFreeDataIsPresent());
-	});
+	}, []);
 
 	useEffect(() => {
 		const makeRequest = async () => {
