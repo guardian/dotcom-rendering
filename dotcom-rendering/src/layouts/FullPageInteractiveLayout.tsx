@@ -271,6 +271,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
+							position="header"
 						/>
 					</Island>
 				</Section>
@@ -356,6 +357,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
+							position="footer"
 						/>
 					</Island>
 				</Section>

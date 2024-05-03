@@ -8,6 +8,7 @@ import { palette } from '../palette';
 type Props = {
 	subNavSections: SubNavType;
 	currentNavLink: string;
+	position: 'header' | 'footer';
 };
 
 const wrapperCollapsedStyles = css`
@@ -55,7 +56,7 @@ const fontStyle = css`
 		font-size: 16px;
 	}
 	font-weight: 500;
-	color: ${palette('--sub-nav-link')};
+	color: var(--sub-nav-link);
 	padding: 0 5px;
 	height: 36px;
 	/* Design System: Line height is being used here for centering layout, we need the primitives */
@@ -133,7 +134,11 @@ const listItemStyles = css`
 	}
 `;
 
-export const SubNav = ({ subNavSections, currentNavLink }: Props) => {
+export const SubNav = ({
+	subNavSections,
+	currentNavLink,
+	position = 'header',
+}: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const ulRef = useRef<HTMLUListElement>(null);
@@ -163,6 +168,12 @@ export const SubNav = ({ subNavSections, currentNavLink }: Props) => {
 			css={[collapseWrapper && wrapperCollapsedStyles, spaceBetween]}
 			data-testid="sub-nav"
 			data-component="sub-nav"
+			style={{
+				'--sub-nav-link':
+					position === 'header'
+						? palette('--sub-nav-link-header')
+						: palette('--sub-nav-link-footer'),
+			}}
 		>
 			{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari {@see https://github.com/guardian/dotcom-rendering/pull/5041} */}
 			<ul

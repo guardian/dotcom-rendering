@@ -19,6 +19,7 @@ export const Default = {
 			links: [],
 		},
 		currentNavLink: '',
+		position: 'header',
 	},
 } satisfies Story;
 
@@ -26,5 +27,6 @@ export const World = {
 	args: {
 		subNavSections: extractNAV(navWorld).subNavSections ?? { links: [] },
 		currentNavLink: 'World',
+		position: 'footer',
 	},
 } satisfies Story;

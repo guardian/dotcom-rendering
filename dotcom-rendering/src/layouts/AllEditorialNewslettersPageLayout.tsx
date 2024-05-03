@@ -124,6 +124,7 @@ export const AllEditorialNewslettersPageLayout = ({
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
+										position="header"
 									/>
 								</Island>
 							</Section>

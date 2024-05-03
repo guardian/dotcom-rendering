@@ -3510,7 +3510,7 @@ const subNavBorder: PaletteFunction = ({ design, theme }) => {
 			}
 	}
 };
-const subNavLinkLight: PaletteFunction = (format) => {
+const subNavLinkHeaderLight: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -3520,7 +3520,13 @@ const subNavLinkLight: PaletteFunction = (format) => {
 			return sourcePalette.neutral[7];
 	}
 };
-const subNavLinkDark: PaletteFunction = () => {
+const subNavLinkHeaderDark: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+const subNavLinkFooterLight: PaletteFunction = () => {
+	return sourcePalette.neutral[7];
+};
+const subNavLinkFooterDark: PaletteFunction = () => {
 	return sourcePalette.neutral[100];
 };
 const subNavLinkHoverLight: PaletteFunction = (format) => {
@@ -5839,9 +5845,13 @@ const paletteColours = {
 		light: subNavBorder,
 		dark: subNavBorder,
 	},
-	'--sub-nav-link': {
-		light: subNavLinkLight,
-		dark: subNavLinkDark,
+	'--sub-nav-link-header': {
+		light: subNavLinkHeaderLight,
+		dark: subNavLinkHeaderDark,
+	},
+	'--sub-nav-link-footer': {
+		light: subNavLinkFooterLight,
+		dark: subNavLinkFooterDark,
 	},
 	'--sub-nav-link-hover': {
 		light: subNavLinkHoverLight,

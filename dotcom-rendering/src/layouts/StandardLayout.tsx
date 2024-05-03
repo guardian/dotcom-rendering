@@ -509,6 +509,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
+										position="header"
 									/>
 								</Island>
 							</Section>
@@ -1097,6 +1098,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
+									position="footer"
 								/>
 							</Island>
 						</Section>

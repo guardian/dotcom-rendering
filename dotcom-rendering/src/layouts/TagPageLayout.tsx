@@ -154,6 +154,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
+										position="header"
 									/>
 								</Island>
 							</Section>
@@ -296,6 +297,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
+							position="footer"
 						/>
 					</Island>
 				</Section>

@@ -949,6 +949,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
+							position="footer"
 						/>
 					</Island>
 				</Section>
