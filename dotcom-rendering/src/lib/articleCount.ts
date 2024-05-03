@@ -21,7 +21,6 @@ export interface ArticleCounts {
 export const getArticleCounts = async (
 	pageId: string,
 	tags: TagType[],
-	keywordIds: string,
 	contentType: string,
 ): Promise<ArticleCounts | undefined> => {
 	if (await hasOptedOutOfArticleCount()) return undefined;
@@ -40,12 +39,12 @@ export const getArticleCounts = async (
 	// This is because a potential race condition where one invocation of getArticleCounts
 	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
 
-	const keywordAndToneTagIds: string[] = [
-		...keywordIds.split(','),
-		...tags
-			.filter((tag) => tag?.type.toLowerCase() === 'tone')
-			.map((tag) => tag.id),
-	];
+	const keywordAndToneTagIds: string[] = tags.flatMap((tag) =>
+		tag?.type.toLowerCase() === 'tone' ||
+		tag?.type.toLowerCase() === 'keyword'
+			? tag.id
+			: [],
+	);
 
 	if (!window.guardian.weeklyArticleCount) {
 		if (shouldIncrement) {
@@ -75,7 +74,6 @@ export const getArticleCounts = async (
 export const useArticleCounts = (
 	pageId: string,
 	tags: TagType[],
-	keywordIds: string,
 	contentType: string,
 ): ArticleCounts | undefined | 'Pending' => {
 	const [articleCounts, setArticleCounts] = useState<
@@ -83,10 +81,10 @@ export const useArticleCounts = (
 	>('Pending');
 
 	useEffect(() => {
-		getArticleCounts(pageId, tags, keywordIds, contentType)
+		getArticleCounts(pageId, tags, contentType)
 			.then(setArticleCounts)
 			.catch(() => setArticleCounts(undefined));
-	}, [contentType, pageId, tags, keywordIds]);
+	}, [contentType, pageId, tags]);
 
 	return articleCounts;
 };
