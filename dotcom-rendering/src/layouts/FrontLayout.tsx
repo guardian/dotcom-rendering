@@ -204,6 +204,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showSideBorders={false}
 								padSides={false}
 								shouldCenter={false}
+								backgroundColour={palette(
+									'--article-section-background',
+								)}
 							>
 								<HeaderAdSlot
 									isPaidContent={!!front.config.isPaidContent}
