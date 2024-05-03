@@ -10,7 +10,7 @@ import {
 import { Link } from '@guardian/source-react-components';
 import { Fragment } from 'react';
 import { decidePalette } from '../lib/decidePalette';
-import { palette } from '../palette';
+import { palette as schemePalette } from '../palette';
 import type { TreatType } from '../types/front';
 import { generateSources, getFallbackSource } from './Picture';
 import { SvgCrossword } from './SvgCrossword';
@@ -31,8 +31,10 @@ const TextTreat = ({
 	<li
 		css={css`
 			margin-top: ${space[3]}px;
-			border-left: 1px solid ${borderColour ?? sourcePalette.neutral[86]};
-			border-top: 1px solid ${borderColour ?? sourcePalette.neutral[86]};
+			border-left: 1px solid
+				${borderColour ?? schemePalette('--article-border')};
+			border-top: 1px solid
+				${borderColour ?? schemePalette('--article-border')};
 			padding-top: ${space[1]}px;
 			padding-left: ${space[2]}px;
 		`}
@@ -143,7 +145,7 @@ const ImageTreat = ({
 									padding: 0 5px 4px;
 									box-decoration-break: clone;
 									position: relative;
-									color: ${palette(
+									color: ${schemePalette(
 										'--article-section-title',
 									)};
 									text-decoration: none;

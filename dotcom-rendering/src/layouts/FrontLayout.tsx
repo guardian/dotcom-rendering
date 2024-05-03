@@ -255,6 +255,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={palette(
 									'--article-background',
 								)}
+								borderColour={palette('--article-border')}
 							>
 								<Island
 									priority="enhancement"
@@ -274,12 +275,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={palette(
 									'--article-background',
 								)}
+								borderColour={palette('--article-border')}
 							>
 								<StraightLines
 									cssOverrides={css`
 										display: block;
 									`}
 									count={4}
+									color={palette('--article-border')}
 								/>
 							</Section>
 						</>
@@ -362,6 +365,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												hasPageSkin={hasPageSkin}
 												backgroundColour={palette(
 													'--article-background',
+												)}
+												borderColour={palette(
+													'--article-border',
 												)}
 											>
 												<Snap
@@ -552,6 +558,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									innerBackgroundColour={
 										containerOverrides.background.container
+									}
+									borderColour={
+										containerOverrides.border.container
 									}
 									hasPageSkin={hasPageSkin}
 								>

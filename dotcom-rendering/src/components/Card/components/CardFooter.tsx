@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
-import { decidePalette } from '../../../lib/decidePalette';
+import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 
 type Props = {
@@ -42,8 +42,6 @@ export const CardFooter = ({
 	supportingContent,
 	leftAlign = false,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
-
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
@@ -69,7 +67,8 @@ export const CardFooter = ({
 								align-self: flex-end;
 							`}
 							color={
-								overrides?.border.lines ?? palette.border.lines
+								overrides?.border.lines ??
+								palette('--article-border')
 							}
 							count={4}
 						/>

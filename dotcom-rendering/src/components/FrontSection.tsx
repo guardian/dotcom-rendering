@@ -497,12 +497,16 @@ export const FrontSection = ({
 						overrides?.background.container,
 						hasPageSkin,
 					) ?? schemePalette('--article-background'),
+				borderColor:
+					overrides?.border.container ??
+					schemePalette('--article-border'),
 			}}
 		>
 			<div
 				css={[
 					decoration(
-						overrides?.border.container ?? palette.neutral[86],
+						overrides?.border.container ??
+							schemePalette('--article-border'),
 					),
 					sideBorders,
 					showTopBorder && topBorder,
@@ -519,7 +523,8 @@ export const FrontSection = ({
 					),
 					!hasPageSkin &&
 						sectionHeadlineFromLeftCol(
-							overrides?.border.container ?? palette.neutral[86],
+							overrides?.border.container ??
+								schemePalette('--article-border'),
 						),
 					title?.toLowerCase() === 'headlines' &&
 						sectionHeadlineHeight,

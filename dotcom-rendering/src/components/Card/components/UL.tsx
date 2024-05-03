@@ -1,12 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	palette as sourcePalette,
-	space,
-	until,
-} from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
+import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 
 type Direction = 'row' | 'column' | 'row-reverse';
@@ -68,7 +64,7 @@ export const UL = ({
 	const borderColour =
 		(containerPalette &&
 			decideContainerOverrides(containerPalette).border.container) ??
-		sourcePalette.neutral[86];
+		palette('--article-border');
 
 	return (
 		<ul
