@@ -9,7 +9,7 @@ test.describe('Consent tests', () => {
 	test('should make calls to Google Analytics after the reader consents', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${firstPage}`);
+		await loadPage({ page, path: `/Article/${firstPage}` });
 		// Assert ga is undefined before any user consent has been given
 		expect(await page.evaluate(() => window.ga)).toBeUndefined();
 		// Accept all
@@ -26,7 +26,7 @@ test.describe('Consent tests', () => {
 	test('should not add GA tracking scripts onto the window object after the reader rejects consent', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${firstPage}`);
+		await loadPage({ page, path: `/Article/${firstPage}` });
 		// Assert ga is undefined before any user consent has been given
 		expect(await page.evaluate(() => window.ga)).toBeUndefined();
 		// Reject all

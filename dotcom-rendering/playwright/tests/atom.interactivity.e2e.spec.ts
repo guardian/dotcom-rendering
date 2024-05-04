@@ -41,7 +41,7 @@ for (const { type, url } of expandableTests) {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${url}`);
+			await loadPage({ page, path: `/Article/${url}` });
 
 			await expectToBeVisible(page, `[data-snippet-type=${type}]`);
 			await expect(
@@ -92,7 +92,7 @@ for (const { type, url } of expandableTests) {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${url}`);
+			await loadPage({ page, path: `/Article/${url}` });
 			await page.locator(`[data-snippet-type=${type}]`).click();
 			await page.locator('[data-testid="like"]').click();
 			await expectToBeVisible(page, '[data-testid="feedback"]');
@@ -103,7 +103,7 @@ for (const { type, url } of expandableTests) {
 			page,
 		}) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${url}`);
+			await loadPage({ page, path: `/Article/${url}` });
 			await page.locator(`[data-snippet-type=${type}]`).click();
 			await page.locator('[data-testid="dislike"]').click();
 			await expectToBeVisible(page, '[data-testid="feedback"]');
@@ -115,7 +115,7 @@ for (const { type, url } of genericTests) {
 	test.describe(type, () => {
 		test('should render', async ({ context, page }) => {
 			await disableCMP(context);
-			await loadPage(page, `/Article/${url}`);
+			await loadPage({ page, path: `/Article/${url}` });
 			await expectToBeVisible(page, `[data-snippet-type=${type}]`);
 		});
 	});
@@ -127,7 +127,7 @@ test.describe('Why do wombats do square poos?', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPage(page, `/Article/${quizAtomUrl}`);
+		await loadPage({ page, path: `/Article/${quizAtomUrl}` });
 
 		await waitForIsland(page, 'KnowledgeQuizAtom');
 
@@ -178,7 +178,7 @@ test.describe('Why do wombats do square poos?', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPage(page, `/Article/${quizAtomUrl}`);
+		await loadPage({ page, path: `/Article/${quizAtomUrl}` });
 
 		await waitForIsland(page, 'KnowledgeQuizAtom');
 

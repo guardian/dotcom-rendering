@@ -38,7 +38,7 @@ test.describe('Paid content tests', () => {
 	test('should send Google Analytics message on click of sponsor logo in metadata', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${paidContentPage}`);
+		await loadPage({ page, path: `/Article/${paidContentPage}` });
 		await cmpAcceptAll(page);
 
 		const hasGA = await page.evaluate(() => {
@@ -62,7 +62,7 @@ test.describe('Paid content tests', () => {
 	test('should send Google Analytics message on click of sponsor logo in onwards section', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${paidContentPage}`);
+		await loadPage({ page, path: `/Article/${paidContentPage}` });
 		await cmpAcceptAll(page);
 
 		const hasGA = await page.evaluate(() => {
@@ -86,7 +86,7 @@ test.describe('Paid content tests', () => {
 	test('should send Ophan component event on click of sponsor logo in article meta', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${paidContentPage}`);
+		await loadPage({ page, path: `/Article/${paidContentPage}` });
 		await cmpAcceptAll(page);
 
 		const clickEventRequest = interceptOphanRequest({
@@ -113,7 +113,7 @@ test.describe('Paid content tests', () => {
 	test('should send Ophan component event on click of sponsor logo in onwards section', async ({
 		page,
 	}) => {
-		await loadPage(page, `/Article/${paidContentPage}`);
+		await loadPage({ page, path: `/Article/${paidContentPage}` });
 		await cmpAcceptAll(page);
 
 		const clickEventRequest = interceptOphanRequest({

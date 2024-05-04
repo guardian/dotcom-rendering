@@ -13,10 +13,10 @@ test.describe('Epics', () => {
 		page,
 	}) => {
 		await disableCMP(context);
-		await loadPage(
+		await loadPage({
 			page,
-			`/Article/${blogUrl}?live=true&force-liveblog-epic=true`,
-		);
+			path: `/Article/${blogUrl}?live=true&force-liveblog-epic=true`,
+		});
 
 		// Wait for hydration of the Epic
 		// The LiveBlogEpic island does not become visible so we wait for it to be attached
