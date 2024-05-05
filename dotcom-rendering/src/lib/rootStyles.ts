@@ -22,11 +22,11 @@ export const rootStyles = (
 			color: ${sourcePalette.neutral[7]};
 			background: ${sourcePalette.neutral[100]};
 		}
+		/* Indicate whether UI can adapt https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme */
+		color-scheme: ${darkModeAvailable ? 'light dark' : 'light'};
 		/* Dark palette only if supported */
 		${darkModeAvailable
 			? css`
-					/* Indicate whether UI can adapt https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme */
-					color-scheme: light dark;
 					@media (prefers-color-scheme: dark) {
 						${paletteDeclarations(format, 'dark')}
 						body {
