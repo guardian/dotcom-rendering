@@ -189,6 +189,34 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 			return sourcePalette.neutral[7];
 	}
 };
+
+const headlineTextWhenMatchLight: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
+	switch (design) {
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[0];
+		default:
+			return seriesTitleTextLight({ design, display, theme });
+	}
+};
+const headlineTextWhenMatchDark: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
+	switch (design) {
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[100];
+		default:
+			return seriesTitleTextDark({ design, display, theme });
+	}
+};
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -2918,6 +2946,23 @@ const captionOverlayText: PaletteFunction = () => {
 	return sourcePalette.neutral[100];
 };
 
+const imageTitle: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
+		return pillarPalette(theme, 300);
+	}
+
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+		default:
+			return pillarPalette(theme, 200);
+	}
+};
+
 const keyEventBulletLight: PaletteFunction = () => sourcePalette.neutral[46];
 const keyEventBulletDark: PaletteFunction = () => sourcePalette.neutral[60];
 
@@ -5511,6 +5556,10 @@ const paletteColours = {
 		light: headlineTextLight,
 		dark: headlineTextDark,
 	},
+	'--headline-when-match': {
+		light: headlineTextWhenMatchLight,
+		dark: headlineTextWhenMatchDark,
+	},
 	'--headline-border': {
 		light: headlineBorder,
 		dark: headlineBorder,
@@ -5734,6 +5783,10 @@ const paletteColours = {
 	'--caption-overlay-text': {
 		light: captionOverlayText,
 		dark: captionOverlayText,
+	},
+	'--image-title': {
+		light: imageTitle,
+		dark: imageTitle,
 	},
 	'--key-event-bullet': {
 		light: keyEventBulletLight,
