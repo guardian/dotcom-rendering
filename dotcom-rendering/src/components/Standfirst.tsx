@@ -81,6 +81,7 @@ const decideFont = ({ display, design }: ArticleFormat) => {
 						${headlineMedium20};
 						${from.tablet} {
 							${headlineMedium24};
+						}
 					`;
 				case ArticleDisplay.Showcase:
 				default:
