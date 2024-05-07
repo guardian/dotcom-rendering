@@ -707,9 +707,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											isPaidContent={
 												article.pageType.isPaidContent
 											}
-											keywordIds={
-												article.config.keywordIds
-											}
 											pageId={article.pageId}
 											sectionId={article.config.section}
 											shouldHideReaderRevenue={
@@ -966,7 +963,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								isPaidContent={article.pageType.isPaidContent}
 								isPreview={!!article.config.isPreview}
 								isSensitive={article.config.isSensitive}
-								keywordIds={article.config.keywordIds}
 								pageId={article.pageId}
 								sectionId={article.config.section}
 								shouldHideReaderRevenue={

@@ -862,9 +862,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											isPaidContent={
 												article.pageType.isPaidContent
 											}
-											keywordIds={
-												article.config.keywordIds
-											}
 											pageId={article.pageId}
 											sectionId={article.config.section}
 											shouldHideReaderRevenue={
@@ -1137,7 +1134,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								isPaidContent={article.pageType.isPaidContent}
 								isPreview={!!article.config.isPreview}
 								isSensitive={article.config.isSensitive}
-								keywordIds={article.config.keywordIds}
 								pageId={article.pageId}
 								sectionId={article.config.section}
 								shouldHideReaderRevenue={
