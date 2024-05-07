@@ -30,5 +30,26 @@
 		"prettier": "3.0.3",
 		"tslib": "2.6.2"
 	},
-	"packageManager": "pnpm@8.15.7"
+	"packageManager": "pnpm@8.15.7",
+	"pnpm": {
+		"overrides": {
+			"@guardian/ab-core": "0.0.0-canary-20240507160332",
+			"@guardian/ab-react": "0.0.0-canary-20240507160332",
+			"@guardian/browserslist-config": "0.0.0-canary-20240507160332",
+			"@guardian/core-web-vitals": "0.0.0-canary-20240507160332",
+			"@guardian/eslint-config": "0.0.0-canary-20240507160332",
+			"@guardian/eslint-config-typescript": "0.0.0-canary-20240507160332",
+			"@guardian/eslint-plugin-source-foundations": "0.0.0-canary-20240507160332",
+			"@guardian/eslint-plugin-source-react-components": "0.0.0-canary-20240507160332",
+			"@guardian/identity-auth": "0.0.0-canary-20240507160332",
+			"@guardian/identity-auth-frontend": "0.0.0-canary-20240507160332",
+			"@guardian/libs": "0.0.0-canary-20240507160332",
+			"@guardian/newsletter-types": "0.0.0-canary-20240507160332",
+			"@guardian/prettier": "0.0.0-canary-20240507160332",
+			"@guardian/source-foundations": "0.0.0-canary-20240507160332",
+			"@guardian/source-react-components": "0.0.0-canary-20240507160332",
+			"@guardian/source-react-components-development-kitchen": "0.0.0-canary-20240507160332",
+			"@guardian/tsconfig": "0.0.0-canary-20240507160332"
+		}
+	}
 }

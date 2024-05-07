@@ -4,13 +4,32 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@guardian/ab-core': 0.0.0-canary-20240507160332
+  '@guardian/ab-react': 0.0.0-canary-20240507160332
+  '@guardian/browserslist-config': 0.0.0-canary-20240507160332
+  '@guardian/core-web-vitals': 0.0.0-canary-20240507160332
+  '@guardian/eslint-config': 0.0.0-canary-20240507160332
+  '@guardian/eslint-config-typescript': 0.0.0-canary-20240507160332
+  '@guardian/eslint-plugin-source-foundations': 0.0.0-canary-20240507160332
+  '@guardian/eslint-plugin-source-react-components': 0.0.0-canary-20240507160332
+  '@guardian/identity-auth': 0.0.0-canary-20240507160332
+  '@guardian/identity-auth-frontend': 0.0.0-canary-20240507160332
+  '@guardian/libs': 0.0.0-canary-20240507160332
+  '@guardian/newsletter-types': 0.0.0-canary-20240507160332
+  '@guardian/prettier': 0.0.0-canary-20240507160332
+  '@guardian/source-foundations': 0.0.0-canary-20240507160332
+  '@guardian/source-react-components': 0.0.0-canary-20240507160332
+  '@guardian/source-react-components-development-kitchen': 0.0.0-canary-20240507160332
+  '@guardian/tsconfig': 0.0.0-canary-20240507160332
+
 importers:
 
   .:
     dependencies:
       '@guardian/prettier':
-        specifier: 5.0.0
-        version: 5.0.0(prettier@3.0.3)(tslib@2.6.2)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(prettier@3.0.3)(tslib@2.6.2)
       chromatic:
         specifier: 11.0.8
         version: 11.0.8
@@ -72,29 +91,29 @@ importers:
         specifier: 4.0.1
         version: 4.0.1
       '@guardian/eslint-config':
-        specifier: 7.0.1
-        version: 7.0.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)(tslib@2.6.2)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(tslib@2.6.2)
       '@guardian/eslint-config-typescript':
-        specifier: 9.0.1
-        version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(eslint@8.56.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/eslint-plugin-source-react-components':
-        specifier: 21.0.1
-        version: 21.0.1(@guardian/libs@16.0.0)(@guardian/source-react-components@18.0.0)(eslint@8.56.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(eslint@8.56.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/libs':
-        specifier: 16.0.0
-        version: 16.0.0(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/renditions':
         specifier: 0.2.0
         version: 0.2.0
       '@guardian/source-foundations':
-        specifier: 14.2.2
-        version: 14.2.2(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-react-components':
-        specifier: 18.0.0
-        version: 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-react-components-development-kitchen':
-        specifier: 16.0.0
-        version: 16.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components@18.0.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@smithy/property-provider':
         specifier: 2.0.16
         version: 2.0.16
@@ -324,44 +343,44 @@ importers:
         specifier: 11.11.0
         version: 11.11.0
       '@guardian/ab-core':
-        specifier: 7.0.1
-        version: 7.0.1(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/braze-components':
         specifier: 19.0.0
-        version: 19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components-development-kitchen@19.0.0)(@guardian/source-react-components@22.1.0)(react@18.3.1)
+        version: 19.0.0(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@guardian/source-react-components-development-kitchen@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(react@18.3.1)
       '@guardian/bridget':
         specifier: 6.0.0
         version: 6.0.0
       '@guardian/browserslist-config':
-        specifier: 6.1.0
-        version: 6.1.0(browserslist@4.23.0)(tslib@2.6.2)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(browserslist@4.23.0)(tslib@2.6.2)
       '@guardian/cdk':
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.5.3)(@types/node@20.12.7)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
         specifier: 17.13.1
-        version: 17.13.1(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(typescript@5.3.3)
+        version: 17.13.1(@guardian/ab-core@0.0.0-canary-20240507160332)(@guardian/core-web-vitals@0.0.0-canary-20240507160332)(@guardian/identity-auth-frontend@0.0.0-canary-20240507160332)(@guardian/identity-auth@0.0.0-canary-20240507160332)(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-foundations@0.0.0-canary-20240507160332)(typescript@5.3.3)
       '@guardian/core-web-vitals':
-        specifier: 6.0.0
-        version: 6.0.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
       '@guardian/eslint-config':
-        specifier: 7.0.1
-        version: 7.0.1(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2)
       '@guardian/eslint-config-typescript':
-        specifier: 9.0.1
-        version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(eslint@8.56.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/eslint-plugin-source-react-components':
-        specifier: 24.0.0
-        version: 24.0.0(@guardian/libs@16.1.0)(@guardian/source-react-components@22.1.0)(eslint@8.56.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(eslint@8.56.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth':
-        specifier: 2.1.0
-        version: 2.1.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth-frontend':
-        specifier: 4.0.0
-        version: 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@guardian/identity-auth@0.0.0-canary-20240507160332)(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/libs':
-        specifier: 16.1.0
-        version: 16.1.0(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js':
         specifier: 2.1.1
         version: 2.1.1
@@ -369,20 +388,20 @@ importers:
         specifier: 1.0.2
         version: 1.0.2
       '@guardian/source-foundations':
-        specifier: 14.2.2
-        version: 14.2.2(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-react-components':
-        specifier: 22.1.0
-        version: 22.1.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-react-components-development-kitchen':
-        specifier: 19.0.0
-        version: 19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components@22.1.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/support-dotcom-components':
         specifier: 2.2.0
         version: 2.2.0(zod@3.22.3)
       '@guardian/tsconfig':
-        specifier: 0.2.0
-        version: 0.2.0
+        specifier: 0.0.0-canary-20240507160332
+        version: 0.0.0-canary-20240507160332
       '@playwright/test':
         specifier: 1.40.1
         version: 1.40.1
@@ -3933,8 +3952,8 @@ packages:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
     dev: false
 
-  /@guardian/ab-core@7.0.1(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-2LzVvEC26oYztK5woowBhK5lqnrsJGoA22Byi82kL/qubOMPPCOyimJHLXGhHrvvsyxQZM2NRm4+PuxGIdF8Nw==}
+  /@guardian/ab-core@0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-SHS4QtEzmKfL+wFOlgpRs8BR9EgX2s8tzRVEnPH8iZmsKMRNyzc7EnmmToOylLYeuQOm3Kebul24Pk/nrHWFvg==}
     peerDependencies:
       tslib: ^2.6.2
       typescript: ~5.3.3
@@ -3962,22 +3981,22 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components-development-kitchen@19.0.0)(@guardian/source-react-components@22.1.0)(react@18.3.1):
+  /@guardian/braze-components@19.0.0(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@guardian/source-react-components-development-kitchen@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(react@18.3.1):
     resolution: {integrity: sha512-JNLplEzVL9skHpIWslqsjooI+qqJsUmJkdRqNlBjV0yNF/ba/REeWx2ncLqEdAYV1MvRoLSSb3T4GEgHggx1IQ==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
       '@emotion/react': ^11.1.2
-      '@guardian/libs': ^16.0.0
-      '@guardian/source-foundations': ^14.1.2
-      '@guardian/source-react-components': ^22.1.0
-      '@guardian/source-react-components-development-kitchen': ^19.0.0
+      '@guardian/libs': 0.0.0-canary-20240507160332
+      '@guardian/source-foundations': 0.0.0-canary-20240507160332
+      '@guardian/source-react-components': 0.0.0-canary-20240507160332
+      '@guardian/source-react-components-development-kitchen': 0.0.0-canary-20240507160332
       react: 17.0.2 || 18.2.0
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 22.1.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components-development-kitchen': 19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components@22.1.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-foundations': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-react-components': 0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-react-components-development-kitchen': 0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       react: 18.3.1
     dev: false
 
@@ -3989,8 +4008,8 @@ packages:
     resolution: {integrity: sha512-aiRVLDF/UfNYeoF10ptBDs52Fv1T4sd19uKACTZSr1uMgV2BPmzG+/BiVLi8Q9/6gjS+CTP3Covz62liksAFuQ==}
     dev: false
 
-  /@guardian/browserslist-config@6.1.0(browserslist@4.23.0)(tslib@2.6.2):
-    resolution: {integrity: sha512-qM0QxAv6E5IHXny5Okli6AZXEio0mpXzzEzz38qrb4IwO91R6eWVKyihdj0qW2k7TVxMFVOSfNmBZ1H5EiJhgw==}
+  /@guardian/browserslist-config@0.0.0-canary-20240507160332(browserslist@4.23.0)(tslib@2.6.2):
+    resolution: {integrity: sha512-sxp7L46QSlYHr3OYo+hrDNSp82+yk9y3zgZv+ChXOHN2q9/GfB6BQICpAslEwCk8O1hafnVdJVJJJfExgsdBjA==}
     peerDependencies:
       browserslist: ^4.22.2
       tslib: ^2.6.2
@@ -4057,25 +4076,25 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@17.13.1(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(typescript@5.3.3):
+  /@guardian/commercial@17.13.1(@guardian/ab-core@0.0.0-canary-20240507160332)(@guardian/core-web-vitals@0.0.0-canary-20240507160332)(@guardian/identity-auth-frontend@0.0.0-canary-20240507160332)(@guardian/identity-auth@0.0.0-canary-20240507160332)(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-foundations@0.0.0-canary-20240507160332)(typescript@5.3.3):
     resolution: {integrity: sha512-hvIg9Dsk7nqbFulT8jLTfv0+Rwtdg5dKMp5Cguki87YF0YCJgZbnaV5uf/OgOWSUyHSblJ10aPtY9hXyCIt8Hg==}
     peerDependencies:
-      '@guardian/ab-core': ^7.0.1
-      '@guardian/core-web-vitals': ^6.0.0
-      '@guardian/identity-auth': ^2.1.0
-      '@guardian/identity-auth-frontend': ^4.0.0
-      '@guardian/libs': ^16.1.0
-      '@guardian/source-foundations': ^14.1.2
+      '@guardian/ab-core': 0.0.0-canary-20240507160332
+      '@guardian/core-web-vitals': 0.0.0-canary-20240507160332
+      '@guardian/identity-auth': 0.0.0-canary-20240507160332
+      '@guardian/identity-auth-frontend': 0.0.0-canary-20240507160332
+      '@guardian/libs': 0.0.0-canary-20240507160332
+      '@guardian/source-foundations': 0.0.0-canary-20240507160332
     dependencies:
       '@changesets/cli': 2.27.1
-      '@guardian/ab-core': 7.0.1(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/core-web-vitals': 6.0.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
-      '@guardian/identity-auth': 2.1.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/ab-core': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/core-web-vitals': 0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
+      '@guardian/identity-auth': 0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/identity-auth-frontend': 0.0.0-canary-20240507160332(@guardian/identity-auth@0.0.0-canary-20240507160332)(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js': 2.0.4
       '@guardian/prebid.js': 8.34.0(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-foundations': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       '@octokit/core': 4.2.4
       fastdom: 1.0.11
       lodash-es: 4.17.21
@@ -4130,10 +4149,10 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/core-web-vitals@6.0.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1):
-    resolution: {integrity: sha512-kwH1VsQQMn+sPZis1zYYcCYzedNpen6tk3CtVjJlmtHV4nK6i6FnMfhHgbtqECDsqrHdTzRbwN2Lodh1f8D5lA==}
+  /@guardian/core-web-vitals@0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1):
+    resolution: {integrity: sha512-bThNBhzM5/bveW5jiqI3aoEsZRdpCeNZFnPu64nhphBq51636t+cEy6ydy+kIV2SAu4d18ytcjk2An66/8HhcQ==}
     peerDependencies:
-      '@guardian/libs': ^16.0.0
+      '@guardian/libs': 0.0.0-canary-20240507160332
       tslib: ^2.6.2
       typescript: ~5.3.3
       web-vitals: ^3.5.0
@@ -4141,25 +4160,25 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
       web-vitals: 3.5.1
     dev: false
 
-  /@guardian/eslint-config-typescript@9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-m6DZbfZGLSgObkQWhz0aKKGSKd3UqDsTZPeIDS8AEHqMjsn6DerOe6Pn1wH8939D2rW/c2RsrdmJxkHo/OF5+w==}
+  /@guardian/eslint-config-typescript@0.0.0-canary-20240507160332(eslint@8.56.0)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-wDzD2PIlUdCUaJLnyIir0DnfJldFlEwSvZVRbdorgqMM6mxvFXXZChUPGyYO1Cvos4Miwix5YYE1MRhiTPBGbw==}
     peerDependencies:
       eslint: ^8.56.0
       tslib: ^2.6.2
       typescript: ~5.3.3
     dependencies:
-      '@guardian/eslint-config': 7.0.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)(tslib@2.6.2)
-      '@typescript-eslint/eslint-plugin': 6.18.0(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)(typescript@5.3.3)
-      '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
+      '@guardian/eslint-config': 0.0.0-canary-20240507160332(@typescript-eslint/parser@7.3.1)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)(tslib@2.6.2)
+      '@typescript-eslint/eslint-plugin': 7.3.1(@typescript-eslint/parser@7.3.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 7.3.1(eslint@8.56.0)(typescript@5.3.3)
       eslint: 8.56.0
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.18.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.3.1)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)
       tslib: 2.6.2
       typescript: 5.3.3
     transitivePeerDependencies:
@@ -4168,8 +4187,8 @@ packages:
       - supports-color
     dev: false
 
-  /@guardian/eslint-config@7.0.1(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2):
-    resolution: {integrity: sha512-9MX0Xj2vaXWLQvjnk0QJKYXaCABwkaZx6ZAOGiGOb4KiadN5guFOgV2ki+YuDqcd5k/R1F3bUyBh/L3+gk0ouQ==}
+  /@guardian/eslint-config@0.0.0-canary-20240507160332(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2):
+    resolution: {integrity: sha512-13FNOxtVqXquYWCXH86MaP29jw0gwdaZQxFQOQur8gwrJQ447CjLwQW4o0weLJlwRNpAbQzAO3/62ZDgSSZkGw==}
     peerDependencies:
       eslint: ^8.56.0
       tslib: ^2.6.2
@@ -4186,8 +4205,8 @@ packages:
       - supports-color
     dev: false
 
-  /@guardian/eslint-config@7.0.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)(tslib@2.6.2):
-    resolution: {integrity: sha512-9MX0Xj2vaXWLQvjnk0QJKYXaCABwkaZx6ZAOGiGOb4KiadN5guFOgV2ki+YuDqcd5k/R1F3bUyBh/L3+gk0ouQ==}
+  /@guardian/eslint-config@0.0.0-canary-20240507160332(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(tslib@2.6.2):
+    resolution: {integrity: sha512-13FNOxtVqXquYWCXH86MaP29jw0gwdaZQxFQOQur8gwrJQ447CjLwQW4o0weLJlwRNpAbQzAO3/62ZDgSSZkGw==}
     peerDependencies:
       eslint: ^8.56.0
       tslib: ^2.6.2
@@ -4195,7 +4214,7 @@ packages:
       eslint: 8.56.0
       eslint-config-prettier: 9.1.0(eslint@8.56.0)
       eslint-plugin-eslint-comments: 3.2.0(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)
       tslib: 2.6.2
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
@@ -4204,46 +4223,42 @@ packages:
       - supports-color
     dev: false
 
-  /@guardian/eslint-plugin-source-react-components@21.0.1(@guardian/libs@16.0.0)(@guardian/source-react-components@18.0.0)(eslint@8.56.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-erMqLMhgGbzJAjViZMNtE8DjrpJuRurreBBeuttbaxrIE3eKX2p3QTYJKxE0fqAyIRhTCV3/M+sil9RTifN1Xw==}
+  /@guardian/eslint-config@0.0.0-canary-20240507160332(@typescript-eslint/parser@7.3.1)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)(tslib@2.6.2):
+    resolution: {integrity: sha512-13FNOxtVqXquYWCXH86MaP29jw0gwdaZQxFQOQur8gwrJQ447CjLwQW4o0weLJlwRNpAbQzAO3/62ZDgSSZkGw==}
     peerDependencies:
-      '@guardian/libs': ^16.0.0
-      '@guardian/source-react-components': ^18.0.0
       eslint: ^8.56.0
-      react: ^18.2.0
       tslib: ^2.6.2
-      typescript: ~5.3.3
-    peerDependenciesMeta:
-      typescript:
-        optional: true
     dependencies:
-      '@guardian/libs': 16.0.0(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
-      '@typescript-eslint/eslint-plugin': 6.18.0(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)(typescript@5.3.3)
-      '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
       eslint: 8.56.0
-      react: 18.3.1
+      eslint-config-prettier: 9.1.0(eslint@8.56.0)
+      eslint-plugin-eslint-comments: 3.2.0(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.3.1)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
       tslib: 2.6.2
-      typescript: 5.3.3
     transitivePeerDependencies:
+      - '@typescript-eslint/parser'
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
       - supports-color
     dev: false
 
-  /@guardian/eslint-plugin-source-react-components@24.0.0(@guardian/libs@16.1.0)(@guardian/source-react-components@22.1.0)(eslint@8.56.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-CQpKTWgDsrRhzQcHEI62EQD36W9jQ/TDfMqF6umkNXyCby/WFs80YrgkkJreQmJJFUc5vXCzVdUXpPfB4mMong==}
+  /@guardian/eslint-plugin-source-react-components@0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(eslint@8.56.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-Ar77pBNZ/Fk19c8Lnk/KJnF8Ej26DBleZkkJPkuFKPzhlYTa95G/+7DS9Z1Dn3o0xlpaJmU5J3dms6mbOGNFKw==}
     peerDependencies:
-      '@guardian/libs': ^16.0.0
-      '@guardian/source-react-components': ^22.0.1
+      '@guardian/libs': 0.0.0-canary-20240507160332
+      '@guardian/source-react-components': 0.0.0-canary-20240507160332
+      '@types/eslint': ^8.56.1
       eslint: ^8.56.0
       react: ^18.2.0
       tslib: ^2.6.2
       typescript: ~5.3.3
     peerDependenciesMeta:
+      '@types/eslint':
+        optional: true
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 22.1.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-react-components': 0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@typescript-eslint/eslint-plugin': 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/parser': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
       eslint: 8.56.0
@@ -4254,53 +4269,40 @@ packages:
       - supports-color
     dev: false
 
-  /@guardian/identity-auth-frontend@4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-lSXpRF54eEkxbQXEzJTXYDqzMDHl345Ac/Y7M8/OnKee0vtbR1hCjfm70HbcIXpUyx+TaNV8Ka4bqkR9VwJCPA==}
+  /@guardian/identity-auth-frontend@0.0.0-canary-20240507160332(@guardian/identity-auth@0.0.0-canary-20240507160332)(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-WZWRF4lDywhCBJIfl+tcMdGK3kqbbf9UEtvNRC7vtc6tk+Wt3dUFTP/RCbWvo9aoqtt/gmLx5JVuK352FWWqTQ==}
     peerDependencies:
-      '@guardian/identity-auth': ^2.1.0
-      '@guardian/libs': ^16.0.0
+      '@guardian/identity-auth': 0.0.0-canary-20240507160332
+      '@guardian/libs': 0.0.0-canary-20240507160332
       tslib: ^2.6.2
       typescript: ~5.3.3
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@guardian/identity-auth': 2.1.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/identity-auth': 0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
     dev: false
 
-  /@guardian/identity-auth@2.1.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-+AM0pcmRvRZUf92RYGJ2Q6KK1JpnQIxZ6pafsaBMGnF0IwiIk9DdfhaYZl0cyPQ3PwLTJJw2aSl453ivPAmHbw==}
+  /@guardian/identity-auth@0.0.0-canary-20240507160332(@guardian/libs@0.0.0-canary-20240507160332)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-BQ22VSO26KhZtiABcq1DqlqgH5A2LGOPtgjXPH0c+HJmqyx3BzYvvxUtkbSspgwmf5D7AKiUWW56Tap5oV8nBQ==}
     peerDependencies:
-      '@guardian/libs': ^16.0.0
+      '@guardian/libs': 0.0.0-canary-20240507160332
       tslib: ^2.6.2
       typescript: ~5.3.3
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
     dev: false
 
-  /@guardian/libs@16.0.0(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-2i9cN6htXnvABIGhfqJGb9Bh/DdQOayUjb5ruqBGTiXEeDBHztctdVsi7+rPfMlwyPxQ+0qYLhM19f6J94vvhQ==}
-    peerDependencies:
-      tslib: ^2.6.2
-      typescript: ~5.3.3
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      tslib: 2.6.2
-      typescript: 5.3.3
-    dev: false
-
-  /@guardian/libs@16.1.0(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-nb7r0C+UO4P6f0wH8sATtGYnGrfqCzOX4M1Pp2G+uj9c3tehMRSum4mgnqxSAVXN50LtkL2bwd4u3Ichk6670Q==}
+  /@guardian/libs@0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-Dsf9kZzfUVGuorKgf9JtU2h6ps9CFz7ybCxFNRew8LGsQWaKgxDqqtmqGhXTJMKB/8KxPoZkNYh/d1C2D/MeJQ==}
     peerDependencies:
       tslib: ^2.6.2
       typescript: ~5.3.3
@@ -4330,7 +4332,7 @@ packages:
       '@babel/plugin-transform-runtime': 7.24.3(@babel/core@7.24.5)
       '@babel/preset-env': 7.24.5(@babel/core@7.24.5)
       '@babel/runtime': 7.24.5
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
       core-js: 3.33.3
       core-js-pure: 3.35.0
       criteo-direct-rsa-validate: 1.1.0
@@ -4349,11 +4351,11 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/prettier@5.0.0(prettier@3.0.3)(tslib@2.6.2):
-    resolution: {integrity: sha512-gJSQuuP7JVDOWQj4EUrwyJTnMt+frLkw0D2sLg70nHn76L3LmH2xTQtYMPUsqyqn37qocDPzgdvBdmATi50zRQ==}
+  /@guardian/prettier@0.0.0-canary-20240507160332(prettier@3.0.3)(tslib@2.6.2):
+    resolution: {integrity: sha512-bUkxQXZfEJCAFEkdN0hYgtQq7E3nwmsoaTw6jPrkjDu3tbVUJGbv0rVpH3KBCgNAEWRwz91i+5fpSJa0IUobew==}
     peerDependencies:
-      prettier: ^3.0.0
-      tslib: ^2.5.3
+      prettier: ^3.2.2
+      tslib: ^2.6.2
     dependencies:
       prettier: 3.0.3
       tslib: 2.6.2
@@ -4371,8 +4373,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@guardian/source-foundations@14.2.2(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-198Akw1RqufsX6Iu/qzqeR4eC9L3ezHURVzMqJeB3ZRZtabdkL2Q562mS1UnSdyACeCLRMqlOXqZDO38gsjP/g==}
+  /@guardian/source-foundations@0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-ZJ1GLzqczBhKsEv/fg/b0TvFhehPAWiiAFReY3fAeq/6zThBlo7ancPbV8+gmN2KDBMN4hqjw4v7KRq4fLgtrw==}
     peerDependencies:
       tslib: ^2.6.2
       typescript: ~5.3.3
@@ -4385,85 +4387,51 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /@guardian/source-react-components-development-kitchen@16.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components@18.0.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-wJgQgPJIuahWS3nvHYhIsb0U/nsmmWyL2F6ID+so8Ft39/gEiyssPK/agqqWA0i/zUyttv5Fn3+Hk0tijau5+A==}
+  /@guardian/source-react-components-development-kitchen@0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240507160332)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@guardian/source-react-components@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-xq0qgtCA5NDYTBv0kdoNY72Rgh8MXyntrvZio3qLdUqXPlbLONBBD/g5D7zRZy7/aP01fZiCVq7+2hhfCyLYjg==}
     peerDependencies:
       '@emotion/react': ^11.11.1
-      '@guardian/libs': ^16.0.0
-      '@guardian/source-foundations': ^14.0.0
-      '@guardian/source-react-components': ^18.0.0
+      '@guardian/libs': 0.0.0-canary-20240507160332
+      '@guardian/source-foundations': 0.0.0-canary-20240507160332
+      '@guardian/source-react-components': 0.0.0-canary-20240507160332
+      '@types/react': ^18.2.11
       react: ^18.2.0
       tslib: ^2.6.2
       typescript: ~5.3.3
     peerDependenciesMeta:
+      '@types/react':
+        optional: true
       typescript:
         optional: true
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 16.0.0(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-foundations': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-react-components': 0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@types/react': 18.3.1
       react: 18.3.1
       tslib: 2.6.2
       typescript: 5.3.3
     dev: false
 
-  /@guardian/source-react-components-development-kitchen@19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components@22.1.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-YPqsLlwbuXNcD6dkUuzCCp/ytkwY7HH8ZozuuxlLhdwMFywFuvLRuCAp0q36gEBzcmuEU3eGjSIE823AKK9pfA==}
+  /@guardian/source-react-components@0.0.0-canary-20240507160332(@emotion/react@11.11.1)(@guardian/source-foundations@0.0.0-canary-20240507160332)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-YMa8c+h40YA43fCT4uGa/WdNVeOMkGIqA7LHNPhysAG4SGB/oZEoWPjs78E+CnW8VKFbBnqFnazo3A0qGSIBWQ==}
     peerDependencies:
       '@emotion/react': ^11.11.1
-      '@guardian/libs': ^16.0.0
-      '@guardian/source-foundations': ^14.1.4
-      '@guardian/source-react-components': ^22.0.1
+      '@guardian/source-foundations': 0.0.0-canary-20240507160332
+      '@types/react': ^18.2.11
       react: ^18.2.0
       tslib: ^2.6.2
       typescript: ~5.3.3
     peerDependenciesMeta:
+      '@types/react':
+        optional: true
       typescript:
         optional: true
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 22.1.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
-      react: 18.3.1
-      tslib: 2.6.2
-      typescript: 5.3.3
-    dev: false
-
-  /@guardian/source-react-components@18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-7mt6RDmViRdUKUlU8OaswIsYnR+yFEt5iYbRhmXB+A0XjiTeLYP8EHKmazISRlGXTZjjG701WgY5witaShI1YA==}
-    peerDependencies:
-      '@emotion/react': ^11.11.1
-      '@guardian/source-foundations': ^14.0.0
-      react: ^18.2.0
-      tslib: ^2.6.2
-      typescript: ~5.3.3
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
-      react: 18.3.1
-      tslib: 2.6.2
-      typescript: 5.3.3
-    dev: false
-
-  /@guardian/source-react-components@22.1.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-2oNhJsd4eaQRuHsOeQLkFZ3y4KAaA7BnG/qQES1SbPSx+e+MA8Z2UZu/9v/SEkGIleffkKKSeftP1TGQr4zJwQ==}
-    peerDependencies:
-      '@emotion/react': ^11.11.1
-      '@guardian/source-foundations': ^14.1.4
-      react: ^18.2.0
-      tslib: ^2.6.2
-      typescript: ~5.3.3
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-foundations': 0.0.0-canary-20240507160332(tslib@2.6.2)(typescript@5.3.3)
+      '@types/react': 18.3.1
       react: 18.3.1
       tslib: 2.6.2
       typescript: 5.3.3
@@ -4489,8 +4457,8 @@ packages:
       zod: 3.22.3
     dev: false
 
-  /@guardian/tsconfig@0.2.0:
-    resolution: {integrity: sha512-RauppalK+cQZDRK6IssVmDSnU/VyqMNuVOxPxhmI03kVRxEdwcmBuRqexHwDbnClVUxW/N9hYLbFNuAb9V/p+A==}
+  /@guardian/tsconfig@0.0.0-canary-20240507160332:
+    resolution: {integrity: sha512-OXmQUiBFeD3mUpLQ5BSWX5FrO4DfOk9rP9TS2F/BdGdEqskdUJB9FynJytn/638eZS5CtOChvApG68oLq8Z/JA==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.13:
@@ -8303,35 +8271,6 @@ packages:
       - supports-color
     dev: false
 
-  /@typescript-eslint/eslint-plugin@6.18.0(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-3lqEvQUdCozi6d1mddWqd+kf8KxmGq2Plzx36BlkjuQe3rSTm/O98cLf0A4uDO+a5N1KD2SeEEl6fW97YHY+6w==}
-    engines: {node: ^16.0.0 || >=18.0.0}
-    peerDependencies:
-      '@typescript-eslint/parser': ^6.0.0 || ^6.0.0-alpha
-      eslint: ^7.0.0 || ^8.0.0
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@eslint-community/regexpp': 4.10.0
-      '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
-      '@typescript-eslint/scope-manager': 6.18.0
-      '@typescript-eslint/type-utils': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
-      '@typescript-eslint/utils': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
-      '@typescript-eslint/visitor-keys': 6.18.0
-      debug: 4.3.4(supports-color@8.1.1)
-      eslint: 8.56.0
-      graphemer: 1.4.0
-      ignore: 5.3.1
-      natural-compare: 1.4.0
-      semver: 7.5.4
-      ts-api-utils: 1.3.0(typescript@5.3.3)
-      typescript: 5.3.3
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)(typescript@5.3.3):
     resolution: {integrity: sha512-oy9+hTPCUFpngkEZUSzbf9MxI65wbKFoQYsgPdILTfbUldp5ovUuphZVe4i30emU9M/kP+T64Di0mxl7dSw3MA==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -8349,6 +8288,35 @@ packages:
       '@typescript-eslint/type-utils': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/utils': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/visitor-keys': 6.21.0
+      debug: 4.3.4(supports-color@8.1.1)
+      eslint: 8.56.0
+      graphemer: 1.4.0
+      ignore: 5.3.1
+      natural-compare: 1.4.0
+      semver: 7.5.4
+      ts-api-utils: 1.3.0(typescript@5.3.3)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@typescript-eslint/eslint-plugin@7.3.1(@typescript-eslint/parser@7.3.1)(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-STEDMVQGww5lhCuNXVSQfbfuNII5E08QWkvAw5Qwf+bj2WT+JkG1uc+5/vXA3AOYMDHVOSpL+9rcbEUiHIm2dw==}
+    engines: {node: ^18.18.0 || >=20.0.0}
+    peerDependencies:
+      '@typescript-eslint/parser': ^7.0.0
+      eslint: ^8.56.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@eslint-community/regexpp': 4.10.0
+      '@typescript-eslint/parser': 7.3.1(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/scope-manager': 7.3.1
+      '@typescript-eslint/type-utils': 7.3.1(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/utils': 7.3.1(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/visitor-keys': 7.3.1
       debug: 4.3.4(supports-color@8.1.1)
       eslint: 8.56.0
       graphemer: 1.4.0
@@ -8394,27 +8362,6 @@ packages:
       - supports-color
     dev: false
 
-  /@typescript-eslint/parser@6.18.0(eslint@8.56.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-v6uR68SFvqhNQT41frCMCQpsP+5vySy6IdgjlzUWoo7ALCnpaWYcz/Ij2k4L8cEsL0wkvOviCMpjmtRtHNOKzA==}
-    engines: {node: ^16.0.0 || >=18.0.0}
-    peerDependencies:
-      eslint: ^7.0.0 || ^8.0.0
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@typescript-eslint/scope-manager': 6.18.0
-      '@typescript-eslint/types': 6.18.0
-      '@typescript-eslint/typescript-estree': 6.18.0(typescript@5.3.3)
-      '@typescript-eslint/visitor-keys': 6.18.0
-      debug: 4.3.4(supports-color@8.1.1)
-      eslint: 8.56.0
-      typescript: 5.3.3
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /@typescript-eslint/parser@6.21.0(eslint@8.56.0)(typescript@5.3.3):
     resolution: {integrity: sha512-tbsV1jPne5CkFQCgPBcDOt30ItF7aJoZL997JSF7MhGQqOeT3svWRYxiqlfA5RUdlHN6Fi+EI9bxqbdyAUZjYQ==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -8436,6 +8383,27 @@ packages:
       - supports-color
     dev: false
 
+  /@typescript-eslint/parser@7.3.1(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-Rq49+pq7viTRCH48XAbTA+wdLRrB/3sRq4Lpk0oGDm0VmnjBrAOVXH/Laalmwsv2VpekiEfVFwJYVk6/e8uvQw==}
+    engines: {node: ^18.18.0 || >=20.0.0}
+    peerDependencies:
+      eslint: ^8.56.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/scope-manager': 7.3.1
+      '@typescript-eslint/types': 7.3.1
+      '@typescript-eslint/typescript-estree': 7.3.1(typescript@5.3.3)
+      '@typescript-eslint/visitor-keys': 7.3.1
+      debug: 4.3.4(supports-color@8.1.1)
+      eslint: 8.56.0
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@typescript-eslint/scope-manager@5.62.0:
     resolution: {integrity: sha512-VXuvVvZeQCQb5Zgf4HAxc04q5j+WrNAtNh9OwCsCgpKqESMTu3tF/jhZ3xG6T4NZwWl65Bg8KuS2uEvhSfLl0w==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -8444,20 +8412,20 @@ packages:
       '@typescript-eslint/visitor-keys': 5.62.0
     dev: false
 
-  /@typescript-eslint/scope-manager@6.18.0:
-    resolution: {integrity: sha512-o/UoDT2NgOJ2VfHpfr+KBY2ErWvCySNUIX/X7O9g8Zzt/tXdpfEU43qbNk8LVuWUT2E0ptzTWXh79i74PP0twA==}
-    engines: {node: ^16.0.0 || >=18.0.0}
-    dependencies:
-      '@typescript-eslint/types': 6.18.0
-      '@typescript-eslint/visitor-keys': 6.18.0
-    dev: false
-
   /@typescript-eslint/scope-manager@6.21.0:
     resolution: {integrity: sha512-OwLUIWZJry80O99zvqXVEioyniJMa+d2GrqpUTqi5/v5D5rOrppJVBPa0yKCblcigC0/aYAzxxqQ1B+DS2RYsg==}
     engines: {node: ^16.0.0 || >=18.0.0}
     dependencies:
       '@typescript-eslint/types': 6.21.0
       '@typescript-eslint/visitor-keys': 6.21.0
+    dev: false
+
+  /@typescript-eslint/scope-manager@7.3.1:
+    resolution: {integrity: sha512-fVS6fPxldsKY2nFvyT7IP78UO1/I2huG+AYu5AMjCT9wtl6JFiDnsv4uad4jQ0GTFzcUV5HShVeN96/17bTBag==}
+    engines: {node: ^18.18.0 || >=20.0.0}
+    dependencies:
+      '@typescript-eslint/types': 7.3.1
+      '@typescript-eslint/visitor-keys': 7.3.1
     dev: false
 
   /@typescript-eslint/type-utils@5.62.0(eslint@8.56.0)(typescript@5.3.3):
@@ -8480,26 +8448,6 @@ packages:
       - supports-color
     dev: false
 
-  /@typescript-eslint/type-utils@6.18.0(eslint@8.56.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-ZeMtrXnGmTcHciJN1+u2CigWEEXgy1ufoxtWcHORt5kGvpjjIlK9MUhzHm4RM8iVy6dqSaZA/6PVkX6+r+ChjQ==}
-    engines: {node: ^16.0.0 || >=18.0.0}
-    peerDependencies:
-      eslint: ^7.0.0 || ^8.0.0
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@typescript-eslint/typescript-estree': 6.18.0(typescript@5.3.3)
-      '@typescript-eslint/utils': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
-      debug: 4.3.4(supports-color@8.1.1)
-      eslint: 8.56.0
-      ts-api-utils: 1.3.0(typescript@5.3.3)
-      typescript: 5.3.3
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /@typescript-eslint/type-utils@6.21.0(eslint@8.56.0)(typescript@5.3.3):
     resolution: {integrity: sha512-rZQI7wHfao8qMX3Rd3xqeYSMCL3SoiSQLBATSiVKARdFGCYSRvmViieZjqc58jKgs8Y8i9YvVVhRbHSTA4VBag==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -8507,6 +8455,8 @@ packages:
       eslint: ^7.0.0 || ^8.0.0
       typescript: '*'
     peerDependenciesMeta:
+      eslint:
+        optional: true
       typescript:
         optional: true
     dependencies:
@@ -8520,19 +8470,39 @@ packages:
       - supports-color
     dev: false
 
+  /@typescript-eslint/type-utils@7.3.1(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-iFhaysxFsMDQlzJn+vr3OrxN8NmdQkHks4WaqD4QBnt5hsq234wcYdyQ9uquzJJIDAj5W4wQne3yEsYA6OmXGw==}
+    engines: {node: ^18.18.0 || >=20.0.0}
+    peerDependencies:
+      eslint: ^8.56.0
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/typescript-estree': 7.3.1(typescript@5.3.3)
+      '@typescript-eslint/utils': 7.3.1(eslint@8.56.0)(typescript@5.3.3)
+      debug: 4.3.4(supports-color@8.1.1)
+      eslint: 8.56.0
+      ts-api-utils: 1.3.0(typescript@5.3.3)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@typescript-eslint/types@5.62.0:
     resolution: {integrity: sha512-87NVngcbVXUahrRTqIK27gD2t5Cu1yuCXxbLcFtCzZGlfyVWWh8mLHkoxzjsB6DDNnvdL+fW8MiwPEJyGJQDgQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
-  /@typescript-eslint/types@6.18.0:
-    resolution: {integrity: sha512-/RFVIccwkwSdW/1zeMx3hADShWbgBxBnV/qSrex6607isYjj05t36P6LyONgqdUrNLl5TYU8NIKdHUYpFvExkA==}
-    engines: {node: ^16.0.0 || >=18.0.0}
-    dev: false
-
   /@typescript-eslint/types@6.21.0:
     resolution: {integrity: sha512-1kFmZ1rOm5epu9NZEZm1kckCDGj5UJEf7P1kliH4LKu/RkwpsfqqGmY2OOcUs18lSlQBKLDYBOGxRVtrMN5lpg==}
     engines: {node: ^16.0.0 || >=18.0.0}
+    dev: false
+
+  /@typescript-eslint/types@7.3.1:
+    resolution: {integrity: sha512-2tUf3uWggBDl4S4183nivWQ2HqceOZh1U4hhu4p1tPiIJoRRXrab7Y+Y0p+dozYwZVvLPRI6r5wKe9kToF9FIw==}
+    engines: {node: ^18.18.0 || >=20.0.0}
     dev: false
 
   /@typescript-eslint/typescript-estree@5.62.0(typescript@5.3.3):
@@ -8556,28 +8526,6 @@ packages:
       - supports-color
     dev: false
 
-  /@typescript-eslint/typescript-estree@6.18.0(typescript@5.3.3):
-    resolution: {integrity: sha512-klNvl+Ql4NsBNGB4W9TZ2Od03lm7aGvTbs0wYaFYsplVPhr+oeXjlPZCDI4U9jgJIDK38W1FKhacCFzCC+nbIg==}
-    engines: {node: ^16.0.0 || >=18.0.0}
-    peerDependencies:
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@typescript-eslint/types': 6.18.0
-      '@typescript-eslint/visitor-keys': 6.18.0
-      debug: 4.3.4(supports-color@8.1.1)
-      globby: 11.1.0
-      is-glob: 4.0.3
-      minimatch: 9.0.3
-      semver: 7.5.4
-      ts-api-utils: 1.3.0(typescript@5.3.3)
-      typescript: 5.3.3
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /@typescript-eslint/typescript-estree@6.21.0(typescript@5.3.3):
     resolution: {integrity: sha512-6npJTkZcO+y2/kr+z0hc4HwNfrrP4kNYh57ek7yCNlrBjWQ1Y0OS7jiZTkgumrvkX5HkEKXFZkkdFNkaW2wmUQ==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -8589,6 +8537,28 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.21.0
       '@typescript-eslint/visitor-keys': 6.21.0
+      debug: 4.3.4(supports-color@8.1.1)
+      globby: 11.1.0
+      is-glob: 4.0.3
+      minimatch: 9.0.3
+      semver: 7.5.4
+      ts-api-utils: 1.3.0(typescript@5.3.3)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@typescript-eslint/typescript-estree@7.3.1(typescript@5.3.3):
+    resolution: {integrity: sha512-tLpuqM46LVkduWP7JO7yVoWshpJuJzxDOPYIVWUUZbW+4dBpgGeUdl/fQkhuV0A8eGnphYw3pp8d2EnvPOfxmQ==}
+    engines: {node: ^18.18.0 || >=20.0.0}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@typescript-eslint/types': 7.3.1
+      '@typescript-eslint/visitor-keys': 7.3.1
       debug: 4.3.4(supports-color@8.1.1)
       globby: 11.1.0
       is-glob: 4.0.3
@@ -8620,25 +8590,6 @@ packages:
       - typescript
     dev: false
 
-  /@typescript-eslint/utils@6.18.0(eslint@8.56.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-wiKKCbUeDPGaYEYQh1S580dGxJ/V9HI7K5sbGAVklyf+o5g3O+adnS4UNJajplF4e7z2q0uVBaTdT/yLb4XAVA==}
-    engines: {node: ^16.0.0 || >=18.0.0}
-    peerDependencies:
-      eslint: ^7.0.0 || ^8.0.0
-    dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@8.56.0)
-      '@types/json-schema': 7.0.15
-      '@types/semver': 7.5.6
-      '@typescript-eslint/scope-manager': 6.18.0
-      '@typescript-eslint/types': 6.18.0
-      '@typescript-eslint/typescript-estree': 6.18.0(typescript@5.3.3)
-      eslint: 8.56.0
-      semver: 7.5.4
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-    dev: false
-
   /@typescript-eslint/utils@6.21.0(eslint@8.56.0)(typescript@5.3.3):
     resolution: {integrity: sha512-NfWVaC8HP9T8cbKQxHcsJBY5YE1O33+jpMwN45qzWWaPDZgLIbo12toGMWnmhvCpd3sIxkpDw3Wv1B3dYrbDQQ==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -8658,6 +8609,25 @@ packages:
       - typescript
     dev: false
 
+  /@typescript-eslint/utils@7.3.1(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-jIERm/6bYQ9HkynYlNZvXpzmXWZGhMbrOvq3jJzOSOlKXsVjrrolzWBjDW6/TvT5Q3WqaN4EkmcfdQwi9tDjBQ==}
+    engines: {node: ^18.18.0 || >=20.0.0}
+    peerDependencies:
+      eslint: ^8.56.0
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.56.0)
+      '@types/json-schema': 7.0.15
+      '@types/semver': 7.5.6
+      '@typescript-eslint/scope-manager': 7.3.1
+      '@typescript-eslint/types': 7.3.1
+      '@typescript-eslint/typescript-estree': 7.3.1(typescript@5.3.3)
+      eslint: 8.56.0
+      semver: 7.5.4
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+    dev: false
+
   /@typescript-eslint/visitor-keys@5.62.0:
     resolution: {integrity: sha512-07ny+LHRzQXepkGg6w0mFY41fVUNBrL2Roj/++7V1txKugfjm/Ci/qSND03r2RhlJhJYMcTn9AhhSSqQp0Ysyw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -8666,19 +8636,19 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: false
 
-  /@typescript-eslint/visitor-keys@6.18.0:
-    resolution: {integrity: sha512-1wetAlSZpewRDb2h9p/Q8kRjdGuqdTAQbkJIOUMLug2LBLG+QOjiWoSj6/3B/hA9/tVTFFdtiKvAYoYnSRW/RA==}
-    engines: {node: ^16.0.0 || >=18.0.0}
-    dependencies:
-      '@typescript-eslint/types': 6.18.0
-      eslint-visitor-keys: 3.4.3
-    dev: false
-
   /@typescript-eslint/visitor-keys@6.21.0:
     resolution: {integrity: sha512-JJtkDduxLi9bivAB+cYOVMtbkqdPOhZ+ZI5LC47MIRrDV4Yn2o+ZnW10Nkmr28xRpSpdJ6Sm42Hjf2+REYXm0A==}
     engines: {node: ^16.0.0 || >=18.0.0}
     dependencies:
       '@typescript-eslint/types': 6.21.0
+      eslint-visitor-keys: 3.4.3
+    dev: false
+
+  /@typescript-eslint/visitor-keys@7.3.1:
+    resolution: {integrity: sha512-9RMXwQF8knsZvfv9tdi+4D/j7dMG28X/wMJ8Jj6eOHyHWwDW4ngQJcqEczSsqIKKjFiLFr40Mnr7a5ulDD3vmw==}
+    engines: {node: ^18.18.0 || >=20.0.0}
+    dependencies:
+      '@typescript-eslint/types': 7.3.1
       eslint-visitor-keys: 3.4.3
     dev: false
 
@@ -11557,7 +11527,7 @@ packages:
       - supports-color
     dev: false
 
-  /eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.18.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0):
+  /eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.3.1)(eslint-plugin-import@2.29.1)(eslint@8.56.0):
     resolution: {integrity: sha512-xgdptdoi5W3niYeuQxKmzVDTATvLYqhpwmykwsh7f6HIOStGWEIL9iqZgQDF9u9OEzrRwR8no5q2VT+bjAujTg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -11567,8 +11537,8 @@ packages:
       debug: 4.3.4(supports-color@8.1.1)
       enhanced-resolve: 5.16.0
       eslint: 8.56.0
-      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@7.3.1)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0)(eslint@8.56.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -11609,7 +11579,7 @@ packages:
       - supports-color
     dev: false
 
-  /eslint-module-utils@2.8.0(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0):
+  /eslint-module-utils@2.8.0(@typescript-eslint/parser@6.21.0)(eslint-import-resolver-node@0.3.9)(eslint@8.56.0):
     resolution: {integrity: sha512-aWajIYfsqCKRDgUfjEXNN/JlrzauMuSEy5sbd7WXbtW3EH6A6MpwEh42c7qD+MqQo9QMJ6fWLAeIJynx0g6OAw==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -11630,11 +11600,40 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
       debug: 3.2.7
       eslint: 8.56.0
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.18.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /eslint-module-utils@2.8.0(@typescript-eslint/parser@7.3.1)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0):
+    resolution: {integrity: sha512-aWajIYfsqCKRDgUfjEXNN/JlrzauMuSEy5sbd7WXbtW3EH6A6MpwEh42c7qD+MqQo9QMJ6fWLAeIJynx0g6OAw==}
+    engines: {node: '>=4'}
+    peerDependencies:
+      '@typescript-eslint/parser': '*'
+      eslint: '*'
+      eslint-import-resolver-node: '*'
+      eslint-import-resolver-typescript: '*'
+      eslint-import-resolver-webpack: '*'
+    peerDependenciesMeta:
+      '@typescript-eslint/parser':
+        optional: true
+      eslint:
+        optional: true
+      eslint-import-resolver-node:
+        optional: true
+      eslint-import-resolver-typescript:
+        optional: true
+      eslint-import-resolver-webpack:
+        optional: true
+    dependencies:
+      '@typescript-eslint/parser': 7.3.1(eslint@8.56.0)(typescript@5.3.3)
+      debug: 3.2.7
+      eslint: 8.56.0
+      eslint-import-resolver-node: 0.3.9
+      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.3.1)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -11693,7 +11692,7 @@ packages:
       - supports-color
     dev: false
 
-  /eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0):
+  /eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.21.0)(eslint@8.56.0):
     resolution: {integrity: sha512-BbPC0cuExzhiMo4Ff1BTVwHpjjv28C5R+btTOGaCRC7UEz801up0JadwkeSk5Ued6TG34uaczuVuH6qyy5YUxw==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -11703,7 +11702,7 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.21.0(eslint@8.56.0)(typescript@5.3.3)
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.5
       array.prototype.flat: 1.3.2
@@ -11712,7 +11711,42 @@ packages:
       doctrine: 2.1.0
       eslint: 8.56.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.21.0)(eslint-import-resolver-node@0.3.9)(eslint@8.56.0)
+      hasown: 2.0.2
+      is-core-module: 2.13.1
+      is-glob: 4.0.3
+      minimatch: 3.1.2
+      object.fromentries: 2.0.7
+      object.groupby: 1.0.3
+      object.values: 1.1.7
+      semver: 6.3.1
+      tsconfig-paths: 3.15.0
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+    dev: false
+
+  /eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.3.1)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0):
+    resolution: {integrity: sha512-BbPC0cuExzhiMo4Ff1BTVwHpjjv28C5R+btTOGaCRC7UEz801up0JadwkeSk5Ued6TG34uaczuVuH6qyy5YUxw==}
+    engines: {node: '>=4'}
+    peerDependencies:
+      '@typescript-eslint/parser': '*'
+      eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
+    peerDependenciesMeta:
+      '@typescript-eslint/parser':
+        optional: true
+    dependencies:
+      '@typescript-eslint/parser': 7.3.1(eslint@8.56.0)(typescript@5.3.3)
+      array-includes: 3.1.7
+      array.prototype.findlastindex: 1.2.5
+      array.prototype.flat: 1.3.2
+      array.prototype.flatmap: 1.3.2
+      debug: 3.2.7
+      doctrine: 2.1.0
+      eslint: 8.56.0
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@7.3.1)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
       hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3
