@@ -5,7 +5,7 @@
  * This is intended to replace the existing `HeaderTopBar` component after being AB tested.
  */
 import { css } from '@emotion/react';
-import { from, palette, space } from '@guardian/source-foundations';
+import { from, space } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
@@ -15,6 +15,7 @@ import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { usePageViewId } from '../lib/usePageViewId';
+import { palette as themePalette } from '../palette';
 import { useConfig } from './ConfigContext';
 import { TopBarLink } from './TopBarLink';
 import { TopBarMyAccount } from './TopBarMyAccount';
@@ -29,7 +30,7 @@ interface TopBarProps {
 }
 
 const topBarStyles = css`
-	background-color: ${palette.brand[300]};
+	background-color: ${themePalette('--masthead-top-bar-background')};
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -74,7 +75,8 @@ const verticalDividerStyles = css`
 	${from.desktop} {
 		:before {
 			content: '';
-			border-left: 1px solid ${palette.brand[600]};
+			border-left: 1px solid
+				${themePalette('--masthead-top-bar-vertical-divider')};
 			display: flex;
 			position: relative;
 			height: 38px;

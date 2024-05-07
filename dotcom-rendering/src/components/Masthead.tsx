@@ -1,4 +1,3 @@
-import { palette as sourcePalette } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -62,7 +61,7 @@ export const Masthead = ({
 			showSideBorders={false}
 			padSides={false}
 			shouldCenter={false}
-			backgroundColour={sourcePalette.brand[300]}
+			backgroundColour={themePalette('--masthead-top-bar-background')}
 			element="header"
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
@@ -83,10 +82,10 @@ export const Masthead = ({
 
 		<Section
 			fullWidth={true}
-			borderColour={sourcePalette.brand[600]}
+			backgroundColour={themePalette('--masthead-nav-background')}
+			borderColour={themePalette('--masthead-nav-border')}
 			showTopBorder={false}
 			padSides={false}
-			backgroundColour={sourcePalette.brand[400]}
 			element="nav"
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
@@ -102,23 +101,21 @@ export const Masthead = ({
 		</Section>
 
 		{nav.subNavSections && showSubNav && (
-			<>
-				<Section
-					fullWidth={true}
-					backgroundColour={themePalette('--article-background')}
-					borderColour={themePalette('--article-border')}
-					padSides={false}
-					element="aside"
-				>
-					<Island priority="enhancement" defer={{ until: 'idle' }}>
-						<SubNav
-							subNavSections={nav.subNavSections}
-							currentNavLink={nav.currentNavLink}
-							position="header"
-						/>
-					</Island>
-				</Section>
-			</>
+			<Section
+				fullWidth={true}
+				backgroundColour={themePalette('--article-background')}
+				borderColour={themePalette('--article-border')}
+				padSides={false}
+				element="aside"
+			>
+				<Island priority="enhancement" defer={{ until: 'idle' }}>
+					<SubNav
+						subNavSections={nav.subNavSections}
+						currentNavLink={nav.currentNavLink}
+						position="header"
+					/>
+				</Island>
+			</Section>
 		)}
 	</>
 );

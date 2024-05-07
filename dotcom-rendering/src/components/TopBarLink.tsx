@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { palette, space, textSansBold17 } from '@guardian/source-foundations';
+import { space, textSansBold17 } from '@guardian/source-foundations';
+import { palette as themePalette } from '../palette';
 
 type Props = {
 	href: string;
@@ -12,7 +13,7 @@ export const topBarLinkStyles = css`
 	align-items: center;
 	${textSansBold17};
 
-	color: ${palette.neutral[100]};
+	color: ${themePalette('--masthead-top-bar-link-text')};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 

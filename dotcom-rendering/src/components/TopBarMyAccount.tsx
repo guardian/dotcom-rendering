@@ -5,12 +5,7 @@
  */
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import {
-	from,
-	palette,
-	space,
-	textSansBold17,
-} from '@guardian/source-foundations';
+import { from, space, textSansBold17 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
@@ -28,6 +23,7 @@ import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
 import { useBraze } from '../lib/useBraze';
+import { palette as themePalette } from '../palette';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
@@ -53,7 +49,7 @@ const myAccountLinkStyles = css`
 	align-items: center;
 	${textSansBold17};
 
-	color: ${palette.neutral[100]};
+	color: ${themePalette('--masthead-top-bar-link-text')};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 
@@ -155,7 +151,7 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 );
 
 export const dropDownOverrides = css`
-	color: ${palette.neutral[100]};
+	color: ${themePalette('--masthead-top-bar-link-text')};
 	padding-right: 0;
 	padding-bottom: 0;
 	margin-top: 0;
@@ -163,7 +159,7 @@ export const dropDownOverrides = css`
 	font-weight: bold;
 
 	&:not(ul):hover {
-		color: ${palette.neutral[100]};
+		color: ${themePalette('--masthead-top-bar-link-text')};
 		text-decoration: underline;
 	}
 
