@@ -14,6 +14,7 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { palette as schemedPalette } from '../palette';
 import type { FEArticleType } from '../types/frontend';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { Island } from './Island';
@@ -73,10 +74,10 @@ const individualLabelCSS = css`
 	${textSans12};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
-	background-color: ${palette.neutral[97]};
+	background-color: ${schemedPalette('--ad-slot-background')};
 	padding: 0 8px;
-	border-top: 1px solid ${palette.neutral[86]};
-	color: ${palette.neutral[46]};
+	border-top: 1px solid ${schemedPalette('--ad-slot-border')};
+	color: ${schemedPalette('--ad-labels-text')};
 	text-align: left;
 	box-sizing: border-box;
 `;
@@ -240,8 +241,6 @@ const inlineAdStyles = css`
 const liveblogInlineAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
-	background-color: ${palette.neutral[93]};
-
 	${until.tablet} {
 		display: none;
 	}
@@ -250,7 +249,6 @@ const liveblogInlineAdStyles = css`
 const liveblogInlineMobileAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
-	background-color: ${palette.neutral[93]};
 
 	${from.tablet} {
 		display: none;
@@ -281,7 +279,7 @@ const frontsBannerAdTopContainerStyles = css`
 		display: flex;
 		justify-content: center;
 		min-height: ${frontsBannerMinHeightTablet}px;
-		background-color: ${palette.neutral[97]};
+		background-color: ${schemedPalette('--ad-slot-background')};
 	}
 	${from.desktop} {
 		min-height: ${frontsBannerMinHeight}px;
@@ -470,6 +468,9 @@ const mobileStickyAdStylesFullWidth = css`
 `;
 
 export const adContainerStyles = [
+	css`
+		background-color: ${schemedPalette('--ad-slot-background')};
+	`,
 	adContainerCollapseStyles,
 	labelStyles,
 	adContainerCentreSlotStyles,
