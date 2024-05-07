@@ -393,7 +393,6 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						isPaidContent={article.pageType.isPaidContent}
 						isPreview={!!article.config.isPreview}
 						isSensitive={article.config.isSensitive}
-						keywordIds={article.config.keywordIds}
 						pageId={article.pageId}
 						sectionId={article.config.section}
 						shouldHideReaderRevenue={

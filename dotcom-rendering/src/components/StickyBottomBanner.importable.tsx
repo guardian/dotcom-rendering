@@ -46,7 +46,6 @@ type Props = {
 	idApiUrl: string;
 
 	pageId: string;
-	keywordIds: string;
 };
 
 type RRBannerConfig = {

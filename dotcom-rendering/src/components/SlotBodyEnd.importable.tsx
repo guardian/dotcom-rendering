@@ -44,7 +44,6 @@ type Props = {
 	idApiUrl: string;
 	stage: string;
 	pageId: string;
-	keywordIds: string;
 	renderAds: boolean;
 	isLabs: boolean;
 	articleEndSlot: boolean;
