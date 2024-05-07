@@ -1,6 +1,7 @@
 import { palette as sourcePalette } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import { Island } from './Island';
 import { Nav } from './Nav/Nav';
 import { Section } from './Section';
@@ -86,10 +87,10 @@ export const Masthead = ({
 			<>
 				<Section
 					fullWidth={true}
-					backgroundColour={sourcePalette.brand[400]}
+					backgroundColour={themePalette('--article-background')}
+					borderColour={themePalette('--article-border')}
 					padSides={false}
 					element="aside"
-					borderColour={sourcePalette.brand[600]}
 				>
 					<Island priority="enhancement" defer={{ until: 'idle' }}>
 						<SubNav
