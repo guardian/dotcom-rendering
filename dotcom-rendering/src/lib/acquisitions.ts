@@ -7,7 +7,7 @@ type AcquisitionLinkParams = {
 	componentId: string;
 	campaignCode?: string;
 	abTest?: { name: string; variant: string };
-	pageViewId: string;
+	pageViewId: string | undefined;
 	referrerUrl: string;
 };
 
@@ -18,7 +18,7 @@ export const addTrackingCodesToUrl = ({
 	componentId,
 	campaignCode,
 	abTest,
-	pageViewId,
+	pageViewId = '',
 	referrerUrl,
 }: AcquisitionLinkParams): string => {
 	const isSupportUrl =
