@@ -242,7 +242,7 @@ const hoverStyles = css`
 `;
 
 export const Standfirst = ({ format, standfirst }: Props) => {
-	if (standfirst === '') return null;
+	if (standfirst.trim() === '') return null;
 	return (
 		<>
 			<div
