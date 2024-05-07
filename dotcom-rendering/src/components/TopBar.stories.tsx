@@ -3,7 +3,7 @@ import { TopBar } from './TopBar.importable';
 
 const meta = {
 	component: TopBar,
-	title: 'Components/TopBar',
+	title: 'Components/Masthead/TopBar',
 	render: (args) => <TopBar {...args} />,
 	args: {
 		editionId: 'UK',
@@ -15,6 +15,4 @@ const meta = {
 } satisfies Meta<typeof TopBar>;
 export default meta;
 
-export const Default = {
-	name: 'MastheadTopBar',
-};
+export const Default = {};

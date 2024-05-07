@@ -10,7 +10,6 @@ import {
 	palette,
 	space,
 	textSansBold17,
-	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
@@ -136,7 +135,7 @@ export const buildIdentityLinks = (
 	return links.map((link) => ({
 		...link,
 		dataLinkName: nestedOphanComponents(
-			'nav3',
+			'nav4',
 			'topbar',
 			link.id.replaceAll('_', ' '),
 		),
@@ -149,7 +148,7 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
-		data-link-name={nestedOphanComponents('nav3', 'topbar', 'signin')}
+		data-link-name={nestedOphanComponents('nav4', 'topbar', 'signin')}
 	>
 		<ProfileIcon /> Sign in
 	</a>
@@ -169,14 +168,15 @@ export const dropDownOverrides = css`
 	}
 
 	/** Handles case of *new* top bar being 52px at this breakpoint */
-	${until.tablet} {
-		&:not(button) {
-			top: 48px;
-		}
+	&:not(button) {
+		top: 48px;
 	}
 
 	${from.tablet} {
 		right: 0;
+		&:not(button) {
+			top: 0;
+		}
 	}
 `;
 
@@ -238,7 +238,7 @@ const SignedInWithNotifications = ({
 				links={identityLinksWithNotifications}
 				id="my-account"
 				dataLinkName={nestedOphanComponents(
-					'nav3',
+					'nav4',
 					'topbar',
 					'my account',
 				)}

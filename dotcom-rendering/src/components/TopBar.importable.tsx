@@ -1,3 +1,9 @@
+/**
+ * @file
+ * This file is rework of https://github.com/guardian/dotcom-rendering/blob/94957ccdefe180ce6c292cb81de528cb616676e5/dotcom-rendering/src/components/HeaderTopBar.importable.tsx
+ * and includes the previously separated out `HeaderTopBarPrintSubscriptions` and `HeaderTopBarSearchJobs` components.
+ * This is intended to replace the existing `HeaderTopBar` component after being AB tested.
+ */
 import { css } from '@emotion/react';
 import { from, palette, space } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
@@ -8,6 +14,8 @@ import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { usePageViewId } from '../lib/usePageViewId';
+import { useConfig } from './ConfigContext';
 import { TopBarLink } from './TopBarLink';
 import { TopBarMyAccount } from './TopBarMyAccount';
 
@@ -20,7 +28,7 @@ interface TopBarProps {
 	hasPageSkin?: boolean;
 }
 
-const topBarStylesUntilLeftCol = css`
+const topBarStyles = css`
 	background-color: ${palette.brand[300]};
 	display: flex;
 	flex-direction: row;
@@ -44,7 +52,7 @@ const topBarStylesUntilLeftCol = css`
 	}
 `;
 
-const topBarStylesFromLeftCol = css`
+const topBarStylesWithoutPageSkin = css`
 	${from.wide} {
 		padding-right: 96px;
 	}
@@ -109,12 +117,12 @@ export const TopBar = ({
 	hasPageSkin = false,
 }: TopBarProps) => {
 	const authStatus = useAuthStatus();
+	const { renderingTarget } = useConfig();
+	const pageViewId = usePageViewId(renderingTarget);
 
-	const [pageViewId, setPageViewId] = useState('');
 	const [referrerUrl, setReferrerUrl] = useState('');
 
 	useEffect(() => {
-		setPageViewId(window.guardian.config.ophan.pageViewId);
 		setReferrerUrl(window.location.origin + window.location.pathname);
 	}, []);
 
@@ -131,8 +139,8 @@ export const TopBar = ({
 	return (
 		<div
 			css={[
-				topBarStylesUntilLeftCol,
-				!hasPageSkin && topBarStylesFromLeftCol,
+				topBarStyles,
+				!hasPageSkin && topBarStylesWithoutPageSkin,
 				hasPageSkin ? pageSkinContainer : center,
 			]}
 		>
@@ -144,7 +152,7 @@ export const TopBar = ({
 				<TopBarLinkContainer>
 					<TopBarLink
 						dataLinkName={nestedOphanComponents(
-							'nav3',
+							'nav4',
 							'topbar',
 							'printsubs',
 						)}
@@ -160,7 +168,7 @@ export const TopBar = ({
 			<Hide until="desktop">
 				<TopBarLinkContainer>
 					<TopBarLink
-						dataLinkName={nestedOphanComponents('nav3', 'job-cta')}
+						dataLinkName={nestedOphanComponents('nav4', 'job-cta')}
 						href="https://jobs.theguardian.com"
 					>
 						Search jobs
