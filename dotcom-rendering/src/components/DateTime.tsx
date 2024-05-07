@@ -47,7 +47,7 @@ export const DateTime = ({
 	showTime,
 	display = 'absolute',
 }: Props) => {
-	const { locale, timeZone } = getEditionFromId(editionId);
+	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
 	const epoch = date.getTime();
 	const relativeTime = display === 'relative' && timeAgo(epoch);
@@ -60,8 +60,8 @@ export const DateTime = ({
 	) : (
 		<time
 			dateTime={date.toISOString()}
-			data-locale={locale}
-			title={date.toLocaleDateString(locale, {
+			data-locale={dateLocale}
+			title={date.toLocaleDateString(dateLocale, {
 				hour: '2-digit',
 				minute: '2-digit',
 				weekday: 'long',
@@ -73,9 +73,9 @@ export const DateTime = ({
 			})}
 		>
 			{[
-				showWeekday && formatWeekday(date, locale, timeZone),
-				showDate && formatDate(date, locale, timeZone),
-				showTime && formatTime(date, locale, timeZone),
+				showWeekday && formatWeekday(date, dateLocale, timeZone),
+				showDate && formatDate(date, dateLocale, timeZone),
+				showTime && formatTime(date, dateLocale, timeZone),
 			]
 				.filter(isString)
 				.join(' ')}

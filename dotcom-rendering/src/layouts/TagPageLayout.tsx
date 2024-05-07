@@ -216,7 +216,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					image={tagPage.header.image}
 				/>
 				{tagPage.groupedTrails.map((groupedTrails, index) => {
-					const locale = getEditionFromId(tagPage.editionId).locale;
+					const locale = getEditionFromId(
+						tagPage.editionId,
+					).dateLocale;
 					const date = new Date(
 						groupedTrails.year,
 						groupedTrails.month,
