@@ -134,7 +134,7 @@ export const AdConsent = () => {
 			<amp-consent
 				layout="nodisplay"
 				id="consent"
-				class="i-amphtml-consent-ui-iframe-fullscreen"
+				// class="i-amphtml-consent-ui-iframe-fullscreen"
 				style={{
 					background: 'none',
 				}}
