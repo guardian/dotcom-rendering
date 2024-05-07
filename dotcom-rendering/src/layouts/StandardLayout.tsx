@@ -507,15 +507,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										subNavLinkColour={themePalette(
-											'--sub-nav-link',
-										)}
-										linkHoverColour={themePalette(
-											'--article-link-text-hover',
-										)}
-										borderColour={themePalette(
-											'--sub-nav-border',
-										)}
+										position="header"
 									/>
 								</Island>
 							</Section>
@@ -1101,15 +1093,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
-									subNavLinkColour={themePalette(
-										'--sub-nav-link',
-									)}
-									linkHoverColour={themePalette(
-										'--article-link-text-hover',
-									)}
-									borderColour={themePalette(
-										'--sub-nav-border',
-									)}
+									position="footer"
 								/>
 							</Island>
 						</Section>

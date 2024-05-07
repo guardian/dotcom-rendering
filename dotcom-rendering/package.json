@@ -67,7 +67,7 @@
 		"@storybook/core-events": "7.6.18",
 		"@storybook/react": "7.6.18",
 		"@storybook/react-webpack5": "7.6.18",
-		"@storybook/testing-library": "0.2.2",
+		"@storybook/test": "7.6.19",
 		"@storybook/theming": "7.6.18",
 		"@svgr/webpack": "8.1.0",
 		"@swc/cli": "0.3.12",
