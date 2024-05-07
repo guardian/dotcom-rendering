@@ -453,7 +453,6 @@ describe('Island: server-side rendering', () => {
 						idApiUrl={''}
 						stage={''}
 						pageId={''}
-						keywordIds={''}
 						renderAds={true}
 						isLabs={false}
 						articleEndSlot={true}
@@ -484,7 +483,6 @@ describe('Island: server-side rendering', () => {
 						contributionsServiceUrl=""
 						idApiUrl=""
 						pageId=""
-						keywordIds=""
 						remoteBannerSwitch={true}
 						isSensitive={false}
 					/>

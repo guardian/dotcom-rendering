@@ -11,6 +11,7 @@ import {
 	getDailyArticleCount,
 	incrementDailyArticleCount,
 } from '../lib/dailyArticleCount';
+import type { TagType } from '../types/tag';
 
 export interface ArticleCounts {
 	weeklyArticleHistory: WeeklyArticleHistory;
@@ -19,7 +20,7 @@ export interface ArticleCounts {
 
 export const getArticleCounts = async (
 	pageId: string,
-	keywordIds: string,
+	tags: TagType[],
 	contentType: string,
 ): Promise<ArticleCounts | undefined> => {
 	if (await hasOptedOutOfArticleCount()) return undefined;
@@ -37,15 +38,19 @@ export const getArticleCounts = async (
 	// hasOptedOut needs to be done before we check if articleCount is set in the window
 	// This is because a potential race condition where one invocation of getArticleCounts
 	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
+
+	const keywordAndToneTagIds: string[] = tags
+		.filter((tag) => ['tone', 'keyword'].includes(tag.type.toLowerCase()))
+		.map((tag) => tag.id);
+
 	if (!window.guardian.weeklyArticleCount) {
 		if (shouldIncrement) {
 			incrementWeeklyArticleCount(
 				storage.local,
 				pageId,
-				keywordIds.split(','),
+				keywordAndToneTagIds,
 			);
 		}
-
 		window.guardian.weeklyArticleCount = getWeeklyArticleHistory(
 			storage.local,
 		);
@@ -65,7 +70,7 @@ export const getArticleCounts = async (
 
 export const useArticleCounts = (
 	pageId: string,
-	keywordIds: string,
+	tags: TagType[],
 	contentType: string,
 ): ArticleCounts | undefined | 'Pending' => {
 	const [articleCounts, setArticleCounts] = useState<
@@ -73,10 +78,10 @@ export const useArticleCounts = (
 	>('Pending');
 
 	useEffect(() => {
-		getArticleCounts(pageId, keywordIds, contentType)
+		getArticleCounts(pageId, tags, contentType)
 			.then(setArticleCounts)
 			.catch(() => setArticleCounts(undefined));
-	}, [contentType, pageId, keywordIds]);
+	}, [contentType, pageId, tags]);
 
 	return articleCounts;
 };
