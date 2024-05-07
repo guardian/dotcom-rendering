@@ -370,6 +370,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 
 	const isWeb = renderingTarget === 'Web';
@@ -508,15 +509,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										subNavLinkColour={themePalette(
-											'--sub-nav-link',
-										)}
-										linkHoverColour={themePalette(
-											'--article-link-text-hover',
-										)}
-										borderColour={themePalette(
-											'--sub-nav-border',
-										)}
+										position="header"
 									/>
 								</Island>
 							</Section>
@@ -551,7 +544,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader />
+						<LabsHeader editionId={editionId} />
 					</Section>
 				</Stuck>
 			)}
@@ -1105,15 +1098,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
-									subNavLinkColour={themePalette(
-										'--sub-nav-link',
-									)}
-									linkHoverColour={themePalette(
-										'--article-link-text-hover',
-									)}
-									borderColour={themePalette(
-										'--sub-nav-border',
-									)}
+									position="footer"
 								/>
 							</Island>
 						</Section>

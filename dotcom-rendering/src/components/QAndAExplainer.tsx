@@ -25,9 +25,10 @@ interface Props {
 
 const headingLineStyles = css`
 	width: 140px;
-	margin: 8px 0 0 0;
+	padding-top: 8px;
+	margin: 0 0 2px 0;
 	border: none;
-	border-top: 4px solid ${palette('--heading-line')};
+	border-bottom: 4px solid ${palette('--heading-line')};
 `;
 
 export const QAndAExplainer = ({
