@@ -1,4 +1,5 @@
 import type { Branding } from '../types/branding';
+import type { EditionId } from './edition';
 
 export const getOphanComponents = ({
 	branding,
@@ -18,4 +19,15 @@ export const getOphanComponents = ({
 		ophanComponentName: `labs-logo | ${componentName}`,
 		ophanComponentLink: `labs-logo-${componentName}`,
 	};
+};
+
+export const getLabsUrlSuffix = (editionId: EditionId): string => {
+	switch (editionId) {
+		case 'AU':
+			return '-australia';
+		case 'US':
+			return '-us';
+		default:
+			return '';
+	}
 };

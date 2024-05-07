@@ -235,6 +235,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -356,7 +357,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
-								<LabsHeader />
+								<LabsHeader editionId={editionId} />
 							</Section>
 						</Stuck>
 					)}
@@ -948,10 +949,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={themePalette(
-								'--article-link-text-hover',
-							)}
-							borderColour={themePalette('--sub-nav-border')}
+							position="footer"
 						/>
 					</Island>
 				</Section>

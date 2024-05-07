@@ -10,7 +10,7 @@ import type { RenderingTarget } from './renderingTarget';
 export type Config =
 	| {
 			renderingTarget: Extract<RenderingTarget, 'Web'>;
-			darkModeAvailable: false;
+			darkModeAvailable: boolean;
 			assetOrigin: AssetOrigin;
 	  }
 	| {

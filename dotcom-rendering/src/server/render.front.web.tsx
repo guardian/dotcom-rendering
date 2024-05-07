@@ -83,7 +83,8 @@ export const renderFront = ({
 	// Fronts are not supported in Apps
 	const config: Config = {
 		renderingTarget: 'Web',
-		darkModeAvailable: false,
+		darkModeAvailable:
+			front.config.abTests.darkModeWebVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
 	};
 
@@ -175,7 +176,8 @@ export const renderTagPage = ({
 	// Fronts are not supported in Apps
 	const config: Config = {
 		renderingTarget: 'Web',
-		darkModeAvailable: false,
+		darkModeAvailable:
+			tagPage.config.abTests.darkModeWebVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
 	};
 

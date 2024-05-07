@@ -3510,7 +3510,7 @@ const subNavBorder: PaletteFunction = ({ design, theme }) => {
 			}
 	}
 };
-const subNavLink = (format: ArticleFormat) => {
+const subNavLinkHeaderLight: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
@@ -3519,6 +3519,27 @@ const subNavLink = (format: ArticleFormat) => {
 		default:
 			return sourcePalette.neutral[7];
 	}
+};
+const subNavLinkHeaderDark: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+const subNavLinkFooterLight: PaletteFunction = () => {
+	return sourcePalette.neutral[7];
+};
+const subNavLinkFooterDark: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+const subNavLinkHoverLight: PaletteFunction = (format) => {
+	return articleLinkHoverLight(format);
+};
+const subNavLinkHoverDark: PaletteFunction = (format) => {
+	return articleLinkHoverDark(format);
+};
+const subNavMoreLight: PaletteFunction = () => {
+	return sourcePalette.neutral[60];
+};
+const subNavMoreDark: PaletteFunction = () => {
+	return sourcePalette.neutral[38];
 };
 
 const pullQuoteTextLight: PaletteFunction = ({
@@ -3749,9 +3770,14 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 
 const shareButtonDark: PaletteFunction = () => sourcePalette.neutral[60];
 
-const matchNavBackground: PaletteFunction = () => sourcePalette.brandAlt[400];
+const matchNavBackgroundLight: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const matchNavBackgroundDark: PaletteFunction = () =>
+	sourcePalette.brandAlt[200];
 
-const matchStatsBackground: PaletteFunction = ({ design }) => {
+const matchNavText: PaletteFunction = () => sourcePalette.neutral[7];
+
+const matchStatsBackgroundLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
@@ -3763,8 +3789,16 @@ const matchStatsBackground: PaletteFunction = ({ design }) => {
 	}
 };
 
-const matchTabBorder: PaletteFunction = () => sourcePalette.neutral[86];
-const matchActiveTabBorder: PaletteFunction = () => sourcePalette.sport[300];
+const matchStatsBackgroundDark: PaletteFunction = () =>
+	sourcePalette.sport[300];
+
+const matchTabBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const matchTabBorderDark: PaletteFunction = () => sourcePalette.neutral[46];
+
+const matchActiveTabBorderLight: PaletteFunction = () =>
+	sourcePalette.sport[300];
+const matchActiveTabBorderDark: PaletteFunction = () =>
+	sourcePalette.sport[500];
 
 const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -5821,29 +5855,45 @@ const paletteColours = {
 		light: subNavBorder,
 		dark: subNavBorder,
 	},
-	'--sub-nav-link': {
-		light: subNavLink,
-		dark: subNavLink,
+	'--sub-nav-link-header': {
+		light: subNavLinkHeaderLight,
+		dark: subNavLinkHeaderDark,
+	},
+	'--sub-nav-link-footer': {
+		light: subNavLinkFooterLight,
+		dark: subNavLinkFooterDark,
+	},
+	'--sub-nav-link-hover': {
+		light: subNavLinkHoverLight,
+		dark: subNavLinkHoverDark,
+	},
+	'--sub-nav-more': {
+		light: subNavMoreLight,
+		dark: subNavMoreDark,
 	},
 	'--share-button': {
 		light: shareButtonLight,
 		dark: shareButtonDark,
 	},
 	'--match-nav-background': {
-		light: matchNavBackground,
-		dark: matchNavBackground,
+		light: matchNavBackgroundLight,
+		dark: matchNavBackgroundDark,
+	},
+	'--match-nav-text': {
+		light: matchNavText,
+		dark: matchNavText,
 	},
 	'--match-stats-background': {
-		light: matchStatsBackground,
-		dark: matchStatsBackground,
+		light: matchStatsBackgroundLight,
+		dark: matchStatsBackgroundDark,
 	},
 	'--match-tab-border': {
-		light: matchTabBorder,
-		dark: matchTabBorder,
+		light: matchTabBorderLight,
+		dark: matchTabBorderDark,
 	},
 	'--match-tab-border-active': {
-		light: matchActiveTabBorder,
-		dark: matchActiveTabBorder,
+		light: matchActiveTabBorderLight,
+		dark: matchActiveTabBorderDark,
 	},
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,

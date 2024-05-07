@@ -1,13 +1,9 @@
-import { css, Global } from '@emotion/react';
+import { Global } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import {
-	focusHalo,
-	palette as sourcePalette,
-} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { AllEditorialNewslettersPageLayout } from '../layouts/AllEditorialNewslettersPageLayout';
+import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
-import { paletteDeclarations } from '../palette';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { FocusStyles } from './FocusStyles.importable';
@@ -40,29 +36,12 @@ export const AllEditorialNewslettersPage = ({
 		theme: Pillar.News,
 	};
 
+	const darkModeAvailable =
+		newslettersPage.config.abTests.darkModeWebVariant === 'variant';
+
 	return (
 		<StrictMode>
-			<Global
-				styles={css`
-					:root {
-						/* Light palette is default on all platforms */
-						/* We do not support dark mode on tag pages */
-						${paletteDeclarations(format, 'light')}
-						body {
-							color: ${sourcePalette.neutral[7]};
-						}
-					}
-					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-					*:focus {
-						${focusHalo}
-					}
-					::selection {
-						background: ${sourcePalette.brandAlt[400]};
-						color: ${sourcePalette.neutral[7]};
-					}
-				`}
-			/>
+			<Global styles={rootStyles(format, darkModeAvailable)} />
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>
