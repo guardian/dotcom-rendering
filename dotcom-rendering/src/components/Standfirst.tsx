@@ -71,6 +71,58 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
+const decidePadding = ({ display, design }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial: {
+			switch (display) {
+				case ArticleDisplay.Immersive:
+					return css`
+						padding-bottom: ${space[6]}px;
+						padding-top: ${space[2]}px;
+						${from.tablet} {
+							padding-bottom: none;
+						}
+					`;
+				case ArticleDisplay.Showcase:
+				default:
+					return css`
+						padding-bottom: 12px;
+						${from.tablet} {
+							padding-bottom: ${space[2]}px;
+						}
+					`;
+			}
+		}
+		default: {
+			switch (display) {
+				case ArticleDisplay.Showcase:
+					return css`
+						padding-bottom: ${space[2]}px;
+
+						${from.tablet} {
+							padding-bottom: 14px;
+						}
+					`;
+				case ArticleDisplay.Immersive:
+					return css`
+						padding-bottom: ${space[6]}px;
+						padding-top: ${space[2]}px;
+
+						${from.tablet} {
+							padding-bottom: none;
+						}
+					`;
+				default:
+					return css`
+						padding-bottom: ${space[2]}px;
+					`;
+			}
+		}
+	}
+};
+
 const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
@@ -79,8 +131,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					if (theme === ArticleSpecial.Labs) {
 						return css`
 							${textSans20};
-							margin-top: ${space[2]}px;
-							margin-bottom: ${space[3]}px;
 							line-height: 22px;
 							max-width: 540px;
 							color: ${palette('--standfirst-text')};
@@ -88,8 +138,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					}
 					return css`
 						${headlineMedium17};
-						margin-top: ${space[2]}px;
-						margin-bottom: ${space[3]}px;
 						line-height: 22px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
@@ -99,7 +147,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						${theme === ArticleSpecial.Labs
 							? textSans17
 							: headlineLight24};
-						padding-top: ${space[4]}px;
 
 						max-width: 280px;
 						${from.tablet} {
@@ -116,7 +163,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 		case ArticleDisplay.NumberedList:
 			return css`
 				${headlineBold20};
-				margin-bottom: ${space[3]}px;
 				max-width: 540px;
 				color: ${palette('--standfirst-text')};
 			`;
@@ -137,7 +183,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Profile:
 					return css`
 						${headlineLight20};
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 						li:before {
@@ -150,14 +195,12 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					return css`
 						${headlineBold17};
 						margin-top: ${space[1]}px;
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 					`;
 				case ArticleDesign.Analysis:
 					return css`
 						${headlineMedium17};
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 					`;
@@ -165,7 +208,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Audio:
 					return css`
 						${headlineBold17};
-						margin-bottom: ${space[3]}px;
 						color: ${palette('--standfirst-text')};
 					`;
 				default:
@@ -173,7 +215,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						case ArticleSpecial.Labs:
 							return css`
 								${textSans.medium({ lineHeight: 'tight' })}
-								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
 								a {
@@ -185,7 +226,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 						default:
 							return css`
 								${headlineBold17};
-								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
 							`;
@@ -202,12 +242,14 @@ const hoverStyles = css`
 `;
 
 export const Standfirst = ({ format, standfirst }: Props) => {
+	if (standfirst.trim() === '') return null;
 	return (
 		<>
 			<div
 				css={[
 					nestedStyles(format),
 					standfirstStyles(format),
+					decidePadding(format),
 					hoverStyles,
 				]}
 				className={
