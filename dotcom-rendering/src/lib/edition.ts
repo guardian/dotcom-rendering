@@ -12,6 +12,7 @@ type Edition = {
 	dateLocale: string;
 	timeZone: string;
 	langLocale?: string;
+	hasEditionalisedPages: boolean;
 };
 
 const editionList: Tuple<Edition, 5> = [
@@ -24,6 +25,7 @@ const editionList: Tuple<Edition, 5> = [
 		dateLocale: 'en-gb',
 		timeZone: 'Europe/London',
 		langLocale: 'en-GB',
+		hasEditionalisedPages: true,
 	},
 	{
 		url: '/preference/edition/us',
@@ -34,6 +36,7 @@ const editionList: Tuple<Edition, 5> = [
 		dateLocale: 'en-us',
 		timeZone: 'America/New_York',
 		langLocale: 'en-US',
+		hasEditionalisedPages: true,
 	},
 	{
 		url: '/preference/edition/au',
@@ -44,6 +47,7 @@ const editionList: Tuple<Edition, 5> = [
 		dateLocale: 'en-au',
 		timeZone: 'Australia/Sydney',
 		langLocale: 'en-AU',
+		hasEditionalisedPages: true,
 	},
 	{
 		url: '/preference/edition/int',
@@ -54,6 +58,7 @@ const editionList: Tuple<Edition, 5> = [
 		dateLocale: 'en-gb',
 		timeZone: 'Europe/London',
 		langLocale: 'en',
+		hasEditionalisedPages: false,
 	},
 	{
 		url: '/preference/edition/eur',
@@ -63,6 +68,7 @@ const editionList: Tuple<Edition, 5> = [
 		title: 'Europe edition',
 		dateLocale: 'en-gb',
 		timeZone: 'Europe/Paris',
+		hasEditionalisedPages: false,
 	},
 ];
 
@@ -108,19 +114,25 @@ const isEditionId = isOneOf(editionList.map(({ editionId }) => editionId));
 const isNetworkFront = (pageId: string): boolean =>
 	editionList.some((edition) => edition.pageId === pageId);
 
-const isEditionalisedPage = (pageId: string): boolean => {
+const splitEditionalisedPage = (
+	pageId: string,
+): undefined | [string, string] => {
 	const pageIdSplit = pageId.split('/');
 	if (!isTuple(pageIdSplit, 2)) {
-		return false;
+		return undefined;
 	}
 	const [networkId, pageIdSuffix] = pageIdSplit;
 	if (!isNetworkFront(networkId)) {
-		return false;
+		return undefined;
 	}
-	return editionalisedPages.some(
+	const hasMatch = editionalisedPages.some(
 		(editionalisedPage) => editionalisedPage === pageIdSuffix,
 	);
+	return hasMatch ? [networkId, pageIdSuffix] : undefined;
 };
+
+const isEditionalisedPage = (pageId: string): boolean =>
+	!!splitEditionalisedPage(pageId);
 
 export {
 	EditionId,
@@ -133,4 +145,5 @@ export {
 	isEditionId,
 	isEditionalisedPage,
 	isNetworkFront,
+	splitEditionalisedPage,
 };
