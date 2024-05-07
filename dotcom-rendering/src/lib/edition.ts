@@ -91,6 +91,9 @@ const getEditionFromId = (editionId: EditionId): Edition => {
 	);
 };
 
+const getEditionFromPageId = (pageId: string): Edition | undefined =>
+	editionList.find((edition) => edition.pageId === pageId);
+
 const getRemainingEditions = (editionId: EditionId): Edition[] => {
 	return editionList.filter((edition) => edition.editionId !== editionId);
 };
@@ -125,6 +128,7 @@ export {
 	editionList,
 	editionalisedPages,
 	getEditionFromId,
+	getEditionFromPageId,
 	getRemainingEditions,
 	isEditionId,
 	isEditionalisedPage,
