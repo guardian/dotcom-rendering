@@ -42,7 +42,7 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 			},
 		};
 
-		if (error?.message || error?.stack) {
+		if (error?.message ?? error?.stack) {
 			logger.error('Error rendering page', logArgs);
 		} else {
 			logger.info('Rendered page', logArgs);

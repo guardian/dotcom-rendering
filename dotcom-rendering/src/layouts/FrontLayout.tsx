@@ -122,6 +122,7 @@ const decideLeftContent = (
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent, hasPageSkin: hasPageSkinConfig, pageId },
+		editionId,
 	} = front;
 
 	const renderAds = canRenderAds(front);
@@ -255,10 +256,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={
-											sourcePalette.news[400]
-										}
-										borderColour={sourcePalette.neutral[46]}
+										position="header"
 									/>
 								</Island>
 							</Section>
@@ -286,7 +284,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							borderColour={sourcePalette.neutral[60]}
 							sectionId="labs-header"
 						>
-							<LabsHeader />
+							<LabsHeader editionId={editionId} />
 						</Section>
 					)}
 				</>
@@ -473,7 +471,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									editionId={'UK'}
+									editionId={editionId}
 								>
 									<DecideContainer
 										trails={trailsWithoutBranding}
@@ -686,8 +684,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={sourcePalette.news[400]}
-							borderColour={sourcePalette.neutral[46]}
+							position="footer"
 						/>
 					</Island>
 				</Section>

@@ -389,15 +389,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										linkHoverColour={themePalette(
-											'--article-link-text-hover',
-										)}
-										borderColour={themePalette(
-											'--sub-nav-border',
-										)}
-										subNavLinkColour={themePalette(
-											'--sub-nav-link',
-										)}
+										position="header"
 									/>
 								</Island>
 							</Section>
@@ -579,7 +571,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 												branding={branding}
 												format={format}
 												pageId={article.pageId}
-												webTitle={article.webTitle}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -598,7 +589,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide until="leftCol">
@@ -625,7 +615,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											/>
 										</Hide>
 									</>
@@ -648,7 +637,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
 									/>
 								)}
 							</div>
@@ -792,7 +780,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>
@@ -824,10 +811,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={themePalette(
-								'--article-link-text-hover',
-							)}
-							borderColour={themePalette('--sub-nav-border')}
+							position="footer"
 						/>
 					</Island>
 				</Section>

@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { defaultFormats } from '../../../.storybook/decorators/splitThemeDecorator';
 import { allModes } from '../../../.storybook/modes';
@@ -21,11 +20,6 @@ export const AudioAtom = {
 		kicker: 'Football Weekly Extra Extra',
 		title: 'Q&A and Detective Wilson',
 		duration: 849,
-		format: {
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-		},
 	},
 	parameters: {
 		// We only want to snapshot the `multipleFormats` version below.

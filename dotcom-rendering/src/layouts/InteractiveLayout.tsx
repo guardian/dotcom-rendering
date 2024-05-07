@@ -220,6 +220,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 
 	const isApps = renderingTarget === 'Apps';
@@ -355,12 +356,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											currentNavLink={
 												props.NAV.currentNavLink
 											}
-											linkHoverColour={themePalette(
-												'--article-link-text-hover',
-											)}
-											borderColour={themePalette(
-												'--sub-nav-border',
-											)}
+											position="header"
 										/>
 									</Island>
 								</Section>
@@ -394,7 +390,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
-								<LabsHeader />
+								<LabsHeader editionId={editionId} />
 							</Section>
 						</Stuck>
 					)}
@@ -524,7 +520,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 													branding={branding}
 													format={format}
 													pageId={article.pageId}
-													webTitle={article.webTitle}
 													byline={article.byline}
 													tags={article.tags}
 													primaryDateline={
@@ -543,9 +538,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 													shortUrlId={
 														article.config
 															.shortUrlId
-													}
-													ajaxUrl={
-														article.config.ajaxUrl
 													}
 												></ArticleMetaApps>
 											</Hide>
@@ -574,9 +566,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 														article.config
 															.shortUrlId
 													}
-													ajaxUrl={
-														article.config.ajaxUrl
-													}
 												/>
 											</Hide>
 										</>
@@ -603,7 +592,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											ajaxUrl={article.config.ajaxUrl}
 										/>
 									)}
 								</div>
@@ -842,7 +830,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>
@@ -880,10 +867,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={themePalette(
-								'--article-link-text-hover',
-							)}
-							borderColour={themePalette('--sub-nav-border')}
+							position="footer"
 						/>
 					</Island>
 				</Section>

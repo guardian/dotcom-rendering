@@ -27,9 +27,10 @@ const SEGMENT_GAP = 2;
 const TAU = Math.PI * 2;
 const QUARTER_TURN = TAU / 4;
 
-const unitStyles = css`
+const percentageStyles = css`
 	${headlineBold34}
 	text-anchor: middle;
+	fill: currentColor;
 `;
 
 const valueStyles = (background: string) => css`
@@ -166,7 +167,7 @@ export const Doughnut = ({
 					</text>
 				</g>
 			))}
-			<text css={unitStyles} dy="0.4em">
+			<text css={percentageStyles} dy="0.4em">
 				%
 			</text>
 		</svg>

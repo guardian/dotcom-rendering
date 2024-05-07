@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
+import { headlineLight17 } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
 const styles = css`
-	${headline.xxxsmall({ fontWeight: 'light' })}
+	${headlineLight17}
 `;
 
 interface Props {

@@ -22,7 +22,7 @@ export const FixedSmallSlowVHalf = ({
 
 	return (
 		<UL direction="row-reverse">
-			{firstSlice50.map((trail, index) => {
+			{firstSlice50.map((trail) => {
 				return (
 					<LI
 						key={trail.url}

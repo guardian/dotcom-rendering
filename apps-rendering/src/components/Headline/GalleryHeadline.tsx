@@ -3,7 +3,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headline, remSpace } from '@guardian/source-foundations';
+import {
+	from,
+	headlineBold34,
+	headlineBold50,
+	remSpace,
+} from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { background, text } from 'palette';
 import { darkModeCss } from 'styles';
@@ -11,7 +16,7 @@ import { darkModeCss } from 'styles';
 // ----- Component ----- //
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headlineBold34};
 	background-color: ${background.headline(format)};
 	color: ${text.headline(format)};
 	padding: ${remSpace[1]} ${remSpace[5]} ${remSpace[9]} 0;
@@ -28,7 +33,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	${from.desktop} {
-		${headline.xlarge({ fontWeight: 'bold' })}
+		${headlineBold50}
 		${grid.span('centre-column-start', 8)}
 		padding-top: 0;
 	}

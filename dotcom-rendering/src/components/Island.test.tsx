@@ -309,15 +309,7 @@ describe('Island: server-side rendering', () => {
 	test('MostViewedFooterData', () => {
 		expect(() =>
 			renderToString(
-				<MostViewedFooterData
-					ajaxUrl={''}
-					edition={'UK'}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-				/>,
+				<MostViewedFooterData ajaxUrl={''} edition={'UK'} />,
 			),
 		).not.toThrow();
 	});

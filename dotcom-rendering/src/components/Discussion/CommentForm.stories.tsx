@@ -77,7 +77,7 @@ export const Default = () => {
 		<CommentForm
 			shortUrl={shortUrl}
 			user={aUser}
-			onAddComment={(comment) => {}}
+			onAddComment={() => {}}
 			userNameMissing={false}
 			setUserNameMissing={() => {}}
 			error={''}
@@ -99,7 +99,7 @@ export const Error = () => {
 		<CommentForm
 			shortUrl={'/p/g8g7v'}
 			user={aUser}
-			onAddComment={(comment) => {}}
+			onAddComment={() => {}}
 			userNameMissing={userNameMissing}
 			setUserNameMissing={setUserNameMissing}
 			error={'Username field cannot be empty'}
@@ -118,7 +118,7 @@ export const Active = () => {
 		<CommentForm
 			shortUrl={shortUrl}
 			user={aUser}
-			onAddComment={(comment) => {}}
+			onAddComment={() => {}}
 			commentBeingRepliedTo={aComment}
 			error={''}
 			setError={() => {}}
@@ -157,7 +157,7 @@ export const Premoderated = () => {
 					},
 				},
 			}}
-			onAddComment={(comment) => {}}
+			onAddComment={() => {}}
 			commentBeingRepliedTo={aComment}
 			error={''}
 			setError={() => {}}
