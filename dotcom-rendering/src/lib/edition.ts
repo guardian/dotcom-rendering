@@ -1,9 +1,9 @@
 import { isOneOf } from '@guardian/libs';
-import type { Tuple } from './tuple';
+import { isTuple, type Tuple } from './tuple';
 
-export type EditionId = 'UK' | 'US' | 'AU' | 'INT' | 'EUR';
+type EditionId = 'UK' | 'US' | 'AU' | 'INT' | 'EUR';
 
-export type Edition = {
+type Edition = {
 	url: string;
 	editionId: EditionId;
 	pageId: string;
@@ -11,9 +11,10 @@ export type Edition = {
 	title: string;
 	dateLocale: string;
 	timeZone: string;
+	langLocale?: string;
 };
 
-export const editionList: Tuple<Edition, 5> = [
+const editionList: Tuple<Edition, 5> = [
 	{
 		url: '/preference/edition/uk',
 		editionId: 'UK',
@@ -22,6 +23,7 @@ export const editionList: Tuple<Edition, 5> = [
 		title: 'UK edition',
 		dateLocale: 'en-gb',
 		timeZone: 'Europe/London',
+		langLocale: 'en-GB',
 	},
 	{
 		url: '/preference/edition/us',
@@ -31,6 +33,7 @@ export const editionList: Tuple<Edition, 5> = [
 		title: 'US edition',
 		dateLocale: 'en-us',
 		timeZone: 'America/New_York',
+		langLocale: 'en-US',
 	},
 	{
 		url: '/preference/edition/au',
@@ -40,6 +43,7 @@ export const editionList: Tuple<Edition, 5> = [
 		title: 'AU edition',
 		dateLocale: 'en-au',
 		timeZone: 'Australia/Sydney',
+		langLocale: 'en-AU',
 	},
 	{
 		url: '/preference/edition/int',
@@ -49,6 +53,7 @@ export const editionList: Tuple<Edition, 5> = [
 		title: 'International edition',
 		dateLocale: 'en-gb',
 		timeZone: 'Europe/London',
+		langLocale: 'en',
 	},
 	{
 		url: '/preference/edition/eur',
@@ -63,7 +68,7 @@ export const editionList: Tuple<Edition, 5> = [
 
 const ukEdition = editionList[0];
 
-export const editionalisedPages = [
+const editionalisedPages = [
 	'business',
 	'business-to-business',
 	'commentisfree',
@@ -79,14 +84,14 @@ export const editionalisedPages = [
 	'tv-and-radio',
 ] as const;
 
-export const getEditionFromId = (editionId: EditionId): Edition => {
+const getEditionFromId = (editionId: EditionId): Edition => {
 	return (
 		editionList.find((edition) => edition.editionId === editionId) ??
 		ukEdition
 	);
 };
 
-export const getRemainingEditions = (editionId: EditionId): Edition[] => {
+const getRemainingEditions = (editionId: EditionId): Edition[] => {
 	return editionList.filter((edition) => edition.editionId !== editionId);
 };
 
@@ -95,6 +100,33 @@ export const getRemainingEditions = (editionId: EditionId): Edition[] => {
  *
  * @param s The string to test
  */
-export const isEditionId = isOneOf(
-	editionList.map(({ editionId }) => editionId),
-);
+const isEditionId = isOneOf(editionList.map(({ editionId }) => editionId));
+
+const isNetworkFront = (pageId: string): boolean =>
+	editionList.some((edition) => edition.pageId === pageId);
+
+const isEditionalisedPage = (pageId: string): boolean => {
+	const pageIdSplit = pageId.split('/');
+	if (!isTuple(pageIdSplit, 2)) {
+		return false;
+	}
+	const [networkId, pageIdSuffix] = pageIdSplit;
+	if (!isNetworkFront(networkId)) {
+		return false;
+	}
+	return editionalisedPages.some(
+		(editionalisedPage) => editionalisedPage === pageIdSuffix,
+	);
+};
+
+export {
+	EditionId,
+	Edition,
+	editionList,
+	editionalisedPages,
+	getEditionFromId,
+	getRemainingEditions,
+	isEditionId,
+	isEditionalisedPage,
+	isNetworkFront,
+};
