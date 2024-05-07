@@ -23,7 +23,7 @@ export const rootStyles = (
 			background: ${sourcePalette.neutral[100]};
 		}
 		/* Indicate whether UI can adapt https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme */
-		color-scheme: ${darkModeAvailable ? 'light dark' : 'only light'};
+		color-scheme: ${darkModeAvailable ? 'light dark' : 'light'};
 		/* Dark palette only if supported */
 		${darkModeAvailable
 			? css`
