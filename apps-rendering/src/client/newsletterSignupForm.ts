@@ -14,10 +14,10 @@ interface FormBundle {
 }
 
 // ----- Constants ----- //
-const SIGNUP_CONTAINER_CLASSNAME = 'js-signup-form-container' as const;
-const FALLBACK_CONTENT_CLASSNAME = 'js-signup-form-fallback-container' as const;
-const LOADING_CONTENT_CLASSNAME = 'js-signup-form-loading-content' as const;
-const SIGNUP_COMPONENT_BASE_CLASSNAME = 'js-signup-form' as const;
+const SIGNUP_CONTAINER_CLASSNAME = 'js-signup-form-container';
+const FALLBACK_CONTENT_CLASSNAME = 'js-signup-form-fallback-container';
+const LOADING_CONTENT_CLASSNAME = 'js-signup-form-loading-content';
+const SIGNUP_COMPONENT_BASE_CLASSNAME = 'js-signup-form';
 const MODIFIER_CLASSNAME = {
 	waiting: `${SIGNUP_COMPONENT_BASE_CLASSNAME}--waiting`,
 	success: `${SIGNUP_COMPONENT_BASE_CLASSNAME}--success`,

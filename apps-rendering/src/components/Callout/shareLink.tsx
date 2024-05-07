@@ -21,7 +21,9 @@ export const ShareLink: FC<{
 	const onShare = async (): Promise<void> => {
 		const url = window.location.href;
 		let shareTitle = `Share your experience`;
-		if (title) shareTitle += `: ${title}`;
+		if (title) {
+			shareTitle += `: ${title}`;
+		}
 
 		const shareText = `
 I saw this callout in an article: ${url}#${urlAnchor}

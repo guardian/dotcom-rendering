@@ -114,8 +114,12 @@ const TweetStyles = css`
 `;
 
 const allowsDropCaps = (format: ArticleFormat): boolean => {
-	if (format.theme === ArticleSpecial.Labs) return false;
-	if (format.display === ArticleDisplay.Immersive) return true;
+	if (format.theme === ArticleSpecial.Labs) {
+		return false;
+	}
+	if (format.display === ArticleDisplay.Immersive) {
+		return true;
+	}
 	switch (format.design) {
 		case ArticleDesign.Feature:
 		case ArticleDesign.Comment:
@@ -392,7 +396,9 @@ const calloutDescriptionText = (
 	format: ArticleFormat,
 	doc?: DocumentFragment,
 ): ReactNode[] => {
-	if (!doc) return [];
+	if (!doc) {
+		return [];
+	}
 	const nodes = Array.from(doc.childNodes);
 	const filteredNodes = nodes.filter(
 		(node) => !['A'].includes(node.nodeName),

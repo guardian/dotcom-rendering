@@ -80,7 +80,9 @@ function followToggle(
 	bridgetClient: NotificationsClient<void> | TagClient<void>,
 ): void {
 	const followStatus = document.querySelector(querySelector);
-	if (!followStatus) return;
+	if (!followStatus) {
+		return;
+	}
 	void bridgetClient.isFollowing(topic).then((isFollowing) => {
 		if (isFollowing) {
 			void bridgetClient.unfollow(topic).then((unfollow) => {

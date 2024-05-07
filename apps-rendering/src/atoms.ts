@@ -19,9 +19,13 @@ interface TimelineEvent {
 }
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
-	if (date === undefined) return undefined;
+	if (date === undefined) {
+		return undefined;
+	}
 	const d = new Date(date.toNumber());
-	if (!isValidDate(d)) return undefined;
+	if (!isValidDate(d)) {
+		return undefined;
+	}
 	return d.toDateString();
 }
 

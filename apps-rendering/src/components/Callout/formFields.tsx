@@ -63,7 +63,9 @@ export const FormField: FC<FormFieldProp> = ({
 		);
 	}
 
-	if (formField.hidden) return <input type="hidden" />;
+	if (formField.hidden) {
+		return <input type="hidden" />;
+	}
 
 	switch (type) {
 		case 'text':
