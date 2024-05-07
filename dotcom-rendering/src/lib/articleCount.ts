@@ -39,12 +39,9 @@ export const getArticleCounts = async (
 	// This is because a potential race condition where one invocation of getArticleCounts
 	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
 
-	const keywordAndToneTagIds: string[] = tags.flatMap((tag) =>
-		tag?.type.toLowerCase() === 'tone' ||
-		tag?.type.toLowerCase() === 'keyword'
-			? tag.id
-			: [],
-	);
+	const keywordAndToneTagIds: string[] = tags
+		.filter((tag) => ['tone', 'keyword'].includes(tag.type.toLowerCase()))
+		.map((tag) => tag.id);
 
 	if (!window.guardian.weeklyArticleCount) {
 		if (shouldIncrement) {
