@@ -18,7 +18,7 @@ export const addTrackingCodesToUrl = ({
 	componentId,
 	campaignCode,
 	abTest,
-	pageViewId = '',
+	pageViewId,
 	referrerUrl,
 }: AcquisitionLinkParams): string => {
 	const isSupportUrl =
