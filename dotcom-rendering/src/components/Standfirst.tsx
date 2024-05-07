@@ -10,6 +10,7 @@ import {
 	textSans,
 	textSans17,
 	textSans20,
+	textSans24,
 } from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -70,13 +71,22 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
-const decideFont = ({ display, design }: ArticleFormat) => {
+const decideFont = ({ display, design, theme }: ArticleFormat) => {
+	const isLabs = theme === ArticleSpecial.Labs;
 	switch (design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial: {
 			switch (display) {
 				case ArticleDisplay.Immersive:
+					if (isLabs) {
+						return css`
+							${textSans20};
+							${from.tablet} {
+								${textSans24};
+							}
+						`;
+					}
 					return css`
 						${headlineMedium20};
 						${from.tablet} {
@@ -84,33 +94,60 @@ const decideFont = ({ display, design }: ArticleFormat) => {
 						}
 					`;
 				case ArticleDisplay.Showcase:
-				default:
+				default: {
+					if (isLabs) {
+						return css`
+							${textSans17};
+							${from.tablet} {
+								${textSans20};
+							}
+						`;
+					}
 					return css`
 						${headlineMedium17};
 						${from.tablet} {
 							${headlineMedium20};
 						}
 					`;
+				}
 			}
 		}
 		default: {
 			switch (display) {
-				case ArticleDisplay.Immersive:
+				case ArticleDisplay.Immersive: {
+					if (isLabs) {
+						return css`
+							${textSans20};
+							${from.tablet} {
+								${textSans24};
+							}
+						`;
+					}
 					return css`
 						${headlineMedium20};
 						${from.tablet} {
 							${headlineMedium24};
 						}
 					`;
+				}
 				case ArticleDisplay.Showcase:
-				default:
+				default: {
+					if (isLabs) {
+						return css`
+							${textSans17};
+							${from.tablet} {
+								${textSans20};
+							}
+						`;
+					}
 					return css`
-						${headlineMedium20};
+						${headlineMedium17};
 
 						${from.tablet} {
-							${headlineMedium17};
+							${headlineMedium20};
 						}
 					`;
+				}
 			}
 		}
 	}
@@ -173,14 +210,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 		case ArticleDisplay.Immersive:
 			switch (design) {
 				case ArticleDesign.PhotoEssay:
-					if (theme === ArticleSpecial.Labs) {
-						return css`
-							${textSans20};
-							line-height: 22px;
-							max-width: 540px;
-							color: ${palette('--standfirst-text')};
-						`;
-					}
 					return css`
 						line-height: 22px;
 						max-width: 540px;
@@ -188,10 +217,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					`;
 				default:
 					return css`
-						${theme === ArticleSpecial.Labs
-							? textSans17
-							: headlineLight24};
-
 						max-width: 280px;
 						${from.tablet} {
 							max-width: 460px;
@@ -253,7 +278,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 					switch (theme) {
 						case ArticleSpecial.Labs:
 							return css`
-								${textSans.medium({ lineHeight: 'tight' })}
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
 								a {
