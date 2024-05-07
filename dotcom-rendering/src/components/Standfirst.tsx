@@ -2,12 +2,10 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
-	headlineLight24,
 	headlineMedium17,
 	headlineMedium20,
 	headlineMedium24,
 	space,
-	textSans,
 	textSans17,
 	textSans20,
 	textSans24,
