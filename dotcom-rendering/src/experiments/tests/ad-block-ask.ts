@@ -6,7 +6,7 @@ export const adBlockAsk: ABTest = {
 	start: '2024-04-10',
 	expiry: '2024-05-31',
 	audience: 10 / 100,
-	audienceOffset: 0 / 100,
+	audienceOffset: 10 / 100,
 	audienceCriteria: '',
 	successMeasure: '',
 	description:
