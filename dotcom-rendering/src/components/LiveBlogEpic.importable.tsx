@@ -87,7 +87,6 @@ const usePayload = ({
 	isPaidContent,
 	tags,
 	pageId,
-	keywordIds,
 }: {
 	shouldHideReaderRevenue: boolean;
 	sectionId: string;

@@ -135,7 +135,6 @@ export const SlotBodyEnd = ({
 	idApiUrl,
 	stage,
 	pageId,
-	keywordIds,
 	renderAds,
 	isLabs,
 	articleEndSlot,

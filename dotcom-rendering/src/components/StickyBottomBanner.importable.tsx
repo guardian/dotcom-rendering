@@ -217,7 +217,6 @@ export const StickyBottomBanner = ({
 	contributionsServiceUrl,
 	idApiUrl,
 	pageId,
-	keywordIds,
 	remoteBannerSwitch,
 }: Props & {
 	remoteBannerSwitch: boolean;
