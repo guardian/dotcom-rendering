@@ -94,7 +94,7 @@ export const useAdblockAsk = ({
 	useEffect(() => {
 		onConsentChange((consentState) => {
 			if (consentState.tcfv2) {
-				setHasConsentForGoogletag(
+				return setHasConsentForGoogletag(
 					getConsentFor('googletag', consentState),
 				);
 			}
