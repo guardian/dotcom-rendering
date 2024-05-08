@@ -58,6 +58,7 @@ module.exports = {
 		es6: true,
 		node: true,
 	},
+	ignorePatterns: ['src/static/js/curl-with-js-and-domReady.js'],
 	extends: [
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
@@ -129,6 +130,9 @@ module.exports = {
 		'custom-elements/file-name-matches-element': 'error',
 
 		'object-shorthand': ['error', 'always'],
+
+		// need to be explicitely added because it is disabled by extending `prettier`
+		curly: ['error', 'multi-line', 'consistent'],
 
 		/** @see https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-for-each.md */
 		'unicorn/no-array-for-each': 'error',

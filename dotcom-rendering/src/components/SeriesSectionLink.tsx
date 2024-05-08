@@ -3,8 +3,12 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	headline,
+	headlineBold17,
+	headlineBold20,
 	space,
-	textSans,
+	textSans17,
+	textSans20,
+	textSansBold20,
 	until,
 } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -92,7 +96,7 @@ const fontStyles = (format: ArticleFormat) => {
 			switch (format.display) {
 				case ArticleDisplay.Immersive:
 					return css`
-						${textSans.large({ fontWeight: 'bold' })}
+						${textSansBold20};
 						line-height: 23px;
 						${from.leftCol} {
 							line-height: 20px;
@@ -100,7 +104,7 @@ const fontStyles = (format: ArticleFormat) => {
 					`;
 				default:
 					return css`
-						${textSans.large()}
+						${textSans20};
 						line-height: 23px;
 						${from.leftCol} {
 							line-height: 20px;
@@ -109,9 +113,9 @@ const fontStyles = (format: ArticleFormat) => {
 			}
 		default:
 			return css`
-				${headline.xxxsmall({ fontWeight: 'bold' })}
+				${headlineBold17}
 				${from.wide} {
-					${headline.xxsmall({ fontWeight: 'bold' })}
+					${headlineBold20}
 				}
 			`;
 	}
@@ -120,7 +124,7 @@ const fontStyles = (format: ArticleFormat) => {
 const secondaryFontStyles = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
-			${textSans.medium({ fontWeight: 'regular' })}
+			${textSans17}
 		`;
 	}
 	return css`
@@ -290,7 +294,7 @@ export const SeriesSectionLink = ({
 					);
 				}
 				default: {
-					if (hasSeriesTag || isLabs) {
+					if (!!hasSeriesTag || isLabs) {
 						const title = tag?.title ? tag.title : sectionLabel;
 						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (

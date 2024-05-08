@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import {
 	brandText,
 	from,
-	headline,
+	headlineMedium17,
 	palette,
 	until,
 	visuallyHidden,
@@ -82,7 +82,7 @@ const pillarLinkStyle = (pillar: ArticleTheme) => css`
 	text-decoration: none;
 	cursor: pointer;
 	display: block;
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	height: 36px;
 	padding: 9px 4px;
 	color: ${palette.neutral[100]};

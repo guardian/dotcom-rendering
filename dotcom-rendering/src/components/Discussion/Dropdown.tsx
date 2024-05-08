@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from, textSans, until } from '@guardian/source-foundations';
+import {
+	from,
+	textSans,
+	textSans15,
+	textSansBold15,
+	until,
+} from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { DropdownOptionType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
@@ -43,7 +49,7 @@ const ulExpanded = css`
 `;
 
 const linkStyles = (disabled: boolean) => css`
-	${textSans.small()};
+	${textSans15};
 	text-align: left;
 	color: ${disabled
 		? schemedPalette('--discussion-text')
@@ -139,7 +145,7 @@ const expandedStyles = css`
 `;
 
 const labelStyles = css`
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 	color: ${schemedPalette('--discussion-subdued')};
 `;
 

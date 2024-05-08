@@ -1,7 +1,14 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { body, palette, space, textSans } from '@guardian/source-foundations';
+import {
+	article17,
+	palette,
+	space,
+	textSans17,
+	textSansBold17,
+	textSansBold34,
+} from '@guardian/source-foundations';
 import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
 import { Fragment, useEffect, useState } from 'react';
 import type {
@@ -64,7 +71,6 @@ export const KnowledgeQuizAtom = ({
 						imageUrl={question.imageUrl}
 						imageAlt={question.imageAlt}
 						answers={question.answers}
-						quizSelection={quizSelection}
 						setQuizSelection={setQuizSelection}
 						theme={theme}
 					/>
@@ -90,12 +96,10 @@ export const Question = ({
 	imageAlt,
 	answers,
 	number,
-	quizSelection,
 	setQuizSelection,
 	theme,
 }: QuestionType & {
 	number: number;
-	quizSelection: QuizSelectionType;
 	setQuizSelection: React.Dispatch<React.SetStateAction<QuizSelectionType>>;
 	theme: ArticleTheme;
 }) => {
@@ -121,9 +125,7 @@ export const Question = ({
 	return (
 		<li
 			css={css`
-				${theme === ArticleSpecial.Labs
-					? textSans.medium()
-					: body.medium()};
+				${theme === ArticleSpecial.Labs ? textSans17 : article17}
 			`}
 		>
 			<fieldset css={fieldsetStyle}>
@@ -298,18 +300,18 @@ const resultWrapperStyles = css`
 `;
 
 const resultDescriptionStyles = css`
-	${textSans.medium()}
+	${textSans17}
 	display: flex;
 	flex-direction: column;
 `;
 
 const resultsNumberStyles = css`
-	${textSans.xxxlarge({ fontWeight: 'bold' })}
+	${textSansBold34}
 	color: ${palette.brand[400]};
 `;
 
 const resultHeaderStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 	color: ${palette.neutral[20]};
 	padding-bottom: ${space[1]}px;
 `;

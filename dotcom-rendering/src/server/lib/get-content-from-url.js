@@ -1,5 +1,3 @@
-const { URLSearchParams } = require('node:url');
-
 /** @type {(_: [string, unknown]) => _ is [string, string]} */
 const isStringTuple = (_) => typeof _[1] === 'string';
 
@@ -30,13 +28,15 @@ async function getContentFromURL(url, _headers) {
 	);
 
 	// pick all the keys from the JSON except `html`
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we don't want `html` in the config
 	const { html, ...config } = await fetch(jsonUrl, { headers })
 		.then((response) => response.json())
 		.catch((error) => {
-			if (error?.type === 'invalid-json')
+			if (error?.type === 'invalid-json') {
 				throw new Error(
 					'Did not receive JSON response - are you sure this URL supports .json?dcr requests?',
 				);
+			}
 			throw error;
 		});
 

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type {
 	AdditionalHeadersType,
@@ -34,7 +34,6 @@ type Props = {
 	expanded: boolean;
 	onPermalinkClick: (commentId: string) => void;
 	apiKey: string;
-	onRecommend?: (commentId: string) => Promise<boolean>;
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
@@ -77,7 +76,7 @@ const NoComments = () => (
 	<div
 		css={css`
 			color: ${schemedPalette('--discussion-subdued')};
-			${textSans.small()}
+			${textSans15}
 			padding-top: ${space[5]}px;
 			padding-left: ${space[1]}px;
 			padding-bottom: ${space[9]}px;
@@ -113,7 +112,6 @@ export const Comments = ({
 	expanded,
 	onPermalinkClick,
 	apiKey,
-	onRecommend,
 	onPreview,
 	idApiUrl,
 	page,

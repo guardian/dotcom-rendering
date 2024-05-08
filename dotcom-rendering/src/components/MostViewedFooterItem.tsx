@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { headline, until } from '@guardian/source-foundations';
+import { headlineMedium17, until } from '@guardian/source-foundations';
 import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber';
@@ -66,7 +66,7 @@ const headlineLink = css`
 	text-decoration: none;
 	color: ${palette('--article-text')};
 	font-weight: 500;
-	${headline.xxxsmall()};
+	${headlineMedium17};
 
 	display: block; /* To ensure focus outline works okay */
 `;

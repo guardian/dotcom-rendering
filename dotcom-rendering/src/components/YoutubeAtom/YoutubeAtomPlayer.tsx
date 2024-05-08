@@ -152,8 +152,9 @@ const createOnStateChangeListener =
 					msg: 'resume',
 					event,
 				});
-				for (const eventEmitter of eventEmitters)
+				for (const eventEmitter of eventEmitters) {
 					eventEmitter('resume');
+				}
 			}
 
 			const checkProgress = () => {
@@ -171,8 +172,9 @@ const createOnStateChangeListener =
 						msg: 'played 25%',
 						event,
 					});
-					for (const eventEmitter of eventEmitters)
+					for (const eventEmitter of eventEmitters) {
 						eventEmitter('25');
+					}
 					progressEvents.hasSent25Event = true;
 				}
 
@@ -183,8 +185,9 @@ const createOnStateChangeListener =
 						msg: 'played 50%',
 						event,
 					});
-					for (const eventEmitter of eventEmitters)
+					for (const eventEmitter of eventEmitters) {
 						eventEmitter('50');
+					}
 					progressEvents.hasSent50Event = true;
 				}
 
@@ -195,8 +198,9 @@ const createOnStateChangeListener =
 						msg: 'played 75%',
 						event,
 					});
-					for (const eventEmitter of eventEmitters)
+					for (const eventEmitter of eventEmitters) {
 						eventEmitter('75');
+					}
 					progressEvents.hasSent75Event = true;
 				}
 
@@ -408,7 +412,7 @@ export const YoutubeAtomPlayer = ({
 				});
 
 				const adsConfig: AdsConfig =
-					adTargeting.disableAds || enableIma
+					!!adTargeting.disableAds || enableIma
 						? disabledAds
 						: buildAdsConfigWithConsent({
 								adUnit: adTargeting.adUnit,
@@ -485,10 +489,7 @@ export const YoutubeAtomPlayer = ({
 							const playerStatePromise =
 								player.current?.getPlayerState();
 							void playerStatePromise?.then((playerState) => {
-								if (
-									playerState &&
-									playerState === YT.PlayerState.PLAYING
-								) {
+								if (playerState === YT.PlayerState.PLAYING) {
 									void player.current?.pauseVideo();
 								}
 							});

@@ -5,8 +5,11 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
-import { textSans } from '@guardian/source-foundations';
+import {
+	palette,
+	textSans17,
+	textSansBold17,
+} from '@guardian/source-foundations';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
@@ -26,15 +29,15 @@ const rootStyles = css`
 `;
 
 const totalCountStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const soFarCountStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const countLabelStyles = css`
-	${textSans.medium()}
+	${textSans17}
 `;
 
 const progressBarHeight = 10;
@@ -152,8 +155,7 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	const runningTotal = useTicker(total, readyToAnimate);
 
 	const goalReached = total >= goal;
-	const currencySymbol =
-		settings.countType === 'money' ? settings.currencySymbol : '';
+	const currencySymbol = settings.currencySymbol;
 
 	// If we've exceeded the goal then extend the bar 15% beyond the total
 	const end = total > goal ? total + total * 0.15 : goal;

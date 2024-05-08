@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { textSans } from '@guardian/source-foundations';
+import { textSans, textSansBold12 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { text } from 'palette';
 import type { FC } from 'react';
@@ -20,7 +20,7 @@ const termsStyle = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
 	color: ${text.privacyMessage(format)};
 	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })};
+		${textSansBold12};
 		color: ${text.newsletterSignUpForm(format)};
 		text-decoration: underline;
 		:hover {

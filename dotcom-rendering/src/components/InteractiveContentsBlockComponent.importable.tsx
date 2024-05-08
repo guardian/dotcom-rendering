@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold17,
+	headlineBold20,
+	headlineBold34,
+	headlineLight20,
 	palette as sourcePalette,
 	space,
 	until,
@@ -33,7 +36,7 @@ const borderRightStyles = css`
 
 const linkStyles = css`
 	display: flex;
-	${headline.xxsmall({ fontWeight: 'light' })}
+	${headlineLight20}
 
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
@@ -47,11 +50,11 @@ const linkStyles = css`
 
 const numberStyles = css`
 	padding-right: ${space[2]}px;
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 `;
 
 const headerStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headlineBold34}
 	padding-left: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 `;
@@ -105,10 +108,10 @@ const stickyNavCurrentHeaderStyles = css`
 
 	display: flex;
 	align-items: center;
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 
 	${until.mobileLandscape} {
-		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${headlineBold17}
 	}
 	position: fixed;
 
@@ -189,8 +192,9 @@ export const InteractiveContentsBlockComponent = ({
 					  )
 					: undefined;
 
-				if (endElement?.isIntersecting)
+				if (endElement?.isIntersecting) {
 					return setStickyNavCurrentHeader(null);
+				}
 
 				// Check if the current element is in this update
 				const currentElement = entries.find(
@@ -216,12 +220,13 @@ export const InteractiveContentsBlockComponent = ({
 
 				// Check for entry of new element
 				const element = entries.find((entry) => entry.isIntersecting);
-				if (element?.target.id)
+				if (element?.target.id) {
 					return setStickyNavCurrentHeader(
 						enhancedSubheadings[
 							getSubheadingIndexById(element.target.id)
 						] ?? null,
 					);
+				}
 
 				// Check if we're scrolling up past the end of the document and set sticky nav to the last element
 				const [lastElement] = enhancedSubheadings.slice(-1);
@@ -240,8 +245,9 @@ export const InteractiveContentsBlockComponent = ({
 				rootMargin: `0px 0px -100% 0px`,
 			});
 
-			for (const item of enhancedSubheadings)
+			for (const item of enhancedSubheadings) {
 				item.ref && observer.observe(item.ref);
+			}
 
 			if (endDocumentElementId) {
 				const endDocumentRef =
@@ -265,9 +271,7 @@ export const InteractiveContentsBlockComponent = ({
 			css={wrapperStyles}
 			style={height !== undefined ? { height } : {}}
 		>
-			<h2 css={headerStyles} data-ignore="global-h2-styling">
-				Contents
-			</h2>
+			<h2 css={headerStyles}>Contents</h2>
 			{/* only show sticky nav header if defined */}
 			{stickyNavCurrentHeader && (
 				<button

@@ -1,5 +1,7 @@
 import { EventTimer } from '@guardian/commercial';
+import { getConsentFor, onConsentChange } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { adFreeDataIsPresent } from '../client/userFeatures/user-features-lib';
 import { useAB } from './useAB';
 
 const useIsInAdBlockAskVariant = (): boolean => {
@@ -69,9 +71,40 @@ const detectByRequests = async () => {
 	return !doubleclickSuccess && guardianSuccess;
 };
 
-export const useAdblockAsk = (slotId: string): boolean => {
+export const useAdblockAsk = ({
+	slotId,
+	shouldHideReaderRevenue,
+	isPaidContent,
+}: {
+	slotId: `dfp-ad--${string}`;
+	shouldHideReaderRevenue: boolean;
+	isPaidContent: boolean;
+}): boolean => {
 	const isInVariant = useIsInAdBlockAskVariant();
 	const [adBlockerDetected, setAdBlockerDetected] = useState<boolean>(false);
+	const [isAdFree, setIsAdFree] = useState<boolean>(false);
+	const [hasConsentForGoogletag, setHasConsentForGoogletag] = useState(false);
+
+	const canDisplayAdBlockAsk =
+		!shouldHideReaderRevenue &&
+		!isPaidContent &&
+		!isAdFree &&
+		hasConsentForGoogletag;
+
+	useEffect(() => {
+		onConsentChange((consentState) => {
+			if (consentState.tcfv2) {
+				return setHasConsentForGoogletag(
+					getConsentFor('googletag', consentState),
+				);
+			}
+			setHasConsentForGoogletag(true);
+		});
+	}, []);
+
+	useEffect(() => {
+		setIsAdFree(adFreeDataIsPresent());
+	}, []);
 
 	useEffect(() => {
 		const makeRequest = async () => {
@@ -80,7 +113,9 @@ export const useAdblockAsk = (slotId: string): boolean => {
 				isInVariant &&
 				// Once we've detected an ad-blocker, we don't care about subsequent detections
 				!adBlockerDetected &&
-				// Attempt to detect ad-blocker
+				// Is the reader/content eligible for displaying such a message
+				canDisplayAdBlockAsk &&
+				// Actually perform the detection
 				(await detectByRequests())
 			) {
 				setAdBlockerDetected(true);
@@ -98,7 +133,7 @@ export const useAdblockAsk = (slotId: string): boolean => {
 			}
 		};
 		void makeRequest();
-	}, [isInVariant, adBlockerDetected, slotId]);
+	}, [isInVariant, adBlockerDetected, slotId, canDisplayAdBlockAsk]);
 
 	return adBlockerDetected;
 };

@@ -50,8 +50,9 @@ const decidePresentationFormat = ({
 		containerFormat.design === ArticleDesign.Video ||
 		containerFormat.theme === ArticleSpecial.SpecialReport ||
 		containerFormat.design === ArticleDesign.Analysis
-	)
+	) {
 		return containerFormat;
+	}
 
 	// These types of link format designs mean the headline could render
 	// poorly (e.g.: white) so we use the container format
@@ -61,8 +62,9 @@ const decidePresentationFormat = ({
 		linkFormat.design === ArticleDesign.Audio ||
 		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Video
-	)
+	) {
 		return { ...containerFormat, theme: Pillar.News };
+	}
 
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
@@ -289,7 +291,7 @@ export const enhanceCards = (
 	}: {
 		cardInTagPage: boolean;
 		offset?: number;
-		editionId?: EditionId;
+		editionId: EditionId;
 		containerPalette?: DCRContainerPalette;
 		pageId?: string;
 		discussionApiUrl: string;

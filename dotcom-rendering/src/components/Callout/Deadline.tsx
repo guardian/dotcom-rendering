@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans12 } from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
 import { palette } from '../../palette';
 
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const deadlineStyles = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	color: ${palette('--callout-highlight-text')};
 	background-color: ${palette('--callout-highlight-background')};
 	right: 0;

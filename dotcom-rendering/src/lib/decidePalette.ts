@@ -40,8 +40,9 @@ const textStandfirst = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog
-	)
+	) {
 		return palette.specialReportAlt[100];
+	}
 
 	return BLACK;
 };
@@ -73,14 +74,17 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 		}
 	}
 
-	if (format.design === ArticleDesign.Picture)
+	if (format.design === ArticleDesign.Picture) {
 		return pillarPalette[format.theme].bright;
+	}
 
-	if (format.theme === ArticleSpecial.SpecialReport)
+	if (format.theme === ArticleSpecial.SpecialReport) {
 		return specialReport[400];
+	}
 
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return palette.specialReportAlt[100];
+	}
 
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -97,8 +101,9 @@ const textCricketScoreboardLink = (): string => {
 
 const backgroundBullet = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
+	if (format.theme === ArticleSpecial.SpecialReport) {
 		return specialReport[300];
+	}
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case Pillar.News:
@@ -139,8 +144,9 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 		}
 	}
 
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return palette.specialReportAlt[100];
+	}
 
 	return neutral[86]; // default previously defined in Standfirst.tsx
 };
@@ -261,11 +267,13 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 				return news[600];
 		}
 	}
-	if (format.theme === ArticleSpecial.SpecialReport)
+	if (format.theme === ArticleSpecial.SpecialReport) {
 		return specialReport[400];
+	}
 
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return transparentColour(neutral[60], 0.3);
+	}
 
 	return palette.neutral[86];
 };
@@ -352,17 +360,20 @@ const borderLines = (format: ArticleFormat): string => {
 		format.theme === ArticleSpecial.SpecialReport &&
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
-	)
+	) {
 		return neutral[46];
+	}
 
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
-	)
+	) {
 		return transparentColour(neutral[60], 0.3);
-	if (format.design === ArticleDesign.Picture)
+	}
+	if (format.design === ArticleDesign.Picture) {
 		return transparentColour(neutral[60], 0.5);
+	}
 
 	return neutral[86];
 };
@@ -404,8 +415,9 @@ const backgroundMessageForm = (format: ArticleFormat): string => {
 const textBetaLabel = (): string => neutral[46];
 
 const textDesignTag = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return palette.specialReportAlt[800];
+	}
 
 	return neutral[100];
 };
@@ -415,8 +427,9 @@ const textDateLine = (format: ArticleFormat): string => {
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog &&
 		format.design !== ArticleDesign.LiveBlog
-	)
+	) {
 		return palette.specialReportAlt[100];
+	}
 
 	return neutral[46];
 };
@@ -537,8 +550,7 @@ const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	}
 };
 
-const backgroundDynamoSublink = (_format: ArticleFormat): string =>
-	palette.neutral[97];
+const backgroundDynamoSublink = (): string => palette.neutral[97];
 
 export const decidePalette = (
 	format: ArticleFormat,
@@ -580,7 +592,7 @@ export const decidePalette = (
 			messageForm: backgroundMessageForm(format),
 			dynamoSublink:
 				overrides?.background.dynamoSublink ??
-				backgroundDynamoSublink(format),
+				backgroundDynamoSublink(),
 		},
 		fill: {
 			guardianLogo: fillGuardianLogo(format),

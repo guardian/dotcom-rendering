@@ -99,8 +99,9 @@ export const extractTrendingTopicsFomFront = (
 	for (const card of collections.flatMap((collection) => [
 		...collection.curated,
 		...collection.backfill,
-	]))
+	])) {
 		trails.set(card.properties.maybeContentId ?? card.card.id, card);
+	}
 
 	return extractTrendingTopics([...trails.values()], pageId);
 };

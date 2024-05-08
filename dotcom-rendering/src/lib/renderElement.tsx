@@ -90,6 +90,7 @@ type Props = {
 	forceDropCap?: 'on' | 'off';
 	isTimeline?: boolean;
 	totalElements?: number;
+	isListElement?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -148,6 +149,7 @@ export const renderElement = ({
 	forceDropCap,
 	isTimeline = false,
 	totalElements = 0,
+	isListElement = false,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -163,7 +165,6 @@ export const renderElement = ({
 						kicker={element.kicker}
 						title={element.title}
 						duration={element.duration}
-						format={format}
 						contentIsNotSensitive={!isSensitive}
 						aCastisEnabled={!!switches.acast}
 						readerCanBeShownAds={!isAdFreeUser}
@@ -490,7 +491,7 @@ export const renderElement = ({
 				successDescription: element.newsletter.successDescription,
 				theme: element.newsletter.theme,
 			};
-
+			if (isListElement || isTimeline) return null;
 			return <EmailSignUpWrapper {...emailSignUpProps} />;
 		case 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement':
 			return <AdPlaceholder />;
@@ -499,7 +500,6 @@ export const renderElement = ({
 				<NumberedTitleBlockComponent
 					position={element.position}
 					html={element.html}
-					format={format}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
@@ -625,7 +625,13 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-			return <SubheadingBlockComponent key={index} html={element.html} />;
+			return (
+				<SubheadingBlockComponent
+					key={index}
+					format={format}
+					html={element.html}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.TableBlockElement':
 			return <TableBlockComponent element={element} />;
 
@@ -636,11 +642,7 @@ export const renderElement = ({
 					isFirstParagraph={index === 0}
 					html={element.html}
 					format={format}
-					forceDropCap={
-						forceDropCap !== undefined
-							? forceDropCap
-							: element.dropCap
-					}
+					forceDropCap={forceDropCap ?? element.dropCap}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.TimelineAtomBlockElement':
@@ -664,7 +666,6 @@ export const renderElement = ({
 						ajaxUrl,
 						editionId,
 						isAdFreeUser,
-						isMainMedia,
 						isSensitive,
 						pageId,
 						switches,
@@ -871,6 +872,7 @@ export const RenderArticleElement = ({
 	forceDropCap,
 	isTimeline,
 	totalElements,
+	isListElement,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -894,6 +896,7 @@ export const RenderArticleElement = ({
 		forceDropCap,
 		isTimeline,
 		totalElements,
+		isListElement,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
@@ -927,7 +930,9 @@ type ElementLevelPropNames =
 	| 'forceDropCap'
 	| 'hideCaption'
 	| 'format'
-	| 'isTimeline';
+	| 'isTimeline'
+	| 'isListElement'
+	| 'isMainMedia';
 type ArticleLevelProps = Omit<Props, ElementLevelPropNames>;
 type ElementLevelProps = Pick<Props, ElementLevelPropNames>;
 

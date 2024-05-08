@@ -33,7 +33,7 @@ const decideButtonText = ({
 	title: string;
 }) => {
 	if (isOpen && loading) return <>Loading</>;
-	if (isOpen)
+	if (isOpen) {
 		return (
 			<>
 				Less{' '}
@@ -47,6 +47,7 @@ const decideButtonText = ({
 				</span>
 			</>
 		);
+	}
 	return <>More {title}</>;
 };
 
@@ -69,7 +70,7 @@ type Props = {
 	sectionId: string;
 	showAge: boolean;
 	ajaxUrl: string;
-	editionId?: EditionId;
+	editionId: EditionId;
 	containerPalette?: DCRContainerPalette;
 	discussionApiUrl: string;
 };

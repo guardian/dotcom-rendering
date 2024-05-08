@@ -8,7 +8,7 @@ import {
 	from,
 	neutral,
 	remSpace,
-	textSans,
+	textSans15,
 } from '@guardian/source-foundations';
 import FooterContent from 'components/FooterContent';
 import { background } from 'palette';
@@ -19,7 +19,7 @@ import { darkModeCss } from 'styles';
 
 const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-width: 0 1px;
-	${textSans.small({ lineHeight: 'regular' })};
+	${textSans15};
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: ${remSpace[3]};
@@ -34,7 +34,7 @@ const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	a {
-		${textSans.small({ lineHeight: 'regular' })};
+		${textSans15};
 		color: ${neutral[7]};
 		text-decoration: underline;
 	}

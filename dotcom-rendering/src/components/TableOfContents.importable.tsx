@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
-import { headline, space, textSans } from '@guardian/source-foundations';
+import { headline, space, textSans14 } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -90,7 +90,7 @@ const summaryStyles = css`
 `;
 
 const titleStyle = css`
-	${textSans.xsmall({ lineHeight: 'regular' })}
+	${textSans14}
 	color:${palette('--table-of-contents')};
 `;
 

@@ -5,7 +5,10 @@ import {
 	from,
 	palette,
 	palette as sourcePalette,
-	textSans,
+	textSans12,
+	textSans14,
+	textSans15,
+	textSans17,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
@@ -84,7 +87,7 @@ const displayNone = css`
 `;
 
 const linkStyles = css`
-	${textSans.small()};
+	${textSans15};
 	color: ${sourcePalette.neutral[7]};
 	transition: color 80ms ease-out;
 	margin: -1px 0 0 0;
@@ -138,7 +141,7 @@ const linkFirst = css`
 `;
 
 const buttonStyles = css`
-	${textSans.medium()};
+	${textSans17};
 	display: block;
 	cursor: pointer;
 	background: none;
@@ -193,7 +196,7 @@ const notificationBadgeStyles = css`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	${textSans.xsmall()};
+	${textSans14};
 	line-height: 1;
 	flex-shrink: 0;
 `;
@@ -207,7 +210,7 @@ const dropdownButtonNotificationBadgeStyles = css`
 `;
 
 const notificationTextStyles = css`
-	${textSans.xxsmall()};
+	${textSans12};
 `;
 
 const buildOphanComponentWithNotifications = (

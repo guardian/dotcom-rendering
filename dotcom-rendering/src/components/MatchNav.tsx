@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import {
 	background,
-	headline,
-	palette,
+	headlineBold20,
 	space,
-	textSans,
+	textSans15,
 	until,
 } from '@guardian/source-foundations';
 import { Score } from './Score';
@@ -46,7 +45,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 			justify-content: space-between;
 			position: relative;
 			padding: ${space[2]}px;
-			background-color: ${palette.brandAlt[400]};
+			background-color: var(--match-nav-background);
 			margin-bottom: 10px;
 			${until.tablet} {
 				margin: 0 -10px 10px;
@@ -59,7 +58,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 				bottom: 0;
 				width: 100vw;
 				left: -100vw;
-				background-color: ${palette.brandAlt[400]};
+				background-color: var(--match-nav-background);
 				z-index: -1;
 			}
 		`}
@@ -83,7 +82,7 @@ const Column = ({ children }: { children: React.ReactNode }) => (
 const TeamName = ({ name }: { name: string }) => (
 	<h2
 		css={css`
-			${headline.xxsmall({ fontWeight: 'bold' })}
+			${headlineBold20}
 		`}
 	>
 		{name}
@@ -103,7 +102,7 @@ const Scorers = ({ scorers }: { scorers: string[] }) => (
 				// unless a single player scores twice in the same minute
 				key={player}
 				css={css`
-					${textSans.small()}
+					${textSans15}
 				`}
 			>
 				{player}
@@ -157,6 +156,7 @@ const TeamNav = ({
 			display: flex;
 			flex-grow: 1;
 			flex-basis: 50%;
+			color: var(--match-nav-text);
 		`}
 	>
 		<Column>
@@ -187,7 +187,7 @@ const TeamNav = ({
 const Comments = ({ comments }: { comments: string }) => (
 	<div
 		css={css`
-			${textSans.small()}
+			${textSans15}
 			margin-top: ${space[2]}px;
 			padding-top: ${space[1]}px;
 			font-style: italic;

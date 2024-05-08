@@ -2,7 +2,10 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineLight17,
+	headlineLight20,
+	headlineLight24,
+	headlineLight34,
 	palette as srcPalette,
 	until,
 } from '@guardian/source-foundations';
@@ -31,6 +34,30 @@ type Props = {
 	isAvatar?: boolean;
 	isTimeline?: boolean;
 };
+
+const timelineBulletStyles = css`
+	position: relative;
+	::before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 12px;
+		height: 12px;
+		border: 1px solid ${themePalette('--timeline-event-border')};
+		border-radius: 100%;
+		background-color: ${themePalette('--timeline-bullet')};
+		top: -6px;
+		left: -6.5px;
+
+		${from.leftCol} {
+			left: 143.5px;
+		}
+
+		${from.wide} {
+			left: 223.5px;
+		}
+	}
+`;
 
 const starsWrapper = css`
 	background-color: ${themePalette('--star-rating-background')};
@@ -95,20 +122,34 @@ const moreTitlePadding = css`
 	}
 `;
 
+const immersiveTitleWrapper = css`
+	${until.desktop} {
+		${headlineLight34};
+	}
+
+	${until.phablet} {
+		${headlineLight34};
+	}
+
+	${from.desktop} {
+		${headlineLight34};
+	}
+`;
 const titleWrapper = (palette: Palette) => css`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 
 	${until.desktop} {
-		${headline.xxsmall({ fontWeight: 'light' })}
+		${headlineLight20};
 	}
 	${until.phablet} {
-		${headline.xxxsmall({ fontWeight: 'light' })}
+		${headlineLight17};
 	}
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: 'light' })}
+		${headlineLight24};
 	}
+
 	color: ${srcPalette.neutral[100]};
 	background: linear-gradient(transparent, ${srcPalette.neutral[0]});
 
@@ -150,7 +191,15 @@ const ImageTitle = ({
 		case 'showcase':
 		case 'immersive':
 			return (
-				<h2 css={[titleWrapper(palette), moreTitlePadding]}>{title}</h2>
+				<h2
+					css={[
+						titleWrapper(palette),
+						immersiveTitleWrapper,
+						moreTitlePadding,
+					]}
+				>
+					{title}
+				</h2>
 			);
 	}
 };
@@ -230,7 +279,7 @@ export const ImageComponent = ({
 	}
 
 	const shouldLimitWidth =
-		!isMainMedia &&
+		(!isMainMedia || isTimeline) &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
 	const isNotOpinion =
 		format.design !== ArticleDesign.Comment &&
@@ -386,6 +435,9 @@ export const ImageComponent = ({
 					/>
 				)}
 
+				{isTimeline && isMainMedia && role === 'showcase' && (
+					<div css={timelineBulletStyles} aria-hidden="true" />
+				)}
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
@@ -449,6 +501,9 @@ export const ImageComponent = ({
 						loading={loading}
 						isMainMedia={isMainMedia}
 					/>
+				)}
+				{isTimeline && isMainMedia && role === 'showcase' && (
+					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
 
 				{isMainMedia && (

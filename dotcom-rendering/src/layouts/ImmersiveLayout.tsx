@@ -168,6 +168,12 @@ const maxWidth = css`
 	}
 `;
 
+const linesMargin = css`
+	${from.leftCol} {
+		margin-top: ${space[5]}px;
+	}
+`;
+
 const stretchLines = css`
 	${until.phablet} {
 		margin-left: -20px;
@@ -229,6 +235,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -350,7 +357,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								borderColour={sourcePalette.neutral[60]}
 								sectionId="labs-header"
 							>
-								<LabsHeader />
+								<LabsHeader editionId={editionId} />
 							</Section>
 						</Stuck>
 					)}
@@ -556,7 +563,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								<></>
 							) : (
 								<div css={maxWidth}>
-									<div css={stretchLines}>
+									<div css={[stretchLines, linesMargin]}>
 										{format.theme ===
 										ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
@@ -581,7 +588,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												branding={branding}
 												format={format}
 												pageId={article.pageId}
-												webTitle={article.webTitle}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -600,7 +606,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											></ArticleMetaApps>
 										</Hide>
 										<Hide when="below" breakpoint="leftCol">
@@ -627,7 +632,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											/>
 										</Hide>
 									</>
@@ -655,7 +659,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											ajaxUrl={article.config.ajaxUrl}
 										/>
 										{!!article.affiliateLinksDisclaimer && (
 											<AffiliateDisclaimer />
@@ -716,9 +719,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											}
 											isPaidContent={
 												article.pageType.isPaidContent
-											}
-											keywordIds={
-												article.config.keywordIds
 											}
 											pageId={article.pageId}
 											sectionId={article.config.section}
@@ -789,6 +789,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 														isPaidContent={
 															article.pageType
 																.isPaidContent
+														}
+														shouldHideReaderRevenue={
+															!!article.config
+																.shouldHideReaderRevenue
 														}
 													/>
 												}
@@ -912,7 +916,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>
@@ -943,10 +946,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						<SubNav
 							subNavSections={props.NAV.subNavSections}
 							currentNavLink={props.NAV.currentNavLink}
-							linkHoverColour={themePalette(
-								'--article-link-text-hover',
-							)}
-							borderColour={themePalette('--sub-nav-border')}
+							position="footer"
 						/>
 					</Island>
 				</Section>
@@ -988,7 +988,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 								isPaidContent={article.pageType.isPaidContent}
 								isPreview={!!article.config.isPreview}
 								isSensitive={article.config.isSensitive}
-								keywordIds={article.config.keywordIds}
 								pageId={article.pageId}
 								sectionId={article.config.section}
 								shouldHideReaderRevenue={

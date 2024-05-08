@@ -16,7 +16,11 @@ describe('Contributor', () => {
 
 		const { container } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Contributor
 					format={format}
@@ -46,7 +50,11 @@ describe('Contributor', () => {
 
 		const { container } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<Contributor
 					format={format}

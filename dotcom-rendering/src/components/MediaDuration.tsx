@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSansBold12 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import type { ImagePositionType } from './Card/components/ImageWrapper';
 
@@ -12,7 +12,7 @@ const durationStyles = css`
 	padding: ${space[1]}px ${space[3]}px;
 	border-radius: ${space[3]}px;
 	color: white;
-	${textSans.xxsmall({ fontWeight: `bold` })}
+	${textSansBold12};
 `;
 
 export function secondsToDuration(secs?: number): string {
@@ -50,7 +50,7 @@ export const MediaDuration = ({
 	if (imagePosition === 'left') {
 		return null;
 	}
-	if (imagePositionOnMobile === 'left')
+	if (imagePositionOnMobile === 'left') {
 		return (
 			<Hide until="tablet">
 				<div css={durationStyles}>
@@ -58,6 +58,7 @@ export const MediaDuration = ({
 				</div>
 			</Hide>
 		);
+	}
 
 	return (
 		<div css={durationStyles}>

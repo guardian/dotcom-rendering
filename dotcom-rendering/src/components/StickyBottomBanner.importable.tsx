@@ -46,7 +46,6 @@ type Props = {
 	idApiUrl: string;
 
 	pageId: string;
-	keywordIds: string;
 };
 
 type RRBannerConfig = {
@@ -217,7 +216,6 @@ export const StickyBottomBanner = ({
 	contributionsServiceUrl,
 	idApiUrl,
 	pageId,
-	keywordIds,
 	remoteBannerSwitch,
 }: Props & {
 	remoteBannerSwitch: boolean;
@@ -245,10 +243,8 @@ export const StickyBottomBanner = ({
 	});
 
 	useEffect(() => {
-		setAsyncArticleCounts(
-			getArticleCounts(pageId, keywordIds, contentType),
-		);
-	}, [contentType, pageId, keywordIds]);
+		setAsyncArticleCounts(getArticleCounts(pageId, tags, contentType));
+	}, [contentType, tags, pageId]);
 
 	useOnce(() => {
 		if (!countryCode) return;

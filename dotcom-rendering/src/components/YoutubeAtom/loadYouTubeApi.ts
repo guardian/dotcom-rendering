@@ -16,20 +16,20 @@ const loadScripts = (enableIma = false) => {
 	if (scriptsPromise) {
 		return scriptsPromise;
 	}
-	let scripts;
 	if (enableIma) {
 		log('dotcom', 'loadYouTubeAPI: loading YouTube & IMA script');
-		scripts = [
+		scriptsPromise = Promise.all([
 			loadScriptAndCatch('https://www.youtube.com/iframe_api?ima=1'),
 			loadScriptAndCatch(
 				'https://imasdk.googleapis.com/js/sdkloader/ima3.js',
 			),
-		];
+		]);
 	} else {
 		log('dotcom', 'loadYouTubeAPI: loading YouTube script');
-		scripts = [loadScriptAndCatch('https://www.youtube.com/iframe_api')];
+		scriptsPromise = Promise.all([
+			loadScriptAndCatch('https://www.youtube.com/iframe_api'),
+		]);
 	}
-	scriptsPromise = Promise.all(scripts);
 	return scriptsPromise;
 };
 

@@ -1,3 +1,4 @@
+import type { AssetOrigin } from '../lib/assets';
 import type { RenderingTarget } from './renderingTarget';
 
 /**
@@ -9,9 +10,11 @@ import type { RenderingTarget } from './renderingTarget';
 export type Config =
 	| {
 			renderingTarget: Extract<RenderingTarget, 'Web'>;
-			darkModeAvailable: false;
+			darkModeAvailable: boolean;
+			assetOrigin: AssetOrigin;
 	  }
 	| {
 			renderingTarget: Extract<RenderingTarget, 'Apps'>;
 			darkModeAvailable: boolean;
+			assetOrigin: AssetOrigin;
 	  };

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, remBodySizes, until } from '@guardian/source-foundations';
+import { textEgyptian14, until } from '@guardian/source-foundations';
 import { palette } from '../../../palette';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
@@ -19,12 +19,13 @@ const showTrailText = (
 		imageSize === 'large' &&
 		imagePosition === 'right' &&
 		imageType !== 'avatar'
-	)
+	) {
 		return css`
 			${until.desktop} {
 				display: none;
 			}
 		`;
+	}
 	return css`
 		${until.tablet} {
 			display: none;
@@ -45,8 +46,7 @@ export const TrailTextWrapper = ({
 					display: flex;
 					flex-direction: column;
 					color: ${palette('--card-headline-trail-text')};
-					${body.small({ lineHeight: 'regular' })};
-					font-size: ${remBodySizes.xsmall}rem;
+					${textEgyptian14};
 					padding-left: 5px;
 					padding-right: 5px;
 					padding-bottom: 8px;

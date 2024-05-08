@@ -20,7 +20,11 @@ describe('MostViewedList', () => {
 
 		const { asFragment, getAllByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<MostViewedRight />
 			</ConfigProvider>,
@@ -65,7 +69,11 @@ describe('MostViewedList', () => {
 
 		const { getAllByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<MostViewedRight limitItems={3} />
 			</ConfigProvider>,
@@ -89,7 +97,11 @@ describe('MostViewedList', () => {
 
 		const { getByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<MostViewedRight />
 			</ConfigProvider>,

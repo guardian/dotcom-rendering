@@ -10,10 +10,11 @@ import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
 import { enhanceH2s } from './enhance-H2s';
-import { enhanceImages } from './enhance-images';
+import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
+import { enhanceGuVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
 import { enhanceTimeline } from './enhanceTimeline';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
@@ -72,6 +73,22 @@ export const enhanceElements =
 				  )
 				: enhanceAdPlaceholders(format, options.renderingTarget),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
+		].reduce(
+			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
+			elements,
+		);
+	};
+
+export const enhanceMainMedia =
+	(
+		format: ArticleFormat,
+		imagesForLightbox: ImageForLightbox[],
+		mediaHTML: string,
+	) =>
+	(elements: FEElement[]): FEElement[] => {
+		return [
+			enhanceElementsImages(format, imagesForLightbox),
+			enhanceGuVideos(format, mediaHTML),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

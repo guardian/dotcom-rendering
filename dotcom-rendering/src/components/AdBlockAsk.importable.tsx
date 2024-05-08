@@ -1,12 +1,16 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { headline, textSans } from '@guardian/source-foundations';
-import { palette } from '@guardian/source-foundations/cjs/source-foundations/src/colour/palette';
+import {
+	headlineMedium24,
+	palette,
+	textSans14,
+	textSans15,
+	textSans17,
+} from '@guardian/source-foundations';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { useAdblockAsk } from '../lib/useAdBlockAsk';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
-import HandsLogoSmall from '../static/logos/hands-small.svg';
-import HandsLogo from '../static/logos/hands.svg';
+import { useConfig } from './ConfigContext';
 
 type AdBlockAskSize = 'leaderboard' | 'mpu';
 
@@ -15,7 +19,7 @@ const linkStyles = css`
 	border-radius: 16px;
 	box-sizing: border-box;
 	color: ${palette.neutral[7]};
-	${textSans.medium()};
+	${textSans17};
 	font-weight: 700;
 	text-decoration: none;
 
@@ -42,7 +46,7 @@ const linkStyles = css`
 `;
 
 const adBlockAskH2Styles = css`
-	${headline.xsmall()}
+	${headlineMedium24}
 	color: ${palette.brandAlt[400]};
 	font-weight: bold;
 `;
@@ -50,14 +54,20 @@ const adBlockAskH2Styles = css`
 const adBlockAskTextStyles: Record<AdBlockAskSize, SerializedStyles> = {
 	leaderboard: css`
 		margin-top: 8px;
-		${textSans.xsmall()};
+		${textSans14};
 		color: ${palette.neutral[100]};
 	`,
 	mpu: css`
 		margin-top: 16px;
-		${textSans.small()};
+		${textSans15};
 		color: ${palette.neutral[100]};
 	`,
+};
+
+const HandsLogo = ({ styles }: { styles: SerializedStyles }) => {
+	const { assetOrigin } = useConfig();
+	const src = `${assetOrigin}static/frontend/logos/hands.png`;
+	return <img src={src} alt="Guardian logo held up by hands" css={styles} />;
 };
 
 const SupportButton = ({ href }: { href: string }) => (
@@ -97,8 +107,8 @@ export const AdBlockAskLeaderboard = ({
 				margin: 0 auto;
 			`}
 		>
-			<HandsLogoSmall
-				css={css`
+			<HandsLogo
+				styles={css`
 					flex: 0 0 auto;
 					margin: auto 8px -6px 8px;
 					width: 81px;
@@ -153,29 +163,40 @@ export const AdBlockAskMPU = ({
 			>
 				<SupportButton href={supportButtonHref} />
 			</div>
-			<div
-				css={css`
-					width: 128px;
-					height: 68px;
-					background-position: right bottom;
-					position: absolute;
-					bottom: 0;
-					right: 0;
-				`}
-			>
-				<HandsLogo />
+			<div>
+				<HandsLogo
+					styles={css`
+						width: 128px;
+						height: 68px;
+						background-position: right bottom;
+						position: absolute;
+						bottom: 0;
+						right: 0;
+					`}
+				/>
 			</div>
 		</div>
 	);
 };
 
 type Props = {
-	slotId: `dfp-ad--${string}`;
 	size: AdBlockAskSize;
+	slotId: `dfp-ad--${string}`;
+	shouldHideReaderRevenue: boolean;
+	isPaidContent: boolean;
 };
 
-export const AdBlockAsk = ({ size, slotId }: Props) => {
-	const showAdBlockAsk = useAdblockAsk(slotId);
+export const AdBlockAsk = ({
+	size,
+	slotId,
+	shouldHideReaderRevenue,
+	isPaidContent,
+}: Props) => {
+	const showAdBlockAsk = useAdblockAsk({
+		slotId,
+		shouldHideReaderRevenue,
+		isPaidContent,
+	});
 
 	if (!showAdBlockAsk) {
 		return null;

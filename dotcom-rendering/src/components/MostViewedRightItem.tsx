@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	headline,
+	headlineMedium17,
 	palette as sourcePalette,
 } from '@guardian/source-foundations';
 import { useHover } from '../lib/useHover';
@@ -35,7 +35,7 @@ const listItemStyles = css`
 const linkTagStyles = css`
 	text-decoration: none;
 	font-weight: 500;
-	${headline.xxxsmall()};
+	${headlineMedium17};
 
 	&:link,
 	&:active {

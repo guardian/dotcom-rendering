@@ -1,10 +1,18 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	palette,
+	space,
+	textSans15,
+	textSansBold15,
+} from '@guardian/source-foundations';
 import {
 	Link,
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
+import type { EditionId } from '../lib/edition';
+import { getLabsUrlSuffix } from '../lib/labs';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import { Details } from './Details';
@@ -72,7 +80,7 @@ const HeaderSection = ({
 const Title = () => (
 	<div
 		css={css`
-			${textSans.small({ fontWeight: 'bold' })};
+			${textSansBold15};
 			margin-bottom: 4px;
 		`}
 	>
@@ -83,7 +91,7 @@ const Title = () => (
 const About = () => (
 	<div
 		css={css`
-			${textSans.small()};
+			${textSans15};
 			background-color: ${palette.labs[400]};
 			border-top: 1px solid ${palette.neutral[60]};
 
@@ -123,13 +131,17 @@ const About = () => (
 	</div>
 );
 
-const Logo = () => (
-	<Link href="https://www.theguardian.com/guardian-labs">
+const Logo = ({ editionId }: { editionId: EditionId }) => (
+	<Link
+		href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+			editionId,
+		)}`}
+	>
 		<LabsLogo />
 	</Link>
 );
 
-export const LabsHeader = () => (
+export const LabsHeader = ({ editionId }: { editionId: EditionId }) => (
 	<FlexWrapper>
 		<Left>
 			<HeaderSection isFirst={true}>
@@ -157,7 +169,7 @@ export const LabsHeader = () => (
 			</HeaderSection>
 		</Left>
 		<Right>
-			<Logo />
+			<Logo editionId={editionId} />
 		</Right>
 	</FlexWrapper>
 );

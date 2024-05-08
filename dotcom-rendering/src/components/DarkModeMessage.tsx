@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans } from '@guardian/source-foundations';
+import { from, palette, space, textSans17 } from '@guardian/source-foundations';
+import type { PropsWithChildren } from 'react';
 
-export const DarkModeMessage = () => (
+export const DarkModeMessage = ({ children }: PropsWithChildren) => (
 	<aside
 		css={css`
 			display: none;
 			@media (prefers-color-scheme: dark) {
-				${textSans.medium()}
+				${textSans17}
 				background-color: ${palette.neutral[7]};
 				color: ${palette.neutral[97]};
 
@@ -73,9 +74,7 @@ export const DarkModeMessage = () => (
 				grid-column: centre-column;
 			`}
 		>
-			We hope you are enjoying the updates we are implementing on
-			articles. Unfortunately, some are still missing a dark mode view.
-			Rest assured this will be fixed in a forthcoming beta release.
+			{children}
 		</p>
 	</aside>
 );

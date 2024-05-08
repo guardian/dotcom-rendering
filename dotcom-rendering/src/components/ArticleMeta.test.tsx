@@ -16,7 +16,11 @@ describe('ArticleMeta', () => {
 
 		const { container } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<ArticleMeta
 					format={format}
@@ -35,7 +39,6 @@ describe('ArticleMeta', () => {
 					isCommentable={false}
 					discussionApiUrl=""
 					shortUrlId=""
-					ajaxUrl=""
 				/>
 			</ConfigProvider>,
 		);
@@ -59,7 +62,11 @@ describe('ArticleMeta', () => {
 
 		const { container } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					assetOrigin: '/',
+				}}
 			>
 				<ArticleMeta
 					format={format}
@@ -78,7 +85,6 @@ describe('ArticleMeta', () => {
 					isCommentable={false}
 					discussionApiUrl=""
 					shortUrlId=""
-					ajaxUrl=""
 				/>
 			</ConfigProvider>,
 		);

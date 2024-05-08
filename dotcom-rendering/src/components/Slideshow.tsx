@@ -4,7 +4,7 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSansBold12,
 	until,
 } from '@guardian/source-foundations';
 import { takeFirst } from '../lib/tuple';
@@ -79,7 +79,7 @@ const animationStyles = (animation: Keyframes) => css`
 `;
 
 const captionStyles = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })}
+	${textSansBold12}
 	position: absolute;
 	bottom: 0;
 	left: 0;

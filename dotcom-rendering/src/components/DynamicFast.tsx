@@ -199,10 +199,8 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 		cards,
 		showAge,
 		containerPalette,
-		imageLoading,
 	}: {
 		cards: DCRFrontCard[];
-		imageLoading: Loading;
 		showAge?: boolean;
 		containerPalette?: DCRContainerPalette;
 	}) => {
@@ -650,7 +648,6 @@ export const DynamicFast = ({
 						cards={secondSliceCards}
 						showAge={showAge}
 						containerPalette={containerPalette}
-						imageLoading={imageLoading}
 					/>
 				);
 			case 'oneBig':

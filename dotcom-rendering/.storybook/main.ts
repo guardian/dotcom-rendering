@@ -18,7 +18,10 @@ const config: StorybookConfig = {
 		'../stories/**/*.stories.@(tsx)',
 		'../stories/**/*.stories.@(jsx)',
 	],
-	staticDirs: ['../src/static'],
+	staticDirs: [
+		'../src/static',
+		{ from: '../src/static', to: '/static/frontend/' },
+	],
 	addons: [
 		'@storybook/addon-essentials',
 		'@storybook/addon-interactions',
@@ -60,7 +63,6 @@ const config: StorybookConfig = {
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
 		config.plugins?.push(
-			// @ts-expect-error -- we’ve got plugin mismatch
 			new webpack.DefinePlugin({
 				process: '{}',
 			}),

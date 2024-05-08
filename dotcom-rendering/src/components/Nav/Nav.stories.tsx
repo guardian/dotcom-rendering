@@ -1,6 +1,6 @@
 import { Pillar } from '@guardian/libs';
 import { brandBackground, brandBorder } from '@guardian/source-foundations';
-import { userEvent, within } from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/test';
 import { Section } from '../Section';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
@@ -23,7 +23,7 @@ export const StandardStory = () => {
 				selectedPillar={Pillar.News}
 				nav={nav}
 				subscribeUrl=""
-				editionId="UK"
+				editionId={'UK'}
 			/>
 		</Section>
 	);
@@ -43,7 +43,7 @@ export const StandardStoryTopBarHeader = () => {
 				selectedPillar={Pillar.News}
 				nav={nav}
 				subscribeUrl=""
-				editionId="UK"
+				editionId={'UK'}
 			/>
 		</Section>
 	);
@@ -63,7 +63,7 @@ export const OpinionStory = () => {
 				selectedPillar={Pillar.Opinion}
 				nav={nav}
 				subscribeUrl=""
-				editionId="UK"
+				editionId={'UK'}
 			/>
 		</Section>
 	);
@@ -86,7 +86,7 @@ export const ImmersiveStory = () => {
 				isImmersive={true}
 				nav={nav}
 				subscribeUrl=""
-				editionId="UK"
+				editionId={'UK'}
 			/>
 		</Section>
 	);
@@ -109,7 +109,7 @@ export const ExpandedMenuStory = () => {
 				isImmersive={false}
 				nav={nav}
 				subscribeUrl=""
-				editionId="UK"
+				editionId={'UK'}
 			/>
 		</Section>
 	);
@@ -146,7 +146,7 @@ export const ExpandedMenuWithPageSkinStory = () => {
 				isImmersive={false}
 				nav={nav}
 				subscribeUrl=""
-				editionId="UK"
+				editionId={'UK'}
 				hasPageSkin={true}
 			/>
 		</Section>

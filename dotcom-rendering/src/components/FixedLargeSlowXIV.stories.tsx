@@ -22,6 +22,7 @@ export const Default = () => (
 	<FrontSection
 		title="Fixed Large Slow XIV"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedLargeSlowXIV
 			trails={trails}

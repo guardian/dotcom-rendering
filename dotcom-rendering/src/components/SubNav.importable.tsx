@@ -1,15 +1,14 @@
 import { css } from '@emotion/react';
-import { from, palette, text, textSans } from '@guardian/source-foundations';
+import { from, textSans15, textSans17 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { SubNavType } from '../model/extract-nav';
+import { palette } from '../palette';
 
 type Props = {
 	subNavSections: SubNavType;
 	currentNavLink: string;
-	borderColour: string;
-	linkHoverColour: string;
-	subNavLinkColour?: string;
+	position: 'header' | 'footer';
 };
 
 const wrapperCollapsedStyles = css`
@@ -49,15 +48,15 @@ const collapsedStyles = css`
 	}
 `;
 
-const fontStyle = (subNavLinkColour: string) => css`
-	${textSans.small()};
+const fontStyle = css`
+	${textSans15};
 	font-size: 14px;
 	${from.tablet} {
-		${textSans.medium()};
+		${textSans17};
 		font-size: 16px;
 	}
 	font-weight: 500;
-	color: ${subNavLinkColour};
+	color: var(--sub-nav-link);
 	padding: 0 5px;
 	height: 36px;
 	/* Design System: Line height is being used here for centering layout, we need the primitives */
@@ -70,12 +69,12 @@ const fontStyle = (subNavLinkColour: string) => css`
 	}
 `;
 
-const linkStyle = (linkHoverColour: string) => css`
+const linkStyle = css`
 	float: left;
 	text-decoration: none;
 
 	:hover {
-		color: ${linkHoverColour};
+		color: ${palette('--sub-nav-link-hover')};
 	}
 
 	:focus {
@@ -106,10 +105,10 @@ const showMoreStyle = css`
 	cursor: pointer;
 	border: none;
 	background-color: transparent;
-	color: ${text.supporting};
+	color: ${palette('--sub-nav-more')};
 
 	:hover {
-		color: ${palette.news[400]};
+		color: ${palette('--sub-nav-link-hover')};
 	}
 
 	${from.desktop} {
@@ -117,7 +116,7 @@ const showMoreStyle = css`
 	}
 `;
 
-const listItemStyles = (borderColour: string) => css`
+const listItemStyles = css`
 	:after {
 		content: '';
 		display: inline-block;
@@ -125,10 +124,9 @@ const listItemStyles = (borderColour: string) => css`
 		height: 0;
 		border-top: 6px solid transparent;
 		border-bottom: 6px solid transparent;
-		border-left: 10px solid ${palette.neutral[7]};
+		border-left: 10px solid ${palette('--sub-nav-border')};
 		margin-top: 12px;
 		margin-left: 2px;
-		border-left-color: ${borderColour};
 
 		${from.tablet} {
 			margin-top: 16px;
@@ -139,9 +137,7 @@ const listItemStyles = (borderColour: string) => css`
 export const SubNav = ({
 	subNavSections,
 	currentNavLink,
-	borderColour,
-	linkHoverColour,
-	subNavLinkColour = palette.neutral[7],
+	position = 'header',
 }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -172,6 +168,12 @@ export const SubNav = ({
 			css={[collapseWrapper && wrapperCollapsedStyles, spaceBetween]}
 			data-testid="sub-nav"
 			data-component="sub-nav"
+			style={{
+				'--sub-nav-link':
+					position === 'header'
+						? palette('--sub-nav-link-header')
+						: palette('--sub-nav-link-footer'),
+			}}
 		>
 			{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari {@see https://github.com/guardian/dotcom-rendering/pull/5041} */}
 			<ul
@@ -181,16 +183,10 @@ export const SubNav = ({
 			>
 				{/* eslint-enable jsx-a11y/no-redundant-roles */}
 				{subNavSections.parent && (
-					<li
-						key={subNavSections.parent.url}
-						css={listItemStyles(borderColour)}
-					>
+					<li key={subNavSections.parent.url} css={listItemStyles}>
 						<a
 							data-src-focus-disabled={true}
-							css={[
-								linkStyle(linkHoverColour),
-								fontStyle(subNavLinkColour),
-							]}
+							css={[linkStyle, fontStyle]}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
@@ -211,10 +207,7 @@ export const SubNav = ({
 						}
 					>
 						<a
-							css={[
-								linkStyle(linkHoverColour),
-								fontStyle(subNavLinkColour),
-							]}
+							css={[linkStyle, fontStyle]}
 							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={nestedOphanComponents(

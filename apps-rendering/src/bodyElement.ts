@@ -374,18 +374,12 @@ const parse =
 						Result.ok<string, Callout>({
 							kind: ElementKind.Callout,
 							isNonCollapsible,
-							prompt:
-								overridePrompt === undefined
-									? 'Share your experience'
-									: overridePrompt,
-							heading:
-								overrideTitle === undefined
-									? callout.callout
-									: overrideTitle,
+							prompt: overridePrompt ?? 'Share your experience',
+							heading: overrideTitle ?? callout.callout,
 							description: context.docParser(
-								overrideDescription === undefined
-									? callout.description ?? ''
-									: overrideDescription,
+								overrideDescription ??
+									callout.description ??
+									'',
 							),
 							formFields: callout.formFields,
 							formId: callout.formId,
