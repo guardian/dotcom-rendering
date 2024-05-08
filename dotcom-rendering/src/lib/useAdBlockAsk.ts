@@ -108,28 +108,31 @@ export const useAdblockAsk = ({
 
 	useEffect(() => {
 		const makeRequest = async () => {
-			if (
-				// Only perform the detection check in the variant of the AB test
-				isInVariant &&
-				// Once we've detected an ad-blocker, we don't care about subsequent detections
+			if (isInVariant) {
 				!adBlockerDetected &&
-				// Is the reader/content eligible for displaying such a message
-				canDisplayAdBlockAsk &&
-				// Actually perform the detection
-				(await detectByRequests())
-			) {
-				setAdBlockerDetected(true);
+					EventTimer.get().setProperty('detectedAdBlocker', false);
 
-				// Some ad-blockers will remove slots from the DOM, while others don't
-				// This clean-up ensures that any space we've reserved for an ad is removed,
-				// in order to properly layout the ask.
-				document
-					.getElementById(slotId)
-					?.closest('.ad-slot-container')
-					?.remove();
+				if (
+					// Once we've detected an ad-blocker, we don't care about subsequent detections
+					!adBlockerDetected &&
+					(await detectByRequests())
+				) {
+					setAdBlockerDetected(true);
 
-				// Record ad block detection in commercial metrics
-				EventTimer.get().setProperty('detectedAdBlocker', true);
+					// Is the reader/content eligible for displaying such a message
+					if (canDisplayAdBlockAsk) {
+						// Some ad-blockers will remove slots from the DOM, while others don't
+						// This clean-up ensures that any space we've reserved for an ad is removed,
+						// in order to properly layout the ask.
+						document
+							.getElementById(slotId)
+							?.closest('.ad-slot-container')
+							?.remove();
+					}
+
+					// Record ad block detection in commercial metrics
+					EventTimer.get().setProperty('detectedAdBlocker', true);
+				}
 			}
 		};
 		void makeRequest();
