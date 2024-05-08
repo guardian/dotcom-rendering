@@ -34,7 +34,6 @@ const topBarStyles = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-
 	height: 52px;
 	box-sizing: border-box;
 	padding: 0 10px;
@@ -61,14 +60,9 @@ const topBarStylesWithoutPageSkin = css`
 
 const topBarLinkContainerStyles = css`
 	height: 100%;
-
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-`;
-
-const paddingRightStyles = css`
-	padding-right: ${space[3]}px;
 `;
 
 const verticalDividerStyles = css`
@@ -93,7 +87,10 @@ const TopBarLinkContainer = ({
 	isLastChild?: boolean;
 	children: React.ReactNode;
 }) => (
-	<div css={[topBarLinkContainerStyles, !isLastChild && paddingRightStyles]}>
+	<div
+		css={topBarLinkContainerStyles}
+		style={{ paddingRight: isLastChild ? 0 : `${space[3]}px` }}
+	>
 		{children}
 	</div>
 );

@@ -163,7 +163,7 @@ export const dropDownOverrides = css`
 		text-decoration: underline;
 	}
 
-	/** Handles case of *new* top bar being 52px at this breakpoint */
+	/** Handles case of *new* top bar being 52px high until tablet */
 	&:not(button) {
 		top: 48px;
 	}
