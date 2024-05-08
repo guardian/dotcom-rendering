@@ -1,4 +1,4 @@
-import { joinUrl, log } from '@guardian/libs';
+import { isString, joinUrl, log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { abTestTest } from '../experiments/tests/ab-test-test';
 import { onwardJourneys } from '../experiments/tests/onward-journeys';
@@ -75,12 +75,13 @@ export const MostViewedFooterData = ({
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
 	useEffect(() => {
-		const variant = ABTestAPI?.runnableTest(onwardJourneys)?.variantToRun;
-		if (!variant) {
+		const variantId =
+			ABTestAPI?.runnableTest(onwardJourneys)?.variantToRun.id;
+		if (!isString(variantId)) {
 			// we are not in the onwards journey test
 			return setShow(true);
 		}
-		setShow(['control', 'most-viewed'].includes(variant.id));
+		setShow(['control', 'most-viewed'].includes(variantId));
 	}, [ABTestAPI]);
 
 	/** if falsy/undefined, no calls are made to the endpoint by SWR, which is wrapped by useApi  */
