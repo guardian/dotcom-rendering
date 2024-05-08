@@ -221,6 +221,11 @@ export const renderTagPage = ({
 		...legacyScripts,
 	]);
 
+	const alternateLangLinks = generateAlternateLangLinks(
+		tagPage.guardianBaseURL,
+		tagPage.pageId,
+	);
+
 	const guardian = createGuardian({
 		editionId: tagPage.editionId,
 		stage: tagPage.config.stage,
@@ -255,6 +260,7 @@ export const renderTagPage = ({
 		renderingTarget: 'Web',
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
 		canonicalUrl: tagPage.canonicalUrl,
+		alternateLangLinks,
 	});
 	return {
 		html: pageHtml,
