@@ -466,6 +466,12 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				},
 				{ overwriteRoutes: false },
 			)
+			// Get Ophan
+			.get(
+				/.*ophan.theguardian.com\/img\/.*/,
+				{ status: 200 },
+				{ overwriteRoutes: false },
+			)
 
 			// Return an error response if the request body includes the
 			// phrase 'example.com', otherwise, return a success response.

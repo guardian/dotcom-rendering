@@ -30,6 +30,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
@@ -232,6 +233,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -269,115 +273,148 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							</Stuck>
 						)}
 
-						{format.theme !== ArticleSpecial.Labs && (
-							<div data-print-layout="hide">
-								<Section
-									fullWidth={true}
-									shouldCenter={false}
-									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
-									backgroundColour={sourcePalette.brand[400]}
-									element="header"
-								>
-									<Header
-										editionId={article.editionId}
-										idUrl={article.config.idUrl}
-										mmaUrl={article.config.mmaUrl}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										urls={
-											article.nav.readerRevenueLinks
-												.header
-										}
-										remoteHeader={
-											!!article.config.switches
-												.remoteHeader
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										idApiUrl={article.config.idApiUrl}
-										headerTopBarSearchCapiSwitch={
-											!!article.config.switches
-												.headerTopBarSearchCapi
-										}
-									/>
-								</Section>
-							</div>
-						)}
-
-						<Section
-							fullWidth={true}
-							borderColour={sourcePalette.brand[600]}
-							showTopBorder={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="nav"
-						>
-							<Nav
+						{inUpdatedHeaderABTest ? (
+							<Masthead
 								nav={props.NAV}
-								isImmersive={
-									format.display === ArticleDisplay.Immersive
-								}
-								displayRoundel={
-									format.display ===
-										ArticleDisplay.Immersive ||
-									format.theme === ArticleSpecial.Labs
-								}
-								selectedPillar={props.NAV.selectedPillar}
+								editionId={article.editionId}
+								idUrl={article.config.idUrl}
+								mmaUrl={article.config.mmaUrl}
 								subscribeUrl={
 									article.nav.readerRevenueLinks.header
 										.subscribe
 								}
-								editionId={article.editionId}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								showSubNav={false}
+								isImmersive={false}
+								displayRoundel={false}
+								hasPageSkin={false}
+								hasPageSkinContentSelfConstrain={false}
 							/>
-						</Section>
+						) : (
+							<>
+								{format.theme !== ArticleSpecial.Labs && (
+									<div data-print-layout="hide">
+										<Section
+											fullWidth={true}
+											shouldCenter={false}
+											showTopBorder={false}
+											showSideBorders={false}
+											padSides={false}
+											backgroundColour={
+												sourcePalette.brand[400]
+											}
+											element="header"
+										>
+											<Header
+												editionId={article.editionId}
+												idUrl={article.config.idUrl}
+												mmaUrl={article.config.mmaUrl}
+												discussionApiUrl={
+													article.config
+														.discussionApiUrl
+												}
+												urls={
+													article.nav
+														.readerRevenueLinks
+														.header
+												}
+												remoteHeader={
+													!!article.config.switches
+														.remoteHeader
+												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												idApiUrl={
+													article.config.idApiUrl
+												}
+												headerTopBarSearchCapiSwitch={
+													!!article.config.switches
+														.headerTopBarSearchCapi
+												}
+											/>
+										</Section>
+									</div>
+								)}
 
-						{props.NAV.subNavSections &&
-							format.theme !== ArticleSpecial.Labs && (
 								<Section
 									fullWidth={true}
-									backgroundColour={themePalette(
-										'--article-background',
-									)}
+									borderColour={sourcePalette.brand[600]}
+									showTopBorder={false}
 									padSides={false}
-									element="aside"
+									backgroundColour={sourcePalette.brand[400]}
+									element="nav"
 								>
-									<Island
-										priority="enhancement"
-										defer={{ until: 'idle' }}
-									>
-										<SubNav
-											subNavSections={
-												props.NAV.subNavSections
-											}
-											currentNavLink={
-												props.NAV.currentNavLink
-											}
-											position="header"
-										/>
-									</Island>
+									<Nav
+										nav={props.NAV}
+										isImmersive={
+											format.display ===
+											ArticleDisplay.Immersive
+										}
+										displayRoundel={
+											format.display ===
+												ArticleDisplay.Immersive ||
+											format.theme === ArticleSpecial.Labs
+										}
+										selectedPillar={
+											props.NAV.selectedPillar
+										}
+										subscribeUrl={
+											article.nav.readerRevenueLinks
+												.header.subscribe
+										}
+										editionId={article.editionId}
+									/>
 								</Section>
-							)}
 
-						{format.theme !== ArticleSpecial.Labs && (
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
+								{props.NAV.subNavSections &&
+									format.theme !== ArticleSpecial.Labs && (
+										<Section
+											fullWidth={true}
+											backgroundColour={themePalette(
+												'--article-background',
+											)}
+											padSides={false}
+											element="aside"
+										>
+											<Island
+												priority="enhancement"
+												defer={{ until: 'idle' }}
+											>
+												<SubNav
+													subNavSections={
+														props.NAV.subNavSections
+													}
+													currentNavLink={
+														props.NAV.currentNavLink
+													}
+													position="header"
+												/>
+											</Island>
+										</Section>
+									)}
+
+								{format.theme !== ArticleSpecial.Labs && (
+									<Section
+										fullWidth={true}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										padSides={false}
+										showTopBorder={false}
+									>
+										<StraightLines
+											cssOverrides={css`
+												display: block;
+											`}
+											count={4}
+										/>
+									</Section>
 								)}
-								padSides={false}
-								showTopBorder={false}
-							>
-								<StraightLines
-									cssOverrides={css`
-										display: block;
-									`}
-									count={4}
-								/>
-							</Section>
+							</>
 						)}
 					</div>
 

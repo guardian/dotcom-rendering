@@ -5414,6 +5414,17 @@ const timelineEventBorderLight: PaletteFunction = () =>
 const timelineEventBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+const mastheadTopBarBackground: PaletteFunction = () =>
+	sourcePalette.brand[300];
+const mastheadTopBarLinkText: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const mastheadTopBarVerticalDivider: PaletteFunction = () =>
+	sourcePalette.brand[600];
+
+const mastheadNavBackground: PaletteFunction = () => sourcePalette.brand[400];
+const mastheadNavLinkText: PaletteFunction = () => sourcePalette.brand[400];
+const mastheadNavBorder: PaletteFunction = () => sourcePalette.brand[600];
+
 // ----- Palette ----- //
 
 /**
@@ -6438,6 +6449,30 @@ const paletteColours = {
 	'--timeline-event-border': {
 		light: timelineEventBorderLight,
 		dark: timelineEventBorderDark,
+	},
+	'--masthead-top-bar-background': {
+		light: mastheadTopBarBackground,
+		dark: mastheadTopBarBackground,
+	},
+	'--masthead-top-bar-link-text': {
+		light: mastheadTopBarLinkText,
+		dark: mastheadTopBarLinkText,
+	},
+	'--masthead-top-bar-vertical-divider': {
+		light: mastheadTopBarVerticalDivider,
+		dark: mastheadTopBarVerticalDivider,
+	},
+	'--masthead-nav-background': {
+		light: mastheadNavBackground,
+		dark: mastheadNavBackground,
+	},
+	'--masthead-nav-link-text': {
+		light: mastheadNavLinkText,
+		dark: mastheadNavLinkText,
+	},
+	'--masthead-nav-border': {
+		light: mastheadNavBorder,
+		dark: mastheadNavBorder,
 	},
 } satisfies PaletteColours;
 
