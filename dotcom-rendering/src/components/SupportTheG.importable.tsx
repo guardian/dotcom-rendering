@@ -224,17 +224,11 @@ const ReaderRevenueLinksRemote = ({
 				const { module } = response.data;
 				setSupportHeaderResponse(module);
 
-				return window
-					.guardianPolyfilledImport(module.url)
-					.then(
-						(headerModule: {
-							[key: string]: React.ElementType;
-						}) => {
-							setSupportHeader(
-								() => headerModule[module.name] ?? null,
-							);
-						},
-					);
+				return import(
+					/* webpackChunkName: "header" */ `./marketing/header/Header`
+				).then((headerModule: { [key: string]: React.ElementType }) => {
+					setSupportHeader(() => headerModule.Header ?? null);
+				});
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${String(error)}`;
