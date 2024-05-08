@@ -34,11 +34,12 @@ describe('alternate lang links', () => {
 				);
 			});
 		for (const langLinks of langLinksForEditionsWithLangLocale) {
-			expect(langLinks.length).toBe(4);
+			expect(langLinks.length).toBe(5);
 			expect(langLinks).toEqual([
 				'<link rel="alternate" href="https://www.theguardian.com/uk" hreflang="en-GB" />',
 				'<link rel="alternate" href="https://www.theguardian.com/us" hreflang="en-US" />',
 				'<link rel="alternate" href="https://www.theguardian.com/au" hreflang="en-AU" />',
+				'<link rel="alternate" href="https://www.theguardian.com/europe" hreflang="en-EU" />',
 				'<link rel="alternate" href="https://www.theguardian.com/international" hreflang="en" />',
 			]);
 		}
