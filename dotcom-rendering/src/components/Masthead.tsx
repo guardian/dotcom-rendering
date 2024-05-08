@@ -12,6 +12,7 @@ type Props = {
 	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
+	contributionsServiceUrl: string;
 	subscribeUrl: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
@@ -48,6 +49,7 @@ export const Masthead = ({
 	discussionApiUrl,
 	subscribeUrl,
 	idApiUrl,
+	contributionsServiceUrl,
 	showSubNav = true,
 	isImmersive,
 	displayRoundel,
@@ -74,6 +76,7 @@ export const Masthead = ({
 						mmaUrl={mmaUrl}
 						discussionApiUrl={discussionApiUrl}
 						idApiUrl={idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						hasPageSkin={hasPageSkin}
 					/>
 				</Island>

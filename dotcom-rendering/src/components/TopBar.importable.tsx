@@ -19,13 +19,15 @@ import { palette as themePalette } from '../palette';
 import { useConfig } from './ConfigContext';
 import { TopBarLink } from './TopBarLink';
 import { TopBarMyAccount } from './TopBarMyAccount';
+import { TopBarSupport } from './TopBarSupport.importable';
 
-interface TopBarProps {
+interface Props {
 	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
+	contributionsServiceUrl: string;
 	hasPageSkin?: boolean;
 }
 
@@ -113,8 +115,9 @@ export const TopBar = ({
 	mmaUrl,
 	discussionApiUrl,
 	idApiUrl,
+	contributionsServiceUrl,
 	hasPageSkin = false,
-}: TopBarProps) => {
+}: Props) => {
 	const authStatus = useAuthStatus();
 	const { renderingTarget } = useConfig();
 	const pageViewId = usePageViewId(renderingTarget);
@@ -143,7 +146,7 @@ export const TopBar = ({
 				hasPageSkin ? pageSkinContainer : center,
 			]}
 		>
-			{/** @todo - Reader revenue support messaging + CTA button */}
+			<TopBarSupport contributionsServiceUrl={contributionsServiceUrl} />
 
 			<VerticalDivider />
 

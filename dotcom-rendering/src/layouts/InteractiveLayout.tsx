@@ -289,6 +289,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									article.config.discussionApiUrl
 								}
 								idApiUrl={article.config.idApiUrl}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
 								showSubNav={false}
 								isImmersive={false}
 								displayRoundel={false}

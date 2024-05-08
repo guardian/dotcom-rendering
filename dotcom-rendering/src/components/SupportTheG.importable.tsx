@@ -224,11 +224,17 @@ const ReaderRevenueLinksRemote = ({
 				const { module } = response.data;
 				setSupportHeaderResponse(module);
 
-				return import(
-					/* webpackChunkName: "header" */ `./marketing/header/Header`
-				).then((headerModule: { [key: string]: React.ElementType }) => {
-					setSupportHeader(() => headerModule.Header ?? null);
-				});
+				return window
+					.guardianPolyfilledImport(module.url)
+					.then(
+						(headerModule: {
+							[key: string]: React.ElementType;
+						}) => {
+							setSupportHeader(
+								() => headerModule[module.name] ?? null,
+							);
+						},
+					);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${String(error)}`;
@@ -411,7 +417,7 @@ const ReaderRevenueLinksNative = ({
 };
 
 /**
- * Container for `ReaderRevenueLinksRemote` or `ReaderRevenueLinksNative`
+ * Container for `ReaderRevenueLinksRemote` or `ReaderRevenueLinksRemote`
  *
  * ## Why does this need to be an Island?
  *
