@@ -2,9 +2,8 @@ import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import { Island } from './Island';
-import { Nav } from './Nav/Nav';
 import { Section } from './Section';
-import { SubNav } from './SubNav.importable';
+import { Titlepiece } from './Titlepiece';
 import { TopBar } from './TopBar.importable';
 
 type Props = {
@@ -82,6 +81,20 @@ export const Masthead = ({
 
 		<Section
 			fullWidth={true}
+			showTopBorder={false}
+			showSideBorders={false}
+			padSides={false}
+			shouldCenter={false}
+			backgroundColour={themePalette('--masthead-nav-background')}
+			element="header"
+			hasPageSkin={hasPageSkin}
+			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
+		>
+			<Titlepiece />
+		</Section>
+
+		{/* <Section
+			fullWidth={true}
 			backgroundColour={themePalette('--masthead-nav-background')}
 			borderColour={themePalette('--masthead-nav-border')}
 			showTopBorder={false}
@@ -116,6 +129,6 @@ export const Masthead = ({
 					/>
 				</Island>
 			</Section>
-		)}
+		)} */}
 	</>
 );
