@@ -77,11 +77,11 @@ test.describe('E2E Page rendering', () => {
 			).toBeVisible();
 
 			// expect most read right to be loaded, its data response and its text to be visible
-			await waitForIsland(page, 'MostViewedRightWrapper', {});
+			await waitForIsland(page, 'MostViewedRightWithAd', {});
 			await mostReadRightResponsePromise;
 			await expect(
 				page
-					.locator(`gu-island[name="MostViewedRightWrapper"]`)
+					.locator(`gu-island[name="MostViewedRightWithAd"]`)
 					.getByText('Most Viewed'),
 			).toBeVisible();
 
