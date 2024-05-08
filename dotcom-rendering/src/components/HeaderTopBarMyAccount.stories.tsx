@@ -3,7 +3,7 @@ import { MyAccount } from './HeaderTopBarMyAccount';
 
 export default {
 	component: MyAccount,
-	title: 'Components/MyAccount',
+	title: 'Components/HeaderTopBarMyAccount',
 	parameters: {
 		backgrounds: { default: 'dark' },
 		layout: 'centered',
