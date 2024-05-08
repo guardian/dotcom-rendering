@@ -980,10 +980,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					(showOnwardsAllRows || showOnwardsTopRow) && (
 						<Section
 							fullWidth={true}
-							// backgroundColour={themePalette(
-							// 	'--article-section-background',
-							// )}
-							backgroundColour={'hotpink'}
+							backgroundColour={themePalette(
+								'--article-section-background',
+							)}
 							borderColour={themePalette('--article-border')}
 							fontColour={themePalette('--article-section-title')}
 						>
