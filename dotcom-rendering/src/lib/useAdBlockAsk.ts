@@ -124,6 +124,10 @@ export const useAdblockAsk = ({
 							.getElementById(slotId)
 							?.closest('.ad-slot-container')
 							?.remove();
+						EventTimer.get().setProperty(
+							'didDisplayAdBlockAsk',
+							true,
+						);
 					}
 
 					// Record ad block detection in commercial metrics
