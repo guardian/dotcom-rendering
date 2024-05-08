@@ -1,4 +1,4 @@
-import { createAlternateLangLinks } from './alternate-lang-links';
+import { generateAlternateLangLinks } from './alternate-lang-links';
 import { editionalisedPages, editionList } from './edition';
 
 const everyEditionWithLangLocale = editionList.filter(
@@ -16,6 +16,7 @@ const everyEditionWithEditionalisedPages = editionList
 	)
 	.flat();
 
+// This is an invalid combination e.g. europe/travel
 const everyEditionWithNoEditionalisedPages = editionList
 	.filter((edition) => !edition.hasEditionalisedPages)
 	.map((edition) =>
@@ -24,10 +25,10 @@ const everyEditionWithNoEditionalisedPages = editionList
 	.flat();
 
 describe('alternate lang links', () => {
-	it('pageIds for network fronts with a lang locale', () => {
+	it('generate hreflang links for network fronts with a lang locale', () => {
 		const langLinksForEditionsWithLangLocale =
 			everyEditionWithLangLocale.map((edition) => {
-				return createAlternateLangLinks(
+				return generateAlternateLangLinks(
 					'https://www.theguardian.com',
 					edition.pageId,
 				);
@@ -42,10 +43,10 @@ describe('alternate lang links', () => {
 			]);
 		}
 	});
-	it('pageIds for network fronts with NO lang locale', () => {
+	it('do NOT generate hreflang links for network fronts with NO lang locale', () => {
 		const langLinksForEditionsWithNoLangLocale =
 			everyEditionWithNoLangLocale.map((edition) => {
-				return createAlternateLangLinks(
+				return generateAlternateLangLinks(
 					'https://www.theguardian.com',
 					edition.pageId,
 				);
@@ -54,13 +55,12 @@ describe('alternate lang links', () => {
 			expect(langLinks.length).toBe(0);
 		}
 	});
-	it('pageIds for editions with editionalised pages', () => {
+	it('generate hreflang links for editionalised pages', () => {
 		for (const pageId of everyEditionWithEditionalisedPages) {
-			const langLinks = createAlternateLangLinks(
+			const langLinks = generateAlternateLangLinks(
 				'https://www.theguardian.com',
 				pageId,
 			);
-
 			const pageIdSuffix = pageId.split('/')[1] ?? '';
 			expect(langLinks.length).toBe(3);
 			expect(langLinks).toEqual([
@@ -70,16 +70,16 @@ describe('alternate lang links', () => {
 			]);
 		}
 	});
-	it('pageIds for editions with NO editionalised pages', () => {
+	it('do NOT generate hreflang links for editions with NO editionalised pages', () => {
 		for (const pageId of everyEditionWithNoEditionalisedPages) {
-			const langLinks = createAlternateLangLinks(
+			const langLinks = generateAlternateLangLinks(
 				'https://www.theguardian.com',
 				pageId,
 			);
 			expect(langLinks.length).toBe(0);
 		}
 	});
-	it('pageIds that are NOT editionalised pages', () => {
+	it('do NOT generate hreflang links for NON editionalised pages', () => {
 		const pageIdsNotEditionalisedPages = [
 			'uk/something',
 			'us/something',
@@ -88,7 +88,7 @@ describe('alternate lang links', () => {
 			'uk/business/something',
 		];
 		for (const pageId of pageIdsNotEditionalisedPages) {
-			const langLinks = createAlternateLangLinks(
+			const langLinks = generateAlternateLangLinks(
 				'https://www.theguardian.com',
 				pageId,
 			);

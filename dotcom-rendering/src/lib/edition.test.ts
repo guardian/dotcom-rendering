@@ -20,9 +20,7 @@ describe('is network front', () => {
 		);
 	});
 	it('returns false if pageId is NOT a network front', () => {
-		expect(
-			everyEditionalisedPage.every((page) => isNetworkFront(page)),
-		).toBe(false);
+		expect(everyEditionalisedPage.every(isNetworkFront)).toBe(false);
 		expect(isNetworkFront('eu')).toBe(false);
 		expect(isNetworkFront('int')).toBe(false);
 		expect(isNetworkFront('uk/')).toBe(false);

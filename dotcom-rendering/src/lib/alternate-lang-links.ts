@@ -33,13 +33,13 @@ const collectAlternateLangLinks = ({
 	}, []);
 };
 
-const createAlternateLangLinks = (
+const generateAlternateLangLinks = (
 	baseUrl: string,
 	pageId: string,
 ): string[] => {
 	if (isNetworkFront(pageId)) {
 		const pageEdition = getEditionFromPageId(pageId);
-		const hasLangLocale = pageEdition?.langLocale;
+		const hasLangLocale = !!pageEdition?.langLocale;
 		if (hasLangLocale) {
 			return collectAlternateLangLinks({ baseUrl });
 		}
@@ -47,10 +47,11 @@ const createAlternateLangLinks = (
 	const parsedEditionalisedPage = splitEditionalisedPage(pageId);
 	const isEditionalisedPage = parsedEditionalisedPage !== undefined;
 	if (isEditionalisedPage) {
+		// e.g. uk/travel
 		const [networkId, pageIdSuffix] = parsedEditionalisedPage;
 		const pageEdition = getEditionFromPageId(networkId);
-		const hasLangLocale = pageEdition?.langLocale;
-		const hasEditionalisedPages = pageEdition?.hasEditionalisedPages;
+		const hasLangLocale = !!pageEdition?.langLocale;
+		const hasEditionalisedPages = !!pageEdition?.hasEditionalisedPages;
 		if (hasLangLocale && hasEditionalisedPages) {
 			return collectAlternateLangLinks({
 				baseUrl,
@@ -62,4 +63,4 @@ const createAlternateLangLinks = (
 	return [];
 };
 
-export { createAlternateLangLinks };
+export { generateAlternateLangLinks };

@@ -72,8 +72,12 @@ const editionList: Tuple<Edition, 5> = [
 	},
 ];
 
-const ukEdition = editionList[0];
+const [ukEdition] = editionList;
 
+/**
+ * The list of editionalised pages was copied from Frontend:
+ * https://github.com/guardian/frontend/blob/60c6b55944d52d87039a2a844665cf39dc7fe437/common/app/common/Edition.scala#L20-L35
+ */
 const editionalisedPages = [
 	'business',
 	'business-to-business',
@@ -114,6 +118,15 @@ const isEditionId = isOneOf(editionList.map(({ editionId }) => editionId));
 const isNetworkFront = (pageId: string): boolean =>
 	editionList.some((edition) => edition.pageId === pageId);
 
+/**
+ * Given an editionalised pageId such as 'uk/travel' split into ['uk', 'travel']
+ * Checks:
+ * a) the first section is a network front
+ * b) the second section is an editionalised page
+ *
+ * @param pageId
+ * @returns
+ */
 const splitEditionalisedPage = (
 	pageId: string,
 ): undefined | [string, string] => {

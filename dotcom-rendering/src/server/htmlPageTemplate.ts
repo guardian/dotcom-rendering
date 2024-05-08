@@ -68,7 +68,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		renderingTarget,
 		hasPageSkin = false,
 		weAreHiring,
-		alternateLangLinks,
+		alternateLangLinks = [],
 	} = props;
 
 	/**
@@ -207,7 +207,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 						? `<link rel="canonical" href="${canonicalUrl}" />`
 						: '<!-- no canonical URL -->'
 				}
-				${alternateLangLinks?.join('\n') ?? ''}
+				${alternateLangLinks.join('\n')}
 				${
 					renderingTarget === 'Web'
 						? `<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">`
