@@ -71,17 +71,17 @@ export const MostViewedFooterData = ({
 		abTestCypressDataAttr = 'ab-test-variant';
 	}
 
+	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
+	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
+
 	useEffect(() => {
 		const variant = ABTestAPI?.runnableTest(onwardJourneys)?.variantToRun;
 		if (!variant) {
 			// we are not in the onwards journey test
 			return setShow(true);
 		}
-		setShow(['control', 'bottom-only'].includes(variant.id));
+		setShow(['control', 'most-viewed'].includes(variant.id));
 	}, [ABTestAPI]);
-
-	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
-	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
 	/** if falsy/undefined, no calls are made to the endpoint by SWR, which is wrapped by useApi  */
 	const url = show ? buildSectionUrl(ajaxUrl, edition, sectionId) : undefined;
