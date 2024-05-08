@@ -22,7 +22,7 @@ const clientConfig = {
 	pmTab: 'purposes',
 	stageCampaign: false,
 	privacyManagerId: 145885,
-	initialHeight: 60,
+	initialHeight: 80,
 	isTCFV2: true,
 	propertyHref: 'https://theguardian.amp',
 	targetingParams: {
