@@ -37,8 +37,12 @@ describe('MostViewedFooterData', () => {
 			</ConfigProvider>,
 		);
 
-		// Calls api once only
-		expect(useApi).toHaveBeenCalledTimes(1);
+		// we start with an undefined URL before we know if we’re in a test
+		expect(useApi).toHaveBeenCalledTimes(2);
+		// Calls api with the correct URL
+		expect(useApi).toHaveBeenLastCalledWith(
+			'https://api.nextgen.guardianapps.co.uk/most-read/Section Name.json?_edition=UK&dcr=true',
+		);
 
 		// Renders all 20 items
 		expect(getAllByText(/LINKTEXT/).length).toBe(20);
