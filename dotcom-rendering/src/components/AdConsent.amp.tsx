@@ -134,9 +134,7 @@ export const AdConsent = () => {
 			<amp-consent
 				layout="nodisplay"
 				id="consent"
-				style={{
-					background: 'none',
-				}}
+				style={{ background: 'none' }}
 			>
 				<JsonScript
 					o={{
