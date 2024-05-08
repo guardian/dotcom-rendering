@@ -6,10 +6,12 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold17,
+	headlineBold24,
 	palette,
 	space,
-	textSans,
+	textSans12,
+	textSans15,
 } from '@guardian/source-foundations';
 import {
 	Hide,
@@ -28,11 +30,11 @@ const DOTS_COUNT = 3;
 
 const headingStyles = () => css`
 	color: ${palette.neutral[100]};
-	${headline.xxxsmall({ fontWeight: 'bold' })};
+	${headlineBold17}
 	margin: 0;
 
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: 'bold' })};
+		${headlineBold24}
 	}
 `;
 
@@ -40,10 +42,11 @@ const subHeadingStyles = css`
 	color: ${palette.brandAlt[400]};
 	margin: 0;
 
-	${textSans.xxsmall({ fontWeight: 'regular', lineHeight: 'tight' })};
+	${textSans12}
+	line-height: 1.15;
 
 	${from.desktop} {
-		${textSans.small({ fontWeight: 'regular', lineHeight: 'tight' })};
+		${textSans15}
 	}
 `;
 
@@ -85,10 +88,12 @@ const dotStyles = css`
 
 const benefitTextStyles = css`
 	color: ${palette.neutral[100]};
-	${textSans.xxsmall({ lineHeight: 'tight' })};
+	${textSans12}
+	line-height: 1.15;
 
 	${from.desktop} {
-		${textSans.small({ lineHeight: 'regular' })};
+		${textSans15}
+		line-height: 1;
 	}
 `;
 
@@ -128,7 +133,7 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 			animationSteps.push({ callback, ms });
 		};
 
-		if (benefits === null || !benefits.length) {
+		if (!(benefits ?? []).length) {
 			return;
 		}
 
@@ -160,7 +165,7 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 			setBenefitVisible(true);
 		}, FADE_TIME_MS + ANIMATION_DELAY_MS);
 
-		if (benefitIndex < benefits.length - 1) {
+		if (benefitIndex < (benefits ?? []).length - 1) {
 			// Fade out benefit text
 			queueAnimation(() => {
 				setBenefitVisible(false);

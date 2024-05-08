@@ -62,6 +62,7 @@ ManyBenefits.args = {
 };
 
 export const WithoutBenefits = Template.bind({});
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Omitting benefits arg from the story
 const { benefits, ...contentWithoutBenefits } = baseArgs.content;
 WithoutBenefits.args = {
 	...baseArgs,

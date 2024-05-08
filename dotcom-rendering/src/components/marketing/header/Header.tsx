@@ -6,9 +6,13 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold20,
+	headlineBold24,
+	headlineBold28,
+	headlineBold34,
 	palette as sourcePalette,
-	textSans,
+	textSans17,
+	textSansBold15,
 } from '@guardian/source-foundations';
 import {
 	Hide,
@@ -22,24 +26,22 @@ import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';
 
 const messageStyles = (isThankYouMessage: boolean) => css`
 	color: ${sourcePalette.brandAlt[400]};
-	${headline.xxsmall({ fontWeight: 'bold' })};
+	${headlineBold20}
 	margin-bottom: 3px;
 
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: 'bold' })}
+		${headlineBold24}
 	}
 
 	${from.leftCol} {
-		${isThankYouMessage
-			? headline.small({ fontWeight: 'bold' })
-			: headline.medium({ fontWeight: 'bold' })}
+		${isThankYouMessage ? headlineBold28 : headlineBold34}
 	}
 `;
 
 const linkStyles = css`
 	height: 32px;
 	min-height: 32px;
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15}
 	border-radius: 16px;
 	padding: 0 12px 0 12px;
 	line-height: 18px;
@@ -53,7 +55,7 @@ const linkStyles = css`
 
 const subMessageStyles = css`
 	color: ${sourcePalette.neutral[100]};
-	${textSans.medium()};
+	${textSans17}
 	margin: 5px 0;
 `;
 
@@ -73,7 +75,7 @@ const Header: ReactComponent<HeaderRenderProps> = (
 	};
 	return (
 		<div>
-			<Hide below="tablet">
+			<Hide until="tablet">
 				<div css={messageStyles(false)}>
 					<h2 css={headingStyles}>{heading}</h2>
 				</div>
