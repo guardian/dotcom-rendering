@@ -28,6 +28,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
@@ -42,7 +43,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { useAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
@@ -266,25 +266,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
 
-	const abTests = useAB();
-	const abTestsApi = abTests?.api;
-	const showOnwardsAllRows = abTestsApi?.isUserInVariant(
-		'OnwardJourneys',
-		'control',
-	);
-	const showOnwardsTopRow = abTestsApi?.isUserInVariant(
-		'OnwardJourneys',
-		'variant-1',
-	);
-	const showOnwardsBottomRow = abTestsApi?.isUserInVariant(
-		'OnwardJourneys',
-		'variant-2',
-	);
-	const showOnwardsMostViewed = abTestsApi?.isUserInVariant(
-		'OnwardJourneys',
-		'variant-3',
-	);
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -303,6 +284,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 		?.bylineLargeImageUrl;
 
 	const displayAvatarUrl = avatarUrl ? true : false;
+
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	return (
 		<>
@@ -328,111 +312,131 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							</Section>
 						</Stuck>
 					)}
-					<SendToBack>
-						<Section
-							fullWidth={true}
-							shouldCenter={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="header"
-						>
-							<Header
-								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
-								}
-							/>
-						</Section>
-						<Section
-							fullWidth={true}
-							borderColour={sourcePalette.brand[600]}
-							showTopBorder={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="nav"
-							format={format}
-						>
-							<Nav
-								nav={props.NAV}
-								isImmersive={
-									format.display === ArticleDisplay.Immersive
-								}
-								displayRoundel={
-									format.display ===
-										ArticleDisplay.Immersive ||
-									format.theme === ArticleSpecial.Labs
-								}
-								selectedPillar={props.NAV.selectedPillar}
-								subscribeUrl={
-									article.nav.readerRevenueLinks.header
-										.subscribe
-								}
-								editionId={article.editionId}
-							/>
-						</Section>
+					{inUpdatedHeaderABTest ? (
+						<Masthead
+							nav={props.NAV}
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							subscribeUrl={
+								article.nav.readerRevenueLinks.header.subscribe
+							}
+							discussionApiUrl={article.config.discussionApiUrl}
+							idApiUrl={article.config.idApiUrl}
+							showSubNav={true}
+							isImmersive={false}
+							displayRoundel={false}
+							hasPageSkin={false}
+							hasPageSkinContentSelfConstrain={false}
+						/>
+					) : (
+						<SendToBack>
+							<Section
+								fullWidth={true}
+								shouldCenter={false}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="header"
+							>
+								<Header
+									editionId={article.editionId}
+									idUrl={article.config.idUrl}
+									mmaUrl={article.config.mmaUrl}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									urls={article.nav.readerRevenueLinks.header}
+									remoteHeader={
+										!!article.config.switches.remoteHeader
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									idApiUrl={article.config.idApiUrl}
+									headerTopBarSearchCapiSwitch={
+										!!article.config.switches
+											.headerTopBarSearchCapi
+									}
+								/>
+							</Section>
+							<Section
+								fullWidth={true}
+								borderColour={sourcePalette.brand[600]}
+								showTopBorder={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="nav"
+								format={format}
+							>
+								<Nav
+									nav={props.NAV}
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={props.NAV.selectedPillar}
+									subscribeUrl={
+										article.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									editionId={article.editionId}
+								/>
+							</Section>
 
-						{props.NAV.subNavSections && (
+							{props.NAV.subNavSections && (
+								<Section
+									fullWidth={true}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
+									padSides={false}
+									element="aside"
+									format={format}
+									showTopBorder={showSubNavTopBorder}
+								>
+									<Island
+										priority="enhancement"
+										defer={{ until: 'idle' }}
+									>
+										<SubNav
+											subNavSections={
+												props.NAV.subNavSections
+											}
+											currentNavLink={
+												props.NAV.currentNavLink
+											}
+											position="header"
+										/>
+									</Island>
+								</Section>
+							)}
+
 							<Section
 								fullWidth={true}
 								backgroundColour={themePalette(
 									'--article-background',
 								)}
 								padSides={false}
-								element="aside"
-								format={format}
-								showTopBorder={showSubNavTopBorder}
+								showTopBorder={false}
+								borderColour={themePalette('--article-border')}
 							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
-								>
-									<SubNav
-										subNavSections={
-											props.NAV.subNavSections
-										}
-										currentNavLink={
-											props.NAV.currentNavLink
-										}
-										position="header"
-									/>
-								</Island>
+								<StraightLines
+									count={4}
+									color={themePalette('--straight-lines')}
+									cssOverrides={css`
+										display: block;
+									`}
+								/>
 							</Section>
-						)}
-
-						<Section
-							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-							padSides={false}
-							showTopBorder={false}
-							borderColour={themePalette('--article-border')}
-						>
-							<StraightLines
-								count={4}
-								color={themePalette('--straight-lines')}
-								cssOverrides={css`
-									display: block;
-								`}
-							/>
-						</Section>
-					</SendToBack>
+						</SendToBack>
+					)}
 				</div>
 			)}
 
@@ -703,36 +707,30 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{article.storyPackage &&
-					(showOnwardsAllRows || showOnwardsTopRow) && (
-						<Section
-							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-							borderColour={themePalette('--article-border')}
-						>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<Carousel
-									heading={article.storyPackage.heading}
-									trails={article.storyPackage.trails.map(
-										decideTrail,
-									)}
-									onwardsSource="more-on-this-story"
-									format={format}
-									leftColSize={'compact'}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-								/>
-							</Island>
-						</Section>
-					)}
+				{article.storyPackage && (
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<Carousel
+								heading={article.storyPackage.heading}
+								trails={article.storyPackage.trails.map(
+									decideTrail,
+								)}
+								onwardsSource="more-on-this-story"
+								format={format}
+								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+							/>
+						</Island>
+					</Section>
+				)}
 
-				{isWeb && (showOnwardsAllRows || showOnwardsBottomRow) && (
+				{isWeb && (
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<OnwardsUpper
 							ajaxUrl={article.config.ajaxUrl}
@@ -784,36 +782,35 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 					</Section>
 				)}
 
-				{!isPaidContent &&
-					(showOnwardsAllRows || showOnwardsMostViewed) && (
-						<Section
-							title="Most viewed"
-							padContent={false}
-							verticalMargins={false}
-							element="aside"
-							data-print-layout="hide"
-							data-link-name="most-popular"
-							data-component="most-popular"
-							backgroundColour={themePalette(
-								'--article-section-background',
-							)}
-							borderColour={themePalette('--article-border')}
-							fontColour={themePalette('--article-section-title')}
-						>
-							<MostViewedFooterLayout renderAds={renderAds}>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<MostViewedFooterData
-										sectionId={article.config.section}
-										ajaxUrl={article.config.ajaxUrl}
-										edition={article.editionId}
-									/>
-								</Island>
-							</MostViewedFooterLayout>
-						</Section>
-					)}
+				{!isPaidContent && (
+					<Section
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
+						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
+					>
+						<MostViewedFooterLayout renderAds={renderAds}>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<MostViewedFooterData
+									sectionId={article.config.section}
+									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
+					</Section>
+				)}
 
 				{renderAds && (
 					<Section

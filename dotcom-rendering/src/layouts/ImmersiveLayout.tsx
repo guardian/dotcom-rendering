@@ -34,7 +34,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { Nav, minNavHeightPx } from '../components/Nav/Nav';
+import { minNavHeightPx, Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -50,7 +50,6 @@ import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
-import { useAB } from '../lib/useAB';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
@@ -240,25 +239,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
-
-	const abTests = useAB();
-	const abTestsApi = abTests?.api;
-	const showOnwardsAllRows = abTestsApi?.isUserInVariant(
-		'OnwardJourneys',
-		'control',
-	);
-	const showOnwardsTopRow = abTestsApi?.isUserInVariant(
-		'OnwardJourneys',
-		'variant-1',
-	);
-	const showOnwardsBottomRow = abTestsApi?.isUserInVariant(
-		'OnwardJourneys',
-		'variant-2',
-	);
-	const showOnwardsMostViewed = abTestsApi?.isUserInVariant(
-		'OnwardJourneys',
-		'variant-3',
-	);
 
 	const showBodyEndSlot =
 		isWeb &&
@@ -840,60 +820,51 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					</Section>
 				)}
 
-				{article.storyPackage &&
-					(showOnwardsAllRows || showOnwardsTopRow) && (
-						<Section
-							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-							borderColour={themePalette('--article-border')}
+				{article.storyPackage && (
+					<Section
+						fullWidth={true}
+						backgroundColour={themePalette('--article-background')}
+						borderColour={themePalette('--article-border')}
+					>
+						<Island
+							priority="enhancement"
+							defer={{ until: 'visible' }}
 						>
-							<Island
-								priority="enhancement"
-								defer={{ until: 'visible' }}
-							>
-								<Carousel
-									heading={article.storyPackage.heading}
-									trails={article.storyPackage.trails.map(
-										decideTrail,
-									)}
-									onwardsSource="more-on-this-story"
-									format={format}
-									leftColSize={'compact'}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-								/>
-							</Island>
-						</Section>
-					)}
-
-				{(showOnwardsAllRows || showOnwardsBottomRow) && (
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<OnwardsUpper
-							ajaxUrl={article.config.ajaxUrl}
-							hasRelated={article.hasRelated}
-							hasStoryPackage={article.hasStoryPackage}
-							isAdFreeUser={article.isAdFreeUser}
-							pageId={article.pageId}
-							isPaidContent={
-								article.config.isPaidContent ?? false
-							}
-							showRelatedContent={
-								article.config.showRelatedContent
-							}
-							keywordIds={article.config.keywordIds}
-							contentType={article.contentType}
-							tags={article.tags}
-							format={format}
-							pillar={format.theme}
-							editionId={article.editionId}
-							shortUrlId={article.config.shortUrlId}
-							discussionApiUrl={article.config.discussionApiUrl}
-						/>
-					</Island>
+							<Carousel
+								heading={article.storyPackage.heading}
+								trails={article.storyPackage.trails.map(
+									decideTrail,
+								)}
+								onwardsSource="more-on-this-story"
+								format={format}
+								leftColSize={'compact'}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+							/>
+						</Island>
+					</Section>
 				)}
+
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<OnwardsUpper
+						ajaxUrl={article.config.ajaxUrl}
+						hasRelated={article.hasRelated}
+						hasStoryPackage={article.hasStoryPackage}
+						isAdFreeUser={article.isAdFreeUser}
+						pageId={article.pageId}
+						isPaidContent={article.config.isPaidContent ?? false}
+						showRelatedContent={article.config.showRelatedContent}
+						keywordIds={article.config.keywordIds}
+						contentType={article.contentType}
+						tags={article.tags}
+						format={format}
+						pillar={format.theme}
+						editionId={article.editionId}
+						shortUrlId={article.config.shortUrlId}
+						discussionApiUrl={article.config.discussionApiUrl}
+					/>
+				</Island>
 
 				{showComments && (
 					<Section
@@ -923,36 +894,35 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						/>
 					</Section>
 				)}
-				{!isPaidContent &&
-					(showOnwardsAllRows || showOnwardsMostViewed) && (
-						<Section
-							title="Most viewed"
-							padContent={false}
-							verticalMargins={false}
-							element="aside"
-							data-print-layout="hide"
-							data-link-name="most-popular"
-							data-component="most-popular"
-							backgroundColour={themePalette(
-								'--article-section-background',
-							)}
-							borderColour={themePalette('--article-border')}
-							fontColour={themePalette('--article-section-title')}
-						>
-							<MostViewedFooterLayout renderAds={renderAds}>
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<MostViewedFooterData
-										sectionId={article.config.section}
-										ajaxUrl={article.config.ajaxUrl}
-										edition={article.editionId}
-									/>
-								</Island>
-							</MostViewedFooterLayout>
-						</Section>
-					)}
+				{!isPaidContent && (
+					<Section
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
+						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
+						borderColour={themePalette('--article-border')}
+						fontColour={themePalette('--article-section-title')}
+					>
+						<MostViewedFooterLayout renderAds={renderAds}>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<MostViewedFooterData
+									sectionId={article.config.section}
+									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
+					</Section>
+				)}
 				{!isLabs && renderAds && (
 					<Section
 						fullWidth={true}
