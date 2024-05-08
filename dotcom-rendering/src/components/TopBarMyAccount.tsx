@@ -5,7 +5,12 @@
  */
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { from, space, textSansBold17 } from '@guardian/source-foundations';
+import {
+	from,
+	space,
+	textSansBold17,
+	until,
+} from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
@@ -164,15 +169,14 @@ export const dropDownOverrides = css`
 	}
 
 	/** Handles case of *new* top bar being 52px high until tablet */
-	&:not(button) {
-		top: 48px;
+	${until.tablet} {
+		&:not(button) {
+			top: 48px;
+		}
 	}
 
 	${from.tablet} {
 		right: 0;
-		&:not(button) {
-			top: 0;
-		}
 	}
 `;
 
