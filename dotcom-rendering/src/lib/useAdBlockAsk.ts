@@ -108,15 +108,11 @@ export const useAdblockAsk = ({
 
 	useEffect(() => {
 		const makeRequest = async () => {
-			if (isInVariant) {
-				!adBlockerDetected &&
-					EventTimer.get().setProperty('detectedAdBlocker', false);
+			// Only perform the detection check in the variant of the AB test and if we haven't already detected an ad-blocker
+			if (isInVariant && !adBlockerDetected) {
+				EventTimer.get().setProperty('detectedAdBlocker', false);
 
-				if (
-					// Once we've detected an ad-blocker, we don't care about subsequent detections
-					!adBlockerDetected &&
-					(await detectByRequests())
-				) {
+				if (await detectByRequests()) {
 					setAdBlockerDetected(true);
 
 					// Is the reader/content eligible for displaying such a message
