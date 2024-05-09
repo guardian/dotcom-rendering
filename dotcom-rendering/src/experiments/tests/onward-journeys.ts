@@ -7,7 +7,7 @@ export const onwardJourneys: ABTest = {
 	author: '@web-experience',
 	description:
 		'Show the user one onward journey containers at a time to see which is the most effective',
-	audience: 25 / 100,
+	audience: 100 / 100,
 	audienceOffset: 0,
 	audienceCriteria: 'all users',
 	dataLinkNames: 'OnwardJourneys',
