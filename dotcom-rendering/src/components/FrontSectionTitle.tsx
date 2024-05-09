@@ -22,12 +22,12 @@ const titleStyle = css`
 	}
 `;
 
-const borderStyling = css`
+const advertisingPartnerDottedBorder = css`
 	border: 1px dotted ${sourcePalette.neutral[86]};
 	margin-top: 0.375rem;
 `;
 
-const brandingStyle = css`
+const brandingAdvertisingPartnerStyle = css`
 	margin-top: 5px;
 	padding: 6px;
 	border: 1px solid ${palette('--branding-border')};
@@ -47,14 +47,21 @@ const brandingStyle = css`
 	}
 `;
 
+const labelAdvertisingPartnerStyles = css`
+	margin-top: 0;
+	border-top: 0;
+`;
+
 const labelStyles = css`
 	${textSans12};
 	line-height: 1rem;
 	color: ${sourcePalette.neutral[46]};
 	font-weight: bold;
+	margin-top: 0.375rem;
 	padding-right: 0.625rem;
 	padding-bottom: 0.625rem;
 	text-align: left;
+	border-top: 1px dotted ${sourcePalette.neutral[86]};
 `;
 
 const aboutThisLinkStyles = css`
@@ -63,6 +70,10 @@ const aboutThisLinkStyles = css`
 	color: ${sourcePalette.neutral[46]};
 	font-weight: normal;
 	text-decoration: none;
+`;
+
+const aboutThisLinkAdvertisingPartnerStyles = css`
+	color: #b7271b;
 `;
 
 export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
@@ -143,15 +154,42 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 				isContainerBranding,
 				isFrontBranding,
 			} = collectionBranding;
+			const isAdvertisingPartnerPlaceholder =
+				logo.label.toLowerCase() === 'supported by';
 			if (isFrontBranding || isContainerBranding) {
 				return (
 					<div css={titleStyle}>
 						{title}
-						<div css={borderStyling}></div>
-						<div css={brandingStyle}>
-							<p css={labelStyles}>{logo.label}</p>
+						<div
+							css={
+								isAdvertisingPartnerPlaceholder &&
+								advertisingPartnerDottedBorder
+							}
+						></div>
+						<div
+							css={
+								isAdvertisingPartnerPlaceholder &&
+								brandingAdvertisingPartnerStyle
+							}
+						>
+							<p
+								css={[
+									labelStyles,
+									isAdvertisingPartnerPlaceholder &&
+										labelAdvertisingPartnerStyles,
+								]}
+							>
+								{logo.label}
+							</p>
 							<Badge imageSrc={logo.src} href={logo.link} />
-							<a href={aboutThisLink} css={aboutThisLinkStyles}>
+							<a
+								href={aboutThisLink}
+								css={[
+									aboutThisLinkStyles,
+									isAdvertisingPartnerPlaceholder &&
+										aboutThisLinkAdvertisingPartnerStyles,
+								]}
+							>
 								About this content
 							</a>
 						</div>
