@@ -10,7 +10,7 @@ import type {
 	OphanAction,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useCallback, useEffect } from 'react';
-import { type HasBeenSeen, useHasBeenSeen } from '../hooks/useHasBeenSeen';
+import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
 import {
 	addRegionIdAndTrackingParamsToSupportUrl,
@@ -145,12 +145,10 @@ export const headerWrapper = (
 			],
 		);
 
-		const [hasBeenSeen, setNode] = useHasBeenSeen(
-			{
-				threshold: 0,
-			},
-			true,
-		) as HasBeenSeen;
+		const [hasBeenSeen, setNode] = useIsInView({
+			debounce: true,
+			threshold: 0,
+		});
 
 		useEffect(() => {
 			if (hasBeenSeen) {
