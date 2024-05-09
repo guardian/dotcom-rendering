@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isString, joinUrl, log, Pillar } from '@guardian/libs';
+import { isUndefined, joinUrl, log, Pillar } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { onwardJourneys } from '../experiments/tests/onward-journeys';
 import type { EditionId } from '../lib/edition';
@@ -217,7 +217,7 @@ export const OnwardsUpper = ({
 
 	useEffect(() => {
 		const variantId = AB?.api.runnableTest(onwardJourneys)?.variantToRun.id;
-		if (!isString(variantId)) {
+		if (isUndefined(variantId)) {
 			// we are not in the onwards journey test
 			return setShowTopRow(true);
 		}
@@ -226,7 +226,7 @@ export const OnwardsUpper = ({
 
 	useEffect(() => {
 		const variantId = AB?.api.runnableTest(onwardJourneys)?.variantToRun.id;
-		if (!isString(variantId)) {
+		if (isUndefined(variantId)) {
 			// we are not in the onwards journey test
 			return setShowBottomRow(true);
 		}
@@ -316,16 +316,10 @@ export const OnwardsUpper = ({
 		url = undefined;
 	}
 
-	log(
-		'dotcom',
-		`Onward Journeys test: ${showTopRow ? 'top' : '___'} & ${
-			showTopRow ? 'bottom' : '______'
-		}`,
-		{
-			url,
-			curatedDataUrl,
-		},
-	);
+	log('dotcom', 'Onward Journeys test (Carousel)', {
+		showTopRow,
+		showBottomRow,
+	});
 
 	return (
 		<div css={onwardsWrapper}>

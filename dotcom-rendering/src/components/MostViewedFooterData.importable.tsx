@@ -84,11 +84,29 @@ export const MostViewedFooterData = ({
 		setShow(['control', 'most-viewed'].includes(variantId));
 	}, [ABTestAPI]);
 
+	useEffect(() => {
+		const ancestor = document
+			.querySelector('gu-island[name="MostViewedFooterData"]')
+			?.closest('section');
+
+		log('dotcom', 'Onward Journeys test (Most Viewed)', { show, ancestor });
+
+		if (ancestor) {
+			// TEMPORARY SOLUTION, we need to reach outside of the Island’s boundary
+			// Acceptable in the context of the short-lived Onwards Journey test
+			ancestor.style.display = show ? 'initial' : 'none';
+		}
+	}, [show]);
+
 	/** if falsy/undefined, no calls are made to the endpoint by SWR, which is wrapped by useApi  */
 	const url = show ? buildSectionUrl(ajaxUrl, edition, sectionId) : undefined;
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(url);
+
+	if (!show) {
+		return null;
+	}
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
