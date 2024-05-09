@@ -1,10 +1,10 @@
 import { JSDOM } from 'jsdom';
-import { createTitleId } from '../components/KeyTakeaway';
 import type {
 	NumberedTitleBlockElement,
 	SubheadingBlockElement,
 } from '../types/content';
 import type { TableOfContentsItem } from '../types/frontend';
+import { slugify } from './enhance-H2s';
 
 const extractText = (
 	element: SubheadingBlockElement | NumberedTitleBlockElement,
@@ -48,10 +48,19 @@ export const enhanceTableOfContents = (
 				'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement'
 			) {
 				for (const keyTakeaway of element.keyTakeaways) {
-					console.log(keyTakeaway.title);
 					tocItems.push({
-						id: createTitleId(keyTakeaway.title),
+						id: slugify(keyTakeaway.title),
 						title: keyTakeaway.title,
+					});
+				}
+			} else if (
+				element._type ===
+				'model.dotcomrendering.pageElements.QAndAExplainerBlockElement'
+			) {
+				for (const qAndAExplainer of element.qAndAExplainers) {
+					tocItems.push({
+						id: slugify(qAndAExplainer.title),
+						title: qAndAExplainer.title,
 					});
 				}
 			} else if (

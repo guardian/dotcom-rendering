@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { type ArticleFormat } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
+import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { KeyTakeaway as KeyTakeawayModel } from '../types/content';
@@ -21,10 +22,6 @@ const headingLineStyles = css`
 	border: none;
 	border-top: 4px solid ${palette('--heading-line')};
 `;
-
-export const createTitleId = (title: string) => {
-	return title.toLowerCase().replace(' ', '-');
-};
 
 interface KeyTakeawayProps {
 	format: ArticleFormat;
@@ -64,7 +61,7 @@ export const KeyTakeaway = ({
 			<li css={keyTakeawayStyles} data-spacefinder-role="nested">
 				<hr css={headingLineStyles} />
 				<Subheading
-					id={createTitleId(keyTakeaway.title)}
+					id={slugify(keyTakeaway.title)}
 					format={format}
 					topPadding={false}
 				>
