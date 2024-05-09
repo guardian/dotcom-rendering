@@ -1,3 +1,4 @@
+import { getConsentFor, onConsentChange } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 
 /**
@@ -64,16 +65,28 @@ const detectByRequests = async () => {
 export const useDetectAdBlock = (): boolean => {
 	const [adBlockerDetected, setAdBlockerDetected] = useState<boolean>(false);
 	const [detectionHasRun, setDetectionHasRun] = useState<boolean>(false);
+	const [hasConsentForGoogletag, setHasConsentForGoogletag] = useState(false);
+
+	useEffect(() => {
+		onConsentChange((consentState) => {
+			if (consentState.tcfv2) {
+				return setHasConsentForGoogletag(
+					getConsentFor('googletag', consentState),
+				);
+			}
+			setHasConsentForGoogletag(true);
+		});
+	}, []);
 
 	useEffect(() => {
 		const makeRequest = async () => {
-			if (!detectionHasRun) {
+			if (!detectionHasRun && hasConsentForGoogletag) {
 				setAdBlockerDetected(await detectByRequests());
 				setDetectionHasRun(true);
 			}
 		};
 		void makeRequest();
-	});
+	}, [detectionHasRun, hasConsentForGoogletag]);
 
 	return adBlockerDetected;
 };
