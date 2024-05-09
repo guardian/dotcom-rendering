@@ -63,14 +63,13 @@ const detectByRequests = async () => {
 
 export const useDetectAdBlock = (): boolean => {
 	const [adBlockerDetected, setAdBlockerDetected] = useState<boolean>(false);
-	const [adBlockerDetectionRun, setAdBlockerDetectionRun] =
-		useState<boolean>(false);
+	const [detectionHasRun, setDetectionHasRun] = useState<boolean>(false);
 
 	useEffect(() => {
 		const makeRequest = async () => {
-			if (!adBlockerDetectionRun && (await detectByRequests())) {
-				setAdBlockerDetectionRun(true);
-				setAdBlockerDetected(true);
+			if (!detectionHasRun) {
+				setAdBlockerDetected(await detectByRequests());
+				setDetectionHasRun(true);
 			}
 		};
 		void makeRequest();
