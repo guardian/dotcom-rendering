@@ -4,8 +4,12 @@ import { Titlepiece } from './Titlepiece';
 const meta = {
 	title: 'Components/Masthead/Titlepiece',
 	component: Titlepiece,
+	render: (args) => <Titlepiece {...args} />,
+	args: {
+		editionId: 'UK',
+	},
 } satisfies Meta<typeof Titlepiece>;
 
 export default meta;
 
-export const Default = () => <Titlepiece />;
+export const Default = {};

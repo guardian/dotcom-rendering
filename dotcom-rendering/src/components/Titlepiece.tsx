@@ -7,20 +7,14 @@ import {
 	space,
 	textSans14,
 } from '@guardian/source-foundations';
-import {
-	SvgChevronDownSingle,
-	SvgGuardianLogo,
-	SvgMenu,
-} from '@guardian/source-react-components';
+import { SvgGuardianLogo, SvgMenu } from '@guardian/source-react-components';
+import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
 import { TitlepieceGrid } from './TitlepieceGrid';
+import { EditionId } from 'src/lib/edition';
 
-const editions = [
-	{ longName: 'UK edition', shortName: 'UK', slug: 'uk' },
-	// { longName: "US edition", shortName: "US", slug: "us" },
-	// { longName: "Australia edition", shortName: "AUS", slug: "au" },
-	// { longName: "International edition", shortName: "INT", slug: "int" },
-	// { longName: "Europe edition", shortName: "EUR", slug: "eu" },
-];
+interface TitlepieceProps {
+	editionId: EditionId;
+}
 
 const pillars = [
 	{ name: 'News', colour: palette.news[500], path: '/news' },
@@ -60,9 +54,11 @@ const sections = [
 }>;
 
 const editionsMenuStyles = css`
-	${textSans14}
 	grid-column: content-start / content-end;
 	grid-row: 1;
+	@media (min-width: 375px) {
+		justify-self: end;
+	}
 `;
 
 const guardianLogoStyles = css`
@@ -73,6 +69,9 @@ const guardianLogoStyles = css`
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
 	margin-right: 50px;
+	@media (min-width: 1024px) {
+		// grid-row: 1 / 2;
+	}
 	svg {
 		height: 49px;
 		@media (min-width: 375px) and (max-width: 739px) {
@@ -108,6 +107,13 @@ const burgerStyles = css`
 	@media (min-width: 375px) and (max-width: 739px) {
 		grid-row: 2;
 		align-self: center;
+	}
+`;
+
+const navLinkStyles = css`
+	a {
+		color: ${palette.neutral[100]};
+		text-decoration: none;
 	}
 `;
 
@@ -176,7 +182,7 @@ const sectionsNavStyles = css`
 	}
 `;
 
-export const Titlepiece = () => {
+export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 	return (
 		<TitlepieceGrid
 			style={{
@@ -186,22 +192,12 @@ export const Titlepiece = () => {
 			type="header"
 		>
 			{/* Edition menu */}
-			<ul css={editionsMenuStyles}>
-				{editions.map(({ longName, shortName, slug }) => (
-					<li key={slug}>
-						<a
-							key={slug}
-							href={`https://www.theguardian.com/preference/edition/${slug}`}
-						>
-							{shortName}
-						</a>
-						<SvgChevronDownSingle
-							size="xsmall"
-							theme={{ fill: palette.neutral[100] }}
-						/>
-					</li>
-				))}
-			</ul>
+			<div css={editionsMenuStyles}>
+				<TitlepieceEditionDropdown
+					editionId={editionId}
+					dataLinkName={''}
+				/>
+			</div>
 
 			{/* Guardian logo */}
 			<div css={guardianLogoStyles}>
@@ -214,7 +210,7 @@ export const Titlepiece = () => {
 			</div>
 
 			{/* Pillars nav */}
-			<nav css={pillarsNavStyles}>
+			<nav css={[pillarsNavStyles, navLinkStyles]}>
 				<ul>
 					{pillars.map(({ name, path, colour }, index) => (
 						<li
@@ -244,7 +240,7 @@ export const Titlepiece = () => {
 			</nav>
 
 			{/* Sections nav */}
-			<nav css={sectionsNavStyles}>
+			<nav css={[sectionsNavStyles, navLinkStyles]}>
 				<ul>
 					{sections.map(({ name, slug }) => (
 						<li key={slug}>

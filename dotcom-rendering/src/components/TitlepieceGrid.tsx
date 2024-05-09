@@ -18,11 +18,6 @@ const grid = css`
 
 	column-gap: 10px;
 
-	a {
-		color: ${palette.neutral[100]};
-		text-decoration: none;
-	}
-
 	${from.mobileLandscape} {
 		column-gap: 20px;
 	}

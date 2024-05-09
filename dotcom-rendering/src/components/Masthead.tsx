@@ -90,7 +90,7 @@ export const Masthead = ({
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
 		>
-			<Titlepiece />
+			<Titlepiece editionId={editionId} />
 		</Section>
 
 		{/* <Section
