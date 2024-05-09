@@ -7,19 +7,11 @@ import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import { useConfig } from './ConfigContext';
 
-const brandingInteractiveStyle = css`{
-	margin: 5px 0 25px;
-	padding: 6px;
-	border: 1px solid ${palette('--branding-border')};
-	width: fit-content;
-
-	${from.desktop} {
-		padding: 9px;
-		width: 220px;
-	}
-}`;
-
 const brandingStyle = css`
+	padding-bottom: 10x;
+`;
+
+const brandingAdvertisingPartnerStyle = css`
 	margin: 5px 0 25px;
 	padding: 6px;
 	border: 1px solid ${palette('--branding-border')};
@@ -39,10 +31,25 @@ const brandingStyle = css`
 	}
 `;
 
+const brandingInteractiveStyle = css`{
+	margin: 5px 0 25px;
+	padding: 6px;
+	border: 1px solid ${palette('--branding-border')};
+	width: fit-content;
+
+	${from.desktop} {
+		padding: 9px;
+		width: 220px;
+	}
+}`;
+
+const labelAdvertisingPartnerStyle = css`
+	padding-bottom: 1px;
+`;
+
 const labelStyle = css`
 	${textSans12}
 	color: ${palette('--branding-label-text')};
-	padding-bottom: 1px;
 
 	a {
 		color: inherit;
@@ -190,9 +197,28 @@ export const Branding = ({ branding, format }: Props) => {
 
 	const { darkModeAvailable } = useConfig();
 
+	const isAdvertisingPartnerPlaceholder =
+		branding.logo.label.toLowerCase() === 'supported by';
+
 	return (
-		<div css={[brandingStyle, isInteractive && brandingInteractiveStyle]}>
-			<div css={[labelStyle, isLiveBlog && liveBlogLabelStyle]}>
+		<div
+			css={[
+				brandingStyle,
+				isAdvertisingPartnerPlaceholder &&
+					brandingAdvertisingPartnerStyle,
+				isAdvertisingPartnerPlaceholder &&
+					isInteractive &&
+					brandingInteractiveStyle,
+			]}
+		>
+			<div
+				css={[
+					labelStyle,
+					isAdvertisingPartnerPlaceholder &&
+						labelAdvertisingPartnerStyle,
+					isLiveBlog && liveBlogLabelStyle,
+				]}
+			>
 				{branding.logo.label}
 			</div>
 			<div css={brandingLogoStyle}>

@@ -73,7 +73,7 @@ const aboutThisLinkStyles = css`
 `;
 
 const aboutThisLinkAdvertisingPartnerStyles = css`
-	color: #b7271b;
+	color: ${sourcePalette.news[400]};
 `;
 
 export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
