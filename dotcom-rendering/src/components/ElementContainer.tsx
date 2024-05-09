@@ -1,6 +1,11 @@
 import { css, jsx } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, palette, space } from '@guardian/source-foundations';
+import {
+	breakpoints,
+	from,
+	palette,
+	space,
+} from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import { transparentColour } from '../lib/transparentColour';
@@ -39,7 +44,7 @@ const timelineStyles = (colour: string) => css`
 	margin: auto;
 
 	${from.leftCol} {
-		max-width: 1140px;
+		max-width: ${breakpoints.leftCol};
 		border-left: 1px solid ${colour};
 		border-right: 1px solid ${colour};
 	}
