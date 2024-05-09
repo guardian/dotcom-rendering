@@ -8,7 +8,7 @@ import type { Branding as BrandingType } from '../types/branding';
 import { useConfig } from './ConfigContext';
 
 const brandingStyle = css`
-	padding-bottom: 10x;
+	padding-bottom: 10px;
 `;
 
 const brandingAdvertisingPartnerStyle = css`
@@ -31,17 +31,12 @@ const brandingAdvertisingPartnerStyle = css`
 	}
 `;
 
-const brandingInteractiveStyle = css`{
-	margin: 5px 0 25px;
-	padding: 6px;
-	border: 1px solid ${palette('--branding-border')};
-	width: fit-content;
-
+const brandingInteractiveStyle = css`
 	${from.desktop} {
 		padding: 9px;
 		width: 220px;
 	}
-}`;
+`;
 
 const labelAdvertisingPartnerStyle = css`
 	padding-bottom: 1px;
@@ -200,15 +195,16 @@ export const Branding = ({ branding, format }: Props) => {
 	const isAdvertisingPartnerPlaceholder =
 		branding.logo.label.toLowerCase() === 'supported by';
 
+	const isAdvertisingPartnerAndInteractive =
+		isAdvertisingPartnerPlaceholder && isInteractive;
+
 	return (
 		<div
 			css={[
 				brandingStyle,
 				isAdvertisingPartnerPlaceholder &&
 					brandingAdvertisingPartnerStyle,
-				isAdvertisingPartnerPlaceholder &&
-					isInteractive &&
-					brandingInteractiveStyle,
+				isAdvertisingPartnerAndInteractive && brandingInteractiveStyle,
 			]}
 		>
 			<div
