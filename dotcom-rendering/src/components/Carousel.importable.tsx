@@ -802,7 +802,7 @@ export const Carousel = ({
 			return;
 		}
 		setShow(['control', 'top-row'].includes(variantId));
-	}, [AB, onwardsSource]);
+	}, [AB, isStoryPackage]);
 
 	const arrowName = 'carousel-small-arrow';
 
