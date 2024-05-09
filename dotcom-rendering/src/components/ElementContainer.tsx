@@ -44,13 +44,13 @@ const timelineStyles = (colour: string) => css`
 	margin: auto;
 
 	${from.leftCol} {
-		max-width: ${breakpoints.leftCol};
+		max-width: ${breakpoints.leftCol}px;
 		border-left: 1px solid ${colour};
 		border-right: 1px solid ${colour};
 	}
 
 	${from.wide} {
-		max-width: 1300px;
+		max-width: ${breakpoints.wide}px;
 	}
 `;
 
@@ -138,10 +138,8 @@ export const ElementContainer = ({
 				 */
 				id={sectionId}
 				css={[
-					shouldCenter && !isTimeline && center,
-					showSideBorders &&
-						!isTimeline &&
-						sideBorderStyles(borderColour),
+					shouldCenter && center,
+					showSideBorders && sideBorderStyles(borderColour),
 					showTopBorder && topBorderStyles(borderColour),
 					innerBackgroundColour &&
 						setBackgroundColour(innerBackgroundColour),

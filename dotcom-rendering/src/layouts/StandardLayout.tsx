@@ -496,6 +496,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								backgroundColour={sourcePalette.brand[400]}
 								element="nav"
+								shouldCenter={!isTimeline}
+								showSideBorders={!isTimeline}
 								isTimeline={isTimeline}
 							>
 								<Nav
@@ -529,6 +531,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										)}
 										padSides={false}
 										element="aside"
+										shouldCenter={!isTimeline}
+										showSideBorders={!isTimeline}
 										isTimeline={isTimeline}
 									>
 										<Island
@@ -556,6 +560,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										)}
 										padSides={false}
 										showTopBorder={false}
+										shouldCenter={!isTimeline}
+										showSideBorders={!isTimeline}
 										isTimeline={isTimeline}
 									>
 										<StraightLines
@@ -618,6 +624,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						'--article-inner-background',
 					)}
 					element="article"
+					shouldCenter={!isTimeline}
+					showSideBorders={!isTimeline}
 					isTimeline={isTimeline}
 				>
 					<StandardGrid
