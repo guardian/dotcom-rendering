@@ -5,7 +5,6 @@
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, isUndefined } from '@guardian/libs';
-import { from, space } from '@guardian/source-foundations';
 import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,
@@ -33,28 +32,10 @@ type Props = {
 };
 
 const headerStyles = css`
-	padding-top: 39px;
-	padding-left: 10px;
-	max-width: 310px;
-
-	${from.mobileMedium} {
-		padding-top: 44px;
-	}
-
-	${from.mobileLandscape} {
-		padding-left: ${space[5]}px;
-	}
-
-	${from.tablet} {
-		padding-top: ${space[1]}px;
-		padding-bottom: ${space[3]}px;
-		padding-left: ${space[5]}px;
-		max-width: 400px;
-	}
-
-	${from.desktop} {
-		max-width: none;
-	}
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-wrap: nowrap;
 `;
 
 function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {

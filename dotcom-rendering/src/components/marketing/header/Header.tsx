@@ -8,11 +8,9 @@ import {
 	from,
 	headlineBold20,
 	headlineBold24,
-	headlineBold28,
-	headlineBold34,
 	palette as sourcePalette,
-	textSans17,
-	textSansBold15,
+	space,
+	textSans14,
 } from '@guardian/source/foundations';
 import {
 	Hide,
@@ -24,45 +22,34 @@ import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';
 import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';
 
-const messageStyles = (isThankYouMessage: boolean) => css`
-	color: ${sourcePalette.brandAlt[400]};
+const flexRowStyles = css`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`;
+
+const textStyles = css`
+	display: flex;
+	flex-direction: column;
+	margin-right: ${space[5]}px;
+`;
+
+const messageStyles = css`
+	color: ${sourcePalette.neutral[100]};
 	${headlineBold20}
-	margin-bottom: 3px;
 
 	${from.desktop} {
 		${headlineBold24}
-	}
-
-	${from.leftCol} {
-		${isThankYouMessage ? headlineBold28 : headlineBold34}
-	}
-`;
-
-const linkStyles = css`
-	height: 32px;
-	min-height: 32px;
-	${textSansBold15}
-	border-radius: 16px;
-	padding: 0 12px 0 12px;
-	line-height: 18px;
-	margin-right: 10px;
-	margin-bottom: 6px;
-
-	svg {
-		width: 24px;
 	}
 `;
 
 const subMessageStyles = css`
 	color: ${sourcePalette.neutral[100]};
-	${textSans17}
-	margin: 5px 0;
+	${textSans14}
 `;
 
-// override user agent styles
-const headingStyles = css`
-	margin: 0;
-	font-size: 100%;
+const buttonStyles = css`
+	margin-right: ${space[1]}px;
 `;
 
 const Header: ReactComponent<HeaderRenderProps> = (
@@ -74,14 +61,12 @@ const Header: ReactComponent<HeaderRenderProps> = (
 		props.onCtaClick?.();
 	};
 	return (
-		<div>
+		<div css={flexRowStyles}>
 			<Hide until="tablet">
-				<div css={messageStyles(false)}>
-					<h2 css={headingStyles}>{heading}</h2>
-				</div>
+				<div css={textStyles}>
+					<h2 css={messageStyles}>{heading}</h2>
 
-				<div css={subMessageStyles}>
-					<div>{subheading}</div>
+					<span css={subMessageStyles}>{subheading}</span>
 				</div>
 			</Hide>
 
@@ -96,7 +81,8 @@ const Header: ReactComponent<HeaderRenderProps> = (
 							icon={<SvgArrowRightStraight />}
 							iconSide="right"
 							nudgeIcon={true}
-							css={linkStyles}
+							size="xsmall"
+							css={buttonStyles}
 						>
 							{primaryCta.ctaText}
 						</LinkButton>
@@ -110,7 +96,8 @@ const Header: ReactComponent<HeaderRenderProps> = (
 								props.mobileContent?.primaryCta?.ctaUrl ??
 								primaryCta.ctaUrl
 							}
-							css={linkStyles}
+							css={buttonStyles}
+							size="xsmall"
 						>
 							{props.mobileContent?.primaryCta?.ctaText ??
 								primaryCta.ctaText}
@@ -128,7 +115,8 @@ const Header: ReactComponent<HeaderRenderProps> = (
 						icon={<SvgArrowRightStraight />}
 						iconSide="right"
 						nudgeIcon={true}
-						css={linkStyles}
+						css={buttonStyles}
+						size="xsmall"
 					>
 						{secondaryCta.ctaText}
 					</LinkButton>

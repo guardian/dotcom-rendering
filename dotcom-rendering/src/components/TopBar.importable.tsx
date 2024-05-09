@@ -35,7 +35,6 @@ const topBarStyles = css`
 	background-color: ${themePalette('--masthead-top-bar-background')};
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
 	height: 52px;
 	box-sizing: border-box;
 	padding: 0 10px;
@@ -50,7 +49,6 @@ const topBarStyles = css`
 
 	${from.desktop} {
 		height: 64px;
-		justify-content: flex-end;
 	}
 `;
 
@@ -90,7 +88,7 @@ const TopBarLinkContainer = ({
 	children: React.ReactNode;
 }) => (
 	<div
-		css={topBarLinkContainerStyles}
+		css={[topBarLinkContainerStyles]}
 		style={{ paddingRight: isLastChild ? 0 : `${space[3]}px` }}
 	>
 		{children}
@@ -146,7 +144,11 @@ export const TopBar = ({
 				hasPageSkin ? pageSkinContainer : center,
 			]}
 		>
-			<TopBarSupport contributionsServiceUrl={contributionsServiceUrl} />
+			<TopBarLinkContainer>
+				<TopBarSupport
+					contributionsServiceUrl={contributionsServiceUrl}
+				/>
+			</TopBarLinkContainer>
 
 			<VerticalDivider />
 
