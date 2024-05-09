@@ -1,7 +1,5 @@
-import { isString, joinUrl, log } from '@guardian/libs';
-import { useEffect, useState } from 'react';
+import { joinUrl, log } from '@guardian/libs';
 import { abTestTest } from '../experiments/tests/ab-test-test';
-import { onwardJourneys } from '../experiments/tests/onward-journeys';
 import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
@@ -59,7 +57,6 @@ export const MostViewedFooterData = ({
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB()?.api;
-	const [show, setShow] = useState(false);
 
 	let abTestCypressDataAttr = 'ab-test-not-in-test';
 
@@ -74,39 +71,10 @@ export const MostViewedFooterData = ({
 	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
-	useEffect(() => {
-		const variantId =
-			ABTestAPI?.runnableTest(onwardJourneys)?.variantToRun.id;
-		if (!isString(variantId)) {
-			// we are not in the onwards journey test
-			return setShow(true);
-		}
-		setShow(['control', 'most-viewed'].includes(variantId));
-	}, [ABTestAPI]);
-
-	useEffect(() => {
-		const ancestor = document
-			.querySelector('gu-island[name="MostViewedFooterData"]')
-			?.closest('section');
-
-		log('dotcom', 'Onward Journeys test (Most Viewed)', { show, ancestor });
-
-		if (ancestor) {
-			// TEMPORARY SOLUTION, we need to reach outside of the Island’s boundary
-			// Acceptable in the context of the short-lived Onwards Journey test
-			ancestor.style.display = show ? 'initial' : 'none';
-		}
-	}, [show]);
-
-	/** if falsy/undefined, no calls are made to the endpoint by SWR, which is wrapped by useApi  */
-	const url = show ? buildSectionUrl(ajaxUrl, edition, sectionId) : undefined;
+	const url = buildSectionUrl(ajaxUrl, edition, sectionId);
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(url);
-
-	if (!show) {
-		return null;
-	}
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');

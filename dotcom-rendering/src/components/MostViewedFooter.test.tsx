@@ -37,9 +37,7 @@ describe('MostViewedFooterData', () => {
 			</ConfigProvider>,
 		);
 
-		// we start with an undefined URL before we know if we’re in a test
-		expect(useApi).toHaveBeenCalledTimes(2);
-		// Calls api with the correct URL
+		expect(useApi).toHaveBeenCalledTimes(1);
 		expect(useApi).toHaveBeenLastCalledWith(
 			'https://api.nextgen.guardianapps.co.uk/most-read/Section Name.json?_edition=UK&dcr=true',
 		);

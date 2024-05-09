@@ -221,7 +221,7 @@ export const OnwardsUpper = ({
 			// we are not in the onwards journey test
 			return setShowTopRow(true);
 		}
-		setShowTopRow(['control', 'top-row'].includes(variantId));
+		setShowTopRow(['control', 'top-row-most-viewed'].includes(variantId));
 	}, [AB]);
 
 	useEffect(() => {
@@ -230,7 +230,9 @@ export const OnwardsUpper = ({
 			// we are not in the onwards journey test
 			return setShowBottomRow(true);
 		}
-		setShowBottomRow(['control', 'bottom-row'].includes(variantId));
+		setShowBottomRow(
+			['control', 'bottom-row-most-viewed'].includes(variantId),
+		);
 	}, [AB]);
 
 	if (isAndroid) return null;

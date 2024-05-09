@@ -801,7 +801,7 @@ export const Carousel = ({
 		if (isUndefined(variantId)) {
 			return;
 		}
-		setShow(['control', 'top-row'].includes(variantId));
+		setShow(['control', 'top-row-most-viewed'].includes(variantId));
 	}, [AB, isStoryPackage]);
 
 	const arrowName = 'carousel-small-arrow';
