@@ -3,7 +3,6 @@ import type { ServerSideTests } from '../types/config';
 import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
-import { enhanceAdPlaceholders as enhanceAdPlaceholders_AB_TEST_CONTROL } from './enhance-ad-placeholders_AB_TEST_CONTROL';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
@@ -66,12 +65,7 @@ export const enhanceElements =
 				options.promotedNewsletter,
 				blockId,
 			),
-			options.abTests.commercialMegaTestControl === 'control'
-				? enhanceAdPlaceholders_AB_TEST_CONTROL(
-						format,
-						options.renderingTarget,
-				  )
-				: enhanceAdPlaceholders(format, options.renderingTarget),
+			enhanceAdPlaceholders(format, options.renderingTarget),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
