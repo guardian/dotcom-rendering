@@ -111,6 +111,10 @@ type Props = {
 	 * width but the content to constrain itself e.g. Header */
 	hasPageSkinContentSelfConstrain?: boolean;
 	/**
+	 * Whether the article format is Timeline. Defaults to false.
+	 */
+	isTimeline?: boolean;
+	/**
 	 * @deprecated Do not use
 	 *
 	 * Legacy className prop only used for supporting old interactives
@@ -302,6 +306,7 @@ export const Section = ({
 	shouldCenter,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
+	isTimeline = false,
 	className,
 }: Props) => {
 	const overrides =
@@ -333,6 +338,7 @@ export const Section = ({
 				hasPageSkinContentSelfConstrain={
 					hasPageSkinContentSelfConstrain
 				}
+				isTimeline={isTimeline}
 			>
 				{children}
 			</ElementContainer>

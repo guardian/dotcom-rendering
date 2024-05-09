@@ -145,10 +145,11 @@ const eventStyles = css`
 	position: relative;
 
 	${from.tablet} {
-		margin-left: -21px;
-		margin-right: -21px;
+		border-left: none;
 	}
+
 	${from.leftCol} {
+		border-left: 1px solid ${palette('--timeline-event-border')};
 		margin-left: -11px;
 		margin-right: -11px;
 	}
@@ -162,10 +163,11 @@ const labelStyles = css`
 	${textSans.small({ fontWeight: 'regular' })}
 
 	${from.tablet} {
-		margin-left: -21px;
-		margin-right: -21px;
+		border-left: none;
 	}
+
 	${from.leftCol} {
+		border-left: 1px solid ${palette('--timeline-event-border')};
 		margin-left: -11px;
 		margin-right: -11px;
 	}
@@ -225,6 +227,16 @@ const TimelineEvent = ({
 	</>
 );
 
+const containerStyles = css`
+	border-left: none;
+	${from.tablet} {
+		border-left: 1px solid ${palette('--timeline-event-border')};
+	}
+	${from.leftCol} {
+		border-left: none;
+	}
+`;
+
 // ----- Timeline ----- //
 
 type Props = {
@@ -243,7 +255,7 @@ export const Timeline = ({
 			const someEventsHaveTitles = timeline.events.some(hasTitle);
 
 			return (
-				<>
+				<div css={containerStyles}>
 					{timeline.events.map((event) => (
 						<TimelineEvent
 							event={event}
@@ -254,7 +266,7 @@ export const Timeline = ({
 							format={format}
 						/>
 					))}
-				</>
+				</div>
 			);
 		}
 		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement': {
@@ -263,7 +275,7 @@ export const Timeline = ({
 			);
 
 			return (
-				<>
+				<div css={containerStyles}>
 					{timeline.sections.map((section) => (
 						<section key={section.title}>
 							<Subheading format={format} topPadding={false}>
@@ -283,7 +295,7 @@ export const Timeline = ({
 							))}
 						</section>
 					))}
-				</>
+				</div>
 			);
 		}
 	}

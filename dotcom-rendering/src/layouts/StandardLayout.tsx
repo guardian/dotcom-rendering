@@ -391,6 +391,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			? article.matchUrl
 			: undefined;
 
+	const isTimeline = format.design === ArticleDesign.Timeline;
+
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
@@ -494,6 +496,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								backgroundColour={sourcePalette.brand[400]}
 								element="nav"
+								isTimeline={isTimeline}
 							>
 								<Nav
 									nav={props.NAV}
@@ -526,6 +529,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										)}
 										padSides={false}
 										element="aside"
+										isTimeline={isTimeline}
 									>
 										<Island
 											priority="enhancement"
@@ -552,6 +556,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										)}
 										padSides={false}
 										showTopBorder={false}
+										isTimeline={isTimeline}
 									>
 										<StraightLines
 											count={4}
@@ -613,6 +618,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						'--article-inner-background',
 					)}
 					element="article"
+					isTimeline={isTimeline}
 				>
 					<StandardGrid
 						isMatchReport={isMatchReport}

@@ -34,6 +34,21 @@ const setBackgroundColour = (colour: string) => css`
 	background-color: ${colour};
 `;
 
+const timelineStyles = (colour: string) => css`
+	position: relative;
+	margin: auto;
+
+	${from.leftCol} {
+		max-width: 1140px;
+		border-left: 1px solid ${colour};
+		border-right: 1px solid ${colour};
+	}
+
+	${from.wide} {
+		max-width: 1300px;
+	}
+`;
+
 //Previously, borderColour would be set to palette.neutral[86] if the parameter being passed was undefined. We still want this as a fallback, but not for ArticleDesign.Picture pages (and probably not for any future pages with a similar design).
 const decideFallbackBorderColour = (format: ArticleFormat | undefined) => {
 	return format?.design === ArticleDesign.Picture
@@ -68,6 +83,7 @@ type Props = {
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
 	format?: ArticleFormat;
+	isTimeline?: boolean;
 };
 
 /**
@@ -95,6 +111,7 @@ export const ElementContainer = ({
 	containerName,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
+	isTimeline = false,
 }: Props) =>
 	jsx(element, {
 		id: ophanComponentName,
@@ -116,14 +133,17 @@ export const ElementContainer = ({
 				 */
 				id={sectionId}
 				css={[
-					shouldCenter && center,
-					showSideBorders && sideBorderStyles(borderColour),
+					shouldCenter && !isTimeline && center,
+					showSideBorders &&
+						!isTimeline &&
+						sideBorderStyles(borderColour),
 					showTopBorder && topBorderStyles(borderColour),
 					innerBackgroundColour &&
 						setBackgroundColour(innerBackgroundColour),
 					padSides && sidePadding,
 					padBottom && bottomPadding,
 					hasPageSkin && pageSkinContainer,
+					isTimeline && timelineStyles(borderColour),
 				]}
 			>
 				{children}
