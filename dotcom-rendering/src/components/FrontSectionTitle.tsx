@@ -28,7 +28,7 @@ const advertisingPartnerDottedBorder = css`
 `;
 
 const brandingAdvertisingPartnerStyle = css`
-	margin-top: 5px;
+	margin: 5px 0 25px;
 	padding: 6px;
 	border: 1px solid ${palette('--branding-border')};
 	width: fit-content;
