@@ -795,11 +795,11 @@ export const Carousel = ({
 	useEffect(() => {
 		if (!isStoryPackage) {
 			// This logic is only for the onwards journey test
-			return;
+			return setShow(true);
 		}
 		const variantId = AB?.api.runnableTest(onwardJourneys)?.variantToRun.id;
 		if (isUndefined(variantId)) {
-			return;
+			return setShow(true);
 		}
 		setShow(['control', 'top-row-most-viewed'].includes(variantId));
 	}, [AB, isStoryPackage]);
