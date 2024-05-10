@@ -3844,6 +3844,32 @@ const matchActiveTabBorderLight: PaletteFunction = () =>
 	sourcePalette.sport[300];
 const matchActiveTabBorderDark: PaletteFunction = () =>
 	sourcePalette.sport[500];
+const messageUsBackgroundLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[100];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		default:
+			return pillarPalette(theme, 100);
+	}
+};
+const messageUsBackgroundDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
+		default:
+			return pillarPalette(theme, 500);
+	}
+};
 
 const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -5947,6 +5973,10 @@ const paletteColours = {
 	'--match-tab-border-active': {
 		light: matchActiveTabBorderLight,
 		dark: matchActiveTabBorderDark,
+	},
+	'--message-us-background': {
+		light: messageUsBackgroundLight,
+		dark: messageUsBackgroundDark,
 	},
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,

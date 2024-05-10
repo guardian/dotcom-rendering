@@ -19,21 +19,22 @@ import {
 } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
+import { palette as themePalette } from '../palette';
 import type { MessageUsFieldType } from '../types/content';
 import { FormField } from './Callout/FormField';
 
 const CALLOUT_URL =
 	'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit';
 
-const containerStyles = (format: ArticleFormat) => css`
+const containerStyles = css`
 	${until.desktop} {
-		background-color: ${decidePalette(format).background.messageForm};
+		background-color: ${themePalette('--message-us-background')};
 		color: ${palette.neutral[100]};
 	}
 	background-color: ${palette.neutral[86]};
 	padding: ${space[3]}px;
 `;
+
 const textStyles = css`
 	${textSans14};
 	padding-bottom: ${space[4]}px;
@@ -127,7 +128,6 @@ type FormDataType = { [key in string]: any };
 type Props = {
 	formFields: MessageUsFieldType[];
 	formId: string;
-	format: ArticleFormat;
 	pageId: string;
 };
 
@@ -135,13 +135,7 @@ interface FormProps extends Props {
 	submissionURL: string;
 }
 
-const Form = ({
-	formFields,
-	submissionURL,
-	formId,
-	format,
-	pageId,
-}: FormProps) => {
+const Form = ({ formFields, submissionURL, formId, pageId }: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
@@ -244,7 +238,7 @@ const Form = ({
 
 	if (submissionSuccess) {
 		return (
-			<div css={containerStyles(format)}>
+			<div css={containerStyles}>
 				<div css={tickBoxStyles}>
 					<SvgTickRound />
 				</div>
@@ -256,7 +250,7 @@ const Form = ({
 	}
 
 	return (
-		<div css={containerStyles(format)}>
+		<div css={containerStyles}>
 			<div css={prefaceStyles}>
 				<span css={{ fontWeight: 'bold' }}>Please note: </span>This is
 				not a public comment – only the Guardian can see your message.
@@ -398,7 +392,7 @@ const summaryStyles = css`
  *
  */
 
-export const SendAMessage = ({ formFields, formId, format, pageId }: Props) => {
+export const SendAMessage = ({ formFields, formId, pageId }: Props) => {
 	return (
 		<details css={detailsStyles}>
 			<summary css={summaryStyles}>
@@ -415,7 +409,6 @@ export const SendAMessage = ({ formFields, formId, format, pageId }: Props) => {
 				formFields={formFields}
 				submissionURL={CALLOUT_URL}
 				formId={formId}
-				format={format}
 				pageId={pageId}
 			/>
 		</details>

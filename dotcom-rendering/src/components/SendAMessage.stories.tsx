@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { MessageForm } from '../../fixtures/manual/message-us-form';
 import { Section } from './Section';
@@ -10,12 +9,6 @@ export default {
 	parameters: {
 		chromatic: { diffThreshold: 0.2 },
 	},
-};
-
-const defaultFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
 };
 
 const goodRequest = () => {
@@ -51,7 +44,6 @@ export const Default = () => {
 			<SendAMessage
 				formFields={MessageForm.formFields}
 				formId={MessageForm.formId}
-				format={defaultFormat}
 				pageId=""
 			/>
 		</Section>
@@ -65,7 +57,6 @@ export const SubmissionFailure = () => {
 			<SendAMessage
 				formFields={MessageForm.formFields}
 				formId={MessageForm.formId}
-				format={defaultFormat}
 				pageId=""
 			/>
 		</Section>
