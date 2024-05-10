@@ -1,5 +1,4 @@
 import { type ArticleFormat } from '@guardian/libs';
-import type { ServerSideTests } from '../types/config';
 import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
@@ -23,7 +22,6 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
-	abTests: ServerSideTests;
 };
 
 const enhanceNewsletterSignup =
@@ -47,8 +45,8 @@ const enhanceNewsletterSignup =
 // as they both effect SubheadingBlockElement
 export const enhanceElements =
 	(format: ArticleFormat, blockId: string, options: Options) =>
-	(elements: FEElement[]): FEElement[] => {
-		return [
+	(elements: FEElement[]): FEElement[] =>
+		[
 			enhanceLists(enhanceElements(format, blockId, options)),
 			enhanceTimeline(enhanceElements(format, blockId, options)),
 			enhanceDividers,
@@ -71,7 +69,6 @@ export const enhanceElements =
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,
 		);
-	};
 
 export const enhanceMainMedia =
 	(
