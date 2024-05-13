@@ -12,7 +12,7 @@ import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
 import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
 import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
-import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
+import { Metric, Stats } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
@@ -148,7 +148,7 @@ export class RenderingCDKStack extends CDKStack {
 				metricName: 'TargetResponseTime',
 				namespace: 'AWS/ApplicationELB',
 				period: Duration.seconds(30),
-				statistic: 'Average', // TODO - should we use p90?
+				statistic: Stats.percentile(99),
 			});
 
 			/** Scaling policies ASCII diagram
