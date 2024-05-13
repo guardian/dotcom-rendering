@@ -77,6 +77,7 @@ const enhanceNav = (NAV: NavType): NavType => {
 export const renderFront = ({
 	front,
 }: Props): { html: string; prefetchScripts: string[] } => {
+	throw new Error("Didn't work!");
 	const title = front.webTitle;
 	const NAV = extractNAV(front.nav);
 	const enhancedNAV = enhanceNav(NAV);
