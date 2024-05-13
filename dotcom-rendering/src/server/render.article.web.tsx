@@ -38,8 +38,7 @@ const decideTitle = (article: DCRArticle): string => {
 export const renderHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	// eslint-disable-next-line no-empty, no-constant-condition, @typescript-eslint/no-unnecessary-condition
-	while (1) {}
+	process.exit(1);
 	const NAV = {
 		...extractNAV(article.nav),
 		selectedPillar: getCurrentPillar(article),
