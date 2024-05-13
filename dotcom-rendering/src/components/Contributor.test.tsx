@@ -19,6 +19,7 @@ describe('Contributor', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					inAdvertisingPartnerABTest: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -53,6 +54,7 @@ describe('Contributor', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					inAdvertisingPartnerABTest: false,
 					assetOrigin: '/',
 				}}
 			>

@@ -158,8 +158,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const { abTests } = front.config;
+
 	const inUpdatedHeaderABTest =
-		front.config.abTests.updatedHeaderDesignVariant === 'variant';
+		abTests.updatedHeaderDesignVariant === 'variant';
+
+	const inAdvertisingPartnerABTest =
+		abTests.updateLogoAdPartnerVariant === 'variant';
 
 	return (
 		<>
@@ -456,6 +461,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
+									inAdvertisingPartnerABTest={
+										inAdvertisingPartnerABTest
+									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -660,6 +668,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								discussionApiUrl={front.config.discussionApiUrl}
 								collectionBranding={
 									collection.collectionBranding
+								}
+								inAdvertisingPartnerABTest={
+									inAdvertisingPartnerABTest
 								}
 							>
 								<DecideContainer

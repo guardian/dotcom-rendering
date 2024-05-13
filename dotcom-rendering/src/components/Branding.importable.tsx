@@ -205,8 +205,8 @@ export const Branding = ({ branding, format }: Props) => {
 				isAdvertisingPartnerPlaceholder &&
 					inAdvertisingPartnerABTest &&
 					brandingAdvertisingPartnerStyle,
-				inAdvertisingPartnerABTest &&
-					isAdvertisingPartnerAndInteractive &&
+				isAdvertisingPartnerAndInteractive &&
+					inAdvertisingPartnerABTest &&
 					brandingInteractiveStyle,
 			]}
 		>

@@ -72,8 +72,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 		? getTagPageMobileAdPositions(tagPage.groupedTrails)
 		: [];
 
+	const { abTests } = tagPage.config;
+
 	const inUpdatedHeaderABTest =
-		tagPage.config.abTests.updatedHeaderDesignVariant === 'variant';
+		abTests.updatedHeaderDesignVariant === 'variant';
+
+	const inAdvertisingPartnerABTest =
+		abTests.updateLogoAdPartnerVariant === 'variant';
 
 	return (
 		<>
@@ -285,6 +290,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								}
 								discussionApiUrl={
 									tagPage.config.discussionApiUrl
+								}
+								inAdvertisingPartnerABTest={
+									inAdvertisingPartnerABTest
 								}
 							>
 								<DecideContainerByTrails

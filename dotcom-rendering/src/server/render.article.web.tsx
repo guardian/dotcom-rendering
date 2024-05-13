@@ -266,6 +266,8 @@ export const renderBlocks = ({
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
+		inAdvertisingPartnerABTest:
+			abTests.updateLogoAdPartnerVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
 	};
 
