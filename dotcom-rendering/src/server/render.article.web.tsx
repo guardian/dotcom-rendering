@@ -38,7 +38,9 @@ const decideTitle = (article: DCRArticle): string => {
 export const renderHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	process.exit(1);
+	if (Math.random() < 2) {
+		process.exit(1);
+	}
 	const NAV = {
 		...extractNAV(article.nav),
 		selectedPillar: getCurrentPillar(article),
