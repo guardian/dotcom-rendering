@@ -190,7 +190,7 @@ export const Branding = ({ branding, format }: Props) => {
 		locationPrefix: 'article-meta',
 	});
 
-	const { darkModeAvailable } = useConfig();
+	const { darkModeAvailable, inAdvertisingPartnerABTest } = useConfig();
 
 	const isAdvertisingPartnerPlaceholder =
 		branding.logo.label.toLowerCase() === 'supported by';
@@ -203,14 +203,18 @@ export const Branding = ({ branding, format }: Props) => {
 			css={[
 				brandingStyle,
 				isAdvertisingPartnerPlaceholder &&
+					inAdvertisingPartnerABTest &&
 					brandingAdvertisingPartnerStyle,
-				isAdvertisingPartnerAndInteractive && brandingInteractiveStyle,
+				inAdvertisingPartnerABTest &&
+					isAdvertisingPartnerAndInteractive &&
+					brandingInteractiveStyle,
 			]}
 		>
 			<div
 				css={[
 					labelStyle,
 					isAdvertisingPartnerPlaceholder &&
+						inAdvertisingPartnerABTest &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,
 				]}

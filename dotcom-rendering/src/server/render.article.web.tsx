@@ -53,6 +53,8 @@ export const renderHtml = ({
 		renderingTarget,
 		darkModeAvailable:
 			article.config.abTests.darkModeWebVariant === 'variant',
+		inAdvertisingPartnerABTest:
+			article.config.abTests.updateLogoAdPartnerVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
 	};
 
