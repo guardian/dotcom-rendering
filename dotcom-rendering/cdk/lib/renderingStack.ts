@@ -196,7 +196,7 @@ export class RenderingCDKStack extends CDKStack {
 				metric: latencyMetric,
 				scalingSteps: props.scaling.policy.scalingStepsIn,
 				adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-				evaluationPeriods: 10,
+				evaluationPeriods: 4,
 			});
 		}
 

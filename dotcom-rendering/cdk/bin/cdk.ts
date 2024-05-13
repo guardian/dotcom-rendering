@@ -81,17 +81,19 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.4s
-				{ lower: 0, upper: 0.4, change: 0 },
-				// When latency is higher than 0.4s we scale up by 50%
-				{ lower: 0.4, change: 50 },
-				// When latency is higher than 0.5s we scale up by 80%
-				{ lower: 0.5, change: 80 },
+				{ lower: 0, upper: 0.9, change: 0 },
+				// When latency is higher than 0.9s we scale up by 30%
+				{ lower: 0.9, change: 30 },
+				// When latency is higher than 1.0s we scale up by 50%
+				{ lower: 1.0, change: 50 },
+				// When latency is higher than 1.5s we scale up by 80%
+				{ lower: 1.2, change: 80 },
 			],
 			scalingStepsIn: [
-				// No scaling down effect when latency is higher than 0.35s
-				{ lower: 0.35, change: 0 },
-				// When latency is lower than 0.35s we scale down by 1
-				{ upper: 0.35, lower: 0, change: -1 },
+				// No scaling down effect when latency is higher than 0.85s
+				{ lower: 0.85, change: 0 },
+				// When latency is lower than 0.85s we scale down by 1
+				{ upper: 0.85, lower: 0, change: -1 },
 			],
 		},
 	},
