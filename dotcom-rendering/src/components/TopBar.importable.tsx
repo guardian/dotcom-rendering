@@ -35,6 +35,7 @@ const topBarStyles = css`
 	background-color: ${themePalette('--masthead-top-bar-background')};
 	display: flex;
 	flex-direction: row;
+	justify-content: flex-end;
 	height: 52px;
 	box-sizing: border-box;
 	padding: 0 10px;
@@ -61,8 +62,10 @@ const topBarStylesWithoutPageSkin = css`
 const topBarLinkContainerStyles = css`
 	height: 100%;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+`;
+
+const alignLeftStyles = css`
+	margin-right: auto;
 `;
 
 const verticalDividerStyles = css`
@@ -71,24 +74,32 @@ const verticalDividerStyles = css`
 			content: '';
 			border-left: 1px solid
 				${themePalette('--masthead-top-bar-vertical-divider')};
-			display: flex;
-			position: relative;
 			height: 38px;
 		}
 	}
 `;
 
-const VerticalDivider = () => <div css={verticalDividerStyles} />;
-
 const TopBarLinkContainer = ({
+	alignLeft = false,
+	showVerticalDivider = true,
 	isLastChild = false,
 	children,
 }: {
+	alignLeft?: boolean;
+	showVerticalDivider?: boolean;
 	isLastChild?: boolean;
 	children: React.ReactNode;
 }) => (
 	<div
-		css={[topBarLinkContainerStyles]}
+		css={[
+			topBarLinkContainerStyles,
+			alignLeft && alignLeftStyles,
+			showVerticalDivider
+				? verticalDividerStyles
+				: css`
+						align-items: center;
+				  `,
+		]}
 		style={{ paddingRight: isLastChild ? 0 : `${space[3]}px` }}
 	>
 		{children}
@@ -144,13 +155,11 @@ export const TopBar = ({
 				hasPageSkin ? pageSkinContainer : center,
 			]}
 		>
-			<TopBarLinkContainer>
+			<TopBarLinkContainer showVerticalDivider={false} alignLeft={true}>
 				<TopBarSupport
 					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</TopBarLinkContainer>
-
-			<VerticalDivider />
 
 			<Hide until="desktop">
 				<TopBarLinkContainer>
@@ -167,8 +176,6 @@ export const TopBar = ({
 				</TopBarLinkContainer>
 			</Hide>
 
-			<VerticalDivider />
-
 			<Hide until="desktop">
 				<TopBarLinkContainer>
 					<TopBarLink
@@ -179,8 +186,6 @@ export const TopBar = ({
 					</TopBarLink>
 				</TopBarLinkContainer>
 			</Hide>
-
-			<VerticalDivider />
 
 			<TopBarLinkContainer isLastChild={true}>
 				<TopBarMyAccount

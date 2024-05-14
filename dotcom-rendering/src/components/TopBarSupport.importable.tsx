@@ -35,7 +35,7 @@ const headerStyles = css`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	text-wrap: nowrap;
+	overflow-wrap: nowrap;
 `;
 
 function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {

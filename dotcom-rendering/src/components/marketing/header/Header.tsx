@@ -26,6 +26,7 @@ const flexRowStyles = css`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: center;
 `;
 
 const textStyles = css`
@@ -72,7 +73,7 @@ const Header: ReactComponent<HeaderRenderProps> = (
 
 			{primaryCta && (
 				<>
-					<Hide until="mobileLandscape">
+					<Hide until="tablet">
 						<LinkButton
 							theme={themeButtonReaderRevenueBrand}
 							priority="primary"
@@ -88,7 +89,7 @@ const Header: ReactComponent<HeaderRenderProps> = (
 						</LinkButton>
 					</Hide>
 
-					<Hide from="mobileLandscape">
+					<Hide from="tablet">
 						<LinkButton
 							theme={themeButtonReaderRevenueBrand}
 							priority="primary"
@@ -97,7 +98,9 @@ const Header: ReactComponent<HeaderRenderProps> = (
 								primaryCta.ctaUrl
 							}
 							css={buttonStyles}
-							size="xsmall"
+							icon={<SvgArrowRightStraight />}
+							iconSide="right"
+							size="small"
 						>
 							{props.mobileContent?.primaryCta?.ctaText ??
 								primaryCta.ctaText}
