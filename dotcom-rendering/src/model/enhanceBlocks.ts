@@ -1,9 +1,7 @@
 import { type ArticleFormat } from '@guardian/libs';
-import type { ServerSideTests } from '../types/config';
 import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
-import { enhanceAdPlaceholders as enhanceAdPlaceholders_AB_TEST_CONTROL } from './enhance-ad-placeholders_AB_TEST_CONTROL';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDisclaimer } from './enhance-disclaimer';
 import { enhanceDividers } from './enhance-dividers';
@@ -24,7 +22,6 @@ type Options = {
 	promotedNewsletter: Newsletter | undefined;
 	imagesForLightbox: ImageForLightbox[];
 	hasAffiliateLinksDisclaimer: boolean;
-	abTests: ServerSideTests;
 };
 
 const enhanceNewsletterSignup =
@@ -48,8 +45,8 @@ const enhanceNewsletterSignup =
 // as they both effect SubheadingBlockElement
 export const enhanceElements =
 	(format: ArticleFormat, blockId: string, options: Options) =>
-	(elements: FEElement[]): FEElement[] => {
-		return [
+	(elements: FEElement[]): FEElement[] =>
+		[
 			enhanceLists(enhanceElements(format, blockId, options)),
 			enhanceTimeline(enhanceElements(format, blockId, options)),
 			enhanceDividers,
@@ -66,18 +63,12 @@ export const enhanceElements =
 				options.promotedNewsletter,
 				blockId,
 			),
-			options.abTests.commercialMegaTestControl === 'control'
-				? enhanceAdPlaceholders_AB_TEST_CONTROL(
-						format,
-						options.renderingTarget,
-				  )
-				: enhanceAdPlaceholders(format, options.renderingTarget),
+			enhanceAdPlaceholders(format, options.renderingTarget),
 			enhanceDisclaimer(options.hasAffiliateLinksDisclaimer),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,
 		);
-	};
 
 export const enhanceMainMedia =
 	(

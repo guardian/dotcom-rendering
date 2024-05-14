@@ -10,7 +10,9 @@ import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../../../lib/acquisitions';
 import type { EditionId } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { usePageViewId } from '../../../lib/usePageViewId';
 import type { LinkType } from '../../../model/extract-nav';
+import { useConfig } from '../../ConfigContext';
 
 const hideDesktop = css`
 	${from.desktop} {
@@ -79,10 +81,11 @@ export const ReaderRevenueLinks = ({
 	readerRevenueLinks,
 	editionId,
 }: Props) => {
-	const [pageViewId, setPageViewId] = useState('');
+	const { renderingTarget } = useConfig();
+	const pageViewId = usePageViewId(renderingTarget);
+
 	const [referrerUrl, setReferrerUrl] = useState('');
 	useEffect(() => {
-		setPageViewId(window.guardian.config.ophan.pageViewId);
 		setReferrerUrl(window.location.origin + window.location.pathname);
 	}, []);
 

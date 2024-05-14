@@ -44,6 +44,9 @@ export interface DCRFrontType {
 	trendingTopics?: FETagType[];
 	contributionsServiceUrl: string;
 	canonicalUrl?: string;
+	pageId: string;
+	webURL: string;
+	guardianBaseURL: string;
 }
 
 interface FEPressedPageType {

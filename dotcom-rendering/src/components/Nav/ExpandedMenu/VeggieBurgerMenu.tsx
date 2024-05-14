@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	between,
 	from,
 	palette as sourcePalette,
 	visuallyHidden,
@@ -81,10 +80,6 @@ const veggieBurgerStyles = (isImmersive: boolean) => css`
 
 	right: 5px;
 	bottom: 58px;
-
-	${between.mobileMedium.and.tablet} {
-		${getZIndex('burger')}
-	}
 
 	${from.mobileMedium} {
 		bottom: ${isImmersive ? '3px' : '-3px'};

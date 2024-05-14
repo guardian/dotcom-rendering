@@ -17,7 +17,7 @@ const headingIndexStyles = css`
 
 const headingLineStyles = css`
 	width: 140px;
-	margin: 0;
+	margin: 0 0 2px 0;
 	border: none;
 	border-top: 4px solid ${palette('--heading-line')};
 `;
