@@ -1,17 +1,14 @@
-import { css, Global } from '@emotion/react';
+import { Global } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import {
-	focusHalo,
-	palette as sourcePalette,
-} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { TagPageLayout } from '../layouts/TagPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
+import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import { paletteDeclarations } from '../palette';
 import type { DCRTagPageType } from '../types/tagPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -49,29 +46,12 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
+	const darkModeAvailable =
+		tagPage.config.abTests.darkModeWebVariant === 'variant';
+
 	return (
 		<StrictMode>
-			<Global
-				styles={css`
-					:root {
-						/* Light palette is default on all platforms */
-						/* We do not support dark mode on tag pages */
-						${paletteDeclarations(format, 'light')}
-						body {
-							color: ${sourcePalette.neutral[7]};
-						}
-					}
-					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-					*:focus {
-						${focusHalo}
-					}
-					::selection {
-						background: ${sourcePalette.brandAlt[400]};
-						color: ${sourcePalette.neutral[7]};
-					}
-				`}
-			/>
+			<Global styles={rootStyles(format, darkModeAvailable)} />
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>
@@ -101,6 +81,20 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 			<Island priority="critical">
 				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
+			{darkModeAvailable && (
+				<DarkModeMessage>
+					Dark mode is a work-in-progress.
+					<br />
+					You can{' '}
+					<a
+						style={{ color: 'inherit' }}
+						href="/opt/out/dark-mode-web"
+					>
+						opt out anytime
+					</a>{' '}
+					if anything is unreadable or odd.
+				</DarkModeMessage>
+			)}
 			<TagPageLayout tagPage={tagPage} NAV={NAV} />
 		</StrictMode>
 	);

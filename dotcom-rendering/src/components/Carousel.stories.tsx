@@ -265,7 +265,7 @@ export const Headlines: StoryObj = ({ format }: StoryProps) => {
 			<Carousel
 				heading="More on this story"
 				trails={trails}
-				onwardsSource="more-on-this-story"
+				onwardsSource="unknown-source"
 				format={format}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
@@ -289,7 +289,7 @@ export const SingleItemCarousel = () => {
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
-				onwardsSource="more-on-this-story"
+				onwardsSource="unknown-source"
 				format={defaultFormat}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
@@ -338,7 +338,7 @@ export const SingleOpinionCarousel = () => {
 			<Carousel
 				heading="More on this story"
 				trails={[comment]}
-				onwardsSource="more-on-this-story"
+				onwardsSource="unknown-source"
 				format={{
 					theme: Pillar.Opinion,
 					design: ArticleDesign.Comment,
@@ -628,7 +628,7 @@ export const AllCards = () => {
 			<Carousel
 				heading="All the card types"
 				trails={allCardTypesTrail}
-				onwardsSource="more-on-this-story"
+				onwardsSource="unknown-source"
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				format={defaultFormat}
