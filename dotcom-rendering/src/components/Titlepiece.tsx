@@ -8,9 +8,9 @@ import {
 	textSans14,
 } from '@guardian/source-foundations';
 import { SvgGuardianLogo, SvgMenu } from '@guardian/source-react-components';
+import type { EditionId } from '../lib/edition';
 import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
 import { TitlepieceGrid } from './TitlepieceGrid';
-import { EditionId } from 'src/lib/edition';
 
 interface TitlepieceProps {
 	editionId: EditionId;
@@ -69,6 +69,9 @@ const guardianLogoStyles = css`
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
 	margin-right: 50px;
+	@media (min-width: 375px) {
+		margin-right: 0;
+	}
 	@media (min-width: 1024px) {
 		// grid-row: 1 / 2;
 	}
@@ -120,11 +123,15 @@ const navLinkStyles = css`
 const pillarsNavStyles = css`
 	grid-column: content-start / viewport-end;
 	grid-row: 2;
+	align-self: end;
 
 	${headlineBold14}
 	margin-top: 8px;
 	margin-bottom: 8px;
 	border-bottom: 1px solid ${palette.neutral[86]};
+	@media (min-width: 1024px) {
+		grid-row: 1 / 2;
+	}
 	ul {
 		display: flex;
 	}
@@ -133,17 +140,17 @@ const pillarsNavStyles = css`
 		padding-right: ${space[1]}px;
 	}
 	@media (min-width: 1024px) and (max-width: 1279px) {
-		height: 40px;
 		li {
 			${headlineBold20}
 			width: 108px;
+			height: 40px;
 		}
 	}
 	@media (min-width: 1280px) and (max-width: 1439px) {
-		height: 52px;
 		li {
 			${headlineBold24}
 			width: 125px;
+			height: 52px;
 		}
 	}
 	@media (min-width: 1440px) {
@@ -213,28 +220,30 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 			<nav css={[pillarsNavStyles, navLinkStyles]}>
 				<ul>
 					{pillars.map(({ name, path, colour }, index) => (
-						<li
+						<a
 							key={path}
-							css={css`
-								position: relative;
-								${index !== pillars.length - 1 &&
-								`border-right: 1px solid ${palette.neutral[86]};`}
-								${index > 0 && `padding-left: ${space[1]}px;`}
-							`}
+							href={`https://www.theguardian.com${path}`}
 						>
-							<div
-								style={{
-									backgroundColor: colour,
-								}}
-								css={pillarColorStyles}
-							/>
-							<a
+							<li
 								key={path}
-								href={`https://www.theguardian.com${path}`}
+								css={css`
+									position: relative;
+									${index !== pillars.length - 1 &&
+									`border-right: 1px solid ${palette.neutral[86]};`}
+									${index > 0 &&
+									`padding-left: ${space[1]}px;`}
+								`}
 							>
+								<div
+									style={{
+										backgroundColor: colour,
+									}}
+									css={pillarColorStyles}
+								/>
+
 								{name}
-							</a>
-						</li>
+							</li>
+						</a>
 					))}
 				</ul>
 			</nav>
