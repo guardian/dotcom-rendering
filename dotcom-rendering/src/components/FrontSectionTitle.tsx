@@ -189,7 +189,16 @@ export const FrontSectionTitle = ({
 							>
 								{logo.label}
 							</p>
-							<Badge imageSrc={logo.src} href={logo.link} />
+							<Badge
+								imageSrc={logo.src}
+								href={logo.link}
+								isAdvertisingPartner={
+									isAdvertisingPartnerPlaceholder
+								}
+								inAdvertisingPartnerABTest={
+									inAdvertisingPartnerABTest
+								}
+							/>
 							<a
 								href={aboutThisLink}
 								css={[

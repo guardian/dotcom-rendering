@@ -23,6 +23,15 @@ const labsSectionBadgeSizingStyles = css`
 	}
 `;
 
+const imageAdvertisingPartnerStyles = css`
+	${from.leftCol} {
+		max-width: 130px;
+	}
+	${from.wide} {
+		max-width: 100%;
+	}
+`;
+
 const imageStyles = css`
 	display: block;
 	width: auto;
@@ -40,6 +49,8 @@ type Props = {
 	ophanComponentLink?: string;
 	ophanComponentName?: string;
 	isInLabsSection?: boolean;
+	isAdvertisingPartner?: boolean;
+	inAdvertisingPartnerABTest?: boolean;
 };
 
 export const Badge = ({
@@ -48,6 +59,8 @@ export const Badge = ({
 	ophanComponentLink,
 	ophanComponentName,
 	isInLabsSection = false,
+	isAdvertisingPartner = false,
+	inAdvertisingPartnerABTest = false,
 }: Props) => {
 	return (
 		<a
@@ -62,6 +75,9 @@ export const Badge = ({
 					isInLabsSection
 						? labsSectionBadgeSizingStyles
 						: frontsSectionBadgeSizingStyles,
+					isAdvertisingPartner &&
+						inAdvertisingPartnerABTest &&
+						imageAdvertisingPartnerStyles,
 				]}
 				src={imageSrc}
 				alt={isInLabsSection ? 'Labs sponsor logo' : ''}

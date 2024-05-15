@@ -23,7 +23,7 @@ const brandingAdvertisingPartnerStyle = css`
 	}
 	${from.leftCol} {
 		padding: 4px;
-		width: fit-content;
+		width: 140px;
 	}
 	${from.wide} {
 		padding: 8px;
@@ -56,6 +56,18 @@ const liveBlogLabelStyle = css`
 
 	${from.desktop} {
 		color: ${palette('--branding-label-text')};
+	}
+`;
+
+const brandingLogoAdvertisingPartnerStyle = css`
+	& img {
+		display: block;
+		${from.leftCol} {
+			max-width: 130px;
+		}
+		${from.wide} {
+			max-width: 100%;
+		}
 	}
 `;
 
@@ -221,7 +233,15 @@ export const Branding = ({ branding, format }: Props) => {
 			>
 				{branding.logo.label}
 			</div>
-			<div css={brandingLogoStyle}>
+			<div
+				css={[
+					brandingLogoStyle,
+					isAdvertisingPartnerPlaceholder &&
+						!isInteractive &&
+						inAdvertisingPartnerABTest &&
+						brandingLogoAdvertisingPartnerStyle,
+				]}
+			>
 				<a
 					href={branding.logo.link}
 					data-sponsor={branding.sponsorName.toLowerCase()}
