@@ -15,7 +15,6 @@ import {
 	SvgMagnifyingGlass,
 	TextInput,
 } from '@guardian/source-react-components';
-import { useId } from 'react';
 import type { EditionId } from '../../../lib/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -233,7 +232,7 @@ export const Columns = ({
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
-	const searchId = useId();
+	const searchId = 'gu-search-mobile';
 	return (
 		<ul
 			css={[
