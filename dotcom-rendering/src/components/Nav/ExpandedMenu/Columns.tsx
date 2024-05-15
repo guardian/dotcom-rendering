@@ -15,6 +15,7 @@ import {
 	SvgMagnifyingGlass,
 	TextInput,
 } from '@guardian/source-react-components';
+import { useId } from 'react';
 import type { EditionId } from '../../../lib/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -232,6 +233,7 @@ export const Columns = ({
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
+	const searchId = useId();
 	return (
 		<ul
 			css={[
@@ -273,9 +275,14 @@ export const Columns = ({
 						data-link-name={nestedOphanComponents('nav2', 'search')}
 						className="selectableMenuItem"
 						tabIndex={-1}
+						id={searchId}
 					/>
 
-					<Label hideLabel={true} text="google-search">
+					<Label
+						hideLabel={true}
+						text="google-search"
+						htmlFor={searchId}
+					>
 						<div css={searchGlass}>
 							<SvgMagnifyingGlass
 								isAnnouncedByScreenReader={true}
