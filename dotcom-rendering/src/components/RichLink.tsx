@@ -6,6 +6,7 @@ import {
 	from,
 	headline,
 	headlineMedium17,
+	headlineMedium20,
 	headlineMediumItalic20,
 	textSans17,
 	textSansBold12,
@@ -74,7 +75,9 @@ const headerStyles = css`
 
 /** Re-sizes the headline.xxxsmall to 14px / 0.875rem as this isn't available in source */
 const miniHeadlineOverrideStyles = (fontArgs: FontScaleArgs) => css`
-	${headline.xxxsmall(fontArgs)};
+	${headline.xxxsmall(
+		fontArgs,
+	)}/** TODO (1) - Unknown argument please manually update */;
 	font-size: 0.875rem;
 `;
 
@@ -86,7 +89,13 @@ const titleStyles = (parentIsBlog: boolean) => css`
 	padding-bottom: 1px;
 
 	${from.wide} {
-		${headline.xxsmall({ fontWeight: 'regular' })};
+		${headlineMedium20};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		*/
+		font-weight: 400;
 		padding-bottom: 5px;
 	}
 `;

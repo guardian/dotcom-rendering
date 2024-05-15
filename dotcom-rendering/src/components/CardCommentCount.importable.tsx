@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	textSans,
 	visuallyHidden,
+	textSans12,
 } from '@guardian/source-foundations';
 import { formatCount } from '../lib/formatCount';
 import { useCommentCount } from '../lib/useCommentCount';
@@ -35,7 +35,13 @@ const getCommentCountColour = (
 const containerStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
 	display: flex;
 	flex-direction: row;
-	${textSans.xxsmall({ lineHeight: 'tight' })};
+	${textSans12};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	*/
+	line-height: 1.15;
 	margin-top: -4px;
 	padding-left: 5px;
 	padding-right: 5px;
