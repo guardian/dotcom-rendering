@@ -2887,6 +2887,9 @@ const captionTextDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
+const captionPhotoEssayMainMediaTextLight = () => sourcePalette.neutral[46];
+const captionPhotoEssayMainMediaTextDark = () => sourcePalette.neutral[60];
+
 const captionLink: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.NewsletterSignup) {
 		return sourcePalette.neutral[0];
@@ -5737,6 +5740,10 @@ const paletteColours = {
 	'--caption-text': {
 		light: captionTextLight,
 		dark: captionTextDark,
+	},
+	'--caption-photo-essay-main-media-text': {
+		light: captionPhotoEssayMainMediaTextLight,
+		dark: captionPhotoEssayMainMediaTextDark,
 	},
 	'--caption-link': {
 		light: captionLink,

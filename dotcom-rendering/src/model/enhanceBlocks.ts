@@ -74,11 +74,12 @@ export const enhanceMainMedia =
 	(
 		format: ArticleFormat,
 		imagesForLightbox: ImageForLightbox[],
+		isMainMedia: boolean,
 		mediaHTML: string,
 	) =>
 	(elements: FEElement[]): FEElement[] => {
 		return [
-			enhanceElementsImages(format, imagesForLightbox),
+			enhanceElementsImages(format, isMainMedia, imagesForLightbox),
 			enhanceGuVideos(format, mediaHTML),
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
