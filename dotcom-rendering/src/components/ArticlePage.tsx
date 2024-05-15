@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { StrictMode } from 'react';
+import { StrictMode, useId } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { rootStyles } from '../lib/rootStyles';
@@ -59,6 +59,8 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		? article.config.abTests.darkModeWebVariant === 'variant'
 		: !!article.config.switches.darkModeInApps;
 
+	const id = useId();
+
 	return (
 		<StrictMode>
 			<Global styles={rootStyles(format, darkModeAvailable)} />
@@ -91,6 +93,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			)}
 			{renderingTarget === 'Web' && (
 				<>
+					<div style={{ display: 'none' }} data-stable-id={id} />
 					<SkipTo id="navigation" label="Skip to navigation" />
 					<Island priority="feature" defer={{ until: 'idle' }}>
 						<AlreadyVisited />

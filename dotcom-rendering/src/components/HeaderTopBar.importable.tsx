@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, palette, space } from '@guardian/source-foundations';
+import { useId } from 'react';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
@@ -72,12 +73,14 @@ export const HeaderTopBar = ({
 	hasPageSkin = false,
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
+	const id = useId();
 
 	return (
 		<div
 			css={css`
 				background-color: ${palette.brand[300]};
 			`}
+			data-stable-id={id}
 		>
 			<div
 				css={[

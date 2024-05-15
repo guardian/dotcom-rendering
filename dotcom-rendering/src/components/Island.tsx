@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
 import { useConfig } from './ConfigContext';
 
@@ -63,6 +64,8 @@ export const Island = ({ priority, defer, children }: IslandProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
 	const name = String(children.type.name);
 
+	const id = useId();
+
 	return (
 		<gu-island
 			name={name}
@@ -71,6 +74,7 @@ export const Island = ({ priority, defer, children }: IslandProps) => {
 			props={JSON.stringify(children.props)}
 			rootMargin={rootMargin}
 			config={JSON.stringify(config)}
+			data-stable-id={id}
 		>
 			{children}
 		</gu-island>
