@@ -232,6 +232,7 @@ export const Columns = ({
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
+	const searchId = 'gu-search-mobile';
 	return (
 		<ul
 			css={[
@@ -273,9 +274,14 @@ export const Columns = ({
 						data-link-name={nestedOphanComponents('nav2', 'search')}
 						className="selectableMenuItem"
 						tabIndex={-1}
+						id={searchId}
 					/>
 
-					<Label hideLabel={true} text="google-search">
+					<Label
+						hideLabel={true}
+						text="google-search"
+						htmlFor={searchId}
+					>
 						<div css={searchGlass}>
 							<SvgMagnifyingGlass
 								isAnnouncedByScreenReader={true}
