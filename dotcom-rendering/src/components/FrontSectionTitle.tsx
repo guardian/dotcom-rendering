@@ -29,21 +29,21 @@ const advertisingPartnerDottedBorder = css`
 `;
 
 const brandingAdvertisingPartnerStyle = css`
-	margin: 5px 0 25px;
-	padding: 6px;
+	margin: 4px 0 20px;
+	padding: 4px;
 	border: 1px solid ${palette('--branding-border')};
 	width: fit-content;
 
 	${from.desktop} {
-		padding: 9px;
+		padding: 8px;
 		width: 220px;
 	}
 	${from.leftCol} {
-		padding: 5px;
+		padding: 4px;
 		width: fit-content;
 	}
 	${from.wide} {
-		padding: 9px;
+		padding: 8px;
 		width: auto;
 	}
 `;

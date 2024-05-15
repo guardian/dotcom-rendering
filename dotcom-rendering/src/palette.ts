@@ -1853,8 +1853,8 @@ const brandingLabelLight: PaletteFunction = ({ design }) => {
 	}
 };
 const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
-const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[60];
-const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[100];
+const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
