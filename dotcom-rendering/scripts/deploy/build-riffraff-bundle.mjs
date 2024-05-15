@@ -15,6 +15,7 @@ const target = path.resolve(dirname, '../..', 'target');
  * ├── ${copyApp('rendering')} // existing rendering app
  * ├── ${copyApp('article-rendering')} // new article-rendering app
  * ├── ${copyApp('facia-rendering')} // new facia-rendering app
+ * ├── ${copyApp('tag-page-rendering')}
  * └── ${copyApp('interactive-rendering')} // new interactive-rendering app
  */
 
@@ -33,7 +34,7 @@ const target = path.resolve(dirname, '../..', 'target');
  *
  *  Except for the instance where appName === 'rendering' due to backwards compatibility
  *
- * @param guAppName {`${'article' | 'facia' | 'interactive'}-rendering` | 'rendering'}
+ * @param guAppName {`${'article' | 'facia' | 'interactive' | 'tag-page'}-rendering` | 'rendering'}
  **/
 const copyApp = (guAppName) => {
 	/**
@@ -154,6 +155,7 @@ Promise.all([
 	...copyApp('rendering'), // existing rendering app
 	...copyApp('article-rendering'),
 	...copyApp('facia-rendering'),
+	...copyApp('tag-page-rendering'),
 	...copyApp('interactive-rendering'),
 	...copyFrontendStatic(),
 	copyRiffRaff(),
