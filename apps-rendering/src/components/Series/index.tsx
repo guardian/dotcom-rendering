@@ -30,7 +30,8 @@ const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		${headlineBold17};
 		/**
-		 * @TODO (2) Typography preset styles should not be overridden.
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
 		 * Please speak to your team's designer and update this to use a more appropriate preset.
 		*/
 		line-height: 1.4;
@@ -46,7 +47,8 @@ const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 const labsLinkStyles = (format: ArticleFormat): SerializedStyles => css`
 	${textSansBold17};
 	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
 	 * Please speak to your team's designer and update this to use a more appropriate preset.
 	*/
 	line-height: 1.4;
@@ -64,7 +66,8 @@ const immersiveLinkStyles = css`
 	white-space: nowrap;
 	${headlineBold17};
 	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
 	 * Please speak to your team's designer and update this to use a more appropriate preset.
 	*/
 	line-height: 1.4;
@@ -73,7 +76,8 @@ const immersiveLinkStyles = css`
 const immersiveLabsLinkStyles = css`
 	${textSansBold17};
 	/**
-	 * @TODO (2) Typography preset styles should not be overridden.
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
 	 * Please speak to your team's designer and update this to use a more appropriate preset.
 	*/
 	line-height: 1.4;
