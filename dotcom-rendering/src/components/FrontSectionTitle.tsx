@@ -159,22 +159,23 @@ export const FrontSectionTitle = ({
 				isContainerBranding,
 				isFrontBranding,
 			} = collectionBranding;
-			const isAdvertisingPartnerPlaceholder =
-				logo.label.toLowerCase() === 'supported by';
+			const isAdvertisingPartnerOrExclusive =
+				logo.label.toLowerCase() === 'advertising partner' ||
+				logo.label.toLowerCase() === 'exclusive advertising partner';
 			if (isFrontBranding || isContainerBranding) {
 				return (
 					<div css={titleStyle}>
 						{title}
 						<div
 							css={
-								isAdvertisingPartnerPlaceholder &&
+								isAdvertisingPartnerOrExclusive &&
 								inAdvertisingPartnerABTest &&
 								advertisingPartnerDottedBorder
 							}
 						></div>
 						<div
 							css={
-								isAdvertisingPartnerPlaceholder &&
+								isAdvertisingPartnerOrExclusive &&
 								inAdvertisingPartnerABTest &&
 								brandingAdvertisingPartnerStyle
 							}
@@ -182,7 +183,7 @@ export const FrontSectionTitle = ({
 							<p
 								css={[
 									labelStyles,
-									isAdvertisingPartnerPlaceholder &&
+									isAdvertisingPartnerOrExclusive &&
 										inAdvertisingPartnerABTest &&
 										labelAdvertisingPartnerStyles,
 								]}
@@ -193,7 +194,7 @@ export const FrontSectionTitle = ({
 								imageSrc={logo.src}
 								href={logo.link}
 								isAdvertisingPartner={
-									isAdvertisingPartnerPlaceholder
+									isAdvertisingPartnerOrExclusive
 								}
 								inAdvertisingPartnerABTest={
 									inAdvertisingPartnerABTest
@@ -203,7 +204,7 @@ export const FrontSectionTitle = ({
 								href={aboutThisLink}
 								css={[
 									aboutThisLinkStyles,
-									isAdvertisingPartnerPlaceholder &&
+									isAdvertisingPartnerOrExclusive &&
 										inAdvertisingPartnerABTest &&
 										aboutThisLinkAdvertisingPartnerStyles,
 								]}

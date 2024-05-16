@@ -204,17 +204,18 @@ export const Branding = ({ branding, format }: Props) => {
 
 	const { darkModeAvailable, inAdvertisingPartnerABTest } = useConfig();
 
-	const isAdvertisingPartnerPlaceholder =
-		branding.logo.label.toLowerCase() === 'supported by';
+	const isAdvertisingPartnerOrExclusive =
+		branding.logo.label.toLowerCase() === 'advertising partner' ||
+		branding.logo.label.toLowerCase() === 'exclusive advertising partner';
 
 	const isAdvertisingPartnerAndInteractive =
-		isAdvertisingPartnerPlaceholder && isInteractive;
+		isAdvertisingPartnerOrExclusive && isInteractive;
 
 	return (
 		<div
 			css={[
 				brandingStyle,
-				isAdvertisingPartnerPlaceholder &&
+				isAdvertisingPartnerOrExclusive &&
 					inAdvertisingPartnerABTest &&
 					brandingAdvertisingPartnerStyle,
 				isAdvertisingPartnerAndInteractive &&
@@ -225,7 +226,7 @@ export const Branding = ({ branding, format }: Props) => {
 			<div
 				css={[
 					labelStyle,
-					isAdvertisingPartnerPlaceholder &&
+					isAdvertisingPartnerOrExclusive &&
 						inAdvertisingPartnerABTest &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,
@@ -236,7 +237,7 @@ export const Branding = ({ branding, format }: Props) => {
 			<div
 				css={[
 					brandingLogoStyle,
-					isAdvertisingPartnerPlaceholder &&
+					isAdvertisingPartnerOrExclusive &&
 						!isInteractive &&
 						inAdvertisingPartnerABTest &&
 						brandingLogoAdvertisingPartnerStyle,
