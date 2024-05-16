@@ -3,8 +3,8 @@ import {
 	article17,
 	palette as sourcePalette,
 	textSans14,
-} from '@guardian/source-foundations';
-import { SvgInfo } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgInfo } from '@guardian/source/react-components';
 import { palette as themePalette } from '../../palette';
 
 const imageStyling = css`

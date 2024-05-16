@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Cartoon } from '../../../cartoon';
 import type { ArticleFormat } from '@guardian/libs';
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import {
 	articlePaddingStyles,
 	desktopArticleMargin,

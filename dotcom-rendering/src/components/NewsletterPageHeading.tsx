@@ -5,8 +5,8 @@ import {
 	headlineMedium34,
 	palette,
 	space,
-} from '@guardian/source-foundations';
-import { Link, SvgChevronRightSingle } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link, SvgChevronRightSingle } from '@guardian/source/react-components';
 import { Section } from './Section';
 
 export interface NewslettersListProps {

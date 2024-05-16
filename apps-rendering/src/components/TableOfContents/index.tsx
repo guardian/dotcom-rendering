@@ -8,11 +8,11 @@ import {
 	remSpace,
 	textSans14,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import Anchor from 'components/Anchor';
 import ListItem from 'components/ListItem';
 import OrderedList from 'components/OrderedList';

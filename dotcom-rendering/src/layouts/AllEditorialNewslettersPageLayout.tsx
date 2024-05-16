@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { palette as sourcePalette } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Footer } from '../components/Footer';
 import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
 import { Header } from '../components/Header';

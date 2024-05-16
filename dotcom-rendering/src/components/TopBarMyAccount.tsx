@@ -10,7 +10,7 @@ import {
 	space,
 	textSansBold17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';

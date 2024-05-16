@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { some } from '../../../../vendor/@guardian/types/index';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';

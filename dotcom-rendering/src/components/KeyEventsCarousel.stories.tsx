@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	LongKeyEvents,

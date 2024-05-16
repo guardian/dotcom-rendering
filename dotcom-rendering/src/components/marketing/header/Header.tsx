@@ -13,13 +13,13 @@ import {
 	palette as sourcePalette,
 	textSans17,
 	textSansBold15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Hide,
 	LinkButton,
 	SvgArrowRightStraight,
 	themeButtonReaderRevenueBrand,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';
 import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';

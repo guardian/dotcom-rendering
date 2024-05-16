@@ -7,7 +7,7 @@ import {
 	palette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';

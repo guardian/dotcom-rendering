@@ -6,7 +6,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { space } from '@guardian/source-foundations';
+import { space } from '@guardian/source/foundations';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { EpicVariant } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/epic';
 import type {

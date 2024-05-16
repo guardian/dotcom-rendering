@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, neutral, remSpace } from '@guardian/source-foundations';
+import { from, neutral, remSpace } from '@guardian/source/foundations';
 import type { FC } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 import type { Video } from 'video';

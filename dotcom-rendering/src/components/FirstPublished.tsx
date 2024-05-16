@@ -5,8 +5,8 @@ import {
 	space,
 	textSans12,
 	textSansBold12,
-} from '@guardian/source-foundations';
-import { SvgPinned } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgPinned } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 import { DateTime } from './DateTime';
 

@@ -5,8 +5,8 @@
  * This is intended to replace the existing `HeaderTopBar` component after being AB tested.
  */
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+import { from, space } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';

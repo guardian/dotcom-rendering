@@ -3,8 +3,8 @@ import {
 	brandAltBackground,
 	space,
 	textSans,
-} from '@guardian/source-foundations';
-import { SvgNewsletter } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgNewsletter } from '@guardian/source/react-components';
 
 type Props = {
 	text: string;

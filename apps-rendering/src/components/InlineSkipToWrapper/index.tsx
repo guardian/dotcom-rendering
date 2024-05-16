@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { border, neutral, textSans17 } from '@guardian/source-foundations';
+import { border, neutral, textSans17 } from '@guardian/source/foundations';
 import type { FC, ReactNode } from 'react';
 
 // ----- Component ----- //

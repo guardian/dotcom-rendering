@@ -1,4 +1,4 @@
-import { Button } from '@guardian/source-react-components';
+import { Button } from '@guardian/source/react-components';
 import { none, some } from '../../../vendor/@guardian/types/index';
 import renderer from 'react-test-renderer';
 import ClickToView from './';

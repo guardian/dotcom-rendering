@@ -86,15 +86,12 @@ importers:
       '@guardian/renditions':
         specifier: 0.2.0
         version: 0.2.0
-      '@guardian/source-foundations':
-        specifier: 14.2.2
-        version: 14.2.2(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components':
-        specifier: 18.0.0
-        version: 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components-development-kitchen':
-        specifier: 16.0.0
-        version: 16.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components@18.0.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source':
+        specifier: 0.3.0
+        version: 0.3.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-development-kitchen':
+        specifier: 0.0.0-canary-20240516160005
+        version: 0.0.0-canary-20240516160005(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source@0.3.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@smithy/property-provider':
         specifier: 2.0.16
         version: 2.0.16
@@ -368,15 +365,12 @@ importers:
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
-      '@guardian/source-foundations':
-        specifier: 14.2.2
-        version: 14.2.2(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components':
-        specifier: 22.1.0
-        version: 22.1.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components-development-kitchen':
-        specifier: 19.0.0
-        version: 19.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components@22.1.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source':
+        specifier: 0.3.0
+        version: 0.3.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source-development-kitchen':
+        specifier: 0.0.0-canary-20240516160005
+        version: 0.0.0-canary-20240516160005(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source@0.3.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/support-dotcom-components':
         specifier: 2.2.1
         version: 2.2.1(zod@3.22.3)
@@ -4371,6 +4365,64 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@guardian/source-development-kitchen@0.0.0-canary-20240516160005(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source@0.3.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-vU4UYigiXnzxHr/aUnOBwrBGkEPoJL1M0Nld0DzvwegaIUKuiWLPoccwgwNXXGb2qHWn9jEJNVmDUaAbOQ2JjA==}
+    peerDependencies:
+      '@emotion/react': ^11.11.1
+      '@guardian/libs': ^16.0.0
+      '@guardian/source': ^0.3.0
+      '@types/react': ^18.2.11
+      react: ^18.2.0
+      tslib: ^2.6.2
+      typescript: ~5.3.3
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
+      '@guardian/libs': 16.0.0(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source': 0.3.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@types/react': 18.3.1
+      react: 18.3.1
+      tslib: 2.6.2
+      typescript: 5.3.3
+    dev: false
+
+  /@guardian/source-development-kitchen@0.0.0-canary-20240516160005(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source@0.3.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-vU4UYigiXnzxHr/aUnOBwrBGkEPoJL1M0Nld0DzvwegaIUKuiWLPoccwgwNXXGb2qHWn9jEJNVmDUaAbOQ2JjA==}
+    peerDependencies:
+      '@emotion/react': ^11.11.1
+      '@guardian/libs': ^16.0.0
+      '@guardian/source': ^0.3.0
+      '@types/react': ^18.2.11
+      react: ^18.2.0
+      tslib: ^2.6.2
+      typescript: ~5.3.3
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
+      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/source': 0.3.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+      '@types/react': 18.3.1
+      react: 18.3.1
+      tslib: 2.6.2
+      typescript: 5.3.3
+    dev: false
+
   /@guardian/source-foundations@14.2.2(tslib@2.6.2)(typescript@5.3.3):
     resolution: {integrity: sha512-198Akw1RqufsX6Iu/qzqeR4eC9L3ezHURVzMqJeB3ZRZtabdkL2Q562mS1UnSdyACeCLRMqlOXqZDO38gsjP/g==}
     peerDependencies:
@@ -4381,29 +4433,6 @@ packages:
         optional: true
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tslib: 2.6.2
-      typescript: 5.3.3
-    dev: false
-
-  /@guardian/source-react-components-development-kitchen@16.0.0(@emotion/react@11.11.1)(@guardian/libs@16.0.0)(@guardian/source-foundations@14.2.2)(@guardian/source-react-components@18.0.0)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-wJgQgPJIuahWS3nvHYhIsb0U/nsmmWyL2F6ID+so8Ft39/gEiyssPK/agqqWA0i/zUyttv5Fn3+Hk0tijau5+A==}
-    peerDependencies:
-      '@emotion/react': ^11.11.1
-      '@guardian/libs': ^16.0.0
-      '@guardian/source-foundations': ^14.0.0
-      '@guardian/source-react-components': ^18.0.0
-      react: ^18.2.0
-      tslib: ^2.6.2
-      typescript: ~5.3.3
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 16.0.0(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/source-react-components': 18.0.0(@emotion/react@11.11.1)(@guardian/source-foundations@14.2.2)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
-      react: 18.3.1
       tslib: 2.6.2
       typescript: 5.3.3
     dev: false
@@ -4464,6 +4493,28 @@ packages:
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
       '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
+      react: 18.3.1
+      tslib: 2.6.2
+      typescript: 5.3.3
+    dev: false
+
+  /@guardian/source@0.3.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-3PwArI4TZtL7KY9yCK5oZDidwuJzUV2rzz1PkrNaT+N5Mvxt3Xb4a6oHs+1+T55ec3cH/0RQ9cvNGpPW6ohQlA==}
+    peerDependencies:
+      '@emotion/react': ^11.11.1
+      '@types/react': ^18.2.11
+      react: ^18.2.0
+      tslib: ^2.6.2
+      typescript: ~5.3.3
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
+      '@types/react': 18.3.1
+      mini-svg-data-uri: 1.4.4
       react: 18.3.1
       tslib: 2.6.2
       typescript: 5.3.3

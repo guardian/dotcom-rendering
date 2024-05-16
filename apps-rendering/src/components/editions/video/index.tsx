@@ -5,8 +5,8 @@ import {
 	neutral,
 	remSpace,
 	textSans15,
-} from '@guardian/source-foundations';
-import { SvgOfflineCloud } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgOfflineCloud } from '@guardian/source/react-components';
 import type { FC } from 'react';
 import { useOnlineStatus } from '../utils/useOnlineStatus';
 

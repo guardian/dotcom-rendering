@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { space } from '@guardian/source-foundations';
-import { SvgCheckmark } from '@guardian/source-react-components';
+import { space } from '@guardian/source/foundations';
+import { SvgCheckmark } from '@guardian/source/react-components';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import { PillarButton } from './PillarButton';
 import { Row } from './Row';

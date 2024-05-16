@@ -8,7 +8,7 @@ import {
 	remSpace,
 	textSans17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';

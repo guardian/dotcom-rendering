@@ -9,7 +9,7 @@ import {
 	remSpace,
 	textSansBold14,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	InlineError,
@@ -20,7 +20,7 @@ import {
 	SvgSpinner,
 	TextInput,
 	userFeedbackThemeDefault,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { background, fill, hover, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';

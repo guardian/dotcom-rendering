@@ -6,7 +6,7 @@ import {
 	headlineMedium17,
 	palette,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { palette as themePalette } from '../palette';
 import type { WitnessAssetType } from '../types/content';

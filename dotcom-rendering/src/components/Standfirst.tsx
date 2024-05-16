@@ -11,7 +11,7 @@ import {
 	textSans,
 	textSans17,
 	textSans20,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette } from '../palette';

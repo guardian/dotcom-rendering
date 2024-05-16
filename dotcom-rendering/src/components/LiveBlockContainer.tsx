@@ -5,7 +5,7 @@ import {
 	from,
 	headlineBold20,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { FirstPublished } from './FirstPublished';
 

@@ -6,8 +6,8 @@ import {
 	brandBorder,
 	brandLine,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';

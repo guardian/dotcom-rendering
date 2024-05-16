@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import type { FontScaleArgs } from '@guardian/source-foundations';
+import type { FontScaleArgs } from '@guardian/source/foundations';
 import {
 	from,
 	headline,
@@ -11,7 +11,7 @@ import {
 	textSansBold12,
 	textSansBold15,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { TagType } from '../types/tag';

@@ -4,8 +4,8 @@ import {
 	textSans,
 	textSans12,
 	textSans14,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { FETagType } from '../types/tag';
 
 type Props = {

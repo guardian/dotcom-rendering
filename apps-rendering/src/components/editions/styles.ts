@@ -12,7 +12,7 @@ import {
 	opinion,
 	remSpace,
 	sport,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Colour } from 'palette';
 
 export const tabletContentWidth = 526;

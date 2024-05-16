@@ -7,17 +7,17 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { palette as sourcePalette } from '@guardian/source-foundations';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
 	buttonThemeDefault,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import {
 	expandingWrapperDarkTheme,
 	expandingWrapperThemeDefault,
 	tabsDarkTheme,
 	tabsThemeDefault,
-} from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source-development-kitchen/react-components';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //

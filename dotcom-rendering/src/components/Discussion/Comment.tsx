@@ -8,8 +8,8 @@ import {
 	textSansBold12,
 	textSansBold15,
 	until,
-} from '@guardian/source-foundations';
-import { Button, Link, SvgIndent } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, Link, SvgIndent } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type {
 	CommentType,

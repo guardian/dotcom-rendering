@@ -4,7 +4,7 @@ import {
 	textSans15,
 	textSans17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { NavType } from '../model/extract-nav';
 import ArrowRight from '../static/icons/arrow-right.svg';
 

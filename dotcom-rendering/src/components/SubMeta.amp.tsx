@@ -5,7 +5,7 @@ import {
 	text,
 	textSans12,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { BaseLinkType } from '../model/extract-nav';
 import CommentIcon from '../static/icons/comment.svg';

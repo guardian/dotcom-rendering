@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { from, palette, textSans12, until } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+import { from, palette, textSans12, until } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import type { CollectionBranding } from '../types/branding';
 import { Badge } from './Badge';

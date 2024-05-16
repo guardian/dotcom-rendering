@@ -1,7 +1,7 @@
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
-import { resets } from '@guardian/source-foundations';
+import { resets } from '@guardian/source/foundations';
 import he from 'he';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';

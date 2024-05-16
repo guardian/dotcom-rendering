@@ -2,11 +2,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
-import { headline, space, textSans14 } from '@guardian/source-foundations';
+import { headline, space, textSans14 } from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette } from '../palette';
 import type { TableOfContentsItem } from '../types/frontend';

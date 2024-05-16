@@ -3,7 +3,7 @@ import {
 	headlineMedium24,
 	palette,
 	textSans,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 
 export const Sidebar = () => {

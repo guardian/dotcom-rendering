@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
 import { SupportingContent } from './SupportingContent';

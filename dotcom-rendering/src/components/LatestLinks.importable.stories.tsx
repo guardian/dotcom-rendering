@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints, palette } from '@guardian/source-foundations';
+import { breakpoints, palette } from '@guardian/source/foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';

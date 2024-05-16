@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { InlineError } from '@guardian/source-react-components';
+import { InlineError } from '@guardian/source/react-components';
 import type { FC } from 'react';
 
 // ----- Component ----- //

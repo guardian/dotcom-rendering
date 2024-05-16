@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
 import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';

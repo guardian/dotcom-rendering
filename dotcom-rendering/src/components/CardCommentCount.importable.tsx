@@ -3,7 +3,7 @@ import {
 	between,
 	textSans,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { formatCount } from '../lib/formatCount';
 import { useCommentCount } from '../lib/useCommentCount';
 import { palette as themePalette } from '../palette';

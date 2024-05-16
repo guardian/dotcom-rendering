@@ -1,4 +1,4 @@
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 import type { DCRContainerPalette } from '../types/front';
 import type { ContainerOverrides } from '../types/palette';
 import { transparentColour } from './transparentColour';
