@@ -92,6 +92,7 @@ const ReaderRevenueLinksRemote = ({
 				isSignedIn: isSignedIn === true,
 			},
 		};
+
 		getHeader(contributionsServiceUrl, requestData)
 			.then((response: ModuleDataResponse) => {
 				if (!response.data) {
@@ -101,10 +102,14 @@ const ReaderRevenueLinksRemote = ({
 				const { module } = response.data;
 				setSupportHeaderResponse(module);
 
-				return import(
-					/* webpackChunkName: "header" */ `./marketing/header/Header`
+				return (
+					module.url.includes('SignInPromptHeader')
+						? /* webpackChunkName: "sign-in-prompt-header" */
+						  import(`./marketing/header/SignInPromptHeader`)
+						: /* webpackChunkName: "header" */
+						  import(`./marketing/header/Header`)
 				).then((headerModule: { [key: string]: React.ElementType }) => {
-					setSupportHeader(() => headerModule.Header ?? null);
+					setSupportHeader(() => headerModule[module.name] ?? null);
 				});
 			})
 			.catch((error) => {
