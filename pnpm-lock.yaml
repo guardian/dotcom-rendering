@@ -363,8 +363,8 @@ importers:
         specifier: 16.1.0
         version: 16.1.0(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.1.1-next.1
+        version: 2.1.1-next.1
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -4317,8 +4317,8 @@ packages:
     engines: {node: '>=16'}
     dev: false
 
-  /@guardian/ophan-tracker-js@2.1.1:
-    resolution: {integrity: sha512-Ktk9kDJfe//NJFfpT15jweTj4KQbgkQuo8pWRYrlNZpq1oaTpSeMtI/eSCtqK8yhXKlBJDsMbEyCYsEgQRYFag==}
+  /@guardian/ophan-tracker-js@2.1.1-next.1:
+    resolution: {integrity: sha512-DPQyGKnpoKK8Dq7jZTABUSAiYhcjtV1SEL8s9eah/Xr6+ELkSlFltEezCw/Jl7IXlg5O0LX1Ftn71HqS/jlbDQ==}
     engines: {node: '>=16'}
     dev: false
 

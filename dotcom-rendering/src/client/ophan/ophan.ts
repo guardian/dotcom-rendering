@@ -4,9 +4,10 @@ import type {
 	OphanComponentEvent,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
+import type ophan from '@guardian/ophan-tracker-js';
 import type { RenderingTarget } from '../../types/renderingTarget';
 
-export type OphanRecordFunction = (
+type OphanRecordFunction = (
 	event: { [key: string]: unknown } & {
 		/**
 		 * the experiences key will override previously set values.
@@ -17,17 +18,19 @@ export type OphanRecordFunction = (
 	callback?: () => void,
 ) => void;
 
+type Ophan = typeof ophan;
+
 /**
  * Store a reference to Ophan so that we don't need to load/enhance it more than once.
  */
-let cachedOphan: typeof window.guardian.ophan;
+let cachedOphan: Ophan | undefined;
 
 /**
  * Loads Ophan (if it hasn't already been loaded) and returns a promise of Ophan's methods.
  */
 export const getOphan = async (
 	renderingTarget: RenderingTarget,
-): Promise<NonNullable<typeof window.guardian.ophan>> => {
+): Promise<Ophan> => {
 	if (cachedOphan) {
 		return cachedOphan;
 	}
@@ -52,7 +55,6 @@ export const getOphan = async (
 	}
 
 	// We've taken '@guardian/ophan-tracker-js' out of the apps client bundle (made it external in webpack) because we don't ever expect this method to be called. Tracking in apps is done natively.
-	// @ts-expect-error -- side effect only
 	await import(/* webpackMode: "eager" */ '@guardian/ophan-tracker-js');
 
 	const { ophan } = window.guardian;
