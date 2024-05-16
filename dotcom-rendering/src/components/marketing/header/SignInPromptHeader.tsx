@@ -95,9 +95,6 @@ const benefitTextStyles = css`
 const fadeable = css`
 	transition: opacity 150ms linear;
 	opacity: 0;
-	@media (prefers-reduced-motion: reduce) {
-		transition: none !important;
-	}
 `;
 
 const visible = css`
