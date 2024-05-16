@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	visuallyHidden,
 	textSans12,
+	visuallyHidden,
 } from '@guardian/source-foundations';
 import { formatCount } from '../lib/formatCount';
 import { useCommentCount } from '../lib/useCommentCount';

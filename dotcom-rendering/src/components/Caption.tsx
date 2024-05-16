@@ -4,9 +4,9 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	space,
+	textSans12,
 	textSans14,
 	until,
-	textSans12,
 } from '@guardian/source-foundations';
 import { palette } from '../palette';
 import CameraSvg from '../static/icons/camera.svg';

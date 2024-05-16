@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 import {
-	until,
 	textSans12,
 	textSansBold12,
+	until,
 } from '@guardian/source-foundations';
 import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';

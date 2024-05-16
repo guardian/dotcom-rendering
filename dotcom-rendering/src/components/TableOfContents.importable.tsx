@@ -3,10 +3,10 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {
+	headlineBold17,
+	headlineLight17,
 	space,
 	textSans14,
-	headlineLight17,
-	headlineBold17,
 } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,

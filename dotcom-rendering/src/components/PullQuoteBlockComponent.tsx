@@ -5,8 +5,8 @@ import {
 	headlineMedium20,
 	headlineMedium24,
 	headlineMedium28,
-	until,
 	textSans20,
+	until,
 } from '@guardian/source-foundations';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';

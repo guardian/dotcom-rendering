@@ -2,14 +2,14 @@ import { css, type SerializedStyles } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
-	space,
-	textSansBold15,
-	textSans15,
-	textSansBold17,
-	headlineMedium20,
-	headlineMedium24,
 	headlineBold20,
 	headlineBold24,
+	headlineMedium20,
+	headlineMedium24,
+	space,
+	textSans15,
+	textSansBold15,
+	textSansBold17,
 } from '@guardian/source-foundations';
 import type { NestedArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, headlineBold17 } from '@guardian/source-foundations';
+import { from, headlineBold17, space } from '@guardian/source-foundations';
 import {
 	Button,
 	Hide,

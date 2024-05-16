@@ -3,8 +3,8 @@ import {
 	brandText,
 	from,
 	palette as sourcePalette,
-	until,
 	textSans17,
+	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../../../lib/acquisitions';

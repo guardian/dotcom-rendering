@@ -4,12 +4,12 @@ import {
 	from,
 	headlineBold17,
 	headlineBold20,
+	headlineMedium17,
 	space,
 	textSans17,
 	textSans20,
 	textSansBold20,
 	until,
-	headlineMedium17,
 } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette as themePalette } from '../palette';
