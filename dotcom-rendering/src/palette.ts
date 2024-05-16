@@ -1863,6 +1863,10 @@ const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.news[400];
 		case Pillar.News:
 			switch (design) {
+				case ArticleDesign.Picture:
+				case ArticleDesign.Video:
+				case ArticleDesign.Audio:
+					return sourcePalette.neutral[86];
 				case ArticleDesign.Analysis:
 					return sourcePalette.news[300];
 				default:
