@@ -18,6 +18,11 @@ type Props = {
  * a right ad slot and a most viewed component
  */
 const MAX_HEIGHT_PX = 1600;
+
+/**
+ * When in the deeply-read-and-most-viewed variant of the deeplyReadRightColumn
+ * AB test, there is an extra container of five article links.
+ */
 const MAX_HEIGHT_PX_DEEPLY_READ = 2250;
 
 /**
@@ -46,6 +51,7 @@ export const MostViewedRightWithAd = ({
 	const useDarkColourScheme =
 		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.Audio;
+
 	const deeplyReadTestVariant = useDeeplyReadTestVariant();
 	const deeplyReadAndMostViewed =
 		deeplyReadTestVariant === 'deeply-read-and-most-viewed';
