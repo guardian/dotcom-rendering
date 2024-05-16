@@ -98,7 +98,7 @@ export const SetABTests = ({
 		};
 
 		const ab = new AB({
-			mvtId: mvtId ?? 0,
+			mvtId: mvtId ?? -1,
 			mvtMaxValue,
 			pageIsSensitive,
 			abTestSwitches,
