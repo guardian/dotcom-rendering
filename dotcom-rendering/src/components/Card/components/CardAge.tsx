@@ -26,22 +26,20 @@ const ageStyles = (
 	isOnwardsContent?: boolean,
 ) => {
 	return css`
-				${textSans12};
-				/**
-				 * Typography preset styles should not be overridden.
-				 * This has been done because the styles do not directly map to the new presets.
-				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				*/
-				line-height: 1.15;
-        margin-top: -4px;
-        color: ${
-			isOnwardsContent
-				? palette('--card-footer-onwards-content')
-				: palette('--card-footer-text')
-		};
+		${textSans12};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		line-height: 1.15;
+		margin-top: -4px;
+		color: ${isOnwardsContent
+			? palette('--card-footer-onwards-content')
+			: palette('--card-footer-text')};
 
 		/* Provide side padding for positioning and also to keep spacing
-    between any sibings (like Lines) */
+		between any sibings (like Lines) */
 		padding-left: 5px;
 		padding-right: 5px;
 		${until.tablet} {
@@ -49,11 +47,9 @@ const ageStyles = (
 		}
 
 		svg {
-			fill: ${
-				isOnwardsContent
-					? palette('--card-footer-onwards-content')
-					: palette('--card-footer-text')
-			};
+			fill: ${isOnwardsContent
+				? palette('--card-footer-onwards-content')
+				: palette('--card-footer-text')};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
@@ -61,13 +57,11 @@ const ageStyles = (
 		}
 
 		> time {
-			${
-				format.design === ArticleDesign.Gallery ||
-				format.design === ArticleDesign.Audio ||
-				format.design === ArticleDesign.Video
-					? textSansBold12
-					: textSans12
-			}};
+			${format.design === ArticleDesign.Gallery ||
+			format.design === ArticleDesign.Audio ||
+			format.design === ArticleDesign.Video
+				? textSansBold12
+				: textSans12};
 		}
 	`;
 };
