@@ -50,7 +50,7 @@ const subMessageStyles = css`
 `;
 
 const buttonStyles = css`
-	margin-right: ${space[1]}px;
+	margin-right: ${space[2]}px;
 `;
 
 const Header: ReactComponent<HeaderRenderProps> = (

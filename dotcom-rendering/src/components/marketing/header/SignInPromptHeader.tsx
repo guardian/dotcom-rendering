@@ -4,14 +4,17 @@
  * https://github.com/guardian/support-dotcom-components/blob/4925ef1e0ced5d221f1122afe79f93bd7448e0e5/packages/modules/src/modules/headers/SignInPromptHeader.tsx
  */
 import { css } from '@emotion/react';
+import { storage } from '@guardian/libs';
 import {
 	from,
-	headlineBold17,
+	headlineBold20,
 	headlineBold24,
-	palette,
+	palette as sourcePalette,
 	space,
 	textSans12,
+	textSans14,
 	textSans15,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import {
 	Hide,
@@ -28,10 +31,25 @@ const TEXT_DELAY_MS = 1500;
 const ANIMATION_DELAY_MS = 150;
 const DOTS_COUNT = 3;
 
+const padLeftStyles = css`
+	padding-left: ${space[3]}px;
+`;
+
+const flexRowStyles = css`
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`;
+
+const flexColumnStyles = css`
+	display: flex;
+	flex-direction: column;
+`;
+
 const headingStyles = () => css`
-	color: ${palette.neutral[100]};
-	${headlineBold17}
-	margin: 0;
+	color: ${sourcePalette.neutral[100]};
+	${headlineBold20}
 
 	${from.desktop} {
 		${headlineBold24}
@@ -39,55 +57,32 @@ const headingStyles = () => css`
 `;
 
 const subHeadingStyles = css`
-	color: ${palette.brandAlt[400]};
-	margin: 0;
-
-	${textSans12}
-	line-height: 1.15;
-
-	${from.desktop} {
-		${textSans15}
-	}
+	color: ${sourcePalette.brandAlt[400]};
+	${textSans14}
 `;
 
 const benefitsWrapper = css`
-	margin: 0 0 ${space[1]}px;
-	height: 16px;
-	position: relative;
-
-	${from.desktop} {
-		margin: 0 0 ${space[2]}px;
-		height: 20px;
-	}
-`;
-
-const benefitStyles = css`
 	display: flex;
-`;
-
-const dotsWrapper = css`
-	position: absolute;
-	display: flex;
+	flex-direction: row;
+	margin-bottom: ${space[2]}px;
+	align-items: center;
 `;
 
 const dotStyles = css`
-	background: ${palette.brandAlt[400]};
-	width: 9px;
-	height: 9px;
+	background: ${sourcePalette.brandAlt[400]};
+	width: ${space[2]}px;
+	height: ${space[2]}px;
 	border-radius: 50%;
-	margin-top: 4px;
 	margin-right: ${space[1]}px;
 
 	${from.desktop} {
-		width: 11px;
-		height: 11px;
-		margin-top: 5px;
-		margin-right: 6px;
+		width: ${space[3]}px;
+		height: ${space[3]}px;
 	}
 `;
 
 const benefitTextStyles = css`
-	color: ${palette.neutral[100]};
+	color: ${sourcePalette.neutral[100]};
 	${textSans12}
 	line-height: 1.15;
 
@@ -100,14 +95,30 @@ const benefitTextStyles = css`
 const fadeable = css`
 	transition: opacity 150ms linear;
 	opacity: 0;
+	@media (prefers-reduced-motion: reduce) {
+		transition: none !important;
+	}
 `;
 
 const visible = css`
 	opacity: 1;
 `;
 
-const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
-	const { heading, subheading, primaryCta, benefits } = props.content;
+const hideIfReducedMotion = css`
+	@media (prefers-reduced-motion: reduce) {
+		${visuallyHidden}
+	}
+`;
+
+const buttonStyles = css`
+	flex-grow: 0;
+	width: fit-content;
+`;
+
+/**
+ * @todo Possible future improvement: replace mutable animation logic with more readable solution
+ */
+const SignInBenefits = ({ benefits }: { benefits: string[] }) => {
 	const [benefitIndex, setBenefitIndex] = useState(-1);
 	const [benefitVisible, setBenefitVisible] = useState<boolean>(false);
 	const [dotsVisible, setDotsVisible] = useState(() => {
@@ -116,14 +127,9 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 		return initialState;
 	});
 	const benefitText = useMemo(
-		() => benefits?.[benefitIndex] ?? '',
+		() => benefits[benefitIndex] ?? '',
 		[benefits, benefitIndex],
 	);
-	const benefitCss = [benefitStyles, fadeable];
-
-	if (benefitVisible) {
-		benefitCss.push(visible);
-	}
 
 	useEffect(() => {
 		let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -132,10 +138,6 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 		const queueAnimation = (callback: () => void, ms: number) => {
 			animationSteps.push({ callback, ms });
 		};
-
-		if (!(benefits ?? []).length) {
-			return;
-		}
 
 		if (benefitIndex === -1) {
 			setBenefitIndex(0);
@@ -165,7 +167,7 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 			setBenefitVisible(true);
 		}, FADE_TIME_MS + ANIMATION_DELAY_MS);
 
-		if (benefitIndex < (benefits ?? []).length - 1) {
+		if (benefitIndex < benefits.length - 1) {
 			// Fade out benefit text
 			queueAnimation(() => {
 				setBenefitVisible(false);
@@ -202,39 +204,70 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 	}, [benefits, benefitIndex]);
 
 	return (
+		<div css={benefitsWrapper}>
+			{dotsVisible.map((dotVisible, index) => (
+				<div
+					css={[dotStyles, fadeable, dotVisible && visible]}
+					key={`benefit-dot-${index + 1}`}
+				/>
+			))}
+
+			<div css={[flexRowStyles, fadeable, benefitVisible && visible]}>
+				<div css={dotStyles} />
+				<span css={benefitTextStyles}>{benefitText}</span>
+			</div>
+		</div>
+	);
+};
+
+const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
+	const { heading, subheading, primaryCta, benefits } = props.content;
+
+	const [shouldFlash, setShouldFlash] = useState(false);
+
+	/** Logic copied from PulsingDot */
+	useEffect(() => {
+		/**
+		 * `flashingPreference` is `null` if no preference exists and explicitly
+		 * `false` when the reader has said they don't want flashing
+		 */
+		const flashingPreferences = storage.local.get(
+			'gu.prefs.accessibility.flashing-elements',
+		);
+		setShouldFlash(flashingPreferences !== false);
+	}, []);
+
+	const showBenefits = !!benefits && !!benefits.length && shouldFlash;
+
+	return (
 		<Hide until="tablet">
-			<h2 css={headingStyles}>{heading}</h2>
-			<h3 css={subHeadingStyles}>{subheading}</h3>
-
-			<div css={benefitsWrapper}>
-				<div css={dotsWrapper}>
-					{dotsVisible.map((dotVisible, index) => {
-						const dotCss = [dotStyles, fadeable];
-
-						if (dotVisible) {
-							dotCss.push(visible);
-						}
-
-						return <div css={dotCss} key={index} />;
-					})}
+			<div css={[flexRowStyles]}>
+				<div css={flexColumnStyles}>
+					<h2 css={headingStyles}>{heading}</h2>
+					<h3 css={subHeadingStyles}>{subheading}</h3>
 				</div>
-				<div css={benefitCss}>
-					<div css={dotStyles} />
-					<span css={benefitTextStyles}>{benefitText}</span>
+
+				<div css={[padLeftStyles, flexColumnStyles]}>
+					{showBenefits && (
+						<div css={hideIfReducedMotion}>
+							<SignInBenefits benefits={benefits} />
+						</div>
+					)}
+
+					{primaryCta && (
+						<LinkButton
+							theme={themeButtonBrand}
+							priority="primary"
+							href={primaryCta.ctaUrl}
+							size="xsmall"
+							onClick={props.onCtaClick}
+							css={buttonStyles}
+						>
+							{primaryCta.ctaText}
+						</LinkButton>
+					)}
 				</div>
 			</div>
-
-			{primaryCta && (
-				<LinkButton
-					theme={themeButtonBrand}
-					priority="primary"
-					href={primaryCta.ctaUrl}
-					size="xsmall"
-					onClick={props.onCtaClick}
-				>
-					{primaryCta.ctaText}
-				</LinkButton>
-			)}
 		</Hide>
 	);
 };

@@ -11,6 +11,7 @@ const meta = {
 		mmaUrl: 'mmaUrl',
 		discussionApiUrl: 'discussionApiUrl',
 		idApiUrl: 'idApiUrl',
+		contributionsServiceUrl: 'contributionsServiceUrl',
 	},
 } satisfies Meta<typeof TopBar>;
 export default meta;
