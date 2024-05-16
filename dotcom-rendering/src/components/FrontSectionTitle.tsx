@@ -24,7 +24,7 @@ const titleStyle = css`
 `;
 
 const advertisingPartnerDottedBorder = css`
-	border: 1px dotted ${sourcePalette.neutral[86]};
+	border-bottom: 1px dotted ${sourcePalette.neutral[86]};
 	margin-top: 0.375rem;
 `;
 
