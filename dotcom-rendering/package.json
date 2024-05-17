@@ -164,7 +164,6 @@
 		"lodash.get": "4.4.2",
 		"log4js": "6.9.1",
 		"lz-string": "1.5.0",
-		"minimatch": "5.1.6",
 		"mockdate": "3.0.5",
 		"parse5": "7.1.2",
 		"postcss-styled-syntax": "0.6.3",
