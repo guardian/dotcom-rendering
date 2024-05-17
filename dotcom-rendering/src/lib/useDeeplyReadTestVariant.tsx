@@ -1,12 +1,17 @@
+import { isOneOf } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { deeplyReadRightColumn } from '../experiments/tests/deeply-read-right-column';
 import { useAB } from './useAB';
 
-type Variant =
-	| 'deeply-read-only'
-	| 'deeply-read-and-most-viewed'
-	| 'most-viewed-only'
-	| 'none';
+const variants = [
+	'deeply-read-only',
+	'deeply-read-and-most-viewed',
+	'most-viewed-only',
+	'none',
+] as const;
+type Variant = (typeof variants)[number];
+
+const isVariant = isOneOf(variants);
 
 export const useDeeplyReadTestVariant = (): Variant => {
 	const [variant, setVariant] = useState<Variant>('none');
@@ -14,11 +19,12 @@ export const useDeeplyReadTestVariant = (): Variant => {
 
 	useEffect(() => {
 		const variantId =
-			(ABTestAPI?.runnableTest(deeplyReadRightColumn)?.variantToRun.id as
-				| Variant
-				| undefined) ?? 'none';
+			ABTestAPI?.runnableTest(deeplyReadRightColumn)?.variantToRun.id ??
+			'none';
 
-		setVariant(variantId);
+		if (isVariant(variantId)) {
+			setVariant(variantId);
+		}
 	}, [ABTestAPI]);
 
 	return variant;
