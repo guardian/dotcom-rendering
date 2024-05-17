@@ -23,7 +23,7 @@ import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { Liveness } from './Liveness.importable';
 import { Metrics } from './Metrics.importable';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
-import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
+import { MostViewedRightWithAd } from './MostViewedRightWithAd.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
@@ -314,14 +314,28 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
-	test('MostViewedRightWrapper', () => {
+	test('MostViewedRightWithAd', () => {
 		expect(() =>
 			renderToString(
-				<MostViewedRightWrapper
-					componentDataAttribute={''}
-					maxHeightPx={0}
-					renderAds={false}
-				/>,
+				<ConfigProvider
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						assetOrigin: '/',
+					}}
+				>
+					<MostViewedRightWithAd
+						format={{
+							theme: Pillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
+						}}
+						isPaidContent={false}
+						renderAds={false}
+						shouldHideReaderRevenue={false}
+					/>
+					,
+				</ConfigProvider>,
 			),
 		).not.toThrow();
 	});
