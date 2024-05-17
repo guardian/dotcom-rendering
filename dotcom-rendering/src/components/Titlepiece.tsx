@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	headlineBold14,
+	headlineBold17,
 	headlineBold20,
 	headlineBold24,
 	palette,
@@ -53,6 +54,10 @@ const sections = [
 	slug: string;
 }>;
 
+const pillarLinkWidth1024 = 108;
+const pillarLinkWidth1280 = 125;
+const pillarLinkWidth1440 = 136;
+
 const editionsMenuStyles = css`
 	grid-column: content-start / content-end;
 	grid-row: 1;
@@ -72,13 +77,13 @@ const guardianLogoStyles = css`
 	@media (min-width: 375px) {
 		margin-right: 0;
 	}
-	@media (min-width: 1024px) {
-		// grid-row: 1 / 2;
-	}
 	svg {
 		height: 49px;
 		@media (min-width: 375px) and (max-width: 739px) {
 			height: 67px;
+		}
+		@media (min-width: 480px) and (max-width: 1279px) {
+			margin-bottom: 8px;
 		}
 		@media (min-width: 740px) and (max-width: 1023px) {
 			height: 96px;
@@ -88,12 +93,13 @@ const guardianLogoStyles = css`
 		}
 		@media (min-width: 1280px) {
 			height: 115px;
+			margin-bottom: 10px;
 		}
 	}
 `;
 
 const burgerStyles = css`
-	grid-column: 3 / content-end;
+	grid-column: content-start / content-end;
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
@@ -107,9 +113,23 @@ const burgerStyles = css`
 	:hover {
 		background-color: ${palette.brandAlt[300]};
 	}
-	@media (min-width: 375px) and (max-width: 739px) {
+	@media (min-width: 375px) {
 		grid-row: 2;
 		align-self: center;
+		z-index: 10;
+	}
+	@media (min-width: 1024px) {
+		grid-row: 1 / 2;
+		align-self: end;
+		justify-self: start;
+		margin-left: ${pillarLinkWidth1024 * pillars.length}px;
+		margin-bottom: 12px;
+	}
+	@media (min-width: 1280px) {
+		margin-left: ${pillarLinkWidth1280 * pillars.length}px;
+	}
+	@media (min-width: 1440px) {
+		margin-left: ${pillarLinkWidth1440 * pillars.length}px;
 	}
 `;
 
@@ -139,10 +159,15 @@ const pillarsNavStyles = css`
 		height: 28px;
 		padding-right: ${space[1]}px;
 	}
+	@media (min-width: 740px) and (max-width: 1023px) {
+		li {
+			${headlineBold17}
+		}
+	}
 	@media (min-width: 1024px) and (max-width: 1279px) {
 		li {
 			${headlineBold20}
-			width: 108px;
+			width: ${pillarLinkWidth1024}px;
 			height: 40px;
 		}
 	}
