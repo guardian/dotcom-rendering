@@ -55,7 +55,7 @@ const sections = [
 	slug: string;
 }>;
 
-const getIsTabletOrSmaller = () => window.innerWidth <= 740;
+const getWindowWidth = () => window.innerWidth;
 
 const pillarLinkWidth1024 = 108;
 const pillarLinkWidth1280 = 125;
@@ -125,14 +125,14 @@ const burgerStyles = css`
 		grid-row: 1 / 2;
 		align-self: end;
 		justify-self: start;
-		margin-left: ${pillarLinkWidth1024 * pillars.length}px;
+		margin-left: ${pillarLinkWidth1024 * pillars.length + space[1]}px;
 		margin-bottom: 12px;
 	}
 	@media (min-width: 1280px) {
-		margin-left: ${pillarLinkWidth1280 * pillars.length}px;
+		margin-left: ${pillarLinkWidth1280 * pillars.length + space[1]}px;
 	}
 	@media (min-width: 1440px) {
-		margin-left: ${pillarLinkWidth1440 * pillars.length}px;
+		margin-left: ${pillarLinkWidth1440 * pillars.length + space[1]}px;
 	}
 `;
 
@@ -218,12 +218,10 @@ const sectionsNavStyles = css`
 `;
 
 export const Titlepiece = ({ editionId }: TitlepieceProps) => {
-	const [isTabletOrSmaller, setIsTabletOrSmaller] = useState(
-		getIsTabletOrSmaller(),
-	);
+	const [windowWidth, setWindowWidth] = useState(getWindowWidth());
 	useEffect(() => {
 		const handleResize = () => {
-			setIsTabletOrSmaller(getIsTabletOrSmaller());
+			setWindowWidth(getWindowWidth());
 		};
 		window.addEventListener('resize', handleResize);
 		return () => {
@@ -243,7 +241,7 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 				<TitlepieceEditionDropdown
 					editionId={editionId}
 					dataLinkName={''}
-					isTabletOrSmaller={isTabletOrSmaller}
+					isTabletOrSmaller={windowWidth <= 740}
 				/>
 			</div>
 
@@ -271,8 +269,10 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 									position: relative;
 									${index !== pillars.length - 1 &&
 									`border-right: 1px solid ${palette.neutral[86]};`}
-									${index > 0 &&
-									`padding-left: ${space[1]}px;`}
+									${index === pillars.length - 1 &&
+									windowWidth > 1023 &&
+									`border-right: 1px solid ${palette.neutral[86]};`}
+									${index > 0 && `padding-left: ${space[1]}px;`}
 								`}
 							>
 								<div

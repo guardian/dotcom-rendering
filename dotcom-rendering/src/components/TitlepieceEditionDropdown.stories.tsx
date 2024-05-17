@@ -10,7 +10,13 @@ export default {
 };
 
 export const defaultStory = () => {
-	return <TitlepieceEditionDropdown editionId={'UK'} dataLinkName="test" />;
+	return (
+		<TitlepieceEditionDropdown
+			editionId={'UK'}
+			dataLinkName="test"
+			isTabletOrSmaller={false}
+		/>
+	);
 };
 
 defaultStory.storyName = 'default';
