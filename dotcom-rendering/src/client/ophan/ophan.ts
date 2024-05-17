@@ -1,22 +1,8 @@
-import type {
-	OphanABTestMeta,
-	OphanAction,
-	OphanComponentEvent,
-} from '@guardian/libs';
+import type { OphanABTestMeta, OphanAction } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import type ophan from '@guardian/ophan-tracker-js';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import type { RenderingTarget } from '../../types/renderingTarget';
-
-type OphanRecordFunction = (
-	event: { [key: string]: unknown } & {
-		/**
-		 * the experiences key will override previously set values.
-		 * Use `recordExperiences` instead.
-		 */
-		experiences?: never;
-	},
-	callback?: () => void,
-) => void;
 
 type Ophan = typeof ophan;
 
@@ -55,15 +41,11 @@ export const getOphan = async (
 	}
 
 	// We've taken '@guardian/ophan-tracker-js' out of the apps client bundle (made it external in webpack) because we don't ever expect this method to be called. Tracking in apps is done natively.
-	await import(/* webpackMode: "eager" */ '@guardian/ophan-tracker-js');
+	const { default: ophan } = await import(
+		/* webpackMode: "eager" */ '@guardian/ophan-tracker-js'
+	);
 
-	const { ophan } = window.guardian;
-
-	if (!ophan) {
-		throw new Error('window.guardian.ophan is not available');
-	}
-
-	const record: OphanRecordFunction = (event, callback) => {
+	const record: (typeof ophan)['record'] = (event, callback) => {
 		ophan.record(event, callback);
 		log('dotcom', '🧿 Ophan event recorded:', event);
 	};
@@ -85,7 +67,7 @@ export const getOphan = async (
 };
 
 export const submitComponentEvent = async (
-	componentEvent: OphanComponentEvent,
+	componentEvent: ComponentEvent,
 	renderingTarget: RenderingTarget,
 ): Promise<void> => {
 	const ophan = await getOphan(renderingTarget);
@@ -107,15 +89,17 @@ export const sendOphanComponentEvent = async (
 		componentType,
 		products = [],
 		campaignCode,
-		labels,
+		labels = [],
 	} = testMeta;
 
-	const componentEvent: OphanComponentEvent = {
+	const componentEvent: ComponentEvent = {
 		component: {
 			componentType,
+			// @ts-expect-error -- Type 'OphanProduct[]' is missing the following properties from type 'Set<TProduct>': add, clear, delete, has, and 2 more.
 			products,
 			campaignCode,
 			id: testMeta.campaignId ?? testMeta.campaignCode,
+			// @ts-expect-error -- Type 'string[]' is missing the following properties from type 'Set<string>': add, clear, delete, has, and 2 more.
 			labels,
 		},
 		abTest: {

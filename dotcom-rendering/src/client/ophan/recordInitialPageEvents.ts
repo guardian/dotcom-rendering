@@ -7,7 +7,11 @@ export const recordInitialPageEvents = async (
 	const { record } = await getOphan(renderingTarget);
 
 	void recordExperiences(renderingTarget, ['dotcom-rendering']);
-	record({ edition: window.guardian.config.page.edition });
+	record({
+		// @ts-expect-error -- Type 'EditionId' is not assignable to type 'TEdition | undefined'.
+		// Type '"INT"' is not assignable to type 'TEdition | undefined'.
+		edition: window.guardian.config.page.edition,
+	});
 
 	// We wait for the load event so that we can be sure our assetPerformance is reported as expected.
 	window.addEventListener('load', function load() {

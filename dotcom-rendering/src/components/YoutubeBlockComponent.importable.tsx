@@ -14,7 +14,7 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { useConfig } from './ConfigContext';
-import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
+import { type VideoEventKey, YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
 type Props = {
 	id: string;
@@ -199,8 +199,19 @@ export const YoutubeBlockComponent = ({
 		);
 	}
 
-	const ophanTracking = async (trackingEvent: string): Promise<void> => {
+	const ophanTracking = async (
+		trackingEvent: VideoEventKey,
+	): Promise<void> => {
 		if (!id) return;
+		if (
+			// these events are not supported by VideoEventKey
+			trackingEvent === 'skip' ||
+			trackingEvent === 'pause' ||
+			trackingEvent === 'cued' ||
+			trackingEvent === 'resume'
+		) {
+			return;
+		}
 		const ophan = await getOphan(renderingTarget);
 		ophan.record({
 			video: {

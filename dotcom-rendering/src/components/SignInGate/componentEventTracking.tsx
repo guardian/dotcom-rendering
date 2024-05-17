@@ -1,4 +1,4 @@
-import type { OphanComponent, OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getOphan } from '../../client/ophan/ophan';
 import { isServer } from '../../lib/isServer';
 import type { RenderingTarget } from '../../types/renderingTarget';
@@ -15,7 +15,7 @@ export type ComponentEventParams = {
 
 // ophan helper methods
 const submitComponentEventTracking = async (
-	componentEvent: OphanComponentEvent,
+	componentEvent: ComponentEvent,
 	renderingTarget: RenderingTarget,
 ) => {
 	if (isServer) return;
@@ -25,7 +25,7 @@ const submitComponentEventTracking = async (
 };
 
 export const submitViewEventTracking = (
-	componentEvent: Omit<OphanComponentEvent, 'action'>,
+	componentEvent: Omit<ComponentEvent, 'action'>,
 	renderingTarget: RenderingTarget,
 ) =>
 	void submitComponentEventTracking(
@@ -37,7 +37,7 @@ export const submitViewEventTracking = (
 	);
 
 const submitClickEventTracking = (
-	componentEvent: Omit<OphanComponentEvent, 'action'>,
+	componentEvent: Omit<ComponentEvent, 'action'>,
 	renderingTarget: RenderingTarget,
 ) =>
 	void submitComponentEventTracking(
@@ -48,9 +48,12 @@ const submitClickEventTracking = (
 		renderingTarget,
 	);
 
-export const withComponentId: (id: string) => OphanComponent = (id = '') => ({
+export const withComponentId = (id?: string): ComponentEvent['component'] => ({
 	componentType: 'SIGN_IN_GATE',
 	id,
+	// What’s the benefit of passing empty sets here?
+	products: new Set(),
+	labels: new Set(),
 });
 
 export const trackLink = (
