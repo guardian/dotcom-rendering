@@ -11,6 +11,7 @@ import { dropDownOverrides } from './HeaderTopBarMyAccount';
 interface TitlepieceEditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
+	isTabletOrSmaller: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -22,6 +23,7 @@ const editionDropdownStyles = css`
 export const TitlepieceEditionDropdown = ({
 	editionId,
 	dataLinkName,
+	isTabletOrSmaller,
 }: TitlepieceEditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
@@ -53,7 +55,9 @@ export const TitlepieceEditionDropdown = ({
 		<div css={editionDropdownStyles}>
 			<Dropdown
 				// TODO: Display ID on small screens
-				label={activeEdition.id}
+				label={
+					isTabletOrSmaller ? activeEdition.id : activeEdition.title
+				}
 				links={linksToDisplay}
 				id="edition"
 				dataLinkName={dataLinkName}

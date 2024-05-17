@@ -9,6 +9,7 @@ import {
 	textSans14,
 } from '@guardian/source-foundations';
 import { SvgGuardianLogo, SvgMenu } from '@guardian/source-react-components';
+import { useEffect, useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
 import { TitlepieceGrid } from './TitlepieceGrid';
@@ -53,6 +54,8 @@ const sections = [
 	name: string;
 	slug: string;
 }>;
+
+const getIsTabletOrSmaller = () => window.innerWidth <= 740;
 
 const pillarLinkWidth1024 = 108;
 const pillarLinkWidth1280 = 125;
@@ -215,6 +218,18 @@ const sectionsNavStyles = css`
 `;
 
 export const Titlepiece = ({ editionId }: TitlepieceProps) => {
+	const [isTabletOrSmaller, setIsTabletOrSmaller] = useState(
+		getIsTabletOrSmaller(),
+	);
+	useEffect(() => {
+		const handleResize = () => {
+			setIsTabletOrSmaller(getIsTabletOrSmaller());
+		};
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 	return (
 		<TitlepieceGrid
 			style={{
@@ -228,6 +243,7 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 				<TitlepieceEditionDropdown
 					editionId={editionId}
 					dataLinkName={''}
+					isTabletOrSmaller={isTabletOrSmaller}
 				/>
 			</div>
 
