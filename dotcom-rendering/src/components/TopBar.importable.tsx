@@ -151,7 +151,7 @@ export const TopBar = ({
 				<TopBarLinkContainer>
 					<TopBarLink
 						dataLinkName={nestedOphanComponents(
-							'nav4',
+							'header',
 							'topbar',
 							'printsubs',
 						)}
@@ -167,7 +167,11 @@ export const TopBar = ({
 			<Hide until="desktop">
 				<TopBarLinkContainer>
 					<TopBarLink
-						dataLinkName={nestedOphanComponents('nav4', 'job-cta')}
+						dataLinkName={nestedOphanComponents(
+							'header',
+							'topbar',
+							'job-cta',
+						)}
 						href="https://jobs.theguardian.com"
 					>
 						Search jobs
