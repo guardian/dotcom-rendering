@@ -87,7 +87,7 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 			await expectToNotExist(page, '[data-component=geo-most-popular]');
-			await waitForIsland(page, 'MostViewedRightWithAd', {});
+			await waitForIsland(page, 'MostViewedRightWrapper', {});
 			await expectToExist(page, '[data-component=geo-most-popular]');
 		});
 
@@ -141,10 +141,10 @@ test.describe('Interactivity', () => {
 			).toHaveCount(0);
 
 			// Wait for hydration
-			await waitForIsland(page, 'MostViewedRightWithAd', {});
+			await waitForIsland(page, 'MostViewedRightWrapper', {});
 			await expect(
 				page
-					.locator(`gu-island[name="MostViewedRightWithAd"]`)
+					.locator(`gu-island[name="MostViewedRightWrapper"]`)
 					.filter({ hasText: 'Most Viewed' }),
 			).toBeVisible();
 

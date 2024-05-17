@@ -34,13 +34,13 @@ test.describe('E2E Page rendering', () => {
 			);
 
 			// most viewed right hand column, response promise
-			// https://api.nextgen.guardianapps.co.uk/most-read-with-deeply-read.json
+			// https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true
 			const mostReadRightResponsePromise = page.waitForResponse(
 				(response) =>
 					responseHasJsonProperty(
 						response,
-						/most-read-with-deeply-read\.json/,
-						'tabs',
+						/most-read-geo\.json/,
+						'heading',
 					),
 			);
 
@@ -77,11 +77,11 @@ test.describe('E2E Page rendering', () => {
 			).toBeVisible();
 
 			// expect most read right to be loaded, its data response and its text to be visible
-			await waitForIsland(page, 'MostViewedRightWithAd', {});
+			await waitForIsland(page, 'MostViewedRightWrapper', {});
 			await mostReadRightResponsePromise;
 			await expect(
 				page
-					.locator(`gu-island[name="MostViewedRightWithAd"]`)
+					.locator(`gu-island[name="MostViewedRightWrapper"]`)
 					.getByText('Most Viewed'),
 			).toBeVisible();
 

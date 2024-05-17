@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ConfigProvider } from './ConfigContext';
-import { responseWithTwoTabs } from './MostViewed.mocks';
+import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
-const response = { data: responseWithTwoTabs };
+const response = { data: mockTab1 };
 const useApi: { [key: string]: any } = useApi_;
 
 jest.mock('../lib/useApi', () => ({

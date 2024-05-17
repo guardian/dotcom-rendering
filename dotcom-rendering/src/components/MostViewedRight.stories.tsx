@@ -8,7 +8,7 @@ import {
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
-import { responseWithTwoTabs } from './MostViewed.mocks';
+import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 import { RightColumn } from './RightColumn';
 import { Section } from './Section';
@@ -33,7 +33,7 @@ export const defaultStory: StoryObj = ({ format }: StoryProps) => {
 		.restore()
 		.getOnce('*', {
 			status: 200,
-			body: responseWithTwoTabs,
+			body: mockTab1,
 		})
 		.spy('end:.hot-update.json');
 
@@ -67,7 +67,7 @@ export const limitItemsStory: StoryObj = ({ format }: StoryProps) => {
 		.restore()
 		.getOnce('*', {
 			status: 200,
-			body: responseWithTwoTabs,
+			body: mockTab1,
 		})
 		.spy('end:.hot-update.json');
 
@@ -101,7 +101,7 @@ export const outsideContextStory: StoryObj = () => {
 		.restore()
 		.getOnce('*', {
 			status: 200,
-			body: responseWithTwoTabs,
+			body: mockTab1,
 		})
 		.spy('end:.hot-update.json');
 
