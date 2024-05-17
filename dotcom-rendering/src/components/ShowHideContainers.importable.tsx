@@ -1,5 +1,6 @@
 import { isObject, isString, storage } from '@guardian/libs';
 import { useEffect } from 'react';
+import { getOphan } from '../client/ophan/ophan';
 
 type ContainerStates = { [id: string]: string };
 
@@ -14,6 +15,18 @@ const getContainerStates = (): ContainerStates => {
 	const item = storage.local.get(`gu.prefs.container-states`);
 
 	if (!isContainerStates(item)) return {};
+
+	/** Log how many front containers are hidden for users */
+	const hiddenContainers = Object.values(item).filter(
+		(value) => value === 'closed',
+	).length;
+
+	void getOphan('Web').then((ophan) => {
+		ophan.record({
+			component: 'front-containers-hidden',
+			value: hiddenContainers,
+		});
+	});
 
 	return item;
 };
