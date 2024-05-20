@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { between, from } from '@guardian/source-foundations';
 
 const frontsSectionBadgeSizingStyles = css`
 	height: auto;
@@ -24,11 +24,8 @@ const labsSectionBadgeSizingStyles = css`
 `;
 
 const imageAdvertisingPartnerStyles = css`
-	${from.leftCol} {
+	${between.leftCol.and.wide} {
 		max-width: 130px;
-	}
-	${from.wide} {
-		max-width: 100%;
 	}
 `;
 

@@ -166,13 +166,12 @@ export const FrontSectionTitle = ({
 				return (
 					<div css={titleStyle}>
 						{title}
-						<div
-							css={
-								isAdvertisingPartnerOrExclusive &&
-								inAdvertisingPartnerABTest &&
-								advertisingPartnerDottedBorder
-							}
-						></div>
+						{isAdvertisingPartnerOrExclusive &&
+						inAdvertisingPartnerABTest ? (
+							<div css={advertisingPartnerDottedBorder}></div>
+						) : (
+							<div></div>
+						)}
 						<div
 							css={
 								isAdvertisingPartnerOrExclusive &&

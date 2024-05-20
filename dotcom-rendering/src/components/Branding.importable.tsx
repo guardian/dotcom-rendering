@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { breakpoints, from, textSans12 } from '@guardian/source-foundations';
+import {
+	between,
+	breakpoints,
+	from,
+	textSans12,
+} from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
 import { getOphanComponents } from '../lib/labs';
 import { palette } from '../palette';
@@ -27,7 +32,7 @@ const brandingAdvertisingPartnerStyle = css`
 	}
 	${from.wide} {
 		padding: 8px;
-		width: 219px;
+		width: 220px;
 	}
 `;
 
@@ -62,11 +67,8 @@ const liveBlogLabelStyle = css`
 const brandingLogoAdvertisingPartnerStyle = css`
 	& img {
 		display: block;
-		${from.leftCol} {
+		${between.leftCol.and.wide} {
 			max-width: 130px;
-		}
-		${from.wide} {
-			max-width: 100%;
 		}
 	}
 `;
@@ -205,8 +207,9 @@ export const Branding = ({ branding, format }: Props) => {
 	const { darkModeAvailable, inAdvertisingPartnerABTest } = useConfig();
 
 	const isAdvertisingPartnerOrExclusive =
-		branding.logo.label.toLowerCase() === 'advertising partner' ||
-		branding.logo.label.toLowerCase() === 'exclusive advertising partner';
+		// branding.logo.label.toLowerCase() === 'advertising partner' ||
+		// branding.logo.label.toLowerCase() === 'exclusive advertising partner';
+		branding.logo.label.toLowerCase() === 'supported by';
 
 	const isAdvertisingPartnerAndInteractive =
 		isAdvertisingPartnerOrExclusive && isInteractive;
