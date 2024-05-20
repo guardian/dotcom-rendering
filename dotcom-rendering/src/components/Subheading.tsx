@@ -33,6 +33,11 @@ const fontStyles = ({
 	${format.display === ArticleDisplay.Immersive
 		? headlineLight28
 		: `
+			/**
+			 * Typography preset styles should not be overridden.
+			 * This has been done because the styles do not directly map to the new presets.
+			 * Please speak to your team's designer and update this to use a more appropriate preset.
+			 */
 			${fontWeight === 'light' && headlineLight24};
 			${fontWeight === 'medium' && headlineMedium24};
 			${fontWeight === 'bold' && headlineBold24};
@@ -42,6 +47,11 @@ const fontStyles = ({
 		${format.display === ArticleDisplay.Immersive
 			? headlineLight34
 			: `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
 				${fontWeight === 'light' && headlineLight28};
 				${fontWeight === 'medium' && headlineMedium28};
 				${fontWeight === 'bold' && headlineBold28};
@@ -53,11 +63,21 @@ const fontStyles = ({
 	css`
 		${format.display === ArticleDisplay.Immersive
 			? `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
 				${textSans28};
 				font-weight: 300;
 				line-height: 1.15;
 			`
 			: `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
 				${textSans24};
 				${fontWeight === 'light' && 'font-weight: 300;'};
 				${fontWeight === 'medium' && 'font-weight: 500;'};
@@ -68,11 +88,21 @@ const fontStyles = ({
 		${from.tablet} {
 			${format.display === ArticleDisplay.Immersive
 				? `
+					/**
+					 * Typography preset styles should not be overridden.
+					 * This has been done because the styles do not directly map to the new presets.
+					 * Please speak to your team's designer and update this to use a more appropriate preset.
+					 */
 					${textSans34};
 					font-weight: 300;
 					line-height: 1.15;
 				`
 				: `
+					/**
+					 * Typography preset styles should not be overridden.
+					 * This has been done because the styles do not directly map to the new presets.
+					 * Please speak to your team's designer and update this to use a more appropriate preset.
+					 */
 					${textSans28};
 					${fontWeight === 'light' && 'font-weight: 300;'};
 					${fontWeight === 'medium' && 'font-weight: 500;'};
