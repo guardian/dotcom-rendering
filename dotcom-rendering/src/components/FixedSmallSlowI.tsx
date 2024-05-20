@@ -9,12 +9,14 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 };
 
 export const FixedSmallSlowI = ({
 	trails,
 	containerPalette,
 	showAge,
+	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
 	const firstSlice100 = trails.slice(0, 1);
@@ -27,6 +29,7 @@ export const FixedSmallSlowI = ({
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						imageLoading={imageLoading}
 					/>
 				</LI>

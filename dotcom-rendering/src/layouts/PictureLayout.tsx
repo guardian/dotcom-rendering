@@ -725,6 +725,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={
+									!!article.config.switches
+										.absoluteServerTimes
+								}
 							/>
 						</Island>
 					</Section>
@@ -750,6 +754,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
+							absoluteServerTimes={
+								!!article.config.switches.absoluteServerTimes
+							}
 						/>
 					</Island>
 				)}

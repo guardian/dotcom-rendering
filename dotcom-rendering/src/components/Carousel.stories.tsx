@@ -269,6 +269,7 @@ export const Headlines: StoryObj = ({ format }: StoryProps) => {
 				format={format}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -293,6 +294,7 @@ export const SingleItemCarousel = () => {
 				format={defaultFormat}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -346,6 +348,7 @@ export const SingleOpinionCarousel = () => {
 				}}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -375,6 +378,7 @@ export const Immersive = () => {
 					}}
 					leftColSize="compact"
 					discussionApiUrl={discussionApiUrl}
+					absoluteServerTimes={true}
 				/>
 			</Section>
 		</>
@@ -419,6 +423,7 @@ export const SpecialReportAlt = () => {
 				format={specialReportAltFormat}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -632,6 +637,7 @@ export const AllCards = () => {
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				format={defaultFormat}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -655,6 +661,7 @@ export const FrontCarousel = () => (
 				url={'https://www.theguardian.com'}
 				discussionApiUrl={discussionApiUrl}
 				palette={'BreakingPalette'}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	</>

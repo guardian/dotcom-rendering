@@ -72,7 +72,11 @@ export const Sport = () => {
 	};
 	return (
 		<Wrapper>
-			<PinnedPost pinnedPost={block} format={format}>
+			<PinnedPost
+				pinnedPost={block}
+				format={format}
+				absoluteServerTimes={true}
+			>
 				<LiveBlock
 					format={format}
 					block={block}
@@ -119,7 +123,11 @@ export const News = () => {
 	};
 	return (
 		<Wrapper>
-			<PinnedPost pinnedPost={block} format={format}>
+			<PinnedPost
+				pinnedPost={block}
+				format={format}
+				absoluteServerTimes={true}
+			>
 				<LiveBlock
 					format={format}
 					block={block}
@@ -166,7 +174,11 @@ export const Culture = () => {
 	};
 	return (
 		<Wrapper>
-			<PinnedPost pinnedPost={block} format={format}>
+			<PinnedPost
+				pinnedPost={block}
+				format={format}
+				absoluteServerTimes={true}
+			>
 				<LiveBlock
 					format={format}
 					block={block}
@@ -213,7 +225,11 @@ export const Lifestyle = () => {
 	};
 	return (
 		<Wrapper>
-			<PinnedPost pinnedPost={block} format={format}>
+			<PinnedPost
+				pinnedPost={block}
+				format={format}
+				absoluteServerTimes={true}
+			>
 				<LiveBlock
 					format={format}
 					block={block}
@@ -260,7 +276,11 @@ export const Opinion = () => {
 	};
 	return (
 		<Wrapper>
-			<PinnedPost pinnedPost={block} format={format}>
+			<PinnedPost
+				pinnedPost={block}
+				format={format}
+				absoluteServerTimes={true}
+			>
 				<LiveBlock
 					format={format}
 					block={block}
@@ -307,7 +327,11 @@ export const SpecialReport = () => {
 	};
 	return (
 		<Wrapper>
-			<PinnedPost pinnedPost={block} format={format}>
+			<PinnedPost
+				pinnedPost={block}
+				format={format}
+				absoluteServerTimes={true}
+			>
 				<LiveBlock
 					format={format}
 					block={block}
@@ -354,7 +378,11 @@ export const Labs = () => {
 	};
 	return (
 		<Wrapper>
-			<PinnedPost pinnedPost={block} format={format}>
+			<PinnedPost
+				pinnedPost={block}
+				format={format}
+				absoluteServerTimes={true}
+			>
 				<LiveBlock
 					format={format}
 					block={block}
