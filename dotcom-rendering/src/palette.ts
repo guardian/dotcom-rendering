@@ -2394,31 +2394,36 @@ const cardAgeTextDark = (): string => {
 };
 
 const cardOnwardContentFooterLight: PaletteFunction = ({ theme, design }) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return sourcePalette.neutral[100];
-		case ArticleDesign.LiveBlog:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				default:
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.brandAlt[400];
+		default: {
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
 					return sourcePalette.neutral[100];
-			}
-		default:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.brandAlt[400];
+				case ArticleDesign.LiveBlog:
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[7];
+						case Pillar.News:
+						case Pillar.Sport:
+						case Pillar.Opinion:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+						default:
+							return sourcePalette.neutral[100];
+					}
 				default:
-					return sourcePalette.neutral[46];
+					switch (theme) {
+						default:
+							return sourcePalette.neutral[46];
+					}
 			}
+		}
 	}
 };
 
@@ -2520,6 +2525,7 @@ const onwardContentCardBackgroundLight: PaletteFunction = ({
 }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[800];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.neutral[46];
 		default:
@@ -2572,6 +2578,7 @@ const onwardContentCardBackgroundDark: PaletteFunction = ({
 const onwardContentCardHoverLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.neutral[20];
 		default:
@@ -2662,7 +2669,7 @@ const cardTextDark = (): string => {
 const cardOnwardContentTextLight: PaletteFunction = (format) => {
 	switch (format.theme) {
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.neutral[100];
+			return sourcePalette.specialReportAlt[100];
 		default:
 			if (
 				format.display === ArticleDisplay.Immersive &&
