@@ -207,9 +207,8 @@ export const Branding = ({ branding, format }: Props) => {
 	const { darkModeAvailable, inAdvertisingPartnerABTest } = useConfig();
 
 	const isAdvertisingPartnerOrExclusive =
-		// branding.logo.label.toLowerCase() === 'advertising partner' ||
-		// branding.logo.label.toLowerCase() === 'exclusive advertising partner';
-		branding.logo.label.toLowerCase() === 'supported by';
+		branding.logo.label.toLowerCase() === 'advertising partner' ||
+		branding.logo.label.toLowerCase() === 'exclusive advertising partner';
 
 	const isAdvertisingPartnerAndInteractive =
 		isAdvertisingPartnerOrExclusive && isInteractive;
