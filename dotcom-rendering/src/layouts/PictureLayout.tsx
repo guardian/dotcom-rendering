@@ -288,6 +288,8 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
+	const { absoluteServerTimes = false } = article.config.switches;
+
 	return (
 		<>
 			{isWeb && (
@@ -725,10 +727,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={
-									!!article.config.switches
-										.absoluteServerTimes
-								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -754,9 +753,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
-							absoluteServerTimes={
-								!!article.config.switches.absoluteServerTimes
-							}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
 				)}

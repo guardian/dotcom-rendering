@@ -1039,9 +1039,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={
-							!!article.config.switches.absoluteServerTimes
-						}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 				{showComments && (

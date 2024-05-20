@@ -1264,10 +1264,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
-									absoluteServerTimes={
-										!!article.config.switches
-											.absoluteServerTimes
-									}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</Island>
 						</Section>

@@ -215,6 +215,8 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
+	const { absoluteServerTimes = false } = article.config.switches;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -549,10 +551,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
-								absoluteServerTimes={
-									!!article.config.switches
-										.absoluteServerTimes
-								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -575,9 +574,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
-						absoluteServerTimes={
-							!!article.config.switches.absoluteServerTimes
-						}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 			</main>
