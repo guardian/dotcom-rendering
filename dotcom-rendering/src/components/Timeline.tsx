@@ -1,6 +1,12 @@
 import { css, type SerializedStyles } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, headline, space, textSans } from '@guardian/source-foundations';
+import {
+	between,
+	from,
+	headline,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import type { NestedArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
 import type {
@@ -37,6 +43,10 @@ const timelineBulletStyles = css`
 		background-color: ${palette('--timeline-bullet')};
 		left: -16.5px;
 		top: -10px;
+
+		${between.tablet.and.leftCol} {
+			left: -26.5px;
+		}
 	}
 `;
 
@@ -145,10 +155,14 @@ const eventStyles = css`
 	position: relative;
 
 	${from.tablet} {
+		padding-left: ${space[5]}px;
+		padding-right: ${space[5]}px;
 		margin-left: -21px;
 		margin-right: -21px;
 	}
 	${from.leftCol} {
+		padding-left: 10px;
+		padding-right: 10px;
 		margin-left: -11px;
 		margin-right: -11px;
 	}
@@ -162,10 +176,14 @@ const labelStyles = css`
 	${textSans.small({ fontWeight: 'regular' })}
 
 	${from.tablet} {
+		padding-left: ${space[5]}px;
+		padding-right: ${space[5]}px;
 		margin-left: -21px;
 		margin-right: -21px;
 	}
 	${from.leftCol} {
+		padding-left: 10px;
+		padding-right: 10px;
 		margin-left: -11px;
 		margin-right: -11px;
 	}

@@ -272,7 +272,11 @@ export const Caption = ({
 					css={[
 						css`
 							${textSans.xxsmall({ lineHeight: 'tight' })};
-							color: ${palette('--caption-text')};
+							color: ${isMainMedia
+								? palette(
+										'--caption-photo-essay-main-media-text',
+								  )
+								: palette('--caption-text')};
 							width: 100%;
 							margin-top: ${space[3]}px;
 							li:not(:first-child) {
@@ -281,7 +285,11 @@ export const Caption = ({
 							li {
 								padding-top: ${space[2]}px;
 								border-top: 1px solid
-									${palette('--caption-text')};
+									${isMainMedia
+										? palette(
+												'--caption-photo-essay-main-media-text',
+										  )
+										: palette('--caption-text')};
 							}
 						`,
 						bottomMarginStyles,

@@ -2,6 +2,7 @@ import { isString, Pillar } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
 import { TagPage } from '../components/TagPage';
+import { generateAlternateLangLinks } from '../lib/alternate-lang-links';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -123,6 +124,11 @@ export const renderFront = ({
 		...legacyScripts,
 	]);
 
+	const alternateLangLinks = generateAlternateLangLinks(
+		front.guardianBaseURL,
+		front.pageId,
+	);
+
 	const guardian = createGuardian({
 		editionId: front.editionId,
 		stage: front.config.stage,
@@ -158,6 +164,7 @@ export const renderFront = ({
 		hasPageSkin: front.config.hasPageSkin,
 		weAreHiring: !!front.config.switches.weAreHiring,
 		canonicalUrl: front.canonicalUrl,
+		alternateLangLinks,
 	});
 
 	return {
@@ -218,6 +225,11 @@ export const renderTagPage = ({
 		...legacyScripts,
 	]);
 
+	const alternateLangLinks = generateAlternateLangLinks(
+		tagPage.guardianBaseURL,
+		tagPage.pageId,
+	);
+
 	const guardian = createGuardian({
 		editionId: tagPage.editionId,
 		stage: tagPage.config.stage,
@@ -252,6 +264,7 @@ export const renderTagPage = ({
 		renderingTarget: 'Web',
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
 		canonicalUrl: tagPage.canonicalUrl,
+		alternateLangLinks,
 	});
 	return {
 		html: pageHtml,

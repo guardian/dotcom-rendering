@@ -221,7 +221,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					image={tagPage.header.image}
 				/>
 				{tagPage.groupedTrails.map((groupedTrails, index) => {
-					const locale = getEditionFromId(tagPage.editionId).locale;
+					const { dateLocale } = getEditionFromId(tagPage.editionId);
 					const date = new Date(
 						groupedTrails.year,
 						groupedTrails.month,
@@ -229,7 +229,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					);
 					const containedId = getContainerId(
 						date,
-						locale,
+						dateLocale,
 						groupedTrails.day !== undefined,
 					);
 
@@ -247,12 +247,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					const url =
 						groupedTrails.day !== undefined
 							? `/${tagPage.pageId}/${groupedTrails.year}/${date
-									.toLocaleDateString(locale, {
+									.toLocaleDateString(dateLocale, {
 										month: 'long',
 									})
 									.slice(0, 3)
 									.toLowerCase()}/${date.toLocaleDateString(
-									locale,
+									dateLocale,
 									{
 										day: '2-digit',
 									},
