@@ -4,7 +4,7 @@ import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles
 import { images } from '../../fixtures/generated/images';
 import { decideFormat } from '../lib/decideFormat';
 import type { FEElement } from '../types/content';
-import { enhanceImages } from './enhance-images';
+import { enhanceElementsImages, enhanceImages } from './enhance-images';
 
 const exampleArticleFormat = decideFormat(ExampleArticle.format);
 const photoEssayFormat = decideFormat(PhotoEssay.format);
@@ -19,6 +19,33 @@ const image = {
 
 describe('Enhance Images', () => {
 	describe('for photo essays', () => {
+		it('sets the caption and credit for main media images', () => {
+			const input: FEElement[] = [
+				{ ...image, role: 'immersive' },
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'mockId',
+					html: '<ul><li><p>This is the caption</p></li></ul>',
+				},
+			];
+
+			const expectedOutput: FEElement[] = [
+				{
+					...image,
+					role: 'immersive',
+					data: {
+						...image.data,
+						caption: '<ul><li><p>This is the caption</p></li></ul>',
+						credit: 'Photograph: Cat Vinton/The Guardian',
+					},
+				},
+			];
+
+			expect(
+				enhanceElementsImages(photoEssayFormat, true, [])(input),
+			).toEqual(expectedOutput);
+		});
+
 		it('sets the caption for an image if the following element is a text element with ul and li tags', () => {
 			const input: FEElement[] = [
 				image,
@@ -541,9 +568,8 @@ describe('Enhance Images', () => {
 					...image,
 					role: 'inline',
 					data: {
-						caption:
-							'This text starts in data but gets removed for photo essays',
-						credit: 'but it is copied into the lightbox property so we can use it there',
+						caption: '',
+						credit: '',
 					},
 				},
 			];

@@ -276,9 +276,13 @@ export const Caption = ({
 							 * Typography preset styles should not be overridden.
 							 * This has been done because the styles do not directly map to the new presets.
 							 * Please speak to your team's designer and update this to use a more appropriate preset.
-							*/
+							 */
 							line-height: 1.15;
-							color: ${palette('--caption-text')};
+							color: ${isMainMedia
+								? palette(
+										'--caption-photo-essay-main-media-text',
+								  )
+								: palette('--caption-text')};
 							width: 100%;
 							margin-top: ${space[3]}px;
 							li:not(:first-child) {
@@ -287,7 +291,11 @@ export const Caption = ({
 							li {
 								padding-top: ${space[2]}px;
 								border-top: 1px solid
-									${palette('--caption-text')};
+									${isMainMedia
+										? palette(
+												'--caption-photo-essay-main-media-text',
+										  )
+										: palette('--caption-text')};
 							}
 						`,
 						bottomMarginStyles,

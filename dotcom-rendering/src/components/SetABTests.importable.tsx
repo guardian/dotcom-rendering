@@ -90,7 +90,6 @@ export const SetABTests = ({
 			console.error(
 				'There is no MVT ID set, see SetABTests.importable.tsx',
 			);
-			return;
 		}
 
 		const allForcedTestVariants = {
@@ -99,7 +98,7 @@ export const SetABTests = ({
 		};
 
 		const ab = new AB({
-			mvtId,
+			mvtId: mvtId ?? -1,
 			mvtMaxValue,
 			pageIsSensitive,
 			abTestSwitches,

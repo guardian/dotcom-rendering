@@ -304,6 +304,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				format={format}
 				shouldLimitWidth={true}
 				isLeftCol={true}
+				isMainMedia={true}
 			/>
 		</div>
 	);
