@@ -5646,6 +5646,14 @@ const paletteColours = {
 		light: blockquoteTextLight,
 		dark: blockquoteTextDark,
 	},
+	'--branding-border': {
+		light: brandingBorderLight,
+		dark: brandingBorderDark,
+	},
+	'--branding-label-text': {
+		light: brandingLabelLight,
+		dark: brandingLabelDark,
+	},
 	'--branding-link-text': {
 		light: brandingLinkLight,
 		dark: brandingLinkDark,
@@ -5765,14 +5773,6 @@ const paletteColours = {
 	'--carousel-border': {
 		light: carouselBorderLight,
 		dark: carouselBorderDark,
-	},
-	'--branding-border': {
-		light: brandingBorderLight,
-		dark: brandingBorderDark,
-	},
-	'--branding-label-text': {
-		light: brandingLabelLight,
-		dark: brandingLabelDark,
 	},
 	'--carousel-dot': {
 		light: carouselDotLight,
