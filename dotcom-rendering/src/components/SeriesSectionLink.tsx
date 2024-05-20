@@ -197,7 +197,6 @@ export const SeriesSectionLink = ({
 	if (isEuros2024 && isTagLinkTest) {
 		return (
 			<TagLink
-				format={format}
 				sectionLabel={'Euro 24'}
 				sectionUrl={'football/euro-2024'}
 				guardianBaseURL={guardianBaseURL}

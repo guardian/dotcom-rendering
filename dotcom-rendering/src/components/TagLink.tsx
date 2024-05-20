@@ -10,7 +10,6 @@ import {
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
 
 interface Props {
-	format: ArticleFormat;
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
