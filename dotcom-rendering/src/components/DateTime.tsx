@@ -9,8 +9,17 @@ type Props = {
 	showWeekday: boolean;
 	showDate: boolean;
 	showTime: boolean;
-	display?: 'absolute' | 'relative';
 };
+
+type DisplayProps =
+	| {
+			display?: 'absolute';
+			absoluteServerTimes?: never;
+	  }
+	| {
+			display: 'relative';
+			absoluteServerTimes: boolean;
+	  };
 
 const formatWeekday = (date: Date, locale: string, timeZone: string) =>
 	date.toLocaleDateString(locale, {
@@ -46,16 +55,18 @@ export const DateTime = ({
 	showDate,
 	showTime,
 	display = 'absolute',
-}: Props) => {
+	absoluteServerTimes = true,
+}: Props & DisplayProps) => {
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
 	const epoch = date.getTime();
 	const relativeTime = display === 'relative' && timeAgo(epoch);
 	const isRecent = isString(relativeTime) && relativeTime.endsWith(' ago');
+	const now = absoluteServerTimes ? Number.MAX_SAFE_INTEGER - 1 : Date.now();
 
 	return isRecent ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
-			<RelativeTime then={epoch} />
+			<RelativeTime then={epoch} now={now} />
 		</Island>
 	) : (
 		<time
