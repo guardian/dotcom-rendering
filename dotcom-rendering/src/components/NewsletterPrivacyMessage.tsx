@@ -35,7 +35,7 @@ const termsStyle = css`
 	 * Typography preset styles should not be overridden.
 	 * This has been done because the styles do not directly map to the new presets.
 	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	*/
+	 */
 	line-height: 1.15;
 	a {
 		${textSans12};

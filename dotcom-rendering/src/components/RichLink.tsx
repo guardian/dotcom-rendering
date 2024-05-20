@@ -77,7 +77,7 @@ const headerStyles = css`
 const miniHeadlineOverrideStyles = (fontArgs: FontScaleArgs) => css`
 	${headline.xxxsmall(
 		fontArgs,
-	)}/** TODO (1) - Unknown argument please manually update */;
+	)}; /** TODO (1) - Unknown argument please manually update */
 	font-size: 0.875rem;
 `;
 
@@ -94,7 +94,7 @@ const titleStyles = (parentIsBlog: boolean) => css`
 		 * Typography preset styles should not be overridden.
 		 * This has been done because the styles do not directly map to the new presets.
 		 * Please speak to your team's designer and update this to use a more appropriate preset.
-		*/
+		 */
 		font-weight: 400;
 		padding-bottom: 5px;
 	}

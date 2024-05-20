@@ -59,7 +59,7 @@ const fontStyles = ({
 				${from.desktop} {
 					${headline.large(
 						options,
-					)}/** TODO (1) - Unknown argument please manually update */;
+					)}; /** TODO (1) - Unknown argument please manually update */
 					font-size: 50px;
 				}
 			`;
@@ -67,31 +67,31 @@ const fontStyles = ({
 			return css`
 				${headline.small(
 					options,
-				)}/** TODO (1) - Unknown argument please manually update */;
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'large':
 			return css`
 				${headline.xsmall(
 					options,
-				)}/** TODO (1) - Unknown argument please manually update */;
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'medium':
 			return css`
 				${headline.xxsmall(
 					options,
-				)}/** TODO (1) - Unknown argument please manually update */;
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'small':
 			return css`
 				${headline.xxxsmall(
 					options,
-				)}/** TODO (1) - Unknown argument please manually update */;
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'tiny':
 			return css`
 				${headline.xxxsmall(
 					options,
-				)}/** TODO (1) - Unknown argument please manually update */;
+				)}; /** TODO (1) - Unknown argument please manually update */
 				font-size: 14px;
 			`;
 	}
@@ -113,12 +113,12 @@ const fontStylesOnMobile = ({
 				${until.mobileLandscape} {
 					${headline.medium(
 						options,
-					)}/** TODO (1) - Unknown argument please manually update */;
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 				${between.mobileLandscape.and.desktop} {
 					${headline.large(
 						options,
-					)}/** TODO (1) - Unknown argument please manually update */;
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'huge':
@@ -126,7 +126,7 @@ const fontStylesOnMobile = ({
 				${until.desktop} {
 					${headline.xsmall(
 						options,
-					)}/** TODO (1) - Unknown argument please manually update */;
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'large':
@@ -134,7 +134,7 @@ const fontStylesOnMobile = ({
 				${until.desktop} {
 					${headline.xxsmall(
 						options,
-					)}/** TODO (1) - Unknown argument please manually update */;
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'medium':
@@ -142,7 +142,7 @@ const fontStylesOnMobile = ({
 				${until.desktop} {
 					${headline.xxxsmall(
 						options,
-					)}/** TODO (1) - Unknown argument please manually update */;
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		default:
@@ -168,7 +168,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 				 * Typography preset styles should not be overridden.
 				 * This has been done because the styles do not directly map to the new presets.
 				 * Please speak to your team's designer and update this to use a more appropriate preset.
-				*/
+				 */
 				line-height: 1.15;
 				${until.desktop} {
 					${textSans17};
@@ -176,7 +176,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 					 * Typography preset styles should not be overridden.
 					 * This has been done because the styles do not directly map to the new presets.
 					 * Please speak to your team's designer and update this to use a more appropriate preset.
-					*/
+					 */
 					line-height: 1.15;
 				}
 				padding-bottom: ${space[1]}px;

@@ -19,10 +19,10 @@ interface Props {
 const termsStyle = (format: ArticleFormat): SerializedStyles => css`
 	${textSans12};
 	/**
-		 * Typography preset styles should not be overridden.
-		 * This has been done because the styles do not directly map to the new presets.
-		 * Please speak to your team's designer and update this to use a more appropriate preset.
-		*/
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
 	line-height: 1.15;
 	color: ${text.privacyMessage(format)};
 	a {
