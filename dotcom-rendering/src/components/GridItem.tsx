@@ -32,6 +32,19 @@ const gridArea = css`
 	grid-area: var(--grid-area);
 `;
 
+// TODO:: Pass knowledge of the test variant here
+if (area === 'title') {
+	return css`
+		grid-area: ${area};
+		z-index: 1000;
+		position: sticky;
+		top: 0;
+	`;
+}
+return css`
+	grid-area: ${area};
+`;
+
 export const GridItem = ({
 	children,
 	area,

@@ -17,6 +17,7 @@ import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
+import { TagLink } from './TagLink';
 
 type Props = {
 	format: ArticleFormat;
@@ -177,6 +178,9 @@ export const SeriesSectionLink = ({
 			(tag.type === 'Publication' && tag.title === 'The Observer'),
 	);
 
+	const isEuros2024 = tags.find((tag) => tag.id === 'football/euro-2024');
+	const isTagLinkTest = true; // TODO: Add logic here to determine if we're in the tag link test
+
 	// If we have a tag, use it to show 2 section titles
 	// Observer opinion (commentisfree) articles should prioritise
 	// the publication tag over the commentisfree tag.
@@ -190,6 +194,16 @@ export const SeriesSectionLink = ({
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
+	if (isEuros2024 && isTagLinkTest) {
+		return (
+			<TagLink
+				format={format}
+				sectionLabel={'Euro 24'}
+				sectionUrl={'football/euro-2024'}
+				guardianBaseURL={guardianBaseURL}
+			/>
+		);
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
