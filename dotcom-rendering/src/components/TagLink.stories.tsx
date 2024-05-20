@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { TagLink } from './TagLink';
+
 const meta = {
 	component: TagLink,
 	title: 'Components/TagLink',
