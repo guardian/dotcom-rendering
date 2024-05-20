@@ -58,7 +58,7 @@
 		"@storybook/addon-essentials": "7.6.18",
 		"@storybook/addons": "7.6.18",
 		"@storybook/api": "7.6.18",
-		"@storybook/components": "7.6.18",
+		"@storybook/components": "8.1.1",
 		"@storybook/core-events": "7.6.18",
 		"@storybook/react": "7.6.18",
 		"@storybook/react-webpack5": "7.6.18",
