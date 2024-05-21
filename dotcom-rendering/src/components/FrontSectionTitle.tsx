@@ -24,7 +24,8 @@ const titleStyle = css`
 `;
 
 const advertisingPartnerDottedBorder = css`
-	border-bottom: 1px dotted ${sourcePalette.neutral[86]};
+	border-top: 1px dotted ${sourcePalette.neutral[86]};
+	border-bottom: none;
 	margin-top: 0.375rem;
 `;
 
@@ -168,10 +169,8 @@ export const FrontSectionTitle = ({
 						{title}
 						{isAdvertisingPartnerOrExclusive &&
 						inAdvertisingPartnerABTest ? (
-							<div css={advertisingPartnerDottedBorder}></div>
-						) : (
-							<div></div>
-						)}
+							<hr css={advertisingPartnerDottedBorder} />
+						) : null}
 						<div
 							css={
 								isAdvertisingPartnerOrExclusive &&
