@@ -1856,6 +1856,8 @@ const brandingLabelLight: PaletteFunction = ({ design }) => {
 	}
 };
 const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
+const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -5650,6 +5652,10 @@ const paletteColours = {
 	'--block-quote-text': {
 		light: blockquoteTextLight,
 		dark: blockquoteTextDark,
+	},
+	'--branding-border': {
+		light: brandingBorderLight,
+		dark: brandingBorderDark,
 	},
 	'--branding-label-text': {
 		light: brandingLabelLight,
