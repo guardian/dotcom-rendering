@@ -57,6 +57,8 @@ const sections = [
 
 const getWindowWidth = () => window.innerWidth;
 
+const veggieBurgerDiameter = 40;
+
 const pillarLinkWidth740 = 108;
 const pillarLinkWidth1280 = 125;
 const pillarLinkWidth1440 = 136;
@@ -76,7 +78,7 @@ const guardianLogoStyles = css`
 	align-self: end;
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
-	margin-right: 50px;
+	margin-right: ${veggieBurgerDiameter + space[3]}px;
 	@media (min-width: 375px) {
 		margin-right: 0;
 	}
@@ -111,8 +113,8 @@ const burgerStyles = css`
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
-	height: 40px;
-	width: 40px;
+	height: ${veggieBurgerDiameter}px;
+	width: ${veggieBurgerDiameter}px;
 	margin-bottom: 6px;
 	border-radius: 50%;
 	background-color: ${palette.brandAlt[400]};
