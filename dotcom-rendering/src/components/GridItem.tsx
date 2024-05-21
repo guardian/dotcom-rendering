@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -38,9 +39,19 @@ if (area === 'title') {
 		return css`
 			grid-area: ${area};
 			.sticky-title-experiment & {
-				z-index: 1;
+				z-index: 10;
 				position: sticky;
 				top: 0;
+				margin-left: -10px;
+				margin-right: -10px;
+				${from.mobileLandscape} {
+					margin-left: -20px;
+					margin-right: -20px;
+				}
+				${from.phablet} {
+					margin-left: 0px;
+					margin-right: 0px;
+				}
 			}
 		`;
 	}

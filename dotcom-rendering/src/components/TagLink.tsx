@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineBold20,
 	headlineMedium14,
 	headlineMedium17,
@@ -15,15 +16,29 @@ interface Props {
 	guardianBaseURL: string;
 }
 
-const TagLinkStyles = css`
-	padding: 10px 0 10px 9px;
-	gap: 8px;
+const TagLinkStyle = css`
+	display: flex;
+	fill: ${palette.sport[400]};
+	justify-content: space-between;
 	border-radius: 15px;
 	background-color: ${palette.sport[800]};
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	fill: ${palette.sport[400]};
+	padding: 10px 9px;
+	flex-direction: row;
+	align-items: center;
+	height: 44px;
+	width: 100%;
+	text-decoration: none;
+	color: ${palette.sport[400]};
+	:hover {
+		text-decoration: underline;
+	}
+	${from.leftCol} {
+		align-items: start;
+		gap: 8px;
+		height: auto;
+		width: auto;
+		flex-direction: column;
+	}
 `;
 const tagButtonStyles = css`
 	${until.wide} {
@@ -34,6 +49,7 @@ const tagButtonStyles = css`
 	align-items: baseline;
 	gap: 8px;
 `;
+
 const arrowStyles = css`
 	svg {
 		fill: ${palette.sport[800]};
@@ -60,14 +76,6 @@ const arrowStyles = css`
 	}
 `;
 
-const sectionLabelLink = css`
-	text-decoration: none;
-	color: ${palette.sport[400]};
-	:hover {
-		text-decoration: underline;
-	}
-`;
-
 export const TagLink = ({
 	sectionUrl,
 	sectionLabel,
@@ -76,23 +84,23 @@ export const TagLink = ({
 	return (
 		<a
 			href={`${guardianBaseURL}/${sectionUrl}`}
-			css={[TagLinkStyles, sectionLabelLink]}
+			css={TagLinkStyle}
 			data-component="series"
 			data-link-name="article series"
 		>
-			<span
+			<div
 				css={css`
 					${headlineBold20};
 				`}
 			>
 				{sectionLabel}
-			</span>
-			<span css={tagButtonStyles}>
+			</div>
+			<div css={tagButtonStyles}>
+				<div>Discover More</div>
 				<span css={arrowStyles}>
 					<SvgArrowRightStraight isAnnouncedByScreenReader={false} />
 				</span>
-				<span>Discover More</span>
-			</span>
+			</div>
 		</a>
 	);
 };
