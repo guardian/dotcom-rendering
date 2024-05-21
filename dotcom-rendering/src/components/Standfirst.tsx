@@ -2,6 +2,9 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
+	headlineLight17,
+	headlineLight20,
+	headlineLight24,
 	headlineMedium17,
 	headlineMedium20,
 	headlineMedium24,
@@ -86,9 +89,9 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 						`;
 					}
 					return css`
-						${headlineMedium20};
+						${headlineLight20};
 						${from.tablet} {
-							${headlineMedium24};
+							${headlineLight24};
 						}
 					`;
 				case ArticleDisplay.Showcase:
@@ -102,9 +105,9 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 						`;
 					}
 					return css`
-						${headlineMedium17};
+						${headlineLight17};
 						${from.tablet} {
-							${headlineMedium20};
+							${headlineLight20};
 						}
 					`;
 				}
