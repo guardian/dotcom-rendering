@@ -265,7 +265,7 @@ export const Headlines: StoryObj = ({ format }: StoryProps) => {
 			<Carousel
 				heading="More on this story"
 				trails={trails}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				format={format}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
@@ -289,7 +289,7 @@ export const SingleItemCarousel = () => {
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				format={defaultFormat}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
@@ -338,7 +338,7 @@ export const SingleOpinionCarousel = () => {
 			<Carousel
 				heading="More on this story"
 				trails={[comment]}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				format={{
 					theme: Pillar.Opinion,
 					design: ArticleDesign.Comment,
@@ -628,7 +628,7 @@ export const AllCards = () => {
 			<Carousel
 				heading="All the card types"
 				trails={allCardTypesTrail}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				format={defaultFormat}
@@ -650,7 +650,7 @@ export const FrontCarousel = () => (
 				isOnwardContent={false}
 				heading="More on this story"
 				trails={trails}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				leftColSize="compact"
 				url={'https://www.theguardian.com'}
 				discussionApiUrl={discussionApiUrl}

@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
-import { isUndefined, joinUrl, log, Pillar } from '@guardian/libs';
-import { useEffect, useState } from 'react';
-import { onwardJourneys } from '../experiments/tests/onward-journeys';
+import { joinUrl, Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
-import { useAB } from '../lib/useAB';
 import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette } from '../palette';
 import type { OnwardsSource } from '../types/onwards';
@@ -211,29 +208,6 @@ export const OnwardsUpper = ({
 	discussionApiUrl,
 }: Props) => {
 	const isAndroid = useIsAndroid();
-	const AB = useAB();
-	const [showTopRow, setShowTopRow] = useState(false);
-	const [showBottomRow, setShowBottomRow] = useState(false);
-
-	useEffect(() => {
-		const variantId = AB?.api.runnableTest(onwardJourneys)?.variantToRun.id;
-		if (isUndefined(variantId)) {
-			// we are not in the onwards journey test
-			return setShowTopRow(true);
-		}
-		setShowTopRow(['control', 'top-row-most-viewed'].includes(variantId));
-	}, [AB]);
-
-	useEffect(() => {
-		const variantId = AB?.api.runnableTest(onwardJourneys)?.variantToRun.id;
-		if (isUndefined(variantId)) {
-			// we are not in the onwards journey test
-			return setShowBottomRow(true);
-		}
-		setShowBottomRow(
-			['control', 'bottom-row-most-viewed'].includes(variantId),
-		);
-	}, [AB]);
 
 	if (isAndroid) return null;
 
@@ -309,19 +283,9 @@ export const OnwardsUpper = ({
 		onwardsSource = 'related-stories';
 	}
 
-	const curatedDataUrl =
-		showRelatedContent && showBottomRow
-			? getContainerDataUrl(pillar, editionId, ajaxUrl)
-			: undefined;
-
-	if (!showTopRow) {
-		url = undefined;
-	}
-
-	log('dotcom', 'Onward Journeys test (Carousel)', {
-		showTopRow,
-		showBottomRow,
-	});
+	const curatedDataUrl = showRelatedContent
+		? getContainerDataUrl(pillar, editionId, ajaxUrl)
+		: undefined;
 
 	return (
 		<div css={onwardsWrapper}>
