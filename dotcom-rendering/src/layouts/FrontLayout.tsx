@@ -161,6 +161,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const inUpdatedHeaderABTest =
 		front.config.abTests.updatedHeaderDesignVariant === 'variant';
 
+	const { absoluteServerTimes = false } = front.config.switches;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -516,6 +518,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -594,6 +599,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											url={collection.href}
 											discussionApiUrl={
 												front.config.discussionApiUrl
+											}
+											absoluteServerTimes={
+												absoluteServerTimes
 											}
 										/>
 									</Island>
@@ -675,6 +683,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(

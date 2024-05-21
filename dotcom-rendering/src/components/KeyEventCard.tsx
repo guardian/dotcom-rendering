@@ -15,6 +15,7 @@ interface Props {
 	title: string;
 	isSummary: boolean;
 	filterKeyEvents: boolean;
+	absoluteServerTimes: boolean;
 	cardPosition?: string;
 }
 
@@ -117,6 +118,7 @@ export const KeyEventCard = ({
 	title,
 	filterKeyEvents,
 	cardPosition = 'unknown position',
+	absoluteServerTimes,
 }: Props) => {
 	const url = `?filterKeyEvents=${String(
 		filterKeyEvents,
@@ -133,6 +135,7 @@ export const KeyEventCard = ({
 					<DateTime
 						date={new Date(blockFirstPublished)}
 						display="relative"
+						absoluteServerTimes={absoluteServerTimes}
 						editionId={'UK'}
 						showWeekday={false}
 						showDate={true}
