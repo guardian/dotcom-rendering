@@ -207,6 +207,16 @@ const pillarColorStyles = css`
 	}
 `;
 
+const pillarBarStyles = css`
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin-top: 4px;
+	width: 1px;
+	background-color: ${palette.neutral[86]};
+`;
+
 const sectionsNavStyles = css`
 	grid-column: content-start / viewport-end;
 	grid-row: 3;
@@ -278,12 +288,8 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 								key={path}
 								css={css`
 									position: relative;
-									${index !== pillars.length - 1 &&
-									`border-right: 1px solid ${palette.neutral[86]};`}
-									${index === pillars.length - 1 &&
-									windowWidth > 1023 &&
-									`border-right: 1px solid ${palette.neutral[86]};`}
-									${index > 0 && `padding-left: ${space[1]}px;`}
+									${index > 0 &&
+									`padding-left: ${space[1]}px;`}
 								`}
 							>
 								<div
@@ -292,6 +298,11 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 									}}
 									css={pillarColorStyles}
 								/>
+								{(index !== pillars.length - 1 ||
+									(index === pillars.length - 1 &&
+										windowWidth > 1023)) && (
+									<div css={pillarBarStyles} />
+								)}
 
 								{name}
 							</li>
