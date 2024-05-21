@@ -99,7 +99,7 @@ const guardianLogoStyles = css`
 		margin-bottom: 10px;
 	}
 	@media (min-width: 1024px) and (max-width: 1279px) {
-		margin-bottom: 12px;
+		margin-bottom: ${space[3]};
 	}
 	@media (min-width: 1280px) {
 		margin-bottom: 14px;
@@ -131,7 +131,7 @@ const burgerStyles = css`
 		align-self: end;
 		justify-self: start;
 		margin-left: ${pillarLinkWidth740 * pillars.length + space[1]}px;
-		margin-bottom: 12px;
+		margin-bottom: ${space[3]}px;
 	}
 	@media (min-width: 1280px) {
 		margin-left: ${pillarLinkWidth1280 * pillars.length + space[1]}px;
@@ -154,7 +154,7 @@ const pillarsNavStyles = css`
 	align-self: end;
 
 	${headlineBold14}
-	margin-top: 8px;
+	margin-top: ${space[2]}px;
 	border-bottom: 1px solid ${palette.neutral[86]};
 	@media (min-width: 1024px) {
 		grid-row: 1 / 2;
@@ -177,7 +177,7 @@ const pillarsNavStyles = css`
 		}
 		@media (min-width: 740px) and (max-width: 1279px) {
 			${headlineBold20}
-			height: 40px;
+			height: ${space[10]}px;
 			width: ${pillarLinkWidth740}px;
 		}
 		@media (min-width: 1280px) {
@@ -211,7 +211,7 @@ const pillarBarStyles = css`
 	top: 0;
 	bottom: 0;
 	right: 0;
-	margin-top: 4px;
+	margin-top: ${space[1]}px;
 	width: 1px;
 	background-color: ${palette.neutral[86]};
 `;
@@ -221,7 +221,7 @@ const sectionsNavStyles = css`
 	grid-row: 3;
 	${textSans14}
 	height: 28px;
-	margin-top: 8px;
+	margin-top: ${space[2]}px;
 	ul {
 		display: flex;
 		column-gap: ${space[3]}px;
@@ -230,7 +230,7 @@ const sectionsNavStyles = css`
 		white-space: nowrap;
 	}
 	@media (min-width: 375px) and (max-width: 1279px) {
-		margin-top: 12px;
+		margin-top: ${space[3]}px;
 	}
 	@media (min-width: 1280px) {
 		margin-top: 14px;
