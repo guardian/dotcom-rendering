@@ -85,9 +85,6 @@ const guardianLogoStyles = css`
 		@media (min-width: 375px) and (max-width: 739px) {
 			height: 67px;
 		}
-		@media (min-width: 480px) and (max-width: 1279px) {
-			margin-bottom: 8px;
-		}
 		@media (min-width: 740px) and (max-width: 1023px) {
 			height: 96px;
 		}
@@ -96,8 +93,16 @@ const guardianLogoStyles = css`
 		}
 		@media (min-width: 1280px) {
 			height: 115px;
-			margin-bottom: 10px;
 		}
+	}
+	@media (min-width: 480px) and (max-width: 1023px) {
+		margin-bottom: 10px;
+	}
+	@media (min-width: 1024px) and (max-width: 1279px) {
+		margin-bottom: 12px;
+	}
+	@media (min-width: 1280px) {
+		margin-bottom: 14px;
 	}
 `;
 
