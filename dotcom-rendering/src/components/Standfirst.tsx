@@ -125,7 +125,7 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 						`;
 					}
 					return css`
-						${headlineMedium20};
+						${headlineLight20};
 						${from.tablet} {
 							${headlineMedium24};
 						}
