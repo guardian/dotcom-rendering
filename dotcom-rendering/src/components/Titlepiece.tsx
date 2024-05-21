@@ -269,7 +269,9 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 
 			{/* Guardian logo */}
 			<div css={guardianLogoStyles}>
-				<SvgGuardianLogo textColor={palette.neutral[100]} />
+				<a href="https://theguardian.com">
+					<SvgGuardianLogo textColor={palette.neutral[100]} />
+				</a>
 			</div>
 
 			{/* Burger menu */}
