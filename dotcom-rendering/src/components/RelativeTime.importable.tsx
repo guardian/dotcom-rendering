@@ -22,8 +22,8 @@ export const RelativeTime = ({ then, now }: Props) => {
 	const [display, setDisplay] = useState(timeAgo(then, { now }));
 
 	useEffect(() => {
-		if (!inView) return;
 		setDisplay(timeAgo(then));
+		if (!inView) return;
 
 		const interval = setTimeout(() => {
 			setDisplay(timeAgo(then));
