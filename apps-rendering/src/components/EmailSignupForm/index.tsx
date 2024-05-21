@@ -111,10 +111,9 @@ const EmailSignupForm: FC<Props> = ({
 				cssOverrides={css`
 					div {
 						${textSansBold14};
-
 						${darkModeCss`
-                        color: ${text.newsletterSignUpFormDark(format)};
-                    `}
+							color: ${text.newsletterSignUpFormDark(format)};
+						`}
 					}
 				`}
 			/>
@@ -144,11 +143,9 @@ const EmailSignupForm: FC<Props> = ({
 							flex-basis: ${pxToRem(335)}rem;
 
 							${darkModeCss`
-                        background-color: ${background.newsletterSignUpFormDark(
-							format,
-						)};
-                        color: ${text.newsletterSignUpFormDark(format)};
-                    `}
+								background-color: ${background.newsletterSignUpFormDark(format)};
+								color: ${text.newsletterSignUpFormDark(format)};
+							`}
 						`}
 					/>
 					<Button
