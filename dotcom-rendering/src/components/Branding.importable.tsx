@@ -65,6 +65,7 @@ const liveBlogLabelStyle = css`
 `;
 
 const brandingLogoAdvertisingPartnerStyle = css`
+	padding: 0;
 	& img {
 		display: block;
 		${between.leftCol.and.wide} {
@@ -74,6 +75,7 @@ const brandingLogoAdvertisingPartnerStyle = css`
 `;
 
 const brandingLogoStyle = css`
+	padding: 10px 0;
 	display: block;
 
 	& img {
@@ -81,11 +83,14 @@ const brandingLogoStyle = css`
 	}
 `;
 
+const aboutLinkAdvertisingPartnerStyle = css`
+	padding-top: 1px;
+`;
+
 const aboutLinkStyle = css`
 	${textSans12}
 	display: block;
 	text-decoration: none;
-	padding-top: 1px;
 
 	color: ${palette('--branding-link-text')};
 	a {
@@ -261,7 +266,13 @@ export const Branding = ({ branding, format }: Props) => {
 
 			<a
 				href={branding.aboutThisLink}
-				css={[aboutLinkStyle, isLiveBlog && liveBlogAboutLinkStyle]}
+				css={[
+					aboutLinkStyle,
+					isAdvertisingPartnerOrExclusive &&
+						inAdvertisingPartnerABTest &&
+						aboutLinkAdvertisingPartnerStyle,
+					isLiveBlog && liveBlogAboutLinkStyle,
+				]}
 			>
 				About this content
 			</a>
