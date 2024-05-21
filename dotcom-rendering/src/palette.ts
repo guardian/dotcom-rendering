@@ -77,7 +77,7 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[200];
 						default:
-							return sourcePalette.neutral[97];
+							return sourcePalette.neutral[7];
 					}
 				}
 				case ArticleDesign.Interview:
