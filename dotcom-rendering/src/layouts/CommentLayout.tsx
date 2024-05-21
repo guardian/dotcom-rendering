@@ -465,7 +465,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 
-			<main data-layout="CommentLayout">
+			<main
+				data-layout="CommentLayout"
+				className="sticky-title-experiment"
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">

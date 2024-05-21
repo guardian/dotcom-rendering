@@ -34,6 +34,16 @@ const gridArea = css`
 
 // TODO:: Pass knowledge of the test variant here
 if (area === 'title') {
+	if (area === 'title') {
+		return css`
+			grid-area: ${area};
+			.sticky-title-experiment & {
+				z-index: 1;
+				position: sticky;
+				top: 0;
+			}
+		`;
+	}
 	return css`
 		grid-area: ${area};
 		z-index: 1000;

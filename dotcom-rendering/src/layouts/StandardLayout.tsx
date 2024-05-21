@@ -592,7 +592,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main
+				data-layout="StandardLayout"
+				className="sticky-title-experiment"
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
