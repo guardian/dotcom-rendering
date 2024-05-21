@@ -16,17 +16,26 @@ const getContainerStates = (): ContainerStates => {
 
 	if (!isContainerStates(item)) return {};
 
-	/** Log how many front containers are hidden for users */
-	const hiddenContainers = Object.values(item).filter(
-		(value) => value === 'closed',
-	).length;
+	/**
+	 * Tracks usage of the feature to allow hiding and showing containers on fronts.
+	 *
+	 * When fetching the local storage configuration for container states:
+	 * - If the user has configuration present, we log to Ophan how many containers they have explicitly hidden
+	 * - If they have previously hidden containers and subsequently undone this action, this will be logged as 0
+	 * - If a user has never interacted with the show/hide feature, no calls to Ophan will be made
+	 */
+	if (Object.keys(item).length) {
+		const hiddenContainers = Object.values(item).filter(
+			(value) => value === 'closed',
+		).length;
 
-	void getOphan('Web').then((ophan) => {
-		ophan.record({
-			component: 'front-containers-hidden',
-			value: hiddenContainers,
+		void getOphan('Web').then((ophan) => {
+			ophan.record({
+				component: 'front-containers-hidden',
+				value: hiddenContainers,
+			});
 		});
-	});
+	}
 
 	return item;
 };
