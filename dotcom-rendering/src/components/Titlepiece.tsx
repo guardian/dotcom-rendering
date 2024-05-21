@@ -150,7 +150,6 @@ const pillarsNavStyles = css`
 
 	${headlineBold14}
 	margin-top: 8px;
-	margin-bottom: 8px;
 	border-bottom: 1px solid ${palette.neutral[86]};
 	@media (min-width: 1024px) {
 		grid-row: 1 / 2;
@@ -208,12 +207,19 @@ const sectionsNavStyles = css`
 	grid-row: 3;
 	${textSans14}
 	height: 28px;
+	margin-top: 8px;
 	ul {
 		display: flex;
 		column-gap: ${space[3]}px;
 	}
 	li {
 		white-space: nowrap;
+	}
+	@media (min-width: 375px) and (max-width: 1279px) {
+		margin-top: 12px;
+	}
+	@media (min-width: 1280px) {
+		margin-top: 14px;
 	}
 `;
 
