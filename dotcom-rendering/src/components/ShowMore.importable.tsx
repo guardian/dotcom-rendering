@@ -177,6 +177,7 @@ export const ShowMore = ({
 											showAge={showAge}
 											headlineSize="small"
 											imageLoading="eager"
+											absoluteServerTimes={false}
 										/>
 									</LI>
 								);

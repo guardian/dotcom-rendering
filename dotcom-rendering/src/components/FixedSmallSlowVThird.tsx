@@ -10,12 +10,14 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 };
 
 export const FixedSmallSlowVThird = ({
 	trails,
 	containerPalette,
 	showAge,
+	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
 	const firstSlice25 = trails.slice(0, 2);
@@ -36,6 +38,7 @@ export const FixedSmallSlowVThird = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -54,6 +57,7 @@ export const FixedSmallSlowVThird = ({
 									trail={trail}
 									containerPalette={containerPalette}
 									showAge={showAge}
+									absoluteServerTimes={absoluteServerTimes}
 									headlineSize="small"
 									imagePosition="left"
 									imagePositionOnMobile="none"

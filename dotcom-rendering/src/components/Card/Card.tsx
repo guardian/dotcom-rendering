@@ -57,6 +57,7 @@ import { TrailTextWrapper } from './components/TrailTextWrapper';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
+	absoluteServerTimes: boolean;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	headlineSizeOnMobile?: SmallHeadlineSize;
@@ -289,6 +290,7 @@ export const Card = ({
 	onwardsSource,
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
+	absoluteServerTimes,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -326,6 +328,7 @@ export const Card = ({
 							showClock={showClock}
 							isDynamo={isDynamo}
 							isOnwardContent={isOnwardContent}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					) : undefined
 				}
@@ -639,6 +642,9 @@ export const Card = ({
 										isDynamo={isDynamo}
 										direction={supportingContentAlignment}
 										containerPalette={containerPalette}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
 									></LatestLinks>
 								</Island>
 							)}
