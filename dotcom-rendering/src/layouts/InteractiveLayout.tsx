@@ -236,6 +236,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
+	const { absoluteServerTimes = false } = article.config.switches;
+
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -774,7 +776,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={themePalette('--article-background')}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
 						borderColour={themePalette('--article-border')}
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
@@ -789,6 +793,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -811,6 +816,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 

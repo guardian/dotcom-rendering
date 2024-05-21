@@ -8,6 +8,7 @@ import { DateTime } from '../../DateTime';
 
 type Props = {
 	format: ArticleFormat;
+	absoluteServerTimes: boolean;
 	containerPalette?: DCRContainerPalette;
 	webPublicationDate: string;
 	showClock?: boolean;
@@ -66,6 +67,7 @@ export const CardAge = ({
 	showClock,
 	isDynamo,
 	isOnwardContent,
+	absoluteServerTimes,
 }: Props) => {
 	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
 		return null;
@@ -79,6 +81,7 @@ export const CardAge = ({
 			<DateTime
 				date={new Date(webPublicationDate)}
 				display="relative"
+				absoluteServerTimes={absoluteServerTimes}
 				editionId={'UK'}
 				showWeekday={false}
 				showDate={true}
