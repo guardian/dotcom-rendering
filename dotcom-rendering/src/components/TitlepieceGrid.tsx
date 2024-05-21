@@ -1,7 +1,13 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx } from '@emotion/react';
-import { from, palette, until } from '@guardian/source-foundations';
+import { from } from '@guardian/source-foundations';
 import type { CSSProperties, PropsWithChildren } from 'react';
+import { palette as themePalette } from '../palette';
+
+const colours = css`
+	background-color: ${themePalette('--masthead-nav-background')};
+	color: ${themePalette('--masthead-nav-link-text')};
+`;
 
 const grid = css`
 	display: grid;
@@ -81,11 +87,10 @@ const grid = css`
 export const TitlepieceGrid = ({
 	type = 'div',
 	children,
-	style,
 }: PropsWithChildren<{
 	type: keyof JSX.IntrinsicElements;
 	style?: CSSProperties;
-}>) => jsx(type, { css: grid, style }, children);
+}>) => jsx(type, { css: [colours, grid] }, children);
 
 /** Spans the entire width of the grid */
 export const Content = ({
@@ -136,46 +141,4 @@ export const RightColumn = ({ children }: PropsWithChildren) => (
 	<section style={{ gridColumn: 'right-column' }} css={hideUntilDesktop}>
 		{children}
 	</section>
-);
-
-export const Lines = ({
-	colour = palette.neutral[86],
-	right = true,
-	left = true,
-	top = false,
-	bottom = false,
-	gridRowStart = 1,
-}: {
-	colour?: string;
-	right?: boolean;
-	left?: boolean;
-	top?: boolean;
-	bottom?: boolean;
-	gridRowStart?: number;
-}) => (
-	<div
-		style={{
-			gridColumn: 'content',
-			gridRowStart,
-			gridRowEnd: -1,
-			borderColor: colour,
-			borderRightStyle: right ? 'solid' : undefined,
-			borderLeftStyle: left ? 'solid' : undefined,
-			borderTopStyle: top ? 'solid' : undefined,
-			borderBottomStyle: bottom ? 'solid' : undefined,
-		}}
-		css={css`
-			border-width: 1px;
-
-			margin: 0 -10px;
-
-			${from.mobileLandscape} {
-				margin: 0 -20px;
-			}
-
-			${until.tablet} {
-				border-left-style: none;
-			}
-		`}
-	/>
 );

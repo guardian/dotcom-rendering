@@ -11,6 +11,7 @@ import {
 import { SvgGuardianLogo, SvgMenu } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import type { EditionId } from '../lib/edition';
+import { palette as themePalette } from '../palette';
 import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
 import { TitlepieceGrid } from './TitlepieceGrid';
 
@@ -93,8 +94,11 @@ const guardianLogoStyles = css`
 		@media (min-width: 1024px) and (max-width: 1279px) {
 			height: 94px;
 		}
-		@media (min-width: 1280px) {
+		@media (min-width: 1280px) and (max-width: 1439px) {
 			height: 115px;
+		}
+		@media (min-width: 1440px) {
+			height: 135px;
 		}
 	}
 	@media (min-width: 480px) and (max-width: 1023px) {
@@ -117,16 +121,17 @@ const burgerStyles = css`
 	width: ${veggieBurgerDiameter}px;
 	margin-bottom: 6px;
 	border-radius: 50%;
-	background-color: ${palette.brandAlt[400]};
+	background-color: ${themePalette('--masthead-veggie-burger-background')};
 	justify-content: center;
 	display: flex;
 	:hover {
-		background-color: ${palette.brandAlt[300]};
+		background-color: ${themePalette(
+			'--masthead-veggie-burger-background-hover',
+		)};
 	}
 	@media (min-width: 375px) {
 		grid-row: 2;
 		align-self: center;
-		z-index: 10;
 	}
 	@media (min-width: 1024px) {
 		grid-row: 1 / 2;
@@ -145,7 +150,7 @@ const burgerStyles = css`
 
 const navLinkStyles = css`
 	a {
-		color: ${palette.neutral[100]};
+		color: ${themePalette('--masthead-nav-link-text')};
 		text-decoration: none;
 	}
 `;
@@ -157,7 +162,7 @@ const pillarsNavStyles = css`
 
 	${headlineBold14}
 	margin-top: ${space[2]}px;
-	border-bottom: 1px solid ${palette.neutral[86]};
+	border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
 	@media (min-width: 1024px) {
 		grid-row: 1 / 2;
 	}
@@ -215,7 +220,7 @@ const pillarBarStyles = css`
 	right: 0;
 	margin-top: ${space[1]}px;
 	width: 1px;
-	background-color: ${palette.neutral[86]};
+	background-color: ${themePalette('--masthead-nav-lines')};
 `;
 
 const sectionsNavStyles = css`
@@ -251,13 +256,7 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 		};
 	}, []);
 	return (
-		<TitlepieceGrid
-			style={{
-				backgroundColor: palette.brand[400],
-				color: palette.neutral[100],
-			}}
-			type="header"
-		>
+		<TitlepieceGrid type="header">
 			{/* Edition menu */}
 			<div css={editionsMenuStyles}>
 				<TitlepieceEditionDropdown
@@ -270,13 +269,20 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 			{/* Guardian logo */}
 			<div css={guardianLogoStyles}>
 				<a href="https://theguardian.com">
-					<SvgGuardianLogo textColor={palette.neutral[100]} />
+					<SvgGuardianLogo
+						textColor={themePalette('--masthead-nav-link-text')}
+					/>
 				</a>
 			</div>
 
-			{/* Burger menu */}
+			{/* Veggie burger menu */}
 			<div css={burgerStyles}>
-				<SvgMenu size="small" theme={{ fill: palette.brand[400] }} />
+				<SvgMenu
+					size="small"
+					theme={{
+						fill: themePalette('--masthead-veggie-burger-icon'),
+					}}
+				/>
 			</div>
 
 			{/* Pillars nav */}
