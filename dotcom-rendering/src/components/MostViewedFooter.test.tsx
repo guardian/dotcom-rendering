@@ -26,6 +26,7 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					inAdvertisingPartnerABTest: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -37,8 +38,10 @@ describe('MostViewedFooterData', () => {
 			</ConfigProvider>,
 		);
 
-		// Calls api once only
 		expect(useApi).toHaveBeenCalledTimes(1);
+		expect(useApi).toHaveBeenLastCalledWith(
+			'https://api.nextgen.guardianapps.co.uk/most-read/Section Name.json?_edition=UK&dcr=true',
+		);
 
 		// Renders all 20 items
 		expect(getAllByText(/LINKTEXT/).length).toBe(20);
@@ -66,6 +69,7 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					inAdvertisingPartnerABTest: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -127,6 +131,7 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					inAdvertisingPartnerABTest: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -173,6 +178,7 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					inAdvertisingPartnerABTest: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -195,6 +201,7 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					inAdvertisingPartnerABTest: false,
 					assetOrigin: '/',
 				}}
 			>

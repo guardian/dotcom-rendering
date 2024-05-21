@@ -38,6 +38,7 @@ import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
@@ -311,6 +312,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
+	const { absoluteServerTimes = false } = article.config.switches;
+
 	return (
 		<>
 			{isWeb && (
@@ -336,101 +342,123 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							</Section>
 						</Stuck>
 					)}
-					<SendToBack>
-						<Section
-							fullWidth={true}
-							shouldCenter={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="header"
-						>
-							<Header
-								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
-								}
-							/>
-						</Section>
 
-						<Section
-							fullWidth={true}
-							borderColour={sourcePalette.brand[600]}
-							showTopBorder={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="nav"
-						>
-							<Nav
-								nav={props.NAV}
-								selectedPillar={props.NAV.selectedPillar}
-								subscribeUrl={
-									article.nav.readerRevenueLinks.header
-										.subscribe
-								}
-								editionId={article.editionId}
-							/>
-						</Section>
+					{inUpdatedHeaderABTest ? (
+						<Masthead
+							nav={props.NAV}
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							subscribeUrl={
+								article.nav.readerRevenueLinks.header.subscribe
+							}
+							discussionApiUrl={article.config.discussionApiUrl}
+							idApiUrl={article.config.idApiUrl}
+							showSubNav={false}
+							isImmersive={false}
+							displayRoundel={false}
+							hasPageSkin={false}
+							hasPageSkinContentSelfConstrain={false}
+						/>
+					) : (
+						<SendToBack>
+							<Section
+								fullWidth={true}
+								shouldCenter={false}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="header"
+							>
+								<Header
+									editionId={article.editionId}
+									idUrl={article.config.idUrl}
+									mmaUrl={article.config.mmaUrl}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									urls={article.nav.readerRevenueLinks.header}
+									remoteHeader={
+										!!article.config.switches.remoteHeader
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									idApiUrl={article.config.idApiUrl}
+									headerTopBarSearchCapiSwitch={
+										!!article.config.switches
+											.headerTopBarSearchCapi
+									}
+								/>
+							</Section>
 
-						{props.NAV.subNavSections && (
+							<Section
+								fullWidth={true}
+								borderColour={sourcePalette.brand[600]}
+								showTopBorder={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="nav"
+							>
+								<Nav
+									nav={props.NAV}
+									selectedPillar={props.NAV.selectedPillar}
+									subscribeUrl={
+										article.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									editionId={article.editionId}
+								/>
+							</Section>
+
+							{props.NAV.subNavSections && (
+								<Section
+									fullWidth={true}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
+									padSides={false}
+									borderColour={themePalette(
+										'--article-border',
+									)}
+									element="aside"
+								>
+									<Island
+										priority="enhancement"
+										defer={{ until: 'idle' }}
+									>
+										<SubNav
+											subNavSections={
+												props.NAV.subNavSections
+											}
+											currentNavLink={
+												props.NAV.currentNavLink
+											}
+											position="header"
+										/>
+									</Island>
+								</Section>
+							)}
+
 							<Section
 								fullWidth={true}
 								backgroundColour={themePalette(
 									'--article-background',
 								)}
 								padSides={false}
+								showTopBorder={false}
 								borderColour={themePalette('--article-border')}
-								element="aside"
 							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
-								>
-									<SubNav
-										subNavSections={
-											props.NAV.subNavSections
-										}
-										currentNavLink={
-											props.NAV.currentNavLink
-										}
-										position="header"
-									/>
-								</Island>
+								<StraightLines
+									count={4}
+									cssOverrides={css`
+										display: block;
+									`}
+								/>
 							</Section>
-						)}
-
-						<Section
-							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-							padSides={false}
-							showTopBorder={false}
-							borderColour={themePalette('--article-border')}
-						>
-							<StraightLines
-								count={4}
-								cssOverrides={css`
-									display: block;
-								`}
-							/>
-						</Section>
-					</SendToBack>
+						</SendToBack>
+					)}
 				</div>
 			)}
 			<main data-layout="LiveLayout">
@@ -655,6 +683,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</Island>
 						</Hide>
@@ -1231,6 +1260,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</Island>
 						</Section>
@@ -1255,6 +1285,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
 

@@ -24,7 +24,11 @@ export const OneTrail = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 1)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 1)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 OneTrail.storyName = 'with one trail';
@@ -35,7 +39,11 @@ export const TwoTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 2)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 2)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 TwoTrails.storyName = 'with two trails';
@@ -46,7 +54,11 @@ export const ThreeTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 3)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 3)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 ThreeTrails.storyName = 'with three trails';
@@ -57,7 +69,11 @@ export const FourTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 4)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 4)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 FourTrails.storyName = 'with four trails';
@@ -68,7 +84,11 @@ export const FiveTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 5)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 5)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 FiveTrails.storyName = 'with five trails';
@@ -79,7 +99,11 @@ export const SixTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 6)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 6)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 SixTrails.storyName = 'with six trails';
@@ -90,7 +114,11 @@ export const SevenTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 7)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 7)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 SevenTrails.storyName = 'with seven trails';
@@ -101,7 +129,11 @@ export const EightTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 8)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 8)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 EightTrails.storyName = 'with eight trails';
@@ -112,7 +144,11 @@ export const NineTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 9)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 9)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 NineTrails.storyName = 'with nine trails';
@@ -123,7 +159,11 @@ export const TenTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 10)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 10)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 TenTrails.storyName = 'with ten trails';
@@ -134,7 +174,11 @@ export const ElevenTrails = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedMediumFastXI trails={trails.slice(0, 11)} imageLoading="eager" />
+		<FixedMediumFastXI
+			trails={trails.slice(0, 11)}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 ElevenTrails.storyName = 'with eleven trails';

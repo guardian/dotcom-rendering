@@ -173,6 +173,7 @@ type Props = {
 	pillar: ArticleTheme;
 	shortUrlId: string;
 	discussionApiUrl: string;
+	absoluteServerTimes: boolean;
 };
 
 /**
@@ -206,6 +207,7 @@ export const OnwardsUpper = ({
 	editionId,
 	shortUrlId,
 	discussionApiUrl,
+	absoluteServerTimes,
 }: Props) => {
 	const isAndroid = useIsAndroid();
 
@@ -220,7 +222,7 @@ export const OnwardsUpper = ({
 		(tag) => tag.type === 'Series' || tag.type === 'Blog',
 	);
 
-	let url;
+	let url: string | undefined;
 	let onwardsSource: OnwardsSource = 'unknown-source';
 
 	if (!showRelatedContent) {
@@ -300,6 +302,7 @@ export const OnwardsUpper = ({
 						onwardsSource={onwardsSource}
 						format={format}
 						discussionApiUrl={discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Section>
 			)}
@@ -314,6 +317,7 @@ export const OnwardsUpper = ({
 						onwardsSource="curated-content"
 						format={format}
 						discussionApiUrl={discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Section>
 			)}

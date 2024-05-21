@@ -40,6 +40,7 @@ const basicCardProps: CardProps = {
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showMainVideo: true,
+	absoluteServerTimes: true,
 };
 
 const aBasicLink = {

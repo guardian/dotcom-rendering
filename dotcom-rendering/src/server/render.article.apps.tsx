@@ -26,6 +26,7 @@ export const renderArticle = (
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable: !!article.config.switches.darkModeInApps,
+		inAdvertisingPartnerABTest: false,
 		assetOrigin: ASSET_ORIGIN,
 	};
 

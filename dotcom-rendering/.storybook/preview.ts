@@ -29,15 +29,19 @@ if (isChromatic()) {
 
 mockRESTCalls();
 
-setABTests(
-	new AB({
+setABTests({
+	api: new AB({
 		mvtMaxValue: 1_000_000,
 		mvtId: 1234,
 		pageIsSensitive: false,
 		abTestSwitches: {},
 		arrayOfTestObjects: [],
+		serverSideTests: {},
+		ophanRecord: () => {},
+		errorReporter: () => {},
 	}),
-);
+	participations: {},
+});
 
 // Add base css for the site
 let css = `${fontsCss}${resets.resetCSS}`;
@@ -63,6 +67,7 @@ window.guardian = {
 			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		},
 		tests: {},
+		switches: {},
 	},
 	ophan: {
 		record: ({}) => {},

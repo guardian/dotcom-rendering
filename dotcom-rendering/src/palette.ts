@@ -1,5 +1,8 @@
 // ----- Imports ----- //
-
+/* eslint sort-keys: ["error", "asc", { minKeys: 12, natural: true }]
+  --
+  the palette object is large and ordering helps knowing where  to insert new elements
+*/
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
@@ -1792,6 +1795,8 @@ const brandingLabelLight: PaletteFunction = ({ design }) => {
 	}
 };
 const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
+const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -1802,6 +1807,10 @@ const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.news[400];
 		case Pillar.News:
 			switch (design) {
+				case ArticleDesign.Picture:
+				case ArticleDesign.Video:
+				case ArticleDesign.Audio:
+					return sourcePalette.neutral[86];
 				case ArticleDesign.Analysis:
 					return sourcePalette.news[300];
 				default:
@@ -2326,31 +2335,36 @@ const cardAgeTextDark = (): string => {
 };
 
 const cardOnwardContentFooterLight: PaletteFunction = ({ theme, design }) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return sourcePalette.neutral[100];
-		case ArticleDesign.LiveBlog:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				default:
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.brandAlt[400];
+		default: {
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
 					return sourcePalette.neutral[100];
-			}
-		default:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.brandAlt[400];
+				case ArticleDesign.LiveBlog:
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[7];
+						case Pillar.News:
+						case Pillar.Sport:
+						case Pillar.Opinion:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+						default:
+							return sourcePalette.neutral[100];
+					}
 				default:
-					return sourcePalette.neutral[46];
+					switch (theme) {
+						default:
+							return sourcePalette.neutral[46];
+					}
 			}
+		}
 	}
 };
 
@@ -2452,6 +2466,7 @@ const onwardContentCardBackgroundLight: PaletteFunction = ({
 }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[800];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.neutral[46];
 		default:
@@ -2504,6 +2519,7 @@ const onwardContentCardBackgroundDark: PaletteFunction = ({
 const onwardContentCardHoverLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.neutral[20];
 		default:
@@ -2594,7 +2610,7 @@ const cardTextDark = (): string => {
 const cardOnwardContentTextLight: PaletteFunction = (format) => {
 	switch (format.theme) {
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.neutral[100];
+			return sourcePalette.specialReportAlt[100];
 		default:
 			if (
 				format.display === ArticleDisplay.Immersive &&
@@ -2825,6 +2841,9 @@ const captionTextDark: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[60];
 	}
 };
+
+const captionPhotoEssayMainMediaTextLight = () => sourcePalette.neutral[46];
+const captionPhotoEssayMainMediaTextDark = () => sourcePalette.neutral[60];
 
 const captionLink: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.NewsletterSignup) {
@@ -5353,6 +5372,17 @@ const timelineEventBorderLight: PaletteFunction = () =>
 const timelineEventBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
+const mastheadTopBarBackground: PaletteFunction = () =>
+	sourcePalette.brand[300];
+const mastheadTopBarLinkText: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const mastheadTopBarVerticalDivider: PaletteFunction = () =>
+	sourcePalette.brand[600];
+
+const mastheadNavBackground: PaletteFunction = () => sourcePalette.brand[400];
+const mastheadNavLinkText: PaletteFunction = () => sourcePalette.brand[400];
+const mastheadNavBorder: PaletteFunction = () => sourcePalette.brand[600];
+
 // ----- Palette ----- //
 
 /**
@@ -5390,109 +5420,17 @@ type PaletteColours = Record<
 const paletteColours = {
 	...expandingWrapper,
 	...tabs,
-	'--tabs-input': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[0],
+	'--accordion-key-events-background': {
+		light: accordionKeyEventsBackgroundLight,
+		dark: accordionBackgroundDark,
 	},
-	'--byline': {
-		light: bylineLight,
-		dark: bylineDark,
+	'--accordion-live-feed-background': {
+		light: accordionLiveFeedBackgroundLight,
+		dark: accordionBackgroundDark,
 	},
-	'--byline-background': {
-		light: bylineBackgroundLight,
-		dark: bylineBackgroundDark,
-	},
-	'--byline-anchor': {
-		light: bylineAnchorLight,
-		dark: bylineAnchorDark,
-	},
-	'--byline-underline': {
-		light: bylineUnderline,
-		dark: bylineUnderline,
-	},
-	'--byline-hover': {
-		light: bylineHoverLight,
-		dark: bylineHoverDark,
-	},
-	'--callout-prompt': {
-		light: calloutPromptLight,
-		dark: calloutPromptDark,
-	},
-	'--callout-submit-text': {
-		light: calloutSubmitTextLight,
-		dark: calloutSubmitTextDark,
-	},
-	'--callout-submit-background': {
-		light: calloutSubmitBackgroundLight,
-		dark: calloutSubmitBackgroundDark,
-	},
-	'--callout-submit-background-hover': {
-		light: calloutSubmitBackgroundHoverLight,
-		dark: calloutSubmitBackgroundHoverDark,
-	},
-	'--callout-highlight-text': {
-		light: starRatingFillColourLight,
-		dark: starRatingFillColourDark,
-	},
-	'--callout-highlight-background': {
-		light: starRatingBackgroundColourLight,
-		dark: starRatingBackgroundColourDark,
-	},
-	'--dateline': {
-		light: datelineLight,
-		dark: datelineDark,
-	},
-	'--dateline-mobile': {
-		light: datelineMobileLight,
-		dark: standfirstTextDark,
-	},
-	'--headline-colour': {
-		light: headlineTextLight,
-		dark: headlineTextDark,
-	},
-	'--headline-border': {
-		light: headlineBorder,
-		dark: headlineBorder,
-	},
-	'--headline-background': {
-		light: headlineBackgroundLight,
-		dark: headlineBackgroundDark,
-	},
-	'--headline-blog-background': {
-		light: headlineBlogBackgroundLight,
-		dark: headlineBlogBackgroundDark,
-	},
-	'--heading-line': {
-		light: headingLineLight,
-		dark: headingLineDark,
-	},
-	'--subheading-text': {
-		light: subheadingTextLight,
-		dark: subheadingTextDark,
-	},
-	'--star-rating-fill': {
-		light: starRatingFillColourLight,
-		dark: starRatingFillColourDark,
-	},
-	'--star-rating-background': {
-		light: starRatingBackgroundColourLight,
-		dark: starRatingBackgroundColourDark,
-	},
-	'--block-quote-fill': {
-		light: blockQuoteFillLight,
-		dark: blockQuoteFillDark,
-	},
-	'--block-quote-text': {
-		light: blockquoteTextLight,
-		dark: blockquoteTextDark,
-	},
-	'--block-quote-link': {
-		light: blockQuoteLinkLight,
-		dark: blockQuoteLinkDark,
-	},
-	'--accordion-title-row-fill': {
-		light: accordionTitleRowFillLight,
-		dark: accordionTitleRowFillDark,
+	'--accordion-title': {
+		light: accordionTitleLight,
+		dark: accordionTitleDark,
 	},
 	'--accordion-title-row-background': {
 		light: accordionTitleRowBackgroundLight,
@@ -5502,25 +5440,9 @@ const paletteColours = {
 		light: accordionTitleRowBorderTopLight,
 		dark: accordionTitleRowBorderTopDark,
 	},
-	'--accordion-title': {
-		light: accordionTitleLight,
-		dark: accordionTitleDark,
-	},
-	'--accordion-key-events-background': {
-		light: accordionKeyEventsBackgroundLight,
-		dark: accordionBackgroundDark,
-	},
-	'--accordion-live-feed-background': {
-		light: accordionLiveFeedBackgroundLight,
-		dark: accordionBackgroundDark,
-	},
-	'--table-of-contents': {
-		light: tableOfContentsLight,
-		dark: tableOfContentsDark,
-	},
-	'--table-of-contents-border': {
-		light: tableOfContentsBorderLight,
-		dark: tableOfContentsBorderDark,
+	'--accordion-title-row-fill': {
+		light: accordionTitleRowFillLight,
+		dark: accordionTitleRowFillDark,
 	},
 	'--ad-background': {
 		light: adBackgroundLight,
@@ -5530,13 +5452,13 @@ const paletteColours = {
 		light: adLabelsTextLight,
 		dark: adLabelsTextDark,
 	},
-	'--ad-support-banner-button-background': {
-		light: adSupportBannerButtonBackgroundLight,
-		dark: adSupportBannerButtonBackgroundDark,
-	},
 	'--ad-support-banner-background': {
 		light: adSupportBannerBackgroundLight,
 		dark: adSupportBannerBackgroundDark,
+	},
+	'--ad-support-banner-button-background': {
+		light: adSupportBannerButtonBackgroundLight,
+		dark: adSupportBannerButtonBackgroundDark,
 	},
 	'--ad-support-banner-button-text': {
 		light: adSupportBannerButtonTextLight,
@@ -5546,333 +5468,25 @@ const paletteColours = {
 		light: adSupportBannerTextLight,
 		dark: adSupportBannerTextDark,
 	},
-	'--apps-footer-links-text': {
-		light: appsFooterLinksTextLight,
-		dark: appsFooterLinksTextDark,
-	},
-	'--apps-footer-links-text-hover': {
-		light: appsFooterLinksTextHoverLight,
-		dark: appsFooterLinksTextHoverDark,
-	},
-	'--apps-footer-background': {
-		light: appsFooterBackgroundLight,
-		dark: appsFooterBackgroundDark,
-	},
-	'--click-to-view-background': {
-		light: clickToViewBackgroundLight,
-		dark: clickToViewBackgroundDark,
-	},
-	'--click-to-view-border': {
-		light: clickToViewBorderLight,
-		dark: clickToViewBorderDark,
-	},
-	'--click-to-view-button': {
-		light: clickToViewButtonLight,
-		dark: clickToViewButtonDark,
-	},
-	'--click-to-view-button-text': {
-		light: clickToViewButtonTextLight,
-		dark: clickToViewButtonTextDark,
-	},
-	'--click-to-view-button-hover': {
-		light: clickToViewButtonHoverLight,
-		dark: clickToViewButtonHoverDark,
-	},
-	'--avatar-background': {
-		light: avatarLight,
-		dark: avatarDark,
-	},
-	'--standfirst-text': {
-		light: standfirstTextLight,
-		dark: standfirstTextDark,
-	},
-	'--standfirst-bullet': {
-		light: standfirstBulletLight,
-		dark: standfirstBulletDark,
-	},
-	'--standfirst-link-text': {
-		light: standfirstLinkTextLight,
-		dark: standfirstLinkTextDark,
-	},
-	'--standfirst-link-border': {
-		light: standfirstLinkBorderLight,
-		dark: standfirstLinkBorderDark,
-	},
-	'--follow-icon-fill': {
-		light: followIconFillLight,
-		dark: followIconFillDark,
-	},
-	'--follow-icon-background': {
-		light: followIconBackgroundLight,
-		dark: followIconBackgroundDark,
-	},
-	'--follow-text': {
-		light: followTextLight,
-		dark: followTextDark,
-	},
-	'--standfirst-border': {
-		light: standfirstBorder,
-		dark: standfirstBorder,
-	},
-	'--standfirst-background': {
-		light: standfirstBackgroundLight,
-		dark: standfirstBackgroundDark,
-	},
-	'--card-border-top': {
-		light: cardBorderTopLight,
-		dark: cardBorderTopDark,
-	},
-	'--card-footer-text': {
-		light: cardAgeTextLight,
-		dark: cardAgeTextDark,
-	},
-	'--card-footer-onwards-content': {
-		light: cardOnwardContentFooterLight,
-		dark: cardOnwardContentFooterDark,
-	},
-	'--card-background': {
-		light: cardBackgroundLight,
-		dark: cardBackgroundDark,
-	},
-	'--onward-placeholder-background': {
-		light: onwardPlaceholderBackgroundLight,
-		dark: onwardPlaceholderBackgroundDark,
-	},
-	'--onward-content-card-background': {
-		light: onwardContentCardBackgroundLight,
-		dark: onwardContentCardBackgroundDark,
-	},
-	'--onward-content-card-hover': {
-		light: onwardContentCardHoverLight,
-		dark: onwardContentCardHoverDark,
-	},
-	'--card-headline-onward-content-text': {
-		light: cardOnwardContentTextLight,
-		dark: cardTextDark,
-	},
-	'--card-headline-trail-text': {
-		light: cardHeadlineTextLight,
-		dark: cardTextDark,
-	},
-	'--card-kicker-text': {
-		light: cardKickerTextLight,
-		dark: cardBylineKickerTextDark,
-	},
-	'--card-background-hover': {
-		light: cardBackgroundHoverLight,
-		dark: cardBackgroundDark,
-	},
-	'--caption-text': {
-		light: captionTextLight,
-		dark: captionTextDark,
-	},
-	'--caption-link': {
-		light: captionLink,
-		dark: captionLink,
-	},
-	'--caption-overlay-text': {
-		light: captionOverlayText,
-		dark: captionOverlayText,
-	},
-	'--key-event-bullet': {
-		light: keyEventBulletLight,
-		dark: keyEventBulletDark,
-	},
-	'--key-event-bullet-hover': {
-		light: keyEventBulletHoverLight,
-		dark: keyEventBulletHoverDark,
-	},
-	'--key-event-title': {
-		light: keyEventTitleLight,
-		dark: keyEventTitleDark,
-	},
-	'--key-event-text': {
-		light: keyEventTextLight,
-		dark: keyEventTextDark,
-	},
-	'--key-event-background': {
-		light: keyEventBackgroundLight,
-		dark: keyEventBackgroundDark,
-	},
-	'--key-event-background-desktop': {
-		light: keyEventBackgroundDesktopLight,
-		dark: keyEventBackgroundDesktopDark,
-	},
-	'--key-event-border': {
-		light: keyEventBorderLight,
-		dark: keyEventBorderDark,
-	},
-	'--key-event-button': {
-		light: keyEventButtonLight,
-		dark: keyEventButtonDark,
-	},
-	'--key-event-button-hover': {
-		light: keyEventButtonHoverLight,
-		dark: keyEventButtonHoverDark,
-	},
-	'--key-event-button-fill': {
-		light: keyEventButtonFillLight,
-		dark: keyEventButtonFillDark,
-	},
-	'--numbered-list-number': {
-		light: numberedListNumberLight,
-		dark: numberedListNumberDark,
-	},
-	'--numbered-list-title': {
-		light: numberedListTitleLight,
-		dark: numberedListTitleDark,
-	},
-	'--numbered-list-links': {
-		light: numberedListLinksLight,
-		dark: numberedListLinksDark,
-	},
-	'--numbered-list-heading': {
-		light: numberedListHeadingLight,
-		dark: numberedListHeadingDark,
-	},
-	'--summary-event-bullet': {
-		light: summaryEventBulletLight,
-		dark: summaryEventBulletDark,
-	},
-	'--summary-event-bullet-hover': {
-		light: summaryEventBulletHoverLight,
-		dark: summaryEventBulletHoverDark,
-	},
-	'--branding-label-text': {
-		light: brandingLabelLight,
-		dark: brandingLabelDark,
-	},
-	'--branding-link-text': {
-		light: brandingLinkLight,
-		dark: brandingLinkDark,
-	},
-	'--article-background': {
-		light: articleBackgroundLight,
-		dark: articleBackgroundDark,
-	},
-	'--article-inner-background': {
-		light: articleInnerBackgroundLight,
-		dark: articleInnerBackgroundDark,
-	},
-	'--article-section-background': {
-		light: articleSectionBackgroundLight,
-		dark: articleSectionBackgroundDark,
-	},
-	'--article-section-title': {
-		light: articleSectionTitleLight,
-		dark: articleSectionTitleDark,
-	},
-	'--article-link-text': {
-		light: articleLinkTextLight,
-		dark: articleLinkTextDark,
-	},
-	'--article-link-border': {
-		light: articleLinkBorderLight,
-		dark: articleLinkBorderDark,
-	},
-	'--article-link-text-hover': {
-		light: articleLinkHoverLight,
-		dark: articleLinkHoverDark,
-	},
-	'--article-link-border-hover': {
-		light: articleLinkBorderHoverLight,
-		dark: articleLinkBorderHoverDark,
-	},
-	'--article-border': {
-		light: articleBorderLight,
-		dark: articleBorderDark,
-	},
-	'--straight-lines': {
-		light: straightLinesLight,
-		dark: straightLinesDark,
-	},
-	'--article-meta-lines': {
-		light: articleBorderLight,
-		dark: articleMetaLinesDark,
-	},
-	'--sub-nav-border': {
-		light: subNavBorder,
-		dark: subNavBorder,
-	},
-	'--sub-nav-link-header': {
-		light: subNavLinkHeaderLight,
-		dark: subNavLinkHeaderDark,
-	},
-	'--sub-nav-link-footer': {
-		light: subNavLinkFooterLight,
-		dark: subNavLinkFooterDark,
-	},
-	'--sub-nav-link-hover': {
-		light: subNavLinkHoverLight,
-		dark: subNavLinkHoverDark,
-	},
-	'--sub-nav-more': {
-		light: subNavMoreLight,
-		dark: subNavMoreDark,
-	},
-	'--share-button': {
-		light: shareButtonLight,
-		dark: shareButtonDark,
-	},
-	'--match-nav-background': {
-		light: matchNavBackgroundLight,
-		dark: matchNavBackgroundDark,
-	},
-	'--match-nav-text': {
-		light: matchNavText,
-		dark: matchNavText,
-	},
-	'--match-stats-background': {
-		light: matchStatsBackgroundLight,
-		dark: matchStatsBackgroundDark,
-	},
-	'--match-tab-border': {
-		light: matchTabBorderLight,
-		dark: matchTabBorderDark,
-	},
-	'--match-tab-border-active': {
-		light: matchActiveTabBorderLight,
-		dark: matchActiveTabBorderDark,
-	},
-	'--live-block-container-background': {
-		light: liveBlockContainerBackgroundLight,
-		dark: liveBlockContainerBackgroundDark,
-	},
-	'--live-block-border-top': {
-		light: liveBlockBorderTopLight,
-		dark: liveBlockBorderTopDark,
-	},
-	'--live-block-border-bottom': {
-		light: liveBlockBorderBottomLight,
-		dark: liveBlockBorderBottomDark,
-	},
-	'--sub-meta-background': {
-		light: subMetaBackgroundLight,
-		dark: subMetaBackgroundDark,
-	},
-	'--sub-meta-label-text': {
-		light: subMetaLabelTextLight,
-		dark: subMetaLabelTextDark,
-	},
-	'--sub-meta-text': {
-		light: subMetaTextLight,
-		dark: subMetaTextDark,
-	},
-	'--sub-meta-text-hover': {
-		light: subMetaTextHoverLight,
-		dark: subMetaBackgroundDark,
-	},
-	'--syndication-button-text': {
-		light: syndicationButtonText,
-		dark: syndicationButtonText,
-	},
-	'--syndication-button-border': {
-		light: syndicationButtonBorder,
-		dark: syndicationButtonBorder,
-	},
-	'--drop-cap': {
-		light: dropCapLight,
-		dark: dropCapDark,
+	'--affiliate-disclaimer-background': {
+		light: affiliateDisclaimerBackgroundLight,
+		dark: affiliateDisclaimerBackgroundDark,
+	},
+	'--affiliate-disclaimer-background-hover': {
+		light: affiliateDisclaimerBackgroundHoverLight,
+		dark: affiliateDisclaimerBackgroundHoverDark,
+	},
+	'--age-warning-background': {
+		light: ageWarningBackgroundLight,
+		dark: ageWarningBackgroundDark,
+	},
+	'--age-warning-text': {
+		light: ageWarningText,
+		dark: ageWarningText,
+	},
+	'--age-warning-wrapper-background': {
+		light: ageWarningWrapperBackground,
+		dark: ageWarningWrapperBackground,
 	},
 	'--apps-epic-background': {
 		light: appsEpicBackgroundLight,
@@ -5886,45 +5500,201 @@ const paletteColours = {
 		light: appsEpicTextLight,
 		dark: appsEpicTextDark,
 	},
-	'--interactive-block-background': {
-		light: interactiveBlockBackgroundLight,
-		dark: interactiveBlockBackgroundDark,
+	'--apps-footer-background': {
+		light: appsFooterBackgroundLight,
+		dark: appsFooterBackgroundDark,
 	},
-	'--most-viewed-headline': {
-		light: mostViewedHeadlineLight,
-		dark: mostViewedHeadlineDark,
+	'--apps-footer-links-text': {
+		light: appsFooterLinksTextLight,
+		dark: appsFooterLinksTextDark,
 	},
-	'--most-viewed-tab-border': {
-		light: mostViewedTabBorderLight,
-		dark: mostViewedTabBorderDark,
+	'--apps-footer-links-text-hover': {
+		light: appsFooterLinksTextHoverLight,
+		dark: appsFooterLinksTextHoverDark,
 	},
-	'--link-kicker-text': {
-		light: linkKickerTextLight,
-		dark: linkKickerTextDark,
+	'--article-background': {
+		light: articleBackgroundLight,
+		dark: articleBackgroundDark,
+	},
+	'--article-border': {
+		light: articleBorderLight,
+		dark: articleBorderDark,
+	},
+	'--article-inner-background': {
+		light: articleInnerBackgroundLight,
+		dark: articleInnerBackgroundDark,
+	},
+	'--article-link-border': {
+		light: articleLinkBorderLight,
+		dark: articleLinkBorderDark,
+	},
+	'--article-link-border-hover': {
+		light: articleLinkBorderHoverLight,
+		dark: articleLinkBorderHoverDark,
+	},
+	'--article-link-text': {
+		light: articleLinkTextLight,
+		dark: articleLinkTextDark,
+	},
+	'--article-link-text-hover': {
+		light: articleLinkHoverLight,
+		dark: articleLinkHoverDark,
+	},
+	'--article-meta-lines': {
+		light: articleBorderLight,
+		dark: articleMetaLinesDark,
+	},
+	'--article-section-background': {
+		light: articleSectionBackgroundLight,
+		dark: articleSectionBackgroundDark,
+	},
+	'--article-section-title': {
+		light: articleSectionTitleLight,
+		dark: articleSectionTitleDark,
 	},
 	'--article-text': {
 		light: articleTextLight,
 		dark: articleTextDark,
 	},
-	'--carousel-text': {
-		light: carouselTextLight,
-		dark: carouselTextDark,
+	'--audio-atom-background': {
+		light: audioAtomBackgroundLight,
+		dark: audioAtomBackgroundDark,
 	},
-	'--carousel-title-highlight': {
-		light: carouselTitleHighlightLight,
-		dark: carouselTitleHighlightDark,
+	'--audio-atom-border': {
+		light: audioAtomBorderLight,
+		dark: audioAtomBorderDark,
 	},
-	'--carousel-border': {
-		light: carouselBorderLight,
-		dark: carouselBorderDark,
+	'--audio-atom-icons': {
+		light: audioAtomIconsLight,
+		dark: audioAtomIconsDark,
 	},
-	'--carousel-dot': {
-		light: carouselDotLight,
-		dark: carouselDotDark,
+	'--audio-atom-kicker': {
+		light: audioAtomKickerLight,
+		dark: audioAtomKickerDark,
 	},
-	'--carousel-dot-hover': {
-		light: carouselDotHoverLight,
-		dark: carouselDotHoverDark,
+	'--audio-atom-progress-bar': {
+		light: audioAtomProgressBarLight,
+		dark: audioAtomProgressBarDark,
+	},
+	'--avatar-background': {
+		light: avatarLight,
+		dark: avatarDark,
+	},
+	'--block-quote-fill': {
+		light: blockQuoteFillLight,
+		dark: blockQuoteFillDark,
+	},
+	'--block-quote-link': {
+		light: blockQuoteLinkLight,
+		dark: blockQuoteLinkDark,
+	},
+	'--block-quote-text': {
+		light: blockquoteTextLight,
+		dark: blockquoteTextDark,
+	},
+	'--branding-border': {
+		light: brandingBorderLight,
+		dark: brandingBorderDark,
+	},
+	'--branding-label-text': {
+		light: brandingLabelLight,
+		dark: brandingLabelDark,
+	},
+	'--branding-link-text': {
+		light: brandingLinkLight,
+		dark: brandingLinkDark,
+	},
+	'--byline': {
+		light: bylineLight,
+		dark: bylineDark,
+	},
+	'--byline-anchor': {
+		light: bylineAnchorLight,
+		dark: bylineAnchorDark,
+	},
+	'--byline-background': {
+		light: bylineBackgroundLight,
+		dark: bylineBackgroundDark,
+	},
+	'--byline-hover': {
+		light: bylineHoverLight,
+		dark: bylineHoverDark,
+	},
+	'--byline-underline': {
+		light: bylineUnderline,
+		dark: bylineUnderline,
+	},
+	'--callout-highlight-background': {
+		light: starRatingBackgroundColourLight,
+		dark: starRatingBackgroundColourDark,
+	},
+	'--callout-highlight-text': {
+		light: starRatingFillColourLight,
+		dark: starRatingFillColourDark,
+	},
+	'--callout-prompt': {
+		light: calloutPromptLight,
+		dark: calloutPromptDark,
+	},
+	'--callout-submit-background': {
+		light: calloutSubmitBackgroundLight,
+		dark: calloutSubmitBackgroundDark,
+	},
+	'--callout-submit-background-hover': {
+		light: calloutSubmitBackgroundHoverLight,
+		dark: calloutSubmitBackgroundHoverDark,
+	},
+	'--callout-submit-text': {
+		light: calloutSubmitTextLight,
+		dark: calloutSubmitTextDark,
+	},
+	'--caption-link': {
+		light: captionLink,
+		dark: captionLink,
+	},
+	'--caption-overlay-text': {
+		light: captionOverlayText,
+		dark: captionOverlayText,
+	},
+	'--caption-photo-essay-main-media-text': {
+		light: captionPhotoEssayMainMediaTextLight,
+		dark: captionPhotoEssayMainMediaTextDark,
+	},
+	'--caption-text': {
+		light: captionTextLight,
+		dark: captionTextDark,
+	},
+	'--card-background': {
+		light: cardBackgroundLight,
+		dark: cardBackgroundDark,
+	},
+	'--card-background-hover': {
+		light: cardBackgroundHoverLight,
+		dark: cardBackgroundDark,
+	},
+	'--card-border-top': {
+		light: cardBorderTopLight,
+		dark: cardBorderTopDark,
+	},
+	'--card-footer-onwards-content': {
+		light: cardOnwardContentFooterLight,
+		dark: cardOnwardContentFooterDark,
+	},
+	'--card-footer-text': {
+		light: cardAgeTextLight,
+		dark: cardAgeTextDark,
+	},
+	'--card-headline-onward-content-text': {
+		light: cardOnwardContentTextLight,
+		dark: cardTextDark,
+	},
+	'--card-headline-trail-text': {
+		light: cardHeadlineTextLight,
+		dark: cardTextDark,
+	},
+	'--card-kicker-text': {
+		light: cardKickerTextLight,
+		dark: cardBylineKickerTextDark,
 	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
@@ -5946,125 +5716,53 @@ const paletteColours = {
 		light: carouselArrowBackgroundHoverLight,
 		dark: carouselArrowBackgroundHoverDark,
 	},
-	'--most-viewed-footer-hover': {
-		light: mostViewedFooterHoverLight,
-		dark: mostViewedFooterHoverDark,
+	'--carousel-border': {
+		light: carouselBorderLight,
+		dark: carouselBorderDark,
 	},
-	'--pullquote-text': {
-		light: pullQuoteTextLight,
-		dark: pullQuoteTextDark,
+	'--carousel-dot': {
+		light: carouselDotLight,
+		dark: carouselDotDark,
 	},
-	'--pullquote-background': {
-		light: pullQuoteBackgroundLight,
-		dark: pullQuoteBackgroundDark,
+	'--carousel-dot-hover': {
+		light: carouselDotHoverLight,
+		dark: carouselDotHoverDark,
 	},
-	'--pullquote-border': {
-		light: pullQuoteBorderLight,
-		dark: pullQuoteBorderDark,
+	'--carousel-text': {
+		light: carouselTextLight,
+		dark: carouselTextDark,
 	},
-	'--pullquote-icon': {
-		light: pullQuoteIconLight,
-		dark: pullQuoteIconDark,
+	'--carousel-title-highlight': {
+		light: carouselTitleHighlightLight,
+		dark: carouselTitleHighlightDark,
 	},
-	'--rich-link-text': {
-		light: richLinkTextLight,
-		dark: richLinkTextDark,
+	'--click-to-view-background': {
+		light: clickToViewBackgroundLight,
+		dark: clickToViewBackgroundDark,
 	},
-	'--rich-link-background': {
-		light: richLinkBackgroundLight,
-		dark: richLinkBackgroundDark,
+	'--click-to-view-border': {
+		light: clickToViewBorderLight,
+		dark: clickToViewBorderDark,
 	},
-	'--rich-link-fill': {
-		light: richLinkFillLight,
-		dark: richLinkFillDark,
+	'--click-to-view-button': {
+		light: clickToViewButtonLight,
+		dark: clickToViewButtonDark,
 	},
-	'--rich-link-background-hover': {
-		light: richLinkBackgroundHoverLight,
-		dark: richLinkBackgroundHoverDark,
+	'--click-to-view-button-hover': {
+		light: clickToViewButtonHoverLight,
+		dark: clickToViewButtonHoverDark,
 	},
-	'--rich-link-header': {
-		light: richLinkHeaderLight,
-		dark: richLinkHeaderDark,
+	'--click-to-view-button-text': {
+		light: clickToViewButtonTextLight,
+		dark: clickToViewButtonTextDark,
 	},
-	'--rich-link-branding-text': {
-		light: richLinkBrandingTextLight,
-		dark: richLinkHeaderDark,
+	'--code-block-background': {
+		light: codeBlockBackgroundLight,
+		dark: codeBlockBackgroundDark,
 	},
-	'--quote-icon-fill': {
-		light: richLinkQuoteFillLight,
-		dark: richLinkFillDark,
-	},
-	'--rich-link-border': {
-		light: richLinkBorderLight,
-		dark: richLinkBorderDark,
-	},
-	'--age-warning-wrapper-background': {
-		light: ageWarningWrapperBackground,
-		dark: ageWarningWrapperBackground,
-	},
-	'--age-warning-background': {
-		light: ageWarningBackgroundLight,
-		dark: ageWarningBackgroundDark,
-	},
-	'--age-warning-text': {
-		light: ageWarningText,
-		dark: ageWarningText,
-	},
-	'--series-title-background': {
-		light: seriesTitleBackgroundLight,
-		dark: seriesTitleBackgroundLight,
-	},
-	'--section-title-background': {
-		light: sectionTitleBackgroundLight,
-		dark: sectionTitleBackgroundLight,
-	},
-	'--series-title-text': {
-		light: seriesTitleTextLight,
-		dark: seriesTitleTextDark,
-	},
-	'--series-title-match-text': {
-		light: seriesTitleMatchTextLight,
-		dark: seriesTitleTextDark,
-	},
-	'--recaptcha-button': {
-		light: recaptchaButtonLight,
-		dark: recaptchaButtonDark,
-	},
-	'--recaptcha-button-hover': {
-		light: recaptchaButtonHoverLight,
-		dark: recaptchaButtonHoverDark,
-	},
-	'--recaptcha-button-text': {
-		light: recaptchaButtonTextLight,
-		dark: recaptchaButtonTextDark,
-	},
-	'--recaptcha-border': {
-		light: recaptchaBorderLight,
-		dark: recaptchaBorderDark,
-	},
-	'--privacy-text-supporting': {
-		light: privacyTextSupportingLight,
-		dark: privacyTextDark,
-	},
-	'--privacy-text-supporting-subdued': {
-		light: privacyTextSupportingSubduedLight,
-		dark: privacyTextSupportingSubduedDark,
-	},
-	'--privacy-text-regular': {
-		light: privacyTextRegularLight,
-		dark: privacyTextDark,
-	},
-	'--witness-title-text': {
-		light: witnessTitleText,
-		dark: witnessTitleText,
-	},
-	'--witness-title-icon': {
-		light: witnessTitleIcon,
-		dark: witnessTitleIcon,
-	},
-	'--witness-title-author': {
-		light: witnessTitleAuthor,
-		dark: witnessTitleAuthor,
+	'--code-block-text-shadow': {
+		light: codeBlockTextShadowLight,
+		dark: codeBlockTextShadowDark,
 	},
 	'--comment-count-fill': {
 		light: commentCountFill,
@@ -6074,73 +5772,33 @@ const paletteColours = {
 		light: mobileCommentCountFill,
 		dark: mobileCommentCountFillDark,
 	},
-	'--explainer-atom-background': {
-		light: explainerAtomBackgroundLight,
-		dark: explainerAtomBackgroundDark,
+	'--comment-form-header-background': {
+		light: commentFormHeaderBackgroundLight,
+		dark: commentFormHeaderBackgroundDark,
 	},
-	'--explainer-atom-accent': {
-		light: explainerAtomAccentLight,
-		dark: explainerAtomAccentDark,
+	'--comment-form-input-background': {
+		light: commentFormInputBackgroundLight,
+		dark: commentFormInputBackgroundDark,
 	},
-	'--sign-in-link': {
-		light: signInLinkLight,
-		dark: signInLinkDark,
+	'--dateline': {
+		light: datelineLight,
+		dark: datelineDark,
 	},
-	'--sign-in-link-underline': {
-		light: signInLinkLineLight,
-		dark: signInLinkLineDark,
-	},
-	'--discussion-section-background': {
-		light: discussionSectionBackgroundLight,
-		dark: discussionSectionBackgroundDark,
-	},
-	'--discussion-top-pick-background': {
-		light: topPickBackgroundLight,
-		dark: topPickBackgroundDark,
-	},
-	'--discussion-top-pick-link': {
-		light: topPickLinkLight,
-		dark: topPickLinkDark,
-	},
-	'--discussion-staff-label-text': {
-		light: staffLabelLight,
-		dark: staffLabelDark,
-	},
-	'--discussion-pick-label-text': {
-		light: staffPickLight,
-		dark: staffPickDark,
-	},
-	'--recommendation-count': {
-		light: recommendationCountLight,
-		dark: recommendationCountDark,
-	},
-	'--recommendation-count-selected': {
-		light: recommendationCountSelectedLight,
-		dark: recommendationCountSelectedDark,
-	},
-	'--recommendation-count-arrow': {
-		light: recommendationCountArrowLight,
-		dark: recommendationCountArrowDark,
-	},
-	'--recommendation-count-arrow-selected': {
-		light: recommendationCountArrowSelectedLight,
-		dark: recommendationCountArrowSelectedDark,
-	},
-	'--discussion-text': {
-		light: discussionTextLight,
-		dark: discussionTextDark,
+	'--dateline-mobile': {
+		light: datelineMobileLight,
+		dark: standfirstTextDark,
 	},
 	'--discussion-accent-text': {
 		light: discussionAccentTextLight,
 		dark: discussionAccentTextDark,
 	},
-	'--discussion-link': {
-		light: discussionLinkLight,
-		dark: discussionLinkDark,
+	'--discussion-background': {
+		light: discussionBackgroundLight,
+		dark: discussionBackgroundDark,
 	},
-	'--discussion-primary-button-background': {
-		light: discussionPrimaryButtonBackgroundLight,
-		dark: discussionPrimaryButtonBackgroundDark,
+	'--discussion-border': {
+		light: discussionBorderLight,
+		dark: discussionBorderDark,
 	},
 	'--discussion-button-background-hover': {
 		light: discussionButtonHover,
@@ -6150,41 +5808,21 @@ const paletteColours = {
 		light: discussionButtonTextLight,
 		dark: discussionButtonTextDark,
 	},
-	'--discussion-preview-background': {
-		light: discussionPreviewBackgroundLight,
-		dark: discussionPreviewBackgroundDark,
+	'--discussion-comment-underline': {
+		light: discussionCommentUnderlineLight,
+		dark: discussionCommentUnderlineDark,
 	},
-	'--discussion-report-background': {
-		light: discussionReportBackgroundLight,
-		dark: discussionReportBackgroundDark,
+	'--discussion-link': {
+		light: discussionLinkLight,
+		dark: discussionLinkDark,
 	},
-	'--discussion-report-label-text': {
-		light: discussionReportAbuseFormLabelText,
-		dark: discussionReportAbuseFormLabelTextDark,
+	'--discussion-loading-background': {
+		light: discussionLoadingBackgroundLight,
+		dark: discussionLoadingBackgroundDark,
 	},
-	'--discussion-report-border': {
-		light: discussionReportBorder,
-		dark: discussionReportBorderDark,
-	},
-	'--discussion-report-button': {
-		light: discussionReportButton,
-		dark: discussionReportButtonDark,
-	},
-	'--discussion-report-error-text': {
-		light: discussionReportErrorText,
-		dark: discussionReportErrorTextDark,
-	},
-	'--discussion-report-success-text': {
-		light: discussionReportSuccessText,
-		dark: discussionReportSuccessTextDark,
-	},
-	'--discussion-border': {
-		light: discussionBorderLight,
-		dark: discussionBorderDark,
-	},
-	'--discussion-pagination-text': {
-		light: discussionPaginationTextLight,
-		dark: discussionPaginationTextDark,
+	'--discussion-loading-shimmer': {
+		light: discussionLoadingShimmerLight,
+		dark: discussionLoadingShimmerDark,
 	},
 	'--discussion-pagination-background': {
 		light: discussionPaginationBackgroundLight,
@@ -6198,97 +5836,81 @@ const paletteColours = {
 		light: discussionPaginationBorderHover,
 		dark: discussionPaginationBorderHover,
 	},
-	'--discussion-subdued': {
-		light: discussionSubduedLight,
-		dark: discussionSubduedDark,
+	'--discussion-pagination-text': {
+		light: discussionPaginationTextLight,
+		dark: discussionPaginationTextDark,
 	},
-	'--discussion-loading-background': {
-		light: discussionLoadingBackgroundLight,
-		dark: discussionLoadingBackgroundDark,
+	'--discussion-pick-label-text': {
+		light: staffPickLight,
+		dark: staffPickDark,
 	},
-	'--discussion-loading-shimmer': {
-		light: discussionLoadingShimmerLight,
-		dark: discussionLoadingShimmerDark,
+	'--discussion-pre-mod': {
+		light: discussionPreModLight,
+		dark: discussionPreModDark,
 	},
-	'--comment-form-input-background': {
-		light: commentFormInputBackgroundLight,
-		dark: commentFormInputBackgroundDark,
+	'--discussion-preview-background': {
+		light: discussionPreviewBackgroundLight,
+		dark: discussionPreviewBackgroundDark,
 	},
-	'--comment-form-header-background': {
-		light: commentFormHeaderBackgroundLight,
-		dark: commentFormHeaderBackgroundDark,
+	'--discussion-primary-button-background': {
+		light: discussionPrimaryButtonBackgroundLight,
+		dark: discussionPrimaryButtonBackgroundDark,
 	},
-	'--discussion-background': {
-		light: discussionBackgroundLight,
-		dark: discussionBackgroundDark,
+	'--discussion-report-background': {
+		light: discussionReportBackgroundLight,
+		dark: discussionReportBackgroundDark,
+	},
+	'--discussion-report-border': {
+		light: discussionReportBorder,
+		dark: discussionReportBorderDark,
+	},
+	'--discussion-report-button': {
+		light: discussionReportButton,
+		dark: discussionReportButtonDark,
+	},
+	'--discussion-report-error-text': {
+		light: discussionReportErrorText,
+		dark: discussionReportErrorTextDark,
+	},
+	'--discussion-report-label-text': {
+		light: discussionReportAbuseFormLabelText,
+		dark: discussionReportAbuseFormLabelTextDark,
+	},
+	'--discussion-report-success-text': {
+		light: discussionReportSuccessText,
+		dark: discussionReportSuccessTextDark,
+	},
+	'--discussion-section-background': {
+		light: discussionSectionBackgroundLight,
+		dark: discussionSectionBackgroundDark,
 	},
 	'--discussion-selected-background': {
 		light: discussionSelectedBackgroundLight,
 		dark: discussionSelectedBackgroundDark,
 	},
-	'--pagination-text': {
-		light: paginationTextLight,
-		dark: paginationTextDark,
+	'--discussion-staff-label-text': {
+		light: staffLabelLight,
+		dark: staffLabelDark,
 	},
-	'--interactive-contents-hover': {
-		light: interactiveContentsHoverLight,
-		dark: interactiveContentsHoverDark,
+	'--discussion-subdued': {
+		light: discussionSubduedLight,
+		dark: discussionSubduedDark,
 	},
-	'--audio-atom-background': {
-		light: audioAtomBackgroundLight,
-		dark: audioAtomBackgroundDark,
+	'--discussion-text': {
+		light: discussionTextLight,
+		dark: discussionTextDark,
 	},
-	'--audio-atom-kicker': {
-		light: audioAtomKickerLight,
-		dark: audioAtomKickerDark,
+	'--discussion-top-pick-background': {
+		light: topPickBackgroundLight,
+		dark: topPickBackgroundDark,
 	},
-	'--audio-atom-border': {
-		light: audioAtomBorderLight,
-		dark: audioAtomBorderDark,
+	'--discussion-top-pick-link': {
+		light: topPickLinkLight,
+		dark: topPickLinkDark,
 	},
-	'--audio-atom-icons': {
-		light: audioAtomIconsLight,
-		dark: audioAtomIconsDark,
-	},
-	'--audio-atom-progress-bar': {
-		light: audioAtomProgressBarLight,
-		dark: audioAtomProgressBarDark,
-	},
-	'--expandable-atom-background': {
-		light: expandableAtomBackgroundLight,
-		dark: expandableAtomBackgroundDark,
-	},
-	'--expandable-atom-text-hover': {
-		light: expandableAtomTextHoverLight,
-		dark: expandableAtomTextHoverDark,
-	},
-	'--expandable-atom-border': {
-		light: expandableAtomBorderLight,
-		dark: expandableAtomBorderDark,
-	},
-	'--expandable-atom-button': {
-		light: expandableAtomButtonLight,
-		dark: expandableAtomButtonDark,
-	},
-	'--expandable-atom-button-fill': {
-		light: expandableAtomButtonFillLight,
-		dark: expandableAtomButtonFillDark,
-	},
-	'--timeline-bullet': {
-		light: timelineBulletLight,
-		dark: timelineBulletDark,
-	},
-	'--timeline-atom-bullet': {
-		light: timelineAtomBulletLight,
-		dark: timelineAtomBulletDark,
-	},
-	'--timeline-atom-highlight-text': {
-		light: timelineAtomHighlightText,
-		dark: timelineAtomHighlightText,
-	},
-	'--timeline-atom-highlight-text-background': {
-		light: timelineAtomHighlightTextBackgroundLight,
-		dark: timelineAtomHighlightTextBackgroundDark,
+	'--drop-cap': {
+		light: dropCapLight,
+		dark: dropCapDark,
 	},
 	'--email-signup-button-background': {
 		light: emailSignupButtonBackgroundLight,
@@ -6306,25 +5928,337 @@ const paletteColours = {
 		light: emailSignupTextSubduedLight,
 		dark: emailSignupTextSubduedDark,
 	},
-	'--code-block-background': {
-		light: codeBlockBackgroundLight,
-		dark: codeBlockBackgroundDark,
+	'--expandable-atom-background': {
+		light: expandableAtomBackgroundLight,
+		dark: expandableAtomBackgroundDark,
 	},
-	'--code-block-text-shadow': {
-		light: codeBlockTextShadowLight,
-		dark: codeBlockTextShadowDark,
+	'--expandable-atom-border': {
+		light: expandableAtomBorderLight,
+		dark: expandableAtomBorderDark,
 	},
-	'--last-updated-text': {
-		light: lastUpdatedText,
-		dark: lastUpdatedText,
+	'--expandable-atom-button': {
+		light: expandableAtomButtonLight,
+		dark: expandableAtomButtonDark,
+	},
+	'--expandable-atom-button-fill': {
+		light: expandableAtomButtonFillLight,
+		dark: expandableAtomButtonFillDark,
+	},
+	'--expandable-atom-text-hover': {
+		light: expandableAtomTextHoverLight,
+		dark: expandableAtomTextHoverDark,
+	},
+	'--explainer-atom-accent': {
+		light: explainerAtomAccentLight,
+		dark: explainerAtomAccentDark,
+	},
+	'--explainer-atom-background': {
+		light: explainerAtomBackgroundLight,
+		dark: explainerAtomBackgroundDark,
+	},
+	'--follow-icon-background': {
+		light: followIconBackgroundLight,
+		dark: followIconBackgroundDark,
+	},
+	'--follow-icon-fill': {
+		light: followIconFillLight,
+		dark: followIconFillDark,
+	},
+	'--follow-text': {
+		light: followTextLight,
+		dark: followTextDark,
+	},
+	'--heading-line': {
+		light: headingLineLight,
+		dark: headingLineDark,
+	},
+	'--headline-background': {
+		light: headlineBackgroundLight,
+		dark: headlineBackgroundDark,
+	},
+	'--headline-blog-background': {
+		light: headlineBlogBackgroundLight,
+		dark: headlineBlogBackgroundDark,
+	},
+	'--headline-border': {
+		light: headlineBorder,
+		dark: headlineBorder,
+	},
+	'--headline-colour': {
+		light: headlineTextLight,
+		dark: headlineTextDark,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
 		dark: interactiveAtomBackgroundDark,
 	},
-	'--share-button-liveblog-mobile': {
-		light: shareButtonLiveBlogMobileLight,
-		dark: shareButtonLiveBlogMobileLight,
+	'--interactive-block-background': {
+		light: interactiveBlockBackgroundLight,
+		dark: interactiveBlockBackgroundDark,
+	},
+	'--interactive-contents-hover': {
+		light: interactiveContentsHoverLight,
+		dark: interactiveContentsHoverDark,
+	},
+	'--key-event-background': {
+		light: keyEventBackgroundLight,
+		dark: keyEventBackgroundDark,
+	},
+	'--key-event-background-desktop': {
+		light: keyEventBackgroundDesktopLight,
+		dark: keyEventBackgroundDesktopDark,
+	},
+	'--key-event-border': {
+		light: keyEventBorderLight,
+		dark: keyEventBorderDark,
+	},
+	'--key-event-bullet': {
+		light: keyEventBulletLight,
+		dark: keyEventBulletDark,
+	},
+	'--key-event-bullet-hover': {
+		light: keyEventBulletHoverLight,
+		dark: keyEventBulletHoverDark,
+	},
+	'--key-event-button': {
+		light: keyEventButtonLight,
+		dark: keyEventButtonDark,
+	},
+	'--key-event-button-fill': {
+		light: keyEventButtonFillLight,
+		dark: keyEventButtonFillDark,
+	},
+	'--key-event-button-hover': {
+		light: keyEventButtonHoverLight,
+		dark: keyEventButtonHoverDark,
+	},
+	'--key-event-text': {
+		light: keyEventTextLight,
+		dark: keyEventTextDark,
+	},
+	'--key-event-title': {
+		light: keyEventTitleLight,
+		dark: keyEventTitleDark,
+	},
+	'--last-updated-text': {
+		light: lastUpdatedText,
+		dark: lastUpdatedText,
+	},
+	'--link-kicker-text': {
+		light: linkKickerTextLight,
+		dark: linkKickerTextDark,
+	},
+	'--live-block-border-bottom': {
+		light: liveBlockBorderBottomLight,
+		dark: liveBlockBorderBottomDark,
+	},
+	'--live-block-border-top': {
+		light: liveBlockBorderTopLight,
+		dark: liveBlockBorderTopDark,
+	},
+	'--live-block-container-background': {
+		light: liveBlockContainerBackgroundLight,
+		dark: liveBlockContainerBackgroundDark,
+	},
+	'--masthead-nav-background': {
+		light: mastheadNavBackground,
+		dark: mastheadNavBackground,
+	},
+	'--masthead-nav-border': {
+		light: mastheadNavBorder,
+		dark: mastheadNavBorder,
+	},
+	'--masthead-nav-link-text': {
+		light: mastheadNavLinkText,
+		dark: mastheadNavLinkText,
+	},
+	'--masthead-top-bar-background': {
+		light: mastheadTopBarBackground,
+		dark: mastheadTopBarBackground,
+	},
+	'--masthead-top-bar-link-text': {
+		light: mastheadTopBarLinkText,
+		dark: mastheadTopBarLinkText,
+	},
+	'--masthead-top-bar-vertical-divider': {
+		light: mastheadTopBarVerticalDivider,
+		dark: mastheadTopBarVerticalDivider,
+	},
+	'--match-nav-background': {
+		light: matchNavBackgroundLight,
+		dark: matchNavBackgroundDark,
+	},
+	'--match-nav-text': {
+		light: matchNavText,
+		dark: matchNavText,
+	},
+	'--match-stats-background': {
+		light: matchStatsBackgroundLight,
+		dark: matchStatsBackgroundDark,
+	},
+	'--match-tab-border': {
+		light: matchTabBorderLight,
+		dark: matchTabBorderDark,
+	},
+	'--match-tab-border-active': {
+		light: matchActiveTabBorderLight,
+		dark: matchActiveTabBorderDark,
+	},
+	'--most-viewed-footer-hover': {
+		light: mostViewedFooterHoverLight,
+		dark: mostViewedFooterHoverDark,
+	},
+	'--most-viewed-headline': {
+		light: mostViewedHeadlineLight,
+		dark: mostViewedHeadlineDark,
+	},
+	'--most-viewed-tab-border': {
+		light: mostViewedTabBorderLight,
+		dark: mostViewedTabBorderDark,
+	},
+	'--numbered-list-heading': {
+		light: numberedListHeadingLight,
+		dark: numberedListHeadingDark,
+	},
+	'--numbered-list-links': {
+		light: numberedListLinksLight,
+		dark: numberedListLinksDark,
+	},
+	'--numbered-list-number': {
+		light: numberedListNumberLight,
+		dark: numberedListNumberDark,
+	},
+	'--numbered-list-title': {
+		light: numberedListTitleLight,
+		dark: numberedListTitleDark,
+	},
+	'--onward-content-card-background': {
+		light: onwardContentCardBackgroundLight,
+		dark: onwardContentCardBackgroundDark,
+	},
+	'--onward-content-card-hover': {
+		light: onwardContentCardHoverLight,
+		dark: onwardContentCardHoverDark,
+	},
+	'--onward-placeholder-background': {
+		light: onwardPlaceholderBackgroundLight,
+		dark: onwardPlaceholderBackgroundDark,
+	},
+	'--pagination-text': {
+		light: paginationTextLight,
+		dark: paginationTextDark,
+	},
+	'--privacy-text-regular': {
+		light: privacyTextRegularLight,
+		dark: privacyTextDark,
+	},
+	'--privacy-text-supporting': {
+		light: privacyTextSupportingLight,
+		dark: privacyTextDark,
+	},
+	'--privacy-text-supporting-subdued': {
+		light: privacyTextSupportingSubduedLight,
+		dark: privacyTextSupportingSubduedDark,
+	},
+	'--pullquote-background': {
+		light: pullQuoteBackgroundLight,
+		dark: pullQuoteBackgroundDark,
+	},
+	'--pullquote-border': {
+		light: pullQuoteBorderLight,
+		dark: pullQuoteBorderDark,
+	},
+	'--pullquote-icon': {
+		light: pullQuoteIconLight,
+		dark: pullQuoteIconDark,
+	},
+	'--pullquote-text': {
+		light: pullQuoteTextLight,
+		dark: pullQuoteTextDark,
+	},
+	'--quote-icon-fill': {
+		light: richLinkQuoteFillLight,
+		dark: richLinkFillDark,
+	},
+	'--recaptcha-border': {
+		light: recaptchaBorderLight,
+		dark: recaptchaBorderDark,
+	},
+	'--recaptcha-button': {
+		light: recaptchaButtonLight,
+		dark: recaptchaButtonDark,
+	},
+	'--recaptcha-button-hover': {
+		light: recaptchaButtonHoverLight,
+		dark: recaptchaButtonHoverDark,
+	},
+	'--recaptcha-button-text': {
+		light: recaptchaButtonTextLight,
+		dark: recaptchaButtonTextDark,
+	},
+	'--recommendation-count': {
+		light: recommendationCountLight,
+		dark: recommendationCountDark,
+	},
+	'--recommendation-count-arrow': {
+		light: recommendationCountArrowLight,
+		dark: recommendationCountArrowDark,
+	},
+	'--recommendation-count-arrow-selected': {
+		light: recommendationCountArrowSelectedLight,
+		dark: recommendationCountArrowSelectedDark,
+	},
+	'--recommendation-count-selected': {
+		light: recommendationCountSelectedLight,
+		dark: recommendationCountSelectedDark,
+	},
+	'--rich-link-background': {
+		light: richLinkBackgroundLight,
+		dark: richLinkBackgroundDark,
+	},
+	'--rich-link-background-hover': {
+		light: richLinkBackgroundHoverLight,
+		dark: richLinkBackgroundHoverDark,
+	},
+	'--rich-link-border': {
+		light: richLinkBorderLight,
+		dark: richLinkBorderDark,
+	},
+	'--rich-link-branding-text': {
+		light: richLinkBrandingTextLight,
+		dark: richLinkHeaderDark,
+	},
+	'--rich-link-fill': {
+		light: richLinkFillLight,
+		dark: richLinkFillDark,
+	},
+	'--rich-link-header': {
+		light: richLinkHeaderLight,
+		dark: richLinkHeaderDark,
+	},
+	'--rich-link-text': {
+		light: richLinkTextLight,
+		dark: richLinkTextDark,
+	},
+	'--section-title-background': {
+		light: sectionTitleBackgroundLight,
+		dark: sectionTitleBackgroundLight,
+	},
+	'--series-title-background': {
+		light: seriesTitleBackgroundLight,
+		dark: seriesTitleBackgroundLight,
+	},
+	'--series-title-match-text': {
+		light: seriesTitleMatchTextLight,
+		dark: seriesTitleTextDark,
+	},
+	'--series-title-text': {
+		light: seriesTitleTextLight,
+		dark: seriesTitleTextDark,
+	},
+	'--share-button': {
+		light: shareButtonLight,
+		dark: shareButtonDark,
 	},
 	'--share-button-border': {
 		light: shareButtonBorderLight,
@@ -6338,9 +6272,21 @@ const paletteColours = {
 		light: shareButtonHoverLight,
 		dark: shareButtonHoverLight,
 	},
+	'--share-button-liveblog-mobile': {
+		light: shareButtonLiveBlogMobileLight,
+		dark: shareButtonLiveBlogMobileLight,
+	},
 	'--share-button-xsmall-border': {
 		light: shareButtonBorderXSmallLight,
 		dark: shareButtonBorderXSmallLight,
+	},
+	'--sign-in-link': {
+		light: signInLinkLight,
+		dark: signInLinkDark,
+	},
+	'--sign-in-link-underline': {
+		light: signInLinkLineLight,
+		dark: signInLinkLineDark,
 	},
 	'--staff-contributor-badge': {
 		light: staffBadgeLight,
@@ -6358,25 +6304,141 @@ const paletteColours = {
 		light: staffPickBadgeTextLight,
 		dark: staffPickBadgeTextDark,
 	},
-	'--discussion-pre-mod': {
-		light: discussionPreModLight,
-		dark: discussionPreModDark,
+	'--standfirst-background': {
+		light: standfirstBackgroundLight,
+		dark: standfirstBackgroundDark,
 	},
-	'--discussion-comment-underline': {
-		light: discussionCommentUnderlineLight,
-		dark: discussionCommentUnderlineDark,
+	'--standfirst-border': {
+		light: standfirstBorder,
+		dark: standfirstBorder,
 	},
-	'--affiliate-disclaimer-background': {
-		light: affiliateDisclaimerBackgroundLight,
-		dark: affiliateDisclaimerBackgroundDark,
+	'--standfirst-bullet': {
+		light: standfirstBulletLight,
+		dark: standfirstBulletDark,
 	},
-	'--affiliate-disclaimer-background-hover': {
-		light: affiliateDisclaimerBackgroundHoverLight,
-		dark: affiliateDisclaimerBackgroundHoverDark,
+	'--standfirst-link-border': {
+		light: standfirstLinkBorderLight,
+		dark: standfirstLinkBorderDark,
+	},
+	'--standfirst-link-text': {
+		light: standfirstLinkTextLight,
+		dark: standfirstLinkTextDark,
+	},
+	'--standfirst-text': {
+		light: standfirstTextLight,
+		dark: standfirstTextDark,
+	},
+	'--star-rating-background': {
+		light: starRatingBackgroundColourLight,
+		dark: starRatingBackgroundColourDark,
+	},
+	'--star-rating-fill': {
+		light: starRatingFillColourLight,
+		dark: starRatingFillColourDark,
+	},
+	'--straight-lines': {
+		light: straightLinesLight,
+		dark: straightLinesDark,
+	},
+	'--sub-meta-background': {
+		light: subMetaBackgroundLight,
+		dark: subMetaBackgroundDark,
+	},
+	'--sub-meta-label-text': {
+		light: subMetaLabelTextLight,
+		dark: subMetaLabelTextDark,
+	},
+	'--sub-meta-text': {
+		light: subMetaTextLight,
+		dark: subMetaTextDark,
+	},
+	'--sub-meta-text-hover': {
+		light: subMetaTextHoverLight,
+		dark: subMetaBackgroundDark,
+	},
+	'--sub-nav-border': {
+		light: subNavBorder,
+		dark: subNavBorder,
+	},
+	'--sub-nav-link-footer': {
+		light: subNavLinkFooterLight,
+		dark: subNavLinkFooterDark,
+	},
+	'--sub-nav-link-header': {
+		light: subNavLinkHeaderLight,
+		dark: subNavLinkHeaderDark,
+	},
+	'--sub-nav-link-hover': {
+		light: subNavLinkHoverLight,
+		dark: subNavLinkHoverDark,
+	},
+	'--sub-nav-more': {
+		light: subNavMoreLight,
+		dark: subNavMoreDark,
+	},
+	'--subheading-text': {
+		light: subheadingTextLight,
+		dark: subheadingTextDark,
+	},
+	'--summary-event-bullet': {
+		light: summaryEventBulletLight,
+		dark: summaryEventBulletDark,
+	},
+	'--summary-event-bullet-hover': {
+		light: summaryEventBulletHoverLight,
+		dark: summaryEventBulletHoverDark,
+	},
+	'--syndication-button-border': {
+		light: syndicationButtonBorder,
+		dark: syndicationButtonBorder,
+	},
+	'--syndication-button-text': {
+		light: syndicationButtonText,
+		dark: syndicationButtonText,
+	},
+	'--table-of-contents': {
+		light: tableOfContentsLight,
+		dark: tableOfContentsDark,
+	},
+	'--table-of-contents-border': {
+		light: tableOfContentsBorderLight,
+		dark: tableOfContentsBorderDark,
+	},
+	'--tabs-input': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[0],
+	},
+	'--timeline-atom-bullet': {
+		light: timelineAtomBulletLight,
+		dark: timelineAtomBulletDark,
+	},
+	'--timeline-atom-highlight-text': {
+		light: timelineAtomHighlightText,
+		dark: timelineAtomHighlightText,
+	},
+	'--timeline-atom-highlight-text-background': {
+		light: timelineAtomHighlightTextBackgroundLight,
+		dark: timelineAtomHighlightTextBackgroundDark,
+	},
+	'--timeline-bullet': {
+		light: timelineBulletLight,
+		dark: timelineBulletDark,
 	},
 	'--timeline-event-border': {
 		light: timelineEventBorderLight,
 		dark: timelineEventBorderDark,
+	},
+	'--witness-title-author': {
+		light: witnessTitleAuthor,
+		dark: witnessTitleAuthor,
+	},
+	'--witness-title-icon': {
+		light: witnessTitleIcon,
+		dark: witnessTitleIcon,
+	},
+	'--witness-title-text': {
+		light: witnessTitleText,
+		dark: witnessTitleText,
 	},
 } satisfies PaletteColours;
 
