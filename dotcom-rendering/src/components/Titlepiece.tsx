@@ -57,7 +57,7 @@ const sections = [
 
 const getWindowWidth = () => window.innerWidth;
 
-const pillarLinkWidth1024 = 108;
+const pillarLinkWidth740 = 108;
 const pillarLinkWidth1280 = 125;
 const pillarLinkWidth1440 = 136;
 
@@ -130,7 +130,7 @@ const burgerStyles = css`
 		grid-row: 1 / 2;
 		align-self: end;
 		justify-self: start;
-		margin-left: ${pillarLinkWidth1024 * pillars.length + space[1]}px;
+		margin-left: ${pillarLinkWidth740 * pillars.length + space[1]}px;
 		margin-bottom: 12px;
 	}
 	@media (min-width: 1280px) {
@@ -165,28 +165,27 @@ const pillarsNavStyles = css`
 	li {
 		height: 28px;
 		padding-right: ${space[1]}px;
-	}
-	@media (min-width: 740px) and (max-width: 1023px) {
-		li {
+		@media (min-width: 375px) and (max-width: 479px) {
+			height: 34px;
+		}
+		@media (min-width: 480px) and (max-width: 739px) {
+			${headlineBold17}
+			height: 37px;
+		}
+		@media (min-width: 740px) and (max-width: 1023px) {
 			${headlineBold17}
 		}
-	}
-	@media (min-width: 1024px) and (max-width: 1279px) {
-		li {
+		@media (min-width: 740px) and (max-width: 1279px) {
 			${headlineBold20}
-			width: ${pillarLinkWidth1024}px;
 			height: 40px;
+			width: ${pillarLinkWidth740}px;
 		}
-	}
-	@media (min-width: 1280px) and (max-width: 1439px) {
-		li {
+		@media (min-width: 1280px) {
 			${headlineBold24}
-			width: 125px;
 			height: 52px;
+			width: 125px;
 		}
-	}
-	@media (min-width: 1440px) {
-		li {
+		@media (min-width: 1440px) {
 			width: 136px;
 		}
 	}
