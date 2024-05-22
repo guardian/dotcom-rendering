@@ -62,9 +62,9 @@ const getWindowWidth = () => window.innerWidth;
 
 const veggieBurgerDiameter = 40;
 
-const pillarLinkWidth740 = 108;
-const pillarLinkWidth1280 = 125;
-const pillarLinkWidth1440 = 136;
+const pillarLinkWidthTablet = 108;
+const pillarLinkWidthLeftCol = 125;
+const pillarLinkWidthWide = 136;
 
 const editionSwitcherMenuStyles = css`
 	grid-column: content-start / content-end;
@@ -90,27 +90,21 @@ const guardianLogoStyles = css`
 		${between.mobileMedium.and.tablet} {
 			height: 67px;
 		}
-		${from.tablet} {
+		${between.tablet.and.desktop} {
 			height: 96px;
 		}
-		@media (min-width: 1024px) and (max-width: 1279px) {
+		${between.desktop.and.leftCol} {
 			height: 94px;
 		}
-		@media (min-width: 1280px) and (max-width: 1439px) {
-			height: 115px;
-		}
-		@media (min-width: 1440px) {
+		${from.leftCol} {
 			height: 135px;
 		}
 	}
-	${from.mobileLandscape} {
+	${between.mobileLandscape.and.desktop} {
+		margin-bottom: 8px;
+	}
+	${from.desktop} {
 		margin-bottom: 10px;
-	}
-	@media (min-width: 1024px) and (max-width: 1279px) {
-		margin-bottom: ${space[3]};
-	}
-	@media (min-width: 1280px) {
-		margin-bottom: 14px;
 	}
 `;
 
@@ -135,18 +129,18 @@ const burgerStyles = css`
 		grid-row: 2;
 		align-self: center;
 	}
-	@media (min-width: 1024px) {
+	${from.desktop} {
 		grid-row: 1 / 2;
 		align-self: end;
 		justify-self: start;
-		margin-left: ${pillarLinkWidth740 * pillars.length + space[1]}px;
 		margin-bottom: ${space[3]}px;
+		margin-left: ${pillarLinkWidthTablet * pillars.length + space[2]}px;
 	}
-	@media (min-width: 1280px) {
-		margin-left: ${pillarLinkWidth1280 * pillars.length + space[1]}px;
+	${from.leftCol} {
+		margin-left: ${pillarLinkWidthLeftCol * pillars.length + space[2]}px;
 	}
-	@media (min-width: 1440px) {
-		margin-left: ${pillarLinkWidth1440 * pillars.length + space[1]}px;
+	${from.wide} {
+		margin-left: ${pillarLinkWidthWide * pillars.length + space[2]}px;
 	}
 `;
 
@@ -165,7 +159,7 @@ const pillarsNavStyles = css`
 	${headlineBold14}
 	margin-top: ${space[2]}px;
 	border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
-	@media (min-width: 1024px) {
+	${from.desktop} {
 		grid-row: 1 / 2;
 	}
 	ul {
@@ -184,15 +178,15 @@ const pillarsNavStyles = css`
 		${from.tablet} {
 			${headlineBold20}
 			height: ${space[10]}px;
-			width: ${pillarLinkWidth740}px;
+			width: ${pillarLinkWidthTablet}px;
 		}
-		@media (min-width: 1280px) {
+		${from.leftCol} {
 			${headlineBold24}
 			height: 52px;
-			width: 125px;
+			width: ${pillarLinkWidthLeftCol}px;
 		}
-		@media (min-width: 1440px) {
-			width: 136px;
+		${from.wide} {
+			width: ${pillarLinkWidthWide}px;
 		}
 	}
 `;
@@ -238,7 +232,7 @@ const sectionsNavStyles = css`
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
-	@media (min-width: 1280px) {
+	${from.leftCol} {
 		margin-top: 14px;
 	}
 `;
@@ -308,7 +302,7 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 								/>
 								{(index !== pillars.length - 1 ||
 									(index === pillars.length - 1 &&
-										windowWidth > 1023)) && (
+										windowWidth >= 980)) && (
 									<div css={pillarBarStyles} />
 								)}
 
