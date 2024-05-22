@@ -45,23 +45,21 @@ const topPadding = css`
 
 const decideHeadlineFont = (format: ArticleFormat) => {
 	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			{
-				switch (format.design) {
-					case ArticleDesign.Obituary:
-					case ArticleDesign.Comment:
-					case ArticleDesign.Editorial:
-						return headlineLight50;
-					case ArticleDesign.Feature:
-					case ArticleDesign.Review:
-					case ArticleDesign.Recipe:
-					case ArticleDesign.Interview:
-						return headlineBold50;
-					default:
-						return headlineMedium50;
-				}
+		case ArticleDisplay.Immersive: {
+			switch (format.design) {
+				case ArticleDesign.Obituary:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+					return headlineLight50;
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
+					return headlineBold50;
+				default:
+					return headlineMedium50;
 			}
-			return headlineBold50;
+		}
 		default:
 			switch (format.design) {
 				case ArticleDesign.Obituary:
@@ -107,6 +105,13 @@ const headlineFont = (format: ArticleFormat) => css`
 	}
 `;
 
+const invertedFontLineHeight = css`
+	line-height: 2.1875rem;
+	${from.tablet} {
+		line-height: 2.625rem;
+	}
+`;
+
 const labsFont = css`
 	${textSansBold28};
 	line-height: 2rem;
@@ -147,6 +152,7 @@ const invertedStyles = css`
 	position: relative;
 	white-space: pre-wrap;
 	padding-right: ${space[1]}px;
+	padding-bottom: ${space[1]}px;
 	box-shadow: -6px 0 0 ${themePalette('--headline-background')};
 	/* Box decoration is required to push the box shadow out on Firefox */
 	box-decoration-break: clone;
@@ -629,6 +635,7 @@ export const ArticleHeadline = ({
 											? labsFont
 											: headlineFont(format),
 										invertedWrapper,
+										invertedFontLineHeight,
 										zIndex,
 										css`
 											color: ${themePalette(
