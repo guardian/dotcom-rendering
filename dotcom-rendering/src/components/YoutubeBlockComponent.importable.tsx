@@ -4,7 +4,6 @@ import { body, palette, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import type { Switches } from '../../src/types/config';
-import { trackVideoInteraction } from '../client/ga/ga';
 import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';

@@ -6,7 +6,6 @@ import {
 	from,
 	textSans12,
 } from '@guardian/source-foundations';
-import { trackSponsorLogoLinkClick } from '../client/ga/ga';
 import { getOphanComponents } from '../lib/labs';
 import { palette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
@@ -255,7 +254,6 @@ export const Branding = ({ branding, format }: Props) => {
 					data-sponsor={branding.sponsorName.toLowerCase()}
 					rel="nofollow"
 					aria-label={`Visit the ${branding.sponsorName} website`}
-					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
 					data-testid="branding-logo"
 					data-component={ophanComponentName}
 					data-link-name={ophanComponentLink}

@@ -4,7 +4,6 @@ import {
 	textSans12,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
 import { getOphanComponents } from '../../../lib/labs';
@@ -72,11 +71,6 @@ export const CardBranding = ({ branding, format, onwardsSource }: Props) => {
 				data-sponsor={branding.sponsorName.toLowerCase()}
 				rel="nofollow"
 				aria-label={`Visit the ${branding.sponsorName} website`}
-				onClick={() =>
-					trackSponsorLogoLinkClick(
-						branding.sponsorName.toLowerCase(),
-					)
-				}
 				data-testid="card-branding-logo"
 			>
 				<img
