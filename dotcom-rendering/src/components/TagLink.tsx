@@ -4,10 +4,10 @@ import {
 	headlineBold17,
 	headlineBold20,
 	headlineMedium14,
-	palette,
 	space,
 } from '@guardian/source-foundations';
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
+import { palette } from 'src/palette';
 
 interface Props {
 	sectionLabel: string;
@@ -25,9 +25,9 @@ const TagLinkStyle = css`
 	padding: ${space[2]}px;
 	border-radius: ${space[2]}px;
 	text-decoration: none;
-	background-color: ${palette.sport[800]};
-	color: ${palette.sport[400]};
-	fill: ${palette.sport[400]};
+	background-color: ${palette('--tag-link-background')};
+	color: ${palette('--tag-link-accent')};
+	fill: ${palette('--tag-link-accent')};
 	margin-bottom: ${space[2]}px;
 	:hover {
 		text-decoration: underline;
@@ -56,7 +56,7 @@ const tagButtonStyles = css`
 
 const arrowStyles = css`
 	svg {
-		fill: ${palette.sport[800]};
+		fill: ${palette('--tag-link-background')};
 		margin-top: 5px;
 		height: 14px;
 		width: 14px;
@@ -71,9 +71,9 @@ const arrowStyles = css`
 	border: none;
 	cursor: pointer;
 	transition: background-color 0.2s;
-	background-color: ${palette.sport[400]};
+	background-color: ${palette('--tag-link-accent')};
 	:hover {
-		background-color: ${palette.sport[400]};
+		background-color: ${palette('--tag-link-accent')};
 	}
 `;
 
