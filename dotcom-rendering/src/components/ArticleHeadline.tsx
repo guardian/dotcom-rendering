@@ -139,6 +139,10 @@ const displayFlex = css`
 	flex-direction: column;
 `;
 
+const shiftSlightly = css`
+	margin-bottom: 16px;
+`;
+
 const invertedStyles = css`
 	position: relative;
 	white-space: pre-wrap;
@@ -602,6 +606,7 @@ export const ArticleHeadline = ({
 						// and a black background (only for the text)
 						<div
 							css={[
+								shiftSlightly,
 								maxWidth,
 								displayFlex,
 								decideBottomPadding({
