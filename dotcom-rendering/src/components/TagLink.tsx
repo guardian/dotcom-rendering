@@ -18,42 +18,46 @@ interface Props {
 
 const TagLinkStyle = css`
 	display: flex;
-	fill: ${palette.sport[400]};
-	justify-content: space-between;
-	border-radius: 15px;
-	background-color: ${palette.sport[800]};
-	padding: 10px 9px;
 	flex-direction: row;
+	justify-content: space-between;
 	align-items: center;
 	height: 44px;
 	width: 100%;
+	padding: 10px 9px;
+	border-radius: 15px;
 	text-decoration: none;
+	background-color: ${palette.sport[800]};
 	color: ${palette.sport[400]};
+	fill: ${palette.sport[400]};
 	:hover {
 		text-decoration: underline;
 	}
 	${from.leftCol} {
 		align-items: start;
-		gap: 8px;
+		gap: ${space[2]}px;
 		height: auto;
 		width: auto;
 		flex-direction: column;
 	}
 `;
+const labelStyles = css`
+	${headlineBold20};
+`;
+
 const tagButtonStyles = css`
+	display: flex;
+	align-items: baseline;
+	gap: ${space[2]}px;
 	${until.wide} {
 		${headlineMedium14};
 	}
 	${headlineMedium17};
-	display: flex;
-	align-items: baseline;
-	gap: 8px;
 `;
 
 const arrowStyles = css`
 	svg {
 		fill: ${palette.sport[800]};
-		margin-top: 4px;
+		margin-top: ${space[1]}px;
 		height: 14px;
 		width: 14px;
 	}
@@ -88,13 +92,7 @@ export const TagLink = ({
 			data-component="series"
 			data-link-name="article series"
 		>
-			<div
-				css={css`
-					${headlineBold20};
-				`}
-			>
-				{sectionLabel}
-			</div>
+			<div css={labelStyles}>{sectionLabel}</div>
 			<div css={tagButtonStyles}>
 				<div>Discover More</div>
 				<span css={arrowStyles}>
