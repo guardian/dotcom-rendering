@@ -307,6 +307,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const inTagLinkTest = false;
 
 	return (
 		<>
@@ -467,7 +468,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 			<main
 				data-layout="CommentLayout"
-				className="sticky-title-experiment"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -525,6 +526,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">

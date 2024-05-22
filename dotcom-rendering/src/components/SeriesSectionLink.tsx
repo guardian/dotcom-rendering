@@ -26,6 +26,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	isMatch?: boolean;
+	inTagLinkTest?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -164,6 +165,7 @@ export const SeriesSectionLink = ({
 	sectionUrl,
 	guardianBaseURL,
 	isMatch,
+	inTagLinkTest,
 }: Props) => {
 	const observerTag = tags.find(
 		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
@@ -179,7 +181,6 @@ export const SeriesSectionLink = ({
 	);
 
 	const isEuros2024 = tags.find((tag) => tag.id === 'football/euro-2024');
-	const isTagLinkTest = true; // TODO: Add logic here to determine if we're in the tag link test
 
 	// If we have a tag, use it to show 2 section titles
 	// Observer opinion (commentisfree) articles should prioritise
@@ -194,7 +195,7 @@ export const SeriesSectionLink = ({
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
-	if (isEuros2024 && isTagLinkTest) {
+	if (isEuros2024 && inTagLinkTest) {
 		return (
 			<TagLink
 				sectionLabel={'Euro 24'}

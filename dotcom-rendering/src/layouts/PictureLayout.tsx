@@ -287,6 +287,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+	const inTagLinkTest = false;
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -446,6 +447,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 			<main
 				data-layout="PictureLayout"
 				id="maincontent"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
@@ -476,6 +478,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">

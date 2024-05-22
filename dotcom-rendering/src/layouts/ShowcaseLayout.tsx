@@ -249,6 +249,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+	const inTagLinkTest = false;
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -527,7 +528,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main
 				data-layout="ShowcaseLayout"
-				className="sticky-title-experiment"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 				id="maincontent"
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
@@ -583,6 +584,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">

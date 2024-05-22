@@ -413,6 +413,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
+	const inTagLinkTest = false;
 	return (
 		<>
 			{isWeb && (
@@ -594,7 +595,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="StandardLayout"
-				className="sticky-title-experiment"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -685,6 +686,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 								isMatch={!!footballMatchUrl}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">

@@ -66,6 +66,7 @@ export const ArticleTitle = ({
 				sectionUrl={sectionUrl}
 				guardianBaseURL={guardianBaseURL}
 				isMatch={isMatch}
+				inTagLinkTest={inTagLinkTest}
 			/>
 		</div>
 	</div>

@@ -38,7 +38,7 @@ if (area === 'title') {
 	if (area === 'title') {
 		return css`
 			grid-area: ${area};
-			.sticky-title-experiment & {
+			.sticky-tag-link-test & {
 				z-index: 10;
 				position: sticky;
 				top: 0;
