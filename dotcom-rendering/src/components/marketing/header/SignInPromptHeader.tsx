@@ -15,29 +15,31 @@ import {
 import {
 	Hide,
 	LinkButton,
+	SvgArrowRightStraight,
 	themeButtonReaderRevenueBrand,
 } from '@guardian/source/react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';
 import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';
 
-const padLeftStyles = css`
-	padding-left: ${space[3]}px;
+const gridStyles = css`
+	display: grid;
+
+	grid-template-rows: auto;
+	grid-template-columns: auto;
+
+	grid-template-areas:
+		'heading     cta1'
+		'subheading  .   ';
 `;
 
-const flexRowStyles = css`
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+const textStyles = css`
+	margin-right: ${space[3]}px;
 `;
 
-const flexColumnStyles = css`
-	display: flex;
-	flex-direction: column;
-`;
+const headingStyles = css`
+	grid-area: 'heading';
 
-const headingStyles = () => css`
 	color: ${sourcePalette.neutral[100]};
 	${headlineBold20}
 
@@ -47,42 +49,71 @@ const headingStyles = () => css`
 `;
 
 const subHeadingStyles = css`
+	grid-area: 'subheading';
+
 	color: ${sourcePalette.neutral[100]};
 	${textSans14}
 `;
 
 const buttonStyles = css`
-	flex-grow: 0;
-	width: fit-content;
+	margin: 0 0 0 ${space[2]}px;
+
+	${from.tablet} {
+		margin: ${space[1]}px 0 0 ${space[2]}px;
+	}
 `;
 
 const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 	const { heading, subheading, primaryCta } = props.content;
 
-	return (
-		<Hide until="tablet">
-			<div css={[flexRowStyles]}>
-				<div css={flexColumnStyles}>
-					<h2 css={headingStyles}>{heading}</h2>
-					<h3 css={subHeadingStyles}>{subheading}</h3>
-				</div>
+	const onClick = () => props.onCtaClick?.();
 
-				<div css={[padLeftStyles, flexColumnStyles]}>
-					{primaryCta && (
+	return (
+		<div css={gridStyles}>
+			<Hide until="tablet">
+				<div css={textStyles}>
+					<h2 css={headingStyles}>{heading}</h2>
+					<span css={subHeadingStyles}>{subheading}</span>
+				</div>
+			</Hide>
+
+			{primaryCta && (
+				<>
+					<Hide until="tablet">
 						<LinkButton
 							theme={themeButtonReaderRevenueBrand}
 							priority="primary"
 							href={primaryCta.ctaUrl}
+							icon={<SvgArrowRightStraight />}
+							iconSide="right"
+							onClick={onClick}
+							nudgeIcon={true}
 							size="xsmall"
-							onClick={props.onCtaClick}
 							css={buttonStyles}
+							style={{ gridArea: 'cta1' }}
 						>
 							{primaryCta.ctaText}
 						</LinkButton>
-					)}
-				</div>
-			</div>
-		</Hide>
+					</Hide>
+
+					<Hide from="tablet">
+						<LinkButton
+							theme={themeButtonReaderRevenueBrand}
+							priority="primary"
+							href={
+								props.mobileContent?.primaryCta?.ctaUrl ??
+								primaryCta.ctaUrl
+							}
+							css={buttonStyles}
+							size="xsmall"
+						>
+							{props.mobileContent?.primaryCta?.ctaText ??
+								primaryCta.ctaText}
+						</LinkButton>
+					</Hide>
+				</>
+			)}
+		</div>
 	);
 };
 

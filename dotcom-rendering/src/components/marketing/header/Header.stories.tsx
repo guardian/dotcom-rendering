@@ -7,47 +7,57 @@ import type { Meta } from '@storybook/react';
 import { HeaderDecorator } from './common/HeaderDecorator';
 import { HeaderUnvalidated as Header } from './Header';
 
+const baseArgs = {
+	content: {
+		heading: 'Support the Guardian',
+		subheading: 'Available for everyone, funded by readers',
+		primaryCta: {
+			baseUrl: 'https://support.theguardian.com/contribute',
+			text: 'Contribute',
+		},
+	},
+	mobileContent: {
+		heading: '',
+		subheading: '',
+		primaryCta: {
+			baseUrl: 'https://support.theguardian.com/contribute',
+			text: 'Support us',
+		},
+	},
+	tracking: {
+		ophanPageId: 'pvid',
+		platformId: 'GUARDIAN_WEB',
+		referrerUrl: 'https://theguardian.com/uk',
+		clientName: 'dcr',
+		abTestName: 'test-name',
+		abTestVariant: 'variant-name',
+		campaignCode: 'campaign-code',
+		componentType: 'ACQUISITIONS_HEADER',
+	},
+	countryCode: 'GB',
+};
+
 export default {
 	component: Header,
 	title: 'Components/marketing/Header',
 	decorators: [HeaderDecorator],
 	render: (props) => <Header {...props} />,
+	args: baseArgs,
+} as Meta<typeof Header>;
+
+export const DefaultHeader = {};
+
+export const WithSecondaryCta = {
 	args: {
 		content: {
-			heading: 'Support the Guardian',
-			subheading: 'Available for everyone, funded by readers',
-			primaryCta: {
-				baseUrl: 'https://support.theguardian.com/contribute',
-				text: 'Contribute',
-			},
+			...baseArgs.content,
 			secondaryCta: {
 				baseUrl: 'https://support.theguardian.com/subscribe',
 				text: 'Subscribe',
 			},
 		},
-		mobileContent: {
-			heading: '',
-			subheading: '',
-			primaryCta: {
-				baseUrl: 'https://support.theguardian.com/contribute',
-				text: 'Support us',
-			},
-		},
-		tracking: {
-			ophanPageId: 'pvid',
-			platformId: 'GUARDIAN_WEB',
-			referrerUrl: 'https://theguardian.com/uk',
-			clientName: 'dcr',
-			abTestName: 'test-name',
-			abTestVariant: 'variant-name',
-			campaignCode: 'campaign-code',
-			componentType: 'ACQUISITIONS_HEADER',
-		},
-		countryCode: 'GB',
 	},
-} as Meta<typeof Header>;
-
-export const DefaultHeader = {};
+};
 
 export const ThankYouHeader = {
 	args: {

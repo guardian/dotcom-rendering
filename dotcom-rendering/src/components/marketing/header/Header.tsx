@@ -22,20 +22,24 @@ import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';
 import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';
 
-const flexRowStyles = css`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
+const gridStyles = css`
+	display: grid;
+
+	grid-template-rows: auto;
+	grid-template-columns: auto;
+
+	grid-template-areas:
+		'heading     cta1  cta2'
+		'subheading  .     .   ';
 `;
 
 const textStyles = css`
-	display: flex;
-	flex-direction: column;
-	margin-right: ${space[5]}px;
+	margin-right: ${space[3]}px;
 `;
 
-const messageStyles = css`
+const headingStyles = css`
+	grid-area: 'heading';
+
 	color: ${sourcePalette.neutral[100]};
 	${headlineBold20}
 
@@ -44,13 +48,19 @@ const messageStyles = css`
 	}
 `;
 
-const subMessageStyles = css`
+const subHeadingStyles = css`
+	grid-area: 'subheading';
+
 	color: ${sourcePalette.neutral[100]};
 	${textSans14}
 `;
 
 const buttonStyles = css`
-	margin-right: ${space[2]}px;
+	margin: 0 0 0 ${space[2]}px;
+
+	${from.tablet} {
+		margin: ${space[1]}px 0 0 ${space[2]}px;
+	}
 `;
 
 const Header: ReactComponent<HeaderRenderProps> = (
@@ -58,16 +68,14 @@ const Header: ReactComponent<HeaderRenderProps> = (
 ) => {
 	const { heading, subheading, primaryCta, secondaryCta } = props.content;
 
-	const onClick = () => {
-		props.onCtaClick?.();
-	};
+	const onClick = () => props.onCtaClick?.();
+
 	return (
-		<div css={flexRowStyles}>
+		<div css={gridStyles}>
 			<Hide until="tablet">
 				<div css={textStyles}>
-					<h2 css={messageStyles}>{heading}</h2>
-
-					<span css={subMessageStyles}>{subheading}</span>
+					<h2 css={headingStyles}>{heading}</h2>
+					<span css={subHeadingStyles}>{subheading}</span>
 				</div>
 			</Hide>
 
@@ -83,7 +91,8 @@ const Header: ReactComponent<HeaderRenderProps> = (
 							iconSide="right"
 							nudgeIcon={true}
 							size="xsmall"
-							css={buttonStyles}
+							css={[buttonStyles]}
+							style={{ gridArea: 'cta1' }}
 						>
 							{primaryCta.ctaText}
 						</LinkButton>
@@ -98,8 +107,6 @@ const Header: ReactComponent<HeaderRenderProps> = (
 								primaryCta.ctaUrl
 							}
 							css={buttonStyles}
-							icon={<SvgArrowRightStraight />}
-							iconSide="right"
 							size="xsmall"
 						>
 							{props.mobileContent?.primaryCta?.ctaText ??
@@ -120,6 +127,7 @@ const Header: ReactComponent<HeaderRenderProps> = (
 						nudgeIcon={true}
 						css={buttonStyles}
 						size="xsmall"
+						style={{ gridArea: 'cta2' }}
 					>
 						{secondaryCta.ctaText}
 					</LinkButton>
@@ -131,4 +139,8 @@ const Header: ReactComponent<HeaderRenderProps> = (
 
 const unvalidated = headerWrapper(Header);
 const validated = validatedHeaderWrapper(Header);
-export { validated as Header, unvalidated as HeaderUnvalidated };
+export {
+	validated as Header,
+	unvalidated as HeaderUnvalidated,
+	Header as HeaderComponent,
+};
