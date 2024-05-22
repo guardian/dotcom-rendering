@@ -165,7 +165,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 						padding-bottom: ${space[6]}px;
 						padding-top: ${space[2]}px;
 						${from.tablet} {
-							padding-bottom: none;
+							padding-bottom: 0;
 						}
 					`;
 				case ArticleDisplay.Showcase:
@@ -194,7 +194,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 						padding-top: ${space[2]}px;
 
 						${from.tablet} {
-							padding-bottom: none;
+							padding-bottom: 0;
 						}
 					`;
 				default:
