@@ -100,7 +100,7 @@ const Header: ReactComponent<HeaderRenderProps> = (
 							css={buttonStyles}
 							icon={<SvgArrowRightStraight />}
 							iconSide="right"
-							size="small"
+							size="xsmall"
 						>
 							{props.mobileContent?.primaryCta?.ctaText ??
 								primaryCta.ctaText}
