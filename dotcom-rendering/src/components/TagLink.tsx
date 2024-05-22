@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineBold17,
 	headlineBold20,
 	headlineMedium14,
-	headlineMedium17,
 	palette,
 	space,
-	until,
 } from '@guardian/source-foundations';
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
 
@@ -23,41 +22,42 @@ const TagLinkStyle = css`
 	align-items: center;
 	height: 44px;
 	width: 100%;
-	padding: 10px 9px;
-	border-radius: 15px;
+	padding: ${space[2]}px;
+	border-radius: ${space[2]}px;
 	text-decoration: none;
 	background-color: ${palette.sport[800]};
 	color: ${palette.sport[400]};
 	fill: ${palette.sport[400]};
+	margin-bottom: ${space[2]}px;
 	:hover {
 		text-decoration: underline;
 	}
 	${from.leftCol} {
 		align-items: start;
-		gap: ${space[2]}px;
+		gap: ${space[3]}px;
 		height: auto;
 		width: auto;
 		flex-direction: column;
 	}
 `;
 const labelStyles = css`
-	${headlineBold20};
+	${headlineBold17};
+	${from.desktop} {
+		${headlineBold20};
+	}
 `;
 
 const tagButtonStyles = css`
 	display: flex;
-	align-items: baseline;
+	align-items: center;
+	${headlineMedium14};
 	gap: ${space[2]}px;
-	${until.wide} {
-		${headlineMedium14};
-	}
-	${headlineMedium17};
 `;
 
 const arrowStyles = css`
 	svg {
 		fill: ${palette.sport[800]};
-		margin-top: ${space[1]}px;
+		margin-top: 5px;
 		height: 14px;
 		width: 14px;
 	}
@@ -65,9 +65,6 @@ const arrowStyles = css`
 	display: inline-block;
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[2]}px;
-	${until.tablet} {
-		margin-left: ${space[2]}px;
-	}
 	border-radius: 50%;
 	height: 24px;
 	width: 24px;
