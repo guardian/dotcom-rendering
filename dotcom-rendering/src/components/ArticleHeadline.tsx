@@ -303,7 +303,6 @@ const decideBottomPadding = ({
 			`;
 		default: {
 			switch (format.design) {
-				case ArticleDesign.Review:
 				case ArticleDesign.Interview: {
 					return css`
 						padding-bottom: ${space[5]}px;
