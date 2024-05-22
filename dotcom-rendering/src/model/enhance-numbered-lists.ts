@@ -1,4 +1,8 @@
-import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDisplay,
+	type ArticleFormat,
+	isUndefined,
+} from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import type { FEElement, TextBlockElement } from '../types/content';
 
@@ -153,7 +157,8 @@ const inlineStarRatings = (elements: FEElement[]): FEElement[] =>
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isStarRating(thisElement)
 		) {
-			const rating = extractStarCount(thisElement) ?? 0;
+			const rating = extractStarCount(thisElement);
+			if (isUndefined(rating)) return thisElement;
 			// Inline this image
 			return {
 				_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
