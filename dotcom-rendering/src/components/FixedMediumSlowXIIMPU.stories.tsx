@@ -27,6 +27,7 @@ export const OneTrail = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -42,6 +43,7 @@ export const TwoTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -57,6 +59,7 @@ export const ThreeTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -72,6 +75,7 @@ export const FourTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -87,6 +91,7 @@ export const FiveTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 5)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -102,6 +107,7 @@ export const SixTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 6)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -117,6 +123,7 @@ export const SevenTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 7)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -132,6 +139,7 @@ export const EightTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 8)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -147,6 +155,7 @@ export const NineTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 9)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

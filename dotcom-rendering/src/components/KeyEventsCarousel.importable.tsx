@@ -14,6 +14,7 @@ interface Props {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
+	absoluteServerTimes: boolean;
 }
 type ValidBlock = Block & {
 	title: string;
@@ -99,6 +100,7 @@ export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	id,
+	absoluteServerTimes,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const cardWidth = 200;
@@ -137,6 +139,7 @@ export const KeyEventsCarousel = ({
 								isSummary={keyEvent.attributes.summary}
 								title={keyEvent.title}
 								cardPosition={`${index} of ${carouselLength}`}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						);
 					})}

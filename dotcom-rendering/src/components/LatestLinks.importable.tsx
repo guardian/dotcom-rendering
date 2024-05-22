@@ -18,6 +18,7 @@ import { DateTime } from './DateTime';
 type Props = {
 	id: string;
 	direction: 'horizontal' | 'vertical';
+	absoluteServerTimes: boolean;
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
 };
@@ -92,6 +93,7 @@ export const LatestLinks = ({
 	direction,
 	isDynamo,
 	containerPalette,
+	absoluteServerTimes,
 }: Props) => {
 	const { data } = useApi<{
 		blocks: Array<{
@@ -173,6 +175,9 @@ export const LatestLinks = ({
 												)
 											}
 											display="relative"
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
 											editionId={'UK'}
 											showWeekday={false}
 											showDate={true}

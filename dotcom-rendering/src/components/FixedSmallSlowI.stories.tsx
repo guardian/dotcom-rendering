@@ -24,7 +24,12 @@ export const Default = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedSmallSlowI trails={trails} showAge={true} imageLoading="eager" />
+		<FixedSmallSlowI
+			trails={trails}
+			showAge={true}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 Default.storyName = 'FixedSmallSlowI';

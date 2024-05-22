@@ -21,6 +21,7 @@ type Props = {
 	blockId: string;
 	isPinnedPost: boolean;
 	isOriginalPinnedPost: boolean;
+	absoluteServerTimes: boolean;
 	host?: string;
 	pageId?: string;
 };
@@ -33,6 +34,7 @@ const FirstPublished = ({
 	isOriginalPinnedPost,
 	host,
 	pageId,
+	absoluteServerTimes,
 }: Props) => {
 	const baseHref = host && pageId ? joinUrl(host, pageId) : '';
 	const publishedDate = new Date(firstPublished);
@@ -69,6 +71,7 @@ const FirstPublished = ({
 						<DateTime
 							date={new Date(firstPublished)}
 							display="relative"
+							absoluteServerTimes={absoluteServerTimes}
 							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}

@@ -141,9 +141,15 @@ type Props = {
 	pinnedPost: Block;
 	children: React.ReactNode;
 	format: ArticleFormat;
+	absoluteServerTimes: boolean;
 };
 
-export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
+export const PinnedPost = ({
+	pinnedPost,
+	children,
+	format,
+	absoluteServerTimes,
+}: Props) => {
 	const palette = decidePalette(format);
 	return (
 		<div
@@ -171,6 +177,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 						<DateTime
 							date={new Date(pinnedPost.blockFirstPublished)}
 							display="relative"
+							absoluteServerTimes={absoluteServerTimes}
 							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}
