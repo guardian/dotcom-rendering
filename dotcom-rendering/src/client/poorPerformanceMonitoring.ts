@@ -1,6 +1,7 @@
 import { log } from '@guardian/libs';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { recordExperiences } from './ophan/ophan';
+import {} from 'web-vitals';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
 	log('dotcom', '⏱', name, data);

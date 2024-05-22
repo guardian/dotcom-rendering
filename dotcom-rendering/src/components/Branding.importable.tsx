@@ -199,7 +199,6 @@ type Props = {
  * (No visual story exists)
  */
 export const Branding = ({ branding, format }: Props) => {
-	const sponsorId = branding.sponsorName.toLowerCase();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 

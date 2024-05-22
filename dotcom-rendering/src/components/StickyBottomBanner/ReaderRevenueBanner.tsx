@@ -9,7 +9,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
 import { useEffect, useState } from 'react';
-import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
@@ -259,9 +258,9 @@ type RemoteBannerProps = BannerProps & {
 };
 
 const RemoteBanner = ({
-	componentTypeName,
-	displayEvent,
-	meta,
+	// componentTypeName,
+	// displayEvent,
+	// meta,
 	module,
 	fetchEmail,
 }: RemoteBannerProps) => {
@@ -289,14 +288,7 @@ const RemoteBanner = ({
 			});
 	}, [module]);
 
-	useOnce(() => {
-		const { componentType } = meta;
-
-		// track banner view event in Google Analytics for subscriptions banner
-		if (componentType === componentTypeName) {
-			trackNonClickInteraction(displayEvent);
-		}
-	}, [hasBeenSeen, meta]);
+	useOnce(() => {}, [hasBeenSeen]);
 
 	if (Banner !== undefined) {
 		return (
