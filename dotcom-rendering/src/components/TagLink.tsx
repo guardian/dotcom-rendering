@@ -7,7 +7,7 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
-import { palette } from 'src/palette';
+import { palette } from '../palette';
 
 interface Props {
 	sectionLabel: string;
