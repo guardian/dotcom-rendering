@@ -66,7 +66,7 @@ const pillarLinkWidth740 = 108;
 const pillarLinkWidth1280 = 125;
 const pillarLinkWidth1440 = 136;
 
-const editionsMenuStyles = css`
+const editionSwitcherMenuStyles = css`
 	grid-column: content-start / content-end;
 	grid-row: 1;
 	${from.mobileMedium} {
@@ -257,7 +257,7 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 	return (
 		<TitlepieceGrid type="header">
 			{/* Edition menu */}
-			<div css={editionsMenuStyles}>
+			<div css={editionSwitcherMenuStyles}>
 				<TitlepieceEditionDropdown
 					editionId={editionId}
 					dataLinkName={''}

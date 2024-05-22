@@ -30,8 +30,8 @@ export const TitlepieceEditionDropdown = ({
 		url: edition.url,
 		title: edition.longTitle,
 		dataLinkName: nestedOphanComponents(
-			'nav4',
-			'topbar',
+			'header',
+			'titlepiece',
 			`edition-picker: ${edition.editionId}`,
 		),
 		isActive: editionId === edition.editionId,
