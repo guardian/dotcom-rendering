@@ -249,7 +249,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
-	const inTagLinkTest = false;
+
+	const inTagLinkTest =
+		article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
 

@@ -307,7 +307,8 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
-	const inTagLinkTest = false;
+	const inTagLinkTest =
+		article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	return (
 		<>

@@ -311,7 +311,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
-	const inTagLinkTest = false;
+	const inTagLinkTest =
+		article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	return (
 		<>

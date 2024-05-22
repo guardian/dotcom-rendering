@@ -314,7 +314,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-	const inTagLinkTest = false;
+	const inTagLinkTest =
+		article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
