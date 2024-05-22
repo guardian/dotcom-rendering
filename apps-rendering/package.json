@@ -52,7 +52,7 @@
 		"@guardian/libs": "16.0.0",
 		"@guardian/renditions": "0.2.0",
 		"@guardian/source": "0.3.0",
-		"@guardian/source-development-kitchen": "0.0.0-canary-20240516160005",
+		"@guardian/source-development-kitchen": "0.0.0-canary-20240521161616",
 		"@smithy/property-provider": "2.0.16",
 		"@storybook/addon-essentials": "7.6.18",
 		"@storybook/addons": "7.6.18",
