@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -549,22 +549,19 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												article.webPublicationDateDeprecated
 											}
 											hasStarRating={
-												typeof article.starRating ===
-												'number'
+												!isUndefined(article.starRating)
 											}
 										/>
 									)}
 								</div>
-								{article.starRating !== undefined ? (
+								{!isUndefined(article.starRating) ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={article.starRating}
 											size="large"
 										/>
 									</div>
-								) : (
-									<></>
-								)}
+								) : null}
 							</GridItem>
 						</HeadlineGrid>
 					</Section>

@@ -5,6 +5,7 @@ import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { KeyTakeaway } from '../types/content';
+import type { DCRArticle } from '../types/frontend';
 import { KeyTakeaway as KeyTakeawayComponent } from './KeyTakeaway';
 
 interface KeyTakeawaysProps {
@@ -18,7 +19,7 @@ interface KeyTakeawaysProps {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: DCRArticle['starRating'];
 	keyTakeaways: KeyTakeaway[];
 	RenderArticleElement: ArticleElementRenderer;
 	/**

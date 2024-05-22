@@ -6,6 +6,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
+import type { DCRArticle } from '../types/frontend';
 
 const mainMedia = css`
 	height: 100%;
@@ -73,7 +74,7 @@ type Props = {
 	format: ArticleFormat;
 	elements: FEElement[];
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: DCRArticle['starRating'];
 	host?: string;
 	pageId: string;
 	webTitle: string;

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { SvgStar, SvgStarOutline } from '@guardian/source-react-components';
 import type { RatingSizeType } from '../../types/content';
+import type { DCRArticle } from '../../types/frontend';
 
 const padding = css`
 	padding: 0 2px;
@@ -28,7 +29,7 @@ const determineSize = (size: RatingSizeType) => {
 };
 
 type Props = {
-	rating: number;
+	rating: NonNullable<DCRArticle['starRating']>;
 	size: RatingSizeType;
 };
 

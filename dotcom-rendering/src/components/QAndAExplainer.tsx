@@ -5,6 +5,7 @@ import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { QAndAExplainer as QAndAExplainerModel } from '../types/content';
+import type { DCRArticle } from '../types/frontend';
 import { Subheading } from './Subheading';
 
 interface Props {
@@ -19,7 +20,7 @@ interface Props {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: DCRArticle['starRating'];
 	RenderArticleElement: ArticleElementRenderer;
 }
 

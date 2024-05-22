@@ -265,7 +265,7 @@ export type FEFrontCard = {
 		webPublicationDateOption?: number;
 		lastModifiedOption?: number;
 		trailText?: string;
-		starRating?: number;
+		starRating?: 0 | 1 | 2 | 3 | 4 | 5;
 		shortUrlPath?: string;
 		shortUrl: string;
 		group: string;
@@ -303,7 +303,7 @@ export type DCRFrontCard = {
 	headline: string;
 	showQuotedHeadline: boolean;
 	trailText?: string;
-	starRating?: number;
+	starRating?: 0 | 1 | 2 | 3 | 4 | 5;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
 	kickerText?: string;

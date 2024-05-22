@@ -1763,6 +1763,14 @@
                     "type": "string"
                 },
                 "starRating": {
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
                     "type": "number"
                 },
                 "isAvatar": {
@@ -2611,6 +2619,14 @@
                     "type": "string"
                 },
                 "rating": {
+                    "enum": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
                     "type": "number"
                 },
                 "size": {

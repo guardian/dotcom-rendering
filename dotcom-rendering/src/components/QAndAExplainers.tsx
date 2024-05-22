@@ -3,6 +3,7 @@ import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { QAndAExplainer } from '../types/content';
+import type { DCRArticle } from '../types/frontend';
 import { QAndAExplainer as QAndAExplainerComponent } from './QAndAExplainer';
 
 interface Props {
@@ -17,7 +18,7 @@ interface Props {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: DCRArticle['starRating'];
 	RenderArticleElement: ArticleElementRenderer;
 }
 

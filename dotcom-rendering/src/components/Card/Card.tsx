@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -19,6 +19,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { DCRArticle } from '../../types/frontend';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import type { Palette } from '../../types/palette';
@@ -84,7 +85,7 @@ export type Props = {
 	isPlayableMediaCard?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	starRating?: number;
+	starRating?: DCRArticle['starRating'];
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
@@ -123,7 +124,7 @@ const StarRatingComponent = ({
 	rating,
 	cardHasImage,
 }: {
-	rating: number;
+	rating: NonNullable<DCRArticle['starRating']>;
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
@@ -598,7 +599,7 @@ export const Card = ({
 								isExternalLink={isExternalLink}
 								isOnwardContent={isOnwardContent}
 							/>
-							{starRating !== undefined ? (
+							{!isUndefined(starRating) ? (
 								<StarRatingComponent
 									rating={starRating}
 									cardHasImage={!!image}

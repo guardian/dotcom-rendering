@@ -22,7 +22,7 @@ interface FERichLinkType {
 	tags: TagType[];
 	sponsorName: string;
 	format: FEFormat;
-	starRating?: number;
+	starRating?: 0 | 1 | 2 | 3 | 4 | 5;
 	contributorImage?: string;
 	imageAsset?: ImageAsset;
 }

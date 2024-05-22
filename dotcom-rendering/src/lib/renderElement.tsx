@@ -68,6 +68,7 @@ import {
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
+import type { DCRArticle } from '../types/frontend';
 import type { EditionId } from './edition';
 
 type Props = {
@@ -77,7 +78,7 @@ type Props = {
 	index: number;
 	isMainMedia: boolean;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: DCRArticle['starRating'];
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;

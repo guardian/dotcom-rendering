@@ -1,4 +1,5 @@
 import type { ImageBlockElement } from '../types/content';
+import type { DCRArticle } from '../types/frontend';
 import { ImageComponent } from './ImageComponent';
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 	hideCaption?: boolean;
 	title?: string;
 	isMainMedia?: boolean;
-	starRating?: number;
+	starRating?: DCRArticle['starRating'];
 	isAvatar?: boolean;
 	isTimeline?: boolean;
 };

@@ -84,7 +84,7 @@ export interface FEArticleType {
 	beaconURL: string;
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
-	starRating?: number;
+	starRating?: 0 | 1 | 2 | 3 | 4 | 5;
 	trailText: string;
 	badge?: FEArticleBadgeType;
 
