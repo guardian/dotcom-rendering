@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import {
+	between,
+	from,
 	headlineBold14,
 	headlineBold17,
 	headlineBold20,
@@ -67,7 +69,7 @@ const pillarLinkWidth1440 = 136;
 const editionsMenuStyles = css`
 	grid-column: content-start / content-end;
 	grid-row: 1;
-	@media (min-width: 375px) {
+	${from.mobileMedium} {
 		justify-self: end;
 	}
 `;
@@ -80,15 +82,15 @@ const guardianLogoStyles = css`
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
 	margin-right: ${veggieBurgerDiameter + space[3]}px;
-	@media (min-width: 375px) {
+	${from.mobileMedium} {
 		margin-right: 0;
 	}
 	svg {
 		height: 49px;
-		@media (min-width: 375px) and (max-width: 739px) {
+		${between.mobileMedium.and.tablet} {
 			height: 67px;
 		}
-		@media (min-width: 740px) and (max-width: 1023px) {
+		${from.tablet} {
 			height: 96px;
 		}
 		@media (min-width: 1024px) and (max-width: 1279px) {
@@ -101,7 +103,7 @@ const guardianLogoStyles = css`
 			height: 135px;
 		}
 	}
-	@media (min-width: 480px) and (max-width: 1023px) {
+	${from.mobileLandscape} {
 		margin-bottom: 10px;
 	}
 	@media (min-width: 1024px) and (max-width: 1279px) {
@@ -129,7 +131,7 @@ const burgerStyles = css`
 			'--masthead-veggie-burger-background-hover',
 		)};
 	}
-	@media (min-width: 375px) {
+	${from.mobileMedium} {
 		grid-row: 2;
 		align-self: center;
 	}
@@ -172,17 +174,14 @@ const pillarsNavStyles = css`
 	li {
 		height: 28px;
 		padding-right: ${space[1]}px;
-		@media (min-width: 375px) and (max-width: 479px) {
+		${between.mobileMedium.and.mobileLandscape} {
 			height: 34px;
 		}
-		@media (min-width: 480px) and (max-width: 739px) {
+		${between.mobileLandscape.and.tablet} {
 			${headlineBold17}
 			height: 37px;
 		}
-		@media (min-width: 740px) and (max-width: 1023px) {
-			${headlineBold17}
-		}
-		@media (min-width: 740px) and (max-width: 1279px) {
+		${from.tablet} {
 			${headlineBold20}
 			height: ${space[10]}px;
 			width: ${pillarLinkWidth740}px;
@@ -236,7 +235,7 @@ const sectionsNavStyles = css`
 	li {
 		white-space: nowrap;
 	}
-	@media (min-width: 375px) and (max-width: 1279px) {
+	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
 	@media (min-width: 1280px) {
