@@ -6292,15 +6292,6 @@ const paletteColours = {
 		light: recommendationCountLight,
 		dark: recommendationCountDark,
 	},
-	'--tag-link-background': {
-		light: tagLinkBackground,
-		dark: tagLinkBackground,
-	},
-
-	'--tag-link-accent': {
-		light: tagLinkAccent,
-		dark: tagLinkAccent,
-	},
 	'--recommendation-count-arrow': {
 		light: recommendationCountArrowLight,
 		dark: recommendationCountArrowDark,
@@ -6508,6 +6499,14 @@ const paletteColours = {
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[0],
+	},
+	'--tag-link-accent': {
+		light: tagLinkAccent,
+		dark: tagLinkAccent,
+	},
+	'--tag-link-background': {
+		light: tagLinkBackground,
+		dark: tagLinkBackground,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,
