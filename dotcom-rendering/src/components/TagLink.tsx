@@ -38,6 +38,7 @@ const TagLinkStyle = css`
 		height: auto;
 		width: auto;
 		flex-direction: column;
+		margin-right: -1px; // To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead.
 	}
 `;
 const labelStyles = css`
@@ -55,25 +56,25 @@ const tagButtonStyles = css`
 `;
 
 const arrowStyles = css`
-	svg {
-		fill: ${palette('--tag-link-background')};
-		margin-top: 5px;
-		height: 14px;
-		width: 14px;
-	}
-	text-align: center;
-	display: inline-block;
-	margin-top: ${space[2]}px;
-	margin-bottom: ${space[2]}px;
-	border-radius: 50%;
-	height: 24px;
-	width: 24px;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
 	border: none;
-	cursor: pointer;
-	transition: background-color 0.2s;
+	vertical-align: middle;
+	justify-content: center;
+	padding: 0;
+	width: 24px;
+	height: 24px;
+	color: ${palette('--tag-link-background')};
 	background-color: ${palette('--tag-link-accent')};
-	:hover {
-		background-color: ${palette('--tag-link-accent')};
+	border-radius: 50%;
+	svg {
+		flex: 0 0 auto;
+		display: block;
+		fill: currentColor;
+		position: relative;
+		width: 20px;
+		height: auto;
 	}
 `;
 
@@ -92,9 +93,10 @@ export const TagLink = ({
 			<div css={labelStyles}>{sectionLabel}</div>
 			<div css={tagButtonStyles}>
 				<div>Discover More</div>
-				<span css={arrowStyles}>
-					<SvgArrowRightStraight isAnnouncedByScreenReader={false} />
-				</span>
+
+				<div css={arrowStyles}>
+					<SvgArrowRightStraight />
+				</div>
 			</div>
 		</a>
 	);
