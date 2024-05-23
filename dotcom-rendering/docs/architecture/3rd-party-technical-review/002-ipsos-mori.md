@@ -91,7 +91,7 @@ Similar security and data privacy considerations are applicable also for AMP. Th
 
 ## Perfomance engineering review
 
-Adding another tracker sending regularly will have a negative impact on performance. The Dotmetrics script on web loads additional scripts which total around 31kB in an initial experiment. The main script loaded in particular is 28kB on its own, which for comparison is larger than google analytics and 15x the size of comscore.
+Adding another tracker sending regularly will have a negative impact on performance. The Dotmetrics script on web loads additional scripts which total around 31kB in an initial experiment. The main script loaded in particular is 28kB on its own, which for comparison is 15x the size of comscore.
 
 The most time consuming part of the requests made by Dotmetrics scripts is the DNS lookup and initial connection. This could be optimised by adding prefetch/preconnect hints for these domains, although if this tag was to be behind consent then that may raise additional privacy concerns - and optimising loading of this script will not be particularly advantageous.
 
