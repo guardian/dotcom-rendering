@@ -165,7 +165,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 						padding-bottom: ${space[6]}px;
 						padding-top: ${space[2]}px;
 						${from.tablet} {
-							padding-bottom: 0;
+							padding-bottom: 2px;
 						}
 					`;
 				case ArticleDisplay.Showcase:
