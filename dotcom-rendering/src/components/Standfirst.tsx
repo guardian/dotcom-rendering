@@ -162,7 +162,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 			switch (display) {
 				case ArticleDisplay.Immersive:
 					return css`
-						padding-bottom: ${space[6]}px;
+						padding-bottom: 18px;
 						padding-top: ${space[2]}px;
 						${from.tablet} {
 							padding-bottom: 2px;
@@ -171,9 +171,9 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				case ArticleDisplay.Showcase:
 				default:
 					return css`
-						padding-bottom: 12px;
+						padding-bottom: ${space[2]}px;
 						${from.tablet} {
-							padding-bottom: ${space[2]}px;
+							padding-bottom: 12px;
 						}
 					`;
 			}
