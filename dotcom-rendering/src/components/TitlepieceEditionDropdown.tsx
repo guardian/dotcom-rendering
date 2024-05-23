@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { Hide } from '@guardian/source-react-components';
 import type { EditionId } from '../lib/edition';
 import { editionList, getEditionFromId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
@@ -11,7 +12,6 @@ import { dropDownOverrides } from './HeaderTopBarMyAccount';
 interface TitlepieceEditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
-	isTabletOrSmaller: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -23,7 +23,6 @@ const editionDropdownStyles = css`
 export const TitlepieceEditionDropdown = ({
 	editionId,
 	dataLinkName,
-	isTabletOrSmaller,
 }: TitlepieceEditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
@@ -53,19 +52,30 @@ export const TitlepieceEditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Dropdown
-				// TODO: Display ID on small screens
-				label={
-					isTabletOrSmaller ? activeEdition.id : activeEdition.title
-				}
-				links={linksToDisplay}
-				id="edition"
-				dataLinkName={dataLinkName}
-				cssOverrides={css`
-					${dropDownOverrides};
-					padding-top: 6px;
-				`}
-			/>
+			<Hide until="desktop">
+				<Dropdown
+					label={activeEdition.title}
+					links={linksToDisplay}
+					id="edition"
+					dataLinkName={dataLinkName}
+					cssOverrides={css`
+						${dropDownOverrides};
+						padding-top: 6px;
+					`}
+				/>
+			</Hide>
+			<Hide from="desktop">
+				<Dropdown
+					label={activeEdition.id}
+					links={linksToDisplay}
+					id="edition"
+					dataLinkName={dataLinkName}
+					cssOverrides={css`
+						${dropDownOverrides};
+						padding-top: 6px;
+					`}
+				/>
+			</Hide>
 		</div>
 	);
 };
