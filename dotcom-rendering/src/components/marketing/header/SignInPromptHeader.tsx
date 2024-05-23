@@ -8,7 +8,6 @@ import {
 	from,
 	headlineBold20,
 	headlineBold24,
-	palette as sourcePalette,
 	space,
 	textSans14,
 } from '@guardian/source/foundations';
@@ -18,6 +17,7 @@ import {
 	SvgArrowRightStraight,
 	themeButtonReaderRevenueBrand,
 } from '@guardian/source/react-components';
+import { palette as themePalette } from '../../../palette';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';
 import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';
@@ -40,7 +40,7 @@ const textStyles = css`
 const headingStyles = css`
 	grid-area: 'heading';
 
-	color: ${sourcePalette.neutral[100]};
+	color: ${themePalette('--masthead-top-bar-text')};
 	${headlineBold20}
 
 	${from.desktop} {
@@ -51,7 +51,7 @@ const headingStyles = css`
 const subHeadingStyles = css`
 	grid-area: 'subheading';
 
-	color: ${sourcePalette.neutral[100]};
+	color: ${themePalette('--masthead-top-bar-text')};
 	${textSans14}
 `;
 

@@ -5435,6 +5435,7 @@ const timelineEventBorderDark: PaletteFunction = () =>
 
 const mastheadTopBarBackground: PaletteFunction = () =>
 	sourcePalette.brand[300];
+const mastheadTopBarText: PaletteFunction = () => sourcePalette.neutral[100];
 const mastheadTopBarLinkText: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const mastheadTopBarVerticalDivider: PaletteFunction = () =>
@@ -6140,6 +6141,10 @@ const paletteColours = {
 	'--masthead-top-bar-link-text': {
 		light: mastheadTopBarLinkText,
 		dark: mastheadTopBarLinkText,
+	},
+	'--masthead-top-bar-text': {
+		light: mastheadTopBarText,
+		dark: mastheadTopBarText,
 	},
 	'--masthead-top-bar-vertical-divider': {
 		light: mastheadTopBarVerticalDivider,
