@@ -75,6 +75,7 @@ const editionSwitcherMenuStyles = css`
 `;
 
 const guardianLogoStyles = css`
+	z-index: 2;
 	grid-column: content-start / content-end;
 	grid-row: 1;
 	justify-self: end;
@@ -109,6 +110,7 @@ const guardianLogoStyles = css`
 `;
 
 const burgerStyles = css`
+	z-index: 2;
 	grid-column: content-start / content-end;
 	grid-row: 1;
 	justify-self: end;
@@ -255,7 +257,6 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 				<TitlepieceEditionDropdown
 					editionId={editionId}
 					dataLinkName={''}
-					isTabletOrSmaller={windowWidth <= 740}
 				/>
 			</div>
 
