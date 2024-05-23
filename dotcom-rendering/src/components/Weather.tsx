@@ -22,12 +22,12 @@ import {
 	textSans17,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 	SvgExternal,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useId } from 'react';
 import type { EditionId } from '../lib/edition';
 import { WeatherSlot } from './WeatherSlot';

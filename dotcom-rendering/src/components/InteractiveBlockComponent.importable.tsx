@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import { article17, space, textSans17 } from '@guardian/source-foundations';
+import { article17, space, textSans17 } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';

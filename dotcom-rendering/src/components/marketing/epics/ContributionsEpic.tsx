@@ -8,9 +8,9 @@ import {
 	article17,
 	articleBold17,
 	headlineBold20,
-} from '@guardian/source-foundations';
-import { palette, space } from '@guardian/source-foundations';
-import { from } from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
+import { palette, space } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import {
 	containsNonArticleCountPlaceholder,
 	getLocalCurrencySymbol,

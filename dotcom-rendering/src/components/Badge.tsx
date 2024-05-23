@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source-foundations';
+import { between, from } from '@guardian/source/foundations';
 
 const frontsSectionBadgeSizingStyles = css`
 	height: auto;

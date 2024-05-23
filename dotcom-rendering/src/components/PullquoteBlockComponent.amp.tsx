@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { article17, palette } from '@guardian/source-foundations';
+import { article17, palette } from '@guardian/source/foundations';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import Quote from '../static/icons/quote.svg';
 

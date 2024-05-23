@@ -7,7 +7,7 @@ import {
 	palette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Fragment, type ReactNode } from 'react';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { isElement, parseHtml } from '../lib/domUtils';

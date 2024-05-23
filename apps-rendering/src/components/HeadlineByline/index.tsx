@@ -7,7 +7,7 @@ import {
 	headline,
 	remSpace,
 	textSans,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';

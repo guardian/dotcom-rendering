@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headlineBold20, space, textSans } from '@guardian/source-foundations';
+import { headlineBold20, space, textSans } from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 interface Props {

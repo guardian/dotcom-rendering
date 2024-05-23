@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { decidePalette } from '../../../lib/decidePalette';
 import type { DCRContainerPalette } from '../../../types/front';

@@ -15,8 +15,8 @@ import {
 	sport,
 	textSans,
 	textSans15,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import Accordion from 'components/Accordion';
 import { background, text } from 'palette';
 import type { FC } from 'react';

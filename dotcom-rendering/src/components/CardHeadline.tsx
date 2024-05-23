@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
+import type { FontScaleArgs, FontWeight } from '@guardian/source/foundations';
 import {
 	between,
 	fontWeights,
@@ -14,8 +14,8 @@ import {
 	textSans17,
 	textSans20,
 	until,
-} from '@guardian/source-foundations';
-import { Link, SvgExternal } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';

@@ -11,7 +11,7 @@ import {
 	neutral,
 	remSpace,
 	textSans,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';

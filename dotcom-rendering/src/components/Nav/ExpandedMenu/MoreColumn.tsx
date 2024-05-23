@@ -5,7 +5,7 @@ import {
 	palette as sourcePalette,
 	textSans,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { LinkType } from '../../../model/extract-nav';
 

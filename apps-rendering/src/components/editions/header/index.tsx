@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { border, from, neutral, remSpace } from '@guardian/source-foundations';
+import { border, from, neutral, remSpace } from '@guardian/source/foundations';
 import Byline from 'components/editions/byline';
 import HeaderMedia from 'components/editions/headerMedia';
 import Headline from 'components/editions/headline';

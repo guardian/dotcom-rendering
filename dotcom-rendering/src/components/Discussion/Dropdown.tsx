@@ -5,7 +5,7 @@ import {
 	textSans15,
 	textSansBold15,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import type { DropdownOptionType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';

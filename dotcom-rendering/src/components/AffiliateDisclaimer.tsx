@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+import { palette, space, textSans } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`

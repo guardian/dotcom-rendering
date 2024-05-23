@@ -6,7 +6,7 @@ import {
 	palette as sourcePalette,
 	space,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Decorator, type StrictArgs } from '@storybook/react';
 import { ArticleFormat } from '@guardian/libs';
 

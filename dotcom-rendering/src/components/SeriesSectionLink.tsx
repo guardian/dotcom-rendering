@@ -10,7 +10,7 @@ import {
 	textSans20,
 	textSansBold20,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';

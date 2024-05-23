@@ -4,7 +4,7 @@ import {
 	headlineBold17,
 	space,
 	textSans,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 import { FilterLink } from './FilterLink';

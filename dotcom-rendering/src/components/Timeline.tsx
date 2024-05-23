@@ -6,7 +6,7 @@ import {
 	headline,
 	space,
 	textSans,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { NestedArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
 import type {

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headlineMedium28, palette } from '@guardian/source-foundations';
+import { headlineMedium28, palette } from '@guardian/source/foundations';
 import { getAgeWarning } from '../lib/age-warning';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';

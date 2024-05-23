@@ -7,7 +7,7 @@ import {
 	textSans17,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type {
 	EditionLinkType,

@@ -1,6 +1,6 @@
 import { ArticleDesign, isString } from '@guardian/libs';
-import { Hide } from '@guardian/source-react-components';
-import { DottedLines } from '@guardian/source-react-components-development-kitchen';
+import { Hide } from '@guardian/source/react-components';
+import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	getBylineComponentsFromTokens,
 	getSoleContributor,

@@ -12,12 +12,12 @@ import {
 	space,
 	textSans12,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Hide,
 	LinkButton,
 	themeButtonBrand,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useEffect, useMemo, useState } from 'react';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';

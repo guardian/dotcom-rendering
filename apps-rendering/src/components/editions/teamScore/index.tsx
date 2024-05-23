@@ -9,7 +9,7 @@ import {
 	neutral,
 	remSpace,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { fromNullable } from '../../../../vendor/@guardian/types/index';
 import { TeamLocation } from 'football';
 import { maybeRender } from 'lib';

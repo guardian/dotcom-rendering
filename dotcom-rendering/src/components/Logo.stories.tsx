@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans34 } from '@guardian/source-foundations';
+import { palette, space, textSans34 } from '@guardian/source/foundations';
 import { editionList } from '../lib/edition';
 import { Logo } from './Logo';
 

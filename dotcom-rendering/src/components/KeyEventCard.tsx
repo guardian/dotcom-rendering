@@ -4,8 +4,8 @@ import {
 	space,
 	textSans,
 	textSans15,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { palette } from '../palette';
 import { DateTime } from './DateTime';
 

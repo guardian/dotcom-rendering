@@ -5,7 +5,7 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	adContainerStyles,
 	MobileStickyContainer,
