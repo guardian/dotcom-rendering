@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { between, from } from '@guardian/source-foundations';
 
 const frontsSectionBadgeSizingStyles = css`
 	height: auto;
@@ -23,6 +23,12 @@ const labsSectionBadgeSizingStyles = css`
 	}
 `;
 
+const imageAdvertisingPartnerStyles = css`
+	${between.leftCol.and.wide} {
+		max-width: 130px;
+	}
+`;
+
 const imageStyles = css`
 	display: block;
 	width: auto;
@@ -40,6 +46,8 @@ type Props = {
 	ophanComponentLink?: string;
 	ophanComponentName?: string;
 	isInLabsSection?: boolean;
+	isAdvertisingPartner?: boolean;
+	inAdvertisingPartnerABTest?: boolean;
 };
 
 export const Badge = ({
@@ -48,6 +56,8 @@ export const Badge = ({
 	ophanComponentLink,
 	ophanComponentName,
 	isInLabsSection = false,
+	isAdvertisingPartner = false,
+	inAdvertisingPartnerABTest = false,
 }: Props) => {
 	return (
 		<a
@@ -62,6 +72,9 @@ export const Badge = ({
 					isInLabsSection
 						? labsSectionBadgeSizingStyles
 						: frontsSectionBadgeSizingStyles,
+					isAdvertisingPartner &&
+						inAdvertisingPartnerABTest &&
+						imageAdvertisingPartnerStyles,
 				]}
 				src={imageSrc}
 				alt={isInLabsSection ? 'Labs sponsor logo' : ''}
