@@ -24,15 +24,20 @@ const getContainerStates = (): ContainerStates => {
 	 * - If they have previously hidden containers and subsequently undone this action, this will be logged as 0
 	 * - If a user has never interacted with the show/hide feature, no calls to Ophan will be made
 	 */
-	if (Object.keys(item).length) {
-		const hiddenContainers = Object.values(item).filter(
-			(value) => value === 'closed',
-		).length;
+	const containerConfigArr = Object.entries(item);
+
+	if (containerConfigArr.length) {
+		const hiddenContainers = containerConfigArr.filter(
+			([, value]) => value === 'closed',
+		);
 
 		void getOphan('Web').then((ophan) => {
 			ophan.record({
 				component: 'front-containers-hidden',
-				value: hiddenContainers,
+				value: {
+					num: hiddenContainers.length,
+					ids: hiddenContainers.map(([c]) => c),
+				},
 			});
 		});
 	}
