@@ -27,8 +27,6 @@ import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
-import { useIsInView } from '../../lib/useIsInView';
-import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
 
 type BaseProps = {
@@ -257,19 +255,8 @@ type RemoteBannerProps = BannerProps & {
 	displayEvent: string;
 };
 
-const RemoteBanner = ({
-	// componentTypeName,
-	// displayEvent,
-	// meta,
-	module,
-	fetchEmail,
-}: RemoteBannerProps) => {
+const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 	const [Banner, setBanner] = useState<React.ElementType>();
-
-	const [hasBeenSeen, setNode] = useIsInView({
-		threshold: 0,
-		debounce: true,
-	});
 
 	useEffect(() => {
 		setAutomat();
@@ -288,13 +275,10 @@ const RemoteBanner = ({
 			});
 	}, [module]);
 
-	useOnce(() => {}, [hasBeenSeen]);
-
 	if (Banner !== undefined) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
-				ref={setNode}
 				css={css`
 					width: 100%;
 					${getZIndex('banner')}
