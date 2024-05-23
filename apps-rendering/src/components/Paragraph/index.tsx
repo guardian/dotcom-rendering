@@ -9,7 +9,7 @@ import {
 	headlineBold42,
 	remSpace,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { text } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';

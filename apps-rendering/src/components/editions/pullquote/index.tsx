@@ -5,8 +5,8 @@ import {
 	from,
 	headlineBold20,
 	headlineMedium20,
-} from '@guardian/source-foundations';
-import { SvgQuote } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgQuote } from '@guardian/source/react-components';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';

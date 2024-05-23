@@ -7,7 +7,7 @@ import {
 	headlineMedium28,
 	textSans20,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgEnvelope,
@@ -9,8 +9,8 @@ import {
 	SvgPinterest,
 	SvgTwitter,
 	SvgWhatsApp,
-} from '@guardian/source-react-components';
-import type { IconProps } from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
+import type { IconProps } from '@guardian/source/react-components';
 import type { SharePlatformType } from '../types/content';
 
 const shareIconList = css`

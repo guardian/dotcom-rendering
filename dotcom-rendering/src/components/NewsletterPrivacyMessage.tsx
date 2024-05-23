@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	palette as sourcePalette,
 	textSans12,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 interface Props {

@@ -5,7 +5,7 @@ import {
 	palette as sourcePalette,
 	space,
 	textSans14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { palette as themePalette } from '../palette';
 import { NewsletterDetail } from './NewsletterDetail';

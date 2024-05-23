@@ -9,7 +9,7 @@ import {
 	headlineMedium28,
 	headlineMedium34,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';
 import { getFormat } from 'item';

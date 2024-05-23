@@ -10,8 +10,8 @@ import {
 	space,
 	textSans12,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { AdBlockAsk } from './AdBlockAsk.importable';

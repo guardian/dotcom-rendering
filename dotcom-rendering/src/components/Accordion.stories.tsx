@@ -6,7 +6,7 @@ import {
 	breakpoints,
 	from,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Accordion as AccordionComponent } from './Accordion';

@@ -10,7 +10,7 @@ import {
 	neutral,
 	textSans12,
 	textSans14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { datetimeFormat } from 'datetime';

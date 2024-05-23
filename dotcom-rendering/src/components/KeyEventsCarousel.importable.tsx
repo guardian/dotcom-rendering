@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { from, headlineBold17, space } from '@guardian/source-foundations';
+import { from, headlineBold17, space } from '@guardian/source/foundations';
 import {
 	Button,
 	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useRef } from 'react';
 import { palette } from '../palette';
 import { KeyEventCard } from './KeyEventCard';

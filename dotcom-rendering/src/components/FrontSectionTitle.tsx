@@ -4,8 +4,8 @@ import {
 	palette as sourcePalette,
 	textSans12,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { palette } from '../palette';
 import type { CollectionBranding } from '../types/branding';

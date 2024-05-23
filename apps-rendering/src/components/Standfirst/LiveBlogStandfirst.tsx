@@ -3,7 +3,7 @@ import {
 	headlineMedium17,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { darkModeCss } from 'styles';

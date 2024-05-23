@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { textSans12 } from '@guardian/source-foundations';
-import { SvgArrowUpStraight } from '@guardian/source-react-components';
+import { textSans12 } from '@guardian/source/foundations';
+import { SvgArrowUpStraight } from '@guardian/source/react-components';
 import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
 import type { SignedInUser } from '../../lib/discussion';

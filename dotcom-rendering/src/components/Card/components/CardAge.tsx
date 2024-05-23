@@ -4,7 +4,7 @@ import {
 	textSans12,
 	textSansBold12,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../types/front';

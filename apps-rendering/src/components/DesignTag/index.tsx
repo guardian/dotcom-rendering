@@ -7,7 +7,7 @@ import {
 	headlineBold17,
 	headlineBold20,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { background, text } from 'palette';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss } from '../../styles';

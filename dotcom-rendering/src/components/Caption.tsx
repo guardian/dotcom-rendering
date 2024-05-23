@@ -7,7 +7,7 @@ import {
 	textSans12,
 	textSans14,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette } from '../palette';
 import CameraSvg from '../static/icons/camera.svg';
 import VideoSvg from '../static/icons/video-icon.svg';

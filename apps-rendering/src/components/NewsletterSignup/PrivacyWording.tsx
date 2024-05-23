@@ -3,8 +3,8 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { textSans12, textSansBold12 } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+import { textSans12, textSansBold12 } from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';

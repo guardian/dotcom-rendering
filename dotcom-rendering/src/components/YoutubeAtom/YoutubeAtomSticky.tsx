@@ -4,8 +4,8 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-} from '@guardian/source-foundations';
-import { SvgCross } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgCross } from '@guardian/source/react-components';
 import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';

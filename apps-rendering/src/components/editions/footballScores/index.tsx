@@ -8,7 +8,7 @@ import {
 	remSpace,
 	textSans17,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { FC } from 'react';
 import { tabletContentWidth, wideContentWidth } from '../styles';

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { palette } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import {

@@ -12,8 +12,8 @@ import {
 	sport,
 	textSans14,
 	textSansBold14,
-} from '@guardian/source-foundations';
-import { SvgNewsletter } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgNewsletter } from '@guardian/source/react-components';
 import type { NewsletterSignUp } from 'bodyElement';
 import { background, border, text } from 'palette';
 import type { FC } from 'react';

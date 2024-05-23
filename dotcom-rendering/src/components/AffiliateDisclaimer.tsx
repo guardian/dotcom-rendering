@@ -4,8 +4,8 @@ import {
 	space,
 	textSans14,
 	textSans15,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`

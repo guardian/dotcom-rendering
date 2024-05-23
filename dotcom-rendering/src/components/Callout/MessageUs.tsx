@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import { space, textSans14 } from '@guardian/source-foundations';
+import { space, textSans14 } from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgSignalBrand,
 	SvgTelegramBrand,
 	SvgWhatsAppBrand,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { ReactElement } from 'react';
 import { palette } from '../../palette';
 import type { CalloutContactType } from '../../types/content';

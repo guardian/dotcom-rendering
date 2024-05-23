@@ -11,7 +11,7 @@ import {
 	neutral,
 	remSpace,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //

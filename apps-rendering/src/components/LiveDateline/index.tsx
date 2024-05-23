@@ -3,7 +3,7 @@
 import { css, keyframes } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, pxToRem, textSans12 } from '@guardian/source-foundations';
+import { neutral, pxToRem, textSans12 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { makeRelativeDate } from 'date';
 import { maybeRender } from 'lib';

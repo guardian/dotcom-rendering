@@ -5,7 +5,7 @@ import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
 import { fontsCss } from '../src/lib/fonts-css';
-import { resets } from '@guardian/source-foundations';
+import { resets } from '@guardian/source/foundations';
 
 import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';

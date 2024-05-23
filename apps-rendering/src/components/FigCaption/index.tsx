@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, remSpace, textSans14 } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans14 } from '@guardian/source/foundations';
 import CaptionIcon from 'components/CaptionIcon';
 import type { CaptionIconVariant } from 'components/CaptionIcon';
 import type { Styleable } from 'lib';

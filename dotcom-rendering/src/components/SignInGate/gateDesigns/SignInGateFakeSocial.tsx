@@ -7,8 +7,8 @@ import {
 	space,
 	textSans17,
 	until,
-} from '@guardian/source-foundations';
-import { Button, Link, LinkButton } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGateProps } from '../types';

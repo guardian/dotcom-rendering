@@ -8,7 +8,7 @@ import {
 	remSpace,
 	textSans17,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { MatchStatusIcon } from 'components/MatchStatusIcon';
 import { TeamScore } from 'components/TeamScore';
 import { MatchStatusKind, TeamLocation } from 'football';

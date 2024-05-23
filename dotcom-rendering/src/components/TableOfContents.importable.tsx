@@ -7,11 +7,11 @@ import {
 	headlineLight17,
 	space,
 	textSans14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette } from '../palette';
 import type { TableOfContentsItem } from '../types/frontend';

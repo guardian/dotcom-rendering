@@ -3,7 +3,7 @@ import {
 	headlineBold20,
 	space,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 interface Props {

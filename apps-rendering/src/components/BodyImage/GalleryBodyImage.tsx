@@ -5,7 +5,7 @@ import {
 	from,
 	headlineMedium17,
 	textSans14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { CaptionIconVariant } from 'components/CaptionIcon';
 import FigCaption from 'components/FigCaption';
 import Img from 'components/ImgAlt';

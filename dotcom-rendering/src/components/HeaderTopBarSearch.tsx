@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, textSansBold17 } from '@guardian/source-foundations';
+import { from, palette, textSansBold17 } from '@guardian/source/foundations';
 import { getZIndex } from '../lib/getZIndex';
 import SearchIcon from '../static/icons/search.svg';
 

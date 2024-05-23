@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { LinkButton } from '@guardian/source-react-components';
+import { LinkButton } from '@guardian/source/react-components';
 import type { RoleType } from '../types/content';
 import { ClickToView } from './ClickToView';
 

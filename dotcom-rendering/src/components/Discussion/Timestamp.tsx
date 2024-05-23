@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans12 } from '@guardian/source-foundations';
+import { textSans12 } from '@guardian/source/foundations';
 import { useState } from 'react';
 import { dateFormatter } from '../../lib/discussionDateFormatter';
 import { useInterval } from '../../lib/useInterval';

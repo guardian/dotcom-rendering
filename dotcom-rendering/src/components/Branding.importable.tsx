@@ -5,7 +5,7 @@ import {
 	breakpoints,
 	from,
 	textSans12,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
 import { getOphanComponents } from '../lib/labs';
 import { palette } from '../palette';

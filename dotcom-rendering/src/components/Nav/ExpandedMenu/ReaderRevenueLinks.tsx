@@ -5,7 +5,7 @@ import {
 	palette as sourcePalette,
 	textSans17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../../../lib/acquisitions';
 import type { EditionId } from '../../../lib/edition';

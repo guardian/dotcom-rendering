@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import type { Pillar } from '@guardian/libs';
-import { until, visuallyHidden } from '@guardian/source-foundations';
+import { until, visuallyHidden } from '@guardian/source/foundations';
 import type { EditionId } from '../../lib/edition';
 import { clearFix } from '../../lib/mixins';
 import type { NavType } from '../../model/extract-nav';

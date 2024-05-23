@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, text, textSans12 } from '@guardian/source-foundations';
+import { from, space, text, textSans12 } from '@guardian/source/foundations';
 import { unescapeData } from '../lib/escapeData';
 import type { RoleType } from '../types/content';
 import { ClickToView } from './ClickToView';

@@ -8,8 +8,8 @@ import {
 	textSans17,
 	textSansBold17,
 	textSansBold34,
-} from '@guardian/source-foundations';
-import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, Radio, RadioGroup } from '@guardian/source/react-components';
 import { Fragment, useEffect, useState } from 'react';
 import type {
 	AnswerType,

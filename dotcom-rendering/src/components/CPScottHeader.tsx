@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { headlineMedium17, palette, until } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+import { headlineMedium17, palette, until } from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { generateSources, getFallbackSource } from './Picture';
 import { QuoteIcon } from './QuoteIcon';
 

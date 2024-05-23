@@ -1,5 +1,5 @@
 import { Pillar } from '@guardian/libs';
-import { brandBackground, brandBorder } from '@guardian/source-foundations';
+import { brandBackground, brandBorder } from '@guardian/source/foundations';
 import { userEvent, within } from '@storybook/test';
 import { Section } from '../Section';
 import { Nav } from './Nav';

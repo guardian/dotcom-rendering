@@ -11,7 +11,7 @@ import {
 	textSans15,
 	textSansBold15,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { NestedArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
 import type {
