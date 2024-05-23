@@ -27,6 +27,7 @@ export const Default = () => (
 		<FixedSmallSlowVThird
 			trails={trails}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

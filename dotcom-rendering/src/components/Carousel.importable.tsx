@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, isUndefined } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
 	headlineBold24,
@@ -9,11 +9,9 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import { onwardJourneys } from '../experiments/tests/onward-journeys';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
-import { useAB } from '../lib/useAB';
 import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
@@ -41,6 +39,7 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
 	discussionApiUrl: string;
+	absoluteServerTimes: boolean;
 };
 
 type ArticleProps = Props & {
@@ -462,6 +461,7 @@ type CarouselCardProps = {
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
+	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 	kickerText?: string;
 	image?: DCRFrontImage;
@@ -494,6 +494,7 @@ const CarouselCard = ({
 	imageLoading,
 	discussionApiUrl,
 	isOnwardContent,
+	absoluteServerTimes,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
@@ -536,6 +537,7 @@ const CarouselCard = ({
 				isOnwardContent={isOnwardContent}
 				imagePosition={cardImagePosition}
 				imagePositionOnMobile={cardImagePosition}
+				absoluteServerTimes={absoluteServerTimes}
 			/>
 		</LI>
 	);
@@ -781,28 +783,14 @@ export const Carousel = ({
 	leftColSize,
 	discussionApiUrl,
 	isOnwardContent = true,
+	absoluteServerTimes,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
-	const isStoryPackage = onwardsSource === 'more-on-this-story';
 
 	const [index, setIndex] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(0);
 	const isAndroid = useIsAndroid();
-	const [show, setShow] = useState(!isStoryPackage);
-	const AB = useAB();
-
-	useEffect(() => {
-		if (!isStoryPackage) {
-			// This logic is only for the onwards journey test
-			return setShow(true);
-		}
-		const variantId = AB?.api.runnableTest(onwardJourneys)?.variantToRun.id;
-		if (isUndefined(variantId)) {
-			return setShow(true);
-		}
-		setShow(['control', 'top-row-most-viewed'].includes(variantId));
-	}, [AB, isStoryPackage]);
 
 	const arrowName = 'carousel-small-arrow';
 
@@ -911,10 +899,6 @@ export const Carousel = ({
 	// when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
-	if (!show) {
-		return null;
-	}
-
 	if (isAndroid) {
 		return null;
 	}
@@ -1014,6 +998,7 @@ export const Carousel = ({
 									linkTo={linkTo}
 									headlineText={headlineText}
 									webPublicationDate={webPublicationDate}
+									absoluteServerTimes={absoluteServerTimes}
 									image={image}
 									kickerText={kickerText}
 									dataLinkName={`carousel-small-card-position-${i}`}

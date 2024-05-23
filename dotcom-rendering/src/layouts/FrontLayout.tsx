@@ -158,8 +158,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const { abTests } = front.config;
+
 	const inUpdatedHeaderABTest =
-		front.config.abTests.updatedHeaderDesignVariant === 'variant';
+		abTests.updatedHeaderDesignVariant === 'variant';
+
+	const inAdvertisingPartnerABTest =
+		abTests.updateLogoAdPartnerVariant === 'variant';
+
+	const { absoluteServerTimes = false } = front.config.switches;
 
 	return (
 		<>
@@ -456,6 +463,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
+									inAdvertisingPartnerABTest={
+										inAdvertisingPartnerABTest
+									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -516,6 +526,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -595,6 +608,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											discussionApiUrl={
 												front.config.discussionApiUrl
 											}
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
 										/>
 									</Island>
 								</Section>
@@ -661,6 +677,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
+								inAdvertisingPartnerABTest={
+									inAdvertisingPartnerABTest
+								}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -675,6 +694,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(
