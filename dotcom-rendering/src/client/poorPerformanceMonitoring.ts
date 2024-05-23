@@ -1,7 +1,6 @@
 import { log } from '@guardian/libs';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { recordExperiences } from './ophan/ophan';
-import {} from 'web-vitals';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
 	log('dotcom', '⏱', name, data);
@@ -47,12 +46,21 @@ const isTimeToFirstByteAboveThreshold = (threshold = 1200) => {
 		const [nav] = window.performance.getEntriesByType('navigation');
 		if (!nav) return true;
 
-		logPerformanceInfo('navigation', {
-			domContentLoadedEventEnd: nav.domContentLoadedEventEnd,
-			type: nav.type,
-			responseEnd: nav.responseEnd,
-		});
-		return nav.responseStart - nav.startTime > threshold;
+		const isPerformanceNavigationTiming = (
+			navigationEvent: PerformanceEntry | undefined,
+		): navigationEvent is PerformanceNavigationTiming => {
+			return navigationEvent?.entryType === 'navigation';
+		};
+
+		if (isPerformanceNavigationTiming(nav)) {
+			logPerformanceInfo('navigation', {
+				domContentLoadedEventEnd: nav.domContentLoadedEventEnd,
+				type: nav.type,
+				responseEnd: nav.responseEnd,
+			});
+			return nav.responseStart - nav.startTime > threshold;
+		}
+		return false;
 	} catch (error) {
 		return true;
 	}
