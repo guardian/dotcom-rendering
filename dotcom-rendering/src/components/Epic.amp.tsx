@@ -524,7 +524,10 @@ export const Epic = ({ webURL }: Props) => {
 									</button>
 								</div>
 							</div>
-							<div css={acceptedPaymentMethodsWrapperStyle}>
+							<div
+								css={acceptedPaymentMethodsWrapperStyle}
+								data-amp-bind-hidden="epicState.hidePaymentIcons"
+							>
 								<amp-img
 									layout="fixed"
 									height="25px"
