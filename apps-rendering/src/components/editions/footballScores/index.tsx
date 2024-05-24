@@ -6,7 +6,7 @@ import {
 	brandAltBackground,
 	from,
 	remSpace,
-	textSans,
+	textSans17,
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { MatchStatusKind, TeamLocation } from 'football';
@@ -48,7 +48,7 @@ const leagueStyles = css`
 `;
 
 const stadiumStyles = css`
-	${textSans.medium({ fontStyle: 'normal' })}
+	${textSans17};
 `;
 
 const FootballScores: FC<Props> = ({ league, homeTeam, awayTeam, stadium }) => (

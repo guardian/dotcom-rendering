@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	palette,
-	textSans,
-	textSans12,
-	textSans14,
-} from '@guardian/source/foundations';
+import { palette, textSans12, textSans14 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { FETagType } from '../types/tag';
 
@@ -18,7 +13,13 @@ const linkStyle = css`
 	border-radius: 12px;
 	padding: 2px 9px;
 	display: inline-block;
-	${textSans.xsmall({ lineHeight: 'loose' })}
+	${textSans14};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.4;
 	text-decoration: none;
 	top: 0;
 	color: ${palette.neutral[20]};

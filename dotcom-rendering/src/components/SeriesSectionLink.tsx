@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
-	headline,
 	headlineBold17,
 	headlineBold20,
+	headlineMedium17,
 	space,
 	textSans17,
 	textSans20,
@@ -128,7 +128,13 @@ const secondaryFontStyles = (format: ArticleFormat) => {
 		`;
 	}
 	return css`
-		${headline.xxxsmall({ fontWeight: 'regular' })}
+		${headlineMedium17};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		font-weight: 400;
 	`;
 };
 
