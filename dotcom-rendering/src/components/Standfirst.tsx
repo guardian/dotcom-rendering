@@ -125,7 +125,7 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 						`;
 					}
 					return css`
-						${headlineLight20};
+						${headlineMedium20};
 						${from.tablet} {
 							${headlineMedium24};
 						}
@@ -178,6 +178,28 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 					`;
 			}
 		}
+		case ArticleDesign.Interview: {
+			switch (display) {
+				case ArticleDisplay.Showcase: {
+					return css`
+						padding-bottom: 0;
+					`;
+				}
+				case ArticleDisplay.Immersive:
+					return css`
+						padding-bottom: 0;
+						padding-top: ${space[2]}px;
+
+						${from.tablet} {
+							padding-bottom: 0;
+						}
+					`;
+				default:
+					return css`
+						padding-bottom: ${space[2]}px;
+					`;
+			}
+		}
 		default: {
 			switch (display) {
 				case ArticleDisplay.Showcase:
@@ -190,7 +212,7 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 					`;
 				case ArticleDisplay.Immersive:
 					return css`
-						padding-bottom: ${space[6]}px;
+						padding-bottom: 0;
 						padding-top: ${space[2]}px;
 
 						${from.tablet} {

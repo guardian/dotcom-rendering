@@ -304,13 +304,35 @@ const decideBottomPadding = ({
 		default: {
 			switch (format.design) {
 				case ArticleDesign.Interview: {
+					if (format.display === ArticleDisplay.Showcase) {
+						return css`
+							padding-bottom: ${space[1]}px;
+							${from.desktop} {
+								padding-bottom: ${space[6]}px;
+							}
+						`;
+					}
 					return css`
-						padding-bottom: ${space[5]}px;
-
-						${from.tablet} {
-							padding-bottom: ${space[6]}px;
-						}
+						padding-bottom: ${space[2]}px;
 					`;
+				}
+				case ArticleDesign.Review: {
+					if (format.display === ArticleDisplay.Showcase) {
+						return css`
+							padding-bottom: 28px;
+							${from.tablet} {
+								padding-bottom: ${space[6]}px;
+							}
+						`;
+					} else {
+						return css`
+							padding-bottom: ${space[5]}px;
+
+							${from.tablet} {
+								padding-bottom: ${space[6]}px;
+							}
+						`;
+					}
 				}
 				default:
 					return hasAvatar
