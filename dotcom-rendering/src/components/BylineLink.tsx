@@ -159,6 +159,10 @@ const getRenderedTokens = (
 		);
 	}
 
+	if (design === ArticleDesign.Crossword && renderedTokens.length > 0) {
+		return [(<>Set by: </>), ...renderedTokens];
+	}
+
 	return renderedTokens;
 };
 

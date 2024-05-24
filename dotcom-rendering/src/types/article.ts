@@ -61,7 +61,7 @@ export const enhanceCrossword = (article: Article): Article => {
 		};
 		return {
 			...article,
-			format: { ...article.format, design: ArticleDesign.Interactive },
+			format: { ...article.format, design: ArticleDesign.Crossword },
 			frontendData: {
 				...article.frontendData,
 				blocks: [
@@ -78,7 +78,6 @@ export const enhanceCrossword = (article: Article): Article => {
 							article.frontendData.webPublicationSecondaryDateDisplay,
 					},
 				],
-				crossword: undefined,
 			}
 		};
 	}

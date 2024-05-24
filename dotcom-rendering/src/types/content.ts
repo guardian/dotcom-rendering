@@ -717,7 +717,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 
 export interface CrosswordElement {
 	_type: 'model.dotcomrendering.pageElements.CrosswordElement';
-	crossword: GuardianCrossword;
+	crossword: GuardianCrossword & { instructions?: string };
 }
 
 export type FEElement =
