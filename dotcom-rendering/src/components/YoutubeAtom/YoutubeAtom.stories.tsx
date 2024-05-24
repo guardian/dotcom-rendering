@@ -1,403 +1,277 @@
-import type { ConsentState } from '@guardian/libs';
+import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { YoutubeAtom } from './YoutubeAtom';
 
-export default {
-	title: 'YoutubeAtom',
+const meta = {
+	title: 'Components/Youtube Atom',
 	component: YoutubeAtom,
-	tags: ['autodocs'],
-};
+} satisfies Meta<typeof YoutubeAtom>;
 
-const containerStyle = { width: '800px', margin: '24px' };
-const containerStyleSmall = { width: '400px', margin: '24px' };
-const explainerStyle = {
-	fontSize: '20px',
-	margin: '0 0 20px',
-	width: '750px',
-};
-const boldStyle = { fontWeight: 'bold' };
+export default meta;
 
-const OverlayAutoplayExplainer = () => (
-	<p style={explainerStyle}>
-		If you're viewing this in the composed storybook please be aware the
-		autoplay functionality in the player will not work correctly.{' '}
-		<span style={boldStyle}>
-			To view the correct functionality please view this story in the
-			external atoms-rendering storybook by clicking the link in the
-			sidebar.
-		</span>
-	</p>
+type Story = StoryObj<typeof meta>;
+
+const Container: Decorator = (Story) => (
+	<div
+		css={css`
+			width: 800px;
+			margin: 24px;
+		`}
+	>
+		<Story />
+	</div>
 );
 
-const adTargeting: AdTargeting = {
-	disableAds: true,
-};
+const SmallContainer: Decorator = (Story) => (
+	<div
+		css={css`
+			width: 400px;
+			margin: 24px;
+		`}
+	>
+		<Story />
+	</div>
+);
 
-const consentStateCanTarget: ConsentState = {
-	tcfv2: {
-		vendorConsents: { abc: false },
-		addtlConsent: 'xyz',
-		gdprApplies: true,
-		tcString: 'YAAA',
-		consents: { '1': true, '2': true },
-		eventStatus: 'useractioncomplete',
+const OverlayAutoplayExplainer: Decorator = (Story) => (
+	<>
+		<p
+			css={css`
+				font-size: 20px;
+				margin: 0 0 20px;
+				width: 750px;
+			`}
+		>
+			If you're viewing this in the composed storybook please be aware the
+			autoplay functionality in the player will not work correctly.{' '}
+			<span
+				css={css`
+					font-weight: bold;
+				`}
+			>
+				To view the correct functionality please view this story in the
+				external dotcom-rendering storybook by clicking the link in the
+				sidebar.
+			</span>
+		</p>
+		<Story />
+	</>
+);
+
+const ScrollDown =
+	(instructions: 'text' | 'arrow'): Decorator =>
+	(Story) => (
+		<div>
+			{instructions === 'text' ? (
+				<div>Scroll down...</div>
+			) : (
+				<div
+					css={css`
+						font-size: 36px;
+					`}
+				>
+					⬇️
+				</div>
+			)}
+			<div
+				css={css`
+					height: 1000px;
+				`}
+			></div>
+			<Story />
+			<div
+				css={css`
+					height: 1000px;
+				`}
+			></div>
+		</div>
+	);
+
+export const NoConsent = {
+	args: {
+		index: 123,
+		videoId: '-ZCvZmYlQD8',
+		alt: '',
+		eventEmitters: [(e) => console.log(`analytics event ${e} called`)],
+		duration: 252,
+		format: {
+			theme: Pillar.Culture,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		height: 450,
+		width: 800,
+		shouldStick: false,
+		isMainMedia: false,
+		imaEnabled: false,
+		abTestParticipations: {},
+		adTargeting: {
+			disableAds: true,
+		},
+		imagePositionOnMobile: 'none',
+		imageSize: 'large',
 	},
-	canTarget: true,
-	framework: 'tcfv2',
-};
+	decorators: [Container],
+} satisfies Story;
 
-const overrideImage =
-	'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg';
-const posterImage =
-	'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg';
+export const NoOverlay = {
+	args: {
+		...NoConsent.args,
+		consentState: {
+			tcfv2: {
+				vendorConsents: { abc: false },
+				addtlConsent: 'xyz',
+				gdprApplies: true,
+				tcString: 'YAAA',
+				consents: { '1': true, '2': true },
+				eventStatus: 'useractioncomplete',
+			},
+			canTarget: true,
+			framework: 'tcfv2',
+		},
+		title: "Rayshard Brooks: US justice system treats us like 'animals'",
+	},
+	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+} satisfies Story;
 
-export const NoConsent = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const WithOverrideImage = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		videoId: '3jpXAMwRSu4',
+		alt: 'Microscopic image of COVID',
+		format: {
+			theme: Pillar.News,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		overrideImage:
+			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac',
+		height: undefined,
+		width: undefined,
+		title: 'How to stop the spread of coronavirus',
+	},
+	decorators: [OverlayAutoplayExplainer, Container],
+} satisfies Story;
 
-export const NoOverlay = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const WithPosterImage = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		videoId: 'N9Cgy-ke5-s',
+		format: {
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		posterImage:
+			'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg',
+		videoCategory: 'documentary',
+		title: 'How Donald Trump’s broken promises failed Ohio | Anywhere but Washington',
+	},
+	decorators: [OverlayAutoplayExplainer, Container],
+} satisfies Story;
 
-NoOverlay.parameters = {
-	chromatic: { disableSnapshot: true },
-};
+export const WithOverlayAndPosterImage = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		videoId: WithPosterImage.args.videoId,
+		format: {
+			theme: Pillar.Opinion,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		posterImage: WithPosterImage.args.posterImage,
+		overrideImage:
+			'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg',
+		videoCategory: 'live',
+		title: 'How Donald Trump’s broken promises failed Ohio',
+		kicker: 'Breaking News',
+		showTextOverlay: true,
+	},
+	decorators: [OverlayAutoplayExplainer, Container],
+} satisfies Story;
 
-export const WithOverrideImage = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<OverlayAutoplayExplainer />
-			<YoutubeAtom
-				index={123}
-				videoId="3jpXAMwRSu4"
-				alt="Microscopic image of COVID"
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				duration={252}
-				consentState={consentStateCanTarget}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				overrideImage={
-					'https://i.guim.co.uk/img/media/4b3808707ec341629932a9d443ff5a812cf4df14/0_309_1800_1081/master/1800.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=aff4b8255693eb449f13070df88e9cac'
-				}
-				shouldStick={false}
-				isMainMedia={false}
-				title="How to stop the spread of coronavirus"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const GiveConsent = {
+	args: {
+		...NoConsent.args,
+		videoId: WithOverrideImage.args.videoId,
+		alt: WithOverrideImage.args.alt,
+		format: WithOverrideImage.args.format,
+		title: WithOverrideImage.args.title,
+		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
+	},
+	render: function Render(args) {
+		const [consented, setConsented] = useState(false);
 
-export const WithPosterImage = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<OverlayAutoplayExplainer />
-			<YoutubeAtom
-				index={123}
-				videoId="N9Cgy-ke5-s"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				format={{
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				duration={252}
-				consentState={consentStateCanTarget}
-				posterImage={
-					'https://media.guim.co.uk/757dd4db5818984fd600b41cdaf687668497051d/0_0_1920_1080/1920.jpg'
-				}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				videoCategory="documentary"
-				title="How Donald Trump’s broken promises failed Ohio | Anywhere but Washington"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
-
-export const WithOverlayAndPosterImage = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<OverlayAutoplayExplainer />
-			<YoutubeAtom
-				index={123}
-				videoId="N9Cgy-ke5-s"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				duration={252}
-				format={{
-					theme: Pillar.Opinion,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				videoCategory="live"
-				overrideImage={overrideImage}
-				consentState={consentStateCanTarget}
-				posterImage={posterImage}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				title="How Donald Trump’s broken promises failed Ohio"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				kicker="Breaking News"
-				showTextOverlay={true}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
-
-export const GiveConsent = (): JSX.Element => {
-	const [consented, setConsented] = useState(false);
-	return (
-		<>
-			<OverlayAutoplayExplainer />
-			<button onClick={() => setConsented(true)}>Give consent</button>
-			<div style={containerStyle}>
+		return (
+			<>
+				<button onClick={() => setConsented(true)}>Give consent</button>
 				<YoutubeAtom
-					index={123}
-					videoId="3jpXAMwRSu4"
-					alt="Microscopic image of COVID"
-					eventEmitters={[
-						(e) => console.log(`analytics event ${e} called`),
-					]}
-					consentState={consented ? consentStateCanTarget : undefined}
-					duration={252}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					overrideImage={overrideImage}
-					height={450}
-					width={800}
-					shouldStick={false}
-					isMainMedia={false}
-					title="How to stop the spread of coronavirus"
-					imaEnabled={false}
-					abTestParticipations={{}}
-					adTargeting={adTargeting}
-					imagePositionOnMobile="none"
-					imageSize="large"
+					{...args}
+					consentState={
+						consented ? NoOverlay.args.consentState : undefined
+					}
 				/>
-			</div>
-		</>
-	);
-};
+			</>
+		);
+	},
+	decorators: [OverlayAutoplayExplainer],
+} satisfies Story;
 
-export const Sticky = (): JSX.Element => {
-	return (
-		<div>
-			<div>Scroll down...</div>
-			<div style={{ height: '1000px' }}></div>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				shouldPauseOutOfView={true}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<div style={{ height: '1000px' }}></div>
-		</div>
-	);
-};
+export const Sticky = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		shouldStick: true,
+		isMainMedia: true,
+		shouldPauseOutOfView: true,
+		title: NoOverlay.args.title,
+	},
+	decorators: [ScrollDown('text')],
+} satisfies Story;
 
-export const StickyMainMedia = (): JSX.Element => {
-	return (
-		<div>
-			<div>Scroll down...</div>
-			<div style={{ height: '1000px' }}></div>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<div style={{ height: '1000px' }}></div>
-		</div>
-	);
-};
+export const StickyMainMedia = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		shouldStick: true,
+		isMainMedia: true,
+		title: NoOverlay.args.title,
+	},
+	decorators: [ScrollDown('text')],
+} satisfies Story;
 
 /**
  * Tests duplicate YoutubeAtoms on the same page.
  * Players should play independently.
  * If another video is played any other playing video should pause.
  */
-export const DuplicateVideos = (): JSX.Element => {
-	return (
-		<div style={containerStyleSmall}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
+export const DuplicateVideos = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		shouldStick: true,
+		isMainMedia: undefined,
+	},
+	render: (args) => (
+		<>
+			<YoutubeAtom {...args} />
 			<br />
-			<YoutubeAtom
-				index={345}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
-
-DuplicateVideos.parameters = {
-	chromatic: { disableSnapshot: true },
-};
+			<YoutubeAtom {...args} index={345} />
+		</>
+	),
+	decorators: [SmallContainer],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+} satisfies Story;
 
 /**
  * Tests multiple YoutubeAtoms on the same page.
@@ -405,570 +279,147 @@ DuplicateVideos.parameters = {
  * If another video is played any other playing video should pause.
  * Closing a sticky video should pause the video.
  */
-export const MultipleStickyVideos = (): JSX.Element => {
-	return (
-		<div style={{ width: '500px', height: '5000px' }}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<YoutubeAtom
-				index={456}
-				videoId="pcMiS6PW8aQ"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<YoutubeAtom
-				index={789}
-				videoId="3jpXAMwRSu4"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
+export const MultipleStickyVideos = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		shouldStick: true,
+		isMainMedia: true,
+		title: NoOverlay.args.title,
+	},
+	render: (args) => (
+		<div
+			css={css`
+				width: 500px;
+				height: 5000px;
+			`}
+		>
+			<YoutubeAtom {...args} />
+			<YoutubeAtom {...args} index={456} videoId="pcMiS6PW8aQ" />
+			<YoutubeAtom {...args} index={789} videoId="3jpXAMwRSu4" />
 		</div>
-	);
-};
+	),
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+} satisfies Story;
 
-MultipleStickyVideos.parameters = {
-	chromatic: { disableSnapshot: true },
-};
-
-export const PausesOffscreen = (): JSX.Element => {
-	return (
+export const PausesOffscreen = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		isMainMedia: true,
+		title: NoOverlay.args.title,
+		shouldPauseOutOfView: true,
+	},
+	render: (args) => (
 		<div>
 			<div>Scroll down...</div>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={false}
-				abTestParticipations={{}}
-				adTargeting={adTargeting}
-				shouldPauseOutOfView={true}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<div style={{ height: '1000px' }}></div>
+			<YoutubeAtom {...args} />
+			<div
+				css={css`
+					height: 1000px;
+				`}
+			></div>
 			<p>It stopped playing!</p>
 		</div>
-	);
-};
+	),
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
+} satisfies Story;
 
-PausesOffscreen.parameters = {
-	chromatic: { disableSnapshot: true },
-};
+export const NoConsentWithIma = {
+	...NoConsent,
+	args: {
+		...NoConsent.args,
+		imaEnabled: true,
+	},
+} satisfies Story;
 
-export const NoConsentWithIma = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const AdFreeWithIma = {
+	args: {
+		...NoConsent.args,
+		consentState: NoOverlay.args.consentState,
+		imaEnabled: true,
+	},
+	decorators: [Container],
+} satisfies Story;
 
-export const AdFreeWithIma = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={{ disableAds: true }}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const NoOverlayWithIma = {
+	args: {
+		...NoOverlay.args,
+		imaEnabled: true,
+	},
+	decorators: [Container],
+} satisfies Story;
 
-export const NoOverlayWithIma = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const WithOverrideImageWithIma = {
+	args: {
+		...WithOverrideImage.args,
+		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
+		imaEnabled: true,
+	},
+	decorators: [Container],
+} satisfies Story;
 
-export const WithOverrideImageWithIma = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<YoutubeAtom
-				index={123}
-				videoId="3jpXAMwRSu4"
-				alt="Microscopic image of COVID"
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				duration={252}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				format={{
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				overrideImage={overrideImage}
-				shouldStick={false}
-				isMainMedia={false}
-				title="How to stop the spread of coronavirus"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const WithPosterImageWithIma = {
+	args: {
+		...WithPosterImage.args,
+		imaEnabled: true,
+	},
+	decorators: [Container],
+} satisfies Story;
 
-export const WithPosterImageWithIma = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<YoutubeAtom
-				index={123}
-				videoId="N9Cgy-ke5-s"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				format={{
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				duration={252}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				posterImage={posterImage}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				title="How Donald Trump’s broken promises failed Ohio | Anywhere but Washington"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const WithOverlayAndPosterImageWithIma = {
+	args: {
+		...WithOverlayAndPosterImage.args,
+		imaEnabled: true,
+		kicker: undefined,
+		showTextOverlay: undefined,
+	},
+	decorators: [Container],
+} satisfies Story;
 
-export const WithOverlayAndPosterImageWithIma = (): JSX.Element => {
-	return (
-		<div style={containerStyle}>
-			<YoutubeAtom
-				index={123}
-				videoId="N9Cgy-ke5-s"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				duration={252}
-				format={{
-					theme: Pillar.Opinion,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				overrideImage={overrideImage}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				posterImage={posterImage}
-				height={450}
-				width={800}
-				shouldStick={false}
-				isMainMedia={false}
-				title="How Donald Trump’s broken promises failed Ohio"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
+export const GiveConsentWithIma = {
+	...GiveConsent,
+	args: {
+		...GiveConsent.args,
+		imaEnabled: true,
+	},
+	decorators: [],
+} satisfies Story;
 
-export const GiveConsentWithIma = (): JSX.Element => {
-	const [consented, setConsented] = useState(false);
-	return (
-		<>
-			<button onClick={() => setConsented(true)}>Give consent</button>
-			<div style={containerStyle}>
-				<YoutubeAtom
-					index={123}
-					videoId="3jpXAMwRSu4"
-					alt="Microscopic image of COVID"
-					eventEmitters={[
-						(e) => console.log(`analytics event ${e} called`),
-					]}
-					adTargeting={adTargeting}
-					consentState={consented ? consentStateCanTarget : undefined}
-					duration={252}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-					overrideImage={overrideImage}
-					height={450}
-					width={800}
-					shouldStick={false}
-					isMainMedia={false}
-					title="How to stop the spread of coronavirus"
-					imaEnabled={true}
-					abTestParticipations={{}}
-					imagePositionOnMobile="none"
-					imageSize="large"
-				/>
-			</div>
-		</>
-	);
-};
+export const StickyWithIma = {
+	args: {
+		...Sticky.args,
+		imaEnabled: true,
+		shouldPauseOutOfView: undefined,
+	},
+	decorators: [ScrollDown('arrow')],
+} satisfies Story;
 
-export const StickyWithIma = (): JSX.Element => {
-	return (
-		<div>
-			<div style={{ fontSize: '36px' }}>⬇️</div>
-			<div style={{ height: '1000px' }}></div>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<div style={{ height: '1000px' }}></div>
-		</div>
-	);
-};
+export const StickyMainMediaWithIma = {
+	args: {
+		...StickyMainMedia.args,
+		imaEnabled: true,
+	},
+	decorators: [ScrollDown('arrow')],
+} satisfies Story;
 
-export const StickyMainMediaWithIma = (): JSX.Element => {
-	return (
-		<div>
-			<div style={{ fontSize: '36px' }}>⬇️</div>
-			<div style={{ height: '1000px' }}></div>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<div style={{ height: '1000px' }}></div>
-		</div>
-	);
-};
+export const DuplicateVideosWithIma = {
+	...DuplicateVideos,
+	args: {
+		...DuplicateVideos.args,
+		imaEnabled: true,
+	},
+	parameters: undefined,
+} satisfies Story;
 
-export const DuplicateVideosWithIma = (): JSX.Element => {
-	return (
-		<div style={containerStyleSmall}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<br />
-			<YoutubeAtom
-				index={345}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
-
-DuplicateVideos.parameters = {
-	chromatic: { disableSnapshot: true },
-};
-
-export const MultipleStickyVideosWithIma = (): JSX.Element => {
-	return (
-		<div style={{ width: '500px', height: '5000px' }}>
-			<YoutubeAtom
-				index={123}
-				videoId="-ZCvZmYlQD8"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<YoutubeAtom
-				index={456}
-				videoId="pcMiS6PW8aQ"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-			<YoutubeAtom
-				index={789}
-				videoId="3jpXAMwRSu4"
-				alt=""
-				eventEmitters={[
-					(e) => console.log(`analytics event ${e} called`),
-				]}
-				adTargeting={adTargeting}
-				consentState={consentStateCanTarget}
-				duration={252}
-				format={{
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
-				height={450}
-				width={800}
-				shouldStick={true}
-				isMainMedia={true}
-				title="Rayshard Brooks: US justice system treats us like 'animals'"
-				imaEnabled={true}
-				abTestParticipations={{}}
-				imagePositionOnMobile="none"
-				imageSize="large"
-			/>
-		</div>
-	);
-};
-
-MultipleStickyVideosWithIma.parameters = {
-	chromatic: { disableSnapshot: true },
-};
+export const MultipleStickyVideosWithIma = {
+	...MultipleStickyVideos,
+	args: {
+		...MultipleStickyVideos.args,
+		imaEnabled: true,
+	},
+} satisfies Story;
