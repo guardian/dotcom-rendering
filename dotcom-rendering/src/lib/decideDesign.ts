@@ -64,6 +64,8 @@ export const decideDesign = ({
 			return ArticleDesign.Timeline;
 		case 'ProfileDesign':
 			return ArticleDesign.Profile;
+		case 'CrosswordDesign':
+			return ArticleDesign.Crossword;
 		default:
 			return ArticleDesign.Standard;
 	}

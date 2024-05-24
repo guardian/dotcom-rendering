@@ -34,7 +34,7 @@ export const enhanceCrossword = (article: DCRArticle): DCRArticle => {
 		};
 		return {
 			...article,
-			format: { ...article.format, design: 'InteractiveDesign' },
+			format: { ...article.format, design: 'CrosswordDesign' },
 			blocks: [
 				{
 					id: randomUUID(),
@@ -49,7 +49,6 @@ export const enhanceCrossword = (article: DCRArticle): DCRArticle => {
 						article.webPublicationSecondaryDateDisplay,
 				},
 			],
-			crossword: undefined,
 		};
 	}
 

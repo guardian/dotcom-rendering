@@ -76,6 +76,7 @@ export const Contributor = ({ byline, tags, format, source }: Props) => (
 						standfirstColourBelowDesktop,
 				]}
 			>
+				{format.design === ArticleDesign.Crossword && 'Set by: '}
 				<BylineLink
 					byline={byline}
 					tags={tags}

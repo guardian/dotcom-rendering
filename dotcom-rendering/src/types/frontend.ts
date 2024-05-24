@@ -118,7 +118,7 @@ export interface FEArticleType {
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
-	crossword?: GuardianCrossword;
+	crossword?: GuardianCrossword & { instructions: string };
 }
 
 type MatchType = 'CricketMatchType' | 'FootballMatchType';

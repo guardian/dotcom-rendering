@@ -1,6 +1,6 @@
-import { css, Global } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -12,15 +12,14 @@ import React from 'react';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
-import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.importable';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { CrosswordInstructions } from '../components/CrosswordInstructions';
 import { CrosswordLinks } from '../components/CrosswordLinks';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -29,17 +28,15 @@ import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader';
-import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
-import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
@@ -50,15 +47,10 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
-import {
-	interactiveGlobalStyles,
-	interactiveLegacyClasses,
-} from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
+const CrosswordGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
-		className={interactiveLegacyClasses.contentInteractiveGrid}
 		css={css`
 			/* IE Fallback */
 			display: flex;
@@ -83,43 +75,37 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
+					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-template-columns: 220px 1fr 300px;
 
 					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
+						'title  headline                right-column'
+						'lines  crossword-links         right-column'
+						'meta   standfirst              right-column'
+						'meta   crossword-instructions  right-column'
+						'body   body                    right-column';
 				}
 
 				/*
 					Explanation of each unit of grid-template-columns
 
-					Left Column (220 - 1px border)
-					Vertical grey border
+					Left Column
 					Main content
+					Right Column
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr;
+					grid-template-columns: 140px 1fr 300px;
 
 					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
+						'title  headline                right-column'
+						'lines  crossword-links         right-column'
+						'meta   standfirst              right-column'
+						'meta   crossword-instructions  right-column'
+						'body   body                    right-column';
 				}
 
 				${until.leftCol} {
@@ -127,12 +113,12 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
+						'crossword-links'
 						'standfirst'
-						'media'
 						'lines'
 						'meta'
-						'body'
-						'.';
+						'crossword-instructions'
+						'body';
 				}
 
 				${until.desktop} {
@@ -140,10 +126,11 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas:
 						'title'
 						'headline'
+						'crossword-links'
 						'standfirst'
-						'media'
 						'lines'
 						'meta'
+						'crossword-instructions'
 						'body';
 				}
 
@@ -151,12 +138,13 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
-						'media'
 						'title'
 						'headline'
+						'crossword-links'
 						'standfirst'
 						'lines'
 						'meta'
+						'crossword-instructions'
 						'body';
 				}
 			}
@@ -183,26 +171,6 @@ const stretchLines = css`
 	}
 `;
 
-const starWrapper = css`
-	margin-bottom: 18px;
-	margin-top: 6px;
-	background-color: ${themePalette('--star-rating-background')};
-	color: ${themePalette('--star-rating-fill')};
-	display: inline-block;
-
-	${until.phablet} {
-		padding-left: 20px;
-		margin-left: -20px;
-	}
-	${until.leftCol} {
-		padding-left: 0px;
-		margin-left: -0px;
-	}
-
-	padding-left: 10px;
-	margin-left: -10px;
-`;
-
 interface CommonProps {
 	article: DCRArticle;
 	format: ArticleFormat;
@@ -218,11 +186,10 @@ interface AppsProps extends CommonProps {
 	renderingTarget: 'Apps';
 }
 
-export const InteractiveLayout = (props: WebProps | AppsProps) => {
+export const CrosswordLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
-		editionId,
 	} = article;
 
 	const isApps = renderingTarget === 'Apps';
@@ -247,10 +214,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 		<>
 			{isWeb && (
 				<>
-					{article.isLegacyInteractive && (
-						<Global styles={interactiveGlobalStyles} />
-					)}
-
 					<div>
 						{renderAds && (
 							<Stuck>
@@ -421,20 +384,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						)}
 					</div>
 
-					{format.theme === ArticleSpecial.Labs && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								backgroundColour={sourcePalette.labs[400]}
-								borderColour={sourcePalette.neutral[60]}
-								sectionId="labs-header"
-							>
-								<LabsHeader editionId={editionId} />
-							</Section>
-						</Stuck>
-					)}
-
 					{renderAds && article.config.switches.surveys && (
 						<AdSlot position="survey" display={format.display} />
 					)}
@@ -446,11 +395,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						<Island priority="critical">
 							<AdPortals />
 						</Island>
-						<Island priority="feature" defer={{ until: 'idle' }}>
-							<AppsLightboxImageStore
-								images={article.imagesForAppsLightbox}
-							/>
-						</Island>
 					</>
 				)}
 				<Section
@@ -460,33 +404,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					element="article"
-					className={interactiveLegacyClasses.contentInteractive}
 				>
-					<div
-						className={interactiveLegacyClasses.contentInteractive}
-					>
-						<InteractiveGrid>
-							<GridItem area="media">
-								<div css={maxWidth}>
-									<MainMedia
-										format={format}
-										elements={article.mainMediaElements}
-										host={host}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										ajaxUrl={article.config.ajaxUrl}
-										abTests={article.config.abTests}
-										switches={article.config.switches}
-										isAdFreeUser={article.isAdFreeUser}
-										isSensitive={article.config.isSensitive}
-										editionId={article.editionId}
-									/>
-								</div>
-							</GridItem>
+					<div>
+						<CrosswordGrid>
 							<GridItem area="title" element="aside">
-								<div
-									className={`${interactiveLegacyClasses.contentLabels} ${interactiveLegacyClasses.contentLabelsNotImmersive}`}
-								>
+								<div>
 									<ArticleTitle
 										format={format}
 										tags={article.tags}
@@ -498,13 +420,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									/>
 								</div>
 							</GridItem>
-							<GridItem area="border">
-								{format.theme === ArticleSpecial.Labs ? (
-									<></>
-								) : (
-									<Border />
-								)}
-							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
 									<ArticleHeadline
@@ -515,33 +430,24 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
-										hasStarRating={
-											typeof article.starRating ===
-											'number'
-										}
+										hasStarRating={false}
 									/>
 								</div>
-								{article.starRating !== undefined ? (
-									<div css={starWrapper}>
-										<StarRating
-											rating={article.starRating}
-											size="large"
-										/>
-									</div>
-								) : (
-									<></>
-								)}
 							</GridItem>
+							{article.crossword && (
+								<GridItem area="crossword-links">
+									<CrosswordLinks
+										css={maxWidth}
+										crossword={article.crossword}
+									/>
+								</GridItem>
+							)}
 							<GridItem area="standfirst">
-								{format.design === ArticleDesign.Crossword &&
-									article.crossword && (
-										<CrosswordLinks
-											crossword={article.crossword}
-										/>
-									)}
 								<Standfirst
 									format={format}
-									standfirst={article.standfirst}
+									standfirst={
+										'Download the Guardian app for a puzzles experience'
+									}
 								/>
 							</GridItem>
 
@@ -642,6 +548,16 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									)}
 								</div>
 							</GridItem>
+							{!!article.crossword?.instructions && (
+								<GridItem area="crossword-instructions">
+									<CrosswordInstructions
+										instructions={
+											article.crossword.instructions
+										}
+										css={maxWidth}
+									/>
+								</GridItem>
+							)}
 							<GridItem area="body" element="article">
 								<ArticleContainer format={format}>
 									<ArticleBody
@@ -682,7 +598,21 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									/>
 								</ArticleContainer>
 							</GridItem>
-						</InteractiveGrid>
+							<GridItem area="right-column">
+								<RightColumn>
+									{renderAds ? (
+										<AdSlot
+											position="right"
+											display={format.display}
+											isPaidContent={isPaidContent}
+											shouldHideReaderRevenue={
+												article.shouldHideReaderRevenue
+											}
+										/>
+									) : null}
+								</RightColumn>
+							</GridItem>
+						</CrosswordGrid>
 					</div>
 				</Section>
 
