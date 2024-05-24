@@ -32,6 +32,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	> p {
+		font-style: italic;
 		&:first-of-type {
 			display: inline;
 		}

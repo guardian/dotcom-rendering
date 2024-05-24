@@ -6,11 +6,10 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
-	headline,
 	headlineBold17,
 	neutral,
 	remSpace,
-	textSans,
+	textSansBold17,
 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -29,7 +28,13 @@ interface Props {
 
 const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
-		${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
+		${headlineBold17};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		line-height: 1.4;
 		color: ${text.seriesTitle(format)};
 		text-decoration: none;
 
@@ -40,7 +45,13 @@ const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const labsLinkStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
+	${textSansBold17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.4;
 	color: ${text.seriesTitle(format)};
 	text-decoration: none;
 
@@ -53,11 +64,23 @@ const immersiveLinkStyles = css`
 	color: ${neutral[100]};
 	text-decoration: none;
 	white-space: nowrap;
-	${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
+	${headlineBold17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.4;
 `;
 
 const immersiveLabsLinkStyles = css`
-	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
+	${textSansBold17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.4;
 `;
 
 const blogLinkStyles = (format: ArticleFormat): SerializedStyles => css`

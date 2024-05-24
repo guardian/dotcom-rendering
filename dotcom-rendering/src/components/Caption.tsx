@@ -4,7 +4,7 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	space,
-	textSans,
+	textSans12,
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
@@ -271,7 +271,13 @@ export const Caption = ({
 				<figcaption
 					css={[
 						css`
-							${textSans.xxsmall({ lineHeight: 'tight' })};
+							${textSans12};
+							/**
+							 * Typography preset styles should not be overridden.
+							 * This has been done because the styles do not directly map to the new presets.
+							 * Please speak to your team's designer and update this to use a more appropriate preset.
+							 */
+							line-height: 1.15;
 							color: ${isMainMedia
 								? palette(
 										'--caption-photo-essay-main-media-text',
