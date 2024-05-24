@@ -213,12 +213,19 @@ export const GiveConsent = {
 		return (
 			<>
 				<button onClick={() => setConsented(true)}>Give consent</button>
-				<YoutubeAtom
-					{...args}
-					consentState={
-						consented ? NoOverlay.args.consentState : undefined
-					}
-				/>
+				<div
+					css={css`
+						width: 800px;
+						margin: 24px;
+					`}
+				>
+					<YoutubeAtom
+						{...args}
+						consentState={
+							consented ? NoOverlay.args.consentState : undefined
+						}
+					/>
+				</div>
 			</>
 		);
 	},
@@ -367,6 +374,7 @@ export const WithPosterImageWithIma = {
 	args: {
 		...WithPosterImage.args,
 		imaEnabled: true,
+		videoCategory: undefined,
 	},
 	decorators: [Container],
 } satisfies Story;
@@ -375,6 +383,7 @@ export const WithOverlayAndPosterImageWithIma = {
 	args: {
 		...WithOverlayAndPosterImage.args,
 		imaEnabled: true,
+		videoCategory: undefined,
 		kicker: undefined,
 		showTextOverlay: undefined,
 	},
