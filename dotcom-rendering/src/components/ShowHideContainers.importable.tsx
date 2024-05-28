@@ -25,16 +25,16 @@ const getContainerStates = (): ContainerStates => {
 	 * - If a user has never interacted with the show/hide feature, no calls to Ophan will be made
 	 */
 	Object.entries(item).map(
-		([key, value]) =>
+		([containerId, status]) =>
 			void submitComponentEvent(
 				{
 					component: {
 						// Awaiting release of latest libs version to use "satifies" keyword
 						componentType: 'CONTAINER' as OphanComponentType,
-						id: key,
+						id: containerId,
 					},
 					action: 'VIEW',
-					value,
+					value: status,
 				},
 				'Web',
 			),
