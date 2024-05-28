@@ -3824,6 +3824,17 @@ const liveBlockContainerBackgroundLight: PaletteFunction = () =>
 const liveBlockContainerBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 
+const localElectionTrackerFontColourLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
+const localElectionTrackerFontColourDark: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+
+const localElectionTrackerBorderColourLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const localElectionTrackerBorderColourDark: PaletteFunction = () => '#606060';
+
 const liveBlockBorderTopLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -6120,6 +6131,14 @@ const paletteColours = {
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,
 		dark: liveBlockContainerBackgroundDark,
+	},
+	'--local-election-tracker-font-colour': {
+		light: localElectionTrackerFontColourLight,
+		dark: localElectionTrackerFontColourDark,
+	},
+	'--local-election-tracker-border-colour': {
+		light: localElectionTrackerBorderColourLight,
+		dark: localElectionTrackerBorderColourDark,
 	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
