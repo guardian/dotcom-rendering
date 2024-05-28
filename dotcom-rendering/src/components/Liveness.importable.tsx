@@ -150,11 +150,38 @@ const getIconString = (num: number): string => {
 	else return '5-plus';
 };
 
+const updateFavicon = async (blocks?: Block[]) => {
+	// console.log({blocks})
+	if (!blocks) return;
+	const favicon = getFavicon(document);
+	console.log({ favicon });
+
+	if (!favicon) return;
+
+	const faviconSize = 32;
+	const canvas = document.createElement('canvas');
+	const context = canvas.getContext('2d');
+	if (!context) return;
+
+	canvas.width = faviconSize;
+	canvas.height = faviconSize;
+	context.fillStyle = '#F76B67';
+	context.fillRect(0, 0, canvas.width, canvas.height);
+
+	favicon.element.href = canvas.toDataURL('image/png');
+
+	const tinyfontImg = await new Promise<HTMLImageElement>((resolve) => {
+		const imageEl = new Image();
+		imageEl.src = 'https://uploads.guim.co.uk/2024/05/28/tinyfont.png';
+		imageEl.onload = () => resolve(imageEl);
+	});
+};
+
 /**
  * Return the current link element corresponding to the favicon
  *
  */
-const getFavicon = (document: Document): Favicon | undefined => {
+export const getFavicon = (document: Document): Favicon | undefined => {
 	const favicon = document.querySelector('link[rel="icon"]');
 	if (favicon && favicon instanceof HTMLLinkElement) {
 		return {
@@ -282,14 +309,7 @@ export const Liveness = ({
 
 	useEffect(() => {
 		if (favicon) {
-			if (numHiddenBlocks > 0) {
-				const newFaviconHref = `https://uploads.guim.co.uk/2024/05/28/gu-liveblog-${getIconString(
-					numHiddenBlocks,
-				)}.png`;
-				favicon.element.href = newFaviconHref;
-			} else if (favicon.element.href !== favicon.initialHref) {
-				favicon.element.href = favicon.initialHref;
-			}
+			updateFavicon().catch((error) => console.log(error));
 		}
 	}, [numHiddenBlocks, webTitle, favicon]);
 

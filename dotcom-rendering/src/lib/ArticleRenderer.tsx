@@ -66,6 +66,7 @@ export const ArticleRenderer = ({
 	abTests,
 	editionId,
 }: Props) => {
+	console.log('SDSDS');
 	const renderedElements = elements.map((element, index, { length }) => {
 		return (
 			<RenderArticleElement

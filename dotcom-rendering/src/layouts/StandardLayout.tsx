@@ -368,6 +368,7 @@ interface AppProps extends Props {
 }
 
 export const StandardLayout = (props: WebProps | AppProps) => {
+	console.log('What');
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },

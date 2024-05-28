@@ -875,7 +875,7 @@ export const RenderArticleElement = ({
 	isListElement,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
-
+	console.log('SDSDS');
 	const el = renderElement({
 		format,
 		element: withUpdatedRole,

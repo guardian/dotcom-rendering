@@ -18,6 +18,9 @@ import type { TagType } from '../types/tag';
 import { Island } from './Island';
 import { LiveBlogRenderer } from './LiveBlogRenderer';
 import { TableOfContents } from './TableOfContents.importable';
+import { useEffect } from 'react';
+import { getFavicon } from './Liveness.importable';
+import { FaviconUpdater } from './FaviconUpdater.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -208,6 +211,9 @@ export const ArticleBody = ({
 				lang={language}
 				dir={languageDirection}
 			>
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<FaviconUpdater blocks={blocks} />
+				</Island>
 				<ArticleRenderer
 					format={format}
 					elements={blocks[0] ? blocks[0].elements : []}
