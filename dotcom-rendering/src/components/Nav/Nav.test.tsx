@@ -10,7 +10,6 @@ describe('Nav', () => {
 			value={{
 				renderingTarget: 'Web',
 				darkModeAvailable: false,
-				inAdvertisingPartnerABTest: false,
 				assetOrigin: '/',
 			}}
 		>
