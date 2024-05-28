@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
+import e from 'express';
 
 type Props = {
 	pageId: string;
@@ -17,6 +18,11 @@ type Props = {
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
 	selectedTopics?: Topic[];
+};
+
+type Favicon = {
+	element: HTMLLinkElement;
+	initialHref: string;
 };
 
 /**
@@ -134,6 +140,32 @@ function getKey(
 }
 
 /**
+ * Return a string used to construct the url of a liveblog favicon,
+ * based on the number of new blocks received via polling.
+ *
+ * @returns string
+ */
+const getIconString = (num: number): string => {
+	if (num <= 5) return num.toString();
+	else return '5-plus';
+};
+
+/**
+ * Return the current link element corresponding to the favicon
+ *
+ */
+const getFavicon = (document: Document): Favicon | undefined => {
+	const favicon = document.querySelector('link[rel="icon"]');
+	if (favicon && favicon instanceof HTMLLinkElement) {
+		return {
+			element: favicon,
+			initialHref: favicon.href,
+		};
+	}
+	return undefined;
+};
+
+/**
  * Allow new blocks on live blogs to be added without page reload.
  * Polls the content API inserts news blocks if the user
  * is at the top of the article.
@@ -163,10 +195,12 @@ export const Liveness = ({
 
 	const [topOfBlog, setTopOfBlog] = useState<Element | null>(null);
 	const [toastRoot, setToastRoot] = useState<Element | null>(null);
+	const [favicon, setFavicon] = useState<Favicon | undefined>(undefined);
 
 	useEffect(() => {
 		setTopOfBlog(document.getElementById('top-of-blog'));
 		setToastRoot(document.getElementById('toast-root'));
+		setFavicon(getFavicon(document));
 	}, []);
 
 	/**
@@ -183,7 +217,7 @@ export const Liveness = ({
 						topOfBlog &&
 							insert(data.html, enhanceTweetsSwitch, topOfBlog);
 					} catch (e) {
-						console.log('>> failed >>', e);
+						console.warn('>> failed >>', e);
 					}
 				}
 
@@ -247,9 +281,17 @@ export const Liveness = ({
 	});
 
 	useEffect(() => {
-		document.title =
-			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
-	}, [numHiddenBlocks, webTitle]);
+		if (favicon) {
+			if (numHiddenBlocks > 0) {
+				const newFaviconHref = `https://uploads.guim.co.uk/2024/05/28/gu-liveblog-${getIconString(
+					numHiddenBlocks,
+				)}.png`;
+				favicon.element.href = newFaviconHref;
+			} else if (favicon.element.href !== favicon.initialHref) {
+				favicon.element.href = favicon.initialHref;
+			}
+		}
+	}, [numHiddenBlocks, webTitle, favicon]);
 
 	useEffect(() => {
 		if (!topOfBlog) return;
@@ -343,7 +385,7 @@ export const Liveness = ({
 		 * [stickily positioned element]: https://developer.mozilla.org/en-US/docs/Web/CSS/position#types_of_positioning
 		 * [containing block]: https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 		 */
-		return ReactDOM.createPortal(
+		return createPortal(
 			<Toast
 				onClick={handleToastClick}
 				count={numHiddenBlocks}
