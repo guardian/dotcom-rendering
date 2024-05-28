@@ -325,6 +325,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={true}
 							isImmersive={false}
 							displayRoundel={false}

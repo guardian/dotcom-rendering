@@ -220,6 +220,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					}
 					discussionApiUrl={article.config.discussionApiUrl}
 					idApiUrl={article.config.idApiUrl}
+					contributionsServiceUrl={article.contributionsServiceUrl}
 					showSubNav={false}
 					isImmersive={false}
 					displayRoundel={false}

@@ -80,6 +80,7 @@ export const AllEditorialNewslettersPageLayout = ({
 								newslettersPage.config.discussionApiUrl
 							}
 							idApiUrl={config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
 							displayRoundel={false}
