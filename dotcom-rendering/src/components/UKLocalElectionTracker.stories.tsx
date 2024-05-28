@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRFrontCard } from '../types/front';
@@ -61,4 +62,47 @@ export const DynamoContainer = {
 	),
 } satisfies Story;
 
-// TODO: Add stories for iOS and Android
+export const IOSWebView = {
+	parameters: {
+		chromatic: {
+			modes: {
+				'light mobile': allModes['light mobile'],
+				'dark mobile': allModes['dark mobile'],
+			},
+		},
+		viewport: {
+			defaultViewport: 'mobile',
+		},
+	},
+	decorators: [
+		(Story) => (
+			<div style={{ marginLeft: '-10px' }} className={'ios'}>
+				<Story />
+			</div>
+		),
+	],
+} satisfies Story;
+
+export const AndroidWebView = {
+	parameters: {
+		chromatic: {
+			modes: {
+				'light mobile': allModes['light mobile'],
+				'dark mobile': allModes['dark mobile'],
+			},
+		},
+		viewport: {
+			defaultViewport: 'mobile',
+		},
+	},
+	decorators: [
+		(Story) => (
+			<div
+				style={{ backgroundColor: 'white', margin: '10px' }}
+				className={'android'}
+			>
+				<Story />
+			</div>
+		),
+	],
+} satisfies Story;
