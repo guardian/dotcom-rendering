@@ -15,7 +15,7 @@ import {
 	Hide,
 	LinkButton,
 	SvgArrowRightStraight,
-	themeButtonReaderRevenueBrand,
+	themeButtonBrand,
 } from '@guardian/source/react-components';
 import { palette as themePalette } from '../../../palette';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -81,7 +81,7 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 				<>
 					<Hide until="tablet">
 						<LinkButton
-							theme={themeButtonReaderRevenueBrand}
+							theme={themeButtonBrand}
 							priority="primary"
 							href={primaryCta.ctaUrl}
 							icon={<SvgArrowRightStraight />}
@@ -98,7 +98,7 @@ const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
 
 					<Hide from="tablet">
 						<LinkButton
-							theme={themeButtonReaderRevenueBrand}
+							theme={themeButtonBrand}
 							priority="primary"
 							href={
 								props.mobileContent?.primaryCta?.ctaUrl ??
