@@ -9,8 +9,8 @@ import {
 	palette,
 	space,
 	textSans14,
-} from '@guardian/source-foundations';
-import { SvgGuardianLogo, SvgMenu } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgGuardianLogo, SvgMenu } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { EditionId } from '../lib/edition';
 import { palette as themePalette } from '../palette';

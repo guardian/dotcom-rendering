@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Hide } from '@guardian/source-react-components';
+import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import { editionList, getEditionFromId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
