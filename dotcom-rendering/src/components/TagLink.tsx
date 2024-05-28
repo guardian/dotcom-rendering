@@ -57,7 +57,6 @@ const tagButtonStyles = css`
 
 const arrowStyles = css`
 	display: inline-flex;
-	justify-content: space-between;
 	align-items: center;
 	border: none;
 	vertical-align: middle;
