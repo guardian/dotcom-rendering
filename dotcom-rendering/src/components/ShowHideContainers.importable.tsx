@@ -34,6 +34,7 @@ const getContainerStates = (): ContainerStates => {
 						id: containerId,
 					},
 					action: 'VIEW',
+					id: 'web-container-status',
 					value: status,
 				},
 				'Web',
