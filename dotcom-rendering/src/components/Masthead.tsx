@@ -56,7 +56,7 @@ export const Masthead = ({
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
 }: Props) => (
-	<>
+	<div data-component="header">
 		<Section
 			fullWidth={true}
 			showTopBorder={false}
@@ -68,7 +68,7 @@ export const Masthead = ({
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
 		>
-			<div data-component="nav4">
+			<div data-component="topbar">
 				<Island priority="critical">
 					<TopBar
 						editionId={editionId}
@@ -120,5 +120,5 @@ export const Masthead = ({
 				</Island>
 			</Section>
 		)}
-	</>
+	</div>
 );
