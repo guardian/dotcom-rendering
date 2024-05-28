@@ -209,7 +209,7 @@ export const Branding = ({ branding, format }: Props) => {
 		locationPrefix: 'article-meta',
 	});
 
-	const { darkModeAvailable } = useConfig();
+	const { darkModeAvailable, updateLogoAdPartnerSwitch } = useConfig();
 
 	const isAdvertisingPartnerOrExclusive =
 		branding.logo.label.toLowerCase() === 'advertising partner' ||
@@ -223,14 +223,18 @@ export const Branding = ({ branding, format }: Props) => {
 			css={[
 				brandingStyle,
 				isAdvertisingPartnerOrExclusive &&
+					updateLogoAdPartnerSwitch &&
 					brandingAdvertisingPartnerStyle,
-				isAdvertisingPartnerAndInteractive && brandingInteractiveStyle,
+				isAdvertisingPartnerAndInteractive &&
+					updateLogoAdPartnerSwitch &&
+					brandingInteractiveStyle,
 			]}
 		>
 			<div
 				css={[
 					labelStyle,
 					isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,
 				]}
@@ -241,6 +245,7 @@ export const Branding = ({ branding, format }: Props) => {
 				css={[
 					brandingLogoStyle,
 					isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch &&
 						!isInteractive &&
 						brandingLogoAdvertisingPartnerStyle,
 				]}
@@ -264,6 +269,7 @@ export const Branding = ({ branding, format }: Props) => {
 				css={[
 					aboutLinkStyle,
 					isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch &&
 						aboutLinkAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogAboutLinkStyle,
 				]}

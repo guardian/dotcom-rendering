@@ -87,6 +87,7 @@ type Props = {
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
+	updateLogoAdPartnerSwitch?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -462,6 +463,7 @@ export const FrontSection = ({
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
+	updateLogoAdPartnerSwitch = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -539,6 +541,7 @@ export const FrontSection = ({
 						/>
 					}
 					collectionBranding={collectionBranding}
+					updateLogoAdPartnerSwitch={updateLogoAdPartnerSwitch}
 				/>
 
 				{leftContent}

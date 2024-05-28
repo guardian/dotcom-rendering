@@ -47,6 +47,7 @@ type Props = {
 	ophanComponentName?: string;
 	isInLabsSection?: boolean;
 	isAdvertisingPartner?: boolean;
+	updateLogoAdPartnerSwitch?: boolean;
 };
 
 export const Badge = ({
@@ -56,6 +57,7 @@ export const Badge = ({
 	ophanComponentName,
 	isInLabsSection = false,
 	isAdvertisingPartner = false,
+	updateLogoAdPartnerSwitch = false,
 }: Props) => {
 	return (
 		<a
@@ -70,7 +72,9 @@ export const Badge = ({
 					isInLabsSection
 						? labsSectionBadgeSizingStyles
 						: frontsSectionBadgeSizingStyles,
-					isAdvertisingPartner && imageAdvertisingPartnerStyles,
+					isAdvertisingPartner &&
+						updateLogoAdPartnerSwitch &&
+						imageAdvertisingPartnerStyles,
 				]}
 				src={imageSrc}
 				alt={isInLabsSection ? 'Labs sponsor logo' : ''}

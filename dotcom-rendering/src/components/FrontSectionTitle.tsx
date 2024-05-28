@@ -14,6 +14,7 @@ import { Badge } from './Badge';
 type Props = {
 	title: React.ReactNode;
 	collectionBranding: CollectionBranding | undefined;
+	updateLogoAdPartnerSwitch: boolean;
 };
 
 const titleStyle = css`
@@ -77,7 +78,11 @@ const aboutThisLinkAdvertisingPartnerStyles = css`
 	color: ${sourcePalette.news[400]};
 `;
 
-export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
+export const FrontSectionTitle = ({
+	title,
+	collectionBranding,
+	updateLogoAdPartnerSwitch,
+}: Props) => {
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
 			const {
@@ -162,12 +167,14 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 				return (
 					<div css={titleStyle}>
 						{title}
-						{isAdvertisingPartnerOrExclusive ? (
+						{isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch ? (
 							<hr css={advertisingPartnerDottedBorder} />
 						) : null}
 						<div
 							css={
 								isAdvertisingPartnerOrExclusive &&
+								updateLogoAdPartnerSwitch &&
 								brandingAdvertisingPartnerStyle
 							}
 						>
@@ -175,6 +182,7 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 								css={[
 									labelStyles,
 									isAdvertisingPartnerOrExclusive &&
+										updateLogoAdPartnerSwitch &&
 										labelAdvertisingPartnerStyles,
 								]}
 							>
@@ -186,12 +194,16 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 								isAdvertisingPartner={
 									isAdvertisingPartnerOrExclusive
 								}
+								updateLogoAdPartnerSwitch={
+									updateLogoAdPartnerSwitch
+								}
 							/>
 							<a
 								href={aboutThisLink}
 								css={[
 									aboutThisLinkStyles,
 									isAdvertisingPartnerOrExclusive &&
+										updateLogoAdPartnerSwitch &&
 										aboutThisLinkAdvertisingPartnerStyles,
 								]}
 							>
