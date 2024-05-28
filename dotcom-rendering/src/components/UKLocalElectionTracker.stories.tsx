@@ -1,11 +1,11 @@
-import { UKLocalElectionTracker as UKLocalElectionTrackerComponent } from './UKLocalElectionTracker';
-import { Meta, StoryObj } from '@storybook/react';
-import { FrontSection } from './FrontSection';
-import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
-import { DynamicPackage } from './DynamicPackage';
-import { DCRFrontCard } from '../types/front';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { Meta, StoryObj } from '@storybook/react';
+import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
+import type { DCRFrontCard } from '../types/front';
+import { DynamicPackage } from './DynamicPackage';
+import { FrontSection } from './FrontSection';
+import { UKLocalElectionTracker as UKLocalElectionTrackerComponent } from './UKLocalElectionTracker';
 
 const meta = {
 	title: 'Components/UK Local Election Tracker',
@@ -36,7 +36,7 @@ const snap: DCRFrontCard = {
 export const UKLocalElectionTracker = {} satisfies Story;
 
 export const DynamoContainer = {
-	render: (args) => (
+	render: () => (
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
@@ -52,6 +52,7 @@ export const DynamoContainer = {
 					standard: trails.slice(1, 4),
 					snap: [snap],
 				}}
+				absoluteServerTimes={true}
 				showAge={true}
 				containerPalette="EventPalette"
 				imageLoading="eager"
