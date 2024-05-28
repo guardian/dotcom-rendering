@@ -1,6 +1,7 @@
+import type { OphanComponentType } from '@guardian/libs';
 import { isObject, isString, storage } from '@guardian/libs';
 import { useEffect } from 'react';
-import { getOphan } from '../client/ophan/ophan';
+import { submitComponentEvent } from '../client/ophan/ophan';
 
 type ContainerStates = { [id: string]: string };
 
@@ -20,27 +21,24 @@ const getContainerStates = (): ContainerStates => {
 	 * Tracks usage of the feature to allow hiding and showing containers on fronts.
 	 *
 	 * When fetching the local storage configuration for container states:
-	 * - If the user has configuration present, we log to Ophan how many containers they have explicitly hidden
-	 * - If they have previously hidden containers and subsequently undone this action, this will be logged as 0
+	 * - If the user has configuration present, we log to Ophan which containers are hidden and which are shown ("opened" or "closed")
 	 * - If a user has never interacted with the show/hide feature, no calls to Ophan will be made
 	 */
-	const containerConfigArr = Object.entries(item);
-
-	if (containerConfigArr.length) {
-		const hiddenContainers = containerConfigArr.filter(
-			([, value]) => value === 'closed',
-		);
-
-		void getOphan('Web').then((ophan) => {
-			ophan.record({
-				component: 'front-containers-hidden',
-				value: {
-					num: hiddenContainers.length,
-					ids: hiddenContainers.map(([c]) => c),
+	Object.entries(item).map(
+		([key, value]) =>
+			void submitComponentEvent(
+				{
+					component: {
+						// Awaiting release of latest libs version to use "satifies" keyword
+						componentType: 'CONTAINER' as OphanComponentType,
+						id: key,
+					},
+					action: 'VIEW',
+					value,
 				},
-			});
-		});
-	}
+				'Web',
+			),
+	);
 
 	return item;
 };
