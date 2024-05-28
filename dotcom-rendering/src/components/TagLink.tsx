@@ -38,7 +38,7 @@ const TagLinkStyle = css`
 		height: auto;
 		width: auto;
 		flex-direction: column;
-		margin-right: -1px; // To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead.
+		margin-right: -1px; /* To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead */
 	}
 `;
 const labelStyles = css`
