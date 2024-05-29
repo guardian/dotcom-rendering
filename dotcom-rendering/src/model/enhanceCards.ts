@@ -327,6 +327,8 @@ export const enhanceCards = (
 
 		const imageSrc = decideImage(faciaCard);
 
+		const isContributorTagPage = !!pageId && pageId.includes('profile/');
+
 		return {
 			format,
 			dataLinkName,
@@ -360,6 +362,7 @@ export const enhanceCards = (
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
+				!isContributorTagPage &&
 				faciaCard.properties.maybeContent?.tags.tags &&
 				faciaCard.properties.image?.type === 'Cutout'
 					? decideAvatarUrl(
