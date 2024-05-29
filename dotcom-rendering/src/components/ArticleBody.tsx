@@ -212,7 +212,7 @@ export const ArticleBody = ({
 				dir={languageDirection}
 			>
 				<Island priority="feature" defer={{ until: 'idle' }}>
-					<FaviconUpdater blocks={blocks} />
+					<FaviconUpdater blocks={blocks} webTitle={webTitle} />
 				</Island>
 				<ArticleRenderer
 					format={format}
