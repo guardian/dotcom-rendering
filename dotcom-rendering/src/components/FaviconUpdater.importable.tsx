@@ -20,7 +20,6 @@ const getElementText = (element: FEElement): string => {
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
 			const el = document.createElement('div');
 			el.innerHTML = element.html;
-			console.log({ html: element.html, textContent: el.textContent });
 			return el.textContent ?? '';
 		default:
 			return '';
@@ -81,8 +80,8 @@ const splitText = (text: string) => {
 	return split;
 };
 
-const updateFavicon = async (blocks?: Block[], webTitle: string) => {
-	if (!blocks) return;
+const getArticleAsCanvas = async (blocks?: Block[], webTitle?: string) => {
+	if (!blocks || !webTitle) return;
 	const favicon = getFavicon(document);
 
 	if (!favicon) return;
@@ -113,11 +112,17 @@ const updateFavicon = async (blocks?: Block[], webTitle: string) => {
 	const firstBlock = blocks[0];
 	if (!firstBlock) return;
 
+	const filteredElements = firstBlock.elements.filter(
+		(el) =>
+			el._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement' ||
+			el._type === 'model.dotcomrendering.pageElements.ImageBlockElement',
+	);
 	const onlyTextEls = firstBlock.elements.filter(
 		(el) =>
 			el._type === 'model.dotcomrendering.pageElements.TextBlockElement',
 	);
-	console.log(onlyTextEls);
+
 	const headlineElement = splitText(webTitle);
 	const printableElements = [
 		headlineElement,
@@ -125,13 +130,27 @@ const updateFavicon = async (blocks?: Block[], webTitle: string) => {
 			.map((el) => getElementText(el))
 			.map((text) => splitText(text)),
 	];
-	console.log(printableElements);
+
 	const totalTextLines = printableElements.flat().length;
 	const headerHeight = 14;
+	// We're assuming all images are 22px high here based on a aspect ratio of 3:2, this will be wrong in some cases.
+	// TODO: prefetch the image elements here so we know their actual height.
+	const assumedImageHeight = 22;
 	const totalElements = printableElements.length;
-	// each line is rendered as 4px high, including blank pixel above char, and elements have 4px blank space after
-	const totalHeight = headerHeight + totalTextLines * 4 + totalElements * 4;
+	const imageCount = filteredElements.filter(
+		(el) =>
+			el._type === 'model.dotcomrendering.pageElements.ImageBlockElement',
+	).length;
+	// 4px per image for space afterwards
+	const totalImageHeight = imageCount * (assumedImageHeight + 4);
+	const totalHeight =
+		headerHeight +
+		totalImageHeight +
+		totalTextLines * 4 +
+		totalElements * 4;
 	canvas.height = totalHeight;
+
+	//TODO Account for image height
 
 	// TODO: add a white background on the whole canvas
 
@@ -141,14 +160,59 @@ const updateFavicon = async (blocks?: Block[], webTitle: string) => {
 	let currentOffset = headerHeight;
 	// Current offset = lines in all preceding blocks + total of preceding blocks + position in current array * 4
 
-	for (const printableElement of printableElements) {
-		for (const textLine of printableElement) {
-			// console.log(textLine)
-			// console.log(currentOffset)
-			writeLineToCanvas(context, textLine, tinyfontImg, currentOffset);
-			// Offset by 4px for each line
-			currentOffset += 4;
+	for (const textLine of headlineElement) {
+		writeLineToCanvas(context, textLine, tinyfontImg, currentOffset);
+		// Offset by 4px for each line
+		currentOffset += 4;
+	}
+	// Leave a blank line after the headline
+	currentOffset += 4;
+
+	for (const el of filteredElements) {
+		if (
+			el._type === 'model.dotcomrendering.pageElements.TextBlockElement'
+		) {
+			const elementText = getElementText(el);
+			const printableTextElement = splitText(elementText);
+			for (const textLine of printableTextElement) {
+				writeLineToCanvas(
+					context,
+					textLine,
+					tinyfontImg,
+					currentOffset,
+				);
+				// Offset by 4px for each line
+				currentOffset += 4;
+			}
 		}
+		if (
+			el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
+		) {
+			const imageUrl = el.media.allImages[0]?.url ?? '';
+			if (imageUrl) {
+				const image = await new Promise<HTMLImageElement>((resolve) => {
+					const imageEl = new Image();
+					imageEl.crossOrigin = 'Anonymous';
+					imageEl.src = imageUrl;
+					imageEl.onload = () => resolve(imageEl);
+				});
+				const { height, width } = image;
+				const destHeight = Math.round(height / (width / faviconSize));
+				context.drawImage(
+					image,
+					0,
+					0,
+					width,
+					height,
+					0,
+					currentOffset,
+					32,
+					destHeight,
+				);
+				currentOffset += destHeight;
+			}
+		}
+
 		// Leave a 4px blank row after each block
 		currentOffset += 4;
 	}
@@ -163,6 +227,7 @@ const updateFavicon = async (blocks?: Block[], webTitle: string) => {
 	// Then try image elements.
 	document.body.appendChild(canvas);
 	favicon.element.href = canvas.toDataURL('image/png');
+	return canvas;
 };
 
 export const FaviconUpdater = ({
@@ -173,7 +238,51 @@ export const FaviconUpdater = ({
 	webTitle: string;
 }) => {
 	useEffect(() => {
-		void updateFavicon(blocks, webTitle);
+		getArticleAsCanvas(blocks, webTitle)
+			.then((articleCanvas) => {
+				const faviconSize = 32;
+				const faviconCanvas = document.createElement('canvas');
+				const faviconContext = faviconCanvas.getContext('2d');
+				const main = document.getElementById('maincontent');
+				if (!faviconContext || !main || !articleCanvas) return;
+				faviconCanvas.width = faviconSize;
+				faviconCanvas.height = faviconSize;
+
+				setInterval(() => {
+					// Find pos in doc relative to main.
+					const mainYMin = main.offsetTop;
+					const mainYMax = main.offsetTop + main.offsetHeight;
+					const currentScroll = window.scrollY;
+					const docHeight = window.innerHeight;
+					const pos =
+						(currentScroll < mainYMin
+							? mainYMin
+							: currentScroll > mainYMax
+							? mainYMax
+							: currentScroll) - mainYMin;
+					const progress = pos / (mainYMax - mainYMin);
+					console.log(currentScroll, mainYMin, mainYMax);
+					const articleCanvasHeight = articleCanvas.height - 32;
+					const articleCanvasYPos = Math.round(
+						articleCanvasHeight * progress,
+					);
+					faviconContext.drawImage(
+						articleCanvas,
+						0,
+						articleCanvasYPos,
+						32,
+						32,
+						0,
+						0,
+						32,
+						32,
+					);
+					const favicon = getFavicon(document);
+					if (!favicon) return;
+					favicon.element.href = faviconCanvas.toDataURL('image/png');
+				}, 500);
+			})
+			.catch(() => null);
 	}, [blocks, webTitle]);
 	// Nothing is rendered by this component
 	return null;
