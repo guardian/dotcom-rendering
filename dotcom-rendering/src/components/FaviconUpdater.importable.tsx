@@ -50,10 +50,8 @@ const writeLineToCanvas = (
 };
 
 const updateFavicon = async (blocks?: Block[]) => {
-	console.log({ blocks });
 	if (!blocks) return;
 	const favicon = getFavicon(document);
-	console.log({ favicon });
 
 	if (!favicon) return;
 
@@ -69,19 +67,11 @@ const updateFavicon = async (blocks?: Block[]) => {
 
 	const tinyfontImg = await new Promise<HTMLImageElement>((resolve) => {
 		const src = `/static/frontend/logos/tinyfont.png`;
-
 		const imageEl = new Image();
-		console.log('what');
 		imageEl.src = src;
 		imageEl.onload = () => resolve(imageEl);
 	});
-	console.log('when');
 
-	console.log(tinyfontImg);
-	// const destPos = {
-	// 	x: 0,
-	// 	y: 0
-	// }
 	const firstEl = blocks[0]?.elements[0];
 	for (const block of blocks) {
 		const elements = block.elements;
