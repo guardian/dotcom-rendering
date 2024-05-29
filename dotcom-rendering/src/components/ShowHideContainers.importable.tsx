@@ -16,26 +16,20 @@ const getContainerStates = (): ContainerStates => {
 
 	if (!isContainerStates(item)) return {};
 
-	/**
-	 * Tracks usage of the feature to allow hiding and showing containers on fronts.
-	 *
-	 * When fetching the local storage configuration for container states:
-	 * - If the user has configuration present, we log to Ophan which containers are hidden (status = "closed")
-	 * - If a user has no currently hidden containers, no calls to Ophan will be made
-	 */
-	Object.entries(item)
-		.filter(([, status]) => status === 'closed')
-		.map(
-			([containerId]) =>
-				void getOphan('Web').then((ophan) =>
-					ophan.record({
-						component: 'hidden-container',
-						value: containerId,
-					}),
-				),
-		);
-
 	return item;
+};
+
+/**
+ * Implemented on 29/05/24 to understand how much the
+ * "hide" container feature is being used
+ */
+const recordHiddenContainer = (sectionId: string): void => {
+	void getOphan('Web').then((ophan) =>
+		ophan.record({
+			component: 'hidden-container',
+			value: sectionId,
+		}),
+	);
 };
 
 export const ShowHideContainers = () => {
@@ -75,6 +69,9 @@ export const ShowHideContainers = () => {
 
 			if (containerStates[sectionId] === 'closed') {
 				toggleContainer(sectionId, e);
+
+				// Track which containers are configured to be hidden
+				recordHiddenContainer(sectionId);
 			}
 		}
 	}, []);
