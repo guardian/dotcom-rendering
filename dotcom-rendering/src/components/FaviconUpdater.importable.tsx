@@ -92,8 +92,6 @@ const getArticleAsCanvas = async (blocks?: Block[], webTitle?: string) => {
 	if (!context) return;
 
 	canvas.width = faviconSize;
-	context.fillStyle = '#F76B67';
-	context.fillRect(0, 0, canvas.width, canvas.height);
 
 	const tinyfontImg = await new Promise<HTMLImageElement>((resolve) => {
 		const src = `/static/frontend/logos/tinyfont.png`;
@@ -149,6 +147,9 @@ const getArticleAsCanvas = async (blocks?: Block[], webTitle?: string) => {
 		totalTextLines * 4 +
 		totalElements * 4;
 	canvas.height = totalHeight;
+
+	context.fillStyle = '#ffffff';
+	context.fillRect(0, 0, canvas.width, canvas.height);
 
 	//TODO Account for image height
 
@@ -253,7 +254,6 @@ export const FaviconUpdater = ({
 					const mainYMin = main.offsetTop;
 					const mainYMax = main.offsetTop + main.offsetHeight;
 					const currentScroll = window.scrollY;
-					const docHeight = window.innerHeight;
 					const pos =
 						(currentScroll < mainYMin
 							? mainYMin
@@ -261,11 +261,19 @@ export const FaviconUpdater = ({
 							? mainYMax
 							: currentScroll) - mainYMin;
 					const progress = pos / (mainYMax - mainYMin);
-					console.log(currentScroll, mainYMin, mainYMax);
+
 					const articleCanvasHeight = articleCanvas.height - 32;
 					const articleCanvasYPos = Math.round(
 						articleCanvasHeight * progress,
 					);
+					console.log({
+						currentScroll,
+						mainYMin,
+						articleCanvasHeight,
+						mainYMax,
+						progress,
+						articleCanvasYPos,
+					});
 					faviconContext.drawImage(
 						articleCanvas,
 						0,
@@ -280,7 +288,7 @@ export const FaviconUpdater = ({
 					const favicon = getFavicon(document);
 					if (!favicon) return;
 					favicon.element.href = faviconCanvas.toDataURL('image/png');
-				}, 500);
+				}, 50);
 			})
 			.catch(() => null);
 	}, [blocks, webTitle]);
