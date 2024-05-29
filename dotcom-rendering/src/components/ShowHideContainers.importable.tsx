@@ -33,13 +33,13 @@ export const ShowHideContainers = () => {
 				section?.classList.add('hidden');
 				element.innerHTML = 'Show';
 				element.setAttribute('aria-expanded', 'false');
-				element.setAttribute('data-link-name', 'Show');
+				element.setAttribute('data-link-name', 'Hide');
 			} else {
 				containerStates[sectionId] = 'opened';
 				section?.classList.remove('hidden');
 				element.innerHTML = 'Hide';
 				element.setAttribute('aria-expanded', 'true');
-				element.setAttribute('data-link-name', 'Hide');
+				element.setAttribute('data-link-name', 'Show');
 			}
 
 			storage.local.set(`gu.prefs.container-states`, containerStates);
