@@ -5442,8 +5442,16 @@ const mastheadTopBarVerticalDivider: PaletteFunction = () =>
 	sourcePalette.brand[600];
 
 const mastheadNavBackground: PaletteFunction = () => sourcePalette.brand[400];
-const mastheadNavLinkText: PaletteFunction = () => sourcePalette.brand[400];
+const mastheadNavLinkText: PaletteFunction = () => sourcePalette.neutral[100];
 const mastheadNavBorder: PaletteFunction = () => sourcePalette.brand[600];
+const mastheadNavLines: PaletteFunction = () => sourcePalette.neutral[86];
+
+const mastheadVeggieBurgerIcon: PaletteFunction = () =>
+	sourcePalette.brand[400];
+const mastheadVeggieBurgerBackground: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
+	sourcePalette.brandAlt[300];
 
 // ----- Palette ----- //
 
@@ -6130,6 +6138,10 @@ const paletteColours = {
 		light: mastheadNavBorder,
 		dark: mastheadNavBorder,
 	},
+	'--masthead-nav-lines': {
+		light: mastheadNavLines,
+		dark: mastheadNavLines,
+	},
 	'--masthead-nav-link-text': {
 		light: mastheadNavLinkText,
 		dark: mastheadNavLinkText,
@@ -6149,6 +6161,18 @@ const paletteColours = {
 	'--masthead-top-bar-vertical-divider': {
 		light: mastheadTopBarVerticalDivider,
 		dark: mastheadTopBarVerticalDivider,
+	},
+	'--masthead-veggie-burger-background': {
+		light: mastheadVeggieBurgerBackground,
+		dark: mastheadVeggieBurgerBackground,
+	},
+	'--masthead-veggie-burger-background-hover': {
+		light: mastheadVeggieBurgerBackgroundHover,
+		dark: mastheadVeggieBurgerBackgroundHover,
+	},
+	'--masthead-veggie-burger-icon': {
+		light: mastheadVeggieBurgerIcon,
+		dark: mastheadVeggieBurgerIcon,
 	},
 	'--match-nav-background': {
 		light: matchNavBackgroundLight,
