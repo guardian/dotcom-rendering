@@ -14,7 +14,7 @@ import {
 } from '@guardian/source-foundations';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
-import type { DCRArticle } from '../types/frontend';
+import type { StarRating as Rating } from '../types/content';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
@@ -28,7 +28,7 @@ interface Props {
 	headlineText: string;
 	contentType: ContentType;
 	url: string;
-	starRating?: DCRArticle['starRating'];
+	starRating?: Rating;
 	linkFormat: ArticleFormat;
 	format: ArticleFormat;
 	tags: TagType[];

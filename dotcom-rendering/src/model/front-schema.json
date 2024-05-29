@@ -990,15 +990,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "enum": [
-                                                        0,
-                                                        1,
-                                                        2,
-                                                        3,
-                                                        4,
-                                                        5
-                                                    ],
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -1711,15 +1703,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "enum": [
-                                                        0,
-                                                        1,
-                                                        2,
-                                                        3,
-                                                        4,
-                                                        5
-                                                    ],
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -2432,15 +2416,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "enum": [
-                                                        0,
-                                                        1,
-                                                        2,
-                                                        3,
-                                                        4,
-                                                        5
-                                                    ],
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -3140,6 +3116,17 @@
                 "SpecialReportAlt"
             ],
             "type": "string"
+        },
+        "StarRating": {
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
         },
         "FEContainerType": {
             "enum": [

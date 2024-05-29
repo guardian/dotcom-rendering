@@ -4,7 +4,7 @@ import {
 	isUndefined,
 } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
-import type { FEElement, TextBlockElement } from '../types/content';
+import type { FEElement, StarRating, TextBlockElement } from '../types/content';
 
 const isFalseH3 = (element: FEElement): boolean => {
 	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
@@ -75,7 +75,7 @@ const isStarRating = (element: FEElement): boolean => {
 
 const extractStarCount = (
 	element: TextBlockElement,
-): 0 | 1 | 2 | 3 | 4 | 5 | undefined => {
+): StarRating | undefined => {
 	const isSelectedStar = (charactor: string): boolean => {
 		return charactor === '★';
 	};
@@ -111,7 +111,7 @@ const isStarableImage = (element: FEElement | undefined): boolean => {
 
 const starifyImages = (elements: FEElement[]): FEElement[] => {
 	const starified: FEElement[] = [];
-	let previousRating: 0 | 1 | 2 | 3 | 4 | 5 | undefined;
+	let previousRating: StarRating | undefined;
 	for (const [index, thisElement] of elements.entries()) {
 		switch (thisElement._type) {
 			case 'model.dotcomrendering.pageElements.TextBlockElement':

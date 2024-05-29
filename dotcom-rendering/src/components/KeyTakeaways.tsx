@@ -4,8 +4,7 @@ import { palette } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { KeyTakeaway } from '../types/content';
-import type { DCRArticle } from '../types/frontend';
+import type { KeyTakeaway, StarRating } from '../types/content';
 import { KeyTakeaway as KeyTakeawayComponent } from './KeyTakeaway';
 
 interface KeyTakeawaysProps {
@@ -19,7 +18,7 @@ interface KeyTakeawaysProps {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: DCRArticle['starRating'];
+	starRating?: StarRating;
 	keyTakeaways: KeyTakeaway[];
 	RenderArticleElement: ArticleElementRenderer;
 	/**

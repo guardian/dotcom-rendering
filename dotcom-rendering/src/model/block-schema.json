@@ -1763,15 +1763,7 @@
                     "type": "string"
                 },
                 "starRating": {
-                    "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
-                    ],
-                    "type": "number"
+                    "$ref": "#/definitions/StarRating"
                 },
                 "isAvatar": {
                     "type": "boolean"
@@ -1834,6 +1826,17 @@
                 "src",
                 "width"
             ]
+        },
+        "StarRating": {
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
         },
         "InstagramBlockElement": {
             "type": "object",
@@ -2619,15 +2622,7 @@
                     "type": "string"
                 },
                 "rating": {
-                    "enum": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
-                    ],
-                    "type": "number"
+                    "$ref": "#/definitions/StarRating"
                 },
                 "size": {
                     "$ref": "#/definitions/RatingSizeType"

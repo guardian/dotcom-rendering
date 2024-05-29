@@ -3,7 +3,7 @@ import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding, EditionBranding } from './branding';
 import type { ServerSideTests, Switches } from './config';
-import type { Image } from './content';
+import type { Image, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { MainMedia } from './mainMedia';
 import type { FETagType } from './tag';
@@ -265,7 +265,7 @@ export type FEFrontCard = {
 		webPublicationDateOption?: number;
 		lastModifiedOption?: number;
 		trailText?: string;
-		starRating?: 0 | 1 | 2 | 3 | 4 | 5;
+		starRating?: StarRating;
 		shortUrlPath?: string;
 		shortUrl: string;
 		group: string;
@@ -303,7 +303,7 @@ export type DCRFrontCard = {
 	headline: string;
 	showQuotedHeadline: boolean;
 	trailText?: string;
-	starRating?: 0 | 1 | 2 | 3 | 4 | 5;
+	starRating?: StarRating;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
 	kickerText?: string;

@@ -11,6 +11,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import type { Branding } from '../../types/branding';
+import type { StarRating as Rating } from '../../types/content';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -19,7 +20,6 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
-import type { DCRArticle } from '../../types/frontend';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
 import type { Palette } from '../../types/palette';
@@ -85,7 +85,7 @@ export type Props = {
 	isPlayableMediaCard?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	starRating?: DCRArticle['starRating'];
+	starRating?: Rating;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
@@ -124,7 +124,7 @@ const StarRatingComponent = ({
 	rating,
 	cardHasImage,
 }: {
-	rating: NonNullable<DCRArticle['starRating']>;
+	rating: Rating;
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>

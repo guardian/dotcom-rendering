@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import { palette } from '../palette';
-import type { RatingSizeType } from '../types/content';
-import type { DCRArticle } from '../types/frontend';
+import type { StarRating as Rating, RatingSizeType } from '../types/content';
 import { StarRating } from './StarRating/StarRating';
 
 type Props = {
-	rating: NonNullable<DCRArticle['starRating']>;
+	rating: Rating;
 	size: RatingSizeType;
 };
 

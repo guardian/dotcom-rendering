@@ -12,8 +12,11 @@ import {
 import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';
-import type { ImageBlockElement, RoleType } from '../types/content';
-import type { DCRArticle } from '../types/frontend';
+import type {
+	ImageBlockElement,
+	StarRating as Rating,
+	RoleType,
+} from '../types/content';
 import type { Palette } from '../types/palette';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
@@ -30,7 +33,7 @@ type Props = {
 	format: ArticleFormat;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
-	starRating?: DCRArticle['starRating'];
+	starRating?: Rating;
 	title?: string;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
@@ -73,11 +76,7 @@ const starsWrapper = css`
 	}
 `;
 
-const PositionStarRating = ({
-	rating,
-}: {
-	rating: NonNullable<DCRArticle['starRating']>;
-}) => (
+const PositionStarRating = ({ rating }: { rating: Rating }) => (
 	<div css={starsWrapper}>
 		<StarRating rating={rating} size="large" />
 	</div>
