@@ -8,11 +8,8 @@ import {
 	from,
 	headlineBold20,
 	headlineBold24,
-	headlineBold28,
-	headlineBold34,
-	palette as sourcePalette,
-	textSans17,
-	textSansBold15,
+	space,
+	textSans14,
 } from '@guardian/source/foundations';
 import {
 	Hide,
@@ -20,49 +17,50 @@ import {
 	SvgArrowRightStraight,
 	themeButtonReaderRevenueBrand,
 } from '@guardian/source/react-components';
+import { palette as themePalette } from '../../../palette';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';
 import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';
 
-const messageStyles = (isThankYouMessage: boolean) => css`
-	color: ${sourcePalette.brandAlt[400]};
+const gridStyles = css`
+	display: grid;
+
+	grid-template-rows: auto;
+	grid-template-columns: auto;
+
+	grid-template-areas:
+		'heading     cta1  cta2'
+		'subheading  .     .   ';
+`;
+
+const textStyles = css`
+	margin-right: ${space[3]}px;
+`;
+
+const headingStyles = css`
+	grid-area: 'heading';
+
+	color: ${themePalette('--masthead-top-bar-text')};
 	${headlineBold20}
-	margin-bottom: 3px;
 
 	${from.desktop} {
 		${headlineBold24}
 	}
+`;
 
-	${from.leftCol} {
-		${isThankYouMessage ? headlineBold28 : headlineBold34}
+const subHeadingStyles = css`
+	grid-area: 'subheading';
+
+	color: ${themePalette('--masthead-top-bar-text')};
+	${textSans14}
+`;
+
+const buttonStyles = css`
+	margin: 0 0 0 ${space[2]}px;
+
+	${from.tablet} {
+		margin: ${space[1]}px 0 0 ${space[2]}px;
 	}
-`;
-
-const linkStyles = css`
-	height: 32px;
-	min-height: 32px;
-	${textSansBold15}
-	border-radius: 16px;
-	padding: 0 12px 0 12px;
-	line-height: 18px;
-	margin-right: 10px;
-	margin-bottom: 6px;
-
-	svg {
-		width: 24px;
-	}
-`;
-
-const subMessageStyles = css`
-	color: ${sourcePalette.neutral[100]};
-	${textSans17}
-	margin: 5px 0;
-`;
-
-// override user agent styles
-const headingStyles = css`
-	margin: 0;
-	font-size: 100%;
 `;
 
 const Header: ReactComponent<HeaderRenderProps> = (
@@ -70,24 +68,20 @@ const Header: ReactComponent<HeaderRenderProps> = (
 ) => {
 	const { heading, subheading, primaryCta, secondaryCta } = props.content;
 
-	const onClick = () => {
-		props.onCtaClick?.();
-	};
-	return (
-		<div>
-			<Hide until="tablet">
-				<div css={messageStyles(false)}>
-					<h2 css={headingStyles}>{heading}</h2>
-				</div>
+	const onClick = () => props.onCtaClick?.();
 
-				<div css={subMessageStyles}>
-					<div>{subheading}</div>
+	return (
+		<div css={gridStyles}>
+			<Hide until="tablet">
+				<div css={textStyles}>
+					<h2 css={headingStyles}>{heading}</h2>
+					<span css={subHeadingStyles}>{subheading}</span>
 				</div>
 			</Hide>
 
 			{primaryCta && (
 				<>
-					<Hide until="mobileLandscape">
+					<Hide until="tablet">
 						<LinkButton
 							theme={themeButtonReaderRevenueBrand}
 							priority="primary"
@@ -96,13 +90,15 @@ const Header: ReactComponent<HeaderRenderProps> = (
 							icon={<SvgArrowRightStraight />}
 							iconSide="right"
 							nudgeIcon={true}
-							css={linkStyles}
+							size="xsmall"
+							css={buttonStyles}
+							style={{ gridArea: 'cta1' }}
 						>
 							{primaryCta.ctaText}
 						</LinkButton>
 					</Hide>
 
-					<Hide from="mobileLandscape">
+					<Hide from="tablet">
 						<LinkButton
 							theme={themeButtonReaderRevenueBrand}
 							priority="primary"
@@ -110,7 +106,8 @@ const Header: ReactComponent<HeaderRenderProps> = (
 								props.mobileContent?.primaryCta?.ctaUrl ??
 								primaryCta.ctaUrl
 							}
-							css={linkStyles}
+							css={buttonStyles}
+							size="xsmall"
 						>
 							{props.mobileContent?.primaryCta?.ctaText ??
 								primaryCta.ctaText}
@@ -128,7 +125,9 @@ const Header: ReactComponent<HeaderRenderProps> = (
 						icon={<SvgArrowRightStraight />}
 						iconSide="right"
 						nudgeIcon={true}
-						css={linkStyles}
+						css={buttonStyles}
+						size="xsmall"
+						style={{ gridArea: 'cta2' }}
 					>
 						{secondaryCta.ctaText}
 					</LinkButton>

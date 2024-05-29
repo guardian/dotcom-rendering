@@ -6,32 +6,42 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineBold17,
+	headlineBold20,
 	headlineBold24,
-	palette,
 	space,
-	textSans12,
-	textSans15,
+	textSans14,
 } from '@guardian/source/foundations';
 import {
 	Hide,
 	LinkButton,
+	SvgArrowRightStraight,
 	themeButtonBrand,
 } from '@guardian/source/react-components';
-import { useEffect, useMemo, useState } from 'react';
+import { palette as themePalette } from '../../../palette';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { HeaderRenderProps } from './HeaderWrapper';
 import { headerWrapper, validatedHeaderWrapper } from './HeaderWrapper';
 
-const FADE_TIME_MS = 300;
-const TEXT_DELAY_MS = 1500;
-const ANIMATION_DELAY_MS = 150;
-const DOTS_COUNT = 3;
+const gridStyles = css`
+	display: grid;
 
-const headingStyles = () => css`
-	color: ${palette.neutral[100]};
-	${headlineBold17}
-	margin: 0;
+	grid-template-rows: auto;
+	grid-template-columns: auto;
+
+	grid-template-areas:
+		'heading     cta1'
+		'subheading  .   ';
+`;
+
+const textStyles = css`
+	margin-right: ${space[3]}px;
+`;
+
+const headingStyles = css`
+	grid-area: 'heading';
+
+	color: ${themePalette('--masthead-top-bar-text')};
+	${headlineBold20}
 
 	${from.desktop} {
 		${headlineBold24}
@@ -39,203 +49,71 @@ const headingStyles = () => css`
 `;
 
 const subHeadingStyles = css`
-	color: ${palette.brandAlt[400]};
-	margin: 0;
+	grid-area: 'subheading';
 
-	${textSans12}
-	line-height: 1.15;
+	color: ${themePalette('--masthead-top-bar-text')};
+	${textSans14}
+`;
 
-	${from.desktop} {
-		${textSans15}
+const buttonStyles = css`
+	margin: 0 0 0 ${space[2]}px;
+
+	${from.tablet} {
+		margin: ${space[1]}px 0 0 ${space[2]}px;
 	}
-`;
-
-const benefitsWrapper = css`
-	margin: 0 0 ${space[1]}px;
-	height: 16px;
-	position: relative;
-
-	${from.desktop} {
-		margin: 0 0 ${space[2]}px;
-		height: 20px;
-	}
-`;
-
-const benefitStyles = css`
-	display: flex;
-`;
-
-const dotsWrapper = css`
-	position: absolute;
-	display: flex;
-`;
-
-const dotStyles = css`
-	background: ${palette.brandAlt[400]};
-	width: 9px;
-	height: 9px;
-	border-radius: 50%;
-	margin-top: 4px;
-	margin-right: ${space[1]}px;
-
-	${from.desktop} {
-		width: 11px;
-		height: 11px;
-		margin-top: 5px;
-		margin-right: 6px;
-	}
-`;
-
-const benefitTextStyles = css`
-	color: ${palette.neutral[100]};
-	${textSans12}
-	line-height: 1.15;
-
-	${from.desktop} {
-		${textSans15}
-		line-height: 1;
-	}
-`;
-
-const fadeable = css`
-	transition: opacity 150ms linear;
-	opacity: 0;
-`;
-
-const visible = css`
-	opacity: 1;
 `;
 
 const SignInPromptHeader: ReactComponent<HeaderRenderProps> = (props) => {
-	const { heading, subheading, primaryCta, benefits } = props.content;
-	const [benefitIndex, setBenefitIndex] = useState(-1);
-	const [benefitVisible, setBenefitVisible] = useState<boolean>(false);
-	const [dotsVisible, setDotsVisible] = useState(() => {
-		const initialState = new Array<boolean>(DOTS_COUNT);
-		initialState.fill(false);
-		return initialState;
-	});
-	const benefitText = useMemo(
-		() => benefits?.[benefitIndex] ?? '',
-		[benefits, benefitIndex],
-	);
-	const benefitCss = [benefitStyles, fadeable];
+	const { heading, subheading, primaryCta } = props.content;
 
-	if (benefitVisible) {
-		benefitCss.push(visible);
-	}
-
-	useEffect(() => {
-		let timeout: ReturnType<typeof setTimeout> | null = null;
-		const animationSteps: { callback: () => void; ms: number }[] = [];
-
-		const queueAnimation = (callback: () => void, ms: number) => {
-			animationSteps.push({ callback, ms });
-		};
-
-		if (!(benefits ?? []).length) {
-			return;
-		}
-
-		if (benefitIndex === -1) {
-			setBenefitIndex(0);
-			return;
-		}
-
-		for (let i = 0; i < DOTS_COUNT; i++) {
-			const delay = i === 0 ? 0 : FADE_TIME_MS + ANIMATION_DELAY_MS;
-			// Fade in individual dots
-			queueAnimation(() => {
-				setDotsVisible((currentState) => {
-					const newState = [...currentState];
-					newState.splice(i, 1, true);
-					return newState;
-				});
-			}, delay);
-		}
-
-		// Fade out all dots
-		queueAnimation(() => {
-			const newState = new Array(DOTS_COUNT).fill(false);
-			setDotsVisible(newState);
-		}, FADE_TIME_MS + ANIMATION_DELAY_MS);
-
-		// Fade in benefit text
-		queueAnimation(() => {
-			setBenefitVisible(true);
-		}, FADE_TIME_MS + ANIMATION_DELAY_MS);
-
-		if (benefitIndex < (benefits ?? []).length - 1) {
-			// Fade out benefit text
-			queueAnimation(() => {
-				setBenefitVisible(false);
-			}, FADE_TIME_MS + TEXT_DELAY_MS);
-
-			// Trigger this effect to run again
-			queueAnimation(() => {
-				setBenefitIndex(benefitIndex + 1);
-			}, FADE_TIME_MS + ANIMATION_DELAY_MS);
-		}
-
-		const tick = () => {
-			const animationStep = animationSteps.shift();
-
-			if (!animationStep) {
-				return;
-			}
-
-			timeout = setTimeout(() => {
-				animationStep.callback();
-				tick();
-			}, animationStep.ms);
-		};
-
-		// Start this stage of the animation
-		tick();
-
-		return () => {
-			// Clear any timeouts still running in case of unexpected unmount
-			if (timeout) {
-				clearTimeout(timeout);
-			}
-		};
-	}, [benefits, benefitIndex]);
+	const onClick = () => props.onCtaClick?.();
 
 	return (
-		<Hide until="tablet">
-			<h2 css={headingStyles}>{heading}</h2>
-			<h3 css={subHeadingStyles}>{subheading}</h3>
-
-			<div css={benefitsWrapper}>
-				<div css={dotsWrapper}>
-					{dotsVisible.map((dotVisible, index) => {
-						const dotCss = [dotStyles, fadeable];
-
-						if (dotVisible) {
-							dotCss.push(visible);
-						}
-
-						return <div css={dotCss} key={index} />;
-					})}
+		<div css={gridStyles}>
+			<Hide until="tablet">
+				<div css={textStyles}>
+					<h2 css={headingStyles}>{heading}</h2>
+					<span css={subHeadingStyles}>{subheading}</span>
 				</div>
-				<div css={benefitCss}>
-					<div css={dotStyles} />
-					<span css={benefitTextStyles}>{benefitText}</span>
-				</div>
-			</div>
+			</Hide>
 
 			{primaryCta && (
-				<LinkButton
-					theme={themeButtonBrand}
-					priority="primary"
-					href={primaryCta.ctaUrl}
-					size="xsmall"
-					onClick={props.onCtaClick}
-				>
-					{primaryCta.ctaText}
-				</LinkButton>
+				<>
+					<Hide until="tablet">
+						<LinkButton
+							theme={themeButtonBrand}
+							priority="primary"
+							href={primaryCta.ctaUrl}
+							icon={<SvgArrowRightStraight />}
+							iconSide="right"
+							onClick={onClick}
+							nudgeIcon={true}
+							size="xsmall"
+							css={buttonStyles}
+							style={{ gridArea: 'cta1' }}
+						>
+							{primaryCta.ctaText}
+						</LinkButton>
+					</Hide>
+
+					<Hide from="tablet">
+						<LinkButton
+							theme={themeButtonBrand}
+							priority="primary"
+							href={
+								props.mobileContent?.primaryCta?.ctaUrl ??
+								primaryCta.ctaUrl
+							}
+							css={buttonStyles}
+							size="xsmall"
+						>
+							{props.mobileContent?.primaryCta?.ctaText ??
+								primaryCta.ctaText}
+						</LinkButton>
+					</Hide>
+				</>
 			)}
-		</Hide>
+		</div>
 	);
 };
 

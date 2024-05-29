@@ -417,7 +417,7 @@ const ReaderRevenueLinksNative = ({
 };
 
 /**
- * Container for `ReaderRevenueLinksRemote` or `ReaderRevenueLinksNative`
+ * Container for `ReaderRevenueLinksRemote` or `ReaderRevenueLinksRemote`
  *
  * ## Why does this need to be an Island?
  *
