@@ -26,6 +26,12 @@ const getElementText = (element: FEElement): string => {
 	}
 };
 
+const getTextFromHtml = (text: string): string => {
+	const el = document.createElement('div');
+	el.innerHTML = text;
+	return el.textContent ?? '';
+};
+
 const writeLineToCanvas = (
 	context: CanvasRenderingContext2D,
 	str: string,
@@ -141,9 +147,28 @@ const getArticleAsCanvas = async (blocks?: Block[], webTitle?: string) => {
 	).length;
 	// 4px per image for space afterwards
 	const totalImageHeight = imageCount * (assumedImageHeight + 4);
+
+	let totalImageCaptionHeight = 0;
+
+	// TODO: get captions once, don't duplicate logic from below
+	for (const el of filteredElements) {
+		if (
+			el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
+		) {
+			const caption = el.data.caption;
+			if (caption) {
+				totalImageCaptionHeight += 2;
+				const captionTextLines = splitText(webTitle);
+				// 2 for padding between caption and image
+				totalImageCaptionHeight += captionTextLines.length * 4 + 2;
+			}
+		}
+	}
+
 	const totalHeight =
 		headerHeight +
 		totalImageHeight +
+		totalImageCaptionHeight +
 		totalTextLines * 4 +
 		totalElements * 4;
 	canvas.height = totalHeight;
@@ -211,6 +236,23 @@ const getArticleAsCanvas = async (blocks?: Block[], webTitle?: string) => {
 					destHeight,
 				);
 				currentOffset += destHeight;
+				const caption = el.data.caption;
+				if (caption) {
+					currentOffset += 2;
+					const captionTextLines = splitText(
+						getTextFromHtml(caption),
+					);
+					for (const captionTextLine of captionTextLines) {
+						writeLineToCanvas(
+							context,
+							captionTextLine,
+							tinyfontImg,
+							currentOffset,
+						);
+						// Offset by 4px for each line
+						currentOffset += 4;
+					}
+				}
 			}
 		}
 
@@ -266,14 +308,14 @@ export const FaviconUpdater = ({
 					const articleCanvasYPos = Math.round(
 						articleCanvasHeight * progress,
 					);
-					console.log({
-						currentScroll,
-						mainYMin,
-						articleCanvasHeight,
-						mainYMax,
-						progress,
-						articleCanvasYPos,
-					});
+					// console.log({
+					// 	currentScroll,
+					// 	mainYMin,
+					// 	articleCanvasHeight,
+					// 	mainYMax,
+					// 	progress,
+					// 	articleCanvasYPos,
+					// });
 					faviconContext.drawImage(
 						articleCanvas,
 						0,
