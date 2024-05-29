@@ -1,28 +1,12 @@
 import { useEffect } from 'react';
+import type { FEElement } from '../types/content';
 import { getFavicon } from './Liveness.importable';
-import { FEElement } from 'src/types/content';
 
 type Coord = {
 	x: number;
 	y: number;
 };
-const coords = {
-	a: { x: 4, y: 16 },
-	b: { x: 8, y: 16 },
-	c: { x: 12, y: 16 },
-	d: { x: 16, y: 16 },
-	e: { x: 20, y: 16 },
-	f: { x: 24, y: 16 },
-	g: { x: 28, y: 16 },
-	h: { x: 32, y: 16 },
-	i: { x: 36, y: 16 },
-	j: { x: 40, y: 16 },
-	k: { x: 44, y: 16 },
-	l: { x: 48, y: 16 },
-	m: { x: 52, y: 16 },
-	n: { x: 56, y: 16 },
-	o: { x: 60, y: 16 },
-};
+
 const getCharCoord = (char: string): Coord => {
 	const charCode = char.toUpperCase().charCodeAt(0);
 	return {
@@ -41,6 +25,30 @@ const getElementText = (element: FEElement): string => {
 			return '';
 	}
 };
+
+const writeLineToCanvas = (
+	context: CanvasRenderingContext2D,
+	str: string,
+	fontImg: HTMLImageElement,
+	yOffset: number,
+) => {
+	for (const [index, char] of str.split('').entries()) {
+		const charCoord = getCharCoord(char);
+		const destX = index * 4 + 1;
+		context.drawImage(
+			fontImg,
+			charCoord.x,
+			charCoord.y,
+			4,
+			4,
+			destX,
+			yOffset + 1,
+			4,
+			4,
+		);
+	}
+};
+
 const updateFavicon = async (blocks?: Block[]) => {
 	console.log({ blocks });
 	if (!blocks) return;
@@ -83,23 +91,30 @@ const updateFavicon = async (blocks?: Block[]) => {
 	}
 	const elText = getElementText(firstEl);
 
-	for (const [index, char] of 'guardian'.split('').entries()) {
-		const charCoord = getCharCoord(char);
-		const destX = index * 4 + 1;
-		const destY = 1;
-		context.drawImage(
-			tinyfontImg,
-			charCoord.x,
-			charCoord.y,
-			4,
-			4,
-			destX,
-			destY,
-			4,
-			4,
-		);
-	}
+	// for (const [index, char] of 'guardian'.split('').entries()) {
+	// 	const charCoord = getCharCoord(char);
+	// 	const destX = index * 4 + 1;
+	// 	const destY = 1;
+	// 	context.drawImage(
+	// 		tinyfontImg,
+	// 		charCoord.x,
+	// 		charCoord.y,
+	// 		4,
+	// 		4,
+	// 		destX,
+	// 		destY,
+	// 		4,
+	// 		4,
+	// 	);
+	// }
+	writeLineToCanvas(context, 'grauniad', tinyfontImg, 1);
 	// context.drawImage( tinyfontImg, coords.a.x, coords.a.y, 4, 3, destPos.x, destPos.y, 4, 3 );
+
+	// Have an initial offset to leave room for the logo
+	// For each text element, add the text. Add an empty line after.
+	// Image height will be (total text rows * 4) + (total blocks * 4) + image height (if we're doing those)
+	// Height of any one image will be (initial image height / (initial image width/32))
+	// Then try image elements.
 
 	favicon.element.href = canvas.toDataURL('image/png');
 };
