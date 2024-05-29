@@ -2,7 +2,7 @@ import {
 	Button,
 	SvgShare,
 	SvgTickRound,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
 import {

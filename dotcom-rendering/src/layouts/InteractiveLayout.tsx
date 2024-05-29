@@ -5,9 +5,9 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import React from 'react';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -289,6 +289,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									article.config.discussionApiUrl
 								}
 								idApiUrl={article.config.idApiUrl}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
 								showSubNav={false}
 								isImmersive={false}
 								displayRoundel={false}
@@ -773,7 +776,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={themePalette('--article-background')}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
 						borderColour={themePalette('--article-border')}
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>

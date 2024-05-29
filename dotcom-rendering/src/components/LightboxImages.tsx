@@ -8,9 +8,9 @@ import {
 	textSans14,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
-import { Hide, Link } from '@guardian/source-react-components';
-import { StarRating } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide, Link } from '@guardian/source/react-components';
+import { StarRating } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, textSansBold17 } from '@guardian/source-foundations';
+import { from, palette, textSansBold17 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import type { EditionId } from '../lib/edition';

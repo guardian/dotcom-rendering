@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { palette } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import {
@@ -72,8 +72,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 		? getTagPageMobileAdPositions(tagPage.groupedTrails)
 		: [];
 
+	const { abTests } = tagPage.config;
+
 	const inUpdatedHeaderABTest =
-		tagPage.config.abTests.updatedHeaderDesignVariant === 'variant';
+		abTests.updatedHeaderDesignVariant === 'variant';
+
+	const inAdvertisingPartnerABTest =
+		abTests.updateLogoAdPartnerVariant === 'variant';
 
 	return (
 		<>
@@ -109,6 +114,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							}
 							discussionApiUrl={tagPage.config.discussionApiUrl}
 							idApiUrl={tagPage.config.idApiUrl}
+							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							showSubNav={false}
 							isImmersive={false}
 							displayRoundel={false}
@@ -285,6 +291,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								}
 								discussionApiUrl={
 									tagPage.config.discussionApiUrl
+								}
+								inAdvertisingPartnerABTest={
+									inAdvertisingPartnerABTest
 								}
 							>
 								<DecideContainerByTrails

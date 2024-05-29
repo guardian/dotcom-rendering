@@ -8,7 +8,7 @@ import {
 	headlineLight34,
 	palette as srcPalette,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';

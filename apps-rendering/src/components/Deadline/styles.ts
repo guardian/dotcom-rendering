@@ -4,7 +4,7 @@ import {
 	neutral,
 	remSpace,
 	textSans14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { darkModeCss } from 'styles';
 
 export const highlight = css`

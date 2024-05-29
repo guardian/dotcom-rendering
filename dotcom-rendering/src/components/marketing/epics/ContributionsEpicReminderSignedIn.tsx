@@ -12,13 +12,13 @@ import {
 	space,
 	textSans15,
 	textSansBold15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	SvgCheckmark,
 	SvgCross,
-} from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Hide } from '../../Hide';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { ensureHasPreposition, ReminderStatus } from '../lib/reminders';

@@ -5,8 +5,8 @@
  * This is intended to replace the existing `HeaderTopBar` component after being AB tested.
  */
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+import { from, space } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
@@ -19,13 +19,15 @@ import { palette as themePalette } from '../palette';
 import { useConfig } from './ConfigContext';
 import { TopBarLink } from './TopBarLink';
 import { TopBarMyAccount } from './TopBarMyAccount';
+import { TopBarSupport } from './TopBarSupport.importable';
 
-interface TopBarProps {
+interface Props {
 	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
+	contributionsServiceUrl: string;
 	hasPageSkin?: boolean;
 }
 
@@ -48,7 +50,6 @@ const topBarStyles = css`
 
 	${from.desktop} {
 		height: 64px;
-		justify-content: flex-end;
 	}
 `;
 
@@ -61,8 +62,10 @@ const topBarStylesWithoutPageSkin = css`
 const topBarLinkContainerStyles = css`
 	height: 100%;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+`;
+
+const alignLeftStyles = css`
+	margin-right: auto;
 `;
 
 const verticalDividerStyles = css`
@@ -71,24 +74,32 @@ const verticalDividerStyles = css`
 			content: '';
 			border-left: 1px solid
 				${themePalette('--masthead-top-bar-vertical-divider')};
-			display: flex;
-			position: relative;
 			height: 38px;
 		}
 	}
 `;
 
-const VerticalDivider = () => <div css={verticalDividerStyles} />;
-
 const TopBarLinkContainer = ({
+	alignLeft = false,
+	showVerticalDivider = true,
 	isLastChild = false,
 	children,
 }: {
+	alignLeft?: boolean;
+	showVerticalDivider?: boolean;
 	isLastChild?: boolean;
 	children: React.ReactNode;
 }) => (
 	<div
-		css={topBarLinkContainerStyles}
+		css={[
+			topBarLinkContainerStyles,
+			alignLeft && alignLeftStyles,
+			showVerticalDivider
+				? verticalDividerStyles
+				: css`
+						align-items: center;
+				  `,
+		]}
 		style={{ paddingRight: isLastChild ? 0 : `${space[3]}px` }}
 	>
 		{children}
@@ -113,8 +124,9 @@ export const TopBar = ({
 	mmaUrl,
 	discussionApiUrl,
 	idApiUrl,
+	contributionsServiceUrl,
 	hasPageSkin = false,
-}: TopBarProps) => {
+}: Props) => {
 	const authStatus = useAuthStatus();
 	const { renderingTarget } = useConfig();
 	const pageViewId = usePageViewId(renderingTarget);
@@ -143,15 +155,17 @@ export const TopBar = ({
 				hasPageSkin ? pageSkinContainer : center,
 			]}
 		>
-			{/** @todo - Reader revenue support messaging + CTA button */}
-
-			<VerticalDivider />
+			<TopBarLinkContainer showVerticalDivider={false} alignLeft={true}>
+				<TopBarSupport
+					contributionsServiceUrl={contributionsServiceUrl}
+				/>
+			</TopBarLinkContainer>
 
 			<Hide until="desktop">
 				<TopBarLinkContainer>
 					<TopBarLink
 						dataLinkName={nestedOphanComponents(
-							'nav4',
+							'header',
 							'topbar',
 							'printsubs',
 						)}
@@ -162,20 +176,20 @@ export const TopBar = ({
 				</TopBarLinkContainer>
 			</Hide>
 
-			<VerticalDivider />
-
 			<Hide until="desktop">
 				<TopBarLinkContainer>
 					<TopBarLink
-						dataLinkName={nestedOphanComponents('nav4', 'job-cta')}
+						dataLinkName={nestedOphanComponents(
+							'header',
+							'topbar',
+							'job-cta',
+						)}
 						href="https://jobs.theguardian.com"
 					>
 						Search jobs
 					</TopBarLink>
 				</TopBarLinkContainer>
 			</Hide>
-
-			<VerticalDivider />
 
 			<TopBarLinkContainer isLastChild={true}>
 				<TopBarMyAccount

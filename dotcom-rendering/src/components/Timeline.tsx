@@ -3,10 +3,15 @@ import { ArticleDesign } from '@guardian/libs';
 import {
 	between,
 	from,
-	headline,
+	headlineBold20,
+	headlineBold24,
+	headlineMedium20,
+	headlineMedium24,
 	space,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans15,
+	textSansBold15,
+	textSansBold17,
+} from '@guardian/source/foundations';
 import type { NestedArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
 import type {
@@ -52,10 +57,10 @@ const timelineBulletStyles = css`
 
 const smallDateStyles = css`
 	display: block;
-	${textSans.small({ fontWeight: 'bold' })}
+	${textSansBold15}
 
 	${from.desktop} {
-		${textSans.medium({ fontWeight: 'bold' })}
+		${textSansBold17}
 	}
 `;
 
@@ -72,10 +77,10 @@ const titleWeight = ({ design }: ArticleFormat): 'bold' | 'medium' => {
 };
 
 const titleStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxsmall({ fontWeight: titleWeight(format) })}
+	${titleWeight(format) === 'bold' ? headlineBold20 : headlineMedium20}
 
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: titleWeight(format) })}
+		${titleWeight(format) === 'bold' ? headlineBold24 : headlineMedium24}
 	}
 `;
 
@@ -173,7 +178,7 @@ const labelStyles = css`
 	border-bottom: none;
 	padding: 3px 10px 4px 10px;
 	display: inline-block;
-	${textSans.small({ fontWeight: 'regular' })}
+	${textSans15}
 
 	${from.tablet} {
 		padding-left: ${space[5]}px;

@@ -7,7 +7,7 @@ import {
 	palette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -87,6 +87,7 @@ type Props = {
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
+	inAdvertisingPartnerABTest?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -462,6 +463,7 @@ export const FrontSection = ({
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
+	inAdvertisingPartnerABTest = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -539,6 +541,7 @@ export const FrontSection = ({
 						/>
 					}
 					collectionBranding={collectionBranding}
+					inAdvertisingPartnerABTest={inAdvertisingPartnerABTest}
 				/>
 
 				{leftContent}

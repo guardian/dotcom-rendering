@@ -1,4 +1,4 @@
-import { Hide } from '@guardian/source-react-components';
+import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';

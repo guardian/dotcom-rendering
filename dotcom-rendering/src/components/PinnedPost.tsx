@@ -10,12 +10,12 @@ import {
 	textSansBold17,
 	transitions,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgMinus,
 	SvgPinned,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 import { DateTime } from './DateTime';

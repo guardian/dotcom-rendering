@@ -3,8 +3,8 @@ import {
 	headlineBold20,
 	space,
 	textSans15,
-} from '@guardian/source-foundations';
-import { Link, TextInput } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link, TextInput } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette as schemedPalette } from '../../palette';
 import { useConfig } from '../ConfigContext';

@@ -8,7 +8,7 @@ import {
 	from,
 	neutral,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import Accordion from '.';

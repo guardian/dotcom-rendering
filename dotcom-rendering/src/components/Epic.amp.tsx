@@ -12,7 +12,7 @@ import {
 	textSansBold15,
 	textSansBold17,
 	textSansItalic15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	MoustacheSection,
 	MoustacheTemplate,

@@ -10,17 +10,17 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { palette as sourcePalette } from '@guardian/source-foundations';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
 	buttonThemeDefault,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import {
 	expandingWrapperDarkTheme,
 	expandingWrapperThemeDefault,
 	tabsDarkTheme,
 	tabsThemeDefault,
-} from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source-development-kitchen/react-components';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -1856,6 +1856,8 @@ const brandingLabelLight: PaletteFunction = ({ design }) => {
 	}
 };
 const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
+const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
@@ -2394,31 +2396,36 @@ const cardAgeTextDark = (): string => {
 };
 
 const cardOnwardContentFooterLight: PaletteFunction = ({ theme, design }) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return sourcePalette.neutral[100];
-		case ArticleDesign.LiveBlog:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				default:
+	switch (theme) {
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.brandAlt[400];
+		default: {
+			switch (design) {
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
 					return sourcePalette.neutral[100];
-			}
-		default:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.brandAlt[400];
+				case ArticleDesign.LiveBlog:
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[7];
+						case Pillar.News:
+						case Pillar.Sport:
+						case Pillar.Opinion:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+						default:
+							return sourcePalette.neutral[100];
+					}
 				default:
-					return sourcePalette.neutral[46];
+					switch (theme) {
+						default:
+							return sourcePalette.neutral[46];
+					}
 			}
+		}
 	}
 };
 
@@ -2520,6 +2527,7 @@ const onwardContentCardBackgroundLight: PaletteFunction = ({
 }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[800];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.neutral[46];
 		default:
@@ -2572,6 +2580,7 @@ const onwardContentCardBackgroundDark: PaletteFunction = ({
 const onwardContentCardHoverLight: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[700];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.neutral[20];
 		default:
@@ -2662,7 +2671,7 @@ const cardTextDark = (): string => {
 const cardOnwardContentTextLight: PaletteFunction = (format) => {
 	switch (format.theme) {
 		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.neutral[100];
+			return sourcePalette.specialReportAlt[100];
 		default:
 			if (
 				format.display === ArticleDisplay.Immersive &&
@@ -5426,14 +5435,23 @@ const timelineEventBorderDark: PaletteFunction = () =>
 
 const mastheadTopBarBackground: PaletteFunction = () =>
 	sourcePalette.brand[300];
+const mastheadTopBarText: PaletteFunction = () => sourcePalette.neutral[100];
 const mastheadTopBarLinkText: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const mastheadTopBarVerticalDivider: PaletteFunction = () =>
 	sourcePalette.brand[600];
 
 const mastheadNavBackground: PaletteFunction = () => sourcePalette.brand[400];
-const mastheadNavLinkText: PaletteFunction = () => sourcePalette.brand[400];
+const mastheadNavLinkText: PaletteFunction = () => sourcePalette.neutral[100];
 const mastheadNavBorder: PaletteFunction = () => sourcePalette.brand[600];
+const mastheadNavLines: PaletteFunction = () => sourcePalette.neutral[86];
+
+const mastheadVeggieBurgerIcon: PaletteFunction = () =>
+	sourcePalette.brand[400];
+const mastheadVeggieBurgerBackground: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
+	sourcePalette.brandAlt[300];
 
 // ----- Palette ----- //
 
@@ -5643,6 +5661,10 @@ const paletteColours = {
 	'--block-quote-text': {
 		light: blockquoteTextLight,
 		dark: blockquoteTextDark,
+	},
+	'--branding-border': {
+		light: brandingBorderLight,
+		dark: brandingBorderDark,
 	},
 	'--branding-label-text': {
 		light: brandingLabelLight,
@@ -6116,6 +6138,10 @@ const paletteColours = {
 		light: mastheadNavBorder,
 		dark: mastheadNavBorder,
 	},
+	'--masthead-nav-lines': {
+		light: mastheadNavLines,
+		dark: mastheadNavLines,
+	},
 	'--masthead-nav-link-text': {
 		light: mastheadNavLinkText,
 		dark: mastheadNavLinkText,
@@ -6128,9 +6154,25 @@ const paletteColours = {
 		light: mastheadTopBarLinkText,
 		dark: mastheadTopBarLinkText,
 	},
+	'--masthead-top-bar-text': {
+		light: mastheadTopBarText,
+		dark: mastheadTopBarText,
+	},
 	'--masthead-top-bar-vertical-divider': {
 		light: mastheadTopBarVerticalDivider,
 		dark: mastheadTopBarVerticalDivider,
+	},
+	'--masthead-veggie-burger-background': {
+		light: mastheadVeggieBurgerBackground,
+		dark: mastheadVeggieBurgerBackground,
+	},
+	'--masthead-veggie-burger-background-hover': {
+		light: mastheadVeggieBurgerBackgroundHover,
+		dark: mastheadVeggieBurgerBackgroundHover,
+	},
+	'--masthead-veggie-burger-icon': {
+		light: mastheadVeggieBurgerIcon,
+		dark: mastheadVeggieBurgerIcon,
 	},
 	'--match-nav-background': {
 		light: matchNavBackgroundLight,

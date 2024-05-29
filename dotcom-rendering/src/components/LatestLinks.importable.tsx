@@ -5,7 +5,7 @@ import {
 	space,
 	textSans14,
 	textSansBold14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';

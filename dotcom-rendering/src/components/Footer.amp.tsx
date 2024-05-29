@@ -4,7 +4,7 @@ import {
 	palette,
 	textSans12,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { NavType } from '../model/extract-nav';
 import { useContentABTestGroup } from './ContentABTest.amp';
 import { ReaderRevenueButton } from './ReaderRevenueButton.amp';

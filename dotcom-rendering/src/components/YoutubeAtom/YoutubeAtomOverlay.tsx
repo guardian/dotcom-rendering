@@ -8,7 +8,7 @@ import {
 	palette as sourcePalette,
 	space,
 	textSansBold12,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decidePalette } from '../../lib/decidePalette';
 import type { Palette } from '../../types/palette';
 import type {

@@ -10,7 +10,7 @@ import {
 	from,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { hasCartoon, isPicture } from 'item';
 import type { FC } from 'react';

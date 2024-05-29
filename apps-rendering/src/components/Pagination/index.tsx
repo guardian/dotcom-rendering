@@ -6,7 +6,7 @@ import {
 	space,
 	textSans15,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Hide,
 	LinkButton,
@@ -14,7 +14,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { border, hover, text } from 'palette';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';

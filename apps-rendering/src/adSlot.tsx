@@ -7,8 +7,8 @@ import {
 	remSpace,
 	textSans14,
 	until,
-} from '@guardian/source-foundations';
-import { Button, buttonThemeBrandAlt } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, buttonThemeBrandAlt } from '@guardian/source/react-components';
 import { background, text } from 'palette';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';

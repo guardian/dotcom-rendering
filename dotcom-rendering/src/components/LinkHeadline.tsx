@@ -4,7 +4,7 @@ import {
 	headlineMedium20,
 	headlineMedium24,
 	headlineMedium28,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
