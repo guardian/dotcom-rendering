@@ -327,7 +327,7 @@ export const enhanceCards = (
 
 		const imageSrc = decideImage(faciaCard);
 
-		const isContributorTagPage = !!pageId && pageId.includes('profile/');
+		const isContributorTagPage = !!pageId && pageId.startsWith('profile/');
 
 		return {
 			format,
