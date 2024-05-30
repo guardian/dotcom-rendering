@@ -10,10 +10,14 @@ import { palette } from '@guardian/source/foundations';
 import { space } from '@guardian/source/foundations';
 import {
 	containsNonArticleCountPlaceholder,
+	getLocalCurrencySymbol,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { useEffect } from 'react';
+import type {
+	ContributionFrequency,
+	EpicProps,
+} from '@guardian/support-dotcom-components/dist/shared/src/types';
+import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
@@ -23,6 +27,8 @@ import {
 } from '../lib/tracking';
 import { logEpicView } from '../lib/viewLog';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
+import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
+import type { ChoiceCardSelection } from '../lib/choiceCards';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
@@ -131,6 +137,29 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	onReminderOpen,
 	fetchEmail,
 }: EpicProps): JSX.Element => {
+	const { showChoiceCards, choiceCardAmounts } = variant;
+
+	const [choiceCardSelection, setChoiceCardSelection] = useState<
+		ChoiceCardSelection | undefined
+	>();
+
+	useEffect(() => {
+		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
+			const defaultFrequency: ContributionFrequency =
+				choiceCardAmounts.defaultContributionType || 'MONTHLY';
+			const localAmounts =
+				choiceCardAmounts.amountsCardData[defaultFrequency];
+			const defaultAmount = localAmounts.defaultAmount;
+
+			setChoiceCardSelection({
+				frequency: defaultFrequency,
+				amount: defaultAmount,
+			});
+		}
+	}, [showChoiceCards, choiceCardAmounts]);
+
+	const currencySymbol = getLocalCurrencySymbol(countryCode);
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 	});
@@ -186,6 +215,16 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					paragraphs={cleanParagraphs}
 					numArticles={articleCounts.forTargetedWeeks}
 				/>
+
+				{choiceCardAmounts && (
+					<ContributionsEpicChoiceCards
+						setSelectionsCallback={setChoiceCardSelection}
+						selection={choiceCardSelection}
+						submitComponentEvent={submitComponentEvent}
+						currencySymbol={currencySymbol}
+						amountsTest={choiceCardAmounts}
+					/>
+				)}
 
 				<ContributionsEpicCtas
 					variant={variant}
