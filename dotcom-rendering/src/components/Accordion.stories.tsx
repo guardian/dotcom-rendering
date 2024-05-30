@@ -50,13 +50,13 @@ const accordionContent = (
 			At wider breakpoints the accordion UI disappears and just leaves the
 			content. To view the accordion UI, switch to a narrower breakpoint.
 		</p>
-		<p css={[textStyle]}>
+		<p css={textStyle}>
 			Vaccine passports enjoy substantial support across Europe, a YouGov
 			survey suggests, as a fourth wave of infections prompts a growing
 			number of countries to impose tougher restrictions on people who
 			have not been fully vaccinated.
 		</p>
-		<p css={[textStyle]}>
+		<p css={textStyle}>
 			The annual YouGov-Cambridge Globalism Project suggests majorities in
 			all 10 European countries surveyed back compulsory vaccine passes
 			for large events, while in most, more people favour than oppose
