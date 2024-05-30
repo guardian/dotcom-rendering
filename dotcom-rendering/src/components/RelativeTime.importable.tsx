@@ -1,4 +1,4 @@
-import { timeAgo } from '@guardian/libs';
+import { isString, timeAgo } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../lib/useIsInView';
 
@@ -24,12 +24,14 @@ export const RelativeTime = ({ then, now }: Props) => {
 	useEffect(() => {
 		setDisplay(timeAgo(then));
 		if (!inView) return;
+		const refresh =
+			isString(display) && display.match(/\ds ago/) ? 1_000 : 15_000;
 
 		const interval = setTimeout(() => {
 			setDisplay(timeAgo(then));
-		}, 15_000);
+		}, refresh);
 		return () => clearInterval(interval);
-	}, [inView, then]);
+	}, [inView, then, display]);
 
 	const date = new Date(then);
 
