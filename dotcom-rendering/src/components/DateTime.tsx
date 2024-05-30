@@ -48,6 +48,10 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		})
 		.replace(':', '.');
 
+/** Rounded up to the next minute as most pages are cached for a least a minute */
+const getServerTime = (precision = 60_000) =>
+	Math.ceil(Date.now() / precision) * precision;
+
 export const DateTime = ({
 	date,
 	editionId,
@@ -62,7 +66,9 @@ export const DateTime = ({
 	const epoch = date.getTime();
 	const relativeTime = display === 'relative' && timeAgo(epoch);
 	const isRecent = isString(relativeTime) && relativeTime.endsWith(' ago');
-	const now = absoluteServerTimes ? Number.MAX_SAFE_INTEGER - 1 : Date.now();
+	const now = absoluteServerTimes
+		? Number.MAX_SAFE_INTEGER - 1
+		: getServerTime();
 
 	return isRecent ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
