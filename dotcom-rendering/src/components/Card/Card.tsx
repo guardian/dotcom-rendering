@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -11,6 +11,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import type { Branding } from '../../types/branding';
+import type { StarRating as Rating } from '../../types/content';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -84,7 +85,7 @@ export type Props = {
 	isPlayableMediaCard?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	starRating?: number;
+	starRating?: Rating;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
@@ -123,7 +124,7 @@ const StarRatingComponent = ({
 	rating,
 	cardHasImage,
 }: {
-	rating: number;
+	rating: Rating;
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
@@ -598,7 +599,7 @@ export const Card = ({
 								isExternalLink={isExternalLink}
 								isOnwardContent={isOnwardContent}
 							/>
-							{starRating !== undefined ? (
+							{!isUndefined(starRating) ? (
 								<StarRatingComponent
 									rating={starRating}
 									cardHasImage={!!image}

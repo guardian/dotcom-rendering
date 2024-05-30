@@ -4,7 +4,10 @@ import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { KeyTakeaway as KeyTakeawayModel } from '../types/content';
+import type {
+	KeyTakeaway as KeyTakeawayModel,
+	StarRating,
+} from '../types/content';
 import { Subheading } from './Subheading';
 
 const keyTakeawayStyles = css`
@@ -33,7 +36,7 @@ interface KeyTakeawayProps {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	keyTakeaway: KeyTakeawayModel;
 	titleIndex: number;
 	RenderArticleElement: ArticleElementRenderer;

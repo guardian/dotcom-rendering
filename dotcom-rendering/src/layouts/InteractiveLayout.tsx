@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -518,21 +518,18 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 											article.webPublicationDateDeprecated
 										}
 										hasStarRating={
-											typeof article.starRating ===
-											'number'
+											!isUndefined(article.starRating)
 										}
 									/>
 								</div>
-								{article.starRating !== undefined ? (
+								{!isUndefined(article.starRating) ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={article.starRating}
 											size="large"
 										/>
 									</div>
-								) : (
-									<></>
-								)}
+								) : null}
 							</GridItem>
 							<GridItem area="standfirst">
 								<Standfirst

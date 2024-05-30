@@ -4,7 +4,10 @@ import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { QAndAExplainer as QAndAExplainerModel } from '../types/content';
+import type {
+	QAndAExplainer as QAndAExplainerModel,
+	StarRating,
+} from '../types/content';
 import { Subheading } from './Subheading';
 
 interface Props {
@@ -19,7 +22,7 @@ interface Props {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	RenderArticleElement: ArticleElementRenderer;
 }
 

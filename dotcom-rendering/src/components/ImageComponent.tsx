@@ -12,7 +12,11 @@ import {
 import { decidePalette } from '../lib/decidePalette';
 import { getLargest, getMaster } from '../lib/image';
 import { palette as themePalette } from '../palette';
-import type { ImageBlockElement, RoleType } from '../types/content';
+import type {
+	ImageBlockElement,
+	StarRating as Rating,
+	RoleType,
+} from '../types/content';
 import type { Palette } from '../types/palette';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
 import { Caption } from './Caption';
@@ -29,7 +33,7 @@ type Props = {
 	format: ArticleFormat;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
-	starRating?: number;
+	starRating?: Rating;
 	title?: string;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
@@ -72,7 +76,7 @@ const starsWrapper = css`
 	}
 `;
 
-const PositionStarRating = ({ rating }: { rating: number }) => (
+const PositionStarRating = ({ rating }: { rating: Rating }) => (
 	<div css={starsWrapper}>
 		<StarRating rating={rating} size="large" />
 	</div>
@@ -438,9 +442,9 @@ export const ImageComponent = ({
 				{isTimeline && isMainMedia && role === 'showcase' && (
 					<div css={timelineBulletStyles} aria-hidden="true" />
 				)}
-				{typeof starRating === 'number' && (
+				{!isUndefined(starRating) ? (
 					<PositionStarRating rating={starRating} />
-				)}
+				) : null}
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
@@ -544,9 +548,9 @@ export const ImageComponent = ({
 						</Row>
 					</Hide>
 				)}
-				{typeof starRating === 'number' && (
+				{!isUndefined(starRating) ? (
 					<PositionStarRating rating={starRating} />
-				)}
+				) : null}
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
