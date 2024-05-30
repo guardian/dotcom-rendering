@@ -10,8 +10,11 @@ import {
 	space,
 	textSans14,
 } from '@guardian/source/foundations';
-import { SvgGuardianLogo, SvgMenu } from '@guardian/source/react-components';
-import { useEffect, useState } from 'react';
+import {
+	Hide,
+	SvgGuardianLogo,
+	SvgMenu,
+} from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import { palette as themePalette } from '../palette';
 import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
@@ -57,8 +60,6 @@ const sections = [
 	name: string;
 	slug: string;
 }>;
-
-const getWindowWidth = () => window.innerWidth;
 
 const veggieBurgerDiameter = 40;
 
@@ -168,6 +169,7 @@ const pillarsNavStyles = css`
 		display: flex;
 	}
 	li {
+		background-color: inherit;
 		height: 28px;
 		padding-right: ${space[1]}px;
 		${between.mobileMedium.and.mobileLandscape} {
@@ -192,9 +194,15 @@ const pillarsNavStyles = css`
 		}
 	}
 `;
-
+const pillarChildStyle = css`
+	li {
+		:not(:first-child) {
+			padding-left: ${space[1]}px;
+		}
+	}
+`;
 const pillarColorStyles = css`
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -208,15 +216,33 @@ const pillarColorStyles = css`
 	}
 `;
 
-const pillarBarStyles = css`
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	margin-top: ${space[1]}px;
-	width: 1px;
-	background-color: ${themePalette('--masthead-nav-lines')};
-`;
+// const verticalDivider = css`
+// 	/* :after {
+// 		content: '';
+// 		position: absolute;
+// 		top: 0;
+// 		right: 0;
+// 		bottom: 0;
+
+// 		margin-top: ${space[1]}px;
+
+// 		border-right: 1px solid ${themePalette('--masthead-nav-lines')};
+// 	} */
+
+// 	position: relative;
+// 	top: 0;
+// 	bottom: 0;
+// 	right: 0;
+// 	margin-top: ${space[1]}px;
+// 	width: 1px;
+// 	background-color: ${themePalette('--masthead-nav-lines')};
+// `;
+
+// const verticalDividerFromDesktop = css`
+// 	${from.desktop} {
+// 		${verticalDivider}
+// 	}
+// `;
 
 const sectionsNavStyles = css`
 	grid-column: content-start / viewport-end;
@@ -239,17 +265,82 @@ const sectionsNavStyles = css`
 	}
 `;
 
+const pillarStyle = css`
+	background-color: ${palette.brand[400]};
+	width: fit-content;
+
+	${from.desktop} {
+		height: 40px;
+		width: 108px;
+	}
+
+	${from.leftCol} {
+		height: 52px;
+		width: 125px;
+	}
+
+	${from.wide} {
+		width: 136px;
+	}
+`;
+
+const textStyles = css`
+	${headlineBold14}
+	color: ${palette.neutral[100]};
+
+	margin-left: 6px;
+
+	${from.mobileMedium} {
+		${headlineBold17}
+	}
+
+	${from.desktop} {
+		${headlineBold20}
+	}
+
+	${from.leftCol} {
+		${headlineBold24}
+	}
+`;
+
+const verticalDividerStyles = css`
+	${from.desktop} {
+		:before {
+			content: '';
+			border-left: 1px solid ${palette.neutral[86]};
+			display: flex;
+			position: relative;
+			height: calc(100% - ${space[1]}px);
+			margin-top: ${space[1]}px;
+		}
+	}
+`;
+
+const VerticalDivider = () => <div css={verticalDividerStyles} />;
+
+const hoverStyles = (colour: string) => css`
+	:after {
+		content: '';
+		display: block;
+		position: relative;
+		border-bottom: 4px solid ${colour};
+		height: ${space[1]}px;
+		width: calc(100% - 6px);
+		margin-left: 6px;
+	}
+`;
+
+type PillarProps = { name: string; colour: string; showDivider?: boolean };
+const Pillar = ({ name, colour, showDivider = true }: PillarProps) => (
+	<>
+		{showDivider && <VerticalDivider />}
+		<li css={[flexColumn, pillarStyle, hoverStyles(colour)]}>
+			<span css={[textStyles]}>{name}</span>
+		</li>
+	</>
+);
+
 export const Titlepiece = ({ editionId }: TitlepieceProps) => {
-	const [windowWidth, setWindowWidth] = useState(getWindowWidth());
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowWidth(getWindowWidth());
-		};
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
 	return (
 		<TitlepieceGrid type="header">
 			{/* Edition menu */}
@@ -260,7 +351,9 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 				/>
 			</div>
 
-			{/* Guardian logo */}
+			{/* Guardian logo
+			 * @todo - replace with <Logo /> component
+			 */}
 			<div css={guardianLogoStyles}>
 				<a href="https://theguardian.com">
 					<SvgGuardianLogo
@@ -280,37 +373,23 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 			</div>
 
 			{/* Pillars nav */}
-			<nav css={[pillarsNavStyles, navLinkStyles]}>
+			<nav css={[pillarsNavStyles, navLinkStyles, pillarChildStyle]}>
 				<ul>
 					{pillars.map(({ name, path, colour }, index) => (
 						<a
 							key={path}
 							href={`https://www.theguardian.com${path}`}
 						>
-							<li
-								key={path}
-								css={css`
-									position: relative;
-									${index > 0 &&
-									`padding-left: ${space[1]}px;`}
-								`}
-							>
-								<div
-									style={{
-										backgroundColor: colour,
-									}}
-									css={pillarColorStyles}
-								/>
-								{(index !== pillars.length - 1 ||
-									(index === pillars.length - 1 &&
-										windowWidth >= 980)) && (
-									<div css={pillarBarStyles} />
-								)}
-
-								{name}
-							</li>
+							<Pillar
+								name={name}
+								colour={colour}
+								showDivider={index !== 0}
+							/>
 						</a>
 					))}
+					<Hide until="desktop">
+						<VerticalDivider />
+					</Hide>
 				</ul>
 			</nav>
 
