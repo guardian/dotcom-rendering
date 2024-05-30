@@ -6,11 +6,13 @@
 	"exports": {
 		"./foundations": {
 			"types": "./foundations.d.ts",
-			"import": "./foundations.js"
+			"import": "./foundations.js",
+			"require": "./foundations.cjs"
 		},
 		"./react-components": {
 			"types": "./react-components.d.ts",
-			"import": "./react-components.js"
+			"import": "./react-components.js",
+			"require": "./react-components.cjs"
 		}
 	},
 	"dependencies": {
