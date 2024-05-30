@@ -55,7 +55,7 @@ export const footerLinks: Link[][] = [
 		},
 		{
 			title: 'Help',
-			url: 'https://www.theguardian.com/help',
+			url: 'https://manage.theguardian.com/help-centre',
 		},
 	],
 	[
@@ -80,8 +80,8 @@ export const footerLinks: Link[][] = [
 			url: 'https://www.facebook.com/theguardian',
 		},
 		{
-			title: 'Twitter',
-			url: 'https://twitter.com/guardian',
+			title: 'X',
+			url: 'https://x.com/guardian',
 		},
 	],
 	[

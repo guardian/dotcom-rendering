@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
 import type { FontScaleArgs } from '@guardian/source/foundations';
 import {
 	from,
@@ -15,6 +15,7 @@ import {
 } from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
+import type { StarRating as Rating } from '../types/content';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
@@ -28,7 +29,7 @@ interface Props {
 	headlineText: string;
 	contentType: ContentType;
 	url: string;
-	starRating?: number;
+	starRating?: Rating;
 	linkFormat: ArticleFormat;
 	format: ArticleFormat;
 	tags: TagType[];
@@ -270,14 +271,14 @@ export const RichLink = ({
 								<div css={bylineStyles}>{mainContributor}</div>
 							)}
 
-							{starRating !== undefined && (
+							{!isUndefined(starRating) ? (
 								<div css={starWrapperStyles}>
 									<StarRating
 										rating={starRating}
 										size="small"
 									/>
 								</div>
-							)}
+							) : null}
 
 							{!!(isPaidContent && sponsorName) && (
 								<div css={paidForBrandingStyles}>
