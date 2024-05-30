@@ -11,7 +11,7 @@
 		}
 	},
 	"dependencies": {
-		"@CSNX_PACKAGE/source-development-kitchen": "npm:@guardian/source-development-kitchen@1.0.0"
+		"CSNX_SOURCE_DEVELOPMENT_KITCHEN": "npm:@guardian/source-development-kitchen@1.0.0"
 	},
 	"peerDependencies": {
 		"@emotion/react": "^11.11.1",

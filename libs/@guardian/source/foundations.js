@@ -1,1 +1,1 @@
-export * from '@CSNX_PACKAGE/source/foundations';
+export * from 'CSNX_SOURCE/foundations';

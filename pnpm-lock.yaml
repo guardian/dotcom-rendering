@@ -872,15 +872,15 @@ importers:
 
   libs/@guardian/source:
     dependencies:
-      '@CSNX_PACKAGE/source':
-        specifier: npm:@guardian/source@1.0.3
-        version: /@guardian/source@1.0.3(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@emotion/react':
         specifier: ^11.11.1
         version: 11.11.1(@types/react@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: ^18.2.11
         version: 18.3.1
+      CSNX_SOURCE:
+        specifier: npm:@guardian/source@1.0.3
+        version: /@guardian/source@1.0.3(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -893,9 +893,6 @@ importers:
 
   libs/@guardian/source-development-kitchen:
     dependencies:
-      '@CSNX_PACKAGE/source-development-kitchen':
-        specifier: npm:@guardian/source-development-kitchen@1.0.0
-        version: /@guardian/source-development-kitchen@1.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source@1.0.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       '@emotion/react':
         specifier: ^11.11.1
         version: 11.11.1(@types/react@18.3.1)(react@18.3.1)
@@ -908,6 +905,9 @@ importers:
       '@types/react':
         specifier: ^18.2.11
         version: 18.3.1
+      CSNX_SOURCE_DEVELOPMENT_KITCHEN:
+        specifier: npm:@guardian/source-development-kitchen@1.0.0
+        version: /@guardian/source-development-kitchen@1.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source@1.0.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       react:
         specifier: ^18.2.0
         version: 18.3.1

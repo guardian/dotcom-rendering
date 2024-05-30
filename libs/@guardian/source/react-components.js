@@ -1,1 +1,1 @@
-export * from '@CSNX_PACKAGE/source/react-components';
+export * from 'CSNX_SOURCE/react-components';

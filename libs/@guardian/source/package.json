@@ -16,7 +16,7 @@
 		}
 	},
 	"dependencies": {
-		"@CSNX_PACKAGE/source": "npm:@guardian/source@1.0.3"
+		"CSNX_SOURCE": "npm:@guardian/source@1.0.3"
 	},
 	"peerDependencies": {
 		"@emotion/react": "^11.11.1",
