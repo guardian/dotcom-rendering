@@ -175,7 +175,7 @@ const buildPayload = async ({
 
 // Safari displays an "Open in app" banner which can cover the top of the banner.
 // We can detect this by checking the innerHeight
-const isSafariWithReduceHeight = () =>
+const isSafariWithReducedHeight = () =>
 	window.navigator.userAgent.toLowerCase().includes('safari') &&
 	window.innerHeight < window.document.documentElement.clientHeight;
 
@@ -211,7 +211,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		return { show: false };
 	}
 
-	if (isSafariWithReduceHeight()) {
+	if (isSafariWithReducedHeight()) {
 		return { show: false };
 	}
 
