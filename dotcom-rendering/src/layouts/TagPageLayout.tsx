@@ -77,9 +77,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant';
 
-	const inAdvertisingPartnerABTest =
-		abTests.updateLogoAdPartnerVariant === 'variant';
-
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -292,8 +289,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								discussionApiUrl={
 									tagPage.config.discussionApiUrl
 								}
-								inAdvertisingPartnerABTest={
-									inAdvertisingPartnerABTest
+								updateLogoAdPartnerSwitch={
+									!!switches.updateLogoAdPartner
 								}
 							>
 								<DecideContainerByTrails

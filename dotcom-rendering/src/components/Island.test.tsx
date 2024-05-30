@@ -96,7 +96,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -127,7 +127,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -148,7 +148,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -179,7 +179,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -208,7 +208,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -303,7 +303,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -348,7 +348,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -386,7 +386,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -425,7 +425,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -449,7 +449,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -480,7 +480,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -510,7 +510,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -538,7 +538,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>

@@ -19,7 +19,7 @@ describe('ArticleMeta', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -66,7 +66,7 @@ describe('ArticleMeta', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
