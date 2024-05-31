@@ -20,7 +20,6 @@ const rightColumnStyles = css`
 
 	@supports (display: grid) {
 		position: relative;
-		overflow-x: hidden;
 	}
 `;
 
