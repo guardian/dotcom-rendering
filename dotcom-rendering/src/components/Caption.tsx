@@ -230,13 +230,19 @@ export const Caption = ({
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
 
+	const isBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
+
 	const defaultCaption = (
 		<figcaption
 			css={[
 				captionStyle,
 				shouldLimitWidth && limitedWidth,
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
-				isMainMedia && tabletCaptionPadding,
+				isMainMedia &&
+					(isBlog || mediaType === 'Video') &&
+					tabletCaptionPadding,
 				padCaption && captionPadding,
 			]}
 		>
