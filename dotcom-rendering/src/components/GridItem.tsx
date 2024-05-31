@@ -10,35 +10,28 @@ type Props = {
 	element?: 'div' | 'article' | 'main' | 'aside' | 'section';
 };
 
-const gridAreaStyles = (area: string) => {
-	if (area === 'right-column') {
-		return css`
-			/* IE Fallback */
-			position: absolute;
-			top: 0;
-			right: 0;
-			/* Pop me below the body */
-			${getZIndex('rightColumnArea')}
+const rightColumnStyles = css`
+	/* IE Fallback */
+	position: absolute;
+	top: 0;
+	right: 0;
+	/* Pop me below the body */
+	${getZIndex('rightColumnArea')}
 
-			@supports (display: grid) {
-				position: relative;
-				overflow-x: hidden;
-			}
-		`;
-	}
-
-	if (area === 'body') {
-		return css`
-			overflow-x: hidden;
-			/* Pop me above the right column */
-			${getZIndex('bodyArea')}
-		`;
-	}
-
-	return css`
+	@supports (display: grid) {
+		position: relative;
 		overflow-x: hidden;
-	`;
-};
+	}
+`;
+
+const bodyStyles = css`
+	/* Pop me above the right column */
+	${getZIndex('bodyArea')}
+`;
+
+const gridItemStyles = css`
+	overflow-x: hidden;
+`;
 
 export const GridItem = ({
 	children,
@@ -46,7 +39,11 @@ export const GridItem = ({
 	element: Element = 'div',
 }: Props) => (
 	<Element
-		css={gridAreaStyles(area)}
+		css={[
+			gridItemStyles,
+			area === 'body' && bodyStyles,
+			area === 'right-column' && rightColumnStyles,
+		]}
 		style={{
 			gridArea: area,
 		}}
