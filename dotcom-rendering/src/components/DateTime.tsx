@@ -63,16 +63,18 @@ export const DateTime = ({
 }: Props & DisplayProps) => {
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
-	const epoch = date.getTime();
-	const relativeTime = display === 'relative' && timeAgo(epoch);
-	const isRecent = isString(relativeTime) && relativeTime.endsWith(' ago');
+	const then = date.getTime();
+	const relativeTime = display === 'relative' && timeAgo(then);
+	const isRecent =
+		isString(relativeTime) &&
+		(relativeTime === 'now' || relativeTime.endsWith(' ago'));
 	const now = absoluteServerTimes
 		? Number.MAX_SAFE_INTEGER - 1
 		: getServerTime();
 
 	return isRecent ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
-			<RelativeTime then={epoch} now={now} />
+			<RelativeTime then={then} now={now} />
 		</Island>
 	) : (
 		<time

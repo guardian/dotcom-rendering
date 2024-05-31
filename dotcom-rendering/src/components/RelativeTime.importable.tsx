@@ -10,8 +10,8 @@ type Props = {
 };
 
 const ONE_MINUTE = 60_000;
-
-const getTime = () => Math.ceil(Date.now() / ONE_MINUTE) * ONE_MINUTE;
+const getNextMinute = (then: number) =>
+	then + Math.floor((Date.now() - then) / ONE_MINUTE) * ONE_MINUTE;
 
 /**
  * Shows a recent time as relative, such as “3h ago”
@@ -26,12 +26,12 @@ export const RelativeTime = ({ then, now }: Props) => {
 	const [display, setDisplay] = useState(timeAgo(then, { now }));
 
 	useEffect(() => {
-		setDisplay(timeAgo(then, { now: getTime() }));
+		setDisplay(timeAgo(then, { now: getNextMinute(then) }));
 		if (!inView) return;
 
-		const interval = setTimeout(() => {
-			setDisplay(timeAgo(then, { now: getTime() }));
-		}, 60_000);
+		const interval = setInterval(() => {
+			setDisplay(timeAgo(then, { now: getNextMinute(then) }));
+		}, ONE_MINUTE);
 		return () => clearInterval(interval);
 	}, [inView, then]);
 
