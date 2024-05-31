@@ -1,4 +1,4 @@
-import { isString, timeAgo } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import { type EditionId, getEditionFromId } from '../lib/edition';
 import { Island } from './Island';
 import { RelativeTime } from './RelativeTime.importable';
@@ -48,8 +48,10 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		})
 		.replace(':', '.');
 
+const ONE_MINUTE = 60_000;
+const ONE_WEEK = 7 * 24 * 60 * ONE_MINUTE;
 /** Rounded up to the next minute as most pages are cached for a least a minute */
-const getServerTime = (precision = 60_000) =>
+const getServerTime = (precision = ONE_MINUTE) =>
 	Math.ceil(Date.now() / precision) * precision;
 
 export const DateTime = ({
@@ -64,15 +66,14 @@ export const DateTime = ({
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
 	const then = date.getTime();
-	const relativeTime = display === 'relative' && timeAgo(then);
-	const isRecent =
-		isString(relativeTime) &&
-		(relativeTime === 'now' || relativeTime.endsWith(' ago'));
+	const isRelative =
+		display === 'relative' ? Date.now() - then < ONE_WEEK : false;
+
 	const now = absoluteServerTimes
 		? Number.MAX_SAFE_INTEGER - 1
 		: getServerTime();
 
-	return isRecent ? (
+	return isRelative ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
 			<RelativeTime then={then} now={now} />
 		</Island>
