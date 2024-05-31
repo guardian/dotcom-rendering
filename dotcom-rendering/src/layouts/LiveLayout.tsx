@@ -88,11 +88,11 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 220px 1fr;
+					grid-template-columns: 220px 620px;
 					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline';
@@ -125,7 +125,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 				margin-left: 0;
 				grid-column-gap: 20px;
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'standfirst'
 						'lines'
@@ -133,7 +133,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 				}
 				${from.desktop} {
-					grid-template-columns: 220px 1fr;
+					grid-template-columns: 220px 620px;
 					grid-template-areas: 'lastupdated standfirst';
 				}
 			}
@@ -184,7 +184,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'media'
 						'info'

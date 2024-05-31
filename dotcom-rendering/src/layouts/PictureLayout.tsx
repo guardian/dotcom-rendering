@@ -82,7 +82,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-template-columns: 219px 1px 620px;
 					grid-template-areas:
 						'title  border  headline'
 						'.      border  standfirst'
@@ -109,7 +109,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${until.leftCol} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title     '
 						'headline  '
@@ -123,7 +123,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.desktop} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -136,7 +136,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
