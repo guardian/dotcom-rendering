@@ -46,4 +46,9 @@ export const rootStyles = (
 		background: ${sourcePalette.brandAlt[400]};
 		color: ${sourcePalette.neutral[7]};
 	}
+
+	.ad-slot-container {
+		/* prevent third-party code from breaking our layout */
+		overflow-x: hidden;
+	}
 `;

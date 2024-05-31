@@ -28,10 +28,6 @@ const bodyStyles = css`
 	${getZIndex('bodyArea')}
 `;
 
-const gridItemStyles = css`
-	overflow-x: hidden;
-`;
-
 export const GridItem = ({
 	children,
 	area,
@@ -39,7 +35,6 @@ export const GridItem = ({
 }: Props) => (
 	<Element
 		css={[
-			gridItemStyles,
 			area === 'body' && bodyStyles,
 			area === 'right-column' && rightColumnStyles,
 		]}
