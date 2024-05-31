@@ -21,11 +21,14 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
+const pillarLeftMarginPx = 6;
+
 const pillarsContainer = css`
+	/* display: grid; */
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-
+	/*
 	height: 36px;
 
 	${from.mobileMedium} {
@@ -38,7 +41,7 @@ const pillarsContainer = css`
 
 	${from.tablet} {
 		height: 60px;
-	}
+	} */
 `;
 
 const pillarLink = css`
@@ -49,12 +52,12 @@ const pillarLink = css`
 	background-color: ${sourcePalette.brand[400]};
 	color: ${sourcePalette.neutral[100]};
 
-	margin-left: 6px;
-	padding-right: 4px;
+	margin-left: ${pillarLeftMarginPx}px;
+	padding-right: ${space[1]}px;
 
 	${from.mobileMedium} {
 		${headlineBold17}
-		padding-right: 8px;
+		padding-right: ${space[2]}px;
 	}
 
 	${from.desktop} {
@@ -73,6 +76,18 @@ const pillarLink = css`
 	}
 	:hover:after {
 		transform: translateY(-${space[1]}px);
+	}
+`;
+
+const firstPillarLinkOverrides = css`
+	/* width: calc(100% - ${pillarLeftMarginPx}px); */
+	a {
+		margin-left: 0;
+
+		:after {
+			width: calc(100% - 1px);
+			margin-left: 0;
+		}
 	}
 `;
 
@@ -120,8 +135,8 @@ const pillarUnderline = css`
 		height: ${space[1]}px;
 		// This is 100% width of pillar block minus the 6px margin
 		// on the left hand side and 1px border on the right
-		width: calc(100% - 7px);
-		margin-left: 6px;
+		width: calc(100% - ${pillarLeftMarginPx}px - 1px);
+		margin-left: ${pillarLeftMarginPx}px;
 		transition: transform 0.3s ease-in-out;
 
 		// This hides the pillar underline below the pillar block until
@@ -137,20 +152,21 @@ const pillarBlock = css`
 
 	height: 28px;
 	width: fit-content;
-	/* padding-right: 4px; */
 
 	${from.mobileMedium} {
 		height: 34px;
-		/* padding-right: 8px; */
 	}
 
 	${from.mobileLandscape} {
 		height: 37px;
 	}
 
+	${from.tablet} {
+		width: 108px;
+	}
+
 	${from.desktop} {
 		height: 40px;
-		width: 108px;
 	}
 
 	${from.leftCol} {
@@ -199,7 +215,7 @@ export const Pillars = ({
 	console.log({ needsAdapting });
 
 	return (
-		<ul id="navigation" css={pillarsContainer}>
+		<ul id="navigation" css={[pillarsContainer]}>
 			{pillars.map((p, i) => {
 				const isSelected = p.pillar === selectedPillar;
 
@@ -214,6 +230,7 @@ export const Pillars = ({
 						css={[
 							pillarBlock,
 							showDivider && verticalDividerStyles,
+							i === 0 && firstPillarLinkOverrides,
 						]}
 					>
 						<a

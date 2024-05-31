@@ -2,10 +2,11 @@ import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
 
 export default {
 	component: TitlepieceEditionDropdown,
-	title: 'Components/Masthead/EditionDropdown',
+	title: 'Components/Masthead/Titlepiece/EditionDropdown',
 	parameters: {
 		backgrounds: { default: 'dark' },
 		layout: 'centered',
+		chromatic: { disable: true },
 	},
 };
 

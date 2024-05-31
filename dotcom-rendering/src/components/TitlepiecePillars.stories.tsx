@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { Pillar } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { nav } from './Nav/Nav.mock';
 import { Pillars } from './TitlepiecePillars';
 
@@ -15,7 +16,7 @@ const meta = {
 	args: {
 		pillars: nav.pillars,
 		selectedPillar: nav.pillars[0]?.pillar as Pillar,
-		dataLinkName: 'header-nav',
+		dataLinkName: nestedOphanComponents('header', 'titlepiece', 'nav'),
 		isImmersive: false,
 		showLastPillarDivider: false,
 		hasPageSkin: false,
