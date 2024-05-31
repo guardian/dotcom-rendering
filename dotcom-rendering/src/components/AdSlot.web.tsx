@@ -437,16 +437,10 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-/** prevent third party code from breaking our layout if a child has a larger width */
-const noHorizontalOverflow = css`
-	overflow-x: hidden;
-`;
-
 export const adContainerStyles = [
 	adContainerCollapseStyles,
 	labelStyles,
 	adContainerCentreSlotStyles,
-	noHorizontalOverflow,
 ];
 
 export const AdSlot = ({

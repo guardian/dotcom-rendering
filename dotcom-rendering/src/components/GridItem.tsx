@@ -22,21 +22,21 @@ const gridAreaStyles = (area: string) => {
 
 			@supports (display: grid) {
 				position: relative;
-				grid-area: ${area};
+				overflow-x: hidden;
 			}
 		`;
 	}
 
 	if (area === 'body') {
 		return css`
-			grid-area: ${area};
+			overflow-x: hidden;
 			/* Pop me above the right column */
 			${getZIndex('bodyArea')}
 		`;
 	}
 
 	return css`
-		grid-area: ${area};
+		overflow-x: hidden;
 	`;
 };
 
@@ -45,7 +45,13 @@ export const GridItem = ({
 	area,
 	element: Element = 'div',
 }: Props) => (
-	<Element css={gridAreaStyles(area)} data-gu-name={area}>
+	<Element
+		css={gridAreaStyles(area)}
+		style={{
+			gridArea: area,
+		}}
+		data-gu-name={area}
+	>
 		{children}
 	</Element>
 );
