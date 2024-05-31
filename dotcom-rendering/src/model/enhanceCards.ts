@@ -343,20 +343,25 @@ export const enhanceCards = (
 					  ).toISOString()
 					: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
-			supportingContent: faciaCard.supportingContent
-				? enhanceSupportingContent(
-						faciaCard.supportingContent,
-						format,
-						containerPalette,
-				  )
-				: undefined,
+			supportingContent:
+				faciaCard.type === 'CuratedContent'
+					? enhanceSupportingContent(
+							faciaCard.supportingContent,
+							format,
+							containerPalette,
+					  )
+					: undefined,
 			discussionApiUrl,
 			discussionId: faciaCard.discussion.isCommentable
 				? faciaCard.discussion.discussionId
 				: undefined,
 			byline: faciaCard.properties.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
-			snapData: enhanceSnaps(faciaCard.enriched),
+			snapData:
+				faciaCard.type === 'CuratedContent' ||
+				faciaCard.type === 'LinkSnap'
+					? enhanceSnaps(faciaCard.enriched)
+					: undefined,
 			isBoosted: faciaCard.display.isBoosted,
 			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
