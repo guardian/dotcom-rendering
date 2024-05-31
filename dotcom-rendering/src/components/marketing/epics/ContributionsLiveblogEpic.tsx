@@ -19,6 +19,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
+import type { ChoiceCardSelection } from '../lib/choiceCards';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
 import {
@@ -26,9 +27,8 @@ import {
 	createViewEventFromTracking,
 } from '../lib/tracking';
 import { logEpicView } from '../lib/viewLog';
-import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
+import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
