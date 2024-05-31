@@ -10,17 +10,17 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { palette as sourcePalette } from '@guardian/source-foundations';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import {
 	buttonThemeBrand,
 	buttonThemeDefault,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import {
 	expandingWrapperDarkTheme,
 	expandingWrapperThemeDefault,
 	tabsDarkTheme,
 	tabsThemeDefault,
-} from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source-development-kitchen/react-components';
 import { transparentColour } from './lib/transparentColour';
 
 // ----- Palette Functions ----- //
@@ -5435,14 +5435,23 @@ const timelineEventBorderDark: PaletteFunction = () =>
 
 const mastheadTopBarBackground: PaletteFunction = () =>
 	sourcePalette.brand[300];
+const mastheadTopBarText: PaletteFunction = () => sourcePalette.neutral[100];
 const mastheadTopBarLinkText: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const mastheadTopBarVerticalDivider: PaletteFunction = () =>
 	sourcePalette.brand[600];
 
 const mastheadNavBackground: PaletteFunction = () => sourcePalette.brand[400];
-const mastheadNavLinkText: PaletteFunction = () => sourcePalette.brand[400];
+const mastheadNavLinkText: PaletteFunction = () => sourcePalette.neutral[100];
 const mastheadNavBorder: PaletteFunction = () => sourcePalette.brand[600];
+const mastheadNavLines: PaletteFunction = () => sourcePalette.neutral[86];
+
+const mastheadVeggieBurgerIcon: PaletteFunction = () =>
+	sourcePalette.brand[400];
+const mastheadVeggieBurgerBackground: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
+	sourcePalette.brandAlt[300];
 
 // ----- Palette ----- //
 
@@ -6129,6 +6138,10 @@ const paletteColours = {
 		light: mastheadNavBorder,
 		dark: mastheadNavBorder,
 	},
+	'--masthead-nav-lines': {
+		light: mastheadNavLines,
+		dark: mastheadNavLines,
+	},
 	'--masthead-nav-link-text': {
 		light: mastheadNavLinkText,
 		dark: mastheadNavLinkText,
@@ -6141,9 +6154,25 @@ const paletteColours = {
 		light: mastheadTopBarLinkText,
 		dark: mastheadTopBarLinkText,
 	},
+	'--masthead-top-bar-text': {
+		light: mastheadTopBarText,
+		dark: mastheadTopBarText,
+	},
 	'--masthead-top-bar-vertical-divider': {
 		light: mastheadTopBarVerticalDivider,
 		dark: mastheadTopBarVerticalDivider,
+	},
+	'--masthead-veggie-burger-background': {
+		light: mastheadVeggieBurgerBackground,
+		dark: mastheadVeggieBurgerBackground,
+	},
+	'--masthead-veggie-burger-background-hover': {
+		light: mastheadVeggieBurgerBackgroundHover,
+		dark: mastheadVeggieBurgerBackgroundHover,
+	},
+	'--masthead-veggie-burger-icon': {
+		light: mastheadVeggieBurgerIcon,
+		dark: mastheadVeggieBurgerIcon,
 	},
 	'--match-nav-background': {
 		light: matchNavBackgroundLight,

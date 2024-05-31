@@ -6,8 +6,8 @@ import {
 	remSpace,
 	textSans14,
 	textSans15,
-} from '@guardian/source-foundations';
-import { SvgGuardianLiveLogo } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgGuardianLiveLogo } from '@guardian/source/react-components';
 import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 

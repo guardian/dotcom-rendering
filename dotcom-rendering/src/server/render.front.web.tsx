@@ -86,8 +86,7 @@ export const renderFront = ({
 		renderingTarget: 'Web',
 		darkModeAvailable:
 			front.config.abTests.darkModeWebVariant === 'variant',
-		inAdvertisingPartnerABTest:
-			front.config.abTests.updateLogoAdPartnerVariant === 'variant',
+		updateLogoAdPartnerSwitch: !!front.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 	};
 
@@ -187,8 +186,8 @@ export const renderTagPage = ({
 		renderingTarget: 'Web',
 		darkModeAvailable:
 			tagPage.config.abTests.darkModeWebVariant === 'variant',
-		inAdvertisingPartnerABTest:
-			tagPage.config.abTests.updateLogoAdPartnerVariant === 'variant',
+		updateLogoAdPartnerSwitch:
+			!!tagPage.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 	};
 

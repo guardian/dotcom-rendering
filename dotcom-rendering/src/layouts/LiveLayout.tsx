@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
 	space,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -354,6 +354,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
 							displayRoundel={false}
@@ -549,22 +550,19 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												article.webPublicationDateDeprecated
 											}
 											hasStarRating={
-												typeof article.starRating ===
-												'number'
+												!isUndefined(article.starRating)
 											}
 										/>
 									)}
 								</div>
-								{article.starRating !== undefined ? (
+								{!isUndefined(article.starRating) ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={article.starRating}
 											size="large"
 										/>
 									</div>
-								) : (
-									<></>
-								)}
+								) : null}
 							</GridItem>
 						</HeadlineGrid>
 					</Section>

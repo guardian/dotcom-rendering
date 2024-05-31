@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, textSans15, textSans17 } from '@guardian/source-foundations';
+import { from, textSans15, textSans17 } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { SubNavType } from '../model/extract-nav';

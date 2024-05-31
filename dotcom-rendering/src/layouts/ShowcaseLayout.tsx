@@ -5,9 +5,9 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -296,6 +296,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										idApiUrl={article.config.idApiUrl}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
 										showSubNav={false}
 										isImmersive={false}
 										displayRoundel={false}

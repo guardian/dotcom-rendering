@@ -1,4 +1,4 @@
-import { resets, palette as sourcePalette } from '@guardian/source-foundations';
+import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';

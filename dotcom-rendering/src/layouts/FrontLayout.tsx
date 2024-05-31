@@ -6,8 +6,8 @@ import {
 	brandBorder,
 	brandLine,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
@@ -163,10 +163,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant';
 
-	const inAdvertisingPartnerABTest =
-		abTests.updateLogoAdPartnerVariant === 'variant';
-
-	const { absoluteServerTimes = false } = front.config.switches;
+	const { updateLogoAdPartner, absoluteServerTimes = false } =
+		front.config.switches;
 
 	return (
 		<>
@@ -208,6 +206,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
+							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={front.config.idApiUrl}
 							showSubNav={!isPaidContent}
 							hasPageSkin={hasPageSkin}
@@ -463,8 +462,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									inAdvertisingPartnerABTest={
-										inAdvertisingPartnerABTest
+									updateLogoAdPartnerSwitch={
+										updateLogoAdPartner
 									}
 								>
 									<FrontMostViewed
@@ -677,9 +676,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
-								inAdvertisingPartnerABTest={
-									inAdvertisingPartnerABTest
-								}
+								updateLogoAdPartnerSwitch={updateLogoAdPartner}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}

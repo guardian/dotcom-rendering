@@ -14,7 +14,7 @@ import {
 	textSansBold24,
 	textSansBold34,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import { decidePalette } from '../lib/decidePalette';

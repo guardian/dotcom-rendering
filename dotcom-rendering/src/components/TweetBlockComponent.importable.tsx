@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import {
 	article15,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useEffect } from 'react';
 import { unescapeData } from '../lib/escapeData';
 import type { TweetBlockElement } from '../types/content';

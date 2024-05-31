@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans20 } from '@guardian/source-foundations';
+import { textSans20 } from '@guardian/source/foundations';
 import type { RoleType, VineBlockElement } from '../types/content';
 import { ClickToView } from './ClickToView';
 import { MaintainAspectRatio } from './MaintainAspectRatio';

@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, until } from '@guardian/source-foundations';
+import { between, from, until } from '@guardian/source/foundations';
 import { PlayIcon } from './PlayIcon';
 
 export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';

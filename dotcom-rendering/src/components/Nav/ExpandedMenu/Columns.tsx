@@ -7,14 +7,14 @@ import {
 	space,
 	textSans17,
 	textSans20,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	Label,
 	SvgArrowRightStraight,
 	SvgMagnifyingGlass,
 	TextInput,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';

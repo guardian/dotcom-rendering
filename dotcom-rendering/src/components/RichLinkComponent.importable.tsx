@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';
-import type { RichLinkBlockElement } from '../types/content';
+import type { RichLinkBlockElement, StarRating } from '../types/content';
 import type { TagType } from '../types/tag';
 import type { RichLinkImageData } from './RichLink';
 import { RichLink } from './RichLink';
@@ -22,7 +22,7 @@ interface FERichLinkType {
 	tags: TagType[];
 	sponsorName: string;
 	format: FEFormat;
-	starRating?: number;
+	starRating?: StarRating;
 	contributorImage?: string;
 	imageAsset?: ImageAsset;
 }

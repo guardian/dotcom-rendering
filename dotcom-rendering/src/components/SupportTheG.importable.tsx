@@ -13,7 +13,7 @@ import {
 	textSans15,
 	textSans17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,
@@ -417,7 +417,7 @@ const ReaderRevenueLinksNative = ({
 };
 
 /**
- * Container for `ReaderRevenueLinksRemote` or `ReaderRevenueLinksNative`
+ * Container for `ReaderRevenueLinksRemote` or `ReaderRevenueLinksRemote`
  *
  * ## Why does this need to be an Island?
  *

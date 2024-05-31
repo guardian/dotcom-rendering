@@ -1,5 +1,5 @@
 import { cmp } from '@guardian/libs';
-import { Button, Link, LinkButton } from '@guardian/source-react-components';
+import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGateProps } from '../types';

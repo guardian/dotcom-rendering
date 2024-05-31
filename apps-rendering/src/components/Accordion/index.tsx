@@ -10,11 +10,11 @@ import {
 	line,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 

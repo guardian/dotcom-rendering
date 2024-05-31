@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, log, storage } from '@guardian/libs';
-import { space } from '@guardian/source-foundations';
+import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import React, { useEffect, useState } from 'react';

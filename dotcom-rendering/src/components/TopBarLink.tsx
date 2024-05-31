@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSansBold17 } from '@guardian/source-foundations';
+import { space, textSansBold17 } from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 
 type Props = {

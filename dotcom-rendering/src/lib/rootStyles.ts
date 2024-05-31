@@ -2,7 +2,7 @@ import { css, type SerializedStyles } from '@emotion/react';
 import {
 	focusHalo,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { paletteDeclarations } from '../palette';
 
 /**

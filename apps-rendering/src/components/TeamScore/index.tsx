@@ -8,7 +8,7 @@ import {
 	neutral,
 	remSpace,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { TeamLocation } from 'football';
 import type { FC } from 'react';
 

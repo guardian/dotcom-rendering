@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import { liveBlock } from '../../fixtures/manual/liveBlock';
 import { LiveBlock } from './LiveBlock';
 import { PinnedPost } from './PinnedPost';

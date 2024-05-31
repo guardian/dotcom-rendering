@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { ArticleDisplay, ArticleElementRole, Pillar } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { none, some } from '../../../../vendor/@guardian/types/index';
 import type { Contributor } from 'contributor';
 import {

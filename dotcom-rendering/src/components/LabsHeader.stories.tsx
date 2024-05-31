@@ -1,4 +1,4 @@
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 import { LabsHeader } from './LabsHeader';
 import { Section } from './Section';
 

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { focusHalo } from '@guardian/source-foundations';
+import { focusHalo } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 
 const fauxLinkStyles = css`

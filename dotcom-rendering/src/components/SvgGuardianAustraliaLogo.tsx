@@ -1,4 +1,4 @@
-import { palette as sourcePalette } from '@guardian/source-foundations';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 
 export const SvgGuardianAustraliaLogo = () => {
 	const white = sourcePalette.neutral[100];

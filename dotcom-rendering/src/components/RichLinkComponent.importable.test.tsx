@@ -16,7 +16,7 @@ describe('RichLinkComponent', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						inAdvertisingPartnerABTest: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>

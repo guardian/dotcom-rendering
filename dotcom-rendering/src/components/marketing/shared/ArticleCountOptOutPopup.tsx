@@ -6,7 +6,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { OphanComponentEvent, OphanComponentType } from '@guardian/libs';
-import { from, space } from '@guardian/source-foundations';
+import { from, space } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import {

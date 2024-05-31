@@ -1,5 +1,6 @@
 import { isObject, isString, storage } from '@guardian/libs';
 import { useEffect } from 'react';
+import { getOphan } from '../client/ophan/ophan';
 
 type ContainerStates = { [id: string]: string };
 
@@ -16,6 +17,19 @@ const getContainerStates = (): ContainerStates => {
 	if (!isContainerStates(item)) return {};
 
 	return item;
+};
+
+/**
+ * Implemented on 29/05/24 to understand how much the
+ * "hide" container feature is being used
+ */
+const recordHiddenContainer = (sectionId: string): void => {
+	void getOphan('Web').then((ophan) =>
+		ophan.record({
+			component: 'hidden-container',
+			value: sectionId,
+		}),
+	);
 };
 
 export const ShowHideContainers = () => {
@@ -55,6 +69,9 @@ export const ShowHideContainers = () => {
 
 			if (containerStates[sectionId] === 'closed') {
 				toggleContainer(sectionId, e);
+
+				// Track which containers are configured to be hidden
+				recordHiddenContainer(sectionId);
 			}
 		}
 	}, []);
