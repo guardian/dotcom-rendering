@@ -100,7 +100,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 140px 1px 620px 300px;
+					grid-template-columns: 219px 1px 620px 300px;
 
 					${isMatchReport
 						? css`
