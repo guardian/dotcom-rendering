@@ -86,7 +86,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
 						'caption    border      title       right-column'
 						'.          border      headline    right-column'
@@ -109,7 +109,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${until.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
@@ -129,7 +129,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
+					grid-template-columns: 620px 300px;
 					grid-column-gap: 20px;
 					grid-template-areas:
 						'title       right-column'

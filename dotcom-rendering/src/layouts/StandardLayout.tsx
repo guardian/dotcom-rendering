@@ -100,7 +100,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 620px 300px;
 
 					${isMatchReport
 						? css`
@@ -146,7 +146,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 			${until.wide} {
-				grid-template-columns: 140px 1px 1fr 300px;
+				grid-template-columns: 140px 1px 620px 300px;
 
 				${isMatchReport
 					? css`
@@ -190,7 +190,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 			${until.leftCol} {
-				grid-template-columns: 1fr 300px;
+				grid-template-columns: 620px 300px;
 				${isMatchReport
 					? css`
 							grid-template-areas:
