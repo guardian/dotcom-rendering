@@ -66,13 +66,12 @@ export const DateTime = ({
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
 	const then = date.getTime();
-	const isRelative = display === 'relative' && Date.now() - then < ONE_WEEK;
-
+	const isRecent = display === 'relative' && Date.now() - then < ONE_WEEK;
 	const now = absoluteServerTimes
 		? Number.MAX_SAFE_INTEGER - 1
 		: getServerTime();
 
-	return isRelative ? (
+	return isRecent ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
 			<RelativeTime then={then} now={now} />
 		</Island>
