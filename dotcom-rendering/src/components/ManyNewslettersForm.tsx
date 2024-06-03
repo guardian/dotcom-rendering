@@ -4,8 +4,8 @@ import {
 	headlineObjectStyles,
 	palette,
 	space,
-} from '@guardian/source-foundations';
-import { Button, TextInput } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, TextInput } from '@guardian/source/react-components';
 import { type ChangeEventHandler, useState } from 'react';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';

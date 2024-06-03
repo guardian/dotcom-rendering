@@ -1,4 +1,4 @@
-import { Hide } from '@guardian/source-react-components';
+import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
@@ -68,6 +68,7 @@ export const LiveBlogRenderer = ({
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
+	const { absoluteServerTimes = false } = switches;
 
 	const filtered =
 		(!!selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
@@ -79,7 +80,11 @@ export const LiveBlogRenderer = ({
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
 					</Island>
-					<PinnedPost pinnedPost={pinnedPost} format={format}>
+					<PinnedPost
+						pinnedPost={pinnedPost}
+						format={format}
+						absoluteServerTimes={absoluteServerTimes}
+					>
 						<LiveBlock
 							format={format}
 							block={pinnedPost}
@@ -105,6 +110,7 @@ export const LiveBlogRenderer = ({
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
 					{(!switches.automaticFilters || !availableTopics) && (

@@ -4,12 +4,12 @@ import {
 	headlineObjectStyles,
 	palette,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	SvgCheckmark,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useCallback, useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';

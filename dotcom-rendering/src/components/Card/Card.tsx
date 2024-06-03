@@ -1,16 +1,17 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
 	space,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import type { Branding } from '../../types/branding';
+import type { StarRating as Rating } from '../../types/content';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -57,6 +58,7 @@ import { TrailTextWrapper } from './components/TrailTextWrapper';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
+	absoluteServerTimes: boolean;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	headlineSizeOnMobile?: SmallHeadlineSize;
@@ -83,7 +85,7 @@ export type Props = {
 	isPlayableMediaCard?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	starRating?: number;
+	starRating?: Rating;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
@@ -122,7 +124,7 @@ const StarRatingComponent = ({
 	rating,
 	cardHasImage,
 }: {
-	rating: number;
+	rating: Rating;
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
@@ -289,6 +291,7 @@ export const Card = ({
 	onwardsSource,
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
+	absoluteServerTimes,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -326,6 +329,7 @@ export const Card = ({
 							showClock={showClock}
 							isDynamo={isDynamo}
 							isOnwardContent={isOnwardContent}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					) : undefined
 				}
@@ -595,7 +599,7 @@ export const Card = ({
 								isExternalLink={isExternalLink}
 								isOnwardContent={isOnwardContent}
 							/>
-							{starRating !== undefined ? (
+							{!isUndefined(starRating) ? (
 								<StarRatingComponent
 									rating={starRating}
 									cardHasImage={!!image}
@@ -639,6 +643,9 @@ export const Card = ({
 										isDynamo={isDynamo}
 										direction={supportingContentAlignment}
 										containerPalette={containerPalette}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
 									></LatestLinks>
 								</Island>
 							)}

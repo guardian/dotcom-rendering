@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints, palette } from '@guardian/source-foundations';
+import { breakpoints, palette } from '@guardian/source/foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
@@ -169,6 +169,7 @@ export const WorldCupFinal2023 = () => {
 						direction="horizontal"
 						containerPalette={containerPalette}
 						isDynamo={true}
+						absoluteServerTimes={true}
 					/>
 				</Island>
 			</ContainerOverrides>
@@ -203,6 +204,7 @@ export const LondonPride2022 = ({ theme }: StoryArgs) => {
 				<LatestLinks
 					id="/world/live/2022/jul/02/pride-in-london-2022-huge-turnout-expected-at-first-march-since-pandemic-live-updates"
 					direction="horizontal"
+					absoluteServerTimes={true}
 				/>
 			</Island>
 		</Wrapper>

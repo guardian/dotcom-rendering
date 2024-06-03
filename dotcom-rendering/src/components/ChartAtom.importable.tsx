@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, space } from '@guardian/source-foundations';
+import { palette, space } from '@guardian/source/foundations';
 
 interface Props {
 	id: string;

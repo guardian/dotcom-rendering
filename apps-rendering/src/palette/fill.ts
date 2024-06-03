@@ -12,7 +12,7 @@ import {
 	palette,
 	specialReport,
 	sport,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Colour } from './colour';
 
 // ----- Functions ----- //

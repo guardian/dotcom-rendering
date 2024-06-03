@@ -3,7 +3,7 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 
 type Props = {
 	size?: 'full' | 'partial';

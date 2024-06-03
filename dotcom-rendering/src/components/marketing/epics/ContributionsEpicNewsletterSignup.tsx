@@ -5,7 +5,7 @@
  */
 import { css } from '@emotion/react';
 import { isObject, log } from '@guardian/libs';
-import { space } from '@guardian/source-foundations';
+import { space } from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 
 const containerStyles = css`

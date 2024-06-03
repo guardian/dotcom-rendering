@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import type { JSX } from '@emotion/react/jsx-runtime';
-import { space, textSans15 } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgCheckmark,
 	SvgNotificationsOff,
 	SvgNotificationsOn,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 type IconProps = {

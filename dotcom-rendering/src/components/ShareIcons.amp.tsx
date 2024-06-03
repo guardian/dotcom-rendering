@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { visuallyHidden } from '@guardian/source-foundations';
+import { visuallyHidden } from '@guardian/source/foundations';
 import React from 'react';
 import {
 	neutralBorder,

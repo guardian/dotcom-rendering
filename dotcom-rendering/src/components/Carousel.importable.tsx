@@ -6,7 +6,7 @@ import {
 	palette as sourcePalette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { formatAttrString } from '../lib/formatAttrString';
@@ -39,6 +39,7 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
 	discussionApiUrl: string;
+	absoluteServerTimes: boolean;
 };
 
 type ArticleProps = Props & {
@@ -460,6 +461,7 @@ type CarouselCardProps = {
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
+	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 	kickerText?: string;
 	image?: DCRFrontImage;
@@ -492,6 +494,7 @@ const CarouselCard = ({
 	imageLoading,
 	discussionApiUrl,
 	isOnwardContent,
+	absoluteServerTimes,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
@@ -534,6 +537,7 @@ const CarouselCard = ({
 				isOnwardContent={isOnwardContent}
 				imagePosition={cardImagePosition}
 				imagePositionOnMobile={cardImagePosition}
+				absoluteServerTimes={absoluteServerTimes}
 			/>
 		</LI>
 	);
@@ -779,6 +783,7 @@ export const Carousel = ({
 	leftColSize,
 	discussionApiUrl,
 	isOnwardContent = true,
+	absoluteServerTimes,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
@@ -993,6 +998,7 @@ export const Carousel = ({
 									linkTo={linkTo}
 									headlineText={headlineText}
 									webPublicationDate={webPublicationDate}
+									absoluteServerTimes={absoluteServerTimes}
 									image={image}
 									kickerText={kickerText}
 									dataLinkName={`carousel-small-card-position-${i}`}

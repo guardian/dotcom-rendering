@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, log, storage } from '@guardian/libs';
-import { space } from '@guardian/source-foundations';
+import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import React, { useEffect, useState } from 'react';
@@ -87,7 +87,6 @@ const usePayload = ({
 	isPaidContent,
 	tags,
 	pageId,
-	keywordIds,
 }: {
 	shouldHideReaderRevenue: boolean;
 	sectionId: string;
@@ -96,7 +95,7 @@ const usePayload = ({
 	pageId: string;
 	keywordIds: string;
 }): EpicPayload | undefined => {
-	const articleCounts = useArticleCounts(pageId, keywordIds, 'LiveBlog');
+	const articleCounts = useArticleCounts(pageId, tags, 'LiveBlog');
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
 	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();

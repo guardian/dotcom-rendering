@@ -3,7 +3,7 @@ import {
 	from,
 	headlineBold28,
 	headlineBold34,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { defaultStyles } from './Headline.defaults';
 

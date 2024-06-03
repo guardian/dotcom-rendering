@@ -7,7 +7,7 @@ import { expectToBeVisible } from '../lib/locators';
 import { ADDITIONAL_REQUEST_PATH, interceptOphanRequest } from '../lib/ophan';
 
 const paidContentPage =
-	'https://www.theguardian.com/the-future-of-sustainable-entrepreneurship/2023/jun/01/take-your-sustainable-business-to-the-next-level-win-your-own-retail-space-at-one-of-londons-westfield-centres';
+	'https://www.theguardian.com/a-taste-of-piedmont-and-alpine-italy/article/2024/may/08/anchovy-sauce-to-sundried-chillies-what-the-uks-italian-chefs-eat-for-a-real-taste-of-home';
 
 /**
  * There are mutiple requests to Google Analytics made on the page.
@@ -22,8 +22,8 @@ const waitForGARequest = (page: Page) => {
 		const searchParams = new URLSearchParams(request.url());
 		const hasClick = searchParams.get('ec') === 'click';
 		const hasSponsor = searchParams.get('ea') === 'sponsor logo';
-		const hasWestfield = searchParams.get('el') === 'westfield';
-		return matchUrl && hasClick && hasSponsor && hasWestfield;
+		const hasMenabrea = searchParams.get('el') === 'menabrea';
+		return matchUrl && hasClick && hasSponsor && hasMenabrea;
 	});
 };
 
@@ -96,8 +96,8 @@ test.describe('Paid content tests', () => {
 				const clickComponent = searchParams.get('clickComponent');
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
-					clickComponent === 'labs-logo | article-meta-westfield' &&
-					clickLinkNames === '["labs-logo-article-meta-westfield"]'
+					clickComponent === 'labs-logo | article-meta-menabrea' &&
+					clickLinkNames === '["labs-logo-article-meta-menabrea"]'
 				);
 			},
 		});
@@ -124,9 +124,9 @@ test.describe('Paid content tests', () => {
 				const clickLinkNames = searchParams.get('clickLinkNames');
 				return (
 					clickComponent ===
-						'labs-logo | article-related-content-westfield' &&
+						'labs-logo | article-related-content-menabrea' &&
 					clickLinkNames ===
-						'["labs-logo-article-related-content-westfield","related-content"]'
+						'["labs-logo-article-related-content-menabrea","related-content"]'
 				);
 			},
 		});

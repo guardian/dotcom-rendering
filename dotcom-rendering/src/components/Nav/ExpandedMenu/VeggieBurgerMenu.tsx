@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	between,
 	from,
 	palette as sourcePalette,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
@@ -81,10 +80,6 @@ const veggieBurgerStyles = (isImmersive: boolean) => css`
 
 	right: 5px;
 	bottom: 58px;
-
-	${between.mobileMedium.and.tablet} {
-		${getZIndex('burger')}
-	}
 
 	${from.mobileMedium} {
 		bottom: ${isImmersive ? '3px' : '-3px'};

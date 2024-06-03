@@ -6,8 +6,8 @@ import {
 	brandBorder,
 	brandLine,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
@@ -26,6 +26,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
+import { Masthead } from '../components/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -157,6 +158,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const { abTests } = front.config;
+
+	const inUpdatedHeaderABTest =
+		abTests.updatedHeaderDesignVariant === 'variant';
+
+	const { updateLogoAdPartner, absoluteServerTimes = false } =
+		front.config.switches;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -187,95 +196,121 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					)}
 
-					{!isPaidContent && (
-						<Section
-							fullWidth={true}
-							shouldCenter={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							backgroundColour={brandBackground.primary}
-							element="header"
-							hasPageSkin={hasPageSkin}
-							hasPageSkinContentSelfConstrain={true}
-						>
-							<Header
-								editionId={front.editionId}
-								idUrl={front.config.idUrl}
-								mmaUrl={front.config.mmaUrl}
-								discussionApiUrl={front.config.discussionApiUrl}
-								urls={front.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!front.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={front.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!front.config.switches
-										.headerTopBarSearchCapi
-								}
-								hasPageSkin={hasPageSkin}
-							/>
-						</Section>
-					)}
-
-					<Section
-						fullWidth={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={brandBackground.primary}
-						element="nav"
-						hasPageSkin={hasPageSkin}
-						hasPageSkinContentSelfConstrain={true}
-					>
-						<Nav
+					{inUpdatedHeaderABTest ? (
+						<Masthead
 							nav={NAV}
+							editionId={front.editionId}
+							idUrl={front.config.idUrl}
+							mmaUrl={front.config.mmaUrl}
+							discussionApiUrl={front.config.discussionApiUrl}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
-							selectedPillar={NAV.selectedPillar}
-							editionId={front.editionId}
+							contributionsServiceUrl={contributionsServiceUrl}
+							idApiUrl={front.config.idApiUrl}
+							showSubNav={!isPaidContent}
 							hasPageSkin={hasPageSkin}
+							hasPageSkinContentSelfConstrain={true}
 						/>
-					</Section>
-					{NAV.subNavSections && (
+					) : (
 						<>
-							<Section
-								fullWidth={true}
-								padSides={false}
-								element="aside"
-								hasPageSkin={hasPageSkin}
-							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
+							{!isPaidContent && (
+								<Section
+									fullWidth={true}
+									shouldCenter={false}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									backgroundColour={brandBackground.primary}
+									element="header"
+									hasPageSkin={hasPageSkin}
+									hasPageSkinContentSelfConstrain={true}
 								>
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={
-											sourcePalette.news[400]
+									<Header
+										editionId={front.editionId}
+										idUrl={front.config.idUrl}
+										mmaUrl={front.config.mmaUrl}
+										discussionApiUrl={
+											front.config.discussionApiUrl
 										}
-										borderColour={sourcePalette.neutral[46]}
+										urls={
+											front.nav.readerRevenueLinks.header
+										}
+										remoteHeader={
+											!!front.config.switches.remoteHeader
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										idApiUrl={front.config.idApiUrl}
+										headerTopBarSearchCapiSwitch={
+											!!front.config.switches
+												.headerTopBarSearchCapi
+										}
+										hasPageSkin={hasPageSkin}
 									/>
-								</Island>
-							</Section>
+								</Section>
+							)}
+
 							<Section
 								fullWidth={true}
-								padSides={false}
+								borderColour={brandLine.primary}
 								showTopBorder={false}
+								padSides={false}
+								backgroundColour={brandBackground.primary}
+								element="nav"
 								hasPageSkin={hasPageSkin}
+								hasPageSkinContentSelfConstrain={true}
 							>
-								<StraightLines
-									cssOverrides={css`
-										display: block;
-									`}
-									count={4}
+								<Nav
+									nav={NAV}
+									subscribeUrl={
+										front.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									selectedPillar={NAV.selectedPillar}
+									editionId={front.editionId}
+									hasPageSkin={hasPageSkin}
 								/>
 							</Section>
+							{NAV.subNavSections && (
+								<>
+									<Section
+										fullWidth={true}
+										padSides={false}
+										element="aside"
+										hasPageSkin={hasPageSkin}
+									>
+										<Island
+											priority="enhancement"
+											defer={{ until: 'idle' }}
+										>
+											<SubNav
+												subNavSections={
+													NAV.subNavSections
+												}
+												currentNavLink={
+													NAV.currentNavLink
+												}
+												position="header"
+											/>
+										</Island>
+									</Section>
+									<Section
+										fullWidth={true}
+										padSides={false}
+										showTopBorder={false}
+										hasPageSkin={hasPageSkin}
+									>
+										<StraightLines
+											cssOverrides={css`
+												display: block;
+											`}
+											count={4}
+										/>
+									</Section>
+								</>
+							)}
 						</>
 					)}
 
@@ -292,6 +327,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
+
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
@@ -426,6 +462,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
+									updateLogoAdPartnerSwitch={
+										updateLogoAdPartner
+									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -486,6 +525,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -565,6 +607,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											discussionApiUrl={
 												front.config.discussionApiUrl
 											}
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
 										/>
 									</Island>
 								</Section>
@@ -631,6 +676,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
+								updateLogoAdPartnerSwitch={updateLogoAdPartner}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -645,6 +691,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(
@@ -687,8 +734,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={sourcePalette.news[400]}
-							borderColour={sourcePalette.neutral[46]}
+							position="footer"
 						/>
 					</Island>
 				</Section>
@@ -724,7 +770,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						isPaidContent={!!front.config.isPaidContent}
 						isPreview={front.config.isPreview}
 						isSensitive={front.config.isSensitive}
-						keywordIds={front.config.keywordIds} // a front doesn't really have tags, but frontend generates a keywordId
 						pageId={front.pressedPage.id}
 						sectionId={front.config.section}
 						shouldHideReaderRevenue={false} // never defined for fronts

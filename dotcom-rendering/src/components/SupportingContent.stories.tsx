@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
 import { SupportingContent } from './SupportingContent';
@@ -37,6 +37,7 @@ const basicCardProps: CardProps = {
 	isPlayableMediaCard: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+	absoluteServerTimes: true,
 };
 
 const aBasicLink = {

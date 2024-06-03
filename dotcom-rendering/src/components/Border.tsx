@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 
 export const Border = () => (
