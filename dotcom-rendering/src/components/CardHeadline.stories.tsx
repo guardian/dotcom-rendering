@@ -333,13 +333,8 @@ OpinionKicker.decorators = [
 ];
 
 export const SpecialReport: StoryObj = ({ format }: StoryProps) => (
-	<Section
-		fullWidth={true}
-		showTopBorder={false}
-		showSideBorders={false}
-		backgroundColour="grey"
-	>
-		<ContainerOverrides isDynamo={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+		<ContainerOverrides>
 			<CardHeadline
 				headlineText="This is how a Special Report card headline with kicker and quotes looks"
 				format={format}
@@ -391,7 +386,7 @@ export const Byline: StoryObj = ({ format }: StoryProps) => (
 				: undefined
 		}
 	>
-		<ContainerOverrides isDynamo={false}>
+		<ContainerOverrides>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={format}
@@ -469,17 +464,13 @@ export const WithContainerOverrides: StoryObj = ({ format }: StoryProps) => (
 				showSideBorders={false}
 				containerPalette={containerPalette}
 			>
-				<ContainerOverrides
-					containerPalette={containerPalette}
-					isDynamo={false}
-				>
+				<ContainerOverrides containerPalette={containerPalette}>
 					<CardHeadline
 						headlineText={`This is a ${
 							Pillar[format.theme] ??
 							ArticleSpecial[format.theme] ??
 							'Unknown'
 						} headline`}
-						containerPalette={containerPalette}
 						format={format}
 						byline={`inside a ${containerPalette} container`}
 						showByline={true}

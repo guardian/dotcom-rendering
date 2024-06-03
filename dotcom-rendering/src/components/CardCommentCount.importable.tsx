@@ -85,10 +85,7 @@ export const CardCommentCount = ({
 
 	const { long, short } = formatCount(count);
 	return (
-		<ContainerOverrides
-			containerPalette={containerPalette}
-			isDynamo={!!isDynamo}
-		>
+		<ContainerOverrides containerPalette={containerPalette}>
 			<div css={containerStyles(isDynamo, isOnwardContent)}>
 				<div css={svgStyles(isDynamo, isOnwardContent)}>
 					<CommentIcon />

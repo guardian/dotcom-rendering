@@ -87,7 +87,6 @@ export const CardKickerWithContainerOverrides = {
 						<ContainerOverrides
 							key={containerPalette}
 							containerPalette={containerPalette}
-							isDynamo={false}
 						>
 							<div style={kickerWrapperStyles}>
 								<span
