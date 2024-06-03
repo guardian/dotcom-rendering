@@ -11,13 +11,14 @@ import {
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';
+import { VeggieBurgerMenu } from './TitlepieceVeggieBurgerMenu';
 
 type Props = {
 	pillars: PillarLinkType[];
 	dataLinkName: string;
 	selectedPillar?: Pillar;
 	isImmersive?: boolean;
-	showLastPillarDivider?: boolean;
+	showBurgerMenu?: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -179,6 +180,15 @@ const pillarBlock = css`
 	}
 `;
 
+const burgerPositionOverrides = css`
+	left: 6px;
+	bottom: 4px;
+
+	${from.leftCol} {
+		bottom: 16px;
+	}
+`;
+
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
 
@@ -206,7 +216,7 @@ export const Pillars = ({
 	selectedPillar,
 	dataLinkName,
 	isImmersive = false,
-	showLastPillarDivider = true,
+	showBurgerMenu = false,
 	hasPageSkin = false,
 }: Props) => {
 	// TEMPORARY - to stop the linter freaking out
@@ -220,7 +230,7 @@ export const Pillars = ({
 				const isSelected = p.pillar === selectedPillar;
 
 				const showDivider =
-					showLastPillarDivider || isNotLastPillar(i, pillars.length);
+					showBurgerMenu || isNotLastPillar(i, pillars.length);
 
 				const pillarColour = getPillarColour(p.pillar);
 
@@ -252,6 +262,11 @@ export const Pillars = ({
 					</li>
 				);
 			})}
+			{showBurgerMenu && (
+				<VeggieBurgerMenu
+					positionOverrideStyles={burgerPositionOverrides}
+				/>
+			)}
 		</ul>
 	);
 };
