@@ -1,8 +1,17 @@
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { getSublinks, trails } from '../../fixtures/manual/trails';
-import type { DCRFrontCard, DCRGroupedTrails } from '../types/front';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../types/front';
 import { DynamicPackage } from './DynamicPackage';
 import { FrontSection } from './FrontSection';
 
@@ -539,7 +548,78 @@ export const SpecialReportWithoutPalette = () => (
 		/>
 	</FrontSection>
 );
-One.storyName = 'With one standard card';
+SpecialReportWithoutPalette.storyName = 'With one standard card';
+
+export const DynamoSpecialPaletteVariations = () => {
+	const containerPalettes = [
+		'EventPalette',
+		'SombreAltPalette',
+		'EventAltPalette',
+		'InvestigationPalette',
+		'LongRunningAltPalette',
+		'LongRunningPalette',
+		'SombrePalette',
+		'BreakingPalette',
+		'SpecialReportAltPalette',
+	] as const satisfies readonly DCRContainerPalette[];
+
+	return (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					showTopBorder={true}
+					discussionApiUrl={discussionApiUrl}
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+				>
+					<DynamicPackage
+						groupedTrails={{
+							...defaultGroupedTrails,
+							standard: [
+								{
+									format: {
+										display: ArticleDisplay.Immersive,
+										theme: Pillar.News,
+										design: ArticleDesign.Standard,
+									},
+									url: '/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+									kickerText: 'Mossack Fonseca',
+									headline:
+										'inside the firm that helps the super-rich hide their money',
+									showQuotedHeadline: false,
+									dataLinkName: 'news | group-0 | card-@1',
+									mainMedia: undefined,
+									showLivePlayable: false,
+									isExternalLink: false,
+									webPublicationDate:
+										'2016-04-08T12:15:09.000Z',
+									image: {
+										src: 'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/3000.jpg',
+										altText: 'An office building',
+									},
+									isBoosted: false,
+									trailText:
+										'As Panama Papers shine light on offshore world, Luke Harding takes a closer look at company exploiting tropical tax havens',
+									supportingContent: [],
+									byline: 'Luke Harding',
+									snapData: {},
+									isCrossword: false,
+									discussionApiUrl,
+								},
+							],
+						}}
+						absoluteServerTimes={true}
+						imageLoading="eager"
+					/>
+				</FrontSection>
+			))}
+		</>
+	);
+};
+DynamoSpecialPaletteVariations.storyName =
+	'Dynamo with special palette variations';
 
 export const VideoSublinks = () => (
 	<FrontSection
