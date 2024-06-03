@@ -1,11 +1,10 @@
-import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import { decideFormat } from '../lib/decideFormat';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type {
-	DCRContainerPalette,
 	DCRFrontCard,
 	DCRSlideshowImage,
 	DCRSupportingContent,
@@ -18,76 +17,15 @@ import type { TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
 import { enhanceTags } from './enhanceTags';
 
-/**
- *
- * This function makes the decision about when we use the parent's (the
- * container's) format property to override the styling of a sublink, and
- * when we allow the sublink to express its own styling.
- *
- * Eg. If you had a sublink to a lifestyle article, when should it use pink for
- * the kicker and when would that not look right
- *
- * @returns the format property that we will use to style the sublink
- */
-const decidePresentationFormat = ({
-	linkFormat,
-	containerFormat,
-	containerPalette,
-}: {
-	linkFormat?: ArticleFormat;
-	containerFormat: ArticleFormat;
-	containerPalette?: DCRContainerPalette;
-}): ArticleFormat => {
-	// Some sublinks are to fronts and so don't have a `format` property
-	if (!linkFormat) return containerFormat;
-	// If the container has a special palette, use the container format
-	if (containerPalette) return containerFormat;
-	// These types of article styles have background styles that sublinks
-	// need to respect so we use the container format here
-	if (
-		containerFormat.design === ArticleDesign.LiveBlog ||
-		containerFormat.design === ArticleDesign.Gallery ||
-		containerFormat.design === ArticleDesign.Audio ||
-		containerFormat.design === ArticleDesign.Video ||
-		containerFormat.theme === ArticleSpecial.SpecialReport ||
-		containerFormat.design === ArticleDesign.Analysis
-	) {
-		return containerFormat;
-	}
-
-	// These types of link format designs mean the headline could render
-	// poorly (e.g.: white) so we use the container format
-	if (
-		linkFormat.design === ArticleDesign.LiveBlog ||
-		linkFormat.design === ArticleDesign.Gallery ||
-		linkFormat.design === ArticleDesign.Audio ||
-		linkFormat.theme === ArticleSpecial.SpecialReport ||
-		linkFormat.design === ArticleDesign.Video
-	) {
-		return { ...containerFormat, theme: Pillar.News };
-	}
-
-	// Otherwise, we can allow the sublink to express its own styling
-	return linkFormat;
-};
-
 const enhanceSupportingContent = (
 	supportingContent: FESupportingContent[],
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
+	parentFormat: ArticleFormat,
 ): DCRSupportingContent[] => {
 	return supportingContent.map((subLink) => {
-		// This is the actual DCR format for this sublink
+		/** Use link format where available and fallback to parent otherwise */
 		const linkFormat = subLink.format
 			? decideFormat(subLink.format)
-			: undefined;
-		// This is the format used to decide how the sublink looks (we vary this based
-		// on the container background colour)
-		const presentationFormat = decidePresentationFormat({
-			linkFormat,
-			containerFormat: format,
-			containerPalette,
-		});
+			: parentFormat;
 
 		const supportingContentIsLive =
 			subLink.format?.design === 'LiveBlogDesign';
@@ -95,11 +33,11 @@ const enhanceSupportingContent = (
 		const kickerText = subLink.header.kicker?.item?.properties.kickerText;
 
 		return {
-			format: presentationFormat,
-			headline: subLink.header.headline ?? '',
+			format: linkFormat,
+			headline: subLink.header.headline,
 			url: decideUrl(subLink),
 			kickerText:
-				supportingContentIsLive && !kickerText ? 'Live' : kickerText,
+				!kickerText && supportingContentIsLive ? 'Live' : kickerText,
 		};
 	});
 };
@@ -264,14 +202,12 @@ export const enhanceCards = (
 		cardInTagPage,
 		offset = 0,
 		editionId,
-		containerPalette,
 		pageId,
 		discussionApiUrl,
 	}: {
 		cardInTagPage: boolean;
 		offset?: number;
 		editionId: EditionId;
-		containerPalette?: DCRContainerPalette;
 		pageId?: string;
 		discussionApiUrl: string;
 	},
@@ -323,11 +259,7 @@ export const enhanceCards = (
 					: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
 			supportingContent: faciaCard.supportingContent
-				? enhanceSupportingContent(
-						faciaCard.supportingContent,
-						format,
-						containerPalette,
-				  )
+				? enhanceSupportingContent(faciaCard.supportingContent, format)
 				: undefined,
 			discussionApiUrl,
 			discussionId: faciaCard.discussion.isCommentable

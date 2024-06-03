@@ -318,14 +318,12 @@ export const CardHeadline = ({
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
 					{!!kickerText && (
-						<>
-							<Kicker
-								text={kickerText}
-								color={kickerColour}
-								showPulsingDot={showPulsingDot}
-								hideLineBreak={hideLineBreak}
-							/>
-						</>
+						<Kicker
+							text={kickerText}
+							color={kickerColour}
+							showPulsingDot={showPulsingDot}
+							hideLineBreak={hideLineBreak}
+						/>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span

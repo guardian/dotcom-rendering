@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
@@ -173,6 +174,10 @@ export const SupportingContent = ({
 										linkTo={subLink.url}
 										containerPalette={containerPalette}
 										isDynamo={isDynamo}
+										showPulsingDot={
+											subLink.format.design ===
+											ArticleDesign.LiveBlog
+										}
 										headlineText={subLink.headline}
 										kickerText={subLink.kickerText}
 									/>
