@@ -26,6 +26,7 @@ import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
 } from '../lib/getTagPageAdPositions';
+import { enhanceTags } from '../model/enhanceCards';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRTagPageType } from '../types/tagPage';
@@ -387,7 +388,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						sectionId={section}
 						shouldHideReaderRevenue={false} // never defined for tag pages?
 						remoteBannerSwitch={!!switches.remoteBanner}
-						tags={tags} // what tags does a tag page have? :-)
+						tags={enhanceTags(tags)}
 					/>
 				</Island>
 			</BannerWrapper>

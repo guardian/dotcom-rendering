@@ -191,7 +191,7 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
-const enhanceTags = (tags: FETagType[]): TagType[] => {
+export const enhanceTags = (tags: FETagType[]): TagType[] => {
 	return tags.map(({ properties }) => {
 		const {
 			id,
