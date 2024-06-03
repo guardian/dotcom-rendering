@@ -70,6 +70,7 @@ export type ContainerOverrides = {
 		containerToggle: Colour;
 		containerDate: Colour;
 		containerSummary: Colour;
+		liveKicker?: Colour;
 	};
 	border: {
 		container: Colour;
@@ -86,6 +87,8 @@ export type ContainerOverrides = {
 		carouselArrow: Colour;
 		carouselArrowHover: Colour;
 		dynamoSublink: Colour;
+		liveKicker?: Colour;
+		pulsingDot?: Colour;
 	};
 	topBar?: {
 		card?: Colour;
