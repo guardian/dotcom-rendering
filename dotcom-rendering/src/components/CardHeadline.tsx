@@ -297,14 +297,17 @@ export const CardHeadline = ({
 					{!!kickerText && (
 						<Kicker
 							text={kickerText}
-							color={kickerColour}
+							color={
+								showPulsingDot
+									? palette('--kicker-text-with-pulsing-dot')
+									: kickerColour
+							}
 							backgroundColor={palette(
-								'--card-kicker-background',
+								'--kicker-background-with-pulsing-dot',
 							)}
+							isSublink={isSublink}
 							showPulsingDot={showPulsingDot}
-							pulsingDotColor={palette(
-								'--card-kicker-pulsing-dot',
-							)}
+							pulsingDotColor={palette('--kicker-pulsing-dot')}
 							hideLineBreak={hideLineBreak}
 						/>
 					)}

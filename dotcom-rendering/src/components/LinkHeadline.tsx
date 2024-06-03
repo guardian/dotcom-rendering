@@ -92,8 +92,17 @@ export const LinkHeadline = ({
 			{!!kickerText && (
 				<Kicker
 					text={kickerText}
-					color={palette('--link-kicker-text')}
+					color={
+						showPulsingDot
+							? palette('--kicker-text-with-pulsing-dot')
+							: palette('--link-kicker-text')
+					}
+					backgroundColor={palette(
+						'--kicker-background-with-pulsing-dot',
+					)}
+					isSublink={false}
 					showPulsingDot={showPulsingDot}
+					pulsingDotColor={palette('--kicker-pulsing-dot')}
 					hideLineBreak={hideLineBreak}
 				/>
 			)}

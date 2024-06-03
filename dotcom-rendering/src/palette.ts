@@ -2636,58 +2636,44 @@ const cardOnwardContentTextLight: PaletteFunction = (format) => {
 	}
 };
 
-const cardKickerBackgroundLight: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			switch (format.theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle: {
-					return pillarPalette(format.theme, 400);
-				}
-
-				case ArticleSpecial.SpecialReport:
-				case ArticleSpecial.SpecialReportAlt:
-				case ArticleSpecial.Labs:
-				default: {
-					return 'transparent';
-				}
-			}
+const kickerBackgroundWithPulsingDotLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle: {
+			return pillarPalette(format.theme, 400);
 		}
+
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+		case ArticleSpecial.Labs:
 		default: {
-			return 'transparent';
+			return '';
 		}
 	}
 };
-const cardKickerBackgroundDark: PaletteFunction = (format) => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			switch (format.theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle: {
-					return pillarPalette(format.theme, 300);
-				}
-
-				case ArticleSpecial.SpecialReport:
-				case ArticleSpecial.SpecialReportAlt:
-				case ArticleSpecial.Labs:
-				default: {
-					return 'transparent';
-				}
-			}
+const kickerBackgroundWithPulsingDotDark: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle: {
+			return pillarPalette(format.theme, 300);
 		}
+
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
+		case ArticleSpecial.Labs:
 		default: {
-			return 'transparent';
+			return '';
 		}
 	}
 };
 
-const cardKickerPulsingDot: PaletteFunction = (format) => {
+const kickerPulsingDot: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog: {
 			switch (format.theme) {
@@ -2703,15 +2689,18 @@ const cardKickerPulsingDot: PaletteFunction = (format) => {
 				case ArticleSpecial.SpecialReportAlt:
 				case ArticleSpecial.Labs:
 				default: {
-					return 'transparent';
+					return '';
 				}
 			}
 		}
 		default: {
-			return 'transparent';
+			return '';
 		}
 	}
 };
+
+const kickerTextWithPulsingDot: PaletteFunction = () =>
+	sourcePalette.neutral[100];
 
 const cardKickerTextLight: PaletteFunction = (format) => {
 	if (
@@ -2734,6 +2723,10 @@ const cardKickerTextLight: PaletteFunction = (format) => {
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[7];
+				case Pillar.News:
+					return sourcePalette.news[600];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
 				default:
 					return sourcePalette.neutral[100];
 			}
@@ -2775,6 +2768,10 @@ const cardKickerTextDark: PaletteFunction = ({ design, theme }) => {
 			switch (theme) {
 				case ArticleSpecial.Labs:
 					return sourcePalette.neutral[7];
+				case Pillar.News:
+					return sourcePalette.news[600];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
 				default:
 					return sourcePalette.neutral[100];
 			}
@@ -5829,14 +5826,6 @@ const paletteColours = {
 		light: cardHeadlineTextLight,
 		dark: cardTextDark,
 	},
-	'--card-kicker-background': {
-		light: cardKickerBackgroundLight,
-		dark: cardKickerBackgroundDark,
-	},
-	'--card-kicker-pulsing-dot': {
-		light: cardKickerPulsingDot,
-		dark: cardKickerPulsingDot,
-	},
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
 		dark: cardKickerTextDark,
@@ -6184,6 +6173,18 @@ const paletteColours = {
 	'--key-event-title': {
 		light: keyEventTitleLight,
 		dark: keyEventTitleDark,
+	},
+	'--kicker-background-with-pulsing-dot': {
+		light: kickerBackgroundWithPulsingDotLight,
+		dark: kickerBackgroundWithPulsingDotDark,
+	},
+	'--kicker-pulsing-dot': {
+		light: kickerPulsingDot,
+		dark: kickerPulsingDot,
+	},
+	'--kicker-text-with-pulsing-dot': {
+		light: kickerTextWithPulsingDot,
+		dark: kickerTextWithPulsingDot,
 	},
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,

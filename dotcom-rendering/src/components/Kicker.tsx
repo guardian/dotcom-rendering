@@ -3,11 +3,11 @@ import { textSansBold14 } from '@guardian/source/foundations';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
 
-// Defines a prefix to be used with a headline (e.g. 'Live /')
 type Props = {
 	text: string;
 	color: string;
 	backgroundColor?: string;
+	isSublink?: boolean;
 	showPulsingDot?: boolean;
 	pulsingDotColor?: string;
 	hideLineBreak?: boolean;
@@ -16,16 +16,19 @@ type Props = {
 const textStyles = css`
 	${textSansBold14}
 	margin-right: 4px;
-	padding: 0 4px;
 	width: fit-content;
 `;
 
+/**
+ * The kicker is a prefix to be used with a headline (e.g. 'Live')
+ */
 export const Kicker = ({
 	text,
 	color,
 	backgroundColor = 'transparent',
 	showPulsingDot,
-	pulsingDotColor,
+	isSublink,
+	pulsingDotColor = color,
 	hideLineBreak,
 }: Props) => {
 	return (
@@ -40,7 +43,8 @@ export const Kicker = ({
 			/** Dynamic styles are best in the style prop */
 			style={{
 				color,
-				...(showPulsingDot && { backgroundColor }),
+				...(!isSublink &&
+					showPulsingDot && { backgroundColor, padding: '0 4px' }),
 			}}
 		>
 			{showPulsingDot && (
