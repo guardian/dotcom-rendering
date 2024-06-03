@@ -26,7 +26,7 @@ import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
 } from '../lib/getTagPageAdPositions';
-import { enhanceTags } from '../model/enhanceCards';
+import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRTagPageType } from '../types/tagPage';
