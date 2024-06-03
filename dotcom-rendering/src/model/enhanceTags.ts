@@ -6,19 +6,19 @@ export const enhanceTags = (tags: FETagType[]): TagType[] =>
 const enhanceTag = ({ properties }: FETagType): TagType => {
 	const {
 		id,
-		tagType,
-		webTitle,
+		tagType: type,
+		webTitle: title,
 		twitterHandle,
 		bylineImageUrl,
-		contributorLargeImagePath,
+		contributorLargeImagePath: bylineLargeImageUrl,
 	} = properties;
 
 	return {
 		id,
-		type: tagType,
-		title: webTitle,
+		type,
+		title,
 		twitterHandle,
 		bylineImageUrl,
-		bylineLargeImageUrl: contributorLargeImagePath,
+		bylineLargeImageUrl,
 	};
 };
