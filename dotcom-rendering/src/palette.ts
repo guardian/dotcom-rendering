@@ -2727,8 +2727,121 @@ const cardOnwardContentTextLight: PaletteFunction = (format) => {
 	}
 };
 
-const cardBylineKickerTextDark: PaletteFunction = ({ design, theme }) => {
+const liveKickerBackgroundLight: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle: {
+			return pillarPalette(format.theme, 400);
+		}
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+	}
+};
+const liveKickerBackgroundDark: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.News:
+		case Pillar.Opinion:
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle: {
+			return pillarPalette(format.theme, 300);
+		}
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+	}
+};
+
+const liveKickerTextLight: PaletteFunction = () => sourcePalette.neutral[97];
+
+const liveKickerTextDark: PaletteFunction = () => sourcePalette.neutral[93];
+
+const liveKickerPulsingDot: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[97], 0.75);
+
+const cardKickerTextLight: PaletteFunction = (format) => {
+	if (
+		format.theme === ArticleSpecial.SpecialReport &&
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Letter)
+	) {
+		return sourcePalette.brandAlt[400];
+	}
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
+		return sourcePalette.neutral[7];
+	}
+
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return sourcePalette.brandAlt[400];
+	}
+
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case Pillar.News:
+					return sourcePalette.news[600];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
+				default:
+					return sourcePalette.neutral[100];
+			}
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[550];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[550];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+			}
+		default:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
+				case Pillar.Opinion:
+					return pillarPalette(format.theme, 300);
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				case Pillar.News:
+					return pillarPalette(format.theme, 400);
+			}
+	}
+};
+
+const cardKickerTextDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case Pillar.News:
+					return sourcePalette.news[600];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
+				default:
+					return sourcePalette.neutral[100];
+			}
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.Sport:
@@ -2796,65 +2909,6 @@ const cardBylineKickerTextDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[500];
-			}
-	}
-};
-const cardKickerTextLight: PaletteFunction = (format) => {
-	if (
-		format.theme === ArticleSpecial.SpecialReport &&
-		(format.design === ArticleDesign.Comment ||
-			format.design === ArticleDesign.Letter)
-	) {
-		return sourcePalette.brandAlt[400];
-	}
-	if (format.theme === ArticleSpecial.SpecialReportAlt) {
-		return sourcePalette.neutral[7];
-	}
-
-	if (format.theme === ArticleSpecial.SpecialReport) {
-		return sourcePalette.brandAlt[400];
-	}
-
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				case Pillar.News:
-					return sourcePalette.news[600];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				default:
-					return sourcePalette.neutral[100];
-			}
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			switch (format.theme) {
-				case Pillar.News:
-					return sourcePalette.news[550];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[550];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-			}
-		default:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
-				case Pillar.Opinion:
-					return pillarPalette(format.theme, 300);
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				case Pillar.News:
-					return pillarPalette(format.theme, 400);
 			}
 	}
 };
@@ -5915,7 +5969,7 @@ const paletteColours = {
 	},
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
-		dark: cardBylineKickerTextDark,
+		dark: cardKickerTextDark,
 	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
@@ -6264,6 +6318,18 @@ const paletteColours = {
 	'--key-event-title': {
 		light: keyEventTitleLight,
 		dark: keyEventTitleDark,
+	},
+	'--kicker-background-live': {
+		light: liveKickerBackgroundLight,
+		dark: liveKickerBackgroundDark,
+	},
+	'--kicker-pulsing-dot-live': {
+		light: liveKickerPulsingDot,
+		dark: liveKickerPulsingDot,
+	},
+	'--kicker-text-live': {
+		light: liveKickerTextLight,
+		dark: liveKickerTextDark,
 	},
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
