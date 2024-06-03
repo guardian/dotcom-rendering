@@ -121,7 +121,7 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 
 test.describe('YouTube Atom', () => {
 	// Skipping because the video in this article has stopped working. Investigation needed!
-	test.skip('plays main media video', async ({ page }) => {
+	test.skip('plays main media video: skipped', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
