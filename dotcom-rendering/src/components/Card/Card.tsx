@@ -596,6 +596,7 @@ export const Card = ({
 								byline={byline}
 								showByline={showByline}
 								isDynamo={isDynamo}
+								isSublink={false}
 								isExternalLink={isExternalLink}
 								isOnwardContent={isOnwardContent}
 							/>

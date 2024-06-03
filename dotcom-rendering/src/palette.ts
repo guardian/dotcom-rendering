@@ -2636,8 +2636,148 @@ const cardOnwardContentTextLight: PaletteFunction = (format) => {
 	}
 };
 
-const cardBylineKickerTextDark: PaletteFunction = ({ design, theme }) => {
+const cardKickerBackgroundLight: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog: {
+			switch (format.theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle: {
+					return pillarPalette(format.theme, 400);
+				}
+
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+				case ArticleSpecial.Labs:
+				default: {
+					return 'transparent';
+				}
+			}
+		}
+		default: {
+			return 'transparent';
+		}
+	}
+};
+const cardKickerBackgroundDark: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog: {
+			switch (format.theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle: {
+					return pillarPalette(format.theme, 300);
+				}
+
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+				case ArticleSpecial.Labs:
+				default: {
+					return 'transparent';
+				}
+			}
+		}
+		default: {
+			return 'transparent';
+		}
+	}
+};
+
+const cardKickerPulsingDot: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog: {
+			switch (format.theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle: {
+					return pillarPalette(format.theme, 600);
+				}
+
+				case ArticleSpecial.SpecialReport:
+				case ArticleSpecial.SpecialReportAlt:
+				case ArticleSpecial.Labs:
+				default: {
+					return 'transparent';
+				}
+			}
+		}
+		default: {
+			return 'transparent';
+		}
+	}
+};
+
+const cardKickerTextLight: PaletteFunction = (format) => {
+	if (
+		format.theme === ArticleSpecial.SpecialReport &&
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Letter)
+	) {
+		return sourcePalette.brandAlt[400];
+	}
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
+		return sourcePalette.neutral[7];
+	}
+
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return sourcePalette.brandAlt[400];
+	}
+
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[100];
+			}
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			switch (format.theme) {
+				case Pillar.News:
+					return sourcePalette.news[550];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[550];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+			}
+		default:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[200];
+				case Pillar.Opinion:
+					return pillarPalette(format.theme, 300);
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				case Pillar.News:
+					return pillarPalette(format.theme, 400);
+			}
+	}
+};
+
+const cardKickerTextDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[100];
+			}
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.Sport:
@@ -2705,65 +2845,6 @@ const cardBylineKickerTextDark: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.specialReport[500];
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[500];
-			}
-	}
-};
-const cardKickerTextLight: PaletteFunction = (format) => {
-	if (
-		format.theme === ArticleSpecial.SpecialReport &&
-		(format.design === ArticleDesign.Comment ||
-			format.design === ArticleDesign.Letter)
-	) {
-		return sourcePalette.brandAlt[400];
-	}
-	if (format.theme === ArticleSpecial.SpecialReportAlt) {
-		return sourcePalette.neutral[7];
-	}
-
-	if (format.theme === ArticleSpecial.SpecialReport) {
-		return sourcePalette.brandAlt[400];
-	}
-
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				case Pillar.News:
-					return sourcePalette.news[600];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				default:
-					return sourcePalette.neutral[100];
-			}
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			switch (format.theme) {
-				case Pillar.News:
-					return sourcePalette.news[550];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[550];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[500];
-				case Pillar.Culture:
-					return sourcePalette.culture[500];
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-			}
-		default:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
-				case Pillar.Opinion:
-					return pillarPalette(format.theme, 300);
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				case Pillar.News:
-					return pillarPalette(format.theme, 400);
 			}
 	}
 };
@@ -5748,9 +5829,17 @@ const paletteColours = {
 		light: cardHeadlineTextLight,
 		dark: cardTextDark,
 	},
+	'--card-kicker-background': {
+		light: cardKickerBackgroundLight,
+		dark: cardKickerBackgroundDark,
+	},
+	'--card-kicker-pulsing-dot': {
+		light: cardKickerPulsingDot,
+		dark: cardKickerPulsingDot,
+	},
 	'--card-kicker-text': {
 		light: cardKickerTextLight,
-		dark: cardBylineKickerTextDark,
+		dark: cardKickerTextDark,
 	},
 	'--carousel-active-dot': {
 		light: carouselActiveDotLight,
