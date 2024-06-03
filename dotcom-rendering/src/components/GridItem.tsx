@@ -10,42 +10,39 @@ type Props = {
 	element?: 'div' | 'article' | 'main' | 'aside' | 'section';
 };
 
-const gridAreaStyles = (area: string) => {
-	if (area === 'right-column') {
-		return css`
-			/* IE Fallback */
-			position: absolute;
-			top: 0;
-			right: 0;
-			/* Pop me below the body */
-			${getZIndex('rightColumnArea')}
+const rightColumnStyles = css`
+	/* IE Fallback */
+	position: absolute;
+	top: 0;
+	right: 0;
+	/* Pop me below the body */
+	${getZIndex('rightColumnArea')}
 
-			@supports (display: grid) {
-				position: relative;
-				grid-area: ${area};
-			}
-		`;
+	@supports (display: grid) {
+		position: relative;
 	}
+`;
 
-	if (area === 'body') {
-		return css`
-			grid-area: ${area};
-			/* Pop me above the right column */
-			${getZIndex('bodyArea')}
-		`;
-	}
-
-	return css`
-		grid-area: ${area};
-	`;
-};
+const bodyStyles = css`
+	/* Pop me above the right column */
+	${getZIndex('bodyArea')}
+`;
 
 export const GridItem = ({
 	children,
 	area,
 	element: Element = 'div',
 }: Props) => (
-	<Element css={gridAreaStyles(area)} data-gu-name={area}>
+	<Element
+		css={[
+			area === 'body' && bodyStyles,
+			area === 'right-column' && rightColumnStyles,
+		]}
+		style={{
+			gridArea: area,
+		}}
+		data-gu-name={area}
+	>
 		{children}
 	</Element>
 );
