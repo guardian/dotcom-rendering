@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ONE_MINUTE = 60_000;
-const getNextMinute = (then: number) =>
+const getCurrentMinute = (then: number) =>
 	then + Math.floor((Date.now() - then) / ONE_MINUTE) * ONE_MINUTE;
 
 /**
@@ -26,11 +26,11 @@ export const RelativeTime = ({ then, now }: Props) => {
 	const [display, setDisplay] = useState(timeAgo(then, { now }));
 
 	useEffect(() => {
-		setDisplay(timeAgo(then, { now: getNextMinute(then) }));
+		setDisplay(timeAgo(then, { now: getCurrentMinute(then) }));
 		if (!inView) return;
 
 		const interval = setInterval(() => {
-			setDisplay(timeAgo(then, { now: getNextMinute(then) }));
+			setDisplay(timeAgo(then, { now: getCurrentMinute(then) }));
 		}, ONE_MINUTE);
 		return () => clearInterval(interval);
 	}, [inView, then]);
