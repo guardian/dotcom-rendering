@@ -90,26 +90,26 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 
 					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
-									'title      border  headline    headline'
-									'lines      border  headline    headline'
-									'meta       border  standfirst  standfirst'
-									'meta       border  media       media'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title      border  headline   headline   headline'
+									'lines      border  headline   headline   headline'
+									'meta       border  standfirst standfirst standfirst'
+									'meta       border  media      media      media'
+									'.          border  body       .          right-column'
+									'.          border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title      border  headline    right-column'
-									'lines      border  headline    right-column'
-									'meta       border  standfirst  right-column'
-									'meta       border  media       right-column'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title      border  headline   . right-column'
+									'lines      border  headline   . right-column'
+									'meta       border  standfirst . right-column'
+									'meta       border  media      . right-column'
+									'.          border  body       . right-column'
+									'.          border  .          . right-column';
 						  `}
 				}
 
