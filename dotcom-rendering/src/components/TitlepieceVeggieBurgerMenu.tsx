@@ -142,7 +142,10 @@ export const VeggieBurgerMenu = ({
 			>
 				<span css={screenReadable}>Show More</span>
 				<span css={[veggieBurgerIconStyles, checkedIconStyles]}>
-					<SvgMenu size="small" />
+					<SvgMenu
+						size="small"
+						theme={{ fill: sourcePalette.brand[400] }}
+					/>
 				</span>
 			</label>
 		</div>

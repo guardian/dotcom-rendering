@@ -19,14 +19,14 @@ const gridStyles = css`
 	grid-template-areas:
 		'editionSwitcher .        logo     burger'
 		'pillars         pillars  pillars  pillars'
-		'hr          hr   hr   hr'
+		'hr              hr       hr       hr'
 		'subnav          subnav   subnav   subnav';
 
 	${from.mobileLandscape} {
 		grid-template-areas:
 			'.        .        logo     logo'
 			'pillars  pillars  pillars  burger'
-			'hr   hr   hr   hr'
+			'hr       hr       hr       hr'
 			'subnav   subnav   subnav   subnav';
 	}
 
@@ -34,7 +34,7 @@ const gridStyles = css`
 		grid-template-areas:
 			'.        .        .       editionSwitcher'
 			'pillars  burger   .       logo'
-			'hr   hr   hr  hr'
+			'hr       hr       hr      hr'
 			'subnav   subnav   subnav  subnav';
 	}
 `;
@@ -108,6 +108,12 @@ const burgerStyles = css`
 	${from.desktop} {
 		justify-self: start;
 	} */
+
+	justify-self: center;
+
+	${from.tablet} {
+		justify-self: unset;
+	}
 `;
 
 const navLinkStyles = css`
@@ -212,22 +218,19 @@ export const Titlepiece = ({ nav, editionId }: TitlepieceProps) => {
 				</Hide>
 			</nav>
 
-			{/* Veggie burger menu */}
+			{/* Veggie burger menu (mobile only) */}
 			<div
 				css={css`
-					/* justify-self: end; */
-
-					justify-self: center;
-
-					${from.tablet} {
-						justify-self: unset;
-					}
 					grid-area: burger;
 				`}
 			>
 				<Hide from="desktop">
 					<div css={burgerStyles}>
-						<VeggieBurgerMenu />
+						<VeggieBurgerMenu
+						// positionOverrideStyles={css`
+						// 	bottom: 8px;
+						// `}
+						/>
 					</div>
 				</Hide>
 			</div>

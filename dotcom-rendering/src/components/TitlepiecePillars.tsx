@@ -182,11 +182,7 @@ const pillarBlock = css`
 
 const burgerPositionOverrides = css`
 	left: 6px;
-	bottom: 4px;
-
-	${from.leftCol} {
-		bottom: 16px;
-	}
+	bottom: 10px;
 `;
 
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
