@@ -64,14 +64,16 @@ export const DateTime = ({
 }: Props & DisplayProps) => {
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
-	const then = date.getTime();
-	const now = absoluteServerTimes
-		? Number.MAX_SAFE_INTEGER - 1
-		: getServerTime();
-
 	return display === 'relative' ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
-			<RelativeTime then={then} now={now} />
+			<RelativeTime
+				then={Math.max(date.getTime(), Date.now())}
+				now={
+					absoluteServerTimes
+						? Number.MAX_SAFE_INTEGER - 1
+						: getServerTime()
+				}
+			/>
 		</Island>
 	) : (
 		<time
