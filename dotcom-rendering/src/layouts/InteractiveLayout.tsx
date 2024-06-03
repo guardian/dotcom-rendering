@@ -87,7 +87,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-template-columns: 219px 1px 620px;
 
 					grid-template-areas:
 						'title  border  headline'
@@ -108,7 +108,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr;
+					grid-template-columns: 140px 1px 620px;
 
 					grid-template-areas:
 						'title  border  headline'
@@ -122,7 +122,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${until.leftCol} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -135,7 +135,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${until.desktop} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -148,7 +148,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'media'
 						'title'
