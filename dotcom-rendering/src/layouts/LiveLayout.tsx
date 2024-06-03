@@ -88,7 +88,7 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 220px 620px;
+					grid-template-columns: 220px 700px;
 					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {

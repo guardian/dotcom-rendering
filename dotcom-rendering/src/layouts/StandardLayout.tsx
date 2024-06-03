@@ -117,13 +117,13 @@ const StandardGrid = ({
 						: isMedia
 						? css`
 								grid-template-areas:
-									'title  border  headline   . .'
-									'.      border  disclaimer . right-column'
-									'lines  border  media      . right-column'
-									'meta   border  media      . right-column'
-									'meta   border  standfirst . right-column'
-									'.      border  body       . right-column'
-									'.      border  .          . right-column';
+									'title  border  headline   headline   .'
+									'.      border  disclaimer disclaimer right-column'
+									'lines  border  media      media      right-column'
+									'meta   border  media      media      right-column'
+									'meta   border  standfirst standfirst right-column'
+									'.      border  body       body       right-column'
+									'.      border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
