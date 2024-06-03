@@ -15,7 +15,7 @@ import {
 	textSansItalic20,
 	textSansItalic34,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { getSoleContributor } from '../lib/byline';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';

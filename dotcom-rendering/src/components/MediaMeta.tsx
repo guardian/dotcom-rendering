@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { SvgAudio, SvgCamera } from '@guardian/source-react-components';
+import { SvgAudio, SvgCamera } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 type Props = {

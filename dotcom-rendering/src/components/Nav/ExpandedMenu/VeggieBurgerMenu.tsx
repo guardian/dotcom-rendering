@@ -3,7 +3,7 @@ import {
 	from,
 	palette as sourcePalette,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { navInputCheckboxId, veggieBurgerId } from '../config';

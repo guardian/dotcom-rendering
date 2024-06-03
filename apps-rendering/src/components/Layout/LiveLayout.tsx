@@ -10,7 +10,7 @@ import {
 	news,
 	pxToRem,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { fromNullable } from '../../../vendor/@guardian/types/index';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';

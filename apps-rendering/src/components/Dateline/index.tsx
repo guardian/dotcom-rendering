@@ -8,9 +8,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	neutral,
-	textSans,
+	textSans12,
 	textSans14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { datetimeFormat } from 'datetime';
@@ -42,7 +42,13 @@ const getStyles = (
 ): SerializedStyles => css`
 	color: ${colour};
 	display: block;
-	${textSans.xxsmall({ lineHeight: 'tight' })}
+	${textSans12};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 
 	${from.desktop} {
 		color: ${desktopColour};

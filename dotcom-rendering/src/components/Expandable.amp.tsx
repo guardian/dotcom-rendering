@@ -4,7 +4,7 @@ import {
 	headlineMedium20,
 	palette,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import InfoIcon from '../static/icons/info.svg';

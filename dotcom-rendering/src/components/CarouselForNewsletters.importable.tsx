@@ -6,7 +6,7 @@ import {
 	space,
 	text,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { formatAttrString } from '../lib/formatAttrString';

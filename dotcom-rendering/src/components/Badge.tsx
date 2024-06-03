@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source-foundations';
+import { between, from } from '@guardian/source/foundations';
 
 const frontsSectionBadgeSizingStyles = css`
 	height: auto;
@@ -47,7 +47,7 @@ type Props = {
 	ophanComponentName?: string;
 	isInLabsSection?: boolean;
 	isAdvertisingPartner?: boolean;
-	inAdvertisingPartnerABTest?: boolean;
+	updateLogoAdPartnerSwitch?: boolean;
 };
 
 export const Badge = ({
@@ -57,7 +57,7 @@ export const Badge = ({
 	ophanComponentName,
 	isInLabsSection = false,
 	isAdvertisingPartner = false,
-	inAdvertisingPartnerABTest = false,
+	updateLogoAdPartnerSwitch = false,
 }: Props) => {
 	return (
 		<a
@@ -73,7 +73,7 @@ export const Badge = ({
 						? labsSectionBadgeSizingStyles
 						: frontsSectionBadgeSizingStyles,
 					isAdvertisingPartner &&
-						inAdvertisingPartnerABTest &&
+						updateLogoAdPartnerSwitch &&
 						imageAdvertisingPartnerStyles,
 				]}
 				src={imageSrc}

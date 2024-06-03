@@ -24,19 +24,19 @@ describe('ConfigContext', () => {
 			{
 				renderingTarget: 'Web',
 				darkModeAvailable: false,
-				inAdvertisingPartnerABTest: false,
+				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
 			},
 			{
 				renderingTarget: 'Apps',
 				darkModeAvailable: true,
-				inAdvertisingPartnerABTest: false,
+				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
 			},
 			{
 				renderingTarget: 'Apps',
 				darkModeAvailable: false,
-				inAdvertisingPartnerABTest: false,
+				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
 			},
 		] as const satisfies ReadonlyArray<Config>)(

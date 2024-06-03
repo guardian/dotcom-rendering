@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { from, remSpace } from '@guardian/source-foundations';
+import { from, remSpace } from '@guardian/source/foundations';
 import type { FC } from 'react';
 import RichLink, { richLinkWidth } from './';
 

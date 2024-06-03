@@ -4,7 +4,7 @@ import {
 	headlineBold28,
 	headlineBold34,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import DesignTag from 'components/DesignTag';
 import HeadlineByline from 'components/HeadlineByline';
 import type { Item } from 'item';

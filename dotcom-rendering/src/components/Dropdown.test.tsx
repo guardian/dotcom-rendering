@@ -45,7 +45,7 @@ describe('Dropdown', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -67,7 +67,7 @@ describe('Dropdown', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -92,7 +92,7 @@ describe('Dropdown', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -116,7 +116,7 @@ describe('Dropdown', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -142,7 +142,7 @@ describe('Dropdown', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -169,7 +169,7 @@ describe('Dropdown', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>

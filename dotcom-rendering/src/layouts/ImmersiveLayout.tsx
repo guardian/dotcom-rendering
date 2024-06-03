@@ -6,8 +6,8 @@ import {
 	palette as sourcePalette,
 	space,
 	until,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -86,17 +86,17 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 					grid-template-areas:
-						'caption    border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
-						'lines      border      body        right-column'
-						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      body        right-column'
-						'.          border      .           right-column';
+						'caption    border      title      . right-column'
+						'.          border      headline   . right-column'
+						'.          border      standfirst . right-column'
+						'.          border      byline     . right-column'
+						'lines      border      body       . right-column'
+						'meta       border      body       . right-column'
+						'meta       border      body       . right-column'
+						'.          border      body       . right-column'
+						'.          border      .          . right-column';
 				}
 
 				/*
@@ -109,7 +109,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${until.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
@@ -129,7 +129,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
+					grid-template-columns: 620px 300px;
 					grid-column-gap: 20px;
 					grid-template-areas:
 						'title       right-column'
@@ -144,7 +144,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.desktop} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'

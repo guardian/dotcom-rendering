@@ -12,7 +12,7 @@ import {
 	textSansBold15,
 	textSansBold17,
 	textSansItalic15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	MoustacheSection,
 	MoustacheTemplate,
@@ -524,7 +524,10 @@ export const Epic = ({ webURL }: Props) => {
 									</button>
 								</div>
 							</div>
-							<div css={acceptedPaymentMethodsWrapperStyle}>
+							<div
+								css={acceptedPaymentMethodsWrapperStyle}
+								data-amp-bind-hidden="epicState.hidePaymentIcons"
+							>
 								<amp-img
 									layout="fixed"
 									height="25px"

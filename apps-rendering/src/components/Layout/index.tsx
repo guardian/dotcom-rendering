@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import CommentLayout from 'components/Layout/CommentLayout';
 import GalleryLayout from 'components/Layout/GalleryLayout';
 import InteractiveLayout from 'components/Layout/InteractiveLayout';

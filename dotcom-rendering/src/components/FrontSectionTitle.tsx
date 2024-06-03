@@ -4,8 +4,8 @@ import {
 	palette as sourcePalette,
 	textSans12,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { palette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
@@ -14,7 +14,7 @@ import { Badge } from './Badge';
 type Props = {
 	title: React.ReactNode;
 	collectionBranding: CollectionBranding | undefined;
-	inAdvertisingPartnerABTest: boolean;
+	updateLogoAdPartnerSwitch: boolean;
 };
 
 const titleStyle = css`
@@ -81,7 +81,7 @@ const aboutThisLinkAdvertisingPartnerStyles = css`
 export const FrontSectionTitle = ({
 	title,
 	collectionBranding,
-	inAdvertisingPartnerABTest,
+	updateLogoAdPartnerSwitch,
 }: Props) => {
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
@@ -168,13 +168,13 @@ export const FrontSectionTitle = ({
 					<div css={titleStyle}>
 						{title}
 						{isAdvertisingPartnerOrExclusive &&
-						inAdvertisingPartnerABTest ? (
+						updateLogoAdPartnerSwitch ? (
 							<hr css={advertisingPartnerDottedBorder} />
 						) : null}
 						<div
 							css={
 								isAdvertisingPartnerOrExclusive &&
-								inAdvertisingPartnerABTest &&
+								updateLogoAdPartnerSwitch &&
 								brandingAdvertisingPartnerStyle
 							}
 						>
@@ -182,7 +182,7 @@ export const FrontSectionTitle = ({
 								css={[
 									labelStyles,
 									isAdvertisingPartnerOrExclusive &&
-										inAdvertisingPartnerABTest &&
+										updateLogoAdPartnerSwitch &&
 										labelAdvertisingPartnerStyles,
 								]}
 							>
@@ -194,8 +194,8 @@ export const FrontSectionTitle = ({
 								isAdvertisingPartner={
 									isAdvertisingPartnerOrExclusive
 								}
-								inAdvertisingPartnerABTest={
-									inAdvertisingPartnerABTest
+								updateLogoAdPartnerSwitch={
+									updateLogoAdPartnerSwitch
 								}
 							/>
 							<a
@@ -203,7 +203,7 @@ export const FrontSectionTitle = ({
 								css={[
 									aboutThisLinkStyles,
 									isAdvertisingPartnerOrExclusive &&
-										inAdvertisingPartnerABTest &&
+										updateLogoAdPartnerSwitch &&
 										aboutThisLinkAdvertisingPartnerStyles,
 								]}
 							>

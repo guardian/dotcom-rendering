@@ -2,7 +2,7 @@ import { css, type SerializedStyles } from '@emotion/react';
 import {
 	focusHalo,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { paletteDeclarations } from '../palette';
 
 /**
@@ -45,5 +45,10 @@ export const rootStyles = (
 	::selection {
 		background: ${sourcePalette.brandAlt[400]};
 		color: ${sourcePalette.neutral[7]};
+	}
+
+	.ad-slot-container {
+		/* prevent third-party code from breaking our layout */
+		overflow-x: hidden;
 	}
 `;

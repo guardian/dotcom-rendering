@@ -28,7 +28,7 @@ export const renderEditorialNewslettersPage = ({
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: false,
-		inAdvertisingPartnerABTest: false,
+		updateLogoAdPartnerSwitch: false,
 		assetOrigin: ASSET_ORIGIN,
 	};
 

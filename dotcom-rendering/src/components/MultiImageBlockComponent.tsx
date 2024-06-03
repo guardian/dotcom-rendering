@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import type { ImageBlockElement } from '../types/content';
 import { Caption } from './Caption';
 import { GridItem } from './GridItem';

@@ -5,9 +5,9 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -99,39 +99,39 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  matchNav   . right-column'
+									'title  border  matchtabs  . right-column'
+									'.      border  headline   . right-column'
+									'.      border  standfirst . right-column'
+									'lines  border  media      . right-column'
+									'meta   border  media      . right-column'
+									'meta   border  body       . right-column'
+									'.      border  .          . right-column';
 						  `
 						: isMedia
 						? css`
 								grid-template-areas:
-									'title  border  headline     .'
-									'.      border  disclaimer   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  standfirst   right-column'
-									'.      border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  headline   headline   .'
+									'.      border  disclaimer disclaimer right-column'
+									'lines  border  media      media      right-column'
+									'meta   border  media      media      right-column'
+									'meta   border  standfirst standfirst right-column'
+									'.      border  body       body       right-column'
+									'.      border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  headline   . right-column'
+									'.      border  standfirst . right-column'
+									'lines  border  media      . right-column'
+									'meta   border  media      . right-column'
+									'meta   border  body       . right-column'
+									'.      border  .          . right-column';
 						  `}
 				}
 			}
@@ -145,7 +145,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 			${until.wide} {
-				grid-template-columns: 140px 1px 1fr 300px;
+				grid-template-columns: 140px 1px 620px 300px;
 
 				${isMatchReport
 					? css`
@@ -189,7 +189,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 			${until.leftCol} {
-				grid-template-columns: 1fr 300px;
+				grid-template-columns: 620px 300px;
 				${isMatchReport
 					? css`
 							grid-template-areas:
@@ -232,7 +232,7 @@ const StandardGrid = ({
 			}
 
 			${until.desktop} {
-				grid-template-columns: 1fr; /* Main content */
+				grid-template-columns: 100%; /* Main content */
 				${isMatchReport
 					? css`
 							grid-template-areas:
@@ -446,6 +446,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								article.nav.readerRevenueLinks.header.subscribe
 							}
 							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={!isPaidContent}
 							hasPageSkinContentSelfConstrain={true}
 						/>

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, textSansBold17 } from '@guardian/source-foundations';
+import { from, palette, textSansBold17 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 
 const searchLinkStyles = css`

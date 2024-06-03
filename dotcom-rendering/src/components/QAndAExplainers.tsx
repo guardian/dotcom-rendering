@@ -2,7 +2,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { QAndAExplainer } from '../types/content';
+import type { QAndAExplainer, StarRating } from '../types/content';
 import { QAndAExplainer as QAndAExplainerComponent } from './QAndAExplainer';
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	RenderArticleElement: ArticleElementRenderer;
 }
 

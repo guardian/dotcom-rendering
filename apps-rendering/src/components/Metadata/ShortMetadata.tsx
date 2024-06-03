@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import DefaultMetadata from './Metadata.defaults';

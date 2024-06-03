@@ -4,7 +4,7 @@ import {
 	headlineBold17,
 	headlineMedium17,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { palette } from '../../palette';

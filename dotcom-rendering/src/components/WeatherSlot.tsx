@@ -9,7 +9,7 @@ import {
 	textSans24,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { lazy, Suspense } from 'react';
 import { type EditionId, getEditionFromId } from '../lib/edition';
 import type { WeatherData } from './WeatherWrapper.importable';

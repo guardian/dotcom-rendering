@@ -10,7 +10,7 @@ import {
 	space,
 	textSansBold17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';
@@ -136,7 +136,7 @@ export const buildIdentityLinks = (
 	return links.map((link) => ({
 		...link,
 		dataLinkName: nestedOphanComponents(
-			'nav4',
+			'header',
 			'topbar',
 			link.id.replaceAll('_', ' '),
 		),
@@ -149,7 +149,7 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
-		data-link-name={nestedOphanComponents('nav4', 'topbar', 'signin')}
+		data-link-name={nestedOphanComponents('header', 'topbar', 'signin')}
 	>
 		<ProfileIcon /> Sign in
 	</a>
@@ -238,7 +238,7 @@ const SignedInWithNotifications = ({
 				links={identityLinksWithNotifications}
 				id="my-account"
 				dataLinkName={nestedOphanComponents(
-					'nav4',
+					'header',
 					'topbar',
 					'my account',
 				)}

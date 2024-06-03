@@ -4,14 +4,14 @@ import {
 	space,
 	textSans17,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	ChoiceCard,
 	ChoiceCardGroup,
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { AustralianTerritory } from '../types/territory';
 

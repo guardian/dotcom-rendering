@@ -8,7 +8,7 @@ import {
 	space,
 	textSansBold17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Column,
 	Columns,
@@ -17,8 +17,8 @@ import {
 	LinkButton,
 	SvgEye,
 	SvgGuardianLogo,
-} from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -250,6 +250,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						}
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={!!NAV.subNavSections}
 						isImmersive={
 							format.display === ArticleDisplay.Immersive
