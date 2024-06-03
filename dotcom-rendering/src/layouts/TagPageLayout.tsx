@@ -16,6 +16,7 @@ import { Island } from '../components/Island';
 import { Masthead } from '../components/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -28,7 +29,7 @@ import {
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRTagPageType } from '../types/tagPage';
-import { Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
 	tagPage: DCRTagPageType;
@@ -59,7 +60,18 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 
 export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const {
-		config: { switches, hasPageSkin, isPaidContent },
+		config: {
+			contentType,
+			hasPageSkin,
+			idApiUrl,
+			isPaidContent,
+			isPreview,
+			isSensitive,
+			section,
+			switches,
+			pageId,
+		},
+		tags,
 	} = tagPage;
 
 	const renderAds = canRenderAds(tagPage);
@@ -76,6 +88,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant';
+
+	const contributionsServiceUrl = 'https://contributions.guardianapis.com'; // TODO: Read this from config (use getContributionsServiceUrl)
 
 	return (
 		<>
@@ -111,7 +125,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							}
 							discussionApiUrl={tagPage.config.discussionApiUrl}
 							idApiUrl={tagPage.config.idApiUrl}
-							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
 							displayRoundel={false}
@@ -356,9 +370,27 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={tagPage.nav.readerRevenueLinks.header}
 					editionId={tagPage.editionId}
-					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
+			<BannerWrapper data-print-layout="hide">
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StickyBottomBanner
+						contentType={contentType}
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={idApiUrl}
+						isMinuteArticle={false}
+						isPaidContent={!!isPaidContent}
+						isPreview={isPreview}
+						isSensitive={isSensitive}
+						pageId={pageId}
+						sectionId={section}
+						shouldHideReaderRevenue={false} // never defined for tag pages?
+						remoteBannerSwitch={!!switches.remoteBanner}
+						tags={tags} // what tags does a tag page have? :-)
+					/>
+				</Island>
+			</BannerWrapper>
 		</>
 	);
 };
