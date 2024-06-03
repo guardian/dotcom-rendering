@@ -1,25 +1,17 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
+import type { FontScaleArgs, FontWeight } from '@guardian/source/foundations';
 import {
 	between,
+	fontWeights,
 	from,
-	headlineMedium14,
-	headlineMedium17,
-	headlineMedium20,
-	headlineMedium24,
-	headlineMedium28,
-	headlineMedium34,
-	headlineMedium42,
-	headlineMedium50,
+	headline,
+	remBodySizes,
 	space,
 	textSans12,
-	textSans14,
 	textSans15,
 	textSans17,
 	textSans20,
-	textSans24,
-	textSans28,
-	textSans34,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
@@ -54,74 +46,104 @@ type Props = {
 
 const fontStyles = ({
 	size,
-	isSublink,
+	fontWeight,
 }: {
 	size: SmallHeadlineSize;
-	isSublink?: boolean;
+	fontWeight?: FontWeight;
 }) => {
+	const options: FontScaleArgs = {};
+	if (fontWeight) options.fontWeight = fontWeight;
+
 	switch (size) {
 		case 'ginormous':
 			return css`
 				${from.desktop} {
-					${headlineMedium50}
+					${headline.large(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
+					font-size: 50px;
 				}
 			`;
 		case 'huge':
 			return css`
-				${isSublink ? textSans28 : headlineMedium28}
+				${headline.small(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'large':
 			return css`
-				${isSublink ? textSans24 : headlineMedium24}
+				${headline.xsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'medium':
 			return css`
-				${isSublink ? textSans20 : headlineMedium20}
+				${headline.xxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'small':
 			return css`
-				${isSublink ? textSans17 : headlineMedium17}
+				${headline.xxxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'tiny':
 			return css`
-				${isSublink ? textSans14 : headlineMedium14}
+				${headline.xxxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
+				font-size: 14px;
 			`;
 	}
 };
 
 const fontStylesOnMobile = ({
 	size,
-	isSublink,
+	fontWeight,
 }: {
 	size: SmallHeadlineSize;
-	isSublink?: boolean;
+	fontWeight?: FontWeight;
 }) => {
+	const options: FontScaleArgs = {};
+	if (fontWeight) options.fontWeight = fontWeight;
+
 	switch (size) {
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					${isSublink ? textSans34 : headlineMedium34}
+					${headline.medium(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 				${between.mobileLandscape.and.desktop} {
-					${headlineMedium42}
+					${headline.large(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'huge':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans24 : headlineMedium24}
+					${headline.xsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'large':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans20 : headlineMedium20}
+					${headline.xxsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'medium':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans17 : headlineMedium17}
+					${headline.xxxsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		default:
@@ -167,6 +189,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 		case 'tiny':
 			return css`
 				${textSans12};
+				font-size: ${remBodySizes.xsmall}rem;
 			`;
 	}
 };
@@ -181,6 +204,7 @@ const sublinkStyles = css`
 	/* stylelint-disable-next-line property-disallowed-list */
 	font-family: inherit;
 	font-size: inherit;
+	font-weight: ${fontWeights.medium};
 	line-height: inherit;
 	@media (pointer: coarse) {
 		min-height: 44px;
@@ -220,6 +244,7 @@ const lineStyles = (
 
 const dynamoStyles = css`
 	display: block;
+	font-weight: ${fontWeights.medium};
 	padding: 5px;
 `;
 
@@ -281,12 +306,12 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles({
 								size,
-								isSublink,
+								fontWeight: 'medium',
 						  }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
-							isSublink,
+							fontWeight: 'medium',
 						}),
 					showLine &&
 						!isDynamo &&
