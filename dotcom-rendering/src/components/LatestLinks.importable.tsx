@@ -141,10 +141,7 @@ export const LatestLinks = ({
 			{data && data.blocks.length >= 3 ? (
 				data.blocks.slice(0, 3).map((block, index) => (
 					<>
-						<ContainerOverrides
-							containerPalette={containerPalette}
-							isDynamo={!!isDynamo}
-						>
+						<ContainerOverrides containerPalette={containerPalette}>
 							{index > 0 && (
 								<li
 									key={block.id + ' : divider'}

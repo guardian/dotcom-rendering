@@ -111,7 +111,6 @@ const hoverStyles = (
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-		case ArticleDesign.LiveBlog:
 			return css`
 				:hover {
 					filter: brightness(90%);
@@ -180,10 +179,7 @@ export const CardWrapper = ({
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
-			<ContainerOverrides
-				containerPalette={containerPalette}
-				isDynamo={!!isDynamo}
-			>
+			<ContainerOverrides containerPalette={containerPalette}>
 				<div
 					css={[
 						baseCardStyles(isOnwardContent),
