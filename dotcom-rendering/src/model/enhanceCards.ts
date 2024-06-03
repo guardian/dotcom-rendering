@@ -14,8 +14,9 @@ import type {
 	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
-import type { FETagType, TagType } from '../types/tag';
+import type { TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
+import { enhanceTags } from './enhanceTags';
 
 /**
  *
@@ -189,28 +190,6 @@ const decideSlideshowImages = (
 		return assets;
 	}
 	return undefined;
-};
-
-const enhanceTags = (tags: FETagType[]): TagType[] => {
-	return tags.map(({ properties }) => {
-		const {
-			id,
-			tagType,
-			webTitle,
-			twitterHandle,
-			bylineImageUrl,
-			contributorLargeImagePath,
-		} = properties;
-
-		return {
-			id,
-			type: tagType,
-			title: webTitle,
-			twitterHandle,
-			bylineImageUrl,
-			bylineLargeImageUrl: contributorLargeImagePath,
-		};
-	});
 };
 
 /**
