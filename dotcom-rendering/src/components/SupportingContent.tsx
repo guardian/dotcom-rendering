@@ -169,7 +169,6 @@ export const SupportingContent = ({
 										hideLineBreak={true}
 										showLine={true}
 										linkTo={subLink.url}
-										containerPalette={containerPalette}
 										isDynamo={isDynamo}
 										isSublink={true}
 										headlineText={subLink.headline}

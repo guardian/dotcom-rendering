@@ -2309,6 +2309,50 @@ const cardBorderTopLight: PaletteFunction = ({ theme, design }) => {
 const cardBorderTopDark = (): string => {
 	return sourcePalette.neutral[20];
 };
+
+const cardBorderSupportingLight: PaletteFunction = (format) => {
+	switch (format.design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.opinion[550];
+				default:
+					return sourcePalette.neutral[86];
+			}
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.brandAlt[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[600];
+				case Pillar.News:
+					return sourcePalette.news[600];
+				case Pillar.Sport:
+					return sourcePalette.sport[600];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[550];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[500];
+				case Pillar.Culture:
+					return sourcePalette.culture[500];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				default:
+					return sourcePalette.neutral[86];
+			}
+		default:
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.brandAlt[400];
+				default:
+					return sourcePalette.neutral[86];
+			}
+	}
+};
+
 const cardAgeTextLight: PaletteFunction = (format) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return sourcePalette.specialReportAlt[100];
@@ -2322,13 +2366,6 @@ const cardAgeTextLight: PaletteFunction = (format) => {
 					return sourcePalette.neutral[86];
 				default:
 					return sourcePalette.neutral[46];
-			}
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				default:
-					return sourcePalette.neutral[100];
 			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -2402,46 +2439,19 @@ const cardBackgroundLight: PaletteFunction = (format) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return sourcePalette.neutral[20];
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[400];
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Lifestyle:
-				case Pillar.Culture:
-					return pillarPalette(format.theme, 300);
-			}
 		default:
-			return sourcePalette.neutral[97];
+			return 'transparent';
 	}
 };
-const cardBackgroundDark: PaletteFunction = ({ design, theme }) => {
+const cardBackgroundDark: PaletteFunction = ({ design }) => {
 	switch (design) {
-		case ArticleDesign.LiveBlog:
-			switch (theme) {
-				case Pillar.Lifestyle:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Opinion:
-					return pillarPalette(theme, 100);
-				case ArticleSpecial.Labs:
-					return sourcePalette.labs[200];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[100];
-				case Pillar.News:
-				case ArticleSpecial.SpecialReportAlt:
-				default:
-					return sourcePalette.news[100];
-			}
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[10];
 		default:
-			return sourcePalette.neutral[0];
+			return 'transparent';
 	}
 };
 
@@ -2489,13 +2499,6 @@ const onwardContentCardBackgroundLight: PaletteFunction = ({
 				case ArticleDesign.Audio:
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[46];
-				case ArticleDesign.LiveBlog:
-					switch (theme) {
-						case ArticleSpecial.Labs:
-							return sourcePalette.neutral[100];
-						default:
-							return pillarPalette(theme, 400);
-					}
 				default:
 					return sourcePalette.neutral[100];
 			}
@@ -2517,13 +2520,6 @@ const onwardContentCardBackgroundDark: PaletteFunction = ({
 				case ArticleDesign.Audio:
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[20];
-				case ArticleDesign.LiveBlog:
-					switch (theme) {
-						case ArticleSpecial.Labs:
-							return sourcePalette.neutral[0];
-						default:
-							return pillarPalette(theme, 200);
-					}
 				default:
 					return sourcePalette.neutral[10];
 			}
@@ -2601,18 +2597,6 @@ const cardHeadlineTextLight: PaletteFunction = (format) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return sourcePalette.neutral[100];
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-				default:
-					return sourcePalette.neutral[100];
-			}
 		default:
 			return sourcePalette.neutral[7];
 	}
@@ -2722,17 +2706,6 @@ const cardKickerTextLight: PaletteFunction = (format) => {
 	}
 
 	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				case Pillar.News:
-					return sourcePalette.news[600];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				default:
-					return sourcePalette.neutral[100];
-			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -2767,17 +2740,6 @@ const cardKickerTextLight: PaletteFunction = (format) => {
 
 const cardKickerTextDark: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
-		case ArticleDesign.LiveBlog:
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[7];
-				case Pillar.News:
-					return sourcePalette.news[600];
-				case Pillar.Sport:
-					return sourcePalette.sport[600];
-				default:
-					return sourcePalette.neutral[100];
-			}
 		case ArticleDesign.Analysis:
 			switch (theme) {
 				case Pillar.Sport:
@@ -5808,6 +5770,10 @@ const paletteColours = {
 	'--card-background-hover': {
 		light: cardBackgroundHoverLight,
 		dark: cardBackgroundDark,
+	},
+	'--card-border-supporting': {
+		light: cardBorderSupportingLight,
+		dark: cardBorderTopDark,
 	},
 	'--card-border-top': {
 		light: cardBorderTopLight,

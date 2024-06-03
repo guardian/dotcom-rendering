@@ -579,7 +579,6 @@ export const Card = ({
 							<CardHeadline
 								headlineText={headlineText}
 								format={format}
-								containerPalette={containerPalette}
 								size={headlineSize}
 								sizeOnMobile={headlineSizeOnMobile}
 								showQuotes={showQuotes}

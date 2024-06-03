@@ -16,10 +16,8 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
-import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
-import type { DCRContainerPalette } from '../types/front';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
@@ -27,7 +25,6 @@ import { QuoteIcon } from './QuoteIcon';
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat; // Used to decide when to add type specific styles
-	containerPalette?: DCRContainerPalette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	hideLineBreak?: boolean;
@@ -221,10 +218,7 @@ const sublinkStyles = css`
 	}
 `;
 
-const lineStyles = (
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
-) => css`
+const lineStyles = css`
 	padding-top: 1px;
 	:before {
 		display: block;
@@ -232,8 +226,7 @@ const lineStyles = (
 		top: 0;
 		left: 0;
 		content: '';
-		border-top: 1px solid
-			${decidePalette(format, containerPalette).border.cardSupporting};
+		border-top: 1px solid ${palette('--card-border-supporting')};
 
 		width: 120px;
 		${between.tablet.and.desktop} {
@@ -278,7 +271,6 @@ const isFirstWordShort = /^(\w{1,3}) \b/;
 export const CardHeadline = ({
 	headlineText,
 	format,
-	containerPalette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -313,9 +305,7 @@ export const CardHeadline = ({
 							size: sizeOnMobile ?? size,
 							fontWeight: 'medium',
 						}),
-					showLine &&
-						!isDynamo &&
-						lineStyles(format, containerPalette),
+					showLine && !isDynamo && lineStyles,
 				]}
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
