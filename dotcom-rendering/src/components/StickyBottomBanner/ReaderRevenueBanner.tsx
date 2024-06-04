@@ -234,7 +234,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	}
 
 	//Send user consent status to the banner API
-	const userConsent = true; // await hasRequiredConsents();
+	const userConsent = await hasRequiredConsents();
 
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
