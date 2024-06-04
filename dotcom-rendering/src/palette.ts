@@ -5405,7 +5405,7 @@ const codeBlockTextShadowLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const codeBlockTextShadowDark: PaletteFunction = () => sourcePalette.neutral[0];
 
-const lastUpdatedText: PaletteFunction = ({ theme, design }) => {
+const lastUpdatedTextLight: PaletteFunction = ({ theme, design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
@@ -5423,6 +5423,26 @@ const lastUpdatedText: PaletteFunction = ({ theme, design }) => {
 			}
 		default:
 			return sourcePalette.neutral[0];
+	}
+};
+const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+					return pillarPalette(theme, 600);
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[600];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[700];
+			}
+		default:
+			return sourcePalette.neutral[93];
 	}
 };
 
@@ -6122,8 +6142,8 @@ const paletteColours = {
 		dark: keyEventTitleDark,
 	},
 	'--last-updated-text': {
-		light: lastUpdatedText,
-		dark: lastUpdatedText,
+		light: lastUpdatedTextLight,
+		dark: lastUpdatedTextDark,
 	},
 	'--link-kicker-text': {
 		light: linkKickerTextLight,
