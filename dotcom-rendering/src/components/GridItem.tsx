@@ -28,6 +28,10 @@ const bodyStyles = css`
 	${getZIndex('bodyArea')}
 `;
 
+const gridArea = css`
+	grid-area: var(--grid-area);
+`;
+
 export const GridItem = ({
 	children,
 	area,
@@ -37,9 +41,10 @@ export const GridItem = ({
 		css={[
 			area === 'body' && bodyStyles,
 			area === 'right-column' && rightColumnStyles,
+			gridArea,
 		]}
 		style={{
-			gridArea: area,
+			'--grid-area': area,
 		}}
 		data-gu-name={area}
 	>
