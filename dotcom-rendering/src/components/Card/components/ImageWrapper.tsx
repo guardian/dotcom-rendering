@@ -97,10 +97,6 @@ export const ImageWrapper = ({
 						${until.tablet} {
 							width: 125px;
 							flex-shrink: 0;
-							margin-top: 4px;
-							margin-right: 0;
-							margin-bottom: 4px;
-							margin-left: 4px;
 							flex-basis: unset;
 							align-self: flex-start;
 						}

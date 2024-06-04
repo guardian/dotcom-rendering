@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -21,7 +20,7 @@ type Props = {
 	isOnwardContent?: boolean;
 };
 
-const baseCardStyles = (isOnwardContent: boolean) => css`
+const baseCardStyles = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -41,6 +40,12 @@ const baseCardStyles = (isOnwardContent: boolean) => css`
 		}
 	}
 
+	/* a tag specific styles */
+	color: inherit;
+	text-decoration: none;
+`;
+
+const hoverStyles = css`
 	:hover .image-overlay {
 		position: absolute;
 		top: 0;
@@ -49,125 +54,46 @@ const baseCardStyles = (isOnwardContent: boolean) => css`
 		left: 0;
 		background-color: ${sourcePalette.neutral[7]};
 		opacity: 0.1;
-		border-radius: ${isOnwardContent ? space[2] : 0}px;
 	}
 
-	/* a tag specific styles */
-	color: inherit;
-	text-decoration: none;
-`;
-
-const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
-	switch (thePalette) {
-		case 'EventPalette':
-			return `96%`;
-		case 'BreakingPalette':
-			return `85%`;
-		case 'EventAltPalette':
-			return `95%`;
-		case 'InvestigationPalette':
-			return `90%`;
-		case 'LongRunningPalette':
-			return `84%`;
-		case 'LongRunningAltPalette':
-			return `95%`;
-		case 'SombrePalette':
-			return `90%`;
-		case 'SombreAltPalette':
-			return `85%`;
-		case 'SpecialReportAltPalette':
-			return `95%`;
-		default:
-			return `90%`;
-	}
-};
-
-const hoverStyles = (
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
-) => {
-	if (containerPalette) {
-		return css`
-			:hover {
-				filter: brightness(
-					${decidePaletteBrightness(containerPalette)}
-				);
-			}
-		`;
-	}
-
-	if (
-		format.theme === ArticleSpecial.SpecialReport ||
-		format.theme === ArticleSpecial.SpecialReportAlt
-	) {
-		return css`
-			:hover {
-				filter: brightness(90%);
-			}
-		`;
-	}
-
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return css`
-				:hover {
-					filter: brightness(90%);
-				}
-			`;
-		default:
-			return css`
-				:hover {
-					background-color: ${palette('--card-background-hover')};
-				}
-			`;
-	}
-};
-
-const cardStyles = css`
-	background-color: ${palette('--card-background')};
-`;
-
-const onwardContentCardStyles = css`
-	background-color: ${palette('--onward-content-card-background')};
-	border-radius: ${space[2]}px;
-`;
-
-const onwardContentHoverStyles = css`
-	:hover {
-		background-color: ${palette('--onward-content-card-hover')};
+	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+	:hover .card-headline .show-underline {
+		text-decoration: underline;
 	}
 `;
 
-const topBarStyles = ({ isDynamo }: { isDynamo?: true }) => {
-	/* Styling for top bar */
-	const baseStyles = css`
-		background-color: ${isDynamo
-			? palette('--card-kicker-text')
-			: palette('--card-border-top')};
+/** When we hover on sublinks, we want to prevent the general hover styles applying */
+const sublinkHoverStyles = css`
+	:has(ul.sublinks:hover) {
+		.card-headline .show-underline {
+			text-decoration: none !important;
+		}
+	}
+`;
+
+const topBarStyles = (isDynamo: boolean) => css`
+	:before {
+		border-top: 1px solid ${palette('--card-border-top')};
 		content: '';
-		height: 1px;
 		z-index: 2;
 		width: 100%;
-	`;
+		padding-bottom: ${space[2]}px;
+		background-color: unset;
 
-	if (isDynamo) {
-		return css`
-			:before {
-				${baseStyles}
-				${from.phablet} {
-					width: 25%;
-				}
-			}
-		`;
-	}
-	return css`
-		:before {
-			${baseStyles}
+		${from.phablet} {
+			width: ${isDynamo ? '25%' : '100%'};
 		}
-	`;
-};
+	}
+`;
+
+const onwardContentStyles = css`
+	border-radius: ${space[2]}px;
+	overflow: hidden;
+
+	:hover .image-overlay {
+		border-radius: ${space[2]}px;
+	}
+`;
 
 export const CardWrapper = ({
 	children,
@@ -182,12 +108,11 @@ export const CardWrapper = ({
 			<ContainerOverrides containerPalette={containerPalette}>
 				<div
 					css={[
-						baseCardStyles(isOnwardContent),
-						isOnwardContent ? onwardContentCardStyles : cardStyles,
-						isOnwardContent
-							? onwardContentHoverStyles
-							: hoverStyles(format, containerPalette),
-						showTopBar && topBarStyles({ isDynamo }),
+						baseCardStyles,
+						hoverStyles,
+						sublinkHoverStyles,
+						showTopBar && topBarStyles(!!isDynamo),
+						isOnwardContent && onwardContentStyles,
 					]}
 				>
 					{children}

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { space } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { decidePalette } from '../../../lib/decidePalette';
@@ -20,11 +21,15 @@ const spacing = (leftAlign: boolean) => css`
 	display: flex;
 	justify-content: ${leftAlign ? 'flex-start' : 'space-between'};
 	align-items: center;
+	> {
+		*:not(:first-child) {
+			margin-left: ${space[1]}px;
+		}
+	}
 `;
 
 const margins = css`
-	margin-top: 3px;
-	margin-bottom: 3px;
+	margin-top: ${space[1]}px;
 `;
 
 const flexEnd = css`
