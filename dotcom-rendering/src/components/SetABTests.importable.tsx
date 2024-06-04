@@ -19,6 +19,36 @@ type Props = {
 	serverSideTests: ServerSideTests;
 };
 
+const mvtMinValue = 1;
+const mvtMaxValue = 1_000_000;
+
+/** Parse a valid MVT ID between 1 and 1,000,000 or undefined if it fails */
+const parseMvtId = (id: string | null): number | undefined => {
+	if (!id) return; // null or empty string
+	const number = Number(id);
+	if (Number.isNaN(number)) return;
+	if (number < mvtMinValue) return;
+	if (number > mvtMaxValue) return;
+	return number;
+};
+
+const getMvtId = () =>
+	parseMvtId(
+		getCookie({
+			name: 'GU_mvt_id',
+			shouldMemoize: true,
+		}),
+	);
+
+/** Check if there is a local override */
+const getLocalMvtId = () =>
+	parseMvtId(
+		getCookie({
+			name: 'GU_mvt_id_local',
+			shouldMemoize: true,
+		}),
+	);
+
 /**
  * Initialises the values of `useAB` and sends relevant Ophan events.
  *
@@ -54,17 +84,10 @@ export const SetABTests = ({
 	useEffect(() => {
 		if (!ophan) return;
 
-		const mvtId = Number(
-			(isDev &&
-				getCookie({
-					name: 'GU_mvt_id_local',
-					shouldMemoize: true,
-				})) || // Simplify localhost testing by creating a different mvt id
-				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
-		);
-		if (!mvtId) {
-			// 0 is default and falsy here
-			console.log(
+		const mvtId = isDev ? getLocalMvtId() ?? getMvtId() : getMvtId();
+
+		if (mvtId === undefined) {
+			console.error(
 				'There is no MVT ID set, see SetABTests.importable.tsx',
 			);
 		}
@@ -75,7 +98,8 @@ export const SetABTests = ({
 		};
 
 		const ab = new AB({
-			mvtId,
+			mvtId: mvtId ?? -1,
+			mvtMaxValue,
 			pageIsSensitive,
 			abTestSwitches,
 			arrayOfTestObjects: tests,

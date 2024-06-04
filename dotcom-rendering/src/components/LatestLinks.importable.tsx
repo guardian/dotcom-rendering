@@ -5,7 +5,7 @@ import {
 	space,
 	textSans14,
 	textSansBold14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
@@ -18,6 +18,7 @@ import { DateTime } from './DateTime';
 type Props = {
 	id: string;
 	direction: 'horizontal' | 'vertical';
+	absoluteServerTimes: boolean;
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
 };
@@ -92,6 +93,7 @@ export const LatestLinks = ({
 	direction,
 	isDynamo,
 	containerPalette,
+	absoluteServerTimes,
 }: Props) => {
 	const { data } = useApi<{
 		blocks: Array<{
@@ -128,7 +130,9 @@ export const LatestLinks = ({
 			css={[
 				ulStyle,
 				revealStyles,
-				isDynamo || direction === 'horizontal' ? horizontal : vertical,
+				!!isDynamo || direction === 'horizontal'
+					? horizontal
+					: vertical,
 				css`
 					color: ${themePalette('--card-headline-trail-text')};
 				`,
@@ -171,6 +175,9 @@ export const LatestLinks = ({
 												)
 											}
 											display="relative"
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
 											editionId={'UK'}
 											showWeekday={false}
 											showDate={true}

@@ -1,19 +1,21 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import type { FontScaleArgs } from '@guardian/source-foundations';
+import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
+import type { FontScaleArgs } from '@guardian/source/foundations';
 import {
 	from,
 	headline,
 	headlineMedium17,
+	headlineMedium20,
 	headlineMediumItalic20,
 	textSans17,
 	textSansBold12,
 	textSansBold15,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
+import type { StarRating as Rating } from '../types/content';
 import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { FormatBoundary } from './FormatBoundary';
@@ -27,7 +29,7 @@ interface Props {
 	headlineText: string;
 	contentType: ContentType;
 	url: string;
-	starRating?: number;
+	starRating?: Rating;
 	linkFormat: ArticleFormat;
 	format: ArticleFormat;
 	tags: TagType[];
@@ -74,7 +76,9 @@ const headerStyles = css`
 
 /** Re-sizes the headline.xxxsmall to 14px / 0.875rem as this isn't available in source */
 const miniHeadlineOverrideStyles = (fontArgs: FontScaleArgs) => css`
-	${headline.xxxsmall(fontArgs)};
+	${headline.xxxsmall(
+		fontArgs,
+	)}; /** TODO (1) - Unknown argument please manually update */
 	font-size: 0.875rem;
 `;
 
@@ -86,7 +90,13 @@ const titleStyles = (parentIsBlog: boolean) => css`
 	padding-bottom: 1px;
 
 	${from.wide} {
-		${headline.xxsmall({ fontWeight: 'regular' })};
+		${headlineMedium20};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		font-weight: 400;
 		padding-bottom: 5px;
 	}
 `;
@@ -261,14 +271,14 @@ export const RichLink = ({
 								<div css={bylineStyles}>{mainContributor}</div>
 							)}
 
-							{starRating !== undefined && (
+							{!isUndefined(starRating) ? (
 								<div css={starWrapperStyles}>
 									<StarRating
 										rating={starRating}
 										size="small"
 									/>
 								</div>
-							)}
+							) : null}
 
 							{!!(isPaidContent && sponsorName) && (
 								<div css={paidForBrandingStyles}>

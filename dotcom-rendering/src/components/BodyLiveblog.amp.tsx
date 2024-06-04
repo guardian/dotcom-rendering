@@ -3,7 +3,7 @@ import {
 	headlineMedium20,
 	palette,
 	textSans12,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { decideTheme } from '../lib/decideTheme';
 import { getSharingUrls } from '../lib/sharing-urls';
@@ -130,7 +130,6 @@ export const Body = ({ data, config }: Props) => {
 						url={url}
 						shouldHideAds={data.shouldHideAds}
 						adTargeting={adTargeting}
-						pageId={data.pageId}
 					/>
 				</div>
 			</amp-live-list>

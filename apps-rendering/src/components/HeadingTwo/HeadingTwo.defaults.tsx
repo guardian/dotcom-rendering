@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace } from '@guardian/source-foundations';
+import { headlineBold20, remSpace } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { HeadingTwo as HeadingTwoType } from 'bodyElement';
 import Anchor from 'components/Anchor';
@@ -30,7 +30,7 @@ interface HeadingTextElementProps {
 }
 
 const defaultStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20};
 	margin: ${remSpace[4]} 0 ${remSpace[1]} 0;
 
 	& + p {

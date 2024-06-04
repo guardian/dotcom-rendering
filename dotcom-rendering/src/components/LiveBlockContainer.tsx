@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { isString } from '@guardian/libs';
 import {
 	article17,
 	from,
 	headlineBold20,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { FirstPublished } from './FirstPublished';
 
@@ -19,7 +18,6 @@ type BlockContributor = {
 type Props = {
 	id: string;
 	children: React.ReactNode;
-	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
 	blockFirstPublishedDisplay?: string;
@@ -27,6 +25,7 @@ type Props = {
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	isPinnedPost: boolean;
+	absoluteServerTimes: boolean;
 	isOriginalPinnedPost?: boolean;
 	host?: string;
 	pageId?: string;
@@ -132,7 +131,6 @@ const liveBlockBorderStyles = css`
 export const LiveBlockContainer = ({
 	id,
 	children,
-	format,
 	blockTitle,
 	blockFirstPublished,
 	blockFirstPublishedDisplay,
@@ -143,6 +141,7 @@ export const LiveBlockContainer = ({
 	isOriginalPinnedPost = false,
 	host,
 	pageId,
+	absoluteServerTimes,
 }: Props) => {
 	return (
 		<article
@@ -177,6 +176,7 @@ export const LiveBlockContainer = ({
 						isOriginalPinnedPost={isOriginalPinnedPost}
 						host={host}
 						pageId={pageId}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}

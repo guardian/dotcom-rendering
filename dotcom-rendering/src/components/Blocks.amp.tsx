@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, text, textSans12 } from '@guardian/source-foundations';
+import { palette, text, textSans12 } from '@guardian/source/foundations';
 import { blockLink } from '../lib/block-link.amp';
 import type { EditionId } from '../lib/edition';
 import { findBlockAdSlots } from '../lib/find-adslots.amp';
@@ -70,7 +70,6 @@ type Props = {
 	url: string;
 	shouldHideAds: boolean;
 	adTargeting: AdTargeting;
-	pageId: string;
 };
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
@@ -86,7 +85,6 @@ export const Blocks = ({
 	url,
 	shouldHideAds,
 	adTargeting,
-	pageId,
 }: Props) => {
 	// TODO add last updated for blocks to show here
 	const liveBlogBlocks = blocks.map((block) => {

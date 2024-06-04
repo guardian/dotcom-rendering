@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
+import { headlineLight34 } from '@guardian/source/foundations';
 import { text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -16,7 +16,7 @@ const styles = (
 	format: ArticleFormat,
 	isEditions: boolean,
 ): SerializedStyles => css`
-	${headline.medium({ fontWeight: 'light' })}
+	${headlineLight34}
 
 	${isEditions
 		? null

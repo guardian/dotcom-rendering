@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, headline } from '@guardian/source-foundations';
+import { between, headlineLightItalic34 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { text } from 'palette';
 import { darkModeCss } from 'styles';
@@ -10,7 +10,7 @@ import { DefaultByline } from './Byline.defaults';
 const commentStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.byline(format)};
 	width: 75%;
-	${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
+	${headlineLightItalic34}
 
 	${between.mobile.and.phablet} {
 		width: 68%;

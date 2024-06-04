@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
-import { Radio, RadioGroup } from '@guardian/source-react-components';
+import { Radio, RadioGroup } from '@guardian/source/react-components';
 import type { ReactElement } from 'react';
 
 interface RadioInputProps {

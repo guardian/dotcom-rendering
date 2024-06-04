@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textEgyptian14, until } from '@guardian/source-foundations';
+import { textEgyptian14, until } from '@guardian/source/foundations';
 import { palette } from '../../../palette';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 

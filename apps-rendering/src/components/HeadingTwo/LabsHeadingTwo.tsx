@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { textSansBold20 } from '@guardian/source/foundations';
 import type { FC } from 'react';
 import type { DefaultProps } from './HeadingTwo.defaults';
 import DefaultHeadingTwo, { defaultStyles } from './HeadingTwo.defaults';
@@ -9,7 +9,7 @@ import DefaultHeadingTwo, { defaultStyles } from './HeadingTwo.defaults';
 // ----- Component ----- //
 
 const styles = css`
-	${textSans.large({ fontWeight: 'bold' })}
+	${textSansBold20}
 `;
 
 const LabsHeadingTwo: FC<DefaultProps> = (props) => (

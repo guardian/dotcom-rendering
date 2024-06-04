@@ -5,7 +5,7 @@ import {
 	palette as sourcePalette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 
 const leftWidth = (size: LeftColSize, hasPageSkin: boolean) => {
 	if (hasPageSkin) {

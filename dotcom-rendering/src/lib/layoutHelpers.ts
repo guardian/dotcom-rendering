@@ -4,8 +4,8 @@ import { decideNavPillar } from './decideNavPillar';
 
 export const getCurrentPillar = (article: DCRArticle): Pillar | undefined => {
 	const currentPillar =
-		(article.nav.currentPillarTitle &&
-			(article.nav.currentPillarTitle.toLowerCase() as LegacyPillar)) ||
-		article.pillar;
+		(article.nav.currentPillarTitle?.toLowerCase() as
+			| LegacyPillar
+			| undefined) ?? article.pillar;
 	return decideNavPillar(currentPillar);
 };

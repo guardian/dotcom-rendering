@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
+import { headlineLight20 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
@@ -10,7 +10,7 @@ const styles = css`
 		padding: 0;
 	}
 
-	${headline.xxsmall({ fontWeight: 'light' })}
+	${headlineLight20}
 `;
 
 interface Props {

@@ -9,12 +9,14 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 };
 
 export const FixedSmallSlowVHalf = ({
 	trails,
 	containerPalette,
 	showAge,
+	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
 	const firstSlice50 = trails.slice(0, 1);
@@ -22,7 +24,7 @@ export const FixedSmallSlowVHalf = ({
 
 	return (
 		<UL direction="row-reverse">
-			{firstSlice50.map((trail, index) => {
+			{firstSlice50.map((trail) => {
 				return (
 					<LI
 						key={trail.url}
@@ -35,6 +37,7 @@ export const FixedSmallSlowVHalf = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -49,6 +52,7 @@ export const FixedSmallSlowVHalf = ({
 									trail={trail}
 									containerPalette={containerPalette}
 									showAge={showAge}
+									absoluteServerTimes={absoluteServerTimes}
 									imageLoading={imageLoading}
 								/>
 							</LI>

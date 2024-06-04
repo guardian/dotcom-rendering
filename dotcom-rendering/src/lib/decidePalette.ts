@@ -1,6 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
-import { brandAltBackground, palette } from '@guardian/source-foundations';
+import { brandAltBackground, palette } from '@guardian/source/foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
 import { palette as themePalette } from '../palette';
@@ -550,8 +550,7 @@ const textYoutubeOverlayKicker = (format: ArticleFormat) => {
 	}
 };
 
-const backgroundDynamoSublink = (_format: ArticleFormat): string =>
-	palette.neutral[97];
+const backgroundDynamoSublink = (): string => palette.neutral[97];
 
 export const decidePalette = (
 	format: ArticleFormat,
@@ -593,7 +592,7 @@ export const decidePalette = (
 			messageForm: backgroundMessageForm(format),
 			dynamoSublink:
 				overrides?.background.dynamoSublink ??
-				backgroundDynamoSublink(format),
+				backgroundDynamoSublink(),
 		},
 		fill: {
 			guardianLogo: fillGuardianLogo(format),

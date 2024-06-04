@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { from, palette, space, textSans15 } from '@guardian/source-foundations';
+import { from, palette, space, textSans15 } from '@guardian/source/foundations';
 import {
 	Hide,
 	LinkButton,
@@ -8,7 +7,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 type Props = {
@@ -18,7 +17,6 @@ type Props = {
 	newer?: string;
 	oldest?: string;
 	older?: string;
-	format: ArticleFormat;
 };
 
 /** Used to scroll the page to this point when using permalinks */
@@ -64,7 +62,6 @@ export const Pagination = ({
 	older,
 	newest,
 	newer,
-	format,
 }: Props) => {
 	const cssOverrides = decidePaginationCss;
 

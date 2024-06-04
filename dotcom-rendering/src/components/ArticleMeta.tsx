@@ -7,8 +7,8 @@ import {
 	palette,
 	space,
 	until,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
@@ -37,7 +37,6 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	ajaxUrl: string;
 	messageUs?: MessageUs;
 };
 
@@ -311,7 +310,6 @@ export const ArticleMeta = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
-	ajaxUrl,
 	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);

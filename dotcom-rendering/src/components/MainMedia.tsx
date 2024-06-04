@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { space, until } from '@guardian/source-foundations';
+import { space, until } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement } from '../types/content';
+import type { FEElement, StarRating } from '../types/content';
 
 const mainMedia = css`
 	height: 100%;
@@ -73,7 +73,7 @@ type Props = {
 	format: ArticleFormat;
 	elements: FEElement[];
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	host?: string;
 	pageId: string;
 	webTitle: string;

@@ -6,8 +6,9 @@ import {
 	brandAltBackground,
 	from,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans17,
+	textSansBold17,
+} from '@guardian/source/foundations';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { FC } from 'react';
 import { tabletContentWidth, wideContentWidth } from '../styles';
@@ -43,11 +44,11 @@ const scoreStyles = css`
 `;
 
 const leagueStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 `;
 
 const stadiumStyles = css`
-	${textSans.medium({ fontStyle: 'normal' })}
+	${textSans17};
 `;
 
 const FootballScores: FC<Props> = ({ league, homeTeam, awayTeam, stadium }) => (

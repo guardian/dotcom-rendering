@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import type { Item } from 'item';
 import { getFormat } from 'item';

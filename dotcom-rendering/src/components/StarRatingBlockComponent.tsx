@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { palette } from '../palette';
-import type { RatingSizeType } from '../types/content';
+import type { StarRating as Rating, RatingSizeType } from '../types/content';
 import { StarRating } from './StarRating/StarRating';
 
 type Props = {
-	rating: number;
+	rating: Rating;
 	size: RatingSizeType;
 };
 

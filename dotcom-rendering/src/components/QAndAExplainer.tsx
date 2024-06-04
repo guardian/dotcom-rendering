@@ -5,7 +5,10 @@ import type { ArticleElementRenderer } from '../lib/renderElement';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { QAndAExplainer as QAndAExplainerModel } from '../types/content';
+import type {
+	QAndAExplainer as QAndAExplainerModel,
+	StarRating,
+} from '../types/content';
 import { Subheading } from './Subheading';
 
 interface Props {
@@ -20,15 +23,16 @@ interface Props {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	RenderArticleElement: ArticleElementRenderer;
 }
 
 const headingLineStyles = css`
 	width: 140px;
-	margin: 8px 0 0 0;
+	padding-top: 8px;
+	margin: 0 0 2px 0;
 	border: none;
-	border-top: 4px solid ${palette('--heading-line')};
+	border-bottom: 4px solid ${palette('--heading-line')};
 `;
 
 export const QAndAExplainer = ({

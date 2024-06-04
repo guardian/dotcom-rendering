@@ -4,8 +4,8 @@ import {
 	palette as sourcePalette,
 	space,
 	visuallyHidden,
-} from '@guardian/source-foundations';
-import { SvgGuardianLogo } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgGuardianLogo } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { nestedOphanComponents } from '../lib/ophan-helpers';

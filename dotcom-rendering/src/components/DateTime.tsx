@@ -9,8 +9,17 @@ type Props = {
 	showWeekday: boolean;
 	showDate: boolean;
 	showTime: boolean;
-	display?: 'absolute' | 'relative';
 };
+
+type DisplayProps =
+	| {
+			display?: 'absolute';
+			absoluteServerTimes?: never;
+	  }
+	| {
+			display: 'relative';
+			absoluteServerTimes: boolean;
+	  };
 
 const formatWeekday = (date: Date, locale: string, timeZone: string) =>
 	date.toLocaleDateString(locale, {
@@ -39,6 +48,10 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		})
 		.replace(':', '.');
 
+/** Rounded up to the next minute as most pages are cached for a least a minute */
+const getServerTime = (precision = 60_000) =>
+	Math.ceil(Date.now() / precision) * precision;
+
 export const DateTime = ({
 	date,
 	editionId,
@@ -46,22 +59,26 @@ export const DateTime = ({
 	showDate,
 	showTime,
 	display = 'absolute',
-}: Props) => {
-	const { locale, timeZone } = getEditionFromId(editionId);
+	absoluteServerTimes = true,
+}: Props & DisplayProps) => {
+	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
 	const epoch = date.getTime();
 	const relativeTime = display === 'relative' && timeAgo(epoch);
 	const isRecent = isString(relativeTime) && relativeTime.endsWith(' ago');
+	const now = absoluteServerTimes
+		? Number.MAX_SAFE_INTEGER - 1
+		: getServerTime();
 
 	return isRecent ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
-			<RelativeTime then={epoch} />
+			<RelativeTime then={epoch} now={now} />
 		</Island>
 	) : (
 		<time
 			dateTime={date.toISOString()}
-			data-locale={locale}
-			title={date.toLocaleDateString(locale, {
+			data-locale={dateLocale}
+			title={date.toLocaleDateString(dateLocale, {
 				hour: '2-digit',
 				minute: '2-digit',
 				weekday: 'long',
@@ -73,9 +90,9 @@ export const DateTime = ({
 			})}
 		>
 			{[
-				showWeekday && formatWeekday(date, locale, timeZone),
-				showDate && formatDate(date, locale, timeZone),
-				showTime && formatTime(date, locale, timeZone),
+				showWeekday && formatWeekday(date, dateLocale, timeZone),
+				showDate && formatDate(date, dateLocale, timeZone),
+				showTime && formatTime(date, dateLocale, timeZone),
 			]
 				.filter(isString)
 				.join(' ')}

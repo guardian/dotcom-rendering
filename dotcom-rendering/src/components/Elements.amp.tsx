@@ -97,7 +97,7 @@ export const isAmpSupported = ({
 		if (
 			!isSwitchedOn ||
 			hasQuizTag ||
-			hasQuizAtoms ||
+			!!hasQuizAtoms ||
 			elements.length == 0
 		) {
 			return false;

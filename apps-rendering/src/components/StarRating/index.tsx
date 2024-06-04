@@ -7,8 +7,8 @@ import {
 	brandAltLine,
 	from,
 	remSpace,
-} from '@guardian/source-foundations';
-import { SvgStar } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgStar } from '@guardian/source/react-components';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';

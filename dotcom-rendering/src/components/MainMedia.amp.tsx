@@ -3,7 +3,7 @@ import {
 	palette,
 	textSans15,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils.amp';
 import InfoIcon from '../static/icons/info.svg';
@@ -88,7 +88,7 @@ const mainImage = (element: ImageBlockElement) => {
 				srcset={scrsetStringFromImagesSources(element.imageSources)}
 			/>
 			{!!(
-				element.data.caption ||
+				!!element.data.caption ||
 				(element.data.credit && element.displayCredit)
 			) && (
 				<>

@@ -5,7 +5,10 @@ import type { ArticleElementRenderer } from '../lib/renderElement';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { KeyTakeaway as KeyTakeawayModel } from '../types/content';
+import type {
+	KeyTakeaway as KeyTakeawayModel,
+	StarRating,
+} from '../types/content';
 import { Subheading } from './Subheading';
 
 const keyTakeawayStyles = css`
@@ -18,7 +21,7 @@ const headingIndexStyles = css`
 
 const headingLineStyles = css`
 	width: 140px;
-	margin: 0;
+	margin: 0 0 2px 0;
 	border: none;
 	border-top: 4px solid ${palette('--heading-line')};
 `;
@@ -34,7 +37,7 @@ interface KeyTakeawayProps {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	keyTakeaway: KeyTakeawayModel;
 	titleIndex: number;
 	RenderArticleElement: ArticleElementRenderer;

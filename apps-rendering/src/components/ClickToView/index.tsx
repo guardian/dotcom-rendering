@@ -5,9 +5,12 @@ import {
 	border,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
-import { Button, SvgCheckmark } from '@guardian/source-react-components';
+	textSans15,
+	textSans17,
+	textSansBold17,
+	textSansBold20,
+} from '@guardian/source/foundations';
+import { Button, SvgCheckmark } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind, withDefault } from '../../../vendor/@guardian/types/index';
 import { fold } from 'lib';
@@ -29,12 +32,12 @@ const roleTextSize = (role: ArticleElementRole): string => {
 		case ArticleElementRole.Immersive:
 		case ArticleElementRole.Inline:
 		case ArticleElementRole.Showcase: {
-			return textSans.medium({ lineHeight: 'regular' });
+			return textSans17;
 		}
 		case ArticleElementRole.HalfWidth:
 		case ArticleElementRole.Supporting:
 		case ArticleElementRole.Thumbnail: {
-			return textSans.small({ lineHeight: 'regular' });
+			return textSans15;
 		}
 	}
 };
@@ -45,18 +48,12 @@ const roleHeadlineSize = (role: ArticleElementRole): string => {
 		case ArticleElementRole.Immersive:
 		case ArticleElementRole.Inline:
 		case ArticleElementRole.Showcase: {
-			return textSans.large({
-				fontWeight: 'bold',
-				lineHeight: 'regular',
-			});
+			return textSansBold20;
 		}
 		case ArticleElementRole.HalfWidth:
 		case ArticleElementRole.Supporting:
 		case ArticleElementRole.Thumbnail: {
-			return textSans.medium({
-				fontWeight: 'bold',
-				lineHeight: 'regular',
-			});
+			return textSansBold17;
 		}
 	}
 };
@@ -159,7 +156,7 @@ const ClickToView: FC<ClickToViewProps> = ({
 				</div>
 				<p
 					css={css`
-						${textSize}
+						${textSize};
 						margin: 0px;
 					`}
 				>

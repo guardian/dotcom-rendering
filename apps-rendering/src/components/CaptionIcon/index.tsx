@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
-import { SvgCamera, SvgVideo } from '@guardian/source-react-components';
+import { remSpace } from '@guardian/source/foundations';
+import { SvgCamera, SvgVideo } from '@guardian/source/react-components';
 import { fill } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';

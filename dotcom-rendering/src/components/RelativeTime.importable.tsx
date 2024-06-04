@@ -5,7 +5,13 @@ import { useIsInView } from '../lib/useIsInView';
 type Props = {
 	/** the time to compare with in milliseconds since epoch */
 	then: number;
+	/** the time to compare to */
+	now: number;
 };
+
+const ONE_MINUTE = 60_000;
+
+const getTime = () => Math.ceil(Date.now() / ONE_MINUTE) * ONE_MINUTE;
 
 /**
  * Shows a recent time as relative, such as “3h ago”
@@ -14,18 +20,18 @@ type Props = {
  *
  * We update the relative time on the browser on an interval.
  */
-export const RelativeTime = ({ then }: Props) => {
+export const RelativeTime = ({ then, now }: Props) => {
 	const [inView, ref] = useIsInView({ repeat: true });
 
-	const [display, setDisplay] = useState(timeAgo(then));
+	const [display, setDisplay] = useState(timeAgo(then, { now }));
 
 	useEffect(() => {
+		setDisplay(timeAgo(then, { now: getTime() }));
 		if (!inView) return;
-		setDisplay(timeAgo(then));
 
 		const interval = setTimeout(() => {
-			setDisplay(timeAgo(then));
-		}, 15_000);
+			setDisplay(timeAgo(then, { now: getTime() }));
+		}, 60_000);
 		return () => clearInterval(interval);
 	}, [inView, then]);
 

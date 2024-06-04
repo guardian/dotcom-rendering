@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { FC } from 'react';
-import { body } from '@guardian/source-foundations';
-import { LinkButton } from '@guardian/source-react-components';
+import { article17, body } from '@guardian/source/foundations';
+import { LinkButton } from '@guardian/source/react-components';
 import { background, border, hover, text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { darkModeCss } from 'styles';
@@ -36,7 +36,7 @@ const headingStyles = css`
 `;
 
 const textStyles = css`
-	${body.medium()}
+	${article17};
 	padding-bottom: 0.5rem;
 `;
 

@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace, textSans } from '@guardian/source-foundations';
+import { from, remSpace, textSans14 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import Caption from 'components/caption';
@@ -20,7 +20,7 @@ import { immersiveCaptionId } from './MainMedia.defaults';
 // ----- Component ----- //
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${text.figCaption(format)};
 	${grid.column.centre}
 

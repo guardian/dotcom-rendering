@@ -5,11 +5,12 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	headline,
+	headlineMedium17,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans14,
+	textSansItalic14,
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import Anchor from 'components/Anchor';
@@ -22,14 +23,17 @@ import { darkModeCss } from 'styles';
 // ----- Caption Elements ----- //
 
 const headingStyles = css`
-	${headline.xxxsmall()}
+	${headlineMedium17};
 	color: ${neutral[86]};
 	margin: 0 0 ${remSpace[3]};
 	display: block;
 `;
 
 const emStyles = css`
-	${textSans.xsmall({ fontStyle: 'italic', fontWeight: 'bold' })}
+	${textSansItalic14};
+	> span {
+		font-style: italic;
+	}
 `;
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
@@ -43,11 +47,8 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
 		: undefined;
 
 const textStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall({
-		lineHeight: 'regular',
-	})}
+	${textSans14};
 	color: ${text.figCaption(format)};
-
 	${darkModeCss`
 		color: ${text.figCaptionDark(format)};
 	`}

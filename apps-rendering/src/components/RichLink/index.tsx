@@ -4,11 +4,11 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineBold17,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
-import { SvgArrowRightStraight } from '@guardian/source-react-components';
+	textSansBold17,
+} from '@guardian/source/foundations';
+import { SvgArrowRightStraight } from '@guardian/source/react-components';
 import { background, border, fill, text } from 'palette';
 import type { ReactElement } from 'react';
 import { darkModeCss, darkModeStyles } from 'styles';
@@ -99,9 +99,7 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 		button {
 			background: none;
 			border: none;
-			${textSans.medium({
-				fontWeight: 'bold',
-			})}; // Bold for accessibility
+			${textSansBold17}; // Bold for accessibility
 			padding: 0;
 			margin: 0;
 			display: inline-flex;
@@ -136,7 +134,7 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 
 			h1 {
 				margin: 0 0 ${remSpace[4]} 0;
-				${headline.xxxsmall({ fontWeight: 'bold' })}
+				${headlineBold17};
 				hyphens: auto;
 				${darkModeStyles`
 					color: ${text.richLinkDark(format)};

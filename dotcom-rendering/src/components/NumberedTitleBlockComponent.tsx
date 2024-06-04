@@ -3,15 +3,12 @@ import {
 	headlineBold34,
 	headlineBold42,
 	headlineLight34,
-} from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+} from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
-import type { Palette } from '../types/palette';
 
 type Props = {
 	position: number;
 	html: string;
-	format: ArticleFormat;
 };
 
 const titleStyles = css`
@@ -27,26 +24,20 @@ const titleStyles = css`
 	}
 `;
 
-const numberStyles = (palette: Palette) => css`
+const numberStyles = () => css`
 	${headlineBold42}
 	font-size: 56px;
 	color: ${themePalette('--numbered-list-number')};
 `;
 
-export const NumberedTitleBlockComponent = ({
-	position,
-	html,
-	format,
-}: Props) => {
-	const palette = decidePalette(format);
-
+export const NumberedTitleBlockComponent = ({ position, html }: Props) => {
 	return (
 		<div
 			css={css`
 				margin-top: -16px; /* Hack used to align Title number closer to adjacent divider */
 			`}
 		>
-			<div css={numberStyles(palette)}>{position}</div>
+			<div css={numberStyles()}>{position}</div>
 			<div css={titleStyles} dangerouslySetInnerHTML={{ __html: html }} />
 		</div>
 	);

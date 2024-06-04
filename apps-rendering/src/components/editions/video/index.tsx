@@ -4,9 +4,9 @@ import {
 	from,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
-import { SvgOfflineCloud } from '@guardian/source-react-components';
+	textSans15,
+} from '@guardian/source/foundations';
+import { SvgOfflineCloud } from '@guardian/source/react-components';
 import type { FC } from 'react';
 import { useOnlineStatus } from '../utils/useOnlineStatus';
 
@@ -63,7 +63,7 @@ const styles = css`
 
 	.placeholder-text {
 		text-align: center;
-		${textSans.small()};
+		${textSans15};
 		margin: ${remSpace[2]} 0;
 	}
 `;

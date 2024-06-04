@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { palette } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import {
@@ -13,8 +13,10 @@ import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { Masthead } from '../components/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -24,10 +26,11 @@ import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
 } from '../lib/getTagPageAdPositions';
+import { enhanceTags } from '../model/enhanceTags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRTagPageType } from '../types/tagPage';
-import { Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
 	tagPage: DCRTagPageType;
@@ -58,7 +61,18 @@ const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
 
 export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const {
-		config: { switches, hasPageSkin, isPaidContent },
+		config: {
+			contentType,
+			hasPageSkin,
+			idApiUrl,
+			isPaidContent,
+			isPreview,
+			isSensitive,
+			section,
+			switches,
+			pageId,
+		},
+		tags,
 	} = tagPage;
 
 	const renderAds = canRenderAds(tagPage);
@@ -70,6 +84,13 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const mobileAdPositions = renderAds
 		? getTagPageMobileAdPositions(tagPage.groupedTrails)
 		: [];
+
+	const { abTests } = tagPage.config;
+
+	const inUpdatedHeaderABTest =
+		abTests.updatedHeaderDesignVariant === 'variant';
+
+	const contributionsServiceUrl = 'https://contributions.guardianapis.com'; // TODO: Read this from config (use getContributionsServiceUrl)
 
 	return (
 		<>
@@ -94,86 +115,113 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						</Stuck>
 					)}
 
-					<Section
-						fullWidth={true}
-						shouldCenter={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						backgroundColour={palette.brand[400]}
-						element="header"
-					>
-						<Header
+					{inUpdatedHeaderABTest ? (
+						<Masthead
+							nav={NAV}
 							editionId={tagPage.editionId}
 							idUrl={tagPage.config.idUrl}
 							mmaUrl={tagPage.config.mmaUrl}
-							discussionApiUrl={tagPage.config.discussionApiUrl}
-							urls={tagPage.nav.readerRevenueLinks.header}
-							remoteHeader={!!switches.remoteHeader}
-							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
-							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
-							headerTopBarSearchCapiSwitch={
-								!!switches.headerTopBarSearchCapi
-							}
-						/>
-					</Section>
-					<Section
-						fullWidth={true}
-						borderColour={palette.brand[600]}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={palette.brand[400]}
-						element="nav"
-					>
-						<Nav
-							nav={NAV}
-							isImmersive={false}
-							displayRoundel={false}
-							selectedPillar={NAV.selectedPillar}
 							subscribeUrl={
 								tagPage.nav.readerRevenueLinks.header.subscribe
 							}
-							editionId={tagPage.editionId}
+							discussionApiUrl={tagPage.config.discussionApiUrl}
+							idApiUrl={tagPage.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
+							showSubNav={false}
+							isImmersive={false}
+							displayRoundel={false}
+							hasPageSkin={hasPageSkin}
 						/>
-					</Section>
-					{NAV.subNavSections && (
+					) : (
 						<>
 							<Section
 								fullWidth={true}
+								shouldCenter={false}
 								showTopBorder={false}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
+								showSideBorders={false}
 								padSides={false}
-								element="aside"
+								backgroundColour={palette.brand[400]}
+								element="header"
 							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
-								>
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										linkHoverColour={palette.news[400]}
-										borderColour={palette.neutral[46]}
-									/>
-								</Island>
+								<Header
+									editionId={tagPage.editionId}
+									idUrl={tagPage.config.idUrl}
+									mmaUrl={tagPage.config.mmaUrl}
+									discussionApiUrl={
+										tagPage.config.discussionApiUrl
+									}
+									urls={tagPage.nav.readerRevenueLinks.header}
+									remoteHeader={!!switches.remoteHeader}
+									contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+									idApiUrl={tagPage.config.idApiUrl}
+									headerTopBarSearchCapiSwitch={
+										!!switches.headerTopBarSearchCapi
+									}
+								/>
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								padSides={false}
+								borderColour={palette.brand[600]}
 								showTopBorder={false}
+								padSides={false}
+								backgroundColour={palette.brand[400]}
+								element="nav"
 							>
-								<StraightLines
-									cssOverrides={css`
-										display: block;
-									`}
-									count={4}
+								<Nav
+									nav={NAV}
+									isImmersive={false}
+									displayRoundel={false}
+									selectedPillar={NAV.selectedPillar}
+									subscribeUrl={
+										tagPage.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									editionId={tagPage.editionId}
 								/>
 							</Section>
+							{NAV.subNavSections && (
+								<>
+									<Section
+										fullWidth={true}
+										showTopBorder={false}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										padSides={false}
+										element="aside"
+									>
+										<Island
+											priority="enhancement"
+											defer={{ until: 'idle' }}
+										>
+											<SubNav
+												subNavSections={
+													NAV.subNavSections
+												}
+												currentNavLink={
+													NAV.currentNavLink
+												}
+												position="header"
+											/>
+										</Island>
+									</Section>
+									<Section
+										fullWidth={true}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										padSides={false}
+										showTopBorder={false}
+									>
+										<StraightLines
+											cssOverrides={css`
+												display: block;
+											`}
+											count={4}
+										/>
+									</Section>
+								</>
+							)}
 						</>
 					)}
 				</>
@@ -186,7 +234,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					image={tagPage.header.image}
 				/>
 				{tagPage.groupedTrails.map((groupedTrails, index) => {
-					const locale = getEditionFromId(tagPage.editionId).locale;
+					const { dateLocale } = getEditionFromId(tagPage.editionId);
 					const date = new Date(
 						groupedTrails.year,
 						groupedTrails.month,
@@ -194,7 +242,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					);
 					const containedId = getContainerId(
 						date,
-						locale,
+						dateLocale,
 						groupedTrails.day !== undefined,
 					);
 
@@ -212,12 +260,12 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					const url =
 						groupedTrails.day !== undefined
 							? `/${tagPage.pageId}/${groupedTrails.year}/${date
-									.toLocaleDateString(locale, {
+									.toLocaleDateString(dateLocale, {
 										month: 'long',
 									})
 									.slice(0, 3)
 									.toLowerCase()}/${date.toLocaleDateString(
-									locale,
+									dateLocale,
 									{
 										day: '2-digit',
 									},
@@ -255,6 +303,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								}
 								discussionApiUrl={
 									tagPage.config.discussionApiUrl
+								}
+								updateLogoAdPartnerSwitch={
+									!!switches.updateLogoAdPartner
 								}
 							>
 								<DecideContainerByTrails
@@ -298,8 +349,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							linkHoverColour={palette.news[400]}
-							borderColour={palette.neutral[46]}
+							position="footer"
 						/>
 					</Island>
 				</Section>
@@ -321,9 +371,27 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={tagPage.nav.readerRevenueLinks.header}
 					editionId={tagPage.editionId}
-					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
+			<BannerWrapper data-print-layout="hide">
+				<Island priority="feature" defer={{ until: 'idle' }}>
+					<StickyBottomBanner
+						contentType={contentType}
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={idApiUrl}
+						isMinuteArticle={false}
+						isPaidContent={!!isPaidContent}
+						isPreview={isPreview}
+						isSensitive={isSensitive}
+						pageId={pageId}
+						sectionId={section}
+						shouldHideReaderRevenue={false} // never defined for tag pages?
+						remoteBannerSwitch={!!switches.remoteBanner}
+						tags={enhanceTags(tags)}
+					/>
+				</Island>
+			</BannerWrapper>
 		</>
 	);
 };

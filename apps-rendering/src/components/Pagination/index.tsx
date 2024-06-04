@@ -1,7 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, space, textSans, until } from '@guardian/source-foundations';
+import {
+	neutral,
+	space,
+	textSans15,
+	until,
+} from '@guardian/source/foundations';
 import {
 	Hide,
 	LinkButton,
@@ -9,7 +14,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { border, hover, text } from 'palette';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
@@ -72,7 +77,7 @@ const Position: FC<{
 		css={css`
 			display: flex;
 			flex-direction: row;
-			${textSans.small()}
+			${textSans15}
 
 			${darkModeCss`
 				color: ${neutral[60]};

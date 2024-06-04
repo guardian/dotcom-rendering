@@ -19,6 +19,7 @@ describe('ArticleMeta', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -39,7 +40,6 @@ describe('ArticleMeta', () => {
 					isCommentable={false}
 					discussionApiUrl=""
 					shortUrlId=""
-					ajaxUrl=""
 				/>
 			</ConfigProvider>,
 		);
@@ -66,6 +66,7 @@ describe('ArticleMeta', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -86,7 +87,6 @@ describe('ArticleMeta', () => {
 					isCommentable={false}
 					discussionApiUrl=""
 					shortUrlId=""
-					ajaxUrl=""
 				/>
 			</ConfigProvider>,
 		);

@@ -1,3 +1,5 @@
+export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
+
 // -------------------------------------
 // Elements
 
@@ -258,7 +260,7 @@ export interface ImageBlockElement {
 	displayCredit?: boolean;
 	role: RoleType;
 	title?: string;
-	starRating?: number;
+	starRating?: StarRating;
 	isAvatar?: boolean;
 	/**
 	 * position is an index starting at 1 for all the images
@@ -463,7 +465,7 @@ export interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
 interface StarRatingBlockElement {
 	_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement';
 	elementId: string;
-	rating: number;
+	rating: StarRating;
 	size: RatingSizeType;
 }
 

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import { space, textSans15 } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import type {
 	AdditionalHeadersType,
@@ -34,7 +34,6 @@ type Props = {
 	expanded: boolean;
 	onPermalinkClick: (commentId: string) => void;
 	apiKey: string;
-	onRecommend?: (commentId: string) => Promise<boolean>;
 	onPreview?: typeof preview;
 	idApiUrl: string;
 	page: number;
@@ -113,7 +112,6 @@ export const Comments = ({
 	expanded,
 	onPermalinkClick,
 	apiKey,
-	onRecommend,
 	onPreview,
 	idApiUrl,
 	page,

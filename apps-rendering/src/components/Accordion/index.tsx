@@ -6,15 +6,15 @@ import {
 	background,
 	focusHalo,
 	from,
-	headline,
+	headlineBold20,
 	line,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -69,7 +69,7 @@ const titleRowStyles = css`
 `;
 
 const titleStyle = css`
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${headlineBold20};
 	color: ${neutral[7]};
 	${darkModeCss`
 		color: ${neutral[86]};

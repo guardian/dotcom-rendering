@@ -3,11 +3,12 @@ import { css } from '@emotion/react';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
 import {
 	from,
-	headline,
+	headlineBold20,
+	headlineBold42,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans15,
+} from '@guardian/source/foundations';
 import { TeamLocation } from 'football';
 import type { FC } from 'react';
 
@@ -37,7 +38,7 @@ const styles = (location: TeamLocation): SerializedStyles => css`
 `;
 
 const teamNameStyles = (location: TeamLocation): SerializedStyles => css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20};
 	margin: 0;
 	grid-column: 2;
 	grid-row: 1;
@@ -48,7 +49,7 @@ const teamNameStyles = (location: TeamLocation): SerializedStyles => css`
 `;
 
 const scoreStyles = (location: TeamLocation): SerializedStyles => css`
-	${headline.large({ fontWeight: 'bold' })}
+	${headlineBold42};
 	grid-column: 1;
 	grid-row: 1 / 3;
 	margin-right: ${remSpace[4]};
@@ -75,7 +76,7 @@ const scoreInlineStyles = css`
 `;
 
 const scorerStyles = (location: TeamLocation): SerializedStyles => css`
-	${textSans.small()}
+	${textSans15};
 	list-style: none;
 	margin: 0;
 	padding: 0;

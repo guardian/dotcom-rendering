@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans17 } from '@guardian/source/foundations';
 import type { FC } from 'react';
 
 const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
@@ -10,7 +10,7 @@ const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
 	display: block;
 	list-style: none;
 	padding: ${remSpace[3]} 0 ${remSpace[3]} 0;
-	${textSans.medium()}
+	${textSans17}
 
 	li {
 		margin: ${remSpace[3]} ${remSpace[3]} ${remSpace[1]} 0;

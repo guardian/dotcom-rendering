@@ -131,8 +131,7 @@ function findInsertIndex(body: Body): Result<string, number> {
 			// the element before must be regular text (not bold paragraph)
 			[ElementCategory.ParagraphText].includes(
 				elementBeforeInsertPoint.category,
-			) &&
-			// the element after must be regular text, or a bold paragraph.
+			) && // the element after must be regular text, or a bold paragraph.
 			[
 				ElementCategory.ParagraphText,
 				ElementCategory.BoldParagraphText,

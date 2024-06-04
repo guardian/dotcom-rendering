@@ -2,15 +2,15 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
-	headline,
 	headlineBold17,
 	headlineBold20,
+	headlineMedium17,
 	space,
 	textSans17,
 	textSans20,
 	textSansBold20,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -128,7 +128,13 @@ const secondaryFontStyles = (format: ArticleFormat) => {
 		`;
 	}
 	return css`
-		${headline.xxxsmall({ fontWeight: 'regular' })}
+		${headlineMedium17};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		font-weight: 400;
 	`;
 };
 
@@ -294,7 +300,7 @@ export const SeriesSectionLink = ({
 					);
 				}
 				default: {
-					if (hasSeriesTag || isLabs) {
+					if (!!hasSeriesTag || isLabs) {
 						const title = tag?.title ? tag.title : sectionLabel;
 						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (

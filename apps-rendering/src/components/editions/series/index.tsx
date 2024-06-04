@@ -5,10 +5,10 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineBold17,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
@@ -20,7 +20,7 @@ import { kickerPicker } from '../kickerPicker';
 
 const styles = (kicker: string): SerializedStyles => css`
 	box-sizing: border-box;
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${headlineBold17};
 	color: ${kicker};
 	padding: ${remSpace[1]} 0 ${remSpace[3]};
 	box-sizing: border-box;

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, textSans20 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
 const immersiveLabsStyles = css`
-	${textSans.large()}
+	${textSans20};
 	margin-top: ${remSpace[3]};
 `;
 

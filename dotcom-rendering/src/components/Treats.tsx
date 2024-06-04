@@ -6,8 +6,8 @@ import {
 	palette as sourcePalette,
 	space,
 	textSans12,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import type { TreatType } from '../types/front';

@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
-import { Checkbox, CheckboxGroup } from '@guardian/source-react-components';
+import { Checkbox, CheckboxGroup } from '@guardian/source/react-components';
 import type { ReactElement } from 'react';
 
 interface CheckboxInputProps {

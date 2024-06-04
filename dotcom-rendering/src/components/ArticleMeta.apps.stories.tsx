@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes } from '../lib/format';
@@ -116,7 +116,6 @@ export const ArticleAppsWithFollowStory: StoryObj = ({
 			<ArticleMetaApps
 				format={format}
 				pageId=""
-				webTitle=""
 				byline="Lanre Bakare Chief music writer"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -124,7 +123,6 @@ export const ArticleAppsWithFollowStory: StoryObj = ({
 				isCommentable={isCommentable}
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/zemg8"
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -143,7 +141,6 @@ export const ArticleAppsWithFollowStoryNoTitle: StoryObj = ({
 			<ArticleMetaApps
 				format={format}
 				pageId=""
-				webTitle=""
 				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -151,7 +148,6 @@ export const ArticleAppsWithFollowStoryNoTitle: StoryObj = ({
 				isCommentable={isCommentable}
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/zemg8"
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -172,7 +168,6 @@ export const ArticleAppsWithAvatarAndFollowStory: StoryObj = ({
 			<ArticleMetaApps
 				format={format}
 				pageId=""
-				webTitle=""
 				byline="Lanre Bakare Chief music writer"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -180,7 +175,6 @@ export const ArticleAppsWithAvatarAndFollowStory: StoryObj = ({
 				isCommentable={isCommentable}
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/zemg8"
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -203,7 +197,6 @@ export const ArticleAppsWithAvatarNoTitleAndFollowStory: StoryObj = ({
 			<ArticleMetaApps
 				format={format}
 				pageId=""
-				webTitle=""
 				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -211,7 +204,6 @@ export const ArticleAppsWithAvatarNoTitleAndFollowStory: StoryObj = ({
 				isCommentable={isCommentable}
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/zemg8"
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -234,7 +226,6 @@ export const ArticleAppsImmersiveAndFollowStory: StoryObj = ({
 			<ArticleMetaApps
 				format={format}
 				pageId=""
-				webTitle=""
 				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -242,7 +233,6 @@ export const ArticleAppsImmersiveAndFollowStory: StoryObj = ({
 				isCommentable={isCommentable}
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/zemg8"
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -263,7 +253,6 @@ export const ArticleAppsImmersiveWithMultipleContributorsStory: StoryObj = ({
 			<ArticleMetaApps
 				format={format}
 				pageId=""
-				webTitle=""
 				byline="Lanre Bakare in New York and Laura Banks in London"
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -271,7 +260,6 @@ export const ArticleAppsImmersiveWithMultipleContributorsStory: StoryObj = ({
 				isCommentable={isCommentable}
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/zemg8"
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -296,7 +284,6 @@ export const ArticleAppsWithMultipleContributors: StoryObj = ({
 			<ArticleMetaApps
 				format={format}
 				pageId=""
-				webTitle=""
 				byline="Lanre Bakare in New York and Laura Banks in London"
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -304,7 +291,6 @@ export const ArticleAppsWithMultipleContributors: StoryObj = ({
 				isCommentable={isCommentable}
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/zemg8"
-				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -325,7 +311,6 @@ export const ArticleAppsWithBrandingStory: StoryObj = ({
 			<ArticleMetaApps
 				format={format}
 				pageId=""
-				webTitle=""
 				byline="Lanre Bakare Chief music writer"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -333,7 +318,6 @@ export const ArticleAppsWithBrandingStory: StoryObj = ({
 				isCommentable={isCommentable}
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/zemg8"
-				ajaxUrl=""
 				branding={branding}
 			/>
 		</Wrapper>

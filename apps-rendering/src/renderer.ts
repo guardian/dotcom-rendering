@@ -3,8 +3,8 @@
 import { css, jsx as styledH } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import type { Breakpoint } from '@guardian/source-foundations';
-import { neutral, remSpace, until } from '@guardian/source-foundations';
+import type { Breakpoint } from '@guardian/source/foundations';
+import { neutral, remSpace, until } from '@guardian/source/foundations';
 import {
 	andThen,
 	fromNullable,
@@ -245,10 +245,14 @@ const textElement =
 					{ css: { fontWeight: 'bold' }, key },
 					children,
 				);
+			case 'EM':
+				return styledH(
+					'em',
+					{ css: { fontStyle: 'italic' }, key },
+					children,
+				);
 			case 'B':
 				return h('b', { key }, children);
-			case 'EM':
-				return h('em', { key }, children);
 			case 'BR':
 				return h('br', { key }, null);
 			case 'UL':

@@ -4,7 +4,7 @@ import {
 	headlineBold17,
 	headlineMedium17,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { palette } from '../../palette';
@@ -204,7 +204,6 @@ type Props = {
 	trackUrl: string;
 	kicker: string;
 	title?: string;
-	format: ArticleFormat;
 	shouldUseAcast?: boolean;
 	duration: number;
 };
@@ -214,7 +213,6 @@ export const AudioAtom = ({
 	trackUrl,
 	kicker,
 	title,
-	format,
 	shouldUseAcast,
 	duration,
 }: Props): JSX.Element => {

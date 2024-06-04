@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ConfigProvider } from './ConfigContext';
@@ -27,24 +26,22 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>
 			</ConfigProvider>,
 		);
 
-		// Calls api once only
 		expect(useApi).toHaveBeenCalledTimes(1);
+		expect(useApi).toHaveBeenLastCalledWith(
+			'https://api.nextgen.guardianapps.co.uk/most-read/Section Name.json?_edition=UK&dcr=true',
+		);
 
 		// Renders all 20 items
 		expect(getAllByText(/LINKTEXT/).length).toBe(20);
@@ -72,16 +69,12 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>
@@ -138,16 +131,12 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>
@@ -189,16 +178,12 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>
@@ -216,16 +201,12 @@ describe('MostViewedFooterData', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
 				<MostViewedFooterData
 					sectionId="Section Name"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: Pillar.News,
-					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					edition="UK"
 				/>

@@ -96,6 +96,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -126,6 +127,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -146,6 +148,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -176,6 +179,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -204,6 +208,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -227,6 +232,7 @@ describe('Island: server-side rendering', () => {
 						editionId={'UK'}
 						shortUrlId=""
 						discussionApiUrl=""
+						absoluteServerTimes={true}
 					/>
 				</ConfigProvider>,
 			),
@@ -297,6 +303,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -309,15 +316,7 @@ describe('Island: server-side rendering', () => {
 	test('MostViewedFooterData', () => {
 		expect(() =>
 			renderToString(
-				<MostViewedFooterData
-					ajaxUrl={''}
-					edition={'UK'}
-					format={{
-						theme: Pillar.News,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-				/>,
+				<MostViewedFooterData ajaxUrl={''} edition={'UK'} />,
 			),
 		).not.toThrow();
 	});
@@ -349,6 +348,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -386,6 +386,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -424,6 +425,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -447,6 +449,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -461,7 +464,6 @@ describe('Island: server-side rendering', () => {
 						idApiUrl={''}
 						stage={''}
 						pageId={''}
-						keywordIds={''}
 						renderAds={true}
 						isLabs={false}
 						articleEndSlot={true}
@@ -478,6 +480,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -492,7 +495,6 @@ describe('Island: server-side rendering', () => {
 						contributionsServiceUrl=""
 						idApiUrl=""
 						pageId=""
-						keywordIds=""
 						remoteBannerSwitch={true}
 						isSensitive={false}
 					/>
@@ -508,6 +510,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -535,6 +538,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>

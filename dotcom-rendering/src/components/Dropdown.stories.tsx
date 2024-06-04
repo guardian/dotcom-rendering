@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { brandBackground } from '@guardian/source-foundations';
-import { userEvent, within } from '@storybook/testing-library';
+import { brandBackground } from '@guardian/source/foundations';
+import { userEvent, within } from '@storybook/test';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
 

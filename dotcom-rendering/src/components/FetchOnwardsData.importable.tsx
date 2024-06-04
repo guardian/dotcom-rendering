@@ -15,6 +15,7 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 	discussionApiUrl: string;
+	absoluteServerTimes: boolean;
 };
 
 type OnwardsResponse = {
@@ -34,6 +35,7 @@ export const FetchOnwardsData = ({
 	onwardsSource,
 	format,
 	discussionApiUrl,
+	absoluteServerTimes,
 }: Props) => {
 	const { data, error } = useApi<OnwardsResponse>(url);
 
@@ -81,6 +83,7 @@ export const FetchOnwardsData = ({
 						: 'compact'
 				}
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={absoluteServerTimes}
 			/>
 		</div>
 	);

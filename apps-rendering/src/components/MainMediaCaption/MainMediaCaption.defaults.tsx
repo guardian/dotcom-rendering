@@ -7,9 +7,10 @@ import {
 	brandAlt,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
-import { SvgCamera } from '@guardian/source-react-components';
+	textSans14,
+	textSans15,
+} from '@guardian/source/foundations';
+import { SvgCamera } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Styleable } from 'lib';
@@ -35,7 +36,7 @@ const detailsStyles = css`
 		overflow: hidden;
 		padding-right: ${remSpace[12]};
 		z-index: 1;
-		${textSans.small()};
+		${textSans15};
 		box-sizing: border-box;
 
 		${darkModeCss`
@@ -85,9 +86,7 @@ const svgStyles = css`
 `;
 
 const textStyles = css`
-	${textSans.xsmall({
-		lineHeight: 'regular',
-	})}
+	${textSans14};
 	color: ${neutral[100]};
 `;
 

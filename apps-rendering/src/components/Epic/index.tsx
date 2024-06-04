@@ -3,15 +3,15 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
-	body,
+	article17,
 	brandAlt,
 	brandAltBackground,
 	from,
-	headline,
+	headlineMedium24,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans17,
+} from '@guardian/source/foundations';
 import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //
@@ -25,13 +25,13 @@ const styles: SerializedStyles = css`
 		border-top: 1px solid ${brandAltBackground.primary};
 		background: ${neutral[97]};
 		padding: ${remSpace[3]};
-		${body.medium()}
+		${article17};
 		clear: left;
 	}
 
 	h1:first-of-type {
 		margin-top: 0;
-		${headline.xsmall()}
+		${headlineMedium24}
 	}
 
 	button {
@@ -75,7 +75,7 @@ const styles: SerializedStyles = css`
 		transition: 0.3s ease-in-out;
 		text-decoration: none;
 		white-space: nowrap;
-		${textSans.medium()}
+		${textSans17};
 		line-height: 1.5;
 		font-weight: 700;
 		height: 44px;

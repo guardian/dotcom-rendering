@@ -10,11 +10,13 @@ import type { RenderingTarget } from './renderingTarget';
 export type Config =
 	| {
 			renderingTarget: Extract<RenderingTarget, 'Web'>;
-			darkModeAvailable: false;
+			darkModeAvailable: boolean;
+			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
 	  }
 	| {
 			renderingTarget: Extract<RenderingTarget, 'Apps'>;
 			darkModeAvailable: boolean;
+			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
 	  };
