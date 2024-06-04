@@ -1,23 +1,22 @@
 import { JSDOM } from 'jsdom';
-import type { FEElement, SubheadingBlockElement } from '../types/content';
+import type {
+	NumberedTitleBlockElement,
+	SubheadingBlockElement,
+} from '../types/content';
 import type { TableOfContentsItem } from '../types/frontend';
+import { slugify } from './enhance-H2s';
 
-const isH2 = (element: FEElement): element is SubheadingBlockElement => {
-	return (
-		element._type ===
-			'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
-		element._type ===
-			'model.dotcomrendering.pageElements.NumberedTitleBlockElement'
-	);
-};
-
-const extractText = (element: SubheadingBlockElement): string => {
+const extractText = (
+	element: SubheadingBlockElement | NumberedTitleBlockElement,
+): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
 	return frag.textContent?.trim() ?? '';
 };
 
-const extractID = (element: SubheadingBlockElement): string => {
+const extractID = (
+	element: SubheadingBlockElement | NumberedTitleBlockElement,
+): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
 	return frag.querySelector('H2')?.getAttribute('id') ?? '';
@@ -44,7 +43,32 @@ export const enhanceTableOfContents = (
 
 	for (const block of blocks) {
 		for (const element of block.elements) {
-			if (isH2(element)) {
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement'
+			) {
+				for (const keyTakeaway of element.keyTakeaways) {
+					tocItems.push({
+						id: slugify(keyTakeaway.title),
+						title: keyTakeaway.title,
+					});
+				}
+			} else if (
+				element._type ===
+				'model.dotcomrendering.pageElements.QAndAExplainerBlockElement'
+			) {
+				for (const qAndAExplainer of element.qAndAExplainers) {
+					tocItems.push({
+						id: slugify(qAndAExplainer.title),
+						title: qAndAExplainer.title,
+					});
+				}
+			} else if (
+				element._type ===
+					'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
+				element._type ===
+					'model.dotcomrendering.pageElements.NumberedTitleBlockElement'
+			) {
 				tocItems.push({
 					id: extractID(element),
 					title: extractText(element),
