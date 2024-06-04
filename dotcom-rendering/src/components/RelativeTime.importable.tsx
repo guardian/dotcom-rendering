@@ -41,9 +41,8 @@ export const RelativeTime = ({ then, now }: Props) => {
 	const [display, setDisplay] = useState(relativeTime(then, now));
 
 	useEffect(() => {
-		if (!inView) return;
 		setDisplay(relativeTime(then, getCurrentMinute(then)));
-
+		if (!inView) return;
 		const interval = setInterval(() => {
 			setDisplay(relativeTime(then, getCurrentMinute(then)));
 		}, ONE_MINUTE);

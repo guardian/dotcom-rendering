@@ -49,6 +49,8 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		.replace(':', '.');
 
 const ONE_MINUTE = 60_000;
+/** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date */
+const MAX_DATE = 8.64e15;
 /** Rounded up to the next minute as most pages are cached for a least a minute */
 const getServerTime = () => Math.ceil(Date.now() / ONE_MINUTE) * ONE_MINUTE;
 
@@ -69,11 +71,7 @@ export const DateTime = ({
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
 			<RelativeTime
 				then={then}
-				now={
-					absoluteServerTimes
-						? Number.MAX_SAFE_INTEGER - 1
-						: getServerTime()
-				}
+				now={absoluteServerTimes ? MAX_DATE : getServerTime()}
 			/>
 		</Island>
 	) : (
