@@ -392,8 +392,6 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
-const topBarCard = textCardKicker;
-
 const backgroundLiveKicker = (
 	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
@@ -538,9 +536,6 @@ export const decideContainerOverrides = (
 			carouselArrowHover: backgroundCarouselArrowHover(containerPalette),
 			liveKicker: backgroundLiveKicker(containerPalette),
 			pulsingDot: backgroundPulsingDot(containerPalette),
-		},
-		topBar: {
-			card: topBarCard(containerPalette),
 		},
 	};
 };

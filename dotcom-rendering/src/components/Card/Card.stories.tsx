@@ -8,7 +8,6 @@ import {
 import { from } from '@guardian/source/foundations';
 import React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
 import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { FrontSection } from '../FrontSection';
@@ -536,15 +535,6 @@ export const WithAnAvatar = () => {
 		</>
 	);
 };
-WithAnAvatar.decorators = [
-	lightDecorator([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Comment,
-			theme: Pillar.Opinion,
-		},
-	]),
-];
 
 export const WhenVerticalAndThemeOpinion = () => {
 	return (
@@ -587,6 +577,11 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 							...aBasicLink,
 							headline: 'Headline 2',
 							kickerText: 'Kicker',
+							format: {
+								theme: Pillar.Sport,
+								design: ArticleDesign.Gallery,
+								display: ArticleDisplay.Standard,
+							},
 						},
 						{
 							...aBasicLink,
@@ -1214,6 +1209,11 @@ export const DynamoWithSpecialPaletteVariations = () => {
 									...aBasicLink,
 									headline: 'Headline 2',
 									kickerText: 'Kicker',
+									format: {
+										theme: Pillar.Sport,
+										design: ArticleDesign.Gallery,
+										display: ArticleDisplay.Standard,
+									},
 								},
 								{
 									...aBasicLink,

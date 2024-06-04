@@ -2367,39 +2367,9 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	}
 };
 
-const cardBorderTopLight: PaletteFunction = ({ theme, design }) => {
-	if (theme === ArticleSpecial.SpecialReportAlt) {
-		return sourcePalette.neutral[60];
-	}
-	if (theme === ArticleSpecial.SpecialReport) {
-		return sourcePalette.brandAlt[400];
-	}
-	if (theme === ArticleSpecial.Labs) return sourcePalette.labs[400];
-	if (design === ArticleDesign.Analysis) {
-		switch (theme) {
-			case Pillar.News:
-			case Pillar.Opinion:
-				return pillarPalette(theme, 300);
-			case Pillar.Lifestyle:
-			case Pillar.Culture:
-			case Pillar.Sport:
-				return pillarPalette(theme, 400);
-		}
-	}
-	switch (theme) {
-		case Pillar.Opinion:
-			return sourcePalette.opinion[300];
-		case Pillar.News:
-		case Pillar.Lifestyle:
-		case Pillar.Culture:
-		case Pillar.Sport:
-			return pillarPalette(theme, 400);
-	}
-};
+const cardBorderTopLight: PaletteFunction = () => sourcePalette.neutral[73];
 
-const cardBorderTopDark = (): string => {
-	return sourcePalette.neutral[20];
-};
+const cardBorderTopDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const cardBorderSupportingLight: PaletteFunction = (format) => {
 	switch (format.design) {

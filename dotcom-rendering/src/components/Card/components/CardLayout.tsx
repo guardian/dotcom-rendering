@@ -7,6 +7,7 @@ const padding = 20;
 
 type Props = {
 	children: React.ReactNode;
+	cardBackgroundColour: string;
 	imageType: CardImageType | undefined;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
@@ -90,6 +91,7 @@ const decidePosition = (
 
 export const CardLayout = ({
 	children,
+	cardBackgroundColour,
 	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	minWidthInPixels,
@@ -111,6 +113,7 @@ export const CardLayout = ({
 				imageType,
 			),
 		]}
+		style={{ backgroundColor: cardBackgroundColour }}
 	>
 		{children}
 	</div>

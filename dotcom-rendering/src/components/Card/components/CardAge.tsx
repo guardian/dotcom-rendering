@@ -1,32 +1,21 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, timeAgo } from '@guardian/libs';
-import {
-	textSans12,
-	textSansBold12,
-	until,
-} from '@guardian/source/foundations';
+import { timeAgo } from '@guardian/libs';
+import { from, textSans12, textSansBold12 } from '@guardian/source/foundations';
+import { isUnsupportedFormatForCardWithoutBackground } from '../../../lib/cardHelpers';
 import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
-import type { DCRContainerPalette } from '../../../types/front';
 import { DateTime } from '../../DateTime';
 
 type Props = {
 	format: ArticleFormat;
 	absoluteServerTimes: boolean;
-	containerPalette?: DCRContainerPalette;
 	webPublicationDate: string;
 	showClock?: boolean;
-	isDynamo?: true;
 	isOnwardContent?: boolean;
 	isTagPage: boolean;
 };
 
-const ageStyles = (
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
-	isDynamo?: true,
-	isOnwardsContent?: boolean,
-) => {
+const ageStyles = (format: ArticleFormat, isOnwardsContent?: boolean) => {
 	return css`
 		${textSans12};
 		/**
@@ -34,19 +23,16 @@ const ageStyles = (
 		 * This has been done because the styles do not directly map to the new presets.
 		 * Please speak to your team's designer and update this to use a more appropriate preset.
 		 */
-		line-height: 1.15;
-		margin-top: -4px;
+		line-height: 1.25;
+		${from.tablet} {
+			line-height: 1.15;
+		}
+
 		color: ${isOnwardsContent
 			? palette('--card-footer-onwards-content')
 			: palette('--card-footer-text')};
 
-		/* Provide side padding for positioning and also to keep spacing
-		between any sibings (like Lines) */
-		padding-left: 5px;
-		padding-right: 5px;
-		${until.tablet} {
-			line-height: 1.25;
-		}
+		margin-top: -4px;
 
 		svg {
 			fill: ${isOnwardsContent
@@ -59,9 +45,7 @@ const ageStyles = (
 		}
 
 		> time {
-			${format.design === ArticleDesign.Gallery ||
-			format.design === ArticleDesign.Audio ||
-			format.design === ArticleDesign.Video
+			${isUnsupportedFormatForCardWithoutBackground(format)
 				? textSansBold12
 				: textSans12};
 		}
@@ -70,10 +54,8 @@ const ageStyles = (
 
 export const CardAge = ({
 	format,
-	containerPalette,
 	webPublicationDate,
 	showClock,
-	isDynamo,
 	isOnwardContent,
 	absoluteServerTimes,
 	isTagPage,
@@ -83,9 +65,7 @@ export const CardAge = ({
 	}
 
 	return (
-		<span
-			css={ageStyles(format, containerPalette, isDynamo, isOnwardContent)}
-		>
+		<span css={ageStyles(format, isOnwardContent)}>
 			{showClock && <ClockIcon />}
 			{isTagPage ? (
 				<DateTime

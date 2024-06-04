@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
@@ -7,9 +8,11 @@ import {
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { isUnsupportedFormatForCardWithoutBackground } from '../../lib/cardHelpers';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
+import { palette as themePalette } from '../../palette';
 import type { Branding } from '../../types/branding';
 import type { StarRating as Rating } from '../../types/content';
 import type {
@@ -173,12 +176,10 @@ const DecideFooter = ({
 const CommentFooter = ({
 	hasSublinks,
 	palette,
-
 	renderFooter,
 }: {
 	hasSublinks?: boolean;
 	palette: Palette;
-
 	renderFooter: RenderFooter;
 }) => {
 	return hasSublinks ? (
@@ -251,6 +252,8 @@ const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
 	return timeDiffHours <= 12;
 };
+
+const overrideHoverStylesForSublinks = css``;
 
 export const Card = ({
 	linkTo,
@@ -327,10 +330,8 @@ export const Card = ({
 		return (
 			<CardAge
 				format={format}
-				containerPalette={containerPalette}
 				webPublicationDate={webPublicationDate}
 				showClock={showClock}
-				isDynamo={isDynamo}
 				isOnwardContent={isOnwardContent}
 				absoluteServerTimes={absoluteServerTimes}
 				isTagPage={isTagPage}
@@ -420,6 +421,22 @@ export const Card = ({
 		isPlayableMediaCard,
 	});
 
+	const cardBackgroundColour = isOnwardContent
+		? themePalette('--onward-content-card-background')
+		: themePalette('--card-background');
+
+	/**
+	 * For cards in standard containers, we include additional padding for
+	 * cards with background colours (which are Audio, Video, Gallery designs)
+	 *
+	 * For onward content cards, we include additional padding for all formats
+	 * due to their hover state
+	 */
+	const hasAdditionalPadding =
+		(!containerPalette &&
+			isUnsupportedFormatForCardWithoutBackground(format)) ||
+		isOnwardContent;
+
 	return (
 		<CardWrapper
 			format={format}
@@ -435,6 +452,7 @@ export const Card = ({
 				isExternalLink={isExternalLink}
 			/>
 			<CardLayout
+				cardBackgroundColour={cardBackgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
@@ -583,14 +601,15 @@ export const Card = ({
 					<ContentWrapper
 						imageType={media?.type}
 						imageSize={imageSize}
-						imagePositionOnDesktop={imagePositionOnDesktop}
+						imagePositionOnMobile={
+							media ? imagePositionOnMobile : 'none'
+						}
+						imagePositionOnDesktop={
+							media ? imagePositionOnDesktop : 'none'
+						}
+						addAdditionalPadding={hasAdditionalPadding}
 					>
-						<HeadlineWrapper
-							imagePositionOnMobile={imagePositionOnMobile}
-							imagePositionOnDesktop={imagePositionOnDesktop}
-							imageUrl={image?.src}
-							hasStarRating={starRating !== undefined}
-						>
+						<HeadlineWrapper>
 							<CardHeadline
 								headlineText={headlineText}
 								format={format}
@@ -684,21 +703,30 @@ export const Card = ({
 				)}
 			</CardLayout>
 
-			{hasSublinks && sublinkPosition === 'outer' && (
-				<SupportingContent
-					supportingContent={supportingContent}
-					containerPalette={containerPalette}
-					isDynamo={isDynamo}
-					alignment={supportingContentAlignment}
-				/>
-			)}
-			{showCommentLinesFooter && (
-				<CommentFooter
-					hasSublinks={hasSublinks}
-					palette={palette}
-					renderFooter={renderFooter}
-				/>
-			)}
+			<div style={{ backgroundColor: cardBackgroundColour }}>
+				<div
+					css={overrideHoverStylesForSublinks}
+					style={{
+						padding: hasAdditionalPadding ? `0 ${space[2]}px` : 0,
+					}}
+				>
+					{hasSublinks && sublinkPosition === 'outer' && (
+						<SupportingContent
+							supportingContent={supportingContent}
+							containerPalette={containerPalette}
+							isDynamo={isDynamo}
+							alignment={supportingContentAlignment}
+						/>
+					)}
+				</div>
+				{showCommentLinesFooter && (
+					<CommentFooter
+						hasSublinks={hasSublinks}
+						palette={palette}
+						renderFooter={renderFooter}
+					/>
+				)}
+			</div>
 		</CardWrapper>
 	);
 };
