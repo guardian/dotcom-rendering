@@ -10,23 +10,41 @@ type Props = {
 };
 
 const ONE_MINUTE = 60_000;
-const getCurrentMinute = (then: number) =>
-	then + Math.floor((Date.now() - then) / ONE_MINUTE) * ONE_MINUTE;
+/** Get the duration between two timestamp, with arbitrary precision */
+const getDuration = ({
+	then,
+	now,
+	precision,
+}: {
+	then: number;
+	now: number;
+	precision: number;
+}) => Math.floor((now - then) / precision) * precision;
 
 /**
  * Wrapper around `timeAgo` which:
  * - handles dates in the future
- * - always returns a `string`
+ * - always returns a `string`, using “now” for future dates
+ * - floors `now` to the nearest minute in the client
  */
-const relativeTime = (then: number, now: number): string => {
-	const value = timeAgo(then, { now });
-	return isString(value)
-		? value
-		: new Date(then).toLocaleString('en-GB', {
-				day: 'numeric',
-				month: 'short',
-				year: 'numeric',
-		  });
+const relativeTime = (
+	then: number,
+	now: number,
+	environment: 'server' | 'client',
+): string => {
+	const time = timeAgo(then, {
+		now:
+			environment === 'server'
+				? now
+				: then +
+				  getDuration({
+						then,
+						now: Date.now(),
+						precision: ONE_MINUTE,
+				  }),
+	});
+
+	return isString(time) ? time : 'now';
 };
 
 /**
@@ -38,16 +56,16 @@ const relativeTime = (then: number, now: number): string => {
  */
 export const RelativeTime = ({ then, now }: Props) => {
 	const [inView, ref] = useIsInView({ repeat: true });
-	const [display, setDisplay] = useState(relativeTime(then, now));
+	const [display, setDisplay] = useState(relativeTime(then, now, 'server'));
 
 	useEffect(() => {
-		setDisplay(relativeTime(then, getCurrentMinute(then)));
+		const updateDisplay = () =>
+			setDisplay(relativeTime(then, now, 'client'));
+		updateDisplay();
 		if (!inView) return;
-		const interval = setInterval(() => {
-			setDisplay(relativeTime(then, getCurrentMinute(then)));
-		}, ONE_MINUTE);
+		const interval = setInterval(updateDisplay, ONE_MINUTE);
 		return () => clearInterval(interval);
-	}, [inView, then]);
+	}, [inView, now, then]);
 
 	const date = new Date(then);
 
