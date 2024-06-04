@@ -22,10 +22,8 @@ import {
 Lazy.disabled = isChromatic();
 Picture.disableLazyLoading = isChromatic();
 
-if (isChromatic()) {
-	// Fix the date to prevent false negatives
-	MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
-}
+// Fix the date to prevent false negatives
+MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
 
 mockRESTCalls();
 
