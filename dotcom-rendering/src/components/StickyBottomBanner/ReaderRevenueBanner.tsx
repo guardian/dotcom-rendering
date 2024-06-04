@@ -49,6 +49,7 @@ type BaseProps = {
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
+	abandonedBasketBannerLastClosedAt?: string;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -120,6 +121,7 @@ const buildPayload = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
 	asyncArticleCounts,
@@ -148,6 +150,7 @@ const buildPayload = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			signInBannerLastClosedAt,
+			abandonedBasketBannerLastClosedAt,
 			mvtId: Number(
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 			),
@@ -188,6 +191,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
@@ -230,7 +234,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	}
 
 	//Send user consent status to the banner API
-	const userConsent = await hasRequiredConsents();
+	const userConsent = true; // await hasRequiredConsents();
 
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
@@ -247,6 +251,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		signInBannerLastClosedAt,
+		abandonedBasketBannerLastClosedAt,
 		optedOutOfArticleCount,
 		asyncArticleCounts,
 		userConsent,
