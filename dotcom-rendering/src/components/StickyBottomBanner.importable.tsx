@@ -142,6 +142,10 @@ const buildRRBannerConfigWith = ({
 						signInBannerLastClosedAt: getBannerLastClosedAt(
 							'signInBannerLastClosedAt',
 						),
+						abandonedBasketBannerLastClosedAt:
+							getBannerLastClosedAt(
+								'abandonedBasketLastClosedAt',
+							),
 						isPreview,
 						idApiUrl,
 						signInGateWillShow,
