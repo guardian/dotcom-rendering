@@ -39,10 +39,6 @@ const ageStyles = (
 			? palette('--card-footer-onwards-content')
 			: palette('--card-footer-text')};
 
-		/* Provide side padding for positioning and also to keep spacing
-		between any sibings (like Lines) */
-		padding-left: 5px;
-		padding-right: 5px;
 		${until.tablet} {
 			line-height: 1.25;
 		}

@@ -20,8 +20,7 @@ export const HeadlineWrapper = ({
 	<div
 		css={css`
 			padding-bottom: 8px;
-			padding-left: 5px;
-			padding-right: 5px;
+
 			padding-top: ${imageUrl &&
 			imagePositionOnMobile &&
 			(imagePositionOnMobile === 'left' ||

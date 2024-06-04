@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -21,7 +20,7 @@ type Props = {
 	isOnwardContent?: boolean;
 };
 
-const baseCardStyles = (isOnwardContent: boolean) => css`
+const baseCardStyles = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -41,6 +40,12 @@ const baseCardStyles = (isOnwardContent: boolean) => css`
 		}
 	}
 
+	/* a tag specific styles */
+	color: inherit;
+	text-decoration: none;
+`;
+
+const hoverStyles = css`
 	:hover .image-overlay {
 		position: absolute;
 		top: 0;
@@ -49,126 +54,38 @@ const baseCardStyles = (isOnwardContent: boolean) => css`
 		left: 0;
 		background-color: ${sourcePalette.neutral[7]};
 		opacity: 0.1;
-		border-radius: ${isOnwardContent ? space[2] : 0}px;
 	}
 
-	/* a tag specific styles */
-	color: inherit;
-	text-decoration: none;
-`;
-
-const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
-	switch (thePalette) {
-		case 'EventPalette':
-			return `96%`;
-		case 'BreakingPalette':
-			return `85%`;
-		case 'EventAltPalette':
-			return `95%`;
-		case 'InvestigationPalette':
-			return `90%`;
-		case 'LongRunningPalette':
-			return `84%`;
-		case 'LongRunningAltPalette':
-			return `95%`;
-		case 'SombrePalette':
-			return `90%`;
-		case 'SombreAltPalette':
-			return `85%`;
-		case 'SpecialReportAltPalette':
-			return `95%`;
-		default:
-			return `90%`;
-	}
-};
-
-const hoverStyles = (
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
-) => {
-	if (containerPalette) {
-		return css`
-			:hover {
-				filter: brightness(
-					${decidePaletteBrightness(containerPalette)}
-				);
-			}
-		`;
-	}
-
-	if (
-		format.theme === ArticleSpecial.SpecialReport ||
-		format.theme === ArticleSpecial.SpecialReportAlt
-	) {
-		return css`
-			:hover {
-				filter: brightness(90%);
-			}
-		`;
-	}
-
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-		case ArticleDesign.LiveBlog:
-			return css`
-				:hover {
-					filter: brightness(90%);
-				}
-			`;
-		default:
-			return css`
-				:hover {
-					background-color: ${palette('--card-background-hover')};
-				}
-			`;
-	}
-};
-
-const cardStyles = css`
-	background-color: ${palette('--card-background')};
-`;
-
-const onwardContentCardStyles = css`
-	background-color: ${palette('--onward-content-card-background')};
-	border-radius: ${space[2]}px;
-`;
-
-const onwardContentHoverStyles = css`
-	:hover {
-		background-color: ${palette('--onward-content-card-hover')};
+	:hover h3 > span {
+		text-decoration: underline;
+		text-underline-position: under;
+		text-underline-offset: 0.05rem;
 	}
 `;
 
-const topBarStyles = ({ isDynamo }: { isDynamo?: true }) => {
-	/* Styling for top bar */
-	const baseStyles = css`
-		background-color: ${isDynamo
-			? palette('--card-kicker-text')
-			: palette('--card-border-top')};
-		content: '';
-		height: 1px;
-		z-index: 2;
-		width: 100%;
-	`;
+/* Styling for top bar */
+const baseTopBarStyles = css`
+	border-top: 1px solid ${palette('--card-border-top')};
+	content: '';
+	z-index: 2;
+	width: 100%;
+	margin-bottom: ${space[2]}px;
+`;
 
-	if (isDynamo) {
-		return css`
-			:before {
-				${baseStyles}
-				${from.phablet} {
-					width: 25%;
-				}
-			}
-		`;
+const topBarStyles = css`
+	:before {
+		${baseTopBarStyles}
 	}
-	return css`
-		:before {
-			${baseStyles}
+`;
+
+const topBarDynamoStyles = css`
+	:before {
+		${baseTopBarStyles}
+		${from.phablet} {
+			width: 25%;
 		}
-	`;
-};
+	}
+`;
 
 export const CardWrapper = ({
 	children,
@@ -186,13 +103,20 @@ export const CardWrapper = ({
 			>
 				<div
 					css={[
-						baseCardStyles(isOnwardContent),
-						isOnwardContent ? onwardContentCardStyles : cardStyles,
-						isOnwardContent
-							? onwardContentHoverStyles
-							: hoverStyles(format, containerPalette),
-						showTopBar && topBarStyles({ isDynamo }),
+						baseCardStyles,
+						hoverStyles,
+						showTopBar &&
+							(isDynamo ? topBarDynamoStyles : topBarStyles),
 					]}
+					// Dynamic styles are better in the style prop
+					style={{
+						borderRadius: `${isOnwardContent ? space[2] : 0}px`,
+						backgroundColor: `${
+							isOnwardContent
+								? palette('--onward-content-card-background')
+								: palette('--card-background')
+						}`,
+					}}
 				>
 					{children}
 				</div>
