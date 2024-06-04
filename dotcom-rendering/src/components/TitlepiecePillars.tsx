@@ -33,7 +33,7 @@ const pillarLink = css`
 	${headlineBold14}
 	text-decoration: none;
 
-	// TODO - set this in palette and retrieve as CSS var
+	/* TODO - set this in palette and retrieve as CSS var */
 	background-color: ${sourcePalette.brand[400]};
 	color: ${sourcePalette.neutral[100]};
 
