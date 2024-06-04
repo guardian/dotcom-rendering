@@ -65,6 +65,7 @@ const pillarLink = css`
 `;
 
 const firstPillarLinkOverrides = css`
+	/* width: calc(100% - ${pillarLeftMarginPx}px); */
 	a {
 		margin-left: 0;
 
@@ -166,6 +167,12 @@ const pillarBlock = css`
 		width: 136px;
 	}
 `;
+
+// TODO - implement veggie burger menu
+// const burgerPositionOverrides = css`
+// 	left: 6px;
+// 	bottom: 10px;
+// `;
 
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
