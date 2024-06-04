@@ -4782,11 +4782,22 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 const seriesTitleMatchTextLight: PaletteFunction = (format) => {
 	if (
 		format.design === ArticleDesign.MatchReport ||
-		format.design === ArticleDesign.LiveBlog
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
 	) {
 		return sourcePalette.neutral[7];
 	}
 	return seriesTitleTextLight(format);
+};
+const seriesTitleMatchTextDark: PaletteFunction = (format) => {
+	if (
+		format.design === ArticleDesign.MatchReport ||
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
+		return sourcePalette.neutral[7];
+	}
+	return seriesTitleTextDark(format);
 };
 
 const recaptchaButtonLight: PaletteFunction = () => sourcePalette.neutral[0];
@@ -6340,7 +6351,7 @@ const paletteColours = {
 	},
 	'--series-title-match-text': {
 		light: seriesTitleMatchTextLight,
-		dark: seriesTitleTextDark,
+		dark: seriesTitleMatchTextDark,
 	},
 	'--series-title-text': {
 		light: seriesTitleTextLight,
