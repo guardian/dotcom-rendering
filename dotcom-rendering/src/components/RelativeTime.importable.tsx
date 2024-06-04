@@ -1,4 +1,4 @@
-import { timeAgo } from '@guardian/libs';
+import { isString, timeAgo } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../lib/useIsInView';
 
@@ -13,6 +13,17 @@ const ONE_MINUTE = 60_000;
 const getCurrentMinute = (then: number) =>
 	then + Math.floor((Date.now() - then) / ONE_MINUTE) * ONE_MINUTE;
 
+const relativeTime = (then: number, now: number): string => {
+	const value = timeAgo(then, { now });
+	return isString(value)
+		? value
+		: new Date(then).toLocaleString('en-GB', {
+				day: 'numeric',
+				month: 'short',
+				year: 'numeric',
+		  });
+};
+
 /**
  * Shows a recent time as relative, such as “3h ago”
  *
@@ -23,14 +34,14 @@ const getCurrentMinute = (then: number) =>
 export const RelativeTime = ({ then, now }: Props) => {
 	const [inView, ref] = useIsInView({ repeat: true });
 
-	const [display, setDisplay] = useState(timeAgo(then, { now }));
+	const [display, setDisplay] = useState(relativeTime(then, now));
 
 	useEffect(() => {
-		setDisplay(timeAgo(then, { now: getCurrentMinute(then) }));
+		setDisplay(relativeTime(then, getCurrentMinute(then)));
 		if (!inView) return;
 
 		const interval = setInterval(() => {
-			setDisplay(timeAgo(then, { now: getCurrentMinute(then) }));
+			setDisplay(relativeTime(then, getCurrentMinute(then)));
 		}, ONE_MINUTE);
 		return () => clearInterval(interval);
 	}, [inView, then]);
