@@ -163,9 +163,9 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				case ArticleDisplay.Immersive:
 					return css`
 						padding-bottom: 18px;
-						padding-top: ${space[2]}px;
+						padding-top: 0;
 						${from.tablet} {
-							padding-bottom: 2px;
+							padding-bottom: 0;
 						}
 					`;
 				case ArticleDisplay.Showcase:

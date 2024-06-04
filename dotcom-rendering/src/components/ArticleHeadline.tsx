@@ -307,7 +307,7 @@ const decideBottomPadding = ({
 					if (format.display === ArticleDisplay.Showcase) {
 						return css`
 							padding-bottom: ${space[1]}px;
-							${from.desktop} {
+							${from.tablet} {
 								padding-bottom: ${space[6]}px;
 							}
 						`;
