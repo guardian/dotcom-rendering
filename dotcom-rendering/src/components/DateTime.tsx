@@ -50,8 +50,7 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 
 const ONE_MINUTE = 60_000;
 /** Rounded up to the next minute as most pages are cached for a least a minute */
-const getServerTime = (then: number, precision = ONE_MINUTE) =>
-	Math.ceil(Math.max(then, Date.now()) / precision) * precision;
+const getServerTime = () => Math.ceil(Date.now() / ONE_MINUTE) * ONE_MINUTE;
 
 export const DateTime = ({
 	date,
@@ -73,7 +72,7 @@ export const DateTime = ({
 				now={
 					absoluteServerTimes
 						? Number.MAX_SAFE_INTEGER - 1
-						: getServerTime(then)
+						: getServerTime()
 				}
 			/>
 		</Island>

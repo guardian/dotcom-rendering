@@ -13,6 +13,11 @@ const ONE_MINUTE = 60_000;
 const getCurrentMinute = (then: number) =>
 	then + Math.floor((Date.now() - then) / ONE_MINUTE) * ONE_MINUTE;
 
+/**
+ * Wrapper around `timeAgo` which:
+ * - handles dates in the future
+ * - always returns a `string`
+ */
 const relativeTime = (then: number, now: number): string => {
 	const value = timeAgo(then, { now });
 	return isString(value)
@@ -33,12 +38,11 @@ const relativeTime = (then: number, now: number): string => {
  */
 export const RelativeTime = ({ then, now }: Props) => {
 	const [inView, ref] = useIsInView({ repeat: true });
-
 	const [display, setDisplay] = useState(relativeTime(then, now));
 
 	useEffect(() => {
-		setDisplay(relativeTime(then, getCurrentMinute(then)));
 		if (!inView) return;
+		setDisplay(relativeTime(then, getCurrentMinute(then)));
 
 		const interval = setInterval(() => {
 			setDisplay(relativeTime(then, getCurrentMinute(then)));
