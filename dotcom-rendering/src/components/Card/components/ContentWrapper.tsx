@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
+import { decideCardContentPadding } from '../../../lib/decideCardContentPadding';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 const sizingStyles = css`
@@ -60,26 +61,68 @@ const flexBasisStyles = ({
 	}
 };
 
+const negativeTopMargin = css`
+	/**
+	 * This ensures the top of the text is flush
+	 * with the image for a horizontal card
+	 */
+	margin-top: calc(1px - ${space[1]}px);
+`;
+const negativeTopMarginDesktop = css`
+	${from.tablet} {
+		${negativeTopMargin}
+	}
+`;
+
+const negativeTopMarginMobile = css`
+	${until.tablet} {
+		${negativeTopMargin}
+	}
+`;
+
 type Props = {
 	children: React.ReactNode;
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
+	imagePositionOnMobile: ImagePositionType;
 	imagePositionOnDesktop: ImagePositionType;
+	addAdditionalPadding?: boolean;
 };
 
 export const ContentWrapper = ({
 	children,
 	imageType,
 	imageSize,
+	imagePositionOnMobile,
 	imagePositionOnDesktop,
+	addAdditionalPadding,
 }: Props) => {
-	const isHorizontal =
+	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+	const isHorizontalOnMobile =
+		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
+
+	const { mobilePadding, desktopPadding } = decideCardContentPadding({
+		imagePositionOnMobile,
+		imagePositionOnDesktop,
+		addAdditionalPadding,
+	});
+
 	return (
 		<div
 			css={[
 				sizingStyles,
-				isHorizontal && flexBasisStyles({ imageSize, imageType }),
+				isHorizontalOnDesktop && [
+					flexBasisStyles({ imageSize, imageType }),
+					negativeTopMarginDesktop,
+				],
+				isHorizontalOnMobile && negativeTopMarginMobile,
+				css`
+					padding: ${mobilePadding};
+					${from.tablet} {
+						padding: ${desktopPadding};
+					}
+				`,
 			]}
 		>
 			{children}
