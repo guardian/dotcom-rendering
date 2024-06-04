@@ -40,6 +40,7 @@ type Props = {
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
+	isSublink?: boolean;
 	isExternalLink?: boolean;
 	isOnwardContent?: boolean;
 };
@@ -171,7 +172,6 @@ const sublinkStyles = css`
 		color: inherit;
 		text-decoration: none;
 		.show-underline {
-			text-underline-offset: -5%;
 			text-decoration: underline;
 		}
 	}
@@ -196,7 +196,7 @@ const lineStyles = css`
 
 const dynamoStyles = css`
 	display: block;
-	padding: 5px;
+	padding: ${space[1]}px;
 `;
 
 export const WithLink = ({
@@ -240,6 +240,7 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 	isDynamo,
+	isSublink,
 	isExternalLink,
 	isOnwardContent = false,
 }: Props) => {
@@ -250,6 +251,9 @@ export const CardHeadline = ({
 	return (
 		<>
 			<h3
+				className={`${
+					isSublink ? 'card-sublink-headline' : 'card-headline'
+				}`}
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)

@@ -20,12 +20,11 @@ type ColourName = Parameters<typeof palette>[0];
  * Add CSS custom property overrides for palette colours in a given container
  */
 export const ContainerOverrides = ({ containerPalette, children }: Props) => {
-	const { text, background, topBar, border } = containerPalette
+	const { text, background, border } = containerPalette
 		? decideContainerOverrides(containerPalette)
 		: {
 				text: undefined,
 				background: undefined,
-				topBar: undefined,
 				border: undefined,
 		  };
 
@@ -38,7 +37,6 @@ export const ContainerOverrides = ({ containerPalette, children }: Props) => {
 		'--kicker-background-live': background?.liveKicker,
 		'--kicker-pulsing-dot-live': background?.pulsingDot,
 		'--byline': text?.cardByline,
-		'--card-border-top': topBar?.card,
 		'--carousel-text': text?.container,
 		'--carousel-title-highlight': text?.container,
 		'--carousel-border': border?.lines,

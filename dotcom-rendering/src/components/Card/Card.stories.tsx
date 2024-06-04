@@ -577,6 +577,11 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 							...aBasicLink,
 							headline: 'Headline 2',
 							kickerText: 'Kicker',
+							format: {
+								theme: Pillar.Sport,
+								design: ArticleDesign.Gallery,
+								display: ArticleDisplay.Standard,
+							},
 						},
 						{
 							...aBasicLink,
@@ -1204,6 +1209,11 @@ export const DynamoWithSpecialPaletteVariations = () => {
 									...aBasicLink,
 									headline: 'Headline 2',
 									kickerText: 'Kicker',
+									format: {
+										theme: Pillar.Sport,
+										design: ArticleDesign.Gallery,
+										display: ArticleDisplay.Standard,
+									},
 								},
 								{
 									...aBasicLink,

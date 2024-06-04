@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source/foundations';
+import { isUnsupportedFormatForCardWithoutBackground } from '../lib/cardHelpers';
 import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { CardHeadline } from './CardHeadline';
@@ -19,9 +20,7 @@ type Props = {
 const wrapperStyles = css`
 	position: relative;
 	display: flex;
-	padding-left: 4px;
-	padding-right: 4px;
-	padding-bottom: 4px;
+	padding: 4px 0;
 	@media (pointer: coarse) {
 		padding-bottom: 0;
 	}
@@ -48,11 +47,11 @@ const dynamoStyles = css`
 	column-gap: 4px;
 	width: 100%;
 	padding: 0;
-
 	${from.tablet} {
 		margin-top: 4px;
 		flex-direction: row;
 		position: relative;
+		background-color: transparent;
 	}
 `;
 
@@ -113,6 +112,7 @@ export const SupportingContent = ({
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
 			<ul
+				className="sublinks"
 				css={[
 					wrapperStyles,
 					isDynamo ? dynamoStyles : directionStyles(alignment),
@@ -125,6 +125,18 @@ export const SupportingContent = ({
 					const shouldPadLeft =
 						!isDynamo && index > 0 && alignment === 'horizontal';
 					const isLast = index === length - 1;
+
+					/** Force the format design to be Standard if sublink format
+					 * is not compatible with transparent backgrounds */
+					const subLinkFormat = {
+						...subLink.format,
+						design: isUnsupportedFormatForCardWithoutBackground(
+							subLink.format,
+						)
+							? ArticleDesign.Standard
+							: subLink.format.design,
+					};
+
 					return (
 						<li
 							key={subLink.url}
@@ -144,12 +156,12 @@ export const SupportingContent = ({
 							]}
 							data-link-name={`sublinks | ${index + 1}`}
 						>
-							<FormatBoundary format={subLink.format}>
+							<FormatBoundary format={subLinkFormat}>
 								<ContainerOverrides
 									containerPalette={containerPalette}
 								>
 									<CardHeadline
-										format={subLink.format}
+										format={subLinkFormat}
 										size="tiny"
 										hideLineBreak={true}
 										showLine={true}
@@ -159,6 +171,7 @@ export const SupportingContent = ({
 											subLink.format.design ===
 											ArticleDesign.LiveBlog
 										}
+										isSublink={true}
 										headlineText={subLink.headline}
 										kickerText={subLink.kickerText}
 									/>
