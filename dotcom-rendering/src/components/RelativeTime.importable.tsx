@@ -23,8 +23,8 @@ const getDuration = ({
 
 /**
  * Wrapper around `timeAgo` which:
- * - handles dates in the future
- * - always returns a `string`, using “now” for future dates
+ * - handles dates in the future with “now”
+ * - always returns a `string`
  * - floors `now` to the nearest minute in the client
  */
 const relativeTime = (
