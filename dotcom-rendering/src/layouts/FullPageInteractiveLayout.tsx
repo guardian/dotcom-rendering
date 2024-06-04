@@ -5,7 +5,7 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	adContainerStyles,
 	MobileStickyContainer,
@@ -15,6 +15,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
+import { Masthead } from '../components/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -134,6 +135,9 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	// often reach readers who are less familiar with the Guardian.
 	const isSlimNav = !article.config.switches.interactiveFullHeaderSwitch;
 
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -205,76 +209,109 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 				</Stuck>
 			)}
 
-			{format.theme !== ArticleSpecial.Labs && (
-				<div data-print-layout="hide">
-					<Section
-						fullWidth={true}
-						shouldCenter={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						backgroundColour={sourcePalette.brand[400]}
-						element="header"
-					>
-						<Header
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							urls={article.nav.readerRevenueLinks.header}
-							remoteHeader={
-								!!article.config.switches.remoteHeader
-							}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
-							idApiUrl={article.config.idApiUrl}
-							headerTopBarSearchCapiSwitch={
-								!!article.config.switches.headerTopBarSearchCapi
-							}
-						/>
-					</Section>
-				</div>
-			)}
-
-			<Section
-				fullWidth={true}
-				borderColour={sourcePalette.brand[600]}
-				showTopBorder={false}
-				padSides={false}
-				backgroundColour={sourcePalette.brand[400]}
-				element="nav"
-			>
-				<Nav
-					isImmersive={format.display === ArticleDisplay.Immersive}
-					displayRoundel={
-						format.display === ArticleDisplay.Immersive ||
-						format.theme === ArticleSpecial.Labs
-					}
-					selectedPillar={NAV.selectedPillar}
+			{inUpdatedHeaderABTest ? (
+				<Masthead
 					nav={NAV}
+					editionId={article.editionId}
+					idUrl={article.config.idUrl}
+					mmaUrl={article.config.mmaUrl}
 					subscribeUrl={
 						article.nav.readerRevenueLinks.header.subscribe
 					}
-					editionId={article.editionId}
+					discussionApiUrl={article.config.discussionApiUrl}
+					idApiUrl={article.config.idApiUrl}
+					contributionsServiceUrl={article.contributionsServiceUrl}
+					showSubNav={false}
+					isImmersive={false}
+					displayRoundel={false}
+					hasPageSkin={false}
+					hasPageSkinContentSelfConstrain={false}
 				/>
-			</Section>
+			) : (
+				<>
+					{format.theme !== ArticleSpecial.Labs && (
+						<div data-print-layout="hide">
+							<Section
+								fullWidth={true}
+								shouldCenter={false}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="header"
+							>
+								<Header
+									editionId={article.editionId}
+									idUrl={article.config.idUrl}
+									mmaUrl={article.config.mmaUrl}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									urls={article.nav.readerRevenueLinks.header}
+									remoteHeader={
+										!!article.config.switches.remoteHeader
+									}
+									contributionsServiceUrl={
+										article.contributionsServiceUrl
+									}
+									idApiUrl={article.config.idApiUrl}
+									headerTopBarSearchCapiSwitch={
+										!!article.config.switches
+											.headerTopBarSearchCapi
+									}
+								/>
+							</Section>
+						</div>
+					)}
 
-			{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
-				<Section
-					fullWidth={true}
-					backgroundColour={themePalette('--article-background')}
-					padSides={false}
-					element="aside"
-				>
-					<Island priority="enhancement" defer={{ until: 'idle' }}>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							position="header"
+					<Section
+						fullWidth={true}
+						borderColour={sourcePalette.brand[600]}
+						showTopBorder={false}
+						padSides={false}
+						backgroundColour={sourcePalette.brand[400]}
+						element="nav"
+					>
+						<Nav
+							isImmersive={
+								format.display === ArticleDisplay.Immersive
+							}
+							displayRoundel={
+								format.display === ArticleDisplay.Immersive ||
+								format.theme === ArticleSpecial.Labs
+							}
+							selectedPillar={NAV.selectedPillar}
+							nav={NAV}
+							subscribeUrl={
+								article.nav.readerRevenueLinks.header.subscribe
+							}
+							editionId={article.editionId}
 						/>
-					</Island>
-				</Section>
+					</Section>
+
+					{NAV.subNavSections &&
+						format.theme !== ArticleSpecial.Labs && (
+							<Section
+								fullWidth={true}
+								backgroundColour={themePalette(
+									'--article-background',
+								)}
+								padSides={false}
+								element="aside"
+							>
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
+									<SubNav
+										subNavSections={NAV.subNavSections}
+										currentNavLink={NAV.currentNavLink}
+										position="header"
+									/>
+								</Island>
+							</Section>
+						)}
+				</>
 			)}
 		</section>
 	);
@@ -393,7 +430,6 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						isPaidContent={article.pageType.isPaidContent}
 						isPreview={!!article.config.isPreview}
 						isSensitive={article.config.isSensitive}
-						keywordIds={article.config.keywordIds}
 						pageId={article.pageId}
 						sectionId={article.config.section}
 						shouldHideReaderRevenue={

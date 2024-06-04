@@ -2,11 +2,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
-import { headline, space, textSans14 } from '@guardian/source-foundations';
+import {
+	headlineBold17,
+	headlineLight17,
+	space,
+	textSans14,
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette } from '../palette';
 import type { TableOfContentsItem } from '../types/frontend';
@@ -29,10 +34,10 @@ const paddingStyles = css`
 `;
 
 const listItemStyles = (format: ArticleFormat) => {
-	const fontWeight =
-		format.display === ArticleDisplay.Immersive ? 'light' : 'bold';
 	return css`
-		${headline.xxxsmall({ fontWeight })};
+		${format.display === ArticleDisplay.Immersive
+			? headlineLight17
+			: headlineBold17};
 		box-sizing: border-box;
 		border-top: 1px solid ${palette('--table-of-contents-border')};
 		display: flex;

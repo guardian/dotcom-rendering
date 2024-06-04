@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedSmallSlowIV } from './FixedSmallSlowIV';
@@ -24,7 +24,12 @@ export const Default = () => (
 		discussionApiUrl={discussionApiUrl}
 		editionId={'UK'}
 	>
-		<FixedSmallSlowIV trails={trails} showAge={true} imageLoading="eager" />
+		<FixedSmallSlowIV
+			trails={trails}
+			showAge={true}
+			imageLoading="eager"
+			absoluteServerTimes={true}
+		/>
 	</FrontSection>
 );
 Default.storyName = 'FixedSmallSlowIV';

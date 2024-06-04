@@ -6,9 +6,9 @@ import {
 	space,
 	textSans14,
 	textSansBold17,
-} from '@guardian/source-foundations';
-import { Button, SvgTickRound } from '@guardian/source-react-components';
-import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Button, SvgTickRound } from '@guardian/source/react-components';
+import { ErrorSummary } from '@guardian/source-development-kitchen/react-components';
 import { useRef, useState } from 'react';
 import { palette as schemedPalette } from '../../palette';
 import type { CampaignFieldType } from '../../types/content';

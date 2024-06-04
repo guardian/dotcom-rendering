@@ -3,7 +3,7 @@ import {
 	headlineMedium17,
 	headlineMedium28,
 	palette,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { string as curly } from 'curlyquotes';
 import { getAgeWarning } from '../lib/age-warning';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';

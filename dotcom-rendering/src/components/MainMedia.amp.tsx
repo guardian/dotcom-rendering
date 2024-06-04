@@ -3,7 +3,7 @@ import {
 	palette,
 	textSans15,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils.amp';
 import InfoIcon from '../static/icons/info.svg';

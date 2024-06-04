@@ -7,7 +7,7 @@ import {
 	headlineBold20,
 	neutral,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import FirstPublished from 'components/FirstPublished';
 import type { Contributor } from 'contributor';
 import type { Image } from 'image';

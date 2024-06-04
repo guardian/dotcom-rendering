@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { breakpoints, from, textSans12 } from '@guardian/source-foundations';
+import {
+	between,
+	breakpoints,
+	from,
+	textSans12,
+} from '@guardian/source/foundations';
 import { trackSponsorLogoLinkClick } from '../client/ga/ga';
 import { getOphanComponents } from '../lib/labs';
 import { palette } from '../palette';
@@ -9,6 +14,37 @@ import { useConfig } from './ConfigContext';
 
 const brandingStyle = css`
 	padding-bottom: 10px;
+`;
+
+const brandingAdvertisingPartnerStyle = css`
+	margin: 4px 0 20px;
+	padding: 4px;
+	border: 1px solid ${palette('--branding-border')};
+	width: fit-content;
+
+	${from.desktop} {
+		padding: 8px;
+		width: 220px;
+	}
+	${from.leftCol} {
+		padding: 4px;
+		width: 140px;
+	}
+	${from.wide} {
+		padding: 8px;
+		width: 220px;
+	}
+`;
+
+const brandingInteractiveStyle = css`
+	${from.desktop} {
+		padding: 8px;
+		width: 220px;
+	}
+`;
+
+const labelAdvertisingPartnerStyle = css`
+	padding-bottom: 1px;
 `;
 
 const labelStyle = css`
@@ -28,6 +64,16 @@ const liveBlogLabelStyle = css`
 	}
 `;
 
+const brandingLogoAdvertisingPartnerStyle = css`
+	padding: 0;
+	& img {
+		display: block;
+		${between.leftCol.and.wide} {
+			max-width: 130px;
+		}
+	}
+`;
+
 const brandingLogoStyle = css`
 	padding: 10px 0;
 	display: block;
@@ -35,6 +81,10 @@ const brandingLogoStyle = css`
 	& img {
 		display: block;
 	}
+`;
+
+const aboutLinkAdvertisingPartnerStyle = css`
+	padding-top: 1px;
 `;
 
 const aboutLinkStyle = css`
@@ -152,19 +202,54 @@ type Props = {
 export const Branding = ({ branding, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+	const isInteractive = format.design === ArticleDesign.Interactive;
+
 	const { ophanComponentName, ophanComponentLink } = getOphanComponents({
 		branding,
 		locationPrefix: 'article-meta',
 	});
 
-	const { darkModeAvailable } = useConfig();
+	const { darkModeAvailable, updateLogoAdPartnerSwitch } = useConfig();
+
+	const isAdvertisingPartnerOrExclusive =
+		branding.logo.label.toLowerCase() === 'advertising partner' ||
+		branding.logo.label.toLowerCase() === 'exclusive advertising partner';
+
+	const isAdvertisingPartnerAndInteractive =
+		isAdvertisingPartnerOrExclusive && isInteractive;
 
 	return (
-		<div css={brandingStyle}>
-			<div css={[labelStyle, isLiveBlog && liveBlogLabelStyle]}>
+		<div
+			css={[
+				brandingStyle,
+				isAdvertisingPartnerOrExclusive &&
+					updateLogoAdPartnerSwitch &&
+					brandingAdvertisingPartnerStyle,
+				isAdvertisingPartnerAndInteractive &&
+					updateLogoAdPartnerSwitch &&
+					brandingInteractiveStyle,
+			]}
+		>
+			<div
+				css={[
+					labelStyle,
+					isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch &&
+						labelAdvertisingPartnerStyle,
+					isLiveBlog && liveBlogLabelStyle,
+				]}
+			>
 				{branding.logo.label}
 			</div>
-			<div css={brandingLogoStyle}>
+			<div
+				css={[
+					brandingLogoStyle,
+					isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch &&
+						!isInteractive &&
+						brandingLogoAdvertisingPartnerStyle,
+				]}
+			>
 				<a
 					href={branding.logo.link}
 					data-sponsor={branding.sponsorName.toLowerCase()}
@@ -181,7 +266,13 @@ export const Branding = ({ branding, format }: Props) => {
 
 			<a
 				href={branding.aboutThisLink}
-				css={[aboutLinkStyle, isLiveBlog && liveBlogAboutLinkStyle]}
+				css={[
+					aboutLinkStyle,
+					isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch &&
+						aboutLinkAdvertisingPartnerStyle,
+					isLiveBlog && liveBlogAboutLinkStyle,
+				]}
 			>
 				About this content
 			</a>

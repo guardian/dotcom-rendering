@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textSans12 } from '@guardian/source-foundations';
+import { palette, textSans12 } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { DateTime } from './DateTime';
 

@@ -5,7 +5,7 @@ import {
 	textSansBold17,
 	textSansItalic15,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { CampaignFieldType } from '../../../types/content';
 
 const fieldLabelStyles = css`

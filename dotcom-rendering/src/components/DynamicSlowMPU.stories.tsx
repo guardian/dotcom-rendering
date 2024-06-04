@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
@@ -36,6 +36,7 @@ export const NoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -57,6 +58,7 @@ export const OneBig = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -78,6 +80,7 @@ export const TwoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -103,6 +106,7 @@ export const FirstBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -128,6 +132,7 @@ export const SecondBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -149,6 +154,7 @@ export const ThreeBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -170,6 +176,7 @@ export const AllBigs = () => (
 				standard: [],
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -191,6 +198,7 @@ export const TwoBigsThreeStandardsNoMPU = () => (
 				standard: standards.slice(0, 3),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -212,6 +220,7 @@ export const NoBigsTwoStandardsNoMPU = () => (
 				standard: standards.slice(0, 2),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -233,6 +242,7 @@ export const NoBigsFiveStandardsNoMPU = () => (
 				standard: standards.slice(0, 5),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

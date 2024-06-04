@@ -1,6 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, palette, space } from '@guardian/source-foundations';
+import { from, palette, space } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import { transparentColour } from '../lib/transparentColour';

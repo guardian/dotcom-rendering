@@ -10,7 +10,7 @@ import {
 	remSpace,
 	textSans14,
 	textSansItalic14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import Anchor from 'components/Anchor';

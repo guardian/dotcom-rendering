@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { from, palette } from '@guardian/source-foundations';
-import type { ThemeIcon } from '@guardian/source-react-components';
-import { SvgMediaControlsPlay } from '@guardian/source-react-components';
+import { from, palette } from '@guardian/source/foundations';
+import type { ThemeIcon } from '@guardian/source/react-components';
+import { SvgMediaControlsPlay } from '@guardian/source/react-components';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type PlayButtonSize = keyof typeof sizes;

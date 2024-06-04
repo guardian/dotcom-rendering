@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import { fill } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
@@ -32,6 +32,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	> p {
+		font-style: italic;
 		&:first-of-type {
 			display: inline;
 		}

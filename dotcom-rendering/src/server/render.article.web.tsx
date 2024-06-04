@@ -53,6 +53,8 @@ export const renderHtml = ({
 		renderingTarget,
 		darkModeAvailable:
 			article.config.abTests.darkModeWebVariant === 'variant',
+		updateLogoAdPartnerSwitch:
+			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 	};
 
@@ -264,6 +266,7 @@ export const renderBlocks = ({
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
+		updateLogoAdPartnerSwitch: !!switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 	};
 

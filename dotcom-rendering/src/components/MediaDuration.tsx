@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { space, textSansBold12 } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+import { space, textSansBold12 } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import type { ImagePositionType } from './Card/components/ImageWrapper';
 
 const durationStyles = css`

@@ -12,7 +12,7 @@ import {
 	space,
 	textSans17,
 	textSansBold20,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Decorator } from '@storybook/react';
 import { storybookPaletteDeclarations as paletteDeclarations } from '../mocks/paletteDeclarations';
 

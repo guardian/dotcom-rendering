@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textSans17 } from '@guardian/source-foundations';
+import { palette, textSans17 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 
 type Props = {

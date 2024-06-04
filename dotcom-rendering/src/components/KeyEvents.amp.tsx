@@ -3,7 +3,7 @@ import {
 	headlineMedium20,
 	palette,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { blockLink } from '../lib/block-link.amp';
 import DownArrow from '../static/icons/down-arrow.svg';
 

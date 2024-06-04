@@ -3,7 +3,7 @@ import { ArticleDesign, Pillar } from '@guardian/libs';
 import {
 	DottedLines,
 	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source-development-kitchen/react-components';
 
 type Props = {
 	format: ArticleFormat;

@@ -2,7 +2,7 @@
 
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleSpecial } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { StoryFn } from '@storybook/react';
 import { formatToString } from 'articleFormat';
 import {

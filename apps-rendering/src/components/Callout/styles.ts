@@ -15,7 +15,7 @@ import {
 	textSans14,
 	textSans15,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { darkModeCss } from 'styles';
 
 // Callout block styles

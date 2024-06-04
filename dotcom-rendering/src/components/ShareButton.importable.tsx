@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { palette, until } from '@guardian/source-foundations';
-import type { Size } from '@guardian/source-react-components';
+import { palette, until } from '@guardian/source/foundations';
+import type { Size } from '@guardian/source/react-components';
 import {
 	Button,
 	LinkButton,
 	SvgCheckmark,
 	SvgShare,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useEffect, useMemo, useState } from 'react';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';

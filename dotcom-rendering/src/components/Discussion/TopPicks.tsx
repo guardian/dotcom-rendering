@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source-foundations';
+import { from, until } from '@guardian/source/foundations';
 import type {
 	CommentType,
 	ReplyType,
