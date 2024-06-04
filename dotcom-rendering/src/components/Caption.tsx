@@ -240,7 +240,9 @@ export const Caption = ({
 				captionStyle,
 				shouldLimitWidth && limitedWidth,
 				isOverlaid ? overlaidStyles(format) : bottomMarginStyles,
-				isMainMedia && isBlog && tabletCaptionPadding,
+				isMainMedia &&
+					(isBlog || mediaType === 'Video') &&
+					tabletCaptionPadding,
 				padCaption && captionPadding,
 			]}
 		>
