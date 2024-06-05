@@ -1,4 +1,5 @@
 import type { Branding } from './branding';
+import { StarRating } from './content';
 import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
 import type { MainMedia } from './mainMedia';
 
@@ -14,7 +15,7 @@ interface BaseTrailType {
 	kickerText?: string;
 	shortUrl?: string;
 	commentCount?: number;
-	starRating?: number;
+	starRating?: StarRating;
 	linkText?: string;
 	branding?: Branding;
 	isSnap?: boolean;
