@@ -139,7 +139,7 @@ export const LiveBlogRenderer = ({
 						/>
 					</Hide>
 				)}
-			<div id="top-of-blog" />
+			{isLiveUpdate ? `<!-- live update --->` : <div id="top-of-blog" />}
 			<LiveBlogBlocksAndAdverts
 				blocks={blocks}
 				format={format}
