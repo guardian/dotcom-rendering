@@ -71,13 +71,20 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 							return pillarPalette(theme, 200);
 					}
 				}
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog: {
+				case ArticleDesign.LiveBlog: {
 					switch (theme) {
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[200];
 						default:
 							return sourcePalette.neutral[100];
+					}
+				}
+				case ArticleDesign.DeadBlog: {
+					switch (theme) {
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.specialReport[200];
+						default:
+							return sourcePalette.neutral[7];
 					}
 				}
 				case ArticleDesign.Interview:
