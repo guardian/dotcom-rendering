@@ -36,7 +36,8 @@ function insert(
 	// Create
 	// ------
 	const template = document.createElement('template');
-	template.innerHTML = html;
+	template.innerHTML =
+		html + `<!-- inserted at ${new Date().toDateString()} -->`;
 	const fragment = template.content;
 
 	// Hydrate
