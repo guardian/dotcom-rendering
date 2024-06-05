@@ -39,6 +39,12 @@ function insert(
 	template.innerHTML = html;
 	const fragment = template.content;
 
+	// Remove duplicates
+	// -----------------
+	for (const article of template.querySelectorAll('article')) {
+		if (document.getElementById(article.id)) article.remove();
+	}
+
 	// Hydrate
 	// -------
 	const islands = fragment.querySelectorAll<HTMLElement>('gu-island');
