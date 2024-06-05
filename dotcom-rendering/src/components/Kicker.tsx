@@ -8,6 +8,7 @@ type Props = {
 	text: string;
 	color: string;
 	showPulsingDot?: boolean;
+	isSublink?: true;
 	hideLineBreak?: boolean;
 };
 
@@ -30,11 +31,16 @@ export const Kicker = ({
 	text,
 	color,
 	showPulsingDot,
+	isSublink,
 	hideLineBreak,
 }: Props) => (
 	<div
 		css={[
 			showPulsingDot ? liveTextStyles : textStyles,
+			isSublink &&
+				css`
+					${textSansBold14};
+				`,
 			hideLineBreak &&
 				css`
 					display: inline-block;
