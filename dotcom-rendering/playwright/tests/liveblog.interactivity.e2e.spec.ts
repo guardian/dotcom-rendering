@@ -30,7 +30,7 @@ test.describe('Liveblogs', () => {
 		await expectToNotExist(page, `[data-testid="toast"]`);
 
 		await page.evaluate(() => {
-			window.mockLiveUpdate({
+			window.mockLiveUpdate?.({
 				numNewBlocks: 1,
 				html: '<p>New block 1</p>',
 				mostRecentBlockId: 'abc',
@@ -47,7 +47,7 @@ test.describe('Liveblogs', () => {
 		).toBeVisible();
 
 		await page.evaluate(() => {
-			window.mockLiveUpdate({
+			window.mockLiveUpdate?.({
 				numNewBlocks: 1,
 				html: '<p>New block 2</p>',
 				mostRecentBlockId: 'abc',
@@ -67,7 +67,7 @@ test.describe('Liveblogs', () => {
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await page.evaluate(() => {
-			window.mockLiveUpdate({
+			window.mockLiveUpdate?.({
 				numNewBlocks: 1,
 				html: '<p>New block 1</p>',
 				mostRecentBlockId: 'abc',
@@ -88,7 +88,7 @@ test.describe('Liveblogs', () => {
 		await expectToNotExist(page, `[data-testid="toast"]`);
 
 		await page.evaluate(() => {
-			window.mockLiveUpdate({
+			window.mockLiveUpdate?.({
 				numNewBlocks: 1,
 				html: '<p>New block 1</p>',
 				mostRecentBlockId: 'abc',
@@ -114,7 +114,7 @@ test.describe('Liveblogs', () => {
 		await waitForIsland(page, 'Liveness', { waitFor: 'attached' });
 
 		await page.evaluate((block) => {
-			window.mockLiveUpdate(block);
+			window.mockLiveUpdate?.(block);
 		}, tweetBlock);
 
 		const updateLocator = page
@@ -199,7 +199,7 @@ test.describe('Liveblogs', () => {
 		await expectToNotExist(page, `[data-testid="toast"]`);
 
 		await page.evaluate(() => {
-			window.mockLiveUpdate({
+			window.mockLiveUpdate?.({
 				numNewBlocks: 1,
 				html: '<p>New block 1</p>',
 				mostRecentBlockId: 'abc',
@@ -241,7 +241,7 @@ test.describe('Liveblogs', () => {
 		);
 
 		await page.evaluate((block) => {
-			window.mockLiveUpdate(block);
+			window.mockLiveUpdate?.(block);
 		}, tweetBlock);
 
 		const tweetIframeSelector =

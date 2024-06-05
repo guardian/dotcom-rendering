@@ -78,7 +78,7 @@ declare global {
 				consent: ConsentState,
 			) => boolean;
 		};
-		mockLiveUpdate: (data: LiveUpdateType) => void;
+		mockLiveUpdate?: (data: LiveUpdateType) => void;
 		google?: typeof google;
 		YT?: typeof YT;
 		onYouTubeIframeAPIReady?: () => void;

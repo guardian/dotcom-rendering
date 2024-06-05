@@ -275,8 +275,13 @@ export const Liveness = ({
 		 * updates with whatever html and properties it wants
 		 *
 		 */
+		console.warn('MUTATE', mutate);
 		window.mockLiveUpdate = (mockData) => void mutate(mockData);
 	}, [mutate]);
+
+	useEffect(() => {
+		console.warn('MUTATE', window.mockLiveUpdate);
+	}, []);
 
 	useEffect(() => {
 		document.title =
