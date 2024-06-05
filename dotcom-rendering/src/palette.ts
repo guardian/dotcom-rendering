@@ -2580,17 +2580,35 @@ const cardTextDark = (): string => {
 };
 
 const cardOnwardContentTextLight: PaletteFunction = (format) => {
-	switch (format.theme) {
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.specialReportAlt[100];
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return sourcePalette.neutral[100];
+	}
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
+		return sourcePalette.specialReportAlt[100];
+	}
+
+	if (
+		format.design !== ArticleDesign.Gallery &&
+		format.display === ArticleDisplay.Immersive
+	) {
+		return sourcePalette.neutral[7];
+	}
+
+	if (
+		format.display === ArticleDisplay.Immersive &&
+		format.design === ArticleDesign.LiveBlog
+	) {
+		return sourcePalette.neutral[100];
+	}
+
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			return sourcePalette.neutral[100];
 		default:
-			if (
-				format.display === ArticleDisplay.Immersive &&
-				format.design === ArticleDesign.LiveBlog
-			) {
-				return sourcePalette.neutral[100];
-			}
-			return cardHeadlineTextLight(format);
+			return sourcePalette.neutral[7];
 	}
 };
 
