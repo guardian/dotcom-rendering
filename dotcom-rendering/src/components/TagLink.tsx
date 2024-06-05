@@ -5,8 +5,8 @@ import {
 	headlineBold20,
 	headlineMedium14,
 	space,
-} from '@guardian/source-foundations';
-import { SvgArrowRightStraight } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Hide, SvgArrowRightStraight } from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 interface Props {
@@ -14,8 +14,11 @@ interface Props {
 	sectionUrl: string;
 	guardianBaseURL: string;
 }
+const containerStyles = css`
+	margin-bottom: ${space[2]}px;
+`;
 
-const TagLinkStyle = css`
+const tagLinkStyles = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -28,7 +31,6 @@ const TagLinkStyle = css`
 	background-color: ${palette('--tag-link-background')};
 	color: ${palette('--tag-link-accent')};
 	fill: ${palette('--tag-link-accent')};
-	margin-bottom: ${space[2]}px;
 	:hover {
 		text-decoration: underline;
 	}
@@ -77,26 +79,40 @@ const arrowStyles = css`
 	}
 `;
 
+const fillBarStyles = css`
+	background-color: white; /* Todo: replace with article background color; */
+	margin-top: -${space[2]}px;
+	width: 100%;
+	height: 20px;
+	margin-bottom: -${space[2]}px;
+	margin-right: -1px;
+`;
+
 export const TagLink = ({
 	sectionUrl,
 	sectionLabel,
 	guardianBaseURL,
 }: Props) => {
 	return (
-		<a
-			href={`${guardianBaseURL}/${sectionUrl}`}
-			css={TagLinkStyle}
-			data-component="series"
-			data-link-name="article series"
-		>
-			<div css={labelStyles}>{sectionLabel}</div>
-			<div css={tagButtonStyles}>
-				<div>Discover More</div>
+		<div css={containerStyles}>
+			<Hide from="leftCol">
+				<div css={fillBarStyles} />
+			</Hide>
+			<a
+				href={`${guardianBaseURL}/${sectionUrl}`}
+				css={tagLinkStyles}
+				data-component="series"
+				data-link-name="article series"
+			>
+				<div css={labelStyles}>{sectionLabel}</div>
+				<div css={tagButtonStyles}>
+					<div>Discover More</div>
 
-				<div css={arrowStyles}>
-					<SvgArrowRightStraight />
+					<div css={arrowStyles}>
+						<SvgArrowRightStraight />
+					</div>
 				</div>
-			</div>
-		</a>
+			</a>
+		</div>
 	);
 };
