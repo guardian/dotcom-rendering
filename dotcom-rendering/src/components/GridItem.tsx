@@ -29,41 +29,26 @@ const bodyStyles = css`
 	${getZIndex('bodyArea')}
 `;
 
-const gridArea = css`
-	grid-area: var(--grid-area);
-`;
-
-// TODO:: Pass knowledge of the test variant here
-if (area === 'title') {
-	if (area === 'title') {
-		return css`
-			grid-area: ${area};
-			.sticky-tag-link-test & {
-				z-index: 10;
-				position: sticky;
-				top: 0;
-				margin-left: -10px;
-				margin-right: -10px;
-				${from.mobileLandscape} {
-					margin-left: -20px;
-					margin-right: -20px;
-				}
-				${from.phablet} {
-					margin-left: 0px;
-					margin-right: 0px;
-				}
-			}
-		`;
-	}
-	return css`
-		grid-area: ${area};
-		z-index: 1000;
+const titleStyles = css`
+	.sticky-tag-link-test & {
+		z-index: 10;
 		position: sticky;
 		top: 0;
-	`;
-}
-return css`
-	grid-area: ${area};
+		margin-left: -10px;
+		margin-right: -10px;
+		${from.mobileLandscape} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${from.phablet} {
+			margin-left: 0px;
+			margin-right: 0px;
+		}
+	}
+`;
+
+const gridArea = css`
+	grid-area: var(--grid-area);
 `;
 
 export const GridItem = ({
@@ -75,6 +60,7 @@ export const GridItem = ({
 		css={[
 			area === 'body' && bodyStyles,
 			area === 'right-column' && rightColumnStyles,
+			area === 'title' && titleStyles,
 			gridArea,
 		]}
 		style={{
