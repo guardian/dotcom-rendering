@@ -5484,6 +5484,8 @@ const mastheadVeggieBurgerBackground: PaletteFunction = () =>
 const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
+const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
+const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
 // ----- Palette ----- //
 
 /**
@@ -6528,6 +6530,14 @@ const paletteColours = {
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[0],
+	},
+	'--tag-link-accent': {
+		light: tagLinkAccent,
+		dark: tagLinkAccent,
+	},
+	'--tag-link-background': {
+		light: tagLinkBackground,
+		dark: tagLinkBackground,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,
