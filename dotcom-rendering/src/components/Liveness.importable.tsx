@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
 import { useApi } from '../lib/useApi';
@@ -343,7 +343,7 @@ export const Liveness = ({
 		 * [stickily positioned element]: https://developer.mozilla.org/en-US/docs/Web/CSS/position#types_of_positioning
 		 * [containing block]: https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 		 */
-		return ReactDOM.createPortal(
+		return createPortal(
 			<Toast
 				onClick={handleToastClick}
 				count={numHiddenBlocks}
