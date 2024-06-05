@@ -1,5 +1,5 @@
 import type { Branding } from './branding';
-import { StarRating } from './content';
+import type { StarRating } from './content';
 import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
 import type { MainMedia } from './mainMedia';
 
