@@ -2419,10 +2419,6 @@ const cardBackgroundLight: PaletteFunction = (format) => {
 		return sourcePalette.specialReport[300];
 	}
 	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return sourcePalette.opinion[800];
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -2803,20 +2799,8 @@ const cardKickerTextDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const cardBackgroundHoverLight: PaletteFunction = ({ design }) => {
-	switch (design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			/* TODO: This colour is hard coded here because it does not yet
-		exist in source-foundations. Once it's been added, please
-		remove this. @siadcock is aware. */
-			/* stylelint-disable-next-line color-no-hex */
-			return '#fdf0e8';
-		default:
-			return sourcePalette.neutral[93];
-	}
-};
+const cardBackgroundHoverLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
 
 const captionTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
