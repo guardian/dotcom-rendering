@@ -26,7 +26,7 @@ type Props = {
 	isSensitive: boolean;
 	abTests: ServerSideTests;
 	switches: Switches;
-	isLiveUpdate?: boolean;
+	isLiveUpdate: boolean;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
@@ -139,7 +139,7 @@ export const LiveBlogRenderer = ({
 						/>
 					</Hide>
 				)}
-			<div id="top-of-blog" />
+			{isLiveUpdate ? `<!-- live update --->` : <div id="top-of-blog" />}
 			<LiveBlogBlocksAndAdverts
 				blocks={blocks}
 				format={format}

@@ -19,7 +19,7 @@ type Props = {
 	isSensitive: boolean;
 	abTests: ServerSideTests;
 	switches: Switches;
-	isLiveUpdate?: boolean;
+	isLiveUpdate: boolean;
 	isPinnedPost: boolean;
 	pinnedPostId?: string;
 	editionId: EditionId;

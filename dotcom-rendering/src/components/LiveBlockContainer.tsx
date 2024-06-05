@@ -22,7 +22,7 @@ type Props = {
 	blockFirstPublished?: number;
 	blockFirstPublishedDisplay?: string;
 	blockId: string;
-	isLiveUpdate?: boolean;
+	isLiveUpdate: boolean;
 	contributors?: BlockContributor[];
 	isPinnedPost: boolean;
 	absoluteServerTimes: boolean;

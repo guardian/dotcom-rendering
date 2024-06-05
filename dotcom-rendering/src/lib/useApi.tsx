@@ -1,4 +1,5 @@
-import type { SWRConfiguration } from 'swr';
+import { isUndefined } from '@guardian/libs';
+import type { KeyedMutator, SWRConfiguration } from 'swr';
 import useSWR from 'swr';
 
 function checkForErrors(response: Response) {
@@ -20,6 +21,7 @@ interface ApiResponse<T> {
 	loading: boolean;
 	data?: T;
 	error?: Error;
+	mutate: KeyedMutator<T>;
 }
 
 /**
@@ -35,11 +37,16 @@ export const useApi = <T,>(
 	options?: SWRConfiguration,
 	init?: RequestInit,
 ): ApiResponse<T> => {
-	const { data, error } = useSWR(url, fetcher(init), options);
+	const { data, error, mutate } = useSWR<T, Error>(
+		url,
+		fetcher(init),
+		options,
+	);
 
 	return {
 		data,
 		error,
-		loading: !!url && !error && !data,
+		loading: !!url && !error && isUndefined(data),
+		mutate,
 	};
 };

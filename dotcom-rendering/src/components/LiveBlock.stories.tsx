@@ -79,6 +79,7 @@ export const VideoAsSecond = () => {
 				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -126,6 +127,7 @@ export const Title = () => {
 				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -194,6 +196,7 @@ export const Video = () => {
 				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -237,6 +240,7 @@ export const RichLink = () => {
 				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -271,6 +275,7 @@ export const FirstImage = () => {
 				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -331,6 +336,7 @@ export const ImageRoles = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -380,6 +386,7 @@ export const Thumbnail = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -415,6 +422,7 @@ export const ImageAndTitle = () => {
 				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -446,6 +454,7 @@ export const Updated = () => {
 				abTests={{}}
 				switches={{}}
 				isPinnedPost={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -481,6 +490,7 @@ export const Contributor = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -514,6 +524,7 @@ export const NoAvatar = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>
@@ -550,6 +561,7 @@ export const TitleAndContributor = () => {
 				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
+				isLiveUpdate={false}
 				editionId={'UK'}
 			/>
 		</Wrapper>

@@ -88,6 +88,7 @@ export const Sport = () => {
 					abTests={{}}
 					switches={{}}
 					isPinnedPost={true}
+					isLiveUpdate={false}
 					editionId={'UK'}
 				/>
 			</PinnedPost>

@@ -20,7 +20,7 @@ type Props = {
 	switches: Switches;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	isLiveUpdate?: boolean;
+	isLiveUpdate: boolean;
 };
 
 const appsFirstAdIndex = 1;

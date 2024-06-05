@@ -1,8 +1,12 @@
+import { log } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import type { Output } from 'valibot';
+import { number, object, safeParse, string } from 'valibot';
 import { getEmotionCache } from '../client/islands/emotion';
 import { initHydration } from '../client/islands/initHydration';
 import { useApi } from '../lib/useApi';
+import { useIsInView } from '../lib/useIsInView';
 import { Toast } from './Toast';
 
 type Props = {
@@ -18,6 +22,14 @@ type Props = {
 	hasPinnedPost: boolean;
 	selectedTopics?: Topic[];
 };
+
+const liveUpdate = object({
+	numNewBlocks: number(),
+	html: string(),
+	mostRecentBlockId: string(),
+});
+
+export type LiveUpdateType = Output<typeof liveUpdate>;
 
 /**
  * insert
@@ -37,7 +49,7 @@ function insert(
 	// ------
 	const template = document.createElement('template');
 	template.innerHTML =
-		html + `<!-- inserted at ${new Date().toDateString()} -->`;
+		html + `<!-- inserted at ${new Date().toUTCString()} -->`;
 	const fragment = template.content;
 
 	// Remove duplicates
@@ -141,6 +153,28 @@ function getKey(
 }
 
 /**
+ * This sets up a listener for when the page is backgrounded or restored.
+ * We do this so that any new blocks that were fetched while the blog was in the
+ * background are animated in at the point when focus is restored
+ */
+const useVisibilityState = () => {
+	const [visibilityState, setVisibilityState] =
+		useState<DocumentVisibilityState>('visible');
+
+	useEffect(() => {
+		const listener = () => {
+			setVisibilityState(document.visibilityState);
+		};
+
+		window.addEventListener('visibilitychange', listener);
+
+		return () => window.removeEventListener('visibilitychange', listener);
+	}, [setVisibilityState]);
+
+	return visibilityState;
+};
+
+/**
  * Allow new blocks on live blogs to be added without page reload.
  * Polls the content API inserts news blocks if the user
  * is at the top of the article.
@@ -163,17 +197,20 @@ export const Liveness = ({
 	selectedTopics,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
-	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 	const [key, setKey] = useState<string>();
 
-	const [topOfBlog, setTopOfBlog] = useState<Element | null>(null);
-	const [toastRoot, setToastRoot] = useState<Element | null>(null);
+	const [topOfBlog, setTopOfBlog] = useState<HTMLElement>();
+	const [toastRoot, setToastRoot] = useState<Element>();
+
+	const [topOfBlogVisible] = useIsInView({ node: topOfBlog });
+
+	const visibilityState = useVisibilityState();
 
 	useEffect(() => {
-		setTopOfBlog(document.getElementById('top-of-blog'));
-		setToastRoot(document.getElementById('toast-root'));
+		setTopOfBlog(document.getElementById('top-of-blog') ?? undefined);
+		setToastRoot(document.getElementById('toast-root') ?? undefined);
 	}, []);
 
 	/**
@@ -181,52 +218,6 @@ export const Liveness = ({
 	 * allows us to avoid the problems of imperative code being executed multiple times
 	 * inside react's declarative structure (things get re-rendered when any state changes)
 	 */
-	const onSuccess = useCallback(
-		(data: LiveUpdateType) => {
-			if (data.numNewBlocks && data.numNewBlocks > 0) {
-				// Insert the new blocks in the dom (but hidden)
-				if (onFirstPage) {
-					try {
-						topOfBlog &&
-							insert(data.html, enhanceTweetsSwitch, topOfBlog);
-					} catch (e) {
-						console.log('>> failed >>', e);
-					}
-				}
-
-				if (
-					onFirstPage &&
-					topOfBlogVisible &&
-					document.visibilityState === 'visible'
-				) {
-					revealPendingBlocks();
-					setNumHiddenBlocks(0);
-				} else {
-					setShowToast(true);
-					// Increment the count of new posts
-					setNumHiddenBlocks((count) => count + data.numNewBlocks);
-				}
-			}
-
-			// Update the block id we use for polling
-			if (data.mostRecentBlockId) {
-				setLatestBlockId(data.mostRecentBlockId);
-			}
-		},
-		[enhanceTweetsSwitch, onFirstPage, topOfBlog, topOfBlogVisible],
-	);
-
-	useEffect(() => {
-		/**
-		 * This is a utility used by our e2e tests
-		 *
-		 * Rather than expect these scripts to depend on polling, we
-		 * expose this function to allow tests to manually trigger
-		 * updates with whatever html and properties it wants
-		 *
-		 */
-		window.mockLiveUpdate = onSuccess;
-	}, [onSuccess]);
 
 	useEffect(() => {
 		setKey(
@@ -241,71 +232,56 @@ export const Liveness = ({
 	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents, selectedTopics]);
 
 	// useApi returns { data, loading, error } but we're not using them here
-	useApi(key, {
+	const { data, mutate } = useApi(key, {
 		refreshInterval: 10_000,
 		refreshWhenHidden: true,
-		onSuccess,
 	});
+
+	useEffect(() => {
+		const result = safeParse(liveUpdate, data);
+		log('dotcom', 'Liveness', result.success, data);
+		if (!result.success) return;
+		// Update the block id we use for polling
+		setLatestBlockId(result.output.mostRecentBlockId);
+
+		if (result.output.numNewBlocks > 0) {
+			// Insert the new blocks in the dom (but hidden)
+			if (onFirstPage && topOfBlog) {
+				try {
+					insert(result.output.html, enhanceTweetsSwitch, topOfBlog);
+				} catch (error) {
+					// eslint-disable-next-line no-console -- this is something we want to know about
+					console.error('Failed to insert new blocks', error);
+					error instanceof Error &&
+						window.guardian.modules.sentry.reportError(
+							error,
+							'liveblog',
+						);
+				}
+			}
+
+			setShowToast(true);
+			// Increment the count of new posts
+			setNumHiddenBlocks((count) => count + result.output.numNewBlocks);
+		}
+	}, [data, enhanceTweetsSwitch, onFirstPage, topOfBlog]);
+
+	useEffect(() => {
+		/**
+		 * This is a utility used by our e2e tests
+		 *
+		 * Rather than expect these scripts to depend on polling, we
+		 * expose this function to allow tests to manually trigger
+		 * updates with whatever html and properties it wants
+		 *
+		 */
+		window.mockLiveUpdate = (mockData) => void mutate(mockData);
+	}, [mutate]);
 
 	useEffect(() => {
 		document.title =
 			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
 	}, [numHiddenBlocks, webTitle]);
-
-	useEffect(() => {
-		if (!topOfBlog) return;
-
-		const observer = new window.IntersectionObserver(([entry]) => {
-			if (!entry) return;
-
-			setTopOfBlogVisible(entry.isIntersecting);
-
-			if (entry.isIntersecting && onFirstPage) {
-				// If on first page, reveal blocks
-				revealPendingBlocks();
-				setNumHiddenBlocks(0);
-				setShowToast(false);
-			}
-		});
-
-		observer.observe(topOfBlog);
-
-		return () => {
-			observer.disconnect();
-		};
-	}, [topOfBlog, onFirstPage]);
-
-	/**
-	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
-	 * do this so that any new blocks that were fetched while the blog was in the
-	 * background are animated in at the point when focus is restored
-	 */
-	useEffect(() => {
-		const handleVisibilityChange = () => {
-			// The blog was either hidden or has become visible
-			if (
-				// If we're returning to a blog that has pending blocks and the reader
-				// is at the top of the first page then...
-				document.visibilityState === 'visible' &&
-				numHiddenBlocks > 0 &&
-				topOfBlogVisible &&
-				onFirstPage
-			) {
-				revealPendingBlocks();
-				setNumHiddenBlocks(0);
-				setShowToast(false);
-			}
-		};
-
-		window.addEventListener('visibilitychange', handleVisibilityChange);
-
-		return () => {
-			window.removeEventListener(
-				'visibilitychange',
-				handleVisibilityChange,
-			);
-		};
-	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
 	const handleToastClick = useCallback(() => {
 		// We adjust the position we scroll readers to based on if there is a pinned
@@ -314,18 +290,24 @@ export const Liveness = ({
 		// see the key events filter
 		const placeToScrollTo = hasPinnedPost ? 'top-of-blog' : 'maincontent';
 		if (onFirstPage) {
-			setShowToast(false);
-
 			document.getElementById(placeToScrollTo)?.scrollIntoView({
 				behavior: 'smooth',
 			});
 			window.history.replaceState({}, '', `#${placeToScrollTo}`);
-			revealPendingBlocks();
-			setNumHiddenBlocks(0);
 		} else {
 			window.location.href = `${webURL}#${placeToScrollTo}`;
 		}
 	}, [hasPinnedPost, onFirstPage, webURL]);
+
+	useEffect(() => {
+		if (!topOfBlogVisible) return;
+		if (visibilityState !== 'visible') return;
+		if (!onFirstPage) return;
+		log('dotcom', 'Ready to insert new blocks:', numHiddenBlocks);
+		setShowToast(false);
+		revealPendingBlocks();
+		setNumHiddenBlocks(0);
+	}, [visibilityState, topOfBlogVisible, onFirstPage, numHiddenBlocks]);
 
 	if (toastRoot && showToast) {
 		/**

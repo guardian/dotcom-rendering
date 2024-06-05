@@ -7,6 +7,7 @@ import type {
 } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { OphanRecordFunction } from './src/client/ophan/ophan';
+import type { LiveUpdateType } from './src/components/Liveness.importable';
 import type { google } from './src/components/YoutubeAtom/ima';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
