@@ -45,7 +45,7 @@ const nestedStyles = (format: ArticleFormat) => {
 			margin-left: -${offset}px;
 		}
 
-		p:not(:last-of-type) {
+		p:not(:last-child) {
 			margin-bottom: 8px;
 		}
 
