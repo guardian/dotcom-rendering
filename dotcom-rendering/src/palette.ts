@@ -4782,11 +4782,22 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 const seriesTitleMatchTextLight: PaletteFunction = (format) => {
 	if (
 		format.design === ArticleDesign.MatchReport ||
-		format.design === ArticleDesign.LiveBlog
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
 	) {
 		return sourcePalette.neutral[7];
 	}
 	return seriesTitleTextLight(format);
+};
+const seriesTitleMatchTextDark: PaletteFunction = (format) => {
+	if (
+		format.design === ArticleDesign.MatchReport ||
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
+		return sourcePalette.neutral[7];
+	}
+	return seriesTitleTextDark(format);
 };
 
 const recaptchaButtonLight: PaletteFunction = () => sourcePalette.neutral[0];
@@ -5394,7 +5405,7 @@ const codeBlockTextShadowLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const codeBlockTextShadowDark: PaletteFunction = () => sourcePalette.neutral[0];
 
-const lastUpdatedText: PaletteFunction = ({ theme, design }) => {
+const lastUpdatedTextLight: PaletteFunction = ({ theme, design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
@@ -5412,6 +5423,26 @@ const lastUpdatedText: PaletteFunction = ({ theme, design }) => {
 			}
 		default:
 			return sourcePalette.neutral[0];
+	}
+};
+const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+				case Pillar.Sport:
+				case Pillar.Opinion:
+					return pillarPalette(theme, 600);
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[600];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[700];
+			}
+		default:
+			return sourcePalette.neutral[93];
 	}
 };
 
@@ -5453,6 +5484,8 @@ const mastheadVeggieBurgerBackground: PaletteFunction = () =>
 const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
+const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
+const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
 // ----- Palette ----- //
 
 /**
@@ -6111,8 +6144,8 @@ const paletteColours = {
 		dark: keyEventTitleDark,
 	},
 	'--last-updated-text': {
-		light: lastUpdatedText,
-		dark: lastUpdatedText,
+		light: lastUpdatedTextLight,
+		dark: lastUpdatedTextDark,
 	},
 	'--link-kicker-text': {
 		light: linkKickerTextLight,
@@ -6340,7 +6373,7 @@ const paletteColours = {
 	},
 	'--series-title-match-text': {
 		light: seriesTitleMatchTextLight,
-		dark: seriesTitleTextDark,
+		dark: seriesTitleMatchTextDark,
 	},
 	'--series-title-text': {
 		light: seriesTitleTextLight,
@@ -6497,6 +6530,14 @@ const paletteColours = {
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[0],
+	},
+	'--tag-link-accent': {
+		light: tagLinkAccent,
+		dark: tagLinkAccent,
+	},
+	'--tag-link-background': {
+		light: tagLinkBackground,
+		dark: tagLinkBackground,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,

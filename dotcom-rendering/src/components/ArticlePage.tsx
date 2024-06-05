@@ -57,7 +57,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 	const webLightbox = isWeb && !!article.config.switches.lightbox;
 	const darkModeAvailable = isWeb
 		? article.config.abTests.darkModeWebVariant === 'variant'
-		: !!article.config.switches.darkModeInApps;
+		: true;
 
 	return (
 		<StrictMode>

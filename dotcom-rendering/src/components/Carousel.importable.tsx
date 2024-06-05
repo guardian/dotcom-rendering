@@ -15,6 +15,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
+import type { StarRating } from '../types/content';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -475,6 +476,7 @@ type CarouselCardProps = {
 	mainMedia?: MainMedia;
 	onwardsSource?: OnwardsSource;
 	containerType?: DCRContainerType;
+	starRating?: StarRating;
 };
 
 const CarouselCard = ({
@@ -495,6 +497,7 @@ const CarouselCard = ({
 	discussionApiUrl,
 	isOnwardContent,
 	absoluteServerTimes,
+	starRating,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
@@ -538,6 +541,7 @@ const CarouselCard = ({
 				imagePosition={cardImagePosition}
 				imagePositionOnMobile={cardImagePosition}
 				absoluteServerTimes={absoluteServerTimes}
+				starRating={starRating}
 			/>
 		</LI>
 	);
@@ -977,6 +981,7 @@ export const Carousel = ({
 								branding,
 								discussion,
 								mainMedia,
+								starRating,
 							} = trail;
 
 							// Don't try to render cards that have no publication date. This property is technically optional
@@ -1014,6 +1019,7 @@ export const Carousel = ({
 									imageLoading={imageLoading}
 									discussionApiUrl={discussionApiUrl}
 									isOnwardContent={isOnwardContent}
+									starRating={starRating}
 								/>
 							);
 						})}
