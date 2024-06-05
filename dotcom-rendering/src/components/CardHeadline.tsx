@@ -268,6 +268,9 @@ export const CardHeadline = ({
 	return (
 		<>
 			<h3
+				className={`${
+					isSublink ? 'card-sublink-headline' : 'card-headline'
+				}`}
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)

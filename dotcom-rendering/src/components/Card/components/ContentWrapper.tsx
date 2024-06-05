@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source/foundations';
+import { between, from, space } from '@guardian/source/foundations';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 const sizingStyles = css`
@@ -60,6 +60,21 @@ const flexBasisStyles = ({
 	}
 };
 
+const paddingFromImage = (imagePosition: ImagePositionType) => {
+	switch (imagePosition) {
+		case 'top':
+			return { paddingTop: `${space[1]}px` };
+		case 'right':
+			return { paddingRight: `${space[1]}px` };
+		case 'bottom':
+			return { paddingBottom: `${space[1]}px` };
+		case 'left':
+			return { paddingLeft: `${space[1]}px` };
+		case 'none':
+			return {};
+	}
+};
+
 type Props = {
 	children: React.ReactNode;
 	imageType?: CardImageType;
@@ -80,6 +95,7 @@ export const ContentWrapper = ({
 				sizingStyles,
 				isHorizontal && flexBasisStyles({ imageSize, imageType }),
 			]}
+			style={paddingFromImage(imagePosition)}
 		>
 			{children}
 		</div>

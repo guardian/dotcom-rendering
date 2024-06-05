@@ -24,7 +24,7 @@ const spacing = (leftAlign: boolean) => css`
 `;
 
 const margins = css`
-	margin: ${space[1]}px auto;
+	margin-top: ${space[1]}px;
 `;
 
 const flexEnd = css`

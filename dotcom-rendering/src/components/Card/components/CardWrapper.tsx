@@ -56,10 +56,11 @@ const hoverStyles = css`
 		opacity: 0.1;
 	}
 
-	:hover h3 > span {
+	/* Ensures that we only underline the headline element we want to target
+	   and not things like kickers or sublink headlines */
+	:hover .card-headline .show-underline {
 		text-decoration: underline;
 		text-underline-position: under;
-		text-underline-offset: 0.05rem;
 	}
 `;
 
