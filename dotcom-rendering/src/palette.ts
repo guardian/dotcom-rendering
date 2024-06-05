@@ -2397,18 +2397,6 @@ const cardOnwardContentFooterLight: PaletteFunction = ({ theme, design }) => {
 				case ArticleDesign.Audio:
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[100];
-				case ArticleDesign.LiveBlog:
-					switch (theme) {
-						case ArticleSpecial.Labs:
-							return sourcePalette.neutral[7];
-						case Pillar.News:
-						case Pillar.Sport:
-						case Pillar.Opinion:
-						case Pillar.Culture:
-						case Pillar.Lifestyle:
-						default:
-							return sourcePalette.neutral[100];
-					}
 				default:
 					switch (theme) {
 						default:
@@ -2538,13 +2526,6 @@ const onwardContentCardHoverLight: PaletteFunction = ({ theme, design }) => {
 				case ArticleDesign.Audio:
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[20];
-				case ArticleDesign.LiveBlog:
-					switch (theme) {
-						case ArticleSpecial.Labs:
-							return sourcePalette.neutral[97];
-						default:
-							return pillarPalette(theme, 300);
-					}
 				default:
 					return sourcePalette.neutral[97];
 			}
@@ -2563,13 +2544,6 @@ const onwardContentCardHoverDark: PaletteFunction = ({ theme, design }) => {
 				case ArticleDesign.Audio:
 				case ArticleDesign.Video:
 					return sourcePalette.neutral[46];
-				case ArticleDesign.LiveBlog:
-					switch (theme) {
-						case ArticleSpecial.Labs:
-							return sourcePalette.neutral[10];
-						default:
-							return pillarPalette(theme, 300);
-					}
 				default:
 					return sourcePalette.neutral[10];
 			}
