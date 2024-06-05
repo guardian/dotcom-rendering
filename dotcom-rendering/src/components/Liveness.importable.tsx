@@ -197,7 +197,7 @@ export const Liveness = ({
 				} else {
 					setShowToast(true);
 					// Increment the count of new posts
-					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
+					setNumHiddenBlocks((count) => count + data.numNewBlocks);
 				}
 			}
 
@@ -206,13 +206,7 @@ export const Liveness = ({
 				setLatestBlockId(data.mostRecentBlockId);
 			}
 		},
-		[
-			enhanceTweetsSwitch,
-			numHiddenBlocks,
-			onFirstPage,
-			topOfBlog,
-			topOfBlogVisible,
-		],
+		[enhanceTweetsSwitch, onFirstPage, topOfBlog, topOfBlogVisible],
 	);
 
 	useEffect(() => {
