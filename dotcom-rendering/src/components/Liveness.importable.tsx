@@ -54,7 +54,7 @@ function insert(
 
 	// Remove duplicates
 	// -----------------
-	for (const article of template.querySelectorAll('article')) {
+	for (const article of fragment.querySelectorAll('article')) {
 		if (document.getElementById(article.id)) article.remove();
 	}
 
@@ -244,26 +244,23 @@ export const Liveness = ({
 		// Update the block id we use for polling
 		setLatestBlockId(result.output.mostRecentBlockId);
 
-		if (result.output.numNewBlocks > 0) {
-			// Insert the new blocks in the dom (but hidden)
-			if (onFirstPage && topOfBlog) {
-				try {
-					insert(result.output.html, enhanceTweetsSwitch, topOfBlog);
-				} catch (error) {
-					// eslint-disable-next-line no-console -- this is something we want to know about
-					console.error('Failed to insert new blocks', error);
-					error instanceof Error &&
-						window.guardian.modules.sentry.reportError(
-							error,
-							'liveblog',
-						);
-				}
-			}
-
-			setShowToast(true);
-			// Increment the count of new posts
-			setNumHiddenBlocks((count) => count + result.output.numNewBlocks);
+		if (result.output.numNewBlocks < 1 || !onFirstPage || !topOfBlog) {
+			return; // no need to insert new blocks as <article> in the DOM
 		}
+
+		// Insert the new blocks in the dom (but hidden)
+		try {
+			insert(result.output.html, enhanceTweetsSwitch, topOfBlog);
+		} catch (error) {
+			// eslint-disable-next-line no-console -- this is something we want to know about
+			console.error('Failed to insert new blocks', error);
+			error instanceof Error &&
+				window.guardian.modules.sentry.reportError(error, 'liveblog');
+		}
+
+		setShowToast(true);
+		// Increment the count of new posts
+		setNumHiddenBlocks((count) => count + result.output.numNewBlocks);
 	}, [data, enhanceTweetsSwitch, onFirstPage, topOfBlog]);
 
 	useEffect(() => {
