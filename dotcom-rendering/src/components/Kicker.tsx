@@ -1,22 +1,26 @@
 import { css } from '@emotion/react';
-import { textSansBold14 } from '@guardian/source/foundations';
+import { textSansBold14, textSansBold15 } from '@guardian/source/foundations';
+import { palette } from '../palette';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
 
 type Props = {
 	text: string;
 	color: string;
-	backgroundColor?: string;
-	isSublink?: boolean;
 	showPulsingDot?: boolean;
-	pulsingDotColor?: string;
 	hideLineBreak?: boolean;
 };
 
 const textStyles = css`
+	${textSansBold15}
+	margin-right: 4px;
+`;
+
+const liveTextStyles = css`
 	${textSansBold14}
 	margin-right: 4px;
 	width: fit-content;
+	padding: 0 4px;
 `;
 
 /**
@@ -25,34 +29,31 @@ const textStyles = css`
 export const Kicker = ({
 	text,
 	color,
-	backgroundColor = 'transparent',
 	showPulsingDot,
-	isSublink,
-	pulsingDotColor = color,
 	hideLineBreak,
-}: Props) => {
-	return (
-		<div
-			css={[
-				textStyles,
-				hideLineBreak &&
-					css`
-						display: inline-block;
-					`,
-			]}
-			/** Dynamic styles are best in the style prop */
-			style={{
-				color,
-				...(!isSublink &&
-					showPulsingDot && { backgroundColor, padding: '0 4px' }),
-			}}
-		>
-			{showPulsingDot && (
-				<Island priority="enhancement" defer={{ until: 'visible' }}>
-					<PulsingDot colour={pulsingDotColor} />
-				</Island>
-			)}
-			{text}
-		</div>
-	);
-};
+}: Props) => (
+	<div
+		css={[
+			showPulsingDot ? liveTextStyles : textStyles,
+			hideLineBreak &&
+				css`
+					display: inline-block;
+				`,
+		]}
+		style={{
+			color: showPulsingDot
+				? palette('--kicker-text-with-pulsing-dot')
+				: color,
+			backgroundColor: showPulsingDot
+				? palette('--kicker-background-with-pulsing-dot')
+				: 'transparent',
+		}}
+	>
+		{showPulsingDot && (
+			<Island priority="enhancement" defer={{ until: 'visible' }}>
+				<PulsingDot colour={palette('--kicker-pulsing-dot')} />
+			</Island>
+		)}
+		{text}
+	</div>
+);

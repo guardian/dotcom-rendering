@@ -171,7 +171,6 @@ export const SupportingContent = ({
 										linkTo={subLink.url}
 										containerPalette={containerPalette}
 										isDynamo={isDynamo}
-										isSublink={true}
 										headlineText={subLink.headline}
 										kickerText={subLink.kickerText}
 									/>

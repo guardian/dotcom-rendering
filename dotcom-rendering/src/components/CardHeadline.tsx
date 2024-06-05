@@ -39,7 +39,6 @@ type Props = {
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
-	isSublink?: boolean;
 	isExternalLink?: boolean;
 	isOnwardContent?: boolean;
 };
@@ -290,7 +289,6 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 	isDynamo,
-	isSublink,
 	isExternalLink,
 	isOnwardContent = false,
 }: Props) => {
@@ -322,17 +320,8 @@ export const CardHeadline = ({
 					{!!kickerText && (
 						<Kicker
 							text={kickerText}
-							color={
-								showPulsingDot
-									? palette('--kicker-text-with-pulsing-dot')
-									: kickerColour
-							}
-							backgroundColor={palette(
-								'--kicker-background-with-pulsing-dot',
-							)}
-							isSublink={isSublink}
+							color={kickerColour}
 							showPulsingDot={showPulsingDot}
-							pulsingDotColor={palette('--kicker-pulsing-dot')}
 							hideLineBreak={hideLineBreak}
 						/>
 					)}

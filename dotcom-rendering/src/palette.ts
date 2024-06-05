@@ -2699,8 +2699,11 @@ const kickerPulsingDot: PaletteFunction = (format) => {
 	}
 };
 
-const kickerTextWithPulsingDot: PaletteFunction = () =>
-	sourcePalette.neutral[100];
+const kickerTextWithPulsingDotLight: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+
+const kickerTextWithPulsingDotDark: PaletteFunction = () =>
+	sourcePalette.neutral[93];
 
 const cardKickerTextLight: PaletteFunction = (format) => {
 	if (
@@ -6183,8 +6186,8 @@ const paletteColours = {
 		dark: kickerPulsingDot,
 	},
 	'--kicker-text-with-pulsing-dot': {
-		light: kickerTextWithPulsingDot,
-		dark: kickerTextWithPulsingDot,
+		light: kickerTextWithPulsingDotLight,
+		dark: kickerTextWithPulsingDotDark,
 	},
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
