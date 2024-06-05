@@ -1,5 +1,6 @@
 import { isString, timeAgo } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { type EditionId, getEditionFromId } from '../lib/edition';
 import { useIsInView } from '../lib/useIsInView';
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 	then: number;
 	/** the time to compare to */
 	now: number;
+	editionId: EditionId;
 };
 
 const ONE_MINUTE = 60_000;
@@ -54,7 +56,7 @@ const relativeTime = (
  *
  * We update the relative time on the browser on an interval.
  */
-export const RelativeTime = ({ then, now }: Props) => {
+export const RelativeTime = ({ then, now, editionId }: Props) => {
 	const [inView, ref] = useIsInView({ repeat: true });
 	const [display, setDisplay] = useState(relativeTime(then, now, 'server'));
 
@@ -68,12 +70,14 @@ export const RelativeTime = ({ then, now }: Props) => {
 	}, [inView, now, then]);
 
 	const date = new Date(then);
+	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
 	return (
 		<time
 			ref={ref}
 			dateTime={date.toISOString()}
-			title={date.toLocaleDateString('en-GB', {
+			data-locale={dateLocale}
+			title={date.toLocaleDateString(dateLocale, {
 				hour: '2-digit',
 				minute: '2-digit',
 				weekday: 'long',
@@ -81,6 +85,7 @@ export const RelativeTime = ({ then, now }: Props) => {
 				month: 'long',
 				day: 'numeric',
 				timeZoneName: 'long',
+				timeZone,
 			})}
 		>
 			{display}

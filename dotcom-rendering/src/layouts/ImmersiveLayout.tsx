@@ -290,7 +290,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 			min-height: calc(50rem - ${navAndLabsHeaderHeight});
 		}
 	`;
-
 	const LeftColCaption = () => (
 		<div
 			css={css`
@@ -312,6 +311,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const inTagLinkTest =
+		article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	return (
 		<>
@@ -459,7 +460,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 			</header>
 
-			<main data-layout="ImmersiveLayout">
+			<main
+				data-layout="ImmersiveLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -519,6 +523,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											guardianBaseURL={
 												article.guardianBaseURL
 											}
+											inTagLinkTest={inTagLinkTest}
 										/>
 									</div>
 								)}
