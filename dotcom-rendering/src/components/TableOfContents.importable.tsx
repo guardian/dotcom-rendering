@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
-/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {
@@ -136,10 +134,18 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 					e.preventDefault();
 					setOpen(!open);
 				}}
+				onKeyDown={(e): void => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						setOpen(!open);
+					}
+				}}
 				data-link-name={
 					open ? 'table-of-contents-close' : 'table-of-contents-open'
 				}
 				css={summaryStyles}
+				tabIndex={0}
+				role="button"
 			>
 				<h2 css={titleStyle}>Jump to</h2>
 				<span className="is-closed">
