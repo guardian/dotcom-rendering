@@ -312,7 +312,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	return (
 		<>

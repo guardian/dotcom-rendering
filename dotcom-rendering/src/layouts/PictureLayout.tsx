@@ -288,7 +288,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
 

@@ -308,7 +308,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	return (
 		<>
