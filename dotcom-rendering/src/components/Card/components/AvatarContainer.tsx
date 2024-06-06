@@ -5,7 +5,7 @@ import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
-	imagePosition: ImagePositionType;
+	imagePositionOnDesktop: ImagePositionType;
 };
 
 const sideMarginStyles = css`
@@ -24,9 +24,10 @@ const largerTopMargin = css`
 
 const sizingStyles = (
 	imageSize: ImageSizeType,
-	imagePosition: ImagePositionType,
+	imagePositionOnDesktop: ImagePositionType,
 ) => {
-	const isVertical = imagePosition === 'top' || imagePosition === 'bottom';
+	const isVertical =
+		imagePositionOnDesktop === 'top' || imagePositionOnDesktop === 'bottom';
 
 	switch (imageSize) {
 		case 'small':
@@ -66,9 +67,10 @@ const sizingStyles = (
 export const AvatarContainer = ({
 	children,
 	imageSize,
-	imagePosition,
+	imagePositionOnDesktop,
 }: Props) => {
-	const isVertical = imagePosition === 'top' || imagePosition === 'bottom';
+	const isVertical =
+		imagePositionOnDesktop === 'top' || imagePositionOnDesktop === 'bottom';
 
 	return (
 		<div
@@ -76,7 +78,7 @@ export const AvatarContainer = ({
 				sideMarginStyles,
 				topMarginStyles,
 				isVertical && largerTopMargin,
-				sizingStyles(imageSize, imagePosition),
+				sizingStyles(imageSize, imagePositionOnDesktop),
 			]}
 		>
 			{children}
