@@ -21,7 +21,13 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
-const pillarLeftMarginPx = 6;
+export const pillarWidthsPx = {
+	tablet: 108,
+	leftCol: 125,
+	wide: 136,
+};
+
+export const pillarLeftMarginPx = 6;
 
 const pillarsContainer = css`
 	display: flex;
@@ -151,7 +157,7 @@ const pillarBlock = css`
 	}
 
 	${from.tablet} {
-		width: 108px;
+		width: ${pillarWidthsPx.tablet}px;
 	}
 
 	${from.desktop} {
@@ -160,11 +166,11 @@ const pillarBlock = css`
 
 	${from.leftCol} {
 		height: 52px;
-		width: 125px;
+		width: ${pillarWidthsPx.leftCol}px;
 	}
 
 	${from.wide} {
-		width: 136px;
+		width: ${pillarWidthsPx.wide}px;
 	}
 `;
 
