@@ -132,12 +132,12 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 			<summary
 				onClick={(e): void => {
 					e.preventDefault();
-					setOpen(!open);
+					setOpen((state) => !state);
 				}}
 				onKeyDown={(e): void => {
 					if (e.key === 'Enter' || e.key === ' ') {
 						e.preventDefault();
-						setOpen(!open);
+						setOpen((state) => !state);
 					}
 				}}
 				data-link-name={
