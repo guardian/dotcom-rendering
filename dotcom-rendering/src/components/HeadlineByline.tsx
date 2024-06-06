@@ -105,7 +105,7 @@ const immersiveStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineMedium20}
 	${format.theme === ArticleSpecial.Labs && 'line-height: 1.15;'}
 	margin-bottom: ${space[6]}px;
-
+	color: ${schemedPalette('--headline-byline')};
 	${from.tablet} {
 		margin-bottom: 0;
 		${format.theme === ArticleSpecial.Labs ? textSans24 : headlineMedium24}
