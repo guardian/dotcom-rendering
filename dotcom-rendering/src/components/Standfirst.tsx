@@ -222,6 +222,9 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 				default:
 					return css`
 						padding-bottom: ${space[2]}px;
+						${from.tablet} {
+							padding-bottom: 14px;
+						}
 					`;
 			}
 		}
