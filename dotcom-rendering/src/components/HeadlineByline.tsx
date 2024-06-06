@@ -2,13 +2,16 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	headlineLight24,
+	from,
 	headlineLightItalic28,
 	headlineLightItalic34,
+	headlineMedium20,
+	headlineMedium24,
 	headlineMediumItalic20,
 	palette,
 	space,
 	textSans20,
+	textSans24,
 	textSansItalic20,
 	textSansItalic34,
 	until,
@@ -99,9 +102,14 @@ const analysisSingleContributorStyles = css`
 `;
 
 const immersiveStyles = (format: ArticleFormat) => css`
-	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineLight24}
+	${format.theme === ArticleSpecial.Labs ? textSans20 : headlineMedium20}
 	${format.theme === ArticleSpecial.Labs && 'line-height: 1.15;'}
 	margin-bottom: ${space[6]}px;
+
+	${from.tablet} {
+		margin-bottom: 0;
+		${format.theme === ArticleSpecial.Labs ? textSans24 : headlineMedium24}
+	}
 `;
 
 const immersiveLinkStyles = css`
