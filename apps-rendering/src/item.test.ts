@@ -614,17 +614,17 @@ describe('list elements', () => {
 		expect(
 			item.body[0].kind === ElementKind.HeadingTwo &&
 				item.body[0].doc.firstChild?.textContent == 'Some title 1',
-		);
+		).toBe(true);
 		expect(item.body[1].kind).toBe(ElementKind.Embed);
 		expect(
 			item.body[4].kind === ElementKind.HeadingTwo &&
 				item.body[4].doc.firstChild?.textContent == 'Some title 2',
-		);
-		expect(item.body[5].kind === ElementKind.Text);
+		).toBe(true);
+		expect(item.body[5].kind).toBe(ElementKind.Text);
 		expect(
 			item.body[6].kind === ElementKind.HeadingTwo &&
 				item.body[6].doc.firstChild?.textContent == 'Some title 3',
-		);
+		).toBe(true);
 	});
 
 	test('filters list elements without listTypeData', () => {
