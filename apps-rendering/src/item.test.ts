@@ -638,6 +638,118 @@ describe('list elements', () => {
 	});
 });
 
+describe('timeline elements', () => {
+	test('parses timeline elements', () => {
+		const embedElement = {
+			type: ElementType.EMBED,
+			assets: [],
+			embedTypeData: {
+				html: '<p>Embed element<p>',
+				source: 'mockSource',
+				sourceDomain: 'mockSourceDomain',
+			},
+		};
+
+		const textElement = {
+			type: ElementType.TEXT,
+			assets: [],
+			textTypeData: {
+				html: '<p>paragraph</p>',
+			},
+		};
+
+		const timelineElement = {
+			type: ElementType.TIMELINE,
+			assets: [],
+			timelineTypeData: {
+				sections: [
+					{
+						title: 'Section 1',
+						events: [
+							{
+								body: [embedElement, textElement],
+								title: 'Event 1',
+								date: '2020-12-25',
+								label: 'Christmas Day',
+							},
+							{
+								body: [textElement],
+								title: 'Event 2',
+								date: '2020-12-26',
+								label: 'Boxing Day',
+							},
+						],
+					},
+					{
+						title: 'Section 2',
+						events: [
+							{
+								body: [textElement],
+								title: 'Event 3',
+								date: '2021-01-01',
+							},
+						],
+					},
+				],
+			},
+		};
+		const item = f(articleContentWith(timelineElement)) as Standard;
+
+		expect(
+			item.body[0].kind === ElementKind.HeadingTwo &&
+				item.body[0].doc.textContent === 'Section 1',
+		).toBe(true);
+
+		expect(
+			item.body[1].kind === ElementKind.HeadingTwo &&
+				item.body[1].doc.textContent === 'Event 1',
+		).toBe(true);
+
+		expect(
+			item.body[2].kind === ElementKind.Text &&
+				item.body[2].doc.textContent === '2020-12-25',
+		).toBe(true);
+
+		expect(
+			item.body[3].kind === ElementKind.Text &&
+				item.body[3].doc.textContent === 'Christmas Day',
+		).toBe(true);
+
+		expect(item.body[4].kind === ElementKind.Embed).toBe(true);
+
+		expect(item.body[5].kind === ElementKind.Text).toBe(true);
+
+		expect(
+			item.body[6].kind === ElementKind.HeadingTwo &&
+				item.body[6].doc.textContent === 'Event 2',
+		).toBe(true);
+
+		// Skip a few for brevity...
+
+		expect(
+			item.body[10].kind === ElementKind.HeadingTwo &&
+				item.body[10].doc.textContent === 'Section 2',
+		).toBe(true);
+
+		expect(
+			item.body[11].kind === ElementKind.HeadingTwo &&
+				item.body[11].doc.textContent === 'Event 3',
+		).toBe(true);
+
+		// Skip a few for brevity...
+	});
+
+	test('filters timeline elements without timelineTypeData', () => {
+		const timelineElement = {
+			type: ElementType.TIMELINE,
+			assets: [],
+		};
+		const item = f(articleContentWith(timelineElement)) as Standard;
+		const element = getFirstBody(item);
+		expect(element.kind).toBe(ElementKind.Interactive);
+	});
+});
+
 describe('audio elements', () => {
 	test('filters out audio elements with no src attributes on iframe', () => {
 		const audioElement = {
