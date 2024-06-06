@@ -481,6 +481,19 @@ export const WebVideoStandardNewsLight: Story = {
 	parameters: webParameters,
 };
 
+export const WebVideoStandardLabsLight: Story = {
+	args: {
+		article: {
+			...VideoStandardNewsFixture,
+			format: {
+				...VideoStandardNewsFixture.format,
+				theme: 'Labs',
+			},
+		},
+	},
+	parameters: webParameters,
+};
+
 export const AppsVideoStandardNewsLight: Story = {
 	args: {
 		article: VideoStandardNewsFixture,

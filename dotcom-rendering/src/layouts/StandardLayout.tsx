@@ -733,7 +733,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									{isWeb &&
-									format.theme === ArticleSpecial.Labs ? (
+									format.theme === ArticleSpecial.Labs &&
+									format.design !== ArticleDesign.Video ? (
 										<GuardianLabsLines />
 									) : (
 										<DecideLines
