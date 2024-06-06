@@ -51,151 +51,104 @@ const pillarPalette = (
 const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
+			return sourcePalette.neutral[97];
+		default: {
 			switch (design) {
-				case ArticleDesign.PrintShop:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Analysis:
+				case ArticleDesign.Feature:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Review: {
+					switch (theme) {
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[200];
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.specialReport[200];
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[200];
+						default:
+							return pillarPalette(theme, 200);
+					}
+				}
+				case ArticleDesign.LiveBlog: {
 					switch (theme) {
 						case ArticleSpecial.SpecialReport:
+							return sourcePalette.specialReport[200];
+						default:
 							return sourcePalette.neutral[100];
+					}
+				}
+				case ArticleDesign.DeadBlog: {
+					switch (theme) {
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.specialReport[200];
 						default:
 							return sourcePalette.neutral[7];
 					}
-				default: {
-					return sourcePalette.neutral[100];
 				}
+				case ArticleDesign.Interview:
+				case ArticleDesign.Picture:
+				case ArticleDesign.Audio:
+				case ArticleDesign.PrintShop:
+					return sourcePalette.neutral[97];
+				case ArticleDesign.Video:
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[7];
+						default:
+							return sourcePalette.neutral[97];
+					}
+				default:
+					return sourcePalette.neutral[7];
 			}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport: {
-					switch (design) {
-						case ArticleDesign.Interview:
-						case ArticleDesign.Video:
-						case ArticleDesign.Audio:
-							return sourcePalette.neutral[100];
-						default:
-							return sourcePalette.specialReport[100];
-					}
-				}
-				case ArticleSpecial.SpecialReportAlt: {
-					switch (design) {
-						case ArticleDesign.Interview:
-							return sourcePalette.specialReport[800];
-						case ArticleDesign.LiveBlog:
-						case ArticleDesign.Video:
-						case ArticleDesign.Audio:
-							return sourcePalette.neutral[100];
-						case ArticleDesign.DeadBlog:
-							return sourcePalette.neutral[7];
-						default:
-							return sourcePalette.neutral[7];
-					}
-				}
-				default: {
-					switch (design) {
-						case ArticleDesign.Review:
-						case ArticleDesign.Recipe:
-						case ArticleDesign.Feature:
-							switch (theme) {
-								case Pillar.News:
-								case Pillar.Sport:
-								case Pillar.Culture:
-								case Pillar.Lifestyle:
-								case Pillar.Opinion:
-									return pillarPalette(theme, 300);
-								case ArticleSpecial.Labs:
-									return sourcePalette.labs[300];
-							}
-						case ArticleDesign.Interview:
-						case ArticleDesign.LiveBlog:
-							return sourcePalette.neutral[100];
-						case ArticleDesign.Picture:
-						case ArticleDesign.Video:
-						case ArticleDesign.Audio:
-							switch (theme) {
-								case ArticleSpecial.Labs:
-									return sourcePalette.neutral[7];
-								default:
-									return sourcePalette.neutral[100];
-							}
-						default:
-							return sourcePalette.neutral[7];
-					}
-				}
-			}
-		default:
-			return sourcePalette.neutral[7];
+		}
 	}
 };
+
 const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
+			return sourcePalette.neutral[97];
+		default: {
 			switch (design) {
-				case ArticleDesign.PrintShop:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Analysis:
+				case ArticleDesign.Feature:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Review: {
+					switch (theme) {
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[700];
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.specialReport[500];
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[400];
+						default:
+							return pillarPalette(theme, 500);
+					}
+				}
+				case ArticleDesign.DeadBlog: {
 					switch (theme) {
 						case ArticleSpecial.SpecialReport:
-							return sourcePalette.neutral[100];
-						default:
-							return sourcePalette.neutral[7];
-					}
-				default: {
-					return sourcePalette.neutral[100];
-				}
-			}
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.NumberedList:
-		case ArticleDisplay.Standard:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport: {
-					switch (design) {
-						case ArticleDesign.Interview:
-							return sourcePalette.neutral[100];
-						case ArticleDesign.LiveBlog:
-							return sourcePalette.neutral[100];
-						default:
 							return sourcePalette.specialReport[500];
-					}
-				}
-				case ArticleSpecial.SpecialReportAlt: {
-					switch (design) {
-						case ArticleDesign.Interview:
-							return sourcePalette.specialReport[800];
-						case ArticleDesign.LiveBlog:
-							return sourcePalette.neutral[100];
-						case ArticleDesign.DeadBlog:
-							return sourcePalette.neutral[60];
 						default:
-							return sourcePalette.neutral[60];
+							return sourcePalette.neutral[97];
 					}
 				}
-				default: {
-					switch (design) {
-						case ArticleDesign.Review:
-						case ArticleDesign.Recipe:
-						case ArticleDesign.Feature:
-							switch (theme) {
-								case ArticleSpecial.Labs:
-									return sourcePalette.labs[300];
-								case Pillar.News:
-								case Pillar.Sport:
-								case Pillar.Culture:
-								case Pillar.Lifestyle:
-								case Pillar.Opinion:
-									return sourcePalette.neutral[86];
-							}
-						case ArticleDesign.Interview:
-						case ArticleDesign.LiveBlog:
-						case ArticleDesign.Picture:
-						case ArticleDesign.Video:
-						case ArticleDesign.Audio:
-							return sourcePalette.neutral[100];
+				case ArticleDesign.LiveBlog: {
+					switch (theme) {
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.neutral[93];
 						default:
-							return sourcePalette.neutral[86];
+							return sourcePalette.neutral[97];
 					}
 				}
+				default:
+					return sourcePalette.neutral[97];
 			}
-		default:
-			return sourcePalette.neutral[7];
+		}
 	}
 };
 const headlineBackgroundLight: PaletteFunction = ({
@@ -307,6 +260,44 @@ const headlineBlogBackgroundDark: PaletteFunction = ({
 	theme,
 }) => {
 	return headlineBackgroundDark({ design, display, theme });
+};
+
+const headlineBylineLight: PaletteFunction = ({ display, theme }) => {
+	switch (display) {
+		case ArticleDisplay.Immersive: {
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				default:
+					return pillarPalette(theme, 400);
+			}
+		}
+		default:
+			return 'inherit';
+	}
+};
+
+const headlineBylineDark: PaletteFunction = ({ display, theme }) => {
+	switch (display) {
+		case ArticleDisplay.Immersive: {
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				default:
+					return pillarPalette(theme, 500);
+			}
+		}
+		default:
+			return 'inherit';
+	}
 };
 
 const bylineLight: PaletteFunction = ({ design, theme }) => {
@@ -6163,6 +6154,10 @@ const paletteColours = {
 	'--headline-border': {
 		light: headlineBorder,
 		dark: headlineBorder,
+	},
+	'--headline-byline': {
+		light: headlineBylineLight,
+		dark: headlineBylineDark,
 	},
 	'--headline-colour': {
 		light: headlineTextLight,

@@ -555,9 +555,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											hasStarRating={
-												!isUndefined(article.starRating)
-											}
 										/>
 									)}
 								</div>

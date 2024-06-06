@@ -4,7 +4,6 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
@@ -337,7 +336,6 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-top: ${space[4]}px;
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
@@ -706,9 +704,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									byline={article.byline}
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										typeof article.starRating === 'number'
 									}
 								/>
 							</div>
