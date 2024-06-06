@@ -150,7 +150,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 		case ArticleDisplay.Immersive:
 			return (
 				<div css={immersiveStyles(format)}>
-					by{' '}
+					By{' '}
 					<span css={immersiveLinkStyles}>
 						<BylineLink
 							byline={byline}
