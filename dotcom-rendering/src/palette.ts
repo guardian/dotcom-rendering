@@ -123,11 +123,18 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 							return pillarPalette(theme, 500);
 					}
 				}
-				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog: {
 					switch (theme) {
 						case ArticleSpecial.SpecialReport:
 							return sourcePalette.specialReport[500];
+						default:
+							return sourcePalette.neutral[97];
+					}
+				}
+				case ArticleDesign.LiveBlog: {
+					switch (theme) {
+						case ArticleSpecial.SpecialReport:
+							return sourcePalette.neutral[93];
 						default:
 							return sourcePalette.neutral[97];
 					}
