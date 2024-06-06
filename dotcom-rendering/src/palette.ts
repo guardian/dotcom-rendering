@@ -256,6 +256,44 @@ const headlineBlogBackgroundDark: PaletteFunction = ({
 	return headlineBackgroundDark({ design, display, theme });
 };
 
+const headlineBylineLight: PaletteFunction = ({ display, theme }) => {
+	switch (display) {
+		case ArticleDisplay.Immersive: {
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[300];
+				default:
+					return pillarPalette(theme, 400);
+			}
+		}
+		default:
+			return 'inherit';
+	}
+};
+
+const headlineBylineDark: PaletteFunction = ({ display, theme }) => {
+	switch (display) {
+		case ArticleDisplay.Immersive: {
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[700];
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				default:
+					return pillarPalette(theme, 500);
+			}
+		}
+		default:
+			return 'inherit';
+	}
+};
+
 const bylineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Picture:
@@ -6039,6 +6077,10 @@ const paletteColours = {
 	'--headline-border': {
 		light: headlineBorder,
 		dark: headlineBorder,
+	},
+	'--headline-byline': {
+		light: headlineBylineLight,
+		dark: headlineBylineDark,
 	},
 	'--headline-colour': {
 		light: headlineTextLight,
