@@ -54,9 +54,7 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 			return sourcePalette.neutral[97];
 		default: {
 			switch (design) {
-				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
-				case ArticleDesign.Analysis:
 				case ArticleDesign.Feature:
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review: {
@@ -106,9 +104,7 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 			return sourcePalette.neutral[97];
 		default: {
 			switch (design) {
-				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
-				case ArticleDesign.Analysis:
 				case ArticleDesign.Feature:
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review: {
