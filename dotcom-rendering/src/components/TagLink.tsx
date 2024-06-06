@@ -106,7 +106,7 @@ export const TagLink = ({
 			>
 				<div css={labelStyles}>{sectionLabel}</div>
 				<div css={tagButtonStyles}>
-					<div>Discover More</div>
+					<div>Discover more</div>
 
 					<div css={arrowStyles}>
 						<SvgArrowRightStraight />
