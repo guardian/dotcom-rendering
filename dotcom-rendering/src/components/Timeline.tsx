@@ -25,8 +25,8 @@ import { Subheading } from './Subheading';
 
 // ----- Helpers ----- //
 
-const hasTitle = (event: DCRTimelineEvent): boolean =>
-	event.title !== undefined && event.title.trim() !== '';
+const isValidString = (str?: string): boolean =>
+	str !== undefined && str.trim() !== '';
 
 const hasShowcaseRole = (element?: FEElement): boolean => {
 	if (element === undefined) return false;
@@ -114,7 +114,7 @@ const EventHeader = ({
 			<span css={smallDates ? smallDateStyles : titleStyles(format)}>
 				{event.date}
 			</span>
-			{hasTitle(event) ? (
+			{isValidString(event.title) ? (
 				<span css={titleStyles(format)}>{event.title}</span>
 			) : null}
 		</Heading>
@@ -212,41 +212,43 @@ const TimelineEvent = ({
 	sectioned,
 	smallDates,
 	format,
-}: TimelineEventProps) => (
-	<>
-		{event.label !== undefined && (
-			<div css={labelStyles}>{event.label}</div>
-		)}
-		<section
-			css={[
-				eventStyles,
-				hasShowcaseRole(event.main)
-					? immersiveMainElementEventStyles
-					: undefined,
-			]}
-		>
-			<EventHeader
-				event={event}
-				ArticleElementComponent={ArticleElementComponent}
-				sectioned={sectioned}
-				smallDates={smallDates}
-				format={format}
-			/>
-			{event.body.map((element, index) => (
-				<ArticleElementComponent
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-					key={index}
-					index={index}
-					element={element}
-					forceDropCap="off"
+}: TimelineEventProps) => {
+	return (
+		<>
+			{isValidString(event.label) && (
+				<div css={labelStyles}>{event.label}</div>
+			)}
+			<section
+				css={[
+					eventStyles,
+					hasShowcaseRole(event.main)
+						? immersiveMainElementEventStyles
+						: undefined,
+				]}
+			>
+				<EventHeader
+					event={event}
+					ArticleElementComponent={ArticleElementComponent}
+					sectioned={sectioned}
+					smallDates={smallDates}
 					format={format}
-					isTimeline={true}
-					isMainMedia={false}
 				/>
-			))}
-		</section>
-	</>
-);
+				{event.body.map((element, index) => (
+					<ArticleElementComponent
+						// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+						key={index}
+						index={index}
+						element={element}
+						forceDropCap="off"
+						format={format}
+						isTimeline={true}
+						isMainMedia={false}
+					/>
+				))}
+			</section>
+		</>
+	);
+};
 
 // ----- Timeline ----- //
 
@@ -263,7 +265,9 @@ export const Timeline = ({
 }: Props) => {
 	switch (timeline._type) {
 		case 'model.dotcomrendering.pageElements.DCRTimelineBlockElement': {
-			const someEventsHaveTitles = timeline.events.some(hasTitle);
+			const someEventsHaveTitles = timeline.events.some((event) =>
+				isValidString(event.title),
+			);
 
 			return (
 				<>
@@ -282,7 +286,7 @@ export const Timeline = ({
 		}
 		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement': {
 			const someEventsHaveTitles = timeline.sections.some((section) =>
-				section.events.some(hasTitle),
+				section.events.some((event) => isValidString(event.title)),
 			);
 
 			return (

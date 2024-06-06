@@ -307,6 +307,8 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
+	const inTagLinkTest =
+		article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	return (
 		<>
@@ -465,7 +467,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 
-			<main data-layout="CommentLayout">
+			<main
+				data-layout="CommentLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -522,6 +527,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -543,10 +549,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										byline={article.byline}
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
-										}
-										hasStarRating={
-											typeof article.starRating ===
-											'number'
 										}
 										hasAvatar={!!avatarUrl}
 									/>
