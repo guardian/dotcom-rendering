@@ -21,6 +21,8 @@ type Props = {
 const wrapperStyles = css`
 	position: relative;
 	display: flex;
+	padding-left: 4px;
+	padding-right: 4px;
 	padding-bottom: 4px;
 	@media (pointer: coarse) {
 		padding-bottom: 0;
@@ -167,8 +169,8 @@ export const SupportingContent = ({
 										hideLineBreak={true}
 										showLine={true}
 										linkTo={subLink.url}
+										containerPalette={containerPalette}
 										isDynamo={isDynamo}
-										isSublink={true}
 										headlineText={subLink.headline}
 										kickerText={subLink.kickerText}
 									/>

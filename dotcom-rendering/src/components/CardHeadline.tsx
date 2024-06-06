@@ -1,31 +1,25 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
+import type { FontScaleArgs, FontWeight } from '@guardian/source/foundations';
 import {
 	between,
+	fontWeights,
 	from,
-	headlineMedium14,
-	headlineMedium17,
-	headlineMedium20,
-	headlineMedium24,
-	headlineMedium28,
-	headlineMedium34,
-	headlineMedium42,
-	headlineMedium50,
+	headline,
+	remBodySizes,
 	space,
 	textSans12,
-	textSans14,
 	textSans15,
 	textSans17,
 	textSans20,
-	textSans24,
-	textSans28,
-	textSans34,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
+import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
+import type { DCRContainerPalette } from '../types/front';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
@@ -33,6 +27,7 @@ import { QuoteIcon } from './QuoteIcon';
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat; // Used to decide when to add type specific styles
+	containerPalette?: DCRContainerPalette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	hideLineBreak?: boolean;
@@ -44,81 +39,110 @@ type Props = {
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
-	isSublink?: true;
 	isExternalLink?: boolean;
 	isOnwardContent?: boolean;
 };
 
 const fontStyles = ({
 	size,
-	isSublink,
+	fontWeight,
 }: {
 	size: SmallHeadlineSize;
-	isSublink?: boolean;
+	fontWeight?: FontWeight;
 }) => {
+	const options: FontScaleArgs = {};
+	if (fontWeight) options.fontWeight = fontWeight;
+
 	switch (size) {
 		case 'ginormous':
 			return css`
 				${from.desktop} {
-					${headlineMedium50}
+					${headline.large(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
+					font-size: 50px;
 				}
 			`;
 		case 'huge':
 			return css`
-				${isSublink ? textSans28 : headlineMedium28}
+				${headline.small(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'large':
 			return css`
-				${isSublink ? textSans24 : headlineMedium24}
+				${headline.xsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'medium':
 			return css`
-				${isSublink ? textSans20 : headlineMedium20}
+				${headline.xxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'small':
 			return css`
-				${isSublink ? textSans17 : headlineMedium17}
+				${headline.xxxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'tiny':
 			return css`
-				${isSublink ? textSans14 : headlineMedium14}
+				${headline.xxxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
+				font-size: 14px;
 			`;
 	}
 };
 
 const fontStylesOnMobile = ({
 	size,
-	isSublink,
+	fontWeight,
 }: {
 	size: SmallHeadlineSize;
-	isSublink?: boolean;
+	fontWeight?: FontWeight;
 }) => {
+	const options: FontScaleArgs = {};
+	if (fontWeight) options.fontWeight = fontWeight;
+
 	switch (size) {
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					${isSublink ? textSans34 : headlineMedium34}
+					${headline.medium(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 				${between.mobileLandscape.and.desktop} {
-					${headlineMedium42}
+					${headline.large(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'huge':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans24 : headlineMedium24}
+					${headline.xsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'large':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans20 : headlineMedium20}
+					${headline.xxsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'medium':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans17 : headlineMedium17}
+					${headline.xxxsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		default:
@@ -164,6 +188,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 		case 'tiny':
 			return css`
 				${textSans12};
+				font-size: ${remBodySizes.xsmall}rem;
 			`;
 	}
 };
@@ -178,6 +203,7 @@ const sublinkStyles = css`
 	/* stylelint-disable-next-line property-disallowed-list */
 	font-family: inherit;
 	font-size: inherit;
+	font-weight: ${fontWeights.medium};
 	line-height: inherit;
 	@media (pointer: coarse) {
 		min-height: 44px;
@@ -194,7 +220,10 @@ const sublinkStyles = css`
 	}
 `;
 
-const lineStyles = css`
+const lineStyles = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+) => css`
 	padding-top: 1px;
 	:before {
 		display: block;
@@ -202,7 +231,8 @@ const lineStyles = css`
 		top: 0;
 		left: 0;
 		content: '';
-		border-top: 1px solid ${palette('--card-border-supporting')};
+		border-top: 1px solid
+			${decidePalette(format, containerPalette).border.cardSupporting};
 
 		width: 120px;
 		${between.tablet.and.desktop} {
@@ -213,6 +243,7 @@ const lineStyles = css`
 
 const dynamoStyles = css`
 	display: block;
+	font-weight: ${fontWeights.medium};
 	padding: 5px;
 `;
 
@@ -246,6 +277,7 @@ const isFirstWordShort = /^(\w{1,3}) \b/;
 export const CardHeadline = ({
 	headlineText,
 	format,
+	containerPalette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -257,7 +289,6 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 	isDynamo,
-	isSublink,
 	isExternalLink,
 	isOnwardContent = false,
 }: Props) => {
@@ -268,30 +299,33 @@ export const CardHeadline = ({
 	return (
 		<>
 			<h3
-				className={`${
-					isSublink ? 'card-sublink-headline' : 'card-headline'
-				}`}
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
-						: fontStyles({ size, isSublink }),
+						: fontStyles({
+								size,
+								fontWeight: 'medium',
+						  }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
-							isSublink,
+							fontWeight: 'medium',
 						}),
-					showLine && !isDynamo && lineStyles,
+					showLine &&
+						!isDynamo &&
+						lineStyles(format, containerPalette),
 				]}
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
 					{!!kickerText && (
-						<Kicker
-							text={kickerText}
-							color={kickerColour}
-							showPulsingDot={showPulsingDot}
-							isSublink={isSublink}
-							hideLineBreak={hideLineBreak}
-						/>
+						<>
+							<Kicker
+								text={kickerText}
+								color={kickerColour}
+								showPulsingDot={showPulsingDot}
+								hideLineBreak={hideLineBreak}
+							/>
+						</>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span

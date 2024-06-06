@@ -476,21 +476,26 @@ const backgroundCard = (
 	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
-		// TODO - These two container palettes need amending
 		case 'LongRunningPalette':
 			return brand[400];
+		case 'LongRunningAltPalette':
+			return neutral[86];
+		case 'SombrePalette':
+			return specialReport[300];
+		case 'SombreAltPalette':
+			return specialReport[100];
+		case 'InvestigationPalette':
+			return specialReport[300];
 		case 'BreakingPalette':
 			return news[200];
-		//
-		case 'LongRunningAltPalette':
-		case 'SombrePalette':
-		case 'SombreAltPalette':
-		case 'InvestigationPalette':
 		case 'EventPalette':
+			return neutral[93];
 		case 'EventAltPalette':
+			return culture[700];
 		case 'SpecialReportAltPalette':
+			return specialReportAlt[700];
 		case 'PodcastPalette':
-			return 'transparent';
+			return neutral[20];
 	}
 };
 

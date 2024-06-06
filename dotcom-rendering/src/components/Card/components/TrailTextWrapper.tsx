@@ -1,23 +1,23 @@
 import { css } from '@emotion/react';
-import { textSans14, until } from '@guardian/source/foundations';
+import { textEgyptian14, until } from '@guardian/source/foundations';
 import { palette } from '../../../palette';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type Props = {
 	children: string | React.ReactNode;
-	imagePosition?: ImagePositionType;
+	imagePositionOnDesktop?: ImagePositionType;
 	imageSize?: ImageSizeType;
 	imageType?: CardImageType | undefined;
 };
 
 const showTrailText = (
-	imagePosition?: ImagePositionType,
+	imagePositionOnDesktop?: ImagePositionType,
 	imageSize?: ImageSizeType,
 	imageType?: CardImageType | undefined,
 ) => {
 	if (
 		imageSize === 'large' &&
-		imagePosition === 'right' &&
+		imagePositionOnDesktop === 'right' &&
 		imageType !== 'avatar'
 	) {
 		return css`
@@ -35,7 +35,7 @@ const showTrailText = (
 
 export const TrailTextWrapper = ({
 	children,
-	imagePosition,
+	imagePositionOnDesktop,
 	imageSize,
 	imageType,
 }: Props) => {
@@ -46,13 +46,15 @@ export const TrailTextWrapper = ({
 					display: flex;
 					flex-direction: column;
 					color: ${palette('--card-headline-trail-text')};
-					${textSans14};
+					${textEgyptian14};
+					padding-left: 5px;
+					padding-right: 5px;
 					padding-bottom: 8px;
 					strong {
 						font-weight: bold;
 					}
 				`,
-				showTrailText(imagePosition, imageSize, imageType),
+				showTrailText(imagePositionOnDesktop, imageSize, imageType),
 			]}
 		>
 			{children}

@@ -8,7 +8,7 @@ const padding = 20;
 type Props = {
 	children: React.ReactNode;
 	imageType: CardImageType | undefined;
-	imagePosition: ImagePositionType;
+	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
@@ -90,7 +90,7 @@ const decidePosition = (
 
 export const CardLayout = ({
 	children,
-	imagePosition,
+	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	minWidthInPixels,
 	imageType,
@@ -105,7 +105,11 @@ export const CardLayout = ({
 			containerType === 'fixed/video'
 				? videoWidth
 				: minWidth(minWidthInPixels),
-			decidePosition(imagePosition, imagePositionOnMobile, imageType),
+			decidePosition(
+				imagePositionOnDesktop,
+				imagePositionOnMobile,
+				imageType,
+			),
 		]}
 	>
 		{children}

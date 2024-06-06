@@ -479,6 +479,7 @@ export const WithContainerOverrides: StoryObj = ({ format }: StoryProps) => (
 							ArticleSpecial[format.theme] ??
 							'Unknown'
 						} headline`}
+						containerPalette={containerPalette}
 						format={format}
 						byline={`inside a ${containerPalette} container`}
 						showByline={true}

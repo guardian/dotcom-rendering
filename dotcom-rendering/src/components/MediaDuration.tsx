@@ -40,14 +40,14 @@ export function secondsToDuration(secs?: number): string {
 
 export const MediaDuration = ({
 	mediaDuration,
-	imagePosition,
+	imagePositionOnDesktop,
 	imagePositionOnMobile,
 }: {
 	mediaDuration: number;
-	imagePosition?: ImagePositionType;
+	imagePositionOnDesktop?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 }) => {
-	if (imagePosition === 'left') {
+	if (imagePositionOnDesktop === 'left') {
 		return null;
 	}
 	if (imagePositionOnMobile === 'left') {
