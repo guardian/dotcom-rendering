@@ -1,4 +1,4 @@
-import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
+import { ExpandingWrapper } from '@guardian/source-development-kitchen/react-components';
 import { palette } from '../palette';
 import type { CalloutBlockElementV2 } from '../types/content';
 import { CalloutBlock } from './Callout/Callout';

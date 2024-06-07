@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 
 const title = 'Back to homepage';

@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/source-foundations';
+import { neutral, remSpace } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import type { FC } from 'react';

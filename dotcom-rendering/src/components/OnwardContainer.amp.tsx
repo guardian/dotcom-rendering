@@ -4,7 +4,7 @@ import {
 	headlineMedium20,
 	palette,
 	textSans12,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import Camera from '../static/icons/camera.svg';
 import Clock from '../static/icons/clock.svg';
 import Quote from '../static/icons/quote.svg';

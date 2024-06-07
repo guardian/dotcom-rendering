@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headlineBold34, text } from '@guardian/source-foundations';
+import { headlineBold34, text } from '@guardian/source/foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {

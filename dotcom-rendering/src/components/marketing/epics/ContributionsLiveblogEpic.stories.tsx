@@ -73,3 +73,45 @@ export const WithReminderCta: Story = {
 		},
 	},
 };
+
+export const WithChoiceCards: Story = {
+	name: 'ContributionsLiveblogEpic with Choice Cards',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			secondaryCta: {
+				type: SecondaryCtaType.ContributionsReminder,
+			},
+			showReminderFields: {
+				reminderCta: 'Remind me in December',
+				reminderPeriod: '2022-12-01',
+				reminderLabel: 'December',
+			},
+			showChoiceCards: true,
+			choiceCardAmounts: {
+				testName: 'Storybook_test',
+				variantName: 'Control',
+				defaultContributionType: 'MONTHLY',
+				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
+				amountsCardData: {
+					ONE_OFF: {
+						amounts: [5, 10],
+						defaultAmount: 5,
+						hideChooseYourAmount: false,
+					},
+					MONTHLY: {
+						amounts: [4, 10],
+						defaultAmount: 12,
+						hideChooseYourAmount: false,
+					},
+					ANNUAL: {
+						amounts: [50, 100],
+						defaultAmount: 100,
+						hideChooseYourAmount: false,
+					},
+				},
+			},
+		},
+	},
+};

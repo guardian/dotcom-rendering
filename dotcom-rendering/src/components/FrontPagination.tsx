@@ -4,11 +4,11 @@ import {
 	space,
 	textSans14,
 	textSansBold12,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { formatCount } from '../lib/formatCount';
 

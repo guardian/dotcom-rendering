@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints, palette } from '@guardian/source-foundations';
+import { breakpoints, palette } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Caption } from './Caption';

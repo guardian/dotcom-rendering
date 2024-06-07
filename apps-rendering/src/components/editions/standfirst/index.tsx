@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { FontWeight, LineHeight } from '@guardian/source-foundations';
+import type { FontWeight, LineHeight } from '@guardian/source/foundations';
 import {
 	body,
 	from,
@@ -12,7 +12,7 @@ import {
 	neutral,
 	remSpace,
 	text,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import { text as textPalette } from 'palette';

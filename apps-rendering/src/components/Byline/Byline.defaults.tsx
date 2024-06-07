@@ -4,7 +4,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	headlineBold17,
 	headlineMediumItalic17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';

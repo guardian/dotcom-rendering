@@ -9,7 +9,7 @@ import {
 	neutral,
 	remSpace,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, none, withDefault } from '../../../vendor/@guardian/types/index';
 import BylineCard from 'components/BylineCard';

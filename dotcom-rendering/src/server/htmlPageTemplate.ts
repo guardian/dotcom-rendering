@@ -1,4 +1,4 @@
-import { resets, palette as sourcePalette } from '@guardian/source-foundations';
+import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
@@ -23,6 +23,7 @@ type BaseProps = {
 	renderingTarget: RenderingTarget;
 	hasPageSkin?: boolean;
 	weAreHiring: boolean;
+	alternateLangLinks?: string[];
 };
 
 interface WebProps extends BaseProps {
@@ -67,6 +68,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		renderingTarget,
 		hasPageSkin = false,
 		weAreHiring,
+		alternateLangLinks = [],
 	} = props;
 
 	/**
@@ -199,12 +201,13 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <title>${title}</title>
                 <meta name="description" content="${he.encode(description)}" />
+				<meta charset="utf-8">
 				${
 					canonicalUrl !== undefined
 						? `<link rel="canonical" href="${canonicalUrl}" />`
 						: '<!-- no canonical URL -->'
 				}
-                <meta charset="utf-8">
+				${alternateLangLinks.join('\n')}
 				${
 					renderingTarget === 'Web'
 						? `<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">`

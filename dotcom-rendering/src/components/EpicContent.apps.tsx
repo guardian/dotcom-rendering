@@ -4,7 +4,7 @@ import {
 	Button,
 	buttonThemeReaderRevenue,
 	SvgArrowRightStraight,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getAcquisitionsClient } from '../lib/bridgetApi';
 import { useIsInView } from '../lib/useIsInView';

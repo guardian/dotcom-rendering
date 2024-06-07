@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';

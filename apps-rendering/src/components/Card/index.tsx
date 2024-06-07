@@ -17,13 +17,13 @@ import {
 	textSans15,
 	textSans17,
 	textSans20,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgAudio,
 	SvgCamera,
 	SvgQuote,
 	SvgVideo,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import {
 	fromNullable,
 	map,

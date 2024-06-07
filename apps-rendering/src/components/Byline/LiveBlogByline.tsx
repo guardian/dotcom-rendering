@@ -5,7 +5,7 @@ import {
 	from,
 	headlineBold17,
 	headlineMediumItalic17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { text } from 'palette';
 import { darkModeCss } from 'styles';

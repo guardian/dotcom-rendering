@@ -1,7 +1,7 @@
 import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
-import { Tabs } from '@guardian/source-react-components-development-kitchen';
+import { Tabs } from '@guardian/source-development-kitchen/react-components';
 import { useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';

@@ -3,7 +3,7 @@ import {
 	headlineBold34,
 	palette as sourcePalette,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { isLight } from '../lib/isLight';
 import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';

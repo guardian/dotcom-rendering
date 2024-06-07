@@ -6,7 +6,7 @@ import {
 	textSans15,
 	textSans17,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { unescapeData } from '../lib/escapeData';
 
 type Props = {

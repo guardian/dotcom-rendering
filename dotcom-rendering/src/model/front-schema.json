@@ -990,7 +990,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -1703,7 +1703,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -2416,7 +2416,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -3117,6 +3117,17 @@
             ],
             "type": "string"
         },
+        "StarRating": {
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
+        },
         "FEContainerType": {
             "enum": [
                 "dynamic/fast",
@@ -3481,7 +3492,7 @@
                     "type": "number"
                 },
                 "starRating": {
-                    "type": "number"
+                    "$ref": "#/definitions/StarRating"
                 },
                 "linkText": {
                     "type": "string"

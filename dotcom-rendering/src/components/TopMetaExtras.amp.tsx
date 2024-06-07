@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text, textSans12 } from '@guardian/source-foundations';
+import { text, textSans12 } from '@guardian/source/foundations';
 import {
 	neutralBorder,
 	pillarMap,

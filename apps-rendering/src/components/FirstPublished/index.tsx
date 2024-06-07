@@ -7,8 +7,8 @@ import {
 	space,
 	textSans12,
 	textSansBold12,
-} from '@guardian/source-foundations';
-import { SvgPinned } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgPinned } from '@guardian/source/react-components';
 import { timestampFormat } from 'datetime';
 import { border } from 'palette';
 import type { FC } from 'react';

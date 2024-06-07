@@ -3,8 +3,8 @@ import {
 	space,
 	textSans15,
 	textSansBold15,
-} from '@guardian/source-foundations';
-import { Button, SvgIndent } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, SvgIndent } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { CommentType, ReplyType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';

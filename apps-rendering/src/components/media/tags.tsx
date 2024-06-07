@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, remSpace, textSans17 } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans17 } from '@guardian/source/foundations';
 import type { FC } from 'react';
 
 const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`

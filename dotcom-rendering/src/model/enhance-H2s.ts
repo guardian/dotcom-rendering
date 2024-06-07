@@ -33,7 +33,7 @@ const getUnique = (slug: string, array: string[]): string => {
  * This function takes a string and turns it into a slug.
  * There's a bunch of ways to achieve this but we have taken inspiration from https://gist.github.com/codeguy/6684588?permalink_comment_id=3243980#gistcomment-3243980
  */
-const slugify = (text: string) => {
+export const slugify = (text: string): string => {
 	return text
 		.normalize('NFKD') // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
 		.toLowerCase() // Convert the string to lowercase letters

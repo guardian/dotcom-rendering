@@ -18,6 +18,7 @@ describe('App', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>

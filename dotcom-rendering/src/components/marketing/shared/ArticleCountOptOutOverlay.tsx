@@ -15,14 +15,14 @@ import {
 	space,
 	textSans14,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	buttonThemeBrand,
 	buttonThemeBrandAlt,
 	buttonThemeDefault,
 	SvgCross,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { ReactComponent } from '../lib/ReactComponent';
 import type { ArticleCountOptOutType } from './ArticleCountOptOutPopup';
 

@@ -16,9 +16,9 @@ import {
 	textSansBold14,
 	textSansBold15,
 	until,
-} from '@guardian/source-foundations';
-import { palette, space } from '@guardian/source-foundations';
-import { Button, ButtonLink } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { palette, space } from '@guardian/source/foundations';
+import { Button, ButtonLink } from '@guardian/source/react-components';
 import type {
 	ArticleCounts,
 	ArticleCountType,

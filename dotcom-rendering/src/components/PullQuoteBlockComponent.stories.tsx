@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { palette as themePalette } from '../palette';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';

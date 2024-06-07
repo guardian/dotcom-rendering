@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Radio, RadioGroup } from '@guardian/source-react-components';
+import { Radio, RadioGroup } from '@guardian/source/react-components';
 import type { CampaignFieldRadio } from '../../../types/content';
 import { FieldLabel } from './FieldLabel';
 

@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 
 export const verticalDivider = (
 	verticalDividerColour: string,

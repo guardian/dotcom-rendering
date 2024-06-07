@@ -5,8 +5,8 @@ import {
 	palette,
 	textSans14,
 	until,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 

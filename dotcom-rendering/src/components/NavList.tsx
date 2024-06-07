@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space } from '@guardian/source-foundations';
+import { from, palette, space } from '@guardian/source/foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import type { ContainerOverrides } from '../types/palette';

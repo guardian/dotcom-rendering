@@ -1,10 +1,10 @@
 import { css, ThemeProvider } from '@emotion/react';
-import { space } from '@guardian/source-foundations';
+import { space } from '@guardian/source/foundations';
 import {
 	buttonThemeReaderRevenue,
 	LinkButton,
 	SvgArrowRightStraight,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';

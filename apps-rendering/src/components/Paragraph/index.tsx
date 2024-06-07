@@ -5,11 +5,11 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	body,
-	headline,
+	article17,
+	headlineBold42,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans17,
+} from '@guardian/source/foundations';
 import { text } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
@@ -43,14 +43,13 @@ const styles = (
 	showDropCap: boolean,
 	isEditions: boolean,
 ): SerializedStyles => {
-	const labs =
-		format.theme === ArticleSpecial.Labs ? textSans.medium() : null;
+	const labs = format.theme === ArticleSpecial.Labs ? textSans17 : null;
 
 	const dropCap = showDropCap
 		? css`
 				&:first-of-type:first-letter,
 				hr + &:first-letter {
-					${headline.large({ fontWeight: 'bold' })}
+					${headlineBold42}
 					${dropCapWeight(format)}
 					color: ${text.dropCap(format)};
 					float: left;
@@ -79,7 +78,7 @@ const styles = (
 		: null;
 
 	return css`
-		${body.medium()}
+		${article17};
 		overflow-wrap: break-word;
 		margin: 0 0 0.875rem;
 		color: ${text.paragraph(format)};

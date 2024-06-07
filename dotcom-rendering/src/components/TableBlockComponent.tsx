@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, text, textSans12 } from '@guardian/source-foundations';
+import { palette, text, textSans12 } from '@guardian/source/foundations';
 import { unescapeData } from '../lib/escapeData';
 import type { TableBlockElement } from '../types/content';
 

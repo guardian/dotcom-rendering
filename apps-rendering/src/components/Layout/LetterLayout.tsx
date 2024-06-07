@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { breakpoints, from } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
 import Cutout from 'components/Cutout';

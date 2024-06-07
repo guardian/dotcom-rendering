@@ -5,7 +5,7 @@ import {
 	Pillar,
 	storage,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { useEffect } from 'react';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxLayout } from './LightboxLayout.importable';

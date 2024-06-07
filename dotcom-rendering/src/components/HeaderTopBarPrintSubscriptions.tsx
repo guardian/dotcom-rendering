@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
-import { from, palette, textSansBold17 } from '@guardian/source-foundations';
+import { from, palette, textSansBold17 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { usePageViewId } from '../lib/usePageViewId';
 import NewspaperIcon from '../static/icons/newspaper.svg';
+import { useConfig } from './ConfigContext';
 
 interface PrintSubscriptionsProps {
 	editionId: EditionId;
@@ -51,10 +53,11 @@ const linkStyles = css`
 export const HeaderTopBarPrintSubscriptions = ({
 	editionId,
 }: PrintSubscriptionsProps) => {
-	const [pageViewId, setPageViewId] = useState('');
+	const { renderingTarget } = useConfig();
+	const pageViewId = usePageViewId(renderingTarget);
+
 	const [referrerUrl, setReferrerUrl] = useState('');
 	useEffect(() => {
-		setPageViewId(window.guardian.config.ophan.pageViewId);
 		setReferrerUrl(window.location.origin + window.location.pathname);
 	}, []);
 

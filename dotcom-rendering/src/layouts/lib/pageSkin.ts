@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 
 const pageSkinContainer = css`
 	${from.desktop} {

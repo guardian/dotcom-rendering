@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space } from '@guardian/source-foundations';
+import { breakpoints, space } from '@guardian/source/foundations';
 import type { PropsWithChildren } from 'react';
 import type { DCRSlideshowImage } from '../types/front';
 import { Slideshow } from './Slideshow';

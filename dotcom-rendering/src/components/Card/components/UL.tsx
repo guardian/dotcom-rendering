@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { palette } from '../../../palette';

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { from, space, textSans15 } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+import { from, space, textSans15 } from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import type {
 	CommentType,
 	ReplyType,

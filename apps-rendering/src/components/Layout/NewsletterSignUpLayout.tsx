@@ -9,8 +9,8 @@ import {
 	textSans14,
 	textSansBold14,
 	until,
-} from '@guardian/source-foundations';
-import { SvgClock, SvgNewsletter } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgClock, SvgNewsletter } from '@guardian/source/react-components';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';

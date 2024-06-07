@@ -6,8 +6,8 @@ import {
 	palette,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
-import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgGuardianBestWebsiteLogo } from '@guardian/source/react-components';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { NavType, PillarLinkType } from '../model/extract-nav';
 import { ReaderRevenueButton } from './ReaderRevenueButton.amp';

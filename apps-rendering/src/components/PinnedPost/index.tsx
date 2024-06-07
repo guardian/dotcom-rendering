@@ -13,12 +13,12 @@ import {
 	textSansBold17,
 	transitions,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgMinus,
 	SvgPinned,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import LiveBlock from 'components/LiveBlock';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import { background, border } from 'palette';

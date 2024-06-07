@@ -3,13 +3,13 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import {
 	Column,
 	Columns,
 	Container,
 	Hide,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import Headline from 'components/Headline';
 import LiveDateline from 'components/LiveDateline';
 import Series from 'components/Series';

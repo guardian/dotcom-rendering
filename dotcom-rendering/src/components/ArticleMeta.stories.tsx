@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { browserThemeDecorator } from '../../.storybook/decorators/themeDecorator';

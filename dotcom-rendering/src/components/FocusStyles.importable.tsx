@@ -1,4 +1,4 @@
-import { FocusStyleManager } from '@guardian/source-foundations';
+import { FocusStyleManager } from '@guardian/source/foundations';
 import { useEffect } from 'react';
 
 export const FocusStyles = () => {

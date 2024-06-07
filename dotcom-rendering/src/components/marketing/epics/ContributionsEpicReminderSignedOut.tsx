@@ -13,14 +13,14 @@ import {
 	space,
 	textSans15,
 	textSansBold15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	SvgArrowRightStraight,
 	SvgCross,
 	TextInput,
-} from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { useContributionsReminderEmailForm } from '../hooks/useContributionsReminderEmailForm';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { ensureHasPreposition, ReminderStatus } from '../lib/reminders';

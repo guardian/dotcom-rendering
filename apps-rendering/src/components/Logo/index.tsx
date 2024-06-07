@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, textSans15, until } from '@guardian/source-foundations';
+import { remSpace, textSans15, until } from '@guardian/source/foundations';
 import Anchor from 'components/Anchor';
 import { getFormat } from 'item';
 import type { Item } from 'item';

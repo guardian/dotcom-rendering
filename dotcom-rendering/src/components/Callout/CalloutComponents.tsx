@@ -5,12 +5,12 @@ import {
 	space,
 	textSans14,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	SvgShare,
 	SvgTickRound,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette } from '../../palette';
 

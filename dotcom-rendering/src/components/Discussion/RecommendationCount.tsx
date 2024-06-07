@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
-import { SvgArrowUpStraight } from '@guardian/source-react-components';
+import { textSans12 } from '@guardian/source/foundations';
+import { SvgArrowUpStraight } from '@guardian/source/react-components';
 import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
 import type { SignedInUser } from '../../lib/discussion';
@@ -17,7 +17,13 @@ type Props = {
 };
 
 const countStyles = css`
-	${textSans.xxsmall({ fontWeight: 'light' })}
+	${textSans12};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	font-weight: 300;
 	min-width: 0.75rem;
 	color: ${themePalette('--discussion-subdued')};
 	margin-right: 0.3125rem;

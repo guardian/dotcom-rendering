@@ -8,8 +8,8 @@ import {
 	palette as sourcePalette,
 	space,
 	until,
-} from '@guardian/source-foundations';
-import { SvgChevronDownSingle } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgChevronDownSingle } from '@guardian/source/react-components';
 import { useCallback, useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';

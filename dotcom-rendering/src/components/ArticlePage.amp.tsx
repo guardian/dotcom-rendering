@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 import { filterForTagsOfType } from '../lib/tag-utils.amp';
 import type { NavType } from '../model/extract-nav';
 import type { AmpExperiments } from '../server/AMPExperimentCache.amp';

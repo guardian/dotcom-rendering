@@ -1,6 +1,7 @@
 import type { ABTest, ABTestAPI } from '@guardian/ab-core';
 import {
 	bypassCommercialMetricsSampling,
+	EventTimer,
 	initCommercialMetrics,
 } from '@guardian/commercial';
 import {
@@ -13,6 +14,7 @@ import { adBlockAsk } from '../experiments/tests/ad-block-ask';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { useDetectAdBlock } from '../lib/useDetectAdBlock';
 import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { ServerSideTests } from '../types/config';
@@ -89,6 +91,7 @@ const useDev = () => {
 export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
+	const detectedAdBlocker = useDetectAdBlock();
 
 	const { renderingTarget } = useConfig();
 	const browserId = useBrowserId();
@@ -151,6 +154,12 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 
 			const bypassSampling = shouldBypassSampling(abTestApi);
 
+			// This is a new detection method we are trying, so we want to record it separately to `adBlockerInUse`
+			EventTimer.get().setProperty(
+				'detectedAdBlocker',
+				detectedAdBlocker,
+			);
+
 			initCommercialMetrics({
 				pageViewId,
 				browserId,
@@ -171,6 +180,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 		[
 			abTestApi,
 			adBlockerInUse,
+			detectedAdBlocker,
 			browserId,
 			commercialMetricsEnabled,
 			isDev,

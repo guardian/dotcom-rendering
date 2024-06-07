@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source-foundations';
-import { SvgPlus } from '@guardian/source-react-components';
+import { space } from '@guardian/source/foundations';
+import { SvgPlus } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type {
 	CommentType,

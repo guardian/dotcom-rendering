@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { FontWeight, LineHeight } from '@guardian/source-foundations';
+import type { FontWeight, LineHeight } from '@guardian/source/foundations';
 import {
 	border,
 	from,
@@ -14,9 +14,9 @@ import {
 	headlineMedium42,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 
-import { SvgQuote } from '@guardian/source-react-components';
+import { SvgQuote } from '@guardian/source/react-components';
 import { OptionKind } from '../../../../vendor/@guardian/types/index';
 import type { Item } from 'item';
 import { getFormat } from 'item';

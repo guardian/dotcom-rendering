@@ -5,8 +5,8 @@ import {
 	headlineMedium24,
 	palette as sourcePalette,
 	visuallyHidden,
-} from '@guardian/source-foundations';
-import { SvgChevronDownSingle } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgChevronDownSingle } from '@guardian/source/react-components';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { navInputCheckboxId, showMoreButtonId } from '../config';
 

@@ -13,10 +13,10 @@ import {
 	opinion,
 	remSpace,
 	sport,
-	textSans,
 	textSans15,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+	textSansBold14,
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import Accordion from 'components/Accordion';
 import { background, text } from 'palette';
 import type { FC } from 'react';
@@ -175,7 +175,13 @@ const textStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const timeStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${textSansBold14};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 	color: ${neutral[7]};
 	display: block;
 	transform: translateY(-4px);

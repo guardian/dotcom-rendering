@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { match } from '../../fixtures/manual/cricket-scoreboard';
 import { CricketScoreboard } from './CricketScoreboard';

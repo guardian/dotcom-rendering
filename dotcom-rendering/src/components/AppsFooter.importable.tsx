@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { remSpace, textSans15 } from '@guardian/source-foundations';
-import { ButtonLink } from '@guardian/source-react-components';
+import { remSpace, textSans15 } from '@guardian/source/foundations';
+import { ButtonLink } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getNavigationClient, getUserClient } from '../lib/bridgetApi';
 import { palette } from '../palette';

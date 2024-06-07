@@ -6,7 +6,7 @@ import {
 	neutral,
 	textSansBold14,
 	textSansItalic14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';

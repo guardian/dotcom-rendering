@@ -44,7 +44,6 @@ type Props = {
 	idApiUrl: string;
 	stage: string;
 	pageId: string;
-	keywordIds: string;
 	renderAds: boolean;
 	isLabs: boolean;
 	articleEndSlot: boolean;
@@ -135,7 +134,6 @@ export const SlotBodyEnd = ({
 	idApiUrl,
 	stage,
 	pageId,
-	keywordIds,
 	renderAds,
 	isLabs,
 	articleEndSlot,
@@ -168,11 +166,11 @@ export const SlotBodyEnd = ({
 
 	useEffect(() => {
 		setAsyncArticleCount(
-			getArticleCounts(pageId, keywordIds, contentType).then(
+			getArticleCounts(pageId, tags, contentType).then(
 				(counts) => counts?.weeklyArticleHistory,
 			),
 		);
-	}, [contentType, pageId, keywordIds]);
+	}, [contentType, tags, pageId]);
 
 	useOnce(() => {
 		if (isUndefined(countryCode)) return;

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans12 } from '@guardian/source-foundations';
+import { textSans12 } from '@guardian/source/foundations';
 import React from 'react';
 import { isEditionId } from '../lib/edition';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headlineLight20 } from '@guardian/source-foundations';
+import { headlineLight20 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';

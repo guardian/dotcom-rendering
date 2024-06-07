@@ -1,5 +1,5 @@
 import { css, jsx } from '@emotion/react';
-import { articleItalic17 } from '@guardian/source-foundations';
+import { articleItalic17 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';

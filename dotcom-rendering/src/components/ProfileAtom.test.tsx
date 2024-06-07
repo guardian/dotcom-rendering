@@ -9,6 +9,7 @@ describe('ProfileAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -48,6 +49,7 @@ describe('ProfileAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -88,6 +90,7 @@ describe('ProfileAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>

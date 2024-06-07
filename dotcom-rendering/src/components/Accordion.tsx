@@ -5,11 +5,11 @@ import {
 	from,
 	headlineBold20,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 interface Props {

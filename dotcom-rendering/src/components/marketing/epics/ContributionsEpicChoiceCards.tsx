@@ -5,8 +5,8 @@
  */
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { until, visuallyHidden } from '@guardian/source-foundations';
-import { ChoiceCard, ChoiceCardGroup } from '@guardian/source-react-components';
+import { until, visuallyHidden } from '@guardian/source/foundations';
+import { ChoiceCard, ChoiceCardGroup } from '@guardian/source/react-components';
 import { contributionTabFrequencies } from '@guardian/support-dotcom-components';
 import type {
 	ContributionFrequency,

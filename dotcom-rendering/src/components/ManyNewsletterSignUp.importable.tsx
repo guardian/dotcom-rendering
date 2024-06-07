@@ -4,8 +4,8 @@ import {
 	headlineObjectStyles,
 	palette,
 	space,
-} from '@guardian/source-foundations';
-import { Button, SvgCross } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, SvgCross } from '@guardian/source/react-components';
 import type { ChangeEventHandler, ReactEventHandler } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",

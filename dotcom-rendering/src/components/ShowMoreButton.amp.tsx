@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textSans15 } from '@guardian/source-foundations';
+import { palette, textSans15 } from '@guardian/source/foundations';
 import PlusIcon from '../static/icons/plus.svg';
 
 const showMore = css`

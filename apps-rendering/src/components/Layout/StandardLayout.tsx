@@ -4,11 +4,11 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import {
 	DottedLines,
 	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source-development-kitchen/react-components';
 import Body from 'components/ArticleBody';
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';

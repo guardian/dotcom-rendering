@@ -13,6 +13,7 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 };
 
 export const FixedMediumSlowVI = ({
@@ -20,6 +21,7 @@ export const FixedMediumSlowVI = ({
 	containerPalette,
 	showAge,
 	imageLoading,
+	absoluteServerTimes,
 }: Props) => {
 	const firstSlice75 = trails.slice(0, 1);
 	const firstSlice25 = trails.slice(1, 2);
@@ -34,6 +36,7 @@ export const FixedMediumSlowVI = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -50,6 +53,7 @@ export const FixedMediumSlowVI = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -67,6 +71,7 @@ export const FixedMediumSlowVI = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 						/>
 					</LI>

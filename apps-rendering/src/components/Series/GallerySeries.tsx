@@ -9,7 +9,7 @@ import {
 	headlineBold17,
 	headlineBold20,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';

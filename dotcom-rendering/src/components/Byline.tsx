@@ -9,7 +9,7 @@ import {
 	textSansItalic20,
 	textSansItalic24,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 type Props = {

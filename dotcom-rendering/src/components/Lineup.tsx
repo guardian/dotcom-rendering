@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans15 } from '@guardian/source-foundations';
+import { textSans15 } from '@guardian/source/foundations';
 
 type Props = {
 	players: PlayerType[];

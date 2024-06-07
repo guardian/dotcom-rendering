@@ -3,8 +3,8 @@
 import { css, jsx as styledH } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import type { Breakpoint } from '@guardian/source-foundations';
-import { neutral, remSpace, until } from '@guardian/source-foundations';
+import type { Breakpoint } from '@guardian/source/foundations';
+import { neutral, remSpace, until } from '@guardian/source/foundations';
 import {
 	andThen,
 	fromNullable,

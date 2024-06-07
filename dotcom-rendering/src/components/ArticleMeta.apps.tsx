@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { from, space, until } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { from, space, until } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';

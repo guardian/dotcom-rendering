@@ -9,8 +9,8 @@ import {
 	textSans17,
 	textSansBold17,
 	textSansBold20,
-} from '@guardian/source-foundations';
-import { Button, SvgCheckmark } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, SvgCheckmark } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind, withDefault } from '../../../vendor/@guardian/types/index';
 import { fold } from 'lib';

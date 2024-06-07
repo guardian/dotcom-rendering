@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source-foundations';
+import { palette as sourcePalette } from '@guardian/source/foundations';
 import { palette as themePalette } from '../../palette';
 import { Summary } from './Summary';
 

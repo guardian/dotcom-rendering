@@ -421,9 +421,22 @@ class Enhancer {
 }
 
 const enhance =
-	(isPhotoEssay: boolean, imagesForLightbox: ImageForLightbox[]) =>
+	(
+		isPhotoEssay: boolean,
+		imagesForLightbox: ImageForLightbox[],
+		isPhotoEssayMainMedia = false,
+	) =>
 	(elements: FEElement[]): FEElement[] => {
 		if (isPhotoEssay) {
+			if (isPhotoEssayMainMedia) {
+				return new Enhancer(elements)
+					.addMultiImageElements()
+					.addTitles()
+					.addCaptionsToMultis()
+					.addCaptionsToImages()
+					.addImagePositions(imagesForLightbox).elements;
+			}
+
 			return new Enhancer(elements)
 				.stripCaptions()
 				.removeCredit()
@@ -456,11 +469,14 @@ export const enhanceImages = (
 
 export const enhanceElementsImages = (
 	format: ArticleFormat,
+	isMainMedia: boolean,
 	imagesForLightbox: ImageForLightbox[],
 ): ((elements: FEElement[]) => FEElement[]) => {
 	const isPhotoEssay =
 		format.design === ArticleDesign.PhotoEssay &&
 		format.theme !== ArticleSpecial.Labs;
 
-	return enhance(isPhotoEssay, imagesForLightbox);
+	const isPhotoEssayMainMedia = isPhotoEssay && isMainMedia;
+
+	return enhance(isPhotoEssay, imagesForLightbox, isPhotoEssayMainMedia);
 };

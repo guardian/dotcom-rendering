@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString, type OphanAction } from '@guardian/libs';
-import { space, until } from '@guardian/source-foundations';
+import { space, until } from '@guardian/source/foundations';
 import {
 	Button,
 	InlineError,
@@ -9,7 +9,7 @@ import {
 	SvgReload,
 	SvgSpinner,
 	TextInput,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { CSSProperties, FormEvent, ReactEventHandler } from 'react';
 import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",

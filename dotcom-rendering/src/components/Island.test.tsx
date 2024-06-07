@@ -96,6 +96,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -126,6 +127,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -146,6 +148,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -176,6 +179,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -204,6 +208,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -227,6 +232,7 @@ describe('Island: server-side rendering', () => {
 						editionId={'UK'}
 						shortUrlId=""
 						discussionApiUrl=""
+						absoluteServerTimes={true}
 					/>
 				</ConfigProvider>,
 			),
@@ -297,6 +303,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -341,6 +348,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -378,6 +386,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -416,6 +425,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -439,6 +449,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -453,7 +464,6 @@ describe('Island: server-side rendering', () => {
 						idApiUrl={''}
 						stage={''}
 						pageId={''}
-						keywordIds={''}
 						renderAds={true}
 						isLabs={false}
 						articleEndSlot={true}
@@ -470,6 +480,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -484,7 +495,6 @@ describe('Island: server-side rendering', () => {
 						contributionsServiceUrl=""
 						idApiUrl=""
 						pageId=""
-						keywordIds=""
 						remoteBannerSwitch={true}
 						isSensitive={false}
 					/>
@@ -500,6 +510,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>
@@ -527,6 +538,7 @@ describe('Island: server-side rendering', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 					}}
 				>

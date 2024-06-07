@@ -6,13 +6,13 @@ import {
 	textSans14,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Hide,
 	SvgArrowLeftStraight,
 	SvgArrowRightStraight,
 	SvgCross,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxJavascript } from './LightboxJavascript';

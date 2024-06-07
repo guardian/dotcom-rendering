@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text } from '@guardian/source-foundations';
+import { text } from '@guardian/source/foundations';
 import { Eight } from './numbers/Eight';
 import { Five } from './numbers/Five';
 import { Four } from './numbers/Four';

@@ -9,7 +9,7 @@ import {
 	neutral,
 	remSpace,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import FooterContent from 'components/FooterContent';
 import { background } from 'palette';
 import type { FC } from 'react';

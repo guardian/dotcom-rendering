@@ -8,8 +8,8 @@ import {
 	neutral,
 	remSpace,
 	until,
-} from '@guardian/source-foundations';
-import { ToggleSwitchApps } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { ToggleSwitchApps } from '@guardian/source-development-kitchen/react-components';
 import Avatar from 'components/Avatar';
 import Byline from 'components/Byline';
 import CommentCount from 'components/CommentCount';

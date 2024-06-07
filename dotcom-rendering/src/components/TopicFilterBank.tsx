@@ -3,8 +3,8 @@ import {
 	from,
 	headlineBold17,
 	space,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans12,
+} from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 import { FilterLink } from './FilterLink';
@@ -29,7 +29,13 @@ const headlineStyles = css`
 
 const headlineAccentStyles = (palette: Palette) => css`
 	color: ${palette.text.betaLabel};
-	${textSans.xxsmall({ fontWeight: 'regular', lineHeight: 'tight' })};
+	${textSans12};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 `;
 
 const topicStyles = css`

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textSans12, textSans17 } from '@guardian/source-foundations';
+import { palette, textSans12, textSans17 } from '@guardian/source/foundations';
 import type { CommentBlockElement } from '../types/content';
 
 const wrapper = css`

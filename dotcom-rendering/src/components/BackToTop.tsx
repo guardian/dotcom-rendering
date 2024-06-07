@@ -4,7 +4,7 @@ import {
 	brandText,
 	palette,
 	textSansBold15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 
 const iconHeight = '42px';
 

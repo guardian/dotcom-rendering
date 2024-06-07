@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { space, textSans15 } from '@guardian/source-foundations';
-import { LinkButton, SvgCross } from '@guardian/source-react-components';
+import { space, textSans15 } from '@guardian/source/foundations';
+import { LinkButton, SvgCross } from '@guardian/source/react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 

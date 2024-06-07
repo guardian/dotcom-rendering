@@ -6,8 +6,20 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import type { FontWeight } from '@guardian/source-foundations';
-import { from, headline, space, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	headlineBold24,
+	headlineBold28,
+	headlineLight24,
+	headlineLight28,
+	headlineLight34,
+	headlineMedium24,
+	headlineMedium28,
+	space,
+	textSans24,
+	textSans28,
+	textSans34,
+} from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { palette } from '../palette';
 
@@ -16,32 +28,87 @@ const fontStyles = ({
 	fontWeight,
 }: {
 	format: ArticleFormat;
-	fontWeight: FontWeight;
+	fontWeight: 'light' | 'medium' | 'bold';
 }) => css`
 	${format.display === ArticleDisplay.Immersive
-		? headline.small({ fontWeight: 'light', lineHeight: 'tight' })
-		: headline.xsmall({ fontWeight, lineHeight: 'tight' })}
+		? headlineLight28
+		: `
+			/**
+			 * Typography preset styles should not be overridden.
+			 * This has been done because the styles do not directly map to the new presets.
+			 * Please speak to your team's designer and update this to use a more appropriate preset.
+			 */
+			${fontWeight === 'light' && headlineLight24};
+			${fontWeight === 'medium' && headlineMedium24};
+			${fontWeight === 'bold' && headlineBold24};
+		`};
 
 	${from.tablet} {
 		${format.display === ArticleDisplay.Immersive
-			? headline.medium({ fontWeight: 'light', lineHeight: 'tight' })
-			: headline.small({ fontWeight, lineHeight: 'tight' })}
+			? headlineLight34
+			: `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
+				${fontWeight === 'light' && headlineLight28};
+				${fontWeight === 'medium' && headlineMedium28};
+				${fontWeight === 'bold' && headlineBold28};
+			`};
 	}
 
 	/** Labs uses sans text */
 	${format.theme === ArticleSpecial.Labs &&
 	css`
 		${format.display === ArticleDisplay.Immersive
-			? textSans.xxlarge({ fontWeight: 'light', lineHeight: 'tight' })
-			: textSans.xlarge({ fontWeight, lineHeight: 'tight' })}
+			? `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
+				${textSans28};
+				font-weight: 300;
+				line-height: 1.15;
+			`
+			: `
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
+				${textSans24};
+				${fontWeight === 'light' && 'font-weight: 300;'};
+				${fontWeight === 'medium' && 'font-weight: 500;'};
+				${fontWeight === 'bold' && 'font-weight: 700;'};
+				line-height: 1.15;
+			`};
 
 		${from.tablet} {
 			${format.display === ArticleDisplay.Immersive
-				? textSans.xxxlarge({
-						fontWeight: 'light',
-						lineHeight: 'tight',
-				  })
-				: textSans.xxlarge({ fontWeight, lineHeight: 'tight' })}
+				? `
+					/**
+					 * Typography preset styles should not be overridden.
+					 * This has been done because the styles do not directly map to the new presets.
+					 * Please speak to your team's designer and update this to use a more appropriate preset.
+					 */
+					${textSans34};
+					font-weight: 300;
+					line-height: 1.15;
+				`
+				: `
+					/**
+					 * Typography preset styles should not be overridden.
+					 * This has been done because the styles do not directly map to the new presets.
+					 * Please speak to your team's designer and update this to use a more appropriate preset.
+					 */
+					${textSans28};
+					${fontWeight === 'light' && 'font-weight: 300;'};
+					${fontWeight === 'medium' && 'font-weight: 500;'};
+					${fontWeight === 'bold' && 'font-weight: 700;'};
+					line-height: 1.15;
+				`};
 		}
 	`}
 
@@ -62,6 +129,7 @@ const paddingStyles = (topPadding: boolean) => css`
 		padding-bottom: ${space[1]}px;
 	}
 `;
+
 const subheadingStyles = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:

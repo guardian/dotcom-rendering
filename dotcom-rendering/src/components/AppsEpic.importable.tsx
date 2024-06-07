@@ -8,7 +8,7 @@ import {
 	palette,
 	remSpace,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { getAcquisitionsClient, getUserClient } from '../lib/bridgetApi';
 import { palette as themePalette } from '../palette';

@@ -1,8 +1,8 @@
 import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
 import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
-import { breakpoints } from '@guardian/source-foundations';
-import type { Breakpoint } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
+import type { Breakpoint } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';

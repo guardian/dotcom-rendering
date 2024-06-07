@@ -66,6 +66,7 @@ export const LiveBlock = ({
 			isOriginalPinnedPost={isOriginalPinnedPost}
 			host={host}
 			pageId={pageId}
+			absoluteServerTimes={!!switches.absoluteServerTimes}
 		>
 			{block.elements.map((element, index) => (
 				<RenderArticleElement

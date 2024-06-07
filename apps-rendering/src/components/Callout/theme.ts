@@ -5,12 +5,12 @@ import {
 	focus,
 	neutral,
 	success,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	expandingWrapperDarkTheme,
 	fileInputDarkTheme,
 	tabsDarkTheme,
-} from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source-development-kitchen/react-components';
 
 const labelDarkTheme = {
 	textLabel: neutral[97],

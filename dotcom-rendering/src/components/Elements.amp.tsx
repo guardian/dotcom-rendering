@@ -85,6 +85,10 @@ export const isAmpSupported = ({
 		if (!hasAmpInteractiveTag) return false;
 	}
 
+	if (tags.some((tag) => tag.id === 'type/video')) {
+		return false;
+	}
+
 	if (tags.some((tag) => tag.id === 'type/article')) {
 		const isSwitchedOn = switches.ampArticleSwitch;
 		const hasQuizTag = tags.some((tag) => tag.id === 'tone/quizzes');

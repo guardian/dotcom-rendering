@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isUndefined, log, storage } from '@guardian/libs';
-import { from, space } from '@guardian/source-foundations';
+import { from, space } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useState } from 'react';
 import screenfull from 'screenfull';

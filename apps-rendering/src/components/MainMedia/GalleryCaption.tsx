@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace, textSans14 } from '@guardian/source-foundations';
+import { from, remSpace, textSans14 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import Caption from 'components/caption';

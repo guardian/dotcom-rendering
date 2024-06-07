@@ -7,8 +7,8 @@ import {
 	headlineBold34,
 	palette,
 	space,
-} from '@guardian/source-foundations';
-import { Button, Link, LinkButton } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import {
 	COMPLETE_REGISTRATION_BUTTON,
 	SIGN_IN_BUTTON,

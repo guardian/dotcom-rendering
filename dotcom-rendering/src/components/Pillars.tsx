@@ -7,7 +7,7 @@ import {
 	headlineMedium17,
 	palette as srcPalette,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';

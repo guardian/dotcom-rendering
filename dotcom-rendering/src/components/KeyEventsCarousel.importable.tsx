@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { from, headline, space } from '@guardian/source-foundations';
+import { from, headlineBold17, space } from '@guardian/source/foundations';
 import {
 	Button,
 	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useRef } from 'react';
 import { palette } from '../palette';
 import { KeyEventCard } from './KeyEventCard';
@@ -14,6 +14,7 @@ interface Props {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
+	absoluteServerTimes: boolean;
 }
 type ValidBlock = Block & {
 	title: string;
@@ -52,7 +53,13 @@ const marginBottomStyles = css`
 	}
 `;
 const titleStyles = css`
-	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'regular' })};
+	${headlineBold17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.3;
 	padding-top: ${space[3]}px;
 	color: ${palette('--key-event-title')};
 `;
@@ -99,6 +106,7 @@ export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	id,
+	absoluteServerTimes,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const cardWidth = 200;
@@ -137,6 +145,7 @@ export const KeyEventsCarousel = ({
 								isSummary={keyEvent.attributes.summary}
 								title={keyEvent.title}
 								cardPosition={`${index} of ${carouselLength}`}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						);
 					})}

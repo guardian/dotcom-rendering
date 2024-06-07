@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans17 } from '@guardian/source-foundations';
+import { from, palette, space, textSans17 } from '@guardian/source/foundations';
 import type { PropsWithChildren } from 'react';
 
 export const DarkModeMessage = ({ children }: PropsWithChildren) => (

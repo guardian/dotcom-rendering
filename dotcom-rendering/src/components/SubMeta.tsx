@@ -6,8 +6,8 @@ import {
 	textSans12,
 	textSans14,
 	until,
-} from '@guardian/source-foundations';
-import { LinkButton } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { LinkButton } from '@guardian/source/react-components';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';

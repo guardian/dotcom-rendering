@@ -4,7 +4,7 @@ import {
 	headlineMedium17,
 	textSansItalic17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette as schemedPalette } from '../palette';
 import type { TagType } from '../types/tag';

@@ -4,7 +4,12 @@ import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType, ServerSideTests } from './config';
-import type { FEElement, ImageForLightbox, Newsletter } from './content';
+import type {
+	FEElement,
+	ImageForLightbox,
+	Newsletter,
+	StarRating,
+} from './content';
 import type { FooterType } from './footer';
 import type { FEOnwards } from './onwards';
 import type { TagType } from './tag';
@@ -84,7 +89,7 @@ export interface FEArticleType {
 	beaconURL: string;
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
-	starRating?: number;
+	starRating?: StarRating;
 	trailText: string;
 	badge?: FEArticleBadgeType;
 

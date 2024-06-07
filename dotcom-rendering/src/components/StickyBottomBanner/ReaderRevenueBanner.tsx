@@ -1,12 +1,16 @@
 import { css } from '@emotion/react';
 import type { ConsentState, CountryCode } from '@guardian/libs';
 import { getCookie, onConsent } from '@guardian/libs';
-import { getBanner } from '@guardian/support-dotcom-components';
+import {
+	abandonedBasketSchema,
+	getBanner,
+} from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { AbandonedBasket } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
 import { useEffect, useState } from 'react';
 import { trackNonClickInteraction } from '../../client/ga/ga';
@@ -45,6 +49,7 @@ type BaseProps = {
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
+	abandonedBasketBannerLastClosedAt?: string;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -85,6 +90,25 @@ const getArticleCountToday = (
 	return undefined;
 };
 
+function parseAbandonedBasket(
+	cookie: string | null,
+): AbandonedBasket | undefined {
+	if (!cookie) return;
+
+	const parsedResult = abandonedBasketSchema.safeParse(JSON.parse(cookie));
+	if (!parsedResult.success) {
+		const errorMessage = parsedResult.error.message;
+		window.guardian.modules.sentry.reportError(
+			new Error(errorMessage),
+			'rr-banner',
+		);
+
+		return;
+	}
+
+	return parsedResult.data;
+}
+
 export const hasRequiredConsents = (): Promise<boolean> =>
 	onConsent()
 		.then(({ canTarget }: ConsentState) => canTarget)
@@ -97,6 +121,7 @@ const buildPayload = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
 	asyncArticleCounts,
@@ -125,6 +150,7 @@ const buildPayload = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			signInBannerLastClosedAt,
+			abandonedBasketBannerLastClosedAt,
 			mvtId: Number(
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 			),
@@ -143,6 +169,9 @@ const buildPayload = async ({
 			isSignedIn,
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
 			hasConsented: userConsent,
+			abandonedBasket: parseAbandonedBasket(
+				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
+			),
 		},
 	};
 };
@@ -162,6 +191,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
@@ -221,6 +251,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		signInBannerLastClosedAt,
+		abandonedBasketBannerLastClosedAt,
 		optedOutOfArticleCount,
 		asyncArticleCounts,
 		userConsent,

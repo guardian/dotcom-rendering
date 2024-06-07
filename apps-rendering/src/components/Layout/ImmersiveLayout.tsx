@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, from, palette, remSpace } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { between, from, palette, remSpace } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';

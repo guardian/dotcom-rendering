@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString, storage } from '@guardian/libs';
-import { space, textSans15 } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import type {
 	AdditionalHeadersType,

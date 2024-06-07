@@ -22,6 +22,7 @@ const clearEpicViewLog = (): void =>
 const clearBannerLastClosedAt = (): void => {
 	storage.local.remove('gu.prefs.engagementBannerLastClosedAt');
 	storage.local.remove('gu.prefs.subscriptionBannerLastClosedAt');
+	storage.local.remove('gu.prefs.abandonedBasketLastClosedAt');
 	storage.local.remove('gu.noRRBannerTimestamp');
 };
 

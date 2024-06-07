@@ -4,7 +4,7 @@ import {
 	SvgSignalBrand,
 	SvgTelegramBrand,
 	SvgWhatsAppBrand,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { FC, ReactElement } from 'react';
 import { calloutLinkContainer, calloutPrimaryButton, info } from './styles';
 

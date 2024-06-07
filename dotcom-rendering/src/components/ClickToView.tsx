@@ -5,8 +5,8 @@ import {
 	textSans17,
 	textSansBold17,
 	textSansBold20,
-} from '@guardian/source-foundations';
-import { Button, SvgCheckmark } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, SvgCheckmark } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';

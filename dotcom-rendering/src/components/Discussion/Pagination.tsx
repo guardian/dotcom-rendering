@@ -4,13 +4,13 @@ import {
 	textSans15,
 	textSansBold15,
 	until,
-} from '@guardian/source-foundations';
-import type { ThemeButton } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { FilterOptions } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
 

@@ -1,5 +1,5 @@
 import { css, keyframes } from '@emotion/react';
-import { space } from '@guardian/source-foundations';
+import { space } from '@guardian/source/foundations';
 import { palette as schemedPalette } from '../../palette';
 import { Column } from './Column';
 import { Row } from './Row';

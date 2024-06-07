@@ -1,4 +1,4 @@
-import { Select as SourceSelect } from '@guardian/source-react-components';
+import { Select as SourceSelect } from '@guardian/source/react-components';
 import type { CampaignFieldSelect } from '../../../types/content';
 
 type Props = {

@@ -47,6 +47,12 @@ jobs:
           rm -r facia-rendering/*
           mv facia-rendering.tar.gz facia-rendering/
 
+      - name: Compress tag-page-rendering app server files
+        run: |
+          tar -zcf tag-page-rendering.tar.gz tag-page-rendering
+          rm -r tag-page-rendering/*
+          mv tag-page-rendering.tar.gz tag-page-rendering/
+
       - name: Compress interactive-rendering app server files
         run: |
           tar -zcf interactive-rendering.tar.gz interactive-rendering
@@ -74,6 +80,10 @@ jobs:
               - facia-rendering-cfn
             facia-rendering:
               - facia-rendering
+            tag-page-rendering-cfn:
+              - tag-page-rendering-cfn
+            tag-page-rendering:
+              - tag-page-rendering
             interactive-rendering-cfn:
               - interactive-rendering-cfn
             interactive-rendering:

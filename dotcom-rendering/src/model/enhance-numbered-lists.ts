@@ -1,6 +1,10 @@
-import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDisplay,
+	type ArticleFormat,
+	isUndefined,
+} from '@guardian/libs';
 import { JSDOM } from 'jsdom';
-import type { FEElement, TextBlockElement } from '../types/content';
+import type { FEElement, StarRating, TextBlockElement } from '../types/content';
 
 const isFalseH3 = (element: FEElement): boolean => {
 	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
@@ -69,12 +73,14 @@ const isStarRating = (element: FEElement): boolean => {
 	return hasPTags && hasFiveStars;
 };
 
-const extractStarCount = (element: FEElement): number => {
+const extractStarCount = (
+	element: TextBlockElement,
+): StarRating | undefined => {
 	const isSelectedStar = (charactor: string): boolean => {
 		return charactor === '★';
 	};
 	// Returns the count of stars
-	const textElement = element as TextBlockElement;
+	const textElement = element;
 	const frag = JSDOM.fragment(textElement.html);
 	const text = frag.textContent ?? '';
 	// Loop the string counting selected stars
@@ -82,7 +88,17 @@ const extractStarCount = (element: FEElement): number => {
 	for (const letter of text) {
 		if (isSelectedStar(letter)) starCount += 1;
 	}
-	return starCount;
+	switch (starCount) {
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+			return starCount;
+		default:
+			return undefined;
+	}
 };
 
 const isStarableImage = (element: FEElement | undefined): boolean => {
@@ -95,7 +111,7 @@ const isStarableImage = (element: FEElement | undefined): boolean => {
 
 const starifyImages = (elements: FEElement[]): FEElement[] => {
 	const starified: FEElement[] = [];
-	let previousRating: number | undefined;
+	let previousRating: StarRating | undefined;
 	for (const [index, thisElement] of elements.entries()) {
 		switch (thisElement._type) {
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
@@ -142,13 +158,14 @@ const inlineStarRatings = (elements: FEElement[]): FEElement[] =>
 			isStarRating(thisElement)
 		) {
 			const rating = extractStarCount(thisElement);
+			if (isUndefined(rating)) return thisElement;
 			// Inline this image
 			return {
 				_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 				elementId: thisElement.elementId,
 				rating,
 				size: 'large',
-			};
+			} satisfies FEElement;
 		} else {
 			// Pass through
 			return thisElement;

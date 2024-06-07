@@ -6,7 +6,7 @@ import {
 	textSans14,
 	textSans15,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { assertUnreachable } from '../lib/assert-unreachable';
 import { useAdblockAsk } from '../lib/useAdBlockAsk';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';

@@ -5,7 +5,7 @@ import {
 	headlineMedium24,
 	palette as sourcePalette,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 
 const hideDesktop = css`

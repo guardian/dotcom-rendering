@@ -3,9 +3,9 @@ import {
 	headlineBold20,
 	headlineMedium20,
 	space,
-} from '@guardian/source-foundations';
-import type { TabProps } from '@guardian/source-react-components-development-kitchen';
-import { Tabs } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import type { TabProps } from '@guardian/source-development-kitchen/react-components';
+import { Tabs } from '@guardian/source-development-kitchen/react-components';
 import { useState } from 'react';
 import { palette } from '../../palette';
 import type {

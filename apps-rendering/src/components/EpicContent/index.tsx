@@ -4,7 +4,7 @@ import {
 	Button,
 	buttonThemeReaderRevenue,
 	SvgArrowRightStraight,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { acquisitionsClient } from 'native/nativeApi';
 import { useEffect, useRef, useState } from 'react';
 

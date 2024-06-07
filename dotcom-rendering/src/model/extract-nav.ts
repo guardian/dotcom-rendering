@@ -15,7 +15,7 @@ export interface LinkType extends BaseLinkType {
 
 export interface EditionLinkType extends LinkType {
 	editionId: EditionId;
-	locale: string;
+	dateLocale: string;
 	timeZone: string;
 }
 

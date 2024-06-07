@@ -7,8 +7,8 @@ import {
 	space,
 	textSans14,
 	textSans17,
-} from '@guardian/source-foundations';
-import { SvgCheckmark, SvgCross } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgCheckmark, SvgCross } from '@guardian/source/react-components';
 
 // We export Radio wrapper styles to override Source Radio buttons to align
 // with our custom answers for the quiz

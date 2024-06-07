@@ -13,7 +13,7 @@ import {
 	textSans15,
 	textSans17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,

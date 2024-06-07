@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans12 } from '@guardian/source-foundations';
+import { neutral, textSans12 } from '@guardian/source/foundations';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

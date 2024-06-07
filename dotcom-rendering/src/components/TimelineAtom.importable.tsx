@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, palette, remSpace, space } from '@guardian/source-foundations';
+import { body, palette, remSpace, space } from '@guardian/source/foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette as schemedPalette } from '../palette';
 import type { TimelineAtomEvent, TimelineAtomType } from '../types/content';

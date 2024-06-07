@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { SvgStar, SvgStarOutline } from '@guardian/source-react-components';
-import type { RatingSizeType } from '../../types/content';
+import { SvgStar, SvgStarOutline } from '@guardian/source/react-components';
+import type { StarRating as Rating, RatingSizeType } from '../../types/content';
 
 const padding = css`
 	padding: 0 2px;
@@ -28,7 +28,7 @@ const determineSize = (size: RatingSizeType) => {
 };
 
 type Props = {
-	rating: number;
+	rating: Rating;
 	size: RatingSizeType;
 };
 

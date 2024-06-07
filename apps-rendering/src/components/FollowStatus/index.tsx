@@ -4,7 +4,7 @@ import {
 	SvgNotificationsOff,
 	SvgNotificationsOn,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { FC } from 'react';
 
 // ----- Component ----- //

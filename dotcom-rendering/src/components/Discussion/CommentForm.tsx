@@ -5,9 +5,9 @@ import {
 	textSans15,
 	textSansBold12,
 	until,
-} from '@guardian/source-foundations';
-import { Link, TextArea } from '@guardian/source-react-components';
-import { InfoSummary } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Link, TextArea } from '@guardian/source/react-components';
+import { InfoSummary } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
 import type {
 	CommentType,

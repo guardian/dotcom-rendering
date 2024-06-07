@@ -4,7 +4,7 @@ import {
 	headlineBold34,
 	text,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {

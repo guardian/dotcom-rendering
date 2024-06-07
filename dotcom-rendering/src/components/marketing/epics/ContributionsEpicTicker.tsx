@@ -9,7 +9,7 @@ import {
 	palette,
 	textSans17,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';

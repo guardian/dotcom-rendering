@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
@@ -27,6 +27,7 @@ export const FourCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -43,6 +44,7 @@ export const ThreeCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -59,6 +61,7 @@ export const TwoCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -75,6 +78,7 @@ export const OneCard = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

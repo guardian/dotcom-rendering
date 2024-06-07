@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
 import type { TagType } from '../types/tag';

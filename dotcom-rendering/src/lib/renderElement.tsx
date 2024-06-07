@@ -67,7 +67,7 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement, RoleType } from '../types/content';
+import type { FEElement, RoleType, StarRating } from '../types/content';
 import type { EditionId } from './edition';
 
 type Props = {
@@ -77,7 +77,7 @@ type Props = {
 	index: number;
 	isMainMedia: boolean;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;

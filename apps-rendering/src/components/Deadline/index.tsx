@@ -1,4 +1,4 @@
-import { SvgClock } from '@guardian/source-react-components';
+import { SvgClock } from '@guardian/source/react-components';
 import { isValidDate } from 'date';
 import type { FC } from 'react';
 import React from 'react';

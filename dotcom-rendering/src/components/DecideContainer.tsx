@@ -31,6 +31,7 @@ type Props = {
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 };
 
 export const DecideContainer = ({
@@ -39,6 +40,7 @@ export const DecideContainer = ({
 	containerType,
 	containerPalette,
 	showAge,
+	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
 	// If you add a new container type which contains an MPU, you must also add it to
@@ -49,6 +51,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -58,6 +61,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -67,6 +71,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -76,6 +81,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -85,6 +91,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -94,6 +101,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -103,6 +111,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -112,6 +121,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -121,6 +131,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -130,6 +141,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -139,6 +151,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -148,6 +161,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -157,6 +171,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -166,6 +181,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -175,6 +191,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -184,6 +201,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);
@@ -193,6 +211,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
 					imageLoading={imageLoading}
 				/>
 			);

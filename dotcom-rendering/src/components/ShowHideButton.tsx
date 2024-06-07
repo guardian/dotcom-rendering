@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans14 } from '@guardian/source-foundations';
-import { ButtonLink } from '@guardian/source-react-components';
+import { palette, space, textSans14 } from '@guardian/source/foundations';
+import { ButtonLink } from '@guardian/source/react-components';
 
 type Props = {
 	sectionId: string;

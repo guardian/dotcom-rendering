@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 

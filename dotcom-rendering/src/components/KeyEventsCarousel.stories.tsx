@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import {
 	LongKeyEvents,
@@ -65,6 +65,7 @@ export const SingleKeyEventCarousel = () => {
 				keyEvents={SingleKeyEvent}
 				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
+				absoluteServerTimes={true}
 			/>
 		</Wrapper>
 	);
@@ -78,6 +79,7 @@ export const ShortKeyEventCarousel = () => {
 				keyEvents={ShortKeyEvents}
 				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
+				absoluteServerTimes={true}
 			/>
 		</Wrapper>
 	);
@@ -91,6 +93,7 @@ export const LongKeyEventCarousel = () => {
 				keyEvents={LongKeyEvents}
 				filterKeyEvents={false}
 				id="key-events-carousel-desktop"
+				absoluteServerTimes={true}
 			/>
 		</Wrapper>
 	);

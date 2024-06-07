@@ -10,12 +10,12 @@ import {
 	textSansBold17,
 	transitions,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgMinus,
 	SvgPinned,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 import { DateTime } from './DateTime';
@@ -141,9 +141,15 @@ type Props = {
 	pinnedPost: Block;
 	children: React.ReactNode;
 	format: ArticleFormat;
+	absoluteServerTimes: boolean;
 };
 
-export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
+export const PinnedPost = ({
+	pinnedPost,
+	children,
+	format,
+	absoluteServerTimes,
+}: Props) => {
 	const palette = decidePalette(format);
 	return (
 		<div
@@ -171,6 +177,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 						<DateTime
 							date={new Date(pinnedPost.blockFirstPublished)}
 							display="relative"
+							absoluteServerTimes={absoluteServerTimes}
 							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}

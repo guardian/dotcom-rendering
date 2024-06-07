@@ -8,7 +8,7 @@ import {
 	palette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { type EditionId, getEditionFromId } from '../lib/edition';
 import { palette as schemePalette } from '../palette';

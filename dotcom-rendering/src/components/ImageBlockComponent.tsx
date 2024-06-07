@@ -1,4 +1,4 @@
-import type { ImageBlockElement } from '../types/content';
+import type { ImageBlockElement, StarRating } from '../types/content';
 import { ImageComponent } from './ImageComponent';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 	hideCaption?: boolean;
 	title?: string;
 	isMainMedia?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	isAvatar?: boolean;
 	isTimeline?: boolean;
 };

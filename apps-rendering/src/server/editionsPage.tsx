@@ -6,7 +6,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { ArticleTheme } from '@guardian/libs';
-import { resets } from '@guardian/source-foundations';
+import { resets } from '@guardian/source/foundations';
 import type { Option } from '../../vendor/@guardian/types/index';
 import {
 	map,

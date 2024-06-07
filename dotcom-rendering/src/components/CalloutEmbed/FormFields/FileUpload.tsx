@@ -1,6 +1,6 @@
 // File upload is the only legacy component that is still used on the old callout form
 import { css } from '@emotion/react';
-import { space, text, textSansBold15 } from '@guardian/source-foundations';
+import { space, text, textSansBold15 } from '@guardian/source/foundations';
 import { useState } from 'react';
 import { stringifyFileBase64 } from '.././../../lib/stringifyFileBase64';
 import type { CampaignFieldFile } from '../../../types/content';

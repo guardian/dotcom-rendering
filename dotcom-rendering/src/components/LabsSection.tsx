@@ -8,12 +8,12 @@ import {
 	textSansBold14,
 	textSansBold20,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Link,
 	LinkButton,
 	SvgArrowRightStraight,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { getLabsUrlSuffix } from '../lib/labs';

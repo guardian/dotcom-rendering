@@ -21,6 +21,7 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 };
 
@@ -31,10 +32,12 @@ const Card33_Card33_Card33 = ({
 	cards,
 	containerPalette,
 	showAge,
+	absoluteServerTimes,
 }: {
 	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 }) => {
 	return (
 		<UL direction="row">
@@ -44,6 +47,7 @@ const Card33_Card33_Card33 = ({
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</LI>
 			))}
@@ -69,6 +73,7 @@ export const DynamicSlowMPU = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
+	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
 	let firstSliceLayout:
@@ -144,6 +149,7 @@ export const DynamicSlowMPU = ({
 						cards={firstSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						imageLoading={imageLoading}
 					/>
 				);
@@ -153,6 +159,7 @@ export const DynamicSlowMPU = ({
 						cards={firstSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						imageLoading={imageLoading}
 					/>
 				);
@@ -162,6 +169,7 @@ export const DynamicSlowMPU = ({
 						cards={firstSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						imageLoading={imageLoading}
 					/>
 				);
@@ -171,6 +179,7 @@ export const DynamicSlowMPU = ({
 						cards={firstSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						imageLoading={imageLoading}
 					/>
 				);
@@ -187,6 +196,7 @@ export const DynamicSlowMPU = ({
 						cards={secondSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				);
 
@@ -196,6 +206,7 @@ export const DynamicSlowMPU = ({
 						cards={secondSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						imageLoading={imageLoading}
 					/>
 				);
@@ -206,6 +217,7 @@ export const DynamicSlowMPU = ({
 						cards={secondSliceCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						imageLoading={imageLoading}
 					/>
 				);
@@ -214,6 +226,7 @@ export const DynamicSlowMPU = ({
 					<Card25_Card25_Card25_Card25
 						cards={secondSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>

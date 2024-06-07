@@ -4,7 +4,7 @@ import {
 	space,
 	textSans14,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { EditionId } from '../lib/edition';
 import type { Palette } from '../types/palette';

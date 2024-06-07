@@ -7,7 +7,7 @@ import {
 	from,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../vendor/@guardian/types/index';
 import { map, none, some, withDefault } from '../vendor/@guardian/types/index';
 import { pipe } from 'lib';

@@ -5,7 +5,7 @@ import {
 	text,
 	textSans15,
 	textSans24,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { getAgeWarning } from '../lib/age-warning';
 import { getSharingUrls } from '../lib/sharing-urls';
 import type { AMPArticleModel } from '../types/article.amp';

@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedMediumSlowVII } from './FixedMediumSlowVII';
@@ -28,6 +28,7 @@ export const Default = () => (
 		<FixedMediumSlowVII
 			trails={trails}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

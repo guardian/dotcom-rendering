@@ -3,8 +3,8 @@ import {
 	space,
 	textSans14,
 	textSansBold14,
-} from '@guardian/source-foundations';
-import { SvgClock } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgClock } from '@guardian/source/react-components';
 
 type Props = {
 	frequency: string;

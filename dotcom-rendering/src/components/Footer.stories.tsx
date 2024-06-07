@@ -5,7 +5,7 @@ import {
 	palette,
 	space,
 	textSans34,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Standard } from '../../fixtures/generated/dcr-articles/Standard';
 import { editionList } from '../lib/edition';
 import { extractNAV } from '../model/extract-nav';

@@ -3,7 +3,7 @@ import {
 	headlineBold34,
 	headlineBold42,
 	headlineLight34,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 
 type Props = {

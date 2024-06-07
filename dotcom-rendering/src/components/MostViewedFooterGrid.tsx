@@ -5,7 +5,7 @@ import {
 	palette as sourcePalette,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useState } from 'react';
 import { palette } from '../palette';
 import type { TrailTabType, TrailType } from '../types/trails';

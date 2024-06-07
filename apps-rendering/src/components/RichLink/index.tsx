@@ -7,8 +7,8 @@ import {
 	headlineBold17,
 	remSpace,
 	textSansBold17,
-} from '@guardian/source-foundations';
-import { SvgArrowRightStraight } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgArrowRightStraight } from '@guardian/source/react-components';
 import { background, border, fill, text } from 'palette';
 import type { ReactElement } from 'react';
 import { darkModeCss, darkModeStyles } from 'styles';

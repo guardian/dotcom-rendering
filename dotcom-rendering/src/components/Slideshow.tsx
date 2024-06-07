@@ -6,7 +6,7 @@ import {
 	space,
 	textSansBold12,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { takeFirst } from '../lib/tuple';
 import type { DCRSlideshowImage } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';

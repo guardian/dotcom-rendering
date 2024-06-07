@@ -14,8 +14,9 @@ import type {
 	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
-import type { FETagType, TagType } from '../types/tag';
+import type { TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
+import { enhanceTags } from './enhanceTags';
 
 /**
  *
@@ -191,28 +192,6 @@ const decideSlideshowImages = (
 	return undefined;
 };
 
-const enhanceTags = (tags: FETagType[]): TagType[] => {
-	return tags.map(({ properties }) => {
-		const {
-			id,
-			tagType,
-			webTitle,
-			twitterHandle,
-			bylineImageUrl,
-			contributorLargeImagePath,
-		} = properties;
-
-		return {
-			id,
-			type: tagType,
-			title: webTitle,
-			twitterHandle,
-			bylineImageUrl,
-			bylineLargeImageUrl: contributorLargeImagePath,
-		};
-	});
-};
-
 /**
  * While the first Media Atom is *not* guaranteed to be the main media,
  * it *happens to be* correct in the majority of cases.
@@ -327,6 +306,8 @@ export const enhanceCards = (
 
 		const imageSrc = decideImage(faciaCard);
 
+		const isContributorTagPage = !!pageId && pageId.startsWith('profile/');
+
 		return {
 			format,
 			dataLinkName,
@@ -360,6 +341,7 @@ export const enhanceCards = (
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
+				!isContributorTagPage &&
 				faciaCard.properties.maybeContent?.tags.tags &&
 				faciaCard.properties.image?.type === 'Cutout'
 					? decideAvatarUrl(

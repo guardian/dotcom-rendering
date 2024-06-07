@@ -4,11 +4,10 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -36,6 +35,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
@@ -99,39 +99,39 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  matchNav   . right-column'
+									'title  border  matchtabs  . right-column'
+									'.      border  headline   . right-column'
+									'.      border  standfirst . right-column'
+									'lines  border  media      . right-column'
+									'meta   border  media      . right-column'
+									'meta   border  body       . right-column'
+									'.      border  .          . right-column';
 						  `
 						: isMedia
 						? css`
 								grid-template-areas:
-									'title  border  headline     .'
-									'.      border  disclaimer   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  standfirst   right-column'
-									'.      border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  headline   headline   .'
+									'.      border  disclaimer disclaimer right-column'
+									'lines  border  media      media      right-column'
+									'meta   border  media      media      right-column'
+									'meta   border  standfirst standfirst right-column'
+									'.      border  body       body       right-column'
+									'.      border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  headline   . right-column'
+									'.      border  standfirst . right-column'
+									'lines  border  media      . right-column'
+									'meta   border  media      . right-column'
+									'meta   border  body       . right-column'
+									'.      border  .          . right-column';
 						  `}
 				}
 			}
@@ -145,7 +145,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 			${until.wide} {
-				grid-template-columns: 140px 1px 1fr 300px;
+				grid-template-columns: 140px 1px 620px 300px;
 
 				${isMatchReport
 					? css`
@@ -189,7 +189,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 			${until.leftCol} {
-				grid-template-columns: 1fr 300px;
+				grid-template-columns: 620px 300px;
 				${isMatchReport
 					? css`
 							grid-template-areas:
@@ -232,7 +232,7 @@ const StandardGrid = ({
 			}
 
 			${until.desktop} {
-				grid-template-columns: 1fr; /* Main content */
+				grid-template-columns: 100%; /* Main content */
 				${isMatchReport
 					? css`
 							grid-template-areas:
@@ -336,7 +336,6 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-top: ${space[4]}px;
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
@@ -381,6 +380,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
 			article.config.switches.slotBodyEnd);
 
+	const { absoluteServerTimes = false } = article.config.switches;
+
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -407,6 +408,12 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = isWeb && canRenderAds(article);
 
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
+	const inTagLinkTest =
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -431,109 +438,142 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</Section>
 						</Stuck>
 					)}
-					{!isLabs && (
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="header"
-						>
-							<Header
-								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
-								}
-							/>
-						</Section>
-					)}
-					<Section
-						fullWidth={true}
-						borderColour={sourcePalette.brand[600]}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={sourcePalette.brand[400]}
-						element="nav"
-					>
-						<Nav
+					{inUpdatedHeaderABTest ? (
+						<Masthead
 							nav={props.NAV}
-							isImmersive={
-								format.display === ArticleDisplay.Immersive
-							}
-							displayRoundel={
-								format.display === ArticleDisplay.Immersive ||
-								format.theme === ArticleSpecial.Labs
-							}
-							selectedPillar={props.NAV.selectedPillar}
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							discussionApiUrl={article.config.discussionApiUrl}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
-							editionId={article.editionId}
+							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
+							showSubNav={!isPaidContent}
+							hasPageSkinContentSelfConstrain={true}
 						/>
-					</Section>
-					{props.NAV.subNavSections && !isLabs && (
+					) : (
 						<>
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								borderColour={themePalette('--article-border')}
-								padSides={false}
-								element="aside"
-							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
+							{!isLabs && (
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									shouldCenter={false}
+									backgroundColour={sourcePalette.brand[400]}
+									element="header"
 								>
-									<SubNav
-										subNavSections={
-											props.NAV.subNavSections
+									<Header
+										editionId={article.editionId}
+										idUrl={article.config.idUrl}
+										mmaUrl={article.config.mmaUrl}
+										discussionApiUrl={
+											article.config.discussionApiUrl
 										}
-										currentNavLink={
-											props.NAV.currentNavLink
+										urls={
+											article.nav.readerRevenueLinks
+												.header
 										}
-										position="header"
+										remoteHeader={
+											!!article.config.switches
+												.remoteHeader
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										idApiUrl={article.config.idApiUrl}
+										headerTopBarSearchCapiSwitch={
+											!!article.config.switches
+												.headerTopBarSearchCapi
+										}
 									/>
-								</Island>
-							</Section>
+								</Section>
+							)}
 							<Section
 								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								borderColour={themePalette('--article-border')}
-								padSides={false}
+								borderColour={sourcePalette.brand[600]}
 								showTopBorder={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="nav"
 							>
-								<StraightLines
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--article-border')}
+								<Nav
+									nav={props.NAV}
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={props.NAV.selectedPillar}
+									subscribeUrl={
+										article.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									editionId={article.editionId}
 								/>
 							</Section>
+							{props.NAV.subNavSections && !isLabs && (
+								<>
+									<Section
+										fullWidth={true}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										borderColour={themePalette(
+											'--article-border',
+										)}
+										padSides={false}
+										element="aside"
+									>
+										<Island
+											priority="enhancement"
+											defer={{ until: 'idle' }}
+										>
+											<SubNav
+												subNavSections={
+													props.NAV.subNavSections
+												}
+												currentNavLink={
+													props.NAV.currentNavLink
+												}
+												position="header"
+											/>
+										</Island>
+									</Section>
+									<Section
+										fullWidth={true}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										borderColour={themePalette(
+											'--article-border',
+										)}
+										padSides={false}
+										showTopBorder={false}
+									>
+										<StraightLines
+											count={4}
+											cssOverrides={css`
+												display: block;
+											`}
+											color={themePalette(
+												'--article-border',
+											)}
+										/>
+									</Section>
+								</>
+							)}
 						</>
 					)}
 				</div>
 			)}
+
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
 					<Section
@@ -553,7 +593,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main
+				data-layout="StandardLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -643,6 +686,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 								isMatch={!!footballMatchUrl}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -661,9 +705,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									byline={article.byline}
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										typeof article.starRating === 'number'
 									}
 								/>
 							</div>
@@ -862,9 +903,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											isPaidContent={
 												article.pageType.isPaidContent
 											}
-											keywordIds={
-												article.config.keywordIds
-											}
 											pageId={article.pageId}
 											sectionId={article.config.section}
 											shouldHideReaderRevenue={
@@ -981,6 +1019,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -1003,6 +1042,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 				{showComments && (
@@ -1137,7 +1177,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								isPaidContent={article.pageType.isPaidContent}
 								isPreview={!!article.config.isPreview}
 								isSensitive={article.config.isSensitive}
-								keywordIds={article.config.keywordIds}
 								pageId={article.pageId}
 								sectionId={article.config.section}
 								shouldHideReaderRevenue={

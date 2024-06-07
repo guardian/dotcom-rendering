@@ -1,16 +1,33 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+import {
+	palette,
+	space,
+	textSans14,
+	textSans15,
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 const disclaimerLeftColStyles = css`
-	${textSans.small({ lineHeight: 'tight' })};
+	${textSans15};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[1]}px;
 `;
 
 const disclaimerInlineStyles = css`
-	${textSans.xsmall({ lineHeight: 'tight' })};
+	${textSans14};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 	float: left;
 	clear: left;
 	width: 8.75rem;
@@ -44,10 +61,8 @@ const ampStyles = css`
 
 const DisclaimerText = () => (
 	<p>
-		The Guardian’s product and service reviews are independent and are in no
-		way influenced by any advertiser or commercial initiative. We will earn
-		a commission from the retailer if you buy something through an affiliate
-		link.&nbsp;
+		The Guardian’s journalism is independent. We will earn a commission if
+		you buy something through an affiliate link.&nbsp;
 		<a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">
 			Learn more.
 		</a>

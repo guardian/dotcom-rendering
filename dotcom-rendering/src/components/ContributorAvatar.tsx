@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { generateSources, getFallbackSource, Sources } from './Picture';
 

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
+import type { FontScaleArgs, FontWeight } from '@guardian/source/foundations';
 import {
 	between,
 	fontWeights,
@@ -8,14 +8,13 @@ import {
 	headline,
 	remBodySizes,
 	space,
-	textSans,
 	textSans12,
 	textSans15,
 	textSans17,
 	textSans20,
 	until,
-} from '@guardian/source-foundations';
-import { Link, SvgExternal } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
@@ -58,29 +57,41 @@ const fontStyles = ({
 		case 'ginormous':
 			return css`
 				${from.desktop} {
-					${headline.large(options)};
+					${headline.large(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 					font-size: 50px;
 				}
 			`;
 		case 'huge':
 			return css`
-				${headline.small(options)};
+				${headline.small(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'large':
 			return css`
-				${headline.xsmall(options)};
+				${headline.xsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'medium':
 			return css`
-				${headline.xxsmall(options)};
+				${headline.xxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'small':
 			return css`
-				${headline.xxxsmall(options)};
+				${headline.xxxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 			`;
 		case 'tiny':
 			return css`
-				${headline.xxxsmall(options)};
+				${headline.xxxsmall(
+					options,
+				)}; /** TODO (1) - Unknown argument please manually update */
 				font-size: 14px;
 			`;
 	}
@@ -100,28 +111,38 @@ const fontStylesOnMobile = ({
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					${headline.medium(options)};
+					${headline.medium(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 				${between.mobileLandscape.and.desktop} {
-					${headline.large(options)};
+					${headline.large(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'huge':
 			return css`
 				${until.desktop} {
-					${headline.xsmall(options)};
+					${headline.xsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'large':
 			return css`
 				${until.desktop} {
-					${headline.xxsmall(options)};
+					${headline.xxsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		case 'medium':
 			return css`
 				${until.desktop} {
-					${headline.xxxsmall(options)};
+					${headline.xxxsmall(
+						options,
+					)}; /** TODO (1) - Unknown argument please manually update */
 				}
 			`;
 		default:
@@ -142,9 +163,21 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'medium':
 			return css`
-				${textSans.large({ lineHeight: 'tight' })};
+				${textSans20};
+				/**
+				 * Typography preset styles should not be overridden.
+				 * This has been done because the styles do not directly map to the new presets.
+				 * Please speak to your team's designer and update this to use a more appropriate preset.
+				 */
+				line-height: 1.15;
 				${until.desktop} {
-					${textSans.medium({ lineHeight: 'tight' })};
+					${textSans17};
+					/**
+					 * Typography preset styles should not be overridden.
+					 * This has been done because the styles do not directly map to the new presets.
+					 * Please speak to your team's designer and update this to use a more appropriate preset.
+					 */
+					line-height: 1.15;
 				}
 				padding-bottom: ${space[1]}px;
 			`;

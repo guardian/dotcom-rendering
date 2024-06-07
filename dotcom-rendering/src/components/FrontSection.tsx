@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import { between, from, space, until } from '@guardian/source-foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -81,6 +81,7 @@ type Props = {
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
+	updateLogoAdPartnerSwitch?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -456,6 +457,7 @@ export const FrontSection = ({
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
+	updateLogoAdPartnerSwitch = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -539,6 +541,7 @@ export const FrontSection = ({
 						/>
 					}
 					collectionBranding={collectionBranding}
+					updateLogoAdPartnerSwitch={updateLogoAdPartnerSwitch}
 				/>
 
 				{leftContent}

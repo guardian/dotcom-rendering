@@ -5,7 +5,7 @@ import {
 	space,
 	textSans15,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Score } from './Score';
 
 type Props = {

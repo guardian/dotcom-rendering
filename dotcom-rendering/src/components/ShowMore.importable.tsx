@@ -6,13 +6,13 @@ import {
 	space,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	InlineError,
 	SvgCross,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type { EditionId } from '../lib/edition';
@@ -177,6 +177,7 @@ export const ShowMore = ({
 											showAge={showAge}
 											headlineSize="small"
 											imageLoading="eager"
+											absoluteServerTimes={false}
 										/>
 									</LI>
 								);

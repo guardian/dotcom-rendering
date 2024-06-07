@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import Avatar from 'components/Avatar';
 import Byline from 'components/Byline';
 import CommentCount from 'components/CommentCount';

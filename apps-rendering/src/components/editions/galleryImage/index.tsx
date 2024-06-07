@@ -7,7 +7,7 @@ import {
 	remSpace,
 	textSans15,
 	textSansBold15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import {
 	map,

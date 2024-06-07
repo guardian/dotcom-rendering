@@ -11,11 +11,11 @@ import {
 	textSans12,
 	textSans17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import { clearFix } from '../lib/mixins';
 import { nestedOphanComponents } from '../lib/ophan-helpers';

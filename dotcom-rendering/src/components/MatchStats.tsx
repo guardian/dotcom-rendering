@@ -8,7 +8,7 @@ import {
 	space,
 	textSans15,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 import { Distribution } from './Distribution';
 import { Doughnut } from './Doughnut';

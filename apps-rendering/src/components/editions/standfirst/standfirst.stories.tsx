@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { neutral } from '@guardian/source-foundations';
+import { neutral } from '@guardian/source/foundations';
 import { parse } from 'client/parser';
 import { analysis, article, comment, media } from 'fixtures/item';
 import type { Optional } from 'optional';

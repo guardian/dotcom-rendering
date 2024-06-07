@@ -27,6 +27,7 @@ type Props = {
 	imageLoading: Loading;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 };
 
 const ColumnOfCards50_Card50 = ({
@@ -34,10 +35,12 @@ const ColumnOfCards50_Card50 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	const big = cards.slice(0, 1);
@@ -56,6 +59,7 @@ const ColumnOfCards50_Card50 = ({
 					<Card50Media50
 						trail={card}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -74,6 +78,7 @@ const ColumnOfCards50_Card50 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
+									absoluteServerTimes={absoluteServerTimes}
 									imageLoading={imageLoading}
 								/>
 							</LI>
@@ -90,10 +95,12 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: {
 	cards: DCRFrontCard[];
 	imageLoading: Loading;
 	showAge?: boolean;
+	absoluteServerTimes: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
 	return (
@@ -117,6 +124,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
+							absoluteServerTimes={absoluteServerTimes}
 							imageLoading={imageLoading}
 						/>
 					</LI>
@@ -135,6 +143,7 @@ export const DynamicSlow = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
+	absoluteServerTimes,
 	imageLoading,
 }: Props) => {
 	let firstSliceLayout:
@@ -218,6 +227,7 @@ export const DynamicSlow = ({
 					<Card100PictureTop
 						cards={firstSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -227,6 +237,7 @@ export const DynamicSlow = ({
 					<Card100PictureRight
 						cards={firstSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -236,6 +247,7 @@ export const DynamicSlow = ({
 					<Card75_Card25
 						cards={firstSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -245,6 +257,7 @@ export const DynamicSlow = ({
 					<Card25_Card75
 						cards={firstSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -254,6 +267,7 @@ export const DynamicSlow = ({
 					<Card50_Card50
 						cards={firstSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -270,6 +284,7 @@ export const DynamicSlow = ({
 					<ColumnOfCards50_ColumnOfCards50
 						cards={secondSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -279,6 +294,7 @@ export const DynamicSlow = ({
 					<ColumnOfCards50_Card50
 						cards={secondSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>
@@ -288,6 +304,7 @@ export const DynamicSlow = ({
 					<ColumnOfCards50_Card25_Card25
 						cards={secondSliceCards}
 						showAge={showAge}
+						absoluteServerTimes={absoluteServerTimes}
 						containerPalette={containerPalette}
 						imageLoading={imageLoading}
 					/>

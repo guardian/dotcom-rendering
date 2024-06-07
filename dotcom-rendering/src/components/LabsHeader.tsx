@@ -5,12 +5,12 @@ import {
 	space,
 	textSans15,
 	textSansBold15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Link,
 	LinkButton,
 	SvgArrowRightStraight,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import { getLabsUrlSuffix } from '../lib/labs';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';

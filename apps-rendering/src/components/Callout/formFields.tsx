@@ -4,8 +4,8 @@ import {
 	Select,
 	TextArea,
 	TextInput,
-} from '@guardian/source-react-components';
-import { FileInput } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/react-components';
+import { FileInput } from '@guardian/source-development-kitchen/react-components';
 import CheckboxInput from 'components/CheckboxInput';
 import RadioInput from 'components/RadioInput';
 import type { FC } from 'react';

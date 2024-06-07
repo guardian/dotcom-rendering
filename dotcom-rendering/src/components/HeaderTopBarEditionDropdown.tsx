@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { editionList, getEditionFromId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';

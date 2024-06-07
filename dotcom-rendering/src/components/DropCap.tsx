@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, Pillar } from '@guardian/libs';
-import { fonts, space } from '@guardian/source-foundations';
+import { fonts, space } from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 type Props = {

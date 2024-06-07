@@ -6,7 +6,7 @@ import {
 	textSans15,
 	textSans17,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { nestedOphanComponents } from '../lib/ophan-helpers';

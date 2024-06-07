@@ -4,8 +4,8 @@ import {
 	textSans14,
 	textSans15,
 	until,
-} from '@guardian/source-foundations';
-import { Button } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button } from '@guardian/source/react-components';
 import { forwardRef } from 'react';
 import { palette } from '../palette';
 
