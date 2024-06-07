@@ -2025,6 +2025,13 @@ const standfirstBulletLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.news[600];
 			}
+		case ArticleDesign.Video:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[86];
+			}
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
