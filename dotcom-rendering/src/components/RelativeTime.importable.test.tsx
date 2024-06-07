@@ -17,7 +17,9 @@ describe('RelativeTime', () => {
 	])('For a difference of %s seconds, show “%s”', (difference, expected) => {
 		const now = Date.now();
 		const then = now - difference * 1000;
-		const { getByText } = render(<RelativeTime then={then} now={now} />);
+		const { getByText } = render(
+			<RelativeTime then={then} now={now} editionId="UK" />,
+		);
 
 		expect(getByText(expected)).toBeDefined();
 	});
@@ -25,7 +27,9 @@ describe('RelativeTime', () => {
 	test('Eight days ago is absolute', () => {
 		const now = Date.now();
 		const then = now - 8 * 24 * 60 * 60 * 1000;
-		const { getByText } = render(<RelativeTime then={then} now={now} />);
+		const { getByText } = render(
+			<RelativeTime then={then} now={now} editionId="UK" />,
+		);
 
 		const expected = new Date(then).toLocaleString('en-GB', {
 			day: 'numeric',

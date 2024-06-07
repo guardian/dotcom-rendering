@@ -3492,7 +3492,7 @@
                     "type": "number"
                 },
                 "starRating": {
-                    "type": "number"
+                    "$ref": "#/definitions/StarRating"
                 },
                 "linkText": {
                     "type": "string"

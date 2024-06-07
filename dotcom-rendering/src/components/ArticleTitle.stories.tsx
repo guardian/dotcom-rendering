@@ -262,7 +262,7 @@ export const LiveblogTitle = ({ theme }: StoryArgs) => {
 					/* stylelint-disable-next-line color-no-hex */
 					background-color: ${theme === 'light'
 						? '#ffe500'
-						: 'inherit'};
+						: '#f3c100'};
 				`}
 			>
 				<ArticleTitle

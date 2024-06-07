@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source/foundations';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -28,6 +29,24 @@ const bodyStyles = css`
 	${getZIndex('bodyArea')}
 `;
 
+const titleStyles = css`
+	.sticky-tag-link-test & {
+		z-index: 10;
+		position: sticky;
+		top: 0;
+		margin-left: -10px;
+		margin-right: -10px;
+		${from.mobileLandscape} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${from.phablet} {
+			margin-left: 0px;
+			margin-right: 0px;
+		}
+	}
+`;
+
 const gridArea = css`
 	grid-area: var(--grid-area);
 `;
@@ -41,6 +60,7 @@ export const GridItem = ({
 		css={[
 			area === 'body' && bodyStyles,
 			area === 'right-column' && rightColumnStyles,
+			area === 'title' && titleStyles,
 			gridArea,
 		]}
 		style={{
