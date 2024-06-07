@@ -157,17 +157,19 @@ export const EnhancePinnedPost = () => {
 		if (!pinnedPost) return;
 		if (!pinnedPostCheckBox) return;
 
-		const listener = () =>
+		const listener = () => {
+			checkContentHeight();
 			handleClickTracking(
 				pinnedPostCheckBox.checked,
 				pinnedPost,
 				renderingTarget,
 			);
+		};
 
 		pinnedPostCheckBox.addEventListener('change', listener);
 
 		return () => pinnedPostCheckBox.removeEventListener('change', listener);
-	}, [pinnedPost, pinnedPostCheckBox, renderingTarget]);
+	}, [checkContentHeight, pinnedPost, pinnedPostCheckBox, renderingTarget]);
 
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
