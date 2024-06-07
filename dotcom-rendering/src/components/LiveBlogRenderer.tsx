@@ -81,7 +81,6 @@ export const LiveBlogRenderer = ({
 					</Island>
 					<PinnedPost
 						pinnedPost={pinnedPost}
-						format={format}
 						absoluteServerTimes={absoluteServerTimes}
 					>
 						<LiveBlock
