@@ -30,21 +30,7 @@ const clientConfig = {
 	},
 };
 
-// const clientConfigUsnat = {
-// 	privacyManagerId: '5eba7ef78c167c47ca8b433d',
-// 	isCCPA: true,
-// 	isTCFV2: false,
-// 	propertyHref: null,
-// 	siteHref: 'https://theguardian.amp',
-// 	getDnsMsgMms: true,
-// 	alwaysDisplayDns: false,
-// 	showNoticeUntilAction: true,
-// 	targetingParams: {
-// 		framework: 'usnat',
-// 	},
-// };
-
-const clientConfigCcpa = {
+const clientConfigUsnat = {
 	privacyManagerId: '5eba7ef78c167c47ca8b433d',
 	isCCPA: true,
 	isTCFV2: false,
@@ -54,9 +40,23 @@ const clientConfigCcpa = {
 	alwaysDisplayDns: false,
 	showNoticeUntilAction: true,
 	targetingParams: {
-		framework: 'ccpa',
+		framework: 'usnat',
 	},
 };
+
+// const clientConfigCcpa = {
+// 	privacyManagerId: '5eba7ef78c167c47ca8b433d',
+// 	isCCPA: true,
+// 	isTCFV2: false,
+// 	propertyHref: null,
+// 	siteHref: 'https://theguardian.amp',
+// 	getDnsMsgMms: true,
+// 	alwaysDisplayDns: false,
+// 	showNoticeUntilAction: true,
+// 	targetingParams: {
+// 		framework: 'ccpa',
+// 	},
+// };
 
 const clientConfigAus = {
 	propertyId: 14327,
@@ -160,7 +160,7 @@ export const AdConsent = () => {
 						geoOverride: {
 							ccpa: {
 								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
-								clientConfig: clientConfigCcpa,
+								clientConfig: clientConfigUsnat,
 							},
 							aus: {
 								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,

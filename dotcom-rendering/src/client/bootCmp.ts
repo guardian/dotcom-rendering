@@ -109,11 +109,6 @@ const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 				consentUUID: getCookie({ name: 'usnatUUID' }) ?? '',
 				consent: consentState.ccpa.doNotSell ? 'false' : 'true',
 			};
-			// return {
-			// 	consentJurisdiction: 'CCPA',
-			// 	consentUUID: getCookie({ name: 'ccpaUUID' }) ?? '',
-			// 	consent: consentState.ccpa.doNotSell ? 'false' : 'true',
-			// };
 		}
 		if (consentState.aus) {
 			return {
