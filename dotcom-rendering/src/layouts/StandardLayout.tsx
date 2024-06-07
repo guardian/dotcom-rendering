@@ -412,7 +412,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
