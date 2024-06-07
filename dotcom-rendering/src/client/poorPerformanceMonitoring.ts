@@ -46,13 +46,7 @@ const isTimeToFirstByteAboveThreshold = (threshold = 1200) => {
 		const [nav] = window.performance.getEntriesByType('navigation');
 		if (!nav) return true;
 
-		const isPerformanceNavigationTiming = (
-			navigationEvent: PerformanceEntry | undefined,
-		): navigationEvent is PerformanceNavigationTiming => {
-			return navigationEvent?.entryType === 'navigation';
-		};
-
-		if (isPerformanceNavigationTiming(nav)) {
+		if (nav instanceof PerformanceNavigationTiming) {
 			logPerformanceInfo('navigation', {
 				domContentLoadedEventEnd: nav.domContentLoadedEventEnd,
 				type: nav.type,
