@@ -78,7 +78,7 @@ playwright-run:
 	$(call log, "starting DEV server and running Playwright tests")
 	@pnpm playwright:run
 
-playwright-open: clear clean-dist install build
+playwright-open:
 	$(call log, "starting DEV server and opening Playwright UI")
 	@pnpm playwright:open
 
