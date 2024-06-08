@@ -103,7 +103,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const twitterMetaTags =
 		twitterData && generateMetaTags(twitterData, 'name');
 
-	// Duplicated prefetch and preconnect tags from DCP:
+	// Duplicated DNS-prefetch and preconnect tags from DCP:
 	// Documented here: https://github.com/guardian/frontend/pull/12935
 	// Preconnect should be used for the most crucial third party domains
 	// "use preconnect when you know for sure that you’re going to be accessing a resource"
@@ -113,17 +113,17 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	// DNS-prefetch can also be used as a fallback for IE11
 	// More information on preconnecting:
 	// https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
-	// More information on prefetching:
+	// More information on DNS-prefetching:
 	// https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
-	const staticPreconnectUrls = [
+	const preconnectUrls = [
 		`${ASSET_ORIGIN}`,
 		`https://i.guim.co.uk`,
 		`https://j.ophan.co.uk`,
 		`https://ophan.theguardian.com`,
 	];
 
-	const staticPrefetchUrls = [
-		...staticPreconnectUrls,
+	const dnsPrefetchUrls = [
+		...preconnectUrls,
 		`https://api.nextgen.guardianapps.co.uk`,
 		`https://hits-secure.theguardian.com`,
 		`https://interactive.guim.co.uk`,
@@ -131,16 +131,16 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		`https://support.theguardian.com`,
 	];
 
-	const allStaticPreconnectUrls =
+	const allPreconnectUrls =
 		process.env.NODE_ENV === 'production'
-			? [...staticPreconnectUrls, 'https://sourcepoint.theguardian.com']
-			: staticPreconnectUrls;
+			? [...preconnectUrls, 'https://sourcepoint.theguardian.com']
+			: preconnectUrls;
 
-	const preconnectTags = allStaticPreconnectUrls.map(
+	const preconnectTags = allPreconnectUrls.map(
 		(src) => `<link rel="preconnect" href="${src}">`,
 	);
 
-	const prefetchTags = staticPrefetchUrls.map(
+	const dnsPrefetchTags = dnsPrefetchUrls.map(
 		(src) => `<link rel="dns-prefetch" href="${src}">`,
 	);
 
@@ -229,7 +229,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
 
                 ${preconnectTags.join('\n')}
-                ${prefetchTags.join('\n')}
+                ${dnsPrefetchTags.join('\n')}
 
                 ${
 					linkedData !== undefined
