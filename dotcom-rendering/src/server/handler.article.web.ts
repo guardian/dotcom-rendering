@@ -5,18 +5,17 @@ import { decideFormat } from '../lib/decideFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsBlock } from '../model/validate';
 import type { FEBlocksRequest } from '../types/frontend';
-import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderBlocks, renderHtml } from './render.article.web';
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 	const article = enhanceArticleType(body, 'Web');
-	const { html, prefetchScripts } = renderHtml({
+	const html = renderHtml({
 		article,
 	});
 
-	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+	res.status(200).send(html);
 };
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
@@ -41,11 +40,11 @@ export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 	const article = enhanceArticleType(body, 'Web');
-	const { html, prefetchScripts } = renderHtml({
+	const html = renderHtml({
 		article,
 	});
 
-	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+	res.status(200).send(html);
 };
 
 export const handleBlocks: RequestHandler = ({ body }, res) => {

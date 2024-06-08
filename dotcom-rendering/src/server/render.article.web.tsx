@@ -34,9 +34,7 @@ const decideTitle = (article: DCRArticle): string => {
 	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
 };
 
-export const renderHtml = ({
-	article,
-}: Props): { html: string; prefetchScripts: string[] } => {
+export const renderHtml = ({ article }: Props): string => {
 	const NAV = {
 		...extractNAV(article.nav),
 		selectedPillar: getCurrentPillar(article),
@@ -100,7 +98,7 @@ export const renderHtml = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const prefetchScripts = [
+	const priorityScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
@@ -114,7 +112,7 @@ export const renderHtml = ({
 	];
 
 	const scriptTags = generateScriptTags([
-		...prefetchScripts,
+		...priorityScripts,
 		...legacyScripts,
 	]);
 
@@ -225,7 +223,7 @@ window.twttr = (function(d, s, id) {
 		weAreHiring: !!article.config.switches.weAreHiring,
 	});
 
-	return { html: pageHtml, prefetchScripts };
+	return pageHtml;
 };
 
 /**

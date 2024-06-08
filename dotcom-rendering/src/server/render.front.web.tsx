@@ -74,9 +74,7 @@ const enhanceNav = (NAV: NavType): NavType => {
 	};
 };
 
-export const renderFront = ({
-	front,
-}: Props): { html: string; prefetchScripts: string[] } => {
+export const renderFront = ({ front }: Props): string => {
 	const title = front.webTitle;
 	const NAV = extractNAV(front.nav);
 	const enhancedNAV = enhanceNav(NAV);
@@ -108,7 +106,7 @@ export const renderFront = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const prefetchScripts = [
+	const priorityScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
@@ -119,7 +117,7 @@ export const renderFront = ({
 		getPathFromManifest('client.web.legacy', 'index.js'),
 	];
 	const scriptTags = generateScriptTags([
-		...prefetchScripts,
+		...priorityScripts,
 		...legacyScripts,
 	]);
 
@@ -166,17 +164,14 @@ export const renderFront = ({
 		alternateLangLinks,
 	});
 
-	return {
-		html: pageHtml,
-		prefetchScripts,
-	};
+	return pageHtml;
 };
 
 export const renderTagPage = ({
 	tagPage,
 }: {
 	tagPage: DCRTagPageType;
-}): { html: string; prefetchScripts: string[] } => {
+}): string => {
 	const title = tagPage.webTitle;
 	const NAV = extractNAV(tagPage.nav);
 	const enhancedNAV = enhanceNav(NAV);
@@ -209,7 +204,7 @@ export const renderTagPage = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const prefetchScripts = [
+	const priorityScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
@@ -220,7 +215,7 @@ export const renderTagPage = ({
 		getPathFromManifest('client.web.legacy', 'index.js'),
 	];
 	const scriptTags = generateScriptTags([
-		...prefetchScripts,
+		...priorityScripts,
 		...legacyScripts,
 	]);
 
@@ -265,8 +260,6 @@ export const renderTagPage = ({
 		canonicalUrl: tagPage.canonicalUrl,
 		alternateLangLinks,
 	});
-	return {
-		html: pageHtml,
-		prefetchScripts,
-	};
+
+	return pageHtml;
 };

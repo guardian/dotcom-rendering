@@ -14,12 +14,7 @@ import type { FEElement } from '../types/content';
 import type { DCRArticle } from '../types/frontend';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
-export const renderArticle = (
-	article: DCRArticle,
-): {
-	prefetchScripts: string[];
-	html: string;
-} => {
+export const renderArticle = (article: DCRArticle): string => {
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const renderingTarget = 'Apps';
@@ -107,7 +102,7 @@ window.twttr = (function(d, s, id) {
 		unknownConfig: article.config,
 	});
 
-	const renderedPage = htmlPageTemplate({
+	const pageHtml = htmlPageTemplate({
 		css: extractedCss,
 		html,
 		title: article.webTitle,
@@ -122,8 +117,5 @@ window.twttr = (function(d, s, id) {
 				: undefined,
 	});
 
-	return {
-		prefetchScripts: clientScripts,
-		html: renderedPage,
-	};
+	return pageHtml;
 };

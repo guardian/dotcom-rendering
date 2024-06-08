@@ -20,7 +20,7 @@ interface Props {
 
 export const renderEditorialNewslettersPage = ({
 	newslettersPage,
-}: Props): { html: string; prefetchScripts: string[] } => {
+}: Props): string => {
 	const title = newslettersPage.webTitle;
 	const NAV = extractNAV(newslettersPage.nav);
 
@@ -53,7 +53,7 @@ export const renderEditorialNewslettersPage = ({
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const prefetchScripts = [
+	const priorityScripts = [
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
@@ -67,7 +67,7 @@ export const renderEditorialNewslettersPage = ({
 	];
 
 	const scriptTags = generateScriptTags([
-		...prefetchScripts,
+		...priorityScripts,
 		...legacyScripts,
 	]);
 
@@ -100,8 +100,5 @@ export const renderEditorialNewslettersPage = ({
 		renderingTarget: 'Web',
 		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
 	});
-	return {
-		html: pageHtml,
-		prefetchScripts,
-	};
+	return pageHtml;
 };
