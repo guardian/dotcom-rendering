@@ -33,7 +33,7 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -249,6 +249,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const inTagLinkTest =
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -527,6 +530,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main
 				data-layout="ShowcaseLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 				id="maincontent"
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
@@ -582,6 +586,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -596,9 +601,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									byline={article.byline}
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										article.starRating !== undefined
 									}
 								/>
 							</PositionHeadline>
@@ -818,17 +820,28 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								`}
 							>
 								<RightColumn>
-									<MostViewedRightWithAd
-										format={format}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											!!article.config
-												.shouldHideReaderRevenue
-										}
-									/>
+									<Island
+										priority="feature"
+										defer={{
+											until: 'visible',
+											// Provide a much higher value for the top margin for the intersection observer
+											// This is because the most viewed would otherwise only be lazy loaded when the
+											// bottom of the container intersects with the viewport
+											rootMargin: '700px 100px',
+										}}
+									>
+										<MostViewedRightWithAd
+											format={format}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											renderAds={renderAds}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
 								</RightColumn>
 							</div>
 						</GridItem>

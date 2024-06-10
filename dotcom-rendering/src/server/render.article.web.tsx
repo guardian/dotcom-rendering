@@ -294,6 +294,11 @@ export const renderBlocks = ({
 				contributionsServiceUrl=""
 				keywordIds={keywordIds}
 				editionId={editionId}
+				onFirstPage={false}
+				keyEvents={[]}
+				filterKeyEvents={false}
+				availableTopics={[]}
+				selectedTopics={[]}
 			/>
 		</ConfigProvider>,
 	);

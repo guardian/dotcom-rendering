@@ -287,6 +287,8 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+	const inTagLinkTest =
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -446,6 +448,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 			<main
 				data-layout="PictureLayout"
 				id="maincontent"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
@@ -476,6 +479,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -493,10 +497,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											byline={article.byline}
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
-											}
-											hasStarRating={
-												typeof article.starRating ===
-												'number'
 											}
 											hasAvatar={displayAvatarUrl}
 										/>
@@ -535,9 +535,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										byline={article.byline}
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
-										}
-										hasStarRating={
-											article.starRating !== undefined
 										}
 									/>
 								</div>

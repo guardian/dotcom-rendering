@@ -314,6 +314,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+	const inTagLinkTest =
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -462,7 +464,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					)}
 				</div>
 			)}
-			<main data-layout="LiveLayout">
+			<main
+				data-layout="LiveLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -536,6 +541,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
+									inTagLinkTest={inTagLinkTest}
 								/>
 							</GridItem>
 							<GridItem area="headline">
@@ -548,9 +554,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											byline={article.byline}
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
-											}
-											hasStarRating={
-												!isUndefined(article.starRating)
 											}
 										/>
 									)}
@@ -1028,10 +1031,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</ArticleContainer>
 										</div>
 									) : (
-										<Accordion
-											accordionTitle="Live feed"
-											context="liveFeed"
-										>
+										<Accordion accordionTitle="Live feed">
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (
