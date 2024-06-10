@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
@@ -29,8 +29,9 @@ export const MostViewedRightWithAd = ({
 	const { renderingTarget } = useConfig();
 	const isApps = renderingTarget === 'Apps';
 	const useDarkColourScheme =
-		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.Audio;
+		(format.design === ArticleDesign.Video ||
+			format.design === ArticleDesign.Audio) &&
+		format.theme !== ArticleSpecial.Labs;
 
 	return (
 		<div

@@ -64,16 +64,17 @@ type Props = {
 	children: React.ReactNode;
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
-	imagePosition: ImagePositionType;
+	imagePositionOnDesktop: ImagePositionType;
 };
 
 export const ContentWrapper = ({
 	children,
 	imageType,
 	imageSize,
-	imagePosition,
+	imagePositionOnDesktop,
 }: Props) => {
-	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
+	const isHorizontal =
+		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
 	return (
 		<div
 			css={[

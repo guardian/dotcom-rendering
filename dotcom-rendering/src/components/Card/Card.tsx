@@ -67,7 +67,7 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePosition?: ImagePositionType;
+	imagePositionOnDesktop?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
@@ -228,13 +228,16 @@ const getMedia = ({
 
 const decideSublinkPosition = (
 	supportingContent?: DCRSupportingContent[],
-	imagePosition?: ImagePositionType,
+	imagePositionOnDesktop?: ImagePositionType,
 	alignment?: Alignment,
 ): 'inner' | 'outer' | 'none' => {
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
 	}
-	if (imagePosition === 'top' || imagePosition === 'bottom') {
+	if (
+		imagePositionOnDesktop === 'top' ||
+		imagePositionOnDesktop === 'bottom'
+	) {
 		return 'outer';
 	}
 	return alignment === 'vertical' ? 'inner' : 'outer';
@@ -259,7 +262,7 @@ export const Card = ({
 	showByline,
 	webPublicationDate,
 	image,
-	imagePosition = 'top',
+	imagePositionOnDesktop = 'top',
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
 	imageLoading,
@@ -298,7 +301,7 @@ export const Card = ({
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
-		imagePosition,
+		imagePositionOnDesktop,
 		supportingContentAlignment,
 	);
 
@@ -422,7 +425,7 @@ export const Card = ({
 				isExternalLink={isExternalLink}
 			/>
 			<CardLayout
-				imagePosition={imagePosition}
+				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
@@ -432,7 +435,7 @@ export const Card = ({
 					<ImageWrapper
 						imageSize={imageSize}
 						imageType={media.type}
-						imagePosition={imagePosition}
+						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
 					>
@@ -446,7 +449,7 @@ export const Card = ({
 						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
-								imagePosition={imagePosition}
+								imagePositionOnDesktop={imagePositionOnDesktop}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -550,7 +553,9 @@ export const Card = ({
 								{showPlayIcon && mainMedia.duration > 0 && (
 									<MediaDuration
 										mediaDuration={mainMedia.duration}
-										imagePosition={imagePosition}
+										imagePositionOnDesktop={
+											imagePositionOnDesktop
+										}
 										imagePositionOnMobile={
 											imagePositionOnMobile
 										}
@@ -568,11 +573,11 @@ export const Card = ({
 					<ContentWrapper
 						imageType={media?.type}
 						imageSize={imageSize}
-						imagePosition={imagePosition}
+						imagePositionOnDesktop={imagePositionOnDesktop}
 					>
 						<HeadlineWrapper
 							imagePositionOnMobile={imagePositionOnMobile}
-							imagePosition={imagePosition}
+							imagePositionOnDesktop={imagePositionOnDesktop}
 							imageUrl={image?.src}
 							hasStarRating={starRating !== undefined}
 						>
@@ -622,7 +627,9 @@ export const Card = ({
 						>
 							{!!trailText && (
 								<TrailTextWrapper
-									imagePosition={imagePosition}
+									imagePositionOnDesktop={
+										imagePositionOnDesktop
+									}
 									imageSize={imageSize}
 									imageType={media?.type}
 								>

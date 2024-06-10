@@ -251,7 +251,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
 

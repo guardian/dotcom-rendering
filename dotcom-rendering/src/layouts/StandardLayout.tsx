@@ -412,7 +412,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
@@ -728,7 +729,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									{isWeb &&
-									format.theme === ArticleSpecial.Labs ? (
+									format.theme === ArticleSpecial.Labs &&
+									format.design !== ArticleDesign.Video ? (
 										<GuardianLabsLines />
 									) : (
 										<DecideLines
