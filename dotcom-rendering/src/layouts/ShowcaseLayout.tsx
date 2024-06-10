@@ -251,7 +251,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const inTagLinkTest =
-		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
