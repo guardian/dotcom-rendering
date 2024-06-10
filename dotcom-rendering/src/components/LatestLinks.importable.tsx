@@ -35,6 +35,7 @@ const linkStyles = css`
 	${textSans14}
 	overflow: hidden;
 	flex-grow: 1;
+	flex: 1;
 `;
 
 const dividerStyles = css`
