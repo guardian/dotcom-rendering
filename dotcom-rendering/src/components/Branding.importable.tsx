@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	breakpoints,
@@ -129,10 +129,11 @@ function decideLogo(
 	const maybeDarkLogo = branding.logoForDarkBackground ?? branding.logo;
 
 	const useDarkColourScheme =
-		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Gallery ||
-		format.design === ArticleDesign.Picture;
+		(format.design === ArticleDesign.Video ||
+			format.design === ArticleDesign.Audio ||
+			format.design === ArticleDesign.Gallery ||
+			format.design === ArticleDesign.Picture) &&
+		format.theme !== ArticleSpecial.Labs;
 
 	return (
 		<picture>

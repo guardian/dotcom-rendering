@@ -51,7 +51,7 @@ export const QAndAExplainer = ({
 	RenderArticleElement,
 }: Props) => {
 	return (
-		<>
+		<div data-spacefinder-role="nested">
 			<hr css={headingLineStyles}></hr>
 			<Subheading
 				id={slugify(qAndAExplainer.title)}
@@ -83,6 +83,6 @@ export const QAndAExplainer = ({
 					isListElement={true}
 				/>
 			))}
-		</>
+		</div>
 	);
 };

@@ -101,7 +101,7 @@ export const TagLink = ({
 			<a
 				href={`${guardianBaseURL}/${sectionUrl}`}
 				css={tagLinkStyles}
-				data-component="series"
+				data-component="big-event-series"
 				data-link-name="article series"
 			>
 				<div css={labelStyles}>{sectionLabel}</div>
