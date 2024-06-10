@@ -315,7 +315,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 	const inTagLinkTest =
-		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
