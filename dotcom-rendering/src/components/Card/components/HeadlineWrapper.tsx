@@ -4,7 +4,7 @@ import type { ImagePositionType } from './ImageWrapper';
 
 type Props = {
 	children: React.ReactNode;
-	imagePosition?: ImagePositionType;
+	imagePositionOnDesktop?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 	imageUrl?: string;
 	hasStarRating?: boolean;
@@ -12,7 +12,7 @@ type Props = {
 
 export const HeadlineWrapper = ({
 	children,
-	imagePosition,
+	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	imageUrl,
 	hasStarRating,
@@ -37,8 +37,9 @@ export const HeadlineWrapper = ({
 
 			${from.tablet} {
 				padding-top: ${imageUrl &&
-				imagePosition &&
-				(imagePosition === 'left' || imagePosition === 'right') &&
+				imagePositionOnDesktop &&
+				(imagePositionOnDesktop === 'left' ||
+					imagePositionOnDesktop === 'right') &&
 				hasStarRating
 					? '0px'
 					: '1px'};

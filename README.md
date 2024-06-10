@@ -22,7 +22,7 @@ corepack enable
 
 ## Install
 
-Run `pnpm` in the root directory of this project to install packages.
+Run `pnpm install` in the root directory of this project to install packages.
 
 ## Run
 

@@ -25,8 +25,9 @@ export const renderArticle = (
 	const renderingTarget = 'Apps';
 	const config: Config = {
 		renderingTarget,
-		darkModeAvailable: !!article.config.switches.darkModeInApps,
-		inAdvertisingPartnerABTest: false,
+		darkModeAvailable: true,
+		updateLogoAdPartnerSwitch:
+			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 	};
 

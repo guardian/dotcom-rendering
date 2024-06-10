@@ -4,7 +4,6 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
@@ -39,7 +38,7 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -100,39 +99,39 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  matchNav   . right-column'
+									'title  border  matchtabs  . right-column'
+									'.      border  headline   . right-column'
+									'.      border  standfirst . right-column'
+									'lines  border  media      . right-column'
+									'meta   border  media      . right-column'
+									'meta   border  body       . right-column'
+									'.      border  .          . right-column';
 						  `
 						: isMedia
 						? css`
 								grid-template-areas:
-									'title  border  headline     .'
-									'.      border  disclaimer   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  standfirst   right-column'
-									'.      border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  headline   headline   .'
+									'.      border  disclaimer disclaimer right-column'
+									'lines  border  media      media      right-column'
+									'meta   border  media      media      right-column'
+									'meta   border  standfirst standfirst right-column'
+									'.      border  body       body       right-column'
+									'.      border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  headline   . right-column'
+									'.      border  standfirst . right-column'
+									'lines  border  media      . right-column'
+									'meta   border  media      . right-column'
+									'meta   border  body       . right-column'
+									'.      border  .          . right-column';
 						  `}
 				}
 			}
@@ -146,7 +145,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 			${until.wide} {
-				grid-template-columns: 140px 1px 1fr 300px;
+				grid-template-columns: 140px 1px 620px 300px;
 
 				${isMatchReport
 					? css`
@@ -190,7 +189,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 			${until.leftCol} {
-				grid-template-columns: 1fr 300px;
+				grid-template-columns: 620px 300px;
 				${isMatchReport
 					? css`
 							grid-template-areas:
@@ -233,7 +232,7 @@ const StandardGrid = ({
 			}
 
 			${until.desktop} {
-				grid-template-columns: 1fr; /* Main content */
+				grid-template-columns: 100%; /* Main content */
 				${isMatchReport
 					? css`
 							grid-template-areas:
@@ -337,7 +336,6 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-top: ${space[4]}px;
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
@@ -412,6 +410,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
+	const inTagLinkTest =
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
 
 	return (
 		<>
@@ -592,7 +593,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main
+				data-layout="StandardLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -682,6 +686,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 								isMatch={!!footballMatchUrl}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -700,9 +705,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									byline={article.byline}
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										typeof article.starRating === 'number'
 									}
 								/>
 							</div>
@@ -727,7 +729,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									{isWeb &&
-									format.theme === ArticleSpecial.Labs ? (
+									format.theme === ArticleSpecial.Labs &&
+									format.design !== ArticleDesign.Video ? (
 										<GuardianLabsLines />
 									) : (
 										<DecideLines
@@ -961,17 +964,28 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								`}
 							>
 								<RightColumn>
-									<MostViewedRightWithAd
-										format={format}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											!!article.config
-												.shouldHideReaderRevenue
-										}
-									/>
+									<Island
+										priority="feature"
+										defer={{
+											until: 'visible',
+											// Provide a much higher value for the top margin for the intersection observer
+											// This is because the most viewed would otherwise only be lazy loaded when the
+											// bottom of the container intersects with the viewport
+											rootMargin: '700px 100px',
+										}}
+									>
+										<MostViewedRightWithAd
+											format={format}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											renderAds={renderAds}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
 								</RightColumn>
 							</div>
 						</GridItem>

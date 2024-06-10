@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	breakpoints,
@@ -129,10 +129,11 @@ function decideLogo(
 	const maybeDarkLogo = branding.logoForDarkBackground ?? branding.logo;
 
 	const useDarkColourScheme =
-		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Gallery ||
-		format.design === ArticleDesign.Picture;
+		(format.design === ArticleDesign.Video ||
+			format.design === ArticleDesign.Audio ||
+			format.design === ArticleDesign.Gallery ||
+			format.design === ArticleDesign.Picture) &&
+		format.theme !== ArticleSpecial.Labs;
 
 	return (
 		<picture>
@@ -209,7 +210,7 @@ export const Branding = ({ branding, format }: Props) => {
 		locationPrefix: 'article-meta',
 	});
 
-	const { darkModeAvailable, inAdvertisingPartnerABTest } = useConfig();
+	const { darkModeAvailable, updateLogoAdPartnerSwitch } = useConfig();
 
 	const isAdvertisingPartnerOrExclusive =
 		branding.logo.label.toLowerCase() === 'advertising partner' ||
@@ -223,10 +224,10 @@ export const Branding = ({ branding, format }: Props) => {
 			css={[
 				brandingStyle,
 				isAdvertisingPartnerOrExclusive &&
-					inAdvertisingPartnerABTest &&
+					updateLogoAdPartnerSwitch &&
 					brandingAdvertisingPartnerStyle,
 				isAdvertisingPartnerAndInteractive &&
-					inAdvertisingPartnerABTest &&
+					updateLogoAdPartnerSwitch &&
 					brandingInteractiveStyle,
 			]}
 		>
@@ -234,7 +235,7 @@ export const Branding = ({ branding, format }: Props) => {
 				css={[
 					labelStyle,
 					isAdvertisingPartnerOrExclusive &&
-						inAdvertisingPartnerABTest &&
+						updateLogoAdPartnerSwitch &&
 						labelAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogLabelStyle,
 				]}
@@ -245,8 +246,8 @@ export const Branding = ({ branding, format }: Props) => {
 				css={[
 					brandingLogoStyle,
 					isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch &&
 						!isInteractive &&
-						inAdvertisingPartnerABTest &&
 						brandingLogoAdvertisingPartnerStyle,
 				]}
 			>
@@ -269,7 +270,7 @@ export const Branding = ({ branding, format }: Props) => {
 				css={[
 					aboutLinkStyle,
 					isAdvertisingPartnerOrExclusive &&
-						inAdvertisingPartnerABTest &&
+						updateLogoAdPartnerSwitch &&
 						aboutLinkAdvertisingPartnerStyle,
 					isLiveBlog && liveBlogAboutLinkStyle,
 				]}

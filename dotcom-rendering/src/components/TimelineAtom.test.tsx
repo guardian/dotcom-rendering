@@ -11,7 +11,7 @@ describe('TimelineAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -37,7 +37,7 @@ describe('TimelineAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>
@@ -64,7 +64,7 @@ describe('TimelineAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					inAdvertisingPartnerABTest: false,
+					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 				}}
 			>

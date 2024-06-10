@@ -46,4 +46,12 @@ export const rootStyles = (
 		background: ${sourcePalette.brandAlt[400]};
 		color: ${sourcePalette.neutral[7]};
 	}
+
+	.ad-slot-container {
+		/* prevent third-party code from breaking our layout */
+		/* using hidden as a fallback for browsers that don't support clip */
+		overflow-x: hidden;
+		/* clip is our preferred choice as it allows sticky ads in the right column */
+		overflow-x: clip;
+	}
 `;

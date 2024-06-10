@@ -1,21 +1,11 @@
 import { isOneOf } from '@guardian/libs';
-import { isTuple, type Tuple } from './tuple';
+import { isTuple } from './tuple';
 
 type EditionId = 'UK' | 'US' | 'AU' | 'INT' | 'EUR';
 
-type Edition = {
-	url: string;
-	editionId: EditionId;
-	pageId: string;
-	longTitle: string;
-	title: string;
-	dateLocale: string;
-	timeZone: string;
-	langLocale?: string;
-	hasEditionalisedPages: boolean;
-};
+type Edition = (typeof editionList)[number];
 
-const editionList: Tuple<Edition, 5> = [
+const editionList = [
 	{
 		url: '/preference/edition/uk',
 		editionId: 'UK',
@@ -71,7 +61,17 @@ const editionList: Tuple<Edition, 5> = [
 		langLocale: 'en',
 		hasEditionalisedPages: false,
 	},
-];
+] as const satisfies ReadonlyArray<{
+	url: string;
+	editionId: EditionId;
+	pageId: string;
+	longTitle: string;
+	title: string;
+	dateLocale: string;
+	timeZone: string;
+	langLocale?: string;
+	hasEditionalisedPages: boolean;
+}>;
 
 const [ukEdition] = editionList;
 

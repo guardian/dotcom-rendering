@@ -1,4 +1,4 @@
-import { isString, timeAgo } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 import { type EditionId, getEditionFromId } from '../lib/edition';
 import { Island } from './Island';
 import { RelativeTime } from './RelativeTime.importable';
@@ -48,6 +48,12 @@ const formatTime = (date: Date, locale: string, timeZone: string) =>
 		})
 		.replace(':', '.');
 
+const ONE_MINUTE = 60_000;
+/** https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date */
+const MAX_DATE = 8.64e15;
+/** Rounded down to the previous minute, to ensure relative times rarely go backwards */
+const getServerTime = () => Math.floor(Date.now() / ONE_MINUTE) * ONE_MINUTE;
+
 export const DateTime = ({
 	date,
 	editionId,
@@ -59,14 +65,15 @@ export const DateTime = ({
 }: Props & DisplayProps) => {
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
-	const epoch = date.getTime();
-	const relativeTime = display === 'relative' && timeAgo(epoch);
-	const isRecent = isString(relativeTime) && relativeTime.endsWith(' ago');
-	const now = absoluteServerTimes ? Number.MAX_SAFE_INTEGER - 1 : Date.now();
+	const then = date.getTime();
 
-	return isRecent ? (
+	return display === 'relative' ? (
 		<Island priority="enhancement" defer={{ until: 'visible' }}>
-			<RelativeTime then={epoch} now={now} />
+			<RelativeTime
+				then={then}
+				now={absoluteServerTimes ? MAX_DATE : getServerTime()}
+				editionId={editionId}
+			/>
 		</Island>
 	) : (
 		<time

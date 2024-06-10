@@ -163,10 +163,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant';
 
-	const inAdvertisingPartnerABTest =
-		abTests.updateLogoAdPartnerVariant === 'variant';
-
-	const { absoluteServerTimes = false } = front.config.switches;
+	const { updateLogoAdPartner, absoluteServerTimes = false } =
+		front.config.switches;
 
 	return (
 		<>
@@ -464,8 +462,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									inAdvertisingPartnerABTest={
-										inAdvertisingPartnerABTest
+									updateLogoAdPartnerSwitch={
+										updateLogoAdPartner
 									}
 								>
 									<FrontMostViewed
@@ -678,9 +676,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
-								inAdvertisingPartnerABTest={
-									inAdvertisingPartnerABTest
-								}
+								updateLogoAdPartnerSwitch={updateLogoAdPartner}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}

@@ -11,12 +11,12 @@ export type Config =
 	| {
 			renderingTarget: Extract<RenderingTarget, 'Web'>;
 			darkModeAvailable: boolean;
-			inAdvertisingPartnerABTest: boolean;
+			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
 	  }
 	| {
 			renderingTarget: Extract<RenderingTarget, 'Apps'>;
 			darkModeAvailable: boolean;
-			inAdvertisingPartnerABTest: boolean;
+			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
 	  };
