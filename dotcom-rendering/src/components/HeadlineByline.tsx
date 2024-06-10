@@ -62,7 +62,7 @@ const opinionStyles = (format: ArticleFormat) => css`
 	display: inline;
 	color: ${schemedPalette('--byline')};
 
-	${until.mobileMedium} {
+	${until.tablet} {
 		${headlineLightItalic28}
 	}
 
