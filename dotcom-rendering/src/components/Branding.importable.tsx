@@ -68,6 +68,7 @@ const brandingLogoAdvertisingPartnerStyle = css`
 	padding: 0;
 	& img {
 		display: block;
+		max-width: 140px;
 		${between.leftCol.and.wide} {
 			max-width: 130px;
 		}
