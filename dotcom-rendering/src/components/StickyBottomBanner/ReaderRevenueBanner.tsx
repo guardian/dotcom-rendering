@@ -202,7 +202,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	if (!remoteBannerConfig) return { show: false };
 
 	if (isAndroidWebview) {
-		// Do not show banners on Android app webview, due to buggy behaviour
+		// Do not show banners on Android app webview, due to buggy behaviour with the buttons
 		return { show: false };
 	}
 
