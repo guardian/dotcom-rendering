@@ -8,8 +8,8 @@ import {
 	headlineMedium20,
 	remSpace,
 	textSans15,
-} from '@guardian/source-foundations';
-import { SvgQuote } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgQuote } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import {
 	fromNullable,

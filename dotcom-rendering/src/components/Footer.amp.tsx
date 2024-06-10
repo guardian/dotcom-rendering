@@ -4,7 +4,7 @@ import {
 	palette,
 	textSans12,
 	textSans17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { NavType } from '../model/extract-nav';
 import { useContentABTestGroup } from './ContentABTest.amp';
 import { ReaderRevenueButton } from './ReaderRevenueButton.amp';
@@ -55,7 +55,7 @@ export const footerLinks: Link[][] = [
 		},
 		{
 			title: 'Help',
-			url: 'https://www.theguardian.com/help',
+			url: 'https://manage.theguardian.com/help-centre',
 		},
 	],
 	[
@@ -80,8 +80,8 @@ export const footerLinks: Link[][] = [
 			url: 'https://www.facebook.com/theguardian',
 		},
 		{
-			title: 'Twitter',
-			url: 'https://twitter.com/guardian',
+			title: 'X',
+			url: 'https://x.com/guardian',
 		},
 	],
 	[

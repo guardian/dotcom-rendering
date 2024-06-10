@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat, Pillar } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { pinnedBlock } from 'fixtures/item';
 import type { FC } from 'react';
 import PinnedPost from './';

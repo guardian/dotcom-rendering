@@ -3,7 +3,7 @@ import {
 	space,
 	textSans12,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';

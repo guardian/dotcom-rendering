@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import {
 	from,
 	space,
-	textSans,
 	textSans15,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+	textSansBold14,
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { palette } from '../palette';
 import { DateTime } from './DateTime';
 
@@ -15,6 +15,7 @@ interface Props {
 	title: string;
 	isSummary: boolean;
 	filterKeyEvents: boolean;
+	absoluteServerTimes: boolean;
 	cardPosition?: string;
 }
 
@@ -99,7 +100,13 @@ const textStyles = css`
 `;
 
 const timeStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${textSansBold14};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 	color: ${palette('--key-event-title')};
 	display: block;
 `;
@@ -111,6 +118,7 @@ export const KeyEventCard = ({
 	title,
 	filterKeyEvents,
 	cardPosition = 'unknown position',
+	absoluteServerTimes,
 }: Props) => {
 	const url = `?filterKeyEvents=${String(
 		filterKeyEvents,
@@ -127,6 +135,7 @@ export const KeyEventCard = ({
 					<DateTime
 						date={new Date(blockFirstPublished)}
 						display="relative"
+						absoluteServerTimes={absoluteServerTimes}
 						editionId={'UK'}
 						showWeekday={false}
 						showDate={true}

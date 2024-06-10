@@ -5,6 +5,7 @@ import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 type TrailProps = {
 	trail: DCRFrontCard;
 	imageLoading: Loading;
+	absoluteServerTimes: boolean;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 };
@@ -46,6 +47,7 @@ export const Card100Media50 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -53,11 +55,12 @@ export const Card100Media50 = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			headlineSize="huge"
 			headlineSizeOnMobile="medium"
 			image={trail.image}
 			imageSize="medium"
-			imagePosition="right"
+			imagePositionOnDesktop="right"
 			imagePositionOnMobile="top"
 			trailText={
 				// Only show trail text if there is no supportContent
@@ -95,17 +98,19 @@ export const Card100Media75 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			headlineSize="huge"
 			headlineSizeOnMobile="large"
 			image={trail.image}
 			imageSize="jumbo"
-			imagePosition="right"
+			imagePositionOnDesktop="right"
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
 			trailText={
@@ -145,16 +150,18 @@ export const Card100Media100 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			headlineSize="huge"
 			headlineSizeOnMobile="large"
 			image={trail.image}
-			imagePosition="top"
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
 			supportingContent={trail.supportingContent?.slice(0, 4)}
@@ -184,16 +191,18 @@ export const Card100Media100Tall = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			headlineSize="medium"
 			headlineSizeOnMobile="large"
 			image={trail.image}
-			imagePosition="top"
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
@@ -222,12 +231,14 @@ export const Card75Media50Right = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			trailText={trail.trailText}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment={
@@ -235,7 +246,7 @@ export const Card75Media50Right = ({
 					? 'horizontal'
 					: 'vertical'
 			}
-			imagePosition="right"
+			imagePositionOnDesktop="right"
 			imageSize="large"
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
@@ -264,12 +275,14 @@ export const Card75Media50Left = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			trailText={trail.trailText}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment={
@@ -277,7 +290,7 @@ export const Card75Media50Left = ({
 					? 'horizontal'
 					: 'vertical'
 			}
-			imagePosition="left"
+			imagePositionOnDesktop="left"
 			imagePositionOnMobile="top"
 			imageSize="large"
 			imageLoading={imageLoading}
@@ -306,6 +319,7 @@ export const Card25Media25 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -314,7 +328,8 @@ export const Card25Media25 = ({
 			supportingContentAlignment="vertical"
 			containerPalette={containerPalette}
 			showAge={showAge}
-			imagePosition="top"
+			absoluteServerTimes={absoluteServerTimes}
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
 			imageLoading={imageLoading}
@@ -344,6 +359,7 @@ export const Card25Media25SmallHeadline = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -352,7 +368,8 @@ export const Card25Media25SmallHeadline = ({
 			supportingContentAlignment="vertical"
 			containerPalette={containerPalette}
 			showAge={showAge}
-			imagePosition="top"
+			absoluteServerTimes={absoluteServerTimes}
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
 			imageLoading={imageLoading}
@@ -383,13 +400,15 @@ export const Card25Media25Tall = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			imagePosition="top"
+			absoluteServerTimes={absoluteServerTimes}
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
 			imageLoading={imageLoading}
@@ -427,13 +446,15 @@ export const Card25Media25TallNoTrail = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			imagePosition="top"
+			absoluteServerTimes={absoluteServerTimes}
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
 			imageLoading={imageLoading}
@@ -464,13 +485,15 @@ export const Card25Media25TallSmallHeadline = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			imagePosition="top"
+			absoluteServerTimes={absoluteServerTimes}
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageSize="small"
 			imageLoading={imageLoading}
@@ -501,6 +524,7 @@ export const Card50Media50 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
@@ -509,10 +533,11 @@ export const Card50Media50 = ({
 			headlineSize="large"
 			headlineSizeOnMobile="large"
 			imageSize="medium"
-			imagePosition="top"
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
 		/>
@@ -539,16 +564,18 @@ export const Card50Media50Tall = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			trailText={trail.trailText}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
-			imagePosition="top"
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
 			imageSize="medium"
 			imageLoading={imageLoading}
@@ -577,16 +604,18 @@ export const Card66Media66 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			trailText={trail.trailText}
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
-			imagePosition="top"
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
 			imageSize="large"
 			imageLoading={imageLoading}
@@ -613,15 +642,17 @@ export const Card33Media33 = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			trailText={trail.trailText}
 			imageSize="medium"
-			imagePosition="top"
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageLoading={imageLoading}
 			headlineSize="medium"
@@ -648,14 +679,16 @@ export const Card33Media33Tall = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			imageSize="medium"
-			imagePosition="top"
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="left"
 			imageLoading={imageLoading}
 			headlineSize="medium"
@@ -685,15 +718,17 @@ export const Card33Media33MobileTopTall = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			trailText={trail.trailText}
 			imageSize="medium"
-			imagePosition="top"
+			imagePositionOnDesktop="top"
 			imagePositionOnMobile="top"
 			imageLoading={imageLoading}
 			headlineSize="medium"
@@ -720,12 +755,14 @@ export const CardDefault = ({
 	trail,
 	showAge,
 	containerPalette,
+	absoluteServerTimes,
 }: Omit<TrailProps, 'imageLoading'>) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			image={undefined}
 			imageLoading={'lazy'}
 			avatarUrl={undefined}
@@ -753,14 +790,16 @@ export const CardDefaultMedia = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			imageSize="small"
-			imagePosition="left"
+			imagePositionOnDesktop="left"
 			imagePositionOnMobile="none"
 			imageLoading={imageLoading}
 			headlineSize="small"
@@ -787,14 +826,16 @@ export const CardDefaultMediaMobile = ({
 	showAge,
 	containerPalette,
 	imageLoading,
+	absoluteServerTimes,
 }: TrailProps) => {
 	return (
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			absoluteServerTimes={absoluteServerTimes}
 			imageSize="small"
-			imagePosition="left"
+			imagePositionOnDesktop="left"
 			imagePositionOnMobile="left"
 			imageLoading={imageLoading}
 			headlineSize="small"

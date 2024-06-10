@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { images } from '../../fixtures/generated/images';
 import { liveBlock } from '../../fixtures/manual/liveBlock';

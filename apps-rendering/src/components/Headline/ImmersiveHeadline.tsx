@@ -8,7 +8,7 @@ import {
 	headlineBold34,
 	headlineBold50,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import { background, text } from 'palette';
 import { darkModeCss } from 'styles';

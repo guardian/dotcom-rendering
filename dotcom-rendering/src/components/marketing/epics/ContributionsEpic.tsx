@@ -8,9 +8,9 @@ import {
 	article17,
 	articleBold17,
 	headlineBold20,
-} from '@guardian/source-foundations';
-import { palette, space } from '@guardian/source-foundations';
-import { from } from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
+import { palette, space } from '@guardian/source/foundations';
+import { from } from '@guardian/source/foundations';
 import {
 	containsNonArticleCountPlaceholder,
 	getLocalCurrencySymbol,
@@ -405,14 +405,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			{showAboveArticleCount && (
 				<div css={articleCountAboveContainerStyles}>
 					<ContributionsEpicArticleCountAboveWithOptOut
-						articleCounts={articleCounts}
+						articleCount={articleCounts.forTargetedWeeks}
 						isArticleCountOn={!hasOptedOut}
 						onArticleCountOptOut={onArticleCountOptOut}
 						onArticleCountOptIn={onArticleCountOptIn}
 						openCmp={openCmp}
 						submitComponentEvent={submitComponentEvent}
 						copy={variant.separateArticleCount?.copy}
-						countType={variant.separateArticleCount?.countType}
 					/>
 				</div>
 			)}

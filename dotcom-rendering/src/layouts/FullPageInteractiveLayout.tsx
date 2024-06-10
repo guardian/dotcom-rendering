@@ -5,7 +5,7 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	adContainerStyles,
 	MobileStickyContainer,
@@ -220,6 +220,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					}
 					discussionApiUrl={article.config.discussionApiUrl}
 					idApiUrl={article.config.idApiUrl}
+					contributionsServiceUrl={article.contributionsServiceUrl}
 					showSubNav={false}
 					isImmersive={false}
 					displayRoundel={false}

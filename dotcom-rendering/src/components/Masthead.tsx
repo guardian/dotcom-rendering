@@ -12,6 +12,7 @@ type Props = {
 	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
+	contributionsServiceUrl: string;
 	subscribeUrl: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
@@ -48,13 +49,14 @@ export const Masthead = ({
 	discussionApiUrl,
 	subscribeUrl,
 	idApiUrl,
+	contributionsServiceUrl,
 	showSubNav = true,
 	isImmersive,
 	displayRoundel,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
 }: Props) => (
-	<>
+	<div data-component="header">
 		<Section
 			fullWidth={true}
 			showTopBorder={false}
@@ -66,7 +68,7 @@ export const Masthead = ({
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
 		>
-			<div data-component="nav4">
+			<div data-component="topbar">
 				<Island priority="critical">
 					<TopBar
 						editionId={editionId}
@@ -74,6 +76,7 @@ export const Masthead = ({
 						mmaUrl={mmaUrl}
 						discussionApiUrl={discussionApiUrl}
 						idApiUrl={idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						hasPageSkin={hasPageSkin}
 					/>
 				</Island>
@@ -117,5 +120,5 @@ export const Masthead = ({
 				</Island>
 			</Section>
 		)}
-	</>
+	</div>
 );

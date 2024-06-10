@@ -3,8 +3,8 @@ import {
 	palette as srcPalette,
 	textSansBold12,
 	textSansBold17,
-} from '@guardian/source-foundations';
-import { Button } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import MinusIcon from '../static/icons/minus.svg';

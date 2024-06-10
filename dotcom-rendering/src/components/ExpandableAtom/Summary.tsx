@@ -3,8 +3,8 @@ import {
 	body,
 	headlineMedium17,
 	textSans15,
-} from '@guardian/source-foundations';
-import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgMinus, SvgPlus } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette as themePalette } from '../../palette';
 

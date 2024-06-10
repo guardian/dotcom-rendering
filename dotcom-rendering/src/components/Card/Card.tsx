@@ -1,16 +1,17 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
 	space,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import type { Branding } from '../../types/branding';
+import type { StarRating as Rating } from '../../types/content';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -57,6 +58,7 @@ import { TrailTextWrapper } from './components/TrailTextWrapper';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
+	absoluteServerTimes: boolean;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	headlineSizeOnMobile?: SmallHeadlineSize;
@@ -65,7 +67,7 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	image?: DCRFrontImage;
-	imagePosition?: ImagePositionType;
+	imagePositionOnDesktop?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
@@ -83,7 +85,7 @@ export type Props = {
 	isPlayableMediaCard?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	starRating?: number;
+	starRating?: Rating;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
@@ -122,7 +124,7 @@ const StarRatingComponent = ({
 	rating,
 	cardHasImage,
 }: {
-	rating: number;
+	rating: Rating;
 	cardHasImage: boolean;
 }) => (
 	<div css={starWrapper(cardHasImage)}>
@@ -226,13 +228,16 @@ const getMedia = ({
 
 const decideSublinkPosition = (
 	supportingContent?: DCRSupportingContent[],
-	imagePosition?: ImagePositionType,
+	imagePositionOnDesktop?: ImagePositionType,
 	alignment?: Alignment,
 ): 'inner' | 'outer' | 'none' => {
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
 	}
-	if (imagePosition === 'top' || imagePosition === 'bottom') {
+	if (
+		imagePositionOnDesktop === 'top' ||
+		imagePositionOnDesktop === 'bottom'
+	) {
 		return 'outer';
 	}
 	return alignment === 'vertical' ? 'inner' : 'outer';
@@ -257,7 +262,7 @@ export const Card = ({
 	showByline,
 	webPublicationDate,
 	image,
-	imagePosition = 'top',
+	imagePositionOnDesktop = 'top',
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
 	imageLoading,
@@ -289,13 +294,14 @@ export const Card = ({
 	onwardsSource,
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
+	absoluteServerTimes,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
-		imagePosition,
+		imagePositionOnDesktop,
 		supportingContentAlignment,
 	);
 
@@ -326,6 +332,7 @@ export const Card = ({
 							showClock={showClock}
 							isDynamo={isDynamo}
 							isOnwardContent={isOnwardContent}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					) : undefined
 				}
@@ -418,7 +425,7 @@ export const Card = ({
 				isExternalLink={isExternalLink}
 			/>
 			<CardLayout
-				imagePosition={imagePosition}
+				imagePositionOnDesktop={imagePositionOnDesktop}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
@@ -428,7 +435,7 @@ export const Card = ({
 					<ImageWrapper
 						imageSize={imageSize}
 						imageType={media.type}
-						imagePosition={imagePosition}
+						imagePositionOnDesktop={imagePositionOnDesktop}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showPlayIcon}
 					>
@@ -442,7 +449,7 @@ export const Card = ({
 						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
-								imagePosition={imagePosition}
+								imagePositionOnDesktop={imagePositionOnDesktop}
 							>
 								<Avatar
 									src={media.avatarUrl}
@@ -546,7 +553,9 @@ export const Card = ({
 								{showPlayIcon && mainMedia.duration > 0 && (
 									<MediaDuration
 										mediaDuration={mainMedia.duration}
-										imagePosition={imagePosition}
+										imagePositionOnDesktop={
+											imagePositionOnDesktop
+										}
 										imagePositionOnMobile={
 											imagePositionOnMobile
 										}
@@ -564,11 +573,11 @@ export const Card = ({
 					<ContentWrapper
 						imageType={media?.type}
 						imageSize={imageSize}
-						imagePosition={imagePosition}
+						imagePositionOnDesktop={imagePositionOnDesktop}
 					>
 						<HeadlineWrapper
 							imagePositionOnMobile={imagePositionOnMobile}
-							imagePosition={imagePosition}
+							imagePositionOnDesktop={imagePositionOnDesktop}
 							imageUrl={image?.src}
 							hasStarRating={starRating !== undefined}
 						>
@@ -595,7 +604,7 @@ export const Card = ({
 								isExternalLink={isExternalLink}
 								isOnwardContent={isOnwardContent}
 							/>
-							{starRating !== undefined ? (
+							{!isUndefined(starRating) ? (
 								<StarRatingComponent
 									rating={starRating}
 									cardHasImage={!!image}
@@ -618,7 +627,9 @@ export const Card = ({
 						>
 							{!!trailText && (
 								<TrailTextWrapper
-									imagePosition={imagePosition}
+									imagePositionOnDesktop={
+										imagePositionOnDesktop
+									}
 									imageSize={imageSize}
 									imageType={media?.type}
 								>
@@ -639,6 +650,9 @@ export const Card = ({
 										isDynamo={isDynamo}
 										direction={supportingContentAlignment}
 										containerPalette={containerPalette}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
 									></LatestLinks>
 								</Island>
 							)}

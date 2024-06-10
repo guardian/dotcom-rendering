@@ -1,4 +1,4 @@
-import { text, textSans14 } from '@guardian/source-foundations';
+import { text, textSans14 } from '@guardian/source/foundations';
 import type { BaseAdProps } from './Ad.amp';
 import { Ad } from './Ad.amp';
 

@@ -1,6 +1,6 @@
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial, Pillar } from '@guardian/libs';
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 
 const {
 	culture,

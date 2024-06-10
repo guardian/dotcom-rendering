@@ -3,19 +3,9 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/4925ef1e0ced5d221f1122afe79f93bd7448e0e5/packages/modules/src/modules/headers/SignInPromptHeader.stories.tsx
  */
-import type { Meta, StoryFn } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 import { HeaderDecorator } from './common/HeaderDecorator';
 import { SignInPromptHeaderUnvalidated as SignInPromptHeader } from './SignInPromptHeader';
-
-export default {
-	component: SignInPromptHeader,
-	title: 'Components/marketing/SignInPromptHeader',
-	decorators: [HeaderDecorator],
-} as Meta<typeof SignInPromptHeader>;
-
-const Template: StoryFn<typeof SignInPromptHeader> = (props) => (
-	<SignInPromptHeader {...props} />
-);
 
 const baseArgs = {
 	content: {
@@ -25,12 +15,6 @@ const baseArgs = {
 			baseUrl: 'https://profile.theguardian.com/register',
 			text: 'Complete registration',
 		},
-		benefits: [
-			'Ad free',
-			'Fewer interruptions',
-			'Newsletters and comments',
-			'Ad free',
-		],
 	},
 	mobileContent: {
 		heading: '',
@@ -49,22 +33,12 @@ const baseArgs = {
 	countryCode: 'GB',
 };
 
-export const DefaultHeader = Template.bind({});
-DefaultHeader.args = baseArgs;
+export default {
+	component: SignInPromptHeader,
+	title: 'Components/marketing/SignInPromptHeader',
+	decorators: [HeaderDecorator],
+	render: (props) => <SignInPromptHeader {...props} />,
+	args: baseArgs,
+} as Meta<typeof SignInPromptHeader>;
 
-export const ManyBenefits = Template.bind({});
-ManyBenefits.args = {
-	...baseArgs,
-	content: {
-		...baseArgs.content,
-		benefits: ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'],
-	},
-};
-
-export const WithoutBenefits = Template.bind({});
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Omitting benefits arg from the story
-const { benefits, ...contentWithoutBenefits } = baseArgs.content;
-WithoutBenefits.args = {
-	...baseArgs,
-	content: contentWithoutBenefits,
-};
+export const DefaultHeader = {};

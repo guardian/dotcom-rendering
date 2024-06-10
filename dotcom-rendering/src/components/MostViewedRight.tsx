@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { headlineBold17 } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { headlineBold17 } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { decideTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { from, palette, textSans17 } from '@guardian/source-foundations';
+import { from, palette, textSans17 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import type { UserProfile } from '../lib/discussion';
 import { getZIndex } from '../lib/getZIndex';

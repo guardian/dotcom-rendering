@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
 	space,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -88,11 +88,11 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 220px 1fr;
+					grid-template-columns: 220px 700px;
 					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline';
@@ -125,7 +125,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 				margin-left: 0;
 				grid-column-gap: 20px;
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'standfirst'
 						'lines'
@@ -133,7 +133,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 				}
 				${from.desktop} {
-					grid-template-columns: 220px 1fr;
+					grid-template-columns: 220px 620px;
 					grid-template-areas: 'lastupdated standfirst';
 				}
 			}
@@ -184,7 +184,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'media'
 						'info'
@@ -314,6 +314,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+	const inTagLinkTest =
+		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
+
+	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
 		<>
@@ -352,6 +356,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
 							displayRoundel={false}
@@ -459,7 +464,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					)}
 				</div>
 			)}
-			<main data-layout="LiveLayout">
+			<main
+				data-layout="LiveLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -533,6 +541,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
+									inTagLinkTest={inTagLinkTest}
 								/>
 							</GridItem>
 							<GridItem area="headline">
@@ -546,23 +555,17 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											hasStarRating={
-												typeof article.starRating ===
-												'number'
-											}
 										/>
 									)}
 								</div>
-								{article.starRating !== undefined ? (
+								{!isUndefined(article.starRating) ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={article.starRating}
 											size="large"
 										/>
 									</div>
-								) : (
-									<></>
-								)}
+								) : null}
 							</GridItem>
 						</HeadlineGrid>
 					</Section>
@@ -685,6 +688,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</Island>
 						</Hide>
@@ -1261,6 +1265,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</Island>
 						</Section>
@@ -1285,6 +1290,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
 

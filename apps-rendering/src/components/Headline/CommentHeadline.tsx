@@ -4,7 +4,7 @@ import {
 	headlineLight28,
 	headlineLight34,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 

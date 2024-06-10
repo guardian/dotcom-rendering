@@ -3,7 +3,7 @@ import {
 	space,
 	palette as srcPalette,
 	textSans14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {

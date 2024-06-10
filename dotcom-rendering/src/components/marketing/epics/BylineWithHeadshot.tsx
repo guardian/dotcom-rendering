@@ -8,7 +8,7 @@ import {
 	articleBold17,
 	articleItalic17,
 	palette,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { BylineWithImage } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { ReactComponent } from '../lib/ReactComponent';
 

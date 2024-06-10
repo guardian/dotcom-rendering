@@ -3,6 +3,7 @@ import { matchReport } from '../../fixtures/generated/match-report';
 import { series } from '../../fixtures/generated/series';
 import { storyPackage } from '../../fixtures/generated/story-package';
 import { comment } from '../../fixtures/manual/comment';
+import { contributionsHeaderResponse } from '../../fixtures/manual/contributionsHeader';
 import { discussion } from '../../fixtures/manual/discussion';
 import { discussionNoTopComments } from '../../fixtures/manual/discussion-no-top-comments';
 import { discussionWithNoComments } from '../../fixtures/manual/discussionWithNoComments';
@@ -463,6 +464,14 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				{
 					status: 200,
 					body: discussion,
+				},
+				{ overwriteRoutes: false },
+			)
+			.post(
+				/.*contributions\.(code.dev-)?guardianapis\.com\/header/,
+				{
+					status: 200,
+					body: contributionsHeaderResponse,
 				},
 				{ overwriteRoutes: false },
 			)

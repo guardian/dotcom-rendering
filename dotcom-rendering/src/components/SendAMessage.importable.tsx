@@ -9,15 +9,15 @@ import {
 	textSansBold15,
 	textSansBold17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 	SvgMessageRound,
 	SvgTickRound,
-} from '@guardian/source-react-components';
-import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/react-components';
+import { ErrorSummary } from '@guardian/source-development-kitchen/react-components';
 import { useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import type { MessageUsFieldType } from '../types/content';

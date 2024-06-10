@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from } from '@guardian/source-foundations';
+import { between, from } from '@guardian/source/foundations';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 const sizingStyles = css`
@@ -64,16 +64,17 @@ type Props = {
 	children: React.ReactNode;
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
-	imagePosition: ImagePositionType;
+	imagePositionOnDesktop: ImagePositionType;
 };
 
 export const ContentWrapper = ({
 	children,
 	imageType,
 	imageSize,
-	imagePosition,
+	imagePositionOnDesktop,
 }: Props) => {
-	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
+	const isHorizontal =
+		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
 	return (
 		<div
 			css={[
