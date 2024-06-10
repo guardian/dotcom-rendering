@@ -180,8 +180,6 @@ export const SeriesSectionLink = ({
 			(tag.type === 'Publication' && tag.title === 'The Observer'),
 	);
 
-	const isEuros2024 = tags.find((tag) => tag.id === 'football/euro-2024');
-
 	// If we have a tag, use it to show 2 section titles
 	// Observer opinion (commentisfree) articles should prioritise
 	// the publication tag over the commentisfree tag.
@@ -195,7 +193,7 @@ export const SeriesSectionLink = ({
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
-	if (isEuros2024 && inTagLinkTest) {
+	if (inTagLinkTest) {
 		return (
 			<TagLink
 				sectionLabel={'Euro 2024'}
