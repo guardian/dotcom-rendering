@@ -15,6 +15,7 @@ interface Props {
 	guardianBaseURL: string;
 }
 const containerStyles = css`
+	padding-top: ${space[1]}px;
 	margin-bottom: ${space[2]}px;
 `;
 
