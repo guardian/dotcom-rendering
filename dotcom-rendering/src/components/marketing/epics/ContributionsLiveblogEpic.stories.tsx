@@ -115,3 +115,21 @@ export const WithChoiceCards: Story = {
 		},
 	},
 };
+
+export const WithNewsletterSignup: Story = {
+	name: 'ContributionsEpic with newsletter signup',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			highlightedText: undefined,
+			heading: 'Sign up to the Fiver',
+			paragraphs: [
+				"Kick off your evenings with the Guardian's take on the world of football",
+			],
+			newsletterSignup: {
+				url: 'https://www.theguardian.com/email/form/plaintone/rrcp-epic/4163',
+			},
+		},
+	},
+};
