@@ -81,7 +81,7 @@ const arrowStyles = css`
 `;
 
 const fillBarStyles = css`
-	background-color: white; /* Todo: replace with article background color; */
+	background-color: ${palette('--article-background')};
 	margin-top: -${space[2]}px;
 	width: 100%;
 	height: 20px;
