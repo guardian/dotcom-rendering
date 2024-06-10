@@ -1773,11 +1773,9 @@ const accordionTitleRowBorderTopDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 const accordionTitleLight: PaletteFunction = () => sourcePalette.neutral[7];
 const accordionTitleDark: PaletteFunction = () => sourcePalette.neutral[86];
-const accordionKeyEventsBackgroundLight: PaletteFunction = () =>
-	sourcePalette.neutral[100];
 const accordionBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
-const accordionLiveFeedBackgroundLight: PaletteFunction = () =>
+const accordionBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 
 const tableOfContentsLight: PaletteFunction = () => sourcePalette.neutral[7];
@@ -5594,12 +5592,8 @@ type PaletteColours = Record<
 const paletteColours = {
 	...expandingWrapper,
 	...tabs,
-	'--accordion-key-events-background': {
-		light: accordionKeyEventsBackgroundLight,
-		dark: accordionBackgroundDark,
-	},
-	'--accordion-live-feed-background': {
-		light: accordionLiveFeedBackgroundLight,
+	'--accordion-background': {
+		light: accordionBackgroundLight,
 		dark: accordionBackgroundDark,
 	},
 	'--accordion-title': {
