@@ -118,7 +118,7 @@ const buildRRBannerConfigWith = ({
 		tags: TagType[];
 		contributionsServiceUrl: string;
 		idApiUrl: string;
-		isAndroidWebview: boolean;
+		isAndroidWebview: boolean | undefined;
 	}): CandidateConfig<BannerProps> => {
 		return {
 			candidate: {

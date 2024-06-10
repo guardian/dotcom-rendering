@@ -66,7 +66,7 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
-	isAndroidWebview: boolean;
+	isAndroidWebview: boolean | undefined;
 };
 
 type ReaderRevenueComponentType =
