@@ -315,7 +315,7 @@ export const WithSponsoredBranding = () => {
 };
 WithSponsoredBranding.storyName = 'with sponsored branding';
 
-export const WithSponsoredBrandingAdPartnerLabel = () => {
+export const WithSponsoredBrandingAdvertisingPartner = () => {
 	return (
 		<FrontSection
 			title="Section"
@@ -323,7 +323,7 @@ export const WithSponsoredBrandingAdPartnerLabel = () => {
 			editionId={'UK'}
 			collectionBranding={{
 				kind: 'sponsored',
-				isFrontBranding: false,
+				isFrontBranding: true,
 				branding: {
 					brandingType: {
 						name: 'sponsored',
@@ -342,8 +342,39 @@ export const WithSponsoredBrandingAdPartnerLabel = () => {
 		</FrontSection>
 	);
 };
-WithSponsoredBrandingAdPartnerLabel.storyName =
+WithSponsoredBrandingAdvertisingPartner.storyName =
 	'with sponsored branding for Advertising partner';
+
+export const WithSponsoredBrandingAdvertisingPartnerTagPages = () => {
+	return (
+		<FrontSection
+			title="Section"
+			isTagPage={true}
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+			collectionBranding={{
+				kind: 'sponsored',
+				isFrontBranding: true,
+				branding: {
+					brandingType: {
+						name: 'sponsored',
+					},
+					sponsorName: 'guardian.org',
+					logo: logoForAdvertisingPartner,
+					aboutThisLink:
+						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+				},
+				isContainerBranding: false,
+				hasMultipleBranding: false,
+			}}
+			updateLogoAdPartnerSwitch={true}
+		>
+			<Placeholder />
+		</FrontSection>
+	);
+};
+WithSponsoredBrandingAdvertisingPartnerTagPages.storyName =
+	'with sponsored branding for Advertising partner TagPages';
 
 export const WithPaidBranding = () => {
 	return (
