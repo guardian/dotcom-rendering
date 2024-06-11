@@ -88,11 +88,11 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 220px 1fr;
+					grid-template-columns: 220px 700px;
 					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline';
@@ -125,7 +125,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 				margin-left: 0;
 				grid-column-gap: 20px;
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'standfirst'
 						'lines'
@@ -133,7 +133,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 				}
 				${from.desktop} {
-					grid-template-columns: 220px 1fr;
+					grid-template-columns: 220px 620px;
 					grid-template-areas: 'lastupdated standfirst';
 				}
 			}
@@ -184,7 +184,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'media'
 						'info'
@@ -314,6 +314,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+	const inTagLinkTest =
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -462,7 +466,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					)}
 				</div>
 			)}
-			<main data-layout="LiveLayout">
+			<main
+				data-layout="LiveLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -536,6 +543,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
+									inTagLinkTest={inTagLinkTest}
 								/>
 							</GridItem>
 							<GridItem area="headline">
@@ -548,9 +556,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											byline={article.byline}
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
-											}
-											hasStarRating={
-												!isUndefined(article.starRating)
 											}
 										/>
 									)}
@@ -1028,10 +1033,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</ArticleContainer>
 										</div>
 									) : (
-										<Accordion
-											accordionTitle="Live feed"
-											context="liveFeed"
-										>
+										<Accordion accordionTitle="Live feed">
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (

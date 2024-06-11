@@ -86,17 +86,17 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 					grid-template-areas:
-						'caption    border      title       right-column'
-						'.          border      headline    right-column'
-						'.          border      standfirst  right-column'
-						'.          border      byline      right-column'
-						'lines      border      body        right-column'
-						'meta       border      body        right-column'
-						'meta       border      body        right-column'
-						'.          border      body        right-column'
-						'.          border      .           right-column';
+						'caption    border      title      . right-column'
+						'.          border      headline   . right-column'
+						'.          border      standfirst . right-column'
+						'.          border      byline     . right-column'
+						'lines      border      body       . right-column'
+						'meta       border      body       . right-column'
+						'meta       border      body       . right-column'
+						'.          border      body       . right-column'
+						'.          border      .          . right-column';
 				}
 
 				/*
@@ -109,7 +109,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${until.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
 						'.          border      title       right-column'
 						'.          border      headline    right-column'
@@ -129,7 +129,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
+					grid-template-columns: 620px 300px;
 					grid-column-gap: 20px;
 					grid-template-areas:
 						'title       right-column'
@@ -144,7 +144,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.desktop} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -290,7 +290,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 			min-height: calc(50rem - ${navAndLabsHeaderHeight});
 		}
 	`;
-
 	const LeftColCaption = () => (
 		<div
 			css={css`
@@ -312,7 +311,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
-
+	const inTagLinkTest =
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 	return (
 		<>
 			{isWeb && (
@@ -448,9 +450,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
-										hasStarRating={
-											article.starRating !== undefined
-										}
 									/>
 								</Section>
 							</Box>
@@ -459,7 +458,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 			</header>
 
-			<main data-layout="ImmersiveLayout">
+			<main
+				data-layout="ImmersiveLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -519,6 +521,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											guardianBaseURL={
 												article.guardianBaseURL
 											}
+											inTagLinkTest={inTagLinkTest}
 										/>
 									</div>
 								)}
@@ -535,10 +538,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											byline={article.byline}
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
-											}
-											hasStarRating={
-												typeof article.starRating ===
-												'number'
 											}
 										/>
 									</div>

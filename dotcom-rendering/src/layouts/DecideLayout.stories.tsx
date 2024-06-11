@@ -172,6 +172,34 @@ export const WebPictureShowcaseOpinionLight: Story = {
 	parameters: webParameters,
 };
 
+export const WebStandardLifestyleReviewLight: Story = {
+	args: {
+		article: {
+			...StandardStandardNewsFixture,
+			format: {
+				...StandardStandardNewsFixture.format,
+				theme: 'LifestylePillar',
+				design: 'ReviewDesign',
+			},
+			starRating: 4,
+		},
+	},
+	parameters: webParameters,
+};
+
+export const WebStandardNewsInterviewLight: Story = {
+	args: {
+		article: {
+			...StandardStandardNewsFixture,
+			format: {
+				...StandardStandardNewsFixture.format,
+				design: 'InterviewDesign',
+			},
+		},
+	},
+	parameters: webParameters,
+};
+
 export const AppsPictureShowcaseOpinionLight: Story = {
 	args: {
 		article: PictureShowcaseOpinionFixture,
@@ -271,6 +299,19 @@ export const AppsRecipeStandardLifestyleDark: Story = {
 export const WebLiveBlogStandardNewsLight: Story = {
 	args: {
 		article: LiveBlogStandardNewsFixture,
+	},
+	parameters: webParameters,
+};
+
+export const WebLiveBlogStandardLabsLight: Story = {
+	args: {
+		article: {
+			...LiveBlogStandardNewsFixture,
+			format: {
+				...LiveBlogStandardNewsFixture.format,
+				theme: 'Labs',
+			},
+		},
 	},
 	parameters: webParameters,
 };
@@ -477,6 +518,19 @@ export const AppsAnalysisStandardCultureDark: Story = {
 export const WebVideoStandardNewsLight: Story = {
 	args: {
 		article: VideoStandardNewsFixture,
+	},
+	parameters: webParameters,
+};
+
+export const WebVideoStandardLabsLight: Story = {
+	args: {
+		article: {
+			...VideoStandardNewsFixture,
+			format: {
+				...VideoStandardNewsFixture.format,
+				theme: 'Labs',
+			},
+		},
 	},
 	parameters: webParameters,
 };

@@ -26,18 +26,18 @@ type Props = {
 	isSensitive: boolean;
 	abTests: ServerSideTests;
 	switches: Switches;
-	isLiveUpdate?: boolean;
+	isLiveUpdate: boolean;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
 	isPaidContent: boolean;
 	keywordIds: string;
 	contributionsServiceUrl: string;
-	onFirstPage?: boolean;
-	keyEvents?: Block[];
-	filterKeyEvents?: boolean;
-	availableTopics?: Topic[];
-	selectedTopics?: Topic[];
+	onFirstPage: boolean;
+	keyEvents: Block[];
+	filterKeyEvents: boolean;
+	availableTopics: Topic[];
+	selectedTopics: Topic[];
 };
 
 export const LiveBlogRenderer = ({
@@ -70,8 +70,7 @@ export const LiveBlogRenderer = ({
 	const isWeb = renderingTarget === 'Web';
 	const { absoluteServerTimes = false } = switches;
 
-	const filtered =
-		(!!selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
+	const filtered = selectedTopics.length > 0 || filterKeyEvents;
 
 	return (
 		<>
@@ -103,7 +102,7 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
-			{keyEvents !== undefined && keyEvents.length > 0 ? (
+			{keyEvents.length > 0 ? (
 				<Hide from="desktop">
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<KeyEventsCarousel
@@ -113,7 +112,8 @@ export const LiveBlogRenderer = ({
 							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
-					{(!switches.automaticFilters || !availableTopics) && (
+					{(!switches.automaticFilters ||
+						availableTopics.length < 1) && (
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<FilterKeyEventsToggle
 								filterKeyEvents={filterKeyEvents}
@@ -139,7 +139,7 @@ export const LiveBlogRenderer = ({
 						/>
 					</Hide>
 				)}
-			<div id="top-of-blog" />
+			{isLiveUpdate ? null : <div id="top-of-blog" />}
 			<LiveBlogBlocksAndAdverts
 				blocks={blocks}
 				format={format}

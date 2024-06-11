@@ -17,6 +17,7 @@ import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
+import { TagLink } from './TagLink';
 
 type Props = {
 	format: ArticleFormat;
@@ -25,6 +26,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	isMatch?: boolean;
+	inTagLinkTest?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -163,6 +165,7 @@ export const SeriesSectionLink = ({
 	sectionUrl,
 	guardianBaseURL,
 	isMatch,
+	inTagLinkTest,
 }: Props) => {
 	const observerTag = tags.find(
 		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
@@ -190,6 +193,15 @@ export const SeriesSectionLink = ({
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
+	if (inTagLinkTest) {
+		return (
+			<TagLink
+				sectionLabel={'Euro 2024'}
+				sectionUrl={'football/euro-2024'}
+				guardianBaseURL={guardianBaseURL}
+			/>
+		);
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {

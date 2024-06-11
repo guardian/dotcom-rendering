@@ -16,6 +16,7 @@ import { pickMessage } from '../lib/messagePicker';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
+import { useIsAndroid } from '../lib/useIsAndroid';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
@@ -101,6 +102,7 @@ const buildRRBannerConfigWith = ({
 		tags,
 		contributionsServiceUrl,
 		idApiUrl,
+		isAndroidWebview,
 	}: {
 		isSignedIn: boolean;
 		countryCode: CountryCode;
@@ -116,6 +118,7 @@ const buildRRBannerConfigWith = ({
 		tags: TagType[];
 		contributionsServiceUrl: string;
 		idApiUrl: string;
+		isAndroidWebview: boolean;
 	}): CandidateConfig<BannerProps> => {
 		return {
 			candidate: {
@@ -142,10 +145,15 @@ const buildRRBannerConfigWith = ({
 						signInBannerLastClosedAt: getBannerLastClosedAt(
 							'signInBannerLastClosedAt',
 						),
+						abandonedBasketBannerLastClosedAt:
+							getBannerLastClosedAt(
+								'abandonedBasketLastClosedAt',
+							),
 						isPreview,
 						idApiUrl,
 						signInGateWillShow,
 						asyncArticleCounts,
+						isAndroidWebview,
 					}),
 				show:
 					({ meta, module, fetchEmail }: BannerProps) =>
@@ -241,6 +249,7 @@ export const StickyBottomBanner = ({
 		isPreview,
 		currentLocaleCode: countryCode,
 	});
+	const isAndroidWebview = !!useIsAndroid();
 
 	useEffect(() => {
 		setAsyncArticleCounts(getArticleCounts(pageId, tags, contentType));
@@ -269,6 +278,7 @@ export const StickyBottomBanner = ({
 			tags,
 			contributionsServiceUrl,
 			idApiUrl,
+			isAndroidWebview,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,

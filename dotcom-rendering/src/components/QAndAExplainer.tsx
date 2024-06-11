@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
+import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type {
@@ -50,9 +51,13 @@ export const QAndAExplainer = ({
 	RenderArticleElement,
 }: Props) => {
 	return (
-		<>
+		<div data-spacefinder-role="nested">
 			<hr css={headingLineStyles}></hr>
-			<Subheading format={format} topPadding={false}>
+			<Subheading
+				id={slugify(qAndAExplainer.title)}
+				format={format}
+				topPadding={false}
+			>
 				{qAndAExplainer.title}
 			</Subheading>
 			{qAndAExplainer.body.map((element, index) => (
@@ -78,6 +83,6 @@ export const QAndAExplainer = ({
 					isListElement={true}
 				/>
 			))}
-		</>
+		</div>
 	);
 };

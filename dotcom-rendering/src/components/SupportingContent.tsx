@@ -67,8 +67,10 @@ const liStyles = css`
 	margin-top: 8px;
 	@media (pointer: coarse) {
 		margin-top: 0;
-		&:first-child {
-			margin-top: 8px;
+		${until.tablet} {
+			&:first-child {
+				margin-top: 8px;
+			}
 		}
 	}
 	${from.tablet} {

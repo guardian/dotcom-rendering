@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { type ArticleFormat } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
+import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type {
@@ -62,7 +63,11 @@ export const KeyTakeaway = ({
 		<>
 			<li css={keyTakeawayStyles} data-spacefinder-role="nested">
 				<hr css={headingLineStyles} />
-				<Subheading format={format} topPadding={false}>
+				<Subheading
+					id={slugify(keyTakeaway.title)}
+					format={format}
+					topPadding={false}
+				>
 					<span css={headingIndexStyles}>{`${titleIndex}. `}</span>
 					{keyTakeaway.title}
 				</Subheading>

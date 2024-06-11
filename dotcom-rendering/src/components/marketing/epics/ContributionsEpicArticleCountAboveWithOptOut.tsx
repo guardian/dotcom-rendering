@@ -19,10 +19,6 @@ import {
 } from '@guardian/source/foundations';
 import { palette, space } from '@guardian/source/foundations';
 import { Button, ButtonLink } from '@guardian/source/react-components';
-import type {
-	ArticleCounts,
-	ArticleCountType,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useState } from 'react';
 import type { ReactComponent } from '../lib/ReactComponent';
 import {
@@ -35,9 +31,8 @@ import {
 } from './utils/ophan';
 
 export interface ContributionsEpicArticleCountAboveWithOptOutProps {
-	articleCounts: ArticleCounts;
 	copy?: string;
-	countType?: ArticleCountType;
+	articleCount: number;
 	isArticleCountOn: boolean;
 	onArticleCountOptOut: () => void;
 	onArticleCountOptIn: () => void;
@@ -48,9 +43,8 @@ export interface ContributionsEpicArticleCountAboveWithOptOutProps {
 export const ContributionsEpicArticleCountAboveWithOptOut: ReactComponent<
 	ContributionsEpicArticleCountAboveWithOptOutProps
 > = ({
-	articleCounts,
+	articleCount,
 	copy,
-	countType,
 	isArticleCountOn,
 	onArticleCountOptOut,
 	onArticleCountOptIn,
@@ -89,8 +83,6 @@ export const ContributionsEpicArticleCountAboveWithOptOut: ReactComponent<
 		setIsOpen(false);
 		submitComponentEvent?.(OPHAN_COMPONENT_ARTICLE_COUNT_STAY_OUT);
 	};
-
-	const articleCount = articleCounts[countType ?? 'for52Weeks'];
 
 	return (
 		<div css={topContainer}>

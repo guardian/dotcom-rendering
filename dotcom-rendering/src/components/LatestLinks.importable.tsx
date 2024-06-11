@@ -34,7 +34,7 @@ const vertical = css`
 const linkStyles = css`
 	${textSans14}
 	overflow: hidden;
-	flex-grow: 1;
+	flex: 1; /* Distribute space evenly.  */
 `;
 
 const dividerStyles = css`

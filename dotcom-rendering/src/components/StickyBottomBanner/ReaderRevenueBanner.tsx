@@ -49,6 +49,7 @@ type BaseProps = {
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
+	abandonedBasketBannerLastClosedAt?: string;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -65,6 +66,7 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
+	isAndroidWebview: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -120,6 +122,7 @@ const buildPayload = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
 	asyncArticleCounts,
@@ -148,6 +151,7 @@ const buildPayload = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			signInBannerLastClosedAt,
+			abandonedBasketBannerLastClosedAt,
 			mvtId: Number(
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 			),
@@ -188,12 +192,19 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
 	asyncArticleCounts,
+	isAndroidWebview,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
+
+	if (isAndroidWebview) {
+		// Do not show banners on Android app webview, due to buggy behaviour with the buttons
+		return { show: false };
+	}
 
 	if (
 		shouldHideReaderRevenue ||
@@ -247,6 +258,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		signInBannerLastClosedAt,
+		abandonedBasketBannerLastClosedAt,
 		optedOutOfArticleCount,
 		asyncArticleCounts,
 		userConsent,

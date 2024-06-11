@@ -386,7 +386,7 @@ export interface AdPlaceholderBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AdPlaceholderBlockElement';
 }
 
-interface NumberedTitleBlockElement {
+export interface NumberedTitleBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
 	elementId: string;
 	position: number;
