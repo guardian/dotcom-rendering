@@ -1,0 +1,32 @@
+diff --git a/dist/index.js b/dist/index.js
+index c6cd171258b3d1ac0d58f70c4b0fa65458969b3d..6e516c19a4fbf9687b59219f205553e14b0ac187 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.WebpackManifestPlugin = exports.getCompilerHooks = void 0;
+ const path_1 = require("path");
+-const NormalModule_1 = __importDefault(require("webpack/lib/NormalModule"));
+ const hooks_1 = require("./hooks");
+ Object.defineProperty(exports, "getCompilerHooks", { enumerable: true, get: function () { return hooks_1.getCompilerHooks; } });
+ const emitCountMap = new Map();
+@@ -33,6 +32,7 @@ class WebpackManifestPlugin {
+         this.options = Object.assign({}, defaults, opts);
+     }
+     apply(compiler) {
++        const { NormalModule } = compiler.webpack;
+         var _a, _b;
+         const moduleAssets = {};
+         const manifestFileName = path_1.resolve(((_a = compiler.options.output) === null || _a === void 0 ? void 0 : _a.path) || './', this.options.fileName);
+@@ -52,9 +52,9 @@ class WebpackManifestPlugin {
+             stage: this.options.assetHookStage
+         };
+         compiler.hooks.compilation.tap(hookOptions, (compilation) => {
+-            const hook = !NormalModule_1.default.getCompilationHooks
++            const hook = !NormalModule.default.getCompilationHooks
+                 ? compilation.hooks.normalModuleLoader
+-                : NormalModule_1.default.getCompilationHooks(compilation).loader;
++                : NormalModule.default.getCompilationHooks(compilation).loader;
+             hook.tap(hookOptions, normalModuleLoader);
+         });
+         if (this.options.useLegacyEmit === true) {
