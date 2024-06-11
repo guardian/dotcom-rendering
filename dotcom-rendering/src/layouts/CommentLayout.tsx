@@ -308,7 +308,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 	const inTagLinkTest =
-		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	return (
 		<>
