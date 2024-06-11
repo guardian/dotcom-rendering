@@ -23,10 +23,10 @@ index c6cd171258b3d1ac0d58f70c4b0fa65458969b3d..6e516c19a4fbf9687b59219f205553e1
          };
          compiler.hooks.compilation.tap(hookOptions, (compilation) => {
 -            const hook = !NormalModule_1.default.getCompilationHooks
-+            const hook = !NormalModule.default.getCompilationHooks
++            const hook = !NormalModule.getCompilationHooks
                  ? compilation.hooks.normalModuleLoader
 -                : NormalModule_1.default.getCompilationHooks(compilation).loader;
-+                : NormalModule.default.getCompilationHooks(compilation).loader;
++                : NormalModule.getCompilationHooks(compilation).loader;
              hook.tap(hookOptions, normalModuleLoader);
          });
          if (this.options.useLegacyEmit === true) {

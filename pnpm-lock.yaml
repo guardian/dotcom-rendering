@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   webpack-manifest-plugin@5.0.0:
-    hash: hjuvxsvdvosb6rdhbfnnuqpj34
+    hash: zao44j4xgexeap52664hqknxfu
     path: patches/webpack-manifest-plugin@5.0.0.patch
 
 importers:
@@ -258,7 +258,7 @@ importers:
         version: 5.0.4(webpack-cli@5.1.4)(webpack@5.91.0)
       webpack-manifest-plugin:
         specifier: 5.0.0
-        version: 5.0.0(patch_hash=hjuvxsvdvosb6rdhbfnnuqpj34)(webpack@5.91.0)
+        version: 5.0.0(patch_hash=zao44j4xgexeap52664hqknxfu)(webpack@5.91.0)
       whatwg-fetch:
         specifier: 3.6.19
         version: 3.6.19
@@ -862,7 +862,7 @@ importers:
         version: 0.6.1(webpack@5.91.0)
       webpack-manifest-plugin:
         specifier: 5.0.0
-        version: 5.0.0(patch_hash=hjuvxsvdvosb6rdhbfnnuqpj34)(webpack@5.91.0)
+        version: 5.0.0(patch_hash=zao44j4xgexeap52664hqknxfu)(webpack@5.91.0)
       webpack-merge:
         specifier: 5.10.0
         version: 5.10.0
@@ -18734,7 +18734,7 @@ packages:
       - supports-color
     dev: false
 
-  /webpack-manifest-plugin@5.0.0(patch_hash=hjuvxsvdvosb6rdhbfnnuqpj34)(webpack@5.91.0):
+  /webpack-manifest-plugin@5.0.0(patch_hash=zao44j4xgexeap52664hqknxfu)(webpack@5.91.0):
     resolution: {integrity: sha512-8RQfMAdc5Uw3QbCQ/CBV/AXqOR8mt03B6GJmRbhWopE8GzRfEpn+k0ZuWywxW+5QZsffhmFDY1J6ohqJo+eMuw==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
