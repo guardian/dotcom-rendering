@@ -118,7 +118,7 @@ const buildRRBannerConfigWith = ({
 		tags: TagType[];
 		contributionsServiceUrl: string;
 		idApiUrl: string;
-		isAndroidWebview: boolean | undefined;
+		isAndroidWebview: boolean;
 	}): CandidateConfig<BannerProps> => {
 		return {
 			candidate: {
@@ -249,7 +249,7 @@ export const StickyBottomBanner = ({
 		isPreview,
 		currentLocaleCode: countryCode,
 	});
-	const isAndroidWebview = useIsAndroid();
+	const isAndroidWebview = !!useIsAndroid();
 
 	useEffect(() => {
 		setAsyncArticleCounts(getArticleCounts(pageId, tags, contentType));
