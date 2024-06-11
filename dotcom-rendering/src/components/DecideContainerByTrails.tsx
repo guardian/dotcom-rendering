@@ -17,15 +17,21 @@ type Props = {
 	trails: DCRFrontCard[];
 	speed: 'fast' | 'slow';
 	imageLoading: Loading;
+	isTagPage?: boolean;
+};
+
+type CardProps = {
+	imageLoading: Loading;
+	isTagPage?: boolean;
 };
 
 export const OneCardFast = ({
 	trail,
 	imageLoading,
+	isTagPage,
 }: {
 	trail: DCRFrontCard;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<UL direction="row">
 			<LI percentage="100%" padSides={true}>
@@ -34,6 +40,7 @@ export const OneCardFast = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 		</UL>
@@ -43,10 +50,10 @@ export const OneCardFast = ({
 export const OneCardSlow = ({
 	trail,
 	imageLoading,
+	isTagPage,
 }: {
 	trail: DCRFrontCard;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<UL direction="row">
 			<LI percentage="100%" padSides={true}>
@@ -55,6 +62,7 @@ export const OneCardSlow = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 		</UL>
@@ -64,10 +72,10 @@ export const OneCardSlow = ({
 export const TwoCard = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 2>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<UL direction="row">
 			<LI percentage="50%" padSides={true}>
@@ -76,6 +84,7 @@ export const TwoCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 			<LI percentage="50%" padSides={true} showDivider={true}>
@@ -84,6 +93,7 @@ export const TwoCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 		</UL>
@@ -93,10 +103,10 @@ export const TwoCard = ({
 export const ThreeCard = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 3>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<UL direction="row">
 			<LI percentage="33.333%" padSides={true}>
@@ -105,6 +115,7 @@ export const ThreeCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -113,6 +124,7 @@ export const ThreeCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -121,6 +133,7 @@ export const ThreeCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 		</UL>
@@ -130,10 +143,11 @@ export const ThreeCard = ({
 export const FourCard = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 4>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
+	console.log(2, { isTagPage });
 	return (
 		<UL direction="row">
 			<LI percentage="25%" padSides={true}>
@@ -142,6 +156,7 @@ export const FourCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 			<LI percentage="25%" padSides={true} showDivider={true}>
@@ -150,6 +165,7 @@ export const FourCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 			<LI percentage="25%" padSides={true} showDivider={true}>
@@ -158,6 +174,7 @@ export const FourCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 			<LI percentage="25%" padSides={true} showDivider={true}>
@@ -166,6 +183,7 @@ export const FourCard = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 		</UL>
@@ -175,10 +193,10 @@ export const FourCard = ({
 export const FiveCardFast = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 5>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<UL direction="row">
 			<LI percentage="33.333%" padSides={true}>
@@ -187,6 +205,7 @@ export const FiveCardFast = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -195,6 +214,7 @@ export const FiveCardFast = ({
 					showAge={true}
 					absoluteServerTimes={true}
 					imageLoading={imageLoading}
+					isTagPage={isTagPage}
 				/>
 			</LI>
 			<LI percentage="33.333%">
@@ -204,6 +224,7 @@ export const FiveCardFast = ({
 							trail={trails[2]}
 							showAge={true}
 							absoluteServerTimes={true}
+							isTagPage={isTagPage}
 						/>
 					</LI>
 					<LI padSides={true}>
@@ -211,6 +232,7 @@ export const FiveCardFast = ({
 							trail={trails[3]}
 							showAge={true}
 							absoluteServerTimes={true}
+							isTagPage={isTagPage}
 						/>
 					</LI>
 					<LI padSides={true}>
@@ -218,6 +240,7 @@ export const FiveCardFast = ({
 							trail={trails[4]}
 							showAge={true}
 							absoluteServerTimes={true}
+							isTagPage={isTagPage}
 						/>
 					</LI>
 				</UL>
@@ -229,10 +252,10 @@ export const FiveCardFast = ({
 export const FiveCardSlow = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 5>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -242,6 +265,7 @@ export const FiveCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="50%" padSides={true} showDivider={true}>
@@ -250,6 +274,7 @@ export const FiveCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -260,6 +285,7 @@ export const FiveCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -268,6 +294,7 @@ export const FiveCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -276,6 +303,7 @@ export const FiveCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -286,10 +314,10 @@ export const FiveCardSlow = ({
 export const SixCardFast = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 6>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -299,6 +327,7 @@ export const SixCardFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -307,6 +336,7 @@ export const SixCardFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -315,6 +345,7 @@ export const SixCardFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -323,6 +354,7 @@ export const SixCardFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -332,6 +364,7 @@ export const SixCardFast = ({
 						trail={trails[4]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="50%" padSides={true} showDivider={true}>
@@ -339,6 +372,7 @@ export const SixCardFast = ({
 						trail={trails[5]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -349,10 +383,10 @@ export const SixCardFast = ({
 export const SixCardSlow = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 6>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -362,6 +396,7 @@ export const SixCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -370,6 +405,7 @@ export const SixCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -378,6 +414,7 @@ export const SixCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -388,6 +425,7 @@ export const SixCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -396,6 +434,7 @@ export const SixCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -404,6 +443,7 @@ export const SixCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -414,10 +454,10 @@ export const SixCardSlow = ({
 export const SevenCardFast = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 7>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -427,6 +467,7 @@ export const SevenCardFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -435,6 +476,7 @@ export const SevenCardFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -443,6 +485,7 @@ export const SevenCardFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -451,6 +494,7 @@ export const SevenCardFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -460,6 +504,7 @@ export const SevenCardFast = ({
 						trail={trails[4]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -467,6 +512,7 @@ export const SevenCardFast = ({
 						trail={trails[5]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -474,6 +520,7 @@ export const SevenCardFast = ({
 						trail={trails[6]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -484,10 +531,10 @@ export const SevenCardFast = ({
 export const SevenCardSlow = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: Tuple<DCRFrontCard, 7>;
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -497,6 +544,7 @@ export const SevenCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -505,6 +553,7 @@ export const SevenCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
@@ -513,6 +562,7 @@ export const SevenCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -523,6 +573,7 @@ export const SevenCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -531,6 +582,7 @@ export const SevenCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -539,6 +591,7 @@ export const SevenCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -547,6 +600,7 @@ export const SevenCardSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -557,10 +611,10 @@ export const SevenCardSlow = ({
 export const EightOrMoreFast = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	const afterEight = trails.slice(8);
 
 	return (
@@ -572,6 +626,7 @@ export const EightOrMoreFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -580,6 +635,7 @@ export const EightOrMoreFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -588,6 +644,7 @@ export const EightOrMoreFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -596,6 +653,7 @@ export const EightOrMoreFast = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -605,6 +663,7 @@ export const EightOrMoreFast = ({
 						trail={trails[4]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -612,6 +671,7 @@ export const EightOrMoreFast = ({
 						trail={trails[5]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -619,6 +679,7 @@ export const EightOrMoreFast = ({
 						trail={trails[6]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -626,6 +687,7 @@ export const EightOrMoreFast = ({
 						trail={trails[7]}
 						showAge={true}
 						absoluteServerTimes={true}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -642,6 +704,7 @@ export const EightOrMoreFast = ({
 								trail={trail}
 								showAge={true}
 								absoluteServerTimes={true}
+								isTagPage={isTagPage}
 							/>
 						</LI>
 					))}
@@ -656,10 +719,10 @@ export const EightOrMoreFast = ({
 export const EightOrMoreSlow = ({
 	trails,
 	imageLoading,
+	isTagPage,
 }: {
 	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
-	imageLoading: Loading;
-}) => {
+} & CardProps) => {
 	const afterEight = trails.slice(8);
 
 	return (
@@ -671,6 +734,7 @@ export const EightOrMoreSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -679,6 +743,7 @@ export const EightOrMoreSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -687,6 +752,7 @@ export const EightOrMoreSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -695,6 +761,7 @@ export const EightOrMoreSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -705,6 +772,7 @@ export const EightOrMoreSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -713,6 +781,7 @@ export const EightOrMoreSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -721,6 +790,7 @@ export const EightOrMoreSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 				<LI percentage="25%" padSides={true} showDivider={true}>
@@ -729,6 +799,7 @@ export const EightOrMoreSlow = ({
 						showAge={true}
 						absoluteServerTimes={true}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				</LI>
 			</UL>
@@ -746,6 +817,7 @@ export const EightOrMoreSlow = ({
 								showAge={true}
 								absoluteServerTimes={true}
 								imageLoading={imageLoading}
+								isTagPage={isTagPage}
 							/>
 						</LI>
 					))}
@@ -761,9 +833,9 @@ export const DecideContainerByTrails = ({
 	trails,
 	speed,
 	imageLoading,
+	isTagPage,
 }: Props) => {
 	const initialTrails = takeFirst(trails, 8);
-
 	if (speed === 'fast') {
 		switch (initialTrails.length) {
 			case 0:
@@ -773,6 +845,7 @@ export const DecideContainerByTrails = ({
 					<OneCardFast
 						trail={initialTrails[0]}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 2:
@@ -780,6 +853,7 @@ export const DecideContainerByTrails = ({
 					<TwoCard
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 3:
@@ -787,6 +861,7 @@ export const DecideContainerByTrails = ({
 					<ThreeCard
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 4:
@@ -794,6 +869,7 @@ export const DecideContainerByTrails = ({
 					<FourCard
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 5:
@@ -801,6 +877,7 @@ export const DecideContainerByTrails = ({
 					<FiveCardFast
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 6:
@@ -808,6 +885,7 @@ export const DecideContainerByTrails = ({
 					<SixCardFast
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 7:
@@ -815,6 +893,7 @@ export const DecideContainerByTrails = ({
 					<SevenCardFast
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 8:
@@ -822,6 +901,7 @@ export const DecideContainerByTrails = ({
 					<EightOrMoreFast
 						trails={[...initialTrails, ...trails.slice(8)]}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 		}
@@ -834,6 +914,7 @@ export const DecideContainerByTrails = ({
 					<OneCardSlow
 						trail={initialTrails[0]}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 2:
@@ -841,6 +922,7 @@ export const DecideContainerByTrails = ({
 					<TwoCard
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 3:
@@ -848,6 +930,7 @@ export const DecideContainerByTrails = ({
 					<ThreeCard
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 4:
@@ -855,6 +938,7 @@ export const DecideContainerByTrails = ({
 					<FourCard
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 5:
@@ -862,6 +946,7 @@ export const DecideContainerByTrails = ({
 					<FiveCardSlow
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 6:
@@ -869,6 +954,7 @@ export const DecideContainerByTrails = ({
 					<SixCardSlow
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 7:
@@ -876,6 +962,7 @@ export const DecideContainerByTrails = ({
 					<SevenCardSlow
 						trails={initialTrails}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 			case 8:
@@ -883,6 +970,7 @@ export const DecideContainerByTrails = ({
 					<EightOrMoreSlow
 						trails={[...initialTrails, ...trails.slice(8)]}
 						imageLoading={imageLoading}
+						isTagPage={isTagPage}
 					/>
 				);
 		}

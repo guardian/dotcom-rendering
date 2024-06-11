@@ -107,6 +107,7 @@ export type Props = {
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
+	isTagPage?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -295,6 +296,7 @@ export const Card = ({
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
 	absoluteServerTimes,
+	isTagPage = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -322,6 +324,7 @@ export const Card = ({
 				leftAlign={isOnwardContent}
 				age={
 					(!!onwardsSource && !!webPublicationDate) ||
+					(isTagPage && !!webPublicationDate) ||
 					(showAge &&
 						webPublicationDate &&
 						isWithinTwelveHours(webPublicationDate)) ? (
