@@ -13,7 +13,6 @@ import type {
 import type { AbandonedBasket } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
 import { useEffect, useState } from 'react';
-import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
@@ -32,8 +31,6 @@ import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
-import { useIsInView } from '../../lib/useIsInView';
-import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
 
 type BaseProps = {
@@ -296,19 +293,8 @@ type RemoteBannerProps = BannerProps & {
 	displayEvent: string;
 };
 
-const RemoteBanner = ({
-	componentTypeName,
-	displayEvent,
-	meta,
-	module,
-	fetchEmail,
-}: RemoteBannerProps) => {
+const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 	const [Banner, setBanner] = useState<React.ElementType>();
-
-	const [hasBeenSeen, setNode] = useIsInView({
-		threshold: 0,
-		debounce: true,
-	});
 
 	useEffect(() => {
 		setAutomat();
@@ -327,20 +313,10 @@ const RemoteBanner = ({
 			});
 	}, [module]);
 
-	useOnce(() => {
-		const { componentType } = meta;
-
-		// track banner view event in Google Analytics for subscriptions banner
-		if (componentType === componentTypeName) {
-			trackNonClickInteraction(displayEvent);
-		}
-	}, [hasBeenSeen, meta]);
-
 	if (Banner !== undefined) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
-				ref={setNode}
 				css={css`
 					width: 100%;
 					${getZIndex('banner')}
