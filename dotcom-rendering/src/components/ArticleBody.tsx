@@ -133,6 +133,8 @@ export const ArticleBody = ({
 	editionId,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
+	const isGallery = format.design === ArticleDesign.Gallery;
+
 	const language = decideLanguage(lang);
 	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 
@@ -199,7 +201,7 @@ export const ArticleBody = ({
 				id="maincontent"
 				css={[
 					`margin-top: ${remSpace[3]}`,
-					isInteractive ? null : bodyPadding,
+					isInteractive || isGallery ? null : bodyPadding,
 					globalH3Styles(format.display),
 					globalOlStyles(),
 					globalStrongStyles,

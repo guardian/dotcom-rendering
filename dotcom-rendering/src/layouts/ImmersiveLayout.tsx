@@ -166,31 +166,47 @@ const ImmersiveGrid = ({
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 620px 300px;
-					grid-column-gap: 20px;
-					grid-template-areas:
-						'title       right-column'
-						'headline    right-column'
-						'standfirst  right-column'
-						'byline      right-column'
-						'caption     right-column'
-						'lines       right-column'
-						'meta        right-column'
-						'body        right-column';
-				}
+					${isGallery
+						? css`
+								grid-column-gap: 0px;
+								grid-template-columns: 100%; /* Main content */
+								grid-template-areas:
+									'title'
+									'headline'
+									'standfirst'
+									'byline'
+									'caption'
+									'lines'
+									'meta'
+									'body';
+						  `
+						: css`
+								grid-template-columns: 620px 300px;
+								grid-column-gap: 20px;
+								grid-template-areas:
+									'title       right-column'
+									'headline    right-column'
+									'standfirst  right-column'
+									'byline      right-column'
+									'caption     right-column'
+									'lines       right-column'
+									'meta        right-column'
+									'body        right-column';
+						  `}
 
-				${until.desktop} {
-					grid-column-gap: 0px;
-					grid-template-columns: 100%; /* Main content */
-					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'byline'
-						'caption'
-						'lines'
-						'meta'
-						'body';
+					${until.desktop} {
+						grid-column-gap: 0px;
+						grid-template-columns: 100%; /* Main content */
+						grid-template-areas:
+							'title'
+							'headline'
+							'standfirst'
+							'byline'
+							'caption'
+							'lines'
+							'meta'
+							'body';
+					}
 				}
 			}
 		`}
