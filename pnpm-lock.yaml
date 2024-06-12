@@ -467,12 +467,6 @@ importers:
       '@types/express':
         specifier: 4.17.21
         version: 4.17.21
-      '@types/gapi.analytics':
-        specifier: 0.0.4
-        version: 0.0.4
-      '@types/google.analytics':
-        specifier: 0.0.42
-        version: 0.0.42
       '@types/he':
         specifier: 1.2.0
         version: 1.2.0
@@ -7416,20 +7410,6 @@ packages:
       '@types/express-serve-static-core': 4.17.41
       '@types/qs': 6.9.15
       '@types/serve-static': 1.15.0
-
-  /@types/gapi.analytics@0.0.4:
-    resolution: {integrity: sha512-unH6f/p/loY8Toi/hLmZ42VNu5xIweWcRt3Ho/n7FhRf6lQMTgF8GEIMTEbDupPXlIUK0bC1kLSNJpJNsvM/mw==}
-    dependencies:
-      '@types/gapi': 0.0.47
-    dev: false
-
-  /@types/gapi@0.0.47:
-    resolution: {integrity: sha512-/ZsLuq6BffMgbKMtZyDZ8vwQvTyKhKQ1G2K6VyWCgtHHhfSSXbk4+4JwImZiTjWNXfI2q1ZStAwFFHSkNoTkHA==}
-    dev: false
-
-  /@types/google.analytics@0.0.42:
-    resolution: {integrity: sha512-w0ZFj3SHznQXSq99kFCuO8tkN6w4T14znjrF2alLCSDnHOXEnpzneyNwxLvekcsDBInr8b5mXmzYh03GArqEyw==}
-    dev: false
 
   /@types/graceful-fs@4.1.9:
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}

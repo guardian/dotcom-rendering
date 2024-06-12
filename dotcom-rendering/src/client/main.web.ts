@@ -40,17 +40,6 @@ void (async () => {
 	);
 
 	void startup(
-		'ga',
-		() =>
-			import(/* webpackMode: "eager" */ './ga/ga-with-consent').then(
-				({ ga }) => ga(),
-			),
-		{
-			priority: 'critical',
-		},
-	);
-
-	void startup(
 		'sentryLoader',
 		() =>
 			import(
