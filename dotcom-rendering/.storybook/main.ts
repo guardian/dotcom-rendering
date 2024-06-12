@@ -22,7 +22,21 @@ const config: StorybookConfig = {
 		{ from: '../src/static', to: '/static/frontend/' },
 	],
 
-	addons: ['@storybook/addon-webpack5-compiler-swc'],
+	addons: [
+		{
+			name: '@storybook/addon-essentials',
+			options: {
+				actions: true,
+				backgrounds: true,
+				controls: true,
+				docs: false,
+				viewport: true,
+				toolbars: true,
+			},
+		},
+		'@storybook/addon-interactions',
+		'@storybook/addon-webpack5-compiler-swc',
+	],
 
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
