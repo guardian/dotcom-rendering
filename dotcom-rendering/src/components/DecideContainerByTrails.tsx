@@ -147,7 +147,6 @@ export const FourCard = ({
 }: {
 	trails: Tuple<DCRFrontCard, 4>;
 } & CardProps) => {
-	console.log(2, { isTagPage });
 	return (
 		<UL direction="row">
 			<LI percentage="25%" padSides={true}>
