@@ -318,7 +318,7 @@ export const ImageComponent = ({
 	const loading = isMainMedia ? 'eager' : 'lazy';
 
 	const orientation = imageWidth > imageHeight ? 'landscape' : 'portrait';
-
+	console.log({ orientation });
 	if (
 		isMainMedia &&
 		format.display === ArticleDisplay.Immersive &&
@@ -477,6 +477,12 @@ export const ImageComponent = ({
 					orientation === 'portrait' &&
 						css`
 							max-width: calc(0.66666 * 96vh);
+						`,
+					orientation === 'landscape' &&
+						css`
+							${from.leftCol} {
+								max-width: calc(1.333 * 96vh);
+							}
 						`,
 				]}
 			>
