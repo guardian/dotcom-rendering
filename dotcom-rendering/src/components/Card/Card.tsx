@@ -107,6 +107,7 @@ export type Props = {
 	onwardsSource?: OnwardsSource;
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
+	isTagPage?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -295,6 +296,7 @@ export const Card = ({
 	pauseOffscreenVideo = false,
 	showMainVideo = true,
 	absoluteServerTimes,
+	isTagPage = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -312,6 +314,29 @@ export const Card = ({
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
 
+	const decideAge = () => {
+		if (!webPublicationDate) return undefined;
+
+		const shouldShowAge =
+			isTagPage ||
+			!!onwardsSource ||
+			(showAge && isWithinTwelveHours(webPublicationDate));
+
+		if (!shouldShowAge) return undefined;
+
+		return (
+			<CardAge
+				format={format}
+				containerPalette={containerPalette}
+				webPublicationDate={webPublicationDate}
+				showClock={showClock}
+				isDynamo={isDynamo}
+				isOnwardContent={isOnwardContent}
+				absoluteServerTimes={absoluteServerTimes}
+				isTagPage={isTagPage}
+			/>
+		);
+	};
 	const renderFooter = ({ displayLines }: { displayLines?: boolean }) => {
 		if (showLivePlayable) return <></>;
 		return (
@@ -320,22 +345,7 @@ export const Card = ({
 				containerPalette={containerPalette}
 				displayLines={displayLines}
 				leftAlign={isOnwardContent}
-				age={
-					(!!onwardsSource && !!webPublicationDate) ||
-					(showAge &&
-						webPublicationDate &&
-						isWithinTwelveHours(webPublicationDate)) ? (
-						<CardAge
-							format={format}
-							containerPalette={containerPalette}
-							webPublicationDate={webPublicationDate}
-							showClock={showClock}
-							isDynamo={isDynamo}
-							isOnwardContent={isOnwardContent}
-							absoluteServerTimes={absoluteServerTimes}
-						/>
-					) : undefined
-				}
+				age={decideAge()}
 				commentCount={
 					discussionId !== undefined ? (
 						<Link
