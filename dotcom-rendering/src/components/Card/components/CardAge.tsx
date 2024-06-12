@@ -18,6 +18,7 @@ type Props = {
 	showClock?: boolean;
 	isDynamo?: true;
 	isOnwardContent?: boolean;
+	isTagPage: boolean;
 };
 
 const ageStyles = (
@@ -75,6 +76,7 @@ export const CardAge = ({
 	isDynamo,
 	isOnwardContent,
 	absoluteServerTimes,
+	isTagPage,
 }: Props) => {
 	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
 		return null;
@@ -85,15 +87,26 @@ export const CardAge = ({
 			css={ageStyles(format, containerPalette, isDynamo, isOnwardContent)}
 		>
 			{showClock && <ClockIcon />}
-			<DateTime
-				date={new Date(webPublicationDate)}
-				display="relative"
-				absoluteServerTimes={absoluteServerTimes}
-				editionId={'UK'}
-				showWeekday={false}
-				showDate={true}
-				showTime={false}
-			/>
+			{isTagPage ? (
+				<DateTime
+					date={new Date(webPublicationDate)}
+					display={'absolute'}
+					editionId={'UK'}
+					showWeekday={false}
+					showDate={false}
+					showTime={true}
+				/>
+			) : (
+				<DateTime
+					date={new Date(webPublicationDate)}
+					display={'relative'}
+					absoluteServerTimes={absoluteServerTimes}
+					editionId={'UK'}
+					showWeekday={false}
+					showDate={true}
+					showTime={false}
+				/>
+			)}
 		</span>
 	);
 };
