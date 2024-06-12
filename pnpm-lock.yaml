@@ -98,13 +98,13 @@ importers:
         specifier: 2.0.16
         version: 2.0.16
       '@storybook/addon-essentials':
-        specifier: ^8.1.6
+        specifier: 8.1.6
         version: 8.1.6(@types/react-dom@18.3.0)(@types/react@18.3.1)(prettier@3.0.3)(react-dom@18.3.1)(react@18.3.1)
       '@storybook/components':
-        specifier: ^8.1.6
+        specifier: 8.1.6
         version: 8.1.6(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)
       '@storybook/core-events':
-        specifier: ^8.1.6
+        specifier: 8.1.6
         version: 8.1.6
       '@storybook/manager-api':
         specifier: 8.1.6
@@ -113,13 +113,13 @@ importers:
         specifier: 8.1.6
         version: 8.1.6
       '@storybook/react':
-        specifier: ^8.1.6
+        specifier: 8.1.6
         version: 8.1.6(prettier@3.0.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.3.3)
       '@storybook/react-webpack5':
-        specifier: ^8.1.6
+        specifier: 8.1.6
         version: 8.1.6(esbuild@0.18.20)(prettier@3.0.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.3.3)(webpack-cli@5.1.4)
       '@storybook/theming':
-        specifier: ^8.1.6
+        specifier: 8.1.6
         version: 8.1.6(react-dom@18.3.1)(react@18.3.1)
       '@types/clean-css':
         specifier: 4.2.11
@@ -227,7 +227,7 @@ importers:
         specifier: 2.0.2
         version: 2.0.2
       storybook:
-        specifier: ^8.1.6
+        specifier: 8.1.6
         version: 8.1.6(@babel/preset-env@7.24.5)(react-dom@18.3.1)(react@18.3.1)
       thrift:
         specifier: 0.19.0
