@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
+	headline,
 	headlineLight17,
 	headlineLight20,
 	headlineLight24,
@@ -240,6 +241,17 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (design) {
+				case ArticleDesign.Gallery: {
+					//** TODO: check headline styles and use more modern syntax*/
+					return css`
+						${headline.xxxsmall({
+							fontWeight: 'bold',
+						})};
+						margin-bottom: ${space[3]}px;
+						max-width: 540px;
+						color: ${palette('--standfirst-text')};
+					`;
+				}
 				case ArticleDesign.PhotoEssay:
 					return css`
 						line-height: 22px;
