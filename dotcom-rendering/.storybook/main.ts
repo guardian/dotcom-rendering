@@ -127,7 +127,6 @@ const webpackConfig = (config: Configuration) => {
 	});
 
 	// modify storybook's file-loader rule to avoid conflicts with our svg
-	// https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
 	const fileLoaderRule = rules.find((rule) => {
 		return String(rule?.test).includes('svg');
 	});
