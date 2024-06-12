@@ -317,13 +317,10 @@ export const Card = ({
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
 
-		const publishedWithinTwelveHours =
-			isWithinTwelveHours(webPublicationDate);
-
 		const shouldShowAge =
 			isTagPage ||
 			!!onwardsSource ||
-			(showAge && publishedWithinTwelveHours);
+			(showAge && isWithinTwelveHours(webPublicationDate));
 
 		if (!shouldShowAge) return undefined;
 
@@ -337,7 +334,6 @@ export const Card = ({
 				isOnwardContent={isOnwardContent}
 				absoluteServerTimes={absoluteServerTimes}
 				isTagPage={isTagPage}
-				isWithinTwelveHours={publishedWithinTwelveHours}
 			/>
 		);
 	};

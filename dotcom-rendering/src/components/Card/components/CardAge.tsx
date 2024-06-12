@@ -18,8 +18,7 @@ type Props = {
 	showClock?: boolean;
 	isDynamo?: true;
 	isOnwardContent?: boolean;
-	isTagPage?: boolean;
-	isWithinTwelveHours: boolean;
+	isTagPage: boolean;
 };
 
 const ageStyles = (
@@ -78,7 +77,6 @@ export const CardAge = ({
 	isOnwardContent,
 	absoluteServerTimes,
 	isTagPage,
-	isWithinTwelveHours,
 }: Props) => {
 	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
 		return null;
@@ -95,8 +93,8 @@ export const CardAge = ({
 					display={'absolute'}
 					editionId={'UK'}
 					showWeekday={false}
-					showDate={isWithinTwelveHours ? false : true}
-					showTime={isWithinTwelveHours ? true : false}
+					showDate={false}
+					showTime={true}
 				/>
 			) : (
 				<DateTime
