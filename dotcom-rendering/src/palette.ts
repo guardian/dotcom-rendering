@@ -298,6 +298,7 @@ const headlineBylineDark: PaletteFunction = ({ display, theme }) => {
 
 const bylineLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -525,6 +526,7 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -629,6 +631,7 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -808,12 +811,17 @@ const bylineHoverDark: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const bylineUnderline: PaletteFunction = ({ theme }) => {
+const bylineUnderline: PaletteFunction = ({ theme, design }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.neutral[60];
 		default:
-			return 'inherit';
+			switch (design) {
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[46];
+				default:
+					return 'inherit';
+			}
 	}
 };
 
@@ -924,6 +932,7 @@ const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[100];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -960,6 +969,7 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.PhotoEssay:
 		case ArticleDesign.Review:
 			return sourcePalette.neutral[60];
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -1240,6 +1250,7 @@ const followTextLight: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.LiveBlog:
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -2198,7 +2209,8 @@ const standfirstLinkTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[100];
 			}
-
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 			switch (theme) {
@@ -2304,6 +2316,8 @@ const standfirstTextLight: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[100];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -2779,7 +2793,7 @@ const captionTextLight: PaletteFunction = ({ design, theme }) => {
 						case ArticleSpecial.SpecialReportAlt:
 							return sourcePalette.news[100];
 					}
-
+				case ArticleDesign.Gallery:
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
@@ -2825,6 +2839,7 @@ const captionLink: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
 		return sourcePalette.news[300];
 	}
+	if (design === ArticleDesign.Gallery) return sourcePalette.neutral[46];
 	switch (theme) {
 		case Pillar.News:
 			return sourcePalette.news[400];
@@ -3086,6 +3101,8 @@ const articleBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video: {
@@ -3177,6 +3194,7 @@ const articleSectionTitleDark: PaletteFunction = () =>
 
 const articleLinkTextLight: PaletteFunction = ({ design, theme }) => {
 	if (design === ArticleDesign.Analysis) return sourcePalette.news[300];
+	if (design === ArticleDesign.Gallery) return sourcePalette.neutral[86];
 	switch (theme) {
 		case Pillar.Lifestyle:
 			return sourcePalette.lifestyle[300];
@@ -3228,7 +3246,7 @@ const articleLinkBorderLight: PaletteFunction = ({ design, theme }) => {
 	) {
 		return transparentColour(sourcePalette.neutral[60], 0.3);
 	}
-
+	if (design === ArticleDesign.Gallery) return sourcePalette.neutral[60];
 	return sourcePalette.neutral[86];
 };
 
@@ -3289,6 +3307,8 @@ const articleLinkHoverLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[200];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -3331,7 +3351,7 @@ const articleLinkBorderHoverLight: PaletteFunction = ({ design, theme }) => {
 	) {
 		return sourcePalette.specialReportAlt[200];
 	}
-
+	if (design === ArticleDesign.Gallery) return sourcePalette.neutral[86];
 	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
 		return sourcePalette.news[300];
 	}
@@ -3352,6 +3372,7 @@ const articleBorderLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.neutral[60];
 		default:
 			switch (design) {
+				case ArticleDesign.Gallery:
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
@@ -3831,6 +3852,7 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.news[800];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
@@ -3896,6 +3918,7 @@ const subMetaTextLight: PaletteFunction = ({ design, theme }) => {
 			return sourcePalette.specialReport[100];
 		default:
 			switch (design) {
+				case ArticleDesign.Gallery:
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
@@ -4616,6 +4639,7 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 					}
 				case ArticleDesign.MatchReport:
 					return sourcePalette.neutral[7];
+				case ArticleDesign.Gallery:
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
@@ -4695,6 +4719,7 @@ const seriesTitleTextDark: PaletteFunction = ({ design, theme, display }) => {
 				case ArticleSpecial.SpecialReportAlt:
 					return sourcePalette.specialReportAlt[300];
 			}
+		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
