@@ -120,7 +120,6 @@ const webpackConfig = (config: Configuration) => {
 	fileLoaderRule &&
 		typeof fileLoaderRule !== 'string' &&
 		(fileLoaderRule.exclude = /\.svg$/);
-	console.log({ fileLoaderRule });
 	rules.push(svgr);
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
