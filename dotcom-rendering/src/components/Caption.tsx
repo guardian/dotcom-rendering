@@ -246,11 +246,14 @@ export const Caption = ({
 				padCaption && captionPadding,
 			]}
 		>
-			{mediaType === 'Video' ? (
+			{/**TODO : refactor to make this easier to parse */}
+			{format.design === ArticleDesign.Gallery ? null : mediaType ===
+			  'Video' ? (
 				<VideoIcon format={format} />
 			) : (
 				<CameraIcon format={format} />
 			)}
+
 			{!!captionText && (
 				<span
 					css={captionLink}
@@ -260,7 +263,17 @@ export const Caption = ({
 					key="caption"
 				/>
 			)}
-			{!!credit && displayCredit && ` ${credit}`}
+			{/**TODO : check padding is not regression for other captionless captions*/}
+
+			{!!credit && displayCredit && (
+				<div
+					css={css`
+						padding-top: 6px;
+					`}
+				>
+					{credit}
+				</div>
+			)}
 		</figcaption>
 	);
 
