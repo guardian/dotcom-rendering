@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { TagLink } from './TagLink';
 
@@ -16,6 +17,11 @@ export const ThemeVariations = {
 		sectionLabel: 'Euro 24',
 		sectionUrl: 'football/euro-24',
 		guardianBaseURL: 'https://www.theguardian.com',
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
 	},
 	decorators: [centreColumnDecorator],
 } satisfies Story;
