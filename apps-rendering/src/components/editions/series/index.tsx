@@ -13,7 +13,7 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { text } from 'palette';
-import type { FC } from 'react';
+
 import { kickerPicker } from '../kickerPicker';
 
 // ----- Component ----- //
@@ -56,7 +56,7 @@ const getStyles = (item: Item): SerializedStyles => {
 	return styles(kicker);
 };
 
-const Series: FC<Props> = ({ item }) =>
+const Series = ({ item }: Props) =>
 	maybeRender(kickerPicker(item), (kicker) => (
 		<nav css={getStyles(item)}>{kicker}</nav>
 	));

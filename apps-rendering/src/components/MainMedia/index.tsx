@@ -6,7 +6,7 @@ import MainMediaImage from 'components/MainMedia/MainMediaImage';
 import MainMediaVideo from 'components/MainMedia/MainMediaVideo';
 import { maybeRender } from 'lib';
 import { MainMedia, MainMediaKind } from 'mainMedia';
-import type { FC } from 'react';
+
 import GalleryCaption from './GalleryCaption';
 import ImmersiveCaption from './ImmersiveCaption';
 
@@ -17,7 +17,7 @@ interface Props {
 	mainMedia: Option<MainMedia>;
 }
 
-const MainMedia: FC<Props> = ({ format, mainMedia }) =>
+const MainMedia = ({ format, mainMedia }: Props) =>
 	maybeRender(mainMedia, (media) => {
 		switch (media.kind) {
 			case MainMediaKind.Image:

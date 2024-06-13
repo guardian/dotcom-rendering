@@ -9,7 +9,7 @@ import {
 import { none } from '../../../vendor/@guardian/types/index';
 import { image } from 'fixtures/image';
 import { Optional } from 'optional';
-import type { FC } from 'react';
+
 import BodyImage from '.';
 
 // ----- Setup ----- //
@@ -44,7 +44,7 @@ const copy = (
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<BodyImage
 		image={image}
 		format={format}
@@ -54,7 +54,7 @@ const Default: FC = () => (
 	/>
 );
 
-const NoCaption: FC = () => (
+const NoCaption = () => (
 	<BodyImage
 		image={image}
 		format={format}
@@ -64,7 +64,7 @@ const NoCaption: FC = () => (
 	/>
 );
 
-const Thumbnail: FC = () => (
+const Thumbnail = () => (
 	<>
 		<BodyImage
 			image={{
@@ -80,7 +80,7 @@ const Thumbnail: FC = () => (
 	</>
 );
 
-const ThumbnailNoCaption: FC = () => (
+const ThumbnailNoCaption = () => (
 	<>
 		<BodyImage
 			image={{

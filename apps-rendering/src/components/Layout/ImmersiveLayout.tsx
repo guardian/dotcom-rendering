@@ -21,7 +21,7 @@ import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import { background, fill } from 'palette';
-import type { FC } from 'react';
+
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -91,7 +91,7 @@ type Props = {
 	item: Exclude<Item, LiveBlog | DeadBlog>;
 };
 
-const ImmersiveLayout: FC<Props> = ({ item }) => {
+const ImmersiveLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

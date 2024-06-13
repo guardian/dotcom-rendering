@@ -3,7 +3,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { none } from '../../../vendor/@guardian/types/index';
 import { image } from 'fixtures/image';
-import type { FC } from 'react';
+
 import Img from '.';
 
 // ----- Setup ----- //
@@ -12,7 +12,7 @@ const sizes = { mediaQueries: [], default: '40vw' };
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<Img
 		image={image}
 		sizes={sizes}
@@ -26,7 +26,7 @@ const Default: FC = () => (
 	/>
 );
 
-const Placeholder: FC = () => (
+const Placeholder = () => (
 	<Img
 		image={{
 			...image,

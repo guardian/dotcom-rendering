@@ -2,12 +2,12 @@
 
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { FC } from 'react';
+
 import FirstPublished from '.';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<FirstPublished
 		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"
@@ -22,7 +22,7 @@ const Default: FC = () => (
 	/>
 );
 
-const PinnedPost: FC = () => (
+const PinnedPost = () => (
 	<FirstPublished
 		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"
@@ -37,7 +37,7 @@ const PinnedPost: FC = () => (
 	/>
 );
 
-const OriginalPinnedPost: FC = () => (
+const OriginalPinnedPost = () => (
 	<FirstPublished
 		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"

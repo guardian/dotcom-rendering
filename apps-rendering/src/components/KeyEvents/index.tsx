@@ -19,7 +19,7 @@ import {
 import { Link } from '@guardian/source/react-components';
 import Accordion from 'components/Accordion';
 import { background, text } from 'palette';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -191,7 +191,7 @@ const timeStyles = css`
 	`}
 `;
 
-const ListItem: FC<ListItemProps> = ({ keyEvent, format }) => {
+const ListItem = ({ keyEvent, format }: ListItemProps) => {
 	return (
 		<li css={listItemStyles}>
 			<Link priority="secondary" css={linkStyles} href={keyEvent.url}>
@@ -219,7 +219,7 @@ const ListItem: FC<ListItemProps> = ({ keyEvent, format }) => {
 	);
 };
 
-const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, format }) => {
+const KeyEvents = ({ keyEvents, format }: KeyEventsProps) => {
 	return (
 		<nav
 			// https://github.com/guardian/dotcom-rendering/pull/3693

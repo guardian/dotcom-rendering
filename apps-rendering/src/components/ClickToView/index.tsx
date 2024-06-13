@@ -14,7 +14,7 @@ import { Button, SvgCheckmark } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind, withDefault } from '../../../vendor/@guardian/types/index';
 import { fold } from 'lib';
-import type { FC } from 'react';
+
 import React, { useState } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -102,13 +102,13 @@ const buttonStyles = darkModeCss`
 	}
 `;
 
-const ClickToView: FC<ClickToViewProps> = ({
+const ClickToView = ({
 	children,
 	role,
 	onAccept,
 	source,
 	sourceDomain,
-}) => {
+}: ClickToViewProps) => {
 	const [isOverlayClicked, setIsOverlayClicked] = useState<boolean>(false);
 
 	const handleClick = (): void => {

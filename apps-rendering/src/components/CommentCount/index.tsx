@@ -9,7 +9,7 @@ import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { border, fill, text } from 'palette';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -124,7 +124,7 @@ const getBubbleStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const CommentCount: FC<Props> = ({ count, commentable, ...format }: Props) => {
+const CommentCount = ({ count, commentable, ...format }: Props) => {
 	if (!commentable) {
 		return null;
 	}

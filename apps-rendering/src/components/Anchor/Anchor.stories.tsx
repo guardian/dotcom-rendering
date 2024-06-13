@@ -2,7 +2,7 @@
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
-import type { FC } from 'react';
+
 import Anchor from './';
 
 // ----- Setup ----- //
@@ -12,7 +12,7 @@ const copy = '“everything that was recommended was done”.';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<Anchor
 		format={{
 			design: ArticleDesign.Standard,
@@ -25,7 +25,7 @@ const Default: FC = () => (
 	</Anchor>
 );
 
-const Liveblock: FC = () => {
+const Liveblock = () => {
 	return (
 		<>
 			{getAllThemes({

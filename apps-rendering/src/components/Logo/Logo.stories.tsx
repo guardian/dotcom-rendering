@@ -2,7 +2,7 @@
 import { some } from '../../../vendor/@guardian/types/index';
 import { article } from 'fixtures/item';
 import { live } from 'fixtures/live';
-import type { FC } from 'react';
+
 import Logo from './';
 
 const branding = some({
@@ -19,7 +19,7 @@ const branding = some({
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<Logo
 		item={{
 			...article,
@@ -28,7 +28,7 @@ const Default: FC = () => (
 	/>
 );
 
-const Blogs: FC = () => (
+const Blogs = () => (
 	<Logo
 		item={{
 			...live,

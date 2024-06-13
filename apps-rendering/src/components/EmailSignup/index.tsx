@@ -3,7 +3,7 @@ import { neutral, remSpace, textSans14 } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { EmailSignup } from 'embed';
 import { maybeRender } from 'lib';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -29,7 +29,7 @@ const captionStyles = css`
 	padding-bottom: ${remSpace[1]};
 `;
 
-const EmailSignupEmbed: FC<Props> = ({ embed }) => (
+const EmailSignupEmbed = ({ embed }: Props) => (
 	<figure css={styles}>
 		{maybeRender(embed.caption, (caption) => (
 			<figcaption css={captionStyles}>{caption}</figcaption>

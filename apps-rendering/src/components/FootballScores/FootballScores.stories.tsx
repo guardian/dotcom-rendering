@@ -1,11 +1,10 @@
 // ----- Imports ----- //
 
-import type { FC } from 'react';
 import FootballScores, { MatchStatusKind } from './';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<FootballScores
 		league="Premier League"
 		stadium="Etihad Stadium"

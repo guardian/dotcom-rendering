@@ -7,7 +7,7 @@ import { neutral, pxToRem, textSans12 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { makeRelativeDate } from 'date';
 import { maybeRender } from 'lib';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -58,7 +58,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const RelativeDateline: FC<Props> = ({ date, format }) =>
+const RelativeDateline = ({ date, format }: Props) =>
 	maybeRender(date, (d) => (
 		<time css={timestampStyles(format.design === ArticleDesign.DeadBlog)}>
 			{format.design === ArticleDesign.LiveBlog && (

@@ -18,7 +18,7 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import { background } from 'palette';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -49,7 +49,7 @@ interface Props {
 	item: LiveBlog | DeadBlog;
 }
 
-const LiveblogHeader: FC<Props> = ({ item }) => {
+const LiveblogHeader = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

@@ -83,7 +83,6 @@ module.exports = {
 			},
 		],
 		'@typescript-eslint/no-unused-vars': 'off',
-		'@typescript-eslint/explicit-function-return-type': 'error',
 		// This check seems to be flaky, and complains about things that TS is happy about
 		'react/prop-types': 'off',
 		'import/no-unresolved': 'off',

@@ -1,11 +1,10 @@
 // ----- Imports ----- //
 
-import type { FC } from 'react';
 import ListItem from './';
 
 // ----- Stories ----- //
 
-const Default: FC = () => <ListItem>A bullet point</ListItem>;
+const Default = () => <ListItem>A bullet point</ListItem>;
 
 // ----- Exports ----- //
 

@@ -5,7 +5,7 @@ import { remSpace, text, textSans14 } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Generic, TikTok } from 'embed';
 import { maybeRender } from 'lib';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -28,7 +28,7 @@ interface Props {
 	embed: Generic | TikTok;
 }
 
-const GenericEmbed: FC<Props> = ({ embed }) => (
+const GenericEmbed = ({ embed }: Props) => (
 	<figure css={styles}>
 		<iframe
 			srcDoc={embed.html}

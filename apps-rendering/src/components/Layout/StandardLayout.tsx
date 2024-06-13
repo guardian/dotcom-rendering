@@ -46,7 +46,7 @@ import type {
 import { maybeRender } from 'lib';
 import { Optional } from 'optional';
 import { background } from 'palette';
-import type { FC } from 'react';
+
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -102,7 +102,7 @@ interface Props {
 		| Profile;
 }
 
-const StandardLayout: FC<Props> = ({ item }) => {
+const StandardLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (

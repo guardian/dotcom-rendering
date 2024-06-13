@@ -2,7 +2,7 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '../../../vendor/@guardian/types/index';
-import type { FC } from 'react';
+
 import AnalysisByline from './AnalysisByline';
 import {
 	defaultAnchorStyles,
@@ -21,7 +21,7 @@ interface Props extends ArticleFormat {
 	bylineHtml: Option<DocumentFragment>;
 }
 
-const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
+const Byline = ({ bylineHtml, ...format }: Props) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return <LabsByline bylineHtml={bylineHtml} format={format} />;
 	}

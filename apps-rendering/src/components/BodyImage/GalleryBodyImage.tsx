@@ -13,7 +13,7 @@ import { grid } from 'grid/grid';
 import type { Image } from 'image/image';
 import type { Sizes } from 'image/sizes';
 import { border, text } from 'palette';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 import { getDefaultImgStyles } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
@@ -138,12 +138,12 @@ const imgSizes = (image: Image): Sizes => {
 	};
 };
 
-const GalleryBodyImage: FC<BodyImageProps> = ({
+const GalleryBodyImage = ({
 	image,
 	format,
 	lightbox,
 	caption,
-}) => (
+}: BodyImageProps) => (
 	<figure css={css(figureStyles)}>
 		<div css={imageWrapperStyles(format)}>
 			<Img

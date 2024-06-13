@@ -21,7 +21,7 @@ import { getFormat } from 'item';
 import type { Item } from 'item';
 import { background } from 'palette';
 import { useState } from 'react';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 import { defaultStyles } from './Metadata.defaults';
 
@@ -123,7 +123,7 @@ type Props = {
 	item: Item;
 };
 
-const LiveBlogMetadata: FC<Props> = ({ item }: Props) => {
+const LiveBlogMetadata = ({ item }: Props) => {
 	const [checked, setChecked] = useState<boolean>(false);
 	const isLive = item.design === ArticleDesign.LiveBlog;
 

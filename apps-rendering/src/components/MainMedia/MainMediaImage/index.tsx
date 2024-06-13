@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Image } from 'image';
-import type { FC } from 'react';
+
 import BlogMainMediaImage from './BlogMainMediaImage';
 import CommentMainMediaImage from './CommentMainMediaImage';
 import GalleryMainMediaImage from './GalleryMainMediaImage';
@@ -25,7 +25,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const MainMediaImage: FC<Props> = ({ image, format }: Props) => {
+const MainMediaImage = ({ image, format }: Props) => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return <ImmersiveMainMediaImage image={image} format={format} />;
 	}

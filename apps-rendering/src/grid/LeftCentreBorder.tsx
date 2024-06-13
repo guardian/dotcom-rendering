@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { from, neutral } from '@guardian/source/foundations';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 import { grid } from './grid';
 
@@ -32,9 +32,7 @@ interface Props {
  * Renders a border between the left column and the centre column when using
  * the common Guardian layout columns. Appears from the leftCol breakpoint.
  */
-const LeftCentreBorder: FC<Props> = ({ rows }) => (
-	<div css={styles(rows)}></div>
-);
+const LeftCentreBorder = ({ rows }: Props) => <div css={styles(rows)}></div>;
 
 // ----- Exports ----- //
 

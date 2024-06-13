@@ -3,7 +3,7 @@ import { ArticleDesign } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { none } from '../../../vendor/@guardian/types/index';
-import type { FC } from 'react';
+
 import type { BodyImageProps } from './BodyImage.defaults';
 import DefaultBodyImage, {
 	getDefaultImgStyles,
@@ -14,13 +14,13 @@ import GalleryBodyImage from './GalleryBodyImage';
 
 type Props = BodyImageProps & { leftColumnBreakpoint: Option<Breakpoint> };
 
-const BodyImage: FC<Props> = ({
+const BodyImage = ({
 	image,
 	format,
 	lightbox,
 	caption,
 	leftColumnBreakpoint,
-}) => {
+}: Props) => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 			return (

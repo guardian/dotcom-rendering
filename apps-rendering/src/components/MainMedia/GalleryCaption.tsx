@@ -12,7 +12,7 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import { background, text } from 'palette';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -51,7 +51,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const GalleryCaption: FC<Props> = ({ mainMedia, format }) =>
+const GalleryCaption = ({ mainMedia, format }: Props) =>
 	maybeRender(mainMedia, (media) => {
 		if (
 			media.kind === MainMediaKind.Video ||

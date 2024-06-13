@@ -31,7 +31,7 @@ import {
 import { deadBlog, live } from 'fixtures/live';
 import type { Item, NewsletterSignup } from 'item';
 import { compose, pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import AnalysisLayout from './AnalysisLayout';
 import CommentLayout from './CommentLayout';
 import GalleryLayout from './GalleryLayout';
@@ -57,7 +57,9 @@ const setSpecialReportAlt = setTheme(ArticleSpecial.SpecialReportAlt);
  * @returns A story created from a layout component and an `Item` fixture
  */
 const createLayoutStory =
-	<Fixture extends Item>(Layout: FC<{ item: Fixture }>) =>
+	<Fixture extends Item>(
+		Layout: ({ item }: { item: Fixture }) => JSX.Element,
+	) =>
 	(fixture: Fixture): StoryFn<typeof Layout> => {
 		const story = (): ReactElement => <Layout item={fixture} />;
 		story.storyName = formatToString(fixture);

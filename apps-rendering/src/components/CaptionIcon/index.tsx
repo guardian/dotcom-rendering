@@ -4,7 +4,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source/foundations';
 import { SvgCamera, SvgVideo } from '@guardian/source/react-components';
 import { fill } from 'palette';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 enum CaptionIconVariant {
@@ -42,7 +42,7 @@ const iconStyles = css`
     `}
 `;
 
-const CaptionIcon: FC<IconProps> = ({ format, variant }) => {
+const CaptionIcon = ({ format, variant }: IconProps) => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:

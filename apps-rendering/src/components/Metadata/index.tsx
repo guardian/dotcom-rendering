@@ -2,7 +2,7 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import type { FC } from 'react';
+
 import ExtendedMetadata from './ExtendedMetadata';
 import GalleryMetadata from './GalleryMetadata';
 import ImmersiveMetadata from './ImmersiveMetadata';
@@ -15,7 +15,7 @@ interface Props {
 	item: Item;
 }
 
-const Metadata: FC<Props> = ({ item }: Props) => {
+const Metadata = ({ item }: Props) => {
 	const { display, design } = item;
 
 	if (display === ArticleDisplay.Immersive) {

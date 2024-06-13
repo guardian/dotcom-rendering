@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import type { FC } from 'react';
+
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
 const styles = css`
@@ -13,7 +13,7 @@ interface Props {
 	item: Item;
 }
 
-const InterviewStandfirst: FC<Props> = ({ item }) => (
+const InterviewStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst
 		item={item}
 		css={css(defaultStyles(getFormat(item)), styles)}

@@ -14,7 +14,7 @@ const styles = css`
 		padding-top: 0;
 	}
 `;
-const AnalysisStandfirst: React.FC<Props> = ({ item }) => (
+const AnalysisStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst
 		item={item}
 		css={css(defaultStyles(getFormat(item)), styles)}

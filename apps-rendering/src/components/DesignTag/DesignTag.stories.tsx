@@ -2,12 +2,12 @@
 
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
-import type { FC } from 'react';
+
 import DesignTag from './';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<>
 		{getAllThemes({
 			display: ArticleDisplay.Standard,

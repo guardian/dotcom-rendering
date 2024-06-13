@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source/foundations';
 import type { Item } from 'item';
-import type { FC } from 'react';
+
 import DefaultMetadata, { defaultStyles } from './Metadata.defaults';
 
 const wrapperStyles = css`
@@ -13,7 +13,7 @@ type Props = {
 	item: Item;
 };
 
-const ExtendedMetadata: FC<Props> = ({ item }) => (
+const ExtendedMetadata = ({ item }: Props) => (
 	<div css={wrapperStyles}>
 		<DefaultMetadata css={defaultStyles} item={item} withByline={true} />
 	</div>

@@ -22,7 +22,7 @@ import {
 import LiveBlock from 'components/LiveBlock';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import { background, border } from 'palette';
-import type { FC } from 'react';
+
 import { darkModeCss } from 'styles';
 
 const pinnedPostContainerStyles = (
@@ -154,7 +154,7 @@ type Props = {
 	edition: Edition;
 };
 
-const PinnedPost: FC<Props> = ({ pinnedPost, format, edition }: Props) => {
+const PinnedPost = ({ pinnedPost, format, edition }: Props) => {
 	return (
 		<div
 			id="pinned-post"

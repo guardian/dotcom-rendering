@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import Paragraph from 'components/Paragraph';
-import type { FC } from 'react';
+
 import Blockquote from './';
 
 const standard = {
@@ -9,7 +9,7 @@ const standard = {
 	theme: ArticlePillar.News,
 };
 
-const Default: FC = () => (
+const Default = () => (
 	<Blockquote format={standard}>
 		<Paragraph format={standard} showDropCap={false} isEditions={false}>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu

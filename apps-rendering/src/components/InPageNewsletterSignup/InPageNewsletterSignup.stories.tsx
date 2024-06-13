@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { FC } from 'react';
+
 import InPageNewsletterSignup from '.';
 
 // ---- Constants ---- //
@@ -16,7 +16,7 @@ const TEST_NEWSLETTER = {
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<>
 		<style>
 			{`.js-signup-form-container {
@@ -34,7 +34,7 @@ const Default: FC = () => (
 	</>
 );
 
-const Unsupported: FC = () => (
+const Unsupported = () => (
 	<>
 		<style>
 			{`.js-signup-form-fallback-container {

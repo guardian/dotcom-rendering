@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { from, neutral } from '@guardian/source/foundations';
 import { comment } from 'fixtures/item';
 import { deadBlog, live } from 'fixtures/live';
-import type { FC } from 'react';
+
 import Metadata from './';
 
 // ----- Stories ----- //
@@ -25,19 +25,19 @@ const deadContainerStyles = css`
 	}
 `;
 
-const LiveblogMetadata: FC = () => (
+const LiveblogMetadata = () => (
 	<div css={liveContainerStyles}>
 		<Metadata item={{ ...live }} />
 	</div>
 );
 
-const DeadBlogMetadata: FC = () => (
+const DeadBlogMetadata = () => (
 	<div css={deadContainerStyles}>
 		<Metadata item={{ ...deadBlog }} />
 	</div>
 );
 
-const ShortMetadata: FC = () => (
+const ShortMetadata = () => (
 	<div css={deadContainerStyles}>
 		<Metadata item={{ ...comment }} />
 	</div>

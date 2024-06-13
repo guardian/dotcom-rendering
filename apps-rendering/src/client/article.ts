@@ -34,7 +34,7 @@ import {
 	userClient,
 } from 'native/nativeApi';
 import type { Optional } from 'optional';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
@@ -73,10 +73,9 @@ function getTopic(follow: Element | null): Topic | null {
 function followToggle(
 	topic: Topic,
 	querySelector: string,
-	followStatusComponent: FC<{
-		isFollowing: boolean;
-		contributorName: string;
-	}>,
+	followStatusComponent:
+		| typeof FollowNotificationStatus
+		| typeof FollowTagStatus,
 	bridgetClient: NotificationsClient<void> | TagClient<void>,
 ): void {
 	const followStatus = document.querySelector(querySelector);

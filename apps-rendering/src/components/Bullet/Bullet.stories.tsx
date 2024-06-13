@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { FC } from 'react';
+
 import Bullet from './';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<Bullet
 		format={{
 			design: ArticleDesign.Standard,

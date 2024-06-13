@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import ListItem from 'components/ListItem';
-import type { FC } from 'react';
+
 import OrderedList from './';
 
 // ----- Setup ----- //
@@ -10,7 +10,7 @@ const listItem = <ListItem>A bullet point</ListItem>;
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<OrderedList>{[listItem, listItem, listItem]}</OrderedList>
 );
 

@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ElementKind } from 'bodyElementKind';
-import type { FC } from 'react';
+
 import NewsletterSignup from '.';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<NewsletterSignup
 		element={{
 			kind: ElementKind.NewsletterSignUp,
@@ -28,7 +28,7 @@ const Default: FC = () => (
 	/>
 );
 
-const NewsTheme: FC = () => (
+const NewsTheme = () => (
 	<NewsletterSignup
 		element={{
 			kind: ElementKind.NewsletterSignUp,

@@ -3,7 +3,7 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import type { FC } from 'react';
+
 import GalleryRelatedContent from './GalleryRelatedContent';
 import ImmersiveRelatedContent from './ImmersiveRelatedContent';
 import DefaultRelatedContent, {
@@ -16,7 +16,7 @@ interface Props {
 	item: Item;
 }
 
-const RelatedContent: FC<Props> = ({ item }) => {
+const RelatedContent = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	if (format.display === ArticleDisplay.Immersive) {

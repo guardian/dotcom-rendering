@@ -7,7 +7,7 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import { SvgOfflineCloud } from '@guardian/source/react-components';
-import type { FC } from 'react';
+
 import { useOnlineStatus } from '../utils/useOnlineStatus';
 
 // ----- Styles ----- //
@@ -75,7 +75,7 @@ interface Props {
 	atomId: string;
 }
 
-const Video: FC<Props> = ({ title, atomId }) => {
+const Video = ({ title, atomId }: Props) => {
 	const online = useOnlineStatus();
 
 	const text =
