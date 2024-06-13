@@ -270,7 +270,7 @@ const tagOverlayGridStyles = css`
 		grid-template-columns: 100%; /* Main content */
 		grid-template-areas: 'sticky-tag';
 	}
-	${from.desktop} {
+	${from.tablet} {
 		display: none;
 	}
 `;
@@ -338,8 +338,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-	const inTagLinkTest =
-		isWeb &&
+	const inTagLinkTest = true;
+	isWeb &&
 		article.config.abTests.tagLinkDesignVariant === 'variant' &&
 		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
