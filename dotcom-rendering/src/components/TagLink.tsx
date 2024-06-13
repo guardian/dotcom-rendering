@@ -120,9 +120,11 @@ export const TagLink = ({
 					`,
 			]}
 		>
-			<Hide from="leftCol">
-				<div css={fillBarStyles} />
-			</Hide>
+			{!isBlog && (
+				<Hide from="leftCol">
+					<div css={fillBarStyles} />
+				</Hide>
+			)}
 			<a
 				href={`${guardianBaseURL}/${sectionUrl}`}
 				css={[tagLinkStyles, isBlog && desktopTabStyles]}
