@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
 	headlineBold17,
@@ -13,9 +14,9 @@ interface Props {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
+	format: ArticleFormat;
 }
 const containerStyles = css`
-	padding-top: ${space[1]}px;
 	margin-bottom: ${space[2]}px;
 `;
 
@@ -81,7 +82,7 @@ const arrowStyles = css`
 `;
 
 const fillBarStyles = css`
-	background-color: ${palette('--article-background')};
+	background-color: ${palette('--tag-link-fill-background')};
 	margin-top: -${space[2]}px;
 	width: 100%;
 	height: 20px;
@@ -93,9 +94,21 @@ export const TagLink = ({
 	sectionUrl,
 	sectionLabel,
 	guardianBaseURL,
+	format,
 }: Props) => {
+	const isBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
 	return (
-		<div css={containerStyles}>
+		<div
+			css={[
+				containerStyles,
+				!isBlog &&
+					css`
+						padding-top: ${space[1]}px;
+					`,
+			]}
+		>
 			<Hide from="leftCol">
 				<div css={fillBarStyles} />
 			</Hide>
