@@ -77,7 +77,9 @@ const enhanceNav = (NAV: NavType): NavType => {
 export const renderFront = ({
 	front,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	const title = front.webTitle;
+	const title = front.isNetworkFront
+		? 'Latest news, sport and opinion from the Guardian'
+		: front.webTitle;
 	const NAV = extractNAV(front.nav);
 	const enhancedNAV = enhanceNav(NAV);
 
