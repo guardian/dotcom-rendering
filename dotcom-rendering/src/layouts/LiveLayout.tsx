@@ -597,14 +597,27 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									inTagLinkTest={inTagLinkTest}
-								/>
+								{inTagLinkTest ? (
+									<div
+										css={css`
+											height: 64px;
+											${from.desktop} {
+												height: 44px;
+											}
+										`}
+									/>
+								) : (
+									<ArticleTitle
+										format={format}
+										tags={article.tags}
+										sectionLabel={article.sectionLabel}
+										sectionUrl={article.sectionUrl}
+										guardianBaseURL={
+											article.guardianBaseURL
+										}
+										inTagLinkTest={inTagLinkTest}
+									/>
+								)}
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
