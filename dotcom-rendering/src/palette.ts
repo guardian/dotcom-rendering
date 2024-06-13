@@ -1773,11 +1773,9 @@ const accordionTitleRowBorderTopDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 const accordionTitleLight: PaletteFunction = () => sourcePalette.neutral[7];
 const accordionTitleDark: PaletteFunction = () => sourcePalette.neutral[86];
-const accordionKeyEventsBackgroundLight: PaletteFunction = () =>
-	sourcePalette.neutral[100];
 const accordionBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
-const accordionLiveFeedBackgroundLight: PaletteFunction = () =>
+const accordionBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 
 const tableOfContentsLight: PaletteFunction = () => sourcePalette.neutral[7];
@@ -5556,6 +5554,59 @@ const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
 const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
+const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return 'transparent';
+		// Order matters. We want comment special report pieces to have the opinion background
+		case ArticleDesign.Letter:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Comment:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.opinion[800];
+			}
+		case ArticleDesign.Editorial:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.news[800];
+			}
+		case ArticleDesign.Picture:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video: {
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[0];
+			}
+		}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				case ArticleSpecial.Labs:
+					switch (display) {
+						case ArticleDisplay.Immersive:
+							return 'transparent';
+						default:
+							return sourcePalette.neutral[97];
+					}
+				default:
+					return 'transparent';
+			}
+	}
+};
+
 const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
 // ----- Palette ----- //
 
@@ -5594,12 +5645,8 @@ type PaletteColours = Record<
 const paletteColours = {
 	...expandingWrapper,
 	...tabs,
-	'--accordion-key-events-background': {
-		light: accordionKeyEventsBackgroundLight,
-		dark: accordionBackgroundDark,
-	},
-	'--accordion-live-feed-background': {
-		light: accordionLiveFeedBackgroundLight,
+	'--accordion-background': {
+		light: accordionBackgroundLight,
 		dark: accordionBackgroundDark,
 	},
 	'--accordion-title': {
@@ -6613,6 +6660,10 @@ const paletteColours = {
 	'--tag-link-background': {
 		light: tagLinkBackground,
 		dark: tagLinkBackground,
+	},
+	'--tag-link-fill-background': {
+		light: tagLinkFillBackground,
+		dark: tagLinkFillBackground,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,

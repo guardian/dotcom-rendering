@@ -62,14 +62,9 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 		};
 
 		const analytics: AnalyticsModel = {
-			gaTracker: 'UA-78705427-1',
-			title: article.headline,
 			comscoreID: '6035250',
 			section: sectionName,
-			contentType: article.contentType,
-			id: article.pageId,
 			neilsenAPIID,
-			domain: 'amp.theguardian.com',
 			ipsosSectionName: config.ipsosTag ?? 'guardian',
 		};
 

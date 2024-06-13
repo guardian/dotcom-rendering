@@ -145,9 +145,11 @@ export default {
 	args: {
 		config: { renderingTarget: 'Web', darkModeAvailable: false },
 	},
+
 	globalTypes: {
 		globalColourScheme,
 	},
+
 	decorators: [
 		// @ts-expect-error -- this global decorator takes an option parameter
 		ConfigContextDecorator,
@@ -157,6 +159,7 @@ export default {
 			return Story();
 		},
 	],
+
 	parameters: {
 		viewport: {
 			viewports: guardianViewports,

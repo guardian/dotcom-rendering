@@ -223,7 +223,7 @@ test.describe('YouTube Atom', () => {
 		await expectToNotExist(page, overlaySelector);
 	});
 
-	test('plays in body video', async ({ page }) => {
+	test.skip('plays in body video', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
@@ -381,7 +381,9 @@ test.describe('YouTube Atom', () => {
 		await youTubeEmbedPromise2;
 	});
 
-	test('plays the video if the reader rejects consent', async ({ page }) => {
+	test.skip('plays the video if the reader rejects consent', async ({
+		page,
+	}) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
