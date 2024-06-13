@@ -271,7 +271,21 @@ const tagOverlayGridStyles = css`
 		grid-template-areas: 'sticky-tag';
 	}
 	${from.tablet} {
-		display: none;
+		grid-template-columns: 1fr 700px 1fr;
+		grid-template-areas: '. sticky-tag .';
+	}
+	${from.desktop} {
+		grid-template-columns: 1fr 200px 740px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+
+	${from.leftCol} {
+		grid-template-columns: 1fr 200px 900px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+	${from.wide} {
+		grid-template-columns: 1fr 200px 1060px 1fr;
+		grid-template-areas: '. sticky-tag . .';
 	}
 `;
 
