@@ -262,7 +262,6 @@ const tagOverlayGridStyles = css`
 	}
 	display: grid;
 	height: inherit;
-	border: 1px solid red;
 	width: 100%;
 	margin-left: 0;
 	grid-column-gap: 0px;
