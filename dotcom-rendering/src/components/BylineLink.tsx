@@ -101,6 +101,7 @@ const ContributorLink = ({
 	contributorTagId: string;
 }) => (
 	<a
+		key={contributorTagId}
 		rel="author"
 		data-link-name="auto tag link"
 		href={`https://www.theguardian.com/${contributorTagId}`}
@@ -141,7 +142,6 @@ const getRenderedTokens = (
 			<ContributorLink
 				contributor={bylineComponent.token}
 				contributorTagId={bylineComponent.tag.id}
-				key={bylineComponent.tag.id}
 			/>
 		);
 	});
