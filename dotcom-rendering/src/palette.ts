@@ -5558,22 +5558,7 @@ const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			switch (theme) {
-				case Pillar.News:
-				case ArticleSpecial.SpecialReportAlt:
-				case ArticleSpecial.Labs:
-					return sourcePalette.news[300];
-				case Pillar.Opinion:
-					return sourcePalette.opinion[300];
-				case Pillar.Sport:
-					return sourcePalette.sport[300];
-				case Pillar.Culture:
-					return sourcePalette.culture[300];
-				case Pillar.Lifestyle:
-					return sourcePalette.lifestyle[300];
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[700];
-			}
+			return 'transparent';
 		// Order matters. We want comment special report pieces to have the opinion background
 		case ArticleDesign.Letter:
 			return sourcePalette.opinion[800];
