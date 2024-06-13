@@ -59,6 +59,17 @@ const tagButtonStyles = css`
 	gap: ${space[2]}px;
 `;
 
+const desktopTabStyles = css`
+	${from.desktop} {
+		align-items: start;
+		gap: ${space[3]}px;
+		height: auto;
+		width: auto;
+		flex-direction: column;
+		margin-right: -1px;
+	}
+`;
+
 const arrowStyles = css`
 	display: inline-flex;
 	align-items: center;
@@ -114,7 +125,7 @@ export const TagLink = ({
 			</Hide>
 			<a
 				href={`${guardianBaseURL}/${sectionUrl}`}
-				css={tagLinkStyles}
+				css={[tagLinkStyles, isBlog && desktopTabStyles]}
 				data-component="big-event-series"
 				data-link-name="article series"
 			>
