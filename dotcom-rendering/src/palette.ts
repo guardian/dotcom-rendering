@@ -5554,6 +5554,74 @@ const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
 const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
+const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			switch (theme) {
+				case Pillar.News:
+				case ArticleSpecial.SpecialReportAlt:
+				case ArticleSpecial.Labs:
+					return sourcePalette.news[300];
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+					return sourcePalette.sport[300];
+				case Pillar.Culture:
+					return sourcePalette.culture[300];
+				case Pillar.Lifestyle:
+					return sourcePalette.lifestyle[300];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[700];
+			}
+		// Order matters. We want comment special report pieces to have the opinion background
+		case ArticleDesign.Letter:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Comment:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.opinion[800];
+			}
+		case ArticleDesign.Editorial:
+			return sourcePalette.opinion[800];
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				default:
+					return sourcePalette.news[800];
+			}
+		case ArticleDesign.Picture:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video: {
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[0];
+			}
+		}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[800];
+				case ArticleSpecial.Labs:
+					switch (display) {
+						case ArticleDisplay.Immersive:
+							return 'transparent';
+						default:
+							return sourcePalette.neutral[97];
+					}
+				default:
+					return 'transparent';
+			}
+	}
+};
+
 const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
 // ----- Palette ----- //
 
@@ -6607,6 +6675,10 @@ const paletteColours = {
 	'--tag-link-background': {
 		light: tagLinkBackground,
 		dark: tagLinkBackground,
+	},
+	'--tag-link-fill-background': {
+		light: tagLinkFillBackground,
+		dark: tagLinkFillBackground,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,
