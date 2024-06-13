@@ -515,20 +515,22 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				data-layout="LiveLayout"
 				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
-				<div css={tagOverlayGridStyles}>
-					<GridItem area="sticky-tag">
-						<div css={stickyTagStyles}>
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								inTagLinkTest={true}
-							/>
-						</div>
-					</GridItem>
-				</div>
+				{inTagLinkTest && (
+					<div css={tagOverlayGridStyles}>
+						<GridItem area="sticky-tag">
+							<div css={stickyTagStyles}>
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									inTagLinkTest={true}
+								/>
+							</div>
+						</GridItem>
+					</div>
+				)}
 
 				{isApps && (
 					<>
