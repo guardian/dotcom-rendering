@@ -255,6 +255,31 @@ const paddingBody = css`
 	}
 `;
 
+const tagOverlayGridStyles = css`
+	position: absolute;
+	${until.desktop} {
+		margin-left: 0px;
+	}
+	display: grid;
+	height: inherit;
+	border: 1px solid red;
+	width: 100%;
+	margin-left: 0;
+	grid-column-gap: 0px;
+	z-index: 999999;
+	${until.desktop} {
+		grid-template-columns: 100%; /* Main content */
+		grid-template-areas: 'sticky-tag';
+	}
+	${from.desktop} {
+		display: none;
+	}
+`;
+
+const stickyTagStyles = css`
+	position: sticky;
+	top: 0;
+`;
 interface BaseProps {
 	article: DCRArticle;
 	format: ArticleFormat;
@@ -467,9 +492,31 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 			<main
+				css={
+					inTagLinkTest &&
+					css`
+						position: relative;
+						height: 100%;
+					`
+				}
 				data-layout="LiveLayout"
 				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
+				<div css={tagOverlayGridStyles}>
+					<GridItem area="sticky-tag">
+						<div css={stickyTagStyles}>
+							<ArticleTitle
+								format={format}
+								tags={article.tags}
+								sectionLabel={article.sectionLabel}
+								sectionUrl={article.sectionUrl}
+								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={true}
+							/>
+						</div>
+					</GridItem>
+				</div>
+
 				{isApps && (
 					<>
 						<Island priority="critical">
