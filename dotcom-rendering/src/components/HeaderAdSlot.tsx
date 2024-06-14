@@ -21,9 +21,9 @@ const headerMinHeight =
 const headerAdWrapper = css`
 	z-index: 1080;
 	width: 100%;
-	background-color: ${palette('--ad-slot-background')};
+	background-color: ${palette('--ad-background')};
 	min-height: ${headerMinHeight}px;
-	border-bottom: ${borderBottomHeight}px solid ${palette('--ad-slot-border')};
+	border-bottom: ${borderBottomHeight}px solid ${palette('--ad-border')};
 
 	display: flex;
 	flex-direction: column;

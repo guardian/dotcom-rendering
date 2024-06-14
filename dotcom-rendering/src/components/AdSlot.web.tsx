@@ -73,9 +73,9 @@ const individualLabelCSS = css`
 	${textSans12};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
-	background-color: ${schemedPalette('--ad-slot-background')};
+	background-color: ${schemedPalette('--ad-background')};
 	padding: 0 8px;
-	border-top: 1px solid ${schemedPalette('--ad-slot-border')};
+	border-top: 1px solid ${schemedPalette('--ad-border')};
 	color: ${schemedPalette('--ad-labels-text')};
 	text-align: left;
 	box-sizing: border-box;
@@ -231,7 +231,7 @@ const merchandisingAdStyles = css`
 
 const inlineAdStyles = css`
 	position: relative;
-	background-color: ${schemedPalette('--article-inner-ad-slot-background')};
+	background-color: ${schemedPalette('--ad-background-article-inner')};
 
 	${until.tablet} {
 		display: none;
@@ -239,13 +239,13 @@ const inlineAdStyles = css`
 `;
 
 const rightAdStyles = css`
-	background-color: ${schemedPalette('--article-inner-ad-slot-background')};
+	background-color: ${schemedPalette('--ad-background-article-inner')};
 `;
 
 const liveblogInlineAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
-	background-color: ${schemedPalette('--article-inner-ad-slot-background')};
+	background-color: ${schemedPalette('--ad-background-article-inner')};
 
 	${until.tablet} {
 		display: none;
@@ -285,7 +285,7 @@ const frontsBannerAdTopContainerStyles = css`
 		display: flex;
 		justify-content: center;
 		min-height: ${frontsBannerMinHeightTablet}px;
-		background-color: ${schemedPalette('--ad-slot-background')};
+		background-color: ${schemedPalette('--ad-background')};
 	}
 	${from.desktop} {
 		min-height: ${frontsBannerMinHeight}px;

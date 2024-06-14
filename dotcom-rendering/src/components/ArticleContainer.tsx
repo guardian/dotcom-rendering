@@ -94,7 +94,7 @@ const adStyles = css`
 		justify-content: center;
 
 		${from.tablet} {
-			background-color: ${palette('--ad-slot-background')};
+			background-color: ${palette('--ad-background')};
 		}
 
 		/* Prevent merger with any nearby float left elements e.g. rich-links */
