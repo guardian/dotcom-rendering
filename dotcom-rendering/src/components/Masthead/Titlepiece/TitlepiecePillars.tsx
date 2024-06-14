@@ -9,25 +9,21 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import type { PillarLinkType } from '../model/extract-nav';
+import type { EditionId } from '../../../lib/edition';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import type { NavType } from '../../../model/extract-nav';
+import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
+import { pillarLeftMarginPx, pillarWidthsPx } from './titlepieceSharedStyles';
 
 type Props = {
-	pillars: PillarLinkType[];
+	nav: NavType;
+	editionId: EditionId;
 	dataLinkName: string;
 	selectedPillar?: Pillar;
 	isImmersive?: boolean;
 	showBurgerMenu?: boolean;
 	hasPageSkin?: boolean;
 };
-
-export const pillarWidthsPx = {
-	tablet: 108,
-	leftCol: 125,
-	wide: 136,
-};
-
-export const pillarLeftMarginPx = 6;
 
 const pillarsContainer = css`
 	display: flex;
@@ -202,8 +198,9 @@ const getPillarColour = (pillar: ArticleTheme): string | undefined => {
 	}
 };
 
-export const Pillars = ({
-	pillars,
+export const TitlepiecePillars = ({
+	nav,
+	editionId,
 	selectedPillar,
 	dataLinkName,
 	isImmersive = false,
@@ -216,45 +213,57 @@ export const Pillars = ({
 	console.log({ needsAdapting });
 
 	return (
-		<ul id="navigation" css={[pillarsContainer]}>
-			{pillars.map((p, i) => {
-				const isSelected = p.pillar === selectedPillar;
+		<>
+			<ul id="navigation" css={[pillarsContainer]}>
+				{nav.pillars.map((p, i) => {
+					const isSelected = p.pillar === selectedPillar;
 
-				const showDivider =
-					showBurgerMenu || isNotLastPillar(i, pillars.length);
+					const showDivider =
+						showBurgerMenu ||
+						isNotLastPillar(i, nav.pillars.length);
 
-				const pillarColour = getPillarColour(p.pillar);
+					const pillarColour = getPillarColour(p.pillar);
 
-				return (
-					<li
-						key={p.title}
-						css={[
-							pillarBlock,
-							showDivider && verticalDividerStyles,
-							i === 0 && firstPillarLinkOverrides,
-						]}
-					>
-						<a
-							href={p.url}
+					return (
+						<li
+							key={p.title}
 							css={[
-								pillarLink,
-								pillarUnderline,
-								isSelected && forceUnderline,
+								pillarBlock,
+								showDivider && verticalDividerStyles,
+								i === 0 && firstPillarLinkOverrides,
 							]}
-							style={{ '--pillar-underline': pillarColour }}
-							data-link-name={nestedOphanComponents(
-								dataLinkName,
-								'primary',
-								p.title,
-							)}
 						>
-							{p.title}
-						</a>
-					</li>
-				);
-			})}
-
-			{/** TODO - implement veggie burger menu */ showBurgerMenu && <></>}
-		</ul>
+							<a
+								href={p.url}
+								css={[
+									pillarLink,
+									pillarUnderline,
+									isSelected && forceUnderline,
+								]}
+								style={{ '--pillar-underline': pillarColour }}
+								data-link-name={nestedOphanComponents(
+									dataLinkName,
+									'primary',
+									p.title,
+								)}
+							>
+								{p.title}
+							</a>
+						</li>
+					);
+				})}
+				{
+					/** TODO - implement veggie burger menu */ showBurgerMenu && (
+						<></>
+					)
+				}
+			</ul>
+			<TitlepieceExpandedNav
+				nav={nav}
+				editionId={editionId}
+				isImmersive={isImmersive}
+				hasPageSkin={hasPageSkin}
+			/>
+		</>
 	);
 };
