@@ -15,7 +15,6 @@ import {
 	neutral,
 	remSpace,
 } from '@guardian/source/foundations';
-
 import { SvgQuote } from '@guardian/source/react-components';
 import { OptionKind } from '../../../../vendor/@guardian/types/index';
 import type { Item } from 'item';

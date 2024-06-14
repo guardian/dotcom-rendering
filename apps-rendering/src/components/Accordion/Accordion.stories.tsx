@@ -9,7 +9,6 @@ import {
 	neutral,
 	space,
 } from '@guardian/source/foundations';
-
 import { darkModeCss } from 'styles';
 import Accordion from '.';
 

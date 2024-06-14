@@ -6,7 +6,6 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
 import Paragraph from './';
 
 // ----- Stories ----- //
