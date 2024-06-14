@@ -155,7 +155,6 @@ export const SupportingContent = ({
 										showLine={true}
 										linkTo={subLink.url}
 										isDynamo={isDynamo}
-										isSublink={true}
 										showPulsingDot={
 											subLink.format.design ===
 											ArticleDesign.LiveBlog
