@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, isUndefined } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import {
 	from,
 	palette as sourcePalette,
@@ -8,7 +9,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -52,8 +52,8 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import {
-	hasRelevantTopics,
 	TopicFilterBank,
+	hasRelevantTopics,
 } from '../components/TopicFilterBank';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
