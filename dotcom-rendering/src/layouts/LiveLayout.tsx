@@ -7,8 +7,8 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { Hide } from '@guardian/source/react-components';
 import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -265,7 +265,7 @@ const tagOverlayGridStyles = css`
 	width: 100%;
 	margin-left: 0;
 	grid-column-gap: 0px;
-	z-index: 999999;
+	${getZIndex('tagLinkOverlay')}
 	${until.desktop} {
 		grid-template-columns: 100%; /* Main content */
 		grid-template-areas: 'sticky-tag';
