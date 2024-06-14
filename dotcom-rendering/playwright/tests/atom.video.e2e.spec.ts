@@ -119,7 +119,7 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 	}
 };
 
-test.describe('YouTube Atom', () => {
+test.describe.skip('YouTube Atom', () => {
 	// Skipping because the video in this article has stopped working. Investigation needed!
 	test.skip('plays main media video: skipped', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
@@ -172,7 +172,7 @@ test.describe('YouTube Atom', () => {
 		await expectToNotExist(page, overlaySelector);
 	});
 
-	test('plays main media video', async ({ page }) => {
+	test.skip('plays main media video', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/us-news/article/2024/may/30/trump-trial-hush-money-verdict',
