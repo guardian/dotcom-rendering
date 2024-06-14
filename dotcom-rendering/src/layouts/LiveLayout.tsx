@@ -7,8 +7,8 @@ import {
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
