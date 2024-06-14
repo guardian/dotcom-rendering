@@ -1305,7 +1305,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							showTopBorder={true}
 							showSideBorders={false}
 							backgroundColour={themePalette(
-								'--article-section-background',
+								'--ad-slot-background',
 							)}
 							shouldCenter={false}
 							element="aside"
@@ -1443,7 +1443,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							showTopBorder={false}
 							showSideBorders={false}
 							backgroundColour={themePalette(
-								'--article-section-background',
+								'--ad-slot-background',
 							)}
 							element="aside"
 						>

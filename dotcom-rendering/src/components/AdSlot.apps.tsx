@@ -20,7 +20,7 @@ const adHeightPx = 258;
 const styles = css`
 	clear: both;
 	margin: ${remSpace[4]} 0;
-	background: ${palette('--ad-background')};
+	background: ${palette('--ad-slot-background')};
 
 	${until.phablet} {
 		margin: 1em 0px;

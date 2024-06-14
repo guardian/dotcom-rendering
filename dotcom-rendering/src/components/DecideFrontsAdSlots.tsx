@@ -1,4 +1,3 @@
-import { palette } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import type { ReactNode } from 'react';
 import { getMerchHighPosition } from '../lib/getFrontsAdPositions';

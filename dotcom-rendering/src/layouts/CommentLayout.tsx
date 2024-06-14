@@ -835,9 +835,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={themePalette('--ad-slot-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -957,9 +955,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={themePalette('--ad-slot-background')}
 						element="aside"
 					>
 						<AdSlot
