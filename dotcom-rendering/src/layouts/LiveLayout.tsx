@@ -265,7 +265,7 @@ const tagOverlayGridStyles = css`
 	width: 100%;
 	margin-left: 0;
 	grid-column-gap: 0px;
-	z-index: 999999;
+	${getZIndex('tagLinkOverlay')}
 	${until.desktop} {
 		grid-template-columns: 100%; /* Main content */
 		grid-template-areas: 'sticky-tag';
