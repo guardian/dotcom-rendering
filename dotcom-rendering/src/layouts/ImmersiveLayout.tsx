@@ -835,9 +835,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={themePalette('--ad-slot-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -958,9 +956,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={themePalette('--ad-slot-background')}
 						element="aside"
 					>
 						<AdSlot

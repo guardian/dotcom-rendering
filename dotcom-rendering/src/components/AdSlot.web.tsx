@@ -232,15 +232,22 @@ const merchandisingAdStyles = css`
 
 const inlineAdStyles = css`
 	position: relative;
+	background-color: ${schemedPalette('--article-inner-ad-slot-background')};
 
 	${until.tablet} {
 		display: none;
 	}
 `;
 
+const rightAdStyles = css`
+	background-color: ${schemedPalette('--article-inner-ad-slot-background')};
+`;
+
 const liveblogInlineAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
+	background-color: ${schemedPalette('--article-inner-ad-slot-background')};
+
 	${until.tablet} {
 		display: none;
 	}
@@ -468,9 +475,6 @@ const mobileStickyAdStylesFullWidth = css`
 `;
 
 export const adContainerStyles = [
-	css`
-		background-color: ${schemedPalette('--ad-slot-background')};
-	`,
 	adContainerCollapseStyles,
 	labelStyles,
 	adContainerCentreSlotStyles,
@@ -498,6 +502,7 @@ export const AdSlot = ({
 						>
 							<div
 								id="dfp-ad--right"
+								css={rightAdStyles}
 								className={[
 									'js-ad-slot',
 									'ad-slot',
@@ -554,6 +559,7 @@ export const AdSlot = ({
 										'js-sticky-mpu',
 									].join(' ')}
 									css={[
+										rightAdStyles,
 										css`
 											position: sticky;
 											/* Possibly account for the sticky Labs header and 6px of padding */

@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial';
-import { space } from '@guardian/source-foundations';
+import { space } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { adContainerStyles, AdSlot } from './AdSlot.web';

@@ -998,9 +998,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={themePalette('--ad-slot-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -1125,9 +1123,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={themePalette('--ad-slot-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -1214,9 +1210,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={themePalette('--ad-slot-background')}
 						borderColour={themePalette('--article-border')}
 						padSides={false}
 						showSideBorders={false}

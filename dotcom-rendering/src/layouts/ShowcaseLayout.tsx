@@ -850,7 +850,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-slot-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -970,7 +970,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-slot-background')}
 						element="aside"
 					>
 						<AdSlot
