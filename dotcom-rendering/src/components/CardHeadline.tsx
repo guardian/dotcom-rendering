@@ -13,13 +13,9 @@ import {
 	headlineMedium50,
 	space,
 	textSans12,
-	textSans14,
 	textSans15,
 	textSans17,
 	textSans20,
-	textSans24,
-	textSans28,
-	textSans34,
 	until,
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
@@ -44,18 +40,11 @@ type Props = {
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
-	isSublink?: boolean;
 	isExternalLink?: boolean;
 	isOnwardContent?: boolean;
 };
 
-const fontStyles = ({
-	size,
-	isSublink,
-}: {
-	size: SmallHeadlineSize;
-	isSublink?: boolean;
-}) => {
+const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
 		case 'ginormous':
 			return css`
@@ -65,39 +54,33 @@ const fontStyles = ({
 			`;
 		case 'huge':
 			return css`
-				${isSublink ? textSans28 : headlineMedium28}
+				${headlineMedium28}
 			`;
 		case 'large':
 			return css`
-				${isSublink ? textSans24 : headlineMedium24}
+				${headlineMedium24}
 			`;
 		case 'medium':
 			return css`
-				${isSublink ? textSans20 : headlineMedium20}
+				${headlineMedium20}
 			`;
 		case 'small':
 			return css`
-				${isSublink ? textSans17 : headlineMedium17}
+				${headlineMedium17}
 			`;
 		case 'tiny':
 			return css`
-				${isSublink ? textSans14 : headlineMedium14}
+				${headlineMedium14}
 			`;
 	}
 };
 
-const fontStylesOnMobile = ({
-	size,
-	isSublink,
-}: {
-	size: SmallHeadlineSize;
-	isSublink?: boolean;
-}) => {
+const fontStylesOnMobile = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					${isSublink ? textSans34 : headlineMedium34}
+					${headlineMedium34}
 				}
 				${between.mobileLandscape.and.desktop} {
 					${headlineMedium42}
@@ -106,19 +89,19 @@ const fontStylesOnMobile = ({
 		case 'huge':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans24 : headlineMedium24}
+					${headlineMedium24}
 				}
 			`;
 		case 'large':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans20 : headlineMedium20}
+					${headlineMedium20}
 				}
 			`;
 		case 'medium':
 			return css`
 				${until.desktop} {
-					${isSublink ? textSans17 : headlineMedium17}
+					${headlineMedium17}
 				}
 			`;
 		default:
@@ -257,7 +240,6 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 	isDynamo,
-	isSublink,
 	isExternalLink,
 	isOnwardContent = false,
 }: Props) => {
@@ -271,11 +253,10 @@ export const CardHeadline = ({
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
-						: fontStyles({ size, isSublink }),
+						: fontStyles({ size }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
-							isSublink,
 						}),
 					showLine && !isDynamo && lineStyles,
 				]}
