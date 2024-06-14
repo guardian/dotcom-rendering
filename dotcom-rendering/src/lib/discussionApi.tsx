@@ -148,7 +148,7 @@ export const preview = async (
 		joinUrl(options.baseUrl, 'comment/preview') +
 		objAsParams(defaultParams);
 	const data = new URLSearchParams();
-	data.append('body', body);
+	data.append('body', encodeURIComponent(body));
 
 	const jsonResult = await fetchJSON(url, {
 		method: 'POST',
@@ -180,7 +180,7 @@ export const comment =
 			joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
 			objAsParams(defaultParams);
 		const data = new URLSearchParams();
-		data.append('body', body);
+		data.append('body', encodeURIComponent(body));
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
@@ -217,7 +217,7 @@ export const reply =
 				'reply',
 			) + objAsParams(defaultParams);
 		const data = new URLSearchParams();
-		data.append('body', body);
+		data.append('body', encodeURIComponent(body));
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 		const jsonResult = await fetchJSON(url, {
