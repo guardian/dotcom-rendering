@@ -19,7 +19,6 @@ import {
 import { Link } from '@guardian/source/react-components';
 import Accordion from 'components/Accordion';
 import { background, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

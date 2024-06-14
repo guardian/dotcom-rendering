@@ -6,7 +6,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, remSpace } from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import { background, border, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';
 

@@ -9,7 +9,6 @@ import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { ResizedRelatedContent } from 'item';
 import { background } from 'palette';
-
 import { darkModeCss } from 'styles';
 import DefaultRelatedContent, {
 	defaultStyles,

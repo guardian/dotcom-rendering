@@ -8,7 +8,6 @@ import { grid } from 'grid/grid';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { border } from 'palette';
-
 import { defaultStyles, DefaultTags } from './Tags.defaults';
 
 // ----- Component ----- //

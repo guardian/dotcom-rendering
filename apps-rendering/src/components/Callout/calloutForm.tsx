@@ -6,7 +6,6 @@ import {
 	SvgTickRound,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
-
 import { ContactText, Disclaimer } from './calloutComponents';
 import { FormField } from './formFields';
 import {

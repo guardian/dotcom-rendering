@@ -5,7 +5,6 @@ import { remSpace, text, textSans14 } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Generic, TikTok } from 'embed';
 import { maybeRender } from 'lib';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

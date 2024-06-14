@@ -21,7 +21,6 @@ import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import { background, fill } from 'palette';
-
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 

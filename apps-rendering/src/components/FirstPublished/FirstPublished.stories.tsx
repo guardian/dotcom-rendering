@@ -2,7 +2,6 @@
 
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import FirstPublished from '.';
 
 // ----- Stories ----- //

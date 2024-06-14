@@ -3,7 +3,6 @@
 import Footer from 'components/Footer';
 import type { Interactive } from 'item';
 import { getFormat } from 'item';
-
 import { renderWithoutStyles } from 'renderer';
 
 // ----- Component ----- //

@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import { textSansBold20 } from '@guardian/source/foundations';
-
 import type { DefaultProps } from './HeadingTwo.defaults';
 import DefaultHeadingTwo, { defaultStyles } from './HeadingTwo.defaults';
 

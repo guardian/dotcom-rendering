@@ -10,7 +10,6 @@ import {
 	textSansBold17,
 } from '@guardian/source/foundations';
 import { MatchStatusKind, TeamLocation } from 'football';
-
 import { tabletContentWidth, wideContentWidth } from '../styles';
 import { TeamScore } from '../teamScore';
 

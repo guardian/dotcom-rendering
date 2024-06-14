@@ -23,7 +23,6 @@ import { getFormat } from 'item';
 import { index } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import { text } from 'palette';
-
 import Series from '../series';
 import {
 	articleWidthStyles,

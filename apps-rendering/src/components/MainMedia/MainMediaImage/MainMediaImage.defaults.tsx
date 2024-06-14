@@ -8,7 +8,6 @@ import Img from 'components/ImgAlt';
 import MainMediaCaption from 'components/MainMediaCaption';
 import type { Image } from 'image';
 import type { Sizes } from 'image/sizes';
-
 import { wideContentWidth } from 'styles';
 
 // ----- Setup ----- //

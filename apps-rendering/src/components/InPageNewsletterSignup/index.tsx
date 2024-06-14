@@ -6,7 +6,6 @@ import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter'
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source/foundations';
 import { background, border, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import PrivacyWording from '../NewsletterSignup/PrivacyWording';

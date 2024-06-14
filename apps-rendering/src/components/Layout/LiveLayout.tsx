@@ -28,7 +28,6 @@ import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { background } from 'palette';
-
 import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 
 // ----- Component ----- //

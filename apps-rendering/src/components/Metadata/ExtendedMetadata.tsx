@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source/foundations';
 import type { Item } from 'item';
-
 import DefaultMetadata, { defaultStyles } from './Metadata.defaults';
 
 const wrapperStyles = css`

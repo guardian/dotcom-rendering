@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ElementKind } from 'bodyElementKind';
-
 import NewsletterSignup from '.';
 
 // ----- Stories ----- //

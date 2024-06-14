@@ -8,7 +8,6 @@ import {
 } from '@guardian/libs';
 import { parse } from 'client/parser';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
-
 import Byline from './';
 
 // ----- Setup ----- //

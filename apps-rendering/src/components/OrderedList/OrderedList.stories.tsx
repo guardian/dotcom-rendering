@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import ListItem from 'components/ListItem';
-
 import OrderedList from './';
 
 // ----- Setup ----- //

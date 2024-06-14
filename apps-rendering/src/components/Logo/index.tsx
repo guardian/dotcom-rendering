@@ -8,7 +8,6 @@ import { getFormat } from 'item';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import { text } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 interface Props {

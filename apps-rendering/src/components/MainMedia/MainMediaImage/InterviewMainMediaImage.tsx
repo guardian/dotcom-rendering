@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source/foundations';
 import type { Image } from 'image';
-
 import { wideContentWidth } from 'styles';
 import DefaultMainMediaImage, {
 	defaultImgCss,

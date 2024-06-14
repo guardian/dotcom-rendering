@@ -24,7 +24,6 @@ import { getFormat } from 'item';
 import type { NewsletterSignup } from 'item';
 import { maybeRender } from 'lib';
 import { background } from 'palette';
-
 import { darkModeCss, onwardStyles } from 'styles';
 import InPageNewsletterSignup from '../InPageNewsletterSignup';
 

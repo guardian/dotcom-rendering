@@ -20,7 +20,6 @@ import { maybeRender } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import { Optional } from 'optional';
 import { background, fill } from 'palette';
-
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
 import Video from '../video';

@@ -21,7 +21,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Analysis } from 'item';
 import { background } from 'palette';
-
 import {
 	articleWidthStyles,
 	darkModeCss,

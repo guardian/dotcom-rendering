@@ -9,7 +9,6 @@ import {
 	remSpace,
 } from '@guardian/source/foundations';
 import { background, text } from 'palette';
-
 import { articleWidthStyles, darkModeCss } from '../../styles';
 
 const designTagWrapper = css`

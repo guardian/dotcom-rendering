@@ -10,7 +10,6 @@ import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
 import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
-
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import LetterLayout from './LetterLayout';

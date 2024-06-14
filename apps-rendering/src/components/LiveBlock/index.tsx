@@ -5,7 +5,6 @@ import { LastUpdated } from 'components/LastUpdated';
 import LiveBlockContainer from 'components/LiveBlockContainer';
 import { datetimeFormat } from 'datetime';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
-
 import { renderElements } from 'renderer';
 
 // ----- Component ----- //

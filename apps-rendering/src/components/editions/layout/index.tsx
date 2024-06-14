@@ -13,7 +13,6 @@ import {
 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { hasCartoon, isPicture } from 'item';
-
 import { renderEditionsElements } from 'renderer';
 import Header from '../header';
 import {

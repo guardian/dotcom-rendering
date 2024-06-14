@@ -22,7 +22,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { pipe } from 'lib';
-
 import {
 	articleWidthStyles,
 	darkModeCss,

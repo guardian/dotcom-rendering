@@ -8,7 +8,6 @@ import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { Image } from 'image';
 import type { Sizes } from 'image/sizes';
-
 import { immersiveCaptionId as captionId } from '../MainMedia.defaults';
 
 // ----- Component ----- //

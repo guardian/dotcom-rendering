@@ -3,7 +3,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { none } from '../../../vendor/@guardian/types/index';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
-
 import Follow from './';
 
 // ----- Stories ----- //

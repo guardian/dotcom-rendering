@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import { neutral, remSpace } from '@guardian/source/foundations';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

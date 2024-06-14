@@ -16,7 +16,6 @@ import {
 import { SvgNewsletter } from '@guardian/source/react-components';
 import type { NewsletterSignUp } from 'bodyElement';
 import { background, border, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import InlineSkipToWrapper from '../InlineSkipToWrapper';

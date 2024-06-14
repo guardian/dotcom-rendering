@@ -12,7 +12,6 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import { background, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

@@ -5,7 +5,6 @@ import type { ArticleFormat, Pillar } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import { pinnedBlock } from 'fixtures/item';
-
 import PinnedPost from './';
 
 // ----- Functions ----- //

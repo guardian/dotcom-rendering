@@ -11,7 +11,6 @@ import {
 import { SvgPinned } from '@guardian/source/react-components';
 import { timestampFormat } from 'datetime';
 import { border } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 type Props = {

@@ -2,7 +2,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-
 import { borderWidthStyles } from './styles';
 
 // ----- Component ----- //

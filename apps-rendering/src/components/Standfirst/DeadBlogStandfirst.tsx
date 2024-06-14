@@ -9,7 +9,6 @@ import {
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { border, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 

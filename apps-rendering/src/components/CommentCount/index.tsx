@@ -9,7 +9,6 @@ import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { border, fill, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

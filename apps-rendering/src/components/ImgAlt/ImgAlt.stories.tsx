@@ -3,7 +3,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { none } from '../../../vendor/@guardian/types/index';
 import { image } from 'fixtures/image';
-
 import Img from '.';
 
 // ----- Setup ----- //

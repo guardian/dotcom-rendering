@@ -12,7 +12,6 @@ import { grid } from 'grid/grid';
 import type { ResizedRelatedContent } from 'item';
 import { maybeRender } from 'lib';
 import { background, border } from 'palette';
-
 import { darkModeCss } from 'styles';
 import {
 	COMMENT,

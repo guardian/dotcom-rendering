@@ -7,7 +7,6 @@ import { neutral, pxToRem, textSans12 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { makeRelativeDate } from 'date';
 import { maybeRender } from 'lib';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

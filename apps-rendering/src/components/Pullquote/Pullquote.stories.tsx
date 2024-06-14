@@ -1,6 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '../../../vendor/@guardian/types/index';
-
 import Pullquote from './';
 
 const standard = {

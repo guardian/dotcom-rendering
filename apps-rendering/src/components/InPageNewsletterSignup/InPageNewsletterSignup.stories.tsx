@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import InPageNewsletterSignup from '.';
 
 // ---- Constants ---- //

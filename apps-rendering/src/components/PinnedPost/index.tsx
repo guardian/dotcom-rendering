@@ -22,7 +22,6 @@ import {
 import LiveBlock from 'components/LiveBlock';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import { background, border } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 const pinnedPostContainerStyles = (

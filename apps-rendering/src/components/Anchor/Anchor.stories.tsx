@@ -2,7 +2,6 @@
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
-
 import Anchor from './';
 
 // ----- Setup ----- //

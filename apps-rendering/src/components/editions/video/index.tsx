@@ -7,7 +7,6 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import { SvgOfflineCloud } from '@guardian/source/react-components';
-
 import { useOnlineStatus } from '../utils/useOnlineStatus';
 
 // ----- Styles ----- //

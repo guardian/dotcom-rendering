@@ -16,7 +16,6 @@ import {
 import setup from 'client/setup';
 import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
-
 import { compare } from 'compare-versions';
 import {
 	FollowNotificationStatus,

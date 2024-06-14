@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { article } from 'fixtures/item';
-
 import Footer from './';
 
 // ----- Stories ----- //

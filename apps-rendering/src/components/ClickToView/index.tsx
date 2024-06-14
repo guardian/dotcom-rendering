@@ -14,7 +14,6 @@ import { Button, SvgCheckmark } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind, withDefault } from '../../../vendor/@guardian/types/index';
 import { fold } from 'lib';
-
 import React, { useState } from 'react';
 import { darkModeCss } from 'styles';
 

@@ -6,7 +6,6 @@ import MainMediaImage from 'components/MainMedia/MainMediaImage';
 import MainMediaVideo from 'components/MainMedia/MainMediaVideo';
 import { maybeRender } from 'lib';
 import { MainMedia, MainMediaKind } from 'mainMedia';
-
 import GalleryCaption from './GalleryCaption';
 import ImmersiveCaption from './ImmersiveCaption';
 

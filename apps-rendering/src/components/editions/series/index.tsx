@@ -13,7 +13,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { text } from 'palette';
-
 import { kickerPicker } from '../kickerPicker';
 
 // ----- Component ----- //

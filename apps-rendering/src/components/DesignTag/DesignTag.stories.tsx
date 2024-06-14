@@ -2,7 +2,6 @@
 
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
-
 import DesignTag from './';
 
 // ----- Stories ----- //

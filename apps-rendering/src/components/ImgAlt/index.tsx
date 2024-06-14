@@ -14,7 +14,6 @@ import { getCaption, getClassName, getCredit } from 'image/lightbox';
 import { sizesAttribute, styles as sizeStyles } from 'image/sizes';
 import type { Sizes } from 'image/sizes';
 import type { Optional } from 'optional';
-
 import { darkModeCss } from 'styles';
 
 // ----- Functions ----- //

@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import CaptionIcon, { CaptionIconVariant } from '.';
 
 // ----- Stories ----- //

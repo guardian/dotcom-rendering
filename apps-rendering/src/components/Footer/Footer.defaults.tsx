@@ -12,7 +12,6 @@ import {
 } from '@guardian/source/foundations';
 import FooterContent from 'components/FooterContent';
 import { background } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

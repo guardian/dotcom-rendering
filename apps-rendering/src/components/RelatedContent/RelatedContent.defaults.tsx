@@ -16,7 +16,6 @@ import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import type { ResizedRelatedContent } from 'item';
 import { pipe } from 'lib';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

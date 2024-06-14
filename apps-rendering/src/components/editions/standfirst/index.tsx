@@ -16,7 +16,6 @@ import {
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import { text as textPalette } from 'palette';
-
 import { renderStandfirstText } from 'renderer';
 import ShareIcon from '../shareIcon';
 import { articleWidthStyles, sidePadding } from '../styles';

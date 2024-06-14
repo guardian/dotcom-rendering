@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source/foundations';
-
 import RichLink, { richLinkWidth } from './';
 
 const overrideStyle = css`

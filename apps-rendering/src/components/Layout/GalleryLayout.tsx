@@ -17,7 +17,6 @@ import { grid } from 'grid/grid';
 import type { Gallery } from 'item';
 import { getFormat } from 'item';
 import { background, border } from 'palette';
-
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 

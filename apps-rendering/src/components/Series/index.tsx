@@ -15,7 +15,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { background, text } from 'palette';
-
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import GallerySeries from './GallerySeries';
 import ImmersiveSeries from './ImmersiveSeries';

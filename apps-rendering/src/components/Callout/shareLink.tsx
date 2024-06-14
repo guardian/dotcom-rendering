@@ -4,7 +4,6 @@ import {
 	SvgTickRound,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
-
 import {
 	calloutShare,
 	calloutSharelink,

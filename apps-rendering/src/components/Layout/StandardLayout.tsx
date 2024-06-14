@@ -46,7 +46,6 @@ import type {
 import { maybeRender } from 'lib';
 import { Optional } from 'optional';
 import { background } from 'palette';
-
 import {
 	articleWidthStyles,
 	darkModeCss,

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { from, neutral, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-
 import { darkModeCss } from 'styles';
 
 const linesStyles = css`

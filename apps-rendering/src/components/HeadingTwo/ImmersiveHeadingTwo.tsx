@@ -5,7 +5,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { headlineLight34 } from '@guardian/source/foundations';
 import { text } from 'palette';
-
 import { darkModeCss } from 'styles';
 import type { DefaultProps } from './HeadingTwo.defaults';
 import DefaultHeadingTwo from './HeadingTwo.defaults';

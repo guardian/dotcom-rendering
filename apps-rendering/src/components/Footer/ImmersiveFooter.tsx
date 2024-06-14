@@ -7,7 +7,6 @@ import { from } from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import { background } from 'palette';
-
 import { darkModeCss } from 'styles';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';
 

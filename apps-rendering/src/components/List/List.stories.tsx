@@ -2,7 +2,6 @@
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import ListItem from 'components/ListItem';
-
 import List from './';
 
 // ----- Setup ----- //

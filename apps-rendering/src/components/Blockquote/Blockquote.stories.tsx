@@ -1,6 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import Paragraph from 'components/Paragraph';
-
 import Blockquote from './';
 
 const standard = {

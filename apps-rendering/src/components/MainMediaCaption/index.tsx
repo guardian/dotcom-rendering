@@ -2,7 +2,6 @@
 
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '../../../vendor/@guardian/types/index';
-
 import DefaultMainMediaCaption, {
 	defaultStyles,
 } from './MainMediaCaption.defaults';

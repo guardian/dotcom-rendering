@@ -2,7 +2,6 @@
 import { some } from '../../../vendor/@guardian/types/index';
 import { article } from 'fixtures/item';
 import { live } from 'fixtures/live';
-
 import Logo from './';
 
 const branding = some({

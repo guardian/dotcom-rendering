@@ -13,7 +13,6 @@ import { grid } from 'grid/grid';
 import type { Image } from 'image/image';
 import type { Sizes } from 'image/sizes';
 import { border, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 import { getDefaultImgStyles } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';

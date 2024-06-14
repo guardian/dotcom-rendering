@@ -14,7 +14,6 @@ import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';
 import { background, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

@@ -22,7 +22,6 @@ import {
 	userFeedbackThemeDefault,
 } from '@guardian/source/react-components';
 import { background, fill, hover, text } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

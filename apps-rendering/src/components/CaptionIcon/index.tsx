@@ -4,7 +4,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source/foundations';
 import { SvgCamera, SvgVideo } from '@guardian/source/react-components';
 import { fill } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 enum CaptionIconVariant {

@@ -3,7 +3,6 @@ import { ArticleDesign } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { none } from '../../../vendor/@guardian/types/index';
-
 import type { BodyImageProps } from './BodyImage.defaults';
 import DefaultBodyImage, {
 	getDefaultImgStyles,

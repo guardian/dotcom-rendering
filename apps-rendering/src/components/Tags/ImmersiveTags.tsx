@@ -5,7 +5,6 @@ import { from } from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-
 import { defaultStyles, DefaultTags } from './Tags.defaults';
 
 // ----- Component ----- //

@@ -21,7 +21,6 @@ import { getFormat } from 'item';
 import type { Item } from 'item';
 import { background } from 'palette';
 import { useState } from 'react';
-
 import { darkModeCss } from 'styles';
 import { defaultStyles } from './Metadata.defaults';
 

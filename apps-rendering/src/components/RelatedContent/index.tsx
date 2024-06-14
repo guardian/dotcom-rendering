@@ -3,7 +3,6 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-
 import GalleryRelatedContent from './GalleryRelatedContent';
 import ImmersiveRelatedContent from './ImmersiveRelatedContent';
 import DefaultRelatedContent, {

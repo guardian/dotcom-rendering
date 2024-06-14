@@ -13,7 +13,6 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import { text } from 'palette';
-
 import { darkModeCss } from 'styles';
 import { immersiveCaptionId } from './MainMedia.defaults';
 

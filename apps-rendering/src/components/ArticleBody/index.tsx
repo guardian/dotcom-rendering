@@ -4,7 +4,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { palette, remSpace } from '@guardian/source/foundations';
 import type { BodyElement } from 'bodyElement';
 import { background } from 'palette';
-
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 

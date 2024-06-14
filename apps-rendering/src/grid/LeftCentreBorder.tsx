@@ -3,7 +3,6 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { from, neutral } from '@guardian/source/foundations';
-
 import { darkModeCss } from 'styles';
 import { grid } from './grid';
 

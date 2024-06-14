@@ -27,7 +27,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial } from 'item';
 import { background } from 'palette';
-
 import {
 	articleWidthStyles,
 	darkModeCss,

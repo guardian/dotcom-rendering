@@ -2,7 +2,6 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-
 import ExtendedMetadata from './ExtendedMetadata';
 import GalleryMetadata from './GalleryMetadata';
 import ImmersiveMetadata from './ImmersiveMetadata';

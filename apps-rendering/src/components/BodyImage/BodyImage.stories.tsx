@@ -9,7 +9,6 @@ import {
 import { none } from '../../../vendor/@guardian/types/index';
 import { image } from 'fixtures/image';
 import { Optional } from 'optional';
-
 import BodyImage from '.';
 
 // ----- Setup ----- //

@@ -7,7 +7,6 @@ import {
 	textSans17,
 } from '@guardian/source/foundations';
 import type { Logo as LogoImage } from 'capi';
-
 import { darkModeCss } from 'styles';
 
 interface Props {

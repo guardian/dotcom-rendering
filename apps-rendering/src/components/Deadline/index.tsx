@@ -1,6 +1,5 @@
 import { SvgClock } from '@guardian/source/react-components';
 import { isValidDate } from 'date';
-
 import React from 'react';
 import { highlight } from './styles';
 

@@ -3,7 +3,6 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '../../../vendor/@guardian/types/index';
-
 import Dateline from './';
 
 // ----- Stories ----- //

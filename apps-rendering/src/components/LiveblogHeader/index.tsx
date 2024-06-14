@@ -18,7 +18,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import { background } from 'palette';
-
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

@@ -2,7 +2,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { parse } from 'client/parser';
-
 import HeadlineByline from './';
 
 // ----- Setup ----- //

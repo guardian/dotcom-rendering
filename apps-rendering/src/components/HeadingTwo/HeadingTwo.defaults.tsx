@@ -9,7 +9,6 @@ import Anchor from 'components/Anchor';
 import HorizontalRule from 'components/HorizontalRule';
 import type { Styleable } from 'lib';
 import { identity } from 'lib';
-
 import { getHref } from 'renderer';
 
 // ----- Components ----- //

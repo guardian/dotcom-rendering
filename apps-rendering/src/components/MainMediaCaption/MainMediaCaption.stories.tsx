@@ -3,7 +3,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '../../../vendor/@guardian/types/index';
 import { parseHtml } from 'fixtures/item';
-
 import MainMediaCaption from '.';
 
 // ----- Stories ----- //

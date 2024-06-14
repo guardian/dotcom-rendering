@@ -6,7 +6,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { background, border, text } from 'palette';
-
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
 

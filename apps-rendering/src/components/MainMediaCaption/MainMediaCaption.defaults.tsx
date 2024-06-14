@@ -14,7 +14,6 @@ import { SvgCamera } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Styleable } from 'lib';
-
 import { darkModeCss } from 'styles';
 import Caption from './Caption';
 
