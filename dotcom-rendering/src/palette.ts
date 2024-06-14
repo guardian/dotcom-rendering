@@ -1788,11 +1788,11 @@ const tableOfContentsBorderDark: PaletteFunction = () =>
 const adLabelsTextLight: PaletteFunction = () => sourcePalette.neutral[46];
 const adLabelsTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
-const adSlotBackgroundLight: PaletteFunction = () => sourcePalette.neutral[97];
+const adBackgroundLight: PaletteFunction = () => sourcePalette.neutral[97];
 
-const adSlotBackgroundDark: PaletteFunction = () => sourcePalette.neutral[7];
+const adBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
 
-const articleInnerAdSlotBackgroundLight: PaletteFunction = ({ design }) => {
+const articleInnerAdBackgroundLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[93];
@@ -1800,7 +1800,7 @@ const articleInnerAdSlotBackgroundLight: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[97];
 	}
 };
-const articleInnerAdSlotBackgroundDark: PaletteFunction = ({ design }) => {
+const articleInnerAdBackgroundDark: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return sourcePalette.neutral[7];
@@ -1809,9 +1809,9 @@ const articleInnerAdSlotBackgroundDark: PaletteFunction = ({ design }) => {
 	}
 };
 
-const adSlotBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+const adBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 
-const adSlotBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
+const adBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
 
 const adSupportBannerBackgroundLight: PaletteFunction = () => {
 	return sourcePalette.neutral[93];
@@ -5628,17 +5628,17 @@ const paletteColours = {
 		light: accordionTitleRowFillLight,
 		dark: accordionTitleRowFillDark,
 	},
-	'--ad-slot-border': {
-		light: adSlotBorderLight,
-		dark: adSlotBorderDark,
+	'--ad-background': {
+		light: adBackgroundLight,
+		dark: adBackgroundDark,
 	},
-	'--ad-slot-background': {
-		light: adSlotBackgroundLight,
-		dark: adSlotBackgroundDark,
+	'--ad-background-article-inner': {
+		light: articleInnerAdBackgroundLight,
+		dark: articleInnerAdBackgroundDark,
 	},
-	'--article-inner-ad-slot-background': {
-		light: articleInnerAdSlotBackgroundLight,
-		dark: articleInnerAdSlotBackgroundDark,
+	'--ad-border': {
+		light: adBorderLight,
+		dark: adBorderDark,
 	},
 	'--ad-labels-text': {
 		light: adLabelsTextLight,
