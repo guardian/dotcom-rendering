@@ -12,11 +12,27 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const ThemeVariations = {
+export const Default = {
 	args: {
 		sectionLabel: 'Euro 24',
 		sectionUrl: 'football/euro-24',
 		guardianBaseURL: 'https://www.theguardian.com',
+		isMatch: false,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
+	},
+	decorators: [centreColumnDecorator],
+} satisfies Story;
+
+export const MatchLiveBlog = {
+	args: {
+		sectionLabel: 'Euro 24',
+		sectionUrl: 'football/euro-24',
+		guardianBaseURL: 'https://www.theguardian.com',
+		isMatch: true,
 		format: {
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
