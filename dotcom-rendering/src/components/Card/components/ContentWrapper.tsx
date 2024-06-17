@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, space, until } from '@guardian/source/foundations';
+import { between, from, space } from '@guardian/source/foundations';
 import { decideCardContentPadding } from '../../../lib/decideCardContentPadding';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
@@ -63,21 +63,11 @@ const flexBasisStyles = ({
 
 const negativeTopMargin = css`
 	/**
-	 * This ensures the top of the text is flush
-	 * with the image for a horizontal card
-	 */
-	margin-top: calc(1px - ${space[1]}px);
-`;
-const negativeTopMarginDesktop = css`
-	${from.tablet} {
-		${negativeTopMargin}
-	}
-`;
-
-const negativeTopMarginMobile = css`
-	${until.tablet} {
-		${negativeTopMargin}
-	}
+	* This reduces excess space above the card content, due to the line
+	* height of the text. It also ensures the top of the content aligns with
+	* with the top of the card image when the image is on the left or right.
+	*/
+	margin-top: -${space[1]}px;
 `;
 
 type Props = {
@@ -87,6 +77,7 @@ type Props = {
 	imagePositionOnMobile: ImagePositionType;
 	imagePositionOnDesktop: ImagePositionType;
 	addAdditionalPadding?: boolean;
+	isOnwardContent?: boolean;
 };
 
 export const ContentWrapper = ({
@@ -96,11 +87,10 @@ export const ContentWrapper = ({
 	imagePositionOnMobile,
 	imagePositionOnDesktop,
 	addAdditionalPadding,
+	isOnwardContent,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
-	const isHorizontalOnMobile =
-		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
 
 	const { mobilePadding, desktopPadding } = decideCardContentPadding({
 		imagePositionOnMobile,
@@ -114,9 +104,8 @@ export const ContentWrapper = ({
 				sizingStyles,
 				isHorizontalOnDesktop && [
 					flexBasisStyles({ imageSize, imageType }),
-					negativeTopMarginDesktop,
 				],
-				isHorizontalOnMobile && negativeTopMarginMobile,
+				!isOnwardContent && negativeTopMargin,
 				css`
 					padding: ${mobilePadding};
 					${from.tablet} {
