@@ -65,6 +65,9 @@ const indices = [
 	// Overlay for sticky tag link
 	'tagLinkOverlay',
 
+	// Match stats header
+	'matchStats',
+
 	// Article headline (should be above main media)
 	'articleHeadline',
 	'immersiveBlackBox',

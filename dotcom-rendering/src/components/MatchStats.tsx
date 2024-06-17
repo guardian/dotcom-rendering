@@ -16,7 +16,7 @@ import { GoalAttempts } from './GoalAttempts';
 import { GridItem } from './GridItem';
 import { Hide } from './Hide';
 import { Lineup } from './Lineup';
-
+import { getZIndex } from '../lib/getZIndex';
 type Props = {
 	home: TeamType;
 	away: TeamType;
@@ -190,7 +190,7 @@ const StretchBackground = ({
 					background-color: ${themePalette(
 						'--match-stats-background',
 					)};
-					z-index: -1;
+					${getZIndex('matchStats')}
 				}
 			}
 		`}
