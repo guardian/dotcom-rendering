@@ -290,6 +290,13 @@ const tagOverlayGridStyles = css`
 	}
 `;
 
+const matchGrid = css`
+	${from.desktop && until.leftCol} {
+		grid-template-columns: 1fr 940px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+`;
+
 const stickyTagStyles = css`
 	position: sticky;
 	top: 0;
@@ -519,7 +526,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
 				{inTagLinkTest && (
-					<div css={tagOverlayGridStyles}>
+					<div
+						css={[
+							tagOverlayGridStyles,
+							footballMatchUrl && matchGrid,
+						]}
+					>
 						<GridItem area="sticky-tag">
 							<div css={stickyTagStyles}>
 								<ArticleTitle
@@ -529,6 +541,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
 									inTagLinkTest={true}
+									isMatch={!!footballMatchUrl}
 								/>
 							</div>
 						</GridItem>

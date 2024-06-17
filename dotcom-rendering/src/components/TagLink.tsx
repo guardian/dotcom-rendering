@@ -15,6 +15,7 @@ interface Props {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	format: ArticleFormat;
+	isMatch: boolean;
 }
 const containerStyles = css`
 	pointer-events: all;
@@ -107,6 +108,7 @@ export const TagLink = ({
 	sectionLabel,
 	guardianBaseURL,
 	format,
+	isMatch,
 }: Props) => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
@@ -128,7 +130,7 @@ export const TagLink = ({
 			)}
 			<a
 				href={`${guardianBaseURL}/${sectionUrl}`}
-				css={[tagLinkStyles, isBlog && desktopTabStyles]}
+				css={[tagLinkStyles, isMatch && !isMatch && desktopTabStyles]}
 				data-component="big-event-series"
 				data-link-name="article series"
 			>

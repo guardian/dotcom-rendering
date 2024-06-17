@@ -25,7 +25,7 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	isMatch?: boolean;
+	isMatch: boolean;
 	inTagLinkTest?: boolean;
 };
 
@@ -200,6 +200,7 @@ export const SeriesSectionLink = ({
 				sectionLabel={'Euro 2024'}
 				sectionUrl={'football/euro-2024'}
 				guardianBaseURL={guardianBaseURL}
+				isMatch={isMatch}
 			/>
 		);
 	}

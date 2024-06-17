@@ -44,7 +44,7 @@ export const ArticleTitle = ({
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	isMatch,
+	isMatch = false,
 	inTagLinkTest = false,
 }: Props) => (
 	<div css={[sectionStyles]}>
