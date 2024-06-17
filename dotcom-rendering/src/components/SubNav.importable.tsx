@@ -139,7 +139,7 @@ const frontSubNavBorder = (currentPillarTitle: string) => {
 	}
 };
 
-const listItemStyle = (currentPillarTitle: string) => {
+const listItemStyle = (currentPillarTitle?: string) => {
 	const borderColor = currentPillarTitle
 		? frontSubNavBorder(currentPillarTitle)
 		: palette('--sub-nav-border');
