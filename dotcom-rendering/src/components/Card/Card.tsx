@@ -253,8 +253,6 @@ const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
-const overrideHoverStylesForSublinks = css``;
-
 export const Card = ({
 	linkTo,
 	format,
@@ -434,7 +432,7 @@ export const Card = ({
 	 * For onward content cards, we include additional padding for all formats
 	 * due to their hover state
 	 */
-	const hasAdditionalPadding =
+	const addAdditionalPadding =
 		(!containerPalette &&
 			isUnsupportedFormatForCardWithoutBackground(format)) ||
 		isOnwardContent;
@@ -609,52 +607,57 @@ export const Card = ({
 						imagePositionOnDesktop={
 							media ? imagePositionOnDesktop : 'none'
 						}
-						addAdditionalPadding={hasAdditionalPadding}
+						addAdditionalPadding={addAdditionalPadding}
+						isOnwardContent={isOnwardContent}
 					>
-						<HeadlineWrapper>
-							<CardHeadline
-								headlineText={headlineText}
-								format={format}
-								size={headlineSize}
-								sizeOnMobile={headlineSizeOnMobile}
-								showQuotes={showQuotes}
-								kickerText={
-									format.design === ArticleDesign.LiveBlog &&
-									!kickerText
-										? 'Live'
-										: kickerText
-								}
-								showPulsingDot={
-									format.design === ArticleDesign.LiveBlog ||
-									showPulsingDot
-								}
-								byline={byline}
-								showByline={showByline}
-								isDynamo={isDynamo}
-								isExternalLink={isExternalLink}
-								isOnwardContent={isOnwardContent}
-							/>
-							{!isUndefined(starRating) ? (
-								<StarRatingComponent
-									rating={starRating}
-									cardHasImage={!!image}
-								/>
-							) : null}
-							{!!mainMedia && mainMedia.type !== 'Video' && (
-								<MediaMeta
-									mediaType={mainMedia.type}
-									hasKicker={!!kickerText}
-								/>
-							)}
-						</HeadlineWrapper>
-						{/* This div is needed to push this content to the bottom of the card */}
+						{/* This div is needed to keep the headline and trail text justified at the start */}
 						<div
-							style={
-								isOnwardContent
-									? { marginTop: `${space[4]}px` }
-									: {}
-							}
+							css={css`
+								display: flex;
+								flex-direction: column;
+								justify-content: flex-start;
+								flex-grow: 1;
+							`}
 						>
+							<HeadlineWrapper>
+								<CardHeadline
+									headlineText={headlineText}
+									format={format}
+									size={headlineSize}
+									sizeOnMobile={headlineSizeOnMobile}
+									showQuotes={showQuotes}
+									kickerText={
+										format.design ===
+											ArticleDesign.LiveBlog &&
+										!kickerText
+											? 'Live'
+											: kickerText
+									}
+									showPulsingDot={
+										format.design ===
+											ArticleDesign.LiveBlog ||
+										showPulsingDot
+									}
+									byline={byline}
+									showByline={showByline}
+									isDynamo={isDynamo}
+									isExternalLink={isExternalLink}
+									isOnwardContent={isOnwardContent}
+								/>
+								{!isUndefined(starRating) ? (
+									<StarRatingComponent
+										rating={starRating}
+										cardHasImage={!!image}
+									/>
+								) : null}
+								{!!mainMedia && mainMedia.type !== 'Video' && (
+									<MediaMeta
+										mediaType={mainMedia.type}
+										hasKicker={!!kickerText}
+									/>
+								)}
+							</HeadlineWrapper>
+
 							{!!trailText && (
 								<TrailTextWrapper
 									imagePositionOnDesktop={
@@ -670,6 +673,16 @@ export const Card = ({
 									/>
 								</TrailTextWrapper>
 							)}
+						</div>
+
+						{/* This div is needed to push this content to the bottom of the card */}
+						<div
+							style={
+								isOnwardContent
+									? { marginTop: `${space[4]}px` }
+									: {}
+							}
+						>
 							{showLivePlayable && (
 								<Island
 									priority="feature"
@@ -707,9 +720,8 @@ export const Card = ({
 
 			<div style={{ backgroundColor: cardBackgroundColour }}>
 				<div
-					css={overrideHoverStylesForSublinks}
 					style={{
-						padding: hasAdditionalPadding ? `0 ${space[2]}px` : 0,
+						padding: addAdditionalPadding ? `0 ${space[2]}px` : 0,
 					}}
 				>
 					{hasSublinks && sublinkPosition === 'outer' && (

@@ -66,7 +66,7 @@ const hoverStyles = css`
 const sublinkHoverStyles = css`
 	:has(ul.sublinks:hover) {
 		.card-headline .show-underline {
-			text-decoration: none !important;
+			text-decoration: none;
 		}
 	}
 `;
