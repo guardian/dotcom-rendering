@@ -9,6 +9,7 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import { Distribution } from './Distribution';
 import { Doughnut } from './Doughnut';
@@ -16,7 +17,7 @@ import { GoalAttempts } from './GoalAttempts';
 import { GridItem } from './GridItem';
 import { Hide } from './Hide';
 import { Lineup } from './Lineup';
-import { getZIndex } from '../lib/getZIndex';
+
 type Props = {
 	home: TeamType;
 	away: TeamType;
