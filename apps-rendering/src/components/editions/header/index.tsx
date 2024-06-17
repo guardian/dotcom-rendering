@@ -12,7 +12,7 @@ import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import {
 	articleMarginStyles,
 	articlePaddingStyles,
@@ -131,7 +131,7 @@ const linesBorderStyles = css`
 	}
 `;
 
-const StandardHeader: FC<HeaderProps> = ({ item }) => (
+const StandardHeader = ({ item }: HeaderProps) => (
 	<header css={headerStyles}>
 		<HeaderMedia item={item} />
 		<Series item={item} />
@@ -142,7 +142,7 @@ const StandardHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
+const ShowcaseHeader = ({ item }: HeaderProps) => (
 	<header css={headerStyles}>
 		<Series item={item} />
 		<Headline item={item} />
@@ -153,7 +153,7 @@ const ShowcaseHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
+const AnalysisHeader = ({ item }: HeaderProps) => (
 	<header css={headerStyles}>
 		<HeaderMedia item={item} />
 		<Series item={item} />
@@ -164,7 +164,7 @@ const AnalysisHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const CommentHeader: FC<HeaderProps> = ({ item }) => (
+const CommentHeader = ({ item }: HeaderProps) => (
 	<header css={headerStyles}>
 		<HeaderMedia item={item} />
 		<Headline item={item} />
@@ -174,7 +174,7 @@ const CommentHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const InterviewHeader: FC<HeaderProps> = ({ item }) => (
+const InterviewHeader = ({ item }: HeaderProps) => (
 	<header>
 		<HeaderMedia item={item} />
 		<div css={interviewStyles(item)}>
@@ -186,7 +186,7 @@ const InterviewHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const GalleryHeader: FC<HeaderProps> = ({ item }) => (
+const GalleryHeader = ({ item }: HeaderProps) => (
 	<header css={galleryHeaderStyles}>
 		<HeaderMedia item={item} />
 		<div css={galleryInnerHeaderStyles}>
@@ -201,7 +201,7 @@ const GalleryHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const PictureHeader: FC<HeaderProps> = ({ item }) => (
+const PictureHeader = ({ item }: HeaderProps) => (
 	<header css={pictureHeaderStyles}>
 		<div css={galleryInnerHeaderStyles}>
 			<div css={galleryHeaderBorderStyles}>
@@ -215,7 +215,7 @@ const PictureHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
+const ImmersiveHeader = ({ item }: HeaderProps) => (
 	<header>
 		<HeaderMedia item={item} />
 		<div css={immersiveHeadlineStyles(item)}>
@@ -229,7 +229,7 @@ const ImmersiveHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const LetterHeader: FC<HeaderProps> = ({ item }) => (
+const LetterHeader = ({ item }: HeaderProps) => (
 	<header css={headerStyles}>
 		<HeaderMedia item={item} />
 		<Series item={item} />
@@ -246,7 +246,7 @@ const LetterHeader: FC<HeaderProps> = ({ item }) => (
 	</header>
 );
 
-const CorrectionsHeader: FC<HeaderProps> = ({ item }) => (
+const CorrectionsHeader = ({ item }: HeaderProps) => (
 	<header css={headerStyles}>
 		<HeaderMedia item={item} />
 		<Series item={item} />
@@ -286,7 +286,7 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 	}
 };
 
-const Container: FC<HeaderProps> = ({ item }) => {
+const Container = ({ item }: HeaderProps) => {
 	return <>{renderArticleHeader(item)}</>;
 };
 

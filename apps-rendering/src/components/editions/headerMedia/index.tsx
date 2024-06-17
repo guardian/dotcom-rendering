@@ -20,7 +20,6 @@ import { maybeRender } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import { Optional } from 'optional';
 import { background, fill } from 'palette';
-import type { FC } from 'react';
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
 import Video from '../video';
@@ -167,7 +166,7 @@ interface Props {
 	item: Item;
 }
 
-const HeaderMedia: FC<Props> = ({ item }) => {
+const HeaderMedia = ({ item }: Props) => {
 	const format = getFormat(item);
 	const isPicture = checkIfPicture(item.tags);
 	const iconColour = fill.editionsCameraIcon(format);

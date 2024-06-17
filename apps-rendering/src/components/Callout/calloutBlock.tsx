@@ -3,7 +3,7 @@ import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import { Tabs } from '@guardian/source-development-kitchen/react-components';
 import { useState } from 'react';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
 import { TermsAndConditions } from './calloutComponents';
 import CalloutContact, {
@@ -36,7 +36,7 @@ export interface CalloutBlockProps {
 	isNonCollapsible: boolean;
 }
 
-const CalloutBlock: FC<CalloutBlockProps> = ({
+const CalloutBlock = ({
 	formId,
 	prompt,
 	heading,
@@ -45,7 +45,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	format,
 	contacts,
 	isNonCollapsible,
-}): ReactElement => {
+}: CalloutBlockProps): ReactElement => {
 	const id = getCalloutId(heading === '' ? formId.toString() : heading);
 	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;

@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import { neutral, remSpace } from '@guardian/source/foundations';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -20,7 +19,7 @@ const styles = css`
     `}
 `;
 
-const HorizontalRule: FC = () => <hr css={styles} />;
+const HorizontalRule = () => <hr css={styles} />;
 
 // ----- Exports ----- //
 

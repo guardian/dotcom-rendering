@@ -71,7 +71,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const ImmersiveHeadline: React.FC<Props> = ({ headline, format }) => (
+const ImmersiveHeadline = ({ headline, format }: Props) => (
 	<>
 		<div css={backgroundStyles(format)} />
 		<h1 css={styles(format)}>{headline}</h1>

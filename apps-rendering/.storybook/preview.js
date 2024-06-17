@@ -1,8 +1,6 @@
 import { setCookie } from '@guardian/libs';
-
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
-
 import { getFontsCss } from './fonts-css';
 import { resets } from '@guardian/source/foundations';
 

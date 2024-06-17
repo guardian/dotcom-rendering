@@ -86,7 +86,7 @@ export const FrontSectionTitle = ({
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
 			const {
-				branding: { logo },
+				branding: { logo, aboutThisLink },
 				isFrontBranding,
 				isContainerBranding,
 			} = collectionBranding;
@@ -94,13 +94,18 @@ export const FrontSectionTitle = ({
 				return (
 					<>
 						<Hide until="leftCol">
+							<p css={[labelStyles]}>{logo.label}</p>
 							<Badge imageSrc={logo.src} href={logo.link} />
 						</Hide>
 						<div css={titleStyle}>
 							<Hide from="leftCol">
+								<p css={[labelStyles]}>{logo.label}</p>
 								<Badge imageSrc={logo.src} href={logo.link} />
 							</Hide>
 							{title}
+							<a href={aboutThisLink} css={[aboutThisLinkStyles]}>
+								About this content
+							</a>
 						</div>
 					</>
 				);

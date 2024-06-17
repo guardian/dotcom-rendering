@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 // ----- Component ----- //
 
@@ -15,7 +15,7 @@ interface Props {
 	children: ReactNode;
 }
 
-const GridItem: FC<Props> = ({ area, children }) => (
+const GridItem = ({ area, children }: Props) => (
 	<div css={styles(area)}>{children}</div>
 );
 

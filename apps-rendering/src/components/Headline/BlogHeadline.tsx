@@ -11,7 +11,7 @@ interface Props {
 	item: Item;
 }
 
-const BlogHeadline: React.FC<Props> = ({ item }) => (
+const BlogHeadline = ({ item }: Props) => (
 	<DefaultHeadline
 		item={item}
 		styles={css(defaultStyles(item), liveblogStyles)}

@@ -21,7 +21,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Letter as LetterItem } from 'item';
 import { background } from 'palette';
-import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -54,7 +53,7 @@ interface Props {
 	item: LetterItem;
 }
 
-const LetterLayout: FC<Props> = ({ item }) => {
+const LetterLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 	return (
 		<main css={styles(format)}>

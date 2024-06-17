@@ -2,7 +2,6 @@
 
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '../../../vendor/@guardian/types/index';
-import type { FC } from 'react';
 import DefaultMainMediaCaption, {
 	defaultStyles,
 } from './MainMediaCaption.defaults';
@@ -16,7 +15,7 @@ type Props = {
 	id: string;
 };
 
-const MainMediaCaption: FC<Props> = ({ caption, credit, format, id }) => {
+const MainMediaCaption = ({ caption, credit, format, id }: Props) => {
 	return (
 		<DefaultMainMediaCaption
 			caption={caption}

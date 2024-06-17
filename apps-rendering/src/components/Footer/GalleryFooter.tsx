@@ -6,7 +6,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, remSpace } from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import { background, border, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';
 
@@ -83,7 +82,7 @@ interface Props {
 	isCcpa: boolean;
 }
 
-const GalleryFooter: FC<Props> = ({ format, isCcpa }) => (
+const GalleryFooter = ({ format, isCcpa }: Props) => (
 	<div css={styles(format)}>
 		<div css={spacerStyles(format)} />
 		<DefaultFooter

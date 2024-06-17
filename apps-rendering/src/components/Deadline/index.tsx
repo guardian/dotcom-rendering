@@ -1,10 +1,13 @@
 import { SvgClock } from '@guardian/source/react-components';
 import { isValidDate } from 'date';
-import type { FC } from 'react';
 import React from 'react';
 import { highlight } from './styles';
 
-const Highlight: FC<React.PropsWithChildren> = ({ children }) => {
+type Props = {
+	children?: React.ReactNode;
+};
+
+const Highlight = ({ children }: Props) => {
 	return <span css={highlight}>{children}</span>;
 };
 
@@ -39,7 +42,7 @@ function isCalloutActive(until?: number): boolean {
 	return untilDate === undefined || untilDate > now;
 }
 
-const DeadlineDate: FC<{ until?: number }> = ({ until }) => {
+const DeadlineDate = ({ until }: { until?: number }) => {
 	const untilDate = formatOptionalDate(until);
 	if (!untilDate) return null;
 	const now = new Date();
