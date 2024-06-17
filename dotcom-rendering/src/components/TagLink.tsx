@@ -17,6 +17,7 @@ interface Props {
 	format: ArticleFormat;
 }
 const containerStyles = css`
+	pointer-events: all;
 	margin-bottom: ${space[2]}px;
 `;
 

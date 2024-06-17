@@ -256,6 +256,7 @@ const paddingBody = css`
 `;
 
 const tagOverlayGridStyles = css`
+	pointer-events: none;
 	position: absolute;
 	${until.desktop} {
 		margin-left: 0px;
