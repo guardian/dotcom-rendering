@@ -568,14 +568,25 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						verticalMargins={false}
 					>
 						<Hide above="leftCol">
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								isMatch={true}
-							/>
+							{inTagLinkTest ? (
+								<div
+									css={css`
+										height: 64px;
+										${from.desktop} {
+											height: 44px;
+										}
+									`}
+								/>
+							) : (
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									isMatch={true}
+								/>
+							)}
 						</Hide>
 
 						<Island priority="feature" defer={{ until: 'visible' }}>
