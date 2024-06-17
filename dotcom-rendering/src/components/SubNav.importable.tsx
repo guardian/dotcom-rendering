@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, textSans15, textSans17 } from '@guardian/source/foundations';
+import {
+	from,
+	palette as sourcePalette,
+	textSans15,
+	textSans17,
+} from '@guardian/source/foundations';
 import { useEffect, useRef, useState } from 'react';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { SubNavType } from '../model/extract-nav';
@@ -9,6 +14,7 @@ type Props = {
 	subNavSections: SubNavType;
 	currentNavLink: string;
 	position: 'header' | 'footer';
+	currentPillarTitle?: string;
 };
 
 const wrapperCollapsedStyles = css`
@@ -116,28 +122,51 @@ const showMoreStyle = css`
 	}
 `;
 
-const listItemStyles = css`
-	:after {
-		content: '';
-		display: inline-block;
-		width: 0;
-		height: 0;
-		border-top: 6px solid transparent;
-		border-bottom: 6px solid transparent;
-		border-left: 10px solid ${palette('--sub-nav-border')};
-		margin-top: 12px;
-		margin-left: 2px;
-
-		${from.tablet} {
-			margin-top: 16px;
-		}
+const frontSubNavBorder = (currentPillarTitle: string) => {
+	switch (currentPillarTitle.toLowerCase()) {
+		case 'news':
+			return sourcePalette.news[400];
+		case 'opinion':
+			return sourcePalette.opinion[400];
+		case 'sport':
+			return sourcePalette.sport[400];
+		case 'culture':
+			return sourcePalette.culture[400];
+		case 'lifestyle':
+			return sourcePalette.lifestyle[400];
+		default:
+			return sourcePalette.news[400];
 	}
-`;
+};
+
+const listItemStyle = (currentPillarTitle: string) => {
+	const borderColor = currentPillarTitle
+		? frontSubNavBorder(currentPillarTitle)
+		: palette('--sub-nav-border');
+	return css`
+		:after {
+			content: '';
+			display: inline-block;
+			width: 0;
+			height: 0;
+			border-top: 6px solid transparent;
+			border-bottom: 6px solid transparent;
+			border-left: 10px solid ${borderColor};
+			margin-top: 12px;
+			margin-left: 2px;
+
+			${from.tablet} {
+				margin-top: 16px;
+			}
+		}
+	`;
+};
 
 export const SubNav = ({
 	subNavSections,
 	currentNavLink,
 	position = 'header',
+	currentPillarTitle,
 }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -183,7 +212,10 @@ export const SubNav = ({
 			>
 				{/* eslint-enable jsx-a11y/no-redundant-roles */}
 				{subNavSections.parent && (
-					<li key={subNavSections.parent.url} css={listItemStyles}>
+					<li
+						key={subNavSections.parent.url}
+						css={listItemStyle(currentPillarTitle)}
+					>
 						<a
 							data-src-focus-disabled={true}
 							css={[linkStyle, fontStyle]}
