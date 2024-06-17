@@ -284,13 +284,29 @@ export type FEFrontCard = {
 		showLivePlayable: boolean;
 	};
 	format?: FEFormat;
-	enriched?: FESnapType;
-	supportingContent?: FESupportingContent[];
-	cardStyle?: {
-		type: FEFrontCardStyle;
-	};
-	type: string;
-};
+} & (
+	| {
+			type: 'CuratedContent';
+			supportingContent: FESupportingContent[];
+			enriched?: FESnapType;
+			cardStyle: {
+				type: FEFrontCardStyle;
+			};
+	  }
+	| {
+			type: 'SupportingCuratedContent';
+			cardStyle: {
+				type: FEFrontCardStyle;
+			};
+	  }
+	| {
+			type: 'LinkSnap';
+			enriched?: FESnapType;
+	  }
+	| {
+			type: 'LatestSnap';
+	  }
+);
 
 export type DCRFrontImage = {
 	src: string;
