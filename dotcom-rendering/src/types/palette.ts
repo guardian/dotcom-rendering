@@ -83,6 +83,7 @@ export type ContainerOverrides = {
 		carouselArrowHover: Colour;
 		liveKicker?: Colour;
 		pulsingDot?: Colour;
+		supportingContent?: Colour;
 	};
 	topBar?: {
 		card?: Colour;

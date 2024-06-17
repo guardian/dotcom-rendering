@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import { isUnsupportedFormatForCardWithoutBackground } from '../lib/cardHelpers';
 import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
@@ -20,9 +20,13 @@ type Props = {
 const wrapperStyles = css`
 	position: relative;
 	display: flex;
-	padding: 4px 0;
+	margin: ${space[1]}px 0;
 	@media (pointer: coarse) {
 		padding-bottom: 0;
+	}
+
+	${until.tablet} {
+		background-color: ${themePalette('--supporting-content-background')};
 	}
 `;
 

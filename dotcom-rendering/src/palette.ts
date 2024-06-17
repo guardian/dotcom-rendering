@@ -5476,6 +5476,12 @@ const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
 };
 
 const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
+
+const supportingContentBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+const supportingContentBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+
 // ----- Palette ----- //
 
 /**
@@ -6516,6 +6522,10 @@ const paletteColours = {
 	'--summary-event-bullet-hover': {
 		light: summaryEventBulletHoverLight,
 		dark: summaryEventBulletHoverDark,
+	},
+	'--supporting-content-background': {
+		light: supportingContentBackgroundLight,
+		dark: supportingContentBackgroundDark,
 	},
 	'--syndication-button-border': {
 		light: syndicationButtonBorder,

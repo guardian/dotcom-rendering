@@ -536,6 +536,7 @@ export const decideContainerOverrides = (
 			carouselArrowHover: backgroundCarouselArrowHover(containerPalette),
 			liveKicker: backgroundLiveKicker(containerPalette),
 			pulsingDot: backgroundPulsingDot(containerPalette),
+			supportingContent: 'transparent',
 		},
 	};
 };
