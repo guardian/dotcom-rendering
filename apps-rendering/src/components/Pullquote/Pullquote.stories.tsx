@@ -1,6 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '../../../vendor/@guardian/types/index';
-import type { FC } from 'react';
 import Pullquote from './';
 
 const standard = {
@@ -9,7 +8,7 @@ const standard = {
 	theme: ArticlePillar.News,
 };
 
-const Default: FC = () => (
+const Default = () => (
 	<Pullquote
 		format={standard}
 		attribution={some('Lorem ipsum')}

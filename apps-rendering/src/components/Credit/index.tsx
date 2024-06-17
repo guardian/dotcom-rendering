@@ -7,7 +7,7 @@ import { remSpace, textSans14 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 // ----- Component ----- //
 
@@ -25,7 +25,7 @@ const defaultStyles = css`
 	${textSans14};
 `;
 
-const Credit: FC<Props> = ({ format, credit }) =>
+const Credit = ({ format, credit }: Props) =>
 	pipe(
 		credit,
 		map((cred) => {

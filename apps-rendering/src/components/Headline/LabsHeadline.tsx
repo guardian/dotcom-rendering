@@ -14,7 +14,7 @@ interface Props {
 	item: Item;
 }
 
-const LabsHeadline: React.FC<Props> = ({ item }) => (
+const LabsHeadline = ({ item }: Props) => (
 	<DefaultHeadline
 		item={item}
 		styles={css(defaultStyles(item), labsStyles)}

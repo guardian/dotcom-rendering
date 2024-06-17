@@ -5,7 +5,6 @@ import type { ArticleFormat, Pillar } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import { pinnedBlock } from 'fixtures/item';
-import type { FC } from 'react';
 import PinnedPost from './';
 
 // ----- Functions ----- //
@@ -18,11 +17,7 @@ const getFormat = (pillar: Pillar): ArticleFormat => {
 	};
 };
 
-const Wrapper: FC<{ children: React.ReactNode }> = ({
-	children,
-}: {
-	children: React.ReactNode;
-}) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			padding: 20px;
@@ -38,7 +33,7 @@ const Wrapper: FC<{ children: React.ReactNode }> = ({
 
 // ----- Stories ----- //
 
-const Default: FC<{ pillar: Pillar }> = ({ pillar = ArticlePillar.News }) => (
+const Default = ({ pillar = ArticlePillar.News }: { pillar: Pillar }) => (
 	<Wrapper>
 		<PinnedPost
 			pinnedPost={pinnedBlock}
@@ -48,12 +43,10 @@ const Default: FC<{ pillar: Pillar }> = ({ pillar = ArticlePillar.News }) => (
 	</Wrapper>
 );
 
-const Sport: FC = () => <Default pillar={ArticlePillar.Sport}></Default>;
-const Culture: FC = () => <Default pillar={ArticlePillar.Culture}></Default>;
-const Opinion: FC = () => <Default pillar={ArticlePillar.Opinion}></Default>;
-const Lifestyle: FC = () => (
-	<Default pillar={ArticlePillar.Lifestyle}></Default>
-);
+const Sport = () => <Default pillar={ArticlePillar.Sport}></Default>;
+const Culture = () => <Default pillar={ArticlePillar.Culture}></Default>;
+const Opinion = () => <Default pillar={ArticlePillar.Opinion}></Default>;
+const Lifestyle = () => <Default pillar={ArticlePillar.Lifestyle}></Default>;
 
 // ----- Exports ----- //
 

@@ -12,7 +12,7 @@ import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';
 import { background } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -76,7 +76,7 @@ type Props = {
 	bylineHtml: Option<DocumentFragment>;
 };
 
-const HeadlineByline: FC<Props> = ({ format, bylineHtml }) =>
+const HeadlineByline = ({ format, bylineHtml }: Props) =>
 	maybeRender(bylineHtml, (byline) => (
 		<div css={headlineBox(format)}>
 			<address css={addressStyles(format)}>

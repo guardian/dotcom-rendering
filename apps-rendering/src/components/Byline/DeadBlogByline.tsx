@@ -23,7 +23,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const DeadblogByline: React.FC<Props> = ({ format, bylineHtml }) => (
+const DeadblogByline = ({ format, bylineHtml }: Props) => (
 	<DefaultByline
 		format={format}
 		bylineHtml={bylineHtml}

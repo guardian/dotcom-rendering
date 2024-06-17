@@ -1,13 +1,12 @@
 // ----- Imports ----- //
 
-import type { FC } from 'react';
 import FootballScores from './index';
 
 // ----- Helpers ----- //
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<FootballScores
 		league="Premier League"
 		stadium="Elland road"

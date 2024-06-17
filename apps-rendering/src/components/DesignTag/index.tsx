@@ -9,7 +9,6 @@ import {
 	remSpace,
 } from '@guardian/source/foundations';
 import { background, text } from 'palette';
-import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss } from '../../styles';
 
 const designTagWrapper = css`
@@ -54,7 +53,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const DesignTag: FC<Props> = ({ format }) => {
+const DesignTag = ({ format }: Props) => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
 			return (

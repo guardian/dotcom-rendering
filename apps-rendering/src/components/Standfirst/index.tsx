@@ -22,7 +22,7 @@ interface Props {
 	item: Item;
 }
 
-const Standfirst: React.FC<Props> = ({ item }) => {
+const Standfirst = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	if (format.display === ArticleDisplay.Immersive) {
