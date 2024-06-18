@@ -76,7 +76,6 @@ export const GetMatchNav = ({
 		) {
 			return (
 				<div
-					// key="error"
 					css={css`
 						${from.leftCol} {
 							margin-left: 10px;
@@ -102,7 +101,6 @@ export const GetMatchNav = ({
 	if (data) {
 		return (
 			<MatchNav
-				// key="data"
 				homeTeam={data.homeTeam}
 				awayTeam={data.awayTeam}
 				comments={data.comments}
