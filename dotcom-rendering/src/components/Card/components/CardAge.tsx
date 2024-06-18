@@ -14,7 +14,10 @@ type Props = {
 	format: ArticleFormat;
 	absoluteServerTimes: boolean;
 	containerPalette?: DCRContainerPalette;
-	webPublicationDate: string;
+	webPublication: {
+		date: string;
+		isWithinTwelveHours: boolean;
+	};
 	showClock?: boolean;
 	isDynamo?: true;
 	isOnwardContent?: boolean;
@@ -71,14 +74,14 @@ const ageStyles = (
 export const CardAge = ({
 	format,
 	containerPalette,
-	webPublicationDate,
+	webPublication,
 	showClock,
 	isDynamo,
 	isOnwardContent,
 	absoluteServerTimes,
 	isTagPage,
 }: Props) => {
-	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
+	if (timeAgo(new Date(webPublication.date).getTime()) === false) {
 		return null;
 	}
 
@@ -89,16 +92,16 @@ export const CardAge = ({
 			{showClock && <ClockIcon />}
 			{isTagPage ? (
 				<DateTime
-					date={new Date(webPublicationDate)}
+					date={new Date(webPublication.date)}
 					display={'absolute'}
 					editionId={'UK'}
 					showWeekday={false}
-					showDate={false}
+					showDate={webPublication.isWithinTwelveHours ? false : true}
 					showTime={true}
 				/>
 			) : (
 				<DateTime
-					date={new Date(webPublicationDate)}
+					date={new Date(webPublication.date)}
 					display={'relative'}
 					absoluteServerTimes={absoluteServerTimes}
 					editionId={'UK'}

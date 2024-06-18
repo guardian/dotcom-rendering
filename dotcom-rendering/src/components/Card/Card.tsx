@@ -316,11 +316,10 @@ export const Card = ({
 
 	const decideAge = () => {
 		if (!webPublicationDate) return undefined;
+		const withinTwelveHours = isWithinTwelveHours(webPublicationDate);
 
 		const shouldShowAge =
-			isTagPage ||
-			!!onwardsSource ||
-			(showAge && isWithinTwelveHours(webPublicationDate));
+			isTagPage || !!onwardsSource || (showAge && withinTwelveHours);
 
 		if (!shouldShowAge) return undefined;
 
@@ -328,7 +327,10 @@ export const Card = ({
 			<CardAge
 				format={format}
 				containerPalette={containerPalette}
-				webPublicationDate={webPublicationDate}
+				webPublication={{
+					date: webPublicationDate,
+					isWithinTwelveHours: withinTwelveHours,
+				}}
 				showClock={showClock}
 				isDynamo={isDynamo}
 				isOnwardContent={isOnwardContent}
