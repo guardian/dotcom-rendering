@@ -1,7 +1,7 @@
 import type { OphanABTestMeta, OphanAction } from '@guardian/libs';
 import { log } from '@guardian/libs';
-import type ophan from '@guardian/ophan-tracker-js';
-import type { ComponentEvent } from '@guardian/ophan-tracker-js';
+import ophan from '@guardian/ophan-tracker-js';
+import type {ComponentEvent} from '@guardian/ophan-tracker-js';
 import type { RenderingTarget } from '../../types/renderingTarget';
 
 type Ophan = typeof ophan;
@@ -95,11 +95,9 @@ export const sendOphanComponentEvent = async (
 	const componentEvent: ComponentEvent = {
 		component: {
 			componentType,
-			// @ts-expect-error -- Type 'OphanProduct[]' is missing the following properties from type 'Set<TProduct>': add, clear, delete, has, and 2 more.
 			products,
 			campaignCode,
 			id: testMeta.campaignId ?? testMeta.campaignCode,
-			// @ts-expect-error -- Type 'string[]' is missing the following properties from type 'Set<string>': add, clear, delete, has, and 2 more.
 			labels,
 		},
 		abTest: {

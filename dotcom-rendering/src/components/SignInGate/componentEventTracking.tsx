@@ -51,9 +51,6 @@ const submitClickEventTracking = (
 export const withComponentId = (id?: string): ComponentEvent['component'] => ({
 	componentType: 'SIGN_IN_GATE',
 	id,
-	// What’s the benefit of passing empty sets here?
-	products: new Set(),
-	labels: new Set(),
 });
 
 export const trackLink = (
