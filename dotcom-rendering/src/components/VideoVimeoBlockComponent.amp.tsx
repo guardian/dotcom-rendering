@@ -1,8 +1,8 @@
+import { levels } from 'log4js';
 import { getIdFromUrl } from '../lib/get-video-id.amp';
 import { logger } from '../server/lib/logging';
 import type { VideoVimeoBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';
-import { levels } from 'log4js';
 
 type Props = {
 	element: VideoVimeoBlockElement;
