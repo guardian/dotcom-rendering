@@ -147,6 +147,13 @@ export const renderFront = ({
 
 	const keywords = front.config.keywords;
 
+	const canonicalUrl =
+		front.isNetworkFront &&
+		!!front.canonicalUrl &&
+		URL.canParse(front.canonicalUrl)
+			? new URL(front.canonicalUrl).origin
+			: front.canonicalUrl;
+
 	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
@@ -158,7 +165,7 @@ export const renderFront = ({
 		renderingTarget: 'Web',
 		hasPageSkin: front.config.hasPageSkin,
 		weAreHiring: !!front.config.switches.weAreHiring,
-		canonicalUrl: front.canonicalUrl,
+		canonicalUrl,
 	});
 
 	return {
