@@ -20,10 +20,11 @@ const paymentTypeChoiceCardStyles = (selected: boolean) => css`
 		: `1px solid ${palette.neutral[46]}`};
 	background-color: ${selected ? palette.sport[800] : ''};
 	border-radius: 10px;
-	padding: ${space[4]}px ${space[5]}px ${space[2]}px ${space[5]}px;
-	${
-		selected ? '' : 'padding-top: 6px;' // reduce top padding when Radio's min-height comes into effect
-	}
+	padding: ${
+		selected
+			? `${space[4]}px ${space[5]}px ${space[2]}px ${space[5]}px`
+			: `6px ${space[5]}px` // reduce vertical padding when Radio's min-height comes into effect
+	};
 	display: flex;
 	justify-content: space-between;
 `;
