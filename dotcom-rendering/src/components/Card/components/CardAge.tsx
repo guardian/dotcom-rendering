@@ -96,7 +96,7 @@ export const CardAge = ({
 					display={'absolute'}
 					editionId={'UK'}
 					showWeekday={false}
-					showDate={webPublication.isWithinTwelveHours ? false : true}
+					showDate={!webPublication.isWithinTwelveHours}
 					showTime={true}
 				/>
 			) : (
