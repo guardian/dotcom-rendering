@@ -41,6 +41,8 @@ export const Score = ({ score }: Props) => {
 	);
 
 	switch (score) {
+		case -1:
+			return <ScoreStyles> </ScoreStyles>;
 		case 0:
 			return (
 				<ScoreStyles>
