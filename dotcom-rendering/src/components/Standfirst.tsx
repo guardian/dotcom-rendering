@@ -182,10 +182,9 @@ const decidePadding = ({ display, design }: ArticleFormat) => {
 			switch (display) {
 				case ArticleDisplay.Showcase: {
 					return css`
-						padding-bottom: 14px;
-
-						${from.leftCol} {
-							padding-bottom: 0;
+						padding-bottom: 8px;
+						${from.tablet} {
+							padding-bottom: ${space[0]}px;
 						}
 					`;
 				}
