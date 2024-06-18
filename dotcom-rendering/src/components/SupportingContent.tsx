@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source/foundations';
-import { decidePalette } from '../lib/decidePalette';
-import { transparentColour } from '../lib/transparentColour';
 import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { CardHeadline } from './CardHeadline';
@@ -16,7 +14,6 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
-	parentFormat: ArticleFormat;
 };
 
 const wrapperStyles = css`
@@ -79,14 +76,7 @@ const liStyles = css`
 	}
 `;
 
-const dynamoLiStyles = (
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
-) => css`
-	background-color: ${transparentColour(
-		decidePalette(format, containerPalette).background.dynamoSublink,
-		0.875,
-	)};
+const dynamoLiStyles = css`
 	/* Creates a containing block which allows Ophan heatmap to place bubbles correctly. */
 	position: relative;
 	border-top: 1px solid;
@@ -119,13 +109,9 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
-	parentFormat,
 }: Props) => {
 	return (
-		<ContainerOverrides
-			containerPalette={containerPalette}
-			isDynamo={!!isDynamo}
-		>
+		<ContainerOverrides containerPalette={containerPalette}>
 			<ul
 				css={[
 					wrapperStyles,
@@ -145,10 +131,7 @@ export const SupportingContent = ({
 							css={[
 								isDynamo
 									? [
-											dynamoLiStyles(
-												parentFormat,
-												containerPalette,
-											),
+											dynamoLiStyles,
 											css`
 												border-color: ${themePalette(
 													'--card-border-top',
@@ -164,7 +147,6 @@ export const SupportingContent = ({
 							<FormatBoundary format={subLink.format}>
 								<ContainerOverrides
 									containerPalette={containerPalette}
-									isDynamo={!!isDynamo}
 								>
 									<CardHeadline
 										format={subLink.format}
@@ -172,7 +154,6 @@ export const SupportingContent = ({
 										hideLineBreak={true}
 										showLine={true}
 										linkTo={subLink.url}
-										containerPalette={containerPalette}
 										isDynamo={isDynamo}
 										showPulsingDot={
 											subLink.format.design ===
