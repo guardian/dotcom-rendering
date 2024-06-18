@@ -55,7 +55,6 @@ export const Default = () => {
 		<SupportingContent
 			supportingContent={[aBasicLink]}
 			alignment="horizontal"
-			parentFormat={aBasicLink.format}
 		/>
 	);
 };
@@ -65,7 +64,6 @@ export const WithKicker = () => {
 		<SupportingContent
 			supportingContent={[{ ...aBasicLink, kickerText: 'Kicker text' }]}
 			alignment="horizontal"
-			parentFormat={aBasicLink.format}
 		/>
 	);
 };
