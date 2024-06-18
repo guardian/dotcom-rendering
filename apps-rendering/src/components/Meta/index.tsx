@@ -1,7 +1,5 @@
 // ----- Imports ----- //
 
-import type { FC } from 'react';
-
 // ----- Component ----- //
 
 interface Props {
@@ -10,7 +8,7 @@ interface Props {
 	isEditions?: boolean;
 }
 
-const Meta: FC<Props> = ({ title, cspString, isEditions = false }) => (
+const Meta = ({ title, cspString, isEditions = false }: Props) => (
 	<>
 		<meta charSet="utf-8" />
 		<title>{title}</title>

@@ -3,7 +3,6 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import type { FC } from 'react';
 import GalleryTags from './GalleryTags';
 import ImmersiveTags from './ImmersiveTags';
 import { defaultStyles, DefaultTags } from './Tags.defaults';
@@ -14,7 +13,7 @@ type Props = {
 	item: Item;
 };
 
-const Tags: FC<Props> = ({ item }) => {
+const Tags = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	if (format.display === ArticleDisplay.Immersive) {

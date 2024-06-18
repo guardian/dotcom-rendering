@@ -30,7 +30,7 @@ interface Props {
 	item: Item;
 }
 
-const LiveBlogStandfirst: React.FC<Props> = ({ item }) => (
+const LiveBlogStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst
 		item={item}
 		css={css(defaultStyles(getFormat(item)), liveBlogStyles)}

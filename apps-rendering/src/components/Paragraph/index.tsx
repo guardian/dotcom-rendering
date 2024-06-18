@@ -11,7 +11,7 @@ import {
 	textSans17,
 } from '@guardian/source/foundations';
 import { text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -93,12 +93,9 @@ const styles = (
 	`;
 };
 
-const Paragraph: FC<Props> = ({
-	children,
-	format,
-	showDropCap,
-	isEditions,
-}: Props) => <p css={styles(format, showDropCap, isEditions)}>{children}</p>;
+const Paragraph = ({ children, format, showDropCap, isEditions }: Props) => (
+	<p css={styles(format, showDropCap, isEditions)}>{children}</p>
+);
 
 // ----- Exports ----- //
 

@@ -15,7 +15,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { background, text } from 'palette';
-import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import GallerySeries from './GallerySeries';
 import ImmersiveSeries from './ImmersiveSeries';
@@ -164,7 +163,7 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	return standardStyles;
 };
 
-const Series: FC<Props> = ({ item }: Props) => {
+const Series = ({ item }: Props) => {
 	// There are some inconsistencies between kickers in AR and DCR.
 	// Until a decision is made, we are not rendering this component in the Interview Design.
 	// See issue here: https://github.com/guardian/dotcom-rendering/issues/4760

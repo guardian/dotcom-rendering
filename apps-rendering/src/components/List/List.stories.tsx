@@ -2,7 +2,6 @@
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import ListItem from 'components/ListItem';
-import type { FC } from 'react';
 import List from './';
 
 // ----- Setup ----- //
@@ -17,7 +16,7 @@ const listItem = <ListItem>A bullet point</ListItem>;
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<List usePillarColour={false} format={format}>
 		{[listItem, listItem, listItem]}
 	</List>

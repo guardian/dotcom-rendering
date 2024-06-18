@@ -2,7 +2,6 @@
 
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { FC } from 'react';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';
 import GalleryFooter from './GalleryFooter';
 import ImmersiveFooter from './ImmersiveFooter';
@@ -14,7 +13,7 @@ interface Props {
 	isCcpa: boolean;
 }
 
-const Footer: FC<Props> = ({ format, isCcpa }) => {
+const Footer = ({ format, isCcpa }: Props) => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return <ImmersiveFooter format={format} isCcpa={isCcpa} />;
 	}

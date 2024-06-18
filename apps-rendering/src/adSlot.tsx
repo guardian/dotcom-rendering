@@ -10,7 +10,7 @@ import {
 } from '@guardian/source/foundations';
 import { Button, buttonThemeBrandAlt } from '@guardian/source/react-components';
 import { background, text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 
 type Props = {
@@ -107,7 +107,7 @@ const adSlotStyles = css`
 	}
 `;
 
-const AdSlot: FC<Props> = ({ className, paragraph, format }): ReactElement => (
+const AdSlot = ({ className, paragraph, format }: Props): ReactElement => (
 	<aside
 		css={styles(format)}
 		className={className}

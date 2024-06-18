@@ -12,7 +12,6 @@ import {
 } from '@guardian/source/foundations';
 import FooterContent from 'components/FooterContent';
 import { background } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -55,7 +54,7 @@ interface Props {
 	css?: SerializedStyles;
 }
 
-const DefaultFooter: FC<Props> = ({ isCcpa, className }) => (
+const DefaultFooter = ({ isCcpa, className }: Props) => (
 	<footer css={className}>
 		<FooterContent isCcpa={isCcpa} />
 	</footer>

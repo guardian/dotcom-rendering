@@ -6,7 +6,7 @@ import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { border, text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { pageFonts } from 'styles';
 
@@ -43,12 +43,12 @@ const atomScript = `
     setTimeout(resize, 1000);
 `;
 
-const InteractiveAtom: FC<InteractiveAtomProps> = ({
+const InteractiveAtom = ({
 	html,
 	styles,
 	js,
 	format,
-}): ReactElement => {
+}: InteractiveAtomProps): ReactElement => {
 	const style = h('style', { dangerouslySetInnerHTML: { __html: styles } });
 	const script = pipe(
 		js,

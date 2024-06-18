@@ -13,7 +13,7 @@ interface Props {
 	item: Item;
 }
 
-const ImmersiveLabsStandfirst: React.FC<Props> = ({ item }) => (
+const ImmersiveLabsStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst
 		item={item}
 		css={css(defaultStyles(getFormat(item)), immersiveLabsStyles)}

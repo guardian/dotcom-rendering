@@ -16,7 +16,6 @@ import {
 import { SvgNewsletter } from '@guardian/source/react-components';
 import type { NewsletterSignUp } from 'bodyElement';
 import { background, border, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import InlineSkipToWrapper from '../InlineSkipToWrapper';
@@ -114,12 +113,12 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
-const NewsletterSignup: FC<Props> = ({
+const NewsletterSignup = ({
 	format,
 	element,
 	showByDefault = false,
 	skipLinkIdSuffix = '',
-}) => {
+}: Props) => {
 	const {
 		name,
 		frequency,
