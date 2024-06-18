@@ -40,9 +40,9 @@ export const Score = ({ score }: Props) => {
 		</div>
 	);
 
+	if (Number.isNaN(score)) return <ScoreStyles> </ScoreStyles>;
+
 	switch (score) {
-		case -1:
-			return <ScoreStyles> </ScoreStyles>;
 		case 0:
 			return (
 				<ScoreStyles>
