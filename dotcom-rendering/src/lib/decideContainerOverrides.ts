@@ -138,26 +138,25 @@ const textCardKicker = (
 	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return brandAlt[400];
 		case 'LongRunningPalette':
-			return news[550];
 		case 'LongRunningAltPalette':
-			return news[200];
+			return news[400];
 		case 'SombrePalette':
 			return brand[800];
 		case 'SombreAltPalette':
 			return news[500];
-		case 'InvestigationPalette':
-			return brandAlt[400];
 		case 'BreakingPalette':
 			return news[600];
 		case 'EventPalette':
-			return news[400];
+			return specialReportAlt[200];
 		case 'EventAltPalette':
-			return '#e2352d';
+			return news[400];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
 		case 'PodcastPalette':
-			return news[600];
+			return '';
 	}
 };
 
@@ -250,6 +249,10 @@ const textDynamoKicker = (
 	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return brandAlt[200];
+
+		//
 		case 'LongRunningPalette':
 			return news[400];
 		case 'LongRunningAltPalette':
@@ -258,8 +261,7 @@ const textDynamoKicker = (
 			return brand[800];
 		case 'SombreAltPalette':
 			return news[500];
-		case 'InvestigationPalette':
-			return brandAlt[400];
+
 		case 'BreakingPalette':
 			return news[200];
 		case 'EventPalette':
@@ -297,6 +299,32 @@ const textDynamoSublinkKicker = (
 			return neutral[7];
 		case 'PodcastPalette':
 			return news[600];
+	}
+};
+
+const textLiveKicker = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
+): string => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return specialReport[400];
+		case 'LongRunningPalette':
+		case 'LongRunningAltPalette':
+			return neutral[97];
+		case 'SombrePalette':
+			return specialReport[300];
+		case 'SombreAltPalette':
+			return specialReport[100];
+		case 'BreakingPalette':
+			return news[200];
+		case 'EventPalette':
+			return specialReport[800];
+		case 'EventAltPalette':
+			return neutral[97];
+		case 'SpecialReportAltPalette':
+			return neutral[97];
+		case 'PodcastPalette':
+			return '';
 	}
 };
 
@@ -516,6 +544,59 @@ const backgroundDynamoSublink = (
 
 const topBarCard = textCardKicker;
 
+const backgroundLiveKicker = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
+): string => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return brandAlt[400];
+		case 'LongRunningPalette':
+			return news[400];
+		case 'LongRunningAltPalette':
+			return news[400];
+		case 'SombrePalette':
+			return brand[800];
+		case 'SombreAltPalette':
+			return news[500];
+		case 'BreakingPalette':
+			return news[600];
+		case 'EventPalette':
+			return specialReportAlt[200];
+		case 'EventAltPalette':
+			return news[400];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'PodcastPalette':
+			return '';
+	}
+};
+
+const backgroundPulsingDot = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
+): string => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return transparentColour(specialReport[400], 0.75);
+		case 'LongRunningPalette':
+		case 'LongRunningAltPalette':
+			return transparentColour(news[600], 0.75);
+		case 'SombrePalette':
+			return transparentColour(specialReport[300], 0.75);
+		case 'SombreAltPalette':
+			return transparentColour(specialReport[100], 0.75);
+		case 'BreakingPalette':
+			return transparentColour(news[200], 0.75);
+		case 'EventPalette':
+			return transparentColour(specialReport[800], 0.75);
+		case 'EventAltPalette':
+			return transparentColour(news[600], 0.75);
+		case 'SpecialReportAltPalette':
+			return transparentColour(neutral[97], 0.75);
+		case 'PodcastPalette':
+			return '';
+	}
+};
+
 /**
  * When a container is given a special `containerPalette` then this function decides the override colours to be used
  * for it and its cards
@@ -589,6 +670,7 @@ export const decideContainerOverrides = (
 			cardCommentCount: textCardCommentCount(containerPalette),
 			dynamoHeadline: textDynamoHeadline(containerPalette),
 			dynamoKicker: textDynamoKicker(containerPalette),
+			liveKicker: textLiveKicker(containerPalette),
 			dynamoSublinkKicker: textDynamoSublinkKicker(containerPalette),
 			dynamoMeta: textDynamoMeta(containerPalette),
 			container: textContainer(containerPalette),
@@ -609,6 +691,8 @@ export const decideContainerOverrides = (
 			carouselArrow: backgroundCarouselArrow(containerPalette),
 			carouselArrowHover: backgroundCarouselArrowHover(containerPalette),
 			dynamoSublink: backgroundDynamoSublink(containerPalette),
+			liveKicker: backgroundLiveKicker(containerPalette),
+			pulsingDot: backgroundPulsingDot(containerPalette),
 		},
 		topBar: {
 			card: topBarCard(containerPalette),
