@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	from,
-	palette as sourcePalette,
-	space,
-} from '@guardian/source/foundations';
+import { palette as sourcePalette, space } from '@guardian/source/foundations';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -15,8 +11,6 @@ type Props = {
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
 	showTopBar?: boolean;
-	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
-	isDynamo?: true;
 	isOnwardContent?: boolean;
 };
 
@@ -71,7 +65,7 @@ const sublinkHoverStyles = css`
 	}
 `;
 
-const topBarStyles = (isDynamo: boolean) => css`
+const topBarStyles = css`
 	:before {
 		border-top: 1px solid ${palette('--card-border-top')};
 		content: '';
@@ -79,10 +73,6 @@ const topBarStyles = (isDynamo: boolean) => css`
 		width: 100%;
 		padding-bottom: ${space[2]}px;
 		background-color: unset;
-
-		${from.phablet} {
-			width: ${isDynamo ? '25%' : '100%'};
-		}
 	}
 `;
 
@@ -99,7 +89,6 @@ export const CardWrapper = ({
 	children,
 	format,
 	containerPalette,
-	isDynamo,
 	showTopBar = true,
 	isOnwardContent = false,
 }: Props) => {
@@ -111,7 +100,7 @@ export const CardWrapper = ({
 						baseCardStyles,
 						hoverStyles,
 						sublinkHoverStyles,
-						showTopBar && topBarStyles(!!isDynamo),
+						showTopBar && topBarStyles,
 						isOnwardContent && onwardContentStyles,
 					]}
 				>
