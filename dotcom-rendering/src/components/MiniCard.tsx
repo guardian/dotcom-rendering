@@ -63,10 +63,7 @@ const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
  */
 export const MiniCard = ({ trail, showImage, containerPalette }: Props) => {
 	return (
-		<ContainerOverrides
-			containerPalette={containerPalette}
-			isDynamo={false}
-		>
+		<ContainerOverrides containerPalette={containerPalette}>
 			<Link
 				href={trail.url}
 				priority="secondary"

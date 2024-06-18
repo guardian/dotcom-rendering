@@ -596,7 +596,6 @@ export const Card = ({
 							<CardHeadline
 								headlineText={headlineText}
 								format={format}
-								containerPalette={containerPalette}
 								size={headlineSize}
 								sizeOnMobile={headlineSizeOnMobile}
 								showQuotes={showQuotes}
@@ -680,7 +679,6 @@ export const Card = ({
 									alignment="vertical"
 									containerPalette={containerPalette}
 									isDynamo={isDynamo}
-									parentFormat={format}
 								/>
 							)}
 						</div>
@@ -691,7 +689,6 @@ export const Card = ({
 			{hasSublinks && sublinkPosition === 'outer' && (
 				<SupportingContent
 					supportingContent={supportingContent}
-					parentFormat={format}
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 					alignment={supportingContentAlignment}

@@ -8,8 +8,9 @@ import {
 import { from } from '@guardian/source/foundations';
 import React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
+import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import { FrontSection } from '../FrontSection';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
@@ -534,15 +535,6 @@ export const WithAnAvatar = () => {
 		</>
 	);
 };
-WithAnAvatar.decorators = [
-	lightDecorator([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Comment,
-			theme: Pillar.Opinion,
-		},
-	]),
-];
 
 export const WhenVerticalAndThemeOpinion = () => {
 	return (
@@ -1137,3 +1129,92 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 
 WithLetterDesignAndShowQuotedHeadline.storyName =
 	'WithLetterDesignAndShowQuotedHeadline';
+
+export const WithSpecialPaletteVariations = () => {
+	const containerPalettes = [
+		'InvestigationPalette',
+		'LongRunningPalette',
+		'SombrePalette',
+		'BreakingPalette',
+		'EventPalette',
+		'EventAltPalette',
+		'LongRunningAltPalette',
+		'SombreAltPalette',
+		'SpecialReportAltPalette',
+	] as const satisfies readonly DCRContainerPalette[];
+
+	return (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					discussionApiUrl=""
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+				>
+					<CardWrapper>
+						<Card
+							{...basicCardProps}
+							containerPalette={containerPalette}
+							imagePositionOnDesktop="left"
+						/>
+					</CardWrapper>
+				</FrontSection>
+			))}
+		</>
+	);
+};
+
+export const DynamoWithSpecialPaletteVariations = () => {
+	const containerPalettes = [
+		'InvestigationPalette',
+		'LongRunningPalette',
+		'SombrePalette',
+		'BreakingPalette',
+		'EventPalette',
+		'EventAltPalette',
+		'LongRunningAltPalette',
+		'SombreAltPalette',
+		'SpecialReportAltPalette',
+	] as const satisfies readonly DCRContainerPalette[];
+
+	return (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					discussionApiUrl=""
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+				>
+					<CardWrapper>
+						<Card
+							{...basicCardProps}
+							containerPalette={containerPalette}
+							isDynamo={true}
+							supportingContent={[
+								{
+									...aBasicLink,
+									headline: 'Headline 1',
+									kickerText: 'Kicker',
+								},
+								{
+									...aBasicLink,
+									headline: 'Headline 2',
+									kickerText: 'Kicker',
+								},
+								{
+									...aBasicLink,
+									headline: 'Headline 3',
+									kickerText: 'Kicker',
+								},
+							]}
+						/>
+					</CardWrapper>
+				</FrontSection>
+			))}
+		</>
+	);
+};

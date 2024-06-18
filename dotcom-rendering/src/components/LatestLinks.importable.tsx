@@ -146,7 +146,6 @@ export const LatestLinks = ({
 						<>
 							<ContainerOverrides
 								containerPalette={containerPalette}
-								isDynamo={!!isDynamo}
 							>
 								{index > 0 && (
 									<li
