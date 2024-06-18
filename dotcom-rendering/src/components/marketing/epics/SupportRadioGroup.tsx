@@ -3,7 +3,6 @@ import {
 	palette,
 	space,
 	textSans15,
-	textSansBold12,
 	textSansBold15,
 } from '@guardian/source/foundations';
 import {
@@ -27,6 +26,7 @@ const paymentTypeChoiceCardStyles = (selected: boolean) => css`
 	};
 	display: flex;
 	justify-content: space-between;
+	align-items: flex-start;
 `;
 
 const benefitsStyles = css`
@@ -66,6 +66,17 @@ const labelOverrideStyles = css`
 
 const supportingTextStyles = css`
 	margin-top: ${space[4]}px;
+`;
+
+const recommendedPillStyles = (selected: boolean) => css`
+	border-radius: 4px;
+	padding: ${space[1]}px ${space[2]}px;
+	background-color: ${palette.brand[400]};
+	${textSansBold15};
+	color: ${palette.neutral[100]};
+	${
+		selected ? '' : 'margin-top: 10px;' // increase margin when Radio's min-height comes into effect
+	}
 `;
 
 type PaymentType = 'LowMonthly' | 'HighMonthly' | 'Single';
@@ -135,18 +146,6 @@ const SupportingBenefits = ({
 		</div>
 	);
 };
-
-const recommendedPillStyles = (selected: boolean) => css`
-	border-radius: 4px;
-	padding: ${space[1]}px ${space[2]}px;
-	background-color: ${palette.brand[400]};
-	${textSansBold12};
-	color: ${palette.neutral[100]};
-	height: ${space[6]}px;
-	${
-		selected ? '' : 'margin-top: 10px;' // increase margin when Radio's min-height comes into effect
-	}
-`;
 
 const RecommendedPill = ({ selected }: { selected: boolean }) => {
 	return <div css={recommendedPillStyles(selected)}>Recommended</div>;
