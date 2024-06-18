@@ -160,7 +160,6 @@ export const LatestLinks = ({
 								>
 									<WithLink
 										linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
-										isDynamo={isDynamo}
 									>
 										<div
 											css={bold}

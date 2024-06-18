@@ -39,7 +39,6 @@ type Props = {
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
-	isDynamo?: true;
 	isSublink?: boolean;
 	isExternalLink?: boolean;
 	isOnwardContent?: boolean;
@@ -194,26 +193,20 @@ const lineStyles = css`
 	}
 `;
 
-const dynamoStyles = css`
-	display: block;
-	padding: ${space[1]}px;
-`;
-
 export const WithLink = ({
 	linkTo,
 	children,
-	isDynamo,
 }: {
 	linkTo?: string;
 	children: React.ReactNode;
-	isDynamo?: true;
 }) => {
 	if (linkTo) {
 		return (
 			<Link
 				href={linkTo}
 				cssOverrides={
-					isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
+					sublinkStyles
+					// isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
 				}
 			>
 				{children}
@@ -239,7 +232,6 @@ export const CardHeadline = ({
 	showByline,
 	showLine,
 	linkTo,
-	isDynamo,
 	isSublink,
 	isExternalLink,
 	isOnwardContent = false,
@@ -262,10 +254,10 @@ export const CardHeadline = ({
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
 						}),
-					showLine && !isDynamo && lineStyles,
+					showLine && lineStyles,
 				]}
 			>
-				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
+				<WithLink linkTo={linkTo}>
 					{!!kickerText && (
 						<Kicker
 							text={kickerText}

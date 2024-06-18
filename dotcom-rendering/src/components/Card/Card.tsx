@@ -440,7 +440,6 @@ export const Card = ({
 			format={format}
 			showTopBar={!isOnwardContent}
 			containerPalette={containerPalette}
-			isDynamo={isDynamo}
 			isOnwardContent={isOnwardContent}
 		>
 			<CardLink
@@ -638,7 +637,6 @@ export const Card = ({
 									}
 									byline={byline}
 									showByline={showByline}
-									isDynamo={isDynamo}
 									isExternalLink={isExternalLink}
 									isOnwardContent={isOnwardContent}
 								/>
@@ -726,8 +724,8 @@ export const Card = ({
 						<SupportingContent
 							supportingContent={supportingContent}
 							containerPalette={containerPalette}
-							isDynamo={isDynamo}
 							alignment={supportingContentAlignment}
+							isDynamo={isDynamo}
 						/>
 					)}
 				</div>
