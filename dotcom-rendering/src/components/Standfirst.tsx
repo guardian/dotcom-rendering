@@ -77,6 +77,7 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 	switch (design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
 		case ArticleDesign.Editorial: {
 			switch (display) {
 				case ArticleDisplay.Immersive:
@@ -157,6 +158,7 @@ const decideFont = ({ display, design, theme }: ArticleFormat) => {
 const decidePadding = ({ display, design }: ArticleFormat) => {
 	switch (design) {
 		case ArticleDesign.Obituary:
+		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial: {
 			switch (display) {
