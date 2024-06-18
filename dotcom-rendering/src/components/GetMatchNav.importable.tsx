@@ -24,10 +24,8 @@ type MatchData = {
 };
 
 const fallbackTeam = {
-	name: '…',
-	// this ensures we reserve space for at least one goal per team
-	// note that reserving more or less space could help prevent CLS
-	scorers: ['…'],
+	name: '―',
+	scorers: [],
 	score: NaN,
 	crest: '',
 } satisfies MatchData['homeTeam'];
