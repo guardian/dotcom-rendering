@@ -60,6 +60,21 @@ const tagPageWebTitle = (tagPage: FETagPageType) => {
 	}
 };
 
+const getBadgeUrl = (data: FETagPageType) => {
+	if (!data.tags.tags[0]) return undefined;
+
+	const references = data.tags.tags[0].properties.references;
+	if (!references) return undefined;
+
+	const footballTeamRef = references.find(
+		(ref) => ref.type === 'pa-football-team',
+	);
+	if (!footballTeamRef) return undefined;
+
+	const teamId = footballTeamRef.id.split('/').slice(1).join('/');
+	return `https://sport.guim.co.uk/football/crests/120/${teamId}.png`;
+};
+
 const enhanceTagPage = (body: unknown): DCRTagPageType => {
 	const data: FETagPageType = validateAsTagPageType(body);
 
@@ -84,6 +99,8 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 		  })
 		: undefined;
 
+	const badgeURl = getBadgeUrl(data);
+
 	return {
 		...data,
 		webTitle: tagPageWebTitle(data),
@@ -104,7 +121,7 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 			description:
 				data.tags.tags[0]?.properties.bio ??
 				data.tags.tags[0]?.properties.description,
-			image: data.tags.tags[0]?.properties.bylineImageUrl,
+			image: data.tags.tags[0]?.properties.bylineImageUrl ?? badgeURl,
 		},
 		branding: tagPageBranding,
 		canonicalUrl: data.canonicalUrl,
