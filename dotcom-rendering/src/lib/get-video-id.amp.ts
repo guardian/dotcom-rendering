@@ -5,20 +5,16 @@ export const getIdFromUrl = (
 	urlString: string,
 	tryInPath?: boolean,
 	tryQueryParam?: string,
-): string => {
+): string | undefined => {
+	if (!URL.canParse(urlString)) return undefined;
+
 	// Looks for ID in both formats if provided
 	const url = new URL(urlString);
 
-	const id = [
+	return [
 		tryQueryParam
 			? new URLSearchParams(url.search).get(tryQueryParam)
 			: undefined,
 		tryInPath ? url.pathname.split('/').at(-1) : undefined,
 	].find(isString);
-
-	if (id !== undefined) return id;
-
-	throw new Error(
-		`getIdFromUrl: The URL ${urlString} did not contain an ID.`,
-	);
 };
