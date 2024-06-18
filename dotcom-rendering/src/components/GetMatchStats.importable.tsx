@@ -12,9 +12,12 @@ type Props = {
 
 const Loading = () => <Placeholder height={800} />;
 
-const cleanTeamCodes = (team: TeamType): string => {
+const cleanTeamCodes = ({
+	name,
+	codename,
+}: Pick<TeamType, 'name' | 'codename'>): string => {
 	// Need to check the team name as South Korea and South Africa both have SOU as their code
-	switch (team.name) {
+	switch (name) {
 		case 'China PR':
 			return 'CHN';
 		case 'Costa Rica':
@@ -40,11 +43,18 @@ const cleanTeamCodes = (team: TeamType): string => {
 		case 'Switzerland':
 			return 'SUI';
 		default:
-			return team.codename;
+			return codename;
 	}
 };
 
-export const cleanTeamData = (team: TeamType): TeamType => ({
+/**
+ * Ensure team codes are normalised
+ *
+ * See also [frontend implementation](https://github.com/guardian/frontend/blob/2715f1bf0123591076dc66503c6e2deebbb64a31/sport/app/football/model/GuTeamCode.scala)
+ */
+const cleanTeamData = <T extends { name: string; codename: string }>(
+	team: T,
+): T => ({
 	...team,
 	codename: cleanTeamCodes(team),
 });

@@ -72,17 +72,17 @@ describe('getIdFromUrl', () => {
 		}
 	});
 
-	it('Throws an error if it cannot find an ID', () => {
-		expect(() => {
-			getIdFromUrl('https://theguardian.com', false, 'v');
-		}).toThrow();
+	it('Returns undefined if it cannot find an ID', () => {
+		expect(
+			getIdFromUrl('https://theguardian.com', false, 'v'),
+		).toBeUndefined();
 
-		expect(() => {
-			getIdFromUrl('https://theguardian.com?p=test', false, 'v');
-		}).toThrow();
+		expect(
+			getIdFromUrl('https://theguardian.com?p=test', false, 'v'),
+		).toBeUndefined();
 
-		expect(() => {
-			getIdFromUrl('https://theguardian.com/test', false, 'p');
-		}).toThrow();
+		expect(
+			getIdFromUrl('https://theguardian.com/test', false, 'p'),
+		).toBeUndefined();
 	});
 });
