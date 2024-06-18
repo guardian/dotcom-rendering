@@ -9,8 +9,8 @@ import {
 import { Score } from './Score';
 
 type Props = {
-	homeTeam: TeamType;
-	awayTeam: TeamType;
+	homeTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	awayTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
 	comments?: string;
 };
 
