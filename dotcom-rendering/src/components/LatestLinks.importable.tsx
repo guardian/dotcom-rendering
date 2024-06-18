@@ -139,59 +139,62 @@ export const LatestLinks = ({
 			]}
 		>
 			{data && data.blocks.length >= 3 ? (
-				data.blocks.slice(0, 3).map((block, index) => (
-					<>
-						<ContainerOverrides
-							containerPalette={containerPalette}
-							isDynamo={!!isDynamo}
-						>
-							{index > 0 && (
-								<li
-									key={block.id + ' : divider'}
-									css={[dividerStyles, dividerColour]}
-								></li>
-							)}
-							<li
-								key={block.id}
-								css={linkStyles}
-								className={'reveal'}
+				data.blocks
+					.filter((block) => block.body.trim() !== '')
+					.slice(0, 3)
+					.map((block, index) => (
+						<>
+							<ContainerOverrides
+								containerPalette={containerPalette}
+								isDynamo={!!isDynamo}
 							>
-								<WithLink
-									linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
-									isDynamo={isDynamo}
+								{index > 0 && (
+									<li
+										key={block.id + ' : divider'}
+										css={[dividerStyles, dividerColour]}
+									></li>
+								)}
+								<li
+									key={block.id}
+									css={linkStyles}
+									className={'reveal'}
 								>
-									<div
-										css={bold}
-										style={{
-											color: themePalette(
-												'--card-kicker-text',
-											),
-										}}
+									<WithLink
+										linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
+										isDynamo={isDynamo}
 									>
-										<DateTime
-											date={
-												new Date(
-													block.publishedDateTime,
-												)
-											}
-											display="relative"
-											absoluteServerTimes={
-												absoluteServerTimes
-											}
-											editionId={'UK'}
-											showWeekday={false}
-											showDate={true}
-											showTime={false}
-										/>
-									</div>
-									<span className="show-underline">
-										{extractAboutThreeLines(block.body)}
-									</span>
-								</WithLink>
-							</li>
-						</ContainerOverrides>
-					</>
-				))
+										<div
+											css={bold}
+											style={{
+												color: themePalette(
+													'--card-kicker-text',
+												),
+											}}
+										>
+											<DateTime
+												date={
+													new Date(
+														block.publishedDateTime,
+													)
+												}
+												display="relative"
+												absoluteServerTimes={
+													absoluteServerTimes
+												}
+												editionId={'UK'}
+												showWeekday={false}
+												showDate={true}
+												showTime={false}
+											/>
+										</div>
+										<span className="show-underline">
+											{extractAboutThreeLines(block.body)}
+										</span>
+									</WithLink>
+								</li>
+							</ContainerOverrides>
+						</>
+					))
 			) : (
 				<>
 					<li css={linkStyles} />
