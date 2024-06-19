@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import {
-	brandText,
 	from,
 	headlineMedium24,
-	palette as sourcePalette,
 	textSans17,
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
+import { palette as themePalette } from '../../../../palette';
 
 const hideDesktop = css`
 	${from.desktop} {
@@ -36,7 +35,7 @@ const collapseColumnButton = css`
 	border: 0;
 	box-sizing: border-box;
 	cursor: pointer;
-	color: ${brandText.primary};
+	color: ${themePalette('--masthead-nav-link-text')};
 	display: block;
 	${headlineMedium24};
 	font-weight: 700;
@@ -64,7 +63,7 @@ const collapseColumnButton = css`
 	}
 	:hover,
 	:focus {
-		color: ${sourcePalette.brandAlt[400]};
+		color: ${themePalette('--masthead-nav-link-text-hover')};
 	}
 `;
 
