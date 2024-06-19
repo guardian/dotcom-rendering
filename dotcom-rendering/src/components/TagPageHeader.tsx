@@ -268,7 +268,7 @@ const Picture = ({ image }: { image: string }) => {
 };
 
 function isFootballCrest(image: string) {
-	return image.includes('https://sport.guim.co.uk/football/crests/');
+	return image.startsWith('https://sport.guim.co.uk/football/crests/');
 }
 
 export const TagPageHeader = ({
