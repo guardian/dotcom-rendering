@@ -1,5 +1,5 @@
 import type { Switches } from '@guardian/libs';
-import { CommercialProperties } from '../../src/types/commercial';
+import type { CommercialProperties } from '../../src/types/commercial';
 import type { FooterType } from '../../src/types/footer';
 import type { FETagPageType } from '../../src/types/tagPage';
 
