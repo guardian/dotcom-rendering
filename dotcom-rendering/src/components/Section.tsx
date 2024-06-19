@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { background, from, space, until } from '@guardian/source/foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { from, space, until } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
+import { palette } from '../palette';
 import type { DCRContainerPalette, TreatType } from '../types/front';
-import type { ContainerOverrides } from '../types/palette';
+import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
@@ -205,7 +205,6 @@ const ContainerTitleWithHide = ({
 	containerPalette,
 	showDateHeader,
 	editionId,
-	overrides,
 	hasPageSkin,
 }: {
 	title?: string;
@@ -215,13 +214,12 @@ const ContainerTitleWithHide = ({
 	containerPalette?: DCRContainerPalette;
 	showDateHeader?: boolean;
 	editionId?: EditionId;
-	overrides?: ContainerOverrides | undefined;
 	hasPageSkin?: boolean;
 }) => {
 	const containerTitle = (
 		<ContainerTitle
 			title={title}
-			fontColour={fontColour ?? overrides?.text.container}
+			fontColour={fontColour ?? palette('--front-container-title')}
 			description={description}
 			url={url}
 			containerPalette={containerPalette}
@@ -237,23 +235,6 @@ const ContainerTitleWithHide = ({
 			{containerTitle}
 		</Hide>
 	);
-};
-
-const decideBackgroundColour = (
-	backgroundColour: string | undefined,
-	overrideBackgroundColour: string | undefined,
-	hasPageSkin: boolean,
-) => {
-	if (backgroundColour) {
-		return backgroundColour;
-	}
-	if (overrideBackgroundColour) {
-		return overrideBackgroundColour;
-	}
-	if (hasPageSkin) {
-		return background.primary;
-	}
-	return undefined;
 };
 
 /**
@@ -304,146 +285,153 @@ export const Section = ({
 	hasPageSkinContentSelfConstrain = false,
 	className,
 }: Props) => {
-	const overrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
 	if (fullWidth) {
 		return (
+			<ContainerOverrides containerPalette={containerPalette}>
+				<ElementContainer
+					sectionId={sectionId}
+					showSideBorders={showSideBorders}
+					showTopBorder={showTopBorder}
+					padSides={padSides}
+					padBottom={padBottom}
+					format={format}
+					borderColour={
+						borderColour ?? palette('--front-container-border')
+					}
+					backgroundColour={
+						backgroundColour ??
+						palette('--front-container-background')
+					}
+					ophanComponentLink={ophanComponentLink}
+					ophanComponentName={ophanComponentName}
+					containerName={containerName}
+					innerBackgroundColour={innerBackgroundColour}
+					className={className}
+					element={element}
+					shouldCenter={shouldCenter}
+					hasPageSkin={hasPageSkin}
+					hasPageSkinContentSelfConstrain={
+						hasPageSkinContentSelfConstrain
+					}
+				>
+					{children}
+				</ElementContainer>
+			</ContainerOverrides>
+		);
+	}
+
+	return (
+		<ContainerOverrides containerPalette={containerPalette}>
 			<ElementContainer
 				sectionId={sectionId}
 				showSideBorders={showSideBorders}
 				showTopBorder={showTopBorder}
 				padSides={padSides}
-				padBottom={padBottom}
 				format={format}
-				borderColour={borderColour ?? overrides?.border.container}
-				backgroundColour={decideBackgroundColour(
-					backgroundColour,
-					overrides?.background.container,
-					hasPageSkin,
-				)}
+				borderColour={
+					borderColour ?? palette('--front-container-border')
+				}
+				backgroundColour={
+					backgroundColour ?? palette('--front-container-background')
+				}
+				element="section"
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
 				containerName={containerName}
 				innerBackgroundColour={innerBackgroundColour}
-				className={className}
-				element={element}
-				shouldCenter={shouldCenter}
 				hasPageSkin={hasPageSkin}
 				hasPageSkinContentSelfConstrain={
 					hasPageSkinContentSelfConstrain
 				}
 			>
-				{children}
-			</ElementContainer>
-		);
-	}
-
-	return (
-		<ElementContainer
-			sectionId={sectionId}
-			showSideBorders={showSideBorders}
-			showTopBorder={showTopBorder}
-			padSides={padSides}
-			format={format}
-			borderColour={borderColour ?? overrides?.border.container}
-			backgroundColour={decideBackgroundColour(
-				backgroundColour,
-				overrides?.background.container,
-				hasPageSkin,
-			)}
-			element="section"
-			ophanComponentLink={ophanComponentLink}
-			ophanComponentName={ophanComponentName}
-			containerName={containerName}
-			innerBackgroundColour={innerBackgroundColour}
-			hasPageSkin={hasPageSkin}
-			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
-		>
-			<Flex>
-				<LeftColumn
-					borderType={centralBorder}
-					borderColour={borderColour ?? overrides?.border.container}
-					size={leftColSize}
-					verticalMargins={verticalMargins}
-					hasPageSkin={hasPageSkin}
-				>
-					<div
-						css={css`
-							display: flex;
-							height: 100%;
-							flex-direction: column;
-							justify-content: space-between;
-						`}
+				<Flex>
+					<LeftColumn
+						borderType={centralBorder}
+						borderColour={
+							borderColour ?? palette('--front-container-border')
+						}
+						size={leftColSize}
+						verticalMargins={verticalMargins}
+						hasPageSkin={hasPageSkin}
 					>
-						<div>
-							<ContainerTitle
+						<div
+							css={css`
+								display: flex;
+								height: 100%;
+								flex-direction: column;
+								justify-content: space-between;
+							`}
+						>
+							<div>
+								<ContainerTitle
+									title={title}
+									fontColour={
+										fontColour ??
+										palette('--front-container-title')
+									}
+									description={description}
+									url={url}
+									containerPalette={containerPalette}
+									showDateHeader={showDateHeader}
+									editionId={editionId}
+								/>
+								{leftContent}
+							</div>
+							{treats && (
+								<Treats
+									treats={treats}
+									borderColour={
+										borderColour ??
+										palette('--front-container-border')
+									}
+									fontColour={
+										fontColour ??
+										palette('--front-container-title')
+									}
+								/>
+							)}
+						</div>
+					</LeftColumn>
+					<Content
+						padded={padContent}
+						verticalMargins={verticalMargins}
+						stretchRight={stretchRight}
+						format={format}
+					>
+						<div
+							css={
+								hasPageSkin
+									? headlineContainerStylesWithPageSkin
+									: headlineContainerStyles
+							}
+						>
+							<ContainerTitleWithHide
 								title={title}
-								fontColour={
-									fontColour ?? overrides?.text.container
-								}
+								fontColour={fontColour}
 								description={description}
 								url={url}
 								containerPalette={containerPalette}
 								showDateHeader={showDateHeader}
 								editionId={editionId}
+								hasPageSkin={hasPageSkin}
 							/>
-							{leftContent}
+							{toggleable && !!sectionId && (
+								<ShowHideButton sectionId={sectionId} />
+							)}
 						</div>
-						{treats && (
-							<Treats
-								treats={treats}
-								borderColour={
-									borderColour ?? overrides?.border.container
-								}
-								fontColour={
-									fontColour ?? overrides?.text.container
-								}
-							/>
+						{toggleable && sectionId ? (
+							<div
+								css={hiddenStyles}
+								id={`container-${sectionId}`}
+							>
+								{children}
+							</div>
+						) : (
+							children
 						)}
-					</div>
-				</LeftColumn>
-				<Content
-					padded={padContent}
-					verticalMargins={verticalMargins}
-					stretchRight={stretchRight}
-					format={format}
-				>
-					<div
-						css={
-							hasPageSkin
-								? headlineContainerStylesWithPageSkin
-								: headlineContainerStyles
-						}
-					>
-						<ContainerTitleWithHide
-							title={title}
-							fontColour={fontColour ?? overrides?.text.container}
-							description={description}
-							url={url}
-							containerPalette={containerPalette}
-							showDateHeader={showDateHeader}
-							editionId={editionId}
-							hasPageSkin={hasPageSkin}
-						/>
-						{toggleable && !!sectionId && (
-							<ShowHideButton
-								sectionId={sectionId}
-								overrideContainerToggleColour={
-									overrides?.text.containerToggle
-								}
-							/>
-						)}
-					</div>
-					{toggleable && sectionId ? (
-						<div css={hiddenStyles} id={`container-${sectionId}`}>
-							{children}
-						</div>
-					) : (
-						children
-					)}
-				</Content>
-			</Flex>
-		</ElementContainer>
+					</Content>
+				</Flex>
+			</ElementContainer>
+		</ContainerOverrides>
 	);
 };

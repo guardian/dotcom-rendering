@@ -1,16 +1,14 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans14 } from '@guardian/source/foundations';
+import { space, textSans14 } from '@guardian/source/foundations';
 import { ButtonLink } from '@guardian/source/react-components';
+import { palette } from '../palette';
 
 type Props = {
 	sectionId: string;
-	overrideContainerToggleColour?: string;
 };
 
-const showHideButtonCss = (
-	overrideContainerToggleColour: string | undefined,
-) => css`
-	color: ${overrideContainerToggleColour ?? palette.neutral[46]};
+const showHideButtonCss = css`
+	color: ${palette('--front-container-toggle-text')};
 	${textSans14};
 
 	margin-top: ${space[2]}px;
@@ -25,14 +23,11 @@ const showHideButtonCss = (
  * This component creates the styled button for showing & hiding a container,
  * The functionality for this is implemented in a single island 'ShownHideContainers.importable'
  **/
-export const ShowHideButton = ({
-	sectionId,
-	overrideContainerToggleColour,
-}: Props) => {
+export const ShowHideButton = ({ sectionId }: Props) => {
 	return (
 		<ButtonLink
 			priority="secondary"
-			cssOverrides={showHideButtonCss(overrideContainerToggleColour)}
+			cssOverrides={showHideButtonCss}
 			data-link-name="Hide"
 			data-show-hide-button={sectionId}
 			aria-controls={sectionId}

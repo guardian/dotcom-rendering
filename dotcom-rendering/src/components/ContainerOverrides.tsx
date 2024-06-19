@@ -29,6 +29,10 @@ export const ContainerOverrides = ({ containerPalette, children }: Props) => {
 		  };
 
 	const paletteOverrides = {
+		'--front-container-title': text?.container,
+		'--front-container-background': background?.container,
+		// '--card-border': border?.card,
+		'--front-container-border': border?.container,
 		'--card-background': background?.card,
 		'--card-headline-trail-text': text?.cardHeadline,
 		'--card-footer-text': text?.cardFooter,

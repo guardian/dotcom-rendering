@@ -2367,9 +2367,9 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 	}
 };
 
-const cardBorderTopLight: PaletteFunction = () => sourcePalette.neutral[73];
+const cardBorderLight: PaletteFunction = () => sourcePalette.neutral[73];
 
-const cardBorderTopDark: PaletteFunction = () => sourcePalette.neutral[20];
+const cardBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const cardBorderSupportingLight: PaletteFunction = (format) => {
 	switch (format.design) {
@@ -5531,6 +5531,27 @@ const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 	}
 };
 
+const frontContainerTitleLight: PaletteFunction = () =>
+	sourcePalette.neutral[7];
+const frontContainerTitleDark: PaletteFunction = () =>
+	sourcePalette.neutral[93];
+
+const frontContainerBorderLight: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+const frontContainerBorderDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
+const frontContainerBackgroundLight: PaletteFunction = () =>
+	sourcePalette.neutral[100];
+const frontContainerBackgroundDark: PaletteFunction = () =>
+	sourcePalette.neutral[0];
+
+const frontContainerToggleTextLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+
+const frontContainerToggleTextDark: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 // ----- Palette ----- //
 
 /**
@@ -5816,13 +5837,13 @@ const paletteColours = {
 		light: cardBackgroundHoverLight,
 		dark: cardBackgroundDark,
 	},
+	'--card-border': {
+		light: cardBorderLight,
+		dark: cardBorderDark,
+	},
 	'--card-border-supporting': {
 		light: cardBorderSupportingLight,
-		dark: cardBorderTopDark,
-	},
-	'--card-border-top': {
-		light: cardBorderTopLight,
-		dark: cardBorderTopDark,
+		dark: cardBorderDark,
 	},
 	'--card-footer-onwards-content': {
 		light: cardOnwardContentFooterLight,
@@ -6115,6 +6136,22 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--front-container-background': {
+		light: frontContainerBackgroundLight,
+		dark: frontContainerBackgroundDark,
+	},
+	'--front-container-border': {
+		light: frontContainerBorderLight,
+		dark: frontContainerBorderDark,
+	},
+	'--front-container-title': {
+		light: frontContainerTitleLight,
+		dark: frontContainerTitleDark,
+	},
+	'--front-container-toggle-text': {
+		light: frontContainerToggleTextLight,
+		dark: frontContainerToggleTextDark,
 	},
 	'--heading-line': {
 		light: headingLineLight,
