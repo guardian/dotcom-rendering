@@ -67,7 +67,7 @@ const sublinkHoverStyles = css`
 
 const topBarStyles = css`
 	:before {
-		border-top: 1px solid ${palette('--card-border-top')};
+		border-top: 1px solid ${palette('--card-border')};
 		content: '';
 		z-index: 2;
 		width: 100%;
