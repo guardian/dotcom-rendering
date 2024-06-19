@@ -1,17 +1,12 @@
 import { css } from '@emotion/react';
-import {
-	brandText,
-	from,
-	palette as sourcePalette,
-	textSans17,
-	until,
-} from '@guardian/source/foundations';
+import { from, textSans17, until } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../../../../lib/acquisitions';
 import type { EditionId } from '../../../../lib/edition';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import { usePageViewId } from '../../../../lib/usePageViewId';
 import type { LinkType } from '../../../../model/extract-nav';
+import { palette as themePalette } from '../../../../palette';
 import { useConfig } from '../../../ConfigContext';
 
 const hideDesktop = css`
@@ -32,7 +27,7 @@ const columnLinkTitle = css`
 	text-decoration: none;
 	border: 0;
 	box-sizing: border-box;
-	color: ${brandText.primary};
+	color: ${themePalette('--masthead-nav-link-text')};
 	cursor: pointer;
 	display: inline-block;
 	font-weight: 500;
@@ -43,7 +38,7 @@ const columnLinkTitle = css`
 	width: 100%;
 
 	${until.desktop} {
-		color: ${sourcePalette.brandAlt[400]};
+		color: ${themePalette('--sub-nav-reader-revenue-link-text')};
 		font-size: 20px;
 		font-weight: 700;
 	}
@@ -59,7 +54,7 @@ const columnLinkTitle = css`
 
 	:hover,
 	:focus {
-		color: ${sourcePalette.brandAlt[400]};
+		color: ${themePalette('--masthead-nav-link-text-hover')};
 		text-decoration: underline;
 	}
 
