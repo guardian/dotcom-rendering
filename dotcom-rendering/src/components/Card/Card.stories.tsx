@@ -1198,17 +1198,23 @@ export const DynamoWithSpecialPaletteVariations = () => {
 						<Card
 							{...basicCardProps}
 							containerPalette={containerPalette}
+							containerType="dynamic/package"
 							isDynamo={true}
+							kickerText="Main kicker"
+							headlineSize="huge"
+							imagePositionOnDesktop="bottom"
+							imagePositionOnMobile="bottom"
+							imageSize="large"
 							supportingContent={[
 								{
 									...aBasicLink,
 									headline: 'Headline 1',
-									kickerText: 'Kicker',
+									kickerText: 'News kicker',
 								},
 								{
 									...aBasicLink,
 									headline: 'Headline 2',
-									kickerText: 'Kicker',
+									kickerText: 'Sport kicker',
 									format: {
 										theme: Pillar.Sport,
 										design: ArticleDesign.Gallery,
@@ -1218,7 +1224,12 @@ export const DynamoWithSpecialPaletteVariations = () => {
 								{
 									...aBasicLink,
 									headline: 'Headline 3',
-									kickerText: 'Kicker',
+									kickerText: 'Culture kicker',
+									format: {
+										theme: Pillar.Culture,
+										design: ArticleDesign.Standard,
+										display: ArticleDisplay.Standard,
+									},
 								},
 							]}
 						/>
