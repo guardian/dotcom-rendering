@@ -267,6 +267,10 @@ const Picture = ({ image }: { image: string }) => {
 	);
 };
 
+function isFootballCrest(image: string) {
+	return image.includes('https://sport.guim.co.uk/football/crests/');
+}
+
 export const TagPageHeader = ({
 	title,
 	containerPalette,
@@ -298,7 +302,11 @@ export const TagPageHeader = ({
 
 			{image !== undefined && (
 				<div css={[sectionImage, paddings]}>
-					<Picture image={image} />
+					{isFootballCrest(image) ? (
+						<img src={image} alt={`${title} football crest`} />
+					) : (
+						<Picture image={image} />
+					)}
 				</div>
 			)}
 
