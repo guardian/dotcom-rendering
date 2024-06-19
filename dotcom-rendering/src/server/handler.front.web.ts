@@ -60,7 +60,7 @@ const tagPageWebTitle = (tagPage: FETagPageType) => {
 	}
 };
 
-export const getBadgeUrl = (data: FETagPageType) => {
+export const getBadgeUrl = (data: FETagPageType): string | undefined => {
 	if (!data.tags.tags[0]) return undefined;
 
 	const references = data.tags.tags[0].properties.references;
