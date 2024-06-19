@@ -28,6 +28,12 @@ export const tagPageHeader = () => {
 					'https://uploads.guim.co.uk/2023/02/17/Josh_Halliday.jpg'
 				}
 			/>
+			<p>A title & a description & an football crest</p>
+			<TagPageHeader
+				title={'Aston Villa'}
+				description={`<p>And a much longer description with lots of text, other thoughts and musings <a href="#">and a link</a></p>`}
+				image={'https://sport.guim.co.uk/football/crests/120/2.png'}
+			/>
 		</>
 	);
 };
