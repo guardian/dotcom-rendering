@@ -471,7 +471,7 @@ export const decideContainerOverrides = (
 				carouselArrow: borderCarouselArrow(containerPalette),
 			},
 			background: {
-				card: 'transparent',
+				card: backgroundContainer(containerPalette),
 				container: backgroundContainer(containerPalette),
 				containerLeftColumn:
 					backgroundContainerLeftColumn(containerPalette),
@@ -498,7 +498,7 @@ export const decideContainerOverrides = (
 				carouselArrow: borderCarouselArrow(containerPalette),
 			},
 			background: {
-				card: 'transparent',
+				card: backgroundContainer(containerPalette),
 				container: backgroundContainer(containerPalette),
 				containerOuter: backgroundContainerOuter(containerPalette),
 				carouselDot: backgroundCarouselDot(containerPalette),
@@ -529,7 +529,7 @@ export const decideContainerOverrides = (
 			carouselArrow: borderCarouselArrow(containerPalette),
 		},
 		background: {
-			card: 'transparent',
+			card: backgroundContainer(containerPalette),
 			container: backgroundContainer(containerPalette),
 			carouselDot: backgroundCarouselDot(containerPalette),
 			carouselArrow: backgroundCarouselArrow(containerPalette),
