@@ -28,12 +28,10 @@ export const GuVideoBlockComponent = ({
 		/http:\/\/cdn\.theguardian\.tv/g,
 		'https://cdn.theguardian.tv',
 	);
-
+	const sanitizedHtml = unescapeData(httpsHtml);
 	return (
 		<div css={embedContainer}>
-			<div
-				dangerouslySetInnerHTML={{ __html: unescapeData(httpsHtml) }}
-			/>
+			<div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
 
 			{!!caption && (
 				<Caption
