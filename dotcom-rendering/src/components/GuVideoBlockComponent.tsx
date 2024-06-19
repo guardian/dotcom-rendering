@@ -24,10 +24,16 @@ export const GuVideoBlockComponent = ({
 			width: 100%;
 		}
 	`;
+	const httpsHtml = html.replace(
+		/http:\/\/cdn\.theguardian\.tv/g,
+		'https://cdn.theguardian.tv',
+	);
 
 	return (
 		<div css={embedContainer}>
-			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
+			<div
+				dangerouslySetInnerHTML={{ __html: unescapeData(httpsHtml) }}
+			/>
 
 			{!!caption && (
 				<Caption
