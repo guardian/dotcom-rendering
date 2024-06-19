@@ -1,4 +1,4 @@
-import { tagPage } from 'fixtures/manual/tag-page';
+import { tagPage } from '../../fixtures/manual/tag-page';
 import { getBadgeUrl } from './handler.front.web';
 
 describe('getBadgeUrl', () => {
