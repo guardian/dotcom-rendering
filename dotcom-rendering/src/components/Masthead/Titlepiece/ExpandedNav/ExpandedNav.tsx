@@ -3,61 +3,61 @@ import {
 	brandBackground,
 	from,
 	textSans20,
-	until,
+	// until,
 } from '@guardian/source/foundations';
 import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
-import { navInputCheckboxId } from '../../../Nav/config';
+// import { navInputCheckboxId } from '../../../Nav/config';
 import { Columns } from '../../../Nav/ExpandedMenu/Columns';
 import { VeggieBurgerMenu } from '../VeggieBurger';
 
-const wrapperMainMenuStyles = css`
-	background-color: rgba(0, 0, 0, 0.5);
-	${getZIndex('expanded-veggie-menu-wrapper')}
-	left: 0;
-	top: 0;
-	/*
-        IMPORTANT NOTE:
-        we need to specify the adjacent path to the a (current) tag
-        to apply styles to the nested tabs due to the fact we use ~
-        to support NoJS
-    */
-	/* stylelint-disable-next-line selector-type-no-unknown */
-	${`#${navInputCheckboxId}`}:checked ~ div & {
-		${from.desktop} {
-			display: block;
-			overflow: visible;
-		}
-	}
+// const wrapperMainMenuStyles = css`
+// 	background-color: rgba(0, 0, 0, 0.5);
+// 	${getZIndex('expanded-veggie-menu-wrapper')}
+// 	left: 0;
+// 	top: 0;
+// 	/*
+//         IMPORTANT NOTE:
+//         we need to specify the adjacent path to the a (current) tag
+//         to apply styles to the nested tabs due to the fact we use ~
+//         to support NoJS
+//     */
+// 	/* stylelint-disable-next-line selector-type-no-unknown */
+// 	${`#${navInputCheckboxId}`}:checked ~ div & {
+// 		${from.desktop} {
+// 			display: block;
+// 			overflow: visible;
+// 		}
+// 	}
 
-	/* refer to comment above */
-	/* stylelint-disable */
-	${`#${navInputCheckboxId}`}:checked ~ div & {
-		${until.desktop} {
-			transform: translateX(
-				0%
-			); /* when translateX is set to 0% it reapears on the screen */
-		}
-	}
+// 	/* refer to comment above */
+// 	/* stylelint-disable */
+// 	${`#${navInputCheckboxId}`}:checked ~ div & {
+// 		${until.desktop} {
+// 			transform: translateX(
+// 				0%
+// 			); /* when translateX is set to 0% it reapears on the screen */
+// 		}
+// 	}
 
-	${until.desktop} {
-		transform: translateX(
-			-110%
-		); /* the negative translateX makes the nav hide to the side */
-		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-		box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
-		bottom: 0;
-		height: 100%;
-		overflow: auto;
-		position: fixed;
-		right: 0;
-		will-change: transform;
-	}
-	${from.desktop} {
-		display: none;
-	}
-`;
+// 	${until.desktop} {
+// 		transform: translateX(
+// 			-110%
+// 		); /* the negative translateX makes the nav hide to the side */
+// 		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+// 		box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
+// 		bottom: 0;
+// 		height: 100%;
+// 		overflow: auto;
+// 		position: fixed;
+// 		right: 0;
+// 		will-change: transform;
+// 	}
+// 	${from.desktop} {
+// 		display: none;
+// 	}
+// `;
 
 const mainMenuStyles = css`
 	background-color: ${brandBackground.primary};

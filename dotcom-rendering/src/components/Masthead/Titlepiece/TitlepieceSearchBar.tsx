@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans15 } from '@guardian/source/foundations';
+import { palette, space, textSans15 } from '@guardian/source/foundations';
 
 const searchBoxStyles = css`
 	width: 100%;
@@ -8,7 +8,7 @@ const searchBoxStyles = css`
 	${textSans15};
 	padding-left: 10px;
 	color: white;
-	background-color: #1e3f72;
+	background-color: ${palette.brand[300]};
 	margin-bottom: ${space[2]}px;
 	border: none;
 	::placeholder {
