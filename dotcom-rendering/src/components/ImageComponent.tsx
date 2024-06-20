@@ -480,9 +480,7 @@ export const ImageComponent = ({
 						`,
 					orientation === 'landscape' &&
 						css`
-							${from.leftCol} {
-								max-width: calc(1.333 * 96vh);
-							}
+							max-width: calc(1.333 * 96vh);
 						`,
 				]}
 			>
