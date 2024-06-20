@@ -1250,7 +1250,6 @@ const followTextLight: PaletteFunction = ({ design }) => {
 		case ArticleDesign.Gallery:
 			return sourcePalette.neutral[86];
 		case ArticleDesign.LiveBlog:
-		case ArticleDesign.Gallery:
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
