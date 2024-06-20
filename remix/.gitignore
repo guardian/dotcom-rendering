@@ -1,0 +1,14 @@
+node_modules
+
+/.cache
+/build
+/public/build
+/public/dcr-test/build
+.env
+
+# Fastly Compute
+/bin
+/pkg
+
+# @fastly/compute-js-static-publish
+/static-publisher

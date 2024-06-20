@@ -1,0 +1,22 @@
+# Ignore file for fastly serve --watch
+
+## fastly serve --watch should ignore these files:
+# Remix app source files
+/app
+/public
+# Remix app intermediate files
+/.cache
+# Fastly Compute output files
+/bin
+/pkg
+# misc files
+/LICENSE
+/README.md
+/.gitignore
+/.fastlyignore
+
+## fastly serve --watch should monitor these files:
+# Remix app output files
+!/build
+!/public/build
+!/public/dcr-test/build

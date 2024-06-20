@@ -1,0 +1,17 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://developer.fastly.com/reference/fastly-toml/
+
+authors = []
+description = "Serving the Guardian's website with Remix at the edge"
+language = "javascript"
+manifest_version = 2
+name = "fastly_remix_rendering_at_edge"
+service_id = "FWz9DTi0dKcxjV9GhW4fk4"
+
+[scripts]
+build = "npm run build"
+
+[local_server.backends.prod]
+url = "https://www.theguardian.com"
+override_host = "www.theguardian.com"
+cert_host = "www.theguardian.com"
