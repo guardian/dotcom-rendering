@@ -100,10 +100,7 @@ const CarouselColours = ({
 }): React.ReactElement => {
 	if ('palette' in props) {
 		return (
-			<ContainerOverrides
-				containerPalette={props.palette}
-				isDynamo={false}
-			>
+			<ContainerOverrides containerPalette={props.palette}>
 				{children}
 			</ContainerOverrides>
 		);
