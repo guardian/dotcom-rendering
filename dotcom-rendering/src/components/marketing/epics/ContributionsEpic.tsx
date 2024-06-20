@@ -1,3 +1,5 @@
+// @ts-nocheck -- testing @guardian/libs
+
 /**
  * @file
  * This file was migrated from:
@@ -7,16 +9,17 @@ import { css } from '@emotion/react';
 import {
 	article17,
 	articleBold17,
+	from,
 	headlineBold20,
+	palette,
+	space,
 } from '@guardian/source/foundations';
-import { palette, space } from '@guardian/source/foundations';
-import { from } from '@guardian/source/foundations';
 import {
 	containsNonArticleCountPlaceholder,
+	epicPropsSchema,
 	getLocalCurrencySymbol,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import { epicPropsSchema } from '@guardian/support-dotcom-components';
 import type {
 	ContributionFrequency,
 	EpicProps,
@@ -326,7 +329,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For the event stream
-			if (!window?.guardian?.config?.isDev && stage !== 'DEV') {
+			if (!window.guardian.config.isDev && stage !== 'DEV') {
 				sendEpicViewEvent(
 					tracking.referrerUrl,
 					tracking.abTestName,

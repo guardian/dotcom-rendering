@@ -1,3 +1,5 @@
+// @ts-nocheck -- testing @guardian/libs
+
 /**
  * @file
  * This file was migrated from:
