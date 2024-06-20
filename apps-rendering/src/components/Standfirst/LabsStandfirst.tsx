@@ -12,7 +12,7 @@ interface Props {
 	item: Item;
 }
 
-const LabsStandfirst: React.FC<Props> = ({ item }) => (
+const LabsStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst
 		item={item}
 		css={css(defaultStyles(getFormat(item)), labsStyles)}

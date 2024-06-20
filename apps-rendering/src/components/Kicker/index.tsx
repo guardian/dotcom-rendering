@@ -6,7 +6,7 @@ import { remSpace } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';
 import { text as kickerTextPalette } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 type Props = {
 	format: ArticleFormat;
@@ -55,7 +55,7 @@ const slashStyles = css`
 	}
 `;
 
-const Kicker: FC<Props> = ({ format, text }) => {
+const Kicker = ({ format, text }: Props) => {
 	return maybeRender(text, (t) => {
 		const kickerColour = kickerTextPalette.kicker(format);
 		return (

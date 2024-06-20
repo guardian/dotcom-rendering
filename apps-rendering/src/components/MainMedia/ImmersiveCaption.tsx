@@ -13,7 +13,6 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import { text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { immersiveCaptionId } from './MainMedia.defaults';
 
@@ -40,7 +39,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const ImmersiveCaption: FC<Props> = ({ mainMedia, format }) =>
+const ImmersiveCaption = ({ mainMedia, format }: Props) =>
 	maybeRender(mainMedia, (media) => {
 		if (
 			media.kind === MainMediaKind.Video ||

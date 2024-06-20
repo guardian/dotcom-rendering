@@ -6,7 +6,6 @@ import {
 	SvgTickRound,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
-import type { FC } from 'react';
 import { ContactText, Disclaimer } from './calloutComponents';
 import { FormField } from './formFields';
 import {
@@ -28,7 +27,7 @@ export type ValidationErrors = { [key in string]: string };
 const CALLOUT_URL =
 	'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit';
 
-const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
+const CalloutForm = ({ id, fields }: CalloutFormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
 		{},

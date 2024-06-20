@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source/foundations';
 import type { Image } from 'image';
-import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
 import DefaultMainMediaImage, {
 	defaultImgCss,
@@ -25,7 +24,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const CommentMainMediaImage: FC<Props> = ({ image, format }) => (
+const CommentMainMediaImage = ({ image, format }: Props) => (
 	<DefaultMainMediaImage
 		image={image}
 		sizes={defaultSizes}

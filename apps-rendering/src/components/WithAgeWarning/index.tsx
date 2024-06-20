@@ -152,7 +152,7 @@ const galleryStyle = (isSeries: boolean): SerializedStyles => css`
 	}
 `;
 
-const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
+const WithAgeWarning = ({
 	tags,
 	series,
 	publishDate,

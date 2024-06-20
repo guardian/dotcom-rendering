@@ -24,7 +24,7 @@ import type {
 } from 'embed';
 import { pipe, resultFromNullable, resultMap2, resultMap3 } from 'lib';
 import { createElement as h } from 'react';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { Result } from 'result';
 
 // ----- Component ----- //
@@ -385,11 +385,11 @@ interface EmbedComponentInClickToViewProps {
 	sourceDetails: SourceDetails;
 }
 
-const EmbedComponentInClickToView: FC<EmbedComponentInClickToViewProps> = ({
+const EmbedComponentInClickToView = ({
 	embed,
 	editions,
 	sourceDetails,
-}) => {
+}: EmbedComponentInClickToViewProps) => {
 	return renderOverlay(embed, editions)
 		? h(ClickToView, {
 				source: sourceDetails.source,
@@ -425,7 +425,7 @@ const withDatasetKeyFormat = (
 	);
 };
 
-const EmbedComponentWrapper: FC<Props> = ({ embed, editions }: Props) => {
+const EmbedComponentWrapper = ({ embed, editions }: Props) => {
 	if (
 		embed.tracking === EmbedTracksType.TRACKS ||
 		embed.tracking === EmbedTracksType.UNKNOWN

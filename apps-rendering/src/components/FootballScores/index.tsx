@@ -13,7 +13,6 @@ import { MatchStatusIcon } from 'components/MatchStatusIcon';
 import { TeamScore } from 'components/TeamScore';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { MatchStatus } from 'football';
-import type { FC } from 'react';
 
 // ----- Component ----- //
 
@@ -67,13 +66,13 @@ const stadiumStyles = css`
 	${textSans17};
 `;
 
-const FootballScores: FC<Props> = ({
+const FootballScores = ({
 	league,
 	stadium,
 	homeTeam,
 	awayTeam,
 	status,
-}) => (
+}: Props) => (
 	<section css={styles}>
 		<h2
 			css={css`

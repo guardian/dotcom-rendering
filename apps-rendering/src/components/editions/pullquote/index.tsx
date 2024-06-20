@@ -11,7 +11,7 @@ import type { Option } from '../../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export const pullquoteWidth = '10.875rem';
 const pullquoteTailSize = '1.5rem';
@@ -99,7 +99,7 @@ const blockQuoteStyles = css`
 	margin: 0;
 `;
 
-const Pullquote: FC<Props> = ({ quote, attribution, format }) => {
+const Pullquote = ({ quote, attribution, format }: Props) => {
 	const quoteElement = (
 		<p css={quoteStyles(format)}>
 			<SvgQuote />

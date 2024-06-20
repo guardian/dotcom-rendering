@@ -1,11 +1,10 @@
 // ----- Imports ----- //
 
-import type { FC } from 'react';
 import { LastUpdated } from './';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<LastUpdated
 		lastUpdated={new Date(1613763519000)}
 		lastUpdatedDisplay={'19.38 GMT'}

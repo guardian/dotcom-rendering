@@ -38,7 +38,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const GalleryStandfirst: React.FC<Props> = ({ standfirst, format }) =>
+const GalleryStandfirst = ({ standfirst, format }: Props) =>
 	maybeRender(standfirst.toOption(), (standfirstDoc) => (
 		<div css={styles(format)}>
 			{renderStandfirstText(standfirstDoc, format)}

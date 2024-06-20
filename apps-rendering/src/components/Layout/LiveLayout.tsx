@@ -28,7 +28,6 @@ import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { background } from 'palette';
-import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 
 // ----- Component ----- //
@@ -120,7 +119,7 @@ interface Props {
 	item: LiveBlog | DeadBlog;
 }
 
-const LiveLayout: FC<Props> = ({ item }) => {
+const LiveLayout = ({ item }: Props) => {
 	const pinnedPost = fromNullable(item.blocks.find((b) => b.isPinned));
 	const pagination = (
 		<Pagination

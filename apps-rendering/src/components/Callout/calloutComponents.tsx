@@ -1,7 +1,6 @@
-import type { FC } from 'react';
 import { highlight, info, termsConditions } from './styles';
 
-export const TermsAndConditions: FC = () => (
+export const TermsAndConditions = () => (
 	<div css={termsConditions}>
 		Please share your story if you are 18 or over, anonymously if you wish.{' '}
 		For more information please see our{' '}
@@ -16,7 +15,7 @@ export const TermsAndConditions: FC = () => (
 	</div>
 );
 
-export const Disclaimer: FC = () => (
+export const Disclaimer = () => (
 	<div css={info}>
 		Your responses, which can be anonymous, are secure as the form is
 		encrypted and only the Guardian has access to your contributions. We
@@ -28,14 +27,14 @@ export const Disclaimer: FC = () => (
 	</div>
 );
 
-export const ContactText: FC = () => (
+export const ContactText = () => (
 	<div css={info}>
 		By submitting your response, you are agreeing to share your details with
 		us for this feature.
 	</div>
 );
 
-export const InactiveCallout: FC = () => (
+export const InactiveCallout = () => (
 	<div css={highlight}>
 		<p>This callout is now closed to any further submissions.</p>
 		<p>

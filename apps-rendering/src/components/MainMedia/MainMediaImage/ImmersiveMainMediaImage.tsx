@@ -8,7 +8,6 @@ import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { Image } from 'image';
 import type { Sizes } from 'image/sizes';
-import type { FC } from 'react';
 import { immersiveCaptionId as captionId } from '../MainMedia.defaults';
 
 // ----- Component ----- //
@@ -48,7 +47,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const ImmersiveMainMediaImage: FC<Props> = ({ image, format }) => (
+const ImmersiveMainMediaImage = ({ image, format }: Props) => (
 	<figure css={styles} aria-labelledby={captionId}>
 		<Img
 			image={image}

@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { Cartoon } from '../../../cartoon';
 import type { ArticleFormat } from '@guardian/libs';
 import { css } from '@emotion/react';
@@ -40,7 +39,7 @@ const imageSizes = {
 	default: '100%',
 };
 
-const Cartoon: FC<Props> = ({ cartoon: { images }, format }) => {
+const Cartoon = ({ cartoon: { images }, format }: Props) => {
 	return (
 		<div css={[articlePaddingStyles, layoutStyles]}>
 			<figure aria-labelledby={cartoonId}>

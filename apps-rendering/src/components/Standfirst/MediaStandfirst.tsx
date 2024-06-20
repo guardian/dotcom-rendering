@@ -20,7 +20,7 @@ interface Props {
 	item: Item;
 }
 
-const MediaStandfirst: React.FC<Props> = ({ item }) => (
+const MediaStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst item={item} css={mediaStyles(getFormat(item))} />
 );
 

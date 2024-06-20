@@ -19,7 +19,7 @@ interface Props {
 	item: Item;
 }
 
-const ReviewHeadline: React.FC<Props> = ({ item }) => (
+const ReviewHeadline = ({ item }: Props) => (
 	<h1 css={css(defaultStyles(item), reviewStyles)}>
 		<span>{item.headline}</span>
 	</h1>

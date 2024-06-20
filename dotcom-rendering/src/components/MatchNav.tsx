@@ -9,8 +9,8 @@ import {
 import { Score } from './Score';
 
 type Props = {
-	homeTeam: TeamType;
-	awayTeam: TeamType;
+	homeTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	awayTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
 	comments?: string;
 };
 
@@ -105,7 +105,17 @@ const Scorers = ({ scorers }: { scorers: string[] }) => (
 					${textSans15}
 				`}
 			>
-				{player}
+				{player.startsWith('placeholder-') ? (
+					<span
+						css={css`
+							opacity: 0;
+						`}
+					>
+						―
+					</span>
+				) : (
+					player
+				)}
 			</li>
 		))}
 	</ul>
@@ -168,7 +178,15 @@ const TeamNav = ({
 				`}
 			>
 				<TeamName name={name} />
-				<Scorers scorers={scorers} />
+				<Scorers
+					scorers={[
+						...scorers,
+						// this ensures we reserve space for at least three scorers per team
+						'placeholder-1',
+						'placeholder-2',
+						'placeholder-3',
+					].slice(0, Math.max(3, scorers.length))}
+				/>
 			</div>
 			<CrestRow>
 				<Crest crest={crest} />

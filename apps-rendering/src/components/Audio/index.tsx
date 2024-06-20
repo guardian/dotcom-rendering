@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import type { FC } from 'react';
 
 // ----- Component ----- //
 
@@ -15,7 +14,7 @@ const audioStyles = css`
 	border: none;
 `;
 
-const Audio: FC<Props> = ({ src, width, height }) => (
+const Audio = ({ src, width, height }: Props) => (
 	<iframe
 		css={audioStyles}
 		src={src}

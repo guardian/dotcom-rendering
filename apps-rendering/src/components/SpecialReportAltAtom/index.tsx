@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { FC } from 'react';
 import { article17, body } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import { background, border, hover, text } from 'palette';
@@ -64,7 +63,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const SpecialReportAltAtom: FC<Props> = ({ format }) => (
+const SpecialReportAltAtom = ({ format }: Props) => (
 	<aside css={styles(format)}>
 		<hr css={hrStyles(format)} />
 		<h2 css={headingStyles}>WHAT IS THE COTTON CAPITAL SERIES?</h2>

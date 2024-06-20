@@ -16,7 +16,7 @@ import { withDefault } from '../../../vendor/@guardian/types/index';
 import Anchor from 'components/Anchor';
 import { maybeRender } from 'lib';
 import { text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { getHref, renderTextElement } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -109,7 +109,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const Caption: FC<Props> = ({ caption, format }) =>
+const Caption = ({ caption, format }: Props) =>
 	maybeRender(caption, (cap) => (
 		<>{Array.from(cap.childNodes).map(captionElement(format))}</>
 	));

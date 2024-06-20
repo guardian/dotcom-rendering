@@ -5618,7 +5618,7 @@ const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
 							return sourcePalette.neutral[97];
 					}
 				default:
-					return 'transparent';
+					return sourcePalette.neutral[100];
 			}
 	}
 };

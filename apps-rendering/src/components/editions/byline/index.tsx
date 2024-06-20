@@ -20,7 +20,7 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import EditionsAvatar from '../avatar';
 import ShareIcon from '../shareIcon';
 import {
@@ -264,7 +264,7 @@ const ignoreTextColour = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.Picture ||
 	format.display === ArticleDisplay.Immersive;
 
-const Byline: FC<Props> = ({ item, shareIcon = true }) => {
+const Byline = ({ item, shareIcon = true }: Props) => {
 	const format = getFormat(item);
 	const kickerColor = text.editionsKicker(format);
 

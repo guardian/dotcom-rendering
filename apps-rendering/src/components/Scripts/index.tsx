@@ -3,7 +3,7 @@
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 // ----- Sub-Components ----- //
 
@@ -11,7 +11,7 @@ interface ClientJsProps {
 	src: Option<string>;
 }
 
-const ClientJs: FC<ClientJsProps> = ({ src }) =>
+const ClientJs = ({ src }: ClientJsProps) =>
 	pipe(
 		src,
 		map((s) => <script src={s}></script>),
@@ -25,7 +25,7 @@ interface Props {
 	twitter: boolean;
 }
 
-const Scripts: FC<Props> = ({ clientScript, twitter }) => (
+const Scripts = ({ clientScript, twitter }: Props) => (
 	<>
 		<ClientJs src={clientScript} />
 		{twitter ? (

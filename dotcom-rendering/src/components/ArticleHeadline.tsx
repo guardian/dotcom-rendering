@@ -50,6 +50,7 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 				case ArticleDesign.Obituary:
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
 					return headlineLight50;
 				case ArticleDesign.Feature:
 				case ArticleDesign.Review:
@@ -65,6 +66,7 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 				case ArticleDesign.Obituary:
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
 					return headlineLight34;
 				case ArticleDesign.Feature:
 				case ArticleDesign.Review:

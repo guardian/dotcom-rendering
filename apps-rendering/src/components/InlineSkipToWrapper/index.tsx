@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import { border, neutral, textSans17 } from '@guardian/source/foundations';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 // ----- Component ----- //
 
@@ -61,11 +61,7 @@ const skipLinkCss = css`
  * The "blockDescription" prop will be announced by screen readers when the visually hidden elements
  * are reached - needs to be a **short** explanation of what the child element is.
  */
-const InlineSkipToWrapper: FC<Props> = ({
-	id,
-	blockDescription,
-	children,
-}: Props) => {
+const InlineSkipToWrapper = ({ id, blockDescription, children }: Props) => {
 	return (
 		<>
 			<a

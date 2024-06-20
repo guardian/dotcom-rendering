@@ -49,7 +49,7 @@ const Wrapper = ({
 							title: null,
 							publishedDateTime: 1692525060000,
 							lastUpdatedDateTime: 1692525060000,
-							body: 'Millie Bright has captained England in place of the injured Leah Williamson at this tournament. What’s her story I hear you ask, we’ve got you covered:',
+							body: '',
 						},
 						{
 							id: '64e1342b8f08af8aaccf0332',
@@ -152,6 +152,7 @@ const Wrapper = ({
 export const WorldCupFinal2023 = () => {
 	const containerPalette = 'EventAltPalette' satisfies DCRContainerPalette;
 	const overrides = decideContainerOverrides(containerPalette);
+
 	return (
 		<Wrapper
 			styles={css`
