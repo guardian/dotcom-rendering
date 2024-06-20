@@ -216,30 +216,31 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					paragraphs={cleanParagraphs}
 					numArticles={articleCounts.forTargetedWeeks}
 				/>
-
-				{choiceCardAmounts && (
-					<ContributionsEpicChoiceCards
-						setSelectionsCallback={setChoiceCardSelection}
-						selection={choiceCardSelection}
-						submitComponentEvent={submitComponentEvent}
-						currencySymbol={currencySymbol}
-						amountsTest={choiceCardAmounts}
-					/>
-				)}
 				{variant.newsletterSignup ? (
 					<ContributionsEpicNewsletterSignup
 						url={variant.newsletterSignup.url}
 					/>
 				) : (
-					<ContributionsEpicCtas
-						variant={variant}
-						tracking={tracking}
-						countryCode={countryCode}
-						articleCounts={articleCounts}
-						onReminderOpen={onReminderOpen}
-						fetchEmail={fetchEmail}
-						submitComponentEvent={submitComponentEvent}
-					/>
+					<>
+						{choiceCardAmounts && (
+							<ContributionsEpicChoiceCards
+								setSelectionsCallback={setChoiceCardSelection}
+								selection={choiceCardSelection}
+								submitComponentEvent={submitComponentEvent}
+								currencySymbol={currencySymbol}
+								amountsTest={choiceCardAmounts}
+							/>
+						)}
+						<ContributionsEpicCtas
+							variant={variant}
+							tracking={tracking}
+							countryCode={countryCode}
+							articleCounts={articleCounts}
+							onReminderOpen={onReminderOpen}
+							fetchEmail={fetchEmail}
+							submitComponentEvent={submitComponentEvent}
+						/>
+					</>
 				)}
 			</section>
 		</div>
