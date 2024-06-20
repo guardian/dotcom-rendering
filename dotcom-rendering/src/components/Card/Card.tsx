@@ -716,29 +716,27 @@ export const Card = ({
 				)}
 			</CardLayout>
 
-			<div style={{ backgroundColor: cardBackgroundColour }}>
-				<div
-					style={{
-						padding: addAdditionalPadding ? `0 ${space[2]}px` : 0,
-					}}
-				>
-					{hasSublinks && sublinkPosition === 'outer' && (
-						<SupportingContent
-							supportingContent={supportingContent}
-							containerPalette={containerPalette}
-							alignment={supportingContentAlignment}
-							isDynamo={isDynamo}
-						/>
-					)}
-				</div>
-				{showCommentLinesFooter && (
-					<CommentFooter
-						hasSublinks={hasSublinks}
-						palette={palette}
-						renderFooter={renderFooter}
+			<div
+				style={{
+					padding: addAdditionalPadding ? `0 ${space[2]}px` : 0,
+				}}
+			>
+				{hasSublinks && sublinkPosition === 'outer' && (
+					<SupportingContent
+						supportingContent={supportingContent}
+						containerPalette={containerPalette}
+						alignment={supportingContentAlignment}
+						isDynamo={isDynamo}
 					/>
 				)}
 			</div>
+			{showCommentLinesFooter && (
+				<CommentFooter
+					hasSublinks={hasSublinks}
+					palette={palette}
+					renderFooter={renderFooter}
+				/>
+			)}
 		</CardWrapper>
 	);
 };
