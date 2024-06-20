@@ -21,25 +21,29 @@ jobs:
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version: v1.44
 
       - name: Thrasher tracker
+        working-directory: scripts/deno
         run: |
           deno run \
             --allow-read \
             --allow-net \
             --allow-env=HOME,GITHUB_TOKEN \
-            scripts/deno/thrasher-tracker.ts
+            --allow-sys=homedir \
+            thrasher-tracker.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: iFrame titles tracker
+        working-directory: scripts/deno
         run: |
           deno run \
             --allow-read \
             --allow-net \
             --allow-env=HOME,GITHUB_TOKEN,CAPI_KEY \
-            scripts/deno/iframe-titles.ts
+            --allow-sys=homedir \
+            iframe-titles.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CAPI_KEY: ${{ secrets.CAPI_KEY }}
