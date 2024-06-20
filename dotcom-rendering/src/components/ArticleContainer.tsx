@@ -162,7 +162,8 @@ const adStyles = css`
 		constants.AD_LABEL_HEIGHT}px;
 
 		${from.desktop} {
-			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+			min-height: ${adSizes.outstreamDesktop.height +
+			constants.AD_LABEL_HEIGHT}px;
 		}
 	}
 
