@@ -21,7 +21,7 @@ jobs:
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version: v1.44
 
       - name: Thrasher tracker
         run: |
@@ -29,6 +29,7 @@ jobs:
             --allow-read \
             --allow-net \
             --allow-env=HOME,GITHUB_TOKEN \
+            --allow-sys=homedir \
             scripts/deno/thrasher-tracker.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,6 +40,7 @@ jobs:
             --allow-read \
             --allow-net \
             --allow-env=HOME,GITHUB_TOKEN,CAPI_KEY \
+            --allow-sys=homedir \
             scripts/deno/iframe-titles.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
