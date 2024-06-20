@@ -49,6 +49,7 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyLiveblogAsk } from '../components/marketing/epics/StickyLiveblogAsk';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import {
@@ -951,6 +952,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												}
 											/>
 										</div>
+										<StickyLiveblogAsk
+											referrerUrl={article.webURL}
+										/>
 									</Hide>
 								)}
 								{/* Match stats */}
