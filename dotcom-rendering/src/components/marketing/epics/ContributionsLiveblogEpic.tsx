@@ -29,6 +29,7 @@ import {
 import { logEpicView } from '../lib/viewLog';
 import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
+import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
@@ -225,16 +226,21 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 						amountsTest={choiceCardAmounts}
 					/>
 				)}
-
-				<ContributionsEpicCtas
-					variant={variant}
-					tracking={tracking}
-					countryCode={countryCode}
-					articleCounts={articleCounts}
-					onReminderOpen={onReminderOpen}
-					fetchEmail={fetchEmail}
-					submitComponentEvent={submitComponentEvent}
-				/>
+				{variant.newsletterSignup ? (
+					<ContributionsEpicNewsletterSignup
+						url={variant.newsletterSignup.url}
+					/>
+				) : (
+					<ContributionsEpicCtas
+						variant={variant}
+						tracking={tracking}
+						countryCode={countryCode}
+						articleCounts={articleCounts}
+						onReminderOpen={onReminderOpen}
+						fetchEmail={fetchEmail}
+						submitComponentEvent={submitComponentEvent}
+					/>
+				)}
 			</section>
 		</div>
 	);
