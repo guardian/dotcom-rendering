@@ -167,8 +167,8 @@ const adStyles = css`
 	}
 
 	/* Give inline1 ad slot a different placeholder height comparing to subsequent-inlines to reduce CLS.
-	   Let the ad slot take control of its height once rendered. */
-	//IMPORTANT NOTE: We currently don't serve OPT-OUT for inline1 but we will need to change this value before we do.
+	   Let the ad slot take control of its height once rendered.
+	   IMPORTANT NOTE: We currently do not serve OPT-OUT for inline1 but we will need to change this value before we do. */
 	.ad-slot--inline1:not(.ad-slot--rendered) {
 		${from.desktop} {
 			min-height: ${adSizes.outstreamDesktop.height +
