@@ -243,7 +243,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 								amountsTest={choiceCardAmounts}
 							/>
 						)}
-						{choiceCardAmounts && showThreeTierChoiceCards && (
+						{showChoiceCards && showThreeTierChoiceCards && (
 							<ThreeTierChoiceCards
 								countryCode={countryCode}
 								selectedAmount={

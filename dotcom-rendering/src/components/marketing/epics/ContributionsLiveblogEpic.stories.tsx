@@ -74,13 +74,13 @@ export const WithReminderCta: Story = {
 	},
 };
 
-export const InUS: Story = {
-	name: 'ContributionsLiveblogEpic in US',
+export const WithThreeTierChoiceCards: Story = {
+	name: 'ContributionsLiveblogEpic with Three Tier Choice Cards',
 	args: {
 		...meta.args,
-		countryCode: 'US',
 		variant: {
 			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
 			secondaryCta: {
 				type: SecondaryCtaType.ContributionsReminder,
 			},
@@ -90,29 +90,6 @@ export const InUS: Story = {
 				reminderLabel: 'December',
 			},
 			showChoiceCards: true,
-			choiceCardAmounts: {
-				testName: 'Storybook_test',
-				variantName: 'Control',
-				defaultContributionType: 'MONTHLY',
-				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
-				amountsCardData: {
-					ONE_OFF: {
-						amounts: [5, 10],
-						defaultAmount: 5,
-						hideChooseYourAmount: false,
-					},
-					MONTHLY: {
-						amounts: [4, 10],
-						defaultAmount: 12,
-						hideChooseYourAmount: false,
-					},
-					ANNUAL: {
-						amounts: [50, 100],
-						defaultAmount: 100,
-						hideChooseYourAmount: false,
-					},
-				},
-			},
 		},
 	},
 };
