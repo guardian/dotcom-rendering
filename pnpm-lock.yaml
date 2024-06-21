@@ -374,8 +374,8 @@ importers:
         specifier: workspace:*
         version: link:../libs/@guardian/source-development-kitchen
       '@guardian/support-dotcom-components':
-        specifier: 2.5.1
-        version: 2.5.1(zod@3.22.4)
+        specifier: 2.5.2
+        version: 2.5.2(@guardian/libs@17.0.0)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4432,11 +4432,13 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@2.5.1(zod@3.22.4):
-    resolution: {integrity: sha512-yF9eAlpQskU45oaevWEjVyXGs2SPhrs4VuxOw1uQqN6Yp11zL0gIEvwnj3eRX8jMNljBvFZdigPjdQxxuARU1A==}
+  /@guardian/support-dotcom-components@2.5.2(@guardian/libs@17.0.0)(zod@3.22.4):
+    resolution: {integrity: sha512-0+F/yI/QUi29lZJklod/jXMUVNpx5QcsInmdbE5/nCkoTo/9x1byr1zFzN/XTetuWxTx35wEVceTNMIOmUV6GA==}
     peerDependencies:
+      '@guardian/libs': ^17.0.0
       zod: ^3.22.4
     dependencies:
+      '@guardian/libs': 17.0.0(tslib@2.6.2)(typescript@5.3.3)
       zod: 3.22.4
     dev: false
 
