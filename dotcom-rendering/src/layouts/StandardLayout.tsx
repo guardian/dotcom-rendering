@@ -957,7 +957,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										/* above 980 */
 										margin-left: 20px;
 										margin-right: -20px;
-										padding-bottom: 48px;
+										padding-bottom: ${isMedia ? 41 : 0}px;
 									}
 									${from.leftCol} {
 										/* above 1140 */
