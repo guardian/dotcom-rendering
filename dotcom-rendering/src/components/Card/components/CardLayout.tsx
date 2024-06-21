@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import type { DCRContainerType } from '../../../types/front';
 import type { ImagePositionType } from './ImageWrapper';
 
@@ -65,26 +65,29 @@ const decidePosition = (
 			case 'left':
 			case 'right': {
 				return css`
+					gap: ${space[2]}px;
 					flex-direction: row-reverse;
-					${until.tablet} {
+					${from.tablet} {
 						flex-direction: row-reverse;
 					}
 				`;
 			}
 			default: {
 				return css`
-					flex-direction: column-reverse;
-					${until.tablet} {
-						flex-direction: row-reverse;
+					gap: ${space[2]}px;
+					flex-direction: row-reverse;
+					${from.tablet} {
+						flex-direction: column-reverse;
 					}
 				`;
 			}
 		}
 	}
 	return css`
-		flex-direction: ${decideDirection(imagePositionOnDesktop)};
-		${until.tablet} {
-			flex-direction: ${decideDirection(imagePositionOnMobile)};
+		gap: ${space[2]}px;
+		flex-direction: ${decideDirection(imagePositionOnMobile)};
+		${from.tablet} {
+			flex-direction: ${decideDirection(imagePositionOnDesktop)};
 		}
 	`;
 };

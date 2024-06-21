@@ -320,12 +320,6 @@ export const Card = ({
 	const showPlayIcon =
 		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
 
-	// For non onwards content comment cards that don't have sublinks or
-	// aren't dynamos, we render the footer in a different location
-	const isDynamoOrHasSublinks = !!isDynamo || !!hasSublinks;
-	const showCommentFooter =
-		isOpinion && !isOnwardContent && !isDynamoOrHasSublinks;
-
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -335,6 +329,11 @@ export const Card = ({
 		mainMedia,
 		isPlayableMediaCard,
 	});
+
+	// For opinion type cards with avatars (which aren't onwards content)
+	// we render the footer in a different location
+	const showCommentFooter =
+		isOpinion && !isOnwardContent && media?.type === 'avatar';
 
 	const cardBackgroundColour = isOnwardContent
 		? themePalette('--onward-content-card-background')
@@ -515,12 +514,7 @@ export const Card = ({
 					<ContentWrapper
 						imageType={media?.type}
 						imageSize={imageSize}
-						imagePositionOnMobile={
-							media ? imagePositionOnMobile : 'none'
-						}
-						imagePositionOnDesktop={
-							media ? imagePositionOnDesktop : 'none'
-						}
+						imagePositionOnDesktop={imagePositionOnDesktop}
 						addAdditionalPadding={addAdditionalPadding}
 						isOnwardContent={isOnwardContent}
 					>
