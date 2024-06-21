@@ -3,12 +3,11 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { none } from '../../../vendor/@guardian/types/index';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
-import type { FC } from 'react';
 import Follow from './';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<Follow
 		contributors={[
 			{
@@ -26,7 +25,7 @@ const Default: FC = () => (
 	/>
 );
 
-const Comment: FC = () => (
+const Comment = () => (
 	<Follow
 		contributors={[
 			{
@@ -44,7 +43,7 @@ const Comment: FC = () => (
 	/>
 );
 
-const Deadblogs: FC = () => {
+const Deadblogs = () => {
 	return (
 		<>
 			{getAllThemes({

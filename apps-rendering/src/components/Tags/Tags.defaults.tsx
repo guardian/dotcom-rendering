@@ -8,7 +8,6 @@ import { neutral, remSpace, textSans17 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { background, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -60,7 +59,7 @@ interface Props {
 	className?: string;
 }
 
-const DefaultTags: FC<Props> = ({ item, className }) => (
+const DefaultTags = ({ item, className }: Props) => (
 	<ul css={className} role="list">
 		{item.tags
 			.filter(

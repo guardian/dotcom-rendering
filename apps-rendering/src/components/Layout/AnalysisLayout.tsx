@@ -21,7 +21,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Analysis } from 'item';
 import { background } from 'palette';
-import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -50,7 +49,7 @@ interface Props {
 	item: Analysis;
 }
 
-const AnalysisLayout: FC<Props> = ({ item }) => {
+const AnalysisLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 	return (
 		<>

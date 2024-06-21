@@ -18,7 +18,7 @@ interface Props {
 	item: Item;
 }
 
-const MediaHeadline: React.FC<Props> = ({ item }) => (
+const MediaHeadline = ({ item }: Props) => (
 	<DefaultHeadline
 		item={item}
 		styles={css(defaultStyles(item), mediaStyles)}

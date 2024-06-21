@@ -1,12 +1,11 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { FC } from 'react';
 import CaptionIcon, { CaptionIconVariant } from '.';
 
 // ----- Stories ----- //
 
-const Image: FC = () => (
+const Image = () => (
 	<CaptionIcon
 		format={{
 			design: ArticleDesign.Standard,
@@ -17,7 +16,7 @@ const Image: FC = () => (
 	></CaptionIcon>
 );
 
-const Video: FC = () => (
+const Video = () => (
 	<CaptionIcon
 		format={{
 			design: ArticleDesign.Standard,

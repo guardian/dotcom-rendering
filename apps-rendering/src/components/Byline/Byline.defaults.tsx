@@ -77,12 +77,12 @@ interface DefaultProps {
 	anchorStyles: SerializedStyles;
 }
 
-export const DefaultByline: React.FC<DefaultProps> = ({
+export const DefaultByline = ({
 	bylineHtml,
 	styles,
 	anchorStyles,
 	format,
-}) =>
+}: DefaultProps) =>
 	maybeRender(bylineHtml, (byline) => (
 		<address css={styles}>
 			{renderText(format, byline, anchorStyles)}

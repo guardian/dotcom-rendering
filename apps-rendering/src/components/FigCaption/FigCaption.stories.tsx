@@ -3,12 +3,12 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { CaptionIconVariant } from 'components/CaptionIcon';
 import { Optional } from 'optional';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import FigCaption from '.';
 
 // ----- Stories ----- //
 
-const Image: FC = (): ReactElement => (
+const Image = (): ReactElement => (
 	<FigCaption
 		format={{
 			design: ArticleDesign.Standard,
@@ -23,7 +23,7 @@ const Image: FC = (): ReactElement => (
 	</FigCaption>
 );
 
-const Video: FC = (): ReactElement => (
+const Video = (): ReactElement => (
 	<FigCaption
 		format={{
 			design: ArticleDesign.Standard,

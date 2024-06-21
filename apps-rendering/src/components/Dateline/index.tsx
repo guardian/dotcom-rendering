@@ -16,7 +16,7 @@ import type { Option } from '../../../vendor/@guardian/types/index';
 import { datetimeFormat } from 'datetime';
 import { pipe } from 'lib';
 import { text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -75,7 +75,7 @@ const getDatelineStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const Dateline: FC<Props> = ({ date, format, edition }) =>
+const Dateline = ({ date, format, edition }: Props) =>
 	pipe(
 		date,
 		map((d) => (

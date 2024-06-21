@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
 	headlineBold17,
@@ -13,6 +14,7 @@ interface Props {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
+	format: ArticleFormat;
 }
 const containerStyles = css`
 	margin-bottom: ${space[2]}px;
@@ -57,6 +59,17 @@ const tagButtonStyles = css`
 	gap: ${space[2]}px;
 `;
 
+const desktopTabStyles = css`
+	${from.desktop} {
+		align-items: start;
+		gap: ${space[3]}px;
+		height: auto;
+		width: auto;
+		flex-direction: column;
+		margin-right: -1px;
+	}
+`;
+
 const arrowStyles = css`
 	display: inline-flex;
 	align-items: center;
@@ -80,8 +93,8 @@ const arrowStyles = css`
 `;
 
 const fillBarStyles = css`
-	background-color: white; /* Todo: replace with article background color; */
-	margin-top: -${space[2]}px;
+	background-color: ${palette('--tag-link-fill-background')};
+	margin-top: -${space[3]}px;
 	width: 100%;
 	height: 20px;
 	margin-bottom: -${space[2]}px;
@@ -92,16 +105,30 @@ export const TagLink = ({
 	sectionUrl,
 	sectionLabel,
 	guardianBaseURL,
+	format,
 }: Props) => {
+	const isBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
 	return (
-		<div css={containerStyles}>
-			<Hide from="leftCol">
-				<div css={fillBarStyles} />
-			</Hide>
+		<div
+			css={[
+				containerStyles,
+				!isBlog &&
+					css`
+						padding-top: ${space[1]}px;
+					`,
+			]}
+		>
+			{!isBlog && (
+				<Hide from="leftCol">
+					<div css={fillBarStyles} />
+				</Hide>
+			)}
 			<a
 				href={`${guardianBaseURL}/${sectionUrl}`}
-				css={tagLinkStyles}
-				data-component="series"
+				css={[tagLinkStyles, isBlog && desktopTabStyles]}
+				data-component="big-event-series"
 				data-link-name="article series"
 			>
 				<div css={labelStyles}>{sectionLabel}</div>

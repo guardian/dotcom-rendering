@@ -103,18 +103,15 @@ export const enhanceCollections = ({
 				collection.backfill,
 				editionId,
 				discussionApiUrl,
-				containerPalette,
 			),
 			curated: enhanceCards(collection.curated, {
 				cardInTagPage: false,
 				editionId,
-				containerPalette,
 				discussionApiUrl,
 			}),
 			backfill: enhanceCards(collection.backfill, {
 				cardInTagPage: false,
 				editionId,
-				containerPalette,
 				discussionApiUrl,
 			}),
 			treats: enhanceTreats(

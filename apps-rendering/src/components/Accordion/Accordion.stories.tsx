@@ -9,7 +9,6 @@ import {
 	neutral,
 	space,
 } from '@guardian/source/foundations';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import Accordion from '.';
 
@@ -63,7 +62,7 @@ const accordionContent = (
 	</>
 );
 
-const Default: FC = () => (
+const Default = () => (
 	<Accordion accordionTitle="Live feed" context="keyEvents">
 		{accordionContent}
 	</Accordion>

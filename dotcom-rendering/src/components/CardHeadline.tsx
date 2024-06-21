@@ -1,12 +1,16 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import type { FontScaleArgs, FontWeight } from '@guardian/source/foundations';
 import {
 	between,
-	fontWeights,
 	from,
-	headline,
-	remBodySizes,
+	headlineMedium14,
+	headlineMedium17,
+	headlineMedium20,
+	headlineMedium24,
+	headlineMedium28,
+	headlineMedium34,
+	headlineMedium42,
+	headlineMedium50,
 	space,
 	textSans12,
 	textSans15,
@@ -16,10 +20,8 @@ import {
 } from '@guardian/source/foundations';
 import { Link, SvgExternal } from '@guardian/source/react-components';
 import React from 'react';
-import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { palette } from '../palette';
-import type { DCRContainerPalette } from '../types/front';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';
@@ -27,7 +29,6 @@ import { QuoteIcon } from './QuoteIcon';
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat; // Used to decide when to add type specific styles
-	containerPalette?: DCRContainerPalette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	hideLineBreak?: boolean;
@@ -38,111 +39,69 @@ type Props = {
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
-	isDynamo?: true;
+	isSublink?: boolean;
 	isExternalLink?: boolean;
 	isOnwardContent?: boolean;
 };
 
-const fontStyles = ({
-	size,
-	fontWeight,
-}: {
-	size: SmallHeadlineSize;
-	fontWeight?: FontWeight;
-}) => {
-	const options: FontScaleArgs = {};
-	if (fontWeight) options.fontWeight = fontWeight;
-
+const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
 		case 'ginormous':
 			return css`
 				${from.desktop} {
-					${headline.large(
-						options,
-					)}; /** TODO (1) - Unknown argument please manually update */
-					font-size: 50px;
+					${headlineMedium50}
 				}
 			`;
 		case 'huge':
 			return css`
-				${headline.small(
-					options,
-				)}; /** TODO (1) - Unknown argument please manually update */
+				${headlineMedium28}
 			`;
 		case 'large':
 			return css`
-				${headline.xsmall(
-					options,
-				)}; /** TODO (1) - Unknown argument please manually update */
+				${headlineMedium24}
 			`;
 		case 'medium':
 			return css`
-				${headline.xxsmall(
-					options,
-				)}; /** TODO (1) - Unknown argument please manually update */
+				${headlineMedium20}
 			`;
 		case 'small':
 			return css`
-				${headline.xxxsmall(
-					options,
-				)}; /** TODO (1) - Unknown argument please manually update */
+				${headlineMedium17}
 			`;
 		case 'tiny':
 			return css`
-				${headline.xxxsmall(
-					options,
-				)}; /** TODO (1) - Unknown argument please manually update */
-				font-size: 14px;
+				${headlineMedium14}
 			`;
 	}
 };
 
-const fontStylesOnMobile = ({
-	size,
-	fontWeight,
-}: {
-	size: SmallHeadlineSize;
-	fontWeight?: FontWeight;
-}) => {
-	const options: FontScaleArgs = {};
-	if (fontWeight) options.fontWeight = fontWeight;
-
+const fontStylesOnMobile = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					${headline.medium(
-						options,
-					)}; /** TODO (1) - Unknown argument please manually update */
+					${headlineMedium34}
 				}
 				${between.mobileLandscape.and.desktop} {
-					${headline.large(
-						options,
-					)}; /** TODO (1) - Unknown argument please manually update */
+					${headlineMedium42}
 				}
 			`;
 		case 'huge':
 			return css`
 				${until.desktop} {
-					${headline.xsmall(
-						options,
-					)}; /** TODO (1) - Unknown argument please manually update */
+					${headlineMedium24}
 				}
 			`;
 		case 'large':
 			return css`
 				${until.desktop} {
-					${headline.xxsmall(
-						options,
-					)}; /** TODO (1) - Unknown argument please manually update */
+					${headlineMedium20}
 				}
 			`;
 		case 'medium':
 			return css`
 				${until.desktop} {
-					${headline.xxxsmall(
-						options,
-					)}; /** TODO (1) - Unknown argument please manually update */
+					${headlineMedium17}
 				}
 			`;
 		default:
@@ -188,7 +147,6 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 		case 'tiny':
 			return css`
 				${textSans12};
-				font-size: ${remBodySizes.xsmall}rem;
 			`;
 	}
 };
@@ -203,7 +161,6 @@ const sublinkStyles = css`
 	/* stylelint-disable-next-line property-disallowed-list */
 	font-family: inherit;
 	font-size: inherit;
-	font-weight: ${fontWeights.medium};
 	line-height: inherit;
 	@media (pointer: coarse) {
 		min-height: 44px;
@@ -214,16 +171,12 @@ const sublinkStyles = css`
 		color: inherit;
 		text-decoration: none;
 		.show-underline {
-			text-underline-offset: -5%;
 			text-decoration: underline;
 		}
 	}
 `;
 
-const lineStyles = (
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
-) => css`
+const lineStyles = css`
 	padding-top: 1px;
 	:before {
 		display: block;
@@ -231,8 +184,7 @@ const lineStyles = (
 		top: 0;
 		left: 0;
 		content: '';
-		border-top: 1px solid
-			${decidePalette(format, containerPalette).border.cardSupporting};
+		border-top: 1px solid ${palette('--card-border-supporting')};
 
 		width: 120px;
 		${between.tablet.and.desktop} {
@@ -241,27 +193,20 @@ const lineStyles = (
 	}
 `;
 
-const dynamoStyles = css`
-	display: block;
-	font-weight: ${fontWeights.medium};
-	padding: 5px;
-`;
-
 export const WithLink = ({
 	linkTo,
 	children,
-	isDynamo,
 }: {
 	linkTo?: string;
 	children: React.ReactNode;
-	isDynamo?: true;
 }) => {
 	if (linkTo) {
 		return (
 			<Link
 				href={linkTo}
 				cssOverrides={
-					isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
+					sublinkStyles
+					// isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
 				}
 			>
 				{children}
@@ -277,7 +222,6 @@ const isFirstWordShort = /^(\w{1,3}) \b/;
 export const CardHeadline = ({
 	headlineText,
 	format,
-	containerPalette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -288,7 +232,7 @@ export const CardHeadline = ({
 	showByline,
 	showLine,
 	linkTo,
-	isDynamo,
+	isSublink,
 	isExternalLink,
 	isOnwardContent = false,
 }: Props) => {
@@ -299,33 +243,28 @@ export const CardHeadline = ({
 	return (
 		<>
 			<h3
+				className={`${
+					isSublink ? 'card-sublink-headline' : 'card-headline'
+				}`}
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
-						: fontStyles({
-								size,
-								fontWeight: 'medium',
-						  }),
+						: fontStyles({ size }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
-							fontWeight: 'medium',
 						}),
-					showLine &&
-						!isDynamo &&
-						lineStyles(format, containerPalette),
+					showLine && lineStyles,
 				]}
 			>
-				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
+				<WithLink linkTo={linkTo}>
 					{!!kickerText && (
-						<>
-							<Kicker
-								text={kickerText}
-								color={kickerColour}
-								showPulsingDot={showPulsingDot}
-								hideLineBreak={hideLineBreak}
-							/>
-						</>
+						<Kicker
+							text={kickerText}
+							color={kickerColour}
+							showPulsingDot={showPulsingDot}
+							hideLineBreak={hideLineBreak}
+						/>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span

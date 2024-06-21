@@ -7,7 +7,7 @@ import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Series } from 'capi';
 import { pipe } from 'lib';
 import { text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 const articleSeriesStyles = (format: ArticleFormat): SerializedStyles => css`
 	a {
@@ -28,7 +28,7 @@ interface ArticleSeriesProps {
 	format: ArticleFormat;
 }
 
-const ArticleSeries: FC<ArticleSeriesProps> = ({ series, format }) =>
+const ArticleSeries = ({ series, format }: ArticleSeriesProps) =>
 	pipe(
 		series,
 		map((series) => (

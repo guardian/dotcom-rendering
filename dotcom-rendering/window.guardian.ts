@@ -55,8 +55,6 @@ declare global {
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
 		};
-		GoogleAnalyticsObject: string;
-		ga: UniversalAnalytics.ga | null;
 		/**
 		 * ES6 module import, possibly polyfilled depending on the current
 		 * browser. There are three categories:

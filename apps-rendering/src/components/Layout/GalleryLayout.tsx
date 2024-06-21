@@ -17,7 +17,6 @@ import { grid } from 'grid/grid';
 import type { Gallery } from 'item';
 import { getFormat } from 'item';
 import { background, border } from 'palette';
-import type { FC } from 'react';
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -49,7 +48,7 @@ type Props = {
 	item: Gallery;
 };
 
-const GalleryLayout: FC<Props> = ({ item }) => {
+const GalleryLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

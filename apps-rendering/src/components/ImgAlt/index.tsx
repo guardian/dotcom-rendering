@@ -14,7 +14,6 @@ import { getCaption, getClassName, getCredit } from 'image/lightbox';
 import { sizesAttribute, styles as sizeStyles } from 'image/sizes';
 import type { Sizes } from 'image/sizes';
 import type { Optional } from 'optional';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Functions ----- //
@@ -80,7 +79,7 @@ const styles = (
 	display: block;
 `;
 
-const Img: FC<Props> = ({ image, sizes, className, format, lightbox }) => (
+const Img = ({ image, sizes, className, format, lightbox }: Props) => (
 	<picture>
 		<source
 			sizes={sizesAttribute(sizes)}

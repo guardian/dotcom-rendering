@@ -8,8 +8,9 @@ import {
 import { from } from '@guardian/source/foundations';
 import React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
+import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import { FrontSection } from '../FrontSection';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
@@ -534,15 +535,6 @@ export const WithAnAvatar = () => {
 		</>
 	);
 };
-WithAnAvatar.decorators = [
-	lightDecorator([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Comment,
-			theme: Pillar.Opinion,
-		},
-	]),
-];
 
 export const WhenVerticalAndThemeOpinion = () => {
 	return (
@@ -585,6 +577,11 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 							...aBasicLink,
 							headline: 'Headline 2',
 							kickerText: 'Kicker',
+							format: {
+								theme: Pillar.Sport,
+								design: ArticleDesign.Gallery,
+								display: ArticleDisplay.Standard,
+							},
 						},
 						{
 							...aBasicLink,
@@ -1137,3 +1134,108 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 
 WithLetterDesignAndShowQuotedHeadline.storyName =
 	'WithLetterDesignAndShowQuotedHeadline';
+
+export const WithSpecialPaletteVariations = () => {
+	const containerPalettes = [
+		'InvestigationPalette',
+		'LongRunningPalette',
+		'SombrePalette',
+		'BreakingPalette',
+		'EventPalette',
+		'EventAltPalette',
+		'LongRunningAltPalette',
+		'SombreAltPalette',
+		'SpecialReportAltPalette',
+	] as const satisfies readonly DCRContainerPalette[];
+
+	return (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					discussionApiUrl=""
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+				>
+					<CardWrapper>
+						<Card
+							{...basicCardProps}
+							containerPalette={containerPalette}
+							imagePositionOnDesktop="left"
+						/>
+					</CardWrapper>
+				</FrontSection>
+			))}
+		</>
+	);
+};
+
+export const DynamoWithSpecialPaletteVariations = () => {
+	const containerPalettes = [
+		'InvestigationPalette',
+		'LongRunningPalette',
+		'SombrePalette',
+		'BreakingPalette',
+		'EventPalette',
+		'EventAltPalette',
+		'LongRunningAltPalette',
+		'SombreAltPalette',
+		'SpecialReportAltPalette',
+	] as const satisfies readonly DCRContainerPalette[];
+
+	return (
+		<>
+			{containerPalettes.map((containerPalette) => (
+				<FrontSection
+					title={containerPalette}
+					discussionApiUrl=""
+					editionId={'UK'}
+					containerPalette={containerPalette}
+					key={containerPalette}
+				>
+					<CardWrapper>
+						<Card
+							{...basicCardProps}
+							containerPalette={containerPalette}
+							containerType="dynamic/package"
+							isDynamo={true}
+							kickerText="Main kicker"
+							headlineSize="huge"
+							imagePositionOnDesktop="bottom"
+							imagePositionOnMobile="bottom"
+							imageSize="large"
+							supportingContent={[
+								{
+									...aBasicLink,
+									headline: 'Headline 1',
+									kickerText: 'News kicker',
+								},
+								{
+									...aBasicLink,
+									headline: 'Headline 2',
+									kickerText: 'Sport kicker',
+									format: {
+										theme: Pillar.Sport,
+										design: ArticleDesign.Gallery,
+										display: ArticleDisplay.Standard,
+									},
+								},
+								{
+									...aBasicLink,
+									headline: 'Headline 3',
+									kickerText: 'Culture kicker',
+									format: {
+										theme: Pillar.Culture,
+										design: ArticleDesign.Standard,
+										display: ArticleDisplay.Standard,
+									},
+								},
+							]}
+						/>
+					</CardWrapper>
+				</FrontSection>
+			))}
+		</>
+	);
+};

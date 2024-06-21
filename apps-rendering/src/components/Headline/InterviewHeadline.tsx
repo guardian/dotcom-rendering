@@ -26,7 +26,7 @@ const interviewStyles = css`
 	}
 `;
 
-const InterviewHeadline: React.FC<Props> = ({ item }) => {
+const InterviewHeadline = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

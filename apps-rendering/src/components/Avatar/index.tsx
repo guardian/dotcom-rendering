@@ -10,7 +10,7 @@ import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';
 import { pipe } from 'lib';
 import { background } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Setup ----- //
@@ -37,7 +37,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
-const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
+const Avatar = ({ contributors, ...format }: Props) => {
 	const [contributor] = contributors;
 
 	if (!isSingleContributor(contributors)) {

@@ -4,7 +4,6 @@ import {
 	SvgTickRound,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
-import type { FC } from 'react';
 import {
 	calloutShare,
 	calloutSharelink,
@@ -12,10 +11,13 @@ import {
 	sharePopup,
 } from './styles';
 
-export const ShareLink: FC<{
+export const ShareLink = ({
+	title,
+	urlAnchor,
+}: {
 	title?: string;
 	urlAnchor: string;
-}> = ({ title, urlAnchor }) => {
+}) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async (): Promise<void> => {
