@@ -250,7 +250,7 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 			<div css={textBlock}>
 				<div css={bodySection}>
 					The Guardian's expert news coverage is funded by people like
-					you, not a billionaire owner. Can you help us keep our
+					you, not a billionaire owner. Will you help us keep our
 					independent journalism free and open to all today?
 				</div>
 				<div css={ctaSection}>
