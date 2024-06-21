@@ -162,6 +162,14 @@ const adStyles = css`
 		constants.AD_LABEL_HEIGHT}px;
 
 		${from.desktop} {
+			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+		}
+	}
+
+	/* Give inline1 ad slot a different placeholder height comparing to subsequent-inlines to reduce CLS.
+	   Let the ad slot take control of its height once rendered. */
+	.ad-slot--inline1:not(.ad-slot--rendered) {
+		${from.desktop} {
 			min-height: ${adSizes.outstreamDesktop.height +
 			constants.AD_LABEL_HEIGHT}px;
 		}
