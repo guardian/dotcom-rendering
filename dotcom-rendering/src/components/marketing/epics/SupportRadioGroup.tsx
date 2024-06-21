@@ -11,9 +11,15 @@ import {
 	Stack,
 	SvgTickRound,
 } from '@guardian/source/react-components';
+import { getLocalCurrencySymbol } from '@guardian/support-dotcom-components';
 import { useState } from 'react';
+import type {
+	SupportCurrencyIso,
+	SupportTier,
+} from './utils/threeTierChoiceCardAmounts';
+import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
-const paymentTypeChoiceCardStyles = (selected: boolean) => css`
+const supportTierChoiceCardStyles = (selected: boolean) => css`
 	border: ${selected
 		? `2px solid ${palette.brand['500']}`
 		: `1px solid ${palette.neutral[46]}`};
@@ -24,9 +30,6 @@ const paymentTypeChoiceCardStyles = (selected: boolean) => css`
 			? `${space[4]}px ${space[5]}px ${space[2]}px ${space[5]}px`
 			: `6px ${space[5]}px` // reduce vertical padding when Radio's min-height comes into effect
 	};
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
 `;
 
 const benefitsStyles = css`
@@ -54,8 +57,12 @@ const benefitsStyles = css`
 `;
 
 const benefitsLabelStyles = css`
-	color: ${palette.neutral[46]};
-	${textSansBold15};
+	color: ${palette.neutral[0]};
+	${textSans15};
+
+	strong {
+		${textSansBold15};
+	}
 `;
 
 const labelOverrideStyles = css`
@@ -68,32 +75,48 @@ const supportingTextStyles = css`
 	margin-top: ${space[4]}px;
 `;
 
-const recommendedPillStyles = (selected: boolean) => css`
+const recommendedPillStyles = css`
 	border-radius: 4px;
 	padding: ${space[1]}px ${space[2]}px;
 	background-color: ${palette.brand[400]};
 	${textSansBold15};
 	color: ${palette.neutral[100]};
-	${
-		selected ? '' : 'margin-top: 10px;' // increase margin when Radio's min-height comes into effect
-	}
+	position: absolute;
+	top: -${space[2]}px;
+	right: ${space[5]}px;
 `;
 
-type PaymentType = 'LowMonthly' | 'HighMonthly' | 'Single';
-
 type ChoiceInfo = {
-	id: PaymentType;
-	label: string;
+	supportTier: SupportTier;
+	label: (amount: number, currencySymbol: string) => string;
 	benefitsLabel?: string;
 	benefits: string[];
 	recommended: boolean;
 };
 
+function getAmount(
+	supportTier: SupportTier,
+	currency: SupportCurrencyIso,
+): number {
+	return threeTierChoiceCardAmounts[currency][supportTier];
+}
+
 const Choices = [
 	{
-		id: 'HighMonthly',
-		label: 'Support £10/month',
-		benefitsLabel: 'Unlock Support benefits',
+		supportTier: 'support',
+		label: (amount: number, currencySymbol: string) =>
+			`Support ${currencySymbol}${amount}/month`,
+		benefitsLabel: 'Support',
+		benefits: [
+			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
+		],
+		recommended: false,
+	},
+	{
+		supportTier: 'allAccess',
+		label: (amount: number, currencySymbol: string) =>
+			`Support ${currencySymbol}${amount}/month`,
+		benefitsLabel: 'All-access digital',
 		benefits: [
 			'Unlimited access to the Guardian app',
 			'Ad-free reading on all your devices',
@@ -103,21 +126,10 @@ const Choices = [
 		recommended: true,
 	},
 	{
-		id: 'LowMonthly',
-		label: 'Support £4/month',
-		benefitsLabel: 'Unlock All-access digital benefits',
-		benefits: [
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-		],
-		recommended: false,
-	},
-	{
-		id: 'Single',
-		label: 'Support just once',
+		supportTier: 'other',
+		label: () => 'Support with another amount',
 		benefitsLabel: undefined,
-		benefits: [
-			'We welcome support of any size, any time - whether you choose to give £1 or more',
-		],
+		benefits: ['We welcome support of any size, any time'],
 		recommended: false,
 	},
 ] as const satisfies ReadonlyArray<ChoiceInfo>;
@@ -133,7 +145,9 @@ const SupportingBenefits = ({
 	return (
 		<div css={supportingTextStyles}>
 			{!!benefitsLabel && (
-				<span css={benefitsLabelStyles}>{benefitsLabel}</span>
+				<span css={benefitsLabelStyles}>
+					Unlock <strong>{benefitsLabel}</strong> benefits:
+				</span>
 			)}
 			<ul css={benefitsStyles}>
 				{benefits.map((benefit) => (
@@ -147,13 +161,19 @@ const SupportingBenefits = ({
 	);
 };
 
-const RecommendedPill = ({ selected }: { selected: boolean }) => {
-	return <div css={recommendedPillStyles(selected)}>Recommended</div>;
+const RecommendedPill = () => {
+	return <div css={recommendedPillStyles}>Recommended</div>;
 };
 
-export const SupportRadioGroup = () => {
-	const [selectedPaymentType, setSelectedPaymentType] =
-		useState<PaymentType>('HighMonthly');
+type SupportRadioGroupProps = {
+	countryCode?: string;
+};
+
+export const SupportRadioGroup = ({ countryCode }: SupportRadioGroupProps) => {
+	const [selectedSupportTier, setSelectedSupportTier] =
+		useState<SupportTier>('allAccess');
+
+	const currencySymbol = getLocalCurrencySymbol(countryCode);
 
 	return (
 		<RadioGroup
@@ -161,35 +181,50 @@ export const SupportRadioGroup = () => {
 				margin-top: ${space[6]}px;
 			`}
 		>
-			<Stack space={2}>
+			<Stack space={3}>
 				{Choices.map(
-					({ id, label, benefitsLabel, benefits, recommended }) => {
-						const selected = selectedPaymentType === id;
+					({
+						supportTier,
+						label,
+						benefitsLabel,
+						benefits,
+						recommended,
+					}) => {
+						const selected = selectedSupportTier === supportTier;
 						return (
 							<div
-								key={id}
-								css={paymentTypeChoiceCardStyles(selected)}
+								key={supportTier}
+								css={css`
+									position: relative;
+								`}
 							>
-								<Radio
-									label={label}
-									value={id}
-									css={labelOverrideStyles}
-									supporting={
-										selected ? (
-											<SupportingBenefits
-												benefitsLabel={benefitsLabel}
-												benefits={benefits}
-											/>
-										) : (
-											''
-										)
-									}
-									checked={selected}
-									onChange={() => setSelectedPaymentType(id)}
-								/>
-								{recommended && (
-									<RecommendedPill selected={selected} />
-								)}
+								{recommended && <RecommendedPill />}
+								<div
+									css={supportTierChoiceCardStyles(selected)}
+								>
+									<Radio
+										label={label(
+											getAmount(supportTier, 'GBP'),
+											currencySymbol,
+										)}
+										value={supportTier}
+										css={labelOverrideStyles}
+										supporting={
+											selected ? (
+												<SupportingBenefits
+													benefitsLabel={
+														benefitsLabel
+													}
+													benefits={benefits}
+												/>
+											) : undefined
+										}
+										checked={selected}
+										onChange={() =>
+											setSelectedSupportTier(supportTier)
+										}
+									/>
+								</div>
 							</div>
 						);
 					},
