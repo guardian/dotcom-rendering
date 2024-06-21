@@ -27,11 +27,9 @@ const supportTierChoiceCardStyles = (selected: boolean) => css`
 		: `1px solid ${palette.neutral[46]}`};
 	background-color: ${selected ? palette.sport[800] : ''};
 	border-radius: 10px;
-	padding: ${
-		selected
-			? `${space[4]}px ${space[5]}px ${space[2]}px ${space[5]}px`
-			: `6px ${space[5]}px` // reduce vertical padding when Radio's min-height comes into effect
-	};
+	padding: ${selected
+		? `${space[4]}px ${space[5]}px ${space[2]}px ${space[5]}px`
+		: `6px ${space[5]}px`};
 `;
 
 const benefitsStyles = css`
