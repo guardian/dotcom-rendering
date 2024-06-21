@@ -30,6 +30,8 @@ import { logEpicView } from '../lib/viewLog';
 import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
+import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
+import { getDefaultAmount as getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
@@ -144,6 +146,10 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 		ChoiceCardSelection | undefined
 	>();
 
+	const showThreeTierChoiceCards = variant.name.includes(
+		'THREE_TIER_CHOICE_CARDS',
+	);
+
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
 			const defaultFrequency: ContributionFrequency =
@@ -197,6 +203,12 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 		replaceNonArticleCountPlaceholders(variant.heading) ||
 		'Support the Guardian';
 
+	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
+	const [
+		threeTierChoiceCardSelectedAmount,
+		setThreeTierChoiceCardSelectedAmount,
+	] = useState<number>(defaultThreeTierAmount);
+
 	if (
 		cleanParagraphs.some(containsNonArticleCountPlaceholder) ||
 		containsNonArticleCountPlaceholder(cleanHeading)
@@ -222,13 +234,24 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					/>
 				) : (
 					<>
-						{choiceCardAmounts && (
+						{choiceCardAmounts && !showThreeTierChoiceCards && (
 							<ContributionsEpicChoiceCards
 								setSelectionsCallback={setChoiceCardSelection}
 								selection={choiceCardSelection}
 								submitComponentEvent={submitComponentEvent}
 								currencySymbol={currencySymbol}
 								amountsTest={choiceCardAmounts}
+							/>
+						)}
+						{choiceCardAmounts && showThreeTierChoiceCards && (
+							<ThreeTierChoiceCards
+								countryCode={countryCode}
+								selectedAmount={
+									threeTierChoiceCardSelectedAmount
+								}
+								setSelectedAmount={
+									setThreeTierChoiceCardSelectedAmount
+								}
 							/>
 						)}
 						<ContributionsEpicCtas
@@ -239,6 +262,11 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 							onReminderOpen={onReminderOpen}
 							fetchEmail={fetchEmail}
 							submitComponentEvent={submitComponentEvent}
+							showChoiceCards={showChoiceCards}
+							choiceCardSelection={choiceCardSelection}
+							threeTierChoiceCardSelectedAmount={
+								threeTierChoiceCardSelectedAmount
+							}
 						/>
 					</>
 				)}

@@ -17,7 +17,7 @@ import {
 	countryCodeToCountryGroupId,
 	getLocalCurrencySymbol,
 } from '@guardian/support-dotcom-components';
-import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
@@ -99,8 +99,11 @@ type ChoiceInfo = {
 	recommended: boolean;
 };
 
-function getAmount(supportTier: SupportTier, currency: CountryGroupId): number {
-	return threeTierChoiceCardAmounts[currency][supportTier];
+function getChoiceAmount(
+	supportTier: SupportTier,
+	countryGroupId: CountryGroupId,
+): number {
+	return threeTierChoiceCardAmounts[countryGroupId][supportTier];
 }
 
 const Choices = [
@@ -167,14 +170,17 @@ const RecommendedPill = () => {
 	return <div css={recommendedPillStyles}>Recommended</div>;
 };
 
-type SupportRadioGroupProps = {
+type ThreeTierChoiceCardsProps = {
+	selectedAmount: number;
+	setSelectedAmount: Dispatch<SetStateAction<number>>;
 	countryCode?: string;
 };
 
-export const SupportRadioGroup = ({ countryCode }: SupportRadioGroupProps) => {
-	const [selectedSupportTier, setSelectedSupportTier] =
-		useState<SupportTier>('allAccess');
-
+export const ThreeTierChoiceCards = ({
+	countryCode,
+	selectedAmount,
+	setSelectedAmount,
+}: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
 
@@ -193,7 +199,12 @@ export const SupportRadioGroup = ({ countryCode }: SupportRadioGroupProps) => {
 						benefits,
 						recommended,
 					}) => {
-						const selected = selectedSupportTier === supportTier;
+						const choiceAmount = getChoiceAmount(
+							supportTier,
+							countryGroupId,
+						);
+						const selected = selectedAmount === choiceAmount;
+
 						return (
 							<div
 								key={supportTier}
@@ -207,10 +218,7 @@ export const SupportRadioGroup = ({ countryCode }: SupportRadioGroupProps) => {
 								>
 									<Radio
 										label={label(
-											getAmount(
-												supportTier,
-												countryGroupId,
-											),
+											choiceAmount,
 											currencySymbol,
 										)}
 										value={supportTier}
@@ -227,7 +235,7 @@ export const SupportRadioGroup = ({ countryCode }: SupportRadioGroupProps) => {
 										}
 										checked={selected}
 										onChange={() =>
-											setSelectedSupportTier(supportTier)
+											setSelectedAmount(choiceAmount)
 										}
 									/>
 								</div>
