@@ -4,6 +4,7 @@ import {
 	space,
 	textSans15,
 	textSansBold15,
+	until,
 } from '@guardian/source/foundations';
 import {
 	Radio,
@@ -11,12 +12,13 @@ import {
 	Stack,
 	SvgTickRound,
 } from '@guardian/source/react-components';
-import { getLocalCurrencySymbol } from '@guardian/support-dotcom-components';
+import type { CountryGroupId } from '@guardian/support-dotcom-components';
+import {
+	countryCodeToCountryGroupId,
+	getLocalCurrencySymbol,
+} from '@guardian/support-dotcom-components';
 import { useState } from 'react';
-import type {
-	SupportCurrencyIso,
-	SupportTier,
-} from './utils/threeTierChoiceCardAmounts';
+import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
 const supportTierChoiceCardStyles = (selected: boolean) => css`
@@ -83,6 +85,9 @@ const recommendedPillStyles = css`
 	color: ${palette.neutral[100]};
 	position: absolute;
 	top: -${space[2]}px;
+	${until.phablet} {
+		right: ${space[3]}px;
+	}
 	right: ${space[5]}px;
 `;
 
@@ -94,10 +99,7 @@ type ChoiceInfo = {
 	recommended: boolean;
 };
 
-function getAmount(
-	supportTier: SupportTier,
-	currency: SupportCurrencyIso,
-): number {
+function getAmount(supportTier: SupportTier, currency: CountryGroupId): number {
 	return threeTierChoiceCardAmounts[currency][supportTier];
 }
 
@@ -174,6 +176,7 @@ export const SupportRadioGroup = ({ countryCode }: SupportRadioGroupProps) => {
 		useState<SupportTier>('allAccess');
 
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
+	const countryGroupId = countryCodeToCountryGroupId(countryCode);
 
 	return (
 		<RadioGroup
@@ -204,7 +207,10 @@ export const SupportRadioGroup = ({ countryCode }: SupportRadioGroupProps) => {
 								>
 									<Radio
 										label={label(
-											getAmount(supportTier, 'GBP'),
+											getAmount(
+												supportTier,
+												countryGroupId,
+											),
 											currencySymbol,
 										)}
 										value={supportTier}

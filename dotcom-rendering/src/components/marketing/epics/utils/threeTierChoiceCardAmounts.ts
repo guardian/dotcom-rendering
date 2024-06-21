@@ -1,48 +1,41 @@
-export type SupportCurrencyIso =
-	| 'GBP'
-	| 'USD'
-	| 'AUD'
-	| 'EUR'
-	| 'NZD'
-	| 'CAD'
-	| 'international';
+import type { CountryGroupId } from '@guardian/support-dotcom-components';
 
 export type SupportTier = 'support' | 'allAccess' | 'other';
 
 export const threeTierChoiceCardAmounts = {
-	GBP: {
+	GBPCountries: {
 		support: 4,
 		allAccess: 10,
-		other: 0,
+		other: NaN,
 	},
-	USD: {
+	UnitedStates: {
 		support: 5,
 		allAccess: 13,
-		other: 0,
+		other: NaN,
 	},
-	AUD: {
+	AUDCountries: {
 		support: 10,
 		allAccess: 17,
-		other: 0,
+		other: NaN,
 	},
-	EUR: {
+	EURCountries: {
 		support: 4,
 		allAccess: 10,
-		other: 0,
+		other: NaN,
 	},
-	NZD: {
+	NZDCountries: {
 		support: 10,
 		allAccess: 17,
-		other: 0,
+		other: NaN,
 	},
-	CAD: {
+	Canada: {
 		support: 5,
 		allAccess: 13,
-		other: 0,
+		other: NaN,
 	},
-	international: {
+	International: {
 		support: 3,
 		allAccess: 13,
-		other: 0,
+		other: NaN,
 	},
-} as const satisfies Record<SupportCurrencyIso, Record<SupportTier, number>>;
+} as const satisfies Record<CountryGroupId, Record<SupportTier, number>>;
