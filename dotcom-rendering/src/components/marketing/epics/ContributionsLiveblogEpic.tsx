@@ -30,6 +30,7 @@ import { logEpicView } from '../lib/viewLog';
 import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
+import { ContributionsEpicNewsletterSignupV2 } from './ContributionsEpicNewsletterSignupV2';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
@@ -217,8 +218,9 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					numArticles={articleCounts.forTargetedWeeks}
 				/>
 				{variant.newsletterSignup ? (
-					<ContributionsEpicNewsletterSignup
-						url={variant.newsletterSignup.url}
+					<ContributionsEpicNewsletterSignupV2
+						newsletterId={newsletterSignup.newsletterId}
+						successDescription={newsletterSignup.successDescription}
 					/>
 				) : (
 					<>
