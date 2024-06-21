@@ -7,18 +7,18 @@ import { css } from '@emotion/react';
 import {
 	article17,
 	articleBold17,
+	from,
 	headlineBold20,
+	palette,
+	space,
 } from '@guardian/source/foundations';
-import { palette, space } from '@guardian/source/foundations';
-import { from } from '@guardian/source/foundations';
 import {
 	containsNonArticleCountPlaceholder,
+	epicPropsSchema,
 	getLocalCurrencySymbol,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import { epicPropsSchema } from '@guardian/support-dotcom-components';
 import type {
-	ContributionFrequency,
 	EpicProps,
 	Stage,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
@@ -300,14 +300,14 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
-			const defaultFrequency: ContributionFrequency =
-				choiceCardAmounts.defaultContributionType || 'MONTHLY';
 			const localAmounts =
-				choiceCardAmounts.amountsCardData[defaultFrequency];
+				choiceCardAmounts.amountsCardData[
+					choiceCardAmounts.defaultContributionType
+				];
 			const defaultAmount = localAmounts.defaultAmount;
 
 			setChoiceCardSelection({
-				frequency: defaultFrequency,
+				frequency: choiceCardAmounts.defaultContributionType,
 				amount: defaultAmount,
 			});
 		}
@@ -326,7 +326,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For the event stream
-			if (!window?.guardian?.config?.isDev && stage !== 'DEV') {
+			if (!window.guardian.config.isDev && stage !== 'DEV') {
 				sendEpicViewEvent(
 					tracking.referrerUrl,
 					tracking.abTestName,

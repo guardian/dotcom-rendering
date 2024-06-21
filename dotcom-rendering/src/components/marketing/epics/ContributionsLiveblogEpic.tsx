@@ -4,19 +4,19 @@
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/ContributionsLiveblogEpic.tsx
  */
 import { css } from '@emotion/react';
-import { article17, headlineBold34 } from '@guardian/source/foundations';
-import { from } from '@guardian/source/foundations';
-import { palette } from '@guardian/source/foundations';
-import { space } from '@guardian/source/foundations';
+import {
+	article17,
+	from,
+	headlineBold34,
+	palette,
+	space,
+} from '@guardian/source/foundations';
 import {
 	containsNonArticleCountPlaceholder,
 	getLocalCurrencySymbol,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import type {
-	ContributionFrequency,
-	EpicProps,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import type { ChoiceCardSelection } from '../lib/choiceCards';
@@ -146,20 +146,19 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 		ChoiceCardSelection | undefined
 	>();
 
-	const showThreeTierChoiceCards = variant.name.includes(
-		'THREE_TIER_CHOICE_CARDS',
-	);
+	const showThreeTierChoiceCards =
+		showChoiceCards && variant.name.includes('THREE_TIER_CHOICE_CARDS');
 
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
-			const defaultFrequency: ContributionFrequency =
-				choiceCardAmounts.defaultContributionType || 'MONTHLY';
 			const localAmounts =
-				choiceCardAmounts.amountsCardData[defaultFrequency];
+				choiceCardAmounts.amountsCardData[
+					choiceCardAmounts.defaultContributionType
+				];
 			const defaultAmount = localAmounts.defaultAmount;
 
 			setChoiceCardSelection({
-				frequency: defaultFrequency,
+				frequency: choiceCardAmounts.defaultContributionType,
 				amount: defaultAmount,
 			});
 		}
@@ -243,7 +242,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 								amountsTest={choiceCardAmounts}
 							/>
 						)}
-						{showChoiceCards && showThreeTierChoiceCards && (
+						{showThreeTierChoiceCards && (
 							<ThreeTierChoiceCards
 								countryCode={countryCode}
 								selectedAmount={
