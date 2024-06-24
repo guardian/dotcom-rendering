@@ -30,7 +30,6 @@ import { logEpicView } from '../lib/viewLog';
 import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
-import { ContributionsEpicNewsletterSignupV2 } from './ContributionsEpicNewsletterSignupV2';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
@@ -139,7 +138,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	onReminderOpen,
 	fetchEmail,
 }: EpicProps): JSX.Element => {
-	const { showChoiceCards, choiceCardAmounts } = variant;
+	const { showChoiceCards, choiceCardAmounts, newsletterSignup } = variant;
 
 	const [choiceCardSelection, setChoiceCardSelection] = useState<
 		ChoiceCardSelection | undefined
@@ -217,8 +216,8 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					paragraphs={cleanParagraphs}
 					numArticles={articleCounts.forTargetedWeeks}
 				/>
-				{variant.newsletterSignup ? (
-					<ContributionsEpicNewsletterSignupV2
+				{newsletterSignup ? (
+					<ContributionsEpicNewsletterSignup
 						newsletterId={newsletterSignup.newsletterId}
 						successDescription={newsletterSignup.successDescription}
 					/>
