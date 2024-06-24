@@ -17,15 +17,20 @@ describe('The RenderingCDKStack', () => {
 			scaling: {
 				minimumInstances: 1,
 				maximumInstances: 4,
-				policy: {
-					scalingStepsOut: [
-						{ lower: 0, upper: 0.2, change: 0 },
-						{ lower: 0.2, change: 50 },
-						{ lower: 0.3, change: 80 },
-					],
-					scalingStepsIn: [
-						{ lower: 0.15, change: 0 },
-						{ upper: 0.15, lower: 0, change: -1 },
+				policies: {
+					step: {
+						scalingStepsOut: [
+							{ lower: 0, upper: 0.2, change: 0 },
+							{ lower: 0.2, change: 50 },
+							{ lower: 0.3, change: 80 },
+						],
+						scalingStepsIn: [
+							{ lower: 0.15, change: 0 },
+							{ upper: 0.15, lower: 0, change: -1 },
+						],
+					},
+					target: [
+						{ type: 'ASGAverageCPUUtilization', targetValue: 40 },
 					],
 				},
 			},
