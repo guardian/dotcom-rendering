@@ -74,6 +74,26 @@ export const WithReminderCta: Story = {
 	},
 };
 
+export const WithThreeTierChoiceCards: Story = {
+	name: 'ContributionsLiveblogEpic with Three Tier Choice Cards',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: {
+				type: SecondaryCtaType.ContributionsReminder,
+			},
+			showReminderFields: {
+				reminderCta: 'Remind me in December',
+				reminderPeriod: '2022-12-01',
+				reminderLabel: 'December',
+			},
+			showChoiceCards: true,
+		},
+	},
+};
+
 export const WithChoiceCards: Story = {
 	name: 'ContributionsLiveblogEpic with Choice Cards',
 	args: {
