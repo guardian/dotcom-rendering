@@ -16,7 +16,7 @@ const {
 } = palette;
 
 const textCardHeadline = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
+	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
@@ -39,6 +39,8 @@ const textCardHeadline = (
 			return specialReportAlt[100];
 		case 'PodcastPalette':
 			return neutral[100];
+		case 'Branded':
+			return neutral[7];
 	}
 };
 
@@ -459,6 +461,7 @@ export const decideContainerOverrides = (
 	if (containerPalette === 'Branded') {
 		return {
 			text: {
+				cardHeadline: textCardHeadline(containerPalette),
 				container: textContainer(containerPalette),
 				containerToggle: textContainerToggle(containerPalette),
 				containerFooter: textContainerFooter(containerPalette),
