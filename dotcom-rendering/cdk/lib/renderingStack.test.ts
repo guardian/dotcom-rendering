@@ -1,5 +1,6 @@
 import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
+import { PredefinedMetric } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { RenderingCDKStack } from './renderingStack';
 
@@ -30,7 +31,10 @@ describe('The RenderingCDKStack', () => {
 						],
 					},
 					target: [
-						{ type: 'ASGAverageCPUUtilization', targetValue: 40 },
+						{
+							type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
+							targetValue: 40,
+						},
 					],
 				},
 			},

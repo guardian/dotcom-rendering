@@ -1,4 +1,5 @@
 import { App } from 'aws-cdk-lib';
+import { PredefinedMetric } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { DotcomRendering } from '../lib/dotcom-rendering';
 import { RenderingCDKStack } from '../lib/renderingStack';
@@ -61,7 +62,12 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 					{ upper: 0.12, lower: 0, change: -1 },
 				],
 			},
-			target: [{ type: 'ASGAverageCPUUtilization', targetValue: 40 }],
+			target: [
+				{
+					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
+					targetValue: 40,
+				},
+			],
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
@@ -99,7 +105,12 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 					{ upper: 0.35, lower: 0, change: -1 },
 				],
 			},
-			target: [{ type: 'ASGAverageCPUUtilization', targetValue: 40 }],
+			target: [
+				{
+					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
+					targetValue: 40,
+				},
+			],
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
@@ -137,7 +148,12 @@ new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
 					{ upper: 0.35, lower: 0, change: -1 },
 				],
 			},
-			target: [{ type: 'ASGAverageCPUUtilization', targetValue: 40 }],
+			target: [
+				{
+					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
+					targetValue: 40,
+				},
+			],
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
@@ -175,7 +191,12 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 					{ upper: 0.15, lower: 0, change: -1 },
 				],
 			},
-			target: [{ type: 'ASGAverageCPUUtilization', targetValue: 40 }],
+			target: [
+				{
+					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
+					targetValue: 40,
+				},
+			],
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
