@@ -3,25 +3,27 @@
  * If it does, it may become a more standard feature.
  */
 
-import { ThemeProvider, css } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import { palette, space, textSans14 } from '@guardian/source/foundations';
-import { ReactComponent } from '../lib/ReactComponent';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
+import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
+import { useEffect } from 'react';
+import { submitComponentEvent } from '../../../client/ophan/ophan';
+import { useConfig } from '../../../components/ConfigContext';
+import { useCountryCode } from '../../../lib/useCountryCode';
+import { useIsInView } from '../../../lib/useIsInView';
+import { usePageViewId } from '../../../lib/usePageViewId';
+import type { ReactComponent } from '../lib/ReactComponent';
 import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 	createClickEventFromTracking,
 	createViewEventFromTracking,
 } from '../lib/tracking';
-import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
-import { useEffect } from 'react';
-import { useIsInView } from '../../../lib/useIsInView';
-import { useConfig } from '../../../components/ConfigContext';
-import { submitComponentEvent } from '../../../client/ophan/ophan';
-import { useCountryCode } from '../../../lib/useCountryCode';
-import { usePageViewId } from '../../../lib/usePageViewId';
+// import { useAuthStatus } from '../../../lib/useAuthStatus';
+// import { shouldHideSupportMessaging } from '../../../lib/contributions';
 
 const baseUrl = 'https://support.theguardian.com/contribute';
 
@@ -101,13 +103,18 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 	const countryCode = useCountryCode(whatAmI);
 	const pageViewId = usePageViewId(renderingTarget);
 
+	// should we show ourselves?
+	// const authStatus = useAuthStatus();
+	// const isSignedIn = 	authStatus.kind === 'SignedInWithOkta' || 	authStatus.kind === 'SignedInWithCookies';
+	//const showSupportMessaging = !shouldHideSupportMessaging(isSignedIn); // document is not defined error??
+
 	// tracking
 	const tracking: Tracking = {
 		// page tracking
 		ophanPageId: pageViewId ?? '',
 		platformId: 'GUARDIAN_WEB',
 		clientName: 'dcr',
-		referrerUrl: referrerUrl,
+		referrerUrl,
 		// message tests
 		abTestName: whatAmI,
 		abTestVariant: 'control',
@@ -130,25 +137,18 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For ophan
-			if (submitComponentEvent) {
-				submitComponentEvent(
-					createViewEventFromTracking(
-						tracking,
-						tracking.campaignCode,
-					),
-					renderingTarget,
-				);
-			}
+			submitComponentEvent(
+				createViewEventFromTracking(tracking, tracking.campaignCode),
+				renderingTarget,
+			);
 		}
 	}, [hasBeenSeen, submitComponentEvent, tracking]);
 
 	const onButtonCtaClick = () => {
-		if (submitComponentEvent) {
-			submitComponentEvent(
-				createClickEventFromTracking(tracking, tracking.campaignCode),
-				renderingTarget,
-			);
-		}
+		submitComponentEvent(
+			createClickEventFromTracking(tracking, tracking.campaignCode),
+			renderingTarget,
+		);
 	};
 
 	return (
@@ -273,5 +273,3 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 		</div>
 	);
 };
-
-export default StickyLiveblogAsk;
