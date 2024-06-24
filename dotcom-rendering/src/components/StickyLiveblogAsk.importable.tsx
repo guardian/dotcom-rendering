@@ -64,11 +64,11 @@ const textBlock = css`
 	gap: ${space[1]}px;
 `;
 const bodySection = css`
-	color: ${palette.neutral[100]};
+	color: ${palette.neutral[0]};
 	${textSans14}
 `;
 const ctaSection = css`
-	color: ${palette.neutral[100]};
+	color: ${palette.neutral[0]};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[4]}px;
 `;
