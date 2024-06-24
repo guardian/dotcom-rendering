@@ -81,14 +81,7 @@ export const WithThreeTierChoiceCards: Story = {
 		variant: {
 			...props.variant,
 			name: 'THREE_TIER_CHOICE_CARDS',
-			secondaryCta: {
-				type: SecondaryCtaType.ContributionsReminder,
-			},
-			showReminderFields: {
-				reminderCta: 'Remind me in December',
-				reminderPeriod: '2022-12-01',
-				reminderLabel: 'December',
-			},
+			secondaryCta: undefined,
 			showChoiceCards: true,
 		},
 	},

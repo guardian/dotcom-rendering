@@ -31,7 +31,7 @@ import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
-import { getDefaultAmount as getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
+import { getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
