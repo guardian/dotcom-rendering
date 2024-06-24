@@ -219,7 +219,7 @@ export const CardHeadline = ({
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
 	return (
-		<>
+		<WithLink linkTo={linkTo}>
 			<h3
 				className={`${
 					linkTo ? 'card-sublink-headline' : 'card-headline'
@@ -234,40 +234,38 @@ export const CardHeadline = ({
 						}),
 				]}
 			>
-				<WithLink linkTo={linkTo}>
-					{!!kickerText && (
-						<Kicker
-							text={kickerText}
-							color={kickerColour}
-							showPulsingDot={showPulsingDot}
-							hideLineBreak={hideLineBreak}
-						/>
+				{!!kickerText && (
+					<Kicker
+						text={kickerText}
+						color={kickerColour}
+						showPulsingDot={showPulsingDot}
+						hideLineBreak={hideLineBreak}
+					/>
+				)}
+				{showQuotes && <QuoteIcon colour={kickerColour} />}
+				<span
+					css={css`
+						color: ${isOnwardContent
+							? palette('--card-headline-onward-content-text')
+							: palette('--card-headline-trail-text')};
+					`}
+					className="show-underline"
+				>
+					{cleanHeadLineText}
+					{isExternalLink && (
+						<span
+							css={css`
+								stroke: red;
+							`}
+						>
+							<SvgExternal size="xsmall" />
+						</span>
 					)}
-					{showQuotes && <QuoteIcon colour={kickerColour} />}
-					<span
-						css={css`
-							color: ${isOnwardContent
-								? palette('--card-headline-onward-content-text')
-								: palette('--card-headline-trail-text')};
-						`}
-						className="show-underline"
-					>
-						{cleanHeadLineText}
-						{isExternalLink && (
-							<span
-								css={css`
-									stroke: red;
-								`}
-							>
-								<SvgExternal size="xsmall" />
-							</span>
-						)}
-					</span>
-				</WithLink>
+				</span>
 			</h3>
 			{!!byline && showByline && (
 				<Byline text={byline} format={format} size={size} />
 			)}
-		</>
+		</WithLink>
 	);
 };
