@@ -12,18 +12,18 @@ import {
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
 import { useEffect, useMemo, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
-import { useConfig } from './ConfigContext';
+import { shouldHideSupportMessaging } from '../lib/contributions';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { usePageViewId } from '../lib/usePageViewId';
+import { useConfig } from './ConfigContext';
 import type { ReactComponent } from './marketing/lib/ReactComponent';
 import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 	createClickEventFromTracking,
 	createViewEventFromTracking,
 } from './marketing/lib/tracking';
-import { useAuthStatus } from '../lib/useAuthStatus';
-import { shouldHideSupportMessaging } from '../lib/contributions';
 
 const baseUrl = 'https://support.theguardian.com/contribute';
 
