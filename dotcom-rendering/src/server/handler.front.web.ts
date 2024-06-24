@@ -11,6 +11,7 @@ import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagPageType } from '../model/validate';
 import type { DCRFrontType, FEFrontType } from '../types/front';
+import type { FETagType } from '../types/tag';
 import type { DCRTagPageType, FETagPageType } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
@@ -60,10 +61,9 @@ const tagPageWebTitle = (tagPage: FETagPageType) => {
 	}
 };
 
-export const getBadgeUrl = (data: FETagPageType): string | undefined => {
-	if (!data.tags.tags[0]) return undefined;
+export const getBadgeUrl = (tag: FETagType): string | undefined => {
+	const { references } = tag.properties;
 
-	const references = data.tags.tags[0].properties.references;
 	if (!references) return undefined;
 
 	const footballTeamRef = references.find(
@@ -121,7 +121,9 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 				data.tags.tags[0]?.properties.description,
 			image:
 				data.tags.tags[0]?.properties.bylineImageUrl ??
-				getBadgeUrl(data),
+				data.tags.tags[0]
+					? getBadgeUrl(data.tags.tags[0])
+					: undefined,
 		},
 		branding: tagPageBranding,
 		canonicalUrl: data.canonicalUrl,
