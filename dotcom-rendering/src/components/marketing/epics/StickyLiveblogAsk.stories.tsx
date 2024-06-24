@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
-import { StickyLiveblogAsk } from './StickyLiveblogAsk.importable';
+import { StickyLiveblogAsk } from '../../StickyLiveblogAsk.importable';
 /**
  * Playground story
  */
