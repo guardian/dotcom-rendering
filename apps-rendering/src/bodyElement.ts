@@ -262,6 +262,20 @@ const parse =
 	(
 		element: BlockElement,
 	): Result<string, BodyElement> | Array<Result<string, BodyElement>> => {
+		const parseTitle = (
+			title: string,
+		): Array<Result<string, BodyElement>> => {
+			const doc = context.docParser(`<h2>${title}</h2>`);
+			return flattenTextElement(doc).map((elem) => Result.ok(elem));
+		};
+
+		const parseSubheading = (
+			title: string,
+		): Array<Result<string, BodyElement>> => {
+			const doc = context.docParser(`<p><strong>${title}</strong></p>`);
+			return flattenTextElement(doc).map((elem) => Result.ok(elem));
+		};
+
 		switch (element.type) {
 			case ElementType.TEXT: {
 				const html = element.textTypeData?.html;
@@ -476,22 +490,14 @@ const parse =
 					return Result.err('No listTypeData on list element');
 				}
 
-				const parseTitle = (
-					title: string,
-				): Array<Result<string, BodyElement>> => {
-					const doc = context.docParser(`<h2>${title}</h2>`);
-					return flattenTextElement(doc).map((elem) =>
-						Result.ok(elem),
-					);
-				};
-
 				const parser = parse(context, campaigns, atoms);
 
 				return listTypeData.items.flatMap((item) => {
-					const titleElements = item.title
-						? parseTitle(item.title)
-						: [];
-					return titleElements.concat(item.elements.flatMap(parser));
+					return (item.title ? parseTitle(item.title) : []).concat(
+						item.bio ? parseSubheading(item.bio) : [],
+						item.elements.flatMap(parser),
+						item.endNote ? parseSubheading(item.endNote) : [],
+					);
 				});
 			}
 
@@ -503,26 +509,6 @@ const parse =
 						'No timelineTypeData on timeline element',
 					);
 				}
-
-				const parseTitle = (
-					title: string,
-				): Array<Result<string, BodyElement>> => {
-					const doc = context.docParser(`<h2>${title}</h2>`);
-					return flattenTextElement(doc).map((elem) =>
-						Result.ok(elem),
-					);
-				};
-
-				const parseSubheading = (
-					title: string,
-				): Array<Result<string, BodyElement>> => {
-					const doc = context.docParser(
-						`<p><strong>${title}</strong></p>`,
-					);
-					return flattenTextElement(doc).map((elem) =>
-						Result.ok(elem),
-					);
-				};
 
 				const parser = parse(context, campaigns, atoms);
 
