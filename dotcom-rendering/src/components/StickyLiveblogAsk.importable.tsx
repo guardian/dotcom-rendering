@@ -45,10 +45,10 @@ const stickyLeft = css`
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 0px;
-	gap: 4px;
+	gap: ${space[1]}px;
 `;
 const imageHeader = css`
-	background-color: #052962;
+	background-color: ${palette.brand[400]};
 	text-align: center;
 	padding: 15px 0;
 	width: 220px;
@@ -60,20 +60,20 @@ const textBlock = css`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding: 4px;
-	gap: 4px;
+	padding: ${space[1]}px;
+	gap: ${space[1]}px;
 `;
 const bodySection = css`
-	color: #000000;
+	color: ${palette.neutral[100]};
 	${textSans14}
 `;
 const ctaSection = css`
-	color: #000000;
-	margin-top: 12px;
-	margin-bottom: 16px;
+	color: ${palette.neutral[100]};
+	margin-top: ${space[3]}px;
+	margin-bottom: ${space[4]}px;
 `;
 const cta = css`
-	left: 8px;
+	left: ${space[2]}px;
 	min-width: 100%;
 	width: 100%;
 	min-height: 30px;
