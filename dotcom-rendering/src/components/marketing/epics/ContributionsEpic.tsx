@@ -44,6 +44,8 @@ import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
 import { ContributionsEpicTicker } from './ContributionsEpicTicker';
+import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
+import { getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
 
 // CSS Styling
 // -------------------------------------------
@@ -298,6 +300,15 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 		ChoiceCardSelection | undefined
 	>();
 
+	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
+	const [
+		threeTierChoiceCardSelectedAmount,
+		setThreeTierChoiceCardSelectedAmount,
+	] = useState<number>(defaultThreeTierAmount);
+
+	const showThreeTierChoiceCards =
+		showChoiceCards && variant.name.includes('THREE_TIER_CHOICE_CARDS');
+
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
 			const localAmounts =
@@ -455,13 +466,20 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				<BylineWithHeadshot bylineWithImage={variant.bylineWithImage} />
 			)}
 
-			{choiceCardAmounts && (
+			{choiceCardAmounts && !showThreeTierChoiceCards && (
 				<ContributionsEpicChoiceCards
 					setSelectionsCallback={setChoiceCardSelection}
 					selection={choiceCardSelection}
 					submitComponentEvent={submitComponentEvent}
 					currencySymbol={currencySymbol}
 					amountsTest={choiceCardAmounts}
+				/>
+			)}
+			{showThreeTierChoiceCards && (
+				<ThreeTierChoiceCards
+					countryCode={countryCode}
+					selectedAmount={threeTierChoiceCardSelectedAmount}
+					setSelectedAmount={setThreeTierChoiceCardSelectedAmount}
 				/>
 			)}
 
@@ -482,6 +500,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
 					choiceCardSelection={choiceCardSelection}
+					threeTierChoiceCardSelectedAmount={
+						threeTierChoiceCardSelectedAmount
+					}
 				/>
 			)}
 
