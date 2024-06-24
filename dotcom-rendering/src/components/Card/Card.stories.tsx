@@ -10,6 +10,7 @@ import React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import { ContainerOverrides } from '../ContainerOverrides';
 import { FrontSection } from '../FrontSection';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
@@ -1151,21 +1152,25 @@ export const WithSpecialPaletteVariations = () => {
 	return (
 		<>
 			{containerPalettes.map((containerPalette) => (
-				<FrontSection
-					title={containerPalette}
-					discussionApiUrl=""
-					editionId={'UK'}
-					containerPalette={containerPalette}
+				<ContainerOverrides
 					key={containerPalette}
+					containerPalette={containerPalette}
 				>
-					<CardWrapper>
-						<Card
-							{...basicCardProps}
-							containerPalette={containerPalette}
-							imagePositionOnDesktop="left"
-						/>
-					</CardWrapper>
-				</FrontSection>
+					<FrontSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						containerPalette={containerPalette}
+					>
+						<CardWrapper>
+							<Card
+								{...basicCardProps}
+								containerPalette={containerPalette}
+								imagePositionOnDesktop="left"
+							/>
+						</CardWrapper>
+					</FrontSection>
+				</ContainerOverrides>
 			))}
 		</>
 	);
@@ -1187,54 +1192,59 @@ export const DynamoWithSpecialPaletteVariations = () => {
 	return (
 		<>
 			{containerPalettes.map((containerPalette) => (
-				<FrontSection
-					title={containerPalette}
-					discussionApiUrl=""
-					editionId={'UK'}
-					containerPalette={containerPalette}
+				<ContainerOverrides
 					key={containerPalette}
+					containerPalette={containerPalette}
 				>
-					<CardWrapper>
-						<Card
-							{...basicCardProps}
-							containerPalette={containerPalette}
-							containerType="dynamic/package"
-							isDynamo={true}
-							kickerText="Main kicker"
-							headlineSize="huge"
-							imagePositionOnDesktop="bottom"
-							imagePositionOnMobile="bottom"
-							imageSize="large"
-							supportingContent={[
-								{
-									...aBasicLink,
-									headline: 'Headline 1',
-									kickerText: 'News kicker',
-								},
-								{
-									...aBasicLink,
-									headline: 'Headline 2',
-									kickerText: 'Sport kicker',
-									format: {
-										theme: Pillar.Sport,
-										design: ArticleDesign.Gallery,
-										display: ArticleDisplay.Standard,
+					<FrontSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						containerPalette={containerPalette}
+						key={containerPalette}
+					>
+						<CardWrapper>
+							<Card
+								{...basicCardProps}
+								containerPalette={containerPalette}
+								containerType="dynamic/package"
+								isDynamo={true}
+								kickerText="Main kicker"
+								headlineSize="huge"
+								imagePositionOnDesktop="bottom"
+								imagePositionOnMobile="bottom"
+								imageSize="large"
+								supportingContent={[
+									{
+										...aBasicLink,
+										headline: 'Headline 1',
+										kickerText: 'News kicker',
 									},
-								},
-								{
-									...aBasicLink,
-									headline: 'Headline 3',
-									kickerText: 'Culture kicker',
-									format: {
-										theme: Pillar.Culture,
-										design: ArticleDesign.Standard,
-										display: ArticleDisplay.Standard,
+									{
+										...aBasicLink,
+										headline: 'Headline 2',
+										kickerText: 'Sport kicker',
+										format: {
+											theme: Pillar.Sport,
+											design: ArticleDesign.Gallery,
+											display: ArticleDisplay.Standard,
+										},
 									},
-								},
-							]}
-						/>
-					</CardWrapper>
-				</FrontSection>
+									{
+										...aBasicLink,
+										headline: 'Headline 3',
+										kickerText: 'Culture kicker',
+										format: {
+											theme: Pillar.Culture,
+											design: ArticleDesign.Standard,
+											display: ArticleDisplay.Standard,
+										},
+									},
+								]}
+							/>
+						</CardWrapper>
+					</FrontSection>
+				</ContainerOverrides>
 			))}
 		</>
 	);

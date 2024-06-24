@@ -724,8 +724,8 @@ export const Card = ({
 				{hasSublinks && sublinkPosition === 'outer' && (
 					<SupportingContent
 						supportingContent={supportingContent}
-						containerPalette={containerPalette}
 						alignment={supportingContentAlignment}
+						containerPalette={containerPalette}
 						isDynamo={isDynamo}
 					/>
 				)}
