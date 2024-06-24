@@ -29,6 +29,7 @@ import {
 import { logEpicView } from '../lib/viewLog';
 import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
+import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 
 const container = (clientName: string) => css`
 	padding: 6px 10px 28px 10px;
@@ -215,26 +216,32 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					paragraphs={cleanParagraphs}
 					numArticles={articleCounts.forTargetedWeeks}
 				/>
-
-				{choiceCardAmounts && (
-					<ContributionsEpicChoiceCards
-						setSelectionsCallback={setChoiceCardSelection}
-						selection={choiceCardSelection}
-						submitComponentEvent={submitComponentEvent}
-						currencySymbol={currencySymbol}
-						amountsTest={choiceCardAmounts}
+				{variant.newsletterSignup ? (
+					<ContributionsEpicNewsletterSignup
+						url={variant.newsletterSignup.url}
 					/>
+				) : (
+					<>
+						{choiceCardAmounts && (
+							<ContributionsEpicChoiceCards
+								setSelectionsCallback={setChoiceCardSelection}
+								selection={choiceCardSelection}
+								submitComponentEvent={submitComponentEvent}
+								currencySymbol={currencySymbol}
+								amountsTest={choiceCardAmounts}
+							/>
+						)}
+						<ContributionsEpicCtas
+							variant={variant}
+							tracking={tracking}
+							countryCode={countryCode}
+							articleCounts={articleCounts}
+							onReminderOpen={onReminderOpen}
+							fetchEmail={fetchEmail}
+							submitComponentEvent={submitComponentEvent}
+						/>
+					</>
 				)}
-
-				<ContributionsEpicCtas
-					variant={variant}
-					tracking={tracking}
-					countryCode={countryCode}
-					articleCounts={articleCounts}
-					onReminderOpen={onReminderOpen}
-					fetchEmail={fetchEmail}
-					submitComponentEvent={submitComponentEvent}
-				/>
 			</section>
 		</div>
 	);
