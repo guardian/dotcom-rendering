@@ -44,20 +44,6 @@ const clientConfigUsnat = {
 	},
 };
 
-// const clientConfigCcpa = {
-// 	privacyManagerId: '5eba7ef78c167c47ca8b433d',
-// 	isCCPA: true,
-// 	isTCFV2: false,
-// 	propertyHref: null,
-// 	siteHref: 'https://theguardian.amp',
-// 	getDnsMsgMms: true,
-// 	alwaysDisplayDns: false,
-// 	showNoticeUntilAction: true,
-// 	targetingParams: {
-// 		framework: 'ccpa',
-// 	},
-// };
-
 const clientConfigAus = {
 	propertyId: 14327,
 	privacyManagerId: '5f859e174ed5055e72ce26a6',

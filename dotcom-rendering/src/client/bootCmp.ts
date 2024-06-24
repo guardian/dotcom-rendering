@@ -44,11 +44,6 @@ const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 					`03:${consentString}`,
 				];
 			}
-			// if (consentState.ccpa) {
-			// 	const ccpaUUID = getCookie({ name: 'ccpaUUID' }) ?? '';
-			// 	const flag = consentState.ccpa.doNotSell ? 'true' : 'false';
-			// 	return ['01:CCPA', `04:${ccpaUUID}`, `05:${flag}`];
-			// }
 
 			if (consentState.ccpa) {
 				const usnatUUID = getCookie({ name: 'usnatUUID' }) ?? '';
