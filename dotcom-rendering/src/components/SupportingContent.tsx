@@ -28,30 +28,44 @@ const wrapperStyles = css`
 `;
 
 const directionStyles = (alignment: Alignment) => {
+	const linkPaddingVertical = css`
+		li a {
+			padding-top: ${space[1]}px;
+			padding-bottom: ${space[2]}px;
+		}
+	`;
+
+	const flexColumn = css`
+		flex-direction: column;
+		${linkPaddingVertical}
+	`;
+
+	const flexRow = css`
+		flex-direction: row;
+		${linkPaddingVertical}
+
+		/** Pad right for each horizontal sublink */
+		li a {
+			padding-right: ${space[3]}px;
+		}
+		/** Remove additional padding for last sublink */
+		li:last-of-type a {
+			padding-right: 0;
+		}
+	`;
+
 	switch (alignment) {
 		case 'horizontal':
 			return css`
-				flex-direction: column;
-				li a {
-					padding-right: 0;
-				}
+				${flexColumn}
 
 				${from.tablet} {
-					flex-direction: row;
-
-					/* Override the padding of the final sublink
-					   anchor tag set in CardHeadline */
-					li:last-of-type a {
-						padding-right: 0;
-					}
+					${flexRow}
 				}
 			`;
 		case 'vertical':
 			return css`
-				flex-direction: column;
-				li a {
-					padding-right: 0;
-				}
+				${flexColumn}
 			`;
 	}
 };

@@ -164,8 +164,6 @@ const sublinkStyles = css`
 		min-height: 44px;
 	}
 
-	padding: ${space[1]}px ${space[2]}px ${space[2]}px 0;
-
 	/* This css is used to remove any underline from the kicker but still
 	 * have it applied to the headline when the kicker is hovered */
 	:hover {
