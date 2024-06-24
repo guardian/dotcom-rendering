@@ -74,7 +74,7 @@ type Props = {
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
 	imagePositionOnDesktop: ImagePositionType;
-	addAdditionalPadding?: boolean;
+	hasBackgroundColour?: boolean;
 	isOnwardContent?: boolean;
 };
 
@@ -83,7 +83,7 @@ export const ContentWrapper = ({
 	imageType,
 	imageSize,
 	imagePositionOnDesktop,
-	addAdditionalPadding,
+	hasBackgroundColour,
 	isOnwardContent,
 }: Props) => {
 	const isHorizontalOnDesktop =
@@ -98,7 +98,9 @@ export const ContentWrapper = ({
 				],
 				!isOnwardContent && negativeTopMargin,
 				css`
-					padding: ${addAdditionalPadding ? space[1] : 0}px;
+					padding: ${!!hasBackgroundColour || !!isOnwardContent
+						? space[1]
+						: 0}px;
 				`,
 			]}
 		>

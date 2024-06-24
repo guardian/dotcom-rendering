@@ -14,6 +14,7 @@ type Props = {
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
 	isOnwardContent?: boolean;
+	hasBackgroundColour?: boolean;
 };
 
 const decideDirection = (imagePosition: ImagePositionType) => {
@@ -66,7 +67,6 @@ const decidePosition = (
 			case 'left':
 			case 'right': {
 				return css`
-					gap: ${space[2]}px;
 					flex-direction: row-reverse;
 					${from.tablet} {
 						flex-direction: row-reverse;
@@ -75,7 +75,6 @@ const decidePosition = (
 			}
 			default: {
 				return css`
-					gap: ${space[2]}px;
 					flex-direction: row-reverse;
 					${from.tablet} {
 						flex-direction: column-reverse;
@@ -85,12 +84,24 @@ const decidePosition = (
 		}
 	}
 	return css`
-		gap: ${space[2]}px;
 		flex-direction: ${decideDirection(imagePositionOnMobile)};
 		${from.tablet} {
 			flex-direction: ${decideDirection(imagePositionOnDesktop)};
 		}
 	`;
+};
+
+const gapStyles = (
+	isOnwardContent?: boolean,
+	hasBackgroundColour?: boolean,
+) => {
+	if (isOnwardContent) {
+		return 0;
+	} else if (hasBackgroundColour) {
+		return `${space[1]}px`;
+	} else {
+		return `${space[2]}px`;
+	}
 };
 
 export const CardLayout = ({
@@ -102,6 +113,7 @@ export const CardLayout = ({
 	imageType,
 	containerType,
 	isOnwardContent,
+	hasBackgroundColour,
 }: Props) => (
 	<div
 		css={[
@@ -117,12 +129,11 @@ export const CardLayout = ({
 				imagePositionOnMobile,
 				imageType,
 			),
-			isOnwardContent &&
-				css`
-					gap: 0;
-				`,
 		]}
-		style={{ backgroundColor: cardBackgroundColour }}
+		style={{
+			backgroundColor: cardBackgroundColour,
+			gap: gapStyles(isOnwardContent, hasBackgroundColour),
+		}}
 	>
 		{children}
 	</div>

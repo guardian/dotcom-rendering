@@ -340,16 +340,12 @@ export const Card = ({
 		: themePalette('--card-background');
 
 	/**
-	 * For cards in standard containers, we include additional padding for
-	 * cards with background colours (which are Audio, Video, Gallery designs)
-	 *
-	 * For onward content cards, we include additional padding for all formats
-	 * due to their hover state
+	 * Some cards in standard containers have contrasting background colours.
+	 * We need to add additional padding to these cards to keep the text readable.
 	 */
-	const addAdditionalPadding =
-		(!containerPalette &&
-			isUnsupportedFormatForCardWithoutBackground(format)) ||
-		isOnwardContent;
+	const hasBackgroundColour =
+		!containerPalette &&
+		isUnsupportedFormatForCardWithoutBackground(format);
 
 	return (
 		<CardWrapper
@@ -372,6 +368,7 @@ export const Card = ({
 				imageType={media?.type}
 				containerType={containerType}
 				isOnwardContent={isOnwardContent}
+				hasBackgroundColour={hasBackgroundColour}
 			>
 				{media && (
 					<ImageWrapper
@@ -516,7 +513,7 @@ export const Card = ({
 						imageType={media?.type}
 						imageSize={imageSize}
 						imagePositionOnDesktop={imagePositionOnDesktop}
-						addAdditionalPadding={addAdditionalPadding}
+						hasBackgroundColour={hasBackgroundColour}
 						isOnwardContent={isOnwardContent}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
@@ -642,7 +639,10 @@ export const Card = ({
 
 			<div
 				style={{
-					padding: addAdditionalPadding ? `0 ${space[2]}px` : 0,
+					padding:
+						hasBackgroundColour || isOnwardContent
+							? `0 ${space[2]}px`
+							: 0,
 				}}
 			>
 				{hasSublinks && sublinkPosition === 'outer' && (
