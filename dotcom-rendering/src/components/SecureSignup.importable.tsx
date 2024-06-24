@@ -33,7 +33,6 @@ import { useConfig } from './ConfigContext';
 type Props = {
 	newsletterId: string;
 	successDescription: string;
-	name?: string;
 };
 
 const formStyles = css`
@@ -121,7 +120,6 @@ const buildFormData = (
 	emailAddress: string,
 	newsletterId: string,
 	token: string,
-	name?: string,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -132,7 +130,7 @@ const buildFormData = (
 	formData.append('listName', newsletterId);
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
-	formData.append('name', name ?? '');
+	formData.append('name', '');
 	if (window.guardian.config.switches.emailSignupRecaptcha) {
 		formData.append('g-recaptcha-response', token); // TO DO - PR on form handlers - is the token verified?
 	}
@@ -247,11 +245,7 @@ const sendTracking = (
  *
  * [`EmailSignup` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-emailsignup)
  */
-export const SecureSignup = ({
-	newsletterId,
-	successDescription,
-	name,
-}: Props) => {
+export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [signedInUserEmail, setSignedInUserEmail] = useState<string>();
@@ -280,7 +274,7 @@ export const SecureSignup = ({
 		sendTracking(newsletterId, 'form-submission', renderingTarget);
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
-			buildFormData(emailAddress, newsletterId, token, name),
+			buildFormData(emailAddress, newsletterId, token),
 		);
 
 		// The response body could be accessed with await response.text()

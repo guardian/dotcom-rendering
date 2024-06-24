@@ -21,7 +21,6 @@ export const ContributionsEpicNewsletterSignup = ({
 			<SecureSignup
 				newsletterId={newsletterId}
 				successDescription={successDescription}
-				name="epic-newsletter-signup"
 			/>
 			<NewsletterPrivacyMessage />
 		</div>
