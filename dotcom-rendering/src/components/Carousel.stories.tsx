@@ -4,7 +4,6 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
@@ -20,11 +19,7 @@ export default {
 	title: 'Components/Carousel',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.desktop,
-			],
+			viewports: ['mobile', 'tablet', 'desktop'],
 		},
 	},
 };

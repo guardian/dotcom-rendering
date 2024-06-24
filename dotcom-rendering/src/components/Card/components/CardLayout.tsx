@@ -13,6 +13,7 @@ type Props = {
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
+	isOnwardContent?: boolean;
 };
 
 const decideDirection = (imagePosition: ImagePositionType) => {
@@ -100,6 +101,7 @@ export const CardLayout = ({
 	minWidthInPixels,
 	imageType,
 	containerType,
+	isOnwardContent,
 }: Props) => (
 	<div
 		css={[
@@ -115,6 +117,10 @@ export const CardLayout = ({
 				imagePositionOnMobile,
 				imageType,
 			),
+			isOnwardContent &&
+				css`
+					gap: 0;
+				`,
 		]}
 		style={{ backgroundColor: cardBackgroundColour }}
 	>

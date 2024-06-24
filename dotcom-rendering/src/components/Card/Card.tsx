@@ -371,6 +371,7 @@ export const Card = ({
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
 				containerType={containerType}
+				isOnwardContent={isOnwardContent}
 			>
 				{media && (
 					<ImageWrapper
