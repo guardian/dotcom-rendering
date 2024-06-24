@@ -38,7 +38,7 @@ import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
-import { StickyLiveblogAsk } from '../components/marketing/epics/StickyLiveblogAsk';
+import { StickyLiveblogAsk } from '../components/marketing/epics/StickyLiveblogAsk.importable';
 import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -57,7 +57,10 @@ import {
 	TopicFilterBank,
 } from '../components/TopicFilterBank';
 import { canRenderAds } from '../lib/canRenderAds';
-import { getContributionsServiceUrl } from '../lib/contributions';
+import {
+	getContributionsServiceUrl,
+	shouldHideSupportMessaging,
+} from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
@@ -934,9 +937,21 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												}
 											/>
 										</div>
-										<StickyLiveblogAsk
-											referrerUrl={article.webURL}
-										/>
+										{!article.shouldHideReaderRevenue &&
+											// !shouldHideSupportMessaging() &&
+											article.config.switches
+												.brazeTaylorReport !== true && (
+												<Island
+													priority="feature"
+													defer={{ until: 'visible' }}
+												>
+													<StickyLiveblogAsk
+														referrerUrl={
+															article.webURL
+														}
+													/>
+												</Island>
+											)}
 									</Hide>
 								)}
 								{/* Match stats */}
