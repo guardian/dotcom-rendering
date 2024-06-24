@@ -12,7 +12,7 @@ describe('The RenderingCDKStack', () => {
 	it('matches the snapshot', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(app, 'ArticleRendering', {
-			stage: 'TEST',
+			stage: 'PROD',
 			guApp: 'article-rendering',
 			domainName: 'article-rendering.test.dev-guardianapis.com',
 			scaling: {
