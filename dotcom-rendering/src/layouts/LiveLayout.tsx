@@ -59,7 +59,7 @@ import {
 import { canRenderAds } from '../lib/canRenderAds';
 import {
 	getContributionsServiceUrl,
-	shouldHideSupportMessaging,
+	// shouldHideSupportMessaging,
 } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
