@@ -10,7 +10,7 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { submitComponentEvent } from '../../../client/ophan/ophan';
 import { useConfig } from '../../../components/ConfigContext';
 import { useCountryCode } from '../../../lib/useCountryCode';
@@ -109,18 +109,19 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 	//const showSupportMessaging = !shouldHideSupportMessaging(isSignedIn); // document is not defined error??
 
 	// tracking
-	const tracking: Tracking = {
-		// page tracking
-		ophanPageId: pageViewId ?? '',
-		platformId: 'GUARDIAN_WEB',
-		clientName: 'dcr',
-		referrerUrl,
-		// message tests
-		abTestName: whatAmI,
-		abTestVariant: 'control',
-		campaignCode: whatAmI,
-		componentType: 'ACQUISITIONS_OTHER',
-	};
+	const tracking: Tracking = useMemo(() => {
+		return {
+			ophanPageId: pageViewId ?? '',
+			platformId: 'GUARDIAN_WEB',
+			clientName: 'dcr',
+			referrerUrl,
+			// message tests
+			abTestName: whatAmI,
+			abTestVariant: 'control',
+			campaignCode: whatAmI,
+			componentType: 'ACQUISITIONS_OTHER',
+		};
+	}, [pageViewId, referrerUrl]);
 
 	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
 		baseUrl,
@@ -137,15 +138,15 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For ophan
-			submitComponentEvent(
+			void submitComponentEvent(
 				createViewEventFromTracking(tracking, tracking.campaignCode),
 				renderingTarget,
 			);
 		}
-	}, [hasBeenSeen, submitComponentEvent, tracking]);
+	}, [hasBeenSeen, tracking, renderingTarget]);
 
 	const onButtonCtaClick = () => {
-		submitComponentEvent(
+		void submitComponentEvent(
 			createClickEventFromTracking(tracking, tracking.campaignCode),
 			renderingTarget,
 		);
