@@ -12,7 +12,7 @@ import {
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
 import { useEffect, useMemo } from 'react';
 import { submitComponentEvent } from '../../../client/ophan/ophan';
-import { useConfig } from '../../../components/ConfigContext';
+import { useConfig } from '../../ConfigContext';
 import { useCountryCode } from '../../../lib/useCountryCode';
 import { useIsInView } from '../../../lib/useIsInView';
 import { usePageViewId } from '../../../lib/usePageViewId';
@@ -106,7 +106,7 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 	// should we show ourselves?
 	// const authStatus = useAuthStatus();
 	// const isSignedIn = 	authStatus.kind === 'SignedInWithOkta' || 	authStatus.kind === 'SignedInWithCookies';
-	//const showSupportMessaging = !shouldHideSupportMessaging(isSignedIn); // document is not defined error??
+	// const showSupportMessaging = !shouldHideSupportMessaging(isSignedIn); // document is not defined error??
 
 	// tracking
 	const tracking: Tracking = useMemo(() => {
