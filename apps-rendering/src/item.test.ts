@@ -597,6 +597,8 @@ describe('list elements', () => {
 					{
 						title: 'Some title 1',
 						elements: [embedElement, textElement, textElement],
+						bio: 'Some bio 1',
+						endNote: 'Some end note 1',
 					},
 					{
 						title: 'Some title 2',
@@ -615,15 +617,23 @@ describe('list elements', () => {
 			item.body[0].kind === ElementKind.HeadingTwo &&
 				item.body[0].doc.firstChild?.textContent == 'Some title 1',
 		).toBe(true);
-		expect(item.body[1].kind).toBe(ElementKind.Embed);
 		expect(
-			item.body[4].kind === ElementKind.HeadingTwo &&
-				item.body[4].doc.firstChild?.textContent == 'Some title 2',
+			item.body[1].kind === ElementKind.Text &&
+				item.body[1].doc.textContent === 'Some bio 1',
 		).toBe(true);
-		expect(item.body[5].kind).toBe(ElementKind.Text);
+		expect(item.body[2].kind).toBe(ElementKind.Embed);
+		expect(
+			item.body[3].kind === ElementKind.Text &&
+				item.body[3].doc.textContent === 'Some end note 1',
+		).toBe(true);
 		expect(
 			item.body[6].kind === ElementKind.HeadingTwo &&
-				item.body[6].doc.firstChild?.textContent == 'Some title 3',
+				item.body[6].doc.firstChild?.textContent == 'Some title 2',
+		).toBe(true);
+		expect(item.body[7].kind).toBe(ElementKind.Text);
+		expect(
+			item.body[8].kind === ElementKind.HeadingTwo &&
+				item.body[8].doc.firstChild?.textContent == 'Some title 3',
 		).toBe(true);
 	});
 
