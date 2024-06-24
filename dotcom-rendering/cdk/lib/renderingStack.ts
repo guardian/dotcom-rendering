@@ -11,7 +11,11 @@ import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import { type App as CDKApp, Duration } from 'aws-cdk-lib';
 import type { ScalingInterval } from 'aws-cdk-lib/aws-applicationautoscaling';
-import { AdjustmentType, StepScalingPolicy } from 'aws-cdk-lib/aws-autoscaling';
+import {
+	AdjustmentType,
+	PredefinedMetric,
+	StepScalingPolicy,
+} from 'aws-cdk-lib/aws-autoscaling';
 import { Metric } from 'aws-cdk-lib/aws-cloudwatch';
 import { SnsAction } from 'aws-cdk-lib/aws-cloudwatch-actions';
 import type { InstanceType } from 'aws-cdk-lib/aws-ec2';
@@ -30,7 +34,7 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 				scalingStepsOut: ScalingInterval[];
 				scalingStepsIn: ScalingInterval[];
 			};
-			target?: [{ type: string; targetValue: number }];
+			target?: [{ type: PredefinedMetric; targetValue: number }];
 		};
 	};
 }
@@ -110,15 +114,16 @@ const addTargetScalingPolicy = (
 ) => {
 	if (stage === 'PROD' && props.scaling.policies?.target) {
 		for (const targetPolicy of props.scaling.policies.target) {
-			switch (targetPolicy.type) {
-				case 'ASGAverageCPUUtilization': {
-					ec2App.autoScalingGroup.scaleOnCpuUtilization(
-						'CpuScalingPolicy',
-						{
-							targetUtilizationPercent: targetPolicy.targetValue,
-						},
-					);
-				}
+			if (
+				targetPolicy.type ===
+				PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION
+			) {
+				ec2App.autoScalingGroup.scaleOnCpuUtilization(
+					'CpuScalingPolicy',
+					{
+						targetUtilizationPercent: targetPolicy.targetValue,
+					},
+				);
 			}
 		}
 	}
