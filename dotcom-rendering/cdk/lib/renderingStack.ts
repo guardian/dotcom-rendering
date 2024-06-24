@@ -25,12 +25,104 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 	domainName: string;
 	instanceType: InstanceType;
 	scaling: GuAsgCapacity & {
-		policy?: {
-			scalingStepsOut: ScalingInterval[];
-			scalingStepsIn: ScalingInterval[];
+		policies?: {
+			step?: {
+				scalingStepsOut: ScalingInterval[];
+				scalingStepsIn: ScalingInterval[];
+			};
+			target?: [{ type: string; targetValue: number }];
 		};
 	};
 }
+
+const addStepScalingPolicy = (
+	context: RenderingCDKStack,
+	ec2App: GuEc2App,
+	props: RenderingCDKStackProps,
+	stage: string,
+) => {
+	if (stage === 'PROD' && props.scaling.policies?.step) {
+		const latencyMetric = new Metric({
+			dimensionsMap: {
+				LoadBalancer: ec2App.loadBalancer.loadBalancerFullName,
+				TargetGroup: ec2App.targetGroup.targetGroupFullName,
+			},
+			metricName: 'TargetResponseTime',
+			namespace: 'AWS/ApplicationELB',
+			period: Duration.seconds(30),
+			statistic: 'Average', // TODO - should we use p90?
+		});
+
+		/** Scaling policies ASCII diagram
+		 *
+		 * Metric value (latency in seconds)
+		 *  0        lower       middle       upper         infinity
+		 * --------------------------------------------------------
+		 *  |   - z    |     0      |   + x%   |     + y%      |
+		 * --------------------------------------------------------
+		 * Instance change
+		 *
+		 * -
+		 * When scaling up, we use percentage change (+x% initially then +y% if particularly high)
+		 * When scaling down, we use absolute change (-z each interval)
+		 * We take no scaling actions when latency is between lower and middle values to avoid flapping
+		 * @see https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#step-scaling-considerations
+		 */
+
+		const scaleOutPolicy = new StepScalingPolicy(
+			context,
+			'LatencyScaleUpPolicy',
+			{
+				autoScalingGroup: ec2App.autoScalingGroup,
+				metric: latencyMetric,
+				scalingSteps: props.scaling.policies.step.scalingStepsOut,
+				adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+				evaluationPeriods: 2, // 1 minute = 2 × 30 seconds
+			},
+		);
+
+		const scalingAlertsTopic = new Topic(context, 'ScalingAlertsTopic');
+		new Subscription(context, 'ScalingAlertsSubscriptionEmail', {
+			endpoint: 'dotcom.platform@theguardian.com',
+			protocol: SubscriptionProtocol.EMAIL,
+			topic: scalingAlertsTopic,
+		});
+
+		scaleOutPolicy.upperAlarm?.addAlarmAction(
+			new SnsAction(scalingAlertsTopic),
+		);
+
+		/** Scale in policy */
+		new StepScalingPolicy(context, 'LatencyScaleDownPolicy', {
+			autoScalingGroup: ec2App.autoScalingGroup,
+			metric: latencyMetric,
+			scalingSteps: props.scaling.policies.step.scalingStepsIn,
+			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			evaluationPeriods: 10,
+		});
+	}
+};
+
+const addTargetScalingPolicy = (
+	ec2App: GuEc2App,
+	props: RenderingCDKStackProps,
+	stage: string,
+) => {
+	if (stage === 'PROD' && props.scaling.policies?.target) {
+		for (const targetPolicy of props.scaling.policies.target) {
+			switch (targetPolicy.type) {
+				case 'ASGAverageCPUUtilization': {
+					ec2App.autoScalingGroup.scaleOnCpuUtilization(
+						'CpuScalingPolicy',
+						{
+							targetUtilizationPercent: targetPolicy.targetValue,
+						},
+					);
+				}
+			}
+		}
+	}
+};
 
 /** DCR infrastructure provisioning via CDK */
 export class RenderingCDKStack extends CDKStack {
@@ -138,67 +230,11 @@ export class RenderingCDKStack extends CDKStack {
 			ttl: Duration.hours(1),
 		});
 
-		/** Add latency-based step scaling policy for PROD only if a policy is defined */
-		if (stage === 'PROD' && props.scaling.policy) {
-			const latencyMetric = new Metric({
-				dimensionsMap: {
-					LoadBalancer: ec2App.loadBalancer.loadBalancerFullName,
-					TargetGroup: ec2App.targetGroup.targetGroupFullName,
-				},
-				metricName: 'TargetResponseTime',
-				namespace: 'AWS/ApplicationELB',
-				period: Duration.seconds(30),
-				statistic: 'Average', // TODO - should we use p90?
-			});
+		/** Add CPU utilisation based TARGET scaling policy for PROD only if a policy is defined */
+		addTargetScalingPolicy(ec2App, props, stage);
 
-			/** Scaling policies ASCII diagram
-			 *
-			 * Metric value (latency in seconds)
-			 *  0        lower       middle       upper         infinity
-			 * --------------------------------------------------------
-			 *  |   - z    |     0      |   + x%   |     + y%      |
-			 * --------------------------------------------------------
-			 * Instance change
-			 *
-			 * -
-			 * When scaling up, we use percentage change (+x% initially then +y% if particularly high)
-			 * When scaling down, we use absolute change (-z each interval)
-			 * We take no scaling actions when latency is between lower and middle values to avoid flapping
-			 * @see https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#step-scaling-considerations
-			 */
-
-			const scaleOutPolicy = new StepScalingPolicy(
-				this,
-				'LatencyScaleUpPolicy',
-				{
-					autoScalingGroup: ec2App.autoScalingGroup,
-					metric: latencyMetric,
-					scalingSteps: props.scaling.policy.scalingStepsOut,
-					adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
-					evaluationPeriods: 2, // 1 minute = 2 × 30 seconds
-				},
-			);
-
-			const scalingAlertsTopic = new Topic(this, 'ScalingAlertsTopic');
-			new Subscription(this, 'ScalingAlertsSubscriptionEmail', {
-				endpoint: 'dotcom.platform@theguardian.com',
-				protocol: SubscriptionProtocol.EMAIL,
-				topic: scalingAlertsTopic,
-			});
-
-			scaleOutPolicy.upperAlarm?.addAlarmAction(
-				new SnsAction(scalingAlertsTopic),
-			);
-
-			/** Scale in policy */
-			new StepScalingPolicy(this, 'LatencyScaleDownPolicy', {
-				autoScalingGroup: ec2App.autoScalingGroup,
-				metric: latencyMetric,
-				scalingSteps: props.scaling.policy.scalingStepsIn,
-				adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-				evaluationPeriods: 10,
-			});
-		}
+		/** Add latency-based STEP scaling policy for PROD only if a policy is defined */
+		addStepScalingPolicy(this, ec2App, props, stage);
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
 		new StringParameter(this, 'RenderingBaseURLParam', {
