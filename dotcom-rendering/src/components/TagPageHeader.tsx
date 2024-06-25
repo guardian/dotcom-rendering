@@ -267,8 +267,9 @@ const Picture = ({ image }: { image: string }) => {
 	);
 };
 
-const isFootballCrest = (image: string): image is `https://sport.guim.co.uk/football/crests/${string}` =>
+const isFootballCrest = (image: string) =>
 	image.startsWith('https://sport.guim.co.uk/football/crests/');
+
 export const TagPageHeader = ({
 	title,
 	containerPalette,
