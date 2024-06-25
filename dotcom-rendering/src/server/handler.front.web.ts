@@ -121,9 +121,9 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 				data.tags.tags[0]?.properties.description,
 			image:
 				data.tags.tags[0]?.properties.bylineImageUrl ??
-				data.tags.tags[0]
+				(data.tags.tags[0]
 					? getBadgeUrl(data.tags.tags[0])
-					: undefined,
+					: undefined),
 		},
 		branding: tagPageBranding,
 		canonicalUrl: data.canonicalUrl,
