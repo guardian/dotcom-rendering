@@ -2,7 +2,7 @@ import type { BrowserContext, Page } from '@playwright/test';
 import { addCookie } from './cookies';
 import { waitForIsland } from './islands';
 
-const CMP_LAYER1_IFRAME = '[id*="sp_message_iframe"]';
+const CMP_LAYER1_IFRAME = 'div > iframe[id*="sp_message_iframe"]'; // TODO: this is a guess
 const CMP_LAYER1_ACCEPT_ALL_BUTTON = 'button.sp_choice_type_11';
 const CMP_LAYER2_MANAGE_MY_COOKIES_BUTTON = 'button.sp_choice_type_12';
 
