@@ -1112,7 +1112,6 @@ const subheadingTextLight = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		default:
@@ -1147,7 +1146,6 @@ const subheadingTextDark = ({ design, theme }: ArticleFormat) => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		default:
@@ -1563,9 +1561,6 @@ const blockQuoteFillLight: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline: {
-			return sourcePalette.neutral[46];
-		}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1633,9 +1628,6 @@ const blockQuoteFillDark: PaletteFunction = ({
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline: {
-			return sourcePalette.neutral[60];
-		}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Analysis:
@@ -1678,7 +1670,6 @@ const blockquoteTextLight: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.LiveBlog:
@@ -1704,7 +1695,6 @@ const blockquoteTextDark: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.LiveBlog:

@@ -22,7 +22,6 @@ const pullQuoteStoryVariations = [
 	ArticleDesign.Standard,
 	ArticleDesign.Profile,
 	ArticleDesign.Explainer,
-	ArticleDesign.Timeline,
 	ArticleDesign.LiveBlog,
 	ArticleDesign.DeadBlog,
 	ArticleDesign.Analysis,

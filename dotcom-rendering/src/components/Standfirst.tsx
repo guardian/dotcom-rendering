@@ -278,7 +278,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Review:
 				case ArticleDesign.NewsletterSignup:
 				case ArticleDesign.Explainer:
-				case ArticleDesign.Timeline:
 				case ArticleDesign.Profile:
 					return css`
 						max-width: 540px;

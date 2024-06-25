@@ -50,6 +50,7 @@ export const getAllDesigns = ({
 const designToFEDesign = (design: ArticleDesign): FEDesign => {
 	switch (design) {
 		case ArticleDesign.Standard:
+		case ArticleDesign.Timeline:
 		// Correction doesn't exist in `FEFormat`.
 		case ArticleDesign.Correction:
 			return 'ArticleDesign';
@@ -99,8 +100,6 @@ const designToFEDesign = (design: ArticleDesign): FEDesign => {
 			return 'FullPageInteractiveDesign';
 		case ArticleDesign.NewsletterSignup:
 			return 'NewsletterSignupDesign';
-		case ArticleDesign.Timeline:
-			return 'TimelineDesign';
 		case ArticleDesign.Profile:
 			return 'ProfileDesign';
 	}
