@@ -220,6 +220,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					<ContributionsEpicNewsletterSignup
 						newsletterId={newsletterSignup.newsletterId}
 						successDescription={newsletterSignup.successDescription}
+						tracking={tracking}
 					/>
 				) : (
 					<>

@@ -474,6 +474,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				<ContributionsEpicNewsletterSignup
 					newsletterId={newsletterSignup.newsletterId}
 					successDescription={newsletterSignup.successDescription}
+					tracking={tracking}
 				/>
 			) : (
 				<ContributionsEpicCtas
