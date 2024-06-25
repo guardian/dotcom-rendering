@@ -27,7 +27,7 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 		</script>`;
 
 	const permutiveCachedTargetingScript = `
-		exportFunction('ct', () => {let c = JSON.parse(localStorage.getItem('_pdfps'));let i = localStorage.getItem('permutive-id');return {targeting:{permutive: c ? c : [], puid: i}, ppid: i};})
+		exportFunction('ct', () => {let c = JSON.parse(localStorage.getItem('_pdfps'));let i = localStorage.getItem('permutive-id');return {targeting:{permutive: c ? c : [], puid: i}};})
 	`;
 
 	const pampScript = `
