@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { isString, type OphanAction } from '@guardian/libs';
+import {
+	isString,
+	type OphanAction,
+	type OphanComponentEvent,
+} from '@guardian/libs';
 import { space, until } from '@guardian/source/foundations';
 import {
 	Button,
@@ -30,10 +34,7 @@ import { useConfig } from './ConfigContext';
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
-interface OphanABTest {
-	name: string;
-	variant: string;
-}
+type OphanABTest = OphanComponentEvent['abTest'];
 
 type Props = {
 	newsletterId: string;
