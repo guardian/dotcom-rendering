@@ -13,6 +13,7 @@ import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/s
 import { useEffect, useMemo, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
+import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
@@ -93,7 +94,6 @@ const contributionsTheme = {
 interface StickyLiveblogAskProps {
 	referrerUrl: string;
 	shouldHideReaderRevenueOnArticle: boolean;
-	isEnabled: boolean;
 }
 
 const whatAmI = 'sticky-liveblog-ask';
@@ -101,11 +101,19 @@ const whatAmI = 'sticky-liveblog-ask';
 export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 	referrerUrl,
 	shouldHideReaderRevenueOnArticle,
-	isEnabled,
 }) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode(whatAmI);
 	const pageViewId = usePageViewId(renderingTarget);
+
+	const ABTestAPI = useAB()?.api;
+
+	// We can check if a user is in a variant, returns a boolean
+	// ABTestTest being an ab test that was passed in via the ab test array
+	const userInVariant = ABTestAPI?.isUserInVariant(
+		'StickyLiveBlogAskTest',
+		'variant',
+	);
 
 	// should we show ourselves?
 	const [showSupportMessagingForUser, setShowSupportMessaging] =
@@ -163,12 +171,13 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 		);
 	};
 	const canShow =
+		userInVariant &&
 		showSupportMessagingForUser &&
-		!shouldHideReaderRevenueOnArticle &&
-		isEnabled;
+		!shouldHideReaderRevenueOnArticle;
 
 	return (
 		<>
+			{' '}
 			{canShow && (
 				<div css={stickyLeft} ref={setNode}>
 					<div css={imageHeader}>

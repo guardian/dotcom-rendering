@@ -961,11 +961,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												shouldHideReaderRevenueOnArticle={
 													article.shouldHideReaderRevenue
 												}
-												isEnabled={
-													article.config.switches
-														.brazeTaylorReport !==
-													true
-												}
 											/>
 										</Island>
 									</Hide>
