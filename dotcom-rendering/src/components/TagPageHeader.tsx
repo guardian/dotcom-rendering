@@ -249,6 +249,10 @@ const imageStyle = css`
 	}
 `;
 
+const crestStyle = css`
+	height: 5rem;
+`;
+
 const Picture = ({ image }: { image: string }) => {
 	const sources = generateSources(image, [
 		{ breakpoint: breakpoints.mobile, width: 80 },
@@ -302,7 +306,11 @@ export const TagPageHeader = ({
 			{image !== undefined && (
 				<div css={[sectionImage, paddings]}>
 					{isFootballCrest(image) ? (
-						<img src={image} alt={`${title} football crest`} />
+						<img
+							css={crestStyle}
+							src={image}
+							alt={`${title} football crest`}
+						/>
 					) : (
 						<Picture image={image} />
 					)}
