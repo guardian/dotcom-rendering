@@ -74,6 +74,19 @@ export const WithReminderCta: Story = {
 	},
 };
 
+export const WithThreeTierChoiceCards: Story = {
+	name: 'ContributionsLiveblogEpic with Three Tier Choice Cards',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+		},
+	},
+};
+
 export const WithChoiceCards: Story = {
 	name: 'ContributionsLiveblogEpic with Choice Cards',
 	args: {
