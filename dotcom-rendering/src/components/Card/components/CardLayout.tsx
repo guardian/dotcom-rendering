@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import type { DCRContainerType } from '../../../types/front';
 import type { ImagePositionType } from './ImageWrapper';
 
@@ -13,6 +13,8 @@ type Props = {
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
+	isOnwardContent?: boolean;
+	hasBackgroundColour?: boolean;
 };
 
 const decideDirection = (imagePosition: ImagePositionType) => {
@@ -66,27 +68,40 @@ const decidePosition = (
 			case 'right': {
 				return css`
 					flex-direction: row-reverse;
-					${until.tablet} {
+					${from.tablet} {
 						flex-direction: row-reverse;
 					}
 				`;
 			}
 			default: {
 				return css`
-					flex-direction: column-reverse;
-					${until.tablet} {
-						flex-direction: row-reverse;
+					flex-direction: row-reverse;
+					${from.tablet} {
+						flex-direction: column-reverse;
 					}
 				`;
 			}
 		}
 	}
 	return css`
-		flex-direction: ${decideDirection(imagePositionOnDesktop)};
-		${until.tablet} {
-			flex-direction: ${decideDirection(imagePositionOnMobile)};
+		flex-direction: ${decideDirection(imagePositionOnMobile)};
+		${from.tablet} {
+			flex-direction: ${decideDirection(imagePositionOnDesktop)};
 		}
 	`;
+};
+
+const gapStyles = (
+	isOnwardContent?: boolean,
+	hasBackgroundColour?: boolean,
+) => {
+	if (isOnwardContent) {
+		return 0;
+	} else if (hasBackgroundColour) {
+		return `${space[1]}px`;
+	} else {
+		return `${space[2]}px`;
+	}
 };
 
 export const CardLayout = ({
@@ -97,6 +112,8 @@ export const CardLayout = ({
 	minWidthInPixels,
 	imageType,
 	containerType,
+	isOnwardContent,
+	hasBackgroundColour,
 }: Props) => (
 	<div
 		css={[
@@ -113,7 +130,10 @@ export const CardLayout = ({
 				imageType,
 			),
 		]}
-		style={{ backgroundColor: cardBackgroundColour }}
+		style={{
+			backgroundColor: cardBackgroundColour,
+			gap: gapStyles(isOnwardContent, hasBackgroundColour),
+		}}
 	>
 		{children}
 	</div>
