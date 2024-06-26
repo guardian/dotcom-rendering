@@ -5,7 +5,6 @@ import { consentlessAds } from './tests/consentless-ads';
 import { deeplyReadRightColumn } from './tests/deeply-read-right-column';
 import { integrateIma } from './tests/integrate-ima';
 import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
-import { signInGateAlternativeWording } from './tests/sign-in-gate-alternative-wording';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 
@@ -15,7 +14,6 @@ export const tests: ABTest[] = [
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateAlternativeWording,
 	consentlessAds,
 	integrateIma,
 	mpuWhenNoEpic,
