@@ -175,7 +175,7 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				{ overwriteRoutes: false },
 			)
 			.get(
-				/^https:\/\/discussion.theguardian.com\/discussion-api\/getCommentCounts\?/,
+				/^https:\/\/discussion\.theguardian\.com\/discussion-api\/getCommentCounts\?/,
 				{
 					status: 200,
 					body: {
@@ -186,7 +186,7 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				{ overwriteRoutes: false },
 			)
 			.get(
-				/^https:\/\/discussion.theguardian.com\/discussion-api\/getCommentCounts\?short-urls=\/p\/d8ex5/,
+				/^https:\/\/discussion\.theguardian\.com\/discussion-api\/getCommentCounts\?short-urls=\/p\/d8ex5/,
 				{
 					status: 200,
 					body: {
