@@ -358,7 +358,19 @@ const mostPopContainerStyles = css`
 	}
 `;
 
-const liveBlogTopAdStyles = mostPopAdStyles;
+const liveBlogTopAdStyles = css`
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: ${adSizes.mpu.width}px;
+	width: fit-content;
+	max-width: ${adSizes.mpu.width}px;
+	margin: 0 auto;
+	${from.tablet} {
+		max-width: 700px;
+	}
+	${from.desktop} {
+		max-width: ${adSizes.mpu.width}px;
+	}
+`;
 
 const liveBlogTopContainerStyles = css`
 	padding: 12px 0;
