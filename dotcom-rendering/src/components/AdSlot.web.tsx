@@ -358,6 +358,14 @@ const mostPopContainerStyles = css`
 	}
 `;
 
+const liveBlogTopAdStyles = mostPopAdStyles;
+
+const liveBlogTopContainerStyles = css`
+	padding: 12px 0;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+`;
 /**
  * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
  * These styles come mostly from RichLink in DCR.
@@ -783,6 +791,32 @@ export const AdSlot = ({
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						data-testid={`liveblog-inline-mobile--${advertId}`}
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
+		case 'liveblog-top': {
+			return (
+				<div
+					className="ad-slot-container"
+					css={[adContainerStyles, liveBlogTopContainerStyles]}
+				>
+					<div
+						id="dfp-ad--liveblog-top"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--liveblog-top',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+							liveBlogTopAdStyles,
+						]}
+						data-link-name="ad slot liveblog-top"
+						data-name="liveblog-top"
 						aria-hidden="true"
 					/>
 				</div>

@@ -22,6 +22,7 @@ type BaseProps = {
 	canonicalUrl?: string;
 	renderingTarget: RenderingTarget;
 	hasPageSkin?: boolean;
+	hasLiveBlogTopAd?: boolean;
 	weAreHiring: boolean;
 };
 
