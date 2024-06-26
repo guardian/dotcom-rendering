@@ -952,19 +952,22 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												}
 											/>
 										</div>
-										<Island
-											priority="feature"
-											defer={{ until: 'visible' }}
-										>
-											<StickyLiveblogAsk
-												referrerUrl={article.webURL}
-												shouldHideReaderRevenueOnArticle={
-													article.shouldHideReaderRevenue
-												}
-											/>
-										</Island>
 									</Hide>
 								)}
+								<Hide until="desktop">
+									<Island
+										priority="feature"
+										defer={{ until: 'visible' }}
+									>
+										<StickyLiveblogAsk
+											referrerUrl={article.webURL}
+											shouldHideReaderRevenueOnArticle={
+												article.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
+								</Hide>
+
 								{/* Match stats */}
 								{!!footballMatchUrl && (
 									<Island
