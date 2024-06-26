@@ -1136,32 +1136,42 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 WithLetterDesignAndShowQuotedHeadline.storyName =
 	'WithLetterDesignAndShowQuotedHeadline';
 
-export const WithSpecialPaletteVariations = () => {
-	const containerPalettes = [
-		'InvestigationPalette',
-		'LongRunningPalette',
-		'SombrePalette',
-		'BreakingPalette',
-		'EventPalette',
-		'EventAltPalette',
-		'LongRunningAltPalette',
-		'SombreAltPalette',
-		'SpecialReportAltPalette',
-		'Branded',
-	] as const satisfies readonly Omit<
-		DCRContainerPalette,
-		'MediaPalette' | 'PodcastPalette'
-	>[];
+const containerPalettes = [
+	'InvestigationPalette',
+	'LongRunningPalette',
+	'SombrePalette',
+	'BreakingPalette',
+	'EventPalette',
+	'EventAltPalette',
+	'LongRunningAltPalette',
+	'SombreAltPalette',
+	'SpecialReportAltPalette',
+	'Branded',
+] as const satisfies readonly Omit<
+	DCRContainerPalette,
+	'MediaPalette' | 'PodcastPalette'
+>[];
 
+export const WithSpecialPaletteVariations = () => {
 	const Cards = ({
 		containerPalette,
+		isLabs = false,
 	}: {
 		containerPalette: DCRContainerPalette;
+		isLabs?: boolean;
 	}) => (
 		<UL direction="row" padBottom={true}>
 			<LI percentage={'66.666%'} padSides={true}>
 				<Card
 					{...basicCardProps}
+					format={
+						isLabs
+							? {
+									...basicCardProps.format,
+									theme: ArticleSpecial.Labs,
+							  }
+							: basicCardProps.format
+					}
 					kickerText="Live kicker"
 					showPulsingDot={true}
 					imagePositionOnDesktop="right"
@@ -1175,11 +1185,19 @@ export const WithSpecialPaletteVariations = () => {
 			<LI percentage={'33.333%'} padSides={true} showDivider={true}>
 				<Card
 					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Gallery,
-						theme: Pillar.Lifestyle,
-					}}
+					format={
+						isLabs
+							? {
+									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Gallery,
+									theme: ArticleSpecial.Labs,
+							  }
+							: {
+									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Gallery,
+									theme: Pillar.Lifestyle,
+							  }
+					}
 					kickerText="Kicker"
 					trailText=""
 					imagePositionOnDesktop="top"
@@ -1212,7 +1230,10 @@ export const WithSpecialPaletteVariations = () => {
 							href: 'https://theguardian.org',
 						}}
 					>
-						<Cards containerPalette={containerPalette} />
+						<Cards
+							isLabs={true}
+							containerPalette={containerPalette}
+						/>
 					</LabsSection>
 				) : (
 					<FrontSection
@@ -1231,30 +1252,24 @@ export const WithSpecialPaletteVariations = () => {
 };
 
 export const DynamoWithSpecialPaletteVariations = () => {
-	const containerPalettes = [
-		'InvestigationPalette',
-		'LongRunningPalette',
-		'SombrePalette',
-		'BreakingPalette',
-		'EventPalette',
-		'EventAltPalette',
-		'LongRunningAltPalette',
-		'SombreAltPalette',
-		'SpecialReportAltPalette',
-		'Branded',
-	] as const satisfies readonly Omit<
-		DCRContainerPalette,
-		'MediaPalette' | 'PodcastPalette'
-	>[];
-
 	const DynamoCard = ({
 		containerPalette,
+		isLabs = false,
 	}: {
 		containerPalette: DCRContainerPalette;
+		isLabs?: boolean;
 	}) => (
 		<CardWrapper>
 			<Card
 				{...basicCardProps}
+				format={
+					isLabs
+						? {
+								...basicCardProps.format,
+								theme: ArticleSpecial.Labs,
+						  }
+						: basicCardProps.format
+				}
 				containerPalette={containerPalette}
 				containerType="dynamic/package"
 				isDynamo={true}
@@ -1267,14 +1282,20 @@ export const DynamoWithSpecialPaletteVariations = () => {
 					{
 						...aBasicLink,
 						headline: 'Headline 1',
-						kickerText: 'News kicker',
+						kickerText: `${isLabs ? 'Labs' : 'News'} kicker`,
+						format: isLabs
+							? {
+									...basicCardProps.format,
+									theme: ArticleSpecial.Labs,
+							  }
+							: basicCardProps.format,
 					},
 					{
 						...aBasicLink,
 						headline: 'Headline 2',
-						kickerText: 'Sport kicker',
+						kickerText: `${isLabs ? 'Labs' : 'Sport'} kicker`,
 						format: {
-							theme: Pillar.Sport,
+							theme: isLabs ? ArticleSpecial.Labs : Pillar.Sport,
 							design: ArticleDesign.Gallery,
 							display: ArticleDisplay.Standard,
 						},
@@ -1282,9 +1303,11 @@ export const DynamoWithSpecialPaletteVariations = () => {
 					{
 						...aBasicLink,
 						headline: 'Headline 3',
-						kickerText: 'Culture kicker',
+						kickerText: `${isLabs ? 'Labs' : 'Culture'} kicker`,
 						format: {
-							theme: Pillar.Culture,
+							theme: isLabs
+								? ArticleSpecial.Labs
+								: Pillar.Culture,
 							design: ArticleDesign.Standard,
 							display: ArticleDisplay.Standard,
 						},
@@ -1315,7 +1338,10 @@ export const DynamoWithSpecialPaletteVariations = () => {
 							href: 'https://theguardian.org',
 						}}
 					>
-						<DynamoCard containerPalette={containerPalette} />
+						<DynamoCard
+							isLabs={true}
+							containerPalette={containerPalette}
+						/>
 					</LabsSection>
 				) : (
 					<FrontSection
