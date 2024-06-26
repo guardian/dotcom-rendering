@@ -177,7 +177,6 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 
 	return (
 		<>
-			{' '}
 			{canShow && (
 				<div css={stickyLeft} ref={setNode}>
 					<div css={imageHeader}>
