@@ -38,9 +38,9 @@ export const Analytics = ({
 							"request": "pageViewWithConsent",
 							"selector": ".amp-geo-group-ccpa",
 							"vars": {
-								"consentUUID": "\${clientId(ccpaUUID)}",
+								"consentUUID": "\${clientId(usnatUUID)}",
 								"consent": "$EQUALS(\${consentState}, sufficient)",
-								"consentJurisdiction": "CCPA"
+								"consentJurisdiction": "USNAT"
 
 							},
 							"visibilitySpec": {

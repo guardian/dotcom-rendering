@@ -30,7 +30,7 @@ const clientConfig = {
 	},
 };
 
-const clientConfigCcpa = {
+const clientConfigUsnat = {
 	privacyManagerId: '5eba7ef78c167c47ca8b433d',
 	isCCPA: true,
 	isTCFV2: false,
@@ -40,6 +40,7 @@ const clientConfigCcpa = {
 	alwaysDisplayDns: false,
 	showNoticeUntilAction: true,
 	targetingParams: {
+		// framework: 'usnat', // TODO: Remove
 		framework: 'ccpa',
 	},
 };
@@ -146,7 +147,7 @@ export const AdConsent = () => {
 						geoOverride: {
 							ccpa: {
 								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
-								clientConfig: clientConfigCcpa,
+								clientConfig: clientConfigUsnat,
 							},
 							aus: {
 								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
