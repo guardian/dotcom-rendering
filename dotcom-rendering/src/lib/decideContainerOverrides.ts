@@ -40,7 +40,7 @@ const textCardHeadline = (
 		case 'PodcastPalette':
 			return neutral[100];
 		case 'Branded':
-			return neutral[38];
+			return neutral[20];
 	}
 };
 
@@ -188,7 +188,7 @@ const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 };
 
 const textCardCommentCount = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
+	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -211,6 +211,8 @@ const textCardCommentCount = (
 			return specialReportAlt[100];
 		case 'PodcastPalette':
 			return neutral[86];
+		case 'Branded':
+			return neutral[46];
 	}
 };
 
@@ -323,7 +325,7 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 		case 'SpecialReportAltPalette':
 			return neutral[60];
 		case 'Branded':
-			return neutral[46];
+			return neutral[60];
 		case 'MediaPalette':
 			return neutral[46];
 		case 'PodcastPalette':
@@ -352,7 +354,7 @@ const borderLines = (containerPalette: DCRContainerPalette): string => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[46], 0.3);
 		case 'Branded':
-			return neutral[46];
+			return neutral[60];
 		case 'MediaPalette':
 			return neutral[46];
 		case 'PodcastPalette':
