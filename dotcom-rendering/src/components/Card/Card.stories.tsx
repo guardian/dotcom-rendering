@@ -11,6 +11,7 @@ import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { FrontSection } from '../FrontSection';
+import { LabsSection } from '../LabsSection';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
@@ -1146,27 +1147,85 @@ export const WithSpecialPaletteVariations = () => {
 		'LongRunningAltPalette',
 		'SombreAltPalette',
 		'SpecialReportAltPalette',
-	] as const satisfies readonly DCRContainerPalette[];
+		'Branded',
+	] as const satisfies readonly Omit<
+		DCRContainerPalette,
+		'MediaPalette' | 'PodcastPalette'
+	>[];
 
+	const Cards = ({
+		containerPalette,
+	}: {
+		containerPalette: DCRContainerPalette;
+	}) => (
+		<UL direction="row" padBottom={true}>
+			<LI percentage={'66.666%'} padSides={true}>
+				<Card
+					{...basicCardProps}
+					kickerText="Live kicker"
+					showPulsingDot={true}
+					imagePositionOnDesktop="right"
+					imageSize="large"
+					imagePositionOnMobile="top"
+					containerPalette={containerPalette}
+					discussionId="/p/d8ex5"
+					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+				/>
+			</LI>
+			<LI percentage={'33.333%'} padSides={true} showDivider={true}>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Gallery,
+						theme: Pillar.Lifestyle,
+					}}
+					kickerText="Kicker"
+					trailText=""
+					imagePositionOnDesktop="top"
+					imagePositionOnMobile="left"
+					imageSize="medium"
+					mainMedia={mainGallery}
+					containerPalette={containerPalette}
+				/>
+			</LI>
+		</UL>
+	);
 	return (
 		<>
-			{containerPalettes.map((containerPalette) => (
-				<FrontSection
-					title={containerPalette}
-					discussionApiUrl=""
-					editionId={'UK'}
-					containerPalette={containerPalette}
-					key={containerPalette}
-				>
-					<CardWrapper>
-						<Card
-							{...basicCardProps}
-							containerPalette={containerPalette}
-							imagePositionOnDesktop="left"
-						/>
-					</CardWrapper>
-				</FrontSection>
-			))}
+			{containerPalettes.map((containerPalette) =>
+				containerPalette === 'Branded' ? (
+					<LabsSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						key={containerPalette}
+						ajaxUrl=""
+						collectionId=""
+						ophanComponentLink=""
+						ophanComponentName=""
+						pageId=""
+						sectionId=""
+						badge={{
+							imageSrc:
+								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
+							href: 'https://theguardian.org',
+						}}
+					>
+						<Cards containerPalette={containerPalette} />
+					</LabsSection>
+				) : (
+					<FrontSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						containerPalette={containerPalette}
+						key={containerPalette}
+					>
+						<Cards containerPalette={containerPalette} />
+					</FrontSection>
+				),
+			)}
 		</>
 	);
 };
@@ -1182,60 +1241,94 @@ export const DynamoWithSpecialPaletteVariations = () => {
 		'LongRunningAltPalette',
 		'SombreAltPalette',
 		'SpecialReportAltPalette',
-	] as const satisfies readonly DCRContainerPalette[];
+		'Branded',
+	] as const satisfies readonly Omit<
+		DCRContainerPalette,
+		'MediaPalette' | 'PodcastPalette'
+	>[];
+
+	const DynamoCard = ({
+		containerPalette,
+	}: {
+		containerPalette: DCRContainerPalette;
+	}) => (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				containerPalette={containerPalette}
+				containerType="dynamic/package"
+				isDynamo={true}
+				kickerText="Main kicker"
+				headlineSize="huge"
+				imagePositionOnDesktop="bottom"
+				imagePositionOnMobile="bottom"
+				imageSize="large"
+				supportingContent={[
+					{
+						...aBasicLink,
+						headline: 'Headline 1',
+						kickerText: 'News kicker',
+					},
+					{
+						...aBasicLink,
+						headline: 'Headline 2',
+						kickerText: 'Sport kicker',
+						format: {
+							theme: Pillar.Sport,
+							design: ArticleDesign.Gallery,
+							display: ArticleDisplay.Standard,
+						},
+					},
+					{
+						...aBasicLink,
+						headline: 'Headline 3',
+						kickerText: 'Culture kicker',
+						format: {
+							theme: Pillar.Culture,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
+						},
+					},
+				]}
+			/>
+		</CardWrapper>
+	);
 
 	return (
 		<>
-			{containerPalettes.map((containerPalette) => (
-				<FrontSection
-					title={containerPalette}
-					discussionApiUrl=""
-					editionId={'UK'}
-					containerPalette={containerPalette}
-					key={containerPalette}
-				>
-					<CardWrapper>
-						<Card
-							{...basicCardProps}
-							containerPalette={containerPalette}
-							containerType="dynamic/package"
-							isDynamo={true}
-							kickerText="Main kicker"
-							headlineSize="huge"
-							imagePositionOnDesktop="bottom"
-							imagePositionOnMobile="bottom"
-							imageSize="large"
-							supportingContent={[
-								{
-									...aBasicLink,
-									headline: 'Headline 1',
-									kickerText: 'News kicker',
-								},
-								{
-									...aBasicLink,
-									headline: 'Headline 2',
-									kickerText: 'Sport kicker',
-									format: {
-										theme: Pillar.Sport,
-										design: ArticleDesign.Gallery,
-										display: ArticleDisplay.Standard,
-									},
-								},
-								{
-									...aBasicLink,
-									headline: 'Headline 3',
-									kickerText: 'Culture kicker',
-									format: {
-										theme: Pillar.Culture,
-										design: ArticleDesign.Standard,
-										display: ArticleDisplay.Standard,
-									},
-								},
-							]}
-						/>
-					</CardWrapper>
-				</FrontSection>
-			))}
+			{containerPalettes.map((containerPalette) =>
+				containerPalette === 'Branded' ? (
+					<LabsSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						key={containerPalette}
+						ajaxUrl=""
+						collectionId=""
+						ophanComponentLink=""
+						ophanComponentName=""
+						pageId=""
+						sectionId=""
+						badge={{
+							imageSrc:
+								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
+							href: 'https://theguardian.org',
+						}}
+					>
+						<DynamoCard containerPalette={containerPalette} />
+					</LabsSection>
+				) : (
+					<FrontSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						containerPalette={containerPalette}
+						key={containerPalette}
+					>
+						<DynamoCard containerPalette={containerPalette} />
+					</FrontSection>
+				),
+			)}
 		</>
 	);
 };
