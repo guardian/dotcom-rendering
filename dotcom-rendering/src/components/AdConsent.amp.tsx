@@ -40,7 +40,8 @@ const clientConfigUsnat = {
 	alwaysDisplayDns: false,
 	showNoticeUntilAction: true,
 	targetingParams: {
-		framework: 'usnat',
+		// framework: 'usnat', // TODO: Remove
+		framework: 'ccpa',
 	},
 };
 
