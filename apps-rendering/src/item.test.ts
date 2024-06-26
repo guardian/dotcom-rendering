@@ -623,8 +623,8 @@ describe('list elements', () => {
 		).toBe(true);
 		expect(item.body[2].kind).toBe(ElementKind.Embed);
 		expect(
-			item.body[3].kind === ElementKind.Text &&
-				item.body[3].doc.textContent === 'Some end note 1',
+			item.body[5].kind === ElementKind.Text &&
+				item.body[5].doc.textContent === 'Some end note 1',
 		).toBe(true);
 		expect(
 			item.body[6].kind === ElementKind.HeadingTwo &&
