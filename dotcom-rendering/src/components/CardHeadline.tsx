@@ -37,9 +37,7 @@ type Props = {
 	sizeOnMobile?: SmallHeadlineSize;
 	byline?: string;
 	showByline?: boolean;
-	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
-	isSublink?: boolean;
 	isExternalLink?: boolean;
 	isOnwardContent?: boolean;
 };
@@ -165,6 +163,7 @@ const sublinkStyles = css`
 	@media (pointer: coarse) {
 		min-height: 44px;
 	}
+
 	/* This css is used to remove any underline from the kicker but still
 	 * have it applied to the headline when the kicker is hovered */
 	:hover {
@@ -172,23 +171,8 @@ const sublinkStyles = css`
 		text-decoration: none;
 		.show-underline {
 			text-decoration: underline;
-		}
-	}
-`;
-
-const lineStyles = css`
-	padding-top: 1px;
-	:before {
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		content: '';
-		border-top: 1px solid ${palette('--card-border-supporting')};
-
-		width: 120px;
-		${between.tablet.and.desktop} {
-			width: 100px;
+			text-underline-offset: auto;
+			text-underline-position: auto;
 		}
 	}
 `;
@@ -202,13 +186,7 @@ export const WithLink = ({
 }) => {
 	if (linkTo) {
 		return (
-			<Link
-				href={linkTo}
-				cssOverrides={
-					sublinkStyles
-					// isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
-				}
-			>
+			<Link href={linkTo} cssOverrides={sublinkStyles}>
 				{children}
 			</Link>
 		);
@@ -230,9 +208,7 @@ export const CardHeadline = ({
 	sizeOnMobile,
 	byline,
 	showByline,
-	showLine,
 	linkTo,
-	isSublink,
 	isExternalLink,
 	isOnwardContent = false,
 }: Props) => {
@@ -241,10 +217,10 @@ export const CardHeadline = ({
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
 	return (
-		<>
+		<WithLink linkTo={linkTo}>
 			<h3
 				className={`${
-					isSublink ? 'card-sublink-headline' : 'card-headline'
+					linkTo ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
 					format.theme === ArticleSpecial.Labs
@@ -254,43 +230,40 @@ export const CardHeadline = ({
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
 						}),
-					showLine && lineStyles,
 				]}
 			>
-				<WithLink linkTo={linkTo}>
-					{!!kickerText && (
-						<Kicker
-							text={kickerText}
-							color={kickerColour}
-							showPulsingDot={showPulsingDot}
-							hideLineBreak={hideLineBreak}
-						/>
+				{!!kickerText && (
+					<Kicker
+						text={kickerText}
+						color={kickerColour}
+						showPulsingDot={showPulsingDot}
+						hideLineBreak={hideLineBreak}
+					/>
+				)}
+				{showQuotes && <QuoteIcon colour={kickerColour} />}
+				<span
+					css={css`
+						color: ${isOnwardContent
+							? palette('--card-headline-onward-content-text')
+							: palette('--card-headline-trail-text')};
+					`}
+					className="show-underline"
+				>
+					{cleanHeadLineText}
+					{isExternalLink && (
+						<span
+							css={css`
+								stroke: red;
+							`}
+						>
+							<SvgExternal size="xsmall" />
+						</span>
 					)}
-					{showQuotes && <QuoteIcon colour={kickerColour} />}
-					<span
-						css={css`
-							color: ${isOnwardContent
-								? palette('--card-headline-onward-content-text')
-								: palette('--card-headline-trail-text')};
-						`}
-						className="show-underline"
-					>
-						{cleanHeadLineText}
-						{isExternalLink && (
-							<span
-								css={css`
-									stroke: red;
-								`}
-							>
-								<SvgExternal size="xsmall" />
-							</span>
-						)}
-					</span>
-				</WithLink>
+				</span>
 			</h3>
 			{!!byline && showByline && (
 				<Byline text={byline} format={format} size={size} />
 			)}
-		</>
+		</WithLink>
 	);
 };

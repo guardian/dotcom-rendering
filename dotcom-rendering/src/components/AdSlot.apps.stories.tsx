@@ -1,68 +1,41 @@
-import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints, space } from '@guardian/source/foundations';
-import type { Decorator } from '@storybook/react';
-import { useRef } from 'react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { AdSlot, type Props } from './AdSlot.apps';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
+import { rightColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
+import { AdSlot } from './AdSlot.apps';
 
-const Wrapper: Decorator = (Story) => (
-	<div
-		css={css`
-			/* this matches the negative margin in AdSlot.apps */
-			padding: ${space[3]}px;
-			width: 100%;
-		`}
-	>
-		<Story />
-	</div>
-);
-
-export default {
+const meta = {
 	component: AdSlot,
-	title: 'Components/AdSlot.apps',
+	title: 'Components/Ad Slot (apps)',
+	decorators: [rightColumnDecorator],
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.tablet],
+			modes: {
+				'vertical mobileMedium': allModes['vertical mobileMedium'],
+				'light desktop': allModes['light desktop'],
+			},
 		},
 		viewport: {
-			defaultViewport: 'mobile',
+			defaultViewport: 'mobileMedium',
 		},
 	},
-	argTypes: {
-		onClickSupportButton: { action: 'clicked' },
+	args: {
+		onClickSupportButton: fn(),
 	},
-	decorators: [
-		Wrapper,
-		splitTheme(
-			[
-				{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-				},
-			],
-			{ orientation: 'vertical' },
-		),
-	],
-};
+} satisfies Meta<typeof AdSlot>;
 
-type Args = Omit<Props, 'ref'>;
+export default meta;
 
-export const AdSlotSquare = (args: Args) => {
-	const ref = useRef(null);
-	return <AdSlot ref={ref} {...args} />;
-};
-AdSlotSquare.storyName = 'with isFirstAdSlot = true';
-AdSlotSquare.args = {
-	isFirstAdSlot: true,
-};
+type Story = StoryObj<typeof meta>;
 
-export const AdSlotNotSquare = (args: Args) => {
-	const ref = useRef(null);
-	return <AdSlot ref={ref} {...args} />;
-};
-AdSlotNotSquare.storyName = 'with isFirstAdSlot = false';
-AdSlotNotSquare.args = {
-	isFirstAdSlot: false,
-};
+export const FirstSlot = {
+	args: {
+		isFirstAdSlot: true,
+	},
+} satisfies Story;
+
+export const OtherSlots = {
+	args: {
+		isFirstAdSlot: false,
+	},
+} satisfies Story;

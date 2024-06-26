@@ -1,20 +1,15 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
-import { decidePalette } from '../../../lib/decidePalette';
-import type { DCRContainerPalette } from '../../../types/front';
 
 type Props = {
 	format: ArticleFormat;
-	containerPalette?: DCRContainerPalette;
-	displayLines?: boolean;
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	supportingContent?: JSX.Element;
 	leftAlign?: boolean;
+	showLivePlayable?: boolean;
 };
 
 const spacing = (leftAlign: boolean) => css`
@@ -39,50 +34,17 @@ const flexEnd = css`
 
 export const CardFooter = ({
 	format,
-	containerPalette,
-	displayLines,
 	age,
 	commentCount,
 	cardBranding,
 	supportingContent,
 	leftAlign = false,
+	showLivePlayable = false,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
-
-	const overrides =
-		containerPalette && decideContainerOverrides(containerPalette);
+	if (showLivePlayable) return null;
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer css={margins}>{cardBranding}</footer>;
-	}
-
-	if (
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter
-	) {
-		return (
-			<footer css={margins}>
-				{supportingContent}
-				<div css={spacing(leftAlign)}>
-					{age}
-					{displayLines && (
-						<StraightLines
-							cssOverrides={css`
-								/* Fill the space */
-								flex: 1;
-								align-self: flex-end;
-							`}
-							color={
-								overrides?.border.lines ?? palette.border.lines
-							}
-							count={4}
-						/>
-					)}
-					{commentCount}
-				</div>
-			</footer>
-		);
 	}
 
 	if (age) {

@@ -16,7 +16,7 @@ const {
 } = palette;
 
 const textCardHeadline = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
+	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
@@ -39,20 +39,13 @@ const textCardHeadline = (
 			return specialReportAlt[100];
 		case 'PodcastPalette':
 			return neutral[100];
+		case 'Branded':
+			return neutral[20];
 	}
 };
 
 const textCardStandfirst = textCardHeadline;
 const textCardFooter = textCardHeadline;
-
-const textContainerFooter = (containerPalette: DCRContainerPalette): string => {
-	switch (containerPalette) {
-		case 'Branded':
-			return neutral[46];
-		default:
-			return neutral[46];
-	}
-};
 
 const textContainerSummary = (
 	containerPalette: DCRContainerPalette,
@@ -135,8 +128,8 @@ const backgroundCarouselArrowHover = (
 };
 
 const textCardKicker = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
-): string => {
+	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
+): string | undefined => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
 			return brandAlt[400];
@@ -156,8 +149,10 @@ const textCardKicker = (
 			return news[400];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
+		case 'Branded':
+			return labs[200];
 		case 'PodcastPalette':
-			return '';
+			return undefined;
 	}
 };
 
@@ -193,7 +188,7 @@ const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 };
 
 const textCardCommentCount = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
+	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -216,12 +211,14 @@ const textCardCommentCount = (
 			return specialReportAlt[100];
 		case 'PodcastPalette':
 			return neutral[86];
+		case 'Branded':
+			return neutral[46];
 	}
 };
 
 const textLiveKicker = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
-): string => {
+	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
+): string | undefined => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
 			return specialReport[400];
@@ -241,8 +238,10 @@ const textLiveKicker = (
 			return neutral[97];
 		case 'SpecialReportAltPalette':
 			return neutral[97];
+		case 'Branded':
+			return neutral[97];
 		case 'PodcastPalette':
-			return '';
+			return undefined;
 	}
 };
 
@@ -326,7 +325,7 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 		case 'SpecialReportAltPalette':
 			return neutral[60];
 		case 'Branded':
-			return neutral[46];
+			return neutral[60];
 		case 'MediaPalette':
 			return neutral[46];
 		case 'PodcastPalette':
@@ -355,7 +354,7 @@ const borderLines = (containerPalette: DCRContainerPalette): string => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[46], 0.3);
 		case 'Branded':
-			return neutral[46];
+			return neutral[60];
 		case 'MediaPalette':
 			return neutral[46];
 		case 'PodcastPalette':
@@ -393,8 +392,8 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 };
 
 const backgroundLiveKicker = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
-): string => {
+	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
+): string | undefined => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
 			return brandAlt[400];
@@ -414,14 +413,16 @@ const backgroundLiveKicker = (
 			return news[400];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
+		case 'Branded':
+			return labs[200];
 		case 'PodcastPalette':
-			return '';
+			return undefined;
 	}
 };
 
 const backgroundPulsingDot = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
-): string => {
+	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
+): string | undefined => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
 			return transparentColour(specialReport[400], 0.75);
@@ -440,8 +441,10 @@ const backgroundPulsingDot = (
 			return transparentColour(news[600], 0.75);
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[97], 0.75);
+		case 'Branded':
+			return transparentColour(neutral[97], 0.75);
 		case 'PodcastPalette':
-			return '';
+			return undefined;
 	}
 };
 
@@ -459,9 +462,13 @@ export const decideContainerOverrides = (
 	if (containerPalette === 'Branded') {
 		return {
 			text: {
+				cardHeadline: textCardHeadline(containerPalette),
+				cardKicker: textCardKicker(containerPalette),
+				liveKicker: textLiveKicker(containerPalette),
+				cardFooter: textCardFooter(containerPalette),
 				container: textContainer(containerPalette),
 				containerToggle: textContainerToggle(containerPalette),
-				containerFooter: textContainerFooter(containerPalette),
+				containerFooter: neutral[46],
 				containerSummary: textContainerSummary(containerPalette),
 				containerDate: textContainerDate(containerPalette),
 			},
@@ -480,6 +487,8 @@ export const decideContainerOverrides = (
 				carouselArrow: backgroundCarouselArrow(containerPalette),
 				carouselArrowHover:
 					backgroundCarouselArrowHover(containerPalette),
+				liveKicker: backgroundLiveKicker(containerPalette),
+				pulsingDot: backgroundPulsingDot(containerPalette),
 			},
 		};
 	}
@@ -490,7 +499,7 @@ export const decideContainerOverrides = (
 				containerToggle: textContainerToggle(containerPalette),
 				containerDate: textContainerDate(containerPalette),
 				containerSummary: textContainerSummary(containerPalette),
-				containerFooter: textContainerFooter(containerPalette),
+				containerFooter: neutral[46],
 			},
 			border: {
 				container: borderContainer(containerPalette),
@@ -521,7 +530,7 @@ export const decideContainerOverrides = (
 			containerToggle: textContainerToggle(containerPalette),
 			containerDate: textContainerDate(containerPalette),
 			containerSummary: textContainerSummary(containerPalette),
-			containerFooter: textContainerFooter(containerPalette),
+			containerFooter: neutral[46],
 		},
 		border: {
 			container: borderContainer(containerPalette),

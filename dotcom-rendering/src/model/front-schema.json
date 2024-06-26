@@ -690,7 +690,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -737,6 +736,25 @@
                                                                                     },
                                                                                     "webUrl": {
                                                                                         "type": "string"
+                                                                                    },
+                                                                                    "references": {
+                                                                                        "type": "array",
+                                                                                        "items": {
+                                                                                            "description": "This type comes from `frontend`, hence the FE prefix.",
+                                                                                            "type": "object",
+                                                                                            "properties": {
+                                                                                                "id": {
+                                                                                                    "type": "string"
+                                                                                                },
+                                                                                                "type": {
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            },
+                                                                                            "required": [
+                                                                                                "id",
+                                                                                                "type"
+                                                                                            ]
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [
@@ -1403,7 +1421,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -1450,6 +1467,25 @@
                                                                                     },
                                                                                     "webUrl": {
                                                                                         "type": "string"
+                                                                                    },
+                                                                                    "references": {
+                                                                                        "type": "array",
+                                                                                        "items": {
+                                                                                            "description": "This type comes from `frontend`, hence the FE prefix.",
+                                                                                            "type": "object",
+                                                                                            "properties": {
+                                                                                                "id": {
+                                                                                                    "type": "string"
+                                                                                                },
+                                                                                                "type": {
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            },
+                                                                                            "required": [
+                                                                                                "id",
+                                                                                                "type"
+                                                                                            ]
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [
@@ -2116,7 +2152,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -2163,6 +2198,25 @@
                                                                                     },
                                                                                     "webUrl": {
                                                                                         "type": "string"
+                                                                                    },
+                                                                                    "references": {
+                                                                                        "type": "array",
+                                                                                        "items": {
+                                                                                            "description": "This type comes from `frontend`, hence the FE prefix.",
+                                                                                            "type": "object",
+                                                                                            "properties": {
+                                                                                                "id": {
+                                                                                                    "type": "string"
+                                                                                                },
+                                                                                                "type": {
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            },
+                                                                                            "required": [
+                                                                                                "id",
+                                                                                                "type"
+                                                                                            ]
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [

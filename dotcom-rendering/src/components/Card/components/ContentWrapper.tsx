@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, space } from '@guardian/source/foundations';
-import { decideCardContentPadding } from '../../../lib/decideCardContentPadding';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 const sizingStyles = css`
@@ -74,9 +73,8 @@ type Props = {
 	children: React.ReactNode;
 	imageType?: CardImageType;
 	imageSize: ImageSizeType;
-	imagePositionOnMobile: ImagePositionType;
 	imagePositionOnDesktop: ImagePositionType;
-	addAdditionalPadding?: boolean;
+	hasBackgroundColour?: boolean;
 	isOnwardContent?: boolean;
 };
 
@@ -84,19 +82,12 @@ export const ContentWrapper = ({
 	children,
 	imageType,
 	imageSize,
-	imagePositionOnMobile,
 	imagePositionOnDesktop,
-	addAdditionalPadding,
+	hasBackgroundColour,
 	isOnwardContent,
 }: Props) => {
 	const isHorizontalOnDesktop =
 		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
-
-	const { mobilePadding, desktopPadding } = decideCardContentPadding({
-		imagePositionOnMobile,
-		imagePositionOnDesktop,
-		addAdditionalPadding,
-	});
 
 	return (
 		<div
@@ -107,10 +98,9 @@ export const ContentWrapper = ({
 				],
 				!isOnwardContent && negativeTopMargin,
 				css`
-					padding: ${mobilePadding};
-					${from.tablet} {
-						padding: ${desktopPadding};
-					}
+					padding: ${!!hasBackgroundColour || !!isOnwardContent
+						? space[1]
+						: 0}px;
 				`,
 			]}
 		>

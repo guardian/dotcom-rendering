@@ -74,6 +74,19 @@ export const WithReminderCta: Story = {
 	},
 };
 
+export const WithThreeTierChoiceCards: Story = {
+	name: 'ContributionsLiveblogEpic with Three Tier Choice Cards',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+		},
+	},
+};
+
 export const WithChoiceCards: Story = {
 	name: 'ContributionsLiveblogEpic with Choice Cards',
 	args: {
@@ -123,12 +136,14 @@ export const WithNewsletterSignup: Story = {
 		variant: {
 			...props.variant,
 			highlightedText: undefined,
-			heading: 'Sign up to the Fiver',
+			heading: 'Sign up to First Edition',
 			paragraphs: [
-				"Kick off your evenings with the Guardian's take on the world of football",
+				'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
 			],
 			newsletterSignup: {
-				url: 'https://www.theguardian.com/email/form/plaintone/rrcp-epic/4163',
+				newsletterId: 'morning-briefing',
+				successDescription:
+					'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
 			},
 		},
 	},

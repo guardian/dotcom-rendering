@@ -3,6 +3,12 @@
  *
  * @see https://github.com/guardian/frontend/blob/5b987289/common/app/model/Tag.scala#L156-L179
  */
+
+type Reference = {
+	id: string;
+	type: string;
+};
+
 export type FETagType = {
 	properties: {
 		id: string;
@@ -20,6 +26,7 @@ export type FETagType = {
 		twitterHandle?: string;
 		url?: string;
 		webUrl?: string;
+		references?: Reference[];
 	};
 	pagination?: FEPagination;
 };
