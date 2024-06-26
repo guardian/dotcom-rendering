@@ -341,8 +341,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.5.3)(@types/node@20.12.7)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
-        specifier: 19.7.0
-        version: 19.7.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(typescript@5.3.3)
+        specifier: 19.9.1
+        version: 19.9.1(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(typescript@5.3.3)
       '@guardian/core-web-vitals':
         specifier: 6.0.0
         version: 6.0.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
@@ -4068,14 +4068,14 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@19.7.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-UC4XMnBi85bY356esJbGqJs142E5+k9wqm89oSnThFM20tVhkP3ci+SjfxfLzYgpnn9bKKbfLKI5Dh18umVSsQ==}
+  /@guardian/commercial@19.9.1(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(@guardian/source-foundations@14.2.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-D97C3okQxjLsYO8jR4HQs0WgMnY7pL8Z8xIdCWZyu1l5CWb+ouXgD1emYsF3B/DY03ZMwH880srJ16W4v3sG4g==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
       '@guardian/core-web-vitals': ^6.0.0
       '@guardian/identity-auth': ^2.1.0
       '@guardian/identity-auth-frontend': ^4.0.0
-      '@guardian/libs': ^16.1.0
+      '@guardian/libs': ^17.0.0
       '@guardian/source-foundations': ^14.1.2
       typescript: ~5.3.3
     dependencies:
@@ -4085,7 +4085,7 @@ packages:
       '@guardian/identity-auth': 2.1.0(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@16.1.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/ophan-tracker-js': 2.0.4
+      '@guardian/ophan-tracker-js': 2.1.1
       '@guardian/prebid.js': 8.34.0(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
       '@octokit/core': 6.1.2
@@ -4276,11 +4276,6 @@ packages:
     dependencies:
       tslib: 2.6.2
       typescript: 5.3.3
-    dev: false
-
-  /@guardian/ophan-tracker-js@2.0.4:
-    resolution: {integrity: sha512-kwUNUSfnL8SQwzTlVzInYh7a6VSMFy3zEq2A6Hm7cmKSbl8D7ed03y7ANqquViFuPffRZRQ0IrkJHSbMnsRmrA==}
-    engines: {node: '>=16'}
     dev: false
 
   /@guardian/ophan-tracker-js@2.1.1:
