@@ -7,9 +7,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { isUnsupportedFormatForCardWithoutBackground } from '../../lib/cardHelpers';
-import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette as themePalette } from '../../palette';
@@ -25,7 +23,6 @@ import type {
 } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import type { OnwardsSource } from '../../types/onwards';
-import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline } from '../CardHeadline';
@@ -136,65 +133,6 @@ const StarRatingComponent = ({
 	</div>
 );
 
-/**
- * This functions contains the business logic that decides when the card age should be
- * shown. It uses the format of the article the card links to as well as information
- * about the container where the card sits.
- *
- */
-
-type RenderFooter = ({
-	displayLines,
-}: {
-	displayLines: boolean;
-}) => JSX.Element;
-
-const DecideFooter = ({
-	isOpinion,
-	hasSublinks,
-	isOnwardContent,
-	renderFooter,
-}: {
-	isOpinion: boolean;
-	hasSublinks?: boolean;
-	isOnwardContent?: boolean;
-	renderFooter: RenderFooter;
-}) => {
-	if (isOpinion && !hasSublinks && !isOnwardContent) {
-		// Opinion cards without sublinks render the entire footer, including lines,
-		// outside, sitting along the very bottom of the card
-		// Unless they are onwardContent cards
-		return null;
-	}
-	// For all other cases (including opinion cards that *do* have sublinks) we
-	// render a version of the footer without lines here
-	return renderFooter({
-		displayLines: false,
-	});
-};
-
-const CommentFooter = ({
-	hasSublinks,
-	palette,
-	renderFooter,
-}: {
-	hasSublinks?: boolean;
-	palette: Palette;
-	renderFooter: RenderFooter;
-}) => {
-	return hasSublinks ? (
-		// For opinion cards with sublinks there is already a footer rendered inside that
-		// shows the metadata. We only want to render the lines here
-		<StraightLines color={palette.border.lines} count={4} />
-	) : (
-		// When an opinion card has no sublinks we show the entire footer, including lines
-		// outside, along the entire bottom of the card
-		renderFooter({
-			displayLines: true,
-		})
-	);
-};
-
 const getMedia = ({
 	imageUrl,
 	imageAltText,
@@ -299,8 +237,6 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
-
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -338,62 +274,38 @@ export const Card = ({
 			/>
 		);
 	};
-	const renderFooter = ({ displayLines }: { displayLines?: boolean }) => {
-		if (showLivePlayable) return <></>;
-		return (
-			<CardFooter
-				format={format}
-				containerPalette={containerPalette}
-				displayLines={displayLines}
-				leftAlign={isOnwardContent}
-				age={decideAge()}
-				commentCount={
-					discussionId !== undefined ? (
-						<Link
-							{...{
-								[DISCUSSION_ID_DATA_ATTRIBUTE]: discussionId,
-							}}
-							data-ignore="global-link-styling"
-							data-link-name="Comment count"
-							href={`${linkTo}#comments`}
-							cssOverrides={css`
-								/* See: https://css-tricks.com/nested-links/ */
-								${getZIndex('card-nested-link')}
-								/* The following styles turn off those provided by Link */
-								color: inherit;
-								/* stylelint-disable-next-line property-disallowed-list */
-								font-family: inherit;
-								font-size: inherit;
-								line-height: inherit;
-								text-decoration: none;
-								min-height: 10px;
-							`}
-						>
-							<Island
-								priority="feature"
-								defer={{ until: 'visible' }}
-							>
-								<CardCommentCount
-									discussionApiUrl={discussionApiUrl}
-									discussionId={discussionId}
-									isOnwardContent={isOnwardContent}
-								/>
-							</Island>
-						</Link>
-					) : undefined
-				}
-				cardBranding={
-					branding ? (
-						<CardBranding
-							branding={branding}
-							format={format}
-							onwardsSource={onwardsSource}
-						/>
-					) : undefined
-				}
-			/>
+
+	const CommentCount = () =>
+		!!discussionId && (
+			<Link
+				{...{
+					[DISCUSSION_ID_DATA_ATTRIBUTE]: discussionId,
+				}}
+				data-ignore="global-link-styling"
+				data-link-name="Comment count"
+				href={`${linkTo}#comments`}
+				cssOverrides={css`
+					/* See: https://css-tricks.com/nested-links/ */
+					${getZIndex('card-nested-link')}
+					/* The following styles turn off those provided by Link */
+				color: inherit;
+					/* stylelint-disable-next-line property-disallowed-list */
+					font-family: inherit;
+					font-size: inherit;
+					line-height: inherit;
+					text-decoration: none;
+					min-height: 10px;
+				`}
+			>
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<CardCommentCount
+						discussionApiUrl={discussionApiUrl}
+						discussionId={discussionId}
+						isOnwardContent={isOnwardContent}
+					/>
+				</Island>
+			</Link>
 		);
-	};
 
 	if (snapData?.embedHtml) {
 		return (
@@ -408,9 +320,6 @@ export const Card = ({
 	const showPlayIcon =
 		mainMedia?.type === 'Video' && !isPlayableMediaCard && showMainVideo;
 
-	// We want to show the comment footer with lines, for opinion cards that are not onwardsContent or dynamo
-	const showCommentLinesFooter = isOpinion && !isDynamo && !isOnwardContent;
-
 	const media = getMedia({
 		imageUrl: image?.src,
 		imageAltText: image?.altText,
@@ -421,21 +330,22 @@ export const Card = ({
 		isPlayableMediaCard,
 	});
 
+	// For opinion type cards with avatars (which aren't onwards content)
+	// we render the footer in a different location
+	const showCommentFooter =
+		isOpinion && !isOnwardContent && media?.type === 'avatar';
+
 	const cardBackgroundColour = isOnwardContent
 		? themePalette('--onward-content-card-background')
 		: themePalette('--card-background');
 
 	/**
-	 * For cards in standard containers, we include additional padding for
-	 * cards with background colours (which are Audio, Video, Gallery designs)
-	 *
-	 * For onward content cards, we include additional padding for all formats
-	 * due to their hover state
+	 * Some cards in standard containers have contrasting background colours.
+	 * We need to add additional padding to these cards to keep the text readable.
 	 */
-	const addAdditionalPadding =
-		(!containerPalette &&
-			isUnsupportedFormatForCardWithoutBackground(format)) ||
-		isOnwardContent;
+	const hasBackgroundColour =
+		!containerPalette &&
+		isUnsupportedFormatForCardWithoutBackground(format);
 
 	return (
 		<CardWrapper
@@ -457,6 +367,8 @@ export const Card = ({
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
 				containerType={containerType}
+				isOnwardContent={isOnwardContent}
+				hasBackgroundColour={hasBackgroundColour}
 			>
 				{media && (
 					<ImageWrapper
@@ -600,13 +512,8 @@ export const Card = ({
 					<ContentWrapper
 						imageType={media?.type}
 						imageSize={imageSize}
-						imagePositionOnMobile={
-							media ? imagePositionOnMobile : 'none'
-						}
-						imagePositionOnDesktop={
-							media ? imagePositionOnDesktop : 'none'
-						}
-						addAdditionalPadding={addAdditionalPadding}
+						imagePositionOnDesktop={imagePositionOnDesktop}
+						hasBackgroundColour={hasBackgroundColour}
 						isOnwardContent={isOnwardContent}
 					>
 						{/* This div is needed to keep the headline and trail text justified at the start */}
@@ -697,12 +604,26 @@ export const Card = ({
 									></LatestLinks>
 								</Island>
 							)}
-							<DecideFooter
-								isOpinion={isOpinion}
-								hasSublinks={hasSublinks}
-								renderFooter={renderFooter}
-								isOnwardContent={isOnwardContent}
-							/>
+
+							{!showCommentFooter && (
+								<CardFooter
+									format={format}
+									leftAlign={isOnwardContent}
+									age={decideAge()}
+									commentCount={<CommentCount />}
+									cardBranding={
+										branding ? (
+											<CardBranding
+												branding={branding}
+												format={format}
+												onwardsSource={onwardsSource}
+											/>
+										) : undefined
+									}
+									showLivePlayable={showLivePlayable}
+								/>
+							)}
+
 							{hasSublinks && sublinkPosition === 'inner' && (
 								<SupportingContent
 									supportingContent={supportingContent}
@@ -718,7 +639,10 @@ export const Card = ({
 
 			<div
 				style={{
-					padding: addAdditionalPadding ? `0 ${space[2]}px` : 0,
+					padding:
+						hasBackgroundColour || isOnwardContent
+							? `0 ${space[2]}px`
+							: 0,
 				}}
 			>
 				{hasSublinks && sublinkPosition === 'outer' && (
@@ -729,14 +653,26 @@ export const Card = ({
 						isDynamo={isDynamo}
 					/>
 				)}
+
+				{showCommentFooter && (
+					<CardFooter
+						format={format}
+						leftAlign={isOnwardContent}
+						age={decideAge()}
+						commentCount={<CommentCount />}
+						cardBranding={
+							branding ? (
+								<CardBranding
+									branding={branding}
+									format={format}
+									onwardsSource={onwardsSource}
+								/>
+							) : undefined
+						}
+						showLivePlayable={showLivePlayable}
+					/>
+				)}
 			</div>
-			{showCommentLinesFooter && (
-				<CommentFooter
-					hasSublinks={hasSublinks}
-					palette={palette}
-					renderFooter={renderFooter}
-				/>
-			)}
 		</CardWrapper>
 	);
 };

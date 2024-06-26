@@ -136,12 +136,14 @@ export const WithNewsletterSignup: Story = {
 		variant: {
 			...props.variant,
 			highlightedText: undefined,
-			heading: 'Sign up to the Fiver',
+			heading: 'Sign up to First Edition',
 			paragraphs: [
-				"Kick off your evenings with the Guardian's take on the world of football",
+				'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
 			],
 			newsletterSignup: {
-				url: 'https://www.theguardian.com/email/form/plaintone/rrcp-epic/4163',
+				newsletterId: 'morning-briefing',
+				successDescription:
+					'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
 			},
 		},
 	},

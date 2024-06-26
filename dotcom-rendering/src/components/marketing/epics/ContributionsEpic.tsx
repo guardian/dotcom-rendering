@@ -293,8 +293,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicProps) => {
-	const { image, tickerSettings, showChoiceCards, choiceCardAmounts } =
-		variant;
+	const {
+		image,
+		tickerSettings,
+		showChoiceCards,
+		choiceCardAmounts,
+		newsletterSignup,
+	} = variant;
 
 	const [choiceCardSelection, setChoiceCardSelection] = useState<
 		ChoiceCardSelection | undefined
@@ -483,9 +488,11 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				/>
 			)}
 
-			{variant.newsletterSignup ? (
+			{newsletterSignup ? (
 				<ContributionsEpicNewsletterSignup
-					url={variant.newsletterSignup.url}
+					newsletterId={newsletterSignup.newsletterId}
+					successDescription={newsletterSignup.successDescription}
+					tracking={tracking}
 				/>
 			) : (
 				<ContributionsEpicCtas
