@@ -29,6 +29,7 @@ export const renderArticle = (
 		updateLogoAdPartnerSwitch:
 			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
+		editionId: article.editionId,
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(

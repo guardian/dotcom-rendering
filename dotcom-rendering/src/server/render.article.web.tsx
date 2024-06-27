@@ -55,6 +55,7 @@ export const renderHtml = ({
 		updateLogoAdPartnerSwitch:
 			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
+		editionId: article.editionId,
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
@@ -252,15 +253,16 @@ export const renderBlocks = ({
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
+	const editionId = isEditionId(edition) ? edition : 'UK';
+
 	// Only currently supported for Web
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
 		updateLogoAdPartnerSwitch: !!switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
+		editionId,
 	};
-
-	const editionId = isEditionId(edition) ? edition : 'UK';
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>

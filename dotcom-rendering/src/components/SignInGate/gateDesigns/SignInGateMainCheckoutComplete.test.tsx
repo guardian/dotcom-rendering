@@ -34,6 +34,7 @@ describe('SignInGateMainCheckoutComplete', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<SignInGateMainCheckoutComplete

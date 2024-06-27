@@ -1,4 +1,5 @@
 import type { AssetOrigin } from '../lib/assets';
+import type { EditionId } from '../lib/edition';
 import type { RenderingTarget } from './renderingTarget';
 
 /**
@@ -13,10 +14,12 @@ export type Config =
 			darkModeAvailable: boolean;
 			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
+			editionId: EditionId;
 	  }>
 	| Readonly<{
 			renderingTarget: Extract<RenderingTarget, 'Apps'>;
 			darkModeAvailable: boolean;
 			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
+			editionId: EditionId;
 	  }>;

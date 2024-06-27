@@ -14,6 +14,7 @@ import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
 import { ContainerOverrides } from './ContainerOverrides';
 import { DateTime } from './DateTime';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	id: string;
@@ -125,6 +126,8 @@ export const LatestLinks = ({
 		min-height: ${minHeight};
 	`;
 
+	const { editionId } = useConfig();
+
 	return (
 		<ul
 			css={[
@@ -179,7 +182,7 @@ export const LatestLinks = ({
 												absoluteServerTimes={
 													absoluteServerTimes
 												}
-												editionId={'UK'}
+												editionId={editionId}
 												showWeekday={false}
 												showDate={true}
 												showTime={false}

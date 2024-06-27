@@ -89,6 +89,7 @@ export const renderFront = ({
 			front.config.abTests.darkModeWebVariant === 'variant',
 		updateLogoAdPartnerSwitch: !!front.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
+		editionId: front.editionId,
 	} satisfies Config;
 
 	const { html, extractedCss } = renderToStringWithEmotion(
@@ -192,6 +193,7 @@ export const renderTagPage = ({
 		updateLogoAdPartnerSwitch:
 			!!tagPage.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
+		editionId: tagPage.editionId,
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(

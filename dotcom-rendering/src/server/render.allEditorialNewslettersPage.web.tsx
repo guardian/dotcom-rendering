@@ -30,6 +30,7 @@ export const renderEditorialNewslettersPage = ({
 		darkModeAvailable: false,
 		updateLogoAdPartnerSwitch: false,
 		assetOrigin: ASSET_ORIGIN,
+		editionId: newslettersPage.editionId,
 	} satisfies Config;
 
 	const { html, extractedCss } = renderToStringWithEmotion(
