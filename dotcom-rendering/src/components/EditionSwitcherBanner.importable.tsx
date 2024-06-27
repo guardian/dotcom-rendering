@@ -102,17 +102,22 @@ export const EditionSwitcherBanner = ({ pageEdition }: Props) => {
 	const suggestedUrl = `https://www.theguardian.com/${EditionToUrlMap[userEdition]}`;
 
 	return (
-		<aside css={container}>
+		<aside data-component="edition-switcher-banner" css={container}>
 			<div css={content}>
 				<div css={text}>
 					<p>You are viewing the {pageEdition} homepage</p>
-					<a css={button} href={suggestedUrl}>
+					<a
+						data-link-name="edition-switcher-banner switch-edition"
+						css={button}
+						href={suggestedUrl}
+					>
 						View the {userEdition} homepage
 					</a>
 				</div>
 				<button
 					type="button"
 					css={icon}
+					data-link-name="edition-switcher-banner close-banner"
 					onClick={() => {
 						hideEditionSwitcherBanner();
 					}}
