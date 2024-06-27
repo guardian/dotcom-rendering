@@ -24,6 +24,7 @@ import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 import { Result } from 'result';
+import { ListType } from '@guardian/content-api-models/v1/listType';
 
 // ----- Types ----- //
 
@@ -496,19 +497,33 @@ const parse =
 
 				const parser = parse(context, campaigns, atoms);
 
-				return listTypeData.items.flatMap((item) => {
-					return (
-						item.title ? parseSubheading(item.title) : []
-					).concat(
-						item.bio
-							? flattenTextElement(
-									context.docParser(item.bio),
-							  ).map((elem) => Result.ok(elem))
-							: [],
-						item.elements.flatMap(parser),
-						item.endNote ? parseEmphasis(item.endNote) : [],
-					);
-				});
+				const isMiniProfile =
+					listTypeData.type === ListType.MINI_PROFILES;
+				console.log(isMiniProfile);
+				if (isMiniProfile) {
+					return listTypeData.items.flatMap((item) => {
+						console.log(
+							item.title ? parseSubheading(item.title) : [],
+						);
+						return (
+							item.title ? parseSubheading(item.title) : []
+						).concat(
+							item.bio
+								? flattenTextElement(
+										context.docParser(item.bio),
+								  ).map((elem) => Result.ok(elem))
+								: [],
+							item.elements.flatMap(parser),
+							item.endNote ? parseEmphasis(item.endNote) : [],
+						);
+					});
+				} else {
+					return listTypeData.items.flatMap((item) => {
+						return (
+							item.title ? parseTitle(item.title) : []
+						).concat(item.elements.flatMap(parser));
+					});
+				}
 			}
 
 			case ElementType.TIMELINE: {
