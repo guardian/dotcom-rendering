@@ -268,6 +268,7 @@ const parse =
 			(text: string): Array<Result<string, BodyElement>> => {
 				const openingTags = tags.map((tag) => `<${tag}>`).join('');
 				const closingTags = tags
+					.slice()
 					.reverse()
 					.map((tag) => `</${tag}>`)
 					.join('');
