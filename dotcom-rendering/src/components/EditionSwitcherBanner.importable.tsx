@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, palette, space } from '@guardian/source/foundations';
-// import { LinkButton } from '@guardian/source/react-components';
+import { LinkButton } from '@guardian/source/react-components';
 import useSWR from 'swr';
 import { center } from '../lib/center';
 import type { EditionId as Edition } from '../lib/edition';
@@ -21,7 +21,8 @@ const container = css`
 const content = css`
 	display: flex;
 	justify-content: space-between;
-	padding: ${space[2]}px 10px;
+	padding: 10px 10px ${space[2]}px;
+	align-items: flex-start;
 
 	${from.phablet} {
 		align-items: center;
@@ -35,7 +36,7 @@ const text = css`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: ${space[2]}px;
+	gap: 10px;
 	font-family:
 		'GuardianTextSans',
 		'Guardian Text Sans Web',
@@ -54,16 +55,8 @@ const text = css`
 `;
 
 const button = css`
-	cursor: pointer;
-	text-decoration: none;
-	font-weight: 600;
-	border-radius: 18px;
-	background-color: ${palette.brand[400]};
-	color: ${palette.neutral[100]};
-	padding: 4px 10px 6px 12px;
-
 	${from.phablet} {
-		padding: 10px 18px 10px 16px;
+		padding: 18px ${space[4]}px;
 	}
 `;
 
@@ -106,13 +99,15 @@ export const EditionSwitcherBanner = ({ pageEdition }: Props) => {
 			<div css={content}>
 				<div css={text}>
 					<p>You are viewing the {pageEdition} homepage</p>
-					<a
-						data-link-name="edition-switcher-banner switch-edition"
-						css={button}
+					<LinkButton
 						href={suggestedUrl}
+						priority="primary"
+						size="xsmall"
+						cssOverrides={button}
+						data-link-name="edition-switcher-banner switch-edition"
 					>
 						View the {userEdition} homepage
-					</a>
+					</LinkButton>
 				</div>
 				<button
 					type="button"
