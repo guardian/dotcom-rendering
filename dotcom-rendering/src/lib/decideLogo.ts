@@ -4,10 +4,6 @@ import type { Branding } from '../types/branding';
 const shouldUseLogoForDarkBackground = (format: ArticleFormat): boolean => {
 	if (format.theme === ArticleSpecial.SpecialReport) return true;
 	switch (format.design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return true;
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
