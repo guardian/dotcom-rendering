@@ -12,9 +12,9 @@ import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
+import { useConfig } from './ConfigContext';
 import { ContainerOverrides } from './ContainerOverrides';
 import { DateTime } from './DateTime';
-import { useConfig } from './ConfigContext';
 
 type Props = {
 	id: string;
