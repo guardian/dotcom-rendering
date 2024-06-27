@@ -83,13 +83,13 @@ export const renderFront = ({
 	const enhancedNAV = enhanceNav(NAV);
 
 	// Fronts are not supported in Apps
-	const config: Config = {
+	const config = {
 		renderingTarget: 'Web',
 		darkModeAvailable:
 			front.config.abTests.darkModeWebVariant === 'variant',
 		updateLogoAdPartnerSwitch: !!front.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
-	};
+	} satisfies Config;
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -166,6 +166,7 @@ export const renderFront = ({
 		hasPageSkin: front.config.hasPageSkin,
 		weAreHiring: !!front.config.switches.weAreHiring,
 		canonicalUrl,
+		config,
 	});
 
 	return {
@@ -260,6 +261,7 @@ export const renderTagPage = ({
 		renderingTarget: 'Web',
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
 		canonicalUrl: tagPage.canonicalUrl,
+		config,
 	});
 	return {
 		html: pageHtml,

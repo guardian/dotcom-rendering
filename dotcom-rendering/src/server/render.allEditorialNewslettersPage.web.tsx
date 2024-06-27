@@ -25,12 +25,12 @@ export const renderEditorialNewslettersPage = ({
 	const NAV = extractNAV(newslettersPage.nav);
 
 	// The newsletters page is currently only supported on Web
-	const config: Config = {
+	const config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: false,
 		updateLogoAdPartnerSwitch: false,
 		assetOrigin: ASSET_ORIGIN,
-	};
+	} satisfies Config;
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -99,6 +99,7 @@ export const renderEditorialNewslettersPage = ({
 		keywords: '',
 		renderingTarget: 'Web',
 		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
+		config,
 	});
 	return {
 		html: pageHtml,

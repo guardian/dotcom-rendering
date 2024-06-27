@@ -8,15 +8,15 @@ import type { RenderingTarget } from './renderingTarget';
  * @see /dotcom-rendering/docs/architecture/proposed-adrs/react-context-api.md
  */
 export type Config =
-	| {
+	| Readonly<{
 			renderingTarget: Extract<RenderingTarget, 'Web'>;
 			darkModeAvailable: boolean;
 			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
-	  }
-	| {
+	  }>
+	| Readonly<{
 			renderingTarget: Extract<RenderingTarget, 'Apps'>;
 			darkModeAvailable: boolean;
 			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
-	  };
+	  }>;

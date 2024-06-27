@@ -223,6 +223,7 @@ window.twttr = (function(d, s, id) {
 		canonicalUrl,
 		renderingTarget: 'Web',
 		weAreHiring: !!article.config.switches.weAreHiring,
+		config,
 	});
 
 	return { html: pageHtml, prefetchScripts };

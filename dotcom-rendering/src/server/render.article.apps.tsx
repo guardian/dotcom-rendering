@@ -120,6 +120,7 @@ window.twttr = (function(d, s, id) {
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
+		config,
 	});
 
 	return {
