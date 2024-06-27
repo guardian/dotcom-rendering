@@ -529,27 +529,6 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
-const textYoutubeOverlayKicker = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[500];
-		case Pillar.Opinion:
-			return news[500];
-		case Pillar.Sport:
-			return sport[500];
-		case Pillar.Culture:
-			return culture[500];
-		case Pillar.Lifestyle:
-			return lifestyle[500];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[500];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
-	}
-};
-
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -571,7 +550,6 @@ export const decidePalette = (
 			dateLine: textDateLine(format),
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
-			youtubeOverlayKicker: textYoutubeOverlayKicker(format),
 		},
 		background: {
 			analysisContrast: backgroundAnalysisContrastColour(),
