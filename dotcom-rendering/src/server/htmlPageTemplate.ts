@@ -335,9 +335,9 @@ https://workforus.theguardian.com/careers/product-engineering/
                     })(window, document);
                 </script>
 
-        <script id="config" type="application/json">${JSON.stringify(
-			config,
-		)}</script>
+        <script id="config" type="application/json">
+          ${JSON.stringify(config)}
+        </script>
 
 				<script>
 					window.curlConfig = {
