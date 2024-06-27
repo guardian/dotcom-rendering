@@ -4,6 +4,7 @@ import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useEditionSwitcherBanner } from '../lib/useUserPreferredEdition';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
 import { MyAccount } from './HeaderTopBarMyAccount';
 import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions';
@@ -72,6 +73,7 @@ export const HeaderTopBar = ({
 	hasPageSkin = false,
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
+	const [shouldShowBanner] = useEditionSwitcherBanner(editionId);
 
 	return (
 		<div
@@ -107,6 +109,7 @@ export const HeaderTopBar = ({
 					<HeaderTopBarEditionDropdown
 						editionId={editionId}
 						dataLinkName={dataLinkName}
+						showActiveEdition={!shouldShowBanner}
 					/>
 				</Hide>
 			</div>
