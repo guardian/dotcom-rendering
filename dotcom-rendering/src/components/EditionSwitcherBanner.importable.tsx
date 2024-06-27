@@ -24,6 +24,10 @@ const content = css`
 	padding: 10px 10px ${space[2]}px;
 	align-items: flex-start;
 
+	${from.mobileLandscape} {
+		padding: ${space[2]}px 20px;
+	}
+
 	${from.phablet} {
 		align-items: center;
 		padding: ${space[2]}px 20px;
@@ -62,6 +66,9 @@ const button = css`
 
 const icon = css`
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	padding: 0;
 	background-color: unset;
 	border: none;
 `;
