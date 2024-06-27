@@ -279,7 +279,6 @@ const parse =
 		const parseTitle = parseWithTags(['h2']);
 		const parseSubheading = parseWithTags(['p', 'strong']);
 		const parseEmphasis = parseWithTags(['p', 'em']);
-		const parseParagraph = parseWithTags(['p']);
 
 		switch (element.type) {
 			case ElementType.TEXT: {
@@ -498,8 +497,14 @@ const parse =
 				const parser = parse(context, campaigns, atoms);
 
 				return listTypeData.items.flatMap((item) => {
-					return (item.title ? parseTitle(item.title) : []).concat(
-						item.bio ? parseParagraph(item.bio) : [],
+					return (
+						item.title ? parseSubheading(item.title) : []
+					).concat(
+						item.bio
+							? flattenTextElement(
+									context.docParser(item.bio),
+							  ).map((elem) => Result.ok(elem))
+							: [],
 						item.elements.flatMap(parser),
 						item.endNote ? parseEmphasis(item.endNote) : [],
 					);
