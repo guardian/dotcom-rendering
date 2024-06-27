@@ -15,13 +15,13 @@ const hasUserSelectedEdition = (preferredEdition: string | null): boolean => {
 	return preferredEdition !== null && isEditionId(preferredEdition);
 };
 
-const getValueFromQueryParams = () => {
+const getBannerValueFromQueryParams = () => {
 	const queryParams = new URLSearchParams(window.location.search);
 	return queryParams.get('editionSwitcherBanner');
 };
 
 const addOrRemoveCookie = () => {
-	const value = getValueFromQueryParams();
+	const value = getBannerValueFromQueryParams();
 	if (value === 'hide') {
 		setCookie({
 			name: 'gu_hide_edition_switcher_banner',
@@ -33,7 +33,7 @@ const addOrRemoveCookie = () => {
 };
 
 const hideBannerThroughUserOverride = () => {
-	const queryStringValue = getValueFromQueryParams();
+	const queryStringValue = getBannerValueFromQueryParams();
 	const cookieValue = getCookie({
 		name: 'gu_hide_edition_switcher_banner',
 	});
@@ -42,6 +42,19 @@ const hideBannerThroughUserOverride = () => {
 		queryStringValue === 'hide' ||
 		(cookieValue === 'true' && queryStringValue !== 'unhide')
 	);
+};
+
+/**
+ * If the user has arrived on the page by clicking the edition switcher dropdown in the
+ * top-right of the page, then the URL will contain a query parameter `INTCMP=CE_..`.
+ * When this happens, we can assume the user knows they are on a
+ * particular edition and we do notneed to show them the banner.
+ */
+const didUserClickEditionDropdown = () => {
+	const queryParams = new URLSearchParams(window.location.search);
+	const value = queryParams.get('INTCMP');
+
+	return value?.substring(0, 3) === 'CE_';
 };
 
 /**
@@ -80,7 +93,8 @@ export const useEditionSwitcherBanner = (
 		setShouldShowBanner(
 			userEdition !== null &&
 				edition !== userEdition &&
-				!hideBannerThroughUserOverride(),
+				!hideBannerThroughUserOverride() &&
+				!didUserClickEditionDropdown(),
 		);
 	}, [userEdition, edition]);
 
