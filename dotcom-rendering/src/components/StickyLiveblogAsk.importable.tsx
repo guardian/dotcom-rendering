@@ -23,6 +23,7 @@ import type { ReactComponent } from './marketing/lib/ReactComponent';
 import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 	createClickEventFromTracking,
+	createInsertEventFromTracking,
 	createViewEventFromTracking,
 } from './marketing/lib/tracking';
 
@@ -106,6 +107,17 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 	const countryCode = useCountryCode(whatAmI);
 	const pageViewId = usePageViewId(renderingTarget);
 
+	// should we show ourselves?
+	const [showSupportMessagingForUser, setShowSupportMessaging] =
+		useState<boolean>(false);
+	const authStatus = useAuthStatus();
+	useEffect(() => {
+		const isSignedIn =
+			authStatus.kind === 'SignedInWithOkta' ||
+			authStatus.kind === 'SignedInWithCookies';
+		setShowSupportMessaging(!shouldHideSupportMessaging(isSignedIn));
+	}, [authStatus]);
+
 	const ABTestAPI = useAB()?.api;
 
 	// We can check if a user is in a variant, returns a boolean
@@ -114,18 +126,6 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 		'StickyLiveBlogAskTest',
 		'variant',
 	);
-
-	// should we show ourselves?
-	const [showSupportMessagingForUser, setShowSupportMessaging] =
-		useState<boolean>(false);
-	const authStatus = useAuthStatus();
-
-	useEffect(() => {
-		const isSignedIn =
-			authStatus.kind === 'SignedInWithOkta' ||
-			authStatus.kind === 'SignedInWithCookies';
-		setShowSupportMessaging(!shouldHideSupportMessaging(isSignedIn));
-	}, [authStatus]);
 
 	// tracking
 	const tracking: Tracking = useMemo(() => {
@@ -136,11 +136,11 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 			referrerUrl,
 			// message tests
 			abTestName: whatAmI,
-			abTestVariant: 'control',
+			abTestVariant: userInVariant ? 'variant' : 'control',
 			campaignCode: whatAmI,
 			componentType: 'ACQUISITIONS_OTHER',
 		};
-	}, [pageViewId, referrerUrl]);
+	}, [pageViewId, referrerUrl, userInVariant]);
 
 	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
 		baseUrl,
@@ -154,6 +154,24 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 		debounce: true,
 	});
 
+	// send event regardless of variant or control
+	// but only where they *could* see the component.
+	useEffect(() => {
+		if (showSupportMessagingForUser && !shouldHideReaderRevenueOnArticle) {
+			// For ophan
+			void submitComponentEvent(
+				createInsertEventFromTracking(tracking, tracking.campaignCode),
+				renderingTarget,
+			);
+		}
+	}, [
+		tracking,
+		renderingTarget,
+		showSupportMessagingForUser,
+		shouldHideReaderRevenueOnArticle,
+	]);
+
+	// capture where it has been displayed (is variant).
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For ophan
