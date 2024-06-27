@@ -49,7 +49,6 @@ const stickyLeft = css`
 	padding: 0px;
 	gap: ${space[1]}px;
 `;
-
 const imageHeader = css`
 	background-color: ${palette.brand[400]};
 	text-align: center;
@@ -88,12 +87,10 @@ const buttonStyles = {
 	backgroundPrimary: palette.brandAlt[400],
 	backgroundPrimaryHover: palette.brandAlt[300],
 };
-
 const contributionsTheme = {
 	button: buttonStyles,
 	link: buttonStyles,
 };
-
 interface StickyLiveblogAskProps {
 	referrerUrl: string;
 	shouldHideReaderRevenueOnArticle: boolean;
