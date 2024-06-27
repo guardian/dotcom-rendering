@@ -36,13 +36,13 @@ const groupByYear = (trails: TrailAndDate[]) => {
 
 	for (const { trail, date } of trails) {
 		const existingYear = trailsByYear.find(
-			({ year }) => year === date.getUTCFullYear(),
+			({ year }) => year === date.getFullYear(),
 		);
 		if (existingYear) {
 			existingYear.trails.push({ trail, date });
 		} else {
 			trailsByYear.push({
-				year: date.getUTCFullYear(),
+				year: date.getFullYear(),
 				trails: [{ trail, date }],
 			});
 		}
@@ -63,14 +63,14 @@ const groupTrailsByMonth = (trails: TrailAndDate[], year: number) => {
 
 	for (const { trail, date } of trails) {
 		const existingMonth = trailsByMonth.find(
-			({ month }) => month === date.getUTCMonth(),
+			({ month }) => month === date.getMonth(),
 		);
 		if (existingMonth) {
 			existingMonth.trails.push({ trail, date });
 		} else {
 			trailsByMonth.push({
 				year,
-				month: date.getUTCMonth(),
+				month: date.getMonth(),
 				trails: [{ trail, date }],
 			});
 		}
@@ -96,7 +96,7 @@ const groupTrailsByDay = (
 
 	for (const { trail, date } of trails) {
 		const existingMonth = trailsByDay.find(
-			({ day }) => day === date.getUTCDate(),
+			({ day }) => day === date.getDate(),
 		);
 		if (existingMonth) {
 			existingMonth.trails.push({ trail, date });
@@ -104,7 +104,7 @@ const groupTrailsByDay = (
 			trailsByDay.push({
 				year,
 				month,
-				day: date.getUTCDate(),
+				day: date.getDate(),
 				trails: [{ trail, date }],
 			});
 		}

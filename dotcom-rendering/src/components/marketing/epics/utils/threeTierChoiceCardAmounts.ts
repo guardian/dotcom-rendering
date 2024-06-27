@@ -43,7 +43,7 @@ export const threeTierChoiceCardAmounts = {
 	},
 } as const satisfies Record<CountryGroupId, Record<SupportTier, number>>;
 
-export function getDefaultAmount(countryCode?: string): number {
+export function getDefaultThreeTierAmount(countryCode?: string): number {
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
 	return threeTierChoiceCardAmounts[countryGroupId].allAccess;
 }

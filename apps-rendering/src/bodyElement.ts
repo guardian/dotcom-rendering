@@ -500,12 +500,8 @@ const parse =
 
 				const isMiniProfile =
 					listTypeData.type === ListType.MINI_PROFILES;
-				console.log(isMiniProfile);
 				if (isMiniProfile) {
 					return listTypeData.items.flatMap((item) => {
-						console.log(
-							item.title ? parseSubheading(item.title) : [],
-						);
 						return (
 							item.title ? parseSubheading(item.title) : []
 						).concat(

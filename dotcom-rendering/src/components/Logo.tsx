@@ -9,7 +9,6 @@ import { SvgGuardianLogo } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo';
 import { SvgGuardianNewsProviderLogo } from './SvgGuardianNewsProviderLogo';
 
 const linkStylesUntilLeftCol = css`
@@ -71,27 +70,6 @@ export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 					<SvgGuardianNewsProviderLogo />
 				</a>
 			);
-		case 'AU':
-			return (
-				<a
-					css={[
-						linkStylesUntilLeftCol,
-						!hasPageSkin && linkStylesFromLeftCol,
-					]}
-					href="/"
-					data-link-name={nestedOphanComponents('nav3', 'logo')}
-				>
-					<span
-						css={css`
-							${visuallyHidden};
-						`}
-					>
-						The Guardian - Back to home
-					</span>
-					<SvgGuardianAustraliaLogo />
-				</a>
-			);
-
 		default:
 			return (
 				<a
