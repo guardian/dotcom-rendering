@@ -77,11 +77,6 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	 */
 	const windowGuardian = escapeData(JSON.stringify(guardian));
 
-	if (config.renderingTarget === 'Apps') {
-		config.darkModeAvailable;
-		config.updateLogoAdPartnerSwitch;
-	}
-
 	const favicon =
 		process.env.NODE_ENV === 'production'
 			? 'favicon-32x32.ico'
