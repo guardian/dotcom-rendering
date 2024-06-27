@@ -70,7 +70,6 @@ const bodySection = css`
 	color: ${palette.neutral[0]};
 	${textSans15};
 	left: ${space[8]}px;
-	// line-height 130%
 `;
 const ctaSection = css`
 	color: ${palette.neutral[0]};
