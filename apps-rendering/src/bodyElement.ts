@@ -262,19 +262,24 @@ const parse =
 	(
 		element: BlockElement,
 	): Result<string, BodyElement> | Array<Result<string, BodyElement>> => {
-		const parseTitle = (
-			title: string,
-		): Array<Result<string, BodyElement>> => {
-			const doc = context.docParser(`<h2>${title}</h2>`);
-			return flattenTextElement(doc).map((elem) => Result.ok(elem));
-		};
+		const parseWithTags =
+			(tags: string[]) =>
+			(text: string): Array<Result<string, BodyElement>> => {
+				const openingTags = tags.map((tag) => `<${tag}>`).join('');
+				const closingTags = tags
+					.reverse()
+					.map((tag) => `</${tag}>`)
+					.join('');
+				const doc = context.docParser(
+					`${openingTags}${text}${closingTags}`,
+				);
+				return flattenTextElement(doc).map((elem) => Result.ok(elem));
+			};
 
-		const parseSubheading = (
-			title: string,
-		): Array<Result<string, BodyElement>> => {
-			const doc = context.docParser(`<p><strong>${title}</strong></p>`);
-			return flattenTextElement(doc).map((elem) => Result.ok(elem));
-		};
+		const parseTitle = parseWithTags(['h2']);
+		const parseSubheading = parseWithTags(['p', 'strong']);
+		const parseEmphasis = parseWithTags(['p', 'em']);
+		const parseParagraph = parseWithTags(['p']);
 
 		switch (element.type) {
 			case ElementType.TEXT: {
@@ -494,9 +499,9 @@ const parse =
 
 				return listTypeData.items.flatMap((item) => {
 					return (item.title ? parseTitle(item.title) : []).concat(
-						item.bio ? parseSubheading(item.bio) : [],
+						item.bio ? parseParagraph(item.bio) : [],
 						item.elements.flatMap(parser),
-						item.endNote ? parseSubheading(item.endNote) : [],
+						item.endNote ? parseEmphasis(item.endNote) : [],
 					);
 				});
 			}
