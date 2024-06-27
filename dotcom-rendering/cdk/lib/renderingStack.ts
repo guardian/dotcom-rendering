@@ -43,9 +43,8 @@ const addStepScalingPolicy = (
 	context: RenderingCDKStack,
 	ec2App: GuEc2App,
 	props: RenderingCDKStackProps,
-	stage: string,
 ) => {
-	if (stage === 'PROD' && props.scaling.policies?.step) {
+	if (props.scaling.policies?.step) {
 		const latencyMetric = new Metric({
 			dimensionsMap: {
 				LoadBalancer: ec2App.loadBalancer.loadBalancerFullName,
@@ -110,9 +109,8 @@ const addStepScalingPolicy = (
 const addTargetScalingPolicy = (
 	ec2App: GuEc2App,
 	props: RenderingCDKStackProps,
-	stage: string,
 ) => {
-	if (stage === 'PROD' && props.scaling.policies?.target) {
+	if (props.scaling.policies?.target) {
 		for (const targetPolicy of props.scaling.policies.target) {
 			if (
 				targetPolicy.type ===
@@ -236,10 +234,10 @@ export class RenderingCDKStack extends CDKStack {
 		});
 
 		/** Add CPU utilisation based TARGET scaling policy for PROD only if a policy is defined */
-		addTargetScalingPolicy(ec2App, props, stage);
+		addTargetScalingPolicy(ec2App, props);
 
 		/** Add latency-based STEP scaling policy for PROD only if a policy is defined */
-		addStepScalingPolicy(this, ec2App, props, stage);
+		addStepScalingPolicy(this, ec2App, props);
 
 		// Saves the value of the rendering base URL to SSM for frontend apps to use
 		new StringParameter(this, 'RenderingBaseURLParam', {
