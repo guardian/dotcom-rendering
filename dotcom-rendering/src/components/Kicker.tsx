@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
 	space,
@@ -13,6 +14,7 @@ type Props = {
 	color: string;
 	showPulsingDot?: boolean;
 	hideLineBreak?: boolean;
+	cssOverrides?: SerializedStyles;
 };
 
 const standardTextStyles = css`
@@ -46,6 +48,7 @@ export const Kicker = ({
 	color,
 	showPulsingDot,
 	hideLineBreak,
+	cssOverrides,
 }: Props) => {
 	/** @todo
 	 * Future optimisation is to not have color as a prop, but to infer this through format and CSS vars.
@@ -58,6 +61,7 @@ export const Kicker = ({
 			css={[
 				isLiveKicker ? liveTextStyles : standardTextStyles,
 				hideLineBreak && hideLineBreakStyles,
+				cssOverrides,
 			]}
 			style={{
 				color: isLiveKicker ? palette('--kicker-text-live') : color,
