@@ -1,4 +1,4 @@
-import { getCookie } from '@guardian/libs';
+import { getCookie, removeCookie, setCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { mutate } from 'swr';
 import { type EditionId as Edition, isEditionId } from './edition';
@@ -15,8 +15,40 @@ const hasUserSelectedEdition = (preferredEdition: string | null): boolean => {
 	return preferredEdition !== null && isEditionId(preferredEdition);
 };
 
+const getValueFromQueryParams = () => {
+	const queryParams = new URLSearchParams(window.location.search);
+	return queryParams.get('editionSwitcherBanner');
+};
+
+const addOrRemoveCookie = () => {
+	const value = getValueFromQueryParams();
+	if (value === 'hide') {
+		setCookie({
+			name: 'gu_hide_edition_switcher_banner',
+			value: 'true',
+		});
+	} else if (value === 'unhide') {
+		removeCookie({ name: 'gu_hide_edition_switcher_banner' });
+	}
+};
+
+const hideBannerThroughUserOverride = () => {
+	const queryStringValue = getValueFromQueryParams();
+	const cookieValue = getCookie({
+		name: 'gu_hide_edition_switcher_banner',
+	});
+
+	return (
+		queryStringValue === 'hide' ||
+		(cookieValue === 'true' && queryStringValue !== 'unhide')
+	);
+};
+
 /**
- * Show the banner if the user's preferred edition is different from the current edition
+ * Show an "Edition Switcher" banner if the user's preferred edition is different from the current edition.
+ *
+ * This allows a user to quickly identify that they are not on the network front
+ * for their preferred edition and provides a link to switch to it.
  */
 export const useEditionSwitcherBanner = (
 	edition: Edition,
@@ -41,7 +73,15 @@ export const useEditionSwitcherBanner = (
 	}, [userEdition]);
 
 	useEffect(() => {
-		setShouldShowBanner(userEdition !== null && edition !== userEdition);
+		addOrRemoveCookie();
+	}, []);
+
+	useEffect(() => {
+		setShouldShowBanner(
+			userEdition !== null &&
+				edition !== userEdition &&
+				!hideBannerThroughUserOverride(),
+		);
 	}, [userEdition, edition]);
 
 	return [shouldShowBanner, userEdition];
