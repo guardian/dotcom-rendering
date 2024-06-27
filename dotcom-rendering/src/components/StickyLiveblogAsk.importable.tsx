@@ -280,7 +280,7 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 					</div>
 					<div css={textBlock}>
 						<div css={bodySection}>
-							The Guardian's expert news coverage is funded by
+							The Guardian’s expert news coverage is funded by
 							people like you, not a billionaire owner. Will you
 							help us keep our independent journalism free and
 							open to all today?
