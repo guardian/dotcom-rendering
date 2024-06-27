@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space } from '@guardian/source/foundations';
+import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import useSWR from 'swr';
 import { center } from '../lib/center';
@@ -14,26 +14,24 @@ import XIcon from '../static/icons/x.svg';
 const container = css`
 	position: sticky;
 	top: 0;
-	${getZIndex('banner')};
 	background-color: ${palette.brand[800]};
+	${getZIndex('banner')};
 `;
 
 const content = css`
 	display: flex;
 	justify-content: space-between;
-	padding: 10px 10px ${space[2]}px;
+	padding: 10px;
 	align-items: flex-start;
+	${center}
 
 	${from.mobileLandscape} {
-		padding: ${space[2]}px 20px;
+		padding: 10px ${space[5]}px;
 	}
 
 	${from.phablet} {
 		align-items: center;
-		padding: ${space[2]}px 20px;
 	}
-
-	${center}
 `;
 
 const text = css`
@@ -41,15 +39,7 @@ const text = css`
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 10px;
-	font-family:
-		'GuardianTextSans',
-		'Guardian Text Sans Web',
-		Helvetica Neue,
-		Helvetica,
-		Arial,
-		Lucida Grande,
-		sans-serif;
-	font-size: 0.875rem;
+	${textSans14};
 
 	${from.phablet} {
 		flex-direction: row;
