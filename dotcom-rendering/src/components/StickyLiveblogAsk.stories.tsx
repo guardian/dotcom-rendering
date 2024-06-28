@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { StickyLiveblogAsk } from './StickyLiveblogAskWrapper.importable';
+import { space } from '@guardian/source/foundations';
 
 export default {
 	component: StickyLiveblogAsk,
@@ -9,9 +10,8 @@ export default {
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
-			background-color: #ededed;
-			margin-left: 20px;
-			margin-top: 24px;
+			margin-left: ${space[5]}px;
+			margin-top: ${space[6]}px;
 		`}
 	>
 		{children}
@@ -25,7 +25,6 @@ export const Default = () => {
 				url="https://www.theguardian.com/uk"
 				onCtaClick={() => {}}
 			/>
-			/
 		</Wrapper>
 	);
 };
