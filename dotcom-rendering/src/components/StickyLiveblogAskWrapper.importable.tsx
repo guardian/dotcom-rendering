@@ -37,11 +37,13 @@ const stickyLeft = css`
 	background: ${palette.neutral[100]};
 	position: sticky;
 	top: ${space[3]}px;
-`;
-const container = css`
 	width: 220px;
 	margin-left: ${space[5]}px;
 	margin-top: ${space[6]}px;
+`;
+const container = css`
+	background: ${palette.neutral[100]};
+	width: 220px;
 
 	box-sizing: border-box;
 

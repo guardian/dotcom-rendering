@@ -49,7 +49,7 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAsk.importable';
+import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import {
