@@ -188,9 +188,6 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 	}, [authStatus]);
 
 	const ABTestAPI = useAB()?.api;
-
-	// We can check if a user is in a variant, returns a boolean
-	// ABTestTest being an ab test that was passed in via the ab test array
 	const userInVariant = ABTestAPI?.isUserInVariant(
 		'StickyLiveBlogAskTest',
 		'variant',
