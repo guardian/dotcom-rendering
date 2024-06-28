@@ -313,14 +313,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				id="maincontent"
 				css={hasPageSkin && pageSkinContainer}
 			>
-				{front.isNetworkFront && (
-					<Island priority="enhancement" defer={{ until: 'idle' }}>
-						<EditionSwitcherBanner
-							pageId={pageId}
-							edition={editionId}
-						/>
-					</Island>
-				)}
+				<Island priority="enhancement" defer={{ until: 'idle' }}>
+					<EditionSwitcherBanner
+						pageId={pageId}
+						edition={editionId}
+					/>
+				</Island>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(

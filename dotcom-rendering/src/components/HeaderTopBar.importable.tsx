@@ -55,9 +55,10 @@ const topBarStylesFromLeftCol = css`
  *
  * ## Why does this need to be an Island?
  *
- * - We need to check if a user is signed in to show them the right header.
+ * - We need to check if a user is signed in to show them the right header
  * - We track clicks on print subscription with a page view ID
  * - We (sometimes) have a dynamic search
+ * - We change the text of the edition dropdown if we show the edition switcher banner
  *
  * ---
  *

@@ -1,7 +1,11 @@
 import { getCookie, removeCookie, setCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { mutate } from 'swr';
-import { type EditionId as Edition, getEditionFromPageId } from './edition';
+import {
+	type EditionId as Edition,
+	getEditionFromPageId,
+	isNetworkFront,
+} from './edition';
 
 const getBannerValueFromQueryParams = () => {
 	const queryParams = new URLSearchParams(window.location.search);
@@ -33,26 +37,29 @@ const hideBannerThroughUserOverride = () => {
 };
 
 /**
- * Show an "Edition Switcher" banner if the user's preferred edition is different from the current edition.
+ * Show an "Edition Switcher" banner if the user is on a network front
+ * which is different to their preferred or default edition.
  *
  * This allows a user to quickly identify that they are not on the network front
- * for their preferred edition and provides a link to switch to it.
+ * for their edition and gives them a link to switch to it.
  */
 export const useEditionSwitcherBanner = (
 	pageId: string,
 	userEdition: Edition,
 ): [boolean] => {
 	const pageEdition = getEditionFromPageId(pageId)?.editionId;
+	const isOnDifferentFrontToEdition =
+		isNetworkFront(pageId) && pageEdition !== userEdition;
 
 	const [shouldShowBanner, setShouldShowBanner] = useState(
-		pageEdition !== userEdition,
+		isOnDifferentFrontToEdition,
 	);
 
 	useEffect(() => {
 		setShouldShowBanner(
-			pageEdition !== userEdition && !hideBannerThroughUserOverride(),
+			isOnDifferentFrontToEdition && !hideBannerThroughUserOverride(),
 		);
-	}, [userEdition, pageId, pageEdition]);
+	}, [isOnDifferentFrontToEdition]);
 
 	useEffect(() => {
 		addOrRemoveCookie();
