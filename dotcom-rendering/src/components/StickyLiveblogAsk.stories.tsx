@@ -8,8 +8,8 @@ export default {
 export const Default = () => {
 	return (
 		<StickyLiveblogAsk
-			referrerUrl="https://www.theguardian.com/uk"
-			shouldHideReaderRevenueOnArticle={false}
+			url="https://www.theguardian.com/uk"
+			onCtaClick={() => {}}
 		/>
 	);
 };
