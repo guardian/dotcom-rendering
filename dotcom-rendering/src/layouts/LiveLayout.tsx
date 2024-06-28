@@ -49,7 +49,7 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { StickyLiveblogAsk } from '../components/StickyLiveblogAsk.importable';
+import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAsk.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import {
@@ -941,7 +941,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										priority="feature"
 										defer={{ until: 'visible' }}
 									>
-										<StickyLiveblogAsk
+										<StickyLiveblogAskWrapper
 											referrerUrl={article.webURL}
 											shouldHideReaderRevenueOnArticle={
 												article.shouldHideReaderRevenue
