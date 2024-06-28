@@ -15,7 +15,6 @@ export type Palette = {
 		dateLine: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
-		youtubeOverlayKicker: Colour;
 	};
 	background: {
 		analysisContrast: Colour;
