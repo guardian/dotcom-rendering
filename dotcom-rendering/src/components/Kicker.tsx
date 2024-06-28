@@ -1,9 +1,9 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
 	space,
 	textSans15,
 	textSansBold14,
+	textSansBold15,
 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { Island } from './Island';
@@ -14,12 +14,18 @@ type Props = {
 	color: string;
 	showPulsingDot?: boolean;
 	hideLineBreak?: boolean;
-	cssOverrides?: SerializedStyles;
+	/** Controls the weight of the standard, non-live kicker. Defaults to regular */
+	fontWeight?: 'regular' | 'bold';
 };
 
 const standardTextStyles = css`
 	${textSans15}
 `;
+
+const boldTextStyles = css`
+	${textSansBold15}
+`;
+
 const liveTextStyles = css`
 	${textSansBold14}
 	display: flex;
@@ -48,7 +54,7 @@ export const Kicker = ({
 	color,
 	showPulsingDot,
 	hideLineBreak,
-	cssOverrides,
+	fontWeight = 'regular',
 }: Props) => {
 	/** @todo
 	 * Future optimisation is to not have color as a prop, but to infer this through format and CSS vars.
@@ -60,8 +66,8 @@ export const Kicker = ({
 		<div
 			css={[
 				isLiveKicker ? liveTextStyles : standardTextStyles,
+				!!isLiveKicker && fontWeight === 'bold' && boldTextStyles,
 				hideLineBreak && hideLineBreakStyles,
-				cssOverrides,
 			]}
 			style={{
 				color: isLiveKicker ? palette('--kicker-text-live') : color,

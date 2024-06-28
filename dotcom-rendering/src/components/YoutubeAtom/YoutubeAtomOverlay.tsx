@@ -6,7 +6,6 @@ import {
 	palette as sourcePalette,
 	space,
 	textSansBold12,
-	textSansBold15,
 } from '@guardian/source/foundations';
 import { palette } from '../../palette';
 import type {
@@ -123,10 +122,6 @@ const textOverlayStyles = css`
 	padding-top: ${space[9]}px;
 `;
 
-const kickerOverrides = css`
-	${textSansBold15}
-`;
-
 const titleStyles = css`
 	${headlineMedium17};
 	${from.tablet} {
@@ -216,7 +211,7 @@ export const YoutubeAtomOverlay = ({
 							<Kicker
 								text={kicker}
 								color={palette('--youtube-overlay-kicker')}
-								cssOverrides={kickerOverrides}
+								fontWeight="bold"
 							/>
 						)}
 						<div css={titleStyles}>{title}</div>
