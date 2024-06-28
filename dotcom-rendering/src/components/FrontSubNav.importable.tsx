@@ -31,8 +31,9 @@ export const FrontSubNav = ({
 }: Props) => {
 	const [showBanner] = useEditionSwitcherBanner(pageId, userEdition);
 	const { data } = useSWR(key, () => apiPromise);
+	const isBannerClosed = !!data?.hidden;
 
-	if (showBanner && !data?.hidden) {
+	if (showBanner && !isBannerClosed) {
 		return null;
 	}
 

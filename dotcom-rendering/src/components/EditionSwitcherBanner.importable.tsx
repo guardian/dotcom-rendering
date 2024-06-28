@@ -38,7 +38,7 @@ const content = css`
 	}
 `;
 
-const text = css`
+const textAndLink = css`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -52,13 +52,13 @@ const text = css`
 	}
 `;
 
-const button = css`
+const linkButton = css`
 	${from.phablet} {
 		padding: 18px ${space[4]}px;
 	}
 `;
 
-const icon = css`
+const closeButton = css`
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
@@ -76,15 +76,18 @@ type Props = {
 	pageId: string;
 	edition: EditionId;
 };
+
 /**
- * Displays between the header and the main content on network fronts.
- *
+ * Displays a banner between the header and main content on network fronts.
  * Provides a link to switch to the homepage of the user's preferred edition.
+ *
+ * See PR for details: https://github.com/guardian/dotcom-rendering/pull/11763
  */
 export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
-	const [shouldShowBanner] = useEditionSwitcherBanner(pageId, edition);
+	const [showBanner] = useEditionSwitcherBanner(pageId, edition);
 
 	const { data } = useSWR(key, () => apiPromise);
+	const isBannerClosed = !!data?.hidden;
 	const suggestedPageId = getEditionFromId(edition).pageId;
 	const suggestedEdition = getEditionFromId(edition).title.replace(
 		' edition',
@@ -93,23 +96,21 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 	const defaultEdition = getEditionFromPageId(pageId);
 	const defaultEditionName = defaultEdition?.title.replace(' edition', '');
 
-	if (
-		data?.hidden ??
-		(!shouldShowBanner || !defaultEditionName || !suggestedPageId)
-	) {
+	if (isBannerClosed || !showBanner || !defaultEditionName) {
 		return null;
 	}
 
 	return (
 		<aside data-component="edition-switcher-banner" css={container}>
 			<div css={content}>
-				<div css={text}>
+				<div css={textAndLink}>
 					<p>You are viewing the {defaultEditionName} homepage</p>
 					<LinkButton
 						href={`https://www.theguardian.com/${suggestedPageId}`}
 						priority="primary"
 						size="xsmall"
-						cssOverrides={button}
+						// larger screen sizes should have size="small", which is why we need a css override
+						cssOverrides={linkButton}
 						data-link-name="edition-switcher-banner switch-edition"
 					>
 						View the {suggestedEdition} homepage
@@ -117,7 +118,7 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 				</div>
 				<button
 					type="button"
-					css={icon}
+					css={closeButton}
 					data-link-name="edition-switcher-banner close-banner"
 					onClick={() => {
 						hideEditionSwitcherBanner();

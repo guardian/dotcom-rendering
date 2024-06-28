@@ -76,7 +76,7 @@ export const HeaderTopBar = ({
 	pageId = '',
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
-	const [shouldShowBanner] = useEditionSwitcherBanner(pageId, editionId);
+	const [showBanner] = useEditionSwitcherBanner(pageId, editionId);
 
 	return (
 		<div
@@ -112,7 +112,7 @@ export const HeaderTopBar = ({
 					<HeaderTopBarEditionDropdown
 						editionId={editionId}
 						dataLinkName={dataLinkName}
-						showActiveEdition={!shouldShowBanner}
+						showActiveEdition={!showBanner}
 					/>
 				</Hide>
 			</div>

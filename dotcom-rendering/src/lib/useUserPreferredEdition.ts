@@ -48,24 +48,21 @@ export const useEditionSwitcherBanner = (
 	userEdition: Edition,
 ): [boolean] => {
 	const pageEdition = getEditionFromPageId(pageId)?.editionId;
-	const isOnDifferentFrontToEdition =
+	const isOnWrongNetworkFront =
 		isNetworkFront(pageId) && pageEdition !== userEdition;
-
-	const [shouldShowBanner, setShouldShowBanner] = useState(
-		isOnDifferentFrontToEdition,
-	);
+	const [showBanner, setShowBanner] = useState(isOnWrongNetworkFront);
 
 	useEffect(() => {
-		setShouldShowBanner(
-			isOnDifferentFrontToEdition && !hideBannerThroughUserOverride(),
+		setShowBanner(
+			isOnWrongNetworkFront && !hideBannerThroughUserOverride(),
 		);
-	}, [isOnDifferentFrontToEdition]);
+	}, [isOnWrongNetworkFront]);
 
 	useEffect(() => {
 		addOrRemoveCookie();
 	}, []);
 
-	return [shouldShowBanner];
+	return [showBanner];
 };
 
 const key = 'edition-switcher-banner';
