@@ -49,14 +49,14 @@ export const useEditionSwitcherBanner = (
 	);
 
 	useEffect(() => {
-		addOrRemoveCookie();
-	}, []);
-
-	useEffect(() => {
 		setShouldShowBanner(
 			pageEdition !== userEdition && !hideBannerThroughUserOverride(),
 		);
 	}, [userEdition, pageId, pageEdition]);
+
+	useEffect(() => {
+		addOrRemoveCookie();
+	}, []);
 
 	return [shouldShowBanner];
 };
