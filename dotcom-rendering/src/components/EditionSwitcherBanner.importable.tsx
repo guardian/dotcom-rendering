@@ -3,7 +3,11 @@ import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
 import useSWR from 'swr';
 import { center } from '../lib/center';
-import { type EditionId, getEditionFromPageId } from '../lib/edition';
+import {
+	type EditionId,
+	getEditionFromId,
+	getEditionFromPageId,
+} from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import {
 	hideEditionSwitcherBanner,
@@ -15,7 +19,7 @@ const container = css`
 	position: sticky;
 	top: 0;
 	background-color: ${palette.brand[800]};
-	${getZIndex('banner')};
+	${getZIndex('editionSwitcherBanner')};
 `;
 
 const content = css`
@@ -72,31 +76,43 @@ type Props = {
 	pageId: string;
 	edition: EditionId;
 };
-
+/**
+ * Displays between the header and the main content on network fronts.
+ *
+ * Provides a link to switch to the homepage of the user's preferred edition.
+ */
 export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 	const [shouldShowBanner] = useEditionSwitcherBanner(pageId, edition);
-	const { data } = useSWR(key, () => apiPromise);
 
-	if (data?.hidden ?? !shouldShowBanner) {
+	const { data } = useSWR(key, () => apiPromise);
+	const suggestedPageId = getEditionFromId(edition).pageId;
+	const suggestedEdition = getEditionFromId(edition).title.replace(
+		' edition',
+		'',
+	);
+	const defaultEdition = getEditionFromPageId(pageId);
+	const defaultEditionName = defaultEdition?.title.replace(' edition', '');
+
+	if (
+		data?.hidden ??
+		(!shouldShowBanner || !defaultEditionName || !suggestedPageId)
+	) {
 		return null;
 	}
-
-	const defaultEditionForPage = getEditionFromPageId(pageId)?.editionId;
-	const suggestedUrl = `https://www.theguardian.com/${pageId}`;
 
 	return (
 		<aside data-component="edition-switcher-banner" css={container}>
 			<div css={content}>
 				<div css={text}>
-					<p>You are viewing the {defaultEditionForPage} homepage</p>
+					<p>You are viewing the {defaultEditionName} homepage</p>
 					<LinkButton
-						href={suggestedUrl}
+						href={`https://www.theguardian.com/${suggestedPageId}`}
 						priority="primary"
 						size="xsmall"
 						cssOverrides={button}
 						data-link-name="edition-switcher-banner switch-edition"
 					>
-						View the {edition} homepage
+						View the {suggestedEdition} homepage
 					</LinkButton>
 				</div>
 				<button

@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const EditionSwitcherBanner = {
 	args: {
-		pageId: 'UK',
+		pageId: 'uk',
 		edition: 'US',
 	},
 } satisfies Story;
