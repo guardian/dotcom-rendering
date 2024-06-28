@@ -5,9 +5,10 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { from } from '@guardian/source/foundations';
+import { from, palette } from '@guardian/source/foundations';
 import React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
+import { verticalDivider } from '../../lib/verticalDivider';
 import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { FrontSection } from '../FrontSection';
@@ -1135,6 +1136,89 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 
 WithLetterDesignAndShowQuotedHeadline.storyName =
 	'WithLetterDesignAndShowQuotedHeadline';
+
+export const HighlightsContainerCard = () => {
+	const highlightsCardProps = {
+		...basicCardProps,
+		imagePositionOnDesktop: 'right',
+		imagePositionOnMobile: 'bottom',
+		imageSize: 'small',
+		showAge: false,
+		showByline: false,
+		showLivePlayable: false,
+		showClock: false,
+		trailText: undefined,
+		supportingContent: undefined,
+		containerType: 'fixed/highlights',
+		showTopBar: false,
+		headlineSize: 'small',
+	} satisfies CardProps;
+
+	const HighlightsCardWrapper = (props: CardProps) => (
+		<div
+			css={[
+				css`
+					position: relative;
+					flex-basis: 1;
+					padding: 0 10px;
+				`,
+				verticalDivider(palette.neutral[73]),
+			]}
+		>
+			<Card {...props} />
+		</div>
+	);
+
+	return (
+		<Section backgroundColour={palette.neutral[97]}>
+			<div
+				css={css`
+					display: flex;
+					flex-direction: row;
+					overflow-x: scroll;
+					width: 100%;
+					padding: 12px 10px;
+				`}
+			>
+				<HighlightsCardWrapper
+					{...highlightsCardProps}
+					headlineText="Restaurants are disproportionately expensive"
+					kickerText="Tom Kerridge"
+					avatarUrl="https://i.guim.co.uk/img/uploads/2024/06/11/Tom_Kerridge.jpg?width=100&dpr=2&s=none"
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: Pillar.Opinion,
+					}}
+				/>
+
+				<HighlightsCardWrapper
+					{...highlightsCardProps}
+					headlineText="Conceição off the bench to score injury time winner"
+					kickerText="Euro 2024"
+					avatarUrl="https://media.guim.co.uk/5690a995b381cb5aa4cdc87539da81083007cdc6/0_244_5806_3484/500.jpg"
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.LiveBlog,
+						theme: Pillar.Sport,
+					}}
+				/>
+
+				<HighlightsCardWrapper
+					{...highlightsCardProps}
+					headlineText="Scotland learn to use Billy Gilmour’s talents"
+					kickerText="Euro 2024"
+					avatarUrl="https://media.guim.co.uk/86bbacdae8c3b66d729d3664493b95a2e2a4839a/559_810_4974_2984/500.jpg"
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: Pillar.Sport,
+					}}
+				/>
+			</div>
+		</Section>
+	);
+};
 
 const containerPalettes = [
 	'InvestigationPalette',

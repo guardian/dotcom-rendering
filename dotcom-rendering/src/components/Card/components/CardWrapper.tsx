@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { palette as sourcePalette, space } from '@guardian/source/foundations';
+import { verticalDivider } from '../../../lib/verticalDivider';
 import { palette } from '../../../palette';
 import type { DCRContainerPalette } from '../../../types/front';
 import { ContainerOverrides } from '../../ContainerOverrides';
@@ -12,6 +13,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showTopBar?: boolean;
 	isOnwardContent?: boolean;
+	showLeftDivider?: boolean;
 };
 
 const baseCardStyles = css`
@@ -91,6 +93,7 @@ export const CardWrapper = ({
 	containerPalette,
 	showTopBar = true,
 	isOnwardContent = false,
+	showLeftDivider = false,
 }: Props) => {
 	return (
 		<FormatBoundary format={format}>
@@ -102,6 +105,8 @@ export const CardWrapper = ({
 						sublinkHoverStyles,
 						showTopBar && topBarStyles,
 						isOnwardContent && onwardContentStyles,
+						showLeftDivider &&
+							verticalDivider(palette('--card-border-top')),
 					]}
 				>
 					{children}

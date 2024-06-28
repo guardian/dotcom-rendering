@@ -108,6 +108,8 @@ export type Props = {
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
 	isTagPage?: boolean;
+	showTopBar?: boolean;
+	showLeftDivider?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -236,6 +238,8 @@ export const Card = ({
 	showMainVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
+	showTopBar = true,
+	showLeftDivider = false,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -350,7 +354,8 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent}
+			showLeftDivider={showLeftDivider}
+			showTopBar={!isOnwardContent && showTopBar}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>

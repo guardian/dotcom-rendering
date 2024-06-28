@@ -86,9 +86,13 @@ const decideDivider = (
 			decideContainerOverrides(containerPalette).border.container) ??
 		sourcePalette.neutral[86];
 
-	return offsetBottomPaddingOnDivider
-		? verticalDividerWithBottomOffset(paddingSize, borderColour)
-		: verticalDivider(borderColour);
+	return css`
+		${from.tablet} {
+			${offsetBottomPaddingOnDivider
+				? verticalDividerWithBottomOffset(paddingSize, borderColour)
+				: verticalDivider(borderColour)}
+		}
+	`;
 };
 
 type Props = {

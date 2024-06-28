@@ -74,7 +74,12 @@ export const UL = ({
 		<ul
 			css={[
 				ulStyles(direction),
-				showDivider && verticalDivider(borderColour),
+				showDivider &&
+					css`
+						${from.tablet} {
+							${verticalDivider(borderColour)}
+						}
+					`,
 				padBottom && marginBottomStyles,
 				wrapCards && wrapStyles,
 			]}
