@@ -62,13 +62,17 @@ export const Kicker = ({
 	 */
 	const isLiveKicker = !!showPulsingDot;
 
+	const textStyles = () => {
+		if (isLiveKicker) {
+			return liveTextStyles;
+		} else {
+			return fontWeight === 'bold' ? boldTextStyles : standardTextStyles;
+		}
+	};
+
 	return (
 		<div
-			css={[
-				isLiveKicker ? liveTextStyles : standardTextStyles,
-				!!isLiveKicker && fontWeight === 'bold' && boldTextStyles,
-				hideLineBreak && hideLineBreakStyles,
-			]}
+			css={[textStyles(), hideLineBreak && hideLineBreakStyles]}
 			style={{
 				color: isLiveKicker ? palette('--kicker-text-live') : color,
 				backgroundColor: isLiveKicker
