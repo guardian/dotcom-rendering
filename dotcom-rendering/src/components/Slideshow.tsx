@@ -150,7 +150,7 @@ export const Slideshow = ({
 	isDynamo?: boolean;
 }) => (
 	<>
-		{takeFirst(images, 5).map((slideshowImage, index, { length }) => {
+		{takeFirst(images, 10).map((slideshowImage, index, { length }) => {
 			const isNotFirst = index > 0;
 			const loading = isNotFirst ? 'lazy' : 'eager';
 
