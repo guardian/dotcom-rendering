@@ -4313,6 +4313,9 @@
                 },
                 "hasInlineMerchandise": {
                     "type": "boolean"
+                },
+                "hasLiveBlogTopAd": {
+                    "type": "boolean"
                 }
             },
             "required": [

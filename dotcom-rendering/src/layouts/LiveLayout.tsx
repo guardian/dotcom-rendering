@@ -311,7 +311,7 @@ interface WebProps extends BaseProps {
 export const LiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasLiveBlogTopAd },
 	} = article;
 
 	// TODO:
@@ -517,6 +517,24 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				data-layout="LiveLayout"
 				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
+				{renderAds && hasLiveBlogTopAd && (
+					<Hide from="tablet">
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={sourcePalette.neutral[97]}
+							element="aside"
+						>
+							<AdSlot
+								position="liveblog-top"
+								display={format.display}
+							/>
+						</Section>
+					</Hide>
+				)}
 				{inTagLinkTest && (
 					<div css={tagOverlayGridStyles}>
 						<GridItem area="sticky-tag">
