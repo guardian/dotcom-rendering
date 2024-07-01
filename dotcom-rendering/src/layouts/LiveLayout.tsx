@@ -255,6 +255,44 @@ const paddingBody = css`
 	}
 `;
 
+const tagOverlayGridStyles = css`
+	position: absolute;
+	${until.desktop} {
+		margin-left: 0px;
+	}
+	display: grid;
+	height: inherit;
+	width: 100%;
+	margin-left: 0;
+	grid-column-gap: 0px;
+	${getZIndex('tagLinkOverlay')}
+	${until.desktop} {
+		grid-template-columns: 100%; /* Main content */
+		grid-template-areas: 'sticky-tag';
+	}
+	${from.tablet} {
+		grid-template-columns: 1fr 700px 1fr;
+		grid-template-areas: '. sticky-tag .';
+	}
+	${from.desktop} {
+		grid-template-columns: 1fr 200px 740px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+
+	${from.leftCol} {
+		grid-template-columns: 1fr 200px 900px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+	${from.wide} {
+		grid-template-columns: 1fr 200px 1060px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+`;
+
+const stickyTagStyles = css`
+	position: sticky;
+	top: 0;
+`;
 interface BaseProps {
 	article: DCRArticle;
 	format: ArticleFormat;
@@ -314,8 +352,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-	const inTagLinkTest =
-		isWeb && article.config.abTests.tagLinkDesignVariant === 'variant';
+	// The test is being paused on liveblogs whilst we investigate an issue
+
+	const inTagLinkTest = false;
+	// isWeb &&
+	// article.config.abTests.tagLinkDesignVariant === 'variant' &&
+	// article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -465,9 +507,33 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 			<main
+				css={
+					inTagLinkTest &&
+					css`
+						position: relative;
+						height: 100%;
+					`
+				}
 				data-layout="LiveLayout"
 				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
+				{inTagLinkTest && (
+					<div css={tagOverlayGridStyles}>
+						<GridItem area="sticky-tag">
+							<div css={stickyTagStyles}>
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									inTagLinkTest={true}
+								/>
+							</div>
+						</GridItem>
+					</div>
+				)}
+
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -535,14 +601,27 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									inTagLinkTest={inTagLinkTest}
-								/>
+								{inTagLinkTest ? (
+									<div
+										css={css`
+											height: 64px;
+											${from.desktop} {
+												height: 44px;
+											}
+										`}
+									/>
+								) : (
+									<ArticleTitle
+										format={format}
+										tags={article.tags}
+										sectionLabel={article.sectionLabel}
+										sectionUrl={article.sectionUrl}
+										guardianBaseURL={
+											article.guardianBaseURL
+										}
+										inTagLinkTest={inTagLinkTest}
+									/>
+								)}
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
@@ -1031,10 +1110,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</ArticleContainer>
 										</div>
 									) : (
-										<Accordion
-											accordionTitle="Live feed"
-											context="liveFeed"
-										>
+										<Accordion accordionTitle="Live feed">
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (

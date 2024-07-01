@@ -6,7 +6,6 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import type { FC } from 'react';
 import Paragraph from './';
 
 // ----- Stories ----- //
@@ -23,7 +22,7 @@ const labs = {
 	theme: ArticleSpecial.Labs,
 };
 
-const Default: FC = () => (
+const Default = () => (
 	<Paragraph format={standard} showDropCap={false} isEditions={false}>
 		Ever since Mexico City was founded on an island in the lake of Texcoco
 		its inhabitants have dreamed of water: containing it, draining it and
@@ -31,7 +30,7 @@ const Default: FC = () => (
 	</Paragraph>
 );
 
-const Dropcap: FC = () => (
+const Dropcap = () => (
 	<Paragraph format={standard} showDropCap={true} isEditions={false}>
 		Ever since Mexico City was founded on an island in the lake of Texcoco
 		its inhabitants have dreamed of water: containing it, draining it and
@@ -43,7 +42,7 @@ const Dropcap: FC = () => (
 	</Paragraph>
 );
 
-const Labs: FC = () => (
+const Labs = () => (
 	<Paragraph format={labs} showDropCap={false} isEditions={false}>
 		Ever since Mexico City was founded on an island in the lake of Texcoco
 		its inhabitants have dreamed of water: containing it, draining it and

@@ -6,7 +6,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { labs, neutral } from '@guardian/source/foundations';
 import { text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -59,7 +59,7 @@ const colour = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const Anchor: FC<Props> = ({
+const Anchor = ({
 	format,
 	children,
 	href,

@@ -62,6 +62,9 @@ const indices = [
 	// Wrapper after nav stuff
 	'headerWrapper',
 
+	// Overlay for sticky tag link
+	'tagLinkOverlay',
+
 	// Article headline (should be above main media)
 	'articleHeadline',
 	'immersiveBlackBox',

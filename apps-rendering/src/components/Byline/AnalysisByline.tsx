@@ -46,7 +46,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const AnalysisByline: React.FC<Props> = ({ format, bylineHtml }) => (
+const AnalysisByline = ({ format, bylineHtml }: Props) => (
 	<DefaultByline
 		format={format}
 		bylineHtml={bylineHtml}

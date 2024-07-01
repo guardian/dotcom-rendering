@@ -14,7 +14,6 @@ import LiveBlock from 'components/LiveBlock';
 import PinnedPost from 'components/PinnedPost';
 import { pipe } from 'lib';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
-import type { FC } from 'react';
 
 // ----- Component ----- //
 interface LiveBlocksProps {
@@ -25,13 +24,13 @@ interface LiveBlocksProps {
 	edition: Edition;
 }
 
-const LiveBlocks: FC<LiveBlocksProps> = ({
+const LiveBlocks = ({
 	blocks,
 	format,
 	pageNumber,
 	pinnedPost,
 	edition,
-}) => {
+}: LiveBlocksProps) => {
 	const showPinnedPost =
 		pageNumber === 1 && pinnedPost.kind === OptionKind.Some;
 

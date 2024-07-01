@@ -492,6 +492,7 @@ export const AllCards = () => {
 				theme: ArticleSpecial.SpecialReport,
 				design: ArticleDesign.Standard,
 			},
+			kickerText: 'Special report',
 			webPublicationDate: '2022-07-12T16:24:48.000Z',
 			headline: 'Special report example',
 			shortUrl: 'https://www.theguardian.com/p/yzmgf',
@@ -585,7 +586,7 @@ export const AllCards = () => {
 		},
 		{
 			url: 'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023',
-			linkText: 'Galleries example',
+			linkText: 'Gallery example',
 			showByline: false,
 			byline: 'Aneesa Ahmed, Ben Beaumont-Thomas and Laura Snapes',
 			image: {
@@ -595,7 +596,7 @@ export const AllCards = () => {
 			format: {
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Culture,
-				design: ArticleDesign.Picture,
+				design: ArticleDesign.Gallery,
 			},
 			webPublicationDate: '2023-12-04T06:00:35.000Z',
 			headline: 'Galleries example',
@@ -660,7 +661,7 @@ export const FrontCarousel = () => (
 				leftColSize="compact"
 				url={'https://www.theguardian.com'}
 				discussionApiUrl={discussionApiUrl}
-				palette={'BreakingPalette'}
+				palette="PodcastPalette"
 				absoluteServerTimes={true}
 			/>
 		</Section>

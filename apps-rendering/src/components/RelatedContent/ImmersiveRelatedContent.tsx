@@ -9,7 +9,6 @@ import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { ResizedRelatedContent } from 'item';
 import { background } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultRelatedContent, {
 	defaultStyles,
@@ -55,7 +54,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const ImmersiveRelatedContent: FC<Props> = ({ content, format }) => (
+const ImmersiveRelatedContent = ({ content, format }: Props) => (
 	<aside css={styles(format)}>
 		<hr css={hrStyles} />
 		<DefaultRelatedContent

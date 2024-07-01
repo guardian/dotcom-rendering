@@ -4,7 +4,6 @@ import { body, palette, space } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { Switches } from '../../src/types/config';
-import { trackVideoInteraction } from '../client/ga/ga';
 import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
@@ -210,14 +209,6 @@ export const YoutubeBlockComponent = ({
 		});
 	};
 
-	const gaTracking = (trackingEvent: string) => {
-		if (!id) return;
-		trackVideoInteraction({
-			trackingEvent,
-			elementId: id,
-		});
-	};
-
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
@@ -232,11 +223,7 @@ export const YoutubeBlockComponent = ({
 				width={width}
 				title={mediaTitle}
 				duration={duration}
-				eventEmitters={
-					renderingTarget === 'Web'
-						? [ophanTracking, gaTracking]
-						: [gaTracking]
-				}
+				eventEmitters={renderingTarget === 'Web' ? [ophanTracking] : []}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}

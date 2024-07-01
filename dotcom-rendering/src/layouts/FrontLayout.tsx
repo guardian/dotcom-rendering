@@ -293,6 +293,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 													NAV.currentNavLink
 												}
 												position="header"
+												currentPillarTitle={
+													front.nav.currentPillarTitle
+												}
 											/>
 										</Island>
 									</Section>
@@ -735,6 +738,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							position="footer"
+							currentPillarTitle={front.nav.currentPillarTitle}
 						/>
 					</Island>
 				</Section>

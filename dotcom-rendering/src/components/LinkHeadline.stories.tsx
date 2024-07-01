@@ -41,6 +41,8 @@ export const xsmallStory: StoryObj = ({ format }: StoryProps) => (
 xsmallStory.storyName = 'Size | large';
 xsmallStory.decorators = [splitTheme([defaultFormat])];
 
+const liveFormat = { ...defaultFormat, design: ArticleDesign.LiveBlog };
+
 export const liveStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
@@ -51,7 +53,7 @@ export const liveStory: StoryObj = ({ format }: StoryProps) => (
 	</Section>
 );
 liveStory.storyName = 'With Live kicker';
-liveStory.decorators = [splitTheme([defaultFormat])];
+liveStory.decorators = [splitTheme([liveFormat])];
 
 export const noLinebreak: StoryObj = ({ format }: StoryArgs) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -64,7 +66,7 @@ export const noLinebreak: StoryObj = ({ format }: StoryArgs) => (
 	</Section>
 );
 noLinebreak.storyName = 'With Live kicker but no line break';
-noLinebreak.decorators = [splitTheme([defaultFormat])];
+noLinebreak.decorators = [splitTheme([liveFormat])];
 
 export const pulsingDot: StoryObj = ({ format }: StoryArgs) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -77,7 +79,7 @@ export const pulsingDot: StoryObj = ({ format }: StoryArgs) => (
 	</Section>
 );
 pulsingDot.storyName = 'With pulsing dot';
-pulsingDot.decorators = [splitTheme([defaultFormat])];
+pulsingDot.decorators = [splitTheme([liveFormat])];
 
 export const opinionxxxsmall: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>

@@ -3,12 +3,11 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '../../../vendor/@guardian/types/index';
 import { parseHtml } from 'fixtures/item';
-import type { FC } from 'react';
 import MainMediaCaption from '.';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<MainMediaCaption
 		caption={parseHtml('A caption').toOption()}
 		credit={some('By a person')}

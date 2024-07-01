@@ -8,7 +8,7 @@ import Img from 'components/Img';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import { pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //
@@ -38,7 +38,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const Cutout: FC<Props> = ({ contributors, className, format }) => {
+const Cutout = ({ contributors, className, format }: Props) => {
 	const [contributor] = contributors;
 
 	if (!isSingleContributor(contributors)) {

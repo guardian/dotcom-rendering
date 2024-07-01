@@ -4,29 +4,9 @@ const webpack = require('webpack');
 /** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
 	stories: ['../src/**/*.stories.@(js|mdx|ts|tsx)'],
-	addons: [
-		'@storybook/addon-essentials',
-		'storybook-addon-turbo-build',
-		{
-			name: 'storybook-addon-turbo-build',
-			options: {
-				optimizationLevel: 1,
-				// We're explicitly setting the minification options below because
-				// we want to turn off `minifyIdentifiers`. Why? Because it breaks
-				// Islands hydration. When you minify the component filenames
-				// the dynamic imports fail to find them.
-				// See: https://github.com/privatenumber/esbuild-loader#minify
-				//    & https://esbuild.github.io/api/#minify
-				esbuildMinifyOptions: {
-					target: 'es2015',
-					minify: false,
-					minifyWhitespace: true,
-					minifyIdentifiers: false,
-					minifySyntax: true,
-				},
-			},
-		},
-	],
+
+	addons: ['@storybook/addon-webpack5-compiler-babel'],
+
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
 		config = webpackConfig(config);
@@ -51,16 +31,20 @@ module.exports = {
 
 		return config;
 	},
+
 	env: (config) => ({
 		...config,
 		// Github sets a CI env var for all actions but this isn't being picked up by Storybook
 		// See: https://storybook.js.org/docs/react/configure/environment-variables
 		CI: 'true',
 	}),
+
 	framework: {
 		name: '@storybook/react-webpack5',
 		options: {},
 	},
+
+	docs: {},
 };
 
 const webpackConfig = (config) => {

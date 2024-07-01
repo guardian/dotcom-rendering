@@ -1,12 +1,11 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import type { FC } from 'react';
 import SpecialReportAltAtom from '.';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<SpecialReportAltAtom
 		format={{
 			design: ArticleDesign.Standard,

@@ -8,7 +8,6 @@ import {
 import { FileInput } from '@guardian/source-development-kitchen/react-components';
 import CheckboxInput from 'components/CheckboxInput';
 import RadioInput from 'components/RadioInput';
-import type { FC } from 'react';
 import { useEffect, useRef } from 'react';
 import { logger } from '../../logger';
 import type { FormDataType, ValidationErrors } from './calloutForm';
@@ -25,13 +24,13 @@ type FormFieldProp = {
 	validationErrors: ValidationErrors;
 };
 
-export const FormField: FC<FormFieldProp> = ({
+export const FormField = ({
 	formId,
 	formField,
 	formData,
 	setFieldInFormData,
 	validationErrors,
-}) => {
+}: FormFieldProp) => {
 	const { type, label, description, mandatory, options, id } = formField;
 	const name = `field_${type}_${id}`;
 	const fieldValue =

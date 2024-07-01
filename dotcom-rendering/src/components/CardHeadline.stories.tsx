@@ -4,7 +4,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints, palette } from '@guardian/source/foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
@@ -55,11 +55,6 @@ export const Analysis: StoryObj = ({ format }: StoryProps) => (
 				showTopBorder={false}
 				showSideBorders={false}
 				padBottom={true}
-				backgroundColour={
-					format.theme === ArticleSpecial.SpecialReport
-						? palette.specialReport[300]
-						: undefined
-				}
 			>
 				<CardHeadline
 					headlineText={`This is how a ${size} ${
@@ -333,13 +328,8 @@ OpinionKicker.decorators = [
 ];
 
 export const SpecialReport: StoryObj = ({ format }: StoryProps) => (
-	<Section
-		fullWidth={true}
-		showTopBorder={false}
-		showSideBorders={false}
-		backgroundColour="grey"
-	>
-		<ContainerOverrides isDynamo={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+		<ContainerOverrides>
 			<CardHeadline
 				headlineText="This is how a Special Report card headline with kicker and quotes looks"
 				format={format}
@@ -382,16 +372,8 @@ Busy.decorators = [
 ];
 
 export const Byline: StoryObj = ({ format }: StoryProps) => (
-	<Section
-		fullWidth={true}
-		showSideBorders={false}
-		backgroundColour={
-			format.theme === ArticleSpecial.SpecialReport
-				? palette.specialReport[300]
-				: undefined
-		}
-	>
-		<ContainerOverrides isDynamo={false}>
+	<Section fullWidth={true} showSideBorders={false}>
+		<ContainerOverrides>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={format}
@@ -469,17 +451,13 @@ export const WithContainerOverrides: StoryObj = ({ format }: StoryProps) => (
 				showSideBorders={false}
 				containerPalette={containerPalette}
 			>
-				<ContainerOverrides
-					containerPalette={containerPalette}
-					isDynamo={false}
-				>
+				<ContainerOverrides containerPalette={containerPalette}>
 					<CardHeadline
 						headlineText={`This is a ${
 							Pillar[format.theme] ??
 							ArticleSpecial[format.theme] ??
 							'Unknown'
 						} headline`}
-						containerPalette={containerPalette}
 						format={format}
 						byline={`inside a ${containerPalette} container`}
 						showByline={true}

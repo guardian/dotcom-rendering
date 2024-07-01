@@ -37,14 +37,9 @@ test('produces valid AMP doc', async () => {
 	};
 
 	const analytics: AnalyticsModel = {
-		gaTracker: 'UA-XXXXXXX-X',
-		title: 'Foo',
 		comscoreID: 'XXXXXXX',
 		section: ExampleArticle.sectionName,
-		contentType: ExampleArticle.contentType,
-		id: ExampleArticle.pageId,
 		neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
-		domain: 'amp.theguardian.com',
 		ipsosSectionName: 'section',
 	};
 

@@ -16,7 +16,7 @@ interface Props {
 	item: Item;
 }
 
-const ReviewStandfirst: React.FC<Props> = ({ item }) => (
+const ReviewStandfirst = ({ item }: Props) => (
 	<>
 		<StarRating item={item} />
 		<DefaultStandfirst

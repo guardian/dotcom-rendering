@@ -10,7 +10,6 @@ import {
 	textSans15,
 } from '@guardian/source/foundations';
 import { TeamLocation } from 'football';
-import type { FC } from 'react';
 
 interface Props {
 	team: FootballTeam;
@@ -88,7 +87,7 @@ const scorerStyles = (location: TeamLocation): SerializedStyles => css`
 	}
 `;
 
-const TeamScore: FC<Props> = ({ team, location }) => (
+const TeamScore = ({ team, location }: Props) => (
 	<section css={styles(location)}>
 		<h3 css={teamNameStyles(location)}>{team.name}</h3>
 		<div css={scoreStyles(location)}>

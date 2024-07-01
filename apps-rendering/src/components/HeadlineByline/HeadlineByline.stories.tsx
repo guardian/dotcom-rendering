@@ -2,7 +2,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { parse } from 'client/parser';
-import type { FC } from 'react';
 import HeadlineByline from './';
 
 // ----- Setup ----- //
@@ -17,7 +16,7 @@ const mockBylineHtml = (): Option<DocumentFragment> =>
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<HeadlineByline
 		format={{
 			theme: ArticlePillar.News,

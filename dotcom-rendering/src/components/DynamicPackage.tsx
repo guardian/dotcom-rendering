@@ -476,21 +476,27 @@ const Card75_ColumnOfCards25 = ({
 			>
 				<UL direction="column">
 					{remaining.map((card, cardIndex) => {
+						// Always show the image on the first card and only
+						// on the second if there are two items in two
+						const shouldShowImage =
+							cardIndex === 0 || remaining.length === 2;
+						const cardWithoutMainMedia = shouldShowImage
+							? card
+							: {
+									...card,
+									mainMedia: undefined,
+							  };
+
 						return (
 							<LI key={card.url} padSides={true}>
 								<FrontCard
-									trail={card}
+									trail={cardWithoutMainMedia}
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
 									absoluteServerTimes={absoluteServerTimes}
 									image={
-										// Always show the image on the first card and only
-										// on the second if there are two items in two
-										cardIndex === 0 ||
-										remaining.length === 2
-											? card.image
-											: undefined
+										shouldShowImage ? card.image : undefined
 									}
 									headlineSize={
 										cardIndex === 0 ||

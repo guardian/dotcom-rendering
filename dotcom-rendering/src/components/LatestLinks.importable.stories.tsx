@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints, palette } from '@guardian/source/foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
@@ -10,10 +10,6 @@ import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
 import { Island } from './Island';
 import { LatestLinks } from './LatestLinks.importable';
-
-interface StoryArgs {
-	theme: string;
-}
 
 export default {
 	component: LatestLinks,
@@ -49,7 +45,7 @@ const Wrapper = ({
 							title: null,
 							publishedDateTime: 1692525060000,
 							lastUpdatedDateTime: 1692525060000,
-							body: 'Millie Bright has captained England in place of the injured Leah Williamson at this tournament. What’s her story I hear you ask, we’ve got you covered:',
+							body: '',
 						},
 						{
 							id: '64e1342b8f08af8aaccf0332',
@@ -152,6 +148,7 @@ const Wrapper = ({
 export const WorldCupFinal2023 = () => {
 	const containerPalette = 'EventAltPalette' satisfies DCRContainerPalette;
 	const overrides = decideContainerOverrides(containerPalette);
+
 	return (
 		<Wrapper
 			styles={css`
@@ -159,10 +156,7 @@ export const WorldCupFinal2023 = () => {
 				background-color: ${overrides.background.container};
 			`}
 		>
-			<ContainerOverrides
-				containerPalette={containerPalette}
-				isDynamo={true}
-			>
+			<ContainerOverrides containerPalette={containerPalette}>
 				<Island priority="critical">
 					<LatestLinks
 						id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
@@ -190,14 +184,12 @@ WorldCupFinal2023.decorators = [
 	),
 ];
 
-export const LondonPride2022 = ({ theme }: StoryArgs) => {
+export const LondonPride2022 = () => {
 	return (
 		<Wrapper
 			styles={css`
 				max-width: 600px;
-				background-color: ${theme === 'light'
-					? palette.news[300]
-					: 'inherit'};
+				background-color: 'inherit';
 			`}
 		>
 			<Island priority="critical">

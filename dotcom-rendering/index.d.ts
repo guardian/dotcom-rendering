@@ -5,7 +5,6 @@
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
-// These are partialy kept for Google Analytics purposes
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type LegacyPillar = RealPillars | FakePillars;

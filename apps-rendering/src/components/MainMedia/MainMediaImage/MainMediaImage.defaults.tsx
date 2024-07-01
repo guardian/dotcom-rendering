@@ -8,7 +8,6 @@ import Img from 'components/ImgAlt';
 import MainMediaCaption from 'components/MainMediaCaption';
 import type { Image } from 'image';
 import type { Sizes } from 'image/sizes';
-import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
 
 // ----- Setup ----- //
@@ -56,13 +55,13 @@ interface DefaultProps {
 	format: ArticleFormat;
 }
 
-const DefaultMainMediaImage: FC<DefaultProps> = ({
+const DefaultMainMediaImage = ({
 	className,
 	image,
 	imgCss,
 	format,
 	sizes,
-}) => (
+}: DefaultProps) => (
 	<figure css={className} aria-labelledby={captionId}>
 		<Img
 			image={image}

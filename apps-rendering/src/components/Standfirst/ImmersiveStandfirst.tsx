@@ -76,12 +76,12 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const ImmersiveStandfirst: React.FC<Props> = ({
+const ImmersiveStandfirst = ({
 	standfirst,
 	format,
 	byline,
 	bylineHtml,
-}) =>
+}: Props) =>
 	maybeRender(standfirst.toOption(), (standfirstDoc) => (
 		<div css={styles(format)}>
 			{renderContent(standfirstDoc, format, byline, bylineHtml)}

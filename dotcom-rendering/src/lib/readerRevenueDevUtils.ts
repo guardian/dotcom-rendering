@@ -101,11 +101,16 @@ const showMeTheBanner = (
 	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
+	enableCmp();
 	clearBannerLastClosedAt();
 	clearCommonReaderRevenueStateAndReload(
 		asExistingSupporter,
 		shouldHideReaderRevenue,
 	);
+};
+
+const enableCmp = (): void => {
+	removeCookie({ name: 'gu-cmp-disabled' });
 };
 
 const showNextVariant = (

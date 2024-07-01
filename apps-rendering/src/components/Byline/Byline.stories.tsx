@@ -8,7 +8,6 @@ import {
 } from '@guardian/libs';
 import { parse } from 'client/parser';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
-import type { FC } from 'react';
 import Byline from './';
 
 // ----- Setup ----- //
@@ -26,7 +25,7 @@ const mockBylineHtml = parseByline(
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<Byline
 		theme={ArticlePillar.News}
 		design={ArticleDesign.Standard}
@@ -35,7 +34,7 @@ const Default: FC = () => (
 	/>
 );
 
-const Analysis: FC = () => (
+const Analysis = () => (
 	<Byline
 		theme={ArticlePillar.News}
 		design={ArticleDesign.Analysis}
@@ -44,7 +43,7 @@ const Analysis: FC = () => (
 	/>
 );
 
-const Comment: FC = () => (
+const Comment = () => (
 	<Byline
 		theme={ArticlePillar.Opinion}
 		design={ArticleDesign.Comment}
@@ -53,7 +52,7 @@ const Comment: FC = () => (
 	/>
 );
 
-const Labs: FC = () => (
+const Labs = () => (
 	<Byline
 		theme={ArticleSpecial.Labs}
 		design={ArticleDesign.Standard}
@@ -62,7 +61,7 @@ const Labs: FC = () => (
 	/>
 );
 
-const Deadblog: FC = () => {
+const Deadblog = () => {
 	return (
 		<>
 			{getAllThemes({

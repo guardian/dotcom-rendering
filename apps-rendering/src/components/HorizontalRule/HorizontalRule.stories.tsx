@@ -1,11 +1,10 @@
 // ----- Imports ----- //
 
-import type { FC } from 'react';
 import HorizontalRule from './';
 
 // ----- Stories ----- //
 
-const Default: FC = () => <HorizontalRule />;
+const Default = () => <HorizontalRule />;
 
 // ----- Exports ----- //
 

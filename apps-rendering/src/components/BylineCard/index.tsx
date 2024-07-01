@@ -20,7 +20,7 @@ import { formatFromRelatedItem } from 'components/Card';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import { background, border, fill, text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -210,7 +210,7 @@ const footerStyles = css`
 	min-height: 2rem;
 `;
 
-const BylineCard: FC<Props> = ({ relatedItem }) => {
+const BylineCard = ({ relatedItem }: Props) => {
 	const { title, link, pillar, webPublicationDate, type } = relatedItem;
 	const format = formatFromRelatedItem(type, pillar.id);
 	const img = cardImage(relatedItem, format);

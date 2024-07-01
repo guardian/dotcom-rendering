@@ -22,7 +22,7 @@ interface Props {
 	item: Item;
 }
 
-const CommentHeadline: React.FC<Props> = ({ item }) => (
+const CommentHeadline = ({ item }: Props) => (
 	<DefaultHeadline
 		item={item}
 		styles={css(defaultStyles(item), commentStyles)}

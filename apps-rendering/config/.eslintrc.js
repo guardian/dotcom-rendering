@@ -83,7 +83,6 @@ module.exports = {
 			},
 		],
 		'@typescript-eslint/no-unused-vars': 'off',
-		'@typescript-eslint/explicit-function-return-type': 'error',
 		// This check seems to be flaky, and complains about things that TS is happy about
 		'react/prop-types': 'off',
 		'import/no-unresolved': 'off',
@@ -115,6 +114,30 @@ module.exports = {
 		'@typescript-eslint/no-unsafe-argument': 'off',
 		'@typescript-eslint/no-misused-promises': 'off',
 	},
+	overrides: [
+		{
+			files: ['**/*.tsx'],
+			rules: {
+				'@typescript-eslint/ban-types': [
+					'error',
+					{
+						types: {
+							// Why? See this: https://github.com/facebook/create-react-app/pull/8177
+							'React.StatelessComponent':
+								'Please use const MyThing = ({foo, bar}: Props) instead',
+							'React.FunctionComponent':
+								'Please use const MyThing = ({foo, bar}: Props) instead',
+							'React.SC':
+								'Please use const MyThing = ({foo, bar}: Props) instead',
+							'React.FC':
+								'Please use const MyThing = ({foo, bar}: Props) instead',
+						},
+						extendDefaults: true,
+					},
+				],
+			},
+		},
+	],
 	settings: {
 		react: {
 			// Tells eslint-plugin-react to automatically detect the version of React to use

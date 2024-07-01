@@ -16,4 +16,3 @@ Logical duplication:
 -   social share icon links
 -   tracking consent cookie logic
 -   pillars
--   Google Analytics pageview data

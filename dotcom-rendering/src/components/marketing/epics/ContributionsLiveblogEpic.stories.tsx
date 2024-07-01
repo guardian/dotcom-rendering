@@ -74,6 +74,19 @@ export const WithReminderCta: Story = {
 	},
 };
 
+export const WithThreeTierChoiceCards: Story = {
+	name: 'ContributionsLiveblogEpic with Three Tier Choice Cards',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+		},
+	},
+};
+
 export const WithChoiceCards: Story = {
 	name: 'ContributionsLiveblogEpic with Choice Cards',
 	args: {
@@ -111,6 +124,26 @@ export const WithChoiceCards: Story = {
 						hideChooseYourAmount: false,
 					},
 				},
+			},
+		},
+	},
+};
+
+export const WithNewsletterSignup: Story = {
+	name: 'ContributionsEpic with newsletter signup',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			highlightedText: undefined,
+			heading: 'Sign up to First Edition',
+			paragraphs: [
+				'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
+			],
+			newsletterSignup: {
+				newsletterId: 'morning-briefing',
+				successDescription:
+					'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
 			},
 		},
 	},

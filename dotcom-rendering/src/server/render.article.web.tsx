@@ -15,7 +15,6 @@ import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
-import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
@@ -142,16 +141,6 @@ export const renderHtml = ({
 		contentType: article.contentType,
 		shouldHideReaderRevenue: article.shouldHideReaderRevenue,
 		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
-		GAData: extractGA({
-			webTitle: article.webTitle,
-			format,
-			sectionName: article.sectionName,
-			contentType: article.contentType,
-			tags: article.tags,
-			pageId: article.pageId,
-			editionId: article.editionId,
-			beaconURL: article.beaconURL,
-		}),
 		hasInlineMerchandise: article.config.hasInlineMerchandise,
 		// Until we understand exactly what config we need to make available client-side,
 		// add everything we haven't explicitly typed as unknown config

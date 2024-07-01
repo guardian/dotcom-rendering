@@ -32,8 +32,7 @@ looks like:
 | UC Browser        | 12          | 0.30%            |
 | Opera             | 56          | 0.25%            |
 
-The above table was calculated using [this spreadsheet](https://docs.google.com/spreadsheets/d/17g8py3P30nJLVqrlgc8JW4rkFhPTqNvwrMJdaOFnFzs/)
-based on data from Google Analytics.
+The above table was calculated based on data from Google Analytics.
 
 ## Cutting the mustard
 

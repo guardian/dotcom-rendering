@@ -15,7 +15,6 @@ export type Palette = {
 		dateLine: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
-		youtubeOverlayKicker: Colour;
 	};
 	background: {
 		analysisContrast: Colour;
@@ -32,7 +31,6 @@ export type Palette = {
 		designTag: Colour;
 		lightboxDivider: Colour;
 		messageForm: Colour;
-		dynamoSublink: Colour;
 	};
 	fill: {
 		guardianLogo: Colour;
@@ -60,15 +58,12 @@ export type ContainerOverrides = {
 		cardByline?: Colour;
 		cardFooter?: Colour;
 		cardCommentCount?: Colour;
-		dynamoHeadline?: Colour;
-		dynamoKicker?: Colour;
-		dynamoSublinkKicker?: Colour;
-		dynamoMeta?: Colour;
 		container: Colour;
 		containerFooter: Colour;
 		containerToggle: Colour;
 		containerDate: Colour;
 		containerSummary: Colour;
+		liveKicker?: Colour;
 	};
 	border: {
 		container: Colour;
@@ -76,15 +71,16 @@ export type ContainerOverrides = {
 		carouselArrow: Colour;
 	};
 	background: {
+		card: Colour;
 		container: Colour;
 		containerLeftColumn?: Colour;
 		containerOuter?: Colour;
 		containerSummary?: Colour;
-		card?: Colour;
 		carouselDot: Colour;
 		carouselArrow: Colour;
 		carouselArrowHover: Colour;
-		dynamoSublink: Colour;
+		liveKicker?: Colour;
+		pulsingDot?: Colour;
 	};
 	topBar?: {
 		card?: Colour;

@@ -3,12 +3,11 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '../../../vendor/@guardian/types/index';
-import type { FC } from 'react';
 import Dateline from './';
 
 // ----- Stories ----- //
 
-const Default: FC = () => (
+const Default = () => (
 	<Dateline
 		format={{
 			design: ArticleDesign.Standard,
@@ -20,7 +19,7 @@ const Default: FC = () => (
 	/>
 );
 
-const LiveBlogDateline: FC = () => (
+const LiveBlogDateline = () => (
 	<Dateline
 		format={{
 			design: ArticleDesign.LiveBlog,
@@ -32,7 +31,7 @@ const LiveBlogDateline: FC = () => (
 	/>
 );
 
-const DeadBlogDateline: FC = () => (
+const DeadBlogDateline = () => (
 	<Dateline
 		format={{
 			design: ArticleDesign.DeadBlog,

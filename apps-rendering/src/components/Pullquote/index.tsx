@@ -7,7 +7,7 @@ import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { fill, text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 const styles = (format: ArticleFormat): SerializedStyles => {
@@ -48,7 +48,7 @@ const blockQuoteStyles = css`
 	margin-left: 0;
 `;
 
-const Pullquote: FC<Props> = ({ quote, attribution, format }) => {
+const Pullquote = ({ quote, attribution, format }: Props) => {
 	const quoteElement = (
 		<p css={quoteStyles(format)}>
 			<SvgQuote />

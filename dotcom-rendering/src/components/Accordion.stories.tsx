@@ -68,7 +68,6 @@ const accordionContent = (
 export const Accordion = {
 	args: {
 		accordionTitle: 'Live feed',
-		context: 'keyEvents',
 		children: accordionContent,
 	},
 } satisfies Story;

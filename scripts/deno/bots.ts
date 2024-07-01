@@ -19,8 +19,8 @@ import {
   GetQueryResultsCommand,
   ResultSet,
   StartQueryExecutionCommand,
-} from "npm:@aws-sdk/client-athena";
-import { parseArgs } from "https://deno.land/std@0.207.0/cli/parse_args.ts";
+} from "npm:@aws-sdk/client-athena@3";
+import { parseArgs } from "jsr:@std/cli";
 
 const flags = parseArgs(Deno.args, {
 	string: ["date"],

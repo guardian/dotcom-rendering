@@ -312,6 +312,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									trails={groupedTrails.trails}
 									speed={tagPage.speed}
 									imageLoading={imageLoading}
+									isTagPage={true}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(

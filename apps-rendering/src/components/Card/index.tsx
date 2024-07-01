@@ -41,7 +41,7 @@ import { formatSeconds, makeRelativeDate } from 'date';
 import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
 import { background, border, fill, text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -546,7 +546,7 @@ const formatFromRelatedItem = (
 	}
 };
 
-const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
+const Card = ({ relatedItem, image, kickerText }: Props) => {
 	const format = formatFromRelatedItem(
 		relatedItem.type,
 		relatedItem.pillar.id,
