@@ -142,6 +142,7 @@ interface ContributionsEpicButtonsProps {
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	choiceCardSelection?: ChoiceCardSelection;
+	threeTierChoiceCardSelectedAmount?: number;
 	numArticles: number;
 }
 
@@ -155,6 +156,7 @@ export const ContributionsEpicButtons = ({
 	isSignedIn,
 	showChoiceCards,
 	choiceCardSelection,
+	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
 	numArticles,
@@ -179,17 +181,33 @@ export const ContributionsEpicButtons = ({
 		return null;
 	}
 
+	const getChoiceCardCta = (cta: Cta): Cta => {
+		if (threeTierChoiceCardSelectedAmount != undefined) {
+			return {
+				text: cta.text,
+				baseUrl: addChoiceCardsParams(
+					cta.baseUrl,
+					'MONTHLY', // only doing monthly in the first test
+					threeTierChoiceCardSelectedAmount,
+				),
+			};
+		}
+		if (choiceCardSelection) {
+			return {
+				text: cta.text,
+				baseUrl: addChoiceCardsParams(
+					cta.baseUrl,
+					choiceCardSelection.frequency,
+					choiceCardSelection.amount,
+				),
+			};
+		}
+
+		return cta;
+	};
+
 	const getCta = (cta: Cta): Cta =>
-		showChoiceCards && choiceCardSelection
-			? {
-					text: cta.text,
-					baseUrl: addChoiceCardsParams(
-						cta.baseUrl,
-						choiceCardSelection.frequency,
-						choiceCardSelection.amount,
-					),
-			  }
-			: cta;
+		showChoiceCards ? getChoiceCardCta(cta) : cta;
 
 	const openReminder = () => {
 		if (submitComponentEvent) {

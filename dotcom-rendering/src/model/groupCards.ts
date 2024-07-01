@@ -1,6 +1,5 @@
 import type { EditionId } from '../lib/edition';
 import type {
-	DCRContainerPalette,
 	DCRContainerType,
 	DCRGroupedTrails,
 	FEFrontCard,
@@ -30,7 +29,6 @@ export const groupCards = (
 	backfill: FEFrontCard[],
 	editionId: EditionId,
 	discussionApiUrl: string,
-	containerPalette?: DCRContainerPalette,
 ): DCRGroupedTrails => {
 	switch (container) {
 		case 'dynamic/slow-mpu': {
@@ -43,7 +41,6 @@ export const groupCards = (
 				big: enhanceCards(big, {
 					cardInTagPage: false,
 					editionId,
-					containerPalette,
 					discussionApiUrl,
 				}),
 				standard: enhanceCards(
@@ -55,7 +52,6 @@ export const groupCards = (
 						cardInTagPage: false,
 						offset: big.length,
 						editionId,
-						containerPalette,
 						discussionApiUrl,
 					},
 				),
@@ -72,21 +68,18 @@ export const groupCards = (
 				huge: enhanceCards(huge, {
 					cardInTagPage: false,
 					editionId,
-					containerPalette,
 					discussionApiUrl,
 				}),
 				veryBig: enhanceCards(veryBig, {
 					cardInTagPage: false,
 					offset: huge.length,
 					editionId,
-					containerPalette,
 					discussionApiUrl,
 				}),
 				big: enhanceCards(big, {
 					cardInTagPage: false,
 					offset: huge.length + veryBig.length,
 					editionId,
-					containerPalette,
 					discussionApiUrl,
 				}),
 				standard: enhanceCards(
@@ -98,7 +91,6 @@ export const groupCards = (
 						cardInTagPage: false,
 						offset: huge.length + veryBig.length + big.length,
 						editionId,
-						containerPalette,
 						discussionApiUrl,
 					},
 				),
@@ -114,7 +106,6 @@ export const groupCards = (
 				snap: enhanceCards(snap, {
 					cardInTagPage: false,
 					editionId,
-					containerPalette,
 					discussionApiUrl,
 				}),
 				standard: enhanceCards(
@@ -126,7 +117,6 @@ export const groupCards = (
 						cardInTagPage: false,
 						offset: snap.length,
 						editionId,
-						containerPalette,
 						discussionApiUrl,
 					},
 				),

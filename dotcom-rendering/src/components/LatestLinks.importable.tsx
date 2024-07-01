@@ -113,16 +113,16 @@ export const LatestLinks = ({
 			: palette.neutral[86]};
 	`;
 
-	const height = isDynamo
-		? `calc(5px + 4 * ${lineHeights.regular}em)`
-		: `calc(4 * ${lineHeights.regular}em)`;
+	/** Reserve space for the latest links to avoid CLS while loading */
+	const minHeight = isDynamo
+		? `calc(${space[1]}px + 4 * ${lineHeights.regular}em);`
+		: `calc(4 * ${lineHeights.regular}em);`;
 
 	const ulStyle = css`
 		display: flex;
-		gap: 5px;
-		padding-bottom: ${space[2]}px;
+		gap: ${space[1]}px;
 		box-sizing: border-box;
-		height: ${height};
+		min-height: ${minHeight};
 	`;
 
 	return (
@@ -146,7 +146,6 @@ export const LatestLinks = ({
 						<>
 							<ContainerOverrides
 								containerPalette={containerPalette}
-								isDynamo={!!isDynamo}
 							>
 								{index > 0 && (
 									<li
@@ -161,7 +160,6 @@ export const LatestLinks = ({
 								>
 									<WithLink
 										linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
-										isDynamo={isDynamo}
 									>
 										<div
 											css={bold}

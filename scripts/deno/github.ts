@@ -1,4 +1,4 @@
-import { Octokit } from 'npm:octokit@2.0.14';
+import { Octokit } from 'npm:octokit@4';
 
 /** Github token for Authentication */
 const token = Deno.env.get('GITHUB_TOKEN');

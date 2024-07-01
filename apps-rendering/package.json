@@ -98,7 +98,7 @@
 		"react-test-renderer": "18.3.1",
 		"require-from-string": "2.0.2",
 		"storybook": "8.1.8",
-		"thrift": "0.19.0",
+		"thrift": "0.20.0",
 		"ts-jest": "29.1.2",
 		"ts-loader": "9.5.1",
 		"tslib": "2.6.2",
