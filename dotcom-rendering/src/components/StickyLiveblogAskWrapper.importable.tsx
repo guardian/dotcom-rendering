@@ -186,10 +186,20 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 	}, [authStatus]);
 
 	const ABTestAPI = useAB()?.api;
-	const userInVariant = ABTestAPI?.isUserInVariant(
-		'StickyLiveBlogAskTest',
-		'variant',
-	);
+
+	const getVariant = (): 'control' | 'variant' | 'not-in-test' => {
+		if (ABTestAPI?.isUserInVariant('StickyLiveBlogAskTest', 'variant')) {
+			return 'variant';
+		} else if (
+			ABTestAPI?.isUserInVariant('StickyLiveBlogAskTest', 'control')
+		) {
+			return 'control';
+		}
+		return 'not-in-test';
+	};
+
+	const variantName = getVariant();
+	const userIsInTest = variantName !== 'not-in-test';
 
 	// tracking
 	const tracking: Tracking = useMemo(() => {
@@ -200,11 +210,11 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			referrerUrl,
 			// message tests
 			abTestName: whatAmI,
-			abTestVariant: userInVariant ? 'variant' : 'control',
+			abTestVariant: variantName,
 			campaignCode: whatAmI,
 			componentType: 'ACQUISITIONS_OTHER',
 		};
-	}, [pageViewId, referrerUrl, userInVariant]);
+	}, [pageViewId, referrerUrl, variantName]);
 
 	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
 		baseUrl,
@@ -221,7 +231,11 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 	// send event regardless of variant or control
 	// but only where they *could* see the component.
 	useEffect(() => {
-		if (showSupportMessagingForUser && !shouldHideReaderRevenueOnArticle) {
+		if (
+			userIsInTest &&
+			showSupportMessagingForUser &&
+			!shouldHideReaderRevenueOnArticle
+		) {
 			// For ophan
 			void submitComponentEvent(
 				createInsertEventFromTracking(tracking, tracking.campaignCode),
@@ -233,18 +247,19 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		renderingTarget,
 		showSupportMessagingForUser,
 		shouldHideReaderRevenueOnArticle,
+		userIsInTest,
 	]);
 
 	// capture where it has been displayed (is variant).
 	useEffect(() => {
-		if (hasBeenSeen) {
+		if (userIsInTest && hasBeenSeen) {
 			// For ophan
 			void submitComponentEvent(
 				createViewEventFromTracking(tracking, tracking.campaignCode),
 				renderingTarget,
 			);
 		}
-	}, [hasBeenSeen, tracking, renderingTarget]);
+	}, [hasBeenSeen, tracking, renderingTarget, userIsInTest]);
 
 	const onCtaClick = () => {
 		void submitComponentEvent(
@@ -253,7 +268,7 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		);
 	};
 	const canShow =
-		userInVariant &&
+		variantName === 'variant' &&
 		showSupportMessagingForUser &&
 		!shouldHideReaderRevenueOnArticle;
 
