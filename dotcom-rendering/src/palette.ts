@@ -87,10 +87,16 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 				}
 				case ArticleDesign.Interview:
 				case ArticleDesign.Picture:
-				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
 				case ArticleDesign.PrintShop:
 					return sourcePalette.neutral[97];
+				case ArticleDesign.Video:
+					switch (theme) {
+						case ArticleSpecial.Labs:
+							return sourcePalette.neutral[7];
+						default:
+							return sourcePalette.neutral[97];
+					}
 				default:
 					return sourcePalette.neutral[7];
 			}
@@ -295,7 +301,12 @@ const bylineLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			return sourcePalette.neutral[86];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[86];
+			}
 		case ArticleDesign.Analysis:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
@@ -517,7 +528,12 @@ const bylineAnchorLight: PaletteFunction = ({ design, theme, display }) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			return sourcePalette.neutral[86];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[86];
+			}
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -616,7 +632,12 @@ const bylineAnchorDark: PaletteFunction = ({ design, theme, display }) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			return sourcePalette.neutral[60];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -938,10 +959,16 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.NewsletterSignup:
 		case ArticleDesign.PhotoEssay:
 		case ArticleDesign.Review:
+			return sourcePalette.neutral[60];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			return sourcePalette.neutral[60];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.neutral[60];
+			}
 		case ArticleDesign.Standard:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -1750,7 +1777,7 @@ const accordionKeyEventsBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[100];
 const accordionBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[10];
-const accordionLiveFeedBackgroundLight: PaletteFunction = () =>
+const accordionBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 
 const tableOfContentsLight: PaletteFunction = () => sourcePalette.neutral[7];
@@ -1832,12 +1859,17 @@ const clickToViewButtonHoverLight: PaletteFunction = () =>
 const clickToViewButtonHoverDark: PaletteFunction = () =>
 	sourcePalette.neutral[86];
 
-const brandingLabelLight: PaletteFunction = ({ design }) => {
+const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Picture:
-			return sourcePalette.neutral[60];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[20];
+				default:
+					return sourcePalette.neutral[7];
+			}
 		default:
 			return sourcePalette.neutral[20];
 	}
@@ -1937,7 +1969,12 @@ const standfirstBulletDark: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
-			return sourcePalette.neutral[86];
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[86];
+			}
 		default:
 			switch (theme) {
 				case Pillar.News:
@@ -5548,7 +5585,7 @@ const paletteColours = {
 		dark: accordionBackgroundDark,
 	},
 	'--accordion-live-feed-background': {
-		light: accordionLiveFeedBackgroundLight,
+		light: accordionBackgroundLight,
 		dark: accordionBackgroundDark,
 	},
 	'--accordion-title': {
