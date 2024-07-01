@@ -26,18 +26,21 @@ const bold = css`
  * Allows user to select their accessibility preferences
  */
 export const Accessibility = () => {
-	const [shouldFlash, setShouldFlash] = useState<boolean>(true);
+	const [shouldFlash, setShouldFlash] = useState<boolean | undefined>();
+
+	const checked = shouldFlash ?? true;
 
 	useEffect(() => {
 		const flashingPreference = storage.local.get(
 			'gu.prefs.accessibility.flashing-elements',
 		);
-		if (flashingPreference === false) {
-			setShouldFlash(false);
+		if (typeof flashingPreference === 'boolean') {
+			setShouldFlash(flashingPreference);
 		}
 	}, []);
 
 	useEffect(() => {
+		if (shouldFlash === undefined) return;
 		storage.local.set(
 			'gu.prefs.accessibility.flashing-elements',
 			shouldFlash,
@@ -45,7 +48,7 @@ export const Accessibility = () => {
 	}, [shouldFlash]);
 
 	const toggleFlash = (): void => {
-		setShouldFlash((prev) => !prev);
+		setShouldFlash((prev) => (prev === undefined ? false : !prev));
 	};
 
 	return (
@@ -71,12 +74,12 @@ export const Accessibility = () => {
 					<label>
 						<input
 							type="checkbox"
-							checked={shouldFlash}
+							checked={checked}
 							onChange={toggleFlash}
 							data-link-name="flashing-elements"
 						/>
 						<span css={bold}>Allow flashing elements </span>
-						{shouldFlash
+						{checked
 							? 'Untick this to disable flashing and moving elements'
 							: 'Tick this to enable flashing or moving elements'}
 					</label>
