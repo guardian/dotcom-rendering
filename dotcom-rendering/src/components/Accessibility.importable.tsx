@@ -29,6 +29,15 @@ export const Accessibility = () => {
 	const [shouldFlash, setShouldFlash] = useState<boolean>(true);
 
 	useEffect(() => {
+		const flashingPreference = storage.local.get(
+			'gu.prefs.accessibility.flashing-elements',
+		);
+		if (flashingPreference === false) {
+			setShouldFlash(false);
+		}
+	}, []);
+
+	useEffect(() => {
 		storage.local.set(
 			'gu.prefs.accessibility.flashing-elements',
 			shouldFlash,
