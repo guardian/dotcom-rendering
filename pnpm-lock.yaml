@@ -342,10 +342,10 @@ importers:
         version: 50.13.0(@swc/core@1.5.3)(@types/node@20.12.7)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
         specifier: 19.8.0
-        version: 19.8.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.3.3)
+        version: 19.8.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@0.0.0-canary-20240627122902)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.3.3)
       '@guardian/core-web-vitals':
-        specifier: 6.0.0
-        version: 6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
+        specifier: 0.0.0-canary-20240627122902
+        version: 0.0.0-canary-20240627122902(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
       '@guardian/eslint-config':
         specifier: 7.0.1
         version: 7.0.1(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2)
@@ -3966,7 +3966,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4059,7 +4059,7 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@19.8.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.3.3):
+  /@guardian/commercial@19.8.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@0.0.0-canary-20240627122902)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.3.3):
     resolution: {integrity: sha512-XK68q0sd284/hQJozmN0CHetjOfaIKBIiBTRtwGMPQcCHvpNj/rp1kaTQP6OoS3RU4M2EwT39b4HAkgZ5MQ8mQ==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
@@ -4072,7 +4072,7 @@ packages:
     dependencies:
       '@changesets/cli': 2.27.1
       '@guardian/ab-core': 7.0.1(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/core-web-vitals': 6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
+      '@guardian/core-web-vitals': 0.0.0-canary-20240627122902(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
       '@guardian/identity-auth': 2.1.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/libs': 17.0.1(tslib@2.6.2)(typescript@5.3.3)
@@ -4101,7 +4101,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4114,7 +4114,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4126,14 +4126,14 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
     dev: false
 
-  /@guardian/core-web-vitals@6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1):
-    resolution: {integrity: sha512-kwH1VsQQMn+sPZis1zYYcCYzedNpen6tk3CtVjJlmtHV4nK6i6FnMfhHgbtqECDsqrHdTzRbwN2Lodh1f8D5lA==}
+  /@guardian/core-web-vitals@0.0.0-canary-20240627122902(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1):
+    resolution: {integrity: sha512-ueBE17UXabSKzkix3poagnP6PLv1f0HnvmaOFhi1mbXHXbjRyBzRDZh+gY4f7aC7fTOPKJW4GAAAD3kElfpLEw==}
     peerDependencies:
       '@guardian/libs': ^16.0.0
       tslib: ^2.6.2
@@ -4417,7 +4417,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -17992,6 +17992,19 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: false
 
+  /thrift@0.15.0:
+    resolution: {integrity: sha512-RvuFCwHD8bAHIh0Evlr+8QJui/zzistIj9k668jX6jGvDF1OyOmI5TvY+YnqI/VQxpiE2OCGucYJs/nz/CfldA==}
+    engines: {node: '>= 10.18.0'}
+    dependencies:
+      browser-or-node: 1.3.0
+      isomorphic-ws: 4.0.1(ws@5.2.4)
+      node-int64: 0.4.0
+      q: 1.5.1
+      ws: 5.2.4
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
 
   /thrift@0.20.0:
     resolution: {integrity: sha512-oSmJTaoIAGolpupVHFfsWcmdEKX81fcDI6ty0hhezzdgZvp0XyXgMe9+1YusI8Ahy0HK4n8jlNrkPjOPeHZjdQ==}
