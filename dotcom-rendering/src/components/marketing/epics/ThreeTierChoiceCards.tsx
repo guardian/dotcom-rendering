@@ -219,6 +219,7 @@ export const ThreeTierChoiceCards = ({
 											choiceAmount,
 											currencySymbol,
 										)}
+										id={`choicecard-${supportTier}`}
 										value={supportTier}
 										css={labelOverrideStyles}
 										supporting={
