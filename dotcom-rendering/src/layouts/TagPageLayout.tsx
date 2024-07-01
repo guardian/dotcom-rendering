@@ -233,7 +233,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 			<main data-layout="TagPageLayout" id="maincontent">
 				{isAccessibilityPage && (
-					<Island priority="enhancement" defer={{ until: 'visible' }}>
+					<Island priority="critical" defer={{ until: 'visible' }}>
 						<Accessibility />
 					</Island>
 				)}
