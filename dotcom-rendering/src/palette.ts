@@ -5421,6 +5421,39 @@ const mastheadVeggieBurgerBackground: PaletteFunction = () =>
 const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
+const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 300);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[300];
+	}
+};
+const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 200);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[200];
+	}
+};
+
 const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
 const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
 	switch (design) {
@@ -6298,6 +6331,14 @@ const paletteColours = {
 	'--pagination-text': {
 		light: paginationTextLight,
 		dark: paginationTextDark,
+	},
+	'--pinned-post-background': {
+		light: liveBlockContainerBackgroundLight,
+		dark: liveBlockContainerBackgroundDark,
+	},
+	'--pinned-post-border': {
+		light: pinnedPostBorderLight,
+		dark: pinnedPostBorderDark,
 	},
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,

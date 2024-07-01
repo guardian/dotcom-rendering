@@ -36,7 +36,6 @@ export type Palette = {
 		guardianLogo: Colour;
 	};
 	border: {
-		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
 		navPillar: Colour;
