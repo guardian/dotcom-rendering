@@ -671,8 +671,8 @@ importers:
         specifier: 8.0.1
         version: 8.0.1
       inquirer:
-        specifier: 8.2.5
-        version: 8.2.5
+        specifier: 9.3.2
+        version: 9.3.2
       is-mobile:
         specifier: 3.1.1
         version: 3.1.1
@@ -3966,7 +3966,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4101,7 +4101,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4114,7 +4114,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4126,7 +4126,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4161,7 +4161,7 @@ packages:
       '@typescript-eslint/parser': 6.18.0(eslint@8.56.0)(typescript@5.3.3)
       eslint: 8.56.0
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.18.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
       tslib: 2.6.2
       typescript: 5.3.3
     transitivePeerDependencies:
@@ -4412,7 +4412,7 @@ packages:
       '@types/node-int64': 0.4.32
       '@types/thrift': 0.10.17
       node-int64: 0.4.0
-      thrift: 0.20.0
+      thrift: 0.15.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4452,6 +4452,11 @@ packages:
   /@humanwhocodes/object-schema@2.0.1:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
     deprecated: Use @eslint/object-schema instead
+    dev: false
+
+  /@inquirer/figures@1.0.3:
+    resolution: {integrity: sha512-ErXXzENMH5pJt5/ssXV0DfWUZqly8nGzf0UcBV9xTnP+KyffE2mqyxIMBrZ8ijQck2nU0TQm40EQB53YreyWHw==}
+    engines: {node: '>=18'}
     dev: false
 
   /@isaacs/cliui@8.0.2:
@@ -6553,7 +6558,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -8364,8 +8369,8 @@ packages:
       webpack: 5.x.x
       webpack-cli: 5.x.x
     dependencies:
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.0.4)(webpack@5.91.0)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.91.0)
     dev: false
 
   /@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.91.0):
@@ -8375,8 +8380,8 @@ packages:
       webpack: 5.x.x
       webpack-cli: 5.x.x
     dependencies:
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.0.4)(webpack@5.91.0)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.91.0)
     dev: false
 
   /@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack-dev-server@5.0.4)(webpack@5.91.0):
@@ -8390,8 +8395,8 @@ packages:
       webpack-dev-server:
         optional: true
     dependencies:
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.0.4)(webpack@5.91.0)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.91.0)
       webpack-dev-server: 5.0.4(webpack-cli@5.1.4)(webpack@5.91.0)
     dev: false
 
@@ -8942,7 +8947,7 @@ packages:
       '@babel/core': 7.24.5
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /babel-plugin-istanbul@6.1.1:
@@ -9597,9 +9602,9 @@ packages:
       string-width: 7.0.0
     dev: false
 
-  /cli-width@3.0.0:
-    resolution: {integrity: sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==}
-    engines: {node: '>= 10'}
+  /cli-width@4.1.0:
+    resolution: {integrity: sha512-ouuZd4/dm2Sw5Gmqy6bGyNNNe1qt9RpmxveLSO7KcgsTnU7RXfsw+/bukWGo1abgBiMAic068rclZsO4IWmmxQ==}
+    engines: {node: '>= 12'}
     dev: false
 
   /cliui@6.0.0:
@@ -10030,7 +10035,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.38)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /css-loader@7.1.1(webpack@5.91.0):
@@ -11070,7 +11075,7 @@ packages:
       enhanced-resolve: 5.16.0
       eslint: 8.56.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint-import-resolver-typescript@3.6.1)(eslint@8.56.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.18.0)(eslint@8.56.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -12034,7 +12039,7 @@ packages:
       semver: 7.5.4
       tapable: 2.2.1
       typescript: 5.3.3
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /form-data@3.0.1:
@@ -12986,25 +12991,22 @@ packages:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
     dev: false
 
-  /inquirer@8.2.5:
-    resolution: {integrity: sha512-QAgPDQMEgrDssk1XiwwHoOGYF9BAbUcc1+j+FhEvaOt8/cKRqyLn0U5qA6F74fGhTMGxf92pOvPBeh29jQJDTQ==}
-    engines: {node: '>=12.0.0'}
+  /inquirer@9.3.2:
+    resolution: {integrity: sha512-+ynEbhWKhyomnaX0n2aLIMSkgSlGB5RrWbNXnEqj6mdaIydu6y40MdBjL38SAB0JcdmOaIaMua1azdjLEr3sdw==}
+    engines: {node: '>=18'}
     dependencies:
+      '@inquirer/figures': 1.0.3
       ansi-escapes: 4.3.2
-      chalk: 4.1.2
-      cli-cursor: 3.1.0
-      cli-width: 3.0.0
+      cli-width: 4.1.0
       external-editor: 3.1.0
-      figures: 3.2.0
-      lodash: 4.17.21
-      mute-stream: 0.0.8
+      mute-stream: 1.0.0
       ora: 5.4.1
-      run-async: 2.4.1
+      run-async: 3.0.0
       rxjs: 7.8.1
       string-width: 4.2.3
       strip-ansi: 6.0.1
-      through: 2.3.8
-      wrap-ansi: 7.0.0
+      wrap-ansi: 6.2.0
+      yoctocolors-cjs: 2.1.1
     dev: false
 
   /internal-slot@1.0.7:
@@ -15221,8 +15223,9 @@ packages:
       object-assign: 4.1.1
     dev: false
 
-  /mute-stream@0.0.8:
-    resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
+  /mute-stream@1.0.0:
+    resolution: {integrity: sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: false
 
   /nanoid@3.3.7:
@@ -16892,8 +16895,8 @@ packages:
     engines: {node: '>=18'}
     dev: false
 
-  /run-async@2.4.1:
-    resolution: {integrity: sha512-tvVnVv01b8c1RrA6Ep7JkStj85Guv/YrMcwqYQnwjsAS2cTmmPGBBjAjpCW7RrSodNSoE2/qg9O4bceNvUuDgQ==}
+  /run-async@3.0.0:
+    resolution: {integrity: sha512-540WwVDOMxA6dN6We19EcT9sc3hkXPw5mzRNGM3FkdN/vtE9NFvj5lFAPNwUDmJjXidm3v7TC1cTE7t17Ulm1Q==}
     engines: {node: '>=0.12.0'}
     dev: false
 
@@ -17660,7 +17663,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /stylelint-config-recommended@14.0.0(stylelint@16.5.0):
@@ -17987,6 +17990,19 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: false
 
+  /thrift@0.15.0:
+    resolution: {integrity: sha512-RvuFCwHD8bAHIh0Evlr+8QJui/zzistIj9k668jX6jGvDF1OyOmI5TvY+YnqI/VQxpiE2OCGucYJs/nz/CfldA==}
+    engines: {node: '>= 10.18.0'}
+    dependencies:
+      browser-or-node: 1.3.0
+      isomorphic-ws: 4.0.1(ws@5.2.4)
+      node-int64: 0.4.0
+      q: 1.5.1
+      ws: 5.2.4
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
 
   /thrift@0.20.0:
     resolution: {integrity: sha512-oSmJTaoIAGolpupVHFfsWcmdEKX81fcDI6ty0hhezzdgZvp0XyXgMe9+1YusI8Ahy0HK4n8jlNrkPjOPeHZjdQ==}
@@ -18224,7 +18240,7 @@ packages:
       semver: 7.5.4
       source-map: 0.7.4
       typescript: 5.3.3
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /ts-node@10.9.2(@swc/core@1.5.3)(@types/node@16.18.68)(typescript@4.9.5):
@@ -19044,7 +19060,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
     dev: false
 
   /webpack-dev-middleware@7.2.1(webpack@5.91.0):
@@ -19106,8 +19122,8 @@ packages:
       serve-index: 1.9.1
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
-      webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.0.4)(webpack@5.91.0)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-cli: 5.1.4(webpack-dev-server@5.0.4)(webpack@5.91.0)
       webpack-dev-middleware: 7.2.1(webpack@5.91.0)
       ws: 8.17.1
     transitivePeerDependencies:
@@ -19152,7 +19168,7 @@ packages:
       webpack: ^5.47.0
     dependencies:
       tapable: 2.2.1
-      webpack: 5.91.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack: 5.91.0(esbuild@0.18.20)(webpack-cli@5.1.4)
       webpack-sources: 2.3.1
     dev: false
     patched: true
@@ -19725,6 +19741,11 @@ packages:
   /yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
+    dev: false
+
+  /yoctocolors-cjs@2.1.1:
+    resolution: {integrity: sha512-c6T13b6qYcJZvck7QbEFXrFX/Mu2KOjvAGiKHmYMUg96jxNpfP6i+psGW72BOPxOIDUJrORG+Kyu7quMX9CQBQ==}
+    engines: {node: '>=18'}
     dev: false
 
   /zod@3.22.4:
