@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { between, from, space } from '@guardian/source/foundations';
-import { isUnsupportedFormatForCardWithoutBackground } from '../lib/cardHelpers';
+import { isMediaCard } from '../lib/cardHelpers';
 import { palette } from '../palette';
 import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { CardHeadline } from './CardHeadline';
@@ -141,9 +141,7 @@ export const SupportingContent = ({
 				 * is not compatible with transparent backgrounds */
 				const subLinkFormat = {
 					...subLink.format,
-					design: isUnsupportedFormatForCardWithoutBackground(
-						subLink.format,
-					)
+					design: isMediaCard(subLink.format)
 						? ArticleDesign.Standard
 						: subLink.format.design,
 				};

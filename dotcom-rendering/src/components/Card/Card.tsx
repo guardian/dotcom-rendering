@@ -7,7 +7,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
-import { isUnsupportedFormatForCardWithoutBackground } from '../../lib/cardHelpers';
+import { isMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
 import { palette as themePalette } from '../../palette';
@@ -343,9 +343,7 @@ export const Card = ({
 	 * Some cards in standard containers have contrasting background colours.
 	 * We need to add additional padding to these cards to keep the text readable.
 	 */
-	const hasBackgroundColour =
-		!containerPalette &&
-		isUnsupportedFormatForCardWithoutBackground(format);
+	const hasBackgroundColour = !containerPalette && isMediaCard(format);
 
 	return (
 		<CardWrapper
