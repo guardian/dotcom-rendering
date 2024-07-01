@@ -1,17 +1,17 @@
 import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
-import { textEgyptian17 } from '@guardian/source/foundations';
+import { article17, palette } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { FrontSection } from './FrontSection';
 
 const formStyle = css`
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
-	padding: 1rem;
-	border: 2px groove rgb(192, 192, 192);
+	gap: 0.5rem;
+	padding: 0.5rem 1rem;
+	border: 2px groove ${palette.neutral[86]};
 	margin-left: 10px;
-	${textEgyptian17}
+	${article17}
 `;
 
 const bold = css`
@@ -35,7 +35,7 @@ export const Accessibility = () => {
 		);
 	}, [shouldFlash]);
 
-	const useHandleCheckboxChange = (): void => {
+	const toggleFlash = (): void => {
 		setShouldFlash((prev) => !prev);
 	};
 
@@ -63,7 +63,7 @@ export const Accessibility = () => {
 						<input
 							type="checkbox"
 							checked={shouldFlash}
-							onChange={useHandleCheckboxChange}
+							onChange={toggleFlash}
 							data-link-name="flashing-elements"
 						/>
 						<span css={bold}>Allow flashing elements </span>
