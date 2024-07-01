@@ -1,5 +1,6 @@
 import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
+import { PredefinedMetric } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { RenderingCDKStack } from './renderingStack';
 
@@ -11,21 +12,29 @@ describe('The RenderingCDKStack', () => {
 	it('matches the snapshot', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(app, 'ArticleRendering', {
-			stage: 'TEST',
+			stage: 'PROD',
 			guApp: 'article-rendering',
 			domainName: 'article-rendering.test.dev-guardianapis.com',
 			scaling: {
 				minimumInstances: 1,
 				maximumInstances: 4,
-				policy: {
-					scalingStepsOut: [
-						{ lower: 0, upper: 0.2, change: 0 },
-						{ lower: 0.2, change: 50 },
-						{ lower: 0.3, change: 80 },
-					],
-					scalingStepsIn: [
-						{ lower: 0.15, change: 0 },
-						{ upper: 0.15, lower: 0, change: -1 },
+				policies: {
+					step: {
+						scalingStepsOut: [
+							{ lower: 0, upper: 0.2, change: 0 },
+							{ lower: 0.2, change: 50 },
+							{ lower: 0.3, change: 80 },
+						],
+						scalingStepsIn: [
+							{ lower: 0.15, change: 0 },
+							{ upper: 0.15, lower: 0, change: -1 },
+						],
+					},
+					target: [
+						{
+							type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
+							targetValue: 40,
+						},
 					],
 				},
 			},

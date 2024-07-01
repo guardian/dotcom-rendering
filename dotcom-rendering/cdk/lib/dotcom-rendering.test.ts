@@ -11,7 +11,7 @@ describe('The DotcomRendering stack', () => {
 		const app = new App();
 		const stack = new DotcomRendering(app, 'DotcomRendering', {
 			stack: 'frontend',
-			stage: 'TEST',
+			stage: 'PROD',
 			app: 'rendering',
 			minCapacity: 1,
 			maxCapacity: 4,
