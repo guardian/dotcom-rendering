@@ -1,4 +1,4 @@
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay, isOneOf } from '@guardian/libs';
 import {
 	background,
 	brandBackground,
@@ -45,7 +45,11 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
-import type { DCRCollectionType, DCRFrontType } from '../types/front';
+import {
+	type DCRCollectionType,
+	type DCRFrontType,
+	NetworkFrontPageIds,
+} from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -58,6 +62,8 @@ const spaces = / /g;
 /** TODO: Confirm with is a valid way to generate component IDs. */
 const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
+
+const isNetworkFrontPageId = isOneOf(NetworkFrontPageIds);
 
 const isNavList = (collection: DCRCollectionType) => {
 	return (
@@ -99,9 +105,7 @@ const decideLeftContent = (
 	// show weather?
 	if (
 		front.config.switches['weather'] &&
-		['uk', 'us', 'au', 'international', 'europe'].includes(
-			front.config.pageId,
-		) &&
+		isNetworkFrontPageId(front.config.pageId) &&
 		// based on https://github.com/guardian/frontend/blob/473aafd168fec7f2a578a52c8e84982e3ec10fea/common/app/views/support/GetClasses.scala#L107
 		collection.displayName.toLowerCase() === 'headlines' &&
 		!hasPageSkin
@@ -313,12 +317,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				id="maincontent"
 				css={hasPageSkin && pageSkinContainer}
 			>
-				<Island priority="enhancement" defer={{ until: 'idle' }}>
-					<EditionSwitcherBanner
-						pageId={pageId}
-						edition={editionId}
-					/>
-				</Island>
+				{isNetworkFrontPageId(pageId) && (
+					<Island priority="enhancement" defer={{ until: 'idle' }}>
+						<EditionSwitcherBanner
+							pageId={pageId}
+							edition={editionId}
+						/>
+					</Island>
+				)}
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(

@@ -14,6 +14,7 @@ import {
 	useEditionSwitcherBanner,
 } from '../lib/useUserPreferredEdition';
 import XIcon from '../static/icons/x.svg';
+import type { NetworkFrontPageId } from '../types/front';
 
 const container = css`
 	position: sticky;
@@ -73,7 +74,7 @@ const apiPromise = new Promise<{ hidden: boolean }>(() => {
 });
 
 type Props = {
-	pageId: string;
+	pageId: NetworkFrontPageId;
 	edition: EditionId;
 };
 

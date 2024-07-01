@@ -560,3 +560,12 @@ export type TreatType = {
 	 */
 	pageId?: string;
 };
+
+export const NetworkFrontPageIds = [
+	'uk',
+	'us',
+	'au',
+	'international',
+	'europe',
+] as const;
+export type NetworkFrontPageId = (typeof NetworkFrontPageIds)[number];
