@@ -617,6 +617,9 @@ export const Card = ({
 												branding={branding}
 												format={format}
 												onwardsSource={onwardsSource}
+												containerPalette={
+													containerPalette
+												}
 											/>
 										) : undefined
 									}
