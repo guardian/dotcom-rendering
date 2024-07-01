@@ -26,8 +26,7 @@ const shouldUseLogoForDarkBackground = (
 		// Special palettes which act more like standard containers
 		case 'MediaPalette':
 		case 'PodcastPalette':
-		case undefined:
-		default: {
+		case undefined: {
 			switch (format.design) {
 				case ArticleDesign.Gallery:
 				case ArticleDesign.Audio:
