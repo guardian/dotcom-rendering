@@ -10,7 +10,7 @@ describe('EditionSwitcherBanner', () => {
 		screen.getByText('You are viewing the US homepage');
 
 		const link = screen.getByRole('link', { name: 'View the UK homepage' });
-		expect(link).toHaveAttribute('href', 'https://www.theguardian.com/uk');
+		expect(link).toHaveAttribute('href', '/uk');
 	});
 
 	test('should no longer be present in DOM after clicking the close button', async () => {
