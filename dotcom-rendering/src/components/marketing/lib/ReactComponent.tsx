@@ -3,7 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/types.ts#L12
  */
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import type { JSX } from '@emotion/react/jsx-runtime';
 
 // This type can be used in place of React.FC<T> which was previously widespread
 // in this codebase but is no longer recommended. In many cases it's possible to
@@ -17,4 +17,4 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 
 export type ReactComponent<GenericProps = Record<string, never>> = (
 	props: GenericProps,
-) => EmotionJSX.Element;
+) => JSX.Element;
