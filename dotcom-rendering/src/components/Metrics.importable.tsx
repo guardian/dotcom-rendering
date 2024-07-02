@@ -8,6 +8,10 @@ import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
+import {
+	bypassCoreWebVitalsSampling as bypassCoreWebVitalsSamplingAttribution,
+	initCoreWebVitals as initCoreWebVitalsAttribution,
+} from '@guardian/core-web-vitals-attribution';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { adBlockAsk } from '../experiments/tests/ad-block-ask';
@@ -134,8 +138,17 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				team: 'dotcom',
 			});
 
+			void initCoreWebVitalsAttribution({
+				browserId,
+				pageViewId,
+				isDev,
+				sampling: nearZeroSampling,
+				team: 'dotcom',
+			});
+
 			if (bypassSampling || isDev) {
 				void bypassCoreWebVitalsSampling('commercial');
+				void bypassCoreWebVitalsSamplingAttribution('dotcom');
 			}
 		},
 		[abTestApi, browserId, isDev, pageViewId, shouldBypassSampling],
