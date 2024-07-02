@@ -1004,7 +1004,14 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					{renderAds && <MobileStickyContainer />}
+					{renderAds && (
+						<MobileStickyContainer
+							isValidPageForMobileSticky={
+								article.contentType === 'Article' ||
+								article.pageId.startsWith('football/')
+							}
+						/>
+					)}
 				</>
 			)}
 			{isApps && (

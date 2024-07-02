@@ -66,6 +66,10 @@ type RemainingProps = {
  */
 type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
+type MobileStickyContainerProps = {
+	isValidPageForMobileSticky: boolean;
+};
+
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
 const individualLabelCSS = css`
@@ -455,6 +459,12 @@ const mobileStickyAdStyles = css`
 		position: relative;
 		${individualLabelCSS}
 	}
+`;
+
+const mobileStickyAdStylesFullWidth = css`
+	width: 100%;
+	text-align: center;
+	background-color: ${palette.neutral[97]};
 `;
 
 export const adContainerStyles = [
@@ -908,8 +918,16 @@ export const AdSlot = ({
 	}
 };
 
-export const MobileStickyContainer = () => {
+export const MobileStickyContainer = ({
+	isValidPageForMobileSticky,
+}: MobileStickyContainerProps) => {
 	return (
-		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
+		<div
+			className="mobilesticky-container"
+			css={[
+				mobileStickyAdStyles,
+				isValidPageForMobileSticky && mobileStickyAdStylesFullWidth,
+			]}
+		/>
 	);
 };
