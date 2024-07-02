@@ -29,8 +29,8 @@ const columnsStyle = (isImmersive: boolean) => css`
 		margin: 0 auto;
 		display: flex;
 		border-right: ${isImmersive
-		? 'none'
-		: `1px solid ${themePalette('--masthead-nav-lines')}`};
+			? 'none'
+			: `1px solid ${themePalette('--masthead-nav-lines')}`};
 		border-top: 1px solid ${themePalette('--masthead-nav-lines')};
 	}
 `;
@@ -227,7 +227,7 @@ export const Sections = ({
 								css={[
 									brandExtensionLink,
 									!hasPageSkin &&
-									brandExtensionLinkFromLeftCol,
+										brandExtensionLinkFromLeftCol,
 								]}
 								href={brandExtension.url}
 								key={brandExtension.title}

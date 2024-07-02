@@ -10,7 +10,7 @@ import type { NavType } from '../../../../model/extract-nav';
 // import { navInputCheckboxId } from '../../../Nav/config';
 import { palette as themePalette } from '../../../../palette';
 import { VeggieBurgerMenu } from '../VeggieBurger';
-import { ExpandedNavSections } from './ExpandedNavSections';
+import { Sections } from './Sections';
 
 // const wrapperMainMenuStyles = css`
 // 	background-color: rgba(0, 0, 0, 0.5);
@@ -127,7 +127,7 @@ export const TitlepieceExpandedNav = ({
 				`}
 			>
 				<div css={mainMenuStyles}>
-					<ExpandedNavSections
+					<Sections
 						editionId={editionId}
 						isImmersive={isImmersive}
 						nav={nav}

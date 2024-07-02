@@ -3,7 +3,7 @@ import { from, textSans17 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
-import { pillarWidthsPx } from '../titlepieceSharedStyles';
+import { pillarWidthsPx } from '../constants';
 
 const pillarHeight = 42;
 
