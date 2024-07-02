@@ -1,4 +1,3 @@
-import type { OphanABTestMeta } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import type ophan from '@guardian/ophan-tracker-js';
 import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
@@ -74,8 +73,14 @@ export const submitComponentEvent = async (
 	ophan.record({ componentEvent });
 };
 
-interface SdcTestMeta extends OphanABTestMeta {
-	labels?: string[];
+interface SdcTestMeta {
+	abTestName: NonNullable<ComponentEvent['abTest']>['name'];
+	abTestVariant: NonNullable<ComponentEvent['abTest']>['name'];
+	componentType: ComponentEvent['component']['componentType'];
+	campaignCode: ComponentEvent['component']['campaignCode'];
+	products: ComponentEvent['component']['products'];
+	labels: ComponentEvent['component']['labels'];
+	campaignId?: string;
 }
 
 export const sendOphanComponentEvent = async (

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { OphanABTestMeta, OphanComponentEvent } from '@guardian/libs';
 import { getCookie } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import {
 	brandText,
 	from,
@@ -159,7 +159,7 @@ const subMessageStyles = css`
 
 type SupportHeaderType = React.ElementType<
 	ModuleData['props'] & {
-		submitComponentEvent: (componentEvent: OphanComponentEvent) => void;
+		submitComponentEvent: (componentEvent: ComponentEvent) => void;
 	}
 >;
 
@@ -244,9 +244,7 @@ const ReaderRevenueLinksRemote = ({
 			<div css={headerStyles}>
 				{}
 				<SupportHeader
-					submitComponentEvent={(
-						componentEvent: OphanComponentEvent,
-					) =>
+					submitComponentEvent={(componentEvent: ComponentEvent) =>
 						void submitComponentEvent(
 							componentEvent,
 							renderingTarget,
@@ -285,12 +283,14 @@ const ReaderRevenueLinksNative = ({
 	// Only the header component is in the AB test
 	const testName = inHeader ? 'RRHeaderLinks' : 'RRFooterLinks';
 	const campaignCode = `${testName}_control`;
-	const tracking: OphanABTestMeta = {
+	const tracking = {
 		abTestName: testName,
 		abTestVariant: 'control',
 		componentType: inHeader ? 'ACQUISITIONS_HEADER' : 'ACQUISITIONS_FOOTER',
 		campaignCode,
-	};
+		products: undefined,
+		labels: undefined,
+	} satisfies Parameters<typeof sendOphanComponentEvent>[1];
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		threshold: 0,
