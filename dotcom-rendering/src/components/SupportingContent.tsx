@@ -20,55 +20,22 @@ type Props = {
 const wrapperStyles = css`
 	position: relative;
 	display: flex;
-	padding-top: ${space[3]}px;
+	padding-top: ${space[2]}px;
 
 	@media (pointer: coarse) {
 		padding-bottom: 0;
 	}
 `;
 
-const directionStyles = (alignment: Alignment) => {
-	const linkPaddingVertical = css`
-		li a {
-			padding-top: ${space[1]}px;
-			padding-bottom: ${space[2]}px;
-		}
-	`;
+const flexColumn = css`
+	flex-direction: column;
+`;
 
-	const flexColumn = css`
-		flex-direction: column;
-		${linkPaddingVertical}
-	`;
-
-	const flexRow = css`
+const flexRowFromTablet = css`
+	${from.tablet} {
 		flex-direction: row;
-		${linkPaddingVertical}
-
-		/** Pad right for each horizontal sublink */
-		li a {
-			padding-right: ${space[3]}px;
-		}
-		/** Remove additional padding for last sublink */
-		li:last-of-type a {
-			padding-right: 0;
-		}
-	`;
-
-	switch (alignment) {
-		case 'horizontal':
-			return css`
-				${flexColumn}
-
-				${from.tablet} {
-					${flexRow}
-				}
-			`;
-		case 'vertical':
-			return css`
-				${flexColumn}
-			`;
 	}
-};
+`;
 
 const lineStyles = css`
 	:before {
@@ -87,34 +54,22 @@ const lineStyles = css`
 	}
 `;
 
-const dynamoStyles = css`
-	flex-direction: column;
-	width: 100%;
-	padding: 0;
-	${from.tablet} {
-		padding-top: ${space[1]}px;
-		flex-direction: row;
-		position: relative;
-		background-color: transparent;
-	}
-`;
-
 const liStyles = css`
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-`;
 
-const dynamoLiStyles = css`
-	/* Creates a containing block which allows Ophan heatmap to place bubbles correctly. */
-	position: relative;
-	/* 25% is arbitrary, but the cards should expand thanks for flex-grow */
-	flex: 1 1 25%;
-	margin-right: ${space[1]}px;
+	a {
+		flex: 1;
+		padding-top: ${space[1]}px;
+		padding-bottom: ${space[2]}px;
+		padding-right: ${space[2]}px;
+	}
 
-	&:last-of-type {
-		margin-right: 0;
+	/** Remove right padding for last sublink */
+	&:last-of-type a {
+		padding-right: 0;
 	}
 `;
 
@@ -129,7 +84,8 @@ export const SupportingContent = ({
 			className="sublinks"
 			css={[
 				wrapperStyles,
-				isDynamo ? dynamoStyles : directionStyles(alignment),
+				flexColumn,
+				(isDynamo ?? alignment === 'horizontal') && flexRowFromTablet,
 			]}
 		>
 			{supportingContent.map((subLink, index) => {
@@ -149,7 +105,7 @@ export const SupportingContent = ({
 				return (
 					<li
 						key={subLink.url}
-						css={[isDynamo ? dynamoLiStyles : liStyles, lineStyles]}
+						css={[liStyles, lineStyles]}
 						data-link-name={`sublinks | ${index + 1}`}
 					>
 						<FormatBoundary format={subLinkFormat}>
