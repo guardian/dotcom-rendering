@@ -1204,7 +1204,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer data-print-layout="hide" />
+					<MobileStickyContainer
+						data-print-layout="hide"
+						isValidPageForMobileSticky={
+							article.contentType === 'Article' ||
+							article.pageId.startsWith('football/')
+						}
+					/>
 				</>
 			)}
 

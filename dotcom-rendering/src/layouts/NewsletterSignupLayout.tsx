@@ -601,7 +601,13 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide" />
-			<MobileStickyContainer data-print-layout="hide" />
+			<MobileStickyContainer
+				data-print-layout="hide"
+				isValidPageForMobileSticky={
+					article.contentType === 'Article' ||
+					article.pageId.startsWith('football/')
+				}
+			/>
 		</>
 	);
 };

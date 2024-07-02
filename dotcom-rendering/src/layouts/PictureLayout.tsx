@@ -893,7 +893,12 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer />
+					<MobileStickyContainer
+						isValidPageForMobileSticky={
+							article.contentType === 'Article' ||
+							article.pageId.startsWith('football/')
+						}
+					/>
 				</>
 			)}
 			{isApps && (

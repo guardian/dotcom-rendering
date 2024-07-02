@@ -961,7 +961,13 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer data-print-layout="hide" />
+					<MobileStickyContainer
+						data-print-layout="hide"
+						isValidPageForMobileSticky={
+							article.contentType === 'Article' ||
+							article.pageId.startsWith('football/')
+						}
+					/>
 				</>
 			)}
 			{isApps && (

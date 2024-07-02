@@ -442,7 +442,12 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer />
+			<MobileStickyContainer
+				isValidPageForMobileSticky={
+					article.contentType === 'Article' ||
+					article.pageId.startsWith('football/')
+				}
+			/>
 		</>
 	);
 };
