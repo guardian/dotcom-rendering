@@ -95,25 +95,6 @@ export const SpecialReport = () => {
 };
 SpecialReport.storyName = 'with design Analysis and theme SpecialReport';
 
-export const Timeline = () => {
-	return (
-		<div
-			css={css`
-				max-width: 400px;
-			`}
-		>
-			<DesignTag
-				format={{
-					design: ArticleDesign.Timeline,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				}}
-			/>
-		</div>
-	);
-};
-Timeline.storyName = 'with design Timeline';
-
 export const Profile = () => {
 	return (
 		<div

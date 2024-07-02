@@ -29,7 +29,6 @@ const fontWeight = (format: ArticleFormat) => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Profile:
 		case ArticleDesign.Explainer:
-		case ArticleDesign.Timeline:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Analysis:

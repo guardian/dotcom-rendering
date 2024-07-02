@@ -10,6 +10,7 @@ export const decideDesign = ({
 }: Partial<FEFormat>): ArticleDesign => {
 	switch (design) {
 		case 'ArticleDesign':
+		case 'TimelineDesign':
 			return ArticleDesign.Standard;
 		case 'PictureDesign':
 			return ArticleDesign.Picture;
@@ -60,8 +61,6 @@ export const decideDesign = ({
 			return ArticleDesign.NewsletterSignup;
 		case 'ExplainerDesign':
 			return ArticleDesign.Explainer;
-		case 'TimelineDesign':
-			return ArticleDesign.Timeline;
 		case 'ProfileDesign':
 			return ArticleDesign.Profile;
 		default:
