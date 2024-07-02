@@ -12,7 +12,7 @@ import type {
 	EditionLinkType,
 	PillarLinkType,
 } from '../../../../model/extract-nav';
-import { CollapseColumnButton } from './ExpandedNavCollapseSectionButton';
+import { CollapseSectionButton } from './CollapseSectionButton';
 
 // CSS
 const hideDesktop = css`
@@ -208,7 +208,7 @@ const columnStyleFromLeftCol = css`
 	}
 `;
 
-export const Column = ({
+export const Pillar = ({
 	column,
 	index,
 	showLineBelow,
@@ -277,7 +277,7 @@ export const Column = ({
 				key="OpenExpandedMenuCheckbox"
 				aria-hidden="true"
 			/>
-			<CollapseColumnButton
+			<CollapseSectionButton
 				collapseColumnInputId={collapseColumnInputId}
 				title={column.title}
 				columnInputId={columnInputId}

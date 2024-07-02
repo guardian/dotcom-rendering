@@ -177,7 +177,7 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
-export const MoreColumn = ({
+export const MoreSection = ({
 	otherLinks,
 	brandExtensions,
 	hasPageSkin,

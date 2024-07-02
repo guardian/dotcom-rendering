@@ -22,9 +22,9 @@ import {
 } from '../../../../lib/edition';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { NavType } from '../../../../model/extract-nav';
-import { MoreColumn } from './ExpandedNavMoreSection';
-import { Column, lineStyle } from './ExpandedNavPillar';
-import { ReaderRevenueLinks } from './ExpandedNavReaderRevenueLinks';
+import { MoreSection } from './MoreSection';
+import { lineStyle, Pillar } from './Pillar';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
 const columnsStyle = (isImmersive: boolean) => css`
 	box-sizing: border-box;
@@ -227,7 +227,7 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
-export const Columns = ({
+export const Sections = ({
 	isImmersive = false,
 	nav,
 	editionId,
@@ -255,7 +255,7 @@ export const Columns = ({
 						mobileOnly: true,
 					}),
 					(
-						<Column
+						<Pillar
 							column={column}
 							key={column.title.toLowerCase()}
 							index={i}
@@ -325,7 +325,7 @@ export const Columns = ({
 
 			{/* This is where the edition dropdown is inserted					 */}
 			<section css={editionsSwitch}>
-				<Column
+				<Pillar
 					column={{
 						...activeEdition,
 						children: remainingEditions,
@@ -337,7 +337,7 @@ export const Columns = ({
 				<div css={lineStyle}></div>
 			</section>
 
-			<MoreColumn
+			<MoreSection
 				otherLinks={nav.otherLinks}
 				brandExtensions={nav.brandExtensions}
 				key="more"

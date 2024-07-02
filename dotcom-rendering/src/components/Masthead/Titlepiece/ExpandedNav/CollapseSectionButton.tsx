@@ -79,7 +79,7 @@ type Props = {
 	ariaControls: string;
 };
 
-export const CollapseColumnButton = ({
+export const CollapseSectionButton = ({
 	title,
 	columnInputId,
 	collapseColumnInputId,
