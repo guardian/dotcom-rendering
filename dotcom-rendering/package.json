@@ -104,7 +104,7 @@
 		"@types/serve-static": "1.15.0",
 		"@types/tough-cookie": "4.0.2",
 		"@types/trusted-types": "2.0.3",
-		"@types/twitter-for-web": "0.0.2",
+		"@types/twitter-for-web": "0.0.6",
 		"@types/webpack-bundle-analyzer": "4.7.0",
 		"@types/webpack-env": "1.18.4",
 		"@types/webpack-node-externals": "3.0.4",
