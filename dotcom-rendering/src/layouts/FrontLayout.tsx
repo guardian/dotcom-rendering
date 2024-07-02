@@ -45,6 +45,7 @@ import {
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
+import { palette as schemePalette } from '../palette';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -178,6 +179,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showSideBorders={false}
 								padSides={false}
 								shouldCenter={false}
+								backgroundColour={schemePalette(
+									'--article-section-background',
+								)}
 							>
 								<HeaderAdSlot
 									isPaidContent={!!front.config.isPaidContent}

@@ -1342,7 +1342,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={true}
 							showSideBorders={false}
-							backgroundColour={sourcePalette.neutral[97]}
+							backgroundColour={themePalette('--ad-background')}
 							shouldCenter={false}
 							element="aside"
 						>
@@ -1478,7 +1478,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={false}
 							showSideBorders={false}
-							backgroundColour={sourcePalette.neutral[97]}
+							backgroundColour={themePalette('--ad-background')}
 							element="aside"
 						>
 							<AdSlot
