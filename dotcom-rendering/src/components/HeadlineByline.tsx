@@ -3,12 +3,13 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
+	headline,
 	headlineLightItalic28,
 	headlineLightItalic34,
 	headlineMedium20,
 	headlineMedium24,
 	headlineMediumItalic20,
-	palette,
+	palette as sourcePalette,
 	space,
 	textSans20,
 	textSans24,
@@ -92,7 +93,7 @@ const analysisStyles = css`
 		}
 	}
 	span {
-		color: ${palette.neutral[46]};
+		color: ${sourcePalette.neutral[46]};
 	}
 `;
 
@@ -110,6 +111,11 @@ const immersiveStyles = (format: ArticleFormat) => css`
 		margin-bottom: 0;
 		${format.theme === ArticleSpecial.Labs ? textSans24 : headlineMedium24}
 	}
+`;
+//* TODO: check headline styles and use modern syntax */
+const galleryStyles = css`
+	${headline.xxsmall({ fontWeight: 'bold' })}
+	font-style: italic;
 `;
 
 const immersiveLinkStyles = css`
@@ -148,19 +154,33 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
-			return (
-				<div css={immersiveStyles(format)}>
-					By{' '}
-					<span css={immersiveLinkStyles}>
-						<BylineLink
-							byline={byline}
-							tags={tags}
-							format={format}
-							isHeadline={true}
-						/>
-					</span>
-				</div>
-			);
+			switch (format.design) {
+				case ArticleDesign.Gallery:
+					return (
+						<span css={[immersiveLinkStyles, galleryStyles]}>
+							<BylineLink
+								byline={byline}
+								tags={tags}
+								format={format}
+								isHeadline={true}
+							/>
+						</span>
+					);
+				default:
+					return (
+						<div css={immersiveStyles(format)}>
+							By{' '}
+							<span css={immersiveLinkStyles}>
+								<BylineLink
+									byline={byline}
+									tags={tags}
+									format={format}
+									isHeadline={true}
+								/>
+							</span>
+						</div>
+					);
+			}
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard:
