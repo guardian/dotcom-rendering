@@ -39,7 +39,7 @@ export const initHydration = async (
 ): Promise<void> => {
 	const name = getName(element);
 	const props = getProps(element);
-	const config = getConfig(element);
+	const config = getConfig();
 	const priority = getPriority(element);
 
 	if (!name) return;

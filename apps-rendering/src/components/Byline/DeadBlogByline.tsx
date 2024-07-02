@@ -3,7 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	headlineBold17,
 	headlineMediumItalic17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { DefaultByline } from './Byline.defaults';
 import { blogColor } from './LiveBlogByline';
@@ -23,7 +23,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const DeadblogByline: React.FC<Props> = ({ format, bylineHtml }) => (
+const DeadblogByline = ({ format, bylineHtml }: Props) => (
 	<DefaultByline
 		format={format}
 		bylineHtml={bylineHtml}

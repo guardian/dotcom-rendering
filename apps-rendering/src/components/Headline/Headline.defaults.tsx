@@ -9,7 +9,7 @@ import {
 	headlineMedium28,
 	headlineMedium34,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -95,7 +95,7 @@ interface DefaultProps {
 	styles: SerializedStyles;
 }
 
-export const DefaultHeadline: React.FC<DefaultProps> = ({ item, styles }) => {
+export const DefaultHeadline = ({ item, styles }: DefaultProps) => {
 	const format = getFormat(item);
 	return (
 		<>

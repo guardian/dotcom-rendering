@@ -4,7 +4,7 @@ import {
 	palette,
 	text,
 	textSans12,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { RichLinkBlockElement } from '../types/content';
 

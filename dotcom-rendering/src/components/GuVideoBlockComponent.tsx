@@ -24,10 +24,14 @@ export const GuVideoBlockComponent = ({
 			width: 100%;
 		}
 	`;
-
+	const httpsHtml = html.replaceAll(
+		new RegExp('http://cdn\\.theguardian\\.tv', 'g'),
+		'https://cdn.theguardian.tv',
+	);
+	const sanitizedHtml = unescapeData(httpsHtml);
 	return (
 		<div css={embedContainer}>
-			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
+			<div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
 
 			{!!caption && (
 				<Caption

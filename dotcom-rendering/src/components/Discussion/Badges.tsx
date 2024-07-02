@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSansBold12 } from '@guardian/source-foundations';
+import { space, textSansBold12 } from '@guardian/source/foundations';
 import { palette as themePalette } from '../../palette';
 
 const staffBadge = css`

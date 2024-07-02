@@ -22,6 +22,7 @@ const clearEpicViewLog = (): void =>
 const clearBannerLastClosedAt = (): void => {
 	storage.local.remove('gu.prefs.engagementBannerLastClosedAt');
 	storage.local.remove('gu.prefs.subscriptionBannerLastClosedAt');
+	storage.local.remove('gu.prefs.abandonedBasketLastClosedAt');
 	storage.local.remove('gu.noRRBannerTimestamp');
 };
 
@@ -100,11 +101,16 @@ const showMeTheBanner = (
 	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
+	enableCmp();
 	clearBannerLastClosedAt();
 	clearCommonReaderRevenueStateAndReload(
 		asExistingSupporter,
 		shouldHideReaderRevenue,
 	);
+};
+
+const enableCmp = (): void => {
+	removeCookie({ name: 'gu-cmp-disabled' });
 };
 
 const showNextVariant = (

@@ -1,6 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
-import { brandAltBackground, palette } from '@guardian/source-foundations';
+import { brandAltBackground, palette } from '@guardian/source/foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
 import { palette as themePalette } from '../palette';
@@ -223,27 +223,6 @@ const fillGuardianLogo = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.NewsletterSignup) return WHITE;
 
 	return WHITE;
-};
-
-const borderPinnedPost = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
-	}
 };
 
 const borderStandfirstLink = (format: ArticleFormat): string => {
@@ -529,29 +508,6 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
-const textYoutubeOverlayKicker = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[500];
-		case Pillar.Opinion:
-			return news[500];
-		case Pillar.Sport:
-			return sport[500];
-		case Pillar.Culture:
-			return culture[500];
-		case Pillar.Lifestyle:
-			return lifestyle[500];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[500];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
-	}
-};
-
-const backgroundDynamoSublink = (): string => palette.neutral[97];
-
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -573,7 +529,6 @@ export const decidePalette = (
 			dateLine: textDateLine(format),
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
-			youtubeOverlayKicker: textYoutubeOverlayKicker(format),
 		},
 		background: {
 			analysisContrast: backgroundAnalysisContrastColour(),
@@ -590,15 +545,11 @@ export const decidePalette = (
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
 			messageForm: backgroundMessageForm(format),
-			dynamoSublink:
-				overrides?.background.dynamoSublink ??
-				backgroundDynamoSublink(),
 		},
 		fill: {
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
-			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			navPillar: borderNavPillar(format),

@@ -5,8 +5,8 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -31,7 +31,7 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -90,26 +90,26 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 
 					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
-									'title      border  headline    headline'
-									'lines      border  headline    headline'
-									'meta       border  standfirst  standfirst'
-									'meta       border  media       media'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title      border  headline   headline   headline'
+									'lines      border  headline   headline   headline'
+									'meta       border  standfirst standfirst standfirst'
+									'meta       border  media      media      media'
+									'.          border  body       .          right-column'
+									'.          border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title      border  headline    right-column'
-									'lines      border  headline    right-column'
-									'meta       border  standfirst  right-column'
-									'meta       border  media       right-column'
-									'.          border  body        right-column'
-									'.          border  .           right-column';
+									'title      border  headline   . right-column'
+									'lines      border  headline   . right-column'
+									'meta       border  standfirst . right-column'
+									'meta       border  media      . right-column'
+									'.          border  body       . right-column'
+									'.          border  .          . right-column';
 						  `}
 				}
 
@@ -122,7 +122,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 620px 300px;
 
 					${display === ArticleDisplay.Showcase
 						? css`
@@ -152,7 +152,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
+					grid-template-columns: 620px 300px;
 					grid-template-areas:
 						'title      right-column'
 						'headline   right-column'
@@ -165,7 +165,7 @@ const StandardGrid = ({
 
 				${until.desktop} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -178,7 +178,7 @@ const StandardGrid = ({
 				${until.tablet} {
 					grid-column-gap: 0px;
 
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -306,6 +306,12 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
+	const { absoluteServerTimes = false } = article.config.switches;
+	const inTagLinkTest =
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
+
 	return (
 		<>
 			{isWeb && (
@@ -342,6 +348,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
 							displayRoundel={false}
@@ -462,7 +469,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 
-			<main data-layout="CommentLayout">
+			<main
+				data-layout="CommentLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -519,6 +529,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -540,10 +551,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 										byline={article.byline}
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
-										}
-										hasStarRating={
-											typeof article.starRating ===
-											'number'
 										}
 										hasAvatar={!!avatarUrl}
 									/>
@@ -794,17 +801,28 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								`}
 							>
 								<RightColumn>
-									<MostViewedRightWithAd
-										format={format}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											!!article.config
-												.shouldHideReaderRevenue
-										}
-									/>
+									<Island
+										priority="feature"
+										defer={{
+											until: 'visible',
+											// Provide a much higher value for the top margin for the intersection observer
+											// This is because the most viewed would otherwise only be lazy loaded when the
+											// bottom of the container intersects with the viewport
+											rootMargin: '700px 100px',
+										}}
+									>
+										<MostViewedRightWithAd
+											format={format}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											renderAds={renderAds}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
 								</RightColumn>
 							</div>
 						</GridItem>
@@ -845,6 +863,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -867,6 +886,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 

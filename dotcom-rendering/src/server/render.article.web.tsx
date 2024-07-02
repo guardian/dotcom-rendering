@@ -15,7 +15,6 @@ import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
-import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
@@ -53,7 +52,10 @@ export const renderHtml = ({
 		renderingTarget,
 		darkModeAvailable:
 			article.config.abTests.darkModeWebVariant === 'variant',
+		updateLogoAdPartnerSwitch:
+			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
+		editionId: article.editionId,
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
@@ -140,16 +142,6 @@ export const renderHtml = ({
 		contentType: article.contentType,
 		shouldHideReaderRevenue: article.shouldHideReaderRevenue,
 		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
-		GAData: extractGA({
-			webTitle: article.webTitle,
-			format,
-			sectionName: article.sectionName,
-			contentType: article.contentType,
-			tags: article.tags,
-			pageId: article.pageId,
-			editionId: article.editionId,
-			beaconURL: article.beaconURL,
-		}),
 		hasInlineMerchandise: article.config.hasInlineMerchandise,
 		// Until we understand exactly what config we need to make available client-side,
 		// add everything we haven't explicitly typed as unknown config
@@ -232,6 +224,8 @@ window.twttr = (function(d, s, id) {
 		canonicalUrl,
 		renderingTarget: 'Web',
 		weAreHiring: !!article.config.switches.weAreHiring,
+		config,
+		hasLiveBlogTopAd: !!article.config.hasLiveBlogTopAd,
 	});
 
 	return { html: pageHtml, prefetchScripts };
@@ -260,14 +254,16 @@ export const renderBlocks = ({
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
+	const editionId = isEditionId(edition) ? edition : 'UK';
+
 	// Only currently supported for Web
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
+		updateLogoAdPartnerSwitch: !!switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
+		editionId,
 	};
-
-	const editionId = isEditionId(edition) ? edition : 'UK';
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -291,6 +287,11 @@ export const renderBlocks = ({
 				contributionsServiceUrl=""
 				keywordIds={keywordIds}
 				editionId={editionId}
+				onFirstPage={false}
+				keyEvents={[]}
+				filterKeyEvents={false}
+				availableTopics={[]}
+				selectedTopics={[]}
 			/>
 		</ConfigProvider>,
 	);

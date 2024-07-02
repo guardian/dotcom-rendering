@@ -5,9 +5,9 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -82,7 +82,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-template-columns: 219px 1px 1020px;
 					grid-template-areas:
 						'title  border  headline'
 						'.      border  standfirst'
@@ -92,13 +92,13 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 620px 0 300px;
 					grid-template-areas:
-						'title  border  headline    headline'
-						'.      border  standfirst  standfirst'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  submeta     submeta';
+						'title  border  headline    headline   headline'
+						'.      border  standfirst  standfirst standfirst'
+						'lines  border  media       media      media'
+						'meta   border  media       media      media'
+						'meta   border  submeta     submeta    submeta';
 				}
 
 				/*
@@ -109,7 +109,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${until.leftCol} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title     '
 						'headline  '
@@ -123,7 +123,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.desktop} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -136,7 +136,7 @@ const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -287,6 +287,12 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+	const inTagLinkTest =
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
+
+	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
 		<>
@@ -323,6 +329,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={true}
 							isImmersive={false}
 							displayRoundel={false}
@@ -443,6 +450,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 			<main
 				data-layout="PictureLayout"
 				id="maincontent"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
@@ -473,6 +481,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -490,10 +499,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											byline={article.byline}
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
-											}
-											hasStarRating={
-												typeof article.starRating ===
-												'number'
 											}
 											hasAvatar={displayAvatarUrl}
 										/>
@@ -532,9 +537,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										byline={article.byline}
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
-										}
-										hasStarRating={
-											article.starRating !== undefined
 										}
 									/>
 								</div>
@@ -725,6 +727,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -750,6 +753,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
 				)}

@@ -7,11 +7,10 @@ import {
 	space,
 	textSans12,
 	textSansBold12,
-} from '@guardian/source-foundations';
-import { SvgPinned } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgPinned } from '@guardian/source/react-components';
 import { timestampFormat } from 'datetime';
 import { border } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 type Props = {
@@ -23,14 +22,14 @@ type Props = {
 	edition: Edition;
 };
 
-const FirstPublished: FC<Props> = ({
+const FirstPublished = ({
 	firstPublished,
 	blockId,
 	isPinnedPost,
 	isOriginalPinnedPost,
 	format,
 	edition,
-}) => (
+}: Props) => (
 	<div
 		css={css`
 			display: flex;

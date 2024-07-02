@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headlineBold17, remSpace } from '@guardian/source-foundations';
+import { from, headlineBold17, remSpace } from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';
@@ -38,7 +38,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const GalleryStandfirst: React.FC<Props> = ({ standfirst, format }) =>
+const GalleryStandfirst = ({ standfirst, format }: Props) =>
 	maybeRender(standfirst.toOption(), (standfirstDoc) => (
 		<div css={styles(format)}>
 			{renderStandfirstText(standfirstDoc, format)}

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { until } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import type { DCRContainerType } from '../../../types/front';
 import type { ImagePositionType } from './ImageWrapper';
 
@@ -7,11 +7,14 @@ const padding = 20;
 
 type Props = {
 	children: React.ReactNode;
+	cardBackgroundColour: string;
 	imageType: CardImageType | undefined;
-	imagePosition: ImagePositionType;
+	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
+	isOnwardContent?: boolean;
+	hasBackgroundColour?: boolean;
 };
 
 const decideDirection = (imagePosition: ImagePositionType) => {
@@ -55,46 +58,62 @@ const minWidth = (minWidthInPixels?: number) => {
 };
 
 const decidePosition = (
-	imagePosition: ImagePositionType,
+	imagePositionOnDesktop: ImagePositionType,
 	imagePositionOnMobile: ImagePositionType,
 	imageType?: CardImageType,
 ) => {
 	if (imageType === 'avatar') {
-		switch (imagePosition) {
+		switch (imagePositionOnDesktop) {
 			case 'left':
 			case 'right': {
 				return css`
 					flex-direction: row-reverse;
-					${until.tablet} {
+					${from.tablet} {
 						flex-direction: row-reverse;
 					}
 				`;
 			}
 			default: {
 				return css`
-					flex-direction: column-reverse;
-					${until.tablet} {
-						flex-direction: row-reverse;
+					flex-direction: row-reverse;
+					${from.tablet} {
+						flex-direction: column-reverse;
 					}
 				`;
 			}
 		}
 	}
 	return css`
-		flex-direction: ${decideDirection(imagePosition)};
-		${until.tablet} {
-			flex-direction: ${decideDirection(imagePositionOnMobile)};
+		flex-direction: ${decideDirection(imagePositionOnMobile)};
+		${from.tablet} {
+			flex-direction: ${decideDirection(imagePositionOnDesktop)};
 		}
 	`;
 };
 
+const gapStyles = (
+	isOnwardContent?: boolean,
+	hasBackgroundColour?: boolean,
+) => {
+	if (isOnwardContent) {
+		return 0;
+	} else if (hasBackgroundColour) {
+		return `${space[1]}px`;
+	} else {
+		return `${space[2]}px`;
+	}
+};
+
 export const CardLayout = ({
 	children,
-	imagePosition,
+	cardBackgroundColour,
+	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	minWidthInPixels,
 	imageType,
 	containerType,
+	isOnwardContent,
+	hasBackgroundColour,
 }: Props) => (
 	<div
 		css={[
@@ -105,8 +124,16 @@ export const CardLayout = ({
 			containerType === 'fixed/video'
 				? videoWidth
 				: minWidth(minWidthInPixels),
-			decidePosition(imagePosition, imagePositionOnMobile, imageType),
+			decidePosition(
+				imagePositionOnDesktop,
+				imagePositionOnMobile,
+				imageType,
+			),
 		]}
+		style={{
+			backgroundColor: cardBackgroundColour,
+			gap: gapStyles(isOnwardContent, hasBackgroundColour),
+		}}
 	>
 		{children}
 	</div>

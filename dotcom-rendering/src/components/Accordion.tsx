@@ -5,17 +5,16 @@ import {
 	from,
 	headlineBold20,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 interface Props {
 	children: React.ReactNode;
 	accordionTitle: string;
-	context: 'keyEvents' | 'liveFeed';
 }
 
 const detailsStyles: SerializedStyles = css`
@@ -69,36 +68,21 @@ const arrowPosition: SerializedStyles = css`
 	}
 `;
 
-const backgroundColour = (
-	context: 'keyEvents' | 'liveFeed',
-): SerializedStyles => {
-	if (context === 'keyEvents') {
-		return css`
-			background-color: ${palette('--accordion-key-events-background')};
-			${from.desktop} {
-				background-color: transparent;
-			}
-		`;
-	}
-	return css`
-		background-color: ${palette('--accordion-live-feed-background')};
-		${from.desktop} {
-			background-color: transparent;
-		}
-	`;
-};
-
-const paddingBody: SerializedStyles = css`
+const contentStyles: SerializedStyles = css`
+	background-color: ${palette('--accordion-background')};
 	padding: ${space[3]}px;
+
 	${from.mobileLandscape} {
 		padding: ${space[3]}px ${space[5]}px;
 	}
+
 	${from.desktop} {
+		background-color: transparent;
 		padding: 0;
 	}
 `;
 
-export const Accordion = ({ children, accordionTitle, context }: Props) => {
+export const Accordion = ({ children, accordionTitle }: Props) => {
 	return (
 		<details open={true} css={detailsStyles}>
 			<summary css={titleRowStyles}>
@@ -110,7 +94,7 @@ export const Accordion = ({ children, accordionTitle, context }: Props) => {
 					<SvgChevronUpSingle />
 				</span>
 			</summary>
-			<div css={[backgroundColour(context), paddingBody]}>{children}</div>
+			<div css={contentStyles}>{children}</div>
 		</details>
 	);
 };

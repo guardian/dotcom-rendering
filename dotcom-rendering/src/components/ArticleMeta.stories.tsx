@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { browserThemeDecorator } from '../../.storybook/decorators/themeDecorator';
@@ -120,6 +120,31 @@ const branding: BrandingType = {
 		'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
 };
 
+const brandingForAdvertisingPartner: BrandingType = {
+	brandingType: { name: 'sponsored' },
+	sponsorName: 'theguardian.org',
+	logo: {
+		src: 'https://static.theguardian.com/commercial/sponsor/19/Dec/2022/57ba1d00-b2bd-4f6d-ba35-15a82b8d9507-0094b90a-bdb8-4e97-b866-dcf49179b29d-theguardian.org.png',
+		dimensions: {
+			width: 280,
+			height: 180,
+		},
+		link: 'https://theguardian.org/',
+		label: 'Advertising partner',
+	},
+	logoForDarkBackground: {
+		src: 'https://static.theguardian.com/commercial/sponsor/19/Dec/2022/58a1e08d-cd4a-47a5-966a-4846b0461642-46629471-cb0b-4c59-9a06-1ef23778b41f-theguardian.org2.png',
+		dimensions: {
+			width: 280,
+			height: 180,
+		},
+		link: 'https://theguardian.org/',
+		label: 'Advertising partner',
+	},
+	aboutThisLink:
+		'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
+};
+
 export const Branding: StoryObj = ({ format }: StoryArgs) => {
 	return (
 		<Wrapper>
@@ -142,6 +167,35 @@ export const Branding: StoryObj = ({ format }: StoryArgs) => {
 Branding.args = { format: defaultFormat };
 Branding.parameters = { config: { darkModeAvailable: true } };
 Branding.decorators = [browserThemeDecorator(defaultFormat)];
+
+export const BrandingForAdvertisingPartner: StoryObj = ({
+	format,
+}: StoryArgs) => {
+	return (
+		<Wrapper>
+			<ArticleMeta
+				branding={brandingForAdvertisingPartner}
+				format={format}
+				pageId=""
+				webTitle=""
+				byline="Lanre Bakare"
+				tags={tagsWithLargeBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
+			/>
+		</Wrapper>
+	);
+};
+BrandingForAdvertisingPartner.args = { format: defaultFormat };
+BrandingForAdvertisingPartner.parameters = {
+	config: { darkModeAvailable: true, updateLogoAdPartnerSwitch: true },
+};
+BrandingForAdvertisingPartner.decorators = [
+	browserThemeDecorator(defaultFormat),
+];
 
 export const BrandingLiveBlog: StoryObj = ({ format }: StoryArgs) => {
 	return (

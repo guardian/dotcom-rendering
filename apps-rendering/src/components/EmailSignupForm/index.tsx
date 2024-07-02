@@ -9,7 +9,7 @@ import {
 	remSpace,
 	textSansBold14,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	InlineError,
@@ -20,9 +20,8 @@ import {
 	SvgSpinner,
 	TextInput,
 	userFeedbackThemeDefault,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { background, fill, hover, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -99,11 +98,11 @@ const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
  * The UI for the NewsletterSignup might not use an HTML form for apps
  * when implemented
  */
-const EmailSignupForm: FC<Props> = ({
+const EmailSignupForm = ({
 	identityName,
 	successDescription,
 	format,
-}) => {
+}: Props) => {
 	return (
 		<>
 			<Label
@@ -143,9 +142,9 @@ const EmailSignupForm: FC<Props> = ({
 							flex-basis: ${pxToRem(335)}rem;
 
 							${darkModeCss`
-							background-color: ${background.newsletterSignUpFormDark(format)};
-							color: ${text.newsletterSignUpFormDark(format)};
-						`}
+								background-color: ${background.newsletterSignUpFormDark(format)};
+								color: ${text.newsletterSignUpFormDark(format)};
+							`}
 						`}
 					/>
 					<Button

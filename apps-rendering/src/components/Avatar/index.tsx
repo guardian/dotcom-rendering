@@ -3,14 +3,14 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import Img from 'components/Img';
 import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';
 import { pipe } from 'lib';
 import { background } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Setup ----- //
@@ -37,7 +37,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
-const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
+const Avatar = ({ contributors, ...format }: Props) => {
 	const [contributor] = contributors;
 
 	if (!isSingleContributor(contributors)) {

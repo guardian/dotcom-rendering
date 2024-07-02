@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headlineMedium17 } from '@guardian/source-foundations';
+import { headlineMedium17 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
@@ -14,7 +14,7 @@ const styles = css`
 		padding-top: 0;
 	}
 `;
-const AnalysisStandfirst: React.FC<Props> = ({ item }) => (
+const AnalysisStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst
 		item={item}
 		css={css(defaultStyles(getFormat(item)), styles)}

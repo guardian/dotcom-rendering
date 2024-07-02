@@ -1,40 +1,41 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, timeAgo } from '@guardian/libs';
-import { textSans, until } from '@guardian/source-foundations';
+import { timeAgo } from '@guardian/libs';
+import { from, textSans12, textSansBold12 } from '@guardian/source/foundations';
+import { cardHasDarkBackground } from '../../../lib/cardHelpers';
 import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
-import type { DCRContainerPalette } from '../../../types/front';
 import { DateTime } from '../../DateTime';
 
 type Props = {
 	format: ArticleFormat;
-	containerPalette?: DCRContainerPalette;
-	webPublicationDate: string;
+	absoluteServerTimes: boolean;
+	webPublication: {
+		date: string;
+		isWithinTwelveHours: boolean;
+	};
 	showClock?: boolean;
-	isDynamo?: true;
 	isOnwardContent?: boolean;
+	isTagPage: boolean;
 };
 
-const ageStyles = (
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
-	isDynamo?: true,
-	isOnwardsContent?: boolean,
-) => {
+const ageStyles = (format: ArticleFormat, isOnwardsContent?: boolean) => {
 	return css`
-		${textSans.xxsmall({ lineHeight: 'tight' })};
-		margin-top: -4px;
+		${textSans12};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		line-height: 1.25;
+		${from.tablet} {
+			line-height: 1.15;
+		}
+
 		color: ${isOnwardsContent
 			? palette('--card-footer-onwards-content')
 			: palette('--card-footer-text')};
 
-		/* Provide side padding for positioning and also to keep spacing
-    between any sibings (like Lines) */
-		padding-left: 5px;
-		padding-right: 5px;
-		${until.tablet} {
-			line-height: 1.25;
-		}
+		margin-top: -4px;
 
 		svg {
 			fill: ${isOnwardsContent
@@ -47,43 +48,46 @@ const ageStyles = (
 		}
 
 		> time {
-			${textSans.xxsmall({
-				fontWeight:
-					format.design === ArticleDesign.Gallery ||
-					format.design === ArticleDesign.Audio ||
-					format.design === ArticleDesign.Video
-						? `bold`
-						: `regular`,
-			})};
+			${cardHasDarkBackground(format) ? textSansBold12 : textSans12};
 		}
 	`;
 };
 
 export const CardAge = ({
 	format,
-	containerPalette,
-	webPublicationDate,
+	webPublication,
 	showClock,
-	isDynamo,
 	isOnwardContent,
+	absoluteServerTimes,
+	isTagPage,
 }: Props) => {
-	if (timeAgo(new Date(webPublicationDate).getTime()) === false) {
+	if (timeAgo(new Date(webPublication.date).getTime()) === false) {
 		return null;
 	}
 
 	return (
-		<span
-			css={ageStyles(format, containerPalette, isDynamo, isOnwardContent)}
-		>
+		<span css={ageStyles(format, isOnwardContent)}>
 			{showClock && <ClockIcon />}
-			<DateTime
-				date={new Date(webPublicationDate)}
-				display="relative"
-				editionId={'UK'}
-				showWeekday={false}
-				showDate={true}
-				showTime={false}
-			/>
+			{isTagPage ? (
+				<DateTime
+					date={new Date(webPublication.date)}
+					display={'absolute'}
+					editionId={'UK'}
+					showWeekday={false}
+					showDate={!webPublication.isWithinTwelveHours}
+					showTime={true}
+				/>
+			) : (
+				<DateTime
+					date={new Date(webPublication.date)}
+					display={'relative'}
+					absoluteServerTimes={absoluteServerTimes}
+					editionId={'UK'}
+					showWeekday={false}
+					showDate={true}
+					showTime={false}
+				/>
+			)}
 		</span>
 	);
 };

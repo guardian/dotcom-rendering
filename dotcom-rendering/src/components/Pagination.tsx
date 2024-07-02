@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, palette, space, textSans15 } from '@guardian/source-foundations';
+import { from, palette, space, textSans15 } from '@guardian/source/foundations';
 import {
 	Hide,
 	LinkButton,
@@ -7,7 +7,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 type Props = {

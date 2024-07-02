@@ -3,7 +3,7 @@ import {
 	headlineMedium17,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { darkModeCss } from 'styles';
@@ -30,7 +30,7 @@ interface Props {
 	item: Item;
 }
 
-const LiveBlogStandfirst: React.FC<Props> = ({ item }) => (
+const LiveBlogStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst
 		item={item}
 		css={css(defaultStyles(getFormat(item)), liveBlogStyles)}

@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import type { KeyEventCard as KeyEventCardType } from '../../fixtures/manual/key-events';
 import { events } from '../../fixtures/manual/key-events';
@@ -58,6 +58,7 @@ export const SummaryCard = () => (
 			title={events[0].title}
 			filterKeyEvents={false}
 			isSummary={true}
+			absoluteServerTimes={true}
 		/>
 	</ul>
 );
@@ -73,6 +74,7 @@ export const StandardCard = () => (
 			title={events[0].title}
 			isSummary={events[0].isSummary}
 			filterKeyEvents={false}
+			absoluteServerTimes={true}
 		/>
 	</ul>
 );
@@ -89,6 +91,7 @@ export const MultipleCards = () => (
 				title={event.title}
 				isSummary={event.isSummary}
 				filterKeyEvents={false}
+				absoluteServerTimes={true}
 			/>
 		))}
 	</ul>

@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headlineLight24, remSpace } from '@guardian/source-foundations';
+import { from, headlineLight24, remSpace } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import { grid } from 'grid/grid';
@@ -76,12 +76,12 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const ImmersiveStandfirst: React.FC<Props> = ({
+const ImmersiveStandfirst = ({
 	standfirst,
 	format,
 	byline,
 	bylineHtml,
-}) =>
+}: Props) =>
 	maybeRender(standfirst.toOption(), (standfirstDoc) => (
 		<div css={styles(format)}>
 			{renderContent(standfirstDoc, format, byline, bylineHtml)}

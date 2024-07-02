@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { articleBold17, breakpoints } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+import { articleBold17, breakpoints } from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { TrailType } from '../types/trails';
@@ -63,10 +63,7 @@ const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
  */
 export const MiniCard = ({ trail, showImage, containerPalette }: Props) => {
 	return (
-		<ContainerOverrides
-			containerPalette={containerPalette}
-			isDynamo={false}
-		>
+		<ContainerOverrides containerPalette={containerPalette}>
 			<Link
 				href={trail.url}
 				priority="secondary"

@@ -4,7 +4,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { StoryObj } from '@storybook/react';
 import fetchMock from 'fetch-mock';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
@@ -265,10 +265,11 @@ export const Headlines: StoryObj = ({ format }: StoryProps) => {
 			<Carousel
 				heading="More on this story"
 				trails={trails}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				format={format}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -289,10 +290,11 @@ export const SingleItemCarousel = () => {
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				format={defaultFormat}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -338,7 +340,7 @@ export const SingleOpinionCarousel = () => {
 			<Carousel
 				heading="More on this story"
 				trails={[comment]}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				format={{
 					theme: Pillar.Opinion,
 					design: ArticleDesign.Comment,
@@ -346,6 +348,7 @@ export const SingleOpinionCarousel = () => {
 				}}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -375,6 +378,7 @@ export const Immersive = () => {
 					}}
 					leftColSize="compact"
 					discussionApiUrl={discussionApiUrl}
+					absoluteServerTimes={true}
 				/>
 			</Section>
 		</>
@@ -419,6 +423,7 @@ export const SpecialReportAlt = () => {
 				format={specialReportAltFormat}
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -487,6 +492,7 @@ export const AllCards = () => {
 				theme: ArticleSpecial.SpecialReport,
 				design: ArticleDesign.Standard,
 			},
+			kickerText: 'Special report',
 			webPublicationDate: '2022-07-12T16:24:48.000Z',
 			headline: 'Special report example',
 			shortUrl: 'https://www.theguardian.com/p/yzmgf',
@@ -580,7 +586,7 @@ export const AllCards = () => {
 		},
 		{
 			url: 'https://www.theguardian.com/music/2023/dec/04/the-20-best-songs-of-2023',
-			linkText: 'Galleries example',
+			linkText: 'Gallery example',
 			showByline: false,
 			byline: 'Aneesa Ahmed, Ben Beaumont-Thomas and Laura Snapes',
 			image: {
@@ -590,7 +596,7 @@ export const AllCards = () => {
 			format: {
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Culture,
-				design: ArticleDesign.Picture,
+				design: ArticleDesign.Gallery,
 			},
 			webPublicationDate: '2023-12-04T06:00:35.000Z',
 			headline: 'Galleries example',
@@ -628,10 +634,11 @@ export const AllCards = () => {
 			<Carousel
 				heading="All the card types"
 				trails={allCardTypesTrail}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				leftColSize="compact"
 				discussionApiUrl={discussionApiUrl}
 				format={defaultFormat}
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	);
@@ -650,11 +657,12 @@ export const FrontCarousel = () => (
 				isOnwardContent={false}
 				heading="More on this story"
 				trails={trails}
-				onwardsSource="unknown-source"
+				onwardsSource="more-on-this-story"
 				leftColSize="compact"
 				url={'https://www.theguardian.com'}
 				discussionApiUrl={discussionApiUrl}
-				palette={'BreakingPalette'}
+				palette="PodcastPalette"
+				absoluteServerTimes={true}
 			/>
 		</Section>
 	</>

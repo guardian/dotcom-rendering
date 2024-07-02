@@ -3,7 +3,7 @@ import {
 	from,
 	headlineMedium28,
 	headlineMedium34,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
@@ -18,7 +18,7 @@ interface Props {
 	item: Item;
 }
 
-const MediaHeadline: React.FC<Props> = ({ item }) => (
+const MediaHeadline = ({ item }: Props) => (
 	<DefaultHeadline
 		item={item}
 		styles={css(defaultStyles(item), mediaStyles)}

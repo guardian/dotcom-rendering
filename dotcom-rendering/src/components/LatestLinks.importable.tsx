@@ -5,19 +5,21 @@ import {
 	space,
 	textSans14,
 	textSansBold14,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
+import { useConfig } from './ConfigContext';
 import { ContainerOverrides } from './ContainerOverrides';
 import { DateTime } from './DateTime';
 
 type Props = {
 	id: string;
 	direction: 'horizontal' | 'vertical';
+	absoluteServerTimes: boolean;
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
 };
@@ -33,7 +35,7 @@ const vertical = css`
 const linkStyles = css`
 	${textSans14}
 	overflow: hidden;
-	flex-grow: 1;
+	flex: 1; /* Distribute space evenly.  */
 `;
 
 const dividerStyles = css`
@@ -92,6 +94,7 @@ export const LatestLinks = ({
 	direction,
 	isDynamo,
 	containerPalette,
+	absoluteServerTimes,
 }: Props) => {
 	const { data } = useApi<{
 		blocks: Array<{
@@ -111,17 +114,19 @@ export const LatestLinks = ({
 			: palette.neutral[86]};
 	`;
 
-	const height = isDynamo
-		? `calc(5px + 4 * ${lineHeights.regular}em)`
-		: `calc(4 * ${lineHeights.regular}em)`;
+	/** Reserve space for the latest links to avoid CLS while loading */
+	const minHeight = isDynamo
+		? `calc(${space[1]}px + 4 * ${lineHeights.regular}em);`
+		: `calc(4 * ${lineHeights.regular}em);`;
 
 	const ulStyle = css`
 		display: flex;
-		gap: 5px;
-		padding-bottom: ${space[2]}px;
+		gap: ${space[1]}px;
 		box-sizing: border-box;
-		height: ${height};
+		min-height: ${minHeight};
 	`;
+
+	const { editionId } = useConfig();
 
 	return (
 		<ul
@@ -137,56 +142,60 @@ export const LatestLinks = ({
 			]}
 		>
 			{data && data.blocks.length >= 3 ? (
-				data.blocks.slice(0, 3).map((block, index) => (
-					<>
-						<ContainerOverrides
-							containerPalette={containerPalette}
-							isDynamo={!!isDynamo}
-						>
-							{index > 0 && (
-								<li
-									key={block.id + ' : divider'}
-									css={[dividerStyles, dividerColour]}
-								></li>
-							)}
-							<li
-								key={block.id}
-								css={linkStyles}
-								className={'reveal'}
+				data.blocks
+					.filter((block) => block.body.trim() !== '')
+					.slice(0, 3)
+					.map((block, index) => (
+						<>
+							<ContainerOverrides
+								containerPalette={containerPalette}
 							>
-								<WithLink
-									linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
-									isDynamo={isDynamo}
+								{index > 0 && (
+									<li
+										key={block.id + ' : divider'}
+										css={[dividerStyles, dividerColour]}
+									></li>
+								)}
+								<li
+									key={block.id}
+									css={linkStyles}
+									className={'reveal'}
 								>
-									<div
-										css={bold}
-										style={{
-											color: themePalette(
-												'--card-kicker-text',
-											),
-										}}
+									<WithLink
+										linkTo={`${id}?page=with:block-${block.id}#block-${block.id}`}
 									>
-										<DateTime
-											date={
-												new Date(
-													block.publishedDateTime,
-												)
-											}
-											display="relative"
-											editionId={'UK'}
-											showWeekday={false}
-											showDate={true}
-											showTime={false}
-										/>
-									</div>
-									<span className="show-underline">
-										{extractAboutThreeLines(block.body)}
-									</span>
-								</WithLink>
-							</li>
-						</ContainerOverrides>
-					</>
-				))
+										<div
+											css={bold}
+											style={{
+												color: themePalette(
+													'--card-kicker-text',
+												),
+											}}
+										>
+											<DateTime
+												date={
+													new Date(
+														block.publishedDateTime,
+													)
+												}
+												display="relative"
+												absoluteServerTimes={
+													absoluteServerTimes
+												}
+												editionId={editionId}
+												showWeekday={false}
+												showDate={true}
+												showTime={false}
+											/>
+										</div>
+										<span className="show-underline">
+											{extractAboutThreeLines(block.body)}
+										</span>
+									</WithLink>
+								</li>
+							</ContainerOverrides>
+						</>
+					))
 			) : (
 				<>
 					<li css={linkStyles} />

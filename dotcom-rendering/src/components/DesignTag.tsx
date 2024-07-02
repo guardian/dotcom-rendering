@@ -5,8 +5,8 @@ import {
 	headlineBold20,
 	space,
 	until,
-} from '@guardian/source-foundations';
-import { LinkButton } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { LinkButton } from '@guardian/source/react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 

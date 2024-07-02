@@ -5,7 +5,7 @@ import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
 import { fontsCss } from '../src/lib/fonts-css';
-import { resets } from '@guardian/source-foundations';
+import { resets } from '@guardian/source/foundations';
 
 import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';
@@ -22,10 +22,8 @@ import {
 Lazy.disabled = isChromatic();
 Picture.disableLazyLoading = isChromatic();
 
-if (isChromatic()) {
-	// Fix the date to prevent false negatives
-	MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
-}
+// Fix the date to prevent false negatives
+MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
 
 mockRESTCalls();
 
@@ -147,9 +145,11 @@ export default {
 	args: {
 		config: { renderingTarget: 'Web', darkModeAvailable: false },
 	},
+
 	globalTypes: {
 		globalColourScheme,
 	},
+
 	decorators: [
 		// @ts-expect-error -- this global decorator takes an option parameter
 		ConfigContextDecorator,
@@ -159,6 +159,7 @@ export default {
 			return Story();
 		},
 	],
+
 	parameters: {
 		viewport: {
 			viewports: guardianViewports,

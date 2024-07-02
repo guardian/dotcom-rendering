@@ -6,7 +6,7 @@ import {
 	space,
 	textSans15,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Hide,
 	LinkButton,
@@ -14,9 +14,9 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { border, hover, text } from 'palette';
-import type { FC, ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 type Props = {
@@ -29,7 +29,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const NavWrapper: FC<{ children: ReactNode }> = ({ children }) => (
+const NavWrapper = ({ children }: { children: ReactNode }) => (
 	<nav
 		// Used to scroll the page to this point when using permalinks
 		id="liveblog-navigation"
@@ -45,10 +45,13 @@ const NavWrapper: FC<{ children: ReactNode }> = ({ children }) => (
 	</nav>
 );
 
-const FlexSection: FC<{
+const FlexSection = ({
+	hide = false,
+	children,
+}: {
 	hide?: boolean;
 	children: ReactNode;
-}> = ({ hide = false, children }) => (
+}) => (
 	<section
 		css={css`
 			display: flex;
@@ -60,7 +63,7 @@ const FlexSection: FC<{
 	</section>
 );
 
-const Bold: FC<{ children: ReactNode }> = ({ children }) => (
+const Bold = ({ children }: { children: ReactNode }) => (
 	<div
 		css={css`
 			font-weight: bold;
@@ -70,9 +73,7 @@ const Bold: FC<{ children: ReactNode }> = ({ children }) => (
 	</div>
 );
 
-const Position: FC<{
-	children: ReactNode;
-}> = ({ children }) => (
+const Position = ({ children }: { children: ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
@@ -109,7 +110,7 @@ const decidePaginationCss = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
-const Pagination: FC<Props> = ({
+const Pagination = ({
 	currentPage,
 	totalPages,
 	oldest,
@@ -117,7 +118,7 @@ const Pagination: FC<Props> = ({
 	newest,
 	newer,
 	format,
-}) => {
+}: Props) => {
 	return (
 		<NavWrapper>
 			<FlexSection hide={currentPage === 1}>

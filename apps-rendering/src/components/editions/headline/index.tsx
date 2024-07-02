@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { FontWeight, LineHeight } from '@guardian/source-foundations';
+import type { FontWeight, LineHeight } from '@guardian/source/foundations';
 import {
 	border,
 	from,
@@ -14,16 +14,14 @@ import {
 	headlineMedium42,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
-
-import { SvgQuote } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgQuote } from '@guardian/source/react-components';
 import { OptionKind } from '../../../../vendor/@guardian/types/index';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import { text } from 'palette';
-import type { FC } from 'react';
 import Series from '../series';
 import {
 	articleWidthStyles,
@@ -268,7 +266,7 @@ interface Props {
 	item: Item;
 }
 
-const Headline: FC<Props> = ({ item }) => {
+const Headline = ({ item }: Props) => {
 	const format = getFormat(item);
 	const kickerColor = text.editionsKicker(format);
 	const contributor = index(0)(item.contributors);

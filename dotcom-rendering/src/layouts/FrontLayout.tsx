@@ -6,8 +6,8 @@ import {
 	brandBorder,
 	brandLine,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
@@ -158,8 +158,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const { abTests } = front.config;
+
 	const inUpdatedHeaderABTest =
-		front.config.abTests.updatedHeaderDesignVariant === 'variant';
+		abTests.updatedHeaderDesignVariant === 'variant';
+
+	const { updateLogoAdPartner, absoluteServerTimes = false } =
+		front.config.switches;
 
 	return (
 		<>
@@ -201,6 +206,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
+							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={front.config.idApiUrl}
 							showSubNav={!isPaidContent}
 							hasPageSkin={hasPageSkin}
@@ -287,6 +293,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 													NAV.currentNavLink
 												}
 												position="header"
+												currentPillarTitle={
+													front.nav.currentPillarTitle
+												}
 											/>
 										</Island>
 									</Section>
@@ -456,6 +465,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
+									updateLogoAdPartnerSwitch={
+										updateLogoAdPartner
+									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -516,6 +528,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.containerPalette
 										}
 										imageLoading={imageLoading}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
 									/>
 								</LabsSection>
 								{decideMerchHighAndMobileAdSlots(
@@ -595,6 +610,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											discussionApiUrl={
 												front.config.discussionApiUrl
 											}
+											absoluteServerTimes={
+												absoluteServerTimes
+											}
 										/>
 									</Island>
 								</Section>
@@ -661,6 +679,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
+								updateLogoAdPartnerSwitch={updateLogoAdPartner}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -675,6 +694,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										)
 									}
 									imageLoading={imageLoading}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</FrontSection>
 							{decideMerchHighAndMobileAdSlots(
@@ -718,6 +738,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							position="footer"
+							currentPillarTitle={front.nav.currentPillarTitle}
 						/>
 					</Island>
 				</Section>

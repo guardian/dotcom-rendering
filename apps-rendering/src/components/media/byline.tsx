@@ -2,14 +2,14 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, remSpace, textSans14 } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans14 } from '@guardian/source/foundations';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import Dateline from 'components/Dateline';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { pipe } from 'lib';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { renderText } from '../../renderer';
 
 // ----- Styles ----- //
@@ -44,7 +44,7 @@ interface Props {
 	item: Item;
 }
 
-const Byline: FC<Props> = ({ publicationDate, className, item }) => {
+const Byline = ({ publicationDate, className, item }: Props) => {
 	const byline = pipe(
 		item.bylineHtml,
 		map((html) => <address>{renderText(html, getFormat(item))}</address>),

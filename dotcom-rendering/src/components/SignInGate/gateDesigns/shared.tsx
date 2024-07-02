@@ -9,7 +9,7 @@ import {
 	text,
 	textSans17,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 
 export const signInGateContainer = css`
 	max-width: 617px;

@@ -8,17 +8,17 @@ import {
 	remSpace,
 	textSans14,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import Anchor from 'components/Anchor';
 import ListItem from 'components/ListItem';
 import OrderedList from 'components/OrderedList';
 import type { Outline } from 'outline';
 import { border, text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -172,10 +172,7 @@ const verticalLineStyle = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
-const TocTextElement: React.FC<TextElementProps> = ({
-	node,
-	key,
-}): ReactElement => {
+const TocTextElement = ({ node, key }: TextElementProps): ReactElement => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map((item, i) => {
 		return <TocTextElement node={item} key={i.toString()} />;
@@ -229,7 +226,7 @@ const TocTextElement: React.FC<TextElementProps> = ({
 	}
 };
 
-const TableOfContents: FC<Props> = ({ format, outline }) => {
+const TableOfContents = ({ format, outline }: Props) => {
 	return (
 		<details open={outline.length < 5} css={detailsStyles(format)}>
 			<summary css={summaryStyles(format)}>

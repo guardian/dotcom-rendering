@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans15 } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source/foundations';
 import { palette as schemedPalette } from '../../palette';
 
 type Props = {

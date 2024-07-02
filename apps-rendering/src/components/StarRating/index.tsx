@@ -7,11 +7,11 @@ import {
 	brandAltLine,
 	from,
 	remSpace,
-} from '@guardian/source-foundations';
-import { SvgStar } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgStar } from '@guardian/source/react-components';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Subcomponents ----- //
@@ -68,7 +68,7 @@ interface Props {
 	item: Item;
 }
 
-const StarRating: FC<Props> = ({ item }) =>
+const StarRating = ({ item }: Props) =>
 	item.design === ArticleDesign.Review
 		? maybeRender(item.starRating, (starRating) => (
 				<div css={styles}>{stars(starRating)}</div>

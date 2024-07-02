@@ -6,7 +6,7 @@ import {
 	body,
 	headlineBold24,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
@@ -120,11 +120,11 @@ export const ArticleBody = ({
 	idUrl,
 	isSensitive,
 	isDev,
-	onFirstPage,
-	keyEvents,
-	filterKeyEvents,
-	availableTopics,
-	selectedTopics,
+	onFirstPage = false,
+	keyEvents = [],
+	filterKeyEvents = false,
+	availableTopics = [],
+	selectedTopics = [],
 	keywordIds,
 	abTests,
 	tableOfContents,

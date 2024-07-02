@@ -1,30 +1,30 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
-import { decidePalette } from '../../../lib/decidePalette';
-import type { DCRContainerPalette } from '../../../types/front';
+import { ArticleSpecial } from '@guardian/libs';
+import { space } from '@guardian/source/foundations';
 
 type Props = {
 	format: ArticleFormat;
-	containerPalette?: DCRContainerPalette;
-	displayLines?: boolean;
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	supportingContent?: JSX.Element;
 	leftAlign?: boolean;
+	showLivePlayable?: boolean;
 };
 
 const spacing = (leftAlign: boolean) => css`
 	display: flex;
 	justify-content: ${leftAlign ? 'flex-start' : 'space-between'};
 	align-items: center;
+	> {
+		*:not(:first-child) {
+			margin-left: ${space[1]}px;
+		}
+	}
 `;
 
 const margins = css`
-	margin-top: 3px;
-	margin-bottom: 3px;
+	margin-top: ${space[1]}px;
 `;
 
 const flexEnd = css`
@@ -34,50 +34,17 @@ const flexEnd = css`
 
 export const CardFooter = ({
 	format,
-	containerPalette,
-	displayLines,
 	age,
 	commentCount,
 	cardBranding,
 	supportingContent,
 	leftAlign = false,
+	showLivePlayable = false,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
-
-	const overrides =
-		containerPalette && decideContainerOverrides(containerPalette);
+	if (showLivePlayable) return null;
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer css={margins}>{cardBranding}</footer>;
-	}
-
-	if (
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter
-	) {
-		return (
-			<footer css={margins}>
-				{supportingContent}
-				<div css={spacing(leftAlign)}>
-					{age}
-					{displayLines && (
-						<StraightLines
-							cssOverrides={css`
-								/* Fill the space */
-								flex: 1;
-								align-self: flex-end;
-							`}
-							color={
-								overrides?.border.lines ?? palette.border.lines
-							}
-							count={4}
-						/>
-					)}
-					{commentCount}
-				</div>
-			</footer>
-		);
 	}
 
 	if (age) {

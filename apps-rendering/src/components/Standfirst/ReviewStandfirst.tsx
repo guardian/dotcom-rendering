@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headlineLight20 } from '@guardian/source-foundations';
+import { headlineLight20 } from '@guardian/source/foundations';
 import StarRating from 'components/StarRating';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -16,7 +16,7 @@ interface Props {
 	item: Item;
 }
 
-const ReviewStandfirst: React.FC<Props> = ({ item }) => (
+const ReviewStandfirst = ({ item }: Props) => (
 	<>
 		<StarRating item={item} />
 		<DefaultStandfirst

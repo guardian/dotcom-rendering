@@ -5,9 +5,9 @@ import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -33,7 +33,7 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -87,18 +87,18 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 					grid-template-areas:
-						'title  border  headline    headline'
-						'lines  border  media       media'
-						'meta   border  media       media'
-						'meta   border  standfirst  right-column'
-						'.      border  body        right-column'
-						'.      border  .           right-column';
+						'title  border  headline   headline headline'
+						'lines  border  media      media    media'
+						'meta   border  media      media    media'
+						'meta   border  standfirst .        right-column'
+						'.      border  body       .        right-column'
+						'.      border  .          .        right-column';
 				}
 
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+					grid-template-columns: 140px 1px 620px 300px;
 					grid-template-areas:
 						'title  border  headline    headline'
 						'lines  border  media       media'
@@ -115,7 +115,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
+					grid-template-columns: 620px 300px;
 					grid-template-areas:
 						'title      right-column'
 						'headline   right-column'
@@ -129,7 +129,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.desktop} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -142,7 +142,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'media'
 						'title'
@@ -250,6 +250,13 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const inTagLinkTest =
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
+
+	const { absoluteServerTimes = false } = article.config.switches;
+
 	return (
 		<>
 			{isWeb && (
@@ -294,6 +301,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										idApiUrl={article.config.idApiUrl}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
 										showSubNav={false}
 										isImmersive={false}
 										displayRoundel={false}
@@ -522,6 +532,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main
 				data-layout="ShowcaseLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 				id="maincontent"
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
@@ -577,6 +588,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -591,9 +603,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									byline={article.byline}
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										article.starRating !== undefined
 									}
 								/>
 							</PositionHeadline>
@@ -813,17 +822,28 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								`}
 							>
 								<RightColumn>
-									<MostViewedRightWithAd
-										format={format}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											!!article.config
-												.shouldHideReaderRevenue
-										}
-									/>
+									<Island
+										priority="feature"
+										defer={{
+											until: 'visible',
+											// Provide a much higher value for the top margin for the intersection observer
+											// This is because the most viewed would otherwise only be lazy loaded when the
+											// bottom of the container intersects with the viewport
+											rootMargin: '700px 100px',
+										}}
+									>
+										<MostViewedRightWithAd
+											format={format}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											renderAds={renderAds}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
 								</RightColumn>
 							</div>
 						</GridItem>
@@ -864,6 +884,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -886,6 +907,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 

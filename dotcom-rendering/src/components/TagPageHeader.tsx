@@ -7,7 +7,7 @@ import {
 	palette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Fragment, type ReactNode } from 'react';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { isElement, parseHtml } from '../lib/domUtils';
@@ -249,6 +249,10 @@ const imageStyle = css`
 	}
 `;
 
+const crestStyle = css`
+	height: 5rem;
+`;
+
 const Picture = ({ image }: { image: string }) => {
 	const sources = generateSources(image, [
 		{ breakpoint: breakpoints.mobile, width: 80 },
@@ -266,6 +270,9 @@ const Picture = ({ image }: { image: string }) => {
 		</picture>
 	);
 };
+
+const isFootballCrest = (image: string) =>
+	image.startsWith('https://sport.guim.co.uk/football/crests/');
 
 export const TagPageHeader = ({
 	title,
@@ -298,7 +305,15 @@ export const TagPageHeader = ({
 
 			{image !== undefined && (
 				<div css={[sectionImage, paddings]}>
-					<Picture image={image} />
+					{isFootballCrest(image) ? (
+						<img
+							css={crestStyle}
+							src={image}
+							alt={`${title} football crest`}
+						/>
+					) : (
+						<Picture image={image} />
+					)}
 				</div>
 			)}
 

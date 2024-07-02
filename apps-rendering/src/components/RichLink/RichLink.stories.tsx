@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { from, remSpace } from '@guardian/source-foundations';
-import type { FC } from 'react';
+import { from, remSpace } from '@guardian/source/foundations';
 import RichLink, { richLinkWidth } from './';
 
 const overrideStyle = css`
@@ -14,7 +13,7 @@ const url = 'https://theguardian.com';
 const linkText =
 	'Axolotls in crisis: the fight to save the water monster of Mexico City.';
 
-const Default: FC = () => (
+const Default = () => (
 	<section css={overrideStyle}>
 		<RichLink
 			format={{
@@ -33,7 +32,7 @@ export default {
 	title: 'AR/Rich Link',
 };
 
-const Analysis: FC = () => (
+const Analysis = () => (
 	<div
 		css={css`
 			background-color: #fff4f2;

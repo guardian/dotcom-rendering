@@ -9,12 +9,11 @@ import {
 	headlineBold17,
 	headlineBold20,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';
 import { background, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -62,7 +61,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const GallerySeries: FC<Props> = (props) =>
+const GallerySeries = (props: Props) =>
 	maybeRender(props.series.toOption(), (series) => (
 		<nav css={styles}>
 			<a href={series.webUrl} css={linkStyles(props.format)}>

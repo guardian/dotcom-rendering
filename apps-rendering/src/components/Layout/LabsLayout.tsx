@@ -6,8 +6,8 @@ import {
 	breakpoints,
 	from,
 	neutral,
-} from '@guardian/source-foundations';
-import { DottedLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
@@ -22,7 +22,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { pipe } from 'lib';
-import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -56,7 +55,7 @@ interface Props {
 	item: Exclude<Item, LiveBlog | DeadBlog>;
 }
 
-const LabsLayout: FC<Props> = ({ item }) => {
+const LabsLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 	return (
 		<main css={[Styles, DarkStyles]}>

@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
-import { isString, type OphanAction } from '@guardian/libs';
-import { space, until } from '@guardian/source-foundations';
+import {
+	isString,
+	type OphanAction,
+	type OphanComponentEvent,
+} from '@guardian/libs';
+import { space, until } from '@guardian/source/foundations';
 import {
 	Button,
 	InlineError,
@@ -9,7 +13,7 @@ import {
 	SvgReload,
 	SvgSpinner,
 	TextInput,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { CSSProperties, FormEvent, ReactEventHandler } from 'react';
 import { useEffect, useRef, useState } from 'react';
 // Note - the package also exports a component as a named export "ReCAPTCHA",
@@ -30,9 +34,12 @@ import { useConfig } from './ConfigContext';
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
+type OphanABTest = OphanComponentEvent['abTest'];
+
 type Props = {
 	newsletterId: string;
 	successDescription: string;
+	abTest?: OphanABTest;
 };
 
 const formStyles = css`
@@ -186,6 +193,7 @@ const sendTracking = (
 	newsletterId: string,
 	eventDescription: EventDescription,
 	renderingTarget: RenderingTarget,
+	abTest?: OphanABTest,
 ): void => {
 	let action: OphanAction = 'CLICK';
 
@@ -231,6 +239,7 @@ const sendTracking = (
 				componentType: 'NEWSLETTER_SUBSCRIPTION',
 				id: `AR SecureSignup ${newsletterId}`,
 			},
+			abTest,
 		},
 		renderingTarget,
 	);
@@ -245,7 +254,11 @@ const sendTracking = (
  *
  * [`EmailSignup` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-emailsignup)
  */
-export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
+export const SecureSignup = ({
+	newsletterId,
+	successDescription,
+	abTest,
+}: Props) => {
 	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>();
 	const [signedInUserEmail, setSignedInUserEmail] = useState<string>();
@@ -271,7 +284,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			document.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
 
-		sendTracking(newsletterId, 'form-submission', renderingTarget);
+		sendTracking(newsletterId, 'form-submission', renderingTarget, abTest);
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
 			buildFormData(emailAddress, newsletterId, token),
@@ -288,6 +301,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 			renderingTarget,
+			abTest,
 		);
 	};
 
@@ -298,29 +312,44 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	};
 
 	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
-		sendTracking(newsletterId, 'captcha-load-error', renderingTarget);
+		sendTracking(
+			newsletterId,
+			'captcha-load-error',
+			renderingTarget,
+			abTest,
+		);
 		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
 		recaptchaRef.current?.reset();
 	};
 
 	const handleCaptchaComplete = (token: string | null) => {
 		if (!token) {
-			sendTracking(newsletterId, 'captcha-not-passed', renderingTarget);
+			sendTracking(
+				newsletterId,
+				'captcha-not-passed',
+				renderingTarget,
+				abTest,
+			);
 			return;
 		}
-		sendTracking(newsletterId, 'captcha-passed', renderingTarget);
+		sendTracking(newsletterId, 'captcha-passed', renderingTarget, abTest);
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
 			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
-			sendTracking(newsletterId, 'form-submit-error', renderingTarget);
+			sendTracking(
+				newsletterId,
+				'form-submit-error',
+				renderingTarget,
+				abTest,
+			);
 			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);
 		});
 	};
 
 	const handleClick = (): void => {
-		sendTracking(newsletterId, 'click-button', renderingTarget);
+		sendTracking(newsletterId, 'click-button', renderingTarget, abTest);
 	};
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -329,7 +358,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			return;
 		}
 		setErrorMessage(undefined);
-		sendTracking(newsletterId, 'open-captcha', renderingTarget);
+		sendTracking(newsletterId, 'open-captcha', renderingTarget, abTest);
 		recaptchaRef.current?.execute();
 	};
 

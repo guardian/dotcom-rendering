@@ -5,11 +5,10 @@ import {
 	headlineBold17,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { border, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
@@ -63,7 +62,7 @@ interface Props {
 	item: Item;
 }
 
-const DeadBlogStandfirst: FC<Props> = ({ item }) => {
+const DeadBlogStandfirst = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

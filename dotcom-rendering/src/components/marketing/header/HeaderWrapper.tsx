@@ -3,11 +3,11 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/4925ef1e0ced5d221f1122afe79f93bd7448e0e5/packages/modules/src/modules/headers/HeaderWrapper.tsx
  */
+import type { OphanAction } from '@guardian/libs';
 import { headerPropsSchema } from '@guardian/support-dotcom-components';
 import type {
 	Cta,
 	HeaderProps,
-	OphanAction,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useCallback, useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
@@ -30,7 +30,6 @@ export interface HeaderRenderedContent {
 	subheading: string;
 	primaryCta: HeaderEnrichedCta | null;
 	secondaryCta: HeaderEnrichedCta | null;
-	benefits: string[] | null;
 }
 
 export interface HeaderRenderProps {
@@ -77,14 +76,12 @@ export const headerWrapper = (
 		const secondaryCta = content.secondaryCta
 			? buildEnrichedCta(content.secondaryCta)
 			: null;
-		const benefits = content.benefits ?? null;
 
 		const renderedContent: HeaderRenderedContent = {
 			heading: content.heading,
 			subheading: content.subheading,
 			primaryCta,
 			secondaryCta,
-			benefits,
 		};
 
 		const mobilePrimaryCta = mobileContent?.primaryCta

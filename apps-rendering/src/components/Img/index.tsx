@@ -4,11 +4,10 @@ import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleElementRole } from '@guardian/libs';
-import { neutral } from '@guardian/source-foundations';
+import { neutral } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Image } from 'image';
 import { createElement as h } from 'react';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -50,7 +49,7 @@ const styles = (
 		  `;
 };
 
-const Img: FC<Props> = ({ image, sizes, className, format }) =>
+const Img = ({ image, sizes, className, format }: Props) =>
 	h('picture', null, [
 		h('source', {
 			key: `${image.src}-dpr2Srcset`,

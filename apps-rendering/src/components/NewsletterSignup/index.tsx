@@ -10,13 +10,12 @@ import {
 	headlineBold20,
 	remSpace,
 	sport,
-	textSans,
+	textSans14,
 	textSansBold14,
-} from '@guardian/source-foundations';
-import { SvgNewsletter } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgNewsletter } from '@guardian/source/react-components';
 import type { NewsletterSignUp } from 'bodyElement';
 import { background, border, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import InlineSkipToWrapper from '../InlineSkipToWrapper';
@@ -75,7 +74,13 @@ const titleStyles = (theme: ArticleTheme): SerializedStyles => css`
 `;
 
 const descriptionStyles = css`
-	${textSans.xsmall({ lineHeight: 'tight' })}
+	${textSans14};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 	margin-bottom: ${remSpace[2]};
 `;
 
@@ -108,12 +113,12 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
-const NewsletterSignup: FC<Props> = ({
+const NewsletterSignup = ({
 	format,
 	element,
 	showByDefault = false,
 	skipLinkIdSuffix = '',
-}) => {
+}: Props) => {
 	const {
 		name,
 		frequency,

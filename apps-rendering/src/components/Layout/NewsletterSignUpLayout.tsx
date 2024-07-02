@@ -9,8 +9,8 @@ import {
 	textSans14,
 	textSansBold14,
 	until,
-} from '@guardian/source-foundations';
-import { SvgClock, SvgNewsletter } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgClock, SvgNewsletter } from '@guardian/source/react-components';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
@@ -24,7 +24,6 @@ import { getFormat } from 'item';
 import type { NewsletterSignup } from 'item';
 import { maybeRender } from 'lib';
 import { background } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss, onwardStyles } from 'styles';
 import InPageNewsletterSignup from '../InPageNewsletterSignup';
 
@@ -90,7 +89,7 @@ interface Props {
 	item: NewsletterSignup;
 }
 
-const NewsletterSignUpLayout: FC<Props> = ({ item }) => {
+const NewsletterSignUpLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

@@ -7,7 +7,7 @@ import {
 	Platform,
 } from '@guardian/renditions';
 import type { PlatformMessage, ShareIconMessage } from '@guardian/renditions';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
 const usePlatform = (defaultPlatform: Platform): Platform => {
@@ -76,7 +76,7 @@ const hydratedButtonStyles = css`
 	}
 `;
 
-const ShareIcon: FC = () => {
+const ShareIcon = () => {
 	const platform = usePlatform(Platform.IOS);
 	const showIcon = useShareIcon(true);
 

@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
 	space,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Accordion } from '../components/Accordion';
 import { RightAdsPlaceholder } from '../components/AdPlaceholder.apps';
 import { AdPortals } from '../components/AdPortals.importable';
@@ -49,6 +49,7 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import {
@@ -88,11 +89,11 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 220px 1fr;
+					grid-template-columns: 220px 700px;
 					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline';
@@ -125,7 +126,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 				margin-left: 0;
 				grid-column-gap: 20px;
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'standfirst'
 						'lines'
@@ -133,7 +134,7 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 0px;
 				}
 				${from.desktop} {
-					grid-template-columns: 220px 1fr;
+					grid-template-columns: 220px 620px;
 					grid-template-areas: 'lastupdated standfirst';
 				}
 			}
@@ -184,7 +185,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'media'
 						'info'
@@ -255,6 +256,44 @@ const paddingBody = css`
 	}
 `;
 
+const tagOverlayGridStyles = css`
+	position: absolute;
+	${until.desktop} {
+		margin-left: 0px;
+	}
+	display: grid;
+	height: inherit;
+	width: 100%;
+	margin-left: 0;
+	grid-column-gap: 0px;
+	${getZIndex('tagLinkOverlay')}
+	${until.desktop} {
+		grid-template-columns: 100%; /* Main content */
+		grid-template-areas: 'sticky-tag';
+	}
+	${from.tablet} {
+		grid-template-columns: 1fr 700px 1fr;
+		grid-template-areas: '. sticky-tag .';
+	}
+	${from.desktop} {
+		grid-template-columns: 1fr 200px 740px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+
+	${from.leftCol} {
+		grid-template-columns: 1fr 200px 900px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+	${from.wide} {
+		grid-template-columns: 1fr 200px 1060px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+`;
+
+const stickyTagStyles = css`
+	position: sticky;
+	top: 0;
+`;
 interface BaseProps {
 	article: DCRArticle;
 	format: ArticleFormat;
@@ -273,7 +312,7 @@ interface WebProps extends BaseProps {
 export const LiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasLiveBlogTopAd },
 	} = article;
 
 	// TODO:
@@ -314,6 +353,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+	// The test is being paused on liveblogs whilst we investigate an issue
+
+	const inTagLinkTest = false;
+	// isWeb &&
+	// article.config.abTests.tagLinkDesignVariant === 'variant' &&
+	// article.tags.some((tag) => tag.id === 'football/euro-2024');
+
+	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
 		<>
@@ -352,6 +399,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
 							displayRoundel={false}
@@ -459,7 +507,52 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					)}
 				</div>
 			)}
-			<main data-layout="LiveLayout">
+			<main
+				css={
+					inTagLinkTest &&
+					css`
+						position: relative;
+						height: 100%;
+					`
+				}
+				data-layout="LiveLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
+				{renderAds && hasLiveBlogTopAd && (
+					<Hide from="tablet">
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={sourcePalette.neutral[97]}
+							element="aside"
+						>
+							<AdSlot
+								position="liveblog-top"
+								display={format.display}
+							/>
+						</Section>
+					</Hide>
+				)}
+				{inTagLinkTest && (
+					<div css={tagOverlayGridStyles}>
+						<GridItem area="sticky-tag">
+							<div css={stickyTagStyles}>
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									inTagLinkTest={true}
+								/>
+							</div>
+						</GridItem>
+					</div>
+				)}
+
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -527,13 +620,27 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-								/>
+								{inTagLinkTest ? (
+									<div
+										css={css`
+											height: 64px;
+											${from.desktop} {
+												height: 44px;
+											}
+										`}
+									/>
+								) : (
+									<ArticleTitle
+										format={format}
+										tags={article.tags}
+										sectionLabel={article.sectionLabel}
+										sectionUrl={article.sectionUrl}
+										guardianBaseURL={
+											article.guardianBaseURL
+										}
+										inTagLinkTest={inTagLinkTest}
+									/>
+								)}
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
@@ -546,23 +653,17 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											hasStarRating={
-												typeof article.starRating ===
-												'number'
-											}
 										/>
 									)}
 								</div>
-								{article.starRating !== undefined ? (
+								{!isUndefined(article.starRating) ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={article.starRating}
 											size="large"
 										/>
 									</div>
-								) : (
-									<></>
-								)}
+								) : null}
 							</GridItem>
 						</HeadlineGrid>
 					</Section>
@@ -685,6 +786,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									keyEvents={article.keyEvents}
 									filterKeyEvents={article.filterKeyEvents}
 									id={'key-events-carousel-desktop'}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</Island>
 						</Hide>
@@ -852,6 +954,23 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</div>
 									</Hide>
 								)}
+
+								{isWeb && (
+									<Hide until="desktop">
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<StickyLiveblogAskWrapper
+												referrerUrl={article.webURL}
+												shouldHideReaderRevenueOnArticle={
+													article.shouldHideReaderRevenue
+												}
+											/>
+										</Island>
+									</Hide>
+								)}
+
 								{/* Match stats */}
 								{!!footballMatchUrl && (
 									<Island
@@ -1027,10 +1146,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</ArticleContainer>
 										</div>
 									) : (
-										<Accordion
-											accordionTitle="Live feed"
-											context="liveFeed"
-										>
+										<Accordion accordionTitle="Live feed">
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (
@@ -1261,6 +1377,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
+									absoluteServerTimes={absoluteServerTimes}
 								/>
 							</Island>
 						</Section>
@@ -1285,6 +1402,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							shortUrlId={article.config.shortUrlId}
 							discussionApiUrl={article.config.discussionApiUrl}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
 

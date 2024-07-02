@@ -8,7 +8,7 @@ import {
 	headlineBold34,
 	headlineBold50,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import { background, text } from 'palette';
 import { darkModeCss } from 'styles';
@@ -71,7 +71,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const ImmersiveHeadline: React.FC<Props> = ({ headline, format }) => (
+const ImmersiveHeadline = ({ headline, format }: Props) => (
 	<>
 		<div css={backgroundStyles(format)} />
 		<h1 css={styles(format)}>{headline}</h1>

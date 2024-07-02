@@ -3,7 +3,7 @@ import { ArticleDesign } from '@guardian/libs';
 import {
 	headlineMedium17,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useHover } from '../lib/useHover';
 import { palette as themePalette } from '../palette';
 import type { TrailType } from '../types/trails';
@@ -104,6 +104,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 									size="small"
 									showUnderline={isHovered}
 									kickerText="Live"
+									showPulsingDot={true}
 									hideLineBreak={true}
 									byline={
 										trail.showByline

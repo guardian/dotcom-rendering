@@ -5,8 +5,8 @@ import {
 	neutral,
 	remSpace,
 	textSans15,
-} from '@guardian/source-foundations';
-import { SvgCamera } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgCamera } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import {
 	map,
@@ -14,7 +14,7 @@ import {
 	withDefault,
 } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { articlePaddingStyles } from './styles';
 
 const captionId = 'header-image-caption';
@@ -102,7 +102,7 @@ const toReact = (node: Node, key: number): ReactNode => {
 const renderText = (caption: DocumentFragment): ReactNode =>
 	Array.from(caption.childNodes).map((node, i) => toReact(node, i));
 
-const HeaderImageCaption: FC<Props> = ({
+const HeaderImageCaption = ({
 	caption,
 	credit,
 	styles,

@@ -2,14 +2,13 @@
 
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headlineBold20, remSpace } from '@guardian/source-foundations';
+import { headlineBold20, remSpace } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { HeadingTwo as HeadingTwoType } from 'bodyElement';
 import Anchor from 'components/Anchor';
 import HorizontalRule from 'components/HorizontalRule';
 import type { Styleable } from 'lib';
 import { identity } from 'lib';
-import type { FC } from 'react';
 import { getHref } from 'renderer';
 
 // ----- Components ----- //
@@ -38,12 +37,12 @@ const defaultStyles = css`
 	}
 `;
 
-const HeadingTextElement: FC<HeadingTextElementProps> = ({
+const HeadingTextElement = ({
 	format,
 	isEditions,
 	node,
 	key,
-}) => {
+}: HeadingTextElementProps) => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map((item, i) => (
 		<HeadingTextElement
@@ -112,12 +111,12 @@ const HeadingTextElement: FC<HeadingTextElementProps> = ({
 	}
 };
 
-const DefaultHeadingTwo: FC<Props> = ({
+const DefaultHeadingTwo = ({
 	format,
 	isEditions,
 	heading,
 	className,
-}) => {
+}: Props) => {
 	const text = heading.doc.textContent ?? '';
 	const children = Array.from(heading.doc.childNodes).map((item, i) => (
 		<HeadingTextElement

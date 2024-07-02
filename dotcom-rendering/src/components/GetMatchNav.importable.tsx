@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
 import type { TagType } from '../types/tag';
 import { ArticleHeadline } from './ArticleHeadline';
-import { cleanTeamData } from './GetMatchStats.importable';
 import { MatchNav } from './MatchNav';
-import { Placeholder } from './Placeholder';
 
 type Props = {
 	matchUrl: string;
@@ -17,7 +15,25 @@ type Props = {
 	webPublicationDateDeprecated: string;
 };
 
-const Loading = () => <Placeholder height={230} />;
+type MatchData = {
+	homeTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	awayTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	comments?: string;
+	minByMinUrl?: string;
+	venue?: string;
+};
+
+const fallbackTeam = {
+	name: '―',
+	scorers: [],
+	score: NaN,
+	crest: '',
+} satisfies MatchData['homeTeam'];
+
+const fallbackData = {
+	homeTeam: fallbackTeam,
+	awayTeam: fallbackTeam,
+} satisfies MatchData;
 
 /**
  * Wrapper around `MatchNav` with loading and fallback.
@@ -38,20 +54,16 @@ export const GetMatchNav = ({
 	tags,
 	webPublicationDateDeprecated,
 }: Props) => {
-	const options: SWRConfiguration = { errorRetryCount: 1 };
-	// If this blog is live then poll for new stats
-	if (format.design === ArticleDesign.LiveBlog) {
-		options.refreshInterval = 16_000;
-	}
-	const { data, error, loading } = useApi<{
-		homeTeam: TeamType;
-		awayTeam: TeamType;
-		comments?: string;
-		minByMinUrl?: string;
-		venue?: string;
-	}>(matchUrl, options);
+	const options = {
+		errorRetryCount: 1,
+		fallbackData,
+		refreshInterval:
+			// If this blog is live then poll for new stats
+			format.design === ArticleDesign.LiveBlog ? 16_000 : undefined,
+	} satisfies SWRConfiguration<MatchData>;
 
-	if (loading) return <Loading />;
+	const { data, error } = useApi<MatchData>(matchUrl, options);
+
 	if (error) {
 		// Send the error to Sentry and then render the headline in its place as a fallback
 		window.guardian.modules.sentry.reportError(error, 'match-nav');
@@ -87,12 +99,13 @@ export const GetMatchNav = ({
 	if (data) {
 		return (
 			<MatchNav
-				homeTeam={cleanTeamData(data.homeTeam)}
-				awayTeam={cleanTeamData(data.awayTeam)}
+				homeTeam={data.homeTeam}
+				awayTeam={data.awayTeam}
 				comments={data.comments}
 			/>
 		);
 	}
 
+	// this should never happen because we pass fallback data to SWR
 	return null;
 };

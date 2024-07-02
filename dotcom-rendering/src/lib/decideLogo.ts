@@ -1,35 +1,13 @@
-import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import type { Branding } from '../types/branding';
+import type { DCRContainerPalette } from '../types/front';
+import { cardHasDarkBackground } from './cardHelpers';
 
-const shouldUseLogoForDarkBackground = (format: ArticleFormat): boolean => {
-	if (format.theme === ArticleSpecial.SpecialReport) return true;
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-			return true;
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticleSpecial.Labs:
-					return false;
-				case Pillar.News:
-				case Pillar.Sport:
-				case Pillar.Opinion:
-				case Pillar.Lifestyle:
-				case Pillar.Culture:
-				default:
-					return true;
-			}
-		default:
-			return false;
-	}
-};
-
-export const decideLogo = (
-	format: ArticleFormat,
+export const decideCardLogo = (
 	branding: Branding,
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
 ): Branding['logo'] => {
-	return shouldUseLogoForDarkBackground(format) &&
+	return cardHasDarkBackground(format, containerPalette) &&
 		branding.logoForDarkBackground
 		? branding.logoForDarkBackground
 		: branding.logo;

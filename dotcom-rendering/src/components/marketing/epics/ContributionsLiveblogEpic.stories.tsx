@@ -73,3 +73,78 @@ export const WithReminderCta: Story = {
 		},
 	},
 };
+
+export const WithThreeTierChoiceCards: Story = {
+	name: 'ContributionsLiveblogEpic with Three Tier Choice Cards',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+		},
+	},
+};
+
+export const WithChoiceCards: Story = {
+	name: 'ContributionsLiveblogEpic with Choice Cards',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			secondaryCta: {
+				type: SecondaryCtaType.ContributionsReminder,
+			},
+			showReminderFields: {
+				reminderCta: 'Remind me in December',
+				reminderPeriod: '2022-12-01',
+				reminderLabel: 'December',
+			},
+			showChoiceCards: true,
+			choiceCardAmounts: {
+				testName: 'Storybook_test',
+				variantName: 'Control',
+				defaultContributionType: 'MONTHLY',
+				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
+				amountsCardData: {
+					ONE_OFF: {
+						amounts: [5, 10],
+						defaultAmount: 5,
+						hideChooseYourAmount: false,
+					},
+					MONTHLY: {
+						amounts: [4, 10],
+						defaultAmount: 12,
+						hideChooseYourAmount: false,
+					},
+					ANNUAL: {
+						amounts: [50, 100],
+						defaultAmount: 100,
+						hideChooseYourAmount: false,
+					},
+				},
+			},
+		},
+	},
+};
+
+export const WithNewsletterSignup: Story = {
+	name: 'ContributionsEpic with newsletter signup',
+	args: {
+		...meta.args,
+		variant: {
+			...props.variant,
+			highlightedText: undefined,
+			heading: 'Sign up to First Edition',
+			paragraphs: [
+				'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
+			],
+			newsletterSignup: {
+				newsletterId: 'morning-briefing',
+				successDescription:
+					'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
+			},
+		},
+	},
+};

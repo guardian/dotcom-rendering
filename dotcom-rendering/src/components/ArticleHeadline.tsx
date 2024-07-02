@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	headlineBold28,
@@ -8,13 +8,15 @@ import {
 	headlineBold50,
 	headlineLight28,
 	headlineLight34,
+	headlineLight50,
 	headlineMedium28,
 	headlineMedium34,
+	headlineMedium50,
 	space,
-	textSansBold24,
+	textSansBold28,
 	textSansBold34,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import { decidePalette } from '../lib/decidePalette';
@@ -31,7 +33,6 @@ type Props = {
 	byline?: string;
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
-	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 	isMatch?: boolean;
 };
@@ -42,34 +43,83 @@ const topPadding = css`
 	}
 `;
 
-const standardFont = css`
-	${headlineMedium34};
-	${until.tablet} {
-		${headlineMedium28};
+const decideHeadlineFont = (format: ArticleFormat) => {
+	switch (format.display) {
+		case ArticleDisplay.Immersive: {
+			switch (format.design) {
+				case ArticleDesign.Obituary:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					return headlineLight50;
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
+					return headlineBold50;
+				default:
+					return headlineMedium50;
+			}
+		}
+		default:
+			switch (format.design) {
+				case ArticleDesign.Obituary:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					return headlineLight34;
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
+					return headlineBold34;
+				default:
+					return headlineMedium34;
+			}
+	}
+};
+const decideMobileHeadlineFont = (format: ArticleFormat) => {
+	switch (format.display) {
+		case ArticleDisplay.Immersive: {
+			return headlineBold34;
+		}
+		default:
+			switch (format.design) {
+				case ArticleDesign.Obituary:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+					return headlineLight28;
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
+					return headlineBold28;
+				default:
+					return headlineMedium28;
+			}
+	}
+};
+const headlineFont = (format: ArticleFormat) => css`
+	${decideMobileHeadlineFont(format)}
+
+	${from.tablet} {
+		${decideHeadlineFont(format)}
+	}
+`;
+
+const invertedFontLineHeight = css`
+	line-height: 2.1875rem;
+	${from.tablet} {
+		line-height: 2.625rem;
 	}
 `;
 
 const labsFont = css`
-	${textSansBold24};
+	${textSansBold28};
 	line-height: 2rem;
 	${from.tablet} {
 		${textSansBold34};
 		line-height: 2.375rem;
-	}
-`;
-
-const boldFont = css`
-	${headlineBold34};
-	${until.tablet} {
-		${headlineBold28};
-	}
-`;
-
-const jumboFont = css`
-	${headlineBold50};
-	line-height: 3.5rem;
-	${until.desktop} {
-		${headlineBold34};
 	}
 `;
 
@@ -80,24 +130,6 @@ const jumboLabsFont = css`
 	${until.desktop} {
 		${textSansBold34};
 		line-height: 2.375rem;
-	}
-`;
-
-const invertedFont = css`
-	${headlineBold34};
-	line-height: 2.625rem;
-	${until.tablet} {
-		${headlineBold28};
-		line-height: 2.1875rem;
-	}
-`;
-
-const lightFont = css`
-	${headlineLight34};
-	font-size: 2.125rem;
-	line-height: 2.375rem;
-	${until.mobileMedium} {
-		${headlineLight28};
 	}
 `;
 
@@ -121,8 +153,8 @@ const shiftSlightly = css`
 const invertedStyles = css`
 	position: relative;
 	white-space: pre-wrap;
-	padding-bottom: ${space[1]}px;
 	padding-right: ${space[1]}px;
+	padding-bottom: ${space[1]}px;
 	box-shadow: -6px 0 0 ${themePalette('--headline-background')};
 	/* Box decoration is required to push the box shadow out on Firefox */
 	box-decoration-break: clone;
@@ -130,7 +162,7 @@ const invertedStyles = css`
 
 const immersiveStyles = css`
 	min-height: 112px;
-	padding-bottom: ${space[9]}px;
+	padding-bottom: ${space[6]}px;
 	padding-left: ${space[1]}px;
 	${from.mobileLandscape} {
 		padding-left: ${space[3]}px;
@@ -139,10 +171,6 @@ const immersiveStyles = css`
 		padding-left: ${space[1]}px;
 	}
 	margin-right: ${space[5]}px;
-`;
-
-const reducedBottomPadding = css`
-	padding-bottom: ${space[4]}px;
 `;
 
 const darkBackground = css`
@@ -265,70 +293,58 @@ const WithAgeWarning = ({
 
 const decideBottomPadding = ({
 	format,
-	hasStarRating,
 	hasAvatar,
 }: {
 	format: ArticleFormat;
-	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 }) => {
-	const defaultPadding = css`
-		padding-bottom: ${space[6]}px;
-		${from.tablet} {
-			padding-bottom: ${space[9]}px;
-		}
-	`;
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
-			// Immersive articles have no padding
-			return '';
-		case ArticleDisplay.Showcase:
-			switch (format.design) {
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					// Opinion pieces with an avatar have no padding
-					// Those with no avatar always have 43 pixels of bottom padding
-					return hasAvatar
-						? ''
-						: css`
-								padding-bottom: 43px;
-						  `;
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog:
-					// Don't add extra padding
-					return '';
-				default:
-					// Non opinion showcase articles always have 24 pixels
-					return css`
-						padding-bottom: ${space[6]}px;
-					`;
-			}
+			return css`
+				padding-bottom: ${space[6]}px;
+			`;
 		default: {
 			switch (format.design) {
-				case ArticleDesign.Review:
-					if (hasStarRating) {
-						return '';
+				case ArticleDesign.Interview: {
+					if (format.display === ArticleDisplay.Showcase) {
+						return css`
+							padding-bottom: ${space[1]}px;
+							${from.tablet} {
+								padding-bottom: ${space[6]}px;
+							}
+						`;
 					}
-					return defaultPadding;
+					return css`
+						padding-bottom: ${space[2]}px;
+					`;
+				}
+				case ArticleDesign.Review: {
+					if (format.display === ArticleDisplay.Showcase) {
+						return css`
+							padding-bottom: 28px;
+							${from.tablet} {
+								padding-bottom: ${space[6]}px;
+							}
+						`;
+					} else {
+						return css`
+							padding-bottom: ${space[5]}px;
 
-				case ArticleDesign.Comment:
-				case ArticleDesign.Editorial:
-				case ArticleDesign.Letter:
-					// Opinion pieces with an avatar have no padding
-					// Those with no avatar always have 43 pixels of bottom padding
+							${from.tablet} {
+								padding-bottom: ${space[6]}px;
+							}
+						`;
+					}
+				}
+				default:
 					return hasAvatar
 						? ''
 						: css`
-								padding-bottom: 43px;
+								padding-bottom: 28px;
+								${from.tablet} {
+									padding-bottom: ${space[9]}px;
+								}
 						  `;
-				case ArticleDesign.Interview:
-				case ArticleDesign.LiveBlog:
-				case ArticleDesign.DeadBlog:
-					// Don't add extra padding
-					return '';
-				default:
-					return defaultPadding;
 			}
 		}
 	}
@@ -340,7 +356,6 @@ export const ArticleHeadline = ({
 	tags,
 	byline,
 	webPublicationDateDeprecated,
-	hasStarRating,
 	hasAvatar,
 	isMatch,
 }: Props) => {
@@ -354,7 +369,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -369,11 +383,10 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? jumboLabsFont
-											: jumboFont,
+											: headlineFont(format),
 										maxWidth,
 										immersiveStyles,
 										displayBlock,
-										reducedBottomPadding,
 									]}
 								>
 									{headlineString}
@@ -388,7 +401,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -403,7 +415,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: lightFont,
+											: headlineFont(format),
 										invertedText,
 										css`
 											color: ${themePalette(
@@ -451,7 +463,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? jumboLabsFont
-											: jumboFont,
+											: headlineFont(format),
 										maxWidth,
 										invertedStyles,
 										immersiveStyles,
@@ -470,7 +482,6 @@ export const ArticleHeadline = ({
 				<div
 					css={decideBottomPadding({
 						format,
-						hasStarRating,
 						hasAvatar,
 					})}
 				>
@@ -486,7 +497,7 @@ export const ArticleHeadline = ({
 							css={[
 								format.theme === ArticleSpecial.Labs
 									? labsFont
-									: boldFont,
+									: headlineFont(format),
 								topPadding,
 								css`
 									color: ${themePalette('--headline-colour')};
@@ -512,7 +523,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -528,7 +538,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: boldFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -548,7 +558,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -564,7 +573,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: lightFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -591,7 +600,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -607,7 +615,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: lightFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -632,7 +640,6 @@ export const ArticleHeadline = ({
 								displayFlex,
 								decideBottomPadding({
 									format,
-									hasStarRating,
 									hasAvatar,
 								}),
 							]}
@@ -649,8 +656,9 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: invertedFont,
+											: headlineFont(format),
 										invertedWrapper,
+										invertedFontLineHeight,
 										zIndex,
 										css`
 											color: ${themePalette(
@@ -684,7 +692,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -700,7 +707,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: standardFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -727,7 +734,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -743,14 +749,13 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: standardFont,
+											: headlineFont(format),
 										css`
 											color: ${isMatch
 												? palette.text.headlineWhenMatch
 												: themePalette(
 														'--headline-colour',
 												  )};
-											padding-bottom: ${space[9]}px;
 										`,
 									]}
 								>
@@ -765,7 +770,6 @@ export const ArticleHeadline = ({
 							css={[
 								decideBottomPadding({
 									format,
-									hasStarRating,
 									hasAvatar,
 								}),
 								css`
@@ -788,7 +792,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: standardFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(
@@ -807,7 +811,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -816,7 +819,7 @@ export const ArticleHeadline = ({
 								css={[
 									format.theme === ArticleSpecial.Labs
 										? labsFont
-										: standardFont,
+										: headlineFont(format),
 									topPadding,
 									css`
 										color: ${themePalette(
@@ -834,7 +837,6 @@ export const ArticleHeadline = ({
 						<div
 							css={decideBottomPadding({
 								format,
-								hasStarRating,
 								hasAvatar,
 							})}
 						>
@@ -850,7 +852,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: standardFont,
+											: headlineFont(format),
 										topPadding,
 										css`
 											color: ${themePalette(

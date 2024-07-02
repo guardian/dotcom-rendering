@@ -5,12 +5,12 @@ import {
 	space,
 	textSans15,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Score } from './Score';
 
 type Props = {
-	homeTeam: TeamType;
-	awayTeam: TeamType;
+	homeTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	awayTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
 	comments?: string;
 };
 
@@ -105,7 +105,17 @@ const Scorers = ({ scorers }: { scorers: string[] }) => (
 					${textSans15}
 				`}
 			>
-				{player}
+				{player.startsWith('placeholder-') ? (
+					<span
+						css={css`
+							opacity: 0;
+						`}
+					>
+						―
+					</span>
+				) : (
+					player
+				)}
 			</li>
 		))}
 	</ul>
@@ -122,21 +132,23 @@ const Crest = ({ crest }: { crest: string }) => (
 			z-index: 1;
 		`}
 	>
-		<img
-			css={css`
-				position: absolute;
-				left: 0.5rem;
-				right: 0.5rem;
-				bottom: 0.5rem;
-				top: 0.5rem;
-				max-width: calc(100% - 1rem);
-				max-height: calc(100% - 1rem);
-				margin: auto;
-				display: block;
-			`}
-			src={crest}
-			alt=""
-		/>
+		{crest.trim() === '' ? null : (
+			<img
+				css={css`
+					position: absolute;
+					left: 0.5rem;
+					right: 0.5rem;
+					bottom: 0.5rem;
+					top: 0.5rem;
+					max-width: calc(100% - 1rem);
+					max-height: calc(100% - 1rem);
+					margin: auto;
+					display: block;
+				`}
+				src={crest}
+				alt=""
+			/>
+		)}
 	</div>
 );
 
@@ -168,7 +180,15 @@ const TeamNav = ({
 				`}
 			>
 				<TeamName name={name} />
-				<Scorers scorers={scorers} />
+				<Scorers
+					scorers={[
+						...scorers,
+						// this ensures we reserve space for at least three scorers per team
+						'placeholder-1',
+						'placeholder-2',
+						'placeholder-3',
+					].slice(0, Math.max(3, scorers.length))}
+				/>
 			</div>
 			<CrestRow>
 				<Crest crest={crest} />

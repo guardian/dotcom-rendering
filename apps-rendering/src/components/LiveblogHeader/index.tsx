@@ -3,13 +3,13 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import {
 	Column,
 	Columns,
 	Container,
 	Hide,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import Headline from 'components/Headline';
 import LiveDateline from 'components/LiveDateline';
 import Series from 'components/Series';
@@ -18,7 +18,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import { background } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -49,7 +48,7 @@ interface Props {
 	item: LiveBlog | DeadBlog;
 }
 
-const LiveblogHeader: FC<Props> = ({ item }) => {
+const LiveblogHeader = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

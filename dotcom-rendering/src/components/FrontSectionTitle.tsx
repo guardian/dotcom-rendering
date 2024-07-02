@@ -1,13 +1,20 @@
 import { css } from '@emotion/react';
-import { from, palette, textSans12, until } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+import {
+	from,
+	palette as sourcePalette,
+	textSans12,
+	until,
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { assertUnreachable } from '../lib/assert-unreachable';
+import { palette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import { Badge } from './Badge';
 
 type Props = {
 	title: React.ReactNode;
 	collectionBranding: CollectionBranding | undefined;
+	updateLogoAdPartnerSwitch: boolean;
 };
 
 const titleStyle = css`
@@ -16,31 +23,70 @@ const titleStyle = css`
 	}
 `;
 
+const advertisingPartnerDottedBorder = css`
+	border-top: 1px dotted ${sourcePalette.neutral[86]};
+	border-bottom: none;
+	margin-top: 0.375rem;
+`;
+
+const brandingAdvertisingPartnerStyle = css`
+	margin: 4px 0 20px;
+	padding: 4px;
+	border: 1px solid ${palette('--branding-border')};
+	width: fit-content;
+
+	${from.desktop} {
+		padding: 8px;
+		width: 220px;
+	}
+	${from.leftCol} {
+		padding: 4px;
+		width: fit-content;
+	}
+	${from.wide} {
+		padding: 8px;
+		width: auto;
+	}
+`;
+
+const labelAdvertisingPartnerStyles = css`
+	margin-top: 0;
+	border-top: 0;
+`;
+
 const labelStyles = css`
 	${textSans12};
 	line-height: 1rem;
-	color: ${palette.neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	font-weight: bold;
 	margin-top: 0.375rem;
 	padding-right: 0.625rem;
 	padding-bottom: 0.625rem;
 	text-align: left;
-	border-top: 1px dotted ${palette.neutral[86]};
+	border-top: 1px dotted ${sourcePalette.neutral[86]};
 `;
 
 const aboutThisLinkStyles = css`
 	${textSans12};
 	line-height: 11px;
-	color: ${palette.neutral[46]};
+	color: ${sourcePalette.neutral[46]};
 	font-weight: normal;
 	text-decoration: none;
 `;
 
-export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
+const aboutThisLinkAdvertisingPartnerStyles = css`
+	color: ${sourcePalette.news[400]};
+`;
+
+export const FrontSectionTitle = ({
+	title,
+	collectionBranding,
+	updateLogoAdPartnerSwitch,
+}: Props) => {
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
 			const {
-				branding: { logo },
+				branding: { logo, aboutThisLink },
 				isFrontBranding,
 				isContainerBranding,
 			} = collectionBranding;
@@ -48,13 +94,18 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 				return (
 					<>
 						<Hide until="leftCol">
+							<p css={[labelStyles]}>{logo.label}</p>
 							<Badge imageSrc={logo.src} href={logo.link} />
 						</Hide>
 						<div css={titleStyle}>
 							<Hide from="leftCol">
+								<p css={[labelStyles]}>{logo.label}</p>
 								<Badge imageSrc={logo.src} href={logo.link} />
 							</Hide>
 							{title}
+							<a href={aboutThisLink} css={[aboutThisLinkStyles]}>
+								About this content
+							</a>
 						</div>
 					</>
 				);
@@ -76,9 +127,10 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 						<div
 							css={css`
 								display: inline-block;
-								border-top: 1px dotted ${palette.neutral[86]};
+								border-top: 1px dotted
+									${sourcePalette.neutral[86]};
 								${textSans12}
-								color: ${palette.neutral[46]};
+								color: ${sourcePalette.neutral[46]};
 								font-weight: bold;
 
 								${from.leftCol} {
@@ -113,17 +165,56 @@ export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 				isContainerBranding,
 				isFrontBranding,
 			} = collectionBranding;
+			const isAdvertisingPartnerOrExclusive =
+				logo.label.toLowerCase() === 'advertising partner' ||
+				logo.label.toLowerCase() === 'exclusive advertising partner';
 			if (isFrontBranding || isContainerBranding) {
 				return (
 					<div css={titleStyle}>
 						{title}
-						<>
-							<p css={labelStyles}>{logo.label}</p>
-							<Badge imageSrc={logo.src} href={logo.link} />
-							<a href={aboutThisLink} css={aboutThisLinkStyles}>
+						{isAdvertisingPartnerOrExclusive &&
+						updateLogoAdPartnerSwitch ? (
+							<hr css={advertisingPartnerDottedBorder} />
+						) : null}
+						<div
+							css={
+								isAdvertisingPartnerOrExclusive &&
+								updateLogoAdPartnerSwitch &&
+								brandingAdvertisingPartnerStyle
+							}
+						>
+							<p
+								css={[
+									labelStyles,
+									isAdvertisingPartnerOrExclusive &&
+										updateLogoAdPartnerSwitch &&
+										labelAdvertisingPartnerStyles,
+								]}
+							>
+								{logo.label}
+							</p>
+							<Badge
+								imageSrc={logo.src}
+								href={logo.link}
+								isAdvertisingPartner={
+									isAdvertisingPartnerOrExclusive
+								}
+								updateLogoAdPartnerSwitch={
+									updateLogoAdPartnerSwitch
+								}
+							/>
+							<a
+								href={aboutThisLink}
+								css={[
+									aboutThisLinkStyles,
+									isAdvertisingPartnerOrExclusive &&
+										updateLogoAdPartnerSwitch &&
+										aboutThisLinkAdvertisingPartnerStyles,
+								]}
+							>
 								About this content
 							</a>
-						</>
+						</div>
 					</div>
 				);
 			}

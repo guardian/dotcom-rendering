@@ -2,8 +2,8 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { remSpace } from '@guardian/source-foundations';
-import type { FC, ReactNode } from 'react';
+import { remSpace } from '@guardian/source/foundations';
+import type { ReactNode } from 'react';
 
 // ----- Component ----- //
 
@@ -34,7 +34,7 @@ interface Props {
 	className?: SerializedStyles;
 }
 
-const OrderedList: FC<Props> = ({ children, className }) => (
+const OrderedList = ({ children, className }: Props) => (
 	<ol css={[styles, className]}>{children}</ol>
 );
 

@@ -2,10 +2,10 @@ import { css, ThemeProvider } from '@emotion/react';
 import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
-import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
+import { remSpace } from '@guardian/source/foundations';
+import { ExpandingWrapper } from '@guardian/source-development-kitchen/react-components';
 import { isElement } from 'lib';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { DeadlineDate, isCalloutActive } from '../Deadline/index';
 import CalloutBlock, { getCalloutId } from './calloutBlock';
@@ -25,7 +25,7 @@ export interface CalloutProps {
 	contacts?: Contact[];
 }
 
-const Callout: FC<CalloutProps> = ({
+const Callout = ({
 	prompt,
 	heading,
 	description,
@@ -36,7 +36,7 @@ const Callout: FC<CalloutProps> = ({
 	activeUntil,
 	name,
 	contacts,
-}): ReactElement => {
+}: CalloutProps): ReactElement => {
 	const isActive = isCalloutActive(activeUntil);
 
 	if (!isActive && isNonCollapsible) {
@@ -94,10 +94,10 @@ const Callout: FC<CalloutProps> = ({
 	);
 };
 
-const CalloutWithHydrationProps: FC<CalloutProps> = ({
+const CalloutWithHydrationProps = ({
 	format,
 	...calloutProps
-}): ReactElement => {
+}: CalloutProps): ReactElement => {
 	const getStringFromNodes = (nodes: NodeListOf<ChildNode>): string =>
 		Array.from(nodes)
 			.map((node) => {

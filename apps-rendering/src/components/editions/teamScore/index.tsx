@@ -9,11 +9,10 @@ import {
 	neutral,
 	remSpace,
 	textSans15,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { fromNullable } from '../../../../vendor/@guardian/types/index';
 import { TeamLocation } from 'football';
 import { maybeRender } from 'lib';
-import type { FC } from 'react';
 
 interface Props {
 	team: FootballTeam;
@@ -98,7 +97,7 @@ const scorerStyles = (location: TeamLocation): SerializedStyles => css`
 	}
 `;
 
-const TeamScore: FC<Props> = ({ team, location }) => {
+const TeamScore = ({ team, location }: Props) => {
 	const scorers = fromNullable(team.scorers);
 	return (
 		<section css={styles(location)}>

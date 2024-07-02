@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans14 } from '@guardian/source-foundations';
+import { textSans14 } from '@guardian/source/foundations';
 import { useState } from 'react';
 import { palette as themePalette } from '../../palette';
 

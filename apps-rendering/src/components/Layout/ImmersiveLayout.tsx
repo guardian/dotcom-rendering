@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, from, palette, remSpace } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { between, from, palette, remSpace } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';
@@ -21,7 +21,6 @@ import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import { background, fill } from 'palette';
-import type { FC } from 'react';
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -91,7 +90,7 @@ type Props = {
 	item: Exclude<Item, LiveBlog | DeadBlog>;
 };
 
-const ImmersiveLayout: FC<Props> = ({ item }) => {
+const ImmersiveLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

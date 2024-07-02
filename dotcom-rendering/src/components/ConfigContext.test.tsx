@@ -24,17 +24,23 @@ describe('ConfigContext', () => {
 			{
 				renderingTarget: 'Web',
 				darkModeAvailable: false,
+				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
+				editionId: 'UK',
 			},
 			{
 				renderingTarget: 'Apps',
 				darkModeAvailable: true,
+				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
+				editionId: 'UK',
 			},
 			{
 				renderingTarget: 'Apps',
 				darkModeAvailable: false,
+				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
+				editionId: 'INT',
 			},
 		] as const satisfies ReadonlyArray<Config>)(
 			'useConfig hook provides correct config: "%o"',

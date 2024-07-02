@@ -1,9 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, textSansBold15 } from '@guardian/source-foundations';
+import { neutral, textSansBold15 } from '@guardian/source/foundations';
 import { MatchStatusKind } from 'football';
 import type { MatchStatus } from 'football';
-import type { FC } from 'react';
 
 interface Props {
 	status: MatchStatus;
@@ -44,7 +43,7 @@ const matchStatusCopy = (status: MatchStatus): string => {
 	}
 };
 
-const MatchStatusIcon: FC<Props> = ({ status }) => (
+const MatchStatusIcon = ({ status }: Props) => (
 	<span css={styles(status.kind)}>{matchStatusCopy(status)}</span>
 );
 

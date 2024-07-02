@@ -10,10 +10,9 @@ import {
 	from,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { hasCartoon, isPicture } from 'item';
-import type { FC } from 'react';
 import { renderEditionsElements } from 'renderer';
 import Header from '../header';
 import {
@@ -170,7 +169,7 @@ const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 	return [headerStyles, articleStyles];
 };
 
-const Layout: FC<Props> = ({ item }) => {
+const Layout = ({ item }: Props) => {
 	if (
 		item.design === ArticleDesign.Timeline ||
 		item.design === ArticleDesign.Profile ||

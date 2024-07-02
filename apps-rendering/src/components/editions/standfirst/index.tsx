@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { FontWeight, LineHeight } from '@guardian/source-foundations';
+import type { FontWeight, LineHeight } from '@guardian/source/foundations';
 import {
 	body,
 	from,
@@ -12,11 +12,10 @@ import {
 	neutral,
 	remSpace,
 	text,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import { text as textPalette } from 'palette';
-import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 import ShareIcon from '../shareIcon';
 import { articleWidthStyles, sidePadding } from '../styles';
@@ -137,7 +136,7 @@ interface Props {
 
 const isEditions = true;
 
-const Standfirst: FC<Props> = ({ item, shareIcon }) => {
+const Standfirst = ({ item, shareIcon }: Props) => {
 	return maybeRender(item.standfirst.toOption(), (standfirst) => (
 		<div css={getStyles(item)}>
 			<div css={textContainerStyles}>

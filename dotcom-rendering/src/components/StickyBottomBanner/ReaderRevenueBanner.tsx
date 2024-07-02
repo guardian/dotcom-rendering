@@ -1,15 +1,18 @@
 import { css } from '@emotion/react';
 import type { ConsentState, CountryCode } from '@guardian/libs';
 import { getCookie, onConsent } from '@guardian/libs';
-import { getBanner } from '@guardian/support-dotcom-components';
+import {
+	abandonedBasketSchema,
+	getBanner,
+} from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { AbandonedBasket } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
 import { useEffect, useState } from 'react';
-import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
@@ -28,8 +31,6 @@ import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
-import { useIsInView } from '../../lib/useIsInView';
-import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
 
 type BaseProps = {
@@ -45,6 +46,7 @@ type BaseProps = {
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
+	abandonedBasketBannerLastClosedAt?: string;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -61,6 +63,7 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
+	isAndroidWebview: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -85,6 +88,25 @@ const getArticleCountToday = (
 	return undefined;
 };
 
+function parseAbandonedBasket(
+	cookie: string | null,
+): AbandonedBasket | undefined {
+	if (!cookie) return;
+
+	const parsedResult = abandonedBasketSchema.safeParse(JSON.parse(cookie));
+	if (!parsedResult.success) {
+		const errorMessage = parsedResult.error.message;
+		window.guardian.modules.sentry.reportError(
+			new Error(errorMessage),
+			'rr-banner',
+		);
+
+		return;
+	}
+
+	return parsedResult.data;
+}
+
 export const hasRequiredConsents = (): Promise<boolean> =>
 	onConsent()
 		.then(({ canTarget }: ConsentState) => canTarget)
@@ -97,6 +119,7 @@ const buildPayload = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
 	asyncArticleCounts,
@@ -125,6 +148,7 @@ const buildPayload = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			signInBannerLastClosedAt,
+			abandonedBasketBannerLastClosedAt,
 			mvtId: Number(
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 			),
@@ -143,6 +167,9 @@ const buildPayload = async ({
 			isSignedIn,
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
 			hasConsented: userConsent,
+			abandonedBasket: parseAbandonedBasket(
+				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
+			),
 		},
 	};
 };
@@ -162,12 +189,19 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
 	asyncArticleCounts,
+	isAndroidWebview,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
+
+	if (isAndroidWebview) {
+		// Do not show banners on Android app webview, due to buggy behaviour with the buttons
+		return { show: false };
+	}
 
 	if (
 		shouldHideReaderRevenue ||
@@ -221,6 +255,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		signInBannerLastClosedAt,
+		abandonedBasketBannerLastClosedAt,
 		optedOutOfArticleCount,
 		asyncArticleCounts,
 		userConsent,
@@ -258,19 +293,8 @@ type RemoteBannerProps = BannerProps & {
 	displayEvent: string;
 };
 
-const RemoteBanner = ({
-	componentTypeName,
-	displayEvent,
-	meta,
-	module,
-	fetchEmail,
-}: RemoteBannerProps) => {
+const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 	const [Banner, setBanner] = useState<React.ElementType>();
-
-	const [hasBeenSeen, setNode] = useIsInView({
-		threshold: 0,
-		debounce: true,
-	});
 
 	useEffect(() => {
 		setAutomat();
@@ -289,20 +313,10 @@ const RemoteBanner = ({
 			});
 	}, [module]);
 
-	useOnce(() => {
-		const { componentType } = meta;
-
-		// track banner view event in Google Analytics for subscriptions banner
-		if (componentType === componentTypeName) {
-			trackNonClickInteraction(displayEvent);
-		}
-	}, [hasBeenSeen, meta]);
-
 	if (Banner !== undefined) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
-				ref={setNode}
 				css={css`
 					width: 100%;
 					${getZIndex('banner')}

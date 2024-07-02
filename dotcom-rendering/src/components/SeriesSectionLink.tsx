@@ -2,21 +2,22 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
-	headline,
 	headlineBold17,
 	headlineBold20,
+	headlineMedium17,
 	space,
 	textSans17,
 	textSans20,
 	textSansBold20,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
+import { TagLink } from './TagLink';
 
 type Props = {
 	format: ArticleFormat;
@@ -25,6 +26,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	isMatch?: boolean;
+	inTagLinkTest?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -128,7 +130,13 @@ const secondaryFontStyles = (format: ArticleFormat) => {
 		`;
 	}
 	return css`
-		${headline.xxxsmall({ fontWeight: 'regular' })}
+		${headlineMedium17};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		font-weight: 400;
 	`;
 };
 
@@ -157,6 +165,7 @@ export const SeriesSectionLink = ({
 	sectionUrl,
 	guardianBaseURL,
 	isMatch,
+	inTagLinkTest,
 }: Props) => {
 	const observerTag = tags.find(
 		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
@@ -184,6 +193,16 @@ export const SeriesSectionLink = ({
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
+	if (inTagLinkTest) {
+		return (
+			<TagLink
+				format={format}
+				sectionLabel={'Euro 2024'}
+				sectionUrl={'football/euro-2024'}
+				guardianBaseURL={guardianBaseURL}
+			/>
+		);
+	}
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {

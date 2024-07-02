@@ -5,11 +5,14 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import React from 'react';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
-import { lightDecorator } from '../../../.storybook/decorators/themeDecorator';
+import type { Branding } from '../../types/branding';
+import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import { FrontSection } from '../FrontSection';
+import { LabsSection } from '../LabsSection';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
@@ -33,13 +36,14 @@ const basicCardProps: CardProps = {
 		src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 		altText: 'alt text',
 	},
-	imagePosition: 'top',
+	imagePositionOnDesktop: 'top',
 	showAge: true,
 	isExternalLink: false,
 	isPlayableMediaCard: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api/',
 	showMainVideo: true,
+	absoluteServerTimes: true,
 };
 
 const aBasicLink = {
@@ -259,7 +263,7 @@ export const WithExternalLink = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePosition="right"
+					imagePositionOnDesktop="right"
 					kickerText="Instagram"
 					headlineSize="huge"
 					headlineText="Follow The Guardian now"
@@ -374,7 +378,7 @@ export const WithDifferentImagePositions = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="large"
 					headlineText="left"
 				/>
@@ -382,7 +386,7 @@ export const WithDifferentImagePositions = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePosition="right"
+					imagePositionOnDesktop="right"
 					imageSize="large"
 					headlineText="right"
 				/>
@@ -390,7 +394,7 @@ export const WithDifferentImagePositions = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePosition="top"
+					imagePositionOnDesktop="top"
 					headlineText="top"
 				/>
 			</CardWrapper>
@@ -404,7 +408,7 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					headlineText="small"
 					imageSize="small"
 				/>
@@ -412,7 +416,7 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					headlineText="medium"
 					imageSize="medium"
 				/>
@@ -420,7 +424,7 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					headlineText="large"
 					imageSize="large"
 				/>
@@ -428,7 +432,7 @@ export const WithDifferentImageSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					headlineText="jumbo"
 					imageSize="jumbo"
 				/>
@@ -533,15 +537,6 @@ export const WithAnAvatar = () => {
 		</>
 	);
 };
-WithAnAvatar.decorators = [
-	lightDecorator([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Comment,
-			theme: Pillar.Opinion,
-		},
-	]),
-];
 
 export const WhenVerticalAndThemeOpinion = () => {
 	return (
@@ -554,7 +549,7 @@ export const WhenVerticalAndThemeOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="top"
+					imagePositionOnDesktop="top"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -573,7 +568,7 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="top"
+					imagePositionOnDesktop="top"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -584,6 +579,11 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 							...aBasicLink,
 							headline: 'Headline 2',
 							kickerText: 'Kicker',
+							format: {
+								theme: Pillar.Sport,
+								design: ArticleDesign.Gallery,
+								display: ArticleDisplay.Standard,
+							},
 						},
 						{
 							...aBasicLink,
@@ -609,7 +609,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="right"
+					imagePositionOnDesktop="right"
 					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
@@ -621,7 +621,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="right"
+					imagePositionOnDesktop="right"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
@@ -654,7 +654,7 @@ export const WhenHorizontalAndOpinion = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="right"
+					imagePositionOnDesktop="right"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -675,7 +675,7 @@ export const WhenNewsWithMoreThanTwoSublinks = () => {
 		<CardWrapper>
 			<Card
 				{...basicCardProps}
-				imagePosition="right"
+				imagePositionOnDesktop="right"
 				imageSize="large"
 				supportingContentAlignment="horizontal"
 				supportingContent={[
@@ -711,7 +711,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="small"
 					showQuotedHeadline={true}
 				/>
@@ -724,7 +724,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="small"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -765,7 +765,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="medium"
 					showQuotedHeadline={true}
 				/>
@@ -778,7 +778,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="medium"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -819,7 +819,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="large"
 					showQuotedHeadline={true}
 				/>
@@ -832,7 +832,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="large"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -873,7 +873,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="jumbo"
 					showQuotedHeadline={true}
 				/>
@@ -886,7 +886,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="left"
+					imagePositionOnDesktop="left"
 					imageSize="jumbo"
 					supportingContentAlignment="horizontal"
 					supportingContent={[
@@ -927,7 +927,7 @@ export const WhenOpinionWithImageAtBottom = () => {
 						design: ArticleDesign.Comment,
 						theme: Pillar.Opinion,
 					}}
-					imagePosition="bottom"
+					imagePositionOnDesktop="bottom"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -967,7 +967,7 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePosition="top"
+						imagePositionOnDesktop="top"
 						imageSize="jumbo"
 						imagePositionOnMobile="top"
 						mainMedia={mainVideo}
@@ -983,7 +983,7 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePosition="right"
+						imagePositionOnDesktop="right"
 						imageSize="large"
 						imagePositionOnMobile="top"
 						mainMedia={mainVideo}
@@ -997,7 +997,7 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePosition="top"
+						imagePositionOnDesktop="top"
 						mainMedia={mainVideo}
 						isPlayableMediaCard={false}
 					/>
@@ -1012,7 +1012,7 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePosition="top"
+						imagePositionOnDesktop="top"
 						imageSize="medium"
 						imagePositionOnMobile="bottom"
 						mainMedia={mainVideo}
@@ -1028,7 +1028,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePosition="left"
+								imagePositionOnDesktop="left"
 								mainMedia={mainVideo}
 								isPlayableMediaCard={false}
 							/>
@@ -1041,7 +1041,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePosition="right"
+								imagePositionOnDesktop="right"
 								mainMedia={mainVideo}
 								isPlayableMediaCard={false}
 							/>
@@ -1055,7 +1055,7 @@ export const WhenVideoWithPlayButton = () => {
 									design: ArticleDesign.Video,
 									theme: Pillar.News,
 								}}
-								imagePosition="right"
+								imagePositionOnDesktop="right"
 								mainMedia={mainVideo}
 								isPlayableMediaCard={false}
 							/>
@@ -1073,7 +1073,7 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePosition="right"
+						imagePositionOnDesktop="right"
 						imageSize="large"
 						imagePositionOnMobile="top"
 						mainMedia={mainVideo}
@@ -1087,7 +1087,7 @@ export const WhenVideoWithPlayButton = () => {
 							design: ArticleDesign.Video,
 							theme: Pillar.News,
 						}}
-						imagePosition="top"
+						imagePositionOnDesktop="top"
 						imagePositionOnMobile="left"
 						imageSize="medium"
 						mainMedia={mainVideo}
@@ -1136,3 +1136,321 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 
 WithLetterDesignAndShowQuotedHeadline.storyName =
 	'WithLetterDesignAndShowQuotedHeadline';
+
+const containerPalettes = [
+	'InvestigationPalette',
+	'LongRunningPalette',
+	'SombrePalette',
+	'BreakingPalette',
+	'EventPalette',
+	'EventAltPalette',
+	'LongRunningAltPalette',
+	'SombreAltPalette',
+	'SpecialReportAltPalette',
+	'Branded',
+] as const satisfies readonly Omit<
+	DCRContainerPalette,
+	'MediaPalette' | 'PodcastPalette'
+>[];
+
+export const WithBranding = () => {
+	const branding = {
+		brandingType: {
+			name: 'sponsored',
+		},
+		sponsorName: 'theguardian.org',
+		logo: {
+			src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for badge.png',
+			dimensions: {
+				width: 280,
+				height: 180,
+			},
+			link: 'https://theguardian.org/',
+			label: 'Supported by',
+		},
+		logoForDarkBackground: {
+			src: 'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/21f5a3a5-30e7-4db7-a09f-031af569454d-guardian.org new logo - white version (3).png',
+			dimensions: {
+				width: 280,
+				height: 180,
+			},
+			link: 'https://theguardian.org/',
+			label: 'Supported by',
+		},
+		aboutThisLink:
+			'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
+	} satisfies Branding;
+
+	return [undefined, ...containerPalettes].map((containerPalette) => (
+		<Section
+			key={containerPalette}
+			title={containerPalette ?? 'Standard'}
+			containerPalette={containerPalette}
+		>
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'33.333%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticleSpecial.Labs,
+						}}
+						headlineText="guardian.org branding on a Standard card"
+						kickerText="Kicker"
+						trailText=""
+						imagePositionOnDesktop="top"
+						imagePositionOnMobile="left"
+						imageSize="small"
+						containerPalette={containerPalette}
+						branding={branding}
+					/>
+				</LI>
+				<LI percentage={'33.333%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Gallery,
+							theme: ArticleSpecial.Labs,
+						}}
+						kickerText="Kicker"
+						headlineText="guardian.org branding on a Gallery card"
+						trailText=""
+						imagePositionOnDesktop="top"
+						imagePositionOnMobile="left"
+						imageSize="small"
+						mainMedia={mainGallery}
+						containerPalette={containerPalette}
+						branding={branding}
+					/>
+				</LI>
+				<LI percentage={'33.333%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: Pillar.News,
+						}}
+						headlineText="guardian.org branding does not appear on non Labs articles"
+						kickerText="Kicker"
+						trailText=""
+						imagePositionOnDesktop="top"
+						imagePositionOnMobile="left"
+						imageSize="small"
+						containerPalette={containerPalette}
+						branding={branding}
+					/>
+				</LI>
+			</UL>
+		</Section>
+	));
+};
+
+export const WithSpecialPaletteVariations = () => {
+	const Cards = ({
+		containerPalette,
+		isLabs = false,
+	}: {
+		containerPalette: DCRContainerPalette;
+		isLabs?: boolean;
+	}) => (
+		<UL direction="row" padBottom={true}>
+			<LI percentage={'66.666%'} padSides={true}>
+				<Card
+					{...basicCardProps}
+					format={
+						isLabs
+							? {
+									...basicCardProps.format,
+									theme: ArticleSpecial.Labs,
+							  }
+							: basicCardProps.format
+					}
+					kickerText="Live kicker"
+					showPulsingDot={true}
+					imagePositionOnDesktop="right"
+					imageSize="large"
+					imagePositionOnMobile="top"
+					containerPalette={containerPalette}
+					discussionId="/p/d8ex5"
+					discussionApiUrl="https://discussion.theguardian.com/discussion-api"
+				/>
+			</LI>
+			<LI percentage={'33.333%'} padSides={true} showDivider={true}>
+				<Card
+					{...basicCardProps}
+					format={
+						isLabs
+							? {
+									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Gallery,
+									theme: ArticleSpecial.Labs,
+							  }
+							: {
+									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Gallery,
+									theme: Pillar.Lifestyle,
+							  }
+					}
+					kickerText="Kicker"
+					trailText=""
+					imagePositionOnDesktop="top"
+					imagePositionOnMobile="left"
+					imageSize="medium"
+					mainMedia={mainGallery}
+					containerPalette={containerPalette}
+				/>
+			</LI>
+		</UL>
+	);
+	return (
+		<>
+			{containerPalettes.map((containerPalette) =>
+				containerPalette === 'Branded' ? (
+					<LabsSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						key={containerPalette}
+						ajaxUrl=""
+						collectionId=""
+						ophanComponentLink=""
+						ophanComponentName=""
+						pageId=""
+						sectionId=""
+						badge={{
+							imageSrc:
+								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
+							href: 'https://theguardian.org',
+						}}
+					>
+						<Cards
+							isLabs={true}
+							containerPalette={containerPalette}
+						/>
+					</LabsSection>
+				) : (
+					<FrontSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						containerPalette={containerPalette}
+						key={containerPalette}
+					>
+						<Cards containerPalette={containerPalette} />
+					</FrontSection>
+				),
+			)}
+		</>
+	);
+};
+
+export const DynamoWithSpecialPaletteVariations = () => {
+	const DynamoCard = ({
+		containerPalette,
+		isLabs = false,
+	}: {
+		containerPalette: DCRContainerPalette;
+		isLabs?: boolean;
+	}) => (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				format={
+					isLabs
+						? {
+								...basicCardProps.format,
+								theme: ArticleSpecial.Labs,
+						  }
+						: basicCardProps.format
+				}
+				containerPalette={containerPalette}
+				containerType="dynamic/package"
+				isDynamo={true}
+				kickerText="Main kicker"
+				headlineSize="huge"
+				imagePositionOnDesktop="bottom"
+				imagePositionOnMobile="bottom"
+				imageSize="large"
+				supportingContent={[
+					{
+						...aBasicLink,
+						headline: 'Headline 1',
+						kickerText: `${isLabs ? 'Labs' : 'News'} kicker`,
+						format: isLabs
+							? {
+									...basicCardProps.format,
+									theme: ArticleSpecial.Labs,
+							  }
+							: basicCardProps.format,
+					},
+					{
+						...aBasicLink,
+						headline: 'Headline 2',
+						kickerText: `${isLabs ? 'Labs' : 'Sport'} kicker`,
+						format: {
+							theme: isLabs ? ArticleSpecial.Labs : Pillar.Sport,
+							design: ArticleDesign.Gallery,
+							display: ArticleDisplay.Standard,
+						},
+					},
+					{
+						...aBasicLink,
+						headline: 'Headline 3',
+						kickerText: `${isLabs ? 'Labs' : 'Culture'} kicker`,
+						format: {
+							theme: isLabs
+								? ArticleSpecial.Labs
+								: Pillar.Culture,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
+						},
+					},
+				]}
+			/>
+		</CardWrapper>
+	);
+
+	return (
+		<>
+			{containerPalettes.map((containerPalette) =>
+				containerPalette === 'Branded' ? (
+					<LabsSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						key={containerPalette}
+						ajaxUrl=""
+						collectionId=""
+						ophanComponentLink=""
+						ophanComponentName=""
+						pageId=""
+						sectionId=""
+						badge={{
+							imageSrc:
+								'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
+							href: 'https://theguardian.org',
+						}}
+					>
+						<DynamoCard
+							isLabs={true}
+							containerPalette={containerPalette}
+						/>
+					</LabsSection>
+				) : (
+					<FrontSection
+						title={containerPalette}
+						discussionApiUrl=""
+						editionId={'UK'}
+						containerPalette={containerPalette}
+						key={containerPalette}
+					>
+						<DynamoCard containerPalette={containerPalette} />
+					</FrontSection>
+				),
+			)}
+		</>
+	);
+};

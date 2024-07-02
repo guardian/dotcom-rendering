@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace, textSans14 } from '@guardian/source-foundations';
+import { from, remSpace, textSans14 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import Caption from 'components/caption';
@@ -12,7 +12,6 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import { background, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -51,7 +50,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const GalleryCaption: FC<Props> = ({ mainMedia, format }) =>
+const GalleryCaption = ({ mainMedia, format }: Props) =>
 	maybeRender(mainMedia, (media) => {
 		if (
 			media.kind === MainMediaKind.Video ||

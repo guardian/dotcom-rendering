@@ -4,8 +4,7 @@ import {
 	SvgNotificationsOff,
 	SvgNotificationsOn,
 	SvgPlus,
-} from '@guardian/source-react-components';
-import type { FC } from 'react';
+} from '@guardian/source/react-components';
 
 // ----- Component ----- //
 
@@ -14,7 +13,7 @@ interface Props {
 	contributorName: string;
 }
 
-export const FollowNotificationStatus: FC<Props> = ({ isFollowing }) => {
+export const FollowNotificationStatus = ({ isFollowing }: Props) => {
 	return (
 		<>
 			{isFollowing ? (
@@ -38,10 +37,7 @@ export const FollowNotificationStatus: FC<Props> = ({ isFollowing }) => {
 	);
 };
 
-export const FollowTagStatus: FC<Props> = ({
-	isFollowing,
-	contributorName,
-}) => {
+export const FollowTagStatus = ({ isFollowing, contributorName }: Props) => {
 	return (
 		<>
 			{isFollowing ? (

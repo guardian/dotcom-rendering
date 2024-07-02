@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
 import { SupportingContent } from './SupportingContent';
@@ -31,12 +31,13 @@ const basicCardProps: CardProps = {
 		src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg',
 		altText: 'some alt text',
 	},
-	imagePosition: 'top',
+	imagePositionOnDesktop: 'top',
 	isExternalLink: false,
 	showLivePlayable: false,
 	isPlayableMediaCard: true,
 	imageLoading: 'eager',
 	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+	absoluteServerTimes: true,
 };
 
 const aBasicLink = {
@@ -54,7 +55,6 @@ export const Default = () => {
 		<SupportingContent
 			supportingContent={[aBasicLink]}
 			alignment="horizontal"
-			parentFormat={aBasicLink.format}
 		/>
 	);
 };
@@ -64,7 +64,6 @@ export const WithKicker = () => {
 		<SupportingContent
 			supportingContent={[{ ...aBasicLink, kickerText: 'Kicker text' }]}
 			alignment="horizontal"
-			parentFormat={aBasicLink.format}
 		/>
 	);
 };
@@ -136,7 +135,7 @@ export const Themes = () => {
 						},
 					},
 				]}
-				imagePosition="top"
+				imagePositionOnDesktop="top"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -172,7 +171,7 @@ export const Vertical = () => {
 						headline: 'Vertical 3',
 					},
 				]}
-				imagePosition="top"
+				imagePositionOnDesktop="top"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -209,7 +208,7 @@ export const Horizontal = () => {
 						headline: 'Horizontal 3',
 					},
 				]}
-				imagePosition="right"
+				imagePositionOnDesktop="right"
 				imageSize="large"
 				format={{
 					display: ArticleDisplay.Standard,
@@ -247,7 +246,7 @@ export const HorizontalOnMobile = () => {
 						headline: 'Horizontal 3',
 					},
 				]}
-				imagePosition="right"
+				imagePositionOnDesktop="right"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -300,7 +299,7 @@ export const LongText = () => {
 						kickerText: 'Long',
 					},
 				]}
-				imagePosition="left"
+				imagePositionOnDesktop="left"
 				imageSize="large"
 				format={{
 					display: ArticleDisplay.Standard,
@@ -351,7 +350,7 @@ export const MoreThanThree = () => {
 						kickerText: 'Kicker',
 					},
 				]}
-				imagePosition="left"
+				imagePositionOnDesktop="left"
 				imageSize="large"
 				format={{
 					display: ArticleDisplay.Standard,
@@ -381,7 +380,7 @@ export const OneSublink = () => {
 						kickerText: 'Kicker',
 					},
 				]}
-				imagePosition="left"
+				imagePositionOnDesktop="left"
 				imageSize="large"
 				trailText="When the image is positioned horizontally and there is only one sublink, it appears under the headline"
 				format={{
@@ -417,7 +416,7 @@ export const TwoSublinks = () => {
 						kickerText: 'Kicker',
 					},
 				]}
-				imagePosition="left"
+				imagePositionOnDesktop="left"
 				imageSize="large"
 				trailText="When there are only two sublinks they appear under the headline vertically stacked"
 				format={{
@@ -453,7 +452,7 @@ export const LiveSublink = () => {
 						},
 					},
 				]}
-				imagePosition="left"
+				imagePositionOnDesktop="left"
 				imageSize="large"
 				trailText="When the image is positioned horizontally and there is only one sublink, it appears under the headline"
 				format={{

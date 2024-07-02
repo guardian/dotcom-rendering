@@ -3,10 +3,15 @@ import { ArticleDesign } from '@guardian/libs';
 import {
 	between,
 	from,
-	headline,
+	headlineBold20,
+	headlineBold24,
+	headlineMedium20,
+	headlineMedium24,
 	space,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans15,
+	textSansBold15,
+	textSansBold17,
+} from '@guardian/source/foundations';
 import type { NestedArticleElement } from '../lib/renderElement';
 import { palette } from '../palette';
 import type {
@@ -20,8 +25,8 @@ import { Subheading } from './Subheading';
 
 // ----- Helpers ----- //
 
-const hasTitle = (event: DCRTimelineEvent): boolean =>
-	event.title !== undefined && event.title.trim() !== '';
+const isValidString = (str?: string): boolean =>
+	str !== undefined && str.trim() !== '';
 
 const hasShowcaseRole = (element?: FEElement): boolean => {
 	if (element === undefined) return false;
@@ -52,10 +57,10 @@ const timelineBulletStyles = css`
 
 const smallDateStyles = css`
 	display: block;
-	${textSans.small({ fontWeight: 'bold' })}
+	${textSansBold15}
 
 	${from.desktop} {
-		${textSans.medium({ fontWeight: 'bold' })}
+		${textSansBold17}
 	}
 `;
 
@@ -72,10 +77,10 @@ const titleWeight = ({ design }: ArticleFormat): 'bold' | 'medium' => {
 };
 
 const titleStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxsmall({ fontWeight: titleWeight(format) })}
+	${titleWeight(format) === 'bold' ? headlineBold20 : headlineMedium20}
 
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: titleWeight(format) })}
+		${titleWeight(format) === 'bold' ? headlineBold24 : headlineMedium24}
 	}
 `;
 
@@ -109,7 +114,7 @@ const EventHeader = ({
 			<span css={smallDates ? smallDateStyles : titleStyles(format)}>
 				{event.date}
 			</span>
-			{hasTitle(event) ? (
+			{isValidString(event.title) ? (
 				<span css={titleStyles(format)}>{event.title}</span>
 			) : null}
 		</Heading>
@@ -173,7 +178,7 @@ const labelStyles = css`
 	border-bottom: none;
 	padding: 3px 10px 4px 10px;
 	display: inline-block;
-	${textSans.small({ fontWeight: 'regular' })}
+	${textSans15}
 
 	${from.tablet} {
 		padding-left: ${space[5]}px;
@@ -207,41 +212,43 @@ const TimelineEvent = ({
 	sectioned,
 	smallDates,
 	format,
-}: TimelineEventProps) => (
-	<>
-		{event.label !== undefined && (
-			<div css={labelStyles}>{event.label}</div>
-		)}
-		<section
-			css={[
-				eventStyles,
-				hasShowcaseRole(event.main)
-					? immersiveMainElementEventStyles
-					: undefined,
-			]}
-		>
-			<EventHeader
-				event={event}
-				ArticleElementComponent={ArticleElementComponent}
-				sectioned={sectioned}
-				smallDates={smallDates}
-				format={format}
-			/>
-			{event.body.map((element, index) => (
-				<ArticleElementComponent
-					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-					key={index}
-					index={index}
-					element={element}
-					forceDropCap="off"
+}: TimelineEventProps) => {
+	return (
+		<>
+			{isValidString(event.label) && (
+				<div css={labelStyles}>{event.label}</div>
+			)}
+			<section
+				css={[
+					eventStyles,
+					hasShowcaseRole(event.main)
+						? immersiveMainElementEventStyles
+						: undefined,
+				]}
+			>
+				<EventHeader
+					event={event}
+					ArticleElementComponent={ArticleElementComponent}
+					sectioned={sectioned}
+					smallDates={smallDates}
 					format={format}
-					isTimeline={true}
-					isMainMedia={false}
 				/>
-			))}
-		</section>
-	</>
-);
+				{event.body.map((element, index) => (
+					<ArticleElementComponent
+						// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+						key={index}
+						index={index}
+						element={element}
+						forceDropCap="off"
+						format={format}
+						isTimeline={true}
+						isMainMedia={false}
+					/>
+				))}
+			</section>
+		</>
+	);
+};
 
 // ----- Timeline ----- //
 
@@ -258,7 +265,9 @@ export const Timeline = ({
 }: Props) => {
 	switch (timeline._type) {
 		case 'model.dotcomrendering.pageElements.DCRTimelineBlockElement': {
-			const someEventsHaveTitles = timeline.events.some(hasTitle);
+			const someEventsHaveTitles = timeline.events.some((event) =>
+				isValidString(event.title),
+			);
 
 			return (
 				<>
@@ -277,7 +286,7 @@ export const Timeline = ({
 		}
 		case 'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement': {
 			const someEventsHaveTitles = timeline.sections.some((section) =>
-				section.events.some(hasTitle),
+				section.events.some((event) => isValidString(event.title)),
 			);
 
 			return (

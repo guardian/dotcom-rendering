@@ -7,13 +7,13 @@ import {
 	headlineBold20,
 	neutral,
 	space,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import FirstPublished from 'components/FirstPublished';
 import type { Contributor } from 'contributor';
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import { background, border } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 type Props = {
@@ -34,7 +34,7 @@ const LEFT_MARGIN_DESKTOP = 60;
 const SIDE_MARGIN = space[5];
 const SIDE_MARGIN_MOBILE = 10;
 
-const Header: FC<{ children: ReactNode }> = ({ children }) => {
+const Header = ({ children }: { children: ReactNode }) => {
 	return (
 		<header
 			css={css`
@@ -48,7 +48,7 @@ const Header: FC<{ children: ReactNode }> = ({ children }) => {
 	);
 };
 
-const BlockTitle: FC<{ blockTitle: Optional<string> }> = ({ blockTitle }) =>
+const BlockTitle = ({ blockTitle }: { blockTitle: Optional<string> }) =>
 	blockTitle.maybeRender((title) => (
 		<h2
 			css={css`
@@ -60,11 +60,15 @@ const BlockTitle: FC<{ blockTitle: Optional<string> }> = ({ blockTitle }) =>
 		</h2>
 	));
 
-const BlockByline: FC<{
+const BlockByline = ({
+	name,
+	image,
+	format,
+}: {
 	name: string;
 	format: ArticleFormat;
 	image: Optional<Image>;
-}> = ({ name, image, format }) => {
+}) => {
 	return (
 		<div
 			css={css`
@@ -106,7 +110,7 @@ const BlockByline: FC<{
 	);
 };
 
-const LiveBlockContainer: FC<Props> = ({
+const LiveBlockContainer = ({
 	id,
 	children,
 	format,
@@ -118,7 +122,7 @@ const LiveBlockContainer: FC<Props> = ({
 	isPinnedPost,
 	isOriginalPinnedPost,
 	edition,
-}) => {
+}: Props) => {
 	return (
 		<article
 			/**

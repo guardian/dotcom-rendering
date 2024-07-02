@@ -3,8 +3,8 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace } from '@guardian/source-foundations';
-import type { Breakpoint } from '@guardian/source-foundations';
+import { from, remSpace } from '@guardian/source/foundations';
+import type { Breakpoint } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { none, some, withDefault } from '../../../vendor/@guardian/types/index';
 import { CaptionIconVariant } from 'components/CaptionIcon';
@@ -14,7 +14,7 @@ import type { Image } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
 import type { Sizes } from 'image/sizes';
 import type { Optional } from 'optional';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 const width = '100%';
@@ -96,13 +96,7 @@ export type BodyImageProps = {
 	caption: Optional<ReactNode>;
 };
 
-const DefaultBodyImage: FC<
-	BodyImageProps & {
-		wrapperStyles: SerializedStyles;
-		imgStyles: Option<SerializedStyles>;
-		captionStyles: Option<SerializedStyles>;
-	}
-> = ({
+const DefaultBodyImage = ({
 	image,
 	format,
 	lightbox,
@@ -110,6 +104,10 @@ const DefaultBodyImage: FC<
 	wrapperStyles,
 	imgStyles,
 	captionStyles,
+}: BodyImageProps & {
+	wrapperStyles: SerializedStyles;
+	imgStyles: Option<SerializedStyles>;
+	captionStyles: Option<SerializedStyles>;
 }) => (
 	<figure css={wrapperStyles}>
 		<Img

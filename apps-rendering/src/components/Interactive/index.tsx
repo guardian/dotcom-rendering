@@ -1,10 +1,9 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/source-foundations';
+import { neutral, remSpace } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -27,7 +26,7 @@ const iframeStyles = css`
 	width: 100%;
 `;
 
-const Interactive: FC<Props> = ({ url, title }) => (
+const Interactive = ({ url, title }: Props) => (
 	<figure css={styles} className="interactive">
 		<iframe
 			css={iframeStyles}

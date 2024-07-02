@@ -5,7 +5,7 @@ import {
 	from,
 	headlineBold17,
 	headlineMediumItalic17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { text } from 'palette';
 import { darkModeCss } from 'styles';
@@ -40,7 +40,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const LiveblogByline: React.FC<Props> = ({ format, bylineHtml }) => {
+const LiveblogByline = ({ format, bylineHtml }: Props) => {
 	return (
 		<DefaultByline
 			format={format}

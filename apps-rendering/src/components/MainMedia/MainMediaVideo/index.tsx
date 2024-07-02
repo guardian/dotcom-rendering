@@ -4,8 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, neutral, remSpace } from '@guardian/source-foundations';
-import type { FC } from 'react';
+import { from, neutral, remSpace } from '@guardian/source/foundations';
 import { darkModeCss, wideContentWidth } from 'styles';
 import type { Video } from 'video';
 
@@ -60,7 +59,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const MainMediaVideo: FC<Props> = ({ video, format }) => (
+const MainMediaVideo = ({ video, format }: Props) => (
 	<div
 		className="js-native-video"
 		css={styles(format)}

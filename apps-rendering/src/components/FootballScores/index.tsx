@@ -6,14 +6,13 @@ import {
 	brandAltBackground,
 	from,
 	remSpace,
-	textSans,
+	textSans17,
 	textSansBold17,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { MatchStatusIcon } from 'components/MatchStatusIcon';
 import { TeamScore } from 'components/TeamScore';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { MatchStatus } from 'football';
-import type { FC } from 'react';
 
 // ----- Component ----- //
 
@@ -64,16 +63,16 @@ const leagueStyles = css`
 `;
 
 const stadiumStyles = css`
-	${textSans.medium({ fontStyle: 'normal' })}
+	${textSans17};
 `;
 
-const FootballScores: FC<Props> = ({
+const FootballScores = ({
 	league,
 	stadium,
 	homeTeam,
 	awayTeam,
 	status,
-}) => (
+}: Props) => (
 	<section css={styles}>
 		<h2
 			css={css`

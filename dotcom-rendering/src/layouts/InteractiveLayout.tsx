@@ -1,13 +1,13 @@
 import { css, Global } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import React from 'react';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
@@ -87,7 +87,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-template-columns: 219px 1px 1020px;
 
 					grid-template-areas:
 						'title  border  headline'
@@ -108,7 +108,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 				*/
 				${until.wide} {
-					grid-template-columns: 140px 1px 1fr;
+					grid-template-columns: 140px 1px 940px;
 
 					grid-template-areas:
 						'title  border  headline'
@@ -122,7 +122,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${until.leftCol} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -135,7 +135,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${until.desktop} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'title'
 						'headline'
@@ -148,7 +148,7 @@ const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 				${until.tablet} {
 					grid-column-gap: 0px;
-					grid-template-columns: minmax(0, 1fr); /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					grid-template-areas:
 						'media'
 						'title'
@@ -236,6 +236,8 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
+	const { absoluteServerTimes = false } = article.config.switches;
+
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -287,6 +289,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 									article.config.discussionApiUrl
 								}
 								idApiUrl={article.config.idApiUrl}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
 								showSubNav={false}
 								isImmersive={false}
 								displayRoundel={false}
@@ -512,22 +517,16 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
-										hasStarRating={
-											typeof article.starRating ===
-											'number'
-										}
 									/>
 								</div>
-								{article.starRating !== undefined ? (
+								{!isUndefined(article.starRating) ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={article.starRating}
 											size="large"
 										/>
 									</div>
-								) : (
-									<></>
-								)}
+								) : null}
 							</GridItem>
 							<GridItem area="standfirst">
 								<Standfirst
@@ -774,7 +773,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={themePalette('--article-background')}
+						backgroundColour={themePalette(
+							'--article-section-background',
+						)}
 						borderColour={themePalette('--article-border')}
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
@@ -789,6 +790,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -811,6 +813,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 

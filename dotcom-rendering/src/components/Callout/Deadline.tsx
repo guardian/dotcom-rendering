@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { space, textSans12 } from '@guardian/source-foundations';
-import { SvgClock } from '@guardian/source-react-components';
+import { space, textSans12 } from '@guardian/source/foundations';
+import { SvgClock } from '@guardian/source/react-components';
 import { palette } from '../../palette';
 
 type Props = {

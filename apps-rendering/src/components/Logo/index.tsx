@@ -2,13 +2,12 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, textSans15, until } from '@guardian/source-foundations';
+import { remSpace, textSans15, until } from '@guardian/source/foundations';
 import Anchor from 'components/Anchor';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import { text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -103,7 +102,7 @@ const getStyles = (
 export const cleanImageUrl = (url: string): string =>
 	encodeURI(url).replace(/\(/g, '%28').replace(/\)/g, '%29');
 
-const Logo: FC<Props> = ({ item }) => {
+const Logo = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return maybeRender(item.branding, (branding) => {
