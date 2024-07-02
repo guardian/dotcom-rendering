@@ -1,33 +1,21 @@
-import type {
-	OphanABTestMeta,
-	OphanAction,
-	OphanComponentEvent,
-} from '@guardian/libs';
 import { log } from '@guardian/libs';
+import type ophan from '@guardian/ophan-tracker-js';
+import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import type { RenderingTarget } from '../../types/renderingTarget';
 
-export type OphanRecordFunction = (
-	event: { [key: string]: unknown } & {
-		/**
-		 * the experiences key will override previously set values.
-		 * Use `recordExperiences` instead.
-		 */
-		experiences?: never;
-	},
-	callback?: () => void,
-) => void;
+type Ophan = typeof ophan;
 
 /**
  * Store a reference to Ophan so that we don't need to load/enhance it more than once.
  */
-let cachedOphan: typeof window.guardian.ophan;
+let cachedOphan: Ophan | undefined;
 
 /**
  * Loads Ophan (if it hasn't already been loaded) and returns a promise of Ophan's methods.
  */
 export const getOphan = async (
 	renderingTarget: RenderingTarget,
-): Promise<NonNullable<typeof window.guardian.ophan>> => {
+): Promise<Ophan> => {
 	if (cachedOphan) {
 		return cachedOphan;
 	}
@@ -52,16 +40,11 @@ export const getOphan = async (
 	}
 
 	// We've taken '@guardian/ophan-tracker-js' out of the apps client bundle (made it external in webpack) because we don't ever expect this method to be called. Tracking in apps is done natively.
-	// @ts-expect-error -- side effect only
-	await import(/* webpackMode: "eager" */ '@guardian/ophan-tracker-js');
+	const { default: ophan } = await import(
+		/* webpackMode: "eager" */ '@guardian/ophan-tracker-js'
+	);
 
-	const { ophan } = window.guardian;
-
-	if (!ophan) {
-		throw new Error('window.guardian.ophan is not available');
-	}
-
-	const record: OphanRecordFunction = (event, callback) => {
+	const record: (typeof ophan)['record'] = (event, callback) => {
 		ophan.record(event, callback);
 		log('dotcom', '🧿 Ophan event recorded:', event);
 	};
@@ -83,19 +66,25 @@ export const getOphan = async (
 };
 
 export const submitComponentEvent = async (
-	componentEvent: OphanComponentEvent,
+	componentEvent: ComponentEvent,
 	renderingTarget: RenderingTarget,
 ): Promise<void> => {
 	const ophan = await getOphan(renderingTarget);
 	ophan.record({ componentEvent });
 };
 
-interface SdcTestMeta extends OphanABTestMeta {
-	labels?: string[];
+interface SdcTestMeta {
+	abTestName: NonNullable<ComponentEvent['abTest']>['name'];
+	abTestVariant: NonNullable<ComponentEvent['abTest']>['name'];
+	componentType: ComponentEvent['component']['componentType'];
+	campaignCode: ComponentEvent['component']['campaignCode'];
+	products: ComponentEvent['component']['products'];
+	labels: ComponentEvent['component']['labels'];
+	campaignId?: string;
 }
 
 export const sendOphanComponentEvent = async (
-	action: OphanAction,
+	action: TAction,
 	testMeta: SdcTestMeta,
 	renderingTarget: RenderingTarget,
 ): Promise<void> => {
@@ -105,10 +94,10 @@ export const sendOphanComponentEvent = async (
 		componentType,
 		products = [],
 		campaignCode,
-		labels,
+		labels = [],
 	} = testMeta;
 
-	const componentEvent: OphanComponentEvent = {
+	const componentEvent: ComponentEvent = {
 		component: {
 			componentType,
 			products,

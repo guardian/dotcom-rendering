@@ -26,6 +26,7 @@ const getContainerStates = (): ContainerStates => {
 const recordHiddenContainer = (sectionId: string): void => {
 	void getOphan('Web').then((ophan) =>
 		ophan.record({
+			// @ts-expect-error -- is this event dropped by Ophan?
 			component: 'hidden-container',
 			value: sectionId,
 		}),
