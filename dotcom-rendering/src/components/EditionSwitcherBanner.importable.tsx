@@ -102,7 +102,7 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 				<div css={textAndLink}>
 					<p>You are viewing the {defaultEditionName} homepage</p>
 					<LinkButton
-						href={`https://www.theguardian.com/${suggestedPageId}`}
+						href={`/${suggestedPageId}`}
 						priority="primary"
 						size="xsmall"
 						// larger screen sizes should have size="small", which is why we need a css override
