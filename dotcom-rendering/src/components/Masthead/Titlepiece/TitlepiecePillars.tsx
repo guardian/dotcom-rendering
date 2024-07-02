@@ -12,8 +12,8 @@ import {
 import type { EditionId } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
+import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
 import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
-import { pillarLeftMarginPx, pillarWidthsPx } from './titlepieceSharedStyles';
 
 type Props = {
 	nav: NavType;
