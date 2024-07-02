@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { from, palette, space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import type { EditionId } from '../lib/edition';
-import { editionList, getEditionFromId } from '../lib/edition';
-import { getZIndex } from '../lib/getZIndex';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import type { EditionLinkType } from '../model/extract-nav';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { EditionId } from '../../../lib/edition';
+import { editionList, getEditionFromId } from '../../../lib/edition';
+import { getZIndex } from '../../../lib/getZIndex';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import type { EditionLinkType } from '../../../model/extract-nav';
+import type { DropdownLinkType } from '../../Dropdown';
+import { Dropdown } from '../../Dropdown';
 
 interface TitlepieceEditionDropdownProps {
 	editionId: EditionId;
