@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { palette } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
+import { Accessibility } from '../components/Accessibility.importable';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import {
 	decideFrontsBannerAdSlot,
@@ -91,6 +92,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 		abTests.updatedHeaderDesignVariant === 'variant';
 
 	const contributionsServiceUrl = 'https://contributions.guardianapis.com'; // TODO: Read this from config (use getContributionsServiceUrl)
+
+	const isAccessibilityPage =
+		tagPage.config.pageId === 'help/accessibility-help';
 
 	return (
 		<>
@@ -228,6 +232,11 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 			</div>
 
 			<main data-layout="TagPageLayout" id="maincontent">
+				{isAccessibilityPage && (
+					<Island priority="critical" defer={{ until: 'visible' }}>
+						<Accessibility />
+					</Island>
+				)}
 				<TagPageHeader
 					title={tagPage.header.title}
 					description={tagPage.header.description}

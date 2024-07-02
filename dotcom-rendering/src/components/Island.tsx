@@ -1,5 +1,4 @@
 import type { ScheduleOptions, SchedulePriority } from '../lib/scheduler';
-import { useConfig } from './ConfigContext';
 
 type DeferredProps = {
 	visible: {
@@ -49,14 +48,6 @@ type IslandProps = {
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  */
 export const Island = ({ priority, defer, children }: IslandProps) => {
-	/**
-	 * Where is this coming from?
-	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
-	 *
-	 * This is here so that we can provide the config information to the hydrated, client-side rendered components
-	 */
-	const config = useConfig();
-
 	const rootMargin =
 		defer?.until === 'visible' ? defer.rootMargin : undefined;
 
@@ -70,7 +61,6 @@ export const Island = ({ priority, defer, children }: IslandProps) => {
 			deferUntil={defer?.until}
 			props={JSON.stringify(children.props)}
 			rootMargin={rootMargin}
-			config={JSON.stringify(config)}
 		>
 			{children}
 		</gu-island>
@@ -88,9 +78,4 @@ export type GuIsland = {
 	rootMargin?: string;
 	props: string;
 	children: React.ReactNode;
-	/**
-	 * This should be a stringified JSON of `ConfigContext`
-	 * @see /dotcom-rendering/src/types/configContext.ts
-	 */
-	config: string;
 };

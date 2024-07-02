@@ -48,6 +48,7 @@ describe('ReaderRevenueLinks', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<ReaderRevenueLinks
@@ -74,6 +75,7 @@ describe('ReaderRevenueLinks', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<ReaderRevenueLinks
