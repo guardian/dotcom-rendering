@@ -112,7 +112,7 @@ export const HeaderTopBar = ({
 					<HeaderTopBarEditionDropdown
 						editionId={editionId}
 						dataLinkName={dataLinkName}
-						showActiveEdition={!showBanner}
+						showCurrentEdition={!showBanner}
 					/>
 				</Hide>
 			</div>

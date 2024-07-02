@@ -48,15 +48,15 @@ export const useEditionSwitcherBanner = (
 	userEdition: Edition,
 ): [boolean] => {
 	const pageEdition = getEditionFromPageId(pageId)?.editionId;
-	const isOnWrongNetworkFront =
+	const isOnMismatchedNetworkFront =
 		isNetworkFront(pageId) && pageEdition !== userEdition;
-	const [showBanner, setShowBanner] = useState(isOnWrongNetworkFront);
+	const [showBanner, setShowBanner] = useState(isOnMismatchedNetworkFront);
 
 	useEffect(() => {
 		setShowBanner(
-			isOnWrongNetworkFront && !hideBannerThroughUserOverride(),
+			isOnMismatchedNetworkFront && !hideBannerThroughUserOverride(),
 		);
-	}, [isOnWrongNetworkFront]);
+	}, [isOnMismatchedNetworkFront]);
 
 	useEffect(() => {
 		addOrRemoveCookie();

@@ -12,7 +12,7 @@ import { dropDownOverrides } from './HeaderTopBarMyAccount';
 interface HeaderTopBarEditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
-	showActiveEdition?: boolean;
+	showCurrentEdition?: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -29,7 +29,7 @@ const editionDropdownStyles = css`
 export const HeaderTopBarEditionDropdown = ({
 	editionId,
 	dataLinkName,
-	showActiveEdition = true,
+	showCurrentEdition = true,
 }: HeaderTopBarEditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
@@ -47,7 +47,7 @@ export const HeaderTopBarEditionDropdown = ({
 		getEditionFromId(editionId),
 	);
 
-	const label = showActiveEdition ? activeEdition.title : 'Edition';
+	const label = showCurrentEdition ? activeEdition.title : 'Edition';
 
 	const dropdownItems: DropdownLinkType[] = editionList.map(
 		editionToDropdownLink,

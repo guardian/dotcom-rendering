@@ -124,9 +124,6 @@ const isNetworkFront = (pageId: string): boolean =>
  * Checks:
  * a) the first section is a network front
  * b) the second section is an editionalised page
- *
- * @param pageId
- * @returns
  */
 const splitEditionalisedPage = (
 	pageId: string,
