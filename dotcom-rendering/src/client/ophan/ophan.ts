@@ -1,7 +1,7 @@
-import type { OphanABTestMeta, OphanAction } from '@guardian/libs';
+import type { OphanABTestMeta } from '@guardian/libs';
 import { log } from '@guardian/libs';
-import ophan from '@guardian/ophan-tracker-js';
-import type {ComponentEvent} from '@guardian/ophan-tracker-js';
+import type ophan from '@guardian/ophan-tracker-js';
+import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import type { RenderingTarget } from '../../types/renderingTarget';
 
 type Ophan = typeof ophan;
@@ -79,7 +79,7 @@ interface SdcTestMeta extends OphanABTestMeta {
 }
 
 export const sendOphanComponentEvent = async (
-	action: OphanAction,
+	action: TAction,
 	testMeta: SdcTestMeta,
 	renderingTarget: RenderingTarget,
 ): Promise<void> => {
