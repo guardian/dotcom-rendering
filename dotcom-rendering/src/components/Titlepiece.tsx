@@ -3,68 +3,28 @@ import {
 	between,
 	from,
 	headlineBold14,
-	headlineBold17,
-	headlineBold20,
-	headlineBold24,
-	palette,
 	space,
 	textSans14,
 } from '@guardian/source/foundations';
-import { SvgGuardianLogo, SvgMenu } from '@guardian/source/react-components';
-import { useEffect, useState } from 'react';
+import {
+	Hide,
+	SvgGuardianLogo,
+	SvgMenu,
+} from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
+import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
 import { TitlepieceGrid } from './TitlepieceGrid';
+import { Pillars } from './TitlepiecePillars';
 
-interface TitlepieceProps {
+interface Props {
+	nav: NavType;
 	editionId: EditionId;
 }
 
-const pillars = [
-	{ name: 'News', colour: palette.news[500], path: '/news' },
-	{ name: 'Opinion', colour: palette.opinion[500], path: '/commentisfree' },
-	{ name: 'Culture', colour: palette.culture[500], path: '/culture' },
-	{
-		name: 'Lifestyle',
-		colour: palette.lifestyle[500],
-		path: '/lifeandstyle',
-	},
-	{ name: 'Sport', colour: palette.sport[500], path: '/sport' },
-] as const satisfies ReadonlyArray<{
-	name: string;
-	colour: string;
-	path: string;
-}>;
-
-const sections = [
-	{ name: 'UK', slug: 'uk-news' },
-	{ name: 'World', slug: 'world' },
-	{ name: 'Climate crisis', slug: 'environment/climate-crisis' },
-	{ name: 'Ukraine', slug: 'world/ukraine' },
-	{ name: 'Football', slug: 'football' },
-	{ name: 'Newsletters', slug: 'email-newsletters' },
-	{ name: 'Business', slug: 'business' },
-	{ name: 'Environment', slug: 'environment' },
-	{ name: 'UK politics', slug: 'politics' },
-	{ name: 'Education', slug: 'education' },
-	{ name: 'Society', slug: 'society' },
-	{ name: 'Science', slug: 'science' },
-	{ name: 'Tech', slug: 'technology' },
-	{ name: 'Global development', slug: 'global-development' },
-	{ name: 'Obituaries', slug: 'obituaries' },
-] as const satisfies ReadonlyArray<{
-	name: string;
-	slug: string;
-}>;
-
-const getWindowWidth = () => window.innerWidth;
-
 const veggieBurgerDiameter = 40;
-
-const pillarLinkWidthTablet = 108;
-const pillarLinkWidthLeftCol = 125;
-const pillarLinkWidthWide = 136;
 
 const editionSwitcherMenuStyles = css`
 	grid-column: content-start / content-end;
@@ -132,124 +92,61 @@ const burgerStyles = css`
 		align-self: center;
 	}
 	${from.desktop} {
-		grid-row: 1 / 2;
-		align-self: end;
-		justify-self: start;
-		margin-bottom: ${space[3]}px;
-		margin-left: ${pillarLinkWidthTablet * pillars.length + space[2]}px;
-	}
-	${from.leftCol} {
-		margin-left: ${pillarLinkWidthLeftCol * pillars.length + space[2]}px;
-	}
-	${from.wide} {
-		margin-left: ${pillarLinkWidthWide * pillars.length + space[2]}px;
-	}
-`;
-
-const navLinkStyles = css`
-	a {
-		color: ${themePalette('--masthead-nav-link-text')};
-		text-decoration: none;
+		/** TODO - include veggie burger in desktop version of <Pillars /> */
+		display: none;
 	}
 `;
 
 const pillarsNavStyles = css`
-	grid-column: content-start / viewport-end;
+	grid-column: content-start / content-end;
 	grid-row: 2;
 	align-self: end;
 
 	${headlineBold14}
 	margin-top: ${space[2]}px;
 	border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
+
 	${from.desktop} {
 		grid-row: 1 / 2;
 	}
-	ul {
-		display: flex;
-	}
-	li {
-		height: 28px;
-		padding-right: ${space[1]}px;
-		${between.mobileMedium.and.mobileLandscape} {
-			height: 34px;
-		}
-		${between.mobileLandscape.and.tablet} {
-			${headlineBold17}
-			height: 37px;
-		}
-		${from.tablet} {
-			${headlineBold20}
-			height: ${space[10]}px;
-			width: ${pillarLinkWidthTablet}px;
-		}
-		${from.leftCol} {
-			${headlineBold24}
-			height: 52px;
-			width: ${pillarLinkWidthLeftCol}px;
-		}
-		${from.wide} {
-			width: ${pillarLinkWidthWide}px;
-		}
-	}
 `;
 
-const pillarColorStyles = css`
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height: 4px;
-	transform-origin: bottom;
-	transform: scaleY(0);
-	transition: transform 0.3s;
-
-	*:hover > & {
-		transform: scaleY(1);
-	}
-`;
-
-const pillarBarStyles = css`
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	margin-top: ${space[1]}px;
-	width: 1px;
-	background-color: ${themePalette('--masthead-nav-lines')};
-`;
-
-const sectionsNavStyles = css`
-	grid-column: content-start / viewport-end;
+const subnavStyles = css`
+	grid-column: content-start / content-end;
 	grid-row: 3;
 	${textSans14}
+	color: inherit;
 	height: 28px;
 	margin-top: ${space[2]}px;
-	ul {
-		display: flex;
-		column-gap: ${space[3]}px;
-	}
-	li {
-		white-space: nowrap;
-	}
+
+	overflow-x: scroll;
+	width: calc(100% + 10px);
+
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
+	}
+	${from.tablet} {
+		width: calc(100% + ${space[5]}px);
 	}
 	${from.leftCol} {
 		margin-top: 14px;
 	}
 `;
 
-export const Titlepiece = ({ editionId }: TitlepieceProps) => {
-	const [windowWidth, setWindowWidth] = useState(getWindowWidth());
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowWidth(getWindowWidth());
-		};
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
+const subnavListStyles = css`
+	display: flex;
+	column-gap: ${space[3]}px;
+`;
+const subnavListItemStyles = css`
+	white-space: nowrap;
+`;
+
+const subnavLinkStyles = css`
+	color: ${themePalette('--masthead-nav-link-text')};
+	text-decoration: none;
+`;
+
+export const Titlepiece = ({ nav, editionId }: Props) => {
 	return (
 		<TitlepieceGrid type="header">
 			{/* Edition menu */}
@@ -269,7 +166,43 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 				</a>
 			</div>
 
+			{/* Pillars nav */}
+			<nav css={pillarsNavStyles}>
+				{/* Pillars nav mobile version */}
+				<Hide from="desktop">
+					<Pillars
+						pillars={nav.pillars}
+						dataLinkName={nestedOphanComponents(
+							'header',
+							'titlepiece',
+							'nav',
+						)}
+						selectedPillar={nav.selectedPillar}
+						isImmersive={false}
+						showBurgerMenu={false}
+						hasPageSkin={false}
+					/>
+				</Hide>
+
+				{/* Pillars nav desktop version (contains veggie burger) */}
+				<Hide until="desktop">
+					<Pillars
+						pillars={nav.pillars}
+						dataLinkName={nestedOphanComponents(
+							'header',
+							'titlepiece',
+							'nav',
+						)}
+						selectedPillar={nav.selectedPillar}
+						isImmersive={false}
+						showBurgerMenu={true}
+						hasPageSkin={false}
+					/>
+				</Hide>
+			</nav>
+
 			{/* Veggie burger menu */}
+			{/* <Hide from="desktop"> */}
 			<div css={burgerStyles}>
 				<SvgMenu
 					size="small"
@@ -278,57 +211,22 @@ export const Titlepiece = ({ editionId }: TitlepieceProps) => {
 					}}
 				/>
 			</div>
+			{/* </Hide> */}
 
-			{/* Pillars nav */}
-			<nav css={[pillarsNavStyles, navLinkStyles]}>
-				<ul>
-					{pillars.map(({ name, path, colour }, index) => (
-						<a
-							key={path}
-							href={`https://www.theguardian.com${path}`}
-						>
-							<li
-								key={path}
-								css={css`
-									position: relative;
-									${index > 0 &&
-									`padding-left: ${space[1]}px;`}
-								`}
-							>
-								<div
-									style={{
-										backgroundColor: colour,
-									}}
-									css={pillarColorStyles}
-								/>
-								{(index !== pillars.length - 1 ||
-									(index === pillars.length - 1 &&
-										windowWidth >= 980)) && (
-									<div css={pillarBarStyles} />
-								)}
-
-								{name}
+			{/* Subnav */}
+			{nav.subNavSections && (
+				<nav css={subnavStyles}>
+					<ul css={subnavListStyles}>
+						{nav.subNavSections.links.map(({ title, url }) => (
+							<li key={title} css={subnavListItemStyles}>
+								<a href={url} css={subnavLinkStyles}>
+									{title}
+								</a>
 							</li>
-						</a>
-					))}
-				</ul>
-			</nav>
-
-			{/* Sections nav */}
-			<nav css={[sectionsNavStyles, navLinkStyles]}>
-				<ul>
-					{sections.map(({ name, slug }) => (
-						<li key={slug}>
-							<a
-								key={slug}
-								href={`https://www.theguardian.com/${slug}`}
-							>
-								{name}
-							</a>
-						</li>
-					))}
-				</ul>
-			</nav>
+						))}
+					</ul>
+				</nav>
+			)}
 		</TitlepieceGrid>
 	);
 };
