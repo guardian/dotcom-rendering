@@ -65,7 +65,6 @@ const pillarLink = css`
 `;
 
 const firstPillarLinkOverrides = css`
-	/* width: calc(100% - ${pillarLeftMarginPx}px); */
 	a {
 		margin-left: 0;
 
@@ -94,7 +93,7 @@ const forceUnderline = css`
 const verticalDividerStyles = css`
 	:after {
 		content: '';
-		// TODO - set this in palette and retrieve as CSS var
+		/* TODO - set this in palette and retrieve as CSS var */
 		border-left: 1px solid ${sourcePalette.neutral[86]};
 		display: flex;
 		position: absolute;
@@ -108,7 +107,7 @@ const verticalDividerStyles = css`
 
 const pillarUnderline = css`
 	:after {
-		// This CSS var is dynamically set via the style attribute
+		/* This CSS var is dynamically set via the style attribute*/
 		border-bottom: 4px solid var(--pillar-underline);
 		content: '';
 		display: block;
@@ -118,14 +117,18 @@ const pillarUnderline = css`
 		right: 0;
 
 		height: ${space[1]}px;
-		// This is 100% width of pillar block minus the 6px margin
-		// on the left hand side and 1px border on the right
+		/*
+		This is 100% width of pillar block minus the left margin
+		and 1px border on the right
+		*/
 		width: calc(100% - ${pillarLeftMarginPx}px - 1px);
 		margin-left: ${pillarLeftMarginPx}px;
 		transition: transform 0.3s ease-in-out;
 
-		// This hides the pillar underline below the pillar block until
-		// ready to view, either by hovering or forcing the underline (when selected)
+		/*
+		This hides the pillar underline below the pillar block until
+		ready to view, either by hovering or forcing the underline (when selected)
+		*/
 		margin-bottom: -${space[1]}px;
 	}
 `;
@@ -163,12 +166,6 @@ const pillarBlock = css`
 		width: 136px;
 	}
 `;
-
-// TODO - implement veggie burger menu
-// const burgerPositionOverrides = css`
-// 	left: 6px;
-// 	bottom: 10px;
-// `;
 
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
