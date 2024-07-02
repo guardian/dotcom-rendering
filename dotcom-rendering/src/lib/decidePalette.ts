@@ -391,27 +391,6 @@ const borderFilterButton = (): string => neutral[60];
 const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
 const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
 
-const backgroundMessageForm = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[100];
-		case Pillar.Sport:
-			return sport[200];
-		case Pillar.Lifestyle:
-			return lifestyle[100];
-		case Pillar.Culture:
-			return culture[100];
-		case Pillar.Opinion:
-			return opinion[100];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[100];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[100];
-		default:
-			return news[100];
-	}
-};
-
 const textBetaLabel = (): string => neutral[46];
 
 const textDesignTag = (format: ArticleFormat): string => {
@@ -587,7 +566,6 @@ export const decidePalette = (
 			filterButtonActive: backgroundFilterButtonActive(format),
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
-			messageForm: backgroundMessageForm(format),
 		},
 		fill: {
 			guardianLogo: fillGuardianLogo(format),

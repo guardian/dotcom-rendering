@@ -924,12 +924,6 @@ export interface CampaignFieldSelect extends CampaignField {
 }
 
 // -------------------------------------
-// Message Us
-// -------------------------------------
-
-export type MessageUsFieldType = CampaignFieldText | CampaignFieldTextArea;
-
-// -------------------------------------
 // Quiz
 // -------------------------------------
 

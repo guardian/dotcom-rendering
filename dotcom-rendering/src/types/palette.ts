@@ -31,7 +31,6 @@ export type Palette = {
 		treat: Colour;
 		designTag: Colour;
 		lightboxDivider: Colour;
-		messageForm: Colour;
 	};
 	fill: {
 		guardianLogo: Colour;
