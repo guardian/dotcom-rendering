@@ -30,6 +30,7 @@ describe('YoutubeAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<YoutubeAtom
@@ -67,6 +68,7 @@ describe('YoutubeAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<YoutubeAtom
@@ -113,6 +115,7 @@ describe('YoutubeAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<YoutubeAtom
@@ -151,6 +154,7 @@ describe('YoutubeAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<YoutubeAtom
@@ -191,6 +195,7 @@ describe('YoutubeAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<YoutubeAtom
@@ -229,6 +234,7 @@ describe('YoutubeAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<YoutubeAtom
@@ -266,6 +272,7 @@ describe('YoutubeAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<YoutubeAtom
@@ -307,6 +314,7 @@ describe('YoutubeAtom', () => {
 						darkModeAvailable: false,
 						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
+						editionId: 'UK',
 					}}
 				>
 					<YoutubeAtom
