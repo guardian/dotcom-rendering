@@ -14,7 +14,7 @@ const apiPromise = new Promise<{ hidden: boolean }>(() => {
 
 const getBannerValueFromQueryParams = () => {
 	const queryParams = new URLSearchParams(window.location.search);
-	return queryParams.get('editionSwitcherBanner');
+	return queryParams.get('edition-switcher-banner');
 };
 
 const addOrRemoveCookie = () => {
