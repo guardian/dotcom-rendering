@@ -129,8 +129,32 @@ export const FlatWithNoTitles = {
 				},
 			] as const,
 		},
-		ArticleElementComponent,
 		format,
+		ArticleElementComponent,
+	},
+	parameters: {
+		formats: [
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+			{
+				design: ArticleDesign.Comment,
+				display: ArticleDisplay.Showcase,
+				theme: Pillar.Culture,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.Opinion,
+			},
+		],
+		chromatic: {
+			modes: {
+				Horizontal: allModes.splitHorizontal,
+			},
+		},
 	},
 } satisfies Story;
 
