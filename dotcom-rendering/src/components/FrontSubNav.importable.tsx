@@ -1,16 +1,10 @@
 import { css } from '@emotion/react';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import useSWR from 'swr';
 import type { EditionId } from '../lib/edition';
 import { useEditionSwitcherBanner } from '../lib/useUserPreferredEdition';
 import type { SubNavType } from '../model/extract-nav';
 import { Section } from './Section';
 import { SubNav } from './SubNav.importable';
-
-const key = 'edition-switcher-banner';
-const apiPromise = new Promise<{ hidden: boolean }>(() => {
-	/* this never resolves */
-});
 
 type Props = {
 	subNavSections: SubNavType;
@@ -29,9 +23,10 @@ export const FrontSubNav = ({
 	userEdition,
 	currentPillarTitle,
 }: Props) => {
-	const [showBanner] = useEditionSwitcherBanner(pageId, userEdition);
-	const { data } = useSWR(key, () => apiPromise);
-	const isBannerClosed = !!data?.hidden;
+	const [showBanner, isBannerClosed] = useEditionSwitcherBanner(
+		pageId,
+		userEdition,
+	);
 
 	if (showBanner && !isBannerClosed) {
 		return null;

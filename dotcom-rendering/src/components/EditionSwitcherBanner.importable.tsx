@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { from, palette, space, textSans14 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
-import useSWR from 'swr';
 import { center } from '../lib/center';
 import {
 	type Edition,
@@ -68,11 +67,6 @@ const closeButton = css`
 	border: none;
 `;
 
-const key = 'edition-switcher-banner';
-const apiPromise = new Promise<{ hidden: boolean }>(() => {
-	/* this never resolves */
-});
-
 type Props = {
 	pageId: Edition['pageId'];
 	edition: EditionId;
@@ -85,10 +79,11 @@ type Props = {
  * See PR for details: https://github.com/guardian/dotcom-rendering/pull/11763
  */
 export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
-	const [showBanner] = useEditionSwitcherBanner(pageId, edition);
+	const [showBanner, isBannerClosed] = useEditionSwitcherBanner(
+		pageId,
+		edition,
+	);
 
-	const { data } = useSWR(key, () => apiPromise);
-	const isBannerClosed = !!data?.hidden;
 	const suggestedPageId = getEditionFromId(edition).pageId;
 	const suggestedEdition = getEditionFromId(edition).title.replace(
 		' edition',

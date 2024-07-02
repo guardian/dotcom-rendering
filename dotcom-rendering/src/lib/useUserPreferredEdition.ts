@@ -1,11 +1,16 @@
 import { getCookie, removeCookie, setCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { mutate } from 'swr';
+import useSWR, { mutate } from 'swr';
 import {
 	type EditionId as Edition,
 	getEditionFromPageId,
 	isNetworkFront,
 } from './edition';
+
+const key = 'edition-switcher-banner';
+const apiPromise = new Promise<{ hidden: boolean }>(() => {
+	/* this never resolves */
+});
 
 const getBannerValueFromQueryParams = () => {
 	const queryParams = new URLSearchParams(window.location.search);
@@ -46,11 +51,14 @@ const hideBannerThroughUserOverride = () => {
 export const useEditionSwitcherBanner = (
 	pageId: string,
 	userEdition: Edition,
-): [boolean] => {
+): [boolean, boolean] => {
 	const pageEdition = getEditionFromPageId(pageId)?.editionId;
 	const isOnMismatchedNetworkFront =
 		isNetworkFront(pageId) && pageEdition !== userEdition;
 	const [showBanner, setShowBanner] = useState(isOnMismatchedNetworkFront);
+
+	const { data } = useSWR(key, () => apiPromise);
+	const isBannerClosed = !!data?.hidden;
 
 	useEffect(() => {
 		setShowBanner(
@@ -62,10 +70,9 @@ export const useEditionSwitcherBanner = (
 		addOrRemoveCookie();
 	}, []);
 
-	return [showBanner];
+	return [showBanner, isBannerClosed];
 };
 
-const key = 'edition-switcher-banner';
 export const hideEditionSwitcherBanner = (): void => {
 	void mutate(key, { hidden: true }, false);
 };
