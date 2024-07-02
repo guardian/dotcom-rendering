@@ -105,7 +105,6 @@ export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
 						href={`/${suggestedPageId}`}
 						priority="primary"
 						size="xsmall"
-						// larger screen sizes should have size="small", which is why we need a css override
 						cssOverrides={linkButton}
 						data-link-name="edition-switcher-banner switch-edition"
 					>
