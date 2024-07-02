@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import {
+	brandText,
 	from,
-	space,
-	textSans15,
+	palette as sourcePalette,
+	textSans17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -11,10 +12,9 @@ import type {
 	EditionLinkType,
 	PillarLinkType,
 } from '../../../../model/extract-nav';
-import { palette as themePalette } from '../../../../palette';
-import { pillarWidthsPx } from '../constants';
-import { CollapseSectionButton } from './CollapseSectionButton';
+import { CollapseColumnButton } from './ExpandedNavCollapseSectionButton';
 
+// CSS
 const hideDesktop = css`
 	${from.desktop} {
 		display: none;
@@ -31,14 +31,14 @@ const pillarDivider = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${themePalette('--masthead-nav-lines')};
+			background-color: ${sourcePalette.brand[600]};
 			z-index: 1;
 		}
 	}
 `;
 
 const columnLinkTitle = css`
-	${textSans15};
+	${textSans17};
 	/**
 	 * Typography preset styles should not be overridden.
 	 * This has been done because the styles do not directly map to the new presets.
@@ -49,7 +49,7 @@ const columnLinkTitle = css`
 	text-decoration: none;
 	border: 0;
 	box-sizing: border-box;
-	color: ${themePalette('--masthead-nav-link-text')};
+	color: ${brandText.primary};
 	cursor: pointer;
 	display: inline-block;
 	font-weight: 500;
@@ -70,7 +70,7 @@ const columnLinkTitle = css`
 
 	:hover,
 	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
+		color: ${sourcePalette.brandAlt[400]};
 		text-decoration: underline;
 	}
 
@@ -90,7 +90,7 @@ export const mainMenuLinkStyle = css`
 `;
 
 export const columnLinks = css`
-	${textSans15};
+	${textSans17};
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
@@ -113,7 +113,7 @@ export const columnLinks = css`
 		order: 1;
 		height: 100%;
 		width: 100%;
-		padding: 0 ${space[2]}px;
+		padding: 0 9px;
 	}
 `;
 
@@ -122,13 +122,13 @@ const firstColumnLinks = css`
 		padding-left: 0;
 	}
 	${until.tablet} {
-		background: ${themePalette('--sub-nav-section-header-background')};
+		background: ${sourcePalette.brand[300]};
 	}
 `;
 
 const pillarColumnLinks = css`
 	${until.tablet} {
-		background: ${themePalette('--sub-nav-section-header-background')};
+		background: ${sourcePalette.brand[300]};
 	}
 `;
 
@@ -154,7 +154,7 @@ export const lineStyle = css`
 	${from.desktop} {
 		display: none;
 	}
-	background-color: ${themePalette('--sub-nav-horizontal-section-divider')};
+	background-color: ${sourcePalette.brand[600]};
 	content: '';
 	display: block;
 	height: 1px;
@@ -163,7 +163,7 @@ export const lineStyle = css`
 `;
 
 const columnStyle = css`
-	${textSans15};
+	${textSans17};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
@@ -180,10 +180,10 @@ const columnStyle = css`
 	position: relative;
 
 	${from.desktop} {
-		width: ${pillarWidthsPx.tablet}px;
+		width: 134px;
 		float: left;
 		position: relative;
-		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
+		border-left: 1px solid ${sourcePalette.brand[600]};
 
 		:after {
 			height: 100%;
@@ -193,20 +193,22 @@ const columnStyle = css`
 
 		:first-of-type {
 			border-left: none;
+			width: 123px;
 		}
 	}
 `;
 
 const columnStyleFromLeftCol = css`
 	${from.leftCol} {
-		width: ${pillarWidthsPx.leftCol}px;
-	}
-	${from.wide} {
-		width: ${pillarWidthsPx.wide}px;
+		width: 160px;
+
+		:first-of-type {
+			width: 150px;
+		}
 	}
 `;
 
-export const Pillar = ({
+export const Column = ({
 	column,
 	index,
 	showLineBelow,
@@ -275,7 +277,7 @@ export const Pillar = ({
 				key="OpenExpandedMenuCheckbox"
 				aria-hidden="true"
 			/>
-			<CollapseSectionButton
+			<CollapseColumnButton
 				collapseColumnInputId={collapseColumnInputId}
 				title={column.title}
 				columnInputId={columnInputId}

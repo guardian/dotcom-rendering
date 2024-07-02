@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	brandBackground,
 	from,
 	textSans20,
 	// until,
@@ -9,8 +8,9 @@ import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
 // import { navInputCheckboxId } from '../../../Nav/config';
-import { Columns } from '../../../Nav/ExpandedMenu/Columns';
+import { palette as themePalette } from '../../../../palette';
 import { VeggieBurgerMenu } from '../VeggieBurger';
+import { Sections } from './Sections';
 
 // const wrapperMainMenuStyles = css`
 // 	background-color: rgba(0, 0, 0, 0.5);
@@ -55,12 +55,12 @@ import { VeggieBurgerMenu } from '../VeggieBurger';
 // 		will-change: transform;
 // 	}
 // 	${from.desktop} {
-// 		display: none;
+// 		display: relative;
 // 	}
 // `;
 
 const mainMenuStyles = css`
-	background-color: ${brandBackground.primary};
+	background-color: ${themePalette('--masthead-nav-background')};
 	box-sizing: border-box;
 	${textSans20};
 	margin-right: 29px;
@@ -68,6 +68,7 @@ const mainMenuStyles = css`
 	top: 0;
 	${getZIndex('expanded-veggie-menu')}
 	overflow: hidden;
+	position: fixed;
 
 	${from.desktop} {
 		position: absolute;
@@ -118,13 +119,21 @@ export const TitlepieceExpandedNav = ({
 				data-testid="expanded-menu"
 				css={wrapperMainMenuStyles}
 			> */}
-			<div css={mainMenuStyles}>
-				<Columns
-					editionId={editionId}
-					isImmersive={isImmersive}
-					nav={nav}
-					hasPageSkin={hasPageSkin}
-				/>
+			<div
+				css={css`
+					${from.desktop} {
+						position: relative;
+					}
+				`}
+			>
+				<div css={mainMenuStyles}>
+					<Sections
+						editionId={editionId}
+						isImmersive={isImmersive}
+						nav={nav}
+						hasPageSkin={hasPageSkin}
+					/>
+				</div>
 			</div>
 			{/* </div> */}
 		</div>

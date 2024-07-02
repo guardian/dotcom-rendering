@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
-import { from, textSans17 } from '@guardian/source/foundations';
+import {
+	brandText,
+	from,
+	palette as sourcePalette,
+	textSans17,
+} from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType } from '../../../../model/extract-nav';
-import { palette as themePalette } from '../../../../palette';
-import { pillarWidthsPx } from '../constants';
 
 const pillarHeight = 42;
 
@@ -34,7 +37,7 @@ const columnStyle = css`
 	}
 
 	${from.desktop} {
-		width: ${pillarWidthsPx.tablet}px;
+		width: 140px;
 		float: left;
 		position: relative;
 
@@ -46,10 +49,7 @@ const columnStyle = css`
 
 const columnStyleFromLeftCol = css`
 	${from.leftCol} {
-		width: ${pillarWidthsPx.leftCol}px;
-	}
-	${from.wide} {
-		width: ${pillarWidthsPx.wide}px;
+		width: 160px;
 	}
 `;
 
@@ -64,7 +64,7 @@ const pillarDivider = css`
 			bottom: 0;
 			width: 1px;
 			height: auto;
-			background-color: ${themePalette('--masthead-nav-lines')};
+			background-color: ${sourcePalette.brand[600]};
 			z-index: 1;
 		}
 	}
@@ -86,7 +86,7 @@ const pillarDividerExtended = css`
 			left: 0;
 			width: 1px;
 			height: auto;
-			background-color: ${themePalette('--masthead-nav-lines')};
+			background-color: ${sourcePalette.brand[600]};
 			z-index: 1;
 		}
 	}
@@ -132,7 +132,7 @@ const columnLinkTitle = css`
 	text-decoration: none;
 	border: 0;
 	box-sizing: border-box;
-	color: ${themePalette('--masthead-nav-link-text')};
+	color: ${brandText.primary};
 	cursor: pointer;
 	display: inline-block;
 	font-weight: 500;
@@ -152,7 +152,7 @@ const columnLinkTitle = css`
 	}
 	:hover,
 	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
+		color: ${sourcePalette.brandAlt[400]};
 		text-decoration: underline;
 	}
 
@@ -177,7 +177,7 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
-export const MoreSection = ({
+export const MoreColumn = ({
 	otherLinks,
 	brandExtensions,
 	hasPageSkin,

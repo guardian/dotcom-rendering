@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import {
+	brandText,
 	from,
 	headlineMedium24,
+	palette as sourcePalette,
 	textSans17,
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
-import { palette as themePalette } from '../../../../palette';
 
 const hideDesktop = css`
 	${from.desktop} {
@@ -35,7 +36,7 @@ const collapseColumnButton = css`
 	border: 0;
 	box-sizing: border-box;
 	cursor: pointer;
-	color: ${themePalette('--masthead-nav-link-text')};
+	color: ${brandText.primary};
 	display: block;
 	${headlineMedium24};
 	font-weight: 700;
@@ -63,7 +64,7 @@ const collapseColumnButton = css`
 	}
 	:hover,
 	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
+		color: ${sourcePalette.brandAlt[400]};
 	}
 `;
 
@@ -78,7 +79,7 @@ type Props = {
 	ariaControls: string;
 };
 
-export const CollapseSectionButton = ({
+export const CollapseColumnButton = ({
 	title,
 	columnInputId,
 	collapseColumnInputId,
