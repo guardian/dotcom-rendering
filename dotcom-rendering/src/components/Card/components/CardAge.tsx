@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { timeAgo } from '@guardian/libs';
 import { from, textSans12, textSansBold12 } from '@guardian/source/foundations';
-import { isUnsupportedFormatForCardWithoutBackground } from '../../../lib/cardHelpers';
+import { cardHasDarkBackground } from '../../../lib/cardHelpers';
 import { palette } from '../../../palette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import { DateTime } from '../../DateTime';
@@ -48,9 +48,7 @@ const ageStyles = (format: ArticleFormat, isOnwardsContent?: boolean) => {
 		}
 
 		> time {
-			${isUnsupportedFormatForCardWithoutBackground(format)
-				? textSansBold12
-				: textSans12};
+			${cardHasDarkBackground(format) ? textSansBold12 : textSans12};
 		}
 	`;
 };

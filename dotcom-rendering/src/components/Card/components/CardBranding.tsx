@@ -4,7 +4,7 @@ import {
 	textSans12,
 	visuallyHidden,
 } from '@guardian/source/foundations';
-import { decideLogo } from '../../../lib/decideLogo';
+import { decideCardLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
 import { getOphanComponents } from '../../../lib/labs';
 import { palette as themePalette } from '../../../palette';
@@ -48,7 +48,7 @@ export const CardBranding = ({
 	onwardsSource,
 	containerPalette,
 }: Props) => {
-	const logo = decideLogo(format, branding, containerPalette);
+	const logo = decideCardLogo(branding, format, containerPalette);
 
 	/**
 	 * Only apply click tracking to branding on related content
