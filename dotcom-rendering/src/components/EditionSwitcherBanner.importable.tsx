@@ -79,7 +79,7 @@ type Props = {
  * See PR for details: https://github.com/guardian/dotcom-rendering/pull/11763
  */
 export const EditionSwitcherBanner = ({ pageId, edition }: Props) => {
-	const [showBanner, isBannerClosed] = useEditionSwitcherBanner(
+	const { showBanner, isBannerClosed } = useEditionSwitcherBanner(
 		pageId,
 		edition,
 	);

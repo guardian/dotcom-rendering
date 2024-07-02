@@ -41,6 +41,11 @@ const hideBannerThroughUserOverride = () => {
 	);
 };
 
+type EditionSwitcherBanner = {
+	showBanner: boolean;
+	isBannerClosed: boolean;
+};
+
 /**
  * Show an "Edition Switcher" banner if the user is on a network front
  * which is different to their preferred or default edition.
@@ -51,7 +56,7 @@ const hideBannerThroughUserOverride = () => {
 export const useEditionSwitcherBanner = (
 	pageId: string,
 	userEdition: Edition,
-): [boolean, boolean] => {
+): EditionSwitcherBanner => {
 	const pageEdition = getEditionFromPageId(pageId)?.editionId;
 	const isOnMismatchedNetworkFront =
 		isNetworkFront(pageId) && pageEdition !== userEdition;
@@ -70,7 +75,7 @@ export const useEditionSwitcherBanner = (
 		addOrRemoveCookie();
 	}, []);
 
-	return [showBanner, isBannerClosed];
+	return { showBanner, isBannerClosed };
 };
 
 export const hideEditionSwitcherBanner = (): void => {

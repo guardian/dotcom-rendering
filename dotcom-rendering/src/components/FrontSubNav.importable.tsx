@@ -23,7 +23,7 @@ export const FrontSubNav = ({
 	userEdition,
 	currentPillarTitle,
 }: Props) => {
-	const [showBanner, isBannerClosed] = useEditionSwitcherBanner(
+	const { showBanner, isBannerClosed } = useEditionSwitcherBanner(
 		pageId,
 		userEdition,
 	);

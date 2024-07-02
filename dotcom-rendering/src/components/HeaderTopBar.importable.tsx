@@ -76,7 +76,7 @@ export const HeaderTopBar = ({
 	pageId = '',
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
-	const [showBanner] = useEditionSwitcherBanner(pageId, editionId);
+	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
 	return (
 		<div
