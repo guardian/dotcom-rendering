@@ -5421,6 +5421,39 @@ const mastheadVeggieBurgerBackground: PaletteFunction = () =>
 const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
+const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 300);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[300];
+	}
+};
+const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.Sport:
+		case Pillar.Opinion:
+			return pillarPalette(theme, 200);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[200];
+	}
+};
+
 const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
 const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
 	switch (design) {
@@ -5476,6 +5509,28 @@ const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
 };
 
 const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
+
+const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[500];
+		case Pillar.Opinion:
+			return sourcePalette.news[500];
+		case Pillar.Sport:
+			return sourcePalette.sport[500];
+		case Pillar.Culture:
+			return sourcePalette.culture[500];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[500];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[500];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.news[500];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -6277,6 +6332,14 @@ const paletteColours = {
 		light: paginationTextLight,
 		dark: paginationTextDark,
 	},
+	'--pinned-post-background': {
+		light: liveBlockContainerBackgroundLight,
+		dark: liveBlockContainerBackgroundDark,
+	},
+	'--pinned-post-border': {
+		light: pinnedPostBorderLight,
+		dark: pinnedPostBorderDark,
+	},
 	'--privacy-text-regular': {
 		light: privacyTextRegularLight,
 		dark: privacyTextDark,
@@ -6580,6 +6643,10 @@ const paletteColours = {
 	'--witness-title-text': {
 		light: witnessTitleText,
 		dark: witnessTitleText,
+	},
+	'--youtube-overlay-kicker': {
+		light: youtubeOverlayKicker,
+		dark: youtubeOverlayKicker,
 	},
 } satisfies PaletteColours;
 

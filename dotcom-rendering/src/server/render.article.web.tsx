@@ -225,6 +225,7 @@ window.twttr = (function(d, s, id) {
 		renderingTarget: 'Web',
 		weAreHiring: !!article.config.switches.weAreHiring,
 		config,
+		hasLiveBlogTopAd: !!article.config.hasLiveBlogTopAd,
 	});
 
 	return { html: pageHtml, prefetchScripts };

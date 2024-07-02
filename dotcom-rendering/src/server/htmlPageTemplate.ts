@@ -21,6 +21,7 @@ type BaseProps = {
 	initTwitter?: string;
 	canonicalUrl?: string;
 	hasPageSkin?: boolean;
+	hasLiveBlogTopAd?: boolean;
 	weAreHiring: boolean;
 };
 
