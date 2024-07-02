@@ -39,17 +39,14 @@ import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { editionList } from '../lib/edition';
 import {
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
-import {
-	type DCRCollectionType,
-	type DCRFrontType,
-	NetworkFrontPageIds,
-} from '../types/front';
+import { type DCRCollectionType, type DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -63,7 +60,7 @@ const spaces = / /g;
 const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
 
-const isNetworkFrontPageId = isOneOf(NetworkFrontPageIds);
+const isNetworkFrontPageId = isOneOf(editionList.map(({ pageId }) => pageId));
 
 const isNavList = (collection: DCRCollectionType) => {
 	return (

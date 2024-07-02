@@ -4,6 +4,7 @@ import { LinkButton } from '@guardian/source/react-components';
 import useSWR from 'swr';
 import { center } from '../lib/center';
 import {
+	type Edition,
 	type EditionId,
 	getEditionFromId,
 	getEditionFromPageId,
@@ -14,7 +15,6 @@ import {
 	useEditionSwitcherBanner,
 } from '../lib/useUserPreferredEdition';
 import XIcon from '../static/icons/x.svg';
-import type { NetworkFrontPageId } from '../types/front';
 
 const container = css`
 	position: sticky;
@@ -74,7 +74,7 @@ const apiPromise = new Promise<{ hidden: boolean }>(() => {
 });
 
 type Props = {
-	pageId: NetworkFrontPageId;
+	pageId: Edition['pageId'];
 	edition: EditionId;
 };
 
