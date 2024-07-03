@@ -90,7 +90,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 60px 300px;
+					grid-template-columns: 219px 1px 620px 80px 300px;
 
 					${display === ArticleDisplay.Showcase
 						? css`

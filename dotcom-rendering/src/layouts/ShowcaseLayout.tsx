@@ -87,7 +87,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 60px 300px;
+					grid-template-columns: 219px 1px 620px 80px 300px;
 					grid-template-areas:
 						'title  border  headline   headline headline'
 						'lines  border  media      media    media'
