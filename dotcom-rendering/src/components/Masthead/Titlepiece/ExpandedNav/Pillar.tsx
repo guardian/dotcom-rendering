@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import {
-	brandText,
 	from,
-	palette as sourcePalette,
-	textSans17,
+	space,
+	textSans15,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -12,9 +11,10 @@ import type {
 	EditionLinkType,
 	PillarLinkType,
 } from '../../../../model/extract-nav';
+import { palette as themePalette } from '../../../../palette';
+import { pillarWidthsPx } from '../constants';
 import { CollapseSectionButton } from './CollapseSectionButton';
 
-// CSS
 const hideDesktop = css`
 	${from.desktop} {
 		display: none;
@@ -31,14 +31,14 @@ const pillarDivider = css`
 			top: 0;
 			bottom: 0;
 			width: 1px;
-			background-color: ${sourcePalette.brand[600]};
+			background-color: ${themePalette('--masthead-nav-lines')};
 			z-index: 1;
 		}
 	}
 `;
 
 const columnLinkTitle = css`
-	${textSans17};
+	${textSans15};
 	/**
 	 * Typography preset styles should not be overridden.
 	 * This has been done because the styles do not directly map to the new presets.
@@ -49,7 +49,7 @@ const columnLinkTitle = css`
 	text-decoration: none;
 	border: 0;
 	box-sizing: border-box;
-	color: ${brandText.primary};
+	color: ${themePalette('--masthead-nav-link-text')};
 	cursor: pointer;
 	display: inline-block;
 	font-weight: 500;
@@ -70,7 +70,7 @@ const columnLinkTitle = css`
 
 	:hover,
 	:focus {
-		color: ${sourcePalette.brandAlt[400]};
+		color: ${themePalette('--masthead-nav-link-text-hover')};
 		text-decoration: underline;
 	}
 
@@ -90,7 +90,7 @@ export const mainMenuLinkStyle = css`
 `;
 
 export const columnLinks = css`
-	${textSans17};
+	${textSans15};
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
@@ -113,7 +113,7 @@ export const columnLinks = css`
 		order: 1;
 		height: 100%;
 		width: 100%;
-		padding: 0 9px;
+		padding: 0 ${space[2]}px;
 	}
 `;
 
@@ -122,13 +122,13 @@ const firstColumnLinks = css`
 		padding-left: 0;
 	}
 	${until.tablet} {
-		background: ${sourcePalette.brand[300]};
+		background: ${themePalette('--sub-nav-section-header-background')};
 	}
 `;
 
 const pillarColumnLinks = css`
 	${until.tablet} {
-		background: ${sourcePalette.brand[300]};
+		background: ${themePalette('--sub-nav-section-header-background')};
 	}
 `;
 
@@ -154,7 +154,7 @@ export const lineStyle = css`
 	${from.desktop} {
 		display: none;
 	}
-	background-color: ${sourcePalette.brand[600]};
+	background-color: ${themePalette('--sub-nav-horizontal-section-divider')};
 	content: '';
 	display: block;
 	height: 1px;
@@ -163,7 +163,7 @@ export const lineStyle = css`
 `;
 
 const columnStyle = css`
-	${textSans17};
+	${textSans15};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
@@ -180,10 +180,10 @@ const columnStyle = css`
 	position: relative;
 
 	${from.desktop} {
-		width: 134px;
+		width: ${pillarWidthsPx.tablet}px;
 		float: left;
 		position: relative;
-		border-left: 1px solid ${sourcePalette.brand[600]};
+		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 
 		:after {
 			height: 100%;
@@ -193,18 +193,16 @@ const columnStyle = css`
 
 		:first-of-type {
 			border-left: none;
-			width: 123px;
 		}
 	}
 `;
 
 const columnStyleFromLeftCol = css`
 	${from.leftCol} {
-		width: 160px;
-
-		:first-of-type {
-			width: 150px;
-		}
+		width: ${pillarWidthsPx.leftCol}px;
+	}
+	${from.wide} {
+		width: ${pillarWidthsPx.wide}px;
 	}
 `;
 
@@ -311,7 +309,7 @@ export const Pillar = ({
 							href={link.url}
 							role="menuitem"
 							data-link-name={nestedOphanComponents(
-								'nav2',
+								'header',
 								'secondary',
 								link.longTitle,
 							)}

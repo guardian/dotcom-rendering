@@ -1,20 +1,11 @@
 import { css } from '@emotion/react';
 import {
-	brandText,
 	from,
 	headlineMedium20,
-	palette as sourcePalette,
 	space,
 	textSans17,
-	textSans20,
 } from '@guardian/source/foundations';
-import {
-	Button,
-	Label,
-	SvgArrowRightStraight,
-	SvgMagnifyingGlass,
-	TextInput,
-} from '@guardian/source/react-components';
+import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../../../../lib/edition';
 import {
 	getEditionFromId,
@@ -22,25 +13,25 @@ import {
 } from '../../../../lib/edition';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { NavType } from '../../../../model/extract-nav';
+import { palette as themePalette } from '../../../../palette';
 import { MoreSection } from './MoreSection';
 import { lineStyle, Pillar } from './Pillar';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { SearchBar } from './SearchBar';
 
 const columnsStyle = (isImmersive: boolean) => css`
 	box-sizing: border-box;
 	max-width: none;
 	${from.desktop} {
 		max-width: 980px;
-		padding: 0 20px;
+		padding: 0 ${space[4] + 3}px;
 		position: relative;
 		margin: 0 auto;
 		display: flex;
-		border-left: ${isImmersive
-			? 'none'
-			: `1px solid ${sourcePalette.brand[600]}`};
 		border-right: ${isImmersive
 			? 'none'
-			: `1px solid ${sourcePalette.brand[600]}`};
+			: `1px solid ${themePalette('--masthead-nav-lines')}`};
+		border-top: 1px solid ${themePalette('--masthead-nav-lines')};
 	}
 `;
 
@@ -58,14 +49,10 @@ const desktopBrandExtensionColumn = css`
 		display: block;
 	}
 	display: none;
-	position: absolute;
-	right: 20px;
-	top: 4px;
-	bottom: 0;
+	padding: ${space[2]}px;
 `;
 
 const brandExtensionList = css`
-	width: 131px;
 	box-sizing: border-box;
 	${textSans17};
 	flex-wrap: wrap;
@@ -106,7 +93,7 @@ const brandExtensionLink = css`
 	background-color: transparent;
 	border: 0;
 	box-sizing: border-box;
-	color: ${brandText.primary};
+	color: ${themePalette('--masthead-nav-link-text')};
 	cursor: pointer;
 	display: inline-block;
 	outline: none;
@@ -123,7 +110,7 @@ const brandExtensionLink = css`
 	}
 	:hover,
 	:focus {
-		color: ${sourcePalette.brandAlt[400]};
+		color: ${themePalette('--masthead-nav-link-text-hover')};
 	}
 	> * {
 		pointer-events: none;
@@ -133,84 +120,6 @@ const brandExtensionLink = css`
 const brandExtensionLinkFromLeftCol = css`
 	${from.wide} {
 		font-size: 24px;
-	}
-`;
-
-const searchBar = css`
-	${from.desktop} {
-		display: none;
-	}
-	box-sizing: border-box;
-	display: block;
-	margin-left: 13px;
-	max-width: 380px;
-	position: relative;
-	margin-bottom: 24px;
-	margin-right: 41px;
-	padding-bottom: 15px;
-`;
-
-const searchInput = css`
-	${textSans20}
-	background-color: rgba(255,255,255, .1);
-	border: 0;
-	border-radius: 1000px;
-	box-sizing: border-box;
-	color: ${sourcePalette.neutral[100]};
-	height: 36px;
-	padding-left: 38px;
-	vertical-align: middle;
-	width: 100%;
-	&::placeholder {
-		color: ${sourcePalette.neutral[100]};
-	}
-	&:focus {
-		padding-right: 40px;
-		&::placeholder {
-			opacity: 0;
-		}
-	}
-	&:focus ~ button {
-		background-color: transparent;
-		opacity: 1;
-		pointer-events: all;
-	}
-`;
-
-const searchGlass = css`
-	position: absolute;
-	left: 7px;
-	top: 7px;
-	fill: ${sourcePalette.neutral[100]};
-`;
-
-const searchSubmit = css`
-	background: transparent;
-	border: 0;
-	bottom: 0;
-	cursor: pointer;
-	display: block;
-	opacity: 0;
-	pointer-events: none;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 50px;
-	fill: ${sourcePalette.neutral[100]};
-	&:focus,
-	&:active {
-		opacity: 0;
-		pointer-events: all;
-	}
-	&:before {
-		height: 12px;
-		top: ${space[3]}px;
-		width: 12px;
-	}
-	&:after {
-		border-right: 0;
-		top: 17px;
-		width: 20px;
 	}
 `;
 
@@ -235,7 +144,6 @@ export const Sections = ({
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
-	const searchId = 'gu-search-mobile';
 	return (
 		<ul
 			css={[
@@ -267,54 +175,9 @@ export const Sections = ({
 			)}
 
 			<li role="none">
-				<form css={searchBar} action="https://www.google.co.uk/search">
-					<TextInput
-						hideLabel={true}
-						label="Search input"
-						cssOverrides={searchInput}
-						name="q" // query param sent to google
-						placeholder="Search"
-						data-link-name={nestedOphanComponents('nav2', 'search')}
-						className="selectableMenuItem"
-						tabIndex={-1}
-						id={searchId}
-					/>
-
-					<Label
-						hideLabel={true}
-						text="google-search"
-						htmlFor={searchId}
-					>
-						<div css={searchGlass}>
-							<SvgMagnifyingGlass
-								isAnnouncedByScreenReader={true}
-								size="medium"
-							/>
-						</div>
-					</Label>
-					<Button
-						icon={
-							<SvgArrowRightStraight
-								isAnnouncedByScreenReader={false}
-								size="medium"
-							/>
-						}
-						aria-label="Search with Google"
-						cssOverrides={searchSubmit}
-						data-link-name={nestedOphanComponents(
-							'nav2',
-							'search',
-							'submit',
-						)}
-						type="submit"
-						tabIndex={-1}
-					></Button>
-					<input
-						type="hidden"
-						name="as_sitesearch"
-						value="www.theguardian.com"
-					/>
-				</form>
+				<Hide from="desktop">
+					<SearchBar />
+				</Hide>
 				<div css={lineStyle}></div>
 			</li>
 
@@ -344,6 +207,9 @@ export const Sections = ({
 				hasPageSkin={hasPageSkin}
 			/>
 			<li css={desktopBrandExtensionColumn} role="none">
+				<Hide until="desktop">
+					<SearchBar />
+				</Hide>
 				<ul
 					css={[
 						brandExtensionList,
@@ -367,7 +233,7 @@ export const Sections = ({
 								key={brandExtension.title}
 								role="menuitem"
 								data-link-name={nestedOphanComponents(
-									'nav2',
+									'header',
 									'brand extension',
 									brandExtension.longTitle,
 								)}

@@ -3476,6 +3476,21 @@ const subNavMoreLight: PaletteFunction = () => {
 const subNavMoreDark: PaletteFunction = () => {
 	return sourcePalette.neutral[38];
 };
+const subNavHorizontalSectionDivider: PaletteFunction = () => {
+	return sourcePalette.brand[600];
+};
+const subNavReaderRevenueLinkText: PaletteFunction = () => {
+	return sourcePalette.brandAlt[400];
+};
+const subNavSearchBarIcon: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+const subNavSearchBarText: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+const subNavSectionHeaderBackground: PaletteFunction = () => {
+	return sourcePalette.brand[300];
+};
 
 const pullQuoteTextLight: PaletteFunction = ({
 	design,
@@ -5411,6 +5426,8 @@ const mastheadTopBarVerticalDivider: PaletteFunction = () =>
 
 const mastheadNavBackground: PaletteFunction = () => sourcePalette.brand[400];
 const mastheadNavLinkText: PaletteFunction = () => sourcePalette.neutral[100];
+const mastheadNavLinkTextHover: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
 const mastheadNavBorder: PaletteFunction = () => sourcePalette.brand[600];
 const mastheadNavLines: PaletteFunction = () => sourcePalette.neutral[86];
 
@@ -6240,6 +6257,10 @@ const paletteColours = {
 		light: mastheadNavLinkText,
 		dark: mastheadNavLinkText,
 	},
+	'--masthead-nav-link-text-hover': {
+		light: mastheadNavLinkTextHover,
+		dark: mastheadNavLinkTextHover,
+	},
 	'--masthead-top-bar-background': {
 		light: mastheadTopBarBackground,
 		dark: mastheadTopBarBackground,
@@ -6552,6 +6573,10 @@ const paletteColours = {
 		light: subNavBorder,
 		dark: subNavBorder,
 	},
+	'--sub-nav-horizontal-section-divider': {
+		light: subNavHorizontalSectionDivider,
+		dark: subNavHorizontalSectionDivider,
+	},
 	'--sub-nav-link-footer': {
 		light: subNavLinkFooterLight,
 		dark: subNavLinkFooterDark,
@@ -6567,6 +6592,22 @@ const paletteColours = {
 	'--sub-nav-more': {
 		light: subNavMoreLight,
 		dark: subNavMoreDark,
+	},
+	'--sub-nav-reader-revenue-link-text': {
+		light: subNavReaderRevenueLinkText,
+		dark: subNavReaderRevenueLinkText,
+	},
+	'--sub-nav-search-bar-icon': {
+		light: subNavSearchBarIcon,
+		dark: subNavSearchBarIcon,
+	},
+	'--sub-nav-search-bar-text': {
+		light: subNavSearchBarText,
+		dark: subNavSearchBarText,
+	},
+	'--sub-nav-section-header-background': {
+		light: subNavSectionHeaderBackground,
+		dark: subNavSectionHeaderBackground,
 	},
 	'--subheading-text': {
 		light: subheadingTextLight,
