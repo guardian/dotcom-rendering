@@ -11,18 +11,26 @@ import {
 	SvgGuardianLogo,
 	SvgMenu,
 } from '@guardian/source/react-components';
-import type { EditionId } from '../lib/edition';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import type { NavType } from '../model/extract-nav';
-import { palette as themePalette } from '../palette';
+import type { EditionId } from '../../../lib/edition';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import type { NavType } from '../../../model/extract-nav';
+import { palette as themePalette } from '../../../palette';
 import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
 import { TitlepieceGrid } from './TitlepieceGrid';
-import { Pillars } from './TitlepiecePillars';
+import { TitlepiecePillars } from './TitlepiecePillars';
 
 interface Props {
 	nav: NavType;
 	editionId: EditionId;
 }
+
+export const pillarLeftMarginPx = 6;
+
+export const pillarWidthsPx = {
+	tablet: 108,
+	leftCol: 125,
+	wide: 136,
+};
 
 const veggieBurgerDiameter = 40;
 
@@ -170,8 +178,9 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 			<nav css={pillarsNavStyles}>
 				{/* Pillars nav mobile version */}
 				<Hide from="desktop">
-					<Pillars
-						pillars={nav.pillars}
+					<TitlepiecePillars
+						nav={nav}
+						editionId={editionId}
 						dataLinkName={nestedOphanComponents(
 							'header',
 							'titlepiece',
@@ -186,8 +195,9 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 
 				{/* Pillars nav desktop version (contains veggie burger) */}
 				<Hide until="desktop">
-					<Pillars
-						pillars={nav.pillars}
+					<TitlepiecePillars
+						nav={nav}
+						editionId={editionId}
 						dataLinkName={nestedOphanComponents(
 							'header',
 							'titlepiece',

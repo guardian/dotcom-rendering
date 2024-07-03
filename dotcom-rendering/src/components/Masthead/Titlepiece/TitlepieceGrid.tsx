@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css, jsx } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { CSSProperties, PropsWithChildren } from 'react';
-import { palette as themePalette } from '../palette';
+import { palette as themePalette } from '../../../palette';
 
 const colours = css`
 	background-color: ${themePalette('--masthead-nav-background')};
