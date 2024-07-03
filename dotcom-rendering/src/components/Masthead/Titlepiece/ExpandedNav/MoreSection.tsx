@@ -219,7 +219,7 @@ export const MoreSection = ({
 								href={link.url}
 								role="menuitem"
 								data-link-name={nestedOphanComponents(
-									'nav2',
+									'header',
 									'secondary',
 									link.longTitle,
 								)}

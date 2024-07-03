@@ -14,10 +14,10 @@ import {
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
-import { ExpandedNavSearchBar } from './ExpandedNavSearchBar';
 import { MoreSection } from './MoreSection';
 import { lineStyle, Pillar } from './Pillar';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { SearchBar } from './SearchBar';
 
 const columnsStyle = (isImmersive: boolean) => css`
 	box-sizing: border-box;
@@ -176,7 +176,7 @@ export const Sections = ({
 
 			<li role="none">
 				<Hide from="desktop">
-					<ExpandedNavSearchBar />
+					<SearchBar />
 				</Hide>
 				<div css={lineStyle}></div>
 			</li>
@@ -208,7 +208,7 @@ export const Sections = ({
 			/>
 			<li css={desktopBrandExtensionColumn} role="none">
 				<Hide until="desktop">
-					<ExpandedNavSearchBar />
+					<SearchBar />
 				</Hide>
 				<ul
 					css={[
@@ -233,7 +233,7 @@ export const Sections = ({
 								key={brandExtension.title}
 								role="menuitem"
 								data-link-name={nestedOphanComponents(
-									'nav2',
+									'header',
 									'brand extension',
 									brandExtension.longTitle,
 								)}
