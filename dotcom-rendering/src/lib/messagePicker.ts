@@ -86,7 +86,7 @@ const timeoutify = <T>(
 							ophan.record({
 								// @ts-expect-error -- is this event dropped by Ophan?
 								component: perfName,
-								value: String(canShowTimeTaken),
+								value: canShowTimeTaken,
 							});
 						});
 					}
