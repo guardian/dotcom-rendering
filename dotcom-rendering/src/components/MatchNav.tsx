@@ -132,21 +132,23 @@ const Crest = ({ crest }: { crest: string }) => (
 			z-index: 1;
 		`}
 	>
-		<img
-			css={css`
-				position: absolute;
-				left: 0.5rem;
-				right: 0.5rem;
-				bottom: 0.5rem;
-				top: 0.5rem;
-				max-width: calc(100% - 1rem);
-				max-height: calc(100% - 1rem);
-				margin: auto;
-				display: block;
-			`}
-			src={crest}
-			alt=""
-		/>
+		{crest.trim() === '' ? null : (
+			<img
+				css={css`
+					position: absolute;
+					left: 0.5rem;
+					right: 0.5rem;
+					bottom: 0.5rem;
+					top: 0.5rem;
+					max-width: calc(100% - 1rem);
+					max-height: calc(100% - 1rem);
+					margin: auto;
+					display: block;
+				`}
+				src={crest}
+				alt=""
+			/>
+		)}
 	</div>
 );
 

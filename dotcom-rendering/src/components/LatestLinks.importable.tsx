@@ -12,6 +12,7 @@ import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { WithLink } from './CardHeadline';
+import { useConfig } from './ConfigContext';
 import { ContainerOverrides } from './ContainerOverrides';
 import { DateTime } from './DateTime';
 
@@ -125,6 +126,8 @@ export const LatestLinks = ({
 		min-height: ${minHeight};
 	`;
 
+	const { editionId } = useConfig();
+
 	return (
 		<ul
 			css={[
@@ -179,7 +182,7 @@ export const LatestLinks = ({
 												absoluteServerTimes={
 													absoluteServerTimes
 												}
-												editionId={'UK'}
+												editionId={editionId}
 												showWeekday={false}
 												showDate={true}
 												showTime={false}

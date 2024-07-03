@@ -12,6 +12,7 @@ describe('Nav', () => {
 				darkModeAvailable: false,
 				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
+				editionId: 'UK',
 			}}
 		>
 			<Nav

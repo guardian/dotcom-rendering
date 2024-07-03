@@ -46,6 +46,7 @@ export const renderArticle = ({
 		darkModeAvailable: false,
 		updateLogoAdPartnerSwitch: false,
 		assetOrigin: ASSET_ORIGIN,
+		editionId: 'INT', // AMP pages have all editions in the HTML
 	};
 
 	const { html, css }: RenderToStringResult = extractCritical(

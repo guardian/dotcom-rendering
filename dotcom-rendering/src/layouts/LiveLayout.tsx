@@ -49,6 +49,7 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import {
@@ -311,7 +312,7 @@ interface WebProps extends BaseProps {
 export const LiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasLiveBlogTopAd },
 	} = article;
 
 	// TODO:
@@ -517,6 +518,24 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				data-layout="LiveLayout"
 				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
+				{renderAds && hasLiveBlogTopAd && (
+					<Hide from="tablet">
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={sourcePalette.neutral[97]}
+							element="aside"
+						>
+							<AdSlot
+								position="liveblog-top"
+								display={format.display}
+							/>
+						</Section>
+					</Hide>
+				)}
 				{inTagLinkTest && (
 					<div css={tagOverlayGridStyles}>
 						<GridItem area="sticky-tag">
@@ -931,6 +950,23 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</div>
 									</Hide>
 								)}
+
+								{isWeb && (
+									<Hide until="desktop">
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<StickyLiveblogAskWrapper
+												referrerUrl={article.webURL}
+												shouldHideReaderRevenueOnArticle={
+													article.shouldHideReaderRevenue
+												}
+											/>
+										</Island>
+									</Hide>
+								)}
+
 								{/* Match stats */}
 								{!!footballMatchUrl && (
 									<Island

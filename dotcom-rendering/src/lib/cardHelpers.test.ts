@@ -1,26 +1,67 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { isUnsupportedFormatForCardWithoutBackground } from './cardHelpers';
+import type { DCRContainerPalette } from '../types/front';
+import { cardHasDarkBackground } from './cardHelpers';
 
-describe('isUnsupportedFormatForCardWithoutBackground', () => {
+describe('cardHasDarkBackground', () => {
 	const standardArticleFormat = {
 		design: ArticleDesign.Standard,
 		display: ArticleDisplay.Standard,
 		theme: Pillar.News,
 	};
 
-	it('should return false for ArticleDesign.Picture', () => {
-		const format = {
-			...standardArticleFormat,
-			design: ArticleDesign.Picture,
-		};
-		expect(isUnsupportedFormatForCardWithoutBackground(format)).toBe(false);
-	});
+	const pictureFormat = {
+		...standardArticleFormat,
+		design: ArticleDesign.Picture,
+	};
 
-	it('should return true for ArticleDesign.Gallery', () => {
-		const format = {
-			...standardArticleFormat,
-			design: ArticleDesign.Gallery,
-		};
-		expect(isUnsupportedFormatForCardWithoutBackground(format)).toBe(true);
-	});
+	const galleryFormat = {
+		...standardArticleFormat,
+		design: ArticleDesign.Gallery,
+	};
+
+	const testCases = [
+		{
+			format: pictureFormat,
+			containerPalette: undefined,
+			expectedResult: false,
+		},
+		{
+			format: galleryFormat,
+			containerPalette: undefined,
+			expectedResult: true,
+		},
+		{
+			format: pictureFormat,
+			containerPalette: 'Branded',
+			expectedResult: false,
+		},
+		{
+			format: galleryFormat,
+			containerPalette: 'Branded',
+			expectedResult: false,
+		},
+		{
+			format: pictureFormat,
+			containerPalette: 'SombrePalette',
+			expectedResult: true,
+		},
+		{
+			format: galleryFormat,
+			containerPalette: 'SombrePalette',
+			expectedResult: true,
+		},
+	] satisfies {
+		format: ArticleFormat;
+		containerPalette?: DCRContainerPalette;
+		expectedResult: boolean;
+	}[];
+
+	it.each(testCases)(
+		'returns $expectedResult for $format format, $containerPalette containerPalette',
+		({ format, containerPalette, expectedResult }) => {
+			expect(cardHasDarkBackground(format, containerPalette)).toBe(
+				expectedResult,
+			);
+		},
+	);
 });
