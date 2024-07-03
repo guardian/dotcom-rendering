@@ -373,9 +373,6 @@
                 "$ref": "#/definitions/Topic"
             }
         },
-        "messageUs": {
-            "$ref": "#/definitions/MessageUs"
-        },
         "promotedNewsletter": {
             "type": "object",
             "properties": {
@@ -5099,34 +5096,6 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
-        },
-        "MessageUs": {
-            "type": "object",
-            "properties": {
-                "formId": {
-                    "type": "string"
-                },
-                "formFields": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/MessageUsFieldType"
-                    }
-                }
-            },
-            "required": [
-                "formFields",
-                "formId"
-            ]
-        },
-        "MessageUsFieldType": {
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/CampaignFieldText"
-                },
-                {
-                    "$ref": "#/definitions/CampaignFieldTextArea"
-                }
-            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"
