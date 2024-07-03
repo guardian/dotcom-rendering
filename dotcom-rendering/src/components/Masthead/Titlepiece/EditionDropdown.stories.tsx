@@ -1,4 +1,4 @@
-import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
+import { TitlepieceEditionDropdown } from './EditionDropdown';
 
 export default {
 	component: TitlepieceEditionDropdown,
@@ -10,7 +10,5 @@ export default {
 };
 
 export const defaultStory = () => {
-	return <TitlepieceEditionDropdown editionId={'UK'} dataLinkName="test" />;
+	return <TitlepieceEditionDropdown editionId="UK" dataLinkName="test" />;
 };
-
-defaultStory.storyName = 'default';

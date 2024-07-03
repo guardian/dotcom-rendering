@@ -9,15 +9,12 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import type { EditionId } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
-import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
 
 type Props = {
 	nav: NavType;
-	editionId: EditionId;
 	dataLinkName: string;
 	selectedPillar?: Pillar;
 	isImmersive?: boolean;
@@ -35,7 +32,7 @@ const pillarLink = css`
 	${headlineBold14}
 	text-decoration: none;
 
-	/* TODO - set this in palette and retrieve as CSS var */
+	/* TODO @cemms1 - set these in palette and retrieve as CSS var */
 	background-color: ${sourcePalette.brand[400]};
 	color: ${sourcePalette.neutral[100]};
 
@@ -96,7 +93,7 @@ const forceUnderline = css`
 const verticalDividerStyles = css`
 	:after {
 		content: '';
-		/* TODO - set this in palette and retrieve as CSS var */
+		/* TODO @cemms1 - set this in palette and retrieve as CSS var */
 		border-left: 1px solid ${sourcePalette.neutral[86]};
 		display: flex;
 		position: absolute;
@@ -200,7 +197,6 @@ const getPillarColour = (pillar: ArticleTheme): string | undefined => {
 
 export const TitlepiecePillars = ({
 	nav,
-	editionId,
 	selectedPillar,
 	dataLinkName,
 	isImmersive = false,
@@ -258,12 +254,6 @@ export const TitlepiecePillars = ({
 					)
 				}
 			</ul>
-			<TitlepieceExpandedNav
-				nav={nav}
-				editionId={editionId}
-				isImmersive={isImmersive}
-				hasPageSkin={hasPageSkin}
-			/>
 		</>
 	);
 };

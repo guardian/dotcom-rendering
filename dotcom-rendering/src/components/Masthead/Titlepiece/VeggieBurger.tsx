@@ -68,6 +68,7 @@ const veggieBurgerIconStyles = css`
 `;
 
 const veggieBurgerStyles = (isImmersive: boolean) => css`
+	/* TODO - @cemms1 use palette colours */
 	background-color: ${sourcePalette.brandAlt[400]};
 	color: ${sourcePalette.neutral[7]};
 	cursor: pointer;
@@ -118,7 +119,7 @@ export const VeggieBurgerMenu = ({ isImmersive = false }: Props) => {
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}
 			data-link-name={nestedOphanComponents(
-				'nav3',
+				'header',
 				'veggie-burger',
 				'show',
 			)}

@@ -1,5 +1,5 @@
 import { nav } from '../../../Nav/Nav.mock';
-import { TitlepiecePillars } from '../TitlepiecePillars';
+import { TitlepiecePillars } from '../Pillars';
 import { TitlepieceExpandedNav } from './ExpandedNav';
 
 export default {

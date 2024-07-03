@@ -4,7 +4,6 @@ import {
 	from,
 	headlineBold14,
 	space,
-	textSans14,
 } from '@guardian/source/foundations';
 import {
 	Hide,
@@ -15,9 +14,12 @@ import type { EditionId } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
+import { Section } from '../../Section';
+import { TitlepieceEditionDropdown } from './EditionDropdown';
+import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
+import { TitlepiecePillars } from './Pillars';
+import { SubNav } from './SubNav';
 import { TitlepieceGrid } from './TitlepieceGrid';
-import { TitlepiecePillars } from './TitlepiecePillars';
 
 interface Props {
 	nav: NavType;
@@ -119,41 +121,6 @@ const pillarsNavStyles = css`
 	}
 `;
 
-const subnavStyles = css`
-	grid-column: content-start / content-end;
-	grid-row: 3;
-	${textSans14}
-	color: inherit;
-	height: 28px;
-	margin-top: ${space[2]}px;
-
-	overflow-x: scroll;
-	width: calc(100% + 10px);
-
-	${from.mobileMedium} {
-		margin-top: ${space[3]}px;
-	}
-	${from.tablet} {
-		width: calc(100% + ${space[5]}px);
-	}
-	${from.leftCol} {
-		margin-top: 14px;
-	}
-`;
-
-const subnavListStyles = css`
-	display: flex;
-	column-gap: ${space[3]}px;
-`;
-const subnavListItemStyles = css`
-	white-space: nowrap;
-`;
-
-const subnavLinkStyles = css`
-	color: ${themePalette('--masthead-nav-link-text')};
-	text-decoration: none;
-`;
-
 export const Titlepiece = ({ nav, editionId }: Props) => {
 	return (
 		<TitlepieceGrid type="header">
@@ -180,7 +147,6 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 				<Hide from="desktop">
 					<TitlepiecePillars
 						nav={nav}
-						editionId={editionId}
 						dataLinkName={nestedOphanComponents(
 							'header',
 							'titlepiece',
@@ -197,7 +163,6 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 				<Hide until="desktop">
 					<TitlepiecePillars
 						nav={nav}
-						editionId={editionId}
 						dataLinkName={nestedOphanComponents(
 							'header',
 							'titlepiece',
@@ -209,6 +174,8 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 						hasPageSkin={false}
 					/>
 				</Hide>
+
+				{/* Expanded nav */}
 			</nav>
 
 			{/* Veggie burger menu */}
@@ -225,17 +192,21 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 
 			{/* Subnav */}
 			{nav.subNavSections && (
-				<nav css={subnavStyles}>
-					<ul css={subnavListStyles}>
-						{nav.subNavSections.links.map(({ title, url }) => (
-							<li key={title} css={subnavListItemStyles}>
-								<a href={url} css={subnavLinkStyles}>
-									{title}
-								</a>
-							</li>
-						))}
-					</ul>
-				</nav>
+				<Section
+					fullWidth={true}
+					padSides={false}
+					element="aside"
+					hasPageSkin={false}
+					css={css`
+						grid-column: content-start / content-end;
+						grid-row: 3;
+					`}
+				>
+					<SubNav
+						subNavSections={nav.subNavSections}
+						currentNavLink={nav.currentNavLink}
+					/>
+				</Section>
 			)}
 		</TitlepieceGrid>
 	);
