@@ -18,6 +18,7 @@ describe('RichLinkComponent', () => {
 						darkModeAvailable: false,
 						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
+						editionId: 'UK',
 					}}
 				>
 					<RichLinkComponent

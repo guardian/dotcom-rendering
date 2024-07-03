@@ -4,7 +4,7 @@ import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { fontsCss } from '../lib/fonts-css';
 import type { Guardian } from '../model/guardian';
-import type { RenderingTarget } from '../types/renderingTarget';
+import type { Config } from '../types/configContext';
 import { GIT_COMMIT_HASH } from './prout';
 
 type BaseProps = {
@@ -20,7 +20,6 @@ type BaseProps = {
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
 	canonicalUrl?: string;
-	renderingTarget: RenderingTarget;
 	hasPageSkin?: boolean;
 	hasLiveBlogTopAd?: boolean;
 	weAreHiring: boolean;
@@ -29,10 +28,12 @@ type BaseProps = {
 interface WebProps extends BaseProps {
 	renderingTarget: 'Web';
 	keywords: string;
+	config: Config & { renderingTarget: 'Web' };
 }
 
 interface AppProps extends BaseProps {
 	renderingTarget: 'Apps';
+	config: Config & { renderingTarget: 'Apps' };
 }
 
 /**
@@ -68,6 +69,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		renderingTarget,
 		hasPageSkin = false,
 		weAreHiring,
+		config,
 	} = props;
 
 	/**
@@ -333,6 +335,10 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                     })(window, document);
                 </script>
+
+        <script id="config" type="application/json">
+          ${JSON.stringify(config)}
+        </script>
 
 				<script>
 					window.curlConfig = {

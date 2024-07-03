@@ -25,6 +25,7 @@ describe('MostViewedList', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedRight />
@@ -75,6 +76,7 @@ describe('MostViewedList', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedRight limitItems={3} />
@@ -104,6 +106,7 @@ describe('MostViewedList', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedRight />

@@ -119,7 +119,8 @@ const imgStyles = (lightLogoWidth: number) => css`
 	height: fit-content;
 `;
 
-function decideLogo(
+/** @todo Future improvement to align with src/lib/decideLogo.ts */
+function decideArticleLogo(
 	branding: BrandingType,
 	format: ArticleFormat,
 	darkModeAvailable: boolean,
@@ -259,7 +260,7 @@ export const Branding = ({ branding, format }: Props) => {
 					data-component={ophanComponentName}
 					data-link-name={ophanComponentLink}
 				>
-					{decideLogo(branding, format, darkModeAvailable)}
+					{decideArticleLogo(branding, format, darkModeAvailable)}
 				</a>
 			</div>
 

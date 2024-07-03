@@ -225,27 +225,6 @@ const fillGuardianLogo = (format: ArticleFormat): string => {
 	return WHITE;
 };
 
-const borderPinnedPost = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
-	}
-};
-
 const borderStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		switch (format.theme) {
@@ -571,7 +550,6 @@ export const decidePalette = (
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
-			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			navPillar: borderNavPillar(format),
