@@ -136,7 +136,6 @@ export const KeyEventCard = ({
 						date={new Date(blockFirstPublished)}
 						display="relative"
 						absoluteServerTimes={absoluteServerTimes}
-						editionId={'UK'}
 						showWeekday={false}
 						showDate={true}
 						showTime={false}

@@ -1,11 +1,11 @@
 import { isString } from '@guardian/libs';
-import { type EditionId, getEditionFromId } from '../lib/edition';
+import { getEditionFromId } from '../lib/edition';
+import { useConfig } from './ConfigContext';
 import { Island } from './Island';
 import { RelativeTime } from './RelativeTime.importable';
 
 type Props = {
 	date: Date;
-	editionId: EditionId;
 	showWeekday: boolean;
 	showDate: boolean;
 	showTime: boolean;
@@ -56,13 +56,13 @@ const getServerTime = () => Math.floor(Date.now() / ONE_MINUTE) * ONE_MINUTE;
 
 export const DateTime = ({
 	date,
-	editionId,
 	showWeekday,
 	showDate,
 	showTime,
 	display = 'absolute',
 	absoluteServerTimes = true,
 }: Props & DisplayProps) => {
+	const { editionId } = useConfig();
 	const { dateLocale, timeZone } = getEditionFromId(editionId);
 
 	const then = date.getTime();

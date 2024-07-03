@@ -72,7 +72,6 @@ const FirstPublished = ({
 							date={new Date(firstPublished)}
 							display="relative"
 							absoluteServerTimes={absoluteServerTimes}
-							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}
 							showTime={false}

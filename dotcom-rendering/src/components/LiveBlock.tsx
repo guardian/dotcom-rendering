@@ -105,10 +105,7 @@ export const LiveBlock = ({
 					/>
 				</Island>
 				{!isUndefined(lastUpdated) && (
-					<LastUpdated
-						lastUpdated={lastUpdated}
-						editionId={editionId}
-					/>
+					<LastUpdated lastUpdated={lastUpdated} />
 				)}
 			</footer>
 		</LiveBlockContainer>

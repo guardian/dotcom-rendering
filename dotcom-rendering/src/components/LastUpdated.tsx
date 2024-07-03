@@ -1,15 +1,8 @@
 import { css } from '@emotion/react';
 import { palette, textSans12 } from '@guardian/source/foundations';
-import type { EditionId } from '../lib/edition';
 import { DateTime } from './DateTime';
 
-const LastUpdated = ({
-	editionId,
-	lastUpdated,
-}: {
-	editionId: EditionId;
-	lastUpdated: number;
-}) => {
+const LastUpdated = ({ lastUpdated }: { lastUpdated: number }) => {
 	return (
 		<div
 			css={css`
@@ -22,7 +15,6 @@ const LastUpdated = ({
 			Updated at&nbsp;
 			<DateTime
 				date={new Date(lastUpdated)}
-				editionId={editionId}
 				showWeekday={false}
 				showDate={false}
 				showTime={true}
