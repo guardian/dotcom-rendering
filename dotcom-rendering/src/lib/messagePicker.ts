@@ -42,11 +42,9 @@ const recordMessageTimeoutInOphan = async (
 ) => {
 	const ophan = await getOphan(renderingTarget);
 	ophan.record({
-		componentEvent: {
-			// @ts-expect-error -- Type 'string' is not assignable to type 'ComponentV2'.
-			component: `${slotName}-picker-timeout-dcr`,
-			value: candidateId,
-		},
+		// @ts-expect-error -- Type 'string' is not assignable to type 'ComponentV2'.
+		component: `${slotName}-picker-timeout-dcr`,
+		value: candidateId,
 	});
 };
 
@@ -86,11 +84,9 @@ const timeoutify = <T>(
 					if (candidateConfig.reportTiming) {
 						void getOphan(renderingTarget).then((ophan) => {
 							ophan.record({
-								componentEvent: {
-									// @ts-expect-error -- is this event dropped by Ophan?
-									component: perfName,
-									value: String(canShowTimeTaken),
-								},
+								// @ts-expect-error -- is this event dropped by Ophan?
+								component: perfName,
+								value: String(canShowTimeTaken),
 							});
 						});
 					}

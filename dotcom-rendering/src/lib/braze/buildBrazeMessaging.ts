@@ -108,11 +108,9 @@ export const buildBrazeMessaging = async (
 		const sdkLoadTimeTaken = endPerformanceMeasure();
 		const ophan = await getOphan(renderingTarget);
 		ophan.record({
-			componentEvent: {
-				// @ts-expect-error -- is this event dropped by Ophan?
-				component: 'braze-sdk-load-timing',
-				value: String(sdkLoadTimeTaken),
-			},
+			// @ts-expect-error -- is this event dropped by Ophan?
+			component: 'braze-sdk-load-timing',
+			value: String(sdkLoadTimeTaken),
 		});
 
 		const errorHandler = (error: Error, desc: string) => {
