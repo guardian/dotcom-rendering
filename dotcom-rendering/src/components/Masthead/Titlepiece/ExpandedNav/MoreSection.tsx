@@ -1,12 +1,9 @@
 import { css } from '@emotion/react';
-import {
-	brandText,
-	from,
-	palette as sourcePalette,
-	textSans17,
-} from '@guardian/source/foundations';
+import { from, textSans17 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType } from '../../../../model/extract-nav';
+import { palette as themePalette } from '../../../../palette';
+import { pillarWidthsPx } from '../constants';
 
 const pillarHeight = 42;
 
@@ -37,7 +34,7 @@ const columnStyle = css`
 	}
 
 	${from.desktop} {
-		width: 140px;
+		width: ${pillarWidthsPx.tablet}px;
 		float: left;
 		position: relative;
 
@@ -49,7 +46,10 @@ const columnStyle = css`
 
 const columnStyleFromLeftCol = css`
 	${from.leftCol} {
-		width: 160px;
+		width: ${pillarWidthsPx.leftCol}px;
+	}
+	${from.wide} {
+		width: ${pillarWidthsPx.wide}px;
 	}
 `;
 
@@ -64,7 +64,7 @@ const pillarDivider = css`
 			bottom: 0;
 			width: 1px;
 			height: auto;
-			background-color: ${sourcePalette.brand[600]};
+			background-color: ${themePalette('--masthead-nav-lines')};
 			z-index: 1;
 		}
 	}
@@ -86,7 +86,7 @@ const pillarDividerExtended = css`
 			left: 0;
 			width: 1px;
 			height: auto;
-			background-color: ${sourcePalette.brand[600]};
+			background-color: ${themePalette('--masthead-nav-lines')};
 			z-index: 1;
 		}
 	}
@@ -132,7 +132,7 @@ const columnLinkTitle = css`
 	text-decoration: none;
 	border: 0;
 	box-sizing: border-box;
-	color: ${brandText.primary};
+	color: ${themePalette('--masthead-nav-link-text')};
 	cursor: pointer;
 	display: inline-block;
 	font-weight: 500;
@@ -152,7 +152,7 @@ const columnLinkTitle = css`
 	}
 	:hover,
 	:focus {
-		color: ${sourcePalette.brandAlt[400]};
+		color: ${themePalette('--masthead-nav-link-text-hover')};
 		text-decoration: underline;
 	}
 
@@ -219,7 +219,7 @@ export const MoreSection = ({
 								href={link.url}
 								role="menuitem"
 								data-link-name={nestedOphanComponents(
-									'nav2',
+									'header',
 									'secondary',
 									link.longTitle,
 								)}
