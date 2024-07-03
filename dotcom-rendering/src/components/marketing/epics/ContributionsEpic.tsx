@@ -507,6 +507,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
 					choiceCardSelection={choiceCardSelection}
+					showThreeTierChoiceCards={showThreeTierChoiceCards}
 					threeTierChoiceCardSelectedAmount={
 						threeTierChoiceCardSelectedAmount
 					}
