@@ -1,5 +1,9 @@
 import { ClassNames } from '@emotion/react';
-import { headline, palette, textSans } from '@guardian/source-foundations';
+import {
+	headlineMedium24,
+	palette,
+	textSans20,
+} from '@guardian/source/foundations';
 import { createAuthenticationEventParams } from '../lib/identity-component-event';
 
 export const Sidebar = () => {
@@ -53,7 +57,7 @@ export const Sidebar = () => {
 					border: 0;
 					box-sizing: border-box;
 					display: block;
-					${headline.xsmall()};
+					${headlineMedium24};
 					outline: none;
 					padding: 6px 10px 16px 50px;
 					position: relative;
@@ -71,7 +75,13 @@ export const Sidebar = () => {
 					color: ${palette.neutral[100]};
 					text-decoration: none;
 					display: block;
-					${textSans.large({ lineHeight: 'tight' })};
+					${textSans20};
+					/**
+					 * Typography preset styles should not be overridden.
+					 * This has been done because the styles do not directly map to the new presets.
+					 * Please speak to your team's designer and update this to use a more appropriate preset.
+					 */
+					line-height: 1.15;
 					font-weight: 400;
 					outline: none;
 					padding: 8px 10px 8px 50px;

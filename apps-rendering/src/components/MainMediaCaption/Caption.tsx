@@ -2,11 +2,15 @@
 
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, textSans } from '@guardian/source-foundations';
+import {
+	neutral,
+	textSansBold14,
+	textSansItalic14,
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -25,10 +29,7 @@ const captionElement =
 				return (
 					<strong
 						css={css`
-							${textSans.xsmall({
-								lineHeight: 'regular',
-								fontWeight: 'bold',
-							})}
+							${textSansBold14}
 						`}
 						key={key}
 					>
@@ -39,10 +40,7 @@ const captionElement =
 				return (
 					<em
 						css={css`
-							${textSans.xsmall({
-								lineHeight: 'regular',
-								fontStyle: 'italic',
-							})}
+							${textSansItalic14}
 						`}
 						key={key}
 					>
@@ -91,7 +89,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const Caption: FC<Props> = ({ caption, format }) =>
+const Caption = ({ caption, format }: Props) =>
 	maybeRender(caption, (cap) => (
 		<>{Array.from(cap.childNodes).map(captionElement(format))}</>
 	));

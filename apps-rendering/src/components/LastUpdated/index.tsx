@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
-import type { FC } from 'react';
+import { neutral, textSans12 } from '@guardian/source/foundations';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -8,12 +7,12 @@ interface Props {
 	lastUpdated: Date;
 }
 
-const LastUpdated: FC<Props> = ({ lastUpdatedDisplay, lastUpdated }: Props) => (
+const LastUpdated = ({ lastUpdatedDisplay, lastUpdated }: Props) => (
 	<div
 		css={css`
 			display: flex;
 			align-items: flex-end;
-			${textSans.xxsmall()};
+			${textSans12};
 			color: ${neutral[46]};
 
 			${darkModeCss`

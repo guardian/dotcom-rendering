@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints, space } from '@guardian/source-foundations';
+import { breakpoints, space } from '@guardian/source/foundations';
 import type { ImgHTMLAttributes } from 'react';
 import React from 'react';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
@@ -139,8 +139,7 @@ export const CardPicture = ({
 				src={fallbackSource.lowResUrl}
 				css={block}
 				loading={loading}
-				// Chromatic inconsistenly loads the image for lazy-loaded images
-				data-chromatic={loading === 'lazy' ? 'ignore' : undefined}
+				data-chromatic="ignore"
 			/>
 		</picture>
 	);

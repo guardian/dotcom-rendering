@@ -3,12 +3,12 @@ import { ArticleDesign } from '@guardian/libs';
 import {
 	between,
 	from,
-	headline,
+	headlineBold20,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSans15,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 import { Distribution } from './Distribution';
 import { Doughnut } from './Doughnut';
@@ -265,7 +265,7 @@ const RightBorder = ({ children }: { children: React.ReactNode }) => (
 const H3 = ({ children }: { children: React.ReactNode }) => (
 	<h3
 		css={css`
-			${headline.xxsmall({ fontWeight: 'bold' })}
+			${headlineBold20}
 		`}
 	>
 		{children}
@@ -275,7 +275,7 @@ const H3 = ({ children }: { children: React.ReactNode }) => (
 const H4 = ({ children }: { children: React.ReactNode }) => (
 	<h4
 		css={css`
-			${textSans.small()}
+			${textSans15}
 		`}
 	>
 		{children}

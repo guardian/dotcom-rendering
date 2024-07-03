@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineMedium17,
 	palette as sourcePalette,
 	space,
-	textSans,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+	textSans12,
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import type { TreatType } from '../types/front';
@@ -40,7 +40,7 @@ const TextTreat = ({
 			priority="secondary"
 			subdued={true}
 			cssOverrides={css`
-				${textSans.xxsmall()}
+				${textSans12}
 				text-decoration: none;
 				color: ${fontColour ?? sourcePalette.neutral[7]};
 			`}
@@ -134,7 +134,7 @@ const ImageTreat = ({
 						>
 							<span
 								css={css`
-									${headline.xxxsmall()};
+									${headlineMedium17};
 									font-size: 16px;
 									background-color: ${index % 2 === 0
 										? sourcePalette.neutral[0]

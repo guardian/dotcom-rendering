@@ -5,14 +5,20 @@
  */
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { from, until } from '@guardian/source-foundations';
-import { palette, space } from '@guardian/source-foundations';
-import { body, textSans } from '@guardian/source-foundations';
-import { Button, ButtonLink } from '@guardian/source-react-components';
-import type {
-	ArticleCounts,
-	ArticleCountType,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
+import {
+	articleBoldItalic15,
+	articleBoldItalic17,
+	from,
+	textSans12,
+	textSans14,
+	textSans15,
+	textSansBold12,
+	textSansBold14,
+	textSansBold15,
+	until,
+} from '@guardian/source/foundations';
+import { palette, space } from '@guardian/source/foundations';
+import { Button, ButtonLink } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { ReactComponent } from '../lib/ReactComponent';
 import {
@@ -25,9 +31,8 @@ import {
 } from './utils/ophan';
 
 export interface ContributionsEpicArticleCountAboveWithOptOutProps {
-	articleCounts: ArticleCounts;
 	copy?: string;
-	countType?: ArticleCountType;
+	articleCount: number;
 	isArticleCountOn: boolean;
 	onArticleCountOptOut: () => void;
 	onArticleCountOptIn: () => void;
@@ -38,9 +43,8 @@ export interface ContributionsEpicArticleCountAboveWithOptOutProps {
 export const ContributionsEpicArticleCountAboveWithOptOut: ReactComponent<
 	ContributionsEpicArticleCountAboveWithOptOutProps
 > = ({
-	articleCounts,
+	articleCount,
 	copy,
-	countType,
 	isArticleCountOn,
 	onArticleCountOptOut,
 	onArticleCountOptIn,
@@ -79,8 +83,6 @@ export const ContributionsEpicArticleCountAboveWithOptOut: ReactComponent<
 		setIsOpen(false);
 		submitComponentEvent?.(OPHAN_COMPONENT_ARTICLE_COUNT_STAY_OUT);
 	};
-
-	const articleCount = articleCounts[countType ?? 'for52Weeks'];
 
 	return (
 		<div css={topContainer}>
@@ -302,11 +304,10 @@ const topContainer = css`
 `;
 
 const articleCountAboveContainerStyles = css`
-	font-style: italic;
-	${body.small({ fontWeight: 'bold' })};
+	${articleBoldItalic15};
 
 	${from.tablet} {
-		${body.medium({ fontWeight: 'bold' })};
+		${articleBoldItalic17};
 	}
 `;
 
@@ -343,21 +344,21 @@ const articleCountWrapperStyles = css`
 `;
 
 const articleCountTextStyles = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	margin-right: ${space[1]}px;
 
 	${from.tablet} {
-		${textSans.small()};
+		${textSans15};
 	}
 `;
 
 const articleCountCtaStyles = css`
 	margin-top: 0;
 
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 
 	${from.tablet} {
-		${textSans.small({ fontWeight: 'bold' })};
+		${textSansBold15};
 	}
 `;
 
@@ -388,7 +389,7 @@ const articleCountDescriptionContainer = css`
 `;
 
 const articleCountBodyTextStyles = css`
-	${textSans.small()};
+	${textSans15};
 	width: 100%;
 
 	${from.tablet} {
@@ -436,18 +437,18 @@ const articleCountOptOutCtaStyles = css`
 
 const trackingSettingsContainerStyles = css`
 	margin: ${space[4]}px auto ${space[3]}px;
-	${textSans.xxsmall()};
+	${textSans12};
 
 	${from.tablet} {
-		${textSans.xsmall()};
+		${textSans14};
 	}
 `;
 
 const privacySettingsLinkStyles = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 
 	${from.tablet} {
-		${textSans.xsmall({ fontWeight: 'bold' })};
+		${textSansBold14};
 	}
 `;
 

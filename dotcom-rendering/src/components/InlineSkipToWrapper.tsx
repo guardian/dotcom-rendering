@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textSans } from '@guardian/source-foundations';
+import { palette, textSans17 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const skipLinkCss = css`
-	${textSans.medium()}
+	${textSans17}
 	height: 40px;
 	left: -200vw;
 	line-height: 30px;

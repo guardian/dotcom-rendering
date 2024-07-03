@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineMedium17,
 	palette as sourcePalette,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useState } from 'react';
 import { palette } from '../palette';
 import type { TrailTabType, TrailType } from '../types/trails';
@@ -65,7 +65,7 @@ const unselectedStyles = css`
 `;
 
 const buttonStyles = (isSelected: boolean) => css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	color: ${palette('--article-text')};
 	margin: 0;
 	border: 0;

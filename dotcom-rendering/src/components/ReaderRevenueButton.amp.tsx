@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { palette, textSans, until } from '@guardian/source-foundations';
+import {
+	palette,
+	textSans15,
+	textSans17,
+	until,
+} from '@guardian/source/foundations';
 import type { NavType } from '../model/extract-nav';
 import ArrowRight from '../static/icons/arrow-right.svg';
 
@@ -35,7 +40,7 @@ const supportFooterStyles = css`
 const supportLinkStyles = css`
 	position: relative;
 	color: ${palette.neutral[7]};
-	${textSans.medium()};
+	${textSans17};
 	font-weight: 700;
 	display: block;
 	text-decoration: none;
@@ -43,7 +48,7 @@ const supportLinkStyles = css`
 
 	padding-right: 20px;
 	${until.mobileMedium} {
-		${textSans.small()};
+		${textSans15};
 		padding-right: 18px;
 	}
 

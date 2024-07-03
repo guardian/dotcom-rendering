@@ -43,7 +43,13 @@ describe('ReaderRevenueLinks', () => {
 
 		const { getByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<ReaderRevenueLinks
 					urls={urls}
@@ -64,7 +70,13 @@ describe('ReaderRevenueLinks', () => {
 
 		const { getByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<ReaderRevenueLinks
 					urls={urls}

@@ -1,7 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { headline, palette, textSans } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	palette,
+	textSans20,
+} from '@guardian/source/foundations';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 
 const ListStyle = (iconColour: string) => css`
@@ -37,7 +41,7 @@ const LinkStyle = (pillar: ArticleTheme) => css`
 `;
 
 const standfirstCss = (pillar: ArticleTheme) => css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	font-weight: 100;
 	color: ${palette.neutral[7]};
 	margin-bottom: 12px;
@@ -59,7 +63,7 @@ const labsStyle = css`
 	p,
 	li {
 		font-weight: 700;
-		${textSans.large()}
+		${textSans20}
 	}
 `;
 

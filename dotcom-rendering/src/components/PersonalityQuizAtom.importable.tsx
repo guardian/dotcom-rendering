@@ -1,8 +1,14 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { body, palette, space, textSans } from '@guardian/source-foundations';
-import { Button, Radio, RadioGroup } from '@guardian/source-react-components';
+import {
+	article17,
+	palette,
+	space,
+	textSans17,
+	textSansBold17,
+} from '@guardian/source/foundations';
+import { Button, Radio, RadioGroup } from '@guardian/source/react-components';
 import type { KeyboardEvent, MouseEvent } from 'react';
 import { memo, useEffect, useState } from 'react';
 import type {
@@ -19,7 +25,7 @@ const answersWrapperStyle = (theme: ArticleTheme) => css`
 	margin-bottom: 12px;
 	border: 0px;
 	padding: 0px;
-	${theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
+	${theme === ArticleSpecial.Labs ? textSans17 : article17};
 
 	label {
 		width: inherit;
@@ -364,7 +370,7 @@ const AnswersGroup = memo(
 AnswersGroup.displayName = 'AnswersGroup';
 
 const missingAnswersStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 	padding-bottom: ${space[3]}px;
 	color: ${palette.error[500]};
 `;
@@ -383,13 +389,13 @@ const resultWrapperStyles = css`
 `;
 
 const resultHeaderStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 	color: ${palette.neutral[20]};
 	padding-bottom: ${space[1]}px;
 `;
 
 const resultDescriptionStyles = css`
-	${textSans.medium()}
+	${textSans17}
 	color: ${palette.neutral[46]};
 `;
 

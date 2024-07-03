@@ -5,17 +5,19 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans14,
+	textSansBold15,
+	textSansBold17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 	SvgMessageRound,
 	SvgTickRound,
-} from '@guardian/source-react-components';
-import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/react-components';
+import { ErrorSummary } from '@guardian/source-development-kitchen/react-components';
 import { useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import type { MessageUsFieldType } from '../types/content';
@@ -33,12 +35,12 @@ const containerStyles = (format: ArticleFormat) => css`
 	padding: ${space[3]}px;
 `;
 const textStyles = css`
-	${textSans.xsmall()};
+	${textSans14};
 	padding-bottom: ${space[4]}px;
 `;
 
 const successStyles = css`
-	${textSans.xsmall()};
+	${textSans14};
 	${until.desktop} {
 		color: ${palette.neutral[100]};
 	}
@@ -51,7 +53,7 @@ const tickBoxStyles = css`
 `;
 const errorTextStyles = css`
 	color: ${palette.error[400]};
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	display: flex;
 	padding-bottom: ${space[2]}px;
 `;
@@ -112,7 +114,7 @@ const footerPaddingStyles = css`
 `;
 
 const prefaceStyles = css`
-	${textSans.xsmall()};
+	${textSans14};
 	color: ${palette.neutral[100]};
 	padding-bottom: ${space[4]}px;
 	${from.desktop} {
@@ -377,7 +379,7 @@ const summaryStyles = css`
 			height: ${space[3]}px;
 		}
 	}
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 	display: flex;
 	align-items: center;
 	margin-bottom: ${space[2]}px;

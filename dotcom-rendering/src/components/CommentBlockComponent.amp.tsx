@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, textSans } from '@guardian/source-foundations';
+import { palette, textSans12, textSans17 } from '@guardian/source/foundations';
 import type { CommentBlockElement } from '../types/content';
 
 const wrapper = css`
@@ -7,7 +7,7 @@ const wrapper = css`
 	position: relative;
 	margin-bottom: 12px;
 	padding-top: 12px;
-	${textSans.medium()};
+	${textSans17};
 	padding-left: 20px;
 	border-left: 8px solid ${palette.neutral[86]};
 	clear: left;
@@ -23,14 +23,14 @@ const metaLink = css`
 	border-bottom: 1px solid ${palette.neutral[86]};
 	color: ${palette.news[400]};
 	text-decoration: none;
-	${textSans.xxsmall()};
+	${textSans12};
 `;
 
 const bodyCSS = css`
 	clear: left;
 
 	p {
-		${textSans.medium()};
+		${textSans17};
 		font-weight: 300;
 		margin-top: 0;
 		margin-bottom: 8px;

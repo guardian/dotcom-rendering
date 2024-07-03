@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, remSpace } from '@guardian/source-foundations';
+import { between, remSpace } from '@guardian/source/foundations';
 import { none } from '../../../../vendor/@guardian/types/index';
 import type { Image } from 'image';
 import type { Sizes } from 'image/sizes';
-import type { FC } from 'react';
 import DefaultMainMediaImage from './MainMediaImage.defaults';
 
 const styles = css`
@@ -26,7 +25,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const BlogMainMediaImage: FC<Props> = ({ image, format }) => (
+const BlogMainMediaImage = ({ image, format }: Props) => (
 	<DefaultMainMediaImage
 		image={image}
 		sizes={sizes}

@@ -1,13 +1,17 @@
 import { css } from '@emotion/react';
 import { isString, removeCookie, setCookie } from '@guardian/libs';
-import { space, textSans } from '@guardian/source-foundations';
+import {
+	space,
+	textSans17,
+	textSansBold17,
+} from '@guardian/source/foundations';
 import {
 	Button,
 	ChoiceCard,
 	ChoiceCardGroup,
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { AustralianTerritory } from '../types/territory';
 
@@ -27,12 +31,12 @@ const controlsStyles = css`
 `;
 
 const labelStyles = css`
-	${textSans.medium()}
+	${textSans17}
 	padding-bottom: ${space[3]}px;
 	display: block;
 
 	strong {
-		${textSans.medium({ fontWeight: 'bold' })}
+		${textSansBold17}
 	}
 `;
 

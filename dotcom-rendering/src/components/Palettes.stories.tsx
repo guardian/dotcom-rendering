@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
@@ -36,6 +36,7 @@ export const EventPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="EventPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -64,6 +65,7 @@ export const EventAltPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="EventAltPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -81,6 +83,7 @@ export const SombrePalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="SombrePalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -98,6 +101,7 @@ export const SombreAltPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="SombreAltPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -115,6 +119,7 @@ export const BreakingPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="BreakingPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -132,6 +137,7 @@ export const LongRunningPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="LongRunningPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -149,6 +155,7 @@ export const LongRunningAltPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -166,6 +173,7 @@ export const InvestigationPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="InvestigationPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -183,6 +191,7 @@ export const SpecialReportAltPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="SpecialReportAltPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -198,11 +207,13 @@ export const BrandedPalette = () => (
 		ophanComponentName={'branded-palette'}
 		ophanComponentLink={'branded-palette'}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="Branded"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</LabsSection>
@@ -220,6 +231,7 @@ export const MediaPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="MediaPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -235,11 +247,13 @@ export const PodcastPalette = () => (
 		ophanComponentName={'podcast-palette'}
 		ophanComponentLink={'podcast-palette'}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="PodcastPalette"
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
+import { space } from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { EditorialButton } from '@guardian/source-development-kitchen/react-components';
 
 type Props = {
 	count: number;

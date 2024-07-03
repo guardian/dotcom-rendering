@@ -7,6 +7,7 @@ import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import type { Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import type { TagType } from '../types/tag';
+import { AffiliateDisclaimerInline } from './AffiliateDisclaimer';
 import { AudioAtomBlockComponent } from './AudioAtomBlockComponent.amp';
 import { CommentBlockComponent } from './CommentBlockComponent.amp';
 import { ContentAtomBlockComponent } from './ContentAtomBlockComponent.amp';
@@ -84,6 +85,10 @@ export const isAmpSupported = ({
 		if (!hasAmpInteractiveTag) return false;
 	}
 
+	if (tags.some((tag) => tag.id === 'type/video')) {
+		return false;
+	}
+
 	if (tags.some((tag) => tag.id === 'type/article')) {
 		const isSwitchedOn = switches.ampArticleSwitch;
 		const hasQuizTag = tags.some((tag) => tag.id === 'tone/quizzes');
@@ -93,8 +98,24 @@ export const isAmpSupported = ({
 				element._type ===
 				'model.dotcomrendering.pageElements.QuizAtomBlockElement',
 		);
-		if (!isSwitchedOn || hasQuizTag || hasQuizAtoms || elements.length == 0)
+		if (
+			!isSwitchedOn ||
+			hasQuizTag ||
+			!!hasQuizAtoms ||
+			elements.length == 0
+		) {
 			return false;
+		}
+	}
+
+	if (
+		elements.some(
+			(element) =>
+				element._type ===
+				'model.dotcomrendering.pageElements.ListBlockElement',
+		)
+	) {
+		return false;
 	}
 
 	if (format.design === ArticleDesign.LiveBlog) {
@@ -357,7 +378,7 @@ export const Elements = (
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-				return <></>;
+				return <AffiliateDisclaimerInline isAmp={true} />;
 			default:
 				console.log('Unsupported Element', JSON.stringify(element));
 				if ((element as { isMandatory?: boolean }).isMandatory) {

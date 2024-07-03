@@ -3,15 +3,20 @@ import {
 	between,
 	from,
 	space,
-	textSans,
+	textSans14,
+	textSansBold12,
+	textSansBold14,
+	textSansBold20,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Link,
 	LinkButton,
 	SvgArrowRightStraight,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import type { EditionId } from '../lib/edition';
+import { getLabsUrlSuffix } from '../lib/labs';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
@@ -62,6 +67,9 @@ type Props = {
 	hasPageSkin?: boolean;
 
 	discussionApiUrl: string;
+
+	/** We use a different link on the logo for US and AUS labs */
+	editionId: EditionId;
 };
 
 const leftColumnBackground = (backgroundColour?: string) => css`
@@ -165,7 +173,7 @@ const linkStyles = (textColour?: string) => css`
 `;
 
 const headerStyles = (textColour?: string) => css`
-	${textSans.large({ fontWeight: 'bold' })};
+	${textSansBold20};
 	color: ${textColour ?? 'inherit'};
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
@@ -184,7 +192,7 @@ const badgeStyles = css`
 `;
 
 const paidForByStyles = (textColour?: string) => css`
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 	color: ${textColour};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
@@ -309,7 +317,7 @@ const LabsContainerHeader = ({
 	>
 		<div
 			css={css`
-				${textSans.xsmall({ fontWeight: 'bold' })};
+				${textSansBold14};
 				padding-right: 16px;
 			`}
 		>
@@ -344,7 +352,7 @@ const LabsContainerHeader = ({
 					href="https://www.theguardian.com/info/2016/jan/25/content-funding"
 					cssOverrides={css`
 						color: ${summaryTextSecondaryColour};
-						${textSans.xsmall({ fontWeight: 'regular' })};
+						${textSans14};
 					`}
 				>
 					Learn more about Guardian Labs content
@@ -378,6 +386,7 @@ export const LabsSection = ({
 	children,
 	hasPageSkin = false,
 	discussionApiUrl,
+	editionId,
 }: Props) => {
 	const overrides = decideContainerOverrides('Branded');
 
@@ -422,7 +431,9 @@ export const LabsSection = ({
 					</div>
 
 					<Link
-						href="https://www.theguardian.com/guardian-labs"
+						href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+							editionId,
+						)}`}
 						cssOverrides={css`
 							text-align: right;
 						`}
@@ -449,6 +460,7 @@ export const LabsSection = ({
 								containerPalette={'Branded'}
 								showAge={true}
 								discussionApiUrl={discussionApiUrl}
+								editionId={editionId}
 							/>
 						</Island>
 					)}

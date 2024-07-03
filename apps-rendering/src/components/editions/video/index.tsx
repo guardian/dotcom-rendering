@@ -4,10 +4,9 @@ import {
 	from,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
-import { SvgOfflineCloud } from '@guardian/source-react-components';
-import type { FC } from 'react';
+	textSans15,
+} from '@guardian/source/foundations';
+import { SvgOfflineCloud } from '@guardian/source/react-components';
 import { useOnlineStatus } from '../utils/useOnlineStatus';
 
 // ----- Styles ----- //
@@ -63,7 +62,7 @@ const styles = css`
 
 	.placeholder-text {
 		text-align: center;
-		${textSans.small()};
+		${textSans15};
 		margin: ${remSpace[2]} 0;
 	}
 `;
@@ -75,7 +74,7 @@ interface Props {
 	atomId: string;
 }
 
-const Video: FC<Props> = ({ title, atomId }) => {
+const Video = ({ title, atomId }: Props) => {
 	const online = useOnlineStatus();
 
 	const text =

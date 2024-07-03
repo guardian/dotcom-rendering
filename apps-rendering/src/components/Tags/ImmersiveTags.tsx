@@ -1,11 +1,10 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import type { FC } from 'react';
 import { defaultStyles, DefaultTags } from './Tags.defaults';
 
 // ----- Component ----- //
@@ -22,7 +21,7 @@ type Props = {
 	item: Item;
 };
 
-const ImmersiveTags: FC<Props> = ({ item }) => (
+const ImmersiveTags = ({ item }: Props) => (
 	<section css={styles}>
 		<DefaultTags item={item} css={defaultStyles(getFormat(item))} />
 	</section>

@@ -4,8 +4,8 @@ import {
 	breakpoints,
 	palette,
 	space,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans34,
+} from '@guardian/source/foundations';
 import { Standard } from '../../fixtures/generated/dcr-articles/Standard';
 import { editionList } from '../lib/edition';
 import { extractNAV } from '../model/extract-nav';
@@ -38,7 +38,7 @@ export const Footers = () => (
 				<h1
 					css={css`
 						color: ${palette.brand[400]};
-						${textSans.xxxlarge()};
+						${textSans34};
 					`}
 				>
 					{editionId} Footer

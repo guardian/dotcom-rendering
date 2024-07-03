@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { textSans15 } from '@guardian/source/foundations';
 
 type Props = {
 	players: PlayerType[];
@@ -69,7 +69,7 @@ export const Lineup = ({ players }: Props) => {
 				<li
 					key={player.id}
 					css={css`
-						${textSans.small()}
+						${textSans15}
 					`}
 				>
 					<Row>

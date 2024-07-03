@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { cmp, onConsent } from '@guardian/libs';
 import type { ConsentFramework } from '@guardian/libs';
-import { palette } from '@guardian/source-foundations';
-import { ButtonLink } from '@guardian/source-react-components';
+import { palette } from '@guardian/source/foundations';
+import { ButtonLink } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 
 const footerLink = css`
@@ -43,12 +43,13 @@ export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 		});
 	}, []);
 
-	if (!framework)
+	if (!framework) {
 		return (
 			<span css={footerLink} style={{ color: 'transparent' }}>
 				&nbsp;
 			</span>
 		);
+	}
 
 	return (
 		<ButtonLink

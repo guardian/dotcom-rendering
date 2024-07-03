@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 import { cmp } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineBold28,
 	line,
 	space,
-	textSans,
+	textSans17,
 	until,
-} from '@guardian/source-foundations';
-import { Button, Link, LinkButton } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, Link, LinkButton } from '@guardian/source/react-components';
 import { useConfig } from '../../ConfigContext';
 import { trackLink } from '../componentEventTracking';
 import type { SignInGateProps } from '../types';
@@ -28,7 +28,7 @@ import {
 } from './shared';
 
 const heading = css`
-	${headline.small({ fontWeight: 'bold' })};
+	${headlineBold28};
 	border-top: 2px black solid;
 	padding-bottom: ${space[3]}px;
 
@@ -166,7 +166,7 @@ const separator = css`
 `;
 
 const separatorText = css`
-	${textSans.medium({ lineHeight: 'regular' })}
+	${textSans17}
 `;
 
 const facebookIcon = (

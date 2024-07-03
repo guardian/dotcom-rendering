@@ -4,9 +4,8 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import { background, border, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import PrivacyWording from '../NewsletterSignup/PrivacyWording';
@@ -42,12 +41,12 @@ const initiallyHidden = css`
 	display: none;
 `;
 
-const InPageNewsletterSignup: FC<Props> = ({
+const InPageNewsletterSignup = ({
 	format,
 	newsletter,
 	waitingContent: loadingContent,
 	fallbackContent,
-}) => {
+}: Props) => {
 	const { identityName, successDescription } = newsletter;
 	return (
 		<>

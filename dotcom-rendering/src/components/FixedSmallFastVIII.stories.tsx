@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedSmallFastVIII } from './FixedSmallFastVIII';
@@ -23,10 +23,12 @@ export const Default = () => (
 		title="Fixed Small Fast VIII"
 		showTopBorder={true}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallFastVIII
 			trails={trails}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

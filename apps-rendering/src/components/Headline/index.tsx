@@ -17,7 +17,7 @@ interface Props {
 	item: Item;
 }
 
-const Headline: React.FC<Props> = ({ item }) => {
+const Headline = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	if (format.display === ArticleDisplay.Immersive) {

@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { textSans17, textSansBold17 } from '@guardian/source/foundations';
 
 type Props = {
 	html: string;
 };
 
 const itemLinkStyles = css`
-	${textSans.medium()}
+	${textSans17}
 	a {
-		${textSans.medium({ fontWeight: 'bold' })}
+		${textSansBold17}
 	}
 	strong {
 		display: block;

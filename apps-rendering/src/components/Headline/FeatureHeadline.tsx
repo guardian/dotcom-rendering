@@ -1,12 +1,16 @@
 import { css } from '@emotion/react';
-import { from, headline } from '@guardian/source-foundations';
+import {
+	from,
+	headlineBold28,
+	headlineBold34,
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const featureStyles = css`
-	${headline.small({ fontWeight: 'bold' })}
+	${headlineBold28}
 	${from.tablet} {
-		${headline.medium({ fontWeight: 'bold' })}
+		${headlineBold34}
 	}
 `;
 
@@ -14,7 +18,7 @@ interface Props {
 	item: Item;
 }
 
-const FeatureHeadline: React.FC<Props> = ({ item }) => (
+const FeatureHeadline = ({ item }: Props) => (
 	<DefaultHeadline
 		item={item}
 		styles={css(defaultStyles(item), featureStyles)}

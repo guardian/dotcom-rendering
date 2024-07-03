@@ -16,6 +16,7 @@
 		},
 		"preserveConstEnums": true
 	},
+	"include": ["**/*", ".storybook/mocks/bridgetApi.ts"],
 	"exclude": [
 		"storybook-static",
 		"target",

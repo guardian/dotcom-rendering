@@ -2,17 +2,23 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { headline, remSpace, textSans } from '@guardian/source-foundations';
+import {
+	headlineBold17,
+	headlineLight17,
+	remSpace,
+	textSans14,
+	textSansBold17,
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import Anchor from 'components/Anchor';
 import ListItem from 'components/ListItem';
 import OrderedList from 'components/OrderedList';
 import type { Outline } from 'outline';
 import { border, text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -76,20 +82,20 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 const listItemStyles = (format: ArticleFormat): SerializedStyles => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return css`
-			${headline.xxxsmall({ fontWeight: 'light' })}
+			${headlineLight17}
 			${defaultListItemStyles(format)}
 		`;
 	}
 
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
-			${textSans.medium({ fontWeight: 'bold' })}
+			${textSansBold17}
 			${defaultListItemStyles(format)}
 		`;
 	}
 
 	return css`
-		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${headlineBold17}
 		${defaultListItemStyles(format)}
 	`;
 };
@@ -143,7 +149,7 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const titleStyle = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall({ lineHeight: 'regular' })}
+	${textSans14};
 	color: ${text.tableOfContentsTitle(format)};
 	${darkModeCss`
 		color: ${text.tableOfContentsTitleDark(format)};
@@ -166,10 +172,7 @@ const verticalLineStyle = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
-const TocTextElement: React.FC<TextElementProps> = ({
-	node,
-	key,
-}): ReactElement => {
+const TocTextElement = ({ node, key }: TextElementProps): ReactElement => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map((item, i) => {
 		return <TocTextElement node={item} key={i.toString()} />;
@@ -223,7 +226,7 @@ const TocTextElement: React.FC<TextElementProps> = ({
 	}
 };
 
-const TableOfContents: FC<Props> = ({ format, outline }) => {
+const TableOfContents = ({ format, outline }: Props) => {
 	return (
 		<details open={outline.length < 5} css={detailsStyles(format)}>
 			<summary css={summaryStyles(format)}>

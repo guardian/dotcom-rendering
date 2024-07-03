@@ -11,12 +11,13 @@ const sharedProps = {
 	region: 'eu-west-1',
 };
 
+/** Legacy, only serves the all newsletters page */
 new DotcomRendering(cdkApp, 'DotcomRendering-PROD', {
 	...sharedProps,
 	app: 'rendering',
 	stage: 'PROD',
 	minCapacity: 3,
-	maxCapacity: 12,
+	maxCapacity: 30,
 	instanceType: 't4g.small',
 });
 new DotcomRendering(cdkApp, 'DotcomRendering-CODE', {
@@ -42,7 +43,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	domainName: 'article-rendering.guardianapis.com',
 	scaling: {
 		minimumInstances: 18,
-		maximumInstances: 90,
+		maximumInstances: 180,
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.2s
@@ -77,7 +78,42 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 	domainName: 'facia-rendering.guardianapis.com',
 	scaling: {
 		minimumInstances: 18,
-		maximumInstances: 60,
+		maximumInstances: 180,
+		policy: {
+			scalingStepsOut: [
+				// No scaling up effect when latency is lower than 0.4s
+				{ lower: 0, upper: 0.4, change: 0 },
+				// When latency is higher than 0.4s we scale up by 50%
+				{ lower: 0.4, change: 50 },
+				// When latency is higher than 0.5s we scale up by 80%
+				{ lower: 0.5, change: 80 },
+			],
+			scalingStepsIn: [
+				// No scaling down effect when latency is higher than 0.35s
+				{ lower: 0.35, change: 0 },
+				// When latency is lower than 0.35s we scale down by 1
+				{ upper: 0.35, lower: 0, change: -1 },
+			],
+		},
+	},
+	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
+});
+
+/** Tag pages */
+new RenderingCDKStack(cdkApp, 'TagPageRendering-CODE', {
+	guApp: 'tag-page-rendering',
+	stage: 'CODE',
+	domainName: 'tag-page-rendering.code.dev-guardianapis.com',
+	scaling: { minimumInstances: 1, maximumInstances: 3 },
+	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
+});
+new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
+	guApp: 'tag-page-rendering',
+	stage: 'PROD',
+	domainName: 'tag-page-rendering.guardianapis.com',
+	scaling: {
+		minimumInstances: 18,
+		maximumInstances: 180,
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.4s
@@ -112,7 +148,7 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 	domainName: 'interactive-rendering.guardianapis.com',
 	scaling: {
 		minimumInstances: 3,
-		maximumInstances: 24,
+		maximumInstances: 30,
 		policy: {
 			scalingStepsOut: [
 				// No scaling up effect when latency is lower than 0.2s

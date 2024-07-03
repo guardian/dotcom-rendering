@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { headline, text, textSans } from '@guardian/source-foundations';
+import {
+	headlineBold28,
+	headlineBold34,
+	text,
+	textSans15,
+} from '@guardian/source/foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
@@ -22,19 +27,20 @@ const SEGMENT_GAP = 2;
 const TAU = Math.PI * 2;
 const QUARTER_TURN = TAU / 4;
 
-const unitStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+const percentageStyles = css`
+	${headlineBold34}
 	text-anchor: middle;
+	fill: currentColor;
 `;
 
 const valueStyles = (background: string) => css`
-	${headline.small({ fontWeight: 'bold' })}
+	${headlineBold28}
 	fill: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 	text-anchor: middle;
 `;
 
 const labelStyles = (background: string) => css`
-	${textSans.small()}
+	${textSans15}
 	fill: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 	text-anchor: middle;
 `;
@@ -161,7 +167,7 @@ export const Doughnut = ({
 					</text>
 				</g>
 			))}
-			<text css={unitStyles} dy="0.4em">
+			<text css={percentageStyles} dy="0.4em">
 				%
 			</text>
 		</svg>

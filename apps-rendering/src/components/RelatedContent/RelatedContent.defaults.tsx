@@ -5,18 +5,17 @@ import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import {
 	from,
-	headline,
+	headlineBold24,
 	neutral,
 	remSpace,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, none, withDefault } from '../../../vendor/@guardian/types/index';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import type { ResizedRelatedContent } from 'item';
 import { pipe } from 'lib';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -28,7 +27,7 @@ interface Props {
 }
 
 export const defaultHeadingStyles = css`
-	${headline.xsmall({ fontWeight: 'bold' })}
+	${headlineBold24};
 	margin: 0 0 ${remSpace[4]} 0;
 
 	${darkModeCss`
@@ -108,7 +107,7 @@ const defaultStyles = css`
 
 export const COMMENT = RelatedItemType.COMMENT;
 
-const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
+const DefaultRelatedContent = ({ content, className }: Props) => {
 	return pipe(
 		content,
 		map(({ title, relatedItems, resizedImages }) => {

@@ -1,3 +1,5 @@
+import type { AssetOrigin } from '../lib/assets';
+import type { EditionId } from '../lib/edition';
 import type { RenderingTarget } from './renderingTarget';
 
 /**
@@ -7,11 +9,17 @@ import type { RenderingTarget } from './renderingTarget';
  * @see /dotcom-rendering/docs/architecture/proposed-adrs/react-context-api.md
  */
 export type Config =
-	| {
+	| Readonly<{
 			renderingTarget: Extract<RenderingTarget, 'Web'>;
-			darkModeAvailable: false;
-	  }
-	| {
+			darkModeAvailable: boolean;
+			updateLogoAdPartnerSwitch: boolean;
+			assetOrigin: AssetOrigin;
+			editionId: EditionId;
+	  }>
+	| Readonly<{
 			renderingTarget: Extract<RenderingTarget, 'Apps'>;
 			darkModeAvailable: boolean;
-	  };
+			updateLogoAdPartnerSwitch: boolean;
+			assetOrigin: AssetOrigin;
+			editionId: EditionId;
+	  }>;

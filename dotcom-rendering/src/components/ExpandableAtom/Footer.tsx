@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { textSans14 } from '@guardian/source/foundations';
 import { useState } from 'react';
 import { palette as themePalette } from '../../palette';
 
@@ -64,7 +64,7 @@ export const Footer = ({
 					css={css`
 						display: flex;
 						align-items: center;
-						${textSans.xsmall()};
+						${textSans14};
 					`}
 				>
 					<div>Was this helpful?</div>
@@ -99,7 +99,7 @@ export const Footer = ({
 			</div>
 			<div
 				css={css`
-					${textSans.xsmall()};
+					${textSans14};
 					height: 28px;
 				`}
 				data-testid="feedback"

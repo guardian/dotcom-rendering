@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { palette, text, textSans } from '@guardian/source-foundations';
+import { palette, text, textSans12 } from '@guardian/source/foundations';
 import { blockLink } from '../lib/block-link.amp';
 import type { EditionId } from '../lib/edition';
 import { findBlockAdSlots } from '../lib/find-adslots.amp';
@@ -21,7 +21,7 @@ const adStyle = css`
 	:before {
 		content: 'Advertisement';
 		display: block;
-		${textSans.xxsmall()};
+		${textSans12};
 		/* Adverts specifcally don't use the GU font branding. */
 		/* stylelint-disable-next-line property-disallowed-list */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
@@ -45,11 +45,11 @@ const firstPublishedStyle = css`
 	margin-bottom: 10px;
 	text-decoration: none;
 	font-weight: bold;
-	${textSans.xxsmall()};
+	${textSans12};
 `;
 
 const lastUpdatedStyle = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	color: ${palette.neutral[60]};
 	text-align: right;
 	padding-right: 15px;
@@ -70,7 +70,6 @@ type Props = {
 	url: string;
 	shouldHideAds: boolean;
 	adTargeting: AdTargeting;
-	pageId: string;
 };
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
@@ -86,7 +85,6 @@ export const Blocks = ({
 	url,
 	shouldHideAds,
 	adTargeting,
-	pageId,
 }: Props) => {
 	// TODO add last updated for blocks to show here
 	const liveBlogBlocks = blocks.map((block) => {

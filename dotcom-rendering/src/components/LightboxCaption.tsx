@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	space,
 	palette as srcPalette,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans14,
+} from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -24,7 +24,7 @@ export const LightboxCaption = ({
 	return (
 		<figcaption
 			css={css`
-				${textSans.xsmall()};
+				${textSans14};
 				line-height: 135%;
 				overflow-wrap: break-all;
 				padding-top: ${space[2]}px;

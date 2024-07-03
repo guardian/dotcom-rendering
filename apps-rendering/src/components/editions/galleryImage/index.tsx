@@ -5,8 +5,9 @@ import {
 	from,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans15,
+	textSansBold15,
+} from '@guardian/source/foundations';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import {
 	map,
@@ -20,7 +21,6 @@ import Img from 'components/ImgAlt';
 import type { Sizes } from 'image/sizes';
 import { maybeRender, pipe } from 'lib';
 import { text } from 'palette';
-import type { FC } from 'react';
 
 const width = '100%';
 
@@ -129,7 +129,7 @@ const triangleStyles = (color: string): SerializedStyles => css`
 	padding-right: ${remSpace[1]};
 `;
 
-const Triangle: FC<{ color: string }> = ({ color }) => (
+const Triangle = ({ color }: { color: string }) => (
 	<svg
 		viewBox="0 0 13 11"
 		css={triangleStyles(color)}
@@ -139,12 +139,15 @@ const Triangle: FC<{ color: string }> = ({ color }) => (
 	</svg>
 );
 
-const CaptionLocation: FC<{ location: string[]; triangleColor: string }> = ({
+const CaptionLocation = ({
 	location,
 	triangleColor,
+}: {
+	location: string[];
+	triangleColor: string;
 }) => {
 	const styles = css`
-		${textSans.small({ fontWeight: 'bold' })}
+		${textSansBold15};
 		color: ${neutral[100]};
 		margin: 0;
 		padding: ${remSpace[1]} 0 0;
@@ -164,9 +167,9 @@ const CaptionLocation: FC<{ location: string[]; triangleColor: string }> = ({
 	);
 };
 
-const CaptionDescription: FC<{ description: string[] }> = ({ description }) => {
+const CaptionDescription = ({ description }: { description: string[] }) => {
 	const styles = css`
-		${textSans.small({ lineHeight: 'regular' })};
+		${textSans15};
 		color: ${neutral[100]};
 		margin: 0;
 		padding: 0;
@@ -183,7 +186,7 @@ const CaptionDescription: FC<{ description: string[] }> = ({ description }) => {
 	);
 };
 
-const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
+const GalleryImageCaption = ({ details, format }: CaptionProps) => {
 	const kicker = text.editionsKicker(format);
 
 	const styles = css`
@@ -207,7 +210,7 @@ const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
 	);
 };
 
-const GalleryImage: FC<Props> = ({ image, format }) => {
+const GalleryImage = ({ image, format }: Props) => {
 	return (
 		<figure css={styles} className="editions-gallery-figure">
 			<div css={imgStyles}>

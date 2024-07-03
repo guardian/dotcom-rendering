@@ -1,4 +1,4 @@
-import { text, textSans } from '@guardian/source-foundations';
+import { text, textSans14 } from '@guardian/source/foundations';
 import type { BaseAdProps } from './Ad.amp';
 import { Ad } from './Ad.amp';
 
@@ -7,7 +7,7 @@ export const stickyAdLabelCss = `
 amp-sticky-ad:before {
 	content: 'Advertisement';
 	display: block;
-	${textSans.xsmall()};
+	${textSans14};
 	font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
 	padding: 3px 10px 0;
 	color: ${text.supporting};

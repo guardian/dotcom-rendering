@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { breakpoints, from } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
 import Cutout from 'components/Cutout';
@@ -21,7 +21,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Letter as LetterItem } from 'item';
 import { background } from 'palette';
-import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -54,7 +53,7 @@ interface Props {
 	item: LetterItem;
 }
 
-const LetterLayout: FC<Props> = ({ item }) => {
+const LetterLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 	return (
 		<main css={styles(format)}>

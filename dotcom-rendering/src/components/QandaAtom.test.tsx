@@ -8,7 +8,13 @@ describe('QandaAtom', () => {
 	it('should render & expand works', () => {
 		const { getByText, queryByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<QandaAtom {...imageStory} />
 			</ConfigProvider>,
@@ -29,7 +35,13 @@ describe('QandaAtom', () => {
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<QandaAtom {...imageStory} />
 			</ConfigProvider>,
@@ -51,7 +63,13 @@ describe('QandaAtom', () => {
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<QandaAtom {...imageStory} />
 			</ConfigProvider>,

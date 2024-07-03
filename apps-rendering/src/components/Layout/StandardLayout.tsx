@@ -4,11 +4,11 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source/foundations';
 import {
 	DottedLines,
 	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source-development-kitchen/react-components';
 import Body from 'components/ArticleBody';
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
@@ -46,7 +46,6 @@ import type {
 import { maybeRender } from 'lib';
 import { Optional } from 'optional';
 import { background } from 'palette';
-import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -102,7 +101,7 @@ interface Props {
 		| Profile;
 }
 
-const StandardLayout: FC<Props> = ({ item }) => {
+const StandardLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (

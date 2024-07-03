@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
-import { from, headline, palette, space } from '@guardian/source-foundations';
-import { Link, SvgChevronRightSingle } from '@guardian/source-react-components';
+import {
+	from,
+	headlineMedium20,
+	headlineMedium34,
+	palette,
+	space,
+} from '@guardian/source/foundations';
+import { Link, SvgChevronRightSingle } from '@guardian/source/react-components';
 import { Section } from './Section';
 
 export interface NewslettersListProps {
@@ -25,11 +31,11 @@ const headlineStyle = css`
 	border: 1px dashed ${palette.neutral[7]};
 	margin-bottom: ${space[2]}px;
 	margin-top: ${space[2]}px;
-	${headline.medium()}
+	${headlineMedium34}
 `;
 
 const subtitleStyle = css`
-	${headline.xxsmall()}
+	${headlineMedium20}
 `;
 
 const manageLinkContainer = css`

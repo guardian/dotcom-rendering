@@ -3,9 +3,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
+import { headlineLight34 } from '@guardian/source/foundations';
 import { text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import type { DefaultProps } from './HeadingTwo.defaults';
 import DefaultHeadingTwo from './HeadingTwo.defaults';
@@ -16,7 +15,7 @@ const styles = (
 	format: ArticleFormat,
 	isEditions: boolean,
 ): SerializedStyles => css`
-	${headline.medium({ fontWeight: 'light' })}
+	${headlineLight34}
 
 	${isEditions
 		? null
@@ -25,7 +24,7 @@ const styles = (
 	`}
 `;
 
-const ImmersiveHeadingTwo: FC<DefaultProps> = (props) => (
+const ImmersiveHeadingTwo = (props: DefaultProps) => (
 	<DefaultHeadingTwo
 		{...props}
 		css={styles(props.format, props.isEditions)}

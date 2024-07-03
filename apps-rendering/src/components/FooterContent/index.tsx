@@ -1,10 +1,8 @@
 // ----- Imports ----- //
 
-import type { FC } from 'react';
-
 // ----- Sub-components ----- //
 
-const PrivacySettings: FC<{ isCcpa: boolean }> = ({ isCcpa }) => {
+const PrivacySettings = ({ isCcpa }: { isCcpa: boolean }) => {
 	if (isCcpa) {
 		return (
 			<>
@@ -38,7 +36,7 @@ interface Props {
 	isCcpa: boolean;
 }
 
-const FooterContent: FC<Props> = ({ isCcpa }) => {
+const FooterContent = ({ isCcpa }: Props) => {
 	const currentYear = new Date().getFullYear();
 
 	return (

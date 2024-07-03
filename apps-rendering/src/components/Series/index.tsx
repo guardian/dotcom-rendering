@@ -6,16 +6,15 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineBold17,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSansBold17,
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { background, text } from 'palette';
-import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import GallerySeries from './GallerySeries';
 import ImmersiveSeries from './ImmersiveSeries';
@@ -28,7 +27,13 @@ interface Props {
 
 const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
-		${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
+		${headlineBold17};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		line-height: 1.4;
 		color: ${text.seriesTitle(format)};
 		text-decoration: none;
 
@@ -39,7 +44,13 @@ const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const labsLinkStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
+	${textSansBold17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.4;
 	color: ${text.seriesTitle(format)};
 	text-decoration: none;
 
@@ -52,15 +63,27 @@ const immersiveLinkStyles = css`
 	color: ${neutral[100]};
 	text-decoration: none;
 	white-space: nowrap;
-	${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
+	${headlineBold17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.4;
 `;
 
 const immersiveLabsLinkStyles = css`
-	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
+	${textSansBold17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.4;
 `;
 
 const blogLinkStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
+	${headlineBold17};
 	color: ${text.seriesTitle(format)};
 	text-decoration: none;
 
@@ -140,7 +163,7 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	return standardStyles;
 };
 
-const Series: FC<Props> = ({ item }: Props) => {
+const Series = ({ item }: Props) => {
 	// There are some inconsistencies between kickers in AR and DCR.
 	// Until a decision is made, we are not rendering this component in the Interview Design.
 	// See issue here: https://github.com/guardian/dotcom-rendering/issues/4760

@@ -1,47 +1,45 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	Pillar,
-	setCookie,
-	storage,
-} from '@guardian/libs';
+import { setCookie, storage } from '@guardian/libs';
 import { AB } from '@guardian/ab-core';
 
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
 import { fontsCss } from '../src/lib/fonts-css';
-
-import { resets } from '@guardian/source-foundations';
+import { resets } from '@guardian/source/foundations';
 
 import { Lazy } from '../src/components/Lazy';
 import { Picture } from '../src/components/Picture';
 import { mockRESTCalls } from '../src/lib/mockRESTCalls';
 import { setABTests } from '../src/lib/useAB';
 import { ConfigContextDecorator } from './decorators/configContextDecorator';
-import { lightDecorator } from './decorators/themeDecorator';
 import { Preview } from '@storybook/react';
+import {
+	globalColourScheme,
+	globalColourSchemeDecorator,
+} from './toolbar/globalColourScheme';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
 Picture.disableLazyLoading = isChromatic();
 
-if (isChromatic()) {
-	// Fix the date to prevent false negatives
-	MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
-}
+// Fix the date to prevent false negatives
+MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
 
 mockRESTCalls();
 
-setABTests(
-	new AB({
+setABTests({
+	api: new AB({
 		mvtMaxValue: 1_000_000,
 		mvtId: 1234,
 		pageIsSensitive: false,
 		abTestSwitches: {},
 		arrayOfTestObjects: [],
+		serverSideTests: {},
+		ophanRecord: () => {},
+		errorReporter: () => {},
 	}),
-);
+	participations: {},
+});
 
 // Add base css for the site
 let css = `${fontsCss}${resets.resetCSS}`;
@@ -67,6 +65,7 @@ window.guardian = {
 			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
 		},
 		tests: {},
+		switches: {},
 	},
 	ophan: {
 		record: ({}) => {},
@@ -142,33 +141,30 @@ const guardianViewports = {
 	},
 };
 
-const defaultFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: Pillar.News,
-};
-
 export default {
 	args: {
 		config: { renderingTarget: 'Web', darkModeAvailable: false },
 	},
+
+	globalTypes: {
+		globalColourScheme,
+	},
+
 	decorators: [
 		// @ts-expect-error -- this global decorator takes an option parameter
 		ConfigContextDecorator,
-		lightDecorator([defaultFormat]),
+		globalColourSchemeDecorator,
 		(Story) => {
 			storage.local.clear();
 			return Story();
 		},
 	],
-} satisfies Preview;
 
-export const viewports = [320, 375, 480, 660, 740, 980, 1140, 1300];
-
-export const parameters = {
-	viewport: {
-		viewports: guardianViewports,
-		defaultViewport: 'wide',
+	parameters: {
+		viewport: {
+			viewports: guardianViewports,
+			defaultViewport: 'wide',
+		},
+		layout: 'fullscreen',
 	},
-	layout: 'fullscreen',
-};
+} satisfies Preview;

@@ -3,6 +3,7 @@ import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
 import { TagPage } from '../components/TagPage';
 import {
+	ASSET_ORIGIN,
 	generateScriptTags,
 	getModulesBuild,
 	getPathFromManifest,
@@ -75,12 +76,21 @@ const enhanceNav = (NAV: NavType): NavType => {
 export const renderFront = ({
 	front,
 }: Props): { html: string; prefetchScripts: string[] } => {
-	const title = front.webTitle;
+	const title = front.isNetworkFront
+		? 'Latest news, sport and opinion from the Guardian'
+		: front.webTitle;
 	const NAV = extractNAV(front.nav);
 	const enhancedNAV = enhanceNav(NAV);
 
 	// Fronts are not supported in Apps
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+	const config = {
+		renderingTarget: 'Web',
+		darkModeAvailable:
+			front.config.abTests.darkModeWebVariant === 'variant',
+		updateLogoAdPartnerSwitch: !!front.config.switches.updateLogoAdPartner,
+		assetOrigin: ASSET_ORIGIN,
+		editionId: front.editionId,
+	} satisfies Config;
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -138,6 +148,13 @@ export const renderFront = ({
 
 	const keywords = front.config.keywords;
 
+	const canonicalUrl =
+		front.isNetworkFront &&
+		!!front.canonicalUrl &&
+		URL.canParse(front.canonicalUrl)
+			? new URL(front.canonicalUrl).origin
+			: front.canonicalUrl;
+
 	const pageHtml = htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
@@ -149,6 +166,8 @@ export const renderFront = ({
 		renderingTarget: 'Web',
 		hasPageSkin: front.config.hasPageSkin,
 		weAreHiring: !!front.config.switches.weAreHiring,
+		canonicalUrl,
+		config,
 	});
 
 	return {
@@ -167,7 +186,15 @@ export const renderTagPage = ({
 	const enhancedNAV = enhanceNav(NAV);
 
 	// Fronts are not supported in Apps
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable:
+			tagPage.config.abTests.darkModeWebVariant === 'variant',
+		updateLogoAdPartnerSwitch:
+			!!tagPage.config.switches.updateLogoAdPartner,
+		assetOrigin: ASSET_ORIGIN,
+		editionId: tagPage.editionId,
+	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
@@ -235,6 +262,8 @@ export const renderTagPage = ({
 		keywords,
 		renderingTarget: 'Web',
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
+		canonicalUrl: tagPage.canonicalUrl,
+		config,
 	});
 	return {
 		html: pageHtml,

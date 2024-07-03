@@ -4,17 +4,21 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpic.tsx
  */
 import { css } from '@emotion/react';
-import { body, headline } from '@guardian/source-foundations';
-import { palette, space } from '@guardian/source-foundations';
-import { from } from '@guardian/source-foundations';
+import {
+	article17,
+	articleBold17,
+	from,
+	headlineBold20,
+	palette,
+	space,
+} from '@guardian/source/foundations';
 import {
 	containsNonArticleCountPlaceholder,
+	epicPropsSchema,
 	getLocalCurrencySymbol,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
-import { epicPropsSchema } from '@guardian/support-dotcom-components';
 import type {
-	ContributionFrequency,
 	EpicProps,
 	Stage,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
@@ -40,6 +44,8 @@ import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
 import { ContributionsEpicTicker } from './ContributionsEpicTicker';
+import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
+import { getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
 
 // CSS Styling
 // -------------------------------------------
@@ -64,7 +70,7 @@ const wrapperStyles = css`
 `;
 
 const headingStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 	margin-top: 0;
 	margin-bottom: ${space[3]}px;
 `;
@@ -80,13 +86,13 @@ const linkStyles = css`
 
 const bodyStyles = css`
 	margin: 0 auto ${space[2]}px;
-	${body.medium()};
+	${article17};
 	${linkStyles}
 `;
 
 const highlightWrapperStyles = css`
-	${body.medium({ fontWeight: 'bold' })}
-	${linkStyles}
+	${articleBold17};
+	${linkStyles};
 `;
 
 const highlightStyles = css`
@@ -287,23 +293,37 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicProps) => {
-	const { image, tickerSettings, showChoiceCards, choiceCardAmounts } =
-		variant;
+	const {
+		image,
+		tickerSettings,
+		showChoiceCards,
+		choiceCardAmounts,
+		newsletterSignup,
+	} = variant;
 
 	const [choiceCardSelection, setChoiceCardSelection] = useState<
 		ChoiceCardSelection | undefined
 	>();
 
+	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
+	const [
+		threeTierChoiceCardSelectedAmount,
+		setThreeTierChoiceCardSelectedAmount,
+	] = useState<number>(defaultThreeTierAmount);
+
+	const showThreeTierChoiceCards =
+		showChoiceCards && variant.name.includes('THREE_TIER_CHOICE_CARDS');
+
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
-			const defaultFrequency: ContributionFrequency =
-				choiceCardAmounts.defaultContributionType || 'MONTHLY';
 			const localAmounts =
-				choiceCardAmounts.amountsCardData[defaultFrequency];
+				choiceCardAmounts.amountsCardData[
+					choiceCardAmounts.defaultContributionType
+				];
 			const defaultAmount = localAmounts.defaultAmount;
 
 			setChoiceCardSelection({
-				frequency: defaultFrequency,
+				frequency: choiceCardAmounts.defaultContributionType,
 				amount: defaultAmount,
 			});
 		}
@@ -322,7 +342,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	useEffect(() => {
 		if (hasBeenSeen) {
 			// For the event stream
-			if (!window?.guardian?.config?.isDev && stage !== 'DEV') {
+			if (!window.guardian.config.isDev && stage !== 'DEV') {
 				sendEpicViewEvent(
 					tracking.referrerUrl,
 					tracking.abTestName,
@@ -401,14 +421,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			{showAboveArticleCount && (
 				<div css={articleCountAboveContainerStyles}>
 					<ContributionsEpicArticleCountAboveWithOptOut
-						articleCounts={articleCounts}
+						articleCount={articleCounts.forTargetedWeeks}
 						isArticleCountOn={!hasOptedOut}
 						onArticleCountOptOut={onArticleCountOptOut}
 						onArticleCountOptIn={onArticleCountOptIn}
 						openCmp={openCmp}
 						submitComponentEvent={submitComponentEvent}
 						copy={variant.separateArticleCount?.copy}
-						countType={variant.separateArticleCount?.countType}
 					/>
 				</div>
 			)}
@@ -452,7 +471,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				<BylineWithHeadshot bylineWithImage={variant.bylineWithImage} />
 			)}
 
-			{choiceCardAmounts && (
+			{choiceCardAmounts && !showThreeTierChoiceCards && (
 				<ContributionsEpicChoiceCards
 					setSelectionsCallback={setChoiceCardSelection}
 					selection={choiceCardSelection}
@@ -461,10 +480,19 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					amountsTest={choiceCardAmounts}
 				/>
 			)}
+			{showThreeTierChoiceCards && (
+				<ThreeTierChoiceCards
+					countryCode={countryCode}
+					selectedAmount={threeTierChoiceCardSelectedAmount}
+					setSelectedAmount={setThreeTierChoiceCardSelectedAmount}
+				/>
+			)}
 
-			{variant.newsletterSignup ? (
+			{newsletterSignup ? (
 				<ContributionsEpicNewsletterSignup
-					url={variant.newsletterSignup.url}
+					newsletterId={newsletterSignup.newsletterId}
+					successDescription={newsletterSignup.successDescription}
+					tracking={tracking}
 				/>
 			) : (
 				<ContributionsEpicCtas
@@ -479,6 +507,9 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
 					choiceCardSelection={choiceCardSelection}
+					threeTierChoiceCardSelectedAmount={
+						threeTierChoiceCardSelectedAmount
+					}
 				/>
 			)}
 

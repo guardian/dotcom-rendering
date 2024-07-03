@@ -1,6 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
-import { brandAltBackground, palette } from '@guardian/source-foundations';
+import { brandAltBackground, palette } from '@guardian/source/foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
 import { palette as themePalette } from '../palette';
@@ -40,8 +40,9 @@ const textStandfirst = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog
-	)
+	) {
 		return palette.specialReportAlt[100];
+	}
 
 	return BLACK;
 };
@@ -73,14 +74,17 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 		}
 	}
 
-	if (format.design === ArticleDesign.Picture)
+	if (format.design === ArticleDesign.Picture) {
 		return pillarPalette[format.theme].bright;
+	}
 
-	if (format.theme === ArticleSpecial.SpecialReport)
+	if (format.theme === ArticleSpecial.SpecialReport) {
 		return specialReport[400];
+	}
 
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return palette.specialReportAlt[100];
+	}
 
 	switch (format.theme) {
 		case Pillar.Opinion:
@@ -97,8 +101,9 @@ const textCricketScoreboardLink = (): string => {
 
 const backgroundBullet = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
+	if (format.theme === ArticleSpecial.SpecialReport) {
 		return specialReport[300];
+	}
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case Pillar.News:
@@ -139,8 +144,9 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 		}
 	}
 
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return palette.specialReportAlt[100];
+	}
 
 	return neutral[86]; // default previously defined in Standfirst.tsx
 };
@@ -219,27 +225,6 @@ const fillGuardianLogo = (format: ArticleFormat): string => {
 	return WHITE;
 };
 
-const borderPinnedPost = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
-	}
-};
-
 const borderStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		switch (format.theme) {
@@ -261,11 +246,13 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 				return news[600];
 		}
 	}
-	if (format.theme === ArticleSpecial.SpecialReport)
+	if (format.theme === ArticleSpecial.SpecialReport) {
 		return specialReport[400];
+	}
 
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return transparentColour(neutral[60], 0.3);
+	}
 
 	return palette.neutral[86];
 };
@@ -352,17 +339,20 @@ const borderLines = (format: ArticleFormat): string => {
 		format.theme === ArticleSpecial.SpecialReport &&
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
-	)
+	) {
 		return neutral[46];
+	}
 
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
-	)
+	) {
 		return transparentColour(neutral[60], 0.3);
-	if (format.design === ArticleDesign.Picture)
+	}
+	if (format.design === ArticleDesign.Picture) {
 		return transparentColour(neutral[60], 0.5);
+	}
 
 	return neutral[86];
 };
@@ -404,8 +394,9 @@ const backgroundMessageForm = (format: ArticleFormat): string => {
 const textBetaLabel = (): string => neutral[46];
 
 const textDesignTag = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
 		return palette.specialReportAlt[800];
+	}
 
 	return neutral[100];
 };
@@ -415,8 +406,9 @@ const textDateLine = (format: ArticleFormat): string => {
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog &&
 		format.design !== ArticleDesign.LiveBlog
-	)
+	) {
 		return palette.specialReportAlt[100];
+	}
 
 	return neutral[46];
 };
@@ -516,30 +508,6 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
-const textYoutubeOverlayKicker = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[500];
-		case Pillar.Opinion:
-			return news[500];
-		case Pillar.Sport:
-			return sport[500];
-		case Pillar.Culture:
-			return culture[500];
-		case Pillar.Lifestyle:
-			return lifestyle[500];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[500];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
-	}
-};
-
-const backgroundDynamoSublink = (_format: ArticleFormat): string =>
-	palette.neutral[97];
-
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -561,7 +529,6 @@ export const decidePalette = (
 			dateLine: textDateLine(format),
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
-			youtubeOverlayKicker: textYoutubeOverlayKicker(format),
 		},
 		background: {
 			analysisContrast: backgroundAnalysisContrastColour(),
@@ -578,15 +545,11 @@ export const decidePalette = (
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
 			messageForm: backgroundMessageForm(format),
-			dynamoSublink:
-				overrides?.background.dynamoSublink ??
-				backgroundDynamoSublink(format),
 		},
 		fill: {
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
-			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			navPillar: borderNavPillar(format),

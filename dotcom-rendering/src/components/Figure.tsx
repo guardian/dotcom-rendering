@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, space, until } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source/foundations';
 import type { FEElement, RoleType } from '../types/content';
 
 type Props = {
@@ -11,6 +11,7 @@ type Props = {
 	id?: string;
 	className?: string;
 	type?: FEElement['_type'];
+	isTimeline?: boolean;
 };
 
 const roleCss = {
@@ -150,6 +151,7 @@ const roleCss = {
 export const defaultRoleStyles = (
 	role: RoleType | 'richLink',
 	format: ArticleFormat,
+	isTimeline = false,
 ) => {
 	switch (role) {
 		case 'inline':
@@ -159,6 +161,20 @@ export const defaultRoleStyles = (
 		case 'immersive':
 			return roleCss.immersive;
 		case 'showcase':
+			if (isTimeline) {
+				return css`
+					margin: 0 -10px;
+					${from.tablet} {
+						position: relative;
+					}
+					${from.leftCol} {
+						margin-left: -160px;
+					}
+					${from.wide} {
+						margin-left: -240px;
+					}
+				`;
+			}
 			return roleCss.showcase;
 		case 'thumbnail':
 			switch (format.design) {
@@ -196,8 +212,9 @@ export const Figure = ({
 	isMainMedia,
 	className = '',
 	type,
+	isTimeline = false,
 }: Props) => {
-	if (isMainMedia) {
+	if (isMainMedia && !isTimeline) {
 		// Don't add in-body styles for main media elements
 		// TODO: If we want to support other element types having role position, such
 		// as showcase twitter embeds, then we should remove the role positioning which
@@ -213,7 +230,7 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			css={defaultRoleStyles(role, format)}
+			css={defaultRoleStyles(role, format, isTimeline)}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}
 			className={className}

@@ -1,4 +1,6 @@
+import { levels } from 'log4js';
 import { getIdFromUrl } from '../lib/get-video-id.amp';
+import { logger } from '../server/lib/logging';
 import type { VideoYoutubeBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';
 
@@ -7,15 +9,13 @@ type Props = {
 	pillar: ArticleTheme;
 };
 
-export const ampYoutubeIdRegex = '^[a-zA-Z0-9_-]{11}$'; // Alphanumeric, underscores and hyphens, 11 characters long
-
 export const VideoYoutubeBlockComponent = ({ element, pillar }: Props) => {
-	const youtubeId = getIdFromUrl(
-		element.originalUrl || element.url,
-		ampYoutubeIdRegex,
-		true,
-		'v',
-	);
+	const url = element.originalUrl || element.url;
+	const youtubeId = getIdFromUrl(url, true, 'v');
+
+	logger.log(levels.ERROR, `Could not get an id from: ${url}`);
+	if (!youtubeId) return null;
+
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>
 			<amp-youtube

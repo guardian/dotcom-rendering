@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, until } from '@guardian/source-foundations';
+import { from, until } from '@guardian/source/foundations';
 import { center } from '../../lib/center';
 import type { RoleType } from '../../types/content';
 
@@ -27,6 +27,7 @@ export const interactiveLegacyFigureClasses = (
 // Classes present in Frontend that we add for legacy interactives.
 export const interactiveLegacyClasses = {
 	contentInteractive: 'content--interactive',
+	contentInteractiveGrid: 'content--interactive-grid',
 	contentLabels: 'content__labels',
 	contentLabelsNotImmersive: 'content__labels--not-immersive',
 	contentMainColumn: 'content__main-column--interactive',

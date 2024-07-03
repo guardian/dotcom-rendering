@@ -3,8 +3,10 @@ import {
 	palette,
 	space,
 	text as textColor,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans15,
+	textSans17,
+	textSansBold17,
+} from '@guardian/source/foundations';
 import { unescapeData } from '../lib/escapeData';
 
 type Props = {
@@ -17,7 +19,7 @@ type Props = {
 };
 
 const commentWrapperStyles = css`
-	${textSans.medium()};
+	${textSans17};
 	border-left: 1px ${palette.neutral[86]} solid;
 	border-top: 1px ${palette.neutral[86]} solid;
 	padding-top: ${space[1]}px;
@@ -111,7 +113,7 @@ export const CommentBlockComponent = ({
 				<div css={usernameWrapperStyles}>
 					<a
 						css={css`
-							${textSans.medium({ fontWeight: 'bold' })};
+							${textSansBold17};
 							width: max-content;
 						`}
 						href={profileURL}
@@ -122,7 +124,7 @@ export const CommentBlockComponent = ({
 					<a href={permalink} className="permalink">
 						<time
 							css={css`
-								${textSans.small()};
+								${textSans15};
 							`}
 						>
 							{dateTime}

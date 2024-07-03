@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
-import { Button, SvgCheckmark } from '@guardian/source-react-components';
+import {
+	space,
+	textSans15,
+	textSans17,
+	textSansBold17,
+	textSansBold20,
+} from '@guardian/source/foundations';
+import { Button, SvgCheckmark } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette } from '../palette';
 import type { RoleType } from '../types/content';
@@ -20,12 +26,12 @@ const roleTextSize = (role: RoleType) => {
 		case 'immersive':
 		case 'inline':
 		case 'showcase': {
-			return textSans.medium({ lineHeight: 'regular' });
+			return textSans17;
 		}
 		case 'halfWidth':
 		case 'supporting':
 		case 'thumbnail': {
-			return textSans.small({ lineHeight: 'regular' });
+			return textSans15;
 		}
 	}
 };
@@ -35,18 +41,12 @@ const roleHeadlineSize = (role: RoleType) => {
 		case 'immersive':
 		case 'inline':
 		case 'showcase': {
-			return textSans.large({
-				fontWeight: 'bold',
-				lineHeight: 'regular',
-			});
+			return textSansBold20;
 		}
 		case 'halfWidth':
 		case 'supporting':
 		case 'thumbnail': {
-			return textSans.medium({
-				fontWeight: 'bold',
-				lineHeight: 'regular',
-			});
+			return textSansBold17;
 		}
 	}
 };
@@ -101,7 +101,7 @@ const shouldDisplayOverlay = ({
 	isOverlayClicked: boolean;
 	isMainMedia?: boolean;
 }) => {
-	if (isMainMedia || !isTracking) {
+	if (!!isMainMedia || !isTracking) {
 		return false;
 	}
 	if (isOverlayClicked) {

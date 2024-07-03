@@ -3,8 +3,8 @@ import {
 	brandBackground,
 	brandText,
 	palette,
-	textSans,
-} from '@guardian/source-foundations';
+	textSansBold15,
+} from '@guardian/source/foundations';
 
 const iconHeight = '42px';
 
@@ -52,7 +52,7 @@ const icon = css`
 `;
 
 const textStyles = css`
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 	padding-right: 5px;
 `;
 

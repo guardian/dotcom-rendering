@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
-import type { FC } from 'react';
+import { neutral, remSpace, textSans17 } from '@guardian/source/foundations';
 
 const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
 	margin-top: 0;
@@ -10,7 +9,7 @@ const tagsStyles = (background: string = neutral[20]): SerializedStyles => css`
 	display: block;
 	list-style: none;
 	padding: ${remSpace[3]} 0 ${remSpace[3]} 0;
-	${textSans.medium()}
+	${textSans17}
 
 	li {
 		margin: ${remSpace[3]} ${remSpace[3]} ${remSpace[1]} 0;
@@ -38,7 +37,7 @@ interface TagsProps {
 	background?: string;
 }
 
-const Tags: FC<TagsProps> = ({ tags, background }) => (
+const Tags = ({ tags, background }: TagsProps) => (
 	<ul css={tagsStyles(background)} role="list">
 		{tags.map((tag, index) => {
 			return (

@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import {
 	brandText,
 	from,
-	headline,
+	headlineMedium17,
 	palette,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
-import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgGuardianBestWebsiteLogo } from '@guardian/source/react-components';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { NavType, PillarLinkType } from '../model/extract-nav';
 import { ReaderRevenueButton } from './ReaderRevenueButton.amp';
@@ -82,7 +82,7 @@ const pillarLinkStyle = (pillar: ArticleTheme) => css`
 	text-decoration: none;
 	cursor: pointer;
 	display: block;
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	height: 36px;
 	padding: 9px 4px;
 	color: ${palette.neutral[100]};

@@ -3,12 +3,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import { grid } from 'grid/grid';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { border } from 'palette';
-import type { FC } from 'react';
 import { defaultStyles, DefaultTags } from './Tags.defaults';
 
 // ----- Component ----- //
@@ -75,7 +74,7 @@ type Props = {
 	item: Item;
 };
 
-const GalleryTags: FC<Props> = ({ item }) => {
+const GalleryTags = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

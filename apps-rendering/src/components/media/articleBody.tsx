@@ -1,9 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import { background, text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -31,11 +31,11 @@ interface ArticleBodyProps {
 	format: ArticleFormat;
 }
 
-const ArticleBodyMedia: FC<ArticleBodyProps> = ({
+const ArticleBodyMedia = ({
 	className,
 	children,
 	format,
-}) => (
+}: ArticleBodyProps) => (
 	<div
 		css={[
 			ArticleBodyStyles(format),

@@ -380,6 +380,9 @@
         },
         "contributionsServiceUrl": {
             "type": "string"
+        },
+        "canonicalUrl": {
+            "type": "string"
         }
     },
     "required": [
@@ -687,7 +690,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -734,6 +736,25 @@
                                                                                     },
                                                                                     "webUrl": {
                                                                                         "type": "string"
+                                                                                    },
+                                                                                    "references": {
+                                                                                        "type": "array",
+                                                                                        "items": {
+                                                                                            "description": "This type comes from `frontend`, hence the FE prefix.",
+                                                                                            "type": "object",
+                                                                                            "properties": {
+                                                                                                "id": {
+                                                                                                    "type": "string"
+                                                                                                },
+                                                                                                "type": {
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            },
+                                                                                            "required": [
+                                                                                                "id",
+                                                                                                "type"
+                                                                                            ]
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [
@@ -987,7 +1008,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -1400,7 +1421,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -1447,6 +1467,25 @@
                                                                                     },
                                                                                     "webUrl": {
                                                                                         "type": "string"
+                                                                                    },
+                                                                                    "references": {
+                                                                                        "type": "array",
+                                                                                        "items": {
+                                                                                            "description": "This type comes from `frontend`, hence the FE prefix.",
+                                                                                            "type": "object",
+                                                                                            "properties": {
+                                                                                                "id": {
+                                                                                                    "type": "string"
+                                                                                                },
+                                                                                                "type": {
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            },
+                                                                                            "required": [
+                                                                                                "id",
+                                                                                                "type"
+                                                                                            ]
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [
@@ -1700,7 +1739,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -2113,7 +2152,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -2160,6 +2198,25 @@
                                                                                     },
                                                                                     "webUrl": {
                                                                                         "type": "string"
+                                                                                    },
+                                                                                    "references": {
+                                                                                        "type": "array",
+                                                                                        "items": {
+                                                                                            "description": "This type comes from `frontend`, hence the FE prefix.",
+                                                                                            "type": "object",
+                                                                                            "properties": {
+                                                                                                "id": {
+                                                                                                    "type": "string"
+                                                                                                },
+                                                                                                "type": {
+                                                                                                    "type": "string"
+                                                                                                }
+                                                                                            },
+                                                                                            "required": [
+                                                                                                "id",
+                                                                                                "type"
+                                                                                            ]
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                 "required": [
@@ -2413,7 +2470,7 @@
                                                     "type": "string"
                                                 },
                                                 "starRating": {
-                                                    "type": "number"
+                                                    "$ref": "#/definitions/StarRating"
                                                 },
                                                 "shortUrlPath": {
                                                     "type": "string"
@@ -3114,6 +3171,17 @@
             ],
             "type": "string"
         },
+        "StarRating": {
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "type": "number"
+        },
         "FEContainerType": {
             "enum": [
                 "dynamic/fast",
@@ -3478,7 +3546,7 @@
                     "type": "number"
                 },
                 "starRating": {
-                    "type": "number"
+                    "$ref": "#/definitions/StarRating"
                 },
                 "linkText": {
                     "type": "string"

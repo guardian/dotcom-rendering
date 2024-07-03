@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { palette, textSans } from '@guardian/source-foundations';
+import { palette, textSans12 } from '@guardian/source/foundations';
 import ChevronLeftDouble from '../static/icons/chevron-left-double.svg';
 import ChevronLeftSingle from '../static/icons/chevron-left-single.svg';
 import ChevronRightDouble from '../static/icons/chevron-right-double.svg';
 import ChevronRightSingle from '../static/icons/chevron-right-single.svg';
 
 const paginationStyle = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	font-weight: bold;
 
 	display: flex;

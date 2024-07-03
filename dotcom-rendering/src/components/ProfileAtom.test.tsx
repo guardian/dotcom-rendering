@@ -6,7 +6,13 @@ describe('ProfileAtom', () => {
 	it('should render', () => {
 		const { getByText, queryByText } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<ProfileAtom
 					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
@@ -41,7 +47,13 @@ describe('ProfileAtom', () => {
 	it('Show feedback on like', () => {
 		const { getByText, queryByText, queryByTestId } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<ProfileAtom
 					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"
@@ -77,7 +89,13 @@ describe('ProfileAtom', () => {
 	it('Show feedback on dislike', () => {
 		const { getByText, queryByText, queryByTestId } = render(
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<ProfileAtom
 					id="1fba49a4-81c6-49e4-b7fa-fd66d1512360"

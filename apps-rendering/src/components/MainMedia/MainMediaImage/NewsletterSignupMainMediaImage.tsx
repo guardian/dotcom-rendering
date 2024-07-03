@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace } from '@guardian/source-foundations';
+import { from, remSpace } from '@guardian/source/foundations';
 import { none, some } from '../../../../vendor/@guardian/types/index';
 import Img from 'components/ImgAlt';
 import type { Image } from 'image';
 import type { Sizes } from 'image/sizes';
-import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
 
 // ----- Component ----- //
@@ -31,7 +30,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const NewsletterSignupMainMediaImage: FC<Props> = ({ image, format }) => (
+const NewsletterSignupMainMediaImage = ({ image, format }: Props) => (
 	<figure role="presentation">
 		<Img
 			image={image}

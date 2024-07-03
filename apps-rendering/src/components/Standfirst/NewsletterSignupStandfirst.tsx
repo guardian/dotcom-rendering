@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
+import { headlineLight20 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import type { FC } from 'react';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
 const styles = css`
@@ -10,14 +9,14 @@ const styles = css`
 		padding: 0;
 	}
 
-	${headline.xxsmall({ fontWeight: 'light' })}
+	${headlineLight20}
 `;
 
 interface Props {
 	item: Item;
 }
 
-const NewsletterSignupStandfirst: FC<Props> = ({ item }) => (
+const NewsletterSignupStandfirst = ({ item }: Props) => (
 	<DefaultStandfirst
 		item={item}
 		css={css(defaultStyles(getFormat(item)), styles)}

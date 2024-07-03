@@ -3,16 +3,16 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans14,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Hide,
 	SvgArrowLeftStraight,
 	SvgArrowRightStraight,
 	SvgCross,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxJavascript } from './LightboxJavascript';
@@ -166,7 +166,7 @@ const Selection = ({
 					padding-top: 2.25rem;
 					margin-bottom: ${space[1]}px;
 				}
-				${textSans.xsmall()};
+				${textSans14};
 				color: ${palette.neutral[86]};
 				${until.tablet} {
 					margin-bottom: ${space[2]}px;

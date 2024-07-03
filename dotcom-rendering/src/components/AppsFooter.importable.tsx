@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { remSpace, textSans } from '@guardian/source-foundations';
-import { ButtonLink } from '@guardian/source-react-components';
+import { remSpace, textSans15 } from '@guardian/source/foundations';
+import { ButtonLink } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { getNavigationClient, getUserClient } from '../lib/bridgetApi';
 import { palette } from '../palette';
@@ -8,13 +8,13 @@ import { palette } from '../palette';
 const year = new Date().getFullYear();
 
 const footerStyles = css`
-	${textSans.small({ lineHeight: 'regular' })}
+	${textSans15}
 	padding: ${remSpace[4]} ${remSpace[3]};
 	background-color: ${palette('--apps-footer-background')};
 `;
 
 const linkStyles = css`
-	${textSans.small({ lineHeight: 'regular' })};
+	${textSans15};
 	color: ${palette('--apps-footer-links-text')};
 
 	:active,

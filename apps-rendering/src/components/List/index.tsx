@@ -3,9 +3,9 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import { background } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -42,7 +42,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const List: FC<Props> = ({ children, usePillarColour, format }) => (
+const List = ({ children, usePillarColour, format }: Props) => (
 	<ul css={styles(usePillarColour, format)} role="list">
 		{children}
 	</ul>

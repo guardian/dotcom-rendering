@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { palette, textSans } from '@guardian/source-foundations';
+import { palette, textSans15 } from '@guardian/source/foundations';
 import PlusIcon from '../static/icons/plus.svg';
 
 const showMore = css`
 	color: ${palette.neutral[7]};
 	padding: 0 10px;
-	${textSans.small()};
+	${textSans15};
 	/* Design System: Ideally we want a centring primitive that we can use in these situations */
 	line-height: 34px;
 	height: 36px;

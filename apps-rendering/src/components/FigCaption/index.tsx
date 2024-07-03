@@ -4,13 +4,13 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans14 } from '@guardian/source/foundations';
 import CaptionIcon from 'components/CaptionIcon';
 import type { CaptionIconVariant } from 'components/CaptionIcon';
 import type { Styleable } from 'lib';
 import type { Optional } from 'optional';
 import { text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -22,7 +22,7 @@ type Props = Styleable<{
 }>;
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall({ lineHeight: 'regular' })}
+	${textSans14};
 	padding-top: ${remSpace[1]};
 	color: ${text.figCaption(format)};
 
@@ -51,12 +51,12 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const FigCaption: FC<Props> = ({
+const FigCaption = ({
 	format,
 	children: maybeChildren,
 	className,
 	variant,
-}) =>
+}: Props) =>
 	maybeChildren.maybeRender((children) => (
 		<figcaption className={className} css={getStyles(format)}>
 			<CaptionIcon format={format} variant={variant} />

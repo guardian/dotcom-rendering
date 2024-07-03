@@ -1,5 +1,5 @@
 import { css, jsx } from '@emotion/react';
-import { body } from '@guardian/source-foundations';
+import { articleItalic17 } from '@guardian/source/foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
@@ -14,12 +14,7 @@ type Props = {
 
 const baseBlockquoteStyles = css`
 	margin-bottom: 14px;
-	${body.medium({
-		fontWeight: 'regular',
-		fontStyle: 'italic',
-		lineHeight: 'loose',
-	})};
-
+	${articleItalic17};
 	color: ${palette('--block-quote-text')};
 
 	p {

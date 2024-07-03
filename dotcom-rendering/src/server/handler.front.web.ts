@@ -11,6 +11,7 @@ import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagPageType } from '../model/validate';
 import type { DCRFrontType, FEFrontType } from '../types/front';
+import type { FETagType } from '../types/tag';
 import type { DCRTagPageType, FETagPageType } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
@@ -47,6 +48,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			data.pageId,
 		),
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
+		canonicalUrl: data.canonicalUrl,
 	};
 };
 
@@ -59,6 +61,20 @@ const tagPageWebTitle = (tagPage: FETagPageType) => {
 	}
 };
 
+export const getBadgeUrl = (tag: FETagType): string | undefined => {
+	const { references } = tag.properties;
+
+	if (!references) return undefined;
+
+	const footballTeamRef = references.find(
+		(ref) => ref.type === 'pa-football-team',
+	);
+	if (!footballTeamRef) return undefined;
+
+	const teamId = footballTeamRef.id.split('/').slice(1).join('/');
+	return `https://sport.guim.co.uk/football/crests/120/${teamId}.png`;
+};
+
 const enhanceTagPage = (body: unknown): DCRTagPageType => {
 	const data: FETagPageType = validateAsTagPageType(body);
 
@@ -66,6 +82,7 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 		cardInTagPage: true,
 		pageId: data.pageId,
 		discussionApiUrl: data.config.discussionApiUrl,
+		editionId: data.editionId,
 	});
 	const speed = getSpeedFromTrails(data.contents);
 
@@ -102,9 +119,14 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 			description:
 				data.tags.tags[0]?.properties.bio ??
 				data.tags.tags[0]?.properties.description,
-			image: data.tags.tags[0]?.properties.bylineImageUrl,
+			image:
+				data.tags.tags[0]?.properties.bylineImageUrl ??
+				(data.tags.tags[0]
+					? getBadgeUrl(data.tags.tags[0])
+					: undefined),
 		},
 		branding: tagPageBranding,
+		canonicalUrl: data.canonicalUrl,
 	};
 };
 

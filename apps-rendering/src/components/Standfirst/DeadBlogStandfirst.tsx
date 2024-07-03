@@ -1,11 +1,14 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, neutral, remSpace } from '@guardian/source-foundations';
+import {
+	headlineBold17,
+	neutral,
+	remSpace,
+} from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { border, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
@@ -13,7 +16,7 @@ const deadblogStyles = (format: ArticleFormat): SerializedStyles => {
 	const colour = text.standfirstLink(format);
 
 	return css`
-		${headline.xxxsmall({ fontWeight: 'bold' })};
+		${headlineBold17};
 		margin-bottom: 0;
 		padding-bottom: ${remSpace[3]};
 
@@ -59,7 +62,7 @@ interface Props {
 	item: Item;
 }
 
-const DeadBlogStandfirst: FC<Props> = ({ item }) => {
+const DeadBlogStandfirst = ({ item }: Props) => {
 	const format = getFormat(item);
 
 	return (

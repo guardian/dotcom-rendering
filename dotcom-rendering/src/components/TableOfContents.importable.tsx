@@ -1,12 +1,15 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
-/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
-import { headline, space, textSans } from '@guardian/source-foundations';
+import {
+	headlineBold17,
+	headlineLight17,
+	space,
+	textSans14,
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette } from '../palette';
 import type { TableOfContentsItem } from '../types/frontend';
@@ -20,17 +23,21 @@ const anchorStyles = css`
 	color: ${palette('--table-of-contents')};
 	text-decoration: none;
 	display: block;
+	width: 100%;
+`;
+
+const paddingStyles = css`
+	padding-bottom: ${space[4]}px;
+	padding-top: ${space[1]}px;
 `;
 
 const listItemStyles = (format: ArticleFormat) => {
-	const fontWeight =
-		format.display === ArticleDisplay.Immersive ? 'light' : 'bold';
 	return css`
-		${headline.xxxsmall({ fontWeight })};
+		${format.display === ArticleDisplay.Immersive
+			? headlineLight17
+			: headlineBold17};
 		box-sizing: border-box;
 		border-top: 1px solid ${palette('--table-of-contents-border')};
-		padding-bottom: ${space[4]}px;
-		padding-top: ${space[1]}px;
 		display: flex;
 		position: relative;
 
@@ -86,7 +93,7 @@ const summaryStyles = css`
 `;
 
 const titleStyle = css`
-	${textSans.xsmall({ lineHeight: 'regular' })}
+	${textSans14}
 	color:${palette('--table-of-contents')};
 `;
 
@@ -125,12 +132,20 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 			<summary
 				onClick={(e): void => {
 					e.preventDefault();
-					setOpen(!open);
+					setOpen((state) => !state);
+				}}
+				onKeyDown={(e): void => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						setOpen((state) => !state);
+					}
 				}}
 				data-link-name={
 					open ? 'table-of-contents-close' : 'table-of-contents-open'
 				}
 				css={summaryStyles}
+				tabIndex={0}
+				role="button"
 			>
 				<h2 css={titleStyle}>Jump to</h2>
 				<span className="is-closed">
@@ -149,13 +164,16 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
 						{format.display === ArticleDisplay.NumberedList && (
-							<>
+							<div css={paddingStyles}>
 								<span css={indexStyle}>{index + 1}</span>
 								<div css={verticalStyle}></div>
-							</>
+							</div>
 						)}
 
-						<a href={`#${item.id}`} css={anchorStyles}>
+						<a
+							href={`#${item.id}`}
+							css={[anchorStyles, paddingStyles]}
+						>
 							{item.title}
 						</a>
 					</li>

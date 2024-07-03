@@ -4,15 +4,15 @@ import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballT
 import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import {
 	from,
-	headline,
+	headlineBold20,
+	headlineBold42,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans15,
+} from '@guardian/source/foundations';
 import { fromNullable } from '../../../../vendor/@guardian/types/index';
 import { TeamLocation } from 'football';
 import { maybeRender } from 'lib';
-import type { FC } from 'react';
 
 interface Props {
 	team: FootballTeam;
@@ -47,12 +47,12 @@ const styles = (location: TeamLocation): SerializedStyles => css`
 `;
 
 const teamNameStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20};
 	margin: 0;
 `;
 
 const scoreStyles = (location: TeamLocation): SerializedStyles => css`
-	${headline.large({ fontWeight: 'bold' })}
+	${headlineBold42};
 	margin-right: ${remSpace[3]};
 
 	${from.phablet} {
@@ -87,7 +87,7 @@ const infoStyles = (location: TeamLocation): SerializedStyles => css`
 `;
 
 const scorerStyles = (location: TeamLocation): SerializedStyles => css`
-	${textSans.small()}
+	${textSans15};
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -97,7 +97,7 @@ const scorerStyles = (location: TeamLocation): SerializedStyles => css`
 	}
 `;
 
-const TeamScore: FC<Props> = ({ team, location }) => {
+const TeamScore = ({ team, location }: Props) => {
 	const scorers = fromNullable(team.scorers);
 	return (
 		<section css={styles(location)}>

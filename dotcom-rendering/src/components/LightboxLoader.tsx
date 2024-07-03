@@ -1,5 +1,5 @@
 import { css, keyframes } from '@emotion/react';
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 
 const flash = keyframes`
 	0% {

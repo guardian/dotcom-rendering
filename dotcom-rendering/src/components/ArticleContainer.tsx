@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial';
 import { ArticleDesign } from '@guardian/libs';
-import { from, palette, space, until } from '@guardian/source-foundations';
+import { from, palette, space, until } from '@guardian/source/foundations';
 import { carrotAdStyles, labelStyles } from './AdSlot.web';
 
 type Props = {
@@ -26,6 +26,17 @@ const articleWidth = (format: ArticleFormat) => {
 				}
 			`;
 		}
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+			return css`
+				${from.desktop} {
+					width: 620px;
+				}
+				/* Make the video player as wide as possible on larger screens */
+				${from.wide} {
+					width: 688px;
+				}
+			`;
 		default: {
 			return css`
 				${from.desktop} {
@@ -152,6 +163,16 @@ const adStyles = css`
 
 		${from.desktop} {
 			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
+		}
+	}
+
+	/* Give inline1 ad slot a different placeholder height comparing to subsequent-inlines to reduce CLS.
+	   Let the ad slot take control of its height once rendered.
+	   IMPORTANT NOTE: We currently do not serve OPT-OUT for inline1 but we will need to change this value before we do. */
+	.ad-slot--inline1:not(.ad-slot--rendered) {
+		${from.desktop} {
+			min-height: ${adSizes.outstreamDesktop.height +
+			constants.AD_LABEL_HEIGHT}px;
 		}
 	}
 

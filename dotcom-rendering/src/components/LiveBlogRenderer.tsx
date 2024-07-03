@@ -1,4 +1,4 @@
-import { Hide } from '@guardian/source-react-components';
+import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
@@ -26,18 +26,18 @@ type Props = {
 	isSensitive: boolean;
 	abTests: ServerSideTests;
 	switches: Switches;
-	isLiveUpdate?: boolean;
+	isLiveUpdate: boolean;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
 	isPaidContent: boolean;
 	keywordIds: string;
 	contributionsServiceUrl: string;
-	onFirstPage?: boolean;
-	keyEvents?: Block[];
-	filterKeyEvents?: boolean;
-	availableTopics?: Topic[];
-	selectedTopics?: Topic[];
+	onFirstPage: boolean;
+	keyEvents: Block[];
+	filterKeyEvents: boolean;
+	availableTopics: Topic[];
+	selectedTopics: Topic[];
 };
 
 export const LiveBlogRenderer = ({
@@ -68,9 +68,9 @@ export const LiveBlogRenderer = ({
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
+	const { absoluteServerTimes = false } = switches;
 
-	const filtered =
-		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
+	const filtered = selectedTopics.length > 0 || filterKeyEvents;
 
 	return (
 		<>
@@ -79,7 +79,10 @@ export const LiveBlogRenderer = ({
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
 					</Island>
-					<PinnedPost pinnedPost={pinnedPost} format={format}>
+					<PinnedPost
+						pinnedPost={pinnedPost}
+						absoluteServerTimes={absoluteServerTimes}
+					>
 						<LiveBlock
 							format={format}
 							block={pinnedPost}
@@ -98,16 +101,18 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
-			{keyEvents !== undefined && keyEvents.length > 0 ? (
+			{keyEvents.length > 0 ? (
 				<Hide from="desktop">
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<KeyEventsCarousel
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							id={'key-events-carousel-mobile'}
+							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
-					{(!switches.automaticFilters || !availableTopics) && (
+					{(!switches.automaticFilters ||
+						availableTopics.length < 1) && (
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<FilterKeyEventsToggle
 								filterKeyEvents={filterKeyEvents}
@@ -133,7 +138,7 @@ export const LiveBlogRenderer = ({
 						/>
 					</Hide>
 				)}
-			<div id="top-of-blog" />
+			{isLiveUpdate ? null : <div id="top-of-blog" />}
 			<LiveBlogBlocksAndAdverts
 				blocks={blocks}
 				format={format}

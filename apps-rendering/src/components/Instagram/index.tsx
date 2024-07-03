@@ -2,7 +2,6 @@
 
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { withDefault } from '../../../vendor/@guardian/types/index';
-import type { FC } from 'react';
 
 // ----- Functions ----- //
 
@@ -16,7 +15,7 @@ interface Props {
 	caption: Option<string>;
 }
 
-const Instagram: FC<Props> = ({ id, caption }) => (
+const Instagram = ({ id, caption }: Props) => (
 	<iframe
 		src={instagramUrl(id)}
 		height="830"

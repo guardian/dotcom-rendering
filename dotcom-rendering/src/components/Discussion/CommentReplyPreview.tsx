@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
-import { Button, SvgIndent } from '@guardian/source-react-components';
+import {
+	space,
+	textSans15,
+	textSansBold15,
+} from '@guardian/source/foundations';
+import { Button, SvgIndent } from '@guardian/source/react-components';
 import { useState } from 'react';
 import type { CommentType, ReplyType } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
@@ -27,12 +31,12 @@ const indentStyles = css`
 `;
 
 const smallFontStyles = css`
-	${textSans.small()};
+	${textSans15};
 	line-height: 19px;
 `;
 
 const replyPreviewHeaderStyle = css`
-	${textSans.small({ fontWeight: 'bold' })};
+	${textSansBold15};
 	margin-top: 0px;
 	margin-bottom: ${space[2]}px;
 `;
@@ -63,7 +67,7 @@ const previewStyle = css`
 
 const commentStyles = css`
 	p {
-		${textSans.small()};
+		${textSans15};
 		margin-top: 0px;
 		margin-bottom: ${space[3]}px;
 	}
@@ -126,7 +130,7 @@ export const CommentReplyPreview = ({ commentBeingRepliedTo }: Props) => {
 						buttonLinkPillarBaseStyles,
 						css`
 							button {
-								${textSans.small({ fontWeight: 'bold' })}
+								${textSansBold15}
 							}
 						`,
 					]}
@@ -178,13 +182,12 @@ export const Preview = ({
 					__html: commentBeingRepliedTo.body || '',
 				}}
 			/>
-
 			<div
 				css={[
 					buttonLinkBaseStyles,
 					css`
 						button {
-							${textSans.small()}
+							${textSans15}
 						}
 					`,
 				]}

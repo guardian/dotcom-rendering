@@ -46,3 +46,27 @@ CommentWithError.decorators = [
 		{ orientation: 'vertical' },
 	),
 ];
+
+export const FirstCommentWelcomeApps = () => (
+	<FirstCommentWelcome
+		submitForm={() => Promise.resolve()}
+		cancelSubmit={() => undefined}
+		previewBody="My first comment!!"
+	/>
+);
+FirstCommentWelcomeApps.storyName = 'First Comment Welcome Apps';
+FirstCommentWelcomeApps.parameters = {
+	config: { renderingTarget: 'Apps' },
+};
+FirstCommentWelcomeApps.decorators = [
+	splitTheme(
+		[
+			{
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+				theme: Pillar.News,
+			},
+		],
+		{ orientation: 'vertical' },
+	),
+];

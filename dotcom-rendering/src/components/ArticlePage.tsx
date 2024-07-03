@@ -1,15 +1,11 @@
-import { css, Global } from '@emotion/react';
+import { Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	focusHalo,
-	palette as sourcePalette,
-} from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
+import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import { paletteDeclarations } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
@@ -57,45 +53,21 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 		adUnit: article.config.adUnit,
 	});
 
-	const webLightbox =
-		renderingTarget === 'Web' && !!article.config.switches.lightbox;
+	const isWeb = renderingTarget === 'Web';
+	const webLightbox = isWeb && !!article.config.switches.lightbox;
+	const darkModeAvailable = isWeb
+		? article.config.abTests.darkModeWebVariant === 'variant'
+		: true;
 
 	return (
 		<StrictMode>
-			<Global
-				styles={css`
-					:root {
-						/* Light palette is default on all platforms */
-						${paletteDeclarations(format, 'light')}
-						body {
-							color: ${sourcePalette.neutral[7]};
-						}
-						/* Dark palette only for apps and only if switch turned on */
-						${article.config.switches.darkModeInApps &&
-						renderingTarget === 'Apps'
-							? css`
-									@media (prefers-color-scheme: dark) {
-										${paletteDeclarations(format, 'dark')}
-										body {
-											color: ${sourcePalette.neutral[86]};
-										}
-									}
-							  `
-							: ''}
-					}
-					/* Crude but effective mechanism. Specific components may need to improve on this behaviour. */
-					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
-					*:focus {
-						${focusHalo}
-					}
-					::selection {
-						background: ${sourcePalette.brandAlt[400]};
-						color: ${sourcePalette.neutral[7]};
-					}
-				`}
-			/>
-			<SkipTo id="maincontent" label="Skip to main content" />
-			<SkipTo id="navigation" label="Skip to navigation" />
+			<Global styles={rootStyles(format, darkModeAvailable)} />
+			{isWeb && (
+				<>
+					<SkipTo id="maincontent" label="Skip to main content" />
+					<SkipTo id="navigation" label="Skip to navigation" />
+				</>
+			)}
 			{webLightbox && article.imagesForLightbox.length > 0 && (
 				<>
 					<Island priority="feature" defer={{ until: 'hash' }}>
@@ -167,8 +139,28 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					/>
 				</Island>
 			)}
-			{renderingTarget === 'Apps' &&
-				!article.config.switches.darkModeInApps && <DarkModeMessage />}
+			{renderingTarget === 'Web' && darkModeAvailable && (
+				<DarkModeMessage>
+					Dark mode is a work-in-progress.
+					<br />
+					You can{' '}
+					<a
+						style={{ color: 'inherit' }}
+						href="/opt/out/dark-mode-web"
+					>
+						opt out anytime
+					</a>{' '}
+					if anything is unreadable or odd.
+				</DarkModeMessage>
+			)}
+			{renderingTarget === 'Apps' && !darkModeAvailable && (
+				<DarkModeMessage>
+					We hope you are enjoying the updates we are implementing on
+					articles. Unfortunately, some are still missing a dark mode
+					view. Rest assured this will be fixed in a forthcoming beta
+					release.
+				</DarkModeMessage>
+			)}
 			{renderingTarget === 'Apps' ? (
 				<DecideLayout
 					article={article}

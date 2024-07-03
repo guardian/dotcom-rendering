@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
@@ -47,7 +47,11 @@ export const Avatar = () => {
 		};
 	});
 	return (
-		<FrontSection title="Dynamic Slow" discussionApiUrl={discussionApiUrl}>
+		<FrontSection
+			title="Dynamic Slow"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+		>
 			<DynamicSlow
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -60,6 +64,7 @@ export const Avatar = () => {
 					standard: avatarTrails.slice(4, 8),
 				}}
 				showAge={true}
+				absoluteServerTimes={true}
 				imageLoading="eager"
 			/>
 		</FrontSection>
@@ -74,6 +79,7 @@ export const OneHugeTwoBigsFourStandards = () => (
 		title="Dynamic Slow"
 		description={`first slice: oneHuge</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -83,6 +89,7 @@ export const OneHugeTwoBigsFourStandards = () => (
 				standard: trails.slice(3, 7),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -94,6 +101,7 @@ export const OneVeryBigTwoBigsFourStandards = () => (
 		title="Dynamic Slow"
 		description={`first slice: oneVeryBig</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -103,6 +111,7 @@ export const OneVeryBigTwoBigsFourStandards = () => (
 				standard: trails.slice(3, 7),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -115,6 +124,7 @@ export const TwoVeryBigsTwoBigsFourStandards = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -124,6 +134,7 @@ export const TwoVeryBigsTwoBigsFourStandards = () => (
 				standard: trails.slice(4, 8),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -136,6 +147,7 @@ export const TwoVeryBigs1stBoostedTwoBigsFourStandards = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigsFirstBoosted</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -145,6 +157,7 @@ export const TwoVeryBigs1stBoostedTwoBigsFourStandards = () => (
 				standard: trails.slice(4, 8),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -157,6 +170,7 @@ export const TwoVeryBigs2ndBoostedTwoBigsFourStandards = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigsSecondBoosted</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -166,6 +180,7 @@ export const TwoVeryBigs2ndBoostedTwoBigsFourStandards = () => (
 				standard: trails.slice(4, 8),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -179,6 +194,7 @@ export const TwoVeryBigs8Standards = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -187,6 +203,7 @@ export const TwoVeryBigs8Standards = () => (
 				standard: trails.slice(2, 10),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -198,6 +215,7 @@ export const TwoVeryBigsOneBig4Standards = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -207,6 +225,7 @@ export const TwoVeryBigsOneBig4Standards = () => (
 				standard: trails.slice(3, 7),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -219,6 +238,7 @@ export const TwoVeryBigsTwoBigs4Standards = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -228,6 +248,7 @@ export const TwoVeryBigsTwoBigs4Standards = () => (
 				standard: trails.slice(4, 8),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -243,6 +264,7 @@ export const TwoVeryBigsFiveStandards = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -251,6 +273,7 @@ export const TwoVeryBigsFiveStandards = () => (
 				standard: trails.slice(2, 7),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -263,6 +286,7 @@ export const ThreeVeryBigsFiveStandards = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -271,6 +295,7 @@ export const ThreeVeryBigsFiveStandards = () => (
 				standard: trails.slice(3, 8),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -283,6 +308,7 @@ export const TwoVeryBigsOneBig = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -291,6 +317,7 @@ export const TwoVeryBigsOneBig = () => (
 				big: trails.slice(2, 3),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -303,6 +330,7 @@ export const TwoBigsThreeStandards = () => (
 		title="Dynamic Slow"
 		description={`first slice: undefined</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -311,6 +339,7 @@ export const TwoBigsThreeStandards = () => (
 				standard: trails.slice(2, 5),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -323,6 +352,7 @@ export const OneVeryBigTwoBigsOneStandard = () => (
 		title="Dynamic Slow"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<DynamicSlow
 			groupedTrails={{
@@ -332,6 +362,7 @@ export const OneVeryBigTwoBigsOneStandard = () => (
 				standard: trails.slice(4, 5),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

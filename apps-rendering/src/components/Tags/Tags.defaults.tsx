@@ -4,11 +4,10 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans17 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { background, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -20,7 +19,7 @@ const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	flex-wrap: wrap;
 	list-style: none;
 	padding: ${remSpace[3]} 0 ${remSpace[2]} 0;
-	${textSans.medium()}
+	${textSans17}
 
 	${darkModeCss`
 		background-color: ${background.articleContentDark(format)};
@@ -60,7 +59,7 @@ interface Props {
 	className?: string;
 }
 
-const DefaultTags: FC<Props> = ({ item, className }) => (
+const DefaultTags = ({ item, className }: Props) => (
 	<ul css={className} role="list">
 		{item.tags
 			.filter(

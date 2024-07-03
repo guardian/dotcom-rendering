@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { body } from '@guardian/source-foundations';
+import { article17 } from '@guardian/source/foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { DropCap } from './DropCap';
 
@@ -11,7 +11,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 			padding: 20px;
 
 			p {
-				${body.medium()};
+				${article17};
 			}
 		`}
 	>
@@ -81,6 +81,11 @@ const decorators = [
 			design: ArticleDesign.Comment,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
+		},
+		{
+			design: ArticleDesign.Interview,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
 		},
 	]),
 ];

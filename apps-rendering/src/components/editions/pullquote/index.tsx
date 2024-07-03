@@ -1,13 +1,17 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headline } from '@guardian/source-foundations';
-import { SvgQuote } from '@guardian/source-react-components';
+import {
+	from,
+	headlineBold20,
+	headlineMedium20,
+} from '@guardian/source/foundations';
+import { SvgQuote } from '@guardian/source/react-components';
 import type { Option } from '../../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export const pullquoteWidth = '10.875rem';
 const pullquoteTailSize = '1.5rem';
@@ -64,7 +68,13 @@ const quoteStyles = (format: ArticleFormat): SerializedStyles => {
 
 	return css`
 		margin: 0;
-		${headline.xxsmall({ fontWeight: 'regular' })}
+		${headlineMedium20};
+		/**
+		 * Typography preset styles should not be overridden.
+		 * This has been done because the styles do not directly map to the new presets.
+		 * Please speak to your team's designer and update this to use a more appropriate preset.
+		 */
+		font-weight: 400;
 		svg {
 			margin-bottom: -0.6rem;
 			height: 2rem;
@@ -76,7 +86,7 @@ const quoteStyles = (format: ArticleFormat): SerializedStyles => {
 
 const citeStyles = css`
 	font-style: normal;
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 `;
 
 type Props = {
@@ -89,7 +99,7 @@ const blockQuoteStyles = css`
 	margin: 0;
 `;
 
-const Pullquote: FC<Props> = ({ quote, attribution, format }) => {
+const Pullquote = ({ quote, attribution, format }: Props) => {
 	const quoteElement = (
 		<p css={quoteStyles(format)}>
 			<SvgQuote />

@@ -25,7 +25,11 @@ export const renderArticle = (
 	const renderingTarget = 'Apps';
 	const config: Config = {
 		renderingTarget,
-		darkModeAvailable: !!article.config.switches.darkModeInApps,
+		darkModeAvailable: true,
+		updateLogoAdPartnerSwitch:
+			!!article.config.switches.updateLogoAdPartner,
+		assetOrigin: ASSET_ORIGIN,
+		editionId: article.editionId,
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
@@ -117,6 +121,7 @@ window.twttr = (function(d, s, id) {
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
+		config,
 	});
 
 	return {

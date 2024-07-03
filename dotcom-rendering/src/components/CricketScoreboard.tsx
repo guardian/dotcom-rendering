@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { between, space, textSans, until } from '@guardian/source-foundations';
+import {
+	between,
+	space,
+	textSans14,
+	until,
+} from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { EditionId } from '../lib/edition';
 import type { Palette } from '../types/palette';
@@ -36,7 +41,7 @@ const containerStyle = css`
 
 const tableStyle = css`
 	width: 100%;
-	${textSans.xsmall()}
+	${textSans14}
 `;
 
 const captionStyle = (palette: Palette) => css`

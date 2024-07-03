@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { from, space, until } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { from, space, until } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
@@ -22,7 +22,6 @@ import { SendAMessage } from './SendAMessage.importable';
 type Props = {
 	format: ArticleFormat;
 	pageId: string;
-	webTitle: string;
 	byline?: string;
 	tags: TagType[];
 	primaryDateline: string;
@@ -31,7 +30,6 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	ajaxUrl: string;
 	messageUs?: MessageUs;
 };
 
@@ -201,7 +199,6 @@ export const ArticleMetaApps = ({
 	branding,
 	format,
 	pageId,
-	webTitle,
 	byline,
 	tags,
 	primaryDateline,
@@ -209,7 +206,6 @@ export const ArticleMetaApps = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
-	ajaxUrl,
 	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);

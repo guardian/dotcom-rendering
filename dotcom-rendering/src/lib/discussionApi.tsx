@@ -13,6 +13,7 @@ import {
 	getCommentContextResponseSchema,
 	parseAbuseResponse,
 	parseCommentResponse,
+	parseRecommendResponse,
 	parseRepliesResponse,
 	pickResponseSchema,
 	postUsernameResponseSchema,
@@ -66,7 +67,11 @@ const objAsParams = (obj: any): string => {
 	return '?' + params;
 };
 
-type GetDiscussionError = 'ParsingError' | 'ApiError' | 'NetworkError';
+type GetDiscussionError =
+	| 'ParsingError'
+	| 'ApiError'
+	| 'NetworkError'
+	| 'AbortedSignal';
 
 //todo: figure out the different return types and consider error handling
 export const getDiscussion = async ({
@@ -104,7 +109,9 @@ export const getDiscussion = async ({
 		signal,
 	});
 
-	if (jsonResult.kind === 'error') return jsonResult;
+	if (jsonResult.kind === 'error') {
+		return signal.aborted ? error('AbortedSignal') : jsonResult;
+	}
 
 	const result = safeParse(discussionApiResponseSchema, jsonResult.value);
 	if (!result.success) {
@@ -309,16 +316,17 @@ export const recommend =
 
 		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-		return fetch(url, {
+		const jsonResult = await fetchJSON(url, {
 			method: 'POST',
 			headers: {
 				...options.headers,
-				...(authOptions.headers !== undefined
-					? authOptions.headers
-					: {}),
+				...(authOptions.headers ?? {}),
 			},
 			credentials: authOptions.credentials,
-		}).then((resp) => resp.ok);
+		});
+
+		if (jsonResult.kind === 'error') return false;
+		return parseRecommendResponse(jsonResult.value).kind === 'ok';
 	};
 
 export const addUserName =

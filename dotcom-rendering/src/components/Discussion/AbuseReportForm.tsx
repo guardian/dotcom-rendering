@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans12 } from '@guardian/source/foundations';
 import {
 	Button,
 	InlineError,
@@ -10,7 +10,7 @@ import {
 	SvgCross,
 	TextArea,
 	TextInput,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
 import type { reportAbuse } from '../../lib/discussionApi';
 import { palette as schemedPalette } from '../../palette';
@@ -32,7 +32,7 @@ const formWrapper = css`
 	flex-direction: column;
 	padding: ${space[3]}px;
 	background-color: ${schemedPalette('--discussion-report-background')};
-	${textSans.xxsmall()};
+	${textSans12};
 `;
 
 const labelColour = schemedPalette('--discussion-report-label-text');

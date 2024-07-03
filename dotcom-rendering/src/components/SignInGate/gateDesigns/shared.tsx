@@ -1,13 +1,15 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold28,
+	headlineBold34,
 	line,
 	palette,
 	space,
 	text,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans17,
+	textSansBold17,
+} from '@guardian/source/foundations';
 
 export const signInGateContainer = css`
 	max-width: 617px;
@@ -18,13 +20,13 @@ export const signInGateContainer = css`
 `;
 
 export const headingStyles = css`
-	${headline.small({ fontWeight: 'bold' })};
+	${headlineBold28};
 	border-top: 2px black solid;
 	padding-bottom: ${space[12]}px;
 
 	${from.phablet} {
 		padding-right: 160px;
-		${headline.medium({ fontWeight: 'bold' })};
+		${headlineBold34};
 	}
 `;
 
@@ -33,7 +35,7 @@ export const bodySeparator = css`
 `;
 
 export const bodyBold = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSansBold17}
 	padding-bottom: 20px;
 	${from.phablet} {
 		padding-right: 130px;
@@ -41,7 +43,7 @@ export const bodyBold = css`
 `;
 
 export const bodyText = css`
-	${textSans.medium({ lineHeight: 'regular' })}
+	${textSans17}
 	padding-bottom: ${space[6]}px;
 
 	${from.phablet} {

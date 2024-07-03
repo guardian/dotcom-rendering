@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral, remSpace, until } from '@guardian/source-foundations';
+import { from, neutral, remSpace, until } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { none } from '../../../vendor/@guardian/types/index';
 import BylineCard from 'components/BylineCard';
@@ -12,7 +12,6 @@ import { grid } from 'grid/grid';
 import type { ResizedRelatedContent } from 'item';
 import { maybeRender } from 'lib';
 import { background, border } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import {
 	COMMENT,
@@ -94,7 +93,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const GalleryRelatedContent: FC<Props> = ({ content, format }) =>
+const GalleryRelatedContent = ({ content, format }: Props) =>
 	maybeRender(content, ({ title, relatedItems, resizedImages }) => {
 		if (relatedItems.length === 0) {
 			return null;

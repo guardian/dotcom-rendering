@@ -1,8 +1,14 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { allModes } from '../../.storybook/modes';
 import { images } from '../../fixtures/generated/images';
-import { getAllThemes } from '../lib/format';
+import { getAllDesigns, getAllThemes } from '../lib/format';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { TextBlockElement } from '../types/content';
 import { KeyTakeaways } from './KeyTakeaways';
@@ -23,7 +29,7 @@ const testTextElement: TextBlockElement = {
 	html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>',
 };
 
-export const AllThemes = {
+export const ThemeVariations = {
 	args: {
 		keyTakeaways: [
 			{
@@ -35,8 +41,9 @@ export const AllThemes = {
 				body: [testTextElement],
 			},
 		],
+		isLastElement: true,
 		/**
-		 * This will be replaced by the `splitTheme` decorator, but it's
+		 * This will be replaced by the `formats` parameter, but it's
 		 * required by the type.
 		 */
 		format: {
@@ -57,60 +64,83 @@ export const AllThemes = {
 		switches: {},
 		RenderArticleElement,
 	},
-	decorators: [
-		splitTheme(
-			getAllThemes({
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-		),
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		}),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
-/* TODO reminder to check desktop/mobile font size variations
- * remove this comment when https://github.com/guardian/dotcom-rendering/issues/9193 complete
- */
-export const SomeDesignsAndDisplays = {
-	args: AllThemes.args,
-	decorators: [
-		splitTheme([
+export const DesignVariations = {
+	args: ThemeVariations.args,
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: getAllDesigns({
+			theme: Pillar.News,
+			display: ArticleDisplay.Standard,
+		}),
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
+} satisfies Story;
+
+export const OtherVariations = {
+	args: ThemeVariations.args,
+	decorators: [centreColumnDecorator],
+	parameters: {
+		formats: [
 			{
 				design: ArticleDesign.Obituary,
 				display: ArticleDisplay.Standard,
 				theme: Pillar.Lifestyle,
 			},
 			{
-				design: ArticleDesign.Editorial,
+				design: ArticleDesign.Review,
 				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
+				theme: Pillar.Sport,
 			},
 			{
-				design: ArticleDesign.Profile,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Analysis,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Interview,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.Lifestyle,
-			},
-			{
-				design: ArticleDesign.Standard,
+				design: ArticleDesign.Recipe,
 				display: ArticleDisplay.Immersive,
 				theme: Pillar.Lifestyle,
 			},
-		]),
-	],
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReport,
+			},
+			{
+				design: ArticleDesign.Feature,
+				display: ArticleDisplay.Immersive,
+				theme: ArticleSpecial.SpecialReportAlt,
+			},
+		],
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Story;
 
 export const Images = {
 	args: {
-		...AllThemes.args,
+		...ThemeVariations.args,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
 		keyTakeaways: [
 			{
 				title: 'The first key takeaway',
@@ -134,16 +164,25 @@ export const Images = {
 			},
 		],
 	},
-	decorators: [
-		splitTheme(
-			[
-				{
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-				},
-			],
-			{ orientation: 'vertical' },
-		),
-	],
+	decorators: [centreColumnDecorator],
+	parameters: {
+		chromatic: {
+			modes: {
+				vertical: allModes.splitVertical,
+			},
+		},
+	},
+} satisfies Story;
+
+export const WithSeparatorLine = {
+	args: {
+		...ThemeVariations.args,
+		isLastElement: false,
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
+	},
+	decorators: [centreColumnDecorator],
 } satisfies Story;

@@ -6,13 +6,13 @@ import {
 	space,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Button,
 	InlineError,
 	SvgCross,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type { EditionId } from '../lib/edition';
@@ -33,7 +33,7 @@ const decideButtonText = ({
 	title: string;
 }) => {
 	if (isOpen && loading) return <>Loading</>;
-	if (isOpen)
+	if (isOpen) {
 		return (
 			<>
 				Less{' '}
@@ -47,6 +47,7 @@ const decideButtonText = ({
 				</span>
 			</>
 		);
+	}
 	return <>More {title}</>;
 };
 
@@ -69,7 +70,7 @@ type Props = {
 	sectionId: string;
 	showAge: boolean;
 	ajaxUrl: string;
-	editionId?: EditionId;
+	editionId: EditionId;
 	containerPalette?: DCRContainerPalette;
 	discussionApiUrl: string;
 };
@@ -176,6 +177,7 @@ export const ShowMore = ({
 											showAge={showAge}
 											headlineSize="small"
 											imageLoading="eager"
+											absoluteServerTimes={false}
 										/>
 									</LI>
 								);

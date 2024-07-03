@@ -1,6 +1,13 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { from, headline, textSans, until } from '@guardian/source-foundations';
+import {
+	from,
+	headlineMedium20,
+	headlineMedium24,
+	headlineMedium28,
+	textSans20,
+	until,
+} from '@guardian/source/foundations';
 import { unescapeData } from '../lib/escapeData';
 import { palette } from '../palette';
 import { QuoteIcon } from './QuoteIcon';
@@ -16,7 +23,13 @@ const pullQuoteCss = css`
 const fontCss = (role: string, format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
-			${textSans.large({ fontWeight: 'medium' })}
+			${textSans20};
+			/**
+			 * Typography preset styles should not be overridden.
+			 * This has been done because the styles do not directly map to the new presets.
+			 * Please speak to your team's designer and update this to use a more appropriate preset.
+			 */
+			font-weight: 500;
 		`;
 	}
 
@@ -35,15 +48,9 @@ const fontCss = (role: string, format: ArticleFormat) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 					return css`
-						${headline.xsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium24};
 						${from.tablet} {
-							${headline.small({
-								fontWeight: 'medium',
-								lineHeight: 'tight',
-							})};
+							${headlineMedium28};
 						}
 					`;
 				case ArticleDesign.Obituary:
@@ -51,15 +58,21 @@ const fontCss = (role: string, format: ArticleFormat) => {
 				case ArticleDesign.Editorial:
 				default:
 					return css`
-						${headline.xsmall({
-							fontWeight: 'regular',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium24};
+						/**
+						 * Typography preset styles should not be overridden.
+						 * This has been done because the styles do not directly map to the new presets.
+						 * Please speak to your team's designer and update this to use a more appropriate preset.
+						 */
+						font-weight: 400;
 						${from.tablet} {
-							${headline.small({
-								fontWeight: 'regular',
-								lineHeight: 'tight',
-							})};
+							${headlineMedium28};
+							/**
+							 * Typography preset styles should not be overridden.
+							 * This has been done because the styles do not directly map to the new presets.
+							 * Please speak to your team's designer and update this to use a more appropriate preset.
+							 */
+							font-weight: 400;
 						}
 					`;
 			}
@@ -77,20 +90,20 @@ const fontCss = (role: string, format: ArticleFormat) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 					return css`
-						${headline.xxsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium20};
 					`;
 				case ArticleDesign.Obituary:
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				default:
 					return css`
-						${headline.xxsmall({
-							fontWeight: 'regular',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium20};
+						/**
+						 * Typography preset styles should not be overridden.
+						 * This has been done because the styles do not directly map to the new presets.
+						 * Please speak to your team's designer and update this to use a more appropriate preset.
+						 */
+						font-weight: 400;
 					`;
 			}
 		// Inline
@@ -108,15 +121,9 @@ const fontCss = (role: string, format: ArticleFormat) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 					return css`
-						${headline.xxsmall({
-							fontWeight: 'medium',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium20};
 						${from.tablet} {
-							${headline.xsmall({
-								fontWeight: 'medium',
-								lineHeight: 'tight',
-							})};
+							${headlineMedium24};
 						}
 					`;
 				case ArticleDesign.Obituary:
@@ -124,15 +131,21 @@ const fontCss = (role: string, format: ArticleFormat) => {
 				case ArticleDesign.Comment:
 				default:
 					return css`
-						${headline.xxsmall({
-							fontWeight: 'regular',
-							lineHeight: 'tight',
-						})};
+						${headlineMedium20};
+						/**
+						 * Typography preset styles should not be overridden.
+						 * This has been done because the styles do not directly map to the new presets.
+						 * Please speak to your team's designer and update this to use a more appropriate preset.
+						 */
+						font-weight: 400;
 						${from.tablet} {
-							${headline.xsmall({
-								fontWeight: 'regular',
-								lineHeight: 'tight',
-							})};
+							${headlineMedium24};
+							/**
+							 * Typography preset styles should not be overridden.
+							 * This has been done because the styles do not directly map to the new presets.
+							 * Please speak to your team's designer and update this to use a more appropriate preset.
+							 */
+							font-weight: 400;
 						}
 					`;
 			}

@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
@@ -22,10 +22,12 @@ export const Default = () => (
 	<FrontSection
 		title="Fixed Small Slow V Third"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedSmallSlowVThird
 			trails={trails}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

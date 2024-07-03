@@ -374,18 +374,12 @@ const parse =
 						Result.ok<string, Callout>({
 							kind: ElementKind.Callout,
 							isNonCollapsible,
-							prompt:
-								overridePrompt === undefined
-									? 'Share your experience'
-									: overridePrompt,
-							heading:
-								overrideTitle === undefined
-									? callout.callout
-									: overrideTitle,
+							prompt: overridePrompt ?? 'Share your experience',
+							heading: overrideTitle ?? callout.callout,
 							description: context.docParser(
-								overrideDescription === undefined
-									? callout.description ?? ''
-									: overrideDescription,
+								overrideDescription ??
+									callout.description ??
+									'',
 							),
 							formFields: callout.formFields,
 							formId: callout.formId,
@@ -498,6 +492,60 @@ const parse =
 						? parseTitle(item.title)
 						: [];
 					return titleElements.concat(item.elements.flatMap(parser));
+				});
+			}
+
+			case ElementType.TIMELINE: {
+				const timelineTypeData = element.timelineTypeData;
+
+				if (!timelineTypeData) {
+					return Result.err(
+						'No timelineTypeData on timeline element',
+					);
+				}
+
+				const parseTitle = (
+					title: string,
+				): Array<Result<string, BodyElement>> => {
+					const doc = context.docParser(`<h2>${title}</h2>`);
+					return flattenTextElement(doc).map((elem) =>
+						Result.ok(elem),
+					);
+				};
+
+				const parseSubheading = (
+					title: string,
+				): Array<Result<string, BodyElement>> => {
+					const doc = context.docParser(
+						`<p><strong>${title}</strong></p>`,
+					);
+					return flattenTextElement(doc).map((elem) =>
+						Result.ok(elem),
+					);
+				};
+
+				const parser = parse(context, campaigns, atoms);
+
+				return timelineTypeData.sections.flatMap((section) => {
+					const sectionTitleElements = section.title
+						? parseTitle(section.title)
+						: [];
+
+					return sectionTitleElements.concat(
+						section.events.flatMap(
+							({ title, date, label, body }) => {
+								const titleElements = title
+									? parseTitle(title)
+									: [];
+
+								return titleElements.concat(
+									date ? parseSubheading(date) : [],
+									label ? parseSubheading(label) : [],
+									body.flatMap(parser),
+								);
+							},
+						),
+					);
 				});
 			}
 

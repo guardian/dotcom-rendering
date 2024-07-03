@@ -1,6 +1,10 @@
-import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
+import {
+	ArticleDisplay,
+	type ArticleFormat,
+	isUndefined,
+} from '@guardian/libs';
 import { JSDOM } from 'jsdom';
-import type { FEElement, TextBlockElement } from '../types/content';
+import type { FEElement, StarRating, TextBlockElement } from '../types/content';
 
 const isFalseH3 = (element: FEElement): boolean => {
 	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
@@ -53,8 +57,11 @@ const isStarRating = (element: FEElement): boolean => {
 	};
 
 	// Checks if this element is a 'star rating' based on the convention: <p>★★★★☆</p>
-	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
+	if (
+		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
+	) {
 		return false;
+	}
 	const frag = JSDOM.fragment(element.html);
 	const hasPTags = frag.firstElementChild?.nodeName === 'P';
 	const text = frag.textContent ?? '';
@@ -66,12 +73,14 @@ const isStarRating = (element: FEElement): boolean => {
 	return hasPTags && hasFiveStars;
 };
 
-const extractStarCount = (element: FEElement): number => {
+const extractStarCount = (
+	element: TextBlockElement,
+): StarRating | undefined => {
 	const isSelectedStar = (charactor: string): boolean => {
 		return charactor === '★';
 	};
 	// Returns the count of stars
-	const textElement = element as TextBlockElement;
+	const textElement = element;
 	const frag = JSDOM.fragment(textElement.html);
 	const text = frag.textContent ?? '';
 	// Loop the string counting selected stars
@@ -79,7 +88,17 @@ const extractStarCount = (element: FEElement): number => {
 	for (const letter of text) {
 		if (isSelectedStar(letter)) starCount += 1;
 	}
-	return starCount;
+	switch (starCount) {
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+			return starCount;
+		default:
+			return undefined;
+	}
 };
 
 const isStarableImage = (element: FEElement | undefined): boolean => {
@@ -92,7 +111,7 @@ const isStarableImage = (element: FEElement | undefined): boolean => {
 
 const starifyImages = (elements: FEElement[]): FEElement[] => {
 	const starified: FEElement[] = [];
-	let previousRating: number | undefined;
+	let previousRating: StarRating | undefined;
 	for (const [index, thisElement] of elements.entries()) {
 		switch (thisElement._type) {
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
@@ -139,13 +158,14 @@ const inlineStarRatings = (elements: FEElement[]): FEElement[] =>
 			isStarRating(thisElement)
 		) {
 			const rating = extractStarCount(thisElement);
+			if (isUndefined(rating)) return thisElement;
 			// Inline this image
 			return {
 				_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 				elementId: thisElement.elementId,
 				rating,
 				size: 'large',
-			};
+			} satisfies FEElement;
 		} else {
 			// Pass through
 			return thisElement;
@@ -187,35 +207,6 @@ const isItemLink = (element: FEElement): boolean => {
 
 	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
 };
-
-const removeGlobalH2Styles = (elements: FEElement[]): FEElement[] =>
-	/**
-	 * Article pages come with some global style rules, one of which affects h2
-	 * tags. But for numbered lists we don't want these styles because we use
-	 * these html elements to represents our special titles. Rather than start a
-	 * css war, this enhancer uses the `data-ignore` attribute which is a contract
-	 * established to allow global styles to be ignored.
-	 *
-	 * All h2 tags inside an article of Design: NumberedList have this attribute
-	 * set.
-	 */
-	elements.map<FEElement>((thisElement) => {
-		if (
-			thisElement._type ===
-			'model.dotcomrendering.pageElements.SubheadingBlockElement'
-		) {
-			return {
-				...thisElement,
-				html: thisElement.html.replace(
-					'<h2>',
-					'<h2 data-ignore="global-h2-styling">',
-				),
-			};
-		} else {
-			// Pass through
-			return thisElement;
-		}
-	});
 
 const addH3s = (elements: FEElement[]): FEElement[] => {
 	/**
@@ -350,11 +341,6 @@ class Enhancer {
 		return this;
 	}
 
-	removeGlobalH2Styles() {
-		this.elements = removeGlobalH2Styles(this.elements);
-		return this;
-	}
-
 	addH3s() {
 		this.elements = addH3s(this.elements);
 		return this;
@@ -387,8 +373,6 @@ export const enhanceNumberedLists =
 
 		return (
 			new Enhancer(elements)
-				// Add the data-ignore='global-h2-styling' attribute
-				.removeGlobalH2Styles()
 				// Turn false h3s into real ones
 				.addH3s()
 				// Add item links

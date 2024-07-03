@@ -6,9 +6,9 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-	textSans,
+	textSansBold17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	Column,
 	Columns,
@@ -17,8 +17,8 @@ import {
 	LinkButton,
 	SvgEye,
 	SvgGuardianLogo,
-} from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -27,6 +27,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/NewsletterBadge';
 import { NewsletterDetail } from '../components/NewsletterDetail';
@@ -129,7 +130,7 @@ const previewCaptionStyle = css`
 	align-items: center;
 	background-color: ${sourcePalette.brandAlt[400]};
 	padding: ${space[1]}px ${space[3]}px;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	text-decoration: none;
 
 	:hover {
@@ -159,7 +160,7 @@ const topMarginStyle = (marginTop: number = space[2]): SerializedStyles => css`
 `;
 
 const shareSpanStyle = css`
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	margin-right: ${space[4]}px;
 `;
 
@@ -211,6 +212,11 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	 */
 	const renderAds = canRenderAds(article);
 
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
+	const { absoluteServerTimes = false } = article.config.switches;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -223,45 +229,29 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot />
+							<HeaderAdSlot
+								isPaidContent={!!article.config.isPaidContent}
+								shouldHideReaderRevenue={
+									!!article.config.shouldHideReaderRevenue
+								}
+							/>
 						</Section>
 					</Stuck>
 				)}
 
-				<Section
-					fullWidth={true}
-					shouldCenter={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					padSides={false}
-					backgroundColour={sourcePalette.brand[400]}
-					element="header"
-				>
-					<Header
+				{inUpdatedHeaderABTest ? (
+					<Masthead
+						nav={NAV}
 						editionId={article.editionId}
 						idUrl={article.config.idUrl}
 						mmaUrl={article.config.mmaUrl}
-						discussionApiUrl={article.config.discussionApiUrl}
-						urls={article.nav.readerRevenueLinks.header}
-						remoteHeader={!!article.config.switches.remoteHeader}
-						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={article.config.idApiUrl}
-						headerTopBarSearchCapiSwitch={
-							!!article.config.switches.headerTopBarSearchCapi
+						subscribeUrl={
+							article.nav.readerRevenueLinks.header.subscribe
 						}
-					/>
-				</Section>
-
-				<Section
-					fullWidth={true}
-					borderColour={sourcePalette.brand[600]}
-					showTopBorder={false}
-					padSides={false}
-					backgroundColour={sourcePalette.brand[400]}
-					element="nav"
-				>
-					<Nav
-						nav={NAV}
+						discussionApiUrl={article.config.discussionApiUrl}
+						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={!!NAV.subNavSections}
 						isImmersive={
 							format.display === ArticleDisplay.Immersive
 						}
@@ -269,60 +259,109 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
-						selectedPillar={NAV.selectedPillar}
-						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
-						}
-						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
+						hasPageSkin={false}
+						hasPageSkinContentSelfConstrain={false}
 					/>
-				</Section>
-
-				{!!NAV.subNavSections && (
+				) : (
 					<>
 						<Section
 							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
-							padSides={false}
+							shouldCenter={false}
 							showTopBorder={false}
-							element="aside"
-						>
-							<Island
-								priority="enhancement"
-								defer={{ until: 'idle' }}
-							>
-								<SubNav
-									subNavSections={NAV.subNavSections}
-									currentNavLink={NAV.currentNavLink}
-									linkHoverColour={themePalette(
-										'--article-link-text-hover',
-									)}
-									borderColour={themePalette(
-										'--sub-nav-border',
-									)}
-								/>
-							</Island>
-						</Section>
-						<Section
-							fullWidth={true}
-							backgroundColour={themePalette(
-								'--article-background',
-							)}
+							showSideBorders={false}
 							padSides={false}
-							showTopBorder={false}
+							backgroundColour={sourcePalette.brand[400]}
+							element="header"
 						>
-							<StraightLines
-								count={4}
-								cssOverrides={css`
-									display: block;
-								`}
-								color={themePalette('--straight-lines')}
+							<Header
+								editionId={article.editionId}
+								idUrl={article.config.idUrl}
+								mmaUrl={article.config.mmaUrl}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+								urls={article.nav.readerRevenueLinks.header}
+								remoteHeader={
+									!!article.config.switches.remoteHeader
+								}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								headerTopBarSearchCapiSwitch={
+									!!article.config.switches
+										.headerTopBarSearchCapi
+								}
 							/>
 						</Section>
+
+						<Section
+							fullWidth={true}
+							borderColour={sourcePalette.brand[600]}
+							showTopBorder={false}
+							padSides={false}
+							backgroundColour={sourcePalette.brand[400]}
+							element="nav"
+						>
+							<Nav
+								nav={NAV}
+								isImmersive={
+									format.display === ArticleDisplay.Immersive
+								}
+								displayRoundel={
+									format.display ===
+										ArticleDisplay.Immersive ||
+									format.theme === ArticleSpecial.Labs
+								}
+								selectedPillar={NAV.selectedPillar}
+								subscribeUrl={
+									article.nav.readerRevenueLinks.header
+										.subscribe
+								}
+								editionId={article.editionId}
+							/>
+						</Section>
+
+						{!!NAV.subNavSections && (
+							<>
+								<Section
+									fullWidth={true}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
+									padSides={false}
+									showTopBorder={false}
+									element="aside"
+								>
+									<Island
+										priority="enhancement"
+										defer={{ until: 'idle' }}
+									>
+										<SubNav
+											subNavSections={NAV.subNavSections}
+											currentNavLink={NAV.currentNavLink}
+											position="header"
+										/>
+									</Island>
+								</Section>
+								<Section
+									fullWidth={true}
+									backgroundColour={themePalette(
+										'--article-background',
+									)}
+									padSides={false}
+									showTopBorder={false}
+								>
+									<StraightLines
+										count={4}
+										cssOverrides={css`
+											display: block;
+										`}
+										color={themePalette('--straight-lines')}
+									/>
+								</Section>
+							</>
+						)}
 					</>
 				)}
 			</div>
@@ -513,6 +552,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -535,6 +575,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 			</main>

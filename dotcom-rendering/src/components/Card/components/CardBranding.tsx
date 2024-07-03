@@ -1,17 +1,22 @@
 import { css } from '@emotion/react';
-import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
-import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
-import { decideLogo } from '../../../lib/decideLogo';
+import {
+	space,
+	textSans12,
+	visuallyHidden,
+} from '@guardian/source/foundations';
+import { decideCardLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
 import { getOphanComponents } from '../../../lib/labs';
 import { palette as themePalette } from '../../../palette';
 import type { Branding } from '../../../types/branding';
+import type { DCRContainerPalette } from '../../../types/front';
 import type { OnwardsSource } from '../../../types/onwards';
 
 type Props = {
 	branding: Branding;
 	format: ArticleFormat;
 	onwardsSource: OnwardsSource | undefined;
+	containerPalette?: DCRContainerPalette;
 };
 
 const logoImageStyle = css`
@@ -33,12 +38,17 @@ const brandingWrapperStyle = css`
 `;
 
 const labelStyle = css`
-	${textSans.xxsmall()}
+	${textSans12}
 	color: ${themePalette('--card-footer-text')};
 `;
 
-export const CardBranding = ({ branding, format, onwardsSource }: Props) => {
-	const logo = decideLogo(format, branding);
+export const CardBranding = ({
+	branding,
+	format,
+	onwardsSource,
+	containerPalette,
+}: Props) => {
+	const logo = decideCardLogo(branding, format, containerPalette);
 
 	/**
 	 * Only apply click tracking to branding on related content
@@ -68,11 +78,6 @@ export const CardBranding = ({ branding, format, onwardsSource }: Props) => {
 				data-sponsor={branding.sponsorName.toLowerCase()}
 				rel="nofollow"
 				aria-label={`Visit the ${branding.sponsorName} website`}
-				onClick={() =>
-					trackSponsorLogoLinkClick(
-						branding.sponsorName.toLowerCase(),
-					)
-				}
 				data-testid="card-branding-logo"
 			>
 				<img

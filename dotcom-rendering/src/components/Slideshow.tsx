@@ -4,9 +4,9 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSansBold12,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { takeFirst } from '../lib/tuple';
 import type { DCRSlideshowImage } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
@@ -79,7 +79,7 @@ const animationStyles = (animation: Keyframes) => css`
 `;
 
 const captionStyles = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })}
+	${textSansBold12}
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -150,7 +150,7 @@ export const Slideshow = ({
 	isDynamo?: boolean;
 }) => (
 	<>
-		{takeFirst(images, 5).map((slideshowImage, index, { length }) => {
+		{takeFirst(images, 10).map((slideshowImage, index, { length }) => {
 			const isNotFirst = index > 0;
 			const loading = isNotFirst ? 'lazy' : 'eager';
 

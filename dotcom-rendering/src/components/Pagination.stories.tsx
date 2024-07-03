@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { getAllThemes } from '../lib/format';
@@ -25,7 +25,6 @@ export const notFirstPage = ({ format }: StoryProps) => (
 			key={JSON.stringify(format)}
 			currentPage={2}
 			totalPages={6}
-			format={format}
 			oldest="oldest"
 			older="older"
 			newer="newer"
@@ -43,7 +42,6 @@ export const firstPageStory = ({ format }: StoryProps) => (
 			key={JSON.stringify(format)}
 			currentPage={1}
 			totalPages={4}
-			format={format}
 			oldest="oldest"
 			older="older"
 			newer="newer"
@@ -61,7 +59,6 @@ export const lastPage = ({ format }: StoryProps) => (
 			key={JSON.stringify(format)}
 			currentPage={9}
 			totalPages={9}
-			format={format}
 			oldest="oldest"
 			older="older"
 			newer="newer"

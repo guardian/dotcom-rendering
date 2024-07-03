@@ -2,15 +2,15 @@ import { css } from '@emotion/react';
 import { log, timeAgo } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineLight24,
 	palette,
 	space,
-	textSans,
+	textSans14,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
-import { Hide, Link } from '@guardian/source-react-components';
-import { StarRating } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide, Link } from '@guardian/source/react-components';
+import { StarRating } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useState } from 'react';
 import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';
@@ -143,7 +143,7 @@ const Selection = ({
 					padding-top: 2.25rem;
 					margin-bottom: ${space[1]}px;
 				}
-				${textSans.xsmall()};
+				${textSans14};
 				color: ${palette.neutral[86]};
 				${until.tablet} {
 					margin-bottom: ${space[2]}px;
@@ -230,9 +230,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 									<h2
 										css={css`
 											width: 100%;
-											${headline.xsmall({
-												fontWeight: 'light',
-											})}
+											${headlineLight24}
 											color: ${palette.neutral[100]};
 											margin-bottom: ${space[1]}px;
 											${from.tablet} {
@@ -282,7 +280,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 											href={`?page=with:block-${image.blockId}#block-${image.blockId}`}
 											priority="secondary"
 											cssOverrides={css`
-												${textSans.xsmall()};
+												${textSans14};
 												color: ${palette.neutral[60]};
 												:hover {
 													color: ${palette

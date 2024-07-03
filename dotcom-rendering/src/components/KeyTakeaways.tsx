@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
-import type { KeyTakeaway } from '../types/content';
+import type { KeyTakeaway, StarRating } from '../types/content';
 import { KeyTakeaway as KeyTakeawayComponent } from './KeyTakeaway';
 
 interface KeyTakeawaysProps {
@@ -18,12 +18,16 @@ interface KeyTakeawaysProps {
 	switches: Switches;
 	editionId: EditionId;
 	hideCaption?: boolean;
-	starRating?: number;
+	starRating?: StarRating;
 	keyTakeaways: KeyTakeaway[];
 	RenderArticleElement: ArticleElementRenderer;
+	/**
+	 * Whether this is the last element in the article. If true, no separator will be rendered.
+	 */
+	isLastElement: boolean;
 }
 
-const finalLineStyles = css`
+const separatorStyles = css`
 	width: 140px;
 	margin: 8px 0 2px 0;
 	border-top: 1px solid ${palette.neutral[86]};
@@ -43,6 +47,7 @@ export const KeyTakeaways = ({
 	hideCaption,
 	starRating,
 	RenderArticleElement,
+	isLastElement,
 }: KeyTakeawaysProps) => {
 	return (
 		<ol data-ignore="global-ol-styling">
@@ -65,7 +70,7 @@ export const KeyTakeaways = ({
 					RenderArticleElement={RenderArticleElement}
 				/>
 			))}
-			<hr css={finalLineStyles} />
+			{!isLastElement && <hr css={separatorStyles} />}
 		</ol>
 	);
 };

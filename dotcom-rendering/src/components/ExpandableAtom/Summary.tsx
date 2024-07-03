@@ -1,15 +1,17 @@
 import { css } from '@emotion/react';
-import { body, headline, textSans } from '@guardian/source-foundations';
-import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
+import {
+	body,
+	headlineMedium17,
+	textSans15,
+} from '@guardian/source/foundations';
+import { SvgMinus, SvgPlus } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette as themePalette } from '../../palette';
 
 /// SUMMARY ELEMENT
 
 const titleStyling = css`
-	${headline.xxxsmall({
-		fontWeight: 'medium',
-	})};
+	${headlineMedium17};
 	margin: 0;
 	line-height: 22px;
 `;
@@ -33,7 +35,7 @@ const minusStyling = css`
 const iconSpacing = css`
 	display: inline-flex;
 	align-items: center;
-	${textSans.small()};
+	${textSans15};
 `;
 
 export const Summary = ({

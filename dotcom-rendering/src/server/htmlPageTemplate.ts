@@ -1,10 +1,10 @@
-import { resets, palette as sourcePalette } from '@guardian/source-foundations';
+import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { escapeData } from '../lib/escapeData';
 import { fontsCss } from '../lib/fonts-css';
 import type { Guardian } from '../model/guardian';
-import type { RenderingTarget } from '../types/renderingTarget';
+import type { Config } from '../types/configContext';
 import { GIT_COMMIT_HASH } from './prout';
 
 type BaseProps = {
@@ -20,18 +20,20 @@ type BaseProps = {
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
 	canonicalUrl?: string;
-	renderingTarget: RenderingTarget;
 	hasPageSkin?: boolean;
+	hasLiveBlogTopAd?: boolean;
 	weAreHiring: boolean;
 };
 
 interface WebProps extends BaseProps {
 	renderingTarget: 'Web';
 	keywords: string;
+	config: Config & { renderingTarget: 'Web' };
 }
 
 interface AppProps extends BaseProps {
 	renderingTarget: 'Apps';
+	config: Config & { renderingTarget: 'Apps' };
 }
 
 /**
@@ -67,6 +69,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		renderingTarget,
 		hasPageSkin = false,
 		weAreHiring,
+		config,
 	} = props;
 
 	/**
@@ -199,12 +202,12 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <title>${title}</title>
                 <meta name="description" content="${he.encode(description)}" />
+				<meta charset="utf-8">
 				${
 					canonicalUrl !== undefined
 						? `<link rel="canonical" href="${canonicalUrl}" />`
 						: '<!-- no canonical URL -->'
 				}
-                <meta charset="utf-8">
 				${
 					renderingTarget === 'Web'
 						? `<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">`
@@ -332,6 +335,10 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                     })(window, document);
                 </script>
+
+        <script id="config" type="application/json">
+          ${JSON.stringify(config)}
+        </script>
 
 				<script>
 					window.curlConfig = {

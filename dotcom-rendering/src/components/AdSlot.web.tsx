@@ -8,12 +8,14 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans12,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
-import { TopRightAdSlot } from './TopRightAdSlot';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { AdBlockAsk } from './AdBlockAsk.importable';
+import { Island } from './Island';
 
 type InlinePosition =
 	| 'fronts-banner'
@@ -31,27 +33,43 @@ type DefaultProps = {
 // TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
+// for dark ad labels
+type ColourScheme = 'light' | 'dark';
+
 type InlineProps = {
 	position: InlinePosition;
+	colourScheme?: ColourScheme;
 	index: number;
+	shouldHideReaderRevenue?: never;
 };
 
-type NonInlineProps = {
-	position: Exclude<SlotNamesWithPageSkin, InlinePosition>;
+type RightProps = {
+	position: 'right';
+	colourScheme?: ColourScheme;
 	index?: never;
+	shouldHideReaderRevenue: boolean;
+};
+
+type RemainingProps = {
+	position: Exclude<SlotNamesWithPageSkin, InlinePosition | 'right'>;
+	colourScheme?: ColourScheme;
+	index?: never;
+	shouldHideReaderRevenue?: never;
 };
 
 /**
- * This allows us to conditionally require the index property based
- * on position. If `position` is an inline type then we expect the
- * index value. If not, then we explicitly refuse this property
+ * This allows us to conditionally require properties based on position:
+ *
+ * - If `position` is an inline type then we expect the `index` prop.
+ * - If `position` is `right` then we expect the `shouldHideReaderRevenue` prop
+ * - If not, then we explicitly refuse these properties
  */
-type Props = DefaultProps & (InlineProps | NonInlineProps);
+type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
 const individualLabelCSS = css`
-	${textSans.xxsmall()};
+	${textSans12};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
 	background-color: ${palette.neutral[97]};
@@ -103,7 +121,7 @@ export const labelStyles = css`
 	}
 
 	.ad-slot__adtest-cookie-clear-link {
-		${textSans.xxsmall()};
+		${textSans12};
 		text-align: left;
 		position: absolute;
 		left: 268px;
@@ -122,6 +140,14 @@ export const labelStyles = css`
 		border: 0;
 		display: block;
 		${individualLabelCSS}
+	}
+`;
+
+const darkLabelStyles = css`
+	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
+		background-color: transparent;
+		border-top-color: ${palette.neutral[20]};
+		color: ${palette.neutral[86]};
 	}
 `;
 
@@ -176,15 +202,6 @@ const fluidFullWidthAdStyles = css`
 	&.ad-slot--fluid {
 		width: 100%;
 	}
-`;
-
-const topAboveNavStyles = css`
-	position: relative;
-	margin: 0 auto;
-	min-height: ${adSizes.leaderboard.height}px;
-	min-width: ${adSizes.leaderboard.width}px;
-	text-align: left;
-	display: block;
 `;
 
 const merchandisingAdContainerStyles = css`
@@ -341,6 +358,26 @@ const mostPopContainerStyles = css`
 	}
 `;
 
+const liveBlogTopAdStyles = css`
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: ${adSizes.mpu.width}px;
+	width: fit-content;
+	max-width: ${adSizes.mpu.width}px;
+	margin: 0 auto;
+	${from.tablet} {
+		max-width: 700px;
+	}
+	${from.desktop} {
+		max-width: ${adSizes.mpu.width}px;
+	}
+`;
+
+const liveBlogTopContainerStyles = css`
+	padding: 12px 0;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+`;
 /**
  * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
  * These styles come mostly from RichLink in DCR.
@@ -432,6 +469,8 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	hasPageskin = false,
+	shouldHideReaderRevenue = false,
+	colourScheme = 'light',
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -462,11 +501,61 @@ export const AdSlot = ({
 					);
 				}
 				case ArticleDisplay.Standard: {
+					const slotId = 'dfp-ad--right';
 					return (
-						<TopRightAdSlot
-							isPaidContent={isPaidContent}
-							adStyles={[labelStyles]}
-						/>
+						<>
+							<Island
+								priority="feature"
+								defer={{ until: 'visible' }}
+							>
+								<AdBlockAsk
+									size="mpu"
+									slotId={slotId}
+									isPaidContent={isPaidContent}
+									shouldHideReaderRevenue={
+										shouldHideReaderRevenue
+									}
+								/>
+							</Island>
+							<div
+								id="top-right-ad-slot"
+								className="ad-slot-container"
+								css={[
+									css`
+										position: static;
+										height: 100%;
+										max-height: 100%;
+									`,
+									labelStyles,
+									colourScheme === 'dark' && darkLabelStyles,
+								]}
+							>
+								<div
+									id={slotId}
+									className={[
+										'js-ad-slot',
+										'ad-slot',
+										'ad-slot--right',
+										'ad-slot--mpu-banner-ad',
+										'ad-slot--rendered',
+										'js-sticky-mpu',
+									].join(' ')}
+									css={[
+										css`
+											position: sticky;
+											/* Possibly account for the sticky Labs header and 6px of padding */
+											top: ${isPaidContent
+												? LABS_HEADER_HEIGHT + 6
+												: 0}px;
+										`,
+										labelStyles,
+									]}
+									data-link-name="ad slot right"
+									data-name="right"
+									aria-hidden="true"
+								/>
+							</div>
+						</>
 					);
 				}
 				default:
@@ -503,11 +592,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[
-						fluidAdStyles,
-						fluidFullWidthAdStyles,
-						topAboveNavStyles,
-					]}
+					css={[fluidAdStyles, fluidFullWidthAdStyles]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
 					aria-hidden="true"
@@ -718,6 +803,32 @@ export const AdSlot = ({
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
 						data-testid={`liveblog-inline-mobile--${advertId}`}
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
+		case 'liveblog-top': {
+			return (
+				<div
+					className="ad-slot-container"
+					css={[adContainerStyles, liveBlogTopContainerStyles]}
+				>
+					<div
+						id="dfp-ad--liveblog-top"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--liveblog-top',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+							liveBlogTopAdStyles,
+						]}
+						data-link-name="ad slot liveblog-top"
+						data-name="liveblog-top"
 						aria-hidden="true"
 					/>
 				</div>

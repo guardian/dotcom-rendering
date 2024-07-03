@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
@@ -22,10 +22,12 @@ export const OneTrail = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -36,10 +38,12 @@ export const TwoTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -50,10 +54,12 @@ export const ThreeTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -64,10 +70,12 @@ export const FourTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -78,10 +86,12 @@ export const FiveTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 5)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -92,10 +102,12 @@ export const SixTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 6)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -106,10 +118,12 @@ export const SevenTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 7)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -120,10 +134,12 @@ export const EightTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 8)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -134,10 +150,12 @@ export const NineTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
 		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
 	>
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 9)}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineBold24,
 	palette as sourcePalette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { formatAttrString } from '../lib/formatAttrString';
@@ -15,6 +15,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette as themePalette } from '../palette';
 import type { Branding } from '../types/branding';
+import type { StarRating } from '../types/content';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -39,6 +40,7 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
 	discussionApiUrl: string;
+	absoluteServerTimes: boolean;
 };
 
 type ArticleProps = Props & {
@@ -98,10 +100,7 @@ const CarouselColours = ({
 }): React.ReactElement => {
 	if ('palette' in props) {
 		return (
-			<ContainerOverrides
-				containerPalette={props.palette}
-				isDynamo={false}
-			>
+			<ContainerOverrides containerPalette={props.palette}>
 				{children}
 			</ContainerOverrides>
 		);
@@ -396,10 +395,10 @@ const headerRowStyles = css`
 `;
 
 const headerStyles = css`
-	${headline.xsmall({ fontWeight: 'bold' })};
+	${headlineBold24};
 	color: ${sourcePalette.neutral[7]};
 	color: ${themePalette('--carousel-text')};
-	${headline.xsmall({ fontWeight: 'bold' })};
+	${headlineBold24};
 	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;
 	margin-left: 0;
@@ -460,6 +459,7 @@ type CarouselCardProps = {
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
+	absoluteServerTimes: boolean;
 	imageLoading: Loading;
 	kickerText?: string;
 	image?: DCRFrontImage;
@@ -473,6 +473,7 @@ type CarouselCardProps = {
 	mainMedia?: MainMedia;
 	onwardsSource?: OnwardsSource;
 	containerType?: DCRContainerType;
+	starRating?: StarRating;
 };
 
 const CarouselCard = ({
@@ -492,6 +493,8 @@ const CarouselCard = ({
 	imageLoading,
 	discussionApiUrl,
 	isOnwardContent,
+	absoluteServerTimes,
+	starRating,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
@@ -515,7 +518,7 @@ const CarouselCard = ({
 				webPublicationDate={webPublicationDate}
 				kickerText={kickerText}
 				image={image}
-				imageSize={'small'}
+				imageSize={'carousel'}
 				showClock={!isOnwardContent && true}
 				showAge={true}
 				pauseOffscreenVideo={isVideoContainer}
@@ -532,8 +535,10 @@ const CarouselCard = ({
 				imageLoading={imageLoading}
 				discussionApiUrl={discussionApiUrl}
 				isOnwardContent={isOnwardContent}
-				imagePosition={cardImagePosition}
+				imagePositionOnDesktop={cardImagePosition}
 				imagePositionOnMobile={cardImagePosition}
+				absoluteServerTimes={absoluteServerTimes}
+				starRating={starRating}
 			/>
 		</LI>
 	);
@@ -779,6 +784,7 @@ export const Carousel = ({
 	leftColSize,
 	discussionApiUrl,
 	isOnwardContent = true,
+	absoluteServerTimes,
 	...props
 }: ArticleProps | FrontProps) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
@@ -972,6 +978,7 @@ export const Carousel = ({
 								branding,
 								discussion,
 								mainMedia,
+								starRating,
 							} = trail;
 
 							// Don't try to render cards that have no publication date. This property is technically optional
@@ -993,6 +1000,7 @@ export const Carousel = ({
 									linkTo={linkTo}
 									headlineText={headlineText}
 									webPublicationDate={webPublicationDate}
+									absoluteServerTimes={absoluteServerTimes}
 									image={image}
 									kickerText={kickerText}
 									dataLinkName={`carousel-small-card-position-${i}`}
@@ -1008,6 +1016,7 @@ export const Carousel = ({
 									imageLoading={imageLoading}
 									discussionApiUrl={discussionApiUrl}
 									isOnwardContent={isOnwardContent}
+									starRating={starRating}
 								/>
 							);
 						})}

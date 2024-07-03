@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-import { from, neutral, until } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { FC } from 'react';
+import { from, neutral, until } from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { darkModeCss } from 'styles';
 
 const linesStyles = css`
@@ -28,7 +27,7 @@ type Props = {
 	isLive: boolean;
 };
 
-const LiveblogMetadataLines: FC<Props> = ({ isLive }) => (
+const LiveblogMetadataLines = ({ isLive }: Props) => (
 	<>
 		<StraightLines
 			color={

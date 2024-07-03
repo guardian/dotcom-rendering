@@ -13,7 +13,13 @@ describe('RichLinkComponent', () => {
 		expect(() =>
 			renderToString(
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
+						assetOrigin: '/',
+						editionId: 'UK',
+					}}
 				>
 					<RichLinkComponent
 						element={{

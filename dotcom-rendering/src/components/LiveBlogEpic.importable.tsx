@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, log, storage } from '@guardian/libs';
-import { space } from '@guardian/source-foundations';
+import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import React, { useEffect, useState } from 'react';
@@ -14,7 +14,6 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { useAB } from '../lib/useAB';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
@@ -88,7 +87,6 @@ const usePayload = ({
 	isPaidContent,
 	tags,
 	pageId,
-	keywordIds,
 }: {
 	shouldHideReaderRevenue: boolean;
 	sectionId: string;
@@ -97,7 +95,7 @@ const usePayload = ({
 	pageId: string;
 	keywordIds: string;
 }): EpicPayload | undefined => {
-	const articleCounts = useArticleCounts(pageId, keywordIds, 'LiveBlog');
+	const articleCounts = useArticleCounts(pageId, tags, 'LiveBlog');
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
 	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();
@@ -251,16 +249,6 @@ export const LiveBlogEpic = ({
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
 
-	const ABTestAPI = useAB()?.api;
-	const userIsInBlockSupporterRevenueTest = ABTestAPI?.isUserInVariant(
-		'BlockSupporterRevenueMessagingSport',
-		'variant',
-	);
-
-	const shouldRemoveEpic =
-		userIsInBlockSupporterRevenueTest &&
-		(sectionId === 'sport' || sectionId === 'football');
-
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
@@ -271,7 +259,6 @@ export const LiveBlogEpic = ({
 		keywordIds,
 	});
 	if (!payload) return null;
-	if (shouldRemoveEpic) return null;
 
 	/**
 	 * Here we decide where to insert the epic.

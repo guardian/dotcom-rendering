@@ -1,19 +1,19 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
-import { textSans } from '@guardian/source-foundations';
+import { textSans15, textSansBold15 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
 
 const lastUpdatedStyles = css`
-	${textSans.small()}
+	${textSans15}
 	padding-bottom: 0.125rem;
 	padding-top: 0.125rem;
 	color: ${palette('--last-updated-text')};
 `;
 
 const livePulseIconStyles = css`
-	${textSans.small({ fontWeight: 'bold' })}
+	${textSansBold15}
 	color: ${palette('--standfirst-text')};
 `;
 

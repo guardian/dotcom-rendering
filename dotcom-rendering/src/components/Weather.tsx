@@ -18,15 +18,16 @@ import {
 	from,
 	palette,
 	space,
-	textSans,
+	textSans15,
+	textSans17,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 	SvgExternal,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { useId } from 'react';
 import type { EditionId } from '../lib/edition';
 import { WeatherSlot } from './WeatherSlot';
@@ -54,7 +55,7 @@ const weatherCSS = css`
 
 const locationCSS = css`
 	flex: 1;
-	${textSans.medium()};
+	${textSans17};
 	padding: 12px 0;
 	white-space: nowrap;
 	overflow: hidden;
@@ -141,7 +142,7 @@ const slotCSS = css`
 
 const linkCSS = css`
 	a {
-		${textSans.small()};
+		${textSans15};
 		color: ${palette.neutral[7]};
 		text-decoration: none;
 		display: block;

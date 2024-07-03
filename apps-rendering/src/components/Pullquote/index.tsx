@@ -1,20 +1,20 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace } from '@guardian/source-foundations';
-import { SvgQuote } from '@guardian/source-react-components';
+import { headlineLight24, remSpace } from '@guardian/source/foundations';
+import { SvgQuote } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { map, withDefault } from '../../../vendor/@guardian/types/index';
 import { pipe } from 'lib';
 import { fill, text } from 'palette';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 const styles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		color: ${text.pullquote(format)};
 		margin: 0 0 ${remSpace[5]};
-		${headline.xsmall({ fontWeight: 'light' })};
+		${headlineLight24};
 		${darkModeCss`color: ${text.pullquoteDark(format)};`}
 	`;
 };
@@ -48,7 +48,7 @@ const blockQuoteStyles = css`
 	margin-left: 0;
 `;
 
-const Pullquote: FC<Props> = ({ quote, attribution, format }) => {
+const Pullquote = ({ quote, attribution, format }: Props) => {
 	const quoteElement = (
 		<p css={quoteStyles(format)}>
 			<SvgQuote />

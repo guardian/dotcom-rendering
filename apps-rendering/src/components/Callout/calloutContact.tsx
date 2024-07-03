@@ -4,8 +4,8 @@ import {
 	SvgSignalBrand,
 	SvgTelegramBrand,
 	SvgWhatsAppBrand,
-} from '@guardian/source-react-components';
-import type { FC, ReactElement } from 'react';
+} from '@guardian/source/react-components';
+import type { ReactElement } from 'react';
 import { calloutLinkContainer, calloutPrimaryButton, info } from './styles';
 
 export const formatContactType = (s: string): string =>
@@ -50,7 +50,7 @@ export const formatContactNumbers = (contacts: Contact[]): string => {
 	);
 };
 
-const Disclaimer: FC<{ contacts: Contact[] }> = ({ contacts }) => {
+const Disclaimer = ({ contacts }: { contacts: Contact[] }) => {
 	const contactText = (
 		<p css={[info, calloutLinkContainer]}>
 			{formatContactNumbers(contacts)}.
@@ -93,7 +93,7 @@ const Disclaimer: FC<{ contacts: Contact[] }> = ({ contacts }) => {
 	);
 };
 
-const CalloutContact: FC<{ contacts: Contact[] }> = ({ contacts }) => {
+const CalloutContact = ({ contacts }: { contacts: Contact[] }) => {
 	return (
 		<div className="js-message-us-tab">
 			<Disclaimer contacts={contacts} />

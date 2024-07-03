@@ -4,7 +4,7 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
-import { palette, text, textSans, until } from '@guardian/source-foundations';
+import { palette, text, textSans12, until } from '@guardian/source/foundations';
 import React from 'react';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { decideDesign } from '../lib/decideDesign';
@@ -12,6 +12,7 @@ import { decideTheme } from '../lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots.amp';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import { getSharingUrls } from '../lib/sharing-urls';
+import { insertDisclaimerElement } from '../model/enhance-disclaimer';
 import type { AMPArticleModel } from '../types/article.amp';
 import type { ConfigType } from '../types/config';
 import { Elements } from './Elements.amp';
@@ -79,7 +80,7 @@ const adStyle = css`
 	:before {
 		content: 'Advertisement';
 		display: block;
-		${textSans.xxsmall()};
+		${textSans12};
 		/* Adverts specifcally don't use the GU font branding. */
 		/* stylelint-disable-next-line property-disallowed-list */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
@@ -102,6 +103,9 @@ type Props = {
 
 export const Body = ({ data, config }: Props) => {
 	const bodyElements = data.blocks[0] ? data.blocks[0].elements : [];
+	const bodyElementsWithDisclaimer = data.affiliateLinksDisclaimer
+		? insertDisclaimerElement(bodyElements)
+		: bodyElements;
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,
 		isSensitive: config.isSensitive,
@@ -114,12 +118,12 @@ export const Body = ({ data, config }: Props) => {
 	const design = decideDesign(data.format);
 	const pillar = decideTheme(data.format);
 	const elementsWithoutAds = Elements(
-		bodyElements,
+		bodyElementsWithDisclaimer,
 		pillar,
 		data.isImmersive,
 		adTargeting,
 	);
-	const insertSlotsAfter = findAdSlots(bodyElements);
+	const insertSlotsAfter = findAdSlots(bodyElementsWithDisclaimer);
 	const adInfo = {
 		adUnit: config.adUnit,
 		section: data.sectionName,

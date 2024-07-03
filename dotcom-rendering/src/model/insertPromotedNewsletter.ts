@@ -1,4 +1,5 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, isOneOf } from '@guardian/libs';
 import { logger } from '../server/lib/logging';
 import type { FEElement, Newsletter } from '../types/content';
 
@@ -7,6 +8,7 @@ type PlaceInArticle = {
 	distanceFromTarget: number;
 	isAfterText: boolean;
 	distanceAfterFloating: number;
+	isAfterListElement: boolean;
 };
 
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 3;
@@ -88,6 +90,22 @@ const checkIfAfterText = (index: number, elements: FEElement[]): boolean =>
 	elements[index - 1]?._type ===
 	'model.dotcomrendering.pageElements.TextBlockElement';
 
+const listElements = [
+	'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement',
+	'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
+	'model.dotcomrendering.pageElements.DCRSectionedTimelineBlockElement',
+	'model.dotcomrendering.pageElements.DCRTimelineBlockElement',
+] as const;
+
+const isListElement = isOneOf(listElements);
+
+const checkIfAfterNestedListElement = (
+	index: number,
+	elements: FEElement[],
+): boolean => {
+	return !elements.slice(index).some(({ _type }) => isListElement(_type));
+};
+
 const getDistanceAfterFloating = (
 	index: number,
 	elements: FEElement[],
@@ -123,6 +141,7 @@ const getDistanceAfterFloating = (
 
 const placeIsSuitable = (place: PlaceInArticle): boolean =>
 	place.isAfterText &&
+	place.isAfterListElement &&
 	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT &&
 	place.distanceFromTarget <= MAXIMUM_DISTANCE_FROM_MIDDLE;
 
@@ -154,9 +173,9 @@ const findInsertPosition = (elements: FEElement[]): number | null => {
 		position: index,
 		distanceFromTarget: Math.abs(index - targetPosition),
 		isAfterText: checkIfAfterText(index, elements),
+		isAfterListElement: checkIfAfterNestedListElement(index, elements),
 		distanceAfterFloating: getDistanceAfterFloating(index, elements),
 	}));
-
 	const suitablePlacesInOrderOfPrefence = places
 		.filter(placeIsSuitable)
 		.sort(sortPlaces);

@@ -1,13 +1,14 @@
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
-import { resets } from '@guardian/source-foundations';
+import { resets } from '@guardian/source/foundations';
 import he from 'he';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { ConfigProvider } from '../components/ConfigContext';
 import { epicChoiceCardCss } from '../components/Epic.amp';
 import { stickyAdLabelCss } from '../components/StickyAd.amp';
+import { ASSET_ORIGIN } from '../lib/assets';
 import { fontsCss } from '../lib/fonts-css';
 import type { Config } from '../types/configContext';
 
@@ -40,7 +41,13 @@ export const renderArticle = ({
 	const { extractCritical } = createEmotionServer(cache);
 
 	// We are currently considering AMP to be a renderingTarget of Web
-	const config: Config = { renderingTarget: 'Web', darkModeAvailable: false };
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable: false,
+		updateLogoAdPartnerSwitch: false,
+		assetOrigin: ASSET_ORIGIN,
+		editionId: 'INT', // AMP pages have all editions in the HTML
+	};
 
 	const { html, css }: RenderToStringResult = extractCritical(
 		renderToStaticMarkup(

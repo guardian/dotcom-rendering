@@ -25,7 +25,13 @@ describe('YoutubeAtom', () => {
 	it('Player initialises when no overlay and has consent state', () => {
 		const atom = (
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<YoutubeAtom
 					index={123}
@@ -57,7 +63,13 @@ describe('YoutubeAtom', () => {
 	it('Player initialises when overlay clicked and has consent state', () => {
 		const atom = (
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<YoutubeAtom
 					index={123}
@@ -98,7 +110,13 @@ describe('YoutubeAtom', () => {
 
 		const atom = (
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<YoutubeAtom
 					index={123}
@@ -131,7 +149,13 @@ describe('YoutubeAtom', () => {
 		const title = 'My Youtube video!';
 		const atom = (
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<YoutubeAtom
 					index={123}
@@ -166,7 +190,13 @@ describe('YoutubeAtom', () => {
 	it('shows a placeholder if overlay is missing', () => {
 		const atom = (
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<YoutubeAtom
 					index={123}
@@ -199,7 +229,13 @@ describe('YoutubeAtom', () => {
 	it('shows an overlay if present', () => {
 		const atom = (
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<YoutubeAtom
 					index={123}
@@ -231,7 +267,13 @@ describe('YoutubeAtom', () => {
 	it('hides an overlay once it is clicked', () => {
 		const atom = (
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<YoutubeAtom
 					index={123}
@@ -267,7 +309,13 @@ describe('YoutubeAtom', () => {
 		const atom = (
 			<>
 				<ConfigProvider
-					value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+					value={{
+						renderingTarget: 'Web',
+						darkModeAvailable: false,
+						updateLogoAdPartnerSwitch: false,
+						assetOrigin: '/',
+						editionId: 'UK',
+					}}
 				>
 					<YoutubeAtom
 						index={123}

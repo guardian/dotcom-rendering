@@ -8,8 +8,8 @@ import {
 	from,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
 import Cutout from 'components/Cutout';
@@ -27,7 +27,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial } from 'item';
 import { background } from 'palette';
-import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -73,7 +72,7 @@ interface Props {
 	item: CommentItem | Editorial;
 }
 
-const CommentLayout: FC<Props> = ({ item }) => {
+const CommentLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 	return (
 		<main css={styles(format)}>

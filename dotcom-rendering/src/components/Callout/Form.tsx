@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
 import { isString, isUndefined } from '@guardian/libs';
 import {
-	headline,
+	headlineBold20,
 	palette,
 	space,
-	textSans,
-} from '@guardian/source-foundations';
-import { Button, SvgTickRound } from '@guardian/source-react-components';
-import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
+	textSans14,
+	textSansBold17,
+} from '@guardian/source/foundations';
+import { Button, SvgTickRound } from '@guardian/source/react-components';
+import { ErrorSummary } from '@guardian/source-development-kitchen/react-components';
 import { useRef, useState } from 'react';
 import { palette as schemedPalette } from '../../palette';
 import type { CampaignFieldType } from '../../types/content';
@@ -15,12 +16,12 @@ import { CalloutTermsAndConditions } from './CalloutComponents';
 import { FormField } from './FormField';
 
 const textStyles = css`
-	${textSans.xsmall()};
+	${textSans14};
 	padding-bottom: 16px;
 `;
 
 const successStyles = css`
-	${textSans.xsmall()};
+	${textSans14};
 	padding-bottom: 44px;
 `;
 
@@ -30,7 +31,7 @@ const tickBoxStyles = css`
 `;
 const errorTextStyles = css`
 	color: ${palette.error[400]};
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSansBold17};
 	display: flex;
 `;
 
@@ -233,7 +234,7 @@ export const Form = ({
 				</div>
 				<div
 					css={css`
-						${headline.xxsmall({ fontWeight: 'bold' })}
+						${headlineBold20}
 					`}
 				>
 					Thank you!

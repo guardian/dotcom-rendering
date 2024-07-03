@@ -1,6 +1,18 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { from, headline, space, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	headlineLight17,
+	headlineLight20,
+	headlineLight24,
+	headlineMedium17,
+	headlineMedium20,
+	headlineMedium24,
+	space,
+	textSans17,
+	textSans20,
+	textSans24,
+} from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette } from '../palette';
@@ -33,7 +45,7 @@ const nestedStyles = (format: ArticleFormat) => {
 			margin-left: -${offset}px;
 		}
 
-		p {
+		p:not(:last-child) {
 			margin-bottom: 8px;
 		}
 
@@ -60,38 +72,182 @@ const nestedStyles = (format: ArticleFormat) => {
 	`;
 };
 
+const decideFont = ({ display, design, theme }: ArticleFormat) => {
+	const isLabs = theme === ArticleSpecial.Labs;
+	switch (design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial: {
+			switch (display) {
+				case ArticleDisplay.Immersive:
+					if (isLabs) {
+						return css`
+							${textSans20};
+							${from.tablet} {
+								${textSans24};
+							}
+						`;
+					}
+					return css`
+						${headlineLight20};
+						${from.tablet} {
+							${headlineLight24};
+						}
+					`;
+				case ArticleDisplay.Showcase:
+				default: {
+					if (isLabs) {
+						return css`
+							${textSans17};
+							${from.tablet} {
+								${textSans20};
+							}
+						`;
+					}
+					return css`
+						${headlineLight17};
+						${from.tablet} {
+							${headlineLight20};
+						}
+					`;
+				}
+			}
+		}
+		default: {
+			switch (display) {
+				case ArticleDisplay.Immersive: {
+					if (isLabs) {
+						return css`
+							${textSans20};
+							${from.tablet} {
+								${textSans24};
+							}
+						`;
+					}
+					return css`
+						${headlineMedium20};
+						${from.tablet} {
+							${headlineMedium24};
+						}
+					`;
+				}
+				case ArticleDisplay.Showcase:
+				default: {
+					if (isLabs) {
+						return css`
+							${textSans17};
+							${from.tablet} {
+								${textSans20};
+							}
+						`;
+					}
+					return css`
+						${headlineMedium17};
+
+						${from.tablet} {
+							${headlineMedium20};
+						}
+					`;
+				}
+			}
+		}
+	}
+};
+
+const decidePadding = ({ display, design }: ArticleFormat) => {
+	switch (design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial: {
+			switch (display) {
+				case ArticleDisplay.Immersive:
+					return css`
+						padding-bottom: 18px;
+						padding-top: 0;
+						${from.tablet} {
+							padding-bottom: 0;
+						}
+					`;
+				case ArticleDisplay.Showcase:
+				default:
+					return css`
+						padding-bottom: ${space[2]}px;
+						${from.tablet} {
+							padding-bottom: 12px;
+						}
+					`;
+			}
+		}
+		case ArticleDesign.Interview: {
+			switch (display) {
+				case ArticleDisplay.Showcase: {
+					return css`
+						padding-bottom: 8px;
+						${from.tablet} {
+							padding-bottom: ${space[0]}px;
+						}
+					`;
+				}
+				case ArticleDisplay.Immersive:
+					return css`
+						padding-bottom: 0;
+						padding-top: ${space[2]}px;
+
+						${from.tablet} {
+							padding-bottom: 0;
+						}
+					`;
+				default:
+					return css`
+						padding-bottom: ${space[2]}px;
+					`;
+			}
+		}
+		default: {
+			switch (display) {
+				case ArticleDisplay.Showcase:
+					return css`
+						padding-bottom: ${space[2]}px;
+
+						${from.tablet} {
+							padding-bottom: 14px;
+						}
+					`;
+				case ArticleDisplay.Immersive:
+					return css`
+						padding-bottom: 0;
+						padding-top: ${space[2]}px;
+
+						${from.tablet} {
+							padding-bottom: 0;
+						}
+					`;
+				default:
+					return css`
+						padding-bottom: ${space[2]}px;
+						${from.tablet} {
+							padding-bottom: 14px;
+						}
+					`;
+			}
+		}
+	}
+};
+
 const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			switch (design) {
 				case ArticleDesign.PhotoEssay:
-					if (theme === ArticleSpecial.Labs) {
-						return css`
-							${textSans.large({})};
-							margin-top: ${space[2]}px;
-							margin-bottom: ${space[3]}px;
-							line-height: 22px;
-							max-width: 540px;
-							color: ${palette('--standfirst-text')};
-						`;
-					}
 					return css`
-						${headline.xxxsmall({})};
-						margin-top: ${space[2]}px;
-						margin-bottom: ${space[3]}px;
 						line-height: 22px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 					`;
 				default:
 					return css`
-						${theme === ArticleSpecial.Labs
-							? textSans.medium()
-							: headline.xsmall({
-									fontWeight: 'light',
-							  })};
-						padding-top: ${space[4]}px;
-
 						max-width: 280px;
 						${from.tablet} {
 							max-width: 460px;
@@ -106,10 +262,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 
 		case ArticleDisplay.NumberedList:
 			return css`
-				${headline.xxsmall({
-					fontWeight: 'bold',
-				})};
-				margin-bottom: ${space[3]}px;
 				max-width: 540px;
 				color: ${palette('--standfirst-text')};
 			`;
@@ -129,11 +281,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Timeline:
 				case ArticleDesign.Profile:
 					return css`
-						${headline.xxsmall({
-							fontWeight: 'light',
-							lineHeight: 'tight',
-						})};
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 						li:before {
@@ -144,27 +291,31 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return css`
-						${headline.xxxsmall({
-							fontWeight: 'bold',
-							lineHeight: 'tight',
-						})};
 						margin-top: ${space[1]}px;
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette('--standfirst-text')};
 					`;
 				case ArticleDesign.Analysis:
 					return css`
-						${headline.xxxsmall({ lineHeight: 'tight' })};
-						margin-bottom: ${space[3]}px;
 						max-width: 540px;
+						color: ${palette('--standfirst-text')};
+					`;
+				case ArticleDesign.Video:
+				case ArticleDesign.Audio:
+					return css`
 						color: ${palette('--standfirst-text')};
 					`;
 				default:
 					switch (theme) {
 						case ArticleSpecial.Labs:
 							return css`
-								${textSans.medium({ lineHeight: 'tight' })}
+								${textSans17};
+								/**
+								 * Typography preset styles should not be overridden.
+								 * This has been done because the styles do not directly map to the new presets.
+								 * Please speak to your team's designer and update this to use a more appropriate preset.
+								 */
+								line-height: 1.15;
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
@@ -176,11 +327,6 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 							`;
 						default:
 							return css`
-								${headline.xxxsmall({
-									fontWeight: 'bold',
-									lineHeight: 'tight',
-								})};
-								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette('--standfirst-text')};
 							`;
@@ -197,12 +343,15 @@ const hoverStyles = css`
 `;
 
 export const Standfirst = ({ format, standfirst }: Props) => {
+	if (standfirst.trim() === '') return null;
 	return (
 		<>
 			<div
 				css={[
 					nestedStyles(format),
 					standfirstStyles(format),
+					decideFont(format),
+					decidePadding(format),
 					hoverStyles,
 				]}
 				className={

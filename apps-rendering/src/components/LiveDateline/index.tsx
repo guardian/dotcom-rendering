@@ -3,11 +3,10 @@
 import { css, keyframes } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, pxToRem, textSans } from '@guardian/source-foundations';
+import { neutral, pxToRem, textSans12 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { makeRelativeDate } from 'date';
 import { maybeRender } from 'lib';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -21,7 +20,13 @@ const livePulse = keyframes`
 
 const timestampStyles = (isDeadBlog = false): ReturnType<typeof css> => css`
 	color: ${isDeadBlog ? neutral[7] : neutral[100]};
-	${textSans.xxsmall({ lineHeight: 'tight' })}
+	${textSans12};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 
 	${darkModeCss`
 		color: ${isDeadBlog ? neutral[60] : neutral[100]};
@@ -52,7 +57,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const RelativeDateline: FC<Props> = ({ date, format }) =>
+const RelativeDateline = ({ date, format }: Props) =>
 	maybeRender(date, (d) => (
 		<time css={timestampStyles(format.design === ArticleDesign.DeadBlog)}>
 			{format.design === ArticleDesign.LiveBlog && (

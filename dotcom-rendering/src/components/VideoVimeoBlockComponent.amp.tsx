@@ -1,4 +1,6 @@
+import { levels } from 'log4js';
 import { getIdFromUrl } from '../lib/get-video-id.amp';
+import { logger } from '../server/lib/logging';
 import type { VideoVimeoBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';
 
@@ -13,7 +15,10 @@ export const VideoVimeoBlockComponent = ({ element, pillar }: Props) => {
 	// see: https://github.com/guardian/dotcom-rendering/issues/4057
 	// We should remove this once ☝️ is fixed.
 	const url = element.url === '' ? element.originalUrl ?? '' : element.url;
-	const vimeoId = getIdFromUrl(url, '(\\d+)($|\\/)', true);
+	const vimeoId = getIdFromUrl(url, true);
+
+	logger.log(levels.ERROR, `Could not get an id from: ${url}`);
+	if (!vimeoId) return null;
 
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>

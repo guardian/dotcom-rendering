@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from } from '@guardian/source/foundations';
 import type { TagType } from '../types/tag';
 import { SeriesSectionLink } from './SeriesSectionLink';
 
@@ -11,6 +11,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	isMatch?: boolean;
+	inTagLinkTest?: boolean;
 };
 
 const sectionStyles = css`
@@ -44,6 +45,7 @@ export const ArticleTitle = ({
 	sectionUrl,
 	guardianBaseURL,
 	isMatch,
+	inTagLinkTest = false,
 }: Props) => (
 	<div css={[sectionStyles]}>
 		<div
@@ -51,6 +53,10 @@ export const ArticleTitle = ({
 				format.display === ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.PrintShop &&
 					immersiveMargins,
+				inTagLinkTest &&
+					css`
+						width: 100%;
+					`,
 			]}
 		>
 			<SeriesSectionLink
@@ -60,6 +66,7 @@ export const ArticleTitle = ({
 				sectionUrl={sectionUrl}
 				guardianBaseURL={guardianBaseURL}
 				isMatch={isMatch}
+				inTagLinkTest={inTagLinkTest}
 			/>
 		</div>
 	</div>

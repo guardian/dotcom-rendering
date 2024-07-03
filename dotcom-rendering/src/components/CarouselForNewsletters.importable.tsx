@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineBold24,
 	palette,
 	space,
 	text,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { formatAttrString } from '../lib/formatAttrString';
@@ -300,9 +300,9 @@ const headerRowStyles = css`
 `;
 
 const headerStyles = css`
-	${headline.xsmall({ fontWeight: 'bold' })};
+	${headlineBold24};
 	color: ${text.primary};
-	${headline.xsmall({ fontWeight: 'bold' })};
+	${headlineBold24};
 	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;
 	margin-left: 0;

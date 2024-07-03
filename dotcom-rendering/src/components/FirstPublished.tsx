@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
-import { palette, space, textSans } from '@guardian/source-foundations';
-import { SvgPinned } from '@guardian/source-react-components';
+import {
+	palette,
+	space,
+	textSans12,
+	textSansBold12,
+} from '@guardian/source/foundations';
+import { SvgPinned } from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 import { DateTime } from './DateTime';
 
@@ -16,6 +21,7 @@ type Props = {
 	blockId: string;
 	isPinnedPost: boolean;
 	isOriginalPinnedPost: boolean;
+	absoluteServerTimes: boolean;
 	host?: string;
 	pageId?: string;
 };
@@ -28,6 +34,7 @@ const FirstPublished = ({
 	isOriginalPinnedPost,
 	host,
 	pageId,
+	absoluteServerTimes,
 }: Props) => {
 	const baseHref = host && pageId ? joinUrl(host, pageId) : '';
 	const publishedDate = new Date(firstPublished);
@@ -41,7 +48,7 @@ const FirstPublished = ({
 				href={`${baseHref}?page=with:block-${blockId}#block-${blockId}`}
 				data-ignore="global-link-styling"
 				css={css`
-					${textSans.xxsmall({ fontWeight: 'bold' })}
+					${textSansBold12}
 					margin-bottom: ${space[1]}px;
 					display: flex;
 					width: fit-content;
@@ -64,7 +71,8 @@ const FirstPublished = ({
 						<DateTime
 							date={new Date(firstPublished)}
 							display="relative"
-							editionId="UK"
+							absoluteServerTimes={absoluteServerTimes}
+							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}
 							showTime={false}
@@ -73,7 +81,7 @@ const FirstPublished = ({
 				)}
 				<span
 					css={css`
-						${textSans.xxsmall()};
+						${textSans12};
 						color: ${palette.neutral[46]};
 					`}
 				>
@@ -85,7 +93,7 @@ const FirstPublished = ({
 					href={`${baseHref}#pinned-post`}
 					data-ignore="global-link-styling"
 					css={css`
-						${textSans.xxsmall({ fontWeight: 'bold' })}
+						${textSansBold12}
 						margin-bottom: ${space[1]}px;
 						text-decoration: none;
 						display: flex;

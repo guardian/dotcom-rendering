@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/source-foundations';
-import type { FC, ReactNode } from 'react';
+import { remSpace } from '@guardian/source/foundations';
+import type { ReactNode } from 'react';
 
 // ----- Component ----- //
 
@@ -22,7 +22,7 @@ interface Props {
 	className?: SerializedStyles;
 }
 
-const ListItem: FC<Props> = ({ children, className }) => (
+const ListItem = ({ children, className }: Props) => (
 	<li css={[baseStyles, className]}>{children}</li>
 );
 

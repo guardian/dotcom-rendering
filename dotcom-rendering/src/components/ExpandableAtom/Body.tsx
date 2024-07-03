@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import {
-	body,
+	article17,
 	palette as sourcePalette,
-	textSans,
-} from '@guardian/source-foundations';
-import { SvgInfo } from '@guardian/source-react-components';
+	textSans14,
+} from '@guardian/source/foundations';
+import { SvgInfo } from '@guardian/source/react-components';
 import { palette as themePalette } from '../../palette';
 
 const imageStyling = css`
@@ -20,7 +20,7 @@ const imageStyling = css`
 `;
 
 const creditStyling = css`
-	${textSans.xsmall()};
+	${textSans14};
 	margin: 12px 0;
 	display: flex;
 	align-items: center;
@@ -31,7 +31,8 @@ const creditStyling = css`
 `;
 
 const bodyStyling = css`
-	${body.medium()}
+	${article17};
+
 	p {
 		margin-bottom: 0.5rem;
 	}

@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral } from '@guardian/source-foundations';
+import { neutral } from '@guardian/source/foundations';
 import { withDefault } from '../../../vendor/@guardian/types/index';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import type { Image } from 'image/image';
@@ -14,7 +14,6 @@ import { getCaption, getClassName, getCredit } from 'image/lightbox';
 import { sizesAttribute, styles as sizeStyles } from 'image/sizes';
 import type { Sizes } from 'image/sizes';
 import type { Optional } from 'optional';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Functions ----- //
@@ -80,7 +79,7 @@ const styles = (
 	display: block;
 `;
 
-const Img: FC<Props> = ({ image, sizes, className, format, lightbox }) => (
+const Img = ({ image, sizes, className, format, lightbox }: Props) => (
 	<picture>
 		<source
 			sizes={sizesAttribute(sizes)}

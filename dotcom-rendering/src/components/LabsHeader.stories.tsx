@@ -1,4 +1,4 @@
-import { palette } from '@guardian/source-foundations';
+import { palette } from '@guardian/source/foundations';
 import { LabsHeader } from './LabsHeader';
 import { Section } from './Section';
 
@@ -15,7 +15,7 @@ export const Default = () => {
 			backgroundColour={palette.labs[400]}
 			borderColour={palette.neutral[60]}
 		>
-			<LabsHeader />
+			<LabsHeader editionId="UK" />
 		</Section>
 	);
 };

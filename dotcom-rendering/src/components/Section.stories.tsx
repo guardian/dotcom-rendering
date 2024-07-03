@@ -4,7 +4,7 @@ import {
 	brandBackground,
 	brandBorder,
 	breakpoints,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Section } from './Section';
 
 export default {
@@ -309,7 +309,7 @@ export const TreatsStory = () => {
 			showTopBorder={false}
 			showSideBorders={false}
 			showDateHeader={true}
-			editionId="UK"
+			editionId={'UK'}
 		>
 			<Grey />
 		</Section>

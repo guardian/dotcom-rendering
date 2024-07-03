@@ -5,8 +5,8 @@ import {
 	palette,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
-import { SvgArrowExpand } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgArrowExpand } from '@guardian/source/react-components';
 import type { RoleType } from '../types/content';
 
 type Props = {

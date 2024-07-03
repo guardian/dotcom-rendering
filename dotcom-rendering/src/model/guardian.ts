@@ -1,6 +1,5 @@
 import type { EditionId } from '../lib/edition';
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
-import type { GADataType } from './extract-ga';
 
 export interface Guardian {
 	polyfilled: boolean;
@@ -34,7 +33,6 @@ export interface Guardian {
 			isPaidContent?: boolean;
 			isDev?: boolean;
 			hasInlineMerchandise?: boolean;
-			section?: string;
 			userAttributesApiUrl?: string;
 			idApiUrl?: string;
 		};
@@ -53,7 +51,6 @@ export interface Guardian {
 			reportError: (error: Error, feature: string) => void;
 		};
 	};
-	GAData?: GADataType;
 	adBlockers: unknown;
 }
 
@@ -81,9 +78,7 @@ export const createGuardian = ({
 	editionId,
 	contentType,
 	brazeApiKey,
-	GAData,
 	hasInlineMerchandise,
-	section,
 	googleRecaptchaSiteKey,
 	unknownConfig = {},
 }: {
@@ -104,9 +99,7 @@ export const createGuardian = ({
 	isPaidContent?: boolean;
 	contentType?: string;
 	brazeApiKey?: string;
-	GAData?: GADataType;
 	hasInlineMerchandise?: boolean;
-	section?: string;
 	googleRecaptchaSiteKey?: string;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
@@ -144,7 +137,6 @@ export const createGuardian = ({
 				isPaidContent: !!isPaidContent,
 				brazeApiKey,
 				hasInlineMerchandise,
-				section,
 				googleRecaptchaSiteKey,
 			}),
 			libs: {
@@ -167,6 +159,5 @@ export const createGuardian = ({
 				reportError: () => null,
 			},
 		},
-		GAData,
 	};
 };

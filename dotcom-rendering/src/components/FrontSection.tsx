@@ -7,7 +7,7 @@ import {
 	palette,
 	space,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -63,7 +63,7 @@ type Props = {
 	 */
 	showDateHeader?: boolean;
 	/** Used in partnership with `showDateHeader` to localise the date string */
-	editionId?: EditionId;
+	editionId: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
@@ -87,6 +87,7 @@ type Props = {
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
+	updateLogoAdPartnerSwitch?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -462,6 +463,7 @@ export const FrontSection = ({
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
+	updateLogoAdPartnerSwitch = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -539,6 +541,7 @@ export const FrontSection = ({
 						/>
 					}
 					collectionBranding={collectionBranding}
+					updateLogoAdPartnerSwitch={updateLogoAdPartnerSwitch}
 				/>
 
 				{leftContent}

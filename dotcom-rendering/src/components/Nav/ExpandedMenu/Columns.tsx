@@ -2,18 +2,19 @@ import { css } from '@emotion/react';
 import {
 	brandText,
 	from,
-	headline,
+	headlineMedium20,
 	palette as sourcePalette,
 	space,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans17,
+	textSans20,
+} from '@guardian/source/foundations';
 import {
 	Button,
 	Label,
 	SvgArrowRightStraight,
 	SvgMagnifyingGlass,
 	TextInput,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -63,7 +64,7 @@ const desktopBrandExtensionColumn = css`
 const brandExtensionList = css`
 	width: 131px;
 	box-sizing: border-box;
-	${textSans.medium()};
+	${textSans17};
 	flex-wrap: wrap;
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
@@ -97,7 +98,7 @@ const brandExtensionListItem = css`
 `;
 
 const brandExtensionLink = css`
-	${headline.xxsmall()};
+	${headlineMedium20};
 	font-weight: 700;
 	background-color: transparent;
 	border: 0;
@@ -147,7 +148,7 @@ const searchBar = css`
 `;
 
 const searchInput = css`
-	${textSans.large()}
+	${textSans20}
 	background-color: rgba(255,255,255, .1);
 	border: 0;
 	border-radius: 1000px;
@@ -220,7 +221,6 @@ type Props = {
 	editionId: EditionId;
 	isImmersive?: boolean;
 	nav: NavType;
-	headerTopBarSwitch: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -228,11 +228,11 @@ export const Columns = ({
 	isImmersive = false,
 	nav,
 	editionId,
-	headerTopBarSwitch,
 	hasPageSkin,
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
+	const searchId = 'gu-search-mobile';
 	return (
 		<ul
 			css={[
@@ -274,9 +274,14 @@ export const Columns = ({
 						data-link-name={nestedOphanComponents('nav2', 'search')}
 						className="selectableMenuItem"
 						tabIndex={-1}
+						id={searchId}
 					/>
 
-					<Label hideLabel={true} text="google-search">
+					<Label
+						hideLabel={true}
+						text="google-search"
+						htmlFor={searchId}
+					>
 						<div css={searchGlass}>
 							<SvgMagnifyingGlass
 								isAnnouncedByScreenReader={true}
@@ -313,7 +318,6 @@ export const Columns = ({
 			<ReaderRevenueLinks
 				readerRevenueLinks={nav.readerRevenueLinks}
 				editionId={editionId}
-				headerTopBarSwitch={headerTopBarSwitch}
 			/>
 
 			{/* This is where the edition dropdown is inserted					 */}

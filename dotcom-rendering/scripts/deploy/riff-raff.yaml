@@ -10,7 +10,7 @@ templates:
       amiEncrypted: true
       amiTags:
         # Keep the Node version in sync with `.nvmrc`
-        Recipe: dotcom-rendering-ARM-jammy-node-18.18.2-cdk-base
+        Recipe: dotcom-rendering-ARM-jammy-node-20.12.2
         AmigoStage: PROD
 deployments:
   frontend-static:
@@ -86,6 +86,26 @@ deployments:
     dependencies:
       - frontend-static
       - facia-rendering-cfn
+  # tag-page-rendering cloudformation
+  tag-page-rendering-cfn:
+    template: cloudformation
+    parameters:
+      templateStagePaths:
+        CODE: TagPageRendering-CODE.template.json
+        PROD: TagPageRendering-PROD.template.json
+      cloudFormationStackByTags: false
+      cloudFormationStackName: tag-page-rendering
+      amiParameter: AMITagpagerendering
+  # tag-page-rendering autoscaling
+  tag-page-rendering:
+    type: autoscaling
+    parameters:
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
+      # Default is 900 (15 mins), this is 25 mins
+      secondsToWait: 1500
+    dependencies:
+      - frontend-static
+      - tag-page-rendering-cfn
   # interactive-rendering cloudformation
   interactive-rendering-cfn:
     template: cloudformation

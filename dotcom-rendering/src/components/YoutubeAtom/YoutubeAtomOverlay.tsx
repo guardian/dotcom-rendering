@@ -1,18 +1,20 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headline,
+	headlineMedium17,
+	headlineMedium20,
 	palette as sourcePalette,
 	space,
-	textSans,
-} from '@guardian/source-foundations';
-import { decidePalette } from '../../lib/decidePalette';
-import type { Palette } from '../../types/palette';
+	textSansBold12,
+} from '@guardian/source/foundations';
+import { palette } from '../../palette';
 import type {
 	ImagePositionType,
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
 import { PlayIcon } from '../Card/components/PlayIcon';
+import { FormatBoundary } from '../FormatBoundary';
+import { Kicker } from '../Kicker';
 import { secondsToDuration } from '../MediaDuration';
 import { YoutubeAtomPicture } from './YoutubeAtomPicture';
 
@@ -69,7 +71,7 @@ const pillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
 	right: ${space[2]}px;
-	${textSans.xxsmall({ fontWeight: 'bold' })};
+	${textSansBold12};
 	background-color: rgba(0, 0, 0, 0.7);
 	color: ${sourcePalette.neutral[100]};
 	border-radius: ${space[3]}px;
@@ -120,18 +122,10 @@ const textOverlayStyles = css`
 	padding-top: ${space[9]}px;
 `;
 
-const kickerStyles = (dcrPalette: Palette) => css`
-	color: ${dcrPalette.text.youtubeOverlayKicker};
-	${headline.xxxsmall({ fontWeight: 'bold' })};
-	${from.tablet} {
-		${headline.xxsmall({ fontWeight: 'bold' })};
-	}
-`;
-
 const titleStyles = css`
-	${headline.xxxsmall({ fontWeight: 'medium' })};
+	${headlineMedium17};
 	${from.tablet} {
-		${headline.xxsmall({ fontWeight: 'medium' })};
+		${headlineMedium20};
 	}
 `;
 const capitalise = (str: string): string =>
@@ -158,63 +152,72 @@ export const YoutubeAtomOverlay = ({
 	const hasDuration = duration !== undefined && duration > 0;
 	const showPill = !!videoCategory || hasDuration;
 	const isLive = videoCategory === 'live';
-	const dcrPalette = decidePalette(format);
 	const image = overrideImage ?? posterImage;
 	const hidePillOnMobile =
 		imagePositionOnMobile === 'right' || imagePositionOnMobile === 'left';
 
 	return (
-		<button
-			data-testid={id}
-			onClick={onClick}
-			css={overlayStyles}
-			aria-label={title ? `Play video: ${title}` : `Play video`}
-			type="button"
-		>
-			{!!image && (
-				<YoutubeAtomPicture
-					image={image}
-					alt={alt}
-					height={height}
-					width={width}
+		<FormatBoundary format={format}>
+			<button
+				data-testid={id}
+				onClick={onClick}
+				css={overlayStyles}
+				aria-label={title ? `Play video: ${title}` : `Play video`}
+				type="button"
+			>
+				{!!image && (
+					<YoutubeAtomPicture
+						image={image}
+						alt={alt}
+						height={height}
+						width={width}
+					/>
+				)}
+				{showPill && (
+					<div
+						css={
+							hidePillOnMobile
+								? css`
+										display: none;
+								  `
+								: pillStyles
+						}
+					>
+						{!!videoCategory && (
+							<div css={pillItemStyles}>
+								<div
+									css={[pillTextStyles, isLive && liveStyles]}
+								>
+									{capitalise(videoCategory)}
+								</div>
+							</div>
+						)}
+						{!!hasDuration && (
+							<div css={pillItemStyles}>
+								<div css={pillTextStyles}>
+									{secondsToDuration(duration)}
+								</div>
+							</div>
+						)}
+					</div>
+				)}
+				<PlayIcon
+					imageSize={imageSize}
+					imagePositionOnMobile={imagePositionOnMobile}
 				/>
-			)}
-			{showPill && (
-				<div
-					css={
-						hidePillOnMobile
-							? css`
-									display: none;
-							  `
-							: pillStyles
-					}
-				>
-					{!!videoCategory && (
-						<div css={pillItemStyles}>
-							<div css={[pillTextStyles, isLive && liveStyles]}>
-								{capitalise(videoCategory)}
-							</div>
-						</div>
-					)}
-					{!!hasDuration && (
-						<div css={pillItemStyles}>
-							<div css={pillTextStyles}>
-								{secondsToDuration(duration)}
-							</div>
-						</div>
-					)}
-				</div>
-			)}
-			<PlayIcon
-				imageSize={imageSize}
-				imagePositionOnMobile={imagePositionOnMobile}
-			/>
-			{showTextOverlay && (
-				<div css={textOverlayStyles}>
-					<div css={kickerStyles(dcrPalette)}>{kicker}</div>
-					<div css={titleStyles}>{title}</div>
-				</div>
-			)}
-		</button>
+				{showTextOverlay && (
+					<div css={textOverlayStyles}>
+						{!!kicker && (
+							<Kicker
+								text={kicker}
+								color={palette('--youtube-overlay-kicker')}
+								fontWeight="bold"
+							/>
+						)}
+						<div css={titleStyles}>{title}</div>
+					</div>
+				)}
+			</button>
+		</FormatBoundary>
 	);
 };

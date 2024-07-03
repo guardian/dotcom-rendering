@@ -3,14 +3,14 @@ import { css, ThemeProvider } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineMedium17,
 	remSpace,
-	textSans,
+	textSans14,
 	until,
-} from '@guardian/source-foundations';
-import { Button, buttonThemeBrandAlt } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { Button, buttonThemeBrandAlt } from '@guardian/source/react-components';
 import { background, text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 };
 
 const adLabelsStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${text.adLabel(format)};
 	padding: ${remSpace[3]};
 	float: left;
@@ -44,7 +44,7 @@ const supportBannerStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.supportBanner(format)};
 
 	p {
-		${headline.xxxsmall()};
+		${headlineMedium17};
 		margin-top: 0;
 	}
 
@@ -107,7 +107,7 @@ const adSlotStyles = css`
 	}
 `;
 
-const AdSlot: FC<Props> = ({ className, paragraph, format }): ReactElement => (
+const AdSlot = ({ className, paragraph, format }: Props): ReactElement => (
 	<aside
 		css={styles(format)}
 		className={className}

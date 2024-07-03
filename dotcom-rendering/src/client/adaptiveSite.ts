@@ -13,9 +13,8 @@ import { recordExperiences } from './ophan/ophan';
 export const shouldAdapt = async (): Promise<boolean> => {
 	if (isServer) return false;
 	if (window.location.hash === '#adapt') return true;
-	if (window.guardian.config.tests.adaptiveSiteVariant !== 'variant') {
-		return false;
-	}
+	if (!window.guardian.config.switches.adaptiveSite) return false;
+	if (window.location.host !== 'www.theguardian.com') return false;
 
 	// only evaluate this code if we want to adapt in response to page performance
 	const { isPerformingPoorly } = await import(
@@ -36,7 +35,7 @@ const recordAdaptedSite = (renderingTarget: RenderingTarget) =>
 	recordExperiences(renderingTarget, ['adapted']);
 
 export const adaptSite = (renderingTarget: RenderingTarget): void => {
-	log('openJournalism', '🎛️ Adapting');
+	log('dotcom', '🎛️ Adapting');
 
 	// disable all tasks except critical ones
 	setSchedulerPriorityLastStartTime('feature', 0);

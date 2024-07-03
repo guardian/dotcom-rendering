@@ -1,6 +1,7 @@
 import type { ABTest, ABTestAPI } from '@guardian/ab-core';
 import {
 	bypassCommercialMetricsSampling,
+	EventTimer,
 	initCommercialMetrics,
 } from '@guardian/commercial';
 import {
@@ -9,9 +10,12 @@ import {
 } from '@guardian/core-web-vitals';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
+import { adBlockAsk } from '../experiments/tests/ad-block-ask';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { useDetectAdBlock } from '../lib/useDetectAdBlock';
+import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { ServerSideTests } from '../types/config';
 import { useConfig } from './ConfigContext';
@@ -19,6 +23,14 @@ import { useConfig } from './ConfigContext';
 type Props = {
 	commercialMetricsEnabled: boolean;
 	tests: ServerSideTests;
+};
+
+type AmIUsedLoggingEvent = {
+	label: string;
+	properties?: {
+		name: string;
+		value: string;
+	}[];
 };
 
 const sampling = 1 / 100;
@@ -29,6 +41,7 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
+	adBlockAsk,
 ];
 
 const useBrowserId = () => {
@@ -78,6 +91,7 @@ const useDev = () => {
 export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
+	const detectedAdBlocker = useDetectAdBlock();
 
 	const { renderingTarget } = useConfig();
 	const browserId = useBrowserId();
@@ -120,8 +134,9 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				team: 'dotcom',
 			});
 
-			if (bypassSampling || isDev)
+			if (bypassSampling || isDev) {
 				void bypassCoreWebVitalsSampling('commercial');
+			}
 		},
 		[abTestApi, browserId, isDev, pageViewId, shouldBypassSampling],
 	);
@@ -138,6 +153,12 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 			if (isUndefined(pageViewId)) return;
 
 			const bypassSampling = shouldBypassSampling(abTestApi);
+
+			// This is a new detection method we are trying, so we want to record it separately to `adBlockerInUse`
+			EventTimer.get().setProperty(
+				'detectedAdBlocker',
+				detectedAdBlocker,
+			);
 
 			initCommercialMetrics({
 				pageViewId,
@@ -159,12 +180,52 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 		[
 			abTestApi,
 			adBlockerInUse,
+			detectedAdBlocker,
 			browserId,
 			commercialMetricsEnabled,
 			isDev,
 			pageViewId,
 			shouldBypassSampling,
 		],
+	);
+
+	useOnce(
+		function measurePrefersColorScheme() {
+			if (isDev) return;
+
+			if (!window.guardian.config.switches.sentinelLogger) return;
+
+			const endpoint = window.guardian.config.page.isDev
+				? '//logs.code.dev-guardianapis.com/log'
+				: '//logs.guardianapis.com/log';
+
+			const prefersDark = window.matchMedia(
+				'(prefers-color-scheme: dark)',
+			).matches;
+
+			const prefersLight = window.matchMedia(
+				'(prefers-color-scheme: light)',
+			).matches;
+
+			const prefersColorScheme: 'dark' | 'light' | 'unknown' = prefersDark
+				? 'dark'
+				: prefersLight
+				? 'light'
+				: 'unknown';
+
+			const event: AmIUsedLoggingEvent = {
+				label: 'dotcom.colour-scheme',
+				properties: [
+					{
+						name: 'prefersColorScheme',
+						value: prefersColorScheme,
+					},
+				],
+			};
+
+			window.navigator.sendBeacon(endpoint, JSON.stringify(event));
+		},
+		[isDev],
 	);
 
 	// We don’t render anything

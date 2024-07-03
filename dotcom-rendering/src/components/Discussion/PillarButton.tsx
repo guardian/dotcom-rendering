@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
-import { Button } from '@guardian/source-react-components';
+import { textSansBold15 } from '@guardian/source/foundations';
+import { Button } from '@guardian/source/react-components';
 import { palette as themePalette } from '../../palette';
 
 type Props = {
@@ -19,7 +19,7 @@ const buttonOverrides = (priority: 'primary' | 'secondary' | 'subdued') => {
 		case 'primary':
 			return css`
 				button {
-					${textSans.small({ fontWeight: 'bold' })}
+					${textSansBold15}
 					background-color: ${themePalette(
 						'--discussion-primary-button-background',
 					)};
@@ -36,7 +36,7 @@ const buttonOverrides = (priority: 'primary' | 'secondary' | 'subdued') => {
 		case 'secondary':
 			return css`
 				button {
-					${textSans.small({ fontWeight: 'bold' })}
+					${textSansBold15}
 					background-color: transparent;
 					border: 1px solid
 						${themePalette('--discussion-accent-text')};
@@ -57,7 +57,7 @@ const buttonOverrides = (priority: 'primary' | 'secondary' | 'subdued') => {
 		case 'subdued':
 			return css`
 				button {
-					${textSans.small({ fontWeight: 'bold' })}
+					${textSansBold15}
 					background-color: transparent;
 					color: ${themePalette('--discussion-accent-text')};
 					border-radius: 0;

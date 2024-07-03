@@ -2,11 +2,15 @@ import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { timeAgo } from '@guardian/libs';
-import { neutral, space, textSans } from '@guardian/source-foundations';
-import { SvgPinned } from '@guardian/source-react-components';
+import {
+	neutral,
+	space,
+	textSans12,
+	textSansBold12,
+} from '@guardian/source/foundations';
+import { SvgPinned } from '@guardian/source/react-components';
 import { timestampFormat } from 'datetime';
 import { border } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 type Props = {
@@ -18,14 +22,14 @@ type Props = {
 	edition: Edition;
 };
 
-const FirstPublished: FC<Props> = ({
+const FirstPublished = ({
 	firstPublished,
 	blockId,
 	isPinnedPost,
 	isOriginalPinnedPost,
 	format,
 	edition,
-}) => (
+}: Props) => (
 	<div
 		css={css`
 			display: flex;
@@ -35,7 +39,7 @@ const FirstPublished: FC<Props> = ({
 			href={`?page=with:block-${blockId}#block-${blockId}`}
 			data-ignore="global-link-styling"
 			css={css`
-				${textSans.xxsmall({ fontWeight: 'bold' })}
+				${textSansBold12};
 				margin-bottom: ${space[1]}px;
 				display: flex;
 				width: fit-content;
@@ -66,7 +70,7 @@ const FirstPublished: FC<Props> = ({
 			)}
 			<span
 				css={css`
-					${textSans.xxsmall()};
+					${textSans12};
 					color: ${neutral[46]};
 
 					${darkModeCss`
@@ -82,7 +86,7 @@ const FirstPublished: FC<Props> = ({
 				href="#pinned-post"
 				data-ignore="global-link-styling"
 				css={css`
-					${textSans.xxsmall({ fontWeight: 'bold' })}
+					${textSansBold12};
 					margin-bottom: ${space[1]}px;
 					text-decoration: none;
 					display: flex;

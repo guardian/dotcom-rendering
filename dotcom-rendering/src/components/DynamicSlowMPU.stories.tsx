@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
@@ -22,7 +22,11 @@ const bigs = trails.slice(0, 3);
 const standards = trails.slice(3);
 
 export const NoBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Slow MPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -32,6 +36,7 @@ export const NoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -39,7 +44,11 @@ export const NoBigs = () => (
 NoBigs.storyName = 'with no big cards, only standard';
 
 export const OneBig = () => (
-	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Slow MPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -49,6 +58,7 @@ export const OneBig = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -56,7 +66,11 @@ export const OneBig = () => (
 OneBig.storyName = 'with just one big';
 
 export const TwoBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Slow MPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -66,6 +80,7 @@ export const TwoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -73,7 +88,11 @@ export const TwoBigs = () => (
 TwoBigs.storyName = 'with two bigs';
 
 export const FirstBigBoosted = () => (
-	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Slow MPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -87,6 +106,7 @@ export const FirstBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -94,7 +114,11 @@ export const FirstBigBoosted = () => (
 FirstBigBoosted.storyName = 'with the first of two bigs boosted';
 
 export const SecondBigBoosted = () => (
-	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Slow MPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -108,6 +132,7 @@ export const SecondBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -115,7 +140,11 @@ export const SecondBigBoosted = () => (
 SecondBigBoosted.storyName = 'with the second of two bigs boosted';
 
 export const ThreeBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="Dynamic Slow MPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -125,6 +154,7 @@ export const ThreeBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -132,7 +162,11 @@ export const ThreeBigs = () => (
 ThreeBigs.storyName = 'with three bigs';
 
 export const AllBigs = () => (
-	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="DynamicSlowMPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -142,6 +176,7 @@ export const AllBigs = () => (
 				standard: [],
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -149,7 +184,11 @@ export const AllBigs = () => (
 AllBigs.storyName = 'Ad-free with lots of bigs';
 
 export const TwoBigsThreeStandardsNoMPU = () => (
-	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="DynamicSlowMPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -159,6 +198,7 @@ export const TwoBigsThreeStandardsNoMPU = () => (
 				standard: standards.slice(0, 3),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -166,7 +206,11 @@ export const TwoBigsThreeStandardsNoMPU = () => (
 TwoBigsThreeStandardsNoMPU.storyName = 'Ad-free with 2 bigs & 3 standards';
 
 export const NoBigsTwoStandardsNoMPU = () => (
-	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="DynamicSlowMPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -176,6 +220,7 @@ export const NoBigsTwoStandardsNoMPU = () => (
 				standard: standards.slice(0, 2),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>
@@ -183,7 +228,11 @@ export const NoBigsTwoStandardsNoMPU = () => (
 NoBigsTwoStandardsNoMPU.storyName = 'Ad-free with 0 bigs & 2 standards';
 
 export const NoBigsFiveStandardsNoMPU = () => (
-	<FrontSection title="DynamicSlowMPU" discussionApiUrl={discussionApiUrl}>
+	<FrontSection
+		title="DynamicSlowMPU"
+		discussionApiUrl={discussionApiUrl}
+		editionId={'UK'}
+	>
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -193,6 +242,7 @@ export const NoBigsFiveStandardsNoMPU = () => (
 				standard: standards.slice(0, 5),
 			}}
 			showAge={true}
+			absoluteServerTimes={true}
 			imageLoading="eager"
 		/>
 	</FrontSection>

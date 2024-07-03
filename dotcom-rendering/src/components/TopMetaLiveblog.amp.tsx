@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { headline, palette } from '@guardian/source-foundations';
+import {
+	headlineMedium17,
+	headlineMedium28,
+	palette,
+} from '@guardian/source/foundations';
 import { string as curly } from 'curlyquotes';
 import { getAgeWarning } from '../lib/age-warning';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
@@ -31,7 +35,7 @@ const ListStyle = (iconColour: string) => css`
 `;
 
 const headerStyle = (pillar: ArticleTheme) => css`
-	${headline.small()};
+	${headlineMedium28};
 	font-weight: 500;
 	padding: 3px 10px 24px;
 	color: ${palette.neutral[100]};
@@ -39,7 +43,7 @@ const headerStyle = (pillar: ArticleTheme) => css`
 `;
 
 const bylineStyle = (pillar: ArticleTheme) => css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	padding-top: 3px;
 	padding-bottom: 8px;
@@ -54,7 +58,7 @@ const bylineStyle = (pillar: ArticleTheme) => css`
 `;
 
 const standfirstStyle = (pillar: ArticleTheme) => css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	color: ${palette.neutral[100]};
 	background-color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 	font-weight: bold;

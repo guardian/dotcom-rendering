@@ -1,13 +1,11 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
-import { enhanceElementsImages } from '../model/enhance-images';
-import { enhanceBlocks } from '../model/enhanceBlocks';
+import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
-import type { ServerSideTests } from '../types/config';
 import { type DCRArticle } from '../types/frontend';
 import { type RenderingTarget } from '../types/renderingTarget';
 import { decideFormat } from './decideFormat';
@@ -15,7 +13,6 @@ import { decideFormat } from './decideFormat';
 const enhancePinnedPost = (
 	format: ArticleFormat,
 	renderingTarget: RenderingTarget,
-	abTests: ServerSideTests,
 	block?: Block,
 ) => {
 	if (!block) return;
@@ -25,7 +22,6 @@ const enhancePinnedPost = (
 		imagesForLightbox: [],
 		promotedNewsletter: undefined,
 		hasAffiliateLinksDisclaimer: false,
-		abTests,
 	})[0];
 };
 
@@ -45,24 +41,20 @@ export const enhanceArticleType = (
 		promotedNewsletter: data.promotedNewsletter,
 		imagesForLightbox,
 		hasAffiliateLinksDisclaimer: !!data.affiliateLinksDisclaimer,
-		abTests: data.config.abTests,
 	});
 
-	const mainMediaElements = enhanceElementsImages(
+	const mainMediaElements = enhanceMainMedia(
 		format,
 		imagesForLightbox,
+		true,
+		data.main,
 	)(data.mainMediaElements);
 
 	return {
 		...data,
 		mainMediaElements,
 		blocks: enhancedBlocks,
-		pinnedPost: enhancePinnedPost(
-			format,
-			renderingTarget,
-			data.config.abTests,
-			data.pinnedPost,
-		),
+		pinnedPost: enhancePinnedPost(format, renderingTarget, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,

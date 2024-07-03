@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
 import { DecideContainerByTrails } from './DecideContainerByTrails';
@@ -23,6 +23,7 @@ export const OneCardFast = () => {
 		<FrontSection
 			title="Fast - One card"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 1)}
@@ -39,6 +40,7 @@ export const TwoCardFast = () => {
 		<FrontSection
 			title="Fast - Two cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 2)}
@@ -55,6 +57,7 @@ export const ThreeCardFast = () => {
 		<FrontSection
 			title="Fast - Three cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 3)}
@@ -71,6 +74,7 @@ export const FourCardFast = () => {
 		<FrontSection
 			title="Fast - Four cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 4)}
@@ -87,6 +91,7 @@ export const FiveCardFast = () => {
 		<FrontSection
 			title="Fast - Five cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 5)}
@@ -103,6 +108,7 @@ export const SixCardFast = () => {
 		<FrontSection
 			title="Fast - Six cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 6)}
@@ -119,6 +125,7 @@ export const SevenCardFast = () => {
 		<FrontSection
 			title="Fast - Seven cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 7)}
@@ -135,6 +142,7 @@ export const EightCardFast = () => {
 		<FrontSection
 			title="Fast - Eight cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 8)}
@@ -152,6 +160,7 @@ export const TwelveCardFast = () => {
 		<FrontSection
 			title="Fast - Twelve cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 12)}
@@ -168,6 +177,7 @@ export const OneCardSlow = () => {
 		<FrontSection
 			title="Slow - One card"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 1)}
@@ -184,6 +194,7 @@ export const TwoCardSlow = () => {
 		<FrontSection
 			title="Slow - Two cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 2)}
@@ -200,6 +211,7 @@ export const ThreeCardSlow = () => {
 		<FrontSection
 			title="Slow - Three cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 3)}
@@ -216,6 +228,7 @@ export const FourCardSlow = () => {
 		<FrontSection
 			title="Slow - Four cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 4)}
@@ -232,6 +245,7 @@ export const FiveCardSlow = () => {
 		<FrontSection
 			title="Slow - Five cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 5)}
@@ -248,6 +262,7 @@ export const SixCardSlow = () => {
 		<FrontSection
 			title="Slow - Six cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 6)}
@@ -264,6 +279,7 @@ export const SevenCardSlow = () => {
 		<FrontSection
 			title="Slow - Seven cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 7)}
@@ -280,6 +296,7 @@ export const EightCardSlow = () => {
 		<FrontSection
 			title="Slow - Eight cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 8)}
@@ -297,6 +314,7 @@ export const TwelveCardSlow = () => {
 		<FrontSection
 			title="Slow - Twelve cards"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<DecideContainerByTrails
 				trails={trails.slice(0, 12)}

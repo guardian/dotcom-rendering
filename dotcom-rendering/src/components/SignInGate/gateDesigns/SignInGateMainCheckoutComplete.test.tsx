@@ -29,7 +29,13 @@ describe('SignInGateMainCheckoutComplete', () => {
 	) => {
 		return (
 			<ConfigProvider
-				value={{ renderingTarget: 'Web', darkModeAvailable: false }}
+				value={{
+					renderingTarget: 'Web',
+					darkModeAvailable: false,
+					updateLogoAdPartnerSwitch: false,
+					assetOrigin: '/',
+					editionId: 'UK',
+				}}
 			>
 				<SignInGateMainCheckoutComplete
 					{...signInGateProps}

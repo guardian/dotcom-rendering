@@ -1,15 +1,18 @@
 import { css } from '@emotion/react';
-import type { CountryCode } from '@guardian/libs';
-import { getCookie } from '@guardian/libs';
-import { getBanner } from '@guardian/support-dotcom-components';
+import type { ConsentState, CountryCode } from '@guardian/libs';
+import { getCookie, onConsent } from '@guardian/libs';
+import {
+	abandonedBasketSchema,
+	getBanner,
+} from '@guardian/support-dotcom-components';
 import type {
 	BannerPayload,
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { AbandonedBasket } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
 import { useEffect, useState } from 'react';
-import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
 import {
@@ -28,8 +31,6 @@ import { lazyFetchEmailWithTimeout } from '../../lib/fetchEmail';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
-import { useIsInView } from '../../lib/useIsInView';
-import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
 
 type BaseProps = {
@@ -45,12 +46,14 @@ type BaseProps = {
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
 	signInBannerLastClosedAt?: string;
+	abandonedBasketBannerLastClosedAt?: string;
 };
 
 type BuildPayloadProps = BaseProps & {
 	countryCode: string;
 	optedOutOfArticleCount: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
+	userConsent: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -60,7 +63,7 @@ type CanShowProps = BaseProps & {
 	idApiUrl: string;
 	signInGateWillShow: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
-	isInBlockSupporterRevenueMessagingTest: boolean;
+	isAndroidWebview: boolean;
 };
 
 type ReaderRevenueComponentType =
@@ -85,6 +88,30 @@ const getArticleCountToday = (
 	return undefined;
 };
 
+function parseAbandonedBasket(
+	cookie: string | null,
+): AbandonedBasket | undefined {
+	if (!cookie) return;
+
+	const parsedResult = abandonedBasketSchema.safeParse(JSON.parse(cookie));
+	if (!parsedResult.success) {
+		const errorMessage = parsedResult.error.message;
+		window.guardian.modules.sentry.reportError(
+			new Error(errorMessage),
+			'rr-banner',
+		);
+
+		return;
+	}
+
+	return parsedResult.data;
+}
+
+export const hasRequiredConsents = (): Promise<boolean> =>
+	onConsent()
+		.then(({ canTarget }: ConsentState) => canTarget)
+		.catch(() => false);
+
 const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
@@ -92,12 +119,14 @@ const buildPayload = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
 	asyncArticleCounts,
 	sectionId,
 	tags,
 	contentType,
+	userConsent,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
@@ -119,6 +148,7 @@ const buildPayload = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			signInBannerLastClosedAt,
+			abandonedBasketBannerLastClosedAt,
 			mvtId: Number(
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 			),
@@ -136,6 +166,10 @@ const buildPayload = async ({
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
 			lastOneOffContributionDate: getLastOneOffContributionDate(),
+			hasConsented: userConsent,
+			abandonedBasket: parseAbandonedBasket(
+				getCookie({ name: 'GU_CO_INCOMPLETE', shouldMemoize: true }),
+			),
 		},
 	};
 };
@@ -155,24 +189,25 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	signInBannerLastClosedAt,
+	abandonedBasketBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
 	asyncArticleCounts,
-	isInBlockSupporterRevenueMessagingTest,
+	isAndroidWebview,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
-	const shouldHideBannerForTest =
-		isInBlockSupporterRevenueMessagingTest &&
-		(sectionId === 'sport' || sectionId === 'football');
+	if (isAndroidWebview) {
+		// Do not show banners on Android app webview, due to buggy behaviour with the buttons
+		return { show: false };
+	}
 
 	if (
 		shouldHideReaderRevenue ||
 		isPaidContent ||
 		isPreview ||
-		signInGateWillShow ||
-		shouldHideBannerForTest
+		signInGateWillShow
 	) {
 		// We never serve Reader Revenue banners in this case
 		return { show: false };
@@ -202,6 +237,9 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		}
 	}
 
+	//Send user consent status to the banner API
+	const userConsent = await hasRequiredConsents();
+
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
 		isSignedIn,
@@ -217,8 +255,10 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		signInBannerLastClosedAt,
+		abandonedBasketBannerLastClosedAt,
 		optedOutOfArticleCount,
 		asyncArticleCounts,
+		userConsent,
 	});
 
 	const response: ModuleDataResponse = await getBanner(
@@ -244,7 +284,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 export type BannerProps = {
 	meta: TestTracking;
 	module: ModuleData;
-	// eslint-disable-next-line react/no-unused-prop-types -- ESLint is wrong: it is used in ReaderRevenueBanner
+
 	fetchEmail?: () => Promise<string | null>;
 };
 
@@ -253,19 +293,8 @@ type RemoteBannerProps = BannerProps & {
 	displayEvent: string;
 };
 
-const RemoteBanner = ({
-	componentTypeName,
-	displayEvent,
-	meta,
-	module,
-	fetchEmail,
-}: RemoteBannerProps) => {
+const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 	const [Banner, setBanner] = useState<React.ElementType>();
-
-	const [hasBeenSeen, setNode] = useIsInView({
-		threshold: 0,
-		debounce: true,
-	});
 
 	useEffect(() => {
 		setAutomat();
@@ -284,20 +313,10 @@ const RemoteBanner = ({
 			});
 	}, [module]);
 
-	useOnce(() => {
-		const { componentType } = meta;
-
-		// track banner view event in Google Analytics for subscriptions banner
-		if (componentType === componentTypeName) {
-			trackNonClickInteraction(displayEvent);
-		}
-	}, [hasBeenSeen, meta]);
-
 	if (Banner !== undefined) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
-				ref={setNode}
 				css={css`
 					width: 100%;
 					${getZIndex('banner')}

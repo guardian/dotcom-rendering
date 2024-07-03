@@ -1,5 +1,12 @@
 import { css } from '@emotion/react';
-import { body, headline, palette, space } from '@guardian/source-foundations';
+import {
+	article15,
+	article17,
+	articleBold15,
+	headlineMedium17,
+	palette,
+	space,
+} from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { palette as themePalette } from '../palette';
 import type { WitnessAssetType } from '../types/content';
@@ -20,7 +27,7 @@ const mainContentWrapperStyles = css`
 `;
 
 const witnessIconWrapperStyles = css`
-	${body.small()}
+	${article15};
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
@@ -30,7 +37,7 @@ const witnessIconStyles = css`
 	padding-left: ${space[1]}px;
 
 	color: ${themePalette('--witness-title-icon')};
-	${body.small({ fontWeight: 'bold' })}
+	${articleBold15};
 `;
 
 const witnessDetailsWrapperStyles = css`
@@ -49,7 +56,7 @@ const captionStyles = css`
 const titleStyles = css`
 	margin-bottom: ${space[2]}px;
 	color: ${themePalette('--witness-title-text')};
-	${headline.xxxsmall()}
+	${headlineMedium17}
 `;
 
 const witnessDetailsSpacingStyles = css`
@@ -62,7 +69,7 @@ const witnessDetailsSpacingStyles = css`
 const authorNameStyles = css`
 	padding-left: 5px;
 	color: ${themePalette('--witness-title-author')};
-	${body.small({ fontWeight: 'bold' })}
+	${articleBold15};
 `;
 
 type WrapperProps = {
@@ -99,7 +106,7 @@ const WitnessWrapper = ({
 					<div css={witnessDetailsSpacingStyles}>
 						<p
 							css={css`
-								${body.small()}
+								${article15};
 							`}
 						>
 							By
@@ -113,7 +120,7 @@ const WitnessWrapper = ({
 						</p>
 						<p
 							css={css`
-								${body.small()}
+								${article15};
 							`}
 						>
 							<DateTime
@@ -181,7 +188,7 @@ export const WitnessImageBlockComponent = ({
 						<div itemProp="description">
 							<p
 								css={css`
-									${body.medium()}
+									${article17};
 								`}
 								dangerouslySetInnerHTML={{ __html: caption }}
 							/>
@@ -221,7 +228,7 @@ export const WitnessTextBlockComponent = ({
 		<div itemProp="text">
 			<p
 				css={css`
-					${body.medium()}
+					${article17};
 				`}
 				dangerouslySetInnerHTML={{ __html: description }}
 			/>
@@ -268,7 +275,7 @@ export const WitnessVideoBlockComponent = ({
 			<div itemProp="description">
 				<p
 					css={css`
-						${body.medium()}
+						${article17};
 					`}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>

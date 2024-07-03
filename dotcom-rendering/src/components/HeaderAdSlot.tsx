@@ -1,8 +1,10 @@
 import { css, Global } from '@emotion/react';
-import { constants } from '@guardian/commercial';
-import { palette as sourcePalette, space } from '@guardian/source-foundations';
+import { adSizes, constants } from '@guardian/commercial';
+import { palette as sourcePalette, space } from '@guardian/source/foundations';
+import { AdBlockAsk } from './AdBlockAsk.importable';
 import { adContainerStyles, AdSlot } from './AdSlot.web';
 import { Hide } from './Hide';
+import { Island } from './Island';
 
 const headerWrapper = css`
 	position: static;
@@ -21,7 +23,6 @@ const headerAdWrapper = css`
 	background-color: ${sourcePalette.neutral[97]};
 	min-height: ${headerMinHeight}px;
 	border-bottom: ${borderBottomHeight}px solid ${sourcePalette.neutral[86]};
-	padding-bottom: ${padding}px;
 
 	display: flex;
 	flex-direction: column;
@@ -37,9 +38,31 @@ const topAboveNavContainer = css`
 		width: fit-content;
 		margin: auto;
 	}
+	padding-bottom: ${padding}px;
 `;
 
-export const HeaderAdSlot = () => (
+/**
+ * Ensure the top-above-nav/ad-block-ask containing div is always of a certain minimum height
+ */
+const headerMinSizeStyles = css`
+	min-height: ${adSizes.leaderboard.height}px;
+	min-width: ${adSizes.leaderboard.width}px;
+`;
+
+const topAboveNavStyles = css`
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+	display: block;
+`;
+
+export const HeaderAdSlot = ({
+	shouldHideReaderRevenue,
+	isPaidContent,
+}: {
+	shouldHideReaderRevenue: boolean;
+	isPaidContent: boolean;
+}) => (
 	<div css={headerWrapper}>
 		<Global
 			styles={css`
@@ -56,11 +79,25 @@ export const HeaderAdSlot = () => (
 		/>
 		<Hide when="below" breakpoint="tablet">
 			<div css={[headerAdWrapper]} className="top-banner-ad-container">
-				<div
-					css={[adContainerStyles, topAboveNavContainer]}
-					className="ad-slot-container"
-				>
-					<AdSlot position="top-above-nav" />
+				<div css={headerMinSizeStyles}>
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<AdBlockAsk
+							size="leaderboard"
+							slotId="dfp-ad--top-above-nav"
+							shouldHideReaderRevenue={shouldHideReaderRevenue}
+							isPaidContent={isPaidContent}
+						/>
+					</Island>
+					<div
+						css={[
+							adContainerStyles,
+							topAboveNavContainer,
+							topAboveNavStyles,
+						]}
+						className="ad-slot-container"
+					>
+						<AdSlot position="top-above-nav" />
+					</div>
 				</div>
 			</div>
 		</Hide>

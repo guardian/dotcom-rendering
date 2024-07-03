@@ -3,13 +3,10 @@ import {
 	brandText,
 	from,
 	palette as sourcePalette,
-	textSans,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+	textSans17,
+} from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { LinkType } from '../../../model/extract-nav';
-import FacebookIcon from '../../../static/icons/facebook.svg';
-import TwitterIconPadded from '../../../static/icons/twitter-padded.svg';
 
 const pillarHeight = 42;
 
@@ -20,7 +17,7 @@ const hideDesktop = css`
 `;
 
 const columnStyle = css`
-	${textSans.medium()};
+	${textSans17};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
@@ -96,7 +93,7 @@ const pillarDividerExtended = css`
 `;
 
 const columnLinks = css`
-	${textSans.medium()};
+	${textSans17};
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
@@ -124,7 +121,13 @@ const columnLinks = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans.medium({ lineHeight: 'tight' })};
+	${textSans17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 	background-color: transparent;
 	text-decoration: none;
 	border: 0;
@@ -166,15 +169,6 @@ const mainMenuLinkStyle = css`
 	${from.desktop} {
 		display: list-item;
 	}
-`;
-
-const shareIconStyles = css`
-	fill: currentColor;
-	height: 28px;
-	left: 18px;
-	position: absolute;
-	top: 5px;
-	width: 28px;
 `;
 
 type Props = {
@@ -238,59 +232,6 @@ export const MoreColumn = ({
 					))}
 				</ul>
 			</li>
-			{/** Social buttons hidden from menus from desktop */}
-			<Hide from="desktop">
-				<li
-					css={[columnStyle, !hasPageSkin && columnStyleFromLeftCol]}
-					role="none"
-				>
-					<ul css={[columnLinks]} role="menu">
-						<li
-							key="facebook"
-							css={[mainMenuLinkStyle, hideDesktop]}
-							role="none"
-						>
-							<a
-								className="selectableMenuItem"
-								css={columnLinkTitle}
-								data-link-name={nestedOphanComponents(
-									'nav2',
-									'secondary',
-									'facebook',
-								)}
-								href="https://www.facebook.com/theguardian"
-								role="menuitem"
-								tabIndex={-1}
-							>
-								<FacebookIcon css={shareIconStyles} />
-								Facebook
-							</a>
-						</li>
-
-						<li
-							key="twitter"
-							css={[mainMenuLinkStyle, hideDesktop]}
-							role="none"
-						>
-							<a
-								className="selectableMenuItem"
-								css={columnLinkTitle}
-								data-link-name={nestedOphanComponents(
-									'nav2',
-									'secondary',
-									'twitter',
-								)}
-								href="https://twitter.com/guardian"
-								role="menuitem"
-								tabIndex={-1}
-							>
-								<TwitterIconPadded css={shareIconStyles} />
-								Twitter
-							</a>
-						</li>
-					</ul>
-				</li>
-			</Hide>
 		</>
 	);
 };

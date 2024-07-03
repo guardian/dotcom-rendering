@@ -1,17 +1,16 @@
 import { css } from '@emotion/react';
 import {
 	background,
-	headline,
-	palette,
+	headlineBold20,
 	space,
-	textSans,
+	textSans15,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { Score } from './Score';
 
 type Props = {
-	homeTeam: TeamType;
-	awayTeam: TeamType;
+	homeTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
+	awayTeam: Pick<TeamType, 'name' | 'score' | 'scorers' | 'crest'>;
 	comments?: string;
 };
 
@@ -46,7 +45,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 			justify-content: space-between;
 			position: relative;
 			padding: ${space[2]}px;
-			background-color: ${palette.brandAlt[400]};
+			background-color: var(--match-nav-background);
 			margin-bottom: 10px;
 			${until.tablet} {
 				margin: 0 -10px 10px;
@@ -59,7 +58,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 				bottom: 0;
 				width: 100vw;
 				left: -100vw;
-				background-color: ${palette.brandAlt[400]};
+				background-color: var(--match-nav-background);
 				z-index: -1;
 			}
 		`}
@@ -83,7 +82,7 @@ const Column = ({ children }: { children: React.ReactNode }) => (
 const TeamName = ({ name }: { name: string }) => (
 	<h2
 		css={css`
-			${headline.xxsmall({ fontWeight: 'bold' })}
+			${headlineBold20}
 		`}
 	>
 		{name}
@@ -103,10 +102,20 @@ const Scorers = ({ scorers }: { scorers: string[] }) => (
 				// unless a single player scores twice in the same minute
 				key={player}
 				css={css`
-					${textSans.small()}
+					${textSans15}
 				`}
 			>
-				{player}
+				{player.startsWith('placeholder-') ? (
+					<span
+						css={css`
+							opacity: 0;
+						`}
+					>
+						―
+					</span>
+				) : (
+					player
+				)}
 			</li>
 		))}
 	</ul>
@@ -123,21 +132,23 @@ const Crest = ({ crest }: { crest: string }) => (
 			z-index: 1;
 		`}
 	>
-		<img
-			css={css`
-				position: absolute;
-				left: 0.5rem;
-				right: 0.5rem;
-				bottom: 0.5rem;
-				top: 0.5rem;
-				max-width: calc(100% - 1rem);
-				max-height: calc(100% - 1rem);
-				margin: auto;
-				display: block;
-			`}
-			src={crest}
-			alt=""
-		/>
+		{crest.trim() === '' ? null : (
+			<img
+				css={css`
+					position: absolute;
+					left: 0.5rem;
+					right: 0.5rem;
+					bottom: 0.5rem;
+					top: 0.5rem;
+					max-width: calc(100% - 1rem);
+					max-height: calc(100% - 1rem);
+					margin: auto;
+					display: block;
+				`}
+				src={crest}
+				alt=""
+			/>
+		)}
 	</div>
 );
 
@@ -157,6 +168,7 @@ const TeamNav = ({
 			display: flex;
 			flex-grow: 1;
 			flex-basis: 50%;
+			color: var(--match-nav-text);
 		`}
 	>
 		<Column>
@@ -168,7 +180,15 @@ const TeamNav = ({
 				`}
 			>
 				<TeamName name={name} />
-				<Scorers scorers={scorers} />
+				<Scorers
+					scorers={[
+						...scorers,
+						// this ensures we reserve space for at least three scorers per team
+						'placeholder-1',
+						'placeholder-2',
+						'placeholder-3',
+					].slice(0, Math.max(3, scorers.length))}
+				/>
 			</div>
 			<CrestRow>
 				<Crest crest={crest} />
@@ -187,7 +207,7 @@ const TeamNav = ({
 const Comments = ({ comments }: { comments: string }) => (
 	<div
 		css={css`
-			${textSans.small()}
+			${textSans15}
 			margin-top: ${space[2]}px;
 			padding-top: ${space[1]}px;
 			font-style: italic;

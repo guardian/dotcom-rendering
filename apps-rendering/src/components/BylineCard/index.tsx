@@ -4,11 +4,12 @@ import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedIte
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
-	headline,
+	headlineMedium17,
+	headlineMedium20,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
-import { SvgQuote } from '@guardian/source-react-components';
+	textSans15,
+} from '@guardian/source/foundations';
+import { SvgQuote } from '@guardian/source/react-components';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import {
 	fromNullable,
@@ -19,7 +20,7 @@ import { formatFromRelatedItem } from 'components/Card';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import { background, border, fill, text } from 'palette';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -106,16 +107,16 @@ const headingWrapperStyles = css`
 `;
 
 const headingStyles: SerializedStyles = css`
-	${headline.xxxsmall()}
+	${headlineMedium17};
 	margin: 0;
 
 	${from.desktop} {
-		${headline.xxsmall()}
+		${headlineMedium20}
 	}
 `;
 
 const cardStyles: SerializedStyles = css`
-	${headline.xxsmall()}
+	${headlineMedium20}
 `;
 
 const commentIconStyle = (format: ArticleFormat): SerializedStyles => {
@@ -179,7 +180,7 @@ const cardImage = (
 };
 
 const dateStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small()};
+	${textSans15};
 	color: ${text.relatedCardTimeAgo(format)};
 	text-align: right;
 	vertical-align: top;
@@ -209,7 +210,7 @@ const footerStyles = css`
 	min-height: 2rem;
 `;
 
-const BylineCard: FC<Props> = ({ relatedItem }) => {
+const BylineCard = ({ relatedItem }: Props) => {
 	const { title, link, pillar, webPublicationDate, type } = relatedItem;
 	const format = formatFromRelatedItem(type, pillar.id);
 	const img = cardImage(relatedItem, format);

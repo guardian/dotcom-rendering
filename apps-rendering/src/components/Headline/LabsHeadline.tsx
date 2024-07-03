@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { from, textSans } from '@guardian/source-foundations';
+import { from, textSans34 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const labsStyles = css`
-	${textSans.xxxlarge({ lineHeight: 'regular' })}
+	${textSans34}
 	${from.desktop} {
-		${textSans.xxxlarge({ lineHeight: 'regular' })}
+		${textSans34}
 	}
 `;
 
@@ -14,7 +14,7 @@ interface Props {
 	item: Item;
 }
 
-const LabsHeadline: React.FC<Props> = ({ item }) => (
+const LabsHeadline = ({ item }: Props) => (
 	<DefaultHeadline
 		item={item}
 		styles={css(defaultStyles(item), labsStyles)}

@@ -44,7 +44,6 @@ type Props = {
 	idApiUrl: string;
 	stage: string;
 	pageId: string;
-	keywordIds: string;
 	renderAds: boolean;
 	isLabs: boolean;
 	articleEndSlot: boolean;
@@ -135,7 +134,6 @@ export const SlotBodyEnd = ({
 	idApiUrl,
 	stage,
 	pageId,
-	keywordIds,
 	renderAds,
 	isLabs,
 	articleEndSlot,
@@ -159,10 +157,6 @@ export const SlotBodyEnd = ({
 		(abTestsApi?.isUserInVariant('MpuWhenNoEpic', 'variant') &&
 			countryCode === 'GB') ??
 		false;
-	const userIsInBlockSupporterRevenueTest = abTestsApi?.isUserInVariant(
-		'BlockSupporterRevenueMessagingSport',
-		'variant',
-	);
 
 	const showArticleEndSlot =
 		renderAds &&
@@ -172,11 +166,11 @@ export const SlotBodyEnd = ({
 
 	useEffect(() => {
 		setAsyncArticleCount(
-			getArticleCounts(pageId, keywordIds, contentType).then(
+			getArticleCounts(pageId, tags, contentType).then(
 				(counts) => counts?.weeklyArticleHistory,
 			),
 		);
-	}, [contentType, pageId, keywordIds]);
+	}, [contentType, tags, pageId]);
 
 	useOnce(() => {
 		if (isUndefined(countryCode)) return;
@@ -214,24 +208,11 @@ export const SlotBodyEnd = ({
 			candidates: [brazeEpic, readerRevenueEpic],
 			name: 'slotBodyEnd',
 		};
-
-		const shouldRemoveEpic =
-			userIsInBlockSupporterRevenueTest &&
-			(sectionId === 'sport' || sectionId === 'football');
-
-		if (!shouldRemoveEpic) {
-			pickMessage(epicConfig, renderingTarget)
-				.then((PickedEpic: () => MaybeFC) =>
-					setSelectedEpic(PickedEpic),
-				)
-				.catch((e) =>
-					console.error(
-						`SlotBodyEnd pickMessage - error: ${String(e)}`,
-					),
-				);
-		} else {
-			setSelectedEpic(null);
-		}
+		pickMessage(epicConfig, renderingTarget)
+			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
+			.catch((e) =>
+				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
+			);
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount, browserId]);
 
 	useEffect(() => {

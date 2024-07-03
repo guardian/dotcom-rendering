@@ -3,7 +3,7 @@ import type { RenderingTarget } from '../types/renderingTarget';
 import { recordExperiences } from './ophan/ophan';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
-	log('openJournalism', '⏱', name, data);
+	log('dotcom', '⏱', name, data);
 
 /**
  * @see https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint
@@ -46,12 +46,15 @@ const isTimeToFirstByteAboveThreshold = (threshold = 1200) => {
 		const [nav] = window.performance.getEntriesByType('navigation');
 		if (!nav) return true;
 
-		logPerformanceInfo('navigation', {
-			domContentLoadedEventEnd: nav.domContentLoadedEventEnd,
-			type: nav.type,
-			responseEnd: nav.responseEnd,
-		});
-		return nav.responseStart - nav.startTime > threshold;
+		if (nav instanceof PerformanceNavigationTiming) {
+			logPerformanceInfo('navigation', {
+				domContentLoadedEventEnd: nav.domContentLoadedEventEnd,
+				type: nav.type,
+				responseEnd: nav.responseEnd,
+			});
+			return nav.responseStart - nav.startTime > threshold;
+		}
+		return false;
 	} catch (error) {
 		return true;
 	}
@@ -77,7 +80,7 @@ export const recordPoorPerformance = async (
 ): Promise<void> => {
 	try {
 		if (await isPerformingPoorly()) {
-			log('openJournalism', `🐌 Poor page performance`);
+			log('dotcom', `🐌 Poor page performance`);
 			return recordExperiences(renderingTarget, [
 				'poor-page-performance',
 			]);

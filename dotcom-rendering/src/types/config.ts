@@ -15,6 +15,7 @@ export interface CommercialConfigType {
 	contentType: string;
 	ampIframeUrl: string;
 	hasInlineMerchandise?: boolean;
+	hasLiveBlogTopAd?: boolean;
 }
 
 /**
@@ -61,6 +62,7 @@ export interface ConfigType extends CommercialConfigType {
 	videoDuration?: number;
 	edition: EditionId;
 	section: string;
+	source?: string;
 
 	sharedAdTargeting: SharedAdTargeting;
 	isPaidContent?: boolean;

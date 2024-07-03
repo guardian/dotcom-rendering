@@ -9,40 +9,35 @@ import { svgr } from '../webpack/svg.cjs';
 saveStories();
 
 const config: StorybookConfig = {
-	features: {
-		// used in composition
-		buildStoriesJson: true,
-	},
+	features: {},
+
 	stories: [
 		'../src/**/*.stories.@(tsx)',
 		'../stories/**/*.stories.@(tsx)',
 		'../stories/**/*.stories.@(jsx)',
 	],
-	staticDirs: ['../src/static'],
+
+	staticDirs: [
+		'../src/static',
+		{ from: '../src/static', to: '/static/frontend/' },
+	],
+
 	addons: [
-		'@storybook/addon-essentials',
-		'@storybook/addon-interactions',
-		'storybook-addon-turbo-build',
 		{
-			name: 'storybook-addon-turbo-build',
+			name: '@storybook/addon-essentials',
 			options: {
-				optimizationLevel: 1,
-				// We're explicitly setting the minification options below because
-				// we want to turn off `minifyIdentifiers`. Why? Because it breaks
-				// Islands hydration. When you minify the component filenames
-				// the dynamic imports fail to find them.
-				// See: https://github.com/privatenumber/esbuild-loader#minify
-				//    & https://esbuild.github.io/api/#minify
-				esbuildMinifyOptions: {
-					target: 'es2015',
-					minify: false,
-					minifyWhitespace: true,
-					minifyIdentifiers: false,
-					minifySyntax: true,
-				},
+				actions: true,
+				backgrounds: true,
+				controls: true,
+				docs: false,
+				viewport: true,
+				toolbars: true,
 			},
 		},
+		'@storybook/addon-interactions',
+		'@storybook/addon-webpack5-compiler-swc',
 	],
+
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
 		config = webpackConfig(config);
@@ -60,7 +55,6 @@ const config: StorybookConfig = {
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
 		config.plugins?.push(
-			// @ts-expect-error -- we’ve got plugin mismatch
 			new webpack.DefinePlugin({
 				process: '{}',
 			}),
@@ -71,15 +65,21 @@ const config: StorybookConfig = {
 		);
 		return config;
 	},
+
 	env: (config) => ({
 		...config,
 		// Github sets a CI env var for all actions but this isn't being picked up by Storybook
 		// See: https://storybook.js.org/docs/react/configure/environment-variables
 		CI: 'true',
 	}),
+
 	framework: {
 		name: '@storybook/react-webpack5',
-		options: { fastRefresh: true },
+		options: {},
+	},
+
+	typescript: {
+		reactDocgen: 'react-docgen',
 	},
 };
 
@@ -127,12 +127,12 @@ const webpackConfig = (config: Configuration) => {
 	});
 
 	// modify storybook's file-loader rule to avoid conflicts with our svg
-	// https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
-	const fileLoaderRule = rules.find((rule) => rule.test.test('.svg'));
+	const fileLoaderRule = rules.find((rule) => {
+		return String(rule?.test).includes('svg');
+	});
 	fileLoaderRule &&
 		typeof fileLoaderRule !== 'string' &&
 		(fileLoaderRule.exclude = /\.svg$/);
-
 	rules.push(svgr);
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),

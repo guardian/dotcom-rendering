@@ -1,11 +1,16 @@
 import { css } from '@emotion/react';
-import { space, textSans, until } from '@guardian/source-foundations';
-import type { ThemeButton } from '@guardian/source-react-components';
+import {
+	space,
+	textSans15,
+	textSansBold15,
+	until,
+} from '@guardian/source/foundations';
+import type { ThemeButton } from '@guardian/source/react-components';
 import {
 	Button,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import type { FilterOptions } from '../../lib/discussion';
 import { palette as schemedPalette } from '../../palette';
 
@@ -18,7 +23,7 @@ type Props = {
 
 const pageButtonStyles = (isSelected: boolean) => css`
 	cursor: pointer;
-	${textSans.small({ fontWeight: 'bold' })}
+	${textSansBold15}
 
 	text-decoration: none;
 	border-radius: 62.5rem;
@@ -62,7 +67,7 @@ const ellipsisStyles = css`
 `;
 
 const wrapperStyles = css`
-	${textSans.small()};
+	${textSans15};
 	color: ${schemedPalette('--discussion-pagination-text')};
 
 	display: flex;
@@ -86,7 +91,7 @@ const paginationButtons = css`
 `;
 
 const paginationText = css`
-	${textSans.small()};
+	${textSans15};
 	margin-left: 5px;
 	${until.mobileLandscape} {
 		padding-top: 10px;

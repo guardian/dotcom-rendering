@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
-import { Radio, RadioGroup } from '@guardian/source-react-components';
+import { Radio, RadioGroup } from '@guardian/source/react-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import {
 	CorrectSelectedAnswer,

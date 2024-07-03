@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { DateTime } from './DateTime';
 
@@ -10,7 +10,7 @@ const meta: Meta<typeof DateTime> = {
 		<div
 			css={css`
 				padding: ${space[2]}px;
-				${textSans.small()}
+				${textSans15}
 			`}
 		>
 			<Story />

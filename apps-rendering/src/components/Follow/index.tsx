@@ -4,12 +4,11 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { remSpace, space, textSans } from '@guardian/source-foundations';
+import { remSpace, space, textSans15 } from '@guardian/source/foundations';
 import { FollowNotificationStatus } from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import { background, fill, text } from 'palette';
-import { type FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -29,8 +28,8 @@ const followButtonStyles: SerializedStyles = css`
 `;
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small()}
-	color:  ${text.follow(format)};
+	${textSans15};
+	color: ${text.follow(format)};
 	background: none;
 	border: none;
 	display: block;
@@ -86,7 +85,7 @@ const followStatusStyles = (): SerializedStyles => css`
 	column-gap: 0.2em;
 `;
 
-const Follow: FC<Props> = ({ contributors, format }) => {
+const Follow = ({ contributors, format }: Props) => {
 	const [contributor] = contributors;
 
 	if (

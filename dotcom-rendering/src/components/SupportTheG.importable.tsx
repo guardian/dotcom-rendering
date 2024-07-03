@@ -4,12 +4,16 @@ import { getCookie, isUndefined } from '@guardian/libs';
 import {
 	brandText,
 	from,
-	headline,
+	headlineBold20,
+	headlineBold24,
+	headlineBold28,
+	headlineBold34,
 	palette,
 	space,
-	textSans,
+	textSans15,
+	textSans17,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,
@@ -81,19 +85,17 @@ const headerStyles = css`
 
 const messageStylesUntilLeftCol = css`
 	color: ${palette.brandAlt[400]};
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 	padding-top: 3px;
 	margin-bottom: 3px;
 	${from.desktop} {
-		${headline.xsmall({ fontWeight: 'bold' })}
+		${headlineBold24}
 	}
 `;
 
 const messageStylesFromLeftCol = (isThankYouMessage: boolean) => css`
 	${from.leftCol} {
-		${isThankYouMessage
-			? headline.small({ fontWeight: 'bold' })
-			: headline.medium({ fontWeight: 'bold' })}
+		${isThankYouMessage ? headlineBold28 : headlineBold34}
 	}
 `;
 
@@ -103,7 +105,7 @@ const linkStyles = css`
 	box-sizing: border-box;
 	color: ${palette.neutral[7]};
 	float: left;
-	${textSans.small()};
+	${textSans15};
 	font-weight: 700;
 	height: 32px;
 	text-decoration: none;
@@ -155,7 +157,7 @@ const hiddenFromTablet = css`
 
 const subMessageStyles = css`
 	color: ${brandText.primary};
-	${textSans.medium()};
+	${textSans17};
 	margin: 5px 0;
 `;
 

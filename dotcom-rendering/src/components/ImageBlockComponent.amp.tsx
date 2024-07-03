@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text, textSans } from '@guardian/source-foundations';
+import { text, textSans12 } from '@guardian/source/foundations';
 import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import TriangleIcon from '../static/icons/triangle.svg';
@@ -11,7 +11,7 @@ const figureStyle = css`
 `;
 const captionStyle = css`
 	padding-top: 8px;
-	${textSans.xxsmall()};
+	${textSans12};
 	word-wrap: break-word;
 	color: ${text.supporting};
 `;

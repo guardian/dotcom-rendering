@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { headline, space } from '@guardian/source-foundations';
+import { headlineMedium17, space } from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
 
 type Props = {
@@ -47,7 +47,7 @@ const tabLink = css`
 `;
 
 const tabLabel = css`
-	${headline.xxxsmall()};
+	${headlineMedium17};
 	background: transparent;
 	padding: 6px 8px 0;
 	text-align: left;

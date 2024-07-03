@@ -11,7 +11,7 @@ describe('Browser targets are as expected', () => {
 			edge: '109.0.0',
 			firefox: '78.0.0',
 			ios: '10.3.0',
-			opera: '73.0.0',
+			opera: '105.0.0',
 			safari: '11.1.0',
 			samsung: '17.0.0',
 		});
@@ -22,7 +22,7 @@ describe('Browser targets are as expected', () => {
 			edge: '109.0.0',
 			firefox: '78.0.0',
 			ios: '11', // upgraded
-			opera: '73.0.0',
+			opera: '105.0.0',
 			safari: '11.1.0', // upgraded
 			samsung: '17.0.0',
 		});

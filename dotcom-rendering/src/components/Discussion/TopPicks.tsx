@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source-foundations';
+import { from, until } from '@guardian/source/foundations';
 import type {
 	CommentType,
 	ReplyType,
@@ -55,10 +55,11 @@ export const TopPicks = ({
 }: Props) => {
 	const leftColComments: Array<CommentType | ReplyType> = [];
 	const rightColComments: Array<CommentType | ReplyType> = [];
-	for (const [index, comment] of comments.entries())
+	for (const [index, comment] of comments.entries()) {
 		index % 2 === 0
 			? leftColComments.push(comment)
 			: rightColComments.push(comment);
+	}
 	return (
 		<div css={picksWrapper}>
 			<div css={twoColCommentsStyles}>

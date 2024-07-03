@@ -2,7 +2,14 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, headline, remSpace } from '@guardian/source-foundations';
+import {
+	from,
+	headlineBold28,
+	headlineBold34,
+	headlineMedium28,
+	headlineMedium34,
+	remSpace,
+} from '@guardian/source/foundations';
 import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -10,20 +17,20 @@ import { background, text } from 'palette';
 import { articleWidthStyles, darkModeCss } from 'styles';
 
 const boldFontStyles: SerializedStyles = css`
-	${headline.small({ fontWeight: 'bold' })}
+	${headlineBold28}
 	${from.tablet} {
-		${headline.medium({ fontWeight: 'bold' })}
+		${headlineBold34}
 	}
 `;
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
-		${headline.small()}
+		${headlineMedium28};
 		color: ${text.headline(format)};
 		margin: 0;
 
 		${from.tablet} {
-			${headline.medium()}
+			${headlineMedium34}
 		}
 
 		${darkModeCss`
@@ -34,7 +41,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
 			return css`
-				${baseStyles}
+				${baseStyles};
 				padding-bottom: ${remSpace[1]};
 			`;
 		case ArticleDesign.Analysis:
@@ -88,7 +95,7 @@ interface DefaultProps {
 	styles: SerializedStyles;
 }
 
-export const DefaultHeadline: React.FC<DefaultProps> = ({ item, styles }) => {
+export const DefaultHeadline = ({ item, styles }: DefaultProps) => {
 	const format = getFormat(item);
 	return (
 		<>

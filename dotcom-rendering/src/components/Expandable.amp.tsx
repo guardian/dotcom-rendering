@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import {
-	body,
-	headline,
+	article17,
+	headlineMedium20,
 	palette,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans15,
+} from '@guardian/source/foundations';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import InfoIcon from '../static/icons/info.svg';
@@ -48,7 +48,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 	}
 	p {
 		padding: 0 0 12px;
-		${body.medium()};
+		${article17};
 		font-weight: 300;
 		word-wrap: break-word;
 		color: ${palette.neutral[7]};
@@ -58,9 +58,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		margin-left: 20px;
 		font-style: italic;
 	}
-
-	${body.medium()};
-
+	${article17};
 	${LinkStyle(pillar)};
 	${ListStyle(neutralBorder(pillar))};
 `;
@@ -83,7 +81,7 @@ const wrapper = (pillar: ArticleTheme) => css`
 
 	${TextStyle(pillar)}
 
-	${body.medium()};
+	${article17};
 `;
 
 const buttonStyles = css`
@@ -92,7 +90,7 @@ const buttonStyles = css`
 	border-radius: 1600px;
 	color: ${palette.neutral[100]};
 	border: none;
-	${textSans.small()};
+	${textSans15};
 	font-weight: 700;
 	padding: 0 15px 0 7px;
 
@@ -117,11 +115,11 @@ const buttonStyles = css`
 `;
 
 const headerStyle = css`
-	${headline.xxsmall()};
+	${headlineMedium20};
 `;
 
 const creditStyle = css`
-	${textSans.small()};
+	${textSans15};
 	display: block;
 	margin: 12px 0;
 `;

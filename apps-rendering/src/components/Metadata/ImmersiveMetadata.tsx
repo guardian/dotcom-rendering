@@ -3,14 +3,13 @@
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace } from '@guardian/source-foundations';
+import { from, remSpace } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import CommentCount from 'components/CommentCount';
 import Dateline from 'components/Dateline';
 import Follow from 'components/Follow';
 import type { Contributor } from 'contributor';
 import { grid } from 'grid/grid';
-import type { FC } from 'react';
 
 // ----- Component ----- //
 
@@ -37,14 +36,14 @@ type Props = {
 	edition: Edition;
 };
 
-const ImmersiveMetadata: FC<Props> = ({
+const ImmersiveMetadata = ({
 	format,
 	publishDate,
 	contributors,
 	commentCount,
 	commentable,
 	edition,
-}) => (
+}: Props) => (
 	<div css={styles}>
 		<div css={textStyles}>
 			<Dateline date={publishDate} format={format} edition={edition} />

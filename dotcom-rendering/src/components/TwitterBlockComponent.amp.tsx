@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { body, palette } from '@guardian/source-foundations';
+import { article17, palette } from '@guardian/source/foundations';
 import { JSDOM } from 'jsdom';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { TweetBlockElement } from '../types/content';
@@ -42,7 +42,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 	}
 	p {
 		padding: 0 0 12px;
-		${body.medium()};
+		${article17};
 		font-weight: 300;
 		word-wrap: break-word;
 		color: ${palette.neutral[7]};
@@ -53,8 +53,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		font-style: italic;
 	}
 
-	${body.medium()};
-
+	${article17};
 	${LinkStyle(pillar)};
 	${ListStyle(neutralBorder(pillar))};
 `;

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/source-foundations';
-import type { FC, ReactElement } from 'react';
+import { neutral, remSpace } from '@guardian/source/foundations';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 export interface VideoProps {
@@ -32,11 +32,7 @@ const videoStyles = css`
     `}
 `;
 
-const Video: FC<VideoProps> = ({
-	src,
-	width,
-	height,
-}: VideoProps): ReactElement => (
+const Video = ({ src, width, height }: VideoProps): ReactElement => (
 	<div css={videoStyles}>
 		<iframe
 			src={src}

@@ -1,4 +1,4 @@
-import { userEvent, within } from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/test';
 import fetchMock from 'fetch-mock';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/show-more-trails';
@@ -18,6 +18,7 @@ const pageId = 'uk/lifestyle';
 const collectionId = '5011-3940-8793-33a9';
 const ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
 const sectionId = 'container-id';
+const editionId = 'UK';
 
 const defaultProps = {
 	title,
@@ -27,6 +28,7 @@ const defaultProps = {
 	sectionId,
 	showAge: false,
 	discussionApiUrl,
+	editionId,
 } satisfies Parameters<typeof ShowMore>[0];
 
 export default {

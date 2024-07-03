@@ -5,7 +5,6 @@
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
-// These are partialy kept for Google Analytics purposes
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type LegacyPillar = RealPillars | FakePillars;
@@ -457,6 +456,35 @@ declare namespace JSX {
 		 * change, Chromatic will still capture the incoming changes.
 		 */
 		'data-chromatic'?: 'ignore';
+
+		/**
+		 * **Spacefinder Role**
+		 *
+		 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
+		 * is a part of the commercial bundle that is used to find positions
+		 * for ad slots within articles.
+		 *
+		 * Spacefinder has rules specified for elements with this data attribute
+		 * that it will use to find positions for ads.
+		 */
+		'data-spacefinder-role'?:
+			| 'nested'
+			| 'immersive'
+			| 'inline'
+			| 'richLink'
+			| 'thumbnail';
+
+		/**
+		 * **Spacefinder Type**
+		 *
+		 * [Spacefinder](https://github.com/guardian/commercial/blob/main/src/insert/spacefinder/article.ts)
+		 * is a part of the commercial bundle that is used to find positions
+		 * for ad slots within articles.
+		 *
+		 * Spacefinder has rules specified for elements with this data attribute
+		 * that it will use to find positions for ads.
+		 */
+		'data-spacefinder-type'?: import('./src/types/content').FEElement['_type'];
 	}
 }
 

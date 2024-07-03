@@ -1,6 +1,10 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
-import { SvgClock } from '@guardian/source-react-components';
+import {
+	space,
+	textSans14,
+	textSansBold14,
+} from '@guardian/source/foundations';
+import { SvgClock } from '@guardian/source/react-components';
 
 type Props = {
 	frequency: string;
@@ -13,9 +17,9 @@ const mainStyles = css`
 
 const spanStyles = css`
 	margin-left: ${space[1]}px;
-	${textSans.xsmall()}
+	${textSans14}
 	strong {
-		${textSans.xsmall({ fontWeight: 'bold' })}
+		${textSansBold14}
 	}
 `;
 

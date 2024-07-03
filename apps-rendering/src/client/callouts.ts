@@ -3,7 +3,7 @@
 import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { withDefault } from '../../vendor/@guardian/types/index';
 import { ElementKind } from 'bodyElementKind';
@@ -116,21 +116,9 @@ const makeArticleFormat = (theme: ArticleTheme): ArticleFormatProps => ({
 const themeParser: Parser<ArticleTheme> = pipe(
 	numberParser,
 	andThen((num) => {
-		switch (num) {
-			case ArticlePillar.News:
-			case ArticlePillar.Opinion:
-			case ArticlePillar.Sport:
-			case ArticlePillar.Culture:
-			case ArticlePillar.Lifestyle:
-			case ArticleSpecial.SpecialReport:
-			case ArticleSpecial.SpecialReportAlt:
-			case ArticleSpecial.Labs:
-				return succeed(num);
-			default:
-				return fail(
-					`I was not able to parse '${num}' as a valid theme`,
-				);
-		}
+		if (Pillar[num]) return succeed(num);
+		if (ArticleSpecial[num]) return succeed(num);
+		return fail(`I was not able to parse '${num}' as a valid theme`);
 	}),
 );
 

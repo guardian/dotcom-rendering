@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import {
 	brandBackground,
 	from,
-	textSans,
+	textSans20,
 	until,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
 import type { NavType } from '../../../model/extract-nav';
@@ -68,7 +68,7 @@ const wrapperMainMenuStyles = css`
 const mainMenuStyles = css`
 	background-color: ${brandBackground.primary};
 	box-sizing: border-box;
-	${textSans.large()};
+	${textSans20};
 	margin-right: 29px;
 	left: 0;
 	top: 0;
@@ -107,7 +107,6 @@ type Props = {
 	editionId: EditionId;
 	isImmersive?: boolean;
 	nav: NavType;
-	headerTopBarSwitch: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -115,7 +114,6 @@ export const ExpandedMenu = ({
 	isImmersive,
 	nav,
 	editionId,
-	headerTopBarSwitch,
 	hasPageSkin,
 }: Props) => {
 	return (
@@ -132,7 +130,6 @@ export const ExpandedMenu = ({
 						editionId={editionId}
 						isImmersive={isImmersive}
 						nav={nav}
-						headerTopBarSwitch={headerTopBarSwitch}
 						hasPageSkin={hasPageSkin}
 					/>
 				</div>

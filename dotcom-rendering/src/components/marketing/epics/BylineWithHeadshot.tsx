@@ -4,7 +4,11 @@
  * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/BylineWithHeadshot.tsx
  */
 import { css } from '@emotion/react';
-import { body, palette } from '@guardian/source-foundations';
+import {
+	articleBold17,
+	articleItalic17,
+	palette,
+} from '@guardian/source/foundations';
 import type { BylineWithImage } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { ReactComponent } from '../lib/ReactComponent';
 
@@ -36,12 +40,12 @@ const bylineImageContainer = css`
 `;
 
 const bylineName = css`
-	${body.medium({ fontWeight: 'bold' })};
+	${articleBold17};
 	margin: 0;
 `;
 
 const bylineDescription = css`
-	${body.medium({ fontStyle: 'italic' })};
+	${articleItalic17};
 	margin: 0;
 `;
 

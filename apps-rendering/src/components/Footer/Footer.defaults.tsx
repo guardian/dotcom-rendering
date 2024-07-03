@@ -8,18 +8,17 @@ import {
 	from,
 	neutral,
 	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans15,
+} from '@guardian/source/foundations';
 import FooterContent from 'components/FooterContent';
 import { background } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
 const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-width: 0 1px;
-	${textSans.small({ lineHeight: 'regular' })};
+	${textSans15};
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: ${remSpace[3]};
@@ -34,7 +33,7 @@ const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	a {
-		${textSans.small({ lineHeight: 'regular' })};
+		${textSans15};
 		color: ${neutral[7]};
 		text-decoration: underline;
 	}
@@ -55,7 +54,7 @@ interface Props {
 	css?: SerializedStyles;
 }
 
-const DefaultFooter: FC<Props> = ({ isCcpa, className }) => (
+const DefaultFooter = ({ isCcpa, className }: Props) => (
 	<footer css={className}>
 		<FooterContent isCcpa={isCcpa} />
 	</footer>

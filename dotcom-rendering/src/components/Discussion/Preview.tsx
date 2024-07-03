@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source/foundations';
 import { palette as schemedPalette } from '../../palette';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const previewStyle = css`
-	${textSans.small()}
+	${textSans15}
 	padding: ${space[2]}px ${space[4]}px;
 	background-color: ${schemedPalette('--discussion-preview-background')};
 	border-radius: 5px;

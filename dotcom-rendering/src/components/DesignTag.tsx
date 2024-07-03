@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { headline, space, until } from '@guardian/source-foundations';
-import { LinkButton } from '@guardian/source-react-components';
+import {
+	headlineBold17,
+	headlineBold20,
+	space,
+	until,
+} from '@guardian/source/foundations';
+import { LinkButton } from '@guardian/source/react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
 
@@ -10,14 +15,14 @@ const tagStyles = (palette: Palette) => css`
 	color: ${palette.text.designTag};
 	display: inline-block;
 	padding: 2px 0 4px 0;
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	${headlineBold20}
 	line-height: 115%;
 	box-shadow:
 		6px 0 0 ${palette.background.headlineTag},
 		-6px 0 0 ${palette.background.headlineTag};
 	box-decoration-break: clone;
 	${until.tablet} {
-		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${headlineBold17}
 	}
 `;
 

@@ -6,16 +6,16 @@ import {
 	background,
 	focusHalo,
 	from,
-	headline,
+	headlineBold20,
 	line,
 	neutral,
 	remSpace,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
-} from '@guardian/source-react-components';
-import type { FC, ReactNode } from 'react';
+} from '@guardian/source/react-components';
+import type { ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -69,7 +69,7 @@ const titleRowStyles = css`
 `;
 
 const titleStyle = css`
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${headlineBold20};
 	color: ${neutral[7]};
 	${darkModeCss`
 		color: ${neutral[86]};
@@ -121,11 +121,7 @@ const paddingBody: SerializedStyles = css`
 	}
 `;
 
-const Accordion: FC<AccordionProps> = ({
-	children,
-	accordionTitle,
-	context,
-}) => {
+const Accordion = ({ children, accordionTitle, context }: AccordionProps) => {
 	return (
 		<details open css={detailsStyles}>
 			<summary css={titleRowStyles}>

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source/foundations';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';
@@ -78,6 +78,7 @@ export const ContainerStory = () => {
 			title="Default Container"
 			showTopBorder={false}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -87,7 +88,11 @@ ContainerStory.storyName = 'default container';
 
 export const NoTitleStory = () => {
 	return (
-		<FrontSection showTopBorder={false} discussionApiUrl={discussionApiUrl}>
+		<FrontSection
+			showTopBorder={false}
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+		>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -96,7 +101,11 @@ NoTitleStory.storyName = 'with no title';
 
 export const TopBorderStory = () => {
 	return (
-		<FrontSection title="Borders" discussionApiUrl={discussionApiUrl}>
+		<FrontSection
+			title="Borders"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+		>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -111,6 +120,7 @@ export const LeftContentStory = () => {
 				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
 			}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -126,6 +136,7 @@ export const LeftContentOpinionStory = () => {
 				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
 			}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -142,6 +153,7 @@ export const ToggleableStory = () => {
 			sectionId="section-id"
 			showTopBorder={false}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -156,24 +168,32 @@ export const MultipleStory = () => {
 				title="Page Title"
 				showTopBorder={false}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			/>
-			<FrontSection title="Headlines" discussionApiUrl={discussionApiUrl}>
+			<FrontSection
+				title="Headlines"
+				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
+			>
 				<Placeholder />
 			</FrontSection>
 			<FrontSection
 				title="Useful links"
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			/>
 			<FrontSection
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</FrontSection>
 			<FrontSection
 				showTopBorder={false}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<h2>Insert call to action here</h2>
 			</FrontSection>
@@ -181,6 +201,7 @@ export const MultipleStory = () => {
 				title="Videos"
 				showTopBorder={false}
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -188,6 +209,7 @@ export const MultipleStory = () => {
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
 				discussionApiUrl={discussionApiUrl}
+				editionId={'UK'}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -233,7 +255,7 @@ export const TreatsStory = () => {
 			]}
 			showTopBorder={false}
 			showDateHeader={true}
-			editionId="UK"
+			editionId={'UK'}
 			discussionApiUrl={discussionApiUrl}
 		>
 			<Placeholder />
@@ -243,7 +265,7 @@ export const TreatsStory = () => {
 TreatsStory.storyName = 'with treats and date header';
 
 /**
- * Use the same logo for each of the stories with branding
+ * Use the same logo for each of the stories with branding except stories for Advertising partner and Exclusive advertising partner labels
  */
 const logo = {
 	src: 'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
@@ -255,11 +277,22 @@ const logo = {
 	label: 'Paid for by',
 };
 
+const logoForAdvertisingPartner = {
+	src: 'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
+	dimensions: {
+		width: 140,
+		height: 90,
+	},
+	link: '/',
+	label: 'Advertising partner',
+};
+
 export const WithSponsoredBranding = () => {
 	return (
 		<FrontSection
 			title="Section"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 			collectionBranding={{
 				kind: 'sponsored',
 				isFrontBranding: false,
@@ -272,7 +305,7 @@ export const WithSponsoredBranding = () => {
 					aboutThisLink:
 						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
 				},
-				isContainerBranding: false,
+				isContainerBranding: true,
 				hasMultipleBranding: false,
 			}}
 		>
@@ -282,11 +315,73 @@ export const WithSponsoredBranding = () => {
 };
 WithSponsoredBranding.storyName = 'with sponsored branding';
 
+export const WithSponsoredBrandingAdvertisingPartner = () => {
+	return (
+		<FrontSection
+			title="Section"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+			collectionBranding={{
+				kind: 'sponsored',
+				isFrontBranding: true,
+				branding: {
+					brandingType: {
+						name: 'sponsored',
+					},
+					sponsorName: 'guardian.org',
+					logo: logoForAdvertisingPartner,
+					aboutThisLink:
+						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+				},
+				isContainerBranding: false,
+				hasMultipleBranding: false,
+			}}
+			updateLogoAdPartnerSwitch={true}
+		>
+			<Placeholder />
+		</FrontSection>
+	);
+};
+WithSponsoredBrandingAdvertisingPartner.storyName =
+	'with sponsored branding for Advertising partner';
+
+export const WithSponsoredBrandingAdvertisingPartnerTagPages = () => {
+	return (
+		<FrontSection
+			title="Section"
+			isTagPage={true}
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+			collectionBranding={{
+				kind: 'sponsored',
+				isFrontBranding: true,
+				branding: {
+					brandingType: {
+						name: 'sponsored',
+					},
+					sponsorName: 'guardian.org',
+					logo: logoForAdvertisingPartner,
+					aboutThisLink:
+						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
+				},
+				isContainerBranding: false,
+				hasMultipleBranding: false,
+			}}
+			updateLogoAdPartnerSwitch={true}
+		>
+			<Placeholder />
+		</FrontSection>
+	);
+};
+WithSponsoredBrandingAdvertisingPartnerTagPages.storyName =
+	'with sponsored branding for Advertising partner TagPages';
+
 export const WithPaidBranding = () => {
 	return (
 		<FrontSection
 			title="Section"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 			collectionBranding={{
 				kind: 'paid-content',
 				isFrontBranding: false,
@@ -299,7 +394,7 @@ export const WithPaidBranding = () => {
 					aboutThisLink:
 						'https://www.theguardian.com/global-development/2021/feb/21/about-the-rights-and-freedom-series',
 				},
-				isContainerBranding: false,
+				isContainerBranding: true,
 				hasMultipleBranding: false,
 			}}
 		>
@@ -314,6 +409,7 @@ export const WithPaidContentForWholeFront = () => {
 		<FrontSection
 			title="First Section"
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 			collectionBranding={{
 				kind: 'paid-content',
 				isFrontBranding: true,
@@ -342,6 +438,7 @@ export const PageSkinStory = () => {
 			title="Page Skin"
 			hasPageSkin={true}
 			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
 		>
 			<Placeholder text="Page skins constrain my layout to desktop" />
 		</FrontSection>

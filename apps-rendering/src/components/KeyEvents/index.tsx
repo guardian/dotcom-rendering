@@ -13,12 +13,12 @@ import {
 	opinion,
 	remSpace,
 	sport,
-	textSans,
-} from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+	textSans15,
+	textSansBold14,
+} from '@guardian/source/foundations';
+import { Link } from '@guardian/source/react-components';
 import Accordion from 'components/Accordion';
 import { background, text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -145,7 +145,7 @@ const timeTextWrapperStyles: SerializedStyles = css`
 `;
 
 const textStyles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
+	${textSans15};
 	color: ${text.keyEventsInline(format)};
 	display: block;
 	text-decoration: none;
@@ -174,7 +174,13 @@ const textStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const timeStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${textSansBold14};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 	color: ${neutral[7]};
 	display: block;
 	transform: translateY(-4px);
@@ -184,7 +190,7 @@ const timeStyles = css`
 	`}
 `;
 
-const ListItem: FC<ListItemProps> = ({ keyEvent, format }) => {
+const ListItem = ({ keyEvent, format }: ListItemProps) => {
 	return (
 		<li css={listItemStyles}>
 			<Link priority="secondary" css={linkStyles} href={keyEvent.url}>
@@ -212,7 +218,7 @@ const ListItem: FC<ListItemProps> = ({ keyEvent, format }) => {
 	);
 };
 
-const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, format }) => {
+const KeyEvents = ({ keyEvents, format }: KeyEventsProps) => {
 	return (
 		<nav
 			// https://github.com/guardian/dotcom-rendering/pull/3693

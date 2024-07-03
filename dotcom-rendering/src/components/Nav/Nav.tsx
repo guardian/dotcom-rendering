@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import type { Pillar } from '@guardian/libs';
-import { until, visuallyHidden } from '@guardian/source-foundations';
+import { until, visuallyHidden } from '@guardian/source/foundations';
 import type { EditionId } from '../../lib/edition';
 import { clearFix } from '../../lib/mixins';
 import type { NavType } from '../../model/extract-nav';
@@ -18,7 +18,6 @@ type Props = {
 	displayRoundel?: boolean;
 	isImmersive?: boolean;
 	selectedPillar?: Pillar;
-	headerTopBarSwitch: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -61,7 +60,6 @@ export const Nav = ({
 	displayRoundel,
 	isImmersive,
 	selectedPillar,
-	headerTopBarSwitch,
 	hasPageSkin,
 }: Props) => {
 	return (
@@ -215,7 +213,6 @@ export const Nav = ({
 					editionId={editionId}
 					nav={nav}
 					isImmersive={isImmersive}
-					headerTopBarSwitch={headerTopBarSwitch}
 					hasPageSkin={hasPageSkin}
 				/>
 			</div>

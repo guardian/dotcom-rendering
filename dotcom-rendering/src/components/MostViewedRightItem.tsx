@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	headline,
+	headlineMedium17,
 	palette as sourcePalette,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { useHover } from '../lib/useHover';
 import { palette as themePalette } from '../palette';
 import type { TrailType } from '../types/trails';
@@ -35,7 +35,7 @@ const listItemStyles = css`
 const linkTagStyles = css`
 	text-decoration: none;
 	font-weight: 500;
-	${headline.xxxsmall()};
+	${headlineMedium17};
 
 	&:link,
 	&:active {
@@ -104,6 +104,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 									size="small"
 									showUnderline={isHovered}
 									kickerText="Live"
+									showPulsingDot={true}
 									hideLineBreak={true}
 									byline={
 										trail.showByline

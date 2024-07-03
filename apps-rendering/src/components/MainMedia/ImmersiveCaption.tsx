@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace, textSans } from '@guardian/source-foundations';
+import { from, remSpace, textSans14 } from '@guardian/source/foundations';
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import Caption from 'components/caption';
@@ -13,14 +13,13 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import { text } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { immersiveCaptionId } from './MainMedia.defaults';
 
 // ----- Component ----- //
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xsmall()}
+	${textSans14};
 	color: ${text.figCaption(format)};
 	${grid.column.centre}
 
@@ -40,7 +39,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const ImmersiveCaption: FC<Props> = ({ mainMedia, format }) =>
+const ImmersiveCaption = ({ mainMedia, format }: Props) =>
 	maybeRender(mainMedia, (media) => {
 		if (
 			media.kind === MainMediaKind.Video ||

@@ -4,10 +4,9 @@ import {
 	neutral,
 	remSpace,
 	text,
-	textSans,
-} from '@guardian/source-foundations';
+	textSans17,
+} from '@guardian/source/foundations';
 import type { Logo as LogoImage } from 'capi';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -17,7 +16,7 @@ interface Props {
 const styles = css`
 	display: flex;
 	justify-content: space-between;
-	${textSans.medium()}
+	${textSans17};
 	color: ${text.supporting};
 
 	a {
@@ -37,7 +36,7 @@ const styles = css`
     `}
 `;
 
-const LabsLogo: FC<Props> = ({ logo }: Props) => (
+const LabsLogo = ({ logo }: Props) => (
 	<section css={styles}>
 		<span>Paid for by</span>
 		<span>

@@ -1,12 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace } from '@guardian/source-foundations';
+import { headlineBold17, remSpace } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { background, border, text } from 'palette';
-import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -21,7 +20,7 @@ const darkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
 `;
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${headlineBold17};
 	padding: 0;
 	margin-bottom: ${remSpace[3]};
 	color: ${text.standfirst(format)};
@@ -53,7 +52,7 @@ interface Props {
 	className?: string;
 }
 
-const DefaultStandfirst: FC<Props> = ({ item, className }) =>
+const DefaultStandfirst = ({ item, className }: Props) =>
 	maybeRender(item.standfirst.toOption(), (standfirst) => (
 		<div className={className}>
 			{renderStandfirstText(standfirst, getFormat(item))}

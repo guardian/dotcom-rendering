@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
-import { space, textSans } from '@guardian/source-foundations';
+import { space, textSans15 } from '@guardian/source/foundations';
 import {
 	SvgCheckmark,
 	SvgNotificationsOff,
 	SvgNotificationsOn,
 	SvgPlus,
-} from '@guardian/source-react-components';
+} from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 type IconProps = {
@@ -47,7 +47,7 @@ const FollowIcon = ({
 );
 
 const buttonStyles = (withExtraBottomMargin: boolean) => css`
-	${textSans.small()}
+	${textSans15}
 	color: ${palette('--follow-text')};
 	background: none;
 	border: none;

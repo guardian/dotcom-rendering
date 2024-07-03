@@ -3,10 +3,10 @@ import {
 	brandText,
 	from,
 	palette as sourcePalette,
-	textSans,
+	textSans17,
 	until,
 	visuallyHidden,
-} from '@guardian/source-foundations';
+} from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type {
 	EditionLinkType,
@@ -38,7 +38,13 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans.medium({ lineHeight: 'tight' })};
+	${textSans17};
+	/**
+	 * Typography preset styles should not be overridden.
+	 * This has been done because the styles do not directly map to the new presets.
+	 * Please speak to your team's designer and update this to use a more appropriate preset.
+	 */
+	line-height: 1.15;
 	background-color: transparent;
 	text-decoration: none;
 	border: 0;
@@ -84,7 +90,7 @@ export const mainMenuLinkStyle = css`
 `;
 
 export const columnLinks = css`
-	${textSans.medium()};
+	${textSans17};
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
@@ -157,7 +163,7 @@ export const lineStyle = css`
 `;
 
 const columnStyle = css`
-	${textSans.medium()};
+	${textSans17};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */

@@ -15,6 +15,7 @@ type Props = {
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 	discussionApiUrl: string;
+	absoluteServerTimes: boolean;
 };
 
 type OnwardsResponse = {
@@ -34,6 +35,7 @@ export const FetchOnwardsData = ({
 	onwardsSource,
 	format,
 	discussionApiUrl,
+	absoluteServerTimes,
 }: Props) => {
 	const { data, error } = useApi<OnwardsResponse>(url);
 
@@ -55,7 +57,7 @@ export const FetchOnwardsData = ({
 			<Placeholder
 				height={340} // best guess at typical height
 				shouldShimmer={false}
-				backgroundColor={palette('--article-background')}
+				backgroundColor={palette('--onward-placeholder-background')}
 			/>
 		);
 	}
@@ -81,6 +83,7 @@ export const FetchOnwardsData = ({
 						: 'compact'
 				}
 				discussionApiUrl={discussionApiUrl}
+				absoluteServerTimes={absoluteServerTimes}
 			/>
 		</div>
 	);

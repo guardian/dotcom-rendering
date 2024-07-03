@@ -4,8 +4,8 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-} from '@guardian/source-foundations';
-import { SvgCross } from '@guardian/source-react-components';
+} from '@guardian/source/foundations';
+import { SvgCross } from '@guardian/source/react-components';
 import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
@@ -216,8 +216,9 @@ export const YoutubeAtomSticky = ({
 	 */
 	useEffect(() => {
 		// Sticky-ness should take precedence over pausing
-		if (!shouldStick && shouldPauseOutOfView)
+		if (!shouldStick && shouldPauseOutOfView) {
 			setPauseVideo(isActive && !isIntersecting && !isClosed);
+		}
 	}, [
 		isIntersecting,
 		shouldStick,

@@ -4,11 +4,10 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
-} from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+} from '@guardian/source/foundations';
+import { Hide } from '@guardian/source/react-components';
+import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AffiliateDisclaimer } from '../components/AffiliateDisclaimer';
@@ -36,9 +35,10 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -62,9 +62,11 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 const StandardGrid = ({
 	children,
 	isMatchReport,
+	isMedia,
 }: {
 	children: React.ReactNode;
 	isMatchReport: boolean;
+	isMedia: boolean;
 }) => (
 	<div
 		css={css`
@@ -97,32 +99,44 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 300px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 
 					${isMatchReport
 						? css`
 								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  matchNav   . right-column'
+									'title  border  matchtabs  . right-column'
+									'.      border  headline   . right-column'
+									'.      border  standfirst . right-column'
+									'lines  border  media      . right-column'
+									'meta   border  media      . right-column'
+									'meta   border  body       . right-column'
+									'.      border  .          . right-column';
+						  `
+						: isMedia
+						? css`
+								grid-template-areas:
+									'title  border  headline   headline   .'
+									'.      border  disclaimer disclaimer right-column'
+									'lines  border  media      media      right-column'
+									'meta   border  media      media      right-column'
+									'meta   border  standfirst standfirst right-column'
+									'.      border  body       body       right-column'
+									'.      border  .          .          right-column';
 						  `
 						: css`
 								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
+									'title  border  headline   . right-column'
+									'.      border  standfirst . right-column'
+									'lines  border  media      . right-column'
+									'meta   border  media      . right-column'
+									'meta   border  body       . right-column'
+									'.      border  .          . right-column';
 						  `}
 				}
+			}
 
-				/*
+			/*
 					Explanation of each unit of grid-template-columns
 
 					Left Column
@@ -130,122 +144,173 @@ const StandardGrid = ({
 					Main content
 					Right Column
 				*/
-				${until.wide} {
-					grid-template-columns: 140px 1px 1fr 300px;
+			${until.wide} {
+				grid-template-columns: 140px 1px 620px 300px;
 
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
-				}
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'title  border  matchNav     right-column'
+								'title  border  matchtabs    right-column'
+								'.      border  headline     right-column'
+								'.      border  standfirst   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  body         right-column'
+								'.      border  .            right-column';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title  border  headline     .'
+								'.      border  disclaimer   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  standfirst   right-column'
+								'.      border  body         right-column'
+								'.      border  .            right-column';
+					  `
+					: css`
+							grid-template-areas:
+								'title  border  headline     right-column'
+								'.      border  standfirst   right-column'
+								'.      border  disclaimer   right-column'
+								'lines  border  media        right-column'
+								'meta   border  media        right-column'
+								'meta   border  body         right-column'
+								'.      border  .            right-column';
+					  `}
+			}
 
-				/*
+			/*
 					Explanation of each unit of grid-template-columns
 
 					Main content
 					Right Column
 				*/
-				${until.leftCol} {
-					grid-template-columns: 1fr 300px;
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav      right-column'
-									'matchtabs	   right-column'
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `}
-				}
+			${until.leftCol} {
+				grid-template-columns: 620px 300px;
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav      right-column'
+								'matchtabs	   right-column'
+								'title         right-column'
+								'headline      right-column'
+								'standfirst    right-column'
+								'media         right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title         .'
+								'headline      .'
+								'disclaimer    right-column'
+								'media         right-column'
+								'standfirst    right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `
+					: css`
+							grid-template-areas:
+								'title         right-column'
+								'headline      right-column'
+								'standfirst    right-column'
+								'disclaimer    right-column'
+								'media         right-column'
+								'lines         right-column'
+								'meta          right-column'
+								'body          right-column'
+								'.             right-column';
+					  `}
+			}
 
-				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'matchtabs'
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `}
-				}
+			${until.desktop} {
+				grid-template-columns: 100%; /* Main content */
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav'
+								'matchtabs'
+								'title'
+								'headline'
+								'standfirst'
+								'media'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title'
+								'headline'
+								'disclaimer'
+								'media'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: css`
+							grid-template-areas:
+								'title'
+								'headline'
+								'standfirst'
+								'disclaimer'
+								'media'
+								'lines'
+								'meta'
+								'body';
+					  `}
+			}
 
-				${until.tablet} {
-					grid-column-gap: 0px;
+			${until.tablet} {
+				grid-column-gap: 0px;
 
-					grid-template-columns: 100%; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'matchtabs'
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `}
-				}
+				grid-template-columns: 100%; /* Main content */
+				${isMatchReport
+					? css`
+							grid-template-areas:
+								'matchNav'
+								'matchtabs'
+								'media'
+								'title'
+								'headline'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: isMedia
+					? css`
+							grid-template-areas:
+								'title'
+								'headline'
+								'disclaimer'
+								'media'
+								'standfirst'
+								'lines'
+								'meta'
+								'body';
+					  `
+					: css`
+							grid-template-areas:
+								'media'
+								'title'
+								'headline'
+								'standfirst'
+								'disclaimer'
+								'lines'
+								'meta'
+								'body';
+					  `}
 			}
 		`}
 	>
@@ -271,7 +336,6 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-top: ${space[4]}px;
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
@@ -305,6 +369,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
+		editionId,
 	} = article;
 
 	const isWeb = renderingTarget === 'Web';
@@ -314,6 +379,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		isWeb &&
 		(parse(article.slotMachineFlags ?? '').showBodyEnd ||
 			article.config.switches.slotBodyEnd);
+
+	const { absoluteServerTimes = false } = article.config.switches;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -327,6 +394,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
+	const isMedia =
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Audio;
+
 	const showComments = article.isCommentable && !isPaidContent;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -336,6 +407,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = isWeb && canRenderAds(article);
+
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
+	const inTagLinkTest =
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	return (
 		<>
@@ -350,119 +429,153 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot />
+								<HeaderAdSlot
+									isPaidContent={
+										!!article.config.isPaidContent
+									}
+									shouldHideReaderRevenue={
+										!!article.config.shouldHideReaderRevenue
+									}
+								/>
 							</Section>
 						</Stuck>
 					)}
-					{!isLabs && (
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="header"
-						>
-							<Header
-								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
-								}
-							/>
-						</Section>
-					)}
-					<Section
-						fullWidth={true}
-						borderColour={sourcePalette.brand[600]}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={sourcePalette.brand[400]}
-						element="nav"
-					>
-						<Nav
+					{inUpdatedHeaderABTest ? (
+						<Masthead
 							nav={props.NAV}
-							isImmersive={
-								format.display === ArticleDisplay.Immersive
-							}
-							displayRoundel={
-								format.display === ArticleDisplay.Immersive ||
-								format.theme === ArticleSpecial.Labs
-							}
-							selectedPillar={props.NAV.selectedPillar}
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							discussionApiUrl={article.config.discussionApiUrl}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
-							editionId={article.editionId}
-							headerTopBarSwitch={
-								!!article.config.switches.headerTopNav
-							}
+							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
+							showSubNav={!isPaidContent}
+							hasPageSkinContentSelfConstrain={true}
 						/>
-					</Section>
-					{props.NAV.subNavSections && !isLabs && (
+					) : (
 						<>
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								padSides={false}
-								element="aside"
-							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
+							{!isLabs && (
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									shouldCenter={false}
+									backgroundColour={sourcePalette.brand[400]}
+									element="header"
 								>
-									<SubNav
-										subNavSections={
-											props.NAV.subNavSections
+									<Header
+										editionId={article.editionId}
+										idUrl={article.config.idUrl}
+										mmaUrl={article.config.mmaUrl}
+										discussionApiUrl={
+											article.config.discussionApiUrl
 										}
-										currentNavLink={
-											props.NAV.currentNavLink
+										urls={
+											article.nav.readerRevenueLinks
+												.header
 										}
-										linkHoverColour={themePalette(
-											'--article-link-text-hover',
-										)}
-										borderColour={themePalette(
-											'--sub-nav-border',
-										)}
+										remoteHeader={
+											!!article.config.switches
+												.remoteHeader
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										idApiUrl={article.config.idApiUrl}
+										headerTopBarSearchCapiSwitch={
+											!!article.config.switches
+												.headerTopBarSearchCapi
+										}
 									/>
-								</Island>
-							</Section>
+								</Section>
+							)}
 							<Section
 								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								padSides={false}
+								borderColour={sourcePalette.brand[600]}
 								showTopBorder={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="nav"
 							>
-								<StraightLines
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--article-border')}
+								<Nav
+									nav={props.NAV}
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={props.NAV.selectedPillar}
+									subscribeUrl={
+										article.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									editionId={article.editionId}
 								/>
 							</Section>
+							{props.NAV.subNavSections && !isLabs && (
+								<>
+									<Section
+										fullWidth={true}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										borderColour={themePalette(
+											'--article-border',
+										)}
+										padSides={false}
+										element="aside"
+									>
+										<Island
+											priority="enhancement"
+											defer={{ until: 'idle' }}
+										>
+											<SubNav
+												subNavSections={
+													props.NAV.subNavSections
+												}
+												currentNavLink={
+													props.NAV.currentNavLink
+												}
+												position="header"
+											/>
+										</Island>
+									</Section>
+									<Section
+										fullWidth={true}
+										backgroundColour={themePalette(
+											'--article-background',
+										)}
+										borderColour={themePalette(
+											'--article-border',
+										)}
+										padSides={false}
+										showTopBorder={false}
+									>
+										<StraightLines
+											count={4}
+											cssOverrides={css`
+												display: block;
+											`}
+											color={themePalette(
+												'--article-border',
+											)}
+										/>
+									</Section>
+								</>
+							)}
 						</>
 					)}
 				</div>
 			)}
+
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
 					<Section
@@ -473,7 +586,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader />
+						<LabsHeader editionId={editionId} />
 					</Section>
 				</Stuck>
 			)}
@@ -482,7 +595,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main
+				data-layout="StandardLayout"
+				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+			>
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -502,9 +618,15 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
 					fontColour={themePalette('--article-section-title')}
+					innerBackgroundColour={themePalette(
+						'--article-inner-background',
+					)}
 					element="article"
 				>
-					<StandardGrid isMatchReport={isMatchReport}>
+					<StandardGrid
+						isMatchReport={isMatchReport}
+						isMedia={isMedia}
+					>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
@@ -541,7 +663,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="media">
-							<div css={maxWidth}>
+							<div css={!isMedia && maxWidth}>
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
@@ -554,6 +676,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									isAdFreeUser={article.isAdFreeUser}
 									isSensitive={article.config.isSensitive}
 									editionId={article.editionId}
+									hideCaption={isMedia}
 								/>
 							</div>
 						</GridItem>
@@ -565,6 +688,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 								isMatch={!!footballMatchUrl}
+								inTagLinkTest={inTagLinkTest}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -583,9 +707,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									byline={article.byline}
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										typeof article.starRating === 'number'
 									}
 								/>
 							</div>
@@ -610,7 +731,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									{isWeb &&
-									format.theme === ArticleSpecial.Labs ? (
+									format.theme === ArticleSpecial.Labs &&
+									format.design !== ArticleDesign.Video ? (
 										<GuardianLabsLines />
 									) : (
 										<DecideLines
@@ -632,7 +754,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												branding={branding}
 												format={format}
 												pageId={article.pageId}
-												webTitle={article.webTitle}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -651,7 +772,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											></ArticleMetaApps>
 										</div>
 									</Hide>
@@ -663,6 +783,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												pageId={article.pageId}
 												webTitle={article.webTitle}
 												byline={article.byline}
+												source={article.config.source}
 												tags={article.tags}
 												primaryDateline={
 													article.webPublicationDateDisplay
@@ -680,7 +801,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												shortUrlId={
 													article.config.shortUrlId
 												}
-												ajaxUrl={article.config.ajaxUrl}
 											/>
 										</div>
 									</Hide>
@@ -693,6 +813,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										pageId={article.pageId}
 										webTitle={article.webTitle}
 										byline={article.byline}
+										source={article.config.source}
 										tags={article.tags}
 										primaryDateline={
 											article.webPublicationDateDisplay
@@ -705,7 +826,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										ajaxUrl={article.config.ajaxUrl}
 									/>
 									{!!article.affiliateLinksDisclaimer && (
 										<AffiliateDisclaimer />
@@ -786,9 +906,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											isPaidContent={
 												article.pageType.isPaidContent
 											}
-											keywordIds={
-												article.config.keywordIds
-											}
 											pageId={article.pageId}
 											sectionId={article.config.section}
 											shouldHideReaderRevenue={
@@ -834,12 +951,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="right-column">
 							<div
 								css={css`
-									padding-top: 6px;
+									padding-top: ${isMedia ? 0 : 6}px;
 									height: 100%;
 									${from.desktop} {
 										/* above 980 */
 										margin-left: 20px;
 										margin-right: -20px;
+										padding-bottom: ${isMedia ? 41 : 0}px;
 									}
 									${from.leftCol} {
 										/* above 1140 */
@@ -849,13 +967,28 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								`}
 							>
 								<RightColumn>
-									<MostViewedRightWithAd
-										display={format.display}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={renderAds}
-									/>
+									<Island
+										priority="feature"
+										defer={{
+											until: 'visible',
+											// Provide a much higher value for the top margin for the intersection observer
+											// This is because the most viewed would otherwise only be lazy loaded when the
+											// bottom of the container intersects with the viewport
+											rootMargin: '700px 100px',
+										}}
+									>
+										<MostViewedRightWithAd
+											format={format}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											renderAds={renderAds}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
 								</RightColumn>
 							</div>
 						</GridItem>
@@ -901,6 +1034,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
+								absoluteServerTimes={absoluteServerTimes}
 							/>
 						</Island>
 					</Section>
@@ -923,6 +1057,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						editionId={article.editionId}
 						shortUrlId={article.config.shortUrlId}
 						discussionApiUrl={article.config.discussionApiUrl}
+						absoluteServerTimes={absoluteServerTimes}
 					/>
 				</Island>
 				{showComments && (
@@ -977,7 +1112,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							>
 								<MostViewedFooterData
 									sectionId={article.config.section}
-									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
 								/>
@@ -1019,12 +1153,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
-									linkHoverColour={themePalette(
-										'--article-link-text-hover',
-									)}
-									borderColour={themePalette(
-										'--sub-nav-border',
-									)}
+									position="footer"
 								/>
 							</Island>
 						</Section>
@@ -1063,7 +1192,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								isPaidContent={article.pageType.isPaidContent}
 								isPreview={!!article.config.isPreview}
 								isSensitive={article.config.isSensitive}
-								keywordIds={article.config.keywordIds}
 								pageId={article.pageId}
 								sectionId={article.config.section}
 								shouldHideReaderRevenue={

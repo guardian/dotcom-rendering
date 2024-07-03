@@ -119,8 +119,9 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 	}
 };
 
-test.describe('YouTube Atom', () => {
-	test('plays main media video', async ({ page }) => {
+test.describe.skip('YouTube Atom', () => {
+	// Skipping because the video in this article has stopped working. Investigation needed!
+	test.skip('plays main media video: skipped', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
@@ -171,7 +172,58 @@ test.describe('YouTube Atom', () => {
 		await expectToNotExist(page, overlaySelector);
 	});
 
-	test('plays in body video', async ({ page }) => {
+	test.skip('plays main media video', async ({ page }) => {
+		await fetchAndloadPageWithOverrides(
+			page,
+			'https://www.theguardian.com/us-news/article/2024/may/30/trump-trial-hush-money-verdict',
+			{ switchOverrides: { youtubeIma: false } },
+		);
+		await cmpAcceptAll(page);
+
+		await waitForIsland(page, 'YoutubeBlockComponent');
+
+		// Make sure overlay is displayed
+		const videoId = 'LETgTLSzWgA';
+		const overlaySelector = `[data-testid^="youtube-overlay-${videoId}"]`;
+		await expectToBeVisible(page, overlaySelector);
+
+		// YouTube has not initialised
+		const hasYouTubeIframeApi = await page.evaluate(() => {
+			return !!window.onYouTubeIframeAPIReady;
+		});
+		expect(hasYouTubeIframeApi).toBeFalsy();
+
+		// Listen for the ophan call made when the video is played
+		const ophanPlayEventPromise = interceptOphanPlayEvent({
+			page,
+			id: 'gu-video-youtube-0e4c56e6-966c-4fa4-aec2-0755d607e3f1',
+		});
+
+		// Listen for the YouTube embed call made when the video is played
+		const youTubeEmbedPromise = interceptYouTubeEmbed({
+			page,
+			videoId,
+			adUnit: '/59666047/theguardian.com/us-news/article/ng',
+			pageUrl:
+				'/us-news/article/2024/may/30/trump-trial-hush-money-verdict',
+			rejectAll: false,
+		});
+
+		// Play video
+		await page.locator(overlaySelector).click();
+
+		// Mute video
+		await muteYouTube(page, `iframe[id^="youtube-player-${videoId}"]`);
+
+		await ophanPlayEventPromise;
+
+		await youTubeEmbedPromise;
+
+		// Video is playing, overlay is gone
+		await expectToNotExist(page, overlaySelector);
+	});
+
+	test.skip('plays in body video', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
@@ -329,7 +381,9 @@ test.describe('YouTube Atom', () => {
 		await youTubeEmbedPromise2;
 	});
 
-	test('plays the video if the reader rejects consent', async ({ page }) => {
+	test.skip('plays the video if the reader rejects consent', async ({
+		page,
+	}) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',

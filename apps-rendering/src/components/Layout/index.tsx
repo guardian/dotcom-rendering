@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source/foundations';
 import CommentLayout from 'components/Layout/CommentLayout';
 import GalleryLayout from 'components/Layout/GalleryLayout';
 import InteractiveLayout from 'components/Layout/InteractiveLayout';
@@ -10,7 +10,6 @@ import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
 import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
-import type { FC } from 'react';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import LetterLayout from './LetterLayout';
@@ -32,7 +31,7 @@ const notImplemented = (
 	</p>
 );
 
-const Layout: FC<Props> = ({ item }) => {
+const Layout = ({ item }: Props) => {
 	if (
 		item.design === ArticleDesign.LiveBlog ||
 		item.design === ArticleDesign.DeadBlog
