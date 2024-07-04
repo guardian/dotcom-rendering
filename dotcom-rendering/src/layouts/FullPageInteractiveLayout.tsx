@@ -15,7 +15,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -215,15 +215,14 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					editionId={article.editionId}
 					idUrl={article.config.idUrl}
 					mmaUrl={article.config.mmaUrl}
-					subscribeUrl={
-						article.nav.readerRevenueLinks.header.subscribe
-					}
+					// subscribeUrl={
+					// 	article.nav.readerRevenueLinks.header.subscribe
+					// }
 					discussionApiUrl={article.config.discussionApiUrl}
 					idApiUrl={article.config.idApiUrl}
 					contributionsServiceUrl={article.contributionsServiceUrl}
 					showSubNav={false}
 					isImmersive={false}
-					displayRoundel={false}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 				/>

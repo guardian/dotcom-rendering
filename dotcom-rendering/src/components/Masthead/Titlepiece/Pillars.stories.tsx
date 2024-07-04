@@ -4,7 +4,7 @@ import { palette as sourcePalette } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { nav } from '../../Nav/Nav.mock';
-import { TitlepiecePillars } from './TitlepiecePillars';
+import { Pillars } from './Pillars';
 
 const wrapperStyles = css`
 	padding: 20px;
@@ -15,7 +15,6 @@ const meta = {
 	title: 'Components/Masthead/Titlepiece/Pillars',
 	args: {
 		nav,
-		editionId: 'UK',
 		selectedPillar: nav.pillars[0]?.pillar as Pillar,
 		dataLinkName: nestedOphanComponents('header', 'titlepiece', 'nav'),
 		isImmersive: false,
@@ -24,10 +23,10 @@ const meta = {
 	},
 	render: (args) => (
 		<div css={wrapperStyles}>
-			<TitlepiecePillars {...args} />
+			<Pillars {...args} />
 		</div>
 	),
-} satisfies Meta<typeof TitlepiecePillars>;
+} satisfies Meta<typeof Pillars>;
 
 export default meta;
 

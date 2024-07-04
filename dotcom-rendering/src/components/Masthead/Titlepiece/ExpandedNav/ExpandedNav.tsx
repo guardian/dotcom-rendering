@@ -105,7 +105,7 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
-export const TitlepieceExpandedNav = ({
+export const ExpandedNav = ({
 	isImmersive,
 	nav,
 	editionId,

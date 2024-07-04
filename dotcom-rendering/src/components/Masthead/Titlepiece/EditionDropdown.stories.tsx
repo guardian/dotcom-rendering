@@ -1,4 +1,4 @@
-import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
+import { TitlepieceEditionDropdown } from './EditionDropdown';
 
 export default {
 	component: TitlepieceEditionDropdown,

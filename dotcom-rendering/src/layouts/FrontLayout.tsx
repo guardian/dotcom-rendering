@@ -26,7 +26,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -229,9 +229,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
 							discussionApiUrl={front.config.discussionApiUrl}
-							subscribeUrl={
-								front.nav.readerRevenueLinks.header.subscribe
-							}
+							// subscribeUrl={
+							// 	front.nav.readerRevenueLinks.header.subscribe
+							// }
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={front.config.idApiUrl}
 							showSubNav={!isPaidContent}
