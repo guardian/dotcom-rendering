@@ -1045,7 +1045,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer article={article} />
+					<MobileStickyContainer
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 			{isApps && (

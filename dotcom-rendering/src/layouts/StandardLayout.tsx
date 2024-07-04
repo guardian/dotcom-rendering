@@ -1206,10 +1206,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</BannerWrapper>
 					<MobileStickyContainer
 						data-print-layout="hide"
-						isValidPageForMobileSticky={
-							article.contentType === 'Article' ||
-							article.pageId.startsWith('football/')
-						}
+						contentType={article.contentType}
+						pageId={article.pageId}
 					/>
 				</>
 			)}

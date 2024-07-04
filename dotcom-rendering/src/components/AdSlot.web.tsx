@@ -67,10 +67,6 @@ type RemainingProps = {
  */
 type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
-type MobileStickyContainerProps = {
-	article: FEArticleType;
-};
-
 const labelHeight = constants.AD_LABEL_HEIGHT;
 
 const individualLabelCSS = css`
@@ -924,8 +920,12 @@ export const AdSlot = ({
 	}
 };
 
-export const MobileStickyContainer = (article: MobileStickyContainerProps) => {
-	const { contentType, pageId } = article.article;
+type MobileStickyContainerProps = Pick<FEArticleType, 'contentType' | 'pageId'>;
+
+export const MobileStickyContainer = ({
+	contentType,
+	pageId,
+}: MobileStickyContainerProps) => {
 	return (
 		<div
 			className="mobilesticky-container"

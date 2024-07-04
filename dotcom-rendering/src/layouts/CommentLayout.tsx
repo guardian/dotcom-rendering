@@ -1026,10 +1026,8 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						</Island>
 					</BannerWrapper>
 					<MobileStickyContainer
-						isValidPageForMobileSticky={
-							article.contentType === 'Article' ||
-							article.pageId.startsWith('football/')
-						}
+						contentType={article.contentType}
+						pageId={article.pageId}
 					/>
 				</>
 			)}

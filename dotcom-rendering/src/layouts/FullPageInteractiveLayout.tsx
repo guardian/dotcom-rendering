@@ -443,10 +443,8 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				</Island>
 			</BannerWrapper>
 			<MobileStickyContainer
-				isValidPageForMobileSticky={
-					article.contentType === 'Article' ||
-					article.pageId.startsWith('football/')
-				}
+				contentType={article.contentType}
+				pageId={article.pageId}
 			/>
 		</>
 	);
