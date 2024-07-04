@@ -2369,7 +2369,9 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 
 const cardBorderTopLight: PaletteFunction = () => sourcePalette.neutral[73];
 
-const cardBorderTopDark: PaletteFunction = () => sourcePalette.neutral[20];
+const cardBorderTopDark: PaletteFunction = (format): string => {
+	return cardBorderTopLight(format);
+};
 
 const cardBorderSupportingLight: PaletteFunction = (format) => {
 	switch (format.design) {

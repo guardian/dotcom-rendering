@@ -30,6 +30,7 @@ import {
 } from '@guardian/source/react-components';
 import { useId } from 'react';
 import type { EditionId } from '../lib/edition';
+import { palette as schemePalette } from '../palette';
 import { WeatherSlot } from './WeatherSlot';
 import type { WeatherApiData, WeatherData } from './WeatherWrapper.importable';
 
@@ -39,7 +40,7 @@ const visuallyHiddenCSS = css`
 
 const weatherCSS = css`
 	animation: ${keyframes`from {	opacity: 0;	} to {	opacity: 1;	}`} 250ms;
-	--border: 1px solid ${palette.neutral[86]};
+	--border: 1px solid ${schemePalette('--article-border')};
 	width: 100%;
 	display: flex;
 	flex-direction: row;
