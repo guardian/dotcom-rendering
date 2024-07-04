@@ -1045,12 +1045,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer
-						isValidPageForMobileSticky={
-							article.contentType === 'Article' ||
-							article.pageId.startsWith('football/')
-						}
-					/>
+					<MobileStickyContainer article={article} />
 				</>
 			)}
 			{isApps && (

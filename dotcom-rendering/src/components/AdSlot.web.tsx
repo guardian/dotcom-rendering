@@ -14,6 +14,7 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import type { FEArticleType } from '../types/frontend';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { Island } from './Island';
 
@@ -67,7 +68,7 @@ type RemainingProps = {
 type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
 type MobileStickyContainerProps = {
-	isValidPageForMobileSticky: boolean;
+	article: FEArticleType;
 };
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
@@ -923,15 +924,15 @@ export const AdSlot = ({
 	}
 };
 
-export const MobileStickyContainer = ({
-	isValidPageForMobileSticky,
-}: MobileStickyContainerProps) => {
+export const MobileStickyContainer = (article: MobileStickyContainerProps) => {
+	const { contentType, pageId } = article.article;
 	return (
 		<div
 			className="mobilesticky-container"
 			css={[
 				mobileStickyAdStyles,
-				isValidPageForMobileSticky && mobileStickyAdStylesFullWidth,
+				(contentType === 'Article' || pageId.startsWith('football/')) &&
+					mobileStickyAdStylesFullWidth,
 			]}
 		/>
 	);
