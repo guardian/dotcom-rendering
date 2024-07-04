@@ -6675,6 +6675,18 @@ const paletteColours = {
 		light: timelineEventBorderLight,
 		dark: timelineEventBorderDark,
 	},
+	'--trending-topics-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--trending-topics-separator': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--trending-topics-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[73],
+	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,
 		dark: witnessTitleAuthor,
