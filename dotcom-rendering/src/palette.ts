@@ -1785,7 +1785,7 @@ const tableOfContentsBorderLight: PaletteFunction = () =>
 const tableOfContentsBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
-const adLabelsTextLight: PaletteFunction = () => sourcePalette.neutral[20];
+const adLabelsTextLight: PaletteFunction = () => sourcePalette.neutral[46];
 const adLabelsTextDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const adBackgroundLight: PaletteFunction = () => sourcePalette.neutral[97];
