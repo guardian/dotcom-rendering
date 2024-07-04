@@ -48,8 +48,6 @@ const listStyleNone = css`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5rem 0.25rem;
-	--background: ${palette('--trending-topics-background')};
-	--dotted-line: ${palette('--trending-topics-separator')};
 	/*
 	 to show a repeading dotted line
 	 we create a 1px horizontal slit
@@ -57,17 +55,17 @@ const listStyleNone = css`
 	*/
 	background-image: repeating-linear-gradient(
 			to bottom,
-			var(--background) 0px,
-			var(--background) 36px,
+			${palette('--trending-topics-background')} 0px,
+			${palette('--trending-topics-background')} 36px,
 			transparent 36px,
 			transparent 37px,
-			var(--background) 37px,
-			var(--background) 48px
+			${palette('--trending-topics-background')} 37px,
+			${palette('--trending-topics-background')} 48px
 		),
 		repeating-linear-gradient(
 			to right,
-			var(--dotted-line) 0px,
-			var(--dotted-line) 3px,
+			${palette('--trending-topics-separator')} 0px,
+			${palette('--trending-topics-separator')} 3px,
 			transparent 3px,
 			transparent 5px
 		);
