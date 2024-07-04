@@ -10,6 +10,7 @@ const meta = {
 	decorators: [rightColumnDecorator],
 	parameters: {
 		chromatic: {
+			diffThreshold: 0.012,
 			modes: {
 				'vertical mobileMedium': allModes['vertical mobileMedium'],
 				'light desktop': allModes['light desktop'],
