@@ -2,6 +2,8 @@ import { setCookie, storage } from '@guardian/libs';
 import MockDate from 'mockdate';
 import {
 	getLastOneOffContributionTimestamp,
+	hasSupporterCookie,
+	HIDE_SUPPORT_MESSAGING_COOKIE,
 	isRecentOneOffContributor,
 	NO_RR_BANNER_KEY,
 	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
@@ -205,5 +207,33 @@ describe('withinLocalNoBannerCachePeriod', () => {
 	it('returns false if expiry is number and expired', () => {
 		storage.local.set(NO_RR_BANNER_KEY, true, Date.now() - 10000);
 		expect(withinLocalNoBannerCachePeriod()).toEqual(false);
+	});
+});
+
+describe('hasSupporterCookie', () => {
+	beforeEach(clearAllCookies);
+
+	it('returns false if cookie exists and is set to false', () => {
+		setCookie({
+			name: HIDE_SUPPORT_MESSAGING_COOKIE,
+			value: 'false',
+		});
+		expect(hasSupporterCookie(true)).toEqual(false);
+	});
+
+	it('returns true if cookie exists and is set to true', () => {
+		setCookie({
+			name: HIDE_SUPPORT_MESSAGING_COOKIE,
+			value: 'true',
+		});
+		expect(hasSupporterCookie(true)).toEqual(true);
+	});
+
+	it('returns false if cookie does not exist and user is signed out', () => {
+		expect(hasSupporterCookie(false)).toEqual(false);
+	});
+
+	it('returns true if cookie does not exist and user is signed in', () => {
+		expect(hasSupporterCookie(true)).toEqual(true);
 	});
 });
