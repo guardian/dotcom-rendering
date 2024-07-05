@@ -142,6 +142,7 @@ interface ContributionsEpicButtonsProps {
 	amountsTestName?: string;
 	amountsVariantName?: string;
 	choiceCardSelection?: ChoiceCardSelection;
+	showThreeTierChoiceCards?: boolean;
 	threeTierChoiceCardSelectedAmount?: number;
 	numArticles: number;
 }
@@ -156,6 +157,7 @@ export const ContributionsEpicButtons = ({
 	isSignedIn,
 	showChoiceCards,
 	choiceCardSelection,
+	showThreeTierChoiceCards,
 	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
@@ -182,7 +184,10 @@ export const ContributionsEpicButtons = ({
 	}
 
 	const getChoiceCardCta = (cta: Cta): Cta => {
-		if (threeTierChoiceCardSelectedAmount != undefined) {
+		if (
+			showThreeTierChoiceCards &&
+			threeTierChoiceCardSelectedAmount != undefined
+		) {
 			return {
 				text: cta.text,
 				baseUrl: addChoiceCardsParams(

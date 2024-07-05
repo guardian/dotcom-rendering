@@ -265,6 +265,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 							submitComponentEvent={submitComponentEvent}
 							showChoiceCards={showChoiceCards}
 							choiceCardSelection={choiceCardSelection}
+							showThreeTierChoiceCards={showThreeTierChoiceCards}
 							threeTierChoiceCardSelectedAmount={
 								threeTierChoiceCardSelectedAmount
 							}
