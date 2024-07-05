@@ -1,4 +1,6 @@
-import type { Config } from '../../types/configContext';
+import { safeParse } from 'valibot';
+import { error } from '../../lib/result';
+import { configSchema, type Config } from '../../types/configContext';
 
 let config: Config | undefined;
 /**
@@ -7,7 +9,8 @@ let config: Config | undefined;
  *
  * @returns {Config} an immutable, global config
  */
-export const getConfig = (): Readonly<Config> => {
+
+export const getConfig = (): Readonly<Config> | undefined => {
 	if (config) return config;
 
 	const serialised = document.querySelector('script#config')?.innerHTML;
@@ -16,8 +19,16 @@ export const getConfig = (): Readonly<Config> => {
 		if (!serialised) {
 			throw Error('Unable to fetch config attribute from #config');
 		} else {
-			config = JSON.parse(serialised) as Config;
-			return config;
+			const result = safeParse(configSchema, serialised);
+			if (!result.success) {
+				console.error(
+					`🚨 Error parsing ${String(
+						serialised,
+					)} config with valibot🚨`,
+				);
+				throw error;
+			}
+			return result.output;
 		}
 	} catch (error: unknown) {
 		console.error(

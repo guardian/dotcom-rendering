@@ -1,3 +1,4 @@
+import { boolean, literal, object, picklist, variant } from 'valibot';
 import type { AssetOrigin } from '../lib/assets';
 import type { EditionId } from '../lib/edition';
 import type { RenderingTarget } from './renderingTarget';
@@ -23,3 +24,32 @@ export type Config =
 			assetOrigin: AssetOrigin;
 			editionId: EditionId;
 	  }>;
+
+const assetOrigin = [
+	'https://assets.guim.co.uk/',
+	'https://assets-code.guim.co.uk/',
+	'/',
+] as const;
+
+const editionId = ['UK', 'US', 'AU', 'INT', 'EUR'] as const;
+
+const configWebSchema = object({
+	renderingTarget: literal('Web'),
+	darkModeAvailable: boolean(),
+	updateLogoAdPartnerSwitch: boolean(),
+	assetOrigin: picklist(assetOrigin),
+	editionId: picklist(editionId),
+});
+
+const configAppSchema = object({
+	renderingTarget: literal('Apps'),
+	darkModeAvailable: boolean(),
+	updateLogoAdPartnerSwitch: boolean(),
+	assetOrigin: picklist(assetOrigin),
+	editionId: picklist(editionId),
+});
+
+export const configSchema = variant('renderingTarget', [
+	configWebSchema,
+	configAppSchema,
+]);
