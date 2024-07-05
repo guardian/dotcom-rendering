@@ -1259,6 +1259,120 @@ const followTextLight: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[7];
 	}
 };
+const filterLinkTextLight: PaletteFunction = () => {
+	return sourcePalette.neutral[7];
+};
+
+const filterLinkTextDark: PaletteFunction = () => {
+	return sourcePalette.neutral[97];
+};
+const filterLinkActiveTextLight: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+
+const filterLinkActiveTextDark: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+const filterLinkHoverTextLight: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+
+const filterLinkHoverTextDark: PaletteFunction = () => {
+	return sourcePalette.neutral[100];
+};
+
+const filterLinkBorderLight: PaletteFunction = () => {
+	return sourcePalette.neutral[60];
+};
+
+const filterLinkBorderDark: PaletteFunction = () => {
+	return sourcePalette.neutral[60];
+};
+
+const filterLinkBackgroundLight: PaletteFunction = () => {
+	return sourcePalette.neutral[97];
+};
+
+const filterLinkBackgroundDark: PaletteFunction = () => {
+	return sourcePalette.neutral[7];
+};
+
+const filterLinkActiveBackgroundLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		default:
+			return sourcePalette.news[300];
+	}
+};
+
+const filterLinkActiveBackgroundDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		default:
+			return sourcePalette.news[400];
+	}
+};
+
+const filterLinkHoverBackgroundLight: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Culture:
+			return sourcePalette.culture[200];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[200];
+		case Pillar.Sport:
+			return sourcePalette.sport[200];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[200];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[200];
+		default:
+			return sourcePalette.news[200];
+	}
+};
+
+const filterLinkHoverBackgroundDark: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		default:
+			return sourcePalette.news[300];
+	}
+};
+
 const followTextDark: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -5745,6 +5859,34 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
+	},
+	'--filter-link-text': {
+		light: filterLinkTextLight,
+		dark: filterLinkTextDark,
+	},
+	'--filter-link-active-text': {
+		light: filterLinkActiveTextLight,
+		dark: filterLinkActiveTextDark,
+	},
+	'--filter-link-hover-text': {
+		light: filterLinkHoverTextLight,
+		dark: filterLinkHoverTextDark,
+	},
+	'--filter-link-border': {
+		light: filterLinkBorderLight,
+		dark: filterLinkBorderDark,
+	},
+	'--filter-link-background': {
+		light: filterLinkBackgroundLight,
+		dark: filterLinkBackgroundDark,
+	},
+	'--filter-link-active-background': {
+		light: filterLinkActiveBackgroundLight,
+		dark: filterLinkActiveBackgroundDark,
+	},
+	'--filter-link-hover-background': {
+		light: filterLinkHoverBackgroundLight,
+		dark: filterLinkHoverBackgroundDark,
 	},
 	'--standfirst-border': {
 		light: standfirstBorder,

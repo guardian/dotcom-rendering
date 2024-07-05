@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import { space, textSans15 } from '@guardian/source-foundations';
 import { LinkButton, SvgCross } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 
 interface LabelProps {
 	value: string;
@@ -13,25 +12,24 @@ interface ButtonProps {
 	value: string;
 	type?: TopicType;
 	count?: number;
-	format: ArticleFormat;
 	isActive: boolean;
 	href: string;
 }
 
-const buttonStyles = (palette: Palette) => css`
+const buttonStyles = css`
 	${textSans15};
 	height: 24px;
 	min-height: 24px;
 	padding: 2px 12px 4px;
 	font-weight: 700;
-	border: 1px solid ${palette.border.filterButton};
-	color: ${palette.text.filterButton};
-	background-color: ${palette.background.filterButton};
+	border: 1px solid ${palette('--filter-link-border')};
+	color: ${palette('--filter-link-text')};
+	background-color: ${palette('--filter-link-background')};
 
 	&:hover {
-		color: ${palette.text.filterButtonHover};
-		background-color: ${palette.background.filterButtonHover};
-		border: 1px solid ${palette.background.filterButtonHover};
+		color: ${palette('--filter-link-hover-text')};
+		background-color: ${palette('--filter-link-hover-background')};
+		border: 1px solid ${palette('--filter-link-hover-background')};
 	}
 
 	svg {
@@ -50,10 +48,10 @@ const buttonStyles = (palette: Palette) => css`
 	}
 `;
 
-const activeStyles = (palette: Palette) => css`
-	color: ${palette.text.filterButtonActive};
-	background-color: ${palette.background.filterButtonActive};
-	border: 1px solid ${palette.background.filterButtonActive};
+const activeStyles = css`
+	color: ${palette('--filter-link-active-text')};
+	background-color: ${palette('--filter-link-active-background')};
+	border: 1px solid ${palette('--filter-link-active-background')};
 `;
 
 const countStyles = css`
@@ -89,16 +87,13 @@ export const FilterLink = ({
 	value,
 	count,
 	isActive,
-	format,
 	href,
 }: ButtonProps) => {
-	const palette = decidePalette(format);
-
 	const dataLinkName = type ? `${type}:${value}` : value;
 
 	return isActive ? (
 		<LinkButton
-			cssOverrides={[buttonStyles(palette), activeStyles(palette)]}
+			cssOverrides={[buttonStyles, activeStyles]}
 			href={href}
 			icon={<SvgCross />}
 			iconSide="right"
@@ -110,7 +105,7 @@ export const FilterLink = ({
 		</LinkButton>
 	) : (
 		<LinkButton
-			cssOverrides={buttonStyles(palette)}
+			cssOverrides={buttonStyles}
 			href={href}
 			aria-label={`Activate ${value} filter`}
 			data-link-name={`${dataLinkName} | filter on`}
