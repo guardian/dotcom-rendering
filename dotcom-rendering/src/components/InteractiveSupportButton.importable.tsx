@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { Hide } from './Hide';
 
 type InteractiveSupportButtonProps = {
@@ -32,10 +33,13 @@ export const InteractiveSupportButton = ({
 	subscribeUrl,
 }: InteractiveSupportButtonProps) => {
 	const [hideSupportMessaging, setHideSupportMessaging] = useState(true);
+	const isSignedIn = useIsSignedIn();
 
 	useEffect(() => {
-		setHideSupportMessaging(shouldHideSupportMessaging());
-	}, []);
+		if (isSignedIn !== 'Pending') {
+			setHideSupportMessaging(shouldHideSupportMessaging(isSignedIn));
+		}
+	}, [isSignedIn]);
 
 	if (!hideSupportMessaging) {
 		return (

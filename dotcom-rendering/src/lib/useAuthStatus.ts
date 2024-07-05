@@ -6,6 +6,20 @@ import {
 	getSignedInStatusWithOkta,
 } from './identity';
 
+export const useIsSignedIn = (): boolean | 'Pending' => {
+	const authStatus = useAuthStatus();
+	switch (authStatus.kind) {
+		case 'Pending':
+			return 'Pending';
+		case 'SignedInWithCookies':
+		case 'SignedInWithOkta':
+			return true;
+		case 'SignedOutWithCookies':
+		case 'SignedOutWithOkta':
+			return false;
+	}
+};
+
 export const useAuthStatus = (): AuthStatus => {
 	const [authStatus, setAuthStatus] = useState<AuthStatus>({
 		kind: 'Pending',

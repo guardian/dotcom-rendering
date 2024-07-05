@@ -33,10 +33,9 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import type { AuthStatus } from '../lib/identity';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -165,31 +164,19 @@ type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
+	isSignedIn: boolean;
 };
-
-function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
-	switch (authStatus.kind) {
-		case 'Pending':
-			return undefined;
-		case 'SignedInWithCookies':
-		case 'SignedInWithOkta':
-			return true;
-		case 'SignedOutWithCookies':
-		case 'SignedOutWithOkta':
-			return false;
-	}
-}
 
 const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
+	isSignedIn,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType | null>(null);
-	const isSignedIn = getIsSignedIn(useAuthStatus());
 
 	const { renderingTarget } = useConfig();
 
@@ -204,7 +191,7 @@ const ReaderRevenueLinksRemote = ({
 				clientName: 'dcr',
 			},
 			targeting: {
-				showSupportMessaging: !shouldHideSupportMessaging(),
+				showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
@@ -212,7 +199,7 @@ const ReaderRevenueLinksRemote = ({
 				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
 				purchaseInfo: getPurchaseInfo(),
-				isSignedIn: isSignedIn === true,
+				isSignedIn,
 			},
 		};
 		getHeader(contributionsServiceUrl, requestData)
@@ -263,7 +250,6 @@ const ReaderRevenueLinksRemote = ({
 			</div>
 		);
 	}
-
 	return null;
 };
 
@@ -278,6 +264,7 @@ type ReaderRevenueLinksNativeProps = {
 	};
 	pageViewId: string;
 	hasPageSkin: boolean;
+	isSignedIn: boolean;
 };
 
 const ReaderRevenueLinksNative = ({
@@ -287,8 +274,9 @@ const ReaderRevenueLinksNative = ({
 	urls,
 	pageViewId,
 	hasPageSkin,
+	isSignedIn,
 }: ReaderRevenueLinksNativeProps) => {
-	const hideSupportMessaging = shouldHideSupportMessaging();
+	const hideSupportMessaging = shouldHideSupportMessaging(isSignedIn);
 
 	// Only the header component is in the AB test
 	const testName = inHeader ? 'RRHeaderLinks' : 'RRFooterLinks';
@@ -440,14 +428,22 @@ export const SupportTheG = ({
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('support-the-Guardian');
 	const pageViewId = usePageViewId(renderingTarget);
+	const isSignedIn = useIsSignedIn();
 
-	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
+	if (
+		isUndefined(countryCode) ||
+		isUndefined(pageViewId) ||
+		isSignedIn === 'Pending'
+	) {
+		return null;
+	}
 
 	return inHeader && remoteHeader ? (
 		<ReaderRevenueLinksRemote
 			countryCode={countryCode}
 			pageViewId={pageViewId}
 			contributionsServiceUrl={contributionsServiceUrl}
+			isSignedIn={isSignedIn}
 		/>
 	) : (
 		<ReaderRevenueLinksNative
@@ -457,6 +453,7 @@ export const SupportTheG = ({
 			urls={urls}
 			pageViewId={pageViewId}
 			hasPageSkin={hasPageSkin}
+			isSignedIn={isSignedIn}
 		/>
 	);
 };
