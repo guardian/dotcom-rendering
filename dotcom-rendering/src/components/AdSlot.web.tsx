@@ -464,8 +464,8 @@ const mobileStickyAdStylesFullWidth = css`
 	background-color: ${palette.neutral[97]};
 
 	.ad-slot[data-label-show='true']::before {
-		padding-left: calc((100% - 320px) / 2);
-		padding-right: calc((100% - 320px) / 2);
+		padding-left: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
+		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
 	}
 `;
 
