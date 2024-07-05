@@ -3188,6 +3188,7 @@
                 "dynamic/package",
                 "dynamic/slow",
                 "dynamic/slow-mpu",
+                "fixed/highlights",
                 "fixed/large/slow-XIV",
                 "fixed/medium/fast-XI",
                 "fixed/medium/fast-XII",

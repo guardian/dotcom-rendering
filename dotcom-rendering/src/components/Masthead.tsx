@@ -1,3 +1,5 @@
+import { palette } from '@guardian/source/foundations';
+import type { ReactElement } from 'react';
 import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -9,6 +11,7 @@ import { TopBar } from './TopBar.importable';
 
 type Props = {
 	nav: NavType;
+	highlights?: ReactElement;
 	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
@@ -43,6 +46,7 @@ type Props = {
  */
 export const Masthead = ({
 	nav,
+	highlights,
 	editionId,
 	idUrl,
 	mmaUrl,
@@ -82,6 +86,25 @@ export const Masthead = ({
 				</Island>
 			</div>
 		</Section>
+
+		{/* Highlights section goes here */}
+		{highlights && (
+			<Section
+				fullWidth={true}
+				// TODO - change these to proper palette usage
+				backgroundColour={palette.neutral[97]}
+				borderColour={palette.neutral[60]}
+				showTopBorder={false}
+				padSides={false}
+				element="section"
+				hasPageSkin={hasPageSkin}
+				hasPageSkinContentSelfConstrain={
+					hasPageSkinContentSelfConstrain
+				}
+			>
+				{highlights}
+			</Section>
+		)}
 
 		<Section
 			fullWidth={true}
