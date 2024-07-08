@@ -1,4 +1,3 @@
-import { palette } from '@guardian/source/foundations';
 import type { ReactElement } from 'react';
 import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
@@ -91,9 +90,10 @@ export const Masthead = ({
 		{highlights && (
 			<Section
 				fullWidth={true}
-				// TODO - change these to proper palette usage
-				backgroundColour={palette.neutral[97]}
-				borderColour={palette.neutral[60]}
+				backgroundColour={themePalette(
+					'--masthead-highlights-background',
+				)}
+				borderColour={themePalette('--masthead-highlights-border')}
 				showTopBorder={false}
 				padSides={false}
 				element="section"

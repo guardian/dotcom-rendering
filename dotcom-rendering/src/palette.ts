@@ -5440,6 +5440,11 @@ const mastheadVeggieBurgerBackground: PaletteFunction = () =>
 const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
+const mastheadHighlightsBackground: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const mastheadHighlightsBorder: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6242,6 +6247,14 @@ const paletteColours = {
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,
 		dark: liveBlockContainerBackgroundDark,
+	},
+	'--masthead-highlights-background': {
+		light: mastheadHighlightsBackground,
+		dark: mastheadHighlightsBackground,
+	},
+	'--masthead-highlights-border': {
+		light: mastheadHighlightsBorder,
+		dark: mastheadHighlightsBorder,
 	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
