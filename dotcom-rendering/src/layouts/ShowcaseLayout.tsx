@@ -33,7 +33,7 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -87,7 +87,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 60px 300px;
+					grid-template-columns: 219px 1px 620px 60px 320px;
 					grid-template-areas:
 						'title  border  headline   headline headline'
 						'lines  border  media      media    media'
@@ -251,7 +251,9 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -602,9 +604,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
-									hasStarRating={
-										article.starRating !== undefined
-									}
 								/>
 							</PositionHeadline>
 						</GridItem>
@@ -632,7 +631,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -823,17 +821,28 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								`}
 							>
 								<RightColumn>
-									<MostViewedRightWithAd
-										format={format}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											!!article.config
-												.shouldHideReaderRevenue
-										}
-									/>
+									<Island
+										priority="feature"
+										defer={{
+											until: 'visible',
+											// Provide a much higher value for the top margin for the intersection observer
+											// This is because the most viewed would otherwise only be lazy loaded when the
+											// bottom of the container intersects with the viewport
+											rootMargin: '700px 100px',
+										}}
+									>
+										<MostViewedRightWithAd
+											format={format}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											renderAds={renderAds}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
 								</RightColumn>
 							</div>
 						</GridItem>

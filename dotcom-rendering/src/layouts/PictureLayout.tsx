@@ -288,7 +288,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -498,10 +500,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											hasStarRating={
-												typeof article.starRating ===
-												'number'
-											}
 											hasAvatar={displayAvatarUrl}
 										/>
 									</div>
@@ -539,9 +537,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 										byline={article.byline}
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
-										}
-										hasStarRating={
-											article.starRating !== undefined
 										}
 									/>
 								</div>
@@ -601,7 +596,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={

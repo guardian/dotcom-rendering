@@ -15,6 +15,7 @@ export interface CommercialConfigType {
 	contentType: string;
 	ampIframeUrl: string;
 	hasInlineMerchandise?: boolean;
+	hasLiveBlogTopAd?: boolean;
 }
 
 /**

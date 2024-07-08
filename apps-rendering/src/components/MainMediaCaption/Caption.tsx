@@ -10,7 +10,7 @@ import {
 import type { Option } from '../../../vendor/@guardian/types/index';
 import { OptionKind } from '../../../vendor/@guardian/types/index';
 import { maybeRender } from 'lib';
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -89,7 +89,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const Caption: FC<Props> = ({ caption, format }) =>
+const Caption = ({ caption, format }: Props) =>
 	maybeRender(caption, (cap) => (
 		<>{Array.from(cap.childNodes).map(captionElement(format))}</>
 	));

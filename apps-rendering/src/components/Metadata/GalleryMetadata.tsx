@@ -11,7 +11,6 @@ import Follow from 'components/Follow';
 import type { Contributor } from 'contributor';
 import { grid } from 'grid/grid';
 import { text } from 'palette';
-import type { FC } from 'react';
 
 // ----- Component ----- //
 
@@ -36,14 +35,14 @@ type Props = {
 	edition: Edition;
 };
 
-const GalleryMetadata: FC<Props> = ({
+const GalleryMetadata = ({
 	format,
 	publishDate,
 	contributors,
 	commentCount,
 	commentable,
 	edition,
-}) => (
+}: Props) => (
 	<div css={styles(format)}>
 		<div css={textStyles}>
 			<Dateline date={publishDate} format={format} edition={edition} />

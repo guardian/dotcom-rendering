@@ -12,7 +12,7 @@ import type { Sizes } from 'image/sizes';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -35,7 +35,7 @@ const sizes: Sizes = {
 	default: '105px',
 };
 
-const Avatar: FC<Props> = ({ item }) => {
+const Avatar = ({ item }: Props) => {
 	const [contributor] = item.contributors;
 	const format = getFormat(item);
 

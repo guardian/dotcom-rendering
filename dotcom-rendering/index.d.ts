@@ -5,7 +5,6 @@
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
-// These are partialy kept for Google Analytics purposes
 type RealPillars = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 type FakePillars = 'labs';
 type LegacyPillar = RealPillars | FakePillars;
@@ -317,11 +316,6 @@ interface Topic {
 }
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
-
-interface MessageUs {
-	formId: string;
-	formFields: import('./src/types/content').MessageUsFieldType[];
-}
 
 // ------------
 // Liveblogs //

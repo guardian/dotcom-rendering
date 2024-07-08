@@ -53,7 +53,7 @@ const Snap100 = ({
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSize="large"
 					headlineSizeOnMobile="medium"
-					imagePosition="right"
+					imagePositionOnDesktop="right"
 					imagePositionOnMobile="left"
 					imageSize="medium"
 					trailText={snaps[0].trailText}
@@ -90,7 +90,7 @@ const Card100 = ({
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSize={cards[0].isBoosted ? 'ginormous' : 'huge'}
-					imagePosition="bottom"
+					imagePositionOnDesktop="bottom"
 					imagePositionOnMobile="bottom"
 					imageSize="large"
 					isDynamo={containerPalette && true}
@@ -132,7 +132,7 @@ const Card75_Card25 = ({
 						absoluteServerTimes={absoluteServerTimes}
 						headlineSize="large"
 						headlineSizeOnMobile="huge"
-						imagePosition="right"
+						imagePositionOnDesktop="right"
 						imagePositionOnMobile="bottom"
 						imageSize="medium"
 						trailText={card.trailText}
@@ -460,7 +460,7 @@ const Card75_ColumnOfCards25 = ({
 						showAge={showAge}
 						absoluteServerTimes={absoluteServerTimes}
 						headlineSize="huge"
-						imagePosition="bottom"
+						imagePositionOnDesktop="bottom"
 						imagePositionOnMobile="bottom"
 						imageSize="large"
 						supportingContent={limitSupportingContent(card)}
@@ -476,21 +476,27 @@ const Card75_ColumnOfCards25 = ({
 			>
 				<UL direction="column">
 					{remaining.map((card, cardIndex) => {
+						// Always show the image on the first card and only
+						// on the second if there are two items in two
+						const shouldShowImage =
+							cardIndex === 0 || remaining.length === 2;
+						const cardWithoutMainMedia = shouldShowImage
+							? card
+							: {
+									...card,
+									mainMedia: undefined,
+							  };
+
 						return (
 							<LI key={card.url} padSides={true}>
 								<FrontCard
-									trail={card}
+									trail={cardWithoutMainMedia}
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
 									absoluteServerTimes={absoluteServerTimes}
 									image={
-										// Always show the image on the first card and only
-										// on the second if there are two items in two
-										cardIndex === 0 ||
-										remaining.length === 2
-											? card.image
-											: undefined
+										shouldShowImage ? card.image : undefined
 									}
 									headlineSize={
 										cardIndex === 0 ||

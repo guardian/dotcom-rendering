@@ -21,7 +21,6 @@ import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
-import { SendAMessage } from './SendAMessage.importable';
 import { ShareButton } from './ShareButton.importable';
 
 type Props = {
@@ -37,7 +36,6 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	messageUs?: MessageUs;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -310,7 +308,6 @@ export const ArticleMeta = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
-	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -370,20 +367,6 @@ export const ArticleMeta = ({
 									source={source}
 								/>
 							)}
-							{messageUs &&
-								format.design === ArticleDesign.LiveBlog && (
-									<Island
-										priority="feature"
-										defer={{ until: 'visible' }}
-									>
-										<SendAMessage
-											formFields={messageUs.formFields}
-											formId={messageUs.formId}
-											format={format}
-											pageId={pageId}
-										/>
-									</Island>
-								)}
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}

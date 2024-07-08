@@ -28,6 +28,7 @@ describe('MostViewedFooterData', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedFooterData
@@ -71,6 +72,7 @@ describe('MostViewedFooterData', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedFooterData
@@ -133,6 +135,7 @@ describe('MostViewedFooterData', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedFooterData
@@ -180,6 +183,7 @@ describe('MostViewedFooterData', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedFooterData
@@ -203,6 +207,7 @@ describe('MostViewedFooterData', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedFooterData

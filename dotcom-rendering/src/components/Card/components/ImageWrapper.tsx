@@ -11,7 +11,7 @@ type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
 	imageType?: CardImageType;
-	imagePosition: ImagePositionType;
+	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	showPlayIcon: boolean;
 };
@@ -57,23 +57,24 @@ export const ImageWrapper = ({
 	children,
 	imageSize,
 	imageType,
-	imagePosition,
+	imagePositionOnDesktop,
 	imagePositionOnMobile,
 	showPlayIcon,
 }: Props) => {
-	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
+	const isHorizontalOnDesktop =
+		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
 	const isHorizontalOnMobile =
 		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
 	return (
 		<div
 			css={[
 				imageType === 'slideshow' &&
-					isHorizontal &&
+					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						imageSize,
 					}),
 				(imageType === 'picture' || imageType === 'video') &&
-					isHorizontal &&
+					isHorizontalOnDesktop &&
 					flexBasisStyles({
 						imageSize,
 					}),
@@ -96,15 +97,11 @@ export const ImageWrapper = ({
 						${until.tablet} {
 							width: 125px;
 							flex-shrink: 0;
-							margin-top: 4px;
-							margin-right: 0;
-							margin-bottom: 4px;
-							margin-left: 4px;
 							flex-basis: unset;
 							align-self: flex-start;
 						}
 					`,
-				isHorizontal &&
+				isHorizontalOnDesktop &&
 					css`
 						${from.tablet} {
 							align-self: flex-start;

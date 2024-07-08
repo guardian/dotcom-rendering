@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ConfigProvider } from './ConfigContext';
-import { mockTab1 } from './MostViewed.mocks';
+import { responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
-const response = { data: mockTab1 };
+const response = { data: responseWithTwoTabs };
 const useApi: { [key: string]: any } = useApi_;
 
 jest.mock('../lib/useApi', () => ({
@@ -25,6 +25,7 @@ describe('MostViewedList', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedRight />
@@ -75,6 +76,7 @@ describe('MostViewedList', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedRight limitItems={3} />
@@ -104,6 +106,7 @@ describe('MostViewedList', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<MostViewedRight />

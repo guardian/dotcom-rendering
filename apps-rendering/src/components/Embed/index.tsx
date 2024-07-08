@@ -7,7 +7,6 @@ import Instagram from 'components/Instagram';
 import Video from 'components/Video';
 import { EmbedKind, youtubeUrl } from 'embed';
 import type { Embed } from 'embed';
-import type { FC } from 'react';
 
 // ----- Component ----- //
 
@@ -20,7 +19,7 @@ interface Props {
  * Handles rendering of all third-party embeds.
  * See the `Embed` type for more information.
  */
-const EmbedComponent: FC<Props> = ({ embed, editions }) => {
+const EmbedComponent = ({ embed, editions }: Props) => {
 	switch (embed.kind) {
 		case EmbedKind.Spotify:
 			return !editions ? (

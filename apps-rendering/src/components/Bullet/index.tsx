@@ -4,7 +4,6 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { background } from 'palette';
-import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -32,7 +31,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
-const Bullet: FC<Props> = ({ format, text }) => (
+const Bullet = ({ format, text }: Props) => (
 	<>
 		<span css={styles(format)}>•</span>
 		{text.replace(/•/g, '')}

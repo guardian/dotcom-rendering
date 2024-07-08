@@ -1,4 +1,4 @@
-/** Polyfill.io script URL @see https://polyfill.io/ */
+/** Polyfill.io script URL @see https://polyfill-fastly.net/ */
 export const polyfillIO = `https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?${new URLSearchParams(
 	{
 		/** Undocumented; probably opting out of real user monitoring… */
@@ -10,7 +10,7 @@ export const polyfillIO = `https://assets.guim.co.uk/polyfill.io/v3/polyfill.min
 		 *
 		 * Available feature names are shown on the [features page][].
 		 *
-		 * [features page]: https://polyfill.io/v3/url-builder
+		 * [features page]: https://polyfill-fastly.net/
 		 */
 		features: [
 			'es6',

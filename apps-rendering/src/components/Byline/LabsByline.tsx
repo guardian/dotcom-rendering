@@ -30,7 +30,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const CommentByline: React.FC<Props> = ({ format, bylineHtml }) => {
+const CommentByline = ({ format, bylineHtml }: Props) => {
 	return (
 		<DefaultByline
 			format={format}

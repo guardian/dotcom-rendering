@@ -100,10 +100,7 @@ const CarouselColours = ({
 }): React.ReactElement => {
 	if ('palette' in props) {
 		return (
-			<ContainerOverrides
-				containerPalette={props.palette}
-				isDynamo={false}
-			>
+			<ContainerOverrides containerPalette={props.palette}>
 				{children}
 			</ContainerOverrides>
 		);
@@ -538,7 +535,7 @@ const CarouselCard = ({
 				imageLoading={imageLoading}
 				discussionApiUrl={discussionApiUrl}
 				isOnwardContent={isOnwardContent}
-				imagePosition={cardImagePosition}
+				imagePositionOnDesktop={cardImagePosition}
 				imagePositionOnMobile={cardImagePosition}
 				absoluteServerTimes={absoluteServerTimes}
 				starRating={starRating}

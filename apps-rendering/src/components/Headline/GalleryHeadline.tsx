@@ -68,7 +68,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const GalleryHeadline: React.FC<Props> = ({ headline, format }) => (
+const GalleryHeadline = ({ headline, format }: Props) => (
 	<>
 		<div css={backgroundStyles(format)} />
 		<h1 css={styles(format)}>{headline}</h1>

@@ -42,7 +42,7 @@ function insert(
 
 	// Remove duplicates
 	// -----------------
-	for (const article of template.querySelectorAll('article')) {
+	for (const article of fragment.querySelectorAll('article')) {
 		if (document.getElementById(article.id)) article.remove();
 	}
 

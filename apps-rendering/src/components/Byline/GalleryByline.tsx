@@ -43,7 +43,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const GalleryByline: React.FC<Props> = ({ format, bylineHtml }) => (
+const GalleryByline = ({ format, bylineHtml }: Props) => (
 	<DefaultByline
 		format={format}
 		bylineHtml={bylineHtml}

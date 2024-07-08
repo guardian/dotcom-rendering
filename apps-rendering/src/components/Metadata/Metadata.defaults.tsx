@@ -8,7 +8,6 @@ import Follow from 'components/Follow';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import type { Styleable } from 'lib';
-import type { FC } from 'react';
 
 export const defaultStyles = css`
 	flex-grow: 1;
@@ -20,7 +19,7 @@ type Props = Styleable<{
 	withByline: boolean;
 }>;
 
-const DefaultMetadata: FC<Props> = ({ item, withByline, className }: Props) => (
+const DefaultMetadata = ({ item, withByline, className }: Props) => (
 	<>
 		{withByline && <Avatar {...item} />}
 		<div className={className}>

@@ -49,6 +49,7 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import {
@@ -255,6 +256,44 @@ const paddingBody = css`
 	}
 `;
 
+const tagOverlayGridStyles = css`
+	position: absolute;
+	${until.desktop} {
+		margin-left: 0px;
+	}
+	display: grid;
+	height: inherit;
+	width: 100%;
+	margin-left: 0;
+	grid-column-gap: 0px;
+	${getZIndex('tagLinkOverlay')}
+	${until.desktop} {
+		grid-template-columns: 100%; /* Main content */
+		grid-template-areas: 'sticky-tag';
+	}
+	${from.tablet} {
+		grid-template-columns: 1fr 700px 1fr;
+		grid-template-areas: '. sticky-tag .';
+	}
+	${from.desktop} {
+		grid-template-columns: 1fr 200px 740px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+
+	${from.leftCol} {
+		grid-template-columns: 1fr 200px 900px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+	${from.wide} {
+		grid-template-columns: 1fr 200px 1060px 1fr;
+		grid-template-areas: '. sticky-tag . .';
+	}
+`;
+
+const stickyTagStyles = css`
+	position: sticky;
+	top: 0;
+`;
 interface BaseProps {
 	article: DCRArticle;
 	format: ArticleFormat;
@@ -273,7 +312,7 @@ interface WebProps extends BaseProps {
 export const LiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasLiveBlogTopAd },
 	} = article;
 
 	// TODO:
@@ -314,8 +353,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+	// The test is being paused on liveblogs whilst we investigate an issue
+
+	const inTagLinkTest = false;
+	// isWeb &&
+	// article.config.abTests.tagLinkDesignVariant === 'variant' &&
+	// article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -465,9 +508,51 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 			<main
+				css={
+					inTagLinkTest &&
+					css`
+						position: relative;
+						height: 100%;
+					`
+				}
 				data-layout="LiveLayout"
 				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
+				{renderAds && hasLiveBlogTopAd && (
+					<Hide from="tablet">
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={sourcePalette.neutral[97]}
+							element="aside"
+						>
+							<AdSlot
+								position="liveblog-top"
+								display={format.display}
+							/>
+						</Section>
+					</Hide>
+				)}
+				{inTagLinkTest && (
+					<div css={tagOverlayGridStyles}>
+						<GridItem area="sticky-tag">
+							<div css={stickyTagStyles}>
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									inTagLinkTest={true}
+								/>
+							</div>
+						</GridItem>
+					</div>
+				)}
+
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -535,14 +620,27 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									inTagLinkTest={inTagLinkTest}
-								/>
+								{inTagLinkTest ? (
+									<div
+										css={css`
+											height: 64px;
+											${from.desktop} {
+												height: 44px;
+											}
+										`}
+									/>
+								) : (
+									<ArticleTitle
+										format={format}
+										tags={article.tags}
+										sectionLabel={article.sectionLabel}
+										sectionUrl={article.sectionUrl}
+										guardianBaseURL={
+											article.guardianBaseURL
+										}
+										inTagLinkTest={inTagLinkTest}
+									/>
+								)}
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
@@ -554,9 +652,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											byline={article.byline}
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
-											}
-											hasStarRating={
-												!isUndefined(article.starRating)
 											}
 										/>
 									)}
@@ -626,7 +721,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								{isApps && (
 									<ArticleMetaApps
 										format={format}
-										pageId={article.pageId}
 										byline={article.byline}
 										tags={article.tags}
 										primaryDateline={
@@ -640,7 +734,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										messageUs={article.messageUs}
 									></ArticleMetaApps>
 								)}
 								{isWeb && (
@@ -665,7 +758,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											messageUs={article.messageUs}
 										/>
 									</div>
 								)}
@@ -783,7 +875,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
-												editionId={article.editionId}
 											/>
 										</Island>
 									)}
@@ -832,7 +923,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											messageUs={article.messageUs}
 										/>
 									</div>
 								</Hide>
@@ -859,6 +949,23 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</div>
 									</Hide>
 								)}
+
+								{isWeb && (
+									<Hide until="desktop">
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<StickyLiveblogAskWrapper
+												referrerUrl={article.webURL}
+												shouldHideReaderRevenueOnArticle={
+													article.shouldHideReaderRevenue
+												}
+											/>
+										</Island>
+									</Hide>
+								)}
+
 								{/* Match stats */}
 								{!!footballMatchUrl && (
 									<Island
@@ -1034,10 +1141,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</ArticleContainer>
 										</div>
 									) : (
-										<Accordion
-											accordionTitle="Live feed"
-											context="liveFeed"
-										>
+										<Accordion accordionTitle="Live feed">
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (

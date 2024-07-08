@@ -22,7 +22,6 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { pipe } from 'lib';
-import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -56,7 +55,7 @@ interface Props {
 	item: Exclude<Item, LiveBlog | DeadBlog>;
 }
 
-const LabsLayout: FC<Props> = ({ item }) => {
+const LabsLayout = ({ item }: Props) => {
 	const format = getFormat(item);
 	return (
 		<main css={[Styles, DarkStyles]}>

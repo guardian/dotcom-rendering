@@ -21,6 +21,7 @@ describe('ArticleMeta', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<ArticleMeta
@@ -68,6 +69,7 @@ describe('ArticleMeta', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<ArticleMeta

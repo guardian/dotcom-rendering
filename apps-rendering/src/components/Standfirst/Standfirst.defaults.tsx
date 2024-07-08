@@ -6,7 +6,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { background, border, text } from 'palette';
-import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -53,7 +52,7 @@ interface Props {
 	className?: string;
 }
 
-const DefaultStandfirst: FC<Props> = ({ item, className }) =>
+const DefaultStandfirst = ({ item, className }: Props) =>
 	maybeRender(item.standfirst.toOption(), (standfirst) => (
 		<div className={className}>
 			{renderStandfirstText(standfirst, getFormat(item))}

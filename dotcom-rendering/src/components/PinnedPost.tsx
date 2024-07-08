@@ -16,15 +16,14 @@ import {
 	SvgPinned,
 	SvgPlus,
 } from '@guardian/source/react-components';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 import { DateTime } from './DateTime';
 
-const pinnedPostContainer = (palette: Palette) => css`
-	border: 3px solid ${palette.border.pinnedPost};
+const pinnedPostContainer = css`
+	border: 3px solid ${palette('--pinned-post-border')};
 	padding-bottom: ${space[1]}px;
 	position: relative;
-	background: ${sourcePalette.neutral[100]};
+	background: ${palette('--pinned-post-background')};
 	${from.mobile} {
 		margin-bottom: 34px;
 	}
@@ -52,8 +51,8 @@ const pinnedPostContainer = (palette: Palette) => css`
 	}
 `;
 
-const rowStyles = (palette: Palette) => css`
-	background: ${palette.border.pinnedPost};
+const rowStyles = css`
+	background: ${palette('--pinned-post-border')};
 	height: 32px;
 	display: flex;
 	align-items: center;
@@ -76,8 +75,8 @@ const timeAgoStyles = css`
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${sourcePalette.neutral[100]},
-		${sourcePalette.neutral[100]} 40%,
+		${palette('--pinned-post-background')},
+		${palette('--pinned-post-background')} 40%,
 		rgba(255, 255, 255, 0)
 	);
 	height: 80px;
@@ -87,7 +86,7 @@ const overlayStyles = css`
 	display: block;
 `;
 
-const fakeButtonStyles = (palette: Palette) => css`
+const fakeButtonStyles = css`
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
@@ -103,7 +102,7 @@ const fakeButtonStyles = (palette: Palette) => css`
 	&:focus {
 		${focusHalo};
 	}
-	background: ${palette.border.pinnedPost};
+	background: ${palette('--pinned-post-border')};
 	margin-left: 10px;
 	position: absolute;
 	bottom: -24px;
@@ -140,21 +139,18 @@ const buttonIcon = css`
 type Props = {
 	pinnedPost: Block;
 	children: React.ReactNode;
-	format: ArticleFormat;
 	absoluteServerTimes: boolean;
 };
 
 export const PinnedPost = ({
 	pinnedPost,
 	children,
-	format,
 	absoluteServerTimes,
 }: Props) => {
-	const palette = decidePalette(format);
 	return (
 		<div
 			id="pinned-post"
-			css={pinnedPostContainer(palette)}
+			css={pinnedPostContainer}
 			data-gu-marker="pinned-post"
 			data-component="pinned-post"
 		>
@@ -169,7 +165,7 @@ export const PinnedPost = ({
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
 			/>
-			<div css={rowStyles(palette)}>
+			<div css={rowStyles}>
 				<SvgPinned />
 				{!isUndefined(pinnedPost.blockFirstPublished) && (
 					<div css={timeAgoStyles}>
@@ -178,7 +174,6 @@ export const PinnedPost = ({
 							date={new Date(pinnedPost.blockFirstPublished)}
 							display="relative"
 							absoluteServerTimes={absoluteServerTimes}
-							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}
 							showTime={false}
@@ -191,7 +186,7 @@ export const PinnedPost = ({
 			</div>
 			<div id="pinned-post-overlay" css={overlayStyles} />
 			<label
-				css={fakeButtonStyles(palette)}
+				css={fakeButtonStyles}
 				htmlFor="pinned-post-checkbox"
 				id="pinned-post-button"
 			>

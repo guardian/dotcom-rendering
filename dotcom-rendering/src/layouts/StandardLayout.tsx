@@ -4,7 +4,6 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
-	space,
 	until,
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
@@ -39,7 +38,7 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -100,7 +99,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 60px 300px;
+					grid-template-columns: 219px 1px 620px 60px 320px;
 
 					${isMatchReport
 						? css`
@@ -337,7 +336,6 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-top: ${space[4]}px;
 	background-color: ${themePalette('--star-rating-background')};
 	color: ${themePalette('--star-rating-fill')};
 	display: inline-block;
@@ -414,7 +412,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
+
 	return (
 		<>
 			{isWeb && (
@@ -707,9 +708,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									webPublicationDateDeprecated={
 										article.webPublicationDateDeprecated
 									}
-									hasStarRating={
-										typeof article.starRating === 'number'
-									}
 								/>
 							</div>
 						</GridItem>
@@ -733,7 +731,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									{isWeb &&
-									format.theme === ArticleSpecial.Labs ? (
+									format.theme === ArticleSpecial.Labs &&
+									format.design !== ArticleDesign.Video ? (
 										<GuardianLabsLines />
 									) : (
 										<DecideLines
@@ -754,7 +753,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -958,6 +956,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										/* above 980 */
 										margin-left: 20px;
 										margin-right: -20px;
+										padding-bottom: ${isMedia ? 41 : 0}px;
 									}
 									${from.leftCol} {
 										/* above 1140 */
@@ -967,17 +966,28 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								`}
 							>
 								<RightColumn>
-									<MostViewedRightWithAd
-										format={format}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										renderAds={renderAds}
-										shouldHideReaderRevenue={
-											!!article.config
-												.shouldHideReaderRevenue
-										}
-									/>
+									<Island
+										priority="feature"
+										defer={{
+											until: 'visible',
+											// Provide a much higher value for the top margin for the intersection observer
+											// This is because the most viewed would otherwise only be lazy loaded when the
+											// bottom of the container intersects with the viewport
+											rootMargin: '700px 100px',
+										}}
+									>
+										<MostViewedRightWithAd
+											format={format}
+											isPaidContent={
+												article.pageType.isPaidContent
+											}
+											renderAds={renderAds}
+											shouldHideReaderRevenue={
+												!!article.config
+													.shouldHideReaderRevenue
+											}
+										/>
+									</Island>
 								</RightColumn>
 							</div>
 						</GridItem>

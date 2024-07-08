@@ -86,7 +86,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 620px 60px 300px;
+					grid-template-columns: 219px 1px 620px 60px 320px;
 					grid-template-areas:
 						'caption    border      title      . right-column'
 						'.          border      headline   . right-column'
@@ -312,8 +312,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 	const inTagLinkTest =
-		article.config.abTests.tagLinkDesignVariant === 'variant';
-
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 	return (
 		<>
 			{isWeb && (
@@ -449,9 +450,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
-										hasStarRating={
-											article.starRating !== undefined
-										}
 									/>
 								</Section>
 							</Box>
@@ -541,10 +539,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											hasStarRating={
-												typeof article.starRating ===
-												'number'
-											}
 										/>
 									</div>
 								)}
@@ -595,7 +589,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={

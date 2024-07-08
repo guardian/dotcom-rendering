@@ -13,6 +13,7 @@ describe('QandaAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<QandaAtom {...imageStory} />
@@ -39,6 +40,7 @@ describe('QandaAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<QandaAtom {...imageStory} />
@@ -66,6 +68,7 @@ describe('QandaAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<QandaAtom {...imageStory} />

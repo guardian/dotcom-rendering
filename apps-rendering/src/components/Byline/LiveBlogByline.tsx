@@ -40,7 +40,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const LiveblogByline: React.FC<Props> = ({ format, bylineHtml }) => {
+const LiveblogByline = ({ format, bylineHtml }: Props) => {
 	return (
 		<DefaultByline
 			format={format}
