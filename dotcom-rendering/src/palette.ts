@@ -6675,6 +6675,14 @@ const paletteColours = {
 		light: timelineEventBorderLight,
 		dark: timelineEventBorderDark,
 	},
+	'--treat-background': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--treat-text': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--trending-topics-background': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[7],
