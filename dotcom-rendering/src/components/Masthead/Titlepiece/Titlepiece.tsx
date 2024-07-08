@@ -16,7 +16,7 @@ import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
 import { TitlepieceEditionDropdown } from './EditionDropdown';
-// import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
+// import { ExpandedNav } from './ExpandedNav/ExpandedNav';
 import { Grid } from './Grid';
 import { Pillars } from './Pillars';
 
@@ -224,7 +224,7 @@ export const Titlepiece = ({
 					/>
 				</Hide>
 
-				{/* <TitlepieceExpandedNav
+				{/* <ExpandedNav
 					nav={nav}
 					editionId={editionId}
 					isImmersive={isImmersive}

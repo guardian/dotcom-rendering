@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, textSans17, until } from '@guardian/source/foundations';
+import { from, space, textSans17, until } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../../../../lib/acquisitions';
 import type { EditionId } from '../../../../lib/edition';
@@ -32,7 +32,7 @@ const columnLinkTitle = css`
 	display: inline-block;
 	font-weight: 500;
 	outline: none;
-	padding: 8px 34px 8px 50px;
+	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
 	position: relative;
 	text-align: left;
 	width: 100%;
@@ -78,6 +78,9 @@ type Props = {
 	editionId: EditionId;
 };
 
+/**
+ * Mobile only links for support asks and subscriptions
+ */
 export const ReaderRevenueLinks = ({
 	readerRevenueLinks,
 	editionId,

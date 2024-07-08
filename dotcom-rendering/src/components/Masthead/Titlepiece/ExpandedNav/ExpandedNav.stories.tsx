@@ -6,7 +6,6 @@ export default {
 	title: 'Components/Masthead/ExpandedNav',
 	parameters: {
 		backgrounds: { default: 'dark' },
-		layout: 'centered',
 	},
 };
 

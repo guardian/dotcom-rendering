@@ -13,7 +13,7 @@ import { palette as themePalette } from '../../../../palette';
 const searchBar = css`
 	box-sizing: border-box;
 	display: block;
-	margin-left: 13px;
+	margin-left: ${space[4]}px;
 	max-width: 380px;
 	position: relative;
 	margin-bottom: 24px;

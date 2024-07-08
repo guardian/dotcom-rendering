@@ -54,7 +54,7 @@ const columnLinkTitle = css`
 	display: inline-block;
 	font-weight: 500;
 	outline: none;
-	padding: 8px 34px 8px 50px;
+	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
 	position: relative;
 	text-align: left;
 	width: 100%;
@@ -96,15 +96,9 @@ export const columnLinks = css`
 	flex-wrap: wrap;
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
-	li::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
+
 	margin: 0;
-	padding: 0 0 12px;
+	padding: 0 0 ${space[3]}px;
 	position: relative;
 	${from.desktop} {
 		display: flex;
@@ -168,13 +162,6 @@ const columnStyle = css`
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
 
-	&::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
-
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
@@ -183,13 +170,6 @@ const columnStyle = css`
 		width: ${pillarWidthsPx.tablet}px;
 		float: left;
 		position: relative;
-		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
-
-		:after {
-			height: 100%;
-			left: 0;
-			width: 1px;
-		}
 
 		:first-of-type {
 			border-left: none;
@@ -206,6 +186,10 @@ const columnStyleFromLeftCol = css`
 	}
 `;
 
+/**
+ * Contains secondary navigation links relating to pillars
+ * E.g. "Business" under the News pillar, "Food" under the Lifestyle pillar
+ */
 export const Pillar = ({
 	column,
 	index,

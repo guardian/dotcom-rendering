@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineMedium24,
+	headlineBold24,
+	space,
 	textSans17,
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
@@ -37,10 +38,9 @@ const collapseColumnButton = css`
 	cursor: pointer;
 	color: ${themePalette('--masthead-nav-link-text')};
 	display: block;
-	${headlineMedium24};
-	font-weight: 700;
+	${headlineBold24};
 	outline: none;
-	padding: 6px 34px 18px 50px;
+	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
 	position: relative;
 	text-align: left;
 	width: 100%;
@@ -49,7 +49,7 @@ const collapseColumnButton = css`
 	}
 	text-transform: capitalize;
 	:before {
-		margin-top: 4px;
+		margin-top: ${space[1]}px;
 		left: 25px;
 		position: absolute;
 		border: 2px solid currentColor;
@@ -78,6 +78,9 @@ type Props = {
 	ariaControls: string;
 };
 
+/**
+ * Mobile only button to collapse a pillar section
+ */
 export const CollapseSectionButton = ({
 	title,
 	columnInputId,

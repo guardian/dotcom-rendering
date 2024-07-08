@@ -105,6 +105,11 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
+/**
+ * Entrypoint for the expanded navigation (via burger menu) to open the
+ * secondary pillar links, other Guardian links as well as
+ * non journalistic links for support asks and other marketing.
+ */
 export const ExpandedNav = ({
 	isImmersive,
 	nav,
