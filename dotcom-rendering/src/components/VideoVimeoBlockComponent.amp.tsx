@@ -17,8 +17,10 @@ export const VideoVimeoBlockComponent = ({ element, pillar }: Props) => {
 	const url = element.url === '' ? element.originalUrl ?? '' : element.url;
 	const vimeoId = getIdFromUrl(url, true);
 
-	logger.log(levels.ERROR, `Could not get an id from: ${url}`);
-	if (!vimeoId) return null;
+	if (!vimeoId) {
+		logger.log(levels.WARN, `Could not get an id from: ${url}`);
+		return null;
+	}
 
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>
