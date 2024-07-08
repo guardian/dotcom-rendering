@@ -125,9 +125,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							editionId={tagPage.editionId}
 							idUrl={tagPage.config.idUrl}
 							mmaUrl={tagPage.config.mmaUrl}
-							// subscribeUrl={
-							// 	tagPage.nav.readerRevenueLinks.header.subscribe
-							// }
 							discussionApiUrl={tagPage.config.discussionApiUrl}
 							idApiUrl={tagPage.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}

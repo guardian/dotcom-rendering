@@ -229,9 +229,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
 							discussionApiUrl={front.config.discussionApiUrl}
-							// subscribeUrl={
-							// 	front.nav.readerRevenueLinks.header.subscribe
-							// }
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={front.config.idApiUrl}
 							showSubNav={!isPaidContent}

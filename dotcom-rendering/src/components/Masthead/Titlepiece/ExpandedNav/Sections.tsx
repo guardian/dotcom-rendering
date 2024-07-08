@@ -24,7 +24,6 @@ const columnsStyle = (isImmersive: boolean) => css`
 	max-width: none;
 	${from.desktop} {
 		max-width: 980px;
-		/** TODO - @cemms1 check this */
 		padding: 0 ${space[4] + 3}px;
 		position: relative;
 		margin: 0 auto;
@@ -67,7 +66,7 @@ const brandExtensionList = css`
 		width: 0;
 	}
 	margin: 0;
-	padding: 0 0 ${space[3]}px;
+	padding: 0 0 12px;
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 0;
@@ -97,17 +96,14 @@ const brandExtensionLink = css`
 	cursor: pointer;
 	display: inline-block;
 	outline: none;
-	/** TODO - @cemms1 check this */
 	padding: 8px 34px 8px 50px;
 	position: relative;
 	text-align: left;
 	width: 100%;
 	text-decoration: none;
-	/** TODO - @cemms1 check this */
 	${from.tablet} {
 		padding-left: 60px;
 	}
-	/** TODO - @cemms1 check this */
 
 	${from.desktop} {
 		padding: 6px 0;

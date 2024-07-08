@@ -75,7 +75,6 @@ export const AllEditorialNewslettersPageLayout = ({
 							editionId={editionId}
 							idUrl={newslettersPage.config.idUrl}
 							mmaUrl={newslettersPage.config.mmaUrl}
-							// subscribeUrl={subscribeUrl}
 							discussionApiUrl={
 								newslettersPage.config.discussionApiUrl
 							}

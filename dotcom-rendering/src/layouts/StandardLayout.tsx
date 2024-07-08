@@ -447,9 +447,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							idUrl={article.config.idUrl}
 							mmaUrl={article.config.mmaUrl}
 							discussionApiUrl={article.config.discussionApiUrl}
-							// subscribeUrl={
-							// 	article.nav.readerRevenueLinks.header.subscribe
-							// }
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={!isPaidContent}

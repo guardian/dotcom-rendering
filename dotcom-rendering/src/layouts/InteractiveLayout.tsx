@@ -281,10 +281,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								editionId={article.editionId}
 								idUrl={article.config.idUrl}
 								mmaUrl={article.config.mmaUrl}
-								// subscribeUrl={
-								// 	article.nav.readerRevenueLinks.header
-								// 		.subscribe
-								// }
 								discussionApiUrl={
 									article.config.discussionApiUrl
 								}
