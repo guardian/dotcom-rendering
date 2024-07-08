@@ -10,7 +10,7 @@ let config: Config | undefined;
  * @returns {Config} an immutable, global config
  */
 
-export const getConfig = (): Readonly<Config> | undefined => {
+export const getConfig = (): Readonly<Config> => {
 	if (config) return config;
 
 	const serialised = document.querySelector('script#config')?.innerHTML;
