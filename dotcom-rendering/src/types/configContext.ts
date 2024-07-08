@@ -25,6 +25,14 @@ export type Config =
 			editionId: EditionId;
 	  }>;
 
+export const defaultConfig: Config = {
+	renderingTarget: 'Web',
+	darkModeAvailable: false,
+	updateLogoAdPartnerSwitch: false,
+	assetOrigin: 'https://assets.guim.co.uk/',
+	editionId: 'UK',
+};
+
 const assetOrigin = [
 	'https://assets.guim.co.uk/',
 	'https://assets-code.guim.co.uk/',

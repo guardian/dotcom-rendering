@@ -1,6 +1,6 @@
-import { parse } from 'valibot';
+import { safeParse } from 'valibot';
 import type { Config } from '../../types/configContext';
-import { configSchema } from '../../types/configContext';
+import { configSchema, defaultConfig } from '../../types/configContext';
 
 let config: Config | undefined;
 /**
@@ -15,11 +15,21 @@ export const getConfig = (): Readonly<Config> => {
 	const serialised = document.querySelector('script#config')?.innerHTML;
 
 	try {
-		if (!serialised)
+		if (!serialised) {
 			throw Error('Unable to fetch config attribute from #config');
-
-		return parse(configSchema, serialised);
-	} catch (error) {
+		} else {
+			const result = safeParse(configSchema, serialised);
+			if (!result.success) {
+				console.error(
+					`🚨 Error parsing ${String(
+						serialised,
+					)} config with valibot🚨`,
+				);
+				return defaultConfig;
+			}
+			return result.output;
+		}
+	} catch (error: unknown) {
 		console.error(
 			`🚨 Error parsing config. Is this data serialisable? ${String(
 				serialised,
