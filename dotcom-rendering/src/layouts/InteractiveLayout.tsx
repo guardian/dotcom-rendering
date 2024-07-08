@@ -555,7 +555,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 												<ArticleMetaApps
 													branding={branding}
 													format={format}
-													pageId={article.pageId}
 													byline={article.byline}
 													tags={article.tags}
 													primaryDateline={

@@ -17,11 +17,9 @@ import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
-import { SendAMessage } from './SendAMessage.importable';
 
 type Props = {
 	format: ArticleFormat;
-	pageId: string;
 	byline?: string;
 	tags: TagType[];
 	primaryDateline: string;
@@ -30,7 +28,6 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	messageUs?: MessageUs;
 };
 
 const metaGridContainer = css`
@@ -198,7 +195,6 @@ const stretchLines = css`
 export const ArticleMetaApps = ({
 	branding,
 	format,
-	pageId,
 	byline,
 	tags,
 	primaryDateline,
@@ -206,7 +202,6 @@ export const ArticleMetaApps = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
-	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -277,16 +272,6 @@ export const ArticleMetaApps = ({
 								/>
 							</Island>
 						)}
-					{messageUs && format.design === ArticleDesign.LiveBlog && (
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<SendAMessage
-								formFields={messageUs.formFields}
-								formId={messageUs.formId}
-								format={format}
-								pageId={pageId}
-							/>
-						</Island>
-					)}
 				</MetaGridByline>
 				{isCommentable && (
 					<MetaGridCommentCount

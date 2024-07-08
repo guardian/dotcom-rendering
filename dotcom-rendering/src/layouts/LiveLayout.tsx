@@ -721,7 +721,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								{isApps && (
 									<ArticleMetaApps
 										format={format}
-										pageId={article.pageId}
 										byline={article.byline}
 										tags={article.tags}
 										primaryDateline={
@@ -735,7 +734,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										messageUs={article.messageUs}
 									></ArticleMetaApps>
 								)}
 								{isWeb && (
@@ -760,7 +758,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											messageUs={article.messageUs}
 										/>
 									</div>
 								)}
@@ -926,7 +923,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											messageUs={article.messageUs}
 										/>
 									</div>
 								</Hide>

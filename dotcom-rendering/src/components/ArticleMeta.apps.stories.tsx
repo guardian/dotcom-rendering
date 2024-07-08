@@ -140,7 +140,6 @@ export const ArticleAppsWithFollowStory: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare Chief music writer"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -165,7 +164,6 @@ export const ArticleAppsWithFollowStoryNoTitle: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -192,7 +190,6 @@ export const ArticleAppsWithAvatarAndFollowStory: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare Chief music writer"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -221,7 +218,6 @@ export const ArticleAppsWithAvatarNoTitleAndFollowStory: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -250,7 +246,6 @@ export const ArticleAppsImmersiveAndFollowStory: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -277,7 +272,6 @@ export const ArticleAppsImmersiveWithMultipleContributorsStory: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare in New York and Laura Banks in London"
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -308,7 +302,6 @@ export const ArticleAppsWithMultipleContributors: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare in New York and Laura Banks in London"
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -335,7 +328,6 @@ export const ArticleAppsWithBrandingStory: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare Chief music writer"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
@@ -363,7 +355,6 @@ export const ArticleAppsWithBrandingStoryForAdvertisingPartner: StoryObj = ({
 		<Wrapper>
 			<ArticleMetaApps
 				format={format}
-				pageId=""
 				byline="Lanre Bakare Chief music writer"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"

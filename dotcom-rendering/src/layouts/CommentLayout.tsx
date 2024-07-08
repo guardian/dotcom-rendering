@@ -606,7 +606,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
