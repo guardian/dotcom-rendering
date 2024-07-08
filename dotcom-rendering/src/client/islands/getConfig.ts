@@ -15,12 +15,10 @@ export const getConfig = (): Readonly<Config> => {
 	const serialised = document.querySelector('script#config')?.innerHTML;
 
 	try {
-		if (!serialised) {
+		if (!serialised)
 			throw Error('Unable to fetch config attribute from #config');
-		} else {
-			const result = parse(configSchema, serialised);
-			return result;
-		}
+
+		return parse(configSchema, serialised);
 	} catch (error) {
 		console.error(
 			`🚨 Error parsing config. Is this data serialisable? ${String(
