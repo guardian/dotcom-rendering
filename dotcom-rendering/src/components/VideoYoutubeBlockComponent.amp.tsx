@@ -13,8 +13,10 @@ export const VideoYoutubeBlockComponent = ({ element, pillar }: Props) => {
 	const url = element.originalUrl || element.url;
 	const youtubeId = getIdFromUrl(url, true, 'v');
 
-	logger.log(levels.ERROR, `Could not get an id from: ${url}`);
-	if (!youtubeId) return null;
+	if (!youtubeId) {
+		logger.log(levels.WARN, `Could not get an id from: ${url}`);
+		return null;
+	}
 
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>
