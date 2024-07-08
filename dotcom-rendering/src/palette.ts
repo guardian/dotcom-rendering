@@ -2369,7 +2369,9 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 
 const cardBorderTopLight: PaletteFunction = () => sourcePalette.neutral[73];
 
-const cardBorderTopDark: PaletteFunction = () => sourcePalette.neutral[20];
+const cardBorderTopDark: PaletteFunction = (format): string => {
+	return cardBorderTopLight(format);
+};
 
 const cardBorderSupportingLight: PaletteFunction = (format) => {
 	switch (format.design) {
@@ -6672,6 +6674,18 @@ const paletteColours = {
 	'--timeline-event-border': {
 		light: timelineEventBorderLight,
 		dark: timelineEventBorderDark,
+	},
+	'--trending-topics-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--trending-topics-separator': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--trending-topics-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,

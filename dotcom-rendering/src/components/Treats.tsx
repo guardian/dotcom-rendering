@@ -10,6 +10,7 @@ import {
 import { Link } from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { decidePalette } from '../lib/decidePalette';
+import { palette as schemePalette } from '../palette';
 import type { TreatType } from '../types/front';
 import { generateSources, getFallbackSource } from './Picture';
 import { SvgCrossword } from './SvgCrossword';
@@ -19,19 +20,19 @@ const TextTreat = ({
 	linkTo,
 	index,
 	borderColour,
-	fontColour,
 }: {
 	text: string;
 	linkTo: string;
 	index: number;
 	borderColour?: string;
-	fontColour?: string;
 }) => (
 	<li
 		css={css`
 			margin-top: ${space[3]}px;
-			border-left: 1px solid ${borderColour ?? sourcePalette.neutral[86]};
-			border-top: 1px solid ${borderColour ?? sourcePalette.neutral[86]};
+			border-left: 1px solid
+				${borderColour ?? schemePalette('--article-border')};
+			border-top: 1px solid
+				${borderColour ?? schemePalette('--article-border')};
 			padding-top: ${space[1]}px;
 			padding-left: ${space[2]}px;
 		`}
@@ -42,7 +43,7 @@ const TextTreat = ({
 			cssOverrides={css`
 				${textSans12}
 				text-decoration: none;
-				color: ${fontColour ?? sourcePalette.neutral[7]};
+				color: inherit;
 			`}
 			href={linkTo}
 			data-link-name={`treat | ${index + 1} | ${text}`}
@@ -142,7 +143,9 @@ const ImageTreat = ({
 									padding: 0 5px 4px;
 									box-decoration-break: clone;
 									position: relative;
-									color: ${sourcePalette.neutral[100]};
+									color: ${schemePalette(
+										'--article-section-title',
+									)};
 									text-decoration: none;
 									:hover {
 										text-decoration: underline;
@@ -169,11 +172,9 @@ const ImageTreat = ({
 export const Treats = ({
 	treats,
 	borderColour,
-	fontColour,
 }: {
 	treats: TreatType[];
 	borderColour?: string;
-	fontColour?: string;
 }) => {
 	if (treats.length === 0) return null;
 	return (
@@ -203,7 +204,6 @@ export const Treats = ({
 									linkTo={linkTo}
 									index={index}
 									borderColour={borderColour}
-									fontColour={fontColour}
 								/>
 							))}
 						</Fragment>
@@ -240,7 +240,6 @@ export const Treats = ({
 								linkTo={linkTo}
 								index={index}
 								borderColour={borderColour}
-								fontColour={fontColour}
 							/>
 						))}
 					</>

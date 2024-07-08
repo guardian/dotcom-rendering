@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { palette, textSans12, textSans14 } from '@guardian/source/foundations';
+import { textSans12, textSans14 } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { palette } from '../palette';
 import type { FETagType } from '../types/tag';
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 
 const linkStyle = css`
 	${textSans14};
-	border: 1px solid ${palette.neutral[20]};
+	border: 1px solid ${palette('--trending-topics-text')};
 	border-radius: 12px;
 	padding: 2px 9px;
 	display: inline-block;
@@ -22,12 +23,12 @@ const linkStyle = css`
 	line-height: 1.4;
 	text-decoration: none;
 	top: 0;
-	color: ${palette.neutral[20]};
+	color: ${palette('--trending-topics-text')};
 `;
 
 const topicLabel = css`
 	${textSans12};
-	color: ${palette.neutral[20]};
+	color: ${palette('--trending-topics-text')};
 `;
 
 const trendingTopicContainer = css`
@@ -47,19 +48,24 @@ const listStyleNone = css`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 1.5rem 0.25rem;
+	/*
+	 to show a repeading dotted line
+	 we create a 1px horizontal slit
+	 through which we show a repeating pattern
+	*/
 	background-image: repeating-linear-gradient(
 			to bottom,
-			${palette.neutral[100]} 0px,
-			${palette.neutral[100]} 36px,
+			${palette('--trending-topics-background')} 0px,
+			${palette('--trending-topics-background')} 36px,
 			transparent 36px,
 			transparent 37px,
-			${palette.neutral[100]} 37px,
-			${palette.neutral[100]} 48px
+			${palette('--trending-topics-background')} 37px,
+			${palette('--trending-topics-background')} 48px
 		),
 		repeating-linear-gradient(
 			to right,
-			${palette.neutral[86]} 0px,
-			${palette.neutral[86]} 3px,
+			${palette('--trending-topics-separator')} 0px,
+			${palette('--trending-topics-separator')} 3px,
 			transparent 3px,
 			transparent 5px
 		);

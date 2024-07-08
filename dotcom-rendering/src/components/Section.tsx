@@ -396,9 +396,6 @@ export const Section = ({
 								borderColour={
 									borderColour ?? overrides?.border.container
 								}
-								fontColour={
-									fontColour ?? overrides?.text.container
-								}
 							/>
 						)}
 					</div>
