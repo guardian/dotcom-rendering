@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { Treats } from './Treats';
 import { Pillar } from '@guardian/libs';
+import { Treats } from './Treats';
 
 export default {
 	component: Treats,
