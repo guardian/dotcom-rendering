@@ -202,15 +202,6 @@ export const YoutubeBlockComponent = ({
 		trackingEvent: VideoEventKey,
 	): Promise<void> => {
 		if (!id) return;
-		if (
-			// these events are not supported by VideoEventKey
-			trackingEvent === 'skip' ||
-			trackingEvent === 'pause' ||
-			trackingEvent === 'cued' ||
-			trackingEvent === 'resume'
-		) {
-			return;
-		}
 		const ophan = await getOphan(renderingTarget);
 		ophan.record({
 			video: {
