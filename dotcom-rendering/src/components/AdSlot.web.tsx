@@ -14,6 +14,7 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import type { FEArticleType } from '../types/frontend';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { Island } from './Island';
 
@@ -454,6 +455,17 @@ const mobileStickyAdStyles = css`
 		display: block;
 		position: relative;
 		${individualLabelCSS}
+	}
+`;
+
+const mobileStickyAdStylesFullWidth = css`
+	width: 100%;
+	text-align: center;
+	background-color: ${palette.neutral[97]};
+
+	.ad-slot[data-label-show='true']::before {
+		padding-left: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
+		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
 	}
 `;
 
@@ -908,8 +920,20 @@ export const AdSlot = ({
 	}
 };
 
-export const MobileStickyContainer = () => {
+type MobileStickyContainerProps = Pick<FEArticleType, 'contentType' | 'pageId'>;
+
+export const MobileStickyContainer = ({
+	contentType,
+	pageId,
+}: MobileStickyContainerProps) => {
 	return (
-		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
+		<div
+			className="mobilesticky-container"
+			css={[
+				mobileStickyAdStyles,
+				(contentType === 'Article' || pageId.startsWith('football/')) &&
+					mobileStickyAdStylesFullWidth,
+			]}
+		/>
 	);
 };

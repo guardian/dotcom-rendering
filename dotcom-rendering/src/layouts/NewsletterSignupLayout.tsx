@@ -601,7 +601,11 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 			</Section>
 
 			<BannerWrapper data-print-layout="hide" />
-			<MobileStickyContainer data-print-layout="hide" />
+			<MobileStickyContainer
+				data-print-layout="hide"
+				contentType={article.contentType}
+				pageId={article.pageId}
+			/>
 		</>
 	);
 };
