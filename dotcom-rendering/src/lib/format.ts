@@ -149,3 +149,21 @@ export const formatToFEFormat = ({
 	display: displayToFEDisplay(display),
 	theme: themeToFETheme(theme),
 });
+
+/**
+ * Creates a string representation of {@linkcode ArticleFormat}. Useful for
+ * logging, storybook UI etc.
+ *
+ * @param format An {@linkcode ArticleFormat}
+ * @returns A string representation of `ArticleFormat`
+ */
+export const formatToString = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): string =>
+	[
+		`${ArticleDesign[design]} Design`,
+		`${ArticleDisplay[display]} Display`,
+		`and ${Pillar[theme] ?? ArticleSpecial[theme]} Theme`,
+	].join(', ');

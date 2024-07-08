@@ -5,795 +5,350 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { palette } from '@guardian/source/foundations';
-import type { StoryObj } from '@storybook/react';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import type { Meta, StoryObj } from '@storybook/react';
+import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { getAllThemes } from '../lib/format';
-import { ArticleContainer } from './ArticleContainer';
+import { formatToString } from '../lib/format';
+import { palette } from '../palette';
 import { ArticleHeadline } from './ArticleHeadline';
-import { mainMediaElements } from './ArticleHeadline.mocks';
-import { Flex } from './Flex';
-import { MainMedia } from './MainMedia';
-import { Section } from './Section';
 import { Standfirst } from './Standfirst';
 
-export default {
+const meta = {
 	component: ArticleHeadline,
-	title: 'Components/ArticleHeadline',
-};
+	title: 'Components/Article Headline',
+	decorators: [
+		centreColumnDecorator,
+		(Story, { args }) => (
+			<Story
+				args={{
+					...args,
+					headlineString: `This is a headline with ${formatToString(
+						args.format,
+					)}`,
+				}}
+			/>
+		),
+	],
+} satisfies Meta<typeof ArticleHeadline>;
 
-type StoryArgs = { format: ArticleFormat };
+export default meta;
 
-const themeVariations = [
-	Pillar.Sport,
-	Pillar.News,
-	Pillar.Culture,
-	Pillar.Opinion,
-	Pillar.Lifestyle,
-	ArticleSpecial.SpecialReport,
-	ArticleSpecial.SpecialReportAlt,
-	ArticleSpecial.Labs,
-];
+type Story = StoryObj<typeof meta>;
 
-const allThemeStandardVariations = themeVariations.map((theme) => ({
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme,
-}));
+export const StandardDesign = {
+	args: {
+		// This will be overwritten by the headline component decorator above
+		headlineString: 'This is an example of a headline',
+		// This will be overwritten by `parameters.formats`
+		format: {
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
+		tags: [],
+		webPublicationDateDeprecated: '',
+	},
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		}),
+	},
+} satisfies Story;
 
-const allThemeFeatureVariations = themeVariations.map((theme) => ({
-	design: ArticleDesign.Feature,
-	display: ArticleDisplay.Standard,
-	theme,
-}));
+export const FeatureDesign = {
+	...StandardDesign,
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Standard,
+		}),
+	},
+} satisfies Story;
 
-export const ArticleStory: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is how the default headline looks"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-ArticleStory.storyName = 'Article';
-ArticleStory.decorators = [splitTheme(allThemeStandardVariations)];
-
-export const Feature: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is a Feature headline, it has colour applied based on pillar"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Feature.storyName = 'Feature';
-Feature.decorators = [splitTheme(allThemeFeatureVariations)];
-
-export const ShowcaseInterview: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<div
-						css={css`
-							margin-bottom: -100px;
-						`}
-					>
-						<ArticleHeadline
-							headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-							format={format}
-							tags={[]}
-							webPublicationDateDeprecated=""
-							byline="Byline text"
-						/>
-					</div>
-					<MainMedia
-						format={format}
-						hideCaption={true}
-						elements={mainMediaElements}
-						pageId="testID"
-						webTitle="story article"
-						ajaxUrl=""
-						isAdFreeUser={false}
-						isSensitive={false}
-						abTests={{}}
-						switches={{}}
-						editionId={'UK'}
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-ShowcaseInterview.storyName = 'Interview (with showcase)';
-ShowcaseInterview.decorators = [
-	splitTheme([
-		{
+export const InterviewDesignShowcaseDisplay = {
+	args: {
+		...StandardDesign.args,
+		format: {
 			display: ArticleDisplay.Showcase,
 			design: ArticleDesign.Interview,
 			theme: Pillar.Culture,
 		},
-	]),
-];
+		byline: 'Byline text',
+	},
+	name: 'Interview Design, Showcase Display',
+} satisfies Story;
 
-export const ShowcaseInterviewNobyline: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<div
-						css={css`
-							margin-bottom: -100px;
-						`}
-					>
-						<ArticleHeadline
-							headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-							format={format}
-							tags={[]}
-							webPublicationDateDeprecated=""
-							byline=""
-						/>
-					</div>
-					<MainMedia
-						format={format}
-						hideCaption={true}
-						elements={mainMediaElements}
-						pageId="testID"
-						webTitle="story article"
-						ajaxUrl=""
-						isAdFreeUser={false}
-						isSensitive={false}
-						abTests={{}}
-						switches={{}}
-						editionId={'UK'}
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-ShowcaseInterviewNobyline.storyName = 'Interview (with showcase and NO BYLINE)';
-ShowcaseInterviewNobyline.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Showcase,
-			design: ArticleDesign.Interview,
-			theme: Pillar.Culture,
-		},
-	]),
-];
+export const InterviewDesignShowcaseDisplayBylineLink = {
+	args: {
+		...InterviewDesignShowcaseDisplay.args,
+		tags: [
+			{
+				id: 'profile/byline-text',
+				type: 'Contributor',
+				title: 'Byline text',
+			},
+		],
+	},
+	name: 'Interview Design, Showcase Display, with byline link',
+} satisfies Story;
 
-export const Interview: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-						byline="Byline text"
-					/>
-					<Standfirst
-						format={format}
-						standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
-					/>
-					<MainMedia
-						format={format}
-						hideCaption={true}
-						elements={mainMediaElements}
-						pageId="testID"
-						webTitle="story article"
-						ajaxUrl=""
-						isAdFreeUser={false}
-						isSensitive={false}
-						abTests={{}}
-						switches={{}}
-						editionId={'UK'}
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Interview.storyName = 'Interview (without showcase)';
-Interview.decorators = [
-	splitTheme([
-		{
+export const InterviewDesignShowcaseDisplayNoByline = {
+	args: {
+		...InterviewDesignShowcaseDisplay.args,
+		byline: undefined,
+	},
+	name: 'Interview Design, Showcase Display, no byline',
+} satisfies Story;
+
+export const InterviewDesignStandardDisplay = {
+	args: {
+		...InterviewDesignShowcaseDisplay.args,
+		format: {
+			...InterviewDesignShowcaseDisplay.args.format,
 			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Interview,
-			theme: Pillar.Culture,
 		},
-	]),
-];
+	},
+	name: 'Interview Design, Standard Display',
+} satisfies Story;
 
-export const InterviewSpecialReport: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-						byline="Byline text"
-					/>
-					<Standfirst
-						format={format}
-						standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
-					/>
-					<MainMedia
-						format={format}
-						hideCaption={true}
-						elements={mainMediaElements}
-						pageId="testID"
-						webTitle="story article"
-						ajaxUrl=""
-						isAdFreeUser={false}
-						isSensitive={false}
-						abTests={{}}
-						switches={{}}
-						editionId={'UK'}
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-InterviewSpecialReport.storyName =
-	'Interview Special Report (without showcase)';
-InterviewSpecialReport.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Interview,
+export const InterviewDesignStandardDisplaySpecialReportTheme = {
+	args: {
+		...InterviewDesignStandardDisplay.args,
+		format: {
+			...InterviewDesignStandardDisplay.args.format,
 			theme: ArticleSpecial.SpecialReport,
 		},
-	]),
-];
+	},
+	name: 'Interview Design, Standard Display, Special Report Theme',
+} satisfies Story;
 
-export const InterviewNoByline: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-						byline=""
-					/>
-					<Standfirst
-						format={format}
-						standfirst="This is the standfirst text. We include here to demonstrate spacing in this case where we have a Interview type article that does not have a showcase main media element"
-					/>
-					<MainMedia
-						format={format}
-						hideCaption={true}
-						elements={mainMediaElements}
-						pageId="testID"
-						webTitle="story article"
-						ajaxUrl=""
-						isAdFreeUser={false}
-						isSensitive={false}
-						abTests={{}}
-						switches={{}}
-						editionId={'UK'}
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-InterviewNoByline.storyName = 'Interview (without showcase with NO BYLINE)';
-InterviewNoByline.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Interview,
-			theme: Pillar.Culture,
-		},
-	]),
-];
+export const InterviewDesignStandardDisplayNoByline = {
+	args: {
+		...InterviewDesignStandardDisplay.args,
+		byline: undefined,
+	},
+	name: 'Interview Design, Standard Display, no byline',
+} satisfies Story;
 
-export const Comment: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="Yes, the billionaire club is one we really need to shut down"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Comment.storyName = 'Comment';
-Comment.decorators = [
-	splitTheme([
-		{
+export const CommentDesignOpinionTheme = {
+	args: {
+		...StandardDesign.args,
+		format: {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Comment,
 			theme: Pillar.Opinion,
 		},
-	]),
-];
+	},
+	name: 'Comment Design, Opinion Theme',
+} satisfies Story;
 
-export const Analysis: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString={`This is an Analysis headline in ${
-							Pillar[format.theme] ??
-							ArticleSpecial[format.theme] ??
-							''
-						}. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor`}
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-const analysisFormats = getAllThemes({
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Analysis,
-});
-Analysis.storyName = 'Analysis';
-Analysis.decorators = [splitTheme(analysisFormats)];
-
-export const Gallery: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is Gallery"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Gallery.storyName = 'Gallery';
-Gallery.decorators = [
-	splitTheme([
-		{
+export const AnalysisDesign = {
+	...StandardDesign,
+	parameters: {
+		formats: getAllThemes({
 			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+		}),
+	},
+} satisfies Story;
+
+export const GalleryDesign = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.Gallery,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Review: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is Review"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Review.storyName = 'Review';
-Review.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const ReviewDesign = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.Review,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const PhotoEssay: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is PhotoEssay"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-PhotoEssay.storyName = 'PhotoEssay';
-PhotoEssay.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const PhotoEssayDesign = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.PhotoEssay,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Explainer: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is Explainer"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Explainer.storyName = 'Review';
-Explainer.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const ExplainerDesign = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.Explainer,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Quiz: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is Quiz"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Quiz.storyName = 'Quiz';
-Quiz.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const QuizDesign = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.Quiz,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Recipe: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is Recipe"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Recipe.storyName = 'Recipe';
-Recipe.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const RecipeDesign = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.Recipe,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Immersive: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when display type is Immersive"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Immersive.storyName = 'Immersive';
-Immersive.decorators = [
-	splitTheme([
-		{
+export const ImmersiveDisplay = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			display: ArticleDisplay.Immersive,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const ImmersiveNoMainMedia: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is PrintShop, which has no main media"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-ImmersiveNoMainMedia.storyName = 'Printshop (with no main media)';
-ImmersiveNoMainMedia.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Immersive,
+export const PrintShopDesignImmersiveDisplay = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.PrintShop,
-			theme: Pillar.News,
-		},
-	]),
-];
-
-export const ImmersiveComment: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section
-			fullWidth={true}
-			showSideBorders={false}
-			showTopBorder={false}
-			backgroundColour="orange"
-		>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when display type is Immersive and design Comment"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-ImmersiveComment.storyName = 'Immersive opinion piece';
-ImmersiveComment.decorators = [
-	splitTheme([
-		{
 			display: ArticleDisplay.Immersive,
+		},
+	},
+	name: 'PrintShop Design, Immersive Display',
+} satisfies Story;
+
+export const CommentDesignImmersiveDisplay = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.Comment,
-			theme: Pillar.News,
+			display: ArticleDisplay.Immersive,
 		},
-	]),
-];
+	},
+	name: 'Comment Design, Immersive Display',
+} satisfies Story;
 
-export const Editorial: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is Editorial"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-Editorial.storyName = 'Editorial';
-Editorial.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const EditorialDesign = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.Editorial,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const MatchReport: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is MatchReport"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-MatchReport.storyName = 'MatchReport';
-MatchReport.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const MatchReportDesignSportTheme = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.MatchReport,
 			theme: Pillar.Sport,
 		},
-	]),
-];
+	},
+	name: 'MatchReport Design, Sport Theme',
+} satisfies Story;
 
-export const LiveBlog: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true} backgroundColour={palette.news[300]}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is LiveBlog"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-LiveBlog.storyName = 'LiveBlog';
-LiveBlog.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const LiveBlogDesign = {
+	args: {
+		...StandardDesign.args,
+		format: {
+			...StandardDesign.args.format,
 			design: ArticleDesign.LiveBlog,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+	decorators: [
+		(Story) => (
+			<div
+				css={css`
+					background-color: ${palette('--headline-blog-background')};
+				`}
+			>
+				<Story />
+			</div>
+		),
+	],
+} satisfies Story;
 
-export const DeadBlog: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is the headline you see when design type is DeadBlog"
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-DeadBlog.storyName = 'DeadBlog';
-DeadBlog.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
+export const DeadBlogDesign = {
+	...LiveBlogDesign,
+	args: {
+		...LiveBlogDesign.args,
+		format: {
+			...LiveBlogDesign.args.format,
 			design: ArticleDesign.DeadBlog,
-			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const ReviewWithoutStars: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is a Review headline."
-						format={format}
-						tags={[]}
-						webPublicationDateDeprecated=""
-						byline="Byline text"
-					/>
-					<Standfirst
-						format={format}
-						standfirst="This is the standfirst text. We include here to demonstrate we have the correct amount of padding below the headline when there are no stars."
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-ReviewWithoutStars.storyName = 'Review without stars';
-ReviewWithoutStars.decorators = [
-	splitTheme([
-		{
+export const ReviewDesignCultureThemeWithoutStars = {
+	args: {
+		...StandardDesign.args,
+		format: {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Review,
 			theme: Pillar.Culture,
 		},
-	]),
-];
+	},
+	decorators: [
+		(Story, { args }) => (
+			<>
+				<Story />
+				<Standfirst
+					format={args.format}
+					standfirst="This is the standfirst text. We include here to demonstrate we have the correct amount of padding below the headline when there are no stars."
+				/>
+			</>
+		),
+	],
+} satisfies Story;
 
-export const AgeWarning: StoryObj = ({ format }: StoryArgs) => {
-	return (
-		<Section fullWidth={true}>
-			<Flex>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString={`This is a headline in ${
-							ArticleDesign[format.design]
-						} with an age warning showing`}
-						format={format}
-						tags={[
-							{
-								id: 'tone/news',
-								type: '',
-								title: '',
-							},
-						]}
-						webPublicationDateDeprecated="2020-03-28T07:27:19.000Z"
-					/>
-				</ArticleContainer>
-			</Flex>
-		</Section>
-	);
-};
-const ageWarningFormats = [
-	ArticleDesign.Comment,
-	ArticleDesign.Interview,
-	ArticleDesign.MatchReport,
-	ArticleDesign.Feature,
-	ArticleDesign.Interactive,
-	ArticleDesign.Gallery,
-	ArticleDesign.Analysis,
-	ArticleDesign.Review,
-].map((design) => ({
-	display: ArticleDisplay.Standard,
-	design,
-	theme: Pillar.News,
-}));
-AgeWarning.storyName = 'with age warning';
-AgeWarning.decorators = [splitTheme(ageWarningFormats)];
+export const WithAgeWarning = {
+	args: {
+		...StandardDesign.args,
+		tags: [
+			{
+				id: 'tone/news',
+				type: '',
+				title: '',
+			},
+		],
+		webPublicationDateDeprecated: '2020-03-28T07:27:19.000Z',
+	},
+	parameters: {
+		formats: [
+			ArticleDesign.Comment,
+			ArticleDesign.Interview,
+			ArticleDesign.MatchReport,
+			ArticleDesign.Feature,
+			ArticleDesign.Interactive,
+			ArticleDesign.Gallery,
+			ArticleDesign.Analysis,
+			ArticleDesign.Review,
+		].map((design) => ({
+			display: ArticleDisplay.Standard,
+			design,
+			theme: Pillar.News,
+		})),
+	},
+} satisfies Story;
