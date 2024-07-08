@@ -1,6 +1,5 @@
 import { ArticleDesign } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
-import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
 import { CricketScoreboard } from './CricketScoreboard';
 import { Placeholder } from './Placeholder';
@@ -8,16 +7,11 @@ import { Placeholder } from './Placeholder';
 type Props = {
 	matchUrl: string;
 	format: ArticleFormat;
-	editionId: EditionId;
 };
 
 const Loading = () => <Placeholder height={172} />;
 
-export const GetCricketScoreboard = ({
-	matchUrl,
-	format,
-	editionId,
-}: Props) => {
+export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 	const options: SWRConfiguration = {
 		errorRetryCount: 1,
 	};
@@ -44,7 +38,6 @@ export const GetCricketScoreboard = ({
 				match={data.match}
 				scorecardUrl={data.scorecardUrl}
 				format={format}
-				editionId={editionId}
 			/>
 		);
 	}

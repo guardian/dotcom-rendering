@@ -174,7 +174,6 @@ export const PinnedPost = ({
 							date={new Date(pinnedPost.blockFirstPublished)}
 							display="relative"
 							absoluteServerTimes={absoluteServerTimes}
-							editionId={'UK'}
 							showWeekday={false}
 							showDate={true}
 							showTime={false}
