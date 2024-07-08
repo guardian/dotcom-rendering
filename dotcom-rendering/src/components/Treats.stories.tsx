@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { Treats } from './Treats';
+import { Pillar } from '@guardian/libs';
 
 export default {
 	component: Treats,
@@ -46,3 +47,28 @@ export const Default = () => {
 	);
 };
 Default.storyName = 'Default';
+
+export const US = () => {
+	return (
+		<Wrapper>
+			<Treats
+				treats={[
+					{
+						links: [
+							{
+								linkTo: '/us/wellness',
+								text: 'Read more on living a good life in a complex world.',
+							},
+						],
+						theme: Pillar.Lifestyle,
+						imageUrl:
+							'https://uploads.guim.co.uk/2023/10/30/Wellness_Treat.png',
+						altText: 'Well Actually logo',
+						pageId: 'us',
+						containerTitle: 'Spotlight',
+					},
+				]}
+			/>
+		</Wrapper>
+	);
+};
