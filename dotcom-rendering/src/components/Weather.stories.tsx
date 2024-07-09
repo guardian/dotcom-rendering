@@ -27,7 +27,7 @@ export default {
 				metric: 10,
 				imperial: 50,
 			},
-			link: 'https://www.accuweather.com/en/gb/llanfair-pwllgwyngyll/ll61-5/current-weather/328819?lang=en-us&partner=web_guardian_adc',
+			link: 'https://www.accuweather.com/en/gb/llanfair-pwllgwyngyll/ll61-5/current-weather/328819?lang=en-us',
 		},
 		forecast: [
 			{
@@ -175,6 +175,7 @@ export default {
 				dateTime: '2023-06-27T15:00:00.000Z',
 			},
 		],
+		link: 'https://www.accuweather.com/en/gb/llanfair-pwllgwyngyll/ll61-5/current-weather/328819?lang=en-us&partner=web_guardian_adc',
 	},
 };
 
