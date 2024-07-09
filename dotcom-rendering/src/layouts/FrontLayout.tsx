@@ -791,7 +791,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}
-					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
 

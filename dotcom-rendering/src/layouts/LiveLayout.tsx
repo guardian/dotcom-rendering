@@ -1522,9 +1522,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							pillars={props.NAV.pillars}
 							urls={article.nav.readerRevenueLinks.header}
 							editionId={article.editionId}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
 						/>
 					</Section>
 
