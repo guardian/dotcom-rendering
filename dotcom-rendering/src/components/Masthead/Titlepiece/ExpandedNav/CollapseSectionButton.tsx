@@ -1,18 +1,24 @@
 import { css } from '@emotion/react';
 import {
-	from,
 	headlineBold24,
 	space,
 	textSans17,
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../../palette';
+import {
+	hideDesktop,
+	mobilePillarStyles,
+	pointerEventsNone,
+	sharedHoverStyles,
+} from './commonStyles';
 
-const hideDesktop = css`
-	${from.desktop} {
-		display: none;
-	}
-`;
+type Props = {
+	title: string;
+	columnInputId: string;
+	collapseColumnInputId: string;
+	ariaControls: string;
+};
 
 const showColumnLinksStyle = (columnInputId: string) => css`
 	/*
@@ -24,30 +30,31 @@ const showColumnLinksStyle = (columnInputId: string) => css`
 	/* stylelint-disable-next-line selector-type-no-unknown */
 	${`#${columnInputId}`}:checked ~ & {
 		:before {
-			margin-top: 8px;
+			margin-top: ${space[2]}px;
 			transform: rotate(-135deg);
 		}
 	}
 `;
 
 const collapseColumnButton = css`
+	${headlineBold24};
+	color: ${themePalette('--masthead-nav-link-text')};
+
 	user-select: none;
 	background-color: transparent;
 	border: 0;
 	box-sizing: border-box;
 	cursor: pointer;
-	color: ${themePalette('--masthead-nav-link-text')};
 	display: block;
-	${headlineBold24};
+
 	outline: none;
-	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
+	${mobilePillarStyles}
 	position: relative;
 	text-align: left;
 	width: 100%;
-	> * {
-		pointer-events: none;
-	}
+
 	text-transform: capitalize;
+
 	:before {
 		margin-top: ${space[1]}px;
 		left: 25px;
@@ -61,22 +68,16 @@ const collapseColumnButton = css`
 		transform: rotate(45deg);
 		width: 10px;
 	}
-	:hover,
-	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
-	}
+
+	${sharedHoverStyles}
+
+	${pointerEventsNone}
 `;
 
 const editionStyle = css`
 	text-transform: none;
 	${textSans17};
 `;
-type Props = {
-	title: string;
-	columnInputId: string;
-	collapseColumnInputId: string;
-	ariaControls: string;
-};
 
 /**
  * Mobile only button to collapse a pillar section
@@ -104,7 +105,7 @@ export const CollapseSectionButton = ({
 		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="menuitem"
 		data-testid={`column-collapse-${title}`}
-		data-link-name={nestedOphanComponents('header', `secondary`, title)}
+		data-link-name={nestedOphanComponents('header', 'secondary-nav', title)}
 	>
 		{title}
 	</label>

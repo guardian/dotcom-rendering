@@ -4,6 +4,11 @@ import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
 import { pillarWidthsPx } from '../constants';
+import {
+	mobilePillarStyles,
+	pointerEventsNone,
+	sharedHoverStyles,
+} from './commonStyles';
 
 const pillarHeight = 42;
 
@@ -130,7 +135,7 @@ const columnLinkTitle = css`
 	display: inline-block;
 	font-weight: 500;
 	outline: none;
-	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
+	${mobilePillarStyles}
 	position: relative;
 	text-align: left;
 	width: 100%;
@@ -140,18 +145,17 @@ const columnLinkTitle = css`
 	}
 
 	${from.desktop} {
-		font-size: 16px;
 		padding: 6px 0;
 	}
+
+	${sharedHoverStyles};
+
 	:hover,
 	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
 		text-decoration: underline;
 	}
 
-	> * {
-		pointer-events: none;
-	}
+	${pointerEventsNone}
 `;
 
 const mainMenuLinkStyle = css`

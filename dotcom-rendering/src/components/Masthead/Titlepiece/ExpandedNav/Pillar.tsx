@@ -14,12 +14,7 @@ import type {
 import { palette as themePalette } from '../../../../palette';
 import { pillarWidthsPx } from '../constants';
 import { CollapseSectionButton } from './CollapseSectionButton';
-
-const hideDesktop = css`
-	${from.desktop} {
-		display: none;
-	}
-`;
+import { hideDesktop, mobilePillarStyles } from './commonStyles';
 
 const pillarDivider = css`
 	${from.desktop} {
@@ -45,16 +40,16 @@ const columnLinkTitle = css`
 	 * Please speak to your team's designer and update this to use a more appropriate preset.
 	 */
 	line-height: 1.15;
-	background-color: transparent;
+	font-weight: 500;
+
 	text-decoration: none;
 	border: 0;
 	box-sizing: border-box;
 	color: ${themePalette('--masthead-nav-link-text')};
 	cursor: pointer;
 	display: inline-block;
-	font-weight: 500;
 	outline: none;
-	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
+	${mobilePillarStyles}
 	position: relative;
 	text-align: left;
 	width: 100%;
