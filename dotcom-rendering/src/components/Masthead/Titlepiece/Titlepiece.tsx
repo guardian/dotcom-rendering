@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	between,
 	from,
 	headlineBold14,
 	space,
@@ -12,6 +11,7 @@ import {
 	SvgMenu,
 } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
+import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
@@ -38,8 +38,12 @@ export const pillarWidthsPx = {
 
 const veggieBurgerDiameter = 40;
 
-const editionSwitcherMenuStyles = css`
+const gridFullWidth = css`
 	grid-column: content-start / content-end;
+`;
+
+const editionSwitcherMenuStyles = css`
+	${gridFullWidth}
 	grid-row: 1;
 	${from.mobileMedium} {
 		justify-self: end;
@@ -47,8 +51,8 @@ const editionSwitcherMenuStyles = css`
 `;
 
 const guardianLogoStyles = css`
-	z-index: 2;
-	grid-column: content-start / content-end;
+	${getZIndex('TheGuardian')}
+	${gridFullWidth}
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
@@ -58,22 +62,23 @@ const guardianLogoStyles = css`
 	${from.mobileMedium} {
 		margin-right: 0;
 	}
+
 	svg {
-		height: 49px;
-		${between.mobileMedium.and.tablet} {
-			height: 67px;
+		width: 144px;
+		${from.mobileMedium} {
+			width: 198px;
 		}
-		${between.tablet.and.desktop} {
-			height: 96px;
+		${from.tablet} {
+			width: 280px;
 		}
-		${between.desktop.and.leftCol} {
-			height: 94px;
+		${from.desktop} {
+			width: 276px;
 		}
 		${from.leftCol} {
-			height: 135px;
+			width: 398px;
 		}
 	}
-	${between.mobileLandscape.and.desktop} {
+	${from.mobileLandscape} {
 		margin-bottom: 8px;
 	}
 	${from.desktop} {
@@ -83,7 +88,7 @@ const guardianLogoStyles = css`
 
 const burgerStyles = css`
 	z-index: 2;
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
@@ -110,7 +115,7 @@ const burgerStyles = css`
 `;
 
 const pillarsNavStyles = css`
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 2;
 	align-self: end;
 
@@ -124,7 +129,7 @@ const pillarsNavStyles = css`
 `;
 
 const subnavStyles = css`
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 3;
 	${textSans14}
 	color: inherit;
