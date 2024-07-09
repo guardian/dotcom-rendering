@@ -167,7 +167,7 @@ export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
 				adBlockerInUse,
 			})
 				.then(() => {
-					if (bypassSampling || isDev) {
+					if (bypassSampling) {
 						void bypassCommercialMetricsSampling();
 					}
 				})
