@@ -1,37 +1,7 @@
 import type { EditionId } from '../lib/edition';
-import type { Tuple } from '../lib/tuple';
 import { useApi } from '../lib/useApi';
+import type { WeatherApiData } from '../types/weather';
 import { Weather, WeatherPlaceholder } from './Weather';
-
-/**
- * Our weather API returns 24 forecast.
- * Each forecast is 1 hour offset from the previous forecast, and the first forecast is 1 hour offset from Now.
- */
-export type WeatherForecast = [
-	...Tuple<WeatherData, 12>,
-	...Tuple<WeatherData, 12>,
-];
-
-export type WeatherData = {
-	description: string;
-	icon: number;
-	link?: string;
-	dateTime?: string;
-	temperature: {
-		metric: number;
-		imperial: number;
-	};
-};
-
-export type WeatherApiData = {
-	location: {
-		id: string;
-		city: string;
-		country: string;
-	};
-	weather: WeatherData;
-	forecast: WeatherForecast;
-};
 
 const appendPartnerCodeToUrl = (
 	url: string | undefined,

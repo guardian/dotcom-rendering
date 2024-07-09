@@ -31,8 +31,8 @@ import {
 import { useId } from 'react';
 import type { EditionId } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
+import type { WeatherApiData, WeatherData } from '../types/weather';
 import { WeatherSlot } from './WeatherSlot';
-import type { WeatherApiData, WeatherData } from './WeatherWrapper.importable';
 
 const visuallyHiddenCSS = css`
 	${visuallyHidden}
