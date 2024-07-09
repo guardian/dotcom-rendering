@@ -257,20 +257,134 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
-    "AutoScalingGroupArticlerenderingScalingPolicyCpuScalingPolicy3A5395AD": {
+    "CPUScaleDownPolicyLowerAlarm589DBBF6": {
       "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "CPUScaleDownPolicyLowerPolicy7BBC9BC0",
+          },
+        ],
+        "AlarmDescription": "Lower threshold scaling alarm",
+        "ComparisonOperator": "LessThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "AutoScalingGroupName",
+            "Value": {
+              "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
+            },
+          },
+        ],
+        "EvaluationPeriods": 10,
+        "ExtendedStatistic": "p90",
+        "MetricName": "CPUUtilization",
+        "Namespace": "AWS/EC2",
+        "Period": 30,
+        "Threshold": 70,
+        "Unit": "Percent",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "CPUScaleDownPolicyLowerPolicy7BBC9BC0": {
+      "Properties": {
+        "AdjustmentType": "ChangeInCapacity",
         "AutoScalingGroupName": {
           "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
         },
-        "PolicyType": "TargetTrackingScaling",
-        "TargetTrackingConfiguration": {
-          "PredefinedMetricSpecification": {
-            "PredefinedMetricType": "ASGAverageCPUUtilization",
+        "MetricAggregationType": "Average",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalUpperBound": 0,
+            "ScalingAdjustment": -1,
           },
-          "TargetValue": 40,
-        },
+        ],
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "CPUScaleUpPolicyUpperAlarm7E15DD91": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "CPUScaleUpPolicyUpperPolicyDEE5DA77",
+          },
+          {
+            "Ref": "CPUScalingAlertsTopic9D0083F7",
+          },
+        ],
+        "AlarmDescription": "Upper threshold scaling alarm",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "AutoScalingGroupName",
+            "Value": {
+              "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
+            },
+          },
+        ],
+        "EvaluationPeriods": 2,
+        "ExtendedStatistic": "p90",
+        "MetricName": "CPUUtilization",
+        "Namespace": "AWS/EC2",
+        "Period": 30,
+        "Threshold": 70,
+        "Unit": "Percent",
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "CPUScaleUpPolicyUpperPolicyDEE5DA77": {
+      "Properties": {
+        "AdjustmentType": "PercentChangeInCapacity",
+        "AutoScalingGroupName": {
+          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
+        },
+        "MetricAggregationType": "Average",
+        "PolicyType": "StepScaling",
+        "StepAdjustments": [
+          {
+            "MetricIntervalLowerBound": 0,
+            "MetricIntervalUpperBound": 20,
+            "ScalingAdjustment": 50,
+          },
+          {
+            "MetricIntervalLowerBound": 20,
+            "ScalingAdjustment": 80,
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "CPUScalingAlertsSubscriptionEmail170D6D82": {
+      "Properties": {
+        "Endpoint": "dotcom.platform@theguardian.com",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "CPUScalingAlertsTopic9D0083F7",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
+    "CPUScalingAlertsTopic9D0083F7": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::Topic",
     },
     "CertificateArticlerendering3297EFD3": {
       "DeletionPolicy": "Retain",
@@ -785,7 +899,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             "Ref": "LatencyScaleUpPolicyUpperPolicy4A22B34C",
           },
           {
-            "Ref": "ScalingAlertsTopicB5AC3613",
+            "Ref": "LatencyScalingAlertsTopic1A322157",
           },
         ],
         "AlarmDescription": "Upper threshold scaling alarm",
@@ -840,6 +954,39 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "LatencyScalingAlertsSubscriptionEmailF1826DAB": {
+      "Properties": {
+        "Endpoint": "dotcom.platform@theguardian.com",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "LatencyScalingAlertsTopic1A322157",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
+    },
+    "LatencyScalingAlertsTopic1A322157": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "PROD",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::Topic",
     },
     "ListenerArticlerendering9419D5F6": {
       "Properties": {
@@ -1091,39 +1238,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "Value": "https://article-rendering.test.dev-guardianapis.com",
       },
       "Type": "AWS::SSM::Parameter",
-    },
-    "ScalingAlertsSubscriptionEmailA0DF7FA0": {
-      "Properties": {
-        "Endpoint": "dotcom.platform@theguardian.com",
-        "Protocol": "email",
-        "TopicArn": {
-          "Ref": "ScalingAlertsTopicB5AC3613",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
-    },
-    "ScalingAlertsTopicB5AC3613": {
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-      },
-      "Type": "AWS::SNS::Topic",
     },
     "TargetGroupArticlerendering3605E498": {
       "Properties": {
