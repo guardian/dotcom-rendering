@@ -192,6 +192,7 @@ export interface WeatherProps
 	extends Pick<WeatherApiData, 'location' | 'forecast'> {
 	now: WeatherData;
 	edition: EditionId;
+	link?: string;
 }
 
 const collapsibleStyles = css`
@@ -234,7 +235,13 @@ export const WeatherPlaceholder = () => (
 	<aside css={[collapsibleStyles, weatherCSS]}></aside>
 );
 
-export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
+export const Weather = ({
+	location,
+	now,
+	forecast,
+	edition,
+	link,
+}: WeatherProps) => {
 	const checkboxId = useId();
 
 	return (
@@ -273,11 +280,13 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 				<WeatherSlot edition={edition} {...forecast[12]} />
 			</div>
 
-			<div css={linkCSS} className="collapsible">
-				<a href={now.link}>
-					View full forecast <ExternalLinkIcon />
-				</a>
-			</div>
+			{!!link && (
+				<div css={linkCSS} className="collapsible">
+					<a href={link}>
+						View full forecast <ExternalLinkIcon />
+					</a>
+				</div>
+			)}
 		</aside>
 	);
 };

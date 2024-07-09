@@ -33,6 +33,19 @@ export type WeatherApiData = {
 	forecast: WeatherForecast;
 };
 
+const appendPartnerCodeToUrl = (
+	url: string | undefined,
+): string | undefined => {
+	if (!url) {
+		return undefined;
+	}
+
+	const link = new URL(url);
+	link.searchParams.append('partner', 'web_guardian_adc');
+
+	return link.toString();
+};
+
 type Props = {
 	ajaxUrl: string;
 	edition: EditionId;
@@ -53,6 +66,7 @@ export const WeatherWrapper = ({ ajaxUrl, edition }: Props) => {
 			now={data.weather}
 			forecast={data.forecast}
 			edition={edition}
+			link={appendPartnerCodeToUrl(data.weather.link)}
 		/>
 	);
 };
