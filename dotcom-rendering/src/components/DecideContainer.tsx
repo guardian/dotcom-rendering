@@ -231,6 +231,9 @@ export const DecideContainer = ({
 					showImage={true}
 				/>
 			);
+		case 'fixed/highlights':
+			// TODO - Implement Highlights container definition
+			return null;
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
