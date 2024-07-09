@@ -1,5 +1,3 @@
-// ----- Imports ----- //
-
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
@@ -8,8 +6,8 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleElementRole,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { none, OptionKind, some } from '../../vendor/@guardian/types/index';
 import type { Option } from '../../vendor/@guardian/types/index';
@@ -48,8 +46,6 @@ import { fromBodyElements } from 'outline';
 import { galleryBody } from './galleryBody';
 import { partialNewsletterItem } from './newsletterSignUpContent';
 import { relatedContent } from './relatedContent';
-
-// ----- Functions ----- //
 
 /**
  * Updates the `theme` property of an `Item`
@@ -392,7 +388,7 @@ const tags: Tag[] = [
 ];
 
 const fields = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	display: ArticleDisplay.Standard,
 	body: body,
 	headline: headline,
@@ -466,7 +462,7 @@ const review: Review = {
 	design: ArticleDesign.Review,
 	starRating: some(4),
 	...fields,
-	theme: ArticlePillar.Culture,
+	theme: Pillar.Culture,
 };
 
 const labs: Item = {
@@ -478,20 +474,20 @@ const labs: Item = {
 const comment: Comment = {
 	design: ArticleDesign.Comment,
 	...fields,
-	theme: ArticlePillar.Opinion,
+	theme: Pillar.Opinion,
 	outline: fromBodyElements(fields.body),
 };
 
 const letter: Letter = {
 	design: ArticleDesign.Letter,
 	...fields,
-	theme: ArticlePillar.Opinion,
+	theme: Pillar.Opinion,
 };
 
 const editorial: Editorial = {
 	design: ArticleDesign.Editorial,
 	...fields,
-	theme: ArticlePillar.Opinion,
+	theme: Pillar.Opinion,
 };
 
 const interview: Interview = {
@@ -515,7 +511,7 @@ const matchReport: MatchReport = {
 	design: ArticleDesign.MatchReport,
 	football: Optional.some(matchScores),
 	...fields,
-	theme: ArticlePillar.Sport,
+	theme: Pillar.Sport,
 };
 
 const correction: Item = {
@@ -536,13 +532,13 @@ const photoEssay: PhotoEssay = {
 const recipe: Recipe = {
 	design: ArticleDesign.Recipe,
 	...fields,
-	theme: ArticlePillar.Lifestyle,
+	theme: Pillar.Lifestyle,
 };
 
 const quiz: Quiz = {
 	design: ArticleDesign.Quiz,
 	...fields,
-	theme: ArticlePillar.Sport,
+	theme: Pillar.Sport,
 };
 
 const explainer: Explainer = {
@@ -573,7 +569,7 @@ const commentImmersive: Comment = {
 	design: ArticleDesign.Comment,
 	...fields,
 	display: ArticleDisplay.Immersive,
-	theme: ArticlePillar.Opinion,
+	theme: Pillar.Opinion,
 };
 
 const gallery: Gallery = {
