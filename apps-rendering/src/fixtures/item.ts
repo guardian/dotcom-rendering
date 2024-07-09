@@ -516,7 +516,6 @@ const matchReport: MatchReport = {
 	football: Optional.some(matchScores),
 	...fields,
 	theme: ArticlePillar.Sport,
-	body: galleryBody,
 };
 
 const correction: Item = {
