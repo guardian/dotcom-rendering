@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space, textSans17, until } from '@guardian/source/foundations';
+import { from, textSans17, textSansBold20 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../../../../lib/acquisitions';
 import type { EditionId } from '../../../../lib/edition';
@@ -8,58 +8,20 @@ import { usePageViewId } from '../../../../lib/usePageViewId';
 import type { LinkType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
 import { useConfig } from '../../../ConfigContext';
-
-const hideDesktop = css`
-	${from.desktop} {
-		display: none;
-	}
-`;
+import { expandedNavLinkStyles, hideFromDesktop } from '../commonStyles';
 
 const columnLinkTitle = css`
-	${textSans17};
-	/**
-	 * Typography preset styles should not be overridden.
-	 * This has been done because the styles do not directly map to the new presets.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
-	background-color: transparent;
-	text-decoration: none;
-	border: 0;
-	box-sizing: border-box;
-	color: ${themePalette('--masthead-nav-link-text')};
-	cursor: pointer;
-	display: inline-block;
-	font-weight: 500;
-	outline: none;
-	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
-	position: relative;
-	text-align: left;
-	width: 100%;
-
-	${until.desktop} {
-		color: ${themePalette('--sub-nav-reader-revenue-link-text')};
-		font-size: 20px;
-		font-weight: 700;
-	}
-
-	${from.tablet} {
-		padding-left: 60px;
-	}
+	${expandedNavLinkStyles}
+	color: ${themePalette('--sub-nav-reader-revenue-link-text')};
+	${textSansBold20}
 
 	${from.desktop} {
-		font-size: 16px;
-		padding: 6px 0;
+		${textSans17}
 	}
 
 	:hover,
 	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
 		text-decoration: underline;
-	}
-
-	> * {
-		pointer-events: none;
 	}
 `;
 
@@ -119,11 +81,14 @@ export const ReaderRevenueLinks = ({
 	];
 
 	return (
-		<ul css={hideDesktop} role="menu">
+		<ul css={hideFromDesktop} role="menu">
 			{links.map((link) => (
 				<li
 					key={link.title.toLowerCase()}
-					css={[mainMenuLinkStyle, !!link.mobileOnly && hideDesktop]}
+					css={[
+						mainMenuLinkStyle,
+						!!link.mobileOnly && hideFromDesktop,
+					]}
 					role="none"
 				>
 					<a

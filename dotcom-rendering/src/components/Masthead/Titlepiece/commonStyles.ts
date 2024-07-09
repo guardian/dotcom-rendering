@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
-import { palette } from '../../../../palette';
+import { palette } from '../../../palette';
 
 /**
  * Removes bullet points from unordered list elements
@@ -19,30 +19,36 @@ export const listAccessibility = css`
 `;
 
 /** Hides element from view from desktop breakpoint */
-export const hideDesktop = css`
+export const hideFromDesktop = css`
 	${from.desktop} {
 		display: none;
 	}
 `;
 
-export const pointerEventsNone = css`
+export const expandedNavLinkStyles = css`
+	position: relative;
+	display: inline-block;
+	text-align: left;
+	box-sizing: border-box;
+	border: 0;
+	outline: none;
+	cursor: pointer;
+	width: 100%;
+	color: ${palette('--masthead-nav-link-text')};
+	text-decoration: none;
+	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
+
 	> * {
 		pointer-events: none;
 	}
-`;
 
-export const mobilePillarStyles = css`
-	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
-`;
-
-export const sharedLiStyles = css`
-	:hover,
-	:focus {
-		color: ${palette('--masthead-nav-link-text-hover')};
+	${from.tablet} {
+		padding-left: 60px;
 	}
-`;
 
-export const sharedHoverStyles = css`
+	${from.desktop} {
+		padding: 6px 0;
+	}
 	:hover,
 	:focus {
 		color: ${palette('--masthead-nav-link-text-hover')};

@@ -9,8 +9,6 @@ export default {
 	},
 };
 
-export const defaultStory = () => {
+export const Default = () => {
 	return <ExpandedNav nav={nav} editionId={'UK'} />;
 };
-
-defaultStory.storyName = 'default';

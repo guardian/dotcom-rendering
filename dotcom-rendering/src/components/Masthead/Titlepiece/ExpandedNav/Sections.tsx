@@ -15,6 +15,11 @@ import {
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType, NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
+import {
+	expandedNavLinkStyles,
+	hideFromDesktop,
+	listAccessibility,
+} from '../commonStyles';
 import { MoreSection } from './MoreSection';
 import { lineStyle, Pillar } from './Pillar';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
@@ -58,16 +63,13 @@ const desktopBrandExtensionColumn = css`
 `;
 
 const brandExtensionList = css`
-	box-sizing: border-box;
 	${textSans17};
-	flex-wrap: wrap;
-	list-style: none;
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-
-	margin: 0;
-	padding: 0 0 12px;
+	${listAccessibility}
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
+	margin: 0;
 	padding-bottom: 0;
 `;
 
@@ -87,15 +89,8 @@ const brandExtensionListItem = css`
 `;
 
 const brandExtensionLink = css`
+	${expandedNavLinkStyles}
 	${headlineBold20};
-	color: ${themePalette('--masthead-nav-link-text')};
-	cursor: pointer;
-	display: inline-block;
-	outline: none;
-	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
-	position: relative;
-	text-align: left;
-	width: 100%;
 	text-decoration: none;
 
 	${from.tablet} {
@@ -104,22 +99,11 @@ const brandExtensionLink = css`
 	${from.desktop} {
 		padding: 6px 0;
 	}
-
-	:hover,
-	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
-	}
 `;
 
-const brandExtensionLinkFromLeftCol = css`
+const brandExtensionLinkFromWide = css`
 	${from.wide} {
 		${headlineBold24};
-	}
-`;
-
-const editionsSwitch = css`
-	${from.desktop} {
-		display: none;
 	}
 `;
 
@@ -188,8 +172,8 @@ export const Sections = ({
 				editionId={editionId}
 			/>
 
-			{/* This is where the edition dropdown is inserted */}
-			<section css={editionsSwitch}>
+			{/* Mobile only Brand Extensions list */}
+			<section css={hideFromDesktop}>
 				<Pillar
 					column={{
 						...activeEdition,
@@ -208,10 +192,10 @@ export const Sections = ({
 				key="more"
 				hasPageSkin={hasPageSkin}
 			/>
+
+			{/* Desktop only Brand Extensions list*/}
 			<li css={desktopBrandExtensionColumn} role="none">
-				<Hide until="desktop">
-					<SearchBar />
-				</Hide>
+				<SearchBar />
 
 				<ul
 					css={[
@@ -229,8 +213,7 @@ export const Sections = ({
 								className="selectableMenuItem"
 								css={[
 									brandExtensionLink,
-									!hasPageSkin &&
-										brandExtensionLinkFromLeftCol,
+									!hasPageSkin && brandExtensionLinkFromWide,
 								]}
 								href={brandExtension.url}
 								key={brandExtension.title}

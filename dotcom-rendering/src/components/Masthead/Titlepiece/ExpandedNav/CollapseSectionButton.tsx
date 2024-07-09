@@ -5,13 +5,7 @@ import {
 	textSans17,
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
-import { palette as themePalette } from '../../../../palette';
-import {
-	hideDesktop,
-	mobilePillarStyles,
-	pointerEventsNone,
-	sharedHoverStyles,
-} from './commonStyles';
+import { expandedNavLinkStyles, hideFromDesktop } from '../commonStyles';
 
 type Props = {
 	title: string;
@@ -38,40 +32,28 @@ const showColumnLinksStyle = (columnInputId: string) => css`
 
 const collapseColumnButton = css`
 	${headlineBold24};
-	color: ${themePalette('--masthead-nav-link-text')};
 
-	user-select: none;
-	background-color: transparent;
-	border: 0;
-	box-sizing: border-box;
-	cursor: pointer;
+	${expandedNavLinkStyles};
+	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
+
 	display: block;
 
-	outline: none;
-	${mobilePillarStyles}
-	position: relative;
-	text-align: left;
-	width: 100%;
-
+	user-select: none;
 	text-transform: capitalize;
 
 	:before {
 		margin-top: ${space[1]}px;
-		left: 25px;
+		left: ${space[6]}px;
 		position: absolute;
 		border: 2px solid currentColor;
 		border-top: 0;
 		border-left: 0;
 		content: '';
 		display: inline-block;
-		height: 10px;
 		transform: rotate(45deg);
+		height: 10px;
 		width: 10px;
 	}
-
-	${sharedHoverStyles}
-
-	${pointerEventsNone}
 `;
 
 const editionStyle = css`
@@ -95,7 +77,7 @@ export const CollapseSectionButton = ({
 			collapseColumnButton,
 			title.includes('edition') && editionStyle,
 			showColumnLinksStyle(columnInputId),
-			hideDesktop,
+			hideFromDesktop,
 		]}
 		aria-label={`Toggle ${title}`}
 		htmlFor={columnInputId}
@@ -105,7 +87,7 @@ export const CollapseSectionButton = ({
 		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="menuitem"
 		data-testid={`column-collapse-${title}`}
-		data-link-name={nestedOphanComponents('header', 'secondary-nav', title)}
+		data-link-name={nestedOphanComponents('header', 'secondary', title)}
 	>
 		{title}
 	</label>

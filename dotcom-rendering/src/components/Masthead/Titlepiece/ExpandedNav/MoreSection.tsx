@@ -3,12 +3,8 @@ import { from, space, textSans17 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
+import { expandedNavLinkStyles, listAccessibility } from '../commonStyles';
 import { pillarWidthsPx } from '../constants';
-import {
-	mobilePillarStyles,
-	pointerEventsNone,
-	sharedHoverStyles,
-} from './commonStyles';
 
 const pillarHeight = 42;
 
@@ -20,8 +16,7 @@ const hideDesktop = css`
 
 const columnStyle = css`
 	${textSans17};
-	list-style: none;
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
+	${listAccessibility};
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
@@ -32,7 +27,7 @@ const columnStyle = css`
 	}
 
 	${from.desktop} {
-		width: ${pillarWidthsPx.tablet}px; /* ?? */
+		width: ${pillarWidthsPx.tablet}px;
 		float: left;
 		position: relative;
 
@@ -95,15 +90,7 @@ const columnLinks = css`
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	list-style: none;
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
-	li::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
+	${listAccessibility};
 	margin: 0;
 	padding: 0 0 ${space[3]}px;
 	position: relative;
@@ -120,42 +107,12 @@ const columnLinks = css`
 
 const columnLinkTitle = css`
 	${textSans17};
-	/**
-	 * Typography preset styles should not be overridden.
-	 * This has been done because the styles do not directly map to the new presets.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
-	background-color: transparent;
-	text-decoration: none;
-	border: 0;
-	box-sizing: border-box;
-	color: ${themePalette('--masthead-nav-link-text')};
-	cursor: pointer;
-	display: inline-block;
-	font-weight: 500;
-	outline: none;
-	${mobilePillarStyles}
-	position: relative;
-	text-align: left;
-	width: 100%;
-
-	${from.tablet} {
-		padding-left: 60px;
-	}
-
-	${from.desktop} {
-		padding: 6px 0;
-	}
-
-	${sharedHoverStyles};
+	${expandedNavLinkStyles};
 
 	:hover,
 	:focus {
 		text-decoration: underline;
 	}
-
-	${pointerEventsNone}
 `;
 
 const mainMenuLinkStyle = css`
