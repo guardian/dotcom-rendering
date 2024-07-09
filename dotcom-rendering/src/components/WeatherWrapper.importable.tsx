@@ -1,6 +1,6 @@
 import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
-import type { WeatherApiData } from '../types/weather';
+import { parseWeatherData } from '../types/weather';
 import { Weather, WeatherPlaceholder } from './Weather';
 
 const appendPartnerCodeToUrl = (
@@ -22,21 +22,30 @@ type Props = {
 };
 
 export const WeatherWrapper = ({ ajaxUrl, edition }: Props) => {
-	const { data, error } = useApi<WeatherApiData>(`${ajaxUrl}/weather.json`);
+	const { data, error } = useApi(`${ajaxUrl}/weather.json`);
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'weather');
 	}
 
-	return !data ? (
+	const result = parseWeatherData(data);
+
+	if (result.kind === 'error' && result.error === 'ParsingError') {
+		window.guardian.modules.sentry.reportError(
+			Error('Invalid weather data'),
+			'weather',
+		);
+	}
+
+	return result.kind === 'error' ? (
 		<WeatherPlaceholder />
 	) : (
 		<Weather
-			location={data.location}
-			now={data.weather}
-			forecast={data.forecast}
+			location={result.value.location}
+			now={result.value.weather}
+			forecast={result.value.forecast}
 			edition={edition}
-			link={appendPartnerCodeToUrl(data.weather.link)}
+			link={appendPartnerCodeToUrl(result.value.weather.link)}
 		/>
 	);
 };
