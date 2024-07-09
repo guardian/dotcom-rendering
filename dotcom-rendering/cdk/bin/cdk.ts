@@ -1,5 +1,4 @@
 import { App } from 'aws-cdk-lib';
-import { PredefinedMetric } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 import { DotcomRendering } from '../lib/dotcom-rendering';
 import { RenderingCDKStack } from '../lib/renderingStack';
@@ -10,6 +9,23 @@ const cdkApp = new App();
 const sharedProps = {
 	stack: 'frontend',
 	region: 'eu-west-1',
+};
+
+const cpuScalingSteps = {
+	scalingStepsOut: [
+		// No scaling up effect when p90 CPU is lower than 70%
+		{ lower: 0, upper: 70, change: 0 },
+		// When p90 CPU is higher than 70% we scale up by 50%
+		{ lower: 70, change: 50 },
+		// When p90 CPU is higher than 90% we scale up by 80%
+		{ lower: 90, change: 80 },
+	],
+	scalingStepsIn: [
+		// No scaling down effect when p90 CPU is higher than 70%
+		{ lower: 70, change: 0 },
+		// When p90 CPU is lower than 70% we scale down by 1
+		{ upper: 70, lower: 0, change: -1 },
+	],
 };
 
 /** Legacy, only serves the all newsletters page */
@@ -40,27 +56,24 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
 		maximumInstances: 4,
 		policies: {
 			step: {
-				scalingStepsOut: [
-					// No scaling up effect when latency is lower than 0.2s
-					{ lower: 0, upper: 0.2, change: 0 },
-					// When latency is higher than 0.2s we scale up by 50%
-					{ lower: 0.2, change: 50 },
-					// When latency is higher than 0.3s we scale up by 80%
-					{ lower: 0.3, change: 80 },
-				],
-				scalingStepsIn: [
-					// No scaling down effect when latency is higher than 0.12s
-					{ lower: 0.12, change: 0 },
-					// When latency is lower than 0.12s we scale down by 1
-					{ upper: 0.12, lower: 0, change: -1 },
-				],
-			},
-			target: [
-				{
-					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
-					targetValue: 20,
+				cpu: cpuScalingSteps,
+				latency: {
+					scalingStepsOut: [
+						// No scaling up effect when latency is lower than 0.2s
+						{ lower: 0, upper: 0.2, change: 0 },
+						// When latency is higher than 0.2s we scale up by 50%
+						{ lower: 0.2, change: 50 },
+						// When latency is higher than 0.3s we scale up by 80%
+						{ lower: 0.3, change: 80 },
+					],
+					scalingStepsIn: [
+						// No scaling down effect when latency is higher than 0.12s
+						{ lower: 0.12, change: 0 },
+						// When latency is lower than 0.12s we scale down by 1
+						{ upper: 0.12, lower: 0, change: -1 },
+					],
 				},
-			],
+			},
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
@@ -74,27 +87,24 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 		maximumInstances: 180,
 		policies: {
 			step: {
-				scalingStepsOut: [
-					// No scaling up effect when latency is lower than 0.2s
-					{ lower: 0, upper: 0.2, change: 0 },
-					// When latency is higher than 0.2s we scale up by 50%
-					{ lower: 0.2, change: 50 },
-					// When latency is higher than 0.3s we scale up by 80%
-					{ lower: 0.3, change: 80 },
-				],
-				scalingStepsIn: [
-					// No scaling down effect when latency is higher than 0.12s
-					{ lower: 0.12, change: 0 },
-					// When latency is lower than 0.12s we scale down by 1
-					{ upper: 0.12, lower: 0, change: -1 },
-				],
-			},
-			target: [
-				{
-					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
-					targetValue: 40,
+				cpu: cpuScalingSteps,
+				latency: {
+					scalingStepsOut: [
+						// No scaling up effect when latency is lower than 0.2s
+						{ lower: 0, upper: 0.2, change: 0 },
+						// When latency is higher than 0.2s we scale up by 50%
+						{ lower: 0.2, change: 50 },
+						// When latency is higher than 0.3s we scale up by 80%
+						{ lower: 0.3, change: 80 },
+					],
+					scalingStepsIn: [
+						// No scaling down effect when latency is higher than 0.12s
+						{ lower: 0.12, change: 0 },
+						// When latency is lower than 0.12s we scale down by 1
+						{ upper: 0.12, lower: 0, change: -1 },
+					],
 				},
-			],
+			},
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
@@ -117,27 +127,24 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 		maximumInstances: 150,
 		policies: {
 			step: {
-				scalingStepsOut: [
-					// No scaling up effect when latency is lower than 0.4s
-					{ lower: 0, upper: 0.4, change: 0 },
-					// When latency is higher than 0.4s we scale up by 50%
-					{ lower: 0.4, change: 50 },
-					// When latency is higher than 0.5s we scale up by 80%
-					{ lower: 0.5, change: 80 },
-				],
-				scalingStepsIn: [
-					// No scaling down effect when latency is higher than 0.35s
-					{ lower: 0.35, change: 0 },
-					// When latency is lower than 0.35s we scale down by 1
-					{ upper: 0.35, lower: 0, change: -1 },
-				],
-			},
-			target: [
-				{
-					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
-					targetValue: 40,
+				cpu: cpuScalingSteps,
+				latency: {
+					scalingStepsOut: [
+						// No scaling up effect when latency is lower than 0.4s
+						{ lower: 0, upper: 0.4, change: 0 },
+						// When latency is higher than 0.4s we scale up by 50%
+						{ lower: 0.4, change: 50 },
+						// When latency is higher than 0.5s we scale up by 80%
+						{ lower: 0.5, change: 80 },
+					],
+					scalingStepsIn: [
+						// No scaling down effect when latency is higher than 0.35s
+						{ lower: 0.35, change: 0 },
+						// When latency is lower than 0.35s we scale down by 1
+						{ upper: 0.35, lower: 0, change: -1 },
+					],
 				},
-			],
+			},
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
@@ -160,27 +167,24 @@ new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
 		maximumInstances: 150,
 		policies: {
 			step: {
-				scalingStepsOut: [
-					// No scaling up effect when latency is lower than 0.4s
-					{ lower: 0, upper: 0.4, change: 0 },
-					// When latency is higher than 0.4s we scale up by 50%
-					{ lower: 0.4, change: 50 },
-					// When latency is higher than 0.5s we scale up by 80%
-					{ lower: 0.5, change: 80 },
-				],
-				scalingStepsIn: [
-					// No scaling down effect when latency is higher than 0.35s
-					{ lower: 0.35, change: 0 },
-					// When latency is lower than 0.35s we scale down by 1
-					{ upper: 0.35, lower: 0, change: -1 },
-				],
-			},
-			target: [
-				{
-					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
-					targetValue: 40,
+				cpu: cpuScalingSteps,
+				latency: {
+					scalingStepsOut: [
+						// No scaling up effect when latency is lower than 0.4s
+						{ lower: 0, upper: 0.4, change: 0 },
+						// When latency is higher than 0.4s we scale up by 50%
+						{ lower: 0.4, change: 50 },
+						// When latency is higher than 0.5s we scale up by 80%
+						{ lower: 0.5, change: 80 },
+					],
+					scalingStepsIn: [
+						// No scaling down effect when latency is higher than 0.35s
+						{ lower: 0.35, change: 0 },
+						// When latency is lower than 0.35s we scale down by 1
+						{ upper: 0.35, lower: 0, change: -1 },
+					],
 				},
-			],
+			},
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
@@ -203,27 +207,24 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 		maximumInstances: 30,
 		policies: {
 			step: {
-				scalingStepsOut: [
-					// No scaling up effect when latency is lower than 0.2s
-					{ lower: 0, upper: 0.2, change: 0 },
-					// When latency is higher than 0.3s we scale up by 50%
-					{ lower: 0.2, change: 50 },
-					// When latency is higher than 0.3s we scale up by 80%
-					{ lower: 0.3, change: 80 },
-				],
-				scalingStepsIn: [
-					// No scaling down effect when latency is higher than 0.15s
-					{ lower: 0.15, change: 0 },
-					// When latency is lower than 0.15s we scale down by 1
-					{ upper: 0.15, lower: 0, change: -1 },
-				],
-			},
-			target: [
-				{
-					type: PredefinedMetric.ASG_AVERAGE_CPU_UTILIZATION,
-					targetValue: 40,
+				cpu: cpuScalingSteps,
+				latency: {
+					scalingStepsOut: [
+						// No scaling up effect when latency is lower than 0.2s
+						{ lower: 0, upper: 0.2, change: 0 },
+						// When latency is higher than 0.3s we scale up by 50%
+						{ lower: 0.2, change: 50 },
+						// When latency is higher than 0.3s we scale up by 80%
+						{ lower: 0.3, change: 80 },
+					],
+					scalingStepsIn: [
+						// No scaling down effect when latency is higher than 0.15s
+						{ lower: 0.15, change: 0 },
+						// When latency is lower than 0.15s we scale down by 1
+						{ upper: 0.15, lower: 0, change: -1 },
+					],
 				},
-			],
+			},
 		},
 	},
 	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
