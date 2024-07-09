@@ -13,7 +13,7 @@ export type WeatherData = {
 
 /**
  * Our weather API returns 24 forecast.
- * Each forecast is 1 hour offset from the previous forecast, and the first forecast is 1 hour offset from Now.
+ * Each forecast is 1 hour offset from the previous forecast, and the first forecast is 1 hour offset from now.
  */
 type WeatherForecast = [...Tuple<WeatherData, 12>, ...Tuple<WeatherData, 12>];
 
