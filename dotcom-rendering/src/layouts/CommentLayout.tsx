@@ -606,7 +606,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -1025,7 +1024,10 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer />
+					<MobileStickyContainer
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 			{isApps && (

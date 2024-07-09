@@ -30,8 +30,9 @@ import {
 } from '@guardian/source/react-components';
 import { useId } from 'react';
 import type { EditionId } from '../lib/edition';
+import { palette as schemePalette } from '../palette';
+import type { WeatherApiData, WeatherData } from '../types/weather';
 import { WeatherSlot } from './WeatherSlot';
-import type { WeatherApiData, WeatherData } from './WeatherWrapper.importable';
 
 const visuallyHiddenCSS = css`
 	${visuallyHidden}
@@ -39,7 +40,7 @@ const visuallyHiddenCSS = css`
 
 const weatherCSS = css`
 	animation: ${keyframes`from {	opacity: 0;	} to {	opacity: 1;	}`} 250ms;
-	--border: 1px solid ${palette.neutral[86]};
+	--border: 1px solid ${schemePalette('--article-border')};
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -191,6 +192,7 @@ export interface WeatherProps
 	extends Pick<WeatherApiData, 'location' | 'forecast'> {
 	now: WeatherData;
 	edition: EditionId;
+	link?: string;
 }
 
 const collapsibleStyles = css`
@@ -233,7 +235,13 @@ export const WeatherPlaceholder = () => (
 	<aside css={[collapsibleStyles, weatherCSS]}></aside>
 );
 
-export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
+export const Weather = ({
+	location,
+	now,
+	forecast,
+	edition,
+	link,
+}: WeatherProps) => {
 	const checkboxId = useId();
 
 	return (
@@ -272,11 +280,13 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 				<WeatherSlot edition={edition} {...forecast[12]} />
 			</div>
 
-			<div css={linkCSS} className="collapsible">
-				<a href={now.link}>
-					View full forecast <ExternalLinkIcon />
-				</a>
-			</div>
+			{!!link && (
+				<div css={linkCSS} className="collapsible">
+					<a href={link}>
+						View full forecast <ExternalLinkIcon />
+					</a>
+				</div>
+			)}
 		</aside>
 	);
 };

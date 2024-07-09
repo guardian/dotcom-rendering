@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import type { EditionId } from '../lib/edition';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
@@ -9,6 +10,7 @@ import { TopBar } from './TopBar.importable';
 
 type Props = {
 	nav: NavType;
+	highlights?: ReactElement;
 	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
@@ -43,6 +45,7 @@ type Props = {
  */
 export const Masthead = ({
 	nav,
+	highlights,
 	editionId,
 	idUrl,
 	mmaUrl,
@@ -82,6 +85,26 @@ export const Masthead = ({
 				</Island>
 			</div>
 		</Section>
+
+		{/* Highlights section goes here */}
+		{highlights && (
+			<Section
+				fullWidth={true}
+				backgroundColour={themePalette(
+					'--masthead-highlights-background',
+				)}
+				borderColour={themePalette('--masthead-highlights-border')}
+				showTopBorder={false}
+				padSides={false}
+				element="section"
+				hasPageSkin={hasPageSkin}
+				hasPageSkinContentSelfConstrain={
+					hasPageSkinContentSelfConstrain
+				}
+			>
+				{highlights}
+			</Section>
+		)}
 
 		<Section
 			fullWidth={true}

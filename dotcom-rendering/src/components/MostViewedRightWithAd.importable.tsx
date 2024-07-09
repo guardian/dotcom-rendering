@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { useDeeplyReadTestVariant } from '../lib/useDeeplyReadTestVariant';
 import { RightAdsPlaceholder } from './AdPlaceholder.apps';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
@@ -18,12 +17,6 @@ type Props = {
  * a right ad slot and a most viewed component
  */
 const MAX_HEIGHT_PX = 1600;
-
-/**
- * When in the deeply-read-and-most-viewed variant of the deeplyReadRightColumn
- * AB test, there is an extra container of five article links.
- */
-const MAX_HEIGHT_PX_DEEPLY_READ = 2250;
 
 /**
  * Wrapping `MostViewedRight` so we can determine whether or not
@@ -53,10 +46,6 @@ export const MostViewedRightWithAd = ({
 			format.design === ArticleDesign.Audio) &&
 		format.theme !== ArticleSpecial.Labs;
 
-	const deeplyReadTestVariant = useDeeplyReadTestVariant();
-	const deeplyReadAndMostViewed =
-		deeplyReadTestVariant === 'deeply-read-and-most-viewed';
-
 	return (
 		<div
 			// This attribute is necessary so that most viewed wrapper
@@ -67,13 +56,7 @@ export const MostViewedRightWithAd = ({
 				 * On Web - we restrict the height to the maximum height, so that the top right ad can be sticky until the
 				 *          most viewed component is in view at MAX_HEIGHT_PX, or 100% of the article height if it is a short article
 				*/
-				height: ${isApps
-					? '100%'
-					: `min(100%, ${
-							deeplyReadAndMostViewed
-								? MAX_HEIGHT_PX_DEEPLY_READ
-								: MAX_HEIGHT_PX
-					  }px)`};
+				height: ${isApps ? '100%' : `min(100%, ${MAX_HEIGHT_PX}px)`};
 				display: flex;
 				flex-direction: column;
 			`}

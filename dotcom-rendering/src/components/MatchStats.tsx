@@ -29,6 +29,7 @@ const omitStatsTeams = [
 	"Women's Nations League",
 	'Europa Conference League',
 	"Women's FA Cup",
+	'Copa America',
 ];
 
 const StatsGrid = ({

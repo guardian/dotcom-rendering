@@ -1,36 +1,19 @@
 import type { EditionId } from '../lib/edition';
-import type { Tuple } from '../lib/tuple';
 import { useApi } from '../lib/useApi';
+import type { WeatherApiData } from '../types/weather';
 import { Weather, WeatherPlaceholder } from './Weather';
 
-/**
- * Our weather API returns 24 forecast.
- * Each forecast is 1 hour offset from the previous forecast, and the first forecast is 1 hour offset from Now.
- */
-export type WeatherForecast = [
-	...Tuple<WeatherData, 12>,
-	...Tuple<WeatherData, 12>,
-];
+const appendPartnerCodeToUrl = (
+	url: string | undefined,
+): string | undefined => {
+	if (!url || !URL.canParse(url)) {
+		return undefined;
+	}
 
-export type WeatherData = {
-	description: string;
-	icon: number;
-	link?: string;
-	dateTime?: string;
-	temperature: {
-		metric: number;
-		imperial: number;
-	};
-};
+	const link = new URL(url);
+	link.searchParams.append('partner', 'web_guardian_adc');
 
-export type WeatherApiData = {
-	location: {
-		id: string;
-		city: string;
-		country: string;
-	};
-	weather: WeatherData;
-	forecast: WeatherForecast;
+	return link.href;
 };
 
 type Props = {
@@ -53,6 +36,7 @@ export const WeatherWrapper = ({ ajaxUrl, edition }: Props) => {
 			now={data.weather}
 			forecast={data.forecast}
 			edition={edition}
+			link={appendPartnerCodeToUrl(data.weather.link)}
 		/>
 	);
 };

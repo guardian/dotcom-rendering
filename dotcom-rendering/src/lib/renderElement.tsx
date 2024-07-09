@@ -759,7 +759,6 @@ export const renderElement = ({
 							authorName={authorName}
 							dateCreated={dateCreated}
 							alt={alt}
-							editionId={editionId}
 						/>
 					);
 				}
@@ -778,7 +777,6 @@ export const renderElement = ({
 							authorName={authorName}
 							youtubeHtml={youtubeHtml}
 							dateCreated={dateCreated}
-							editionId={editionId}
 						/>
 					);
 				}
@@ -790,7 +788,6 @@ export const renderElement = ({
 							description={witnessTypeDataText.description}
 							authorName={witnessTypeDataText.authorName}
 							dateCreated={witnessTypeDataText.dateCreated}
-							editionId={editionId}
 						/>
 					);
 				}

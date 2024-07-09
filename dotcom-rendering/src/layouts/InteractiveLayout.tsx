@@ -555,7 +555,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 												<ArticleMetaApps
 													branding={branding}
 													format={format}
-													pageId={article.pageId}
 													byline={article.byline}
 													tags={article.tags}
 													primaryDateline={
@@ -961,7 +960,11 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer data-print-layout="hide" />
+					<MobileStickyContainer
+						data-print-layout="hide"
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 			{isApps && (

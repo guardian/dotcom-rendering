@@ -2369,7 +2369,9 @@ const standfirstTextDark: PaletteFunction = ({ design, display, theme }) => {
 
 const cardBorderTopLight: PaletteFunction = () => sourcePalette.neutral[73];
 
-const cardBorderTopDark: PaletteFunction = () => sourcePalette.neutral[20];
+const cardBorderTopDark: PaletteFunction = (format): string => {
+	return cardBorderTopLight(format);
+};
 
 const cardBorderSupportingLight: PaletteFunction = (format) => {
 	switch (format.design) {
@@ -5438,6 +5440,11 @@ const mastheadVeggieBurgerBackground: PaletteFunction = () =>
 const mastheadVeggieBurgerBackgroundHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[300];
 
+const mastheadHighlightsBackground: PaletteFunction = () =>
+	sourcePalette.neutral[97];
+const mastheadHighlightsBorder: PaletteFunction = () =>
+	sourcePalette.neutral[60];
+
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6241,6 +6248,14 @@ const paletteColours = {
 		light: liveBlockContainerBackgroundLight,
 		dark: liveBlockContainerBackgroundDark,
 	},
+	'--masthead-highlights-background': {
+		light: mastheadHighlightsBackground,
+		dark: mastheadHighlightsBackground,
+	},
+	'--masthead-highlights-border': {
+		light: mastheadHighlightsBorder,
+		dark: mastheadHighlightsBorder,
+	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
 		dark: mastheadNavBackground,
@@ -6672,6 +6687,26 @@ const paletteColours = {
 	'--timeline-event-border': {
 		light: timelineEventBorderLight,
 		dark: timelineEventBorderDark,
+	},
+	'--treat-background': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[97],
+	},
+	'--treat-text': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--trending-topics-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--trending-topics-separator': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
+	'--trending-topics-text': {
+		light: () => sourcePalette.neutral[20],
+		dark: () => sourcePalette.neutral[73],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,

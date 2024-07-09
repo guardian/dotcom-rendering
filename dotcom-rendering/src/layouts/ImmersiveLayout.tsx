@@ -589,7 +589,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -1004,7 +1003,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					{renderAds && <MobileStickyContainer />}
+					{renderAds && (
+						<MobileStickyContainer
+							contentType={article.contentType}
+							pageId={article.pageId}
+						/>
+					)}
 				</>
 			)}
 			{isApps && (

@@ -721,7 +721,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								{isApps && (
 									<ArticleMetaApps
 										format={format}
-										pageId={article.pageId}
 										byline={article.byline}
 										tags={article.tags}
 										primaryDateline={
@@ -735,7 +734,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										messageUs={article.messageUs}
 									></ArticleMetaApps>
 								)}
 								{isWeb && (
@@ -760,7 +758,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											messageUs={article.messageUs}
 										/>
 									</div>
 								)}
@@ -878,7 +875,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
-												editionId={article.editionId}
 											/>
 										</Island>
 									)}
@@ -927,7 +923,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											messageUs={article.messageUs}
 										/>
 									</div>
 								</Hide>
@@ -1559,7 +1554,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer data-print-layout="hide" />
+					<MobileStickyContainer
+						data-print-layout="hide"
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 

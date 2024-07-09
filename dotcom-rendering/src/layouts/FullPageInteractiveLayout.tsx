@@ -442,7 +442,10 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer />
+			<MobileStickyContainer
+				contentType={article.contentType}
+				pageId={article.pageId}
+			/>
 		</>
 	);
 };

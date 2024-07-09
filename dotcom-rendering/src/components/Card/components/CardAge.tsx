@@ -72,7 +72,6 @@ export const CardAge = ({
 				<DateTime
 					date={new Date(webPublication.date)}
 					display={'absolute'}
-					editionId={'UK'}
 					showWeekday={false}
 					showDate={!webPublication.isWithinTwelveHours}
 					showTime={true}
@@ -82,7 +81,6 @@ export const CardAge = ({
 					date={new Date(webPublication.date)}
 					display={'relative'}
 					absoluteServerTimes={absoluteServerTimes}
-					editionId={'UK'}
 					showWeekday={false}
 					showDate={true}
 					showTime={false}
