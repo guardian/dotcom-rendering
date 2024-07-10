@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	headlineBold14,
-	space,
-	textSans14,
-} from '@guardian/source/foundations';
+import { from, headlineBold14, space } from '@guardian/source/foundations';
 import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -12,7 +7,7 @@ import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
 import { EditionDropdown } from './EditionDropdown';
-// import { ExpandedNav } from './ExpandedNav/ExpandedNav';
+import { SubNav } from '../SubNav';
 import { Grid } from './Grid';
 import { Logo } from './Logo';
 import { Pillars } from './Pillars';
@@ -119,46 +114,42 @@ const pillarsNavStyles = css`
 
 	${headlineBold14}
 	margin-top: ${space[2]}px;
-	border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
 
 	${from.desktop} {
 		grid-row: 1 / 2;
 	}
 `;
 
-const subnavStyles = css`
-	${gridFullWidth}
-	grid-row: 3;
-	${textSans14}
-	color: inherit;
-	height: 28px;
-	margin-top: ${space[2]}px;
-
-	overflow-x: scroll;
+export const subNavWidth = css`
 	width: calc(100% + 10px);
-
-	${from.mobileMedium} {
-		margin-top: ${space[3]}px;
-	}
 	${from.tablet} {
 		width: calc(100% + ${space[5]}px);
 	}
-	${from.leftCol} {
-		margin-top: 14px;
+`;
+
+const horizontalDivider = css`
+	position: relative;
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: -1px;
+		left: 0;
+		width: 100%;
+		border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
 	}
 `;
 
-const subnavListStyles = css`
-	display: flex;
-	column-gap: ${space[3]}px;
-`;
-const subnavListItemStyles = css`
-	white-space: nowrap;
+const dividerWidthWithSubNav = css`
+	&::after {
+		${subNavWidth};
+	}
 `;
 
-const subnavLinkStyles = css`
-	color: ${themePalette('--masthead-nav-link-text')};
-	text-decoration: none;
+const subnavStyles = css`
+	grid-column: content-start / content-end;
+	grid-row: 3;
+	overflow-x: scroll;
+	${subNavWidth};
 `;
 
 export const Titlepiece = ({
@@ -194,7 +185,13 @@ export const Titlepiece = ({
 			</div>
 
 			{/* Pillars nav */}
-			<nav css={pillarsNavStyles}>
+			<nav
+				css={[
+					pillarsNavStyles,
+					horizontalDivider,
+					showSubNav && nav.subNavSections && dividerWidthWithSubNav,
+				]}
+			>
 				{/* Pillars nav mobile version */}
 				<Hide from="desktop">
 					<Pillars
@@ -247,19 +244,12 @@ export const Titlepiece = ({
 			</div>
 			{/* </Hide> */}
 
-			{/* Subnav */}
-			{nav.subNavSections && showSubNav && (
-				<nav css={subnavStyles}>
-					<ul css={subnavListStyles}>
-						{nav.subNavSections.links.map(({ title, url }) => (
-							<li key={title} css={subnavListItemStyles}>
-								<a href={url} css={subnavLinkStyles}>
-									{title}
-								</a>
-							</li>
-						))}
-					</ul>
-				</nav>
+			{showSubNav && nav.subNavSections && (
+				<SubNav
+					subNavSections={nav.subNavSections}
+					currentNavLink={nav.currentNavLink}
+					css={subnavStyles}
+				/>
 			)}
 		</Grid>
 	);
