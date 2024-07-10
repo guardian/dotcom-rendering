@@ -1,5 +1,5 @@
 import { Global } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';

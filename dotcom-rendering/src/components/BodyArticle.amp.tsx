@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	ArticleDesign,
+	type ArticleTheme,
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';

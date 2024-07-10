@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, timeAgo } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, timeAgo } from '@guardian/libs';
 import { textSans15, textSansBold15 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { Island } from './Island';

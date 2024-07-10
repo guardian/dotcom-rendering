@@ -1,6 +1,3 @@
-type ArticleTheme = import('@guardian/libs').ArticleTheme;
-type ArticleFormat = import('@guardian/libs').ArticleFormat;
-
 type SharePlatform =
 	| 'facebook'
 	| 'twitter'

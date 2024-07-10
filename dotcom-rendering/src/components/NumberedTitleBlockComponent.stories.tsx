@@ -2,6 +2,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
+	type ArticleTheme,
 	Pillar,
 } from '@guardian/libs';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';

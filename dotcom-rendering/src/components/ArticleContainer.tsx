@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { adSizes, constants } from '@guardian/commercial';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { carrotAdStyles, labelStyles } from './AdSlot.web';
@@ -160,7 +160,7 @@ const adStyles = css`
 	   Let the ad slot take control of its height once rendered. */
 	.ad-slot--inline:not(.ad-slot--rendered) {
 		min-height: ${adSizes.outstreamMobile.height +
-		constants.AD_LABEL_HEIGHT}px;
+	constants.AD_LABEL_HEIGHT}px;
 
 		${from.desktop} {
 			min-height: ${adSizes.mpu.height + constants.AD_LABEL_HEIGHT}px;
@@ -173,7 +173,7 @@ const adStyles = css`
 	.ad-slot--inline1:not(.ad-slot--rendered) {
 		${from.desktop} {
 			min-height: ${adSizes.outstreamDesktop.height +
-			constants.AD_LABEL_HEIGHT}px;
+	constants.AD_LABEL_HEIGHT}px;
 		}
 	}
 
@@ -182,7 +182,7 @@ const adStyles = css`
 	.ad-slot--top-above-nav:not(.ad-slot--rendered) {
 		${until.tablet} {
 			min-height: ${adSizes.outstreamMobile.height +
-			constants.AD_LABEL_HEIGHT}px;
+	constants.AD_LABEL_HEIGHT}px;
 		}
 	}
 

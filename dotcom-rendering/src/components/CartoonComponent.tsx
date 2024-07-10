@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '@guardian/libs';
 import { Hide } from '@guardian/source/react-components';
 import type { CartoonBlockElement, Image } from '../types/content';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';

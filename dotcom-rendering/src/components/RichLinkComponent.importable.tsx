@@ -1,3 +1,4 @@
+import { type ArticleFormat } from '@guardian/libs';
 import type { FEFormat } from 'types';
 import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';

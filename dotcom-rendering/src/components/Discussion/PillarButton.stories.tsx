@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { SvgCheckmark } from '@guardian/source/react-components';
 import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';

@@ -1,3 +1,4 @@
+import type { ArticleFormat } from '@guardian/libs';
 import type { FEFormat } from 'types';
 import type { Branding } from './branding';
 import type { StarRating } from './content';

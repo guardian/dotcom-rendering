@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '@guardian/libs';
 import { article17 } from '@guardian/source/foundations';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { DropCap } from './DropCap';

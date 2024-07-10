@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
+import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,

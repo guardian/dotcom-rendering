@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { timeAgo } from '@guardian/libs';
+import { type ArticleFormat, timeAgo } from '@guardian/libs';
 import { from, textSans12, textSansBold12 } from '@guardian/source/foundations';
 import { cardHasDarkBackground } from '../../../lib/cardHelpers';
 import { palette } from '../../../palette';

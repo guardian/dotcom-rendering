@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleTheme } from '@guardian/libs';
 import {
 	palette,
 	textSans15,

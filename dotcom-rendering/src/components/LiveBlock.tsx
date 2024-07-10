@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';

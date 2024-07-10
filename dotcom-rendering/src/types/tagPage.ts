@@ -1,3 +1,4 @@
+import type { FENavType } from 'types';
 import type { EditionId } from '../lib/edition';
 import type { Tuple } from '../lib/tuple';
 import type { CollectionBranding } from './branding';

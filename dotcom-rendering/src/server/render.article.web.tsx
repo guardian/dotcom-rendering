@@ -1,4 +1,9 @@
-import { ArticleDesign, isString, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	isString,
+	Pillar,
+} from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';

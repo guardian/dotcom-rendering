@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import type { ImageBlockElement } from '../types/content';
 import { Caption } from './Caption';

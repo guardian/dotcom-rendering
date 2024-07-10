@@ -1,4 +1,9 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { ProfileAtom } from './ProfileAtom.importable';
