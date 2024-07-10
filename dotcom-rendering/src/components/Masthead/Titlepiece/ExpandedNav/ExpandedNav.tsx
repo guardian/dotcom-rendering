@@ -7,7 +7,6 @@ import { from, textSans20, until } from '@guardian/source/foundations';
 import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
-// import { navInputCheckboxId } from '../../../Nav/config';
 import { palette as themePalette } from '../../../../palette';
 import { navInputCheckboxId } from '../constants';
 import { VeggieBurgerMenu } from '../VeggieBurger';

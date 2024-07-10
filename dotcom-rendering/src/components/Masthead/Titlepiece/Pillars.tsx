@@ -1,3 +1,7 @@
+/**
+ * @file
+ * This file was largely inspired by src/components/Pillars.tsx
+ */
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
 import {
@@ -12,6 +16,7 @@ import {
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
+import { listAccessibility } from './commonStyles';
 import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
 
 type Props = {
@@ -223,6 +228,7 @@ export const Pillars = ({
 							key={p.title}
 							css={[
 								pillarBlock,
+								listAccessibility,
 								showDivider && verticalDividerStyles,
 								i === 0 && firstPillarLinkOverrides,
 							]}

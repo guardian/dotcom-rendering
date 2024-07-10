@@ -49,6 +49,7 @@ export const expandedNavLinkStyles = css`
 	${from.desktop} {
 		padding: 6px 0;
 	}
+
 	:hover,
 	:focus {
 		color: ${palette('--masthead-nav-link-text-hover')};
