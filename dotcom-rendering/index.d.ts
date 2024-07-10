@@ -317,11 +317,6 @@ interface Topic {
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
-interface MessageUs {
-	formId: string;
-	formFields: import('./src/types/content').MessageUsFieldType[];
-}
-
 // ------------
 // Liveblogs //
 // ------------

@@ -24,6 +24,7 @@ import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 import { Result } from 'result';
+import { ListType } from '@guardian/content-api-models/v1/listType';
 
 // ----- Types ----- //
 
@@ -262,6 +263,25 @@ const parse =
 	(
 		element: BlockElement,
 	): Result<string, BodyElement> | Array<Result<string, BodyElement>> => {
+		const parseWithTags =
+			(tags: string[]) =>
+			(text: string): Array<Result<string, BodyElement>> => {
+				const openingTags = tags.map((tag) => `<${tag}>`).join('');
+				const closingTags = tags
+					.slice()
+					.reverse()
+					.map((tag) => `</${tag}>`)
+					.join('');
+				const doc = context.docParser(
+					`${openingTags}${text}${closingTags}`,
+				);
+				return flattenTextElement(doc).map((elem) => Result.ok(elem));
+			};
+
+		const parseTitle = parseWithTags(['h2']);
+		const parseSubheading = parseWithTags(['p', 'strong']);
+		const parseEmphasis = parseWithTags(['p', 'em']);
+
 		switch (element.type) {
 			case ElementType.TEXT: {
 				const html = element.textTypeData?.html;
@@ -476,23 +496,35 @@ const parse =
 					return Result.err('No listTypeData on list element');
 				}
 
-				const parseTitle = (
-					title: string,
-				): Array<Result<string, BodyElement>> => {
-					const doc = context.docParser(`<h2>${title}</h2>`);
-					return flattenTextElement(doc).map((elem) =>
-						Result.ok(elem),
-					);
-				};
-
 				const parser = parse(context, campaigns, atoms);
 
-				return listTypeData.items.flatMap((item) => {
-					const titleElements = item.title
-						? parseTitle(item.title)
-						: [];
-					return titleElements.concat(item.elements.flatMap(parser));
-				});
+				const isMiniProfile =
+					listTypeData.type === ListType.MINI_PROFILES;
+				console.log(isMiniProfile);
+				if (isMiniProfile) {
+					return listTypeData.items.flatMap((item) => {
+						console.log(
+							item.title ? parseSubheading(item.title) : [],
+						);
+						return (
+							item.title ? parseSubheading(item.title) : []
+						).concat(
+							item.bio
+								? flattenTextElement(
+										context.docParser(item.bio),
+								  ).map((elem) => Result.ok(elem))
+								: [],
+							item.elements.flatMap(parser),
+							item.endNote ? parseEmphasis(item.endNote) : [],
+						);
+					});
+				} else {
+					return listTypeData.items.flatMap((item) => {
+						return (
+							item.title ? parseTitle(item.title) : []
+						).concat(item.elements.flatMap(parser));
+					});
+				}
 			}
 
 			case ElementType.TIMELINE: {
@@ -503,26 +535,6 @@ const parse =
 						'No timelineTypeData on timeline element',
 					);
 				}
-
-				const parseTitle = (
-					title: string,
-				): Array<Result<string, BodyElement>> => {
-					const doc = context.docParser(`<h2>${title}</h2>`);
-					return flattenTextElement(doc).map((elem) =>
-						Result.ok(elem),
-					);
-				};
-
-				const parseSubheading = (
-					title: string,
-				): Array<Result<string, BodyElement>> => {
-					const doc = context.docParser(
-						`<p><strong>${title}</strong></p>`,
-					);
-					return flattenTextElement(doc).map((elem) =>
-						Result.ok(elem),
-					);
-				};
 
 				const parser = parse(context, campaigns, atoms);
 

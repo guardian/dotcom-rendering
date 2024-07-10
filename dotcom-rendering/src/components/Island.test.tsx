@@ -16,6 +16,7 @@ import { DiscussionLayout } from './DiscussionLayout';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FocusStyles } from './FocusStyles.importable';
+import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -27,7 +28,6 @@ import { MostViewedFooterData } from './MostViewedFooterData.importable';
 import { MostViewedRightWithAd } from './MostViewedRightWithAd.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
@@ -323,16 +323,12 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
-	test('ReaderRevenueLinks', () => {
+	test('FooterReaderRevenueLinks', () => {
 		expect(() =>
 			renderToString(
 				<WithConfig>
-					<ReaderRevenueLinks
-						editionId={'UK'}
+					<FooterReaderRevenueLinks
 						dataLinkNamePrefix={''}
-						inHeader={false}
-						remoteHeader={false}
-						contributionsServiceUrl={''}
 						urls={{
 							subscribe: '',
 							support: '',

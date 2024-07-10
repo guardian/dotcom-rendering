@@ -631,7 +631,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -1013,9 +1012,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							pillars={props.NAV.pillars}
 							urls={article.nav.readerRevenueLinks.header}
 							editionId={article.editionId}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
 						/>
 					</Section>
 
@@ -1045,7 +1041,10 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer />
+					<MobileStickyContainer
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 			{isApps && (

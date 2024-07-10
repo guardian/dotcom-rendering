@@ -2,7 +2,6 @@ import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
 import { adBlockAsk } from './tests/ad-block-ask';
 import { consentlessAds } from './tests/consentless-ads';
-import { deeplyReadRightColumn } from './tests/deeply-read-right-column';
 import { integrateIma } from './tests/integrate-ima';
 import { mpuWhenNoEpic } from './tests/mpu-when-no-epic';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
@@ -19,6 +18,5 @@ export const tests: ABTest[] = [
 	integrateIma,
 	mpuWhenNoEpic,
 	adBlockAsk,
-	deeplyReadRightColumn,
 	stickyLiveBlogAskTest,
 ];

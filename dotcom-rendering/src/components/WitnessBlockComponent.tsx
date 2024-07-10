@@ -7,7 +7,6 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
-import type { EditionId } from '../lib/edition';
 import { palette as themePalette } from '../palette';
 import type { WitnessAssetType } from '../types/content';
 import { DateTime } from './DateTime';
@@ -75,7 +74,6 @@ const authorNameStyles = css`
 type WrapperProps = {
 	authorName: string;
 	dateCreated: string;
-	editionId: EditionId;
 	children: React.ReactNode;
 };
 
@@ -83,7 +81,6 @@ const WitnessWrapper = ({
 	authorName,
 	dateCreated,
 	children,
-	editionId,
 }: WrapperProps) => {
 	return (
 		<div css={wrapperStyles}>
@@ -125,7 +122,6 @@ const WitnessWrapper = ({
 						>
 							<DateTime
 								date={new Date(dateCreated)}
-								editionId={editionId}
 								showWeekday={false}
 								showDate={true}
 								showTime={false}
@@ -145,7 +141,6 @@ type ImageProps = {
 	authorName: string;
 	dateCreated: string;
 	alt: string;
-	editionId: EditionId;
 };
 
 export const WitnessImageBlockComponent = ({
@@ -155,7 +150,6 @@ export const WitnessImageBlockComponent = ({
 	authorName,
 	dateCreated,
 	alt,
-	editionId,
 }: ImageProps) => {
 	// witness images seem to always use `mediumoriginalaspectdouble`, but in case that isn't found we use the 1st
 	// asset in the list
@@ -164,11 +158,7 @@ export const WitnessImageBlockComponent = ({
 			(asset) => asset.typeData?.name === 'mediumoriginalaspectdouble',
 		) ?? assets[0];
 	return (
-		<WitnessWrapper
-			authorName={authorName}
-			dateCreated={dateCreated}
-			editionId={editionId}
-		>
+		<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
 			<>
 				<img
 					css={css`
@@ -205,7 +195,6 @@ type TextProps = {
 	authorName: string;
 	dateCreated: string;
 	description: string;
-	editionId: EditionId;
 };
 
 export const WitnessTextBlockComponent = ({
@@ -213,13 +202,8 @@ export const WitnessTextBlockComponent = ({
 	authorName,
 	dateCreated,
 	description,
-	editionId,
 }: TextProps) => (
-	<WitnessWrapper
-		authorName={authorName}
-		dateCreated={dateCreated}
-		editionId={editionId}
-	>
+	<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
 		<h3
 			css={titleStyles}
 			itemProp="name"
@@ -242,7 +226,6 @@ type VideoProps = {
 	authorName: string;
 	youtubeHtml: string;
 	dateCreated: string;
-	editionId: EditionId;
 };
 
 export const WitnessVideoBlockComponent = ({
@@ -251,13 +234,8 @@ export const WitnessVideoBlockComponent = ({
 	authorName,
 	youtubeHtml,
 	dateCreated,
-	editionId,
 }: VideoProps) => (
-	<WitnessWrapper
-		authorName={authorName}
-		dateCreated={dateCreated}
-		editionId={editionId}
-	>
+	<WitnessWrapper authorName={authorName} dateCreated={dateCreated}>
 		<div
 			css={css`
 				iframe {

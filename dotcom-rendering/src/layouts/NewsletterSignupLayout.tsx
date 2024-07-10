@@ -596,12 +596,15 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
 				/>
 			</Section>
 
 			<BannerWrapper data-print-layout="hide" />
-			<MobileStickyContainer data-print-layout="hide" />
+			<MobileStickyContainer
+				data-print-layout="hide"
+				contentType={article.contentType}
+				pageId={article.pageId}
+			/>
 		</>
 	);
 };

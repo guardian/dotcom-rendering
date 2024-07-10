@@ -414,7 +414,6 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
 				/>
 			</Section>
 
@@ -442,7 +441,10 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer />
+			<MobileStickyContainer
+				contentType={article.contentType}
+				pageId={article.pageId}
+			/>
 		</>
 	);
 };

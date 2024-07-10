@@ -73,8 +73,9 @@ const isToggleable = (
 ) => {
 	if (isNetworkFront) {
 		return (
-			collection.displayName.toLowerCase() != 'headlines' &&
-			!isNavList(collection)
+			collection.displayName.toLowerCase() !== 'headlines' &&
+			!isNavList(collection) &&
+			collection.collectionType !== 'fixed/highlights'
 		);
 	}
 
@@ -166,6 +167,30 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const { updateLogoAdPartner, absoluteServerTimes = false } =
 		front.config.switches;
 
+	const Highlights = () => {
+		const showHighlights = front.isNetworkFront && inUpdatedHeaderABTest;
+		/** TODO - replace above test with the masthead AB test variant */
+		// && abTests.mastheadWithHighlightsVariant === 'variant';
+
+		const highlightsCollection = front.pressedPage.collections.find(
+			({ collectionType }) => collectionType === 'fixed/highlights',
+		);
+
+		return showHighlights && !!highlightsCollection ? (
+			<DecideContainer
+				containerType="fixed/highlights"
+				trails={[
+					...highlightsCollection.curated,
+					...highlightsCollection.backfill,
+				]}
+				groupedTrails={highlightsCollection.grouped}
+				showAge={false}
+				absoluteServerTimes={absoluteServerTimes}
+				imageLoading="eager"
+			/>
+		) : undefined;
+	};
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -199,6 +224,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					{inUpdatedHeaderABTest ? (
 						<Masthead
 							nav={NAV}
+							highlights={<Highlights />}
 							editionId={front.editionId}
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
@@ -365,6 +391,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								branding: undefined,
 						  }))
 						: trails;
+
+					if (collection.collectionType === 'fixed/highlights') {
+						// Highlights are rendered in the Masthead component
+						return null;
+					}
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -760,7 +791,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}
-					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
 

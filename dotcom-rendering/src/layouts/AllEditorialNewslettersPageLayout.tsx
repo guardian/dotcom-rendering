@@ -222,7 +222,6 @@ export const AllEditorialNewslettersPageLayout = ({
 					pillars={NAV.pillars}
 					urls={NAV.readerRevenueLinks.header}
 					editionId={editionId}
-					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
 		</>

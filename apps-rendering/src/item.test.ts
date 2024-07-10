@@ -17,6 +17,7 @@ import { EmbedKind, Spotify, YouTube } from 'embed';
 import { Optional } from 'optional';
 import { Context } from './parserContext';
 import { MainMediaKind } from './mainMedia';
+import { ListType } from '@guardian/content-api-models/v1/listType';
 
 const articleContent = {
 	id: '',
@@ -570,7 +571,7 @@ describe('embed elements', () => {
 });
 
 describe('list elements', () => {
-	test('parses list elements', () => {
+	test('parses non-mini profiles list elements', () => {
 		const embedElement = {
 			type: ElementType.EMBED,
 			assets: [],
@@ -597,6 +598,8 @@ describe('list elements', () => {
 					{
 						title: 'Some title 1',
 						elements: [embedElement, textElement, textElement],
+						bio: 'Some bio 1',
+						endNote: 'Some end note 1',
 					},
 					{
 						title: 'Some title 2',
@@ -607,6 +610,7 @@ describe('list elements', () => {
 						elements: [embedElement, textElement, textElement],
 					},
 				],
+				type: ListType.KEY_TAKEAWAYS,
 			},
 		};
 		const item = f(articleContentWith(listElement)) as Standard;
@@ -624,6 +628,74 @@ describe('list elements', () => {
 		expect(
 			item.body[6].kind === ElementKind.HeadingTwo &&
 				item.body[6].doc.firstChild?.textContent == 'Some title 3',
+		).toBe(true);
+	});
+
+	test('parses mini profiles list elements', () => {
+		const embedElement = {
+			type: ElementType.EMBED,
+			assets: [],
+			embedTypeData: {
+				html: '<p>Embed element<p>',
+				source: 'mockSource',
+				sourceDomain: 'mockSourceDomain',
+			},
+		};
+
+		const textElement = {
+			type: ElementType.TEXT,
+			assets: [],
+			textTypeData: {
+				html: '<p>paragraph</p>',
+			},
+		};
+
+		const listElement = {
+			type: ElementType.LIST,
+			assets: [],
+			listTypeData: {
+				items: [
+					{
+						title: 'Some title 1',
+						elements: [embedElement, textElement, textElement],
+						bio: '<p>Some bio 1</p>',
+						endNote: 'Some end note 1',
+					},
+					{
+						title: 'Some title 2',
+						elements: [textElement],
+					},
+					{
+						title: 'Some title 3',
+						elements: [embedElement, textElement, textElement],
+					},
+				],
+				type: ListType.MINI_PROFILES,
+			},
+		};
+		const item = f(articleContentWith(listElement)) as Standard;
+
+		expect(
+			item.body[0].kind === ElementKind.Text &&
+				item.body[0].doc.firstChild?.textContent == 'Some title 1',
+		).toBe(true);
+		expect(
+			item.body[1].kind === ElementKind.Text &&
+				item.body[1].doc.textContent === 'Some bio 1',
+		).toBe(true);
+		expect(item.body[2].kind).toBe(ElementKind.Embed);
+		expect(
+			item.body[5].kind === ElementKind.Text &&
+				item.body[5].doc.textContent === 'Some end note 1',
+		).toBe(true);
+		expect(
+			item.body[6].kind === ElementKind.Text &&
+				item.body[6].doc.firstChild?.textContent == 'Some title 2',
+		).toBe(true);
+		expect(item.body[7].kind).toBe(ElementKind.Text);
+		expect(
+			item.body[8].kind === ElementKind.Text &&
+				item.body[8].doc.firstChild?.textContent == 'Some title 3',
 		).toBe(true);
 	});
 

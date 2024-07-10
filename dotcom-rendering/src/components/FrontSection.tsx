@@ -1,17 +1,11 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
-import {
-	background,
-	between,
-	from,
-	palette,
-	space,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
+import { palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import type { DCRContainerPalette, TreatType } from '../types/front';
 import type { DCRFrontPagination } from '../types/tagPage';
@@ -349,7 +343,7 @@ const decideBackgroundColour = (
 		return overrideBackgroundColour;
 	}
 	if (hasPageSkin) {
-		return background.primary;
+		return schemePalette('--article-background');
 	}
 	return undefined;
 };
@@ -492,18 +486,23 @@ export const FrontSection = ({
 				containerStylesUntilLeftCol,
 				!hasPageSkin && containerStylesFromLeftCol,
 				hasPageSkin && pageSkinContainer,
-				css`
-					background-color: ${decideBackgroundColour(
+			]}
+			style={{
+				backgroundColor:
+					decideBackgroundColour(
 						overrides?.background.container,
 						hasPageSkin,
-					)};
-				`,
-			]}
+					) ?? schemePalette('--article-background'),
+				borderColor:
+					overrides?.border.container ??
+					schemePalette('--article-border'),
+			}}
 		>
 			<div
 				css={[
 					decoration(
-						overrides?.border.container ?? palette.neutral[86],
+						overrides?.border.container ??
+							schemePalette('--article-border'),
 					),
 					sideBorders,
 					showTopBorder && topBorder,
@@ -520,7 +519,8 @@ export const FrontSection = ({
 					),
 					!hasPageSkin &&
 						sectionHeadlineFromLeftCol(
-							overrides?.border.container ?? palette.neutral[86],
+							overrides?.border.container ??
+								schemePalette('--article-border'),
 						),
 					title?.toLowerCase() === 'headlines' &&
 						sectionHeadlineHeight,
@@ -615,9 +615,6 @@ export const FrontSection = ({
 					<Treats
 						treats={treats}
 						borderColour={overrides?.border.container}
-						fontColour={
-							overrides?.text.container ?? palette.neutral[7]
-						}
 					/>
 				</div>
 			)}

@@ -753,7 +753,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -1171,11 +1170,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							pageFooter={article.pageFooter}
 							selectedPillar={props.NAV.selectedPillar}
 							pillars={props.NAV.pillars}
-							urls={article.nav.readerRevenueLinks.header}
+							urls={article.nav.readerRevenueLinks.footer}
 							editionId={article.editionId}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
 						/>
 					</Section>
 					<BannerWrapper data-print-layout="hide">
@@ -1204,7 +1200,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer data-print-layout="hide" />
+					<MobileStickyContainer
+						data-print-layout="hide"
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 

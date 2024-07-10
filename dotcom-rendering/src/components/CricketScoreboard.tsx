@@ -6,7 +6,6 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
-import type { EditionId } from '../lib/edition';
 import type { Palette } from '../types/palette';
 import { DateTime } from './DateTime';
 
@@ -16,7 +15,6 @@ type Props = {
 	scorecardUrl: string;
 	match: CricketMatch;
 	format: ArticleFormat;
-	editionId: EditionId;
 };
 
 const screenReaderOnlyStyle = css`
@@ -136,12 +134,7 @@ export const CricketInnings = ({
 	return <p>Yet to bat</p>;
 };
 
-export const CricketScoreboard = ({
-	scorecardUrl,
-	match,
-	format,
-	editionId,
-}: Props) => {
+export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
 	const palette = decidePalette(format);
 	const date = new Date(match.gameDate);
 	return (
@@ -149,7 +142,6 @@ export const CricketScoreboard = ({
 			<h2 css={screenReaderOnlyStyle}>
 				<DateTime
 					date={date}
-					editionId={editionId}
 					showWeekday={false}
 					showDate={true}
 					showTime={false}

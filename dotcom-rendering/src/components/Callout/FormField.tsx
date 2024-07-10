@@ -10,16 +10,13 @@ import {
 } from '@guardian/source/react-components';
 import { FileInput } from '@guardian/source-development-kitchen/react-components';
 import { useEffect, useRef } from 'react';
-import type {
-	CampaignFieldType,
-	MessageUsFieldType,
-} from '../../types/content';
+import type { CampaignFieldType } from '../../types/content';
 
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
 	validationErrors: { [key in string]: string };
-	formField: CampaignFieldType | MessageUsFieldType;
+	formField: CampaignFieldType;
 	formData: FormDataType;
 	pageId: string;
 	setFieldInFormData: (
