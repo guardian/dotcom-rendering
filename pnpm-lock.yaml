@@ -479,8 +479,8 @@ importers:
         specifier: 21.1.1
         version: 21.1.1
       '@types/k6':
-        specifier: 0.47.1
-        version: 0.47.1
+        specifier: 0.52.0
+        version: 0.52.0
       '@types/lodash.debounce':
         specifier: 4.0.7
         version: 4.0.7
@@ -7582,8 +7582,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: false
 
-  /@types/k6@0.47.1:
-    resolution: {integrity: sha512-dQCSM3WT4f5MWCyyxmY/fO+BSYS217nvlvOhDvqg4lZGfzbAuS6pOG+UuwoH+3mLTChccEds+0Q0q7YWBbtgMQ==}
+  /@types/k6@0.52.0:
+    resolution: {integrity: sha512-yaw2wg61nKQtToDML+nngzgXVjZ6wNA4R0Q3jKDTeadG5EqfZgis5a1Q2hwY7kjuGuXmu8eM6gHg3tgnOj4vNw==}
     dev: false
 
   /@types/keyv@3.1.4:

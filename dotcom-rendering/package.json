@@ -87,7 +87,7 @@
 		"@types/html-minifier-terser": "7.0.2",
 		"@types/jest": "29.5.12",
 		"@types/jsdom": "21.1.1",
-		"@types/k6": "0.47.1",
+		"@types/k6": "0.52.0",
 		"@types/lodash.debounce": "4.0.7",
 		"@types/lodash.get": "4.4.7",
 		"@types/node": "20.14.10",
