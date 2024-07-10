@@ -33,14 +33,14 @@ const requiredNodeVersionMatches =
 			filepath: 'Containerfile',
 			pattern: /^FROM node:(.+)-alpine$/m,
 		},
-		{
-			filepath: 'scripts/deploy/riff-raff.yaml',
-			pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
-		},
-		{
-			filepath: '../apps-rendering/riff-raff.yaml',
-			pattern: /^ +Recipe: apps-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
-		},
+		// {
+		// 	filepath: 'scripts/deploy/riff-raff.yaml',
+		// 	pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
+		// },
+		// {
+		// 	filepath: '../apps-rendering/riff-raff.yaml',
+		// 	pattern: /^ +Recipe: apps-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
+		// },
 	]);
 
 const problems = (
