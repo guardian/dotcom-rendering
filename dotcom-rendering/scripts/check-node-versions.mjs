@@ -27,21 +27,21 @@ if (!nodeVersion) {
 	log(`Found node version ${nodeVersion} in \`.nvmrc\``);
 }
 
-const requiredNodeVersionMatches =
-	/** @type {const} @satisfies {ReadonlyArray<{filepath: string, pattern: RegExp}>}*/ ([
-		{
-			filepath: 'Containerfile',
-			pattern: /^FROM node:(.+)-alpine$/m,
-		},
-		// {
-		// 	filepath: 'scripts/deploy/riff-raff.yaml',
-		// 	pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
-		// },
-		// {
-		// 	filepath: '../apps-rendering/riff-raff.yaml',
-		// 	pattern: /^ +Recipe: apps-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
-		// },
-	]);
+/** @type {ReadonlyArray<{filepath: string, pattern: RegExp}>}*/
+const requiredNodeVersionMatches = [
+	// {
+	// 	filepath: 'Containerfile',
+	// 	pattern: /^FROM node:(.+)-alpine$/m,
+	// },
+	// {
+	// 	filepath: 'scripts/deploy/riff-raff.yaml',
+	// 	pattern: /^ +Recipe: dotcom-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
+	// },
+	// {
+	// 	filepath: '../apps-rendering/riff-raff.yaml',
+	// 	pattern: /^ +Recipe: apps-rendering.*-node-(\d+\.\d+\.\d+).*?$/m,
+	// },
+];
 
 const problems = (
 	await Promise.all(
