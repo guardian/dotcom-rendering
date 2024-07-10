@@ -5,11 +5,7 @@ import {
 	space,
 	textSans14,
 } from '@guardian/source/foundations';
-import {
-	Hide,
-	SvgGuardianLogo,
-	SvgMenu,
-} from '@guardian/source/react-components';
+import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -18,6 +14,7 @@ import { palette as themePalette } from '../../../palette';
 import { EditionDropdown } from './EditionDropdown';
 // import { ExpandedNav } from './ExpandedNav/ExpandedNav';
 import { Grid } from './Grid';
+import { Logo } from './Logo';
 import { Pillars } from './Pillars';
 
 interface Props {
@@ -90,15 +87,16 @@ const burgerStyles = css`
 	z-index: 2;
 	${gridFullWidth}
 	grid-row: 1;
+	justify-content: center;
+	display: flex;
 	justify-self: end;
 	align-self: end;
 	height: ${veggieBurgerDiameter}px;
 	width: ${veggieBurgerDiameter}px;
-	margin-bottom: 6px;
 	border-radius: 50%;
 	background-color: ${themePalette('--masthead-veggie-burger-background')};
-	justify-content: center;
-	display: flex;
+	margin-bottom: 6px;
+
 	:hover {
 		background-color: ${themePalette(
 			'--masthead-veggie-burger-background-hover',
@@ -180,16 +178,19 @@ export const Titlepiece = ({
 		>
 			{/* Edition menu */}
 			<div css={editionSwitcherMenuStyles}>
-				<EditionDropdown editionId={editionId} dataLinkName={''} />
+				<EditionDropdown
+					editionId={editionId}
+					dataLinkName={nestedOphanComponents(
+						'header',
+						'titlepiece',
+						'edition-picker: toggle',
+					)}
+				/>
 			</div>
 
 			{/* Guardian logo */}
 			<div css={guardianLogoStyles}>
-				<a href="https://theguardian.com">
-					<SvgGuardianLogo
-						textColor={themePalette('--masthead-nav-link-text')}
-					/>
-				</a>
+				<Logo editionId={editionId} />
 			</div>
 
 			{/* Pillars nav */}
