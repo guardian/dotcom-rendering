@@ -1,5 +1,5 @@
-import type { FENavType } from 'types';
 import type { EditionId } from '../lib/edition';
+import type { FENavType } from '../types/types';
 import type { ServerSideTests, Switches } from './config';
 import type { Newsletter } from './content';
 import type { FooterType } from './footer';

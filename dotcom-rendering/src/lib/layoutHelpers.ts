@@ -1,6 +1,6 @@
 import type { Pillar } from '@guardian/libs';
-import type { LegacyPillar } from 'types';
 import type { DCRArticle } from '../types/frontend';
+import type { LegacyPillar } from '../types/types';
 import { decideNavPillar } from './decideNavPillar';
 
 export const getCurrentPillar = (article: DCRArticle): Pillar | undefined => {

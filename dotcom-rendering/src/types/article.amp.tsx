@@ -1,5 +1,5 @@
-import type { FEFormat, FELinkType, LegacyPillar } from 'types';
 import type { EditionId } from '../lib/edition';
+import type { FEFormat, FELinkType, LegacyPillar } from '../types/types';
 import type { CommercialProperties } from './commercial';
 import type { FEElement } from './content';
 import type { TagType } from './tag';

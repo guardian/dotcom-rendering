@@ -1,5 +1,4 @@
-import type { FENavType } from 'types';
-
+import type { FENavType } from '../../src/types/types';
 /** `xhs https://www.theguardian.com/international.json\?dcr | jq .nav | pbcopy` */
 export const navInternational = {
 	currentUrl: '/',

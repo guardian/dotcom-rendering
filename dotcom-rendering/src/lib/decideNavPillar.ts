@@ -1,5 +1,5 @@
 import { Pillar } from '@guardian/libs';
-import type { LegacyPillar } from 'types';
+import type { LegacyPillar } from '../types/types';
 
 export const decideNavPillar = (pillar: LegacyPillar): Pillar | undefined => {
 	switch (pillar) {

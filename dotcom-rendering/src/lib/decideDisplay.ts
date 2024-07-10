@@ -1,5 +1,5 @@
 import { ArticleDisplay } from '@guardian/libs';
-import type { FEFormat } from 'types';
+import type { FEFormat } from '../types/types';
 
 export const decideDisplay = ({
 	display,

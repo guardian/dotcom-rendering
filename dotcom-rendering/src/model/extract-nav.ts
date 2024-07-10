@@ -1,6 +1,6 @@
 import { type ArticleTheme, Pillar } from '@guardian/libs';
-import type { FELinkType, FENavType } from 'types';
 import type { EditionId } from '../lib/edition';
+import type { FELinkType, FENavType } from '../types/types';
 import { findPillar } from './find-pillar';
 
 export interface BaseLinkType {

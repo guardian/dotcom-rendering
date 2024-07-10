@@ -1,4 +1,4 @@
-import type { FENavType } from 'types';
+import type { FENavType } from '../../src/types/types';
 
 /** `xhs https://www.theguardian.com/world.json | jq .config.nav | pbcopy` */
 export const navWorld = {
