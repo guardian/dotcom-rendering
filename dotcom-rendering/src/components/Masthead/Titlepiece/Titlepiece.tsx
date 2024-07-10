@@ -15,7 +15,7 @@ import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import { TitlepieceEditionDropdown } from './EditionDropdown';
+import { EditionDropdown } from './EditionDropdown';
 // import { ExpandedNav } from './ExpandedNav/ExpandedNav';
 import { Grid } from './Grid';
 import { Pillars } from './Pillars';
@@ -180,10 +180,7 @@ export const Titlepiece = ({
 		>
 			{/* Edition menu */}
 			<div css={editionSwitcherMenuStyles}>
-				<TitlepieceEditionDropdown
-					editionId={editionId}
-					dataLinkName={''}
-				/>
+				<EditionDropdown editionId={editionId} dataLinkName={''} />
 			</div>
 
 			{/* Guardian logo */}

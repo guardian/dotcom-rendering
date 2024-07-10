@@ -9,7 +9,7 @@ import type { EditionLinkType } from '../../../model/extract-nav';
 import type { DropdownLinkType } from '../../Dropdown';
 import { Dropdown } from '../../Dropdown';
 
-interface TitlepieceEditionDropdownProps {
+interface EditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
 }
@@ -34,10 +34,10 @@ const dropDownOverrides = css`
 	}
 `;
 
-export const TitlepieceEditionDropdown = ({
+export const EditionDropdown = ({
 	editionId,
 	dataLinkName,
-}: TitlepieceEditionDropdownProps) => {
+}: EditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
 		url: edition.url,

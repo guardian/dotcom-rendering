@@ -3,7 +3,7 @@ import { ExpandedNav } from './ExpandedNav';
 
 export default {
 	component: ExpandedNav,
-	title: 'Components/Masthead/ExpandedNav',
+	title: 'Components/Masthead/Titlepiece/ExpandedNav',
 	parameters: {
 		backgrounds: { default: 'dark' },
 	},
