@@ -1,3 +1,7 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/MoreColumn.tsx
+ */
 import { css } from '@emotion/react';
 import { from, space, textSans17 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';

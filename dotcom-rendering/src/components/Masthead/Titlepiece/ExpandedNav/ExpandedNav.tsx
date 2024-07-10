@@ -1,3 +1,7 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/ExpandedMenu.tsx
+ */
 import { css } from '@emotion/react';
 import { from, textSans20, until } from '@guardian/source/foundations';
 import type { EditionId } from '../../../../lib/edition';

@@ -1,3 +1,7 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/Columns.tsx
+ */
 import { css } from '@emotion/react';
 import {
 	from,

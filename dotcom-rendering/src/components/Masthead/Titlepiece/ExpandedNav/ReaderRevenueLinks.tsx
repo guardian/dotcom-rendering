@@ -1,3 +1,7 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/ReaderRevenueLinks.tsx
+ */
 import { css } from '@emotion/react';
 import { from, textSans17, textSansBold20 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
