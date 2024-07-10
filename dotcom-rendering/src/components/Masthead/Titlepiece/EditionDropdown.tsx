@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
-import { from, palette, space } from '@guardian/source/foundations';
+import { from, space, textSans17 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { editionList, getEditionFromId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { EditionLinkType } from '../../../model/extract-nav';
+import { palette as themePalette } from '../../../palette';
 import type { DropdownLinkType } from '../../Dropdown';
 import { Dropdown } from '../../Dropdown';
 
@@ -21,12 +22,12 @@ const editionDropdownStyles = css`
 `;
 
 const dropDownOverrides = css`
-	color: ${palette.neutral[100]};
+	${textSans17}
+	color: ${themePalette('--masthead-nav-link-text')};
 	padding: 0;
 	margin-top: ${space[1]}px;
-	font-size: 1rem;
 	&:not(ul):hover {
-		color: ${palette.neutral[100]};
+		color: ${themePalette('--masthead-nav-link-text')};
 		text-decoration: underline;
 	}
 	${from.tablet} {
@@ -66,9 +67,9 @@ export const EditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Hide until="desktop">
+			<Hide from="desktop">
 				<Dropdown
-					label={activeEdition.title}
+					label={activeEdition.id}
 					links={linksToDisplay}
 					id="edition"
 					dataLinkName={dataLinkName}
@@ -78,9 +79,10 @@ export const EditionDropdown = ({
 					`}
 				/>
 			</Hide>
-			<Hide from="desktop">
+
+			<Hide until="desktop">
 				<Dropdown
-					label={activeEdition.id}
+					label={activeEdition.title}
 					links={linksToDisplay}
 					id="edition"
 					dataLinkName={dataLinkName}
