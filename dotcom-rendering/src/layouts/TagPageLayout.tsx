@@ -379,7 +379,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					pageFooter={tagPage.pageFooter}
 					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
-					urls={tagPage.nav.readerRevenueLinks.header}
+					urls={tagPage.nav.readerRevenueLinks.footer}
 					editionId={tagPage.editionId}
 				/>
 			</Section>

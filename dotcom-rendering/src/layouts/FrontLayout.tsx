@@ -789,7 +789,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pageFooter={front.pageFooter}
 					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
-					urls={front.nav.readerRevenueLinks.header}
+					urls={front.nav.readerRevenueLinks.footer}
 					editionId={front.editionId}
 				/>
 			</Section>

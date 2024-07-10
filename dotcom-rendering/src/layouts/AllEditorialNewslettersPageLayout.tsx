@@ -220,7 +220,7 @@ export const AllEditorialNewslettersPageLayout = ({
 				<Footer
 					pageFooter={pageFooter}
 					pillars={NAV.pillars}
-					urls={NAV.readerRevenueLinks.header}
+					urls={NAV.readerRevenueLinks.footer}
 					editionId={editionId}
 				/>
 			</Section>

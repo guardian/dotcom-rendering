@@ -412,7 +412,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 					pageFooter={article.pageFooter}
 					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
+					urls={article.nav.readerRevenueLinks.footer}
 					editionId={article.editionId}
 				/>
 			</Section>
