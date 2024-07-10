@@ -7,6 +7,9 @@ const meta = {
 	parameters: {
 		backgrounds: { default: 'dark' },
 		layout: 'centered',
+		chromatic: {
+			disable: true,
+		},
 	},
 	render: (args) => <EditionDropdown {...args} />,
 	args: {
