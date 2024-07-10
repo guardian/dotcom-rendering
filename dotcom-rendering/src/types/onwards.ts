@@ -1,3 +1,4 @@
+import type { FEFormat } from 'types';
 import type { FETrailType } from './trails';
 
 /**

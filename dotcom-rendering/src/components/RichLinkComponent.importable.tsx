@@ -1,3 +1,4 @@
+import type { FEFormat } from 'types';
 import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';
 import type { RichLinkBlockElement, StarRating } from '../types/content';

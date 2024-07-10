@@ -1,4 +1,5 @@
 import type { ArticleSpecial, Pillar } from '@guardian/libs';
+import type { FEFormat, FENavType } from 'types';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding, EditionBranding } from './branding';

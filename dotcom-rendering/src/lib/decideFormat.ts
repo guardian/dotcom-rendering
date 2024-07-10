@@ -1,3 +1,4 @@
+import type { FEFormat } from 'types';
 import { decideDesign } from './decideDesign';
 import { decideDisplay } from './decideDisplay';
 import { decideTheme } from './decideTheme';

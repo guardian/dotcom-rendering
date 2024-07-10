@@ -1,3 +1,4 @@
+import type { FEFormat, FELinkType, FENavType, LegacyPillar } from 'types';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { ImageForAppsLightbox } from '../model/appsLightboxImages';

@@ -1,4 +1,5 @@
 import type { Pillar } from '@guardian/libs';
+import type { LegacyPillar } from 'types';
 import type { DCRArticle } from '../types/frontend';
 import { decideNavPillar } from './decideNavPillar';
 

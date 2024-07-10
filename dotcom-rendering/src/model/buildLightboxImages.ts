@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import type { FEFormat } from 'types';
 import { getLargest, getMaster } from '../lib/image';
 import type {
 	CartoonBlockElement,

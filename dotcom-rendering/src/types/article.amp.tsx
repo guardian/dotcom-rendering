@@ -1,3 +1,4 @@
+import type { FEFormat, FELinkType, LegacyPillar } from 'types';
 import type { EditionId } from '../lib/edition';
 import type { CommercialProperties } from './commercial';
 import type { FEElement } from './content';
