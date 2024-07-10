@@ -14,7 +14,7 @@ import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -125,15 +125,11 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							editionId={tagPage.editionId}
 							idUrl={tagPage.config.idUrl}
 							mmaUrl={tagPage.config.mmaUrl}
-							subscribeUrl={
-								tagPage.nav.readerRevenueLinks.header.subscribe
-							}
 							discussionApiUrl={tagPage.config.discussionApiUrl}
 							idApiUrl={tagPage.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
-							displayRoundel={false}
 							hasPageSkin={hasPageSkin}
 						/>
 					) : (

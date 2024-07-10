@@ -32,6 +32,7 @@ import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { minNavHeightPx, Nav } from '../components/Nav/Nav';
@@ -315,43 +316,66 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 		isWeb &&
 		article.config.abTests.tagLinkDesignVariant === 'variant' &&
 		article.tags.some((tag) => tag.id === 'football/euro-2024');
+
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
 				<>
-					<div
-						css={css`
-							${getZIndex('headerWrapper')}
-							order: 0;
-						`}
-					>
-						<Section
-							fullWidth={true}
-							showSideBorders={false}
-							showTopBorder={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="nav"
+					{inUpdatedHeaderABTest ? (
+						<Masthead
+							nav={props.NAV}
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							discussionApiUrl={article.config.discussionApiUrl}
+							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
+							showSubNav={false}
+							isImmersive={true}
+							hasPageSkin={false}
+							hasPageSkinContentSelfConstrain={false}
+						/>
+					) : (
+						<div
+							css={css`
+								${getZIndex('headerWrapper')}
+								order: 0;
+							`}
 						>
-							<Nav
-								isImmersive={
-									format.display === ArticleDisplay.Immersive
-								}
-								displayRoundel={
-									format.display ===
-										ArticleDisplay.Immersive ||
-									format.theme === ArticleSpecial.Labs
-								}
-								selectedPillar={props.NAV.selectedPillar}
-								nav={props.NAV}
-								subscribeUrl={
-									article.nav.readerRevenueLinks.header
-										.contribute
-								}
-								editionId={article.editionId}
-							/>
-						</Section>
-					</div>
+							<Section
+								fullWidth={true}
+								showSideBorders={false}
+								showTopBorder={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="nav"
+							>
+								<Nav
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={props.NAV.selectedPillar}
+									nav={props.NAV}
+									subscribeUrl={
+										article.nav.readerRevenueLinks.header
+											.contribute
+									}
+									editionId={article.editionId}
+								/>
+							</Section>
+						</div>
+					)}
 
 					{format.theme === ArticleSpecial.Labs && (
 						<Stuck>

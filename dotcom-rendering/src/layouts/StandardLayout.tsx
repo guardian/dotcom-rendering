@@ -35,7 +35,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
@@ -447,9 +447,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							idUrl={article.config.idUrl}
 							mmaUrl={article.config.mmaUrl}
 							discussionApiUrl={article.config.discussionApiUrl}
-							subscribeUrl={
-								article.nav.readerRevenueLinks.header.subscribe
-							}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={!isPaidContent}

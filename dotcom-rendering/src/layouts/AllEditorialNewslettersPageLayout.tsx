@@ -7,7 +7,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.importable';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
@@ -75,7 +75,6 @@ export const AllEditorialNewslettersPageLayout = ({
 							editionId={editionId}
 							idUrl={newslettersPage.config.idUrl}
 							mmaUrl={newslettersPage.config.mmaUrl}
-							subscribeUrl={subscribeUrl}
 							discussionApiUrl={
 								newslettersPage.config.discussionApiUrl
 							}
@@ -83,7 +82,6 @@ export const AllEditorialNewslettersPageLayout = ({
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
-							displayRoundel={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 						/>

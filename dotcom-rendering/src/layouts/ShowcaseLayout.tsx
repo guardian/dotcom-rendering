@@ -30,7 +30,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
@@ -293,10 +293,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										editionId={article.editionId}
 										idUrl={article.config.idUrl}
 										mmaUrl={article.config.mmaUrl}
-										subscribeUrl={
-											article.nav.readerRevenueLinks
-												.header.subscribe
-										}
 										discussionApiUrl={
 											article.config.discussionApiUrl
 										}
@@ -306,7 +302,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										}
 										showSubNav={false}
 										isImmersive={false}
-										displayRoundel={false}
 										hasPageSkin={false}
 										hasPageSkinContentSelfConstrain={false}
 									/>
