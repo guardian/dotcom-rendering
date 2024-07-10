@@ -45,6 +45,9 @@ const indices = [
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
+	// The edition switcher banner needs to be below the Edition selector in nav
+	'editionSwitcherBanner',
+
 	// The content displayed by the Details component
 	'summaryDetails',
 

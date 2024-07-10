@@ -1,5 +1,4 @@
-import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay, isOneOf } from '@guardian/libs';
 import {
 	background,
 	brandBackground,
@@ -7,7 +6,6 @@ import {
 	brandLine,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
@@ -18,9 +16,11 @@ import {
 	decideMerchandisingSlot,
 	decideMerchHighAndMobileAdSlots,
 } from '../components/DecideFrontsAdSlots';
+import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
+import { FrontSubNav } from '../components/FrontSubNav.importable';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -39,13 +39,14 @@ import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { editionList } from '../lib/edition';
 import {
 	getFrontsBannerAdPositions,
 	getMobileAdPositions,
 } from '../lib/getFrontsAdPositions';
 import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
-import type { DCRCollectionType, DCRFrontType } from '../types/front';
+import { type DCRCollectionType, type DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -58,6 +59,8 @@ const spaces = / /g;
 /** TODO: Confirm with is a valid way to generate component IDs. */
 const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
+
+const isNetworkFrontPageId = isOneOf(editionList.map(({ pageId }) => pageId));
 
 const isNavList = (collection: DCRCollectionType) => {
 	return (
@@ -100,9 +103,7 @@ const decideLeftContent = (
 	// show weather?
 	if (
 		front.config.switches['weather'] &&
-		['uk', 'us', 'au', 'international', 'europe'].includes(
-			front.config.pageId,
-		) &&
+		isNetworkFrontPageId(front.config.pageId) &&
 		// based on https://github.com/guardian/frontend/blob/473aafd168fec7f2a578a52c8e84982e3ec10fea/common/app/views/support/GetClasses.scala#L107
 		collection.displayName.toLowerCase() === 'headlines' &&
 		!hasPageSkin
@@ -271,6 +272,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												.headerTopBarSearchCapi
 										}
 										hasPageSkin={hasPageSkin}
+										pageId={pageId}
 									/>
 								</Section>
 							)}
@@ -297,45 +299,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								/>
 							</Section>
 							{NAV.subNavSections && (
-								<>
-									<Section
-										fullWidth={true}
-										padSides={false}
-										element="aside"
+								<Island
+									priority="enhancement"
+									defer={{ until: 'idle' }}
+								>
+									<FrontSubNav
+										subNavSections={NAV.subNavSections}
+										currentNavLink={NAV.currentNavLink}
 										hasPageSkin={hasPageSkin}
-									>
-										<Island
-											priority="enhancement"
-											defer={{ until: 'idle' }}
-										>
-											<SubNav
-												subNavSections={
-													NAV.subNavSections
-												}
-												currentNavLink={
-													NAV.currentNavLink
-												}
-												position="header"
-												currentPillarTitle={
-													front.nav.currentPillarTitle
-												}
-											/>
-										</Island>
-									</Section>
-									<Section
-										fullWidth={true}
-										padSides={false}
-										showTopBorder={false}
-										hasPageSkin={hasPageSkin}
-									>
-										<StraightLines
-											cssOverrides={css`
-												display: block;
-											`}
-											count={4}
-										/>
-									</Section>
-								</>
+										pageId={pageId}
+										userEdition={editionId}
+										currentPillarTitle={
+											front.nav.currentPillarTitle
+										}
+									/>
+								</Island>
 							)}
 						</>
 					)}
@@ -353,13 +331,20 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					)}
 				</>
 			</div>
-
 			<main
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
 				id="maincontent"
 				css={hasPageSkin && pageSkinContainer}
 			>
+				{isNetworkFrontPageId(pageId) && (
+					<Island priority="enhancement" defer={{ until: 'idle' }}>
+						<EditionSwitcherBanner
+							pageId={pageId}
+							edition={editionId}
+						/>
+					</Island>
+				)}
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
