@@ -381,7 +381,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={tagPage.nav.readerRevenueLinks.header}
 					editionId={tagPage.editionId}
-					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
 			<BannerWrapper data-print-layout="hide">

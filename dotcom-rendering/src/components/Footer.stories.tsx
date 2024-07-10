@@ -50,9 +50,6 @@ export const Footers = () => (
 						pillars={extractNAV(Standard.nav).pillars}
 						urls={Standard.nav.readerRevenueLinks.header}
 						editionId={editionId}
-						contributionsServiceUrl={
-							Standard.contributionsServiceUrl
-						}
 					/>
 				</Wrapper>
 			</li>

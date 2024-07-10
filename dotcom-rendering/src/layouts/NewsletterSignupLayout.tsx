@@ -596,7 +596,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
 				/>
 			</Section>
 
