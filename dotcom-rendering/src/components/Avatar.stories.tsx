@@ -55,7 +55,7 @@ export const Default: Story = {
 		theme: Pillar.Opinion,
 		size: '136px',
 	},
-	name: 'Medium, Opinion (Rich Links)',
+	name: 'Round Medium, Opinion (Rich Links)',
 };
 
 export const CutOutShape: Story = {
@@ -68,7 +68,7 @@ export const CutOutShape: Story = {
 		theme: Pillar.Opinion,
 		size: '136px',
 	},
-	name: 'Medium, Opinion (Rich Links)',
+	name: 'Cutout Medium, Opinion (Rich Links)',
 };
 
 export const Large: Story = {
