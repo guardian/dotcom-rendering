@@ -1785,18 +1785,34 @@ const tableOfContentsBorderLight: PaletteFunction = () =>
 const tableOfContentsBorderDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 
-const adLabelsTextLight: PaletteFunction = () => {
-	return sourcePalette.neutral[20];
+const adLabelsTextLight: PaletteFunction = () => sourcePalette.neutral[46];
+const adLabelsTextDark: PaletteFunction = () => sourcePalette.neutral[86];
+
+const adBackgroundLight: PaletteFunction = () => sourcePalette.neutral[97];
+
+const adBackgroundDark: PaletteFunction = () => sourcePalette.neutral[20];
+
+const articleInnerAdBackgroundLight: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[93];
+		default:
+			return sourcePalette.neutral[97];
+	}
 };
-const adLabelsTextDark: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
+const articleInnerAdBackgroundDark: PaletteFunction = ({ design }) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[7];
+		default:
+			return sourcePalette.neutral[20];
+	}
 };
-const adBackgroundLight: PaletteFunction = () => {
-	return sourcePalette.neutral[97];
-};
-const adBackgroundDark: PaletteFunction = () => {
-	return sourcePalette.neutral[20];
-};
+
+const adBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
+
+const adBorderDark: PaletteFunction = () => sourcePalette.neutral[38];
+
 const adSupportBannerBackgroundLight: PaletteFunction = () => {
 	return sourcePalette.neutral[93];
 };
@@ -5615,6 +5631,14 @@ const paletteColours = {
 	'--ad-background': {
 		light: adBackgroundLight,
 		dark: adBackgroundDark,
+	},
+	'--ad-background-article-inner': {
+		light: articleInnerAdBackgroundLight,
+		dark: articleInnerAdBackgroundDark,
+	},
+	'--ad-border': {
+		light: adBorderLight,
+		dark: adBorderDark,
 	},
 	'--ad-labels-text': {
 		light: adLabelsTextLight,
