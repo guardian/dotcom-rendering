@@ -257,7 +257,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							groupedTrails.day !== undefined
 								? 'numeric'
 								: undefined,
-						month: 'short',
+						month: 'long',
 						year: 'numeric',
 					});
 
