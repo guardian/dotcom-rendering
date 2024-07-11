@@ -39,6 +39,7 @@ type Props = {
 	idApiUrl: string;
 	headerTopBarSearchCapiSwitch: boolean;
 	hasPageSkin?: boolean;
+	pageId?: string;
 };
 
 export const Header = ({
@@ -52,6 +53,7 @@ export const Header = ({
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
 	hasPageSkin = false,
+	pageId,
 }: Props) => (
 	<div css={headerStyles} data-component="nav3">
 		<Island priority="critical">
@@ -68,6 +70,7 @@ export const Header = ({
 				idApiUrl={idApiUrl}
 				headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
 				hasPageSkin={hasPageSkin}
+				pageId={pageId}
 			/>
 		</Island>
 
