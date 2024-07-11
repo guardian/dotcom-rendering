@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	isString,
-	type OphanAction,
-	type OphanComponentEvent,
-} from '@guardian/libs';
+import { isString } from '@guardian/libs';
+import type { AbTest, TAction } from '@guardian/ophan-tracker-js';
 import { space, until } from '@guardian/source/foundations';
 import {
 	Button,
@@ -34,12 +31,10 @@ import { useConfig } from './ConfigContext';
 // be accurately predicated for every breakpoint).
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
-type OphanABTest = OphanComponentEvent['abTest'];
-
 type Props = {
 	newsletterId: string;
 	successDescription: string;
-	abTest?: OphanABTest;
+	abTest?: AbTest;
 };
 
 const formStyles = css`
@@ -193,9 +188,9 @@ const sendTracking = (
 	newsletterId: string,
 	eventDescription: EventDescription,
 	renderingTarget: RenderingTarget,
-	abTest?: OphanABTest,
+	abTest?: AbTest,
 ): void => {
-	let action: OphanAction = 'CLICK';
+	let action: TAction = 'CLICK';
 
 	switch (eventDescription) {
 		case 'form-submission':

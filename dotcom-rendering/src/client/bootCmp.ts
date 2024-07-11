@@ -1,15 +1,13 @@
 import type { ConsentState } from '@guardian/libs';
+import { cmp, getCookie, log, onConsent } from '@guardian/libs';
 import type {
-	OphanAction,
-	OphanComponentEvent,
-	OphanComponentType,
-} from '@guardian/libs';
-import { cmp, onConsent } from '@guardian/libs';
-import { getCookie, log } from '@guardian/libs';
+	ComponentEvent,
+	TAction,
+	TComponentType,
+} from '@guardian/ophan-tracker-js';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { submitComponentEvent } from './ophan/ophan';
-import { getOphan } from './ophan/ophan';
+import { getOphan, submitComponentEvent } from './ophan/ophan';
 
 const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 	onConsent().then((consentState: ConsentState) => {
@@ -67,9 +65,9 @@ const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 			return [];
 		};
 
-		const componentType = 'CONSENT' satisfies OphanComponentType;
+		const componentType = 'CONSENT' satisfies TComponentType;
 
-		const action = 'MANAGE_CONSENT' satisfies OphanAction;
+		const action = 'MANAGE_CONSENT' satisfies TAction;
 		const event = {
 			component: {
 				componentType,
@@ -77,7 +75,7 @@ const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 				labels: decideConsentCarrierLabels(),
 			},
 			action,
-		} satisfies OphanComponentEvent;
+		} satisfies ComponentEvent;
 
 		return submitComponentEvent(event, renderingTarget);
 	});

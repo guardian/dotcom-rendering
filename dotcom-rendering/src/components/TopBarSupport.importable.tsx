@@ -3,8 +3,8 @@
  * This file was largely lifted from https://github.com/guardian/dotcom-rendering/blob/b3ef504acd00d48e765e0656be5ffbad88981a39/dotcom-rendering/src/components/SupportTheG.importable.tsx
  */
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, isUndefined } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getHeader } from '@guardian/support-dotcom-components';
 import type {
 	HeaderPayload,
@@ -128,9 +128,7 @@ const ReaderRevenueLinksRemote = ({
 			<div css={headerStyles}>
 				{}
 				<SupportHeader
-					submitComponentEvent={(
-						componentEvent: OphanComponentEvent,
-					) =>
+					submitComponentEvent={(componentEvent: ComponentEvent) =>
 						void submitComponentEvent(
 							componentEvent,
 							renderingTarget,

@@ -1,7 +1,11 @@
 import { css } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
-import { cmp } from '@guardian/libs';
-import { getCookie, startPerformanceMeasure, storage } from '@guardian/libs';
+import {
+	cmp,
+	getCookie,
+	startPerformanceMeasure,
+	storage,
+} from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
 	EpicPayload,
@@ -35,7 +39,7 @@ export type EpicConfig = {
 
 type EpicProps = {
 	fetchEmail?: () => Promise<string | null>;
-	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
+	submitComponentEvent?: (componentEvent: ComponentEvent) => void;
 	openCmp: () => void;
 	hasConsentForArticleCount: boolean;
 	stage: string;

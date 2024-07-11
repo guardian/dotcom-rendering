@@ -3,7 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/shared/src/lib/tracking.ts
  */
-import type { OphanAction, OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent, TAction } from '@guardian/ophan-tracker-js';
 import { addRegionIdToSupportUrl } from '@guardian/support-dotcom-components';
 import type {
 	BannerTest,
@@ -254,8 +254,8 @@ export const buildAmpEpicCampaignCode = (
 	variantName: string,
 ): string => `AMP__${testName}__${variantName}`;
 
-const createEventFromTracking = (action: OphanAction) => {
-	return (tracking: Tracking, componentId: string): OphanComponentEvent => {
+const createEventFromTracking = (action: TAction) => {
+	return (tracking: Tracking, componentId: string): ComponentEvent => {
 		const {
 			abTestName,
 			abTestVariant,

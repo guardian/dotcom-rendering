@@ -6,7 +6,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ThemeProvider } from '@emotion/react';
-import type { OphanComponentEvent } from '@guardian/libs';
+import type { ComponentEvent } from '@guardian/ophan-tracker-js';
 import { palette } from '@guardian/source/foundations';
 import {
 	Button as DSButton,
@@ -46,7 +46,7 @@ type Props = {
 	// Both using the same interface
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	onClickAction: Function | Url;
-	submitComponentEvent?: (event: OphanComponentEvent) => void;
+	submitComponentEvent?: (event: ComponentEvent) => void;
 	children: React.ReactElement | string;
 	priority?: 'primary' | 'secondary';
 	showArrow?: boolean;
