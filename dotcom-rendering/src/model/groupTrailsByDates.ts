@@ -23,7 +23,7 @@ const getEditionalisedDate = (date: Date, editionId: EditionId) => {
 
 	const [day, month, year] = date
 		.toLocaleDateString(
-			// we use GB in order to get “5 May 1821”
+			// we use British locale in order to get “5 May 1821”
 			'en-GB',
 			{
 				day: 'numeric',
