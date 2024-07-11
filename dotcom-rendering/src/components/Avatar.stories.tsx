@@ -49,6 +49,7 @@ export const Default: Story = {
 	args: {
 		src: georgesMonbiot,
 		alt: 'The alt of the image',
+		shape: 'round',
 	},
 	parameters: {
 		theme: Pillar.Opinion,
@@ -127,4 +128,17 @@ export const Small: Story = {
 		size: '60px',
 	},
 	name: 'Small, Sport (Byline image - Mobile)',
+};
+
+export const CutOutShape: Story = {
+	args: {
+		src: georgesMonbiot,
+		alt: 'The alt of the image',
+		shape: 'cutout',
+	},
+	parameters: {
+		theme: Pillar.Opinion,
+		size: '136px',
+	},
+	name: 'Medium, Opinion (Rich Links)',
 };
