@@ -9,15 +9,12 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import type { EditionId } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
-import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
 
 type Props = {
 	nav: NavType;
-	editionId: EditionId;
 	dataLinkName: string;
 	selectedPillar?: Pillar;
 	isImmersive?: boolean;
@@ -198,9 +195,8 @@ const getPillarColour = (pillar: ArticleTheme): string | undefined => {
 	}
 };
 
-export const TitlepiecePillars = ({
+export const Pillars = ({
 	nav,
-	editionId,
 	selectedPillar,
 	dataLinkName,
 	isImmersive = false,
@@ -258,12 +254,6 @@ export const TitlepiecePillars = ({
 					)
 				}
 			</ul>
-			<TitlepieceExpandedNav
-				nav={nav}
-				editionId={editionId}
-				isImmersive={isImmersive}
-				hasPageSkin={hasPageSkin}
-			/>
 		</>
 	);
 };

@@ -1,12 +1,11 @@
 import type { ReactElement } from 'react';
-import type { EditionId } from '../lib/edition';
-import type { NavType } from '../model/extract-nav';
-import { palette as themePalette } from '../palette';
-import { Island } from './Island';
-import { Nav } from './Nav/Nav';
-import { Section } from './Section';
-import { SubNav } from './SubNav.importable';
-import { TopBar } from './TopBar.importable';
+import type { EditionId } from '../../lib/edition';
+import type { NavType } from '../../model/extract-nav';
+import { palette as themePalette } from '../../palette';
+import { Island } from '../Island';
+import { Section } from '../Section';
+import { TopBar } from '../TopBar.importable';
+import { Titlepiece } from './Titlepiece/Titlepiece';
 
 type Props = {
 	nav: NavType;
@@ -15,12 +14,10 @@ type Props = {
 	idUrl?: string;
 	mmaUrl?: string;
 	contributionsServiceUrl: string;
-	subscribeUrl: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
 	showSubNav?: boolean;
 	isImmersive?: boolean;
-	displayRoundel?: boolean;
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
 };
@@ -50,16 +47,14 @@ export const Masthead = ({
 	idUrl,
 	mmaUrl,
 	discussionApiUrl,
-	subscribeUrl,
 	idApiUrl,
 	contributionsServiceUrl,
 	showSubNav = true,
 	isImmersive,
-	displayRoundel,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
 }: Props) => (
-	<div data-component="header">
+	<header data-component="header">
 		<Section
 			fullWidth={true}
 			showTopBorder={false}
@@ -67,7 +62,6 @@ export const Masthead = ({
 			padSides={false}
 			shouldCenter={false}
 			backgroundColour={themePalette('--masthead-top-bar-background')}
-			element="header"
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
 		>
@@ -86,7 +80,6 @@ export const Masthead = ({
 			</div>
 		</Section>
 
-		{/* Highlights section goes here */}
 		{highlights && (
 			<Section
 				fullWidth={true}
@@ -106,42 +99,23 @@ export const Masthead = ({
 			</Section>
 		)}
 
-		<Section
+		{/* <Section
 			fullWidth={true}
 			backgroundColour={themePalette('--masthead-nav-background')}
-			borderColour={themePalette('--masthead-nav-border')}
+			borderColour={themePalette('--masthead-nav-background')}
 			showTopBorder={false}
 			padSides={false}
 			element="nav"
 			hasPageSkin={hasPageSkin}
 			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
-		>
-			<Nav
-				nav={nav}
-				subscribeUrl={subscribeUrl}
-				selectedPillar={nav.selectedPillar}
-				editionId={editionId}
-				isImmersive={isImmersive}
-				displayRoundel={displayRoundel}
-			/>
-		</Section>
-
-		{nav.subNavSections && showSubNav && (
-			<Section
-				fullWidth={true}
-				backgroundColour={themePalette('--article-background')}
-				borderColour={themePalette('--article-border')}
-				padSides={false}
-				element="aside"
-			>
-				<Island priority="enhancement" defer={{ until: 'idle' }}>
-					<SubNav
-						subNavSections={nav.subNavSections}
-						currentNavLink={nav.currentNavLink}
-						position="header"
-					/>
-				</Island>
-			</Section>
-		)}
-	</div>
+		> */}
+		<Titlepiece
+			nav={nav}
+			editionId={editionId}
+			showSubNav={showSubNav}
+			isImmersive={isImmersive}
+			hasPageSkin={hasPageSkin}
+		/>
+		{/* </Section> */}
+	</header>
 );

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
-	headlineMedium20,
+	headlineBold20,
 	space,
 	textSans17,
 } from '@guardian/source/foundations';
@@ -88,8 +88,7 @@ const brandExtensionListItem = css`
 `;
 
 const brandExtensionLink = css`
-	${headlineMedium20};
-	font-weight: 700;
+	${headlineBold20};
 	background-color: transparent;
 	border: 0;
 	box-sizing: border-box;
@@ -105,6 +104,7 @@ const brandExtensionLink = css`
 	${from.tablet} {
 		padding-left: 60px;
 	}
+
 	${from.desktop} {
 		padding: 6px 0;
 	}

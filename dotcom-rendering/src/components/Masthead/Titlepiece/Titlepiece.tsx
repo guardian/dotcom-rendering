@@ -15,13 +15,17 @@ import type { EditionId } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import { TitlepieceEditionDropdown } from './TitlepieceEditionDropdown';
-import { TitlepieceGrid } from './TitlepieceGrid';
-import { TitlepiecePillars } from './TitlepiecePillars';
+import { TitlepieceEditionDropdown } from './EditionDropdown';
+// import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
+import { Grid } from './Grid';
+import { Pillars } from './Pillars';
 
 interface Props {
 	nav: NavType;
 	editionId: EditionId;
+	showSubNav?: boolean;
+	isImmersive?: boolean;
+	hasPageSkin?: boolean;
 }
 
 export const pillarLeftMarginPx = 6;
@@ -154,9 +158,21 @@ const subnavLinkStyles = css`
 	text-decoration: none;
 `;
 
-export const Titlepiece = ({ nav, editionId }: Props) => {
+export const Titlepiece = ({
+	nav,
+	editionId,
+	showSubNav,
+	isImmersive,
+	hasPageSkin,
+}: Props) => {
 	return (
-		<TitlepieceGrid type="header">
+		<Grid
+			type="section"
+			style={{
+				backgroundColor: themePalette('--masthead-nav-background'),
+				color: themePalette('--masthead-nav-link-text'),
+			}}
+		>
 			{/* Edition menu */}
 			<div css={editionSwitcherMenuStyles}>
 				<TitlepieceEditionDropdown
@@ -178,37 +194,42 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 			<nav css={pillarsNavStyles}>
 				{/* Pillars nav mobile version */}
 				<Hide from="desktop">
-					<TitlepiecePillars
+					<Pillars
 						nav={nav}
-						editionId={editionId}
 						dataLinkName={nestedOphanComponents(
 							'header',
 							'titlepiece',
 							'nav',
 						)}
 						selectedPillar={nav.selectedPillar}
-						isImmersive={false}
+						isImmersive={isImmersive}
 						showBurgerMenu={false}
-						hasPageSkin={false}
+						hasPageSkin={hasPageSkin}
 					/>
 				</Hide>
 
 				{/* Pillars nav desktop version (contains veggie burger) */}
 				<Hide until="desktop">
-					<TitlepiecePillars
+					<Pillars
 						nav={nav}
-						editionId={editionId}
 						dataLinkName={nestedOphanComponents(
 							'header',
 							'titlepiece',
 							'nav',
 						)}
 						selectedPillar={nav.selectedPillar}
-						isImmersive={false}
+						isImmersive={isImmersive}
 						showBurgerMenu={true}
-						hasPageSkin={false}
+						hasPageSkin={hasPageSkin}
 					/>
 				</Hide>
+
+				{/* <TitlepieceExpandedNav
+					nav={nav}
+					editionId={editionId}
+					isImmersive={isImmersive}
+					hasPageSkin={hasPageSkin}
+				/> */}
 			</nav>
 
 			{/* Veggie burger menu */}
@@ -224,7 +245,7 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 			{/* </Hide> */}
 
 			{/* Subnav */}
-			{nav.subNavSections && (
+			{nav.subNavSections && showSubNav && (
 				<nav css={subnavStyles}>
 					<ul css={subnavListStyles}>
 						{nav.subNavSections.links.map(({ title, url }) => (
@@ -237,6 +258,6 @@ export const Titlepiece = ({ nav, editionId }: Props) => {
 					</ul>
 				</nav>
 			)}
-		</TitlepieceGrid>
+		</Grid>
 	);
 };

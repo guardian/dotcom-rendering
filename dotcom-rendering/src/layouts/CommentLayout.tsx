@@ -28,7 +28,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
@@ -343,15 +343,11 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							idUrl={article.config.idUrl}
 							mmaUrl={article.config.mmaUrl}
-							subscribeUrl={
-								article.nav.readerRevenueLinks.header.subscribe
-							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
-							displayRoundel={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 						/>
@@ -834,7 +830,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -954,7 +950,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -990,7 +986,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							pageFooter={article.pageFooter}
 							selectedPillar={props.NAV.selectedPillar}
 							pillars={props.NAV.pillars}
-							urls={article.nav.readerRevenueLinks.header}
+							urls={article.nav.readerRevenueLinks.footer}
 							editionId={article.editionId}
 						/>
 					</Section>

@@ -1,9 +1,8 @@
 import { nav } from '../../../Nav/Nav.mock';
-import { TitlepiecePillars } from '../TitlepiecePillars';
-import { TitlepieceExpandedNav } from './ExpandedNav';
+import { ExpandedNav } from './ExpandedNav';
 
 export default {
-	component: TitlepiecePillars,
+	component: ExpandedNav,
 	title: 'Components/Masthead/ExpandedNav',
 	parameters: {
 		backgrounds: { default: 'dark' },
@@ -12,7 +11,7 @@ export default {
 };
 
 export const defaultStory = () => {
-	return <TitlepieceExpandedNav nav={nav} editionId={'UK'} />;
+	return <ExpandedNav nav={nav} editionId={'UK'} />;
 };
 
 defaultStory.storyName = 'default';

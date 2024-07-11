@@ -27,7 +27,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/NewsletterBadge';
 import { NewsletterDetail } from '../components/NewsletterDetail';
@@ -245,19 +245,12 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						editionId={article.editionId}
 						idUrl={article.config.idUrl}
 						mmaUrl={article.config.mmaUrl}
-						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
-						}
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={!!NAV.subNavSections}
 						isImmersive={
 							format.display === ArticleDisplay.Immersive
-						}
-						displayRoundel={
-							format.display === ArticleDisplay.Immersive ||
-							format.theme === ArticleSpecial.Labs
 						}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
@@ -594,7 +587,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					pageFooter={article.pageFooter}
 					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
+					urls={article.nav.readerRevenueLinks.footer}
 					editionId={article.editionId}
 				/>
 			</Section>
