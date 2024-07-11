@@ -237,7 +237,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								tagPage.pageId,
 								groupedTrails.year,
 								groupedTrails.month.slice(0, 3).toLowerCase(),
-								groupedTrails.day,
+								groupedTrails.day.padStart(2, '0'),
 								'all',
 						  )
 						: undefined;
