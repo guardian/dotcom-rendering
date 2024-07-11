@@ -17,18 +17,6 @@ interface TrailAndDate {
 }
 
 /**
- * Calculates the average number of trails per day across a set of days
- */
-const getMeanDayFrequency = (
-	days: Array<{ day: number; trails: TrailAndDate[] }>,
-) => {
-	const totalTrails = days
-		.flatMap(({ trails }) => trails.length)
-		.reduce((acc, curr) => acc + curr, 0);
-	return totalTrails / days.length;
-};
-
-/**
  * Takes a set of trails & returns them grouped by year of publication
  */
 const groupByYear = (trails: TrailAndDate[]) => {
@@ -154,14 +142,16 @@ export const groupTrailsByDates = (
 		for (const { month, trails: trailsForMonth } of trailsByMonth) {
 			const trailsByDay = groupTrailsByDay(trailsForMonth, year, month);
 
-			// Once we have trails grouped by year, month & day, we calculate the day frequency
-			// e.g the average number of trails per day for this month.
-			const meanDayFrequency = getMeanDayFrequency(
-				trailsByDay.map(({ day, trails: dayTrails }) => ({
-					day,
-					trails: dayTrails,
-				})),
-			);
+			/**
+			 * Calculates the average number of trails per day across a set of days.
+			 * For example, if 3 days have 1, 2, and 5 trails respectively,
+			 * the mean frequency would be 4 trails per day.
+			 */
+			const meanDayFrequency =
+				trailsByDay
+					.map(({ trails: { length } }) => length)
+					.reduce((total, day) => total + day, 0) /
+				trailsByDay.length;
 
 			// This is our 'pop-out' option, if forceDay is true of the mean day frequency exceeds
 			// the minimum, we will create a 'GroupedTrails' object for each day we have trails
