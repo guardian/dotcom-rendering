@@ -4,6 +4,7 @@ import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useEditionSwitcherBanner } from '../lib/useUserPreferredEdition';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
 import { MyAccount } from './HeaderTopBarMyAccount';
 import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions';
@@ -21,6 +22,7 @@ interface HeaderTopBarProps {
 	idApiUrl: string;
 	headerTopBarSearchCapiSwitch: boolean;
 	hasPageSkin?: boolean;
+	pageId?: string;
 }
 
 const topBarStylesUntilLeftCol = css`
@@ -53,9 +55,10 @@ const topBarStylesFromLeftCol = css`
  *
  * ## Why does this need to be an Island?
  *
- * - We need to check if a user is signed in to show them the right header.
+ * - We need to check if a user is signed in to show them the right header
  * - We track clicks on print subscription with a page view ID
  * - We (sometimes) have a dynamic search
+ * - We change the text of the edition dropdown if we show the edition switcher banner
  *
  * ---
  *
@@ -70,8 +73,10 @@ export const HeaderTopBar = ({
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
 	hasPageSkin = false,
+	pageId = '',
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
+	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
 
 	return (
 		<div
@@ -107,6 +112,7 @@ export const HeaderTopBar = ({
 					<HeaderTopBarEditionDropdown
 						editionId={editionId}
 						dataLinkName={dataLinkName}
+						showCurrentEdition={!showBanner}
 					/>
 				</Hide>
 			</div>
