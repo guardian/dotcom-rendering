@@ -27,7 +27,11 @@ const formatWeekday = (date: Date, locale: string, timeZone: string) =>
 		timeZone,
 	});
 
-const formatDate = (date: Date, locale: string, timeZone: string) =>
+/**
+ * Get a date that follows the style guide, which is `d Mmm YYYY`.
+ * For example, 15 Mar 1821 or 4 Jul 2023
+ */
+export const formatDate = (date: Date, locale: string, timeZone: string) =>
 	date
 		.toLocaleDateString(locale, {
 			day: 'numeric',
