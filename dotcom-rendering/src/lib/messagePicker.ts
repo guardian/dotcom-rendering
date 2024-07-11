@@ -43,6 +43,8 @@ const recordMessageTimeoutInOphan = async (
 	const ophan = await getOphan(renderingTarget);
 	ophan.record({
 		// @ts-expect-error -- Type 'string' is not assignable to type 'ComponentV2'.
+		// the relevant team should remove this call as it is dropped by Ophan
+		// see https://github.com/guardian/dotcom-rendering/pull/11438 further context
 		component: `${slotName}-picker-timeout-dcr`,
 		value: candidateId,
 	});
@@ -84,7 +86,8 @@ const timeoutify = <T>(
 					if (candidateConfig.reportTiming) {
 						void getOphan(renderingTarget).then((ophan) => {
 							ophan.record({
-								// @ts-expect-error -- is this event dropped by Ophan?
+								// @ts-expect-error -- the relevant team should remove this call as it is dropped by Ophan
+								// see https://github.com/guardian/dotcom-rendering/pull/11438 further context
 								component: perfName,
 								value: canShowTimeTaken,
 							});
