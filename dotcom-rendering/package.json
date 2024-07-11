@@ -187,7 +187,7 @@
 		"type-fest": "4.6.0",
 		"typescript": "5.3.3",
 		"typescript-json-schema": "0.58.1",
-		"unified": "11.0.4",
+		"unified": "11.0.5",
 		"valibot": "0.28.1",
 		"web-vitals": "3.5.1",
 		"webpack": "5.91.0",
