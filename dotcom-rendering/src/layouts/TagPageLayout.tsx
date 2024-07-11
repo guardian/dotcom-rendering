@@ -253,7 +253,10 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
 					const title = date.toLocaleDateString(dateLocale, {
-						day: 'numeric',
+						day:
+							groupedTrails.day !== undefined
+								? 'numeric'
+								: undefined,
 						month: 'short',
 						year: 'numeric',
 					});
