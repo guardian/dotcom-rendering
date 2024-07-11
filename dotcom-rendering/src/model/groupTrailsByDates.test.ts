@@ -43,7 +43,7 @@ describe('groupTrailsByDates', () => {
 			new Date(2023, 4, 5, 12),
 		];
 
-		const result = groupTrailsByDates(datesToTrails(dates));
+		const result = groupTrailsByDates(datesToTrails(dates), 'UK');
 
 		expect(result[0]?.day).toEqual(26);
 		expect(result[1]?.day).toEqual(25);
@@ -67,7 +67,7 @@ describe('groupTrailsByDates', () => {
 			new Date(2023, 4, 5, 12),
 		];
 
-		const result = groupTrailsByDates(datesToTrails(dates), true);
+		const result = groupTrailsByDates(datesToTrails(dates), 'UK', true);
 
 		expect(result[0]?.day).toEqual(5);
 		expect(result[1]?.day).toEqual(4);

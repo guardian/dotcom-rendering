@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined, joinUrl } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
@@ -22,7 +23,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { getEditionFromId } from '../lib/edition';
 import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
@@ -37,28 +37,6 @@ interface Props {
 	tagPage: DCRTagPageType;
 	NAV: NavType;
 }
-
-const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
-	if (hasDay) {
-		return `${date.toLocaleDateString(locale, {
-			day: 'numeric',
-		})}-${date
-			.toLocaleDateString(locale, {
-				month: 'long',
-			})
-			.toLowerCase()}-${date.toLocaleDateString(locale, {
-			year: 'numeric',
-		})}`;
-	} else {
-		return `${date
-			.toLocaleDateString(locale, {
-				month: 'long',
-			})
-			.toLowerCase()}-${date.toLocaleDateString(locale, {
-			year: 'numeric',
-		})}`;
-	}
-};
 
 export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const {
@@ -239,42 +217,33 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					image={tagPage.header.image}
 				/>
 				{tagPage.groupedTrails.map((groupedTrails, index) => {
-					const { dateLocale } = getEditionFromId(tagPage.editionId);
-					const webPublicationDate =
-						groupedTrails.trails[0].webPublicationDate ??
-						new Date();
-					const date = new Date(webPublicationDate);
-					const containedId = getContainerId(
-						date,
-						dateLocale,
-						groupedTrails.day !== undefined,
-					);
-
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
-					const title = date.toLocaleDateString(dateLocale, {
-						day: 'numeric',
-						month: 'short',
-						year: 'numeric',
-					});
+					const title = isUndefined(groupedTrails.day)
+						? [groupedTrails.month, groupedTrails.year].join(' ')
+						: [
+								groupedTrails.day,
+								groupedTrails.month,
+								groupedTrails.year,
+						  ].join(' ');
 
-					const url =
-						groupedTrails.day !== undefined
-							? `/${tagPage.pageId}/${groupedTrails.year}/${date
-									.toLocaleDateString(dateLocale, {
-										month: 'long',
-									})
-									.slice(0, 3)
-									.toLowerCase()}/${date.toLocaleDateString(
-									dateLocale,
-									{
-										day: '2-digit',
-									},
-							  )}/all`
-							: undefined;
+					const containerId = title
+						.replaceAll(' ', '-')
+						.toLowerCase();
+
+					const url = groupedTrails.day
+						? '/' +
+						  joinUrl(
+								tagPage.pageId,
+								groupedTrails.year,
+								groupedTrails.month.slice(0, 3).toLowerCase(),
+								groupedTrails.day,
+								'all',
+						  )
+						: undefined;
 
 					return (
-						<Fragment key={containedId}>
+						<Fragment key={containerId}>
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
@@ -289,9 +258,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									index === 0 ? tagPage.branding : undefined
 								}
 								showTopBorder={true}
-								ophanComponentLink={`container-${index} | ${containedId}`}
-								ophanComponentName={containedId}
-								sectionId={containedId}
+								ophanComponentLink={`container-${index} | ${containerId}`}
+								ophanComponentName={containerId}
+								sectionId={containerId}
 								toggleable={false}
 								pageId={tagPage.pageId}
 								editionId={tagPage.editionId}

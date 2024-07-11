@@ -78,6 +78,8 @@ export const getBadgeUrl = (tag: FETagType): string | undefined => {
 const enhanceTagPage = (body: unknown): DCRTagPageType => {
 	const data: FETagPageType = validateAsTagPageType(body);
 
+	data.editionId = 'US';
+
 	const enhancedCards = enhanceCards(data.contents, {
 		cardInTagPage: true,
 		pageId: data.pageId,
@@ -88,6 +90,7 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 
 	const groupedTrails = groupTrailsByDates(
 		enhancedCards,
+		data.editionId,
 		speed === 'slow' || data.forceDay,
 	);
 
