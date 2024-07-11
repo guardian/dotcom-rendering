@@ -226,10 +226,13 @@ export const groupTrailsByDates = (
 	// In cases where card order is unexpected (e.g not date ordered), it is possible this array will be out of order.
 	const sortedGroupedTrails = groupedTrails
 		.map((groupedTrail) => {
+			/** Milliseconds since midnight, 1 January 1970, UTC */
 			const epoch = new Date(
-				`${groupedTrail.day ?? 1} ${groupedTrail.month} ${
-					groupedTrail.year
-				}`,
+				[
+					groupedTrail.day ?? 1,
+					groupedTrail.month,
+					groupedTrail.year,
+				].join(' '),
 			).getTime();
 			return { groupedTrail, epoch };
 		})
