@@ -5,10 +5,13 @@ import { palette } from '../palette';
 import { generateSources, getFallbackSource } from './Picture';
 
 const picture = css`
-	border-radius: 100%;
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
+`;
+
+const round = css`
+	border-radius: 100%;
 	background-color: ${palette('--avatar-background')};
 `;
 
@@ -28,12 +31,27 @@ const block = css`
 	display: block;
 `;
 
+/**
+ * Defines the possible shapes for the Avatar component.
+ * - 'cutout': The avatar has a flat bottom and no background fill.
+ * - 'round': The avatar is a round cutout with a filled background.
+ */
+type AvatarShape = 'cutout' | 'round';
+
+/**
+ * Props for the Avatar component.
+ *
+ * @property {string} src - The source URL of the avatar image.
+ * @property {string} alt - The alternative text for the avatar image.
+ * @property {AvatarShape} [shape='round'] - Determines the avatar design shape.  The default is 'round'.
+ */
 type Props = {
 	src: string;
 	alt: string;
+	shape?: AvatarShape;
 };
 
-export const Avatar = ({ src, alt }: Props) => {
+export const Avatar = ({ src, alt, shape = 'round' }: Props) => {
 	const sources = generateSources(getSourceImageUrl(src), [
 		{ breakpoint: 320, width: 75 },
 		{ breakpoint: 740, width: 140 },
@@ -52,7 +70,7 @@ export const Avatar = ({ src, alt }: Props) => {
 	return (
 		<picture
 			// data-size={imageSize}
-			css={[block, picture]}
+			css={[block, picture, shape === 'round' && round]}
 		>
 			{sources.map((source) => {
 				return (
