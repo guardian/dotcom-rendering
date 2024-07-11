@@ -31,9 +31,9 @@ export interface FETagPageType {
  * Represents a set of trails grouped by their year, month & optionally day of publication.
  */
 export interface GroupedTrailsBase {
-	year: number;
-	month: number;
-	day: number | undefined;
+	year: string;
+	month: string;
+	day: string | undefined;
 }
 
 export interface GroupedTrails extends GroupedTrailsBase {
