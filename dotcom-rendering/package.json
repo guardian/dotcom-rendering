@@ -143,7 +143,7 @@
 		"eslint-stats": "1.0.1",
 		"execa": "5.1.1",
 		"express": "4.19.2",
-		"fetch-mock": "9.11.0",
+		"fetch-mock": "10.0.7",
 		"find": "0.3.0",
 		"he": "1.2.0",
 		"html-minifier-terser": "7.2.0",

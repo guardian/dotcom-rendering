@@ -197,8 +197,8 @@ importers:
         specifier: 4.19.2
         version: 4.19.2
       fetch-mock:
-        specifier: 9.11.0
-        version: 9.11.0
+        specifier: 10.0.7
+        version: 10.0.7
       html-webpack-plugin:
         specifier: 5.6.0
         version: 5.6.0(webpack@5.91.0)
@@ -647,8 +647,8 @@ importers:
         specifier: 4.19.2
         version: 4.19.2
       fetch-mock:
-        specifier: 9.11.0
-        version: 9.11.0
+        specifier: 10.0.7
+        version: 10.0.7
       find:
         specifier: 0.3.0
         version: 0.3.0
@@ -12252,8 +12252,8 @@ packages:
     resolution: {integrity: sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==}
     dev: false
 
-  /fetch-mock@9.11.0:
-    resolution: {integrity: sha512-PG1XUv+x7iag5p/iNHD4/jdpxL9FtVSqRMUQhPab4hVDt80T1MH5ehzVrL2IdXO9Q2iBggArFvPqjUbHFuI58Q==}
+  /fetch-mock@10.0.7:
+    resolution: {integrity: sha512-TFG42kMRJ6dZpUDeVTdXNjh5O4TchHU/UNk41a050TwKzRr5RJQbtckXDjXiQFHPKgXGUG5l2TY3ZZ2gokiXaQ==}
     engines: {node: '>=4.0.0'}
     peerDependencies:
       node-fetch: '*'
@@ -12261,16 +12261,12 @@ packages:
       node-fetch:
         optional: true
     dependencies:
-      '@babel/core': 7.24.7
-      '@babel/runtime': 7.24.5
-      core-js: 3.33.3
       debug: 4.3.5(supports-color@8.1.1)
       glob-to-regexp: 0.4.1
       is-subset: 0.1.1
       lodash.isequal: 4.5.0
       path-to-regexp: 2.4.0
       querystring: 0.2.1
-      whatwg-url: 6.5.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -15012,10 +15008,6 @@ packages:
 
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
-    dev: false
-
-  /lodash.sortby@4.7.0:
-    resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
     dev: false
 
   /lodash.startcase@4.4.0:
@@ -18550,12 +18542,6 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
     dev: false
 
-  /tr46@1.0.1:
-    resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
-    dependencies:
-      punycode: 2.3.1
-    dev: false
-
   /tr46@2.1.0:
     resolution: {integrity: sha512-15Ih7phfcdP5YxqiB+iDtLoaTz4Nd35+IiAv0kQ5FNKHzXgdWqPoTIqEDDJmXceQt4JZk6lVPT8lnDlPpGDppw==}
     engines: {node: '>=8'}
@@ -19352,10 +19338,6 @@ packages:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
     dev: false
 
-  /webidl-conversions@4.0.2:
-    resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
-    dev: false
-
   /webidl-conversions@5.0.0:
     resolution: {integrity: sha512-VlZwKPCkYKxQgeSbH5EyngOmRp7Ww7I9rQLERETtf5ofd9pGeswWiOtogpEO850jziPRarreGxn5QIiTqpb2wA==}
     engines: {node: '>=8'}
@@ -19792,14 +19774,6 @@ packages:
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
-    dev: false
-
-  /whatwg-url@6.5.0:
-    resolution: {integrity: sha512-rhRZRqx/TLJQWUpQ6bmrt2UV4f0HCQ463yQuONJqC6fO2VoEb1pTYddbe59SkYq87aoM5A3bdhMZiUiVws+fzQ==}
-    dependencies:
-      lodash.sortby: 4.7.0
-      tr46: 1.0.1
-      webidl-conversions: 4.0.2
     dev: false
 
   /whatwg-url@8.7.0:
