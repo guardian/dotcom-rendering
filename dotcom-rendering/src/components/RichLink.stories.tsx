@@ -530,10 +530,52 @@ export const StarRating = {
 	},
 } satisfies Story;
 
+export const SoleContributor = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'comment',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'index',
+		url: '',
+		linkFormat: mockFormatOpinion,
+		format: mockFormatOpinion,
+		sponsorName: '',
+		contributorImage: someContributor,
+		tags: [
+			{
+				id: '',
+				type: 'Contributor',
+				title: 'Sole Contributor',
+			},
+		],
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: allModes.splitHorizontal },
+	},
+} satisfies Story;
+
 export const DoubleTrouble = {
 	args: {
 		richLinkIndex: 1,
-		cardStyle: 'review',
+		cardStyle: 'comment',
 		imageData: someImageData,
 		headlineText: 'Rich link headline',
 		contentType: 'index',
