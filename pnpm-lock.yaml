@@ -779,8 +779,8 @@ importers:
         specifier: 0.58.1
         version: 0.58.1(@swc/core@1.5.3)
       unified:
-        specifier: 11.0.4
-        version: 11.0.4
+        specifier: 11.0.5
+        version: 11.0.5
       valibot:
         specifier: 0.28.1
         version: 0.28.1
@@ -17141,7 +17141,7 @@ packages:
       '@ungap/structured-clone': 1.2.0
       hast-util-heading-rank: 3.0.0
       hast-util-is-element: 3.0.0
-      unified: 11.0.4
+      unified: 11.0.5
       unist-util-visit: 5.0.0
     dev: false
 
@@ -17171,7 +17171,7 @@ packages:
     dependencies:
       '@types/hast': 3.0.4
       hast-util-to-html: 9.0.0
-      unified: 11.0.4
+      unified: 11.0.5
     dev: false
 
   /relateurl@0.2.7:
@@ -17185,7 +17185,7 @@ packages:
       '@types/mdast': 4.0.3
       mdast-util-from-markdown: 2.0.0
       micromark-util-types: 2.0.0
-      unified: 11.0.4
+      unified: 11.0.5
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -17196,7 +17196,7 @@ packages:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.3
       mdast-util-to-hast: 13.1.0
-      unified: 11.0.4
+      unified: 11.0.5
       vfile: 6.0.1
     dev: false
 
@@ -19045,8 +19045,8 @@ packages:
     engines: {node: '>=18'}
     dev: false
 
-  /unified@11.0.4:
-    resolution: {integrity: sha512-apMPnyLjAX+ty4OrNap7yumyVAMlKx5IWU2wlzzUdYJO9A8f1p9m/gywF/GM2ZDFcjQPrx59Mc90KwmxsoklxQ==}
+  /unified@11.0.5:
+    resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
     dependencies:
       '@types/unist': 3.0.2
       bail: 2.0.2
