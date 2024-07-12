@@ -362,8 +362,8 @@ importers:
         specifier: 17.0.1
         version: 17.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js':
-        specifier: 2.1.1
-        version: 2.1.1
+        specifier: 2.2.1
+        version: 2.2.1
       '@guardian/shimport':
         specifier: 1.0.2
         version: 1.0.2
@@ -4419,6 +4419,13 @@ packages:
     engines: {node: '>=16'}
     dev: false
 
+  /@guardian/ophan-tracker-js@2.2.1:
+    resolution: {integrity: sha512-aQnmZQyfzeoImZ+wnf3QCKbMh2pMmUa2KAl2n0sEUGcV5ejsHgxP8KHyEDNxPzF8QhI7S1t9OaQlzlEA+Xs5Tw==}
+    engines: {node: '>=16'}
+    dependencies:
+      '@guardian/tsconfig': 1.0.0
+    dev: false
+
   /@guardian/prebid.js@8.34.0(tslib@2.6.2)(typescript@5.3.3):
     resolution: {integrity: sha512-DLH/EuWGsM6oZcMVm+qsuWhYPl+TE4nqkDzAVJRjOkiP3AHHOZ7AnQaGzF9Y9tG3EeFU/iJwqJ43JlIjDBOt1A==}
     engines: {node: '>=12.0.0'}
@@ -4562,6 +4569,10 @@ packages:
 
   /@guardian/tsconfig@0.2.0:
     resolution: {integrity: sha512-RauppalK+cQZDRK6IssVmDSnU/VyqMNuVOxPxhmI03kVRxEdwcmBuRqexHwDbnClVUxW/N9hYLbFNuAb9V/p+A==}
+    dev: false
+
+  /@guardian/tsconfig@1.0.0:
+    resolution: {integrity: sha512-xgajw/jq4lEtQoN72vnmiXeRnejUcd3DgNFmH6TfAbWV6NRK4KC4hAjzKf0H69zBSJMxEfFVfGKP9wBzGII7qg==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.13:
