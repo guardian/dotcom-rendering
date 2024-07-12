@@ -164,19 +164,19 @@ const dividerWidthWithSubNav = css`
 	}
 `;
 
-const subnavStyles = css`
+const subNavStyles = css`
 	grid-column: content-start / content-end;
 	grid-row: 3;
-	overflow-x: scroll;
+	${textSans14}
+	color: inherit;
+	min-height: 28px;
+	margin-top: ${space[2]}px;
+
 	width: calc(100% + 10px);
 	${from.mobileLandscape} {
 		width: calc(100% + ${space[5]}px);
 	}
 
-	${textSans14}
-	color: inherit;
-	min-height: 28px;
-	margin-top: ${space[2]}px;
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
@@ -185,6 +185,40 @@ const subnavStyles = css`
 	}
 	${from.leftCol} {
 		margin-top: 14px;
+	}
+`;
+
+/** Styles the scrollbar of the subnav, providing sensible defaults
+ * for browsers that don't support scrollbar-color styling
+ * @see https://developer.chrome.com/docs/css-ui/scrollbar-styling
+ */
+const scrollableSubNavStyles = css`
+	--scrollbar-color-thumb: ${themePalette('--masthead-nav-lines')};
+	--scrollbar-color-track: ${themePalette('--masthead-nav-background')};
+	--scrollbar-width: thin;
+	--scrollbar-width-legacy: ${space[2]}px;
+
+	overflow-x: scroll;
+
+	/* For browsers that support scrollbar-* properties */
+	@supports (scrollbar-color: auto) {
+		scrollbar-color: var(--scrollbar-color-thumb)
+			var(--scrollbar-color-track);
+		scrollbar-width: var(--scrollbar-width);
+	}
+
+	/* Otherwise, use ::-webkit-scrollbar-* pseudo-elements */
+	@supports selector(::-webkit-scrollbar) {
+		&::-webkit-scrollbar {
+			max-height: var(--scrollbar-width-legacy);
+			max-width: var(--scrollbar-width-legacy);
+		}
+		&::-webkit-scrollbar-thumb {
+			background: var(--scrollbar-color-thumb);
+		}
+		&::-webkit-scrollbar-track {
+			background: var(--scrollbar-color-track);
+		}
 	}
 `;
 
@@ -283,9 +317,10 @@ export const Titlepiece = ({
 			{showSubNav && nav.subNavSections && (
 				<nav
 					data-print-layout="hide"
-					css={subnavStyles}
+					css={[subNavStyles, scrollableSubNavStyles]}
 					data-testid="sub-nav"
 					data-component="sub-nav"
+					className="scrollable"
 				>
 					<SubNav
 						subNavSections={nav.subNavSections}
