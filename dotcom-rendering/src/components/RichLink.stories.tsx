@@ -488,7 +488,7 @@ export const Tag = {
 	},
 } satisfies Story;
 
-export const Index = {
+export const StarRating = {
 	args: {
 		richLinkIndex: 1,
 		cardStyle: 'review',
@@ -505,6 +505,52 @@ export const Index = {
 				id: '',
 				type: 'Contributor',
 				title: 'Contributor Name',
+			},
+		],
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: allModes.splitHorizontal },
+	},
+} satisfies Story;
+
+export const DoubleTrouble = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'review',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'index',
+		url: '',
+		linkFormat: mockFormatOpinion,
+		format: mockFormatOpinion,
+		sponsorName: '',
+		tags: [
+			{
+				id: '',
+				type: 'Contributor',
+				title: 'Jane First',
+			},
+			{
+				id: '',
+				type: 'Contributor',
+				title: 'Joe Second',
 			},
 		],
 	},

@@ -13,6 +13,7 @@ import {
 	textSansBold15,
 	textSansBold17,
 } from '@guardian/source/foundations';
+import { getSoleContributor, isContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
 import type { StarRating as Rating } from '../types/content';
@@ -179,10 +180,11 @@ const readMoreText: (contentType: string) => string = (contentType) => {
 	}
 };
 
-const getMainContributor: (tags: TagType[]) => string = (tags) => {
-	const [firstContributorTag] = tags.filter((t) => t.type === 'Contributor');
-	return firstContributorTag ? firstContributorTag.title : '';
-};
+const getContributors = (tags: TagType[]): string =>
+	tags
+		.filter(isContributor)
+		.map(({ title }) => title)
+		.join(' and ');
 
 const imageStyles = css`
 	width: 100%;
@@ -217,11 +219,13 @@ export const RichLink = ({
 		imageCardStyles.includes(cardStyle) &&
 		!parentIsBlog;
 
-	const isPaidContent = !!tags.find(
+	const isPaidContent = tags.some(
 		({ id }) => id === 'tone/advertisement-features',
 	);
 	const isOpinion = cardStyle === 'comment';
-	const mainContributor = getMainContributor(tags);
+	const byline = getContributors(tags);
+	const soleContributor = getSoleContributor(tags, byline);
+
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
 
 	return (
@@ -230,7 +234,7 @@ export const RichLink = ({
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
 			css={backgroundStyles}
-			data-name={isPlaceholder ? 'placeholder' : ''}
+			data-name={isPlaceholder ? 'placeholder' : undefined}
 		>
 			<FormatBoundary format={linkFormat}>
 				<a css={linkStyles} href={url}>
@@ -267,8 +271,8 @@ export const RichLink = ({
 								{linkText}
 							</div>
 
-							{isOpinion && (
-								<div css={bylineStyles}>{mainContributor}</div>
+							{isOpinion && byline !== '' && (
+								<div css={bylineStyles}>{byline}</div>
 							)}
 
 							{!isUndefined(starRating) ? (
@@ -287,14 +291,18 @@ export const RichLink = ({
 							)}
 						</div>
 
-						{!!(isOpinion && contributorImage) && (
+						{!!(
+							isOpinion &&
+							contributorImage &&
+							soleContributor
+						) && (
 							<div
 								className="avatar"
 								css={contributorWrapperStyles}
 							>
 								<Avatar
 									src={contributorImage}
-									alt={mainContributor}
+									alt={soleContributor.title}
 								/>
 							</div>
 						)}
