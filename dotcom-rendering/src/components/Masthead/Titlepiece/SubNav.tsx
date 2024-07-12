@@ -1,3 +1,7 @@
+/**
+ * @file
+ * This file was largely copied from https://github.com/guardian/dotcom-rendering/blob/016de51dc294d3a2895b52091258de0adbadcef5/dotcom-rendering/src/components/SubNav.importable.tsx
+ */
 import { css } from '@emotion/react';
 import { space, textSansBold14 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
