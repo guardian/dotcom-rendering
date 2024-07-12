@@ -1,16 +1,23 @@
-import { TitlepieceEditionDropdown } from './EditionDropdown';
+import type { Meta } from '@storybook/react/*';
+import { EditionDropdown } from './EditionDropdown';
 
-export default {
-	component: TitlepieceEditionDropdown,
-	title: 'Components/Masthead/EditionDropdown',
+const meta = {
+	component: EditionDropdown,
+	title: 'Components/Masthead/Titlepiece/EditionDropdown',
 	parameters: {
 		backgrounds: { default: 'dark' },
 		layout: 'centered',
+		chromatic: {
+			disable: true,
+		},
 	},
-};
+	render: (args) => <EditionDropdown {...args} />,
+	args: {
+		editionId: 'UK',
+		dataLinkName: 'test',
+	},
+} satisfies Meta<typeof EditionDropdown>;
 
-export const defaultStory = () => {
-	return <TitlepieceEditionDropdown editionId={'UK'} dataLinkName="test" />;
-};
+export default meta;
 
-defaultStory.storyName = 'default';
+export const Default = {};

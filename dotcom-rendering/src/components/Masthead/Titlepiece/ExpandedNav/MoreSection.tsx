@@ -1,8 +1,13 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/MoreColumn.tsx
+ */
 import { css } from '@emotion/react';
-import { from, textSans17 } from '@guardian/source/foundations';
+import { from, space, textSans17 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
+import { expandedNavLinkStyles, listAccessibility } from '../commonStyles';
 import { pillarWidthsPx } from '../constants';
 
 const pillarHeight = 42;
@@ -15,15 +20,7 @@ const hideDesktop = css`
 
 const columnStyle = css`
 	${textSans17};
-	list-style: none;
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
-	&::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
+	${listAccessibility};
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
@@ -97,17 +94,9 @@ const columnLinks = css`
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	list-style: none;
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
-	li::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
+	${listAccessibility};
 	margin: 0;
-	padding: 0 0 12px;
+	padding: 0 0 ${space[3]}px;
 	position: relative;
 	${from.desktop} {
 		display: flex;
@@ -116,48 +105,17 @@ const columnLinks = css`
 		order: 1;
 		height: 100%;
 		width: 100%;
-		padding: 0 9px;
+		padding: 0 ${space[2]}px;
 	}
 `;
 
 const columnLinkTitle = css`
 	${textSans17};
-	/**
-	 * Typography preset styles should not be overridden.
-	 * This has been done because the styles do not directly map to the new presets.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
-	background-color: transparent;
-	text-decoration: none;
-	border: 0;
-	box-sizing: border-box;
-	color: ${themePalette('--masthead-nav-link-text')};
-	cursor: pointer;
-	display: inline-block;
-	font-weight: 500;
-	outline: none;
-	padding: 8px 34px 8px 50px;
-	position: relative;
-	text-align: left;
-	width: 100%;
+	${expandedNavLinkStyles};
 
-	${from.tablet} {
-		padding-left: 60px;
-	}
-
-	${from.desktop} {
-		font-size: 16px;
-		padding: 6px 0;
-	}
 	:hover,
 	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
 		text-decoration: underline;
-	}
-
-	> * {
-		pointer-events: none;
 	}
 `;
 
@@ -177,6 +135,11 @@ type Props = {
 	hasPageSkin?: boolean;
 };
 
+/**
+ * This is a list of links related to Guardian journalism and products.
+ * This can include things like "The Guardian app, Video, Podcasts etc"
+ * Does not contain any reader revenue type links.
+ */
 export const MoreSection = ({
 	otherLinks,
 	brandExtensions,
@@ -193,45 +156,43 @@ export const MoreSection = ({
 	];
 
 	return (
-		<>
-			<li
-				css={[
-					columnStyle,
-					!hasPageSkin && columnStyleFromLeftCol,
-					pillarDivider,
-					pillarDividerExtended,
-				]}
-				role="none"
-			>
-				<ul css={[columnLinks]} role="menu" id={subNavId}>
-					{links.map((link) => (
-						<li
-							key={link.title.toLowerCase()}
-							css={[
-								mainMenuLinkStyle,
-								!!link.mobileOnly && hideDesktop,
-							]}
-							role="none"
+		<li
+			css={[
+				columnStyle,
+				!hasPageSkin && columnStyleFromLeftCol,
+				pillarDivider,
+				pillarDividerExtended,
+			]}
+			role="none"
+		>
+			<ul css={[columnLinks]} role="menu" id={subNavId}>
+				{links.map((link) => (
+					<li
+						key={link.title.toLowerCase()}
+						css={[
+							mainMenuLinkStyle,
+							!!link.mobileOnly && hideDesktop,
+						]}
+						role="none"
+					>
+						<a
+							className="selectableMenuItem"
+							css={columnLinkTitle}
+							href={link.url}
+							role="menuitem"
+							data-link-name={nestedOphanComponents(
+								'header',
+								'secondary',
+								link.longTitle,
+							)}
+							data-testid={`column-collapse-sublink-${link.title}`}
+							tabIndex={-1}
 						>
-							<a
-								className="selectableMenuItem"
-								css={columnLinkTitle}
-								href={link.url}
-								role="menuitem"
-								data-link-name={nestedOphanComponents(
-									'header',
-									'secondary',
-									link.longTitle,
-								)}
-								data-testid={`column-collapse-sublink-${link.title}`}
-								tabIndex={-1}
-							>
-								{link.longTitle}
-							</a>
-						</li>
-					))}
-				</ul>
-			</li>
-		</>
+							{link.longTitle}
+						</a>
+					</li>
+				))}
+			</ul>
+		</li>
 	);
 };

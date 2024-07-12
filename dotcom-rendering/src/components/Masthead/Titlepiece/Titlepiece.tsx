@@ -1,23 +1,20 @@
 import { css } from '@emotion/react';
 import {
-	between,
 	from,
 	headlineBold14,
 	space,
 	textSans14,
 } from '@guardian/source/foundations';
-import {
-	Hide,
-	SvgGuardianLogo,
-	SvgMenu,
-} from '@guardian/source/react-components';
+import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
+import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import { TitlepieceEditionDropdown } from './EditionDropdown';
-// import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
+import { EditionDropdown } from './EditionDropdown';
+// import { ExpandedNav } from './ExpandedNav/ExpandedNav';
 import { Grid } from './Grid';
+import { Logo } from './Logo';
 import { Pillars } from './Pillars';
 
 interface Props {
@@ -38,8 +35,12 @@ export const pillarWidthsPx = {
 
 const veggieBurgerDiameter = 40;
 
-const editionSwitcherMenuStyles = css`
+const gridFullWidth = css`
 	grid-column: content-start / content-end;
+`;
+
+const editionSwitcherMenuStyles = css`
+	${gridFullWidth}
 	grid-row: 1;
 	${from.mobileMedium} {
 		justify-self: end;
@@ -47,8 +48,8 @@ const editionSwitcherMenuStyles = css`
 `;
 
 const guardianLogoStyles = css`
-	z-index: 2;
-	grid-column: content-start / content-end;
+	${getZIndex('TheGuardian')}
+	${gridFullWidth}
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
@@ -58,22 +59,23 @@ const guardianLogoStyles = css`
 	${from.mobileMedium} {
 		margin-right: 0;
 	}
+
 	svg {
-		height: 49px;
-		${between.mobileMedium.and.tablet} {
-			height: 67px;
+		width: 144px;
+		${from.mobileMedium} {
+			width: 198px;
 		}
-		${between.tablet.and.desktop} {
-			height: 96px;
+		${from.tablet} {
+			width: 280px;
 		}
-		${between.desktop.and.leftCol} {
-			height: 94px;
+		${from.desktop} {
+			width: 276px;
 		}
 		${from.leftCol} {
-			height: 135px;
+			width: 398px;
 		}
 	}
-	${between.mobileLandscape.and.desktop} {
+	${from.mobileLandscape} {
 		margin-bottom: 8px;
 	}
 	${from.desktop} {
@@ -83,17 +85,18 @@ const guardianLogoStyles = css`
 
 const burgerStyles = css`
 	z-index: 2;
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 1;
+	justify-content: center;
+	display: flex;
 	justify-self: end;
 	align-self: end;
 	height: ${veggieBurgerDiameter}px;
 	width: ${veggieBurgerDiameter}px;
-	margin-bottom: 6px;
 	border-radius: 50%;
 	background-color: ${themePalette('--masthead-veggie-burger-background')};
-	justify-content: center;
-	display: flex;
+	margin-bottom: 6px;
+
 	:hover {
 		background-color: ${themePalette(
 			'--masthead-veggie-burger-background-hover',
@@ -110,7 +113,7 @@ const burgerStyles = css`
 `;
 
 const pillarsNavStyles = css`
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 2;
 	align-self: end;
 
@@ -124,7 +127,7 @@ const pillarsNavStyles = css`
 `;
 
 const subnavStyles = css`
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 3;
 	${textSans14}
 	color: inherit;
@@ -175,19 +178,19 @@ export const Titlepiece = ({
 		>
 			{/* Edition menu */}
 			<div css={editionSwitcherMenuStyles}>
-				<TitlepieceEditionDropdown
+				<EditionDropdown
 					editionId={editionId}
-					dataLinkName={''}
+					dataLinkName={nestedOphanComponents(
+						'header',
+						'titlepiece',
+						'edition-picker: toggle',
+					)}
 				/>
 			</div>
 
 			{/* Guardian logo */}
 			<div css={guardianLogoStyles}>
-				<a href="https://theguardian.com">
-					<SvgGuardianLogo
-						textColor={themePalette('--masthead-nav-link-text')}
-					/>
-				</a>
+				<Logo editionId={editionId} />
 			</div>
 
 			{/* Pillars nav */}
@@ -224,7 +227,7 @@ export const Titlepiece = ({
 					/>
 				</Hide>
 
-				{/* <TitlepieceExpandedNav
+				{/* <ExpandedNav
 					nav={nav}
 					editionId={editionId}
 					isImmersive={isImmersive}

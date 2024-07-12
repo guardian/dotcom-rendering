@@ -1,3 +1,7 @@
+/**
+ * @file
+ * This file was largely inspired by src/components/Pillars.tsx
+ */
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
 import {
@@ -11,6 +15,8 @@ import {
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
+import { palette as themePalette } from '../../../palette';
+import { listAccessibility } from './commonStyles';
 import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
 
 type Props = {
@@ -32,9 +38,8 @@ const pillarLink = css`
 	${headlineBold14}
 	text-decoration: none;
 
-	/* TODO - set this in palette and retrieve as CSS var */
-	background-color: ${sourcePalette.brand[400]};
-	color: ${sourcePalette.neutral[100]};
+	background-color: ${themePalette('--masthead-nav-background')};
+	color: ${themePalette('--masthead-nav-link-text')};
 
 	margin-left: ${pillarLeftMarginPx}px;
 	padding-right: ${space[1]}px;
@@ -64,7 +69,6 @@ const pillarLink = css`
 `;
 
 const firstPillarLinkOverrides = css`
-	/* width: calc(100% - ${pillarLeftMarginPx}px); */
 	a {
 		margin-left: 0;
 
@@ -93,8 +97,7 @@ const forceUnderline = css`
 const verticalDividerStyles = css`
 	:after {
 		content: '';
-		/* TODO - set this in palette and retrieve as CSS var */
-		border-left: 1px solid ${sourcePalette.neutral[86]};
+		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
 		display: flex;
 		position: absolute;
 		right: 0;
@@ -225,6 +228,7 @@ export const Pillars = ({
 							key={p.title}
 							css={[
 								pillarBlock,
+								listAccessibility,
 								showDivider && verticalDividerStyles,
 								i === 0 && firstPillarLinkOverrides,
 							]}

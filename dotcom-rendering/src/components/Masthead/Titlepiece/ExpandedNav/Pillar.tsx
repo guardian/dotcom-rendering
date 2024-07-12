@@ -1,8 +1,13 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/Column.tsx
+ */
 import { css } from '@emotion/react';
 import {
 	from,
 	space,
 	textSans15,
+	textSans17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -12,14 +17,13 @@ import type {
 	PillarLinkType,
 } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
+import {
+	expandedNavLinkStyles,
+	hideFromDesktop,
+	listAccessibility,
+} from '../commonStyles';
 import { pillarWidthsPx } from '../constants';
 import { CollapseSectionButton } from './CollapseSectionButton';
-
-const hideDesktop = css`
-	${from.desktop} {
-		display: none;
-	}
-`;
 
 const pillarDivider = css`
 	${from.desktop} {
@@ -38,44 +42,13 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans15};
-	/**
-	 * Typography preset styles should not be overridden.
-	 * This has been done because the styles do not directly map to the new presets.
-	 * Please speak to your team's designer and update this to use a more appropriate preset.
-	 */
-	line-height: 1.15;
-	background-color: transparent;
-	text-decoration: none;
-	border: 0;
-	box-sizing: border-box;
-	color: ${themePalette('--masthead-nav-link-text')};
-	cursor: pointer;
-	display: inline-block;
-	font-weight: 500;
-	outline: none;
-	padding: 8px 34px 8px 50px;
-	position: relative;
-	text-align: left;
-	width: 100%;
+	${textSans17};
 
-	${from.tablet} {
-		padding-left: 60px;
-	}
-
-	${from.desktop} {
-		font-size: 16px;
-		padding: 6px 0;
-	}
+	${expandedNavLinkStyles};
 
 	:hover,
 	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
 		text-decoration: underline;
-	}
-
-	> * {
-		pointer-events: none;
 	}
 `;
 
@@ -94,17 +67,10 @@ export const columnLinks = css`
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	list-style: none;
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
-	li::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
+	${listAccessibility};
+
 	margin: 0;
-	padding: 0 0 12px;
+	padding: 0 0 ${space[3]}px;
 	position: relative;
 	${from.desktop} {
 		display: flex;
@@ -164,16 +130,8 @@ export const lineStyle = css`
 
 const columnStyle = css`
 	${textSans15};
-	list-style: none;
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
 
-	&::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
+	${listAccessibility};
 
 	margin: 0;
 	padding-bottom: 10px;
@@ -184,7 +142,6 @@ const columnStyle = css`
 		float: left;
 		position: relative;
 		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
-
 		:after {
 			height: 100%;
 			left: 0;
@@ -206,6 +163,10 @@ const columnStyleFromLeftCol = css`
 	}
 `;
 
+/**
+ * Contains secondary navigation links relating to pillars
+ * E.g. "Business" under the News pillar, "Food" under the Lifestyle pillar
+ */
 export const Pillar = ({
 	column,
 	index,
@@ -299,7 +260,7 @@ export const Pillar = ({
 						key={link.title.toLowerCase()}
 						css={[
 							mainMenuLinkStyle,
-							!!link.mobileOnly && hideDesktop,
+							!!link.mobileOnly && hideFromDesktop,
 						]}
 						role="none"
 					>
