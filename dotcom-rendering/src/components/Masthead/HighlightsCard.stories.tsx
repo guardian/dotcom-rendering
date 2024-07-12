@@ -15,6 +15,9 @@ const meta = {
 		},
 		showPulsingDot: true,
 		kickerText: 'This is the kicker',
+		avatarUrl:
+			'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
+		byline: 'Georges Monbiot',
 	},
 } satisfies Meta<typeof HighlightsCard>;
 export default meta;
