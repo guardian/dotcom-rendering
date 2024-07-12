@@ -4,7 +4,6 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { Avatar } from './Avatar';
@@ -12,116 +11,134 @@ import { Avatar } from './Avatar';
 const meta: Meta<typeof Avatar> = {
 	component: Avatar,
 	title: 'Components/Avatar',
+	decorators: [
+		(storyFn, context) => {
+			const format = {
+				theme: context.parameters.theme || Pillar.News,
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
+			};
+			return splitTheme([format], { orientation: 'vertical' })(
+				storyFn,
+				context,
+			);
+		},
+		(storyFn, context) => (
+			<div
+				style={{
+					height: context.parameters.size,
+					width: context.parameters.size,
+				}}
+			>
+				{storyFn()}
+			</div>
+		),
+	],
 };
 
 export default meta;
-type Story = StoryObj<typeof Avatar>;
 
 const georgesMonbiot =
 	'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png';
 const leahHarper = 'https://uploads.guim.co.uk/2017/10/06/Leah-Harper,-L.png';
 const sideLowe = 'https://uploads.guim.co.uk/2018/05/25/Sid_Lowe,_L.png';
 
-const format: ArticleFormat = {
-	theme: Pillar.News,
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
+type Story = StoryObj<typeof Avatar>;
+
+export const Default: Story = {
+	args: {
+		src: georgesMonbiot,
+		alt: 'The alt of the image',
+		shape: 'round',
+	},
+	parameters: {
+		theme: Pillar.Opinion,
+		size: '136px',
+	},
+	name: 'Round Medium, Opinion (Rich Links)',
 };
 
-export const defaultStory: Story = () => (
-	<div style={{ width: '136px', height: '136px' }}>
-		<Avatar src={georgesMonbiot} alt="The alt of the image" />
-	</div>
-);
-defaultStory.storyName = 'Medium, Opinion (Rich Links)';
-defaultStory.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Opinion,
-		},
-	]),
-];
+export const CutOutShape: Story = {
+	args: {
+		src: georgesMonbiot,
+		alt: 'The alt of the image',
+		shape: 'cutout',
+	},
+	parameters: {
+		theme: Pillar.Opinion,
+		size: '136px',
+	},
+	name: 'Cutout Medium, Opinion (Rich Links)',
+};
 
-export const largeStory: Story = () => (
-	<div style={{ width: '140px', height: '140px' }}>
-		<Avatar src={leahHarper} alt="The alt of the image" />
-	</div>
-);
-largeStory.storyName = 'Large, Lifestyle (Byline image - Desktop)';
-largeStory.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Lifestyle,
-		},
-	]),
-];
+export const Large: Story = {
+	args: {
+		src: leahHarper,
+		alt: 'The alt of the image',
+	},
+	parameters: {
+		theme: Pillar.Lifestyle,
+		size: '140px',
+	},
+	name: 'Large, Lifestyle (Byline image - Desktop)',
+};
 
-export const largeStoryNews: Story = () => (
-	<div style={{ width: '140px', height: '140px' }}>
-		<Avatar src={leahHarper} alt="The alt of the image" />
-	</div>
-);
-largeStoryNews.storyName = 'Large, News (Byline image - Desktop)';
-largeStoryNews.decorators = [splitTheme([format])];
+export const LargeNews: Story = {
+	args: {
+		src: leahHarper,
+		alt: 'The alt of the image',
+	},
+	parameters: {
+		theme: Pillar.News,
+		size: '140px',
+	},
+	name: 'Large, News (Byline image - Desktop)',
+};
 
-export const largeStoryCulture: Story = () => (
-	<div style={{ width: '140px', height: '140px' }}>
-		<Avatar src={leahHarper} alt="The alt of the image" />
-	</div>
-);
-largeStoryCulture.storyName = 'Large, Culture (Byline image - Desktop)';
-largeStoryCulture.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Culture,
-		},
-	]),
-];
+export const LargeCulture: Story = {
+	args: {
+		src: leahHarper,
+		alt: 'The alt of the image',
+	},
+	parameters: {
+		theme: Pillar.Culture,
+		size: '140px',
+	},
+	name: 'Large, Culture (Byline image - Desktop)',
+};
 
-export const SpecialReport: Story = () => (
-	<div style={{ width: '140px', height: '140px' }}>
-		<Avatar src={leahHarper} alt="The alt of the image" />
-	</div>
-);
-SpecialReport.storyName = 'Large SpecialReport';
-SpecialReport.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: ArticleSpecial.SpecialReport,
-		},
-	]),
-];
+export const SpecialReport: Story = {
+	args: {
+		src: leahHarper,
+		alt: 'The alt of the image',
+	},
+	parameters: {
+		theme: ArticleSpecial.SpecialReport,
+		size: '140px',
+	},
+	name: 'Large SpecialReport',
+};
 
-export const SpecialReportAlt: Story = () => (
-	<div style={{ width: '140px', height: '140px' }}>
-		<Avatar src={leahHarper} alt="The alt of the image" />
-	</div>
-);
-SpecialReportAlt.storyName = 'Large SpecialReportAlt';
-SpecialReportAlt.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: ArticleSpecial.SpecialReportAlt,
-		},
-	]),
-];
+export const SpecialReportAlt: Story = {
+	args: {
+		src: leahHarper,
+		alt: 'The alt of the image',
+	},
+	parameters: {
+		theme: ArticleSpecial.SpecialReportAlt,
+		size: '140px',
+	},
+	name: 'Large SpecialReportAlt',
+};
 
-export const smallStory: Story = () => (
-	<div style={{ width: '60px', height: '60px' }}>
-		<Avatar src={sideLowe} alt="The alt of the image" />
-	</div>
-);
-smallStory.storyName = 'Small, Sport (Byline image - Mobile)';
-smallStory.decorators = [
-	splitTheme([
-		{
-			...format,
-			theme: Pillar.Sport,
-		},
-	]),
-];
+export const Small: Story = {
+	args: {
+		src: sideLowe,
+		alt: 'The alt of the image',
+	},
+	parameters: {
+		theme: Pillar.Sport,
+		size: '60px',
+	},
+	name: 'Small, Sport (Byline image - Mobile)',
+};
