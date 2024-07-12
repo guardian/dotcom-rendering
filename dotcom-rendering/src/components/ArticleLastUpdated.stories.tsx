@@ -1,55 +1,52 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { palette as themePalette } from '../palette';
+import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
+import { palette } from '../palette';
 import { ArticleLastUpdated } from './ArticleLastUpdated';
 
-export default {
+const meta = {
 	component: ArticleLastUpdated,
-	title: 'Components/ArticleLastUpdated',
-};
+	title: 'Components/Article Last Updated',
+	decorators: (Story) => (
+		<div
+			css={css`
+				background: ${palette('--standfirst-background')};
+			`}
+		>
+			<Story />
+		</div>
+	),
+	parameters: {
+		chromatic: {
+			modes: {
+				vertical: allModes.splitVertical,
+			},
+		},
+	},
+} satisfies Meta<typeof ArticleLastUpdated>;
 
-const liveBlogFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.LiveBlog,
-	theme: Pillar.News,
-};
+export default meta;
 
-export const LiveBlog = () => (
-	<div
-		css={css`
-			background: ${themePalette('--standfirst-background')};
-		`}
-	>
-		<ArticleLastUpdated
-			format={liveBlogFormat}
-			lastUpdated={1641038370000}
-		/>
-	</div>
-);
+type Story = StoryObj<typeof meta>;
 
-LiveBlog.decorators = [
-	splitTheme([liveBlogFormat], { orientation: 'vertical' }),
-];
+export const LiveBlog = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.LiveBlog,
+			theme: Pillar.News,
+		},
+		lastUpdated: 1641038370000,
+	},
+} satisfies Story;
 
-const deadBlogFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.DeadBlog,
-	theme: Pillar.News,
-};
-export const DeadBlog = () => (
-	<div
-		css={css`
-			background: ${themePalette('--standfirst-background')};
-		`}
-	>
-		<ArticleLastUpdated
-			format={deadBlogFormat}
-			lastUpdated={1641038370000}
-		/>
-	</div>
-);
-
-DeadBlog.decorators = [
-	splitTheme([deadBlogFormat], { orientation: 'vertical' }),
-];
+export const DeadBlog = {
+	args: {
+		...LiveBlog.args,
+		format: {
+			...LiveBlog.args.format,
+			design: ArticleDesign.DeadBlog,
+		},
+	},
+} satisfies Story;
