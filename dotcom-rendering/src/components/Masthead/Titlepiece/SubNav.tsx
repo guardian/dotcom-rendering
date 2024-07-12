@@ -1,40 +1,17 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	from,
-	space,
-	textSans14,
-	textSansBold14,
-} from '@guardian/source/foundations';
-import { nestedOphanComponents } from '../../lib/ophan-helpers';
-import type { SubNavType } from '../../model/extract-nav';
-import { palette as themePalette } from '../../palette';
+import { space, textSansBold14 } from '@guardian/source/foundations';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import type { SubNavType } from '../../../model/extract-nav';
+import { palette as themePalette } from '../../../palette';
 
 type Props = {
 	subNavSections: SubNavType;
 	currentNavLink: string;
-	css?: SerializedStyles;
 };
-
-const subnavStyles = css`
-	${textSans14}
-	color: inherit;
-	height: 28px;
-	margin-top: ${space[2]}px;
-	${from.mobileMedium} {
-		margin-top: ${space[3]}px;
-	}
-	${from.tablet} {
-		height: 30px;
-	}
-	${from.leftCol} {
-		margin-top: 14px;
-	}
-`;
 
 const subnavListStyles = css`
 	display: flex;
-	column-gap: ${space[3]}px;
+	column-gap: ${space[2]}px;
 `;
 
 const subnavListItemStyles = css`
@@ -44,26 +21,23 @@ const subnavListItemStyles = css`
 const subnavLinkStyles = css`
 	color: ${themePalette('--masthead-nav-link-text')};
 	text-decoration: none;
+	padding-right: ${space[1]}px;
+
+	&:hover {
+		text-decoration: underline;
+		color: ${themePalette('--masthead-nav-link-text-hover')};
+	}
 `;
 
 const selectedLink = css`
 	${textSansBold14}
 `;
 
-export const SubNav = ({
-	subNavSections,
-	currentNavLink,
-	css: cssProp,
-}: Props) => {
+export const SubNav = ({ subNavSections, currentNavLink }: Props) => {
 	return (
-		<nav
-			data-print-layout="hide"
-			css={[subnavStyles, cssProp]}
-			data-testid="sub-nav"
-			data-component="sub-nav"
-		>
+		<>
 			{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari
-			    {@see https://github.com/guardian/dotcom-rendering/pull/5041} */}
+			{@see https://github.com/guardian/dotcom-rendering/pull/5041} */}
 			<ul
 				css={subnavListStyles}
 				role="list"
@@ -107,6 +81,6 @@ export const SubNav = ({
 					</li>
 				))}
 			</ul>
-		</nav>
+		</>
 	);
 };

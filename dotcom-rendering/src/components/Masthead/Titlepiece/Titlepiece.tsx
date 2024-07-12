@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, headlineBold14, space } from '@guardian/source/foundations';
+import {
+	from,
+	headlineBold14,
+	space,
+	textSans14,
+} from '@guardian/source/foundations';
 import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -7,10 +12,10 @@ import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
 import { EditionDropdown } from './EditionDropdown';
-import { SubNav } from '../SubNav';
 import { Grid } from './Grid';
 import { Logo } from './Logo';
 import { Pillars } from './Pillars';
+import { SubNav } from './SubNav';
 
 interface Props {
 	nav: NavType;
@@ -120,28 +125,42 @@ const pillarsNavStyles = css`
 	}
 `;
 
-export const subNavWidth = css`
-	width: calc(100% + 10px);
-	${from.tablet} {
-		width: calc(100% + ${space[5]}px);
-	}
-`;
-
 const horizontalDivider = css`
 	position: relative;
+	z-index: 1;
 	&::after {
 		content: '';
 		position: absolute;
-		bottom: -1px;
-		left: 0;
-		width: 100%;
 		border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
+		bottom: -1px;
+		left: -10px;
+		right: -10px;
+
+		${from.mobileLandscape} {
+			left: -${space[5]}px;
+			right: -${space[5]}px;
+		}
+
+		${from.phablet} {
+			left: 0;
+			right: 0;
+		}
+
+		${from.tablet} {
+			left: -${space[5]}px;
+			right: -${space[5]}px;
+		}
 	}
 `;
 
 const dividerWidthWithSubNav = css`
 	&::after {
-		${subNavWidth};
+		left: 0;
+		right: -10px;
+
+		${from.mobileLandscape} {
+			right: -${space[5]}px;
+		}
 	}
 `;
 
@@ -149,7 +168,24 @@ const subnavStyles = css`
 	grid-column: content-start / content-end;
 	grid-row: 3;
 	overflow-x: scroll;
-	${subNavWidth};
+	width: calc(100% + 10px);
+	${from.mobileLandscape} {
+		width: calc(100% + ${space[5]}px);
+	}
+
+	${textSans14}
+	color: inherit;
+	min-height: 28px;
+	margin-top: ${space[2]}px;
+	${from.mobileMedium} {
+		margin-top: ${space[3]}px;
+	}
+	${from.tablet} {
+		min-height: 30px;
+	}
+	${from.leftCol} {
+		margin-top: 14px;
+	}
 `;
 
 export const Titlepiece = ({
@@ -245,11 +281,17 @@ export const Titlepiece = ({
 			{/* </Hide> */}
 
 			{showSubNav && nav.subNavSections && (
-				<SubNav
-					subNavSections={nav.subNavSections}
-					currentNavLink={nav.currentNavLink}
+				<nav
+					data-print-layout="hide"
 					css={subnavStyles}
-				/>
+					data-testid="sub-nav"
+					data-component="sub-nav"
+				>
+					<SubNav
+						subNavSections={nav.subNavSections}
+						currentNavLink={nav.currentNavLink}
+					/>
+				</nav>
 			)}
 		</Grid>
 	);
