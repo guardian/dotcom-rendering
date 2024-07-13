@@ -53,7 +53,7 @@ export const generateImageURL = ({
 		s: 'none',
 	});
 
-	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
+	return `https://i.guimcode.co.uk/img/${getServiceFromUrl(url)}${
 		url.pathname
 	}?${params.toString()}`;
 };
