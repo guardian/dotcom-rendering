@@ -527,8 +527,8 @@ importers:
         specifier: 2.0.7
         version: 2.0.7
       '@types/twitter-for-web':
-        specifier: 0.0.2
-        version: 0.0.2
+        specifier: 0.0.6
+        version: 0.0.6
       '@types/webpack-bundle-analyzer':
         specifier: 4.7.0
         version: 4.7.0(@swc/core@1.5.3)(esbuild@0.18.20)(webpack-cli@5.1.4)
@@ -7691,8 +7691,8 @@ packages:
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
     dev: false
 
-  /@types/twitter-for-web@0.0.2:
-    resolution: {integrity: sha512-fDg882G9KHOkVxyJFkZ1hIOHxgj1vHLZnMJshF9W+8C2f9lzkIc/DeD1Ed2q1SWaHD/hdooaFIWTDhgL8zzpYg==}
+  /@types/twitter-for-web@0.0.6:
+    resolution: {integrity: sha512-p+gkYmyyEz1c/8uQiqKofJFS6UQI8A4mIztvk44hu8GwrJbjny+a5zxsi4LzfMYwA3+DLccECYIBv/mPoiAZ4Q==}
     dev: false
 
   /@types/uglify-js@3.17.4:
