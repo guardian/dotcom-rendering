@@ -119,7 +119,8 @@ const pillarUnderline = css`
 		left: 0;
 		right: 0;
 
-		height: ${space[1]}px;
+		/** The pillar underline is offset by the height of the horizontal divider (1px) */
+		height: ${space[1] + 1}px;
 		/*
 		This is 100% width of pillar block minus the left margin
 		and 1px border on the right
