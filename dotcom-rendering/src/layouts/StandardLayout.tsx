@@ -449,7 +449,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={!isPaidContent}
+							showSubNav={!isLabs}
 							hasPageSkinContentSelfConstrain={true}
 						/>
 					) : (
