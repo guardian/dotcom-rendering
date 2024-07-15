@@ -443,7 +443,7 @@ export const LiveBlog = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {
-			modes: allModes.splitHorizontal,
+			modes: { horizontal: allModes.splitHorizontal },
 		},
 	},
 } satisfies Story;
@@ -479,7 +479,7 @@ export const Tag = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -521,7 +521,7 @@ export const StarRating = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -563,7 +563,7 @@ export const SoleContributor = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -610,7 +610,7 @@ export const DoubleTrouble = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -645,7 +645,7 @@ export const Crossword = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -680,7 +680,7 @@ export const Survey = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -716,7 +716,7 @@ export const Signup = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -751,7 +751,7 @@ export const Userid = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -792,7 +792,7 @@ export const PaidFor = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
@@ -846,6 +846,6 @@ export const Analysis = {
 		);
 	},
 	parameters: {
-		chromatic: { modes: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
