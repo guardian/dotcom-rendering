@@ -4,7 +4,6 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { allModes } from '../../.storybook/modes';
 import { palette } from '../palette';
