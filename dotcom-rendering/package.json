@@ -103,7 +103,7 @@
 		"@types/semver": "7.5.6",
 		"@types/tough-cookie": "4.0.2",
 		"@types/trusted-types": "2.0.7",
-		"@types/twitter-for-web": "0.0.2",
+		"@types/twitter-for-web": "0.0.6",
 		"@types/webpack-bundle-analyzer": "4.7.0",
 		"@types/webpack-env": "1.18.4",
 		"@types/webpack-node-externals": "3.0.4",
