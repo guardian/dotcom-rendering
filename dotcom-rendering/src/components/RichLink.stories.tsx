@@ -828,7 +828,7 @@ export const Analysis = {
 				className="light"
 				style={{ backgroundColor: palette('--article-background') }}
 			>
-				Analysis Articles have a different color background, so rich
+				Analysis Articles have a different colour background, so rich
 				links should too.
 				<SectionComponent
 					showTopBorder={false}
