@@ -32,16 +32,16 @@ type ApiResponse<T, E> = {
  * @template T assert the expected response type
  * @template E assert the potential error type
  * @param {string} url - The API endpoint. Falsy values will prevent any network requests
- * @param {SWRConfiguration<T,E>} options - The SWR config object - https://swr.vercel.app/docs/api#options
+ * @param {SWRConfiguration<Data,Err>} options - The SWR config object - https://swr.vercel.app/docs/api#options
  * @param {RequestInit} init - The fetch init object - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
- * @returns {ApiResponse<T, E>}
+ * @returns {ApiResponse<Data, Err>}
  * */
-export const useApi = <T = unknown, E = Error>(
+export const useApi = <Data = unknown, Err = Error>(
 	url: string = '',
-	options?: SWRConfiguration<T, E>,
+	options?: SWRConfiguration<Data, Err>,
 	init?: RequestInit,
-): ApiResponse<T, E> => {
-	const { data, error } = useSWR<T, E>(url, fetcher(init), options);
+): ApiResponse<Data, Err> => {
+	const { data, error } = useSWR<Data, Err>(url, fetcher(init), options);
 
 	return {
 		data,
