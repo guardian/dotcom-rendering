@@ -194,25 +194,8 @@ const horizontalDivider = css`
 		position: absolute;
 		border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
 		bottom: 0;
-		left: -${smallMobilePageMargin};
-		right: -${smallMobilePageMargin};
-
-		${from.mobileLandscape} {
-			left: -${pageMargin};
-			right: -${pageMargin};
-		}
-
-		/* Between phablet and tablet breakpoints, the length of the
-		 divider becomes the same as the width of the main content */
-		${from.phablet} {
-			left: 0;
-			right: 0;
-		}
-
-		${from.tablet} {
-			left: -${pageMargin};
-			right: -${pageMargin};
-		}
+		left: 0;
+		right: 0;
 	}
 `;
 
