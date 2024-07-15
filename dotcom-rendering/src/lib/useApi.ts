@@ -46,6 +46,6 @@ export const useApi = <T = unknown, E = Error>(
 	return {
 		data,
 		error,
-		loading: !url && isUndefined(error) && isUndefined(data),
+		loading: !!url && isUndefined(error) && isUndefined(data),
 	};
 };
