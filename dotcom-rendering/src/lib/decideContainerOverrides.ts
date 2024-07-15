@@ -160,20 +160,20 @@ const textCardByline = textCardKicker;
 
 const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return brandAlt[400];
 		case 'LongRunningPalette':
 			return news[400];
 		case 'LongRunningAltPalette':
-			return news[200];
+			return news[400];
 		case 'SombrePalette':
 			return brand[800];
 		case 'SombreAltPalette':
 			return news[500];
-		case 'InvestigationPalette':
-			return brandAlt[400];
 		case 'BreakingPalette':
-			return news[200];
+			return news[600];
 		case 'EventPalette':
-			return news[400];
+			return specialReportAlt[200];
 		case 'EventAltPalette':
 			return news[400];
 		case 'SpecialReportAltPalette':
