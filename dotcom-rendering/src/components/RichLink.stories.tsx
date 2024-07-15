@@ -162,6 +162,9 @@ export const Section = {
 			</SectionComponent>
 		);
 	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
 } satisfies Story;
 
 export const Inline = {
@@ -394,7 +397,7 @@ export const Audio = {
 		);
 	},
 	parameters: {
-		modes: { horizontal: allModes.splitHorizontal },
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
 	},
 } satisfies Story;
 
