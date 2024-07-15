@@ -447,7 +447,6 @@ export const LiveBlog = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {
-			viewports: [breakpoints.mobileMedium],
 			modes: allModes.splitHorizontal,
 		},
 	},

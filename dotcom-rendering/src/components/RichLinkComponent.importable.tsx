@@ -2,7 +2,6 @@ import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';
 import type { RichLinkBlockElement, StarRating } from '../types/content';
 import type { TagType } from '../types/tag';
-import type { RichLinkImageData } from './RichLink';
 import { RichLink } from './RichLink';
 
 type Props = {
@@ -122,12 +121,12 @@ export const RichLinkComponent = ({
 
 	if (!data) return null;
 
-	const richLinkImageData: RichLinkImageData = {
+	const richLinkImageData = {
 		thumbnailUrl: data.thumbnailUrl,
 		altText: (data.imageAsset ?? fallbackData.imageAsset).fields.altText,
 		width: (data.imageAsset ?? fallbackData.imageAsset).fields.width,
 		height: (data.imageAsset ?? fallbackData.imageAsset).fields.height,
-	};
+	} satisfies Parameters<typeof RichLink>[0]['imageData'];
 
 	return (
 		<RichLink
@@ -143,7 +142,11 @@ export const RichLinkComponent = ({
 			tags={data.tags}
 			sponsorName={data.sponsorName}
 			contributorImage={data.contributorImage}
-			isPlaceholder={data === fallbackData}
+			isPlaceholder={
+				// This should never be the case, unless it’s fallback data
+				// https://github.com/guardian/frontend/blob/8256fe148f9abb5842e30339ac64dfa43d758226/common/app/model/Asset.scala#L64
+				data.imageAsset?.index === -1
+			}
 		/>
 	);
 };

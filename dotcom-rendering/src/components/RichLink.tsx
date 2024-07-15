@@ -38,7 +38,7 @@ interface Props {
 	contributorImage?: string;
 	isPlaceholder?: boolean; // use 'true' for server-side default prior to client-side enrichment
 }
-export interface RichLinkImageData {
+interface RichLinkImageData {
 	thumbnailUrl: string;
 	altText: string;
 	width: string;
