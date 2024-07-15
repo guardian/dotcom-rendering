@@ -80,7 +80,7 @@ export const AllEditorialNewslettersPageLayout = ({
 							}
 							idApiUrl={config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={false}
+							showSubNav={true}
 							isImmersive={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
