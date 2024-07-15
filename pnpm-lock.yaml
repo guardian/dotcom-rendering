@@ -671,8 +671,8 @@ importers:
         specifier: 22.1.0
         version: 22.1.0
       load-json-file:
-        specifier: 6.2.0
-        version: 6.2.0
+        specifier: 7.0.1
+        version: 7.0.1
       lodash.debounce:
         specifier: 4.0.8
         version: 4.0.8
@@ -14002,14 +14002,9 @@ packages:
       tiny-hashes: 1.0.1
     dev: false
 
-  /load-json-file@6.2.0:
-    resolution: {integrity: sha512-gUD/epcRms75Cw8RT1pUdHugZYM5ce64ucs2GEISABwkRsOQr0q2wm/MV2TKThycIe5e0ytRweW2RZxclogCdQ==}
-    engines: {node: '>=8'}
-    dependencies:
-      graceful-fs: 4.2.11
-      parse-json: 5.2.0
-      strip-bom: 4.0.0
-      type-fest: 0.6.0
+  /load-json-file@7.0.1:
+    resolution: {integrity: sha512-Gnxj3ev3mB5TkVBGad0JM6dmLiQL+o0t23JPBZ9sd+yvSLk05mFoqKBw5N8gbbkU4TNXyqCgIrl/VM17OgUIgQ==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
   /load-yaml-file@0.2.0:
