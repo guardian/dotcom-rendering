@@ -845,4 +845,7 @@ export const Analysis = {
 			</div>
 		);
 	},
+	parameters: {
+		chromatic: { modes: allModes.splitHorizontal },
+	},
 } satisfies Story;
