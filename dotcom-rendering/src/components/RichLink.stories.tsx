@@ -128,7 +128,6 @@ export const Network = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {
-			viewports: [380],
 			modes: { horizontal: allModes.splitHorizontal },
 		},
 	},
@@ -236,7 +235,6 @@ export const ImageContent = {
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 		chromatic: {
-			viewports: [breakpoints.wide],
 			modes: { horizontal: allModes.splitHorizontal },
 		},
 	},
@@ -361,7 +359,6 @@ export const Video = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {
-			viewports: [breakpoints.mobileMedium],
 			modes: { horizontal: allModes.splitHorizontal },
 		},
 	},
