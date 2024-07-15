@@ -595,6 +595,7 @@ export const DoubleTrouble = {
 				title: 'Joe Second',
 			},
 		],
+		contributorImage: someContributor,
 	},
 	render: (args) => {
 		return (
