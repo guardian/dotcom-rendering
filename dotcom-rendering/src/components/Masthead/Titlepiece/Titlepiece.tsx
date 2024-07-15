@@ -11,11 +11,12 @@ import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
+import { pageMargin, smallMobilePageMargin } from './constants';
 import { EditionDropdown } from './EditionDropdown';
-// import { ExpandedNav } from './ExpandedNav/ExpandedNav';
 import { Grid } from './Grid';
 import { Logo } from './Logo';
 import { Pillars } from './Pillars';
+import { SubNav } from './SubNav';
 
 interface Props {
 	nav: NavType;
@@ -59,6 +60,12 @@ const guardianLogoStyles = css`
 	${from.mobileMedium} {
 		margin-right: 0;
 	}
+	${from.mobileLandscape} {
+		margin-bottom: 8px;
+	}
+	${from.desktop} {
+		margin-bottom: 10px;
+	}
 
 	svg {
 		width: 144px;
@@ -74,12 +81,6 @@ const guardianLogoStyles = css`
 		${from.leftCol} {
 			width: 398px;
 		}
-	}
-	${from.mobileLandscape} {
-		margin-bottom: 8px;
-	}
-	${from.desktop} {
-		margin-bottom: 10px;
 	}
 `;
 
@@ -119,46 +120,112 @@ const pillarsNavStyles = css`
 
 	${headlineBold14}
 	margin-top: ${space[2]}px;
-	border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
 
 	${from.desktop} {
 		grid-row: 1 / 2;
 	}
 `;
 
-const subnavStyles = css`
-	${gridFullWidth}
+const subNavStyles = css`
+	grid-column: content-start / content-end;
 	grid-row: 3;
 	${textSans14}
 	color: inherit;
-	height: 28px;
+	min-height: 28px;
 	margin-top: ${space[2]}px;
 
-	overflow-x: scroll;
-	width: calc(100% + 10px);
+	/** We increase the width of the subnav to let it overflow
+	 on the right to help indicate scrollability */
+	width: calc(100% + ${smallMobilePageMargin});
+	${from.mobileLandscape} {
+		width: calc(100% + ${pageMargin});
+	}
 
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
 	${from.tablet} {
-		width: calc(100% + ${space[5]}px);
+		min-height: 30px;
 	}
 	${from.leftCol} {
 		margin-top: 14px;
 	}
 `;
 
-const subnavListStyles = css`
-	display: flex;
-	column-gap: ${space[3]}px;
-`;
-const subnavListItemStyles = css`
-	white-space: nowrap;
+/** Styles the scrollbar of the subnav, providing sensible defaults
+ * for browsers that don't support scrollbar-color styling
+ * @see https://developer.chrome.com/docs/css-ui/scrollbar-styling
+ */
+const scrollableSubNavStyles = css`
+	--scrollbar-color-thumb: ${themePalette('--masthead-nav-lines')};
+	--scrollbar-color-track: ${themePalette('--masthead-nav-background')};
+	--scrollbar-width: thin;
+	--scrollbar-width-legacy: ${space[2]}px;
+
+	overflow-x: scroll;
+
+	/* For browsers that support scrollbar-* properties */
+	@supports (scrollbar-color: auto) {
+		scrollbar-color: var(--scrollbar-color-thumb)
+			var(--scrollbar-color-track);
+		scrollbar-width: var(--scrollbar-width);
+	}
+
+	/* Otherwise, use ::-webkit-scrollbar-* pseudo-elements */
+	@supports selector(::-webkit-scrollbar) {
+		&::-webkit-scrollbar {
+			max-height: var(--scrollbar-width-legacy);
+			max-width: var(--scrollbar-width-legacy);
+		}
+		&::-webkit-scrollbar-thumb {
+			background: var(--scrollbar-color-thumb);
+		}
+		&::-webkit-scrollbar-track {
+			background: var(--scrollbar-color-track);
+		}
+	}
 `;
 
-const subnavLinkStyles = css`
-	color: ${themePalette('--masthead-nav-link-text')};
-	text-decoration: none;
+const horizontalDivider = css`
+	position: relative;
+	z-index: 1;
+	&::after {
+		content: '';
+		position: absolute;
+		border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
+		bottom: 0;
+		left: -${smallMobilePageMargin};
+		right: -${smallMobilePageMargin};
+
+		${from.mobileLandscape} {
+			left: -${pageMargin};
+			right: -${pageMargin};
+		}
+
+		/* Between phablet and tablet breakpoints, the length of the
+		 divider becomes the same as the width of the main content */
+		${from.phablet} {
+			left: 0;
+			right: 0;
+		}
+
+		${from.tablet} {
+			left: -${pageMargin};
+			right: -${pageMargin};
+		}
+	}
+`;
+
+/** The divider length should match the width of the subnav */
+const dividerOverridesForSubNav = css`
+	&::after {
+		left: 0;
+		right: -${smallMobilePageMargin};
+
+		${from.mobileLandscape} {
+			right: -${pageMargin};
+		}
+	}
 `;
 
 export const Titlepiece = ({
@@ -194,7 +261,15 @@ export const Titlepiece = ({
 			</div>
 
 			{/* Pillars nav */}
-			<nav css={pillarsNavStyles}>
+			<nav
+				css={[
+					pillarsNavStyles,
+					horizontalDivider,
+					showSubNav &&
+						nav.subNavSections &&
+						dividerOverridesForSubNav,
+				]}
+			>
 				{/* Pillars nav mobile version */}
 				<Hide from="desktop">
 					<Pillars
@@ -247,18 +322,17 @@ export const Titlepiece = ({
 			</div>
 			{/* </Hide> */}
 
-			{/* Subnav */}
-			{nav.subNavSections && showSubNav && (
-				<nav css={subnavStyles}>
-					<ul css={subnavListStyles}>
-						{nav.subNavSections.links.map(({ title, url }) => (
-							<li key={title} css={subnavListItemStyles}>
-								<a href={url} css={subnavLinkStyles}>
-									{title}
-								</a>
-							</li>
-						))}
-					</ul>
+			{showSubNav && nav.subNavSections && (
+				<nav
+					data-print-layout="hide"
+					css={[subNavStyles, scrollableSubNavStyles]}
+					data-testid="sub-nav"
+					data-component="sub-nav"
+				>
+					<SubNav
+						subNavSections={nav.subNavSections}
+						currentNavLink={nav.currentNavLink}
+					/>
 				</nav>
 			)}
 		</Grid>

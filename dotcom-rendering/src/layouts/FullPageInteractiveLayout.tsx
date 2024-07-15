@@ -218,7 +218,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					discussionApiUrl={article.config.discussionApiUrl}
 					idApiUrl={article.config.idApiUrl}
 					contributionsServiceUrl={article.contributionsServiceUrl}
-					showSubNav={false}
+					showSubNav={format.theme !== ArticleSpecial.Labs}
 					isImmersive={false}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}

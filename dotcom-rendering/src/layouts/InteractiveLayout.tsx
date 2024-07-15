@@ -288,7 +288,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
-								showSubNav={false}
+								showSubNav={
+									format.theme !== ArticleSpecial.Labs
+								}
 								isImmersive={false}
 								hasPageSkin={false}
 								hasPageSkinContentSelfConstrain={false}
