@@ -193,7 +193,7 @@ const horizontalDivider = css`
 		content: '';
 		position: absolute;
 		border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
-		bottom: -1px;
+		bottom: 0;
 		left: -${smallMobilePageMargin};
 		right: -${smallMobilePageMargin};
 
