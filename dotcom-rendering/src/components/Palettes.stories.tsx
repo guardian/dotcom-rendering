@@ -1,13 +1,20 @@
-import { breakpoints } from '@guardian/source/foundations';
+import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
+import { breakpoints, textSans17 } from '@guardian/source/foundations';
+import type { Meta, StoryFn } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
 import { trails } from '../../fixtures/manual/trails';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../types/front';
+import { Carousel } from './Carousel.importable';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
+import { Island } from './Island';
 import { LabsSection } from './LabsSection';
-
-export default {
-	title: 'Layouts/Palettes',
-};
+import { Section } from './Section';
 
 const groupedTrails = {
 	snap: [],
@@ -22,26 +29,35 @@ const groupedTrails = {
 		trails[8],
 		trails[9],
 	],
-};
+} satisfies DCRGroupedTrails;
 
-export const EventPalette = () => (
-	<FrontSection
-		title="Event Palette"
-		containerPalette="EventPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="EventPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
-EventPalette.story = {
+const meta = {
+	title: 'Layouts/Palettes',
+	render: ({
+		containerPalette,
+	}: {
+		containerPalette?: DCRContainerPalette;
+	}) => {
+		return (
+			<FrontSection
+				title={containerPalette}
+				containerPalette={containerPalette}
+				showDateHeader={true}
+				editionId={'UK'}
+				discussionApiUrl={discussionApiUrl}
+				toggleable={true}
+				sectionId={containerPalette}
+			>
+				<DynamicFast
+					groupedTrails={groupedTrails}
+					containerPalette={containerPalette}
+					showAge={true}
+					absoluteServerTimes={true}
+					imageLoading="eager"
+				/>
+			</FrontSection>
+		);
+	},
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -51,210 +67,164 @@ EventPalette.story = {
 			],
 		},
 	},
+} satisfies Meta;
+
+export default meta;
+
+export const EventPalette = {
+	args: { containerPalette: 'EventPalette' },
 };
 
-export const EventAltPalette = () => (
-	<FrontSection
-		title="Event Alt Palette"
-		containerPalette="EventAltPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="EventAltPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+export const EventAltPalette = {
+	args: { containerPalette: 'EventAltPalette' },
+};
 
-export const SombrePalette = () => (
-	<FrontSection
-		title="Sombre Palette"
-		containerPalette="SombrePalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="SombrePalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+export const SombrePalette = {
+	args: { containerPalette: 'SombrePalette' },
+};
 
-export const SombreAltPalette = () => (
-	<FrontSection
-		title="Sombre Alt Palette"
-		containerPalette="SombreAltPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="SombreAltPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+export const SombreAltPalette = {
+	args: { containerPalette: 'SombreAltPalette' },
+};
 
-export const BreakingPalette = () => (
-	<FrontSection
-		title="Breaking Palette"
-		containerPalette="BreakingPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="BreakingPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+export const BreakingPalette = {
+	args: { containerPalette: 'BreakingPalette' },
+};
 
-export const LongRunningPalette = () => (
-	<FrontSection
-		title="Long Running Palette"
-		containerPalette="LongRunningPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="LongRunningPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+export const LongRunningPalette = {
+	args: { containerPalette: 'LongRunningPalette' },
+};
 
-export const LongRunningAltPalette = () => (
-	<FrontSection
-		title="Long Running Alt Palette"
-		containerPalette="LongRunningAltPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="LongRunningAltPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+export const LongRunningAltPalette = {
+	args: { containerPalette: 'LongRunningAltPalette' },
+};
 
-export const InvestigationPalette = () => (
-	<FrontSection
-		title="Investigation Palette"
-		containerPalette="InvestigationPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="InvestigationPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+export const InvestigationPalette = {
+	args: { containerPalette: 'InvestigationPalette' },
+};
 
-export const SpecialReportAltPalette = () => (
-	<FrontSection
-		title="Special Report Alt Palette"
-		containerPalette="SpecialReportAltPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="SpecialReportAltPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+export const SpecialReportAltPalette = {
+	args: { containerPalette: 'SpecialReportAltPalette' },
+};
 
-export const BrandedPalette = () => (
-	<LabsSection
-		title="Branded Palette"
-		collectionId={''}
-		pageId={''}
-		ajaxUrl={''}
-		sectionId={'branded-palette'}
-		ophanComponentName={'branded-palette'}
-		ophanComponentLink={'branded-palette'}
-		discussionApiUrl={discussionApiUrl}
-		editionId={'UK'}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="Branded"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</LabsSection>
-);
+export const BrandedPalette = {
+	args: { containerPalette: 'Branded' },
+	render: () => (
+		<LabsSection
+			title="Branded Palette"
+			discussionApiUrl={discussionApiUrl}
+			editionId={'UK'}
+			key="Branded"
+			ajaxUrl=""
+			collectionId=""
+			ophanComponentLink=""
+			ophanComponentName=""
+			pageId=""
+			sectionId="Branded"
+			badge={{
+				imageSrc:
+					'https://static.theguardian.com/commercial/sponsor/22/Feb/2024/17ea91fc-659b-4c51-8410-9907241c1710-Guardian.orglogos-for%20badge.png',
+				href: 'https://theguardian.org',
+			}}
+		>
+			<DynamicFast
+				groupedTrails={groupedTrails}
+				containerPalette="Branded"
+				showAge={true}
+				absoluteServerTimes={true}
+				imageLoading="eager"
+			/>
+		</LabsSection>
+	),
+};
 
-export const MediaPalette = () => (
-	<FrontSection
-		title="Media Palette"
-		containerPalette="MediaPalette"
-		showDateHeader={true}
-		editionId={'UK'}
-		discussionApiUrl={discussionApiUrl}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="MediaPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+const carouselRenderer = ({
+	containerPalette: palette,
+}: {
+	containerPalette: DCRContainerPalette;
+}) => {
+	const overrideDesign =
+		(design: ArticleDesign) => (format: ArticleFormat) => ({
+			...format,
+			design,
+		});
 
-export const PodcastPalette = () => (
-	<FrontSection
-		title="Podcast Palette"
-		collectionId={''}
-		pageId={''}
-		ajaxUrl={''}
-		sectionId={'podcast-palette'}
-		ophanComponentName={'podcast-palette'}
-		ophanComponentLink={'podcast-palette'}
-		discussionApiUrl={discussionApiUrl}
-		editionId={'UK'}
-	>
-		<DynamicFast
-			groupedTrails={groupedTrails}
-			containerPalette="PodcastPalette"
-			showAge={true}
-			absoluteServerTimes={true}
-			imageLoading="eager"
-		/>
-	</FrontSection>
-);
+	const trailDesign =
+		palette === 'MediaPalette' ? ArticleDesign.Video : ArticleDesign.Audio;
+
+	const overriddenTrails = trails.map((trail) => ({
+		...trail,
+		format: overrideDesign(trailDesign)(trail.format),
+	})) satisfies DCRFrontCard[];
+
+	return (
+		<Section
+			fullWidth={true}
+			containerPalette={palette}
+			showDateHeader={true}
+			editionId={'UK'}
+			key={palette}
+			toggleable={true}
+			sectionId={palette}
+		>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<Carousel
+					isOnwardContent={false}
+					heading={palette}
+					trails={overriddenTrails.slice(0, 10)}
+					onwardsSource="more-on-this-story"
+					leftColSize="compact"
+					url={'https://www.theguardian.com'}
+					discussionApiUrl={discussionApiUrl}
+					palette={palette}
+					absoluteServerTimes={true}
+				/>
+			</Island>
+		</Section>
+	);
+};
+
+export const MediaPalette = {
+	args: { containerPalette: 'MediaPalette' },
+	render: carouselRenderer,
+	decorators: [
+		(Story: StoryFn) => (
+			<>
+				<span
+					css={css`
+						${textSans17}
+					`}
+				>
+					<em>
+						The media palette is only used with video cards in a
+						carousel
+					</em>
+				</span>
+				<Story />
+			</>
+		),
+	],
+};
+
+export const PodcastPalette = {
+	args: { containerPalette: 'PodcastPalette' },
+	render: carouselRenderer,
+	decorators: [
+		(Story: StoryFn) => (
+			<>
+				<span
+					css={css`
+						${textSans17}
+						padding-bottom: 4px;
+					`}
+				>
+					<em>
+						The podcast palette is only used with audio cards in a
+						carousel
+					</em>
+				</span>
+				<Story />
+			</>
+		),
+	],
+};
