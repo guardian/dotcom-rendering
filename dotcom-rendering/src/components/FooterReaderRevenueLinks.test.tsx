@@ -1,8 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
-import type { EditionId } from '../lib/edition';
 import { ConfigProvider } from './ConfigContext';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;
@@ -27,16 +26,12 @@ jest.mock('@guardian/libs', () => ({
 	},
 }));
 
-const contributionsServiceUrl =
-	'https://contributions.code.dev-guardianapis.com';
-
-describe('ReaderRevenueLinks', () => {
+describe('FooterReaderRevenueLinks', () => {
 	const urls = {
 		contribute: 'https://www.theguardian.com/contribute',
 		subscribe: 'https://www.theguardian.com/subscribe',
 		support: 'https://www.theguardian.com/support',
 	};
-	const edition: EditionId = 'UK';
 
 	it('should render thank you message if shouldHideSupportMessaging() returns true', async () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
@@ -48,15 +43,12 @@ describe('ReaderRevenueLinks', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
-				<ReaderRevenueLinks
+				<FooterReaderRevenueLinks
 					urls={urls}
-					editionId="US"
 					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</ConfigProvider>,
 		);
@@ -74,15 +66,12 @@ describe('ReaderRevenueLinks', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
-				<ReaderRevenueLinks
+				<FooterReaderRevenueLinks
 					urls={urls}
-					editionId={edition}
 					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</ConfigProvider>,
 		);

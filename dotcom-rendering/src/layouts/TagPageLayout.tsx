@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
+import { isUndefined, joinUrl } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { Fragment } from 'react';
+import { Accessibility } from '../components/Accessibility.importable';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import {
 	decideFrontsBannerAdSlot,
@@ -13,7 +15,7 @@ import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -21,7 +23,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { getEditionFromId } from '../lib/edition';
 import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
@@ -36,28 +37,6 @@ interface Props {
 	tagPage: DCRTagPageType;
 	NAV: NavType;
 }
-
-const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
-	if (hasDay) {
-		return `${date.toLocaleDateString(locale, {
-			day: 'numeric',
-		})}-${date
-			.toLocaleDateString(locale, {
-				month: 'long',
-			})
-			.toLowerCase()}-${date.toLocaleDateString(locale, {
-			year: 'numeric',
-		})}`;
-	} else {
-		return `${date
-			.toLocaleDateString(locale, {
-				month: 'long',
-			})
-			.toLowerCase()}-${date.toLocaleDateString(locale, {
-			year: 'numeric',
-		})}`;
-	}
-};
 
 export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const {
@@ -92,6 +71,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 
 	const contributionsServiceUrl = 'https://contributions.guardianapis.com'; // TODO: Read this from config (use getContributionsServiceUrl)
 
+	const isAccessibilityPage =
+		tagPage.config.pageId === 'help/accessibility-help';
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -121,15 +103,11 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							editionId={tagPage.editionId}
 							idUrl={tagPage.config.idUrl}
 							mmaUrl={tagPage.config.mmaUrl}
-							subscribeUrl={
-								tagPage.nav.readerRevenueLinks.header.subscribe
-							}
 							discussionApiUrl={tagPage.config.discussionApiUrl}
 							idApiUrl={tagPage.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
-							displayRoundel={false}
 							hasPageSkin={hasPageSkin}
 						/>
 					) : (
@@ -228,52 +206,44 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 			</div>
 
 			<main data-layout="TagPageLayout" id="maincontent">
+				{isAccessibilityPage && (
+					<Island priority="critical" defer={{ until: 'visible' }}>
+						<Accessibility />
+					</Island>
+				)}
 				<TagPageHeader
 					title={tagPage.header.title}
 					description={tagPage.header.description}
 					image={tagPage.header.image}
 				/>
 				{tagPage.groupedTrails.map((groupedTrails, index) => {
-					const { dateLocale } = getEditionFromId(tagPage.editionId);
-					const date = new Date(
-						groupedTrails.year,
-						groupedTrails.month,
-						groupedTrails.day ?? 1,
-					);
-					const containedId = getContainerId(
-						date,
-						dateLocale,
-						groupedTrails.day !== undefined,
-					);
-
 					const imageLoading = index > 0 ? 'lazy' : 'eager';
 
-					const title = date.toLocaleDateString('en-GB', {
-						day:
-							groupedTrails.day !== undefined
-								? 'numeric'
-								: undefined,
-						month: 'long',
-						year: 'numeric',
-					});
+					const title = isUndefined(groupedTrails.day)
+						? [groupedTrails.month, groupedTrails.year].join(' ')
+						: [
+								groupedTrails.day,
+								groupedTrails.month,
+								groupedTrails.year,
+						  ].join(' ');
 
-					const url =
-						groupedTrails.day !== undefined
-							? `/${tagPage.pageId}/${groupedTrails.year}/${date
-									.toLocaleDateString(dateLocale, {
-										month: 'long',
-									})
-									.slice(0, 3)
-									.toLowerCase()}/${date.toLocaleDateString(
-									dateLocale,
-									{
-										day: '2-digit',
-									},
-							  )}/all`
-							: undefined;
+					const containerId = title
+						.replaceAll(' ', '-')
+						.toLowerCase();
+
+					const url = groupedTrails.day
+						? '/' +
+						  joinUrl(
+								tagPage.pageId,
+								groupedTrails.year,
+								groupedTrails.month.slice(0, 3).toLowerCase(),
+								groupedTrails.day.padStart(2, '0'),
+								'all',
+						  )
+						: undefined;
 
 					return (
-						<Fragment key={containedId}>
+						<Fragment key={containerId}>
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
@@ -288,9 +258,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 									index === 0 ? tagPage.branding : undefined
 								}
 								showTopBorder={true}
-								ophanComponentLink={`container-${index} | ${containedId}`}
-								ophanComponentName={containedId}
-								sectionId={containedId}
+								ophanComponentLink={`container-${index} | ${containerId}`}
+								ophanComponentName={containerId}
+								sectionId={containerId}
 								toggleable={false}
 								pageId={tagPage.pageId}
 								editionId={tagPage.editionId}
@@ -370,9 +340,8 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 					pageFooter={tagPage.pageFooter}
 					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
-					urls={tagPage.nav.readerRevenueLinks.header}
+					urls={tagPage.nav.readerRevenueLinks.footer}
 					editionId={tagPage.editionId}
-					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
 			<BannerWrapper data-print-layout="hide">

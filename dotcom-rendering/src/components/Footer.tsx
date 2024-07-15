@@ -23,10 +23,10 @@ import type { PillarLinkType } from '../model/extract-nav';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
 import { FooterLabel } from './FooterLabel.importable';
+import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
 import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars
 const footerBorders = `1px solid ${palette.brand[600]}`;
@@ -232,13 +232,9 @@ const bttPosition = css`
 const FooterLinks = ({
 	pageFooter,
 	urls,
-	editionId,
-	contributionsServiceUrl,
 }: {
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	editionId: EditionId;
-	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
 		const linkList = linkGroup.flatMap(
@@ -275,13 +271,9 @@ const FooterLinks = ({
 	const rrLinks = (
 		<div css={readerRevenueLinks}>
 			<Island priority="feature" defer={{ until: 'visible' }}>
-				<ReaderRevenueLinks
+				<FooterReaderRevenueLinks
 					urls={urls}
-					editionId={editionId}
 					dataLinkNamePrefix="footer : "
-					inHeader={false}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Island>
 		</div>
@@ -331,7 +323,6 @@ export const Footer = ({
 	pageFooter,
 	urls,
 	editionId,
-	contributionsServiceUrl,
 	hasPageSkin,
 }: {
 	pillars: PillarLinkType[];
@@ -339,7 +330,6 @@ export const Footer = ({
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;
-	contributionsServiceUrl: string;
 	hasPageSkin?: boolean;
 }) => (
 	<div
@@ -378,12 +368,7 @@ export const Footer = ({
 				</LinkButton>
 			</div>
 
-			<FooterLinks
-				pageFooter={pageFooter}
-				urls={urls}
-				editionId={editionId}
-				contributionsServiceUrl={contributionsServiceUrl}
-			/>
+			<FooterLinks pageFooter={pageFooter} urls={urls} />
 
 			{editionId === 'AU' && (
 				<div css={acknowledgments}>

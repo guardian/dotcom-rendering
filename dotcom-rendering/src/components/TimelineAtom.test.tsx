@@ -13,6 +13,7 @@ describe('TimelineAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<TimelineAtom {...noTimelineEventsStory} />
@@ -39,6 +40,7 @@ describe('TimelineAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<TimelineAtom {...noTimelineEventsStory} />
@@ -66,6 +68,7 @@ describe('TimelineAtom', () => {
 					darkModeAvailable: false,
 					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
+					editionId: 'UK',
 				}}
 			>
 				<TimelineAtom {...noTimelineEventsStory} />

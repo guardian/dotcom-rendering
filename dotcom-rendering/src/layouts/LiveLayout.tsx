@@ -38,7 +38,7 @@ import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
@@ -49,6 +49,7 @@ import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import {
@@ -311,7 +312,7 @@ interface WebProps extends BaseProps {
 export const LiveLayout = (props: WebProps | AppsProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasLiveBlogTopAd },
 	} = article;
 
 	// TODO:
@@ -393,15 +394,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							idUrl={article.config.idUrl}
 							mmaUrl={article.config.mmaUrl}
-							subscribeUrl={
-								article.nav.readerRevenueLinks.header.subscribe
-							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={false}
 							isImmersive={false}
-							displayRoundel={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 						/>
@@ -517,6 +514,24 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 				data-layout="LiveLayout"
 				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
 			>
+				{renderAds && hasLiveBlogTopAd && (
+					<Hide from="tablet">
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={sourcePalette.neutral[97]}
+							element="aside"
+						>
+							<AdSlot
+								position="liveblog-top"
+								display={format.display}
+							/>
+						</Section>
+					</Hide>
+				)}
 				{inTagLinkTest && (
 					<div css={tagOverlayGridStyles}>
 						<GridItem area="sticky-tag">
@@ -702,7 +717,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								{isApps && (
 									<ArticleMetaApps
 										format={format}
-										pageId={article.pageId}
 										byline={article.byline}
 										tags={article.tags}
 										primaryDateline={
@@ -716,7 +730,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
-										messageUs={article.messageUs}
 									></ArticleMetaApps>
 								)}
 								{isWeb && (
@@ -741,7 +754,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											messageUs={article.messageUs}
 										/>
 									</div>
 								)}
@@ -859,7 +871,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
-												editionId={article.editionId}
 											/>
 										</Island>
 									)}
@@ -908,7 +919,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											shortUrlId={
 												article.config.shortUrlId
 											}
-											messageUs={article.messageUs}
 										/>
 									</div>
 								</Hide>
@@ -935,6 +945,23 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										</div>
 									</Hide>
 								)}
+
+								{isWeb && (
+									<Hide until="desktop">
+										<Island
+											priority="feature"
+											defer={{ until: 'visible' }}
+										>
+											<StickyLiveblogAskWrapper
+												referrerUrl={article.webURL}
+												shouldHideReaderRevenueOnArticle={
+													article.shouldHideReaderRevenue
+												}
+											/>
+										</Island>
+									</Hide>
+								)}
+
 								{/* Match stats */}
 								{!!footballMatchUrl && (
 									<Island
@@ -1306,7 +1333,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={true}
 							showSideBorders={false}
-							backgroundColour={sourcePalette.neutral[97]}
+							backgroundColour={themePalette('--ad-background')}
 							shouldCenter={false}
 							element="aside"
 						>
@@ -1442,7 +1469,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							padSides={false}
 							showTopBorder={false}
 							showSideBorders={false}
-							backgroundColour={sourcePalette.neutral[97]}
+							backgroundColour={themePalette('--ad-background')}
 							element="aside"
 						>
 							<AdSlot
@@ -1489,11 +1516,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							pageFooter={article.pageFooter}
 							selectedPillar={props.NAV.selectedPillar}
 							pillars={props.NAV.pillars}
-							urls={article.nav.readerRevenueLinks.header}
+							urls={article.nav.readerRevenueLinks.footer}
 							editionId={article.editionId}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
 						/>
 					</Section>
 
@@ -1523,7 +1547,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer data-print-layout="hide" />
+					<MobileStickyContainer
+						data-print-layout="hide"
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 

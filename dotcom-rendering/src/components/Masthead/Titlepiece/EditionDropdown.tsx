@@ -1,15 +1,16 @@
 import { css } from '@emotion/react';
+import { from, space, textSans17 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
-import type { EditionId } from '../lib/edition';
-import { editionList, getEditionFromId } from '../lib/edition';
-import { getZIndex } from '../lib/getZIndex';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import type { EditionLinkType } from '../model/extract-nav';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
-import { dropDownOverrides } from './HeaderTopBarMyAccount';
+import type { EditionId } from '../../../lib/edition';
+import { editionList, getEditionFromId } from '../../../lib/edition';
+import { getZIndex } from '../../../lib/getZIndex';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import type { EditionLinkType } from '../../../model/extract-nav';
+import { palette as themePalette } from '../../../palette';
+import type { DropdownLinkType } from '../../Dropdown';
+import { Dropdown } from '../../Dropdown';
 
-interface TitlepieceEditionDropdownProps {
+interface EditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
 }
@@ -20,10 +21,24 @@ const editionDropdownStyles = css`
 	position: relative;
 `;
 
-export const TitlepieceEditionDropdown = ({
+const dropDownOverrides = css`
+	${textSans17}
+	color: ${themePalette('--masthead-nav-link-text')};
+	padding: 0;
+	margin-top: ${space[1]}px;
+	&:not(ul):hover {
+		color: ${themePalette('--masthead-nav-link-text')};
+		text-decoration: underline;
+	}
+	${from.tablet} {
+		right: 0;
+	}
+`;
+
+export const EditionDropdown = ({
 	editionId,
 	dataLinkName,
-}: TitlepieceEditionDropdownProps) => {
+}: EditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
 		url: edition.url,
@@ -52,9 +67,9 @@ export const TitlepieceEditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Hide until="desktop">
+			<Hide from="desktop">
 				<Dropdown
-					label={activeEdition.title}
+					label={activeEdition.id}
 					links={linksToDisplay}
 					id="edition"
 					dataLinkName={dataLinkName}
@@ -64,9 +79,10 @@ export const TitlepieceEditionDropdown = ({
 					`}
 				/>
 			</Hide>
-			<Hide from="desktop">
+
+			<Hide until="desktop">
 				<Dropdown
-					label={activeEdition.id}
+					label={activeEdition.title}
 					links={linksToDisplay}
 					id="edition"
 					dataLinkName={dataLinkName}

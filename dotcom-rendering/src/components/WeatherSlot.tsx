@@ -12,7 +12,7 @@ import {
 } from '@guardian/source/foundations';
 import { lazy, Suspense } from 'react';
 import { type EditionId, getEditionFromId } from '../lib/edition';
-import type { WeatherData } from './WeatherWrapper.importable';
+import type { WeatherData } from '../types/weather';
 
 interface IconProps {
 	size?: number;

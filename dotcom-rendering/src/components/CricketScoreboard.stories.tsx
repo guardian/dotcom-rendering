@@ -26,7 +26,6 @@ export const defaultStory: Story = {
 		},
 		match,
 		scorecardUrl: '/test',
-		editionId: 'UK',
 	},
 };
 

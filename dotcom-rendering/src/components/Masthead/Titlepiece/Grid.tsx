@@ -2,12 +2,6 @@ import type { SerializedStyles } from '@emotion/react';
 import { css, jsx } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
 import type { CSSProperties, PropsWithChildren } from 'react';
-import { palette as themePalette } from '../palette';
-
-const colours = css`
-	background-color: ${themePalette('--masthead-nav-background')};
-	color: ${themePalette('--masthead-nav-link-text')};
-`;
 
 const grid = css`
 	display: grid;
@@ -84,13 +78,14 @@ const grid = css`
  *
  * @see https://theguardian.design/2a1e5182b/p/41be19-grids
  */
-export const TitlepieceGrid = ({
+export const Grid = ({
 	type = 'div',
+	style,
 	children,
 }: PropsWithChildren<{
 	type: keyof JSX.IntrinsicElements;
 	style?: CSSProperties;
-}>) => jsx(type, { css: [colours, grid] }, children);
+}>) => jsx(type, { css: grid, style }, children);
 
 /** Spans the entire width of the grid */
 export const Content = ({

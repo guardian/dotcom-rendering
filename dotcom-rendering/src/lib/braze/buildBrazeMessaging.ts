@@ -108,6 +108,8 @@ export const buildBrazeMessaging = async (
 		const sdkLoadTimeTaken = endPerformanceMeasure();
 		const ophan = await getOphan(renderingTarget);
 		ophan.record({
+			// @ts-expect-error -- the relevant team should remove this call as it is dropped by Ophan
+			// see https://github.com/guardian/dotcom-rendering/pull/11438 further context
 			component: 'braze-sdk-load-timing',
 			value: sdkLoadTimeTaken,
 		});

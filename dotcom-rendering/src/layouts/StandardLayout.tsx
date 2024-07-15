@@ -35,7 +35,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
@@ -99,7 +99,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 60px 300px;
+					grid-template-columns: 219px 1px 620px 60px 320px;
 
 					${isMatchReport
 						? css`
@@ -447,9 +447,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							idUrl={article.config.idUrl}
 							mmaUrl={article.config.mmaUrl}
 							discussionApiUrl={article.config.discussionApiUrl}
-							subscribeUrl={
-								article.nav.readerRevenueLinks.header.subscribe
-							}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={!isPaidContent}
@@ -753,7 +750,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -1002,7 +998,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -1127,7 +1123,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -1171,11 +1167,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							pageFooter={article.pageFooter}
 							selectedPillar={props.NAV.selectedPillar}
 							pillars={props.NAV.pillars}
-							urls={article.nav.readerRevenueLinks.header}
+							urls={article.nav.readerRevenueLinks.footer}
 							editionId={article.editionId}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
 						/>
 					</Section>
 					<BannerWrapper data-print-layout="hide">
@@ -1204,7 +1197,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer data-print-layout="hide" />
+					<MobileStickyContainer
+						data-print-layout="hide"
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 
@@ -1213,9 +1210,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
-						backgroundColour={themePalette(
-							'--article-section-background',
-						)}
+						backgroundColour={themePalette('--ad-background')}
 						borderColour={themePalette('--article-border')}
 						padSides={false}
 						showSideBorders={false}

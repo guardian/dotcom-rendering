@@ -28,7 +28,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
-import { Masthead } from '../components/Masthead';
+import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
@@ -324,15 +324,11 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							editionId={article.editionId}
 							idUrl={article.config.idUrl}
 							mmaUrl={article.config.mmaUrl}
-							subscribeUrl={
-								article.nav.readerRevenueLinks.header.subscribe
-							}
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={true}
 							isImmersive={false}
-							displayRoundel={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
 						/>
@@ -596,7 +592,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -699,7 +694,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -822,7 +817,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -859,11 +854,8 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							pageFooter={article.pageFooter}
 							selectedPillar={props.NAV.selectedPillar}
 							pillars={props.NAV.pillars}
-							urls={article.nav.readerRevenueLinks.header}
+							urls={article.nav.readerRevenueLinks.footer}
 							editionId={article.editionId}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
 						/>
 					</Section>
 
@@ -893,7 +885,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					<MobileStickyContainer />
+					<MobileStickyContainer
+						contentType={article.contentType}
+						pageId={article.pageId}
+					/>
 				</>
 			)}
 			{isApps && (

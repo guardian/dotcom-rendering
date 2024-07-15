@@ -2,12 +2,16 @@ import { ArticleDisplay } from '@guardian/libs';
 
 export const decideDisplay = ({
 	display,
+	design,
 }: Partial<FEFormat>): ArticleDisplay => {
 	switch (display) {
 		case 'StandardDisplay':
 			return ArticleDisplay.Standard;
 		case 'ImmersiveDisplay':
-			return ArticleDisplay.Immersive;
+			// Temporary hack until we can handle Immersive Comment pieces
+			return design === 'CommentDesign'
+				? ArticleDisplay.Standard
+				: ArticleDisplay.Immersive;
 		case 'ShowcaseDisplay':
 			return ArticleDisplay.Showcase;
 		case 'NumberedListDisplay':

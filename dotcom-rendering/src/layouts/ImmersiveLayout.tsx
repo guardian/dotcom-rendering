@@ -32,6 +32,7 @@ import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
+import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { minNavHeightPx, Nav } from '../components/Nav/Nav';
@@ -86,7 +87,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 620px 60px 300px;
+					grid-template-columns: 219px 1px 620px 60px 320px;
 					grid-template-areas:
 						'caption    border      title      . right-column'
 						'.          border      headline   . right-column'
@@ -315,43 +316,66 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 		isWeb &&
 		article.config.abTests.tagLinkDesignVariant === 'variant' &&
 		article.tags.some((tag) => tag.id === 'football/euro-2024');
+
+	const inUpdatedHeaderABTest =
+		article.config.abTests.updatedHeaderDesignVariant === 'variant';
+
 	return (
 		<>
 			{isWeb && (
 				<>
-					<div
-						css={css`
-							${getZIndex('headerWrapper')}
-							order: 0;
-						`}
-					>
-						<Section
-							fullWidth={true}
-							showSideBorders={false}
-							showTopBorder={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="nav"
+					{inUpdatedHeaderABTest ? (
+						<Masthead
+							nav={props.NAV}
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							discussionApiUrl={article.config.discussionApiUrl}
+							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
+							showSubNav={false}
+							isImmersive={true}
+							hasPageSkin={false}
+							hasPageSkinContentSelfConstrain={false}
+						/>
+					) : (
+						<div
+							css={css`
+								${getZIndex('headerWrapper')}
+								order: 0;
+							`}
 						>
-							<Nav
-								isImmersive={
-									format.display === ArticleDisplay.Immersive
-								}
-								displayRoundel={
-									format.display ===
-										ArticleDisplay.Immersive ||
-									format.theme === ArticleSpecial.Labs
-								}
-								selectedPillar={props.NAV.selectedPillar}
-								nav={props.NAV}
-								subscribeUrl={
-									article.nav.readerRevenueLinks.header
-										.contribute
-								}
-								editionId={article.editionId}
-							/>
-						</Section>
-					</div>
+							<Section
+								fullWidth={true}
+								showSideBorders={false}
+								showTopBorder={false}
+								padSides={false}
+								backgroundColour={sourcePalette.brand[400]}
+								element="nav"
+							>
+								<Nav
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={props.NAV.selectedPillar}
+									nav={props.NAV}
+									subscribeUrl={
+										article.nav.readerRevenueLinks.header
+											.contribute
+									}
+									editionId={article.editionId}
+								/>
+							</Section>
+						</div>
+					)}
 
 					{format.theme === ArticleSpecial.Labs && (
 						<Stuck>
@@ -589,7 +613,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											<ArticleMetaApps
 												branding={branding}
 												format={format}
-												pageId={article.pageId}
 												byline={article.byline}
 												tags={article.tags}
 												primaryDateline={
@@ -812,7 +835,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -933,7 +956,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
-						backgroundColour={sourcePalette.neutral[97]}
+						backgroundColour={themePalette('--ad-background')}
 						element="aside"
 					>
 						<AdSlot
@@ -970,11 +993,8 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							pageFooter={article.pageFooter}
 							selectedPillar={props.NAV.selectedPillar}
 							pillars={props.NAV.pillars}
-							urls={article.nav.readerRevenueLinks.header}
+							urls={article.nav.readerRevenueLinks.footer}
 							editionId={article.editionId}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
 						/>
 					</Section>
 
@@ -1004,7 +1024,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							/>
 						</Island>
 					</BannerWrapper>
-					{renderAds && <MobileStickyContainer />}
+					{renderAds && (
+						<MobileStickyContainer
+							contentType={article.contentType}
+							pageId={article.pageId}
+						/>
+					)}
 				</>
 			)}
 			{isApps && (

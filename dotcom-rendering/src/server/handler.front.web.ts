@@ -88,6 +88,7 @@ const enhanceTagPage = (body: unknown): DCRTagPageType => {
 
 	const groupedTrails = groupTrailsByDates(
 		enhancedCards,
+		data.editionId,
 		speed === 'slow' || data.forceDay,
 	);
 

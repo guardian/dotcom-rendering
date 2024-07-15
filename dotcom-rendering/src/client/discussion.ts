@@ -20,7 +20,7 @@ const forceHydration = async (): Promise<void> => {
 
 		// Read the props and config from where they have been serialised in the dom using an Island
 		const props = getProps(guElement);
-		const config = getConfig(guElement);
+		const config = getConfig();
 
 		// Now that we have the props as an object, tell Discussion we want it to expand itself
 		props.expanded = true;

@@ -59,6 +59,10 @@ const indices = [
 	'searchHeaderLink',
 	'TheGuardian',
 
+	// The edition switcher banner needs to be below the Edition selector
+	// and the myAccount dropdown in the nav
+	'editionSwitcherBanner',
+
 	// Wrapper after nav stuff
 	'headerWrapper',
 

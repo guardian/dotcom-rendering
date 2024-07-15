@@ -3,6 +3,7 @@
  */
 
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { PropsWithChildren } from 'react';
 import { renderToString } from 'react-dom/server';
 import { AdPortals } from './AdPortals.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
@@ -15,6 +16,7 @@ import { DiscussionLayout } from './DiscussionLayout';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FocusStyles } from './FocusStyles.importable';
+import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
 import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
@@ -26,7 +28,6 @@ import { MostViewedFooterData } from './MostViewedFooterData.importable';
 import { MostViewedRightWithAd } from './MostViewedRightWithAd.importable';
 import { OnwardsUpper } from './OnwardsUpper.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { SendTargetingParams } from './SendTargetingParams.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
@@ -77,6 +78,21 @@ const Mock = () => <>🏝️</>;
 // Jest tests
 
 describe('Island: server-side rendering', () => {
+	/** Helper to provide config for islands */
+	const WithConfig = ({ children }: PropsWithChildren) => (
+		<ConfigProvider
+			value={{
+				renderingTarget: 'Web',
+				darkModeAvailable: false,
+				updateLogoAdPartnerSwitch: false,
+				assetOrigin: '/',
+				editionId: 'UK',
+			}}
+		>
+			{children}
+		</ConfigProvider>
+	);
+
 	test('AdPortals', () => {
 		expect(() => renderToString(<AdPortals />)).not.toThrow();
 	});
@@ -92,16 +108,9 @@ describe('Island: server-side rendering', () => {
 	test('BrazeMessaging', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<BrazeMessaging idApiUrl={''} />
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -123,20 +132,13 @@ describe('Island: server-side rendering', () => {
 	test('DiscussionMeta', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<DiscussionMeta
 						discussionApiUrl={''}
 						shortUrlId={''}
 						enableDiscussionSwitch={false}
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -144,14 +146,7 @@ describe('Island: server-side rendering', () => {
 	test('Discussion', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<DiscussionLayout
 						discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 						shortUrlId="p/39f5z"
@@ -167,7 +162,7 @@ describe('Island: server-side rendering', () => {
 						isAdFreeUser={false}
 						shouldHideAds={false}
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -175,16 +170,9 @@ describe('Island: server-side rendering', () => {
 	test('EnhancePinnedPost', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<EnhancePinnedPost />
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -204,14 +192,7 @@ describe('Island: server-side rendering', () => {
 	test('OnwardsUpper', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<OnwardsUpper
 						contentType=""
 						tags={[]}
@@ -234,7 +215,7 @@ describe('Island: server-side rendering', () => {
 						discussionApiUrl=""
 						absoluteServerTimes={true}
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -299,16 +280,9 @@ describe('Island: server-side rendering', () => {
 	test('Metrics', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<Metrics commercialMetricsEnabled={true} tests={{}} />
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -324,14 +298,7 @@ describe('Island: server-side rendering', () => {
 	test('MostViewedRightWithAd', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<MostViewedRightWithAd
 						format={{
 							theme: Pillar.News,
@@ -343,7 +310,7 @@ describe('Island: server-side rendering', () => {
 						shouldHideReaderRevenue={false}
 					/>
 					,
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -356,30 +323,19 @@ describe('Island: server-side rendering', () => {
 		).not.toThrow();
 	});
 
-	test('ReaderRevenueLinks', () => {
+	test('FooterReaderRevenueLinks', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
-					<ReaderRevenueLinks
-						editionId={'UK'}
+				<WithConfig>
+					<FooterReaderRevenueLinks
 						dataLinkNamePrefix={''}
-						inHeader={false}
-						remoteHeader={false}
-						contributionsServiceUrl={''}
 						urls={{
 							subscribe: '',
 							support: '',
 							contribute: '',
 						}}
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -397,14 +353,7 @@ describe('Island: server-side rendering', () => {
 	test('SetABTests', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<SetABTests
 						isDev={false}
 						pageIsSensitive={false}
@@ -412,7 +361,7 @@ describe('Island: server-side rendering', () => {
 						serverSideTests={{}}
 					/>
 					,
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -436,14 +385,7 @@ describe('Island: server-side rendering', () => {
 	test('SignInGateSelector', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<SignInGateSelector
 						contentType={''}
 						tags={[]}
@@ -452,7 +394,7 @@ describe('Island: server-side rendering', () => {
 						pageId={''}
 						switches={{}}
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -460,14 +402,7 @@ describe('Island: server-side rendering', () => {
 	test('SlotBodyEnd', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<SlotBodyEnd
 						contentType={''}
 						sectionId={''}
@@ -483,7 +418,7 @@ describe('Island: server-side rendering', () => {
 						isLabs={false}
 						articleEndSlot={true}
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -491,14 +426,7 @@ describe('Island: server-side rendering', () => {
 	test('StickyBottomBanner', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<StickyBottomBanner
 						contentType=""
 						tags={[]}
@@ -513,7 +441,7 @@ describe('Island: server-side rendering', () => {
 						remoteBannerSwitch={true}
 						isSensitive={false}
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -521,14 +449,7 @@ describe('Island: server-side rendering', () => {
 	test('SupportTheG', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<SupportTheG
 						editionId={'UK'}
 						dataLinkNamePrefix={''}
@@ -541,7 +462,7 @@ describe('Island: server-side rendering', () => {
 							contribute: '',
 						}}
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});
@@ -549,14 +470,7 @@ describe('Island: server-side rendering', () => {
 	test('ShareButton', () => {
 		expect(() =>
 			renderToString(
-				<ConfigProvider
-					value={{
-						renderingTarget: 'Web',
-						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
-						assetOrigin: '/',
-					}}
-				>
+				<WithConfig>
 					<ShareButton
 						pageId={'123'}
 						webTitle={'The the'}
@@ -567,7 +481,7 @@ describe('Island: server-side rendering', () => {
 						}}
 						context="ArticleMeta"
 					/>
-				</ConfigProvider>,
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});

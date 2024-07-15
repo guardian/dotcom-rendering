@@ -3,14 +3,14 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
 	headlineMedium17,
-	palette as sourcePalette,
 	space,
 	textSans12,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { Fragment } from 'react';
-import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 import type { TreatType } from '../types/front';
+import { FormatBoundary } from './FormatBoundary';
 import { generateSources, getFallbackSource } from './Picture';
 import { SvgCrossword } from './SvgCrossword';
 
@@ -19,19 +19,18 @@ const TextTreat = ({
 	linkTo,
 	index,
 	borderColour,
-	fontColour,
 }: {
 	text: string;
 	linkTo: string;
 	index: number;
 	borderColour?: string;
-	fontColour?: string;
 }) => (
 	<li
 		css={css`
 			margin-top: ${space[3]}px;
-			border-left: 1px solid ${borderColour ?? sourcePalette.neutral[86]};
-			border-top: 1px solid ${borderColour ?? sourcePalette.neutral[86]};
+			border-left: 1px solid
+				${borderColour ?? palette('--article-border')};
+			border-top: 1px solid ${borderColour ?? palette('--article-border')};
 			padding-top: ${space[1]}px;
 			padding-left: ${space[2]}px;
 		`}
@@ -42,7 +41,7 @@ const TextTreat = ({
 			cssOverrides={css`
 				${textSans12}
 				text-decoration: none;
-				color: ${fontColour ?? sourcePalette.neutral[7]};
+				color: inherit;
 			`}
 			href={linkTo}
 			data-link-name={`treat | ${index + 1} | ${text}`}
@@ -56,12 +55,10 @@ const ImageTreat = ({
 	imageUrl,
 	links,
 	altText,
-	backgroundColour,
 }: {
 	imageUrl: string;
 	links: { text: string; title?: string; linkTo: string }[];
 	altText?: string;
-	backgroundColour: string;
 }) => {
 	const sources = generateSources(imageUrl, [
 		{ breakpoint: 320, width: 130 },
@@ -136,13 +133,13 @@ const ImageTreat = ({
 								css={css`
 									${headlineMedium17};
 									font-size: 16px;
-									background-color: ${index % 2 === 0
-										? sourcePalette.neutral[0]
-										: backgroundColour};
+									background-color: ${palette(
+										'--treat-background',
+									)};
 									padding: 0 5px 4px;
 									box-decoration-break: clone;
 									position: relative;
-									color: ${sourcePalette.neutral[100]};
+									color: ${palette('--treat-text')};
 									text-decoration: none;
 									:hover {
 										text-decoration: underline;
@@ -169,11 +166,9 @@ const ImageTreat = ({
 export const Treats = ({
 	treats,
 	borderColour,
-	fontColour,
 }: {
 	treats: TreatType[];
 	borderColour?: string;
-	fontColour?: string;
 }) => {
 	if (treats.length === 0) return null;
 	return (
@@ -203,7 +198,6 @@ export const Treats = ({
 									linkTo={linkTo}
 									index={index}
 									borderColour={borderColour}
-									fontColour={fontColour}
 								/>
 							))}
 						</Fragment>
@@ -215,19 +209,21 @@ export const Treats = ({
 					treat.altText &&
 					treat.theme !== undefined
 				) {
-					const palette = decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: treat.theme,
-					});
 					return (
-						<ImageTreat
+						<FormatBoundary
 							key={treat.imageUrl}
-							imageUrl={treat.imageUrl}
-							links={treat.links}
-							altText={treat.altText}
-							backgroundColour={palette.background.treat}
-						/>
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: treat.theme,
+							}}
+						>
+							<ImageTreat
+								imageUrl={treat.imageUrl}
+								links={treat.links}
+								altText={treat.altText}
+							/>
+						</FormatBoundary>
 					);
 				}
 
@@ -240,7 +236,6 @@ export const Treats = ({
 								linkTo={linkTo}
 								index={index}
 								borderColour={borderColour}
-								fontColour={fontColour}
 							/>
 						))}
 					</>

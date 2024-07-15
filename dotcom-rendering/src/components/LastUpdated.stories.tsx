@@ -9,7 +9,7 @@ const meta: Meta = {
 type Story = StoryObj<typeof LastUpdated>;
 
 export const Default: Story = {
-	args: { lastUpdated: 1613763519000, editionId: 'UK' },
+	args: { lastUpdated: 1613763519000 },
 };
 
 export default meta;

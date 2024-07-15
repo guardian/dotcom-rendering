@@ -14,6 +14,8 @@ import {
 import { Hide } from '@guardian/source/react-components';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { palette as schemedPalette } from '../palette';
+import type { FEArticleType } from '../types/frontend';
 import { AdBlockAsk } from './AdBlockAsk.importable';
 import { Island } from './Island';
 
@@ -72,10 +74,10 @@ const individualLabelCSS = css`
 	${textSans12};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
-	background-color: ${palette.neutral[97]};
+	background-color: ${schemedPalette('--ad-background')};
 	padding: 0 8px;
-	border-top: 1px solid ${palette.neutral[86]};
-	color: ${palette.neutral[46]};
+	border-top: 1px solid ${schemedPalette('--ad-border')};
+	color: ${schemedPalette('--ad-labels-text')};
 	text-align: left;
 	box-sizing: border-box;
 `;
@@ -230,16 +232,21 @@ const merchandisingAdStyles = css`
 
 const inlineAdStyles = css`
 	position: relative;
+	background-color: ${schemedPalette('--ad-background-article-inner')};
 
 	${until.tablet} {
 		display: none;
 	}
 `;
 
+const rightAdStyles = css`
+	background-color: ${schemedPalette('--ad-background-article-inner')};
+`;
+
 const liveblogInlineAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.mpu.height + labelHeight}px;
-	background-color: ${palette.neutral[93]};
+	background-color: ${schemedPalette('--ad-background-article-inner')};
 
 	${until.tablet} {
 		display: none;
@@ -249,7 +256,6 @@ const liveblogInlineAdStyles = css`
 const liveblogInlineMobileAdStyles = css`
 	position: relative;
 	min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
-	background-color: ${palette.neutral[93]};
 
 	${from.tablet} {
 		display: none;
@@ -280,7 +286,7 @@ const frontsBannerAdTopContainerStyles = css`
 		display: flex;
 		justify-content: center;
 		min-height: ${frontsBannerMinHeightTablet}px;
-		background-color: ${palette.neutral[97]};
+		background-color: ${schemedPalette('--ad-background')};
 	}
 	${from.desktop} {
 		min-height: ${frontsBannerMinHeight}px;
@@ -358,6 +364,26 @@ const mostPopContainerStyles = css`
 	}
 `;
 
+const liveBlogTopAdStyles = css`
+	min-height: ${adSizes.mpu.height + labelHeight}px;
+	min-width: ${adSizes.mpu.width}px;
+	width: fit-content;
+	max-width: ${adSizes.mpu.width}px;
+	margin: 0 auto;
+	${from.tablet} {
+		max-width: 700px;
+	}
+	${from.desktop} {
+		max-width: ${adSizes.mpu.width}px;
+	}
+`;
+
+const liveBlogTopContainerStyles = css`
+	padding: 12px 0;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+`;
 /**
  * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
  * These styles come mostly from RichLink in DCR.
@@ -437,6 +463,17 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
+const mobileStickyAdStylesFullWidth = css`
+	width: 100%;
+	text-align: center;
+	background-color: ${palette.neutral[97]};
+
+	.ad-slot[data-label-show='true']::before {
+		padding-left: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
+		padding-right: calc((100% - ${adSizes.mobilesticky.width}px) / 2);
+	}
+`;
+
 export const adContainerStyles = [
 	adContainerCollapseStyles,
 	labelStyles,
@@ -465,6 +502,7 @@ export const AdSlot = ({
 						>
 							<div
 								id="dfp-ad--right"
+								css={rightAdStyles}
 								className={[
 									'js-ad-slot',
 									'ad-slot',
@@ -521,6 +559,7 @@ export const AdSlot = ({
 										'js-sticky-mpu',
 									].join(' ')}
 									css={[
+										rightAdStyles,
 										css`
 											position: sticky;
 											/* Possibly account for the sticky Labs header and 6px of padding */
@@ -788,6 +827,32 @@ export const AdSlot = ({
 				</div>
 			);
 		}
+		case 'liveblog-top': {
+			return (
+				<div
+					className="ad-slot-container"
+					css={[adContainerStyles, liveBlogTopContainerStyles]}
+				>
+					<div
+						id="dfp-ad--liveblog-top"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--liveblog-top',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+							liveBlogTopAdStyles,
+						]}
+						data-link-name="ad slot liveblog-top"
+						data-name="liveblog-top"
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
@@ -862,8 +927,20 @@ export const AdSlot = ({
 	}
 };
 
-export const MobileStickyContainer = () => {
+type MobileStickyContainerProps = Pick<FEArticleType, 'contentType' | 'pageId'>;
+
+export const MobileStickyContainer = ({
+	contentType,
+	pageId,
+}: MobileStickyContainerProps) => {
 	return (
-		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
+		<div
+			className="mobilesticky-container"
+			css={[
+				mobileStickyAdStyles,
+				(contentType === 'Article' || pageId.startsWith('football/')) &&
+					mobileStickyAdStylesFullWidth,
+			]}
+		/>
 	);
 };

@@ -15,7 +15,6 @@ export type Palette = {
 		dateLine: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
-		youtubeOverlayKicker: Colour;
 	};
 	background: {
 		analysisContrast: Colour;
@@ -31,13 +30,11 @@ export type Palette = {
 		treat: Colour;
 		designTag: Colour;
 		lightboxDivider: Colour;
-		messageForm: Colour;
 	};
 	fill: {
 		guardianLogo: Colour;
 	};
 	border: {
-		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
 		navPillar: Colour;

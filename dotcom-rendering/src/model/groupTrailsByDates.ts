@@ -1,3 +1,5 @@
+import { isUndefined } from '@guardian/libs';
+import { type EditionId, getEditionFromId } from '../lib/edition';
 import type { DCRFrontCard } from '../types/front';
 import type { GroupedTrails } from '../types/tagPage';
 
@@ -16,33 +18,43 @@ interface TrailAndDate {
 	date: Date;
 }
 
-/**
- * Calculates the average number of trails per day across a set of days
- */
-const getMeanDayFrequency = (
-	days: Array<{ day: number; trails: TrailAndDate[] }>,
-) => {
-	const totalTrails = days
-		.flatMap(({ trails }) => trails.length)
-		.reduce((acc, curr) => acc + curr, 0);
-	return totalTrails / days.length;
+const getEditionalisedDate = (date: Date, editionId: EditionId) => {
+	const { timeZone } = getEditionFromId(editionId);
+
+	const [day, month, year] = date
+		.toLocaleDateString(
+			// we use British locale in order to get “5 May 1821”
+			'en-GB',
+			{
+				day: 'numeric',
+				month: 'long',
+				year: 'numeric',
+				timeZone,
+			},
+		)
+		.split(' ');
+	if (isUndefined(day) || isUndefined(month) || isUndefined(year)) {
+		return undefined;
+	}
+
+	return { day, month, year };
 };
 
 /**
  * Takes a set of trails & returns them grouped by year of publication
  */
-const groupByYear = (trails: TrailAndDate[]) => {
-	const trailsByYear: Array<{ year: number; trails: TrailAndDate[] }> = [];
+const groupByYear = (trails: TrailAndDate[], editionId: EditionId) => {
+	const trailsByYear: Array<{ year: string; trails: TrailAndDate[] }> = [];
 
 	for (const { trail, date } of trails) {
 		const existingYear = trailsByYear.find(
-			({ year }) => year === date.getUTCFullYear(),
+			({ year }) => year === getEditionalisedDate(date, editionId)?.year,
 		);
 		if (existingYear) {
 			existingYear.trails.push({ trail, date });
 		} else {
 			trailsByYear.push({
-				year: date.getUTCFullYear(),
+				year: getEditionalisedDate(date, editionId)?.year ?? '1821',
 				trails: [{ trail, date }],
 			});
 		}
@@ -54,23 +66,28 @@ const groupByYear = (trails: TrailAndDate[]) => {
 /**
  * Takes a set of trails for a given year and returns them grouped by month of publication
  */
-const groupTrailsByMonth = (trails: TrailAndDate[], year: number) => {
+const groupTrailsByMonth = (
+	trails: TrailAndDate[],
+	year: string,
+	editionId: EditionId,
+) => {
 	const trailsByMonth: Array<{
-		year: number;
-		month: number;
+		year: string;
+		month: string;
 		trails: TrailAndDate[];
 	}> = [];
 
 	for (const { trail, date } of trails) {
 		const existingMonth = trailsByMonth.find(
-			({ month }) => month === date.getUTCMonth(),
+			({ month }) =>
+				month === getEditionalisedDate(date, editionId)?.month,
 		);
 		if (existingMonth) {
 			existingMonth.trails.push({ trail, date });
 		} else {
 			trailsByMonth.push({
 				year,
-				month: date.getUTCMonth(),
+				month: getEditionalisedDate(date, editionId)?.month ?? '…',
 				trails: [{ trail, date }],
 			});
 		}
@@ -84,19 +101,20 @@ const groupTrailsByMonth = (trails: TrailAndDate[], year: number) => {
  */
 const groupTrailsByDay = (
 	trails: TrailAndDate[],
-	year: number,
-	month: number,
+	year: string,
+	month: string,
+	editionId: EditionId,
 ) => {
 	const trailsByDay: Array<{
-		year: number;
-		month: number;
-		day: number;
+		year: string;
+		month: string;
+		day: string;
 		trails: TrailAndDate[];
 	}> = [];
 
 	for (const { trail, date } of trails) {
 		const existingMonth = trailsByDay.find(
-			({ day }) => day === date.getUTCDate(),
+			({ day }) => day === getEditionalisedDate(date, editionId)?.day,
 		);
 		if (existingMonth) {
 			existingMonth.trails.push({ trail, date });
@@ -104,7 +122,7 @@ const groupTrailsByDay = (
 			trailsByDay.push({
 				year,
 				month,
-				day: date.getUTCDate(),
+				day: getEditionalisedDate(date, editionId)?.day ?? '42',
 				trails: [{ trail, date }],
 			});
 		}
@@ -132,36 +150,52 @@ const groupTrailsByDay = (
  */
 export const groupTrailsByDates = (
 	trails: DCRFrontCard[],
+	editionId: EditionId,
 	forceDay = false,
 ): GroupedTrails[] => {
 	// Creates a helper type with easy access to the date of publication as a Date class
-	const trailsAndDates = trails.map((trail) => ({
-		trail,
-		date: trail.webPublicationDate
-			? new Date(trail.webPublicationDate)
-			: new Date(),
-	}));
+	const trailsAndDates = trails.flatMap((trail) =>
+		trail.webPublicationDate
+			? [
+					{
+						trail,
+						date: new Date(trail.webPublicationDate),
+					},
+			  ]
+			: [],
+	);
 
-	const trailsByYear = groupByYear(trailsAndDates);
+	const trailsByYear = groupByYear(trailsAndDates, editionId);
 
 	// We will store all our grouped trails here as we work our way through each
 	// year, month & potentially day.
 	const groupedTrails: GroupedTrails[] = [];
 
 	for (const { year, trails: trailsForYear } of trailsByYear) {
-		const trailsByMonth = groupTrailsByMonth(trailsForYear, year);
+		const trailsByMonth = groupTrailsByMonth(
+			trailsForYear,
+			year,
+			editionId,
+		);
 
 		for (const { month, trails: trailsForMonth } of trailsByMonth) {
-			const trailsByDay = groupTrailsByDay(trailsForMonth, year, month);
-
-			// Once we have trails grouped by year, month & day, we calculate the day frequency
-			// e.g the average number of trails per day for this month.
-			const meanDayFrequency = getMeanDayFrequency(
-				trailsByDay.map(({ day, trails: dayTrails }) => ({
-					day,
-					trails: dayTrails,
-				})),
+			const trailsByDay = groupTrailsByDay(
+				trailsForMonth,
+				year,
+				month,
+				editionId,
 			);
+
+			/**
+			 * Calculates the average number of trails per day across a set of days.
+			 * For example, if 3 days have 1, 2, and 5 trails respectively,
+			 * the mean frequency would be 4 trails per day.
+			 */
+			const meanDayFrequency =
+				trailsByDay
+					.map(({ trails: { length } }) => length)
+					.reduce((total, day) => total + day, 0) /
+				trailsByDay.length;
 
 			// This is our 'pop-out' option, if forceDay is true of the mean day frequency exceeds
 			// the minimum, we will create a 'GroupedTrails' object for each day we have trails
@@ -169,12 +203,8 @@ export const groupTrailsByDates = (
 			if (forceDay || meanDayFrequency > MinimumPerDayPopOutFrequency) {
 				groupedTrails.push(
 					...trailsByDay.map((trailByDay) => ({
-						day: trailByDay.day,
-						month,
-						year,
-						trails: trailByDay.trails.map(
-							(trailAndDate) => trailAndDate.trail,
-						),
+						...trailByDay,
+						trails: trailByDay.trails.map(({ trail }) => trail),
 					})),
 				);
 			} else {
@@ -186,9 +216,7 @@ export const groupTrailsByDates = (
 					day: undefined,
 					month,
 					year,
-					trails: trailsForMonth.map(
-						(trailAndDate) => trailAndDate.trail,
-					),
+					trails: trailsForMonth.map(({ trail }) => trail),
 				});
 			}
 		}
@@ -196,18 +224,20 @@ export const groupTrailsByDates = (
 
 	// Sort in descending order (e.g most recent date first)
 	// In cases where card order is unexpected (e.g not date ordered), it is possible this array will be out of order.
-	const sortedGroupedTrails = [...groupedTrails].sort((a, b) => {
-		// It is likely more performant to check year, then month, then day, than creating & destroying
-		// many date objects in order to sort. Though there are generally not enough cards per page that we'd
-		// ever see an impact.
-		if (a.year !== b.year) {
-			return b.year - a.year;
-		}
-		if (a.month !== b.month) {
-			return b.month - a.month;
-		}
-		return (b.day ?? 0) - (a.day ?? 0);
-	});
+	const sortedGroupedTrails = groupedTrails
+		.map((groupedTrail) => {
+			/** Milliseconds since midnight, 1 January 1970, UTC */
+			const epoch = new Date(
+				[
+					groupedTrail.day ?? 1,
+					groupedTrail.month,
+					groupedTrail.year,
+				].join(' '),
+			).getTime();
+			return { groupedTrail, epoch };
+		})
+		.sort((a, b) => b.epoch - a.epoch)
+		.map(({ groupedTrail }) => groupedTrail);
 
 	return sortedGroupedTrails;
 };

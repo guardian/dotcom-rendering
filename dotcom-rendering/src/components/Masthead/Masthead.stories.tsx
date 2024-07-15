@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
+import { nav } from '../Nav/Nav.mock';
 import { Masthead } from './Masthead';
-import { nav } from './Nav/Nav.mock';
 
 const meta = {
 	component: Masthead,
@@ -14,10 +14,8 @@ const meta = {
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		idApiUrl: 'https://idapi.theguardian.com',
 		contributionsServiceUrl: 'https://contributions.guardianapis.com',
-		subscribeUrl: 'https://subscribe.theguardian.com',
 		showSubNav: false,
 		isImmersive: false,
-		displayRoundel: false,
 		hasPageSkin: false,
 		hasPageSkinContentSelfConstrain: false,
 	},
