@@ -269,7 +269,7 @@ export const StickyBottomBanner = ({
 		const readerRevenue = buildReaderRevenueBannerConfig(
 			remoteBannerSwitch,
 		)({
-			isSignedIn: isSignedIn ?? false,
+			isSignedIn,
 			countryCode,
 			isPreview,
 			asyncArticleCounts,
