@@ -74,8 +74,9 @@ const pillarUnderlineHeight = space[1] + 1;
 
 const pillarUnderline = css`
 	:after {
+		height: ${pillarUnderlineHeight}px;
 		/* This CSS var is dynamically set via the style attribute*/
-		border-bottom: ${pillarUnderlineHeight}px solid var(--pillar-underline);
+		background-color: var(--pillar-underline);
 		content: '';
 		display: block;
 		position: absolute;
