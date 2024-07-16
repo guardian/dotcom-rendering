@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
@@ -5,6 +6,7 @@ import type {
 import { adSizes, type SizeMapping } from '@guardian/commercial';
 import type { CountryCode } from '@guardian/libs';
 import { getCookie, isString, isUndefined } from '@guardian/libs';
+import { palette } from '@guardian/source/foundations';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
@@ -46,6 +48,10 @@ type Props = {
 	isLabs: boolean;
 	articleEndSlot: boolean;
 };
+
+const slotStyles = css`
+	color: ${palette.neutral[7]};
+`;
 
 const buildReaderRevenueEpicConfig = (
 	canShowData: RRCanShowData,
@@ -256,13 +262,13 @@ export const SlotBodyEnd = ({
 
 	if (SelectedEpic !== null && SelectedEpic !== undefined) {
 		return (
-			<div id="slot-body-end">
+			<div id="slot-body-end" css={slotStyles}>
 				<SelectedEpic />
 			</div>
 		);
 	} else if (SelectedEpic === null && showArticleEndSlot) {
 		return (
-			<div id="slot-body-end">
+			<div id="slot-body-end" css={slotStyles}>
 				<AdSlot data-print-layout="hide" position="article-end" />
 			</div>
 		);
