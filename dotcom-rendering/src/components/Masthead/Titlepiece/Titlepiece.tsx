@@ -140,6 +140,9 @@ const subNavStyles = css`
 	${from.mobileLandscape} {
 		width: calc(100% + ${pageMargin});
 	}
+	${from.tablet} {
+		width: 100%;
+	}
 
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
@@ -152,36 +155,13 @@ const subNavStyles = css`
 	}
 `;
 
-/** Styles the scrollbar of the subnav, providing sensible defaults
- * for browsers that don't support scrollbar-color styling
- * @see https://developer.chrome.com/docs/css-ui/scrollbar-styling
- */
+/** Sets horizontal scrolling behaviour and removes the scrollbar */
 const scrollableSubNavStyles = css`
-	--scrollbar-color-thumb: ${themePalette('--masthead-nav-lines')};
-	--scrollbar-color-track: ${themePalette('--masthead-nav-background')};
-	--scrollbar-width: thin;
-	--scrollbar-width-legacy: ${space[2]}px;
-
 	overflow-x: scroll;
 
-	/* For browsers that support scrollbar-* properties */
-	@supports (scrollbar-color: auto) {
-		scrollbar-color: var(--scrollbar-color-thumb)
-			var(--scrollbar-color-track);
-		scrollbar-width: var(--scrollbar-width);
-	}
-
-	/* Otherwise, use ::-webkit-scrollbar-* pseudo-elements */
 	@supports selector(::-webkit-scrollbar) {
 		&::-webkit-scrollbar {
-			max-height: var(--scrollbar-width-legacy);
-			max-width: var(--scrollbar-width-legacy);
-		}
-		&::-webkit-scrollbar-thumb {
-			background: var(--scrollbar-color-thumb);
-		}
-		&::-webkit-scrollbar-track {
-			background: var(--scrollbar-color-track);
+			display: none;
 		}
 	}
 `;
@@ -207,6 +187,10 @@ const dividerOverridesForSubNav = css`
 
 		${from.mobileLandscape} {
 			right: -${pageMargin};
+		}
+
+		${from.tablet} {
+			right: 0;
 		}
 	}
 `;
