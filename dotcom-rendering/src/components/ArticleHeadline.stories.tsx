@@ -2,15 +2,13 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
 import type { Meta, StoryObj } from '@storybook/react';
 import { centreColumnDecorator } from '../../.storybook/decorators/gridDecorators';
 import { allModes } from '../../.storybook/modes';
-import { getAllThemes } from '../lib/format';
-import { formatToString } from '../lib/format';
+import { formatToString, getAllThemes } from '../lib/format';
 import { palette } from '../palette';
 import { ArticleHeadline } from './ArticleHeadline';
 import { Standfirst } from './Standfirst';
