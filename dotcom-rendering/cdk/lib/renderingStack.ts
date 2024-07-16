@@ -29,7 +29,6 @@ export interface RenderingCDKStackProps extends Omit<GuStackProps, 'stack'> {
 			step?: {
 				cpu?: {
 					scalingStepsOut: ScalingInterval[];
-					scalingStepsIn: ScalingInterval[];
 				};
 				latency?: {
 					scalingStepsOut: ScalingInterval[];
@@ -96,15 +95,6 @@ const addCPUStepScalingPolicy = (
 		scaleOutPolicy.upperAlarm?.addAlarmAction(
 			new SnsAction(scalingAlertsTopic),
 		);
-
-		/** Scale in policy */
-		new StepScalingPolicy(context, 'CPUScaleDownPolicy', {
-			autoScalingGroup: ec2App.autoScalingGroup,
-			metric: cpuMetric,
-			scalingSteps: props.scaling.policies.step.cpu.scalingStepsIn,
-			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
-			evaluationPeriods: 10,
-		});
 	}
 };
 

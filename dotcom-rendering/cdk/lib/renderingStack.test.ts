@@ -28,12 +28,6 @@ describe('The RenderingCDKStack', () => {
 								// When p90 CPU is higher than 90% we scale up by 80%
 								{ lower: 90, change: 80 },
 							],
-							scalingStepsIn: [
-								// No scaling down effect when p90 CPU is higher than 70%
-								{ lower: 70, change: 0 },
-								// When p90 CPU is lower than 70% we scale down by 1
-								{ upper: 70, lower: 0, change: -1 },
-							],
 						},
 						latency: {
 							scalingStepsOut: [

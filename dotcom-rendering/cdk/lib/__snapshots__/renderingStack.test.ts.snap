@@ -257,50 +257,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
-    "CPUScaleDownPolicyLowerAlarm589DBBF6": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "CPUScaleDownPolicyLowerPolicy7BBC9BC0",
-          },
-        ],
-        "AlarmDescription": "Lower threshold scaling alarm",
-        "ComparisonOperator": "LessThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "AutoScalingGroupName",
-            "Value": {
-              "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-            },
-          },
-        ],
-        "EvaluationPeriods": 10,
-        "ExtendedStatistic": "p90",
-        "MetricName": "CPUUtilization",
-        "Namespace": "AWS/EC2",
-        "Period": 30,
-        "Threshold": 70,
-        "Unit": "Percent",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "CPUScaleDownPolicyLowerPolicy7BBC9BC0": {
-      "Properties": {
-        "AdjustmentType": "ChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalUpperBound": 0,
-            "ScalingAdjustment": -1,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
     "CPUScaleUpPolicyUpperAlarm7E15DD91": {
       "Properties": {
         "AlarmActions": [
