@@ -56,7 +56,7 @@ export const renderHtml = ({
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable:
-			article.config.abTests.darkModeWebVariant === 'variant',
+			article.config.abTests.darkModeWebVariant === 'variant' || true,
 		updateLogoAdPartnerSwitch:
 			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
@@ -264,7 +264,7 @@ export const renderBlocks = ({
 	// Only currently supported for Web
 	const config: Config = {
 		renderingTarget: 'Web',
-		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
+		darkModeAvailable: abTests.darkModeWebVariant === 'variant' || true,
 		updateLogoAdPartnerSwitch: !!switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 		editionId,

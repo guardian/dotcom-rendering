@@ -41,7 +41,12 @@ export const AllEditorialNewslettersPage = ({
 
 	return (
 		<StrictMode>
-			<Global styles={rootStyles(format, darkModeAvailable)} />
+			<Global
+				styles={rootStyles(
+					format, // @TODO remove (darkness, my old friend)
+					darkModeAvailable ? true : true,
+				)}
+			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>
