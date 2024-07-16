@@ -13,7 +13,7 @@ const sharedProps = {
 
 const cpuScalingSteps = {
 	scalingStepsOut: [
-		// No scaling up effect when p90 CPU is lower than 70%
+		// When p90 CPU is lower than 70% no scaling up
 		{ lower: 0, upper: 70, change: 0 },
 		// When p90 CPU is higher than 70% we scale up by 50%
 		{ lower: 70, change: 50 },
@@ -45,32 +45,8 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-CODE', {
 	guApp: 'article-rendering',
 	stage: 'CODE',
 	domainName: 'article-rendering.code.dev-guardianapis.com',
-	scaling: {
-		minimumInstances: 1,
-		maximumInstances: 4,
-		policies: {
-			step: {
-				cpu: cpuScalingSteps,
-				latency: {
-					scalingStepsOut: [
-						// No scaling up effect when latency is lower than 0.2s
-						{ lower: 0, upper: 0.2, change: 0 },
-						// When latency is higher than 0.2s we scale up by 50%
-						{ lower: 0.2, change: 50 },
-						// When latency is higher than 0.3s we scale up by 80%
-						{ lower: 0.3, change: 80 },
-					],
-					scalingStepsIn: [
-						// No scaling down effect when latency is higher than 0.12s
-						{ lower: 0.12, change: 0 },
-						// When latency is lower than 0.12s we scale down by 1
-						{ upper: 0.12, lower: 0, change: -1 },
-					],
-				},
-			},
-		},
-	},
-	instanceType: InstanceType.of(InstanceClass.C7G, InstanceSize.MEDIUM),
+	scaling: { minimumInstances: 1, maximumInstances: 3 },
+	instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.SMALL),
 });
 new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 	guApp: 'article-rendering',
@@ -84,7 +60,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 				cpu: cpuScalingSteps,
 				latency: {
 					scalingStepsOut: [
-						// No scaling up effect when latency is lower than 0.2s
+						// When latency is lower than 0.2s no scaling up
 						{ lower: 0, upper: 0.2, change: 0 },
 						// When latency is higher than 0.2s we scale up by 50%
 						{ lower: 0.2, change: 50 },
@@ -92,7 +68,7 @@ new RenderingCDKStack(cdkApp, 'ArticleRendering-PROD', {
 						{ lower: 0.3, change: 80 },
 					],
 					scalingStepsIn: [
-						// No scaling down effect when latency is higher than 0.12s
+						// When latency is higher than 0.12s no scaling down
 						{ lower: 0.12, change: 0 },
 						// When latency is lower than 0.12s we scale down by 1
 						{ upper: 0.12, lower: 0, change: -1 },
@@ -124,7 +100,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 				cpu: cpuScalingSteps,
 				latency: {
 					scalingStepsOut: [
-						// No scaling up effect when latency is lower than 0.4s
+						// When latency is lower than 0.4s no scaling up
 						{ lower: 0, upper: 0.4, change: 0 },
 						// When latency is higher than 0.4s we scale up by 50%
 						{ lower: 0.4, change: 50 },
@@ -132,7 +108,7 @@ new RenderingCDKStack(cdkApp, 'FaciaRendering-PROD', {
 						{ lower: 0.5, change: 80 },
 					],
 					scalingStepsIn: [
-						// No scaling down effect when latency is higher than 0.35s
+						// When latency is higher than 0.35s no scaling down
 						{ lower: 0.35, change: 0 },
 						// When latency is lower than 0.35s we scale down by 1
 						{ upper: 0.35, lower: 0, change: -1 },
@@ -164,7 +140,7 @@ new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
 				cpu: cpuScalingSteps,
 				latency: {
 					scalingStepsOut: [
-						// No scaling up effect when latency is lower than 0.4s
+						// When latency is lower than 0.4s no scaling up
 						{ lower: 0, upper: 0.4, change: 0 },
 						// When latency is higher than 0.4s we scale up by 50%
 						{ lower: 0.4, change: 50 },
@@ -172,7 +148,7 @@ new RenderingCDKStack(cdkApp, 'TagPageRendering-PROD', {
 						{ lower: 0.5, change: 80 },
 					],
 					scalingStepsIn: [
-						// No scaling down effect when latency is higher than 0.35s
+						// When latency is higher than 0.35s no scaling down
 						{ lower: 0.35, change: 0 },
 						// When latency is lower than 0.35s we scale down by 1
 						{ upper: 0.35, lower: 0, change: -1 },
@@ -204,15 +180,15 @@ new RenderingCDKStack(cdkApp, 'InteractiveRendering-PROD', {
 				cpu: cpuScalingSteps,
 				latency: {
 					scalingStepsOut: [
-						// No scaling up effect when latency is lower than 0.2s
+						// When latency is lower than 0.2s no scaling up
 						{ lower: 0, upper: 0.2, change: 0 },
-						// When latency is higher than 0.3s we scale up by 50%
+						// When latency is higher than 0.2s we scale up by 50%
 						{ lower: 0.2, change: 50 },
 						// When latency is higher than 0.3s we scale up by 80%
 						{ lower: 0.3, change: 80 },
 					],
 					scalingStepsIn: [
-						// No scaling down effect when latency is higher than 0.15s
+						// When latency is higher than 0.15s no scaling down
 						{ lower: 0.15, change: 0 },
 						// When latency is lower than 0.15s we scale down by 1
 						{ upper: 0.15, lower: 0, change: -1 },
