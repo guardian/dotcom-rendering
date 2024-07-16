@@ -345,7 +345,7 @@ importers:
         version: 19.12.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 6.0.0
-        version: 6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@3.5.1)
+        version: 6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.1)
       '@guardian/eslint-config':
         specifier: 7.0.1
         version: 7.0.1(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2)
@@ -788,8 +788,8 @@ importers:
         specifier: 0.28.1
         version: 0.28.1
       web-vitals:
-        specifier: 3.5.1
-        version: 3.5.1
+        specifier: 4.2.1
+        version: 4.2.1
       webpack:
         specifier: 5.93.0
         version: 5.93.0(@swc/core@1.6.13)(esbuild@0.18.20)(webpack-cli@5.1.4)
@@ -4156,7 +4156,7 @@ packages:
     dependencies:
       '@changesets/cli': 2.27.1
       '@guardian/ab-core': 8.0.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/core-web-vitals': 6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@3.5.1)
+      '@guardian/core-web-vitals': 6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.1)
       '@guardian/identity-auth': 2.1.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs': 17.0.1(tslib@2.6.2)(typescript@5.5.3)
@@ -4241,7 +4241,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/core-web-vitals@6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@3.5.1):
+  /@guardian/core-web-vitals@6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.1):
     resolution: {integrity: sha512-kwH1VsQQMn+sPZis1zYYcCYzedNpen6tk3CtVjJlmtHV4nK6i6FnMfhHgbtqECDsqrHdTzRbwN2Lodh1f8D5lA==}
     peerDependencies:
       '@guardian/libs': ^16.0.0
@@ -4255,7 +4255,7 @@ packages:
       '@guardian/libs': 17.0.1(tslib@2.6.2)(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
-      web-vitals: 3.5.1
+      web-vitals: 4.2.1
     dev: false
 
   /@guardian/eslint-config-typescript@9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.5.3):
@@ -18307,6 +18307,10 @@ packages:
 
   /web-vitals@3.5.1:
     resolution: {integrity: sha512-xQ9lvIpfLxUj0eSmT79ZjRoU5wIRfIr7pNukL7ZE4EcWZSmfZQqOlhuAGfkVa3EFmzPHZhWhXfm2i5ys+THVPg==}
+    dev: false
+
+  /web-vitals@4.2.1:
+    resolution: {integrity: sha512-U6bAxeudnhDqcXNl50JC4hLlqox9DZnngxfISZm3DMZnonW35xtJOVUc091L+DOY+6hVZVpKXoiCP0RiT6339Q==}
     dev: false
 
   /webidl-conversions@4.0.2:
