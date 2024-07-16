@@ -500,8 +500,8 @@ importers:
         specifier: 18.3.0
         version: 18.3.0
       '@types/react-google-recaptcha':
-        specifier: 2.1.5
-        version: 2.1.5
+        specifier: 2.1.9
+        version: 2.1.9
       '@types/react-test-renderer':
         specifier: 18.3.0
         version: 18.3.0
@@ -7612,8 +7612,8 @@ packages:
       '@types/react': 18.3.1
     dev: false
 
-  /@types/react-google-recaptcha@2.1.5:
-    resolution: {integrity: sha512-iWTjmVttlNgp0teyh7eBXqNOQzVq2RWNiFROWjraOptRnb1OcHJehQnji0sjqIRAk9K0z8stjyhU+OLpPb0N6w==}
+  /@types/react-google-recaptcha@2.1.9:
+    resolution: {integrity: sha512-nT31LrBDuoSZJN4QuwtQSF3O89FVHC4jLhM+NtKEmVF5R1e8OY0Jo4//x2Yapn2aNHguwgX5doAq8Zo+Ehd0ug==}
     dependencies:
       '@types/react': 18.3.1
     dev: false
