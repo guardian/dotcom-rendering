@@ -15,7 +15,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import { useAB } from '../lib/useAB';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { usePageViewId } from '../lib/usePageViewId';
@@ -177,13 +177,13 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 	// should we show ourselves?
 	const [showSupportMessagingForUser, setShowSupportMessaging] =
 		useState<boolean>(false);
-	const authStatus = useAuthStatus();
+	const isSignedIn = useIsSignedIn();
+
 	useEffect(() => {
-		const isSignedIn =
-			authStatus.kind === 'SignedInWithOkta' ||
-			authStatus.kind === 'SignedInWithCookies';
-		setShowSupportMessaging(!shouldHideSupportMessaging(isSignedIn));
-	}, [authStatus]);
+		if (isSignedIn !== 'Pending') {
+			setShowSupportMessaging(!shouldHideSupportMessaging(isSignedIn));
+		}
+	}, [isSignedIn]);
 
 	const ABTestAPI = useAB()?.api;
 

@@ -8,7 +8,6 @@ import { getCookie, isString, isUndefined } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
-import type { AuthStatus } from '../lib/identity';
 import type {
 	CandidateConfig,
 	MaybeFC,
@@ -16,10 +15,9 @@ import type {
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
 import { useAB } from '../lib/useAB';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
-import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { AdSlot } from './AdSlot.web';
 import { useConfig } from './ConfigContext';
@@ -96,19 +94,6 @@ const buildBrazeEpicConfig = (
 	};
 };
 
-function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
-	switch (authStatus.kind) {
-		case 'Pending':
-			return undefined;
-		case 'SignedInWithCookies':
-		case 'SignedInWithOkta':
-			return true;
-		case 'SignedOutWithCookies':
-		case 'SignedOutWithOkta':
-			return false;
-	}
-}
-
 const useBrowserId = () => {
 	const [browserId, setBrowserId] = useState<string>();
 
@@ -141,7 +126,7 @@ export const SlotBodyEnd = ({
 	const { renderingTarget } = useConfig();
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 	const countryCode = useCountryCode('slot-body-end');
-	const isSignedIn = getIsSignedIn(useAuthStatus());
+	const isSignedIn = useIsSignedIn();
 	const browserId = useBrowserId();
 	const [SelectedEpic, setSelectedEpic] = useState<
 		React.ElementType | null | undefined
@@ -172,8 +157,17 @@ export const SlotBodyEnd = ({
 		);
 	}, [contentType, tags, pageId]);
 
-	useOnce(() => {
-		if (isUndefined(countryCode)) return;
+	useEffect(() => {
+		// Wait for the following dependencies before checking for Braze + RRCP messages
+		if (
+			isUndefined(countryCode) ||
+			isUndefined(brazeMessages) ||
+			isUndefined(asyncArticleCount) ||
+			isUndefined(browserId) ||
+			isSignedIn === 'Pending'
+		) {
+			return;
+		}
 
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
 			isSignedIn,
@@ -187,16 +181,14 @@ export const SlotBodyEnd = ({
 			contributionsServiceUrl,
 			idApiUrl,
 			stage,
-			asyncArticleCount: asyncArticleCount as Promise<
-				WeeklyArticleHistory | undefined
-			>,
+			asyncArticleCount,
 			browserId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionId,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
-			brazeMessages as BrazeMessagesInterface,
+			brazeMessages,
 			countryCode,
 			idApiUrl,
 			contentType,
@@ -213,7 +205,23 @@ export const SlotBodyEnd = ({
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
-	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount, browserId]);
+	}, [
+		isSignedIn,
+		countryCode,
+		brazeMessages,
+		asyncArticleCount,
+		browserId,
+		contentType,
+		contributionsServiceUrl,
+		idApiUrl,
+		isMinuteArticle,
+		isPaidContent,
+		renderingTarget,
+		sectionId,
+		shouldHideReaderRevenue,
+		stage,
+		tags,
+	]);
 
 	useEffect(() => {
 		if (SelectedEpic === null && showArticleEndSlot) {
