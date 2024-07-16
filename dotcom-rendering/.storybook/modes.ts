@@ -25,6 +25,10 @@ export const allModes = {
 		globalColourScheme: 'vertical',
 		viewport: breakpoints.mobileMedium,
 	},
+	'vertical tablet': {
+		globalColourScheme: 'vertical',
+		viewport: breakpoints.tablet,
+	},
 	'light desktop': {
 		globalColourScheme: 'light',
 		viewport: breakpoints.desktop,
