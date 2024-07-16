@@ -53,12 +53,6 @@ const topBarStyles = css`
 	}
 `;
 
-const topBarStylesWithoutPageSkin = css`
-	${from.wide} {
-		padding-right: 96px;
-	}
-`;
-
 const topBarLinkContainerStyles = css`
 	height: 100%;
 	display: flex;
@@ -148,13 +142,7 @@ export const TopBar = ({
 	});
 
 	return (
-		<div
-			css={[
-				topBarStyles,
-				!hasPageSkin && topBarStylesWithoutPageSkin,
-				hasPageSkin ? pageSkinContainer : center,
-			]}
-		>
+		<div css={[topBarStyles, hasPageSkin ? pageSkinContainer : center]}>
 			<TopBarLinkContainer showVerticalDivider={false} alignLeft={true}>
 				<TopBarSupport
 					contributionsServiceUrl={contributionsServiceUrl}
