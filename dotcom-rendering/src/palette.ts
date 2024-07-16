@@ -6596,6 +6596,10 @@ const paletteColours = {
 		light: straightLinesLight,
 		dark: straightLinesDark,
 	},
+	'--stuck-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--sub-meta-background': {
 		light: subMetaBackgroundLight,
 		dark: subMetaBackgroundDark,
