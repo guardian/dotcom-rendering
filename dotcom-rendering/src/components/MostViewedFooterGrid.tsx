@@ -240,7 +240,6 @@ export const MostViewedFooterGrid = ({
 								format={trail.format}
 								headlineText={trail.headline}
 								ageWarning={trail.ageWarning}
-								hasPageSkin={hasPageSkin}
 							/>
 						))}
 					</ol>

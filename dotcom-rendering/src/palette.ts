@@ -6352,6 +6352,10 @@ const paletteColours = {
 		light: matchActiveTabBorderLight,
 		dark: matchActiveTabBorderDark,
 	},
+	'--most-viewed-description': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
 	'--most-viewed-footer-hover': {
 		light: mostViewedFooterHoverLight,
 		dark: mostViewedFooterHoverDark,

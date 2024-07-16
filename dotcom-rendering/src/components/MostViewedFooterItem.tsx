@@ -2,49 +2,31 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { headlineMedium17, until } from '@guardian/source/foundations';
+import { headlineMedium17 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber';
 import { FormatBoundary } from './FormatBoundary';
 import { LinkHeadline } from './LinkHeadline';
 
-const gridItem = (position: number, hasPageSkin: boolean) => {
-	const borderTop = hasPageSkin
-		? css`
-				border-top: 1px solid ${palette('--article-border')};
-		  `
-		: css`
-				/* Below leftCol always set top border */
-				${until.leftCol} {
-					border-top: 1px solid ${palette('--article-border')};
-				}
-		  `;
-	return css`
-		position: relative;
+const gridItem = css`
+	position: relative;
 
-		${borderTop}
+	border-top: 1px solid ${palette('--article-border')};
 
-		/* Above leftCol, don't apply a top border on the 1st and 6th
-		items to prevent double borders */
-		border-top: ${position !== 1 &&
-		position !== 6 &&
-		`1px solid ${palette('--article-border')};`};
+	/* The left border is set on the container */
+	border-right: 1px solid ${palette('--article-border')};
+	min-height: 52px;
 
-		/* The left border is set on the container */
-		border-right: 1px solid ${palette('--article-border')};
-		min-height: 52px;
+	&:hover {
+		cursor: pointer;
+	}
 
-		&:hover {
-			cursor: pointer;
-		}
-
-		&:hover,
-		:focus {
-			background: ${palette('--most-viewed-footer-hover')};
-		}
-	`;
-};
+	&:hover,
+	:focus {
+		background: ${palette('--most-viewed-footer-hover')};
+	}
+`;
 
 const bigNumber = css`
 	position: absolute;
@@ -84,7 +66,6 @@ type Props = {
 	headlineText: string;
 	ageWarning?: string;
 	cssOverrides?: SerializedStyles | SerializedStyles[];
-	hasPageSkin?: boolean;
 };
 
 export const MostViewedFooterItem = ({
@@ -94,12 +75,8 @@ export const MostViewedFooterItem = ({
 	headlineText,
 	ageWarning,
 	cssOverrides,
-	hasPageSkin = false,
 }: Props) => (
-	<li
-		css={[gridItem(position, hasPageSkin), cssOverrides]}
-		data-link-name={`${position} | text`}
-	>
+	<li css={[gridItem, cssOverrides]} data-link-name={`${position} | text`}>
 		<a css={headlineLink} href={url} data-link-name="article">
 			<span css={bigNumber}>
 				<BigNumber index={position} />
