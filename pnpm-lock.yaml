@@ -17,8 +17,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(prettier@3.0.3)(tslib@2.6.2)
       chromatic:
-        specifier: 11.0.8
-        version: 11.0.8
+        specifier: 11.5.5
+        version: 11.5.5
       husky:
         specifier: 8.0.3
         version: 8.0.3
@@ -9261,8 +9261,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /chromatic@11.0.8:
-    resolution: {integrity: sha512-+zJ5h0/Eu5z26KCNLIw2tknbK69gUO8q3Jsew4oU0Q/i/NPhIwcXhvPP7u75aLJgX1EI61+ndiGJA/yeQZQcgw==}
+  /chromatic@11.5.5:
+    resolution: {integrity: sha512-YS0GJwegF0vpMbwZE68/xJlI4SlUGMqI78V2ATAF19YwTHaq8jGP1CPQGKUSlgWUhzPtyu3ELy6Dvv/owYljAg==}
     hasBin: true
     peerDependencies:
       '@chromatic-com/cypress': ^0.*.* || ^1.0.0
