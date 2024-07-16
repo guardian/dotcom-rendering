@@ -197,6 +197,9 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 												display: block;
 											`}
 											count={4}
+											color={themePalette(
+												'--straight-lines',
+											)}
 										/>
 									</Section>
 								</>

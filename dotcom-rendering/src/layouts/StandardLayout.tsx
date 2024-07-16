@@ -562,7 +562,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												display: block;
 											`}
 											color={themePalette(
-												'--article-border',
+												'--straight-lines',
 											)}
 										/>
 									</Section>

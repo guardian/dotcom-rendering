@@ -494,6 +494,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<StraightLines
 									count={4}
+									color={themePalette('--straight-lines')}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -1113,6 +1114,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												<StraightLines
 													data-print-layout="hide"
 													count={4}
+													color={themePalette(
+														'--straight-lines',
+													)}
 													cssOverrides={css`
 														display: block;
 													`}
@@ -1259,6 +1263,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												<StraightLines
 													data-print-layout="hide"
 													count={4}
+													color={themePalette(
+														'--straight-lines',
+													)}
 													cssOverrides={css`
 														display: block;
 													`}
