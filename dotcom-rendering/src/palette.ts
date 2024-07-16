@@ -5908,6 +5908,10 @@ const paletteColours = {
 		light: carouselArrowBackgroundLight,
 		dark: carouselArrowBackgroundDark,
 	},
+	'--carousel-arrow-background-disabled': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
 	'--carousel-arrow-background-hover': {
 		light: carouselArrowBackgroundHoverLight,
 		dark: carouselArrowBackgroundHoverDark,
