@@ -326,8 +326,8 @@ importers:
         specifier: 11.11.0
         version: 11.11.0
       '@guardian/ab-core':
-        specifier: 7.0.1
-        version: 7.0.1(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 8.0.0
+        version: 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/braze-components':
         specifier: 20.0.0
         version: 20.0.0(@emotion/react@11.11.1)(@guardian/libs@17.0.1)(@guardian/source@libs+@guardian+source)(react@18.3.1)
@@ -342,7 +342,7 @@ importers:
         version: 50.13.0(@swc/core@1.6.13)(@types/node@20.14.10)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
       '@guardian/commercial':
         specifier: 19.12.0
-        version: 19.12.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.5.3)
+        version: 19.12.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 6.0.0
         version: 6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@3.5.1)
@@ -4027,11 +4027,11 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
-  /@guardian/ab-core@7.0.1(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-2LzVvEC26oYztK5woowBhK5lqnrsJGoA22Byi82kL/qubOMPPCOyimJHLXGhHrvvsyxQZM2NRm4+PuxGIdF8Nw==}
+  /@guardian/ab-core@8.0.0(tslib@2.6.2)(typescript@5.5.3):
+    resolution: {integrity: sha512-I6KV03kROJPnU7FdRbqkmEAzsTDMMK/bgnB7rbL/qht8+hrK9y52ySFSJF5WX0zPX/9MoMRyAgmf+wBWOeogBA==}
     peerDependencies:
       tslib: ^2.6.2
-      typescript: ~5.3.3
+      typescript: ~5.5.2
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -4143,7 +4143,7 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@19.12.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.5.3):
+  /@guardian/commercial@19.12.0(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(@guardian/source-foundations@14.2.2)(typescript@5.5.3):
     resolution: {integrity: sha512-aOwK4eqaEWaryq/ERpaHEb/o18aY/fh/HcEz7EOCnWiiL3Qp0ojib+KYWceMskN4kPDys+GSBdAyp4yfOnN43Q==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
@@ -4155,7 +4155,7 @@ packages:
       typescript: ~5.3.3
     dependencies:
       '@changesets/cli': 2.27.1
-      '@guardian/ab-core': 7.0.1(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/ab-core': 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/core-web-vitals': 6.0.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@3.5.1)
       '@guardian/identity-auth': 2.1.0(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@17.0.1)(tslib@2.6.2)(typescript@5.5.3)
