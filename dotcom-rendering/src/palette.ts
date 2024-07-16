@@ -6740,6 +6740,10 @@ const paletteColours = {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[73],
 	},
+	'--weather-icon': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,
 		dark: witnessTitleAuthor,
