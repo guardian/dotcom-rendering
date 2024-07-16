@@ -31,6 +31,7 @@ describe('parseVideo', () => {
 			type: ElementType.VIDEO,
 			assets: [
 				{
+					// @ts-expect-error -- these enums are actually compatible
 					type: AssetType.VIDEO,
 				},
 			],
