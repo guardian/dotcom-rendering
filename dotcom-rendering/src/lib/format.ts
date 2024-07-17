@@ -6,7 +6,7 @@ import {
 	isString,
 	Pillar,
 } from '@guardian/libs';
-import type { FEDesign, FEDisplay, FEFormat, FETheme } from '../types/types';
+import type { FEDesign, FEDisplay, FEFormat, FETheme } from '../types/frontend';
 
 export const getThemeNameAsString = (format: ArticleFormat): string => {
 	const themeName = Pillar[format.theme] ?? ArticleSpecial[format.theme];

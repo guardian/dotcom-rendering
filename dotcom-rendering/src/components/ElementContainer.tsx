@@ -47,14 +47,14 @@ type Props = {
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
 	element?:
-	| 'div'
-	| 'article'
-	| 'aside'
-	| 'nav'
-	| 'main'
-	| 'header'
-	| 'section'
-	| 'footer'; // ElementContainer is generally a top-level wrapper
+		| 'div'
+		| 'article'
+		| 'aside'
+		| 'nav'
+		| 'main'
+		| 'header'
+		| 'section'
+		| 'footer'; // ElementContainer is generally a top-level wrapper
 	className?: string;
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
@@ -98,8 +98,8 @@ export const ElementContainer = ({
 		},
 		css: [
 			hasPageSkin &&
-			!hasPageSkinContentSelfConstrain &&
-			pageSkinContainer,
+				!hasPageSkinContentSelfConstrain &&
+				pageSkinContainer,
 		],
 		className,
 		children: (
@@ -117,7 +117,7 @@ export const ElementContainer = ({
 					showSideBorders && sideBorderStyles,
 					showTopBorder && topBorderStyles,
 					innerBackgroundColour &&
-					setBackgroundColour(innerBackgroundColour),
+						setBackgroundColour(innerBackgroundColour),
 					padSides && sidePadding,
 					padBottom && bottomPadding,
 					hasPageSkin && pageSkinContainer,

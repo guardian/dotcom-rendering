@@ -1,11 +1,11 @@
 import type { ArticleFormat, ArticleSpecial, Pillar } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
-import type { FEFormat, FENavType } from '../types/types';
 import type { Branding, CollectionBranding, EditionBranding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { Image, StarRating } from './content';
 import type { FooterType } from './footer';
+import type { FEFormat, FENavType } from './frontend';
 import type { MainMedia } from './mainMedia';
 import type { FETagType } from './tag';
 import type { Territory } from './territory';

@@ -2,8 +2,8 @@ import { type ArticleFormat } from '@guardian/libs';
 import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';
 import type { RichLinkBlockElement, StarRating } from '../types/content';
+import type { FEFormat } from '../types/frontend';
 import type { TagType } from '../types/tag';
-import type { FEFormat } from '../types/types';
 import { RichLink } from './RichLink';
 
 type Props = {

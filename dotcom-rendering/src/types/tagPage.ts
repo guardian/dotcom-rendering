@@ -1,10 +1,10 @@
 import type { EditionId } from '../lib/edition';
 import type { Tuple } from '../lib/tuple';
-import type { FENavType } from '../types/types';
 import type { CollectionBranding } from './branding';
 import type { CommercialProperties } from './commercial';
 import type { FooterType } from './footer';
 import type { DCRFrontCard, FEFrontCard, FEFrontConfigType } from './front';
+import type { FENavType } from './frontend';
 import type { FEPagination, FETagType } from './tag';
 
 export interface FETagPageType {

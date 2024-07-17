@@ -1,8 +1,8 @@
 import type { ArticleFormat } from '@guardian/libs';
-import type { FEFormat } from '../types/types';
 import type { Branding } from './branding';
 import type { StarRating } from './content';
 import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
+import type { FEFormat } from './frontend';
 import type { MainMedia } from './mainMedia';
 
 interface BaseTrailType {

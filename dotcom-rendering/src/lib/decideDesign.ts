@@ -1,5 +1,5 @@
 import { ArticleDesign } from '@guardian/libs';
-import type { FEFormat } from '../types/types';
+import type { FEFormat } from '../types/frontend';
 
 /**
  * NOTE: Immersive Opinion pieces are not supported,
