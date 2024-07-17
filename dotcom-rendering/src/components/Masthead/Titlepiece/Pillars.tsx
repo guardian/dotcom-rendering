@@ -138,10 +138,6 @@ const pillarLink = css`
 		${headlineBold20}
 	}
 
-	${from.leftCol} {
-		${headlineBold24}
-	}
-
 	:focus:after {
 		transform: translateY(-${pillarUnderlineHeight}px);
 	}
@@ -150,6 +146,12 @@ const pillarLink = css`
 	}
 	:hover:after {
 		transform: translateY(-${pillarUnderlineHeight}px);
+	}
+`;
+
+const pillarLinkWithoutPageSkin = css`
+	${from.leftCol} {
+		${headlineBold24}
 	}
 `;
 
