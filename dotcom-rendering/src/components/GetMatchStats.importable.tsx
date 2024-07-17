@@ -2,6 +2,7 @@ import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
 import { useHydrated } from '../lib/useHydrated';
+import type { TeamType } from '../types/sport';
 import { MatchStats } from './MatchStats';
 import { Placeholder } from './Placeholder';
 

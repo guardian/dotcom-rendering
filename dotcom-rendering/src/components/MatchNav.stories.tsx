@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import type { TeamType } from '../types/sport';
 import { ArticleContainer } from './ArticleContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';

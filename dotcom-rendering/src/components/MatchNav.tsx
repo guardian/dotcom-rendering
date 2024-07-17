@@ -6,6 +6,7 @@ import {
 	textSans15,
 	until,
 } from '@guardian/source/foundations';
+import type { TeamType } from '../types/sport';
 import { Score } from './Score';
 
 type Props = {

@@ -1,3 +1,5 @@
+import type { TeamType } from './sport';
+
 export type MatchReportType = {
 	id: string;
 	isResult: boolean;
