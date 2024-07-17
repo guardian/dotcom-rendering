@@ -7,12 +7,13 @@ import {
 	textSansBold17,
 	until,
 } from '@guardian/source/foundations';
-import { Hide, SvgMenu } from '@guardian/source/react-components';
+import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
+import { BurgerMenu } from './BurgerMenu';
 import { pageMargin, smallMobilePageMargin } from './constants';
 import { EditionDropdown } from './EditionDropdown';
 import { Grid } from './Grid';
@@ -104,35 +105,6 @@ const logoStylesWithoutPageSkin = css`
 		${from.leftCol} {
 			width: 324px;
 		}
-	}
-`;
-
-const burgerStyles = css`
-	z-index: 2;
-	${gridMainColumn}
-	grid-row: 1;
-	justify-content: center;
-	display: flex;
-	justify-self: end;
-	align-self: end;
-	height: ${veggieBurgerDiameter}px;
-	width: ${veggieBurgerDiameter}px;
-	border-radius: 50%;
-	background-color: ${themePalette('--masthead-veggie-burger-background')};
-	margin-bottom: 6px;
-
-	:hover {
-		background-color: ${themePalette(
-			'--masthead-veggie-burger-background-hover',
-		)};
-	}
-	${from.mobileMedium} {
-		grid-row: 2;
-		align-self: center;
-	}
-	${from.desktop} {
-		/** TODO - include veggie burger in desktop version of <Pillars /> */
-		display: none;
 	}
 `;
 
@@ -297,26 +269,19 @@ export const Titlepiece = ({
 						hasPageSkin={hasPageSkin}
 					/>
 				</Hide>
-
-				{/* <ExpandedNav
-					nav={nav}
-					editionId={editionId}
-					isImmersive={isImmersive}
-					hasPageSkin={hasPageSkin}
-				/> */}
 			</nav>
-
-			{/* Veggie burger menu */}
-			{/* <Hide from="desktop"> */}
-			<div css={burgerStyles}>
-				<SvgMenu
-					size="small"
-					theme={{
-						fill: themePalette('--masthead-veggie-burger-icon'),
-					}}
-				/>
+			<div
+				css={css`
+					${gridContent}
+					grid-row: 1;
+					justify-content: center;
+					display: flex;
+					justify-self: end;
+					align-self: end;
+				`}
+			>
+				<BurgerMenu />
 			</div>
-			{/* </Hide> */}
 
 			{showSubNav && nav.subNavSections && (
 				<nav

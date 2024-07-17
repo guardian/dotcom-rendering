@@ -17,7 +17,11 @@ import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
 import { listAccessibility } from './commonStyles';
-import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
+import {
+	navInputCheckboxId,
+	pillarLeftMarginPx,
+	pillarWidthsPx,
+} from './constants';
 
 type Props = {
 	nav: NavType;
@@ -117,6 +121,12 @@ const forceUnderline = css`
 	}
 `;
 
+const expandedMenuStyles = css`
+	${`#${navInputCheckboxId}`}:checked {
+		${forceUnderline}
+	}
+`;
+
 const pillarLink = css`
 	${headlineBold14}
 	text-decoration: none;
@@ -155,7 +165,7 @@ const pillarLink = css`
 	}
 `;
 
-const pillarLinkWithoutPageSkin = css`
+const pillarLinkFromLeftCol = css`
 	${from.leftCol} {
 		${headlineBold24}
 	}
@@ -252,7 +262,7 @@ export const Pillars = ({
 							href={p.url}
 							css={[
 								pillarLink,
-								!hasPageSkin && pillarLinkWithoutPageSkin,
+								!hasPageSkin && pillarLinkFromLeftCol,
 								pillarUnderline,
 								isSelected && forceUnderline,
 							]}
