@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { from, palette } from '@guardian/source/foundations';
 // import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
