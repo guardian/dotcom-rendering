@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, palette, until } from '@guardian/source/foundations';
-// import type { DCRFrontImage } from '../../types/front';
+import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
-// import type { Loading } from '../CardPicture';
+import type { Loading } from '../CardPicture';
+import { CardPicture } from '../CardPicture';
 import { Icon } from '../MediaMeta';
 
 export type HighlightsCardProps = {
@@ -13,14 +14,14 @@ export type HighlightsCardProps = {
 	format: ArticleFormat;
 	headlineText: string;
 	// showQuotedHeadline?: boolean;
-	// image?: DCRFrontImage;
-	// imageLoading: Loading;
+	image: DCRFrontImage;
+	imageLoading: Loading;
 	avatarUrl?: string;
 	mainMedia?: MainMedia;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	// dataLinkName?: string;
-	byline?: string;
+	byline: string;
 	showMediaIcon?: boolean;
 };
 
@@ -84,8 +85,8 @@ export const HighlightsCard = ({
 	format,
 	headlineText,
 	// showQuotedHeadline,
-	// image,
-	// imageLoading,
+	image,
+	imageLoading,
 	avatarUrl,
 	mainMedia,
 	kickerText,
@@ -114,7 +115,12 @@ export const HighlightsCard = ({
 				{avatarUrl ? (
 					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
 				) : (
-					<></>
+					<CardPicture
+						mainImage={image.src}
+						imageSize={'carousel'}
+						alt={image?.altText}
+						loading={imageLoading}
+					/>
 				)}
 			</div>
 		</div>
