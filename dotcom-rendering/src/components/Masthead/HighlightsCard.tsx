@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
+import { from, palette } from '@guardian/source/foundations';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { Avatar } from '../Avatar';
-import { AvatarContainer } from '../Card/components/AvatarContainer';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
+import { Icon } from '../MediaMeta';
 
 export type HighlightsCardProps = {
 	linkTo: string;
@@ -24,22 +25,60 @@ export type HighlightsCardProps = {
 
 const gridContainer = css`
 	display: grid;
+	background-color: ${palette.neutral[97]};
+	gap: 8px;
 
 	grid-template-areas:
 		'headline 	headline'
 		'media-icon image';
+
+	${from.tablet} {
+		grid-template-areas:
+			'headline 	image'
+			'media-icon image';
+	}
 `;
 
 const headline = css`
-	grid-area: 'headline';
+	grid-area: headline;
 `;
 
 const mediaIcon = css`
-	grid-area: 'media-icon';
+	grid-area: media-icon;
+	align-self: end;
+
+	width: 24px;
+	height: 24px;
+	/* We’re using the text colour for the icon badge */
+	background-color: ${palette.neutral[10]};
+	border-radius: 50%;
+	display: inline-block;
+
+	> svg {
+		width: 20px;
+		height: 20px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 2px;
+		display: block;
+		fill: ${palette.neutral[97]};
+	}
 `;
-const image = css`
-	grid-area: 'image';
+
+const imageArea = css`
+	grid-area: image;
+	height: 106px;
+	width: 106px;
+	${from.desktop} {
+		height: 112px;
+		width: 112px;
+	}
+	align-self: end;
 `;
+
+const mainGallery: MainMedia = {
+	type: 'Gallery',
+};
 
 export const HighlightsCard = ({
 	linkTo,
@@ -49,7 +88,7 @@ export const HighlightsCard = ({
 	image,
 	imageLoading,
 	avatarUrl,
-	mainMedia,
+	mainMedia = mainGallery,
 	kickerText,
 	showPulsingDot,
 	dataLinkName,
@@ -67,22 +106,17 @@ export const HighlightsCard = ({
 					kickerText={kickerText}
 				/>
 			</div>
-			<div css={mediaIcon}>{showMediaIcon ? <></> : <div></div>}</div>
-			<div css={image}>
+			{showMediaIcon ? (
+				<div css={mediaIcon}>
+					<Icon mediaType={mainMedia.type} />
+				</div>
+			) : null}
+			<div css={imageArea}>
 				{avatarUrl ? (
-					<AvatarContainer
-						imageSize={'medium'}
-						imagePositionOnDesktop={'none'}
-					>
-						<Avatar
-							src={avatarUrl}
-							alt={byline ?? ''}
-							shape="cutout"
-						/>
-					</AvatarContainer>
+					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
 				) : (
-					<p>test</p>
-				)}{' '}
+					<></>
+				)}
 			</div>
 		</div>
 	);
