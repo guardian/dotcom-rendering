@@ -6,6 +6,7 @@ import type {
 	ImageBlockElement,
 	ImageForLightbox,
 } from '../types/content';
+import type { FEFormat } from '../types/frontend';
 import {
 	getCartoonImageForLightbox,
 	isCartoon,

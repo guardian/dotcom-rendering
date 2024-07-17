@@ -99,16 +99,6 @@ export const Masthead = ({
 			</Section>
 		)}
 
-		{/* <Section
-			fullWidth={true}
-			backgroundColour={themePalette('--masthead-nav-background')}
-			borderColour={themePalette('--masthead-nav-background')}
-			showTopBorder={false}
-			padSides={false}
-			element="nav"
-			hasPageSkin={hasPageSkin}
-			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
-		> */}
 		<Titlepiece
 			nav={nav}
 			editionId={editionId}
@@ -116,6 +106,5 @@ export const Masthead = ({
 			isImmersive={isImmersive}
 			hasPageSkin={hasPageSkin}
 		/>
-		{/* </Section> */}
 	</header>
 );

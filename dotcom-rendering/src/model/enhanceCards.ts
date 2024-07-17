@@ -1,4 +1,4 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import { decideFormat } from '../lib/decideFormat';
 import type { EditionId } from '../lib/edition';

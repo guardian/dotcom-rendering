@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { ZIndex } from '../../lib/getZIndex';
 import { getZIndex, getZIndexImportant } from '../../lib/getZIndex';
+import { palette } from '../../palette';
 
 type Props = {
 	children?: React.ReactNode;
@@ -20,8 +21,8 @@ const addZindex = (zIndex: ZIndex = 'stickyAdWrapper') => css`
 	${getZIndex(zIndex)}
 `;
 
-const whiteBackground = css`
-	background-color: white;
+const background = css`
+	background-color: ${palette('--stuck-background')};
 `;
 
 const headerWrapper = css`
@@ -46,9 +47,7 @@ const bannerWrapper = css`
 `;
 
 export const Stuck = ({ children, zIndex }: StuckProps) => (
-	<div css={[stickyStyles, addZindex(zIndex), whiteBackground]}>
-		{children}
-	</div>
+	<div css={[stickyStyles, addZindex(zIndex), background]}>{children}</div>
 );
 
 export const SendToBack = ({ children }: Props) => (

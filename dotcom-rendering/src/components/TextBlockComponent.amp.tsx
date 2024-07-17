@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, type ArticleTheme } from '@guardian/libs';
 import { article17, palette, textSans20 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';

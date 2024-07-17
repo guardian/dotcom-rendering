@@ -1,4 +1,4 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import type { AdPlaceholderBlockElement, FEElement } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 

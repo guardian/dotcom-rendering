@@ -315,7 +315,6 @@ export const Section = ({
 				showTopBorder={showTopBorder}
 				padSides={padSides}
 				padBottom={padBottom}
-				format={format}
 				borderColour={borderColour ?? overrides?.border.container}
 				backgroundColour={decideBackgroundColour(
 					backgroundColour,
@@ -345,7 +344,6 @@ export const Section = ({
 			showSideBorders={showSideBorders}
 			showTopBorder={showTopBorder}
 			padSides={padSides}
-			format={format}
 			borderColour={borderColour ?? overrides?.border.container}
 			backgroundColour={decideBackgroundColour(
 				backgroundColour,

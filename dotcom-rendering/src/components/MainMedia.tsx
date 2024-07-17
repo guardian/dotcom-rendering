@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '@guardian/libs';
 import { space, until } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';

@@ -1,4 +1,9 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '@guardian/libs';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
 import { StarRatingBlockComponent } from './StarRatingBlockComponent';
 

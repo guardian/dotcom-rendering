@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { palette, until } from '@guardian/source/foundations';
 import type { Size } from '@guardian/source/react-components';
 import {

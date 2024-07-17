@@ -1,3 +1,5 @@
+import type { ArticleFormat } from '@guardian/libs';
+import type { FEFormat } from '../types/frontend';
 import { decideDesign } from './decideDesign';
 import { decideDisplay } from './decideDisplay';
 import { decideTheme } from './decideTheme';

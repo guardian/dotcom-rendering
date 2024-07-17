@@ -1,4 +1,4 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import type { FEElement } from '../types/content';
 
 const addHtmlToGuVideoBlocks = (elements: FEElement[], html?: string) => {

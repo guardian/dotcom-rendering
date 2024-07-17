@@ -1,9 +1,9 @@
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { type ArticleFormat } from '@guardian/libs';
 import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';
 import type { RichLinkBlockElement, StarRating } from '../types/content';
+import type { FEFormat } from '../types/frontend';
 import type { TagType } from '../types/tag';
-import type { RichLinkImageData } from './RichLink';
 import { RichLink } from './RichLink';
 
 type Props = {
@@ -79,68 +79,76 @@ export const RichLinkComponent = ({
 	richLinkIndex,
 	format,
 }: Props) => {
+	/** Render a default (basic) rich link on the server */
+	const fallbackData = {
+		headline: element.text,
+		url: element.url,
+		thumbnailUrl: '',
+		imageAsset: {
+			fields: {
+				altText: '',
+				width: '',
+				height: '',
+				source: '',
+				displayCredit: '',
+				photographer: '',
+				isMaster: '',
+				credit: '',
+				mediaId: '',
+			},
+			index: -1,
+			mediaType: '',
+			url: '',
+		},
+		contentType: 'article',
+		format: {
+			design: 'ArticleDesign',
+			display: 'StandardDisplay',
+			// We default to SpecialReport here purely because the greys of this theme
+			// look better as the defaults
+			theme: 'SpecialReportTheme',
+		},
+		cardStyle: 'news',
+		tags: [],
+		sponsorName: '',
+	} satisfies FERichLinkType;
+
 	const url = buildUrl(element, ajaxUrl);
-	const { data, error } = useApi<FERichLinkType>(url);
+	const { data, error } = useApi<FERichLinkType>(url, { fallbackData });
 
 	if (error) {
 		// Send the error to Sentry
 		window.guardian.modules.sentry.reportError(error, 'rich-link');
 	}
 
-	if (data?.imageAsset) {
-		const richLinkImageData: RichLinkImageData = {
-			thumbnailUrl: data.thumbnailUrl,
-			altText: data.imageAsset.fields.altText,
-			width: data.imageAsset.fields.width,
-			height: data.imageAsset.fields.height,
-		};
+	if (!data) return null;
 
-		return (
-			// This is the enhanced rich link rendered on the client
-			<RichLink
-				richLinkIndex={richLinkIndex}
-				cardStyle={data.cardStyle}
-				imageData={richLinkImageData}
-				headlineText={data.headline}
-				contentType={data.contentType}
-				url={data.url}
-				starRating={data.starRating}
-				linkFormat={decideFormat(data.format)}
-				format={format}
-				tags={data.tags}
-				sponsorName={data.sponsorName}
-				contributorImage={data.contributorImage}
-			/>
-		);
-	}
-
-	const defaultFormat = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		// We default to SpecialReport here purely because the greys of this theme
-		// look better as the defaults
-		theme: ArticleSpecial.SpecialReport,
-	};
+	const richLinkImageData = {
+		thumbnailUrl: data.thumbnailUrl,
+		altText: (data.imageAsset ?? fallbackData.imageAsset).fields.altText,
+		width: (data.imageAsset ?? fallbackData.imageAsset).fields.width,
+		height: (data.imageAsset ?? fallbackData.imageAsset).fields.height,
+	} satisfies Parameters<typeof RichLink>[0]['imageData'];
 
 	return (
-		// Render a default (basic) rich link on the server
 		<RichLink
 			richLinkIndex={richLinkIndex}
-			cardStyle="news"
-			imageData={{
-				thumbnailUrl: '',
-				altText: '',
-				width: '',
-				height: '',
-			}}
-			headlineText={element.text}
-			contentType="article"
-			url={element.url}
-			linkFormat={defaultFormat}
-			format={defaultFormat}
-			tags={[]}
-			sponsorName=""
-			isPlaceholder={true}
+			cardStyle={data.cardStyle}
+			imageData={richLinkImageData}
+			headlineText={data.headline}
+			contentType={data.contentType}
+			url={data.url}
+			starRating={data.starRating}
+			linkFormat={decideFormat(data.format)}
+			format={format}
+			tags={data.tags}
+			sponsorName={data.sponsorName}
+			contributorImage={data.contributorImage}
+			isPlaceholder={
+				// This should never be the case, unless it’s fallback data
+				// https://github.com/guardian/frontend/blob/8256fe148f9abb5842e30339ac64dfa43d758226/common/app/model/Asset.scala#L64
+				data.imageAsset?.index === -1
+			}
 		/>
 	);
 };

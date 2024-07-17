@@ -1,18 +1,15 @@
-import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
+import type { Meta, StoryObj } from '@storybook/react';
+import { allModes } from '../../.storybook/modes';
+import { palette } from '../palette';
 import { Figure } from './Figure';
 import { RichLink } from './RichLink';
-import { Section } from './Section';
-
-interface AnalysisProps {
-	theme: string;
-}
+import { Section as SectionComponent } from './Section';
 
 const someContributor =
 	'https://uploads.guim.co.uk/2017/10/09/Oliver-Wainwright,-L.png';
@@ -25,10 +22,14 @@ const someImageData = {
 	height: '900',
 };
 
-export default {
+const meta = {
 	component: RichLink,
 	title: 'Components/RichLink',
-};
+} satisfies Meta<typeof RichLink>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 const mockFormatNews = {
 	display: ArticleDisplay.Standard,
@@ -56,545 +57,374 @@ const mockFormatOpinion = {
 	theme: Pillar.Opinion,
 };
 
-export const Article = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="news"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="article"
-					url=""
-					linkFormat={mockFormatCulture}
-					format={mockFormatCulture}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Article.storyName = 'Article';
-Article.decorators = [splitTheme([mockFormatNews])];
+export const Article = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'news',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'article',
+		url: '',
+		linkFormat: mockFormatCulture,
+		format: mockFormatCulture,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={args.format}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: {
+			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+} satisfies Story;
 
-export const Network = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="special-report"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="network"
-					url=""
-					linkFormat={mockFormatCulture}
-					format={mockFormatCulture}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Network.story = {
+export const Network = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'special-report',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'network',
+		url: '',
+		linkFormat: mockFormatCulture,
+		format: mockFormatCulture,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [380] },
+		chromatic: {
+			modes: { horizontal: allModes.splitHorizontal },
+		},
 	},
-};
-Network.decorators = [splitTheme([mockFormatCulture])];
+} satisfies Story;
 
-export const SectionStory = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="live"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="section"
-					url=""
-					linkFormat={mockFormatSport}
-					format={mockFormatSport}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-SectionStory.storyName = 'Section';
-SectionStory.decorators = [splitTheme([mockFormatNews])];
-
-export const Inline = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="inline">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="external"
-					imageData={someImageData}
-					headlineText="Rich link when inline"
-					contentType="section"
-					url=""
-					linkFormat={mockFormatLifestyle}
-					format={mockFormatLifestyle}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Inline.storyName = 'Inline';
-Inline.decorators = [splitTheme([mockFormatNews])];
-
-export const ImageContent = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="dead"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="imageContent"
-					url=""
-					linkFormat={mockFormatNews}
+export const Section = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'live',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'section',
+		url: '',
+		linkFormat: mockFormatSport,
+		format: mockFormatSport,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
 					format={mockFormatNews}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-ImageContent.story = {
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const Inline = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'external',
+		imageData: someImageData,
+		headlineText: 'Rich link when inline',
+		contentType: 'section',
+		url: '',
+		linkFormat: mockFormatLifestyle,
+		format: mockFormatLifestyle,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="inline"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: {
+			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+} satisfies Story;
+
+export const ImageContent = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'dead',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'imageContent',
+		url: '',
+		linkFormat: mockFormatNews,
+		format: mockFormatNews,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
-		chromatic: { viewports: [1300] },
+		chromatic: {
+			modes: { horizontal: allModes.splitHorizontal },
+		},
 	},
-};
-ImageContent.decorators = [splitTheme([mockFormatNews])];
+} satisfies Story;
 
-export const Interactive = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="feature"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="interactive"
-					url=""
-					linkFormat={mockFormatLifestyle}
-					format={mockFormatLifestyle}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Interactive.story = {
-	parameters: {
-		viewport: { defaultViewport: 'leftCol' },
+export const Interactive = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'feature',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'interactive',
+		url: '',
+		linkFormat: mockFormatLifestyle,
+		format: mockFormatLifestyle,
+		tags: [],
+		sponsorName: '',
 	},
-};
-Interactive.decorators = [splitTheme([mockFormatNews])];
-
-export const Gallery = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="comment"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="gallery"
-					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticleSpecial.Labs,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticleSpecial.Labs,
-					}}
-					tags={[]}
-					sponsorName=""
-					contributorImage={someContributor}
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Gallery.story = {
-	parameters: {
-		viewport: { defaultViewport: 'leftCol' },
-	},
-};
-Gallery.decorators = [splitTheme([mockFormatNews])];
-
-export const Video = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="comment"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="video"
-					url=""
-					linkFormat={mockFormatNews}
-					format={mockFormatNews}
-					tags={[]}
-					sponsorName=""
-					contributorImage={someContributor}
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Video.story = {
-	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [380] },
-	},
-};
-Video.decorators = [splitTheme([mockFormatNews])];
-
-export const Audio = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="podcast"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="audio"
-					url=""
-					linkFormat={mockFormatCulture}
-					format={mockFormatCulture}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Audio.storyName = 'Audio';
-Audio.decorators = [splitTheme([mockFormatNews])];
-
-export const LiveBlog = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.LiveBlog,
-					theme: Pillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
 			>
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="media"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="liveBlog"
-					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.LiveBlog,
-						theme: Pillar.Sport,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.LiveBlog,
-						theme: Pillar.Sport,
-					}}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-LiveBlog.story = {
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		viewport: { defaultViewport: 'leftCol' },
+		chromatic: {
+			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+} satisfies Story;
+
+export const Gallery = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'comment',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'gallery',
+		url: '',
+		linkFormat: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
+		},
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticleSpecial.Labs,
+		},
+		tags: [],
+		sponsorName: '',
+		contributorImage: someContributor,
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		viewport: { defaultViewport: 'leftCol' },
+		chromatic: {
+			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+} satisfies Story;
+
+export const Video = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'comment',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'video',
+		url: '',
+		linkFormat: mockFormatNews,
+		format: mockFormatNews,
+		tags: [],
+		sponsorName: '',
+		contributorImage: someContributor,
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: { viewports: [380] },
+		chromatic: {
+			modes: { horizontal: allModes.splitHorizontal },
+		},
 	},
-};
-LiveBlog.decorators = [splitTheme([mockFormatNews])];
+} satisfies Story;
 
-export const Tag = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="analysis"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="tag"
-					url=""
-					linkFormat={mockFormatCulture}
-					format={mockFormatCulture}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Tag.storyName = 'Tag';
-Tag.decorators = [splitTheme([mockFormatNews])];
+export const Audio = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'podcast',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'audio',
+		url: '',
+		linkFormat: mockFormatCulture,
+		format: mockFormatCulture,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
 
-export const Index = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="review"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="index"
-					url=""
-					linkFormat={mockFormatOpinion}
-					format={mockFormatOpinion}
-					tags={[
-						{
-							id: '',
-							type: 'Contributor',
-							title: 'Contributor Name',
-						},
-					]}
-					sponsorName=""
-					starRating={3}
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Index.storyName = 'Index';
-Index.decorators = [splitTheme([mockFormatNews])];
-
-export const Crossword = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="letters"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="crossword"
-					url=""
-					linkFormat={mockFormatOpinion}
-					format={mockFormatOpinion}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Crossword.storyName = 'Crossword';
-Crossword.decorators = [splitTheme([mockFormatNews])];
-
-export const Survey = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="external"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="survey"
-					url=""
-					linkFormat={mockFormatCulture}
-					format={mockFormatCulture}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Survey.storyName = 'Survey';
-Survey.decorators = [splitTheme([mockFormatNews])];
-
-export const Signup = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="comment"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="signup"
-					url=""
-					linkFormat={mockFormatCulture}
-					format={mockFormatCulture}
-					tags={[]}
-					sponsorName=""
-					contributorImage={someContributor}
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Signup.storyName = 'Signup';
-Signup.decorators = [splitTheme([mockFormatNews])];
-
-export const Userid = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="editorial"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="userid"
-					url=""
-					linkFormat={mockFormatCulture}
-					format={mockFormatCulture}
-					tags={[]}
-					sponsorName=""
-				/>
-			</Figure>
-		</Section>
-	);
-};
-Userid.storyName = 'Userid';
-Userid.decorators = [splitTheme([mockFormatNews])];
-
-export const PaidFor = () => {
-	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
-			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
-				<RichLink
-					richLinkIndex={1}
-					cardStyle="news"
-					imageData={someImageData}
-					headlineText="Rich link headline"
-					contentType="userid"
-					url=""
-					linkFormat={mockFormatCulture}
-					format={mockFormatCulture}
-					tags={[
-						{
-							id: 'tone/advertisement-features',
-							type: '',
-							title: '',
-						},
-					]}
-					sponsorName="Sponsor name"
-				/>
-			</Figure>
-		</Section>
-	);
-};
-PaidFor.storyName = 'PaidFor';
-PaidFor.decorators = [splitTheme([mockFormatNews])];
-
-export const Analysis = ({ theme }: AnalysisProps) => {
-	return (
-		<div
-			className="light"
-			css={css`
-				/* stylelint-disable-next-line color-no-hex */
-				background-color: ${theme === 'light' ? '#fff4f2' : 'inherit'};
-			`}
-		>
-			Analysis Articles have a different color background, so rich links
-			should too.
-			<Section
+export const LiveBlog = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'media',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'liveBlog',
+		url: '',
+		linkFormat: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.LiveBlog,
+			theme: Pillar.Sport,
+		},
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.LiveBlog,
+			theme: Pillar.Sport,
+		},
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
 				showTopBorder={false}
 				centralBorder="full"
 				showSideBorders={false}
@@ -602,44 +432,423 @@ export const Analysis = ({ theme }: AnalysisProps) => {
 				<Figure
 					format={{
 						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Analysis,
+						design: ArticleDesign.LiveBlog,
 						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="richLink"
 				>
-					<RichLink
-						richLinkIndex={1}
-						cardStyle="news"
-						imageData={someImageData}
-						headlineText="Rich link headline"
-						contentType="article"
-						url=""
-						linkFormat={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Analysis,
-							theme: Pillar.Culture,
-						}}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Analysis,
-							theme: Pillar.Culture,
-						}}
-						tags={[]}
-						sponsorName=""
-					/>
+					<RichLink {...args} />
 				</Figure>
-			</Section>
-		</div>
-	);
-};
-Analysis.storyName = 'Analysis';
-Analysis.decorators = [
-	splitTheme([
-		{
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		viewport: { defaultViewport: 'mobileMedium' },
+		chromatic: {
+			modes: { horizontal: allModes.splitHorizontal },
+		},
+	},
+} satisfies Story;
+
+export const Tag = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'analysis',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'tag',
+		url: '',
+		linkFormat: mockFormatCulture,
+		format: mockFormatCulture,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const StarRating = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'review',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'index',
+		url: '',
+		linkFormat: mockFormatOpinion,
+		format: mockFormatOpinion,
+		sponsorName: '',
+		starRating: 3,
+		tags: [
+			{
+				id: '',
+				type: 'Contributor',
+				title: 'Contributor Name',
+			},
+		],
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const SoleContributor = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'comment',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'index',
+		url: '',
+		linkFormat: mockFormatOpinion,
+		format: mockFormatOpinion,
+		sponsorName: '',
+		contributorImage: someContributor,
+		tags: [
+			{
+				id: '',
+				type: 'Contributor',
+				title: 'Sole Contributor',
+			},
+		],
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const DoubleTrouble = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'comment',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'index',
+		url: '',
+		linkFormat: mockFormatOpinion,
+		format: mockFormatOpinion,
+		sponsorName: '',
+		tags: [
+			{
+				id: '',
+				type: 'Contributor',
+				title: 'Jane First',
+			},
+			{
+				id: '',
+				type: 'Contributor',
+				title: 'Joe Second',
+			},
+		],
+		contributorImage: someContributor,
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const Crossword = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'letters',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'crossword',
+		url: '',
+		linkFormat: mockFormatOpinion,
+		format: mockFormatOpinion,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const Survey = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'external',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'survey',
+		url: '',
+		linkFormat: mockFormatCulture,
+		format: mockFormatCulture,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const Signup = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'comment',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'signup',
+		url: '',
+		linkFormat: mockFormatCulture,
+		format: mockFormatCulture,
+		tags: [],
+		sponsorName: '',
+		contributorImage: someContributor,
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const Userid = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'editorial',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'userid',
+		url: '',
+		linkFormat: mockFormatCulture,
+		format: mockFormatCulture,
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const PaidFor = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'news',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'userid',
+		url: '',
+		linkFormat: mockFormatCulture,
+		format: mockFormatCulture,
+		tags: [
+			{
+				id: 'tone/advertisement-features',
+				type: '',
+				title: '',
+			},
+		],
+		sponsorName: 'Sponsor name',
+	},
+	render: (args) => {
+		return (
+			<SectionComponent
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={mockFormatNews}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink {...args} />
+				</Figure>
+			</SectionComponent>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;
+
+export const Analysis = {
+	args: {
+		richLinkIndex: 1,
+		cardStyle: 'news',
+		imageData: someImageData,
+		headlineText: 'Rich link headline',
+		contentType: 'article',
+		url: '',
+		linkFormat: {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Analysis,
 			theme: Pillar.Culture,
 		},
-	]),
-];
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Analysis,
+			theme: Pillar.Culture,
+		},
+		tags: [],
+		sponsorName: '',
+	},
+	render: (args) => {
+		return (
+			<div
+				className="light"
+				style={{ backgroundColor: palette('--article-background') }}
+			>
+				Analysis Articles have a different colour background, so rich
+				links should too.
+				<SectionComponent
+					showTopBorder={false}
+					centralBorder="full"
+					showSideBorders={false}
+				>
+					<Figure
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Analysis,
+							theme: Pillar.News,
+						}}
+						isMainMedia={false}
+						role="richLink"
+					>
+						<RichLink {...args} />
+					</Figure>
+				</SectionComponent>
+			</div>
+		);
+	},
+	parameters: {
+		chromatic: { modes: { horizontal: allModes.splitHorizontal } },
+	},
+} satisfies Story;

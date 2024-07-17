@@ -1,6 +1,7 @@
 import {
 	ArticleDesign,
 	type ArticleFormat,
+	type ArticleTheme,
 	isNonNullable,
 } from '@guardian/libs';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';

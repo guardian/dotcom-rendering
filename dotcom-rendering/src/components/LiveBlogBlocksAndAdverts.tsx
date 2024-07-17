@@ -1,3 +1,4 @@
+import type { ArticleFormat } from '@guardian/libs';
 import { Fragment } from 'react';
 import type { EditionId } from '../lib/edition';
 import { getLiveblogAdPositions } from '../lib/getLiveblogAdPositions';

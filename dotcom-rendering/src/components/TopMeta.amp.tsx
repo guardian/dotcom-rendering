@@ -1,4 +1,8 @@
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleSpecial,
+	type ArticleTheme,
+} from '@guardian/libs';
 import type { AMPArticleModel } from '../types/article.amp';
 import { TopMetaAnalysis } from './TopMetaAnalysis.amp';
 import { TopMetaNews } from './TopMetaNews.amp';

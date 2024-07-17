@@ -3,7 +3,7 @@
   --
   the palette object is large and ordering helps knowing where  to insert new elements
 */
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -5908,6 +5908,10 @@ const paletteColours = {
 		light: carouselArrowBackgroundLight,
 		dark: carouselArrowBackgroundDark,
 	},
+	'--carousel-arrow-background-disabled': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
 	'--carousel-arrow-background-hover': {
 		light: carouselArrowBackgroundHoverLight,
 		dark: carouselArrowBackgroundHoverDark,
@@ -6592,6 +6596,10 @@ const paletteColours = {
 		light: straightLinesLight,
 		dark: straightLinesDark,
 	},
+	'--stuck-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
 	'--sub-meta-background': {
 		light: subMetaBackgroundLight,
 		dark: subMetaBackgroundDark,
@@ -6731,6 +6739,10 @@ const paletteColours = {
 	'--trending-topics-text': {
 		light: () => sourcePalette.neutral[20],
 		dark: () => sourcePalette.neutral[73],
+	},
+	'--weather-icon': {
+		light: () => sourcePalette.neutral[97],
+		dark: () => sourcePalette.neutral[7],
 	},
 	'--witness-title-author': {
 		light: witnessTitleAuthor,

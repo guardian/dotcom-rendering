@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	headlineMedium17,
 	headlineMedium20,

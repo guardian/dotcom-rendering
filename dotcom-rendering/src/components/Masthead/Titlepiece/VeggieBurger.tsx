@@ -1,3 +1,7 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/VeggieBurgerMenu.tsx
+ */
 import { css } from '@emotion/react';
 import {
 	from,
@@ -118,7 +122,7 @@ export const VeggieBurgerMenu = ({ isImmersive = false }: Props) => {
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}
 			data-link-name={nestedOphanComponents(
-				'nav3',
+				'header',
 				'veggie-burger',
 				'show',
 			)}

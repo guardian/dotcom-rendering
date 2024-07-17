@@ -58,7 +58,7 @@ export const findMostReferredToBucketId = ({
 
 	for (const answerFromQuestion of answersFromQuestion) {
 		for (const answerBucket of answerFromQuestion.answerBuckets) {
-			if (answerBucket in bucketCounter) {
+			if (typeof bucketCounter[answerBucket] === 'number') {
 				bucketCounter[answerBucket] += 1;
 			} else {
 				bucketCounter[answerBucket] = 1;

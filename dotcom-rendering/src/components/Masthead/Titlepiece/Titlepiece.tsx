@@ -1,24 +1,22 @@
 import { css } from '@emotion/react';
 import {
-	between,
 	from,
 	headlineBold14,
 	space,
 	textSans14,
 } from '@guardian/source/foundations';
-import {
-	Hide,
-	SvgGuardianLogo,
-	SvgMenu,
-} from '@guardian/source/react-components';
+import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
+import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import { TitlepieceEditionDropdown } from './EditionDropdown';
-// import { TitlepieceExpandedNav } from './ExpandedNav/ExpandedNav';
+import { pageMargin, smallMobilePageMargin } from './constants';
+import { EditionDropdown } from './EditionDropdown';
 import { Grid } from './Grid';
+import { Logo } from './Logo';
 import { Pillars } from './Pillars';
+import { SubNav } from './SubNav';
 
 interface Props {
 	nav: NavType;
@@ -38,8 +36,12 @@ export const pillarWidthsPx = {
 
 const veggieBurgerDiameter = 40;
 
-const editionSwitcherMenuStyles = css`
+const gridFullWidth = css`
 	grid-column: content-start / content-end;
+`;
+
+const editionSwitcherMenuStyles = css`
+	${gridFullWidth}
 	grid-row: 1;
 	${from.mobileMedium} {
 		justify-self: end;
@@ -47,8 +49,8 @@ const editionSwitcherMenuStyles = css`
 `;
 
 const guardianLogoStyles = css`
-	z-index: 2;
-	grid-column: content-start / content-end;
+	${getZIndex('TheGuardian')}
+	${gridFullWidth}
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
@@ -58,42 +60,44 @@ const guardianLogoStyles = css`
 	${from.mobileMedium} {
 		margin-right: 0;
 	}
-	svg {
-		height: 49px;
-		${between.mobileMedium.and.tablet} {
-			height: 67px;
-		}
-		${between.tablet.and.desktop} {
-			height: 96px;
-		}
-		${between.desktop.and.leftCol} {
-			height: 94px;
-		}
-		${from.leftCol} {
-			height: 135px;
-		}
-	}
-	${between.mobileLandscape.and.desktop} {
+	${from.mobileLandscape} {
 		margin-bottom: 8px;
 	}
 	${from.desktop} {
 		margin-bottom: 10px;
 	}
+
+	svg {
+		width: 144px;
+		${from.mobileMedium} {
+			width: 198px;
+		}
+		${from.tablet} {
+			width: 280px;
+		}
+		${from.desktop} {
+			width: 276px;
+		}
+		${from.leftCol} {
+			width: 398px;
+		}
+	}
 `;
 
 const burgerStyles = css`
 	z-index: 2;
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 1;
+	justify-content: center;
+	display: flex;
 	justify-self: end;
 	align-self: end;
 	height: ${veggieBurgerDiameter}px;
 	width: ${veggieBurgerDiameter}px;
-	margin-bottom: 6px;
 	border-radius: 50%;
 	background-color: ${themePalette('--masthead-veggie-burger-background')};
-	justify-content: center;
-	display: flex;
+	margin-bottom: 6px;
+
 	:hover {
 		background-color: ${themePalette(
 			'--masthead-veggie-burger-background-hover',
@@ -110,52 +114,85 @@ const burgerStyles = css`
 `;
 
 const pillarsNavStyles = css`
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 2;
 	align-self: end;
 
 	${headlineBold14}
 	margin-top: ${space[2]}px;
-	border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
 
 	${from.desktop} {
 		grid-row: 1 / 2;
 	}
 `;
 
-const subnavStyles = css`
+const subNavStyles = css`
 	grid-column: content-start / content-end;
 	grid-row: 3;
 	${textSans14}
 	color: inherit;
-	height: 28px;
+	min-height: 28px;
 	margin-top: ${space[2]}px;
 
-	overflow-x: scroll;
-	width: calc(100% + 10px);
+	/** We increase the width of the subnav to let it overflow
+	 on the right to help indicate scrollability */
+	width: calc(100% + ${smallMobilePageMargin});
+	${from.mobileLandscape} {
+		width: calc(100% + ${pageMargin});
+	}
+	${from.tablet} {
+		width: 100%;
+	}
 
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
 	}
 	${from.tablet} {
-		width: calc(100% + ${space[5]}px);
+		min-height: 30px;
 	}
 	${from.leftCol} {
 		margin-top: 14px;
 	}
 `;
 
-const subnavListStyles = css`
-	display: flex;
-	column-gap: ${space[3]}px;
-`;
-const subnavListItemStyles = css`
-	white-space: nowrap;
+/** Sets horizontal scrolling behaviour and removes the scrollbar */
+const scrollableSubNavStyles = css`
+	overflow-x: scroll;
+
+	@supports selector(::-webkit-scrollbar) {
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
 `;
 
-const subnavLinkStyles = css`
-	color: ${themePalette('--masthead-nav-link-text')};
-	text-decoration: none;
+const horizontalDivider = css`
+	position: relative;
+	z-index: 1;
+	&::after {
+		content: '';
+		position: absolute;
+		border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+`;
+
+/** The divider length should match the width of the subnav */
+const dividerOverridesForSubNav = css`
+	&::after {
+		left: 0;
+		right: -${smallMobilePageMargin};
+
+		${from.mobileLandscape} {
+			right: -${pageMargin};
+		}
+
+		${from.tablet} {
+			right: 0;
+		}
+	}
 `;
 
 export const Titlepiece = ({
@@ -175,23 +212,31 @@ export const Titlepiece = ({
 		>
 			{/* Edition menu */}
 			<div css={editionSwitcherMenuStyles}>
-				<TitlepieceEditionDropdown
+				<EditionDropdown
 					editionId={editionId}
-					dataLinkName={''}
+					dataLinkName={nestedOphanComponents(
+						'header',
+						'titlepiece',
+						'edition-picker: toggle',
+					)}
 				/>
 			</div>
 
 			{/* Guardian logo */}
 			<div css={guardianLogoStyles}>
-				<a href="https://theguardian.com">
-					<SvgGuardianLogo
-						textColor={themePalette('--masthead-nav-link-text')}
-					/>
-				</a>
+				<Logo editionId={editionId} />
 			</div>
 
 			{/* Pillars nav */}
-			<nav css={pillarsNavStyles}>
+			<nav
+				css={[
+					pillarsNavStyles,
+					horizontalDivider,
+					showSubNav &&
+						nav.subNavSections &&
+						dividerOverridesForSubNav,
+				]}
+			>
 				{/* Pillars nav mobile version */}
 				<Hide from="desktop">
 					<Pillars
@@ -224,7 +269,7 @@ export const Titlepiece = ({
 					/>
 				</Hide>
 
-				{/* <TitlepieceExpandedNav
+				{/* <ExpandedNav
 					nav={nav}
 					editionId={editionId}
 					isImmersive={isImmersive}
@@ -244,18 +289,17 @@ export const Titlepiece = ({
 			</div>
 			{/* </Hide> */}
 
-			{/* Subnav */}
-			{nav.subNavSections && showSubNav && (
-				<nav css={subnavStyles}>
-					<ul css={subnavListStyles}>
-						{nav.subNavSections.links.map(({ title, url }) => (
-							<li key={title} css={subnavListItemStyles}>
-								<a href={url} css={subnavLinkStyles}>
-									{title}
-								</a>
-							</li>
-						))}
-					</ul>
+			{showSubNav && nav.subNavSections && (
+				<nav
+					data-print-layout="hide"
+					css={[subNavStyles, scrollableSubNavStyles]}
+					data-testid="sub-nav"
+					data-component="sub-nav"
+				>
+					<SubNav
+						subNavSections={nav.subNavSections}
+						currentNavLink={nav.currentNavLink}
+					/>
 				</nav>
 			)}
 		</Grid>

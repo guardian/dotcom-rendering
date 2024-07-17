@@ -1,6 +1,13 @@
 const swcConfig = require('./webpack/.swcrc.json');
 
-const esModules = ['@guardian/', 'screenfull'].join('|');
+const esModules = [
+	'@guardian/',
+	'screenfull',
+	'node-fetch',
+	'data-uri-to-buffer',
+	'fetch-blob',
+	'formdata-polyfill',
+].join('|');
 
 module.exports = {
 	testEnvironment: 'jsdom',

@@ -3,7 +3,7 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import type { CountryCode } from '@guardian/libs';
-import { cmp, isString, storage } from '@guardian/libs';
+import { cmp, isString, isUndefined, storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../lib/articleCount';
 import type { ArticleCounts } from '../lib/articleCount';
@@ -13,11 +13,10 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsAndroid } from '../lib/useIsAndroid';
-import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
@@ -233,15 +232,13 @@ export const StickyBottomBanner = ({
 	const { brazeMessages } = useBraze(idApiUrl, renderingTarget);
 
 	const countryCode = useCountryCode('sticky-bottom-banner');
-	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const isSignedIn = useIsSignedIn();
+
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();
 	const signInGateWillShow = useSignInGateWillShow({
-		isSignedIn,
+		isSignedIn: isSignedIn === true,
 		contentType,
 		sectionId,
 		tags,
@@ -255,8 +252,18 @@ export const StickyBottomBanner = ({
 		setAsyncArticleCounts(getArticleCounts(pageId, tags, contentType));
 	}, [contentType, tags, pageId]);
 
-	useOnce(() => {
-		if (!countryCode) return;
+	useEffect(() => {
+		// Wait for the following dependencies before checking for CMP, Braze + RRCP messages
+		if (
+			isUndefined(countryCode) ||
+			isUndefined(isSignedIn) ||
+			isUndefined(brazeMessages) ||
+			isUndefined(asyncArticleCounts) ||
+			isUndefined(signInGateWillShow) ||
+			isSignedIn === 'Pending'
+		) {
+			return;
+		}
 		const CMP = buildCmpBannerConfig();
 
 		const readerRevenue = buildReaderRevenueBannerConfig(
@@ -265,9 +272,7 @@ export const StickyBottomBanner = ({
 			isSignedIn,
 			countryCode,
 			isPreview,
-			asyncArticleCounts: asyncArticleCounts as Promise<
-				ArticleCounts | undefined
-			>,
+			asyncArticleCounts,
 			signInGateWillShow,
 			contentType,
 			sectionId,
@@ -284,7 +289,7 @@ export const StickyBottomBanner = ({
 			section: sectionId,
 		};
 		const brazeBanner = buildBrazeBanner(
-			brazeMessages as BrazeMessagesInterface,
+			brazeMessages,
 			brazeArticleContext,
 			idApiUrl,
 			tags,
@@ -304,7 +309,26 @@ export const StickyBottomBanner = ({
 					`StickyBottomBanner pickMessage - error: ${String(e)}`,
 				),
 			);
-	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCounts]);
+	}, [
+		isSignedIn,
+		countryCode,
+		brazeMessages,
+		asyncArticleCounts,
+		contentType,
+		contributionsServiceUrl,
+		idApiUrl,
+		isAndroidWebview,
+		isMinuteArticle,
+		isPaidContent,
+		isPreview,
+		isSensitive,
+		remoteBannerSwitch,
+		renderingTarget,
+		sectionId,
+		shouldHideReaderRevenue,
+		signInGateWillShow,
+		tags,
+	]);
 
 	if (SelectedBanner) {
 		return <SelectedBanner />;

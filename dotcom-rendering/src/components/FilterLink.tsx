@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { space, textSans15 } from '@guardian/source/foundations';
 import { LinkButton, SvgCross } from '@guardian/source/react-components';
 import { decidePalette } from '../lib/decidePalette';

@@ -444,7 +444,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 
 						return (
-							<>
+							<Fragment key={ophanName}>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -507,7 +507,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</>
+							</Fragment>
 						);
 					}
 

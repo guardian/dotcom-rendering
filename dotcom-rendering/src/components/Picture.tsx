@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+} from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { generateImageURL } from '../lib/image';

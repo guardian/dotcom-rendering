@@ -1,7 +1,12 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/Columns.tsx
+ */
 import { css } from '@emotion/react';
 import {
 	from,
 	headlineBold20,
+	headlineBold24,
 	space,
 	textSans17,
 } from '@guardian/source/foundations';
@@ -12,26 +17,35 @@ import {
 	getRemainingEditions,
 } from '../../../../lib/edition';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
-import type { NavType } from '../../../../model/extract-nav';
+import type { LinkType, NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
+import {
+	expandedNavLinkStyles,
+	hideFromDesktop,
+	listAccessibility,
+} from '../commonStyles';
 import { MoreSection } from './MoreSection';
 import { lineStyle, Pillar } from './Pillar';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SearchBar } from './SearchBar';
 
-const columnsStyle = (isImmersive: boolean) => css`
+const columnsStyle = css`
 	box-sizing: border-box;
 	max-width: none;
 	${from.desktop} {
 		max-width: 980px;
-		padding: 0 ${space[4] + 3}px;
+		padding: 0 ${space[5]}px;
 		position: relative;
 		margin: 0 auto;
 		display: flex;
-		border-right: ${isImmersive
-			? 'none'
-			: `1px solid ${themePalette('--masthead-nav-lines')}`};
+		border-right: 1px solid ${themePalette('--masthead-nav-lines')};
 		border-top: 1px solid ${themePalette('--masthead-nav-lines')};
+	}
+`;
+
+const immersiveColumnStyle = css`
+	${from.desktop} {
+		border-right: none;
 	}
 `;
 
@@ -45,30 +59,21 @@ const columnsStyleFromLeftCol = css`
 `;
 
 const desktopBrandExtensionColumn = css`
+	display: none;
 	${from.desktop} {
 		display: block;
 	}
-	display: none;
 	padding: ${space[2]}px;
 `;
 
 const brandExtensionList = css`
-	box-sizing: border-box;
 	${textSans17};
-	flex-wrap: wrap;
-	list-style: none;
-	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
-	li::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
-	margin: 0;
-	padding: 0 0 12px;
+	${listAccessibility}
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
+	margin: 0;
 	padding-bottom: 0;
 `;
 
@@ -88,44 +93,21 @@ const brandExtensionListItem = css`
 `;
 
 const brandExtensionLink = css`
+	${expandedNavLinkStyles}
 	${headlineBold20};
-	background-color: transparent;
-	border: 0;
-	box-sizing: border-box;
-	color: ${themePalette('--masthead-nav-link-text')};
-	cursor: pointer;
-	display: inline-block;
-	outline: none;
-	padding: 8px 34px 8px 50px;
-	position: relative;
-	text-align: left;
-	width: 100%;
 	text-decoration: none;
+
 	${from.tablet} {
 		padding-left: 60px;
 	}
-
 	${from.desktop} {
 		padding: 6px 0;
 	}
-	:hover,
-	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
-	}
-	> * {
-		pointer-events: none;
-	}
 `;
 
-const brandExtensionLinkFromLeftCol = css`
+const brandExtensionLinkFromWide = css`
 	${from.wide} {
-		font-size: 24px;
-	}
-`;
-
-const editionsSwitch = css`
-	${from.desktop} {
-		display: none;
+		${headlineBold24};
 	}
 `;
 
@@ -147,47 +129,55 @@ export const Sections = ({
 	return (
 		<ul
 			css={[
-				columnsStyle(isImmersive),
+				columnsStyle,
+				isImmersive && immersiveColumnStyle,
 				!hasPageSkin && columnsStyleFromLeftCol,
 			]}
 			role="menubar"
 			data-testid="nav-menu-columns"
 		>
-			{nav.pillars.map(
-				(column, i) => (
-					column.children?.unshift({
-						title: column.title,
-						longTitle: `View all ${column.title}`,
-						url: column.url,
-						children: [],
-						mobileOnly: true,
-					}),
-					(
-						<Pillar
-							column={column}
-							key={column.title.toLowerCase()}
-							index={i}
-							showLineBelow={i !== nav.pillars.length - 1}
-							hasPageSkin={hasPageSkin}
-						/>
-					)
-				),
-			)}
+			{nav.pillars.map((column, i) => {
+				const viewAllLink = {
+					title: column.title,
+					longTitle: `View all ${column.title}`,
+					url: column.url,
+					children: [],
+					mobileOnly: true,
+				} satisfies LinkType;
 
-			<li role="none">
-				<Hide from="desktop">
+				const children = column.children && [
+					viewAllLink,
+					...column.children,
+				];
+
+				return (
+					<Pillar
+						column={{
+							...column,
+							children,
+						}}
+						key={column.title.toLowerCase()}
+						index={i}
+						showLineBelow={i !== nav.pillars.length - 1}
+						hasPageSkin={hasPageSkin}
+					/>
+				);
+			})}
+
+			<Hide from="desktop">
+				<li role="none">
 					<SearchBar />
-				</Hide>
-				<div css={lineStyle}></div>
-			</li>
+				</li>
+			</Hide>
+			<div css={lineStyle}></div>
 
 			<ReaderRevenueLinks
 				readerRevenueLinks={nav.readerRevenueLinks}
 				editionId={editionId}
 			/>
 
-			{/* This is where the edition dropdown is inserted					 */}
-			<section css={editionsSwitch}>
+			{/* Mobile only Brand Extensions list */}
+			<section css={hideFromDesktop}>
 				<Pillar
 					column={{
 						...activeEdition,
@@ -206,10 +196,11 @@ export const Sections = ({
 				key="more"
 				hasPageSkin={hasPageSkin}
 			/>
+
+			{/* Desktop only Brand Extensions list*/}
 			<li css={desktopBrandExtensionColumn} role="none">
-				<Hide until="desktop">
-					<SearchBar />
-				</Hide>
+				<SearchBar />
+
 				<ul
 					css={[
 						brandExtensionList,
@@ -226,8 +217,7 @@ export const Sections = ({
 								className="selectableMenuItem"
 								css={[
 									brandExtensionLink,
-									!hasPageSkin &&
-										brandExtensionLinkFromLeftCol,
+									!hasPageSkin && brandExtensionLinkFromWide,
 								]}
 								href={brandExtension.url}
 								key={brandExtension.title}

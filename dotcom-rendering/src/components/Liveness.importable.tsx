@@ -1,3 +1,4 @@
+import type { ArticleFormat } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';

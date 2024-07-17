@@ -1,17 +1,22 @@
+/**
+ * @file
+ * This file was largely copied from src/components/Nav/ExpandedMenu/CollapseColumButton.tsx
+ */
 import { css } from '@emotion/react';
 import {
-	from,
-	headlineMedium24,
+	headlineBold24,
+	space,
 	textSans17,
 } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
-import { palette as themePalette } from '../../../../palette';
+import { expandedNavLinkStyles, hideFromDesktop } from '../commonStyles';
 
-const hideDesktop = css`
-	${from.desktop} {
-		display: none;
-	}
-`;
+type Props = {
+	title: string;
+	columnInputId: string;
+	collapseColumnInputId: string;
+	ariaControls: string;
+};
 
 const showColumnLinksStyle = (columnInputId: string) => css`
 	/*
@@ -23,47 +28,35 @@ const showColumnLinksStyle = (columnInputId: string) => css`
 	/* stylelint-disable-next-line selector-type-no-unknown */
 	${`#${columnInputId}`}:checked ~ & {
 		:before {
-			margin-top: 8px;
+			margin-top: ${space[2]}px;
 			transform: rotate(-135deg);
 		}
 	}
 `;
 
 const collapseColumnButton = css`
-	user-select: none;
-	background-color: transparent;
-	border: 0;
-	box-sizing: border-box;
-	cursor: pointer;
-	color: ${themePalette('--masthead-nav-link-text')};
+	${headlineBold24};
+
+	${expandedNavLinkStyles};
+	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
+
 	display: block;
-	${headlineMedium24};
-	font-weight: 700;
-	outline: none;
-	padding: 6px 34px 18px 50px;
-	position: relative;
-	text-align: left;
-	width: 100%;
-	> * {
-		pointer-events: none;
-	}
+
+	user-select: none;
 	text-transform: capitalize;
+
 	:before {
-		margin-top: 4px;
-		left: 25px;
+		margin-top: ${space[1]}px;
+		left: ${space[6]}px;
 		position: absolute;
 		border: 2px solid currentColor;
 		border-top: 0;
 		border-left: 0;
 		content: '';
 		display: inline-block;
-		height: 10px;
 		transform: rotate(45deg);
+		height: 10px;
 		width: 10px;
-	}
-	:hover,
-	:focus {
-		color: ${themePalette('--masthead-nav-link-text-hover')};
 	}
 `;
 
@@ -71,13 +64,10 @@ const editionStyle = css`
 	text-transform: none;
 	${textSans17};
 `;
-type Props = {
-	title: string;
-	columnInputId: string;
-	collapseColumnInputId: string;
-	ariaControls: string;
-};
 
+/**
+ * Mobile only button to collapse a pillar section
+ */
 export const CollapseSectionButton = ({
 	title,
 	columnInputId,
@@ -91,7 +81,7 @@ export const CollapseSectionButton = ({
 			collapseColumnButton,
 			title.includes('edition') && editionStyle,
 			showColumnLinksStyle(columnInputId),
-			hideDesktop,
+			hideFromDesktop,
 		]}
 		aria-label={`Toggle ${title}`}
 		htmlFor={columnInputId}
@@ -101,7 +91,7 @@ export const CollapseSectionButton = ({
 		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="menuitem"
 		data-testid={`column-collapse-${title}`}
-		data-link-name={nestedOphanComponents('header', `secondary`, title)}
+		data-link-name={nestedOphanComponents('header', 'secondary', title)}
 	>
 		{title}
 	</label>

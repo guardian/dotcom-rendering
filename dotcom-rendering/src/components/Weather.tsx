@@ -16,7 +16,6 @@ import { css, keyframes } from '@emotion/react';
 import {
 	between,
 	from,
-	palette,
 	space,
 	textSans15,
 	textSans17,
@@ -30,7 +29,7 @@ import {
 } from '@guardian/source/react-components';
 import { useId } from 'react';
 import type { EditionId } from '../lib/edition';
-import { palette as schemePalette } from '../palette';
+import { palette } from '../palette';
 import type { WeatherApiData, WeatherData } from '../types/weather';
 import { WeatherSlot } from './WeatherSlot';
 
@@ -40,7 +39,7 @@ const visuallyHiddenCSS = css`
 
 const weatherCSS = css`
 	animation: ${keyframes`from {	opacity: 0;	} to {	opacity: 1;	}`} 250ms;
-	--border: 1px solid ${schemePalette('--article-border')};
+	--border: 1px solid ${palette('--article-border')};
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -144,7 +143,7 @@ const slotCSS = css`
 const linkCSS = css`
 	a {
 		${textSans15};
-		color: ${palette.neutral[7]};
+		color: inherit;
 		text-decoration: none;
 		display: block;
 		display: flex;
@@ -170,21 +169,20 @@ const linkCSS = css`
 const ExternalLinkIcon = () => (
 	<div
 		css={css`
-			background-color: black;
+			background-color: currentColor;
 			height: 24px;
 			width: 24px;
 			margin-left: 0.5ch;
 			border-radius: 100%;
 
 			svg {
-				fill: white;
 				height: 18px;
 				margin-top: 2px;
 				margin-left: 3px;
 			}
 		`}
 	>
-		<SvgExternal />
+		<SvgExternal theme={{ fill: palette('--weather-icon') }} />
 	</div>
 );
 

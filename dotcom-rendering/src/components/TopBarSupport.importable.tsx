@@ -11,7 +11,7 @@ import type {
 	ModuleData,
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import {
 	getLastOneOffContributionDate,
@@ -19,11 +19,9 @@ import {
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
-import type { AuthStatus } from '../lib/identity';
 import { setAutomat } from '../lib/setAutomat';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
-import { useOnce } from '../lib/useOnce';
 import { usePageViewId } from '../lib/usePageViewId';
 import { useConfig } from './ConfigContext';
 
@@ -37,19 +35,6 @@ const headerStyles = css`
 	align-items: center;
 	overflow-wrap: nowrap;
 `;
-
-function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
-	switch (authStatus.kind) {
-		case 'Pending':
-			return undefined;
-		case 'SignedInWithCookies':
-		case 'SignedInWithOkta':
-			return true;
-		case 'SignedOutWithCookies':
-		case 'SignedOutWithOkta':
-			return false;
-	}
-}
 
 type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
@@ -66,11 +51,15 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType | null>(null);
-	const isSignedIn = getIsSignedIn(useAuthStatus());
+	const isSignedIn = useIsSignedIn();
 
 	const { renderingTarget } = useConfig();
 
-	useOnce((): void => {
+	useEffect((): void => {
+		if (isUndefined(countryCode) || isSignedIn === 'Pending') {
+			return;
+		}
+
 		setAutomat();
 
 		const requestData: HeaderPayload = {
@@ -81,7 +70,7 @@ const ReaderRevenueLinksRemote = ({
 				clientName: 'dcr',
 			},
 			targeting: {
-				showSupportMessaging: !shouldHideSupportMessaging(),
+				showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
@@ -89,7 +78,7 @@ const ReaderRevenueLinksRemote = ({
 				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
 				purchaseInfo: getPurchaseInfo(),
-				isSignedIn: isSignedIn === true,
+				isSignedIn,
 			},
 		};
 
@@ -121,7 +110,7 @@ const ReaderRevenueLinksRemote = ({
 					'rr-header-links',
 				);
 			});
-	}, [countryCode, isSignedIn]);
+	}, [countryCode, isSignedIn, contributionsServiceUrl, pageViewId]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
 		return (
