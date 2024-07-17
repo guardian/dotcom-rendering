@@ -82,6 +82,7 @@ const textElement =
 				return jsx('blockquote', {
 					key,
 					children,
+					'data-spacefinder-role': 'inline',
 					css: isQuoted
 						? quotedBlockquoteStyles
 						: simpleBlockquoteStyles,

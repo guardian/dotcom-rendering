@@ -20,7 +20,11 @@ export const VideoAtom = ({
 }: Props) => {
 	if (assets.length === 0) return null; // Handle empty assets array
 	return (
-		<MaintainAspectRatio height={height} width={width}>
+		<MaintainAspectRatio
+			height={height}
+			width={width}
+			data-spacefinder-role="inline"
+		>
 			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
 			<video
 				controls={true}

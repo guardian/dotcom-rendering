@@ -15,7 +15,7 @@ const starsWrapper = css`
 `;
 
 export const StarRatingBlockComponent = ({ rating, size }: Props) => (
-	<div css={starsWrapper}>
+	<div css={starsWrapper} data-spacefinder-role="inline">
 		<StarRating rating={rating} size={size} />
 	</div>
 );
