@@ -97,7 +97,7 @@ export const HighlightsCard = ({
 				<CardHeadline
 					headlineText={headlineText}
 					format={format}
-					size={'medium'}
+					size="medium"
 					showPulsingDot={showPulsingDot}
 					kickerText={kickerText}
 				/>
