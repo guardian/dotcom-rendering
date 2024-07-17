@@ -1,24 +1,24 @@
 import { css } from '@emotion/react';
 import { from, palette } from '@guardian/source/foundations';
-import type { DCRFrontImage } from '../../types/front';
+// import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
-import type { Loading } from '../CardPicture';
+// import type { Loading } from '../CardPicture';
 import { Icon } from '../MediaMeta';
 
 export type HighlightsCardProps = {
-	linkTo: string;
+	// linkTo: string;
 	format: ArticleFormat;
 	headlineText: string;
-	showQuotedHeadline?: boolean;
-	image?: DCRFrontImage;
-	imageLoading: Loading;
+	// showQuotedHeadline?: boolean;
+	// image?: DCRFrontImage;
+	// imageLoading: Loading;
 	avatarUrl?: string;
 	mainMedia?: MainMedia;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	dataLinkName?: string;
+	// dataLinkName?: string;
 	byline?: string;
 	showMediaIcon?: boolean;
 };
@@ -46,7 +46,6 @@ const headline = css`
 const mediaIcon = css`
 	grid-area: media-icon;
 	align-self: end;
-
 	width: 24px;
 	height: 24px;
 	/* We’re using the text colour for the icon badge */
@@ -81,17 +80,17 @@ const mainGallery: MainMedia = {
 };
 
 export const HighlightsCard = ({
-	linkTo,
+	// linkTo,
 	format,
 	headlineText,
-	showQuotedHeadline,
-	image,
-	imageLoading,
+	// showQuotedHeadline,
+	// image,
+	// imageLoading,
 	avatarUrl,
 	mainMedia = mainGallery,
 	kickerText,
 	showPulsingDot,
-	dataLinkName,
+	// dataLinkName,
 	byline,
 	showMediaIcon,
 }: HighlightsCardProps) => {
