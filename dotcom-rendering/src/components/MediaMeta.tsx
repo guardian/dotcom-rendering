@@ -34,7 +34,7 @@ const wrapperStyles = css`
 	margin-top: 4px;
 `;
 
-const Icon = ({ mediaType }: { mediaType: MediaType }) => {
+export const Icon = ({ mediaType }: { mediaType: MediaType }) => {
 	switch (mediaType) {
 		case 'Gallery':
 			return <SvgCamera />;
