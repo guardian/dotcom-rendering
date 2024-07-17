@@ -76,10 +76,6 @@ const imageArea = css`
 	align-self: end;
 `;
 
-const mainGallery: MainMedia = {
-	type: 'Gallery',
-};
-
 export const HighlightsCard = ({
 	// linkTo,
 	format,
@@ -88,7 +84,7 @@ export const HighlightsCard = ({
 	// image,
 	// imageLoading,
 	avatarUrl,
-	mainMedia = mainGallery,
+	mainMedia,
 	kickerText,
 	showPulsingDot,
 	// dataLinkName,
@@ -106,7 +102,7 @@ export const HighlightsCard = ({
 					kickerText={kickerText}
 				/>
 			</div>
-			{showMediaIcon ? (
+			{mainMedia && showMediaIcon ? (
 				<div css={mediaIcon}>
 					<Icon mediaType={mainMedia.type} />
 				</div>

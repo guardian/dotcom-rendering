@@ -2,7 +2,12 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { from } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
+import type { MainMedia } from '../../types/mainMedia';
 import { HighlightsCard } from './HighlightsCard';
+
+const mainGallery: MainMedia = {
+	type: 'Gallery',
+};
 
 const meta = {
 	component: HighlightsCard,
@@ -25,6 +30,7 @@ const meta = {
 		avatarUrl:
 			'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
 		byline: 'Georges Monbiot',
+		mainMedia: mainGallery,
 	},
 } satisfies Meta<typeof HighlightsCard>;
 
