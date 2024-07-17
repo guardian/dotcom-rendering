@@ -476,6 +476,21 @@ export const renderElement = ({
 					poster={element.posterImage?.[0]?.url}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
+			return (
+				<MiniProfiles
+					qAndAExplainers={element.miniProfiles}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
 			return (
 				<MultiImageBlockComponent
