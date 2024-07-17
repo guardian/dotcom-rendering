@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, Pillar } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, Pillar } from '@guardian/libs';
 import {
 	DottedLines,
 	StraightLines,

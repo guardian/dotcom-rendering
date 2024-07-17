@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay, type ArticleFormat } from '@guardian/libs';
 import {
 	headlineBold17,
 	headlineLight17,

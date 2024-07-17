@@ -1,4 +1,4 @@
-import { ArticleDesign, isString } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isString } from '@guardian/libs';
 import { Hide } from '@guardian/source/react-components';
 import { DottedLines } from '@guardian/source-development-kitchen/react-components';
 import {

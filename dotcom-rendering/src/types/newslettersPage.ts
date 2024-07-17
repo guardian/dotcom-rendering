@@ -2,6 +2,7 @@ import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { Newsletter } from './content';
 import type { FooterType } from './footer';
+import type { FENavType } from './frontend';
 
 // commented out properties are included in the JSON data from
 // frontend, but not actually used on the AllEditorialNewsletters

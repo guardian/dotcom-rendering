@@ -1,4 +1,8 @@
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '@guardian/libs';
 import type { FEFrontCardStyle } from '../types/front';
 
 /**

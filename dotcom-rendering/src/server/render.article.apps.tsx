@@ -1,4 +1,4 @@
-import { ArticleDesign, isString } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import {

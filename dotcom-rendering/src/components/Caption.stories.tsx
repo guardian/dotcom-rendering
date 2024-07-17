@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
+	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
@@ -24,15 +25,15 @@ const articleFormat: ArticleFormat = {
 };
 
 /**
-    display: Display;
-    design: Design;
-    captionText?: string;
-    pillar: Theme;
-    padCaption?: boolean;
-    credit?: string;
-    displayCredit?: boolean;
-    shouldLimitWidth?: boolean;
-    isOverlaid?: boolean; // Not tested here as this option only works in the context of the ImageComponent
+	display: Display;
+	design: Design;
+	captionText?: string;
+	pillar: Theme;
+	padCaption?: boolean;
+	credit?: string;
+	displayCredit?: boolean;
+	shouldLimitWidth?: boolean;
+	isOverlaid?: boolean; // Not tested here as this option only works in the context of the ImageComponent
  */
 
 export const Article: StoryObj = ({ format }: { format: ArticleFormat }) => (

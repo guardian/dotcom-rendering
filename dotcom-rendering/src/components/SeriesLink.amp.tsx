@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleTheme } from '@guardian/libs';
 import { headlineMedium17 } from '@guardian/source/foundations';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
 import type { TagType } from '../types/tag';

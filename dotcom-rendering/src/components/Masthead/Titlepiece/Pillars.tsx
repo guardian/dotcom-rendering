@@ -3,7 +3,7 @@
  * This file was largely inspired by src/components/Pillars.tsx
  */
 import { css } from '@emotion/react';
-import { Pillar } from '@guardian/libs';
+import { type ArticleTheme, Pillar } from '@guardian/libs';
 import {
 	from,
 	headlineBold14,

@@ -1,3 +1,4 @@
+import type { ArticleTheme } from '@guardian/libs';
 import { levels } from 'log4js';
 import { getIdFromUrl } from '../lib/get-video-id.amp';
 import { logger } from '../server/lib/logging';

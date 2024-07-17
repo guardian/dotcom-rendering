@@ -1,4 +1,4 @@
-import { isObject } from '@guardian/libs';
+import { type ArticleFormat, isObject } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Decorator, StoryObj } from '@storybook/react';
 import { useEffect } from 'react';
