@@ -29,12 +29,20 @@ const testTextElement: TextBlockElement = {
 	html: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>',
 };
 
+const testParagraph =
+	'<p>Proin <strong>imperdiet</strong> pellentesque <a href="#">adipiscing</a> turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus.</p>';
+const testListHtml =
+	'<ul><li><p>This is the <em>first</em> item in the list</p></li><li><p>The second item has a <a href="#">hyperlink</a>.</p></li></ul>';
+const testBioText = testParagraph + testListHtml;
+
 export const ThemeVariations = {
 	args: {
 		miniProfiles: [
 			{
 				title: 'The first mini profile',
+				bio: testBioText,
 				body: [testTextElement],
+				endNote: 'End note',
 			},
 			{
 				title: 'The second mini profile',
@@ -144,12 +152,14 @@ export const Images = {
 		miniProfiles: [
 			{
 				title: 'The first mini profile',
+				bio: testBioText,
 				body: [
 					testTextElement,
 					{ ...images[0], displayCredit: true, role: 'inline' },
 					{ ...images[1], displayCredit: true, role: 'thumbnail' },
 					testTextElement,
 				],
+				endNote: 'End note.',
 			},
 			{
 				title: 'The second mini profile',

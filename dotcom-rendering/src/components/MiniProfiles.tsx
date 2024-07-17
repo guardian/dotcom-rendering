@@ -63,7 +63,6 @@ export const MiniProfiles = ({
 					switches={switches}
 					abTests={abTests}
 					editionId={editionId}
-					titleIndex={index + 1}
 					hideCaption={hideCaption}
 					starRating={starRating}
 					key={index}
