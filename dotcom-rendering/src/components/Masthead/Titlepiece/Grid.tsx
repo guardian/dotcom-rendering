@@ -72,6 +72,19 @@ const grid = css`
 	}
 `;
 
+const pageSkinGrid = css`
+	${from.desktop} {
+		grid-template-columns:
+			[viewport-start]
+			minmax(0, 1fr)
+			[content-start main-column-start]
+			repeat(12, 60px)
+			[content-end main-column-end]
+			minmax(0, 1fr)
+			[viewport-end];
+	}
+`;
+
 /**
  * Create a CSS grid container.
  * Use jointly with Content, LeftCol & RightCol.
@@ -81,11 +94,13 @@ const grid = css`
 export const Grid = ({
 	type = 'div',
 	style,
+	hasPageSkin,
 	children,
 }: PropsWithChildren<{
 	type: keyof JSX.IntrinsicElements;
+	hasPageSkin?: boolean;
 	style?: CSSProperties;
-}>) => jsx(type, { css: grid, style }, children);
+}>) => jsx(type, { css: [grid, hasPageSkin && pageSkinGrid], style }, children);
 
 /** Spans the entire width of the grid */
 export const Content = ({

@@ -57,7 +57,9 @@ const pillarBlock = css`
 	${from.desktop} {
 		height: 40px;
 	}
+`;
 
+const pillarBlockWithoutPageSkin = css`
 	${from.leftCol} {
 		height: 52px;
 		width: ${pillarWidthsPx.leftCol}px;
@@ -136,10 +138,6 @@ const pillarLink = css`
 		${headlineBold20}
 	}
 
-	${from.leftCol} {
-		${headlineBold24}
-	}
-
 	:focus:after {
 		transform: translateY(-${pillarUnderlineHeight}px);
 	}
@@ -148,6 +146,12 @@ const pillarLink = css`
 	}
 	:hover:after {
 		transform: translateY(-${pillarUnderlineHeight}px);
+	}
+`;
+
+const pillarLinkWithoutPageSkin = css`
+	${from.leftCol} {
+		${headlineBold24}
 	}
 `;
 
@@ -218,52 +222,47 @@ export const Pillars = ({
 	console.log({ needsAdapting });
 
 	return (
-		<>
-			<ul id="navigation" css={[pillarsContainer]}>
-				{nav.pillars.map((p, i) => {
-					const isSelected = p.pillar === selectedPillar;
+		<ul id="navigation" css={pillarsContainer}>
+			{nav.pillars.map((p, i) => {
+				const isSelected = p.pillar === selectedPillar;
 
-					const showDivider =
-						showBurgerMenu ||
-						isNotLastPillar(i, nav.pillars.length);
+				const showDivider =
+					showBurgerMenu || isNotLastPillar(i, nav.pillars.length);
 
-					const pillarColour = getPillarColour(p.pillar);
+				const pillarColour = getPillarColour(p.pillar);
 
-					return (
-						<li
-							key={p.title}
+				return (
+					<li
+						key={p.title}
+						css={[
+							pillarBlock,
+							!hasPageSkin && pillarBlockWithoutPageSkin,
+							listAccessibility,
+							showDivider && verticalDividerStyles,
+							i === 0 && firstPillarLinkOverrides,
+						]}
+					>
+						<a
+							href={p.url}
 							css={[
-								pillarBlock,
-								listAccessibility,
-								showDivider && verticalDividerStyles,
-								i === 0 && firstPillarLinkOverrides,
+								pillarLink,
+								!hasPageSkin && pillarLinkWithoutPageSkin,
+								pillarUnderline,
+								isSelected && forceUnderline,
 							]}
+							style={{ '--pillar-underline': pillarColour }}
+							data-link-name={nestedOphanComponents(
+								dataLinkName,
+								'primary',
+								p.title,
+							)}
 						>
-							<a
-								href={p.url}
-								css={[
-									pillarLink,
-									pillarUnderline,
-									isSelected && forceUnderline,
-								]}
-								style={{ '--pillar-underline': pillarColour }}
-								data-link-name={nestedOphanComponents(
-									dataLinkName,
-									'primary',
-									p.title,
-								)}
-							>
-								{p.title}
-							</a>
-						</li>
-					);
-				})}
-				{
-					/** TODO - implement veggie burger menu */ showBurgerMenu && (
-						<></>
-					)
-				}
-			</ul>
-		</>
+							{p.title}
+						</a>
+					</li>
+				);
+			})}
+			{/** TODO - implement veggie burger menu */ showBurgerMenu && <></>}
+		</ul>
 	);
 };

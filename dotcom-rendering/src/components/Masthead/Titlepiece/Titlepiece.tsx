@@ -26,14 +26,6 @@ interface Props {
 	hasPageSkin?: boolean;
 }
 
-export const pillarLeftMarginPx = 6;
-
-export const pillarWidthsPx = {
-	tablet: 108,
-	leftCol: 125,
-	wide: 136,
-};
-
 const veggieBurgerDiameter = 40;
 
 const gridFullWidth = css`
@@ -48,7 +40,7 @@ const editionSwitcherMenuStyles = css`
 	}
 `;
 
-const guardianLogoStyles = css`
+const logoStyles = css`
 	${getZIndex('TheGuardian')}
 	${gridFullWidth}
 	grid-row: 1;
@@ -78,6 +70,11 @@ const guardianLogoStyles = css`
 		${from.desktop} {
 			width: 276px;
 		}
+	}
+`;
+
+const logoStylesWithoutPageSkin = css`
+	svg {
 		${from.leftCol} {
 			width: 398px;
 		}
@@ -150,6 +147,9 @@ const subNavStyles = css`
 	${from.tablet} {
 		min-height: 30px;
 	}
+`;
+
+const subNavStylesWithoutPageSkin = css`
 	${from.leftCol} {
 		margin-top: 14px;
 	}
@@ -209,6 +209,7 @@ export const Titlepiece = ({
 				backgroundColor: themePalette('--masthead-nav-background'),
 				color: themePalette('--masthead-nav-link-text'),
 			}}
+			hasPageSkin={hasPageSkin}
 		>
 			{/* Edition menu */}
 			<div css={editionSwitcherMenuStyles}>
@@ -223,7 +224,7 @@ export const Titlepiece = ({
 			</div>
 
 			{/* Guardian logo */}
-			<div css={guardianLogoStyles}>
+			<div css={[logoStyles, !hasPageSkin && logoStylesWithoutPageSkin]}>
 				<Logo editionId={editionId} />
 			</div>
 
@@ -292,7 +293,11 @@ export const Titlepiece = ({
 			{showSubNav && nav.subNavSections && (
 				<nav
 					data-print-layout="hide"
-					css={[subNavStyles, scrollableSubNavStyles]}
+					css={[
+						subNavStyles,
+						!hasPageSkin && subNavStylesWithoutPageSkin,
+						scrollableSubNavStyles,
+					]}
 					data-testid="sub-nav"
 					data-component="sub-nav"
 				>
