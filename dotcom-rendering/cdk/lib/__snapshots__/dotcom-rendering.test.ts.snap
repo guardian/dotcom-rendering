@@ -50,7 +50,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "ELBLogsParameter": {
-      "Default": "/PROD/frontend/rendering/elb.logs.bucketName",
+      "Default": "/TEST/frontend/rendering/elb.logs.bucketName",
       "Description": "S3 Bucket Name for ELB logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
@@ -186,7 +186,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                       {
                         "Ref": "AWS::AccountId",
                       },
-                      ":parameter/PROD/frontend/rendering/*",
+                      ":parameter/TEST/frontend/rendering/*",
                     ],
                   ],
                 },
@@ -234,11 +234,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "HealthCheckType": "ELB",
         "LaunchTemplate": {
           "LaunchTemplateId": {
-            "Ref": "frontendPRODrendering10B74E2A",
+            "Ref": "frontendTESTrenderingF3FD9600",
           },
           "Version": {
             "Fn::GetAtt": [
-              "frontendPRODrendering10B74E2A",
+              "frontendTESTrenderingF3FD9600",
               "LatestVersionNumber",
             ],
           },
@@ -281,7 +281,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           {
             "Key": "Stage",
             "PropagateAtLaunch": true,
-            "Value": "PROD",
+            "Value": "TEST",
           },
           {
             "Key": "SystemdUnit",
@@ -297,7 +297,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
     "Backend5xxAlarm": {
       "Properties": {
-        "ActionsEnabled": true,
+        "ActionsEnabled": false,
         "AlarmActions": [
           {
             "Fn::Join": [
@@ -307,7 +307,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 {
                   "Ref": "AWS::AccountId",
                 },
-                ":Frontend-PROD-CriticalAlerts",
+                ":Frontend-TEST-CriticalAlerts",
               ],
             ],
           },
@@ -334,7 +334,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 {
                   "Ref": "AWS::AccountId",
                 },
-                ":Frontend-PROD-CriticalAlerts",
+                ":Frontend-TEST-CriticalAlerts",
               ],
             ],
           },
@@ -386,7 +386,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                     {
                       "Ref": "DistributionBucketName",
                     },
-                    "/frontend/PROD/rendering/*",
+                    "/frontend/TEST/rendering/*",
                   ],
                 ],
               },
@@ -434,7 +434,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -533,7 +533,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
       },
@@ -577,7 +577,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -594,7 +594,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           "S3BucketName": {
             "Ref": "ELBLogsParameter",
           },
-          "S3BucketPrefix": "ELBLogs/frontend/rendering/PROD",
+          "S3BucketPrefix": "ELBLogs/frontend/rendering/TEST",
         },
         "CrossZone": true,
         "HealthCheck": {
@@ -612,7 +612,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Protocol": "http",
           },
         ],
-        "LoadBalancerName": "frontend-PROD-rendering-ELB",
+        "LoadBalancerName": "frontend-TEST-rendering-ELB",
         "Scheme": "internal",
         "SecurityGroups": [
           {
@@ -644,7 +644,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
       },
@@ -690,7 +690,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -744,7 +744,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -755,7 +755,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
     "LatencyScalingAlarm": {
       "Properties": {
-        "ActionsEnabled": true,
+        "ActionsEnabled": false,
         "AlarmActions": [
           {
             "Fn::GetAtt": [
@@ -810,7 +810,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/PROD/frontend/rendering",
+                    ":parameter/TEST/frontend/rendering",
                   ],
                 ],
               },
@@ -833,7 +833,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/PROD/frontend/rendering/*",
+                    ":parameter/TEST/frontend/rendering/*",
                   ],
                 ],
               },
@@ -906,7 +906,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -915,7 +915,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "frontendPRODrendering10B74E2A": {
+    "frontendTESTrenderingF3FD9600": {
       "DependsOn": [
         "InstanceRole",
       ],
@@ -924,7 +924,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           "IamInstanceProfile": {
             "Arn": {
               "Fn::GetAtt": [
-                "frontendPRODrenderingProfileD69551A3",
+                "frontendTESTrenderingProfileA2D2425E",
                 "Arn",
               ],
             },
@@ -967,7 +967,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "DotcomRendering/frontend-PROD-rendering",
+                  "Value": "DotcomRendering/frontend-TEST-rendering",
                 },
                 {
                   "Key": "Stack",
@@ -975,7 +975,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Stage",
-                  "Value": "PROD",
+                  "Value": "TEST",
                 },
               ],
             },
@@ -992,7 +992,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "DotcomRendering/frontend-PROD-rendering",
+                  "Value": "DotcomRendering/frontend-TEST-rendering",
                 },
                 {
                   "Key": "Stack",
@@ -1000,7 +1000,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Stage",
-                  "Value": "PROD",
+                  "Value": "TEST",
                 },
               ],
             },
@@ -1018,7 +1018,7 @@ aws --region eu-west-1 s3 cp s3://",
                   {
                     "Ref": "DistributionBucketName",
                   },
-                  "/frontend/PROD/rendering/rendering.tar.gz ./
+                  "/frontend/TEST/rendering/rendering.tar.gz ./
 tar -zxf rendering.tar.gz rendering
 chown -R dotcom-rendering:frontend rendering
 cd rendering
@@ -1037,7 +1037,7 @@ StandardError=journal
 StandardOutput=journal
 Environment=TERM=xterm-256color
 Environment=NODE_ENV=production
-Environment=GU_STAGE=PROD
+Environment=GU_STAGE=TEST
 Environment=GU_APP=rendering
 Environment=GU_STACK=frontend
 ExecStart=make prod
@@ -1066,7 +1066,7 @@ systemctl start rendering",
               },
               {
                 "Key": "Name",
-                "Value": "DotcomRendering/frontend-PROD-rendering",
+                "Value": "DotcomRendering/frontend-TEST-rendering",
               },
               {
                 "Key": "Stack",
@@ -1074,7 +1074,7 @@ systemctl start rendering",
               },
               {
                 "Key": "Stage",
-                "Value": "PROD",
+                "Value": "TEST",
               },
             ],
           },
@@ -1082,7 +1082,7 @@ systemctl start rendering",
       },
       "Type": "AWS::EC2::LaunchTemplate",
     },
-    "frontendPRODrenderingProfileD69551A3": {
+    "frontendTESTrenderingProfileA2D2425E": {
       "Properties": {
         "Roles": [
           {
@@ -1094,10 +1094,10 @@ systemctl start rendering",
     },
     "loadBalancerDnsName0B1DEBAD": {
       "Properties": {
-        "Name": "/frontend/PROD/rendering.loadBalancerDnsName",
+        "Name": "/frontend/TEST/rendering.loadBalancerDnsName",
         "Tags": {
           "Stack": "frontend",
-          "Stage": "PROD",
+          "Stage": "TEST",
           "gu:cdk:version": "TEST",
           "gu:repo": "guardian/dotcom-rendering",
         },

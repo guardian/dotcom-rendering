@@ -28,8 +28,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       "GuApplicationTargetGroup",
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
-      "GuAlb5xxPercentageAlarm",
-      "GuUnhealthyInstancesAlarm",
       "GuCname",
     ],
     "gu:cdk:version": "TEST",
@@ -196,11 +194,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         "HealthCheckType": "ELB",
         "LaunchTemplate": {
           "LaunchTemplateId": {
-            "Ref": "frontendPRODarticlerenderingC9709529",
+            "Ref": "frontendTESTarticlerendering6160AD1F",
           },
           "Version": {
             "Fn::GetAtt": [
-              "frontendPRODarticlerenderingC9709529",
+              "frontendTESTarticlerendering6160AD1F",
               "LatestVersionNumber",
             ],
           },
@@ -238,7 +236,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           {
             "Key": "Stage",
             "PropagateAtLaunch": true,
-            "Value": "PROD",
+            "Value": "TEST",
           },
           {
             "Key": "SystemdUnit",
@@ -256,91 +254,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         },
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
-    },
-    "CPUScaleUpPolicyUpperAlarm7E15DD91": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "CPUScaleUpPolicyUpperPolicyDEE5DA77",
-          },
-          {
-            "Ref": "CPUScalingAlertsTopic9D0083F7",
-          },
-        ],
-        "AlarmDescription": "Upper threshold scaling alarm",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "AutoScalingGroupName",
-            "Value": {
-              "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-            },
-          },
-        ],
-        "EvaluationPeriods": 2,
-        "ExtendedStatistic": "p90",
-        "MetricName": "CPUUtilization",
-        "Namespace": "AWS/EC2",
-        "Period": 30,
-        "Threshold": 70,
-        "Unit": "Percent",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "CPUScaleUpPolicyUpperPolicyDEE5DA77": {
-      "Properties": {
-        "AdjustmentType": "PercentChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "MetricIntervalUpperBound": 20,
-            "ScalingAdjustment": 50,
-          },
-          {
-            "MetricIntervalLowerBound": 20,
-            "ScalingAdjustment": 80,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "CPUScalingAlertsSubscriptionEmail170D6D82": {
-      "Properties": {
-        "Endpoint": "dotcom.platform@theguardian.com",
-        "Protocol": "email",
-        "TopicArn": {
-          "Ref": "CPUScalingAlertsTopic9D0083F7",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
-    },
-    "CPUScalingAlertsTopic9D0083F7": {
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-      },
-      "Type": "AWS::SNS::Topic",
     },
     "CertificateArticlerendering3297EFD3": {
       "DeletionPolicy": "Retain",
@@ -369,7 +282,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "ValidationMethod": "DNS",
@@ -418,7 +331,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "DistributionBucketName",
                     },
-                    "/frontend/PROD/article-rendering/*",
+                    "/frontend/TEST/article-rendering/*",
                   ],
                 ],
               },
@@ -466,7 +379,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -555,108 +468,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "High5xxPercentageAlarmArticlerenderingB88D9FE6": {
-      "Properties": {
-        "ActionsEnabled": true,
-        "AlarmActions": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:aws:sns:eu-west-1:",
-                {
-                  "Ref": "AWS::AccountId",
-                },
-                ":Frontend-PROD-CriticalAlerts",
-              ],
-            ],
-          },
-        ],
-        "AlarmDescription": "article-rendering exceeded 0.5% error rate",
-        "AlarmName": "High 5XX error percentage from article-rendering in PROD",
-        "ComparisonOperator": "GreaterThanThreshold",
-        "EvaluationPeriods": 1,
-        "Metrics": [
-          {
-            "Expression": "100*(m1+m2)/m3",
-            "Id": "expr_1",
-            "Label": "% of 5XX responses served for article-rendering (load balancer and instances combined)",
-          },
-          {
-            "Id": "m1",
-            "MetricStat": {
-              "Metric": {
-                "Dimensions": [
-                  {
-                    "Name": "LoadBalancer",
-                    "Value": {
-                      "Fn::GetAtt": [
-                        "LoadBalancerArticlerendering49883BBC",
-                        "LoadBalancerFullName",
-                      ],
-                    },
-                  },
-                ],
-                "MetricName": "HTTPCode_ELB_5XX_Count",
-                "Namespace": "AWS/ApplicationELB",
-              },
-              "Period": 60,
-              "Stat": "Sum",
-            },
-            "ReturnData": false,
-          },
-          {
-            "Id": "m2",
-            "MetricStat": {
-              "Metric": {
-                "Dimensions": [
-                  {
-                    "Name": "LoadBalancer",
-                    "Value": {
-                      "Fn::GetAtt": [
-                        "LoadBalancerArticlerendering49883BBC",
-                        "LoadBalancerFullName",
-                      ],
-                    },
-                  },
-                ],
-                "MetricName": "HTTPCode_Target_5XX_Count",
-                "Namespace": "AWS/ApplicationELB",
-              },
-              "Period": 60,
-              "Stat": "Sum",
-            },
-            "ReturnData": false,
-          },
-          {
-            "Id": "m3",
-            "MetricStat": {
-              "Metric": {
-                "Dimensions": [
-                  {
-                    "Name": "LoadBalancer",
-                    "Value": {
-                      "Fn::GetAtt": [
-                        "LoadBalancerArticlerendering49883BBC",
-                        "LoadBalancerFullName",
-                      ],
-                    },
-                  },
-                ],
-                "MetricName": "RequestCount",
-                "Namespace": "AWS/ApplicationELB",
-              },
-              "Period": 60,
-              "Stat": "Sum",
-            },
-            "ReturnData": false,
-          },
-        ],
-        "Threshold": 0.5,
-        "TreatMissingData": "notBreaching",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
     "InstanceRoleArticlerendering0D4717E8": {
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -705,7 +516,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
       },
@@ -742,7 +553,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -793,157 +604,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LatencyScaleDownPolicyLowerAlarm3AAA79CF": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "LatencyScaleDownPolicyLowerPolicy5B8C5A01",
-          },
-        ],
-        "AlarmDescription": "Lower threshold scaling alarm",
-        "ComparisonOperator": "LessThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "LoadBalancer",
-            "Value": {
-              "Fn::GetAtt": [
-                "LoadBalancerArticlerendering49883BBC",
-                "LoadBalancerFullName",
-              ],
-            },
-          },
-          {
-            "Name": "TargetGroup",
-            "Value": {
-              "Fn::GetAtt": [
-                "TargetGroupArticlerendering3605E498",
-                "TargetGroupFullName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 10,
-        "MetricName": "TargetResponseTime",
-        "Namespace": "AWS/ApplicationELB",
-        "Period": 30,
-        "Statistic": "Average",
-        "Threshold": 0.15,
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "LatencyScaleDownPolicyLowerPolicy5B8C5A01": {
-      "Properties": {
-        "AdjustmentType": "ChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalUpperBound": 0,
-            "ScalingAdjustment": -1,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "LatencyScaleUpPolicyUpperAlarmB2CCE62D": {
-      "Properties": {
-        "AlarmActions": [
-          {
-            "Ref": "LatencyScaleUpPolicyUpperPolicy4A22B34C",
-          },
-          {
-            "Ref": "LatencyScalingAlertsTopic1A322157",
-          },
-        ],
-        "AlarmDescription": "Upper threshold scaling alarm",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "Dimensions": [
-          {
-            "Name": "LoadBalancer",
-            "Value": {
-              "Fn::GetAtt": [
-                "LoadBalancerArticlerendering49883BBC",
-                "LoadBalancerFullName",
-              ],
-            },
-          },
-          {
-            "Name": "TargetGroup",
-            "Value": {
-              "Fn::GetAtt": [
-                "TargetGroupArticlerendering3605E498",
-                "TargetGroupFullName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 2,
-        "MetricName": "TargetResponseTime",
-        "Namespace": "AWS/ApplicationELB",
-        "Period": 30,
-        "Statistic": "Average",
-        "Threshold": 0.2,
-      },
-      "Type": "AWS::CloudWatch::Alarm",
-    },
-    "LatencyScaleUpPolicyUpperPolicy4A22B34C": {
-      "Properties": {
-        "AdjustmentType": "PercentChangeInCapacity",
-        "AutoScalingGroupName": {
-          "Ref": "AutoScalingGroupArticlerenderingASG8488C3F1",
-        },
-        "MetricAggregationType": "Average",
-        "PolicyType": "StepScaling",
-        "StepAdjustments": [
-          {
-            "MetricIntervalLowerBound": 0,
-            "MetricIntervalUpperBound": 0.09999999999999998,
-            "ScalingAdjustment": 50,
-          },
-          {
-            "MetricIntervalLowerBound": 0.09999999999999998,
-            "ScalingAdjustment": 80,
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "LatencyScalingAlertsSubscriptionEmailF1826DAB": {
-      "Properties": {
-        "Endpoint": "dotcom.platform@theguardian.com",
-        "Protocol": "email",
-        "TopicArn": {
-          "Ref": "LatencyScalingAlertsTopic1A322157",
-        },
-      },
-      "Type": "AWS::SNS::Subscription",
-    },
-    "LatencyScalingAlertsTopic1A322157": {
-      "Properties": {
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "PROD",
-          },
-        ],
-      },
-      "Type": "AWS::SNS::Topic",
-    },
     "ListenerArticlerendering9419D5F6": {
       "Properties": {
         "Certificates": [
@@ -988,7 +648,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "access_logs.s3.prefix",
-            "Value": "ELBLogs/frontend/article-rendering/PROD",
+            "Value": "ELBLogs/frontend/article-rendering/TEST",
           },
           {
             "Key": "idle_timeout.timeout_seconds",
@@ -1032,7 +692,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "Type": "application",
@@ -1061,7 +721,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -1124,7 +784,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
             ],
           },
         ],
-        "Stage": "PROD",
+        "Stage": "TEST",
         "TTL": 3600,
       },
       "Type": "Guardian::DNS::RecordSet",
@@ -1144,7 +804,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/PROD/frontend/article-rendering",
+                    ":parameter/TEST/frontend/article-rendering",
                   ],
                 ],
               },
@@ -1163,7 +823,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/PROD/frontend/article-rendering/*",
+                    ":parameter/TEST/frontend/article-rendering/*",
                   ],
                 ],
               },
@@ -1182,11 +842,11 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
     },
     "RenderingBaseURLParamAE11E777": {
       "Properties": {
-        "Description": "The rendering base URL for frontend to call the article-rendering app in the PROD environment",
-        "Name": "/frontend/prod/article-rendering.baseURL",
+        "Description": "The rendering base URL for frontend to call the article-rendering app in the TEST environment",
+        "Name": "/frontend/test/article-rendering.baseURL",
         "Tags": {
           "Stack": "frontend",
-          "Stage": "PROD",
+          "Stage": "TEST",
           "gu:cdk:version": "TEST",
           "gu:repo": "guardian/dotcom-rendering",
         },
@@ -1223,7 +883,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "TargetGroupAttributes": [
@@ -1243,103 +903,6 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
         },
       },
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-    },
-    "UnhealthyInstancesAlarmArticlerendering51F6462F": {
-      "Properties": {
-        "ActionsEnabled": true,
-        "AlarmActions": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:aws:sns:eu-west-1:",
-                {
-                  "Ref": "AWS::AccountId",
-                },
-                ":Frontend-PROD-CriticalAlerts",
-              ],
-            ],
-          },
-        ],
-        "AlarmDescription": "article-rendering's instances have failed healthchecks several times over the last 1 hour.
-      This typically results in the AutoScaling Group cycling instances and can lead to problems with deployment,
-      scaling or handling traffic spikes.
-
-      Check article-rendering's application logs or ssh onto an unhealthy instance in order to debug these problems.",
-        "AlarmName": "Unhealthy instances for article-rendering in PROD",
-        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
-        "DatapointsToAlarm": 30,
-        "Dimensions": [
-          {
-            "Name": "LoadBalancer",
-            "Value": {
-              "Fn::Join": [
-                "",
-                [
-                  {
-                    "Fn::Select": [
-                      1,
-                      {
-                        "Fn::Split": [
-                          "/",
-                          {
-                            "Ref": "ListenerArticlerendering9419D5F6",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  "/",
-                  {
-                    "Fn::Select": [
-                      2,
-                      {
-                        "Fn::Split": [
-                          "/",
-                          {
-                            "Ref": "ListenerArticlerendering9419D5F6",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  "/",
-                  {
-                    "Fn::Select": [
-                      3,
-                      {
-                        "Fn::Split": [
-                          "/",
-                          {
-                            "Ref": "ListenerArticlerendering9419D5F6",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              ],
-            },
-          },
-          {
-            "Name": "TargetGroup",
-            "Value": {
-              "Fn::GetAtt": [
-                "TargetGroupArticlerendering3605E498",
-                "TargetGroupFullName",
-              ],
-            },
-          },
-        ],
-        "EvaluationPeriods": 60,
-        "MetricName": "UnHealthyHostCount",
-        "Namespace": "AWS/ApplicationELB",
-        "Period": 60,
-        "Statistic": "Maximum",
-        "Threshold": 1,
-        "TreatMissingData": "notBreaching",
-      },
-      "Type": "AWS::CloudWatch::Alarm",
     },
     "WazuhSecurityGroup": {
       "Properties": {
@@ -1375,7 +938,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           },
           {
             "Key": "Stage",
-            "Value": "PROD",
+            "Value": "TEST",
           },
         ],
         "VpcId": {
@@ -1426,7 +989,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "frontendPRODarticlerenderingC9709529": {
+    "frontendTESTarticlerendering6160AD1F": {
       "DependsOn": [
         "InstanceRoleArticlerendering0D4717E8",
       ],
@@ -1435,7 +998,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
           "IamInstanceProfile": {
             "Arn": {
               "Fn::GetAtt": [
-                "frontendPRODarticlerenderingProfile7F39AF3F",
+                "frontendTESTarticlerenderingProfile8DDE1B22",
                 "Arn",
               ],
             },
@@ -1475,7 +1038,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRendering/frontend-PROD-article-rendering",
+                  "Value": "ArticleRendering/frontend-TEST-article-rendering",
                 },
                 {
                   "Key": "Stack",
@@ -1483,7 +1046,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Stage",
-                  "Value": "PROD",
+                  "Value": "TEST",
                 },
               ],
             },
@@ -1500,7 +1063,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Name",
-                  "Value": "ArticleRendering/frontend-PROD-article-rendering",
+                  "Value": "ArticleRendering/frontend-TEST-article-rendering",
                 },
                 {
                   "Key": "Stack",
@@ -1508,7 +1071,7 @@ exports[`The RenderingCDKStack matches the snapshot 1`] = `
                 },
                 {
                   "Key": "Stage",
-                  "Value": "PROD",
+                  "Value": "TEST",
                 },
               ],
             },
@@ -1526,7 +1089,7 @@ aws --region eu-west-1 s3 cp s3://",
                   {
                     "Ref": "DistributionBucketName",
                   },
-                  "/frontend/PROD/article-rendering/article-rendering.tar.gz ./
+                  "/frontend/TEST/article-rendering/article-rendering.tar.gz ./
 tar -zxf article-rendering.tar.gz article-rendering
 chown -R dotcom-rendering:frontend article-rendering
 cd article-rendering
@@ -1545,7 +1108,7 @@ StandardError=journal
 StandardOutput=journal
 Environment=TERM=xterm-256color
 Environment=NODE_ENV=production
-Environment=GU_STAGE=PROD
+Environment=GU_STAGE=TEST
 Environment=GU_APP=article-rendering
 Environment=GU_STACK=frontend
 ExecStart=make prod
@@ -1574,7 +1137,7 @@ systemctl start article-rendering",
               },
               {
                 "Key": "Name",
-                "Value": "ArticleRendering/frontend-PROD-article-rendering",
+                "Value": "ArticleRendering/frontend-TEST-article-rendering",
               },
               {
                 "Key": "Stack",
@@ -1582,7 +1145,7 @@ systemctl start article-rendering",
               },
               {
                 "Key": "Stage",
-                "Value": "PROD",
+                "Value": "TEST",
               },
             ],
           },
@@ -1590,7 +1153,7 @@ systemctl start article-rendering",
       },
       "Type": "AWS::EC2::LaunchTemplate",
     },
-    "frontendPRODarticlerenderingProfile7F39AF3F": {
+    "frontendTESTarticlerenderingProfile8DDE1B22": {
       "Properties": {
         "Roles": [
           {
