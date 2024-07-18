@@ -11,36 +11,22 @@ describe('The RenderingCDKStack', () => {
 	it('matches the snapshot', () => {
 		const app = new App();
 		const stack = new RenderingCDKStack(app, 'ArticleRendering', {
-			stage: 'PROD',
+			stage: 'TEST',
 			guApp: 'article-rendering',
 			domainName: 'article-rendering.test.dev-guardianapis.com',
 			scaling: {
 				minimumInstances: 1,
 				maximumInstances: 4,
-				policies: {
-					step: {
-						cpu: {
-							scalingStepsOut: [
-								// No scaling up effect when p90 CPU is lower than 70%
-								{ lower: 0, upper: 70, change: 0 },
-								// When p90 CPU is higher than 70% we scale up by 50%
-								{ lower: 70, change: 50 },
-								// When p90 CPU is higher than 90% we scale up by 80%
-								{ lower: 90, change: 80 },
-							],
-						},
-						latency: {
-							scalingStepsOut: [
-								{ lower: 0, upper: 0.2, change: 0 },
-								{ lower: 0.2, change: 50 },
-								{ lower: 0.3, change: 80 },
-							],
-							scalingStepsIn: [
-								{ lower: 0.15, change: 0 },
-								{ upper: 0.15, lower: 0, change: -1 },
-							],
-						},
-					},
+				policy: {
+					scalingStepsOut: [
+						{ lower: 0, upper: 0.2, change: 0 },
+						{ lower: 0.2, change: 50 },
+						{ lower: 0.3, change: 80 },
+					],
+					scalingStepsIn: [
+						{ lower: 0.15, change: 0 },
+						{ upper: 0.15, lower: 0, change: -1 },
+					],
 				},
 			},
 			instanceType: InstanceType.of(
