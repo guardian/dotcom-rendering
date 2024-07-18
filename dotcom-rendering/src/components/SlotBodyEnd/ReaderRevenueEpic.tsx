@@ -50,7 +50,7 @@ const wrapperMargins = css`
 `;
 
 export type CanShowData = {
-	isSignedIn?: boolean;
+	isSignedIn: boolean;
 	countryCode?: string;
 	contentType: string;
 	sectionId: string;
@@ -65,7 +65,9 @@ export type CanShowData = {
 	browserId?: string;
 };
 
-const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
+const buildPayload = async (
+	data: CanShowData & { hideSupportMessagingForUser: boolean },
+): Promise<EpicPayload> => ({
 	tracking: {
 		ophanPageId: window.guardian.config.ophan.pageViewId,
 		platformId: 'GUARDIAN_WEB',
@@ -79,15 +81,14 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 		isMinuteArticle: data.isMinuteArticle,
 		isPaidContent: data.isPaidContent,
 		tags: data.tags,
-		showSupportMessaging: !shouldHideSupportMessaging(
-			data.isSignedIn ?? false,
-		),
+		showSupportMessaging: !data.hideSupportMessagingForUser,
 		isRecurringContributor: isRecurringContributor(
 			data.isSignedIn ?? false,
 		),
 		lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 		epicViewLog: getEpicViewLog(storage.local),
 		weeklyArticleHistory: await data.asyncArticleCount,
+
 		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 		countryCode: data.countryCode,
@@ -112,6 +113,13 @@ export const canShowReaderRevenueEpic = async (
 		stage,
 	} = data;
 
+	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
+
+	if (hideSupportMessagingForUser === 'Pending') {
+		// We don't yet know the user's supporter status
+		return Promise.resolve({ show: false });
+	}
+
 	if (shouldHideReaderRevenue || isPaidContent) {
 		// We never serve Reader Revenue epics in this case
 		return Promise.resolve({ show: false });
@@ -121,7 +129,10 @@ export const canShowReaderRevenueEpic = async (
 		'contributions-epic-data',
 	);
 
-	const contributionsPayload = await buildPayload(data);
+	const contributionsPayload = await buildPayload({
+		...data,
+		hideSupportMessagingForUser,
+	});
 
 	const response: ModuleDataResponse = await getEpic(
 		contributionsServiceUrl,

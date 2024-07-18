@@ -233,7 +233,7 @@ describe('hasSupporterCookie', () => {
 		expect(hasSupporterCookie(false)).toEqual(false);
 	});
 
-	it('returns true if cookie does not exist and user is signed in', () => {
-		expect(hasSupporterCookie(true)).toEqual(true);
+	it('returns Pending if cookie does not exist and user is signed in', () => {
+		expect(hasSupporterCookie(true)).toEqual('Pending');
 	});
 });
