@@ -54,6 +54,7 @@ type BuildPayloadProps = BaseProps & {
 	optedOutOfArticleCount: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 	userConsent: boolean;
+	hideSupportMessagingForUser: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -127,6 +128,7 @@ const buildPayload = async ({
 	tags,
 	contentType,
 	userConsent,
+	hideSupportMessagingForUser,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
@@ -144,7 +146,7 @@ const buildPayload = async ({
 		targeting: {
 			shouldHideReaderRevenue,
 			isPaidContent,
-			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
+			showSupportMessaging: !hideSupportMessagingForUser,
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			signInBannerLastClosedAt,
@@ -213,6 +215,12 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		return { show: false };
 	}
 
+	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
+	if (hideSupportMessagingForUser === 'Pending') {
+		// We don't yet know the user's supporter status
+		return { show: false };
+	}
+
 	const purchaseInfo = getPurchaseInfo();
 	const showSignInPrompt =
 		purchaseInfo && !isSignedIn && !signInBannerLastClosedAt;
@@ -259,6 +267,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		optedOutOfArticleCount,
 		asyncArticleCounts,
 		userConsent,
+		hideSupportMessagingForUser,
 	});
 
 	const response: ModuleDataResponse = await getBanner(

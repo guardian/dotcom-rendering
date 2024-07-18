@@ -34,7 +34,9 @@ export const MODULES_VERSION = 'v3';
 // including but not limited to recurring & one-off contributions,
 // paper & digital subscriptions, as well as user tiers (GU supporters/staff/partners/patrons).
 // https://github.com/guardian/members-data-api/blob/3a72dc00b9389968d91e5930686aaf34d8040c52/membership-attribute-service/app/models/Attributes.scala
-export const hasSupporterCookie = (isSignedIn: boolean): boolean => {
+export const hasSupporterCookie = (
+	isSignedIn: boolean,
+): boolean | 'Pending' => {
 	const cookie = getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE });
 	switch (cookie) {
 		case 'true':
@@ -43,11 +45,15 @@ export const hasSupporterCookie = (isSignedIn: boolean): boolean => {
 			return false;
 		default:
 			/**
-			 * If cookie is not present but user is signed in, do not show support messaging.
+			 * If cookie is not present but user is signed in, we do not want to show any messaging.
 			 * This is because of a race condition on the first page view after signing in, where
 			 * we may be awaiting the response from the API to find out if they're a supporter.
 			 */
-			return isSignedIn;
+			if (isSignedIn) {
+				return 'Pending';
+			} else {
+				return false;
+			}
 	}
 };
 
@@ -151,10 +157,20 @@ export const isRecentOneOffContributor = (): boolean => {
 	return false;
 };
 
-export const shouldHideSupportMessaging = (isSignedIn: boolean): boolean =>
-	hasSupporterCookie(isSignedIn) ||
-	isRecurringContributor(isSignedIn) ||
-	isRecentOneOffContributor();
+export const shouldHideSupportMessaging = (
+	isSignedIn: boolean,
+): boolean | 'Pending' => {
+	const hasCookie = hasSupporterCookie(isSignedIn);
+	if (hasCookie === 'Pending') {
+		return 'Pending';
+	} else {
+		return (
+			hasCookie ||
+			isRecurringContributor(isSignedIn) ||
+			isRecentOneOffContributor()
+		);
+	}
+};
 
 export const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 const REQUIRED_CONSENTS_FOR_BROWSER_ID = [1, 3, 5, 7];

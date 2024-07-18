@@ -106,6 +106,10 @@ const ReaderRevenueLinksNative = ({
 	const hideSupportMessaging = shouldHideSupportMessaging(isSignedIn);
 	const url = urls.support;
 
+	if (hideSupportMessaging === 'Pending') {
+		return null;
+	}
+
 	if (hideSupportMessaging) {
 		return (
 			<div>

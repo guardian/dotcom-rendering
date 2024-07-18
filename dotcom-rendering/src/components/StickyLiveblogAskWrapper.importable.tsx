@@ -181,7 +181,9 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 
 	useEffect(() => {
 		if (isSignedIn !== 'Pending') {
-			setShowSupportMessaging(!shouldHideSupportMessaging(isSignedIn));
+			setShowSupportMessaging(
+				shouldHideSupportMessaging(isSignedIn) === false,
+			);
 		}
 	}, [isSignedIn]);
 
