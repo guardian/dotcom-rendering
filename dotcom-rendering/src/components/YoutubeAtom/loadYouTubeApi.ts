@@ -21,7 +21,7 @@ const loadScripts = (enableIma = false) => {
 		scriptsPromise = Promise.all([
 			loadScriptAndCatch('https://www.youtube.com/iframe_api?ima=1'),
 			loadScriptAndCatch(
-				'https://imasdk.googleapis.com/js/sdkloader/ima3.js',
+				'https://imasdk.googleapis.com/js/sdkloader/ima3_debug.js',
 			),
 		]);
 	} else {

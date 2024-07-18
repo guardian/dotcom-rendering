@@ -134,7 +134,7 @@ export const YoutubeBlockComponent = ({
 	const imaAbTest =
 		abTestsApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
 	const imaSwitch = switches?.youtubeIma ?? false;
-	const imaEnabled = imaAbTest || imaSwitch;
+	const imaEnabled = true;
 
 	const [index, setIndex] = useState<number>();
 

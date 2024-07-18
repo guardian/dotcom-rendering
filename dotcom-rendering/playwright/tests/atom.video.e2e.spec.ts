@@ -1,10 +1,19 @@
 import { isUndefined } from '@guardian/libs';
 import type { Page } from '@playwright/test';
-import { expect, test } from '@playwright/test';
+import { devices, expect, test } from '@playwright/test';
 import { cmpAcceptAll, cmpRejectAll } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
-import { fetchAndloadPageWithOverrides } from '../lib/load-page';
+import { fetchAndloadPageWithOverrides, loadPage } from '../lib/load-page';
 import { expectToBeVisible, expectToNotExist } from '../lib/locators';
+
+// test.use({ userAgent: devices['Desktop Chrome'].userAgent });
+test.use({
+	userAgent:
+		'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+});
+
+// Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
+// Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.28 Safari/537.36
 
 type YouTubeEmbedConfig = {
 	adsConfig: {
@@ -119,17 +128,42 @@ const muteYouTube = async (page: Page, iframeSelector: string) => {
 	}
 };
 
-test.describe.skip('YouTube Atom', () => {
+test.describe('YouTube Atom', () => {
 	// Skipping because the video in this article has stopped working. Investigation needed!
-	test.skip('plays main media video: skipped', async ({ page }) => {
-		await fetchAndloadPageWithOverrides(
+	test.only('plays main media video: skipped', async ({ page }) => {
+		await loadPage(
 			page,
-			'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
-			{ switchOverrides: { youtubeIma: false } },
+			'/Article/https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
 		);
+
+		// await fetchAndloadPageWithOverrides(
+		// 	page,
+		// 	'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
+		// 	{ switchOverrides: { youtubeIma: false } },
+		// );
+
 		await cmpAcceptAll(page);
 
 		await waitForIsland(page, 'YoutubeBlockComponent');
+
+		await page.route(
+			'https://www.youtube.com/iframe_api**',
+			async (route) => {
+				const response = await route.fetch();
+				console.log(response.url);
+				let body = await response.text();
+				body = body.replaceAll('www-widgetapi.', 'www-widgetapi-ima.');
+				console.log(body.substring(0, 200));
+				await route.fulfill({
+					response,
+					body,
+					headers: {
+						...response.headers(),
+						'content-type': 'text/javascript',
+					},
+				});
+			},
+		);
 
 		// Make sure overlay is displayed
 		const videoId = 'S0CE1n-R3OY';
@@ -149,14 +183,14 @@ test.describe.skip('YouTube Atom', () => {
 		});
 
 		// Listen for the YouTube embed call made when the video is played
-		const youTubeEmbedPromise = interceptYouTubeEmbed({
-			page,
-			videoId,
-			adUnit: '/59666047/theguardian.com/uk-news/article/ng',
-			pageUrl:
-				'/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
-			rejectAll: false,
-		});
+		// const youTubeEmbedPromise = interceptYouTubeEmbed({
+		// 	page,
+		// 	videoId,
+		// 	adUnit: '/59666047/theguardian.com/uk-news/article/ng',
+		// 	pageUrl:
+		// 		'/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
+		// 	rejectAll: false,
+		// });
 
 		// Play video
 		await page.locator(overlaySelector).click();
@@ -166,13 +200,13 @@ test.describe.skip('YouTube Atom', () => {
 
 		await ophanPlayEventPromise;
 
-		await youTubeEmbedPromise;
+		// await youTubeEmbedPromise;
 
 		// Video is playing, overlay is gone
 		await expectToNotExist(page, overlaySelector);
 	});
 
-	test.skip('plays main media video', async ({ page }) => {
+	test('plays main media video', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/us-news/article/2024/may/30/trump-trial-hush-money-verdict',
@@ -223,7 +257,7 @@ test.describe.skip('YouTube Atom', () => {
 		await expectToNotExist(page, overlaySelector);
 	});
 
-	test.skip('plays in body video', async ({ page }) => {
+	test('plays in body video', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
@@ -381,9 +415,7 @@ test.describe.skip('YouTube Atom', () => {
 		await youTubeEmbedPromise2;
 	});
 
-	test.skip('plays the video if the reader rejects consent', async ({
-		page,
-	}) => {
+	test('plays the video if the reader rejects consent', async ({ page }) => {
 		await fetchAndloadPageWithOverrides(
 			page,
 			'https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
