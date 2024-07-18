@@ -34,6 +34,8 @@ const testParagraph =
 const testListHtml =
 	'<ul><li><p>This is the <em>first</em> item in the list</p></li><li><p>The second item has a <a href="#">hyperlink</a>.</p></li></ul>';
 const testBioText = testParagraph + testListHtml;
+const endNoteText =
+	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu auctor ex.';
 
 export const ThemeVariations = {
 	args: {
@@ -42,7 +44,7 @@ export const ThemeVariations = {
 				title: 'The first mini profile',
 				bio: testBioText,
 				body: [testTextElement],
-				endNote: 'End note',
+				endNote: endNoteText,
 			},
 			{
 				title: 'The second mini profile',
@@ -159,7 +161,7 @@ export const Images = {
 					{ ...images[1], displayCredit: true, role: 'thumbnail' },
 					testTextElement,
 				],
-				endNote: 'End note.',
+				endNote: endNoteText,
 			},
 			{
 				title: 'The second mini profile',

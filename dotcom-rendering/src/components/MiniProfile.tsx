@@ -10,7 +10,7 @@ import type {
 	MiniProfile as MiniProfileModel,
 	StarRating,
 } from '../types/content';
-import { Subheading } from './Subheading';
+import { subheadingStyles } from './Subheading';
 
 const miniProfileStyles = css`
 	padding-top: 8px;
@@ -25,14 +25,18 @@ const headingLineStyles = css`
 
 const bioStyles = css`
 	${textSans14};
-	line-height: 135%;
 	padding-top: 6px;
-	overflow-wrap: break-word;
-	border-bottom: 1px solid ${palette('--article-border')};
-	color: ${neutral[46]};
+	color: ${palette('--mini-profiles-text-subdued')};
+	line-height: 1.3rem;
+	p {
+		margin-bottom: 0.5rem;
+	}
 	a {
 		color: ${palette('--caption-link')};
-		text-decoration: none;
+		text-underline-offset: 3px;
+	}
+	a:not(:hover) {
+		text-decoration-color: ${neutral[86]};
 	}
 	a:hover {
 		text-decoration: underline;
@@ -40,43 +44,44 @@ const bioStyles = css`
 	strong {
 		font-weight: bold;
 	}
-	p {
-		margin-bottom: 0.5rem;
-	}
-
-	ol {
-		list-style: decimal;
-		list-style-position: inside;
-		margin-bottom: 1rem;
-	}
-
 	ul {
 		list-style: none;
 		margin: 0 0 0.75rem;
 		padding: 0;
-		margin-bottom: 1rem;
-		line-height: 1.3rem;
+		margin-bottom: 0.5rem;
 	}
-
 	ul li {
 		padding-left: 1.25rem;
 	}
-
 	ul li p {
 		display: inline-block;
 		margin-bottom: 0;
 	}
-
 	ul li:before {
 		display: inline-block;
 		content: '';
 		border-radius: 0.375rem;
 		height: 10px;
 		width: 10px;
-		margin-right: 0.5rem;
-		background-color: ${neutral[86]};
-		margin-left: -1.25rem;
+		margin: 0 0.5rem 0 -1.25rem;
+		background-color: ${palette('--bullet-fill')};
 	}
+`;
+
+const endNoteStyles = css`
+	${textSans14};
+	line-height: 135%;
+	color: ${palette('--mini-profiles-text-subdued')};
+	margin-bottom: 1rem;
+`;
+
+const bottomBorderStyles = css`
+	border-top: 1px solid ${palette('--article-border')};
+	margin-bottom: 0.5rem;
+`;
+
+const headingMarginStyle = css`
+	margin-bottom: 4px;
 `;
 
 interface MiniProfileProps {
@@ -114,13 +119,12 @@ export const MiniProfile = ({
 		<>
 			<li css={miniProfileStyles} data-spacefinder-role="nested">
 				<hr css={headingLineStyles} />
-				<Subheading
+				<h3
 					id={slugify(miniProfile.title)}
-					format={format}
-					topPadding={false}
+					css={[subheadingStyles(format), headingMarginStyle]}
 				>
 					{miniProfile.title}
-				</Subheading>
+				</h3>
 				<Bio html={miniProfile.bio} />
 				{miniProfile.body.map((element, index) => (
 					<RenderArticleElement
@@ -145,6 +149,9 @@ export const MiniProfile = ({
 						isListElement={true}
 					/>
 				))}
+				{miniProfile.endNote ? (
+					<EndNote text={miniProfile.endNote} />
+				) : null}
 			</li>
 		</>
 	);
@@ -152,6 +159,19 @@ export const MiniProfile = ({
 
 const Bio = ({ html }: { html?: string }) => {
 	if (!html) return null;
+	return (
+		<>
+			<div css={bioStyles} dangerouslySetInnerHTML={{ __html: html }} />
+			<div css={bottomBorderStyles} />
+		</>
+	);
+};
 
-	return <div css={bioStyles} dangerouslySetInnerHTML={{ __html: html }} />;
+const EndNote = ({ text }: { text?: string }) => {
+	if (!text) return null;
+	return (
+		<p css={endNoteStyles}>
+			<em>{text}</em>
+		</p>
+	);
 };
