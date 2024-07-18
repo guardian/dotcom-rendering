@@ -8,15 +8,14 @@ import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
-import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { usePageViewId } from '../lib/usePageViewId';
 import { palette as themePalette } from '../palette';
 import { useConfig } from './ConfigContext';
+import { Grid } from './Masthead/Titlepiece/Grid';
 import { TopBarLink } from './TopBarLink';
 import { TopBarMyAccount } from './TopBarMyAccount';
 import { TopBarSupport } from './TopBarSupport.importable';
@@ -32,22 +31,16 @@ interface Props {
 }
 
 const topBarStyles = css`
+	grid-column: content-start / main-column-end;
 	background-color: ${themePalette('--masthead-top-bar-background')};
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	height: 52px;
 	box-sizing: border-box;
-	padding: 0 10px;
-
-	${from.mobileLandscape} {
-		padding: 0 ${space[5]}px;
-	}
-
+	height: 52px;
 	${from.tablet} {
 		height: 60px;
 	}
-
 	${from.desktop} {
 		height: 64px;
 	}
@@ -142,52 +135,57 @@ export const TopBar = ({
 	});
 
 	return (
-		<div css={[topBarStyles, hasPageSkin ? pageSkinContainer : center]}>
-			<TopBarLinkContainer showVerticalDivider={false} alignLeft={true}>
-				<TopBarSupport
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-			</TopBarLinkContainer>
-
-			<Hide until="desktop">
-				<TopBarLinkContainer>
-					<TopBarLink
-						dataLinkName={nestedOphanComponents(
-							'header',
-							'topbar',
-							'printsubs',
-						)}
-						href={printSubscriptionsHref}
-					>
-						Print subscriptions
-					</TopBarLink>
+		<Grid type="div" hasPageSkin={hasPageSkin}>
+			<div css={topBarStyles}>
+				<TopBarLinkContainer
+					showVerticalDivider={false}
+					alignLeft={true}
+				>
+					<TopBarSupport
+						contributionsServiceUrl={contributionsServiceUrl}
+					/>
 				</TopBarLinkContainer>
-			</Hide>
 
-			<Hide until="desktop">
-				<TopBarLinkContainer>
-					<TopBarLink
-						dataLinkName={nestedOphanComponents(
-							'header',
-							'topbar',
-							'job-cta',
-						)}
-						href="https://jobs.theguardian.com"
-					>
-						Search jobs
-					</TopBarLink>
+				<Hide until="desktop">
+					<TopBarLinkContainer>
+						<TopBarLink
+							dataLinkName={nestedOphanComponents(
+								'header',
+								'topbar',
+								'printsubs',
+							)}
+							href={printSubscriptionsHref}
+						>
+							Print subscriptions
+						</TopBarLink>
+					</TopBarLinkContainer>
+				</Hide>
+
+				<Hide until="desktop">
+					<TopBarLinkContainer>
+						<TopBarLink
+							dataLinkName={nestedOphanComponents(
+								'header',
+								'topbar',
+								'job-cta',
+							)}
+							href="https://jobs.theguardian.com"
+						>
+							Search jobs
+						</TopBarLink>
+					</TopBarLinkContainer>
+				</Hide>
+
+				<TopBarLinkContainer isLastChild={true}>
+					<TopBarMyAccount
+						mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
+						idUrl={idUrl ?? 'https://profile.theguardian.com'}
+						discussionApiUrl={discussionApiUrl}
+						idApiUrl={idApiUrl}
+						authStatus={authStatus}
+					/>
 				</TopBarLinkContainer>
-			</Hide>
-
-			<TopBarLinkContainer isLastChild={true}>
-				<TopBarMyAccount
-					mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}
-					idUrl={idUrl ?? 'https://profile.theguardian.com'}
-					discussionApiUrl={discussionApiUrl}
-					idApiUrl={idApiUrl}
-					authStatus={authStatus}
-				/>
-			</TopBarLinkContainer>
-		</div>
+			</div>
+		</Grid>
 	);
 };
