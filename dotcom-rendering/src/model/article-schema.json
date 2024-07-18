@@ -5065,6 +5065,7 @@
             ]
         },
         "MatchType": {
+            "description": "General",
             "enum": [
                 "CricketMatchType",
                 "FootballMatchType"

@@ -118,34 +118,6 @@ type ContentType =
 	| 'signup'
 	| 'userid';
 
-type CricketTeam = {
-	name: string;
-	home: boolean;
-};
-
-type FallOfWicket = {
-	order: number;
-};
-
-type CricketInnings = {
-	order: number;
-	battingTeam: string;
-	runsScored: string;
-	declared: boolean;
-	forfeited: boolean;
-	fallOfWicket: FallOfWicket[];
-	overs: string;
-};
-
-type CricketMatch = {
-	matchId: string;
-	competitionName: string;
-	venueName: string;
-	teams: CricketTeam[];
-	innings: CricketInnings[];
-	gameDate: string;
-};
-
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
 type CardImageType = 'picture' | 'avatar' | 'crossword' | 'slideshow' | 'video';
@@ -164,41 +136,6 @@ type LeftColSize = 'compact' | 'wide';
 
 type UserBadge = {
 	name: string;
-};
-
-/**
- * Football
- */
-type TeamType = {
-	id: string;
-	name: string;
-	codename: string;
-	players: PlayerType[];
-	possession: number;
-	shotsOn: number;
-	shotsOff: number;
-	corners: number;
-	fouls: number;
-	colours: string;
-	score: number;
-	crest: string;
-	scorers: string[];
-};
-
-type PlayerType = {
-	id: string;
-	name: string;
-	position: string;
-	lastName: string;
-	substitute: boolean;
-	timeOnPitch: string;
-	shirtNumber: string;
-	events: EventType[];
-};
-
-type EventType = {
-	eventTime: string; // minutes
-	eventType: 'substitution' | 'dismissal' | 'booking';
 };
 
 interface Topic {

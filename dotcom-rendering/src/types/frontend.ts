@@ -12,6 +12,7 @@ import type {
 } from './content';
 import type { FooterType } from './footer';
 import type { FEOnwards } from './onwards';
+import type { MatchType } from './sport';
 import type { TagType } from './tag';
 import type { FETrailType } from './trails';
 
@@ -123,8 +124,6 @@ export interface FEArticleType {
 	lang?: string;
 	isRightToLeftLang?: boolean;
 }
-
-type MatchType = 'CricketMatchType' | 'FootballMatchType';
 
 type PageTypeType = {
 	hasShowcaseMainElement: boolean;

@@ -10,6 +10,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { palette as themePalette } from '../palette';
+import type { TeamType } from '../types/sport';
 import { Distribution } from './Distribution';
 import { Doughnut } from './Doughnut';
 import { GoalAttempts } from './GoalAttempts';

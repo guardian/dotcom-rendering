@@ -1,3 +1,5 @@
+import type { CricketMatch } from '../../src/types/sport';
+
 export const match: CricketMatch = {
 	teams: [
 		{
