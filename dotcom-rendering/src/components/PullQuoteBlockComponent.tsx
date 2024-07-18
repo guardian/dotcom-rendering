@@ -266,6 +266,7 @@ export const PullQuoteBlockComponent = ({
 				fontCss(role, format),
 				alignmentCss(role, format),
 			]}
+			data-spacefinder-role={role}
 		>
 			<QuoteIcon colour={palette('--pullquote-icon')} />
 			<blockquote
