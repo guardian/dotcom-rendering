@@ -29,7 +29,7 @@ interface Props {
 const veggieBurgerDiameter = 40;
 
 const gridFullWidth = css`
-	grid-column: content-start / content-end;
+	grid-column: content-start / main-column-end;
 `;
 
 const editionSwitcherMenuStyles = css`
@@ -124,7 +124,7 @@ const pillarsNavStyles = css`
 `;
 
 const subNavStyles = css`
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 3;
 	${textSans14}
 	color: inherit;
