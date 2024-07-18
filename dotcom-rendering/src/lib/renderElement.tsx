@@ -32,6 +32,7 @@ import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
+import { MiniProfiles } from '../components/MiniProfiles';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
@@ -479,7 +480,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
 			return (
 				<MiniProfiles
-					qAndAExplainers={element.miniProfiles}
+					miniProfiles={element.miniProfiles}
 					format={format}
 					ajaxUrl={ajaxUrl}
 					pageId={pageId}
@@ -489,6 +490,7 @@ export const renderElement = ({
 					switches={switches}
 					editionId={editionId}
 					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':

@@ -23,6 +23,10 @@ const headingLineStyles = css`
 	border-top: 4px solid ${palette('--heading-line')};
 `;
 
+// Nesting is necessary in the bio styles because we receive a string of html from the
+// field. This can contain the following tags:
+// Blocks: p, ul, li
+// Inline: strong, em, a
 const bioStyles = css`
 	${textSans14};
 	padding-top: 6px;
@@ -40,9 +44,6 @@ const bioStyles = css`
 	}
 	a:hover {
 		text-decoration: underline;
-	}
-	strong {
-		font-weight: bold;
 	}
 	ul {
 		list-style: none;
@@ -65,6 +66,9 @@ const bioStyles = css`
 		width: 10px;
 		margin: 0 0.5rem 0 -1.25rem;
 		background-color: ${palette('--bullet-fill')};
+	}
+	strong {
+		font-weight: bold;
 	}
 `;
 
