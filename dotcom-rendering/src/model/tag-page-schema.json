@@ -1224,12 +1224,16 @@
         },
         "canonicalUrl": {
             "type": "string"
+        },
+        "contributionsServiceUrl": {
+            "type": "string"
         }
     },
     "required": [
         "commercialProperties",
         "config",
         "contents",
+        "contributionsServiceUrl",
         "editionId",
         "editionLongForm",
         "forceDay",
