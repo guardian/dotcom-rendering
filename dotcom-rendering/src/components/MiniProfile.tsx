@@ -11,6 +11,7 @@ import type {
 	StarRating,
 } from '../types/content';
 import { subheadingStyles } from './Subheading';
+import { sanitiseHTML } from 'src/model/sanitise';
 
 const miniProfileStyles = css`
 	padding-top: 8px;
@@ -163,9 +164,13 @@ export const MiniProfile = ({
 
 const Bio = ({ html }: { html?: string }) => {
 	if (!html) return null;
+	const sanitizedHtml = sanitiseHTML(html, {});
 	return (
 		<>
-			<div css={bioStyles} dangerouslySetInnerHTML={{ __html: html }} />
+			<div
+				css={bioStyles}
+				dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+			/>
 			<div css={bottomBorderStyles} />
 		</>
 	);
