@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	headlineMedium17,
 	headlineMedium20,
 	palette as sourcePalette,
 	space,
@@ -18,8 +19,52 @@ interface Props {
 	NAV: NavType;
 }
 
+const listStyles = css`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	gap: ${space[4]}px;
+`;
+
+const listItemStyles = css`
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	flex-basis: 100%;
+	${from.mobileMedium} {
+		flex-basis: 40%;
+	}
+	${from.tablet} {
+		flex-basis: 30%;
+	}
+
+	:before {
+		border-top: 1px solid ${palette('--card-border-top')};
+		content: '';
+		width: 100%;
+		padding-bottom: ${space[2]}px;
+		background-color: unset;
+	}
+`;
+
+const linkStyles = css`
+	flex-grow: 1;
+	${headlineMedium17}
+	${from.tablet} {
+		${headlineMedium20}
+	}
+	color: ${sourcePalette.neutral[7]};
+	text-decoration: none;
+	:hover {
+		text-decoration: underline;
+	}
+	padding-bottom: ${space[1]}px;
+	margin-right: ${space[4]}px;
+`;
+
 /** This page displays the full expanded nav for no JS users */
-export const NavLayout = ({ navPage, NAV }: Props) => {
+export const NavPageLayout = ({ navPage, NAV }: Props) => {
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -51,56 +96,15 @@ export const NavLayout = ({ navPage, NAV }: Props) => {
 							containerName={pillar.title}
 							description={pillar.longTitle}
 						>
-							<ul
-								css={css`
-									display: flex;
-
-									flex-direction: row;
-									flex-wrap: wrap;
-									justify-content: space-between;
-								`}
-							>
+							<ul css={listStyles}>
 								{pillar.children?.map((navLink) => {
 									return (
 										<li
 											key={navLink.title}
-											css={css`
-												display: flex;
-												flex-direction: column;
-												flex-basis: 50%;
-												${from.mobileLandscape} {
-													flex-basis: 33.33%;
-												}
-												${from.desktop} {
-													flex-basis: 25%;
-												}
-												padding: ${space[1]}px 0
-													${space[2]}px 0;
-												margin-right: ${space[4]}px;
-
-												:before {
-													border-top: 1px solid
-														${palette(
-															'--card-border-top',
-														)};
-													content: '';
-													width: 100%;
-													padding-bottom: ${space[2]}px;
-													background-color: unset;
-												}
-											`}
+											css={listItemStyles}
 										>
 											<a
-												css={css`
-													flex-grow: 1;
-													${headlineMedium20}
-													color: ${sourcePalette
-														.neutral[7]};
-													text-decoration: none;
-													:hover {
-														text-decoration: underline;
-													}
-												`}
+												css={linkStyles}
 												href={navLink.url}
 											>
 												{navLink.title}

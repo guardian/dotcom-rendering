@@ -1,7 +1,7 @@
 import { Global } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { StrictMode } from 'react';
-import { NavLayout } from '../layouts/NavLayout';
+import { NavPageLayout } from '../layouts/NavPageLayout';
 import { buildAdTargeting } from '../lib/ad-targeting';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
@@ -98,7 +98,7 @@ export const NavPage = ({ navPage, NAV }: Props) => {
 					if anything is unreadable or odd.
 				</DarkModeMessage>
 			)}
-			<NavLayout navPage={navPage} NAV={NAV} />
+			<NavPageLayout navPage={navPage} NAV={NAV} />
 		</StrictMode>
 	);
 };
