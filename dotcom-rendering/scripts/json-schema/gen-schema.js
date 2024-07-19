@@ -7,6 +7,7 @@ const {
 	getNewsletterPageSchema,
 	getTagPageSchema,
 	getBlockSchema,
+	getNavPageSchema,
 } = require('./get-schema');
 
 const root = path.resolve(__dirname, '..', '..');
@@ -15,6 +16,7 @@ const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
 const tagPageSchema = getTagPageSchema();
 const newsletterPageSchema = getNewsletterPageSchema();
+const navPageSchema = getNavPageSchema();
 const blockSchema = getBlockSchema();
 
 fs.writeFile(
@@ -53,6 +55,17 @@ fs.writeFile(
 fs.writeFile(
 	`${root}/src/model/newsletter-page-schema.json`,
 	newsletterPageSchema,
+	'utf8',
+	(err) => {
+		if (err) {
+			console.log(err);
+		}
+	},
+);
+
+fs.writeFile(
+	`${root}/src/model/nav-page-schema.json`,
+	navPageSchema,
 	'utf8',
 	(err) => {
 		if (err) {

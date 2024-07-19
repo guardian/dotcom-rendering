@@ -4,11 +4,13 @@ import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFrontType } from '../../src/types/front';
 import type { FEArticleType } from '../types/frontend';
+import type { FENavPage } from '../types/navPage';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import type { FETagPageType } from '../types/tagPage';
 import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import frontSchema from './front-schema.json';
+import navPageSchema from './nav-page-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 import tagPageSchema from './tag-page-schema.json';
 
@@ -28,6 +30,7 @@ const validateTagPage = ajv.compile<FETagPageType>(tagPageSchema);
 const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 	newslettersPageSchema,
 );
+const validateNavPage = ajv.compile<FENavPage>(navPageSchema);
 const validateBlock = ajv.compile<Block[]>(blockSchema);
 
 export const validateAsArticleType = (data: unknown): FEArticleType => {
@@ -81,5 +84,17 @@ export const validateAsBlock = (data: unknown): Block[] => {
 	throw new TypeError(
 		`Unable to validate request body for block.\n
             ${JSON.stringify(validateBlock.errors, null, 2)}`,
+	);
+};
+
+export const validateAsNavPageType = (data: unknown): FENavPage => {
+	if (validateNavPage(data)) return data;
+
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateNavPage.errors, null, 2)}`,
 	);
 };

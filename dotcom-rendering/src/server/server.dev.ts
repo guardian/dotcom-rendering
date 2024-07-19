@@ -14,6 +14,8 @@ import {
 import {
 	handleFront,
 	handleFrontJson,
+	handleNavPage,
+	handleNavPageJson,
 	handleTagPage,
 	handleTagPageJson,
 } from './handler.front.web';
@@ -85,6 +87,10 @@ export const devServer = (): Handler => {
 				return handleAppsArticle(req, res, next);
 			case 'AppsInteractive':
 				return handleAppsInteractive(req, res, next);
+			case 'NavPage':
+				return handleNavPage(req, res, next);
+			case 'NavPageJSON':
+				return handleNavPageJson(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();

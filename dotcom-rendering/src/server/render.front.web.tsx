@@ -1,6 +1,7 @@
 import { isString, Pillar } from '@guardian/libs';
 import { ConfigProvider } from '../components/ConfigContext';
 import { FrontPage } from '../components/FrontPage';
+import { NavPage } from '../components/NavPage';
 import { TagPage } from '../components/TagPage';
 import {
 	ASSET_ORIGIN,
@@ -16,6 +17,7 @@ import { extractNAV } from '../model/extract-nav';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import type { DCRFrontType } from '../types/front';
+import type { DCRNavPage } from '../types/navPage';
 import type { DCRTagPageType } from '../types/tagPage';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
@@ -263,6 +265,101 @@ export const renderTagPage = ({
 		renderingTarget: 'Web',
 		weAreHiring: !!tagPage.config.switches.weAreHiring,
 		canonicalUrl: tagPage.canonicalUrl,
+		config,
+	});
+	return {
+		html: pageHtml,
+		prefetchScripts,
+	};
+};
+
+export const renderNavPage = ({
+	navPage,
+}: {
+	navPage: DCRNavPage;
+}): { html: string; prefetchScripts: string[] } => {
+	const title = navPage.webTitle;
+	const NAV = extractNAV(navPage.nav);
+	const enhancedNAV = enhanceNav(NAV);
+
+	// Navigation menu is not supported in Apps
+	const config: Config = {
+		renderingTarget: 'Web',
+		darkModeAvailable:
+			navPage.config.abTests.darkModeWebVariant === 'variant',
+		updateLogoAdPartnerSwitch:
+			!!navPage.config.switches.updateLogoAdPartner,
+		assetOrigin: ASSET_ORIGIN,
+		editionId: navPage.editionId,
+	};
+
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<ConfigProvider value={config}>
+			<NavPage navPage={navPage} NAV={enhancedNAV} />
+		</ConfigProvider>,
+	);
+
+	const build = getModulesBuild({
+		switches: navPage.config.switches,
+		tests: navPage.config.abTests,
+	});
+
+	/**
+	 * The highest priority scripts.
+	 * These scripts have a considerable impact on site performance.
+	 * Only scripts critical to application execution may go in here.
+	 * Please talk to the dotcom platform team before adding more.
+	 * Scripts will be executed in the order they appear in this array
+	 */
+	const prefetchScripts = [
+		polyfillIO,
+		getPathFromManifest(build, 'frameworks.js'),
+		getPathFromManifest(build, 'index.js'),
+		process.env.COMMERCIAL_BUNDLE_URL ?? navPage.config.commercialBundleUrl,
+	].filter(isString);
+	const legacyScripts = [
+		getPathFromManifest('client.web.legacy', 'frameworks.js'),
+		getPathFromManifest('client.web.legacy', 'index.js'),
+	];
+	const scriptTags = generateScriptTags([
+		...prefetchScripts,
+		...legacyScripts,
+	]);
+
+	const guardian = createGuardian({
+		editionId: navPage.editionId,
+		stage: navPage.config.stage,
+		frontendAssetsFullURL: navPage.config.frontendAssetsFullURL,
+		revisionNumber: navPage.config.revisionNumber,
+		sentryPublicApiKey: navPage.config.sentryPublicApiKey,
+		sentryHost: navPage.config.sentryHost,
+		keywordIds: navPage.config.keywordIds,
+		dfpAccountId: navPage.config.dfpAccountId,
+		adUnit: navPage.config.adUnit,
+		ajaxUrl: navPage.config.ajaxUrl,
+		googletagUrl: navPage.config.googletagUrl,
+		switches: navPage.config.switches,
+		abTests: navPage.config.abTests,
+		brazeApiKey: navPage.config.brazeApiKey,
+		googleRecaptchaSiteKey: navPage.config.googleRecaptchaSiteKey,
+		// Until we understand exactly what config we need to make available client-side,
+		// add everything we haven't explicitly typed as unknown config
+		unknownConfig: navPage.config,
+	});
+
+	const keywords = navPage.config.keywords;
+
+	const pageHtml = htmlPageTemplate({
+		scriptTags,
+		css: extractedCss,
+		html,
+		title,
+		description: 'The Guardian Navigation Menu',
+		guardian,
+		keywords,
+		renderingTarget: 'Web',
+		weAreHiring: !!navPage.config.switches.weAreHiring,
+		canonicalUrl: navPage.canonicalUrl,
 		config,
 	});
 	return {

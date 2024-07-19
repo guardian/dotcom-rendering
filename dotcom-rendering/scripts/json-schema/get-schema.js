@@ -9,6 +9,7 @@ const program = TJS.getProgramFromFiles(
 		path.resolve(`${root}/src/types/frontend.ts`),
 		path.resolve(`${root}/src/types/tagPage.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
+		path.resolve(`${root}/src/types/navPage.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -49,6 +50,14 @@ const getNewsletterPageSchema = () => {
 	);
 };
 
+const getNavPageSchema = () => {
+	return JSON.stringify(
+		TJS.generateSchema(program, 'FENavPage', settings),
+		null,
+		4,
+	);
+};
+
 const getBlockSchema = () => {
 	return JSON.stringify(
 		TJS.generateSchema(program, 'Block', settings),
@@ -62,5 +71,6 @@ module.exports = {
 	getFrontSchema,
 	getTagPageSchema,
 	getNewsletterPageSchema,
+	getNavPageSchema,
 	getBlockSchema,
 };

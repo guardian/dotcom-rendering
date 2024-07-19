@@ -22,6 +22,8 @@ import {
 import {
 	handleFront,
 	handleFrontJson,
+	handleNavPage,
+	handleNavPageJson,
 	handleTagPage,
 	handleTagPageJson,
 } from './handler.front.web';
@@ -78,6 +80,9 @@ export const prodServer = (): void => {
 	);
 	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 	app.post('/AppsInteractive', logRenderTime, handleAppsInteractive);
+
+	app.post('/NavPage', logRenderTime, handleNavPage);
+	app.post('/NavPageJson', logRenderTime, handleNavPageJson);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
@@ -140,6 +145,19 @@ export const prodServer = (): void => {
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsInteractive,
+	);
+
+	app.get(
+		'/NavPage/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleNavPage,
+	);
+	app.get(
+		'/NavPageJSON/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleNavPageJson,
 	);
 
 	app.use('/ArticlePerfTest/*', handleArticlePerfTest);

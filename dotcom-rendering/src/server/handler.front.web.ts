@@ -9,13 +9,18 @@ import {
 } from '../model/extractTrendingTopics';
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
-import { validateAsFrontType, validateAsTagPageType } from '../model/validate';
+import {
+	validateAsFrontType,
+	validateAsNavPageType,
+	validateAsTagPageType,
+} from '../model/validate';
 import type { DCRFrontType, FEFrontType } from '../types/front';
+import type { DCRNavPage, FENavPage } from '../types/navPage';
 import type { FETagType } from '../types/tag';
 import type { DCRTagPageType, FETagPageType } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
-import { renderFront, renderTagPage } from './render.front.web';
+import { renderFront, renderNavPage, renderTagPage } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
@@ -155,4 +160,27 @@ export const handleTagPage: RequestHandler = ({ body }, res) => {
 
 export const handleTagPageJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceTagPage(body));
+};
+
+const enhanceNavPage = (body: unknown): DCRNavPage => {
+	const data: FENavPage = validateAsNavPageType(body);
+
+	return {
+		...data,
+		webTitle: `Navigation Page | The Guardian`,
+		canonicalUrl: data.canonicalUrl,
+	};
+};
+
+export const handleNavPage: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('front');
+	const navPage = enhanceNavPage(body);
+	const { html, prefetchScripts } = renderNavPage({
+		navPage,
+	});
+	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
+};
+
+export const handleNavPageJson: RequestHandler = ({ body }, res) => {
+	res.json(enhanceNavPage(body));
 };
