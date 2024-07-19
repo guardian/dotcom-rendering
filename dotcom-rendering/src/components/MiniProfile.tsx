@@ -4,6 +4,7 @@ import { neutral, textSans14 } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import type { ArticleElementRenderer } from '../lib/renderElement';
 import { slugify } from '../model/enhance-H2s';
+import { sanitiseHTML } from '../model/sanitise';
 import { palette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type {
@@ -11,7 +12,6 @@ import type {
 	StarRating,
 } from '../types/content';
 import { subheadingStyles } from './Subheading';
-import { sanitiseHTML } from 'src/model/sanitise';
 
 const miniProfileStyles = css`
 	padding-top: 8px;
