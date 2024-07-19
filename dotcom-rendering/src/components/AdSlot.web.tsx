@@ -75,10 +75,9 @@ const individualLabelCSS = css`
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
 	background-color: ${schemedPalette('--ad-background')};
-	padding: 0 8px;
 	border-top: 1px solid ${schemedPalette('--ad-border')};
 	color: ${schemedPalette('--ad-labels-text')};
-	text-align: left;
+	text-align: center;
 	box-sizing: border-box;
 `;
 
