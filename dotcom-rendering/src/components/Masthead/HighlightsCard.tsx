@@ -21,7 +21,7 @@ export type HighlightsCardProps = {
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	// dataLinkName?: string;
-	byline: string;
+	byline?: string;
 	showMediaIcon?: boolean;
 };
 
@@ -116,10 +116,11 @@ export const HighlightsCard = ({
 					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
 				) : (
 					<CardPicture
+						imageSize={'medium'}
 						mainImage={image.src}
-						imageSize={'carousel'}
-						alt={image?.altText}
+						alt={image.altText}
 						loading={imageLoading}
+						isHighlightsCardImage={true}
 					/>
 				)}
 			</div>
