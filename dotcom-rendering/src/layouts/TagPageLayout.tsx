@@ -23,7 +23,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { TagPageHeader } from '../components/TagPageHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { getContributionsServiceUrl } from '../lib/contributions';
 import {
 	getTagPageBannerAdPositions,
 	getTagPageMobileAdPositions,
@@ -70,7 +69,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant';
 
-	const contributionsServiceUrl = getContributionsServiceUrl(tagPage);
+	const contributionsServiceUrl = 'https://contributions.guardianapis.com'; // TODO: Read this from config (use getContributionsServiceUrl)
 
 	const isAccessibilityPage =
 		tagPage.config.pageId === 'help/accessibility-help';

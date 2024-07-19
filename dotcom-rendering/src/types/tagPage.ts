@@ -26,7 +26,6 @@ export interface FETagPageType {
 	isAdFreeUser: boolean;
 	forceDay: boolean;
 	canonicalUrl?: string;
-	contributionsServiceUrl: string;
 }
 
 /**
@@ -81,7 +80,6 @@ export interface DCRTagPageType {
 	};
 	branding: CollectionBranding | undefined;
 	canonicalUrl?: string;
-	contributionsServiceUrl: string;
 }
 
 export interface DCRFrontPagination {
