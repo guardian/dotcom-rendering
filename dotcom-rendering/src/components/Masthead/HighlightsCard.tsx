@@ -80,6 +80,24 @@ const imageArea = css`
 	align-self: end;
 `;
 
+const hoverStyles = css`
+	:hover .image-overlay {
+		position: absolute;
+		z-index: 1000;
+		/* top: 0; */
+		width: inherit;
+		height: inherit;
+		/* left: 0; */
+		background-color: ${palette.neutral[7]};
+		opacity: 0.1;
+	}
+
+	/* Only underline the headline element we want to target (not kickers/sublink headlines) */
+	:hover .card-headline .show-underline {
+		text-decoration: underline;
+	}
+`;
+
 export const HighlightsCard = ({
 	// linkTo,
 	format,
@@ -96,7 +114,7 @@ export const HighlightsCard = ({
 	showMediaIcon,
 }: HighlightsCardProps) => {
 	return (
-		<div css={gridContainer}>
+		<div css={[gridContainer, hoverStyles]}>
 			<div css={headline}>
 				<CardHeadline
 					headlineText={headlineText}
