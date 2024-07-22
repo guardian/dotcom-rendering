@@ -15,7 +15,7 @@ const paidContentPage =
  * You need to edit the link as well as the expected requestURL to include the new brand in the code below, where it states `expect(requestURL).to.include('el=<logo goes here>');`.
  * You can grab the required info in the dev tools network tab on the page itself.
  */
-test.skip('Paid content tests', () => {
+test.describe('Paid content tests', () => {
 	test('should send Ophan component event on click of sponsor logo in article meta', async ({
 		page,
 	}) => {
