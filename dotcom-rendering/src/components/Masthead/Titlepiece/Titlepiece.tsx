@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	headlineBold14,
-	space,
-	textSans14,
-} from '@guardian/source/foundations';
+import { from, headlineBold14, space } from '@guardian/source/foundations';
 import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -127,49 +122,6 @@ const pillarsNavStyles = css`
 	}
 `;
 
-const subNavStyles = css`
-	${gridContent}
-	grid-row: 3;
-	${textSans14}
-	color: inherit;
-	min-height: 28px;
-	margin-top: ${space[2]}px;
-
-	/** We increase the width of the subnav to let it overflow
-	 on the right to help indicate scrollability */
-	width: calc(100% + ${smallMobilePageMargin});
-	${from.mobileLandscape} {
-		width: calc(100% + ${pageMargin});
-	}
-	${from.tablet} {
-		width: 100%;
-	}
-
-	${from.mobileMedium} {
-		margin-top: ${space[3]}px;
-	}
-	${from.tablet} {
-		min-height: 30px;
-	}
-`;
-
-const subNavStylesWithoutPageSkin = css`
-	${from.leftCol} {
-		margin-top: 14px;
-	}
-`;
-
-/** Sets horizontal scrolling behaviour and removes the scrollbar */
-const scrollableSubNavStyles = css`
-	overflow-x: scroll;
-
-	@supports selector(::-webkit-scrollbar) {
-		&::-webkit-scrollbar {
-			display: none;
-		}
-	}
-`;
-
 const horizontalDivider = css`
 	position: relative;
 	z-index: 1;
@@ -196,6 +148,41 @@ const dividerOverridesForSubNav = css`
 		${from.tablet} {
 			right: 0;
 		}
+	}
+`;
+
+const subNavWrapper = css`
+	position: relative;
+	${gridContent}
+	grid-row: 3;
+
+	/** We increase the width of the subnav to let it overflow
+	 on the right to help indicate scrollability */
+	width: calc(100% + ${smallMobilePageMargin});
+	${from.mobileLandscape} {
+		width: calc(100% + ${pageMargin});
+	}
+	${from.tablet} {
+		width: 100%;
+	}
+
+	ul {
+		padding-right: ${space[8]}px;
+	}
+
+	::after {
+		content: '';
+		position: absolute;
+		width: ${space[10]}px;
+		height: 100%;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: linear-gradient(
+			to right,
+			transparent,
+			${themePalette('--masthead-nav-background')}
+		);
 	}
 `;
 
@@ -296,12 +283,8 @@ export const Titlepiece = ({
 
 			{showSubNav && nav.subNavSections && (
 				<nav
+					css={subNavWrapper}
 					data-print-layout="hide"
-					css={[
-						subNavStyles,
-						!hasPageSkin && subNavStylesWithoutPageSkin,
-						scrollableSubNavStyles,
-					]}
 					data-testid="sub-nav"
 					data-component="sub-nav"
 				>
