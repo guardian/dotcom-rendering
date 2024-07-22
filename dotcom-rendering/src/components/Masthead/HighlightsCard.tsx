@@ -116,7 +116,7 @@ export const HighlightsCard = ({
 					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
 				) : (
 					<CardPicture
-						imageSize={'medium'}
+						imageSize="medium"
 						mainImage={image.src}
 						alt={image.altText}
 						loading={imageLoading}
