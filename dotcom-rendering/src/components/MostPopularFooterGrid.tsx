@@ -56,13 +56,11 @@ const gridContainerStyleWithPageSkin = css`
 
 const titleContainerStyle = css`
 	border-right: 1px solid ${palette('--article-border')};
-	${until.leftCol} {
-		/* Below leftCol always set top border */
-		border-top: 1px solid ${palette('--article-border')};
-	}
+	border-top: 1px solid ${palette('--article-border')};
 	${from.leftCol} {
-		border-bottom: 1px solid ${palette('--article-border')};
+		border-top: none;
 	}
+
 	padding: 7px 10px 18px;
 `;
 
