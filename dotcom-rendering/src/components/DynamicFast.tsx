@@ -171,12 +171,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 				/>
 			</LI>
 			<LI percentage="50%">
-				<UL
-					direction="row"
-					wrapCards={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
+				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card, cardIndex) => {
 						const columns = 2;
 						return (
@@ -283,12 +278,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 				/>
 			</LI>
 			<LI percentage="75%">
-				<UL
-					direction="row"
-					wrapCards={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
+				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card, cardIndex) => {
 						const columns = 3;
 						return (
@@ -362,12 +352,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 			})}
 
 			<LI percentage="50%">
-				<UL
-					direction="row"
-					wrapCards={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
+				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card, cardIndex) => {
 						const columns = 2;
 						return (
@@ -441,12 +426,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 			})}
 
 			<LI percentage="25%">
-				<UL
-					direction="row"
-					wrapCards={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
+				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card) => {
 						return (
 							<LI

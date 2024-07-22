@@ -9,6 +9,7 @@ import {
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
+import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import {
@@ -38,7 +39,6 @@ import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { editionList } from '../lib/edition';
 import {
 	getFrontsBannerAdPositions,
@@ -569,10 +569,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					) {
 						const containerPalette =
 							collection.containerPalette ?? 'MediaPalette';
-						const containerOverrides =
-							decideContainerOverrides(containerPalette);
+
 						return (
-							<Fragment key={ophanName}>
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={containerPalette}
+							>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -599,13 +601,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.config.showDateHeader
 									}
 									editionId={front.editionId}
-									backgroundColour={
-										containerOverrides.background
-											.containerOuter
-									}
-									innerBackgroundColour={
-										containerOverrides.background.container
-									}
+									backgroundColour={schemePalette(
+										'--section-background-outer',
+									)}
+									innerBackgroundColour={schemePalette(
+										'--section-background-inner',
+									)}
 									hasPageSkin={hasPageSkin}
 								>
 									<Island
@@ -644,7 +645,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mobileAdPositions,
 										hasPageSkin,
 									)}
-							</Fragment>
+							</ContainerOverrides>
 						);
 					}
 

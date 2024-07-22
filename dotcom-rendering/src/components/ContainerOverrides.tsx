@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { palette as sourcePalette } from '@guardian/source/foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import type { palette } from '../palette';
+import { useEffect, useState } from 'react';
+import { containerDeclarations } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	children: React.ReactNode;
@@ -14,45 +14,43 @@ const displayContents = css`
 	display: contents;
 `;
 
-type ColourName = Parameters<typeof palette>[0];
-
 /**
  * Add CSS custom property overrides for palette colours in a given container
  */
 export const ContainerOverrides = ({ containerPalette, children }: Props) => {
-	const { text, background, border } = containerPalette
-		? decideContainerOverrides(containerPalette)
-		: {
-				text: undefined,
-				background: undefined,
-				border: undefined,
-		  };
+	const { darkModeAvailable } = useConfig();
 
-	const paletteOverrides = {
-		'--card-background': background?.card,
-		'--card-headline-trail-text': text?.cardHeadline,
-		'--card-footer-text': text?.cardFooter,
-		'--card-kicker-text': text?.cardKicker,
-		'--kicker-text-live': text?.liveKicker,
-		'--kicker-background-live': background?.liveKicker,
-		'--kicker-pulsing-dot-live': background?.pulsingDot,
-		'--byline': text?.cardByline,
-		'--carousel-text': text?.container,
-		'--carousel-title-highlight': text?.container,
-		'--carousel-border': border?.lines,
-		'--carousel-dot': sourcePalette.neutral[93],
-		'--carousel-dot-hover': sourcePalette.neutral[86],
-		'--carousel-active-dot': background?.carouselDot,
-		'--carousel-arrow': border?.carouselArrow,
-		'--carousel-arrow-background': background?.carouselArrow,
-		'--carousel-arrow-background-hover': background?.carouselArrowHover,
-	} satisfies Partial<Record<ColourName, string>>;
+	const [isStorybook, setIsStorybook] = useState(false);
+	useEffect(() => {
+		if (!('STORIES' in window)) return;
+		setIsStorybook(true);
+	}, []);
+
+	if (!containerPalette) return children;
 
 	return (
 		<div
 			data-container-palette={containerPalette}
-			css={[displayContents]}
-			style={paletteOverrides}
+			css={[
+				displayContents,
+				containerDeclarations(containerPalette, 'light'),
+				darkModeAvailable &&
+					css`
+						@media (prefers-color-scheme: dark) {
+							${containerDeclarations(containerPalette, 'dark')}
+						}
+					`,
+				isStorybook &&
+					css`
+						[data-color-scheme='light'] & {
+							${containerDeclarations(containerPalette, 'light')}
+						}
+
+						[data-color-scheme='dark'] & {
+							${containerDeclarations(containerPalette, 'dark')}
+						}
+					`,
+			]}
 		>
 			{children}
 		</div>

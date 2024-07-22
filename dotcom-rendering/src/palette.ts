@@ -6500,6 +6500,26 @@ const paletteColours = {
 		light: richLinkTextLight,
 		dark: richLinkTextDark,
 	},
+	'--section-background-inner': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--section-background-left': {
+		light: () => 'transparent',
+		dark: () => 'transparent',
+	},
+	'--section-background-outer': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[7],
+	},
+	'--section-date': {
+		light: () => sourcePalette.news[400],
+		dark: () => sourcePalette.news[600],
+	},
+	'--section-description': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[73],
+	},
 	'--section-title-background': {
 		light: sectionTitleBackgroundLight,
 		dark: sectionTitleBackgroundLight,

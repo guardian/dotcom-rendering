@@ -2,15 +2,15 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
-import { palette as schemePalette } from '../palette';
+import { palette, palette as schemePalette } from '../palette';
 import type { CollectionBranding } from '../types/branding';
 import type { DCRContainerPalette, TreatType } from '../types/front';
 import type { DCRFrontPagination } from '../types/tagPage';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import { ContainerOverrides } from './ContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
 import { FrontPagination } from './FrontPagination';
 import { FrontSectionTitle } from './FrontSectionTitle';
@@ -335,19 +335,6 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-const decideBackgroundColour = (
-	overrideBackgroundColour: string | undefined,
-	hasPageSkin: boolean,
-) => {
-	if (overrideBackgroundColour) {
-		return overrideBackgroundColour;
-	}
-	if (hasPageSkin) {
-		return schemePalette('--article-background');
-	}
-	return undefined;
-};
-
 /**
  * # Front Container
  *
@@ -459,9 +446,6 @@ export const FrontSection = ({
 	isTagPage = false,
 	updateLogoAdPartnerSwitch = false,
 }: Props) => {
-	const overrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
 	const isToggleable = toggleable && !!sectionId;
 	const showMore =
 		canShowMore &&
@@ -476,148 +460,141 @@ export const FrontSection = ({
 	 * this id pre-existed showMore so is probably also being used for something else.
 	 */
 	return (
-		<section
-			id={sectionId}
-			data-link-name={ophanComponentLink}
-			data-component={ophanComponentName}
-			data-container-name={containerName}
-			css={[
-				fallbackStyles,
-				containerStylesUntilLeftCol,
-				!hasPageSkin && containerStylesFromLeftCol,
-				hasPageSkin && pageSkinContainer,
-			]}
-			style={{
-				backgroundColor:
-					decideBackgroundColour(
-						overrides?.background.container,
-						hasPageSkin,
-					) ?? schemePalette('--article-background'),
-				borderColor:
-					overrides?.border.container ??
-					schemePalette('--article-border'),
-			}}
-		>
-			<div
+		<ContainerOverrides containerPalette={containerPalette}>
+			<section
+				id={sectionId}
+				data-link-name={ophanComponentLink}
+				data-component={ophanComponentName}
+				data-container-name={containerName}
 				css={[
-					decoration(
-						overrides?.border.container ??
-							schemePalette('--article-border'),
-					),
-					sideBorders,
-					showTopBorder && topBorder,
+					fallbackStyles,
+					containerStylesUntilLeftCol,
+					!hasPageSkin && containerStylesFromLeftCol,
+					hasPageSkin && pageSkinContainer,
 				]}
-			/>
-
-			<div
-				css={[
-					sectionHeadlineUntilLeftCol(
-						// TODO FIXME:
-						// This relies on sections called "opinion"
-						// only ever having <CPScott> as the leftContent
-						title?.toLowerCase() === 'opinion',
+				style={{
+					backgroundColor: schemePalette(
+						'--section-background-inner',
 					),
-					!hasPageSkin &&
-						sectionHeadlineFromLeftCol(
-							overrides?.border.container ??
-								schemePalette('--article-border'),
-						),
-					title?.toLowerCase() === 'headlines' &&
-						sectionHeadlineHeight,
-				]}
+					borderColor: schemePalette('--article-border'),
+				}}
 			>
-				<FrontSectionTitle
-					title={
-						<ContainerTitle
-							title={title}
-							lightweightHeader={isTagPage}
-							fontColour={overrides?.text.container}
-							description={description}
-							// On paid fronts the title is not treated as a link
-							url={!isOnPaidContentFront ? url : undefined}
-							containerPalette={containerPalette}
-							showDateHeader={showDateHeader}
-							editionId={editionId}
-						/>
-					}
-					collectionBranding={collectionBranding}
-					updateLogoAdPartnerSwitch={updateLogoAdPartnerSwitch}
+				<div
+					css={[
+						decoration(schemePalette('--article-border')),
+						sideBorders,
+						showTopBorder && topBorder,
+					]}
 				/>
 
-				{leftContent}
-			</div>
-
-			{isToggleable && (
-				<div css={sectionShowHide}>
-					<ShowHideButton
-						sectionId={sectionId}
-						overrideContainerToggleColour={
-							overrides?.text.containerToggle
+				<div
+					css={[
+						sectionHeadlineUntilLeftCol(
+							// TODO FIXME:
+							// This relies on sections called "opinion"
+							// only ever having <CPScott> as the leftContent
+							title?.toLowerCase() === 'opinion',
+						),
+						!hasPageSkin &&
+							sectionHeadlineFromLeftCol(
+								schemePalette('--article-border'),
+							),
+						title?.toLowerCase() === 'headlines' &&
+							sectionHeadlineHeight,
+					]}
+				>
+					<FrontSectionTitle
+						title={
+							<ContainerTitle
+								title={title}
+								lightweightHeader={isTagPage}
+								description={description}
+								fontColour={schemePalette(
+									'--article-section-title',
+								)}
+								// On paid fronts the title is not treated as a link
+								url={!isOnPaidContentFront ? url : undefined}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
+							/>
 						}
+						collectionBranding={collectionBranding}
+						updateLogoAdPartnerSwitch={updateLogoAdPartnerSwitch}
 					/>
+
+					{leftContent}
 				</div>
-			)}
 
-			<div
-				css={[
-					sectionContent,
-					sectionContentPadded,
-					sectionContentRow(toggleable),
-					paddings,
-				]}
-				id={`container-${sectionId}`}
-			>
-				{children}
-			</div>
-
-			<div
-				css={[
-					sectionContentPadded,
-					sectionBottomContent,
-					bottomPadding,
-				]}
-			>
-				{isString(targetedTerritory) &&
-				isAustralianTerritory(targetedTerritory) ? (
-					<Island priority="feature" defer={{ until: 'visible' }}>
-						<AustralianTerritorySwitcher
-							targetedTerritory={targetedTerritory}
-						/>
-					</Island>
-				) : showMore ? (
-					<Island priority="feature" defer={{ until: 'interaction' }}>
-						<ShowMore
-							title={title}
-							sectionId={sectionId}
-							collectionId={collectionId}
-							pageId={pageId}
-							ajaxUrl={ajaxUrl}
-							editionId={editionId}
-							containerPalette={containerPalette}
-							showAge={!hideAge.includes(title)}
-							discussionApiUrl={discussionApiUrl}
-						/>
-					</Island>
-				) : null}
-				{pagination && (
-					<FrontPagination
-						sectionName={pagination.sectionName}
-						totalContent={pagination.totalContent}
-						currentPage={pagination.currentPage}
-						lastPage={pagination.lastPage}
-						pageId={pagination.pageId}
-					/>
+				{isToggleable && (
+					<div css={sectionShowHide}>
+						<ShowHideButton sectionId={sectionId} />
+					</div>
 				)}
-			</div>
 
-			{treats && !hasPageSkin && (
-				<div css={[sectionTreats, paddings]}>
-					<Treats
-						treats={treats}
-						borderColour={overrides?.border.container}
-					/>
+				<div
+					css={[
+						sectionContent,
+						sectionContentPadded,
+						sectionContentRow(toggleable),
+						paddings,
+					]}
+					id={`container-${sectionId}`}
+				>
+					{children}
 				</div>
-			)}
-		</section>
+
+				<div
+					css={[
+						sectionContentPadded,
+						sectionBottomContent,
+						bottomPadding,
+					]}
+				>
+					{isString(targetedTerritory) &&
+					isAustralianTerritory(targetedTerritory) ? (
+						<Island priority="feature" defer={{ until: 'visible' }}>
+							<AustralianTerritorySwitcher
+								targetedTerritory={targetedTerritory}
+							/>
+						</Island>
+					) : showMore ? (
+						<Island
+							priority="feature"
+							defer={{ until: 'interaction' }}
+						>
+							<ShowMore
+								title={title}
+								sectionId={sectionId}
+								collectionId={collectionId}
+								pageId={pageId}
+								ajaxUrl={ajaxUrl}
+								editionId={editionId}
+								containerPalette={containerPalette}
+								showAge={!hideAge.includes(title)}
+								discussionApiUrl={discussionApiUrl}
+							/>
+						</Island>
+					) : null}
+					{pagination && (
+						<FrontPagination
+							sectionName={pagination.sectionName}
+							totalContent={pagination.totalContent}
+							currentPage={pagination.currentPage}
+							lastPage={pagination.lastPage}
+							pageId={pagination.pageId}
+						/>
+					)}
+				</div>
+
+				{treats && !hasPageSkin && (
+					<div css={[sectionTreats, paddings]}>
+						<Treats
+							treats={treats}
+							borderColour={palette('--article-border')}
+						/>
+					</div>
+				)}
+			</section>
+		</ContainerOverrides>
 	);
 };

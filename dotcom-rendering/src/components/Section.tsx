@@ -6,7 +6,6 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
 import type { DCRContainerPalette, TreatType } from '../types/front';
-import type { ContainerOverrides } from '../types/palette';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
@@ -197,47 +196,20 @@ const Content = ({
 	</div>
 );
 
-const ContainerTitleWithHide = ({
-	title,
-	fontColour,
-	description,
-	url,
-	containerPalette,
-	showDateHeader,
-	editionId,
-	overrides,
-	hasPageSkin,
+const MaybeHideAboveLeftCol = ({
+	hasPageSkin = false,
+	children,
 }: {
-	title?: string;
-	fontColour?: string;
-	description?: string;
-	url?: string;
-	containerPalette?: DCRContainerPalette;
-	showDateHeader?: boolean;
-	editionId?: EditionId;
-	overrides?: ContainerOverrides | undefined;
+	children: React.ReactNode;
 	hasPageSkin?: boolean;
-}) => {
-	const containerTitle = (
-		<ContainerTitle
-			title={title}
-			fontColour={fontColour ?? overrides?.text.container}
-			description={description}
-			url={url}
-			containerPalette={containerPalette}
-			showDateHeader={showDateHeader}
-			editionId={editionId}
-		/>
-	);
-	if (hasPageSkin) {
-		return containerTitle;
-	}
-	return (
+}) =>
+	hasPageSkin ? (
+		children
+	) : (
 		<Hide when="above" breakpoint="leftCol">
-			{containerTitle}
+			{children}
 		</Hide>
 	);
-};
 
 const decideBackgroundColour = (
 	backgroundColour: string | undefined,
@@ -377,12 +349,9 @@ export const Section = ({
 						<div>
 							<ContainerTitle
 								title={title}
-								fontColour={
-									fontColour ?? overrides?.text.container
-								}
+								fontColour={fontColour}
 								description={description}
 								url={url}
-								containerPalette={containerPalette}
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
@@ -411,23 +380,18 @@ export const Section = ({
 								: headlineContainerStyles
 						}
 					>
-						<ContainerTitleWithHide
-							title={title}
-							fontColour={fontColour ?? overrides?.text.container}
-							description={description}
-							url={url}
-							containerPalette={containerPalette}
-							showDateHeader={showDateHeader}
-							editionId={editionId}
-							hasPageSkin={hasPageSkin}
-						/>
-						{toggleable && !!sectionId && (
-							<ShowHideButton
-								sectionId={sectionId}
-								overrideContainerToggleColour={
-									overrides?.text.containerToggle
-								}
+						<MaybeHideAboveLeftCol hasPageSkin={hasPageSkin}>
+							<ContainerTitle
+								title={title}
+								description={description}
+								url={url}
+								fontColour={fontColour}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
 							/>
+						</MaybeHideAboveLeftCol>
+						{toggleable && !!sectionId && (
+							<ShowHideButton sectionId={sectionId} />
 						)}
 					</div>
 					{toggleable && sectionId ? (

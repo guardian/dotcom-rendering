@@ -1,4 +1,5 @@
-import { palette } from '@guardian/source/foundations';
+import { palette as sourcePalette } from '@guardian/source/foundations';
+import type { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import type { ContainerOverrides } from '../types/palette';
 import { transparentColour } from './transparentColour';
@@ -13,7 +14,7 @@ const {
 	specialReportAlt,
 	sport,
 	labs,
-} = palette;
+} = sourcePalette;
 
 const textCardHeadline = (
 	containerPalette: Exclude<DCRContainerPalette, 'MediaPalette'>,
@@ -41,6 +42,66 @@ const textCardHeadline = (
 			return neutral[100];
 		case 'Branded':
 			return neutral[20];
+	}
+};
+const cardHeadlineTrailTextLight: ContainerFunction = (
+	containerPalette: DCRContainerPalette,
+) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return neutral[100];
+		case 'LongRunningPalette':
+			return neutral[7];
+		case 'SombrePalette':
+			return neutral[100];
+		case 'BreakingPalette':
+			return neutral[100];
+		case 'EventPalette':
+			return brand[300];
+		case 'EventAltPalette':
+			return brand[300];
+		case 'LongRunningAltPalette':
+			return neutral[7];
+		case 'SombreAltPalette':
+			return neutral[93];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'PodcastPalette':
+			return neutral[100];
+		case 'Branded':
+			return neutral[20];
+		case 'MediaPalette':
+			return neutral[100];
+	}
+};
+const cardHeadlineTrailTextDark: ContainerFunction = (
+	containerPalette: DCRContainerPalette,
+) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return neutral[93];
+		case 'LongRunningPalette':
+			return neutral[93];
+		case 'SombrePalette':
+			return neutral[100];
+		case 'BreakingPalette':
+			return neutral[100];
+		case 'EventPalette':
+			return brand[800];
+		case 'EventAltPalette':
+			return brand[800];
+		case 'LongRunningAltPalette':
+			return neutral[86];
+		case 'SombreAltPalette':
+			return neutral[93];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[700];
+		case 'PodcastPalette':
+			return neutral[100];
+		case 'Branded':
+			return neutral[86];
+		case 'MediaPalette':
+			return neutral[100];
 	}
 };
 
@@ -245,6 +306,172 @@ const textLiveKicker = (
 	}
 };
 
+const cardKickerTextLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return brandAlt[400];
+		case 'LongRunningPalette':
+			return news[400];
+		case 'LongRunningAltPalette':
+			return news[400];
+		case 'SombrePalette':
+			return brand[800];
+		case 'SombreAltPalette':
+			return news[500];
+		case 'BreakingPalette':
+			return news[600];
+		case 'EventPalette':
+			return specialReportAlt[200];
+		case 'EventAltPalette':
+			return news[400];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'Branded':
+			return labs[200];
+		case 'PodcastPalette':
+		case 'MediaPalette':
+			return neutral[7];
+	}
+};
+const cardKickerTextDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return brandAlt[200];
+		case 'LongRunningPalette':
+			return news[600];
+		case 'LongRunningAltPalette':
+			return news[600];
+		case 'SombrePalette':
+			return brand[800];
+		case 'SombreAltPalette':
+			return news[500];
+		case 'BreakingPalette':
+			return news[600];
+		case 'EventPalette':
+			return specialReportAlt[300];
+		case 'EventAltPalette':
+			return 'inherit';
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[700];
+		case 'Branded':
+			return labs[400];
+		case 'PodcastPalette':
+		case 'MediaPalette':
+			return neutral[7];
+	}
+};
+
+const kickerTextLiveLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return specialReport[400];
+		case 'LongRunningPalette':
+			return neutral[97];
+		case 'LongRunningAltPalette':
+			return neutral[97];
+		case 'SombrePalette':
+			return specialReport[300];
+		case 'SombreAltPalette':
+			return specialReport[100];
+		case 'BreakingPalette':
+			return news[200];
+		case 'EventPalette':
+			return specialReport[800];
+		case 'EventAltPalette':
+			return neutral[97];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[700];
+		case 'Branded':
+			return neutral[97];
+		case 'MediaPalette':
+		case 'PodcastPalette':
+			return 'inherit';
+	}
+};
+
+const kickerTextLiveDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return specialReport[400];
+		case 'LongRunningPalette':
+			return sport[100];
+		case 'LongRunningAltPalette':
+			return neutral[20];
+		case 'SombrePalette':
+			return specialReport[300];
+		case 'SombreAltPalette':
+			return specialReport[100];
+		case 'BreakingPalette':
+			return news[200];
+		case 'EventPalette':
+			return specialReport[800];
+		case 'EventAltPalette':
+			return neutral[97];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'Branded':
+			return neutral[20];
+		case 'MediaPalette':
+		case 'PodcastPalette':
+			return 'inherit';
+	}
+};
+
+const kickerBackgroundLiveLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return brandAlt[400];
+		case 'LongRunningPalette':
+			return news[400];
+		case 'LongRunningAltPalette':
+			return news[400];
+		case 'SombrePalette':
+			return brand[800];
+		case 'SombreAltPalette':
+			return news[500];
+		case 'BreakingPalette':
+			return news[600];
+		case 'EventPalette':
+			return specialReportAlt[200];
+		case 'EventAltPalette':
+			return news[400];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'Branded':
+			return labs[200];
+		case 'PodcastPalette':
+		case 'MediaPalette':
+			return neutral[7];
+	}
+};
+const kickerBackgroundLiveDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return brandAlt[200];
+		case 'LongRunningPalette':
+			return news[600];
+		case 'LongRunningAltPalette':
+			return news[600];
+		case 'SombrePalette':
+			return brand[800];
+		case 'SombreAltPalette':
+			return news[500];
+		case 'BreakingPalette':
+			return news[600];
+		case 'EventPalette':
+			return specialReportAlt[200];
+		case 'EventAltPalette':
+			return 'inherit';
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[700];
+		case 'Branded':
+			return labs[400];
+		case 'PodcastPalette':
+		case 'MediaPalette':
+			return neutral[7];
+	}
+};
+
 const textContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
@@ -362,6 +589,63 @@ const borderLines = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
+const articleBorderLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return transparentColour(neutral[60], 0.4);
+		case 'LongRunningAltPalette':
+			return neutral[86];
+		case 'SombrePalette':
+			return neutral[60];
+		case 'SombreAltPalette':
+			return neutral[46];
+		case 'InvestigationPalette':
+			return neutral[60];
+		case 'BreakingPalette':
+			return neutral[86];
+		case 'EventPalette':
+			return neutral[86];
+		case 'EventAltPalette':
+			return neutral[86];
+		case 'SpecialReportAltPalette':
+			return neutral[60];
+		case 'Branded':
+			return neutral[60];
+		case 'MediaPalette':
+			return neutral[46];
+		case 'PodcastPalette':
+			return neutral[86];
+	}
+};
+const articleBorderDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return transparentColour(neutral[60], 0.4);
+		case 'LongRunningAltPalette':
+			return neutral[10];
+		case 'SombrePalette':
+			return neutral[38];
+		case 'SombreAltPalette':
+			return neutral[46];
+		case 'InvestigationPalette':
+			return neutral[38];
+		case 'BreakingPalette':
+			return neutral[10];
+		case 'EventPalette':
+			return neutral[93];
+		case 'EventAltPalette':
+			return neutral[10];
+		case 'SpecialReportAltPalette':
+			return neutral[38];
+		case 'Branded':
+			return neutral[38];
+		case 'MediaPalette':
+			return neutral[46];
+		case 'PodcastPalette':
+			return neutral[10];
+	}
+};
+
 const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
@@ -388,6 +672,340 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 			return neutral[0];
 		case 'PodcastPalette':
 			return neutral[100];
+	}
+};
+
+const cardBackgroundLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return specialReport[400];
+		case 'LongRunningPalette':
+			return sport[800];
+		case 'SombrePalette':
+			return specialReport[300];
+		case 'BreakingPalette':
+			return news[200];
+		case 'EventPalette':
+			return specialReport[800];
+		case 'EventAltPalette':
+			return culture[800];
+		case 'LongRunningAltPalette':
+			return neutral[93];
+		case 'SombreAltPalette':
+			return neutral[7];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[800];
+		case 'Branded':
+			return 'transparent';
+		case 'MediaPalette':
+			return neutral[0];
+		case 'PodcastPalette':
+			return neutral[100];
+	}
+};
+const cardBackgroundDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return 'transparent';
+		case 'LongRunningPalette':
+			return sport[100];
+		case 'SombrePalette':
+			return specialReport[100];
+		case 'LongRunningAltPalette':
+			return neutral[20];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'Branded':
+			return 'transparent';
+		case 'MediaPalette':
+			return neutral[0];
+		case 'BreakingPalette':
+			return 'transparent';
+		case 'SombreAltPalette':
+		case 'EventPalette':
+		case 'EventAltPalette':
+		case 'PodcastPalette':
+			return 'inherit';
+	}
+};
+
+const sectionBackgroundOuterLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'MediaPalette':
+		case 'EventPalette':
+		case 'SombreAltPalette':
+		case 'EventAltPalette':
+		case 'InvestigationPalette':
+		case 'LongRunningAltPalette':
+		case 'LongRunningPalette':
+		case 'SombrePalette':
+		case 'BreakingPalette':
+		case 'SpecialReportAltPalette':
+		case 'Branded':
+		case 'PodcastPalette':
+			return neutral[100];
+	}
+};
+const sectionBackgroundOuterDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'MediaPalette':
+			return neutral[0];
+		case 'EventPalette':
+		case 'SombreAltPalette':
+		case 'EventAltPalette':
+		case 'InvestigationPalette':
+		case 'LongRunningAltPalette':
+		case 'LongRunningPalette':
+		case 'SombrePalette':
+		case 'BreakingPalette':
+		case 'SpecialReportAltPalette':
+		case 'Branded':
+		case 'PodcastPalette':
+			return neutral[7];
+	}
+};
+const sectionBackgroundInnerLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'InvestigationPalette':
+			return specialReport[400];
+		case 'LongRunningPalette':
+			return sport[800];
+		case 'SombrePalette':
+			return specialReport[300];
+		case 'BreakingPalette':
+			return news[200];
+		case 'EventPalette':
+			return specialReport[800];
+		case 'EventAltPalette':
+			return culture[800];
+		case 'LongRunningAltPalette':
+			return neutral[93];
+		case 'SombreAltPalette':
+			return neutral[7];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[800];
+		case 'Branded':
+			return neutral[93];
+		case 'MediaPalette':
+			return neutral[0];
+		case 'PodcastPalette':
+			return neutral[100];
+	}
+};
+const sectionBackgroundInnerDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return sport[100];
+		case 'SombrePalette':
+			return specialReport[100];
+		case 'EventPalette':
+			return specialReport[100];
+		case 'EventAltPalette':
+			return culture[50];
+		case 'BreakingPalette':
+			return news[100];
+		case 'LongRunningAltPalette':
+			return neutral[20];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'Branded':
+			return neutral[20];
+		case 'MediaPalette':
+			return neutral[0];
+
+		case 'InvestigationPalette':
+			return neutral[20];
+		case 'SombreAltPalette':
+		case 'PodcastPalette':
+			return neutral[7];
+	}
+};
+
+const sectionBackgroundLeftLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'Branded':
+			return labs[400];
+		case 'InvestigationPalette':
+		case 'LongRunningPalette':
+		case 'SombrePalette':
+		case 'BreakingPalette':
+		case 'EventPalette':
+		case 'EventAltPalette':
+		case 'LongRunningAltPalette':
+		case 'SombreAltPalette':
+		case 'SpecialReportAltPalette':
+		case 'MediaPalette':
+		case 'PodcastPalette':
+			return 'transparent';
+	}
+};
+const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'Branded':
+			return labs[200];
+		case 'InvestigationPalette':
+		case 'LongRunningPalette':
+		case 'SombrePalette':
+		case 'BreakingPalette':
+		case 'EventPalette':
+		case 'EventAltPalette':
+		case 'LongRunningAltPalette':
+		case 'SombreAltPalette':
+		case 'SpecialReportAltPalette':
+		case 'MediaPalette':
+		case 'PodcastPalette':
+			return 'transparent';
+	}
+};
+
+const sectionDateLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return news[400];
+		case 'LongRunningAltPalette':
+			return news[200];
+		case 'SombrePalette':
+			return brand[800];
+		case 'SombreAltPalette':
+			return news[500];
+		case 'InvestigationPalette':
+			return brandAlt[400];
+		case 'BreakingPalette':
+			return news[800];
+		case 'EventPalette':
+			return news[400];
+		case 'EventAltPalette':
+			return news[400];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'Branded':
+			return neutral[100];
+		case 'MediaPalette':
+			return neutral[100];
+		case 'PodcastPalette':
+			return neutral[100];
+	}
+};
+const sectionDateDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return news[600];
+		case 'LongRunningAltPalette':
+			return news[800];
+		case 'SombrePalette':
+			return brand[800];
+		case 'SombreAltPalette':
+			return news[500];
+		case 'InvestigationPalette':
+			return brandAlt[400];
+		case 'BreakingPalette':
+			return news[600];
+		case 'EventPalette':
+			return news[400];
+		case 'EventAltPalette':
+			return news[400];
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[700];
+		case 'Branded':
+			return neutral[100];
+		case 'MediaPalette':
+			return neutral[100];
+		case 'PodcastPalette':
+			return neutral[100];
+	}
+};
+
+const sectionTitleLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return 'inherit';
+		case 'LongRunningAltPalette':
+			return 'inherit';
+		case 'SombrePalette':
+			return 'inherit';
+		case 'SombreAltPalette':
+			return neutral[93];
+		case 'InvestigationPalette':
+			return neutral[100];
+		case 'BreakingPalette':
+			return neutral[100];
+		case 'EventPalette':
+			return 'inherit';
+		case 'EventAltPalette':
+			return 'inherit';
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[100];
+		case 'Branded':
+			return neutral[100];
+		case 'MediaPalette':
+			return neutral[100];
+		case 'PodcastPalette':
+			return 'inherit';
+	}
+};
+const sectionTitleDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return 'inherit';
+		case 'LongRunningAltPalette':
+			return 'inherit';
+		case 'SombrePalette':
+			return 'inherit';
+		case 'SombreAltPalette':
+			return neutral[93];
+		case 'InvestigationPalette':
+			return neutral[93];
+		case 'BreakingPalette':
+			return 'inherit';
+		case 'EventPalette':
+			return 'inherit';
+		case 'EventAltPalette':
+			return 'inherit';
+		case 'SpecialReportAltPalette':
+			return specialReportAlt[700];
+		case 'Branded':
+			return neutral[97];
+		case 'MediaPalette':
+			return neutral[100];
+		case 'PodcastPalette':
+			return 'inherit';
+	}
+};
+
+const treatTextLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'Branded':
+			return neutral[46];
+		case 'EventPalette':
+		case 'SombreAltPalette':
+		case 'EventAltPalette':
+		case 'InvestigationPalette':
+		case 'LongRunningAltPalette':
+		case 'LongRunningPalette':
+		case 'SombrePalette':
+		case 'BreakingPalette':
+		case 'SpecialReportAltPalette':
+		case 'MediaPalette':
+		case 'PodcastPalette':
+			return 'inherit';
+	}
+};
+const treatTextDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'Branded':
+			return neutral[38];
+		case 'EventPalette':
+		case 'SombreAltPalette':
+		case 'EventAltPalette':
+		case 'InvestigationPalette':
+		case 'LongRunningAltPalette':
+		case 'LongRunningPalette':
+		case 'SombrePalette':
+		case 'BreakingPalette':
+		case 'SpecialReportAltPalette':
+		case 'MediaPalette':
+		case 'PodcastPalette':
+			return 'inherit';
 	}
 };
 
@@ -548,3 +1166,137 @@ export const decideContainerOverrides = (
 		},
 	};
 };
+
+type ColourName = Parameters<typeof palette>[0];
+
+type ContainerFunction = (containerPalette: DCRContainerPalette) => string;
+
+const containerColours = {
+	'--card-background': {
+		light: cardBackgroundLight,
+		dark: cardBackgroundDark,
+	},
+	'--card-headline-trail-text': {
+		light: cardHeadlineTrailTextLight,
+		dark: cardHeadlineTrailTextDark,
+	},
+	'--card-footer-text': {
+		light: cardHeadlineTrailTextLight,
+		dark: cardHeadlineTrailTextDark,
+	},
+	'--card-kicker-text': {
+		light: cardKickerTextLight,
+		dark: cardKickerTextDark,
+	},
+	'--article-border': {
+		light: articleBorderLight,
+		dark: articleBorderDark,
+	},
+	'--article-section-title': {
+		light: sectionTitleLight,
+		dark: sectionTitleDark,
+	},
+	'--section-background-outer': {
+		light: sectionBackgroundOuterLight,
+		dark: sectionBackgroundOuterDark,
+	},
+	'--section-date': {
+		light: sectionDateLight,
+		dark: sectionDateDark,
+	},
+	'--section-background-inner': {
+		light: sectionBackgroundInnerLight,
+		dark: sectionBackgroundInnerDark,
+	},
+	'--section-background-left': {
+		light: sectionBackgroundLeftLight,
+		dark: sectionBackgroundLeftDark,
+	},
+	'--kicker-background-live': {
+		light: kickerBackgroundLiveLight,
+		dark: kickerBackgroundLiveDark,
+	},
+	'--kicker-text-live': {
+		light: kickerTextLiveLight,
+		dark: kickerTextLiveDark,
+	},
+	'--kicker-pulsing-dot-live': {
+		light: kickerTextLiveLight,
+		dark: kickerTextLiveDark,
+	},
+	'--byline': {
+		light: cardKickerTextLight,
+		dark: cardKickerTextDark,
+	},
+	'--treat-text': {
+		light: treatTextLight,
+		dark: treatTextDark,
+	},
+	'--carousel-text': {
+		//text?.container
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+	'--carousel-title-highlight': {
+		//text?.container
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+	'--carousel-border': {
+		//border?.lines
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+	'--carousel-dot': {
+		//sourcePalette.neutral[93]
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+	'--carousel-dot-hover': {
+		//sourcePalette.neutral[86]
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+	'--carousel-active-dot': {
+		//background?.carouselDot
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+	'--carousel-arrow': {
+		//border?.carouselArrow
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+	'--carousel-arrow-background': {
+		//background?.carouselArrow
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+	'--carousel-arrow-background-hover': {
+		//background?.carouselArrowHover
+		light: () => 'inherit',
+		dark: () => 'inherit',
+	},
+} as const satisfies Partial<
+	Record<
+		ColourName,
+		{
+			light: ContainerFunction;
+			dark: ContainerFunction;
+		}
+	>
+>;
+
+/**
+ * Builds a list of CSS custom property declarations representing colours.
+ * These can be used to override the palette on any element, given a specific
+ * container palette.
+ */
+export const containerDeclarations = (
+	containerPalette: DCRContainerPalette,
+	colourScheme: 'light' | 'dark',
+): string[] =>
+	Object.entries(containerColours).map(
+		([colourName, colour]) =>
+			`${colourName}: ${colour[colourScheme](containerPalette)};`,
+	);
