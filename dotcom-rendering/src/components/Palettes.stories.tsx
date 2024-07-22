@@ -12,7 +12,7 @@ const meta = {
 	parameters: {
 		chromatic: {
 			modes: {
-				horizontal: allModes.splitHorizontal,
+				horizontal: allModes.splitVertical,
 			},
 		},
 	},
