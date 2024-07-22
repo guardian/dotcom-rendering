@@ -75,6 +75,23 @@ export const withTwoTabs: StoryObj = () => {
 };
 withTwoTabs.storyName = 'with two tabs';
 
+export const withTwoTabsAndPageSkin: StoryObj = () => {
+	return (
+		<Section>
+			<MostViewedFooterLayout renderAds={true} hasPageSkin={true}>
+				<MostViewedFooter
+					tabs={[
+						{ heading: 'Tab 1', trails: trails.slice(0, 10) },
+						{ heading: 'Tab 2', trails: trails.slice(5, 15) },
+					]}
+					selectedColour={palette('--most-viewed-tab-border')}
+				/>
+			</MostViewedFooterLayout>
+		</Section>
+	);
+};
+withTwoTabsAndPageSkin.storyName = 'with two tabs & page skin';
+
 export const withOneTabs: StoryObj = () => {
 	return (
 		<Section>

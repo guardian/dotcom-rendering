@@ -8,7 +8,6 @@ type Props = {
 	abTestCypressDataAttr?: string;
 	variantFromRunnable?: string;
 	sectionId?: string;
-	hasPageSkin?: boolean;
 };
 
 /**
@@ -28,7 +27,6 @@ export const MostViewedFooter = ({
 	variantFromRunnable,
 	sectionId,
 	selectedColour,
-	hasPageSkin = false,
 }: Props) => {
 	return (
 		<div
@@ -44,7 +42,6 @@ export const MostViewedFooter = ({
 				data={tabs}
 				sectionId={sectionId}
 				selectedColour={selectedColour}
-				hasPageSkin={hasPageSkin}
 			/>
 		</div>
 	);
