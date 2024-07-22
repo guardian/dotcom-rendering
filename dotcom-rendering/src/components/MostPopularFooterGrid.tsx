@@ -2,17 +2,17 @@ import { css } from '@emotion/react';
 import {
 	from,
 	headlineBold17,
-	palette,
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
+import { palette } from '../palette';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 const gridContainerStyle = css`
 	display: grid;
-	grid-auto-flow: 1fr;
+	grid-auto-flow: column;
 
 	/* One column view */
 	grid-template-columns: 1fr;
@@ -30,12 +30,12 @@ const gridContainerStyle = css`
 
 	/* We set left border on the grid container, and then right border on
     the gridItems to prevent borders doubling up */
-	border-left: 1px solid ${palette.neutral[86]};
+	border-left: 1px solid ${palette('--article-border')};
 `;
 
 const gridContainerStyleWithPageSkin = css`
 	display: grid;
-	grid-auto-flow: 1fr;
+	grid-auto-flow: column;
 
 	/* One column view */
 	grid-template-columns: 1fr;
@@ -51,69 +51,42 @@ const gridContainerStyleWithPageSkin = css`
 
 	/* We set left border on the grid container, and then right border on
     the gridItems to prevent borders doubling up */
-	border-left: 1px solid ${palette.neutral[86]};
+	border-left: 1px solid ${palette('--article-border')};
 `;
 
 const titleContainerStyle = css`
-	border-right: 1px solid ${palette.neutral[86]};
-	${until.leftCol} {
-		/* Below leftCol always set top border */
-		border-top: 1px solid ${palette.neutral[86]};
-	}
+	border-right: 1px solid ${palette('--article-border')};
+	border-top: 1px solid ${palette('--article-border')};
 	${from.leftCol} {
-		border-bottom: 1px solid ${palette.neutral[86]};
+		border-top: none;
 	}
+
 	padding: 7px 10px 18px;
 `;
 
 const titleContainerStyleWithPageSkin = css`
-	border-right: 1px solid ${palette.neutral[86]};
-	border-top: 1px solid ${palette.neutral[86]};
+	border-right: 1px solid;
+	border-top: 1px solid;
+	border-color: ${palette('--article-border')};
 	padding: 7px 10px 18px;
 `;
 
 const titleStyle = css`
 	${headlineBold17};
-	color: ${palette.neutral[7]};
+	color: ${palette('--headline-colour')};
 	overflow-wrap: break-word;
 `;
 
 const descriptionStyle = css`
 	${textSans14};
 	line-height: 125%;
-	color: ${palette.neutral[46]};
+	color: ${palette('--most-viewed-description')};
 	overflow-wrap: break-word;
-
-	&:hover a {
-		color: ${palette.neutral[7]};
-	}
 `;
 
 const displayContent = css`
 	display: contents;
 `;
-
-const mostViewedOverridesStyle = (index: number) => {
-	return css`
-		grid-row: ${index + 2} / ${index + 3};
-		grid-column: 1/2;
-		border-top: ${index + 1 == 6 && `1px solid ${palette.neutral[86]}`};
-	`;
-};
-
-const deeplyOverridesStyle = (index: number, mostViewedLength: number) => {
-	return css`
-		grid-row: ${index + 2} / ${index + 3};
-		grid-column: 2/3;
-		border-top: ${index + 1 == 6 && `1px solid ${palette.neutral[86]}`};
-
-		${until.tablet} {
-			grid-row: ${index + mostViewedLength + 3} /
-				${index + mostViewedLength + 4};
-			grid-column: 1/2;
-		}
-	`;
-};
 
 const ophanLinkName = (name: string) => name.toLowerCase().replace(/ /g, '-');
 
@@ -165,8 +138,6 @@ export const MostPopularFooterGrid = ({
 							format={trail.format}
 							headlineText={trail.headline}
 							ageWarning={trail.ageWarning}
-							cssOverrides={mostViewedOverridesStyle(j)}
-							hasPageSkin={hasPageSkin}
 						/>
 					))}
 				</ol>
@@ -200,11 +171,6 @@ export const MostPopularFooterGrid = ({
 							format={trail.format}
 							headlineText={trail.headline}
 							ageWarning={trail.ageWarning}
-							cssOverrides={deeplyOverridesStyle(
-								j,
-								shortenedMostViewed.length,
-							)}
-							hasPageSkin={hasPageSkin}
 						/>
 					))}
 				</ol>
