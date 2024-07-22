@@ -152,6 +152,8 @@ const dividerOverridesForSubNav = css`
 `;
 
 const subNavWrapper = css`
+	/** Relative positioning needed on the wrapper to allow
+	  the pseudo after element to position absolutely */
 	position: relative;
 	${gridContent}
 	grid-row: 3;
@@ -166,10 +168,14 @@ const subNavWrapper = css`
 		width: 100%;
 	}
 
+	/** This additional padding on the right of the subnav list allows
+	 the list items to remain visible with the fade overlay */
 	ul {
 		padding-right: ${space[8]}px;
 	}
 
+	/** Adds a fade overlay to the RHS of the subnav area,
+	 to visually hint that it is scrollable horizontally */
 	::after {
 		content: '';
 		position: absolute;
