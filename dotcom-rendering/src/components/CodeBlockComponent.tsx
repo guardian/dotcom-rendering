@@ -52,7 +52,7 @@ export const CodeBlockComponent = ({
 	language = 'text',
 }: Props) => {
 	return (
-		<pre css={codeStyles}>
+		<pre css={codeStyles} data-spacefinder-role="inline">
 			<code>
 				<div dangerouslySetInnerHTML={{ __html: code }} />
 			</code>

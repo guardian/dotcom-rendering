@@ -183,7 +183,7 @@ export const ManyNewslettersForm = ({
 					</>
 				) : (
 					<p css={successMessageStyle}>
-						You are now a subscriber! Thank you for signing up
+						Please check your email to confirm your subscription
 					</p>
 				)}
 			</div>

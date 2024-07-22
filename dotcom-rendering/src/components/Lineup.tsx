@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { textSans15 } from '@guardian/source/foundations';
+import type { EventType, PlayerType } from '../types/sport';
 
 type Props = {
 	players: PlayerType[];

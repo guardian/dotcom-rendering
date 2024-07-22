@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleTheme } from '@guardian/libs';
 import { visuallyHidden } from '@guardian/source/foundations';
 import React from 'react';
 import {

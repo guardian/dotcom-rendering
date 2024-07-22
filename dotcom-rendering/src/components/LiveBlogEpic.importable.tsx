@@ -14,7 +14,7 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
@@ -99,11 +99,9 @@ const usePayload = ({
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
 	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();
-	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const isSignedIn = useIsSignedIn();
 
+	if (isSignedIn === 'Pending') return;
 	if (articleCounts === 'Pending') return;
 	if (hasOptedOutOfArticleCount === 'Pending') return;
 	log('dotcom', 'LiveBlogEpic has consent state');

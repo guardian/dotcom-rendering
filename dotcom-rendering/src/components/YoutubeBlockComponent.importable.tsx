@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ConsentState } from '@guardian/libs';
+import type { ArticleFormat, ConsentState } from '@guardian/libs';
 import { body, palette, space } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';

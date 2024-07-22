@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	between,
 	space,
@@ -7,6 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
 import type { Palette } from '../types/palette';
+import type { CricketInnings, CricketMatch } from '../types/sport';
 import { DateTime } from './DateTime';
 
 const ALL_OUT_WICKETS = 10;
@@ -98,7 +100,7 @@ export const cricketScore = ({
 	return `${innings.runsScored} - ${innings.fallOfWicket.length}`;
 };
 
-export const CricketInnings = ({
+export const CricketInningsScores = ({
 	match,
 	home,
 }: {
@@ -162,7 +164,7 @@ export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
 							{match.teams.find((team) => !!team.home)?.name}
 						</td>
 						<td css={cellStyle}>
-							<CricketInnings match={match} home={true} />
+							<CricketInningsScores match={match} home={true} />
 						</td>
 					</tr>
 					{/* Away team */}
@@ -171,7 +173,7 @@ export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
 							{match.teams.find((team) => !team.home)?.name}
 						</td>
 						<td css={cellStyle}>
-							<CricketInnings match={match} home={false} />
+							<CricketInningsScores match={match} home={false} />
 						</td>
 					</tr>
 				</tbody>

@@ -4,6 +4,7 @@ import type { CollectionBranding } from './branding';
 import type { CommercialProperties } from './commercial';
 import type { FooterType } from './footer';
 import type { DCRFrontCard, FEFrontCard, FEFrontConfigType } from './front';
+import type { FENavType } from './frontend';
 import type { FEPagination, FETagType } from './tag';
 
 export interface FETagPageType {
@@ -25,6 +26,7 @@ export interface FETagPageType {
 	isAdFreeUser: boolean;
 	forceDay: boolean;
 	canonicalUrl?: string;
+	contributionsServiceUrl: string;
 }
 
 /**
@@ -79,6 +81,7 @@ export interface DCRTagPageType {
 	};
 	branding: CollectionBranding | undefined;
 	canonicalUrl?: string;
+	contributionsServiceUrl: string;
 }
 
 export interface DCRFrontPagination {

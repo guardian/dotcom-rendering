@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '@guardian/libs';
 import {
 	from,
 	headlineMedium20,
@@ -262,6 +266,7 @@ export const PullQuoteBlockComponent = ({
 				fontCss(role, format),
 				alignmentCss(role, format),
 			]}
+			data-spacefinder-role={role}
 		>
 			<QuoteIcon colour={palette('--pullquote-icon')} />
 			<blockquote

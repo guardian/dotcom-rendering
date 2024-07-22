@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { PlayerType } from '../types/sport';
 import { Lineup } from './Lineup';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { log, timeAgo } from '@guardian/libs';
+import { type ArticleFormat, log, timeAgo } from '@guardian/libs';
 import {
 	from,
 	headlineLight24,

@@ -26,18 +26,10 @@ interface Props {
 	hasPageSkin?: boolean;
 }
 
-export const pillarLeftMarginPx = 6;
-
-export const pillarWidthsPx = {
-	tablet: 108,
-	leftCol: 125,
-	wide: 136,
-};
-
 const veggieBurgerDiameter = 40;
 
 const gridFullWidth = css`
-	grid-column: content-start / content-end;
+	grid-column: content-start / main-column-end;
 `;
 
 const editionSwitcherMenuStyles = css`
@@ -48,7 +40,7 @@ const editionSwitcherMenuStyles = css`
 	}
 `;
 
-const guardianLogoStyles = css`
+const logoStyles = css`
 	${getZIndex('TheGuardian')}
 	${gridFullWidth}
 	grid-row: 1;
@@ -78,6 +70,11 @@ const guardianLogoStyles = css`
 		${from.desktop} {
 			width: 276px;
 		}
+	}
+`;
+
+const logoStylesWithoutPageSkin = css`
+	svg {
 		${from.leftCol} {
 			width: 398px;
 		}
@@ -127,7 +124,7 @@ const pillarsNavStyles = css`
 `;
 
 const subNavStyles = css`
-	grid-column: content-start / content-end;
+	${gridFullWidth}
 	grid-row: 3;
 	${textSans14}
 	color: inherit;
@@ -140,6 +137,9 @@ const subNavStyles = css`
 	${from.mobileLandscape} {
 		width: calc(100% + ${pageMargin});
 	}
+	${from.tablet} {
+		width: 100%;
+	}
 
 	${from.mobileMedium} {
 		margin-top: ${space[3]}px;
@@ -147,41 +147,21 @@ const subNavStyles = css`
 	${from.tablet} {
 		min-height: 30px;
 	}
+`;
+
+const subNavStylesWithoutPageSkin = css`
 	${from.leftCol} {
 		margin-top: 14px;
 	}
 `;
 
-/** Styles the scrollbar of the subnav, providing sensible defaults
- * for browsers that don't support scrollbar-color styling
- * @see https://developer.chrome.com/docs/css-ui/scrollbar-styling
- */
+/** Sets horizontal scrolling behaviour and removes the scrollbar */
 const scrollableSubNavStyles = css`
-	--scrollbar-color-thumb: ${themePalette('--masthead-nav-lines')};
-	--scrollbar-color-track: ${themePalette('--masthead-nav-background')};
-	--scrollbar-width: thin;
-	--scrollbar-width-legacy: ${space[2]}px;
-
 	overflow-x: scroll;
 
-	/* For browsers that support scrollbar-* properties */
-	@supports (scrollbar-color: auto) {
-		scrollbar-color: var(--scrollbar-color-thumb)
-			var(--scrollbar-color-track);
-		scrollbar-width: var(--scrollbar-width);
-	}
-
-	/* Otherwise, use ::-webkit-scrollbar-* pseudo-elements */
 	@supports selector(::-webkit-scrollbar) {
 		&::-webkit-scrollbar {
-			max-height: var(--scrollbar-width-legacy);
-			max-width: var(--scrollbar-width-legacy);
-		}
-		&::-webkit-scrollbar-thumb {
-			background: var(--scrollbar-color-thumb);
-		}
-		&::-webkit-scrollbar-track {
-			background: var(--scrollbar-color-track);
+			display: none;
 		}
 	}
 `;
@@ -194,25 +174,8 @@ const horizontalDivider = css`
 		position: absolute;
 		border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
 		bottom: 0;
-		left: -${smallMobilePageMargin};
-		right: -${smallMobilePageMargin};
-
-		${from.mobileLandscape} {
-			left: -${pageMargin};
-			right: -${pageMargin};
-		}
-
-		/* Between phablet and tablet breakpoints, the length of the
-		 divider becomes the same as the width of the main content */
-		${from.phablet} {
-			left: 0;
-			right: 0;
-		}
-
-		${from.tablet} {
-			left: -${pageMargin};
-			right: -${pageMargin};
-		}
+		left: 0;
+		right: 0;
 	}
 `;
 
@@ -224,6 +187,10 @@ const dividerOverridesForSubNav = css`
 
 		${from.mobileLandscape} {
 			right: -${pageMargin};
+		}
+
+		${from.tablet} {
+			right: 0;
 		}
 	}
 `;
@@ -242,6 +209,7 @@ export const Titlepiece = ({
 				backgroundColor: themePalette('--masthead-nav-background'),
 				color: themePalette('--masthead-nav-link-text'),
 			}}
+			hasPageSkin={hasPageSkin}
 		>
 			{/* Edition menu */}
 			<div css={editionSwitcherMenuStyles}>
@@ -256,7 +224,7 @@ export const Titlepiece = ({
 			</div>
 
 			{/* Guardian logo */}
-			<div css={guardianLogoStyles}>
+			<div css={[logoStyles, !hasPageSkin && logoStylesWithoutPageSkin]}>
 				<Logo editionId={editionId} />
 			</div>
 
@@ -325,7 +293,11 @@ export const Titlepiece = ({
 			{showSubNav && nav.subNavSections && (
 				<nav
 					data-print-layout="hide"
-					css={[subNavStyles, scrollableSubNavStyles]}
+					css={[
+						subNavStyles,
+						!hasPageSkin && subNavStylesWithoutPageSkin,
+						scrollableSubNavStyles,
+					]}
 					data-testid="sub-nav"
 					data-component="sub-nav"
 				>

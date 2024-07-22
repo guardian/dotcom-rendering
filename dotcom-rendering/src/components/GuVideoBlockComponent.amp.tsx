@@ -1,3 +1,4 @@
+import type { ArticleTheme } from '@guardian/libs';
 import type { GuVideoBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';
 

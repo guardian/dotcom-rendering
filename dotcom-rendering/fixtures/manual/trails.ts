@@ -1,4 +1,9 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	Pillar,
+} from '@guardian/libs';
 import type { DCRFrontCard } from '../../src/types/front';
 import { discussionApiUrl } from './discussionApiUrl';
 

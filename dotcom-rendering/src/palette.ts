@@ -3,7 +3,7 @@
   --
   the palette object is large and ordering helps knowing where  to insert new elements
 */
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,

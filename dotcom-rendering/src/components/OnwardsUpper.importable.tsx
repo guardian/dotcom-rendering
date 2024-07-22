@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { joinUrl, Pillar } from '@guardian/libs';
+import {
+	type ArticleFormat,
+	type ArticleTheme,
+	joinUrl,
+	Pillar,
+} from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import { useIsAndroid } from '../lib/useIsAndroid';
 import { palette } from '../palette';

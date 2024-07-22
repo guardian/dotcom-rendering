@@ -1,6 +1,7 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
+import type { CricketMatch } from '../types/sport';
 import { CricketScoreboard } from './CricketScoreboard';
 import { Placeholder } from './Placeholder';
 
