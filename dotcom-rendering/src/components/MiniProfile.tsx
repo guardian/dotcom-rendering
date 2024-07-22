@@ -18,10 +18,11 @@ const headingLineStyles = css`
 	border-top: 4px solid ${palette('--heading-line')};
 `;
 
-// Nesting is necessary in the bio styles because we receive a string of html from the
-// field. This can contain the following tags:
-// Blocks: p, ul, li
-// Inline: strong, em, a
+/** Nesting is necessary in the bio styles because we receive a string of html from the
+ * field. This can contain the following tags:
+ * Blocks: p, ul, li
+ * Inline: strong, em, a
+ */
 const bioStyles = css`
 	${textSans14};
 	padding-top: 6px;
