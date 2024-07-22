@@ -52,22 +52,35 @@ export const MiniProfiles = ({
 	return (
 		<ol data-ignore="global-ol-styling">
 			{miniProfiles.map((miniProfile, index) => (
+				// eslint-disable-next-line react/no-array-index-key -- Title should usually be identical, but in case it isn't, also use array index
 				<MiniProfileComponent
 					miniProfile={miniProfile}
 					format={format}
-					ajaxUrl={ajaxUrl}
-					host={host}
-					pageId={pageId}
-					isAdFreeUser={isAdFreeUser}
-					isSensitive={isSensitive}
-					switches={switches}
-					abTests={abTests}
-					editionId={editionId}
-					hideCaption={hideCaption}
-					starRating={starRating}
-					key={index}
-					RenderArticleElement={RenderArticleElement}
-				/>
+					key={`${miniProfile.title}-${index}`}
+				>
+					{miniProfile.body.map((element) => (
+						// eslint-disable-next-line react/jsx-key -- The element array should remain consistent as it's derived from the order of elements in CAPI
+						<RenderArticleElement
+							format={format}
+							element={element}
+							ajaxUrl={ajaxUrl}
+							host={host}
+							index={index}
+							isMainMedia={false}
+							pageId={pageId}
+							webTitle={miniProfile.title}
+							isAdFreeUser={isAdFreeUser}
+							isSensitive={isSensitive}
+							switches={switches}
+							abTests={abTests}
+							editionId={editionId}
+							hideCaption={hideCaption}
+							starRating={starRating}
+							forceDropCap="off"
+							isListElement={true}
+						/>
+					))}
+				</MiniProfileComponent>
 			))}
 			{!isLastElement && <hr css={separatorStyles} />}
 		</ol>

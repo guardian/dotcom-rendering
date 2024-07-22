@@ -1,16 +1,10 @@
 import { css } from '@emotion/react';
 import { type ArticleFormat } from '@guardian/libs';
 import { neutral, textSans14 } from '@guardian/source/foundations';
-import type { EditionId } from '../lib/edition';
-import type { ArticleElementRenderer } from '../lib/renderElement';
 import { slugify } from '../model/enhance-H2s';
 import { sanitiseHTML } from '../model/sanitise';
 import { palette } from '../palette';
-import type { ServerSideTests, Switches } from '../types/config';
-import type {
-	MiniProfile as MiniProfileModel,
-	StarRating,
-} from '../types/content';
+import type { MiniProfile as MiniProfileModel } from '../types/content';
 import { subheadingStyles } from './Subheading';
 
 const miniProfileStyles = css`
@@ -90,35 +84,15 @@ const headingMarginStyle = css`
 `;
 
 interface MiniProfileProps {
-	format: ArticleFormat;
-	ajaxUrl: string;
-	host?: string;
-	pageId: string;
-	isAdFreeUser: boolean;
-	isSensitive: boolean;
-	abTests: ServerSideTests;
-	switches: Switches;
-	editionId: EditionId;
-	hideCaption?: boolean;
-	starRating?: StarRating;
 	miniProfile: MiniProfileModel;
-	RenderArticleElement: ArticleElementRenderer;
+	format: ArticleFormat;
+	children: React.ReactNode;
 }
 
 export const MiniProfile = ({
 	miniProfile,
 	format,
-	ajaxUrl,
-	host,
-	pageId,
-	isAdFreeUser,
-	isSensitive,
-	switches,
-	abTests,
-	editionId,
-	hideCaption,
-	starRating,
-	RenderArticleElement,
+	children,
 }: MiniProfileProps) => {
 	return (
 		<>
@@ -131,29 +105,7 @@ export const MiniProfile = ({
 					{miniProfile.title}
 				</h3>
 				<Bio html={miniProfile.bio} />
-				{miniProfile.body.map((element, index) => (
-					<RenderArticleElement
-						// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
-						key={index}
-						format={format}
-						element={element}
-						ajaxUrl={ajaxUrl}
-						host={host}
-						index={index}
-						isMainMedia={false}
-						pageId={pageId}
-						webTitle={miniProfile.title}
-						isAdFreeUser={isAdFreeUser}
-						isSensitive={isSensitive}
-						switches={switches}
-						abTests={abTests}
-						editionId={editionId}
-						hideCaption={hideCaption}
-						starRating={starRating}
-						forceDropCap="off"
-						isListElement={true}
-					/>
-				))}
+				{children}
 				{miniProfile.endNote ? (
 					<EndNote text={miniProfile.endNote} />
 				) : null}
