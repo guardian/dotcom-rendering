@@ -58,9 +58,13 @@ export const ShowHideContainers = () => {
 		for (const e of allShowHideButtons) {
 			// We want to remove the ability to toggle front containers between expanded and collapsed states.
 			// The first part of doing this is removing the feature for those who do not currently use it.
-			// This logic removes the show/hide button entirely if users have all containers expanded on a front.
+			// This logic sets the button as disabled and hides it from view and from screenreaders.
+			// It does not remove it entirely from the DOM.
 			if (allContainersExpanded) {
-				e.remove();
+				e.setAttribute('disabled', 'true');
+				e.setAttribute('aria-disabled', 'true');
+				e.setAttribute('style', 'display: none;');
+				e.setAttribute('hidden', 'true');
 			}
 
 			const sectionId = e.getAttribute('data-show-hide-button');
