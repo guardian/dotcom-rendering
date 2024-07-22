@@ -14,4 +14,6 @@ const meta = {
 
 export default meta;
 
-export const Default = {};
+export const WithoutSubNav = {};
+
+export const WithSubNav = { args: { showSubNav: true } };

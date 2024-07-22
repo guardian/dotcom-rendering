@@ -28,7 +28,6 @@ type Props = {
 	dataLinkName: string;
 	selectedPillar?: Pillar;
 	isImmersive?: boolean;
-	showBurgerMenu?: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -63,7 +62,7 @@ const pillarBlock = css`
 	}
 `;
 
-const pillarBlockWithoutPageSkin = css`
+const pillarBlockFromLeftCol = css`
 	${from.leftCol} {
 		height: 52px;
 		width: ${pillarWidthsPx.leftCol}px;
@@ -129,6 +128,8 @@ const expandedMenuStyles = css`
 
 const pillarLink = css`
 	${headlineBold14}
+	/** TODO: FIXME - use source font: headline bold 15 */
+	font-size: 0.9375rem;
 	text-decoration: none;
 
 	background-color: ${themePalette('--masthead-nav-background')};
@@ -182,7 +183,7 @@ const firstPillarLinkOverrides = css`
 	}
 `;
 
-const verticalDividerStyles = css`
+const verticalDivider = css`
 	:after {
 		content: '';
 		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
@@ -196,14 +197,11 @@ const verticalDividerStyles = css`
 	}
 `;
 
-// TODO - implement veggie burger menu
-// const burgerPositionOverrides = css`
-// 	left: 6px;
-// 	bottom: 10px;
-// `;
-
-const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
-	i !== noOfPillars - 1;
+const verticalDividerFromDesktop = css`
+	${from.desktop} {
+		${verticalDivider}
+	}
+`;
 
 const getPillarColour = (pillar: ArticleTheme): string | undefined => {
 	switch (pillar) {
@@ -229,22 +227,18 @@ export const Pillars = ({
 	selectedPillar,
 	dataLinkName,
 	isImmersive = false,
-	showBurgerMenu = false,
 	hasPageSkin = false,
 }: Props) => {
 	// TEMPORARY - to stop the linter freaking out
 	// TODO - handle immersive displayed articles and fronts with page skins
-	const needsAdapting = isImmersive || hasPageSkin;
+	const needsAdapting = isImmersive;
 	console.log({ needsAdapting });
 
 	return (
 		<ul id="navigation" css={pillarsContainer}>
 			{nav.pillars.map((p, i) => {
 				const isSelected = p.pillar === selectedPillar;
-
-				const showDivider =
-					showBurgerMenu || isNotLastPillar(i, nav.pillars.length);
-
+				const isFinalPillar = i === nav.pillars.length - 1;
 				const pillarColour = getPillarColour(p.pillar);
 
 				return (
@@ -252,9 +246,11 @@ export const Pillars = ({
 						key={p.title}
 						css={[
 							pillarBlock,
-							!hasPageSkin && pillarBlockWithoutPageSkin,
+							!hasPageSkin && pillarBlockFromLeftCol,
 							listAccessibility,
-							showDivider && verticalDividerStyles,
+							isFinalPillar
+								? verticalDividerFromDesktop
+								: verticalDivider,
 							i === 0 && firstPillarLinkOverrides,
 						]}
 					>
@@ -264,6 +260,8 @@ export const Pillars = ({
 								pillarLink,
 								!hasPageSkin && pillarLinkFromLeftCol,
 								pillarUnderline,
+								pillarUnderline,
+								expandedMenuStyles,
 								isSelected && forceUnderline,
 							]}
 							style={{ '--pillar-underline': pillarColour }}
@@ -278,7 +276,6 @@ export const Pillars = ({
 					</li>
 				);
 			})}
-			{/** TODO - implement veggie burger menu */ showBurgerMenu && <></>}
 		</ul>
 	);
 };
