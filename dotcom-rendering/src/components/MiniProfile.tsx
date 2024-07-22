@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { type ArticleFormat } from '@guardian/libs';
 import { neutral, textSans14 } from '@guardian/source/foundations';
+import sanitise from 'sanitize-html';
 import { slugify } from '../model/enhance-H2s';
-import { sanitiseHTML } from '../model/sanitise';
 import { palette } from '../palette';
 import type { MiniProfile as MiniProfileModel } from '../types/content';
 import { subheadingStyles } from './Subheading';
@@ -117,7 +117,7 @@ export const MiniProfile = ({
 
 const Bio = ({ html }: { html?: string }) => {
 	if (!html) return null;
-	const sanitizedHtml = sanitiseHTML(html, {});
+	const sanitizedHtml = sanitise(html, {});
 	return (
 		<>
 			<div
