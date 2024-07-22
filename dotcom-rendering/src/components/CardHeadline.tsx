@@ -262,7 +262,11 @@ export const CardHeadline = ({
 				</span>
 			</h3>
 			{!!byline && showByline && (
-				<Byline text={byline} format={format} size={size} />
+				<Byline
+					text={byline}
+					isLabs={format.theme === ArticleSpecial.Labs}
+					size={size}
+				/>
 			)}
 		</WithLink>
 	);

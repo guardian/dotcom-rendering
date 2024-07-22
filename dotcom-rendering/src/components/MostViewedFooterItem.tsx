@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { headlineMedium17 } from '@guardian/source/foundations';
 import { palette } from '../palette';
 import { AgeWarning } from './AgeWarning';
@@ -86,7 +86,7 @@ export const MostViewedFooterItem = ({
 					{format.design === ArticleDesign.LiveBlog ? (
 						<LinkHeadline
 							headlineText={headlineText}
-							format={format}
+							isLabs={format.theme === ArticleSpecial.Labs}
 							size="small"
 							kickerText="Live"
 							hideLineBreak={false}
@@ -96,7 +96,7 @@ export const MostViewedFooterItem = ({
 					) : (
 						<LinkHeadline
 							headlineText={headlineText}
-							format={format}
+							isLabs={format.theme === ArticleSpecial.Labs}
 							size="small"
 							showQuotes={
 								format.design === ArticleDesign.Comment ||
