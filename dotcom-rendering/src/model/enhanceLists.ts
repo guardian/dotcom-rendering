@@ -46,7 +46,7 @@ const constructMiniProfile =
 		endNote?: string;
 	}) => {
 		// if the element is missing its title for any reason, we will skip it
-		if (title !== undefined) {
+		if (title !== undefined && title !== '') {
 			return [
 				{
 					title,
