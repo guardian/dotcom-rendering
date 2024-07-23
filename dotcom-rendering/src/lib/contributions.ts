@@ -5,13 +5,14 @@ import type { DCRFrontType } from '../types/front';
 import type { DCRArticle } from '../types/frontend';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import type { DCRTagPageType } from '../types/tagPage';
-// User Atributes API cookies (dropped on sign-in)
+
+// User Attributes API cookies (created on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
 export const ONE_OFF_CONTRIBUTION_DATE_COOKIE = 'gu_one_off_contribution_date';
 export const OPT_OUT_OF_ARTICLE_COUNT_COOKIE = 'gu_article_count_opt_out';
 
-// Support Frontend cookies (dropped when contribution is made)
+// Support Frontend cookies (created when a contribution is made)
 export const SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE =
 	'gu.contributions.recurring.contrib-timestamp.Monthly';
 export const SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE =
@@ -27,16 +28,33 @@ export const NO_RR_BANNER_KEY = 'gu.noRRBanner';
 // See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
 export const MODULES_VERSION = 'v3';
 
-// Cookie set by the User Attributes API upon signing in.
+// Returns true if we should hide support messaging because the user is a supporter.
+// Checks the cookie that is set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
 // including but not limited to recurring & one-off contributions,
 // paper & digital subscriptions, as well as user tiers (GU supporters/staff/partners/patrons).
 // https://github.com/guardian/members-data-api/blob/3a72dc00b9389968d91e5930686aaf34d8040c52/membership-attribute-service/app/models/Attributes.scala
-const shouldShowSupportMessaging = (): boolean => {
-	const hideSupportMessaging =
-		getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE }) === 'true';
-
-	return !hideSupportMessaging;
+export const hasSupporterCookie = (
+	isSignedIn: boolean,
+): boolean | 'Pending' => {
+	const cookie = getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE });
+	switch (cookie) {
+		case 'true':
+			return true;
+		case 'false':
+			return false;
+		default:
+			/**
+			 * If cookie is not present but user is signed in, we do not want to show any messaging.
+			 * This is because of a race condition on the first page view after signing in, where
+			 * we may be awaiting the response from the API to find out if they're a supporter.
+			 */
+			if (isSignedIn) {
+				return 'Pending';
+			} else {
+				return false;
+			}
+	}
 };
 
 // Determine if user is a recurring contributor by checking if they are signed in
@@ -139,10 +157,20 @@ export const isRecentOneOffContributor = (): boolean => {
 	return false;
 };
 
-export const shouldHideSupportMessaging = (isSignedIn: boolean): boolean =>
-	!shouldShowSupportMessaging() ||
-	isRecurringContributor(isSignedIn) ||
-	isRecentOneOffContributor();
+export const shouldHideSupportMessaging = (
+	isSignedIn: boolean,
+): boolean | 'Pending' => {
+	const hasCookie = hasSupporterCookie(isSignedIn);
+	if (hasCookie === 'Pending') {
+		return 'Pending';
+	} else {
+		return (
+			hasCookie ||
+			isRecurringContributor(isSignedIn) ||
+			isRecentOneOffContributor()
+		);
+	}
+};
 
 export const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 const REQUIRED_CONSENTS_FOR_BROWSER_ID = [1, 3, 5, 7];

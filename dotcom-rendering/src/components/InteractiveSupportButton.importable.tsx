@@ -32,7 +32,9 @@ export const InteractiveSupportButton = ({
 	editionId,
 	subscribeUrl,
 }: InteractiveSupportButtonProps) => {
-	const [hideSupportMessaging, setHideSupportMessaging] = useState(true);
+	const [hideSupportMessaging, setHideSupportMessaging] = useState<
+		boolean | 'Pending'
+	>('Pending');
 	const isSignedIn = useIsSignedIn();
 
 	useEffect(() => {
@@ -41,7 +43,7 @@ export const InteractiveSupportButton = ({
 		}
 	}, [isSignedIn]);
 
-	if (!hideSupportMessaging) {
+	if (hideSupportMessaging === false) {
 		return (
 			<Hide when="above" breakpoint="tablet">
 				<ThemeProvider theme={buttonThemeReaderRevenue}>

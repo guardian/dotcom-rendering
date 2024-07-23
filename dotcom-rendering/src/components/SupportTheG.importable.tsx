@@ -165,6 +165,7 @@ type ReaderRevenueLinksRemoteProps = {
 	pageViewId: string;
 	contributionsServiceUrl: string;
 	isSignedIn: boolean;
+	hideSupportMessagingForUser: boolean;
 };
 
 const ReaderRevenueLinksRemote = ({
@@ -172,6 +173,7 @@ const ReaderRevenueLinksRemote = ({
 	pageViewId,
 	contributionsServiceUrl,
 	isSignedIn,
+	hideSupportMessagingForUser,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
@@ -191,7 +193,7 @@ const ReaderRevenueLinksRemote = ({
 				clientName: 'dcr',
 			},
 			targeting: {
-				showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
+				showSupportMessaging: !hideSupportMessagingForUser,
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
@@ -264,7 +266,7 @@ type ReaderRevenueLinksNativeProps = {
 	};
 	pageViewId: string;
 	hasPageSkin: boolean;
-	isSignedIn: boolean;
+	hideSupportMessagingForUser: boolean;
 };
 
 const ReaderRevenueLinksNative = ({
@@ -274,10 +276,8 @@ const ReaderRevenueLinksNative = ({
 	urls,
 	pageViewId,
 	hasPageSkin,
-	isSignedIn,
+	hideSupportMessagingForUser,
 }: ReaderRevenueLinksNativeProps) => {
-	const hideSupportMessaging = shouldHideSupportMessaging(isSignedIn);
-
 	// Only the header component is in the AB test
 	const testName = inHeader ? 'RRHeaderLinks' : 'RRFooterLinks';
 	const campaignCode = `${testName}_control`;
@@ -298,7 +298,7 @@ const ReaderRevenueLinksNative = ({
 	});
 
 	useEffect(() => {
-		if (!hideSupportMessaging && inHeader) {
+		if (!hideSupportMessagingForUser && inHeader) {
 			void sendOphanComponentEvent('INSERT', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -329,7 +329,7 @@ const ReaderRevenueLinksNative = ({
 		return urls[rrType];
 	};
 
-	if (hideSupportMessaging) {
+	if (hideSupportMessagingForUser) {
 		return (
 			<div css={inHeader && headerStyles}>
 				<div css={inHeader && hiddenUntilTablet}>
@@ -438,12 +438,20 @@ export const SupportTheG = ({
 		return null;
 	}
 
+	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
+
+	if (hideSupportMessagingForUser === 'Pending') {
+		// We don't yet know the user's supporter status
+		return null;
+	}
+
 	return inHeader && remoteHeader ? (
 		<ReaderRevenueLinksRemote
 			countryCode={countryCode}
 			pageViewId={pageViewId}
 			contributionsServiceUrl={contributionsServiceUrl}
 			isSignedIn={isSignedIn}
+			hideSupportMessagingForUser={hideSupportMessagingForUser}
 		/>
 	) : (
 		<ReaderRevenueLinksNative
@@ -453,7 +461,7 @@ export const SupportTheG = ({
 			urls={urls}
 			pageViewId={pageViewId}
 			hasPageSkin={hasPageSkin}
-			isSignedIn={isSignedIn}
+			hideSupportMessagingForUser={hideSupportMessagingForUser}
 		/>
 	);
 };
