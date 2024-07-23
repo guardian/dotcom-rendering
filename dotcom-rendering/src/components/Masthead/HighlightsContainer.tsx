@@ -6,7 +6,9 @@ import { from, neutral, space, until } from '@guardian/source/foundations';
 type Props = { trails: DCRFrontCard[] };
 
 const containerStyles = css`
-	height: 194px;
+	${until.desktop} {
+		height: 194px;
+	}
 `;
 
 const carouselStyles = css`
