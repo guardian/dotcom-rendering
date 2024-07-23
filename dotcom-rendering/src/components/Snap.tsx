@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { DCRSnapType } from '../types/front';
+import { isUndefined } from '@guardian/libs'
 
 // Some thrashers don't have "width: 100%" applied to their first element which causes them to not correctly take up their space
 const snapStyles = css`
@@ -18,7 +19,7 @@ type Props = {
 };
 
 export const Snap = ({ snapData, dataLinkName }: Props) => {
-	if (snapData?.embedHtml === undefined) {
+	if (isUndefined(snapData?.embedHtml)) {
 		return <></>;
 	}
 

@@ -1,4 +1,4 @@
-import { startPerformanceMeasure } from '@guardian/libs';
+import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
 import { Lazy } from '../../Lazy';
 import { canShowSignInGate } from '../displayRule';
@@ -57,7 +57,7 @@ export const signInGateComponent: SignInGateComponent = {
 			<Lazy margin={300}>
 				<Suspense fallback={<></>}>
 					{personaliseSignInGateAfterCheckoutSwitch &&
-					checkoutCompleteCookieData !== undefined ? (
+					!isUndefined(checkoutCompleteCookieData)? (
 						<SignInGateMainCheckoutComplete
 							ophanComponentId={ophanComponentId}
 							dismissGate={dismissGate}
