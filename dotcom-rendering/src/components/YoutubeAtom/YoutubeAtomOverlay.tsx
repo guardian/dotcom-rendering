@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineMedium17,
@@ -150,7 +150,7 @@ export const YoutubeAtomOverlay = ({
 	imagePositionOnMobile,
 }: Props) => {
 	const id = `youtube-overlay-${uniqueId}`;
-	const hasDuration = duration !== undefined && duration > 0;
+	const hasDuration = !isUndefined(duration) && duration > 0;
 	const showPill = !!videoCategory || hasDuration;
 	const isLive = videoCategory === 'live';
 	const image = overrideImage ?? posterImage;

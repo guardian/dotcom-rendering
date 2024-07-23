@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { palette, textSans12 } from '@guardian/source/foundations';
+import { isUndefined } from '@guardian/libs'
 import ChevronLeftDouble from '../static/icons/chevron-left-double.svg';
 import ChevronLeftSingle from '../static/icons/chevron-left-single.svg';
 import ChevronRightDouble from '../static/icons/chevron-right-double.svg';
@@ -59,7 +60,7 @@ export const Pagination = ({ pagination, guardianURL }: Props) => {
 			<p>
 				<a
 					css={[
-						paginationLinkStyle(pagination.newest !== undefined),
+						paginationLinkStyle(!isUndefined(pagination.newest)),
 						marginRightStyle,
 					]}
 					href={
@@ -74,7 +75,7 @@ export const Pagination = ({ pagination, guardianURL }: Props) => {
 				</a>
 
 				<a
-					css={paginationLinkStyle(pagination.newest !== undefined)}
+					css={paginationLinkStyle(!isUndefined(pagination.newest))}
 					href={
 						pagination.newest
 							? `${guardianURL}${pagination.newest}`
@@ -94,7 +95,7 @@ export const Pagination = ({ pagination, guardianURL }: Props) => {
 			<p>
 				<a
 					css={[
-						paginationLinkStyle(pagination.older !== undefined),
+						paginationLinkStyle(!isUndefined(pagination.older)),
 						marginRightStyle,
 					]}
 					href={
@@ -109,7 +110,7 @@ export const Pagination = ({ pagination, guardianURL }: Props) => {
 				</a>
 
 				<a
-					css={paginationLinkStyle(pagination.older !== undefined)}
+					css={paginationLinkStyle(!isUndefined(pagination.older))}
 					href={
 						pagination.older
 							? `${guardianURL}${pagination.older}`
