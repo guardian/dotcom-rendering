@@ -356,10 +356,10 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 	// The test is being paused on liveblogs whilst we investigate an issue
 
-	const inTagLinkTest = true;
-	// isWeb &&
-	// article.config.abTests.tagLinkDesignVariant === 'variant' &&
-	// article.tags.some((tag) => tag.id === 'football/euro-2024');
+	const inTagLinkTest =
+		isWeb &&
+		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.tags.some((tag) => tag.id === 'football/euro-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
