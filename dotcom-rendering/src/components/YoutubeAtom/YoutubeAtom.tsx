@@ -1,6 +1,6 @@
 import type { Participations } from '@guardian/ab-core';
-import type { ConsentState } from '@guardian/libs';
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
+import type { ArticleFormat, ConsentState } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { useCallback, useState } from 'react';
 import type {
 	ImagePositionType,
@@ -41,7 +41,7 @@ type Props = {
 	format: ArticleFormat;
 	shouldStick?: boolean;
 	isMainMedia?: boolean;
-	imaEnabled: boolean;
+	enableIma: boolean;
 	abTestParticipations: Participations;
 	videoCategory?: VideoCategory;
 	kicker?: string;
@@ -67,7 +67,7 @@ export const YoutubeAtom = ({
 	eventEmitters,
 	shouldStick,
 	isMainMedia,
-	imaEnabled,
+	enableIma,
 	abTestParticipations,
 	videoCategory,
 	kicker,
@@ -84,12 +84,20 @@ export const YoutubeAtom = ({
 	const [pauseVideo, setPauseVideo] = useState<boolean>(false);
 
 	const uniqueId = `${videoId}-${index ?? 'server'}`;
-	const enableIma =
-		imaEnabled &&
+
+	/**
+	 * Consent and ad targeting are set by subsequent re-renders
+	 */
+	const adTargetingEnabled =
 		!!adTargeting &&
 		!adTargeting.disableAds &&
 		!!consentState &&
 		consentState.canTarget;
+
+	/**
+	 * IMA integration is only enabled if the user has consented to ad targeting
+	 */
+	const imaEnabled = enableIma && adTargetingEnabled;
 
 	/**
 	 * Update the isActive state based on video events
@@ -193,7 +201,7 @@ export const YoutubeAtom = ({
 						 */
 						autoPlay={hasOverlay}
 						onReady={playerReadyCallback}
-						enableIma={enableIma}
+						enableIma={imaEnabled}
 						pauseVideo={pauseVideo}
 						deactivateVideo={() => {
 							setIsActive(false);
