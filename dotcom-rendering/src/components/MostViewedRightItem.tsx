@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	headlineMedium17,
 	palette as sourcePalette,
@@ -100,7 +100,10 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							{trail.format.design === ArticleDesign.LiveBlog ? (
 								<LinkHeadline
 									headlineText={trail.headline}
-									format={trail.format}
+									isLabs={
+										trail.format.theme ===
+										ArticleSpecial.Labs
+									}
 									size="small"
 									showUnderline={isHovered}
 									kickerText="Live"
@@ -115,7 +118,10 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							) : (
 								<LinkHeadline
 									headlineText={trail.headline}
-									format={trail.format}
+									isLabs={
+										trail.format.theme ===
+										ArticleSpecial.Labs
+									}
 									size="small"
 									showUnderline={isHovered}
 									byline={
