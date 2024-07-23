@@ -1,5 +1,5 @@
 import { css, type SerializedStyles } from '@emotion/react';
-import { ArticleDesign, isUndefined, type ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
 import {
 	between,
 	from,
