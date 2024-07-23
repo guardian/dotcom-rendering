@@ -130,8 +130,14 @@ const pillarLink = css`
 	padding-right: ${space[1]}px;
 
 	${from.mobileMedium} {
-		${headlineBold17}
+		${headlineBold14}
+		/** This overrides the font size to 15
+		 TODO: export headlineBold15 from source */
+		font-size: 0.9375rem;
 		padding-right: ${space[2]}px;
+	}
+	${from.mobileLandscape} {
+		${headlineBold17}
 	}
 
 	${from.desktop} {
