@@ -68,6 +68,8 @@ const indices = [
 
 	// Overlay for sticky tag link
 	'tagLinkOverlay',
+	// sticky tag link
+	'tagLink',
 
 	// Article headline (should be above main media)
 	'articleHeadline',
