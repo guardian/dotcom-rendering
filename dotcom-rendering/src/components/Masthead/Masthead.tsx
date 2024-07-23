@@ -82,6 +82,7 @@ export const Masthead = ({
 
 		{highlights && (
 			<Section
+				showSideBorders={false}
 				fullWidth={true}
 				backgroundColour={themePalette(
 					'--masthead-highlights-background',
