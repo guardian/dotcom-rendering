@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined, type ArticleTheme } from '@guardian/libs';
+import { type ArticleTheme, isUndefined  } from '@guardian/libs';
 import { textSans12 } from '@guardian/source/foundations';
 import React from 'react';
 import { isEditionId } from '../lib/edition';

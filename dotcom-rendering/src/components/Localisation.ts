@@ -1,5 +1,5 @@
-import type { EditionId } from '../lib/edition';
 import { isUndefined } from '@guardian/libs'
+import type { EditionId } from '../lib/edition';
 
 type LocalisedTitles = {
 	[edition in EditionId]?: {
