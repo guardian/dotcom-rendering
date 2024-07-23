@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { palette, textSans12 } from '@guardian/source/foundations';
 import { isUndefined } from '@guardian/libs'
+import { palette, textSans12 } from '@guardian/source/foundations';
 import ChevronLeftDouble from '../static/icons/chevron-left-double.svg';
 import ChevronLeftSingle from '../static/icons/chevron-left-single.svg';
 import ChevronRightDouble from '../static/icons/chevron-right-double.svg';
