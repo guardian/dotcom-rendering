@@ -1,4 +1,5 @@
 import { css, jsx } from '@emotion/react';
+import { isUndefined } from '@guardian/libs'
 import {
 	breakpoints,
 	from,
@@ -286,7 +287,7 @@ export const TagPageHeader = ({ title, description, image }: Props) => {
 				<h2 css={titleStyle}>{title}</h2>
 			</div>
 
-			{image !== undefined && (
+			{!isUndefined(image) && (
 				<div css={[sectionImage, paddings]}>
 					{isFootballCrest(image) ? (
 						<img

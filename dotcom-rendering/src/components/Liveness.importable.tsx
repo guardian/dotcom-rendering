@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
@@ -92,7 +92,7 @@ function revealPendingBlocks() {
 		}
 	}
 
-	if (pendingBlocks !== undefined && pendingBlocks.length > 0) {
+	if (!isUndefined(pendingBlocks) && pendingBlocks.length > 0) {
 		// Notify commercial that new blocks are available and they can re-run spacefinder
 		document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
 	}

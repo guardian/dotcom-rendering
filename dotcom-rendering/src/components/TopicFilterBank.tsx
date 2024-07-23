@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold17,
@@ -74,7 +74,7 @@ const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
 const getTopFiveTopics = (availableTopics: Topic[]) => {
 	return availableTopics
 		.slice(0, 5)
-		.filter((topic) => topic.count !== undefined && topic.count > 2);
+		.filter((topic) => !isUndefined(topic.count) && topic.count > 2);
 };
 
 export const hasRelevantTopics = (availableTopics?: Topic[]) => {
@@ -123,7 +123,7 @@ export const TopicFilterBank = ({
 	filterKeyEvents = false,
 	id,
 }: Props) => {
-	const hasKeyEvents = keyEvents !== undefined && keyEvents.length > 0;
+	const hasKeyEvents = !(isUndefined(keyEvents)) && keyEvents.length > 0;
 
 	if (!hasRelevantTopics(availableTopics) && !hasKeyEvents) return null;
 	const palette = decidePalette(format);

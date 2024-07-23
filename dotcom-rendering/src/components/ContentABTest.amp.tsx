@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { isOneOf } from '@guardian/libs';
+import { isOneOf, isUndefined} from '@guardian/libs';
 import React from 'react';
 import type { Switches } from '../types/config';
 
@@ -85,7 +85,7 @@ export const ContentABTestProvider = ({
 export const useContentABTestGroup = () => {
 	const context = React.useContext(Context);
 
-	if (context === undefined) {
+	if (isUndefined(context)) {
 		throw Error(
 			'useContentABTestGroup must be used within the ContentABTestProvider',
 		);
