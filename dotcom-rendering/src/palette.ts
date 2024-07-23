@@ -6467,7 +6467,7 @@ const paletteColours = {
 	'--mini-profiles-text-subdued': {
 		light: miniProfilesTextSubduedLight,
 		dark: miniProfilesTextSubduedDark,
-  },
+	},
 	'--most-viewed-description': {
 		light: () => sourcePalette.neutral[46],
 		dark: () => sourcePalette.neutral[60],
