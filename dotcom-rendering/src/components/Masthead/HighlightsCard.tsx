@@ -33,7 +33,7 @@ const gridContainer = css`
 		'headline 	headline'
 		'media-icon image';
 
-	${from.tablet} {
+	${from.desktop} {
 		grid-template-areas:
 			'headline 	image'
 			'media-icon image';
