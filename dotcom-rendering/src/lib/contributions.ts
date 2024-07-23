@@ -1,10 +1,8 @@
 import { getCookie, onConsentChange, storage } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import type { DCRFrontType } from '../types/front';
-import type { DCRArticle } from '../types/frontend';
-import type { DCRNewslettersPageType } from '../types/newslettersPage';
-import type { DCRTagPageType } from '../types/tagPage';
+import type { DCRPageType } from '../types/page';
+
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
 export const RECURRING_CONTRIBUTOR_COOKIE = 'gu_recurring_contributor';
@@ -235,9 +233,8 @@ export const recentlyClosedBanner = (
 	return false;
 };
 
-export const getContributionsServiceUrl = (
-	config: DCRArticle | DCRFrontType | DCRTagPageType | DCRNewslettersPageType,
-): string => process.env.SDC_URL ?? config.contributionsServiceUrl;
+export const getContributionsServiceUrl = (config: DCRPageType): string =>
+	process.env.SDC_URL ?? config.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];
 export const getPurchaseInfo = (): PurchaseInfo => {
