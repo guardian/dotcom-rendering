@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
 import { ClickToView } from './ClickToView';
@@ -38,7 +38,7 @@ export const SpotifyBlockComponent = ({
 	source,
 	sourceDomain,
 }: Props) => {
-	if (!embedUrl || !title || width === undefined || height === undefined) {
+	if (!embedUrl || !title || isUndefined(width) || isUndefined(height)) {
 		return null;
 	}
 

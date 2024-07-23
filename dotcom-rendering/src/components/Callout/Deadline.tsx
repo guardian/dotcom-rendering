@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs'
 import { space, textSans12 } from '@guardian/source/foundations';
 import { SvgClock } from '@guardian/source/react-components';
 import { palette } from '../../palette';
@@ -36,7 +37,7 @@ const getDeadlineText = (date1: Date, date2: Date): string | undefined => {
 };
 
 function formatOptionalDate(date: number | undefined): Date | undefined {
-	if (date === undefined) return undefined;
+	if (isUndefined(date)) return undefined;
 	return new Date(date * 1000);
 }
 

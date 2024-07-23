@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs'
 import { ExpandingWrapper } from '@guardian/source-development-kitchen/react-components';
 import { palette } from '../palette';
 import type { CalloutBlockElementV2 } from '../types/content';
@@ -36,7 +37,7 @@ export const CalloutBlockComponent = ({
 	} = callout;
 
 	const isExpired =
-		activeUntil === undefined
+		isUndefined(activeUntil)
 			? false
 			: Math.floor(new Date().getTime() / 1000) > activeUntil;
 
