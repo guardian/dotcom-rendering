@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
+import { type ArticleTheme, isUndefined } from '@guardian/libs';
 import { headlineMedium28, palette } from '@guardian/source/foundations';
 import { getAgeWarning } from '../lib/age-warning';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
@@ -77,8 +77,8 @@ const BylineMeta = ({ articleData, pillar }: BylineMetaProps) => {
 		: undefined;
 
 	const shouldShowBylineImage =
-		contributorTag !== undefined &&
-		bylineImageUrl !== undefined &&
+		!isUndefined(contributorTag) &&
+		!isUndefined(bylineImageUrl) &&
 		contributorCount === 1;
 
 	return (
