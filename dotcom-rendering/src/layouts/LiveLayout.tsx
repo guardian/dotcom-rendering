@@ -257,6 +257,7 @@ const paddingBody = css`
 `;
 
 const tagOverlayGridStyles = css`
+	pointer-events: none;
 	position: absolute;
 	${until.desktop} {
 		margin-left: 0px;
@@ -355,7 +356,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 	// The test is being paused on liveblogs whilst we investigate an issue
 
-	const inTagLinkTest = false;
+	const inTagLinkTest = true;
 	// isWeb &&
 	// article.config.abTests.tagLinkDesignVariant === 'variant' &&
 	// article.tags.some((tag) => tag.id === 'football/euro-2024');
