@@ -65,6 +65,16 @@ export const enhanceTableOfContents = (
 				}
 			} else if (
 				element._type ===
+				'model.dotcomrendering.pageElements.MiniProfilesBlockElement'
+			) {
+				for (const miniProfile of element.miniProfiles) {
+					tocItems.push({
+						id: slugify(miniProfile.title),
+						title: miniProfile.title,
+					});
+				}
+			} else if (
+				element._type ===
 					'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
 				element._type ===
 					'model.dotcomrendering.pageElements.NumberedTitleBlockElement'

@@ -32,6 +32,7 @@ import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
+import { MiniProfiles } from '../components/MiniProfiles';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
@@ -474,6 +475,22 @@ export const renderElement = ({
 				<VideoAtom
 					assets={element.assets}
 					poster={element.posterImage?.[0]?.url}
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
+			return (
+				<MiniProfiles
+					miniProfiles={element.miniProfiles}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
