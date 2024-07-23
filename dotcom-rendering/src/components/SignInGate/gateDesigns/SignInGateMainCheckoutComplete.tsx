@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs'
 import {
 	articleBold17,
 	body,
@@ -168,7 +169,7 @@ export const SignInGateMainCheckoutComplete = ({
 	// the fact that the type is optional.
 	// It's an optional type because `SignInGateProps` is shared
 	// with other components that don't use this type
-	if (checkoutCompleteCookieData === undefined) {
+	if (isUndefined(checkoutCompleteCookieData)) {
 		return (
 			<SignInGateMain
 				signInUrl={signInUrl}

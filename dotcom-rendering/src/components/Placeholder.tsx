@@ -1,4 +1,5 @@
 import { css, keyframes } from '@emotion/react';
+import { isUndefined } from '@guardian/libs'
 import { palette, space } from '@guardian/source/foundations';
 
 const BACKGROUND_COLOUR = palette.neutral[93];
@@ -52,7 +53,7 @@ export const Placeholder = ({
 		<div
 			css={css`
 				min-height: ${height}px;
-				width: ${width !== undefined ? `${width}px` : '100%'};
+				width: ${!isUndefined(width) ? `${width}px` : '100%'};
 				margin-bottom: ${spaceBelow && space[spaceBelow]}px;
 				margin-left: ${spaceLeft && space[spaceLeft]}px;
 				background-color: ${backgroundColor};

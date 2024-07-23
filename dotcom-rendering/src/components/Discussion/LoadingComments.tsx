@@ -1,4 +1,5 @@
 import { css, keyframes } from '@emotion/react';
+import { isUndefined } from '@guardian/libs'
 import { space } from '@guardian/source/foundations';
 import { palette as schemedPalette } from '../../palette';
 import { Column } from './Column';
@@ -57,7 +58,7 @@ const Grey = ({
 	<div
 		css={css`
 			height: ${height}px;
-			width: ${width !== undefined && width !== 0 && !isNaN(width)
+			width: ${!isUndefined(width) && width !== 0 && !isNaN(width)
 				? `${width}px`
 				: '100%'};
 			margin-bottom: ${spaceBelow && space[spaceBelow]}px;
