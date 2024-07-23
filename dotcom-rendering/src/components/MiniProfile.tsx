@@ -1,21 +1,15 @@
 import { css } from '@emotion/react';
 import { type ArticleFormat } from '@guardian/libs';
-import { neutral, textSans14 } from '@guardian/source/foundations';
+import { neutral, space, textSans14 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
 import { slugify } from '../model/enhance-H2s';
 import { palette } from '../palette';
 import type { MiniProfile as MiniProfileModel } from '../types/content';
+import { headingLineStyles } from './KeyTakeaway';
 import { subheadingStyles } from './Subheading';
 
 const miniProfileStyles = css`
 	padding-top: 8px;
-`;
-
-const headingLineStyles = css`
-	width: 140px;
-	margin: 0 0 2px 0;
-	border: none;
-	border-top: 4px solid ${palette('--heading-line')};
 `;
 
 /** Nesting is necessary in the bio styles because we receive a string of html from the
@@ -25,11 +19,10 @@ const headingLineStyles = css`
  */
 const bioStyles = css`
 	${textSans14};
-	padding-top: 6px;
+	padding: ${space[1]}px 0;
 	color: ${palette('--mini-profiles-text-subdued')};
-	line-height: 1.3rem;
 	p {
-		margin-bottom: 0.5rem;
+		margin-bottom: ${space[2]}px;
 	}
 	a {
 		color: ${palette('--caption-link')};
@@ -43,12 +36,11 @@ const bioStyles = css`
 	}
 	ul {
 		list-style: none;
-		margin: 0 0 0.75rem;
+		margin: 0 0 ${space[2]}px;
 		padding: 0;
-		margin-bottom: 0.5rem;
 	}
 	ul li {
-		padding-left: 1.25rem;
+		padding-left: ${space[5]}px;
 	}
 	ul li p {
 		display: inline-block;
@@ -60,7 +52,7 @@ const bioStyles = css`
 		border-radius: 0.375rem;
 		height: 10px;
 		width: 10px;
-		margin: 0 0.5rem 0 -1.25rem;
+		margin: 0 ${space[2]}px 0 -${space[5]}px;
 		background-color: ${palette('--bullet-fill')};
 	}
 	strong {
@@ -70,18 +62,17 @@ const bioStyles = css`
 
 const endNoteStyles = css`
 	${textSans14};
-	line-height: 135%;
 	color: ${palette('--mini-profiles-text-subdued')};
-	margin-bottom: 1rem;
+	margin-bottom: ${space[3]}px;
 `;
 
 const bottomBorderStyles = css`
 	border-top: 1px solid ${palette('--article-border')};
-	margin-bottom: 0.5rem;
+	margin-bottom: ${space[2]}px;
 `;
 
 const headingMarginStyle = css`
-	margin-bottom: 4px;
+	margin-bottom: ${space[2]}px;
 `;
 
 interface MiniProfileProps {
