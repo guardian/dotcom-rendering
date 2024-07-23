@@ -28,7 +28,7 @@ const gridContainer = css`
 	display: grid;
 	background-color: ${palette.neutral[97]};
 	gap: 8px;
-
+	height: 100%;
 	grid-template-areas:
 		'headline 	headline'
 		'media-icon image';
@@ -91,6 +91,7 @@ export const HighlightsCard = ({
 	byline,
 	showMediaIcon,
 }: HighlightsCardProps) => {
+	console.log({ headlineText, kickerText });
 	return (
 		<div css={gridContainer}>
 			<div css={headline}>
