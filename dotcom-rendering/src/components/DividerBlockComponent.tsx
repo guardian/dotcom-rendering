@@ -50,7 +50,6 @@ export const DividerBlockComponent = ({
 	spaceAbove = 'loose',
 }: Props) => (
 	<hr
-		data-spacefinder-role="inline"
 		css={[
 			baseStyles,
 			size === 'partial' ? sizePartialStyle : sizeFullStyle,
