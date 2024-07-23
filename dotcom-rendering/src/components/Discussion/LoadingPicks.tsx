@@ -2,6 +2,8 @@ import { css, keyframes } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
 import { palette as schemedPalette } from '../../palette';
 import { Row } from './Row';
+import { isUndefined } from '@guardian/libs';
+
 
 const BACKGROUND_COLOUR = schemedPalette('--discussion-loading-background');
 
@@ -87,7 +89,7 @@ const Grey = ({
 	<div
 		css={css`
 			height: ${height}px;
-			width: ${width !== undefined && !isNaN(width) && width !== 0
+			width: ${!isUndefined(width) && !isNaN(width) && width !== 0
 				? `${width}px`
 				: '100%'};
 			margin-bottom: ${spaceBelow && space[spaceBelow]}px;

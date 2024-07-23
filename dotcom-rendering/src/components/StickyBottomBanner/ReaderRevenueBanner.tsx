@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, onConsent } from '@guardian/libs';
+import type { ConsentState, CountryCode} from '@guardian/libs';
+import { getCookie, onConsent, isUndefined } from '@guardian/libs';
 import {
 	abandonedBasketSchema,
 	getBanner,
@@ -322,7 +322,7 @@ const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 			});
 	}, [module]);
 
-	if (Banner !== undefined) {
+	if (!isUndefined(banner)) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div
