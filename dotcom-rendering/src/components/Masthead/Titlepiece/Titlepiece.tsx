@@ -28,12 +28,16 @@ interface Props {
 
 const veggieBurgerDiameter = 40;
 
-const gridFullWidth = css`
-	grid-column: content-start / main-column-end;
+const gridContent = css`
+	grid-column: content-start / content-end;
+`;
+
+const gridMainColumn = css`
+	grid-column: main-column-start / main-column-end;
 `;
 
 const editionSwitcherMenuStyles = css`
-	${gridFullWidth}
+	${gridMainColumn}
 	grid-row: 1;
 	${from.mobileMedium} {
 		justify-self: end;
@@ -42,7 +46,7 @@ const editionSwitcherMenuStyles = css`
 
 const logoStyles = css`
 	${getZIndex('TheGuardian')}
-	${gridFullWidth}
+	${gridMainColumn}
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
@@ -60,15 +64,15 @@ const logoStyles = css`
 	}
 
 	svg {
-		width: 144px;
+		width: 152px;
 		${from.mobileMedium} {
-			width: 198px;
+			width: 207px;
 		}
 		${from.tablet} {
-			width: 280px;
+			width: 297px;
 		}
 		${from.desktop} {
-			width: 276px;
+			width: 291px;
 		}
 	}
 `;
@@ -76,14 +80,14 @@ const logoStyles = css`
 const logoStylesWithoutPageSkin = css`
 	svg {
 		${from.leftCol} {
-			width: 398px;
+			width: 356px;
 		}
 	}
 `;
 
 const burgerStyles = css`
 	z-index: 2;
-	${gridFullWidth}
+	${gridMainColumn}
 	grid-row: 1;
 	justify-content: center;
 	display: flex;
@@ -111,7 +115,7 @@ const burgerStyles = css`
 `;
 
 const pillarsNavStyles = css`
-	${gridFullWidth}
+	${gridContent}
 	grid-row: 2;
 	align-self: end;
 
@@ -124,7 +128,7 @@ const pillarsNavStyles = css`
 `;
 
 const subNavStyles = css`
-	${gridFullWidth}
+	${gridContent}
 	grid-row: 3;
 	${textSans14}
 	color: inherit;
@@ -225,7 +229,7 @@ export const Titlepiece = ({
 
 			{/* Guardian logo */}
 			<div css={[logoStyles, !hasPageSkin && logoStylesWithoutPageSkin]}>
-				<Logo editionId={editionId} />
+				<Logo />
 			</div>
 
 			{/* Pillars nav */}
