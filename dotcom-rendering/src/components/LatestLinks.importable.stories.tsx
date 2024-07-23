@@ -5,7 +5,7 @@ import { breakpoints } from '@guardian/source/foundations';
 import fetchMock from 'fetch-mock';
 import type { PropsWithChildren } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
 import { Island } from './Island';
@@ -147,16 +147,15 @@ const Wrapper = ({
 
 export const WorldCupFinal2023 = () => {
 	const containerPalette = 'EventAltPalette' satisfies DCRContainerPalette;
-	const overrides = decideContainerOverrides(containerPalette);
 
 	return (
-		<Wrapper
-			styles={css`
-				max-width: 600px;
-				background-color: ${overrides.background.container};
-			`}
-		>
-			<ContainerOverrides containerPalette={containerPalette}>
+		<ContainerOverrides containerPalette={containerPalette}>
+			<Wrapper
+				styles={css`
+					max-width: 600px;
+					background-color: ${palette('--section-background-outer')};
+				`}
+			>
 				<Island priority="critical">
 					<LatestLinks
 						id="/football/live/2023/aug/20/spain-v-england-womens-world-cup-final-live"
@@ -166,8 +165,8 @@ export const WorldCupFinal2023 = () => {
 						absoluteServerTimes={true}
 					/>
 				</Island>
-			</ContainerOverrides>
-		</Wrapper>
+			</Wrapper>
+		</ContainerOverrides>
 	);
 };
 WorldCupFinal2023.storyName = 'World Cup Final 2023';

@@ -596,7 +596,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showTopBorder={index > 0}
 									padContent={false}
 									url={collection.href}
-									containerPalette={containerPalette}
 									showDateHeader={
 										collection.config.showDateHeader
 									}
