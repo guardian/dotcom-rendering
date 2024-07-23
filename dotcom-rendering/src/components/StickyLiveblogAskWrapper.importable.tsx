@@ -27,6 +27,7 @@ import {
 	createInsertEventFromTracking,
 	createViewEventFromTracking,
 } from './marketing/lib/tracking';
+import { TagType } from 'src/types/tag';
 
 const baseUrl = 'https://support.theguardian.com/contribute';
 
@@ -163,13 +164,14 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 interface StickyLiveblogAskWrapperProps {
 	referrerUrl: string;
 	shouldHideReaderRevenueOnArticle: boolean;
+	tags: TagType[];
 }
 
 const whatAmI = 'sticky-liveblog-ask';
 
 export const StickyLiveblogAskWrapper: ReactComponent<
 	StickyLiveblogAskWrapperProps
-> = ({ referrerUrl, shouldHideReaderRevenueOnArticle }) => {
+> = ({ referrerUrl, shouldHideReaderRevenueOnArticle, tags }) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode(whatAmI);
 	const pageViewId = usePageViewId(renderingTarget);
@@ -269,10 +271,18 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			renderingTarget,
 		);
 	};
+
+	// TODO: 'some' doesn't like underlying array to change
+	// I think tags are added as the blog is added to... will this cause an issue?
+	const shouldHideBasedOnTags = tags.some((a) => {
+		a.id === 'sport/olympic-games-2024';
+	});
+
 	const canShow =
 		variantName === 'variant' &&
 		showSupportMessagingForUser &&
-		!shouldHideReaderRevenueOnArticle;
+		!shouldHideReaderRevenueOnArticle &&
+		!shouldHideBasedOnTags;
 
 	return (
 		<>
