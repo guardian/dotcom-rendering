@@ -25,7 +25,7 @@ const bioStyles = css`
 		margin-bottom: ${space[2]}px;
 	}
 	a {
-		color: ${palette('--caption-link')};
+		color: ${palette('--link-kicker-text')};
 		text-underline-offset: 3px;
 	}
 	a:not(:hover) {
