@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, isUndefined } from '@guardian/libs';
 import {
 	article17,
 	palette,
@@ -366,7 +366,7 @@ export const Result = ({
 		for (let i = 0; i < resultBrackets.length; i++) {
 			const resultBracket = resultBrackets[i];
 
-			if (resultBracket !== undefined) {
+			if (!isUndefined(resultBracket)) {
 				if (numberOfCorrectAnswers >= resultBracket) {
 					bracketIndex = i;
 				}

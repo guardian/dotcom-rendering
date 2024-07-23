@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { getCookie, log, storage } from '@guardian/libs';
+import { getCookie, isUndefined, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
@@ -161,7 +161,7 @@ const Render = ({
 }) => {
 	const { Epic } = useEpic({ url, name });
 
-	if (Epic === undefined) return null;
+	if (isUndefined(Epic)) return null;
 	log('dotcom', 'LiveBlogEpic has the Epic');
 
 	return (

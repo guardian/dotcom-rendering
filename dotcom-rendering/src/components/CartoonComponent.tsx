@@ -3,6 +3,7 @@ import {
 	ArticleDesign,
 	ArticleDisplay,
 	type ArticleFormat,
+	isUndefined,
 	Pillar,
 } from '@guardian/libs';
 import { Hide } from '@guardian/source/react-components';
@@ -67,7 +68,7 @@ export const CartoonComponent = ({ format, element, lightbox }: Props) => {
 					/>
 				)}
 
-				{webLightbox && element.position !== undefined && (
+				{webLightbox && !isUndefined(element.position) && (
 					<LightboxLink
 						role={element.role}
 						format={format}
