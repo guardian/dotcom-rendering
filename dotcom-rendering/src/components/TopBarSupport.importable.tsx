@@ -60,6 +60,13 @@ const ReaderRevenueLinksRemote = ({
 			return;
 		}
 
+		const hideSupportMessagingForUser =
+			shouldHideSupportMessaging(isSignedIn);
+		if (hideSupportMessagingForUser === 'Pending') {
+			// We don't yet know the user's supporter status
+			return;
+		}
+
 		setAutomat();
 
 		const requestData: HeaderPayload = {
@@ -70,7 +77,7 @@ const ReaderRevenueLinksRemote = ({
 				clientName: 'dcr',
 			},
 			targeting: {
-				showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
+				showSupportMessaging: !hideSupportMessagingForUser,
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(

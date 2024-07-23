@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	headlineMedium17,
 	headlineMedium20,
@@ -19,7 +18,7 @@ type HeadlineLink = {
 
 type Props = {
 	headlineText: string; // The text shown
-	format: ArticleFormat;
+	isLabs: boolean;
 	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
 	kickerText?: string;
 	showPulsingDot?: boolean;
@@ -78,11 +77,11 @@ const visitedStyles = (visitedColour: string) => css`
 
 export const LinkHeadline = ({
 	headlineText,
-	format,
 	showUnderline = false,
 	kickerText,
 	showPulsingDot,
 	hideLineBreak,
+	isLabs,
 	showQuotes = false,
 	size = 'medium',
 	link,
@@ -119,7 +118,7 @@ export const LinkHeadline = ({
 						{headlineText}
 					</a>
 					{!!byline && (
-						<Byline text={byline} format={format} size={size} />
+						<Byline text={byline} size={size} isLabs={isLabs} />
 					)}
 				</>
 			) : (
@@ -127,7 +126,7 @@ export const LinkHeadline = ({
 				<>
 					<span>{headlineText}</span>
 					{!!byline && (
-						<Byline text={byline} size={size} format={format} />
+						<Byline text={byline} size={size} isLabs={isLabs} />
 					)}
 				</>
 			)}

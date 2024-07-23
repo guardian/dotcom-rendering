@@ -70,11 +70,7 @@ export const FrontMostViewed = ({
 			{/* We only need hydration if there are multiple tabs */}
 			{showMostViewedTab ? (
 				<Island priority="feature" defer={{ until: 'visible' }}>
-					<MostViewedFooter
-						tabs={tabs}
-						sectionId="Most viewed"
-						hasPageSkin={hasPageSkin}
-					/>
+					<MostViewedFooter tabs={tabs} sectionId="Most viewed" />
 				</Island>
 			) : showMostPopular ? (
 				<MostPopularFooterGrid
@@ -84,11 +80,7 @@ export const FrontMostViewed = ({
 					hasPageSkin={hasPageSkin}
 				/>
 			) : (
-				<MostViewedFooter
-					tabs={tabs}
-					sectionId="Most viewed"
-					hasPageSkin={hasPageSkin}
-				/>
+				<MostViewedFooter tabs={tabs} sectionId="Most viewed" />
 			)}
 		</MostViewedFooterLayout>
 	);

@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
 	headlineMediumItalic17,
 	headlineMediumItalic20,
@@ -14,7 +13,7 @@ import { palette } from '../palette';
 
 type Props = {
 	text: string;
-	format: ArticleFormat;
+	isLabs: boolean;
 	size: SmallHeadlineSize;
 };
 
@@ -23,11 +22,11 @@ const baseStyles = css`
 	color: ${palette('--byline')};
 `;
 
-const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
+const bylineStyles = (size: SmallHeadlineSize, isLabs: boolean) => {
 	switch (size) {
 		case 'ginormous':
 		case 'huge':
-			if (format.theme === ArticleSpecial.Labs) {
+			if (isLabs) {
 				return css`
 					${textSansItalic24};
 					font-size: 24px;
@@ -45,7 +44,7 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 				}
 			`;
 		case 'large': {
-			if (format.theme === ArticleSpecial.Labs) {
+			if (isLabs) {
 				return css`
 					${textSansItalic20};
 					font-size: 24px;
@@ -64,7 +63,7 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 			`;
 		}
 		case 'medium': {
-			if (format.theme === ArticleSpecial.Labs) {
+			if (isLabs) {
 				return css`
 					${textSansItalic20};
 					line-height: 20px;
@@ -82,7 +81,7 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 			`;
 		}
 		case 'small': {
-			if (format.theme === ArticleSpecial.Labs) {
+			if (isLabs) {
 				return css`
 					${textSansItalic17};
 					line-height: 18px;
@@ -97,6 +96,6 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 	}
 };
 
-export const Byline = ({ text, format, size }: Props) => {
-	return <span css={[baseStyles, bylineStyles(size, format)]}>{text}</span>;
+export const Byline = ({ text, isLabs, size }: Props) => {
+	return <span css={[baseStyles, bylineStyles(size, isLabs)]}>{text}</span>;
 };

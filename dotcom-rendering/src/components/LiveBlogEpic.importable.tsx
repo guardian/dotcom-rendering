@@ -102,6 +102,8 @@ const usePayload = ({
 	const isSignedIn = useIsSignedIn();
 
 	if (isSignedIn === 'Pending') return;
+	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
+	if (hideSupportMessagingForUser === 'Pending') return;
 	if (articleCounts === 'Pending') return;
 	if (hasOptedOutOfArticleCount === 'Pending') return;
 	log('dotcom', 'LiveBlogEpic has consent state');
@@ -122,7 +124,7 @@ const usePayload = ({
 			isMinuteArticle: true,
 			isPaidContent,
 			tags,
-			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
+			showSupportMessaging: !hideSupportMessagingForUser,
 			isRecurringContributor: isRecurringContributor(isSignedIn),
 			lastOneOffContributionDate:
 				getLastOneOffContributionTimestamp() ?? undefined,

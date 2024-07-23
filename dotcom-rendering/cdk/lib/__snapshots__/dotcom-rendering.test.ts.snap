@@ -933,6 +933,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Ref": "AMIRendering",
           },
           "InstanceType": "t4g.micro",
+          "MetadataOptions": {
+            "HttpTokens": "required",
+          },
           "SecurityGroupIds": [
             {
               "Fn::GetAtt": [

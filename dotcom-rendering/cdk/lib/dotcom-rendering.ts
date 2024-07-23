@@ -245,7 +245,6 @@ export class DotcomRendering extends GuStack {
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: privateSubnets },
-			withoutImdsv2: true,
 		});
 
 		Tags.of(asg).add('LogKinesisStreamName', loggingStreamName);
