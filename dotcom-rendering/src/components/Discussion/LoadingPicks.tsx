@@ -1,8 +1,9 @@
 import { css, keyframes } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { palette as schemedPalette } from '../../palette';
 import { Row } from './Row';
-import { isUndefined } from '@guardian/libs';
+
 
 
 const BACKGROUND_COLOUR = schemedPalette('--discussion-loading-background');

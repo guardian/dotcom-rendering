@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined, ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, isUndefined, type ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	headlineBold24,
