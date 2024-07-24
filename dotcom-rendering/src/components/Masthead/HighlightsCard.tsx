@@ -130,6 +130,7 @@ export const HighlightsCard = ({
 					headlineText={headlineText}
 					format={format}
 					size="medium"
+					sizeOnMobile="small"
 					showPulsingDot={showPulsingDot}
 					kickerText={kickerText}
 					isExternalLink={isExternalLink}

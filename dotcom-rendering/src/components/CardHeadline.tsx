@@ -101,6 +101,15 @@ const fontStylesOnMobile = ({ size }: { size: SmallHeadlineSize }) => {
 					${headlineMedium17}
 				}
 			`;
+		case 'small':
+			return css`
+				${until.mobileMedium} {
+					${headlineMedium14}
+				}
+				${between.mobileMedium.and.desktop} {
+					${headlineMedium17}
+				}
+			`;
 		default:
 			return undefined;
 	}
