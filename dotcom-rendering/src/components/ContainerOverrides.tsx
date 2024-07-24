@@ -352,15 +352,14 @@ const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 		case 'LongRunningPalette':
 			return sourcePalette.neutral[60];
 		case 'LongRunningAltPalette':
-			return sourcePalette.neutral[7];
-		case 'SombrePalette':
 			return sourcePalette.neutral[60];
+		case 'SombrePalette':
 		case 'SombreAltPalette':
-			return sourcePalette.neutral[46];
+			return sourcePalette.neutral[60];
 		case 'InvestigationPalette':
 			return sourcePalette.neutral[100];
 		case 'BreakingPalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.news[600];
 		case 'EventPalette':
 			return sourcePalette.neutral[73];
 		case 'EventAltPalette':
@@ -383,12 +382,10 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[60];
 		case 'SombrePalette':
-			return cardBorderTopLight(containerPalette);
 		case 'SombreAltPalette':
-			return sourcePalette.neutral[46];
-		case 'InvestigationPalette':
-			return sourcePalette.neutral[100];
 		case 'BreakingPalette':
+			return cardBorderTopLight(containerPalette);
+		case 'InvestigationPalette':
 			return sourcePalette.neutral[100];
 		case 'EventPalette':
 			return sourcePalette.brand[800];
@@ -410,7 +407,7 @@ const articleBorderLight: ContainerFunction = (containerPalette) => {
 		case 'LongRunningPalette':
 			return sourcePalette.neutral[60];
 		case 'LongRunningAltPalette':
-			return sourcePalette.neutral[7];
+			return sourcePalette.neutral[73];
 		case 'SombrePalette':
 			return sourcePalette.neutral[60];
 		case 'SombreAltPalette':
@@ -418,7 +415,7 @@ const articleBorderLight: ContainerFunction = (containerPalette) => {
 		case 'InvestigationPalette':
 			return sourcePalette.neutral[100];
 		case 'BreakingPalette':
-			return sourcePalette.neutral[60];
+			return sourcePalette.news[600];
 		case 'EventPalette':
 			return sourcePalette.neutral[73];
 		case 'EventAltPalette':
@@ -442,11 +439,9 @@ const articleBorderDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.neutral[60];
 		case 'SombrePalette':
 		case 'SombreAltPalette':
-			return articleBorderLight(containerPalette);
 		case 'InvestigationPalette':
-			return articleBorderLight(containerPalette);
 		case 'BreakingPalette':
-			return sourcePalette.neutral[46];
+			return articleBorderLight(containerPalette);
 		case 'EventPalette':
 			return sourcePalette.neutral[38];
 		case 'EventAltPalette':
@@ -583,6 +578,7 @@ const sectionBackgroundInnerLight: ContainerFunction = (containerPalette) => {
 const sectionBackgroundInnerDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
+		case 'BreakingPalette':
 			return sectionBackgroundInnerLight(containerPalette);
 		case 'LongRunningPalette':
 			return sourcePalette.brand[300];
@@ -594,8 +590,6 @@ const sectionBackgroundInnerDark: ContainerFunction = (containerPalette) => {
 			return sourcePalette.specialReport[100];
 		case 'EventAltPalette':
 			return sourcePalette.neutral[20];
-		case 'BreakingPalette':
-			return sourcePalette.news[100];
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[20];
 		case 'SpecialReportAltPalette':
@@ -659,7 +653,7 @@ const sectionDateLight: ContainerFunction = (containerPalette) => {
 		case 'InvestigationPalette':
 			return sourcePalette.brandAlt[400];
 		case 'BreakingPalette':
-			return sourcePalette.news[800];
+			return sourcePalette.news[600];
 		case 'EventPalette':
 			return sourcePalette.news[400];
 		case 'EventAltPalette':
@@ -682,13 +676,10 @@ const sectionDateDark: ContainerFunction = (containerPalette) => {
 		case 'LongRunningAltPalette':
 			return sourcePalette.news[550];
 		case 'SombrePalette':
-			return sourcePalette.brand[800];
 		case 'SombreAltPalette':
-			return sourcePalette.news[500];
 		case 'InvestigationPalette':
-			return sourcePalette.brandAlt[400];
 		case 'BreakingPalette':
-			return sourcePalette.news[600];
+			return sectionDateLight(containerPalette);
 		case 'EventPalette':
 			return sourcePalette.specialReportAlt[300];
 		case 'EventAltPalette':
