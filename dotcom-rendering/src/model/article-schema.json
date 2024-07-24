@@ -583,6 +583,9 @@
                     "$ref": "#/definitions/MediaAtomBlockElement"
                 },
                 {
+                    "$ref": "#/definitions/MiniProfilesBlockElement"
+                },
+                {
                     "$ref": "#/definitions/MultiImageBlockElement"
                 },
                 {
@@ -2489,6 +2492,7 @@
                 "listElementType": {
                     "enum": [
                         "KeyTakeaways",
+                        "MiniProfiles",
                         "QAndAExplainer"
                     ],
                     "type": "string"
@@ -2521,6 +2525,12 @@
                     "items": {
                         "$ref": "#/definitions/FEElement"
                     }
+                },
+                "bio": {
+                    "type": "string"
+                },
+                "endNote": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2628,6 +2638,49 @@
                 "assets",
                 "elementId",
                 "id"
+            ]
+        },
+        "MiniProfilesBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.MiniProfilesBlockElement"
+                },
+                "miniProfiles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MiniProfile"
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "miniProfiles"
+            ]
+        },
+        "MiniProfile": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FEElement"
+                    }
+                },
+                "bio": {
+                    "type": "string"
+                },
+                "endNote": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "body",
+                "title"
             ]
         },
         "MultiImageBlockElement": {

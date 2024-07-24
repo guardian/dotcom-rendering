@@ -19,7 +19,7 @@ const headingIndexStyles = css`
 	font-weight: bold;
 `;
 
-const headingLineStyles = css`
+export const headingLineStyles = css`
 	width: 140px;
 	margin: 0 0 2px 0;
 	border: none;

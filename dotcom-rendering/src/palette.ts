@@ -1759,6 +1759,109 @@ const blockQuoteLinkDark: PaletteFunction = (format: ArticleFormat) => {
 	}
 };
 
+const bulletFillLight: PaletteFunction = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[300];
+	}
+
+	if (format.theme === Pillar.News) {
+		return sourcePalette.neutral[46];
+	}
+
+	switch (format.design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline: {
+			return sourcePalette.neutral[46];
+		}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review: {
+			switch (format.theme) {
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(format.theme, 200);
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[200];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+		}
+		default: {
+			switch (format.theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(format.theme, 400);
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+		}
+	}
+};
+
+const bulletFillDark: PaletteFunction = ({ design, theme }: ArticleFormat) => {
+	if (theme === ArticleSpecial.Labs) {
+		return sourcePalette.labs[400];
+	}
+
+	switch (design) {
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline: {
+			return sourcePalette.neutral[46];
+		}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.Review: {
+			switch (theme) {
+				case Pillar.News:
+				case Pillar.Opinion:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 500);
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[300];
+			}
+		}
+		default:
+			switch (theme) {
+				case Pillar.Opinion:
+					return sourcePalette.opinion[300];
+				case Pillar.News:
+				case Pillar.Sport:
+				case Pillar.Culture:
+				case Pillar.Lifestyle:
+					return pillarPalette(theme, 400);
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+			}
+	}
+};
+
 const accordionTitleRowFillLight: PaletteFunction = () =>
 	sourcePalette.neutral[46];
 const accordionTitleRowFillDark: PaletteFunction = () =>
@@ -5416,6 +5519,11 @@ const lastUpdatedTextDark: PaletteFunction = ({ theme, design }) => {
 	}
 };
 
+const miniProfilesTextSubduedLight: PaletteFunction = () =>
+	sourcePalette.neutral[46];
+const miniProfilesTextSubduedDark: PaletteFunction = () =>
+	sourcePalette.neutral[86];
+
 const interactiveAtomBackgroundLight: PaletteFunction = () => 'transparent';
 const interactiveAtomBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[100];
@@ -5795,6 +5903,10 @@ const paletteColours = {
 	'--branding-link-text': {
 		light: brandingLinkLight,
 		dark: brandingLinkDark,
+	},
+	'--bullet-fill': {
+		light: bulletFillLight,
+		dark: bulletFillDark,
 	},
 	'--byline': {
 		light: bylineLight,
@@ -6351,6 +6463,10 @@ const paletteColours = {
 	'--match-tab-border-active': {
 		light: matchActiveTabBorderLight,
 		dark: matchActiveTabBorderDark,
+	},
+	'--mini-profiles-text-subdued': {
+		light: miniProfilesTextSubduedLight,
+		dark: miniProfilesTextSubduedDark,
 	},
 	'--most-viewed-description': {
 		light: () => sourcePalette.neutral[46],

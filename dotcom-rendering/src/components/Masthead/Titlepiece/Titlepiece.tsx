@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	headlineBold14,
-	space,
-	textSans14,
-} from '@guardian/source/foundations';
+import { from, headlineBold14, space } from '@guardian/source/foundations';
 import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -28,12 +23,16 @@ interface Props {
 
 const veggieBurgerDiameter = 40;
 
-const gridFullWidth = css`
-	grid-column: content-start / main-column-end;
+const gridContent = css`
+	grid-column: content-start / content-end;
+`;
+
+const gridMainColumn = css`
+	grid-column: main-column-start / main-column-end;
 `;
 
 const editionSwitcherMenuStyles = css`
-	${gridFullWidth}
+	${gridMainColumn}
 	grid-row: 1;
 	${from.mobileMedium} {
 		justify-self: end;
@@ -42,7 +41,7 @@ const editionSwitcherMenuStyles = css`
 
 const logoStyles = css`
 	${getZIndex('TheGuardian')}
-	${gridFullWidth}
+	${gridMainColumn}
 	grid-row: 1;
 	justify-self: end;
 	align-self: end;
@@ -60,15 +59,15 @@ const logoStyles = css`
 	}
 
 	svg {
-		width: 144px;
+		width: 152px;
 		${from.mobileMedium} {
-			width: 198px;
+			width: 207px;
 		}
 		${from.tablet} {
-			width: 280px;
+			width: 297px;
 		}
 		${from.desktop} {
-			width: 276px;
+			width: 291px;
 		}
 	}
 `;
@@ -76,14 +75,14 @@ const logoStyles = css`
 const logoStylesWithoutPageSkin = css`
 	svg {
 		${from.leftCol} {
-			width: 398px;
+			width: 356px;
 		}
 	}
 `;
 
 const burgerStyles = css`
 	z-index: 2;
-	${gridFullWidth}
+	${gridMainColumn}
 	grid-row: 1;
 	justify-content: center;
 	display: flex;
@@ -111,7 +110,7 @@ const burgerStyles = css`
 `;
 
 const pillarsNavStyles = css`
-	${gridFullWidth}
+	${gridContent}
 	grid-row: 2;
 	align-self: end;
 
@@ -120,49 +119,6 @@ const pillarsNavStyles = css`
 
 	${from.desktop} {
 		grid-row: 1 / 2;
-	}
-`;
-
-const subNavStyles = css`
-	${gridFullWidth}
-	grid-row: 3;
-	${textSans14}
-	color: inherit;
-	min-height: 28px;
-	margin-top: ${space[2]}px;
-
-	/** We increase the width of the subnav to let it overflow
-	 on the right to help indicate scrollability */
-	width: calc(100% + ${smallMobilePageMargin});
-	${from.mobileLandscape} {
-		width: calc(100% + ${pageMargin});
-	}
-	${from.tablet} {
-		width: 100%;
-	}
-
-	${from.mobileMedium} {
-		margin-top: ${space[3]}px;
-	}
-	${from.tablet} {
-		min-height: 30px;
-	}
-`;
-
-const subNavStylesWithoutPageSkin = css`
-	${from.leftCol} {
-		margin-top: 14px;
-	}
-`;
-
-/** Sets horizontal scrolling behaviour and removes the scrollbar */
-const scrollableSubNavStyles = css`
-	overflow-x: scroll;
-
-	@supports selector(::-webkit-scrollbar) {
-		&::-webkit-scrollbar {
-			display: none;
-		}
 	}
 `;
 
@@ -192,6 +148,47 @@ const dividerOverridesForSubNav = css`
 		${from.tablet} {
 			right: 0;
 		}
+	}
+`;
+
+const subNavWrapper = css`
+	/** Relative positioning needed on the wrapper to allow
+	  the pseudo after element to position absolutely */
+	position: relative;
+	${gridContent}
+	grid-row: 3;
+
+	/** We increase the width of the subnav to let it overflow
+	 on the right to help indicate scrollability */
+	width: calc(100% + ${smallMobilePageMargin});
+	${from.mobileLandscape} {
+		width: calc(100% + ${pageMargin});
+	}
+	${from.tablet} {
+		width: 100%;
+	}
+
+	/** This additional padding on the right of the subnav list allows
+	 the list items to remain visible with the fade overlay */
+	ul {
+		padding-right: ${space[8]}px;
+	}
+
+	/** Adds a fade overlay to the RHS of the subnav area,
+	 to visually hint that it is scrollable horizontally */
+	::after {
+		content: '';
+		position: absolute;
+		width: ${space[10]}px;
+		height: 100%;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: linear-gradient(
+			to right,
+			transparent,
+			${themePalette('--masthead-nav-background')}
+		);
 	}
 `;
 
@@ -225,7 +222,7 @@ export const Titlepiece = ({
 
 			{/* Guardian logo */}
 			<div css={[logoStyles, !hasPageSkin && logoStylesWithoutPageSkin]}>
-				<Logo editionId={editionId} />
+				<Logo />
 			</div>
 
 			{/* Pillars nav */}
@@ -292,12 +289,8 @@ export const Titlepiece = ({
 
 			{showSubNav && nav.subNavSections && (
 				<nav
+					css={subNavWrapper}
 					data-print-layout="hide"
-					css={[
-						subNavStyles,
-						!hasPageSkin && subNavStylesWithoutPageSkin,
-						scrollableSubNavStyles,
-					]}
 					data-testid="sub-nav"
 					data-component="sub-nav"
 				>

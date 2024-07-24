@@ -122,7 +122,7 @@ const fontStyles = ({
 	}
 `;
 
-const paddingStyles = (topPadding: boolean) => css`
+export const paddingStyles = (topPadding: boolean) => css`
 	padding-top: ${topPadding ? space[2] : 0}px;
 	padding-bottom: ${space[0]}px;
 	${from.tablet} {
@@ -130,7 +130,7 @@ const paddingStyles = (topPadding: boolean) => css`
 	}
 `;
 
-const subheadingStyles = (format: ArticleFormat) => {
+export const subheadingStyles = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Obituary:
 		case ArticleDesign.Comment:

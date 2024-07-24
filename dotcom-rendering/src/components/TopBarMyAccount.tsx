@@ -58,7 +58,7 @@ const myAccountLinkStyles = css`
 	transition: color 80ms ease-out;
 	text-decoration: none;
 
-	padding: ${space[1]}px;
+	padding: ${space[1]}px 0 ${space[1]}px ${space[1]}px;
 
 	:hover,
 	:focus {
