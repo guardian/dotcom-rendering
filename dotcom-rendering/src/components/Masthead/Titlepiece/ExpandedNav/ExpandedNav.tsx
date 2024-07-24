@@ -54,7 +54,7 @@ const wrapperMainMenuStyles = css`
 		will-change: transform;
 	}
 	${from.desktop} {
-		display: relative;
+		position: relative;
 	}
 `;
 

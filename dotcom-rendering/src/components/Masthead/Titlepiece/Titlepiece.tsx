@@ -13,6 +13,7 @@ import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
 import { BurgerMenu } from './BurgerMenu';
 import {
+	expandedMenuRoot,
 	navInputCheckboxId,
 	pageMargin,
 	smallMobilePageMargin,
@@ -269,7 +270,7 @@ export const Titlepiece = ({
                         var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
                         var veggieBurger = document.getElementById('${veggieBurgerId}')
                         var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
-                        var expandedMenu = document.getElementById('expanded-menu-root')
+                        var expandedMenu = document.getElementById('${expandedMenuRoot}')
 
                         // We assume News is the 1st column
                         var firstColLabel = document.getElementById('News-button')
@@ -358,6 +359,7 @@ export const Titlepiece = ({
 			)}
 
 			{/* Pillars nav */}
+			{/* <nav> */}
 			<div
 				css={[
 					pillarsNavStyles,
@@ -380,12 +382,17 @@ export const Titlepiece = ({
 				/>
 			</div>
 
-			<div css={burgerStyles}>
-				<BurgerMenu />
+			<div id={expandedMenuRoot} css={burgerStyles}>
+				<BurgerMenu
+					isImmersive={isImmersive}
+					nav={nav}
+					editionId={editionId}
+					hasPageSkin={hasPageSkin}
+				/>
 			</div>
 
 			{showSubNav && nav.subNavSections && (
-				<nav
+				<div
 					css={subNavWrapper}
 					data-print-layout="hide"
 					data-testid="sub-nav"
@@ -395,8 +402,9 @@ export const Titlepiece = ({
 						subNavSections={nav.subNavSections}
 						currentNavLink={nav.currentNavLink}
 					/>
-				</nav>
+				</div>
 			)}
+			{/* </nav> */}
 		</Grid>
 	);
 };

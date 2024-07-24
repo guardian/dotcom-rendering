@@ -4,13 +4,7 @@ import { BurgerMenu } from './BurgerMenu';
 const meta = {
 	component: BurgerMenu,
 	title: 'Components/Masthead/Titlepiece/BurgerMenu',
-	render: () => (
-		<div>
-			<BurgerMenu />
-
-			<p></p>
-		</div>
-	),
+	render: (args) => <BurgerMenu {...args} />,
 	args: {},
 } satisfies Meta<typeof BurgerMenu>;
 
