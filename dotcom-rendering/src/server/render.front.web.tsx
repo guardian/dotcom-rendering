@@ -86,7 +86,7 @@ export const renderFront = ({
 	const config = {
 		renderingTarget: 'Web',
 		darkModeAvailable:
-			front.config.abTests.darkModeWebVariant === 'variant' || true,
+			front.config.abTests.darkModeWebVariant === 'variant',
 		updateLogoAdPartnerSwitch: !!front.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: front.editionId,
