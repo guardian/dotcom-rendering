@@ -19,6 +19,7 @@ import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { usePageViewId } from '../lib/usePageViewId';
+import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import type { ReactComponent } from './marketing/lib/ReactComponent';
 import {
@@ -27,7 +28,6 @@ import {
 	createInsertEventFromTracking,
 	createViewEventFromTracking,
 } from './marketing/lib/tracking';
-import { TagType } from 'src/types/tag';
 
 const baseUrl = 'https://support.theguardian.com/contribute';
 
@@ -272,10 +272,11 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		);
 	};
 
-	// TODO: 'some' doesn't like underlying array to change
-	// I think tags are added as the blog is added to... will this cause an issue?
+	/* This is based on the assumption that the tag is added at the point of blog creation
+	 *  and not added later.  It's a balancing act between adding a useEffect that will run
+	 *  each time a tag is added to check (less performant) and doing it on load. */
 	const shouldHideBasedOnTags = tags.some((a) => {
-		a.id === 'sport/olympic-games-2024';
+		return a.id === 'sport/olympic-games-2024';
 	});
 
 	const canShow =
