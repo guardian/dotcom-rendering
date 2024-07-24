@@ -350,7 +350,7 @@ const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
 const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[60];
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[7];
 		case 'SombrePalette':
@@ -408,7 +408,7 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 const articleBorderLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[60];
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[7];
 		case 'SombrePalette':
