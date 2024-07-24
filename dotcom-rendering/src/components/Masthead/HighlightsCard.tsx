@@ -93,7 +93,6 @@ export const HighlightsCard = ({
 	byline,
 	showMediaIcon,
 }: HighlightsCardProps) => {
-	console.log({ headlineText, kickerText });
 	return (
 		<div css={gridContainer}>
 			<div css={headline}>
