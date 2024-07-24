@@ -476,7 +476,6 @@ export const FrontSection = ({
 					backgroundColor: schemePalette(
 						'--section-background-inner',
 					),
-					borderColor: schemePalette('--article-border'),
 				}}
 			>
 				<div

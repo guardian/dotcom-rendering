@@ -50,7 +50,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 	};
 
 	const darkModeAvailable =
-		front.config.abTests.darkModeWebVariant === 'variant' || true;
+		front.config.abTests.darkModeWebVariant === 'variant';
 
 	return (
 		<StrictMode>
