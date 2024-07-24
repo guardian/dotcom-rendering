@@ -531,6 +531,119 @@ const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
+const sectionToggleButtonLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return neutral[20];
+		case 'LongRunningAltPalette':
+			return neutral[20];
+		case 'SombrePalette':
+			return neutral[86];
+		case 'SombreAltPalette':
+			return neutral[86];
+		case 'InvestigationPalette':
+			return neutral[97];
+		case 'BreakingPalette':
+			return neutral[46];
+		case 'EventPalette':
+			return neutral[46];
+		case 'EventAltPalette':
+			return neutral[46];
+		case 'SpecialReportAltPalette':
+			return neutral[60];
+		case 'Branded':
+			return neutral[7];
+		case 'MediaPalette':
+			return neutral[46];
+		case 'PodcastPalette':
+			return neutral[86];
+	}
+};
+const sectionToggleButtonDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return neutral[20];
+		case 'LongRunningAltPalette':
+			return neutral[20];
+		case 'SombrePalette':
+			return neutral[86];
+		case 'SombreAltPalette':
+			return neutral[86];
+		case 'InvestigationPalette':
+			return neutral[97];
+		case 'BreakingPalette':
+			return neutral[46];
+		case 'EventPalette':
+			return neutral[46];
+		case 'EventAltPalette':
+			return neutral[46];
+		case 'SpecialReportAltPalette':
+			return neutral[60];
+		case 'Branded':
+			return neutral[7];
+		case 'MediaPalette':
+			return neutral[46];
+		case 'PodcastPalette':
+			return neutral[86];
+	}
+};
+const sectionToggleButtonHoverLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return neutral[7];
+		case 'LongRunningAltPalette':
+			return neutral[7];
+		case 'SombrePalette':
+			return neutral[100];
+		case 'SombreAltPalette':
+			return neutral[100];
+		case 'InvestigationPalette':
+			return neutral[60];
+		case 'BreakingPalette':
+			return neutral[7];
+		case 'EventPalette':
+			return neutral[7];
+		case 'EventAltPalette':
+			return neutral[7];
+		case 'SpecialReportAltPalette':
+			return neutral[93];
+		case 'Branded':
+			return neutral[20];
+		case 'MediaPalette':
+			return neutral[7];
+		case 'PodcastPalette':
+			return neutral[100];
+	}
+};
+const sectionToggleButtonHoverDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return 'inherit';
+		case 'LongRunningAltPalette':
+			return 'inherit';
+		case 'SombrePalette':
+			return 'inherit';
+		case 'SombreAltPalette':
+			return 'inherit';
+		case 'InvestigationPalette':
+			return 'inherit';
+		case 'BreakingPalette':
+			return 'inherit';
+		case 'EventPalette':
+			return 'inherit';
+		case 'EventAltPalette':
+			return 'inherit';
+		case 'SpecialReportAltPalette':
+			return 'inherit';
+		case 'Branded':
+			return 'inherit';
+		case 'MediaPalette':
+			return 'inherit';
+		case 'PodcastPalette':
+			return 'inherit';
+	}
+};
+
 const borderContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -1211,6 +1324,14 @@ const containerColours = {
 	'--section-background-left': {
 		light: sectionBackgroundLeftLight,
 		dark: sectionBackgroundLeftDark,
+	},
+	'--section-toggle-button': {
+		light: sectionToggleButtonLight,
+		dark: sectionToggleButtonDark,
+	},
+	'--section-toggle-button-hover': {
+		light: sectionToggleButtonHoverLight,
+		dark: sectionToggleButtonHoverDark,
 	},
 	'--kicker-background-live': {
 		light: kickerBackgroundLiveLight,
