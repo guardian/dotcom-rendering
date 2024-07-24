@@ -354,7 +354,7 @@ const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[7];
 		case 'SombrePalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[60];
 		case 'SombreAltPalette':
 			return sourcePalette.neutral[46];
 		case 'InvestigationPalette':
@@ -383,7 +383,7 @@ const cardBorderTopDark: ContainerFunction = (containerPalette) => {
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[60];
 		case 'SombrePalette':
-			return sourcePalette.neutral[100];
+			return cardBorderTopLight(containerPalette);
 		case 'SombreAltPalette':
 			return sourcePalette.neutral[46];
 		case 'InvestigationPalette':
@@ -412,7 +412,7 @@ const articleBorderLight: ContainerFunction = (containerPalette) => {
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[7];
 		case 'SombrePalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[60];
 		case 'SombreAltPalette':
 			return sourcePalette.neutral[46];
 		case 'InvestigationPalette':
@@ -441,9 +441,8 @@ const articleBorderDark: ContainerFunction = (containerPalette) => {
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[60];
 		case 'SombrePalette':
-			return sourcePalette.neutral[38];
 		case 'SombreAltPalette':
-			return sourcePalette.neutral[46];
+			return articleBorderLight(containerPalette);
 		case 'InvestigationPalette':
 			return articleBorderLight(containerPalette);
 		case 'BreakingPalette':
