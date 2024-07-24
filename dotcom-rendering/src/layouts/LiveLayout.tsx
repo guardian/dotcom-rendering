@@ -575,6 +575,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={false}
 								isMatch={true}
 							/>
 						}
@@ -589,6 +590,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								inTagLinkTest={false}
 								isMatch={true}
 							/>
 						</Hide>

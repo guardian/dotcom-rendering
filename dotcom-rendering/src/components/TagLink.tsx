@@ -11,8 +11,8 @@ import { Hide, SvgArrowRightStraight } from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 interface Props {
-	sectionLabel: string;
 	sectionUrl: string;
+	sectionLabel: string;
 	guardianBaseURL: string;
 	format: ArticleFormat;
 }
@@ -110,13 +110,14 @@ export const TagLink = ({
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
+
 	return (
 		<div
 			css={[
 				containerStyles,
 				!isBlog &&
 					css`
-						padding-top: ${space[1]}px;
+						padding-top: ${space[0]}px;
 					`,
 			]}
 		>

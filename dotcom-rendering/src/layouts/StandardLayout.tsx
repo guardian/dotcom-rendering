@@ -414,7 +414,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const inTagLinkTest =
 		isWeb &&
 		article.config.abTests.tagLinkDesignVariant === 'variant' &&
-		article.tags.some((tag) => tag.id === 'football/euro-2024');
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	return (
 		<>

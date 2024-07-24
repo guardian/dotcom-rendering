@@ -31,7 +31,9 @@ const FEArticle = {
 	fallbackToSection: true,
 	sectionLabel: 'Section label',
 	sectionUrl: '/section_url',
+	inTagLinkTest: false,
 };
+
 const FEBrexit = {
 	...FEArticle,
 	...{

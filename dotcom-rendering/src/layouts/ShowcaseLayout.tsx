@@ -253,7 +253,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const inTagLinkTest =
 		isWeb &&
 		article.config.abTests.tagLinkDesignVariant === 'variant' &&
-		article.tags.some((tag) => tag.id === 'football/euro-2024');
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 

@@ -491,6 +491,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										tags={article.tags}
 										sectionLabel={article.sectionLabel}
 										sectionUrl={article.sectionUrl}
+										inTagLinkTest={false}
 										guardianBaseURL={
 											article.guardianBaseURL
 										}

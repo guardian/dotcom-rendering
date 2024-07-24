@@ -14,8 +14,8 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
+	inTagLinkTest: boolean;
 	isMatch?: boolean;
-	inTagLinkTest?: boolean;
 };
 
 const sectionStyles = css`
@@ -48,8 +48,8 @@ export const ArticleTitle = ({
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
+	inTagLinkTest,
 	isMatch,
-	inTagLinkTest = false,
 }: Props) => (
 	<div css={[sectionStyles]}>
 		<div
