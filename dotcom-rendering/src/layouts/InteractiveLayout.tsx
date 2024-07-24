@@ -46,7 +46,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
-import { palette, palette as themePalette } from '../palette';
+import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import {
@@ -413,7 +413,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 												display: block;
 											`}
 											count={4}
-											color={palette('--straight-lines')}
+											color={themePalette(
+												'--straight-lines',
+											)}
 										/>
 									</Section>
 								)}
@@ -724,7 +726,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<StraightLines
 						count={4}
 						data-print-layout="hide"
-						color={palette('--straight-lines')}
+						color={themePalette('--straight-lines')}
 						cssOverrides={css`
 							display: block;
 						`}
