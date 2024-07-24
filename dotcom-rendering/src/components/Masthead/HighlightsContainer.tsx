@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { DCRFrontCard } from 'src/types/front';
-import { HighlightsCard } from './HighlightsCard';
 import { from, neutral, space, until } from '@guardian/source/foundations';
+import type { DCRFrontCard } from '../../types/front';
+import { HighlightsCard } from './HighlightsCard';
 
 type Props = { trails: DCRFrontCard[] };
 
