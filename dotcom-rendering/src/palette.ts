@@ -6524,6 +6524,14 @@ const paletteColours = {
 		light: sectionTitleBackgroundLight,
 		dark: sectionTitleBackgroundLight,
 	},
+	'--section-toggle-button': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--section-toggle-button-hover': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[93],
+	},
 	'--series-title-background': {
 		light: seriesTitleBackgroundLight,
 		dark: seriesTitleBackgroundLight,

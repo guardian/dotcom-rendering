@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 import {
 	between,
 	from,
+	palette as sourcePalette,
 	space,
 	textSans14,
 	textSansBold12,
 	textSansBold14,
 	textSansBold20,
 	until,
-	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import {
 	Link,
