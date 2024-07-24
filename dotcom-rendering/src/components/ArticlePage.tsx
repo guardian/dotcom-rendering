@@ -10,6 +10,7 @@ import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
+import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -55,9 +56,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	const isWeb = renderingTarget === 'Web';
 	const webLightbox = isWeb && !!article.config.switches.lightbox;
-	const darkModeAvailable = isWeb
-		? article.config.abTests.darkModeWebVariant === 'variant'
-		: true;
+	const { darkModeAvailable } = useConfig();
 
 	return (
 		<StrictMode>
