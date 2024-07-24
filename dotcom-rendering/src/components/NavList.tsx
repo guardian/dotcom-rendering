@@ -10,11 +10,11 @@ type Props = {
 };
 
 const columnRuleColour = css`
-	column-rule: 1px solid ${palette('--article-border')}};
+	column-rule: 1px solid ${palette('--article-border')};
 `;
 
 const topBorderColour = css`
-	border-top: 1px solid ${palette('--card-border-top')}};
+	border-top: 1px solid ${palette('--card-border-top')};
 `;
 
 const ulStyles = css`
