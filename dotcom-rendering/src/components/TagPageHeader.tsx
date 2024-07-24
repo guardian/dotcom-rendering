@@ -12,14 +12,12 @@ import { Fragment, type ReactNode } from 'react';
 import { isElement, parseHtml } from '../lib/domUtils';
 import { palette as schemedPalette } from '../palette';
 import { logger } from '../server/lib/logging';
-import type { DCRContainerPalette } from '../types/front';
 import { generateSources, Sources } from './Picture';
 
 type Props = {
 	title: string;
 	description?: string;
 	image?: string;
-	containerPalette?: DCRContainerPalette;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>

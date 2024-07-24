@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
 import { palette } from '../palette';
-import type { DCRContainerPalette } from '../types/front';
 import type { TrailType } from '../types/trails';
 import { MiniCard } from './MiniCard';
 
 type Props = {
 	trails: TrailType[];
-	containerPalette?: DCRContainerPalette;
 	showImage: boolean;
 };
 
@@ -50,7 +48,7 @@ const mediaColumns = css`
 	}
 `;
 
-export const NavList = ({ trails, containerPalette, showImage }: Props) => {
+export const NavList = ({ trails, showImage }: Props) => {
 	return (
 		<ul
 			css={[
