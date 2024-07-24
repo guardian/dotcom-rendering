@@ -33,7 +33,7 @@ export const ShowHideButton = ({ sectionId }: Props) => {
 			aria-expanded={true}
 			theme={{
 				textSecondary: palette('--section-toggle-button'),
-				textSecondaryHover: palette('--section-toggle-button'),
+				textSecondaryHover: palette('--section-toggle-button-hover'),
 			}}
 		>
 			Hide
