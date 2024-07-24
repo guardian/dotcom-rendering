@@ -413,6 +413,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 												display: block;
 											`}
 											count={4}
+											color={themePalette(
+												'--straight-lines',
+											)}
 										/>
 									</Section>
 								)}
@@ -723,6 +726,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<StraightLines
 						count={4}
 						data-print-layout="hide"
+						color={themePalette('--straight-lines')}
 						cssOverrides={css`
 							display: block;
 						`}

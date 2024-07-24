@@ -19,7 +19,7 @@ const displayContents = css`
  * to that of the :root element
  */
 export const FormatBoundary = ({ format, children }: Props) => {
-	const { darkModeAvailable = false } = useConfig();
+	const { darkModeAvailable } = useConfig();
 
 	const [isStorybook, setIsStorybook] = useState(false);
 	useEffect(() => {

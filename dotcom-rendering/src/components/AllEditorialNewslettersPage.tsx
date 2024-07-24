@@ -6,6 +6,7 @@ import { rootStyles } from '../lib/rootStyles';
 import type { NavType } from '../model/extract-nav';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { useConfig } from './ConfigContext';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
@@ -36,8 +37,7 @@ export const AllEditorialNewslettersPage = ({
 		theme: Pillar.News,
 	};
 
-	const darkModeAvailable =
-		newslettersPage.config.abTests.darkModeWebVariant === 'variant';
+	const { darkModeAvailable } = useConfig();
 
 	return (
 		<StrictMode>

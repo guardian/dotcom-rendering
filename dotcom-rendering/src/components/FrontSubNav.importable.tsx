@@ -3,6 +3,7 @@ import { StraightLines } from '@guardian/source-development-kitchen/react-compon
 import type { EditionId } from '../lib/edition';
 import { useEditionSwitcherBanner } from '../lib/useUserPreferredEdition';
 import type { SubNavType } from '../model/extract-nav';
+import { palette } from '../palette';
 import { Section } from './Section';
 import { SubNav } from './SubNav.importable';
 
@@ -57,6 +58,7 @@ export const FrontSubNav = ({
 					cssOverrides={css`
 						display: block;
 					`}
+					color={palette('--straight-lines')}
 					count={4}
 				/>
 			</Section>

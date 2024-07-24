@@ -3496,6 +3496,7 @@ const straightLinesLight: PaletteFunction = (format) => {
 	) {
 		return transparentColour(sourcePalette.neutral[60], 0.5);
 	}
+	if (format.theme === ArticleSpecial.Labs) return sourcePalette.neutral[60];
 	return sourcePalette.neutral[86];
 };
 
@@ -6970,4 +6971,4 @@ const paletteDeclarations = (
 
 // ----- Exports ----- //
 
-export { palette, paletteDeclarations };
+export { palette as palette, paletteDeclarations };
