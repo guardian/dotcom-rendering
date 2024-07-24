@@ -6,12 +6,6 @@ import { HighlightsCard } from './HighlightsCard';
 
 type Props = { trails: DCRFrontCard[] };
 
-const containerStyles = css`
-	${until.desktop} {
-		height: 194px;
-	}
-`;
-
 const carouselStyles = css`
 	display: grid;
 	grid-auto-columns: 1fr;
@@ -22,7 +16,6 @@ const carouselStyles = css`
 	scroll-behavior: smooth;
 	overscroll-behavior: contain;
 	scroll-padding-left: 10px;
-	height: 100%;
 	/**
 	* Hide scrollbars
 	* See: https://stackoverflow.com/a/38994837
@@ -92,27 +85,22 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 export const HighlightsContainer = ({ trails }: Props) => {
 	const carouselLength = trails.length;
 	return (
-		<div css={containerStyles}>
-			<ol
-				css={[
-					carouselStyles,
-					generateCarouselColumnStyles(carouselLength),
-				]}
-			>
-				{trails.map((trail, index) => {
-					return (
-						<li key={index} css={[itemStyles, verticalLineStyles]}>
-							<HighlightsCard
-								format={trail.format}
-								headlineText={trail.headline}
-								kickerText={trail.kickerText}
-								avatarUrl={trail.avatarUrl}
-								byline={trail.byline}
-							/>
-						</li>
-					);
-				})}
-			</ol>
-		</div>
+		<ol
+			css={[carouselStyles, generateCarouselColumnStyles(carouselLength)]}
+		>
+			{trails.map((trail, index) => {
+				return (
+					<li key={index} css={[itemStyles, verticalLineStyles]}>
+						<HighlightsCard
+							format={trail.format}
+							headlineText={trail.headline}
+							kickerText={trail.kickerText}
+							avatarUrl={trail.avatarUrl}
+							byline={trail.byline}
+						/>
+					</li>
+				);
+			})}
+		</ol>
 	);
 };

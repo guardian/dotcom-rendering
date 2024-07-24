@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, palette } from '@guardian/source/foundations';
+import { from, palette, until } from '@guardian/source/foundations';
 // import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { Avatar } from '../Avatar';
@@ -28,11 +28,13 @@ const gridContainer = css`
 	display: grid;
 	background-color: ${palette.neutral[97]};
 	gap: 8px;
-	height: 100%;
 	grid-template-areas:
 		'headline 	headline'
 		'media-icon image';
 
+	${until.desktop} {
+		height: 194px;
+	}
 	${from.desktop} {
 		grid-template-areas:
 			'headline 	image'
