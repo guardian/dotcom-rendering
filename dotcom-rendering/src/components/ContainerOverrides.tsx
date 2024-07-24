@@ -357,7 +357,7 @@ const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 		case 'SombreAltPalette':
 			return sourcePalette.neutral[60];
 		case 'InvestigationPalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[73];
 		case 'BreakingPalette':
 			return sourcePalette.news[600];
 		case 'EventPalette':
@@ -413,7 +413,7 @@ const articleBorderLight: ContainerFunction = (containerPalette) => {
 		case 'SombreAltPalette':
 			return sourcePalette.neutral[46];
 		case 'InvestigationPalette':
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[73];
 		case 'BreakingPalette':
 			return sourcePalette.news[600];
 		case 'EventPalette':
