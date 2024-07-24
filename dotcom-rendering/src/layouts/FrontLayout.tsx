@@ -6,7 +6,6 @@ import {
 	brandLine,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
-import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerOverrides } from '../components/ContainerOverrides';
@@ -385,7 +384,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<Fragment key={ophanName}>
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
 								<div css={[hasPageSkin && pageSkinContainer]}>
 									{decideFrontsBannerAdSlot(
 										renderAds,
@@ -430,7 +432,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										hasPageSkin,
 									)}
 								</div>
-							</Fragment>
+							</ContainerOverrides>
 						);
 					}
 
@@ -444,7 +446,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 
 						return (
-							<Fragment key={ophanName}>
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -507,13 +512,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</Fragment>
+							</ContainerOverrides>
 						);
 					}
 
 					if (collection.containerPalette === 'Branded') {
 						return (
-							<Fragment key={ophanName}>
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
@@ -559,7 +567,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</Fragment>
+							</ContainerOverrides>
 						);
 					}
 
@@ -649,7 +657,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					return (
-						<Fragment key={ophanName}>
+						<ContainerOverrides
+							key={ophanName}
+							containerPalette={collection.containerPalette}
+						>
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
@@ -722,7 +733,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								mobileAdPositions,
 								hasPageSkin,
 							)}
-						</Fragment>
+						</ContainerOverrides>
 					);
 				})}
 			</main>

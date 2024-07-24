@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
-import { from, palette, space } from '@guardian/source/foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { from, space } from '@guardian/source/foundations';
+import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
-import type { ContainerOverrides } from '../types/palette';
 import type { TrailType } from '../types/trails';
 import { MiniCard } from './MiniCard';
 
@@ -12,14 +11,12 @@ type Props = {
 	showImage: boolean;
 };
 
-const columnRuleColour = (containerOverrides?: ContainerOverrides) => css`
-	column-rule: 1px solid
-		${containerOverrides?.border.container ?? palette.neutral[86]};
+const columnRuleColour = css`
+	column-rule: 1px solid ${palette('--article-border')}};
 `;
 
-const topBorderColour = (containerOverrides?: ContainerOverrides) => css`
-	border-top: 1px solid
-		${containerOverrides?.topBar?.card ?? palette.neutral[93]};
+const topBorderColour = css`
+	border-top: 1px solid ${palette('--card-border-top')}};
 `;
 
 const ulStyles = css`
@@ -54,27 +51,17 @@ const mediaColumns = css`
 `;
 
 export const NavList = ({ trails, containerPalette, showImage }: Props) => {
-	const containerOverrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
 	return (
 		<ul
 			css={[
 				ulStyles,
-				columnRuleColour(containerOverrides),
+				columnRuleColour,
 				showImage ? mediaColumns : textColumns,
 			]}
 		>
 			{trails.map((trail) => (
-				<li
-					key={trail.url}
-					css={[liStyles, topBorderColour(containerOverrides)]}
-				>
-					<MiniCard
-						trail={trail}
-						showImage={showImage}
-						containerPalette={containerPalette}
-					/>
+				<li key={trail.url} css={[liStyles, topBorderColour]}>
+					<MiniCard trail={trail} showImage={showImage} />
 				</li>
 			))}
 		</ul>

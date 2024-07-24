@@ -9,8 +9,8 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Fragment, type ReactNode } from 'react';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { isElement, parseHtml } from '../lib/domUtils';
+import { palette as schemedPalette } from '../palette';
 import { logger } from '../server/lib/logging';
 import type { DCRContainerPalette } from '../types/front';
 import { generateSources, Sources } from './Picture';
@@ -54,6 +54,7 @@ const fallbackStyles = css`
 `;
 
 const containerStyles = css`
+	background-color: ${schemedPalette('--section-background-inner')};
 	display: grid;
 
 	grid-template-rows:
@@ -274,29 +275,13 @@ const Picture = ({ image }: { image: string }) => {
 const isFootballCrest = (image: string) =>
 	image.startsWith('https://sport.guim.co.uk/football/crests/');
 
-export const TagPageHeader = ({
-	title,
-	containerPalette,
-	description,
-	image,
-}: Props) => {
-	const overrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
+export const TagPageHeader = ({ title, description, image }: Props) => {
 	const descriptionFragment = description
 		? parseHtml(description)
 		: undefined;
 
 	return (
-		<section
-			css={[
-				fallbackStyles,
-				containerStyles,
-				css`
-					background-color: ${overrides?.background.container};
-				`,
-			]}
-		>
+		<section css={[fallbackStyles, containerStyles]}>
 			<div css={[decoration, sideBorders]} />
 
 			<div css={[sectionHeadline, titleContainerStyle, paddings]}>
