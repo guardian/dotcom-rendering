@@ -288,9 +288,9 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
-	const inTagLinkTest =
+	const shouldShowTagLink =
 		isWeb &&
-		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
 		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
@@ -447,7 +447,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 			<main
 				data-layout="PictureLayout"
 				id="maincontent"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
@@ -478,7 +478,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								inTagLinkTest={inTagLinkTest}
+								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">

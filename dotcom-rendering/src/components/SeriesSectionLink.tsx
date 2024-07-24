@@ -30,7 +30,7 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	inTagLinkTest: boolean;
+	shouldShowTagLink: boolean;
 	isMatch?: boolean;
 };
 
@@ -169,7 +169,7 @@ export const SeriesSectionLink = ({
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	inTagLinkTest,
+	shouldShowTagLink,
 	isMatch,
 }: Props) => {
 	const observerTag = tags.find(
@@ -198,7 +198,7 @@ export const SeriesSectionLink = ({
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
-	if (inTagLinkTest) {
+	if (shouldShowTagLink) {
 		return (
 			<TagLink
 				sectionUrl="sport/olympic-games-2024"

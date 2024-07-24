@@ -308,9 +308,9 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
-	const inTagLinkTest =
+	const shouldShowTagLink =
 		isWeb &&
-		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
 		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	return (
@@ -468,7 +468,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 			<main
 				data-layout="CommentLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -526,7 +526,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								inTagLinkTest={inTagLinkTest}
+								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">

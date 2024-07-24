@@ -313,9 +313,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
-	const inTagLinkTest =
+	const shouldShowTagLink =
 		isWeb &&
-		article.config.abTests.tagLinkDesignVariant === 'variant' &&
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
 		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	const inUpdatedHeaderABTest =
@@ -457,7 +457,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									inTagLinkTest={false}
+									shouldShowTagLink={false}
 								/>
 							</Section>
 							<Box>
@@ -486,7 +486,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="ImmersiveLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -547,7 +547,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											guardianBaseURL={
 												article.guardianBaseURL
 											}
-											inTagLinkTest={inTagLinkTest}
+											shouldShowTagLink={
+												shouldShowTagLink
+											}
 										/>
 									</div>
 								)}
