@@ -48,7 +48,7 @@ const itemStyles = css`
 		top: ${space[3]}px;
 		right: -10px;
 		width: 1px;
-		height: calc(100% - 24px);
+		height: calc(100% - ${space[6]}px);
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
