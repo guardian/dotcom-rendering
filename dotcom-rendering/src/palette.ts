@@ -5570,6 +5570,9 @@ const mastheadHighlightsBackground: PaletteFunction = () =>
 const mastheadHighlightsBorder: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 
+const mastheadAccreditationText: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+
 const pinnedPostBorderLight: PaletteFunction = ({ theme }) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6388,6 +6391,10 @@ const paletteColours = {
 	'--live-block-container-background': {
 		light: liveBlockContainerBackgroundLight,
 		dark: liveBlockContainerBackgroundDark,
+	},
+	'--masthead-accreditation-text': {
+		light: mastheadAccreditationText,
+		dark: mastheadAccreditationText,
 	},
 	'--masthead-highlights-background': {
 		light: mastheadHighlightsBackground,
