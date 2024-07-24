@@ -801,19 +801,37 @@ const treatTextDark: ContainerFunction = (containerPalette) => {
 	}
 };
 
-const carouselDot: ContainerFunction = (containerPalette) => {
+const carouselDotLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'PodcastPalette':
-			return sourcePalette.neutral[7];
+			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.brandAlt[400];
 	}
 };
 
-const carouselActiveDot: ContainerFunction = (containerPalette) => {
+const carouselDotDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'PodcastPalette':
+			return sourcePalette.neutral[20];
+		default:
 			return sourcePalette.brandAlt[400];
+	}
+};
+
+const carouselActiveDotLight: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'PodcastPalette':
+			return sourcePalette.neutral[7];
+		default:
+			return sourcePalette.news[400];
+	}
+};
+
+const carouselActiveDotDark: ContainerFunction = (containerPalette) => {
+	switch (containerPalette) {
+		case 'PodcastPalette':
+			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.news[400];
 	}
@@ -924,12 +942,12 @@ const containerColours = {
 		dark: cardBorderTopDark,
 	},
 	'--carousel-dot': {
-		light: carouselDot,
-		dark: carouselDot,
+		light: carouselDotLight,
+		dark: carouselDotDark,
 	},
 	'--carousel-active-dot': {
-		light: carouselActiveDot,
-		dark: carouselActiveDot,
+		light: carouselActiveDotLight,
+		dark: carouselActiveDotDark,
 	},
 	'--carousel-arrow': {
 		light: carouselArrow,
