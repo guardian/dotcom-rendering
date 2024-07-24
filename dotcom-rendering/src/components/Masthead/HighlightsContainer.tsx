@@ -42,13 +42,16 @@ const itemStyles = css`
 	:first-child {
 		padding-left: 10px;
 	}
+`;
+
+const verticalLineStyles = css`
 	::after {
 		content: '';
 		position: absolute;
 		top: ${space[3]}px;
+		bottom: ${space[3]}px;
 		right: -10px;
 		width: 1px;
-		height: calc(100% - ${space[6]}px);
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
@@ -98,7 +101,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			>
 				{trails.map((trail, index) => {
 					return (
-						<li key={index} css={itemStyles}>
+						<li key={index} css={[itemStyles, verticalLineStyles]}>
 							<HighlightsCard
 								format={trail.format}
 								headlineText={trail.headline}
