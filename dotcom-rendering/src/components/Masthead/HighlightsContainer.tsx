@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, until } from '@guardian/source/foundations';
+import { from, space, until } from '@guardian/source/foundations';
+import { palette } from '../../palette';
 import type { DCRFrontCard } from '../../types/front';
 import { HighlightsCard } from './HighlightsCard';
 
@@ -48,7 +49,7 @@ const itemStyles = css`
 		right: -10px;
 		width: 1px;
 		height: calc(100% - 24px);
-		background-color: ${neutral[73]};
+		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
 `;
