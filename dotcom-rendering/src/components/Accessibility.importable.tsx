@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
-import { storage } from '@guardian/libs';
+import { setCookie, storage } from '@guardian/libs';
 import { article17, palette } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
+import { useConfig } from './ConfigContext';
 import { FrontSection } from './FrontSection';
 
 const formStyle = css`
@@ -26,7 +27,9 @@ const bold = css`
  * Allows user to select their accessibility preferences
  */
 export const Accessibility = () => {
+	const { darkModeAvailable } = useConfig();
 	const [shouldFlash, setShouldFlash] = useState<boolean | undefined>();
+	const [participate, setParticipate] = useState<boolean>(darkModeAvailable);
 
 	const checked = shouldFlash ?? true;
 
@@ -46,6 +49,24 @@ export const Accessibility = () => {
 			shouldFlash,
 		);
 	}, [shouldFlash]);
+
+	useEffect(() => {
+		setCookie({
+			name:
+				// This is hardcoded, and must be changed if the experiment bucket changes
+				// https://github.com/guardian/frontend/blob/09f49b80/common/app/experiments/Experiments.scala#L57
+				'X-GU-Experiment-0perc-D',
+			value: participate ? 'true' : 'false',
+		});
+
+		const timeout = setTimeout(() => {
+			// we must reload the page for the preference to take effect,
+			// as this relies on a server-side test & cookie combination
+			if (participate !== darkModeAvailable) window.location.reload();
+		}, 1200);
+
+		return () => clearTimeout(timeout);
+	}, [participate, darkModeAvailable]);
 
 	const toggleFlash = (): void => {
 		setShouldFlash((prev) => (prev === undefined ? false : !prev));
@@ -82,6 +103,32 @@ export const Accessibility = () => {
 						{checked
 							? 'Untick this to disable flashing and moving elements'
 							: 'Tick this to enable flashing or moving elements'}
+					</label>
+				</fieldset>
+
+				<br />
+
+				<fieldset css={formStyle}>
+					<p>
+						We offer beta support for a dark colour scheme on the
+						web. The colour scheme preference will follow your
+						system settings.
+					</p>
+					<label>
+						<input
+							type="checkbox"
+							checked={participate}
+							onChange={(e) => {
+								setParticipate(e.target.checked);
+							}}
+							data-link-name="prefers-colour-scheme"
+						/>
+						<span css={bold}>
+							Participate in the dark colour scheme beta{' '}
+						</span>
+						{participate
+							? 'Untick this to opt out'
+							: 'Tick this to opt in'}
 					</label>
 				</fieldset>
 			</form>
