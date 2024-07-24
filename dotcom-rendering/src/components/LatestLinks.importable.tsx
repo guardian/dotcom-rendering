@@ -36,7 +36,7 @@ const linkStyles = css`
 `;
 
 const dividerStyles = css`
-  color: ${themePalette('--article-border')}
+	color: ${themePalette('--article-border')};
 	border-top: 1px solid currentColor;
 	border-left: 1px solid currentColor;
 `;
