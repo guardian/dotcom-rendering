@@ -75,15 +75,17 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 		}
 
 		${from.mobileMedium} {
-			grid-template-columns:
-				repeat(${totalCards}, calc((100% - ${peepingCardWidth}px) / 2))
-				${peepingCardWidth}px;
+			grid-template-columns: repeat(
+				${totalCards},
+				calc((100% - ${peepingCardWidth}px) / 2)
+			);
 		}
 
 		${from.tablet} {
-			grid-template-columns:
-				repeat(${totalCards}, calc((100% - ${peepingCardWidth}px) / 4))
-				${peepingCardWidth}px;
+			grid-template-columns: repeat(
+				${totalCards},
+				calc((100% - ${peepingCardWidth}px) / 4)
+			);
 		}
 
 		${from.desktop} {
