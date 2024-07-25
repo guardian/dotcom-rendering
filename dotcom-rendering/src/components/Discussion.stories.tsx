@@ -24,7 +24,6 @@ const SectionWrapper = ({ children }: { children: React.ReactNode }) => (
 		element="section"
 		backgroundColour={themePalette('--article-background')}
 		borderColour={themePalette('--article-border')}
-		fontColour={themePalette('--article-section-title')}
 	>
 		{children}
 	</Section>

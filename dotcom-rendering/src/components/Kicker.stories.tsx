@@ -2,7 +2,6 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Meta } from '@storybook/react';
 import type { CSSProperties } from 'react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { palette } from '../palette';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerOverrides } from './ContainerOverrides';
@@ -76,14 +75,7 @@ export const CardKickerWithContainerOverrides = {
 		<>
 			{containerPalettes.map((containerPalette) => (
 				<>
-					<Section
-						fullWidth={true}
-						backgroundColour={
-							decideContainerOverrides(containerPalette)
-								.background.container
-						}
-						padSides={true}
-					>
+					<Section fullWidth={true} padSides={true}>
 						<ContainerOverrides
 							key={containerPalette}
 							containerPalette={containerPalette}

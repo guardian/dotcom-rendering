@@ -118,7 +118,9 @@ describe('Island: server-side rendering', () => {
 	test('CardCommentCount', () => {
 		expect(() =>
 			renderToString(
-				<CardCommentCount discussionApiUrl="" discussionId="" />,
+				<WithConfig>
+					<CardCommentCount discussionApiUrl="" discussionId="" />
+				</WithConfig>,
 			),
 		).not.toThrow();
 	});

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	between,
 	from,
+	palette as sourcePalette,
 	space,
 	textSans14,
 	textSansBold12,
@@ -14,12 +15,13 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { getLabsUrlSuffix } from '../lib/labs';
+import { palette } from '../palette';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import type { DCRBadgeType } from '../types/badge';
 import { Badge } from './Badge';
+import { ContainerOverrides } from './ContainerOverrides';
 import { Details } from './Details';
 import { Island } from './Island';
 import { Section } from './Section';
@@ -72,12 +74,12 @@ type Props = {
 	editionId: EditionId;
 };
 
-const leftColumnBackground = (backgroundColour?: string) => css`
-	background-color: ${backgroundColour};
+const leftColumnBackground = css`
+	background-color: ${palette('--section-background-left')};
 `;
 
-const contentBackground = (backgroundColour?: string) => css`
-	background-color: ${backgroundColour};
+const contentBackground = css`
+	background-color: ${palette('--section-background')};
 `;
 
 const leftColumnWidthFromLeftCol = css`
@@ -163,18 +165,18 @@ const contentSidePaddingFromLeftCol = css`
 	}
 `;
 
-const linkStyles = (textColour?: string) => css`
+const linkStyles = css`
 	text-decoration: none;
-	color: ${textColour};
+	color: ${palette('--article-section-title')};
 
 	:hover {
 		text-decoration: underline;
 	}
 `;
 
-const headerStyles = (textColour?: string) => css`
+const headerStyles = css`
 	${textSansBold20};
-	color: ${textColour ?? 'inherit'};
+	color: ${palette('--article-section-title')};
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
 
@@ -191,46 +193,36 @@ const badgeStyles = css`
 	padding: ${space[2]}px 10px;
 `;
 
-const paidForByStyles = (textColour?: string) => css`
+const paidForByStyles = css`
 	${textSansBold12};
-	color: ${textColour};
+	color: ${palette('--treat-text')};
 	margin-top: ${space[3]}px;
 	margin-bottom: ${space[1]}px;
 `;
 
-const GuardianLabsTitle = ({
-	title,
-	textColour,
-	url,
-}: {
-	title: string;
-	url?: string;
-	textColour?: string;
-}) => {
+const GuardianLabsTitle = ({ title, url }: { title: string; url?: string }) => {
 	if (url) {
 		return (
-			<a css={linkStyles(textColour)} href={`/${url}`}>
-				<h2 css={headerStyles()}>{title}</h2>
+			<a css={linkStyles} href={`/${url}`}>
+				<h2 css={headerStyles}>{title}</h2>
 			</a>
 		);
 	} else {
-		return <h2 css={headerStyles(textColour)}>{title}</h2>;
+		return <h2 css={headerStyles}>{title}</h2>;
 	}
 };
 
 const LeftColumn = ({
 	children,
-	backgroundColour,
 	hasPageSkin,
 }: {
 	children: React.ReactNode;
-	backgroundColour?: string;
 	hasPageSkin: boolean;
 }) => (
 	<div
 		css={[
 			!hasPageSkin && leftColumnWidthFromLeftCol,
-			leftColumnBackground(backgroundColour),
+			leftColumnBackground,
 			!hasPageSkin && leftColumnMargins,
 			leftColumnPadding,
 			leftColumnFlex,
@@ -243,11 +235,9 @@ const LeftColumn = ({
 
 const Content = ({
 	children,
-	backgroundColour,
 	hasPageSkin,
 }: {
 	children: React.ReactNode;
-	backgroundColour?: string;
 	hasPageSkin: boolean;
 }) => (
 	<div
@@ -255,7 +245,7 @@ const Content = ({
 			contentSidePaddingUntilLeftCol,
 			!hasPageSkin && contentSidePaddingFromLeftCol,
 			contentMargins,
-			contentBackground(backgroundColour),
+			contentBackground,
 			css`
 				width: 100%;
 			`,
@@ -350,8 +340,8 @@ const LabsContainerHeader = ({
 					priority="subdued"
 					icon={<SvgArrowRightStraight />}
 					href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+					theme={{ textSubdued: summaryTextSecondaryColour }}
 					cssOverrides={css`
-						color: ${summaryTextSecondaryColour};
 						${textSans14};
 					`}
 				>
@@ -388,102 +378,86 @@ export const LabsSection = ({
 	discussionApiUrl,
 	editionId,
 }: Props) => {
-	const overrides = decideContainerOverrides('Branded');
-
 	return (
-		<Section
-			fullWidth={true}
-			sectionId={sectionId}
-			padSides={false}
-			element="section"
-			containerName={containerName}
-			ophanComponentLink={ophanComponentLink}
-			ophanComponentName={ophanComponentName}
-			hasPageSkin={hasPageSkin}
-			/**
-			 * dumathoin?
-			 * https://github.com/guardian/frontend/pull/17625
-			 * https://forgottenrealms.fandom.com/wiki/Dumathoin
-			 */
-			className={'dumathoin'}
-		>
-			<Container hasPageSkin={hasPageSkin}>
-				<LeftColumn
-					backgroundColour={overrides.background.containerLeftColumn}
-					hasPageSkin={hasPageSkin}
-				>
-					<div>
-						<LabsContainerHeader
-							summaryBackgroundColour={
-								overrides.background.containerSummary
-							}
-							summaryTextColour={overrides.text.container}
-							summaryTextSecondaryColour={
-								overrides.text.containerSummary
-							}
-							hasPageSkin={hasPageSkin}
-						/>
-						<GuardianLabsTitle
-							title={title}
-							textColour={overrides.text.container}
-							url={url}
-						/>
-					</div>
-
-					<Link
-						href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
-							editionId,
-						)}`}
-						cssOverrides={css`
-							text-align: right;
-						`}
-					>
-						<LabsLogo />
-					</Link>
-				</LeftColumn>
-				<Content
-					backgroundColour={overrides.background.container}
-					hasPageSkin={hasPageSkin}
-				>
-					{children}
-					{canShowMore && (
-						<Island
-							priority="feature"
-							defer={{ until: 'interaction' }}
-						>
-							<ShowMore
-								title={title}
-								sectionId={sectionId}
-								collectionId={collectionId}
-								pageId={pageId}
-								ajaxUrl={ajaxUrl}
-								containerPalette={'Branded'}
-								showAge={true}
-								discussionApiUrl={discussionApiUrl}
-								editionId={editionId}
+		<ContainerOverrides containerPalette="Branded">
+			<Section
+				fullWidth={true}
+				sectionId={sectionId}
+				padSides={false}
+				element="section"
+				containerName={containerName}
+				ophanComponentLink={ophanComponentLink}
+				ophanComponentName={ophanComponentName}
+				hasPageSkin={hasPageSkin}
+				/**
+				 * dumathoin?
+				 * https://github.com/guardian/frontend/pull/17625
+				 * https://forgottenrealms.fandom.com/wiki/Dumathoin
+				 */
+				className={'dumathoin'}
+			>
+				<Container hasPageSkin={hasPageSkin}>
+					<LeftColumn hasPageSkin={hasPageSkin}>
+						<div>
+							<LabsContainerHeader
+								summaryBackgroundColour={
+									sourcePalette.neutral[0]
+								}
+								summaryTextColour={sourcePalette.neutral[97]}
+								summaryTextSecondaryColour={
+									sourcePalette.labs[400]
+								}
+								hasPageSkin={hasPageSkin}
 							/>
-						</Island>
-					)}
-					{badge && (
-						<div css={badgeStyles}>
-							<div
-								css={paidForByStyles(
-									overrides.text.containerFooter,
-								)}
-							>
-								Paid for by
-							</div>
-							<Badge
-								imageSrc={badge.imageSrc}
-								href={badge.href}
-								ophanComponentLink={`labs-logo | ${ophanComponentName}`}
-								ophanComponentName={`labs-logo-${ophanComponentName}`}
-								isInLabsSection={true}
-							/>
+							<GuardianLabsTitle title={title} url={url} />
 						</div>
-					)}
-				</Content>
-			</Container>
-		</Section>
+
+						<Link
+							href={`https://www.theguardian.com/guardian-labs${getLabsUrlSuffix(
+								editionId,
+							)}`}
+							cssOverrides={css`
+								text-align: right;
+							`}
+						>
+							<LabsLogo />
+						</Link>
+					</LeftColumn>
+					<Content hasPageSkin={hasPageSkin}>
+						{children}
+						{canShowMore && (
+							<Island
+								priority="feature"
+								defer={{ until: 'interaction' }}
+							>
+								<ShowMore
+									title={title}
+									sectionId={sectionId}
+									collectionId={collectionId}
+									pageId={pageId}
+									ajaxUrl={ajaxUrl}
+									containerPalette={'Branded'}
+									showAge={true}
+									discussionApiUrl={discussionApiUrl}
+									editionId={editionId}
+								/>
+							</Island>
+						)}
+						{badge && (
+							<div css={badgeStyles}>
+								<div css={paidForByStyles}>Paid for by</div>
+								<Badge
+									imageSrc={badge.imageSrc}
+									href={badge.href}
+									ophanComponentLink={`labs-logo | ${ophanComponentName}`}
+									ophanComponentName={`labs-logo-${ophanComponentName}`}
+									isInLabsSection={true}
+								/>
+							</div>
+						)}
+					</Content>
+				</Container>
+			</Section>
+		</ContainerOverrides>
 	);
 };

@@ -614,7 +614,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
-					fontColour={themePalette('--article-section-title')}
 					innerBackgroundColour={themePalette(
 						'--article-inner-background',
 					)}
@@ -1016,7 +1015,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							'--article-section-background',
 						)}
 						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
@@ -1099,7 +1097,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							'--article-section-background',
 						)}
 						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island

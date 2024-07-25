@@ -115,10 +115,16 @@ export const Details = ({
 			{label}
 			{/* We use these spans to show/hide the icons based on open state */}
 			<span data-icon="chevronDown">
-				<SvgChevronDownSingle size="xsmall" />
+				<SvgChevronDownSingle
+					size="xsmall"
+					theme={{ fill: 'currentColor' }}
+				/>
 			</span>
 			<span data-icon="chevronUp">
-				<SvgChevronUpSingle size="xsmall" />
+				<SvgChevronUpSingle
+					size="xsmall"
+					theme={{ fill: 'currentColor' }}
+				/>
 			</span>
 		</summary>
 		<Position positionStyles={positionStyles}>{children}</Position>

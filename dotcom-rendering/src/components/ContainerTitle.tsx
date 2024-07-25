@@ -5,23 +5,18 @@ import {
 	body,
 	headlineBold17,
 	headlineBold24,
-	palette,
 	space,
 	until,
 } from '@guardian/source/foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { type EditionId, getEditionFromId } from '../lib/edition';
 import { palette as schemePalette } from '../palette';
-import type { DCRContainerPalette } from '../types/front';
-import type { Colour } from '../types/palette';
 import { localisedTitle } from './Localisation';
 
 type Props = {
 	title?: string;
-	fontColour?: string;
 	description?: string;
+	fontColour?: string;
 	url?: string;
-	containerPalette?: DCRContainerPalette;
 	showDateHeader?: boolean;
 	editionId?: EditionId;
 	lightweightHeader?: boolean;
@@ -31,9 +26,8 @@ const linkStyles = css`
 	text-decoration: none;
 `;
 
-const headerStyles = (fontColour?: string) => css`
+const headerStyles = css`
 	${headlineBold24};
-	color: ${fontColour ?? schemePalette('--article-section-title')};
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
@@ -45,15 +39,15 @@ const headerStylesWithUrl = css`
 	}
 `;
 
-const descriptionStyles = (fontColour?: string) => css`
+const descriptionStyles = css`
 	${body.medium({ fontWeight: 'medium', lineHeight: 'tight' })};
-	color: ${fontColour ?? palette.neutral[46]};
+	color: ${schemePalette('--section-description')};
 	p {
 		/* Handle paragraphs in the description */
 		margin-bottom: ${space[3]}px;
 	}
 	a {
-		color: ${palette.neutral[7]};
+		color: inherit;
 		text-decoration: none;
 	}
 `;
@@ -66,9 +60,9 @@ const marginStyles = css`
 	margin-left: 0;
 `;
 
-const dateTextStyles = (color: Colour) => css`
+const dateTextStyles = css`
 	${headlineBold17};
-	color: ${color};
+	color: ${schemePalette('--section-date')};
 	${until.tablet} {
 		display: none;
 	}
@@ -93,17 +87,13 @@ const dateStyles = css`
 export const ContainerTitle = ({
 	title,
 	lightweightHeader,
-	fontColour,
 	description,
 	url,
-	containerPalette,
 	showDateHeader,
 	editionId,
+	fontColour = schemePalette('--article-section-title'),
 }: Props) => {
 	if (!title) return null;
-
-	const overrides =
-		containerPalette && decideContainerOverrides(containerPalette);
 
 	const now = new Date();
 
@@ -118,9 +108,10 @@ export const ContainerTitle = ({
 					data-link-name="section heading"
 				>
 					<h2
+						style={{ color: fontColour }}
 						css={[
 							headerStylesWithUrl,
-							headerStyles(fontColour),
+							headerStyles,
 							lightweightHeader && article17,
 						]}
 					>
@@ -129,27 +120,21 @@ export const ContainerTitle = ({
 				</a>
 			) : (
 				<h2
-					css={[
-						headerStyles(fontColour),
-						lightweightHeader && article17,
-					]}
+					style={{ color: fontColour }}
+					css={[headerStyles, lightweightHeader && article17]}
 				>
 					{localisedTitle(title, editionId)}
 				</h2>
 			)}
 			{!!description && (
 				<div
-					css={[descriptionStyles(fontColour), bottomMargin]}
+					css={[descriptionStyles, bottomMargin]}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
 			)}
 			{showDateHeader && editionId && (
 				<div css={dateStyles}>
-					<span
-						css={dateTextStyles(
-							overrides?.text.containerDate ?? palette.neutral[0],
-						)}
-					>
+					<span css={dateTextStyles}>
 						{now.toLocaleString('en-GB', {
 							weekday: 'long',
 							timeZone,
@@ -160,10 +145,7 @@ export const ContainerTitle = ({
 							css`
 								display: block;
 							`,
-							dateTextStyles(
-								overrides?.text.containerDate ??
-									palette.news[400],
-							),
+							dateTextStyles,
 							bottomMargin,
 						]}
 					>

@@ -445,13 +445,11 @@ const containerPalettes = [
 export const WithContainerOverrides: StoryObj = ({ format }: StoryProps) => (
 	<>
 		{containerPalettes.map((containerPalette) => (
-			<Section
+			<ContainerOverrides
 				key={containerPalette}
-				fullWidth={true}
-				showSideBorders={false}
 				containerPalette={containerPalette}
 			>
-				<ContainerOverrides containerPalette={containerPalette}>
+				<Section fullWidth={true} showSideBorders={false}>
 					<CardHeadline
 						headlineText={`This is a ${
 							Pillar[format.theme] ??
@@ -462,8 +460,8 @@ export const WithContainerOverrides: StoryObj = ({ format }: StoryProps) => (
 						byline={`inside a ${containerPalette} container`}
 						showByline={true}
 					/>
-				</ContainerOverrides>
-			</Section>
+				</Section>
+			</ContainerOverrides>
 		))}
 	</>
 );

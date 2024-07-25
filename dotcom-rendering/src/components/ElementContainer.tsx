@@ -31,10 +31,6 @@ const topBorderStyles = css`
 	border-color: ${palette('--article-border')};
 `;
 
-const setBackgroundColour = (colour: string) => css`
-	background-color: ${colour};
-`;
-
 type Props = {
 	sectionId?: string;
 	showSideBorders?: boolean;
@@ -111,13 +107,12 @@ export const ElementContainer = ({
 				id={sectionId}
 				style={{
 					borderColor: borderColour,
+					backgroundColor: innerBackgroundColour,
 				}}
 				css={[
 					shouldCenter && center,
 					showSideBorders && sideBorderStyles,
 					showTopBorder && topBorderStyles,
-					innerBackgroundColour &&
-						setBackgroundColour(innerBackgroundColour),
 					padSides && sidePadding,
 					padBottom && bottomPadding,
 					hasPageSkin && pageSkinContainer,

@@ -6617,9 +6617,33 @@ const paletteColours = {
 		light: richLinkTextLight,
 		dark: richLinkTextDark,
 	},
+	'--section-background': {
+		light: () => 'transparent',
+		dark: () => 'transparent',
+	},
+	'--section-background-left': {
+		light: () => 'transparent',
+		dark: () => 'transparent',
+	},
+	'--section-date': {
+		light: () => sourcePalette.news[400],
+		dark: () => sourcePalette.news[600],
+	},
+	'--section-description': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[73],
+	},
 	'--section-title-background': {
 		light: sectionTitleBackgroundLight,
 		dark: sectionTitleBackgroundLight,
+	},
+	'--section-toggle-button': {
+		light: () => sourcePalette.neutral[46],
+		dark: () => sourcePalette.neutral[60],
+	},
+	'--section-toggle-button-hover': {
+		light: () => sourcePalette.neutral[7],
+		dark: () => sourcePalette.neutral[93],
 	},
 	'--series-title-background': {
 		light: seriesTitleBackgroundLight,

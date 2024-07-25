@@ -216,21 +216,9 @@ export const DecideContainer = ({
 				/>
 			);
 		case 'nav/list':
-			return (
-				<NavList
-					trails={trails}
-					containerPalette={containerPalette}
-					showImage={false}
-				/>
-			);
+			return <NavList trails={trails} showImage={false} />;
 		case 'nav/media-list':
-			return (
-				<NavList
-					trails={trails}
-					containerPalette={containerPalette}
-					showImage={true}
-				/>
-			);
+			return <NavList trails={trails} showImage={true} />;
 		case 'fixed/highlights':
 			// TODO - Implement Highlights container definition
 			return null;

@@ -2,9 +2,7 @@ import { css } from '@emotion/react';
 import { articleBold17, breakpoints } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { palette } from '../palette';
-import type { DCRContainerPalette } from '../types/front';
 import type { TrailType } from '../types/trails';
-import { ContainerOverrides } from './ContainerOverrides';
 import { generateSources } from './Picture';
 
 const imageStyles = css`
@@ -23,7 +21,6 @@ const linkStyles = css`
 type Props = {
 	trail: TrailType;
 	showImage: boolean;
-	containerPalette?: DCRContainerPalette;
 };
 
 type MiniCardPictureProps = {
@@ -61,22 +58,16 @@ const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
  *
  * Primarily used for rendering Snaps in containers such as {@linkcode NavList}
  */
-export const MiniCard = ({ trail, showImage, containerPalette }: Props) => {
+export const MiniCard = ({ trail, showImage }: Props) => {
 	return (
-		<ContainerOverrides containerPalette={containerPalette}>
-			<Link
-				href={trail.url}
-				priority="secondary"
-				cssOverrides={[linkStyles]}
-			>
-				{showImage && !!trail.image && (
-					<MiniCardPicture
-						image={trail.image.src}
-						alt={trail.image.altText || trail.headline}
-					/>
-				)}
-				<span>{trail.headline}</span>
-			</Link>
-		</ContainerOverrides>
+		<Link href={trail.url} priority="secondary" cssOverrides={[linkStyles]}>
+			{showImage && !!trail.image && (
+				<MiniCardPicture
+					image={trail.image.src}
+					alt={trail.image.altText || trail.headline}
+				/>
+			)}
+			<span>{trail.headline}</span>
+		</Link>
 	);
 };
