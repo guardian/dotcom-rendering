@@ -36,6 +36,7 @@ const gridContainer = css`
 		height: 194px;
 	}
 	${from.desktop} {
+		width: 300px;
 		grid-template-areas:
 			'headline 	image'
 			'media-icon image';
