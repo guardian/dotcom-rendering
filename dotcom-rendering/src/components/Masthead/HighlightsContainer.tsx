@@ -77,7 +77,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 		}
 
 		${from.desktop} {
-			grid-template-columns: repeat(${totalCards}, calc((100%) / 3));
+			grid-template-columns: repeat(${totalCards}, 1fr);
 		}
 	`;
 };
