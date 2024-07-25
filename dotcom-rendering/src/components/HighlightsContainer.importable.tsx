@@ -72,12 +72,17 @@ const verticalLineStyles = css`
 const buttonContainerStyles = css`
 	position: absolute;
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	height: 100%;
 	width: calc(100% - 40px); // is there a better way to do this?
 	top: 0;
-	justify-content: space-between;
-	align-items: center;
 	pointer-events: none;
+`;
+
+const buttonStyles = css`
+	z-index: 1;
+	pointer-events: all;
 `;
 
 /**
@@ -166,24 +171,56 @@ export const HighlightsContainer = ({ trails }: Props) => {
 
 			<Hide until={'tablet'}>
 				<div css={buttonContainerStyles}>
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronLeftSingle />}
-						onClick={() => scrollTo('left')}
-						aria-label="Move highlights carousel backwards"
-						data-link-name="highlights carousel left chevron"
-						size="small"
-					/>
-					<Button
-						hideLabel={true}
-						iconSide="left"
-						icon={<SvgChevronRightSingle />}
-						onClick={() => scrollTo('right')}
-						aria-label="Move highlights carousel forwards"
-						data-link-name="highlights carousel right chevron"
-						size="small"
-					/>
+					<div
+						css={css`
+							width: 60px;
+							height: 100%;
+							display: flex;
+							align-items: center;
+							background: linear-gradient(
+								to right,
+								#f6f6f6 0%,
+								rgba(250, 250, 250, 0.6) 60%,
+								rgba(255, 255, 255, 0) 100%
+							);
+						`}
+					>
+						<Button
+							css={buttonStyles}
+							hideLabel={true}
+							iconSide="left"
+							icon={<SvgChevronLeftSingle />}
+							onClick={() => scrollTo('left')}
+							aria-label="Move highlights carousel backwards"
+							data-link-name="highlights carousel left chevron"
+							size="small"
+						/>
+					</div>
+					<div
+						css={css`
+							width: 60px;
+							height: 100%;
+							display: flex;
+							align-items: center;
+							background: linear-gradient(
+								to left,
+								#f6f6f6 0%,
+								rgba(250, 250, 250, 0.6) 60%,
+								rgba(255, 255, 255, 0) 100%
+							);
+						`}
+					>
+						<Button
+							css={buttonStyles}
+							hideLabel={true}
+							iconSide="left"
+							icon={<SvgChevronRightSingle />}
+							onClick={() => scrollTo('right')}
+							aria-label="Move highlights carousel forwards"
+							data-link-name="highlights carousel right chevron"
+							size="small"
+						/>
+					</div>
 				</div>
 			</Hide>
 		</div>
