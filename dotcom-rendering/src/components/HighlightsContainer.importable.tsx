@@ -5,7 +5,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -90,24 +90,27 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 export const HighlightsContainer = ({ trails }: Props) => {
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
-	const carousel = useRef<HTMLOListElement | null>(null);
-	const card = useRef<HTMLLIElement | null>(null);
 
-	const goPrevious = () => {
-		if (carousel.current && card.current) {
-			carousel.current.scrollLeft -= card.current?.offsetWidth || 0;
+	const carouselRef = useRef<HTMLOListElement | null>(null);
+
+	const cardWidth = useMemo(() => {
+		if (carouselRef.current) {
+			return carouselRef.current.querySelector('li')?.offsetWidth || 0;
 		}
-	};
-	const goNext = () => {
-		if (carousel.current && card.current) {
-			carousel.current.scrollLeft += card.current?.offsetWidth || 0;
+		return 0;
+	}, [carouselLength]);
+
+	const scrollTo = (direction: 'left' | 'right') => {
+		if (carouselRef.current) {
+			const offset = direction === 'left' ? -cardWidth : cardWidth;
+			carouselRef.current.scrollLeft += offset;
 		}
 	};
 
 	return (
 		<div>
 			<ol
-				ref={carousel}
+				ref={carouselRef}
 				css={[
 					carouselStyles,
 					generateCarouselColumnStyles(carouselLength),
@@ -118,7 +121,6 @@ export const HighlightsContainer = ({ trails }: Props) => {
 						<li
 							key={trail.url}
 							css={[itemStyles, verticalLineStyles]}
-							ref={card}
 						>
 							<HighlightsCard
 								format={trail.format}
@@ -143,18 +145,18 @@ export const HighlightsContainer = ({ trails }: Props) => {
 					hideLabel={true}
 					iconSide="left"
 					icon={<SvgChevronLeftSingle />}
-					onClick={goPrevious}
-					aria-label="Move key events carousel backwards"
-					data-link-name="key event carousel left chevron"
+					onClick={() => scrollTo('left')}
+					aria-label="Move highlights carousel backwards"
+					data-link-name="highlights carousel left chevron"
 					size="small"
 				/>
 				<Button
 					hideLabel={true}
 					iconSide="left"
 					icon={<SvgChevronRightSingle />}
-					onClick={goNext}
-					aria-label="Move key events carousel forwards"
-					data-link-name="key event carousel right chevron"
+					onClick={() => scrollTo('right')}
+					aria-label="Move highlights carousel forwards"
+					data-link-name="highlights carousel right chevron"
 					size="small"
 				/>
 			</>
