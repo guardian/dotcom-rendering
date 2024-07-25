@@ -103,9 +103,7 @@ const borderRadius = css`
 `;
 
 const circularStyles = css`
-	& > * {
-		border-radius: 100%;
-	}
+	border-radius: 100%;
 	object-fit: cover;
 	height: 100%;
 	width: 100%;
