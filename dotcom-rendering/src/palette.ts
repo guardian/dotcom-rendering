@@ -4111,10 +4111,65 @@ const subMetaTextHoverLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
-const syndicationButtonText: PaletteFunction = ({ design, theme }) => {
+const syndicationButtonTextLight: PaletteFunction = ({ design, theme }) => {
 	switch (theme) {
 		case ArticleSpecial.Labs:
 			return sourcePalette.neutral[7];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[100];
+		case ArticleSpecial.SpecialReportAlt:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.specialReportAlt[100];
+			}
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+
+const syndicationButtonTextDark: PaletteFunction = ({ design, theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[86];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[800];
+		case ArticleSpecial.SpecialReportAlt:
+			switch (design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return sourcePalette.neutral[46];
+				default:
+					return sourcePalette.specialReportAlt[100];
+			}
+		default:
+			return sourcePalette.neutral[46];
+	}
+};
+
+const syndicationButtonHoverLight: PaletteFunction = ({ design, theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[60];
+		case ArticleSpecial.SpecialReportAlt:
+			switch (design) {
+				case ArticleDesign.DeadBlog:
+				case ArticleDesign.LiveBlog:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.specialReportAlt[100];
+			}
+		default:
+			return sourcePalette.neutral[86];
+	}
+};
+
+const syndicationButtonHoverDark: PaletteFunction = ({ design, theme }) => {
+	switch (theme) {
+		case ArticleSpecial.Labs:
+			return sourcePalette.neutral[38];
 		case ArticleSpecial.SpecialReport:
 			return sourcePalette.specialReport[100];
 		case ArticleSpecial.SpecialReportAlt:
@@ -6817,9 +6872,13 @@ const paletteColours = {
 		light: syndicationButtonBorder,
 		dark: syndicationButtonBorder,
 	},
+	'--syndication-button-hover': {
+		light: syndicationButtonHoverLight,
+		dark: syndicationButtonHoverDark,
+	},
 	'--syndication-button-text': {
-		light: syndicationButtonText,
-		dark: syndicationButtonText,
+		light: syndicationButtonTextLight,
+		dark: syndicationButtonTextDark,
 	},
 	'--table-of-contents': {
 		light: tableOfContentsLight,
