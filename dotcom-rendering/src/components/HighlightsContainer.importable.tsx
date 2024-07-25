@@ -15,7 +15,7 @@ type Props = { trails: DCRFrontCard[] };
 
 const containerStyles = css`
 	${from.tablet} {
-		padding: 0 20px;
+		padding: 0 10px 0 20px;
 	}
 `;
 const carouselStyles = css`
@@ -44,12 +44,17 @@ const itemStyles = css`
 	position: relative;
 	margin: ${space[3]}px 10px;
 	:first-child {
-		padding-left: 10px;
+		${until.tablet} {
+			padding-left: 10px;
+		}
+		${from.tablet} {
+			margin-left: 0px;
+		}
 	}
 `;
 
 const verticalLineStyles = css`
-	::after {
+	:not(:last-child)::after {
 		content: '';
 		position: absolute;
 		top: 0;
