@@ -5,7 +5,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useMemo, useRef } from 'react';
+import { useRef } from 'react';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -88,22 +88,19 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 };
 
 export const HighlightsContainer = ({ trails }: Props) => {
+	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
 
-	const carouselRef = useRef<HTMLOListElement | null>(null);
-
-	const cardWidth = useMemo(() => {
-		if (carouselRef.current) {
-			return carouselRef.current.querySelector('li')?.offsetWidth || 0;
-		}
-		return 0;
-	}, [carouselLength]);
-
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (carouselRef.current) {
+			const cardWidth =
+				carouselRef.current.querySelector('li')?.offsetWidth || 0;
 			const offset = direction === 'left' ? -cardWidth : cardWidth;
-			carouselRef.current.scrollLeft += offset;
+			carouselRef.current.scrollBy({
+				left: offset,
+				behavior: 'smooth',
+			});
 		}
 	};
 
@@ -116,7 +113,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 					generateCarouselColumnStyles(carouselLength),
 				]}
 			>
-				{trails.map((trail, index) => {
+				{trails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
