@@ -54,9 +54,6 @@ const logoStyles = css`
 	${from.mobileLandscape} {
 		margin-bottom: 8px;
 	}
-	${from.desktop} {
-		margin-bottom: 10px;
-	}
 
 	svg {
 		width: 152px;
@@ -64,7 +61,7 @@ const logoStyles = css`
 			width: 207px;
 		}
 		${from.tablet} {
-			width: 297px;
+			width: 252px;
 		}
 		${from.desktop} {
 			width: 291px;
@@ -75,7 +72,7 @@ const logoStyles = css`
 const logoStylesWithoutPageSkin = css`
 	svg {
 		${from.leftCol} {
-			width: 356px;
+			width: 324px;
 		}
 	}
 `;
