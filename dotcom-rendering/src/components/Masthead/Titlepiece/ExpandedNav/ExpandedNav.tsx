@@ -8,8 +8,11 @@ import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
-import { navInputCheckboxId } from '../constants';
-import { VeggieBurgerMenu } from '../VeggieBurger';
+import {
+	expandedMenu,
+	expandedMenuRoot,
+	navInputCheckboxId,
+} from '../constants';
 import { Sections } from './Sections';
 
 const wrapperMainMenuStyles = css`
@@ -62,7 +65,7 @@ const mainMenuStyles = css`
 	background-color: ${themePalette('--masthead-nav-background')};
 	box-sizing: border-box;
 	${textSans20};
-	margin-right: 29px;
+	margin-right: 28px;
 	left: 0;
 	top: 0;
 	${getZIndex('expanded-veggie-menu')}
@@ -116,10 +119,9 @@ export const ExpandedNav = ({
 	hasPageSkin,
 }: Props) => {
 	return (
-		<div id="expanded-menu-root">
-			<VeggieBurgerMenu isImmersive={isImmersive} />
+		<div id={expandedMenuRoot}>
 			<div
-				id="expanded-menu"
+				id={expandedMenu}
 				data-testid="expanded-menu"
 				css={wrapperMainMenuStyles}
 			>

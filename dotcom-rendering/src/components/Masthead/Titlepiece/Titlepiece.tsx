@@ -5,6 +5,7 @@ import {
 	textSansBold14,
 	textSansBold17,
 	until,
+	visuallyHidden,
 } from '@guardian/source/foundations';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -20,6 +21,7 @@ import {
 	veggieBurgerId,
 } from './constants';
 import { EditionDropdown } from './EditionDropdown';
+import { ExpandedNav } from './ExpandedNav/ExpandedNav';
 import { Grid } from './Grid';
 import { Logo } from './Logo';
 import { Pillars } from './Pillars';
@@ -235,6 +237,7 @@ export const Titlepiece = ({
 			style={{
 				backgroundColor: themePalette('--masthead-nav-background'),
 				color: themePalette('--masthead-nav-link-text'),
+				zIndex: 1,
 			}}
 			hasPageSkin={hasPageSkin}
 		>
@@ -292,13 +295,13 @@ export const Titlepiece = ({
 
                           if(!navInputCheckbox.checked) {
 							firstColLabel.setAttribute('aria-expanded', 'false')
-                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger : show')
+                            veggieBurger.setAttribute('data-link-name','header : veggie-burger : show')
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','-1')
                             })
                           } else {
 							firstColLabel.setAttribute('aria-expanded', 'true')
-                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger : hide')
+                            veggieBurger.setAttribute('data-link-name','header : veggie-burger : hide')
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','0')
                             })
@@ -337,6 +340,22 @@ export const Titlepiece = ({
 				}}
 			/>
 
+			{/** Expanded menu checkbox */}
+			<input
+				type="checkbox"
+				css={css`
+					${visuallyHidden};
+				`}
+				id={navInputCheckboxId}
+				name="more"
+				tabIndex={-1}
+				key="OpenExpandedMenuCheckbox"
+				aria-hidden="true"
+				role="button"
+				aria-expanded="false"
+				aria-haspopup="true"
+			/>
+
 			{/* Edition switcher menu */}
 			<div css={editionSwitcherMenuStyles}>
 				<EditionDropdown
@@ -353,13 +372,11 @@ export const Titlepiece = ({
 			<div css={[logoStyles, !hasPageSkin && logoStylesWithoutPageSkin]}>
 				<Logo />
 			</div>
-
 			{editionId === 'UK' && (
 				<span css={accreditationStyles}>News provider of the year</span>
 			)}
 
 			{/* Pillars nav */}
-			{/* <nav> */}
 			<div
 				css={[
 					pillarsNavStyles,
@@ -382,8 +399,19 @@ export const Titlepiece = ({
 				/>
 			</div>
 
-			<div id={expandedMenuRoot} css={burgerStyles}>
-				<BurgerMenu
+			<div css={burgerStyles}>
+				<BurgerMenu />
+			</div>
+
+			<div
+				css={css`
+					${gridContent}
+					/** FIXME */
+					margin-top: -1px;
+					padding-right: 2px;
+				`}
+			>
+				<ExpandedNav
 					isImmersive={isImmersive}
 					nav={nav}
 					editionId={editionId}
@@ -404,7 +432,6 @@ export const Titlepiece = ({
 					/>
 				</div>
 			)}
-			{/* </nav> */}
 		</Grid>
 	);
 };
