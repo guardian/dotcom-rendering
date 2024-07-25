@@ -14,8 +14,8 @@ export type HighlightsCardProps = {
 	format: ArticleFormat;
 	headlineText: string;
 	// showQuotedHeadline?: boolean;
-	image: DCRFrontImage;
-	imageLoading: Loading;
+	image?: DCRFrontImage;
+	imageLoading?: Loading;
 	avatarUrl?: string;
 	mainMedia?: MainMedia;
 	kickerText?: string;
@@ -86,7 +86,7 @@ export const HighlightsCard = ({
 	headlineText,
 	// showQuotedHeadline,
 	image,
-	imageLoading,
+	imageLoading = 'lazy',
 	avatarUrl,
 	mainMedia,
 	kickerText,
@@ -114,7 +114,7 @@ export const HighlightsCard = ({
 			<div css={imageArea}>
 				{avatarUrl ? (
 					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
-				) : (
+				) : image ? (
 					<CardPicture
 						imageSize="medium"
 						mainImage={image.src}
@@ -122,7 +122,7 @@ export const HighlightsCard = ({
 						loading={imageLoading}
 						isCircular={true}
 					/>
-				)}
+				) : null}
 			</div>
 		</div>
 	);

@@ -84,6 +84,8 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 
 export const HighlightsContainer = ({ trails }: Props) => {
 	const carouselLength = trails.length;
+	const imageLoading = 'eager';
+
 	return (
 		<ol
 			css={[carouselStyles, generateCarouselColumnStyles(carouselLength)]}
@@ -97,6 +99,8 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							kickerText={trail.kickerText}
 							avatarUrl={trail.avatarUrl}
 							byline={trail.byline}
+							image={trail.image}
+							imageLoading={imageLoading}
 						/>
 					</li>
 				);
