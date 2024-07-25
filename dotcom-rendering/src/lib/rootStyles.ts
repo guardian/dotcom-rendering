@@ -29,10 +29,12 @@ export const rootStyles = (
 		${darkModeAvailable
 			? css`
 					@media (prefers-color-scheme: dark) {
-						${paletteDeclarations(format, 'dark')}
-						body {
-							color: ${sourcePalette.neutral[86]};
-							background: ${sourcePalette.neutral[7]};
+						:root:not([data-color-scheme='light']) {
+							${paletteDeclarations(format, 'dark')}
+							body {
+								color: ${sourcePalette.neutral[86]};
+								background: ${sourcePalette.neutral[7]};
+							}
 						}
 					}
 			  `
