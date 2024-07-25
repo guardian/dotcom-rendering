@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 import { trails } from '../../../fixtures/manual/highlights-trails';
-import { HighlightsContainer } from './HighlightsContainer';
+import { HighlightsContainer } from '../HighlightsContainer.importable';
 
 export default {
 	title: 'Masthead/HighlightsContainer',
