@@ -14,7 +14,7 @@ type Props = {
 	loading: Loading;
 	alt?: string;
 	roundedCorners?: boolean;
-	isHighlightsCardImage?: boolean;
+	isCircular?: boolean;
 };
 
 /**
@@ -102,8 +102,10 @@ const borderRadius = css`
 	}
 `;
 
-const highlightsCardImage = css`
-	border-radius: 100%;
+const circularStyles = css`
+	& > * {
+		border-radius: 100%;
+	}
 	object-fit: cover;
 	height: 100%;
 	width: 100%;
@@ -115,7 +117,7 @@ export const CardPicture = ({
 	imageSize,
 	loading,
 	roundedCorners,
-	isHighlightsCardImage,
+	isCircular,
 }: Props) => {
 	const sources = generateSources(mainImage, decideImageWidths(imageSize));
 
@@ -128,7 +130,7 @@ export const CardPicture = ({
 				block,
 				aspectRatio,
 				roundedCorners && borderRadius,
-				isHighlightsCardImage && highlightsCardImage,
+				isCircular && circularStyles,
 			]}
 		>
 			{sources.map((source) => {
@@ -151,7 +153,7 @@ export const CardPicture = ({
 			<img
 				alt={alt ?? ''}
 				src={fallbackSource.lowResUrl}
-				css={[block, isHighlightsCardImage && highlightsCardImage]}
+				css={[block, isCircular && circularStyles]}
 				loading={loading}
 				data-chromatic="ignore"
 			/>

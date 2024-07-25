@@ -120,7 +120,7 @@ export const HighlightsCard = ({
 						mainImage={image.src}
 						alt={image.altText}
 						loading={imageLoading}
-						isHighlightsCardImage={true}
+						isCircular={true}
 					/>
 				)}
 			</div>
