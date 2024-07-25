@@ -1,5 +1,12 @@
 import { css } from '@emotion/react';
-import { from, headlineBold14, space } from '@guardian/source/foundations';
+import {
+	from,
+	headlineBold14,
+	space,
+	textSansBold14,
+	textSansBold17,
+	until,
+} from '@guardian/source/foundations';
 import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -36,6 +43,29 @@ const editionSwitcherMenuStyles = css`
 	grid-row: 1;
 	${from.mobileMedium} {
 		justify-self: end;
+	}
+`;
+
+const accreditationStyles = css`
+	${gridContent}
+	grid-row: 1;
+	justify-self: start;
+	align-self: start;
+	display: flex;
+	flex-wrap: wrap;
+	padding-top: 10px;
+	color: ${themePalette('--masthead-accreditation-text')};
+
+	${textSansBold14}
+	${from.leftCol} {
+		${textSansBold17}
+	}
+
+	${until.mobileMedium} {
+		display: none;
+	}
+	${until.mobileLandscape} {
+		max-width: 100px;
 	}
 `;
 
@@ -221,6 +251,10 @@ export const Titlepiece = ({
 			<div css={[logoStyles, !hasPageSkin && logoStylesWithoutPageSkin]}>
 				<Logo />
 			</div>
+
+			{editionId === 'UK' && (
+				<span css={accreditationStyles}>News provider of the year</span>
+			)}
 
 			{/* Pillars nav */}
 			<nav
