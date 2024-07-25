@@ -7,7 +7,6 @@ import {
 	from,
 	space,
 	textSans15,
-	textSans17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -42,8 +41,6 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans17};
-
 	${expandedNavLinkStyles};
 
 	:hover,
@@ -63,7 +60,6 @@ export const mainMenuLinkStyle = css`
 `;
 
 export const columnLinks = css`
-	${textSans15};
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;

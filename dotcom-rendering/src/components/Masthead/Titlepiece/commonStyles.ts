@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source/foundations';
+import { from, space, textSans15 } from '@guardian/source/foundations';
 import { palette } from '../../../palette';
 
 /**
@@ -35,6 +35,7 @@ export const expandedNavLinkStyles = css`
 	cursor: pointer;
 	width: 100%;
 	color: ${palette('--masthead-nav-link-text')};
+	${textSans15}
 	text-decoration: none;
 	padding: ${space[2]}px ${space[8]}px ${space[2]}px ${space[12]}px;
 

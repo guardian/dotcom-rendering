@@ -344,7 +344,7 @@ export const Titlepiece = ({
 			<input
 				type="checkbox"
 				css={css`
-					${visuallyHidden};
+					/* ${visuallyHidden}; */
 				`}
 				id={navInputCheckboxId}
 				name="more"
@@ -406,9 +406,7 @@ export const Titlepiece = ({
 			<div
 				css={css`
 					${gridContent}
-					/** FIXME */
 					margin-top: -1px;
-					padding-right: 2px;
 				`}
 			>
 				<ExpandedNav

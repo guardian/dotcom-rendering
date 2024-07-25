@@ -3,7 +3,7 @@
  * This file was largely copied from src/components/Nav/ExpandedMenu/MoreColumn.tsx
  */
 import { css } from '@emotion/react';
-import { from, space, textSans17 } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
@@ -19,7 +19,6 @@ const hideDesktop = css`
 `;
 
 const columnStyle = css`
-	${textSans17};
 	${listAccessibility};
 	margin: 0;
 	padding-bottom: 10px;
@@ -90,7 +89,6 @@ const pillarDividerExtended = css`
 `;
 
 const columnLinks = css`
-	${textSans17};
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
@@ -110,7 +108,6 @@ const columnLinks = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans17};
 	${expandedNavLinkStyles};
 
 	:hover,
