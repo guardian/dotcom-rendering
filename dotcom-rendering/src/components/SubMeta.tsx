@@ -120,8 +120,6 @@ type Props = {
 
 const syndicationButtonOverrides = css`
 	> a {
-		color: ${palette('--syndication-button-text')};
-		border-color: ${palette('--syndication-button-border')};
 		font-weight: normal;
 	}
 `;
@@ -197,6 +195,17 @@ export const SubMeta = ({
 								target="_blank"
 								rel="noreferrer"
 								title="Reuse this content"
+								theme={{
+									textTertiary: palette(
+										'--syndication-button-text',
+									),
+									borderTertiary: palette(
+										'--syndication-button-border',
+									),
+									backgroundTertiaryHover: palette(
+										'--syndication-button-hover',
+									),
+								}}
 							>
 								Reuse this content
 							</LinkButton>
