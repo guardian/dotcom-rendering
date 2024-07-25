@@ -27,7 +27,9 @@ const carouselStyles = css`
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overscroll-behavior: contain;
-	scroll-padding-left: 10px;
+	${until.desktop} {
+		scroll-padding-left: 10px;
+	}
 	/**
 	* Hide scrollbars
 	* See: https://stackoverflow.com/a/38994837
@@ -36,6 +38,7 @@ const carouselStyles = css`
 		display: none; /* Safari and Chrome */
 	}
 	scrollbar-width: none; /* Firefox */
+	position: relative;
 `;
 
 const itemStyles = css`
@@ -64,6 +67,17 @@ const verticalLineStyles = css`
 		background-color: ${palette('--card-border-top')};
 		transform: translateX(-50%);
 	}
+`;
+
+const buttonContainerStyles = css`
+	position: absolute;
+	display: flex;
+	height: 100%;
+	width: calc(100% - 40px); // is there a better way to do this?
+	top: 0;
+	justify-content: space-between;
+	align-items: center;
+	pointer-events: none;
 `;
 
 /**
@@ -151,24 +165,26 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			</ol>
 
 			<Hide until={'tablet'}>
-				<Button
-					hideLabel={true}
-					iconSide="left"
-					icon={<SvgChevronLeftSingle />}
-					onClick={() => scrollTo('left')}
-					aria-label="Move highlights carousel backwards"
-					data-link-name="highlights carousel left chevron"
-					size="small"
-				/>
-				<Button
-					hideLabel={true}
-					iconSide="left"
-					icon={<SvgChevronRightSingle />}
-					onClick={() => scrollTo('right')}
-					aria-label="Move highlights carousel forwards"
-					data-link-name="highlights carousel right chevron"
-					size="small"
-				/>
+				<div css={buttonContainerStyles}>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronLeftSingle />}
+						onClick={() => scrollTo('left')}
+						aria-label="Move highlights carousel backwards"
+						data-link-name="highlights carousel left chevron"
+						size="small"
+					/>
+					<Button
+						hideLabel={true}
+						iconSide="left"
+						icon={<SvgChevronRightSingle />}
+						onClick={() => scrollTo('right')}
+						aria-label="Move highlights carousel forwards"
+						data-link-name="highlights carousel right chevron"
+						size="small"
+					/>
+				</div>
 			</Hide>
 		</div>
 	);
