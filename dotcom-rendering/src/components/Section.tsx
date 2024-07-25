@@ -266,7 +266,7 @@ export const Section = ({
 				padBottom={padBottom}
 				borderColour={borderColour ?? palette('--article-border')}
 				backgroundColour={
-					backgroundColour ?? palette('--section-background-inner')
+					backgroundColour ?? palette('--section-background')
 				}
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
@@ -293,7 +293,7 @@ export const Section = ({
 			padSides={padSides}
 			borderColour={borderColour ?? palette('--article-border')}
 			backgroundColour={
-				backgroundColour ?? palette('--section-background-inner')
+				backgroundColour ?? palette('--section-background')
 			}
 			element="section"
 			ophanComponentLink={ophanComponentLink}

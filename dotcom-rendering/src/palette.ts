@@ -6616,17 +6616,13 @@ const paletteColours = {
 		light: richLinkTextLight,
 		dark: richLinkTextDark,
 	},
-	'--section-background-inner': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[7],
+	'--section-background': {
+		light: () => 'transparent',
+		dark: () => 'transparent',
 	},
 	'--section-background-left': {
 		light: () => 'transparent',
 		dark: () => 'transparent',
-	},
-	'--section-background-outer': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[7],
 	},
 	'--section-date': {
 		light: () => sourcePalette.news[400],

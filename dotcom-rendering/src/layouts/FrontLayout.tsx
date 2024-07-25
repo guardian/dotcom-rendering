@@ -609,11 +609,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									editionId={front.editionId}
 									backgroundColour={schemePalette(
-										'--section-background-outer',
+										'--section-background',
 									)}
-									innerBackgroundColour={schemePalette(
-										'--section-background-inner',
-									)}
+									innerBackgroundColour={
+										containerPalette === 'MediaPalette'
+											? sourcePalette.neutral[0]
+											: undefined
+									}
 									hasPageSkin={hasPageSkin}
 								>
 									<Island

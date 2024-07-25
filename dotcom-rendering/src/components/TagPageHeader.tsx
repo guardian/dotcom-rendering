@@ -52,7 +52,7 @@ const fallbackStyles = css`
 `;
 
 const containerStyles = css`
-	background-color: ${schemedPalette('--section-background-inner')};
+	background-color: ${schemedPalette('--section-background')};
 	display: grid;
 
 	grid-template-rows:

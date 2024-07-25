@@ -473,9 +473,7 @@ export const FrontSection = ({
 					hasPageSkin && pageSkinContainer,
 				]}
 				style={{
-					backgroundColor: schemePalette(
-						'--section-background-inner',
-					),
+					backgroundColor: schemePalette('--section-background'),
 				}}
 			>
 				<div

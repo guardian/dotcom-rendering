@@ -460,7 +460,7 @@ const articleBorderDark: ContainerFunction = (containerPalette) => {
 const cardBackgroundLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 		case 'LongRunningPalette':
 			return sourcePalette.sport[800];
 		case 'SombrePalette':
@@ -478,7 +478,7 @@ const cardBackgroundLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[800];
 		case 'Branded':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 		case 'MediaPalette':
 			return sourcePalette.neutral[0];
 		case 'PodcastPalette':
@@ -489,21 +489,21 @@ const cardBackgroundLight: ContainerFunction = (containerPalette) => {
 const cardBackgroundDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 		case 'LongRunningPalette':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 		case 'SombrePalette':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 		case 'LongRunningAltPalette':
 			return sourcePalette.neutral[20];
 		case 'SpecialReportAltPalette':
 			return sourcePalette.specialReportAlt[100];
 		case 'Branded':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 		case 'MediaPalette':
 			return sourcePalette.neutral[0];
 		case 'BreakingPalette':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 		case 'SombreAltPalette':
 		case 'EventPalette':
 		case 'EventAltPalette':
@@ -512,42 +512,7 @@ const cardBackgroundDark: ContainerFunction = (containerPalette) => {
 	}
 };
 
-const sectionBackgroundOuterLight: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'MediaPalette':
-		case 'EventPalette':
-		case 'SombreAltPalette':
-		case 'EventAltPalette':
-		case 'InvestigationPalette':
-		case 'LongRunningAltPalette':
-		case 'LongRunningPalette':
-		case 'SombrePalette':
-		case 'BreakingPalette':
-		case 'SpecialReportAltPalette':
-		case 'Branded':
-		case 'PodcastPalette':
-			return sourcePalette.neutral[100];
-	}
-};
-const sectionBackgroundOuterDark: ContainerFunction = (containerPalette) => {
-	switch (containerPalette) {
-		case 'MediaPalette':
-			return sourcePalette.neutral[0];
-		case 'EventPalette':
-		case 'SombreAltPalette':
-		case 'EventAltPalette':
-		case 'InvestigationPalette':
-		case 'LongRunningAltPalette':
-		case 'LongRunningPalette':
-		case 'SombrePalette':
-		case 'BreakingPalette':
-		case 'SpecialReportAltPalette':
-		case 'Branded':
-		case 'PodcastPalette':
-			return sourcePalette.neutral[7];
-	}
-};
-const sectionBackgroundInnerLight: ContainerFunction = (containerPalette) => {
+const sectionBackgroundLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
 			return sourcePalette.specialReport[400];
@@ -570,16 +535,17 @@ const sectionBackgroundInnerLight: ContainerFunction = (containerPalette) => {
 		case 'Branded':
 			return sourcePalette.neutral[93];
 		case 'MediaPalette':
-			return sourcePalette.neutral[0];
+			return 'transparent';
 		case 'PodcastPalette':
 			return sourcePalette.neutral[100];
 	}
 };
-const sectionBackgroundInnerDark: ContainerFunction = (containerPalette) => {
+
+const sectionBackgroundDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'InvestigationPalette':
 		case 'BreakingPalette':
-			return sectionBackgroundInnerLight(containerPalette);
+			return sectionBackgroundLight(containerPalette);
 		case 'LongRunningPalette':
 			return sourcePalette.brand[300];
 		case 'SombrePalette':
@@ -597,7 +563,7 @@ const sectionBackgroundInnerDark: ContainerFunction = (containerPalette) => {
 		case 'Branded':
 			return sourcePalette.neutral[20];
 		case 'MediaPalette':
-			return sourcePalette.neutral[0];
+			return sectionBackgroundLight(containerPalette);
 		case 'PodcastPalette':
 			return sourcePalette.neutral[7];
 	}
@@ -618,9 +584,10 @@ const sectionBackgroundLeftLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
 		case 'PodcastPalette':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 	}
 };
+
 const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'Branded':
@@ -636,7 +603,7 @@ const sectionBackgroundLeftDark: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 		case 'MediaPalette':
 		case 'PodcastPalette':
-			return palette('--section-background-inner');
+			return palette('--section-background');
 	}
 };
 
@@ -772,6 +739,7 @@ const treatTextLight: ContainerFunction = (containerPalette) => {
 			return 'inherit';
 	}
 };
+
 const treatTextDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'Branded':
@@ -795,6 +763,8 @@ const carouselDotLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'PodcastPalette':
 			return sourcePalette.neutral[86];
+		case 'MediaPalette':
+			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.brandAlt[400];
 	}
@@ -804,6 +774,8 @@ const carouselDotDark: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'PodcastPalette':
 			return sourcePalette.neutral[20];
+		case 'MediaPalette':
+			return carouselDotLight(containerPalette);
 		default:
 			return sourcePalette.brandAlt[400];
 	}
@@ -813,6 +785,8 @@ const carouselActiveDotLight: ContainerFunction = (containerPalette) => {
 	switch (containerPalette) {
 		case 'PodcastPalette':
 			return sourcePalette.neutral[7];
+		case 'MediaPalette':
+			return sourcePalette.brandAlt[400];
 		default:
 			return sourcePalette.news[400];
 	}
@@ -883,17 +857,13 @@ const containerColours = {
 		light: sectionTitleLight,
 		dark: sectionTitleDark,
 	},
-	'--section-background-outer': {
-		light: sectionBackgroundOuterLight,
-		dark: sectionBackgroundOuterDark,
-	},
 	'--section-date': {
 		light: sectionDateLight,
 		dark: sectionDateDark,
 	},
-	'--section-background-inner': {
-		light: sectionBackgroundInnerLight,
-		dark: sectionBackgroundInnerDark,
+	'--section-background': {
+		light: sectionBackgroundLight,
+		dark: sectionBackgroundDark,
 	},
 	'--section-background-left': {
 		light: sectionBackgroundLeftLight,
@@ -930,6 +900,10 @@ const containerColours = {
 	'--card-border-top': {
 		light: cardBorderTopLight,
 		dark: cardBorderTopDark,
+	},
+	'--carousel-text': {
+		light: () => palette('--article-section-title'),
+		dark: () => palette('--article-section-title'),
 	},
 	'--carousel-dot': {
 		light: carouselDotLight,

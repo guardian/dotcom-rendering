@@ -153,7 +153,7 @@ export const WorldCupFinal2023 = () => {
 			<Wrapper
 				styles={css`
 					max-width: 600px;
-					background-color: ${palette('--section-background-outer')};
+					background-color: ${palette('--section-background')};
 				`}
 			>
 				<Island priority="critical">

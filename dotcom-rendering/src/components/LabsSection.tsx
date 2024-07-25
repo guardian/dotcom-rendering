@@ -79,7 +79,7 @@ const leftColumnBackground = css`
 `;
 
 const contentBackground = css`
-	background-color: ${palette('--section-background-inner')};
+	background-color: ${palette('--section-background')};
 `;
 
 const leftColumnWidthFromLeftCol = css`
