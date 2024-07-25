@@ -112,17 +112,18 @@ export const HighlightsCard = ({
 				</div>
 			) : null}
 			<div css={imageArea}>
-				{avatarUrl ? (
+				{(avatarUrl && (
 					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
-				) : image ? (
-					<CardPicture
-						imageSize="medium"
-						mainImage={image.src}
-						alt={image.altText}
-						loading={imageLoading}
-						isCircular={true}
-					/>
-				) : null}
+				)) ??
+					(image && (
+						<CardPicture
+							imageSize="medium"
+							mainImage={image.src}
+							alt={image.altText}
+							loading={imageLoading}
+							isCircular={true}
+						/>
+					))}
 			</div>
 		</div>
 	);
