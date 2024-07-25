@@ -15,7 +15,7 @@ type Props = { trails: DCRFrontCard[] };
 
 const containerStyles = css`
 	${from.tablet} {
-		padding: 0 10px 0 20px;
+		padding: 0 20px;
 	}
 `;
 const carouselStyles = css`
