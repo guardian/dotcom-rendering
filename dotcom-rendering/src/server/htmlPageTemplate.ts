@@ -23,6 +23,7 @@ type BaseProps = {
 	hasPageSkin?: boolean;
 	hasLiveBlogTopAd?: boolean;
 	weAreHiring: boolean;
+	onlyLightColourScheme?: boolean;
 };
 
 interface WebProps extends BaseProps {
@@ -68,6 +69,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		canonicalUrl,
 		renderingTarget,
 		hasPageSkin = false,
+		onlyLightColourScheme = false,
 		weAreHiring,
 		config,
 	} = props;
@@ -190,7 +192,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 --->`;
 
 	return `<!doctype html>
-        <html lang="en">
+        <html lang="en" ${
+			onlyLightColourScheme ? 'data-color-scheme="light"' : ''
+		}>
             <head>
 			    ${
 					weAreHiring

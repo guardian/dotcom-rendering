@@ -231,6 +231,9 @@ window.twttr = (function(d, s, id) {
 		weAreHiring: !!article.config.switches.weAreHiring,
 		config,
 		hasLiveBlogTopAd: !!article.config.hasLiveBlogTopAd,
+		onlyLightColourScheme:
+			format.design === ArticleDesign.FullPageInteractive ||
+			format.design === ArticleDesign.Interactive,
 	});
 
 	return { html: pageHtml, prefetchScripts };

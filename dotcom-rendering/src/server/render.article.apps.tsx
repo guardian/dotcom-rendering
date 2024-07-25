@@ -122,6 +122,9 @@ window.twttr = (function(d, s, id) {
 				? initTwitter
 				: undefined,
 		config,
+		onlyLightColourScheme:
+			format.design === ArticleDesign.FullPageInteractive ||
+			format.design === ArticleDesign.Interactive,
 	});
 
 	return {
