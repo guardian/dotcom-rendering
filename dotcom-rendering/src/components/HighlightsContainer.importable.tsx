@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
 import {
 	Button,
+	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
@@ -144,7 +145,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 				})}
 			</ol>
 
-			<>
+			<Hide until={'tablet'}>
 				<Button
 					hideLabel={true}
 					iconSide="left"
@@ -163,7 +164,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 					data-link-name="highlights carousel right chevron"
 					size="small"
 				/>
-			</>
+			</Hide>
 		</div>
 	);
 };
