@@ -363,7 +363,7 @@ const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 		case 'EventPalette':
 			return sourcePalette.neutral[73];
 		case 'EventAltPalette':
-			return sourcePalette.brand[300];
+			return sourcePalette.neutral[73];
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
