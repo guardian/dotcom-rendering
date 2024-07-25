@@ -12,6 +12,11 @@ import { HighlightsCard } from './Masthead/HighlightsCard';
 
 type Props = { trails: DCRFrontCard[] };
 
+const containerStyles = css`
+	${from.tablet} {
+		padding: 0 20px;
+	}
+`;
 const carouselStyles = css`
 	display: grid;
 	grid-auto-columns: 1fr;
@@ -105,7 +110,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	};
 
 	return (
-		<div>
+		<div css={containerStyles}>
 			<ol
 				ref={carouselRef}
 				css={[
