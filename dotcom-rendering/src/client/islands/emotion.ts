@@ -1,5 +1,6 @@
 import type { EmotionCache } from '@emotion/cache';
 import createCache from '@emotion/cache';
+import { isUndefined } from '@guardian/libs';
 
 /**
  * Emotion Cache
@@ -12,7 +13,7 @@ import createCache from '@emotion/cache';
  * initial page load (e.g with liveblogs), so we store it on window.guardian
  */
 export const getEmotionCache = (): EmotionCache => {
-	if (window.guardian.emotionCache === undefined) {
+	if (isUndefined(window.guardian.emotionCache)) {
 		const key = 'dcr';
 		const emotionCache = createCache({ key });
 		window.guardian.emotionCache = emotionCache;

@@ -16,6 +16,7 @@ import type { DCRTagPageType, FETagPageType } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagPage } from './render.front.web';
+import { isUndefined } from '@guardian/libs';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
@@ -54,7 +55,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 
 const tagPageWebTitle = (tagPage: FETagPageType) => {
 	const { pagination } = tagPage;
-	if (pagination !== undefined && pagination.currentPage > 1) {
+	if (!isUndefined(pagination) && pagination.currentPage > 1) {
 		return `${tagPage.webTitle} | Page ${pagination.currentPage} of ${pagination.lastPage} | The Guardian`;
 	} else {
 		return `${tagPage.webTitle} | The Guardian`;

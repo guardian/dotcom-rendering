@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isUndefined,
+} from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -709,7 +714,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{article.starRating !== undefined ? (
+							{!isUndefined(article.starRating) ? (
 								<div css={starWrapper}>
 									<StarRating
 										rating={article.starRating}

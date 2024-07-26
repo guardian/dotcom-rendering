@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { NonEmptyArray } from './tuple';
+import { isUndefined } from '@guardian/libs';
 
 /**
  * Ensures that the given task is only run once and only after all items in waitFor are defined
@@ -11,7 +12,7 @@ export const useOnce = (
 	waitFor: NonEmptyArray<unknown>,
 ): void => {
 	const [alreadyRun, setAlreadyRun] = useState(false);
-	const isReady = waitFor.every((dep) => dep !== undefined);
+	const isReady = waitFor.every((dep) => !isUndefined(dep));
 	useEffect(() => {
 		if (!alreadyRun && isReady) {
 			task();

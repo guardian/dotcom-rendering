@@ -9,6 +9,7 @@ import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
 import type { NonEmptyArray } from './tuple';
 import { isNonEmptyArray } from './tuple';
+import { isUndefined } from '@guardian/libs';
 
 /**
  * For the sake of determining branding on a collection, these are the only
@@ -144,7 +145,7 @@ export const decideCollectionBranding = ({
 }): CollectionBranding | undefined => {
 	// If this collection is eligible to display front branding
 	// AND there is front branding defined, we should display it
-	if (couldDisplayFrontBranding && frontBranding !== undefined) {
+	if (couldDisplayFrontBranding && !isUndefined(frontBranding)) {
 		const kind = getBrandingType([frontBranding]);
 		if (!kind) {
 			return undefined;
@@ -178,7 +179,7 @@ export const decideCollectionBranding = ({
 	// This takes care of the case when another card is displaying the branding
 	// on behalf of the whole front and this collection is further down the
 	// front, with its branding hidden
-	if (frontBranding !== undefined && brandingEqual(frontBranding, branding)) {
+	if (!isUndefined(frontBranding) && brandingEqual(frontBranding, branding)) {
 		return undefined;
 	}
 

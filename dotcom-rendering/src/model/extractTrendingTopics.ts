@@ -1,4 +1,4 @@
-import { isNonNullable } from '@guardian/libs';
+import { isNonNullable, isUndefined } from '@guardian/libs';
 import type { FETagType } from '../types/tag';
 
 /**
@@ -25,8 +25,8 @@ const isNotSectionTag = (tag: FETagType): boolean => {
 	const sectionId = extractTagSectionId(tag);
 
 	return !(
-		sectionId !== undefined &&
-		tag.properties.sectionId !== undefined &&
+		!isUndefined(sectionId) &&
+		!isUndefined(tag.properties.sectionId) &&
 		sectionId.includes(tag.properties.sectionId)
 	);
 };

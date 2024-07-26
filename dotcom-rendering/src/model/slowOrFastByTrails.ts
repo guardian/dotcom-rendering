@@ -1,4 +1,5 @@
 import type { FEFrontCard } from '../types/front';
+import { isUndefined } from '@guardian/libs';
 
 /**
  * An 'arbitrary list of slow tags' once defined in Frontend.
@@ -46,5 +47,5 @@ export const getSpeedFromTrails = (trails: FEFrontCard[]): 'slow' | 'fast' => {
 			(tagMap.get(tagId) ?? 0) / trails.length > frequencyThreshold,
 	);
 
-	return matchingSlowTag !== undefined ? 'slow' : 'fast';
+	return !isUndefined(matchingSlowTag) ? 'slow' : 'fast';
 };
