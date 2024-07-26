@@ -6,7 +6,7 @@ import type { RelatedContent } from '@guardian/apps-rendering-api-models/related
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { ArticleTheme } from '@guardian/libs';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial, isUndefined } from '@guardian/libs';
 import type { Option } from '../../vendor/@guardian/types/index';
 import {
 	fromNullable,
@@ -101,14 +101,14 @@ const parseCapiResponse =
 			case 200: {
 				const response = await capiDecoder(buffer);
 
-				if (response.content === undefined) {
+				if (isUndefined(response.content)) {
 					logger.error(
 						`CAPI returned a 200 for ${articleId}, but didn't give me any content`,
 					);
 					return Result.err(500);
 				}
 
-				if (response.relatedContent === undefined) {
+				if (isUndefined(response.relatedContent)) {
 					logger.error(
 						`Unable to fetch related content for ${articleId}`,
 					);
@@ -141,7 +141,7 @@ const parseCapiResponse =
 
 const askCapiFor = (articleId: string): CapiReturn =>
 	getConfigValue('capi.key').then((key) => {
-		if (key === undefined) {
+		if (isUndefined(key)) {
 			logger.error('Could not get CAPI key');
 
 			return Result.err(500);
@@ -175,7 +175,7 @@ async function serveArticle(
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
-	if (imageSalt === undefined) {
+	if (isUndefined(imageSalt)) {
 		throw new Error('Could not get image salt');
 	}
 
@@ -198,7 +198,7 @@ async function serveEditionsArticle(
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
-	if (imageSalt === undefined) {
+	if (isUndefined(imageSalt)) {
 		throw new Error('Could not get image salt');
 	}
 
@@ -221,7 +221,7 @@ async function serveRichLinkDetails(
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
-	if (imageSalt === undefined) {
+	if (isUndefined(imageSalt)) {
 		throw new Error('Could not get image salt');
 	}
 

@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs'
 import { SvgClock } from '@guardian/source/react-components';
 import { isValidDate } from 'date';
 import React from 'react';
@@ -29,7 +30,7 @@ export const getDeadlineText = (
 };
 
 function formatOptionalDate(date: number | undefined): Date | undefined {
-	if (date === undefined) return undefined;
+	if (isUndefined(date)) return undefined;
 	const d = new Date(date);
 	if (!isValidDate(d)) return undefined;
 	return d;
@@ -39,7 +40,7 @@ function isCalloutActive(until?: number): boolean {
 	const untilDate = formatOptionalDate(until);
 	const now = new Date();
 
-	return untilDate === undefined || untilDate > now;
+	return isUndefined(untilDate) || untilDate > now;
 }
 
 const DeadlineDate = ({ until }: { until?: number }) => {

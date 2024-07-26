@@ -7,7 +7,7 @@ import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter'
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
-import type { ArticleTheme } from '@guardian/libs';
+import {type  ArticleTheme, isUndefined } from '@guardian/libs';
 import type { Option } from '../vendor/@guardian/types/index';
 import { fromNullable } from '../vendor/@guardian/types/index';
 import type { TimelineEvent } from 'atoms';
@@ -380,9 +380,9 @@ const parse =
 					overrideDescription,
 				} = element.calloutTypeData ?? {};
 				if (
-					campaignId === undefined ||
+					isUndefined(campaignId) ||
 					campaignId === '' ||
-					isNonCollapsible === undefined
+					isUndefined(isNonCollapsible)
 				) {
 					return Result.err(
 						'No valid campaignId or isNonCollapsible field on calloutTypeData',

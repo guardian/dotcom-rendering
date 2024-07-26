@@ -11,7 +11,7 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Element } from '@guardian/content-api-models/v1/element';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -398,7 +398,7 @@ const parseBody = (
 	const campaigns = request.campaigns ?? [];
 	const elements = [...body].shift()?.elements;
 
-	return elements !== undefined
+	return !isUndefined(elements)
 		? Result.partition(parseElements(context, campaigns, atoms)(elements))
 				.oks
 		: [];
