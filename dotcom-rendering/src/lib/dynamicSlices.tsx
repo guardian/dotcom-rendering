@@ -55,7 +55,6 @@ export const Card50_Card50 = ({
 					percentage="50%"
 					padSides={true}
 					showDivider={index !== 0}
-					containerPalette={containerPalette}
 				>
 					<Card50Media50Tall
 						trail={trail}
@@ -110,7 +109,6 @@ export const Card75_Card25 = ({
 					percentage="25%"
 					padSides={true}
 					showDivider={true}
-					containerPalette={containerPalette}
 				>
 					<Card25Media25
 						trail={trail}
@@ -165,7 +163,6 @@ export const Card25_Card75 = ({
 					percentage="75%"
 					padSides={true}
 					showDivider={true}
-					containerPalette={containerPalette}
 				>
 					<Card75Media50Left
 						trail={trail}
@@ -221,7 +218,6 @@ export const Card50_Card25_Card25 = ({
 					percentage="25%"
 					padSides={true}
 					showDivider={true}
-					containerPalette={containerPalette}
 				>
 					<Card25Media25Tall
 						trail={trail}
@@ -300,7 +296,6 @@ export const Card25_Card25_Card25_Card25 = ({
 						percentage={`25%`}
 						padSides={true}
 						showDivider={cardIndex !== 0}
-						containerPalette={containerPalette}
 					>
 						<Card25Media25
 							trail={card}
@@ -340,7 +335,6 @@ export const ColumnOfCards50_Card25_Card25 = ({
 						percentage="25%"
 						padSides={true}
 						showDivider={true}
-						containerPalette={containerPalette}
 						key={big.url}
 					>
 						<Card25Media25Tall

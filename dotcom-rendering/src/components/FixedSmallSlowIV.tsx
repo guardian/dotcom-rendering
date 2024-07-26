@@ -25,12 +25,7 @@ export const FixedSmallSlowIV = ({
 		<UL direction="row">
 			{firstSlice25.map((trail, index) => {
 				return (
-					<LI
-						key={trail.url}
-						padSides={true}
-						showDivider={index > 0}
-						containerPalette={containerPalette}
-					>
+					<LI key={trail.url} padSides={true} showDivider={index > 0}>
 						<Card25Media25
 							trail={trail}
 							containerPalette={containerPalette}

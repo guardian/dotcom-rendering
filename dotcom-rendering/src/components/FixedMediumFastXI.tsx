@@ -77,7 +77,6 @@ export const FixedMediumFastXI = ({
 							position: trailIndex,
 						})}
 						showDivider={trailIndex % 4 !== 0}
-						containerPalette={containerPalette}
 						percentage="25%"
 						stretch={true}
 						key={trail.url}
