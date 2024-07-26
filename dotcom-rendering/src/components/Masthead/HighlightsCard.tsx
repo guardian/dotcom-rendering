@@ -78,16 +78,21 @@ const imageArea = css`
 		width: 112px;
 	}
 	align-self: end;
+	position: relative;
 `;
 
 const hoverStyles = css`
 	:hover .image-overlay {
 		position: absolute;
-		z-index: 1000;
-		/* top: 0; */
-		width: inherit;
-		height: inherit;
-		/* left: 0; */
+		bottom: 0;
+		right: 0;
+		height: 106px;
+		width: 106px;
+		${from.desktop} {
+			height: 112px;
+			width: 112px;
+		}
+		border-radius: 100%;
 		background-color: ${palette.neutral[7]};
 		opacity: 0.1;
 	}
@@ -134,13 +139,17 @@ export const HighlightsCard = ({
 					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
 				)) ??
 					(image && (
-						<CardPicture
-							imageSize="medium"
-							mainImage={image.src}
-							alt={image.altText}
-							loading={imageLoading}
-							isCircular={true}
-						/>
+						<>
+							<CardPicture
+								imageSize="medium"
+								mainImage={image.src}
+								alt={image.altText}
+								loading={imageLoading}
+								isCircular={true}
+							/>
+							{/* This image overlay is styled when the CardLink is hovered */}
+							<div className="image-overlay"> </div>
+						</>
 					))}
 			</div>
 		</div>
