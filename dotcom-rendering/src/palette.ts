@@ -5666,7 +5666,7 @@ const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			return 'transparent';
+			return sourcePalette.neutral[97];
 		// Order matters. We want comment special report pieces to have the opinion background
 		case ArticleDesign.Letter:
 			return sourcePalette.opinion[800];
