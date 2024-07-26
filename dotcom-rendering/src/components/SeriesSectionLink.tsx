@@ -30,8 +30,8 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
+	shouldShowTagLink: boolean;
 	isMatch?: boolean;
-	inTagLinkTest?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -169,8 +169,8 @@ export const SeriesSectionLink = ({
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
+	shouldShowTagLink,
 	isMatch,
-	inTagLinkTest,
 }: Props) => {
 	const observerTag = tags.find(
 		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
@@ -198,16 +198,17 @@ export const SeriesSectionLink = ({
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
 
-	if (inTagLinkTest) {
+	if (shouldShowTagLink) {
 		return (
 			<TagLink
-				format={format}
-				sectionLabel={'Euro 2024'}
-				sectionUrl={'football/euro-2024'}
+				sectionUrl="sport/olympic-games-2024"
+				sectionLabel="Paris Olympic Games 2024"
 				guardianBaseURL={guardianBaseURL}
+				format={format}
 			/>
 		);
 	}
+
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
