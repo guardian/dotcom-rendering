@@ -2641,7 +2641,7 @@ const cardKickerTextDark: PaletteFunction = ({ theme }) => {
 		case ArticleSpecial.Labs:
 			return sourcePalette.labs[400];
 		case ArticleSpecial.SpecialReport:
-			return sourcePalette.news[400];
+			return sourcePalette.news[500];
 		case ArticleSpecial.SpecialReportAlt:
 			return sourcePalette.specialReportAlt[200];
 	}
