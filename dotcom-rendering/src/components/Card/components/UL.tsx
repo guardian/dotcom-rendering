@@ -61,7 +61,7 @@ export const UL = ({
 		<ul
 			css={[
 				ulStyles(direction),
-				showDivider && verticalDivider(palette('--article-border')),
+				showDivider && verticalDivider(palette('--section-border')),
 				padBottom && marginBottomStyles,
 				wrapCards && wrapStyles,
 			]}

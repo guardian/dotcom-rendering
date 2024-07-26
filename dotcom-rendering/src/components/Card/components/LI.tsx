@@ -3,7 +3,6 @@ import { from, space, until } from '@guardian/source/foundations';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 import { palette } from '../../../palette';
-import type { DCRContainerPalette } from '../../../types/front';
 
 type CardPercentageType =
 	| '25%'
@@ -72,10 +71,9 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 const decideDivider = (
 	offsetBottomPaddingOnDivider: boolean,
 	paddingSize: string,
-	containerPalette?: DCRContainerPalette,
 	verticalDividerColour?: string,
 ) => {
-	const borderColour = verticalDividerColour ?? palette('--article-border');
+	const borderColour = verticalDividerColour ?? palette('--section-border');
 
 	return offsetBottomPaddingOnDivider
 		? verticalDividerWithBottomOffset(paddingSize, borderColour)
@@ -103,8 +101,6 @@ type Props = {
 	/** Prevent the divider from spanning the LI's bottom padding. To be used when you know that the
 	LI will have bottom padding, but won't have another card in the same container directly below it. */
 	offsetBottomPaddingOnDivider?: boolean;
-
-	containerPalette?: DCRContainerPalette;
 	verticalDividerColour?: string;
 };
 
@@ -119,7 +115,6 @@ export const LI = ({
 	padSidesMobileOverride,
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
-	containerPalette,
 	verticalDividerColour,
 }: Props) => {
 	// Decide sizing
@@ -134,7 +129,6 @@ export const LI = ({
 					decideDivider(
 						offsetBottomPaddingOnDivider,
 						GAP_SIZE,
-						containerPalette,
 						verticalDividerColour,
 					),
 				padSides && sidePaddingStyles(padSidesOverride),

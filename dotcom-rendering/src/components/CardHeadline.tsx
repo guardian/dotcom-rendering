@@ -39,7 +39,6 @@ type Props = {
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isExternalLink?: boolean;
-	isOnwardContent?: boolean;
 };
 
 const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
@@ -210,7 +209,6 @@ export const CardHeadline = ({
 	showByline,
 	linkTo,
 	isExternalLink,
-	isOnwardContent = false,
 }: Props) => {
 	const kickerColour = palette('--card-kicker-text');
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
@@ -243,9 +241,7 @@ export const CardHeadline = ({
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span
 					css={css`
-						color: ${isOnwardContent
-							? palette('--card-headline-onward-content-text')
-							: palette('--card-headline-trail-text')};
+						color: ${palette('--card-headline-trail-text')};
 					`}
 					className="show-underline"
 				>
