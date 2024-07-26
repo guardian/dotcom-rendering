@@ -18,8 +18,7 @@ const meta = {
 		</CardWrapper>
 	),
 	args: {
-		headlineText:
-			'Underground cave found on moon could be ideal base for explorers',
+		headlineText: 'Underground cave found on moon could be ideal base',
 		format: {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Standard,
@@ -27,10 +26,13 @@ const meta = {
 		},
 		showPulsingDot: true,
 		kickerText: 'News',
-		avatarUrl:
-			'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
 		byline: 'Georges Monbiot',
 		mainMedia: mainGallery,
+		image: {
+			src: 'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
+			altText: 'alt text',
+		},
+		imageLoading: 'eager',
 	},
 } satisfies Meta<typeof HighlightsCard>;
 
@@ -57,6 +59,14 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const Default = {};
+
+export const WithAvatar: Story = {
+	args: {
+		avatarUrl:
+			'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
+	},
+	name: 'With Avatar',
+};
 
 export const WithMediaIcon: Story = {
 	args: {

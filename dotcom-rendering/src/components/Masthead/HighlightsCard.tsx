@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, palette, until } from '@guardian/source/foundations';
-// import type { DCRFrontImage } from '../../types/front';
+import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
-// import type { Loading } from '../CardPicture';
+import type { Loading } from '../CardPicture';
+import { CardPicture } from '../CardPicture';
 import { Icon } from '../MediaMeta';
 
 export type HighlightsCardProps = {
@@ -13,8 +14,8 @@ export type HighlightsCardProps = {
 	format: ArticleFormat;
 	headlineText: string;
 	// showQuotedHeadline?: boolean;
-	// image?: DCRFrontImage;
-	// imageLoading: Loading;
+	image?: DCRFrontImage;
+	imageLoading?: Loading;
 	avatarUrl?: string;
 	mainMedia?: MainMedia;
 	kickerText?: string;
@@ -84,8 +85,8 @@ export const HighlightsCard = ({
 	format,
 	headlineText,
 	// showQuotedHeadline,
-	// image,
-	// imageLoading,
+	image,
+	imageLoading = 'lazy',
 	avatarUrl,
 	mainMedia,
 	kickerText,
@@ -111,11 +112,18 @@ export const HighlightsCard = ({
 				</div>
 			) : null}
 			<div css={imageArea}>
-				{avatarUrl ? (
+				{(avatarUrl && (
 					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
-				) : (
-					<></>
-				)}
+				)) ??
+					(image && (
+						<CardPicture
+							imageSize="medium"
+							mainImage={image.src}
+							alt={image.altText}
+							loading={imageLoading}
+							isCircular={true}
+						/>
+					))}
 			</div>
 		</div>
 	);
