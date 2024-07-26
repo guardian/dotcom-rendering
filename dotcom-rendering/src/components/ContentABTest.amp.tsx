@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { isOneOf, isUndefined} from '@guardian/libs';
+import { isOneOf, isUndefined } from '@guardian/libs';
 import React from 'react';
 import type { Switches } from '../types/config';
 

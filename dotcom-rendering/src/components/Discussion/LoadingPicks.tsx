@@ -4,8 +4,6 @@ import { space } from '@guardian/source/foundations';
 import { palette as schemedPalette } from '../../palette';
 import { Row } from './Row';
 
-
-
 const BACKGROUND_COLOUR = schemedPalette('--discussion-loading-background');
 
 const shimmer = keyframes`

@@ -1,4 +1,4 @@
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 
 type LocalisedTitles = {

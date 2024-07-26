@@ -1,4 +1,4 @@
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import {
 	ContentABTestProvider,

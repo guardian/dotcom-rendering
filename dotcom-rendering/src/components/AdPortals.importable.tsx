@@ -1,7 +1,7 @@
 import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
 import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Breakpoint } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';

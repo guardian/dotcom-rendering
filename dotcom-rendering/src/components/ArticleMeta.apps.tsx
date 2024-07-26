@@ -218,9 +218,7 @@ export const ArticleMetaApps = ({
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
 	const isImmersiveOrAnalysisWithMultipleAuthors =
-		(isAnalysis || isImmersive) &&
-		!!byline &&
-		isUndefined(soleContributor);
+		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
 
 	return (
 		<div

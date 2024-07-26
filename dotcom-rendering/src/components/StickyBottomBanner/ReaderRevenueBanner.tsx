@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, isUndefined, onConsent  } from '@guardian/libs';
+import { getCookie, isUndefined, onConsent } from '@guardian/libs';
 import {
 	abandonedBasketSchema,
 	getBanner,
