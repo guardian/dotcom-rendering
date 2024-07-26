@@ -39,7 +39,6 @@ export const FixedSmallSlowIII = ({
 				<LI
 					padSides={true}
 					showDivider={true}
-					containerPalette={containerPalette}
 					percentage={'25%'}
 					key={trail.url}
 				>

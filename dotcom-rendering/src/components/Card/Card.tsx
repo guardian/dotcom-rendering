@@ -545,7 +545,6 @@ export const Card = ({
 									byline={byline}
 									showByline={showByline}
 									isExternalLink={isExternalLink}
-									isOnwardContent={isOnwardContent}
 								/>
 								{!isUndefined(starRating) ? (
 									<StarRatingComponent

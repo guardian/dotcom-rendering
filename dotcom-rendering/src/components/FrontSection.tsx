@@ -478,7 +478,7 @@ export const FrontSection = ({
 			>
 				<div
 					css={[
-						decoration(schemePalette('--article-border')),
+						decoration(schemePalette('--section-border')),
 						sideBorders,
 						showTopBorder && topBorder,
 					]}
@@ -494,7 +494,7 @@ export const FrontSection = ({
 						),
 						!hasPageSkin &&
 							sectionHeadlineFromLeftCol(
-								schemePalette('--article-border'),
+								schemePalette('--section-border'),
 							),
 						title?.toLowerCase() === 'headlines' &&
 							sectionHeadlineHeight,
@@ -587,7 +587,7 @@ export const FrontSection = ({
 					<div css={[sectionTreats, paddings]}>
 						<Treats
 							treats={treats}
-							borderColour={palette('--article-border')}
+							borderColour={palette('--section-border')}
 						/>
 					</div>
 				)}
