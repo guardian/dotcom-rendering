@@ -38,7 +38,6 @@ const meta = {
 		text: 'Kicker',
 		color: palette('--card-kicker-text'),
 		showPulsingDot: false,
-		hideLineBreak: false,
 	},
 	render: (args) => (
 		<div style={kickerWrapperStyles}>
@@ -71,7 +70,12 @@ export const CardKickerWithContainerOverrides = {
 			},
 		]),
 	],
-	render: () => (
+	args: {
+		text: 'Kicker',
+		color: palette('--card-kicker-text'),
+		showPulsingDot: false,
+	},
+	render: ((args) => (
 		<>
 			{containerPalettes.map((containerPalette) => (
 				<>
@@ -91,24 +95,14 @@ export const CardKickerWithContainerOverrides = {
 									{containerPalette}
 								</span>
 
-								<Kicker
-									text="Standard kicker"
-									color={palette('--card-kicker-text')}
-									showPulsingDot={false}
-									hideLineBreak={false}
-								/>
+								<Kicker {...args} text="Standard kicker" />
 
-								<Kicker
-									text="Live kicker"
-									color={palette('--card-kicker-text')}
-									showPulsingDot={true}
-									hideLineBreak={false}
-								/>
+								<Kicker {...args} text="Live kicker" />
 							</div>
 						</ContainerOverrides>
 					</Section>
 				</>
 			))}
 		</>
-	),
+	)) satisfies (typeof meta)['render'],
 };

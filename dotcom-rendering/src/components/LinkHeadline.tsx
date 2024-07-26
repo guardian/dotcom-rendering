@@ -88,14 +88,21 @@ export const LinkHeadline = ({
 	byline,
 }: Props) => {
 	return (
-		<h4 css={[fontStyles(size)]}>
+		<h4 css={fontStyles(size)}>
 			{!!kickerText && (
-				<Kicker
-					text={kickerText}
-					color={palette('--link-kicker-text')}
-					showPulsingDot={showPulsingDot}
-					hideLineBreak={hideLineBreak}
-				/>
+				<span
+					style={
+						hideLineBreak
+							? { display: 'inline', marginRight: '4px' }
+							: { display: 'block' }
+					}
+				>
+					<Kicker
+						text={kickerText}
+						color={palette('--link-kicker-text')}
+						showPulsingDot={showPulsingDot}
+					/>
+				</span>
 			)}
 			{showQuotes && <QuoteIcon colour={palette('--link-kicker-text')} />}
 			{link ? (

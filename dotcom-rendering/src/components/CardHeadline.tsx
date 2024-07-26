@@ -231,12 +231,19 @@ export const CardHeadline = ({
 				]}
 			>
 				{!!kickerText && (
-					<Kicker
-						text={kickerText}
-						color={kickerColour}
-						showPulsingDot={showPulsingDot}
-						hideLineBreak={hideLineBreak}
-					/>
+					<span
+						style={
+							hideLineBreak
+								? { display: 'inline', marginRight: '4px' }
+								: { display: 'block' }
+						}
+					>
+						<Kicker
+							text={kickerText}
+							color={kickerColour}
+							showPulsingDot={showPulsingDot}
+						/>
+					</span>
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span

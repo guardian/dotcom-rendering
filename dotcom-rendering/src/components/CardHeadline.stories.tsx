@@ -194,11 +194,23 @@ MobileSize.parameters = {
 
 export const liveStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="This is how a card headline with a live kicker looks"
-			format={format}
-			kickerText="Live"
-		/>
+		<div style={{ width: '360px' }}>
+			<CardHeadline
+				headlineText="This is how a card headline with a live kicker looks"
+				format={format}
+				kickerText="Live"
+				showPulsingDot={true}
+			/>
+
+			<div style={{ marginTop: '40px' }}>
+				<CardHeadline
+					headlineText="This is how a card headline with a live kicker looks"
+					format={format}
+					kickerText="This is a really long kicker that will wrap onto multiple lines"
+					showPulsingDot={true}
+				/>
+			</div>
+		</div>
 	</Section>
 );
 liveStory.storyName = 'With Live kicker';
@@ -206,7 +218,7 @@ liveStory.decorators = [
 	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
+			design: ArticleDesign.LiveBlog,
 			theme: Pillar.News,
 		},
 	]),
@@ -214,37 +226,29 @@ liveStory.decorators = [
 
 export const noLineBreak: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="This is how a card headline with no kicker linebreak looks"
-			format={format}
-			kickerText="Live"
-			hideLineBreak={true}
-		/>
+		<div style={{ width: '360px' }}>
+			<CardHeadline
+				headlineText="This is how a card headline with a live kicker looks"
+				format={format}
+				kickerText="Live"
+				showPulsingDot={true}
+				hideLineBreak={true}
+			/>
+
+			<div style={{ marginTop: '40px' }}>
+				<CardHeadline
+					headlineText="This is how a card headline with a live kicker looks"
+					format={format}
+					kickerText="This is a really long kicker that will wrap onto multiple lines"
+					showPulsingDot={true}
+					hideLineBreak={true}
+				/>
+			</div>
+		</div>
 	</Section>
 );
 noLineBreak.storyName = 'With Live kicker but no line break';
 noLineBreak.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.Standard,
-			theme: Pillar.News,
-		},
-	]),
-];
-
-export const pulsingDot: StoryObj = ({ format }: StoryProps) => (
-	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="This is how a card headline with a pulsing dot looks"
-			format={format}
-			kickerText="Live"
-			showPulsingDot={true}
-		/>
-	</Section>
-);
-pulsingDot.storyName = 'With pulsing dot';
-pulsingDot.decorators = [
 	splitTheme([
 		{
 			display: ArticleDisplay.Standard,
