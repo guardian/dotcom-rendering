@@ -2,6 +2,7 @@
 
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
+import { isUndefined } from '@guardian/libs'
 import { fromNullable, withDefault } from '../vendor/@guardian/types/index';
 import type { Option } from '../vendor/@guardian/types/index';
 import { parseIntOpt, pipe, resultFromNullable } from 'lib';
@@ -237,7 +238,7 @@ const parseSpotifyAudio =
 			}));
 
 const parseVideo = (element: BlockElement): Result<string, Embed> => {
-	if (element.videoTypeData === undefined) {
+	if (isUndefined(element.videoTypeData)) {
 		return Result.err(
 			"I can't parse this video element, it has no 'videoTypeData' field",
 		);
@@ -257,7 +258,7 @@ const parseVideo = (element: BlockElement): Result<string, Embed> => {
 const parseAudio =
 	(parser: DocParser) =>
 	(element: BlockElement): Result<string, Embed> => {
-		if (element.audioTypeData === undefined) {
+		if (isUndefined(element.audioTypeData)) {
 			return Result.err(
 				"I can't parse this audio element, it has no 'audioTypeData' field",
 			);
@@ -275,7 +276,7 @@ const parseAudio =
 	};
 
 const parseInstagram = (element: BlockElement): Result<string, Embed> => {
-	if (element.instagramTypeData === undefined) {
+	if (isUndefined(element.instagramTypeData)) {
 		return Result.err(
 			"I can't parse this Instagram element, it has no 'instagramTypeData' field",
 		);
@@ -366,7 +367,7 @@ const parseEmailSignup =
 const parseGeneric =
 	(parser: DocParser) =>
 	(element: BlockElement): Result<string, Embed> => {
-		if (element.embedTypeData === undefined) {
+		if (isUndefined(element.embedTypeData)) {
 			return Result.err(
 				"I can't parse this generic embed, it has no 'embedTypeData' field",
 			);
