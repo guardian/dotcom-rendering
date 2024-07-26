@@ -312,10 +312,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
-	const inTagLinkTest =
+
+	const shouldShowTagLink =
 		isWeb &&
-		article.config.abTests.tagLinkDesignVariant === 'variant' &&
-		article.tags.some((tag) => tag.id === 'football/euro-2024');
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
@@ -434,10 +435,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							css={css`
 								margin-top: -${HEADLINE_OFFSET}px;
 								/*
-                        This z-index is what ensures the headline title text shows above main media. For
-                        the actual headline we set the z-index deeper in ArticleHeadline itself so that
-                        the text appears above the pseudo Box element
-                    */
+									This z-index is what ensures the headline title text shows above main media. For
+									the actual headline we set the z-index deeper in ArticleHeadline itself so that
+									the text appears above the pseudo Box element
+								*/
 								position: relative;
 								${getZIndex('articleHeadline')};
 							`}
@@ -456,6 +457,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
+									shouldShowTagLink={false}
 								/>
 							</Section>
 							<Box>
@@ -484,7 +486,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="ImmersiveLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -545,7 +547,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											guardianBaseURL={
 												article.guardianBaseURL
 											}
-											inTagLinkTest={inTagLinkTest}
+											shouldShowTagLink={
+												shouldShowTagLink
+											}
 										/>
 									</div>
 								)}

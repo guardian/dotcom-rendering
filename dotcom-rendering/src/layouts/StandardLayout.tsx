@@ -411,10 +411,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
-	const inTagLinkTest =
+	const shouldShowTagLink =
 		isWeb &&
-		article.config.abTests.tagLinkDesignVariant === 'variant' &&
-		article.tags.some((tag) => tag.id === 'football/euro-2024');
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	return (
 		<>
@@ -594,7 +594,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="StandardLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -684,7 +684,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 								isMatch={!!footballMatchUrl}
-								inTagLinkTest={inTagLinkTest}
+								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">

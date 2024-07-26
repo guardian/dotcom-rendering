@@ -353,9 +353,9 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-	// The test is being paused on liveblogs whilst we investigate an issue
 
-	const inTagLinkTest = false;
+	// The test is being paused on liveblogs whilst we investigate an issue
+	const shouldShowTagLink = false;
 	// isWeb &&
 	// article.config.abTests.tagLinkDesignVariant === 'variant' &&
 	// article.tags.some((tag) => tag.id === 'football/euro-2024');
@@ -506,14 +506,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main
 				css={
-					inTagLinkTest &&
+					shouldShowTagLink &&
 					css`
 						position: relative;
 						height: 100%;
 					`
 				}
 				data-layout="LiveLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 			>
 				{renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
@@ -533,7 +533,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					</Hide>
 				)}
-				{inTagLinkTest && (
+				{shouldShowTagLink && (
 					<div css={tagOverlayGridStyles}>
 						<GridItem area="sticky-tag">
 							<div css={stickyTagStyles}>
@@ -543,7 +543,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									inTagLinkTest={true}
+									shouldShowTagLink={true}
 								/>
 							</div>
 						</GridItem>
@@ -576,6 +576,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								shouldShowTagLink={false}
 								isMatch={true}
 							/>
 						}
@@ -590,6 +591,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								shouldShowTagLink={false}
 								isMatch={true}
 							/>
 						</Hide>
@@ -617,7 +619,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
-								{inTagLinkTest ? (
+								{shouldShowTagLink ? (
 									<div
 										css={css`
 											height: 64px;
@@ -635,7 +637,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										guardianBaseURL={
 											article.guardianBaseURL
 										}
-										inTagLinkTest={inTagLinkTest}
+										shouldShowTagLink={shouldShowTagLink}
 									/>
 								)}
 							</GridItem>
