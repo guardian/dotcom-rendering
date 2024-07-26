@@ -195,7 +195,7 @@
 		"webpack-assets-manifest": "5.2.1",
 		"webpack-bundle-analyzer": "4.10.2",
 		"webpack-cli": "5.1.4",
-		"webpack-dev-middleware": "7.2.1",
+		"webpack-dev-middleware": "7.3.0",
 		"webpack-dev-server": "5.0.4",
 		"webpack-hot-middleware": "2.26.1",
 		"webpack-hot-server-middleware": "0.6.1",
