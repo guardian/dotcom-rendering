@@ -90,7 +90,7 @@ export const LinkHeadline = ({
 	return (
 		<h4 css={fontStyles(size)}>
 			{!!kickerText && (
-				<span
+				<div
 					style={
 						hideLineBreak
 							? { display: 'inline', marginRight: '4px' }
@@ -102,7 +102,7 @@ export const LinkHeadline = ({
 						color={palette('--link-kicker-text')}
 						showPulsingDot={showPulsingDot}
 					/>
-				</span>
+				</div>
 			)}
 			{showQuotes && <QuoteIcon colour={palette('--link-kicker-text')} />}
 			{link ? (

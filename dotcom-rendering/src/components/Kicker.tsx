@@ -17,6 +17,10 @@ type Props = {
 	fontWeight?: 'regular' | 'bold';
 };
 
+const commonStyles = css`
+	display: inline;
+`;
+
 const standardTextStyles = css`
 	${textSans15}
 `;
@@ -27,9 +31,11 @@ const boldTextStyles = css`
 
 const liveTextStyles = css`
 	${textSansBold14}
+	padding: 0 ${space[1]}px;
+	box-shadow: 0 0.05em 0 0 ${palette('--kicker-background-live')};
 	box-decoration-break: clone;
-	display: inline;
-	padding: 2px ${space[1]}px;
+	/** This is a hack to ensure designs look right for multi line kickers */
+	line-height: 1.2rem;
 `;
 
 /**
@@ -57,7 +63,7 @@ export const Kicker = ({
 
 	return (
 		<div
-			css={textStyles()}
+			css={[commonStyles, textStyles()]}
 			style={{
 				color: isLiveKicker ? palette('--kicker-text-live') : color,
 				backgroundColor: isLiveKicker

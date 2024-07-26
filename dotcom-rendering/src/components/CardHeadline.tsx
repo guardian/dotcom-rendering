@@ -231,7 +231,7 @@ export const CardHeadline = ({
 				]}
 			>
 				{!!kickerText && (
-					<span
+					<div
 						style={
 							hideLineBreak
 								? { display: 'inline', marginRight: '4px' }
@@ -243,7 +243,7 @@ export const CardHeadline = ({
 							color={kickerColour}
 							showPulsingDot={showPulsingDot}
 						/>
-					</span>
+					</div>
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span
