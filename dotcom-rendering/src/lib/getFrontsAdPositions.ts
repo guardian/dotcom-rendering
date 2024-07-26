@@ -4,6 +4,7 @@ import {
 	MAX_FRONTS_MOBILE_ADS,
 } from './commercial-constants';
 import { frontsBannerExcludedCollections } from './frontsBannerExclusions';
+import { isUndefined } from '@guardian/libs';
 
 type GroupedCounts = {
 	snap: number;
@@ -210,7 +211,7 @@ const getFrontsBannerAdPositions = (
 
 			const collectionHeight = getCollectionHeight(collection);
 			const prevCollection = collections[index - 1];
-			const isFirstCollection = prevCollection === undefined;
+			const isFirstCollection = isUndefined(prevCollection);
 			if (isFirstCollection) {
 				accumulator.heightSinceAd += collectionHeight;
 				return accumulator;

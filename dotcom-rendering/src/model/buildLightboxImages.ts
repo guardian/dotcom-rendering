@@ -12,6 +12,7 @@ import {
 	isCartoon,
 	isImage,
 } from './enhance-images';
+import { isUndefined } from '@guardian/libs';
 
 /** Used to determine if a lightbox can be created */
 const THRESHOLD = 620;
@@ -146,7 +147,7 @@ export const buildLightboxImages = (
 				block.elements.flatMap((element) =>
 					getImages(element).flatMap((multiImage) => {
 						const lightboxImage = buildLightboxImage(multiImage);
-						if (lightboxImage === undefined) return [];
+						if (isUndefined(lightboxImage)) return [];
 						return isBlog(format.design)
 							? {
 									...lightboxImage,

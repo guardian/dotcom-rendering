@@ -3,6 +3,7 @@ import { test } from '@playwright/test';
 import { cmpAcceptAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
+import { isUndefined } from '@guardian/libs';
 
 const optOutOfArticleCountConsent = async (context: BrowserContext) => {
 	await addCookie(context, {
@@ -20,7 +21,7 @@ const requestBodyHasProperties = (
 	if (!isURL) return false;
 	const postJSON = request.postDataJSON() as Record<string, string>;
 	return expectedProperties.every(
-		(expectedProperty) => postJSON[expectedProperty] !== undefined,
+		(expectedProperty) => !isUndefined(postJSON[expectedProperty]),
 	);
 };
 

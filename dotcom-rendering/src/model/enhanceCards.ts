@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import { decideFormat } from '../lib/decideFormat';
 import type { EditionId } from '../lib/edition';
@@ -64,7 +64,7 @@ const decideUrl = (trail: FESupportingContent | FEFrontCard) => {
 	 * Don't try to provide a relative URL for LinkSnap, these will link to domains other than www.theguardian.com and therefore wont have a relative path.
 	 */
 	if (
-		trail.properties.webUrl !== undefined &&
+		!isUndefined(trail.properties.webUrl) &&
 		!('type' in trail && trail.type === 'LinkSnap')
 	) {
 		try {
@@ -251,12 +251,13 @@ export const enhanceCards = (
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
-			webPublicationDate:
-				faciaCard.card.webPublicationDateOption !== undefined
-					? new Date(
-							faciaCard.card.webPublicationDateOption,
-					  ).toISOString()
-					: undefined,
+			webPublicationDate: !isUndefined(
+				faciaCard.card.webPublicationDateOption,
+			)
+				? new Date(
+						faciaCard.card.webPublicationDateOption,
+				  ).toISOString()
+				: undefined,
 			kickerText: decideKicker(faciaCard, cardInTagPage, pageId),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(faciaCard.supportingContent, format)

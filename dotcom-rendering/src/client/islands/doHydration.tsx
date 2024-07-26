@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
-import { log, startPerformanceMeasure } from '@guardian/libs';
+import { isUndefined, log, startPerformanceMeasure } from '@guardian/libs';
 import { createElement } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { ConfigProvider } from '../../components/ConfigContext';
@@ -39,7 +39,7 @@ export const doHydration = async (
 ): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
-	if (element.dataset.islandStatus !== undefined) return;
+	if (!isUndefined(element.dataset.islandStatus)) return;
 	else element.dataset.islandStatus = 'identified';
 
 	const { endPerformanceMeasure: endImportPerformanceMeasure } =
