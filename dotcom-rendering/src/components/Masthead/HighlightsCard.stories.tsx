@@ -18,8 +18,7 @@ const meta = {
 		</CardWrapper>
 	),
 	args: {
-		headlineText:
-			'Underground cave found on moon could be ideal base for explorers',
+		headlineText: 'Underground cave found on moon could be ideal base',
 		format: {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Standard,
