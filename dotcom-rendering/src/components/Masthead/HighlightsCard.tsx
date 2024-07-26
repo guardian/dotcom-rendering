@@ -86,12 +86,8 @@ const hoverStyles = css`
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		height: 106px;
-		width: 106px;
-		${from.desktop} {
-			height: 112px;
-			width: 112px;
-		}
+		height: 100%;
+		width: 100%;
 		border-radius: 100%;
 		background-color: ${palette.neutral[7]};
 		opacity: 0.1;
