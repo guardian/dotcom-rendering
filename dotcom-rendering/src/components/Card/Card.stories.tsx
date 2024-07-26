@@ -558,7 +558,7 @@ export const WhenVerticalAndThemeOpinion = () => {
 	);
 };
 
-export const WithSublinksWhenVerticalAndOpinion = () => {
+export const WithSublinksWhenVerticalAndSpecialReport = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -567,7 +567,7 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: Pillar.Opinion,
+						theme: ArticleSpecial.SpecialReport,
 					}}
 					imagePositionOnDesktop="top"
 					supportingContent={[
