@@ -514,7 +514,7 @@ export const Discussion = ({
 					replyForm={replyForm}
 					bottomForm={bottomForm}
 					reportAbuse={
-							!isUndefined(user)
+						!isUndefined(user)
 							? user.reportAbuse
 							: reportAbuseUnauthenticated
 					}

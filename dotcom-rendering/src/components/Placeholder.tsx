@@ -1,5 +1,5 @@
 import { css, keyframes } from '@emotion/react';
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import { palette, space } from '@guardian/source/foundations';
 
 const BACKGROUND_COLOUR = palette.neutral[93];

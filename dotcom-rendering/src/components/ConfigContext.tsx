@@ -1,4 +1,4 @@
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import { createContext, useContext } from 'react';
 import type { Config } from '../types/configContext';
 

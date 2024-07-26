@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import type { DCRSnapType } from '../types/front';
 
 type Props = {

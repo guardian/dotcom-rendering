@@ -1,4 +1,4 @@
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import { SvgClock } from '@guardian/source/react-components';
 import { isValidDate } from 'date';
 import React from 'react';

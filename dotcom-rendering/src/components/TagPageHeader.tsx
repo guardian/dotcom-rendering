@@ -1,5 +1,5 @@
 import { css, jsx } from '@emotion/react';
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import {
 	breakpoints,
 	from,

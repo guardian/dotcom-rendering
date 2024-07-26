@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import type { DCRContainerType } from '../../../types/front';
 import type { ImagePositionType } from './ImageWrapper';

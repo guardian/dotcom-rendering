@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import type { TagType } from '../types/tag';
 import { OnwardContainer } from './OnwardContainer.amp';
 

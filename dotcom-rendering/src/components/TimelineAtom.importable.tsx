@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import { body, palette, remSpace, space } from '@guardian/source/foundations';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette as schemedPalette } from '../palette';
@@ -63,10 +63,9 @@ const TimelineContents = ({ events }: { events: TimelineAtomEvent[] }) => {
 		<div>
 			{events.map((event, index) => {
 				const time = new Date(event.unixDate).toISOString();
-				const toTime =
-					!isUndefined(event.toUnixDate)
-						? new Date(event.toUnixDate).toISOString()
-						: '';
+				const toTime = !isUndefined(event.toUnixDate)
+					? new Date(event.toUnixDate).toISOString()
+					: '';
 				return (
 					<div key={index} data-type="event-snippet" css={Snippet}>
 						<div>

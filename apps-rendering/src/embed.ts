@@ -2,7 +2,7 @@
 
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import { isUndefined } from '@guardian/libs'
+import { isUndefined } from '@guardian/libs';
 import { fromNullable, withDefault } from '../vendor/@guardian/types/index';
 import type { Option } from '../vendor/@guardian/types/index';
 import { parseIntOpt, pipe, resultFromNullable } from 'lib';

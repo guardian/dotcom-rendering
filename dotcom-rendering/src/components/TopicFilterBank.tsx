@@ -123,7 +123,7 @@ export const TopicFilterBank = ({
 	filterKeyEvents = false,
 	id,
 }: Props) => {
-	const hasKeyEvents = !(isUndefined(keyEvents)) && keyEvents.length > 0;
+	const hasKeyEvents = !isUndefined(keyEvents) && keyEvents.length > 0;
 
 	if (!hasRelevantTopics(availableTopics) && !hasKeyEvents) return null;
 	const palette = decidePalette(format);
