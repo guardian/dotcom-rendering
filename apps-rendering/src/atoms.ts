@@ -1,6 +1,5 @@
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import { isUndefined } from '@guardian/libs';
 import { fromNullable } from '../vendor/@guardian/types/index';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -20,7 +19,7 @@ interface TimelineEvent {
 }
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
-	if (isUndefined(date)) return undefined;
+	if (date === undefined) return undefined;
 	const d = new Date(date.toNumber());
 	if (!isValidDate(d)) return undefined;
 	return d.toDateString();
@@ -31,7 +30,7 @@ function parseAtom(
 	atoms: Atoms,
 	docParser: DocParser,
 ): Result<string, BodyElement> {
-	if (isUndefined(element.contentAtomTypeData)) {
+	if (element.contentAtomTypeData === undefined) {
 		return Result.err('The atom has no data');
 	}
 

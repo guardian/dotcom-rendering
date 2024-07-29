@@ -2,7 +2,7 @@
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ParticipationFields } from '@guardian/apps-rendering-api-models/participationFields';
-import { ArticleSpecial, isUndefined } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
 import { Optional } from 'optional';
 
 export type CalloutFields = {
@@ -43,7 +43,7 @@ const getReport = (
 	// If the array is empty, `campaign` will be `undefined`. The linter doesn't
 	// know this without `noUncheckedIndexedAccess` turned on.
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- See above.
-	if (isUndefined(campaign)) {
+	if (campaign === undefined) {
 		return Optional.none();
 	}
 
