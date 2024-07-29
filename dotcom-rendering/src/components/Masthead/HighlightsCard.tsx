@@ -4,13 +4,14 @@ import { from, palette, until } from '@guardian/source/foundations';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { Avatar } from '../Avatar';
+import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Icon } from '../MediaMeta';
 
 export type HighlightsCardProps = {
-	// linkTo: string;
+	linkTo: string;
 	format: ArticleFormat;
 	headlineText: string;
 	// showQuotedHeadline?: boolean;
@@ -20,9 +21,10 @@ export type HighlightsCardProps = {
 	mainMedia?: MainMedia;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	// dataLinkName?: string;
+	dataLinkName: string;
 	byline?: string;
 	showMediaIcon?: boolean;
+	isExternalLink: boolean;
 };
 
 const gridContainer = css`
@@ -100,7 +102,7 @@ const hoverStyles = css`
 `;
 
 export const HighlightsCard = ({
-	// linkTo,
+	linkTo,
 	format,
 	headlineText,
 	// showQuotedHeadline,
@@ -110,12 +112,19 @@ export const HighlightsCard = ({
 	mainMedia,
 	kickerText,
 	showPulsingDot,
-	// dataLinkName,
+	dataLinkName,
 	byline,
 	showMediaIcon,
+	isExternalLink,
 }: HighlightsCardProps) => {
 	return (
 		<div css={[gridContainer, hoverStyles]}>
+			<CardLink
+				linkTo={linkTo}
+				headlineText={headlineText}
+				dataLinkName={dataLinkName}
+				isExternalLink={isExternalLink}
+			/>
 			<div css={headline}>
 				<CardHeadline
 					headlineText={headlineText}
@@ -123,6 +132,7 @@ export const HighlightsCard = ({
 					size="medium"
 					showPulsingDot={showPulsingDot}
 					kickerText={kickerText}
+					isExternalLink={isExternalLink}
 				/>
 			</div>
 			{mainMedia && showMediaIcon ? (

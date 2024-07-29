@@ -30,8 +30,7 @@ const itemStyles = css`
 	scroll-snap-align: start;
 	grid-area: span 1;
 	position: relative;
-	padding: ${space[3]}px 0;
-	margin: 0 10px;
+	margin: ${space[3]}px 10px;
 	:first-child {
 		padding-left: 10px;
 	}
@@ -41,8 +40,8 @@ const verticalLineStyles = css`
 	::after {
 		content: '';
 		position: absolute;
-		top: ${space[3]}px;
-		bottom: ${space[3]}px;
+		top: 0;
+		bottom: 0;
 		right: -10px;
 		width: 1px;
 		background-color: ${palette('--card-border-top')};
@@ -101,6 +100,9 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							byline={trail.byline}
 							image={trail.image}
 							imageLoading={imageLoading}
+							linkTo={trail.url}
+							dataLinkName={trail.dataLinkName}
+							isExternalLink={trail.isExternalLink}
 						/>
 					</li>
 				);
