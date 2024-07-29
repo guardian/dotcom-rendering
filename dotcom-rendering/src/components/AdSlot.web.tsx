@@ -241,6 +241,7 @@ const inlineAdStyles = css`
 
 const rightAdStyles = css`
 	background-color: ${schemedPalette('--ad-background-article-inner')};
+	max-width: 300px;
 `;
 
 const liveblogInlineAdStyles = css`
