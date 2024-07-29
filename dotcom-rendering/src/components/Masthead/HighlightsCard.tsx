@@ -14,7 +14,7 @@ export type HighlightsCardProps = {
 	linkTo: string;
 	format: ArticleFormat;
 	headlineText: string;
-	// showQuotedHeadline?: boolean;
+	showQuotedHeadline: boolean;
 	image?: DCRFrontImage;
 	imageLoading?: Loading;
 	avatarUrl?: string;
@@ -105,7 +105,7 @@ export const HighlightsCard = ({
 	linkTo,
 	format,
 	headlineText,
-	// showQuotedHeadline,
+	showQuotedHeadline,
 	image,
 	imageLoading = 'lazy',
 	avatarUrl,
@@ -133,6 +133,7 @@ export const HighlightsCard = ({
 					showPulsingDot={showPulsingDot}
 					kickerText={kickerText}
 					isExternalLink={isExternalLink}
+					showQuotes={showQuotedHeadline}
 				/>
 			</div>
 			{mainMedia && showMediaIcon ? (
