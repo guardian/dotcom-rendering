@@ -22,6 +22,7 @@ import { FixedSmallSlowIV } from './FixedSmallSlowIV';
 import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
+import { HighlightsContainer } from './Masthead/HighlightsContainer';
 import { NavList } from './NavList';
 
 type Props = {
@@ -220,8 +221,7 @@ export const DecideContainer = ({
 		case 'nav/media-list':
 			return <NavList trails={trails} showImage={true} />;
 		case 'fixed/highlights':
-			// TODO - Implement Highlights container definition
-			return null;
+			return <HighlightsContainer trails={trails} />;
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}

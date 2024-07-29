@@ -90,9 +90,9 @@ export const HighlightsContainer = ({ trails }: Props) => {
 		<ol
 			css={[carouselStyles, generateCarouselColumnStyles(carouselLength)]}
 		>
-			{trails.map((trail, index) => {
+			{trails.map((trail) => {
 				return (
-					<li key={index} css={[itemStyles, verticalLineStyles]}>
+					<li key={trail.url} css={[itemStyles, verticalLineStyles]}>
 						<HighlightsCard
 							format={trail.format}
 							headlineText={trail.headline}

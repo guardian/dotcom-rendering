@@ -165,31 +165,38 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant';
 
+	const inHighlightsContainerABTest =
+		abTests.mastheadWithHighlightsVariant === 'variant';
+
 	const { updateLogoAdPartner, absoluteServerTimes = false } =
 		front.config.switches;
 
 	const Highlights = () => {
-		const showHighlights = front.isNetworkFront && inUpdatedHeaderABTest;
-		/** TODO - replace above test with the masthead AB test variant */
-		// && abTests.mastheadWithHighlightsVariant === 'variant';
+		const showHighlights =
+			front.isNetworkFront &&
+			inUpdatedHeaderABTest &&
+			inHighlightsContainerABTest;
 
 		const highlightsCollection = front.pressedPage.collections.find(
 			({ collectionType }) => collectionType === 'fixed/highlights',
 		);
 
-		return showHighlights && !!highlightsCollection ? (
-			<DecideContainer
-				containerType="fixed/highlights"
-				trails={[
-					...highlightsCollection.curated,
-					...highlightsCollection.backfill,
-				]}
-				groupedTrails={highlightsCollection.grouped}
-				showAge={false}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading="eager"
-			/>
-		) : undefined;
+		return (
+			showHighlights &&
+			!!highlightsCollection && (
+				<DecideContainer
+					containerType="fixed/highlights"
+					trails={[
+						...highlightsCollection.curated,
+						...highlightsCollection.backfill,
+					]}
+					groupedTrails={highlightsCollection.grouped}
+					showAge={false}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading="eager"
+				/>
+			)
+		);
 	};
 
 	return (
