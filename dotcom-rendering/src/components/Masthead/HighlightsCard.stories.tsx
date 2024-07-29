@@ -52,6 +52,7 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 					flex-basis: 1;
 				}
 				margin: 10px;
+				position: relative;
 			`}
 		>
 			{children}
