@@ -222,6 +222,7 @@ const sidePaddingDesktop = css`
 `;
 
 const bodyWrapper = css`
+	position: relative;
 	margin-bottom: ${space[3]}px;
 	${from.desktop} {
 		margin-bottom: 0;
@@ -256,44 +257,12 @@ const paddingBody = css`
 	}
 `;
 
-const tagOverlayGridStyles = css`
-	position: absolute;
-	${until.desktop} {
-		margin-left: 0px;
-	}
-	display: grid;
-	height: inherit;
-	width: 100%;
-	margin-left: 0;
-	grid-column-gap: 0px;
-	${getZIndex('tagLinkOverlay')}
-	${until.desktop} {
-		grid-template-columns: 100%; /* Main content */
-		grid-template-areas: 'sticky-tag';
-	}
-	${from.tablet} {
-		grid-template-columns: 1fr 700px 1fr;
-		grid-template-areas: '. sticky-tag .';
-	}
-	${from.desktop} {
-		grid-template-columns: 1fr 200px 740px 1fr;
-		grid-template-areas: '. sticky-tag . .';
-	}
-
-	${from.leftCol} {
-		grid-template-columns: 1fr 200px 900px 1fr;
-		grid-template-areas: '. sticky-tag . .';
-	}
-	${from.wide} {
-		grid-template-columns: 1fr 200px 1060px 1fr;
-		grid-template-areas: '. sticky-tag . .';
-	}
-`;
-
 const stickyTagStyles = css`
 	position: sticky;
 	top: 0;
+	${getZIndex('tagLinkOverlay')};
 `;
+
 interface BaseProps {
 	article: DCRArticle;
 	format: ArticleFormat;
@@ -354,11 +323,11 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
-	// The test is being paused on liveblogs whilst we investigate an issue
-	const shouldShowTagLink = false;
-	// isWeb &&
-	// article.config.abTests.tagLinkDesignVariant === 'variant' &&
-	// article.tags.some((tag) => tag.id === 'football/euro-2024');
+	const shouldShowTagLink =
+		isWeb &&
+		!!article.config.switches.tagLinkDesign &&
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -504,17 +473,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					)}
 				</div>
 			)}
-			<main
-				css={
-					shouldShowTagLink &&
-					css`
-						position: relative;
-						height: 100%;
-					`
-				}
-				data-layout="LiveLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
-			>
+			<main data-layout="LiveLayout">
 				{renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
 						<Section
@@ -533,23 +492,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					</Hide>
 				)}
-				{shouldShowTagLink && (
-					<div css={tagOverlayGridStyles}>
-						<GridItem area="sticky-tag">
-							<div css={stickyTagStyles}>
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									shouldShowTagLink={true}
-								/>
-							</div>
-						</GridItem>
-					</div>
-				)}
-
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -619,27 +561,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
-								{shouldShowTagLink ? (
-									<div
-										css={css`
-											height: 64px;
-											${from.desktop} {
-												height: 44px;
-											}
-										`}
-									/>
-								) : (
-									<ArticleTitle
-										format={format}
-										tags={article.tags}
-										sectionLabel={article.sectionLabel}
-										sectionUrl={article.sectionUrl}
-										guardianBaseURL={
-											article.guardianBaseURL
-										}
-										shouldShowTagLink={shouldShowTagLink}
-									/>
-								)}
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									shouldShowTagLink={false}
+								/>
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
@@ -966,6 +895,34 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									</Hide>
 								)}
 
+								{isWeb && shouldShowTagLink && (
+									<Hide until="desktop">
+										<div
+											css={[
+												stickyTagStyles,
+												css`
+													margin: 20px 0 20px 20px;
+												`,
+											]}
+										>
+											<ArticleTitle
+												format={format}
+												tags={article.tags}
+												sectionLabel={
+													article.sectionLabel
+												}
+												sectionUrl={article.sectionUrl}
+												guardianBaseURL={
+													article.guardianBaseURL
+												}
+												shouldShowTagLink={
+													shouldShowTagLink
+												}
+											/>
+										</div>
+									</Hide>
+								)}
+
 								{/* Match stats */}
 								{!!footballMatchUrl && (
 									<Island
@@ -981,6 +938,28 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
+									{isWeb && shouldShowTagLink && (
+										<Hide from="desktop">
+											<div css={[stickyTagStyles]}>
+												<ArticleTitle
+													format={format}
+													tags={article.tags}
+													sectionLabel={
+														article.sectionLabel
+													}
+													sectionUrl={
+														article.sectionUrl
+													}
+													guardianBaseURL={
+														article.guardianBaseURL
+													}
+													shouldShowTagLink={
+														shouldShowTagLink
+													}
+												/>
+											</div>
+										</Hide>
+									)}
 									{showKeyEventsToggle ? (
 										<Hide below="desktop">
 											<Island

@@ -96,7 +96,7 @@ const fillBarStyles = css`
 	background-color: ${palette('--tag-link-fill-background')};
 	margin-top: -${space[3]}px;
 	width: 100%;
-	height: 20px;
+	height: ${space[5]}px;
 	margin-bottom: -${space[2]}px;
 	margin-right: -1px;
 `;
@@ -112,20 +112,10 @@ export const TagLink = ({
 		format.design === ArticleDesign.DeadBlog;
 
 	return (
-		<div
-			css={[
-				containerStyles,
-				!isBlog &&
-					css`
-						padding-top: ${space[0]}px;
-					`,
-			]}
-		>
-			{!isBlog && (
-				<Hide from="leftCol">
-					<div css={fillBarStyles} />
-				</Hide>
-			)}
+		<div css={[containerStyles]}>
+			<Hide from={isBlog ? 'desktop' : 'leftCol'}>
+				<div css={fillBarStyles} />
+			</Hide>
 			<a
 				href={`${guardianBaseURL}/${sectionUrl}`}
 				css={[tagLinkStyles, isBlog && desktopTabStyles]}
