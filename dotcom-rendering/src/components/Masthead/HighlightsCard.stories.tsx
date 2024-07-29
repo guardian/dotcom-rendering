@@ -18,6 +18,7 @@ const meta = {
 		</CardWrapper>
 	),
 	args: {
+		linkTo: '',
 		headlineText: 'Underground cave found on moon could be ideal base',
 		format: {
 			display: ArticleDisplay.Standard,

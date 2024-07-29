@@ -101,6 +101,8 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							byline={trail.byline}
 							image={trail.image}
 							imageLoading={imageLoading}
+							linkTo={trail.url}
+							dataLinkName={trail.dataLinkName}
 						/>
 					</li>
 				);
