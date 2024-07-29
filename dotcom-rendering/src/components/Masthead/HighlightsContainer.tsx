@@ -103,6 +103,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							linkTo={trail.url}
 							dataLinkName={trail.dataLinkName}
 							isExternalLink={trail.isExternalLink}
+							showQuotedHeadline={trail.showQuotedHeadline}
 						/>
 					</li>
 				);
