@@ -8,11 +8,7 @@ import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
-import {
-	expandedMenu,
-	expandedMenuRoot,
-	navInputCheckboxId,
-} from '../constants';
+import { expandedMenu, navInputCheckboxId } from '../constants';
 import { Sections } from './Sections';
 
 const wrapperMainMenuStyles = css`
@@ -119,27 +115,25 @@ export const ExpandedNav = ({
 	hasPageSkin,
 }: Props) => {
 	return (
-		<div id={expandedMenuRoot}>
+		<div
+			id={expandedMenu}
+			data-testid="expanded-menu"
+			css={wrapperMainMenuStyles}
+		>
 			<div
-				id={expandedMenu}
-				data-testid="expanded-menu"
-				css={wrapperMainMenuStyles}
+				css={css`
+					${from.desktop} {
+						position: relative;
+					}
+				`}
 			>
-				<div
-					css={css`
-						${from.desktop} {
-							position: relative;
-						}
-					`}
-				>
-					<div css={mainMenuStyles}>
-						<Sections
-							editionId={editionId}
-							isImmersive={isImmersive}
-							nav={nav}
-							hasPageSkin={hasPageSkin}
-						/>
-					</div>
+				<div css={mainMenuStyles}>
+					<Sections
+						editionId={editionId}
+						isImmersive={isImmersive}
+						nav={nav}
+						hasPageSkin={hasPageSkin}
+					/>
 				</div>
 			</div>
 		</div>

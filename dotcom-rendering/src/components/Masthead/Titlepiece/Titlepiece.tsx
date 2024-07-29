@@ -12,7 +12,6 @@ import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import { BurgerMenu } from './BurgerMenu';
 import {
 	expandedMenuRoot,
 	navInputCheckboxId,
@@ -26,6 +25,7 @@ import { Grid } from './Grid';
 import { Logo } from './Logo';
 import { Pillars } from './Pillars';
 import { SubNav } from './SubNav';
+import { VeggieBurger } from './VeggieBurger';
 
 interface Props {
 	nav: NavType;
@@ -181,6 +181,12 @@ const dividerOverridesForSubNav = css`
 			right: 0;
 		}
 	}
+`;
+
+const expandedNavStyles = css`
+	${gridContent}
+	grid-row: 2;
+	margin-top: -1px;
 `;
 
 const subNavWrapper = css`
@@ -400,15 +406,10 @@ export const Titlepiece = ({
 			</div>
 
 			<div css={burgerStyles}>
-				<BurgerMenu />
+				<VeggieBurger />
 			</div>
 
-			<div
-				css={css`
-					${gridContent}
-					margin-top: -1px;
-				`}
-			>
+			<div id={expandedMenuRoot} css={expandedNavStyles}>
 				<ExpandedNav
 					isImmersive={isImmersive}
 					nav={nav}

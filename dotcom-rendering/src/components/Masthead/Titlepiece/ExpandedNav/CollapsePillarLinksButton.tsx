@@ -68,7 +68,7 @@ const editionStyle = css`
 /**
  * Mobile only button to collapse a pillar section
  */
-export const CollapseSectionButton = ({
+export const CollapsePillarLinksButton = ({
 	title,
 	columnInputId,
 	collapseColumnInputId,

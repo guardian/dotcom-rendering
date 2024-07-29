@@ -7,6 +7,7 @@ import {
 	from,
 	space,
 	textSans15,
+	textSans17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -22,7 +23,7 @@ import {
 	listAccessibility,
 } from '../commonStyles';
 import { pillarWidthsPx } from '../constants';
-import { CollapseSectionButton } from './CollapseSectionButton';
+import { CollapsePillarLinksButton } from './CollapsePillarLinksButton';
 
 const pillarDivider = css`
 	${from.desktop} {
@@ -42,6 +43,7 @@ const pillarDivider = css`
 
 const columnLinkTitle = css`
 	${expandedNavLinkStyles};
+	${textSans17};
 
 	:hover,
 	:focus {
@@ -163,7 +165,7 @@ const columnStyleFromLeftCol = css`
  * Contains secondary navigation links relating to pillars
  * E.g. "Business" under the News pillar, "Food" under the Lifestyle pillar
  */
-export const Pillar = ({
+export const PillarLinks = ({
 	column,
 	index,
 	showLineBelow,
@@ -232,7 +234,7 @@ export const Pillar = ({
 				key="OpenExpandedMenuCheckbox"
 				aria-hidden="true"
 			/>
-			<CollapseSectionButton
+			<CollapsePillarLinksButton
 				collapseColumnInputId={collapseColumnInputId}
 				title={column.title}
 				columnInputId={columnInputId}

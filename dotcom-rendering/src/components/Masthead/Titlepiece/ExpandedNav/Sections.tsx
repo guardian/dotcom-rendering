@@ -10,7 +10,6 @@ import {
 	space,
 	textSans17,
 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../../../../lib/edition';
 import {
 	getEditionFromId,
@@ -25,7 +24,7 @@ import {
 	listAccessibility,
 } from '../commonStyles';
 import { MoreSection } from './MoreSection';
-import { lineStyle, Pillar } from './Pillar';
+import { lineStyle, PillarLinks } from './PillarLinks';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SearchBar } from './SearchBar';
 
@@ -151,7 +150,7 @@ export const Sections = ({
 				];
 
 				return (
-					<Pillar
+					<PillarLinks
 						column={{
 							...column,
 							children,
@@ -164,13 +163,14 @@ export const Sections = ({
 				);
 			})}
 
-			<Hide from="desktop">
-				<li role="none">
-					<SearchBar />
-				</li>
-			</Hide>
+			{/* Mobile only search bar */}
+			<li css={hideFromDesktop} role="none">
+				<SearchBar />
+			</li>
+
 			<div css={lineStyle}></div>
 
+			{/* Mobile only reader revenue links */}
 			<ReaderRevenueLinks
 				readerRevenueLinks={nav.readerRevenueLinks}
 				editionId={editionId}
@@ -178,7 +178,7 @@ export const Sections = ({
 
 			{/* Mobile only Brand Extensions list */}
 			<section css={hideFromDesktop}>
-				<Pillar
+				<PillarLinks
 					column={{
 						...activeEdition,
 						children: remainingEditions,
@@ -197,7 +197,7 @@ export const Sections = ({
 				hasPageSkin={hasPageSkin}
 			/>
 
-			{/* Desktop only Brand Extensions list*/}
+			{/* Desktop only Brand Extensions list */}
 			<li css={desktopBrandExtensionColumn} role="none">
 				<SearchBar />
 
