@@ -389,6 +389,8 @@ export const LabsSection = ({
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
 				hasPageSkin={hasPageSkin}
+				borderColour={palette('--section-border')}
+				backgroundColour="transparent"
 				/**
 				 * dumathoin?
 				 * https://github.com/guardian/frontend/pull/17625
