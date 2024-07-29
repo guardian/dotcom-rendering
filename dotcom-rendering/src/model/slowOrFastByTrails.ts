@@ -1,5 +1,5 @@
-import type { FEFrontCard } from '../types/front';
 import { isUndefined } from '@guardian/libs';
+import type { FEFrontCard } from '../types/front';
 
 /**
  * An 'arbitrary list of slow tags' once defined in Frontend.

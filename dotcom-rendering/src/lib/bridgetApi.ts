@@ -11,8 +11,8 @@ import * as Notifications from '@guardian/bridget/Notifications';
 import * as Tag from '@guardian/bridget/Tag';
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
-import { createAppClient } from './thrift/nativeConnection';
 import { isUndefined } from '@guardian/libs';
+import { createAppClient } from './thrift/nativeConnection';
 
 let environmentClient: Environment.Client<void> | undefined = undefined;
 export const getEnvironmentClient = (): Environment.Client<void> => {

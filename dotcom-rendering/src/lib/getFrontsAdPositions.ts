@@ -1,10 +1,10 @@
+import { isUndefined } from '@guardian/libs';
 import type { DCRCollectionType } from '../types/front';
 import {
 	MAX_FRONTS_BANNER_ADS,
 	MAX_FRONTS_MOBILE_ADS,
 } from './commercial-constants';
 import { frontsBannerExcludedCollections } from './frontsBannerExclusions';
-import { isUndefined } from '@guardian/libs';
 
 type GroupedCounts = {
 	snap: number;

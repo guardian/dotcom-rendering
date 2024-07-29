@@ -1,5 +1,5 @@
-import { adJson, stringify } from './ad-json.amp';
 import { isUndefined } from '@guardian/libs';
+import { adJson, stringify } from './ad-json.amp';
 
 const paramSet: AdTargetParam[] = [
 	{

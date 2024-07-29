@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { isUndefined } from '@guardian/libs';
 import { getLargest, getMaster } from '../lib/image';
 import type {
 	CartoonBlockElement,
@@ -12,7 +13,6 @@ import {
 	isCartoon,
 	isImage,
 } from './enhance-images';
-import { isUndefined } from '@guardian/libs';
 
 /** Used to determine if a lightbox can be created */
 const THRESHOLD = 620;

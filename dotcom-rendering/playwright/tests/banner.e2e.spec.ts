@@ -1,9 +1,9 @@
+import { isUndefined } from '@guardian/libs';
 import type { BrowserContext, Request } from '@playwright/test';
 import { test } from '@playwright/test';
 import { cmpAcceptAll } from '../lib/cmp';
 import { addCookie } from '../lib/cookies';
 import { loadPage } from '../lib/load-page';
-import { isUndefined } from '@guardian/libs';
 
 const optOutOfArticleCountConsent = async (context: BrowserContext) => {
 	await addCookie(context, {

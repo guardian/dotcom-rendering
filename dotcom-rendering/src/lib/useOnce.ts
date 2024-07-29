@@ -1,6 +1,6 @@
+import { isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { NonEmptyArray } from './tuple';
-import { isUndefined } from '@guardian/libs';
 
 /**
  * Ensures that the given task is only run once and only after all items in waitFor are defined

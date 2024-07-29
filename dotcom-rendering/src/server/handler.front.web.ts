@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { RequestHandler } from 'express';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
@@ -16,7 +17,6 @@ import type { DCRTagPageType, FETagPageType } from '../types/tagPage';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderFront, renderTagPage } from './render.front.web';
-import { isUndefined } from '@guardian/libs';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);

@@ -1,5 +1,5 @@
-import type { CommercialConfigType } from '../types/config';
 import { isUndefined } from '@guardian/libs';
+import type { CommercialConfigType } from '../types/config';
 
 export interface PermutivePayload {
 	'properties.content.premium'?: string;

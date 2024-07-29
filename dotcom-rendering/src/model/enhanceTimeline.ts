@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type {
 	DCRSectionedTimelineBlockElement,
 	DCRTimelineBlockElement,
@@ -8,7 +9,6 @@ import type {
 	FETimelineEvent,
 	FETimelineSection,
 } from '../types/content';
-import { isUndefined } from '@guardian/libs';
 
 type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 

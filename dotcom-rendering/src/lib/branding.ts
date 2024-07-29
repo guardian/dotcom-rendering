@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { DCRBadgeType } from '../types/badge';
 import type {
 	Branding,
@@ -9,7 +10,6 @@ import { assertUnreachable } from './assert-unreachable';
 import type { EditionId } from './edition';
 import type { NonEmptyArray } from './tuple';
 import { isNonEmptyArray } from './tuple';
-import { isUndefined } from '@guardian/libs';
 
 /**
  * For the sake of determining branding on a collection, these are the only

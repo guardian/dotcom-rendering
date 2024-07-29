@@ -1,5 +1,5 @@
-import type { FEElement, ListBlockElement } from '../types/content';
 import { isUndefined } from '@guardian/libs';
+import type { FEElement, ListBlockElement } from '../types/content';
 
 type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 
