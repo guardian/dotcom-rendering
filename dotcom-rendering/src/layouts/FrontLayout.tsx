@@ -181,19 +181,22 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			({ collectionType }) => collectionType === 'fixed/highlights',
 		);
 
-		return showHighlights && !!highlightsCollection ? (
-			<DecideContainer
-				containerType="fixed/highlights"
-				trails={[
-					...highlightsCollection.curated,
-					...highlightsCollection.backfill,
-				]}
-				groupedTrails={highlightsCollection.grouped}
-				showAge={false}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading="eager"
-			/>
-		) : undefined;
+		return (
+			showHighlights &&
+			!!highlightsCollection && (
+				<DecideContainer
+					containerType="fixed/highlights"
+					trails={[
+						...highlightsCollection.curated,
+						...highlightsCollection.backfill,
+					]}
+					groupedTrails={highlightsCollection.grouped}
+					showAge={false}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading="eager"
+				/>
+			)
+		);
 	};
 
 	return (
