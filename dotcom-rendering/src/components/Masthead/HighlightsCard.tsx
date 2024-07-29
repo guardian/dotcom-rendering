@@ -21,7 +21,7 @@ export type HighlightsCardProps = {
 	mainMedia?: MainMedia;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	dataLinkName?: string;
+	dataLinkName: string;
 	byline?: string;
 	showMediaIcon?: boolean;
 	isExternalLink: boolean;
