@@ -173,7 +173,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const Highlights = () => {
 		const showHighlights =
-			front.isNetworkFront && inHighlightsContainerABTest;
+			front.isNetworkFront &&
+			inUpdatedHeaderABTest &&
+			inHighlightsContainerABTest;
 
 		const highlightsCollection = front.pressedPage.collections.find(
 			({ collectionType }) => collectionType === 'fixed/highlights',
