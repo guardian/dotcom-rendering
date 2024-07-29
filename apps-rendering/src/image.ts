@@ -3,7 +3,7 @@
 import type { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import { ArticleElementRole, isUndefined } from '@guardian/libs';
+import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '../vendor/@guardian/types/index';
 import {
@@ -97,10 +97,10 @@ const parseImage =
 
 		return getBestAsset(element.assets).flatMap((asset) => {
 			if (
-				isUndefined(asset.file) ||
+				asset.file === undefined ||
 				asset.file === '' ||
-				isUndefinedasset.typeData?.width) ||
-				isUndefinedasset.typeData.height)
+				asset.typeData?.width === undefined ||
+				asset.typeData.height === undefined
 			) {
 				return Optional.none();
 			}
@@ -129,7 +129,7 @@ const parseCardImage = (
 	image: CardImage | undefined,
 	salt: string,
 ): Option<Image> => {
-	if (isUndefined(image)) {
+	if (image === undefined) {
 		return none;
 	}
 
