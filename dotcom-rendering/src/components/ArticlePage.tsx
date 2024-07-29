@@ -60,7 +60,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 
 	return (
 		<StrictMode>
-			<Global styles={rootStyles(format, darkModeAvailable)} />
+			<Global
+				styles={rootStyles(
+					format, // @TODO remove (darkness, my old friend)
+					darkModeAvailable ? true : true,
+				)}
+			/>
 			{isWeb && (
 				<>
 					<SkipTo id="maincontent" label="Skip to main content" />

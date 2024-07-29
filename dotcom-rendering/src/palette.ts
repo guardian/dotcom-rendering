@@ -6841,9 +6841,11 @@ const paletteDeclarations = (
 	format: ArticleFormat,
 	colourScheme: 'light' | 'dark',
 ): string[] =>
-	Object.entries(paletteColours).map(
-		([colourName, colour]) =>
+	Object.entries(paletteColours).map(([colourName, colour]) =>
+		[
 			`${colourName}: ${colour[colourScheme](format)};`,
+			// `${colourName}: transparent; `,
+		].join('\n'),
 	);
 
 // ----- Exports ----- //

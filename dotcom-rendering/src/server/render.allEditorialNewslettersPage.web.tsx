@@ -27,7 +27,9 @@ export const renderEditorialNewslettersPage = ({
 	// The newsletters page is currently only supported on Web
 	const config = {
 		renderingTarget: 'Web',
-		darkModeAvailable: false,
+		darkModeAvailable:
+			newslettersPage.config.abTests.darkModeWebVariant === 'variant' ||
+			true,
 		updateLogoAdPartnerSwitch: false,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: newslettersPage.editionId,
