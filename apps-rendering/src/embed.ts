@@ -237,7 +237,7 @@ const parseSpotifyAudio =
 			}));
 
 const parseVideo = (element: BlockElement): Result<string, Embed> => {
-	if (element.videoTypeData) {
+	if (element.videoTypeData === undefined) {
 		return Result.err(
 			"I can't parse this video element, it has no 'videoTypeData' field",
 		);
