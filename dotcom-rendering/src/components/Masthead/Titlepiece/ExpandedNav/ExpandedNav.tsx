@@ -16,6 +16,12 @@ const wrapperMainMenuStyles = css`
 	${getZIndex('expanded-veggie-menu-wrapper')}
 	left: 0;
 	top: 0;
+
+	/* Default state is for the menu to be collapsed or hidden */
+	${from.desktop} {
+		display: none;
+	}
+
 	/*
         IMPORTANT NOTE:
         we need to specify the adjacent path to the a (current) tag
@@ -24,6 +30,7 @@ const wrapperMainMenuStyles = css`
     */
 	/* stylelint-disable-next-line selector-type-no-unknown */
 	${`#${navInputCheckboxId}`}:checked ~ div & {
+		/* Open the menu if the checkbox is checked */
 		${from.desktop} {
 			display: block;
 			overflow: visible;
@@ -51,9 +58,6 @@ const wrapperMainMenuStyles = css`
 		position: fixed;
 		right: 0;
 		will-change: transform;
-	}
-	${from.desktop} {
-		position: relative;
 	}
 `;
 

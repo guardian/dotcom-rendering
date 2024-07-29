@@ -150,7 +150,7 @@ const burgerStyles = css`
 		padding-bottom: ${space[2]}px;
 	}
 	${from.wide} {
-		margin-right: 454px;
+		margin-right: 536px;
 	}
 `;
 
@@ -294,7 +294,7 @@ export const Titlepiece = ({
                           }
                         }
 
-						if (!navInputCheckbox) return; // Sticky nav replaces the nav so element no longer exists for users in test.
+						if (!navInputCheckbox) return;
 
                         navInputCheckbox.addEventListener('click',function(){
                           document.body.classList.toggle('nav-is-open')
@@ -346,22 +346,6 @@ export const Titlepiece = ({
 				}}
 			/>
 
-			{/** Expanded menu checkbox */}
-			<input
-				type="checkbox"
-				css={css`
-					/* ${visuallyHidden}; */
-				`}
-				id={navInputCheckboxId}
-				name="more"
-				tabIndex={-1}
-				key="OpenExpandedMenuCheckbox"
-				aria-hidden="true"
-				role="button"
-				aria-expanded="false"
-				aria-haspopup="true"
-			/>
-
 			{/* Edition switcher menu */}
 			<div css={editionSwitcherMenuStyles}>
 				<EditionDropdown
@@ -381,6 +365,22 @@ export const Titlepiece = ({
 			{editionId === 'UK' && (
 				<span css={accreditationStyles}>News provider of the year</span>
 			)}
+
+			{/** Expanded menu checkbox */}
+			<input
+				type="checkbox"
+				css={css`
+					${visuallyHidden};
+				`}
+				id={navInputCheckboxId}
+				name="more"
+				tabIndex={-1}
+				key="OpenExpandedMenuCheckbox"
+				aria-hidden="true"
+				role="button"
+				aria-expanded="false"
+				aria-haspopup="true"
+			/>
 
 			{/* Pillars nav */}
 			<div
