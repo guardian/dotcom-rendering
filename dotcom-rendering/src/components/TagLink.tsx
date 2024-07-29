@@ -7,7 +7,7 @@ import {
 	headlineMedium14,
 	space,
 } from '@guardian/source/foundations';
-import { Hide, SvgArrowRightStraight } from '@guardian/source/react-components';
+import { SvgArrowRightStraight } from '@guardian/source/react-components';
 import { palette } from '../palette';
 
 interface Props {
@@ -16,6 +16,7 @@ interface Props {
 	guardianBaseURL: string;
 	format: ArticleFormat;
 }
+
 const containerStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
@@ -25,6 +26,7 @@ const tagLinkStyles = css`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	gap: ${space[1]}px;
 	height: 44px;
 	width: 100%;
 	padding: ${space[2]}px;
@@ -94,11 +96,14 @@ const arrowStyles = css`
 
 const fillBarStyles = css`
 	background-color: ${palette('--tag-link-fill-background')};
-	margin-top: -${space[3]}px;
 	width: 100%;
-	height: ${space[5]}px;
-	margin-bottom: -${space[2]}px;
-	margin-right: -1px;
+	margin-top: -2px;
+	margin-bottom: -1px;
+
+	height: ${space[2]}px;
+	${from.desktop} {
+		height: 10px;
+	}
 `;
 
 export const TagLink = ({
@@ -113,9 +118,7 @@ export const TagLink = ({
 
 	return (
 		<div css={[containerStyles]}>
-			<Hide from={isBlog ? 'desktop' : 'leftCol'}>
-				<div css={fillBarStyles} />
-			</Hide>
+			<div css={fillBarStyles} />
 			<a
 				href={`${guardianBaseURL}/${sectionUrl}`}
 				css={[tagLinkStyles, isBlog && desktopTabStyles]}
