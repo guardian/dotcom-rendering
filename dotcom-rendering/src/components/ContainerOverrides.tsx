@@ -367,7 +367,7 @@ const cardBorderTopLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
-			return sourcePalette.neutral[60];
+			return sourcePalette.neutral[73];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
@@ -423,7 +423,7 @@ const articleBorderLight: ContainerFunction = (containerPalette) => {
 		case 'SpecialReportAltPalette':
 			return transparentColour(sourcePalette.neutral[46], 0.3);
 		case 'Branded':
-			return sourcePalette.neutral[60];
+			return sourcePalette.neutral[73];
 		case 'MediaPalette':
 			return sourcePalette.neutral[46];
 		case 'PodcastPalette':
