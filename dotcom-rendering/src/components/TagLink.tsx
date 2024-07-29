@@ -100,7 +100,7 @@ const fillBarStyles = css`
 	margin-top: -2px;
 	margin-bottom: -1px;
 
-	height: ${space[2]}px;
+	height: 6px;
 	${from.desktop} {
 		height: 10px;
 	}
