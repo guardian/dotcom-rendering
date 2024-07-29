@@ -102,6 +102,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							imageLoading={imageLoading}
 							linkTo={trail.url}
 							dataLinkName={trail.dataLinkName}
+							isExternalLink={trail.isExternalLink}
 						/>
 					</li>
 				);

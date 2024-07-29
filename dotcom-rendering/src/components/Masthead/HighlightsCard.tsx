@@ -24,6 +24,7 @@ export type HighlightsCardProps = {
 	dataLinkName?: string;
 	byline?: string;
 	showMediaIcon?: boolean;
+	isExternalLink: boolean;
 };
 
 const gridContainer = css`
@@ -114,6 +115,7 @@ export const HighlightsCard = ({
 	dataLinkName,
 	byline,
 	showMediaIcon,
+	isExternalLink,
 }: HighlightsCardProps) => {
 	return (
 		<div css={[gridContainer, hoverStyles]}>
@@ -121,7 +123,7 @@ export const HighlightsCard = ({
 				linkTo={linkTo}
 				headlineText={headlineText}
 				dataLinkName={dataLinkName}
-				isExternalLink={false}
+				isExternalLink={isExternalLink}
 			/>
 			<div css={headline}>
 				<CardHeadline
@@ -130,6 +132,7 @@ export const HighlightsCard = ({
 					size="medium"
 					showPulsingDot={showPulsingDot}
 					kickerText={kickerText}
+					isExternalLink={isExternalLink}
 				/>
 			</div>
 			{mainMedia && showMediaIcon ? (
