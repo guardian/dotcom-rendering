@@ -165,13 +165,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant';
 
+	const inHighlightsContainerABTest =
+		abTests.mastheadWithHighlightsVariant === 'variant';
+
 	const { updateLogoAdPartner, absoluteServerTimes = false } =
 		front.config.switches;
 
 	const Highlights = () => {
-		const showHighlights = front.isNetworkFront && inUpdatedHeaderABTest;
-		/** TODO - replace above test with the masthead AB test variant */
-		// && abTests.mastheadWithHighlightsVariant === 'variant';
+		const showHighlights =
+			front.isNetworkFront && inHighlightsContainerABTest;
 
 		const highlightsCollection = front.pressedPage.collections.find(
 			({ collectionType }) => collectionType === 'fixed/highlights',
