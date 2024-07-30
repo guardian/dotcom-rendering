@@ -16,7 +16,7 @@ import { expandedNavLinkStyles, hideFromDesktop } from '../commonStyles';
 
 const columnLinkTitle = css`
 	${expandedNavLinkStyles}
-	color: ${themePalette('--sub-nav-reader-revenue-link-text')};
+	color: ${themePalette('--nav-reader-revenue-link-text')};
 	${textSansBold20}
 
 	${from.desktop} {

@@ -3364,42 +3364,22 @@ const subNavLinkHeaderLight: PaletteFunction = (format) => {
 			return sourcePalette.neutral[7];
 	}
 };
-const subNavLinkHeaderDark: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-const subNavLinkFooterLight: PaletteFunction = () => {
-	return sourcePalette.neutral[7];
-};
-const subNavLinkFooterDark: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-const subNavLinkHoverLight: PaletteFunction = (format) => {
-	return articleLinkHoverLight(format);
-};
-const subNavLinkHoverDark: PaletteFunction = (format) => {
-	return articleLinkHoverDark(format);
-};
-const subNavMoreLight: PaletteFunction = () => {
-	return sourcePalette.neutral[60];
-};
-const subNavMoreDark: PaletteFunction = () => {
-	return sourcePalette.neutral[38];
-};
-const subNavHorizontalSectionDivider: PaletteFunction = () => {
-	return sourcePalette.brand[600];
-};
-const subNavReaderRevenueLinkText: PaletteFunction = () => {
-	return sourcePalette.brandAlt[400];
-};
-const subNavSearchBarIcon: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-const subNavSearchBarText: PaletteFunction = () => {
-	return sourcePalette.neutral[100];
-};
-const subNavSectionHeaderBackground: PaletteFunction = () => {
-	return sourcePalette.brand[300];
-};
+const subNavLinkHeaderDark: PaletteFunction = () => sourcePalette.neutral[100];
+const subNavLinkFooterLight: PaletteFunction = () => sourcePalette.neutral[7];
+const subNavLinkFooterDark: PaletteFunction = () => sourcePalette.neutral[100];
+const subNavLinkHoverLight: PaletteFunction = (format) =>
+	articleLinkHoverLight(format);
+const subNavLinkHoverDark: PaletteFunction = (format) =>
+	articleLinkHoverDark(format);
+const subNavMoreLight: PaletteFunction = () => sourcePalette.neutral[60];
+const subNavMoreDark: PaletteFunction = () => sourcePalette.neutral[38];
+
+const navReaderRevenueLinkText: PaletteFunction = () =>
+	sourcePalette.brandAlt[400];
+const navSearchBarIcon: PaletteFunction = () => sourcePalette.neutral[100];
+const navSearchBarText: PaletteFunction = () => sourcePalette.neutral[100];
+const navSearchBarBackground: PaletteFunction = () =>
+	transparentColour(sourcePalette.neutral[100], 0.1);
 
 const pullQuoteTextLight: PaletteFunction = ({
 	design,
@@ -6330,6 +6310,22 @@ const paletteColours = {
 		light: mostViewedTabBorderLight,
 		dark: mostViewedTabBorderDark,
 	},
+	'--nav-reader-revenue-link-text': {
+		light: navReaderRevenueLinkText,
+		dark: navReaderRevenueLinkText,
+	},
+	'--nav-search-bar-background': {
+		light: navSearchBarBackground,
+		dark: navSearchBarBackground,
+	},
+	'--nav-search-bar-icon': {
+		light: navSearchBarIcon,
+		dark: navSearchBarIcon,
+	},
+	'--nav-search-bar-text': {
+		light: navSearchBarText,
+		dark: navSearchBarText,
+	},
 	'--numbered-list-heading': {
 		light: numberedListHeadingLight,
 		dark: numberedListHeadingDark,
@@ -6614,10 +6610,6 @@ const paletteColours = {
 		light: subNavBorder,
 		dark: subNavBorder,
 	},
-	'--sub-nav-horizontal-section-divider': {
-		light: subNavHorizontalSectionDivider,
-		dark: subNavHorizontalSectionDivider,
-	},
 	'--sub-nav-link-footer': {
 		light: subNavLinkFooterLight,
 		dark: subNavLinkFooterDark,
@@ -6633,22 +6625,6 @@ const paletteColours = {
 	'--sub-nav-more': {
 		light: subNavMoreLight,
 		dark: subNavMoreDark,
-	},
-	'--sub-nav-reader-revenue-link-text': {
-		light: subNavReaderRevenueLinkText,
-		dark: subNavReaderRevenueLinkText,
-	},
-	'--sub-nav-search-bar-icon': {
-		light: subNavSearchBarIcon,
-		dark: subNavSearchBarIcon,
-	},
-	'--sub-nav-search-bar-text': {
-		light: subNavSearchBarText,
-		dark: subNavSearchBarText,
-	},
-	'--sub-nav-section-header-background': {
-		light: subNavSectionHeaderBackground,
-		dark: subNavSectionHeaderBackground,
 	},
 	'--subheading-text': {
 		light: subheadingTextLight,
