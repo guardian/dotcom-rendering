@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import {
 	from,
 	headlineBold14,
@@ -6,19 +6,27 @@ import {
 	textSansBold14,
 	textSansBold17,
 	until,
+	visuallyHidden,
 } from '@guardian/source/foundations';
-import { Hide, SvgMenu } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import { pageMargin, smallMobilePageMargin } from './constants';
+import {
+	expandedMenuRoot,
+	navInputCheckboxId,
+	pageMargin,
+	smallMobilePageMargin,
+	veggieBurgerId,
+} from './constants';
 import { EditionDropdown } from './EditionDropdown';
+import { ExpandedNav } from './ExpandedNav/ExpandedNav';
 import { Grid } from './Grid';
 import { Logo } from './Logo';
 import { Pillars } from './Pillars';
 import { SubNav } from './SubNav';
+import { VeggieBurger } from './VeggieBurger';
 
 interface Props {
 	nav: NavType;
@@ -107,35 +115,6 @@ const logoStylesWithoutPageSkin = css`
 	}
 `;
 
-const burgerStyles = css`
-	z-index: 2;
-	${gridMainColumn}
-	grid-row: 1;
-	justify-content: center;
-	display: flex;
-	justify-self: end;
-	align-self: end;
-	height: ${veggieBurgerDiameter}px;
-	width: ${veggieBurgerDiameter}px;
-	border-radius: 50%;
-	background-color: ${themePalette('--masthead-veggie-burger-background')};
-	margin-bottom: 6px;
-
-	:hover {
-		background-color: ${themePalette(
-			'--masthead-veggie-burger-background-hover',
-		)};
-	}
-	${from.mobileMedium} {
-		grid-row: 2;
-		align-self: center;
-	}
-	${from.desktop} {
-		/** TODO - include veggie burger in desktop version of <Pillars /> */
-		display: none;
-	}
-`;
-
 const pillarsNavStyles = css`
 	${gridContent}
 	grid-row: 2;
@@ -147,6 +126,41 @@ const pillarsNavStyles = css`
 	${from.desktop} {
 		grid-row: 1 / 2;
 	}
+`;
+
+const burgerStyles = css`
+	${gridContent}
+	grid-row: 1;
+	align-self: center;
+	${from.mobileMedium} {
+		grid-row: 1 / 3;
+		align-self: end;
+	}
+	justify-content: center;
+	display: flex;
+	justify-self: end;
+	z-index: 2;
+	padding-bottom: 2px;
+	${from.mobileMedium} {
+		padding-bottom: ${space[1]}px;
+	}
+	${from.desktop} {
+		margin-right: 356px;
+		padding-bottom: 6px;
+	}
+	${from.leftCol} {
+		margin-right: 428px;
+		padding-bottom: ${space[2]}px;
+	}
+	${from.wide} {
+		margin-right: 536px;
+	}
+`;
+
+const expandedNavStyles = css`
+	${gridContent}
+	grid-row: 2;
+	margin-top: -1px;
 `;
 
 const horizontalDivider = css`
@@ -228,14 +242,107 @@ export const Titlepiece = ({
 }: Props) => {
 	return (
 		<Grid
-			type="section"
+			type="nav"
 			style={{
 				backgroundColor: themePalette('--masthead-nav-background'),
 				color: themePalette('--masthead-nav-link-text'),
 			}}
 			hasPageSkin={hasPageSkin}
 		>
-			{/* Edition menu */}
+			{/** The following Global styles, comment and script logic are lifted from /src/components/Nav/Nav.tsx: */}
+			<Global
+				styles={css`
+					/* We apply this style when the side navigation is open the prevent the document body from scrolling */
+					/* See Nav.tsx */
+					.nav-is-open {
+						${until.desktop} {
+							overflow: hidden;
+							height: 100vh;
+						}
+					}
+				`}
+			/>
+			{/*
+	           IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
+                We therefore use JS to make the Nav elements more accessible. We add a
+                keydown `addEventListener` to both the veggie burger button and the show
+                more menu buttons. We also listen to escape key presses to close the Nav menu.
+                We also toggle the tabindex of clickable items to make sure that even when we
+                are displaying the menu on mobile and tablet, that it doesnt get highlighted
+                when tabbing though the page.
+                This is not a perfect solution as not all screen readers support JS
+                https://webaim.org/projects/screenreadersurvey8/#javascript
+            */}
+			<script
+				dangerouslySetInnerHTML={{
+					__html: `document.addEventListener('DOMContentLoaded', function(){
+                        // Used to toggle data-link-name on label buttons
+                        var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
+                        var veggieBurger = document.getElementById('${veggieBurgerId}')
+                        var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
+                        var expandedMenu = document.getElementById('${expandedMenuRoot}')
+                        // We assume News is the 1st column
+                        var firstColLabel = document.getElementById('News-button')
+                        var firstColLink = document.querySelectorAll('#newsLinks > li:nth-of-type(2) > a')[0]
+                        var focusOnFirstNavElement = function(){
+                          // need to focus on first element in list, firstColLabel is not viewable on desktop
+                          if(window.getComputedStyle(firstColLabel).display === 'none'){
+                            firstColLink.focus()
+                          } else {
+                            firstColLabel.focus()
+                          }
+                        }
+						if (!navInputCheckbox) return;
+                        navInputCheckbox.addEventListener('click',function(){
+                          document.body.classList.toggle('nav-is-open')
+                          if(!navInputCheckbox.checked) {
+							firstColLabel.setAttribute('aria-expanded', 'false')
+                            veggieBurger.setAttribute('data-link-name','header : veggie-burger : show')
+                            expandedMenuClickableTags.forEach(function($selectableElement){
+                                $selectableElement.setAttribute('tabindex','-1')
+                            })
+                          } else {
+							firstColLabel.setAttribute('aria-expanded', 'true')
+                            veggieBurger.setAttribute('data-link-name','header : veggie-burger : hide')
+                            expandedMenuClickableTags.forEach(function($selectableElement){
+                                $selectableElement.setAttribute('tabindex','0')
+                            })
+                            focusOnFirstNavElement()
+                          }
+                        })
+                        var toggleMainMenu = function(e){
+                          navInputCheckbox.click()
+                        }
+                        // Close hide menu on press enter
+                        var keydownToggleMainMenu = function(e){
+                          // keyCode: 13 => Enter key | keyCode: 32 => Space key
+                          if (e.keyCode === 13 || e.keyCode === 32) {
+                            e.preventDefault()
+                            toggleMainMenu()
+                          }
+                        }
+                        veggieBurger.addEventListener('keydown', keydownToggleMainMenu)
+                        // Accessibility to hide Nav when pressing escape key
+                        document.addEventListener('keydown', function(e){
+                          // keyCode: 27 => esc
+                          if (e.keyCode === 27) {
+                            if(navInputCheckbox.checked) {
+                              toggleMainMenu()
+                              veggieBurger.focus()
+                            }
+                          }
+                        })
+                        // onBlur close dialog
+                        document.addEventListener('mousedown', function(e){
+                          if(navInputCheckbox.checked && !expandedMenu.contains(e.target)){
+                            toggleMainMenu()
+                          }
+                        });
+                      })`,
+				}}
+			/>
+
+			{/* Edition switcher menu */}
 			<div css={editionSwitcherMenuStyles}>
 				<EditionDropdown
 					editionId={editionId}
@@ -256,8 +363,24 @@ export const Titlepiece = ({
 				<span css={accreditationStyles}>News provider of the year</span>
 			)}
 
+			{/** Expanded menu checkbox */}
+			<input
+				type="checkbox"
+				css={css`
+					${visuallyHidden};
+				`}
+				id={navInputCheckboxId}
+				name="more"
+				tabIndex={-1}
+				key="OpenExpandedMenuCheckbox"
+				aria-hidden="true"
+				role="button"
+				aria-expanded="false"
+				aria-haspopup="true"
+			/>
+
 			{/* Pillars nav */}
-			<nav
+			<div
 				css={[
 					pillarsNavStyles,
 					horizontalDivider,
@@ -266,60 +389,38 @@ export const Titlepiece = ({
 						dividerOverridesForSubNav,
 				]}
 			>
-				{/* Pillars nav mobile version */}
-				<Hide from="desktop">
-					<Pillars
-						nav={nav}
-						dataLinkName={nestedOphanComponents(
-							'header',
-							'titlepiece',
-							'nav',
-						)}
-						selectedPillar={nav.selectedPillar}
-						isImmersive={isImmersive}
-						showBurgerMenu={false}
-						hasPageSkin={hasPageSkin}
-					/>
-				</Hide>
-
-				{/* Pillars nav desktop version (contains veggie burger) */}
-				<Hide until="desktop">
-					<Pillars
-						nav={nav}
-						dataLinkName={nestedOphanComponents(
-							'header',
-							'titlepiece',
-							'nav',
-						)}
-						selectedPillar={nav.selectedPillar}
-						isImmersive={isImmersive}
-						showBurgerMenu={true}
-						hasPageSkin={hasPageSkin}
-					/>
-				</Hide>
-
-				{/* <ExpandedNav
+				<Pillars
 					nav={nav}
-					editionId={editionId}
+					dataLinkName={nestedOphanComponents(
+						'header',
+						'titlepiece',
+						'nav',
+					)}
+					selectedPillar={nav.selectedPillar}
 					isImmersive={isImmersive}
+					showBurgerMenu={true}
 					hasPageSkin={hasPageSkin}
-				/> */}
-			</nav>
-
-			{/* Veggie burger menu */}
-			{/* <Hide from="desktop"> */}
-			<div css={burgerStyles}>
-				<SvgMenu
-					size="small"
-					theme={{
-						fill: themePalette('--masthead-veggie-burger-icon'),
-					}}
 				/>
 			</div>
-			{/* </Hide> */}
 
+			{/** Veggie burger menu button */}
+			<div css={burgerStyles}>
+				<VeggieBurger />
+			</div>
+
+			{/** Expanded menu */}
+			<div id={expandedMenuRoot} css={expandedNavStyles}>
+				<ExpandedNav
+					isImmersive={isImmersive}
+					nav={nav}
+					editionId={editionId}
+					hasPageSkin={hasPageSkin}
+				/>
+			</div>
+
+			{/** Subnav */}
 			{showSubNav && nav.subNavSections && (
-				<nav
+				<div
 					css={subNavWrapper}
 					data-print-layout="hide"
 					data-testid="sub-nav"
@@ -329,7 +430,7 @@ export const Titlepiece = ({
 						subNavSections={nav.subNavSections}
 						currentNavLink={nav.currentNavLink}
 					/>
-				</nav>
+				</div>
 			)}
 		</Grid>
 	);
