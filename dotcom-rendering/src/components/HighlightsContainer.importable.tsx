@@ -18,6 +18,7 @@ const containerStyles = css`
 		padding: 0 20px;
 	}
 `;
+
 const carouselStyles = css`
 	display: grid;
 	grid-auto-columns: 1fr;
