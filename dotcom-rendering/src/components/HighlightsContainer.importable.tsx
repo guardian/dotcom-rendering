@@ -147,17 +147,17 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	const imageLoading = 'eager';
 
 	const scrollTo = (direction: 'left' | 'right') => {
-		if (carouselRef.current) {
-			const cardWidth =
-				carouselRef.current.querySelector('li')?.offsetWidth || 0;
-			const offset = direction === 'left' ? -cardWidth : cardWidth;
-			carouselRef.current.scrollBy({
-				left: offset,
-				behavior: 'smooth',
-			});
-		}
-	};
+		if (!carouselRef.current) return;
 
+		const cardWidth =
+			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
+		const offset = direction === 'left' ? -cardWidth : cardWidth;
+
+		carouselRef.current.scrollBy({
+			left: offset,
+			behavior: 'smooth',
+		});
+	};
 	return (
 		<div css={containerStyles}>
 			<ol
