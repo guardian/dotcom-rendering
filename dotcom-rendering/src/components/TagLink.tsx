@@ -97,7 +97,7 @@ const arrowStyles = css`
 const fillBarStyles = css`
 	background-color: ${palette('--tag-link-fill-background')};
 	width: 100%;
-	margin-top: -2px;
+	margin-top: -1px;
 	margin-bottom: -1px;
 
 	height: 6px;
