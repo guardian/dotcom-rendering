@@ -26,17 +26,17 @@ const searchBar = css`
 
 const searchInput = css`
 	${textSans15}
-	background-color: rgba(255,255,255, .1);
+	background-color: ${themePalette('--nav-search-bar-background')};
 	border: 0;
 	border-radius: 1000px;
 	box-sizing: border-box;
-	color: ${themePalette('--sub-nav-search-bar-text')};
+	color: ${themePalette('--nav-search-bar-text')};
 	height: 36px;
 	padding-left: 38px;
 	vertical-align: middle;
 	width: 100%;
 	&::placeholder {
-		color: ${themePalette('--sub-nav-search-bar-text')};
+		color: ${themePalette('--nav-search-bar-text')};
 	}
 	&:focus {
 		padding-right: 40px;
@@ -55,7 +55,7 @@ const searchGlass = css`
 	position: absolute;
 	left: 7px;
 	top: 7px;
-	fill: ${themePalette('--sub-nav-search-bar-icon')};
+	fill: ${themePalette('--nav-search-bar-icon')};
 `;
 
 const searchSubmit = css`
@@ -70,7 +70,7 @@ const searchSubmit = css`
 	right: 0;
 	top: 0;
 	width: 50px;
-	fill: ${themePalette('--sub-nav-search-bar-icon')};
+	fill: ${themePalette('--nav-search-bar-icon')};
 	&:focus,
 	&:active {
 		opacity: 0;

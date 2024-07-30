@@ -88,13 +88,13 @@ const firstColumnLinks = css`
 		padding-left: 0;
 	}
 	${until.tablet} {
-		background: ${themePalette('--sub-nav-section-header-background')};
+		background: ${themePalette('--masthead-nav-background')};
 	}
 `;
 
 const pillarColumnLinks = css`
 	${until.tablet} {
-		background: ${themePalette('--sub-nav-section-header-background')};
+		background: ${themePalette('--masthead-nav-background')};
 	}
 `;
 
@@ -120,7 +120,7 @@ export const lineStyle = css`
 	${from.desktop} {
 		display: none;
 	}
-	background-color: ${themePalette('--sub-nav-horizontal-section-divider')};
+	background-color: ${themePalette('--masthead-nav-border')};
 	content: '';
 	display: block;
 	height: 1px;
