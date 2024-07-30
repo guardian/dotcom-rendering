@@ -19,6 +19,7 @@ interface Props {
 
 const containerStyles = css`
 	margin-bottom: ${space[2]}px;
+	margin-right: -1px; /* To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead */
 `;
 
 const tagLinkStyles = css`
@@ -44,7 +45,6 @@ const tagLinkStyles = css`
 		height: auto;
 		width: auto;
 		flex-direction: column;
-		margin-right: -1px; /* To align with rich link - if we move this feature to production, we should remove this and make rich link align with everything instead */
 	}
 `;
 const labelStyles = css`
