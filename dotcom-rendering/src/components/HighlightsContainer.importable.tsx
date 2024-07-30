@@ -47,9 +47,6 @@ const itemStyles = css`
 	position: relative;
 	margin: ${space[3]}px 10px;
 	:first-child {
-		${until.tablet} {
-			padding-left: 10px;
-		}
 		${from.tablet} {
 			margin-left: 0px;
 		}
