@@ -6156,17 +6156,17 @@ const paletteColours = {
 		light: headlineTextLight,
 		dark: headlineTextDark,
 	},
-	'--highlight-container-start-fade': {
-		light: highlightContainerStartFade,
-		dark: highlightContainerStartFade,
+	'--highlight-container-end-fade': {
+		light: highlightContainerEndFade,
+		dark: highlightContainerEndFade,
 	},
 	'--highlight-container-mid-fade': {
 		light: highlightContainerMidFade,
 		dark: highlightContainerMidFade,
 	},
-	'--highlight-container-end-fade': {
-		light: highlightContainerEndFade,
-		dark: highlightContainerEndFade,
+	'--highlight-container-start-fade': {
+		light: highlightContainerStartFade,
+		dark: highlightContainerStartFade,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
