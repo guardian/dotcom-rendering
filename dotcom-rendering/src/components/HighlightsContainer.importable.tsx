@@ -95,18 +95,18 @@ const buttonOverlayStyles = css`
 const previousButtonFadeStyles = css`
 	background: linear-gradient(
 		to right,
-		#f6f6f6 0%,
-		rgba(250, 250, 250, 0.6) 60%,
-		rgba(255, 255, 255, 0) 100%
+		${palette('--highlight-container-start-fade')} 0%,
+		${palette('--highlight-container-mid-fade')} 60%,
+		${palette('--highlight-container-end-fade')} 100%
 	);
 `;
 
 const nextButtonFadeStyles = css`
 	background: linear-gradient(
 		to left,
-		#f6f6f6 0%,
-		rgba(250, 250, 250, 0.6) 60%,
-		rgba(255, 255, 255, 0) 100%
+		${palette('--highlight-container-start-fade')} 0%,
+		${palette('--highlight-container-mid-fade')} 60%,
+		${palette('--highlight-container-end-fade')} 100%
 	);
 `;
 /**
