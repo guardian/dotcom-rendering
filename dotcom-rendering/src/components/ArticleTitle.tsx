@@ -51,7 +51,16 @@ export const ArticleTitle = ({
 	shouldShowTagLink,
 	isMatch,
 }: Props) => (
-	<div css={[sectionStyles]}>
+	<div
+		css={[
+			sectionStyles,
+			shouldShowTagLink &&
+				css`
+					padding-top: 0;
+					margin-top: 1px;
+				`,
+		]}
+	>
 		<div
 			css={[
 				format.display === ArticleDisplay.Immersive &&
