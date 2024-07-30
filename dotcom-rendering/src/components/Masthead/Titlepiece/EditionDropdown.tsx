@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { from, space, textSans17 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { editionList, getEditionFromId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -67,31 +66,16 @@ export const EditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Hide from="desktop">
-				<Dropdown
-					label={activeEdition.id}
-					links={linksToDisplay}
-					id="edition"
-					dataLinkName={dataLinkName}
-					cssOverrides={css`
-						${dropDownOverrides};
-						padding-top: 6px;
-					`}
-				/>
-			</Hide>
-
-			<Hide until="desktop">
-				<Dropdown
-					label={activeEdition.title}
-					links={linksToDisplay}
-					id="edition"
-					dataLinkName={dataLinkName}
-					cssOverrides={css`
-						${dropDownOverrides};
-						padding-top: 6px;
-					`}
-				/>
-			</Hide>
+			<Dropdown
+				label={activeEdition.id}
+				links={linksToDisplay}
+				id="edition"
+				dataLinkName={dataLinkName}
+				cssOverrides={css`
+					${dropDownOverrides};
+					padding-top: 6px;
+				`}
+			/>
 		</div>
 	);
 };
