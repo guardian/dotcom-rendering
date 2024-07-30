@@ -1,0 +1,14 @@
+body {
+	color: #f2f5f7;
+	background-color: #182931;
+	margin: auto 2rem;
+}
+
+a {
+	color: #19c6ff;
+}
+
+a:focus,
+a:hover {
+	color: #80dfff;
+}
