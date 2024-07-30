@@ -14,10 +14,8 @@ import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/s
 import { useEffect, useMemo, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
-import { useAB } from '../lib/useAB';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
-import { useIsInView } from '../lib/useIsInView';
 import { usePageViewId } from '../lib/usePageViewId';
 import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
@@ -26,7 +24,6 @@ import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 	createClickEventFromTracking,
 	createInsertEventFromTracking,
-	createViewEventFromTracking,
 } from './marketing/lib/tracking';
 
 const baseUrl = 'https://support.theguardian.com/contribute';
@@ -189,22 +186,6 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		}
 	}, [isSignedIn]);
 
-	const ABTestAPI = useAB()?.api;
-
-	const getVariant = (): 'control' | 'variant' | 'not-in-test' => {
-		if (ABTestAPI?.isUserInVariant('StickyLiveBlogAskTest', 'variant')) {
-			return 'variant';
-		} else if (
-			ABTestAPI?.isUserInVariant('StickyLiveBlogAskTest', 'control')
-		) {
-			return 'control';
-		}
-		return 'not-in-test';
-	};
-
-	const variantName = getVariant();
-	const userIsInTest = variantName !== 'not-in-test';
-
 	// tracking
 	const tracking: Tracking = useMemo(() => {
 		return {
@@ -213,12 +194,12 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			clientName: 'dcr',
 			referrerUrl,
 			// message tests
-			abTestName: whatAmI,
-			abTestVariant: variantName,
+			abTestName: '', // quick and dirty but doesn't feel right.
+			abTestVariant: '', // is this the right way to go about this?
 			campaignCode: whatAmI,
 			componentType: 'ACQUISITIONS_OTHER',
 		};
-	}, [pageViewId, referrerUrl, variantName]);
+	}, [pageViewId, referrerUrl]);
 
 	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
 		baseUrl,
@@ -226,51 +207,6 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		undefined,
 		countryCode,
 	);
-
-	// ophan tracking
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
-	});
-
-	// send event regardless of variant or control
-	// but only where they *could* see the component.
-	useEffect(() => {
-		if (
-			userIsInTest &&
-			showSupportMessagingForUser &&
-			!shouldHideReaderRevenueOnArticle
-		) {
-			// For ophan
-			void submitComponentEvent(
-				createInsertEventFromTracking(tracking, tracking.campaignCode),
-				renderingTarget,
-			);
-		}
-	}, [
-		tracking,
-		renderingTarget,
-		showSupportMessagingForUser,
-		shouldHideReaderRevenueOnArticle,
-		userIsInTest,
-	]);
-
-	// capture where it has been displayed (is variant).
-	useEffect(() => {
-		if (userIsInTest && hasBeenSeen) {
-			// For ophan
-			void submitComponentEvent(
-				createViewEventFromTracking(tracking, tracking.campaignCode),
-				renderingTarget,
-			);
-		}
-	}, [hasBeenSeen, tracking, renderingTarget, userIsInTest]);
-
-	const onCtaClick = () => {
-		void submitComponentEvent(
-			createClickEventFromTracking(tracking, tracking.campaignCode),
-			renderingTarget,
-		);
-	};
 
 	/* This is based on the assumption that the tag is added at the point of blog creation
 	 *  and not added later.  It's a balancing act between adding a useEffect that will run
@@ -280,15 +216,33 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 	});
 
 	const canShow =
-		variantName === 'variant' &&
 		showSupportMessagingForUser &&
 		!shouldHideReaderRevenueOnArticle &&
 		!shouldHideBasedOnTags;
 
+	// send event regardless of variant or control
+	// but only where they *could* see the component.
+	useEffect(() => {
+		if (canShow) {
+			// For ophan
+			void submitComponentEvent(
+				createInsertEventFromTracking(tracking, tracking.campaignCode),
+				renderingTarget,
+			);
+		}
+	}, [tracking, renderingTarget, canShow]);
+
+	const onCtaClick = () => {
+		void submitComponentEvent(
+			createClickEventFromTracking(tracking, tracking.campaignCode),
+			renderingTarget,
+		);
+	};
+
 	return (
 		<>
 			{canShow && (
-				<div css={stickyLeft} ref={setNode}>
+				<div css={stickyLeft}>
 					<StickyLiveblogAsk
 						url={urlWithRegionAndTracking}
 						onCtaClick={onCtaClick}
