@@ -6,7 +6,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -67,22 +67,8 @@ const verticalLineStyles = css`
 	}
 `;
 
-const buttonContainerStyles = css`
-	position: absolute;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
-	width: calc(
-		100% - 40px
-	); /* This accounts for the 20px padding on each side of the carousel */
-	top: 0;
-	pointer-events: none;
-`;
-
 const buttonStyles = css`
 	z-index: 1;
-	pointer-events: all;
 `;
 
 const buttonOverlayStyles = css`
@@ -90,9 +76,13 @@ const buttonOverlayStyles = css`
 	height: 100%;
 	display: flex;
 	align-items: center;
+	position: absolute;
+	top: 0;
+	pointer-events: all;
 `;
 
 const previousButtonFadeStyles = css`
+	left: 20px;
 	background: linear-gradient(
 		to right,
 		${palette('--highlight-container-start-fade')} 0%,
@@ -102,6 +92,7 @@ const previousButtonFadeStyles = css`
 `;
 
 const nextButtonFadeStyles = css`
+	right: 0;
 	background: linear-gradient(
 		to left,
 		${palette('--highlight-container-start-fade')} 0%,
@@ -147,6 +138,8 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
+	const [showLeftChevron, setShowLeftChevron] = useState(false);
+	const [showRightChevron, setShowRightChevron] = useState(true);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -160,6 +153,29 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			behavior: 'smooth',
 		});
 	};
+
+	const handleScroll = () => {
+		if (!carouselRef.current) return;
+
+		const scrollLeft = carouselRef.current.scrollLeft;
+		const maxScrollLeft =
+			carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+
+		setShowLeftChevron(scrollLeft > 0);
+		setShowRightChevron(scrollLeft < maxScrollLeft);
+	};
+
+	useEffect(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		carouselElement.addEventListener('scroll', handleScroll);
+
+		return () => {
+			carouselElement.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
+
 	return (
 		<div css={containerStyles}>
 			<ol
@@ -194,32 +210,41 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			</ol>
 
 			<Hide until={'tablet'}>
-				<div css={buttonContainerStyles}>
-					<div css={[buttonOverlayStyles, previousButtonFadeStyles]}>
-						<Button
-							css={buttonStyles}
-							hideLabel={true}
-							iconSide="left"
-							icon={<SvgChevronLeftSingle />}
-							onClick={() => scrollTo('left')}
-							aria-label="Move highlights carousel backwards"
-							data-link-name="highlights carousel left chevron"
-							size="small"
-						/>
-					</div>
-					<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
-						<Button
-							css={buttonStyles}
-							hideLabel={true}
-							iconSide="left"
-							icon={<SvgChevronRightSingle />}
-							onClick={() => scrollTo('right')}
-							aria-label="Move highlights carousel forwards"
-							data-link-name="highlights carousel right chevron"
-							size="small"
-						/>
-					</div>
-				</div>
+				<>
+					{showLeftChevron && (
+						<div
+							css={[
+								buttonOverlayStyles,
+								previousButtonFadeStyles,
+							]}
+						>
+							<Button
+								css={buttonStyles}
+								hideLabel={true}
+								iconSide="left"
+								icon={<SvgChevronLeftSingle />}
+								onClick={() => scrollTo('left')}
+								aria-label="Move highlights carousel backwards"
+								data-link-name="highlights carousel left chevron"
+								size="small"
+							/>
+						</div>
+					)}
+					{showRightChevron && (
+						<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
+							<Button
+								css={buttonStyles}
+								hideLabel={true}
+								iconSide="left"
+								icon={<SvgChevronRightSingle />}
+								onClick={() => scrollTo('right')}
+								aria-label="Move highlights carousel forwards"
+								data-link-name="highlights carousel right chevron"
+								size="small"
+							/>
+						</div>
+					)}
+				</>
 			</Hide>
 		</div>
 	);
