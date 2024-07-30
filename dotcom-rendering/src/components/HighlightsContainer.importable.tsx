@@ -18,6 +18,7 @@ const containerStyles = css`
 		padding: 0 20px;
 	}
 `;
+
 const carouselStyles = css`
 	display: grid;
 	grid-auto-columns: 1fr;
@@ -72,7 +73,7 @@ const buttonContainerStyles = css`
 	justify-content: space-between;
 	align-items: center;
 	height: 100%;
-	width: calc(100% - 40px); // is there a better way to do this?
+	width: calc(100% - 40px); // This accounts for the 20px padding on each side
 	top: 0;
 	pointer-events: none;
 `;
@@ -82,6 +83,30 @@ const buttonStyles = css`
 	pointer-events: all;
 `;
 
+const buttonOverlayStyles = css`
+	width: 60px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+`;
+
+const previousButtonFadeStyles = css`
+	background: linear-gradient(
+		to right,
+		#f6f6f6 0%,
+		rgba(250, 250, 250, 0.6) 60%,
+		rgba(255, 255, 255, 0) 100%
+	);
+`;
+
+const nextButtonFadeStyles = css`
+	background: linear-gradient(
+		to left,
+		#f6f6f6 0%,
+		rgba(250, 250, 250, 0.6) 60%,
+		rgba(255, 255, 255, 0) 100%
+	);
+`;
 /**
  * Generates CSS styles for a grid layout used in a carousel.
  *
@@ -168,20 +193,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 
 			<Hide until={'tablet'}>
 				<div css={buttonContainerStyles}>
-					<div
-						css={css`
-							width: 60px;
-							height: 100%;
-							display: flex;
-							align-items: center;
-							background: linear-gradient(
-								to right,
-								#f6f6f6 0%,
-								rgba(250, 250, 250, 0.6) 60%,
-								rgba(255, 255, 255, 0) 100%
-							);
-						`}
-					>
+					<div css={[buttonOverlayStyles, previousButtonFadeStyles]}>
 						<Button
 							css={buttonStyles}
 							hideLabel={true}
@@ -193,20 +205,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							size="small"
 						/>
 					</div>
-					<div
-						css={css`
-							width: 60px;
-							height: 100%;
-							display: flex;
-							align-items: center;
-							background: linear-gradient(
-								to left,
-								#f6f6f6 0%,
-								rgba(250, 250, 250, 0.6) 60%,
-								rgba(255, 255, 255, 0) 100%
-							);
-						`}
-					>
+					<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
 						<Button
 							css={buttonStyles}
 							hideLabel={true}
