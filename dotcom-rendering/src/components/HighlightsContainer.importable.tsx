@@ -73,7 +73,9 @@ const buttonContainerStyles = css`
 	justify-content: space-between;
 	align-items: center;
 	height: 100%;
-	width: calc(100% - 40px); // This accounts for the 20px padding on each side
+	width: calc(
+		100% - 40px
+	); /* This accounts for the 20px padding on each side of the carousel */
 	top: 0;
 	pointer-events: none;
 `;
