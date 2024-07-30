@@ -22,8 +22,9 @@ import { FixedSmallSlowIV } from './FixedSmallSlowIV';
 import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
-import { HighlightsContainer } from './Masthead/HighlightsContainer';
+import { HighlightsContainer } from './HighlightsContainer.importable';
 import { NavList } from './NavList';
+import { Island } from './Island';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -221,7 +222,11 @@ export const DecideContainer = ({
 		case 'nav/media-list':
 			return <NavList trails={trails} showImage={true} />;
 		case 'fixed/highlights':
-			return <HighlightsContainer trails={trails} />;
+			return (
+				<Island priority="feature" defer={{ until: 'visible' }}>
+					<HighlightsContainer trails={trails} />
+				</Island>
+			);
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
