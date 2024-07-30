@@ -116,7 +116,7 @@ const nextButtonFadeStyles = css`
  * @returns {string} - The CSS styles for the grid layout.
  */
 const generateCarouselColumnStyles = (totalCards: number) => {
-	const peepingCardWidth = 32;
+	const peepingCardWidth = space[8];
 
 	return css`
 		${until.mobileMedium} {
