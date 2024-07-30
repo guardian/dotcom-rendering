@@ -23,8 +23,8 @@ import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
 import { HighlightsContainer } from './HighlightsContainer.importable';
-import { NavList } from './NavList';
 import { Island } from './Island';
+import { NavList } from './NavList';
 
 type Props = {
 	trails: DCRFrontCard[];
