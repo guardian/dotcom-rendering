@@ -501,6 +501,7 @@ export const CarouselForNewsletters = ({
 		<div
 			css={wrapperStyle(newsletters.length)}
 			data-link-name={formatAttrString(heading)}
+			data-heatphan-type="carousel"
 		>
 			<LeftColumn borderType="partial" size={leftColSize}>
 				<HeaderAndNav
