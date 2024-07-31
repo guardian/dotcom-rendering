@@ -908,6 +908,7 @@ export const Carousel = ({
 				css={wrapperStyle(trails.length)}
 				data-link-name={formatAttrString(heading)}
 				data-component={isVideoContainer ? 'video-playlist' : undefined}
+				data-heatphan-type="carousel"
 			>
 				<LeftColumn
 					size={leftColSize}
