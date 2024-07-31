@@ -33,7 +33,7 @@ const weatherApiDataSchema = object({
 	}),
 	weather: weatherDataSchema,
 	/**
-	 * Our weather API returns 24 forecast.
+	 * Our weather API returns 24h forecast.
 	 * Each forecast is 1 hour offset from the previous forecast, and the first forecast is 1 hour offset from now.
 	 */
 	forecast: transform(
