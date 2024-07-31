@@ -8,7 +8,7 @@ import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
-import { expandedMenu, navInputCheckboxId } from '../constants';
+import { expandedMenuId, navInputCheckboxId } from '../constants';
 import { Sections } from './Sections';
 
 const wrapperMainMenuStyles = css`
@@ -110,7 +110,7 @@ export const ExpandedNav = ({
 }: Props) => {
 	return (
 		<div
-			id={expandedMenu}
+			id={expandedMenuId}
 			data-testid="expanded-menu"
 			css={wrapperMainMenuStyles}
 		>

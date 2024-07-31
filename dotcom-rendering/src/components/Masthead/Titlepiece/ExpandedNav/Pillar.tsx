@@ -36,7 +36,6 @@ const pillarDivider = css`
 			bottom: 0;
 			width: 1px;
 			background-color: ${themePalette('--masthead-nav-lines')};
-			z-index: 1;
 		}
 	}
 `;
@@ -100,7 +99,6 @@ const pillarColumnLinks = css`
 
 const hideWhenChecked = (columnInputId: string) => css`
 	${until.desktop} {
-		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${columnInputId}`}:checked ~ & {
 			display: none;
 		}
@@ -109,7 +107,6 @@ const hideWhenChecked = (columnInputId: string) => css`
 
 const hideWhenNotChecked = (columnInputId: string) => css`
 	${until.desktop} {
-		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${columnInputId}`}:not(:checked) ~ & {
 			display: none;
 		}
@@ -142,14 +139,10 @@ const columnStyle = css`
 		float: left;
 		position: relative;
 		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
-		:after {
-			height: 100%;
-			left: 0;
-			width: 1px;
-		}
 
 		:first-of-type {
 			border-left: none;
+			width: calc(${pillarWidthsPx.tablet}px - 1px);
 		}
 	}
 `;
@@ -157,9 +150,15 @@ const columnStyle = css`
 const columnStyleFromLeftCol = css`
 	${from.leftCol} {
 		width: ${pillarWidthsPx.leftCol}px;
+		:first-of-type {
+			width: calc(${pillarWidthsPx.leftCol}px - 1px);
+		}
 	}
 	${from.wide} {
 		width: ${pillarWidthsPx.wide}px;
+		:first-of-type {
+			width: calc(${pillarWidthsPx.wide}px - 1px);
+		}
 	}
 `;
 

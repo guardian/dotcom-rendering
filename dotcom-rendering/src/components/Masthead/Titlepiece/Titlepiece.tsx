@@ -14,7 +14,7 @@ import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
 import {
-	expandedMenuRoot,
+	expandedMenuRootId,
 	navInputCheckboxId,
 	pageMargin,
 	smallMobilePageMargin,
@@ -129,6 +129,7 @@ const pillarsNavStyles = css`
 `;
 
 const burgerStyles = css`
+	${getZIndex('burger')};
 	${gridContent}
 	grid-row: 1;
 	align-self: center;
@@ -139,7 +140,6 @@ const burgerStyles = css`
 	justify-content: center;
 	display: flex;
 	justify-self: end;
-	z-index: 2;
 	padding-bottom: 2px;
 	${from.mobileMedium} {
 		padding-bottom: ${space[1]}px;
@@ -165,7 +165,7 @@ const expandedNavStyles = css`
 
 const horizontalDivider = css`
 	position: relative;
-	z-index: 1;
+	/* z-index: 1; */
 	&::after {
 		content: '';
 		position: absolute;
@@ -280,7 +280,7 @@ export const Titlepiece = ({
                         var navInputCheckbox = document.getElementById('${navInputCheckboxId}')
                         var veggieBurger = document.getElementById('${veggieBurgerId}')
                         var expandedMenuClickableTags = document.querySelectorAll('.selectableMenuItem')
-                        var expandedMenu = document.getElementById('${expandedMenuRoot}')
+                        var expandedMenu = document.getElementById('${expandedMenuRootId}')
                         // We assume News is the 1st column
                         var firstColLabel = document.getElementById('News-button')
                         var firstColLink = document.querySelectorAll('#newsLinks > li:nth-of-type(2) > a')[0]
@@ -409,7 +409,7 @@ export const Titlepiece = ({
 			</div>
 
 			{/** Expanded menu */}
-			<div id={expandedMenuRoot} css={expandedNavStyles}>
+			<div id={expandedMenuRootId} css={expandedNavStyles}>
 				<ExpandedNav
 					isImmersive={isImmersive}
 					nav={nav}

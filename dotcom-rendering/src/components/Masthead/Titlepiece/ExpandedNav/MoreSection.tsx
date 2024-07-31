@@ -62,7 +62,6 @@ const pillarDivider = css`
 			width: 1px;
 			height: auto;
 			background-color: ${themePalette('--masthead-nav-lines')};
-			z-index: 1;
 		}
 	}
 `;
@@ -84,7 +83,6 @@ const pillarDividerExtended = css`
 			width: 1px;
 			height: auto;
 			background-color: ${themePalette('--masthead-nav-lines')};
-			z-index: 1;
 		}
 	}
 `;

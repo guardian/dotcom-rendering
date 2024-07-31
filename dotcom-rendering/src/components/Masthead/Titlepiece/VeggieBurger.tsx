@@ -3,8 +3,7 @@ import { visuallyHidden } from '@guardian/source/foundations';
 import { SvgCross, SvgMenu } from '@guardian/source/react-components';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
-import { veggieBurgerId } from '../../Nav/config';
-import { navInputCheckboxId } from './constants';
+import { navInputCheckboxId, veggieBurgerId } from './constants';
 
 const screenReadable = css`
 	${visuallyHidden};

@@ -1,10 +1,9 @@
 import { space } from '@guardian/source/foundations';
 
-export const navInputCheckboxId = 'top-nav-input-checkbox';
-export const showMoreButtonId = 'show-more-button';
-export const veggieBurgerId = 'veggie-burger';
-export const expandedMenu = 'expanded-menu';
-export const expandedMenuRoot = 'expanded-menu-root';
+export const navInputCheckboxId = 'header-nav-input-checkbox';
+export const veggieBurgerId = 'header-veggie-burger';
+export const expandedMenuRootId = 'header-expanded-menu-root';
+export const expandedMenuId = 'header-expanded-menu';
 
 export const pillarLeftMarginPx = 6;
 
