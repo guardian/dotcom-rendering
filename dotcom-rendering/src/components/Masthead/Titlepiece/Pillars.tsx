@@ -24,7 +24,6 @@ type Props = {
 	dataLinkName: string;
 	selectedPillar?: Pillar;
 	isImmersive?: boolean;
-	showBurgerMenu?: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -172,7 +171,7 @@ const firstPillarLinkOverrides = css`
 	}
 `;
 
-const verticalDividerStyles = css`
+export const verticalDivider = css`
 	:after {
 		content: '';
 		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
@@ -185,12 +184,6 @@ const verticalDividerStyles = css`
 		margin-top: ${space[1]}px;
 	}
 `;
-
-// TODO - implement veggie burger menu
-// const burgerPositionOverrides = css`
-// 	left: 6px;
-// 	bottom: 10px;
-// `;
 
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
@@ -219,7 +212,6 @@ export const Pillars = ({
 	selectedPillar,
 	dataLinkName,
 	isImmersive = false,
-	showBurgerMenu = false,
 	hasPageSkin = false,
 }: Props) => {
 	// TEMPORARY - to stop the linter freaking out
@@ -231,10 +223,7 @@ export const Pillars = ({
 		<ul id="navigation" css={pillarsContainer}>
 			{nav.pillars.map((p, i) => {
 				const isSelected = p.pillar === selectedPillar;
-
-				const showDivider =
-					showBurgerMenu || isNotLastPillar(i, nav.pillars.length);
-
+				const showDivider = isNotLastPillar(i, nav.pillars.length);
 				const pillarColour = getPillarColour(p.pillar);
 
 				return (
@@ -244,7 +233,7 @@ export const Pillars = ({
 							pillarBlock,
 							!hasPageSkin && pillarBlockWithoutPageSkin,
 							listAccessibility,
-							showDivider && verticalDividerStyles,
+							showDivider && verticalDivider,
 							i === 0 && firstPillarLinkOverrides,
 						]}
 					>
@@ -268,7 +257,6 @@ export const Pillars = ({
 					</li>
 				);
 			})}
-			{/** TODO - implement veggie burger menu */ showBurgerMenu && <></>}
 		</ul>
 	);
 };

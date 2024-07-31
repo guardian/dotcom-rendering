@@ -18,7 +18,6 @@ const meta = {
 		selectedPillar: nav.pillars[0]?.pillar as Pillar,
 		dataLinkName: nestedOphanComponents('header', 'titlepiece', 'nav'),
 		isImmersive: false,
-		showBurgerMenu: false,
 		hasPageSkin: false,
 	},
 	render: (args) => (
@@ -31,5 +30,3 @@ const meta = {
 export default meta;
 
 export const Default = {};
-
-export const WithBurgerMenu = { args: { showBurgerMenu: true } };

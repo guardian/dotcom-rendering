@@ -24,7 +24,7 @@ import { EditionDropdown } from './EditionDropdown';
 import { ExpandedNav } from './ExpandedNav/ExpandedNav';
 import { Grid } from './Grid';
 import { Logo } from './Logo';
-import { Pillars } from './Pillars';
+import { Pillars, verticalDivider } from './Pillars';
 import { SubNav } from './SubNav';
 import { VeggieBurger } from './VeggieBurger';
 
@@ -128,8 +128,13 @@ const pillarsNavStyles = css`
 
 	${from.desktop} {
 		grid-row: 1 / 2;
+		li:last-of-type {
+			${verticalDivider}
+		}
 	}
 `;
+
+const pillarFinalDividerStyle = css``;
 
 const burgerStyles = css`
 	${getZIndex('burger')};
@@ -396,6 +401,7 @@ export const Titlepiece = ({
 			<div
 				css={[
 					pillarsNavStyles,
+					pillarFinalDividerStyle,
 					horizontalDivider,
 					showSubNav &&
 						nav.subNavSections &&
@@ -411,7 +417,6 @@ export const Titlepiece = ({
 					)}
 					selectedPillar={nav.selectedPillar}
 					isImmersive={isImmersive}
-					showBurgerMenu={true}
 					hasPageSkin={hasPageSkin}
 				/>
 			</div>
