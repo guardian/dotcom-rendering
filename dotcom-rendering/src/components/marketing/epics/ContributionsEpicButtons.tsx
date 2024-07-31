@@ -145,7 +145,7 @@ interface ContributionsEpicButtonsProps {
 	showThreeTierChoiceCards?: boolean;
 	threeTierChoiceCardSelectedAmount?: number;
 	numArticles: number;
-	variantOfChoiceCard: string;
+	variantOfChoiceCard?: string;
 }
 
 export const ContributionsEpicButtons = ({
@@ -188,10 +188,7 @@ export const ContributionsEpicButtons = ({
 	const getChoiceCardCta = (cta: Cta): Cta => {
 		if (
 			showThreeTierChoiceCards &&
-			![
-				'V1_THREE_TIER_CHOICE_CARDS',
-				'V2_THREE_TIER_CHOICE_CARDS',
-			].includes(variantOfChoiceCard) &&
+			!variantOfChoiceCard &&
 			threeTierChoiceCardSelectedAmount != undefined
 		) {
 			return {
@@ -204,6 +201,7 @@ export const ContributionsEpicButtons = ({
 			};
 		}
 		if (
+			variantOfChoiceCard &&
 			[
 				'V1_THREE_TIER_CHOICE_CARDS',
 				'V2_THREE_TIER_CHOICE_CARDS',
@@ -271,7 +269,6 @@ export const ContributionsEpicButtons = ({
 							amountsVariantName={amountsVariantName}
 							countryCode={countryCode}
 							submitComponentEvent={submitComponentEvent}
-							variantOfChoiceCard={variantOfChoiceCard}
 						/>
 						{secondaryCta?.type === SecondaryCtaType.Custom &&
 							!!secondaryCta.cta.baseUrl &&
