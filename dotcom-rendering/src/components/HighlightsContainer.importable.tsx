@@ -161,13 +161,14 @@ export const HighlightsContainer = ({ trails }: Props) => {
 		});
 	};
 	return (
-		<div data-heatphan-type="carousel" css={containerStyles}>
+		<div css={containerStyles}>
 			<ol
 				ref={carouselRef}
 				css={[
 					carouselStyles,
 					generateCarouselColumnStyles(carouselLength),
 				]}
+				data-heatphan-type="carousel"
 			>
 				{trails.map((trail) => {
 					return (

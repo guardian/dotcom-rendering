@@ -501,7 +501,6 @@ export const CarouselForNewsletters = ({
 		<div
 			css={wrapperStyle(newsletters.length)}
 			data-link-name={formatAttrString(heading)}
-			data-heatphan-type="carousel"
 		>
 			<LeftColumn borderType="partial" size={leftColSize}>
 				<HeaderAndNav
@@ -591,6 +590,7 @@ export const CarouselForNewsletters = ({
 					css={carouselStyle}
 					ref={carouselRef}
 					data-component={`carousel-small | maxIndex-${maxIndex}`}
+					data-heatphan-type="carousel"
 				>
 					{newsletters.map((newsletter, i) => {
 						const uniqueKey = `${newsletter.identityName}-${i}`;
