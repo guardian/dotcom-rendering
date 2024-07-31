@@ -184,7 +184,6 @@ const supportingQuoteCss = css`
 `;
 
 const basePhotoEssayQuoteCss = css`
-	line-height: 25px;
 	position: relative;
 	padding: 6px 10px 12px 10px;
 	margin-bottom: 16px;
