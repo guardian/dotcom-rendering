@@ -65,15 +65,18 @@ const accreditationStyles = css`
 	color: ${themePalette('--masthead-accreditation-text')};
 
 	${textSansBold14}
-	${from.leftCol} {
-		${textSansBold17}
-	}
 
 	${until.mobileMedium} {
 		display: none;
 	}
 	${until.mobileLandscape} {
 		max-width: 100px;
+	}
+`;
+
+const accreditationStylesFromLeftCol = css`
+	${from.leftCol} {
+		${textSansBold17}
 	}
 `;
 
@@ -107,7 +110,7 @@ const logoStyles = css`
 	}
 `;
 
-const logoStylesWithoutPageSkin = css`
+const logoStylesFromLeftCol = css`
 	svg {
 		${from.leftCol} {
 			width: 324px;
@@ -148,6 +151,9 @@ const burgerStyles = css`
 		margin-right: 356px;
 		padding-bottom: 6px;
 	}
+`;
+
+const burgerStylesFromLeftCol = css`
 	${from.leftCol} {
 		margin-right: 428px;
 		padding-bottom: ${space[2]}px;
@@ -355,12 +361,19 @@ export const Titlepiece = ({
 			</div>
 
 			{/* Guardian logo */}
-			<div css={[logoStyles, !hasPageSkin && logoStylesWithoutPageSkin]}>
+			<div css={[logoStyles, !hasPageSkin && logoStylesFromLeftCol]}>
 				<Logo />
 			</div>
 
 			{editionId === 'UK' && (
-				<span css={accreditationStyles}>News provider of the year</span>
+				<span
+					css={[
+						accreditationStyles,
+						!hasPageSkin && accreditationStylesFromLeftCol,
+					]}
+				>
+					News provider of the year
+				</span>
 			)}
 
 			{/** Expanded menu checkbox */}
@@ -404,7 +417,7 @@ export const Titlepiece = ({
 			</div>
 
 			{/** Veggie burger menu button */}
-			<div css={burgerStyles}>
+			<div css={[burgerStyles, !hasPageSkin && burgerStylesFromLeftCol]}>
 				<VeggieBurger />
 			</div>
 
