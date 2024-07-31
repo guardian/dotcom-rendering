@@ -134,8 +134,6 @@ const pillarsNavStyles = css`
 	}
 `;
 
-const pillarFinalDividerStyle = css``;
-
 const burgerStyles = css`
 	${getZIndex('burger')};
 	${gridContent}
@@ -176,7 +174,6 @@ const expandedNavStyles = css`
 
 const horizontalDivider = css`
 	position: relative;
-	/* z-index: 1; */
 	&::after {
 		content: '';
 		position: absolute;
@@ -401,7 +398,6 @@ export const Titlepiece = ({
 			<div
 				css={[
 					pillarsNavStyles,
-					pillarFinalDividerStyle,
 					horizontalDivider,
 					showSubNav &&
 						nav.subNavSections &&

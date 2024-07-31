@@ -11,13 +11,7 @@ import { palette as themePalette } from '../../../../palette';
 import { expandedMenuId, navInputCheckboxId } from '../constants';
 import { Sections } from './Sections';
 
-const wrapperMainMenuStyles = css`
-	background-color: rgba(0, 0, 0, 0.5);
-	${getZIndex('expanded-veggie-menu-wrapper')}
-	left: 0;
-	top: 0;
-
-	/* Default state is for the menu to be collapsed or hidden */
+const collapsedMenuStyles = css`
 	${until.desktop} {
 		/* the negative translateX makes the nav hide to the side */
 		transform: translateX(-110%);
@@ -34,24 +28,43 @@ const wrapperMainMenuStyles = css`
 	${from.desktop} {
 		display: none;
 	}
+`;
+
+const expandedMenuStyles = css`
+	${until.desktop} {
+		/* menu appears from left of screen on mobile when translateX is set to 0% */
+		transform: translateX(0%);
+	}
+	${from.desktop} {
+		display: block;
+		overflow: visible;
+	}
+`;
+
+const wrapperMainMenuStyles = css`
+	${getZIndex('expanded-veggie-menu-wrapper')}
+	left: 0;
+	top: 0;
+
+	${collapsedMenuStyles}
 
 	/*
-        IMPORTANT NOTE:
-        we need to specify the adjacent path to the a (current) tag
-        to apply styles to the nested tabs due to the fact we use ~
-        to support NoJS
+	IMPORTANT NOTE:
+	we need to specify the adjacent path to the a (current) tag
+	to apply styles to the nested tabs due to the fact we use ~
+	to support NoJS
 
-		The following styles apply if the menu is open (checkbox is checked)
-    */
+	The following styles apply if the menu is open (checkbox is checked)
+	*/
 	${`#${navInputCheckboxId}`}:checked ~ div & {
-		${until.desktop} {
-			/* menu appears from left of screen on mobile when translateX is set to 0% */
-			transform: translateX(0%);
-		}
-		${from.desktop} {
-			display: block;
-			overflow: visible;
-		}
+		${expandedMenuStyles}
+	}
+`;
+
+const mobileBackgroundOverlay = css`
+	${until.desktop} {
+		/* TODO - use palette rather than hardcoded RGBA colour for background overlay */
+		background-color: rgba(0, 0, 0, 0.5);
 	}
 `;
 
@@ -114,6 +127,7 @@ export const ExpandedNav = ({
 			data-testid="expanded-menu"
 			css={wrapperMainMenuStyles}
 		>
+			<div css={mobileBackgroundOverlay} />
 			<div
 				css={css`
 					${from.desktop} {

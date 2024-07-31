@@ -12,5 +12,9 @@ export default {
 };
 
 export const Default = () => {
-	return <ExpandedNav nav={nav} editionId={'UK'} />;
+	return (
+		<>
+			<ExpandedNav nav={nav} editionId={'UK'} />
+		</>
+	);
 };
