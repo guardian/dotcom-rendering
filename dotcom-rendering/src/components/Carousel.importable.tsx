@@ -908,7 +908,6 @@ export const Carousel = ({
 				css={wrapperStyle(trails.length)}
 				data-link-name={formatAttrString(heading)}
 				data-component={isVideoContainer ? 'video-playlist' : undefined}
-				data-heatphan-type="carousel"
 			>
 				<LeftColumn
 					size={leftColSize}
@@ -965,6 +964,7 @@ export const Carousel = ({
 						]}
 						ref={carouselRef}
 						data-component={`carousel-small | maxIndex-${maxIndex}`}
+						data-heatphan-type="carousel"
 					>
 						{trails.map((trail, i) => {
 							const {
