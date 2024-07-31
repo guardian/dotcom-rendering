@@ -18,6 +18,11 @@ import {
 	getLocalCurrencySymbol,
 } from '@guardian/support-dotcom-components';
 import type { Dispatch, SetStateAction } from 'react';
+import {
+	ChoiceCardTestData_REGULAR,
+	ChoiceCardTestData_V1,
+	ChoiceCardTestData_V2,
+} from './ThreeTierChoiceCardData';
 import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
@@ -104,39 +109,6 @@ function getChoiceAmount(
 	return threeTierChoiceCardAmounts[countryGroupId][supportTier];
 }
 
-const Choices = [
-	{
-		supportTier: 'support',
-		label: (amount: number, currencySymbol: string) =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'Support',
-		benefits: [
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-		],
-		recommended: false,
-	},
-	{
-		supportTier: 'allAccess',
-		label: (amount: number, currencySymbol: string) =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'All-access digital',
-		benefits: [
-			'Unlimited access to the Guardian app',
-			'Ad-free reading on all your devices',
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-			'Far fewer asks for support',
-		],
-		recommended: true,
-	},
-	{
-		supportTier: 'other',
-		label: () => 'Support with another amount',
-		benefitsLabel: undefined,
-		benefits: ['We welcome support of any size, any time'],
-		recommended: false,
-	},
-] as const satisfies ReadonlyArray<ChoiceInfo>;
-
 const SupportingBenefits = ({
 	benefitsLabel,
 	benefits,
@@ -172,15 +144,32 @@ type ThreeTierChoiceCardsProps = {
 	selectedAmount: number;
 	setSelectedAmount: Dispatch<SetStateAction<number>>;
 	countryCode?: string;
+	variantOfChoiceCard: string;
 };
 
 export const ThreeTierChoiceCards = ({
 	countryCode,
 	selectedAmount,
 	setSelectedAmount,
+	variantOfChoiceCard,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
+
+	const getChoiceCardData = (variant: string) => {
+		switch (variant) {
+			case 'THREE_TIER_CHOICE_CARDS':
+				return ChoiceCardTestData_REGULAR;
+			case 'V1_THREE_TIER_CHOICE_CARDS':
+				return ChoiceCardTestData_V1;
+			case 'V2_THREE_TIER_CHOICE_CARDS':
+				return ChoiceCardTestData_V2;
+			default:
+				return ChoiceCardTestData_REGULAR;
+		}
+	};
+
+	const Choices = getChoiceCardData(variantOfChoiceCard) as ChoiceInfo[];
 
 	return (
 		<RadioGroup
