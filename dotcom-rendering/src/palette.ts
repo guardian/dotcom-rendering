@@ -5505,6 +5505,16 @@ const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 	}
 };
 
+const highlightContainerStartFade: PaletteFunction = () => {
+	return sourcePalette.neutral[97];
+};
+const highlightContainerMidFade: PaletteFunction = () => {
+	return 'rgba(250, 250, 250, 0.6)';
+};
+
+const highlightContainerEndFade: PaletteFunction = () => {
+	return 'transparent';
+};
 // ----- Palette ----- //
 
 /**
@@ -6125,6 +6135,18 @@ const paletteColours = {
 	'--headline-colour': {
 		light: headlineTextLight,
 		dark: headlineTextDark,
+	},
+	'--highlight-container-end-fade': {
+		light: highlightContainerEndFade,
+		dark: highlightContainerEndFade,
+	},
+	'--highlight-container-mid-fade': {
+		light: highlightContainerMidFade,
+		dark: highlightContainerMidFade,
+	},
+	'--highlight-container-start-fade': {
+		light: highlightContainerStartFade,
+		dark: highlightContainerStartFade,
 	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,

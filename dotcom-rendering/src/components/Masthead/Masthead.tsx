@@ -82,7 +82,7 @@ export const Masthead = ({
 
 		{highlights && (
 			<Section
-				shouldCenter={false}
+				shouldCenter={true}
 				showSideBorders={false}
 				fullWidth={true}
 				backgroundColour={themePalette(
