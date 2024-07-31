@@ -199,6 +199,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 					carouselStyles,
 					generateCarouselColumnStyles(carouselLength),
 				]}
+				data-heatphan-type="carousel"
 			>
 				{trails.map((trail) => {
 					return (

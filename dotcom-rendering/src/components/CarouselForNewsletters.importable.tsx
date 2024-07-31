@@ -590,6 +590,7 @@ export const CarouselForNewsletters = ({
 					css={carouselStyle}
 					ref={carouselRef}
 					data-component={`carousel-small | maxIndex-${maxIndex}`}
+					data-heatphan-type="carousel"
 				>
 					{newsletters.map((newsletter, i) => {
 						const uniqueKey = `${newsletter.identityName}-${i}`;

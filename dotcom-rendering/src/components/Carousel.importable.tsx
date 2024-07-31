@@ -964,6 +964,7 @@ export const Carousel = ({
 						]}
 						ref={carouselRef}
 						data-component={`carousel-small | maxIndex-${maxIndex}`}
+						data-heatphan-type="carousel"
 					>
 						{trails.map((trail, i) => {
 							const {
