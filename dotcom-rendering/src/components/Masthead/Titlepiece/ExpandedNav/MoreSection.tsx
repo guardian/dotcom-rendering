@@ -3,7 +3,12 @@
  * This file was largely copied from src/components/Nav/ExpandedMenu/MoreColumn.tsx
  */
 import { css } from '@emotion/react';
-import { from, space, textSans17 } from '@guardian/source/foundations';
+import {
+	from,
+	space,
+	textSans15,
+	textSans17,
+} from '@guardian/source/foundations';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
@@ -108,8 +113,8 @@ const columnLinks = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans17};
 	${expandedNavLinkStyles};
+	${textSans15};
 
 	:hover,
 	:focus {
@@ -143,7 +148,7 @@ export const MoreSection = ({
 	brandExtensions,
 	hasPageSkin,
 }: Props) => {
-	const subNavId = 'moreLinks';
+	const moreSectionId = 'moreLinks';
 
 	const links = [
 		...brandExtensions.map((brandExtension) => ({
@@ -163,7 +168,7 @@ export const MoreSection = ({
 			]}
 			role="none"
 		>
-			<ul css={[columnLinks]} role="menu" id={subNavId}>
+			<ul css={columnLinks} role="menu" id={moreSectionId}>
 				{links.map((link) => (
 					<li
 						key={link.title.toLowerCase()}

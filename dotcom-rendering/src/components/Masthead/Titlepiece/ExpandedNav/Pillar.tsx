@@ -7,7 +7,6 @@ import {
 	from,
 	space,
 	textSans15,
-	textSans17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -41,7 +40,7 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
-	${textSans17};
+	${textSans15};
 
 	${expandedNavLinkStyles};
 
