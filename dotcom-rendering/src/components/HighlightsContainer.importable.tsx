@@ -161,7 +161,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 		});
 	};
 	return (
-		<div data-heatphan="carousel" css={containerStyles}>
+		<div data-heatphan-type="carousel" css={containerStyles}>
 			<ol
 				ref={carouselRef}
 				css={[
