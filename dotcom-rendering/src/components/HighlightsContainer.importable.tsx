@@ -138,8 +138,8 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
-	const [showLeftChevron, setShowLeftChevron] = useState(false);
-	const [showRightChevron, setShowRightChevron] = useState(true);
+	const [showPreviousButton, setShowPreviousButton] = useState(false);
+	const [showNextButton, setShowNextButton] = useState(true);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -154,25 +154,40 @@ export const HighlightsContainer = ({ trails }: Props) => {
 		});
 	};
 
-	const handleScroll = () => {
-		if (!carouselRef.current) return;
+	/**
+	 * Updates the visibility of the navigation buttons based on the carousel's scroll position.
+	 *
+	 * This function checks the current scroll position of the carousel and sets the visibility
+	 * of the previous and next buttons accordingly. The previous button is shown if the carousel
+	 * is scrolled to the right of the start, and the next button is shown if the carousel is not
+	 * fully scrolled to the end.
+	 */
+	const updateButtonVisibilityOnScroll = () => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
 
-		const scrollLeft = carouselRef.current.scrollLeft;
+		const scrollLeft = carouselElement.scrollLeft;
 		const maxScrollLeft =
-			carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+			carouselElement.scrollWidth - carouselElement.clientWidth;
 
-		setShowLeftChevron(scrollLeft > 0);
-		setShowRightChevron(scrollLeft < maxScrollLeft);
+		setShowPreviousButton(scrollLeft > 0);
+		setShowNextButton(scrollLeft < maxScrollLeft);
 	};
 
 	useEffect(() => {
 		const carouselElement = carouselRef.current;
 		if (!carouselElement) return;
 
-		carouselElement.addEventListener('scroll', handleScroll);
+		carouselElement.addEventListener(
+			'scroll',
+			updateButtonVisibilityOnScroll,
+		);
 
 		return () => {
-			carouselElement.removeEventListener('scroll', handleScroll);
+			carouselElement.removeEventListener(
+				'scroll',
+				updateButtonVisibilityOnScroll,
+			);
 		};
 	}, []);
 
@@ -211,7 +226,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 
 			<Hide until={'tablet'}>
 				<>
-					{showLeftChevron && (
+					{showPreviousButton && (
 						<div
 							css={[
 								buttonOverlayStyles,
@@ -224,13 +239,13 @@ export const HighlightsContainer = ({ trails }: Props) => {
 								iconSide="left"
 								icon={<SvgChevronLeftSingle />}
 								onClick={() => scrollTo('left')}
-								aria-label="Move highlights carousel backwards"
+								aria-label="Move highlight stories backwards"
 								data-link-name="highlights carousel left chevron"
 								size="small"
 							/>
 						</div>
 					)}
-					{showRightChevron && (
+					{showNextButton && (
 						<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
 							<Button
 								css={buttonStyles}
@@ -238,7 +253,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 								iconSide="left"
 								icon={<SvgChevronRightSingle />}
 								onClick={() => scrollTo('right')}
-								aria-label="Move highlights carousel forwards"
+								aria-label="Move highlight stories forwards"
 								data-link-name="highlights carousel right chevron"
 								size="small"
 							/>
