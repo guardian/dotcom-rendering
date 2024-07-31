@@ -12,18 +12,10 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../../../../lib/edition';
-import {
-	getEditionFromId,
-	getRemainingEditions,
-} from '../../../../lib/edition';
 import { nestedOphanComponents } from '../../../../lib/ophan-helpers';
 import type { LinkType, NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
-import {
-	expandedNavLinkStyles,
-	hideFromDesktop,
-	listAccessibility,
-} from '../commonStyles';
+import { expandedNavLinkStyles, listAccessibility } from '../commonStyles';
 import { MoreSection } from './MoreSection';
 import { lineStyle, Pillar } from './Pillar';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
@@ -124,8 +116,6 @@ export const Sections = ({
 	editionId,
 	hasPageSkin,
 }: Props) => {
-	const activeEdition = getEditionFromId(editionId);
-	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
 			css={[
@@ -177,19 +167,6 @@ export const Sections = ({
 			/>
 
 			{/* Mobile only Brand Extensions list */}
-			<section css={hideFromDesktop}>
-				<Pillar
-					column={{
-						...activeEdition,
-						children: remainingEditions,
-					}}
-					index={10}
-					showLineBelow={false}
-					hasPageSkin={hasPageSkin}
-				/>
-				<div css={lineStyle}></div>
-			</section>
-
 			<MoreSection
 				otherLinks={nav.otherLinks}
 				brandExtensions={nav.brandExtensions}
