@@ -82,7 +82,7 @@ const buttonOverlayStyles = css`
 `;
 
 const previousButtonFadeStyles = css`
-	left: 20px;
+	left: ${space[5]}px;
 	background: linear-gradient(
 		to right,
 		${palette('--highlight-container-start-fade')} 0%,
@@ -225,41 +225,34 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			</ol>
 
 			<Hide until={'tablet'}>
-				<>
-					{showPreviousButton && (
-						<div
-							css={[
-								buttonOverlayStyles,
-								previousButtonFadeStyles,
-							]}
-						>
-							<Button
-								css={buttonStyles}
-								hideLabel={true}
-								iconSide="left"
-								icon={<SvgChevronLeftSingle />}
-								onClick={() => scrollTo('left')}
-								aria-label="Move highlight stories backwards"
-								data-link-name="highlights carousel left chevron"
-								size="small"
-							/>
-						</div>
-					)}
-					{showNextButton && (
-						<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
-							<Button
-								css={buttonStyles}
-								hideLabel={true}
-								iconSide="left"
-								icon={<SvgChevronRightSingle />}
-								onClick={() => scrollTo('right')}
-								aria-label="Move highlight stories forwards"
-								data-link-name="highlights carousel right chevron"
-								size="small"
-							/>
-						</div>
-					)}
-				</>
+				{showPreviousButton && (
+					<div css={[buttonOverlayStyles, previousButtonFadeStyles]}>
+						<Button
+							css={buttonStyles}
+							hideLabel={true}
+							iconSide="left"
+							icon={<SvgChevronLeftSingle />}
+							onClick={() => scrollTo('left')}
+							aria-label="Move highlight stories backwards"
+							data-link-name="highlights carousel left chevron"
+							size="small"
+						/>
+					</div>
+				)}
+				{showNextButton && (
+					<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
+						<Button
+							css={buttonStyles}
+							hideLabel={true}
+							iconSide="left"
+							icon={<SvgChevronRightSingle />}
+							onClick={() => scrollTo('right')}
+							aria-label="Move highlight stories forwards"
+							data-link-name="highlights carousel right chevron"
+							size="small"
+						/>
+					</div>
+				)}
 			</Hide>
 		</div>
 	);
