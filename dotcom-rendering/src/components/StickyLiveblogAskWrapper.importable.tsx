@@ -194,8 +194,8 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			clientName: 'dcr',
 			referrerUrl,
 			// message tests
-			abTestName: '', // quick and dirty but doesn't feel right.
-			abTestVariant: '', // is this the right way to go about this?
+			abTestName: '', // stop tracking AB test.
+			abTestVariant: '', // stop tracking AB test.
 			campaignCode: whatAmI,
 			componentType: 'ACQUISITIONS_OTHER',
 		};
