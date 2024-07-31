@@ -30,7 +30,7 @@ const collapsedMenuStyles = css`
 	}
 `;
 
-const expandedMenuStyles = css`
+export const expandedMenuStyles = css`
 	${until.desktop} {
 		/* menu appears from left of screen on mobile when translateX is set to 0% */
 		transform: translateX(0%);
