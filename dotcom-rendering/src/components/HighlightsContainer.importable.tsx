@@ -6,7 +6,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -67,22 +67,8 @@ const verticalLineStyles = css`
 	}
 `;
 
-const buttonContainerStyles = css`
-	position: absolute;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
-	width: calc(
-		100% - 40px
-	); /* This accounts for the 20px padding on each side of the carousel */
-	top: 0;
-	pointer-events: none;
-`;
-
 const buttonStyles = css`
 	z-index: 1;
-	pointer-events: all;
 `;
 
 const buttonOverlayStyles = css`
@@ -90,9 +76,13 @@ const buttonOverlayStyles = css`
 	height: 100%;
 	display: flex;
 	align-items: center;
+	position: absolute;
+	top: 0;
+	pointer-events: all;
 `;
 
 const previousButtonFadeStyles = css`
+	left: ${space[5]}px;
 	background: linear-gradient(
 		to right,
 		${palette('--highlight-container-start-fade')} 0%,
@@ -102,6 +92,7 @@ const previousButtonFadeStyles = css`
 `;
 
 const nextButtonFadeStyles = css`
+	right: 0;
 	background: linear-gradient(
 		to left,
 		${palette('--highlight-container-start-fade')} 0%,
@@ -147,6 +138,8 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
+	const [showPreviousButton, setShowPreviousButton] = useState(false);
+	const [showNextButton, setShowNextButton] = useState(true);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -160,6 +153,44 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			behavior: 'smooth',
 		});
 	};
+
+	/**
+	 * Updates the visibility of the navigation buttons based on the carousel's scroll position.
+	 *
+	 * This function checks the current scroll position of the carousel and sets the visibility
+	 * of the previous and next buttons accordingly. The previous button is shown if the carousel
+	 * is scrolled to the right of the start, and the next button is shown if the carousel is not
+	 * fully scrolled to the end.
+	 */
+	const updateButtonVisibilityOnScroll = () => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		const scrollLeft = carouselElement.scrollLeft;
+		const maxScrollLeft =
+			carouselElement.scrollWidth - carouselElement.clientWidth;
+
+		setShowPreviousButton(scrollLeft > 0);
+		setShowNextButton(scrollLeft < maxScrollLeft);
+	};
+
+	useEffect(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		carouselElement.addEventListener(
+			'scroll',
+			updateButtonVisibilityOnScroll,
+		);
+
+		return () => {
+			carouselElement.removeEventListener(
+				'scroll',
+				updateButtonVisibilityOnScroll,
+			);
+		};
+	}, []);
+
 	return (
 		<div css={containerStyles}>
 			<ol
@@ -195,7 +226,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			</ol>
 
 			<Hide until={'tablet'}>
-				<div css={buttonContainerStyles}>
+				{showPreviousButton && (
 					<div css={[buttonOverlayStyles, previousButtonFadeStyles]}>
 						<Button
 							css={buttonStyles}
@@ -203,11 +234,13 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							iconSide="left"
 							icon={<SvgChevronLeftSingle />}
 							onClick={() => scrollTo('left')}
-							aria-label="Move highlights carousel backwards"
+							aria-label="Move highlight stories backwards"
 							data-link-name="highlights carousel left chevron"
 							size="small"
 						/>
 					</div>
+				)}
+				{showNextButton && (
 					<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
 						<Button
 							css={buttonStyles}
@@ -215,12 +248,12 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							iconSide="left"
 							icon={<SvgChevronRightSingle />}
 							onClick={() => scrollTo('right')}
-							aria-label="Move highlights carousel forwards"
+							aria-label="Move highlight stories forwards"
 							data-link-name="highlights carousel right chevron"
 							size="small"
 						/>
 					</div>
-				</div>
+				)}
 			</Hide>
 		</div>
 	);
