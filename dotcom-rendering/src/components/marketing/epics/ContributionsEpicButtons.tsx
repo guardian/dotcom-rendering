@@ -145,6 +145,7 @@ interface ContributionsEpicButtonsProps {
 	showThreeTierChoiceCards?: boolean;
 	threeTierChoiceCardSelectedAmount?: number;
 	numArticles: number;
+	variantOfChoiceCard: string;
 }
 
 export const ContributionsEpicButtons = ({
@@ -162,6 +163,7 @@ export const ContributionsEpicButtons = ({
 	amountsTestName,
 	amountsVariantName,
 	numArticles,
+	variantOfChoiceCard,
 }: ContributionsEpicButtonsProps): JSX.Element | null => {
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -186,6 +188,10 @@ export const ContributionsEpicButtons = ({
 	const getChoiceCardCta = (cta: Cta): Cta => {
 		if (
 			showThreeTierChoiceCards &&
+			![
+				'V1_THREE_TIER_CHOICE_CARDS',
+				'V2_THREE_TIER_CHOICE_CARDS',
+			].includes(variantOfChoiceCard) &&
 			threeTierChoiceCardSelectedAmount != undefined
 		) {
 			return {
@@ -193,6 +199,32 @@ export const ContributionsEpicButtons = ({
 				baseUrl: addChoiceCardsParams(
 					cta.baseUrl,
 					'MONTHLY', // only doing monthly in the first test
+					threeTierChoiceCardSelectedAmount,
+				),
+			};
+		}
+		if (
+			[
+				'V1_THREE_TIER_CHOICE_CARDS',
+				'V2_THREE_TIER_CHOICE_CARDS',
+			].includes(variantOfChoiceCard) &&
+			threeTierChoiceCardSelectedAmount != undefined
+		) {
+			if (threeTierChoiceCardSelectedAmount === 0) {
+				return {
+					text: cta.text,
+					baseUrl: addChoiceCardsParams(
+						'https://support.theguardian.com/contribute/checkout?selected-contribution-type=one_off',
+						'ONE_OFF',
+						threeTierChoiceCardSelectedAmount,
+					),
+				};
+			}
+			return {
+				text: cta.text,
+				baseUrl: addChoiceCardsParams(
+					'https://support.theguardian.com/uk/contribute/checkout',
+					'MONTHLY',
 					threeTierChoiceCardSelectedAmount,
 				),
 			};
@@ -239,6 +271,7 @@ export const ContributionsEpicButtons = ({
 							amountsVariantName={amountsVariantName}
 							countryCode={countryCode}
 							submitComponentEvent={submitComponentEvent}
+							variantOfChoiceCard={variantOfChoiceCard}
 						/>
 						{secondaryCta?.type === SecondaryCtaType.Custom &&
 							!!secondaryCta.cta.baseUrl &&

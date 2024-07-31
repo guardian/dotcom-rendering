@@ -100,6 +100,7 @@ type ChoiceInfo = {
 	benefitsLabel?: string;
 	benefits: string[];
 	recommended: boolean;
+	url: string;
 };
 
 function getChoiceAmount(
@@ -147,6 +148,19 @@ type ThreeTierChoiceCardsProps = {
 	variantOfChoiceCard: string;
 };
 
+export const getChoiceCardData = (variant: string) => {
+	switch (variant) {
+		case 'THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_REGULAR;
+		case 'V1_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_V1;
+		case 'V2_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_V2;
+		default:
+			return ChoiceCardTestData_REGULAR;
+	}
+};
+
 export const ThreeTierChoiceCards = ({
 	countryCode,
 	selectedAmount,
@@ -155,19 +169,6 @@ export const ThreeTierChoiceCards = ({
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
-
-	const getChoiceCardData = (variant: string) => {
-		switch (variant) {
-			case 'THREE_TIER_CHOICE_CARDS':
-				return ChoiceCardTestData_REGULAR;
-			case 'V1_THREE_TIER_CHOICE_CARDS':
-				return ChoiceCardTestData_V1;
-			case 'V2_THREE_TIER_CHOICE_CARDS':
-				return ChoiceCardTestData_V2;
-			default:
-				return ChoiceCardTestData_REGULAR;
-		}
-	};
 
 	const Choices = getChoiceCardData(variantOfChoiceCard) as ChoiceInfo[];
 
