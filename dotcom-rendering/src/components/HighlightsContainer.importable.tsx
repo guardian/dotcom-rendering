@@ -51,6 +51,21 @@ const itemStyles = css`
 		${from.tablet} {
 			margin-left: 0px;
 		}
+
+		${from.leftCol} {
+			padding-left: 160px;
+		}
+		${from.wide} {
+			padding-left: 240px;
+		}
+	}
+	:last-child {
+		${from.leftCol} {
+			padding-right: 160px;
+		}
+		${from.wide} {
+			padding-right: 240px;
+		}
 	}
 `;
 
