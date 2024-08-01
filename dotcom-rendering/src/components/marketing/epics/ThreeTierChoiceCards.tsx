@@ -94,13 +94,12 @@ const recommendedPillStyles = css`
 	right: ${space[5]}px;
 `;
 
-type ChoiceInfo = {
+export type ChoiceInfo = {
 	supportTier: SupportTier;
 	label: (amount: number, currencySymbol: string) => string;
 	benefitsLabel?: string;
 	benefits: string[];
 	recommended: boolean;
-	url: string;
 };
 
 function getChoiceAmount(
@@ -148,7 +147,7 @@ type ThreeTierChoiceCardsProps = {
 	variantOfChoiceCard: string;
 };
 
-export const getChoiceCardData = (variant: string) => {
+export const getChoiceCardData = (variant: string): ChoiceInfo[] => {
 	switch (variant) {
 		case 'THREE_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_REGULAR;
@@ -170,7 +169,7 @@ export const ThreeTierChoiceCards = ({
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
 
-	const Choices = getChoiceCardData(variantOfChoiceCard) as ChoiceInfo[];
+	const Choices = getChoiceCardData(variantOfChoiceCard);
 
 	return (
 		<RadioGroup

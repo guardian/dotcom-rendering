@@ -1,4 +1,6 @@
-export const ChoiceCardTestData_REGULAR = [
+import type { ChoiceInfo } from './ThreeTierChoiceCards';
+
+export const ChoiceCardTestData_REGULAR: ChoiceInfo[] = [
 	{
 		supportTier: 'support',
 		label: (amount: number, currencySymbol: string): string =>
@@ -31,7 +33,7 @@ export const ChoiceCardTestData_REGULAR = [
 	},
 ];
 
-export const ChoiceCardTestData_V1 = [
+export const ChoiceCardTestData_V1: ChoiceInfo[] = [
 	{
 		supportTier: 'support',
 		label: (amount: number, currencySymbol: string): string =>
@@ -66,7 +68,7 @@ export const ChoiceCardTestData_V1 = [
 	},
 ];
 
-export const ChoiceCardTestData_V2 = [
+export const ChoiceCardTestData_V2: ChoiceInfo[] = [
 	{
 		supportTier: 'other',
 		label: (): string => 'Support just once from £1',

@@ -188,19 +188,6 @@ export const ContributionsEpicButtons = ({
 	const getChoiceCardCta = (cta: Cta): Cta => {
 		if (
 			showThreeTierChoiceCards &&
-			!variantOfChoiceCard &&
-			threeTierChoiceCardSelectedAmount != undefined
-		) {
-			return {
-				text: cta.text,
-				baseUrl: addChoiceCardsParams(
-					cta.baseUrl,
-					'MONTHLY', // only doing monthly in the first test
-					threeTierChoiceCardSelectedAmount,
-				),
-			};
-		}
-		if (
 			variantOfChoiceCard &&
 			[
 				'V1_THREE_TIER_CHOICE_CARDS',
