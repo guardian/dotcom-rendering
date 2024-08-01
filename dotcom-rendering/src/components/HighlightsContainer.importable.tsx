@@ -15,7 +15,10 @@ type Props = { trails: DCRFrontCard[] };
 
 const containerStyles = css`
 	${from.tablet} {
-		padding: 0 20px;
+		padding: 0 ${space[5]}px;
+	}
+	${from.wide} {
+		padding-right: 100px;
 	}
 `;
 
@@ -50,6 +53,33 @@ const itemStyles = css`
 	:first-child {
 		${from.tablet} {
 			margin-left: 0px;
+		}
+
+		/**
+		* From left col we add padding left to the first
+		* child so that the first card in the carousel aligns
+		* with the start of the pages content in the grid.
+		*/
+
+		${from.leftCol} {
+			padding-left: 160px; /** 160 === 2 columns and 2 column gaps  */
+		}
+		${from.wide} {
+			padding-left: 240px; /** 240 === 3 columns and 3 column gaps  */
+		}
+	}
+	:last-child {
+		/**
+		*From left col we add right padding to the
+		*last child to offset the first child's left padding.
+		*This ensures the carousel swipes fully across the container.
+		*/
+
+		${from.leftCol} {
+			padding-right: 160px;
+		}
+		${from.wide} {
+			padding-right: 240px;
 		}
 	}
 `;
@@ -92,10 +122,11 @@ const previousButtonFadeStyles = css`
 `;
 
 const nextButtonFadeStyles = css`
-	right: 0;
+	right: ${space[5]}px;
+	justify-content: flex-end;
 	background: linear-gradient(
 		to left,
-		${palette('--highlight-container-start-fade')} 0%,
+		${palette('--highlight-container-start-fade')} 0px,
 		${palette('--highlight-container-mid-fade')} 60%,
 		${palette('--highlight-container-end-fade')} 100%
 	);
