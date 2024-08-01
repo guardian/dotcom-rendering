@@ -239,5 +239,19 @@ export const groupTrailsByDates = (
 		.sort((a, b) => b.epoch - a.epoch)
 		.map(({ groupedTrail }) => groupedTrail);
 
-	return sortedGroupedTrails;
+	const sortedGroupedTrailsByTime = sortedGroupedTrails.map(
+		(groupedTrail) => {
+			groupedTrail.trails.sort((a, b) => {
+				if (b.webPublicationDate && a.webPublicationDate) {
+					return (
+						new Date(b.webPublicationDate).getTime() -
+						new Date(a.webPublicationDate).getTime()
+					);
+				}
+				return 0;
+			});
+			return groupedTrail;
+		},
+	);
+	return sortedGroupedTrailsByTime;
 };
