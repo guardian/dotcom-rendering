@@ -69,10 +69,14 @@ const itemStyles = css`
 		}
 
 		/**
-		* From left col we add padding left to the first
+		* At certain breakpoints, we add padding left to the first
 		* child so that the first card in the carousel aligns
 		* with the start of the pages content in the grid.
 		*/
+
+		${between.tablet.and.desktop} {
+			padding-left: 20px;
+		}
 
 		${from.leftCol} {
 			padding-left: 160px; /** 160 === 2 columns and 2 column gaps  */
@@ -83,10 +87,14 @@ const itemStyles = css`
 	}
 	:last-child {
 		/**
-		*From left col we add right padding to the
+		*We add right padding to the
 		*last child to offset the first child's left padding.
 		*This ensures the carousel swipes fully across the container.
 		*/
+
+		${between.tablet.and.desktop} {
+			padding-right: 20px;
+		}
 
 		${from.leftCol} {
 			padding-right: 160px;
