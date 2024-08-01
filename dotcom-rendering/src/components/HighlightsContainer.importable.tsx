@@ -34,6 +34,16 @@ const carouselStyles = css`
 	${until.desktop} {
 		scroll-padding-left: 10px;
 	}
+	${from.desktop} {
+		scroll-padding-left: 240px;
+	}
+	${from.leftCol} {
+		scroll-padding-left: 80px;
+	}
+
+	${from.wide} {
+		scroll-padding-left: 240px;
+	}
 	/**
 	* Hide scrollbars
 	* See: https://stackoverflow.com/a/38994837
