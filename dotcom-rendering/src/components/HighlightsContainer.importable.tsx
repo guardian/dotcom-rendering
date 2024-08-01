@@ -140,8 +140,7 @@ const previousButtonFadeStyles = css`
 `;
 
 const nextButtonFadeStyles = css`
-	right: ${space[5]}px;
-	justify-content: flex-end;
+	right: 0;
 	background: linear-gradient(
 		to left,
 		${palette('--highlight-container-start-fade')} 0px,
