@@ -1,7 +1,7 @@
 export const ChoiceCardTestData_REGULAR = [
 	{
 		supportTier: 'support',
-		label: (amount: number, currencySymbol: string) =>
+		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'Support',
 		benefits: [
@@ -11,7 +11,7 @@ export const ChoiceCardTestData_REGULAR = [
 	},
 	{
 		supportTier: 'allAccess',
-		label: (amount: number, currencySymbol: string) =>
+		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'All-access digital',
 		benefits: [
@@ -24,7 +24,7 @@ export const ChoiceCardTestData_REGULAR = [
 	},
 	{
 		supportTier: 'other',
-		label: () => 'Support with another amount',
+		label: (): string => 'Support with another amount',
 		benefitsLabel: undefined,
 		benefits: ['We welcome support of any size, any time'],
 		recommended: false,
@@ -34,7 +34,7 @@ export const ChoiceCardTestData_REGULAR = [
 export const ChoiceCardTestData_V1 = [
 	{
 		supportTier: 'support',
-		label: (amount: number, currencySymbol: string) =>
+		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'Support',
 		benefits: [
@@ -44,7 +44,7 @@ export const ChoiceCardTestData_V1 = [
 	},
 	{
 		supportTier: 'allAccess',
-		label: (amount: number, currencySymbol: string) =>
+		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'All-access digital',
 		benefits: [
@@ -57,7 +57,7 @@ export const ChoiceCardTestData_V1 = [
 	},
 	{
 		supportTier: 'other',
-		label: () => 'Support just once from £1',
+		label: (): string => 'Support just once from £1',
 		benefitsLabel: undefined,
 		benefits: [
 			'We welcome support of any size, any time - whether you choose to give £1 or more',
@@ -69,7 +69,7 @@ export const ChoiceCardTestData_V1 = [
 export const ChoiceCardTestData_V2 = [
 	{
 		supportTier: 'other',
-		label: () => 'Support just once from £1',
+		label: (): string => 'Support just once from £1',
 		benefitsLabel: undefined,
 		benefits: [
 			'We welcome support of any size, any time - whether you choose to give £1 or more',
@@ -78,7 +78,7 @@ export const ChoiceCardTestData_V2 = [
 	},
 	{
 		supportTier: 'support',
-		label: (amount: number, currencySymbol: string) =>
+		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'Support',
 		benefits: [
@@ -88,7 +88,7 @@ export const ChoiceCardTestData_V2 = [
 	},
 	{
 		supportTier: 'allAccess',
-		label: (amount: number, currencySymbol: string) =>
+		label: (amount: number, currencySymbol: string): string =>
 			`Support ${currencySymbol}${amount}/month`,
 		benefitsLabel: 'All-access digital',
 		benefits: [
