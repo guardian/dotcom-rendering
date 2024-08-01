@@ -21,11 +21,13 @@ type Props = {
 const standardTextStyles = css`
 	${textSans15}
 	/** We override the line height of the standard kicker
-	to match the overall height of the live kicker */
+	and add additional padding below the text, to align the text to
+	the top and match the overall height of the live kicker */
 	line-height: 1;
+	padding: 0 0 0.2em 0;
 `;
 
-const boldTextStyles = css`
+const boldTextOverrideStyles = css`
 	${textSansBold15}
 `;
 
@@ -65,7 +67,10 @@ export const Kicker = ({
 		if (isLiveKicker) {
 			return liveTextStyles;
 		} else {
-			return fontWeight === 'bold' ? boldTextStyles : standardTextStyles;
+			return [
+				standardTextStyles,
+				fontWeight === 'bold' && boldTextOverrideStyles,
+			];
 		}
 	};
 

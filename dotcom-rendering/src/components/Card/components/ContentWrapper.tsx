@@ -60,15 +60,6 @@ const flexBasisStyles = ({
 	}
 };
 
-const negativeTopMargin = css`
-	/**
-	* This reduces excess space above the card content, due to the line
-	* height of the text. It also ensures the top of the content aligns with
-	* with the top of the card image when the image is on the left or right.
-	*/
-	margin-top: -${space[1]}px;
-`;
-
 type Props = {
 	children: React.ReactNode;
 	imageType?: CardImageType;
@@ -96,7 +87,6 @@ export const ContentWrapper = ({
 				isHorizontalOnDesktop && [
 					flexBasisStyles({ imageSize, imageType }),
 				],
-				!isOnwardContent && negativeTopMargin,
 				css`
 					padding: ${!!hasBackgroundColour || !!isOnwardContent
 						? space[1]
