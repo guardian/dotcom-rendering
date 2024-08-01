@@ -38,6 +38,11 @@ const gridContainer = css`
 	${until.desktop} {
 		height: 194px;
 	}
+
+	${from.tablet} {
+		width: 160px;
+	}
+
 	${from.desktop} {
 		width: 300px;
 		grid-template-areas:
