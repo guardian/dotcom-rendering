@@ -19,7 +19,7 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"@aws-sdk/client-cloudwatch": "3.614.0",
+		"@aws-sdk/client-cloudwatch": "3.621.0",
 		"@babel/core": "7.24.7",
 		"@babel/helper-compilation-targets": "7.24.7",
 		"@babel/helper-create-regexp-features-plugin": "7.24.7",
