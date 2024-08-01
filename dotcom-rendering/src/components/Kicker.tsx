@@ -20,6 +20,9 @@ type Props = {
 
 const standardTextStyles = css`
 	${textSans15}
+	/** We override the line height of the standard kicker
+	to match the overall height of the live kicker */
+	line-height: 1;
 `;
 
 const boldTextStyles = css`
@@ -33,12 +36,6 @@ const liveTextStyles = css`
 	align-items: baseline;
 	width: fit-content;
 	padding: 0 ${space[1]}px;
-
-	/*
-	This is to keep the same height as the standard kicker
-	which has a slightly larger font
-	*/
-	margin-bottom: 1px;
 `;
 
 const hideLineBreakStyles = css`
@@ -48,6 +45,8 @@ const hideLineBreakStyles = css`
 
 /**
  * The kicker is a prefix to be used with a headline (e.g. 'Live')
+ *
+ * Kickers should have a line height of 18px.
  */
 export const Kicker = ({
 	text,
