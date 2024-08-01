@@ -15,7 +15,10 @@ type Props = { trails: DCRFrontCard[] };
 
 const containerStyles = css`
 	${from.tablet} {
-		padding: 0 20px;
+		padding: 0 ${space[5]}px;
+	}
+	${from.wide} {
+		padding-right: 100px;
 	}
 `;
 
@@ -52,14 +55,26 @@ const itemStyles = css`
 			margin-left: 0px;
 		}
 
+		/**
+		* From left col we add padding left to the first
+		* child so that the first card in the carousel aligns
+		* with the start of the pages content in the grid.
+		*/
+
 		${from.leftCol} {
-			padding-left: 160px;
+			padding-left: 160px; /** 160 === 2 columns and 2 column gaps  */
 		}
 		${from.wide} {
-			padding-left: 240px;
+			padding-left: 240px; /** 240 === 3 columns and 3 column gaps  */
 		}
 	}
 	:last-child {
+		/**
+		*From left col we add right padding to the
+		*last child to offset the first child's left padding.
+		*This ensures the carousel swipes fully across the container.
+		*/
+
 		${from.leftCol} {
 			padding-right: 160px;
 		}
