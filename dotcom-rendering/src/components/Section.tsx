@@ -53,6 +53,8 @@ type Props = {
 		| 'footer';
 	/** Sets a max width and margin auto to center children */
 	shouldCenter?: boolean;
+	/** Determines which breakpoint to apply centering styles from  */
+	centerFrom?: 'tablet' | 'desktop' | 'leftCol' | 'wide';
 	/** Defaults to `true`. Adds margins to the top and bottom */
 	verticalMargins?: boolean;
 	/** Applies a background colour to the entire width */
@@ -252,6 +254,7 @@ export const Section = ({
 	fullWidth = false,
 	element = 'section',
 	shouldCenter,
+	centerFrom,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
 	className,
@@ -275,6 +278,7 @@ export const Section = ({
 				className={className}
 				element={element}
 				shouldCenter={shouldCenter}
+				centerFrom={centerFrom}
 				hasPageSkin={hasPageSkin}
 				hasPageSkinContentSelfConstrain={
 					hasPageSkinContentSelfConstrain

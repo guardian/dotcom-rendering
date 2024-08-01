@@ -1,7 +1,7 @@
 import { css, jsx } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { center } from '../lib/center';
+import { decideCenter } from '../lib/center';
 import { palette } from '../palette';
 
 const sidePadding = css`
@@ -42,6 +42,7 @@ type Props = {
 	borderColour?: string;
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
+	centerFrom?: 'tablet' | 'desktop' | 'leftCol' | 'wide';
 	element?:
 		| 'div'
 		| 'article'
@@ -75,6 +76,7 @@ export const ElementContainer = ({
 	backgroundColour,
 	innerBackgroundColour,
 	shouldCenter = true,
+	centerFrom = 'tablet',
 	children,
 	element = 'div',
 	className,
@@ -110,7 +112,7 @@ export const ElementContainer = ({
 					backgroundColor: innerBackgroundColour,
 				}}
 				css={[
-					shouldCenter && center,
+					shouldCenter && decideCenter(centerFrom),
 					showSideBorders && sideBorderStyles,
 					showTopBorder && topBorderStyles,
 					padSides && sidePadding,

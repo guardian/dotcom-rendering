@@ -83,6 +83,7 @@ export const Masthead = ({
 		{highlights && (
 			<Section
 				shouldCenter={true}
+				centerFrom="desktop"
 				showSideBorders={false}
 				fullWidth={true}
 				backgroundColour={themePalette(
