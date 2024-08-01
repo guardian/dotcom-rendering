@@ -14,9 +14,6 @@ import { HighlightsCard } from './Masthead/HighlightsCard';
 type Props = { trails: DCRFrontCard[] };
 
 const containerStyles = css`
-	${between.tablet.and.desktop} {
-		width: 100vw;
-	}
 	${from.desktop} {
 		padding: 0 ${space[5]}px;
 	}
