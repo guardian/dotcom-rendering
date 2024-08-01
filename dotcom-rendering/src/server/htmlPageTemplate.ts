@@ -74,6 +74,8 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		config,
 	} = props;
 
+	const doNotIndex = canonicalUrl?.includes('tracking/commissioningdesk');
+
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
@@ -261,6 +263,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
                 <meta name="robots" content="max-image-preview:large">
+				${doNotIndex && '<meta name="robots" content="noindex">'}
 
                 <script>
                     window.guardian = ${windowGuardian};
