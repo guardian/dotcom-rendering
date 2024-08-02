@@ -4,7 +4,7 @@ import {
 	palette as sourcePalette,
 	textSans14,
 } from '@guardian/source/foundations';
-import { SvgInfo } from '@guardian/source/react-components';
+import { SvgInfoRound } from '@guardian/source/react-components';
 import { palette as themePalette } from '../../palette';
 
 const imageStyling = css`
@@ -110,7 +110,7 @@ export const Body = ({
 			/>
 			{!!credit && (
 				<div css={creditStyling}>
-					<SvgInfo />
+					<SvgInfoRound />
 					{credit}
 				</div>
 			)}
