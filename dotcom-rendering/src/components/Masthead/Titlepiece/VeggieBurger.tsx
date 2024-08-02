@@ -3,13 +3,10 @@
  * This file was largely copied from src/components/Nav/ExpandedMenu/VeggieBurgerMenu.tsx
  */
 import { css } from '@emotion/react';
-import {
-	from,
-	palette as sourcePalette,
-	visuallyHidden,
-} from '@guardian/source/foundations';
+import { from, visuallyHidden } from '@guardian/source/foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { palette as themePalette } from '../../../palette';
 import { navInputCheckboxId, veggieBurgerId } from './constants';
 
 const screenReadable = css`
@@ -72,8 +69,8 @@ const veggieBurgerIconStyles = css`
 `;
 
 const veggieBurgerStyles = (isImmersive: boolean) => css`
-	background-color: ${sourcePalette.brandAlt[400]};
-	color: ${sourcePalette.neutral[7]};
+	background-color: ${themePalette('--masthead-veggie-burger-background')};
+	color: ${themePalette('--masthead-veggie-burger-icon')};
 	cursor: pointer;
 	height: 42px;
 	min-width: 42px;
@@ -106,6 +103,11 @@ const veggieBurgerStyles = (isImmersive: boolean) => css`
 	}
 	:focus {
 		outline: none;
+	}
+	:hover {
+		background-color: ${themePalette(
+			'--masthead-veggie-burger-background-hover',
+		)};
 	}
 `;
 

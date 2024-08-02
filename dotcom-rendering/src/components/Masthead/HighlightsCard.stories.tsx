@@ -18,6 +18,7 @@ const meta = {
 		</CardWrapper>
 	),
 	args: {
+		linkTo: '',
 		headlineText: 'Underground cave found on moon could be ideal base',
 		format: {
 			display: ArticleDisplay.Standard,
@@ -51,6 +52,7 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 					flex-basis: 1;
 				}
 				margin: 10px;
+				position: relative;
 			`}
 		>
 			{children}
