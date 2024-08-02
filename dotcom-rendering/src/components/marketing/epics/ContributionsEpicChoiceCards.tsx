@@ -5,6 +5,7 @@
  */
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { until, visuallyHidden } from '@guardian/source/foundations';
 import { ChoiceCard, ChoiceCardGroup } from '@guardian/source/react-components';
 import { contributionTabFrequencies } from '@guardian/support-dotcom-components';
@@ -127,7 +128,7 @@ export const ContributionsEpicChoiceCards: ReactComponent<
 	};
 
 	const ChoiceCardAmount = ({ amount }: { amount?: number }) => {
-		if (amount !== undefined) {
+		if (!isUndefined(amount)) {
 			return (
 				<ChoiceCard
 					value={`${amount}`}
