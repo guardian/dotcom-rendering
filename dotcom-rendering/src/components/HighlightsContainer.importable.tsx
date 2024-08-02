@@ -168,10 +168,6 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 		${from.tablet} {
 			grid-template-columns: repeat(${totalCards}, 1fr);
 		}
-
-		${from.desktop} {
-			grid-template-columns: repeat(${totalCards}, 1fr);
-		}
 	`;
 };
 
