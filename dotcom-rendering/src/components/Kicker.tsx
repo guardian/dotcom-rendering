@@ -13,10 +13,13 @@ type Props = {
 	text: string;
 	color: string;
 	showPulsingDot?: boolean;
-	hideLineBreak?: boolean;
 	/** Controls the weight of the standard, non-live kicker. Defaults to regular */
 	fontWeight?: 'regular' | 'bold';
 };
+
+const commonStyles = css`
+	display: inline;
+`;
 
 const standardTextStyles = css`
 	${textSans15}
@@ -28,22 +31,11 @@ const boldTextStyles = css`
 
 const liveTextStyles = css`
 	${textSansBold14}
-	display: flex;
-	flex-direction: row;
-	align-items: baseline;
-	width: fit-content;
 	padding: 0 ${space[1]}px;
-
-	/*
-	This is to keep the same height as the standard kicker
-	which has a slightly larger font
-	*/
-	margin-bottom: 1px;
-`;
-
-const hideLineBreakStyles = css`
-	display: inline-block;
-	margin-right: ${space[1]}px;
+	box-shadow: 0 0.05em 0 0 ${palette('--kicker-background-live')};
+	box-decoration-break: clone;
+	/** This is a hack to ensure designs look right for multi line kickers */
+	line-height: 1.2rem;
 `;
 
 /**
@@ -53,7 +45,6 @@ export const Kicker = ({
 	text,
 	color,
 	showPulsingDot,
-	hideLineBreak,
 	fontWeight = 'regular',
 }: Props) => {
 	/** @todo
@@ -72,7 +63,7 @@ export const Kicker = ({
 
 	return (
 		<div
-			css={[textStyles(), hideLineBreak && hideLineBreakStyles]}
+			css={[commonStyles, textStyles()]}
 			style={{
 				color: isLiveKicker ? palette('--kicker-text-live') : color,
 				backgroundColor: isLiveKicker

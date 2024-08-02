@@ -687,8 +687,12 @@ export const WhenNewsWithMoreThanTwoSublinks = () => {
 					},
 					{
 						...aBasicLink,
-						headline: 'A longer headline to see how wrapping works',
-						kickerText: 'Kicker',
+						headline: 'Headline 3',
+						kickerText: 'Kicker Kicker Kicker Kicker Kicker',
+						format: {
+							...aBasicLink.format,
+							design: ArticleDesign.LiveBlog,
+						},
 					},
 					{
 						...aBasicLink,

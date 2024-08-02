@@ -240,12 +240,19 @@ export const CardHeadline = ({
 				]}
 			>
 				{!!kickerText && (
-					<Kicker
-						text={kickerText}
-						color={kickerColour}
-						showPulsingDot={showPulsingDot}
-						hideLineBreak={hideLineBreak}
-					/>
+					<div
+						style={
+							hideLineBreak
+								? { display: 'inline', marginRight: '4px' }
+								: { display: 'block' }
+						}
+					>
+						<Kicker
+							text={kickerText}
+							color={kickerColour}
+							showPulsingDot={showPulsingDot}
+						/>
+					</div>
 				)}
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span

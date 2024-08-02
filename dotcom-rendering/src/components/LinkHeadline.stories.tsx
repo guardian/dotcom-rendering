@@ -51,11 +51,23 @@ const liveFormat = { ...defaultFormat, design: ArticleDesign.LiveBlog };
 
 export const liveStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<LinkHeadline
-			headlineText="This is how a headline with a live kicker looks"
-			isLabs={format.theme === ArticleSpecial.Labs}
-			kickerText="Live"
-		/>
+		<div style={{ width: '360px' }}>
+			<LinkHeadline
+				headlineText="This is how a headline with no kicker line break looks"
+				isLabs={format.theme === ArticleSpecial.Labs}
+				kickerText="Live"
+				showPulsingDot={true}
+			/>
+
+			<div style={{ marginTop: '40px' }}>
+				<LinkHeadline
+					headlineText="This is how a headline with a live kicker looks"
+					isLabs={format.theme === ArticleSpecial.Labs}
+					kickerText="This is a really long kicker that will wrap onto multiple lines"
+					showPulsingDot={true}
+				/>
+			</div>
+		</div>
 	</Section>
 );
 liveStory.storyName = 'With Live kicker';
@@ -63,29 +75,29 @@ liveStory.decorators = [splitTheme([liveFormat])];
 
 export const noLinebreak: StoryObj = ({ format }: StoryArgs) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<LinkHeadline
-			headlineText="This is how a headline with no kicker line break looks"
-			isLabs={format.theme === ArticleSpecial.Labs}
-			kickerText="Live"
-			hideLineBreak={true}
-		/>
+		<div style={{ width: '360px' }}>
+			<LinkHeadline
+				headlineText="This is how a headline with no kicker line break looks"
+				isLabs={format.theme === ArticleSpecial.Labs}
+				kickerText="Live"
+				hideLineBreak={true}
+				showPulsingDot={true}
+			/>
+
+			<div style={{ marginTop: '40px' }}>
+				<LinkHeadline
+					headlineText="This is how a headline with a live kicker looks"
+					isLabs={format.theme === ArticleSpecial.Labs}
+					kickerText="This is a really long kicker that will wrap onto multiple lines"
+					hideLineBreak={true}
+					showPulsingDot={true}
+				/>
+			</div>
+		</div>
 	</Section>
 );
 noLinebreak.storyName = 'With Live kicker but no line break';
 noLinebreak.decorators = [splitTheme([liveFormat])];
-
-export const pulsingDot: StoryObj = ({ format }: StoryArgs) => (
-	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<LinkHeadline
-			headlineText="This is how a headline with a pulsing dot looks"
-			isLabs={format.theme === ArticleSpecial.Labs}
-			kickerText="Live"
-			showPulsingDot={true}
-		/>
-	</Section>
-);
-pulsingDot.storyName = 'With pulsing dot';
-pulsingDot.decorators = [splitTheme([liveFormat])];
 
 export const opinionxxxsmall: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
