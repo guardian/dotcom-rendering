@@ -6,6 +6,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { EpicVariant } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/epic';
@@ -193,7 +194,7 @@ export const ContributionsEpicButtons = ({
 				'V1_THREE_TIER_CHOICE_CARDS',
 				'V2_THREE_TIER_CHOICE_CARDS',
 			].includes(variantOfChoiceCard) &&
-			threeTierChoiceCardSelectedAmount != undefined
+			!isUndefined(threeTierChoiceCardSelectedAmount)
 		) {
 			if (threeTierChoiceCardSelectedAmount === 0) {
 				return {
