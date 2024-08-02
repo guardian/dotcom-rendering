@@ -195,7 +195,7 @@ const styles = (format: ArticleFormat) => css`
 		width: ${remSpace[3]};
 		background-color: ${palette.neutral[86]};
 		margin-left: -${remSpace[5]};
-		margin-right: ${remSpace[2]};
+		margin-right: 0.3rem;
 	}
 
 	/* Subscript and Superscript styles */
