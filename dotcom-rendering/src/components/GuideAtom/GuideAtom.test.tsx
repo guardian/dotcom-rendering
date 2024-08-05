@@ -11,7 +11,6 @@ describe('GuideAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -38,7 +37,6 @@ describe('GuideAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -66,7 +64,6 @@ describe('GuideAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}

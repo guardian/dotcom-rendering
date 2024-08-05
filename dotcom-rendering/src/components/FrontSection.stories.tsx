@@ -336,7 +336,6 @@ export const WithSponsoredBrandingAdvertisingPartner = () => {
 				isContainerBranding: false,
 				hasMultipleBranding: false,
 			}}
-			updateLogoAdPartnerSwitch={true}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -367,7 +366,6 @@ export const WithSponsoredBrandingAdvertisingPartnerTagPages = () => {
 				isContainerBranding: false,
 				hasMultipleBranding: false,
 			}}
-			updateLogoAdPartnerSwitch={true}
 		>
 			<Placeholder />
 		</FrontSection>

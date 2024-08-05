@@ -196,7 +196,7 @@ export const BrandingForAdvertisingPartner: StoryObj = ({
 };
 BrandingForAdvertisingPartner.args = { format: defaultFormat };
 BrandingForAdvertisingPartner.parameters = {
-	config: { darkModeAvailable: true, updateLogoAdPartnerSwitch: true },
+	config: { darkModeAvailable: true },
 };
 BrandingForAdvertisingPartner.decorators = [
 	browserThemeDecorator(defaultFormat),
