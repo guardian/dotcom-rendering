@@ -17,6 +17,13 @@ import { ArticleMeta } from './ArticleMeta.web';
 const meta = {
 	component: ArticleMeta,
 	title: 'Components/Article Meta (web)',
+	parameters: {
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
 } satisfies Meta<typeof ArticleMeta>;
 
 export default meta;
@@ -86,7 +93,14 @@ export const WithBranding = {
 				'https://www.theguardian.com/environment/2023/jan/06/about-animals-farmed-investigating-modern-farming-around-the-world',
 		},
 	},
-	parameters: { config: { darkModeAvailable: true } },
+	parameters: {
+		config: { darkModeAvailable: true },
+		chromatic: {
+			modes: {
+				light: allModes.light,
+			},
+		},
+	},
 	decorators: [
 		leftColumnDecorator,
 		(Story) => (
