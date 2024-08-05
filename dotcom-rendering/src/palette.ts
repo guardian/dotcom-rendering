@@ -259,7 +259,7 @@ const headlineBlogBackgroundDark: PaletteFunction = ({
 	return headlineBackgroundDark({ design, display, theme });
 };
 
-const headlineBylineLight: PaletteFunction = ({ display, theme }) => {
+const headlineBylineLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive: {
 			switch (theme) {
@@ -274,11 +274,16 @@ const headlineBylineLight: PaletteFunction = ({ display, theme }) => {
 			}
 		}
 		default:
-			return 'inherit';
+			switch (design) {
+				case ArticleDesign.Interview:
+					return sourcePalette.neutral[7];
+				default:
+					return 'inherit';
+			}
 	}
 };
 
-const headlineBylineDark: PaletteFunction = ({ display, theme }) => {
+const headlineBylineDark: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive: {
 			switch (theme) {
@@ -293,7 +298,12 @@ const headlineBylineDark: PaletteFunction = ({ display, theme }) => {
 			}
 		}
 		default:
-			return 'inherit';
+			switch (design) {
+				case ArticleDesign.Interview:
+					return sourcePalette.neutral[7];
+				default:
+					return 'inherit';
+			}
 	}
 };
 
