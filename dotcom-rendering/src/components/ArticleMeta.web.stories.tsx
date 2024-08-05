@@ -97,6 +97,7 @@ export const WithBranding = {
 		config: { darkModeAvailable: true },
 		chromatic: {
 			modes: {
+				horizontal: { disable: true },
 				light: allModes.light,
 			},
 		},
@@ -158,6 +159,7 @@ export const LiveBlogDesignWithBranding = {
 		},
 		chromatic: {
 			modes: {
+				horizontal: { disable: true },
 				'horizontal tablet': allModes['horizontal tablet'],
 			},
 		},
