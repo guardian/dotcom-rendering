@@ -26,8 +26,6 @@ export const renderArticle = (
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable: true,
-		updateLogoAdPartnerSwitch:
-			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: article.editionId,
 	};
