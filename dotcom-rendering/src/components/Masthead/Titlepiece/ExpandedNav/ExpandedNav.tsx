@@ -3,49 +3,21 @@
  * This file was largely copied from src/components/Nav/ExpandedMenu/ExpandedMenu.tsx
  */
 import { css } from '@emotion/react';
-import { from, textSans20, until } from '@guardian/source/foundations';
+import { from, space, textSans20, until } from '@guardian/source/foundations';
 import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
 import { palette as themePalette } from '../../../../palette';
-import { navInputCheckboxId } from '../constants';
-import { VeggieBurgerMenu } from '../VeggieBurger';
+import { expandedMenuId, navInputCheckboxId } from '../constants';
 import { Sections } from './Sections';
 
-const wrapperMainMenuStyles = css`
-	background-color: rgba(0, 0, 0, 0.5);
-	${getZIndex('expanded-veggie-menu-wrapper')}
-	left: 0;
-	top: 0;
-	/*
-        IMPORTANT NOTE:
-        we need to specify the adjacent path to the a (current) tag
-        to apply styles to the nested tabs due to the fact we use ~
-        to support NoJS
-    */
-	/* stylelint-disable-next-line selector-type-no-unknown */
-	${`#${navInputCheckboxId}`}:checked ~ div & {
-		${from.desktop} {
-			display: block;
-			overflow: visible;
-		}
-	}
-
-	/* refer to comment above */
-	/* stylelint-disable */
-	${`#${navInputCheckboxId}`}:checked ~ div & {
-		${until.desktop} {
-			transform: translateX(
-				0%
-			); /* when translateX is set to 0% it reapears on the screen */
-		}
-	}
-
+const collapsedMenuStyles = css`
 	${until.desktop} {
 		/* the negative translateX makes the nav hide to the side */
-		/* transform: translateX(-110%); */
+		transform: translateX(-110%);
 		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-		box-shadow: 3px 0 16px rgba(0, 0, 0, 0.4);
+		/** TODO - update the box shadow colour to use the themed palette */
+		box-shadow: ${space[1]}px 0 ${space[4]}px rgba(0, 0, 0, 0.4);
 		bottom: 0;
 		height: 100%;
 		overflow: auto;
@@ -54,21 +26,65 @@ const wrapperMainMenuStyles = css`
 		will-change: transform;
 	}
 	${from.desktop} {
-		display: relative;
+		display: none;
+	}
+`;
+
+export const expandedMenuStyles = css`
+	${until.desktop} {
+		/* menu appears from left of screen on mobile when translateX is set to 0% */
+		transform: translateX(0%);
+	}
+	${from.desktop} {
+		display: block;
+		overflow: visible;
+	}
+`;
+
+const wrapperMainMenuStyles = css`
+	${getZIndex('expanded-veggie-menu-wrapper')}
+	left: 0;
+	top: 0;
+
+	${collapsedMenuStyles}
+
+	/*
+	IMPORTANT NOTE:
+	we need to specify the adjacent path to the a (current) tag
+	to apply styles to the nested tabs due to the fact we use ~
+	to support NoJS
+
+	The following styles apply if the menu is open (checkbox is checked)
+	*/
+	${`#${navInputCheckboxId}`}:checked ~ div & {
+		${expandedMenuStyles}
+	}
+`;
+
+const mobileBackgroundOverlay = css`
+	${until.desktop} {
+		/* TODO - use palette rather than hardcoded RGBA colour for background overlay */
+		background-color: rgba(0, 0, 0, 0.5);
 	}
 `;
 
 const mainMenuStyles = css`
 	background-color: ${themePalette('--masthead-nav-background')};
-	box-sizing: border-box;
 	${textSans20};
-	margin-right: 29px;
-	left: 0;
-	top: 0;
 	${getZIndex('expanded-veggie-menu')}
 	overflow: hidden;
 	position: fixed;
+	left: 0;
+	top: 0;
+	box-sizing: border-box;
 
+	margin-right: 28px;
+	${from.mobileLandscape} {
+		margin-right: 40px;
+	}
+	${from.tablet} {
+		margin-right: 100px;
+	}
 	${from.desktop} {
 		position: absolute;
 		padding-bottom: 0;
@@ -84,16 +100,6 @@ const mainMenuStyles = css`
 			margin-left: -50vw;
 			margin-right: -50vw;
 		}
-	}
-
-	${from.mobileMedium} {
-		margin-right: 29px;
-	}
-	${from.mobileLandscape} {
-		margin-right: 40px;
-	}
-	${from.tablet} {
-		margin-right: 100px;
 	}
 `;
 
@@ -116,28 +122,26 @@ export const ExpandedNav = ({
 	hasPageSkin,
 }: Props) => {
 	return (
-		<div id="expanded-menu-root">
-			<VeggieBurgerMenu isImmersive={isImmersive} />
+		<div
+			id={expandedMenuId}
+			data-testid="expanded-menu"
+			css={wrapperMainMenuStyles}
+		>
+			<div css={mobileBackgroundOverlay} />
 			<div
-				id="expanded-menu"
-				data-testid="expanded-menu"
-				css={wrapperMainMenuStyles}
+				css={css`
+					${from.desktop} {
+						position: relative;
+					}
+				`}
 			>
-				<div
-					css={css`
-						${from.desktop} {
-							position: relative;
-						}
-					`}
-				>
-					<div css={mainMenuStyles}>
-						<Sections
-							editionId={editionId}
-							isImmersive={isImmersive}
-							nav={nav}
-							hasPageSkin={hasPageSkin}
-						/>
-					</div>
+				<div css={mainMenuStyles}>
+					<Sections
+						editionId={editionId}
+						isImmersive={isImmersive}
+						nav={nav}
+						hasPageSkin={hasPageSkin}
+					/>
 				</div>
 			</div>
 		</div>

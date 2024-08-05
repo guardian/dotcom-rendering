@@ -1,16 +1,26 @@
+import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source/foundations';
 import { nav } from '../../../Nav/Nav.mock';
-import { ExpandedNav } from './ExpandedNav';
+import { expandedMenuStyles, ExpandedNav } from './ExpandedNav';
 
 export default {
 	component: ExpandedNav,
 	title: 'Components/Masthead/Titlepiece/ExpandedNav',
 	parameters: {
-		backgrounds: { default: 'dark' },
 		chromatic: { viewports: [breakpoints.mobileMedium, breakpoints.wide] },
 	},
+	render: () => (
+		<div
+			css={css`
+				/* Force the menu open for storybook */
+				div {
+					${expandedMenuStyles}
+				}
+			`}
+		>
+			<ExpandedNav nav={nav} editionId={'UK'} />
+		</div>
+	),
 };
 
-export const Default = () => {
-	return <ExpandedNav nav={nav} editionId={'UK'} />;
-};
+export const Default = {};
