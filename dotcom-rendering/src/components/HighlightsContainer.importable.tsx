@@ -7,6 +7,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -226,6 +227,19 @@ export const HighlightsContainer = ({ trails }: Props) => {
 				updateButtonVisibilityOnScroll,
 			);
 		};
+	}, []);
+
+	useEffect(() => {
+		submitComponentEvent?.(
+			{
+				component: {
+					componentType: 'CAROUSEL',
+					id: 'highlights-container',
+				},
+				action: 'INSERT',
+			},
+			'Web',
+		);
 	}, []);
 
 	return (
