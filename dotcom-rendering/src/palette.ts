@@ -3013,12 +3013,12 @@ const articleBackgroundLight: PaletteFunction = ({
 				case ArticleSpecial.Labs:
 					switch (display) {
 						case ArticleDisplay.Immersive:
-							return 'transparent';
+							return sourcePalette.neutral[100];
 						default:
 							return sourcePalette.neutral[97];
 					}
 				default:
-					return 'transparent';
+					return sourcePalette.neutral[100];
 			}
 	}
 };
