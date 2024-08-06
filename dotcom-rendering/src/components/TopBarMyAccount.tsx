@@ -243,7 +243,7 @@ const SignedInWithNotifications = ({
 			<Dropdown
 				label="My account"
 				links={identityLinksWithNotifications}
-				id="my-account-2"
+				id="topbar-my-account"
 				dataLinkName={nestedOphanComponents(
 					'header',
 					'topbar',
