@@ -112,6 +112,7 @@ export const NoConsent = {
 		},
 		imagePositionOnMobile: 'none',
 		imageSize: 'large',
+		renderingTarget: 'Web',
 	},
 	decorators: [Container],
 } satisfies Story;
