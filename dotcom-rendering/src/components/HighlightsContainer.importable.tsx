@@ -81,20 +81,6 @@ const itemStyles = css`
 			padding-left: 240px; /** 240 === 3 columns and 3 column gaps  */
 		}
 	}
-	:last-child {
-		/**
-		*From left col we add right padding to the
-		*last child to offset the first child's left padding.
-		*This ensures the carousel swipes fully across the container.
-		*/
-
-		${from.leftCol} {
-			padding-right: 160px;
-		}
-		${from.wide} {
-			padding-right: 240px;
-		}
-	}
 `;
 
 const verticalLineStyles = css`
@@ -184,7 +170,6 @@ export const HighlightsContainer = ({ trails }: Props) => {
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
 		const offset = direction === 'left' ? -cardWidth : cardWidth;
-
 		carouselRef.current.scrollBy({
 			left: offset,
 			behavior: 'smooth',
