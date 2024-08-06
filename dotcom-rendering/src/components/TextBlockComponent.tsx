@@ -180,22 +180,23 @@ const styles = (format: ArticleFormat) => css`
 	li {
 		margin-bottom: ${remSpace[1]};
 		padding-left: ${remSpace[5]};
-		display: flow-root;
+		display: flex;
 
 		p {
-			display: inline;
+			margin: 0;
 		}
 	}
 
 	&:is(ul) > li:before {
-		display: inline-block;
 		content: '';
+		flex-shrink: 0;
 		border-radius: 50%;
 		height: ${remSpace[3]};
 		width: ${remSpace[3]};
 		background-color: ${palette.neutral[86]};
 		margin-left: -${remSpace[5]};
 		margin-right: ${remSpace[2]};
+		margin-top: 0.35rem;
 	}
 
 	/* Subscript and Superscript styles */
