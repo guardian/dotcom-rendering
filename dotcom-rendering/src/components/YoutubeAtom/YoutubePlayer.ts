@@ -56,8 +56,12 @@ type YouTubePlayerArgs = {
 	youtubeOptions: PlayerOptions;
 	onReadyListener: PlayerReadyCallback;
 	enableIma: boolean;
-	imaAdsRequestCallback: AdsRequestCallback;
-	imaAdManagerListeners: (imaManager: YT.ImaManager) => void;
+	imaAdsRequestCallback?: AdsRequestCallback;
+	imaAdManagerListeners?: (imaManager: YT.ImaManager) => void;
+};
+
+const noop = () => {
+	return;
 };
 
 class YouTubePlayer {
@@ -69,8 +73,8 @@ class YouTubePlayer {
 		youtubeOptions,
 		onReadyListener,
 		enableIma,
-		imaAdsRequestCallback,
-		imaAdManagerListeners,
+		imaAdsRequestCallback = noop,
+		imaAdManagerListeners = noop,
 	}: YouTubePlayerArgs) {
 		this.playerPromise = this.setPlayer(
 			id,
@@ -97,7 +101,7 @@ class YouTubePlayer {
 					/**
 					 * If enableIma is true, YT.createPlayerForPublishers will be called
 					 * If enableIma is false, the standard new YT.Player constructor will be called
-					 * Listeners are set at expected place for each method
+					 * Listeners are set appropriatley for each method
 					 */
 					if (enableIma) {
 						YTAPI.createPlayerForPublishers(

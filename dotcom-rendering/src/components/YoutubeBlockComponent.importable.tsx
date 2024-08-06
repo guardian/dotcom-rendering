@@ -124,7 +124,8 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
-	const adTargeting = useAdTargeting(duration);
+	const adTargetingWeb = useAdTargeting(duration);
+	const adTargetingApps: AdTargeting = { disableAds: true };
 	const { renderingTarget } = useConfig();
 
 	const abTests = useAB();
@@ -144,20 +145,31 @@ export const YoutubeBlockComponent = ({
 	}, []);
 
 	useEffect(() => {
-		const defineConsentState = async () => {
-			const { onConsentChange } = await import('@guardian/libs');
-			onConsentChange((newConsent: ConsentState) => {
-				setConsentState(newConsent);
-			});
-		};
+		if (renderingTarget === 'Web') {
+			const defineConsentState = async () => {
+				const { onConsentChange } = await import('@guardian/libs');
+				onConsentChange((newConsent: ConsentState) => {
+					setConsentState(newConsent);
+				});
+			};
 
-		defineConsentState().catch((error) => {
-			window.guardian.modules.sentry.reportError(
-				error instanceof Error ? error : new Error(`Error: unknown`),
-				'youtube-consent',
-			);
-		});
-	}, []);
+			defineConsentState().catch((error) => {
+				window.guardian.modules.sentry.reportError(
+					error instanceof Error
+						? error
+						: new Error(`Error: unknown`),
+					'youtube-consent',
+				);
+			});
+		}
+		if (renderingTarget === 'Apps') {
+			// set the minimum consent state for apps
+			setConsentState({
+				canTarget: false,
+				framework: 'tcfv2',
+			});
+		}
+	}, [renderingTarget]);
 
 	if (expired) {
 		return (
@@ -198,6 +210,7 @@ export const YoutubeBlockComponent = ({
 		);
 	}
 
+	// TODO ophan tracking for apps?
 	const ophanTracking = async (
 		trackingEvent: VideoEventKey,
 	): Promise<void> => {
@@ -219,7 +232,9 @@ export const YoutubeBlockComponent = ({
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
 				alt={altText ?? mediaTitle ?? ''}
-				adTargeting={adTargeting}
+				adTargeting={
+					renderingTarget === 'Web' ? adTargetingWeb : adTargetingApps
+				}
 				consentState={consentState}
 				height={height}
 				width={width}
@@ -237,6 +252,7 @@ export const YoutubeBlockComponent = ({
 				showTextOverlay={showTextOverlay}
 				imageSize={imageSize}
 				imagePositionOnMobile={imagePositionOnMobile}
+				renderingTarget={renderingTarget}
 			/>
 			{!hideCaption && (
 				<Caption

@@ -446,6 +446,19 @@ export const YoutubeAtomPlayer = ({
 					eventEmitters,
 				);
 
+				const imaAdsRequestCallback = enableIma
+					? createImaAdsRequestCallback(
+							adTargeting,
+							consentState,
+							abTestParticipations,
+							isSignedIn,
+					  )
+					: undefined;
+
+				const imaAdManagerListeners = enableIma
+					? createImaManagerListeners(uniqueId)
+					: undefined;
+
 				player.current = new YouTubePlayer({
 					id,
 					youtubeOptions: {
@@ -465,13 +478,8 @@ export const YoutubeAtomPlayer = ({
 					},
 					onReadyListener,
 					enableIma,
-					imaAdsRequestCallback: createImaAdsRequestCallback(
-						adTargeting,
-						consentState,
-						abTestParticipations,
-						isSignedIn,
-					),
-					imaAdManagerListeners: createImaManagerListeners(uniqueId),
+					imaAdsRequestCallback,
+					imaAdManagerListeners,
 				});
 
 				/**

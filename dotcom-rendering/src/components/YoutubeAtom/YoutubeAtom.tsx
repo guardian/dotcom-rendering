@@ -1,7 +1,8 @@
 import type { Participations } from '@guardian/ab-core';
-import type { ConsentState } from '@guardian/libs';
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
+import type { ArticleFormat, ConsentState } from '@guardian/libs';
 import { useCallback, useState } from 'react';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type {
 	ImagePositionType,
 	ImageSizeType,
@@ -49,6 +50,7 @@ type Props = {
 	showTextOverlay?: boolean;
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
+	renderingTarget: RenderingTarget;
 };
 
 export const YoutubeAtom = ({
@@ -76,6 +78,7 @@ export const YoutubeAtom = ({
 	showTextOverlay = false,
 	imageSize,
 	imagePositionOnMobile,
+	renderingTarget,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -86,6 +89,7 @@ export const YoutubeAtom = ({
 	const uniqueId = `${videoId}-${index ?? 'server'}`;
 	const enableIma =
 		imaEnabled &&
+		renderingTarget === 'Web' &&
 		!!adTargeting &&
 		!adTargeting.disableAds &&
 		!!consentState &&
