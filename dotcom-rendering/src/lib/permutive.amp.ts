@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { CommercialConfigType } from '../types/config';
 
 export interface PermutivePayload {
@@ -16,7 +17,7 @@ export const generatePermutivePayload = (
 	rawConfig: CommercialConfigType,
 ): PermutivePayload => {
 	const publishedAt =
-		rawConfig.webPublicationDate !== undefined &&
+		!isUndefined(rawConfig.webPublicationDate) &&
 		typeof rawConfig.webPublicationDate === 'number'
 			? new Date(rawConfig.webPublicationDate).toISOString()
 			: null;

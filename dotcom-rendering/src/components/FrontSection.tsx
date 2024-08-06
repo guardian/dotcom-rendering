@@ -81,7 +81,6 @@ type Props = {
 	discussionApiUrl: string;
 	collectionBranding?: CollectionBranding;
 	isTagPage?: boolean;
-	updateLogoAdPartnerSwitch?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -444,7 +443,6 @@ export const FrontSection = ({
 	discussionApiUrl,
 	collectionBranding,
 	isTagPage = false,
-	updateLogoAdPartnerSwitch = false,
 }: Props) => {
 	const isToggleable = toggleable && !!sectionId;
 	const showMore =
@@ -516,7 +514,6 @@ export const FrontSection = ({
 							/>
 						}
 						collectionBranding={collectionBranding}
-						updateLogoAdPartnerSwitch={updateLogoAdPartnerSwitch}
 					/>
 
 					{leftContent}

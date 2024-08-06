@@ -1,4 +1,4 @@
-import { startPerformanceMeasure } from '@guardian/libs';
+import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
 import { getOphan } from '../client/ophan/ophan';
 import type { RenderingTarget } from '../types/renderingTarget';
 
@@ -99,7 +99,7 @@ const timeoutify = <T>(
 				);
 		});
 
-	const cancelTimeout = () => timer !== undefined && clearTimeout(timer);
+	const cancelTimeout = () => !isUndefined(timer) && clearTimeout(timer);
 
 	return {
 		...candidateConfig,

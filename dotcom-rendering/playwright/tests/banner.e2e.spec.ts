@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { BrowserContext, Request } from '@playwright/test';
 import { test } from '@playwright/test';
 import { cmpAcceptAll } from '../lib/cmp';
@@ -20,7 +21,7 @@ const requestBodyHasProperties = (
 	if (!isURL) return false;
 	const postJSON = request.postDataJSON() as Record<string, string>;
 	return expectedProperties.every(
-		(expectedProperty) => postJSON[expectedProperty] !== undefined,
+		(expectedProperty) => !isUndefined(postJSON[expectedProperty]),
 	);
 };
 

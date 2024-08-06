@@ -32,7 +32,6 @@ describe('SignInGateMainCheckoutComplete', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { cmp } from '@guardian/libs';
+import { cmp, isUndefined } from '@guardian/libs';
 import { getCookie, startPerformanceMeasure, storage } from '@guardian/libs';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
@@ -206,7 +206,7 @@ export const ReaderRevenueEpic = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (Epic !== undefined) {
+	if (!isUndefined(Epic)) {
 		return (
 			<div css={wrapperMargins}>
 				{}

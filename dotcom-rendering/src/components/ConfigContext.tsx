@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import { createContext, useContext } from 'react';
 import type { Config } from '../types/configContext';
 
@@ -32,7 +33,7 @@ export const ConfigProvider = ({
 export const useConfig = (): Config => {
 	const context = useContext(ConfigContext);
 
-	if (context === undefined) {
+	if (isUndefined(context)) {
 		throw Error('useConfig must be used within the ConfigContext provider');
 	}
 

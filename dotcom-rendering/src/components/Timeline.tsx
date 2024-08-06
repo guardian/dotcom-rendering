@@ -1,5 +1,5 @@
 import { css, type SerializedStyles } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -26,10 +26,10 @@ import { Subheading } from './Subheading';
 // ----- Helpers ----- //
 
 const isValidString = (str?: string): boolean =>
-	str !== undefined && str.trim() !== '';
+	!isUndefined(str) && str.trim() !== '';
 
 const hasShowcaseRole = (element?: FEElement): boolean => {
-	if (element === undefined) return false;
+	if (isUndefined(element)) return false;
 	return 'role' in element && element.role === 'showcase';
 };
 
@@ -120,7 +120,7 @@ const EventHeader = ({
 		</Heading>
 	);
 
-	if (event.main !== undefined && hasShowcaseRole(event.main)) {
+	if (!isUndefined(event.main) && hasShowcaseRole(event.main)) {
 		return (
 			<header>
 				<ArticleElementComponent
@@ -133,7 +133,7 @@ const EventHeader = ({
 				{heading}
 			</header>
 		);
-	} else if (event.main !== undefined) {
+	} else if (!isUndefined(event.main)) {
 		return (
 			<header>
 				{heading}

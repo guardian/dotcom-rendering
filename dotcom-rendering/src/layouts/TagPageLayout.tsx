@@ -278,9 +278,6 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 								discussionApiUrl={
 									tagPage.config.discussionApiUrl
 								}
-								updateLogoAdPartnerSwitch={
-									!!switches.updateLogoAdPartner
-								}
 							>
 								<DecideContainerByTrails
 									trails={groupedTrails.trails}

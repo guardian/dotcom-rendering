@@ -31,8 +31,21 @@ const carouselStyles = css`
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overscroll-behavior: contain;
-	${until.desktop} {
+	${until.tablet} {
 		scroll-padding-left: 10px;
+	}
+	${from.tablet} {
+		scroll-padding-left: 120px;
+	}
+	${from.desktop} {
+		scroll-padding-left: 240px;
+	}
+	${from.leftCol} {
+		scroll-padding-left: 80px;
+	}
+
+	${from.wide} {
+		scroll-padding-left: 240px;
 	}
 	/**
 	* Hide scrollbars
@@ -153,13 +166,6 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 		}
 
 		${from.tablet} {
-			grid-template-columns: repeat(
-				${totalCards},
-				calc((100% - ${peepingCardWidth}px) / 4)
-			);
-		}
-
-		${from.desktop} {
 			grid-template-columns: repeat(${totalCards}, 1fr);
 		}
 	`;

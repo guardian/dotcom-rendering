@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { FEFrontCard } from '../types/front';
 
 /**
@@ -46,5 +47,5 @@ export const getSpeedFromTrails = (trails: FEFrontCard[]): 'slow' | 'fast' => {
 			(tagMap.get(tagId) ?? 0) / trails.length > frequencyThreshold,
 	);
 
-	return matchingSlowTag !== undefined ? 'slow' : 'fast';
+	return !isUndefined(matchingSlowTag) ? 'slow' : 'fast';
 };

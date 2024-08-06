@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold24,
@@ -817,7 +817,7 @@ export const Carousel = ({
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 		const [offset] = offsets;
-		if (current === null || offset === undefined) return 0;
+		if (current === null || isUndefined(offset)) return 0;
 
 		const scrolled = current.scrollLeft + offset;
 		const active = offsets.findIndex((el) => el >= scrolled);
@@ -849,13 +849,13 @@ export const Carousel = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || offset === undefined) return;
+		if (current === null || isUndefined(offset)) return;
 
 		const scrolled = current.scrollLeft + offset;
 
 		const nextOffset = offsets.reverse().find((o) => o < scrolled);
 
-		if (nextOffset !== undefined && nextOffset !== 0) {
+		if (!isUndefined(nextOffset) && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });
 		} else {
 			current.scrollTo({ left: 0 });
@@ -870,12 +870,12 @@ export const Carousel = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || offset === undefined) return;
+		if (current === null || isUndefined(offset)) return;
 
 		const scrolled = current.scrollLeft + offset;
 		const nextOffset = offsets.find((currOffset) => currOffset > scrolled);
 
-		if (nextOffset !== undefined && nextOffset !== 0) {
+		if (!isUndefined(nextOffset) && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });
 		}
 

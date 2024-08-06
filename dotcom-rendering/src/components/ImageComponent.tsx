@@ -402,7 +402,7 @@ export const ImageComponent = ({
 		return (
 			<div
 				id={
-					element.position !== undefined
+					!isUndefined(element.position)
 						? `img-${element.position}`
 						: ''
 				}
@@ -470,7 +470,7 @@ export const ImageComponent = ({
 		<>
 			<div
 				id={
-					element.position !== undefined
+					!isUndefined(element.position)
 						? `img-${element.position}`
 						: ''
 				}

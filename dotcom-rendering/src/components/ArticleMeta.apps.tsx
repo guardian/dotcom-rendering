@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import type { ReactNode } from 'react';
@@ -9,7 +9,7 @@ import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';
-import { shouldShowAvatar, shouldShowContributor } from './ArticleMeta';
+import { shouldShowAvatar, shouldShowContributor } from './ArticleMeta.web';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
@@ -216,11 +216,9 @@ export const ArticleMetaApps = ({
 	const isAnalysis = format.design === ArticleDesign.Analysis;
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
-		layoutOrDesignType && !!byline && soleContributor !== undefined;
+		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
 	const isImmersiveOrAnalysisWithMultipleAuthors =
-		(isAnalysis || isImmersive) &&
-		!!byline &&
-		soleContributor === undefined;
+		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
 
 	return (
 		<div

@@ -6,7 +6,6 @@ import { Config } from '../../src/types/configContext';
 const defaultConfig = {
 	renderingTarget: 'Web',
 	darkModeAvailable: false,
-	updateLogoAdPartnerSwitch: false,
 	assetOrigin: '/',
 	editionId: 'UK',
 } satisfies Config;

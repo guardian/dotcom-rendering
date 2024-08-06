@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { storage } from '@guardian/libs';
+import { isUndefined, storage } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { SvgPlus } from '@guardian/source/react-components';
 import { useEffect, useReducer } from 'react';
@@ -368,7 +368,7 @@ export const Discussion = ({
 
 	useEffect(() => {
 		const newHashCommentId = commentIdFromUrl();
-		if (newHashCommentId !== undefined) {
+		if (!isUndefined(newHashCommentId)) {
 			dispatch({
 				type: 'updateHashCommentId',
 				hashCommentId: newHashCommentId,
@@ -433,7 +433,7 @@ export const Discussion = ({
 	// If so, make a call to get the context of this comment so we know what page it is
 	// on.
 	useEffect(() => {
-		if (hashCommentId !== undefined) {
+		if (!isUndefined(hashCommentId)) {
 			getCommentContext(
 				discussionApiUrl,
 				hashCommentId,
@@ -514,7 +514,7 @@ export const Discussion = ({
 					replyForm={replyForm}
 					bottomForm={bottomForm}
 					reportAbuse={
-						user !== undefined
+						!isUndefined(user)
 							? user.reportAbuse
 							: reportAbuseUnauthenticated
 					}

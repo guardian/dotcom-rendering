@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { RequestHandler } from 'express';
 import { decideTagPageBranding, pickBrandingForEdition } from '../lib/branding';
 import { decideTrail } from '../lib/decideTrail';
@@ -54,7 +55,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 
 const tagPageWebTitle = (tagPage: FETagPageType) => {
 	const { pagination } = tagPage;
-	if (pagination !== undefined && pagination.currentPage > 1) {
+	if (!isUndefined(pagination) && pagination.currentPage > 1) {
 		return `${tagPage.webTitle} | Page ${pagination.currentPage} of ${pagination.lastPage} | The Guardian`;
 	} else {
 		return `${tagPage.webTitle} | The Guardian`;

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
+import { type ArticleTheme, isUndefined } from '@guardian/libs';
 import {
 	headlineMedium17,
 	headlineMedium28,
@@ -80,7 +80,7 @@ const Headline = ({ headlineText, starRating }: HeadlineProps) => {
 		<div>
 			<h1 css={[headerStyle, underlinedStyles]}>{curly(headlineText)}</h1>
 
-			{starRating !== undefined && (
+			{!isUndefined(starRating) && (
 				<div css={starRatingWrapper}>
 					<StarRating rating={starRating} size="large" />
 				</div>

@@ -11,11 +11,12 @@ import * as Notifications from '@guardian/bridget/Notifications';
 import * as Tag from '@guardian/bridget/Tag';
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
+import { isUndefined } from '@guardian/libs';
 import { createAppClient } from './thrift/nativeConnection';
 
 let environmentClient: Environment.Client<void> | undefined = undefined;
 export const getEnvironmentClient = (): Environment.Client<void> => {
-	if (environmentClient === undefined) {
+	if (isUndefined(environmentClient)) {
 		environmentClient = createAppClient<Environment.Client<void>>(
 			Environment.Client,
 			'buffered',
@@ -27,7 +28,7 @@ export const getEnvironmentClient = (): Environment.Client<void> => {
 
 let commercialClient: Commercial.Client<void> | undefined = undefined;
 export const getCommercialClient = (): Commercial.Client<void> => {
-	if (commercialClient === undefined) {
+	if (isUndefined(commercialClient)) {
 		commercialClient = createAppClient<Commercial.Client<void>>(
 			Commercial.Client,
 			'buffered',

@@ -14,7 +14,6 @@ import { Badge } from './Badge';
 type Props = {
 	title: React.ReactNode;
 	collectionBranding: CollectionBranding | undefined;
-	updateLogoAdPartnerSwitch: boolean;
 };
 
 const titleStyle = css`
@@ -78,11 +77,7 @@ const aboutThisLinkAdvertisingPartnerStyles = css`
 	color: ${sourcePalette.news[400]};
 `;
 
-export const FrontSectionTitle = ({
-	title,
-	collectionBranding,
-	updateLogoAdPartnerSwitch,
-}: Props) => {
+export const FrontSectionTitle = ({ title, collectionBranding }: Props) => {
 	switch (collectionBranding?.kind) {
 		case 'foundation': {
 			const {
@@ -172,14 +167,12 @@ export const FrontSectionTitle = ({
 				return (
 					<div css={titleStyle}>
 						{title}
-						{isAdvertisingPartnerOrExclusive &&
-						updateLogoAdPartnerSwitch ? (
+						{isAdvertisingPartnerOrExclusive ? (
 							<hr css={advertisingPartnerDottedBorder} />
 						) : null}
 						<div
 							css={
 								isAdvertisingPartnerOrExclusive &&
-								updateLogoAdPartnerSwitch &&
 								brandingAdvertisingPartnerStyle
 							}
 						>
@@ -187,7 +180,6 @@ export const FrontSectionTitle = ({
 								css={[
 									labelStyles,
 									isAdvertisingPartnerOrExclusive &&
-										updateLogoAdPartnerSwitch &&
 										labelAdvertisingPartnerStyles,
 								]}
 							>
@@ -199,16 +191,12 @@ export const FrontSectionTitle = ({
 								isAdvertisingPartner={
 									isAdvertisingPartnerOrExclusive
 								}
-								updateLogoAdPartnerSwitch={
-									updateLogoAdPartnerSwitch
-								}
 							/>
 							<a
 								href={aboutThisLink}
 								css={[
 									aboutThisLinkStyles,
 									isAdvertisingPartnerOrExclusive &&
-										updateLogoAdPartnerSwitch &&
 										aboutThisLinkAdvertisingPartnerStyles,
 								]}
 							>
