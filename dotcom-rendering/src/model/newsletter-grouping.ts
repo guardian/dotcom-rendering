@@ -126,8 +126,9 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'green-light', // Down to Earth
 				'soccer-with-jonathan-wilson',
-				'follow-robert-reich',
+				'follow-mehdi-hasan',
 				'follow-margaret-sullivan',
+				'follow-robert-reich',
 				'patriarchy',
 				'this-is-europe',
 				'tech-scape',
