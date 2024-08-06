@@ -177,6 +177,7 @@ export const dropDownOverrides = css`
 		}
 
 		${from.tablet} {
+			left: 0;
 			top: 56px;
 		}
 
