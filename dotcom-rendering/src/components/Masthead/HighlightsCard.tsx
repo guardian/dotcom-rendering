@@ -81,13 +81,11 @@ const imageArea = css`
 	grid-area: image;
 	height: 106px;
 	width: 106px;
+	align-self: end;
+	position: relative;
 	${from.desktop} {
 		height: 112px;
 		width: 112px;
-	}
-	align-self: end;
-	position: relative;
-	${from.tablet} {
 		align-self: start;
 	}
 `;
