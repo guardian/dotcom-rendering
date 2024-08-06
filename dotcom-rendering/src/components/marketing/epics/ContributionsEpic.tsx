@@ -314,6 +314,18 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	const showThreeTierChoiceCards =
 		showChoiceCards && variant.name.includes('THREE_TIER_CHOICE_CARDS');
 
+	const showThreeTierChoiceCardsV1 =
+		showChoiceCards && variant.name.includes('V1_THREE_TIER_CHOICE_CARDS');
+
+	const showThreeTierChoiceCardsV2 =
+		showChoiceCards && variant.name.includes('V2_THREE_TIER_CHOICE_CARDS');
+
+	const variantOfChoiceCard = showThreeTierChoiceCardsV1
+		? 'V1_THREE_TIER_CHOICE_CARDS'
+		: showThreeTierChoiceCardsV2
+		? 'V2_THREE_TIER_CHOICE_CARDS'
+		: 'THREE_TIER_CHOICE_CARDS';
+
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
 			const localAmounts =
@@ -485,6 +497,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					countryCode={countryCode}
 					selectedAmount={threeTierChoiceCardSelectedAmount}
 					setSelectedAmount={setThreeTierChoiceCardSelectedAmount}
+					variantOfChoiceCard={variantOfChoiceCard}
 				/>
 			)}
 
@@ -511,6 +524,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					threeTierChoiceCardSelectedAmount={
 						threeTierChoiceCardSelectedAmount
 					}
+					variantOfChoiceCard={variantOfChoiceCard}
 				/>
 			)}
 

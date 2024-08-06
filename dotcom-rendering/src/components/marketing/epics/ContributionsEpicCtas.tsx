@@ -21,6 +21,7 @@ type ContributionsEpicCtasProps = EpicProps & {
 	threeTierChoiceCardSelectedAmount?: number;
 	amountsTestName?: string;
 	amountsVariantName?: string;
+	variantOfChoiceCard?: string;
 };
 
 export const ContributionsEpicCtas: ReactComponent<
@@ -39,6 +40,7 @@ export const ContributionsEpicCtas: ReactComponent<
 	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
+	variantOfChoiceCard,
 }: ContributionsEpicCtasProps): JSX.Element => {
 	const [fetchedEmail, setFetchedEmail] = useState<string | undefined>(
 		undefined,
@@ -91,6 +93,7 @@ export const ContributionsEpicCtas: ReactComponent<
 				amountsTestName={amountsTestName}
 				amountsVariantName={amountsVariantName}
 				numArticles={articleCounts.for52Weeks}
+				variantOfChoiceCard={variantOfChoiceCard}
 			/>
 			{isReminderActive && showReminderFields && (
 				<ContributionsEpicReminder

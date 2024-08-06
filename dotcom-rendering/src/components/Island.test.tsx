@@ -84,7 +84,6 @@ describe('Island: server-side rendering', () => {
 			value={{
 				renderingTarget: 'Web',
 				darkModeAvailable: false,
-				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
 				editionId: 'UK',
 			}}

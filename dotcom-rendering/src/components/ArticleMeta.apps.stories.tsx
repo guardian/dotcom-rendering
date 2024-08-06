@@ -179,7 +179,6 @@ export const WithBrandingStoryForAdvertisingPartner = {
 		...WithBrandingStory.parameters,
 		config: {
 			...WithBrandingStory.parameters.config,
-			updateLogoAdPartnerSwitch: true,
 		},
 	},
 } satisfies Story;

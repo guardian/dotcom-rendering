@@ -23,7 +23,6 @@ describe('MostViewedList', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -74,7 +73,6 @@ describe('MostViewedList', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -104,7 +102,6 @@ describe('MostViewedList', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}

@@ -168,8 +168,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const inHighlightsContainerABTest =
 		abTests.mastheadWithHighlightsVariant === 'variant';
 
-	const { updateLogoAdPartner, absoluteServerTimes = false } =
-		front.config.switches;
+	const { absoluteServerTimes = false } = front.config.switches;
 
 	const Highlights = () => {
 		const showHighlights =
@@ -494,9 +493,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									updateLogoAdPartnerSwitch={
-										updateLogoAdPartner
-									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -716,7 +712,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
-								updateLogoAdPartnerSwitch={updateLogoAdPartner}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
