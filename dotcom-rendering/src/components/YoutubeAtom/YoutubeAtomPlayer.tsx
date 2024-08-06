@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
-import type { AdsConfig } from '@guardian/commercial';
 import { buildImaAdTagUrl } from '@guardian/commercial';
 import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
@@ -416,7 +415,7 @@ export const YoutubeAtomPlayer = ({
 
 				// Since IMA the YouTube player API no longer accepts ad configuration
 				// If IMA is enabled it will configure ads via its adsRequestCallback
-				const adsConfig: AdsConfig = { disableAds: true };
+				const adsConfig = { disableAds: true } as const;
 
 				const embedConfig = {
 					relatedChannels: [],

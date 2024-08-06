@@ -1,4 +1,3 @@
-import type { AdsConfig } from '@guardian/commercial';
 import { log } from '@guardian/libs';
 import type { google } from './ima';
 import { loadYouTubeAPI } from './loadYouTubeApi';
@@ -30,7 +29,7 @@ declare global {
 type EmbedConfig = {
 	embedConfig: {
 		relatedChannels: string[];
-		adsConfig: AdsConfig;
+		adsConfig: { disableAds: true };
 		enableIma: boolean;
 	};
 };
