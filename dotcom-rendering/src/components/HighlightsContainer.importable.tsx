@@ -230,7 +230,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	}, []);
 
 	useEffect(() => {
-		submitComponentEvent?.(
+		void submitComponentEvent(
 			{
 				component: {
 					componentType: 'CAROUSEL',
@@ -245,6 +245,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	return (
 		<div css={containerStyles}>
 			<ol
+				data-component="highlights-container"
 				ref={carouselRef}
 				css={[
 					carouselStyles,
