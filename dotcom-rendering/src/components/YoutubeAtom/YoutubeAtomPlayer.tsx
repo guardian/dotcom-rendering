@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
 import type { AdsConfig } from '@guardian/commercial';
-import {
-	buildAdsConfigWithConsent,
-	buildImaAdTagUrl,
-	disabledAds,
-} from '@guardian/commercial';
+import { buildImaAdTagUrl } from '@guardian/commercial';
 import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import {
@@ -15,10 +11,10 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { useAuthStatus } from '../../lib/useAuthStatus';
+import { getAuthStatus } from '../../lib/identity';
 import type { google } from './ima';
 import type { VideoEventKey } from './YoutubeAtom';
-import type { PlayerListenerName } from './YoutubePlayer';
+import type { PlayerListenerName, YouTubePlayerArgs } from './YoutubePlayer';
 import { YouTubePlayer } from './YoutubePlayer';
 
 type Props = {
@@ -349,6 +345,19 @@ const createImaManagerListeners = (uniqueId: string) => {
 	};
 };
 
+const isSignedIn = async (): Promise<boolean> => {
+	try {
+		const authStatus = await getAuthStatus();
+		return authStatus.kind == 'SignedInWithCookies' ||
+			authStatus.kind === 'SignedInWithOkta'
+			? true
+			: false;
+	} catch (error) {
+		console.error(error);
+		return false;
+	}
+};
+
 export const YoutubeAtomPlayer = ({
 	uniqueId,
 	videoId,
@@ -394,12 +403,6 @@ export const YoutubeAtomPlayer = ({
 
 	const id = `youtube-player-${uniqueId}`;
 
-	const authStatus = useAuthStatus();
-
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
-
 	/**
 	 * Initialise player useEffect
 	 */
@@ -411,25 +414,15 @@ export const YoutubeAtomPlayer = ({
 					videoId,
 				});
 
-				const adsConfig: AdsConfig =
-					!!adTargeting.disableAds || enableIma
-						? disabledAds
-						: buildAdsConfigWithConsent({
-								adUnit: adTargeting.adUnit,
-								clientSideParticipations: abTestParticipations,
-								consentState,
-								customParams: adTargeting.customParams,
-								isAdFreeUser: false,
-								isSignedIn,
-						  });
+				// Since IMA the YouTube player API no longer accepts ad configuration
+				// If IMA is enabled it will configure ads via its adsRequestCallback
+				const adsConfig: AdsConfig = { disableAds: true };
 
 				const embedConfig = {
 					relatedChannels: [],
 					adsConfig,
 					enableIma,
-					/**
-					 * YouTube recommends disabling related videos when IMA is enabled
-					 */
+					// YouTube recommends disabling related videos when IMA is enabled
 					disableRelatedVideos: enableIma,
 				};
 
@@ -446,20 +439,7 @@ export const YoutubeAtomPlayer = ({
 					eventEmitters,
 				);
 
-				const imaAdsRequestCallback = enableIma
-					? createImaAdsRequestCallback(
-							adTargeting,
-							consentState,
-							abTestParticipations,
-							isSignedIn,
-					  )
-					: undefined;
-
-				const imaAdManagerListeners = enableIma
-					? createImaManagerListeners(uniqueId)
-					: undefined;
-
-				player.current = new YouTubePlayer({
+				const basePlayerConfiguration: YouTubePlayerArgs = {
 					id,
 					youtubeOptions: {
 						height: '100%',
@@ -478,9 +458,32 @@ export const YoutubeAtomPlayer = ({
 					},
 					onReadyListener,
 					enableIma,
-					imaAdsRequestCallback,
-					imaAdManagerListeners,
-				});
+				};
+
+				if (enableIma) {
+					isSignedIn()
+						.then((signedIn) => {
+							player.current = new YouTubePlayer({
+								...basePlayerConfiguration,
+								imaAdsRequestCallback:
+									createImaAdsRequestCallback(
+										adTargeting,
+										consentState,
+										abTestParticipations,
+										signedIn,
+									),
+								imaAdManagerListeners:
+									createImaManagerListeners(uniqueId),
+							});
+						})
+						.catch((error) => {
+							console.error(error);
+						});
+				} else {
+					player.current = new YouTubePlayer({
+						...basePlayerConfiguration,
+					});
+				}
 
 				/**
 				 * Pause the current video when another video is played
@@ -545,7 +548,6 @@ export const YoutubeAtomPlayer = ({
 			id,
 			playerReadyCallback,
 			deactivateVideo,
-			isSignedIn,
 		],
 	);
 

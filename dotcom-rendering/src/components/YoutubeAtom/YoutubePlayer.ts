@@ -190,4 +190,4 @@ class YouTubePlayer {
 	}
 }
 
-export { PlayerListenerName, YouTubePlayer };
+export { PlayerListenerName, YouTubePlayer, YouTubePlayerArgs };
