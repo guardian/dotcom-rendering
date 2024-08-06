@@ -190,7 +190,7 @@
 		"typescript-json-schema": "0.64.0",
 		"unified": "11.0.5",
 		"valibot": "0.28.1",
-		"web-vitals": "3.5.1",
+		"web-vitals": "4.2.2",
 		"webpack": "5.93.0",
 		"webpack-assets-manifest": "5.2.1",
 		"webpack-bundle-analyzer": "4.10.2",
