@@ -51,6 +51,7 @@ describe('YoutubeAtom', () => {
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
+					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -89,6 +90,7 @@ describe('YoutubeAtom', () => {
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
+					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -134,6 +136,7 @@ describe('YoutubeAtom', () => {
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
+					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -173,6 +176,7 @@ describe('YoutubeAtom', () => {
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
+					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -211,6 +215,7 @@ describe('YoutubeAtom', () => {
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
+					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -250,6 +255,7 @@ describe('YoutubeAtom', () => {
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
+					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -287,6 +293,7 @@ describe('YoutubeAtom', () => {
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
+					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -328,6 +335,7 @@ describe('YoutubeAtom', () => {
 						abTestParticipations={{}}
 						imagePositionOnMobile="left"
 						imageSize="small"
+						renderingTarget="Web"
 					/>
 					<YoutubeAtom
 						index={123}
@@ -348,6 +356,7 @@ describe('YoutubeAtom', () => {
 						abTestParticipations={{}}
 						imagePositionOnMobile="left"
 						imageSize="small"
+						renderingTarget="Web"
 					/>
 				</ConfigProvider>
 			</>
