@@ -1,22 +1,34 @@
 import { css } from '@emotion/react';
 import { visuallyHidden } from '@guardian/source/foundations';
 import { SvgCross, SvgMenu } from '@guardian/source/react-components';
+import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { palette as themePalette } from '../../../palette';
 import { navInputCheckboxId, veggieBurgerId } from './constants';
+
+const labelStyles = css`
+	position: relative;
+	z-index: 1;
+	${`#${navInputCheckboxId}`}:checked ~ div & {
+		/* Bump the z-index of the burger menu when expanded */
+		${getZIndex('burger')}
+	}
+`;
 
 const screenReadable = css`
 	${visuallyHidden};
 `;
 
-const hideIfMenuOpened = css`
+const showMoreStyles = css`
 	${`#${navInputCheckboxId}`}:checked ~ div & {
+		/* Hide the expand menu SVG if already expanded */
 		display: none;
 	}
 `;
 
-const hideIfMenuClosed = css`
+const closeMenuStyles = css`
 	${`#${navInputCheckboxId}`}:not(:checked) ~ div & {
+		/* Hide the collapse menu SVG if already collapsed */
 		display: none;
 	}
 `;
@@ -36,7 +48,6 @@ const iconWrapper = css`
 			'--masthead-veggie-burger-background-hover',
 		)};
 	}
-
 	:focus {
 		outline: none;
 	}
@@ -45,6 +56,7 @@ const iconWrapper = css`
 export const VeggieBurger = () => (
 	<label
 		id={veggieBurgerId}
+		css={labelStyles}
 		aria-label="Toggle main menu"
 		key="OpenExpandedMenuButton"
 		htmlFor={navInputCheckboxId}
@@ -58,7 +70,7 @@ export const VeggieBurger = () => (
 		role="button"
 		data-testid="veggie-burger"
 	>
-		<span id="nav-menu-closed" css={[iconWrapper, hideIfMenuOpened]}>
+		<span css={[iconWrapper, showMoreStyles]}>
 			<span css={screenReadable}>Show more</span>
 			<SvgMenu
 				size="small"
@@ -68,7 +80,7 @@ export const VeggieBurger = () => (
 			/>
 		</span>
 
-		<span id="nav-menu-expanded" css={[iconWrapper, hideIfMenuClosed]}>
+		<span css={[iconWrapper, closeMenuStyles]}>
 			<span css={screenReadable}>Hide expanded menu</span>
 			<SvgCross
 				size="small"
