@@ -173,16 +173,16 @@ export const dropDownOverrides = css`
 	/** Handles case of *new* top bar being 52px high until tablet */
 	&:not(button) {
 		${until.tablet} {
-			top: 48px;
+			top: 44px;
 		}
 
 		${from.tablet} {
-			left: 0;
-			top: 56px;
+			right: 0;
+			top: 52px;
 		}
 
 		${from.desktop} {
-			top: 60px;
+			top: 56px;
 		}
 	}
 `;
