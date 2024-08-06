@@ -42,6 +42,7 @@ const indices = [
 	'stickyAdWrapper',
 	'stickyAdWrapperNav',
 
+	'myAccountDropdownV2',
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 

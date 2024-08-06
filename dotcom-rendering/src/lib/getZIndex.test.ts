@@ -2,17 +2,18 @@ import { getZIndex } from './getZIndex';
 
 describe('getZIndex', () => {
 	it('gets the correct zindex for group and sibling', () => {
-		expect(getZIndex('sticky-video-button')).toBe('z-index: 28;');
-		expect(getZIndex('sticky-video')).toBe('z-index: 27;');
-		expect(getZIndex('banner')).toBe('z-index: 26;');
-		expect(getZIndex('dropdown')).toBe('z-index: 25;');
-		expect(getZIndex('burger')).toBe('z-index: 24;');
-		expect(getZIndex('expanded-veggie-menu-wrapper')).toBe('z-index: 23;');
-		expect(getZIndex('expanded-veggie-menu')).toBe('z-index: 22;');
-		expect(getZIndex('mobileSticky')).toBe('z-index: 21;');
-		expect(getZIndex('stickyAdWrapperLabsHeader')).toBe('z-index: 20;');
-		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 19;');
-		expect(getZIndex('stickyAdWrapperNav')).toBe('z-index: 18;');
+		expect(getZIndex('sticky-video-button')).toBe('z-index: 29;');
+		expect(getZIndex('sticky-video')).toBe('z-index: 28;');
+		expect(getZIndex('banner')).toBe('z-index: 27;');
+		expect(getZIndex('dropdown')).toBe('z-index: 26;');
+		expect(getZIndex('burger')).toBe('z-index: 25;');
+		expect(getZIndex('expanded-veggie-menu-wrapper')).toBe('z-index: 24;');
+		expect(getZIndex('expanded-veggie-menu')).toBe('z-index: 23;');
+		expect(getZIndex('mobileSticky')).toBe('z-index: 22;');
+		expect(getZIndex('stickyAdWrapperLabsHeader')).toBe('z-index: 21;');
+		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 20;');
+		expect(getZIndex('stickyAdWrapperNav')).toBe('z-index: 19;');
+		expect(getZIndex('myAccountDropdownV2')).toBe('z-index: 18;');
 		expect(getZIndex('editionDropdown')).toBe('z-index: 17;');
 		expect(getZIndex('summaryDetails')).toBe('z-index: 16;');
 		expect(getZIndex('toast')).toBe('z-index: 15;');
