@@ -764,8 +764,8 @@ importers:
         specifier: 9.5.1
         version: 9.5.1(typescript@5.5.3)(webpack@5.93.0)
       ts-unused-exports:
-        specifier: 8.0.5
-        version: 8.0.5(typescript@5.5.3)
+        specifier: 10.1.0
+        version: 10.1.0(typescript@5.5.3)
       tslib:
         specifier: 2.6.2
         version: 2.6.2
@@ -17265,8 +17265,8 @@ packages:
       yn: 3.1.1
     dev: false
 
-  /ts-unused-exports@8.0.5(typescript@5.5.3):
-    resolution: {integrity: sha512-ewEHxTtQsYQFQCI12CnMx8D0xxn1/Uui1Wr5jbiX4me+4LlSiOGvt4mGz0hxtIC3eElVaLrKEPbeT3TPrm4JvA==}
+  /ts-unused-exports@10.1.0(typescript@5.5.3):
+    resolution: {integrity: sha512-QA11Dpwkm5Apfe9s/UkFzHEpbiBxKy0VQ72YRAoqq9VgNbxvvIOcS5Kgm1MCitOec9YU6nf51DEWnmL6jkP2Yg==}
     hasBin: true
     peerDependencies:
       typescript: '>=3.8.3'
