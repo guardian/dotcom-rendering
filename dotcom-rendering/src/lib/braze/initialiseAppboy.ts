@@ -1,5 +1,5 @@
 import type appboy from '@braze/web-sdk-core';
-import { log } from '@guardian/libs';
+import { isUndefined, log } from '@guardian/libs';
 
 const SDK_OPTIONS: appboy.InitializationOptions = {
 	enableLogging: true,
@@ -25,7 +25,7 @@ const getInitialisedAppboy = (() => {
 	let cache: Promise<typeof appboy>;
 
 	return (apiKey: string): Promise<typeof appboy> => {
-		if (cache === undefined) {
+		if (isUndefined(cache)) {
 			cache = initialiseAppboy(apiKey);
 		}
 

@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type {
 	DCRSectionedTimelineBlockElement,
 	DCRTimelineBlockElement,
@@ -19,7 +20,7 @@ type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
 const enhanceMainMedia = (
 	mainMedia: FEElement | undefined,
 ): FEElement | undefined =>
-	mainMedia !== undefined &&
+	!isUndefined(mainMedia) &&
 	'role' in mainMedia &&
 	mainMedia.role !== 'showcase' &&
 	mainMedia.role !== 'inline' &&
@@ -51,7 +52,7 @@ const enhanceTimelineEvent =
 		body,
 	}: FETimelineEvent): DCRTimelineEvent[] => {
 		// A timeline event must have a date! If it doesn't we drop it.
-		if (date === undefined) {
+		if (isUndefined(date)) {
 			return [];
 		}
 
@@ -70,7 +71,7 @@ const enhanceTimelineSection =
 	(elementsEnhancer: ElementsEnhancer) =>
 	({ title, events }: FETimelineSection): DCRTimelineSection[] => {
 		// A timeline section must have a title! If it doesn't we drop it.
-		if (title === undefined) {
+		if (isUndefined(title)) {
 			return [];
 		}
 
@@ -89,7 +90,7 @@ const enhanceTimelineBlockElement = (
 	const [firstSection, ...otherSections] = element.sections;
 
 	// A timeline must have some content! If it doesn't we drop it.
-	if (firstSection === undefined) {
+	if (isUndefined(firstSection)) {
 		return [];
 	}
 

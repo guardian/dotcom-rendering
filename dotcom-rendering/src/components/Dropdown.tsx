@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { OphanComponent } from '@guardian/libs';
+import { isUndefined, type OphanComponent } from '@guardian/libs';
 import {
 	from,
 	palette,
@@ -346,7 +346,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		: link.url;
 
 	const hasNotifications =
-		link.notifications !== undefined && link.notifications.length > 0;
+		!isUndefined(link.notifications) && link.notifications.length > 0;
 
 	return (
 		<li css={liStyles} key={link.title} ref={setNode}>

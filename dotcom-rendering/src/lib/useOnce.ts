@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { NonEmptyArray } from './tuple';
 
@@ -11,7 +12,7 @@ export const useOnce = (
 	waitFor: NonEmptyArray<unknown>,
 ): void => {
 	const [alreadyRun, setAlreadyRun] = useState(false);
-	const isReady = waitFor.every((dep) => dep !== undefined);
+	const isReady = waitFor.every((dep) => !isUndefined(dep));
 	useEffect(() => {
 		if (!alreadyRun && isReady) {
 			task();

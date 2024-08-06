@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { FEElement, ListBlockElement } from '../types/content';
 
 type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
@@ -6,7 +7,7 @@ const constructKeyTakeaway =
 	(enhanceElements: ElementsEnhancer) =>
 	({ title, elements }: { title?: string; elements: FEElement[] }) => {
 		// if the element is missing its title for any reason, we will skip it
-		if (title !== undefined) {
+		if (!isUndefined(title)) {
 			return [
 				{
 					title,
@@ -21,7 +22,7 @@ const constructQAndAExplainer =
 	(enhanceElements: ElementsEnhancer) =>
 	({ title, elements }: { title?: string; elements: FEElement[] }) => {
 		// if the element is missing its title for any reason, we will skip it
-		if (title !== undefined) {
+		if (!isUndefined(title)) {
 			return [
 				{
 					title,
@@ -46,7 +47,7 @@ const constructMiniProfile =
 		endNote?: string;
 	}) => {
 		// if the element is missing its title for any reason, we will skip it
-		if (title !== undefined && title !== '') {
+		if (!isUndefined(title) && title !== '') {
 			return [
 				{
 					title,

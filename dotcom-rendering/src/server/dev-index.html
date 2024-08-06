@@ -1141,7 +1141,7 @@
 					const attribute = dataElement.dataset[name];
 					const element = row.querySelector(`.${name}`);
 
-					if (attribute !== undefined && element !== null) {
+					if (!isUndefined(attribute) && element !== null) {
 						element.textContent = attribute;
 					}
 				}

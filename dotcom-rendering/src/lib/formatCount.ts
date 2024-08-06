@@ -1,7 +1,9 @@
+import { isUndefined } from '@guardian/libs';
+
 export const formatCount = (
 	count?: number,
 ): { short: string; long: string } => {
-	if (count === undefined) return { short: '…', long: '…' };
+	if (isUndefined(count)) return { short: '…', long: '…' };
 	if (count === 0) return { short: '0', long: '0' };
 
 	const countAsInteger = Math.floor(count);

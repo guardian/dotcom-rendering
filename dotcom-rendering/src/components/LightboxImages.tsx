@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { type ArticleFormat, log, timeAgo } from '@guardian/libs';
+import { type ArticleFormat, isUndefined, log, timeAgo } from '@guardian/libs';
 import {
 	from,
 	headlineLight24,
@@ -275,7 +275,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 									displayCredit={image.displayCredit}
 								/>
 								{!!image.blockId &&
-									image.firstPublished !== undefined && (
+									!isUndefined(image.firstPublished) && (
 										<Link
 											href={`?page=with:block-${image.blockId}#block-${image.blockId}`}
 											priority="secondary"

@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { DCRCollectionType } from '../types/front';
 import {
 	MAX_FRONTS_BANNER_ADS,
@@ -210,7 +211,7 @@ const getFrontsBannerAdPositions = (
 
 			const collectionHeight = getCollectionHeight(collection);
 			const prevCollection = collections[index - 1];
-			const isFirstCollection = prevCollection === undefined;
+			const isFirstCollection = isUndefined(prevCollection);
 			if (isFirstCollection) {
 				accumulator.heightSinceAd += collectionHeight;
 				return accumulator;

@@ -1,4 +1,9 @@
-import { getCookie, onConsentChange, storage } from '@guardian/libs';
+import {
+	getCookie,
+	isUndefined,
+	onConsentChange,
+	storage,
+} from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import type { DCRFrontType } from '../types/front';
@@ -127,7 +132,7 @@ export const getLastOneOffContributionTimestamp = (): number | undefined => {
 export const getLastOneOffContributionDate = (): string | undefined => {
 	const timestamp = getLastOneOffContributionTimestamp();
 
-	if (timestamp === undefined) {
+	if (isUndefined(timestamp)) {
 		return undefined;
 	}
 
@@ -149,7 +154,7 @@ const AskPauseDays = 90;
 
 export const isRecentOneOffContributor = (): boolean => {
 	const lastContributionDate = getLastOneOffContributionTimestamp();
-	if (lastContributionDate !== undefined) {
+	if (!isUndefined(lastContributionDate)) {
 		const now = Date.now();
 		return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
 	}

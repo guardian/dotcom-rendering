@@ -128,7 +128,7 @@ const starifyImages = (elements: FEElement[]): FEElement[] => {
 				break;
 			case 'model.dotcomrendering.pageElements.ImageBlockElement':
 				if (
-					previousRating !== undefined &&
+					!isUndefined(previousRating) &&
 					isStarableImage(thisElement)
 				) {
 					// Add this image using the rating we remembered

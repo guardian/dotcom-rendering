@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
@@ -208,7 +209,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <meta name="description" content="${he.encode(description)}" />
 				<meta charset="utf-8">
 				${
-					canonicalUrl !== undefined
+					!isUndefined(canonicalUrl)
 						? `<link rel="canonical" href="${canonicalUrl}" />`
 						: '<!-- no canonical URL -->'
 				}
@@ -236,7 +237,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${prefetchTags.join('\n')}
 
                 ${
-					linkedData !== undefined
+					!isUndefined(linkedData)
 						? ` <script type="application/ld+json">
                     			${JSON.stringify(linkedData)}
                 			</script>`
@@ -278,7 +279,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <script>
                     // Noop monkey patch perf.mark and perf.measure if not supported
-                    if(window.performance !== undefined && window.performance.mark === undefined) {
+                    if(!isUndefined(window.performance) && isUndefined(window.performance.mark)) {
                         window.performance.mark = function(){};
                         window.performance.measure = function(){};
                     }
