@@ -9,7 +9,7 @@ import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
 import type { TagType } from '../types/tag';
-import { shouldShowAvatar, shouldShowContributor } from './ArticleMeta';
+import { shouldShowAvatar, shouldShowContributor } from './ArticleMeta.web';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
