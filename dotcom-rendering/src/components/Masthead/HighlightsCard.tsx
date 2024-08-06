@@ -87,6 +87,9 @@ const imageArea = css`
 	}
 	align-self: end;
 	position: relative;
+	${from.tablet} {
+		align-self: start;
+	}
 `;
 
 const hoverStyles = css`
