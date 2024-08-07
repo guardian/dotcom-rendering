@@ -23,7 +23,7 @@ const meta = {
 		format: {
 			display: ArticleDisplay.Standard,
 			design: ArticleDesign.Standard,
-			theme: Pillar.News,
+			theme: Pillar.Sport,
 		},
 		showPulsingDot: true,
 		kickerText: 'News',
@@ -72,7 +72,11 @@ export const WithAvatar: Story = {
 
 export const WithMediaIcon: Story = {
 	args: {
-		showMediaIcon: true,
+		format: {
+			design: ArticleDesign.Audio,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Culture,
+		},
 	},
 	parameters: {},
 	name: 'With Media Icon',

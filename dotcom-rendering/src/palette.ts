@@ -5402,6 +5402,25 @@ const mastheadHighlightsBackground: PaletteFunction = () =>
 const mastheadHighlightsBorder: PaletteFunction = () =>
 	sourcePalette.neutral[60];
 
+const highlightsCardHeadline: PaletteFunction = () => sourcePalette.neutral[7];
+const highlightsCardKickerText: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.Opinion:
+			return pillarPalette(format.theme, 300);
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.News:
+			return pillarPalette(format.theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
 const mastheadAccreditationText: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 
@@ -6102,15 +6121,31 @@ const paletteColours = {
 		light: headlineTextLight,
 		dark: headlineTextDark,
 	},
-	'--highlight-container-end-fade': {
+	'--highlights-card-headline': {
+		light: highlightsCardHeadline,
+		dark: highlightsCardHeadline,
+	},
+	'--highlights-card-kicker-text': {
+		light: highlightsCardKickerText,
+		dark: highlightsCardKickerText,
+	},
+	'--highlights-container-background': {
+		light: mastheadHighlightsBackground,
+		dark: mastheadHighlightsBackground,
+	},
+	'--highlights-container-border': {
+		light: mastheadHighlightsBorder,
+		dark: mastheadHighlightsBorder,
+	},
+	'--highlights-container-end-fade': {
 		light: highlightContainerEndFade,
 		dark: highlightContainerEndFade,
 	},
-	'--highlight-container-mid-fade': {
+	'--highlights-container-mid-fade': {
 		light: highlightContainerMidFade,
 		dark: highlightContainerMidFade,
 	},
-	'--highlight-container-start-fade': {
+	'--highlights-container-start-fade': {
 		light: highlightContainerStartFade,
 		dark: highlightContainerStartFade,
 	},
@@ -6201,14 +6236,6 @@ const paletteColours = {
 	'--masthead-accreditation-text': {
 		light: mastheadAccreditationText,
 		dark: mastheadAccreditationText,
-	},
-	'--masthead-highlights-background': {
-		light: mastheadHighlightsBackground,
-		dark: mastheadHighlightsBackground,
-	},
-	'--masthead-highlights-border': {
-		light: mastheadHighlightsBorder,
-		dark: mastheadHighlightsBorder,
 	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,

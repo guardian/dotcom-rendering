@@ -115,9 +115,9 @@ const previousButtonFadeStyles = css`
 	left: ${space[5]}px;
 	background: linear-gradient(
 		to right,
-		${palette('--highlight-container-start-fade')} 0%,
-		${palette('--highlight-container-mid-fade')} 60%,
-		${palette('--highlight-container-end-fade')} 100%
+		${palette('--highlights-container-start-fade')} 0%,
+		${palette('--highlights-container-mid-fade')} 60%,
+		${palette('--highlights-container-end-fade')} 100%
 	);
 `;
 
@@ -126,9 +126,9 @@ const nextButtonFadeStyles = css`
 	justify-content: flex-end;
 	background: linear-gradient(
 		to left,
-		${palette('--highlight-container-start-fade')} 0px,
-		${palette('--highlight-container-mid-fade')} 60%,
-		${palette('--highlight-container-end-fade')} 100%
+		${palette('--highlights-container-start-fade')} 0px,
+		${palette('--highlights-container-mid-fade')} 60%,
+		${palette('--highlights-container-end-fade')} 100%
 	);
 `;
 /**
