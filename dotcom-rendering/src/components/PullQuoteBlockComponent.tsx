@@ -164,13 +164,16 @@ const inlineQuoteCss = css`
 
 const supportingQuoteCss = css`
 	position: relative;
-	width: 40%;
 	background-color: ${palette('--pullquote-background')};
 	margin-top: 2px;
 	margin-right: 10px;
 	margin-bottom: 14px;
 	clear: left;
 	float: left;
+
+	${from.phablet} {
+		width: 40%;
+	}
 
 	${from.leftCol} {
 		position: relative;
