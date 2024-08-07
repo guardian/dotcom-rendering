@@ -179,23 +179,12 @@ const horizontalDivider = css`
 		position: absolute;
 		border-bottom: 1px solid ${themePalette('--masthead-nav-lines')};
 		bottom: 0;
-		left: 0;
-		right: 0;
-	}
-`;
-
-/** The divider length should match the width of the subnav */
-const dividerOverridesForSubNav = css`
-	&::after {
-		left: 0;
 		right: -${smallMobilePageMargin};
+		left: -${smallMobilePageMargin};
 
 		${from.mobileLandscape} {
+			left: -${pageMargin};
 			right: -${pageMargin};
-		}
-
-		${from.tablet} {
-			right: 0;
 		}
 	}
 `;
@@ -217,27 +206,48 @@ const subNavWrapper = css`
 		width: 100%;
 	}
 
+	${from.tablet} {
+		:before {
+			content: '';
+			border-left: 1px solid ${themePalette('--masthead-nav-lines')};
+			position: absolute;
+			left: -${pageMargin};
+			top: 0;
+			bottom: 0;
+		}
+
+		:after {
+			content: '';
+			border-left: 1px solid ${themePalette('--masthead-nav-lines')};
+			position: absolute;
+			right: -${pageMargin};
+			top: 0;
+			bottom: 0;
+		}
+	}
+
 	/** This additional padding on the right of the subnav list allows
 	 the list items to remain visible with the fade overlay */
 	ul {
 		padding-right: ${space[8]}px;
-	}
+		position: relative;
 
-	/** Adds a fade overlay to the RHS of the subnav area,
-	 to visually hint that it is scrollable horizontally */
-	::after {
-		content: '';
-		position: absolute;
-		width: ${space[10]}px;
-		height: 100%;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		background: linear-gradient(
-			to right,
-			transparent,
-			${themePalette('--masthead-nav-background')}
-		);
+		/** Adds a fade overlay to the RHS of the subnav area,
+	 	to visually hint that it is scrollable horizontally */
+		::after {
+			content: '';
+			position: absolute;
+			width: ${space[10]}px;
+			height: 100%;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			background: linear-gradient(
+				to right,
+				transparent,
+				${themePalette('--masthead-nav-background')}
+			);
+		}
 	}
 `;
 
@@ -439,15 +449,7 @@ export const Titlepiece = ({
 			/>
 
 			{/* Pillars nav */}
-			<div
-				css={[
-					pillarsNavStyles,
-					horizontalDivider,
-					showSubNav &&
-						nav.subNavSections &&
-						dividerOverridesForSubNav,
-				]}
-			>
+			<div css={[pillarsNavStyles, horizontalDivider]}>
 				<Pillars
 					nav={nav}
 					dataLinkName={nestedOphanComponents(
