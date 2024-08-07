@@ -449,15 +449,7 @@ export const Titlepiece = ({
 			/>
 
 			{/* Pillars nav */}
-			<div
-				css={[
-					pillarsNavStyles,
-					horizontalDivider,
-					// showSubNav &&
-					// 	nav.subNavSections &&
-					// 	dividerOverridesForSubNav,
-				]}
-			>
+			<div css={[pillarsNavStyles, horizontalDivider]}>
 				<Pillars
 					nav={nav}
 					dataLinkName={nestedOphanComponents(
