@@ -39,6 +39,8 @@ type Props = {
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isExternalLink?: boolean;
+	/** Is the headline inside a Highlights card? */
+	isHighlights?: boolean;
 };
 
 const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
@@ -218,8 +220,11 @@ export const CardHeadline = ({
 	showByline,
 	linkTo,
 	isExternalLink,
+	isHighlights = false,
 }: Props) => {
-	const kickerColour = palette('--card-kicker-text');
+	const kickerColour = isHighlights
+		? palette('--highlights-card-kicker-text')
+		: palette('--card-kicker-text');
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
@@ -250,7 +255,9 @@ export const CardHeadline = ({
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span
 					css={css`
-						color: ${palette('--card-headline-trail-text')};
+						color: ${isHighlights
+							? palette('--highlights-card-headline')
+							: palette('--card-headline-trail-text')};
 					`}
 					className="show-underline"
 				>
