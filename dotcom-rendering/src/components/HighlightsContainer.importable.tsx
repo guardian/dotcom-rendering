@@ -7,6 +7,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
 import { useEffect, useRef, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -213,9 +214,23 @@ export const HighlightsContainer = ({ trails }: Props) => {
 		};
 	}, []);
 
+	useEffect(() => {
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'CONTAINER',
+					id: 'home-highlights',
+				},
+				action: 'INSERT',
+			},
+			'Web',
+		);
+	}, []);
+
 	return (
 		<div css={containerStyles}>
 			<ol
+				data-component="home-highlights"
 				ref={carouselRef}
 				css={[
 					carouselStyles,
@@ -257,7 +272,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							icon={<SvgChevronLeftSingle />}
 							onClick={() => scrollTo('left')}
 							aria-label="Move highlight stories backwards"
-							data-link-name="highlights carousel left chevron"
+							data-link-name="highlights container left chevron"
 							size="small"
 						/>
 					</div>
@@ -271,7 +286,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							icon={<SvgChevronRightSingle />}
 							onClick={() => scrollTo('right')}
 							aria-label="Move highlight stories forwards"
-							data-link-name="highlights carousel right chevron"
+							data-link-name="highlights container right chevron"
 							size="small"
 						/>
 					</div>
