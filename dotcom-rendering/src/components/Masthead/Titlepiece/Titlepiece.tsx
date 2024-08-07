@@ -342,7 +342,7 @@ export const Titlepiece = ({
                         })
                         // onBlur close dialog
                         document.addEventListener('mousedown', function(e){
-                          if(navInputCheckbox.checked && !expandedMenu.contains(e.target)){
+                          if(navInputCheckbox.checked && !expandedMenu.contains(e.target) && !veggieBurger.contains(e.target)){
                             toggleMainMenu()
                           }
                         });
