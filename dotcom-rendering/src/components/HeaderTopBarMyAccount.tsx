@@ -21,8 +21,9 @@ import { useBraze } from '../lib/useBraze';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.importable';
+import { Dropdown } from './Dropdown.importable';
+import { Island } from './Island';
 
 interface MyAccountProps {
 	mmaUrl: string;
@@ -243,17 +244,19 @@ const SignedInWithNotifications = ({
 	return (
 		<div css={myAccountLinkStyles}>
 			<ProfileIcon />
-			<Dropdown
-				label="My account"
-				links={identityLinksWithNotifications}
-				id="my-account"
-				dataLinkName={nestedOphanComponents(
-					'nav3',
-					'topbar',
-					'my account',
-				)}
-				cssOverrides={dropDownOverrides}
-			/>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<Dropdown
+					label="My account"
+					links={identityLinksWithNotifications}
+					id="my-account"
+					dataLinkName={nestedOphanComponents(
+						'nav3',
+						'topbar',
+						'my account',
+					)}
+					cssOverrides={dropDownOverrides}
+				/>
+			</Island>
 		</div>
 	);
 };

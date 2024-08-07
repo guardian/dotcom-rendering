@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source/foundations';
 import { userEvent, within } from '@storybook/test';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.importable';
+import { Dropdown } from './Dropdown.importable';
 
 const Header = ({ children }: { children: React.ReactNode }) => (
 	<div

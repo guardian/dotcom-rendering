@@ -6,8 +6,8 @@ import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { EditionLinkType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
-import type { DropdownLinkType } from '../../Dropdown';
-import { Dropdown } from '../../Dropdown';
+import { Dropdown, type DropdownLinkType } from '../../Dropdown.importable';
+import { Island } from '../../Island';
 
 interface EditionDropdownProps {
 	editionId: EditionId;
@@ -66,16 +66,18 @@ export const EditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Dropdown
-				label={activeEdition.id}
-				links={linksToDisplay}
-				id="edition"
-				dataLinkName={dataLinkName}
-				cssOverrides={css`
-					${dropDownOverrides};
-					padding-top: 6px;
-				`}
-			/>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<Dropdown
+					label={activeEdition.id}
+					links={linksToDisplay}
+					id="masthead-edition"
+					dataLinkName={dataLinkName}
+					cssOverrides={css`
+						${dropDownOverrides};
+						padding-top: 6px;
+					`}
+				/>
+			</Island>
 		</div>
 	);
 };

@@ -5,9 +5,10 @@ import { editionList, getEditionFromId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { EditionLinkType } from '../model/extract-nav';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.importable';
+import { Dropdown } from './Dropdown.importable';
 import { dropDownOverrides } from './HeaderTopBarMyAccount';
+import { Island } from './Island';
 
 interface HeaderTopBarEditionDropdownProps {
 	editionId: EditionId;
@@ -61,16 +62,18 @@ export const HeaderTopBarEditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Dropdown
-				label={label}
-				links={linksToDisplay}
-				id="edition"
-				dataLinkName={dataLinkName}
-				cssOverrides={css`
-					${dropDownOverrides};
-					padding-top: 6px;
-				`}
-			/>
+			<Island priority="feature" defer={{ until: 'visible' }}>
+				<Dropdown
+					label={label}
+					links={linksToDisplay}
+					id="edition"
+					dataLinkName={dataLinkName}
+					cssOverrides={css`
+						${dropDownOverrides};
+						padding-top: 6px;
+					`}
+				/>
+			</Island>
 		</div>
 	);
 };

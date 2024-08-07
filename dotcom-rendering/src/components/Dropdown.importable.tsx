@@ -385,6 +385,13 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 	);
 };
 
+/**
+ * Shows a dropdown menu with a list of links
+ *
+ * ## Why does this need to be an Island?
+ *
+ * It has a fully featured JS version (using button) as well as a noJS version (using checkbox).
+ */
 export const Dropdown = ({
 	id,
 	label,

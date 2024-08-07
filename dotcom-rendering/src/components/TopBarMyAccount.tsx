@@ -32,8 +32,9 @@ import { palette as themePalette } from '../palette';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { useConfig } from './ConfigContext';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.importable';
+import { Dropdown } from './Dropdown.importable';
+import { Island } from './Island';
 
 interface MyAccountProps {
 	mmaUrl: string;
@@ -240,17 +241,19 @@ const SignedInWithNotifications = ({
 	return (
 		<div css={myAccountLinkStyles}>
 			<ProfileIcon />
-			<Dropdown
-				label="My account"
-				links={identityLinksWithNotifications}
-				id="topbar-my-account"
-				dataLinkName={nestedOphanComponents(
-					'header',
-					'topbar',
-					'my account',
-				)}
-				cssOverrides={dropDownOverrides}
-			/>
+			<Island priority="critical">
+				<Dropdown
+					label="My account"
+					links={identityLinksWithNotifications}
+					id="topbar-my-account"
+					dataLinkName={nestedOphanComponents(
+						'header',
+						'topbar',
+						'my account',
+					)}
+					cssOverrides={dropDownOverrides}
+				/>
+			</Island>
 		</div>
 	);
 };
