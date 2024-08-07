@@ -51,6 +51,7 @@ const editionSwitcherMenuStyles = css`
 	${from.mobileMedium} {
 		justify-self: end;
 	}
+	width: fit-content;
 `;
 
 const accreditationStyles = css`

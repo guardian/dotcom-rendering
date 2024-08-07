@@ -23,12 +23,18 @@ const editionDropdownStyles = css`
 	${textSans17}
 	margin-top: ${space[1]}px;
 
-	${from.mobileMedium} {
-		ul {
+	ul {
+		position: absolute;
+		left: 0;
+		right: unset;
+		max-height: unset;
+		min-width: 200px;
+
+		${from.mobileMedium} {
 			position: absolute;
 			right: 0;
 			left: unset;
-			max-height: auto;
+			max-height: unset;
 		}
 	}
 `;
