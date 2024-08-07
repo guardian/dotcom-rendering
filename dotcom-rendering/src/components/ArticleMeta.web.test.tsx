@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { ArticleMeta } from './ArticleMeta';
+import { ArticleMeta } from './ArticleMeta.web';
 import { ConfigProvider } from './ConfigContext';
 
 jest.mock('../lib/bridgetApi', () => jest.fn());

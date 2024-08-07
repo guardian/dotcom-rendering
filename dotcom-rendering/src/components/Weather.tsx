@@ -266,16 +266,19 @@ export const Weather = ({
 			</div>
 
 			<div css={slotCSS} className="forecast-1 collapsible">
-				<WeatherSlot edition={edition} {...forecast[3]} />
+				<WeatherSlot edition={edition} {...forecast['3h']} />
 			</div>
+
 			<div css={slotCSS} className="forecast-2 collapsible">
-				<WeatherSlot edition={edition} {...forecast[6]} />
+				<WeatherSlot edition={edition} {...forecast['6h']} />
 			</div>
+
 			<div css={slotCSS} className="forecast-3 collapsible">
-				<WeatherSlot edition={edition} {...forecast[9]} />
+				<WeatherSlot edition={edition} {...forecast['9h']} />
 			</div>
+
 			<div css={slotCSS} className="forecast-4 collapsible">
-				<WeatherSlot edition={edition} {...forecast[12]} />
+				<WeatherSlot edition={edition} {...forecast['12h']} />
 			</div>
 
 			{!!link && (

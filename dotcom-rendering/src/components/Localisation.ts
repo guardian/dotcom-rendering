@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 
 type LocalisedTitles = {
@@ -22,7 +23,7 @@ export const localisedTitle = (
 	inputTitle: string,
 	editionID?: EditionId,
 ): string => {
-	if (editionID === undefined) {
+	if (isUndefined(editionID)) {
 		return inputTitle;
 	}
 	return localisedTitles[editionID]?.[inputTitle] ?? inputTitle;

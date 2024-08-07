@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import type { TagType } from '../types/tag';
 import { OnwardContainer } from './OnwardContainer.amp';
 
@@ -101,7 +102,7 @@ export const Onward = ({
 	);
 
 	const hasSectionMostViewed =
-		sectionID !== undefined && sectionHasMostViewed(sectionID);
+		!isUndefined(sectionID) && sectionHasMostViewed(sectionID);
 	const sectionMostViewed =
 		sectionID && hasSectionMostViewed
 			? container(

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import type { DCRSnapType } from '../types/front';
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 };
 
 export const SnapCssSandbox = ({ snapData, children }: Props) => {
-	if (snapData?.embedHtml === undefined) {
+	if (isUndefined(snapData?.embedHtml)) {
 		return <></>;
 	}
 

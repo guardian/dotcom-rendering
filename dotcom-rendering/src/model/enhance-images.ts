@@ -2,6 +2,7 @@ import {
 	ArticleDesign,
 	type ArticleFormat,
 	ArticleSpecial,
+	isUndefined,
 } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { getLargest, getMaster } from '../lib/image';
@@ -343,7 +344,7 @@ const addImagePositions = <E extends FEElement>(
 			({ masterUrl }) => image?.url === masterUrl,
 		)?.position;
 
-		return position === undefined ? element : { ...element, position };
+		return isUndefined(position) ? element : { ...element, position };
 	});
 
 class Enhancer {

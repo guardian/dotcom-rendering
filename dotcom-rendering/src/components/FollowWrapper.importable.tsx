@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
-import { log } from '@guardian/libs';
+import { isUndefined, log } from '@guardian/libs';
 import { from, space } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { getNotificationsClient, getTagClient } from '../lib/bridgetApi';
@@ -169,7 +169,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 					isFollowing={isFollowingTag ?? false}
 					displayName={displayName}
 					onClickHandler={
-						isFollowingTag !== undefined
+						!isUndefined(isFollowingTag)
 							? tagHandler
 							: () => undefined
 					}
@@ -179,7 +179,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 			<FollowNotificationsButton
 				isFollowing={isFollowingNotifications ?? false}
 				onClickHandler={
-					isFollowingNotifications !== undefined
+					!isUndefined(isFollowingNotifications)
 						? notificationsHandler
 						: () => undefined
 				}

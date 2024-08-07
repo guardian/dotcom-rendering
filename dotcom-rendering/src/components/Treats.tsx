@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineMedium17,
@@ -207,7 +207,7 @@ export const Treats = ({
 				if (
 					treat.imageUrl &&
 					treat.altText &&
-					treat.theme !== undefined
+					!isUndefined(treat.theme)
 				) {
 					return (
 						<FormatBoundary

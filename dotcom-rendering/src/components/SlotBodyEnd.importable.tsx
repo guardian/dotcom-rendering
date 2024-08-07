@@ -260,7 +260,7 @@ export const SlotBodyEnd = ({
 		showPublicGood,
 	]);
 
-	if (SelectedEpic !== null && SelectedEpic !== undefined) {
+	if (SelectedEpic !== null && !isUndefined(SelectedEpic)) {
 		return (
 			<div id="slot-body-end" css={slotStyles}>
 				<SelectedEpic />

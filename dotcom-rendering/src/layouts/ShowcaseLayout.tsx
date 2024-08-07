@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isUndefined,
+} from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -16,8 +21,8 @@ import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.imp
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
@@ -561,7 +566,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 									starRating={
 										format.design ===
 											ArticleDesign.Review &&
-										article.starRating !== undefined
+										!isUndefined(article.starRating)
 											? article.starRating
 											: undefined
 									}

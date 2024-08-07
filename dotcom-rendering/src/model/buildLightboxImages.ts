@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { isUndefined } from '@guardian/libs';
 import { getLargest, getMaster } from '../lib/image';
 import type {
 	CartoonBlockElement,
@@ -146,7 +147,7 @@ export const buildLightboxImages = (
 				block.elements.flatMap((element) =>
 					getImages(element).flatMap((multiImage) => {
 						const lightboxImage = buildLightboxImage(multiImage);
-						if (lightboxImage === undefined) return [];
+						if (isUndefined(lightboxImage)) return [];
 						return isBlog(format.design)
 							? {
 									...lightboxImage,

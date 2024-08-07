@@ -3023,12 +3023,12 @@ const articleBackgroundLight: PaletteFunction = ({
 				case ArticleSpecial.Labs:
 					switch (display) {
 						case ArticleDisplay.Immersive:
-							return sourcePalette.neutral[100];
+							return 'transparent';
 						default:
 							return sourcePalette.neutral[97];
 					}
 				default:
-					return sourcePalette.neutral[100];
+					return 'transparent';
 			}
 	}
 };
@@ -4210,7 +4210,7 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 const ageWarningWrapperBackground: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
-			return 'transparent';
+			return articleBackgroundLight(format);
 		default:
 			return headlineBackgroundLight(format);
 	}
@@ -5440,6 +5440,14 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 
 const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
 
+const tagLinkFillBackgroundLight: PaletteFunction = (format) => {
+	return articleBackgroundLight(format) === 'transparent'
+		? sourcePalette.neutral[100]
+		: articleBackgroundLight(format);
+};
+const tagLinkFillBackgroundDark: PaletteFunction = (format) =>
+	articleBackgroundDark(format);
+
 const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
 
 const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
@@ -6649,6 +6657,10 @@ const paletteColours = {
 	'--tag-link-background': {
 		light: tagLinkBackground,
 		dark: tagLinkBackground,
+	},
+	'--tag-link-fill-background': {
+		light: tagLinkFillBackgroundLight,
+		dark: tagLinkFillBackgroundDark,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,

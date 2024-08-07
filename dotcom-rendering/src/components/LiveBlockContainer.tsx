@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isString } from '@guardian/libs';
+import { isString, isUndefined } from '@guardian/libs';
 import {
 	article17,
 	from,
@@ -167,7 +167,7 @@ export const LiveBlockContainer = ({
 			]}
 		>
 			<Header>
-				{blockFirstPublished !== undefined && (
+				{!isUndefined(blockFirstPublished) && (
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						firstPublishedDisplay={blockFirstPublishedDisplay}
