@@ -31,8 +31,6 @@ const indices = [
 	'banner',
 	'dropdown',
 	'burger',
-	'expanded-veggie-menu-wrapper',
-	'expanded-veggie-menu',
 
 	// Mobile sticky appears below banners
 	'mobileSticky',
@@ -42,7 +40,12 @@ const indices = [
 	'stickyAdWrapper',
 	'stickyAdWrapperNav',
 
-	'myAccountDropdownV2',
+	'mastheadEditionSwitcher',
+	'expanded-veggie-menu-wrapper',
+	'expanded-veggie-menu',
+	// Burger (expanded nav) should be below sticky ads
+	'expanded-veggie-burger',
+	'mastheadMyAccountDropdown',
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 

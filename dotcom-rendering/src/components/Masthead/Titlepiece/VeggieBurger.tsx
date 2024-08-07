@@ -11,7 +11,7 @@ const labelStyles = css`
 	z-index: 1;
 	${`#${navInputCheckboxId}`}:checked ~ div & {
 		/* Bump the z-index of the burger menu when expanded */
-		${getZIndex('burger')}
+		${getZIndex('expanded-veggie-burger')}
 	}
 `;
 

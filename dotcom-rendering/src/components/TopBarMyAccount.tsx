@@ -75,7 +75,7 @@ const myAccountLinkStyles = css`
 		margin: 0 ${space[1]}px 0 0;
 	}
 
-	${getZIndex('myAccountDropdownV2')}
+	${getZIndex('mastheadMyAccountDropdown')}
 `;
 
 export const buildIdentityLinks = (

@@ -15,13 +15,22 @@ interface EditionDropdownProps {
 }
 
 const editionDropdownStyles = css`
-	${getZIndex('editionDropdown')};
+	${getZIndex('mastheadEditionSwitcher')};
 	display: flex;
 	/** Required to absolutely position the dropdown menu */
 	position: relative;
 	color: ${themePalette('--masthead-nav-link-text')};
 	${textSans17}
 	margin-top: ${space[1]}px;
+
+	${from.mobileMedium} {
+		ul {
+			position: absolute;
+			right: 0;
+			left: unset;
+			max-height: auto;
+		}
+	}
 `;
 
 const dropDownOverrides = css`
@@ -33,17 +42,6 @@ const dropDownOverrides = css`
 	&:not(ul):hover {
 		color: ${themePalette('--masthead-nav-link-text')};
 		text-decoration: underline;
-	}
-
-	&:not(button) {
-		position: absolute;
-		top: 32px;
-		max-height: max-content;
-
-		${from.mobileMedium} {
-			right: 0;
-			left: unset;
-		}
 	}
 `;
 
@@ -82,7 +80,7 @@ export const EditionDropdown = ({
 			<Dropdown
 				label={activeEdition.id}
 				links={linksToDisplay}
-				id="edition"
+				id="masthead-edition"
 				dataLinkName={dataLinkName}
 				cssOverrides={dropDownOverrides}
 			/>
