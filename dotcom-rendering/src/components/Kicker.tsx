@@ -24,7 +24,7 @@ const standardTextStyles = css`
 	and add additional padding below the text, to align the text to
 	the top and match the overall height of the live kicker */
 	line-height: 1;
-	padding: 0 0 0.2em 0;
+	padding-bottom: 0.2em;
 `;
 
 const boldTextOverrideStyles = css`
@@ -43,6 +43,8 @@ const liveTextStyles = css`
 const hideLineBreakStyles = css`
 	display: inline-block;
 	margin-right: ${space[1]}px;
+	/** Unset the padding-bottom from standard kicker */
+	padding-bottom: 0;
 `;
 
 /**

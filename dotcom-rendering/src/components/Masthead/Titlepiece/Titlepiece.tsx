@@ -135,7 +135,6 @@ const pillarsNavStyles = css`
 `;
 
 const burgerStyles = css`
-	${getZIndex('burger')};
 	${gridContent}
 	grid-row: 1;
 	align-self: center;
