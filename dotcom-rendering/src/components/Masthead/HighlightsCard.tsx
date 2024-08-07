@@ -36,7 +36,8 @@ const gridContainer = css`
 		'media-icon image';
 
 	${until.desktop} {
-		height: 194px;
+		min-height: 194px;
+		height: 100%;
 	}
 
 	${from.tablet} {
@@ -80,12 +81,13 @@ const imageArea = css`
 	grid-area: image;
 	height: 106px;
 	width: 106px;
+	align-self: end;
+	position: relative;
 	${from.desktop} {
 		height: 112px;
 		width: 112px;
+		align-self: start;
 	}
-	align-self: end;
-	position: relative;
 `;
 
 const hoverStyles = css`
