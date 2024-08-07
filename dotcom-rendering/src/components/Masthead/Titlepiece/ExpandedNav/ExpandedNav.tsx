@@ -65,6 +65,11 @@ const mobileBackgroundOverlay = css`
 	${until.desktop} {
 		/* TODO - use palette rather than hardcoded RGBA colour for background overlay */
 		background-color: rgba(0, 0, 0, 0.5);
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
 	}
 `;
 

@@ -32,6 +32,10 @@ const columnsStyle = css`
 		display: flex;
 		border-right: 1px solid ${themePalette('--masthead-nav-lines')};
 		border-top: 1px solid ${themePalette('--masthead-nav-lines')};
+
+		&:first-of-type {
+			border-left: 1px solid ${themePalette('--masthead-nav-lines')};
+		}
 	}
 `;
 

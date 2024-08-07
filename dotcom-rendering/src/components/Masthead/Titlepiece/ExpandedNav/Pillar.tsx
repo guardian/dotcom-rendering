@@ -141,7 +141,7 @@ const columnStyle = css`
 
 		:first-of-type {
 			border-left: none;
-			width: calc(${pillarWidthsPx.tablet}px - 1px);
+			width: calc(${pillarWidthsPx.tablet}px - 2px);
 		}
 	}
 `;
@@ -150,13 +150,13 @@ const columnStyleFromLeftCol = css`
 	${from.leftCol} {
 		width: ${pillarWidthsPx.leftCol}px;
 		:first-of-type {
-			width: calc(${pillarWidthsPx.leftCol}px - 1px);
+			width: calc(${pillarWidthsPx.leftCol}px - 2px);
 		}
 	}
 	${from.wide} {
 		width: ${pillarWidthsPx.wide}px;
 		:first-of-type {
-			width: calc(${pillarWidthsPx.wide}px - 1px);
+			width: calc(${pillarWidthsPx.wide}px - 2px);
 		}
 	}
 `;

@@ -5388,7 +5388,7 @@ const mastheadNavLinkText: PaletteFunction = () => sourcePalette.neutral[100];
 const mastheadNavLinkTextHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const mastheadNavBorder: PaletteFunction = () => sourcePalette.brand[600];
-const mastheadNavLines: PaletteFunction = () => sourcePalette.neutral[86];
+const mastheadNavLines: PaletteFunction = () => sourcePalette.brand[600];
 
 const mastheadVeggieBurgerIcon: PaletteFunction = () =>
 	sourcePalette.brand[400];
