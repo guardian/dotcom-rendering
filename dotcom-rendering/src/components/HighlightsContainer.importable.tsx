@@ -69,16 +69,16 @@ const itemStyles = css`
 		}
 
 		/**
-		* From left col we add padding left to the first
+		* From left col we add space to the left margin to the first
 		* child so that the first card in the carousel aligns
 		* with the start of the pages content in the grid.
 		*/
 
 		${from.leftCol} {
-			padding-left: 160px; /** 160 === 2 columns and 2 column gaps  */
+			margin-left: 160px; /** 160 === 2 columns and 2 column gaps  */
 		}
 		${from.wide} {
-			padding-left: 240px; /** 240 === 3 columns and 3 column gaps  */
+			margin-left: 240px; /** 240 === 3 columns and 3 column gaps  */
 		}
 	}
 `;
