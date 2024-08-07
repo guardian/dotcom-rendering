@@ -233,8 +233,8 @@ export const HighlightsContainer = ({ trails }: Props) => {
 		void submitComponentEvent(
 			{
 				component: {
-					componentType: 'CAROUSEL',
-					id: 'highlights-container',
+					componentType: 'CONTAINER',
+					id: 'home-highlights',
 				},
 				action: 'INSERT',
 			},
@@ -245,7 +245,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	return (
 		<div css={containerStyles}>
 			<ol
-				data-component="highlights-container"
+				data-component="home-highlights"
 				ref={carouselRef}
 				css={[
 					carouselStyles,
@@ -287,7 +287,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							icon={<SvgChevronLeftSingle />}
 							onClick={() => scrollTo('left')}
 							aria-label="Move highlight stories backwards"
-							data-link-name="highlights carousel left chevron"
+							data-link-name="highlights container left chevron"
 							size="small"
 						/>
 					</div>
@@ -301,7 +301,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							icon={<SvgChevronRightSingle />}
 							onClick={() => scrollTo('right')}
 							aria-label="Move highlight stories forwards"
-							data-link-name="highlights carousel right chevron"
+							data-link-name="highlights container right chevron"
 							size="small"
 						/>
 					</div>
