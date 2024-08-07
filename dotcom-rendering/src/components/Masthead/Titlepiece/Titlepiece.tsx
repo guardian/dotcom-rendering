@@ -145,23 +145,24 @@ const burgerStyles = css`
 	justify-content: center;
 	display: flex;
 	justify-self: end;
-	padding-bottom: 2px;
+	position: relative;
+	bottom: 2px;
 	${from.mobileMedium} {
-		padding-bottom: ${space[1]}px;
+		bottom: ${space[1]}px;
 	}
 	${from.desktop} {
-		margin-right: 356px;
-		padding-bottom: 6px;
+		right: 354px;
+		bottom: 6px;
 	}
 `;
 
 const burgerStylesFromLeftCol = css`
 	${from.leftCol} {
-		margin-right: 428px;
-		padding-bottom: ${space[2]}px;
+		right: 430px;
+		bottom: 14px;
 	}
 	${from.wide} {
-		margin-right: 536px;
+		right: 534px;
 	}
 `;
 
