@@ -25,7 +25,6 @@ const meta = {
 			design: ArticleDesign.Standard,
 			theme: Pillar.Sport,
 		},
-		showPulsingDot: true,
 		kickerText: 'News',
 		byline: 'Georges Monbiot',
 		mainMedia: mainGallery,
@@ -80,4 +79,16 @@ export const WithMediaIcon: Story = {
 	},
 	parameters: {},
 	name: 'With Media Icon',
+};
+
+export const WithLiveKicker: Story = {
+	args: {
+		format: {
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.LiveBlog,
+			theme: Pillar.News,
+		},
+	},
+	parameters: {},
+	name: 'With Live Kicker',
 };
