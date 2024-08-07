@@ -9,7 +9,6 @@ import {
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import type { EditionId } from '../../../lib/edition';
-import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
@@ -81,7 +80,6 @@ const accreditationStylesFromLeftCol = css`
 `;
 
 const logoStyles = css`
-	${getZIndex('TheGuardian')}
 	${gridMainColumn}
 	grid-row: 1;
 	justify-self: end;

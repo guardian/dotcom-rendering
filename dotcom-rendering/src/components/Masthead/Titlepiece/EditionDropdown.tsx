@@ -7,7 +7,8 @@ import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { EditionLinkType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
 import type { DropdownLinkType } from '../../Dropdown';
-import { Dropdown } from '../../Dropdown';
+import { Island } from '../../Island';
+import { MastheadDropdown } from '../../MastheadDropdown.importable';
 
 interface EditionDropdownProps {
 	editionId: EditionId;
@@ -18,19 +19,26 @@ const editionDropdownStyles = css`
 	${getZIndex('editionDropdown')};
 	display: flex;
 	position: relative;
-`;
 
-const dropDownOverrides = css`
-	${textSans17}
-	color: ${themePalette('--masthead-nav-link-text')};
-	padding: 0;
-	margin-top: ${space[1]}px;
-	&:not(ul):hover {
+	div {
+		position: absolute;
+		${textSans17}
 		color: ${themePalette('--masthead-nav-link-text')};
-		text-decoration: underline;
-	}
-	${from.tablet} {
-		right: 0;
+		padding: 0;
+		margin-top: ${space[1]}px;
+
+		label,
+		button {
+			padding-top: 6px;
+
+			&:not(ul):hover {
+				color: ${themePalette('--masthead-nav-link-text')};
+				text-decoration: underline;
+			}
+		}
+		${from.tablet} {
+			right: 0;
+		}
 	}
 `;
 
@@ -66,16 +74,14 @@ export const EditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Dropdown
-				label={activeEdition.id}
-				links={linksToDisplay}
-				id="edition"
-				dataLinkName={dataLinkName}
-				cssOverrides={css`
-					${dropDownOverrides};
-					padding-top: 6px;
-				`}
-			/>
+			<Island priority="feature" defer={{ until: 'idle' }}>
+				<MastheadDropdown
+					label={activeEdition.id}
+					links={linksToDisplay}
+					id="edition"
+					dataLinkName={dataLinkName}
+				/>
+			</Island>
 		</div>
 	);
 };
