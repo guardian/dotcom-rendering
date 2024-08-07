@@ -15,7 +15,7 @@ interface EditionDropdownProps {
 }
 
 const editionDropdownStyles = css`
-	${getZIndex('mastheadEditionSwitcher')};
+	${getZIndex('mastheadEditionDropdown')};
 	display: flex;
 	/** Required to absolutely position the dropdown menu */
 	position: relative;
@@ -31,10 +31,8 @@ const editionDropdownStyles = css`
 		min-width: 200px;
 
 		${from.mobileMedium} {
-			position: absolute;
-			right: 0;
 			left: unset;
-			max-height: unset;
+			right: 0;
 		}
 	}
 `;

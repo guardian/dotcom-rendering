@@ -12,7 +12,7 @@ const labelStyles = css`
 	${`#${navInputCheckboxId}`}:checked ~ div & {
 		${until.desktop} {
 			/* Bump the z-index of the burger menu when expanded */
-			${getZIndex('expanded-veggie-burger-mobile')}
+			${getZIndex('mastheadVeggieBurgerExpandedMobile')}
 		}
 	}
 `;
