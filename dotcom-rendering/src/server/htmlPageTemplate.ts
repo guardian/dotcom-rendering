@@ -282,7 +282,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <script>
                     // Noop monkey patch perf.mark and perf.measure if not supported
-                    if(!isUndefined(window.performance) && isUndefined(window.performance.mark)) {
+                    if(window.performance !== undefined && window.performance.mark === undefined) {
                         window.performance.mark = function(){};
                         window.performance.measure = function(){};
                     }
