@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import { from, until } from '@guardian/source/foundations';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { palette } from '../../palette';
@@ -23,7 +23,6 @@ export type HighlightsCardProps = {
 	avatarUrl?: string;
 	mainMedia?: MainMedia;
 	kickerText?: string;
-	showPulsingDot?: boolean;
 	dataLinkName: string;
 	byline?: string;
 	isExternalLink: boolean;
@@ -123,7 +122,6 @@ export const HighlightsCard = ({
 	avatarUrl,
 	mainMedia,
 	kickerText,
-	showPulsingDot,
 	dataLinkName,
 	byline,
 	isExternalLink,
@@ -146,7 +144,9 @@ export const HighlightsCard = ({
 						format={format}
 						size="medium"
 						sizeOnMobile="small"
-						showPulsingDot={showPulsingDot}
+						showPulsingDot={
+							format.design === ArticleDesign.LiveBlog
+						}
 						kickerText={kickerText}
 						isExternalLink={isExternalLink}
 						showQuotes={showQuotedHeadline}
