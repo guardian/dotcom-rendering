@@ -183,7 +183,7 @@ const styles = (format: ArticleFormat) => css`
 		display: flow-root;
 
 		p {
-			margin: -1.4rem 0 0 0;
+			margin: -1.5rem 0 0 0;
 		}
 	}
 
