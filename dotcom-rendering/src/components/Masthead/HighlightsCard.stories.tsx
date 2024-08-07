@@ -90,5 +90,5 @@ export const WithLiveKicker: Story = {
 		},
 	},
 	parameters: {},
-	name: 'With Media Icon',
+	name: 'With Live Kicker',
 };
