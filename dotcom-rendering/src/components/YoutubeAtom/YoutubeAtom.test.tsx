@@ -47,11 +47,9 @@ describe('YoutubeAtom', () => {
 					consentState={consentStateCanTarget}
 					shouldStick={false}
 					isMainMedia={false}
-					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
-					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -86,11 +84,9 @@ describe('YoutubeAtom', () => {
 					overrideImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
-					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
-					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -132,11 +128,9 @@ describe('YoutubeAtom', () => {
 					consentState={consentStateCanTarget}
 					shouldStick={false}
 					isMainMedia={false}
-					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
-					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -172,11 +166,9 @@ describe('YoutubeAtom', () => {
 					overrideImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
-					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
-					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -211,11 +203,9 @@ describe('YoutubeAtom', () => {
 					}}
 					shouldStick={false}
 					isMainMedia={false}
-					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
-					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -251,11 +241,9 @@ describe('YoutubeAtom', () => {
 					overrideImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
-					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
-					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -289,11 +277,9 @@ describe('YoutubeAtom', () => {
 					overrideImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
-					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
-					renderingTarget="Web"
 				/>
 			</ConfigProvider>
 		);
@@ -331,11 +317,9 @@ describe('YoutubeAtom', () => {
 						overrideImage={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
-						enableIma={false}
 						abTestParticipations={{}}
 						imagePositionOnMobile="left"
 						imageSize="small"
-						renderingTarget="Web"
 					/>
 					<YoutubeAtom
 						index={123}
@@ -352,11 +336,9 @@ describe('YoutubeAtom', () => {
 						overrideImage={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
-						enableIma={false}
 						abTestParticipations={{}}
 						imagePositionOnMobile="left"
 						imageSize="small"
-						renderingTarget="Web"
 					/>
 				</ConfigProvider>
 			</>
