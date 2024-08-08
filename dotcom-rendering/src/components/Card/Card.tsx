@@ -452,6 +452,7 @@ export const Card = ({
 														? 'large'
 														: imageSize
 												}
+												enableAds={false}
 											/>
 										</Island>
 									</div>

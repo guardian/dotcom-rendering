@@ -1,5 +1,12 @@
 import { css } from '@emotion/react';
 
+/**
+ * The placeholder component is used to render a black rectangle
+ * until the player is ready
+ *
+ * Otherwise the container may visibly flash white between the
+ * overlay image being removed and the player becoming ready
+ */
 export const YoutubeAtomPlaceholder = ({
 	uniqueId,
 }: {
