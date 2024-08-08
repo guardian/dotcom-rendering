@@ -115,8 +115,6 @@ export interface FEArticleType {
 
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
-	availableTopics?: Topic[];
-	selectedTopics?: Topic[];
 
 	promotedNewsletter?: Newsletter;
 	canonicalUrl: string;

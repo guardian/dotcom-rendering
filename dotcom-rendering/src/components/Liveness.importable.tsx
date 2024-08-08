@@ -17,7 +17,6 @@ type Props = {
 	webURL: string;
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
-	selectedTopics?: Topic[];
 };
 
 /**
@@ -110,7 +109,6 @@ function getKey(
 	ajaxUrl: string,
 	latestBlockId: string,
 	filterKeyEvents: boolean,
-	selectedTopics?: Topic[],
 ): string | undefined {
 	try {
 		// Construct the url to poll
@@ -122,10 +120,6 @@ function getKey(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
 		);
-		const [topic] = selectedTopics ?? [];
-		if (topic) {
-			url.searchParams.set('topics', `${topic.type}:${topic.value}`);
-		}
 
 		return url.href;
 	} catch {
@@ -161,7 +155,6 @@ export const Liveness = ({
 	webURL,
 	mostRecentBlockId,
 	hasPinnedPost,
-	selectedTopics,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
@@ -230,16 +223,8 @@ export const Liveness = ({
 	}, [onSuccess]);
 
 	useEffect(() => {
-		setKey(
-			getKey(
-				pageId,
-				ajaxUrl,
-				latestBlockId,
-				filterKeyEvents,
-				selectedTopics,
-			),
-		);
-	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents, selectedTopics]);
+		setKey(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents));
+	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents]);
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(key, {

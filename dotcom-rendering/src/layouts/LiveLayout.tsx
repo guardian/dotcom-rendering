@@ -52,10 +52,6 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import {
-	hasRelevantTopics,
-	TopicFilterBank,
-} from '../components/TopicFilterBank';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
@@ -247,16 +243,6 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-const paddingBody = css`
-	padding: ${space[3]}px;
-	${from.mobileLandscape} {
-		padding: ${space[3]}px ${space[5]}px;
-	}
-	${from.desktop} {
-		padding: 0;
-	}
-`;
-
 const stickyTagStyles = css`
 	position: sticky;
 	top: 0;
@@ -306,12 +292,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
-	const showTopicFilterBank =
-		!!article.config.switches.automaticFilters &&
-		hasRelevantTopics(article.availableTopics);
-
 	const hasKeyEvents = !!article.keyEvents.length;
-	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
 	const renderAds = canRenderAds(article, renderingTarget);
 
@@ -768,7 +749,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										article.mostRecentBlockId ?? ''
 									}
 									hasPinnedPost={!!article.pinnedPost}
-									selectedTopics={article.selectedTopics}
 								/>
 							</Island>
 						</>
@@ -855,29 +835,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									</div>
 								</Hide>
 
-								{showTopicFilterBank && (
-									<Hide until="desktop">
-										<div css={sidePaddingDesktop}>
-											<TopicFilterBank
-												availableTopics={
-													article.availableTopics
-												}
-												selectedTopics={
-													article.selectedTopics
-												}
-												format={format}
-												keyEvents={article.keyEvents}
-												filterKeyEvents={
-													article.filterKeyEvents
-												}
-												id={
-													'key-events-carousel-desktop'
-												}
-											/>
-										</div>
-									</Hide>
-								)}
-
 								{isWeb && (
 									<Hide until="desktop">
 										<Island
@@ -960,7 +917,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											</div>
 										</Hide>
 									)}
-									{showKeyEventsToggle ? (
+									{hasKeyEvents ? (
 										<Hide below="desktop">
 											<Island
 												priority="feature"
@@ -977,301 +934,122 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									) : (
 										<></>
 									)}
-									{showTopicFilterBank ? (
-										<div css={paddingBody}>
-											<ArticleContainer format={format}>
-												{pagination.currentPage !==
-													1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-													/>
+									<Accordion accordionTitle="Live feed">
+										<ArticleContainer format={format}>
+											{pagination.currentPage !== 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+												/>
+											)}
+											<ArticleBody
+												format={format}
+												blocks={article.blocks}
+												pinnedPost={article.pinnedPost}
+												host={host}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												ajaxUrl={article.config.ajaxUrl}
+												sectionId={
+													article.config.section
+												}
+												abTests={article.config.abTests}
+												switches={
+													article.config.switches
+												}
+												isSensitive={
+													article.config.isSensitive
+												}
+												isAdFreeUser={
+													article.isAdFreeUser
+												}
+												shouldHideReaderRevenue={
+													article.shouldHideReaderRevenue
+												}
+												tags={article.tags}
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												contentType={
+													article.contentType
+												}
+												isPreview={
+													article.config.isPreview
+												}
+												idUrl={
+													article.config.idUrl ?? ''
+												}
+												isDev={!!article.config.isDev}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
+												keyEvents={article.keyEvents}
+												filterKeyEvents={
+													article.filterKeyEvents
+												}
+												keywordIds={
+													article.config.keywordIds
+												}
+												lang={article.lang}
+												isRightToLeftLang={
+													article.isRightToLeftLang
+												}
+												editionId={article.editionId}
+											/>
+											{pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+												/>
+											)}
+											<StraightLines
+												data-print-layout="hide"
+												count={4}
+												color={themePalette(
+													'--straight-lines',
 												)}
-												<ArticleBody
-													format={format}
-													blocks={article.blocks}
-													pinnedPost={
-														article.pinnedPost
-													}
-													host={host}
-													pageId={article.pageId}
-													webTitle={article.webTitle}
-													ajaxUrl={
-														article.config.ajaxUrl
-													}
-													sectionId={
-														article.config.section
-													}
-													abTests={
-														article.config.abTests
-													}
-													switches={
-														article.config.switches
-													}
-													isSensitive={
-														article.config
-															.isSensitive
-													}
-													isAdFreeUser={
-														article.isAdFreeUser
-													}
-													shouldHideReaderRevenue={
-														article.shouldHideReaderRevenue
-													}
-													tags={article.tags}
-													isPaidContent={
-														!!article.config
-															.isPaidContent
-													}
-													contributionsServiceUrl={
-														contributionsServiceUrl
-													}
-													contentType={
-														article.contentType
-													}
-													isPreview={
-														article.config.isPreview
-													}
-													idUrl={
-														article.config.idUrl ??
-														''
-													}
-													isDev={
-														!!article.config.isDev
-													}
-													onFirstPage={
-														pagination.currentPage ===
-														1
-													}
-													keyEvents={
-														article.keyEvents
-													}
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													availableTopics={
-														article.availableTopics
-													}
-													selectedTopics={
-														article.selectedTopics
-													}
-													keywordIds={
-														article.config
-															.keywordIds
-													}
-													editionId={
-														article.editionId
-													}
-												/>
-												{pagination.totalPages > 1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-													/>
-												)}
-												<StraightLines
-													data-print-layout="hide"
-													count={4}
-													color={themePalette(
-														'--straight-lines',
-													)}
-													cssOverrides={css`
-														display: block;
-													`}
-												/>
-												<SubMeta
-													format={format}
-													subMetaKeywordLinks={
-														article.subMetaKeywordLinks
-													}
-													subMetaSectionLinks={
-														article.subMetaSectionLinks
-													}
-													pageId={article.pageId}
-													webUrl={article.webURL}
-													webTitle={article.webTitle}
-													showBottomSocialButtons={
-														article.showBottomSocialButtons &&
-														renderingTarget ===
-															'Web'
-													}
-												/>
-											</ArticleContainer>
-										</div>
-									) : (
-										<Accordion accordionTitle="Live feed">
-											<ArticleContainer format={format}>
-												{pagination.currentPage !==
-													1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-													/>
-												)}
-												<ArticleBody
-													format={format}
-													blocks={article.blocks}
-													pinnedPost={
-														article.pinnedPost
-													}
-													host={host}
-													pageId={article.pageId}
-													webTitle={article.webTitle}
-													ajaxUrl={
-														article.config.ajaxUrl
-													}
-													sectionId={
-														article.config.section
-													}
-													abTests={
-														article.config.abTests
-													}
-													switches={
-														article.config.switches
-													}
-													isSensitive={
-														article.config
-															.isSensitive
-													}
-													isAdFreeUser={
-														article.isAdFreeUser
-													}
-													shouldHideReaderRevenue={
-														article.shouldHideReaderRevenue
-													}
-													tags={article.tags}
-													isPaidContent={
-														!!article.config
-															.isPaidContent
-													}
-													contributionsServiceUrl={
-														contributionsServiceUrl
-													}
-													contentType={
-														article.contentType
-													}
-													isPreview={
-														article.config.isPreview
-													}
-													idUrl={
-														article.config.idUrl ??
-														''
-													}
-													isDev={
-														!!article.config.isDev
-													}
-													onFirstPage={
-														pagination.currentPage ===
-														1
-													}
-													keyEvents={
-														article.keyEvents
-													}
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													availableTopics={
-														article.availableTopics
-													}
-													selectedTopics={
-														article.selectedTopics
-													}
-													keywordIds={
-														article.config
-															.keywordIds
-													}
-													lang={article.lang}
-													isRightToLeftLang={
-														article.isRightToLeftLang
-													}
-													editionId={
-														article.editionId
-													}
-												/>
-												{pagination.totalPages > 1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-													/>
-												)}
-												<StraightLines
-													data-print-layout="hide"
-													count={4}
-													color={themePalette(
-														'--straight-lines',
-													)}
-													cssOverrides={css`
-														display: block;
-													`}
-												/>
-												<SubMeta
-													format={format}
-													subMetaKeywordLinks={
-														article.subMetaKeywordLinks
-													}
-													subMetaSectionLinks={
-														article.subMetaSectionLinks
-													}
-													pageId={article.pageId}
-													webUrl={article.webURL}
-													webTitle={article.webTitle}
-													showBottomSocialButtons={
-														article.showBottomSocialButtons &&
-														renderingTarget ===
-															'Web'
-													}
-												/>
-											</ArticleContainer>
-										</Accordion>
-									)}
+												cssOverrides={css`
+													display: block;
+												`}
+											/>
+											<SubMeta
+												format={format}
+												subMetaKeywordLinks={
+													article.subMetaKeywordLinks
+												}
+												subMetaSectionLinks={
+													article.subMetaSectionLinks
+												}
+												pageId={article.pageId}
+												webUrl={article.webURL}
+												webTitle={article.webTitle}
+												showBottomSocialButtons={
+													article.showBottomSocialButtons &&
+													renderingTarget === 'Web'
+												}
+											/>
+										</ArticleContainer>
+									</Accordion>
 								</div>
 							</GridItem>
 							<GridItem area="right-column">

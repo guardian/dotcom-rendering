@@ -295,8 +295,6 @@ export const renderBlocks = ({
 				onFirstPage={false}
 				keyEvents={[]}
 				filterKeyEvents={false}
-				availableTopics={[]}
-				selectedTopics={[]}
 			/>
 		</ConfigProvider>,
 	);

@@ -12,7 +12,6 @@ import { LiveBlock } from './LiveBlock';
 import { LiveBlogBlocksAndAdverts } from './LiveBlogBlocksAndAdverts';
 import { LiveBlogEpic } from './LiveBlogEpic.importable';
 import { PinnedPost } from './PinnedPost';
-import { hasRelevantTopics, TopicFilterBank } from './TopicFilterBank';
 
 type Props = {
 	format: ArticleFormat;
@@ -37,8 +36,6 @@ type Props = {
 	onFirstPage: boolean;
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
-	availableTopics: Topic[];
-	selectedTopics: Topic[];
 };
 
 export const LiveBlogRenderer = ({
@@ -63,19 +60,15 @@ export const LiveBlogRenderer = ({
 	onFirstPage,
 	keyEvents,
 	filterKeyEvents = false,
-	availableTopics,
-	selectedTopics,
 	editionId,
 }: Props) => {
 	const { renderingTarget } = useConfig();
 	const isWeb = renderingTarget === 'Web';
 	const { absoluteServerTimes = false } = switches;
 
-	const filtered = selectedTopics.length > 0 || filterKeyEvents;
-
 	return (
 		<>
-			{pinnedPost && onFirstPage && !filtered && (
+			{pinnedPost && onFirstPage && !filterKeyEvents && (
 				<>
 					<Island defer={{ until: 'idle' }} priority="feature">
 						<EnhancePinnedPost />
@@ -112,33 +105,17 @@ export const LiveBlogRenderer = ({
 							absoluteServerTimes={absoluteServerTimes}
 						/>
 					</Island>
-					{(!switches.automaticFilters ||
-						availableTopics.length < 1) && (
-						<Island priority="feature" defer={{ until: 'visible' }}>
-							<FilterKeyEventsToggle
-								filterKeyEvents={filterKeyEvents}
-								id="filter-toggle-mobile"
-							/>
-						</Island>
-					)}
+					<Island priority="feature" defer={{ until: 'visible' }}>
+						<FilterKeyEventsToggle
+							filterKeyEvents={filterKeyEvents}
+							id="filter-toggle-mobile"
+						/>
+					</Island>
 				</Hide>
 			) : (
 				<></>
 			)}
 
-			{switches.automaticFilters &&
-				hasRelevantTopics(availableTopics) && (
-					<Hide above="desktop">
-						<TopicFilterBank
-							availableTopics={availableTopics}
-							selectedTopics={selectedTopics}
-							format={format}
-							keyEvents={keyEvents}
-							filterKeyEvents={filterKeyEvents}
-							id={'key-events-carousel-mobile'}
-						/>
-					</Hide>
-				)}
 			{isLiveUpdate ? null : <div id="top-of-blog" />}
 			<LiveBlogBlocksAndAdverts
 				blocks={blocks}

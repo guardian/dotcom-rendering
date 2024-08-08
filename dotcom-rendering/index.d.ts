@@ -138,14 +138,6 @@ type UserBadge = {
 	name: string;
 };
 
-interface Topic {
-	type: TopicType;
-	value: string;
-	count?: number;
-}
-
-type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
-
 // ------------
 // Liveblogs //
 // ------------
