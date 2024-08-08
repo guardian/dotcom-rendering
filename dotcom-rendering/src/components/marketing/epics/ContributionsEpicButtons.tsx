@@ -209,7 +209,7 @@ export const ContributionsEpicButtons = ({
 			return {
 				text: cta.text,
 				baseUrl: addChoiceCardsParams(
-					'https://support.theguardian.com/uk/contribute/checkout',
+					'https://support.theguardian.com/contribute/checkout',
 					'MONTHLY',
 					threeTierChoiceCardSelectedAmount,
 				),
