@@ -19,8 +19,6 @@ import { YouTubePlayer } from './YoutubePlayer';
 type Props = {
 	uniqueId: string;
 	videoId: string;
-	adTargeting: AdTargeting;
-	consentState: ConsentState;
 	height: number;
 	width: number;
 	title?: string;
@@ -28,9 +26,11 @@ type Props = {
 	eventEmitters: Array<(event: VideoEventKey) => void>;
 	autoPlay: boolean;
 	onReady: () => void;
-	enableIma: boolean;
 	pauseVideo: boolean;
 	deactivateVideo: () => void;
+	enableAds: boolean;
+	adTargeting: AdTargeting;
+	consentState: ConsentState;
 	abTestParticipations: Participations;
 };
 
@@ -360,8 +360,6 @@ const isSignedIn = async (): Promise<boolean> => {
 export const YoutubeAtomPlayer = ({
 	uniqueId,
 	videoId,
-	adTargeting,
-	consentState,
 	height,
 	width,
 	title,
@@ -369,9 +367,11 @@ export const YoutubeAtomPlayer = ({
 	eventEmitters,
 	autoPlay,
 	onReady,
-	enableIma,
 	pauseVideo,
 	deactivateVideo,
+	enableAds,
+	adTargeting,
+	consentState,
 	abTestParticipations,
 }: Props): JSX.Element => {
 	/**
@@ -413,18 +413,6 @@ export const YoutubeAtomPlayer = ({
 					videoId,
 				});
 
-				// Since IMA the YouTube player API no longer accepts ad configuration
-				// If IMA is enabled it will configure ads via its adsRequestCallback
-				const adsConfig = { disableAds: true } as const;
-
-				const embedConfig = {
-					relatedChannels: [],
-					adsConfig,
-					enableIma,
-					// YouTube recommends disabling related videos when IMA is enabled
-					disableRelatedVideos: enableIma,
-				};
-
 				const onReadyListener = createOnReadyListener(
 					videoId,
 					onReady,
@@ -438,6 +426,10 @@ export const YoutubeAtomPlayer = ({
 					eventEmitters,
 				);
 
+				/**
+				 * Configuration for the core YouTube player
+				 * IMA is configured separately
+				 */
 				const basePlayerConfiguration: YouTubePlayerArgs = {
 					id,
 					youtubeOptions: {
@@ -450,16 +442,23 @@ export const YoutubeAtomPlayer = ({
 							playsinline: 1,
 							rel: 0,
 						},
-						embedConfig,
+						// Since IMA the YouTube player API no longer accepts ad configuration
+						embedConfig: {
+							relatedChannels: [],
+							adsConfig: { disableAds: true },
+							enableIma: enableAds,
+							// YouTube recommends disabling related videos when IMA ads are enabled
+							disableRelatedVideos: enableAds,
+						},
 						events: {
 							onStateChange: onStateChangeListener,
 						},
 					},
 					onReadyListener,
-					enableIma,
+					enableIma: enableAds,
 				};
 
-				if (enableIma) {
+				if (enableAds) {
 					isSignedIn()
 						.then((signedIn) => {
 							player.current = new YouTubePlayer({
@@ -532,21 +531,21 @@ export const YoutubeAtomPlayer = ({
 		 * useEffect dependencies are mostly static but added to array for correctness
 		 */
 		[
+			abTestParticipations,
 			adTargeting,
 			autoPlay,
 			consentState,
+			enableAds,
 			eventEmitters,
+			deactivateVideo,
 			height,
+			id,
 			onReady,
 			origin,
+			playerReadyCallback,
+			uniqueId,
 			videoId,
 			width,
-			enableIma,
-			abTestParticipations,
-			uniqueId,
-			id,
-			playerReadyCallback,
-			deactivateVideo,
 		],
 	);
 
@@ -629,7 +628,7 @@ export const YoutubeAtomPlayer = ({
 			data-testid={id}
 			data-atom-type="youtube"
 			title={title}
-			css={enableIma && imaPlayerStyles}
+			css={enableAds && imaPlayerStyles}
 		></div>
 	);
 };

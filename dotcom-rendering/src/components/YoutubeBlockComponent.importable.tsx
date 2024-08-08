@@ -227,7 +227,7 @@ export const YoutubeBlockComponent = ({
 				posterImage={getLargestImageSize(posterImage)?.url}
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={
-					renderingTarget === 'Web'
+					enableAds && renderingTarget === 'Web'
 						? adTargeting
 						: adTargetingDisabled
 				}
@@ -241,14 +241,12 @@ export const YoutubeBlockComponent = ({
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
-				enableIma={enableAds}
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
 				showTextOverlay={showTextOverlay}
 				imageSize={imageSize}
 				imagePositionOnMobile={imagePositionOnMobile}
-				renderingTarget={renderingTarget}
 			/>
 			{!hideCaption && (
 				<Caption
