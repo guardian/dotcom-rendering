@@ -31,6 +31,7 @@ type EmbedConfig = {
 		relatedChannels: string[];
 		adsConfig: { disableAds: true };
 		enableIma: boolean;
+		disableRelatedVideos: boolean;
 	};
 };
 
@@ -98,8 +99,8 @@ class YouTubePlayer {
 			(resolve, reject) => {
 				try {
 					/**
-					 * If enableIma is true, YT.createPlayerForPublishers will be called
-					 * If enableIma is false, the standard new YT.Player constructor will be called
+					 * If enableIma is true, YT.createPlayerForPublishers will be called to initiate IMA ads
+					 * If enableIma is false, the standard YT.Player constructor will be called
 					 * Listeners are set appropriatley for each method
 					 */
 					if (enableIma) {
