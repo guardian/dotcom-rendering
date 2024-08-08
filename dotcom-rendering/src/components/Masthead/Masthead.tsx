@@ -4,8 +4,8 @@ import type { NavType } from '../../model/extract-nav';
 import { palette as themePalette } from '../../palette';
 import { Island } from '../Island';
 import { Section } from '../Section';
+import { Titlepiece } from '../Titlepiece.importable';
 import { TopBar } from '../TopBar.importable';
-import { Titlepiece } from './Titlepiece/Titlepiece';
 
 type Props = {
 	nav: NavType;
@@ -101,12 +101,14 @@ export const Masthead = ({
 			</Section>
 		)}
 
-		<Titlepiece
-			nav={nav}
-			editionId={editionId}
-			showSubNav={showSubNav}
-			isImmersive={isImmersive}
-			hasPageSkin={hasPageSkin}
-		/>
+		<Island priority="critical" defer={{ until: 'interaction' }}>
+			<Titlepiece
+				nav={nav}
+				editionId={editionId}
+				showSubNav={showSubNav}
+				isImmersive={isImmersive}
+				hasPageSkin={hasPageSkin}
+			/>
+		</Island>
 	</header>
 );
