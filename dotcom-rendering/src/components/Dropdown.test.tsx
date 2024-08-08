@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { ConfigProvider } from './ConfigContext';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.importable';
+import { Dropdown } from './Dropdown.importable';
 
 const links: [
 	DropdownLinkType,
