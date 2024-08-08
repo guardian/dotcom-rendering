@@ -76,9 +76,10 @@ const itemStyles = css`
 		*/
 
 		${from.leftCol} {
-			margin-left: 160px; /** 160 === 2 columns and 2 column gaps  */
+			padding-left: 160px; /** 160 === 2 columns and 2 column gaps  */
 		}
 		${from.wide} {
+			padding-left: 0;
 			margin-left: 240px; /** 240 === 3 columns and 3 column gaps  */
 		}
 	}
