@@ -65,6 +65,33 @@ const useDev = () => {
 	return isDev;
 };
 
+type AmIUsedLoggingEvent = {
+	label: string;
+	properties?: {
+		name: string;
+		value: string;
+	}[];
+};
+/**
+ * This function is used to send a logging event to BigQuery, which is
+ * logged into the `fastly_logging` table within the `logging` dataset.
+ */
+const fastlyLog = (event: AmIUsedLoggingEvent): void => {
+	if (!window.guardian.config.switches.sentinelLogger) return;
+
+	const endpoint = window.guardian.config.page.isDev
+		? '//logs.code.dev-guardianapis.com/log'
+		: '//logs.guardianapis.com/log';
+
+	void fetch(endpoint, {
+		method: 'POST',
+		body: JSON.stringify(event),
+		keepalive: true,
+		cache: 'no-store',
+		mode: 'no-cors',
+	});
+};
+
 /**
  * Record relevant metrics to our data warehouse:
  * - Core Web Vitals
@@ -80,13 +107,23 @@ const useDev = () => {
  * (No visual story exists as this does not render anything)
  */
 export const Metrics = ({ commercialMetricsEnabled, tests }: Props) => {
+	const { renderingTarget } = useConfig();
+	const pageViewId = usePageViewId(renderingTarget);
+	fastlyLog({
+		label: 'dotcom.rendered.metrics.importable',
+		properties: [
+			{
+				name: 'pageViewId',
+				value: pageViewId ?? '',
+			},
+		],
+	});
+
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
 	const detectedAdBlocker = useDetectAdBlock();
 
-	const { renderingTarget } = useConfig();
 	const browserId = useBrowserId();
-	const pageViewId = usePageViewId(renderingTarget);
 
 	const isDev = useDev();
 
