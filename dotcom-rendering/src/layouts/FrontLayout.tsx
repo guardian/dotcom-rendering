@@ -69,6 +69,9 @@ const isNavList = (collection: DCRCollectionType) => {
 	);
 };
 
+const isHighlights = ({ collectionType }: DCRCollectionType) =>
+	collectionType === 'fixed/highlights';
+
 const isToggleable = (
 	index: number,
 	collection: DCRCollectionType,
@@ -78,7 +81,7 @@ const isToggleable = (
 		return (
 			collection.displayName.toLowerCase() !== 'headlines' &&
 			!isNavList(collection) &&
-			collection.collectionType !== 'fixed/highlights'
+			!isHighlights(collection)
 		);
 	}
 
@@ -132,13 +135,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
+	const filteredCollections = front.pressedPage.collections.filter(
+		(collection) => !isHighlights(collection),
+	);
+
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(front.pressedPage.collections)
+		? getMobileAdPositions(filteredCollections)
 		: [];
 
 	const desktopAdPositions = renderAds
 		? getFrontsBannerAdPositions(
-				front.pressedPage.collections.map(
+				filteredCollections.map(
 					({
 						collectionType,
 						containerPalette,
@@ -176,9 +183,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			inUpdatedHeaderABTest &&
 			inHighlightsContainerABTest;
 
-		const highlightsCollection = front.pressedPage.collections.find(
-			({ collectionType }) => collectionType === 'fixed/highlights',
-		);
+		const highlightsCollection =
+			front.pressedPage.collections.find(isHighlights);
 
 		return (
 			showHighlights &&
@@ -354,7 +360,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
-				{front.pressedPage.collections.map((collection, index) => {
+				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
@@ -431,7 +437,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideMerchHighAndMobileAdSlots(
 										renderAds,
 										index,
-										front.pressedPage.collections.length,
+										filteredCollections.length,
 										front.pressedPage.frontProperties
 											.isPaidContent,
 										mobileAdPositions,
@@ -509,7 +515,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideMerchHighAndMobileAdSlots(
 									renderAds,
 									index,
-									front.pressedPage.collections.length,
+									filteredCollections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
@@ -564,7 +570,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideMerchHighAndMobileAdSlots(
 									renderAds,
 									index,
-									front.pressedPage.collections.length,
+									filteredCollections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
@@ -651,7 +657,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									decideMerchHighAndMobileAdSlots(
 										renderAds,
 										index,
-										front.pressedPage.collections.length,
+										filteredCollections.length,
 										front.pressedPage.frontProperties
 											.isPaidContent,
 										mobileAdPositions,
@@ -732,7 +738,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideMerchHighAndMobileAdSlots(
 								renderAds,
 								index,
-								front.pressedPage.collections.length,
+								filteredCollections.length,
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
