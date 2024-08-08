@@ -1,4 +1,4 @@
-import type { ArticleTheme } from '@guardian/libs';
+import { type ArticleTheme } from '@guardian/libs';
 import type { GuVideoBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';
 
@@ -17,16 +17,18 @@ export const GuVideoBlockComponent = ({ element, pillar }: Props) => {
 					Please <a href="http://whatbrowser.org/">upgrade</a> to a
 					modern browser and try again.
 				</div>
-				{element.assets.map(
-					(encoding) =>
-						encoding.mimeType.includes('video') && (
+				{element.assets.map((asset) => {
+					return (
+						asset.mimeType &&
+						asset.mimeType.includes('video') && (
 							<source
-								key={encoding.url}
-								src={encoding.url.replace('http:', 'https:')} // Force https as CAPI doesn't always send them
-								type={encoding.mimeType}
+								key={asset.url}
+								src={asset.url.replace('http:', 'https:')} // Force https as CAPI doesn't always send them
+								type={asset.mimeType}
 							/>
-						),
-				)}
+						)
+					);
+				})}
 			</amp-video>
 		</Caption>
 	);

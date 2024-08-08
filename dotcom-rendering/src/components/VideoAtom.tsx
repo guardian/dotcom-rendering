@@ -2,7 +2,7 @@ import { MaintainAspectRatio } from './MaintainAspectRatio';
 
 type AssetType = {
 	url: string;
-	mimeType: string;
+	mimeType?: string;
 };
 
 interface Props {

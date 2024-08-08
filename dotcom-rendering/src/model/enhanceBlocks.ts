@@ -12,7 +12,7 @@ import { enhanceElementsImages, enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
-import { enhanceGuVideos } from './enhance-videos';
+import { enhanceGuVideos, enhanceMediaAtomVideos } from './enhance-videos';
 import { enhanceLists } from './enhanceLists';
 import { enhanceTimeline } from './enhanceTimeline';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
@@ -81,6 +81,7 @@ export const enhanceMainMedia =
 		return [
 			enhanceElementsImages(format, isMainMedia, imagesForLightbox),
 			enhanceGuVideos(format, mediaHTML),
+			enhanceMediaAtomVideos,
 		].reduce(
 			(enhancedBlocks, enhancer) => enhancer(enhancedBlocks),
 			elements,

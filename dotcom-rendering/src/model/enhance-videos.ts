@@ -1,4 +1,4 @@
-import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
 import type { FEElement } from '../types/content';
 
 const addHtmlToGuVideoBlocks = (elements: FEElement[], html?: string) => {
@@ -29,3 +29,21 @@ export const enhanceGuVideos =
 		}
 		return elements;
 	};
+
+export const enhanceMediaAtomVideos = (elements: FEElement[]): FEElement[] => {
+	const enhancedElements = elements.map((element) => {
+		if (
+			element._type ===
+			'model.dotcomrendering.pageElements.MediaAtomBlockElement'
+		) {
+			return {
+				...element,
+				assets: element.assets.filter(
+					(asset) => !isUndefined(asset.mimeType),
+				),
+			};
+		}
+		return element;
+	});
+	return enhancedElements;
+};
