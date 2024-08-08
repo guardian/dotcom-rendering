@@ -47,6 +47,8 @@ const gridContainer = css`
 	}
 
 	${from.tablet} {
+		min-height: none;
+		height: 100%;
 		width: 160px;
 	}
 
