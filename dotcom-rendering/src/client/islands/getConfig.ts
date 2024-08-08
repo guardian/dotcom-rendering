@@ -1,4 +1,6 @@
+import { safeParse } from 'valibot';
 import type { Config } from '../../types/configContext';
+import { configSchema, defaultConfig } from '../../types/configContext';
 
 let config: Config | undefined;
 /**
@@ -16,8 +18,16 @@ export const getConfig = (): Readonly<Config> => {
 		if (!serialised) {
 			throw Error('Unable to fetch config attribute from #config');
 		} else {
-			config = JSON.parse(serialised) as Config;
-			return config;
+			const result = safeParse(configSchema, serialised);
+			if (!result.success) {
+				console.error(
+					`🚨 Error parsing ${String(
+						serialised,
+					)} config with valibot🚨`,
+				);
+				return defaultConfig;
+			}
+			return result.output;
 		}
 	} catch (error: unknown) {
 		console.error(
