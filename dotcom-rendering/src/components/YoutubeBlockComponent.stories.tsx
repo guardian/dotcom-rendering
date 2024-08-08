@@ -52,6 +52,7 @@ export const Default = () => {
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
 				expired={false}
 				stickyVideos={false}
+				enableAds={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -86,6 +87,7 @@ export const Vertical = () => {
 				height={259}
 				width={460}
 				stickyVideos={false}
+				enableAds={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -121,6 +123,7 @@ export const Expired = () => {
 				height={259}
 				width={460}
 				stickyVideos={false}
+				enableAds={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -157,6 +160,7 @@ export const WithOverlayImage = () => {
 				height={259}
 				width={460}
 				stickyVideos={false}
+				enableAds={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -214,6 +218,7 @@ export const WithPosterImage = () => {
 				height={259}
 				width={460}
 				stickyVideos={false}
+				enableAds={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -272,6 +277,7 @@ export const WithPosterAndOverlayImage = () => {
 				height={259}
 				width={460}
 				stickyVideos={false}
+				enableAds={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -330,6 +336,7 @@ export const WithShowMainVideoFlagOff = () => {
 				height={259}
 				width={460}
 				stickyVideos={false}
+				enableAds={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

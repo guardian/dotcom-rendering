@@ -39,7 +39,7 @@ type Props = {
 	// If the youtube block component is used on a card, we can pass in the image size and position on mobile to get the correct styling for the play icon. If it's not used on a card, we can just pass default values to get the standard large play icon.
 	imageSize?: ImageSizeType;
 	imagePositionOnMobile?: ImagePositionType;
-	enableIma?: boolean;
+	enableAds: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -96,6 +96,8 @@ const getLargestImageSize = (
 /** always undefined on the server */
 let counter: number | undefined;
 
+const adTargetingDisabled: AdTargeting = { disableAds: true };
+
 export const YoutubeBlockComponent = ({
 	id,
 	assetId,
@@ -117,7 +119,7 @@ export const YoutubeBlockComponent = ({
 	showTextOverlay,
 	imageSize = 'large',
 	imagePositionOnMobile = 'none',
-	enableIma = true,
+	enableAds,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -212,7 +214,7 @@ export const YoutubeBlockComponent = ({
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
 				alt={altText ?? mediaTitle ?? ''}
-				adTargeting={adTargeting}
+				adTargeting={enableAds ? adTargeting : adTargetingDisabled}
 				consentState={consentState}
 				height={height}
 				width={width}
@@ -223,7 +225,7 @@ export const YoutubeBlockComponent = ({
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
-				enableIma={enableIma}
+				enableIma={enableAds}
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
