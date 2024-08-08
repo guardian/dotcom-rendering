@@ -25,7 +25,7 @@ export const VideoAtom = ({
 			width={width}
 			data-spacefinder-role="inline"
 		>
-			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+			{/* eslint-disable-next-line jsx-a11y/media-has-caption -- caption not provided */}
 			<video
 				controls={true}
 				preload="metadata"
