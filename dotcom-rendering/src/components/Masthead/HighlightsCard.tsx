@@ -38,7 +38,6 @@ const gridContainer = css`
 	grid-template-areas:
 		'headline 	headline'
 		'media-icon image';
-
 	min-height: 174px;
 
 	${between.mobileMedium.and.desktop} {
@@ -94,7 +93,6 @@ const imageArea = css`
 	${from.desktop} {
 		height: 112px;
 		width: 112px;
-		align-self: start;
 	}
 `;
 
