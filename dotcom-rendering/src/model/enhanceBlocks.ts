@@ -1,4 +1,4 @@
-import { type ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import type { FEElement, ImageForLightbox, Newsletter } from '../types/content';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { enhanceAdPlaceholders } from './enhance-ad-placeholders';
@@ -31,7 +31,7 @@ const enhanceNewsletterSignup =
 		blockId: string,
 	) =>
 	(elements: FEElement[]): FEElement[] =>
-		promotedNewsletter !== undefined
+		!isUndefined(promotedNewsletter)
 			? insertPromotedNewsletter(
 					elements,
 					blockId,

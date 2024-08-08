@@ -259,7 +259,7 @@ const headlineBlogBackgroundDark: PaletteFunction = ({
 	return headlineBackgroundDark({ design, display, theme });
 };
 
-const headlineBylineLight: PaletteFunction = ({ display, theme }) => {
+const headlineBylineLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive: {
 			switch (theme) {
@@ -274,11 +274,16 @@ const headlineBylineLight: PaletteFunction = ({ display, theme }) => {
 			}
 		}
 		default:
-			return 'inherit';
+			switch (design) {
+				case ArticleDesign.Interview:
+					return sourcePalette.neutral[7];
+				default:
+					return 'inherit';
+			}
 	}
 };
 
-const headlineBylineDark: PaletteFunction = ({ display, theme }) => {
+const headlineBylineDark: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive: {
 			switch (theme) {
@@ -293,7 +298,12 @@ const headlineBylineDark: PaletteFunction = ({ display, theme }) => {
 			}
 		}
 		default:
-			return 'inherit';
+			switch (design) {
+				case ArticleDesign.Interview:
+					return sourcePalette.neutral[7];
+				default:
+					return 'inherit';
+			}
 	}
 };
 
@@ -5378,7 +5388,7 @@ const mastheadNavLinkText: PaletteFunction = () => sourcePalette.neutral[100];
 const mastheadNavLinkTextHover: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
 const mastheadNavBorder: PaletteFunction = () => sourcePalette.brand[600];
-const mastheadNavLines: PaletteFunction = () => sourcePalette.neutral[86];
+const mastheadNavLines: PaletteFunction = () => sourcePalette.brand[600];
 
 const mastheadVeggieBurgerIcon: PaletteFunction = () =>
 	sourcePalette.brand[400];
@@ -5391,6 +5401,25 @@ const mastheadHighlightsBackground: PaletteFunction = () =>
 	sourcePalette.neutral[97];
 const mastheadHighlightsBorder: PaletteFunction = () =>
 	sourcePalette.neutral[60];
+
+const highlightsCardHeadline: PaletteFunction = () => sourcePalette.neutral[7];
+const highlightsCardKickerText: PaletteFunction = (format) => {
+	switch (format.theme) {
+		case Pillar.Opinion:
+			return pillarPalette(format.theme, 300);
+		case Pillar.Sport:
+		case Pillar.Culture:
+		case Pillar.Lifestyle:
+		case Pillar.News:
+			return pillarPalette(format.theme, 400);
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[200];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
 
 const mastheadAccreditationText: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
@@ -5429,58 +5458,14 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 };
 
 const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
-const tagLinkFillBackground: PaletteFunction = ({ design, display, theme }) => {
-	switch (design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			return sourcePalette.neutral[97];
-		// Order matters. We want comment special report pieces to have the opinion background
-		case ArticleDesign.Letter:
-			return sourcePalette.opinion[800];
-		case ArticleDesign.Comment:
-			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[800];
-				default:
-					return sourcePalette.opinion[800];
-			}
-		case ArticleDesign.Editorial:
-			return sourcePalette.opinion[800];
-		case ArticleDesign.Analysis:
-			switch (theme) {
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[800];
-				default:
-					return sourcePalette.news[800];
-			}
-		case ArticleDesign.Picture:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video: {
-			switch (theme) {
-				case ArticleSpecial.Labs:
-					return sourcePalette.neutral[86];
-				default:
-					return sourcePalette.neutral[0];
-			}
-		}
-		default:
-			switch (theme) {
-				case ArticleSpecial.SpecialReport:
-					return sourcePalette.specialReport[800];
-				case ArticleSpecial.SpecialReportAlt:
-					return sourcePalette.specialReportAlt[800];
-				case ArticleSpecial.Labs:
-					switch (display) {
-						case ArticleDisplay.Immersive:
-							return 'transparent';
-						default:
-							return sourcePalette.neutral[97];
-					}
-				default:
-					return sourcePalette.neutral[100];
-			}
-	}
+
+const tagLinkFillBackgroundLight: PaletteFunction = (format) => {
+	return articleBackgroundLight(format) === 'transparent'
+		? sourcePalette.neutral[100]
+		: articleBackgroundLight(format);
 };
+const tagLinkFillBackgroundDark: PaletteFunction = (format) =>
+	articleBackgroundDark(format);
 
 const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
 
@@ -6136,15 +6121,31 @@ const paletteColours = {
 		light: headlineTextLight,
 		dark: headlineTextDark,
 	},
-	'--highlight-container-end-fade': {
+	'--highlights-card-headline': {
+		light: highlightsCardHeadline,
+		dark: highlightsCardHeadline,
+	},
+	'--highlights-card-kicker-text': {
+		light: highlightsCardKickerText,
+		dark: highlightsCardKickerText,
+	},
+	'--highlights-container-background': {
+		light: mastheadHighlightsBackground,
+		dark: mastheadHighlightsBackground,
+	},
+	'--highlights-container-border': {
+		light: mastheadHighlightsBorder,
+		dark: mastheadHighlightsBorder,
+	},
+	'--highlights-container-end-fade': {
 		light: highlightContainerEndFade,
 		dark: highlightContainerEndFade,
 	},
-	'--highlight-container-mid-fade': {
+	'--highlights-container-mid-fade': {
 		light: highlightContainerMidFade,
 		dark: highlightContainerMidFade,
 	},
-	'--highlight-container-start-fade': {
+	'--highlights-container-start-fade': {
 		light: highlightContainerStartFade,
 		dark: highlightContainerStartFade,
 	},
@@ -6235,14 +6236,6 @@ const paletteColours = {
 	'--masthead-accreditation-text': {
 		light: mastheadAccreditationText,
 		dark: mastheadAccreditationText,
-	},
-	'--masthead-highlights-background': {
-		light: mastheadHighlightsBackground,
-		dark: mastheadHighlightsBackground,
-	},
-	'--masthead-highlights-border': {
-		light: mastheadHighlightsBorder,
-		dark: mastheadHighlightsBorder,
 	},
 	'--masthead-nav-background': {
 		light: mastheadNavBackground,
@@ -6693,8 +6686,8 @@ const paletteColours = {
 		dark: tagLinkBackground,
 	},
 	'--tag-link-fill-background': {
-		light: tagLinkFillBackground,
-		dark: tagLinkFillBackground,
+		light: tagLinkFillBackgroundLight,
+		dark: tagLinkFillBackgroundDark,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,

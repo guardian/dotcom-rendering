@@ -24,21 +24,18 @@ describe('ConfigContext', () => {
 			{
 				renderingTarget: 'Web',
 				darkModeAvailable: false,
-				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
 				editionId: 'UK',
 			},
 			{
 				renderingTarget: 'Apps',
 				darkModeAvailable: true,
-				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
 				editionId: 'UK',
 			},
 			{
 				renderingTarget: 'Apps',
 				darkModeAvailable: false,
-				updateLogoAdPartnerSwitch: false,
 				assetOrigin: '/',
 				editionId: 'INT',
 			},

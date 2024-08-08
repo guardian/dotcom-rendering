@@ -31,7 +31,7 @@ const tagLinkStyles = css`
 	height: 44px;
 	width: 100%;
 	padding: ${space[2]}px;
-	border-radius: ${space[2]}px;
+	border-radius: 0 0 ${space[2]}px ${space[2]}px;
 	text-decoration: none;
 	background-color: ${palette('--tag-link-background')};
 	color: ${palette('--tag-link-accent')};

@@ -57,8 +57,6 @@ export const renderHtml = ({
 		renderingTarget,
 		darkModeAvailable:
 			article.config.abTests.darkModeWebVariant === 'variant',
-		updateLogoAdPartnerSwitch:
-			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: article.editionId,
 	};
@@ -268,7 +266,6 @@ export const renderBlocks = ({
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
-		updateLogoAdPartnerSwitch: !!switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 		editionId,
 	};
@@ -298,8 +295,6 @@ export const renderBlocks = ({
 				onFirstPage={false}
 				keyEvents={[]}
 				filterKeyEvents={false}
-				availableTopics={[]}
-				selectedTopics={[]}
 			/>
 		</ConfigProvider>,
 	);

@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { Edition } from './edition';
 import {
 	editionList,
@@ -45,7 +46,7 @@ const generateAlternateLangLinks = (
 		}
 	}
 	const parsedEditionalisedPage = splitEditionalisedPage(pageId);
-	const isEditionalisedPage = parsedEditionalisedPage !== undefined;
+	const isEditionalisedPage = !isUndefined(parsedEditionalisedPage);
 	if (isEditionalisedPage) {
 		// e.g. uk/travel
 		const [networkId, pageIdSuffix] = parsedEditionalisedPage;

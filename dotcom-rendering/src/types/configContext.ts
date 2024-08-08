@@ -12,14 +12,12 @@ export type Config =
 	| Readonly<{
 			renderingTarget: Extract<RenderingTarget, 'Web'>;
 			darkModeAvailable: boolean;
-			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
 			editionId: EditionId;
 	  }>
 	| Readonly<{
 			renderingTarget: Extract<RenderingTarget, 'Apps'>;
 			darkModeAvailable: boolean;
-			updateLogoAdPartnerSwitch: boolean;
 			assetOrigin: AssetOrigin;
 			editionId: EditionId;
 	  }>;

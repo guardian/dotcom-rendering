@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { setCookie, storage } from '@guardian/libs';
+import { isUndefined, setCookie, storage } from '@guardian/libs';
 import { article17, palette } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { useConfig } from './ConfigContext';
@@ -43,7 +43,7 @@ export const Accessibility = () => {
 	}, []);
 
 	useEffect(() => {
-		if (shouldFlash === undefined) return;
+		if (isUndefined(shouldFlash)) return;
 		storage.local.set(
 			'gu.prefs.accessibility.flashing-elements',
 			shouldFlash,
@@ -69,7 +69,7 @@ export const Accessibility = () => {
 	}, [participate, darkModeAvailable]);
 
 	const toggleFlash = (): void => {
-		setShouldFlash((prev) => (prev === undefined ? false : !prev));
+		setShouldFlash((prev) => (isUndefined(prev) ? false : !prev));
 	};
 
 	return (

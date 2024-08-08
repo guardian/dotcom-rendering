@@ -6,7 +6,8 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source/react-components';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { palette } from '../palette';
 import type { DCRFrontCard } from '../types/front';
 import { HighlightsCard } from './Masthead/HighlightsCard';
@@ -15,7 +16,10 @@ type Props = { trails: DCRFrontCard[] };
 
 const containerStyles = css`
 	${from.tablet} {
-		padding: 0 20px;
+		padding: 0 ${space[5]}px;
+	}
+	${from.wide} {
+		padding-right: 100px;
 	}
 `;
 
@@ -28,8 +32,21 @@ const carouselStyles = css`
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overscroll-behavior: contain;
-	${until.desktop} {
+	${until.tablet} {
 		scroll-padding-left: 10px;
+	}
+	${from.tablet} {
+		scroll-padding-left: 120px;
+	}
+	${from.desktop} {
+		scroll-padding-left: 240px;
+	}
+	${from.leftCol} {
+		scroll-padding-left: 80px;
+	}
+
+	${from.wide} {
+		scroll-padding-left: 240px;
 	}
 	/**
 	* Hide scrollbars
@@ -51,6 +68,19 @@ const itemStyles = css`
 		${from.tablet} {
 			margin-left: 0px;
 		}
+
+		/**
+		* From left col we add space to the left margin to the first
+		* child so that the first card in the carousel aligns
+		* with the start of the pages content in the grid.
+		*/
+
+		${from.leftCol} {
+			margin-left: 160px; /** 160 === 2 columns and 2 column gaps  */
+		}
+		${from.wide} {
+			margin-left: 240px; /** 240 === 3 columns and 3 column gaps  */
+		}
 	}
 `;
 
@@ -67,22 +97,8 @@ const verticalLineStyles = css`
 	}
 `;
 
-const buttonContainerStyles = css`
-	position: absolute;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
-	width: calc(
-		100% - 40px
-	); /* This accounts for the 20px padding on each side of the carousel */
-	top: 0;
-	pointer-events: none;
-`;
-
 const buttonStyles = css`
 	z-index: 1;
-	pointer-events: all;
 `;
 
 const buttonOverlayStyles = css`
@@ -90,23 +106,29 @@ const buttonOverlayStyles = css`
 	height: 100%;
 	display: flex;
 	align-items: center;
+	position: absolute;
+	top: 0;
+	pointer-events: all;
 `;
 
 const previousButtonFadeStyles = css`
+	left: ${space[5]}px;
 	background: linear-gradient(
 		to right,
-		${palette('--highlight-container-start-fade')} 0%,
-		${palette('--highlight-container-mid-fade')} 60%,
-		${palette('--highlight-container-end-fade')} 100%
+		${palette('--highlights-container-start-fade')} 0%,
+		${palette('--highlights-container-mid-fade')} 60%,
+		${palette('--highlights-container-end-fade')} 100%
 	);
 `;
 
 const nextButtonFadeStyles = css`
+	right: ${space[5]}px;
+	justify-content: flex-end;
 	background: linear-gradient(
 		to left,
-		${palette('--highlight-container-start-fade')} 0%,
-		${palette('--highlight-container-mid-fade')} 60%,
-		${palette('--highlight-container-end-fade')} 100%
+		${palette('--highlights-container-start-fade')} 0px,
+		${palette('--highlights-container-mid-fade')} 60%,
+		${palette('--highlights-container-end-fade')} 100%
 	);
 `;
 /**
@@ -131,13 +153,6 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 		}
 
 		${from.tablet} {
-			grid-template-columns: repeat(
-				${totalCards},
-				calc((100% - ${peepingCardWidth}px) / 4)
-			);
-		}
-
-		${from.desktop} {
 			grid-template-columns: repeat(${totalCards}, 1fr);
 		}
 	`;
@@ -147,6 +162,8 @@ export const HighlightsContainer = ({ trails }: Props) => {
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
+	const [showPreviousButton, setShowPreviousButton] = useState(false);
+	const [showNextButton, setShowNextButton] = useState(true);
 
 	const scrollTo = (direction: 'left' | 'right') => {
 		if (!carouselRef.current) return;
@@ -154,20 +171,72 @@ export const HighlightsContainer = ({ trails }: Props) => {
 		const cardWidth =
 			carouselRef.current.querySelector('li')?.offsetWidth ?? 0;
 		const offset = direction === 'left' ? -cardWidth : cardWidth;
-
 		carouselRef.current.scrollBy({
 			left: offset,
 			behavior: 'smooth',
 		});
 	};
+
+	/**
+	 * Updates the visibility of the navigation buttons based on the carousel's scroll position.
+	 *
+	 * This function checks the current scroll position of the carousel and sets the visibility
+	 * of the previous and next buttons accordingly. The previous button is shown if the carousel
+	 * is scrolled to the right of the start, and the next button is shown if the carousel is not
+	 * fully scrolled to the end.
+	 */
+	const updateButtonVisibilityOnScroll = () => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		const scrollLeft = carouselElement.scrollLeft;
+		const maxScrollLeft =
+			carouselElement.scrollWidth - carouselElement.clientWidth;
+
+		setShowPreviousButton(scrollLeft > 0);
+		setShowNextButton(scrollLeft < maxScrollLeft);
+	};
+
+	useEffect(() => {
+		const carouselElement = carouselRef.current;
+		if (!carouselElement) return;
+
+		carouselElement.addEventListener(
+			'scroll',
+			updateButtonVisibilityOnScroll,
+		);
+
+		return () => {
+			carouselElement.removeEventListener(
+				'scroll',
+				updateButtonVisibilityOnScroll,
+			);
+		};
+	}, []);
+
+	useEffect(() => {
+		void submitComponentEvent(
+			{
+				component: {
+					componentType: 'CONTAINER',
+					id: 'home-highlights',
+				},
+				action: 'INSERT',
+			},
+			'Web',
+		);
+	}, []);
+
 	return (
 		<div css={containerStyles}>
 			<ol
+				data-component="home-highlights"
 				ref={carouselRef}
 				css={[
 					carouselStyles,
 					generateCarouselColumnStyles(carouselLength),
 				]}
+				data-heatphan-type="carousel"
 			>
 				{trails.map((trail) => {
 					return (
@@ -194,7 +263,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			</ol>
 
 			<Hide until={'tablet'}>
-				<div css={buttonContainerStyles}>
+				{showPreviousButton && (
 					<div css={[buttonOverlayStyles, previousButtonFadeStyles]}>
 						<Button
 							css={buttonStyles}
@@ -202,11 +271,13 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							iconSide="left"
 							icon={<SvgChevronLeftSingle />}
 							onClick={() => scrollTo('left')}
-							aria-label="Move highlights carousel backwards"
-							data-link-name="highlights carousel left chevron"
+							aria-label="Move highlight stories backwards"
+							data-link-name="highlights container left chevron"
 							size="small"
 						/>
 					</div>
+				)}
+				{showNextButton && (
 					<div css={[buttonOverlayStyles, nextButtonFadeStyles]}>
 						<Button
 							css={buttonStyles}
@@ -214,12 +285,12 @@ export const HighlightsContainer = ({ trails }: Props) => {
 							iconSide="left"
 							icon={<SvgChevronRightSingle />}
 							onClick={() => scrollTo('right')}
-							aria-label="Move highlights carousel forwards"
-							data-link-name="highlights carousel right chevron"
+							aria-label="Move highlight stories forwards"
+							data-link-name="highlights container right chevron"
 							size="small"
 						/>
 					</div>
-				</div>
+				)}
 			</Hide>
 		</div>
 	);

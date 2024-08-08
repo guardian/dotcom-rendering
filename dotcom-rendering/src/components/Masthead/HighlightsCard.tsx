@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { from, palette, until } from '@guardian/source/foundations';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
+import { from, until } from '@guardian/source/foundations';
+import { isMediaCard } from '../../lib/cardHelpers';
+import { palette } from '../../palette';
 import type { DCRFrontImage } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
 import { Avatar } from '../Avatar';
@@ -8,6 +10,7 @@ import { CardLink } from '../Card/components/CardLink';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
+import { FormatBoundary } from '../FormatBoundary';
 import { Icon } from '../MediaMeta';
 
 export type HighlightsCardProps = {
@@ -20,24 +23,31 @@ export type HighlightsCardProps = {
 	avatarUrl?: string;
 	mainMedia?: MainMedia;
 	kickerText?: string;
-	showPulsingDot?: boolean;
 	dataLinkName: string;
 	byline?: string;
-	showMediaIcon?: boolean;
 	isExternalLink: boolean;
 };
 
 const gridContainer = css`
 	display: grid;
-	background-color: ${palette.neutral[97]};
+	background-color: ${palette('--highlights-container-background')};
+	/** Relative positioning is required to absolutely
+	position the card link overlay */
+	position: relative;
 	gap: 8px;
 	grid-template-areas:
 		'headline 	headline'
 		'media-icon image';
 
 	${until.desktop} {
-		height: 194px;
+		min-height: 194px;
+		height: 100%;
 	}
+
+	${from.tablet} {
+		width: 160px;
+	}
+
 	${from.desktop} {
 		width: 300px;
 		grid-template-areas:
@@ -56,7 +66,7 @@ const mediaIcon = css`
 	width: 24px;
 	height: 24px;
 	/* We’re using the text colour for the icon badge */
-	background-color: ${palette.neutral[10]};
+	background-color: ${palette('--highlights-card-headline')};
 	border-radius: 50%;
 	display: inline-block;
 
@@ -67,7 +77,7 @@ const mediaIcon = css`
 		margin-right: auto;
 		margin-top: 2px;
 		display: block;
-		fill: ${palette.neutral[97]};
+		fill: ${palette('--highlights-container-background')};
 	}
 `;
 
@@ -75,12 +85,13 @@ const imageArea = css`
 	grid-area: image;
 	height: 106px;
 	width: 106px;
+	align-self: end;
+	position: relative;
 	${from.desktop} {
 		height: 112px;
 		width: 112px;
+		align-self: start;
 	}
-	align-self: end;
-	position: relative;
 `;
 
 const hoverStyles = css`
@@ -91,7 +102,7 @@ const hoverStyles = css`
 		height: 100%;
 		width: 100%;
 		border-radius: 100%;
-		background-color: ${palette.neutral[7]};
+		background-color: ${palette('--highlights-card-headline')};
 		opacity: 0.1;
 	}
 
@@ -111,55 +122,67 @@ export const HighlightsCard = ({
 	avatarUrl,
 	mainMedia,
 	kickerText,
-	showPulsingDot,
 	dataLinkName,
 	byline,
-	showMediaIcon,
 	isExternalLink,
 }: HighlightsCardProps) => {
+	const showMediaIcon = isMediaCard(format);
+
 	return (
-		<div css={[gridContainer, hoverStyles]}>
-			<CardLink
-				linkTo={linkTo}
-				headlineText={headlineText}
-				dataLinkName={dataLinkName}
-				isExternalLink={isExternalLink}
-			/>
-			<div css={headline}>
-				<CardHeadline
+		<FormatBoundary format={format}>
+			<div css={[gridContainer, hoverStyles]}>
+				<CardLink
+					linkTo={linkTo}
 					headlineText={headlineText}
-					format={format}
-					size="medium"
-					sizeOnMobile="small"
-					showPulsingDot={showPulsingDot}
-					kickerText={kickerText}
+					dataLinkName={dataLinkName}
 					isExternalLink={isExternalLink}
-					showQuotes={showQuotedHeadline}
 				/>
-			</div>
-			{mainMedia && showMediaIcon ? (
-				<div css={mediaIcon}>
-					<Icon mediaType={mainMedia.type} />
+
+				<div css={headline}>
+					<CardHeadline
+						headlineText={headlineText}
+						format={format}
+						size="medium"
+						sizeOnMobile="small"
+						showPulsingDot={
+							format.design === ArticleDesign.LiveBlog
+						}
+						kickerText={kickerText}
+						isExternalLink={isExternalLink}
+						showQuotes={showQuotedHeadline}
+						isHighlights={true}
+					/>
 				</div>
-			) : null}
-			<div css={imageArea}>
-				{(avatarUrl && (
-					<Avatar src={avatarUrl} alt={byline ?? ''} shape="cutout" />
-				)) ??
-					(image && (
-						<>
-							<CardPicture
-								imageSize="medium"
-								mainImage={image.src}
-								alt={image.altText}
-								loading={imageLoading}
-								isCircular={true}
-							/>
-							{/* This image overlay is styled when the CardLink is hovered */}
-							<div className="image-overlay"> </div>
-						</>
-					))}
+
+				{!!mainMedia && showMediaIcon && (
+					<div css={mediaIcon}>
+						<Icon mediaType={mainMedia.type} />
+					</div>
+				)}
+
+				<div css={imageArea}>
+					{(avatarUrl && (
+						<Avatar
+							src={avatarUrl}
+							alt={byline ?? ''}
+							shape="cutout"
+						/>
+					)) ??
+						(image && (
+							<>
+								<CardPicture
+									imageSize="medium"
+									mainImage={image.src}
+									alt={image.altText}
+									loading={imageLoading}
+									isCircular={true}
+								/>
+								{/* This image overlay is styled when the CardLink is hovered */}
+								<div className="image-overlay"> </div>
+							</>
+						))}
+				</div>
 			</div>
-		</div>
+		</FormatBoundary>
 	);
 };

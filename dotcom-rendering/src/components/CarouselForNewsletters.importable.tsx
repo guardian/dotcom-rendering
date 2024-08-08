@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold24,
@@ -416,7 +417,7 @@ export const CarouselForNewsletters = ({
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 		const [offset] = offsets;
-		if (current === null || offset === undefined) return 0;
+		if (current === null || isUndefined(offset)) return 0;
 
 		const scrolled = current.scrollLeft + offset;
 		const active = offsets.findIndex((el) => el >= scrolled);
@@ -448,13 +449,13 @@ export const CarouselForNewsletters = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || offset === undefined) return;
+		if (current === null || isUndefined(offset)) return;
 
 		const scrolled = current.scrollLeft + offset;
 
 		const nextOffset = offsets.reverse().find((o) => o < scrolled);
 
-		if (nextOffset !== undefined && nextOffset !== 0) {
+		if (!isUndefined(nextOffset) && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });
 		} else {
 			current.scrollTo({ left: 0 });
@@ -469,12 +470,12 @@ export const CarouselForNewsletters = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || offset === undefined) return;
+		if (current === null || isUndefined(offset)) return;
 
 		const scrolled = current.scrollLeft + offset;
 		const nextOffset = offsets.find((currOffset) => currOffset > scrolled);
 
-		if (nextOffset !== undefined && nextOffset !== 0) {
+		if (!isUndefined(nextOffset) && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });
 		}
 
@@ -590,6 +591,7 @@ export const CarouselForNewsletters = ({
 					css={carouselStyle}
 					ref={carouselRef}
 					data-component={`carousel-small | maxIndex-${maxIndex}`}
+					data-heatphan-type="carousel"
 				>
 					{newsletters.map((newsletter, i) => {
 						const uniqueKey = `${newsletter.identityName}-${i}`;

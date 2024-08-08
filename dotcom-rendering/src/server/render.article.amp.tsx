@@ -44,7 +44,6 @@ export const renderArticle = ({
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: false,
-		updateLogoAdPartnerSwitch: false,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: 'INT', // AMP pages have all editions in the HTML
 	};

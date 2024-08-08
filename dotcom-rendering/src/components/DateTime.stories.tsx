@@ -24,7 +24,6 @@ const meta: Meta<typeof DateTime> = {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 						editionId,
 					}}

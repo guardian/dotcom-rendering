@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isString, storage } from '@guardian/libs';
+import { isString, isUndefined, storage } from '@guardian/libs';
 import { space, textSans15 } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import type {
@@ -243,7 +243,7 @@ export const Comments = ({
 	 * page and is added to the DOM later, following an API call.
 	 * */
 	useEffect(() => {
-		if (commentToScrollTo === undefined) return;
+		if (isUndefined(commentToScrollTo)) return;
 		if (loading) return;
 
 		document

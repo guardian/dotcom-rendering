@@ -1,4 +1,4 @@
-import type { ArticleFormat } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { getEmotionCache } from '../client/islands/emotion';
@@ -17,7 +17,6 @@ type Props = {
 	webURL: string;
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
-	selectedTopics?: Topic[];
 };
 
 /**
@@ -92,7 +91,7 @@ function revealPendingBlocks() {
 		}
 	}
 
-	if (pendingBlocks !== undefined && pendingBlocks.length > 0) {
+	if (!isUndefined(pendingBlocks) && pendingBlocks.length > 0) {
 		// Notify commercial that new blocks are available and they can re-run spacefinder
 		document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
 	}
@@ -110,7 +109,6 @@ function getKey(
 	ajaxUrl: string,
 	latestBlockId: string,
 	filterKeyEvents: boolean,
-	selectedTopics?: Topic[],
 ): string | undefined {
 	try {
 		// Construct the url to poll
@@ -122,10 +120,6 @@ function getKey(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
 		);
-		const [topic] = selectedTopics ?? [];
-		if (topic) {
-			url.searchParams.set('topics', `${topic.type}:${topic.value}`);
-		}
 
 		return url.href;
 	} catch {
@@ -161,7 +155,6 @@ export const Liveness = ({
 	webURL,
 	mostRecentBlockId,
 	hasPinnedPost,
-	selectedTopics,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
@@ -230,16 +223,8 @@ export const Liveness = ({
 	}, [onSuccess]);
 
 	useEffect(() => {
-		setKey(
-			getKey(
-				pageId,
-				ajaxUrl,
-				latestBlockId,
-				filterKeyEvents,
-				selectedTopics,
-			),
-		);
-	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents, selectedTopics]);
+		setKey(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents));
+	}, [pageId, ajaxUrl, latestBlockId, filterKeyEvents]);
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(key, {
