@@ -4349,9 +4349,6 @@
                 "ampIframeUrl": {
                     "type": "string"
                 },
-                "hasInlineMerchandise": {
-                    "type": "boolean"
-                },
                 "hasLiveBlogTopAd": {
                     "type": "boolean"
                 }
