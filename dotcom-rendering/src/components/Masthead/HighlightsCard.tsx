@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
-import { between, from } from '@guardian/source/foundations';
+import { between, from, until } from '@guardian/source/foundations';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { palette } from '../../palette';
 import type { DCRFrontImage } from '../../types/front';
@@ -38,7 +38,9 @@ const gridContainer = css`
 	grid-template-areas:
 		'headline 	headline'
 		'media-icon image';
-	min-height: 174px;
+	${until.mobileMedium} {
+		min-height: 174px;
+	}
 
 	${between.mobileMedium.and.desktop} {
 		min-height: 194px;
@@ -46,7 +48,6 @@ const gridContainer = css`
 	}
 
 	${from.tablet} {
-		min-height: auto;
 		height: 100%;
 		width: 160px;
 	}
