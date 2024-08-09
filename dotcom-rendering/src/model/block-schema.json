@@ -1685,7 +1685,6 @@
                 }
             },
             "required": [
-                "mimeType",
                 "url"
             ]
         },

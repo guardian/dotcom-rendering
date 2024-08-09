@@ -824,7 +824,7 @@ export interface Image {
 
 interface VideoAssets {
 	url: string;
-	mimeType: string;
+	mimeType?: string;
 	fields?: {
 		source?: string;
 		embeddable?: string;
