@@ -6,7 +6,8 @@ import { Weather, WeatherPlaceholder } from './Weather';
 const appendPartnerCodeToUrl = (
 	url: string | undefined,
 ): string | undefined => {
-	if (!url || !URL.canParse(url)) {
+	// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- We're on the client so we don't know if URL.canParse is available
+	if (!url || (!!window.URL.canParse && !URL.canParse(url))) {
 		return undefined;
 	}
 
