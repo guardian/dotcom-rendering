@@ -239,7 +239,7 @@ export const YoutubeBlockComponent = ({
 				eventEmitters={renderingTarget === 'Web' ? [ophanTracking] : []}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
-				shouldStick={stickyVideos}
+				shouldStick={renderingTarget === 'Web' ? stickyVideos : false}
 				isMainMedia={isMainMedia}
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
