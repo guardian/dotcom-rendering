@@ -1,4 +1,3 @@
-import type { AdsConfig } from '@guardian/commercial';
 import { log } from '@guardian/libs';
 import type { google } from './ima';
 import { loadYouTubeAPI } from './loadYouTubeApi';
@@ -30,8 +29,9 @@ declare global {
 type EmbedConfig = {
 	embedConfig: {
 		relatedChannels: string[];
-		adsConfig: AdsConfig;
+		adsConfig: { disableAds: true };
 		enableIma: boolean;
+		disableRelatedVideos: boolean;
 	};
 };
 
@@ -56,8 +56,12 @@ type YouTubePlayerArgs = {
 	youtubeOptions: PlayerOptions;
 	onReadyListener: PlayerReadyCallback;
 	enableIma: boolean;
-	imaAdsRequestCallback: AdsRequestCallback;
-	imaAdManagerListeners: (imaManager: YT.ImaManager) => void;
+	imaAdsRequestCallback?: AdsRequestCallback;
+	imaAdManagerListeners?: (imaManager: YT.ImaManager) => void;
+};
+
+const noop = () => {
+	return;
 };
 
 class YouTubePlayer {
@@ -69,8 +73,8 @@ class YouTubePlayer {
 		youtubeOptions,
 		onReadyListener,
 		enableIma,
-		imaAdsRequestCallback,
-		imaAdManagerListeners,
+		imaAdsRequestCallback = noop,
+		imaAdManagerListeners = noop,
 	}: YouTubePlayerArgs) {
 		this.playerPromise = this.setPlayer(
 			id,
@@ -95,9 +99,9 @@ class YouTubePlayer {
 			(resolve, reject) => {
 				try {
 					/**
-					 * If enableIma is true, YT.createPlayerForPublishers will be called
-					 * If enableIma is false, the standard new YT.Player constructor will be called
-					 * Listeners are set at expected place for each method
+					 * If enableIma is true, YT.createPlayerForPublishers will be called to initiate IMA ads
+					 * If enableIma is false, the standard YT.Player constructor will be called
+					 * Listeners are set appropriatley for each method
 					 */
 					if (enableIma) {
 						YTAPI.createPlayerForPublishers(
@@ -186,4 +190,4 @@ class YouTubePlayer {
 	}
 }
 
-export { PlayerListenerName, YouTubePlayer };
+export { PlayerListenerName, YouTubePlayer, YouTubePlayerArgs };
