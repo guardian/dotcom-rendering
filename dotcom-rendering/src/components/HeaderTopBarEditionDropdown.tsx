@@ -5,8 +5,8 @@ import { editionList, getEditionFromId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { EditionLinkType } from '../model/extract-nav';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.importable';
+import { Dropdown } from './Dropdown.importable';
 import { dropDownOverrides } from './HeaderTopBarMyAccount';
 
 interface HeaderTopBarEditionDropdownProps {
