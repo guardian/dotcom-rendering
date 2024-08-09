@@ -21,7 +21,7 @@ export const GuVideoBlockComponent = ({ element, pillar }: Props) => {
 					<source
 						key={asset.url}
 						src={asset.url.replace('http:', 'https:')} // Force https as CAPI doesn't always send them
-						type={asset.mimeType ?? 'video/mp4'}
+						type={asset.mimeType}
 					/>
 				))}
 			</amp-video>

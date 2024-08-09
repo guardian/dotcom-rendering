@@ -34,11 +34,7 @@ export const VideoAtom = ({
 				poster={poster}
 			>
 				{assets.map((asset, index) => (
-					<source
-						key={index}
-						src={asset.url}
-						type={asset.mimeType ?? 'video/mp4'}
-					/>
+					<source key={index} src={asset.url} type={asset.mimeType} />
 				))}
 				<p>
 					{`Your browser doesn't support HTML5 video. Here is a `}
