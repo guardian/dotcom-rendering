@@ -6,7 +6,7 @@ import {
 	remSpace,
 	textSans15,
 } from '@guardian/source/foundations';
-import { SvgOfflineCloud } from '@guardian/source/react-components';
+import { SvgCrossedOutCloud } from '@guardian/source/react-components';
 import { useOnlineStatus } from '../utils/useOnlineStatus';
 
 // ----- Styles ----- //
@@ -100,7 +100,7 @@ const Video = ({ title, atomId }: Props) => {
 				<div className="placeholder">
 					<div className="placeholder-center">
 						<div className="placeholder-wrapper">
-							<SvgOfflineCloud />
+							<SvgCrossedOutCloud />
 							<p className="placeholder-text">{text}</p>
 						</div>
 					</div>

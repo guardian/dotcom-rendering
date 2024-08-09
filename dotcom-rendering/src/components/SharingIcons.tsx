@@ -4,8 +4,8 @@ import {
 	LinkButton,
 	SvgEnvelope,
 	SvgFacebook,
+	SvgFacebookMessenger,
 	SvgLinkedIn,
-	SvgMessenger,
 	SvgPinterest,
 	SvgTwitter,
 	SvgWhatsApp,
@@ -58,7 +58,7 @@ export const SharingIcons = ({
 		twitter: SvgTwitter,
 		email: SvgEnvelope,
 		whatsApp: SvgWhatsApp,
-		messenger: SvgMessenger,
+		messenger: SvgFacebookMessenger,
 		linkedIn: SvgLinkedIn,
 		pinterest: SvgPinterest,
 	};

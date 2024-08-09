@@ -16,8 +16,8 @@ import {
 	InlineSuccess,
 	Label,
 	Link,
+	Spinner,
 	SvgReload,
-	SvgSpinner,
 	TextInput,
 	userFeedbackThemeDefault,
 } from '@guardian/source/react-components';
@@ -155,7 +155,7 @@ const EmailSignupForm = ({
 					>
 						Sign up
 						<span className="js-signup-form__feedback js-signup-form__feedback--waiting">
-							<SvgSpinner size="small" />
+							<Spinner size="small" />
 						</span>
 					</Button>
 				</div>

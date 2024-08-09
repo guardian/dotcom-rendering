@@ -10,8 +10,8 @@ import {
 	InlineError,
 	InlineSuccess,
 	Link,
+	Spinner,
 	SvgReload,
-	SvgSpinner,
 	TextInput,
 } from '@guardian/source/react-components';
 import type { CSSProperties, FormEvent, ReactEventHandler } from 'react';
@@ -391,8 +391,8 @@ export const SecureSignup = ({
 				</Button>
 			</form>
 			{isWaitingForResponse && (
-				<div>
-					<SvgSpinner isAnnouncedByScreenReader={true} size="small" />
+				<div aria-label="loading">
+					<Spinner size="small" />
 				</div>
 			)}
 
