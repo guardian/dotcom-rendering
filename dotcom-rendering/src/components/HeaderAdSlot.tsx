@@ -36,7 +36,6 @@ const headerAdWrapper = css`
 // Remove this once new `ad-slot-container--centre-slot` class is in place
 const topAboveNavContainer = css`
 	&[top-above-nav-ad-rendered] {
-		width: fit-content;
 		margin: auto;
 	}
 	padding-bottom: ${padding}px;
