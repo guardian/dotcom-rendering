@@ -64,8 +64,6 @@ export const LiveBlock = ({
 			contributors={block.contributors}
 			isPinnedPost={isPinnedPost}
 			isOriginalPinnedPost={isOriginalPinnedPost}
-			host={host}
-			pageId={pageId}
 			absoluteServerTimes={!!switches.absoluteServerTimes}
 		>
 			{block.elements.map((element, index) => (

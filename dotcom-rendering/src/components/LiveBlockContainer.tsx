@@ -27,8 +27,6 @@ type Props = {
 	isPinnedPost: boolean;
 	absoluteServerTimes: boolean;
 	isOriginalPinnedPost?: boolean;
-	host?: string;
-	pageId?: string;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -139,8 +137,6 @@ export const LiveBlockContainer = ({
 	contributors,
 	isPinnedPost,
 	isOriginalPinnedPost = false,
-	host,
-	pageId,
 	absoluteServerTimes,
 }: Props) => {
 	return (
@@ -174,8 +170,6 @@ export const LiveBlockContainer = ({
 						blockId={blockId}
 						isPinnedPost={isPinnedPost}
 						isOriginalPinnedPost={isOriginalPinnedPost}
-						host={host}
-						pageId={pageId}
 						absoluteServerTimes={absoluteServerTimes}
 					/>
 				)}
