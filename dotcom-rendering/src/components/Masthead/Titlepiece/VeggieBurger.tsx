@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { visuallyHidden } from '@guardian/source/foundations';
+import { until, visuallyHidden } from '@guardian/source/foundations';
 import { SvgCross, SvgMenu } from '@guardian/source/react-components';
 import { getZIndex } from '../../../lib/getZIndex';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
@@ -10,8 +10,10 @@ const labelStyles = css`
 	position: relative;
 	z-index: 1;
 	${`#${navInputCheckboxId}`}:checked ~ div & {
-		/* Bump the z-index of the burger menu when expanded */
-		${getZIndex('burger')}
+		${until.desktop} {
+			/* Bump the z-index of the burger menu when expanded */
+			${getZIndex('mastheadVeggieBurgerExpandedMobile')}
+		}
 	}
 `;
 
