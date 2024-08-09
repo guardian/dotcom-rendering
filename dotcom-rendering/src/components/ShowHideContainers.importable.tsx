@@ -45,9 +45,28 @@ export const ShowHideContainers = () => {
 			storage.local.set(`gu.prefs.container-states`, containerStates);
 		};
 
-		for (const e of window.document.querySelectorAll<HTMLElement>(
-			'[data-show-hide-button]',
-		)) {
+		const allShowHideButtons = Array.from(
+			window.document.querySelectorAll<HTMLElement>(
+				'[data-show-hide-button]',
+			),
+		);
+
+		const allContainersExpanded = allShowHideButtons.every(
+			(e) => e.getAttribute('data-link-name') === 'Hide',
+		);
+
+		for (const e of allShowHideButtons) {
+			// We want to remove the ability to toggle front containers between expanded and collapsed states.
+			// The first part of doing this is removing the feature for those who do not currently use it.
+			// This logic sets the button as disabled and hides it from view and from screenreaders.
+			// It does not remove it entirely from the DOM.
+			if (allContainersExpanded) {
+				e.setAttribute('disabled', 'true');
+				e.setAttribute('aria-disabled', 'true');
+				e.hidden = true;
+				e.style.display = 'none';
+			}
+
 			const sectionId = e.getAttribute('data-show-hide-button');
 			if (!sectionId) continue;
 
