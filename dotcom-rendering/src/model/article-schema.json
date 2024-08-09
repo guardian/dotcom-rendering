@@ -2081,7 +2081,6 @@
                 }
             },
             "required": [
-                "mimeType",
                 "url"
             ]
         },

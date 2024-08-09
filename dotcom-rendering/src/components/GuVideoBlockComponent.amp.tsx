@@ -17,16 +17,13 @@ export const GuVideoBlockComponent = ({ element, pillar }: Props) => {
 					Please <a href="http://whatbrowser.org/">upgrade</a> to a
 					modern browser and try again.
 				</div>
-				{element.assets.map(
-					(encoding) =>
-						encoding.mimeType.includes('video') && (
-							<source
-								key={encoding.url}
-								src={encoding.url.replace('http:', 'https:')} // Force https as CAPI doesn't always send them
-								type={encoding.mimeType}
-							/>
-						),
-				)}
+				{element.assets.map((asset) => (
+					<source
+						key={asset.url}
+						src={asset.url.replace('http:', 'https:')} // Force https as CAPI doesn't always send them
+						type={asset.mimeType ?? 'video/mp4'}
+					/>
+				))}
 			</amp-video>
 		</Caption>
 	);

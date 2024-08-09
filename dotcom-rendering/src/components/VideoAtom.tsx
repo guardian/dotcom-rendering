@@ -2,7 +2,7 @@ import { MaintainAspectRatio } from './MaintainAspectRatio';
 
 type AssetType = {
 	url: string;
-	mimeType: string;
+	mimeType?: string;
 };
 
 interface Props {
@@ -25,7 +25,7 @@ export const VideoAtom = ({
 			width={width}
 			data-spacefinder-role="inline"
 		>
-			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+			{/* eslint-disable-next-line jsx-a11y/media-has-caption -- caption not available */}
 			<video
 				controls={true}
 				preload="metadata"
@@ -34,7 +34,11 @@ export const VideoAtom = ({
 				poster={poster}
 			>
 				{assets.map((asset, index) => (
-					<source key={index} src={asset.url} type={asset.mimeType} />
+					<source
+						key={index}
+						src={asset.url}
+						type={asset.mimeType ?? 'video/mp4'}
+					/>
 				))}
 				<p>
 					{`Your browser doesn't support HTML5 video. Here is a `}
