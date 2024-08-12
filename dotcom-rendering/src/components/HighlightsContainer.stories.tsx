@@ -19,7 +19,7 @@ export const withTwoLineKicker: Story = {
 		trails: [
 			{
 				...defaultCard,
-				kicker: 'UK Housing and Mortgages',
+				kickerText: 'UK Housing and Mortgages',
 			},
 			...trails,
 		],
@@ -32,7 +32,7 @@ export const withLiveKicker: Story = {
 		trails: [
 			{
 				...defaultCard,
-				kicker: 'Live',
+				kickerText: 'Live',
 				format: { display: 0, theme: 3, design: 11 },
 			},
 			...trails,
