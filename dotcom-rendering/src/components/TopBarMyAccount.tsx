@@ -75,7 +75,7 @@ const myAccountLinkStyles = css`
 		margin: 0 ${space[1]}px 0 0;
 	}
 
-	${getZIndex('myAccountDropdownV2')}
+	${getZIndex('mastheadMyAccountDropdown')}
 `;
 
 export const buildIdentityLinks = (
@@ -173,16 +173,16 @@ export const dropDownOverrides = css`
 	/** Handles case of *new* top bar being 52px high until tablet */
 	&:not(button) {
 		${until.tablet} {
-			top: 48px;
+			top: 44px;
 		}
 
 		${from.tablet} {
-			left: 0;
-			top: 56px;
+			right: 0;
+			top: 52px;
 		}
 
 		${from.desktop} {
-			top: 60px;
+			top: 56px;
 		}
 	}
 `;

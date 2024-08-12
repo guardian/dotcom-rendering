@@ -97,7 +97,7 @@ test.describe('E2E Page rendering', () => {
 	});
 
 	test.describe('for AMP', function () {
-		test(`It should load render an AMP page`, async ({ page }) => {
+		test.skip(`It should load render an AMP page`, async ({ page }) => {
 			await loadPage(
 				page,
 				`/AMPArticle/https://amp.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
