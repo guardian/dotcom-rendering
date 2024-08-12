@@ -31,6 +31,7 @@ const indices = [
 	'banner',
 	'dropdown',
 	'burger',
+	'mastheadVeggieBurgerExpandedMobile',
 	'expanded-veggie-menu-wrapper',
 	'expanded-veggie-menu',
 
@@ -42,7 +43,9 @@ const indices = [
 	'stickyAdWrapper',
 	'stickyAdWrapperNav',
 
-	'myAccountDropdownV2',
+	'mastheadMyAccountDropdown',
+	'mastheadEditionDropdown',
+
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
