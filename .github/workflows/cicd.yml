@@ -37,7 +37,7 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, prettier, jest, lint, playwright, amp]
+    needs: [container, prettier, jest, lint, playwright]
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
