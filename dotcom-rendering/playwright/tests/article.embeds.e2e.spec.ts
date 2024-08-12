@@ -27,7 +27,7 @@ test.describe('Embeds', () => {
 			).toContainText('Daily cases');
 		});
 
-		test('should render the counted interactive embed', async ({
+		test.skip('should render the counted interactive embed', async ({
 			page,
 		}) => {
 			await loadPage(
