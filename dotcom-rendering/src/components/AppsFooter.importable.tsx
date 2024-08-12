@@ -25,14 +25,12 @@ const linkStyles = css`
 
 type PrivacySettingsProps = {
 	isCcpa: boolean;
-	privacyPolicyClickHandler: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	privacySettingsClickHandler: (
 		e: React.MouseEvent<HTMLButtonElement>,
 	) => void;
 };
 const PrivacySettings = ({
 	isCcpa,
-	privacyPolicyClickHandler,
 	privacySettingsClickHandler,
 }: PrivacySettingsProps) => {
 	if (isCcpa) {
@@ -40,7 +38,7 @@ const PrivacySettings = ({
 			<>
 				<ButtonLink
 					priority="secondary"
-					onClick={privacyPolicyClickHandler}
+					onClick={privacySettingsClickHandler}
 					css={linkStyles}
 				>
 					California Residents - Do Not Sell
@@ -98,7 +96,6 @@ export const AppsFooter = () => {
 			<br />
 			<PrivacySettings
 				isCcpa={isCcpa}
-				privacyPolicyClickHandler={privacyPolicyClickHandler}
 				privacySettingsClickHandler={privacySettingsClickHandler}
 			/>
 			<ButtonLink
