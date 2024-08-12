@@ -6,15 +6,18 @@ import { Weather, WeatherPlaceholder } from './Weather';
 const appendPartnerCodeToUrl = (
 	url: string | undefined,
 ): string | undefined => {
-	// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- We're on the client so we don't know if URL.canParse is available
-	if (!url || (!!window.URL.canParse && !URL.canParse(url))) {
+	try {
+		if (url && URL.canParse(url)) {
+			const link = new URL(url);
+			link.searchParams.append('partner', 'web_guardian_adc');
+
+			return link.href;
+		}
+	} catch {
 		return undefined;
 	}
 
-	const link = new URL(url);
-	link.searchParams.append('partner', 'web_guardian_adc');
-
-	return link.href;
+	return undefined;
 };
 
 type Props = {
