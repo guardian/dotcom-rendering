@@ -81,6 +81,7 @@ const accreditationStylesFromLeftCol = css`
 `;
 
 const logoStyles = css`
+	display: flex;
 	${gridMainColumn}
 	grid-row: 1;
 	justify-self: end;
