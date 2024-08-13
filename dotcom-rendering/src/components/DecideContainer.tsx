@@ -25,6 +25,7 @@ import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
 import { HighlightsContainer } from './HighlightsContainer.importable';
 import { Island } from './Island';
 import { NavList } from './NavList';
+import { FlexibleSpecial } from './FlexibleSpecial';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -227,6 +228,8 @@ export const DecideContainer = ({
 					<HighlightsContainer trails={trails} />
 				</Island>
 			);
+		case 'flexible/special':
+			return <FlexibleSpecial trails={trails} />;
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}

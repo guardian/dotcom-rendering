@@ -3205,6 +3205,7 @@
                 "fixed/thrasher",
                 "fixed/video",
                 "fixed/video/vertical",
+				"flexible/special",
                 "nav/list",
                 "nav/media-list",
                 "news/most-popular"
