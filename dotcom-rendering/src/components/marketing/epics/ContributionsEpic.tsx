@@ -446,7 +446,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 
 			{tickerSettings?.tickerData && (
 				<ContributionsEpicTicker
-					settings={tickerSettings}
+					tickerSettings={tickerSettings}
 					total={tickerSettings.tickerData.total}
 					goal={tickerSettings.tickerData.goal}
 				/>

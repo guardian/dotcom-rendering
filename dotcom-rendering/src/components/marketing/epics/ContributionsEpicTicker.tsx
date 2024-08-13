@@ -1,9 +1,8 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
-	palette,
-	textSans17,
-	textSansBold17,
+	space,
+	textSans20,
+	textSansBold20,
 } from '@guardian/source/foundations';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
@@ -11,96 +10,82 @@ import { useIsInView } from '../../../lib/useIsInView';
 import { useTicker } from '../hooks/useTicker';
 import type { ReactComponent } from '../lib/ReactComponent';
 
-const rootStyles = css`
-	position: relative;
-	height: 65px;
-	margin-bottom: 15px;
-	line-height: 18px;
-`;
+const styles = {
+	tickerProgressBar: css`
+		position: relative;
+		height: ${space[3]}px;
+	`,
 
-const totalCountStyles = css`
-	${textSansBold17}
-`;
+	tickerProgressBarBackground: () => css`
+		width: 100%;
+		height: ${space[3]}px;
+		overflow: hidden;
+		background-color: #5056f5;
+		position: absolute;
+		border-radius: ${space[2]}px;
+	`,
 
-const soFarCountStyles = css`
-	${textSansBold17}
-`;
+	progressBarTransform: (
+		goal: number,
+		total: number,
+		runningTotal: number,
+	): string => {
+		const haveStartedAnimating = runningTotal > 0;
+		if (!haveStartedAnimating) {
+			return 'translateX(-100%)';
+		}
+		const percentage = (total / goal) * 100 - 100;
+		return `translate3d(${percentage >= 0 ? 0 : percentage}%, 0, 0)`;
+	},
 
-const countLabelStyles = css`
-	${textSans17}
-`;
+	tickerProgressBarFill: (
+		goal: number,
+		total: number,
+		runningTotal: number,
+	) => css`
+		background-color: rgba(80, 86, 245, 0.35);
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transform: ${styles.progressBarTransform(goal, total, runningTotal)};
+		transition: transform 3s cubic-bezier(0.25, 0.55, 0.2, 0.85);
+		border-radius: ${space[2]}px;
+	`,
 
-const progressBarHeight = 10;
+	tickerHeadline: () => css`
+		${textSansBold20};
+		margin-bottom: ${space[2]}px;
+	`,
 
-const progressBarContainerStyles = css`
-	width: 100%;
-	height: ${progressBarHeight}px;
-	/* stylelint-disable-next-line color-no-hex */
-	background-color: #dda7a1;
-	position: absolute;
-	bottom: 0;
-	margin-top: 40px;
-`;
+	tickerLabelContainer: () => css`
+		position: relative;
+		display: flex;
+		margin-top: ${space[1]}px;
+	`,
 
-const progressBarStyles = css`
-	overflow: hidden;
-	width: 100%;
-	height: ${progressBarHeight}px;
-	position: absolute;
-`;
+	tickerLabel: () => css`
+		${textSans20}
+	`,
 
-const soFarContainerStyles = css`
-	position: absolute;
-	left: 0;
-	bottom: ${progressBarHeight + 5}px;
-`;
+	tickerLabelTotal: () => css`
+		font-weight: 700;
+	`,
 
-const progressBarTransform = (
-	end: number,
-	runningTotal: number,
-	total: number,
-): string => {
-	const haveStartedAnimating = runningTotal > 0;
-
-	if (!haveStartedAnimating) {
-		return 'translateX(-100%)';
-	}
-
-	const percentage = (total / end) * 100 - 100;
-
-	return `translate3d(${percentage >= 0 ? 0 : percentage}%, 0, 0)`;
+	containerStyles: () => css`
+		position: relative;
+	`,
 };
 
-const filledProgressStyles = (
-	end: number,
-	runningTotal: number,
-	total: number,
-): SerializedStyles => css`
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	transform: ${progressBarTransform(end, runningTotal, total)};
-	transition: transform 3s cubic-bezier(0.25, 0.55, 0.2, 0.85);
-	background-color: ${palette.news[400]};
-`;
-
-const goalContainerStyles: SerializedStyles = css`
-	position: absolute;
-	right: 0;
-	bottom: ${progressBarHeight + 5}px;
-	text-align: right;
-`;
-
 export type Props = {
-	settings: TickerSettings;
+	tickerSettings: TickerSettings;
 	total: number;
 	goal: number;
 };
 
 export const ContributionsEpicTicker: ReactComponent<Props> = ({
-	settings,
+	tickerSettings,
 	total,
 	goal,
 }: Props) => {
@@ -118,47 +103,36 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	}, [hasBeenSeen]);
 
 	const runningTotal = useTicker(total, readyToAnimate);
-
-	const goalReached = total >= goal;
-	const currencySymbol = settings.currencySymbol;
-
-	// If we've exceeded the goal then extend the bar 15% beyond the total
-	const end = total > goal ? total + total * 0.15 : goal;
+	const isGoalReached = total >= goal;
+	const currencySymbol = tickerSettings.currencySymbol;
 
 	return (
-		<div ref={setNode} css={rootStyles}>
-			<div>
-				<div css={soFarContainerStyles}>
-					<div css={soFarCountStyles}>
-						{goalReached
-							? settings.copy.goalReachedPrimary
-							: `${currencySymbol}${runningTotal.toLocaleString()}`}
-					</div>
-					<div css={countLabelStyles}>
-						{goalReached
-							? settings.copy.goalReachedSecondary
-							: settings.copy.countLabel}
-					</div>
-				</div>
-
-				<div css={goalContainerStyles}>
-					<div css={totalCountStyles}>
-						{goalReached
-							? `${currencySymbol}${total.toLocaleString()}`
-							: `${currencySymbol}${goal.toLocaleString()}`}
-					</div>
-					<div css={countLabelStyles}>
-						{goalReached ? settings.copy.countLabel : 'our goal'}
-					</div>
+		<div ref={setNode} css={styles.containerStyles}>
+			<h2 css={styles.tickerHeadline()}>
+				{isGoalReached
+					? tickerSettings.copy.goalReachedPrimary
+					: tickerSettings.copy.countLabel}
+			</h2>
+			<div css={styles.tickerProgressBar}>
+				<div css={styles.tickerProgressBarBackground}>
+					<div
+						css={styles.tickerProgressBarFill(
+							goal,
+							total,
+							runningTotal,
+						)}
+					/>
 				</div>
 			</div>
-
-			<div css={progressBarContainerStyles}>
-				<div css={progressBarStyles}>
-					<div
-						css={filledProgressStyles(end, runningTotal, total)}
-					></div>
-				</div>
+			<div css={styles.tickerLabelContainer()}>
+				<p css={styles.tickerLabel}>
+					<span css={styles.tickerLabelTotal}>
+						{currencySymbol}
+						{total.toLocaleString()}
+					</span>{' '}
+					of {currencySymbol}
+					{goal.toLocaleString()} goal
+				</p>
 			</div>
 		</div>
 	);
