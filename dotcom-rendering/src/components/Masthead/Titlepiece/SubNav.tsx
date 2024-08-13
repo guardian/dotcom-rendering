@@ -51,6 +51,7 @@ const scrollableSubNavStyles = css`
 			display: none;
 		}
 	}
+	scrollbar-width: none; /* Firefox */
 `;
 
 const subnavListItemStyles = css`
