@@ -5,33 +5,35 @@ import {
 	replaceNonArticleCountPlaceholders,
 	SecondaryCtaType,
 } from '@guardian/support-dotcom-components';
-import React, { useEffect } from 'react';
-import {
+import type {
 	BannerContent,
 	BannerProps,
 	Cta,
 	SecondaryCta,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import React, { useEffect } from 'react';
 import { useIsInView } from '../../../../lib/useIsInView';
-import withCloseable, { CloseableBannerProps } from '../utils/withCloseable';
+import type { ReactComponent } from '../../lib/ReactComponent';
 import { replaceArticleCount } from '../../lib/replaceArticleCount';
 import {
+	addAbandonedBasketAndTrackingParamsToUrl,
+	addRegionIdAndTrackingParamsToSupportUrl,
+	addTrackingParamsToProfileUrl,
+	createClickEventFromTracking,
+	createInsertEventFromTracking,
+	createViewEventFromTracking,
+	isProfileUrl,
+} from '../../lib/tracking';
+import { withParsedProps } from '../../shared/ModuleWrapper';
+import type { CloseableBannerProps } from '../utils/withCloseable';
+import { withCloseable } from '../utils/withCloseable';
+import type {
 	BannerEnrichedCta,
 	BannerEnrichedSecondaryCta,
 	BannerId,
 	BannerRenderedContent,
 	BannerRenderProps,
 } from './types';
-import { withParsedProps } from '../../shared/ModuleWrapper';
-import { ReactComponent } from '../../lib/ReactComponent';
-import {
-	addAbandonedBasketAndTrackingParamsToUrl,
-	addRegionIdAndTrackingParamsToSupportUrl,
-	addTrackingParamsToProfileUrl,
-	createClickEventFromTracking,
-	createViewEventFromTracking,
-	isProfileUrl,
-} from '../../lib/tracking';
 
 function getComponentIds(bannerId: BannerId) {
 	return {
@@ -100,7 +102,7 @@ const withBannerData =
 					),
 				);
 			}
-		}, [hasBeenSeen, submitComponentEvent]);
+		}, [hasBeenSeen, submitComponentEvent, tracking]);
 
 		useEffect(() => {
 			if (submitComponentEvent) {
@@ -111,7 +113,7 @@ const withBannerData =
 					),
 				);
 			}
-		}, [submitComponentEvent]);
+		}, [submitComponentEvent, tracking]);
 
 		const numArticles = articleCounts.forTargetedWeeks;
 
@@ -230,11 +232,11 @@ const withBannerData =
 				(!!cleanHeading &&
 					containsNonArticleCountPlaceholder(cleanHeading));
 
-			const headingWithArticleCount = !!cleanHeading
+			const headingWithArticleCount = cleanHeading
 				? replaceArticleCount(cleanHeading, numArticles, 'banner')
 				: null;
 
-			const highlightedTextWithArticleCount = !!cleanHighlightedText
+			const highlightedTextWithArticleCount = cleanHighlightedText
 				? replaceArticleCount(
 						cleanHighlightedText,
 						numArticles,

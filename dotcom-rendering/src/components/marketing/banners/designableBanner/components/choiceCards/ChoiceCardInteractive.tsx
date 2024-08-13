@@ -1,18 +1,17 @@
-import React from 'react';
-import { ChoiceCardGroup, ChoiceCard } from '@guardian/source/react-components';
-import { ChoiceCardSettings } from './ChoiceCards';
 import { css } from '@emotion/react';
+import type { OphanComponentEvent } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { from, space, until } from '@guardian/source/foundations';
-import { OphanComponentEvent } from '@guardian/libs';
-import {
-	ChoiceCardSelection,
-	contributionType,
-} from '../../../../lib/choiceCards';
-import {
+import { ChoiceCard, ChoiceCardGroup } from '@guardian/source/react-components';
+import type {
 	ContributionFrequency,
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { ReactComponent } from '../../../../lib/ReactComponent';
+import React from 'react';
+import type { ChoiceCardSelection } from '../../../../lib/choiceCards';
+import { contributionType } from '../../../../lib/choiceCards';
+import type { ReactComponent } from '../../../../lib/ReactComponent';
+import type { ChoiceCardSettings } from './ChoiceCards';
 
 interface ChoiceCardInteractiveProps {
 	selection?: ChoiceCardSelection;
@@ -35,7 +34,7 @@ const buildStyles = (
 		buttonSelectColour,
 		buttonSelectTextColour,
 		buttonSelectBorderColour,
-	} = design || {};
+	} = design ?? {};
 
 	return {
 		buttonOverride: css`
@@ -122,10 +121,6 @@ export const ChoiceCardInteractive: ReactComponent<
 		'ANNUAL',
 	];
 
-	if (!amountsCardData) {
-		return <></>;
-	}
-
 	const noOfContributionTabs = displayContributionType.length > 2 ? 3 : 2;
 	const hideChooseYourAmount =
 		!!amountsCardData[selection.frequency].hideChooseYourAmount;
@@ -148,20 +143,20 @@ export const ChoiceCardInteractive: ReactComponent<
 		trackClick('amount');
 		setSelectionsCallback({
 			frequency: selection.frequency,
-			amount: amount,
+			amount,
 		});
 	};
 
 	const updateFrequency = (frequency: ContributionFrequency) => {
 		trackClick('frequency');
 		setSelectionsCallback({
-			frequency: frequency,
+			frequency,
 			amount: amountsCardData[frequency].defaultAmount,
 		});
 	};
 
 	const choiceCardAmount = (amount?: number) => {
-		if (amount) {
+		if (!isUndefined(amount)) {
 			return (
 				<ChoiceCard
 					key={amount}
@@ -239,7 +234,7 @@ export const ChoiceCardInteractive: ReactComponent<
 				name="contribution-frequency"
 				label="Contribution frequency"
 				columns={noOfContributionTabs}
-				hideLabel
+				hideLabel={true}
 				cssOverrides={[
 					style.cardPaddingOverride,
 					style.frequencyGroupOverride,
@@ -257,7 +252,7 @@ export const ChoiceCardInteractive: ReactComponent<
 				name="contribution-amount"
 				label="Contribution amount"
 				columns={2}
-				hideLabel
+				hideLabel={true}
 				aria-labelledby={selection.frequency}
 				cssOverrides={[
 					style.cardPaddingOverride,

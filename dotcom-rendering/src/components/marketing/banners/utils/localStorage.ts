@@ -1,3 +1,4 @@
+import { storage } from '@guardian/libs';
 import type { BannerChannel } from '@guardian/support-dotcom-components/dist/shared/src/types';
 
 type BannerLastClosedAt =
@@ -7,7 +8,7 @@ type BannerLastClosedAt =
 	| 'abandonedBasketLastClosedAt';
 
 const setBannerClosedTimestamp = (name: BannerLastClosedAt): void =>
-	localStorage.setItem(
+	storage.local.set(
 		`gu.prefs.${name}`,
 		JSON.stringify({
 			value: new Date().toISOString(),

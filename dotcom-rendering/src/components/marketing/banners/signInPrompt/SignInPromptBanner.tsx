@@ -1,27 +1,26 @@
-import React from 'react';
-import { ThemeProvider, css } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import {
 	brand,
 	brandAlt,
-	space,
-	neutral,
 	headline,
+	neutral,
+	space,
 	until,
 } from '@guardian/source/foundations';
 import {
 	Button,
-	LinkButton,
 	buttonThemeBrand,
-	SvgRoundelBrandInverse,
-	Container,
 	Column,
 	Columns,
+	Container,
+	LinkButton,
+	SvgRoundelBrandInverse,
 } from '@guardian/source/react-components';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
-
-import { BannerRenderProps } from '../common/types';
+import React from 'react';
+import type { ReactComponent } from '../../lib/ReactComponent';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
-import { ReactComponent } from '../../lib/ReactComponent';
+import type { BannerRenderProps } from '../common/types';
 
 const bannerStyles = css`
 	background-color: ${brand[400]};

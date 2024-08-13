@@ -1,19 +1,17 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { design, props, stringToHexColour } from '../../utils/storybook';
 import { css } from '@emotion/react';
-import { DesignableBannerUnvalidated as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';
-import lzstring from 'lz-string';
-import {
-	BannerDesignImage,
-	ConfigurableDesign,
-	HexColour,
-	SelectedAmountsVariant,
-} from '@guardian/support-dotcom-components/dist/shared/src/types';
 import {
 	SecondaryCtaType,
 	TickerCountType,
 	TickerEndType,
 } from '@guardian/support-dotcom-components';
+import type {
+	BannerDesignImage,
+	SelectedAmountsVariant,
+} from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { Meta, StoryObj } from '@storybook/react';
+import lzstring from 'lz-string';
+import { DesignableBannerUnvalidated as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';
+import { design, props, stringToHexColour } from '../../utils/storybook';
 
 const style = css`
 	// max-width: 620px;

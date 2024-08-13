@@ -30,7 +30,7 @@ const baseArgs = {
 export default {
 	component: SignInPromptBanner,
 	title: 'Components/marketing/SignInPromptBanner',
-	render: (props) => <SignInPromptBanner {...props} />,
+	render: (args) => <SignInPromptBanner {...args} />,
 	args: baseArgs,
 } as Meta<typeof SignInPromptBanner>;
 

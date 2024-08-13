@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
 import { css } from '@emotion/react';
-import { textSans, neutral, space, from } from '@guardian/source/foundations';
+import { from, neutral, space, textSans } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import { BannerTemplateSettings } from '../settings';
-import { buttonStyles } from '../styles/buttonStyles';
-import { ReactComponent } from '../../../lib/ReactComponent';
+import React, { useState } from 'react';
 import {
 	addArticleCountOptOutCookie,
 	removeArticleCountFromLocalStorage,
 } from '../../../lib/articleCountOptOut';
+import type { ReactComponent } from '../../../lib/ReactComponent';
+import type { BannerTemplateSettings } from '../settings';
+import { buttonStyles } from '../styles/buttonStyles';
 
 // ---- Component ---- //
 
@@ -94,7 +94,7 @@ const Overlay: ReactComponent<OverlayProps> = ({
 				<Button
 					onClick={onClose}
 					icon={<SvgCross />}
-					hideLabel
+					hideLabel={true}
 					size="xsmall"
 					priority="tertiary"
 					cssOverrides={buttonStyles(settings.closeButtonSettings)}

@@ -1,18 +1,18 @@
 import { css } from '@emotion/react';
-import { Button, TextInput } from '@guardian/source/react-components';
 import {
-	textSans,
-	space,
+	error,
 	from,
 	neutral,
-	error,
+	space,
+	textSans,
 } from '@guardian/source/foundations';
+import { Button, TextInput } from '@guardian/source/react-components';
 import React from 'react';
-import { BannerEnrichedReminderCta } from '../../common/types';
-import { CtaSettings } from '../settings';
-import { buttonStyles } from '../styles/buttonStyles';
-import { ensureHasPreposition, ReminderStatus } from '../../../lib/reminders';
 import { useContributionsReminderEmailForm } from '../../../hooks/useContributionsReminderEmailForm';
+import { ensureHasPreposition, ReminderStatus } from '../../../lib/reminders';
+import type { BannerEnrichedReminderCta } from '../../common/types';
+import type { CtaSettings } from '../settings';
+import { buttonStyles } from '../styles/buttonStyles';
 
 // ---- Thank you component ---- //
 
@@ -164,7 +164,7 @@ function Signup({
 			>
 				<TextInput
 					label="Email address"
-					hideLabel
+					hideLabel={true}
 					onChange={updateEmail}
 					error={inputError}
 					value={email}

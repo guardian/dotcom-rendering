@@ -1,7 +1,8 @@
-import { SerializedStyles } from '@emotion/react';
-import React, { ReactElement } from 'react';
-import { BannerId } from '../banners/common/types';
-import { ReactComponent } from '../lib/ReactComponent';
+import type { SerializedStyles } from '@emotion/react';
+import type { ReactElement } from 'react';
+import React from 'react';
+import type { BannerId } from '../banners/common/types';
+import type { ReactComponent } from '../lib/ReactComponent';
 
 export type ImageAttrs = {
 	url: string;

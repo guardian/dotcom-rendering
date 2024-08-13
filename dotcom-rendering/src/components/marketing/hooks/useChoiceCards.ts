@@ -5,8 +5,8 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import type { BannerTextContent } from '../banners/common/types';
-import { addChoiceCardsParams } from '../lib/tracking';
 import type { ChoiceCardSelection } from '../lib/choiceCards';
+import { addChoiceCardsParams } from '../lib/tracking';
 
 export type ContentType = 'mainContent' | 'mobileContent';
 
@@ -32,7 +32,7 @@ const useChoiceCards = (
 			const localAmounts =
 				choiceCardAmounts.amountsCardData[defaultFrequency];
 			const defaultAmount =
-				localAmounts.defaultAmount || localAmounts.amounts[1] || 1;
+				(localAmounts.defaultAmount || localAmounts.amounts[1]) ?? 1;
 
 			setChoiceCardSelection({
 				frequency: defaultFrequency,
@@ -73,4 +73,4 @@ const useChoiceCards = (
 	};
 };
 
-export default useChoiceCards;
+export { useChoiceCards };

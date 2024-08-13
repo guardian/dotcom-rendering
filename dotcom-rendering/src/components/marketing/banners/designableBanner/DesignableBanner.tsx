@@ -1,47 +1,48 @@
+import { css } from '@emotion/react';
+import {
+	between,
+	body,
+	from,
+	neutral,
+	space,
+	specialReport,
+	textSans,
+	until,
+} from '@guardian/source/foundations';
+import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
 import {
 	hexColourToString,
 	SecondaryCtaType,
 } from '@guardian/support-dotcom-components';
-import React, { useEffect } from 'react';
-import { css } from '@emotion/react';
-import {
-	neutral,
-	space,
-	specialReport,
-	between,
-	from,
-	until,
-	body,
-	textSans,
-} from '@guardian/source/foundations';
-import { BannerEnrichedReminderCta, BannerRenderProps } from '../common/types';
-import { DesignableBannerHeader } from './components/DesignableBannerHeader';
-import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
-import { DesignableBannerBody } from './components/DesignableBannerBody';
-import { DesignableBannerCtas } from './components/DesignableBannerCtas';
-import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
-import { DesignableBannerVisual } from './components/DesignableBannerVisual';
-import { DesignableBannerReminder } from './components/DesignableBannerReminder';
-import DesignableBannerTicker from './components/DesignableBannerTicker';
-import { templateSpacing } from './styles/templateStyles';
-import {
-	ChoiceCards,
-	ChoiceCardSettings,
-} from './components/choiceCards/ChoiceCards';
-import { buttonStyles } from './styles/buttonStyles';
-import { BannerTemplateSettings, CtaSettings } from './settings';
-import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
-import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
-import {
+import type {
 	BannerDesignHeaderImage,
 	BannerDesignImage,
 	ConfigurableDesign,
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { ReactComponent } from '../../lib/ReactComponent';
+import React, { useEffect, useState } from 'react';
 import { useMatchMedia } from '../../../../lib/useMatchMedia';
-import useReminder from '../../hooks/useReminder';
-import useChoiceCards from '../../hooks/useChoiceCards';
+import { useChoiceCards } from '../../hooks/useChoiceCards';
+import { useReminder } from '../../hooks/useReminder';
+import type { ReactComponent } from '../../lib/ReactComponent';
+import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
+import type {
+	BannerEnrichedReminderCta,
+	BannerRenderProps,
+} from '../common/types';
+import type { ChoiceCardSettings } from './components/choiceCards/ChoiceCards';
+import { ChoiceCards } from './components/choiceCards/ChoiceCards';
+import { DesignableBannerArticleCount } from './components/DesignableBannerArticleCount';
+import { DesignableBannerBody } from './components/DesignableBannerBody';
+import { DesignableBannerCloseButton } from './components/DesignableBannerCloseButton';
+import { DesignableBannerCtas } from './components/DesignableBannerCtas';
+import { DesignableBannerHeader } from './components/DesignableBannerHeader';
+import { DesignableBannerReminder } from './components/DesignableBannerReminder';
+import { DesignableBannerTicker } from './components/DesignableBannerTicker';
+import { DesignableBannerVisual } from './components/DesignableBannerVisual';
+import type { BannerTemplateSettings, CtaSettings } from './settings';
+import { buttonStyles } from './styles/buttonStyles';
+import { templateSpacing } from './styles/templateStyles';
 
 const buildImageSettings = (
 	design: BannerDesignImage | BannerDesignHeaderImage,
@@ -128,8 +129,12 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		useReminder(reminderTracking);
 
 	// We can use this to shorten the banner if the "open in app" banner is present
-	const iosAppBannerPresent =
-		window.innerHeight != window.document.documentElement.clientHeight;
+	const [iosAppBannerPresent, setIosAppBannerPresent] = useState(false);
+	useEffect(() => {
+		setIosAppBannerPresent(
+			window.innerHeight != window.document.documentElement.clientHeight,
+		);
+	}, []);
 
 	useEffect(() => {
 		if (iosAppBannerPresent) {
@@ -271,7 +276,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	);
 
 	const getHeaderContainerCss = () => {
-		if (!!templateSettings?.headerSettings?.headerImage) {
+		if (templateSettings?.headerSettings?.headerImage) {
 			return styles.headerWithImageContainer(
 				templateSettings.containerSettings.backgroundColour,
 			);
@@ -392,7 +397,6 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 							componentId={'contributions-banner-choice-cards'}
 							amountsTest={choiceCardAmounts}
 							design={templateSettings.choiceCardSettings}
-							content={content}
 							getCtaText={getCtaText}
 							getCtaUrl={getCtaUrl}
 							cssCtaOverides={buttonStyles(

@@ -1,9 +1,9 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { from, headline } from '@guardian/source/foundations';
-import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
-import { BannerTemplateSettings } from '../settings';
+import React from 'react';
+import type { BannerTemplateSettings } from '../settings';
 import { CustomArticleCountCopy } from './CustomArticleCountCopy';
+import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
 
 export const containsArticleCountTemplate = (copy: string): boolean =>
 	copy.includes('%%ARTICLE_COUNT%%');

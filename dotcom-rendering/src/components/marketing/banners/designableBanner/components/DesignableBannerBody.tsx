@@ -1,10 +1,10 @@
-import React from 'react';
 import { css } from '@emotion/react';
-import { from, body } from '@guardian/source/foundations';
-import { createBannerBodyCopy } from './BannerText';
-import { HighlightedTextSettings } from '../settings';
-import { BannerRenderedContent } from '../../common/types';
+import { body, from } from '@guardian/source/foundations';
+import React from 'react';
 import { useMatchMedia } from '../../../../../lib/useMatchMedia';
+import type { BannerRenderedContent } from '../../common/types';
+import type { HighlightedTextSettings } from '../settings';
+import { createBannerBodyCopy } from './BannerText';
 
 interface DesignableBannerBodyProps {
 	mainContent: BannerRenderedContent;

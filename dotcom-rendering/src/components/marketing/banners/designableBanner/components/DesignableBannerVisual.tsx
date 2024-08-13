@@ -1,9 +1,10 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import { BannerId } from '../../common/types';
-import { ImageAttrs, ResponsiveImage } from '../../../shared/ResponsiveImage';
-import { Image } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { Image } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import React from 'react';
+import type { ImageAttrs } from '../../../shared/ResponsiveImage';
+import { ResponsiveImage } from '../../../shared/ResponsiveImage';
+import type { BannerId } from '../../common/types';
 
 // ---- Component ---- //
 

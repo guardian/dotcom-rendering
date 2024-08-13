@@ -1,10 +1,10 @@
-import React from 'react';
-import { BannerEnrichedReminderCta } from '../../common/types';
-import { CtaSettings } from '../settings';
-import { DesignableBannerReminderSignedOut } from './DesignableBannerReminderSignedOut';
 import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
+import React from 'react';
 import { useContributionsReminderSignup } from '../../../hooks/useContributionsReminderSignup';
+import type { BannerEnrichedReminderCta } from '../../common/types';
+import type { CtaSettings } from '../settings';
+import { DesignableBannerReminderSignedOut } from './DesignableBannerReminderSignedOut';
 
 export interface DesignableBannerReminderProps {
 	reminderCta: BannerEnrichedReminderCta;

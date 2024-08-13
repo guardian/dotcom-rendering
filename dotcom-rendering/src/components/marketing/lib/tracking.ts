@@ -149,7 +149,7 @@ export const addAbandonedBasketAndTrackingParamsToUrl = (
 	baseUrl: string,
 	abandonedBasket: AbandonedBasket,
 	tracking: Tracking,
-) => {
+): string => {
 	return addTrackingParams(
 		addAbandonedBasketParamsToUrl(baseUrl, abandonedBasket),
 		tracking,

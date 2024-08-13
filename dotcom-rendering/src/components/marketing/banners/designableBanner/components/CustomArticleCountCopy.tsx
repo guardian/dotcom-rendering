@@ -1,6 +1,6 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { from, headline, space } from '@guardian/source/foundations';
+import React from 'react';
 
 const styles = {
 	container: css`

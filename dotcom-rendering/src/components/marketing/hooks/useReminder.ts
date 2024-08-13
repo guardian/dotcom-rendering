@@ -21,9 +21,9 @@ const useReminder = (
 		if (mobileReminderRef.current && isReminderActive) {
 			mobileReminderRef.current.scrollIntoView({ behavior: 'smooth' });
 		}
-	}, [mobileReminderRef.current, isReminderActive]);
+	}, [isReminderActive]);
 
 	return { isReminderActive, onReminderCtaClick, mobileReminderRef };
 };
 
-export default useReminder;
+export { useReminder };

@@ -1,8 +1,9 @@
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { Button, SvgCross } from '@guardian/source/react-components';
 import React from 'react';
-import { css, SerializedStyles } from '@emotion/react';
-import { SvgCross, Button } from '@guardian/source/react-components';
+import type { CtaSettings } from '../settings';
 import { buttonStyles } from '../styles/buttonStyles';
-import { CtaSettings } from '../settings';
 
 interface DesignableBannerCloseButtonProps {
 	onCloseClick: () => void;
@@ -18,7 +19,7 @@ export function DesignableBannerCloseButton({
 	return (
 		<div
 			css={css`
-				${styles.container} ${styleOverides || ''}
+				${styles.container} ${styleOverides ?? ''}
 			`}
 		>
 			<Button
@@ -29,7 +30,7 @@ export function DesignableBannerCloseButton({
 				)}
 				icon={<SvgCross />}
 				size="small"
-				hideLabel
+				hideLabel={true}
 			>
 				Close
 			</Button>

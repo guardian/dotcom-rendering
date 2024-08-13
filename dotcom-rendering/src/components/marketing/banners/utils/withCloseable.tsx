@@ -1,8 +1,8 @@
+import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import React, { useState } from 'react';
-import { setChannelClosedTimestamp } from './localStorage';
 import { useEscapeShortcut } from '../../hooks/useEscapeShortcut';
-import { BannerProps } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { ReactComponent } from '../../lib/ReactComponent';
+import type { ReactComponent } from '../../lib/ReactComponent';
+import { setChannelClosedTimestamp } from './localStorage';
 
 export interface CloseableBannerProps extends BannerProps {
 	onClose: () => void;
@@ -20,7 +20,7 @@ const withCloseable = (
 			document.body.focus();
 		};
 
-		useEscapeShortcut(onClose, []);
+		useEscapeShortcut(onClose);
 
 		return isOpen ? (
 			<CloseableBanner onClose={onClose} {...bannerProps} />
@@ -31,4 +31,4 @@ const withCloseable = (
 	return Banner;
 };
 
-export default withCloseable;
+export { withCloseable };

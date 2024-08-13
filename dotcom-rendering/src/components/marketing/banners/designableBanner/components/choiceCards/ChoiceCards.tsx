@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { from, space } from '@guardian/source/foundations';
+import type { SelectedAmountsVariant } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import React, { useEffect } from 'react';
+import { useIsInView } from '../../../../../../lib/useIsInView';
+import type { ContentType } from '../../../../hooks/useChoiceCards';
+import type { ChoiceCardSelection } from '../../../../lib/choiceCards';
+import type { ReactComponent } from '../../../../lib/ReactComponent';
+import { PaymentCards } from '../../../common/PaymentCards';
 import { ChoiceCardInteractive } from './ChoiceCardInteractive';
 import { ChoiceCardsSupportCta } from './ChoiceCardsSupportCta';
-import { ContentType } from '../../../../hooks/useChoiceCards';
-import { OphanComponentEvent } from '@guardian/libs';
-import { ChoiceCardSelection } from '../../../../lib/choiceCards';
-import { SelectedAmountsVariant } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import { BannerTextContent } from '../../../common/types';
-import { ReactComponent } from '../../../../lib/ReactComponent';
-import { PaymentCards } from '../../../common/PaymentCards';
-import { useIsInView } from '../../../../../../lib/useIsInView';
 
 export interface ChoiceCardSettings {
 	buttonColour?: string;
@@ -31,10 +31,8 @@ interface ChoiceCardProps {
 	getCtaUrl: (contentType: ContentType) => string;
 	amountsTest?: SelectedAmountsVariant;
 	design?: ChoiceCardSettings;
-	content?: BannerTextContent;
 	cssCtaOverides?: SerializedStyles;
 	onCtaClick: () => void;
-	showMobilePaymentIcons?: boolean;
 }
 
 const styles = {
@@ -125,7 +123,7 @@ export const ChoiceCards: ReactComponent<ChoiceCardProps> = ({
 				});
 			}
 		}
-	}, [hasBeenSeen, submitComponentEvent]);
+	}, [hasBeenSeen, submitComponentEvent, testName, variantName]);
 
 	if (!selection || !amountsTest) {
 		return <></>;

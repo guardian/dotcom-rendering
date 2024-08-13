@@ -1,9 +1,9 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { from, headline, neutral, space } from '@guardian/source/foundations';
-import { DesignableBannerVisual } from './DesignableBannerVisual';
-import { HeaderSettings } from '../settings';
+import React from 'react';
 import { useMatchMedia } from '../../../../../lib/useMatchMedia';
+import type { HeaderSettings } from '../settings';
+import { DesignableBannerVisual } from './DesignableBannerVisual';
 
 interface DesignableBannerHeaderProps {
 	heading: JSX.Element | JSX.Element[] | null;
@@ -34,7 +34,7 @@ export function DesignableBannerHeader({
 			<header css={styles.header}>
 				{headerSettings?.headerImage &&
 					resolveImage(headerSettings.headerImage)}
-				{(heading || mobileHeading) && resolveCopy()}
+				{(heading ?? mobileHeading) && resolveCopy()}
 			</header>
 		</div>
 	);

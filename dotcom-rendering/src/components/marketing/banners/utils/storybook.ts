@@ -8,7 +8,7 @@ import type {
 	TickerSettings,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import {
+import type {
 	ConfigurableDesign,
 	HexColour,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
@@ -139,7 +139,7 @@ export const props: BannerProps = {
 	isSupporter: false,
 	countryCode: 'GB',
 	tracking,
-	content: content,
+	content,
 	tickerSettings,
 	separateArticleCount: true,
 	separateArticleCountSettings: {

@@ -1,12 +1,13 @@
-import React from 'react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { space } from '@guardian/source/foundations';
-import { css, SerializedStyles } from '@emotion/react';
 import {
 	Hide,
-	SvgArrowRightStraight,
 	LinkButton,
+	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import { ContentType } from '../../../../hooks/useChoiceCards';
+import React from 'react';
+import type { ContentType } from '../../../../hooks/useChoiceCards';
 
 const buttonOverrides = css`
 	margin-right: ${space[3]}px;

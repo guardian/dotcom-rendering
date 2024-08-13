@@ -1,12 +1,14 @@
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { from, space, textSans } from '@guardian/source/foundations';
+import { TickerCountType } from '@guardian/support-dotcom-components';
+import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import React, { useEffect, useState } from 'react';
-import { css, SerializedStyles } from '@emotion/react';
-import { textSans, from, space } from '@guardian/source/foundations';
-import { TickerStylingSettings } from '../settings';
-import { templateSpacing } from '../styles/templateStyles';
-import { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useIsInView } from '../../../../../lib/useIsInView';
-import { ReactComponent } from '../../../lib/ReactComponent';
 import { useTicker } from '../../../hooks/useTicker';
+import type { ReactComponent } from '../../../lib/ReactComponent';
+import type { TickerStylingSettings } from '../settings';
+import { templateSpacing } from '../styles/templateStyles';
 
 const progressBarHeight = 12;
 const tickerFillOffset = 15;
@@ -112,13 +114,13 @@ const DesignableBannerTicker: ReactComponent<DesignableBannerTickerProps> = ({
 		}
 	}, [hasBeenSeen]);
 
-	const total = tickerSettings.tickerData?.total || 1;
-	const goal = tickerSettings.tickerData?.goal || 1;
+	const total = tickerSettings.tickerData?.total ?? 1;
+	const goal = tickerSettings.tickerData?.goal ?? 1;
 	const isGoalReached = total >= goal;
 	const runningTotal = useTicker(total, readyToAnimate);
 
 	const currencySymbol =
-		tickerSettings.countType === 'money'
+		tickerSettings.countType === TickerCountType.money
 			? tickerSettings.currencySymbol
 			: '';
 
@@ -188,4 +190,4 @@ const DesignableBannerTicker: ReactComponent<DesignableBannerTickerProps> = ({
 	);
 };
 
-export default DesignableBannerTicker;
+export { DesignableBannerTicker };
