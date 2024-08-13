@@ -1,8 +1,3 @@
-/**
- * @file
- * This file was migrated from:
- * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/modules/epics/ContributionsEpicTicker.tsx
- */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
@@ -15,11 +10,6 @@ import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useTicker } from '../hooks/useTicker';
 import type { ReactComponent } from '../lib/ReactComponent';
-
-// This ticker component provides an animated progress bar and counter for the
-// epic. It mirrors the behaviour of the "unlimited" ticker type from frontend.
-// The "hardstop" type is not supported. The differences between the two relate
-// to behaviour once the goal has been reached.
 
 const rootStyles = css`
 	position: relative;
@@ -103,31 +93,6 @@ const goalContainerStyles: SerializedStyles = css`
 	text-align: right;
 `;
 
-const goalMarkerStyles = (transform: string): SerializedStyles => css`
-	border-right: 2px solid ${palette.neutral[7]};
-	content: ' ';
-	display: block;
-	height: 12px;
-	margin-top: -2px;
-	transform: ${transform};
-`;
-
-type MarkerProps = {
-	goal: number;
-	end: number;
-};
-
-const Marker: ReactComponent<MarkerProps> = ({ goal, end }: MarkerProps) => {
-	if (end > goal) {
-		const markerTranslate = (goal / end) * 100 - 100;
-		const markerTransform = `translate3d(${markerTranslate}%, 0, 0)`;
-
-		return <div css={goalMarkerStyles(markerTransform)} />;
-	} else {
-		return <></>;
-	}
-};
-
 export type Props = {
 	settings: TickerSettings;
 	total: number;
@@ -194,7 +159,6 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 						css={filledProgressStyles(end, runningTotal, total)}
 					></div>
 				</div>
-				<Marker goal={goal} end={end} />
 			</div>
 		</div>
 	);
