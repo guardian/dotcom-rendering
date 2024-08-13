@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { from, space, textSans } from '@guardian/source/foundations';
 import { TickerCountType } from '@guardian/support-dotcom-components';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../../../lib/useIsInView';
 import { useTicker } from '../../../hooks/useTicker';
 import type { ReactComponent } from '../../../lib/ReactComponent';

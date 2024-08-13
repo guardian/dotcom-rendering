@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, isUndefined, onConsent } from '@guardian/libs';
+import { getCookie, onConsent } from '@guardian/libs';
 import {
 	abandonedBasketSchema,
 	getBanner,
@@ -303,19 +303,16 @@ type RemoteBannerProps = BannerProps & {
 };
 
 const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
-	const [Banner, setBanner] = useState<React.ElementType>();
+	const [Banner, setBanner] = useState<React.ElementType | null>(null);
 
 	useEffect(() => {
 		setAutomat();
 
-		return (
-			module.name === 'SignInPromptBanner'
-				? /* webpackChunkName: "sign-in-prompt-banner" */
-				  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
-				: /* webpackChunkName: "designable-banner" */
-				  import(
-						`../marketing/banners/designableBanner/DesignableBanner`
-				  )
+		(module.name === 'SignInPromptBanner'
+			? /* webpackChunkName: "sign-in-prompt-banner" */
+			  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
+			: /* webpackChunkName: "designable-banner" */
+			  import(`../marketing/banners/designableBanner/DesignableBanner`)
 		)
 			.then((bannerModule: { [key: string]: React.ElementType }) => {
 				setBanner(() => bannerModule[module.name] ?? null);
@@ -329,7 +326,7 @@ const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 			});
 	}, [module]);
 
-	if (!isUndefined(Banner)) {
+	if (Banner !== null) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div

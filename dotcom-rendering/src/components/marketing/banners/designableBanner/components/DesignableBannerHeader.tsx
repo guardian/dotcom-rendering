@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from, headline, neutral, space } from '@guardian/source/foundations';
-import React from 'react';
+import type { Image } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useMatchMedia } from '../../../../../lib/useMatchMedia';
 import type { HeaderSettings } from '../settings';
 import { DesignableBannerVisual } from './DesignableBannerVisual';

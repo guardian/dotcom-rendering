@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import React from 'react';
 import type { CtaSettings } from '../settings';
 import { buttonStyles } from '../styles/buttonStyles';
 

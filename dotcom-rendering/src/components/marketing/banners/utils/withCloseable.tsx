@@ -1,5 +1,5 @@
 import type { BannerProps } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useEscapeShortcut } from '../../hooks/useEscapeShortcut';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { setChannelClosedTimestamp } from './localStorage';

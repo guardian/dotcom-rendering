@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import type { ReactElement } from 'react';
-import React from 'react';
 import type { BannerId } from '../banners/common/types';
 import type { ReactComponent } from '../lib/ReactComponent';
 

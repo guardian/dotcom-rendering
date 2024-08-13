@@ -20,7 +20,7 @@ import type {
 	ConfigurableDesign,
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMatchMedia } from '../../../../lib/useMatchMedia';
 import { useChoiceCards } from '../../hooks/useChoiceCards';
 import { useReminder } from '../../hooks/useReminder';

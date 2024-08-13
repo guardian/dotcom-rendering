@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { from, headline } from '@guardian/source/foundations';
-import React from 'react';
 import type { BannerTemplateSettings } from '../settings';
 import { CustomArticleCountCopy } from './CustomArticleCountCopy';
 import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';

@@ -6,7 +6,6 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source/react-components';
-import React from 'react';
 import type { ContentType } from '../../../../hooks/useChoiceCards';
 
 const buttonOverrides = css`

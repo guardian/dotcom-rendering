@@ -7,7 +7,6 @@ import type {
 	ContributionFrequency,
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
-import React from 'react';
 import type { ChoiceCardSelection } from '../../../../lib/choiceCards';
 import { contributionType } from '../../../../lib/choiceCards';
 import type { ReactComponent } from '../../../../lib/ReactComponent';

@@ -2,6 +2,7 @@ import type { OphanComponentEvent } from '@guardian/libs';
 import type { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/src/lib';
 import type {
+	ArticleCounts,
 	ArticleCountType,
 	ConfigurableDesign,
 	SelectedAmountsVariant,
@@ -9,7 +10,6 @@ import type {
 	TickerSettings,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
-import type { ArticleCounts } from '../../../../lib/articleCount';
 
 export type BannerId = 'designable-banner' | 'sign-in-prompt-banner';
 
@@ -63,7 +63,7 @@ export interface BannerRenderProps {
 	fetchEmail?: () => Promise<string | null>;
 	tickerSettings?: TickerSettings;
 	isSupporter?: boolean;
-	articleCounts: ArticleCounts;
+	articleCounts: ArticleCounts; // TODO - export
 	countType?: ArticleCountType;
 	separateArticleCount?: boolean;
 	separateArticleCountSettings?: SeparateArticleCount;

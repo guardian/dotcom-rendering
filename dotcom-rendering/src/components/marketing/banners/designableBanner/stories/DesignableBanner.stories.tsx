@@ -8,6 +8,7 @@ import type {
 	BannerDesignImage,
 	SelectedAmountsVariant,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
+import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import { DesignableBannerUnvalidated as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';
@@ -27,7 +28,6 @@ const meta: Meta<Props> = {
 		...props,
 		countryCode: 'GB',
 		json: '',
-		stage: 'DEV',
 	},
 	render: ({ json, ...args }) => {
 		const jsonProps = json

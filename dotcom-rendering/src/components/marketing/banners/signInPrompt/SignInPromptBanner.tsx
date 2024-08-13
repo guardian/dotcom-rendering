@@ -17,7 +17,6 @@ import {
 	SvgRoundelBrandInverse,
 } from '@guardian/source/react-components';
 import { SecondaryCtaType } from '@guardian/support-dotcom-components';
-import React from 'react';
 import type { ReactComponent } from '../../lib/ReactComponent';
 import { bannerWrapper, validatedBannerWrapper } from '../common/BannerWrapper';
 import type { BannerRenderProps } from '../common/types';

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, neutral, space, textSans } from '@guardian/source/foundations';
 import { Button, SvgCross } from '@guardian/source/react-components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
 	addArticleCountOptOutCookie,
 	removeArticleCountFromLocalStorage,

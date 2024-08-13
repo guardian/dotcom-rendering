@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { body, from } from '@guardian/source/foundations';
-import React from 'react';
 import { useMatchMedia } from '../../../../../lib/useMatchMedia';
 import type { BannerRenderedContent } from '../../common/types';
 import type { HighlightedTextSettings } from '../settings';
