@@ -330,7 +330,7 @@ importers:
         version: 7.0.1(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/braze-components':
         specifier: 20.0.0
-        version: 20.0.0(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240729085532)(@guardian/source@libs+@guardian+source)(react@18.3.1)
+        version: 20.0.0(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240813083420)(@guardian/source@libs+@guardian+source)(react@18.3.1)
       '@guardian/bridget':
         specifier: 6.0.0
         version: 6.0.0
@@ -342,10 +342,10 @@ importers:
         version: 50.13.0(@swc/core@1.5.3)(@types/node@20.14.10)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.3.3)
       '@guardian/commercial':
         specifier: 19.10.0
-        version: 19.10.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240729085532)(@guardian/source-foundations@14.2.2)(typescript@5.3.3)
+        version: 19.10.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240813083420)(@guardian/source-foundations@14.2.2)(typescript@5.3.3)
       '@guardian/core-web-vitals':
         specifier: 6.0.0
-        version: 6.0.0(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
+        version: 6.0.0(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
       '@guardian/eslint-config':
         specifier: 7.0.1
         version: 7.0.1(@typescript-eslint/parser@5.62.0)(eslint@8.56.0)(tslib@2.6.2)
@@ -354,13 +354,13 @@ importers:
         version: 9.0.1(eslint@8.56.0)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth':
         specifier: 2.1.0
-        version: 2.1.0(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3)
+        version: 2.1.0(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/identity-auth-frontend':
         specifier: 4.0.0
-        version: 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3)
+        version: 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/libs':
-        specifier: 0.0.0-canary-20240729085532
-        version: 0.0.0-canary-20240729085532(tslib@2.6.2)(typescript@5.3.3)
+        specifier: 0.0.0-canary-20240813083420
+        version: 0.0.0-canary-20240813083420(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js':
         specifier: 2.2.1
         version: 2.2.1
@@ -375,7 +375,7 @@ importers:
         version: link:../libs/@guardian/source-development-kitchen
       '@guardian/support-dotcom-components':
         specifier: 2.6.0
-        version: 2.6.0(@guardian/libs@0.0.0-canary-20240729085532)(zod@3.22.4)
+        version: 2.6.0(@guardian/libs@0.0.0-canary-20240813083420)(zod@3.22.4)
       '@guardian/tsconfig':
         specifier: 0.2.0
         version: 0.2.0
@@ -4082,7 +4082,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@20.0.0(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240729085532)(@guardian/source@libs+@guardian+source)(react@18.3.1):
+  /@guardian/braze-components@20.0.0(@emotion/react@11.11.1)(@guardian/libs@0.0.0-canary-20240813083420)(@guardian/source@libs+@guardian+source)(react@18.3.1):
     resolution: {integrity: sha512-/ENh0v7GUJcrQ8U0fXffAPWGvyOZxRCN1IPOf89PFLnM5Y0RCBIT2095hfYHxu3LgmvWz30QyuMB6HKN/oo9uQ==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
@@ -4092,7 +4092,7 @@ packages:
       react: 17.0.2 || 18.2.0
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
-      '@guardian/libs': 0.0.0-canary-20240729085532(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240813083420(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source': link:libs/@guardian/source
       react: 18.3.1
     dev: false
@@ -4169,7 +4169,7 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@19.10.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240729085532)(@guardian/source-foundations@14.2.2)(typescript@5.3.3):
+  /@guardian/commercial@19.10.0(@guardian/ab-core@7.0.1)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240813083420)(@guardian/source-foundations@14.2.2)(typescript@5.3.3):
     resolution: {integrity: sha512-727W1CLBDsdDFLrw7L8TmiRIqCEvBu0BaHYy16VBvIDOO7YWaN9catICy/QH2QmyLxoIEp+3roO8teaLfFdAUQ==}
     peerDependencies:
       '@guardian/ab-core': ^7.0.1
@@ -4182,10 +4182,10 @@ packages:
     dependencies:
       '@changesets/cli': 2.27.1
       '@guardian/ab-core': 7.0.1(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/core-web-vitals': 6.0.0(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
-      '@guardian/identity-auth': 2.1.0(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/libs': 0.0.0-canary-20240729085532(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/core-web-vitals': 6.0.0(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1)
+      '@guardian/identity-auth': 2.1.0(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240813083420(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/ophan-tracker-js': 2.1.1
       '@guardian/prebid.js': 8.34.0(tslib@2.6.2)(typescript@5.3.3)
       '@guardian/source-foundations': 14.2.2(tslib@2.6.2)(typescript@5.3.3)
@@ -4267,7 +4267,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/core-web-vitals@6.0.0(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1):
+  /@guardian/core-web-vitals@6.0.0(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3)(web-vitals@3.5.1):
     resolution: {integrity: sha512-kwH1VsQQMn+sPZis1zYYcCYzedNpen6tk3CtVjJlmtHV4nK6i6FnMfhHgbtqECDsqrHdTzRbwN2Lodh1f8D5lA==}
     peerDependencies:
       '@guardian/libs': ^16.0.0
@@ -4278,7 +4278,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 0.0.0-canary-20240729085532(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240813083420(tslib@2.6.2)(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
       web-vitals: 3.5.1
@@ -4359,7 +4359,7 @@ packages:
       - supports-color
     dev: false
 
-  /@guardian/identity-auth-frontend@4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3):
+  /@guardian/identity-auth-frontend@4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3):
     resolution: {integrity: sha512-lSXpRF54eEkxbQXEzJTXYDqzMDHl345Ac/Y7M8/OnKee0vtbR1hCjfm70HbcIXpUyx+TaNV8Ka4bqkR9VwJCPA==}
     peerDependencies:
       '@guardian/identity-auth': ^2.1.0
@@ -4370,13 +4370,13 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/identity-auth': 2.1.0(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3)
-      '@guardian/libs': 0.0.0-canary-20240729085532(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/identity-auth': 2.1.0(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240813083420(tslib@2.6.2)(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
     dev: false
 
-  /@guardian/identity-auth@2.1.0(@guardian/libs@0.0.0-canary-20240729085532)(tslib@2.6.2)(typescript@5.3.3):
+  /@guardian/identity-auth@2.1.0(@guardian/libs@0.0.0-canary-20240813083420)(tslib@2.6.2)(typescript@5.3.3):
     resolution: {integrity: sha512-+AM0pcmRvRZUf92RYGJ2Q6KK1JpnQIxZ6pafsaBMGnF0IwiIk9DdfhaYZl0cyPQ3PwLTJJw2aSl453ivPAmHbw==}
     peerDependencies:
       '@guardian/libs': ^16.0.0
@@ -4386,13 +4386,13 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@guardian/libs': 0.0.0-canary-20240729085532(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240813083420(tslib@2.6.2)(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
     dev: false
 
-  /@guardian/libs@0.0.0-canary-20240729085532(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-vKm7ZEKx/T4FC4F/7TKOlJi8oTI8VEjVWUUL1k/oCyB2Y2SzPqKHYycEieEq28XLOTRXMoXpp4jUHm3ErGs9sA==}
+  /@guardian/libs@0.0.0-canary-20240813083420(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-+3+w2FteUlwT2GiK48zgPxYMfnV7/gA5x1TZZyRz+9Lfd6gvObaHa6754Prpe2VGtfGgbi+obGoYeQWQOCNj8A==}
     peerDependencies:
       tslib: ^2.6.2
       typescript: ~5.5.2
@@ -4560,13 +4560,13 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/support-dotcom-components@2.6.0(@guardian/libs@0.0.0-canary-20240729085532)(zod@3.22.4):
+  /@guardian/support-dotcom-components@2.6.0(@guardian/libs@0.0.0-canary-20240813083420)(zod@3.22.4):
     resolution: {integrity: sha512-RV6GFYFt9GZWacy3OwpSVejloz0/hy3+Z2sRHAfp6vFqlD4M5D4uG3cXhaRIlre1b7Jue3kwNx/+XCcQ4QZgXw==}
     peerDependencies:
       '@guardian/libs': ^17.0.0
       zod: ^3.22.4
     dependencies:
-      '@guardian/libs': 0.0.0-canary-20240729085532(tslib@2.6.2)(typescript@5.3.3)
+      '@guardian/libs': 0.0.0-canary-20240813083420(tslib@2.6.2)(typescript@5.3.3)
       zod: 3.22.4
     dev: false
 
