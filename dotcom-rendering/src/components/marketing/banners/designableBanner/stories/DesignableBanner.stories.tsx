@@ -3,7 +3,6 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/stories/DesignableBanner.stories.tsx
  */
-import { css } from '@emotion/react';
 import {
 	SecondaryCtaType,
 	TickerCountType,
@@ -18,11 +17,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import { DesignableBannerUnvalidated as DesignableBanner } from '../../../banners/designableBanner/DesignableBanner';
 import { design, props, stringToHexColour } from '../../utils/storybook';
-
-const style = css`
-	// max-width: 620px;
-	// margin: 3em auto;
-`;
 
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<React.ComponentProps<typeof DesignableBanner>>;
@@ -40,7 +34,7 @@ const meta: Meta<Props> = {
 			: {};
 
 		return (
-			<div css={style}>
+			<div>
 				<DesignableBanner {...args} {...jsonProps} />
 			</div>
 		);

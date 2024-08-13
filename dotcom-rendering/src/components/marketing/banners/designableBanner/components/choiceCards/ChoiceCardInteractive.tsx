@@ -68,7 +68,9 @@ const buildStyles = (
 		`,
 		cardPaddingOverride: css`
 			> div > label > div {
+				/* stylelint-disable-next-line declaration-no-important */
 				padding-left: 0 !important;
+				/* stylelint-disable-next-line declaration-no-important */
 				padding-right: 0 !important;
 			}
 		`,

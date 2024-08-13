@@ -41,8 +41,8 @@ interface ChoiceCardProps {
 }
 
 const styles = {
+	// This position: relative is necessary to stop it jumping to the top of the page when a button is clicked
 	container: css`
-		// This position: relative is necessary to stop it jumping to the top of the page when a button is clicked
 		position: relative;
 
 		${from.tablet} {

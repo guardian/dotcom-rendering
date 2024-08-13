@@ -13,9 +13,9 @@ import {
 } from '@guardian/source/react-components';
 import type { ContentType } from '../../../../hooks/useChoiceCards';
 
+// Always override the LinkButton border
 const buttonOverrides = css`
 	margin-right: ${space[3]}px;
-	// Always override the LinkButton border
 	border: none;
 `;
 

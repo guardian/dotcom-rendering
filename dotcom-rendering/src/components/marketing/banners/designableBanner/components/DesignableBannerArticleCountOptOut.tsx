@@ -168,14 +168,12 @@ const styles = {
 		padding: 0;
 		cursor: pointer;
 		border-bottom: 1px solid;
+		/* stylelint-disable property-disallowed-list */
 		font-family: inherit;
 		font-size: inherit;
 		font-weight: inherit;
 		font-style: inherit;
 		color: inherit;
-		&:focus {
-			outline: none !important;
-		}
 	`,
 	overlayContainer: css`
 		position: absolute;
@@ -237,7 +235,9 @@ const overlayStyles = {
 		font-style: italic;
 
 		a {
+			/* stylelint-disable-next-line declaration-no-important */
 			color: ${textColour} !important;
+			/* stylelint-disable-next-line declaration-no-important */
 			text-decoration: underline !important;
 		}
 	`,

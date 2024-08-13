@@ -489,12 +489,10 @@ const styles = {
 		position: relative;
 		padding: 0 10px;
 		${from.tablet} {
-			position: static;
 			display: grid;
 			grid-template-columns: 1fr 280px;
 			grid-template-rows: auto 1fr auto;
 			column-gap: ${space[5]}px;
-			position: relative;
 			width: 100%;
 			max-width: 1300px;
 			margin: 0 auto;
