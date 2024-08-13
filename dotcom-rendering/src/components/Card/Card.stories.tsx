@@ -11,6 +11,7 @@ import { splitTheme } from '../../../.storybook/decorators/splitThemeDecorator';
 import type { Branding } from '../../types/branding';
 import type { DCRContainerPalette } from '../../types/front';
 import type { MainMedia } from '../../types/mainMedia';
+import { ContainerOverrides } from '../ContainerOverrides';
 import { FrontSection } from '../FrontSection';
 import { LabsSection } from '../LabsSection';
 import { Section } from '../Section';
@@ -557,7 +558,7 @@ export const WhenVerticalAndThemeOpinion = () => {
 	);
 };
 
-export const WithSublinksWhenVerticalAndOpinion = () => {
+export const WithSublinksWhenVerticalAndSpecialReport = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -566,7 +567,7 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: Pillar.Opinion,
+						theme: ArticleSpecial.SpecialReport,
 					}}
 					imagePositionOnDesktop="top"
 					supportingContent={[
@@ -1182,69 +1183,70 @@ export const WithBranding = () => {
 	} satisfies Branding;
 
 	return [undefined, ...containerPalettes].map((containerPalette) => (
-		<Section
+		<ContainerOverrides
 			key={containerPalette}
-			title={containerPalette ?? 'Standard'}
 			containerPalette={containerPalette}
 		>
-			<UL direction="row" padBottom={true}>
-				<LI percentage={'33.333%'} padSides={true}>
-					<Card
-						{...basicCardProps}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: ArticleSpecial.Labs,
-						}}
-						headlineText="guardian.org branding on a Standard card"
-						kickerText="Kicker"
-						trailText=""
-						imagePositionOnDesktop="top"
-						imagePositionOnMobile="left"
-						imageSize="small"
-						containerPalette={containerPalette}
-						branding={branding}
-					/>
-				</LI>
-				<LI percentage={'33.333%'} padSides={true}>
-					<Card
-						{...basicCardProps}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Gallery,
-							theme: ArticleSpecial.Labs,
-						}}
-						kickerText="Kicker"
-						headlineText="guardian.org branding on a Gallery card"
-						trailText=""
-						imagePositionOnDesktop="top"
-						imagePositionOnMobile="left"
-						imageSize="small"
-						mainMedia={mainGallery}
-						containerPalette={containerPalette}
-						branding={branding}
-					/>
-				</LI>
-				<LI percentage={'33.333%'} padSides={true}>
-					<Card
-						{...basicCardProps}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: Pillar.News,
-						}}
-						headlineText="guardian.org branding does not appear on non Labs articles"
-						kickerText="Kicker"
-						trailText=""
-						imagePositionOnDesktop="top"
-						imagePositionOnMobile="left"
-						imageSize="small"
-						containerPalette={containerPalette}
-						branding={branding}
-					/>
-				</LI>
-			</UL>
-		</Section>
+			<Section title={containerPalette ?? 'Standard'}>
+				<UL direction="row" padBottom={true}>
+					<LI percentage={'33.333%'} padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticleSpecial.Labs,
+							}}
+							headlineText="guardian.org branding on a Standard card"
+							kickerText="Kicker"
+							trailText=""
+							imagePositionOnDesktop="top"
+							imagePositionOnMobile="left"
+							imageSize="small"
+							containerPalette={containerPalette}
+							branding={branding}
+						/>
+					</LI>
+					<LI percentage={'33.333%'} padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Gallery,
+								theme: ArticleSpecial.Labs,
+							}}
+							kickerText="Kicker"
+							headlineText="guardian.org branding on a Gallery card"
+							trailText=""
+							imagePositionOnDesktop="top"
+							imagePositionOnMobile="left"
+							imageSize="small"
+							mainMedia={mainGallery}
+							containerPalette={containerPalette}
+							branding={branding}
+						/>
+					</LI>
+					<LI percentage={'33.333%'} padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: Pillar.News,
+							}}
+							headlineText="guardian.org branding does not appear on non Labs articles"
+							kickerText="Kicker"
+							trailText=""
+							imagePositionOnDesktop="top"
+							imagePositionOnMobile="left"
+							imageSize="small"
+							containerPalette={containerPalette}
+							branding={branding}
+						/>
+					</LI>
+				</UL>
+			</Section>
+		</ContainerOverrides>
 	));
 };
 

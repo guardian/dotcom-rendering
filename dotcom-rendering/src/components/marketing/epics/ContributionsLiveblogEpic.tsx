@@ -149,6 +149,8 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	const showThreeTierChoiceCards =
 		showChoiceCards && variant.name.includes('THREE_TIER_CHOICE_CARDS');
 
+	const variantOfChoiceCard = 'THREE_TIER_CHOICE_CARDS';
+
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
 			const localAmounts =
@@ -253,6 +255,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 								setSelectedAmount={
 									setThreeTierChoiceCardSelectedAmount
 								}
+								variantOfChoiceCard={variantOfChoiceCard}
 							/>
 						)}
 						<ContributionsEpicCtas

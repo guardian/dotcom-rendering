@@ -105,7 +105,7 @@ export const NoConsent = {
 		width: 800,
 		shouldStick: false,
 		isMainMedia: false,
-		imaEnabled: false,
+		enableIma: false,
 		abTestParticipations: {},
 		adTargeting: {
 			disableAds: true,
@@ -340,7 +340,7 @@ export const NoConsentWithIma = {
 	...NoConsent,
 	args: {
 		...NoConsent.args,
-		imaEnabled: true,
+		enableIma: true,
 	},
 } satisfies Story;
 
@@ -348,7 +348,7 @@ export const AdFreeWithIma = {
 	args: {
 		...NoConsent.args,
 		consentState: NoOverlay.args.consentState,
-		imaEnabled: true,
+		enableIma: true,
 	},
 	decorators: [Container],
 } satisfies Story;
@@ -356,7 +356,7 @@ export const AdFreeWithIma = {
 export const NoOverlayWithIma = {
 	args: {
 		...NoOverlay.args,
-		imaEnabled: true,
+		enableIma: true,
 	},
 	decorators: [Container],
 } satisfies Story;
@@ -365,7 +365,7 @@ export const WithOverrideImageWithIma = {
 	args: {
 		...WithOverrideImage.args,
 		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
-		imaEnabled: true,
+		enableIma: true,
 	},
 	decorators: [Container],
 } satisfies Story;
@@ -373,7 +373,7 @@ export const WithOverrideImageWithIma = {
 export const WithPosterImageWithIma = {
 	args: {
 		...WithPosterImage.args,
-		imaEnabled: true,
+		enableIma: true,
 		videoCategory: undefined,
 	},
 	decorators: [Container],
@@ -382,7 +382,7 @@ export const WithPosterImageWithIma = {
 export const WithOverlayAndPosterImageWithIma = {
 	args: {
 		...WithOverlayAndPosterImage.args,
-		imaEnabled: true,
+		enableIma: true,
 		videoCategory: undefined,
 		kicker: undefined,
 		showTextOverlay: undefined,
@@ -394,7 +394,7 @@ export const GiveConsentWithIma = {
 	...GiveConsent,
 	args: {
 		...GiveConsent.args,
-		imaEnabled: true,
+		enableIma: true,
 	},
 	decorators: [],
 } satisfies Story;
@@ -402,7 +402,7 @@ export const GiveConsentWithIma = {
 export const StickyWithIma = {
 	args: {
 		...Sticky.args,
-		imaEnabled: true,
+		enableIma: true,
 		shouldPauseOutOfView: undefined,
 	},
 	decorators: [ScrollDown('arrow')],
@@ -411,7 +411,7 @@ export const StickyWithIma = {
 export const StickyMainMediaWithIma = {
 	args: {
 		...StickyMainMedia.args,
-		imaEnabled: true,
+		enableIma: true,
 	},
 	decorators: [ScrollDown('arrow')],
 } satisfies Story;
@@ -420,7 +420,7 @@ export const DuplicateVideosWithIma = {
 	...DuplicateVideos,
 	args: {
 		...DuplicateVideos.args,
-		imaEnabled: true,
+		enableIma: true,
 	},
 	parameters: undefined,
 } satisfies Story;
@@ -429,6 +429,6 @@ export const MultipleStickyVideosWithIma = {
 	...MultipleStickyVideos,
 	args: {
 		...MultipleStickyVideos.args,
-		imaEnabled: true,
+		enableIma: true,
 	},
 } satisfies Story;

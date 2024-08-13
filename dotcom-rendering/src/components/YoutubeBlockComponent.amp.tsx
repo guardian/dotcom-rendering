@@ -1,3 +1,4 @@
+import type { ArticleTheme } from '@guardian/libs';
 import { constructQuery } from '../lib/querystring';
 import type { YoutubeBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';

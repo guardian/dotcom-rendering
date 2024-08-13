@@ -4,9 +4,7 @@ import { brandAltBackground, palette } from '@guardian/source/foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
 import { palette as themePalette } from '../palette';
-import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
-import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
 
 const {
@@ -487,12 +485,7 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
-export const decidePalette = (
-	format: ArticleFormat,
-	containerPalette?: DCRContainerPalette,
-): Palette => {
-	const overrides =
-		containerPalette && decideContainerOverrides(containerPalette);
+export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
 			headlineWhenMatch: textHeadlineWhenMatch(format),
@@ -531,7 +524,7 @@ export const decidePalette = (
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			navPillar: borderNavPillar(format),
-			lines: overrides?.border.lines ?? borderLines(format),
+			lines: borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			cardSupporting: borderCardSupporting(format),

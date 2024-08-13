@@ -32,6 +32,7 @@ import { KeyTakeaways } from '../components/KeyTakeaways';
 import { KnowledgeQuizAtom } from '../components/KnowledgeQuizAtom.importable';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
+import { MiniProfiles } from '../components/MiniProfiles';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtom } from '../components/PersonalityQuizAtom.importable';
@@ -403,7 +404,11 @@ export const renderElement = ({
 			return (
 				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
 				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
-				<Island priority="critical" defer={{ until: 'idle' }}>
+				<Island
+					priority="critical"
+					defer={{ until: 'idle' }}
+					role={element.role}
+				>
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
@@ -421,7 +426,7 @@ export const renderElement = ({
 			return <ItemLinkBlockElement html={element.html} />;
 		case 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement':
 			return (
-				<div id={element.elementId}>
+				<div id={element.elementId} data-spacefinder-role="inline">
 					<Island priority="critical" defer={{ until: 'visible' }}>
 						<InteractiveContentsBlockComponent
 							subheadingLinks={element.subheadingLinks}
@@ -470,6 +475,22 @@ export const renderElement = ({
 				<VideoAtom
 					assets={element.assets}
 					poster={element.posterImage?.[0]?.url}
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.MiniProfilesBlockElement':
+			return (
+				<MiniProfiles
+					miniProfiles={element.miniProfiles}
+					format={format}
+					ajaxUrl={ajaxUrl}
+					pageId={pageId}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+					switches={switches}
+					editionId={editionId}
+					RenderArticleElement={RenderArticleElement}
+					isLastElement={index === totalElements - 1}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -813,7 +834,7 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
-						switches={switches}
+						enableAds={true}
 					/>
 				</Island>
 			);

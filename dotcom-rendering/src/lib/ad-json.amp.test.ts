@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import { adJson, stringify } from './ad-json.amp';
 
 const paramSet: AdTargetParam[] = [
@@ -62,7 +63,7 @@ describe('ampadslots', () => {
 	it('should set platform to amp', () => {
 		const res = adJson(paramSet);
 		const p = res.targeting.find((param) => param.name === 'p');
-		if (p === undefined) {
+		if (isUndefined(p)) {
 			fail();
 		} else {
 			expect(p.value).toBe('amp');
@@ -74,7 +75,7 @@ describe('ampadslots', () => {
 		const renderingPlatform = res.targeting.find(
 			(param) => param.name === 'rp',
 		);
-		if (renderingPlatform === undefined) {
+		if (isUndefined(renderingPlatform)) {
 			fail();
 		} else {
 			expect(renderingPlatform.value).toBe('dotcom-rendering');
@@ -84,7 +85,7 @@ describe('ampadslots', () => {
 	it('should set values to a comma-separated string', () => {
 		const res = adJson(paramSet);
 		const p = res.targeting.find((param) => param.name === 'su');
-		if (p === undefined) {
+		if (isUndefined(p)) {
 			fail();
 		} else {
 			expect(p.value).toBe('4,5,1,2,3');

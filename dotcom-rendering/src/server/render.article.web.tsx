@@ -1,4 +1,9 @@
-import { ArticleDesign, isString, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	isString,
+	Pillar,
+} from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
@@ -52,8 +57,6 @@ export const renderHtml = ({
 		renderingTarget,
 		darkModeAvailable:
 			article.config.abTests.darkModeWebVariant === 'variant',
-		updateLogoAdPartnerSwitch:
-			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: article.editionId,
 	};
@@ -226,6 +229,9 @@ window.twttr = (function(d, s, id) {
 		weAreHiring: !!article.config.switches.weAreHiring,
 		config,
 		hasLiveBlogTopAd: !!article.config.hasLiveBlogTopAd,
+		onlyLightColourScheme:
+			format.design === ArticleDesign.FullPageInteractive ||
+			format.design === ArticleDesign.Interactive,
 	});
 
 	return { html: pageHtml, prefetchScripts };
@@ -260,7 +266,6 @@ export const renderBlocks = ({
 	const config: Config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: abTests.darkModeWebVariant === 'variant',
-		updateLogoAdPartnerSwitch: !!switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 		editionId,
 	};
@@ -290,8 +295,6 @@ export const renderBlocks = ({
 				onFirstPage={false}
 				keyEvents={[]}
 				filterKeyEvents={false}
-				availableTopics={[]}
-				selectedTopics={[]}
 			/>
 		</ConfigProvider>,
 	);

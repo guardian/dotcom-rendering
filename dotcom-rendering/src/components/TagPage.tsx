@@ -8,6 +8,7 @@ import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagPageType } from '../types/tagPage';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -46,8 +47,7 @@ export const TagPage = ({ tagPage, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
-	const darkModeAvailable =
-		tagPage.config.abTests.darkModeWebVariant === 'variant';
+	const { darkModeAvailable } = useConfig();
 
 	return (
 		<StrictMode>

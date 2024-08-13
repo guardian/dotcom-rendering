@@ -75,11 +75,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 					imageLoading={imageLoading}
 				/>
 			</LI>
-			<LI
-				percentage="25%"
-				showDivider={true}
-				containerPalette={containerPalette}
-			>
+			<LI percentage="25%" showDivider={true}>
 				<UL direction="column">
 					{columnOne.map((card, cardIndex) => {
 						return (
@@ -114,11 +110,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 					})}
 				</UL>
 			</LI>
-			<LI
-				percentage="25%"
-				showDivider={columnTwo.length > 0}
-				containerPalette={containerPalette}
-			>
+			<LI percentage="25%" showDivider={columnTwo.length > 0}>
 				<UL direction="column">
 					{columnTwo.map((card) => {
 						return (
@@ -171,12 +163,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 				/>
 			</LI>
 			<LI percentage="50%">
-				<UL
-					direction="row"
-					wrapCards={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
+				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card, cardIndex) => {
 						const columns = 2;
 						return (
@@ -185,7 +172,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								percentage="50%"
 								stretch={true}
 								showDivider={cardIndex > 0}
-								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length -
@@ -234,7 +220,6 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 							stretch={true}
 							padSides={true}
 							showDivider={cardIndex % columns !== 0}
-							containerPalette={containerPalette}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 								cardIndex,
 								cards.length,
@@ -283,12 +268,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 				/>
 			</LI>
 			<LI percentage="75%">
-				<UL
-					direction="row"
-					wrapCards={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
+				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card, cardIndex) => {
 						const columns = 3;
 						return (
@@ -298,7 +278,6 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								stretch={true}
 								padSides={true}
 								showDivider={cardIndex % columns !== 0}
-								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length -
@@ -348,7 +327,6 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 						percentage={`25%`}
 						padSides={true}
 						showDivider={cardIndex > 0}
-						containerPalette={containerPalette}
 					>
 						<Card25Media25
 							trail={card}
@@ -362,12 +340,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 			})}
 
 			<LI percentage="50%">
-				<UL
-					direction="row"
-					wrapCards={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
+				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card, cardIndex) => {
 						const columns = 2;
 						return (
@@ -377,7 +350,6 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								stretch={true}
 								padSides={true}
 								showDivider={cardIndex % columns !== 0}
-								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length -
@@ -427,7 +399,6 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 						percentage={`25%`}
 						padSides={true}
 						showDivider={cardIndex !== 0}
-						containerPalette={containerPalette}
 					>
 						<Card25Media25
 							trail={card}
@@ -441,12 +412,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 			})}
 
 			<LI percentage="25%">
-				<UL
-					direction="row"
-					wrapCards={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
+				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card) => {
 						return (
 							<LI

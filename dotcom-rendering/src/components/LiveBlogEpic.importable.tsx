@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
-import { getCookie, log, storage } from '@guardian/libs';
+import { getCookie, isUndefined, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source/foundations';
 import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
@@ -14,7 +14,7 @@ import {
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
@@ -99,11 +99,11 @@ const usePayload = ({
 	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
 	const countryCode = useCountryCode('liveblog-epic');
 	const mvtId = useMvtId();
-	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
+	const isSignedIn = useIsSignedIn();
 
+	if (isSignedIn === 'Pending') return;
+	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
+	if (hideSupportMessagingForUser === 'Pending') return;
 	if (articleCounts === 'Pending') return;
 	if (hasOptedOutOfArticleCount === 'Pending') return;
 	log('dotcom', 'LiveBlogEpic has consent state');
@@ -124,7 +124,7 @@ const usePayload = ({
 			isMinuteArticle: true,
 			isPaidContent,
 			tags,
-			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
+			showSupportMessaging: !hideSupportMessagingForUser,
 			isRecurringContributor: isRecurringContributor(isSignedIn),
 			lastOneOffContributionDate:
 				getLastOneOffContributionTimestamp() ?? undefined,
@@ -161,7 +161,7 @@ const Render = ({
 }) => {
 	const { Epic } = useEpic({ url, name });
 
-	if (Epic === undefined) return null;
+	if (isUndefined(Epic)) return null;
 	log('dotcom', 'LiveBlogEpic has the Epic');
 
 	return (

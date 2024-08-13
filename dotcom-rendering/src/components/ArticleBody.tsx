@@ -44,8 +44,6 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	availableTopics?: Topic[];
-	selectedTopics?: Topic[];
 	abTests: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
@@ -55,11 +53,13 @@ type Props = {
 const globalOlStyles = () => css`
 	ol:not([data-ignore='global-ol-styling']) {
 		counter-reset: li;
-		li:before {
+
+		> li:before {
 			${body.medium({ lineHeight: 'tight' })};
 			content: counter(li);
 			counter-increment: li;
 			margin-right: ${remSpace[1]};
+			float: left;
 		}
 	}
 `;
@@ -123,8 +123,6 @@ export const ArticleBody = ({
 	onFirstPage = false,
 	keyEvents = [],
 	filterKeyEvents = false,
-	availableTopics = [],
-	selectedTopics = [],
 	keywordIds,
 	abTests,
 	tableOfContents,
@@ -177,8 +175,6 @@ export const ArticleBody = ({
 					onFirstPage={onFirstPage}
 					keyEvents={keyEvents}
 					filterKeyEvents={filterKeyEvents}
-					availableTopics={availableTopics}
-					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
 					editionId={editionId}
 				/>

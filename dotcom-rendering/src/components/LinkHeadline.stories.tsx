@@ -1,4 +1,10 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
@@ -21,7 +27,7 @@ export const defaultStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with each pillar looks"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			kickerText="The kicker text"
 		/>
 	</Section>
@@ -33,7 +39,7 @@ export const xsmallStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a large headline link looks"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			size="large"
 		/>
 	</Section>
@@ -47,7 +53,7 @@ export const liveStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with a live kicker looks"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			kickerText="Live"
 		/>
 	</Section>
@@ -59,7 +65,7 @@ export const noLinebreak: StoryObj = ({ format }: StoryArgs) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with no kicker line break looks"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			kickerText="Live"
 			hideLineBreak={true}
 		/>
@@ -72,7 +78,7 @@ export const pulsingDot: StoryObj = ({ format }: StoryArgs) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with a pulsing dot looks"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
@@ -85,7 +91,7 @@ export const opinionxxxsmall: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how small links to opinion articles look"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			size="small"
 			byline="Comment byline"
@@ -107,7 +113,7 @@ export const InUnderlinedState: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is the underlined state when showUnderline is true"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showUnderline={true}
 			size="small"
 			kickerText="I am never underlined"
@@ -124,7 +130,7 @@ export const linkStory: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline looks as a link"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			kickerText="I am not a link"
 			link={{
 				to: 'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
@@ -147,7 +153,7 @@ export const LiveBlogSizes: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			kickerText="Large live"
 			showPulsingDot={true}
@@ -156,7 +162,7 @@ export const LiveBlogSizes: StoryObj = ({ format }: StoryProps) => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			kickerText="Medium live"
 			showPulsingDot={true}
@@ -165,7 +171,7 @@ export const LiveBlogSizes: StoryObj = ({ format }: StoryProps) => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			kickerText="Small live"
 			showPulsingDot={true}
@@ -174,7 +180,7 @@ export const LiveBlogSizes: StoryObj = ({ format }: StoryProps) => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			kickerText="Tiny live"
 			showPulsingDot={true}
@@ -197,7 +203,7 @@ export const DeadBlogSizes: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			kickerText="Large dead"
 			showPulsingDot={false}
@@ -206,7 +212,7 @@ export const DeadBlogSizes: StoryObj = ({ format }: StoryProps) => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			kickerText="Medium dead"
 			showPulsingDot={false}
@@ -215,7 +221,7 @@ export const DeadBlogSizes: StoryObj = ({ format }: StoryProps) => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			kickerText="Small dead"
 			showPulsingDot={false}
@@ -224,7 +230,7 @@ export const DeadBlogSizes: StoryObj = ({ format }: StoryProps) => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showQuotes={true}
 			kickerText="Tiny dead"
 			showPulsingDot={false}
@@ -247,7 +253,7 @@ export const Updated: StoryObj = ({ format }: StoryProps) => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText=""
-			format={format}
+			isLabs={format.theme === ArticleSpecial.Labs}
 			showPulsingDot={true}
 			hideLineBreak={true}
 			kickerText="Updated 7m ago"

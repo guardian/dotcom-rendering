@@ -1,3 +1,5 @@
+import type { FENavType } from '../../src/types/frontend';
+
 /** `xhs https://www.theguardian.com/world.json | jq .config.nav | pbcopy` */
 export const navWorld = {
 	currentUrl: '/world',

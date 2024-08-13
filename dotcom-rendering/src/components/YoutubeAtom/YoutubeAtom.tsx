@@ -1,6 +1,6 @@
 import type { Participations } from '@guardian/ab-core';
-import type { ConsentState } from '@guardian/libs';
-import { type ArticleFormat, isUndefined } from '@guardian/libs';
+import type { ArticleFormat, ConsentState } from '@guardian/libs';
+import { isUndefined } from '@guardian/libs';
 import { useCallback, useState } from 'react';
 import type {
 	ImagePositionType,
@@ -41,7 +41,7 @@ type Props = {
 	format: ArticleFormat;
 	shouldStick?: boolean;
 	isMainMedia?: boolean;
-	imaEnabled: boolean;
+	enableIma: boolean;
 	abTestParticipations: Participations;
 	videoCategory?: VideoCategory;
 	kicker?: string;
@@ -67,7 +67,7 @@ export const YoutubeAtom = ({
 	eventEmitters,
 	shouldStick,
 	isMainMedia,
-	imaEnabled,
+	enableIma,
 	abTestParticipations,
 	videoCategory,
 	kicker,
@@ -84,12 +84,20 @@ export const YoutubeAtom = ({
 	const [pauseVideo, setPauseVideo] = useState<boolean>(false);
 
 	const uniqueId = `${videoId}-${index ?? 'server'}`;
-	const enableIma =
-		imaEnabled &&
+
+	/**
+	 * Consent and ad targeting are set by subsequent re-renders
+	 */
+	const adTargetingEnabled =
 		!!adTargeting &&
 		!adTargeting.disableAds &&
 		!!consentState &&
 		consentState.canTarget;
+
+	/**
+	 * IMA integration is only enabled if the user has consented to ad targeting
+	 */
+	const imaEnabled = enableIma && adTargetingEnabled;
 
 	/**
 	 * Update the isActive state based on video events
@@ -117,6 +125,21 @@ export const YoutubeAtom = ({
 	 * Combine the videoState and tracking event emitters
 	 */
 	const compositeEventEmitters = [playerState, ...eventEmitters];
+
+	/**
+	 * The loading sequence of the YoutubeAtom is as follows:
+	 *
+	 * Overlay -> Placeholder -> Player
+	 *
+	 * In detail:
+	 *
+	 * 1. Initially show the overlay if it exists
+	 * 2. When the overlay is clicked
+	 *     2.1 Remove the overlay
+	 *     2.2 Show the placeholder until the player is ready
+	 * 3. When consent and ad targeting is available render the player to initiate loading of the YouTube player
+	 * 4. When the player is ready the placeholder is removed and the YouTube player is shown
+	 */
 
 	const hasOverlay = !!(overrideImage ?? posterImage);
 
@@ -176,31 +199,37 @@ export const YoutubeAtom = ({
 			shouldPauseOutOfView={shouldPauseOutOfView}
 		>
 			<MaintainAspectRatio height={height} width={width}>
-				{loadPlayer && consentState && adTargeting && (
-					<YoutubeAtomPlayer
-						videoId={videoId}
-						uniqueId={uniqueId}
-						adTargeting={adTargeting}
-						consentState={consentState}
-						height={height}
-						width={width}
-						title={title}
-						origin={origin}
-						eventEmitters={compositeEventEmitters}
-						/**
-						 * If there is an overlay we want to autoplay
-						 * If there is not an overlay the user will use the YouTube player UI to play
-						 */
-						autoPlay={hasOverlay}
-						onReady={playerReadyCallback}
-						enableIma={enableIma}
-						pauseVideo={pauseVideo}
-						deactivateVideo={() => {
-							setIsActive(false);
-						}}
-						abTestParticipations={abTestParticipations}
-					/>
-				)}
+				{
+					/**
+					 * Consent and ad targeting are set by subsequent re-renders
+					 * So we wait until they are set before rendering the player
+					 */
+					loadPlayer && consentState && adTargeting && (
+						<YoutubeAtomPlayer
+							videoId={videoId}
+							uniqueId={uniqueId}
+							adTargeting={adTargeting}
+							consentState={consentState}
+							height={height}
+							width={width}
+							title={title}
+							origin={origin}
+							eventEmitters={compositeEventEmitters}
+							/**
+							 * If there is an overlay we want to autoplay
+							 * If there isn't an overlay the user will use the YouTube player UI to play
+							 */
+							autoPlay={hasOverlay}
+							onReady={playerReadyCallback}
+							enableIma={imaEnabled}
+							pauseVideo={pauseVideo}
+							deactivateVideo={() => {
+								setIsActive(false);
+							}}
+							abTestParticipations={abTestParticipations}
+						/>
+					)
+				}
 				{showOverlay && (
 					<YoutubeAtomOverlay
 						uniqueId={uniqueId}

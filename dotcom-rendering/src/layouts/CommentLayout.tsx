@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isUndefined,
+} from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -14,8 +19,8 @@ import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.imp
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
@@ -307,10 +312,12 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	const { absoluteServerTimes = false } = article.config.switches;
-	const inTagLinkTest =
+
+	const shouldShowTagLink =
 		isWeb &&
-		article.config.abTests.tagLinkDesignVariant === 'variant' &&
-		article.tags.some((tag) => tag.id === 'football/euro-2024');
+		!!article.config.switches.tagLinkDesign &&
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	return (
 		<>
@@ -346,7 +353,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={false}
+							showSubNav={true}
 							isImmersive={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
@@ -467,7 +474,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 			<main
 				data-layout="CommentLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -502,7 +509,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 									starRating={
 										format.design ===
 											ArticleDesign.Review &&
-										article.starRating !== undefined
+										!isUndefined(article.starRating)
 											? article.starRating
 											: undefined
 									}
@@ -525,7 +532,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								inTagLinkTest={inTagLinkTest}
+								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">

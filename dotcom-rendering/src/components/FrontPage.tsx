@@ -9,6 +9,7 @@ import type { NavType } from '../model/extract-nav';
 import type { DCRFrontType } from '../types/front';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
+import { useConfig } from './ConfigContext';
 import { DarkModeMessage } from './DarkModeMessage';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -49,8 +50,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 		theme: Pillar.News,
 	};
 
-	const darkModeAvailable =
-		front.config.abTests.darkModeWebVariant === 'variant';
+	const { darkModeAvailable } = useConfig();
 
 	return (
 		<StrictMode>

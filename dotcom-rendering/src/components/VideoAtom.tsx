@@ -2,7 +2,7 @@ import { MaintainAspectRatio } from './MaintainAspectRatio';
 
 type AssetType = {
 	url: string;
-	mimeType: string;
+	mimeType?: string;
 };
 
 interface Props {
@@ -20,8 +20,12 @@ export const VideoAtom = ({
 }: Props) => {
 	if (assets.length === 0) return null; // Handle empty assets array
 	return (
-		<MaintainAspectRatio height={height} width={width}>
-			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+		<MaintainAspectRatio
+			height={height}
+			width={width}
+			data-spacefinder-role="inline"
+		>
+			{/* eslint-disable-next-line jsx-a11y/media-has-caption -- caption not available */}
 			<video
 				controls={true}
 				preload="metadata"

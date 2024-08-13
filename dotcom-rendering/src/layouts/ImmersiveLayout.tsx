@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isUndefined,
+} from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -16,8 +21,8 @@ import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.imp
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
@@ -312,10 +317,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	const renderAds = isWeb && canRenderAds(article);
 
 	const { absoluteServerTimes = false } = article.config.switches;
-	const inTagLinkTest =
+
+	const shouldShowTagLink =
 		isWeb &&
-		article.config.abTests.tagLinkDesignVariant === 'variant' &&
-		article.tags.some((tag) => tag.id === 'football/euro-2024');
+		!!article.config.switches.tagLinkDesign &&
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
@@ -412,7 +419,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 						elements={article.mainMediaElements}
 						starRating={
 							format.design === ArticleDesign.Review &&
-							article.starRating !== undefined
+							!isUndefined(article.starRating)
 								? article.starRating
 								: undefined
 						}
@@ -434,10 +441,10 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							css={css`
 								margin-top: -${HEADLINE_OFFSET}px;
 								/*
-                        This z-index is what ensures the headline title text shows above main media. For
-                        the actual headline we set the z-index deeper in ArticleHeadline itself so that
-                        the text appears above the pseudo Box element
-                    */
+									This z-index is what ensures the headline title text shows above main media. For
+									the actual headline we set the z-index deeper in ArticleHeadline itself so that
+									the text appears above the pseudo Box element
+								*/
 								position: relative;
 								${getZIndex('articleHeadline')};
 							`}
@@ -456,6 +463,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
+									shouldShowTagLink={false}
 								/>
 							</Section>
 							<Box>
@@ -484,7 +492,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="ImmersiveLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -545,7 +553,9 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											guardianBaseURL={
 												article.guardianBaseURL
 											}
-											inTagLinkTest={inTagLinkTest}
+											shouldShowTagLink={
+												shouldShowTagLink
+											}
 										/>
 									</div>
 								)}

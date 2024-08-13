@@ -16,7 +16,7 @@ import {
 import XIcon from '../static/icons/x.svg';
 
 const container = css`
-	position: sticky;
+	position: relative;
 	top: 0;
 	background-color: ${palette.brand[800]};
 	${getZIndex('editionSwitcherBanner')};

@@ -1,9 +1,8 @@
 import { css, jsx } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
-import { from, palette, space } from '@guardian/source/foundations';
+import { from, space } from '@guardian/source/foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
-import { transparentColour } from '../lib/transparentColour';
+import { palette } from '../palette';
 
 const sidePadding = css`
 	padding-left: 10px;
@@ -19,27 +18,18 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-const sideBorderStyles = (colour: string) => css`
+const sideBorderStyles = css`
 	${from.tablet} {
-		border-left: 1px solid ${colour};
-		border-right: 1px solid ${colour};
+		border-left: 1px solid;
+		border-right: 1px solid;
+		border-color: ${palette('--article-border')};
 	}
 `;
 
-const topBorderStyles = (colour: string) => css`
-	border-top: 1px solid ${colour};
+const topBorderStyles = css`
+	border-top: 1px solid;
+	border-color: ${palette('--article-border')};
 `;
-
-const setBackgroundColour = (colour: string) => css`
-	background-color: ${colour};
-`;
-
-//Previously, borderColour would be set to palette.neutral[86] if the parameter being passed was undefined. We still want this as a fallback, but not for ArticleDesign.Picture pages (and probably not for any future pages with a similar design).
-const decideFallbackBorderColour = (format: ArticleFormat | undefined) => {
-	return format?.design === ArticleDesign.Picture
-		? transparentColour(palette.neutral[60], 0.5)
-		: palette.neutral[86];
-};
 
 type Props = {
 	sectionId?: string;
@@ -67,7 +57,6 @@ type Props = {
 	containerName?: string;
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
-	format?: ArticleFormat;
 };
 
 /**
@@ -82,8 +71,7 @@ export const ElementContainer = ({
 	showTopBorder = true,
 	padSides = true,
 	padBottom = false,
-	format,
-	borderColour = decideFallbackBorderColour(format),
+	borderColour,
 	backgroundColour,
 	innerBackgroundColour,
 	shouldCenter = true,
@@ -101,8 +89,10 @@ export const ElementContainer = ({
 		'data-link-name': ophanComponentLink,
 		'data-component': ophanComponentName,
 		'data-container-name': containerName,
+		style: {
+			backgroundColor: backgroundColour,
+		},
 		css: [
-			backgroundColour && setBackgroundColour(backgroundColour),
 			hasPageSkin &&
 				!hasPageSkinContentSelfConstrain &&
 				pageSkinContainer,
@@ -115,12 +105,14 @@ export const ElementContainer = ({
 				 * this id pre-existed showMore so is probably also being used for something else.
 				 */
 				id={sectionId}
+				style={{
+					borderColor: borderColour,
+					backgroundColor: innerBackgroundColour,
+				}}
 				css={[
 					shouldCenter && center,
-					showSideBorders && sideBorderStyles(borderColour),
-					showTopBorder && topBorderStyles(borderColour),
-					innerBackgroundColour &&
-						setBackgroundColour(innerBackgroundColour),
+					showSideBorders && sideBorderStyles,
+					showTopBorder && topBorderStyles,
 					padSides && sidePadding,
 					padBottom && bottomPadding,
 					hasPageSkin && pageSkinContainer,

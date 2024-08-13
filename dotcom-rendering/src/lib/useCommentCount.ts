@@ -46,7 +46,7 @@ export const useCommentCount = (
 		setUrl(getCommentCountUrl);
 	}, [discussionApiUrl, shortUrl]);
 
-	const { data } = useApi<unknown>(url);
+	const { data } = useApi(url);
 
 	/**
 	 * As per the endpoint, but let’s parse it

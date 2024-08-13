@@ -7,7 +7,6 @@ import {
 	from,
 	space,
 	textSans15,
-	textSans17,
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
@@ -36,13 +35,12 @@ const pillarDivider = css`
 			bottom: 0;
 			width: 1px;
 			background-color: ${themePalette('--masthead-nav-lines')};
-			z-index: 1;
 		}
 	}
 `;
 
 const columnLinkTitle = css`
-	${textSans17};
+	${textSans15};
 
 	${expandedNavLinkStyles};
 
@@ -88,19 +86,18 @@ const firstColumnLinks = css`
 		padding-left: 0;
 	}
 	${until.tablet} {
-		background: ${themePalette('--sub-nav-section-header-background')};
+		background: ${themePalette('--masthead-nav-background')};
 	}
 `;
 
 const pillarColumnLinks = css`
 	${until.tablet} {
-		background: ${themePalette('--sub-nav-section-header-background')};
+		background: ${themePalette('--masthead-nav-background')};
 	}
 `;
 
 const hideWhenChecked = (columnInputId: string) => css`
 	${until.desktop} {
-		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${columnInputId}`}:checked ~ & {
 			display: none;
 		}
@@ -109,7 +106,6 @@ const hideWhenChecked = (columnInputId: string) => css`
 
 const hideWhenNotChecked = (columnInputId: string) => css`
 	${until.desktop} {
-		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${columnInputId}`}:not(:checked) ~ & {
 			display: none;
 		}
@@ -120,7 +116,7 @@ export const lineStyle = css`
 	${from.desktop} {
 		display: none;
 	}
-	background-color: ${themePalette('--sub-nav-horizontal-section-divider')};
+	background-color: ${themePalette('--masthead-nav-border')};
 	content: '';
 	display: block;
 	height: 1px;
@@ -142,14 +138,10 @@ const columnStyle = css`
 		float: left;
 		position: relative;
 		border-left: 1px solid ${themePalette('--masthead-nav-lines')};
-		:after {
-			height: 100%;
-			left: 0;
-			width: 1px;
-		}
 
 		:first-of-type {
 			border-left: none;
+			width: calc(${pillarWidthsPx.tablet}px - 2px);
 		}
 	}
 `;
@@ -157,9 +149,15 @@ const columnStyle = css`
 const columnStyleFromLeftCol = css`
 	${from.leftCol} {
 		width: ${pillarWidthsPx.leftCol}px;
+		:first-of-type {
+			width: calc(${pillarWidthsPx.leftCol}px - 2px);
+		}
 	}
 	${from.wide} {
 		width: ${pillarWidthsPx.wide}px;
+		:first-of-type {
+			width: calc(${pillarWidthsPx.wide}px - 2px);
+		}
 	}
 `;
 

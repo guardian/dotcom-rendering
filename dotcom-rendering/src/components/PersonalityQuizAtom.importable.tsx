@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, isUndefined } from '@guardian/libs';
 import {
 	article17,
 	palette,
@@ -53,12 +53,12 @@ export const findMostReferredToBucketId = ({
 			return selectedAnswer;
 		})
 		.filter(
-			(selectedAnswer): boolean => selectedAnswer !== undefined,
+			(selectedAnswer): boolean => !isUndefined(selectedAnswer),
 		) as AnswerType[];
 
 	for (const answerFromQuestion of answersFromQuestion) {
 		for (const answerBucket of answerFromQuestion.answerBuckets) {
-			if (answerBucket in bucketCounter) {
+			if (typeof bucketCounter[answerBucket] === 'number') {
 				bucketCounter[answerBucket] += 1;
 			} else {
 				bucketCounter[answerBucket] = 1;
@@ -75,7 +75,7 @@ export const findMostReferredToBucketId = ({
 		const thisBucket = bucketCounter[bucketId];
 		const currentHighestBucket = bucketCounter[bucketIdWithHighestCount];
 
-		if (thisBucket !== undefined && currentHighestBucket !== undefined) {
+		if (!isUndefined(thisBucket) && !isUndefined(currentHighestBucket)) {
 			bucketIdWithHighestCount =
 				thisBucket > currentHighestBucket
 					? bucketId

@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	isUndefined,
+} from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -17,8 +22,8 @@ import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.imp
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
@@ -411,10 +416,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
-	const inTagLinkTest =
+	const shouldShowTagLink =
 		isWeb &&
-		article.config.abTests.tagLinkDesignVariant === 'variant' &&
-		article.tags.some((tag) => tag.id === 'football/euro-2024');
+		!!article.config.switches.tagLinkDesign &&
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	return (
 		<>
@@ -449,7 +455,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={!isPaidContent}
+							showSubNav={!isLabs}
 							hasPageSkinContentSelfConstrain={true}
 						/>
 					) : (
@@ -562,7 +568,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												display: block;
 											`}
 											color={themePalette(
-												'--article-border',
+												'--straight-lines',
 											)}
 										/>
 									</Section>
@@ -594,7 +600,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="StandardLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
 			>
 				{isApps && (
 					<>
@@ -614,7 +620,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					showTopBorder={false}
 					backgroundColour={themePalette('--article-background')}
 					borderColour={themePalette('--article-border')}
-					fontColour={themePalette('--article-section-title')}
 					innerBackgroundColour={themePalette(
 						'--article-inner-background',
 					)}
@@ -685,7 +690,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 								isMatch={!!footballMatchUrl}
-								inTagLinkTest={inTagLinkTest}
+								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -709,7 +714,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{article.starRating !== undefined ? (
+							{!isUndefined(article.starRating) ? (
 								<div css={starWrapper}>
 									<StarRating
 										rating={article.starRating}
@@ -1016,7 +1021,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							'--article-section-background',
 						)}
 						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
 					>
 						<Island priority="feature" defer={{ until: 'visible' }}>
 							<Carousel
@@ -1099,7 +1103,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							'--article-section-background',
 						)}
 						borderColour={themePalette('--article-border')}
-						fontColour={themePalette('--article-section-title')}
 					>
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island

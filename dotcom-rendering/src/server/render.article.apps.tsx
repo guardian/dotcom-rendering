@@ -1,4 +1,4 @@
-import { ArticleDesign, isString } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
@@ -26,8 +26,6 @@ export const renderArticle = (
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable: true,
-		updateLogoAdPartnerSwitch:
-			!!article.config.switches.updateLogoAdPartner,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: article.editionId,
 	};
@@ -122,6 +120,9 @@ window.twttr = (function(d, s, id) {
 				? initTwitter
 				: undefined,
 		config,
+		onlyLightColourScheme:
+			format.design === ArticleDesign.FullPageInteractive ||
+			format.design === ArticleDesign.Interactive,
 	});
 
 	return {

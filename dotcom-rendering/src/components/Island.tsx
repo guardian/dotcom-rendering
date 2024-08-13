@@ -36,6 +36,7 @@ type PriorityProps = {
 
 type IslandProps = {
 	children: JSX.Element;
+	role?: string;
 } & PriorityProps[keyof PriorityProps];
 
 /**
@@ -47,7 +48,7 @@ type IslandProps = {
  * @param {IslandProps} props - JSX Props
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  */
-export const Island = ({ priority, defer, children }: IslandProps) => {
+export const Island = ({ priority, defer, children, role }: IslandProps) => {
 	const rootMargin =
 		defer?.until === 'visible' ? defer.rootMargin : undefined;
 
@@ -61,6 +62,7 @@ export const Island = ({ priority, defer, children }: IslandProps) => {
 			deferUntil={defer?.until}
 			props={JSON.stringify(children.props)}
 			rootMargin={rootMargin}
+			data-spacefinder-role={role}
 		>
 			{children}
 		</gu-island>

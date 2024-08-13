@@ -30,7 +30,6 @@ export const FixedSmallSlowVHalf = ({
 						key={trail.url}
 						padSides={true}
 						showDivider={true}
-						containerPalette={containerPalette}
 						percentage="50%"
 					>
 						<Card50Media50
@@ -43,7 +42,7 @@ export const FixedSmallSlowVHalf = ({
 					</LI>
 				);
 			})}
-			<LI containerPalette={containerPalette} percentage="50%">
+			<LI percentage="50%">
 				<UL direction="column">
 					{remaining.map((trail) => {
 						return (

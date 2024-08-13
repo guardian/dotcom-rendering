@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import {
 	ContentABTestProvider,
@@ -58,7 +59,7 @@ test('returns undefined group when switched off', () => {
 	const Component = () => {
 		const { group } = useContentABTestGroup();
 
-		if (group === undefined) {
+		if (isUndefined(group)) {
 			return null;
 		}
 
@@ -81,7 +82,7 @@ test('returns a valid group ID when used inside of a provider', () => {
 	const Component = () => {
 		const { group } = useContentABTestGroup();
 
-		if (group === undefined) {
+		if (isUndefined(group)) {
 			return null;
 		}
 

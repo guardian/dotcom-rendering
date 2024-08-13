@@ -6,9 +6,9 @@ import {
 	brandLine,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
-import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot.web';
 import { Carousel } from '../components/Carousel.importable';
+import { ContainerOverrides } from '../components/ContainerOverrides';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import {
@@ -38,7 +38,6 @@ import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { badgeFromBranding, isPaidContentSameBranding } from '../lib/branding';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { editionList } from '../lib/edition';
 import {
 	getFrontsBannerAdPositions,
@@ -70,6 +69,9 @@ const isNavList = (collection: DCRCollectionType) => {
 	);
 };
 
+const isHighlights = ({ collectionType }: DCRCollectionType) =>
+	collectionType === 'fixed/highlights';
+
 const isToggleable = (
 	index: number,
 	collection: DCRCollectionType,
@@ -79,7 +81,7 @@ const isToggleable = (
 		return (
 			collection.displayName.toLowerCase() !== 'headlines' &&
 			!isNavList(collection) &&
-			collection.collectionType !== 'fixed/highlights'
+			!isHighlights(collection)
 		);
 	}
 
@@ -133,13 +135,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const hasPageSkin = renderAds && hasPageSkinConfig;
 
+	const filteredCollections = front.pressedPage.collections.filter(
+		(collection) => !isHighlights(collection),
+	);
+
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(front.pressedPage.collections)
+		? getMobileAdPositions(filteredCollections)
 		: [];
 
 	const desktopAdPositions = renderAds
 		? getFrontsBannerAdPositions(
-				front.pressedPage.collections.map(
+				filteredCollections.map(
 					({
 						collectionType,
 						containerPalette,
@@ -166,31 +172,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant';
 
-	const { updateLogoAdPartner, absoluteServerTimes = false } =
-		front.config.switches;
+	const inHighlightsContainerABTest =
+		abTests.mastheadWithHighlightsVariant === 'variant';
+
+	const { absoluteServerTimes = false } = front.config.switches;
 
 	const Highlights = () => {
-		const showHighlights = front.isNetworkFront && inUpdatedHeaderABTest;
-		/** TODO - replace above test with the masthead AB test variant */
-		// && abTests.mastheadWithHighlightsVariant === 'variant';
+		const showHighlights =
+			front.isNetworkFront &&
+			inUpdatedHeaderABTest &&
+			inHighlightsContainerABTest;
 
-		const highlightsCollection = front.pressedPage.collections.find(
-			({ collectionType }) => collectionType === 'fixed/highlights',
+		const highlightsCollection =
+			front.pressedPage.collections.find(isHighlights);
+
+		return (
+			showHighlights &&
+			!!highlightsCollection && (
+				<DecideContainer
+					containerType="fixed/highlights"
+					trails={[
+						...highlightsCollection.curated,
+						...highlightsCollection.backfill,
+					]}
+					groupedTrails={highlightsCollection.grouped}
+					showAge={false}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading="eager"
+				/>
+			)
 		);
-
-		return showHighlights && !!highlightsCollection ? (
-			<DecideContainer
-				containerType="fixed/highlights"
-				trails={[
-					...highlightsCollection.curated,
-					...highlightsCollection.backfill,
-				]}
-				groupedTrails={highlightsCollection.grouped}
-				showAge={false}
-				absoluteServerTimes={absoluteServerTimes}
-				imageLoading="eager"
-			/>
-		) : undefined;
 	};
 
 	return (
@@ -349,7 +360,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					</Island>
 				)}
-				{front.pressedPage.collections.map((collection, index) => {
+				{filteredCollections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
@@ -385,7 +396,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<Fragment key={ophanName}>
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
 								<div css={[hasPageSkin && pageSkinContainer]}>
 									{decideFrontsBannerAdSlot(
 										renderAds,
@@ -423,14 +437,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									{decideMerchHighAndMobileAdSlots(
 										renderAds,
 										index,
-										front.pressedPage.collections.length,
+										filteredCollections.length,
 										front.pressedPage.frontProperties
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
 									)}
 								</div>
-							</Fragment>
+							</ContainerOverrides>
 						);
 					}
 
@@ -444,7 +458,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 
 						return (
-							<>
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -482,9 +499,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									discussionApiUrl={
 										front.config.discussionApiUrl
 									}
-									updateLogoAdPartnerSwitch={
-										updateLogoAdPartner
-									}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -501,19 +515,22 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideMerchHighAndMobileAdSlots(
 									renderAds,
 									index,
-									front.pressedPage.collections.length,
+									filteredCollections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</>
+							</ContainerOverrides>
 						);
 					}
 
 					if (collection.containerPalette === 'Branded') {
 						return (
-							<Fragment key={ophanName}>
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={collection.containerPalette}
+							>
 								<LabsSection
 									title={collection.displayName}
 									collectionId={collection.id}
@@ -553,13 +570,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								{decideMerchHighAndMobileAdSlots(
 									renderAds,
 									index,
-									front.pressedPage.collections.length,
+									filteredCollections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</Fragment>
+							</ContainerOverrides>
 						);
 					}
 
@@ -569,10 +586,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					) {
 						const containerPalette =
 							collection.containerPalette ?? 'MediaPalette';
-						const containerOverrides =
-							decideContainerOverrides(containerPalette);
+
 						return (
-							<Fragment key={ophanName}>
+							<ContainerOverrides
+								key={ophanName}
+								containerPalette={containerPalette}
+							>
 								{decideFrontsBannerAdSlot(
 									renderAds,
 									hasPageSkin,
@@ -594,17 +613,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showTopBorder={index > 0}
 									padContent={false}
 									url={collection.href}
-									containerPalette={containerPalette}
 									showDateHeader={
 										collection.config.showDateHeader
 									}
 									editionId={front.editionId}
-									backgroundColour={
-										containerOverrides.background
-											.containerOuter
-									}
+									backgroundColour={schemePalette(
+										'--section-background',
+									)}
 									innerBackgroundColour={
-										containerOverrides.background.container
+										containerPalette === 'MediaPalette'
+											? sourcePalette.neutral[0]
+											: undefined
 									}
 									hasPageSkin={hasPageSkin}
 								>
@@ -638,18 +657,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									decideMerchHighAndMobileAdSlots(
 										renderAds,
 										index,
-										front.pressedPage.collections.length,
+										filteredCollections.length,
 										front.pressedPage.frontProperties
 											.isPaidContent,
 										mobileAdPositions,
 										hasPageSkin,
 									)}
-							</Fragment>
+							</ContainerOverrides>
 						);
 					}
 
 					return (
-						<Fragment key={ophanName}>
+						<ContainerOverrides
+							key={ophanName}
+							containerPalette={collection.containerPalette}
+						>
 							{decideFrontsBannerAdSlot(
 								renderAds,
 								hasPageSkin,
@@ -696,7 +718,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								collectionBranding={
 									collection.collectionBranding
 								}
-								updateLogoAdPartnerSwitch={updateLogoAdPartner}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -717,12 +738,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{decideMerchHighAndMobileAdSlots(
 								renderAds,
 								index,
-								front.pressedPage.collections.length,
+								filteredCollections.length,
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 								hasPageSkin,
 							)}
-						</Fragment>
+						</ContainerOverrides>
 					);
 				})}
 			</main>

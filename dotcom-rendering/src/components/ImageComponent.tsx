@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	isUndefined,
+} from '@guardian/libs';
 import {
 	from,
 	headlineLight17,
@@ -397,7 +402,7 @@ export const ImageComponent = ({
 		return (
 			<div
 				id={
-					element.position !== undefined
+					!isUndefined(element.position)
 						? `img-${element.position}`
 						: ''
 				}
@@ -465,7 +470,7 @@ export const ImageComponent = ({
 		<>
 			<div
 				id={
-					element.position !== undefined
+					!isUndefined(element.position)
 						? `img-${element.position}`
 						: ''
 				}

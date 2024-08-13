@@ -14,18 +14,16 @@ import type { Tracking } from '@guardian/support-dotcom-components/dist/shared/s
 import { useEffect, useMemo, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { shouldHideSupportMessaging } from '../lib/contributions';
-import { useAB } from '../lib/useAB';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
-import { useIsInView } from '../lib/useIsInView';
 import { usePageViewId } from '../lib/usePageViewId';
+import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import type { ReactComponent } from './marketing/lib/ReactComponent';
 import {
 	addRegionIdAndTrackingParamsToSupportUrl,
 	createClickEventFromTracking,
 	createInsertEventFromTracking,
-	createViewEventFromTracking,
 } from './marketing/lib/tracking';
 
 const baseUrl = 'https://support.theguardian.com/contribute';
@@ -163,13 +161,14 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 interface StickyLiveblogAskWrapperProps {
 	referrerUrl: string;
 	shouldHideReaderRevenueOnArticle: boolean;
+	tags: TagType[];
 }
 
 const whatAmI = 'sticky-liveblog-ask';
 
 export const StickyLiveblogAskWrapper: ReactComponent<
 	StickyLiveblogAskWrapperProps
-> = ({ referrerUrl, shouldHideReaderRevenueOnArticle }) => {
+> = ({ referrerUrl, shouldHideReaderRevenueOnArticle, tags }) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode(whatAmI);
 	const pageViewId = usePageViewId(renderingTarget);
@@ -177,29 +176,15 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 	// should we show ourselves?
 	const [showSupportMessagingForUser, setShowSupportMessaging] =
 		useState<boolean>(false);
-	const authStatus = useAuthStatus();
+	const isSignedIn = useIsSignedIn();
+
 	useEffect(() => {
-		const isSignedIn =
-			authStatus.kind === 'SignedInWithOkta' ||
-			authStatus.kind === 'SignedInWithCookies';
-		setShowSupportMessaging(!shouldHideSupportMessaging(isSignedIn));
-	}, [authStatus]);
-
-	const ABTestAPI = useAB()?.api;
-
-	const getVariant = (): 'control' | 'variant' | 'not-in-test' => {
-		if (ABTestAPI?.isUserInVariant('StickyLiveBlogAskTest', 'variant')) {
-			return 'variant';
-		} else if (
-			ABTestAPI?.isUserInVariant('StickyLiveBlogAskTest', 'control')
-		) {
-			return 'control';
+		if (isSignedIn !== 'Pending') {
+			setShowSupportMessaging(
+				shouldHideSupportMessaging(isSignedIn) === false,
+			);
 		}
-		return 'not-in-test';
-	};
-
-	const variantName = getVariant();
-	const userIsInTest = variantName !== 'not-in-test';
+	}, [isSignedIn]);
 
 	// tracking
 	const tracking: Tracking = useMemo(() => {
@@ -209,12 +194,12 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			clientName: 'dcr',
 			referrerUrl,
 			// message tests
-			abTestName: whatAmI,
-			abTestVariant: variantName,
+			abTestName: '', // stop tracking AB test.
+			abTestVariant: '', // stop tracking AB test.
 			campaignCode: whatAmI,
 			componentType: 'ACQUISITIONS_OTHER',
 		};
-	}, [pageViewId, referrerUrl, variantName]);
+	}, [pageViewId, referrerUrl]);
 
 	const urlWithRegionAndTracking = addRegionIdAndTrackingParamsToSupportUrl(
 		baseUrl,
@@ -223,43 +208,29 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		countryCode,
 	);
 
-	// ophan tracking
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
+	/* This is based on the assumption that the tag is added at the point of blog creation
+	 *  and not added later.  It's a balancing act between adding a useEffect that will run
+	 *  each time a tag is added to check (less performant) and doing it on load. */
+	const shouldHideBasedOnTags = tags.some((a) => {
+		return a.id === 'sport/olympic-games-2024';
 	});
+
+	const canShow =
+		showSupportMessagingForUser &&
+		!shouldHideReaderRevenueOnArticle &&
+		!shouldHideBasedOnTags;
 
 	// send event regardless of variant or control
 	// but only where they *could* see the component.
 	useEffect(() => {
-		if (
-			userIsInTest &&
-			showSupportMessagingForUser &&
-			!shouldHideReaderRevenueOnArticle
-		) {
+		if (canShow) {
 			// For ophan
 			void submitComponentEvent(
 				createInsertEventFromTracking(tracking, tracking.campaignCode),
 				renderingTarget,
 			);
 		}
-	}, [
-		tracking,
-		renderingTarget,
-		showSupportMessagingForUser,
-		shouldHideReaderRevenueOnArticle,
-		userIsInTest,
-	]);
-
-	// capture where it has been displayed (is variant).
-	useEffect(() => {
-		if (userIsInTest && hasBeenSeen) {
-			// For ophan
-			void submitComponentEvent(
-				createViewEventFromTracking(tracking, tracking.campaignCode),
-				renderingTarget,
-			);
-		}
-	}, [hasBeenSeen, tracking, renderingTarget, userIsInTest]);
+	}, [tracking, renderingTarget, canShow]);
 
 	const onCtaClick = () => {
 		void submitComponentEvent(
@@ -267,15 +238,11 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 			renderingTarget,
 		);
 	};
-	const canShow =
-		variantName === 'variant' &&
-		showSupportMessagingForUser &&
-		!shouldHideReaderRevenueOnArticle;
 
 	return (
 		<>
 			{canShow && (
-				<div css={stickyLeft} ref={setNode}>
+				<div css={stickyLeft}>
 					<StickyLiveblogAsk
 						url={urlWithRegionAndTracking}
 						onCtaClick={onCtaClick}

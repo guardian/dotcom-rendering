@@ -12,6 +12,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { shouldHideSupportMessaging } from '../lib/contributions';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
@@ -98,8 +99,16 @@ const ReaderRevenueLinksNative = ({
 	dataLinkNamePrefix,
 	urls,
 }: ReaderRevenueLinksNativeProps) => {
-	const hideSupportMessaging = shouldHideSupportMessaging();
+	const isSignedIn = useIsSignedIn();
+
+	if (isSignedIn === 'Pending') return null;
+
+	const hideSupportMessaging = shouldHideSupportMessaging(isSignedIn);
 	const url = urls.support;
+
+	if (hideSupportMessaging === 'Pending') {
+		return null;
+	}
 
 	if (hideSupportMessaging) {
 		return (

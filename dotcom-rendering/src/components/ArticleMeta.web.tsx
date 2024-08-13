@@ -1,13 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import {
-	between,
-	from,
-	palette,
-	space,
-	until,
-} from '@guardian/source/foundations';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
@@ -339,7 +333,7 @@ export const ArticleMeta = ({
 						<StraightLines
 							cssOverrides={stretchLines}
 							count={1}
-							color={palette.neutral[60]}
+							color={themePalette('--straight-lines')}
 						/>
 						<div
 							css={css`

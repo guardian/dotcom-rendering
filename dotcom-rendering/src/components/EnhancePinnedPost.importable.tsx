@@ -1,4 +1,4 @@
-import { startPerformanceMeasure } from '@guardian/libs';
+import { isUndefined, startPerformanceMeasure } from '@guardian/libs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
@@ -184,7 +184,7 @@ export const EnhancePinnedPost = () => {
 			);
 		} else if (hasBeenSeen) {
 			const timeTaken = pinnedPostTiming.current?.endPerformanceMeasure();
-			if (timeTaken !== undefined) {
+			if (!isUndefined(timeTaken)) {
 				const timeTakenInSeconds = timeTaken / 1000;
 				void submitComponentEvent(
 					{

@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { background, from, space, until } from '@guardian/source/foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { from, space, until } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
-import type { DCRContainerPalette, TreatType } from '../types/front';
-import type { ContainerOverrides } from '../types/palette';
+import { palette } from '../palette';
+import type { TreatType } from '../types/front';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
@@ -79,8 +78,6 @@ type Props = {
 	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/client/debug/README.md
 	 */
 	containerName?: string;
-	/** Fronts containers can have their styling overridden using a `containerPalette` */
-	containerPalette?: DCRContainerPalette;
 	/** Defaults to `false`. If true a Hide button is show top right allowing this section
 	 * to be collapsed
 	 */
@@ -197,64 +194,20 @@ const Content = ({
 	</div>
 );
 
-const ContainerTitleWithHide = ({
-	title,
-	fontColour,
-	description,
-	url,
-	containerPalette,
-	showDateHeader,
-	editionId,
-	overrides,
-	hasPageSkin,
+const MaybeHideAboveLeftCol = ({
+	hasPageSkin = false,
+	children,
 }: {
-	title?: string;
-	fontColour?: string;
-	description?: string;
-	url?: string;
-	containerPalette?: DCRContainerPalette;
-	showDateHeader?: boolean;
-	editionId?: EditionId;
-	overrides?: ContainerOverrides | undefined;
+	children: React.ReactNode;
 	hasPageSkin?: boolean;
-}) => {
-	const containerTitle = (
-		<ContainerTitle
-			title={title}
-			fontColour={fontColour ?? overrides?.text.container}
-			description={description}
-			url={url}
-			containerPalette={containerPalette}
-			showDateHeader={showDateHeader}
-			editionId={editionId}
-		/>
-	);
-	if (hasPageSkin) {
-		return containerTitle;
-	}
-	return (
+}) =>
+	hasPageSkin ? (
+		children
+	) : (
 		<Hide when="above" breakpoint="leftCol">
-			{containerTitle}
+			{children}
 		</Hide>
 	);
-};
-
-const decideBackgroundColour = (
-	backgroundColour: string | undefined,
-	overrideBackgroundColour: string | undefined,
-	hasPageSkin: boolean,
-) => {
-	if (backgroundColour) {
-		return backgroundColour;
-	}
-	if (overrideBackgroundColour) {
-		return overrideBackgroundColour;
-	}
-	if (hasPageSkin) {
-		return background.primary;
-	}
-	return undefined;
-};
 
 /**
  *
@@ -290,7 +243,6 @@ export const Section = ({
 	format,
 	ophanComponentLink,
 	ophanComponentName,
-	containerPalette,
 	toggleable = false,
 	innerBackgroundColour,
 	showDateHeader = false,
@@ -304,9 +256,6 @@ export const Section = ({
 	hasPageSkinContentSelfConstrain = false,
 	className,
 }: Props) => {
-	const overrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
 	if (fullWidth) {
 		return (
 			<ElementContainer
@@ -315,13 +264,10 @@ export const Section = ({
 				showTopBorder={showTopBorder}
 				padSides={padSides}
 				padBottom={padBottom}
-				format={format}
-				borderColour={borderColour ?? overrides?.border.container}
-				backgroundColour={decideBackgroundColour(
-					backgroundColour,
-					overrides?.background.container,
-					hasPageSkin,
-				)}
+				borderColour={borderColour ?? palette('--article-border')}
+				backgroundColour={
+					backgroundColour ?? palette('--section-background')
+				}
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
 				containerName={containerName}
@@ -345,13 +291,10 @@ export const Section = ({
 			showSideBorders={showSideBorders}
 			showTopBorder={showTopBorder}
 			padSides={padSides}
-			format={format}
-			borderColour={borderColour ?? overrides?.border.container}
-			backgroundColour={decideBackgroundColour(
-				backgroundColour,
-				overrides?.background.container,
-				hasPageSkin,
-			)}
+			borderColour={borderColour ?? palette('--article-border')}
+			backgroundColour={
+				backgroundColour ?? palette('--section-background')
+			}
 			element="section"
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
@@ -363,7 +306,7 @@ export const Section = ({
 			<Flex>
 				<LeftColumn
 					borderType={centralBorder}
-					borderColour={borderColour ?? overrides?.border.container}
+					borderColour={borderColour ?? palette('--article-border')}
 					size={leftColSize}
 					verticalMargins={verticalMargins}
 					hasPageSkin={hasPageSkin}
@@ -379,12 +322,9 @@ export const Section = ({
 						<div>
 							<ContainerTitle
 								title={title}
-								fontColour={
-									fontColour ?? overrides?.text.container
-								}
+								fontColour={fontColour}
 								description={description}
 								url={url}
-								containerPalette={containerPalette}
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
@@ -394,7 +334,7 @@ export const Section = ({
 							<Treats
 								treats={treats}
 								borderColour={
-									borderColour ?? overrides?.border.container
+									borderColour ?? palette('--article-border')
 								}
 							/>
 						)}
@@ -413,23 +353,18 @@ export const Section = ({
 								: headlineContainerStyles
 						}
 					>
-						<ContainerTitleWithHide
-							title={title}
-							fontColour={fontColour ?? overrides?.text.container}
-							description={description}
-							url={url}
-							containerPalette={containerPalette}
-							showDateHeader={showDateHeader}
-							editionId={editionId}
-							hasPageSkin={hasPageSkin}
-						/>
-						{toggleable && !!sectionId && (
-							<ShowHideButton
-								sectionId={sectionId}
-								overrideContainerToggleColour={
-									overrides?.text.containerToggle
-								}
+						<MaybeHideAboveLeftCol hasPageSkin={hasPageSkin}>
+							<ContainerTitle
+								title={title}
+								description={description}
+								url={url}
+								fontColour={fontColour}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
 							/>
+						</MaybeHideAboveLeftCol>
+						{toggleable && !!sectionId && (
+							<ShowHideButton sectionId={sectionId} />
 						)}
 					</div>
 					{toggleable && sectionId ? (

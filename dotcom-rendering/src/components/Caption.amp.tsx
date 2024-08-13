@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleTheme } from '@guardian/libs';
 import { palette, textSans12 } from '@guardian/source/foundations';
 import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../lib/pillars';

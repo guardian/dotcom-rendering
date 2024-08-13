@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
+import { type ArticleFormat, isUndefined } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import { RenderArticleElement } from '../lib/renderElement';
 import type { ServerSideTests, Switches } from '../types/config';
@@ -64,8 +64,6 @@ export const LiveBlock = ({
 			contributors={block.contributors}
 			isPinnedPost={isPinnedPost}
 			isOriginalPinnedPost={isOriginalPinnedPost}
-			host={host}
-			pageId={pageId}
 			absoluteServerTimes={!!switches.absoluteServerTimes}
 		>
 			{block.elements.map((element, index) => (

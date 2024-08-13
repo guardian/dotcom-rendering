@@ -33,10 +33,9 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import type { AuthStatus } from '../lib/identity';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -165,31 +164,21 @@ type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
+	isSignedIn: boolean;
+	hideSupportMessagingForUser: boolean;
 };
-
-function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
-	switch (authStatus.kind) {
-		case 'Pending':
-			return undefined;
-		case 'SignedInWithCookies':
-		case 'SignedInWithOkta':
-			return true;
-		case 'SignedOutWithCookies':
-		case 'SignedOutWithOkta':
-			return false;
-	}
-}
 
 const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
+	isSignedIn,
+	hideSupportMessagingForUser,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType | null>(null);
-	const isSignedIn = getIsSignedIn(useAuthStatus());
 
 	const { renderingTarget } = useConfig();
 
@@ -204,7 +193,7 @@ const ReaderRevenueLinksRemote = ({
 				clientName: 'dcr',
 			},
 			targeting: {
-				showSupportMessaging: !shouldHideSupportMessaging(),
+				showSupportMessaging: !hideSupportMessagingForUser,
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
@@ -212,7 +201,7 @@ const ReaderRevenueLinksRemote = ({
 				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
 				purchaseInfo: getPurchaseInfo(),
-				isSignedIn: isSignedIn === true,
+				isSignedIn,
 			},
 		};
 		getHeader(contributionsServiceUrl, requestData)
@@ -263,7 +252,6 @@ const ReaderRevenueLinksRemote = ({
 			</div>
 		);
 	}
-
 	return null;
 };
 
@@ -278,6 +266,7 @@ type ReaderRevenueLinksNativeProps = {
 	};
 	pageViewId: string;
 	hasPageSkin: boolean;
+	hideSupportMessagingForUser: boolean;
 };
 
 const ReaderRevenueLinksNative = ({
@@ -287,9 +276,8 @@ const ReaderRevenueLinksNative = ({
 	urls,
 	pageViewId,
 	hasPageSkin,
+	hideSupportMessagingForUser,
 }: ReaderRevenueLinksNativeProps) => {
-	const hideSupportMessaging = shouldHideSupportMessaging();
-
 	// Only the header component is in the AB test
 	const testName = inHeader ? 'RRHeaderLinks' : 'RRFooterLinks';
 	const campaignCode = `${testName}_control`;
@@ -310,7 +298,7 @@ const ReaderRevenueLinksNative = ({
 	});
 
 	useEffect(() => {
-		if (!hideSupportMessaging && inHeader) {
+		if (!hideSupportMessagingForUser && inHeader) {
 			void sendOphanComponentEvent('INSERT', tracking, renderingTarget);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -341,7 +329,7 @@ const ReaderRevenueLinksNative = ({
 		return urls[rrType];
 	};
 
-	if (hideSupportMessaging) {
+	if (hideSupportMessagingForUser) {
 		return (
 			<div css={inHeader && headerStyles}>
 				<div css={inHeader && hiddenUntilTablet}>
@@ -440,14 +428,30 @@ export const SupportTheG = ({
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode('support-the-Guardian');
 	const pageViewId = usePageViewId(renderingTarget);
+	const isSignedIn = useIsSignedIn();
 
-	if (isUndefined(countryCode) || isUndefined(pageViewId)) return null;
+	if (
+		isUndefined(countryCode) ||
+		isUndefined(pageViewId) ||
+		isSignedIn === 'Pending'
+	) {
+		return null;
+	}
+
+	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
+
+	if (hideSupportMessagingForUser === 'Pending') {
+		// We don't yet know the user's supporter status
+		return null;
+	}
 
 	return inHeader && remoteHeader ? (
 		<ReaderRevenueLinksRemote
 			countryCode={countryCode}
 			pageViewId={pageViewId}
 			contributionsServiceUrl={contributionsServiceUrl}
+			isSignedIn={isSignedIn}
+			hideSupportMessagingForUser={hideSupportMessagingForUser}
 		/>
 	) : (
 		<ReaderRevenueLinksNative
@@ -457,6 +461,7 @@ export const SupportTheG = ({
 			urls={urls}
 			pageViewId={pageViewId}
 			hasPageSkin={hasPageSkin}
+			hideSupportMessagingForUser={hideSupportMessagingForUser}
 		/>
 	);
 };

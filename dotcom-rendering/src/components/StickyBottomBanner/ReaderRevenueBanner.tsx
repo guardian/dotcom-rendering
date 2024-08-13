@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ConsentState, CountryCode } from '@guardian/libs';
-import { getCookie, onConsent } from '@guardian/libs';
+import { getCookie, isUndefined, onConsent } from '@guardian/libs';
 import {
 	abandonedBasketSchema,
 	getBanner,
@@ -54,6 +54,7 @@ type BuildPayloadProps = BaseProps & {
 	optedOutOfArticleCount: boolean;
 	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 	userConsent: boolean;
+	hideSupportMessagingForUser: boolean;
 };
 
 type CanShowProps = BaseProps & {
@@ -127,6 +128,7 @@ const buildPayload = async ({
 	tags,
 	contentType,
 	userConsent,
+	hideSupportMessagingForUser,
 }: BuildPayloadProps): Promise<BannerPayload> => {
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
@@ -144,7 +146,7 @@ const buildPayload = async ({
 		targeting: {
 			shouldHideReaderRevenue,
 			isPaidContent,
-			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
+			showSupportMessaging: !hideSupportMessagingForUser,
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			signInBannerLastClosedAt,
@@ -213,6 +215,12 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		return { show: false };
 	}
 
+	const hideSupportMessagingForUser = shouldHideSupportMessaging(isSignedIn);
+	if (hideSupportMessagingForUser === 'Pending') {
+		// We don't yet know the user's supporter status
+		return { show: false };
+	}
+
 	const purchaseInfo = getPurchaseInfo();
 	const showSignInPrompt =
 		purchaseInfo && !isSignedIn && !signInBannerLastClosedAt;
@@ -259,6 +267,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		optedOutOfArticleCount,
 		asyncArticleCounts,
 		userConsent,
+		hideSupportMessagingForUser,
 	});
 
 	const response: ModuleDataResponse = await getBanner(
@@ -313,7 +322,7 @@ const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 			});
 	}, [module]);
 
-	if (Banner !== undefined) {
+	if (!isUndefined(Banner)) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div

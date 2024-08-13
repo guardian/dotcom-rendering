@@ -51,6 +51,8 @@ type SignedInProps = MyAccountProps & {
 
 const myAccountLinkStyles = css`
 	display: flex;
+	/** Required to absolutely position the dropdown menu */
+	position: relative;
 	align-items: center;
 	${textSansBold17};
 
@@ -58,7 +60,7 @@ const myAccountLinkStyles = css`
 	transition: color 80ms ease-out;
 	text-decoration: none;
 
-	padding: ${space[1]}px;
+	padding: ${space[1]}px 0 ${space[1]}px ${space[1]}px;
 
 	:hover,
 	:focus {
@@ -73,7 +75,7 @@ const myAccountLinkStyles = css`
 		margin: 0 ${space[1]}px 0 0;
 	}
 
-	${getZIndex('myAccountDropdown')}
+	${getZIndex('mastheadMyAccountDropdown')}
 `;
 
 export const buildIdentityLinks = (
@@ -169,14 +171,19 @@ export const dropDownOverrides = css`
 	}
 
 	/** Handles case of *new* top bar being 52px high until tablet */
-	${until.tablet} {
-		&:not(button) {
-			top: 48px;
+	&:not(button) {
+		${until.tablet} {
+			top: 44px;
 		}
-	}
 
-	${from.tablet} {
-		right: 0;
+		${from.tablet} {
+			right: 0;
+			top: 52px;
+		}
+
+		${from.desktop} {
+			top: 56px;
+		}
 	}
 `;
 
@@ -236,7 +243,7 @@ const SignedInWithNotifications = ({
 			<Dropdown
 				label="My account"
 				links={identityLinksWithNotifications}
-				id="my-account"
+				id="topbar-my-account"
 				dataLinkName={nestedOphanComponents(
 					'header',
 					'topbar',

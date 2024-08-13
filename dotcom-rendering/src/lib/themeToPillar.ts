@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/libs';
+import { type ArticleTheme, Pillar } from '@guardian/libs';
 
 export const themeToPillar = (theme?: ArticleTheme): Pillar | undefined => {
 	switch (theme) {

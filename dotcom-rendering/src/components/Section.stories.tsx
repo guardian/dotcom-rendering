@@ -98,16 +98,17 @@ LeftContentStory.storyName = 'with an element passed into the left column';
 
 export const BackgroundStory = () => {
 	return (
-		<Section
-			title="Background Colour"
-			description="About this content"
-			fontColour={brandBackground.ctaPrimary}
-			centralBorder="full"
-			backgroundColour={brandBackground.primary}
-			borderColour={brandBorder.primary}
-		>
-			<Grey />
-		</Section>
+		<div style={{ '--article-section-title': brandBackground.ctaPrimary }}>
+			<Section
+				title="Background Colour"
+				description="About this content"
+				centralBorder="full"
+				backgroundColour={brandBackground.primary}
+				borderColour={brandBorder.primary}
+			>
+				<Grey />
+			</Section>
+		</div>
 	);
 };
 BackgroundStory.storyName = 'with a blue background';

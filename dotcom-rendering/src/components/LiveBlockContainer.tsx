@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isString } from '@guardian/libs';
+import { isString, isUndefined } from '@guardian/libs';
 import {
 	article17,
 	from,
@@ -27,8 +27,6 @@ type Props = {
 	isPinnedPost: boolean;
 	absoluteServerTimes: boolean;
 	isOriginalPinnedPost?: boolean;
-	host?: string;
-	pageId?: string;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -139,8 +137,6 @@ export const LiveBlockContainer = ({
 	contributors,
 	isPinnedPost,
 	isOriginalPinnedPost = false,
-	host,
-	pageId,
 	absoluteServerTimes,
 }: Props) => {
 	return (
@@ -167,15 +163,13 @@ export const LiveBlockContainer = ({
 			]}
 		>
 			<Header>
-				{blockFirstPublished !== undefined && (
+				{!isUndefined(blockFirstPublished) && (
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						firstPublishedDisplay={blockFirstPublishedDisplay}
 						blockId={blockId}
 						isPinnedPost={isPinnedPost}
 						isOriginalPinnedPost={isOriginalPinnedPost}
-						host={host}
-						pageId={pageId}
 						absoluteServerTimes={absoluteServerTimes}
 					/>
 				)}

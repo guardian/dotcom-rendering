@@ -43,6 +43,9 @@ const grid = css`
 			minmax(0, 1fr)
 			[viewport-end];
 	}
+`;
+
+const gridBeyondDesktop = css`
 	${from.leftCol} {
 		grid-template-columns:
 			[viewport-start]
@@ -81,11 +84,18 @@ const grid = css`
 export const Grid = ({
 	type = 'div',
 	style,
+	hasPageSkin,
 	children,
 }: PropsWithChildren<{
 	type: keyof JSX.IntrinsicElements;
+	hasPageSkin?: boolean;
 	style?: CSSProperties;
-}>) => jsx(type, { css: grid, style }, children);
+}>) =>
+	jsx(
+		type,
+		{ css: [grid, !hasPageSkin && gridBeyondDesktop], style },
+		children,
+	);
 
 /** Spans the entire width of the grid */
 export const Content = ({

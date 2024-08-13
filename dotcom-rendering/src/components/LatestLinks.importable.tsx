@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
 import {
 	lineHeights,
-	palette,
 	space,
 	textSans14,
 	textSansBold14,
 } from '@guardian/source/foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import { palette as themePalette } from '../palette';
@@ -38,6 +36,7 @@ const linkStyles = css`
 `;
 
 const dividerStyles = css`
+	color: ${themePalette('--article-border')};
 	border-top: 1px solid currentColor;
 	border-left: 1px solid currentColor;
 `;
@@ -107,12 +106,6 @@ export const LatestLinks = ({
 		refreshInterval: 9_600,
 	});
 
-	const dividerColour = css`
-		color: ${containerPalette
-			? decideContainerOverrides(containerPalette).border.container
-			: palette.neutral[86]};
-	`;
-
 	/** Reserve space for the latest links to avoid CLS while loading */
 	const minHeight = isDynamo
 		? `calc(${space[1]}px + 4 * ${lineHeights.regular}em);`
@@ -150,7 +143,7 @@ export const LatestLinks = ({
 								{index > 0 && (
 									<li
 										key={block.id + ' : divider'}
-										css={[dividerStyles, dividerColour]}
+										css={[dividerStyles]}
 									></li>
 								)}
 								<li

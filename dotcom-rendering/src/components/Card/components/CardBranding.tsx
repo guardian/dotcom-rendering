@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	space,
 	textSans12,
 	visuallyHidden,
 } from '@guardian/source/foundations';
+import { useConfig } from '../../../components/ConfigContext';
 import { decideCardLogo } from '../../../lib/decideLogo';
 import { getZIndex } from '../../../lib/getZIndex';
 import { getOphanComponents } from '../../../lib/labs';
@@ -50,6 +52,8 @@ export const CardBranding = ({
 }: Props) => {
 	const logo = decideCardLogo(branding, format, containerPalette);
 
+	const { darkModeAvailable } = useConfig();
+
 	/**
 	 * Only apply click tracking to branding on related content
 	 */
@@ -80,15 +84,31 @@ export const CardBranding = ({
 				aria-label={`Visit the ${branding.sponsorName} website`}
 				data-testid="card-branding-logo"
 			>
-				<img
-					css={logoImageStyle}
-					src={logo.src}
-					alt={branding.sponsorName}
-					width={logo.dimensions.width}
-					height={logo.dimensions.height}
-					data-component={dataAttributes?.ophanComponentName}
-					data-link-name={dataAttributes?.ophanComponentLink}
-				/>
+				<picture>
+					{darkModeAvailable && branding.logoForDarkBackground && (
+						<source
+							width={
+								branding.logoForDarkBackground.dimensions.width
+							}
+							height={
+								branding.logoForDarkBackground.dimensions.height
+							}
+							srcSet={encodeURI(
+								branding.logoForDarkBackground.src,
+							)}
+							media={'(prefers-color-scheme: dark)'}
+						/>
+					)}
+					<img
+						css={logoImageStyle}
+						src={logo.src}
+						alt={branding.sponsorName}
+						width={logo.dimensions.width}
+						height={logo.dimensions.height}
+						data-component={dataAttributes?.ophanComponentName}
+						data-link-name={dataAttributes?.ophanComponentLink}
+					/>
+				</picture>
 			</a>
 		</div>
 	);

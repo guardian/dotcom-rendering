@@ -28,7 +28,6 @@ export const renderEditorialNewslettersPage = ({
 	const config = {
 		renderingTarget: 'Web',
 		darkModeAvailable: false,
-		updateLogoAdPartnerSwitch: false,
 		assetOrigin: ASSET_ORIGIN,
 		editionId: newslettersPage.editionId,
 	} satisfies Config;

@@ -3,7 +3,6 @@ import {
 	from,
 	headlineMedium17,
 	palette as sourcePalette,
-	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { useState } from 'react';
@@ -22,19 +21,6 @@ const tabsContainer = css`
 	position: relative;
 	border-left: ${thinGreySolid};
 	border-right: ${thinGreySolid};
-	border-bottom: ${thinGreySolid};
-`;
-
-const tabsContainerBorder = css`
-	${until.leftCol} {
-		border-top: ${thinGreySolid};
-		border-bottom: 0;
-	}
-`;
-
-const tabsContainerBorderPageSkin = css`
-	border-top: ${thinGreySolid};
-	border-bottom: 0;
 `;
 
 const listTab = css`
@@ -106,7 +92,6 @@ type Props = {
 	data: TrailTabType[];
 	sectionId?: string;
 	selectedColour?: string;
-	hasPageSkin?: boolean;
 };
 
 // To avoid having to handle multiple ways of reducing the capitalisation styling
@@ -133,7 +118,6 @@ export const MostViewedFooterGrid = ({
 	data,
 	sectionId = '',
 	selectedColour = sourcePalette.neutral[0],
-	hasPageSkin = false,
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	/**
@@ -154,15 +138,7 @@ export const MostViewedFooterGrid = ({
 				It only generates tabs if there is more than one panel of content.
 			*/}
 			{renderAsTabs && (
-				<ul
-					css={[
-						tabsContainer,
-						hasPageSkin
-							? tabsContainerBorderPageSkin
-							: tabsContainerBorder,
-					]}
-					role="tablist"
-				>
+				<ul css={tabsContainer} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => {
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
@@ -240,7 +216,6 @@ export const MostViewedFooterGrid = ({
 								format={trail.format}
 								headlineText={trail.headline}
 								ageWarning={trail.ageWarning}
-								hasPageSkin={hasPageSkin}
 							/>
 						))}
 					</ol>

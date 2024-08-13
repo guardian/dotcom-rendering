@@ -1,9 +1,10 @@
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat } from '@guardian/libs';
 import type { DCRContainerPalette } from '../types/front';
 
 export const isMediaCard = (format: ArticleFormat): boolean => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
+		case ArticleDesign.Picture:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video: {
 			return true;

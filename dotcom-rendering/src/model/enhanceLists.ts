@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { FEElement, ListBlockElement } from '../types/content';
 
 type ElementsEnhancer = (elements: FEElement[]) => FEElement[];
@@ -6,7 +7,7 @@ const constructKeyTakeaway =
 	(enhanceElements: ElementsEnhancer) =>
 	({ title, elements }: { title?: string; elements: FEElement[] }) => {
 		// if the element is missing its title for any reason, we will skip it
-		if (title !== undefined) {
+		if (!isUndefined(title)) {
 			return [
 				{
 					title,
@@ -21,10 +22,37 @@ const constructQAndAExplainer =
 	(enhanceElements: ElementsEnhancer) =>
 	({ title, elements }: { title?: string; elements: FEElement[] }) => {
 		// if the element is missing its title for any reason, we will skip it
-		if (title !== undefined) {
+		if (!isUndefined(title)) {
 			return [
 				{
 					title,
+					body: enhanceElements(elements),
+				},
+			];
+		}
+		return [];
+	};
+
+const constructMiniProfile =
+	(enhanceElements: ElementsEnhancer) =>
+	({
+		title,
+		elements,
+		bio,
+		endNote,
+	}: {
+		title?: string;
+		elements: FEElement[];
+		bio?: string;
+		endNote?: string;
+	}) => {
+		// if the element is missing its title for any reason, we will skip it
+		if (!isUndefined(title) && title !== '') {
+			return [
+				{
+					title,
+					bio,
+					endNote,
 					body: enhanceElements(elements),
 				},
 			];
@@ -52,6 +80,15 @@ const enhanceListBlockElement = (
 					_type: 'model.dotcomrendering.pageElements.QAndAExplainerBlockElement',
 					qAndAExplainers: element.items.flatMap(
 						constructQAndAExplainer(elementsEnhancer),
+					),
+				},
+			];
+		case 'MiniProfiles':
+			return [
+				{
+					_type: 'model.dotcomrendering.pageElements.MiniProfilesBlockElement',
+					miniProfiles: element.items.flatMap(
+						constructMiniProfile(elementsEnhancer),
 					),
 				},
 			];

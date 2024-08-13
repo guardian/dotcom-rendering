@@ -82,11 +82,13 @@ export const Masthead = ({
 
 		{highlights && (
 			<Section
+				shouldCenter={true}
+				showSideBorders={false}
 				fullWidth={true}
 				backgroundColour={themePalette(
-					'--masthead-highlights-background',
+					'--highlights-container-background',
 				)}
-				borderColour={themePalette('--masthead-highlights-border')}
+				borderColour={themePalette('--highlights-container-border')}
 				showTopBorder={false}
 				padSides={false}
 				element="section"

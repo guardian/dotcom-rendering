@@ -12,6 +12,7 @@ import { Nav } from '../components/Nav/Nav';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
@@ -26,19 +27,12 @@ export const AllEditorialNewslettersPageLayout = ({
 	newslettersPage,
 	NAV,
 }: Props) => {
-	const {
-		subscribeUrl,
-		editionId,
-		pageFooter,
-		contributionsServiceUrl: pageContributionsServiceUrl,
-		config,
-		isAdFreeUser,
-	} = newslettersPage;
+	const { subscribeUrl, editionId, pageFooter, config, isAdFreeUser } =
+		newslettersPage;
 
 	const renderAds = !isAdFreeUser;
 
-	const contributionsServiceUrl =
-		process.env.SDC_URL ?? pageContributionsServiceUrl;
+	const contributionsServiceUrl = getContributionsServiceUrl(newslettersPage);
 
 	const displayedNewslettersCount =
 		newslettersPage.groupedNewsletters.groups.reduce<number>(
@@ -80,7 +74,7 @@ export const AllEditorialNewslettersPageLayout = ({
 							}
 							idApiUrl={config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={false}
+							showSubNav={true}
 							isImmersive={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}

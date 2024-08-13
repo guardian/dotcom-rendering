@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source/foundations';
-import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { palette } from '../../../palette';
-import type { DCRContainerPalette } from '../../../types/front';
 
 type Direction = 'row' | 'column' | 'row-reverse';
 
@@ -50,7 +48,6 @@ type Props = {
 	padBottom?: boolean;
 	/** Used to keep cards aligned in adjacent columns */
 	wrapCards?: boolean;
-	containerPalette?: DCRContainerPalette;
 };
 
 export const UL = ({
@@ -59,18 +56,12 @@ export const UL = ({
 	showDivider = false,
 	padBottom = false,
 	wrapCards = false,
-	containerPalette,
 }: Props) => {
-	const borderColour =
-		(containerPalette &&
-			decideContainerOverrides(containerPalette).border.container) ??
-		palette('--article-border');
-
 	return (
 		<ul
 			css={[
 				ulStyles(direction),
-				showDivider && verticalDivider(borderColour),
+				showDivider && verticalDivider(palette('--section-border')),
 				padBottom && marginBottomStyles,
 				wrapCards && wrapStyles,
 			]}

@@ -16,8 +16,8 @@ import { AppsLightboxImageStore } from '../components/AppsLightboxImageStore.imp
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
@@ -288,7 +288,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
-								showSubNav={false}
+								showSubNav={
+									format.theme !== ArticleSpecial.Labs
+								}
 								isImmersive={false}
 								hasPageSkin={false}
 								hasPageSkinContentSelfConstrain={false}
@@ -411,6 +413,9 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 												display: block;
 											`}
 											count={4}
+											color={themePalette(
+												'--straight-lines',
+											)}
 										/>
 									</Section>
 								)}
@@ -489,6 +494,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 										tags={article.tags}
 										sectionLabel={article.sectionLabel}
 										sectionUrl={article.sectionUrl}
+										shouldShowTagLink={false}
 										guardianBaseURL={
 											article.guardianBaseURL
 										}
@@ -721,6 +727,7 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 					<StraightLines
 						count={4}
 						data-print-layout="hide"
+						color={themePalette('--straight-lines')}
 						cssOverrides={css`
 							display: block;
 						`}

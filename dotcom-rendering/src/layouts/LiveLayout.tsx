@@ -19,8 +19,8 @@ import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
-import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleMetaApps } from '../components/ArticleMeta.apps';
+import { ArticleMeta } from '../components/ArticleMeta.web';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
@@ -52,10 +52,6 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { StickyLiveblogAskWrapper } from '../components/StickyLiveblogAskWrapper.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import {
-	hasRelevantTopics,
-	TopicFilterBank,
-} from '../components/TopicFilterBank';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
@@ -222,6 +218,7 @@ const sidePaddingDesktop = css`
 `;
 
 const bodyWrapper = css`
+	position: relative;
 	margin-bottom: ${space[3]}px;
 	${from.desktop} {
 		margin-bottom: 0;
@@ -246,54 +243,12 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-const paddingBody = css`
-	padding: ${space[3]}px;
-	${from.mobileLandscape} {
-		padding: ${space[3]}px ${space[5]}px;
-	}
-	${from.desktop} {
-		padding: 0;
-	}
-`;
-
-const tagOverlayGridStyles = css`
-	position: absolute;
-	${until.desktop} {
-		margin-left: 0px;
-	}
-	display: grid;
-	height: inherit;
-	width: 100%;
-	margin-left: 0;
-	grid-column-gap: 0px;
-	${getZIndex('tagLinkOverlay')}
-	${until.desktop} {
-		grid-template-columns: 100%; /* Main content */
-		grid-template-areas: 'sticky-tag';
-	}
-	${from.tablet} {
-		grid-template-columns: 1fr 700px 1fr;
-		grid-template-areas: '. sticky-tag .';
-	}
-	${from.desktop} {
-		grid-template-columns: 1fr 200px 740px 1fr;
-		grid-template-areas: '. sticky-tag . .';
-	}
-
-	${from.leftCol} {
-		grid-template-columns: 1fr 200px 900px 1fr;
-		grid-template-areas: '. sticky-tag . .';
-	}
-	${from.wide} {
-		grid-template-columns: 1fr 200px 1060px 1fr;
-		grid-template-areas: '. sticky-tag . .';
-	}
-`;
-
 const stickyTagStyles = css`
 	position: sticky;
 	top: 0;
+	${getZIndex('tagLinkOverlay')};
 `;
+
 interface BaseProps {
 	article: DCRArticle;
 	format: ArticleFormat;
@@ -337,12 +292,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
-	const showTopicFilterBank =
-		!!article.config.switches.automaticFilters &&
-		hasRelevantTopics(article.availableTopics);
-
 	const hasKeyEvents = !!article.keyEvents.length;
-	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
 	const renderAds = canRenderAds(article, renderingTarget);
 
@@ -353,12 +303,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-	// The test is being paused on liveblogs whilst we investigate an issue
 
-	const inTagLinkTest = false;
-	// isWeb &&
-	// article.config.abTests.tagLinkDesignVariant === 'variant' &&
-	// article.tags.some((tag) => tag.id === 'football/euro-2024');
+	const shouldShowTagLink =
+		isWeb &&
+		!!article.config.switches.tagLinkDesign &&
+		article.config.abTests.tagLinkDesignControl !== 'control' &&
+		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -397,7 +347,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							discussionApiUrl={article.config.discussionApiUrl}
 							idApiUrl={article.config.idApiUrl}
 							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={false}
+							showSubNav={true}
 							isImmersive={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
@@ -494,6 +444,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							>
 								<StraightLines
 									count={4}
+									color={themePalette('--straight-lines')}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -503,17 +454,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					)}
 				</div>
 			)}
-			<main
-				css={
-					inTagLinkTest &&
-					css`
-						position: relative;
-						height: 100%;
-					`
-				}
-				data-layout="LiveLayout"
-				className={inTagLinkTest ? 'sticky-tag-link-test' : ''}
-			>
+			<main data-layout="LiveLayout">
 				{renderAds && hasLiveBlogTopAd && (
 					<Hide from="tablet">
 						<Section
@@ -532,23 +473,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Section>
 					</Hide>
 				)}
-				{inTagLinkTest && (
-					<div css={tagOverlayGridStyles}>
-						<GridItem area="sticky-tag">
-							<div css={stickyTagStyles}>
-								<ArticleTitle
-									format={format}
-									tags={article.tags}
-									sectionLabel={article.sectionLabel}
-									sectionUrl={article.sectionUrl}
-									guardianBaseURL={article.guardianBaseURL}
-									inTagLinkTest={true}
-								/>
-							</div>
-						</GridItem>
-					</div>
-				)}
-
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -575,6 +499,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								shouldShowTagLink={false}
 								isMatch={true}
 							/>
 						}
@@ -589,6 +514,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
+								shouldShowTagLink={false}
 								isMatch={true}
 							/>
 						</Hide>
@@ -616,27 +542,14 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
-								{inTagLinkTest ? (
-									<div
-										css={css`
-											height: 64px;
-											${from.desktop} {
-												height: 44px;
-											}
-										`}
-									/>
-								) : (
-									<ArticleTitle
-										format={format}
-										tags={article.tags}
-										sectionLabel={article.sectionLabel}
-										sectionUrl={article.sectionUrl}
-										guardianBaseURL={
-											article.guardianBaseURL
-										}
-										inTagLinkTest={inTagLinkTest}
-									/>
-								)}
+								<ArticleTitle
+									format={format}
+									tags={article.tags}
+									sectionLabel={article.sectionLabel}
+									sectionUrl={article.sectionUrl}
+									guardianBaseURL={article.guardianBaseURL}
+									shouldShowTagLink={false}
+								/>
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
@@ -836,7 +749,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 										article.mostRecentBlockId ?? ''
 									}
 									hasPinnedPost={!!article.pinnedPost}
-									selectedTopics={article.selectedTopics}
 								/>
 							</Island>
 						</>
@@ -923,29 +835,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									</div>
 								</Hide>
 
-								{showTopicFilterBank && (
-									<Hide until="desktop">
-										<div css={sidePaddingDesktop}>
-											<TopicFilterBank
-												availableTopics={
-													article.availableTopics
-												}
-												selectedTopics={
-													article.selectedTopics
-												}
-												format={format}
-												keyEvents={article.keyEvents}
-												filterKeyEvents={
-													article.filterKeyEvents
-												}
-												id={
-													'key-events-carousel-desktop'
-												}
-											/>
-										</div>
-									</Hide>
-								)}
-
 								{isWeb && (
 									<Hide until="desktop">
 										<Island
@@ -957,8 +846,37 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												shouldHideReaderRevenueOnArticle={
 													article.shouldHideReaderRevenue
 												}
+												tags={article.tags}
 											/>
 										</Island>
+									</Hide>
+								)}
+
+								{isWeb && shouldShowTagLink && (
+									<Hide until="desktop">
+										<div
+											css={[
+												stickyTagStyles,
+												css`
+													margin: 20px 0 20px 20px;
+												`,
+											]}
+										>
+											<ArticleTitle
+												format={format}
+												tags={article.tags}
+												sectionLabel={
+													article.sectionLabel
+												}
+												sectionUrl={article.sectionUrl}
+												guardianBaseURL={
+													article.guardianBaseURL
+												}
+												shouldShowTagLink={
+													shouldShowTagLink
+												}
+											/>
+										</div>
 									</Hide>
 								)}
 
@@ -977,7 +895,29 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{showKeyEventsToggle ? (
+									{isWeb && shouldShowTagLink && (
+										<Hide from="desktop">
+											<div css={[stickyTagStyles]}>
+												<ArticleTitle
+													format={format}
+													tags={article.tags}
+													sectionLabel={
+														article.sectionLabel
+													}
+													sectionUrl={
+														article.sectionUrl
+													}
+													guardianBaseURL={
+														article.guardianBaseURL
+													}
+													shouldShowTagLink={
+														shouldShowTagLink
+													}
+												/>
+											</div>
+										</Hide>
+									)}
+									{hasKeyEvents ? (
 										<Hide below="desktop">
 											<Island
 												priority="feature"
@@ -994,295 +934,122 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									) : (
 										<></>
 									)}
-									{showTopicFilterBank ? (
-										<div css={paddingBody}>
-											<ArticleContainer format={format}>
-												{pagination.currentPage !==
-													1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-													/>
+									<Accordion accordionTitle="Live feed">
+										<ArticleContainer format={format}>
+											{pagination.currentPage !== 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+												/>
+											)}
+											<ArticleBody
+												format={format}
+												blocks={article.blocks}
+												pinnedPost={article.pinnedPost}
+												host={host}
+												pageId={article.pageId}
+												webTitle={article.webTitle}
+												ajaxUrl={article.config.ajaxUrl}
+												sectionId={
+													article.config.section
+												}
+												abTests={article.config.abTests}
+												switches={
+													article.config.switches
+												}
+												isSensitive={
+													article.config.isSensitive
+												}
+												isAdFreeUser={
+													article.isAdFreeUser
+												}
+												shouldHideReaderRevenue={
+													article.shouldHideReaderRevenue
+												}
+												tags={article.tags}
+												isPaidContent={
+													!!article.config
+														.isPaidContent
+												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												contentType={
+													article.contentType
+												}
+												isPreview={
+													article.config.isPreview
+												}
+												idUrl={
+													article.config.idUrl ?? ''
+												}
+												isDev={!!article.config.isDev}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
+												keyEvents={article.keyEvents}
+												filterKeyEvents={
+													article.filterKeyEvents
+												}
+												keywordIds={
+													article.config.keywordIds
+												}
+												lang={article.lang}
+												isRightToLeftLang={
+													article.isRightToLeftLang
+												}
+												editionId={article.editionId}
+											/>
+											{pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+												/>
+											)}
+											<StraightLines
+												data-print-layout="hide"
+												count={4}
+												color={themePalette(
+													'--straight-lines',
 												)}
-												<ArticleBody
-													format={format}
-													blocks={article.blocks}
-													pinnedPost={
-														article.pinnedPost
-													}
-													host={host}
-													pageId={article.pageId}
-													webTitle={article.webTitle}
-													ajaxUrl={
-														article.config.ajaxUrl
-													}
-													sectionId={
-														article.config.section
-													}
-													abTests={
-														article.config.abTests
-													}
-													switches={
-														article.config.switches
-													}
-													isSensitive={
-														article.config
-															.isSensitive
-													}
-													isAdFreeUser={
-														article.isAdFreeUser
-													}
-													shouldHideReaderRevenue={
-														article.shouldHideReaderRevenue
-													}
-													tags={article.tags}
-													isPaidContent={
-														!!article.config
-															.isPaidContent
-													}
-													contributionsServiceUrl={
-														contributionsServiceUrl
-													}
-													contentType={
-														article.contentType
-													}
-													isPreview={
-														article.config.isPreview
-													}
-													idUrl={
-														article.config.idUrl ??
-														''
-													}
-													isDev={
-														!!article.config.isDev
-													}
-													onFirstPage={
-														pagination.currentPage ===
-														1
-													}
-													keyEvents={
-														article.keyEvents
-													}
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													availableTopics={
-														article.availableTopics
-													}
-													selectedTopics={
-														article.selectedTopics
-													}
-													keywordIds={
-														article.config
-															.keywordIds
-													}
-													editionId={
-														article.editionId
-													}
-												/>
-												{pagination.totalPages > 1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-													/>
-												)}
-												<StraightLines
-													data-print-layout="hide"
-													count={4}
-													cssOverrides={css`
-														display: block;
-													`}
-												/>
-												<SubMeta
-													format={format}
-													subMetaKeywordLinks={
-														article.subMetaKeywordLinks
-													}
-													subMetaSectionLinks={
-														article.subMetaSectionLinks
-													}
-													pageId={article.pageId}
-													webUrl={article.webURL}
-													webTitle={article.webTitle}
-													showBottomSocialButtons={
-														article.showBottomSocialButtons &&
-														renderingTarget ===
-															'Web'
-													}
-												/>
-											</ArticleContainer>
-										</div>
-									) : (
-										<Accordion accordionTitle="Live feed">
-											<ArticleContainer format={format}>
-												{pagination.currentPage !==
-													1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-													/>
-												)}
-												<ArticleBody
-													format={format}
-													blocks={article.blocks}
-													pinnedPost={
-														article.pinnedPost
-													}
-													host={host}
-													pageId={article.pageId}
-													webTitle={article.webTitle}
-													ajaxUrl={
-														article.config.ajaxUrl
-													}
-													sectionId={
-														article.config.section
-													}
-													abTests={
-														article.config.abTests
-													}
-													switches={
-														article.config.switches
-													}
-													isSensitive={
-														article.config
-															.isSensitive
-													}
-													isAdFreeUser={
-														article.isAdFreeUser
-													}
-													shouldHideReaderRevenue={
-														article.shouldHideReaderRevenue
-													}
-													tags={article.tags}
-													isPaidContent={
-														!!article.config
-															.isPaidContent
-													}
-													contributionsServiceUrl={
-														contributionsServiceUrl
-													}
-													contentType={
-														article.contentType
-													}
-													isPreview={
-														article.config.isPreview
-													}
-													idUrl={
-														article.config.idUrl ??
-														''
-													}
-													isDev={
-														!!article.config.isDev
-													}
-													onFirstPage={
-														pagination.currentPage ===
-														1
-													}
-													keyEvents={
-														article.keyEvents
-													}
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													availableTopics={
-														article.availableTopics
-													}
-													selectedTopics={
-														article.selectedTopics
-													}
-													keywordIds={
-														article.config
-															.keywordIds
-													}
-													lang={article.lang}
-													isRightToLeftLang={
-														article.isRightToLeftLang
-													}
-													editionId={
-														article.editionId
-													}
-												/>
-												{pagination.totalPages > 1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-													/>
-												)}
-												<StraightLines
-													data-print-layout="hide"
-													count={4}
-													cssOverrides={css`
-														display: block;
-													`}
-												/>
-												<SubMeta
-													format={format}
-													subMetaKeywordLinks={
-														article.subMetaKeywordLinks
-													}
-													subMetaSectionLinks={
-														article.subMetaSectionLinks
-													}
-													pageId={article.pageId}
-													webUrl={article.webURL}
-													webTitle={article.webTitle}
-													showBottomSocialButtons={
-														article.showBottomSocialButtons &&
-														renderingTarget ===
-															'Web'
-													}
-												/>
-											</ArticleContainer>
-										</Accordion>
-									)}
+												cssOverrides={css`
+													display: block;
+												`}
+											/>
+											<SubMeta
+												format={format}
+												subMetaKeywordLinks={
+													article.subMetaKeywordLinks
+												}
+												subMetaSectionLinks={
+													article.subMetaSectionLinks
+												}
+												pageId={article.pageId}
+												webUrl={article.webURL}
+												webTitle={article.webTitle}
+												showBottomSocialButtons={
+													article.showBottomSocialButtons &&
+													renderingTarget === 'Web'
+												}
+											/>
+										</ArticleContainer>
+									</Accordion>
 								</div>
 							</GridItem>
 							<GridItem area="right-column">

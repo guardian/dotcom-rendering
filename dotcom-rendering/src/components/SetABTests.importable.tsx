@@ -1,6 +1,6 @@
 import type { CoreAPIConfig } from '@guardian/ab-core';
 import { AB } from '@guardian/ab-core';
-import { getCookie, log } from '@guardian/libs';
+import { getCookie, isUndefined, log } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
@@ -86,7 +86,7 @@ export const SetABTests = ({
 
 		const mvtId = isDev ? getLocalMvtId() ?? getMvtId() : getMvtId();
 
-		if (mvtId === undefined) {
+		if (isUndefined(mvtId)) {
 			console.error(
 				'There is no MVT ID set, see SetABTests.importable.tsx',
 			);

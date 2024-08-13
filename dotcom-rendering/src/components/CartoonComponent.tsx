@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	type ArticleFormat,
+	isUndefined,
+	Pillar,
+} from '@guardian/libs';
 import { Hide } from '@guardian/source/react-components';
 import type { CartoonBlockElement, Image } from '../types/content';
 import { AppsLightboxImage } from './AppsLightboxImage.importable';
@@ -62,7 +68,7 @@ export const CartoonComponent = ({ format, element, lightbox }: Props) => {
 					/>
 				)}
 
-				{webLightbox && element.position !== undefined && (
+				{webLightbox && !isUndefined(element.position) && (
 					<LightboxLink
 						role={element.role}
 						format={format}

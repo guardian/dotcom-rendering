@@ -39,6 +39,7 @@ const interviewBylineBoxStyles = (format: ArticleFormat) => css`
 		-6px 0 0 ${schemedPalette('--byline-background')};
 	display: inline-block;
 	box-decoration-break: clone;
+	color: ${schemedPalette('--headline-byline')};
 
 	a {
 		color: ${schemedPalette('--byline-anchor')};

@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
-import { CricketInnings, cricketScore } from './CricketScoreboard';
+import type { CricketInnings, CricketMatch } from '../types/sport';
+import { CricketInningsScores, cricketScore } from './CricketScoreboard';
 
 const defaultInnings: CricketInnings = {
 	order: 0,
@@ -106,7 +107,7 @@ describe('CricketScoreboard', () => {
 				],
 			};
 			const { getByText } = render(
-				<CricketInnings match={match} home={true} />,
+				<CricketInningsScores match={match} home={true} />,
 			);
 			expect(getByText('26 all out (10.5 overs)')).toBeInTheDocument();
 		});
@@ -139,7 +140,7 @@ describe('CricketScoreboard', () => {
 				],
 			};
 			const { getByText } = render(
-				<CricketInnings match={match} home={true} />,
+				<CricketInningsScores match={match} home={true} />,
 			);
 			expect(
 				getByText('26 & 26 - 3 forfeited (10.5 overs)'),

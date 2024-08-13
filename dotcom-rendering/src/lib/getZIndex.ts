@@ -30,7 +30,10 @@ const indices = [
 	'sticky-video',
 	'banner',
 	'dropdown',
+	'mastheadMyAccountDropdown',
+	'mastheadEditionDropdown',
 	'burger',
+	'mastheadVeggieBurgerExpandedMobile',
 	'expanded-veggie-menu-wrapper',
 	'expanded-veggie-menu',
 

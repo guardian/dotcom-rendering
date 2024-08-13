@@ -183,11 +183,11 @@ const styles = (format: ArticleFormat) => css`
 		display: flow-root;
 
 		p {
-			display: inline;
+			margin: -1.5rem 0 0 0;
 		}
 	}
 
-	li:before {
+	&:is(ul) > li:before {
 		display: inline-block;
 		content: '';
 		border-radius: 50%;

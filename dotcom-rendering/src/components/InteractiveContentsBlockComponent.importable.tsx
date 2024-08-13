@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold17,
@@ -269,7 +270,7 @@ export const InteractiveContentsBlockComponent = ({
 		<div
 			ref={divRef}
 			css={wrapperStyles}
-			style={height !== undefined ? { height } : {}}
+			style={!isUndefined(height) ? { height } : {}}
 		>
 			<h2 css={headerStyles}>Contents</h2>
 			{/* only show sticky nav header if defined */}

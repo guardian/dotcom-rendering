@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	palette,

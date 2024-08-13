@@ -1,3 +1,4 @@
+import type { ArticleFormat } from '@guardian/libs';
 import { Caption } from './Caption';
 
 type Props = {

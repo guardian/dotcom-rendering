@@ -26,7 +26,6 @@ export const FixedSmallSlowVMPU = ({
 					padSides={true}
 					percentage="25%"
 					showDivider={cardIndex > 0}
-					containerPalette={containerPalette}
 					key={card.url}
 				>
 					<Card25Media25SmallHeadline

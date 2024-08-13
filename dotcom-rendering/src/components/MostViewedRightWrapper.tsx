@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { MostViewedRight } from './MostViewedRight';
@@ -26,7 +27,7 @@ export const MostViewedRightWrapper = ({
 			`[data-container="${componentDataAttribute}"]`,
 		);
 		const height = containingElement?.getBoundingClientRect().height;
-		setHeightIsAvailable(height !== undefined && height >= maxHeightPx);
+		setHeightIsAvailable(!isUndefined(height) && height >= maxHeightPx);
 	}, [componentDataAttribute, maxHeightPx]);
 
 	if (!heightIsAvailable) {

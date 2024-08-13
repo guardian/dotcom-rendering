@@ -248,7 +248,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						discussionApiUrl={article.config.discussionApiUrl}
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={!!NAV.subNavSections}
+						showSubNav={true}
 						isImmersive={
 							format.display === ArticleDisplay.Immersive
 						}

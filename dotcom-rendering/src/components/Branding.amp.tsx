@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { type ArticleTheme, isUndefined } from '@guardian/libs';
 import { textSans12 } from '@guardian/source/foundations';
 import React from 'react';
 import { isEditionId } from '../lib/edition';
@@ -83,7 +84,7 @@ export const BrandingRegionContainer = ({
 			.filter(isEditionId)
 			.map((editionId) => {
 				const { branding } = commercialProperties[editionId];
-				return branding !== undefined ? (
+				return !isUndefined(branding) ? (
 					<div key={editionId} css={editionRegionClasses[editionId]}>
 						{children(branding)}
 					</div>

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
+import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
@@ -39,7 +39,8 @@ type Props = {
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isExternalLink?: boolean;
-	isOnwardContent?: boolean;
+	/** Is the headline inside a Highlights card? */
+	isHighlights?: boolean;
 };
 
 const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
@@ -99,6 +100,15 @@ const fontStylesOnMobile = ({ size }: { size: SmallHeadlineSize }) => {
 		case 'medium':
 			return css`
 				${until.desktop} {
+					${headlineMedium17}
+				}
+			`;
+		case 'small':
+			return css`
+				${until.mobileMedium} {
+					${headlineMedium14}
+				}
+				${between.mobileMedium.and.desktop} {
 					${headlineMedium17}
 				}
 			`;
@@ -210,9 +220,11 @@ export const CardHeadline = ({
 	showByline,
 	linkTo,
 	isExternalLink,
-	isOnwardContent = false,
+	isHighlights = false,
 }: Props) => {
-	const kickerColour = palette('--card-kicker-text');
+	const kickerColour = isHighlights
+		? palette('--highlights-card-kicker-text')
+		: palette('--card-kicker-text');
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
@@ -243,8 +255,8 @@ export const CardHeadline = ({
 				{showQuotes && <QuoteIcon colour={kickerColour} />}
 				<span
 					css={css`
-						color: ${isOnwardContent
-							? palette('--card-headline-onward-content-text')
+						color: ${isHighlights
+							? palette('--highlights-card-headline')
 							: palette('--card-headline-trail-text')};
 					`}
 					className="show-underline"
@@ -262,7 +274,11 @@ export const CardHeadline = ({
 				</span>
 			</h3>
 			{!!byline && showByline && (
-				<Byline text={byline} format={format} size={size} />
+				<Byline
+					text={byline}
+					isLabs={format.theme === ArticleSpecial.Labs}
+					size={size}
+				/>
 			)}
 		</WithLink>
 	);

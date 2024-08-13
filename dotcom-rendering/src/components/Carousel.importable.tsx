@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, type ArticleFormat, isUndefined } from '@guardian/libs';
 import {
 	from,
 	headlineBold24,
-	palette as sourcePalette,
 	space,
 	until,
 } from '@guardian/source/foundations';
@@ -308,7 +307,7 @@ const buttonStyle = css`
 		outline: none;
 		background-color: ${themePalette('--carousel-arrow-background-hover')};
 		svg {
-			fill: ${sourcePalette.neutral[7]};
+			fill: ${themePalette('--carousel-arrow-background')};
 		}
 	}
 
@@ -335,14 +334,14 @@ const headerStylesWithUrl = css`
 const prevButtonStyle = (index: number) => css`
 	background-color: ${index !== 0
 		? themePalette('--carousel-arrow-background')
-		: sourcePalette.neutral[46]};
+		: themePalette('--carousel-arrow-background-disabled')};
 	cursor: ${index !== 0 ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
 		background-color: ${index !== 0
 			? themePalette('--carousel-arrow-background-hover')
-			: sourcePalette.neutral[46]};
+			: themePalette('--carousel-arrow-background-disabled')};
 
 		svg {
 			fill: ${themePalette('--carousel-arrow')};
@@ -363,7 +362,7 @@ const nextButtonStyle = (
 		totalCardsShowing,
 	)
 		? themePalette('--carousel-arrow-background')
-		: sourcePalette.neutral[46]};
+		: themePalette('--carousel-arrow-background-disabled')};
 	cursor: ${!isLastCardShowing(index, totalStories, totalCardsShowing)
 		? 'pointer'
 		: 'default'};
@@ -376,7 +375,7 @@ const nextButtonStyle = (
 			totalCardsShowing,
 		)
 			? themePalette('--carousel-arrow-background-hover')
-			: sourcePalette.neutral[46]};
+			: themePalette('--carousel-arrow-background-disabled')};
 
 		svg {
 			fill: ${themePalette('--carousel-arrow')};
@@ -396,7 +395,6 @@ const headerRowStyles = css`
 
 const headerStyles = css`
 	${headlineBold24};
-	color: ${sourcePalette.neutral[7]};
 	color: ${themePalette('--carousel-text')};
 	${headlineBold24};
 	padding-bottom: ${space[2]}px;
@@ -819,7 +817,7 @@ export const Carousel = ({
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 		const [offset] = offsets;
-		if (current === null || offset === undefined) return 0;
+		if (current === null || isUndefined(offset)) return 0;
 
 		const scrolled = current.scrollLeft + offset;
 		const active = offsets.findIndex((el) => el >= scrolled);
@@ -851,13 +849,13 @@ export const Carousel = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || offset === undefined) return;
+		if (current === null || isUndefined(offset)) return;
 
 		const scrolled = current.scrollLeft + offset;
 
 		const nextOffset = offsets.reverse().find((o) => o < scrolled);
 
-		if (nextOffset !== undefined && nextOffset !== 0) {
+		if (!isUndefined(nextOffset) && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });
 		} else {
 			current.scrollTo({ left: 0 });
@@ -872,12 +870,12 @@ export const Carousel = ({
 			.map(({ offsetLeft }) => offsetLeft);
 		const [offset] = offsets;
 
-		if (current === null || offset === undefined) return;
+		if (current === null || isUndefined(offset)) return;
 
 		const scrolled = current.scrollLeft + offset;
 		const nextOffset = offsets.find((currOffset) => currOffset > scrolled);
 
-		if (nextOffset !== undefined && nextOffset !== 0) {
+		if (!isUndefined(nextOffset) && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });
 		}
 
@@ -966,6 +964,7 @@ export const Carousel = ({
 						]}
 						ref={carouselRef}
 						data-component={`carousel-small | maxIndex-${maxIndex}`}
+						data-heatphan-type="carousel"
 					>
 						{trails.map((trail, i) => {
 							const {

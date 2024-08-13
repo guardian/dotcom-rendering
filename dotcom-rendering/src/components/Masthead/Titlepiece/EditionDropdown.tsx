@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { from, space, textSans17 } from '@guardian/source/foundations';
-import { Hide } from '@guardian/source/react-components';
 import type { EditionId } from '../../../lib/edition';
 import { editionList, getEditionFromId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -16,22 +15,37 @@ interface EditionDropdownProps {
 }
 
 const editionDropdownStyles = css`
-	${getZIndex('editionDropdown')};
+	${getZIndex('mastheadEditionDropdown')};
 	display: flex;
+	/** Required to absolutely position the dropdown menu */
 	position: relative;
+	color: ${themePalette('--masthead-nav-link-text')};
+	${textSans17}
+	margin-top: ${space[1]}px;
+
+	ul {
+		position: absolute;
+		left: 0;
+		right: unset;
+		max-height: unset;
+		min-width: 200px;
+
+		${from.mobileMedium} {
+			left: unset;
+			right: 0;
+		}
+	}
 `;
 
 const dropDownOverrides = css`
 	${textSans17}
 	color: ${themePalette('--masthead-nav-link-text')};
-	padding: 0;
+	padding: 6px 0 0 0;
 	margin-top: ${space[1]}px;
+
 	&:not(ul):hover {
 		color: ${themePalette('--masthead-nav-link-text')};
 		text-decoration: underline;
-	}
-	${from.tablet} {
-		right: 0;
 	}
 `;
 
@@ -67,31 +81,13 @@ export const EditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Hide from="desktop">
-				<Dropdown
-					label={activeEdition.id}
-					links={linksToDisplay}
-					id="edition"
-					dataLinkName={dataLinkName}
-					cssOverrides={css`
-						${dropDownOverrides};
-						padding-top: 6px;
-					`}
-				/>
-			</Hide>
-
-			<Hide until="desktop">
-				<Dropdown
-					label={activeEdition.title}
-					links={linksToDisplay}
-					id="edition"
-					dataLinkName={dataLinkName}
-					cssOverrides={css`
-						${dropDownOverrides};
-						padding-top: 6px;
-					`}
-				/>
-			</Hide>
+			<Dropdown
+				label={activeEdition.id}
+				links={linksToDisplay}
+				id="masthead-edition"
+				dataLinkName={dataLinkName}
+				cssOverrides={dropDownOverrides}
+			/>
 		</div>
 	);
 };

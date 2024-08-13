@@ -452,6 +452,7 @@ export const Card = ({
 														? 'large'
 														: imageSize
 												}
+												enableAds={false}
 											/>
 										</Island>
 									</div>
@@ -545,7 +546,6 @@ export const Card = ({
 									byline={byline}
 									showByline={showByline}
 									isExternalLink={isExternalLink}
-									isOnwardContent={isOnwardContent}
 								/>
 								{!isUndefined(starRating) ? (
 									<StarRatingComponent

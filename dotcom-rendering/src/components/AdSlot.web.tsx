@@ -75,10 +75,10 @@ const individualLabelCSS = css`
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
 	background-color: ${schemedPalette('--ad-background')};
-	padding: 0 8px;
+	padding-top: 3px;
 	border-top: 1px solid ${schemedPalette('--ad-border')};
 	color: ${schemedPalette('--ad-labels-text')};
-	text-align: left;
+	text-align: center;
 	box-sizing: border-box;
 `;
 
@@ -241,6 +241,7 @@ const inlineAdStyles = css`
 
 const rightAdStyles = css`
 	background-color: ${schemedPalette('--ad-background-article-inner')};
+	max-width: 300px;
 `;
 
 const liveblogInlineAdStyles = css`

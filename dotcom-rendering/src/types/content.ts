@@ -1,3 +1,5 @@
+import type { ArticleTheme } from '@guardian/libs';
+
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
 
 // -------------------------------------
@@ -321,6 +323,13 @@ export interface QAndAExplainer {
 	body: FEElement[];
 }
 
+export interface MiniProfile {
+	title: string;
+	body: FEElement[];
+	bio?: string;
+	endNote?: string;
+}
+
 export interface KeyTakeawaysBlockElement {
 	_type: 'model.dotcomrendering.pageElements.KeyTakeawaysBlockElement';
 	keyTakeaways: KeyTakeaway[];
@@ -331,14 +340,21 @@ interface QAndAExplainerBlockElement {
 	qAndAExplainers: QAndAExplainer[];
 }
 
+interface MiniProfilesBlockElement {
+	_type: 'model.dotcomrendering.pageElements.MiniProfilesBlockElement';
+	miniProfiles: MiniProfile[];
+}
+
 interface ListItem {
 	title?: string;
 	elements: FEElement[];
+	bio?: string;
+	endNote?: string;
 }
 
 export interface ListBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ListBlockElement';
-	listElementType: 'KeyTakeaways' | 'QAndAExplainer';
+	listElementType: 'KeyTakeaways' | 'QAndAExplainer' | 'MiniProfiles';
 	items: ListItem[];
 	elementId: string;
 }
@@ -728,6 +744,7 @@ export type FEElement =
 	| ListBlockElement
 	| MapBlockElement
 	| MediaAtomBlockElement
+	| MiniProfilesBlockElement
 	| MultiImageBlockElement
 	| NumberedTitleBlockElement
 	| NewsletterSignupBlockElement
@@ -807,7 +824,7 @@ export interface Image {
 
 interface VideoAssets {
 	url: string;
-	mimeType: string;
+	mimeType?: string;
 	fields?: {
 		source?: string;
 		embeddable?: string;

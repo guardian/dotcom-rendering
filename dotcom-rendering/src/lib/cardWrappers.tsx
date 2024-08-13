@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import type { Loading } from '../components/CardPicture';
 import { FrontCard } from '../components/FrontCard';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
@@ -67,7 +68,7 @@ export const Card100Media50 = ({
 			imagePositionOnMobile="top"
 			trailText={
 				// Only show trail text if there is no supportContent
-				trail.supportingContent === undefined ||
+				isUndefined(trail.supportingContent) ||
 				trail.supportingContent.length !== 3
 					? trail.trailText
 					: undefined
@@ -120,7 +121,7 @@ export const Card100Media75 = ({
 			isTagPage={isTagPage}
 			trailText={
 				// Only show trail text if there is no supportContent
-				trail.supportingContent === undefined ||
+				isUndefined(trail.supportingContent) ||
 				trail.supportingContent.length !== 3
 					? trail.trailText
 					: undefined
@@ -434,8 +435,8 @@ export const Card25Media25Tall = ({
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			trailText={
-				trail.avatarUrl === undefined &&
-				(trail.supportingContent === undefined ||
+				isUndefined(trail.avatarUrl) &&
+				(isUndefined(trail.supportingContent) ||
 					trail.supportingContent.length === 0)
 					? trail.trailText
 					: undefined
@@ -803,7 +804,6 @@ export const CardDefault = ({
 			imageLoading={'lazy'}
 			avatarUrl={undefined}
 			headlineSize="small"
-			headlineSizeOnMobile="small"
 			isPlayableMediaCard={false}
 			isTagPage={isTagPage}
 		/>
@@ -842,7 +842,6 @@ export const CardDefaultMedia = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSize="small"
-			headlineSizeOnMobile="small"
 			isPlayableMediaCard={false}
 		/>
 	);
@@ -880,7 +879,6 @@ export const CardDefaultMediaMobile = ({
 			imageLoading={imageLoading}
 			isTagPage={isTagPage}
 			headlineSize="small"
-			headlineSizeOnMobile="small"
 			isPlayableMediaCard={false}
 		/>
 	);

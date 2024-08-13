@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
 import {
 	palette,
 	space,
@@ -22,8 +21,6 @@ type Props = {
 	isPinnedPost: boolean;
 	isOriginalPinnedPost: boolean;
 	absoluteServerTimes: boolean;
-	host?: string;
-	pageId?: string;
 };
 
 const FirstPublished = ({
@@ -32,11 +29,8 @@ const FirstPublished = ({
 	blockId,
 	isPinnedPost,
 	isOriginalPinnedPost,
-	host,
-	pageId,
 	absoluteServerTimes,
 }: Props) => {
-	const baseHref = host && pageId ? joinUrl(host, pageId) : '';
 	const publishedDate = new Date(firstPublished);
 	return (
 		<div
@@ -45,7 +39,7 @@ const FirstPublished = ({
 			`}
 		>
 			<a
-				href={`${baseHref}?page=with:block-${blockId}#block-${blockId}`}
+				href={`?page=with:block-${blockId}#block-${blockId}`}
 				data-ignore="global-link-styling"
 				css={css`
 					${textSansBold12}
@@ -89,7 +83,7 @@ const FirstPublished = ({
 			</a>
 			{isOriginalPinnedPost && (
 				<a
-					href={`${baseHref}#pinned-post`}
+					href={`#pinned-post`}
 					data-ignore="global-link-styling"
 					css={css`
 						${textSansBold12}

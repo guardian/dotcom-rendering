@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
+	type ArticleFormat,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';

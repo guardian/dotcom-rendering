@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
+import {
+	type ArticleFormat,
+	ArticleSpecial,
+	isUndefined,
+} from '@guardian/libs';
 import { article17, space, textSans17 } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
@@ -149,7 +153,7 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 				);
 			}
 
-			if (message === undefined) {
+			if (isUndefined(message)) {
 				return;
 			}
 

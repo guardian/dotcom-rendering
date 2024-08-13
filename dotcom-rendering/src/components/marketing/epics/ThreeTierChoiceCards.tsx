@@ -18,6 +18,11 @@ import {
 	getLocalCurrencySymbol,
 } from '@guardian/support-dotcom-components';
 import type { Dispatch, SetStateAction } from 'react';
+import {
+	ChoiceCardTestData_REGULAR,
+	ChoiceCardTestData_V1,
+	ChoiceCardTestData_V2,
+} from './ThreeTierChoiceCardData';
 import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
 
@@ -89,7 +94,7 @@ const recommendedPillStyles = css`
 	right: ${space[5]}px;
 `;
 
-type ChoiceInfo = {
+export type ChoiceInfo = {
 	supportTier: SupportTier;
 	label: (amount: number, currencySymbol: string) => string;
 	benefitsLabel?: string;
@@ -103,39 +108,6 @@ function getChoiceAmount(
 ): number {
 	return threeTierChoiceCardAmounts[countryGroupId][supportTier];
 }
-
-const Choices = [
-	{
-		supportTier: 'support',
-		label: (amount: number, currencySymbol: string) =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'Support',
-		benefits: [
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-		],
-		recommended: false,
-	},
-	{
-		supportTier: 'allAccess',
-		label: (amount: number, currencySymbol: string) =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'All-access digital',
-		benefits: [
-			'Unlimited access to the Guardian app',
-			'Ad-free reading on all your devices',
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-			'Far fewer asks for support',
-		],
-		recommended: true,
-	},
-	{
-		supportTier: 'other',
-		label: () => 'Support with another amount',
-		benefitsLabel: undefined,
-		benefits: ['We welcome support of any size, any time'],
-		recommended: false,
-	},
-] as const satisfies ReadonlyArray<ChoiceInfo>;
 
 const SupportingBenefits = ({
 	benefitsLabel,
@@ -172,15 +144,32 @@ type ThreeTierChoiceCardsProps = {
 	selectedAmount: number;
 	setSelectedAmount: Dispatch<SetStateAction<number>>;
 	countryCode?: string;
+	variantOfChoiceCard: string;
+};
+
+export const getChoiceCardData = (variant: string): ChoiceInfo[] => {
+	switch (variant) {
+		case 'THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_REGULAR;
+		case 'V1_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_V1;
+		case 'V2_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_V2;
+		default:
+			return ChoiceCardTestData_REGULAR;
+	}
 };
 
 export const ThreeTierChoiceCards = ({
 	countryCode,
 	selectedAmount,
 	setSelectedAmount,
+	variantOfChoiceCard,
 }: ThreeTierChoiceCardsProps) => {
 	const currencySymbol = getLocalCurrencySymbol(countryCode);
 	const countryGroupId = countryCodeToCountryGroupId(countryCode);
+
+	const Choices = getChoiceCardData(variantOfChoiceCard);
 
 	return (
 		<RadioGroup

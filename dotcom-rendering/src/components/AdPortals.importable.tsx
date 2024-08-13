@@ -1,6 +1,7 @@
 import { AdSlot as BridgetAdSlot } from '@guardian/bridget/AdSlot';
 import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
 import type { IRect as BridgetRect } from '@guardian/bridget/Rect';
+import { isUndefined } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Breakpoint } from '@guardian/source/foundations';
 import libDebounce from 'lodash.debounce';
@@ -62,7 +63,7 @@ const adsHaveMoved = (
 	newPositions.some((newPosition, index) => {
 		const oldPositionRect = oldPositions[index]?.rect;
 
-		if (oldPositionRect === undefined) {
+		if (isUndefined(oldPositionRect)) {
 			return false;
 		} else {
 			return !positionsEqual(newPosition.rect, oldPositionRect);
@@ -192,7 +193,7 @@ export const AdPortals = ({
 
 			resizeObserver = new ResizeObserver((entries) => {
 				if (
-					entries[0] !== undefined &&
+					!isUndefined(entries[0]) &&
 					entries[0].target.clientHeight !== bodyHeight.current
 				) {
 					bodyHeight.current = entries[0].target.clientHeight;

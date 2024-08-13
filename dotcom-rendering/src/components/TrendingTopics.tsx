@@ -81,6 +81,7 @@ export const TrendingTopics = ({ trendingTopics }: Props) => {
 				cssOverrides={css`
 					display: block;
 				`}
+				color={palette('--straight-lines')}
 				count={4}
 			/>
 			<div css={topicLabel}>Explore more on these topics</div>

@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	type ArticleFormat,
+	ArticleSpecial,
+} from '@guardian/libs';
 import {
 	from,
 	headlineMedium20,
@@ -160,13 +164,16 @@ const inlineQuoteCss = css`
 
 const supportingQuoteCss = css`
 	position: relative;
-	width: 40%;
 	background-color: ${palette('--pullquote-background')};
 	margin-top: 2px;
 	margin-right: 10px;
 	margin-bottom: 14px;
 	clear: left;
 	float: left;
+
+	${from.phablet} {
+		width: 40%;
+	}
 
 	${from.leftCol} {
 		position: relative;
@@ -180,7 +187,6 @@ const supportingQuoteCss = css`
 `;
 
 const basePhotoEssayQuoteCss = css`
-	line-height: 25px;
 	position: relative;
 	padding: 6px 10px 12px 10px;
 	margin-bottom: 16px;
@@ -262,6 +268,7 @@ export const PullQuoteBlockComponent = ({
 				fontCss(role, format),
 				alignmentCss(role, format),
 			]}
+			data-spacefinder-role={role}
 		>
 			<QuoteIcon colour={palette('--pullquote-icon')} />
 			<blockquote

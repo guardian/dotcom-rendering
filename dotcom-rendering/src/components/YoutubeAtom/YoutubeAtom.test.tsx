@@ -28,7 +28,6 @@ describe('YoutubeAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -48,7 +47,7 @@ describe('YoutubeAtom', () => {
 					consentState={consentStateCanTarget}
 					shouldStick={false}
 					isMainMedia={false}
-					imaEnabled={false}
+					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
@@ -66,7 +65,6 @@ describe('YoutubeAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -87,7 +85,7 @@ describe('YoutubeAtom', () => {
 					overrideImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
-					imaEnabled={false}
+					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
@@ -113,7 +111,6 @@ describe('YoutubeAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -133,7 +130,7 @@ describe('YoutubeAtom', () => {
 					consentState={consentStateCanTarget}
 					shouldStick={false}
 					isMainMedia={false}
-					imaEnabled={false}
+					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
@@ -152,7 +149,6 @@ describe('YoutubeAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -173,7 +169,7 @@ describe('YoutubeAtom', () => {
 					overrideImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
-					imaEnabled={false}
+					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
@@ -193,7 +189,6 @@ describe('YoutubeAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -212,7 +207,7 @@ describe('YoutubeAtom', () => {
 					}}
 					shouldStick={false}
 					isMainMedia={false}
-					imaEnabled={false}
+					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
@@ -232,7 +227,6 @@ describe('YoutubeAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -252,7 +246,7 @@ describe('YoutubeAtom', () => {
 					overrideImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
-					imaEnabled={false}
+					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
@@ -270,7 +264,6 @@ describe('YoutubeAtom', () => {
 				value={{
 					renderingTarget: 'Web',
 					darkModeAvailable: false,
-					updateLogoAdPartnerSwitch: false,
 					assetOrigin: '/',
 					editionId: 'UK',
 				}}
@@ -290,7 +283,7 @@ describe('YoutubeAtom', () => {
 					overrideImage={overlayImage}
 					shouldStick={false}
 					isMainMedia={false}
-					imaEnabled={false}
+					enableIma={false}
 					abTestParticipations={{}}
 					imagePositionOnMobile="none"
 					imageSize="large"
@@ -312,7 +305,6 @@ describe('YoutubeAtom', () => {
 					value={{
 						renderingTarget: 'Web',
 						darkModeAvailable: false,
-						updateLogoAdPartnerSwitch: false,
 						assetOrigin: '/',
 						editionId: 'UK',
 					}}
@@ -332,7 +324,7 @@ describe('YoutubeAtom', () => {
 						overrideImage={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
-						imaEnabled={false}
+						enableIma={false}
 						abTestParticipations={{}}
 						imagePositionOnMobile="left"
 						imageSize="small"
@@ -352,7 +344,7 @@ describe('YoutubeAtom', () => {
 						overrideImage={overlayImage}
 						shouldStick={false}
 						isMainMedia={false}
-						imaEnabled={false}
+						enableIma={false}
 						abTestParticipations={{}}
 						imagePositionOnMobile="left"
 						imageSize="small"

@@ -31,7 +31,7 @@ const bodyStyles = css`
 
 const titleStyles = css`
 	.sticky-tag-link-test & {
-		z-index: 10;
+		${getZIndex('tagLinkOverlay')}
 		position: sticky;
 		top: 0;
 		margin-left: -10px;

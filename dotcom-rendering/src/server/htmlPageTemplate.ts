@@ -1,3 +1,4 @@
+import { isUndefined } from '@guardian/libs';
 import { resets, palette as sourcePalette } from '@guardian/source/foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../lib/assets';
@@ -23,6 +24,7 @@ type BaseProps = {
 	hasPageSkin?: boolean;
 	hasLiveBlogTopAd?: boolean;
 	weAreHiring: boolean;
+	onlyLightColourScheme?: boolean;
 };
 
 interface WebProps extends BaseProps {
@@ -68,9 +70,12 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		canonicalUrl,
 		renderingTarget,
 		hasPageSkin = false,
+		onlyLightColourScheme = false,
 		weAreHiring,
 		config,
 	} = props;
+
+	const doNotIndex = canonicalUrl?.includes('tracking/commissioningdesk');
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -190,7 +195,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 --->`;
 
 	return `<!doctype html>
-        <html lang="en">
+        <html lang="en" ${
+			onlyLightColourScheme ? 'data-color-scheme="light"' : ''
+		}>
             <head>
 			    ${
 					weAreHiring
@@ -204,7 +211,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <meta name="description" content="${he.encode(description)}" />
 				<meta charset="utf-8">
 				${
-					canonicalUrl !== undefined
+					!isUndefined(canonicalUrl)
 						? `<link rel="canonical" href="${canonicalUrl}" />`
 						: '<!-- no canonical URL -->'
 				}
@@ -232,7 +239,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${prefetchTags.join('\n')}
 
                 ${
-					linkedData !== undefined
+					!isUndefined(linkedData)
 						? ` <script type="application/ld+json">
                     			${JSON.stringify(linkedData)}
                 			</script>`
@@ -257,6 +264,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
                 <meta name="robots" content="max-image-preview:large">
+				${doNotIndex ? '<meta name="robots" content="noindex">' : ''}
 
                 <script>
                     window.guardian = ${windowGuardian};

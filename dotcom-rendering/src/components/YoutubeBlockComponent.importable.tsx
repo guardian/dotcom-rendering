@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import type { ConsentState } from '@guardian/libs';
+import type { ArticleFormat, ConsentState } from '@guardian/libs';
 import { body, palette, space } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
-import type { Switches } from '../../src/types/config';
 import { getOphan } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
@@ -37,10 +36,10 @@ type Props = {
 	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
 	showTextOverlay?: boolean;
-	switches?: Switches;
 	// If the youtube block component is used on a card, we can pass in the image size and position on mobile to get the correct styling for the play icon. If it's not used on a card, we can just pass default values to get the standard large play icon.
 	imageSize?: ImageSizeType;
 	imagePositionOnMobile?: ImagePositionType;
+	enableAds: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -97,6 +96,8 @@ const getLargestImageSize = (
 /** always undefined on the server */
 let counter: number | undefined;
 
+const adTargetingDisabled: AdTargeting = { disableAds: true };
+
 export const YoutubeBlockComponent = ({
 	id,
 	assetId,
@@ -116,9 +117,9 @@ export const YoutubeBlockComponent = ({
 	kickerText,
 	pauseOffscreenVideo = false,
 	showTextOverlay,
-	switches,
 	imageSize = 'large',
 	imagePositionOnMobile = 'none',
+	enableAds,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -128,13 +129,7 @@ export const YoutubeBlockComponent = ({
 	const { renderingTarget } = useConfig();
 
 	const abTests = useAB();
-	const abTestsApi = abTests?.api;
 	const abTestParticipations = abTests?.participations ?? {};
-
-	const imaAbTest =
-		abTestsApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
-	const imaSwitch = switches?.youtubeIma ?? false;
-	const imaEnabled = imaAbTest || imaSwitch;
 
 	const [index, setIndex] = useState<number>();
 
@@ -219,7 +214,7 @@ export const YoutubeBlockComponent = ({
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
 				alt={altText ?? mediaTitle ?? ''}
-				adTargeting={adTargeting}
+				adTargeting={enableAds ? adTargeting : adTargetingDisabled}
 				consentState={consentState}
 				height={height}
 				width={width}
@@ -230,7 +225,7 @@ export const YoutubeBlockComponent = ({
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
-				imaEnabled={imaEnabled}
+				enableIma={enableAds}
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
