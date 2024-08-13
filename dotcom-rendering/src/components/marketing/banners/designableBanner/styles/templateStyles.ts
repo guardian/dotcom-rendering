@@ -1,3 +1,8 @@
+/**
+ * @file
+ * This file was migrated from:
+ * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/styles/templateStyles.ts
+ */
 import { css } from '@emotion/react';
 import { from, space } from '@guardian/source/foundations';
 

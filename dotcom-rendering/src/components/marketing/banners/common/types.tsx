@@ -1,3 +1,8 @@
+/**
+ * @file
+ * This file was migrated from:
+ * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/common/types.tsx
+ */
 import type { OphanComponentEvent } from '@guardian/libs';
 import type { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/src/lib';
