@@ -308,10 +308,17 @@ const RemoteBanner = ({ module, fetchEmail }: RemoteBannerProps) => {
 	useEffect(() => {
 		setAutomat();
 
-		window
-			.guardianPolyfilledImport(module.url)
-			.then((bannerModule: { [key: string]: JSX.Element }) => {
-				setBanner(() => bannerModule[module.name] ?? null); // useState requires functions to be wrapped
+		return (
+			module.name === 'SignInPromptBanner'
+				? /* webpackChunkName: "sign-in-prompt-banner" */
+				  import(`../marketing/banners/signInPrompt/SignInPromptBanner`)
+				: /* webpackChunkName: "designable-banner" */
+				  import(
+						`../marketing/banners/designableBanner/DesignableBanner`
+				  )
+		)
+			.then((bannerModule: { [key: string]: React.ElementType }) => {
+				setBanner(() => bannerModule[module.name] ?? null);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${String(error)}`;
