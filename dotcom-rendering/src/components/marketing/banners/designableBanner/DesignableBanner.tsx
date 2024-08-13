@@ -21,7 +21,10 @@ import type {
 	Image,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
-import { useMatchMedia } from '../../../../lib/useMatchMedia';
+import {
+	removeMediaRulePrefix,
+	useMatchMedia,
+} from '../../../../lib/useMatchMedia';
 import { useChoiceCards } from '../../hooks/useChoiceCards';
 import { useReminder } from '../../hooks/useReminder';
 import type { ReactComponent } from '../../lib/ReactComponent';
@@ -124,7 +127,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	submitComponentEvent,
 	design,
 }: BannerRenderProps): JSX.Element => {
-	const isTabletOrAbove = useMatchMedia(from.tablet);
+	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 	const { isReminderActive, onReminderCtaClick, mobileReminderRef } =
 		useReminder(reminderTracking);
 

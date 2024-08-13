@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { body, from } from '@guardian/source/foundations';
-import { useMatchMedia } from '../../../../../lib/useMatchMedia';
+import {
+	removeMediaRulePrefix,
+	useMatchMedia,
+} from '../../../../../lib/useMatchMedia';
 import type { BannerRenderedContent } from '../../common/types';
 import type { HighlightedTextSettings } from '../settings';
 import { createBannerBodyCopy } from './BannerText';
@@ -18,7 +21,7 @@ export function DesignableBannerBody({
 }: DesignableBannerBodyProps): JSX.Element {
 	const styles = getStyles(highlightedTextSettings);
 
-	const isTabletOrAbove = useMatchMedia(from.tablet);
+	const isTabletOrAbove = useMatchMedia(removeMediaRulePrefix(from.tablet));
 
 	return (
 		<div css={styles.container}>
