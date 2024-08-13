@@ -8,12 +8,7 @@ type BannerLastClosedAt =
 	| 'abandonedBasketLastClosedAt';
 
 const setBannerClosedTimestamp = (name: BannerLastClosedAt): void =>
-	storage.local.set(
-		`gu.prefs.${name}`,
-		JSON.stringify({
-			value: new Date().toISOString(),
-		}),
-	);
+	storage.local.set(`gu.prefs.${name}`, new Date().toISOString());
 
 const bannerChannelToLastClosedMap = {
 	contributions: 'engagementBannerLastClosedAt',
