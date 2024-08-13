@@ -131,6 +131,7 @@ const pillarsNavStyles = css`
 			${verticalDivider}
 		}
 	}
+	pointer-events: none;
 `;
 
 const burgerStyles = css`
