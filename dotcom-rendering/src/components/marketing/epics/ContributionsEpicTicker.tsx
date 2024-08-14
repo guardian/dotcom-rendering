@@ -57,9 +57,9 @@ const progressBarStyles = css`
 `;
 
 const progressBarTransform = (
-	end: number,
-	runningTotal: number,
+	goal: number,
 	total: number,
+	runningTotal: number,
 ): string => {
 	const haveStartedAnimating = runningTotal >= 0;
 
@@ -67,8 +67,7 @@ const progressBarTransform = (
 		return 'translateX(-100%)';
 	}
 
-	const percentage = (total / end) * 100 - 100;
-
+	const percentage = (total / goal) * 100 - 100;
 	return `translate3d(${percentage >= 0 ? 0 : percentage}%, 0, 0)`;
 };
 
@@ -82,7 +81,7 @@ const filledProgressStyles = (
 	left: 0;
 	right: 0;
 	bottom: 0;
-	transform: ${progressBarTransform(goal, runningTotal, total)};
+	transform: ${progressBarTransform(goal, total, runningTotal)};
 	transition: transform 3s cubic-bezier(0.25, 0.55, 0.2, 0.85);
 	background-color: #5056f5;
 	height: 10px;
@@ -99,7 +98,8 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	total,
 	goal,
 }: Props) => {
-	const [readyToAnimate, setReadyToAnimate] = useState<boolean>(false);
+	//state to track if the component is ready to animate
+	const [readyToAnimate, setReadyToAnimate] = useState(false);
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 		rootMargin: '-18px',

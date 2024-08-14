@@ -1,12 +1,7 @@
-/**
- * @file
- * This file was migrated from:
- * https://github.com/guardian/support-dotcom-components/blob/a482b35a25ca59f66501c4de02de817046206298/packages/modules/src/hooks/useTicker.ts
- */
 import { useEffect, useState } from 'react';
 
 export const useTicker = (total: number, readyToAnimate: boolean): number => {
-	const [runningTotal, setRunningTotal] = useState<number>(0);
+	const [runningTotal, setRunningTotal] = useState<number>(total);
 
 	useEffect(() => {
 		if (readyToAnimate && runningTotal < total) {
