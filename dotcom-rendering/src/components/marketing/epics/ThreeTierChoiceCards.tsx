@@ -98,7 +98,7 @@ export type ChoiceInfo = {
 	supportTier: SupportTier;
 	label: (amount: number, currencySymbol: string) => string;
 	benefitsLabel?: string;
-	benefits: string[];
+	benefits: (currencySymbol: string) => string[];
 	recommended: boolean;
 };
 
@@ -217,7 +217,9 @@ export const ThreeTierChoiceCards = ({
 													benefitsLabel={
 														benefitsLabel
 													}
-													benefits={benefits}
+													benefits={benefits(
+														currencySymbol,
+													)}
 												/>
 											) : undefined
 										}
