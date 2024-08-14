@@ -1,10 +1,11 @@
+import {
+	TickerCountType,
+	TickerEndType,
+} from '@guardian/support-dotcom-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import lzstring from 'lz-string';
 import React from 'react';
 import { ContributionsEpicTicker } from './ContributionsEpicTicker';
-import { tickerDataProps } from './utils/storybook';
-
-const { tickerSettings, total, goal } = tickerDataProps;
 
 type WithJsonProps<T> = T & { json?: string };
 type Props = WithJsonProps<
@@ -14,9 +15,6 @@ const meta: Meta<Props> = {
 	component: ContributionsEpicTicker,
 	title: 'Components/marketing/ContributionsEpicTicker',
 	args: {
-		tickerSettings,
-		total,
-		goal,
 		json: '',
 	},
 	render: ({ json, ...args }) => {
@@ -31,12 +29,63 @@ export default meta;
 
 type Story = StoryObj<Props>;
 
-export const MoneyTicker: Story = {
-	name: 'MoneyTicker',
+export const MoneyTickerHalfwayWithHeadline: Story = {
 	args: {
 		...meta.args,
 		tickerSettings: {
-			...tickerSettings,
+			endType: TickerEndType.unlimited,
+			countType: TickerCountType.money,
+			currencySymbol: '£',
+			copy: {
+				countLabel: 'Help us reach our end-of-year goal',
+				goalReachedPrimary: '',
+				goalReachedSecondary: '',
+			},
+			name: 'US',
+			tickerData: {
+				total: 100000,
+				goal: 200000,
+			},
 		},
+		total: 5000,
+		goal: 200000,
+	},
+};
+
+export const MoneyTickerNoContributions: Story = {
+	args: {
+		...meta.args,
+		tickerSettings: {
+			endType: TickerEndType.unlimited,
+			countType: TickerCountType.money,
+			currencySymbol: '',
+			copy: {
+				countLabel: '',
+				goalReachedPrimary: '',
+				goalReachedSecondary: '',
+			},
+			name: 'US',
+		},
+		total: 0,
+		goal: 2000000,
+	},
+};
+
+export const MoneyTickerGoalReachedHardstop: Story = {
+	args: {
+		...meta.args,
+		tickerSettings: {
+			endType: TickerEndType.hardstop,
+			countType: TickerCountType.money,
+			currencySymbol: '£',
+			copy: {
+				countLabel: 'Help us reach our end-of-year goal',
+				goalReachedPrimary: '',
+				goalReachedSecondary: '',
+			},
+			name: 'US',
+		},
+		total: 1500000,
+		goal: 1500000,
 	},
 };
