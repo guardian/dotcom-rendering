@@ -2,9 +2,9 @@
 
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
-import type { DCRFrontCard } from '../types/front';
+import type { DCRGroupedTrails } from '../types/front';
 
-type Props = { trails: DCRFrontCard[] };
+type Props = { groupedTrails: DCRGroupedTrails };
 
 const grid = css`
 	display: grid;
@@ -29,7 +29,13 @@ const grid = css`
 
 //desktop
 
-export const FlexibleSpecial = ({ trails }: Props) => {
+export const FlexibleSpecial = ({ groupedTrails }: Props) => {
+	const snaps = [...groupedTrails.snap].slice(0, 1);
+	const cards = [
+		...groupedTrails.snap.slice(1),
+		...groupedTrails.standard,
+	].slice(0, 5);
+
 	return (
 		<div css={grid}>
 			<div
@@ -53,15 +59,10 @@ export const FlexibleSpecial = ({ trails }: Props) => {
 			>
 				<ul>
 					<li>
-						<div>story 1</div>
-						<div>story 2</div>
+						<div>{snaps[0]?.headline}</div>
+						<div>{cards[0]?.headline}</div>
 					</li>
 				</ul>
-			</div>
-			<div>
-				{trails.map((trail) => {
-					return <li key={trail.url}>{trail.headline}</li>;
-				})}
 			</div>
 		</div>
 	);

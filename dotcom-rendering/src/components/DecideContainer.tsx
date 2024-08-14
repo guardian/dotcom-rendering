@@ -229,7 +229,7 @@ export const DecideContainer = ({
 				</Island>
 			);
 		case 'flexible/special':
-			return <FlexibleSpecial trails={trails} />;
+			return <FlexibleSpecial groupedTrails={groupedTrails} />;
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
