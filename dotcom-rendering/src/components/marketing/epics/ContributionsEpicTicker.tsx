@@ -13,6 +13,12 @@ const rootStyles = css`
 	line-height: 18px;
 `;
 
+//styles for headline text (which is optional)
+const headlineStyles = css`
+	${textSansBold17}
+`;
+
+//styles for the numerical count (total raised so far) and the goal text
 const goalLabelStyles = css`
 	${textSans17}
 `;
@@ -60,6 +66,7 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	return (
 		<div ref={setNode} css={rootStyles}>
 			<div>
+				<div css={headlineStyles}>{tickerSettings.copy.countLabel}</div>
 				<div css={soFarContainerStyles}>
 					<div css={goalLabelStyles}>
 						<span css={countLabelStyles}>
