@@ -59,7 +59,7 @@ export const ChoiceCardTestData_V1: ChoiceInfo[] = [
 	},
 	{
 		supportTier: 'other',
-		label: (): string => 'Support just once from £1',
+		label: (): string => 'Support once from just %%CURRENCY_SYMBOL%%1',
 		benefitsLabel: undefined,
 		benefits: [
 			'We welcome support of any size, any time - whether you choose to give £1 or more',
@@ -71,10 +71,10 @@ export const ChoiceCardTestData_V1: ChoiceInfo[] = [
 export const ChoiceCardTestData_V2: ChoiceInfo[] = [
 	{
 		supportTier: 'other',
-		label: (): string => 'Support just once from £1',
+		label: (): string => 'Support once from just %%CURRENCY_SYMBOL%%1',
 		benefitsLabel: undefined,
 		benefits: [
-			'We welcome support of any size, any time - whether you choose to give £1 or more',
+			'We welcome support of any size, any time - whether you choose to give %%CURRENCY_SYMBOL%%1 or more',
 		],
 		recommended: false,
 	},
