@@ -13,6 +13,14 @@ const rootStyles = css`
 	line-height: 18px;
 `;
 
+//styles for the container that holds the ticker
+const tickerContainerStyles = css`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 4px 8px 4px 8px;
+`;
+
 //styles for headline text (which is optional)
 const headlineStyles = css`
 	${textSansBold17}
@@ -28,12 +36,14 @@ const countLabelStyles = css`
 	color: #5056f5;
 `;
 
-const progressBarHeight = 10;
-
-const tickerContainerStyles = css`
-	position: absolute;
-	left: 20px;
-	bottom: ${progressBarHeight + 5}px;
+//styles for the ticker background
+const tickerBackgroundStyles = css`
+	height: 10px;
+	align-self: stretch;
+	align-items: center;
+	display: flex;
+	border-radius: 8px;
+	background: rgba(80, 86, 245, 0.35);
 `;
 
 export type Props = {
@@ -70,6 +80,7 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 					<div css={headlineStyles}>
 						{tickerSettings.copy.countLabel}
 					</div>
+					<div css={tickerBackgroundStyles} />
 					<div css={goalLabelStyles}>
 						<span css={countLabelStyles}>
 							{currencySymbol}
