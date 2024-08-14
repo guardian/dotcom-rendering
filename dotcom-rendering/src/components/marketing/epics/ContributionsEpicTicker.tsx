@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans17, textSansBold17 } from '@guardian/source/foundations';
+import { textSans15, textSansBold17 } from '@guardian/source/foundations';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
@@ -20,7 +20,7 @@ const headlineStyles = css`
 
 //styles for the numerical count (total raised so far) and the goal text
 const goalLabelStyles = css`
-	${textSans17}
+	${textSans15};
 `;
 
 const countLabelStyles = css`
@@ -30,9 +30,9 @@ const countLabelStyles = css`
 
 const progressBarHeight = 10;
 
-const soFarContainerStyles = css`
+const tickerContainerStyles = css`
 	position: absolute;
-	left: 0;
+	left: 20px;
 	bottom: ${progressBarHeight + 5}px;
 `;
 
@@ -66,8 +66,10 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	return (
 		<div ref={setNode} css={rootStyles}>
 			<div>
-				<div css={headlineStyles}>{tickerSettings.copy.countLabel}</div>
-				<div css={soFarContainerStyles}>
+				<div css={tickerContainerStyles}>
+					<div css={headlineStyles}>
+						{tickerSettings.copy.countLabel}
+					</div>
 					<div css={goalLabelStyles}>
 						<span css={countLabelStyles}>
 							{currencySymbol}
