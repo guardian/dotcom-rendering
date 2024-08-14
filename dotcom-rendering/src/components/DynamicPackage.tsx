@@ -28,7 +28,7 @@ type Props = {
 const limitSupportingContent = (card: DCRFrontCard, items = 4) =>
 	card.supportingContent?.slice(0, items) ?? [];
 
-const Snap100 = ({
+export const Snap100 = ({
 	snaps,
 	containerPalette,
 	showAge,
