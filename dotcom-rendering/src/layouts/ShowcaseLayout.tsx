@@ -92,7 +92,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 60px 320px;
+					grid-template-columns: 219px 1px 620px 60px 300px;
 					grid-template-areas:
 						'title  border  headline   headline headline'
 						'lines  border  media      media    media'
@@ -100,6 +100,7 @@ const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 						'meta   border  standfirst .        right-column'
 						'.      border  body       .        right-column'
 						'.      border  .          .        right-column';
+					margin-left: 20px;
 				}
 
 				${until.wide} {
