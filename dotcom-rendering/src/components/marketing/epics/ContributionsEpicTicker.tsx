@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { textSans15, textSansBold17 } from '@guardian/source/foundations';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
@@ -46,6 +47,47 @@ const tickerBackgroundStyles = css`
 	background: rgba(80, 86, 245, 0.35);
 `;
 
+//styles for the moving progress bar
+const progressBarStyles = css`
+	overflow: hidden;
+	width: 100%;
+	height: 10px;
+	position: absolute;
+	border-radius: 8px;
+`;
+
+const progressBarTransform = (
+	end: number,
+	runningTotal: number,
+	total: number,
+): string => {
+	const haveStartedAnimating = runningTotal >= 0;
+
+	if (!haveStartedAnimating) {
+		return 'translateX(-100%)';
+	}
+
+	const percentage = (total / end) * 100 - 100;
+
+	return `translate3d(${percentage >= 0 ? 0 : percentage}%, 0, 0)`;
+};
+
+const filledProgressStyles = (
+	goal: number,
+	runningTotal: number,
+	total: number,
+): SerializedStyles => css`
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transform: ${progressBarTransform(goal, runningTotal, total)};
+	transition: transform 3s cubic-bezier(0.25, 0.55, 0.2, 0.85);
+	background-color: #5056f5;
+	height: 10px;
+`;
+
 export type Props = {
 	tickerSettings: TickerSettings;
 	total: number;
@@ -71,6 +113,7 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	}, [hasBeenSeen]);
 
 	const runningTotal = useTicker(total, readyToAnimate);
+	console.log(goal, runningTotal, total);
 
 	const currencySymbol = tickerSettings.currencySymbol;
 	return (
@@ -80,7 +123,17 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 					<div css={headlineStyles}>
 						{tickerSettings.copy.countLabel}
 					</div>
-					<div css={tickerBackgroundStyles} />
+					<div css={tickerBackgroundStyles}>
+						<div css={progressBarStyles}>
+							<div
+								css={filledProgressStyles(
+									goal,
+									runningTotal,
+									total,
+								)}
+							/>
+						</div>
+					</div>
 					<div css={goalLabelStyles}>
 						<span css={countLabelStyles}>
 							{currencySymbol}
