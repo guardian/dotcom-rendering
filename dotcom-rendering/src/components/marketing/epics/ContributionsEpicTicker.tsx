@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import {
 	space,
-	textSans20,
-	textSansBold20,
+	textSans17,
+	textSansBold17,
 } from '@guardian/source/foundations';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
-import { useIsInView } from '../../../lib/useIsInView';
 import { useTicker } from '../hooks/useTicker';
 import type { ReactComponent } from '../lib/ReactComponent';
+import { useIsInView } from '../../../lib/useIsInView';
 
 const styles = {
 	tickerProgressBar: css`
@@ -55,7 +55,7 @@ const styles = {
 	`,
 
 	tickerHeadline: () => css`
-		${textSansBold20};
+		${textSansBold17};
 		margin-bottom: ${space[2]}px;
 	`,
 
@@ -66,11 +66,12 @@ const styles = {
 	`,
 
 	tickerLabel: () => css`
-		${textSans20}
+		${textSans17}
 	`,
 
 	tickerLabelTotal: () => css`
-		font-weight: 700;
+		${textSansBold17};
+		color: #5056f5;
 	`,
 
 	containerStyles: () => css`
