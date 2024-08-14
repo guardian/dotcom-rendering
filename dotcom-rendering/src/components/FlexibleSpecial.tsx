@@ -2,6 +2,9 @@
 
 import { css } from '@emotion/react';
 import { from } from '@guardian/source/foundations';
+import type { DCRFrontCard } from '../types/front';
+
+type Props = { trails: DCRFrontCard[] };
 
 const grid = css`
 	display: grid;
@@ -26,7 +29,7 @@ const grid = css`
 
 //desktop
 
-export const FlexibleSpecial = () => {
+export const FlexibleSpecial = ({ trails }: Props) => {
 	return (
 		<div css={grid}>
 			<div
@@ -54,6 +57,11 @@ export const FlexibleSpecial = () => {
 						<div>story 2</div>
 					</li>
 				</ul>
+			</div>
+			<div>
+				{trails.map((trail) => {
+					return <li key={trail.url}>{trail.headline}</li>;
+				})}
 			</div>
 		</div>
 	);

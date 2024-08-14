@@ -1,6 +1,7 @@
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { discussionApiUrl } from '../../fixtures/manual/discussionApiUrl';
+import { trails } from '../../fixtures/manual/trails';
 import { FlexibleSpecial } from './FlexibleSpecial';
 import { FrontSection } from './FrontSection';
 
@@ -22,7 +23,7 @@ const meta = {
 			editionId={'UK'}
 			showTopBorder={true}
 		>
-			<FlexibleSpecial />
+			<FlexibleSpecial trails={[]} />
 		</FrontSection>
 	),
 } satisfies Meta<typeof FlexibleSpecial>;
@@ -33,4 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 export const One: Story = {
 	name: 'With one standard card',
+	args: {
+		trails: trails.slice(0, 5),
+	},
 };

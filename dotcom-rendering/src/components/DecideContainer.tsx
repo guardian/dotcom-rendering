@@ -22,10 +22,10 @@ import { FixedSmallSlowIV } from './FixedSmallSlowIV';
 import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
+import { FlexibleSpecial } from './FlexibleSpecial';
 import { HighlightsContainer } from './HighlightsContainer.importable';
 import { Island } from './Island';
 import { NavList } from './NavList';
-import { FlexibleSpecial } from './FlexibleSpecial';
 
 type Props = {
 	trails: DCRFrontCard[];
