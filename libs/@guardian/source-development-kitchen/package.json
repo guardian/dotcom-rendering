@@ -11,15 +11,15 @@
 		}
 	},
 	"dependencies": {
-		"CSNX_SOURCE_DEVELOPMENT_KITCHEN": "npm:@guardian/source-development-kitchen@1.0.0"
+		"CSNX_SOURCE_DEVELOPMENT_KITCHEN": "npm:@guardian/source-development-kitchen@7.0.0"
 	},
 	"peerDependencies": {
-		"@emotion/react": "^11.11.1",
-		"@guardian/libs": "^16.0.0",
-		"@guardian/source": "^1.0.0",
+		"@emotion/react": "^11.11.3",
+		"@guardian/libs": "^18.0.0",
+		"@guardian/source": "^7.0.0",
 		"@types/react": "^18.2.11",
 		"react": "^18.2.0",
 		"tslib": "^2.6.2",
-		"typescript": "~5.3.3"
+		"typescript": "~5.5.2"
 	}
 }
