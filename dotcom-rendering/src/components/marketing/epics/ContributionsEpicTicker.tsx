@@ -27,6 +27,7 @@ const goalLabelStyles = css`
 
 const countLabelStyles = css`
 	${textSansBold17};
+	/* stylelint-disable-next-line color-no-hex */
 	color: #5056f5;
 `;
 
@@ -37,6 +38,7 @@ const tickerBackgroundStyles = css`
 	align-items: center;
 	display: flex;
 	border-radius: 8px;
+	/* stylelint-disable-next-line color-no-hex */
 	background: rgba(80, 86, 245, 0.35);
 	overflow-x: hidden;
 	width: 100%;
