@@ -7,6 +7,7 @@ import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
 export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
+export type AspectRatio = '5:3' | '5:4';
 
 type Props = {
 	imageSize: ImageSizeType;
@@ -15,6 +16,7 @@ type Props = {
 	alt?: string;
 	roundedCorners?: boolean;
 	isCircular?: boolean;
+	aspectRatio?: AspectRatio;
 };
 
 /**
@@ -82,19 +84,23 @@ const block = css`
 	display: block;
 `;
 
-/** On fronts, all images are 5:3 */
-const aspectRatio = css`
-	padding-top: ${(3 / 5) * 100}%;
-	position: relative;
+/** On fronts, flexible-special cards are all images are 5:3 */
+const decideAspectRatio = (aspectRatio: AspectRatio) => {
+	return css`
+		padding-top: ${aspectRatio === '5:4'
+			? `${(4 / 5) * 100}%`
+			: `${(3 / 5) * 100}%`};
+		position: relative;
 
-	& > * {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-`;
+		& > * {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	`;
+};
 
 const borderRadius = css`
 	& > * {
@@ -116,7 +122,14 @@ export const CardPicture = ({
 	loading,
 	roundedCorners,
 	isCircular,
+	aspectRatio = '5:3',
 }: Props) => {
+	console.log(
+		'card picture aspect ratio',
+		aspectRatio,
+		decideAspectRatio(aspectRatio),
+	);
+
 	const sources = generateSources(mainImage, decideImageWidths(imageSize));
 
 	const fallbackSource = getFallbackSource(sources);
@@ -126,7 +139,7 @@ export const CardPicture = ({
 			data-size={imageSize}
 			css={[
 				block,
-				aspectRatio,
+				decideAspectRatio(aspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
 			]}

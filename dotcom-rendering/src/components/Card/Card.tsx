@@ -26,7 +26,7 @@ import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline } from '../CardHeadline';
-import type { Loading } from '../CardPicture';
+import type { AspectRatio, Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
@@ -108,6 +108,7 @@ export type Props = {
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
 	isTagPage?: boolean;
+	aspectRatio?: AspectRatio;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -236,7 +237,9 @@ export const Card = ({
 	showMainVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
+	aspectRatio = '5:3',
 }: Props) => {
+	console.log('card aspect ratio', aspectRatio);
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -476,6 +479,7 @@ export const Card = ({
 											alt={headlineText}
 											loading={imageLoading}
 											roundedCorners={isOnwardContent}
+											aspectRatio={aspectRatio}
 										/>
 									</div>
 								)}
@@ -489,6 +493,7 @@ export const Card = ({
 									alt={media.imageAltText}
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
+									aspectRatio={aspectRatio}
 								/>
 								{showPlayIcon && mainMedia.duration > 0 && (
 									<MediaDuration

@@ -61,6 +61,7 @@ export const OneCardLayout = ({
 					trailText={cards[0].trailText}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
+					aspectRatio="5:4"
 				/>
 			</LI>
 		</UL>
@@ -111,6 +112,7 @@ const TwoCardOrFourCardLayout = ({
 								imagePositionOnDesktop={
 									isTwoCards ? 'left' : 'bottom'
 								}
+								aspectRatio="5:4"
 							/>
 						</LI>
 					);
