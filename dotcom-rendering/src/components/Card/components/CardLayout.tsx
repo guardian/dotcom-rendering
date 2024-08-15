@@ -136,7 +136,7 @@ export const CardLayout = ({
 		]}
 		style={{
 			backgroundColor: cardBackgroundColour,
-			gap: gapStyles(isOnwardContent, hasBackgroundColour),
+			gap: gapStyles(isOnwardContent, hasBackgroundColour, containerType),
 		}}
 	>
 		{children}
