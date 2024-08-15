@@ -348,7 +348,9 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={!isOnwardContent}
+			showTopBar={
+				!isOnwardContent && !(containerType === 'flexible/special')
+			}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
