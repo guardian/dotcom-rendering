@@ -71,13 +71,15 @@ const TwoCardOrFourCardLayout = ({
 	showImage?: boolean;
 	padBottom?: boolean;
 }) => {
+	//TODO : Rename isTwoCards to a better name
+	const isTwoCards = cards.length <= 2;
 	return (
 		<UL direction="row" padBottom={padBottom}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
 						stretch={false}
-						percentage={cards.length <= 2 ? '50%' : '25%'}
+						percentage={isTwoCards ? '50%' : '25%'}
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
@@ -90,6 +92,9 @@ const TwoCardOrFourCardLayout = ({
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
+							imagePositionOnDesktop={
+								isTwoCards ? 'left' : 'bottom'
+							}
 						/>
 					</LI>
 				);
