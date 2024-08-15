@@ -104,7 +104,7 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 
 	useEffect(() => {
 		if (hasBeenSeen) {
-			setTimeout(() => setReadyToAnimate(true), 500);
+			setTimeout(() => setReadyToAnimate(true), 1000);
 		}
 	}, [hasBeenSeen]);
 

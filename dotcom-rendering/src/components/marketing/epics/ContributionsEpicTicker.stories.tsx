@@ -42,12 +42,8 @@ export const MoneyTickerHalfwayWithHeadline: Story = {
 				goalReachedSecondary: '',
 			},
 			name: 'US',
-			tickerData: {
-				total: 100000,
-				goal: 200000,
-			},
 		},
-		total: 5000,
+		total: 100000,
 		goal: 200000,
 	},
 };
@@ -58,7 +54,7 @@ export const MoneyTickerNoContributions: Story = {
 		tickerSettings: {
 			endType: TickerEndType.unlimited,
 			countType: TickerCountType.money,
-			currencySymbol: '',
+			currencySymbol: '$',
 			copy: {
 				countLabel: '',
 				goalReachedPrimary: '',
@@ -71,7 +67,7 @@ export const MoneyTickerNoContributions: Story = {
 	},
 };
 
-export const MoneyTickerGoalReachedHardstop: Story = {
+export const MoneyTickerGoalReached: Story = {
 	args: {
 		...meta.args,
 		tickerSettings: {
@@ -85,7 +81,7 @@ export const MoneyTickerGoalReachedHardstop: Story = {
 			},
 			name: 'US',
 		},
-		total: 1500000,
+		total: 15000000,
 		goal: 1500000,
 	},
 };
