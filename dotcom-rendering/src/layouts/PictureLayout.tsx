@@ -198,6 +198,10 @@ const avatarHeadlineWrapper = css`
 	justify-content: space-between;
 `;
 
+const minHeightWithAvatar = css`
+	min-height: 259px;
+`;
+
 // This styling taken from the similar approach in CommentLayout.tsx
 // If in mobile increase the margin top and margin right deficit
 const avatarPositionStyles = css`
@@ -491,7 +495,12 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 						{displayAvatarUrl ? (
 							<GridItem area="headline">
-								<div css={[avatarHeadlineWrapper, avatarUrl]}>
+								<div
+									css={[
+										avatarHeadlineWrapper,
+										avatarUrl && minHeightWithAvatar,
+									]}
+								>
 									<div css={maxWidth}>
 										<ArticleHeadline
 											format={format}
