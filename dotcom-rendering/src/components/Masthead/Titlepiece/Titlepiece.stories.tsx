@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 import { nav } from '../../Nav/Nav.mock';
-import { Titlepiece } from './Titlepiece';
+import { Titlepiece } from './Titlepiece.importable';
 
 const meta = {
 	title: 'Components/Masthead/Titlepiece',

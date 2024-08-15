@@ -5,7 +5,7 @@ import { palette as themePalette } from '../../palette';
 import { Island } from '../Island';
 import { Section } from '../Section';
 import { TopBar } from '../TopBar.importable';
-import { Titlepiece } from './Titlepiece/Titlepiece';
+import { Titlepiece } from './Titlepiece/Titlepiece.importable';
 
 type Props = {
 	nav: NavType;
