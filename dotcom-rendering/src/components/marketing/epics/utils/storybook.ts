@@ -3,11 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/9c3eae7cb0b159db4a1c40679d6b37710b0bb937/packages/modules/src/modules/epics/utils/storybook.ts
  */
-import {
-	SecondaryCtaType,
-	TickerCountType,
-	TickerEndType,
-} from '@guardian/support-dotcom-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
 	EpicVariant,
 	PageTracking,
@@ -15,7 +11,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { TestTracking } from '@guardian/support-dotcom-components/dist/shared/src/types/abTests/shared';
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types/props/epic';
-import type { Props } from '../ContributionsEpicTicker';
 
 const variant: EpicVariant = {
 	name: 'control',
@@ -73,25 +68,3 @@ const tracking: Tracking = {
 const openCmp = (): void => console.log('open cmp');
 
 export const props: EpicProps = { variant, tracking, openCmp, articleCounts };
-
-export const tickerDataProps: Props = {
-	tickerSettings: {
-		endType: TickerEndType.unlimited,
-		countType: TickerCountType.money,
-		currencySymbol: '£',
-		copy: {
-			countLabel: 'contributions',
-			goalReachedPrimary: 'Thank you',
-			goalReachedSecondary: 'for your support',
-		},
-		name: 'US',
-	},
-	total: 5000,
-	goal: 200000,
-};
-
-export const progressBarTransformProps = {
-	end: 200000,
-	runningTotal: 5000,
-	total: 5000,
-};
