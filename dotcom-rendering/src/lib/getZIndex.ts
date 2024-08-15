@@ -43,7 +43,10 @@ const indices = [
 	'stickyAdWrapper',
 	'stickyAdWrapperNav',
 
+	// My Account dropdown in masthead - needs to be below stickyAdWrapper
 	'mastheadMyAccountDropdown',
+
+	// Edition selector in masthead - needs to be below stickyAdWrapper
 	'mastheadEditionDropdown',
 
 	// Edition selector in nav - needs to be below stickyAdWrapper

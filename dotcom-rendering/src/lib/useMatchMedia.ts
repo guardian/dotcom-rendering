@@ -7,6 +7,9 @@ import { useEffect, useState, useSyncExternalStore } from 'react';
  */
 const cachedQueries = new Map<string, MediaQueryList>();
 
+const removeMediaRulePrefix = (query: string): string =>
+	query.replace('@media', '').trim();
+
 /**
  * A custom hook to test the provided media query. Will return a `boolean`
  * signifying whether the media query currently matches, and will trigger a
@@ -39,4 +42,4 @@ const useMatchMedia = (query: string): boolean => {
 	);
 };
 
-export { useMatchMedia };
+export { removeMediaRulePrefix, useMatchMedia };

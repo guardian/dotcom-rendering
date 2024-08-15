@@ -31,7 +31,8 @@ const carouselStyles = css`
 	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
-	overscroll-behavior: contain;
+	overscroll-behavior-x: contain;
+	overscroll-behavior-y: auto;
 	${until.tablet} {
 		scroll-padding-left: 10px;
 	}

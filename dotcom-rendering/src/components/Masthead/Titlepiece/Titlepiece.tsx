@@ -362,40 +362,52 @@ export const Titlepiece = ({
 							toggleMainMenu();
 						}
 					};
-
 					/**
 					 * Handles click events to manage the state of the navigation menu.
 					 *
 					 * - Toggles the menu open/close state when the menu button (veggieBurger) is clicked.
-					 * - Closes the menu if the click occurs outside both the menu button and the expanded menu.
 					 */
 						const handleMenuClick = (e) => {
 							const menuButtonClicked = veggieBurger.contains(e.target);
 							const clickInsideMenu = expandedMenu.contains(e.target);
 							const menuIsOpen = navInputCheckbox.checked
-							if (menuButtonClicked) {
-									document.body.classList.toggle('nav-is-open');
-									updateAttributesForMenu(menuIsOpen);
-									if (menuIsOpen) {
-										focusOnFirstNavElement();
-									}
-							}
+							if (menuButtonClicked && !menuIsOpen) {
+						    document.body.classList.toggle('nav-is-open')
 
-							if (!menuButtonClicked && !clickInsideMenu && menuIsOpen) {
-									toggleMainMenu()
+							firstColLabel.setAttribute('aria-expanded', 'false')
+                            veggieBurger.setAttribute('data-link-name','header : veggie-burger : show')
+                            expandedMenuClickableTags.forEach(function($selectableElement){
+                                $selectableElement.setAttribute('tabindex','-1')
+                            })
+                          } else if (menuButtonClicked && menuIsOpen) {
+						    document.body.classList.toggle('nav-is-open')
+							firstColLabel.setAttribute('aria-expanded', 'true')
+                            veggieBurger.setAttribute('data-link-name','header : veggie-burger : hide')
+                            expandedMenuClickableTags.forEach(function($selectableElement){
+                                $selectableElement.setAttribute('tabindex','0')
+                            })
+                            focusOnFirstNavElement()
 							}
 						};
 
 					/** Adds event listeners to manage the navigation menu. */
 					if (navInputCheckbox) {
-						document.addEventListener('click', handleMenuClick);
-
+						navInputCheckbox.addEventListener('click', handleMenuClick);
 						veggieBurger.addEventListener('keydown', keydownToggleMainMenu);
-
 						document.addEventListener('keydown', (e) => {
 							if (e.key === 'Escape' && navInputCheckbox.checked) {
 								toggleMainMenu();
 								veggieBurger.focus();
+							}
+						});
+					/**
+					 * Handles mouse down events to manage the state of the navigation menu.
+					 *
+					 * - Closes the menu if the click occurs outside both the menu button and the expanded menu.
+					 */
+					document.addEventListener('mousedown', function(e){
+						if(navInputCheckbox.checked && !expandedMenu.contains(e.target) && !veggieBurger.contains(e.target)){
+						toggleMainMenu()
 							}
 						});
 					}

@@ -214,7 +214,7 @@ export const ShowMore = ({
 						}
 						/* On smaller screens, button text overflows the container so we wrap to prevent it */
 						${until.phablet} {
-							text-wrap: wrap;
+							white-space: normal;
 							height: unset;
 						}
 					`}

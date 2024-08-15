@@ -23,18 +23,6 @@ type Props = {
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
 };
-
-const appsFirstAdIndex = 1;
-
-/**
- * On apps, add an {@linkcode AdPlaceholder} after the 2nd block, and then
- * after every 5th block from then on.
- */
-const shouldInsertAppAd = (isApps: boolean, blockIndex: number): boolean =>
-	isApps &&
-	(blockIndex === appsFirstAdIndex ||
-		(blockIndex - appsFirstAdIndex) % 5 === 0);
-
 /**
  * On liveblogs we insert two sets of ad slots into the page: one set for small
  * screens; one set for large screens. The appropriate set of slots based on the
@@ -83,13 +71,12 @@ export const LiveBlogBlocksAndAdverts = ({
 		);
 	};
 
-	if (!isWeb || isAdFreeUser) {
+	if (isAdFreeUser) {
 		return (
 			<>
-				{blocks.map((block, index) => (
+				{blocks.map((block) => (
 					<Fragment key={block.id}>
 						<LiveBlockComponent block={block} />
-						{shouldInsertAppAd(isApps, index) && <AdPlaceholder />}
 					</Fragment>
 				))}
 			</>
@@ -111,18 +98,19 @@ export const LiveBlogBlocksAndAdverts = ({
 				return (
 					<Fragment key={block.id}>
 						<LiveBlockComponent block={block} />
-						{showAdDesktop && (
+						{isWeb && showAdDesktop && (
 							<AdSlot
 								position="liveblog-inline"
 								index={adPositionDesktop}
 							/>
 						)}
-						{showAdMobile && (
+						{isWeb && showAdMobile && (
 							<AdSlot
 								position="liveblog-inline-mobile"
 								index={adPositionMobile}
 							/>
 						)}
+						{isApps && showAdMobile && <AdPlaceholder />}
 					</Fragment>
 				);
 			})}

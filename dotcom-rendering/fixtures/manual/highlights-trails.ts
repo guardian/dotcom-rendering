@@ -274,3 +274,38 @@ export const trails: Array<DCRFrontCard> = [
 		},
 	},
 ];
+
+export const defaultCard: DCRFrontCard = {
+	format: { display: 0, theme: 4, design: 0 },
+	dataLinkName: 'news | group-0 | card-@3',
+	url: '/money/article/2024/jul/22/number-of-new-uk-buy-to-let-mortgages-halves-in-just-over-a-year',
+	headline:
+		'Number of new UK buy-to-let mortgages halves in just over a year',
+	trailText:
+		'Sector shrinks in size for first time since launch of products in 1996 as higher costs drive out investors',
+	starRating: undefined,
+	webPublicationDate: '2024-07-22T16:19:52.000Z',
+	kickerText: undefined,
+	supportingContent: [],
+	discussionApiUrl:
+		'https://discussion.code.dev-theguardian.com/discussion-api',
+	discussionId: undefined,
+	byline: 'Rupert Jones',
+	showByline: false,
+	snapData: {},
+	isBoosted: false,
+	isCrossword: false,
+	showQuotedHeadline: false,
+	showLivePlayable: false,
+	avatarUrl: undefined,
+	mainMedia: undefined,
+	isExternalLink: false,
+	embedUri: undefined,
+	branding: undefined,
+	slideshowImages: undefined,
+	showMainVideo: false,
+	image: {
+		src: 'https://media.guim.co.uk/dc9dcb8a8d29815e132f798b1d3e7acd528a9df3/0_295_5256_3153/master/5256.jpg',
+		altText: 'A row of terraced houses with many To Let signs',
+	},
+};
