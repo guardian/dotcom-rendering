@@ -112,6 +112,7 @@ const TwoCardOrFourCardLayout = ({
 								imagePositionOnDesktop={
 									isTwoCards ? 'left' : 'bottom'
 								}
+								imageSize={'medium'}
 								aspectRatio="5:4"
 							/>
 						</LI>
