@@ -198,14 +198,13 @@ export const WithTicker: Story = {
 		variant: {
 			...props.variant,
 			tickerSettings: {
-				countType: TickerCountType.money,
 				endType: TickerEndType.unlimited,
+				countType: TickerCountType.money,
 				currencySymbol: '£',
 				copy: {
-					countLabel: 'contributed',
-					goalReachedPrimary: "We've met our goal - thank you",
-					goalReachedSecondary:
-						'Contributions are still being accepted',
+					countLabel: 'Help us reach our end-of-year goal',
+					goalReachedPrimary: '',
+					goalReachedSecondary: '',
 				},
 				tickerData: {
 					total: 10000,

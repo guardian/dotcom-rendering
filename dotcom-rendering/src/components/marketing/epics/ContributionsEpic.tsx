@@ -445,11 +445,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			)}
 
 			{tickerSettings?.tickerData && (
-				<ContributionsEpicTicker
-					tickerSettings={tickerSettings}
-					total={tickerSettings.tickerData.total}
-					goal={tickerSettings.tickerData.goal}
-				/>
+				<ContributionsEpicTicker tickerSettings={tickerSettings} />
 			)}
 
 			{image && (

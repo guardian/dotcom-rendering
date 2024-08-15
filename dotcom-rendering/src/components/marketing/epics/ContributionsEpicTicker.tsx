@@ -87,14 +87,10 @@ const filledProgressStyles = (
 
 export type Props = {
 	tickerSettings: TickerSettings;
-	total: number;
-	goal: number;
 };
 
 export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	tickerSettings,
-	total,
-	goal,
 }: Props) => {
 	//state to track if the component is ready to animate
 	const [readyToAnimate, setReadyToAnimate] = useState(false);
@@ -110,6 +106,8 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 		}
 	}, [hasBeenSeen]);
 
+	const total = tickerSettings.tickerData?.total ?? 0;
+	const goal = tickerSettings.tickerData?.goal ?? 0;
 	const runningTotal = useTicker(total, readyToAnimate);
 
 	const currencySymbol = tickerSettings.currencySymbol;
@@ -137,7 +135,7 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 							{runningTotal.toLocaleString()}
 						</span>{' '}
 						of {currencySymbol}
-						{goal.toLocaleString()} goal
+						{tickerSettings.tickerData?.goal.toLocaleString()} goal
 					</div>
 				</div>
 			</div>
