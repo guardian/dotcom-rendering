@@ -7,13 +7,6 @@ import { useIsInView } from '../../../lib/useIsInView';
 import { useTicker } from '../hooks/useTicker';
 import type { ReactComponent } from '../lib/ReactComponent';
 
-const rootStyles = css`
-	position: relative;
-	height: 65px;
-	margin-bottom: 15px;
-	line-height: 18px;
-`;
-
 //styles for the container that holds the ticker
 const tickerContainerStyles = css`
 	display: flex;
@@ -45,6 +38,9 @@ const tickerBackgroundStyles = css`
 	display: flex;
 	border-radius: 8px;
 	background: rgba(80, 86, 245, 0.35);
+	overflow-x: hidden;
+	width: 100%;
+	position: relative;
 `;
 
 //styles for the moving progress bar
@@ -113,11 +109,10 @@ export const ContributionsEpicTicker: ReactComponent<Props> = ({
 	}, [hasBeenSeen]);
 
 	const runningTotal = useTicker(total, readyToAnimate);
-	console.log(goal, runningTotal, total);
 
 	const currencySymbol = tickerSettings.currencySymbol;
 	return (
-		<div ref={setNode} css={rootStyles}>
+		<div ref={setNode}>
 			<div>
 				<div css={tickerContainerStyles}>
 					<div css={headlineStyles}>
