@@ -95,11 +95,14 @@ const decidePosition = (
 const gapStyles = (
 	isOnwardContent?: boolean,
 	hasBackgroundColour?: boolean,
+	containerType?: DCRContainerType,
 ) => {
 	if (isOnwardContent) {
 		return 0;
 	} else if (hasBackgroundColour) {
 		return `${space[1]}px`;
+	} else if (containerType === 'flexible/special') {
+		return `${space[5]}px`;
 	} else {
 		return `${space[2]}px`;
 	}
