@@ -8,7 +8,13 @@ import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
 
-type Props = { groupedTrails: DCRGroupedTrails };
+type Props = {
+	groupedTrails: DCRGroupedTrails;
+	imageLoading: Loading;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+};
 
 export const OneCardLayout = ({
 	cards,
@@ -92,7 +98,13 @@ const TwoCardOrFourCardLayout = ({
 	);
 };
 
-export const FlexibleSpecial = ({ groupedTrails }: Props) => {
+export const FlexibleSpecial = ({
+	groupedTrails,
+	containerPalette,
+	showAge,
+	absoluteServerTimes,
+	imageLoading,
+}: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1);
 	const splash = [...groupedTrails.standard].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(1, 5);
@@ -101,20 +113,26 @@ export const FlexibleSpecial = ({ groupedTrails }: Props) => {
 		<>
 			<OneCardLayout
 				cards={snaps}
-				absoluteServerTimes={false}
-				imageLoading={'eager'}
+				containerPalette={containerPalette}
+				showAge={showAge}
+				absoluteServerTimes={absoluteServerTimes}
+				imageLoading={imageLoading}
 			/>
 
 			<OneCardLayout
 				cards={splash}
-				absoluteServerTimes={false}
-				imageLoading={'eager'}
+				containerPalette={containerPalette}
+				showAge={showAge}
+				absoluteServerTimes={absoluteServerTimes}
+				imageLoading={imageLoading}
 			/>
 
 			<TwoCardOrFourCardLayout
 				cards={cards}
-				absoluteServerTimes={false}
-				imageLoading={'eager'}
+				containerPalette={containerPalette}
+				showAge={showAge}
+				absoluteServerTimes={absoluteServerTimes}
+				imageLoading={imageLoading}
 			/>
 		</>
 	);

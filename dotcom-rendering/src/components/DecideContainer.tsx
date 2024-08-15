@@ -229,7 +229,15 @@ export const DecideContainer = ({
 				</Island>
 			);
 		case 'flexible/special':
-			return <FlexibleSpecial groupedTrails={groupedTrails} />;
+			return (
+				<FlexibleSpecial
+					groupedTrails={groupedTrails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					imageLoading={imageLoading}
+				/>
+			);
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
