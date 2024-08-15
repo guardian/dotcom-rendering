@@ -96,9 +96,6 @@ export const FlexibleSpecial = ({ groupedTrails }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1);
 	const splash = [...groupedTrails.standard].slice(0, 1);
 	const cards = [...groupedTrails.standard].slice(1, 5);
-	console.log('snaps::', snaps[0]?.headline);
-	console.log('splash::', splash[0]?.headline);
-	cards.map((card, i) => console.log(`card headline ${i}:: `, card.headline));
 
 	return (
 		<>
