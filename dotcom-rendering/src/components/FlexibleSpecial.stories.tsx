@@ -28,6 +28,9 @@ const meta = {
 	},
 	args: {
 		groupedTrails: defaultGroupedTrails,
+		showAge: true,
+		absoluteServerTimes: true,
+		imageLoading: 'eager',
 	},
 	render: (args) => (
 		<FrontSection
@@ -35,12 +38,7 @@ const meta = {
 			editionId={'UK'}
 			showTopBorder={true}
 		>
-			<FlexibleSpecial
-				showAge={true}
-				absoluteServerTimes={true}
-				imageLoading="eager"
-				groupedTrails={args.groupedTrails}
-			/>
+			<FlexibleSpecial {...args} />
 		</FrontSection>
 	),
 } satisfies Meta<typeof FlexibleSpecial>;
