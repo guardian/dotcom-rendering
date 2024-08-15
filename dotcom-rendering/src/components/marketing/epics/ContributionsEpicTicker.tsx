@@ -38,7 +38,6 @@ const tickerBackgroundStyles = css`
 	align-items: center;
 	display: flex;
 	border-radius: 8px;
-	/* stylelint-disable-next-line color-no-hex */
 	background: rgba(80, 86, 245, 0.35);
 	overflow-x: hidden;
 	width: 100%;
@@ -81,6 +80,7 @@ const filledProgressStyles = (
 	bottom: 0;
 	transform: ${progressBarTransform(goal, total, runningTotal)};
 	transition: transform 3s cubic-bezier(0.25, 0.55, 0.2, 0.85);
+	/* stylelint-disable-next-line color-no-hex */
 	background-color: #5056f5;
 	height: 10px;
 `;
