@@ -3,7 +3,6 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { Snap100 } from './DynamicPackage';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { Loading } from './CardPicture';
@@ -11,7 +10,45 @@ import { FrontCard } from './FrontCard';
 
 type Props = { groupedTrails: DCRGroupedTrails };
 
-const SupportingStoryLayout = ({
+export const OneCardLayout = ({
+	cards,
+	containerPalette,
+	showAge,
+	absoluteServerTimes,
+	imageLoading,
+}: {
+	cards: DCRFrontCard[];
+	imageLoading: Loading;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	absoluteServerTimes: boolean;
+}) => {
+	if (!cards[0]) return null;
+
+	return (
+		<UL padBottom={true}>
+			<LI padSides={true}>
+				<FrontCard
+					trail={cards[0]}
+					containerPalette={containerPalette}
+					containerType="dynamic/package"
+					showAge={showAge}
+					absoluteServerTimes={absoluteServerTimes}
+					headlineSize="large"
+					headlineSizeOnMobile="medium"
+					imagePositionOnDesktop="right"
+					imagePositionOnMobile="left"
+					imageSize="medium"
+					trailText={cards[0].trailText}
+					supportingContentAlignment="horizontal"
+					imageLoading={imageLoading}
+				/>
+			</LI>
+		</UL>
+	);
+};
+
+const TwoCardorFourCardLayout = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -57,17 +94,28 @@ const SupportingStoryLayout = ({
 
 export const FlexibleSpecial = ({ groupedTrails }: Props) => {
 	const snaps = [...groupedTrails.snap].slice(0, 1);
-	const cards = [...groupedTrails.standard].slice(0, 4);
-	cards.map((card) => console.log(card.headline));
+	const splash = [...groupedTrails.standard].slice(0, 1);
+	const cards = [...groupedTrails.standard].slice(1, 5);
+	console.log('snaps::', snaps[0]?.headline);
+	console.log('splash::', splash[0]?.headline);
+	cards.map((card, i) => console.log(`card headline ${i}:: `, card.headline));
 
 	return (
 		<>
-			<Snap100
-				snaps={snaps}
+			{snaps && snaps.length > 0 && (
+				<OneCardLayout
+					cards={snaps}
+					absoluteServerTimes={false}
+					imageLoading={'eager'}
+				/>
+			)}
+			<OneCardLayout
+				cards={splash}
 				absoluteServerTimes={false}
 				imageLoading={'eager'}
 			/>
-			<SupportingStoryLayout
+
+			<TwoCardorFourCardLayout
 				cards={cards}
 				absoluteServerTimes={false}
 				imageLoading={'eager'}
