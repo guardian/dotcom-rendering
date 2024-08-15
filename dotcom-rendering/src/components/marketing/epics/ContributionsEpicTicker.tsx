@@ -64,7 +64,7 @@ const progressBarTransform = (
 	}
 
 	const percentage = (total / goal) * 100 - 100;
-	return `translate3d(${percentage >= 0 ? 0 : percentage}%, 0, 0)`;
+	return `translate3d(${percentage > 0 ? 0 : percentage}%, 0, 0)`;
 };
 
 const filledProgressStyles = (
