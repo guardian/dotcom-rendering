@@ -35,7 +35,12 @@ const meta = {
 			editionId={'UK'}
 			showTopBorder={true}
 		>
-			<FlexibleSpecial groupedTrails={args.groupedTrails} />
+			<FlexibleSpecial
+				showAge={true}
+				absoluteServerTimes={true}
+				imageLoading="eager"
+				groupedTrails={args.groupedTrails}
+			/>
 		</FrontSection>
 	),
 } satisfies Meta<typeof FlexibleSpecial>;
