@@ -4,14 +4,17 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { FontWeight, LineHeight } from '@guardian/source/foundations';
 import {
-	body,
 	from,
-	headline,
+	headlineBold17,
+	headlineBold20,
+	headlineMedium17,
+	headlineMedium20,
 	neutral,
 	remSpace,
 	text,
+	textEgyptian17,
+	textEgyptianBold17,
 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
@@ -26,29 +29,31 @@ const interviewStyles = css`
 	${sidePadding}
 `;
 const galleryStyles = css`
-	${body.medium({ lineHeight: 'tight', fontWeight: 'bold' })}
+	${textEgyptianBold17};
+	line-height: 1.15;
 	${from.mobileMedium} {
-		${body.medium({ lineHeight: 'tight' })}
+		${textEgyptian17};
+		line-height: 1.15;
 	}
 	color: ${neutral[100]};
 `;
 
 const getFontStyles = (
 	fontColor: string,
-	lineHeight?: LineHeight,
-	fontWeight?: FontWeight,
+	fontWeight?: 'bold',
 ): SerializedStyles => css`
-	${headline.xxxsmall({ lineHeight, fontWeight })}
+	${fontWeight === 'bold' ? headlineBold17 : headlineMedium17};
 
 	${from.mobileMedium} {
-		${headline.xxsmall({ lineHeight, fontWeight })}
+		${fontWeight === 'bold' ? headlineBold20 : headlineMedium20};
 	}
 	color: ${fontColor};
 `;
 // ----- Headline Component Styles ----- //
 
 const styles = (kickerColor: string): SerializedStyles => css`
-	${body.medium({ lineHeight: 'tight' })}
+	${textEgyptian17};
+	line-height: 1.15;
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: ${remSpace[4]};
@@ -93,10 +98,7 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
 	if (format.display === ArticleDisplay.Immersive) {
-		return css(
-			styles(kickerColor),
-			getFontStyles(neutral[100], 'tight', 'bold'),
-		);
+		return css(styles(kickerColor), getFontStyles(neutral[100], 'bold'));
 	}
 	if (format.design === ArticleDesign.Interview) {
 		return css(styles(kickerColor), interviewStyles);
@@ -105,16 +107,13 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		format.design === ArticleDesign.Analysis ||
 		format.design === ArticleDesign.Letter
 	) {
-		return css(
-			styles(kickerColor),
-			getFontStyles(neutral[46], 'tight', 'bold'),
-		);
+		return css(styles(kickerColor), getFontStyles(neutral[46], 'bold'));
 	}
 	if (
 		format.design === ArticleDesign.Comment ||
 		format.display === ArticleDisplay.Showcase
 	) {
-		return css(styles(kickerColor), getFontStyles(neutral[20], 'tight'));
+		return css(styles(kickerColor), getFontStyles(neutral[20]));
 	}
 
 	if (

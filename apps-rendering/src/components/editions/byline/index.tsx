@@ -3,18 +3,19 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type {
-	FontStyle,
-	FontWeight,
-	LineHeight,
-} from '@guardian/source/foundations';
 import {
-	body,
 	border,
 	from,
-	headline,
+	headlineBold24,
+	headlineBold28,
+	headlineBold34,
+	headlineLightItalic24,
+	headlineLightItalic28,
+	headlineLightItalic34,
 	neutral,
 	remSpace,
+	textEgyptianBold17,
+	textEgyptianBoldItalic17,
 } from '@guardian/source/foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -119,27 +120,33 @@ const styles = (
 };
 
 const largeTextStyles = (
-	fontStyle: FontStyle,
-	fontWeight: FontWeight,
-	lineHeight?: LineHeight,
+	fontStyle: 'normal' | 'italic',
+	fontWeight: 'light' | 'bold',
 ): SerializedStyles => css`
-	${headline.xsmall({ fontStyle, fontWeight, lineHeight })};
-
+	${fontStyle === 'italic' && fontWeight === 'light'
+		? headlineLightItalic24
+		: headlineBold24};
+	line-height: 1.3;
 	${from.tablet} {
-		${headline.small({ fontStyle, fontWeight, lineHeight })};
+		${fontStyle === 'italic' && fontWeight === 'light'
+			? headlineLightItalic28
+			: headlineBold28};
+		line-height: 1.3;
 	}
-
 	${from.desktop} {
-		${headline.medium({ fontStyle, fontWeight, lineHeight })};
+		${fontStyle === 'italic' && fontWeight === 'light'
+			? headlineLightItalic34
+			: headlineBold34};
+		line-height: 1.3;
 	}
 `;
 
 const standardTextStyles = (
-	fontStyle: FontStyle,
-	fontWeight: FontWeight,
-	lineHeight: LineHeight,
+	fontStyle: 'normal' | 'italic',
+	fontWeight: 'light' | 'bold',
 ): SerializedStyles => css`
-	${body.medium({ fontStyle, fontWeight, lineHeight })}
+	${fontStyle === 'italic' ? textEgyptianBoldItalic17 : textEgyptianBold17};
+	${fontWeight === 'light' && 'font-weight: 300;'};
 `;
 
 const bylinePrimaryStyles = (format: ArticleFormat): SerializedStyles => {
@@ -152,13 +159,13 @@ const bylinePrimaryStyles = (format: ArticleFormat): SerializedStyles => {
 	) {
 		return css`
 			color: ${color};
-			${largeTextStyles('normal', 'bold', 'regular')}
+			${largeTextStyles('normal', 'bold')}
 		`;
 	}
 
 	return css`
 		color: ${color};
-		${standardTextStyles('normal', 'bold', 'regular')}
+		${standardTextStyles('normal', 'bold')}
 	`;
 };
 
@@ -175,7 +182,7 @@ const bylineSecondaryStyles = (format: ArticleFormat): SerializedStyles => {
 		`;
 	}
 	return css`
-		${standardTextStyles('italic', 'light', 'regular')};
+		${standardTextStyles('italic', 'light')};
 		color: ${color};
 	`;
 };

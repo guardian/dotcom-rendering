@@ -7,7 +7,9 @@ import { css, ThemeProvider } from '@emotion/react';
 import {
 	brand,
 	brandAlt,
-	headline,
+	headlineBold20,
+	headlineBold34,
+	headlineMedium20,
 	neutral,
 	space,
 	until,
@@ -51,7 +53,7 @@ const asideColumn = css`
 `;
 
 const headingStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headlineBold34}
 	font-size: 32px;
 	color: ${neutral[100]};
 	margin: ${space[1]}px 0 0;
@@ -61,13 +63,13 @@ const headingStyles = css`
 `;
 
 const subHeadingStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })};
+	${headlineBold20};
 	color: ${brandAlt[400]};
 	margin: ${space[2]}px 0;
 `;
 
 const bulletStyles = css`
-	${headline.xxsmall({ fontWeight: 'medium' })};
+	${headlineMedium20};
 	color: ${neutral[100]};
 	display: flex;
 	flex-direction: column;
