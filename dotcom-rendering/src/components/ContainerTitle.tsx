@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import {
 	article17,
 	between,
-	body,
 	headlineBold17,
 	headlineBold24,
 	space,
+	textEgyptian17,
 	until,
 } from '@guardian/source/foundations';
 import { type EditionId, getEditionFromId } from '../lib/edition';
@@ -40,7 +40,9 @@ const headerStylesWithUrl = css`
 `;
 
 const descriptionStyles = css`
-	${body.medium({ fontWeight: 'medium', lineHeight: 'tight' })};
+	${textEgyptian17};
+	line-height: 1.15;
+	font-weight: 500;
 	color: ${schemePalette('--section-description')};
 	p {
 		/* Handle paragraphs in the description */

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	lineHeights,
 	space,
 	textSans14,
 	textSansBold14,
@@ -108,8 +107,8 @@ export const LatestLinks = ({
 
 	/** Reserve space for the latest links to avoid CLS while loading */
 	const minHeight = isDynamo
-		? `calc(${space[1]}px + 4 * ${lineHeights.regular}em);`
-		: `calc(4 * ${lineHeights.regular}em);`;
+		? `calc(${space[1]}px + 4 * 1.3em);`
+		: `calc(4 * 1.3em);`;
 
 	const ulStyle = css`
 		display: flex;

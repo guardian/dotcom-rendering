@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat, ConsentState } from '@guardian/libs';
-import { body, palette, space } from '@guardian/source/foundations';
+import { palette, space, textEgyptian17 } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import type { Switches } from '../../src/types/config';
@@ -174,9 +174,8 @@ export const YoutubeBlockComponent = ({
 						</div>
 						<p
 							css={css`
-								${body.medium({
-									lineHeight: 'tight',
-								})}
+								${textEgyptian17};
+								line-height: 1.15;
 							`}
 						>
 							This video has been removed. This could be because
