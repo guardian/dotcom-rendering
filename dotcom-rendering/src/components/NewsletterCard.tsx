@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	bodyObjectStyles,
-	headlineObjectStyles,
+	headlineBold20,
 	palette,
 	space,
+	textEgyptian14,
 } from '@guardian/source/foundations';
 import {
 	Button,
@@ -50,12 +50,14 @@ const contentWrapperStyle = css`
 	padding-bottom: ${space[2]}px;
 
 	h3 {
-		${headlineObjectStyles.xxsmall({ fontWeight: 'bold' })};
+		${headlineBold20};
 		margin-bottom: ${space[3]}px;
 	}
 
+	// TODO: Replace with article15 and remove line height override?
 	p {
-		${bodyObjectStyles.xsmall({})};
+		${textEgyptian14};
+		line-height: 1.4;
 	}
 `;
 

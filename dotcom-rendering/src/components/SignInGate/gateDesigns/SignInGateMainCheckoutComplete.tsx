@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
+	article17,
 	articleBold17,
-	body,
 	from,
 	headlineBold28,
 	headlineBold34,
@@ -69,7 +69,8 @@ const bulletStyles = css`
 `;
 
 const personalisedBodyTextList = css`
-	${body.medium({ fontWeight: 'medium' })};
+	${article17};
+	font-weight: 500; // TODO: Can we use the default regular weight instead?
 	color: black;
 `;
 
