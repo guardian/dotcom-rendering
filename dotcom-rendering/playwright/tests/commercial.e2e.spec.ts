@@ -12,11 +12,19 @@ test.describe('Commercial E2E tests', () => {
 
 		await cmpAcceptAll(page);
 
+		const totalSlots = 16;
+		const fixedSlots = 4;
+		const inlineSlots = totalSlots - fixedSlots;
 		// We are excluding survey slot as they can be switched off
-		await expectToExist(page, '.js-ad-slot:not([data-name="survey"])', 16);
+		await expectToExist(
+			page,
+			'.js-ad-slot:not([data-name="survey"])',
+			totalSlots,
+		);
 
 		// Check all inline slots are present
-		for (const i of Array(12).keys()) {
+
+		for (const i of Array(inlineSlots).keys()) {
 			await expectToExist(page, `[data-name="inline${i + 1}"]`);
 		}
 
