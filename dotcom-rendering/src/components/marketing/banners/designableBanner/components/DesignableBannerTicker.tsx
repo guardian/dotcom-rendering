@@ -48,6 +48,7 @@ const styles = {
 		width: 100%;
 		height: ${progressBarHeight}px;
 		background: ${backgroundColour};
+		border-radius: 8px;
 	`,
 	progressBarTransform: (
 		end: number,
