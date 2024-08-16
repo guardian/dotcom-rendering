@@ -90,7 +90,8 @@ type FEContainerType =
 	| 'nav/list'
 	| 'nav/media-list'
 	| 'news/most-popular'
-	| 'fixed/highlights';
+	| 'fixed/highlights'
+	| 'flexible/special';
 
 export type FEContainerPalette =
 	| 'EventPalette'

@@ -81,6 +81,7 @@ const accreditationStylesFromLeftCol = css`
 `;
 
 const logoStyles = css`
+	display: flex;
 	${gridMainColumn}
 	grid-row: 1;
 	justify-self: end;
@@ -131,6 +132,7 @@ const pillarsNavStyles = css`
 			${verticalDivider}
 		}
 	}
+	pointer-events: none;
 `;
 
 const burgerStyles = css`
@@ -230,26 +232,24 @@ const subNavWrapper = css`
 	ul {
 		padding-right: ${space[8]}px;
 		position: relative;
-
-		/** Adds a fade overlay to the RHS of the subnav area,
-	 	to visually hint that it is scrollable horizontally */
-		::after {
-			content: '';
-			position: absolute;
-			width: ${space[10]}px;
-			height: 100%;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			background: linear-gradient(
-				to right,
-				transparent,
-				${themePalette('--masthead-nav-background')}
-			);
-		}
 	}
 `;
 
+/** Adds a fade overlay to the RHS of the subnav area,
+			 to visually hint that it is scrollable horizontally */
+const fadeStyles = css`
+	position: absolute;
+	width: ${space[10]}px;
+	height: 100%;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: linear-gradient(
+		to right,
+		transparent 0%,
+		${themePalette('--masthead-nav-background')} 100%
+	);
+`;
 export const Titlepiece = ({
 	nav,
 	editionId,
@@ -501,6 +501,7 @@ export const Titlepiece = ({
 						subNavSections={nav.subNavSections}
 						currentNavLink={nav.currentNavLink}
 					/>
+					<div css={fadeStyles} />
 				</div>
 			)}
 		</Grid>

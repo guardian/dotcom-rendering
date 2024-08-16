@@ -96,6 +96,7 @@ export const groupCards = (
 				),
 			};
 		}
+		case 'flexible/special':
 		case 'dynamic/package': {
 			const snap = curated.filter(({ card }) => card.group === '1');
 			return {

@@ -31,6 +31,8 @@ const pillarsContainer = css`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
+	width: fit-content;
+	pointer-events: auto;
 `;
 
 const pillarBlock = css`
