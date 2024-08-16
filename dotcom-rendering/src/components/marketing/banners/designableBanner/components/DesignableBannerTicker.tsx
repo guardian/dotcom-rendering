@@ -1,8 +1,3 @@
-/**
- * @file
- * This file was migrated from:
- * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/components/DesignableBannerTicker.tsx
- */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { from, space, textSans } from '@guardian/source/foundations';
@@ -30,6 +25,10 @@ const styles = {
 		align-items: end;
 		margin-bottom: ${space[1]}px;
 	`,
+	goalLabelStyles: css`
+		${textSans.small({ fontWeight: 'regular' })};
+	`,
+
 	countLabelStyles: (colour: string) => css`
 		${textSans.xsmall({ fontWeight: 'bold' })};
 		font-size: 13px;
@@ -185,11 +184,6 @@ const DesignableBannerTicker: ReactComponent<DesignableBannerTickerProps> = ({
 						)}
 					/>
 				</div>
-				<div
-					css={styles.goalMarkerStyles(
-						stylingSettings.goalMarkerColour,
-					)}
-				/>
 			</div>
 		</div>
 	);
