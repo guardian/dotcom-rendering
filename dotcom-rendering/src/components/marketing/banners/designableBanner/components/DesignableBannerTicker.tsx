@@ -131,6 +131,23 @@ const DesignableBannerTicker: ReactComponent<DesignableBannerTickerProps> = ({
 
 	return (
 		<div ref={setNode} css={styles.containerStyles}>
+			<div css={styles.progressBarContainerStyles}>
+				<div
+					css={styles.progressBarStyles(
+						stylingSettings.progressBarBackgroundColour,
+					)}
+				>
+					<div
+						css={styles.filledProgressStyles(
+							goal,
+							runningTotal,
+							total,
+							stylingSettings.filledProgressColour,
+							isGoalReached,
+						)}
+					/>
+				</div>
+			</div>
 			<div css={styles.tickerLabelsContainer}>
 				<div css={styles.soFarContainerStyles}>
 					<div
@@ -166,24 +183,6 @@ const DesignableBannerTicker: ReactComponent<DesignableBannerTickerProps> = ({
 								: 'goal'}
 						</span>
 					</div>
-				</div>
-			</div>
-
-			<div css={styles.progressBarContainerStyles}>
-				<div
-					css={styles.progressBarStyles(
-						stylingSettings.progressBarBackgroundColour,
-					)}
-				>
-					<div
-						css={styles.filledProgressStyles(
-							goal,
-							runningTotal,
-							total,
-							stylingSettings.filledProgressColour,
-							isGoalReached,
-						)}
-					/>
 				</div>
 			</div>
 		</div>
