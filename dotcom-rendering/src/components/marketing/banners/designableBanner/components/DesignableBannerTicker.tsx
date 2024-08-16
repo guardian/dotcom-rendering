@@ -1,6 +1,10 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { from, space, textSans } from '@guardian/source/foundations';
+import {
+	textSans15,
+	textSansBold17,
+	space,
+} from '@guardian/source/foundations';
 import { TickerCountType } from '@guardian/support-dotcom-components';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
@@ -24,20 +28,16 @@ const styles = {
 		justify-content: space-between;
 		align-items: end;
 		margin-bottom: ${space[1]}px;
+		padding-top: 7px;
 	`,
 	goalLabelStyles: css`
-		${textSans.small({ fontWeight: 'regular' })};
+		${textSans15};
 	`,
 
 	countLabelStyles: (colour: string) => css`
-		${textSans.xsmall({ fontWeight: 'bold' })};
-		font-size: 13px;
+		${textSansBold17};
 		color: ${colour};
 		line-height: 1.3;
-
-		${from.desktop} {
-			font-size: 17px;
-		}
 	`,
 	progressBarContainerStyles: css`
 		position: relative;
@@ -87,13 +87,6 @@ const styles = {
 		text-align: end;
 		margin-right: ${tickerFillOffset}%;
 		transform: translateX(50%);
-	`,
-	goalMarkerStyles: (colour: string): SerializedStyles => css`
-		border-right: 2px solid ${colour};
-		height: calc(100% + 6px);
-		position: absolute;
-		top: -3px;
-		right: ${tickerFillOffset}%;
 	`,
 };
 
@@ -150,38 +143,17 @@ const DesignableBannerTicker: ReactComponent<DesignableBannerTickerProps> = ({
 			</div>
 			<div css={styles.tickerLabelsContainer}>
 				<div css={styles.soFarContainerStyles}>
-					<div
-						css={styles.countLabelStyles(
-							stylingSettings.textColour,
-						)}
-					>
-						{!isGoalReached && currencySymbol}
-						{isGoalReached
-							? tickerSettings.copy.goalReachedPrimary
-							: runningTotal.toLocaleString()}{' '}
-						<span>
-							{isGoalReached
-								? tickerSettings.copy.goalReachedSecondary
-								: tickerSettings.copy.countLabel}
-						</span>
-					</div>
-				</div>
-
-				<div css={styles.goalContainerStyles}>
-					<div
-						css={styles.countLabelStyles(
-							stylingSettings.textColour,
-						)}
-					>
-						{currencySymbol}
-						{isGoalReached
-							? runningTotal.toLocaleString()
-							: goal.toLocaleString()}{' '}
-						<span>
-							{isGoalReached
-								? tickerSettings.copy.countLabel
-								: 'goal'}
-						</span>
+					<div css={styles.goalLabelStyles}>
+						<span
+							css={styles.countLabelStyles(
+								stylingSettings.textColour,
+							)}
+						>
+							{currencySymbol}
+							{runningTotal.toLocaleString()}
+						</span>{' '}
+						of {currencySymbol}
+						{tickerSettings.tickerData?.goal.toLocaleString()} goal
 					</div>
 				</div>
 			</div>
