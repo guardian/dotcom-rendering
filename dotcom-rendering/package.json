@@ -107,7 +107,7 @@
 		"@types/webpack-bundle-analyzer": "4.7.0",
 		"@types/webpack-env": "1.18.5",
 		"@types/webpack-node-externals": "3.0.4",
-		"@types/youtube": "0.0.47",
+		"@types/youtube": "0.0.50",
 		"ajv": "8.17.1",
 		"ajv-formats": "2.1.1",
 		"amphtml-validator": "1.0.35",
