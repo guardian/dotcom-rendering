@@ -7,8 +7,13 @@ import {
 	space,
 	textSans15,
 } from '@guardian/source/foundations';
-import { Decorator, type StrictArgs } from '@storybook/react';
+import {
+	type Decorator,
+	type StoryContext,
+	type StrictArgs,
+} from '@storybook/react';
 import { ArticleFormat } from '@guardian/libs';
+import type { CSSProperties } from 'react';
 
 const darkStoryCss = css`
 	background-color: ${sourcePalette.neutral[0]};
@@ -18,6 +23,28 @@ const lightStoryCss = css`
 	background-color: ${sourcePalette.neutral[100]};
 	color: ${sourcePalette.neutral[7]};
 `;
+
+function backgroundColour<Args>(
+	colourScheme: 'light' | 'dark',
+	context: StoryContext<Args>,
+): CSSProperties['backgroundColor'] {
+	return colourScheme === 'light'
+		? context.parameters.colourSchemeBackground?.light ??
+				sourcePalette.neutral[100]
+		: context.parameters.colourSchemeBackground?.dark ??
+				sourcePalette.neutral[0];
+}
+
+function textColour<Args>(
+	colourScheme: 'light' | 'dark',
+	context: StoryContext<Args>,
+): CSSProperties['color'] {
+	return colourScheme === 'light'
+		? context.parameters.colourSchemeTextColour?.light ??
+				sourcePalette.neutral[7]
+		: context.parameters.colourSchemeTextColour?.dark ??
+				sourcePalette.neutral[97];
+}
 
 // ----- Decorators ----- //
 
@@ -33,10 +60,14 @@ export const colourSchemeDecorator =
 			{formats.map((format) => (
 				<div
 					data-color-scheme={colourScheme}
-					css={[
-						css(paletteDeclarations(format, colourScheme)),
-						colourScheme === 'dark' ? darkStoryCss : lightStoryCss,
-					]}
+					css={css(paletteDeclarations(format, colourScheme))}
+					style={{
+						backgroundColor: backgroundColour<Args>(
+							colourScheme,
+							context,
+						),
+						color: textColour<Args>(colourScheme, context),
+					}}
 				>
 					<Story args={{ ...context.args, format }} />
 				</div>
