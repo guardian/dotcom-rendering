@@ -386,8 +386,8 @@ importers:
         specifier: 7.75.1
         version: 7.75.1
       '@sentry/integrations':
-        specifier: 7.75.1
-        version: 7.75.1
+        specifier: 7.114.0
+        version: 7.114.0
       '@storybook/addon-essentials':
         specifier: 8.2.9
         version: 8.2.9(storybook@8.2.9)
@@ -5076,6 +5076,14 @@ packages:
       '@sentry/utils': 7.75.1
     dev: false
 
+  /@sentry/core@7.114.0:
+    resolution: {integrity: sha512-YnanVlmulkjgZiVZ9BfY9k6I082n+C+LbZo52MTvx3FY6RE5iyiPMpaOh67oXEZRWcYQEGm+bKruRxLVP6RlbA==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.114.0
+      '@sentry/utils': 7.114.0
+    dev: false
+
   /@sentry/core@7.75.1:
     resolution: {integrity: sha512-Kw4KyKBxbxbh8OKO0S11Tm0gWP+6AaXXYrsq3hp8H338l/wOmIzyckmCbUrc/XJeoRqaFLJbdcCrcUEDZUvsVQ==}
     engines: {node: '>=8'}
@@ -5084,13 +5092,13 @@ packages:
       '@sentry/utils': 7.75.1
     dev: false
 
-  /@sentry/integrations@7.75.1:
-    resolution: {integrity: sha512-qSCyTNX3DiL1aYRmdq10LRhPLfh1KJYKhbmGszC1PII4mt9FbLVmC8fSXiDbhgiuSUKKrDE+J2lC//w688lvHw==}
+  /@sentry/integrations@7.114.0:
+    resolution: {integrity: sha512-BJIBWXGKeIH0ifd7goxOS29fBA8BkEgVVCahs6xIOXBjX1IRS6PmX0zYx/GP23nQTfhJiubv2XPzoYOlZZmDxg==}
     engines: {node: '>=8'}
     dependencies:
-      '@sentry/core': 7.75.1
-      '@sentry/types': 7.75.1
-      '@sentry/utils': 7.75.1
+      '@sentry/core': 7.114.0
+      '@sentry/types': 7.114.0
+      '@sentry/utils': 7.114.0
       localforage: 1.10.0
     dev: false
 
@@ -5104,9 +5112,21 @@ packages:
       '@sentry/utils': 7.75.1
     dev: false
 
+  /@sentry/types@7.114.0:
+    resolution: {integrity: sha512-tsqkkyL3eJtptmPtT0m9W/bPLkU7ILY7nvwpi1hahA5jrM7ppoU0IMaQWAgTD+U3rzFH40IdXNBFb8Gnqcva4w==}
+    engines: {node: '>=8'}
+    dev: false
+
   /@sentry/types@7.75.1:
     resolution: {integrity: sha512-km+ygqgMDaFfTrbQwdhrptFqx0Oq15jZABqIoIpbaOCkCAMm+tyCqrFS8dTfaq5wpCktqWOy2qU/DOpppO99Cg==}
     engines: {node: '>=8'}
+    dev: false
+
+  /@sentry/utils@7.114.0:
+    resolution: {integrity: sha512-319N90McVpupQ6vws4+tfCy/03AdtsU0MurIE4+W5cubHME08HtiEWlfacvAxX+yuKFhvdsO4K4BB/dj54ideg==}
+    engines: {node: '>=8'}
+    dependencies:
+      '@sentry/types': 7.114.0
     dev: false
 
   /@sentry/utils@7.75.1:
