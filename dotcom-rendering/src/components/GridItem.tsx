@@ -8,6 +8,7 @@ type Props = {
 	 * The element type to use.
 	 */
 	element?: 'div' | 'article' | 'main' | 'aside' | 'section';
+	leftBorder?: boolean;
 };
 
 const rightColumnStyles = css`
@@ -30,15 +31,31 @@ const bodyStyles = css`
 
 const gridArea = css`
 	grid-area: var(--grid-area);
+	position: relative;
+`;
+
+const leftBorderStyles = css`
+	:before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: -10px;
+		width: 1px;
+		height: 100%;
+		border-left: 1px solid var(--section-border);
+	}
 `;
 
 export const GridItem = ({
 	children,
 	area,
 	element: Element = 'div',
+	leftBorder = false,
 }: Props) => (
 	<Element
 		css={[
+			leftBorder && leftBorderStyles,
 			area === 'body' && bodyStyles,
 			area === 'right-column' && rightColumnStyles,
 			gridArea,
