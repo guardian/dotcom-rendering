@@ -157,7 +157,7 @@ export const YoutubeBlockComponent = ({
 			});
 		}
 		if (renderingTarget === 'Apps') {
-			// set the minimum consent state for apps
+			// set the minimum unconsented state for apps
 			setConsentState({
 				canTarget: false,
 				framework: 'tcfv2',
@@ -204,7 +204,7 @@ export const YoutubeBlockComponent = ({
 		);
 	}
 
-	// TODO ophan tracking for apps?
+	// TODO video event tracking for apps
 	const ophanTracking = async (
 		trackingEvent: VideoEventKey,
 	): Promise<void> => {

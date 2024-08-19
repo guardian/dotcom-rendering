@@ -141,8 +141,9 @@ class YouTubePlayer {
 		return playerPromise;
 	}
 
-	private logError(e: Error) {
-		log('dotcom', `YouTubePlayer failed to load: ${e.message}`);
+	private logError(error: Error) {
+		log('dotcom', `YouTubePlayer failed to load: ${error.message}`);
+		window.guardian.modules.sentry.reportError(error, 'youtube-player');
 	}
 
 	getPlayerState(): Promise<YT.PlayerState | void> {
