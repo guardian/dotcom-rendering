@@ -315,8 +315,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const shouldShowTagLink =
 		isWeb &&
-		!!article.config.switches.tagLinkDesign &&
-		article.config.abTests.tagLinkDesignControl !== 'control' &&
 		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	return (
