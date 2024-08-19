@@ -1,9 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
+	space,
 	textSans15,
 	textSansBold17,
-	space,
 } from '@guardian/source/foundations';
 import { TickerCountType } from '@guardian/support-dotcom-components';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
