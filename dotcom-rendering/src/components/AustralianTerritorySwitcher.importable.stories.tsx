@@ -1,25 +1,33 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/test';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 
-export default {
+const meta = {
 	component: AustralianTerritorySwitcher,
-	title: 'Components/AustralianTerritorySwitcher',
-};
+	title: 'Components/Australian Territory Switcher',
+} satisfies Meta<typeof AustralianTerritorySwitcher>;
 
-export const Victoria = () => (
-	<AustralianTerritorySwitcher targetedTerritory="AU-VIC" />
-);
+export default meta;
 
-export const Queensland = () => (
-	<AustralianTerritorySwitcher targetedTerritory="AU-QLD" />
-);
+type Story = StoryObj<typeof meta>;
 
-/**
- * Clicks the “Not in Queensland” button so that Chromatic can capture
- * it the component in its `expanded` state.
- */
-Queensland.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-	const canvas = within(canvasElement);
-	await userEvent.click(canvas.getByRole('button'));
-};
-Queensland.storyName = 'Queensland (expanded)';
+export const Victoria = {
+	args: {
+		targetedTerritory: 'AU-VIC',
+	},
+} satisfies Story;
+
+export const QueenslandExpanded = {
+	args: {
+		targetedTerritory: 'AU-QLD',
+	},
+	/**
+	 * Clicks the “Not in Queensland” button so that Chromatic can capture
+	 * the component in its `expanded` state.
+	 */
+	play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+		const canvas = within(canvasElement);
+		await userEvent.click(canvas.getByRole('button'));
+	},
+	name: 'Queensland, expanded',
+} satisfies Story;
