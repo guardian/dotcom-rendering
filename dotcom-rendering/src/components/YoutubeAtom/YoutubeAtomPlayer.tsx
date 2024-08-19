@@ -351,10 +351,15 @@ const isSignedIn = async (): Promise<boolean> => {
 			authStatus.kind === 'SignedInWithOkta'
 			? true
 			: false;
-	} catch (error) {
-		console.error(error);
-		return false;
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			window.guardian.modules.sentry.reportError(
+				error,
+				'youtube-atom-player-is-signed-in',
+			);
+		}
 	}
+	return Promise.resolve(false);
 };
 
 export const YoutubeAtomPlayer = ({
@@ -427,7 +432,7 @@ export const YoutubeAtomPlayer = ({
 				);
 
 				/**
-				 * Configuration for the core YouTube player
+				 * Configuration for the base YouTube player
 				 * IMA is configured separately
 				 */
 				const basePlayerConfiguration: YouTubePlayerArgs = {
@@ -437,12 +442,16 @@ export const YoutubeAtomPlayer = ({
 						width: '100%',
 						videoId,
 						playerVars: {
+							controls: 1,
+							// @ts-expect-error -- advised by YouTube for Android but does not exist in @types/youtube
+							external_fullscreen: 1,
+							fs: 1,
 							modestbranding: 1,
 							origin,
 							playsinline: 1,
 							rel: 0,
 						},
-						// Since IMA the YouTube player API no longer accepts ad configuration
+						// Since IMA ads the YouTube player API no longer accepts ad configuration
 						embedConfig: {
 							relatedChannels: [],
 							adsConfig: { disableAds: true },
@@ -474,13 +483,14 @@ export const YoutubeAtomPlayer = ({
 									createImaManagerListeners(uniqueId),
 							});
 						})
-						.catch((error) => {
-							console.error(error);
+						.catch((error: Error) => {
+							window.guardian.modules.sentry.reportError(
+								error,
+								'youtube-atom-player-ima',
+							);
 						});
 				} else {
-					player.current = new YouTubePlayer({
-						...basePlayerConfiguration,
-					});
+					player.current = new YouTubePlayer(basePlayerConfiguration);
 				}
 
 				/**
