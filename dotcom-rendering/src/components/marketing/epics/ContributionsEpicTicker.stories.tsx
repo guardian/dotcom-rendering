@@ -42,7 +42,7 @@ export const MoneyTickerHalfwayWithHeadline: Story = {
 				goalReachedSecondary: '',
 			},
 			tickerData: {
-				total: 10000,
+				total: 50000,
 				goal: 100000,
 			},
 			name: 'US',
