@@ -152,7 +152,7 @@ const adStyles = css`
 		}
 
 		${from.wide} {
-			margin-right: -380px;
+			margin-right: -400px;
 		}
 	}
 
