@@ -258,6 +258,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 								dataLinkName={trail.dataLinkName}
 								isExternalLink={trail.isExternalLink}
 								showQuotedHeadline={trail.showQuotedHeadline}
+								mainMedia={trail.mainMedia}
 							/>
 						</li>
 					);
