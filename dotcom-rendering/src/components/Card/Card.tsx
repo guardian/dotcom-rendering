@@ -348,6 +348,24 @@ export const Card = ({
 	 */
 	const hasBackgroundColour = !containerPalette && isMediaCard(format);
 
+	const isHorizontalOnDesktop =
+		imagePositionOnDesktop === 'left' || imagePositionOnDesktop === 'right';
+
+	const getGapSize = () => {
+		if (isOnwardContent) {
+			return 'none';
+		} else if (hasBackgroundColour) {
+			return 'small';
+		} else if (
+			containerType === 'flexible/special' &&
+			isHorizontalOnDesktop
+		) {
+			return 'large';
+		} else {
+			return 'medium';
+		}
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -370,8 +388,7 @@ export const Card = ({
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
 				containerType={containerType}
-				isOnwardContent={isOnwardContent}
-				hasBackgroundColour={hasBackgroundColour}
+				gapSize={getGapSize()}
 			>
 				{media && (
 					<ImageWrapper
