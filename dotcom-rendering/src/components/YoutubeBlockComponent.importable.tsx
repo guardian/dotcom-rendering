@@ -1,9 +1,15 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat, ConsentState } from '@guardian/libs';
+import { MediaEvent } from '@guardian/bridget/MediaEvent';
+import {
+	type ArticleFormat,
+	type ConsentState,
+	isUndefined,
+} from '@guardian/libs';
 import { body, palette, space } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
+import { getVideoClient } from '../lib/bridgetApi';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
@@ -98,6 +104,27 @@ let counter: number | undefined;
 
 const adTargetingDisabled: AdTargeting = { disableAds: true };
 
+const getAppsMediaEvent = (
+	trackingEvent: VideoEventKey,
+): MediaEvent | undefined => {
+	switch (trackingEvent) {
+		case 'cued':
+			return MediaEvent.ready;
+		case 'play':
+			return MediaEvent.play;
+		case '25':
+			return MediaEvent.percent25;
+		case '50':
+			return MediaEvent.percent50;
+		case '75':
+			return MediaEvent.percent75;
+		case 'end':
+			return MediaEvent.end;
+		default:
+			return undefined;
+	}
+};
+
 export const YoutubeBlockComponent = ({
 	id,
 	assetId,
@@ -165,6 +192,33 @@ export const YoutubeBlockComponent = ({
 		}
 	}, [renderingTarget]);
 
+	const ophanTrackerWeb = useCallback(
+		(trackingEvent: VideoEventKey) => {
+			void getOphan('Web').then((ophan) => {
+				ophan.record({
+					video: {
+						id: `gu-video-youtube-${id}`,
+						eventType: `video:content:${trackingEvent}`,
+					},
+				});
+			});
+		},
+		[id],
+	);
+
+	const ophanTrackerApps = useCallback(
+		(trackingEvent: VideoEventKey) => {
+			const appsMediaEvent = getAppsMediaEvent(trackingEvent);
+			if (!isUndefined(appsMediaEvent)) {
+				void getVideoClient().sendVideoEvent({
+					videoId: id,
+					event: appsMediaEvent,
+				});
+			}
+		},
+		[id],
+	);
+
 	if (expired) {
 		return (
 			<figure
@@ -204,20 +258,6 @@ export const YoutubeBlockComponent = ({
 		);
 	}
 
-	// TODO video event tracking for apps
-	const ophanTracking = async (
-		trackingEvent: VideoEventKey,
-	): Promise<void> => {
-		if (!id) return;
-		const ophan = await getOphan(renderingTarget);
-		ophan.record({
-			video: {
-				id: `gu-video-youtube-${id}`,
-				eventType: `video:content:${trackingEvent}`,
-			},
-		});
-	};
-
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
@@ -236,7 +276,11 @@ export const YoutubeBlockComponent = ({
 				width={width}
 				title={mediaTitle}
 				duration={duration}
-				eventEmitters={renderingTarget === 'Web' ? [ophanTracking] : []}
+				eventEmitters={
+					renderingTarget === 'Web'
+						? [ophanTrackerWeb]
+						: [ophanTrackerApps]
+				}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={renderingTarget === 'Web' ? stickyVideos : false}
