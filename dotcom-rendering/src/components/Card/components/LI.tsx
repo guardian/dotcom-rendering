@@ -80,6 +80,23 @@ const decideDivider = (
 		: verticalDivider(borderColour);
 };
 
+//* Function to display the correct bottom border.The percentage dictates at which breakpoint the border is visible */
+const decideBorder = (percentage: CardPercentageType) => {
+	if (percentage === '100%') {
+		return css`
+			padding-bottom: 20px;
+			border-bottom: 1px solid ${palette('--section-border')};
+		`;
+	} else {
+		return css`
+			${until.desktop} {
+				padding-bottom: 20px;
+				border-bottom: 1px solid ${palette('--section-border')};
+			}
+		`;
+	}
+};
+
 type Props = {
 	children: React.ReactNode;
 	/** Used to give a particular LI more or less weight / space */
@@ -102,6 +119,8 @@ type Props = {
 	LI will have bottom padding, but won't have another card in the same container directly below it. */
 	offsetBottomPaddingOnDivider?: boolean;
 	verticalDividerColour?: string;
+	/** Toggle to show a bottom border. */
+	showBottomBorder?: boolean;
 };
 
 export const LI = ({
@@ -116,6 +135,7 @@ export const LI = ({
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
 	verticalDividerColour,
+	showBottomBorder = false,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
@@ -135,6 +155,7 @@ export const LI = ({
 				padSidesOnMobile &&
 					sidePaddingStylesMobile(padSidesMobileOverride),
 				snapAlignStart && snapAlignStartStyles,
+				showBottomBorder && decideBorder(percentage ?? '100%'),
 			]}
 		>
 			{children}

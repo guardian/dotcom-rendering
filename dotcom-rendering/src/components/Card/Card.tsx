@@ -239,7 +239,6 @@ export const Card = ({
 	isTagPage = false,
 	aspectRatio = '5:3',
 }: Props) => {
-	console.log('card aspect ratio', aspectRatio);
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
@@ -341,7 +340,7 @@ export const Card = ({
 	const cardBackgroundColour = isOnwardContent
 		? themePalette('--onward-content-card-background')
 		: themePalette('--card-background');
-
+	const isFlexibleContainer = containerType === 'flexible/special';
 	/**
 	 * Some cards in standard containers have contrasting background colours.
 	 * We need to add additional padding to these cards to keep the text readable.
@@ -356,10 +355,7 @@ export const Card = ({
 			return 'none';
 		} else if (hasBackgroundColour) {
 			return 'small';
-		} else if (
-			containerType === 'flexible/special' &&
-			isHorizontalOnDesktop
-		) {
+		} else if (isFlexibleContainer && isHorizontalOnDesktop) {
 			return 'large';
 		} else {
 			return 'medium';
@@ -369,9 +365,7 @@ export const Card = ({
 	return (
 		<CardWrapper
 			format={format}
-			showTopBar={
-				!isOnwardContent && !(containerType === 'flexible/special')
-			}
+			showTopBar={!isOnwardContent && !isFlexibleContainer}
 			containerPalette={containerPalette}
 			isOnwardContent={isOnwardContent}
 		>
