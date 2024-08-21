@@ -20,6 +20,7 @@ type Props = {
 	isImmersive?: boolean;
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
+	pageId?: string;
 };
 
 /**
@@ -53,6 +54,7 @@ export const Masthead = ({
 	isImmersive,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
+	pageId,
 }: Props) => (
 	<header data-component="header">
 		<Section
@@ -101,12 +103,15 @@ export const Masthead = ({
 			</Section>
 		)}
 
-		<Titlepiece
-			nav={nav}
-			editionId={editionId}
-			showSubNav={showSubNav}
-			isImmersive={isImmersive}
-			hasPageSkin={hasPageSkin}
-		/>
+		<Island priority="critical">
+			<Titlepiece
+				nav={nav}
+				editionId={editionId}
+				showSubNav={showSubNav}
+				isImmersive={isImmersive}
+				hasPageSkin={hasPageSkin}
+				pageId={pageId}
+			/>
+		</Island>
 	</header>
 );

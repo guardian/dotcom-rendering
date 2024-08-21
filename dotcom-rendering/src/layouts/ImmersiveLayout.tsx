@@ -344,6 +344,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							isImmersive={true}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
+							pageId={article.pageId}
 						/>
 					) : (
 						<div

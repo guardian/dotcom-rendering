@@ -308,6 +308,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										isImmersive={false}
 										hasPageSkin={false}
 										hasPageSkinContentSelfConstrain={false}
+										pageId={article.pageId}
 									/>
 								) : (
 									<>
