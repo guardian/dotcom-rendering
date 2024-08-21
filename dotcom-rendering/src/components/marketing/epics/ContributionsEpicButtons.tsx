@@ -215,6 +215,20 @@ export const ContributionsEpicButtons = ({
 				),
 			};
 		}
+		if (
+			showChoiceCards &&
+			variantOfChoiceCard === 'THREE_TIER_CHOICE_CARDS' &&
+			!isUndefined(threeTierChoiceCardSelectedAmount)
+		) {
+			return {
+				text: cta.text,
+				baseUrl: addChoiceCardsParams(
+					cta.baseUrl,
+					'MONTHLY',
+					threeTierChoiceCardSelectedAmount,
+				),
+			};
+		}
 		if (choiceCardSelection) {
 			return {
 				text: cta.text,
