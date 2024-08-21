@@ -70,7 +70,7 @@ const bulletStyles = css`
 
 const personalisedBodyTextList = css`
 	${article17};
-	font-weight: 500; // TODO: Can we use the default regular weight instead?
+	font-weight: 500; /* TODO: Can we use the default regular weight instead? */
 	color: black;
 `;
 
