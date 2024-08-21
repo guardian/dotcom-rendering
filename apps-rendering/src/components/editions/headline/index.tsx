@@ -4,12 +4,17 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { FontWeight, LineHeight } from '@guardian/source/foundations';
 import {
 	border,
 	from,
-	headline,
+	headlineBold24,
+	headlineBold28,
+	headlineBold34,
+	headlineLight24,
+	headlineLight28,
+	headlineLight34,
 	headlineMedium24,
+	headlineMedium28,
 	headlineMedium34,
 	headlineMedium42,
 	neutral,
@@ -97,13 +102,14 @@ const interviewStyles = css`
 `;
 
 const interviewFontStyles = css`
-	${headline.xsmall({ lineHeight: 'regular' })}
+	${headlineMedium24};
 	${from.mobileMedium} {
-		${headline.small({ lineHeight: 'regular' })}
+		${headlineMedium28};
 	}
 	${from.tablet} {
-		${headline.medium({ lineHeight: 'regular' })}
+		${headlineMedium34};
 	}
+	line-height: 1.3;
 	background-color: ${neutral[7]};
 	color: ${neutral[100]};
 	white-space: pre-wrap;
@@ -130,18 +136,23 @@ const seriesStyles = (isInterviewVideoHeader: boolean): SerializedStyles => css`
 // ----- Headline Component Styles ----- //
 
 const getFontStyles = (
-	lineHeight: LineHeight,
-	fontWeight: FontWeight,
+	lineHeight: 'tight' | 'regular',
+	fontWeight: 'light' | 'medium' | 'bold',
 ): SerializedStyles => css`
-	${headline.xsmall({ lineHeight, fontWeight })}
-
+	${fontWeight === 'light' && headlineLight24};
+	${fontWeight === 'medium' && headlineMedium24};
+	${fontWeight === 'bold' && headlineBold24};
 	${from.mobileMedium} {
-		${headline.small({ lineHeight, fontWeight })}
+		${fontWeight === 'light' && headlineLight28};
+		${fontWeight === 'medium' && headlineMedium28};
+		${fontWeight === 'bold' && headlineBold28};
 	}
-
 	${from.tablet} {
-		${headline.medium({ lineHeight, fontWeight })}
+		${fontWeight === 'light' && headlineLight34};
+		${fontWeight === 'medium' && headlineMedium34};
+		${fontWeight === 'bold' && headlineBold34};
 	}
+	${lineHeight === 'regular' && 'line-height: 1.3;'};
 `;
 
 const getSharedStyles = (format: ArticleFormat): SerializedStyles => css`
