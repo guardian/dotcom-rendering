@@ -101,7 +101,7 @@ const getUrl = ({ pageId, blockId }: { pageId: string; blockId?: string }) => {
 export const CopyNativeShareButton = ({
 	onShare,
 	size,
-	isLiveBlogMeta: isLiveBlogMeta,
+	isLiveBlogMeta,
 	isCopied,
 }: {
 	onShare: () => void;
