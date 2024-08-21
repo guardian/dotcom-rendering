@@ -254,6 +254,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
+						pageId={article.pageId}
 					/>
 				) : (
 					<>

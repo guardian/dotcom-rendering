@@ -222,6 +222,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					isImmersive={false}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
+					pageId={article.pageId}
 				/>
 			) : (
 				<>

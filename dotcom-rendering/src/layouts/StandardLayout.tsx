@@ -455,6 +455,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							contributionsServiceUrl={contributionsServiceUrl}
 							showSubNav={!isLabs}
 							hasPageSkinContentSelfConstrain={true}
+							pageId={article.pageId}
 						/>
 					) : (
 						<>
