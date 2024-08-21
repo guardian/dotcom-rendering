@@ -254,6 +254,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 							threeTierChoiceCardSelectedAmount={
 								threeTierChoiceCardSelectedAmount
 							}
+							variantOfChoiceCard="THREE_TIER_CHOICE_CARDS"
 						/>
 					</>
 				)}
