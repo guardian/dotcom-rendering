@@ -51,6 +51,14 @@ const dropDownOverrides = css`
 	}
 `;
 
+const editionIdMap: Record<EditionId, string> = {
+	INT: 'Int',
+	UK: 'UK',
+	US: 'US',
+	AU: 'Aus',
+	EUR: 'Eur',
+};
+
 export const EditionDropdown = ({
 	editionId,
 	dataLinkName,
@@ -82,7 +90,9 @@ export const EditionDropdown = ({
 		...dropdownItems.filter(({ isActive }) => !isActive),
 	];
 
-	const label = showCurrentEdition ? activeEdition.id : 'Edition';
+	const label = showCurrentEdition
+		? editionIdMap[activeEdition.id as EditionId]
+		: 'Edition';
 
 	return (
 		<div css={editionDropdownStyles}>
