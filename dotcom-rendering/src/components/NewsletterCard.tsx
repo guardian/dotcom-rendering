@@ -54,7 +54,7 @@ const contentWrapperStyle = css`
 		margin-bottom: ${space[3]}px;
 	}
 
-	// TODO: Replace with article15 and remove line height override?
+	/* TODO: Replace with article15 and remove line height override? */
 	p {
 		${textEgyptian14};
 		line-height: 1.4;

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, type ArticleFormat, Pillar } from '@guardian/libs';
-import { fonts, space } from '@guardian/source/foundations';
+import { headlineMedium14Object, space } from '@guardian/source/foundations';
 import { palette } from '../palette';
 
 type Props = {
@@ -9,8 +9,7 @@ type Props = {
 };
 
 const dropCap = css`
-	/* stylelint-disable-next-line property-disallowed-list -- we’re setting custom line height and font weight */
-	font-family: ${fonts.headline};
+	${headlineMedium14Object.fontFamily};
 	float: left;
 	font-size: 7rem;
 	line-height: 5.75rem;
