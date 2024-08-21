@@ -110,6 +110,7 @@ export const TagPageLayout = ({ tagPage, NAV }: Props) => {
 							showSubNav={true}
 							isImmersive={false}
 							hasPageSkin={hasPageSkin}
+							pageId={pageId}
 						/>
 					) : (
 						<>
