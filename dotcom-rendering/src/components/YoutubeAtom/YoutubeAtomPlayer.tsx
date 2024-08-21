@@ -347,10 +347,10 @@ const createImaManagerListeners = (uniqueId: string) => {
 const isSignedIn = async (): Promise<boolean> => {
 	try {
 		const authStatus = await getAuthStatus();
-		return authStatus.kind == 'SignedInWithCookies' ||
+		return (
+			authStatus.kind === 'SignedInWithCookies' ||
 			authStatus.kind === 'SignedInWithOkta'
-			? true
-			: false;
+		);
 	} catch (error: unknown) {
 		if (error instanceof Error) {
 			window.guardian.modules.sentry.reportError(

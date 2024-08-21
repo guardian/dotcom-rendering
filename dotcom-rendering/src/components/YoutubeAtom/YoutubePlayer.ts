@@ -101,7 +101,7 @@ class YouTubePlayer {
 					/**
 					 * If enableIma is true, YT.createPlayerForPublishers will be called to initiate IMA ads
 					 * If enableIma is false, the standard YT.Player constructor will be called
-					 * Listeners are set appropriatley for each method
+					 * Listeners are set appropriately for each method
 					 */
 					if (enableIma) {
 						YTAPI.createPlayerForPublishers(
