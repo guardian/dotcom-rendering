@@ -1,6 +1,13 @@
 import libDebounce from 'lodash.debounce';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+/**
+ * This is a copy of the useIsInView hook from the dotcom-rendering project
+ * (https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/lib/useIsInView.ts) but without the loadash.deboune logic
+ * as it is not required and it needs to be imported.
+ * We need to discuss how best to consolidate this code as we now have two different versions of the same hook in two different projects.
+ * */
+
 type Options = {
 	/**
 	 * Defaults to `undefined` (falsy),
