@@ -48,6 +48,8 @@ export const OneCardLayout = ({
 					trailText={cards[0].trailText}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
+					aspectRatio="5:4"
+					kickerText={cards[0].kickerText}
 				/>
 			</LI>
 		</UL>
@@ -95,6 +97,7 @@ const TwoCardOrFourCardLayout = ({
 								hasTwoOrFewerCards ? 'left' : 'bottom'
 							}
 							imageSize={'medium'}
+							aspectRatio="5:4"
 							kickerText={card.kickerText}
 						/>
 					</LI>
