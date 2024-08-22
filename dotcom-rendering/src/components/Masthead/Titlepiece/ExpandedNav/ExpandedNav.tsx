@@ -78,7 +78,6 @@ const mainMenuStyles = css`
 	${textSans20};
 	${getZIndex('expanded-veggie-menu')}
 	overflow: hidden;
-	position: fixed;
 	left: 0;
 	top: 0;
 	box-sizing: border-box;
