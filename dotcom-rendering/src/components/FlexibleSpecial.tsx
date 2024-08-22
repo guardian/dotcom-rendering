@@ -37,14 +37,14 @@ export const OneCardLayout = ({
 				<FrontCard
 					trail={cards[0]}
 					containerPalette={containerPalette}
-					containerType="dynamic/package"
+					containerType="flexible/special"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSize="large"
 					headlineSizeOnMobile="medium"
 					imagePositionOnDesktop="right"
 					imagePositionOnMobile="left"
-					imageSize="medium"
+					imageSize="jumbo"
 					trailText={cards[0].trailText}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
@@ -71,13 +71,14 @@ const TwoCardOrFourCardLayout = ({
 	showImage?: boolean;
 	padBottom?: boolean;
 }) => {
+	const hasTwoOrFewerCards = cards.length <= 2;
 	return (
 		<UL direction="row" padBottom={padBottom}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
 						stretch={false}
-						percentage={cards.length <= 2 ? '50%' : '25%'}
+						percentage={hasTwoOrFewerCards ? '50%' : '25%'}
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
@@ -85,11 +86,16 @@ const TwoCardOrFourCardLayout = ({
 						<FrontCard
 							trail={card}
 							containerPalette={containerPalette}
-							containerType="dynamic/package"
+							containerType="flexible/special"
 							showAge={showAge}
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
+							imagePositionOnDesktop={
+								hasTwoOrFewerCards ? 'left' : 'bottom'
+							}
+							imageSize={'medium'}
+							kickerText={card.kickerText}
 						/>
 					</LI>
 				);
