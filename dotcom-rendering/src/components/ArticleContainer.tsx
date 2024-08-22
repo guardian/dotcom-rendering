@@ -35,7 +35,7 @@ const articleWidth = (format: ArticleFormat) => {
 				}
 				/* Make the video player as wide as possible on larger screens */
 				${from.wide} {
-					width: 688px;
+					width: 100%;
 				}
 			`;
 		default: {
@@ -152,7 +152,7 @@ const adStyles = css`
 		}
 
 		${from.wide} {
-			margin-right: -380px;
+			margin-right: -400px;
 		}
 	}
 

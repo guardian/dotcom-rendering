@@ -4,9 +4,7 @@ import { loadPage } from '../lib/load-page';
 import { expectToExist } from '../lib/locators';
 
 test.describe('Commercial E2E tests', () => {
-	test.skip(`It should load the expected number of ad slots`, async ({
-		page,
-	}) => {
+	test(`It should load the expected number of ad slots`, async ({ page }) => {
 		await loadPage(
 			page,
 			`/Article/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
@@ -14,11 +12,19 @@ test.describe('Commercial E2E tests', () => {
 
 		await cmpAcceptAll(page);
 
+		const totalSlots = 16;
+		const fixedSlots = 4;
+		const inlineSlots = totalSlots - fixedSlots;
 		// We are excluding survey slot as they can be switched off
-		await expectToExist(page, '.js-ad-slot:not([data-name="survey"])', 15);
+		await expectToExist(
+			page,
+			'.js-ad-slot:not([data-name="survey"])',
+			totalSlots,
+		);
 
 		// Check all inline slots are present
-		for (const i of Array(11).keys()) {
+
+		for (const i of Array(inlineSlots).keys()) {
 			await expectToExist(page, `[data-name="inline${i + 1}"]`);
 		}
 

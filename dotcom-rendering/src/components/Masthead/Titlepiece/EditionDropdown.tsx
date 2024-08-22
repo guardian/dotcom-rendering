@@ -13,6 +13,7 @@ import { Dropdown } from '../../Dropdown.importable';
 interface EditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
+	showCurrentEdition?: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -53,11 +54,12 @@ const dropDownOverrides = css`
 export const EditionDropdown = ({
 	editionId,
 	dataLinkName,
+	showCurrentEdition = true,
 }: EditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
 		url: edition.url,
-		title: edition.longTitle,
+		title: edition.shortTitle,
 		dataLinkName: nestedOphanComponents(
 			'header',
 			'titlepiece',
@@ -80,11 +82,13 @@ export const EditionDropdown = ({
 		...dropdownItems.filter(({ isActive }) => !isActive),
 	];
 
+	const label = showCurrentEdition ? activeEdition.title : 'Edition';
+
 	return (
 		<div css={editionDropdownStyles}>
 			<Island priority="critical">
 				<Dropdown
-					label={activeEdition.id}
+					label={label}
 					links={linksToDisplay}
 					id="masthead-edition"
 					dataLinkName={dataLinkName}

@@ -349,6 +349,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							isImmersive={false}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
+							pageId={article.pageId}
 						/>
 					) : (
 						<SendToBack>

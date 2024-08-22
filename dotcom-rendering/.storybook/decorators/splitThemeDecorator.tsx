@@ -145,13 +145,15 @@ export const splitTheme =
 		>
 			<div
 				data-color-scheme="light"
-				css={[
-					css`
-						background-color: ${sourcePalette.neutral[100]};
-						color: ${sourcePalette.neutral[0]};
-					`,
-					css(paletteDeclarations(defaultFormats[0], 'light')),
-				]}
+				style={{
+					backgroundColor:
+						context.parameters.colourSchemeBackground?.light ??
+						sourcePalette.neutral[100],
+					color:
+						context.parameters.colourSchemeTextColour?.light ??
+						sourcePalette.neutral[0],
+				}}
+				css={css(paletteDeclarations(defaultFormats[0], 'light'))}
 			>
 				<h2 css={headerCss}>Light Theme ☀️</h2>
 				{formats.map((format) => (
@@ -169,13 +171,15 @@ export const splitTheme =
 			</div>
 			<div
 				data-color-scheme="dark"
-				css={[
-					css`
-						background-color: ${sourcePalette.neutral[0]};
-						color: ${sourcePalette.neutral[100]};
-					`,
-					css(paletteDeclarations(defaultFormats[0], 'dark')),
-				]}
+				style={{
+					backgroundColor:
+						context.parameters.colourSchemeBackground?.dark ??
+						sourcePalette.neutral[0],
+					color:
+						context.parameters.colourSchemeTextColour?.dark ??
+						sourcePalette.neutral[100],
+				}}
+				css={css(paletteDeclarations(defaultFormats[0], 'dark'))}
 			>
 				<h2 css={headerCss}>Dark Theme 🌙</h2>
 				{formats.map((format) => (

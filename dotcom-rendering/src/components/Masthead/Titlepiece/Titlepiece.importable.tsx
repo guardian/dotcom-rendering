@@ -10,6 +10,7 @@ import {
 } from '@guardian/source/foundations';
 import type { EditionId } from '../../../lib/edition';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { useEditionSwitcherBanner } from '../../../lib/useUserPreferredEdition';
 import type { NavType } from '../../../model/extract-nav';
 import { palette as themePalette } from '../../../palette';
 import {
@@ -33,6 +34,7 @@ interface Props {
 	showSubNav?: boolean;
 	isImmersive?: boolean;
 	hasPageSkin?: boolean;
+	pageId?: string;
 }
 
 const veggieBurgerDiameter = 40;
@@ -256,7 +258,10 @@ export const Titlepiece = ({
 	showSubNav,
 	isImmersive,
 	hasPageSkin,
+	pageId = '',
 }: Props) => {
+	const { showBanner } = useEditionSwitcherBanner(pageId, editionId);
+
 	return (
 		<Grid
 			type="nav"
@@ -424,6 +429,7 @@ export const Titlepiece = ({
 						'titlepiece',
 						'edition-picker: toggle',
 					)}
+					showCurrentEdition={!showBanner}
 				/>
 			</div>
 

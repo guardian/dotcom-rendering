@@ -475,7 +475,6 @@ export type FEFrontConfigType = {
 	googletagJsUrl: string;
 	supportUrl: string;
 	edition: string;
-	discussionFrontendUrl: string;
 	ipsosTag: string;
 	ophanJsUrl: string;
 	isPaidContent?: boolean;

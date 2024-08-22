@@ -250,6 +250,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							showSubNav={!isPaidContent}
 							hasPageSkin={hasPageSkin}
 							hasPageSkinContentSelfConstrain={true}
+							pageId={pageId}
 						/>
 					) : (
 						<>

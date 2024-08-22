@@ -92,7 +92,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 620px 60px 320px;
+					grid-template-columns: 219px 1px 620px 80px 300px;
 					grid-template-areas:
 						'caption    border      title      . right-column'
 						'.          border      headline   . right-column'
@@ -344,6 +344,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							isImmersive={true}
 							hasPageSkin={false}
 							hasPageSkinContentSelfConstrain={false}
+							pageId={article.pageId}
 						/>
 					) : (
 						<div
