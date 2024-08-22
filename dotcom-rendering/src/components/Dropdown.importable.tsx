@@ -26,7 +26,7 @@ export interface DropdownLinkType {
 	id: string;
 	url: string;
 	title: string;
-	shortTitle: string;
+	shortTitle?: string;
 	isActive?: boolean;
 	dataLinkName: string;
 	notifications?: Notification[];
