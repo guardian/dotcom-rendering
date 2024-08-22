@@ -136,7 +136,7 @@ export const CardPicture = ({
 			data-size={imageSize}
 			css={[
 				block,
-				decideAspectRatio(aspectRatio),
+				decideAspectRatioStyles(aspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
 			]}
