@@ -3,7 +3,7 @@
  * This file was largely copied from src/components/Nav/ExpandedMenu/ExpandedMenu.tsx
  */
 import { css } from '@emotion/react';
-import { from, space, textSans20, until } from '@guardian/source/foundations';
+import { from, textSans20, until } from '@guardian/source/foundations';
 import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
@@ -16,8 +16,6 @@ const collapsedMenuStyles = css`
 		/* the negative translateX makes the nav hide to the side */
 		transform: translateX(-110%);
 		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-		/** TODO - update the box shadow colour to use the themed palette */
-		box-shadow: ${space[1]}px 0 ${space[4]}px rgba(0, 0, 0, 0.4);
 		bottom: 0;
 		height: 100%;
 		overflow: auto;
@@ -70,13 +68,15 @@ const mainMenuStyles = css`
 	box-sizing: border-box;
 
 	position: absolute;
-	box-shadow: 28px 0 rgba(0, 0, 0, 0.4);
 	margin-right: 28px;
+	box-shadow: 28px 0 rgba(0, 0, 0, 0.4);
 	${from.mobileLandscape} {
 		margin-right: 40px;
+		box-shadow: 40px 0 rgba(0, 0, 0, 0.4);
 	}
 	${from.tablet} {
 		margin-right: 100px;
+		box-shadow: 100px 0 rgba(0, 0, 0, 0.4);
 	}
 	${from.desktop} {
 		box-shadow: none;
