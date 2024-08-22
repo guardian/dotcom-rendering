@@ -1046,9 +1046,6 @@
                 "edition": {
                     "type": "string"
                 },
-                "discussionFrontendUrl": {
-                    "type": "string"
-                },
                 "ipsosTag": {
                     "type": "string"
                 },
@@ -1153,7 +1150,6 @@
                 "discussionApiClientHeader",
                 "discussionApiUrl",
                 "discussionD2Uid",
-                "discussionFrontendUrl",
                 "edition",
                 "externalEmbedHost",
                 "facebookIaAdUnitRoot",
