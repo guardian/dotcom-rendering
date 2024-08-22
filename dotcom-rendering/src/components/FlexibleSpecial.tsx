@@ -33,11 +33,11 @@ export const OneCardLayout = ({
 
 	return (
 		<UL padBottom={true}>
-			<LI padSides={true}>
+			<LI padSides={true} showBottomBorder={true}>
 				<FrontCard
 					trail={cards[0]}
 					containerPalette={containerPalette}
-					containerType="dynamic/package"
+					containerType="flexible/special"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
 					headlineSize="large"
@@ -48,6 +48,7 @@ export const OneCardLayout = ({
 					trailText={cards[0].trailText}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
+					aspectRatio="5:4"
 				/>
 			</LI>
 		</UL>
@@ -71,25 +72,34 @@ const TwoCardOrFourCardLayout = ({
 	showImage?: boolean;
 	padBottom?: boolean;
 }) => {
+	//TODO : Rename isTwoCards to a better name
+	const isTwoCards = cards.length <= 2;
 	return (
 		<UL direction="row" padBottom={padBottom}>
 			{cards.map((card, cardIndex) => {
 				return (
 					<LI
 						stretch={false}
-						percentage={cards.length <= 2 ? '50%' : '25%'}
+						percentage={isTwoCards ? '50%' : '25%'}
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
+						showBottomBorder={true}
 					>
 						<FrontCard
 							trail={card}
+							kickerText={card.kickerText}
 							containerPalette={containerPalette}
-							containerType="dynamic/package"
+							containerType="flexible/special"
 							showAge={showAge}
 							absoluteServerTimes={absoluteServerTimes}
 							image={showImage ? card.image : undefined}
 							imageLoading={imageLoading}
+							imagePositionOnDesktop={
+								isTwoCards ? 'left' : 'bottom'
+							}
+							imageSize={'medium'}
+							aspectRatio="5:4"
 						/>
 					</LI>
 				);

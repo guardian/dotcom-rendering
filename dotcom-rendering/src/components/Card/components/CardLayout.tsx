@@ -16,6 +16,7 @@ type Props = {
 	containerType?: DCRContainerType;
 	isOnwardContent?: boolean;
 	hasBackgroundColour?: boolean;
+	gapSize?: GapSize;
 };
 
 const decideDirection = (imagePosition: ImagePositionType) => {
@@ -92,16 +93,28 @@ const decidePosition = (
 	`;
 };
 
-const gapStyles = (
-	isOnwardContent?: boolean,
-	hasBackgroundColour?: boolean,
-) => {
-	if (isOnwardContent) {
-		return 0;
-	} else if (hasBackgroundColour) {
-		return `${space[1]}px`;
-	} else {
-		return `${space[2]}px`;
+type GapSize = 'none' | 'small' | 'medium' | 'large';
+
+/**
+ *
+ * Detemines the gap size between components in card layout
+ */
+const decideGap = (gapSize: GapSize) => {
+	switch (gapSize) {
+		case 'none':
+			return;
+		case 'small':
+			return css`
+				gap: ${space[1]}px;
+			`;
+		case 'medium':
+			return css`
+				gap: ${space[2]}px;
+			`;
+		case 'large':
+			return css`
+				gap: ${space[5]}px;
+			`;
 	}
 };
 
@@ -113,8 +126,7 @@ export const CardLayout = ({
 	minWidthInPixels,
 	imageType,
 	containerType,
-	isOnwardContent,
-	hasBackgroundColour,
+	gapSize = 'medium',
 }: Props) => (
 	<div
 		css={[
@@ -130,10 +142,10 @@ export const CardLayout = ({
 				imagePositionOnMobile,
 				imageType,
 			),
+			decideGap(gapSize),
 		]}
 		style={{
 			backgroundColor: cardBackgroundColour,
-			gap: gapStyles(isOnwardContent, hasBackgroundColour),
 		}}
 	>
 		{children}
