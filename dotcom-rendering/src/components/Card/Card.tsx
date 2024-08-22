@@ -43,7 +43,7 @@ import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { CardFooter } from './components/CardFooter';
-import { CardLayout, GapSize } from './components/CardLayout';
+import { CardLayout, type GapSize } from './components/CardLayout';
 import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
