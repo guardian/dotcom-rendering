@@ -89,7 +89,7 @@ const block = css`
  * This is due to replace the existing card ratio of 5:3
  * For now, we are keeping both ratios.
  */
-const decideAspectRatio = (aspectRatio: AspectRatio) => {
+const decideAspectRatioStyles = (aspectRatio: AspectRatio) => {
 	return css`
 		padding-top: ${aspectRatio === '5:4'
 			? `${(4 / 5) * 100}%`
