@@ -61,28 +61,16 @@ const wrapperMainMenuStyles = css`
 	}
 `;
 
-const mobileBackgroundOverlay = css`
-	${until.desktop} {
-		/* TODO - use palette rather than hardcoded RGBA colour for background overlay */
-		background-color: rgba(0, 0, 0, 0.5);
-		position: fixed;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-	}
-`;
-
 const mainMenuStyles = css`
 	background-color: ${themePalette('--masthead-nav-background')};
 	${textSans20};
 	${getZIndex('expanded-veggie-menu')}
-	overflow: hidden;
-	position: fixed;
 	left: 0;
 	top: 0;
 	box-sizing: border-box;
 
+	position: absolute;
+	box-shadow: 28px 0 rgba(0, 0, 0, 0.4);
 	margin-right: 28px;
 	${from.mobileLandscape} {
 		margin-right: 40px;
@@ -91,6 +79,7 @@ const mainMenuStyles = css`
 		margin-right: 100px;
 	}
 	${from.desktop} {
+		box-shadow: none;
 		position: absolute;
 		padding-bottom: 0;
 		padding-top: 0;
@@ -132,7 +121,6 @@ export const ExpandedNav = ({
 			data-testid="expanded-menu"
 			css={wrapperMainMenuStyles}
 		>
-			<div css={mobileBackgroundOverlay} />
 			<div
 				css={css`
 					${from.desktop} {
