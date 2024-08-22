@@ -285,6 +285,7 @@ export const trails: [
 		},
 		display: {
 			isBoosted: false,
+			boostLevel: 'default',
 			showBoostedHeadline: false,
 			showQuotedHeadline: false,
 			imageHide: false,
@@ -597,6 +598,7 @@ export const trails: [
 		},
 		display: {
 			isBoosted: false,
+			boostLevel: 'default',
 			showBoostedHeadline: false,
 			showQuotedHeadline: true,
 			imageHide: false,
@@ -929,6 +931,7 @@ export const trails: [
 		},
 		display: {
 			isBoosted: false,
+			boostLevel: 'default',
 			showBoostedHeadline: false,
 			showQuotedHeadline: false,
 			imageHide: false,
@@ -1227,6 +1230,7 @@ export const trails: [
 		},
 		display: {
 			isBoosted: false,
+			boostLevel: 'default',
 			showBoostedHeadline: false,
 			showQuotedHeadline: false,
 			imageHide: false,
@@ -1454,6 +1458,7 @@ export const trails: [
 		},
 		display: {
 			isBoosted: false,
+			boostLevel: 'default',
 			showBoostedHeadline: false,
 			showQuotedHeadline: false,
 			imageHide: false,
@@ -1695,6 +1700,7 @@ export const trails: [
 		},
 		display: {
 			isBoosted: false,
+			boostLevel: 'default',
 			showBoostedHeadline: false,
 			showQuotedHeadline: false,
 			imageHide: false,
