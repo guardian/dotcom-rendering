@@ -572,6 +572,9 @@
                             "isBoosted": {
                                 "type": "boolean"
                             },
+                            "boostLevel": {
+                                "$ref": "#/definitions/BoostLevel"
+                            },
                             "showBoostedHeadline": {
                                 "type": "boolean"
                             },
@@ -586,6 +589,7 @@
                             }
                         },
                         "required": [
+                            "boostLevel",
                             "imageHide",
                             "isBoosted",
                             "showBoostedHeadline",
@@ -1603,6 +1607,15 @@
                 5
             ],
             "type": "number"
+        },
+        "BoostLevel": {
+            "enum": [
+                "boost",
+                "default",
+                "gigaboost",
+                "megaboost"
+            ],
+            "type": "string"
         },
         "FENavType": {
             "type": "object",
