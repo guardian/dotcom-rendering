@@ -61,7 +61,7 @@ export const LinkCopied = () => {
 		<CopyNativeShareButton
 			onShare={() => {}}
 			isCopied={true}
-			isLiveBlogArticleMeta={false}
+			isLiveBlogMeta={false}
 			size="small"
 		/>
 	);
@@ -69,33 +69,33 @@ export const LinkCopied = () => {
 LinkCopied.storyName = 'LinkCopied';
 LinkCopied.decorators = [splitTheme()];
 
-export const LiveBlogMobile = ({ theme }: StoryArgs) => {
+export const LiveBlogMobileMeta = ({ theme }: StoryArgs) => {
 	return (
 		<div
 			css={css`
 				background-color: ${theme === 'light'
-					? themePalette('--share-button-liveblog-mobile')
+					? themePalette('--share-button-liveblog-mobile-meta')
 					: 'inherit'};
 			`}
 		>
 			<CopyNativeShareButton
 				onShare={() => {}}
 				isCopied={false}
-				isLiveBlogArticleMeta={true}
+				isLiveBlogMeta={true}
 				size="small"
 			/>
 		</div>
 	);
 };
-LiveBlogMobile.storyName = 'LiveBlogMobile';
-LiveBlogMobile.decorators = [
+LiveBlogMobileMeta.storyName = 'LiveBlogMobileMeta';
+LiveBlogMobileMeta.decorators = [
 	splitTheme(
 		[...defaultFormats].filter(
 			(format) => format.design !== ArticleDesign.Gallery,
 		),
 	),
 ];
-LiveBlogMobile.story = {
+LiveBlogMobileMeta.story = {
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: { viewports: [375] },
@@ -107,7 +107,7 @@ export const EmailLinkStory = () => {
 		<EmailLink
 			href={`mailto:?subject=Everybody%20looks%20after%20each%20other!&body=https://www.theguardian.com/lifeandstyle/2024/feb/20/everybody-looks-after-each-other-fifty-years-of-the-commune-that-began-with-a-guardian-ad
 			`}
-			isLiveBlogArticleMeta={true}
+			isLiveBlogMeta={true}
 			size="small"
 		/>
 	);
