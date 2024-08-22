@@ -15,6 +15,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { Button, SvgGuardianLogo } from '@guardian/source/react-components';
+import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import {
 	hexColourToString,
 	SecondaryCtaType,
@@ -46,7 +47,6 @@ import { DesignableBannerCloseButton } from './components/DesignableBannerCloseB
 import { DesignableBannerCtas } from './components/DesignableBannerCtas';
 import { DesignableBannerHeader } from './components/DesignableBannerHeader';
 import { DesignableBannerReminder } from './components/DesignableBannerReminder';
-import { DesignableBannerTicker } from './components/DesignableBannerTicker';
 import { DesignableBannerVisual } from './components/DesignableBannerVisual';
 import type { BannerTemplateSettings, CtaSettings } from './settings';
 import { buttonStyles } from './styles/buttonStyles';
@@ -284,7 +284,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	);
 
 	const getHeaderContainerCss = () => {
-		if (templateSettings?.headerSettings?.headerImage) {
+		if (templateSettings.headerSettings?.headerImage) {
 			return styles.headerWithImageContainer(
 				templateSettings.containerSettings.backgroundColour,
 			);
@@ -340,13 +340,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 					</div>
 
 					{tickerSettings?.tickerData &&
-						templateSettings.tickerStylingSettings && (
-							<DesignableBannerTicker
-								tickerSettings={tickerSettings}
-								stylingSettings={
-									templateSettings.tickerStylingSettings
+						tickerSettings.tickerStylingSettings && (
+							<Ticker
+								currencySymbol={tickerSettings.currencySymbol}
+								copy={tickerSettings.copy}
+								tickerData={tickerSettings.tickerData}
+								tickerStylingSettings={
+									tickerSettings.tickerStylingSettings
 								}
-							/>
+							></Ticker>
 						)}
 
 					{!showChoiceCards && (

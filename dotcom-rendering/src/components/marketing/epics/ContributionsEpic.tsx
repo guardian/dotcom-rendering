@@ -12,6 +12,7 @@ import {
 	palette,
 	space,
 } from '@guardian/source/foundations';
+import { Ticker } from '@guardian/source-development-kitchen/react-components';
 import {
 	containsNonArticleCountPlaceholder,
 	epicPropsSchema,
@@ -43,7 +44,6 @@ import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
-import { ContributionsEpicTicker } from './ContributionsEpicTicker';
 import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
 import { getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
 
@@ -70,7 +70,7 @@ const wrapperStyles = css`
 `;
 
 const headingStyles = css`
-	${headlineBold20}
+	${headlineBold20};
 	margin-top: 0;
 	margin-bottom: ${space[3]}px;
 `;
@@ -445,7 +445,12 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			)}
 
 			{tickerSettings?.tickerData && (
-				<ContributionsEpicTicker tickerSettings={tickerSettings} />
+				<Ticker
+					currencySymbol={tickerSettings.currencySymbol}
+					copy={tickerSettings.copy}
+					tickerData={tickerSettings.tickerData}
+					tickerStylingSettings={tickerSettings.tickerStylingSettings}
+				/>
 			)}
 
 			{image && (
