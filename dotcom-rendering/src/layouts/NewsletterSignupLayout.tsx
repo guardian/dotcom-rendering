@@ -185,7 +185,7 @@ const getMainMediaCaptions = (article: Article): (string | undefined)[] =>
 export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
-		config: { host },
+		config: { host, hasSurveyAd },
 	} = article;
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
@@ -247,7 +247,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 				/>
 			</div>
 
-			{renderAds && !!article.config.switches.surveys && (
+			{renderAds && !!article.config.switches.surveys && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
