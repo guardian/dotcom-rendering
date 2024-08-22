@@ -51,14 +51,6 @@ const dropDownOverrides = css`
 	}
 `;
 
-const editionIdMap: Record<EditionId, string> = {
-	INT: 'Int',
-	UK: 'UK',
-	US: 'US',
-	AU: 'Aus',
-	EUR: 'Eur',
-};
-
 export const EditionDropdown = ({
 	editionId,
 	dataLinkName,
