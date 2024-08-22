@@ -365,19 +365,16 @@ export const Card = ({
 
 	//** We need to choose the gap size based on certain card properties */
 	const getGapSize = (): GapSize => {
-		if (isOnwardContent) {
-			return 'none';
-		} else if (hasBackgroundColour) {
-			return 'small';
-		} else if (
+		if (isOnwardContent) return 'none';
+		if (hasBackgroundColour) return 'small';
+		if (
 			isFlexibleContainer &&
 			(imagePositionOnDesktop === 'left' ||
 				imagePositionOnDesktop === 'right')
 		) {
 			return 'large';
-		} else {
-			return 'medium';
 		}
+		return 'medium';
 	};
 
 	return (
