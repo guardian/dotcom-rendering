@@ -1484,3 +1484,100 @@ export const WithAFiveFourAspectRatio = () => {
 		</>
 	);
 };
+export const WithNoGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePositionOnDesktop="left"
+						isOnwardContent={true}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: Pillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithASmallGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePositionOnDesktop="left"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Gallery,
+							theme: Pillar.Sport,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithAMediumGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePositionOnDesktop="left"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: Pillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithALargeGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						containerType={'flexible/special'}
+						imagePositionOnDesktop="left"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: Pillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
