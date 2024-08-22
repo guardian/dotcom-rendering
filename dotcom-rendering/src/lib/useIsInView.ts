@@ -2,11 +2,15 @@ import libDebounce from 'lodash.debounce';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
- * This is a copy of the useIsInView hook from the dotcom-rendering project
- * (https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/lib/useIsInView.ts) but without the loadash.deboune logic
- * as it is not required and it needs to be imported.
- * We need to discuss how best to consolidate this code as we now have two different versions of the same hook in two different projects.
- * */
+ * This file was copied into the source development kitchen from the following repository:
+ * https://github.com/guardian/csnx/blob/main/libs/%40guardian/source-development-kitchen/src/react-components/ticker/useIsInView.ts
+ *
+ * Note: This version of the file uses `lodash.debounce`, whereas the original version does not.
+ * As a result, we now have two versions of the `useIsInView` hook—one with `lodash.debounce` and one without.
+ *
+ * A discussion is needed to determine the best approach for consolidating these two versions into a single file.
+ * Consider whether the use of `lodash.debounce` is necessary, and if so, integrate it into the consolidated version.
+ */
 
 type Options = {
 	/**
