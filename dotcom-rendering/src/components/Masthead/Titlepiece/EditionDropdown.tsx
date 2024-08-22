@@ -83,7 +83,9 @@ export const EditionDropdown = ({
 		...dropdownItems.filter(({ isActive }) => !isActive),
 	];
 
-	const label = showCurrentEdition ? activeEdition.shortTitle : 'Edition';
+	const label = showCurrentEdition
+		? activeEdition.shortTitle || activeEdition.title
+		: 'Edition';
 
 	return (
 		<div css={editionDropdownStyles}>
