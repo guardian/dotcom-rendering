@@ -59,7 +59,8 @@ export const EditionDropdown = ({
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
 		url: edition.url,
-		title: edition.shortTitle,
+		title: edition.longTitle,
+		shortTitle: edition.shortTitle,
 		dataLinkName: nestedOphanComponents(
 			'header',
 			'titlepiece',
@@ -82,7 +83,7 @@ export const EditionDropdown = ({
 		...dropdownItems.filter(({ isActive }) => !isActive),
 	];
 
-	const label = showCurrentEdition ? activeEdition.title : 'Edition';
+	const label = showCurrentEdition ? activeEdition.shortTitle : 'Edition';
 
 	return (
 		<div css={editionDropdownStyles}>
