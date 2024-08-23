@@ -16,6 +16,7 @@ const editionList = [
 		timeZone: 'Europe/London',
 		langLocale: 'en-GB',
 		hasEditionalisedPages: true,
+		shortTitle: 'UK',
 	},
 	{
 		url: '/preference/edition/us',
@@ -27,6 +28,7 @@ const editionList = [
 		timeZone: 'America/New_York',
 		langLocale: 'en-US',
 		hasEditionalisedPages: true,
+		shortTitle: 'US',
 	},
 	{
 		url: '/preference/edition/au',
@@ -38,6 +40,7 @@ const editionList = [
 		timeZone: 'Australia/Sydney',
 		langLocale: 'en-AU',
 		hasEditionalisedPages: true,
+		shortTitle: 'Aus',
 	},
 	{
 		url: '/preference/edition/eur',
@@ -49,6 +52,7 @@ const editionList = [
 		timeZone: 'Europe/Paris',
 		langLocale: 'en-EU',
 		hasEditionalisedPages: false,
+		shortTitle: 'Eur',
 	},
 	{
 		url: '/preference/edition/int',
@@ -60,6 +64,7 @@ const editionList = [
 		timeZone: 'Europe/London',
 		langLocale: 'en',
 		hasEditionalisedPages: false,
+		shortTitle: 'Int',
 	},
 ] as const satisfies ReadonlyArray<{
 	url: string;
@@ -71,6 +76,7 @@ const editionList = [
 	timeZone: string;
 	langLocale?: string;
 	hasEditionalisedPages: boolean;
+	shortTitle: string;
 }>;
 
 const [ukEdition] = editionList;

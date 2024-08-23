@@ -3487,7 +3487,10 @@ const pullQuoteIconDark: PaletteFunction = (format: ArticleFormat) => {
 		: text;
 };
 
-const shareButtonLiveBlogMobileLight: PaletteFunction = ({ design, theme }) => {
+const shareButtonLiveBlogMobileMetaLight: PaletteFunction = ({
+	design,
+	theme,
+}) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -3525,6 +3528,8 @@ const shareButtonHoverLight: PaletteFunction = ({ design, theme }) => {
 	}
 };
 
+const shareButtonHoverDark: PaletteFunction = () => sourcePalette.neutral[7];
+
 const shareButtonBorderLight: PaletteFunction = ({ design }) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
@@ -3539,6 +3544,8 @@ const shareButtonBorderLight: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[86];
 	}
 };
+
+const shareButtonBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 
 const shareButtonBorderXSmallLight: PaletteFunction = ({ design }) => {
 	switch (design) {
@@ -3563,6 +3570,8 @@ const shareButtonCopiedLight: PaletteFunction = ({ design }) => {
 			return sourcePalette.neutral[7];
 	}
 };
+
+const shareButtonCopiedDark: PaletteFunction = () => sourcePalette.neutral[86];
 
 const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 	switch (design) {
@@ -3627,7 +3636,31 @@ const shareButtonLight: PaletteFunction = ({ design, theme, display }) => {
 	}
 };
 
-const shareButtonDark: PaletteFunction = () => sourcePalette.neutral[60];
+const shareButtonDark: PaletteFunction = ({ design, theme }) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[86];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.labs[400];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.specialReportAlt[200];
+				default:
+					return pillarPalette(theme, 500);
+			}
+	}
+};
 
 const matchNavBackgroundLight: PaletteFunction = () =>
 	sourcePalette.brandAlt[400];
@@ -6523,23 +6556,23 @@ const paletteColours = {
 	},
 	'--share-button-border': {
 		light: shareButtonBorderLight,
-		dark: shareButtonBorderLight,
+		dark: shareButtonBorderDark,
 	},
 	'--share-button-copied': {
 		light: shareButtonCopiedLight,
-		dark: shareButtonDark,
+		dark: shareButtonCopiedDark,
 	},
 	'--share-button-hover': {
 		light: shareButtonHoverLight,
-		dark: shareButtonHoverLight,
+		dark: shareButtonHoverDark,
 	},
-	'--share-button-liveblog-mobile': {
-		light: shareButtonLiveBlogMobileLight,
-		dark: shareButtonLiveBlogMobileLight,
+	'--share-button-liveblog-mobile-meta': {
+		light: shareButtonLiveBlogMobileMetaLight,
+		dark: shareButtonLiveBlogMobileMetaLight,
 	},
 	'--share-button-xsmall-border': {
 		light: shareButtonBorderXSmallLight,
-		dark: shareButtonBorderXSmallLight,
+		dark: shareButtonBorderDark,
 	},
 	'--sign-in-link': {
 		light: signInLinkLight,

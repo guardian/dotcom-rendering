@@ -15,8 +15,6 @@ import { palette as themePalette } from '../../../../palette';
 import { expandedNavLinkStyles, listAccessibility } from '../commonStyles';
 import { pillarWidthsPx } from '../constants';
 
-const pillarHeight = 42;
-
 const hideDesktop = css`
 	${from.desktop} {
 		display: none;
@@ -73,10 +71,6 @@ const pillarDivider = css`
 
 const pillarDividerExtended = css`
 	${from.desktop} {
-		:before {
-			top: -${pillarHeight}px;
-		}
-
 		:after {
 			content: '';
 			display: block;
