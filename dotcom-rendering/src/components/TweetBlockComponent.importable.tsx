@@ -6,6 +6,7 @@ import {
 import { useEffect } from 'react';
 import { unescapeData } from '../lib/escapeData';
 import type { TweetBlockElement } from '../types/content';
+import { useConfig } from './ConfigContext';
 
 type Props = {
 	element: TweetBlockElement;
@@ -47,7 +48,7 @@ const noJSStyling = css`
  *
  * @param element TweetBlockElement - The tweet element we want to enhance
  */
-const loadTweet = (element: TweetBlockElement) => {
+const loadTweet = (element: TweetBlockElement, darkModeAvailable: boolean) => {
 	const tweetContainer = document.getElementById(
 		`tweet-container-${element.elementId}`,
 	);
@@ -60,6 +61,8 @@ const loadTweet = (element: TweetBlockElement) => {
 		// to find the tweet on the page. We *remove* this class in
 		// enhanceTweets()
 		tweet.classList.add('twitter-tweet');
+		darkModeAvailable && tweet.setAttribute('data-theme', 'dark');
+
 		twttr.ready((twitter) => {
 			twitter.widgets.load(tweetContainer);
 		});
@@ -67,11 +70,18 @@ const loadTweet = (element: TweetBlockElement) => {
 };
 
 export const TweetBlockComponent = ({ element }: Props) => {
+	const { darkModeAvailable } = useConfig();
+
 	useEffect(() => {
+		const prefersDarkScheme = window.matchMedia(
+			'(prefers-color-scheme: dark)',
+		).matches;
+		const darkMode = darkModeAvailable && prefersDarkScheme;
+
 		// This code only runs if this component is hydrated, which
 		// only happens if the enhanceTweets switch is on
-		loadTweet(element);
-	}, [element]);
+		loadTweet(element, darkMode);
+	}, [element, darkModeAvailable]);
 
 	return (
 		<div
