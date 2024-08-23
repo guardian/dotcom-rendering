@@ -1,4 +1,5 @@
 import { devices, expect, test } from '@playwright/test';
+import { addCookie } from 'playwright/lib/cookies';
 import { disableCMP } from '../lib/cmp';
 import { waitForIsland } from '../lib/islands';
 import { loadPage } from '../lib/load-page';
@@ -118,6 +119,10 @@ test.describe('Interactivity', () => {
 			context,
 			page,
 		}) => {
+			await addCookie(context, {
+				name: 'X-GU-Experiment-50perc',
+				value: 'false',
+			});
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 			await waitForIsland(page, 'SupportTheG');
