@@ -48,7 +48,7 @@ const noJSStyling = css`
  *
  * @param element TweetBlockElement - The tweet element we want to enhance
  */
-const loadTweet = (element: TweetBlockElement, darkModeAvailable: boolean) => {
+const loadTweet = (element: TweetBlockElement, darkMode: boolean) => {
 	const tweetContainer = document.getElementById(
 		`tweet-container-${element.elementId}`,
 	);
@@ -61,7 +61,7 @@ const loadTweet = (element: TweetBlockElement, darkModeAvailable: boolean) => {
 		// to find the tweet on the page. We *remove* this class in
 		// enhanceTweets()
 		tweet.classList.add('twitter-tweet');
-		darkModeAvailable && tweet.setAttribute('data-theme', 'dark');
+		darkMode && tweet.setAttribute('data-theme', 'dark');
 
 		twttr.ready((twitter) => {
 			twitter.widgets.load(tweetContainer);
