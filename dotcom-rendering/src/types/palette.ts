@@ -11,7 +11,6 @@ export type Palette = {
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
 		betaLabel: Colour;
-		designTag: Colour;
 		dateLine: Colour;
 		expandableAtom: Colour;
 		expandableAtomHover: Colour;
@@ -28,7 +27,6 @@ export type Palette = {
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
 		treat: Colour;
-		designTag: Colour;
 		lightboxDivider: Colour;
 	};
 	fill: {

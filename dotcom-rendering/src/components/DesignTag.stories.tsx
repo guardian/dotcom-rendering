@@ -5,6 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
+import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
 import { DesignTag } from './DesignTag';
 
 export default {
@@ -24,6 +25,15 @@ export const Analysis = () => {
 	);
 };
 Analysis.storyName = 'with design Analysis';
+Analysis.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Analysis,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.News,
+		},
+	]),
+];
 
 export const Interview = () => {
 	return (
@@ -43,6 +53,15 @@ export const Interview = () => {
 	);
 };
 Interview.storyName = 'with design Interview';
+Interview.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Interview,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
 export const Explainer = () => {
 	return (
@@ -62,6 +81,15 @@ export const Explainer = () => {
 	);
 };
 Explainer.storyName = 'with design Explainer';
+Explainer.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Explainer,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
 export const Letter = () => {
 	return (
@@ -81,6 +109,15 @@ export const Letter = () => {
 	);
 };
 Letter.storyName = 'with design Letter';
+Letter.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Letter,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
 export const SpecialReport = () => {
 	return (
@@ -94,6 +131,15 @@ export const SpecialReport = () => {
 	);
 };
 SpecialReport.storyName = 'with design Analysis and theme SpecialReport';
+SpecialReport.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Analysis,
+			display: ArticleDisplay.Standard,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	]),
+];
 
 export const Timeline = () => {
 	return (
@@ -113,6 +159,15 @@ export const Timeline = () => {
 	);
 };
 Timeline.storyName = 'with design Timeline';
+Timeline.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Timeline,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
+	]),
+];
 
 export const Profile = () => {
 	return (
@@ -132,3 +187,12 @@ export const Profile = () => {
 	);
 };
 Profile.storyName = 'with design Profile';
+Profile.decorators = [
+	lightDecorator([
+		{
+			design: ArticleDesign.Profile,
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+		},
+	]),
+];

@@ -370,14 +370,6 @@ const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
 
 const textBetaLabel = (): string => neutral[46];
 
-const textDesignTag = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt) {
-		return palette.specialReportAlt[800];
-	}
-
-	return neutral[100];
-};
-
 const textDateLine = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -419,27 +411,6 @@ const backgroundTreat = (format: ArticleFormat): string => {
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
 			return news[300];
-	}
-};
-
-const backgroundDesignTag = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case Pillar.News:
-			return news[300];
-		case Pillar.Sport:
-			return sport[300];
-		case Pillar.Lifestyle:
-			return lifestyle[300];
-		case Pillar.Culture:
-			return culture[300];
-		case Pillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return palette.specialReportAlt[100];
 	}
 };
 
@@ -497,7 +468,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
 			betaLabel: textBetaLabel(),
-			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
@@ -515,7 +485,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),
 			treat: backgroundTreat(format),
-			designTag: backgroundDesignTag(format),
 		},
 		fill: {
 			guardianLogo: fillGuardianLogo(format),
