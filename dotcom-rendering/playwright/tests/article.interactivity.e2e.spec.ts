@@ -14,27 +14,27 @@ const articleUrl =
 
 test.describe('Interactivity', () => {
 	test.describe('Verify elements have been hydrated', () => {
-		// test('should open the edition dropdown menu when clicked and hide when expected', async ({
-		// 	context,
-		// 	page,
-		// }) => {
-		// 	await disableCMP(context);
-		// 	await loadPage(page, `/Article/${articleUrl}`);
+		test.skip('should open the edition dropdown menu when clicked and hide when expected', async ({
+			context,
+			page,
+		}) => {
+			await disableCMP(context);
+			await loadPage(page, `/Article/${articleUrl}`);
 
-		// 	await waitForIsland(page, 'HeaderTopBar');
-		// 	// Open it
-		// 	await page.locator('[data-testid=dropdown-button]').click();
-		// 	await expectToBeVisible(page, '[data-testid=dropdown-options]');
-		// 	// Pressing esc hides it
-		// 	await page.locator('body').press('Escape');
-		// 	await expectToNotBeVisible(page, '[data-testid=dropdown-options]');
-		// 	// Open it again
-		// 	await page.locator('[data-testid=dropdown-button]').click();
-		// 	await expectToBeVisible(page, '[data-testid=dropdown-options]');
-		// 	// Clicking elsewhere in the document hides it
-		// 	await page.locator('h1').first().click();
-		// 	await expectToNotBeVisible(page, '[data-testid=dropdown-options]');
-		// });
+			await waitForIsland(page, 'HeaderTopBar');
+			// Open it
+			await page.locator('[data-testid=dropdown-button]').click();
+			await expectToBeVisible(page, '[data-testid=dropdown-options]');
+			// Pressing esc hides it
+			await page.locator('body').press('Escape');
+			await expectToNotBeVisible(page, '[data-testid=dropdown-options]');
+			// Open it again
+			await page.locator('[data-testid=dropdown-button]').click();
+			await expectToBeVisible(page, '[data-testid=dropdown-options]');
+			// Clicking elsewhere in the document hides it
+			await page.locator('h1').first().click();
+			await expectToNotBeVisible(page, '[data-testid=dropdown-options]');
+		});
 
 		test('loads the discussion when you click the comment count', async ({
 			context,
@@ -164,31 +164,31 @@ test.describe('Interactivity', () => {
 	});
 
 	test.describe('Navigating the pillar menu', () => {
-		// test('should expand and close the desktop pillar menu when More is clicked', async ({
-		// 	context,
-		// 	page,
-		// }) => {
-		// 	await disableCMP(context);
-		// 	await loadPage(page, `/Article/${articleUrl}`);
+		test.skip('should expand and close the desktop pillar menu when More is clicked', async ({
+			context,
+			page,
+		}) => {
+			await disableCMP(context);
+			await loadPage(page, `/Article/${articleUrl}`);
 
-		// 	// Open pillar menu
-		// 	await page.locator('[data-testid=nav-show-more-button]').click();
-		// 	await expect(
-		// 		page.locator('data-testid=expanded-menu'),
-		// 	).toContainText('Columnists');
+			// Open pillar menu
+			await page.locator('[data-testid=nav-show-more-button]').click();
+			await expect(
+				page.locator('data-testid=expanded-menu'),
+			).toContainText('Columnists');
 
-		// 	// Assert newslinks second item (first visible) is focused
-		// 	// TODO e2e find a better way to filter on visible list items :visible doesn't work
-		// 	await expect(
-		// 		page.locator('[data-testid="newsLinks"] > li:nth-child(2) a'),
-		// 	).toBeFocused();
+			// Assert newslinks second item (first visible) is focused
+			// TODO e2e find a better way to filter on visible list items :visible doesn't work
+			await expect(
+				page.locator('[data-testid="newsLinks"] > li:nth-child(2) a'),
+			).toBeFocused();
 
-		// 	// Press escape and assert show more is focused
-		// 	await page.locator('body').press('Escape');
-		// 	await expect(
-		// 		page.locator('[data-testid=nav-show-more-button]'),
-		// 	).toBeFocused();
-		// });
+			// Press escape and assert show more is focused
+			await page.locator('body').press('Escape');
+			await expect(
+				page.locator('[data-testid=nav-show-more-button]'),
+			).toBeFocused();
+		});
 
 		test.describe('On mobile', () => {
 			test('should expand the mobile pillar menu when the VeggieBurger is clicked', async ({
@@ -232,68 +232,68 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			// test('should immediately focus on the News menu item when the menu first opens', async ({
-			// 	context,
-			// 	page,
-			// }) => {
-			// 	await page.setViewportSize(devices['iPhone X'].viewport);
-			// 	await disableCMP(context);
-			// 	await loadPage(page, `/Article/${articleUrl}`);
+			test.skip('should immediately focus on the News menu item when the menu first opens', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
 
-			// 	await page.locator('[data-testid=veggie-burger]').click();
-			// 	await expect(
-			// 		page.locator('[data-testid=column-collapse-News]'),
-			// 	).toBeFocused();
-			// });
+				await page.locator('[data-testid=veggie-burger]').click();
+				await expect(
+					page.locator('[data-testid=column-collapse-News]'),
+				).toBeFocused();
+			});
 
-			// test('should transfer focus to sub menu items when tabbing from section header', async ({
-			// 	context,
-			// 	page,
-			// }) => {
-			// 	await page.setViewportSize(devices['iPhone X'].viewport);
-			// 	await disableCMP(context);
-			// 	await loadPage(page, `/Article/${articleUrl}`);
+			test.skip('should transfer focus to sub menu items when tabbing from section header', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
 
-			// 	// tab to the first sub menu item
-			// 	await page.locator('[data-testid=veggie-burger]').click();
-			// 	await page.keyboard.press('Enter');
-			// 	await page.keyboard.press('Tab');
+				// tab to the first sub menu item
+				await page.locator('[data-testid=veggie-burger]').click();
+				await page.keyboard.press('Enter');
+				await page.keyboard.press('Tab');
 
-			// 	// Assert first item of first sub menu is focused
-			// 	await expect(
-			// 		page.locator(
-			// 			'[data-testid="nav-menu-columns"] > li:nth-child(1) > ul > li:nth-child(1) > a',
-			// 		),
-			// 	).toBeFocused();
-			// });
+				// Assert first item of first sub menu is focused
+				await expect(
+					page.locator(
+						'[data-testid="nav-menu-columns"] > li:nth-child(1) > ul > li:nth-child(1) > a',
+					),
+				).toBeFocused();
+			});
 
-			// test('should let reader traverse section titles using keyboard', async ({
-			// 	context,
-			// 	page,
-			// }) => {
-			// 	await page.setViewportSize(devices['iPhone X'].viewport);
-			// 	await disableCMP(context);
-			// 	await loadPage(page, `/Article/${articleUrl}`);
+			test.skip('should let reader traverse section titles using keyboard', async ({
+				context,
+				page,
+			}) => {
+				await page.setViewportSize(devices['iPhone X'].viewport);
+				await disableCMP(context);
+				await loadPage(page, `/Article/${articleUrl}`);
 
-			// 	await page
-			// 		.locator('[data-testid=veggie-burger]')
-			// 		.press('Enter');
+				await page
+					.locator('[data-testid=veggie-burger]')
+					.press('Enter');
 
-			// 	// Close the news menu
-			// 	await page.locator('*:focus').press('Tab');
-			// 	await expect(
-			// 		page.locator('[data-testid=column-collapse-Opinion]'),
-			// 	).toBeFocused();
+				// Close the news menu
+				await page.locator('*:focus').press('Tab');
+				await expect(
+					page.locator('[data-testid=column-collapse-Opinion]'),
+				).toBeFocused();
 
-			// 	// Open the opinion menu
-			// 	await page.locator('*:focus').press('Enter');
-			// 	await page.locator('*:focus').press('Tab');
-			// 	await expect(
-			// 		page.locator(
-			// 			'[data-testid=column-collapse-sublink-Opinion]',
-			// 		),
-			// 	).toBeFocused();
-			// });
+				// Open the opinion menu
+				await page.locator('*:focus').press('Enter');
+				await page.locator('*:focus').press('Tab');
+				await expect(
+					page.locator(
+						'[data-testid=column-collapse-sublink-Opinion]',
+					),
+				).toBeFocused();
+			});
 
 			test('should expand the subnav when "More" is clicked', async ({
 				context,
