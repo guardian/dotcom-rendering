@@ -842,8 +842,8 @@ importers:
         specifier: ^18.2.11
         version: 18.3.1
       CSNX_SOURCE:
-        specifier: npm:@guardian/source@1.0.3
-        version: /@guardian/source@1.0.3(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: npm:@guardian/source@2.0.0
+        version: /@guardian/source@2.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -4458,6 +4458,32 @@ packages:
 
   /@guardian/source@1.0.3(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
     resolution: {integrity: sha512-LUAaEcwBGdTGVWOXzT/Y6MW4TAgY8Ag/DwrYjbuPKRzAaEGp5B9+GGBl9v9mFhzPArQyKamgEGSQEzTbWfMR3A==}
+    peerDependencies:
+      '@emotion/react': ^11.11.1
+      '@types/react': ^18.2.11
+      react: ^18.2.0
+      tslib: ^2.6.2
+      typescript: ~5.3.3
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
+      '@types/react': 18.3.1
+      mini-svg-data-uri: 1.4.4
+      react: 18.3.1
+      tslib: 2.6.2
+      typescript: 5.3.3
+    dev: false
+
+  /@guardian/source@2.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-8WeAxeNWGJPaY5jw1pW7jC/ZkyW/V+FzVQoGssYHrlN9heqotHaYaE9ko9TPHyWkz4AbeTdc4zkwI8vWndBWMA==}
     peerDependencies:
       '@emotion/react': ^11.11.1
       '@types/react': ^18.2.11
