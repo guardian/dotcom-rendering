@@ -7,27 +7,20 @@ type Props = {
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	supportingContent?: JSX.Element;
 	showLivePlayable?: boolean;
 	topAlign?: boolean;
 };
 
-const spacing = css`
+const marginStyles = (topAlign: boolean) => css`
+	margin-top: ${topAlign ? `${space[3]}px` : `auto`};
+`;
+
+const contentStyles = css`
 	padding-top: ${space[1]}px;
 	display: flex;
 	justify-content: 'flex-start';
 	align-items: center;
-`;
-
-const margins = (topAlign: boolean) => css`
-	margin-top: ${topAlign ? `${space[3]}px` : `auto`};
-`;
-
-const fontStyles = css`
 	${textSansBold12}
-`;
-
-const borderStyles = css`
 	> {
 		/* The dividing line is applied only to the second child. This ensures that no dividing line is added when there is only one child in the container. */
 		:nth-child(2) {
@@ -53,23 +46,19 @@ export const CardFooter = ({
 	age,
 	commentCount,
 	cardBranding,
-	supportingContent,
 	showLivePlayable = false,
 	topAlign = false,
 }: Props) => {
 	if (showLivePlayable) return null;
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
-		return <footer css={margins(topAlign)}>{cardBranding}</footer>;
+		return <footer css={marginStyles(topAlign)}>{cardBranding}</footer>;
 	}
 
 	return (
-		<footer css={margins(topAlign)}>
-			{supportingContent}
-			<div css={[spacing, fontStyles, borderStyles]}>
-				{age}
-				{commentCount}
-			</div>
+		<footer css={[marginStyles(topAlign), contentStyles]}>
+			{age}
+			{commentCount}
 		</footer>
 	);
 };
