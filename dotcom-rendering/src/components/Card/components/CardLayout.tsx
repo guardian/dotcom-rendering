@@ -19,6 +19,11 @@ type Props = {
 	gapSize?: GapSize;
 };
 
+const containerStyles = css`
+	display: flex;
+	flex-basis: 100%;
+`;
+
 const decideDirection = (imagePosition: ImagePositionType) => {
 	switch (imagePosition) {
 		case 'top':
@@ -93,25 +98,17 @@ const decidePosition = (
 	`;
 };
 
-/**
- * Detemines the gap size between components in card layout
- */
+/** Detemines the gap size between components in card layout */
 const decideGap = (gapSize: GapSize) => {
 	switch (gapSize) {
 		case 'none':
-			return;
+			return `0`;
 		case 'small':
-			return css`
-				gap: ${space[1]}px;
-			`;
+			return `${space[1]}px`;
 		case 'medium':
-			return css`
-				gap: ${space[2]}px;
-			`;
+			return ` ${space[2]}px;`;
 		case 'large':
-			return css`
-				gap: ${space[5]}px;
-			`;
+			return `${space[5]}px;`;
 	}
 };
 
@@ -127,10 +124,7 @@ export const CardLayout = ({
 }: Props) => (
 	<div
 		css={[
-			css`
-				display: flex;
-				flex-basis: 100%;
-			`,
+			containerStyles,
 			containerType === 'fixed/video'
 				? videoWidth
 				: minWidth(minWidthInPixels),
@@ -139,10 +133,10 @@ export const CardLayout = ({
 				imagePositionOnMobile,
 				imageType,
 			),
-			decideGap(gapSize),
 		]}
 		style={{
 			backgroundColor: cardBackgroundColour,
+			gap: decideGap(gapSize),
 		}}
 	>
 		{children}

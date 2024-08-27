@@ -360,10 +360,10 @@ export const Card = ({
 	 */
 	const hasBackgroundColour = !containerPalette && isMediaCard(format);
 
-	//** Whilst we migrate to the new container types, we need to check which container we are in. */
+	/* Whilst we migrate to the new container types, we need to check which container we are in. */
 	const isFlexibleContainer = containerType === 'flexible/special';
 
-	//** We need to choose the gap size based on certain card properties */
+	/** Determines the gap of between card components based on card properties */
 	const getGapSize = (): GapSize => {
 		if (isOnwardContent) return 'none';
 		if (hasBackgroundColour) return 'small';
