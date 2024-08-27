@@ -177,11 +177,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
+	const isPreview = front.config.isPreview;
+
 	const Highlights = () => {
 		const showHighlights =
 			front.isNetworkFront &&
-			inUpdatedHeaderABTest &&
-			inHighlightsContainerABTest;
+			((inUpdatedHeaderABTest && inHighlightsContainerABTest) ||
+				isPreview);
 
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);
