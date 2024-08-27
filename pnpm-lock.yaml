@@ -65,8 +65,8 @@ importers:
         specifier: 10.0.0
         version: 10.0.0
       '@guardian/bridget':
-        specifier: 6.0.0
-        version: 6.0.0
+        specifier: 7.0.0
+        version: 7.0.0
       '@guardian/cdk':
         specifier: 50.13.0
         version: 50.13.0(@types/node@18.18.14)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
@@ -332,8 +332,8 @@ importers:
         specifier: 20.0.0
         version: 20.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@libs+@guardian+source)(react@18.3.1)
       '@guardian/bridget':
-        specifier: 6.0.0
-        version: 6.0.0
+        specifier: 7.0.0
+        version: 7.0.0
       '@guardian/browserslist-config':
         specifier: 6.1.0
         version: 6.1.0(browserslist@4.23.0)(tslib@2.6.2)
@@ -4018,8 +4018,8 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@guardian/bridget@6.0.0:
-    resolution: {integrity: sha512-aiRVLDF/UfNYeoF10ptBDs52Fv1T4sd19uKACTZSr1uMgV2BPmzG+/BiVLi8Q9/6gjS+CTP3Covz62liksAFuQ==}
+  /@guardian/bridget@7.0.0:
+    resolution: {integrity: sha512-S0NmkyYd1hQRyOUj7l9Ddfr6FKEHJFLpS2jSMkGexCSscsZd7e8JBdFmlKSUljt4G6hrxcaaevsV4QfT9LnhUg==}
     dev: false
 
   /@guardian/browserslist-config@6.1.0(browserslist@4.23.0)(tslib@2.6.2):
