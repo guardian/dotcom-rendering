@@ -118,12 +118,12 @@ export const CopyNativeShareButton = ({
 			priority="tertiary"
 			iconSide="left"
 			icon={isCopied ? <SvgCheckmark /> : <SvgShare />}
-			css={[
+			cssOverrides={[
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
 					: [buttonStyles(sizeXSmall)]),
 				sharedButtonStyles(sizeXSmall),
-				isLiveBlogMeta && liveBlogMobileMeta(isCopied),
+				isLiveBlogMeta ? liveBlogMobileMeta(isCopied) : css``,
 			]}
 		>
 			{isCopied ? 'Link copied' : 'Share'}
@@ -149,10 +149,10 @@ export const EmailLink = ({
 			priority="tertiary"
 			iconSide="left"
 			icon={<SvgShare />}
-			css={[
+			cssOverrides={[
 				buttonStyles(sizeXSmall),
 				sharedButtonStyles(sizeXSmall),
-				isLiveBlogMeta && liveBlogMobileMeta(false),
+				isLiveBlogMeta ? liveBlogMobileMeta(false) : css``,
 			]}
 		>
 			Share

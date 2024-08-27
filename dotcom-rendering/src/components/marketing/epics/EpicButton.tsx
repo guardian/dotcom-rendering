@@ -5,7 +5,6 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ThemeProvider } from '@emotion/react';
 import type { OphanComponentEvent } from '@guardian/libs';
 import { palette } from '@guardian/source/foundations';
 import {
@@ -97,34 +96,15 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 		// So we'll map that to 'primary' and apply a CSS override on both of
 		// them so they get the same styles for 'tertiary' priority
 		return (
-			<ThemeProvider theme={contributionsTheme}>
-				<LinkButton
-					href={onClickAction}
-					icon={icon ?? <SvgArrowRightStraight />}
-					iconSide="right"
-					onClick={onButtonCtaClick}
-					target="_blank"
-					rel="noopener noreferrer"
-					priority={isTertiary ? 'primary' : priority}
-					css={
-						isTertiary
-							? [tertiaryButtonOverrides, cssOverrides]
-							: cssOverrides
-					}
-					{...props}
-				>
-					{children}
-				</LinkButton>
-			</ThemeProvider>
-		);
-	}
-	return (
-		<ThemeProvider theme={contributionsTheme}>
-			<DSButton
+			<LinkButton
+				href={onClickAction}
+				icon={icon ?? <SvgArrowRightStraight />}
 				iconSide="right"
-				icon={showArrow ? <SvgArrowRightStraight /> : undefined}
-				onClick={(): void => onClickAction()}
+				onClick={onButtonCtaClick}
+				target="_blank"
+				rel="noopener noreferrer"
 				priority={isTertiary ? 'primary' : priority}
+				theme={contributionsTheme.button}
 				css={
 					isTertiary
 						? [tertiaryButtonOverrides, cssOverrides]
@@ -133,7 +113,24 @@ export const EpicButton: ReactComponent<Props> = (allProps: Props) => {
 				{...props}
 			>
 				{children}
-			</DSButton>
-		</ThemeProvider>
+			</LinkButton>
+		);
+	}
+	return (
+		<DSButton
+			iconSide="right"
+			icon={showArrow ? <SvgArrowRightStraight /> : undefined}
+			onClick={(): void => onClickAction()}
+			priority={isTertiary ? 'primary' : priority}
+			theme={contributionsTheme.button}
+			css={
+				isTertiary
+					? [tertiaryButtonOverrides, cssOverrides]
+					: cssOverrides
+			}
+			{...props}
+		>
+			{children}
+		</DSButton>
 	);
 };
