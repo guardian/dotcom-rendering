@@ -169,21 +169,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { abTests } = front.config;
 
+	const isPreview = front.config.isPreview;
+
 	const inUpdatedHeaderABTest =
-		abTests.updatedHeaderDesignVariant === 'variant';
+		abTests.updatedHeaderDesignVariant === 'variant' || isPreview;
 
 	const inHighlightsContainerABTest =
-		abTests.mastheadWithHighlightsVariant === 'variant';
+		abTests.mastheadWithHighlightsVariant === 'variant' || isPreview;
 
 	const { absoluteServerTimes = false } = front.config.switches;
-
-	const isPreview = front.config.isPreview;
 
 	const Highlights = () => {
 		const showHighlights =
 			front.isNetworkFront &&
-			((inUpdatedHeaderABTest && inHighlightsContainerABTest) ||
-				isPreview);
+			inUpdatedHeaderABTest &&
+			inHighlightsContainerABTest;
 
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);
