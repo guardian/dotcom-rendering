@@ -364,10 +364,25 @@ export const PausesOffscreen = {
 	},
 } satisfies Story;
 
+/**
+ * Duplicate YoutubeAtom tests but with ads enabled.
+ *
+ * The YouTube ads integration (IMA) only works on allow listed https domains.
+ * The tests require running:
+ * - DCR as normal on port 3030
+ * - scripts/nginx/setup.sh to setup nginx on https://r.thegulocal.com
+ *
+ * The ad enabled tests are a convenience for manual testing.
+ *
+ */
+
 export const NoConsentWithAds = {
 	args: {
 		...NoConsent.args,
 		adTargeting,
+	},
+	parameters: {
+		chromatic: { disableSnapshot: true },
 	},
 } satisfies Story;
 
@@ -377,6 +392,9 @@ export const NoOverlayWithAds = {
 		...adTargetingAndConsentGiven,
 	},
 	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const WithOverrideImageWithAds = {
@@ -386,6 +404,9 @@ export const WithOverrideImageWithAds = {
 		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
 	},
 	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const WithPosterImageWithAds = {
@@ -395,6 +416,9 @@ export const WithPosterImageWithAds = {
 		videoCategory: undefined,
 	},
 	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const WithOverlayAndPosterImageWithAds = {
@@ -406,6 +430,9 @@ export const WithOverlayAndPosterImageWithAds = {
 		showTextOverlay: undefined,
 	},
 	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const GiveConsentWithAds = {
@@ -415,6 +442,9 @@ export const GiveConsentWithAds = {
 		adTargeting,
 	},
 	decorators: [],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const StickyWithAds = {
@@ -424,6 +454,9 @@ export const StickyWithAds = {
 		shouldPauseOutOfView: undefined,
 	},
 	decorators: [ScrollDown('arrow')],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const StickyMainMediaWithAds = {
@@ -432,6 +465,9 @@ export const StickyMainMediaWithAds = {
 		...adTargetingAndConsentGiven,
 	},
 	decorators: [ScrollDown('arrow')],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const DuplicateVideosWithAds = {
@@ -440,7 +476,9 @@ export const DuplicateVideosWithAds = {
 		...DuplicateVideos.args,
 		...adTargetingAndConsentGiven,
 	},
-	parameters: undefined,
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
 export const MultipleStickyVideosWithAds = {
@@ -448,5 +486,8 @@ export const MultipleStickyVideosWithAds = {
 	args: {
 		...MultipleStickyVideos.args,
 		...adTargetingAndConsentGiven,
+	},
+	parameters: {
+		chromatic: { disableSnapshot: true },
 	},
 } satisfies Story;
