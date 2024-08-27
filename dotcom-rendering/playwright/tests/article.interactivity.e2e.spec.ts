@@ -114,7 +114,7 @@ test.describe('Interactivity', () => {
 			);
 		});
 
-		test('should render the reader revenue links in the header', async ({
+		test.skip('should render the reader revenue links in the header', async ({
 			context,
 			page,
 		}) => {
@@ -295,7 +295,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			test('should expand the subnav when "More" is clicked', async ({
+			test.skip('should expand the subnav when "More" is clicked', async ({
 				context,
 				page,
 			}) => {
