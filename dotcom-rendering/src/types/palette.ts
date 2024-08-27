@@ -22,7 +22,6 @@ export type Palette = {
 		bulletStandfirst: Colour;
 		imageTitle: Colour;
 		speechBubble: Colour;
-		headlineTag: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
