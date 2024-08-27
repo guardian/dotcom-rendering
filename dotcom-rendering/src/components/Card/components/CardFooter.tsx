@@ -41,6 +41,10 @@ const contentStyles = css`
 	}
 `;
 
+const labStyles = css`
+	margin-top: ${space[1]}px;
+`;
+
 export const CardFooter = ({
 	format,
 	age,
@@ -52,7 +56,7 @@ export const CardFooter = ({
 	if (showLivePlayable) return null;
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
-		return <footer css={marginStyles(topAlign)}>{cardBranding}</footer>;
+		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
 	return (
