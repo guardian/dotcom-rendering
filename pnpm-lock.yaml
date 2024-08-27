@@ -836,14 +836,14 @@ importers:
   libs/@guardian/source:
     dependencies:
       '@emotion/react':
-        specifier: ^11.11.1
-        version: 11.11.1(@types/react@18.3.1)(react@18.3.1)
+        specifier: ^11.11.3
+        version: 11.13.3(@types/react@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: ^18.2.11
         version: 18.3.1
       CSNX_SOURCE:
-        specifier: npm:@guardian/source@3.0.0
-        version: /@guardian/source@3.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: npm:@guardian/source@4.0.0
+        version: /@guardian/source@4.0.0(@emotion/react@11.13.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -3607,6 +3607,16 @@ packages:
       stylis: 4.2.0
     dev: false
 
+  /@emotion/cache@11.13.1:
+    resolution: {integrity: sha512-iqouYkuEblRcXmylXIwwOodiEK5Ifl7JcX7o6V4jI3iW4mLXX3dmt5xwBtIkJiQEXFAI+pC8X0i67yiPkH9Ucw==}
+    dependencies:
+      '@emotion/memoize': 0.9.0
+      '@emotion/sheet': 1.4.0
+      '@emotion/utils': 1.4.0
+      '@emotion/weak-memoize': 0.4.0
+      stylis: 4.2.0
+    dev: false
+
   /@emotion/css-prettifier@1.1.3:
     resolution: {integrity: sha512-KNv23+VQ+pcw3ebd1vSEl11CQ6SKAG5EQkrinjVGsfw3ZTWe6/tpWQrsvFLqCtU2LRiLPi04KgFCE4A9+crfpQ==}
     dependencies:
@@ -3668,6 +3678,29 @@ packages:
       - supports-color
     dev: false
 
+  /@emotion/react@11.13.3(@types/react@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-lIsdU6JNrmYfJ5EbUCf4xW1ovy5wKQ2CkPRM4xogziOxH1nXxBSjpC9YqbFAP7circxMfYp+6x676BqWcEiixg==}
+    peerDependencies:
+      '@types/react': '*'
+      react: '>=16.8.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.25.0
+      '@emotion/babel-plugin': 11.12.0
+      '@emotion/cache': 11.13.1
+      '@emotion/serialize': 1.3.1
+      '@emotion/use-insertion-effect-with-fallbacks': 1.1.0(react@18.3.1)
+      '@emotion/utils': 1.4.0
+      '@emotion/weak-memoize': 0.4.0
+      '@types/react': 18.3.1
+      hoist-non-react-statics: 3.3.2
+      react: 18.3.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@emotion/serialize@1.1.2:
     resolution: {integrity: sha512-zR6a/fkFP4EAcCMQtLOhIgpprZOwNmCldtpaISpvz348+DP4Mz8ZoKaGGCQpbzepNIUWbq4w6hNZkwDyKoS+HA==}
     dependencies:
@@ -3684,6 +3717,16 @@ packages:
       '@emotion/hash': 0.9.2
       '@emotion/memoize': 0.9.0
       '@emotion/unitless': 0.9.0
+      '@emotion/utils': 1.4.0
+      csstype: 3.1.1
+    dev: false
+
+  /@emotion/serialize@1.3.1:
+    resolution: {integrity: sha512-dEPNKzBPU+vFPGa+z3axPRn8XVDetYORmDC0wAiej+TNcOZE70ZMJa0X7JdeoM6q/nWTMZeLpN/fTnD9o8MQBA==}
+    dependencies:
+      '@emotion/hash': 0.9.2
+      '@emotion/memoize': 0.9.0
+      '@emotion/unitless': 0.10.0
       '@emotion/utils': 1.4.0
       csstype: 3.1.1
     dev: false
@@ -3706,6 +3749,14 @@ packages:
     resolution: {integrity: sha512-0QBtGvaqtWi+nx6doRwDdBIzhNdZrXUppvTM4dtZZWEGTXL/XE/yJxLMGlDT1Gt+UHH5IX1n+jkXyytE/av7OA==}
     dev: false
 
+  /@emotion/sheet@1.4.0:
+    resolution: {integrity: sha512-fTBW9/8r2w3dXWYM4HCB1Rdp8NLibOw2+XELH5m5+AkWiL/KqYX6dc0kKYlaYyKjrQ6ds33MCdMPEwgs2z1rqg==}
+    dev: false
+
+  /@emotion/unitless@0.10.0:
+    resolution: {integrity: sha512-dFoMUuQA20zvtVTuxZww6OHoJYgrzfKM1t52mVySDJnMSEa08ruEvdYQbhvyu6soU+NeLVd3yKfTfT0NeV6qGg==}
+    dev: false
+
   /@emotion/unitless@0.8.1:
     resolution: {integrity: sha512-KOEGMu6dmJZtpadb476IsZBclKvILjopjUii3V+7MnXIQCYh8W3NgNcgwo21n9LXZX6EDIKvqfjYxXebDwxKmQ==}
     dev: false
@@ -3722,6 +3773,14 @@ packages:
       react: 18.3.1
     dev: false
 
+  /@emotion/use-insertion-effect-with-fallbacks@1.1.0(react@18.3.1):
+    resolution: {integrity: sha512-+wBOcIV5snwGgI2ya3u99D7/FJquOIniQT1IKyDsBmEgwvpxMNeS65Oib7OnE2d2aY+3BU4OiH+0Wchf8yk3Hw==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.3.1
+    dev: false
+
   /@emotion/utils@1.2.1:
     resolution: {integrity: sha512-Y2tGf3I+XVnajdItskUCn6LX+VUDmP6lTL4fcqsXAv43dnlbZiuW4MWQW38rW/BVWSE7Q/7+XQocmpnRYILUmg==}
     dev: false
@@ -3732,6 +3791,10 @@ packages:
 
   /@emotion/weak-memoize@0.3.1:
     resolution: {integrity: sha512-EsBwpc7hBUJWAsNPBmJy4hxWx12v6bshQsldrVmjxJoc3isbxhOrF2IcCpaXxfvq03NwkI7sbsOLXbYuqF/8Ww==}
+    dev: false
+
+  /@emotion/weak-memoize@0.4.0:
+    resolution: {integrity: sha512-snKqtPW01tN0ui7yu9rGv69aJXr/a/Ywvl11sUjNtEcRc+ng/mQriFL0wLXMef74iHa/EkftbDzU9F8iFbH+zg==}
     dev: false
 
   /@esbuild/android-arm64@0.18.20:
@@ -4482,10 +4545,10 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /@guardian/source@3.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-ocdnSojiVmPaDXnPSMo9FQbPgP00JzR74AftgCDqcLTo9uXgLmO0w9TADMHm48MhNsHqH1RDqgDdStd37Qbctw==}
+  /@guardian/source@4.0.0(@emotion/react@11.13.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-Ls3W0b/zktU/BF7A5S8qh0Z3vlrtmxsN6lUdh2n7MIUdbBvhP63AN2Po56DwdsUHQU6joMebzfHbCSzkm2xJww==}
     peerDependencies:
-      '@emotion/react': ^11.11.1
+      '@emotion/react': ^11.11.3
       '@types/react': ^18.2.11
       react: ^18.2.0
       tslib: ^2.6.2
@@ -4500,7 +4563,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
+      '@emotion/react': 11.13.3(@types/react@18.3.1)(react@18.3.1)
       '@types/react': 18.3.1
       mini-svg-data-uri: 1.4.4
       react: 18.3.1
