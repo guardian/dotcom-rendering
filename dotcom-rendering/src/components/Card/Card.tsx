@@ -374,7 +374,12 @@ export const Card = ({
 				isExternalLink={isExternalLink}
 			/>
 			{headlinePosition === 'outer' && (
-				<HeadlineWrapper>
+				<div
+					css={css`
+						padding-bottom: 8px;
+					`}
+					style={{ backgroundColor: cardBackgroundColour }}
+				>
 					<CardHeadline
 						headlineText={headlineText}
 						format={format}
@@ -407,7 +412,7 @@ export const Card = ({
 							hasKicker={!!kickerText}
 						/>
 					)}
-				</HeadlineWrapper>
+				</div>
 			)}
 			<CardLayout
 				cardBackgroundColour={cardBackgroundColour}
