@@ -842,8 +842,8 @@ importers:
         specifier: ^18.2.11
         version: 18.3.1
       CSNX_SOURCE:
-        specifier: npm:@guardian/source@2.0.0
-        version: /@guardian/source@2.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: npm:@guardian/source@3.0.0
+        version: /@guardian/source@3.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -4482,8 +4482,8 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /@guardian/source@2.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-8WeAxeNWGJPaY5jw1pW7jC/ZkyW/V+FzVQoGssYHrlN9heqotHaYaE9ko9TPHyWkz4AbeTdc4zkwI8vWndBWMA==}
+  /@guardian/source@3.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-ocdnSojiVmPaDXnPSMo9FQbPgP00JzR74AftgCDqcLTo9uXgLmO0w9TADMHm48MhNsHqH1RDqgDdStd37Qbctw==}
     peerDependencies:
       '@emotion/react': ^11.11.1
       '@types/react': ^18.2.11
