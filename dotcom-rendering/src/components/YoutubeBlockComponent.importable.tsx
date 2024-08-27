@@ -4,7 +4,9 @@ import {
 	type ArticleFormat,
 	type ConsentState,
 	isUndefined,
+	log,
 } from '@guardian/libs';
+import type { EventPayload, VideoEvent } from '@guardian/ophan-tracker-js';
 import { body, palette, space } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
 import { useCallback, useEffect, useState } from 'react';
@@ -195,12 +197,18 @@ export const YoutubeBlockComponent = ({
 	const ophanTrackerWeb = useCallback(
 		(trackingEvent: VideoEventKey) => {
 			void getOphan('Web').then((ophan) => {
-				ophan.record({
+				const event = {
 					video: {
 						id: `gu-video-youtube-${id}`,
 						eventType: `video:content:${trackingEvent}`,
-					},
+					} satisfies VideoEvent,
+				} satisfies EventPayload;
+				log('dotcom', {
+					from: 'YoutubeAtom event emitter web',
+					id,
+					event,
 				});
+				ophan.record(event);
 			});
 		},
 		[id],
@@ -210,10 +218,16 @@ export const YoutubeBlockComponent = ({
 		(trackingEvent: VideoEventKey) => {
 			const appsMediaEvent = getAppsMediaEvent(trackingEvent);
 			if (!isUndefined(appsMediaEvent)) {
-				void getVideoClient().sendVideoEvent({
+				const event = {
 					videoId: id,
 					event: appsMediaEvent,
+				};
+				log('dotcom', {
+					from: 'YoutubeAtom event emitter apps',
+					id,
+					event,
 				});
+				void getVideoClient().sendVideoEvent(event);
 			}
 		},
 		[id],
