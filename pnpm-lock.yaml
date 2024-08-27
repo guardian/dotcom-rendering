@@ -330,7 +330,7 @@ importers:
         version: 8.0.0(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/braze-components':
         specifier: 20.0.0
-        version: 20.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@3.0.0)(react@18.3.1)
+        version: 20.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@4.0.0)(react@18.3.1)
       '@guardian/bridget':
         specifier: 7.0.0
         version: 7.0.0
@@ -368,11 +368,11 @@ importers:
         specifier: 1.0.2
         version: 1.0.2
       '@guardian/source':
-        specifier: 3.0.0
-        version: 3.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        specifier: 4.0.0
+        version: 4.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source-development-kitchen':
         specifier: 1.0.0
-        version: 1.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@3.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+        version: 1.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@4.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/support-dotcom-components':
         specifier: 2.6.3
         version: 2.6.3(@guardian/libs@18.0.0)(zod@3.22.4)
@@ -3955,7 +3955,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@guardian/braze-components@20.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@3.0.0)(react@18.3.1):
+  /@guardian/braze-components@20.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@4.0.0)(react@18.3.1):
     resolution: {integrity: sha512-/ENh0v7GUJcrQ8U0fXffAPWGvyOZxRCN1IPOf89PFLnM5Y0RCBIT2095hfYHxu3LgmvWz30QyuMB6HKN/oo9uQ==}
     engines: {node: ^18.15 || ^20.9}
     peerDependencies:
@@ -3966,7 +3966,7 @@ packages:
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 18.0.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/source': 3.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/source': 4.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       react: 18.3.1
     dev: false
 
@@ -4380,7 +4380,7 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/source-development-kitchen@1.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@3.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
+  /@guardian/source-development-kitchen@1.0.0(@emotion/react@11.11.1)(@guardian/libs@18.0.0)(@guardian/source@4.0.0)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
     resolution: {integrity: sha512-nZYJuHici8Bja7bKs3GZY5UzNCnbWOq1OCYclC6rhvpkcXdrtP+zyqX6YwJKWMgEKg+aL/l595OubBdGenn7OA==}
     peerDependencies:
       '@emotion/react': ^11.11.1
@@ -4402,7 +4402,7 @@ packages:
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
       '@guardian/libs': 18.0.0(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/source': 3.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/source': 4.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@types/react': 18.3.1
       react: 18.3.1
       tslib: 2.6.2
@@ -4428,6 +4428,32 @@ packages:
     resolution: {integrity: sha512-ocdnSojiVmPaDXnPSMo9FQbPgP00JzR74AftgCDqcLTo9uXgLmO0w9TADMHm48MhNsHqH1RDqgDdStd37Qbctw==}
     peerDependencies:
       '@emotion/react': ^11.11.1
+      '@types/react': ^18.2.11
+      react: ^18.2.0
+      tslib: ^2.6.2
+      typescript: ~5.3.3
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@emotion/react': 11.11.1(@types/react@18.3.1)(react@18.3.1)
+      '@types/react': 18.3.1
+      mini-svg-data-uri: 1.4.4
+      react: 18.3.1
+      tslib: 2.6.2
+      typescript: 5.5.3
+    dev: false
+
+  /@guardian/source@4.0.0(@emotion/react@11.11.1)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
+    resolution: {integrity: sha512-Ls3W0b/zktU/BF7A5S8qh0Z3vlrtmxsN6lUdh2n7MIUdbBvhP63AN2Po56DwdsUHQU6joMebzfHbCSzkm2xJww==}
+    peerDependencies:
+      '@emotion/react': ^11.11.3
       '@types/react': ^18.2.11
       react: ^18.2.0
       tslib: ^2.6.2
@@ -15360,7 +15386,6 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
-
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
     dev: false
 
