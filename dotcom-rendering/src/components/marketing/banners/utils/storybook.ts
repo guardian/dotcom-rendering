@@ -146,9 +146,8 @@ export const props: BannerProps = {
 	tracking,
 	content,
 	tickerSettings,
-	separateArticleCount: true,
 	separateArticleCountSettings: {
-		// copy: 'You’ve read %%ARTICLE_COUNT%% articles in the last few weeks.',
+		copy: 'You’ve read %%ARTICLE_COUNT%% articles in the last few weeks.',
 		type: 'above',
 	},
 	articleCounts: {
