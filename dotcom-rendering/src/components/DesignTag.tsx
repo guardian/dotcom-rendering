@@ -16,7 +16,9 @@ const tagStyles = css`
 	padding: 2px 0 4px 0;
 	${headlineBold20}
 	line-height: 115%;
-	box-shadow: 6px 0 0 ${palette('--design-tag-background')} -6px 0 0 ${palette('--design-tag-background')};
+	box-shadow:
+		6px 0 0 ${palette('--design-tag-background')},
+		-6px 0 0 ${palette('--design-tag-background')};
 	box-decoration-break: clone;
 	${until.tablet} {
 		${headlineBold17}
