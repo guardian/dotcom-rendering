@@ -31,8 +31,16 @@ export function CustomArticleCountCopy({
 	numArticles,
 	settings,
 }: CustomArticleCountProps): JSX.Element {
+	/**
+	 * E.g. the string:
+	 *   "You’ve read %%ARTICLE_COUNT%% articles in the last few weeks."
+	 * needs to be split into:
+	 * - "You’ve read"
+	 * - "articles"
+	 * - "in the last few weeks."
+	 */
 	const [copyHead, copyTail] = copy.split('%%ARTICLE_COUNT%%');
-	const [nextWord, ...rest] = copyTail.trim().split(' ');
+	const [nextWord, ...rest] = (copyTail ?? '').trim().split(' ');
 
 	return (
 		<p css={styles.container}>
