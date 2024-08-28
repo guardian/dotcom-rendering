@@ -46,7 +46,13 @@ export const OneCardLayout = ({
 					imagePositionOnMobile="left"
 					imageSize="jumbo"
 					trailText={cards[0].trailText}
-					supportingContentAlignment="horizontal"
+					supportingContent={cards[0].supportingContent}
+					supportingContentAlignment={
+						cards[0].supportingContent &&
+						cards[0].supportingContent.length > 3
+							? 'horizontal'
+							: 'vertical'
+					}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={cards[0].kickerText}
