@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { SvgAudio, SvgCamera } from '@guardian/source/react-components';
+import {
+	SvgAudio,
+	SvgCamera,
+	SvgVideo,
+} from '@guardian/source/react-components';
 import { palette as themePalette } from '../palette';
 
 type Props = {
@@ -39,7 +43,7 @@ export const Icon = ({ mediaType }: { mediaType: MediaType }) => {
 		case 'Gallery':
 			return <SvgCamera />;
 		case 'Video':
-			return null;
+			return <SvgVideo />;
 		case 'Audio':
 			return <SvgAudio />;
 	}
