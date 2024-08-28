@@ -16,8 +16,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Analysis = {
-	name: 'with design Analysis',
+export const WithDesignAnalysis = {
 	args: {
 		format: {
 			design: ArticleDesign.Analysis,
@@ -27,8 +26,7 @@ export const Analysis = {
 	},
 } satisfies Story;
 
-export const Interview = {
-	name: 'with design Interview',
+export const WithDesignInterview = {
 	args: {
 		format: {
 			design: ArticleDesign.Interview,
@@ -38,8 +36,7 @@ export const Interview = {
 	},
 } satisfies Story;
 
-export const Explainer = {
-	name: 'with design Explainer',
+export const WithDesignExplainer = {
 	args: {
 		format: {
 			design: ArticleDesign.Explainer,
@@ -49,8 +46,7 @@ export const Explainer = {
 	},
 } satisfies Story;
 
-export const Letter = {
-	name: 'with design Letter',
+export const WithDesignLetter = {
 	args: {
 		format: {
 			design: ArticleDesign.Letter,
@@ -60,8 +56,7 @@ export const Letter = {
 	},
 } satisfies Story;
 
-export const SpecialReport = {
-	name: 'with design Analysis and theme SpecialReport',
+export const WithDesignAnalysisAndThemeSpecialReport = {
 	args: {
 		format: {
 			design: ArticleDesign.Analysis,
@@ -71,8 +66,7 @@ export const SpecialReport = {
 	},
 } satisfies Story;
 
-export const Timeline = {
-	name: 'with design Timeline',
+export const WithDesignTimeline = {
 	args: {
 		format: {
 			design: ArticleDesign.Timeline,
@@ -82,8 +76,7 @@ export const Timeline = {
 	},
 } satisfies Story;
 
-export const Profile = {
-	name: 'with design Profile',
+export const WithDesignProfile = {
 	args: {
 		format: {
 			design: ArticleDesign.Profile,
