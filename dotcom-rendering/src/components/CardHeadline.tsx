@@ -35,15 +35,55 @@ type Props = {
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
+	sizeOnTablet?: SmallHeadlineSize;
 	byline?: string;
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isExternalLink?: boolean;
 	/** Is the headline inside a Highlights card? */
 	isHighlights?: boolean;
+	isSplash?: boolean;
 };
 
-const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
+const flexibleSplashFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
+	switch (size) {
+		// we don't have a ginormous size in designs. For now this defaults to huge.
+		case 'ginormous':
+		case 'huge':
+			// this needs to be updated to font size 64 once this is available in source.
+			return `
+				${headlineMedium50}
+				font-size: 64px;
+			`;
+
+		case 'large':
+			return `${headlineMedium50}`;
+
+		case 'medium':
+			return `${headlineMedium42}`;
+
+		case 'small':
+			return `${headlineMedium34}`;
+
+		case 'tiny':
+			return `${headlineMedium28}`;
+	}
+};
+
+const fontStyles = ({
+	size,
+	isSplash,
+}: {
+	size: SmallHeadlineSize;
+	isSplash: boolean;
+}) => {
+	if (isSplash) {
+		return css`
+			${from.desktop} {
+				${flexibleSplashFontStyles({ size })}
+			}
+		`;
+	}
 	switch (size) {
 		case 'ginormous':
 			return css`
@@ -74,7 +114,38 @@ const fontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	}
 };
 
-const fontStylesOnMobile = ({ size }: { size: SmallHeadlineSize }) => {
+const fontStylesOnTablet = ({
+	size,
+	isSplash,
+}: {
+	size?: SmallHeadlineSize;
+	isSplash: boolean;
+}) => {
+	if (!size) return;
+	if (isSplash) {
+		return css`
+			${between.tablet.and.desktop} {
+				${flexibleSplashFontStyles({ size })}
+			}
+		`;
+	}
+	return;
+};
+
+const fontStylesOnMobile = ({
+	size,
+	isSplash,
+}: {
+	size: SmallHeadlineSize;
+	isSplash: boolean;
+}) => {
+	if (isSplash) {
+		return css`
+			${until.tablet} {
+				${flexibleSplashFontStyles({ size })}
+			}
+		`;
+	}
 	switch (size) {
 		case 'ginormous':
 			return css`
@@ -213,11 +284,13 @@ export const CardHeadline = ({
 	hideLineBreak,
 	size = 'medium',
 	sizeOnMobile,
+	sizeOnTablet,
 	byline,
 	showByline,
 	linkTo,
 	isExternalLink,
 	isHighlights = false,
+	isSplash = false,
 }: Props) => {
 	const kickerColour = isHighlights
 		? palette('--highlights-card-kicker-text')
@@ -230,13 +303,20 @@ export const CardHeadline = ({
 					linkTo ? 'card-sublink-headline' : 'card-headline'
 				}`}
 				css={[
-					format.theme === ArticleSpecial.Labs
-						? labTextStyles(size)
-						: fontStyles({ size }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
+							isSplash,
 						}),
+
+					format.theme !== ArticleSpecial.Labs &&
+						fontStylesOnTablet({
+							size: sizeOnTablet,
+							isSplash,
+						}),
+					format.theme === ArticleSpecial.Labs
+						? labTextStyles(size)
+						: fontStyles({ size, isSplash }),
 				]}
 			>
 				{!!kickerText && (
