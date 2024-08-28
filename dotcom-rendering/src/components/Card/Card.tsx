@@ -248,6 +248,7 @@ export const Card = ({
 	);
 
 	const showQuotes = !!showQuotedHeadline;
+	const isFlexibleContainer = containerType === 'flexible/special';
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -265,7 +266,6 @@ export const Card = ({
 
 		return (
 			<CardAge
-				format={format}
 				webPublication={{
 					date: webPublicationDate,
 					isWithinTwelveHours: withinTwelveHours,
@@ -581,37 +581,13 @@ export const Card = ({
 									/>
 								</TrailTextWrapper>
 							)}
-						</div>
-
-						{/* This div is needed to push this content to the bottom of the card */}
-						<div
-							style={
-								isOnwardContent
-									? { marginTop: `${space[4]}px` }
-									: {}
-							}
-						>
-							{showLivePlayable && (
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<LatestLinks
-										id={linkTo}
-										isDynamo={isDynamo}
-										direction={supportingContentAlignment}
-										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-									></LatestLinks>
-								</Island>
-							)}
-
 							{!showCommentFooter && (
 								<CardFooter
 									format={format}
-									leftAlign={isOnwardContent}
+									topAlign={
+										isFlexibleContainer &&
+										imageSize === 'jumbo'
+									}
 									age={decideAge()}
 									commentCount={<CommentCount />}
 									cardBranding={
@@ -628,6 +604,28 @@ export const Card = ({
 									}
 									showLivePlayable={showLivePlayable}
 								/>
+							)}
+						</div>
+
+						{/* This div is needed to push this content to the bottom of the card */}
+						<div
+							style={isOnwardContent ? { marginTop: 'auto' } : {}}
+						>
+							{showLivePlayable && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<LatestLinks
+										id={linkTo}
+										isDynamo={isDynamo}
+										direction={supportingContentAlignment}
+										containerPalette={containerPalette}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
+									></LatestLinks>
+								</Island>
 							)}
 
 							{hasSublinks && sublinkPosition === 'inner' && (
@@ -663,7 +661,6 @@ export const Card = ({
 				{showCommentFooter && (
 					<CardFooter
 						format={format}
-						leftAlign={isOnwardContent}
 						age={decideAge()}
 						commentCount={<CommentCount />}
 						cardBranding={
