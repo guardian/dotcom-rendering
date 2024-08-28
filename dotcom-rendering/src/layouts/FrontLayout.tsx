@@ -169,6 +169,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const { abTests, isPreview } = front.config;
 
+	// If viewing a front through the internal preview tool, we want to automatically opt-in to these tests.
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant' || isPreview;
 
