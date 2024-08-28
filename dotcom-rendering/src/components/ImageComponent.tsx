@@ -15,7 +15,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { decidePalette } from '../lib/decidePalette';
-import { getLargest, getMaster } from '../lib/image';
+import { getLargest, getMaster, isSupported } from '../lib/image';
 import { palette as themePalette } from '../palette';
 import type {
 	ImageBlockElement,
@@ -261,13 +261,6 @@ const CaptionToggle = () => (
 		<input type="checkbox" id="the-checkbox" />
 	</>
 );
-
-const isSupported = (imageUrl: string): boolean => {
-	const supportedImages = ['jpg', 'jpeg', 'png', 'gif'];
-	return supportedImages.some((extension) =>
-		imageUrl.endsWith(`.${extension}`),
-	);
-};
 
 export const ImageComponent = ({
 	element,

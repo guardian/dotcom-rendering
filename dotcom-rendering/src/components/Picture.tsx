@@ -6,6 +6,7 @@ import {
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import { Fragment, useCallback, useEffect, useState } from 'react';
+import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
 import type { RoleType } from '../types/content';
 import type { Loading } from './CardPicture';
@@ -313,6 +314,17 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
+const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
+	if (design === ArticleDesign.Gallery) {
+		return css`
+			display: block;
+			${grid.column.all}
+		`;
+	}
+
+	return isLightbox ? flex : block;
+};
+
 export const Picture = ({
 	role,
 	format,
@@ -374,7 +386,7 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={isLightbox ? flex : block}>
+		<picture css={styles(format, isLightbox)}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>

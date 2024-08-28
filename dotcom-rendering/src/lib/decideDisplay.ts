@@ -9,10 +9,17 @@ export const decideDisplay = ({
 		case 'StandardDisplay':
 			return ArticleDisplay.Standard;
 		case 'ImmersiveDisplay':
-			// Temporary hack until we can handle Immersive Comment pieces
-			return design === 'CommentDesign'
-				? ArticleDisplay.Standard
-				: ArticleDisplay.Immersive;
+			switch (design) {
+				// Temporary hack until we can handle Immersive Comment pieces
+				case 'CommentDesign':
+					return ArticleDisplay.Standard;
+				// Galleries are not immersive; they're galleries. This needs
+				// to be fixed in the CAPI client.
+				case 'GalleryDesign':
+					return ArticleDisplay.Standard;
+				default:
+					return ArticleDisplay.Immersive;
+			}
 		case 'ShowcaseDisplay':
 			return ArticleDisplay.Showcase;
 		case 'NumberedListDisplay':

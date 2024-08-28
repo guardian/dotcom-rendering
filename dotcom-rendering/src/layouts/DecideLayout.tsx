@@ -5,6 +5,7 @@ import type { DCRArticle } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
+import { GalleryLayout } from './GalleryLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
@@ -120,6 +121,14 @@ const DecideLayoutApps = ({ article, format, renderingTarget }: AppProps) => {
 				case ArticleDesign.NewsletterSignup:
 					// Should be NewsletterSignup once implemented for apps
 					return notSupported;
+				case ArticleDesign.Gallery:
+					return (
+						<GalleryLayout
+							article={article}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				default:
 					return (
 						<StandardLayout
@@ -259,6 +268,15 @@ const DecideLayoutWeb = ({
 							article={article}
 							NAV={NAV}
 							format={format}
+						/>
+					);
+				case ArticleDesign.Gallery:
+					return (
+						<GalleryLayout
+							article={article}
+							NAV={NAV}
+							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:

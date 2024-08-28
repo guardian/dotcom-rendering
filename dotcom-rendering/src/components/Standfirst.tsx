@@ -19,6 +19,7 @@ import {
 	textSans24,
 } from '@guardian/source/foundations';
 import sanitise from 'sanitize-html';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { palette } from '../palette';
 
@@ -309,6 +310,15 @@ const standfirstStyles = ({ display, design, theme }: ArticleFormat) => {
 				case ArticleDesign.Audio:
 					return css`
 						color: ${palette('--standfirst-text')};
+					`;
+				case ArticleDesign.Gallery:
+					return css`
+						color: ${palette('--standfirst-text')};
+						${grid.span('centre-column-start', 3)}
+
+						${from.tablet} {
+							${grid.span('centre-column-start', 7)}
+						}
 					`;
 				default:
 					switch (theme) {

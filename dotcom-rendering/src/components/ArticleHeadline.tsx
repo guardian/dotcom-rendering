@@ -17,6 +17,7 @@ import {
 	textSansBold34,
 	until,
 } from '@guardian/source/foundations';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
 import { decidePalette } from '../lib/decidePalette';
@@ -73,6 +74,8 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Interview:
 					return headlineBold34;
+				case ArticleDesign.Gallery:
+					return headlineBold50;
 				default:
 					return headlineMedium34;
 			}
@@ -94,6 +97,8 @@ const decideMobileHeadlineFont = (format: ArticleFormat) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Interview:
 					return headlineBold28;
+				case ArticleDesign.Gallery:
+					return headlineBold34;
 				default:
 					return headlineMedium28;
 			}
@@ -830,6 +835,38 @@ export const ArticleHeadline = ({
 							>
 								{headlineString}
 							</h1>
+						</div>
+					);
+				case ArticleDesign.Gallery:
+					return (
+						<div
+							css={css`
+								${grid.column.centre}
+							`}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<h1
+									css={[
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: headlineFont(format),
+										css`
+											color: ${themePalette(
+												'--headline-colour',
+											)};
+											padding-bottom: ${space[6]}px;
+										`,
+									]}
+								>
+									{headlineString}
+								</h1>
+							</WithAgeWarning>
 						</div>
 					);
 				default:

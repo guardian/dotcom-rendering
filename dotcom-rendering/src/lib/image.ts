@@ -12,6 +12,13 @@ export const getLargest = (images: Image[]): Image | undefined => {
 	return images.slice().sort(descendingByWidthComparator)[0];
 };
 
+export const isSupported = (imageUrl: string): boolean => {
+	const supportedImages = ['jpg', 'jpeg', 'png', 'gif'];
+	return supportedImages.some((extension) =>
+		imageUrl.endsWith(`.${extension}`),
+	);
+};
+
 const getServiceFromUrl = (url: URL): string => {
 	const serviceName = url.hostname.split('.')[0] ?? '';
 	switch (serviceName) {

@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { from } from '@guardian/source/foundations';
+import { from as fromBreakpoint } from '@guardian/source/foundations';
 
 // ----- Columns & Lines ----- //
 
@@ -38,23 +38,23 @@ const container = `
     grid-template-columns: ${mobileColumns};
     column-gap: ${mobileColumnGap};
 
-    ${from.mobileLandscape} {
+    ${fromBreakpoint.mobileLandscape} {
         column-gap: ${columnGap};
     }
 
-    ${from.tablet} {
+    ${fromBreakpoint.tablet} {
         grid-template-columns: ${tabletColumns};
     }
 
-    ${from.desktop} {
+    ${fromBreakpoint.desktop} {
         grid-template-columns: ${desktopColumns};
     }
 
-    ${from.leftCol} {
+    ${fromBreakpoint.leftCol} {
         grid-template-columns: ${leftColColumns};
     }
 
-    ${from.wide} {
+    ${fromBreakpoint.wide} {
         grid-template-columns: ${wideColumns};
     }
 `;
@@ -86,7 +86,7 @@ const between = (from: Line | number, to: Line | number): string => `
  * Ask the element to span a number of grid columns, starting at a specific
  * grid line. The line can be specified either by `Line` name or by number.
  * @param start The grid line to start from, either a `Line` name or a number.
- * @param span The number of columns to span.
+ * @param spans The number of columns to span.
  * @returns {string} CSS to place the element on the grid.
  *
  * @example <caption>The element will span 3 columns from the line.</caption>
@@ -94,8 +94,8 @@ const between = (from: Line | number, to: Line | number): string => `
  *   ${grid.span('centre-column-start', 3)}
  * `;
  */
-const span = (start: Line | number, span: number): string => `
-    grid-column: ${start} / span ${span};
+const span = (start: Line | number, spans: number): string => `
+    grid-column: ${start} / span ${spans};
 `;
 
 /**

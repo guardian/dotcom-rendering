@@ -3,6 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import { grid } from '../grid';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
@@ -185,6 +186,10 @@ export const metaContainer = (format: ArticleFormat) => {
 				case ArticleDesign.DeadBlog: {
 					return '';
 				}
+				case ArticleDesign.Gallery:
+					return css`
+						${grid.column.centre}
+					`;
 				default:
 					return defaultMargins;
 			}
