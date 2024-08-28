@@ -480,7 +480,7 @@ export const ArticleCountSubheadingDefaultCopy: Story = {
 };
 
 export const ArticleCountSubheadingCustomCopy: Story = {
-	name: 'DesignableBanner with article count subheading, default copy',
+	name: 'DesignableBanner with article count subheading, custom copy',
 	args: {
 		...meta.args,
 		separateArticleCountSettings: {
@@ -489,6 +489,20 @@ export const ArticleCountSubheadingCustomCopy: Story = {
 		},
 		articleCounts: {
 			for52Weeks: 12,
+			forTargetedWeeks: 12,
+		},
+	},
+};
+
+export const ArticleCountSubheadingTopReader: Story = {
+	name: 'DesignableBanner with article count subheading, top reader',
+	args: {
+		...meta.args,
+		separateArticleCountSettings: {
+			type: 'above',
+		},
+		articleCounts: {
+			for52Weeks: 51,
 			forTargetedWeeks: 51,
 		},
 	},
