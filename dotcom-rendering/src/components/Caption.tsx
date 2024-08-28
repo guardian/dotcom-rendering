@@ -245,7 +245,6 @@ export const Caption = ({
 					tabletCaptionPadding,
 				padCaption && captionPadding,
 			]}
-			data-spacefinder-role="inline"
 		>
 			{mediaType === 'Video' ? (
 				<VideoIcon format={format} />
