@@ -341,8 +341,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.7.6)(@types/node@20.14.10)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
       '@guardian/commercial':
-        specifier: 0.0.0-beta-20240827121745
-        version: 0.0.0-beta-20240827121745(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240827084710)(@guardian/source@libs+@guardian+source)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: 0.0.0-beta-20240828125924
+        version: 0.0.0-beta-20240828125924(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240827084710)(@guardian/source@libs+@guardian+source)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 6.0.0
         version: 6.0.0(@guardian/libs@0.0.0-canary-20240827084710)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@3.5.1)
@@ -4077,8 +4077,8 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@0.0.0-beta-20240827121745(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240827084710)(@guardian/source@libs+@guardian+source)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-Ar9TNHUk7NeLfTs+X8UUNsAlF+/2NR5wkVOurlVrqdwfpEYW6V3KSeQUNbnBe/v84HSPjkVWPcqhLyYqTN/MzA==}
+  /@guardian/commercial@0.0.0-beta-20240828125924(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@6.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240827084710)(@guardian/source@libs+@guardian+source)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-P/RH7R6+BS7eaZy3U2AvQJDzvzh5ot3QWpPUEMXA3UCpaZBz5vowdfo2rT17ZTNgXn6Jy762HMe3HaTUI9ptEQ==}
     peerDependencies:
       '@guardian/ab-core': ^8.0.0
       '@guardian/core-web-vitals': ^7.0.0
