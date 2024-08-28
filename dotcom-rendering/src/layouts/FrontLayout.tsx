@@ -167,10 +167,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const { abTests } = front.config;
-
-	const isPreview = front.config.isPreview;
-
+	const { abTests, isPreview } = front.config;
+	
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant' || isPreview;
 
