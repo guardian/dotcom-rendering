@@ -50,7 +50,7 @@ export function CustomArticleCountCopy({
 				nextWord={` ${nextWord}`}
 				settings={settings}
 			/>{' '}
-			{rest.slice(1).join(' ')}
+			{rest.join(' ')}
 		</p>
 	);
 }
