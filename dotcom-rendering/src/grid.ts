@@ -86,7 +86,7 @@ const between = (from: Line | number, to: Line | number): string => `
  * Ask the element to span a number of grid columns, starting at a specific
  * grid line. The line can be specified either by `Line` name or by number.
  * @param start The grid line to start from, either a `Line` name or a number.
- * @param spans The number of columns to span.
+ * @param columns The number of columns to span.
  * @returns {string} CSS to place the element on the grid.
  *
  * @example <caption>The element will span 3 columns from the line.</caption>
@@ -94,8 +94,8 @@ const between = (from: Line | number, to: Line | number): string => `
  *   ${grid.span('centre-column-start', 3)}
  * `;
  */
-const span = (start: Line | number, spans: number): string => `
-    grid-column: ${start} / span ${spans};
+const span = (start: Line | number, columns: number): string => `
+    grid-column: ${start} / span ${columns};
 `;
 
 /**
