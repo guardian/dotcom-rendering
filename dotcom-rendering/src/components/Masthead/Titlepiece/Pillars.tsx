@@ -213,14 +213,10 @@ export const Pillars = ({
 	nav,
 	selectedPillar,
 	dataLinkName,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- TODO: add slim nav version for immersives
 	isImmersive = false,
 	hasPageSkin = false,
 }: Props) => {
-	// TEMPORARY - to stop the linter freaking out
-	// TODO - handle immersive displayed articles and fronts with page skins
-	const needsAdapting = isImmersive || hasPageSkin;
-	console.log({ needsAdapting });
-
 	return (
 		<ul id="navigation" css={pillarsContainer}>
 			{nav.pillars.map((p, i) => {
