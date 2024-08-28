@@ -146,10 +146,6 @@ export const props: BannerProps = {
 	tracking,
 	content,
 	tickerSettings,
-	separateArticleCountSettings: {
-		copy: 'You’ve read %%ARTICLE_COUNT%% articles in the last few weeks.',
-		type: 'above',
-	},
 	articleCounts: {
 		for52Weeks: 12,
 		forTargetedWeeks: 12,
