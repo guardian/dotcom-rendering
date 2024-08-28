@@ -41,7 +41,6 @@ type Props = {
 	format: ArticleFormat;
 	shouldStick?: boolean;
 	isMainMedia?: boolean;
-	enableIma: boolean;
 	abTestParticipations: Participations;
 	videoCategory?: VideoCategory;
 	kicker?: string;
@@ -67,7 +66,6 @@ export const YoutubeAtom = ({
 	eventEmitters,
 	shouldStick,
 	isMainMedia,
-	enableIma,
 	abTestParticipations,
 	videoCategory,
 	kicker,
@@ -86,18 +84,13 @@ export const YoutubeAtom = ({
 	const uniqueId = `${videoId}-${index ?? 'server'}`;
 
 	/**
-	 * Consent and ad targeting are set by subsequent re-renders
+	 * Consent and ad targeting are initially undefined and set by subsequent re-renders
 	 */
 	const adTargetingEnabled =
 		!!adTargeting &&
 		!adTargeting.disableAds &&
 		!!consentState &&
 		consentState.canTarget;
-
-	/**
-	 * IMA integration is only enabled if the user has consented to ad targeting
-	 */
-	const imaEnabled = enableIma && adTargetingEnabled;
 
 	/**
 	 * Update the isActive state based on video events
@@ -201,15 +194,13 @@ export const YoutubeAtom = ({
 			<MaintainAspectRatio height={height} width={width}>
 				{
 					/**
-					 * Consent and ad targeting are set by subsequent re-renders
-					 * So we wait until they are set before rendering the player
+					 * Consent and ad targeting are initially undefined and set by subsequent re-renders
+					 * Wait until they are defined before rendering the player
 					 */
 					loadPlayer && consentState && adTargeting && (
 						<YoutubeAtomPlayer
 							videoId={videoId}
 							uniqueId={uniqueId}
-							adTargeting={adTargeting}
-							consentState={consentState}
 							height={height}
 							width={width}
 							title={title}
@@ -221,11 +212,13 @@ export const YoutubeAtom = ({
 							 */
 							autoPlay={hasOverlay}
 							onReady={playerReadyCallback}
-							enableIma={imaEnabled}
 							pauseVideo={pauseVideo}
 							deactivateVideo={() => {
 								setIsActive(false);
 							}}
+							enableAds={adTargetingEnabled}
+							adTargeting={adTargeting}
+							consentState={consentState}
 							abTestParticipations={abTestParticipations}
 						/>
 					)
