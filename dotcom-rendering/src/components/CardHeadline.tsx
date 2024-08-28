@@ -204,9 +204,6 @@ export const WithLink = ({
 	return <>{children}</>;
 };
 
-/** Matches headlines starting with short words of 1 to 3 letters followed by a space */
-const isFirstWordShort = /^(\w{1,3}) \b/;
-
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -225,9 +222,7 @@ export const CardHeadline = ({
 	const kickerColour = isHighlights
 		? palette('--highlights-card-kicker-text')
 		: palette('--card-kicker-text');
-	const cleanHeadLineText = headlineText.match(isFirstWordShort)
-		? headlineText.replace(' ', ' ') // from regular to non-breaking space
-		: headlineText;
+
 	return (
 		<WithLink linkTo={linkTo}>
 			<h3
@@ -261,7 +256,7 @@ export const CardHeadline = ({
 					`}
 					className="show-underline"
 				>
-					{cleanHeadLineText}
+					{headlineText}
 					{isExternalLink && (
 						<span
 							css={css`
