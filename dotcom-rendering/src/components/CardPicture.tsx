@@ -79,9 +79,12 @@ const decideImageWidths = (
  * as these elements are which are `inline` by default.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
+ *
+ * We also add object-fit: cover to ensure the image fills the container and maintains its own aspect ratio.
  */
 const block = css`
 	display: block;
+	object-fit: cover;
 `;
 
 /**
