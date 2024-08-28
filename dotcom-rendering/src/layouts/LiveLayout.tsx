@@ -36,6 +36,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
+import { LiveblogNotifications } from '../components/LiveblogNotifications.importable';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
@@ -642,6 +643,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
+										pageId={article.pageId}
+										headline={article.headline}
 									></ArticleMetaApps>
 								)}
 								{isWeb && (
@@ -831,6 +834,19 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												article.config.shortUrlId
 											}
 										/>
+										{isApps && (
+											<Island
+												priority="feature"
+												defer={{ until: 'visible' }}
+											>
+												<LiveblogNotifications
+													displayName={
+														article.headline
+													}
+													id={article.pageId}
+												/>
+											</Island>
+										)}
 									</div>
 								</Hide>
 
