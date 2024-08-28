@@ -167,13 +167,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const { abTests } = front.config;
+	const { abTests, isPreview } = front.config;
 
+	// If viewing a front through the internal preview tool, we want to automatically opt-in to these tests.
 	const inUpdatedHeaderABTest =
-		abTests.updatedHeaderDesignVariant === 'variant';
+		abTests.updatedHeaderDesignVariant === 'variant' || isPreview;
 
 	const inHighlightsContainerABTest =
-		abTests.mastheadWithHighlightsVariant === 'variant';
+		abTests.mastheadWithHighlightsVariant === 'variant' || isPreview;
 
 	const { absoluteServerTimes = false } = front.config.switches;
 

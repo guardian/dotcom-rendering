@@ -233,10 +233,10 @@ const styles = (format: ArticleFormat) => css`
 `;
 
 const buildElementTree =
-	(html: string, format: ArticleFormat, showDropCaps: boolean) =>
+	(format: ArticleFormat, showDropCaps: boolean) =>
 	(node: Node, key: number): ReactNode => {
 		const children = Array.from(node.childNodes).map(
-			buildElementTree(html, format, showDropCaps),
+			buildElementTree(format, showDropCaps),
 		);
 
 		switch (node.nodeName) {
@@ -365,11 +365,7 @@ export const TextBlockComponent = ({
 	const fragment = parseHtml(sanitise(html, sanitiserOptions));
 	return jsx(Fragment, {
 		children: Array.from(fragment.childNodes).map(
-			buildElementTree(
-				sanitise(html, sanitiserOptions),
-				format,
-				showDropCaps,
-			),
+			buildElementTree(format, showDropCaps),
 		),
 	});
 };
