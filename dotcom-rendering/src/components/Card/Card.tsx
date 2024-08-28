@@ -62,6 +62,7 @@ export type Props = {
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	headlineSizeOnMobile?: SmallHeadlineSize;
+	headlineSizeOnTablet?: SmallHeadlineSize;
 	showQuotedHeadline?: boolean;
 	byline?: string;
 	showByline?: boolean;
@@ -110,6 +111,7 @@ export type Props = {
 	isTagPage?: boolean;
 	//** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
+	isSplash?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -210,6 +212,7 @@ export const Card = ({
 	headlineText,
 	headlineSize,
 	headlineSizeOnMobile,
+	headlineSizeOnTablet,
 	showQuotedHeadline,
 	byline,
 	showByline,
@@ -250,6 +253,7 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
+	isSplash,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -433,6 +437,7 @@ export const Card = ({
 						format={format}
 						size={headlineSize}
 						sizeOnMobile={headlineSizeOnMobile}
+						sizeOnTablet={headlineSizeOnTablet}
 						showQuotes={showQuotes}
 						kickerText={
 							format.design === ArticleDesign.LiveBlog &&
@@ -447,6 +452,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
+						isSplash={isSplash}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
