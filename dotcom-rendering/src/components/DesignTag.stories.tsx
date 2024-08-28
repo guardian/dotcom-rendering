@@ -1,198 +1,94 @@
-import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { lightDecorator } from '../../.storybook/decorators/themeDecorator';
+import type { Meta, StoryObj } from '@storybook/react';
 import { DesignTag } from './DesignTag';
 
-export default {
-	component: DesignTag,
+const meta = {
 	title: 'Components/DesignTag',
-};
+	component: DesignTag,
+} satisfies Meta<typeof DesignTag>;
 
-export const Analysis = () => {
-	return (
-		<DesignTag
-			format={{
-				design: ArticleDesign.Analysis,
-				display: ArticleDisplay.Standard,
-				theme: Pillar.News,
-			}}
-		/>
-	);
-};
-Analysis.storyName = 'with design Analysis';
-Analysis.decorators = [
-	lightDecorator([
-		{
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Analysis = {
+	name: 'with design Analysis',
+	args: {
+		format: {
 			design: ArticleDesign.Analysis,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.News,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Interview = () => {
-	return (
-		<div
-			css={css`
-				max-width: 400px;
-			`}
-		>
-			<DesignTag
-				format={{
-					design: ArticleDesign.Interview,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				}}
-			/>
-		</div>
-	);
-};
-Interview.storyName = 'with design Interview';
-Interview.decorators = [
-	lightDecorator([
-		{
+export const Interview = {
+	name: 'with design Interview',
+	args: {
+		format: {
 			design: ArticleDesign.Interview,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Explainer = () => {
-	return (
-		<div
-			css={css`
-				max-width: 400px;
-			`}
-		>
-			<DesignTag
-				format={{
-					design: ArticleDesign.Explainer,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				}}
-			/>
-		</div>
-	);
-};
-Explainer.storyName = 'with design Explainer';
-Explainer.decorators = [
-	lightDecorator([
-		{
+export const Explainer = {
+	name: 'with design Explainer',
+	args: {
+		format: {
 			design: ArticleDesign.Explainer,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Letter = () => {
-	return (
-		<div
-			css={css`
-				max-width: 400px;
-			`}
-		>
-			<DesignTag
-				format={{
-					design: ArticleDesign.Letter,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				}}
-			/>
-		</div>
-	);
-};
-Letter.storyName = 'with design Letter';
-Letter.decorators = [
-	lightDecorator([
-		{
+export const Letter = {
+	name: 'with design Letter',
+	args: {
+		format: {
 			design: ArticleDesign.Letter,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const SpecialReport = () => {
-	return (
-		<DesignTag
-			format={{
-				design: ArticleDesign.Analysis,
-				display: ArticleDisplay.Standard,
-				theme: ArticleSpecial.SpecialReport,
-			}}
-		/>
-	);
-};
-SpecialReport.storyName = 'with design Analysis and theme SpecialReport';
-SpecialReport.decorators = [
-	lightDecorator([
-		{
+export const SpecialReport = {
+	name: 'with design Analysis and theme SpecialReport',
+	args: {
+		format: {
 			design: ArticleDesign.Analysis,
 			display: ArticleDisplay.Standard,
 			theme: ArticleSpecial.SpecialReport,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Timeline = () => {
-	return (
-		<div
-			css={css`
-				max-width: 400px;
-			`}
-		>
-			<DesignTag
-				format={{
-					design: ArticleDesign.Timeline,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				}}
-			/>
-		</div>
-	);
-};
-Timeline.storyName = 'with design Timeline';
-Timeline.decorators = [
-	lightDecorator([
-		{
+export const Timeline = {
+	name: 'with design Timeline',
+	args: {
+		format: {
 			design: ArticleDesign.Timeline,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
 		},
-	]),
-];
+	},
+} satisfies Story;
 
-export const Profile = () => {
-	return (
-		<div
-			css={css`
-				max-width: 400px;
-			`}
-		>
-			<DesignTag
-				format={{
-					design: ArticleDesign.Profile,
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-				}}
-			/>
-		</div>
-	);
-};
-Profile.storyName = 'with design Profile';
-Profile.decorators = [
-	lightDecorator([
-		{
+export const Profile = {
+	name: 'with design Profile',
+	args: {
+		format: {
 			design: ArticleDesign.Profile,
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
 		},
-	]),
-];
+	},
+} satisfies Story;
