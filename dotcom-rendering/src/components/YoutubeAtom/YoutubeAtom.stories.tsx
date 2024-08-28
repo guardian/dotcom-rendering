@@ -7,6 +7,7 @@ import type {
 	ImagePositionType,
 	ImageSizeType,
 } from '../Card/components/ImageWrapper';
+import type { Props } from './YoutubeAtom';
 import { YoutubeAtom } from './YoutubeAtom';
 
 const meta = {
@@ -153,7 +154,8 @@ const baseConfiguration = {
 	imagePositionOnMobile,
 	imageSize,
 	consentState: consentGiven,
-};
+	renderingTarget: 'Web',
+} satisfies Partial<Props>;
 
 const NoConsent = {
 	args: {
