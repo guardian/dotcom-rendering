@@ -168,7 +168,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
 	const { abTests, isPreview } = front.config;
-	
+
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant' || isPreview;
 
