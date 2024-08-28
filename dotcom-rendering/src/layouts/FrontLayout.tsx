@@ -170,7 +170,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const { abTests } = front.config;
 
 	const isPreview = front.config.isPreview;
-	console.log('isPreview', isPreview);
 
 	const inUpdatedHeaderABTest =
 		abTests.updatedHeaderDesignVariant === 'variant' || isPreview;
@@ -181,14 +180,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const { absoluteServerTimes = false } = front.config.switches;
 
 	const Highlights = () => {
-		console.log('inUpdatedHeaderABTest', inUpdatedHeaderABTest);
-		console.log('inHighlightsContainerABTest', inHighlightsContainerABTest);
-		console.log('front.isNetworkFront', front.isNetworkFront);
 		const showHighlights =
 			front.isNetworkFront &&
 			inUpdatedHeaderABTest &&
 			inHighlightsContainerABTest;
-		console.log('showHighlights', showHighlights);
 
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);
