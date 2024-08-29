@@ -449,6 +449,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					currencySymbol={tickerSettings.currencySymbol}
 					copy={tickerSettings.copy}
 					tickerData={tickerSettings.tickerData}
+					tickerStylingSettings={undefined}
 				/>
 			)}
 
