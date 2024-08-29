@@ -14,6 +14,7 @@ const articleUrl =
 
 test.describe('Interactivity', () => {
 	test.describe('Verify elements have been hydrated', () => {
+		/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
 		test.skip('should open the edition dropdown menu when clicked and hide when expected', async ({
 			context,
 			page,
@@ -21,7 +22,7 @@ test.describe('Interactivity', () => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 
-			await waitForIsland(page, 'HeaderTopBar');
+			await waitForIsland(page, 'Titlepiece');
 			// Open it
 			await page.locator('[data-testid=dropdown-button]').click();
 			await expectToBeVisible(page, '[data-testid=dropdown-options]');
@@ -114,13 +115,14 @@ test.describe('Interactivity', () => {
 			);
 		});
 
+		/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
 		test.skip('should render the reader revenue links in the header', async ({
 			context,
 			page,
 		}) => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
-			await waitForIsland(page, 'SupportTheG');
+			await waitForIsland(page, 'TopBar');
 			await expect(
 				page.locator('header').filter({ hasText: 'Support' }),
 			).toBeVisible();
@@ -164,7 +166,8 @@ test.describe('Interactivity', () => {
 	});
 
 	test.describe('Navigating the pillar menu', () => {
-		test.skip('should expand and close the desktop pillar menu when More is clicked', async ({
+		/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
+		test.skip('should expand and close the desktop pillar menu when the VeggieBurger is clicked', async ({
 			context,
 			page,
 		}) => {
@@ -172,7 +175,7 @@ test.describe('Interactivity', () => {
 			await loadPage(page, `/Article/${articleUrl}`);
 
 			// Open pillar menu
-			await page.locator('[data-testid=nav-show-more-button]').click();
+			await page.locator('[data-testid=veggie-burger]').click();
 			await expect(
 				page.locator('data-testid=expanded-menu'),
 			).toContainText('Columnists');
@@ -186,7 +189,7 @@ test.describe('Interactivity', () => {
 			// Press escape and assert show more is focused
 			await page.locator('body').press('Escape');
 			await expect(
-				page.locator('[data-testid=nav-show-more-button]'),
+				page.locator('[data-testid=veggie-burger]'),
 			).toBeFocused();
 		});
 
@@ -232,6 +235,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
+			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
 			test.skip('should immediately focus on the News menu item when the menu first opens', async ({
 				context,
 				page,
@@ -246,6 +250,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
+			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
 			test.skip('should transfer focus to sub menu items when tabbing from section header', async ({
 				context,
 				page,
@@ -267,6 +272,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
+			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
 			test.skip('should let reader traverse section titles using keyboard', async ({
 				context,
 				page,
@@ -293,59 +299,6 @@ test.describe('Interactivity', () => {
 						'[data-testid=column-collapse-sublink-Opinion]',
 					),
 				).toBeFocused();
-			});
-
-			test.skip('should expand the subnav when "More" is clicked', async ({
-				context,
-				page,
-			}) => {
-				await page.setViewportSize(devices['iPhone X'].viewport);
-				await disableCMP(context);
-				await loadPage(page, `/Article/${articleUrl}`);
-
-				// Wait for hydration of both navs
-				await waitForIsland(page, 'SubNav', {
-					nth: 0,
-				});
-				await waitForIsland(page, 'SubNav', {
-					nth: 1,
-				});
-
-				// Both subnav buttons show 'More'
-				await expect(
-					page.locator('[data-testid=subnav-toggle]').first(),
-				).toHaveText('More');
-				await expect(
-					page.locator('[data-testid=subnav-toggle]').last(),
-				).toHaveText('More');
-
-				// Click Show more in the first sub nav
-				await page
-					.locator('[data-testid=subnav-toggle]')
-					.first()
-					.click();
-				// The first button now shows 'Less'
-				await expect(
-					page.locator('[data-testid=subnav-toggle]').first(),
-				).toHaveText('Less');
-
-				// The last subnav still shows 'More'
-				await expect(
-					page.locator('[data-testid=subnav-toggle]').last(),
-				).toHaveText('More');
-
-				// Click Show more on the last sub nav
-				await page
-					.locator('[data-testid=subnav-toggle]')
-					.last()
-					.click();
-				// Both subnav buttons show 'Less'
-				await expect(
-					page.locator('[data-testid=subnav-toggle]').first(),
-				).toHaveText('Less');
-				await expect(
-					page.locator('[data-testid=subnav-toggle]').last(),
-				).toHaveText('Less');
 			});
 		});
 	});
