@@ -193,7 +193,6 @@ export const WithReminderAndSignInLink: Story = {
 
 export const WithTicker: Story = {
 	name: 'ContributionsEpic with ticker',
-
 	args: {
 		...meta.args,
 		variant: {

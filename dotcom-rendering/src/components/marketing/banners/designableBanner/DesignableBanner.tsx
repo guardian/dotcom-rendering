@@ -287,7 +287,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 	);
 
 	const getHeaderContainerCss = () => {
-		if (templateSettings.headerSettings?.headerImage) {
+		if (templateSettings?.headerSettings?.headerImage) {
 			return styles.headerWithImageContainer(
 				templateSettings.containerSettings.backgroundColour,
 			);
@@ -351,7 +351,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								tickerStylingSettings={
 									templateSettings.tickerStylingSettings
 								}
-							></Ticker>
+							/>
 						)}
 
 					{!showChoiceCards && (
