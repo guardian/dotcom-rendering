@@ -30,7 +30,11 @@ const findCollectionSuitableForFrontBranding = (
 	// Find the lowest indexed collection that COULD display branding
 	const index = collections.findIndex(
 		({ collectionType }) =>
-			!['fixed/thrasher', 'fixed/highlights'].includes(collectionType),
+			![
+				'fixed/thrasher',
+				'fixed/highlights',
+				'scrollable/highlights',
+			].includes(collectionType),
 	);
 	// `findIndex` returns -1 when no element is found
 	// Treat that instead as undefined

@@ -3204,7 +3204,8 @@
                 "flexible/special",
                 "nav/list",
                 "nav/media-list",
-                "news/most-popular"
+                "news/most-popular",
+                "scrollable/highlights"
             ],
             "type": "string"
         },
