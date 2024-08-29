@@ -5533,6 +5533,35 @@ const highlightContainerMidFade: PaletteFunction = () => {
 const highlightContainerEndFade: PaletteFunction = () => {
 	return 'transparent';
 };
+
+const designTagText: PaletteFunction = ({ theme }) => {
+	if (theme === ArticleSpecial.SpecialReportAlt) {
+		return sourcePalette.specialReportAlt[800];
+	}
+	return sourcePalette.neutral[100];
+};
+
+const designTagBackground: PaletteFunction = ({ theme }) => {
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[300];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[300];
+		case Pillar.Culture:
+			return sourcePalette.culture[300];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[300];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[100];
+	}
+};
+
 // ----- Palette ----- //
 
 /**
@@ -5949,6 +5978,14 @@ const paletteColours = {
 	'--dateline-mobile': {
 		light: datelineMobileLight,
 		dark: standfirstTextDark,
+	},
+	'--design-tag-background': {
+		light: designTagBackground,
+		dark: designTagBackground,
+	},
+	'--design-tag-text': {
+		light: designTagText,
+		dark: designTagText,
 	},
 	'--discussion-accent-text': {
 		light: discussionAccentTextLight,

@@ -382,21 +382,21 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 							</Section>
 						</div>
 					)}
-
-					{format.theme === ArticleSpecial.Labs && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								backgroundColour={sourcePalette.labs[400]}
-								borderColour={sourcePalette.neutral[60]}
-								sectionId="labs-header"
-							>
-								<LabsHeader editionId={editionId} />
-							</Section>
-						</Stuck>
-					)}
 				</>
+			)}
+
+			{format.theme === ArticleSpecial.Labs && (
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
+						sectionId="labs-header"
+					>
+						<LabsHeader editionId={editionId} />
+					</Section>
+				</Stuck>
 			)}
 
 			<header

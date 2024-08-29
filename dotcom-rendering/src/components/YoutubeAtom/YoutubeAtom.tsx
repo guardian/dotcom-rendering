@@ -2,6 +2,7 @@ import type { Participations } from '@guardian/ab-core';
 import type { ArticleFormat, ConsentState } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
 import { useCallback, useState } from 'react';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type {
 	ImagePositionType,
 	ImageSizeType,
@@ -24,7 +25,7 @@ export type VideoEventKey =
 	| 'resume'
 	| 'pause';
 
-type Props = {
+export type Props = {
 	index?: number;
 	videoId: string;
 	overrideImage?: string | undefined;
@@ -41,7 +42,6 @@ type Props = {
 	format: ArticleFormat;
 	shouldStick?: boolean;
 	isMainMedia?: boolean;
-	enableIma: boolean;
 	abTestParticipations: Participations;
 	videoCategory?: VideoCategory;
 	kicker?: string;
@@ -49,6 +49,7 @@ type Props = {
 	showTextOverlay?: boolean;
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
+	renderingTarget: RenderingTarget;
 };
 
 export const YoutubeAtom = ({
@@ -67,7 +68,6 @@ export const YoutubeAtom = ({
 	eventEmitters,
 	shouldStick,
 	isMainMedia,
-	enableIma,
 	abTestParticipations,
 	videoCategory,
 	kicker,
@@ -76,6 +76,7 @@ export const YoutubeAtom = ({
 	showTextOverlay = false,
 	imageSize,
 	imagePositionOnMobile,
+	renderingTarget,
 }: Props): JSX.Element => {
 	const [overlayClicked, setOverlayClicked] = useState<boolean>(false);
 	const [playerReady, setPlayerReady] = useState<boolean>(false);
@@ -86,18 +87,13 @@ export const YoutubeAtom = ({
 	const uniqueId = `${videoId}-${index ?? 'server'}`;
 
 	/**
-	 * Consent and ad targeting are set by subsequent re-renders
+	 * Consent and ad targeting are initially undefined and set by subsequent re-renders
 	 */
 	const adTargetingEnabled =
 		!!adTargeting &&
 		!adTargeting.disableAds &&
 		!!consentState &&
 		consentState.canTarget;
-
-	/**
-	 * IMA integration is only enabled if the user has consented to ad targeting
-	 */
-	const imaEnabled = enableIma && adTargetingEnabled;
 
 	/**
 	 * Update the isActive state based on video events
@@ -201,15 +197,13 @@ export const YoutubeAtom = ({
 			<MaintainAspectRatio height={height} width={width}>
 				{
 					/**
-					 * Consent and ad targeting are set by subsequent re-renders
-					 * So we wait until they are set before rendering the player
+					 * Consent and ad targeting are initially undefined and set by subsequent re-renders
+					 * Wait until they are defined before rendering the player
 					 */
 					loadPlayer && consentState && adTargeting && (
 						<YoutubeAtomPlayer
 							videoId={videoId}
 							uniqueId={uniqueId}
-							adTargeting={adTargeting}
-							consentState={consentState}
 							height={height}
 							width={width}
 							title={title}
@@ -221,12 +215,15 @@ export const YoutubeAtom = ({
 							 */
 							autoPlay={hasOverlay}
 							onReady={playerReadyCallback}
-							enableIma={imaEnabled}
 							pauseVideo={pauseVideo}
 							deactivateVideo={() => {
 								setIsActive(false);
 							}}
+							enableAds={adTargetingEnabled}
+							adTargeting={adTargeting}
+							consentState={consentState}
 							abTestParticipations={abTestParticipations}
+							renderingTarget={renderingTarget}
 						/>
 					)
 				}

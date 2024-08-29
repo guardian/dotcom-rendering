@@ -3,14 +3,9 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/utils/storybook.ts
  */
-import {
-	SecondaryCtaType,
-	TickerCountType,
-	TickerEndType,
-} from '@guardian/support-dotcom-components';
+import { SecondaryCtaType } from '@guardian/support-dotcom-components';
 import type {
 	BannerProps,
-	TickerSettings,
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type {
@@ -29,44 +24,53 @@ export const tracking: Tracking = {
 	campaignCode: 'UsEoyAppealBanner_control',
 };
 
-export const content = {
-	heading: 'Show your support for high&#8209;impact reporting.',
-	messageText:
-		'In the extraordinary year that was 2021, our independent journalism was powered by more than a million supporters. Thanks to you, we provided vital news and analysis for everyone, led by science and truth. You’ve read %%ARTICLE_COUNT%% articles in the last year. As 2021 unfolds, offering new hope, we commit to another year of high-impact reporting.',
+export const contentNoHeading = {
 	paragraphs: [
-		'In the extraordinary year that was 2022, our independent journalism was powered by more than a million supporters. Thanks to you, we provided vital news and analysis for everyone, led by science and truth.',
-		'You’ve read %%ARTICLE_COUNT%% articles in the last year. As 2021 unfolds, offering new hope, we commit to another year of high-impact reporting.',
+		'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+		'We do not shy away. And we provide all this for free, for everyone.',
 	],
-	mobileMessageText:
-		'With 2021 offering new hope, %%ARTICLE_COUNT%% articles we commit to another year of independent journalism.',
-	highlightedText: 'Support us from as little as %%CURRENCY_SYMBOL%%1.',
+	highlightedText:
+		'Show your support today from just %%CURRENCY_SYMBOL%%1, or sustain us long term with a little more. Thank you.',
 	cta: {
-		baseUrl: 'https://support.theguardian.com/contribute',
-		text: 'Support The Guardian',
+		text: 'Support once',
+		baseUrl: 'https://support.theguardian.com/contribute/one-off',
 	},
 	secondaryCta: {
 		type: SecondaryCtaType.Custom,
 		cta: {
-			baseUrl: 'https://support.theguardian.com/contribute',
+			text: 'Support monthly',
+			baseUrl: 'https://support.theguardian.com/contribute/recurring',
+		},
+	},
+};
+export const contentWithHeading = {
+	...contentNoHeading,
+	heading: 'Show your support for reader-funded journalism',
+};
+
+export const mobileContentNoHeading = {
+	paragraphs: [
+		'Fearless, investigative reporting shapes a fairer world. At the Guardian, our independence allows us to chase the truth wherever it takes us. <strong>We have no shareholders.</strong> No vested interests. Just the determination and passion to bring readers quality reporting, including groundbreaking investigations.',
+		'We do not shy away. And we provide all this for free, for everyone.',
+	],
+	highlightedText:
+		'Show your support today from just %%CURRENCY_SYMBOL%%1, or sustain us long term with a little more. Thank you.',
+	cta: {
+		text: 'Support us',
+		baseUrl: 'https://support.theguardian.com/contribute/one-off',
+	},
+	secondaryCta: {
+		type: SecondaryCtaType.Custom,
+		cta: {
 			text: 'Learn more',
+			baseUrl: 'https://support.theguardian.com/contribute/recurring',
 		},
 	},
 };
 
-export const tickerSettings: TickerSettings = {
-	countType: TickerCountType.money,
-	endType: TickerEndType.hardstop,
-	currencySymbol: '$',
-	copy: {
-		countLabel: 'contributed',
-		goalReachedPrimary: "It's not too late to give!",
-		goalReachedSecondary: '',
-	},
-	tickerData: {
-		total: 120_000,
-		goal: 150_000,
-	},
-	name: 'US',
+export const mobileContentWithHeading = {
+	...mobileContentNoHeading,
+	heading: 'Show your support for reader-funded journalism',
 };
 
 const hexColourStringRegex = /^([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;
@@ -147,13 +151,8 @@ export const props: BannerProps = {
 	isSupporter: false,
 	countryCode: 'GB',
 	tracking,
-	content,
-	tickerSettings,
-	separateArticleCount: true,
-	separateArticleCountSettings: {
-		// copy: 'You’ve read %%ARTICLE_COUNT%% articles in the last few weeks.',
-		type: 'above',
-	},
+	content: contentWithHeading,
+	mobileContent: mobileContentWithHeading,
 	articleCounts: {
 		for52Weeks: 12,
 		forTargetedWeeks: 12,

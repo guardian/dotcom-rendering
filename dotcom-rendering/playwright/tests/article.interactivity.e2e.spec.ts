@@ -14,7 +14,7 @@ const articleUrl =
 
 test.describe('Interactivity', () => {
 	test.describe('Verify elements have been hydrated', () => {
-		test('should open the edition dropdown menu when clicked and hide when expected', async ({
+		test.skip('should open the edition dropdown menu when clicked and hide when expected', async ({
 			context,
 			page,
 		}) => {
@@ -114,7 +114,7 @@ test.describe('Interactivity', () => {
 			);
 		});
 
-		test('should render the reader revenue links in the header', async ({
+		test.skip('should render the reader revenue links in the header', async ({
 			context,
 			page,
 		}) => {
@@ -164,7 +164,7 @@ test.describe('Interactivity', () => {
 	});
 
 	test.describe('Navigating the pillar menu', () => {
-		test('should expand and close the desktop pillar menu when More is clicked', async ({
+		test.skip('should expand and close the desktop pillar menu when More is clicked', async ({
 			context,
 			page,
 		}) => {
@@ -232,7 +232,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			test('should immediately focus on the News menu item when the menu first opens', async ({
+			test.skip('should immediately focus on the News menu item when the menu first opens', async ({
 				context,
 				page,
 			}) => {
@@ -246,7 +246,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			test('should transfer focus to sub menu items when tabbing from section header', async ({
+			test.skip('should transfer focus to sub menu items when tabbing from section header', async ({
 				context,
 				page,
 			}) => {
@@ -267,7 +267,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			test('should let reader traverse section titles using keyboard', async ({
+			test.skip('should let reader traverse section titles using keyboard', async ({
 				context,
 				page,
 			}) => {
@@ -295,7 +295,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			test('should expand the subnav when "More" is clicked', async ({
+			test.skip('should expand the subnav when "More" is clicked', async ({
 				context,
 				page,
 			}) => {

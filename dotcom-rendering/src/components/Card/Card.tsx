@@ -26,7 +26,7 @@ import type { OnwardsSource } from '../../types/onwards';
 import { Avatar } from '../Avatar';
 import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline } from '../CardHeadline';
-import type { Loading } from '../CardPicture';
+import type { AspectRatio, Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
@@ -108,6 +108,8 @@ export type Props = {
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
 	isTagPage?: boolean;
+	//** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	aspectRatio?: AspectRatio;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -191,6 +193,17 @@ const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
+const decideHeadlinePosition = (
+	imageSize?: ImageSizeType,
+	containerType?: DCRContainerType,
+) => {
+	if (imageSize === 'jumbo' && containerType === 'flexible/special') {
+		return 'outer';
+	}
+
+	return 'inner';
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -236,6 +249,7 @@ export const Card = ({
 	showMainVideo = true,
 	absoluteServerTimes,
 	isTagPage = false,
+	aspectRatio,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -243,8 +257,10 @@ export const Card = ({
 		imagePositionOnDesktop,
 		supportingContentAlignment,
 	);
+	const headlinePosition = decideHeadlinePosition(imageSize, containerType);
 
 	const showQuotes = !!showQuotedHeadline;
+	const isFlexibleContainer = containerType === 'flexible/special';
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -262,7 +278,6 @@ export const Card = ({
 
 		return (
 			<CardAge
-				format={format}
 				webPublication={{
 					date: webPublicationDate,
 					isWithinTwelveHours: withinTwelveHours,
@@ -358,6 +373,47 @@ export const Card = ({
 				dataLinkName={dataLinkName}
 				isExternalLink={isExternalLink}
 			/>
+			{headlinePosition === 'outer' && (
+				<div
+					css={css`
+						padding-bottom: 8px;
+					`}
+					style={{ backgroundColor: cardBackgroundColour }}
+				>
+					<CardHeadline
+						headlineText={headlineText}
+						format={format}
+						size={headlineSize}
+						sizeOnMobile={headlineSizeOnMobile}
+						showQuotes={showQuotes}
+						kickerText={
+							format.design === ArticleDesign.LiveBlog &&
+							!kickerText
+								? 'Live'
+								: kickerText
+						}
+						showPulsingDot={
+							format.design === ArticleDesign.LiveBlog ||
+							showPulsingDot
+						}
+						byline={byline}
+						showByline={showByline}
+						isExternalLink={isExternalLink}
+					/>
+					{!isUndefined(starRating) ? (
+						<StarRatingComponent
+							rating={starRating}
+							cardHasImage={!!image}
+						/>
+					) : null}
+					{!!mainMedia && mainMedia.type !== 'Video' && (
+						<MediaMeta
+							mediaType={mainMedia.type}
+							hasKicker={!!kickerText}
+						/>
+					)}
+				</div>
+			)}
 			<CardLayout
 				cardBackgroundColour={cardBackgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
@@ -474,6 +530,7 @@ export const Card = ({
 											alt={headlineText}
 											loading={imageLoading}
 											roundedCorners={isOnwardContent}
+											aspectRatio={aspectRatio}
 										/>
 									</div>
 								)}
@@ -487,6 +544,7 @@ export const Card = ({
 									alt={media.imageAltText}
 									loading={imageLoading}
 									roundedCorners={isOnwardContent}
+									aspectRatio={aspectRatio}
 								/>
 								{showPlayIcon && mainMedia.duration > 0 && (
 									<MediaDuration
@@ -524,42 +582,45 @@ export const Card = ({
 								flex-grow: 1;
 							`}
 						>
-							<HeadlineWrapper>
-								<CardHeadline
-									headlineText={headlineText}
-									format={format}
-									size={headlineSize}
-									sizeOnMobile={headlineSizeOnMobile}
-									showQuotes={showQuotes}
-									kickerText={
-										format.design ===
-											ArticleDesign.LiveBlog &&
-										!kickerText
-											? 'Live'
-											: kickerText
-									}
-									showPulsingDot={
-										format.design ===
-											ArticleDesign.LiveBlog ||
-										showPulsingDot
-									}
-									byline={byline}
-									showByline={showByline}
-									isExternalLink={isExternalLink}
-								/>
-								{!isUndefined(starRating) ? (
-									<StarRatingComponent
-										rating={starRating}
-										cardHasImage={!!image}
+							{headlinePosition === 'inner' && (
+								<HeadlineWrapper>
+									<CardHeadline
+										headlineText={headlineText}
+										format={format}
+										size={headlineSize}
+										sizeOnMobile={headlineSizeOnMobile}
+										showQuotes={showQuotes}
+										kickerText={
+											format.design ===
+												ArticleDesign.LiveBlog &&
+											!kickerText
+												? 'Live'
+												: kickerText
+										}
+										showPulsingDot={
+											format.design ===
+												ArticleDesign.LiveBlog ||
+											showPulsingDot
+										}
+										byline={byline}
+										showByline={showByline}
+										isExternalLink={isExternalLink}
 									/>
-								) : null}
-								{!!mainMedia && mainMedia.type !== 'Video' && (
-									<MediaMeta
-										mediaType={mainMedia.type}
-										hasKicker={!!kickerText}
-									/>
-								)}
-							</HeadlineWrapper>
+									{!isUndefined(starRating) ? (
+										<StarRatingComponent
+											rating={starRating}
+											cardHasImage={!!image}
+										/>
+									) : null}
+									{!!mainMedia &&
+										mainMedia.type !== 'Video' && (
+											<MediaMeta
+												mediaType={mainMedia.type}
+												hasKicker={!!kickerText}
+											/>
+										)}
+								</HeadlineWrapper>
+							)}
 
 							{!!trailText && (
 								<TrailTextWrapper
@@ -576,37 +637,13 @@ export const Card = ({
 									/>
 								</TrailTextWrapper>
 							)}
-						</div>
-
-						{/* This div is needed to push this content to the bottom of the card */}
-						<div
-							style={
-								isOnwardContent
-									? { marginTop: `${space[4]}px` }
-									: {}
-							}
-						>
-							{showLivePlayable && (
-								<Island
-									priority="feature"
-									defer={{ until: 'visible' }}
-								>
-									<LatestLinks
-										id={linkTo}
-										isDynamo={isDynamo}
-										direction={supportingContentAlignment}
-										containerPalette={containerPalette}
-										absoluteServerTimes={
-											absoluteServerTimes
-										}
-									></LatestLinks>
-								</Island>
-							)}
-
 							{!showCommentFooter && (
 								<CardFooter
 									format={format}
-									leftAlign={isOnwardContent}
+									topAlign={
+										isFlexibleContainer &&
+										imageSize === 'jumbo'
+									}
 									age={decideAge()}
 									commentCount={<CommentCount />}
 									cardBranding={
@@ -623,6 +660,28 @@ export const Card = ({
 									}
 									showLivePlayable={showLivePlayable}
 								/>
+							)}
+						</div>
+
+						{/* This div is needed to push this content to the bottom of the card */}
+						<div
+							style={isOnwardContent ? { marginTop: 'auto' } : {}}
+						>
+							{showLivePlayable && (
+								<Island
+									priority="feature"
+									defer={{ until: 'visible' }}
+								>
+									<LatestLinks
+										id={linkTo}
+										isDynamo={isDynamo}
+										direction={supportingContentAlignment}
+										containerPalette={containerPalette}
+										absoluteServerTimes={
+											absoluteServerTimes
+										}
+									></LatestLinks>
+								</Island>
 							)}
 
 							{hasSublinks && sublinkPosition === 'inner' && (
@@ -658,7 +717,6 @@ export const Card = ({
 				{showCommentFooter && (
 					<CardFooter
 						format={format}
-						leftAlign={isOnwardContent}
 						age={decideAge()}
 						commentCount={<CommentCount />}
 						cardBranding={

@@ -1,35 +1,48 @@
 import { css } from '@emotion/react';
 import { type ArticleFormat, ArticleSpecial } from '@guardian/libs';
-import { space } from '@guardian/source/foundations';
+import { palette, space, textSansBold12 } from '@guardian/source/foundations';
 
 type Props = {
 	format: ArticleFormat;
 	age?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
-	supportingContent?: JSX.Element;
-	leftAlign?: boolean;
 	showLivePlayable?: boolean;
+	topAlign?: boolean;
 };
 
-const spacing = (leftAlign: boolean) => css`
+const marginStyles = (topAlign: boolean) => css`
+	margin-top: ${topAlign ? `${space[3]}px` : `auto`};
+`;
+
+const contentStyles = css`
+	padding-top: ${space[1]}px;
 	display: flex;
-	justify-content: ${leftAlign ? 'flex-start' : 'space-between'};
+	justify-content: 'flex-start';
 	align-items: center;
+	${textSansBold12}
 	> {
-		*:not(:first-child) {
+		/* The dividing line is applied only to the second child. This ensures that no dividing line is added when there is only one child in the container. */
+		:nth-child(2) {
+			::before {
+				content: '';
+				display: block;
+				width: 1px;
+				height: 12px;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				background-color: ${palette.neutral[60]};
+				margin-right: ${space[1]}px;
+			}
 			margin-left: ${space[1]}px;
+			padding-left: ${space[1]}px;
 		}
 	}
 `;
 
-const margins = css`
+const labStyles = css`
 	margin-top: ${space[1]}px;
-`;
-
-const flexEnd = css`
-	display: flex;
-	justify-content: flex-end;
 `;
 
 export const CardFooter = ({
@@ -37,34 +50,19 @@ export const CardFooter = ({
 	age,
 	commentCount,
 	cardBranding,
-	supportingContent,
-	leftAlign = false,
 	showLivePlayable = false,
+	topAlign = false,
 }: Props) => {
 	if (showLivePlayable) return null;
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
-		return <footer css={margins}>{cardBranding}</footer>;
-	}
-
-	if (age) {
-		return (
-			<footer css={margins}>
-				{supportingContent}
-				<div css={spacing(leftAlign)}>
-					{age}
-					{commentCount}
-				</div>
-			</footer>
-		);
+		return <footer css={labStyles}>{cardBranding}</footer>;
 	}
 
 	return (
-		<footer css={margins}>
-			{supportingContent}
-			<div css={flexEnd}>
-				<>{commentCount}</>
-			</div>
+		<footer css={[marginStyles(topAlign), contentStyles]}>
+			{age}
+			{commentCount}
 		</footer>
 	);
 };

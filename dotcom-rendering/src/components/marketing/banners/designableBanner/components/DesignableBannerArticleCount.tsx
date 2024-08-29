@@ -26,7 +26,13 @@ export function DesignableBannerArticleCount({
 }: DesignableBannerArticleCountProps): JSX.Element {
 	if (copy && containsArticleCountTemplate(copy)) {
 		// Custom article count message
-		return <CustomArticleCountCopy numArticles={numArticles} copy={copy} />;
+		return (
+			<CustomArticleCountCopy
+				numArticles={numArticles}
+				copy={copy}
+				settings={settings}
+			/>
+		);
 	} else if (numArticles >= 50) {
 		return (
 			<div css={styles.container(settings.articleCountTextColour)}>
