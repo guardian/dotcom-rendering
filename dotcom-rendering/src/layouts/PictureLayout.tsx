@@ -297,7 +297,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const shouldShowTagLink =
 		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
+		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -454,7 +454,7 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 			<main
 				data-layout="PictureLayout"
 				id="maincontent"
-				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
