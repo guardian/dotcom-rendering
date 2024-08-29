@@ -5569,6 +5569,18 @@ const designTagBackground: PaletteFunction = ({ theme }) => {
 	}
 };
 
+const cricketScoreboardBorderTop = () => {
+	return sourcePalette.sport[300];
+};
+
+const cricketScoreboardDivider = () => {
+	return sourcePalette.neutral[86];
+};
+
+const cricketScoreboardLinkText = () => {
+	return sourcePalette.sport[300];
+};
+
 // ----- Palette ----- //
 
 /**
@@ -5977,6 +5989,18 @@ const paletteColours = {
 	'--comment-form-input-background': {
 		light: commentFormInputBackgroundLight,
 		dark: commentFormInputBackgroundDark,
+	},
+	'--cricket-scoreboard-border-top': {
+		light: cricketScoreboardBorderTop,
+		dark: cricketScoreboardBorderTop,
+	},
+	'--cricket-scoreboard-divider': {
+		light: cricketScoreboardDivider,
+		dark: cricketScoreboardDivider,
+	},
+	'--cricket-scoreboard-link-text': {
+		light: cricketScoreboardLinkText,
+		dark: cricketScoreboardLinkText,
 	},
 	'--dateline': {
 		light: datelineLight,
