@@ -305,6 +305,7 @@ export const YoutubeBlockComponent = ({
 				showTextOverlay={showTextOverlay}
 				imageSize={imageSize}
 				imagePositionOnMobile={imagePositionOnMobile}
+				renderingTarget={renderingTarget}
 			/>
 			{!hideCaption && (
 				<Caption

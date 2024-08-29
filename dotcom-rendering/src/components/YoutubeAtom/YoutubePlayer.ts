@@ -23,6 +23,9 @@ declare global {
 				imaManager: ImaManager,
 			) => void,
 		) => void;
+		export interface Events {
+			onFullscreenToggled?: () => void;
+		}
 	}
 }
 
@@ -110,7 +113,7 @@ class YouTubePlayer {
 							{
 								youtubeOptions,
 							},
-							// onReady callback for YT.createPlayerForPublishers
+							// onReady callback for YT.createPlayerForPublishers must be passed separately
 							(player, imaManager) => {
 								this.player = player;
 								imaAdManagerListeners(imaManager);
@@ -128,6 +131,8 @@ class YouTubePlayer {
 								onReady: onReadyListener,
 								onStateChange:
 									youtubeOptions.events?.onStateChange,
+								onFullscreenToggled:
+									youtubeOptions.events?.onFullscreenToggled,
 							},
 						});
 						resolve({ player: this.player });

@@ -39,12 +39,6 @@ const columnsStyle = css`
 	}
 `;
 
-const immersiveColumnStyle = css`
-	${from.desktop} {
-		border-right: none;
-	}
-`;
-
 const columnsStyleFromLeftCol = css`
 	${from.leftCol} {
 		max-width: 1140px;
@@ -115,6 +109,7 @@ type Props = {
 };
 
 export const Sections = ({
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- TODO: add slim nav version for immersives
 	isImmersive = false,
 	nav,
 	editionId,
@@ -122,11 +117,7 @@ export const Sections = ({
 }: Props) => {
 	return (
 		<ul
-			css={[
-				columnsStyle,
-				isImmersive && immersiveColumnStyle,
-				!hasPageSkin && columnsStyleFromLeftCol,
-			]}
+			css={[columnsStyle, !hasPageSkin && columnsStyleFromLeftCol]}
 			role="menubar"
 			data-testid="nav-menu-columns"
 		>

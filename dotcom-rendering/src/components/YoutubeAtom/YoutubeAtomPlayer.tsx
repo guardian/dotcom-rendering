@@ -10,7 +10,9 @@ import {
 	useRef,
 	useState,
 } from 'react';
+import { getVideoClient } from '../../lib/bridgetApi';
 import { getAuthStatus } from '../../lib/identity';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { google } from './ima';
 import type { VideoEventKey } from './YoutubeAtom';
 import type { PlayerListenerName, YouTubePlayerArgs } from './YoutubePlayer';
@@ -32,6 +34,7 @@ type Props = {
 	adTargeting: AdTargeting;
 	consentState: ConsentState;
 	abTestParticipations: Participations;
+	renderingTarget: RenderingTarget;
 };
 
 type CustomPlayEventDetail = { uniqueId: string };
@@ -378,6 +381,7 @@ export const YoutubeAtomPlayer = ({
 	adTargeting,
 	consentState,
 	abTestParticipations,
+	renderingTarget,
 }: Props): JSX.Element => {
 	/**
 	 * useRef for player and progressEvents
@@ -444,16 +448,17 @@ export const YoutubeAtomPlayer = ({
 						playerVars: {
 							controls: 1,
 							// @ts-expect-error -- advised by YouTube for Android but does not exist in @types/youtube
-							external_fullscreen: 1,
+							external_fullscreen:
+								renderingTarget === 'Apps' ? 1 : 0,
 							fs: 1,
 							modestbranding: 1,
 							origin,
 							playsinline: 1,
 							rel: 0,
 						},
-						// Since IMA ads the YouTube player API no longer accepts ad configuration
 						embedConfig: {
 							relatedChannels: [],
+							// Since IMA ads the YouTube player API no longer accepts ad configuration
 							adsConfig: { disableAds: true },
 							enableIma: enableAds,
 							// YouTube recommends disabling related videos when IMA ads are enabled
@@ -461,6 +466,16 @@ export const YoutubeAtomPlayer = ({
 						},
 						events: {
 							onStateChange: onStateChangeListener,
+							onFullscreenToggled: () => {
+								if (renderingTarget === 'Apps') {
+									log('dotcom', {
+										from: 'YoutubeAtomPlayer fullscreen',
+										videoId,
+									});
+									// For Android only, iOS will stub the method
+									void getVideoClient().fullscreen();
+								}
+							},
 						},
 					},
 					onReadyListener,
@@ -553,6 +568,7 @@ export const YoutubeAtomPlayer = ({
 			onReady,
 			origin,
 			playerReadyCallback,
+			renderingTarget,
 			uniqueId,
 			videoId,
 			width,
