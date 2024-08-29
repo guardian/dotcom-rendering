@@ -320,7 +320,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const shouldShowTagLink =
 		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
+		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
 
 	const inUpdatedHeaderABTest =
 		article.config.abTests.updatedHeaderDesignVariant === 'variant';
@@ -491,7 +491,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 			<main
 				data-layout="ImmersiveLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
 			>
 				{isApps && (
 					<>
