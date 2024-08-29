@@ -15,7 +15,7 @@ type Props = {
 // fallback styling for when JS is disabled
 const noJSStyling = css`
 	iframe {
-		border-radius: 14px;
+		border-radius: 13px;
 	}
 
 	.nojs-tweet:not(.nojs-tweet-rendered) {
