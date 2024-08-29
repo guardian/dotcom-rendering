@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	between,
 	space,
 	textSans14,
 	until,
 } from '@guardian/source/foundations';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { palette } from '../palette';
 import type { CricketInnings, CricketMatch } from '../types/sport';
 import { DateTime } from './DateTime';
 
@@ -16,7 +14,6 @@ const ALL_OUT_WICKETS = 10;
 type Props = {
 	scorecardUrl: string;
 	match: CricketMatch;
-	format: ArticleFormat;
 };
 
 const screenReaderOnlyStyle = css`
@@ -44,17 +41,17 @@ const tableStyle = css`
 	${textSans14}
 `;
 
-const captionStyle = (palette: Palette) => css`
+const captionStyle = css`
 	text-align: left;
 	font-weight: bold;
-	border-top: 1px solid ${palette.border.cricketScoreboardTop};
+	border-top: 1px solid ${palette('--cricket-scoreboard-border-top')};
 	border-collapse: inherit;
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
 `;
 
-const rowStyle = (palette: Palette) => css`
-	border-top: 1px solid ${palette.border.cricketScoreboardDivider};
+const rowStyle = css`
+	border-top: 1px solid ${palette('--cricket-scoreboard-divider')};
 `;
 
 const cellStyle = css`
@@ -71,12 +68,12 @@ const linkPaddingStlye = css`
 	padding-bottom: ${space[2]}px;
 `;
 
-const linkStyle = (palette: Palette) => css`
-	color: ${palette.text.cricketScoreboardLink};
+const linkStyle = css`
+	color: ${palette('--cricket-scoreboard-link-text')};
 	text-decoration: none;
 
 	:hover {
-		color: ${palette.text.cricketScoreboardLink};
+		color: ${palette('--cricket-scoreboard-link-text')};
 		text-decoration: underline;
 	}
 `;
@@ -136,8 +133,7 @@ export const CricketInningsScores = ({
 	return <p>Yet to bat</p>;
 };
 
-export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
-	const palette = decidePalette(format);
+export const CricketScoreboard = ({ scorecardUrl, match }: Props) => {
 	const date = new Date(match.gameDate);
 	return (
 		<div css={containerStyle}>
@@ -159,7 +155,7 @@ export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
 				</thead>
 				<tbody>
 					{/* Home team */}
-					<tr css={rowStyle(palette)}>
+					<tr css={rowStyle}>
 						<td css={[cellStyle, boldStlye]}>
 							{match.teams.find((team) => !!team.home)?.name}
 						</td>
@@ -168,7 +164,7 @@ export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
 						</td>
 					</tr>
 					{/* Away team */}
-					<tr css={rowStyle(palette)}>
+					<tr css={rowStyle}>
 						<td css={[cellStyle, boldStlye]}>
 							{match.teams.find((team) => !team.home)?.name}
 						</td>
@@ -177,13 +173,13 @@ export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
 						</td>
 					</tr>
 				</tbody>
-				<caption css={captionStyle(palette)}>
+				<caption css={captionStyle}>
 					{match.competitionName}, {match.venueName}
 				</caption>
 				<tfoot>
-					<tr css={rowStyle(palette)}>
+					<tr css={rowStyle}>
 						<td css={linkPaddingStlye} colSpan={2}>
-							<a css={linkStyle(palette)} href={scorecardUrl}>
+							<a css={linkStyle} href={scorecardUrl}>
 								View full scorecard
 							</a>
 						</td>
