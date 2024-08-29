@@ -444,17 +444,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				</div>
 			)}
 
-			{tickerSettings?.tickerData &&
-				tickerSettings.tickerStylingSettings && (
-					<Ticker
-						currencySymbol={tickerSettings.currencySymbol}
-						copy={tickerSettings.copy}
-						tickerData={tickerSettings.tickerData}
-						tickerStylingSettings={
-							tickerSettings.tickerStylingSettings
-						}
-					/>
-				)}
+			{tickerSettings?.tickerData && (
+				<Ticker
+					currencySymbol={tickerSettings.currencySymbol}
+					copy={tickerSettings.copy}
+					tickerData={tickerSettings.tickerData}
+				/>
+			)}
 
 			{image && (
 				<div css={imageWrapperStyles}>
