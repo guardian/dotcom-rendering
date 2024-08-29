@@ -1,9 +1,17 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat, ConsentState } from '@guardian/libs';
+import { MediaEvent } from '@guardian/bridget/MediaEvent';
+import {
+	type ArticleFormat,
+	type ConsentState,
+	isUndefined,
+	log,
+} from '@guardian/libs';
+import type { EventPayload, VideoEvent } from '@guardian/ophan-tracker-js';
 import { body, palette, space } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
+import { getVideoClient } from '../lib/bridgetApi';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
@@ -98,6 +106,27 @@ let counter: number | undefined;
 
 const adTargetingDisabled: AdTargeting = { disableAds: true };
 
+const getAppsMediaEvent = (
+	trackingEvent: VideoEventKey,
+): MediaEvent | undefined => {
+	switch (trackingEvent) {
+		case 'cued':
+			return MediaEvent.ready;
+		case 'play':
+			return MediaEvent.play;
+		case '25':
+			return MediaEvent.percent25;
+		case '50':
+			return MediaEvent.percent50;
+		case '75':
+			return MediaEvent.percent75;
+		case 'end':
+			return MediaEvent.end;
+		default:
+			return undefined;
+	}
+};
+
 export const YoutubeBlockComponent = ({
 	id,
 	assetId,
@@ -139,20 +168,70 @@ export const YoutubeBlockComponent = ({
 	}, []);
 
 	useEffect(() => {
-		const defineConsentState = async () => {
-			const { onConsentChange } = await import('@guardian/libs');
-			onConsentChange((newConsent: ConsentState) => {
-				setConsentState(newConsent);
-			});
-		};
+		if (renderingTarget === 'Web') {
+			const defineConsentState = async () => {
+				const { onConsentChange } = await import('@guardian/libs');
+				onConsentChange((newConsent: ConsentState) => {
+					setConsentState(newConsent);
+				});
+			};
 
-		defineConsentState().catch((error) => {
-			window.guardian.modules.sentry.reportError(
-				error instanceof Error ? error : new Error(`Error: unknown`),
-				'youtube-consent',
-			);
-		});
-	}, []);
+			defineConsentState().catch((error) => {
+				window.guardian.modules.sentry.reportError(
+					error instanceof Error
+						? error
+						: new Error(`Error: unknown`),
+					'youtube-consent',
+				);
+			});
+		}
+		if (renderingTarget === 'Apps') {
+			// set the minimum unconsented state for apps
+			setConsentState({
+				canTarget: false,
+				framework: 'tcfv2',
+			});
+		}
+	}, [renderingTarget]);
+
+	const ophanTrackerWeb = useCallback(
+		(trackingEvent: VideoEventKey) => {
+			void getOphan('Web').then((ophan) => {
+				const event = {
+					video: {
+						id: `gu-video-youtube-${id}`,
+						eventType: `video:content:${trackingEvent}`,
+					} satisfies VideoEvent,
+				} satisfies EventPayload;
+				log('dotcom', {
+					from: 'YoutubeAtom event emitter web',
+					id,
+					event,
+				});
+				ophan.record(event);
+			});
+		},
+		[id],
+	);
+
+	const ophanTrackerApps = useCallback(
+		(trackingEvent: VideoEventKey) => {
+			const appsMediaEvent = getAppsMediaEvent(trackingEvent);
+			if (!isUndefined(appsMediaEvent)) {
+				const event = {
+					videoId: id,
+					event: appsMediaEvent,
+				};
+				log('dotcom', {
+					from: 'YoutubeAtom event emitter apps',
+					id,
+					event,
+				});
+				void getVideoClient().sendVideoEvent(event);
+			}
+		},
+		[id],
+	);
 
 	if (expired) {
 		return (
@@ -193,19 +272,6 @@ export const YoutubeBlockComponent = ({
 		);
 	}
 
-	const ophanTracking = async (
-		trackingEvent: VideoEventKey,
-	): Promise<void> => {
-		if (!id) return;
-		const ophan = await getOphan(renderingTarget);
-		ophan.record({
-			video: {
-				id: `gu-video-youtube-${id}`,
-				eventType: `video:content:${trackingEvent}`,
-			},
-		});
-	};
-
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
@@ -214,24 +280,32 @@ export const YoutubeBlockComponent = ({
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
 				alt={altText ?? mediaTitle ?? ''}
-				adTargeting={enableAds ? adTargeting : adTargetingDisabled}
+				adTargeting={
+					enableAds && renderingTarget === 'Web'
+						? adTargeting
+						: adTargetingDisabled
+				}
 				consentState={consentState}
 				height={height}
 				width={width}
 				title={mediaTitle}
 				duration={duration}
-				eventEmitters={renderingTarget === 'Web' ? [ophanTracking] : []}
+				eventEmitters={
+					renderingTarget === 'Web'
+						? [ophanTrackerWeb]
+						: [ophanTrackerApps]
+				}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
-				shouldStick={stickyVideos}
+				shouldStick={renderingTarget === 'Web' ? stickyVideos : false}
 				isMainMedia={isMainMedia}
-				enableIma={enableAds}
 				abTestParticipations={abTestParticipations}
 				kicker={kickerText}
 				shouldPauseOutOfView={pauseOffscreenVideo}
 				showTextOverlay={showTextOverlay}
 				imageSize={imageSize}
 				imagePositionOnMobile={imagePositionOnMobile}
+				renderingTarget={renderingTarget}
 			/>
 			{!hideCaption && (
 				<Caption

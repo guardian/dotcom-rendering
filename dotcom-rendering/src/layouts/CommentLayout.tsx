@@ -315,7 +315,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const shouldShowTagLink =
 		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
+		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
 
 	return (
 		<>
@@ -473,7 +473,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 			<main
 				data-layout="CommentLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
+				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
 			>
 				{isApps && (
 					<>

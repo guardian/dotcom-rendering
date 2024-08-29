@@ -5,6 +5,8 @@
  */
 import { css } from '@emotion/react';
 import { from, headline, space } from '@guardian/source/foundations';
+import type { BannerTemplateSettings } from '../settings';
+import { DesignableBannerArticleCountOptOut } from './DesignableBannerArticleCountOptOut';
 
 const styles = {
 	container: css`
@@ -21,21 +23,34 @@ const styles = {
 interface CustomArticleCountProps {
 	copy: string;
 	numArticles: number;
+	settings: BannerTemplateSettings;
 }
 
 export function CustomArticleCountCopy({
 	copy,
 	numArticles,
+	settings,
 }: CustomArticleCountProps): JSX.Element {
+	/**
+	 * E.g. the string:
+	 *   "You’ve read %%ARTICLE_COUNT%% articles in the last few weeks."
+	 * needs to be split into:
+	 * - "You’ve read"
+	 * - "articles"
+	 * - "in the last few weeks."
+	 */
 	const [copyHead, copyTail] = copy.split('%%ARTICLE_COUNT%%');
+	const [nextWord, ...rest] = (copyTail ?? '').trim().split(' ');
 
 	return (
 		<p css={styles.container}>
-			{copyHead}
-			<span>{numArticles}&nbsp;articles</span>
-			{copyTail?.substring(1, 9) === 'articles'
-				? copyTail.substring(9)
-				: copyTail}
+			{copyHead}{' '}
+			<DesignableBannerArticleCountOptOut
+				numArticles={numArticles}
+				nextWord={` ${nextWord}`}
+				settings={settings}
+			/>{' '}
+			{rest.join(' ')}
 		</p>
 	);
 }

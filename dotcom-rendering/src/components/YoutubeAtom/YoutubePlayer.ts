@@ -1,4 +1,3 @@
-import type { AdsConfig } from '@guardian/commercial';
 import { log } from '@guardian/libs';
 import type { google } from './ima';
 import { loadYouTubeAPI } from './loadYouTubeApi';
@@ -24,14 +23,18 @@ declare global {
 				imaManager: ImaManager,
 			) => void,
 		) => void;
+		export interface Events {
+			onFullscreenToggled?: () => void;
+		}
 	}
 }
 
 type EmbedConfig = {
 	embedConfig: {
 		relatedChannels: string[];
-		adsConfig: AdsConfig;
+		adsConfig: { disableAds: true };
 		enableIma: boolean;
+		disableRelatedVideos: boolean;
 	};
 };
 
@@ -56,8 +59,12 @@ type YouTubePlayerArgs = {
 	youtubeOptions: PlayerOptions;
 	onReadyListener: PlayerReadyCallback;
 	enableIma: boolean;
-	imaAdsRequestCallback: AdsRequestCallback;
-	imaAdManagerListeners: (imaManager: YT.ImaManager) => void;
+	imaAdsRequestCallback?: AdsRequestCallback;
+	imaAdManagerListeners?: (imaManager: YT.ImaManager) => void;
+};
+
+const noop = () => {
+	return;
 };
 
 class YouTubePlayer {
@@ -69,8 +76,8 @@ class YouTubePlayer {
 		youtubeOptions,
 		onReadyListener,
 		enableIma,
-		imaAdsRequestCallback,
-		imaAdManagerListeners,
+		imaAdsRequestCallback = noop,
+		imaAdManagerListeners = noop,
 	}: YouTubePlayerArgs) {
 		this.playerPromise = this.setPlayer(
 			id,
@@ -95,9 +102,9 @@ class YouTubePlayer {
 			(resolve, reject) => {
 				try {
 					/**
-					 * If enableIma is true, YT.createPlayerForPublishers will be called
-					 * If enableIma is false, the standard new YT.Player constructor will be called
-					 * Listeners are set at expected place for each method
+					 * If enableIma is true, YT.createPlayerForPublishers will be called to initiate IMA ads
+					 * If enableIma is false, the standard YT.Player constructor will be called
+					 * Listeners are set appropriately for each method
 					 */
 					if (enableIma) {
 						YTAPI.createPlayerForPublishers(
@@ -106,7 +113,7 @@ class YouTubePlayer {
 							{
 								youtubeOptions,
 							},
-							// onReady callback for YT.createPlayerForPublishers
+							// onReady callback for YT.createPlayerForPublishers must be passed separately
 							(player, imaManager) => {
 								this.player = player;
 								imaAdManagerListeners(imaManager);
@@ -124,6 +131,8 @@ class YouTubePlayer {
 								onReady: onReadyListener,
 								onStateChange:
 									youtubeOptions.events?.onStateChange,
+								onFullscreenToggled:
+									youtubeOptions.events?.onFullscreenToggled,
 							},
 						});
 						resolve({ player: this.player });
@@ -137,8 +146,9 @@ class YouTubePlayer {
 		return playerPromise;
 	}
 
-	private logError(e: Error) {
-		log('dotcom', `YouTubePlayer failed to load: ${e.message}`);
+	private logError(error: Error) {
+		log('dotcom', `YouTubePlayer failed to load: ${error.message}`);
+		window.guardian.modules.sentry.reportError(error, 'youtube-player');
 	}
 
 	getPlayerState(): Promise<YT.PlayerState | void> {
@@ -186,4 +196,4 @@ class YouTubePlayer {
 	}
 }
 
-export { PlayerListenerName, YouTubePlayer };
+export { PlayerListenerName, YouTubePlayer, YouTubePlayerArgs };

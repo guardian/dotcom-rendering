@@ -212,7 +212,7 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 	 *  and not added later.  It's a balancing act between adding a useEffect that will run
 	 *  each time a tag is added to check (less performant) and doing it on load. */
 	const shouldHideBasedOnTags = tags.some((a) => {
-		return a.id === 'sport/olympic-games-2024';
+		return a.id === 'sport/paralympic-games-2024';
 	});
 
 	const canShow =

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined, setCookie, storage } from '@guardian/libs';
+import { isUndefined, removeCookie, setCookie, storage } from '@guardian/libs';
 import { article17, palette } from '@guardian/source/foundations';
 import { useEffect, useState } from 'react';
 import { useConfig } from './ConfigContext';
@@ -18,6 +18,10 @@ const formStyle = css`
 const bold = css`
 	font-weight: bold;
 `;
+
+// This is hardcoded, and must be changed if the experiment bucket changes
+// https://github.com/guardian/frontend/blob/09f49b80/common/app/experiments/Experiments.scala#L57
+const darkModeCookieName = 'X-GU-Experiment-0perc-D';
 
 /**
  * Updates the user's accessibility preferences
@@ -51,13 +55,14 @@ export const Accessibility = () => {
 	}, [shouldFlash]);
 
 	useEffect(() => {
-		setCookie({
-			name:
-				// This is hardcoded, and must be changed if the experiment bucket changes
-				// https://github.com/guardian/frontend/blob/09f49b80/common/app/experiments/Experiments.scala#L57
-				'X-GU-Experiment-0perc-D',
-			value: participate ? 'true' : 'false',
-		});
+		if (participate) {
+			setCookie({
+				name: darkModeCookieName,
+				value: 'true',
+			});
+		} else {
+			removeCookie({ name: darkModeCookieName });
+		}
 
 		const timeout = setTimeout(() => {
 			// we must reload the page for the preference to take effect,
@@ -73,11 +78,7 @@ export const Accessibility = () => {
 	};
 
 	return (
-		<FrontSection
-			title={'Preferences'}
-			editionId={'UK'}
-			discussionApiUrl={''}
-		>
+		<FrontSection title="Preferences" editionId="UK" discussionApiUrl="">
 			<form>
 				<fieldset css={formStyle}>
 					<p>
@@ -127,8 +128,8 @@ export const Accessibility = () => {
 							Participate in the dark colour scheme beta{' '}
 						</span>
 						{participate
-							? 'Untick this to opt out'
-							: 'Tick this to opt in'}
+							? 'Untick this to opt out (browser will refresh)'
+							: 'Tick this to opt in (browser will refresh)'}
 					</label>
 				</fieldset>
 			</form>
