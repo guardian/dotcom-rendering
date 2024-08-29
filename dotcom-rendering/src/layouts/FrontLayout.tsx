@@ -70,7 +70,8 @@ const isNavList = (collection: DCRCollectionType) => {
 };
 
 const isHighlights = ({ collectionType }: DCRCollectionType) =>
-	collectionType === 'fixed/highlights';
+	collectionType === 'fixed/highlights' ||
+	collectionType === 'scrollable/highlights';
 
 const isToggleable = (
 	index: number,

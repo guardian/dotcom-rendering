@@ -91,6 +91,7 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular'
 	| 'fixed/highlights'
+	| 'scrollable/highlights'
 	| 'flexible/special';
 
 export type FEContainerPalette =
