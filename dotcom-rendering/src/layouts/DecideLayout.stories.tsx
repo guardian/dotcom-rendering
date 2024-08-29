@@ -142,18 +142,6 @@ const standardImmersiveNewsFixture: DCRArticle = {
 	},
 };
 
-const standardImmersiveNewsWithUpdatedHeaderFixture: DCRArticle = {
-	...StandardStandardNewsFixture,
-	format: {
-		...StandardStandardNewsFixture.format,
-		display: 'ImmersiveDisplay',
-	},
-	config: {
-		...StandardStandardNewsFixture.config,
-		abTests: { updatedHeaderDesignVariant: 'variant' },
-	},
-};
-
 export const AppsStandardImmersiveNewsLight: Story = {
 	args: {
 		article: standardImmersiveNewsFixture,
@@ -165,22 +153,6 @@ export const AppsStandardImmersiveNewsLight: Story = {
 export const AppsStandardImmersiveNewsDark: Story = {
 	args: {
 		article: standardImmersiveNewsFixture,
-		colourScheme: 'dark',
-	},
-	parameters: appsParameters,
-};
-
-export const AppsStandardImmersiveNewsLightWithUpdatedHeader: Story = {
-	args: {
-		article: standardImmersiveNewsWithUpdatedHeaderFixture,
-		colourScheme: 'light',
-	},
-	parameters: appsParameters,
-};
-
-export const AppsStandardImmersiveNewsDarkWithUpdatedHeader: Story = {
-	args: {
-		article: standardImmersiveNewsWithUpdatedHeaderFixture,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,
@@ -244,24 +216,9 @@ export const AppsPictureShowcaseOpinionDark: Story = {
 	parameters: appsParameters,
 };
 
-const PhotoEssayImmersiveLabsWithUpdatedHeaderFixture: DCRArticle = {
-	...PhotoEssayImmersiveLabsFixture,
-	config: {
-		...PhotoEssayImmersiveLabsFixture.config,
-		abTests: { updatedHeaderDesignVariant: 'variant' },
-	},
-};
-
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
 		article: PhotoEssayImmersiveLabsFixture,
-	},
-	parameters: webParameters,
-};
-
-export const WebPhotoEssayImmersiveLabsLightWithUpdatedHeader: Story = {
-	args: {
-		article: PhotoEssayImmersiveLabsWithUpdatedHeaderFixture,
 	},
 	parameters: webParameters,
 };
