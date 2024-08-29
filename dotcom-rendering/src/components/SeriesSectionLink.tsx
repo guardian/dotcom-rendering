@@ -201,8 +201,8 @@ export const SeriesSectionLink = ({
 	if (shouldShowTagLink) {
 		return (
 			<TagLink
-				sectionUrl="sport/olympic-games-2024"
-				sectionLabel="Paris Olympic Games 2024"
+				sectionUrl="sport/paralympic-games-2024"
+				sectionLabel="Paris Paralympic Games 2024"
 				guardianBaseURL={guardianBaseURL}
 				format={format}
 			/>
