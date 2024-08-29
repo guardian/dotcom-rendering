@@ -25,6 +25,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
+import type { TickerStylingSettings } from '../banners/designableBanner/settings';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
 import type { ChoiceCardSelection } from '../lib/choiceCards';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -113,6 +114,16 @@ const imageStyles = css`
 	width: 100%;
 	object-fit: cover;
 `;
+
+const defaultTickerStylingSettings: TickerStylingSettings = {
+	filledProgressColour: '#5056F5',
+	progressBarBackgroundColour: 'rgba(80, 86, 245, 0)',
+	headlineColour: '#000000',
+	totalColour: '#5056F5',
+	goalColour: '#000000',
+	text: '#000000', // Deprecated, still needs a value
+	goalMarker: '#000000', // Deprecated, still needs a value
+};
 
 const articleCountAboveContainerStyles = css`
 	margin-bottom: ${space[4]}px;
@@ -449,6 +460,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					currencySymbol={tickerSettings.currencySymbol}
 					copy={tickerSettings.copy}
 					tickerData={tickerSettings.tickerData}
+					tickerStylingSettings={defaultTickerStylingSettings}
 				/>
 			)}
 
