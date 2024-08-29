@@ -33,10 +33,13 @@ export interface HighlightedTextSettings {
 }
 
 export interface TickerStylingSettings {
-	textColour: string;
+	text: string; //deprecated
 	filledProgressColour: string;
 	progressBarBackgroundColour: string;
-	goalMarkerColour: string;
+	goalMarker: string; //deprecated
+	headlineColour: string; //new
+	totalColour: string; //new
+	goalColour: string; //new
 }
 
 export interface HeaderSettings {

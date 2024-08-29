@@ -264,12 +264,15 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 		imageSettings,
 		bannerId: 'designable-banner',
 		tickerStylingSettings: {
-			textColour: hexColourToString(ticker.text),
+			text: hexColourToString(ticker.text),
 			filledProgressColour: hexColourToString(ticker.filledProgress),
 			progressBarBackgroundColour: hexColourToString(
 				ticker.progressBarBackground,
 			),
-			goalMarkerColour: hexColourToString(ticker.goalMarker),
+			goalMarker: hexColourToString(ticker.goalMarker),
+			headlineColour: hexColourToString(ticker.headlineColour),
+			totalColour: hexColourToString(ticker.totalColour),
+			goalColour: hexColourToString(ticker.goalColour),
 		},
 	};
 
@@ -346,7 +349,7 @@ const DesignableBanner: ReactComponent<BannerRenderProps> = ({
 								copy={tickerSettings.copy}
 								tickerData={tickerSettings.tickerData}
 								tickerStylingSettings={
-									tickerSettings.tickerStylingSettings
+									templateSettings.tickerStylingSettings
 								}
 							></Ticker>
 						)}
