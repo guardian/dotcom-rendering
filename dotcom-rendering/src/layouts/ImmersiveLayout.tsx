@@ -269,38 +269,17 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const showsUpdatedHeaderDesign: boolean =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant' &&
-		article.config.abTests.updatedHeaderDesignVariant !== undefined;
-
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep
 	the headlines appearing at a consistent height between labs and non labs immersive articles.
 	*/
 
 	const labsHeaderHeight = LABS_HEADER_HEIGHT;
-	const combinedHeight = (
-		minNavHeightPx(showsUpdatedHeaderDesign) + labsHeaderHeight
-	).toString();
+	const combinedHeight = (minNavHeightPx + labsHeaderHeight).toString();
 
 	const navAndLabsHeaderHeight = isLabs
 		? `${combinedHeight}px`
-		: `${minNavHeightPx(showsUpdatedHeaderDesign)}px`;
-
-	const mainMediaUpdatedHeaderStyles = css`
-		${from.desktop} {
-			height: calc(80vh - ${navAndLabsHeaderHeight});
-		}
-	`;
-
-	const mainMediaOldHeaderStyles = css`
-		${from.desktop} {
-			height: calc(100vh - ${navAndLabsHeaderHeight});
-		}
-		${from.wide} {
-			min-height: calc(50rem - ${navAndLabsHeaderHeight});
-		}
-	`;
+		: `${minNavHeightPx}px`;
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
@@ -310,7 +289,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 		*/
 		min-height: calc(25rem - ${navAndLabsHeaderHeight});
 		${from.desktop} {
+			height: calc(100vh - ${navAndLabsHeaderHeight});
 			min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
+		}
+		${from.wide} {
+			min-height: calc(50rem - ${navAndLabsHeaderHeight});
 		}
 	`;
 	const LeftColCaption = () => (
@@ -395,9 +378,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											.contribute
 									}
 									editionId={article.editionId}
-									showsUpdatedHeaderDesign={
-										showsUpdatedHeaderDesign
-									}
 								/>
 							</Section>
 						</div>
@@ -427,12 +407,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				<div
 					css={[
 						mainMedia && hasMainMediaStyles,
-						mainMedia &&
-							showsUpdatedHeaderDesign &&
-							mainMediaUpdatedHeaderStyles,
-						mainMedia &&
-							!showsUpdatedHeaderDesign &&
-							mainMediaOldHeaderStyles,
 						css`
 							display: flex;
 							flex-direction: column;
