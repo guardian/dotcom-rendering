@@ -111,13 +111,6 @@ const tickerSettings: TickerSettings = {
 		goal: 1000000,
 	},
 	name: 'US',
-	tickerStylingSettings: {
-		progressBarBackgroundColour: '#E8E8E8',
-		filledProgressColour: '#48d900',
-		headlineColour: '#d30606',
-		totalColour: '#d9bd3c',
-		goalColour: '#005689',
-	},
 };
 
 const regularChoiceCardAmounts: SelectedAmountsVariant = {
