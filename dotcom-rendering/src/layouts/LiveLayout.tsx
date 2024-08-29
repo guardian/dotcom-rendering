@@ -306,7 +306,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const shouldShowTagLink =
 		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
+		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
