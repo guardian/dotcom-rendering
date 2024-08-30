@@ -67,7 +67,8 @@ test.describe('Signed in readers', () => {
 		await expect(page.getByText('My account')).toBeVisible();
 	});
 
-	test('should have the correct urls for the header links', async ({
+	/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
+	test.skip('should have the correct urls for the header links', async ({
 		context,
 		page,
 	}) => {
@@ -95,23 +96,23 @@ test.describe('Signed in readers', () => {
 
 		expect(
 			await page
-				.locator('a[data-link-name="nav3 : topbar : printsubs"]')
+				.locator('a[data-link-name="header : topbar : printsubs"]')
 				.getAttribute('href'),
 		).toContain('support.theguardian.com/subscribe');
 
 		expect(
 			await page
-				.locator('a[data-link-name="nav3 : job-cta"]')
+				.locator('a[data-link-name="header : topbar : job-cta"]')
 				.getAttribute('href'),
 		).toContain('https://jobs.theguardian.com');
 
 		expect(
 			await page
-				.locator('a[data-link-name="nav3 : search"]')
-				.getAttribute('href'),
-		).toContain(
-			'https://www.google.co.uk/advanced_search?q=site:www.theguardian.com',
-		);
+				.locator(
+					'button[data-link-name="header : topbar : my account"]',
+				)
+				.textContent(),
+		).toContain('My account');
 	});
 
 	test('should not display signed in texts when users are not signed in', async ({

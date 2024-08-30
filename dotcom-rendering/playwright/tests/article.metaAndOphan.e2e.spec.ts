@@ -50,7 +50,8 @@ test.describe('The web document renders with the correct meta and analytics elem
 		await expectToExist(page, `head link[rel="canonical"]`);
 	});
 
-	test('Subnav links exists with correct values', async ({ page }) => {
+	/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
+	test.skip('Subnav links exists with correct values', async ({ page }) => {
 		await loadPage(
 			page,
 			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
@@ -59,13 +60,13 @@ test.describe('The web document renders with the correct meta and analytics elem
 		// Pillar ophan data-link-name exists with correct value
 		await expectToExist(
 			page,
-			`a[data-link-name="nav3 : primary : Opinion"]`,
+			`a[data-link-name="header : titlepiece : nav : primary : Opinion"]`,
 		);
 
 		// Only the top subnav is initially rendered so the count here is one
 		await expectToBeVisible(
 			page,
-			`a[data-link-name="nav2 : subnav : Pensions"]`,
+			`a[data-link-name="header : subnav : Pensions"]`,
 		);
 	});
 

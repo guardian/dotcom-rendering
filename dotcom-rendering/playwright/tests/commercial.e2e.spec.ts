@@ -4,6 +4,7 @@ import { loadPage } from '../lib/load-page';
 import { expectToExist } from '../lib/locators';
 
 test.describe('Commercial E2E tests', () => {
+	/* TODO - @guardian/fairground-web-devs fix this when new Masthead is launched to 100% */
 	test.skip(`It should load the expected number of ad slots`, async ({
 		page,
 	}) => {
