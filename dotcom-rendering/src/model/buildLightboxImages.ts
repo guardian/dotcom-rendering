@@ -110,6 +110,10 @@ const getImages = (
 			return [element];
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
 			return element.images;
+		case 'model.dotcomrendering.pageElements.ListBlockElement':
+			return element.items.flatMap((item) =>
+				item.elements.flatMap(getImages),
+			);
 		default:
 			return [];
 	}
