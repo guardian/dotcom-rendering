@@ -192,7 +192,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			showHighlights &&
 			!!highlightsCollection && (
 				<DecideContainer
-					containerType="fixed/highlights"
+					containerType={highlightsCollection.collectionType}
 					trails={[
 						...highlightsCollection.curated,
 						...highlightsCollection.backfill,
@@ -392,7 +392,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						  }))
 						: trails;
 
-					if (collection.collectionType === 'fixed/highlights') {
+					if (
+						collection.collectionType === 'fixed/highlights' ||
+						collection.collectionType === 'scrollable/highlights'
+					) {
 						// Highlights are rendered in the Masthead component
 						return null;
 					}
