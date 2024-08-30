@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	between,
+	from,
 	headlineMedium17,
 	space,
 	textSans14,
@@ -8,7 +10,7 @@ import {
 import type { ReactNode } from 'react';
 import sanitise, { type IOptions } from 'sanitize-html';
 import { grid } from '../grid';
-import { parseHtml } from '../lib/domUtils';
+import { getAttrs, parseHtml } from '../lib/domUtils';
 import { palette } from '../palette';
 import { Island } from './Island';
 import { ShareButton } from './ShareButton.importable';
@@ -22,25 +24,6 @@ const sanitiserOptions: IOptions = {
 	allowVulnerableTags: true,
 	allowedTags: false, // Leave tags from CAPI alone
 	allowedAttributes: false, // Leave attributes from CAPI alone
-	transformTags: {
-		a: (tagName, attribs) => {
-			if (!attribs.href) return { tagName, attribs };
-
-			const mailto = attribs.href.startsWith('mailto:')
-				? ` | ${attribs.href}`
-				: '';
-
-			return {
-				tagName, // Just return anchors as is
-				attribs: {
-					...attribs, // Merge into the existing attributes
-					...{
-						'data-link-name': `in body link${mailto}`, // Add the data-link-name for Ophan to anchors
-					},
-				},
-			};
-		},
-	},
 };
 
 const styles = css`
@@ -48,16 +31,29 @@ const styles = css`
 	color: ${palette('--caption-text')};
 	${textSans14}
 	padding-bottom: ${space[6]}px;
+
+	${between.tablet.and.desktop} {
+		padding-left: ${space[5]}px;
+		padding-right: ${space[5]}px;
+	}
+
+	${from.desktop} {
+		${grid.column.right}
+	}
+
+	${from.leftCol} {
+		${grid.column.left}
+	}
 `;
 
 const renderTextElement = (node: Node): ReactNode => {
-	switch (node.nodeName) {
-		case 'STRONG': {
-			const text = node.textContent?.trim() ?? '';
-			const children = Array.from(node.childNodes).map(renderTextElement);
+	const text = node.textContent?.trim() ?? '';
+	const children = Array.from(node.childNodes).map(renderTextElement);
 
+	switch (node.nodeName) {
+		case 'STRONG':
 			return text === '' ? null : (
-				<h2
+				<strong
 					css={css`
 						display: block;
 						${headlineMedium17}
@@ -65,7 +61,37 @@ const renderTextElement = (node: Node): ReactNode => {
 					`}
 				>
 					{children}
-				</h2>
+				</strong>
+			);
+		case 'EM':
+			return text === '' ? null : <em>{children}</em>;
+		case 'A': {
+			const attrs = getAttrs(node);
+
+			return (
+				<a
+					css={css`
+						text-decoration: none;
+						color: ${palette('--caption-link')};
+						border-bottom: 1px solid
+							${palette('--article-link-border')};
+
+						:hover {
+							border-bottom: 1px solid
+								${palette('--article-link-border-hover')};
+						}
+					`}
+					href={attrs?.getNamedItem('href')?.value}
+					target={attrs?.getNamedItem('target')?.value}
+					data-link-name={
+						attrs?.getNamedItem('data-link-name')?.value
+					}
+					data-component={
+						attrs?.getNamedItem('data-component')?.value
+					}
+				>
+					{children}
+				</a>
 			);
 		}
 		case '#text':

@@ -4,7 +4,7 @@ import {
 	ArticleDisplay,
 	type ArticleFormat,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source/foundations';
+import { breakpoints, from, space } from '@guardian/source/foundations';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { grid } from '../grid';
 import { generateImageURL } from '../lib/image';
@@ -170,6 +170,17 @@ const decideImageWidths = ({
 					{ breakpoint: breakpoints.phablet, width: 700 },
 				];
 		}
+	} else if (format.design === ArticleDesign.Gallery) {
+		return [
+			{ breakpoint: breakpoints.mobile, width: 375 },
+			{ breakpoint: breakpoints.mobileMedium, width: 480 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{ breakpoint: breakpoints.phablet, width: 740 },
+			{ breakpoint: breakpoints.tablet, width: 700 },
+			{ breakpoint: breakpoints.desktop, width: 620 },
+			{ breakpoint: breakpoints.leftCol, width: 940 },
+			{ breakpoint: breakpoints.wide, width: 1020 },
+		];
 	} else {
 		switch (role) {
 			case 'showcase':
@@ -319,6 +330,23 @@ const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
 		return css`
 			display: block;
 			${grid.column.all}
+
+			${from.tablet} {
+				${grid.column.centre}
+			}
+
+			${from.desktop} {
+				padding-bottom: ${space[10]}px;
+			}
+
+			${from.leftCol} {
+				${grid.between('centre-column-start', 'right-column-end')}
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
 		`;
 	}
 
