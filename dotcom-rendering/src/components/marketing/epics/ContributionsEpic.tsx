@@ -117,7 +117,7 @@ const imageStyles = css`
 
 const defaultTickerStylingSettings: TickerStylingSettings = {
 	filledProgressColour: '#5056F5',
-	progressBarBackgroundColour: 'rgba(80, 86, 245, 0)',
+	progressBarBackgroundColour: 'rgba(80, 86, 245, 0.35)',
 	headlineColour: '#000000',
 	totalColour: '#5056F5',
 	goalColour: '#000000',
