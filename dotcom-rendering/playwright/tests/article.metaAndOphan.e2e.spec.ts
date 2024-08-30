@@ -59,13 +59,13 @@ test.describe('The web document renders with the correct meta and analytics elem
 		// Pillar ophan data-link-name exists with correct value
 		await expectToExist(
 			page,
-			`a[data-link-name="nav3 : primary : Opinion"]`,
+			`a[data-link-name="header : titlepiece : nav : primary : Opinion"]`,
 		);
 
 		// Only the top subnav is initially rendered so the count here is one
 		await expectToBeVisible(
 			page,
-			`a[data-link-name="nav2 : subnav : Pensions"]`,
+			`a[data-link-name="header : subnav : Pensions"]`,
 		);
 	});
 
