@@ -90,7 +90,6 @@ type FEContainerType =
 	| 'nav/list'
 	| 'nav/media-list'
 	| 'news/most-popular'
-	| 'fixed/highlights'
 	| 'scrollable/highlights'
 	| 'flexible/special';
 

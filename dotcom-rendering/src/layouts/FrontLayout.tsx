@@ -70,7 +70,6 @@ const isNavList = (collection: DCRCollectionType) => {
 };
 
 const isHighlights = ({ collectionType }: DCRCollectionType) =>
-	collectionType === 'fixed/highlights' ||
 	collectionType === 'scrollable/highlights';
 
 const isToggleable = (
@@ -392,10 +391,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						  }))
 						: trails;
 
-					if (
-						collection.collectionType === 'fixed/highlights' ||
-						collection.collectionType === 'scrollable/highlights'
-					) {
+					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
 						return null;
 					}
