@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { type ArticleFormat } from '@guardian/libs';
+import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { GalleryImage } from '../components/GalleryImage';
@@ -34,6 +35,18 @@ const articleStyles = css`
 
 const headerStyles = css`
 	${grid.container};
+	grid-auto-flow: row dense;
+	background-color: ${palette('--article-inner-background')};
+	border-bottom: 1px solid ${palette('--article-border')};
+
+	${from.tablet} {
+		&::before {
+			${grid.between('viewport-start', 'centre-column-start')}
+			grid-row: span 3;
+			content: '';
+			border-right: 1px solid ${palette('--article-border')};
+		}
+	}
 `;
 
 const bodyStyles = css`

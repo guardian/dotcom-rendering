@@ -38,7 +38,7 @@ const styles = css`
 	}
 
 	${until.tablet} {
-		border-top: 1px solid ${palette('--gallery-image-border')};
+		border-top: 1px solid ${palette('--article-border')};
 		padding-top: ${space[1]}px;
 	}
 
@@ -48,7 +48,7 @@ const styles = css`
 			grid-row: span 2;
 			content: '';
 			background-color: ${palette('--article-background')};
-			border-right: 1px solid ${palette('--gallery-image-border')};
+			border-right: 1px solid ${palette('--article-border')};
 		}
 
 		&::after {
@@ -56,7 +56,7 @@ const styles = css`
 			grid-row: span 2;
 			content: '';
 			background-color: ${palette('--article-background')};
-			border-left: 1px solid ${palette('--gallery-image-border')};
+			border-left: 1px solid ${palette('--article-border')};
 		}
 	}
 

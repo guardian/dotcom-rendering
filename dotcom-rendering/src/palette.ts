@@ -926,7 +926,7 @@ export const tabs = {
 	};
 };
 
-const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
+const datelineAppsMobileLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			switch (theme) {
@@ -943,6 +943,8 @@ const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
 			return sourcePalette.neutral[46];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			if (
 				theme === ArticleSpecial.SpecialReportAlt &&
@@ -951,6 +953,54 @@ const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
 				return sourcePalette.specialReportAlt[100];
 			}
 			return sourcePalette.neutral[46];
+	}
+};
+
+const datelineAppsMobileDark: PaletteFunction = ({
+	design,
+	display,
+	theme,
+}) => {
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return sourcePalette.neutral[93];
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
+		case ArticleDesign.Picture:
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				default:
+					return sourcePalette.neutral[86];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			if (display === ArticleDisplay.Immersive) {
+				switch (theme) {
+					case ArticleSpecial.SpecialReportAlt:
+						return sourcePalette.neutral[93];
+					default:
+						return sourcePalette.neutral[60];
+				}
+			}
+
+			return sourcePalette.neutral[60];
+		default:
+			return sourcePalette.neutral[60];
 	}
 };
 
@@ -984,6 +1034,8 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[60];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		case ArticleDesign.Standard:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
@@ -991,6 +1043,8 @@ const datelineLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[46];
 			}
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[100];
 		default:
 			return sourcePalette.neutral[46];
 	}
@@ -1016,6 +1070,8 @@ const datelineDark: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[60];
 			}
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.neutral[93];
 		default:
 			return sourcePalette.neutral[60];
 	}
@@ -2002,6 +2058,8 @@ const brandingLabelLight: PaletteFunction = ({ design, theme }) => {
 				default:
 					return sourcePalette.neutral[7];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[86];
 		default:
 			return sourcePalette.neutral[20];
 	}
@@ -2010,26 +2068,31 @@ const brandingLabelDark: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderLight: PaletteFunction = () => sourcePalette.neutral[86];
 const brandingBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
 const brandingLinkLight: PaletteFunction = ({ design, theme }) => {
-	switch (theme) {
-		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[7];
-		case ArticleSpecial.SpecialReport:
-			return sourcePalette.specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return sourcePalette.news[400];
-		case Pillar.News:
-			switch (design) {
-				case ArticleDesign.Picture:
-				case ArticleDesign.Video:
-				case ArticleDesign.Audio:
-					return sourcePalette.neutral[86];
-				case ArticleDesign.Analysis:
-					return sourcePalette.news[300];
-				default:
-					return sourcePalette.news[400];
-			}
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[100];
 		default:
-			return pillarPalette(theme, 400);
+			switch (theme) {
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[7];
+				case ArticleSpecial.SpecialReport:
+					return sourcePalette.specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return sourcePalette.news[400];
+				case Pillar.News:
+					switch (design) {
+						case ArticleDesign.Picture:
+						case ArticleDesign.Video:
+						case ArticleDesign.Audio:
+							return sourcePalette.neutral[86];
+						case ArticleDesign.Analysis:
+							return sourcePalette.news[300];
+						default:
+							return sourcePalette.news[400];
+					}
+				default:
+					return pillarPalette(theme, 400);
+			}
 	}
 };
 const brandingLinkDark: PaletteFunction = ({ design, theme }) => {
@@ -3293,19 +3356,27 @@ const articleLinkBorderHoverDark: PaletteFunction = (f) =>
 	articleLinkTextDark(f);
 
 const articleBorderLight: PaletteFunction = ({ design, theme }) => {
-	switch (theme) {
-		case ArticleSpecial.SpecialReportAlt:
-			return transparentColour(sourcePalette.neutral[60], 0.3);
-		case ArticleSpecial.Labs:
-			return sourcePalette.neutral[60];
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[20];
 		default:
-			switch (design) {
-				case ArticleDesign.Picture:
-				case ArticleDesign.Video:
-				case ArticleDesign.Audio:
-					return transparentColour(sourcePalette.neutral[60], 0.5);
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return transparentColour(sourcePalette.neutral[60], 0.3);
+				case ArticleSpecial.Labs:
+					return sourcePalette.neutral[60];
 				default:
-					return sourcePalette.neutral[86];
+					switch (design) {
+						case ArticleDesign.Picture:
+						case ArticleDesign.Video:
+						case ArticleDesign.Audio:
+							return transparentColour(
+								sourcePalette.neutral[60],
+								0.5,
+							);
+						default:
+							return sourcePalette.neutral[86];
+					}
 			}
 	}
 };
@@ -5537,11 +5608,6 @@ const labsHeaderBackgroundLight: PaletteFunction = () =>
 const labsHeaderBackgroundDark: PaletteFunction = () =>
 	sourcePalette.brand[400];
 
-const galleryImageBorderLight: PaletteFunction = () =>
-	sourcePalette.neutral[20];
-
-const galleryImageBorderDark: PaletteFunction = () => sourcePalette.neutral[20];
-
 // ----- Palette ----- //
 
 /**
@@ -5955,9 +6021,9 @@ const paletteColours = {
 		light: datelineLight,
 		dark: datelineDark,
 	},
-	'--dateline-mobile': {
-		light: datelineMobileLight,
-		dark: standfirstTextDark,
+	'--dateline-apps-mobile': {
+		light: datelineAppsMobileLight,
+		dark: datelineAppsMobileDark,
 	},
 	'--discussion-accent-text': {
 		light: discussionAccentTextLight,
@@ -6138,10 +6204,6 @@ const paletteColours = {
 	'--follow-text': {
 		light: followTextLight,
 		dark: followTextDark,
-	},
-	'--gallery-image-border': {
-		light: galleryImageBorderLight,
-		dark: galleryImageBorderDark,
 	},
 	'--heading-line': {
 		light: headingLineLight,
