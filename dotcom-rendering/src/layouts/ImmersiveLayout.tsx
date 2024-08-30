@@ -427,9 +427,12 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				<div
 					css={[
 						mainMedia && hasMainMediaStyles,
-						mainMedia && showsUpdatedHeaderDesign
-							? mainMediaUpdatedHeaderStyles
-							: mainMediaOldHeaderStyles,
+						mainMedia &&
+							showsUpdatedHeaderDesign &&
+							mainMediaUpdatedHeaderStyles,
+						mainMedia &&
+							!showsUpdatedHeaderDesign &&
+							mainMediaOldHeaderStyles,
 						css`
 							display: flex;
 							flex-direction: column;
