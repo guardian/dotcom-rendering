@@ -89,8 +89,6 @@ const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 				case ArticleDesign.Interview:
 				case ArticleDesign.Picture:
 				case ArticleDesign.Audio:
-				case ArticleDesign.PrintShop:
-					return sourcePalette.neutral[97];
 				case ArticleDesign.Video:
 					switch (theme) {
 						case ArticleSpecial.Labs:
