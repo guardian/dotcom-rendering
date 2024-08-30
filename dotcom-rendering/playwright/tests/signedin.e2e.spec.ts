@@ -67,7 +67,8 @@ test.describe('Signed in readers', () => {
 		await expect(page.getByText('My account')).toBeVisible();
 	});
 
-	test('should have the correct urls for the header links', async ({
+	/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
+	test.skip('should have the correct urls for the header links', async ({
 		context,
 		page,
 	}) => {

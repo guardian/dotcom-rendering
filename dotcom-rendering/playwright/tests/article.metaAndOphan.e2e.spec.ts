@@ -50,7 +50,8 @@ test.describe('The web document renders with the correct meta and analytics elem
 		await expectToExist(page, `head link[rel="canonical"]`);
 	});
 
-	test('Subnav links exists with correct values', async ({ page }) => {
+	/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
+	test.skip('Subnav links exists with correct values', async ({ page }) => {
 		await loadPage(
 			page,
 			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,

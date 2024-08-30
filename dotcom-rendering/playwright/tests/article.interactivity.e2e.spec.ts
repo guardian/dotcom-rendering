@@ -166,7 +166,7 @@ test.describe('Interactivity', () => {
 	});
 
 	test.describe('Navigating the pillar menu', () => {
-		/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
+		/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
 		test.skip('should expand and close the desktop pillar menu when the VeggieBurger is clicked', async ({
 			context,
 			page,
