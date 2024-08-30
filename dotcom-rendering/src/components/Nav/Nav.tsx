@@ -19,7 +19,6 @@ type Props = {
 	isImmersive?: boolean;
 	selectedPillar?: Pillar;
 	hasPageSkin?: boolean;
-	showsUpdatedHeaderDesign?: boolean;
 };
 
 const clearFixStyle = css`
@@ -32,10 +31,9 @@ const rowStyles = css`
 	justify-content: space-between;
 `;
 
-export const minNavHeightPx = (showsUpdatedHeaderDesign: boolean) =>
-	showsUpdatedHeaderDesign ? 191 : 48;
-export const minNavHeight = (showsUpdatedHeaderDesign: boolean) => css`
-	min-height: ${minNavHeightPx(showsUpdatedHeaderDesign)}px;
+export const minNavHeightPx = 48;
+export const minNavHeight = css`
+	min-height: ${minNavHeightPx}px;
 `;
 
 const PositionRoundel = ({ children }: { children: React.ReactNode }) => (
@@ -63,7 +61,6 @@ export const Nav = ({
 	isImmersive,
 	selectedPillar,
 	hasPageSkin,
-	showsUpdatedHeaderDesign = false,
 }: Props) => {
 	return (
 		<div css={rowStyles}>
@@ -173,11 +170,7 @@ export const Nav = ({
 				}}
 			/>
 			<div
-				css={[
-					clearFixStyle,
-					rowStyles,
-					isImmersive && minNavHeight(showsUpdatedHeaderDesign),
-				]}
+				css={[clearFixStyle, rowStyles, isImmersive && minNavHeight]}
 				data-component="nav2"
 			>
 				{isImmersive && (
