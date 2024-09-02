@@ -183,11 +183,12 @@ export const BylineLink = ({
 
 	const { renderingTarget } = useConfig();
 	const isApps = renderingTarget === 'Apps';
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	return (
 		<>
 			{renderedTokens}
-			{isApps && !isHeadline && hasSoleContributor ? (
+			{isApps && !isLiveBlog && !isHeadline && hasSoleContributor ? (
 				<Hide from="leftCol">
 					<DottedLines
 						count={1}
