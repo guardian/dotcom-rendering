@@ -375,37 +375,6 @@ export const ArticleHeadline = ({
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
-				case ArticleDesign.PrintShop:
-					// Immersive headlines have two versions, with main media, and (this one) without
-					return (
-						<div
-							css={decideBottomPadding({
-								format,
-								hasAvatar,
-							})}
-						>
-							<WithAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-							>
-								<h1
-									css={[
-										format.theme === ArticleSpecial.Labs
-											? jumboLabsFont
-											: headlineFont(format),
-										maxWidth,
-										immersiveStyles,
-										displayBlock,
-									]}
-								>
-									{headlineString}
-								</h1>
-							</WithAgeWarning>
-						</div>
-					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
