@@ -1068,6 +1068,7 @@
                                                 }
                                             },
                                             "required": [
+                                                "boostLevel",
                                                 "imageHide",
                                                 "isBoosted",
                                                 "showBoostedHeadline",
@@ -1802,6 +1803,7 @@
                                                 }
                                             },
                                             "required": [
+                                                "boostLevel",
                                                 "imageHide",
                                                 "isBoosted",
                                                 "showBoostedHeadline",
@@ -2536,6 +2538,7 @@
                                                 }
                                             },
                                             "required": [
+                                                "boostLevel",
                                                 "imageHide",
                                                 "isBoosted",
                                                 "showBoostedHeadline",

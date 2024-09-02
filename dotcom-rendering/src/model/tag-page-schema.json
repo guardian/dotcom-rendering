@@ -589,6 +589,7 @@
                             }
                         },
                         "required": [
+                            "boostLevel",
                             "imageHide",
                             "isBoosted",
                             "showBoostedHeadline",
