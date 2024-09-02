@@ -13,7 +13,6 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'morning-briefing', // First Edition
 				'the-stakes-us-election-edition',
-				'swift-notes',
 				'saturday-edition',
 				'word-of-mouth', // Feast
 				'the-guide-staying-in',
@@ -25,7 +24,6 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'In depth',
 			newsletters: [
 				'green-light', // Down to Earth
-				'whats-on',
 				'tech-scape',
 				'fashion-statement',
 				'pushing-buttons',
@@ -38,6 +36,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'film-today',
 				'sleeve-notes',
+				'whats-on',
 				'bookmarks',
 				'hear-here',
 				'art-weekly',
@@ -64,6 +63,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'trump-on-trial',
 				'follow-margaret-sullivan',
 				'follow-robert-reich',
+				'follow-mehdi-hasan',
 				'global-dispatch',
 				'documentaries',
 				'her-stage',
@@ -127,8 +127,8 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'green-light', // Down to Earth
 				'soccer-with-jonathan-wilson',
 				'follow-mehdi-hasan',
-				'follow-margaret-sullivan',
 				'follow-robert-reich',
+				'follow-margaret-sullivan',
 				'patriarchy',
 				'this-is-europe',
 				'tech-scape',
@@ -210,10 +210,10 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
+				'breaking-news-australia',
 				'morning-mail',
 				'afternoon-update',
 				'the-crunch',
-				'swift-notes',
 				'first-dog',
 				'reclaim-your-brain',
 				'well-actually',
@@ -223,6 +223,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'In depth',
 			newsletters: [
 				'the-stakes-us-election-edition',
+				'weekly-beast',
 				'the-rural-network',
 				'green-light', // Down to Earth
 				'tech-scape',
@@ -241,13 +242,13 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'film-today',
 				'bookmarks',
 				'whats-on',
-				'art-weekly',
 				'design-review',
 			],
 		},
 		{
 			title: 'Weekend reads',
 			newsletters: [
+				'weekend-mail-aus',
 				'five-great-reads',
 				'saturday-edition',
 				'the-long-read',
@@ -262,12 +263,10 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'The world explained',
 			newsletters: [
 				'trump-on-trial',
-				'follow-margaret-sullivan',
-				'follow-robert-reich',
 				'global-dispatch',
+				'patriarchy',
 				'cotton-capital',
 				'documentaries',
-				'patriarchy',
 				'her-stage',
 				'guardian-traveller',
 			],
@@ -275,7 +274,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Sport',
 			newsletters: [
-				'tokyo-2020-daily-briefing',
+				'from-the-pocket-afl-weekly',
 				'sports-au',
 				'the-fiver', // Football Daily
 				'moving-the-goalposts',
@@ -303,6 +302,9 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'morning-briefing', // First Edition
 				'us-morning-newsletter', // First Thing
+				'follow-robert-reich',
+				'follow-margaret-sullivan',
+				'follow-mehdi-hasan',
 				'this-is-europe',
 				'business-today',
 			],
