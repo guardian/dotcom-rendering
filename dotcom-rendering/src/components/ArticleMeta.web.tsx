@@ -102,13 +102,6 @@ const metaExtras = (isPictureContent: boolean) => css`
 	padding-top: 6px;
 
 	${!isPictureContent && until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-
-	${!isPictureContent && until.phablet} {
 		margin-left: -10px;
 		margin-right: -10px;
 		padding-left: 10px;
@@ -128,13 +121,6 @@ const metaNumbers = (isPictureContent: boolean) => css`
 	justify-content: flex-end;
 	${between.leftCol.and.wide} {
 		justify-content: flex-start;
-	}
-
-	${!isPictureContent && until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-		padding-left: 20px;
-		padding-right: 20px;
 	}
 
 	${!isPictureContent && until.phablet} {
