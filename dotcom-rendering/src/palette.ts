@@ -6757,6 +6757,10 @@ const paletteColours = {
 		light: tagLinkFillBackgroundLight,
 		dark: tagLinkFillBackgroundDark,
 	},
+	'--tag-page-chevron': {
+		light: () => sourcePalette.neutral[0],
+		dark: () => sourcePalette.neutral[86],
+	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,
 		dark: timelineAtomBulletDark,
