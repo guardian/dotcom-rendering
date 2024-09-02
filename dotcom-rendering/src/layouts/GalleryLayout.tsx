@@ -40,9 +40,9 @@ const headerStyles = css`
 	border-bottom: 1px solid ${palette('--article-border')};
 
 	${from.tablet} {
-		&::before {
+		&::after {
 			${grid.between('viewport-start', 'centre-column-start')}
-			grid-row: span 3;
+			grid-row: span 4;
 			content: '';
 			border-right: 1px solid ${palette('--article-border')};
 		}

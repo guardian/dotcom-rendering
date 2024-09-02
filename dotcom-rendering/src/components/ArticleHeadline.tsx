@@ -296,6 +296,25 @@ const WithAgeWarning = ({
 	return <>{children}</>;
 };
 
+const GalleryBackground = () => (
+	<div
+		css={css`
+			${grid.between('viewport-start', 'centre-column-end')}
+			grid-row: 4/7;
+			background-color: ${themePalette('--headline-background')};
+
+			${from.mobileLandscape} {
+				${grid.column.all}
+			}
+
+			${from.tablet} {
+				${grid.between('centre-column-start', 'viewport-end')}
+				margin-left: -20px;
+			}
+		`}
+	/>
+);
+
 const decideBottomPadding = ({
 	format,
 	hasAvatar,
@@ -839,35 +858,48 @@ export const ArticleHeadline = ({
 					);
 				case ArticleDesign.Gallery:
 					return (
-						<div
-							css={css`
-								${grid.column.centre}
-							`}
-						>
-							<WithAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
+						<>
+							<GalleryBackground />
+							<div
+								css={css`
+									${grid.column.centre}
+									grid-row: 4/7;
+								`}
 							>
-								<h1
-									css={[
-										format.theme === ArticleSpecial.Labs
-											? labsFont
-											: headlineFont(format),
-										css`
-											color: ${themePalette(
-												'--headline-colour',
-											)};
-											padding-bottom: ${space[6]}px;
-										`,
-									]}
+								<WithAgeWarning
+									tags={tags}
+									webPublicationDateDeprecated={
+										webPublicationDateDeprecated
+									}
+									format={format}
 								>
-									{headlineString}
-								</h1>
-							</WithAgeWarning>
-						</div>
+									<h1
+										css={[
+											format.theme === ArticleSpecial.Labs
+												? labsFont
+												: headlineFont(format),
+											css`
+												color: ${themePalette(
+													'--headline-colour',
+												)};
+												padding-bottom: ${space[6]}px;
+												padding-right: ${space[5]}px;
+
+												${from.mobileLandscape} {
+													padding-right: 0;
+												}
+
+												${from.tablet} {
+													${grid.column.centre}
+												}
+											`,
+										]}
+									>
+										{headlineString}
+									</h1>
+								</WithAgeWarning>
+							</div>
+						</>
 					);
 				default:
 					return (

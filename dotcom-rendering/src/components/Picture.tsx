@@ -100,20 +100,22 @@ const decideImageWidths = ({
 		];
 	}
 	if (isMainMedia) {
+		if (
+			format.display === ArticleDisplay.Immersive ||
+			format.design === ArticleDesign.Gallery
+		) {
+			return [
+				{ breakpoint: breakpoints.mobile, width: 480 },
+				{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+				{ breakpoint: breakpoints.phablet, width: 740 },
+				{ breakpoint: breakpoints.tablet, width: 980 },
+				{ breakpoint: breakpoints.desktop, width: 1140 },
+				{ breakpoint: breakpoints.leftCol, width: 1300 },
+				{ breakpoint: breakpoints.wide, width: 1900 },
+			];
+		}
+
 		switch (format.display) {
-			case ArticleDisplay.Immersive: {
-				// If display is Immersive then main media should *always*
-				// use these larger image sources
-				return [
-					{ breakpoint: breakpoints.mobile, width: 480 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
-					{ breakpoint: breakpoints.phablet, width: 740 },
-					{ breakpoint: breakpoints.tablet, width: 980 },
-					{ breakpoint: breakpoints.desktop, width: 1140 },
-					{ breakpoint: breakpoints.leftCol, width: 1300 },
-					{ breakpoint: breakpoints.wide, width: 1900 },
-				];
-			}
 			case ArticleDisplay.Showcase:
 			case ArticleDisplay.NumberedList: {
 				if (format.design === ArticleDesign.Feature) {
@@ -325,19 +327,28 @@ export const Sources = ({ sources }: { sources: ImageSource[] }) => {
 	);
 };
 
-const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
+const styles = (
+	{ design }: ArticleFormat,
+	isLightbox: boolean,
+	isMainMedia: boolean,
+) => {
 	if (design === ArticleDesign.Gallery) {
 		return css`
 			display: block;
+			height: 100%;
 			${grid.column.all}
 
 			${from.tablet} {
 				${grid.column.centre}
 			}
 
-			${from.desktop} {
-				padding-bottom: ${space[10]}px;
-			}
+			${isMainMedia
+				? ''
+				: `
+				${from.desktop} {
+					padding-bottom: ${space[10]}px;
+				}
+			`}
 
 			${from.leftCol} {
 				${grid.between('centre-column-start', 'right-column-end')}
@@ -346,6 +357,7 @@ const styles = ({ design }: ArticleFormat, isLightbox: boolean) => {
 			img {
 				width: 100%;
 				height: 100%;
+				object-fit: cover;
 			}
 		`;
 	}
@@ -414,34 +426,36 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={styles(format, isLightbox)}>
+		<picture css={styles(format, isLightbox, isMainMedia)}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
-			{format.display === ArticleDisplay.Immersive && isMainMedia && (
-				<>
-					{/* High resolution (HDPI) portrait sources*/}
-					<source
-						media="(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)"
-						sizes={sizes}
-						srcSet={sources
-							.map(
-								(source) =>
-									`${source.hiResUrl} ${source.width}w`,
-							)
-							.join(',')}
-					/>
-					{/* Low resolution (MDPI) portrait sources*/}
-					<source
-						media="(orientation: portrait)"
-						sizes={sizes}
-						srcSet={sources
-							.map(
-								(source) =>
-									`${source.lowResUrl} ${source.width}w`,
-							)
-							.join(',')}
-					/>
-				</>
-			)}
+			{(format.display === ArticleDisplay.Immersive ||
+				format.design === ArticleDesign.Gallery) &&
+				isMainMedia && (
+					<>
+						{/* High resolution (HDPI) portrait sources*/}
+						<source
+							media="(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)"
+							sizes={sizes}
+							srcSet={sources
+								.map(
+									(source) =>
+										`${source.hiResUrl} ${source.width}w`,
+								)
+								.join(',')}
+						/>
+						{/* Low resolution (MDPI) portrait sources*/}
+						<source
+							media="(orientation: portrait)"
+							sizes={sizes}
+							srcSet={sources
+								.map(
+									(source) =>
+										`${source.lowResUrl} ${source.width}w`,
+								)
+								.join(',')}
+						/>
+					</>
+				)}
 			<Sources sources={sources} />
 			<img
 				ref={ref}

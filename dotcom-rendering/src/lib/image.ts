@@ -19,6 +19,16 @@ export const isSupported = (imageUrl: string): boolean => {
 	);
 };
 
+export const getImage = (images: Image[]): Image | undefined => {
+	const image = getMaster(images) ?? getLargest(images);
+
+	if (image?.url === undefined || !isSupported(image.url)) {
+		return undefined;
+	}
+
+	return image;
+};
+
 const getServiceFromUrl = (url: URL): string => {
 	const serviceName = url.hostname.split('.')[0] ?? '';
 	switch (serviceName) {

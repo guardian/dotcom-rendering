@@ -170,12 +170,11 @@ const headlineBackgroundLight: PaletteFunction = ({
 		case ArticleDisplay.Standard:
 			switch (design) {
 				case ArticleDesign.Interview:
+				case ArticleDesign.Gallery:
 					return sourcePalette.neutral[7];
 				default:
 					return 'transparent';
 			}
-		default:
-			return 'transparent';
 	}
 };
 
