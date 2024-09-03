@@ -173,7 +173,6 @@ export const BylineLink = ({
 	const soleContributor = getSoleContributor(tags, byline);
 	const hasSoleContributor = !!soleContributor;
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
-	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	const renderedTokens = getRenderedTokens(
 		bylineComponents,
@@ -182,24 +181,18 @@ export const BylineLink = ({
 		source,
 	);
 
-	/**
-	 * Where is this coming from?
-	 * Config value is set at high in the component tree within a React context in a `<ConfigProvider />`
-	 */
 	const { renderingTarget } = useConfig();
+	const isApps = renderingTarget === 'Apps';
+	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
 
 	return (
 		<>
 			{renderedTokens}
-			{renderingTarget === 'Apps' && !isHeadline && hasSoleContributor ? (
+			{isApps && !isLiveBlog && !isHeadline && hasSoleContributor ? (
 				<Hide from="leftCol">
 					<DottedLines
 						count={1}
-						color={
-							isLiveBlog
-								? 'rgba(255, 255, 255, 0.4)'
-								: themePalette('--article-meta-lines')
-						}
+						color={themePalette('--article-meta-lines')}
 					/>
 					<Island priority="critical">
 						<FollowWrapper

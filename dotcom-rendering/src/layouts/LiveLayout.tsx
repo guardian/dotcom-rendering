@@ -642,6 +642,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
+										pageId={article.pageId}
+										headline={article.headline}
 									></ArticleMetaApps>
 								)}
 								{isWeb && (
