@@ -283,7 +283,7 @@ export type FEFrontCard = {
 	};
 	display: {
 		isBoosted: boolean;
-		boostLevel: BoostLevel;
+		boostLevel?: BoostLevel;
 		showBoostedHeadline: boolean;
 		showQuotedHeadline: boolean;
 		imageHide: boolean;
