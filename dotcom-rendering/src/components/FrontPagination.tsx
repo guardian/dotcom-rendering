@@ -11,6 +11,7 @@ import {
 } from '@guardian/source/react-components';
 import { Fragment } from 'react';
 import { formatCount } from '../lib/formatCount';
+import { palette as schemedPalette } from '../palette';
 
 type Props = {
 	pageId: string;
@@ -89,7 +90,7 @@ const paginationArrowsCss = css`
 	padding: 2px;
 
 	svg {
-		color: ${palette.neutral[86]};
+		fill: ${schemedPalette('--tag-page-chevron')};
 	}
 `;
 

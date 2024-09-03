@@ -17,6 +17,7 @@ import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { FollowWrapper } from './FollowWrapper.importable';
 import { Island } from './Island';
+import { LiveblogNotifications } from './LiveblogNotifications.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -28,6 +29,8 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
+	pageId?: string;
+	headline?: string;
 };
 
 const metaGridContainer = css`
@@ -202,21 +205,28 @@ export const ArticleMetaApps = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
+	pageId,
+	headline,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
-
 	const avatarUrl = shouldShowAvatar(format)
 		? soleContributor?.bylineLargeImageUrl
 		: undefined;
+
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const isPicture = format.design === ArticleDesign.Picture;
 	const isComment = format.design === ArticleDesign.Comment;
 	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isAnalysis = format.design === ArticleDesign.Analysis;
 	const isLiveBlog = format.design === ArticleDesign.LiveBlog;
+
 	const shouldShowFollowButtons = (layoutOrDesignType: boolean) =>
 		layoutOrDesignType && !!byline && !isUndefined(soleContributor);
+
+	const shouldShowLiveblogNotifications =
+		isLiveBlog && !!pageId && !!headline;
+
 	const isImmersiveOrAnalysisWithMultipleAuthors =
 		(isAnalysis || isImmersive) && !!byline && isUndefined(soleContributor);
 
@@ -270,6 +280,14 @@ export const ArticleMetaApps = ({
 								/>
 							</Island>
 						)}
+					{shouldShowLiveblogNotifications && (
+						<Island priority="critical">
+							<LiveblogNotifications
+								displayName={headline}
+								id={pageId}
+							/>
+						</Island>
+					)}
 				</MetaGridByline>
 				{isCommentable && (
 					<MetaGridCommentCount
