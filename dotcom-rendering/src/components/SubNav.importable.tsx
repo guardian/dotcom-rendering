@@ -15,6 +15,7 @@ type Props = {
 	currentNavLink: string;
 	position: 'header' | 'footer';
 	currentPillarTitle?: string;
+	isInteractive?: boolean;
 };
 
 const wrapperCollapsedStyles = css`
@@ -122,6 +123,10 @@ const showMoreStyle = css`
 	}
 `;
 
+const interactiveBackground = css`
+	background-color: ${sourcePalette.neutral[100]};
+`;
+
 const frontSubNavBorder = (currentPillarTitle: string) => {
 	switch (currentPillarTitle.toLowerCase()) {
 		case 'news':
@@ -167,6 +172,7 @@ export const SubNav = ({
 	currentNavLink,
 	position = 'header',
 	currentPillarTitle,
+	isInteractive,
 }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -194,7 +200,11 @@ export const SubNav = ({
 	return (
 		<div
 			data-print-layout="hide"
-			css={[collapseWrapper && wrapperCollapsedStyles, spaceBetween]}
+			css={[
+				isInteractive && interactiveBackground,
+				collapseWrapper && wrapperCollapsedStyles,
+				spaceBetween,
+			]}
 			data-testid="sub-nav"
 			data-component="sub-nav"
 			style={{

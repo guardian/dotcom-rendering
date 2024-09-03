@@ -390,6 +390,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							position="footer"
+							isInteractive={true}
 						/>
 					</Island>
 				</Section>
