@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const Letter: DCRArticle = {
+export const Letter: Article = {
 	version: 3,
 	headline: 'Why is a woman’s work never done?',
 	standfirst:

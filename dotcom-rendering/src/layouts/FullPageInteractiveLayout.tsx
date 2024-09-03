@@ -6,6 +6,7 @@ import {
 	palette as sourcePalette,
 	until,
 } from '@guardian/source/foundations';
+import type { Article } from '../article';
 import {
 	adContainerStyles,
 	MobileStickyContainer,
@@ -29,12 +30,11 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
-import type { DCRArticle } from '../types/frontend';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	article: DCRArticle;
+	article: Article;
 	NAV: NavType;
 	format: ArticleFormat;
 }

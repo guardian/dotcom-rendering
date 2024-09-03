@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const Labs: DCRArticle = {
+export const Labs: Article = {
 	version: 3,
 	headline: 'Are you descended from royalty? Six things to consider',
 	standfirst: '',

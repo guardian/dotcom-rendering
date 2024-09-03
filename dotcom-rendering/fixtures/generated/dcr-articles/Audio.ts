@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const Audio: DCRArticle = {
+export const Audio: Article = {
 	version: 3,
 	headline:
 		'NSA collecting phone records of millions of Verizon customers daily',

@@ -1,4 +1,5 @@
 import { ArticleDesign, type ArticleFormat, isString } from '@guardian/libs';
+import type { Article } from '../article';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
@@ -11,11 +12,10 @@ import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
-import type { DCRArticle } from '../types/frontend';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
-	article: DCRArticle,
+	article: Article,
 ): {
 	prefetchScripts: string[];
 	html: string;

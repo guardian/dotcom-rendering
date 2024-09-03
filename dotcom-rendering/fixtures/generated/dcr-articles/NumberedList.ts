@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const NumberedList: DCRArticle = {
+export const NumberedList: Article = {
 	version: 3,
 	headline:
 		'Best smartphone 2019: iPhone, OnePlus, Samsung and Huawei compared and ranked',

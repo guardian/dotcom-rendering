@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const Analysis: DCRArticle = {
+export const Analysis: Article = {
 	version: 3,
 	headline: 'Irish general election: who won and what happens now?',
 	standfirst:

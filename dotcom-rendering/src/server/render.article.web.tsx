@@ -4,6 +4,7 @@ import {
 	isString,
 	Pillar,
 } from '@guardian/libs';
+import type { Article } from '../article';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
@@ -24,15 +25,15 @@ import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
-import type { DCRArticle, FEBlocksRequest } from '../types/frontend';
+import type { FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
-	article: DCRArticle;
+	article: Article;
 }
 
-const decideTitle = (article: DCRArticle): string => {
+const decideTitle = (article: Article): string => {
 	if (decideTheme(article.format) === Pillar.Opinion && article.byline) {
 		return `${article.headline} | ${article.byline} | The Guardian`;
 	}

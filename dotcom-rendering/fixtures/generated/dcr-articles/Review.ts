@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const Review: DCRArticle = {
+export const Review: Article = {
 	version: 3,
 	headline:
 		'Sex Education season two review – fast, funny and still not for the faint-hearted',

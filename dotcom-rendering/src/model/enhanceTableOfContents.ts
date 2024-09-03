@@ -1,9 +1,9 @@
 import { JSDOM } from 'jsdom';
+import type { TableOfContentsItem } from '../article';
 import type {
 	NumberedTitleBlockElement,
 	SubheadingBlockElement,
 } from '../types/content';
-import type { TableOfContentsItem } from '../types/frontend';
 import { slugify } from './enhance-H2s';
 
 const extractText = (

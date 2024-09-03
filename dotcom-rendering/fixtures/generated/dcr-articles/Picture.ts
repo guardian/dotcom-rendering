@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const Picture: DCRArticle = {
+export const Picture: Article = {
 	version: 3,
 	headline: 'Nicola Jennings on the No 10 sleaze scandal – cartoon',
 	standfirst: '',

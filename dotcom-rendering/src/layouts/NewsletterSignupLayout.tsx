@@ -19,6 +19,7 @@ import {
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
+import type { Article } from '../article';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -45,11 +46,10 @@ import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
-	article: DCRArticle;
+	article: Article;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -180,7 +180,7 @@ const regionalFocusDivStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const getMainMediaCaptions = (article: DCRArticle): (string | undefined)[] =>
+const getMainMediaCaptions = (article: Article): (string | undefined)[] =>
 	article.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? el.data.caption

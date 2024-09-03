@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const Comment: DCRArticle = {
+export const Comment: Article = {
 	version: 3,
 	headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
 	standfirst:

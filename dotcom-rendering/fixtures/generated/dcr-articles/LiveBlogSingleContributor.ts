@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const LiveBlogSingleContributor: DCRArticle = {
+export const LiveBlogSingleContributor: Article = {
 	version: 3,
 	headline:
 		'Rishi Sunak and Keir Starmer clash over homelessness and the UK economy at PMQs – as it happened',

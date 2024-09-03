@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const Feature: DCRArticle = {
+export const Feature: Article = {
 	version: 3,
 	headline: "'I've been a scoundrel all my life': quotes of the Oscars 2020",
 	standfirst:

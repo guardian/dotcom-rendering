@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const PhotoEssay: DCRArticle = {
+export const PhotoEssay: Article = {
 	version: 3,
 	headline: 'My year of roaming free in Cornwall',
 	standfirst:

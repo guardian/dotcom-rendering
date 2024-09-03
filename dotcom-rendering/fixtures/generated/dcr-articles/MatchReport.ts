@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const MatchReport: DCRArticle = {
+export const MatchReport: Article = {
 	version: 3,
 	headline:
 		'André Ayew sparks Swansea victory over Norwich to close gap at top',

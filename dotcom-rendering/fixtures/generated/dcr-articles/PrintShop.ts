@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/article';
 
-export const PrintShop: DCRArticle = {
+export const PrintShop: Article = {
 	version: 3,
 	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
 	standfirst:
