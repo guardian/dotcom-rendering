@@ -4,6 +4,7 @@ import { from } from '@guardian/source/foundations';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta.web';
 import { GalleryImage } from '../components/GalleryImage';
+import { GalleryMainMediaCaption } from '../components/GalleryMainMediaCaption';
 import { LabsHeaderFull } from '../components/LabsHeaderFull';
 import { MainMedia } from '../components/MainMedia';
 import { NavNarrow } from '../components/Nav/NavNarrow';
@@ -42,9 +43,15 @@ const headerStyles = css`
 	${from.tablet} {
 		&::after {
 			${grid.between('viewport-start', 'centre-column-start')}
-			grid-row: span 4;
+			grid-row: 5 / span 5;
 			content: '';
 			border-right: 1px solid ${palette('--article-border')};
+		}
+	}
+
+	${from.leftCol} {
+		&::after {
+			transform: translateX(10px);
 		}
 	}
 `;
@@ -92,6 +99,9 @@ export const GalleryLayout = ({
 					<Standfirst
 						format={format}
 						standfirst={article.standfirst}
+					/>
+					<GalleryMainMediaCaption
+						elements={article.mainMediaElements}
 					/>
 					<ArticleMeta
 						branding={

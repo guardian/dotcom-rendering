@@ -311,6 +311,10 @@ const GalleryBackground = () => (
 				${grid.between('centre-column-start', 'viewport-end')}
 				margin-left: -20px;
 			}
+
+			${from.leftCol} {
+				margin-left: -10px;
+			}
 		`}
 	/>
 );
