@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 /* eslint sort-keys: ["error", "asc", { minKeys: 12, natural: true }]
   --
-  the palette object is large and ordering helps knowing where  to insert new elements
+  the palette object is large and ordering helps knowing where to insert new elements
 */
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
