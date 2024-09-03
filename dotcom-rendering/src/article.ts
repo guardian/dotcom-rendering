@@ -13,8 +13,7 @@ import type { FEArticleType } from './types/frontend';
 import { type RenderingTarget } from './types/renderingTarget';
 
 /**
- * The `DCRArticle` type models the `FEArticleType` in addition to any enhancements DCR makes after
- * receiving the data from Frontend.
+ * The `Article` type enhances `FEArticleType` type which defines the model received from Frontend
  */
 export type Article = FEArticleType & {
 	imagesForLightbox: ImageForLightbox[];
