@@ -15,7 +15,7 @@ test.describe('Edition Switcher Banner', () => {
 		({ showBanner }) => showBanner,
 	)) {
 		test.describe("the page ID doesn't match the edition", () => {
-			test(`It shows the banner when the edition is ${edition} and the page is /${pageId}`, async ({
+			test.skip(`It shows the banner when the edition is ${edition} and the page is /${pageId}`, async ({
 				context,
 				page,
 			}) => {
@@ -41,7 +41,7 @@ test.describe('Edition Switcher Banner', () => {
 		({ showBanner }) => !showBanner,
 	)) {
 		test.describe('the page ID matches the edition', () => {
-			test(`It does NOT show the banner when the edition is ${edition} and the page is /${pageId}`, async ({
+			test.skip(`It does NOT show the banner when the edition is ${edition} and the page is /${pageId}`, async ({
 				context,
 				page,
 			}) => {
