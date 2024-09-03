@@ -1,9 +1,10 @@
+import type { BoostLevel } from '../types/content';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
@@ -17,6 +18,56 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
+type BoostProperties = {
+	headlineSize: SmallHeadlineSize;
+	headlineSizeOnMobile: SmallHeadlineSize;
+	headlineSizeOnTablet: SmallHeadlineSize;
+	imagePositionOnDesktop: ImagePositionType;
+	imagePositionOnMobile: ImagePositionType;
+};
+
+/**
+ * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ */
+const determineCardProperties = (
+	boostLevel: BoostLevel | undefined,
+): BoostProperties => {
+	switch (boostLevel) {
+		case 'boost':
+			return {
+				headlineSize: 'large',
+				headlineSizeOnMobile: 'small',
+				headlineSizeOnTablet: 'medium',
+				imagePositionOnDesktop: 'right',
+				imagePositionOnMobile: 'top',
+			};
+		case 'megaboost':
+			return {
+				headlineSize: 'huge',
+				headlineSizeOnMobile: 'medium',
+				headlineSizeOnTablet: 'medium',
+				imagePositionOnDesktop: 'bottom',
+				imagePositionOnMobile: 'top',
+			};
+		case 'gigaboost':
+			return {
+				headlineSize: 'ginormous',
+				headlineSizeOnMobile: 'large',
+				headlineSizeOnTablet: 'large',
+				imagePositionOnDesktop: 'bottom',
+				imagePositionOnMobile: 'top',
+			};
+		case 'default':
+		default:
+			return {
+				headlineSize: 'medium',
+				headlineSizeOnMobile: 'tiny',
+				headlineSizeOnTablet: 'small',
+				imagePositionOnDesktop: 'right',
+				imagePositionOnMobile: 'top',
+			};
+	}
+};
 export const OneCardLayout = ({
 	cards,
 	containerPalette,
@@ -31,20 +82,12 @@ export const OneCardLayout = ({
 	absoluteServerTimes: boolean;
 }) => {
 	if (!cards[0]) return null;
-
-	function getCardImageSize(boostLevel: string | undefined): ImageSizeType {
-		switch (boostLevel) {
-			case 'gigaboost':
-			case 'megaboost':
-				return 'jumbo';
-			case 'boosted':
-				return 'large';
-			case 'default':
-			default:
-				return 'medium';
-		}
-	}
-
+	const {
+		headlineSize,
+		headlineSizeOnMobile,
+		imagePositionOnDesktop,
+		imagePositionOnMobile,
+	} = determineCardProperties(cards[0].boostLevel);
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
@@ -54,22 +97,23 @@ export const OneCardLayout = ({
 					containerType="flexible/special"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
-					headlineSize="large"
-					headlineSizeOnMobile="medium"
-					imagePositionOnDesktop="right"
-					imagePositionOnMobile="top"
-					imageSize={getCardImageSize(cards[0].boostLevel)}
+					headlineSize={headlineSize}
+					headlineSizeOnMobile={headlineSizeOnMobile}
+					imagePositionOnDesktop={imagePositionOnDesktop}
+					imagePositionOnMobile={imagePositionOnMobile}
+					imageSize="jumbo"
 					trailText={cards[0].trailText}
 					supportingContent={cards[0].supportingContent}
 					supportingContentAlignment={
 						cards[0].supportingContent &&
-						cards[0].supportingContent.length > 3
+						cards[0].supportingContent.length > 2
 							? 'horizontal'
 							: 'vertical'
 					}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={cards[0].kickerText}
+					// isSplash={true}
 				/>
 			</LI>
 		</UL>
