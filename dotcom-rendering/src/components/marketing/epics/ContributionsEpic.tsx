@@ -13,6 +13,7 @@ import {
 	space,
 } from '@guardian/source/foundations';
 import { Ticker } from '@guardian/source-development-kitchen/react-components';
+import type { TickerSettings } from '@guardian/source-development-kitchen/react-components';
 import {
 	containsNonArticleCountPlaceholder,
 	epicPropsSchema,
@@ -25,7 +26,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
-import type { TickerStylingSettings } from '../banners/designableBanner/settings';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
 import type { ChoiceCardSelection } from '../lib/choiceCards';
 import type { ReactComponent } from '../lib/ReactComponent';
@@ -115,14 +115,14 @@ const imageStyles = css`
 	object-fit: cover;
 `;
 
-const defaultTickerStylingSettings: TickerStylingSettings = {
+const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
 	filledProgressColour: '#5056F5',
 	progressBarBackgroundColour: 'rgba(80, 86, 245, 0.35)',
 	headlineColour: '#000000',
 	totalColour: '#5056F5',
 	goalColour: '#000000',
-	text: '#000000', // Deprecated, still needs a value
-	goalMarker: '#000000', // Deprecated, still needs a value
+	//text: '#000000', // Deprecated, still needs a value
+	//goalMarker: '#000000', // Deprecated, still needs a value
 };
 
 const articleCountAboveContainerStyles = css`

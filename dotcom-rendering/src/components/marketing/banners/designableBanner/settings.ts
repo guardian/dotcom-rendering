@@ -3,6 +3,7 @@
  * This file was migrated from:
  * https://github.com/guardian/support-dotcom-components/blob/0a2439b701586a7a2cc60dce10b4d96cf7a828db/packages/modules/src/modules/banners/designableBanner/settings.ts
  */
+import type { TickerSettings } from '@guardian/source-development-kitchen/react-components';
 import type { Image } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import type { ReactNode } from 'react';
 import type { BannerId } from '../common/types';
@@ -32,16 +33,6 @@ export interface HighlightedTextSettings {
 	highlightColour?: string;
 }
 
-export interface TickerStylingSettings {
-	text: string; //deprecated
-	filledProgressColour: string;
-	progressBarBackgroundColour: string;
-	goalMarker: string; //deprecated
-	headlineColour: string; //new
-	totalColour: string; //new
-	goalColour: string; //new
-}
-
 export interface HeaderSettings {
 	textColour?: string;
 	headerImage?: Image;
@@ -59,6 +50,6 @@ export interface BannerTemplateSettings {
 	alternativeVisual?: ReactNode;
 	choiceCardSettings?: ChoiceCardSettings;
 	bannerId?: BannerId;
-	tickerStylingSettings?: TickerStylingSettings;
+	tickerStylingSettings?: TickerSettings['tickerStylingSettings'];
 	headerSettings?: HeaderSettings;
 }
