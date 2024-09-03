@@ -55,10 +55,21 @@ if (
 	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
 }
 
-export const reportError = (error: Error, feature?: string): void => {
+export const reportError = (
+	error: Error,
+	tags?:
+		| string
+		| {
+				[key: string]: string;
+		  },
+): void => {
 	Sentry.withScope(() => {
-		if (feature) {
-			Sentry.setTag('feature', feature);
+		if (typeof tags === 'object') {
+			for (const tag of Object.entries(tags)) {
+				Sentry.setTag(tag[0], tag[1]);
+			}
+		} else if (typeof tags === 'string') {
+			Sentry.setTag('feature', tags);
 		}
 		Sentry.captureException(error);
 	});
