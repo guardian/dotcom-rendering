@@ -22,6 +22,15 @@ const {
 const WHITE = neutral[100];
 const BLACK = neutral[7];
 
+const textBlock = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Audio:
+			return palette.neutral[86];
+		default:
+			return themePalette('--article-text');
+	}
+};
+
 const textHeadlineWhenMatch = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.MatchReport:
@@ -456,6 +465,7 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
+			block: textBlock(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),

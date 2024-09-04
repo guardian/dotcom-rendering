@@ -161,6 +161,7 @@ const sanitiserOptions: IOptions = {
 const styles = (format: ArticleFormat) => css`
 	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
+	color: ${decidePalette(format).text.block};
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17};
 	strong em,
 	strong u {
