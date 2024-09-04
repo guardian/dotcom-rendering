@@ -189,11 +189,7 @@ export const ContributionsEpicButtons = ({
 	const getChoiceCardCta = (cta: Cta): Cta => {
 		if (
 			showThreeTierChoiceCards &&
-			variantOfChoiceCard &&
-			[
-				'V1_THREE_TIER_CHOICE_CARDS',
-				'V2_THREE_TIER_CHOICE_CARDS',
-			].includes(variantOfChoiceCard) &&
+			variantOfChoiceCard === 'US__THREE_TIER_CHOICE_CARDS' &&
 			!isUndefined(threeTierChoiceCardSelectedAmount)
 		) {
 			if (threeTierChoiceCardSelectedAmount === 0) {
