@@ -3,7 +3,6 @@ import type {
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
@@ -32,19 +31,6 @@ export const OneCardLayout = ({
 }) => {
 	if (!cards[0]) return null;
 
-	function getCardImageSize(boostLevel: string | undefined): ImageSizeType {
-		switch (boostLevel) {
-			case 'gigaboost':
-			case 'megaboost':
-				return 'jumbo';
-			case 'boosted':
-				return 'large';
-			case 'default':
-			default:
-				return 'medium';
-		}
-	}
-
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
@@ -58,7 +44,7 @@ export const OneCardLayout = ({
 					headlineSizeOnMobile="medium"
 					imagePositionOnDesktop="right"
 					imagePositionOnMobile="top"
-					imageSize={getCardImageSize(cards[0].boostLevel)}
+					imageSize="jumbo"
 					trailText={cards[0].trailText}
 					supportingContent={cards[0].supportingContent}
 					supportingContentAlignment={
