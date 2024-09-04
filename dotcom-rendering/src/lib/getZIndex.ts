@@ -35,6 +35,9 @@ const indices = [
 	'expanded-veggie-menu-wrapper',
 	'expanded-veggie-menu',
 
+	//header wrapper needs to be in line with veggie menus to ensure it stands above various banners
+	'headerWrapper',
+
 	// Mobile sticky appears below banners
 	'mobileSticky',
 
@@ -70,8 +73,8 @@ const indices = [
 	// and the myAccount dropdown in the nav
 	'editionSwitcherBanner',
 
-	// Wrapper after nav stuff
-	'headerWrapper',
+	// Overlay for sticky tag link
+	'tagLinkOverlay',
 
 	// Article headline (should be above main media)
 	'articleHeadline',
