@@ -869,8 +869,8 @@ importers:
         specifier: ^18.2.11
         version: 18.3.1
       CSNX_SOURCE_DEVELOPMENT_KITCHEN:
-        specifier: npm:@guardian/source-development-kitchen@7.1.0
-        version: /@guardian/source-development-kitchen@7.1.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source@1.0.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
+        specifier: npm:@guardian/source-development-kitchen@9.0.0
+        version: /@guardian/source-development-kitchen@9.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source@1.0.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -4412,12 +4412,12 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@guardian/source-development-kitchen@7.1.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source@1.0.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
-    resolution: {integrity: sha512-rVJDH4HPEsU7UqXjchAcAWwuTdmSd3h7ISmRJMJ5p/hNohKGwB9GM6jHtbHYXOL7o2wjH7c6ZYL8Tn+/83huKw==}
+  /@guardian/source-development-kitchen@9.0.0(@emotion/react@11.11.1)(@guardian/libs@16.1.0)(@guardian/source@1.0.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.3.3):
+    resolution: {integrity: sha512-7384llH2Q8eyWBd48ITY6TTis5YhhaOeEW6y7ziPNwlRmI1wP99hlxidXv9FxReiPcdTkQ2U+c0l5k2qdiRg1g==}
     peerDependencies:
       '@emotion/react': ^11.11.3
       '@guardian/libs': ^18.0.0
-      '@guardian/source': ^7.0.0
+      '@guardian/source': ^8.0.0
       '@types/react': ^18.2.11
       react: ^18.2.0
       tslib: ^2.6.2
