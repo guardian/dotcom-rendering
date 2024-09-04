@@ -290,9 +290,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						format.theme !== ArticleSpecial.Labs && (
 							<Section
 								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
+								backgroundColour={sourcePalette.neutral[100]}
 								padSides={false}
 								element="aside"
 							>
@@ -392,6 +390,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							position="footer"
+							isInteractive={true}
 						/>
 					</Island>
 				</Section>
