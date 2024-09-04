@@ -46,11 +46,6 @@ const styles = css`
 	${from.desktop} {
 		&::after {
 			${grid.between('right-column-end', 'viewport-end')}
-			grid-row: span 1;
-		}
-
-		&::before {
-			grid-row: span 1;
 		}
 	}
 

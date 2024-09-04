@@ -3803,6 +3803,7 @@ const subMetaLabelTextLight: PaletteFunction = ({ theme, design }) => {
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
+				case ArticleDesign.Gallery:
 					return sourcePalette.neutral[60];
 				default:
 					return sourcePalette.neutral[46];
@@ -3854,6 +3855,8 @@ const subMetaBackgroundLight: PaletteFunction = ({
 				default:
 					return sourcePalette.neutral[7];
 			}
+		case ArticleDesign.Gallery:
+			return sourcePalette.neutral[7];
 		default:
 			switch (theme) {
 				case ArticleSpecial.SpecialReport:
@@ -3913,6 +3916,7 @@ const subMetaTextLight: PaletteFunction = ({ design, theme }) => {
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
 				case ArticleDesign.Audio:
+				case ArticleDesign.Gallery:
 					return sourcePalette.neutral[86];
 				case ArticleDesign.DeadBlog:
 				case ArticleDesign.LiveBlog:
@@ -4003,7 +4007,12 @@ const syndicationButtonTextLight: PaletteFunction = ({ design, theme }) => {
 					return sourcePalette.specialReportAlt[100];
 			}
 		default:
-			return sourcePalette.neutral[46];
+			switch (design) {
+				case ArticleDesign.Gallery:
+					return sourcePalette.neutral[86];
+				default:
+					return sourcePalette.neutral[46];
+			}
 	}
 };
 

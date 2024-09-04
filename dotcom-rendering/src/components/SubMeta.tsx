@@ -8,6 +8,7 @@ import {
 	until,
 } from '@guardian/source/foundations';
 import { LinkButton } from '@guardian/source/react-components';
+import { grid } from '../grid';
 import type { BaseLinkType } from '../model/extract-nav';
 import { palette } from '../palette';
 import { Island } from './Island';
@@ -19,6 +20,8 @@ const labelStyles = css`
 	color: ${palette('--sub-meta-label-text')};
 	margin-bottom: 8px;
 `;
+
+const labelId = 'sub-meta';
 
 const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
@@ -108,6 +111,47 @@ const linkStyles = css`
 	color: ${palette('--sub-meta-text')};
 `;
 
+const galleryStyles = css`
+	${grid.container}
+	grid-auto-flow: row dense;
+	background-color: ${palette('--article-inner-background')};
+	padding-bottom: ${space[2]}px;
+
+	${from.tablet} {
+		&::before {
+			${grid.between('viewport-start', 'centre-column-start')}
+			grid-row: span 3;
+			content: '';
+			background-color: ${palette('--article-background')};
+			border-right: 1px solid ${palette('--article-border')};
+		}
+
+		&::after {
+			${grid.between('centre-column-end', 'viewport-end')}
+			grid-row: span 3;
+			content: '';
+			background-color: ${palette('--article-background')};
+			border-left: 1px solid ${palette('--article-border')};
+		}
+	}
+
+	${from.desktop} {
+		&::after {
+			${grid.between('right-column-end', 'viewport-end')}
+		}
+	}
+
+	${from.leftCol} {
+		&::before {
+			${grid.between('viewport-start', 'left-column-start')}
+		}
+	}
+`;
+
+const galleryContentStyles = css`
+	${grid.column.centre}
+`;
+
 type Props = {
 	format: ArticleFormat;
 	subMetaSectionLinks: BaseLinkType[];
@@ -143,19 +187,45 @@ export const SubMeta = ({
 		};
 	};
 	const { links, hasLinks } = createLinks();
+
+	if (!hasLinks && !showBottomSocialButtons) {
+		return null;
+	}
+
 	return (
-		<div
+		<nav
 			data-print-layout="hide"
-			css={
+			aria-labelledby={labelId}
+			css={[
 				format.design === ArticleDesign.Interactive
-					? [bottomPadding, setMetaWidth]
-					: bottomPadding
-			}
+					? setMetaWidth
+					: undefined,
+				format.design === ArticleDesign.Gallery
+					? galleryStyles
+					: bottomPadding,
+			]}
 		>
 			{hasLinks && (
 				<>
-					<span css={labelStyles}>Explore more on these topics</span>
-					<div css={listWrapper}>
+					<h2
+						id={labelId}
+						css={[
+							labelStyles,
+							format.design === ArticleDesign.Gallery
+								? galleryContentStyles
+								: undefined,
+						]}
+					>
+						Explore more on these topics
+					</h2>
+					<div
+						css={[
+							listWrapper,
+							format.design === ArticleDesign.Gallery
+								? galleryContentStyles
+								: undefined,
+						]}
+					>
 						<ul css={listStyleNone}>
 							{links.map((link) => (
 								<li css={listItemStyles} key={link.url}>
@@ -170,10 +240,15 @@ export const SubMeta = ({
 			)}
 			{showBottomSocialButtons && (
 				<div
-					css={css`
-						display: flex;
-						justify-content: space-between;
-					`}
+					css={[
+						css`
+							display: flex;
+							justify-content: space-between;
+						`,
+						format.design === ArticleDesign.Gallery
+							? galleryContentStyles
+							: undefined,
+					]}
 				>
 					<Island priority="feature" defer={{ until: 'visible' }}>
 						<ShareButton
@@ -213,6 +288,6 @@ export const SubMeta = ({
 					</div>
 				</div>
 			)}
-		</div>
+		</nav>
 	);
 };
