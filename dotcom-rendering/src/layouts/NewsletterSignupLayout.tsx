@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { ArticleDisplay } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -18,17 +18,14 @@ import {
 	SvgEye,
 	SvgGuardianLogo,
 } from '@guardian/source/react-components';
-import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
 import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
-import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/NewsletterBadge';
 import { NewsletterDetail } from '../components/NewsletterDetail';
 import { NewsletterFrequency } from '../components/NewsletterFrequency';
@@ -38,13 +35,11 @@ import { Section } from '../components/Section';
 import { SecureSignup } from '../components/SecureSignup.importable';
 import { ShareButton } from '../components/ShareButton.importable';
 import { Standfirst } from '../components/Standfirst';
-import { SubNav } from '../components/SubNav.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
-import { palette as themePalette } from '../palette';
 import type { DCRArticle } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -212,9 +207,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	 */
 	const renderAds = canRenderAds(article);
 
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-
 	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
@@ -239,125 +231,20 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					</Stuck>
 				)}
 
-				{inUpdatedHeaderABTest ? (
-					<Masthead
-						nav={NAV}
-						editionId={article.editionId}
-						idUrl={article.config.idUrl}
-						mmaUrl={article.config.mmaUrl}
-						discussionApiUrl={article.config.discussionApiUrl}
-						idApiUrl={article.config.idApiUrl}
-						contributionsServiceUrl={contributionsServiceUrl}
-						showSubNav={true}
-						isImmersive={
-							format.display === ArticleDisplay.Immersive
-						}
-						hasPageSkin={false}
-						hasPageSkinContentSelfConstrain={false}
-						pageId={article.pageId}
-					/>
-				) : (
-					<>
-						<Section
-							fullWidth={true}
-							shouldCenter={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="header"
-						>
-							<Header
-								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
-								}
-							/>
-						</Section>
-
-						<Section
-							fullWidth={true}
-							borderColour={sourcePalette.brand[600]}
-							showTopBorder={false}
-							padSides={false}
-							backgroundColour={sourcePalette.brand[400]}
-							element="nav"
-						>
-							<Nav
-								nav={NAV}
-								isImmersive={
-									format.display === ArticleDisplay.Immersive
-								}
-								displayRoundel={
-									format.display ===
-										ArticleDisplay.Immersive ||
-									format.theme === ArticleSpecial.Labs
-								}
-								selectedPillar={NAV.selectedPillar}
-								subscribeUrl={
-									article.nav.readerRevenueLinks.header
-										.subscribe
-								}
-								editionId={article.editionId}
-							/>
-						</Section>
-
-						{!!NAV.subNavSections && (
-							<>
-								<Section
-									fullWidth={true}
-									backgroundColour={themePalette(
-										'--article-background',
-									)}
-									padSides={false}
-									showTopBorder={false}
-									element="aside"
-								>
-									<Island
-										priority="enhancement"
-										defer={{ until: 'idle' }}
-									>
-										<SubNav
-											subNavSections={NAV.subNavSections}
-											currentNavLink={NAV.currentNavLink}
-											position="header"
-										/>
-									</Island>
-								</Section>
-								<Section
-									fullWidth={true}
-									backgroundColour={themePalette(
-										'--article-background',
-									)}
-									padSides={false}
-									showTopBorder={false}
-								>
-									<StraightLines
-										count={4}
-										cssOverrides={css`
-											display: block;
-										`}
-										color={themePalette('--straight-lines')}
-									/>
-								</Section>
-							</>
-						)}
-					</>
-				)}
+				<Masthead
+					nav={NAV}
+					editionId={article.editionId}
+					idUrl={article.config.idUrl}
+					mmaUrl={article.config.mmaUrl}
+					discussionApiUrl={article.config.discussionApiUrl}
+					idApiUrl={article.config.idApiUrl}
+					contributionsServiceUrl={contributionsServiceUrl}
+					showSubNav={true}
+					isImmersive={format.display === ArticleDisplay.Immersive}
+					hasPageSkin={false}
+					hasPageSkinContentSelfConstrain={false}
+					pageId={article.pageId}
+				/>
 			</div>
 
 			{renderAds && !!article.config.switches.surveys && (
