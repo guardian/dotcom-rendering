@@ -4618,8 +4618,20 @@ const seriesTitleTextLight: PaletteFunction = ({ theme, display, design }) => {
 					return sourcePalette.neutral[7];
 				case ArticleDesign.Picture:
 				case ArticleDesign.Video:
-				case ArticleDesign.Audio:
 					return sourcePalette.neutral[86];
+				case ArticleDesign.Audio:
+					switch (theme) {
+						case Pillar.Opinion:
+						case Pillar.News:
+						case Pillar.Sport:
+						case Pillar.Culture:
+						case Pillar.Lifestyle:
+							return pillarPalette(theme, 500);
+						case ArticleSpecial.Labs:
+							return sourcePalette.labs[400];
+						case ArticleSpecial.SpecialReportAlt:
+							return sourcePalette.specialReportAlt[200];
+					}
 				default:
 					switch (theme) {
 						case Pillar.Opinion:
