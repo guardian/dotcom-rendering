@@ -68,7 +68,7 @@ test.describe('Signed in readers', () => {
 	});
 
 	/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
-	test.skip('should have the correct urls for the header links', async ({
+	test('should have the correct urls for the header links', async ({
 		context,
 		page,
 	}) => {
