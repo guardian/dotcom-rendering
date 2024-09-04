@@ -15,13 +15,16 @@ import { paletteDeclarations } from '../palette';
 export const rootStyles = (
 	format: ArticleFormat,
 	darkModeAvailable: boolean,
+	isPreview?: boolean,
 ): SerializedStyles => css`
 	:root {
 		/* Light palette is default on all platforms */
 		${paletteDeclarations(format, 'light')}
 		body {
 			color: ${sourcePalette.neutral[7]};
-			background: transparent;
+			background: ${isPreview
+				? sourcePalette.neutral[100]
+				: 'transparent'};
 		}
 		/* Indicate whether UI can adapt https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme */
 		color-scheme: ${darkModeAvailable ? 'light dark' : 'light'};

@@ -54,7 +54,13 @@ export const FrontPage = ({ front, NAV }: Props) => {
 
 	return (
 		<StrictMode>
-			<Global styles={rootStyles(format, darkModeAvailable)} />
+			<Global
+				styles={rootStyles(
+					format,
+					darkModeAvailable,
+					front.config.isPreview,
+				)}
+			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
 			<Island priority="feature" defer={{ until: 'idle' }}>
