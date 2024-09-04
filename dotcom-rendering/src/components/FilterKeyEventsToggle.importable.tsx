@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
-import { from, palette, remSpace, until } from '@guardian/source/foundations';
+import { from, remSpace, until } from '@guardian/source/foundations';
 import { ToggleSwitch } from '@guardian/source-development-kitchen/react-components';
 import { useState } from 'react';
+import { palette as schemedPalette } from '../palette';
 
 const cssOverrides = css`
 	display: inline-flex;
@@ -27,7 +28,8 @@ const toggleWrapperStyles = css`
 		padding-top: ${remSpace[3]};
 	}
 	${from.desktop} {
-		border-top: 1px solid ${palette.neutral[86]};
+		border-top: 1px solid
+			${schemedPalette('--filter-key-events-toggle-border-top')};
 	}
 `;
 
