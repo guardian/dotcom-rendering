@@ -13,13 +13,7 @@ type Props = {
 
 const styles = css`
 	background-color: ${palette('--labs-header-background')};
-	${grid.column.all}
-	display: grid;
-	grid-template-columns: subgrid;
-
-	@supports not (grid-template-columns: subgrid) {
-		${grid.container}
-	}
+	${grid.subgrid}
 `;
 
 const wrapperStyles = css`

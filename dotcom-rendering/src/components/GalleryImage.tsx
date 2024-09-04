@@ -16,15 +16,9 @@ type Props = {
 };
 
 const styles = css`
-	${grid.column.all}
-	display: grid;
-	grid-template-columns: subgrid;
+	${grid.subgrid}
 	grid-auto-flow: row dense;
 	background-color: ${palette('--article-inner-background')};
-
-	@supports not (grid-template-columns: subgrid) {
-		${grid.container}
-	}
 
 	${until.tablet} {
 		border-top: 1px solid ${palette('--article-border')};

@@ -98,6 +98,16 @@ const span = (start: Line | number, columns: number): string => `
     grid-column: ${start} / span ${columns};
 `;
 
+const subgrid = `
+	${between('viewport-start', 'viewport-end')}
+	display: grid;
+	grid-template-columns: subgrid;
+
+	@supports not (grid-template-columns: subgrid) {
+		${container}
+	}
+`;
+
 /**
  * An API implementing the Guardian Grid using CSS grid. For more information
  * on the Guardian Grid see https://theguardian.design/2a1e5182b/p/41be19-grids
@@ -148,6 +158,24 @@ const grid = {
 	},
 	between,
 	span,
+	/**
+	 * Place an element across the full viewport width in the grid container,
+	 * and also allow its children to be placed on the grid.
+	 *
+	 * Useful when you have a wrapping element but still want to place its
+	 * children on the grid. Due to the limited browser support for "subgrid"
+	 * this is currently only useful when the wrapping element is intended to
+	 * take up the full viewport width.
+	 *
+	 * @example
+	 * const Component = () =>
+	 *   <main css={css`${grid.container}`}>
+	 *     <header css={css`${grid.subgrid}`}>
+	 *       <h1 css={css`${grid.column.centre}`}>Headline</h1>
+	 *     </header>
+	 *   </main>
+	 */
+	subgrid,
 	/**
 	 * The gap between grid columns from the `mobileLandscape` breakpoint up.
 	 */
