@@ -16,7 +16,7 @@ const sanitiserOptions: IOptions = {
 	allowedAttributes: false, // Leave attributes from CAPI alone
 };
 
-const renderTextElement = (node: Node): ReactNode => {
+const renderTextElement = (node: Node, key: number): ReactNode => {
 	const text = node.textContent?.trim() ?? '';
 	const children = Array.from(node.childNodes).map(renderTextElement);
 
@@ -29,12 +29,13 @@ const renderTextElement = (node: Node): ReactNode => {
 						${headlineMedium17}
 						padding: ${space[1]}px 0 ${space[3]}px;
 					`}
+					key={key}
 				>
 					{children}
 				</strong>
 			);
 		case 'EM':
-			return text === '' ? null : <em>{children}</em>;
+			return text === '' ? null : <em key={key}>{children}</em>;
 		case 'A': {
 			const attrs = getAttrs(node);
 
@@ -59,6 +60,7 @@ const renderTextElement = (node: Node): ReactNode => {
 					data-component={
 						attrs?.getNamedItem('data-component')?.value
 					}
+					key={key}
 				>
 					{children}
 				</a>
