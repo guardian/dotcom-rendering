@@ -5,9 +5,7 @@ import { expectToExist } from '../lib/locators';
 
 test.describe('Commercial E2E tests', () => {
 	/* TODO - @guardian/fairground-web-devs fix this when new Masthead is launched to 100% */
-	test.skip(`It should load the expected number of ad slots`, async ({
-		page,
-	}) => {
+	test(`It should load the expected number of ad slots`, async ({ page }) => {
 		await loadPage(
 			page,
 			`/Article/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,

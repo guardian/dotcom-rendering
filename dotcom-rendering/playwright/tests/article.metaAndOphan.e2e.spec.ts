@@ -50,7 +50,6 @@ test.describe('The web document renders with the correct meta and analytics elem
 		await expectToExist(page, `head link[rel="canonical"]`);
 	});
 
-	/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
 	test('Subnav links exists with correct values', async ({ page }) => {
 		await loadPage(
 			page,

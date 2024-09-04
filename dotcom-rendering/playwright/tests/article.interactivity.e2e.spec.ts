@@ -14,7 +14,6 @@ const articleUrl =
 
 test.describe('Interactivity', () => {
 	test.describe('Verify elements have been hydrated', () => {
-		/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
 		test('should open the edition dropdown menu when clicked and hide when expected', async ({
 			context,
 			page,
@@ -114,7 +113,6 @@ test.describe('Interactivity', () => {
 			);
 		});
 
-		/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
 		test('should render the reader revenue links in the header', async ({
 			context,
 			page,
