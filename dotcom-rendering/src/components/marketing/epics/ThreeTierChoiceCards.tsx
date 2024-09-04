@@ -21,8 +21,6 @@ import type { Dispatch, SetStateAction } from 'react';
 import {
 	ChoiceCardTestData_REGULAR,
 	ChoiceCardTestData_US,
-	ChoiceCardTestData_V1,
-	ChoiceCardTestData_V2,
 } from './ThreeTierChoiceCardData';
 import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';

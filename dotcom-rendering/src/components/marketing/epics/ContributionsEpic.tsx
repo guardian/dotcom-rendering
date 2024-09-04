@@ -15,7 +15,6 @@ import {
 import {
 	containsNonArticleCountPlaceholder,
 	epicPropsSchema,
-	getLocalCurrencySymbol,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
 import type {
@@ -39,7 +38,6 @@ import type { OphanTracking } from '../shared/ArticleCountOptOutPopup';
 import { withParsedProps } from '../shared/ModuleWrapper';
 import { BylineWithHeadshot } from './BylineWithHeadshot';
 import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
-import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
@@ -330,8 +328,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			});
 		}
 	}, [showChoiceCards, choiceCardAmounts]);
-
-	const currencySymbol = getLocalCurrencySymbol(countryCode);
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
