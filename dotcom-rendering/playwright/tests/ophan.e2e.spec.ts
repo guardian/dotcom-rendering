@@ -75,7 +75,7 @@ test.describe('Ophan requests', () => {
 		await ophanExperienceRequestPromise;
 	});
 
-	test.skip('should make an IMPRESSION request on a front', async ({
+	test('should make an IMPRESSION request on a front', async ({
 		context,
 		page,
 	}) => {
@@ -98,7 +98,7 @@ test.describe('Ophan requests', () => {
 		await ophanImpressionRequestPromise;
 	});
 
-	test.skip('should make an ADDITIONAL experiences request on a front', async ({
+	test('should make an ADDITIONAL experiences request on a front', async ({
 		context,
 		page,
 	}) => {
