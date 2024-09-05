@@ -121,8 +121,6 @@ const defaultTickerStylingSettings: TickerSettings['tickerStylingSettings'] = {
 	headlineColour: '#000000',
 	totalColour: '#5056F5',
 	goalColour: '#000000',
-	//text: '#000000', // Deprecated, still needs a value
-	//goalMarker: '#000000', // Deprecated, still needs a value
 };
 
 const articleCountAboveContainerStyles = css`
