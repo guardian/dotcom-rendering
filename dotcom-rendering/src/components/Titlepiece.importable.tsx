@@ -8,25 +8,25 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source/foundations';
-import type { EditionId } from '../../../lib/edition';
-import { nestedOphanComponents } from '../../../lib/ophan-helpers';
-import { useEditionSwitcherBanner } from '../../../lib/useUserPreferredEdition';
-import type { NavType } from '../../../model/extract-nav';
-import { palette as themePalette } from '../../../palette';
+import type { EditionId } from '../lib/edition';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { useEditionSwitcherBanner } from '../lib/useUserPreferredEdition';
+import type { NavType } from '../model/extract-nav';
+import { palette as themePalette } from '../palette';
 import {
 	expandedMenuRootId,
 	navInputCheckboxId,
 	pageMargin,
 	smallMobilePageMargin,
 	veggieBurgerId,
-} from './constants';
-import { EditionDropdown } from './EditionDropdown';
-import { ExpandedNav } from './ExpandedNav/ExpandedNav';
-import { Grid } from './Grid';
-import { Logo } from './Logo';
-import { Pillars, verticalDivider } from './Pillars';
-import { SubNav } from './SubNav';
-import { VeggieBurger } from './VeggieBurger';
+} from './Masthead/Titlepiece/constants';
+import { EditionDropdown } from './Masthead/Titlepiece/EditionDropdown';
+import { ExpandedNav } from './Masthead/Titlepiece/ExpandedNav/ExpandedNav';
+import { Grid } from './Masthead/Titlepiece/Grid';
+import { Logo } from './Masthead/Titlepiece/Logo';
+import { Pillars, verticalDivider } from './Masthead/Titlepiece/Pillars';
+import { SubNav } from './Masthead/Titlepiece/SubNav';
+import { VeggieBurger } from './Masthead/Titlepiece/VeggieBurger';
 
 interface Props {
 	nav: NavType;
