@@ -104,8 +104,6 @@ const roleCss = {
 	// This is a special use case where we want RichLinks to appear wider when in the left col
 	richLink: css`
 		margin-bottom: ${space[1]}px;
-		float: left;
-		clear: left;
 		width: 8.75rem;
 		margin-right: 20px;
 
@@ -122,11 +120,15 @@ const roleCss = {
 				display: none;
 			}
 		}
-
+		${until.leftCol} {
+			display: flex;
+		}
 		${from.tablet} {
 			width: 140px;
 		}
 		${from.leftCol} {
+			float: left;
+			clear: left;
 			position: relative;
 			margin-left: -160px;
 			width: 140px;
