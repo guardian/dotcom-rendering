@@ -57,19 +57,17 @@ if (
 
 export const reportError = (
 	error: Error,
-	tags?:
-		| string
-		| {
-				[key: string]: string;
-		  },
+	feature: string,
+	tags?: {
+		[key: string]: string;
+	},
 ): void => {
 	Sentry.withScope(() => {
-		if (typeof tags === 'object') {
+		Sentry.setTag('feature', feature);
+		if (tags) {
 			for (const [key, value] of Object.entries(tags)) {
-                  Sentry.setTag(key, value);
+				Sentry.setTag(key, value);
 			}
-		} else if (typeof tags === 'string') {
-			Sentry.setTag('feature', tags);
 		}
 		Sentry.captureException(error);
 	});
