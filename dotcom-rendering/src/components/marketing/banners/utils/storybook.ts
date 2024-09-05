@@ -139,6 +139,9 @@ export const design: ConfigurableDesign = {
 			filledProgress: stringToHexColour('052962'),
 			progressBarBackground: stringToHexColour('cccccc'),
 			goalMarker: stringToHexColour('000000'),
+			headlineColour: stringToHexColour('000000'),
+			totalColour: stringToHexColour('000000'),
+			goalColour: stringToHexColour('000000'),
 		},
 	},
 };
