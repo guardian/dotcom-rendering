@@ -99,12 +99,12 @@ const wrapperStyle = ({
 	format,
 	role,
 	loaded,
-	url,
+	isDatawrapperGraphic,
 }: {
 	format: ArticleFormat;
 	role: RoleType;
 	loaded: boolean;
-	url?: string;
+	isDatawrapperGraphic: boolean;
 }) => css`
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17}
 	background-color: ${themePalette('--interactive-block-background')};
@@ -112,9 +112,7 @@ const wrapperStyle = ({
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	${url?.match(
-		/^https?:\/\/interactive\.guim\.co\.uk\/datawrapper(-test)?\/embed/,
-	)
+	${isDatawrapperGraphic
 		? `
 	border-top: 1px solid #dcdcdc;
 	padding-top: 8px;
@@ -305,6 +303,13 @@ export const InteractiveBlockComponent = ({
 		}
 	}, [loaded]);
 
+	const isDatawrapperGraphic =
+		url == undefined
+			? false
+			: /^https?:\/\/interactive\.guim\.co\.uk\/datawrapper(-test)?\/embed/.test(
+					url,
+			  );
+
 	return (
 		<>
 			<figure
@@ -313,8 +318,13 @@ export const InteractiveBlockComponent = ({
 				css={[
 					isMainMedia
 						? mainMediaFigureStyles
-						: defaultRoleStyles(role, format),
-					wrapperStyle({ format, role, loaded, url }),
+						: defaultRoleStyles(role, format, isDatawrapperGraphic),
+					wrapperStyle({
+						format,
+						role,
+						loaded,
+						isDatawrapperGraphic,
+					}),
 				]}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
