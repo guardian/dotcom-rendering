@@ -6183,6 +6183,10 @@ const paletteColours = {
 		light: explainerAtomBackgroundLight,
 		dark: explainerAtomBackgroundDark,
 	},
+	'--filter-key-events-toggle-border-top': {
+		light: () => sourcePalette.neutral[86],
+		dark: () => sourcePalette.neutral[20],
+	},
 	'--follow-icon-background': {
 		light: followIconBackgroundLight,
 		dark: followIconBackgroundDark,

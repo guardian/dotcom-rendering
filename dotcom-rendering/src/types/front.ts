@@ -3,7 +3,7 @@ import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { Branding, CollectionBranding, EditionBranding } from './branding';
 import type { ServerSideTests, Switches } from './config';
-import type { Image, StarRating } from './content';
+import type { BoostLevel, Image, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FEFormat, FENavType } from './frontend';
 import type { MainMedia } from './mainMedia';
@@ -283,6 +283,7 @@ export type FEFrontCard = {
 	};
 	display: {
 		isBoosted: boolean;
+		boostLevel?: BoostLevel;
 		showBoostedHeadline: boolean;
 		showQuotedHeadline: boolean;
 		imageHide: boolean;
@@ -315,6 +316,7 @@ export type DCRFrontCard = {
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
 	isBoosted?: boolean;
+	boostLevel?: BoostLevel;
 	isCrossword?: boolean;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;

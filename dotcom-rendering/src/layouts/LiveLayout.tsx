@@ -700,7 +700,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								{/* Lines */}
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--straight-lines',
+											)}
+										/>
 									</div>
 								</Hide>
 								{/* Meta */}
