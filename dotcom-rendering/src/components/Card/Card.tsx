@@ -260,7 +260,6 @@ export const Card = ({
 	const headlinePosition = decideHeadlinePosition(imageSize, containerType);
 
 	const showQuotes = !!showQuotedHeadline;
-	const isFlexibleContainer = containerType === 'flexible/special';
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
