@@ -6,6 +6,8 @@ import type { ImagePositionType } from './ImageWrapper';
 
 const padding = 20;
 
+export type GapSize = 'none' | 'small' | 'medium' | 'large';
+
 type Props = {
 	children: React.ReactNode;
 	cardBackgroundColour: string;
@@ -14,9 +16,13 @@ type Props = {
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 	containerType?: DCRContainerType;
-	isOnwardContent?: boolean;
-	hasBackgroundColour?: boolean;
+	gapSize?: GapSize;
 };
+
+const containerStyles = css`
+	display: flex;
+	flex-basis: 100%;
+`;
 
 const decideDirection = (imagePosition: ImagePositionType) => {
 	switch (imagePosition) {
@@ -92,16 +98,17 @@ const decidePosition = (
 	`;
 };
 
-const gapStyles = (
-	isOnwardContent?: boolean,
-	hasBackgroundColour?: boolean,
-) => {
-	if (isOnwardContent) {
-		return 0;
-	} else if (hasBackgroundColour) {
-		return `${space[1]}px`;
-	} else {
-		return `${space[2]}px`;
+/** Detemines the gap size between components in card layout */
+const decideGap = (gapSize: GapSize) => {
+	switch (gapSize) {
+		case 'none':
+			return `0`;
+		case 'small':
+			return `${space[1]}px`;
+		case 'medium':
+			return `${space[2]}px`;
+		case 'large':
+			return `${space[5]}px`;
 	}
 };
 
@@ -113,15 +120,11 @@ export const CardLayout = ({
 	minWidthInPixels,
 	imageType,
 	containerType,
-	isOnwardContent,
-	hasBackgroundColour,
+	gapSize = 'medium',
 }: Props) => (
 	<div
 		css={[
-			css`
-				display: flex;
-				flex-basis: 100%;
-			`,
+			containerStyles,
 			containerType === 'fixed/video'
 				? videoWidth
 				: minWidth(minWidthInPixels),
@@ -133,7 +136,7 @@ export const CardLayout = ({
 		]}
 		style={{
 			backgroundColor: cardBackgroundColour,
-			gap: gapStyles(isOnwardContent, hasBackgroundColour),
+			gap: decideGap(gapSize),
 		}}
 	>
 		{children}

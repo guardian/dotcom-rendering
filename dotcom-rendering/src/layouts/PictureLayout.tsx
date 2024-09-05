@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	isUndefined,
-} from '@guardian/libs';
+import { ArticleDesign, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -29,14 +24,12 @@ import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -52,7 +45,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const PictureGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -285,15 +278,10 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = isWeb && canRenderAds(article);
 
-	const showSubNavTopBorder = false;
-
 	const avatarUrl = getSoleContributor(article.tags, article.byline)
 		?.bylineLargeImageUrl;
 
 	const displayAvatarUrl = avatarUrl ? true : false;
-
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
 
 	const shouldShowTagLink =
 		isWeb &&
@@ -325,129 +313,20 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 							</Section>
 						</Stuck>
 					)}
-					{inUpdatedHeaderABTest ? (
-						<Masthead
-							nav={props.NAV}
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							idApiUrl={article.config.idApiUrl}
-							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={true}
-							isImmersive={false}
-							hasPageSkin={false}
-							hasPageSkinContentSelfConstrain={false}
-							pageId={article.pageId}
-						/>
-					) : (
-						<SendToBack>
-							<Section
-								fullWidth={true}
-								shouldCenter={false}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="header"
-							>
-								<Header
-									editionId={article.editionId}
-									idUrl={article.config.idUrl}
-									mmaUrl={article.config.mmaUrl}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									urls={article.nav.readerRevenueLinks.header}
-									remoteHeader={
-										!!article.config.switches.remoteHeader
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									idApiUrl={article.config.idApiUrl}
-									headerTopBarSearchCapiSwitch={
-										!!article.config.switches
-											.headerTopBarSearchCapi
-									}
-								/>
-							</Section>
-							<Section
-								fullWidth={true}
-								borderColour={sourcePalette.brand[600]}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="nav"
-								format={format}
-							>
-								<Nav
-									nav={props.NAV}
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={props.NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-								/>
-							</Section>
-
-							{props.NAV.subNavSections && (
-								<Section
-									fullWidth={true}
-									backgroundColour={themePalette(
-										'--article-background',
-									)}
-									padSides={false}
-									element="aside"
-									format={format}
-									showTopBorder={showSubNavTopBorder}
-								>
-									<Island
-										priority="enhancement"
-										defer={{ until: 'idle' }}
-									>
-										<SubNav
-											subNavSections={
-												props.NAV.subNavSections
-											}
-											currentNavLink={
-												props.NAV.currentNavLink
-											}
-											position="header"
-										/>
-									</Island>
-								</Section>
-							)}
-
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								padSides={false}
-								showTopBorder={false}
-								borderColour={themePalette('--article-border')}
-							>
-								<StraightLines
-									count={4}
-									color={themePalette('--straight-lines')}
-									cssOverrides={css`
-										display: block;
-									`}
-								/>
-							</Section>
-						</SendToBack>
-					)}
+					<Masthead
+						nav={props.NAV}
+						editionId={article.editionId}
+						idUrl={article.config.idUrl}
+						mmaUrl={article.config.mmaUrl}
+						discussionApiUrl={article.config.discussionApiUrl}
+						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={true}
+						isImmersive={false}
+						hasPageSkin={false}
+						hasPageSkinContentSelfConstrain={false}
+						pageId={article.pageId}
+					/>
 				</div>
 			)}
 

@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	isUndefined,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -35,7 +30,6 @@ import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -44,7 +38,6 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
-import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -413,9 +406,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = isWeb && canRenderAds(article);
 
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-
 	const shouldShowTagLink =
 		isWeb &&
 		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
@@ -444,137 +434,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							</Section>
 						</Stuck>
 					)}
-					{inUpdatedHeaderABTest ? (
-						<Masthead
-							nav={props.NAV}
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							idApiUrl={article.config.idApiUrl}
-							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={!isLabs}
-							hasPageSkinContentSelfConstrain={true}
-							pageId={article.pageId}
-						/>
-					) : (
-						<>
-							{!isLabs && (
-								<Section
-									fullWidth={true}
-									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
-									shouldCenter={false}
-									backgroundColour={sourcePalette.brand[400]}
-									element="header"
-								>
-									<Header
-										editionId={article.editionId}
-										idUrl={article.config.idUrl}
-										mmaUrl={article.config.mmaUrl}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										urls={
-											article.nav.readerRevenueLinks
-												.header
-										}
-										remoteHeader={
-											!!article.config.switches
-												.remoteHeader
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										idApiUrl={article.config.idApiUrl}
-										headerTopBarSearchCapiSwitch={
-											!!article.config.switches
-												.headerTopBarSearchCapi
-										}
-									/>
-								</Section>
-							)}
-							<Section
-								fullWidth={true}
-								borderColour={sourcePalette.brand[600]}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="nav"
-							>
-								<Nav
-									nav={props.NAV}
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={props.NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-								/>
-							</Section>
-							{props.NAV.subNavSections && !isLabs && (
-								<>
-									<Section
-										fullWidth={true}
-										backgroundColour={themePalette(
-											'--article-background',
-										)}
-										borderColour={themePalette(
-											'--article-border',
-										)}
-										padSides={false}
-										element="aside"
-									>
-										<Island
-											priority="enhancement"
-											defer={{ until: 'idle' }}
-										>
-											<SubNav
-												subNavSections={
-													props.NAV.subNavSections
-												}
-												currentNavLink={
-													props.NAV.currentNavLink
-												}
-												position="header"
-											/>
-										</Island>
-									</Section>
-									<Section
-										fullWidth={true}
-										backgroundColour={themePalette(
-											'--article-background',
-										)}
-										borderColour={themePalette(
-											'--article-border',
-										)}
-										padSides={false}
-										showTopBorder={false}
-									>
-										<StraightLines
-											count={4}
-											cssOverrides={css`
-												display: block;
-											`}
-											color={themePalette(
-												'--straight-lines',
-											)}
-										/>
-									</Section>
-								</>
-							)}
-						</>
-					)}
+					<Masthead
+						nav={props.NAV}
+						editionId={article.editionId}
+						idUrl={article.config.idUrl}
+						mmaUrl={article.config.mmaUrl}
+						discussionApiUrl={article.config.discussionApiUrl}
+						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={!isLabs}
+						hasPageSkinContentSelfConstrain={true}
+						pageId={article.pageId}
+					/>
 				</div>
 			)}
 

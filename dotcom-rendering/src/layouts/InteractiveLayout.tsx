@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay, ArticleSpecial, isUndefined } from '@guardian/libs';
+import { ArticleSpecial, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -25,7 +25,6 @@ import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -33,7 +32,6 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -233,9 +231,6 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-
 	const { absoluteServerTimes = false } = article.config.switches;
 
 	/**
@@ -275,153 +270,20 @@ export const InteractiveLayout = (props: WebProps | AppsProps) => {
 							</Stuck>
 						)}
 
-						{inUpdatedHeaderABTest ? (
-							<Masthead
-								nav={props.NAV}
-								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								showSubNav={
-									format.theme !== ArticleSpecial.Labs
-								}
-								isImmersive={false}
-								hasPageSkin={false}
-								hasPageSkinContentSelfConstrain={false}
-								pageId={article.pageId}
-							/>
-						) : (
-							<>
-								{format.theme !== ArticleSpecial.Labs && (
-									<div data-print-layout="hide">
-										<Section
-											fullWidth={true}
-											shouldCenter={false}
-											showTopBorder={false}
-											showSideBorders={false}
-											padSides={false}
-											backgroundColour={
-												sourcePalette.brand[400]
-											}
-											element="header"
-										>
-											<Header
-												editionId={article.editionId}
-												idUrl={article.config.idUrl}
-												mmaUrl={article.config.mmaUrl}
-												discussionApiUrl={
-													article.config
-														.discussionApiUrl
-												}
-												urls={
-													article.nav
-														.readerRevenueLinks
-														.header
-												}
-												remoteHeader={
-													!!article.config.switches
-														.remoteHeader
-												}
-												contributionsServiceUrl={
-													contributionsServiceUrl
-												}
-												idApiUrl={
-													article.config.idApiUrl
-												}
-												headerTopBarSearchCapiSwitch={
-													!!article.config.switches
-														.headerTopBarSearchCapi
-												}
-											/>
-										</Section>
-									</div>
-								)}
-
-								<Section
-									fullWidth={true}
-									borderColour={sourcePalette.brand[600]}
-									showTopBorder={false}
-									padSides={false}
-									backgroundColour={sourcePalette.brand[400]}
-									element="nav"
-								>
-									<Nav
-										nav={props.NAV}
-										isImmersive={
-											format.display ===
-											ArticleDisplay.Immersive
-										}
-										displayRoundel={
-											format.display ===
-												ArticleDisplay.Immersive ||
-											format.theme === ArticleSpecial.Labs
-										}
-										selectedPillar={
-											props.NAV.selectedPillar
-										}
-										subscribeUrl={
-											article.nav.readerRevenueLinks
-												.header.subscribe
-										}
-										editionId={article.editionId}
-									/>
-								</Section>
-
-								{props.NAV.subNavSections &&
-									format.theme !== ArticleSpecial.Labs && (
-										<Section
-											fullWidth={true}
-											backgroundColour={themePalette(
-												'--article-background',
-											)}
-											padSides={false}
-											element="aside"
-										>
-											<Island
-												priority="enhancement"
-												defer={{ until: 'idle' }}
-											>
-												<SubNav
-													subNavSections={
-														props.NAV.subNavSections
-													}
-													currentNavLink={
-														props.NAV.currentNavLink
-													}
-													position="header"
-												/>
-											</Island>
-										</Section>
-									)}
-
-								{format.theme !== ArticleSpecial.Labs && (
-									<Section
-										fullWidth={true}
-										backgroundColour={themePalette(
-											'--article-background',
-										)}
-										padSides={false}
-										showTopBorder={false}
-									>
-										<StraightLines
-											cssOverrides={css`
-												display: block;
-											`}
-											count={4}
-											color={themePalette(
-												'--straight-lines',
-											)}
-										/>
-									</Section>
-								)}
-							</>
-						)}
+						<Masthead
+							nav={props.NAV}
+							editionId={article.editionId}
+							idUrl={article.config.idUrl}
+							mmaUrl={article.config.mmaUrl}
+							discussionApiUrl={article.config.discussionApiUrl}
+							idApiUrl={article.config.idApiUrl}
+							contributionsServiceUrl={contributionsServiceUrl}
+							showSubNav={format.theme !== ArticleSpecial.Labs}
+							isImmersive={false}
+							hasPageSkin={false}
+							hasPageSkinContentSelfConstrain={false}
+							pageId={article.pageId}
+						/>
 					</div>
 
 					{format.theme === ArticleSpecial.Labs && (

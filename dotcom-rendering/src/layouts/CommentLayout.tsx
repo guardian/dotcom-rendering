@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	isUndefined,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -28,7 +23,6 @@ import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
@@ -37,7 +31,6 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
-import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -55,7 +48,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
 	children,
@@ -308,9 +301,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = isWeb && canRenderAds(article);
 
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-
 	const { absoluteServerTimes = false } = article.config.switches;
 
 	const shouldShowTagLink =
@@ -341,133 +331,20 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							</Section>
 						</Stuck>
 					)}
-
-					{inUpdatedHeaderABTest ? (
-						<Masthead
-							nav={props.NAV}
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							idApiUrl={article.config.idApiUrl}
-							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={true}
-							isImmersive={false}
-							hasPageSkin={false}
-							hasPageSkinContentSelfConstrain={false}
-							pageId={article.pageId}
-						/>
-					) : (
-						<SendToBack>
-							{format.theme !== ArticleSpecial.Labs && (
-								<Section
-									fullWidth={true}
-									shouldCenter={false}
-									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
-									backgroundColour={sourcePalette.brand[400]}
-									element="header"
-								>
-									<Header
-										editionId={article.editionId}
-										idUrl={article.config.idUrl}
-										mmaUrl={article.config.mmaUrl}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										urls={
-											article.nav.readerRevenueLinks
-												.header
-										}
-										remoteHeader={
-											!!article.config.switches
-												.remoteHeader
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										idApiUrl={article.config.idApiUrl}
-										headerTopBarSearchCapiSwitch={
-											!!article.config.switches
-												.headerTopBarSearchCapi
-										}
-									/>
-								</Section>
-							)}
-
-							<Section
-								fullWidth={true}
-								borderColour={sourcePalette.brand[600]}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="nav"
-							>
-								<Nav
-									nav={props.NAV}
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={props.NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-								/>
-							</Section>
-
-							{props.NAV.subNavSections && (
-								<Section
-									fullWidth={true}
-									backgroundColour={themePalette(
-										'--article-background',
-									)}
-									padSides={false}
-									element="aside"
-								>
-									<Island
-										priority="enhancement"
-										defer={{ until: 'idle' }}
-									>
-										<SubNav
-											subNavSections={
-												props.NAV.subNavSections
-											}
-											currentNavLink={
-												props.NAV.currentNavLink
-											}
-											position="header"
-										/>
-									</Island>
-								</Section>
-							)}
-
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								padSides={false}
-								showTopBorder={false}
-							>
-								<StraightLines
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--straight-lines')}
-								/>
-							</Section>
-						</SendToBack>
-					)}
+					<Masthead
+						nav={props.NAV}
+						editionId={article.editionId}
+						idUrl={article.config.idUrl}
+						mmaUrl={article.config.mmaUrl}
+						discussionApiUrl={article.config.discussionApiUrl}
+						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={true}
+						isImmersive={false}
+						hasPageSkin={false}
+						hasPageSkinContentSelfConstrain={false}
+						pageId={article.pageId}
+					/>
 				</div>
 			)}
 

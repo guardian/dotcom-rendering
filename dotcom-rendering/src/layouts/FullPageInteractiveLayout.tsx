@@ -11,7 +11,6 @@ import {
 	MobileStickyContainer,
 } from '../components/AdSlot.web';
 import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
@@ -135,9 +134,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	// often reach readers who are less familiar with the Guardian.
 	const isSlimNav = !article.config.switches.interactiveFullHeaderSwitch;
 
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -209,107 +205,20 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 				</Stuck>
 			)}
 
-			{inUpdatedHeaderABTest ? (
-				<Masthead
-					nav={NAV}
-					editionId={article.editionId}
-					idUrl={article.config.idUrl}
-					mmaUrl={article.config.mmaUrl}
-					discussionApiUrl={article.config.discussionApiUrl}
-					idApiUrl={article.config.idApiUrl}
-					contributionsServiceUrl={article.contributionsServiceUrl}
-					showSubNav={format.theme !== ArticleSpecial.Labs}
-					isImmersive={false}
-					hasPageSkin={false}
-					hasPageSkinContentSelfConstrain={false}
-					pageId={article.pageId}
-				/>
-			) : (
-				<>
-					{format.theme !== ArticleSpecial.Labs && (
-						<div data-print-layout="hide">
-							<Section
-								fullWidth={true}
-								shouldCenter={false}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="header"
-							>
-								<Header
-									editionId={article.editionId}
-									idUrl={article.config.idUrl}
-									mmaUrl={article.config.mmaUrl}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									urls={article.nav.readerRevenueLinks.header}
-									remoteHeader={
-										!!article.config.switches.remoteHeader
-									}
-									contributionsServiceUrl={
-										article.contributionsServiceUrl
-									}
-									idApiUrl={article.config.idApiUrl}
-									headerTopBarSearchCapiSwitch={
-										!!article.config.switches
-											.headerTopBarSearchCapi
-									}
-								/>
-							</Section>
-						</div>
-					)}
-
-					<Section
-						fullWidth={true}
-						borderColour={sourcePalette.brand[600]}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={sourcePalette.brand[400]}
-						element="nav"
-					>
-						<Nav
-							isImmersive={
-								format.display === ArticleDisplay.Immersive
-							}
-							displayRoundel={
-								format.display === ArticleDisplay.Immersive ||
-								format.theme === ArticleSpecial.Labs
-							}
-							selectedPillar={NAV.selectedPillar}
-							nav={NAV}
-							subscribeUrl={
-								article.nav.readerRevenueLinks.header.subscribe
-							}
-							editionId={article.editionId}
-						/>
-					</Section>
-
-					{NAV.subNavSections &&
-						format.theme !== ArticleSpecial.Labs && (
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								padSides={false}
-								element="aside"
-							>
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
-								>
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										position="header"
-									/>
-								</Island>
-							</Section>
-						)}
-				</>
-			)}
+			<Masthead
+				nav={NAV}
+				editionId={article.editionId}
+				idUrl={article.config.idUrl}
+				mmaUrl={article.config.mmaUrl}
+				discussionApiUrl={article.config.discussionApiUrl}
+				idApiUrl={article.config.idApiUrl}
+				contributionsServiceUrl={article.contributionsServiceUrl}
+				showSubNav={format.theme !== ArticleSpecial.Labs}
+				isImmersive={false}
+				hasPageSkin={false}
+				hasPageSkinContentSelfConstrain={false}
+				pageId={article.pageId}
+			/>
 		</section>
 	);
 };
@@ -392,6 +301,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							position="footer"
+							isInteractive={true}
 						/>
 					</Island>
 				</Section>

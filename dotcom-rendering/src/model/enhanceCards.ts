@@ -270,6 +270,7 @@ export const enhanceCards = (
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
+			boostLevel: faciaCard.display.boostLevel,
 			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			showLivePlayable: faciaCard.display.showLivePlayable,
