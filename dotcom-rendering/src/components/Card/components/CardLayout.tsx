@@ -106,9 +106,9 @@ const decideGap = (gapSize: GapSize) => {
 		case 'small':
 			return `${space[1]}px`;
 		case 'medium':
-			return ` ${space[2]}px;`;
+			return `${space[2]}px`;
 		case 'large':
-			return `${space[5]}px;`;
+			return `${space[5]}px`;
 	}
 };
 
