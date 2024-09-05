@@ -36,16 +36,17 @@ type Props = {
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
 	sizeOnTablet?: SmallHeadlineSize;
+	fontGroup?: 'standard' | 'large';
 	byline?: string;
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isExternalLink?: boolean;
 	/** Is the headline inside a Highlights card? */
 	isHighlights?: boolean;
-	isSplash?: boolean;
 };
 
-const flexibleSplashFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
+/** These represent a new set of fonts. They are large font sizes  */
+const largeFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
 		// we don't have a ginormous size in designs. For now this defaults to huge.
 		case 'ginormous':
@@ -72,60 +73,59 @@ const flexibleSplashFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 
 const fontStyles = ({
 	size,
-	isSplash,
+	fontGroup,
 }: {
 	size: SmallHeadlineSize;
-	isSplash: boolean;
+	fontGroup: 'standard' | 'large';
 }) => {
-	if (isSplash) {
-		return css`
-			${from.desktop} {
-				${flexibleSplashFontStyles({ size })}
-			}
-		`;
-	}
-	switch (size) {
-		case 'ginormous':
-			return css`
-				${from.desktop} {
-					${headlineMedium50}
-				}
-			`;
-		case 'huge':
-			return css`
-				${headlineMedium28}
-			`;
+	switch (fontGroup) {
 		case 'large':
-			return css`
-				${headlineMedium24}
-			`;
-		case 'medium':
-			return css`
-				${headlineMedium20}
-			`;
-		case 'small':
-			return css`
-				${headlineMedium17}
-			`;
-		case 'tiny':
-			return css`
-				${headlineMedium14}
-			`;
+			return largeFontStyles({ size });
+		case 'standard':
+		default:
+			switch (size) {
+				case 'ginormous':
+					return css`
+						${from.desktop} {
+							${headlineMedium50}
+						}
+					`;
+				case 'huge':
+					return css`
+						${headlineMedium28}
+					`;
+				case 'large':
+					return css`
+						${headlineMedium24}
+					`;
+				case 'medium':
+					return css`
+						${headlineMedium20}
+					`;
+				case 'small':
+					return css`
+						${headlineMedium17}
+					`;
+				case 'tiny':
+					return css`
+						${headlineMedium14}
+					`;
+			}
 	}
 };
 
 const fontStylesOnTablet = ({
 	size,
-	isSplash,
+	fontGroup,
 }: {
 	size?: SmallHeadlineSize;
-	isSplash: boolean;
+	fontGroup: 'standard' | 'large';
 }) => {
 	if (!size) return;
-	if (isSplash) {
+	if (fontGroup === 'large') {
 		return css`
 			${between.tablet.and.desktop} {
-				${flexibleSplashFontStyles({ size })}
+				${largeFontStyles({ size })}
 			}
 		`;
 	}
@@ -134,57 +134,62 @@ const fontStylesOnTablet = ({
 
 const fontStylesOnMobile = ({
 	size,
-	isSplash,
+	fontGroup,
 }: {
 	size: SmallHeadlineSize;
-	isSplash: boolean;
+	fontGroup: 'standard' | 'large';
 }) => {
-	if (isSplash) {
-		return css`
-			${until.tablet} {
-				${flexibleSplashFontStyles({ size })}
-			}
-		`;
-	}
-	switch (size) {
-		case 'ginormous':
+	switch (fontGroup) {
+		case 'large': {
 			return css`
-				${until.mobileLandscape} {
-					${headlineMedium34}
-				}
-				${between.mobileLandscape.and.desktop} {
-					${headlineMedium42}
+				${until.tablet} {
+					${largeFontStyles({ size })}
 				}
 			`;
-		case 'huge':
-			return css`
-				${until.desktop} {
-					${headlineMedium24}
-				}
-			`;
-		case 'large':
-			return css`
-				${until.desktop} {
-					${headlineMedium20}
-				}
-			`;
-		case 'medium':
-			return css`
-				${until.desktop} {
-					${headlineMedium17}
-				}
-			`;
-		case 'small':
-			return css`
-				${until.mobileMedium} {
-					${headlineMedium14}
-				}
-				${between.mobileMedium.and.desktop} {
-					${headlineMedium17}
-				}
-			`;
+		}
+
+		case 'standard':
 		default:
-			return undefined;
+			switch (size) {
+				case 'ginormous':
+					return css`
+						${until.mobileLandscape} {
+							${headlineMedium34}
+						}
+						${between.mobileLandscape.and.desktop} {
+							${headlineMedium42}
+						}
+					`;
+				case 'huge':
+					return css`
+						${until.desktop} {
+							${headlineMedium24}
+						}
+					`;
+				case 'large':
+					return css`
+						${until.desktop} {
+							${headlineMedium20}
+						}
+					`;
+				case 'medium':
+					return css`
+						${until.desktop} {
+							${headlineMedium17}
+						}
+					`;
+				case 'small':
+					return css`
+						${until.mobileMedium} {
+							${headlineMedium14}
+						}
+						${between.mobileMedium.and.desktop} {
+							${headlineMedium17}
+						}
+					`;
+				default:
+					return undefined;
+			}
 	}
 };
 
@@ -285,12 +290,12 @@ export const CardHeadline = ({
 	size = 'medium',
 	sizeOnMobile,
 	sizeOnTablet,
+	fontGroup = 'standard',
 	byline,
 	showByline,
 	linkTo,
 	isExternalLink,
 	isHighlights = false,
-	isSplash = false,
 }: Props) => {
 	const kickerColour = isHighlights
 		? palette('--highlights-card-kicker-text')
@@ -306,17 +311,17 @@ export const CardHeadline = ({
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
-							isSplash,
+							fontGroup,
 						}),
 
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnTablet({
 							size: sizeOnTablet,
-							isSplash,
+							fontGroup,
 						}),
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
-						: fontStyles({ size, isSplash }),
+						: fontStyles({ size, fontGroup }),
 				]}
 			>
 				{!!kickerText && (
