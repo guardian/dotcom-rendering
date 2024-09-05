@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { from, space, textSans17 } from '@guardian/source/foundations';
-import { Island } from '../../../components/Island';
 import type { EditionId } from '../../../lib/edition';
 import { editionList, getEditionFromId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -89,15 +88,13 @@ export const EditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<Island priority="critical">
-				<Dropdown
-					label={label}
-					links={linksToDisplay}
-					id="masthead-edition"
-					dataLinkName={dataLinkName}
-					cssOverrides={dropDownOverrides}
-				/>
-			</Island>
+			<Dropdown
+				label={label}
+				links={linksToDisplay}
+				id="masthead-edition"
+				dataLinkName={dataLinkName}
+				cssOverrides={dropDownOverrides}
+			/>
 		</div>
 	);
 };
