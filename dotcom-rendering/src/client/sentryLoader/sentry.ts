@@ -65,8 +65,8 @@ export const reportError = (
 ): void => {
 	Sentry.withScope(() => {
 		if (typeof tags === 'object') {
-			for (const tag of Object.entries(tags)) {
-				Sentry.setTag(tag[0], tag[1]);
+			for (const [key, value] of Object.entries(tags)) {
+                  Sentry.setTag(key, value);
 			}
 		} else if (typeof tags === 'string') {
 			Sentry.setTag('feature', tags);
