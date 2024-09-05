@@ -1,9 +1,9 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
-import { enhanceArticleType } from '../article';
 import { decideFormat } from '../lib/decideFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsBlock } from '../model/validate';
+import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';

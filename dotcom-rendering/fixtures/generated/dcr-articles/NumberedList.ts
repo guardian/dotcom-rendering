@@ -11,7 +11,7 @@
  *    gen-fixtures.js directly.
  */
 
-import type { Article } from '../../../src/article';
+import type { Article } from '../../../src/types/article';
 
 export const NumberedList: Article = {
 	version: 3,

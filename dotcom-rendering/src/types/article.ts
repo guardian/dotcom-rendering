@@ -1,16 +1,16 @@
 import type { ArticleFormat } from '@guardian/libs';
-import { decideFormat } from './lib/decideFormat';
-import type { ImageForAppsLightbox } from './model/appsLightboxImages';
-import { appsLightboxImages } from './model/appsLightboxImages';
-import { buildLightboxImages } from './model/buildLightboxImages';
-import { enhanceBlocks, enhanceMainMedia } from './model/enhanceBlocks';
-import { enhanceCommercialProperties } from './model/enhanceCommercialProperties';
-import { enhanceStandfirst } from './model/enhanceStandfirst';
-import { enhanceTableOfContents } from './model/enhanceTableOfContents';
-import { validateAsArticleType } from './model/validate';
-import type { ImageForLightbox } from './types/content';
-import type { FEArticleType } from './types/frontend';
-import { type RenderingTarget } from './types/renderingTarget';
+import { decideFormat } from '../lib/decideFormat';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
+import { appsLightboxImages } from '../model/appsLightboxImages';
+import { buildLightboxImages } from '../model/buildLightboxImages';
+import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
+import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
+import { enhanceStandfirst } from '../model/enhanceStandfirst';
+import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
+import { validateAsArticleType } from '../model/validate';
+import type { ImageForLightbox } from './content';
+import type { FEArticleType } from './frontend';
+import { type RenderingTarget } from './renderingTarget';
 
 /**
  * The `Article` type enhances `FEArticleType` type which defines the model received from Frontend

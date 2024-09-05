@@ -7,7 +7,7 @@ import {
 } from '@guardian/libs';
 import type { StoryObj } from '@storybook/react';
 import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import type { TableOfContentsItem } from '../article';
+import type { TableOfContentsItem } from '../types/article';
 import { TableOfContents } from './TableOfContents.importable';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {

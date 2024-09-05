@@ -6,7 +6,7 @@ import {
 } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import type { Article } from '../article';
+import type { Article } from '../types/article';
 import type { DCRFrontType } from '../types/front';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import type { DCRTagPageType } from '../types/tagPage';

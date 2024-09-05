@@ -1,7 +1,7 @@
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { Article } from '../article';
 import type { NavType } from '../model/extract-nav';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';

@@ -4,7 +4,6 @@ import {
 	isString,
 	Pillar,
 } from '@guardian/libs';
-import type { Article } from '../article';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import { isAmpSupported } from '../components/Elements.amp';
@@ -23,6 +22,7 @@ import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
+import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import type { FEBlocksRequest } from '../types/frontend';

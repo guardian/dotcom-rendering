@@ -14,12 +14,12 @@ import { Picture as PictureShowcaseOpinionFixture } from '../../fixtures/generat
 import { Recipe as RecipeStandardLifestyleFixture } from '../../fixtures/generated/dcr-articles/Recipe';
 import { Standard as StandardStandardNewsFixture } from '../../fixtures/generated/dcr-articles/Standard';
 import { Video as VideoStandardNewsFixture } from '../../fixtures/generated/dcr-articles/Video';
-import type { Article } from '../article';
 import { embedIframe } from '../client/embedIframe';
 import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
+import type { Article } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 mockRESTCalls();

@@ -13,7 +13,6 @@ import {
 } from '@guardian/source/foundations';
 import { Hide } from '@guardian/source/react-components';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
-import type { Article } from '../article';
 import { AdPortals } from '../components/AdPortals.importable';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot.web';
 import { AppsFooter } from '../components/AppsFooter.importable';
@@ -51,6 +50,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 

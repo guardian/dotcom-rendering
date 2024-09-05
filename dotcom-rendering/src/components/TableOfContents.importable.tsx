@@ -11,8 +11,8 @@ import {
 	SvgChevronUpSingle,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
-import type { TableOfContentsItem } from '../article';
 import { palette } from '../palette';
+import type { TableOfContentsItem } from '../types/article';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];

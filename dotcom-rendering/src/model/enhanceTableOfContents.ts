@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import type { TableOfContentsItem } from '../article';
+import type { TableOfContentsItem } from '../types/article';
 import type {
 	NumberedTitleBlockElement,
 	SubheadingBlockElement,

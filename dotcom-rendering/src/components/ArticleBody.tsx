@@ -7,12 +7,12 @@ import {
 	headlineBold24,
 	remSpace,
 } from '@guardian/source/foundations';
-import type { TableOfContentsItem } from '../article';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import type { EditionId } from '../lib/edition';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { revealStyles } from '../lib/revealStyles';
 import { palette as themePalette } from '../palette';
+import type { TableOfContentsItem } from '../types/article';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import { Island } from './Island';

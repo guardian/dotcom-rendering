@@ -1,4 +1,4 @@
-import type { Article } from '../article';
+import type { Article } from '../types/article';
 import type { DCRFrontType } from '../types/front';
 import type { RenderingTarget } from '../types/renderingTarget';
 import type { DCRTagPageType } from '../types/tagPage';

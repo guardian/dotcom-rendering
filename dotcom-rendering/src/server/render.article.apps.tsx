@@ -1,5 +1,4 @@
 import { ArticleDesign, type ArticleFormat, isString } from '@guardian/libs';
-import type { Article } from '../article';
 import { ArticlePage } from '../components/ArticlePage';
 import { ConfigProvider } from '../components/ConfigContext';
 import {
@@ -10,6 +9,7 @@ import {
 import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
+import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import { htmlPageTemplate } from './htmlPageTemplate';

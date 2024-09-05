@@ -1,5 +1,5 @@
 import type { Pillar } from '@guardian/libs';
-import type { Article } from '../article';
+import type { Article } from '../types/article';
 import type { LegacyPillar } from '../types/frontend';
 import { decideNavPillar } from './decideNavPillar';
 
