@@ -14,15 +14,13 @@ const articleUrl =
 
 test.describe('Interactivity', () => {
 	test.describe('Verify elements have been hydrated', () => {
-		/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
-		test.skip('should open the edition dropdown menu when clicked and hide when expected', async ({
+		test('should open the edition dropdown menu when clicked and hide when expected', async ({
 			context,
 			page,
 		}) => {
 			await disableCMP(context);
 			await loadPage(page, `/Article/${articleUrl}`);
 
-			await waitForIsland(page, 'Titlepiece');
 			// Open it
 			await page.locator('[data-testid=dropdown-button]').click();
 			await expectToBeVisible(page, '[data-testid=dropdown-options]');
@@ -115,8 +113,7 @@ test.describe('Interactivity', () => {
 			);
 		});
 
-		/* TODO - @guardian/fairground-web-devs enable this when new Masthead is launched to 100% */
-		test.skip('should render the reader revenue links in the header', async ({
+		test('should render the reader revenue links in the header', async ({
 			context,
 			page,
 		}) => {
