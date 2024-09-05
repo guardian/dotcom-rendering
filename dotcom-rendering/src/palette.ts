@@ -63,7 +63,7 @@ const textblockTextDark: PaletteFunction = (format: ArticleFormat) => {
 		case ArticleDesign.Audio:
 			return sourcePalette.neutral[7];
 		default:
-			return sourcePalette.neutral[100];
+			return sourcePalette.neutral[97];
 	}
 };
 
