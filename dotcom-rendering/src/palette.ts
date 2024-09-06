@@ -923,16 +923,7 @@ export const tabs = {
 const datelineMobileLight: PaletteFunction = ({ design, theme }) => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			switch (theme) {
-				case Pillar.News:
-				case Pillar.Opinion:
-				case Pillar.Sport:
-				case Pillar.Culture:
-				case Pillar.Lifestyle:
-					return pillarPalette(theme, 600);
-				default:
-					return sourcePalette.neutral[100];
-			}
+			return sourcePalette.neutral[100];
 		case ArticleDesign.Picture:
 		case ArticleDesign.Video:
 		case ArticleDesign.Audio:
