@@ -19,7 +19,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
-import type { DCRArticle } from '../types/frontend';
+import type { Article } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 mockRESTCalls();
@@ -134,7 +134,7 @@ export const AppsStandardStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const standardImmersiveNewsFixture: DCRArticle = {
+const standardImmersiveNewsFixture: Article = {
 	...StandardStandardNewsFixture,
 	format: {
 		...StandardStandardNewsFixture.format,
@@ -223,7 +223,7 @@ export const WebPhotoEssayImmersiveLabsLight: Story = {
 	parameters: webParameters,
 };
 
-const standardStandardLabsFixture: DCRArticle = {
+const standardStandardLabsFixture: Article = {
 	...StandardStandardNewsFixture,
 	format: {
 		...StandardStandardNewsFixture.format,
@@ -332,7 +332,7 @@ export const AppsLiveBlogStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSportFixture: DCRArticle = {
+const liveBlogStandardSportFixture: Article = {
 	...LiveBlogStandardNewsFixture,
 	format: {
 		...LiveBlogStandardNewsFixture.format,
@@ -356,7 +356,7 @@ export const AppsLiveBlogStandardSportDark: Story = {
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSpecialReportFixture: DCRArticle = {
+const liveBlogStandardSpecialReportFixture: Article = {
 	...LiveBlogStandardNewsFixture,
 	format: {
 		...LiveBlogStandardNewsFixture.format,
@@ -380,7 +380,7 @@ export const AppsLiveBlogStandardSpecialReportDark: Story = {
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSpecialReportAltFixture: DCRArticle = {
+const liveBlogStandardSpecialReportAltFixture: Article = {
 	...LiveBlogStandardNewsFixture,
 	format: {
 		...LiveBlogStandardNewsFixture.format,
@@ -427,7 +427,7 @@ export const AppsLiveblogSingleContributorDark: Story = {
 	parameters: appsParameters,
 };
 
-const commentStandardNewsFixture: DCRArticle = {
+const commentStandardNewsFixture: Article = {
 	...CommentStandardOpinionFixture,
 	format: {
 		...CommentStandardOpinionFixture.format,
@@ -451,7 +451,7 @@ export const AppsCommentStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const interactiveStandardNewsFixture: DCRArticle = {
+const interactiveStandardNewsFixture: Article = {
 	...StandardStandardNewsFixture,
 	format: {
 		...StandardStandardNewsFixture.format,
@@ -491,7 +491,7 @@ export const AppsAnalysisStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const analysisStandardCultureFixture: DCRArticle = {
+const analysisStandardCultureFixture: Article = {
 	...AnalysisStandardNewsFixture,
 	format: {
 		...AnalysisStandardNewsFixture.format,

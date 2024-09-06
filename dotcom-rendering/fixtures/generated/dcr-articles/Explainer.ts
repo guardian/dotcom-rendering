@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Explainer: DCRArticle = {
+export const Explainer: Article = {
 	version: 3,
 	headline:
 		'What is an Indigenous treaty and how would it work in Australia?',

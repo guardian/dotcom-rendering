@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Editorial: DCRArticle = {
+export const Editorial: Article = {
 	version: 3,
 	headline:
 		'The Guardian view on quarantine: an old method and a vital one   ',

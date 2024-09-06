@@ -12,7 +12,7 @@ import {
 } from '@guardian/source/react-components';
 import { useState } from 'react';
 import { palette } from '../palette';
-import type { TableOfContentsItem } from '../types/frontend';
+import type { TableOfContentsItem } from '../types/article';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];

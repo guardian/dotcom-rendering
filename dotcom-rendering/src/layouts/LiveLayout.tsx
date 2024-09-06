@@ -56,7 +56,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { DCRArticle } from '../types/frontend';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -248,7 +248,7 @@ const stickyTagStyles = css`
 `;
 
 interface BaseProps {
-	article: DCRArticle;
+	article: Article;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }

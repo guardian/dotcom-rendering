@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import { enhanceArticleType } from '../lib/article';
+import { enhanceArticleType } from '../types/article';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderArticle } from './render.article.apps';

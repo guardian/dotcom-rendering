@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const NewsletterSignup: DCRArticle = {
+export const NewsletterSignup: Article = {
 	version: 3,
 	headline:
 		'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
