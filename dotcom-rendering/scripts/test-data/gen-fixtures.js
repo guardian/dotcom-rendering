@@ -7,7 +7,7 @@ const execa = require('execa');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
-const { enhanceArticleType } = require('../../src/lib/article');
+const { enhanceArticleType } = require('../../src/types/article');
 
 const root = resolve(__dirname, '..', '..');
 
@@ -185,13 +185,9 @@ const requests = articles.map((article) => {
 
 			// Write the new DCR fixture data
 			const dcrContents = `${HEADER}
-				import type { DCRArticle } from '../../../src/types/frontend';
+				import type { Article } from '../../../src/types/article';
 
-				export const ${article.name}: DCRArticle = ${JSON.stringify(
-					dcrArticle,
-					null,
-					4,
-				)}
+				export const ${article.name}: Article = ${JSON.stringify(dcrArticle, null, 4)}
 			`;
 
 			const dcrTypeFile = fs.writeFile(
