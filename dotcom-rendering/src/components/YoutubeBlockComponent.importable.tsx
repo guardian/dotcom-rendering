@@ -1,17 +1,8 @@
 import { css } from '@emotion/react';
-import { MediaEvent } from '@guardian/bridget/MediaEvent';
-import {
-	type ArticleFormat,
-	type ConsentState,
-	isUndefined,
-	log,
-} from '@guardian/libs';
-import type { EventPayload, VideoEvent } from '@guardian/ophan-tracker-js';
+import { type ArticleFormat, type ConsentState } from '@guardian/libs';
 import { body, palette, space } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
-import { getOphan } from '../client/ophan/ophan';
-import { getVideoClient } from '../lib/bridgetApi';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
 import { Caption } from './Caption';
@@ -20,7 +11,8 @@ import type {
 	ImageSizeType,
 } from './Card/components/ImageWrapper';
 import { useConfig } from './ConfigContext';
-import { type VideoEventKey, YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
+import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
+import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
 type Props = {
 	id: string;
@@ -103,64 +95,6 @@ const getLargestImageSize = (
 ) => [...images].sort((a, b) => a.width - b.width).pop();
 
 const adTargetingDisabled: AdTargeting = { disableAds: true };
-
-const getAppsMediaEvent = (
-	trackingEvent: VideoEventKey,
-): MediaEvent | undefined => {
-	switch (trackingEvent) {
-		case 'cued':
-			return MediaEvent.ready;
-		case 'play':
-			return MediaEvent.play;
-		case '25':
-			return MediaEvent.percent25;
-		case '50':
-			return MediaEvent.percent50;
-		case '75':
-			return MediaEvent.percent75;
-		case 'end':
-			return MediaEvent.end;
-		default:
-			return undefined;
-	}
-};
-
-const ophanTrackerWeb = (id: string) => {
-	return (trackingEvent: VideoEventKey) => {
-		void getOphan('Web').then((ophan) => {
-			const event = {
-				video: {
-					id: `gu-video-youtube-${id}`,
-					eventType: `video:content:${trackingEvent}`,
-				} satisfies VideoEvent,
-			} satisfies EventPayload;
-			log('dotcom', {
-				from: 'YoutubeAtom event emitter web',
-				id,
-				event,
-			});
-			ophan.record(event);
-		});
-	};
-};
-
-const ophanTrackerApps = (id: string) => {
-	return (trackingEvent: VideoEventKey) => {
-		const appsMediaEvent = getAppsMediaEvent(trackingEvent);
-		if (!isUndefined(appsMediaEvent)) {
-			const event = {
-				videoId: id,
-				event: appsMediaEvent,
-			};
-			log('dotcom', {
-				from: 'YoutubeAtom event emitter apps',
-				id,
-				event,
-			});
-			void getVideoClient().sendVideoEvent(event);
-		}
-	};
-};
 
 export const YoutubeBlockComponent = ({
 	id,
