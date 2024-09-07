@@ -1,7 +1,4 @@
-import { css } from '@emotion/react';
 import { type ArticleFormat, type ConsentState } from '@guardian/libs';
-import { body, palette, space } from '@guardian/source/foundations';
-import { SvgAlertRound } from '@guardian/source/react-components';
 import { useEffect, useState } from 'react';
 import { useAB } from '../lib/useAB';
 import { useAdTargeting } from '../lib/useAdTargeting';
@@ -13,6 +10,7 @@ import type {
 import { useConfig } from './ConfigContext';
 import { ophanTrackerApps, ophanTrackerWeb } from './YoutubeAtom/eventEmitters';
 import { YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
+import { YoutubeAtomExpiredOverlay } from './YoutubeAtom/YoutubeAtomExpiredOverlay';
 
 type Props = {
 	id: string;
@@ -42,43 +40,6 @@ type Props = {
 	imagePositionOnMobile?: ImagePositionType;
 	enableAds: boolean;
 };
-
-const expiredOverlayStyles = (overrideImage?: string) =>
-	overrideImage
-		? css`
-				height: 0px;
-				position: relative;
-				background-image: url(${overrideImage});
-				background-size: cover;
-				background-position: 49% 49%;
-				background-repeat: no-repeat;
-				padding-bottom: 56%;
-				color: ${palette.neutral[100]};
-				background-color: ${palette.neutral[20]};
-		  `
-		: undefined;
-
-const expiredTextWrapperStyles = css`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-
-	padding-top: ${space[4]}px;
-	padding-bottom: ${space[4]}px;
-	padding-left: ${space[1]}px;
-	padding-right: ${space[12]}px;
-	color: ${palette.neutral[100]};
-	background-color: ${palette.neutral[20]};
-`;
-
-const expiredSVGWrapperStyles = css`
-	padding-right: ${space[1]}px;
-	svg {
-		width: ${space[12]}px;
-		height: ${space[12]}px;
-		fill: ${palette.neutral[100]};
-	}
-`;
 
 /**
  * We do our own image optimization in DCR and only need 1 image. Pick the largest image available to
@@ -161,40 +122,13 @@ export const YoutubeBlockComponent = ({
 
 	if (expired) {
 		return (
-			<figure
-				css={css`
-					margin-top: 16px;
-					margin-bottom: 16px;
-				`}
-			>
-				<div css={expiredOverlayStyles(overrideImage)}>
-					<div css={expiredTextWrapperStyles}>
-						<div css={expiredSVGWrapperStyles}>
-							<SvgAlertRound />
-						</div>
-						<p
-							css={css`
-								${body.medium({
-									lineHeight: 'tight',
-								})}
-							`}
-						>
-							This video has been removed. This could be because
-							it launched early, our rights have expired, there
-							was a legal issue, or for another reason.
-						</p>
-					</div>
-				</div>
-				{!hideCaption && (
-					<Caption
-						captionText={mediaTitle ?? ''}
-						format={format}
-						displayCredit={false}
-						mediaType="Video"
-						isMainMedia={isMainMedia}
-					/>
-				)}
-			</figure>
+			<YoutubeAtomExpiredOverlay
+				format={format}
+				hideCaption={hideCaption}
+				isMainMedia={isMainMedia}
+				mediaTitle={mediaTitle}
+				overrideImage={overrideImage}
+			/>
 		);
 	}
 
