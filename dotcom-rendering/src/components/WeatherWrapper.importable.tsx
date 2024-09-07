@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
 import { parseWeatherData } from '../types/weather';
@@ -24,19 +25,22 @@ type Props = {
 
 export const WeatherWrapper = ({ ajaxUrl, edition }: Props) => {
 	const { data, error } = useApi(`${ajaxUrl}/weather.json`);
-
-	if (error) {
-		window.guardian.modules.sentry.reportError(error, 'weather');
-	}
-
 	const result = parseWeatherData(data);
 
-	if (result.kind === 'error' && result.error === 'ParsingError') {
-		window.guardian.modules.sentry.reportError(
-			Error('Invalid weather data'),
-			'weather',
-		);
-	}
+	useEffect(() => {
+		if (error) {
+			window.guardian.modules.sentry.reportError(error, 'weather');
+		}
+	}, [error]);
+
+	useEffect(() => {
+		if (result.kind === 'error' && result.error === 'ParsingError') {
+			window.guardian.modules.sentry.reportError(
+				Error('Invalid weather data'),
+				'weather',
+			);
+		}
+	}, [result]);
 
 	return result.kind === 'error' ? (
 		<WeatherPlaceholder />
