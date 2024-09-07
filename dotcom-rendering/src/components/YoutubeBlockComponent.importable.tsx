@@ -9,7 +9,7 @@ import {
 import type { EventPayload, VideoEvent } from '@guardian/ophan-tracker-js';
 import { body, palette, space } from '@guardian/source/foundations';
 import { SvgAlertRound } from '@guardian/source/react-components';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 import { getVideoClient } from '../lib/bridgetApi';
 import { useAB } from '../lib/useAB';
@@ -125,6 +125,43 @@ const getAppsMediaEvent = (
 	}
 };
 
+const ophanTrackerWeb = (id: string) => {
+	return (trackingEvent: VideoEventKey) => {
+		void getOphan('Web').then((ophan) => {
+			const event = {
+				video: {
+					id: `gu-video-youtube-${id}`,
+					eventType: `video:content:${trackingEvent}`,
+				} satisfies VideoEvent,
+			} satisfies EventPayload;
+			log('dotcom', {
+				from: 'YoutubeAtom event emitter web',
+				id,
+				event,
+			});
+			ophan.record(event);
+		});
+	};
+};
+
+const ophanTrackerApps = (id: string) => {
+	return (trackingEvent: VideoEventKey) => {
+		const appsMediaEvent = getAppsMediaEvent(trackingEvent);
+		if (!isUndefined(appsMediaEvent)) {
+			const event = {
+				videoId: id,
+				event: appsMediaEvent,
+			};
+			log('dotcom', {
+				from: 'YoutubeAtom event emitter apps',
+				id,
+				event,
+			});
+			void getVideoClient().sendVideoEvent(event);
+		}
+	};
+};
+
 export const YoutubeBlockComponent = ({
 	id,
 	assetId,
@@ -188,45 +225,6 @@ export const YoutubeBlockComponent = ({
 		}
 	}, [renderingTarget]);
 
-	const ophanTrackerWeb = useCallback(
-		(trackingEvent: VideoEventKey) => {
-			void getOphan('Web').then((ophan) => {
-				const event = {
-					video: {
-						id: `gu-video-youtube-${id}`,
-						eventType: `video:content:${trackingEvent}`,
-					} satisfies VideoEvent,
-				} satisfies EventPayload;
-				log('dotcom', {
-					from: 'YoutubeAtom event emitter web',
-					id,
-					event,
-				});
-				ophan.record(event);
-			});
-		},
-		[id],
-	);
-
-	const ophanTrackerApps = useCallback(
-		(trackingEvent: VideoEventKey) => {
-			const appsMediaEvent = getAppsMediaEvent(trackingEvent);
-			if (!isUndefined(appsMediaEvent)) {
-				const event = {
-					videoId: id,
-					event: appsMediaEvent,
-				};
-				log('dotcom', {
-					from: 'YoutubeAtom event emitter apps',
-					id,
-					event,
-				});
-				void getVideoClient().sendVideoEvent(event);
-			}
-		},
-		[id],
-	);
-
 	if (expired) {
 		return (
 			<figure
@@ -286,8 +284,8 @@ export const YoutubeBlockComponent = ({
 				duration={duration}
 				eventEmitters={
 					renderingTarget === 'Web'
-						? [ophanTrackerWeb]
-						: [ophanTrackerApps]
+						? [ophanTrackerWeb(id)]
+						: [ophanTrackerApps(id)]
 				}
 				format={format}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
