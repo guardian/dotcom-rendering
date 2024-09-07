@@ -453,6 +453,7 @@ const Title = ({
 	);
 type CarouselCardProps = {
 	isFirst: boolean;
+	index: number;
 	format: ArticleFormat;
 	linkTo: string;
 	headlineText: string;
@@ -493,6 +494,7 @@ const CarouselCard = ({
 	isOnwardContent,
 	absoluteServerTimes,
 	starRating,
+	index,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const cardImagePosition = isOnwardContent ? 'bottom' : 'top';
@@ -537,6 +539,7 @@ const CarouselCard = ({
 				imagePositionOnMobile={cardImagePosition}
 				absoluteServerTimes={absoluteServerTimes}
 				starRating={starRating}
+				index={index}
 			/>
 		</LI>
 	);
@@ -994,6 +997,7 @@ export const Carousel = ({
 							return (
 								<CarouselCard
 									key={`${trail.url}${i}`}
+									index={i}
 									isFirst={i === 0}
 									format={trailFormat}
 									linkTo={linkTo}

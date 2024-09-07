@@ -33,9 +33,9 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
-					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
+					uniqueId="ZCvZmYlQD8-1"
+					title="My Youtube video!"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -70,9 +70,9 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
-					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
+					uniqueId="ZCvZmYlQD8-1"
+					title="My Youtube video!"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -116,9 +116,9 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
-					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
+					uniqueId="ZCvZmYlQD8-1"
+					title="My Youtube video!"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -154,9 +154,9 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
-					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
+					uniqueId="ZCvZmYlQD8-1"
+					title="My Youtube video!"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -194,9 +194,9 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
-					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
+					uniqueId="ZCvZmYlQD8-1"
+					title="My Youtube video!"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -232,9 +232,9 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
-					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
+					uniqueId="ZCvZmYlQD8-1"
+					title="My Youtube video!"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -269,9 +269,9 @@ describe('YoutubeAtom', () => {
 				}}
 			>
 				<YoutubeAtom
-					index={123}
-					title="My Youtube video!"
 					videoId="ZCvZmYlQD8"
+					uniqueId="ZCvZmYlQD8-1"
+					title="My Youtube video!"
 					alt=""
 					adTargeting={{ disableAds: true }}
 					eventEmitters={[]}
@@ -310,9 +310,9 @@ describe('YoutubeAtom', () => {
 					}}
 				>
 					<YoutubeAtom
-						index={123}
-						title="My Youtube video!"
 						videoId="ZCvZmYlQD8"
+						uniqueId="ZCvZmYlQD8-1"
+						title="My Youtube video!"
 						alt=""
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}
@@ -330,9 +330,9 @@ describe('YoutubeAtom', () => {
 						renderingTarget="Web"
 					/>
 					<YoutubeAtom
-						index={123}
-						title="My Youtube video 2!"
 						videoId="ZCvZmYlQD8"
+						uniqueId="ZCvZmYlQD8-2"
+						title="My Youtube video 2!"
 						alt=""
 						adTargeting={{ disableAds: true }}
 						eventEmitters={[]}

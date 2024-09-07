@@ -113,6 +113,7 @@ export type Props = {
 	aspectRatio?: AspectRatio;
 	/** Alows the consumer to use a larger font size group for boost styling*/
 	boostedFontSizes?: boolean;
+	index?: number;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -255,6 +256,7 @@ export const Card = ({
 	isTagPage = false,
 	aspectRatio,
 	boostedFontSizes,
+	index = 0,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -524,6 +526,7 @@ export const Card = ({
 												assetId={
 													media.mainMedia.videoId
 												}
+												index={index}
 												duration={
 													media.mainMedia.duration
 												}

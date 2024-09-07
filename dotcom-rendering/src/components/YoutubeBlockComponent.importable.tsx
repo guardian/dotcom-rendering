@@ -24,9 +24,10 @@ import { type VideoEventKey, YoutubeAtom } from './YoutubeAtom/YoutubeAtom';
 
 type Props = {
 	id: string;
+	assetId: string;
+	index: number;
 	mediaTitle?: string;
 	altText?: string;
-	assetId: string;
 	expired: boolean;
 	format: ArticleFormat;
 	hideCaption?: boolean;
@@ -101,9 +102,6 @@ const getLargestImageSize = (
 	}[],
 ) => [...images].sort((a, b) => a.width - b.width).pop();
 
-/** always undefined on the server */
-let counter: number | undefined;
-
 const adTargetingDisabled: AdTargeting = { disableAds: true };
 
 const getAppsMediaEvent = (
@@ -130,6 +128,7 @@ const getAppsMediaEvent = (
 export const YoutubeBlockComponent = ({
 	id,
 	assetId,
+	index,
 	mediaTitle,
 	altText,
 	format,
@@ -160,12 +159,7 @@ export const YoutubeBlockComponent = ({
 	const abTests = useAB();
 	const abTestParticipations = abTests?.participations ?? {};
 
-	const [index, setIndex] = useState<number>();
-
-	useEffect(() => {
-		counter ??= 0;
-		setIndex(++counter);
-	}, []);
+	const uniqueId = `${assetId}-${index}`;
 
 	useEffect(() => {
 		if (renderingTarget === 'Web') {
@@ -275,8 +269,8 @@ export const YoutubeBlockComponent = ({
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
-				index={index}
 				videoId={assetId}
+				uniqueId={uniqueId}
 				overrideImage={overrideImage}
 				posterImage={getLargestImageSize(posterImage)?.url}
 				alt={altText ?? mediaTitle ?? ''}
