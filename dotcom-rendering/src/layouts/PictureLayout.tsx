@@ -43,7 +43,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { DCRArticle } from '../types/frontend';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -243,7 +243,7 @@ const LeftColLines = (displayAvatarUrl: boolean) => css`
 `;
 
 interface CommonProps {
-	article: DCRArticle;
+	article: Article;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -282,10 +282,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 		?.bylineLargeImageUrl;
 
 	const displayAvatarUrl = avatarUrl ? true : false;
-
-	const shouldShowTagLink =
-		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -333,7 +329,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 			<main
 				data-layout="PictureLayout"
 				id="maincontent"
-				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
 			>
@@ -364,7 +359,6 @@ export const PictureLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">

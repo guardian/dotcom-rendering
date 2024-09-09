@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Video: DCRArticle = {
+export const Video: Article = {
 	version: 3,
 	headline:
 		'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',

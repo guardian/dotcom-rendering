@@ -6,7 +6,7 @@ import { buildAdTargeting } from '../lib/ad-targeting';
 import { rootStyles } from '../lib/rootStyles';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
-import type { DCRArticle } from '../types/frontend';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
@@ -24,7 +24,7 @@ import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
 interface BaseProps {
-	article: DCRArticle;
+	article: Article;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
