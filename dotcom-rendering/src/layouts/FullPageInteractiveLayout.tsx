@@ -26,14 +26,14 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { Article } from '../types/article';
+import type { ArticleDeprecated } from '../types/article';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	article: Article;
+	article: ArticleDeprecated;
 	NAV: NavType;
 	format: ArticleFormat;
 }
