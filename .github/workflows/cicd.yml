@@ -26,18 +26,18 @@ jobs:
     with:
       container-image: ${{ needs.container.outputs.container-image }}
 
-  # amp:
-  #   needs: [container]
-  #   uses: ./.github/workflows/amp.yml
-  #   with:
-  #     container-image: ${{ needs.container.outputs.container-image }}
+  amp:
+    needs: [container]
+    uses: ./.github/workflows/amp.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
 
   publish:
     permissions:
       id-token: write
       contents: read
       pull-requests: write # required by riff-raff action
-    needs: [container, prettier, jest, lint, playwright]
+    needs: [container, prettier, jest, lint, playwright, amp]
     uses: ./.github/workflows/publish.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
