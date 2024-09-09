@@ -1,6 +1,7 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
+	ArticleFormat,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
@@ -88,6 +89,10 @@ export const ThemeVariations = {
 	},
 } satisfies Story;
 
+// Audio designs don't support mini profiles
+const isNotAudioDesign = (format: ArticleFormat) =>
+	format.design !== ArticleDesign.Audio;
+
 export const DesignVariations = {
 	args: ThemeVariations.args,
 	decorators: [centreColumnDecorator],
@@ -95,7 +100,7 @@ export const DesignVariations = {
 		formats: getAllDesigns({
 			theme: Pillar.News,
 			display: ArticleDisplay.Standard,
-		}),
+		}).filter(isNotAudioDesign),
 		chromatic: {
 			modes: {
 				horizontal: allModes.splitHorizontal,
