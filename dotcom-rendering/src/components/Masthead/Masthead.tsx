@@ -4,8 +4,8 @@ import type { NavType } from '../../model/extract-nav';
 import { palette as themePalette } from '../../palette';
 import { Island } from '../Island';
 import { Section } from '../Section';
+import { Titlepiece } from '../Titlepiece.importable';
 import { TopBar } from '../TopBar.importable';
-import { Titlepiece } from './Titlepiece/Titlepiece.importable';
 
 type Props = {
 	nav: NavType;
