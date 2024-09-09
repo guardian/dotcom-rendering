@@ -241,12 +241,6 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-const stickyTagStyles = css`
-	position: sticky;
-	top: 0;
-	${getZIndex('tagLinkOverlay')};
-`;
-
 interface BaseProps {
 	article: ArticleDeprecated;
 	format: ArticleFormat;
@@ -298,10 +292,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 	const isApps = renderingTarget === 'Apps';
 
 	const showComments = article.isCommentable && !isPaidContent;
-
-	const shouldShowTagLink =
-		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
@@ -392,7 +382,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								shouldShowTagLink={false}
 								isMatch={true}
 							/>
 						}
@@ -407,7 +396,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								shouldShowTagLink={false}
 								isMatch={true}
 							/>
 						</Hide>
@@ -441,7 +429,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									shouldShowTagLink={false}
 								/>
 							</GridItem>
 							<GridItem area="headline">
@@ -746,37 +733,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												shouldHideReaderRevenueOnArticle={
 													article.shouldHideReaderRevenue
 												}
-												tags={article.tags}
 											/>
 										</Island>
-									</Hide>
-								)}
-
-								{isWeb && shouldShowTagLink && (
-									<Hide until="desktop">
-										<div
-											css={[
-												stickyTagStyles,
-												css`
-													margin: 20px 0 20px 20px;
-												`,
-											]}
-										>
-											<ArticleTitle
-												format={format}
-												tags={article.tags}
-												sectionLabel={
-													article.sectionLabel
-												}
-												sectionUrl={article.sectionUrl}
-												guardianBaseURL={
-													article.guardianBaseURL
-												}
-												shouldShowTagLink={
-													shouldShowTagLink
-												}
-											/>
-										</div>
 									</Hide>
 								)}
 
@@ -795,28 +753,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{isWeb && shouldShowTagLink && (
-										<Hide from="desktop">
-											<div css={[stickyTagStyles]}>
-												<ArticleTitle
-													format={format}
-													tags={article.tags}
-													sectionLabel={
-														article.sectionLabel
-													}
-													sectionUrl={
-														article.sectionUrl
-													}
-													guardianBaseURL={
-														article.guardianBaseURL
-													}
-													shouldShowTagLink={
-														shouldShowTagLink
-													}
-												/>
-											</div>
-										</Hide>
-									)}
 									{hasKeyEvents ? (
 										<Hide below="desktop">
 											<Island

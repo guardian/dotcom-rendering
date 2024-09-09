@@ -5491,18 +5491,6 @@ const pinnedPostBorderDark: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const tagLinkBackground: PaletteFunction = () => sourcePalette.sport[800];
-
-const tagLinkFillBackgroundLight: PaletteFunction = (format) => {
-	return articleBackgroundLight(format) === 'transparent'
-		? sourcePalette.neutral[100]
-		: articleBackgroundLight(format);
-};
-const tagLinkFillBackgroundDark: PaletteFunction = (format) =>
-	articleBackgroundDark(format);
-
-const tagLinkAccent: PaletteFunction = () => sourcePalette.sport[400];
-
 const youtubeOverlayKicker: PaletteFunction = ({ theme }: ArticleFormat) => {
 	switch (theme) {
 		case Pillar.News:
@@ -6751,18 +6739,6 @@ const paletteColours = {
 	'--tabs-input': {
 		light: () => sourcePalette.neutral[100],
 		dark: () => sourcePalette.neutral[0],
-	},
-	'--tag-link-accent': {
-		light: tagLinkAccent,
-		dark: tagLinkAccent,
-	},
-	'--tag-link-background': {
-		light: tagLinkBackground,
-		dark: tagLinkBackground,
-	},
-	'--tag-link-fill-background': {
-		light: tagLinkFillBackgroundLight,
-		dark: tagLinkFillBackgroundDark,
 	},
 	'--tag-page-chevron': {
 		light: () => sourcePalette.neutral[0],

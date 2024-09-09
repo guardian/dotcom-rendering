@@ -303,10 +303,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
-	const shouldShowTagLink =
-		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
-
 	return (
 		<>
 			{isWeb && (
@@ -348,10 +344,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 				</div>
 			)}
 
-			<main
-				data-layout="CommentLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
-			>
+			<main data-layout="CommentLayout">
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -408,7 +401,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">
