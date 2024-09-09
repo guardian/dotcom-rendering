@@ -15,6 +15,7 @@ import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import {
 	expandedMenuRootId,
+	handleMenuClickID,
 	navInputCheckboxId,
 	pageMargin,
 	smallMobilePageMargin,
@@ -388,6 +389,7 @@ export const Titlepiece = ({
 			<script
 				dangerouslySetInnerHTML={{
 					__html: `document.addEventListener('DOMContentLoaded', function () {
+					console.log("running script")
 
 					/** The checkbox input element used to toggle the navigation menu. */
 					const navInputCheckbox = document.getElementById('${navInputCheckboxId}');
@@ -405,11 +407,14 @@ export const Titlepiece = ({
 
 					/** The label for the first column in the menu, assumed to be "News".*/
 					const firstColLabel = document.getElementById('News-button');
+					console.log("first col label", firstColLabel)
 
 					/** The link element in the second list item under news links. */
 					const firstColLink = document.querySelector(
 						'#newsLinks > li:nth-of-type(2) > a',
 					);
+
+					console.log("first col link", firstColLink)
 
 					/**
 					 * Focuses on the first navigation element depending on whether the first column label is visible.
@@ -418,12 +423,18 @@ export const Titlepiece = ({
 					 * Otherwise, it focuses on the first column label.
 					 */
 					const focusOnFirstNavElement = () => {
+					console.log("focusOnFirstNavElement")
+					console.log("window.getComputedStyle(firstColLabel).display", window.getComputedStyle(firstColLabel).display)
 						if (window.getComputedStyle(firstColLabel).display === 'none') {
+						console.log("firstCollink if display none", firstColLink)
 							firstColLink.focus();
 						} else {
+						 console.log("firstColLabel if display none", firstColLabel)
 							firstColLabel.focus();
 						}
 					};
+
+
 
 					/**
 					 * Updates ARIA attributes and tabindex values based on whether the menu is open or closed.
@@ -462,11 +473,31 @@ export const Titlepiece = ({
 					 *
 					 * - Toggles the menu open/close state when the menu button (veggieBurger) is clicked.
 					 */
+
 						const handleMenuClick = (e) => {
+							console.log("handleMenuClick")
+							console.log("e", e.target)  //e.target.label or soemthin?
+							console.log("e id", e.target.id)
+							console.log("veggieBurger", veggieBurger)
+								const associatedLabel = document.querySelector('label[for=${handleMenuClickID}]');
+
+							console.log("associatedLabel", associatedLabel)
+							if (${handleMenuClickID} === e.target.id) {console.log("thishere")}
+
+							//e.target asks for the input element, not the label
+							// find the label associated with the input element and search for that in menuButtonClicked
+
+
 							const menuButtonClicked = veggieBurger.contains(e.target);
 							const clickInsideMenu = expandedMenu.contains(e.target);
 							const menuIsOpen = navInputCheckbox.checked
+
+							console.log("menuButtonClicked", menuButtonClicked)
+							console.log("clickInsideMenu", clickInsideMenu)
+							console.log("menuIsOpen", menuIsOpen)
+
 							if (menuButtonClicked && !menuIsOpen) {
+							console.log("here")
 						    document.body.classList.toggle('nav-is-open')
 
 							firstColLabel.setAttribute('aria-expanded', 'false')
@@ -475,12 +506,14 @@ export const Titlepiece = ({
                                 $selectableElement.setAttribute('tabindex','-1')
                             })
                           } else if (menuButtonClicked && menuIsOpen) {
+						   console.log("there")
 						    document.body.classList.toggle('nav-is-open')
 							firstColLabel.setAttribute('aria-expanded', 'true')
                             veggieBurger.setAttribute('data-link-name','header : veggie-burger : hide')
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','0')
                             })
+
                             focusOnFirstNavElement()
 							}
 						};
