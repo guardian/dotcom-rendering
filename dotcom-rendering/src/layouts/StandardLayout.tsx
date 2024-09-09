@@ -406,10 +406,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const renderAds = isWeb && canRenderAds(article);
 
-	const shouldShowTagLink =
-		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
-
 	return (
 		<>
 			{isWeb && (
@@ -468,10 +464,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main
-				data-layout="StandardLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
-			>
+			<main data-layout="StandardLayout">
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -560,7 +553,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 								isMatch={!!footballMatchUrl}
-								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">

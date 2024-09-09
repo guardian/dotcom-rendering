@@ -251,10 +251,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	const shouldShowTagLink =
-		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
-
 	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
@@ -384,7 +380,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 			)}
 			<main
 				data-layout="ShowcaseLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
 				id="maincontent"
 				lang={decideLanguage(article.lang)}
 				dir={decideLanguageDirection(article.isRightToLeftLang)}
@@ -440,7 +435,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">
