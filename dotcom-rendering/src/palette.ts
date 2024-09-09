@@ -52,6 +52,7 @@ const pillarPalette = (
 const textblockTextLight: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return sourcePalette.neutral[97];
 		default:
 			return 'inherit';
@@ -61,6 +62,7 @@ const textblockTextLight: PaletteFunction = (format: ArticleFormat) => {
 const textblockTextDark: PaletteFunction = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return sourcePalette.neutral[7];
 		default:
 			return 'inherit';

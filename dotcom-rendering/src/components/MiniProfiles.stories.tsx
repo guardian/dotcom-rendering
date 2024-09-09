@@ -90,8 +90,9 @@ export const ThemeVariations = {
 } satisfies Story;
 
 // Audio designs don't support mini profiles
-const isNotAudioDesign = (format: ArticleFormat) =>
-	format.design !== ArticleDesign.Audio;
+const isNotAudioOrVideoDesign = (format: ArticleFormat) =>
+	format.design !== ArticleDesign.Audio &&
+	format.design !== ArticleDesign.Video;
 
 export const DesignVariations = {
 	args: ThemeVariations.args,
@@ -100,7 +101,7 @@ export const DesignVariations = {
 		formats: getAllDesigns({
 			theme: Pillar.News,
 			display: ArticleDisplay.Standard,
-		}).filter(isNotAudioDesign),
+		}).filter(isNotAudioOrVideoDesign),
 		chromatic: {
 			modes: {
 				horizontal: allModes.splitHorizontal,
