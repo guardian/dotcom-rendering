@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from, space, textSans17 } from '@guardian/source/foundations';
+import {
+	from,
+	space,
+	textSans14,
+	textSans17,
+	until,
+} from '@guardian/source/foundations';
 import type { EditionId } from '../../../lib/edition';
 import { editionList, getEditionFromId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -13,6 +19,7 @@ interface EditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
 	showCurrentEdition?: boolean;
+	isImmersive?: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -38,8 +45,24 @@ const editionDropdownStyles = css`
 	}
 `;
 
-const dropDownOverrides = css`
-	${textSans17}
+const immersiveEditionDropdownOverrides = css`
+	${until.tablet} {
+		ul {
+			position: absolute;
+			right: 0;
+			left: unset;
+			top: ${space[6]}px;
+			max-height: unset;
+			min-width: 200px;
+		}
+	}
+`;
+
+const dropDownOverrides = (isImmersive: boolean) => css`
+	${textSans14}
+	${from.leftCol} {
+		${textSans17}
+	}
 	color: ${themePalette('--masthead-nav-link-text')};
 	padding: 6px 0 0 0;
 	margin-top: ${space[1]}px;
@@ -48,12 +71,19 @@ const dropDownOverrides = css`
 		color: ${themePalette('--masthead-nav-link-text')};
 		text-decoration: underline;
 	}
+
+	${isImmersive &&
+	css`
+		padding: 0;
+		margin-top: 0;
+	`}
 `;
 
 export const EditionDropdown = ({
 	editionId,
 	dataLinkName,
 	showCurrentEdition = true,
+	isImmersive = false,
 }: EditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
@@ -87,13 +117,18 @@ export const EditionDropdown = ({
 		: 'Edition';
 
 	return (
-		<div css={editionDropdownStyles}>
+		<div
+			css={[
+				editionDropdownStyles,
+				isImmersive && immersiveEditionDropdownOverrides,
+			]}
+		>
 			<Dropdown
 				label={label}
 				links={linksToDisplay}
 				id="masthead-edition"
 				dataLinkName={dataLinkName}
-				cssOverrides={dropDownOverrides}
+				cssOverrides={dropDownOverrides(isImmersive)}
 			/>
 		</div>
 	);

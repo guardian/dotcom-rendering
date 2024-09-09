@@ -56,6 +56,12 @@ const editionSwitcherMenuStyles = css`
 	width: fit-content;
 `;
 
+const immersiveEditionSwitcherStyles = css`
+	${until.tablet} {
+		justify-self: start;
+	}
+`;
+
 const accreditationStyles = css`
 	${gridContent}
 	grid-row: 1;
@@ -95,7 +101,7 @@ const logoStyles = css`
 		margin-right: 0;
 	}
 	${from.mobileLandscape} {
-		margin-bottom: 8px;
+		margin-bottom: ${space[2]}px;
 	}
 
 	svg {
@@ -120,6 +126,40 @@ const logoStylesFromLeftCol = css`
 	}
 `;
 
+const immersiveLogoOverrides = css`
+	position: relative;
+	${from.mobile} {
+		right: 0;
+	}
+	${from.mobileMedium} {
+		right: ${veggieBurgerDiameter + 6}px;
+	}
+	${from.tablet} {
+		right: ${space[8]}px;
+	}
+	${from.desktop} {
+		right: ${space[10]}px;
+	}
+	svg {
+		width: 130px;
+		${from.mobile} {
+			width: 130px;
+		}
+		${from.tablet} {
+			width: 86px;
+		}
+		${from.desktop} {
+			width: 130px;
+		}
+		${from.leftCol} {
+			width: 147px;
+		}
+		${from.wide} {
+			width: 154px;
+		}
+	}
+`;
+
 const pillarsNavStyles = css`
 	${gridContent}
 	grid-row: 2;
@@ -135,6 +175,13 @@ const pillarsNavStyles = css`
 		}
 	}
 	pointer-events: none;
+`;
+
+const immersivePillarsOverrides = css`
+	grid-row: 1;
+	${until.tablet} {
+		display: none;
+	}
 `;
 
 const burgerStyles = css`
@@ -166,6 +213,15 @@ const burgerStylesFromLeftCol = css`
 	}
 	${from.wide} {
 		right: 534px;
+	}
+`;
+
+const immersiveBurgerOverrides = css`
+	${from.tablet}
+	${until.desktop} {
+		grid-row: 1;
+		align-self: end;
+		right: 136px;
 	}
 `;
 
@@ -421,7 +477,12 @@ export const Titlepiece = ({
 			/>
 
 			{/* Edition switcher menu */}
-			<div css={editionSwitcherMenuStyles}>
+			<div
+				css={[
+					editionSwitcherMenuStyles,
+					isImmersive && immersiveEditionSwitcherStyles,
+				]}
+			>
 				<EditionDropdown
 					editionId={editionId}
 					dataLinkName={nestedOphanComponents(
@@ -430,15 +491,23 @@ export const Titlepiece = ({
 						'edition-picker: toggle',
 					)}
 					showCurrentEdition={!showBanner}
+					isImmersive={isImmersive}
 				/>
 			</div>
 
 			{/* Guardian logo */}
-			<div css={[logoStyles, !hasPageSkin && logoStylesFromLeftCol]}>
+			<div
+				css={[
+					logoStyles,
+					!hasPageSkin && logoStylesFromLeftCol,
+					isImmersive && immersiveLogoOverrides,
+				]}
+			>
 				<Logo />
 			</div>
 
-			{editionId === 'UK' && (
+			{/* Accreditation text */}
+			{!isImmersive && editionId === 'UK' && (
 				<span
 					css={[
 						accreditationStyles,
@@ -466,7 +535,13 @@ export const Titlepiece = ({
 			/>
 
 			{/* Pillars nav */}
-			<div css={[pillarsNavStyles, horizontalDivider]}>
+			<div
+				css={[
+					pillarsNavStyles,
+					horizontalDivider,
+					isImmersive && immersivePillarsOverrides,
+				]}
+			>
 				<Pillars
 					nav={nav}
 					dataLinkName={nestedOphanComponents(
@@ -481,7 +556,13 @@ export const Titlepiece = ({
 			</div>
 
 			{/** Veggie burger menu button */}
-			<div css={[burgerStyles, !hasPageSkin && burgerStylesFromLeftCol]}>
+			<div
+				css={[
+					burgerStyles,
+					!hasPageSkin && burgerStylesFromLeftCol,
+					isImmersive && immersiveBurgerOverrides,
+				]}
+			>
 				<VeggieBurger />
 			</div>
 
