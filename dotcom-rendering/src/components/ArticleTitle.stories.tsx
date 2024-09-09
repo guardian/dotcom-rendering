@@ -32,7 +32,6 @@ export const StandardDesign = {
 	args: {
 		tags: [],
 		guardianBaseURL: 'https://theguardian.com',
-		shouldShowTagLink: false,
 		sectionLabel: 'Brexit',
 		sectionUrl: 'brexit',
 		format: {
