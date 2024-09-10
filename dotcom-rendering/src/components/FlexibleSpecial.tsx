@@ -52,7 +52,7 @@ const determineCardProperties = (
 			};
 		case 'megaboost':
 			return {
-				headlineSize: 'huge',
+				headlineSize: 'large',
 				headlineSizeOnMobile: 'medium',
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
@@ -60,7 +60,7 @@ const determineCardProperties = (
 			};
 		case 'gigaboost':
 			return {
-				headlineSize: 'ginormous',
+				headlineSize: 'huge',
 				headlineSizeOnMobile: 'large',
 				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
