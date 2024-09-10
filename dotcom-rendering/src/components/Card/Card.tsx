@@ -5,7 +5,6 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
-	textSans14,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { isMediaCard } from '../../lib/cardHelpers';
@@ -55,7 +54,7 @@ import type {
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
-
+import { Hide } from '@guardian/source/react-components';
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
@@ -204,18 +203,6 @@ const decideHeadlinePosition = (
 
 	return 'inner';
 };
-
-const trailTextOuterStyles = css`
-	color: ${themePalette('--card-headline-trail-text')};
-	${textSans14};
-	padding: ${space[2]}px 0;
-	strong {
-		font-weight: bold;
-	}
-	${from.tablet} {
-		display: none;
-	}
-`;
 
 export const Card = ({
 	linkTo,
@@ -389,6 +376,30 @@ export const Card = ({
 		return 'medium';
 	};
 
+	const decideOuterSublinks = () => {
+		if (!supportingContent) return;
+		if (sublinkPosition === 'outer') {
+			return (
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+				/>
+			);
+		}
+		return (
+			<Hide from="desktop">
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+				/>
+			</Hide>
+		);
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -440,15 +451,6 @@ export const Card = ({
 							mediaType={mainMedia.type}
 							hasKicker={!!kickerText}
 						/>
-					)}
-					{!!trailText && (
-						<div css={trailTextOuterStyles}>
-							<div
-								dangerouslySetInnerHTML={{
-									__html: trailText,
-								}}
-							/>
-						</div>
 					)}
 				</div>
 			)}
@@ -667,6 +669,9 @@ export const Card = ({
 									}
 									imageSize={imageSize}
 									imageType={media?.type}
+									shouldHide={
+										isFlexibleContainer ? false : true
+									}
 								>
 									<div
 										dangerouslySetInnerHTML={{
@@ -723,12 +728,14 @@ export const Card = ({
 							)}
 
 							{hasSublinks && sublinkPosition === 'inner' && (
-								<SupportingContent
-									supportingContent={supportingContent}
-									alignment="vertical"
-									containerPalette={containerPalette}
-									isDynamo={isDynamo}
-								/>
+								<Hide until={'desktop'}>
+									<SupportingContent
+										supportingContent={supportingContent}
+										alignment="vertical"
+										containerPalette={containerPalette}
+										isDynamo={isDynamo}
+									/>
+								</Hide>
 							)}
 						</div>
 					</ContentWrapper>
@@ -743,14 +750,7 @@ export const Card = ({
 							: 0,
 				}}
 			>
-				{hasSublinks && sublinkPosition === 'outer' && (
-					<SupportingContent
-						supportingContent={supportingContent}
-						containerPalette={containerPalette}
-						alignment={supportingContentAlignment}
-						isDynamo={isDynamo}
-					/>
-				)}
+				{decideOuterSublinks()}
 
 				{showCommentFooter && (
 					<CardFooter
