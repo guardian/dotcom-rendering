@@ -5,6 +5,7 @@ import {
 	from,
 	palette as sourcePalette,
 	space,
+	textSans14,
 } from '@guardian/source/foundations';
 import { Link } from '@guardian/source/react-components';
 import { isMediaCard } from '../../lib/cardHelpers';
@@ -203,6 +204,18 @@ const decideHeadlinePosition = (
 
 	return 'inner';
 };
+
+const trailTextOuterStyles = css`
+	color: ${themePalette('--card-headline-trail-text')};
+	${textSans14};
+	padding: ${space[2]}px 0;
+	strong {
+		font-weight: bold;
+	}
+	${from.tablet} {
+		display: none;
+	}
+`;
 
 export const Card = ({
 	linkTo,
@@ -428,8 +441,18 @@ export const Card = ({
 							hasKicker={!!kickerText}
 						/>
 					)}
+					{!!trailText && isFlexibleContainer && (
+						<div css={trailTextOuterStyles}>
+							<div
+								dangerouslySetInnerHTML={{
+									__html: trailText,
+								}}
+							/>
+						</div>
+					)}
 				</div>
 			)}
+
 			<CardLayout
 				cardBackgroundColour={cardBackgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
