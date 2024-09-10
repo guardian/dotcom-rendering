@@ -73,9 +73,6 @@ const indices = [
 	// and the myAccount dropdown in the nav
 	'editionSwitcherBanner',
 
-	// Overlay for sticky tag link
-	'tagLinkOverlay',
-
 	// Article headline (should be above main media)
 	'articleHeadline',
 	'immersiveBlackBox',
