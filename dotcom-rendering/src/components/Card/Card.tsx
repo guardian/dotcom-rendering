@@ -452,7 +452,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						fontGroup={isSplash ? 'headline' : 'regular'}
+						fontRange={isSplash ? 'headline' : 'regular'}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -659,7 +659,7 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
-										fontGroup={
+										fontRange={
 											isSplash ? 'headline' : 'regular'
 										}
 									/>
