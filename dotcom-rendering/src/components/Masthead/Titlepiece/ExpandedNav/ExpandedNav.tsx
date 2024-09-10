@@ -100,7 +100,7 @@ const mainMenuStyles = css`
 type Props = {
 	editionId: EditionId;
 	nav: NavType;
-	isImmersive?: boolean;
+	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -110,7 +110,7 @@ type Props = {
  * non journalistic links for support asks and other marketing.
  */
 export const ExpandedNav = ({
-	isImmersive,
+	showSlimNav,
 	nav,
 	editionId,
 	hasPageSkin,
@@ -131,7 +131,7 @@ export const ExpandedNav = ({
 				<div css={mainMenuStyles}>
 					<Sections
 						editionId={editionId}
-						isImmersive={isImmersive}
+						showSlimNav={showSlimNav}
 						nav={nav}
 						hasPageSkin={hasPageSkin}
 					/>

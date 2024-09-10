@@ -23,7 +23,7 @@ type Props = {
 	nav: NavType;
 	dataLinkName: string;
 	selectedPillar?: Pillar;
-	isImmersive?: boolean;
+	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -214,7 +214,7 @@ export const Pillars = ({
 	selectedPillar,
 	dataLinkName,
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- TODO: add slim nav version for immersives
-	isImmersive = false,
+	showSlimNav = false,
 	hasPageSkin = false,
 }: Props) => {
 	return (

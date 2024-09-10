@@ -19,7 +19,7 @@ interface EditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
 	showCurrentEdition?: boolean;
-	isImmersive?: boolean;
+	showSlimNav?: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -45,7 +45,7 @@ const editionDropdownStyles = css`
 	}
 `;
 
-const immersiveEditionDropdownOverrides = css`
+const slimNavEditionDropdownOverrides = css`
 	${until.tablet} {
 		ul {
 			position: absolute;
@@ -58,7 +58,7 @@ const immersiveEditionDropdownOverrides = css`
 	}
 `;
 
-const dropDownOverrides = (isImmersive: boolean) => css`
+const dropDownOverrides = (showSlimNav: boolean) => css`
 	${textSans14}
 	${from.leftCol} {
 		${textSans17}
@@ -72,7 +72,7 @@ const dropDownOverrides = (isImmersive: boolean) => css`
 		text-decoration: underline;
 	}
 
-	${isImmersive &&
+	${showSlimNav &&
 	css`
 		padding: 0;
 		margin-top: 0;
@@ -83,7 +83,7 @@ export const EditionDropdown = ({
 	editionId,
 	dataLinkName,
 	showCurrentEdition = true,
-	isImmersive = false,
+	showSlimNav = false,
 }: EditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
@@ -120,7 +120,7 @@ export const EditionDropdown = ({
 		<div
 			css={[
 				editionDropdownStyles,
-				isImmersive && immersiveEditionDropdownOverrides,
+				showSlimNav && slimNavEditionDropdownOverrides,
 			]}
 		>
 			<Dropdown
@@ -128,7 +128,7 @@ export const EditionDropdown = ({
 				links={linksToDisplay}
 				id="masthead-edition"
 				dataLinkName={dataLinkName}
-				cssOverrides={dropDownOverrides(isImmersive)}
+				cssOverrides={dropDownOverrides(showSlimNav)}
 			/>
 		</div>
 	);

@@ -103,14 +103,14 @@ const brandExtensionLinkFromWide = css`
 
 type Props = {
 	editionId: EditionId;
-	isImmersive?: boolean;
+	showSlimNav?: boolean;
 	nav: NavType;
 	hasPageSkin?: boolean;
 };
 
 export const Sections = ({
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- TODO: add slim nav version for immersives
-	isImmersive = false,
+	showSlimNav = false,
 	nav,
 	editionId,
 	hasPageSkin,

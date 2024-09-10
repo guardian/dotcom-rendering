@@ -32,7 +32,7 @@ interface Props {
 	nav: NavType;
 	editionId: EditionId;
 	showSubNav?: boolean;
-	isImmersive?: boolean;
+	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	pageId?: string;
 }
@@ -56,7 +56,7 @@ const editionSwitcherMenuStyles = css`
 	width: fit-content;
 `;
 
-const immersiveEditionSwitcherStyles = css`
+const slimNavEditionSwitcherStyles = css`
 	${until.tablet} {
 		justify-self: start;
 	}
@@ -127,7 +127,7 @@ const logoStylesFromLeftCol = css`
 	}
 `;
 
-const immersiveLogoOverrides = css`
+const slimNavLogoOverrides = css`
 	position: relative;
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[2]}px;
@@ -186,7 +186,7 @@ const pillarsNavStyles = css`
 	pointer-events: none;
 `;
 
-const immersivePillarsOverrides = css`
+const slimNavPillarsOverrides = css`
 	grid-row: 1;
 	${until.tablet} {
 		display: none;
@@ -225,7 +225,7 @@ const burgerStylesFromLeftCol = css`
 	}
 `;
 
-const immersiveBurgerOverrides = css`
+const slimNavBurgerOverrides = css`
 	position: relative;
 	grid-row: 1;
 	align-self: end;
@@ -337,7 +337,7 @@ export const Titlepiece = ({
 	nav,
 	editionId,
 	showSubNav,
-	isImmersive,
+	showSlimNav,
 	hasPageSkin,
 	pageId = '',
 }: Props) => {
@@ -505,7 +505,7 @@ export const Titlepiece = ({
 			<div
 				css={[
 					editionSwitcherMenuStyles,
-					isImmersive && immersiveEditionSwitcherStyles,
+					showSlimNav && slimNavEditionSwitcherStyles,
 				]}
 			>
 				<EditionDropdown
@@ -516,7 +516,7 @@ export const Titlepiece = ({
 						'edition-picker: toggle',
 					)}
 					showCurrentEdition={!showBanner}
-					isImmersive={isImmersive}
+					showSlimNav={showSlimNav}
 				/>
 			</div>
 
@@ -525,14 +525,14 @@ export const Titlepiece = ({
 				css={[
 					logoStyles,
 					!hasPageSkin && logoStylesFromLeftCol,
-					isImmersive && immersiveLogoOverrides,
+					showSlimNav && slimNavLogoOverrides,
 				]}
 			>
 				<Logo />
 			</div>
 
 			{/* Accreditation text */}
-			{!isImmersive && editionId === 'UK' && (
+			{!showSlimNav && editionId === 'UK' && (
 				<span
 					css={[
 						accreditationStyles,
@@ -564,7 +564,7 @@ export const Titlepiece = ({
 				css={[
 					pillarsNavStyles,
 					horizontalDivider,
-					isImmersive && immersivePillarsOverrides,
+					showSlimNav && slimNavPillarsOverrides,
 				]}
 			>
 				<Pillars
@@ -575,7 +575,7 @@ export const Titlepiece = ({
 						'nav',
 					)}
 					selectedPillar={nav.selectedPillar}
-					isImmersive={isImmersive}
+					showSlimNav={showSlimNav}
 					hasPageSkin={hasPageSkin}
 				/>
 			</div>
@@ -585,7 +585,7 @@ export const Titlepiece = ({
 				css={[
 					burgerStyles,
 					!hasPageSkin && burgerStylesFromLeftCol,
-					isImmersive && immersiveBurgerOverrides,
+					showSlimNav && slimNavBurgerOverrides,
 				]}
 			>
 				<VeggieBurger />
@@ -594,7 +594,7 @@ export const Titlepiece = ({
 			{/** Expanded menu */}
 			<div id={expandedMenuRootId} css={expandedNavStyles}>
 				<ExpandedNav
-					isImmersive={isImmersive}
+					showSlimNav={showSlimNav}
 					nav={nav}
 					editionId={editionId}
 					hasPageSkin={hasPageSkin}
