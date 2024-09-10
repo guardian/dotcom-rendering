@@ -137,9 +137,7 @@ export const HighlightsCard = ({
 	isExternalLink,
 }: HighlightsCardProps) => {
 	const showMediaIcon = isMediaCard(format);
-	if (headlineText === 'Movie royalty who inspired both love and respect')
-		headlineText =
-			'Movie royalty who uncharacteristically inspired love and respect';
+
 	return (
 		<FormatBoundary format={format}>
 			<div css={[gridContainer, hoverStyles]}>
