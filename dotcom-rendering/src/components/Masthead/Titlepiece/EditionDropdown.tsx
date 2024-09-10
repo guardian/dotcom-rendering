@@ -49,8 +49,8 @@ const slimNavEditionDropdownOverrides = css`
 	${until.tablet} {
 		ul {
 			position: absolute;
-			right: 0;
-			left: unset;
+			left: 0;
+			right: unset;
 			top: ${space[6]}px;
 			max-height: unset;
 			min-width: 200px;
