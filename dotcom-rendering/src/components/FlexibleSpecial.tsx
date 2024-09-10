@@ -1,9 +1,10 @@
+import { BoostLevel } from 'src/types/content';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { ImagePositionType } from './Card/components/ImageWrapper';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
@@ -25,13 +26,12 @@ type boostProperties = {
 	imagePositionOnMobile: ImagePositionType;
 };
 
-type BoostLevel = 'default' | 'boost' | 'megaBoost' | 'gigaBoost';
-
 /**
  * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
  */
 const determineCardProperties = (boostLevel: BoostLevel): boostProperties => {
 	switch (boostLevel) {
+		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
 			return {
 				headlineSize: 'medium',
@@ -48,7 +48,7 @@ const determineCardProperties = (boostLevel: BoostLevel): boostProperties => {
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'top',
 			};
-		case 'megaBoost':
+		case 'megaboost':
 			return {
 				headlineSize: 'huge',
 				headlineSizeOnMobile: 'medium',
@@ -56,7 +56,7 @@ const determineCardProperties = (boostLevel: BoostLevel): boostProperties => {
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'top',
 			};
-		case 'gigaBoost':
+		case 'gigaboost':
 			return {
 				headlineSize: 'ginormous',
 				headlineSizeOnMobile: 'large',
@@ -86,7 +86,7 @@ export const OneCardLayout = ({
 		headlineSizeOnTablet,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
-	} = determineCardProperties('default');
+	} = determineCardProperties(cards[0].boostLevel || 'default');
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
