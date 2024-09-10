@@ -6,7 +6,7 @@ import {
 	Button,
 	LinkButton,
 	SvgCheckmark,
-	SvgShare,
+	SvgShareWeb,
 } from '@guardian/source/react-components';
 import { useEffect, useMemo, useState } from 'react';
 import { transparentColour } from '../lib/transparentColour';
@@ -117,7 +117,7 @@ export const CopyNativeShareButton = ({
 			type="button"
 			priority="tertiary"
 			iconSide="left"
-			icon={isCopied ? <SvgCheckmark /> : <SvgShare />}
+			icon={isCopied ? <SvgCheckmark /> : <SvgShareWeb />}
 			css={[
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
@@ -148,7 +148,7 @@ export const EmailLink = ({
 			type="button"
 			priority="tertiary"
 			iconSide="left"
-			icon={<SvgShare />}
+			icon={<SvgShareWeb />}
 			css={[
 				buttonStyles(sizeXSmall),
 				sharedButtonStyles(sizeXSmall),

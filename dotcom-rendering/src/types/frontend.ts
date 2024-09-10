@@ -1,15 +1,9 @@
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
-import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType, ServerSideTests } from './config';
-import type {
-	FEElement,
-	ImageForLightbox,
-	Newsletter,
-	StarRating,
-} from './content';
+import type { FEElement, Newsletter, StarRating } from './content';
 import type { FooterType } from './footer';
 import type { FEOnwards } from './onwards';
 import type { MatchType } from './sport';
@@ -132,25 +126,6 @@ type PageTypeType = {
 	isPreview: boolean;
 	isSensitive: boolean;
 };
-
-/**
- * The `DCRArticle` type models the `FEArticleType` in addition to any enhancements DCR makes after
- * receiving the data from Frontend.
- */
-export type DCRArticle = FEArticleType & {
-	imagesForLightbox: ImageForLightbox[];
-	imagesForAppsLightbox: ImageForAppsLightbox[];
-	tableOfContents?: TableOfContentsItem[];
-};
-
-export interface TableOfContents {
-	items: TableOfContentsItem[];
-}
-
-export interface TableOfContentsItem {
-	id: string;
-	title: string;
-}
 
 /**
  * BlocksRequest is the expected body format for POST requests made to /Blocks

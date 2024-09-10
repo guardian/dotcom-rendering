@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Dead: DCRArticle = {
+export const Dead: Article = {
 	version: 3,
 	headline:
 		'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',

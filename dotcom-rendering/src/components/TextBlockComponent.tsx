@@ -15,6 +15,7 @@ import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
 import { decidePalette } from '../lib/decidePalette';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
+import { palette as themePalette } from '../palette';
 import { logger } from '../server/lib/logging';
 import { DropCap } from './DropCap';
 
@@ -162,6 +163,8 @@ const styles = (format: ArticleFormat) => css`
 	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17};
+	color: ${themePalette('--textblock-text')};
+
 	strong em,
 	strong u {
 		font-weight: bold;

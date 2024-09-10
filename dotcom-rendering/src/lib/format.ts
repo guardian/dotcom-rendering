@@ -38,6 +38,7 @@ export const getAllThemes = ({
 			display,
 			design,
 		}));
+
 export const getAllDesigns = ({
 	display,
 	theme,

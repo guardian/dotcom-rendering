@@ -1,4 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
+import { decideFormat } from '../lib/decideFormat';
+import type { ImageForAppsLightbox } from '../model/appsLightboxImages';
 import { appsLightboxImages } from '../model/appsLightboxImages';
 import { buildLightboxImages } from '../model/buildLightboxImages';
 import { enhanceBlocks, enhanceMainMedia } from '../model/enhanceBlocks';
@@ -6,15 +8,33 @@ import { enhanceCommercialProperties } from '../model/enhanceCommercialPropertie
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
-import { type DCRArticle } from '../types/frontend';
-import { type RenderingTarget } from '../types/renderingTarget';
-import { decideFormat } from './decideFormat';
+import type { ImageForLightbox } from './content';
+import type { FEArticleType } from './frontend';
+import { type RenderingTarget } from './renderingTarget';
+
+/**
+ * The `Article` type enhances `FEArticleType` type which defines the model received from Frontend
+ */
+export type Article = FEArticleType & {
+	imagesForLightbox: ImageForLightbox[];
+	imagesForAppsLightbox: ImageForAppsLightbox[];
+	tableOfContents?: TableOfContentsItem[];
+};
+
+export interface TableOfContents {
+	items: TableOfContentsItem[];
+}
+
+export interface TableOfContentsItem {
+	id: string;
+	title: string;
+}
 
 const enhancePinnedPost = (
 	format: ArticleFormat,
 	renderingTarget: RenderingTarget,
 	block?: Block,
-) => {
+): Block | undefined => {
 	if (!block) return;
 
 	return enhanceBlocks([block], format, {
@@ -28,7 +48,7 @@ const enhancePinnedPost = (
 export const enhanceArticleType = (
 	body: unknown,
 	renderingTarget: RenderingTarget,
-): DCRArticle => {
+): Article => {
 	const data = validateAsArticleType(body);
 	const format = decideFormat(data.format);
 

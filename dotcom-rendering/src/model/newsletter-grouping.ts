@@ -72,7 +72,6 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Sport',
 			newsletters: [
-				'tokyo-2020-daily-briefing',
 				'the-fiver', // Football Daily
 				'moving-the-goalposts',
 				'soccer-with-jonathan-wilson',
@@ -174,7 +173,6 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Sport',
 			newsletters: [
-				'tokyo-2020-daily-briefing',
 				'the-fiver', // Football Daily
 				'moving-the-goalposts',
 				'the-spin',

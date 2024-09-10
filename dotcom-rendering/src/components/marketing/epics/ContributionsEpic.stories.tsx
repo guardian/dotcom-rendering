@@ -358,6 +358,20 @@ export const WithThreeTierChoiceCards: Story = {
 	},
 };
 
+export const WithThreeTierChoiceCardsForUS: Story = {
+	name: 'ContributionsEpic with three tier choice cards for US',
+	args: {
+		...meta.args,
+		countryCode: 'US',
+		variant: {
+			...props.variant,
+			name: 'THREE_TIER_CHOICE_CARDS',
+			secondaryCta: undefined,
+			showChoiceCards: true,
+		},
+	},
+};
+
 export const WithChoiceCardsAndSignInLink: Story = {
 	name: 'ContributionsEpic with choice cards and sign-in link',
 	args: {

@@ -40,11 +40,11 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import type { NavType } from '../model/extract-nav';
-import type { DCRArticle } from '../types/frontend';
+import type { Article } from '../types/article';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
-	article: DCRArticle;
+	article: Article;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -175,7 +175,7 @@ const regionalFocusDivStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const getMainMediaCaptions = (article: DCRArticle): (string | undefined)[] =>
+const getMainMediaCaptions = (article: Article): (string | undefined)[] =>
 	article.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? el.data.caption

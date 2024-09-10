@@ -17,7 +17,6 @@ import { shouldHideSupportMessaging } from '../lib/contributions';
 import { useIsSignedIn } from '../lib/useAuthStatus';
 import { useCountryCode } from '../lib/useCountryCode';
 import { usePageViewId } from '../lib/usePageViewId';
-import type { TagType } from '../types/tag';
 import { useConfig } from './ConfigContext';
 import type { ReactComponent } from './marketing/lib/ReactComponent';
 import {
@@ -161,14 +160,13 @@ export const StickyLiveblogAsk: ReactComponent<StickyLiveblogAskProps> = ({
 interface StickyLiveblogAskWrapperProps {
 	referrerUrl: string;
 	shouldHideReaderRevenueOnArticle: boolean;
-	tags: TagType[];
 }
 
 const whatAmI = 'sticky-liveblog-ask';
 
 export const StickyLiveblogAskWrapper: ReactComponent<
 	StickyLiveblogAskWrapperProps
-> = ({ referrerUrl, shouldHideReaderRevenueOnArticle, tags }) => {
+> = ({ referrerUrl, shouldHideReaderRevenueOnArticle }) => {
 	const { renderingTarget } = useConfig();
 	const countryCode = useCountryCode(whatAmI);
 	const pageViewId = usePageViewId(renderingTarget);
@@ -208,17 +206,8 @@ export const StickyLiveblogAskWrapper: ReactComponent<
 		countryCode,
 	);
 
-	/* This is based on the assumption that the tag is added at the point of blog creation
-	 *  and not added later.  It's a balancing act between adding a useEffect that will run
-	 *  each time a tag is added to check (less performant) and doing it on load. */
-	const shouldHideBasedOnTags = tags.some((a) => {
-		return a.id === 'sport/paralympic-games-2024';
-	});
-
 	const canShow =
-		showSupportMessagingForUser &&
-		!shouldHideReaderRevenueOnArticle &&
-		!shouldHideBasedOnTags;
+		showSupportMessagingForUser && !shouldHideReaderRevenueOnArticle;
 
 	// send event regardless of variant or control
 	// but only where they *could* see the component.

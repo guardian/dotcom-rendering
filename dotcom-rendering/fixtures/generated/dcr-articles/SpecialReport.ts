@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const SpecialReport: DCRArticle = {
+export const SpecialReport: Article = {
 	version: 3,
 	headline:
 		'How do we rein in the fossil fuel industry? Here are eight ideas',

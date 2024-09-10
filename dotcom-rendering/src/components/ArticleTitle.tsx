@@ -14,7 +14,6 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	shouldShowTagLink: boolean;
 	isMatch?: boolean;
 };
 
@@ -48,28 +47,14 @@ export const ArticleTitle = ({
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	shouldShowTagLink,
 	isMatch,
 }: Props) => (
-	<div
-		css={[
-			sectionStyles,
-			shouldShowTagLink &&
-				css`
-					padding-top: 0;
-					margin-top: 1px;
-				`,
-		]}
-	>
+	<div css={[sectionStyles]}>
 		<div
 			css={[
 				format.display === ArticleDisplay.Immersive &&
 					format.design !== ArticleDesign.PrintShop &&
 					immersiveMargins,
-				shouldShowTagLink &&
-					css`
-						width: 100%;
-					`,
 			]}
 		>
 			<SeriesSectionLink
@@ -79,7 +64,6 @@ export const ArticleTitle = ({
 				sectionUrl={sectionUrl}
 				guardianBaseURL={guardianBaseURL}
 				isMatch={isMatch}
-				shouldShowTagLink={shouldShowTagLink}
 			/>
 		</div>
 	</div>
