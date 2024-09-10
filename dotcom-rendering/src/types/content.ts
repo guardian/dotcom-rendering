@@ -2,6 +2,8 @@ import type { ArticleTheme } from '@guardian/libs';
 
 export type StarRating = 0 | 1 | 2 | 3 | 4 | 5;
 
+export type BoostLevel = 'default' | 'boost' | 'megaboost' | 'gigaboost';
+
 // -------------------------------------
 // Elements
 

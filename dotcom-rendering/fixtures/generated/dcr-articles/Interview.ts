@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Interview: DCRArticle = {
+export const Interview: Article = {
 	version: 3,
 	headline:
 		"‘We all deserve representation': hijab-wearing model Halima Aden on the power of fashion",

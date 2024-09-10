@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Recipe: DCRArticle = {
+export const Recipe: Article = {
 	version: 3,
 	headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
 	standfirst:

@@ -43,7 +43,7 @@ import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { CardFooter } from './components/CardFooter';
-import { CardLayout } from './components/CardLayout';
+import { CardLayout, type GapSize } from './components/CardLayout';
 import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
@@ -260,7 +260,6 @@ export const Card = ({
 	const headlinePosition = decideHeadlinePosition(imageSize, containerType);
 
 	const showQuotes = !!showQuotedHeadline;
-	const isFlexibleContainer = containerType === 'flexible/special';
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -360,6 +359,23 @@ export const Card = ({
 	 */
 	const hasBackgroundColour = !containerPalette && isMediaCard(format);
 
+	/* Whilst we migrate to the new container types, we need to check which container we are in. */
+	const isFlexibleContainer = containerType === 'flexible/special';
+
+	/** Determines the gap of between card components based on card properties */
+	const getGapSize = (): GapSize => {
+		if (isOnwardContent) return 'none';
+		if (hasBackgroundColour) return 'small';
+		if (
+			isFlexibleContainer &&
+			(imagePositionOnDesktop === 'left' ||
+				imagePositionOnDesktop === 'right')
+		) {
+			return 'large';
+		}
+		return 'medium';
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -421,8 +437,7 @@ export const Card = ({
 				minWidthInPixels={minWidthInPixels}
 				imageType={media?.type}
 				containerType={containerType}
-				isOnwardContent={isOnwardContent}
-				hasBackgroundColour={hasBackgroundColour}
+				gapSize={getGapSize()}
 			>
 				{media && (
 					<ImageWrapper

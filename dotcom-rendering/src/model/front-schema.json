@@ -1051,6 +1051,9 @@
                                                 "isBoosted": {
                                                     "type": "boolean"
                                                 },
+                                                "boostLevel": {
+                                                    "$ref": "#/definitions/BoostLevel"
+                                                },
                                                 "showBoostedHeadline": {
                                                     "type": "boolean"
                                                 },
@@ -1781,6 +1784,9 @@
                                             "properties": {
                                                 "isBoosted": {
                                                     "type": "boolean"
+                                                },
+                                                "boostLevel": {
+                                                    "$ref": "#/definitions/BoostLevel"
                                                 },
                                                 "showBoostedHeadline": {
                                                     "type": "boolean"
@@ -2513,6 +2519,9 @@
                                                 "isBoosted": {
                                                     "type": "boolean"
                                                 },
+                                                "boostLevel": {
+                                                    "$ref": "#/definitions/BoostLevel"
+                                                },
                                                 "showBoostedHeadline": {
                                                     "type": "boolean"
                                                 },
@@ -3177,6 +3186,15 @@
                 5
             ],
             "type": "number"
+        },
+        "BoostLevel": {
+            "enum": [
+                "boost",
+                "default",
+                "gigaboost",
+                "megaboost"
+            ],
+            "type": "string"
         },
         "FEContainerType": {
             "enum": [

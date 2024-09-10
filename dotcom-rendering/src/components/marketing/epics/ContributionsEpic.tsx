@@ -15,7 +15,6 @@ import {
 import {
 	containsNonArticleCountPlaceholder,
 	epicPropsSchema,
-	getLocalCurrencySymbol,
 	replaceNonArticleCountPlaceholders,
 } from '@guardian/support-dotcom-components';
 import type {
@@ -39,7 +38,6 @@ import type { OphanTracking } from '../shared/ArticleCountOptOutPopup';
 import { withParsedProps } from '../shared/ModuleWrapper';
 import { BylineWithHeadshot } from './BylineWithHeadshot';
 import { ContributionsEpicArticleCountAboveWithOptOut } from './ContributionsEpicArticleCountAboveWithOptOut';
-import { ContributionsEpicChoiceCards } from './ContributionsEpicChoiceCards';
 import { ContributionsEpicCtas } from './ContributionsEpicCtas';
 import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletterSignup';
 import { ContributionsEpicSignInCta } from './ContributionsEpicSignInCta';
@@ -311,20 +309,10 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 		setThreeTierChoiceCardSelectedAmount,
 	] = useState<number>(defaultThreeTierAmount);
 
-	const showThreeTierChoiceCards =
-		showChoiceCards && variant.name.includes('THREE_TIER_CHOICE_CARDS');
-
-	const showThreeTierChoiceCardsV1 =
-		showChoiceCards && variant.name.includes('V1_THREE_TIER_CHOICE_CARDS');
-
-	const showThreeTierChoiceCardsV2 =
-		showChoiceCards && variant.name.includes('V2_THREE_TIER_CHOICE_CARDS');
-
-	const variantOfChoiceCard = showThreeTierChoiceCardsV1
-		? 'V1_THREE_TIER_CHOICE_CARDS'
-		: showThreeTierChoiceCardsV2
-		? 'V2_THREE_TIER_CHOICE_CARDS'
-		: 'THREE_TIER_CHOICE_CARDS';
+	const variantOfChoiceCard =
+		countryCode === 'US'
+			? 'US_THREE_TIER_CHOICE_CARDS'
+			: 'THREE_TIER_CHOICE_CARDS';
 
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
@@ -340,8 +328,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			});
 		}
 	}, [showChoiceCards, choiceCardAmounts]);
-
-	const currencySymbol = getLocalCurrencySymbol(countryCode);
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -483,16 +469,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				<BylineWithHeadshot bylineWithImage={variant.bylineWithImage} />
 			)}
 
-			{choiceCardAmounts && !showThreeTierChoiceCards && (
-				<ContributionsEpicChoiceCards
-					setSelectionsCallback={setChoiceCardSelection}
-					selection={choiceCardSelection}
-					submitComponentEvent={submitComponentEvent}
-					currencySymbol={currencySymbol}
-					amountsTest={choiceCardAmounts}
-				/>
-			)}
-			{showThreeTierChoiceCards && (
+			{showChoiceCards && (
 				<ThreeTierChoiceCards
 					countryCode={countryCode}
 					selectedAmount={threeTierChoiceCardSelectedAmount}
@@ -520,7 +497,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
 					choiceCardSelection={choiceCardSelection}
-					showThreeTierChoiceCards={showThreeTierChoiceCards}
+					showThreeTierChoiceCards={showChoiceCards}
 					threeTierChoiceCardSelectedAmount={
 						threeTierChoiceCardSelectedAmount
 					}

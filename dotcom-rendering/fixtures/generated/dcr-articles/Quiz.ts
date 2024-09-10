@@ -11,9 +11,9 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Quiz: DCRArticle = {
+export const Quiz: Article = {
 	version: 3,
 	headline: 'Sports quiz: football in the 1980s',
 	standfirst:

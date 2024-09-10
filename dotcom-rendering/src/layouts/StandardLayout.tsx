@@ -53,7 +53,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { DCRArticle } from '../types/frontend';
+import type { Article } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -349,7 +349,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	article: DCRArticle;
+	article: Article;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -405,10 +405,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const renderAds = isWeb && canRenderAds(article);
-
-	const shouldShowTagLink =
-		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
 
 	return (
 		<>
@@ -468,10 +464,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main
-				data-layout="StandardLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
-			>
+			<main data-layout="StandardLayout">
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -560,7 +553,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
 								isMatch={!!footballMatchUrl}
-								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">

@@ -8,7 +8,7 @@ import {
 } from '@guardian/source/foundations';
 import {
 	Button,
-	SvgShare,
+	SvgShareWeb,
 	SvgTickRound,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
@@ -178,7 +178,7 @@ export const CalloutShare = ({
 		<>
 			<div css={shareCalloutStyles}>
 				<span css={shareIconStyles}>
-					<SvgShare size="small" />
+					<SvgShareWeb size="small" />
 				</span>
 				<div css={shareCalloutTextStyles}>
 					<Button

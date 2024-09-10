@@ -1,6 +1,6 @@
 import {
 	Button,
-	SvgShare,
+	SvgShareWeb,
 	SvgTickRound,
 } from '@guardian/source/react-components';
 import { useState } from 'react';
@@ -55,7 +55,7 @@ You can share your story by using the form on this article, or by contacting the
 	return (
 		<div css={calloutShare}>
 			<span css={shareIcon}>
-				<SvgShare size="small" />
+				<SvgShareWeb size="small" />
 			</span>
 			<div>
 				Know others that are affected?{' '}
