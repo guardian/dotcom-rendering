@@ -36,7 +36,7 @@ type Props = {
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
 	sizeOnTablet?: SmallHeadlineSize;
-	fontGroup?: 'standard' | 'large';
+	fontGroup?: 'regular' | 'headline';
 	byline?: string;
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
@@ -45,8 +45,8 @@ type Props = {
 	isHighlights?: boolean;
 };
 
-/** These represent a new set of fonts. They are large font sizes  */
-const largeFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
+/** These represent a new set of fonts. They are extra large font sizes that, as a set, are only used on headlines */
+const headlineFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
 		// we don't have a ginormous size in designs. For now this defaults to huge.
 		case 'ginormous':
@@ -76,12 +76,12 @@ const fontStyles = ({
 	fontGroup,
 }: {
 	size: SmallHeadlineSize;
-	fontGroup: 'standard' | 'large';
+	fontGroup: 'regular' | 'headline';
 }) => {
 	switch (fontGroup) {
-		case 'large':
-			return largeFontStyles({ size });
-		case 'standard':
+		case 'headline':
+			return headlineFontStyles({ size });
+		case 'regular':
 		default:
 			switch (size) {
 				case 'ginormous':
@@ -119,13 +119,13 @@ const fontStylesOnTablet = ({
 	fontGroup,
 }: {
 	size?: SmallHeadlineSize;
-	fontGroup: 'standard' | 'large';
+	fontGroup: 'regular' | 'headline';
 }) => {
 	if (!size) return;
-	if (fontGroup === 'large') {
+	if (fontGroup === 'headline') {
 		return css`
 			${between.tablet.and.desktop} {
-				${largeFontStyles({ size })}
+				${headlineFontStyles({ size })}
 			}
 		`;
 	}
@@ -137,18 +137,18 @@ const fontStylesOnMobile = ({
 	fontGroup,
 }: {
 	size: SmallHeadlineSize;
-	fontGroup: 'standard' | 'large';
+	fontGroup: 'regular' | 'headline';
 }) => {
 	switch (fontGroup) {
-		case 'large': {
+		case 'headline': {
 			return css`
 				${until.tablet} {
-					${largeFontStyles({ size })}
+					${headlineFontStyles({ size })}
 				}
 			`;
 		}
 
-		case 'standard':
+		case 'regular':
 		default:
 			switch (size) {
 				case 'ginormous':
@@ -290,7 +290,7 @@ export const CardHeadline = ({
 	size = 'medium',
 	sizeOnMobile,
 	sizeOnTablet,
-	fontGroup = 'standard',
+	fontGroup = 'regular',
 	byline,
 	showByline,
 	linkTo,
