@@ -45,7 +45,7 @@ const determineCardProperties = (boostLevel: BoostLevel): boostProperties => {
 				headlineSize: 'large',
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'medium',
-				imagePositionOnDesktop: 'bottom',
+				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'top',
 			};
 		case 'megaBoost':
