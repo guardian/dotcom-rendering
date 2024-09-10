@@ -1,4 +1,4 @@
-import { BoostLevel } from 'src/types/content';
+import type { BoostLevel } from '../types/content';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
@@ -47,7 +47,7 @@ const determineCardProperties = (
 				headlineSize: 'large',
 				headlineSizeOnMobile: 'small',
 				headlineSizeOnTablet: 'medium',
-				imagePositionOnDesktop: 'bottom',
+				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'top',
 			};
 		case 'megaboost':
