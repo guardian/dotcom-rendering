@@ -3,7 +3,6 @@ import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import { brandAltBackground, palette } from '@guardian/source/foundations';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../lib/pillars';
-import { palette as themePalette } from '../palette';
 import type { Palette } from '../types/palette';
 import { transparentColour } from './transparentColour';
 
@@ -21,16 +20,6 @@ const {
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
-
-const textHeadlineWhenMatch = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.MatchReport:
-		case ArticleDesign.LiveBlog:
-			return BLACK;
-		default:
-			return themePalette('--series-title-text');
-	}
-};
 
 const textStandfirst = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -444,7 +433,6 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
-			headlineWhenMatch: textHeadlineWhenMatch(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			disclaimerLink: textDisclaimerLink(format),

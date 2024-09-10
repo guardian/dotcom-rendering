@@ -19,7 +19,6 @@ import {
 } from '@guardian/source/foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getAgeWarning } from '../lib/age-warning';
-import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { palette as themePalette } from '../palette';
 import type { TagType } from '../types/tag';
@@ -371,7 +370,6 @@ export const ArticleHeadline = ({
 	hasAvatar,
 	isMatch,
 }: Props) => {
-	const palette = decidePalette(format);
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -764,7 +762,9 @@ export const ArticleHeadline = ({
 											: headlineFont(format),
 										css`
 											color: ${isMatch
-												? palette.text.headlineWhenMatch
+												? themePalette(
+														'--series-title-match-text',
+												  )
 												: themePalette(
 														'--headline-colour',
 												  )};
