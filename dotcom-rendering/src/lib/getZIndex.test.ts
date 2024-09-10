@@ -12,7 +12,9 @@ describe('getZIndex', () => {
 		);
 		expect(getZIndex('expanded-veggie-menu-wrapper')).toBe('z-index: 25;');
 		expect(getZIndex('expanded-veggie-menu')).toBe('z-index: 24;');
-		expect(getZIndex('headerWrapper')).toBe('z-index: 23;');
+		expect(getZIndex('fullPageInteractiveHeaderWrapper')).toBe(
+			'z-index: 23;',
+		);
 		expect(getZIndex('mobileSticky')).toBe('z-index: 22;');
 		expect(getZIndex('stickyAdWrapperLabsHeader')).toBe('z-index: 21;');
 		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 20;');

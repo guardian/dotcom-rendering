@@ -36,7 +36,7 @@ const indices = [
 	'expanded-veggie-menu',
 
 	//header wrapper needs to be in line with veggie menus to ensure it stands above various banners
-	'headerWrapper',
+	'fullPageInteractiveHeaderWrapper',
 
 	// Mobile sticky appears below banners
 	'mobileSticky',
