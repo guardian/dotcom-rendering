@@ -38,6 +38,13 @@ const gridContainer = css`
 	grid-template-areas:
 		'headline 	headline'
 		'media-icon image';
+
+	/* Applied word-break: break-word to prevent text overflow
+	and ensure long words break onto the next line.
+	This is important since the highlights card can only take up a set portion
+	of the screen to allow for the peeping card on mobile and grid layout
+	on larger breakpoints, and the image has a fixed width on all breakpoints. */
+	word-break: break-word;
 	${until.mobileMedium} {
 		min-height: 174px;
 	}
@@ -130,7 +137,9 @@ export const HighlightsCard = ({
 	isExternalLink,
 }: HighlightsCardProps) => {
 	const showMediaIcon = isMediaCard(format);
-
+	if (headlineText === 'Movie royalty who inspired both love and respect')
+		headlineText =
+			'Movie royalty who uncharacteristically inspired love and respect';
 	return (
 		<FormatBoundary format={format}>
 			<div css={[gridContainer, hoverStyles]}>
