@@ -100,7 +100,6 @@ const mainMenuStyles = css`
 type Props = {
 	editionId: EditionId;
 	nav: NavType;
-	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -109,12 +108,7 @@ type Props = {
  * secondary pillar links, other Guardian links as well as
  * non journalistic links for support asks and other marketing.
  */
-export const ExpandedNav = ({
-	showSlimNav,
-	nav,
-	editionId,
-	hasPageSkin,
-}: Props) => {
+export const ExpandedNav = ({ nav, editionId, hasPageSkin }: Props) => {
 	return (
 		<div
 			id={expandedMenuId}
@@ -131,7 +125,6 @@ export const ExpandedNav = ({
 				<div css={mainMenuStyles}>
 					<Sections
 						editionId={editionId}
-						showSlimNav={showSlimNav}
 						nav={nav}
 						hasPageSkin={hasPageSkin}
 					/>

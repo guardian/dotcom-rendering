@@ -56,7 +56,7 @@ const editionSwitcherMenuStyles = css`
 	width: fit-content;
 `;
 
-const slimNavEditionSwitcherStyles = css`
+const slimNavEditionSwitcherOverrides = css`
 	${until.tablet} {
 		justify-self: start;
 	}
@@ -514,7 +514,7 @@ export const Titlepiece = ({
 			<div
 				css={[
 					editionSwitcherMenuStyles,
-					showSlimNav && slimNavEditionSwitcherStyles,
+					showSlimNav && slimNavEditionSwitcherOverrides,
 				]}
 			>
 				<EditionDropdown
@@ -585,7 +585,6 @@ export const Titlepiece = ({
 						'nav',
 					)}
 					selectedPillar={nav.selectedPillar}
-					showSlimNav={showSlimNav}
 					hasPageSkin={hasPageSkin}
 				/>
 			</div>
@@ -604,7 +603,6 @@ export const Titlepiece = ({
 			{/** Expanded menu */}
 			<div id={expandedMenuRootId} css={expandedNavStyles}>
 				<ExpandedNav
-					showSlimNav={showSlimNav}
 					nav={nav}
 					editionId={editionId}
 					hasPageSkin={hasPageSkin}
