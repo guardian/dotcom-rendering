@@ -383,7 +383,7 @@ export const Card = ({
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
+					alignment={'horizontal'}
 					isDynamo={isDynamo}
 				/>
 			);
@@ -393,7 +393,7 @@ export const Card = ({
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
-					alignment={supportingContentAlignment}
+					alignment={'horizontal'}
 					isDynamo={isDynamo}
 				/>
 			</Hide>
