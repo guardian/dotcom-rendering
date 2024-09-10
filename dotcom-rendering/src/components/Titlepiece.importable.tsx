@@ -89,16 +89,17 @@ const accreditationStylesFromLeftCol = css`
 `;
 
 const logoStyles = css`
-	display: flex;
 	${gridMainColumn}
 	grid-row: 1;
+	position: relative;
+	display: flex;
 	justify-self: end;
 	align-self: end;
 	margin-top: ${space[2]}px;
 	margin-bottom: 6px;
-	margin-right: ${veggieBurgerDiameter + space[3]}px;
+	right: ${veggieBurgerDiameter + space[3]}px;
 	${from.mobileMedium} {
-		margin-right: 0;
+		right: 0;
 	}
 	${from.mobileLandscape} {
 		margin-bottom: ${space[2]}px;
@@ -128,11 +129,19 @@ const logoStylesFromLeftCol = css`
 
 const immersiveLogoOverrides = css`
 	position: relative;
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+	right: ${veggieBurgerDiameter + 6}px;
+
 	${from.mobile} {
-		right: 0;
+		right: ${veggieBurgerDiameter + 6}px;
 	}
 	${from.mobileMedium} {
 		right: ${veggieBurgerDiameter + 6}px;
+	}
+	${from.mobileLandscape} {
+		margin-top: ${space[2]}px;
+		margin-bottom: ${space[2]}px;
 	}
 	${from.tablet} {
 		right: ${space[8]}px;
@@ -217,11 +226,27 @@ const burgerStylesFromLeftCol = css`
 `;
 
 const immersiveBurgerOverrides = css`
-	${from.tablet}
-	${until.desktop} {
+	position: relative;
+	grid-row: 1;
+	align-self: end;
+	bottom: ${space[1]}px;
+
+	${from.mobileMedium} {
 		grid-row: 1;
 		align-self: end;
+	}
+
+	${from.tablet} {
 		right: 136px;
+	}
+	${from.desktop} {
+		right: 356px;
+	}
+	${from.leftCol} {
+		right: 430px;
+	}
+	${from.wide} {
+		right: 534px;
 	}
 `;
 
