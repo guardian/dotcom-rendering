@@ -441,7 +441,7 @@ export const Card = ({
 							hasKicker={!!kickerText}
 						/>
 					)}
-					{!!trailText && isFlexibleContainer && (
+					{!!trailText && (
 						<div css={trailTextOuterStyles}>
 							<div
 								dangerouslySetInnerHTML={{
