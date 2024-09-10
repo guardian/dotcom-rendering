@@ -29,7 +29,9 @@ type boostProperties = {
 /**
  * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
  */
-const determineCardProperties = (boostLevel: BoostLevel): boostProperties => {
+const determineCardProperties = (
+	boostLevel: BoostLevel = 'default',
+): boostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
 		case 'default':
@@ -86,7 +88,7 @@ export const OneCardLayout = ({
 		headlineSizeOnTablet,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
-	} = determineCardProperties(cards[0].boostLevel || 'default');
+	} = determineCardProperties(cards[0].boostLevel);
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
