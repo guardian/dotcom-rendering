@@ -36,6 +36,7 @@ type Props = {
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
 	sizeOnTablet?: SmallHeadlineSize;
+	/* Controls which group of font sizes to use. Each group maps internally to the smallHeadlineSize type*/
 	fontRange?: 'regular' | 'headline';
 	byline?: string;
 	showByline?: boolean;
