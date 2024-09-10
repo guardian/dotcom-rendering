@@ -273,6 +273,15 @@ const horizontalDivider = css`
 	}
 `;
 
+const slimNavHorizontalDividerOverrides = css`
+	&::after {
+		${from.tablet} {
+			right: 0;
+			left: 0;
+		}
+	}
+`;
+
 const subNavWrapper = css`
 	/** Relative positioning needed on the wrapper to allow
 	  the pseudo after element to position absolutely */
@@ -565,6 +574,7 @@ export const Titlepiece = ({
 					pillarsNavStyles,
 					horizontalDivider,
 					showSlimNav && slimNavPillarsOverrides,
+					showSlimNav && slimNavHorizontalDividerOverrides,
 				]}
 			>
 				<Pillars
