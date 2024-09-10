@@ -36,7 +36,7 @@ type Props = {
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
 	sizeOnTablet?: SmallHeadlineSize;
-	fontGroup?: 'regular' | 'headline';
+	fontRange?: 'regular' | 'headline';
 	byline?: string;
 	showByline?: boolean;
 	linkTo?: string; // If provided, the headline is wrapped in a link
@@ -45,7 +45,7 @@ type Props = {
 	isHighlights?: boolean;
 };
 
-/** These represent a new set of fonts. They are extra large font sizes that, as a set, are only used on headlines */
+/** These represent a new set of fonts. They are extra large font sizes that, as a group, are only used on headlines */
 const headlineFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 	switch (size) {
 		// we don't have a ginormous size in designs. For now this defaults to huge.
@@ -73,12 +73,12 @@ const headlineFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 
 const fontStyles = ({
 	size,
-	fontGroup,
+	fontRange,
 }: {
 	size: SmallHeadlineSize;
-	fontGroup: 'regular' | 'headline';
+	fontRange: 'regular' | 'headline';
 }) => {
-	switch (fontGroup) {
+	switch (fontRange) {
 		case 'headline':
 			return headlineFontStyles({ size });
 		case 'regular':
@@ -116,13 +116,13 @@ const fontStyles = ({
 
 const fontStylesOnTablet = ({
 	size,
-	fontGroup,
+	fontRange,
 }: {
 	size?: SmallHeadlineSize;
-	fontGroup: 'regular' | 'headline';
+	fontRange: 'regular' | 'headline';
 }) => {
 	if (!size) return;
-	if (fontGroup === 'headline') {
+	if (fontRange === 'headline') {
 		return css`
 			${between.tablet.and.desktop} {
 				${headlineFontStyles({ size })}
@@ -134,12 +134,12 @@ const fontStylesOnTablet = ({
 
 const fontStylesOnMobile = ({
 	size,
-	fontGroup,
+	fontRange,
 }: {
 	size: SmallHeadlineSize;
-	fontGroup: 'regular' | 'headline';
+	fontRange: 'regular' | 'headline';
 }) => {
-	switch (fontGroup) {
+	switch (fontRange) {
 		case 'headline': {
 			return css`
 				${until.tablet} {
@@ -290,7 +290,7 @@ export const CardHeadline = ({
 	size = 'medium',
 	sizeOnMobile,
 	sizeOnTablet,
-	fontGroup = 'regular',
+	fontRange = 'regular',
 	byline,
 	showByline,
 	linkTo,
@@ -311,17 +311,17 @@ export const CardHeadline = ({
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
-							fontGroup,
+							fontRange,
 						}),
 
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnTablet({
 							size: sizeOnTablet,
-							fontGroup,
+							fontRange,
 						}),
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
-						: fontStyles({ size, fontGroup }),
+						: fontStyles({ size, fontRange }),
 				]}
 			>
 				{!!kickerText && (
