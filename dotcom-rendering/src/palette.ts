@@ -49,6 +49,24 @@ const pillarPalette = (
 	}
 };
 
+const textblockTextLight: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Audio:
+			return sourcePalette.neutral[97];
+		default:
+			return 'inherit';
+	}
+};
+
+const textblockTextDark: PaletteFunction = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Audio:
+			return sourcePalette.neutral[7];
+		default:
+			return 'inherit';
+	}
+};
+
 const headlineTextLight: PaletteFunction = ({ design, display, theme }) => {
 	switch (display) {
 		case ArticleDisplay.Immersive:
@@ -6743,6 +6761,10 @@ const paletteColours = {
 	'--tag-page-chevron': {
 		light: () => sourcePalette.neutral[0],
 		dark: () => sourcePalette.neutral[86],
+	},
+	'--textblock-text': {
+		light: textblockTextLight,
+		dark: textblockTextDark,
 	},
 	'--timeline-atom-bullet': {
 		light: timelineAtomBulletLight,
