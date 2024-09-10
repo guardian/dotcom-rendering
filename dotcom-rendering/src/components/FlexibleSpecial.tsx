@@ -9,6 +9,7 @@ import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
+import { Alignment } from './SupportingContent';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
@@ -24,6 +25,7 @@ type boostProperties = {
 	headlineSizeOnTablet: SmallHeadlineSize;
 	imagePositionOnDesktop: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
+	supportingContentAlignment: Alignment;
 };
 
 /**
@@ -31,6 +33,7 @@ type boostProperties = {
  */
 const determineCardProperties = (
 	boostLevel: BoostLevel = 'default',
+	longSupportingContent: boolean,
 ): boostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -41,6 +44,9 @@ const determineCardProperties = (
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'top',
+				supportingContentAlignment: longSupportingContent
+					? 'horizontal'
+					: 'vertical',
 			};
 		case 'boost':
 			return {
@@ -49,6 +55,9 @@ const determineCardProperties = (
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'top',
+				supportingContentAlignment: longSupportingContent
+					? 'horizontal'
+					: 'vertical',
 			};
 		case 'megaboost':
 			return {
@@ -57,6 +66,7 @@ const determineCardProperties = (
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'top',
+				supportingContentAlignment: 'horizontal',
 			};
 		case 'gigaboost':
 			return {
@@ -65,6 +75,7 @@ const determineCardProperties = (
 				headlineSizeOnTablet: 'large',
 				imagePositionOnDesktop: 'bottom',
 				imagePositionOnMobile: 'top',
+				supportingContentAlignment: 'horizontal',
 			};
 	}
 };
@@ -82,13 +93,18 @@ export const OneCardLayout = ({
 	absoluteServerTimes: boolean;
 }) => {
 	if (!cards[0]) return null;
+
+	const longSupportingContent =
+		(cards[0]?.supportingContent?.length ?? 0) >= 3;
+
 	const {
 		headlineSize,
 		headlineSizeOnMobile,
 		headlineSizeOnTablet,
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
-	} = determineCardProperties(cards[0].boostLevel);
+		supportingContentAlignment,
+	} = determineCardProperties(cards[0].boostLevel, longSupportingContent);
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
@@ -106,12 +122,7 @@ export const OneCardLayout = ({
 					imageSize="jumbo"
 					trailText={cards[0].trailText}
 					supportingContent={cards[0].supportingContent}
-					supportingContentAlignment={
-						cards[0].supportingContent &&
-						cards[0].supportingContent.length > 3
-							? 'horizontal'
-							: 'vertical'
-					}
+					supportingContentAlignment={supportingContentAlignment}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
 					kickerText={cards[0].kickerText}
