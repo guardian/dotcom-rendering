@@ -140,7 +140,7 @@ const slimNavLogoOverrides = css`
 		right: ${veggieBurgerDiameter + 6}px;
 	}
 	${from.mobileLandscape} {
-		margin-top: ${space[2]}px;
+		margin-top: ${space[1]}px;
 		margin-bottom: ${space[2]}px;
 	}
 	${from.tablet} {
@@ -161,10 +161,10 @@ const slimNavLogoOverrides = css`
 			width: 130px;
 		}
 		${from.leftCol} {
-			width: 147px;
+			width: 140px;
 		}
 		${from.wide} {
-			width: 154px;
+			width: 145px;
 		}
 	}
 `;
