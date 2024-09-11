@@ -39,7 +39,7 @@ const PrivacySettings = ({
 				<ButtonLink
 					priority="secondary"
 					onClick={privacySettingsClickHandler}
-					css={linkStyles}
+					cssOverrides={linkStyles}
 				>
 					California Residents - Do Not Sell
 				</ButtonLink>
@@ -52,7 +52,7 @@ const PrivacySettings = ({
 				<ButtonLink
 					priority="secondary"
 					onClick={privacySettingsClickHandler}
-					css={linkStyles}
+					cssOverrides={linkStyles}
 				>
 					Privacy Settings
 				</ButtonLink>
@@ -101,7 +101,7 @@ export const AppsFooter = () => {
 			<ButtonLink
 				priority="secondary"
 				onClick={privacyPolicyClickHandler}
-				css={linkStyles}
+				cssOverrides={linkStyles}
 			>
 				Privacy Policy
 			</ButtonLink>

@@ -496,11 +496,11 @@ export const CommentForm = ({
 							? 'Join the discussion'
 							: ''
 					}
-					css={[
-						commentTextArea,
-						commentBeingRepliedTo && isActive && greyPlaceholder,
-						!commentBeingRepliedTo && !isActive && blackPlaceholder,
-					]}
+					cssOverrides={css`
+						${commentTextArea}
+						${commentBeingRepliedTo && isActive && greyPlaceholder}
+						${!commentBeingRepliedTo && !isActive && blackPlaceholder}
+					`}
 					style={{ height: isActive ? '132px' : '50px' }}
 					onFocus={() => setIsActive(true)}
 					value={textValue}

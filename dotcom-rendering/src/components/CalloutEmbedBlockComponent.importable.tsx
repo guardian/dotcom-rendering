@@ -357,7 +357,7 @@ export const CalloutEmbedBlockComponent = ({
 					{!isExpanded && (
 						<span css={buttonWrapperStyles} aria-hidden="true">
 							<Button
-								css={css`
+								cssOverrides={css`
 									/* TODO: need to find an nicer way of dynamically setting svg dimensions */
 									svg {
 										/* stylelint-disable-next-line declaration-no-important */
