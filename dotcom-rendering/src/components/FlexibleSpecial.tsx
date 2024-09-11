@@ -9,7 +9,7 @@ import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
-import { Alignment } from './SupportingContent';
+import type { Alignment } from './SupportingContent';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
