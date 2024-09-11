@@ -330,7 +330,7 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						idApiUrl={article.config.idApiUrl}
 						contributionsServiceUrl={contributionsServiceUrl}
 						showSubNav={true}
-						isImmersive={false}
+						showSlimNav={false}
 						hasPageSkin={false}
 						hasPageSkinContentSelfConstrain={false}
 						pageId={article.pageId}

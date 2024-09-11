@@ -240,7 +240,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 					idApiUrl={article.config.idApiUrl}
 					contributionsServiceUrl={contributionsServiceUrl}
 					showSubNav={true}
-					isImmersive={format.display === ArticleDisplay.Immersive}
+					showSlimNav={format.display === ArticleDisplay.Immersive}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}

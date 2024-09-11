@@ -325,7 +325,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					idApiUrl={article.config.idApiUrl}
 					contributionsServiceUrl={article.contributionsServiceUrl}
 					showSubNav={false}
-					isImmersive={true}
+					showSlimNav={true}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}

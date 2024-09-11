@@ -296,7 +296,7 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 										contributionsServiceUrl
 									}
 									showSubNav={true}
-									isImmersive={false}
+									showSlimNav={false}
 									hasPageSkin={false}
 									hasPageSkinContentSelfConstrain={false}
 									pageId={article.pageId}
