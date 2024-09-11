@@ -736,7 +736,7 @@ export const Card = ({
 							)}
 
 							{hasSublinks && sublinkPosition === 'inner' && (
-								<Hide until={'tablet'}>
+								<Hide until="tablet">
 									<SupportingContent
 										supportingContent={supportingContent}
 										alignment="vertical"
