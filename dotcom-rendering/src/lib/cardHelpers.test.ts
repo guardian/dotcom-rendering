@@ -14,9 +14,9 @@ describe('cardHasDarkBackground', () => {
 		theme: Pillar.News,
 	};
 
-	const photoEssayFormat = {
+	const pictureFormat = {
 		...standardArticleFormat,
-		design: ArticleDesign.PhotoEssay,
+		design: ArticleDesign.Picture,
 	};
 
 	const galleryFormat = {
@@ -26,7 +26,7 @@ describe('cardHasDarkBackground', () => {
 
 	const testCases = [
 		{
-			format: photoEssayFormat,
+			format: pictureFormat,
 			containerPalette: undefined,
 			expectedResult: false,
 		},
@@ -36,7 +36,7 @@ describe('cardHasDarkBackground', () => {
 			expectedResult: true,
 		},
 		{
-			format: photoEssayFormat,
+			format: pictureFormat,
 			containerPalette: 'Branded',
 			expectedResult: false,
 		},
@@ -46,7 +46,7 @@ describe('cardHasDarkBackground', () => {
 			expectedResult: false,
 		},
 		{
-			format: photoEssayFormat,
+			format: pictureFormat,
 			containerPalette: 'SombrePalette',
 			expectedResult: true,
 		},
