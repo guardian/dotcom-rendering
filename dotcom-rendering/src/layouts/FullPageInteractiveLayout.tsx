@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -15,7 +15,6 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { Masthead } from '../components/Masthead/Masthead';
-import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
@@ -132,48 +131,12 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	// the full nav - typically during special events such as Project 200, or
 	// the Euros. The motivation is to better onboard new visitors; interactives
 	// often reach readers who are less familiar with the Guardian.
-	const isSlimNav = !article.config.switches.interactiveFullHeaderSwitch;
+	const showSlimNav = !article.config.switches.interactiveFullHeaderSwitch;
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
 	const renderAds = canRenderAds(article);
-
-	if (isSlimNav) {
-		return (
-			<div
-				css={css`
-					${getZIndex('fullPageInteractiveHeaderWrapper')}
-					order: 0;
-				`}
-			>
-				<Section
-					fullWidth={true}
-					borderColour={sourcePalette.brand[600]}
-					showTopBorder={false}
-					padSides={false}
-					backgroundColour={sourcePalette.brand[400]}
-					element="nav"
-				>
-					<Nav
-						isImmersive={
-							format.display === ArticleDisplay.Immersive
-						}
-						displayRoundel={
-							format.display === ArticleDisplay.Immersive ||
-							format.theme === ArticleSpecial.Labs
-						}
-						selectedPillar={NAV.selectedPillar}
-						nav={NAV}
-						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
-						}
-						editionId={article.editionId}
-					/>
-				</Section>
-			</div>
-		);
-	}
 
 	return (
 		<section
@@ -214,7 +177,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 				idApiUrl={article.config.idApiUrl}
 				contributionsServiceUrl={article.contributionsServiceUrl}
 				showSubNav={format.theme !== ArticleSpecial.Labs}
-				isImmersive={false}
+				showSlimNav={showSlimNav}
 				hasPageSkin={false}
 				hasPageSkinContentSelfConstrain={false}
 				pageId={article.pageId}

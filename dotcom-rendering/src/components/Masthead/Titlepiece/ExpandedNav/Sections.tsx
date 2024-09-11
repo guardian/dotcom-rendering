@@ -103,18 +103,11 @@ const brandExtensionLinkFromWide = css`
 
 type Props = {
 	editionId: EditionId;
-	isImmersive?: boolean;
 	nav: NavType;
 	hasPageSkin?: boolean;
 };
 
-export const Sections = ({
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- TODO: add slim nav version for immersives
-	isImmersive = false,
-	nav,
-	editionId,
-	hasPageSkin,
-}: Props) => {
+export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 	return (
 		<ul
 			css={[columnsStyle, !hasPageSkin && columnsStyleFromLeftCol]}

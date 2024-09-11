@@ -217,12 +217,15 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			);
 		};
 	}, []);
-
 	useEffect(() => {
 		void submitComponentEvent(
 			{
+				abTest: {
+					name: 'masthead-with-highlights',
+					variant: 'inTest',
+				},
 				component: {
-					componentType: 'CONTAINER',
+					componentType: 'CAROUSEL',
 					id: 'home-highlights',
 				},
 				action: 'INSERT',
