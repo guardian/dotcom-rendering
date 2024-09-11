@@ -4,7 +4,7 @@ import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { useAuthStatus } from '../lib/useAuthStatus';
-import { useEditionSwitcherBanner } from '../lib/useUserPreferredEdition';
+import { useEditionSwitcherBanner } from '../lib/useEditionSwitcherBanner';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
 import { MyAccount } from './HeaderTopBarMyAccount';
 import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions';

@@ -10,7 +10,7 @@ import {
 } from '@guardian/source/foundations';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { useEditionSwitcherBanner } from '../lib/useUserPreferredEdition';
+import { useEditionSwitcherBanner } from '../lib/useEditionSwitcherBanner';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
 import {
