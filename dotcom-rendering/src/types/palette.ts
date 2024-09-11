@@ -18,13 +18,11 @@ export type Palette = {
 		analysisContrastHover: Colour;
 		bullet: Colour;
 		bulletStandfirst: Colour;
-		imageTitle: Colour;
 		speechBubble: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
 		treat: Colour;
-		lightboxDivider: Colour;
 	};
 	fill: {
 		guardianLogo: Colour;
