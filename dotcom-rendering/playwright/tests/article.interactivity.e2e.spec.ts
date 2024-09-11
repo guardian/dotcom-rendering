@@ -232,8 +232,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
-			test.skip('should immediately focus on the News menu item when the menu first opens', async ({
+			test('should immediately focus on the News menu item when the menu first opens', async ({
 				context,
 				page,
 			}) => {
