@@ -6,7 +6,7 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { Link } from '@guardian/source/react-components';
+import { Hide, Link } from '@guardian/source/react-components';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
@@ -54,7 +54,7 @@ import type {
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
-import { Hide } from '@guardian/source/react-components';
+
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
@@ -376,8 +376,16 @@ export const Card = ({
 		return 'medium';
 	};
 
+	/**
+	 * Determines how and when to render the `SupportingContent` component in the "outer" position:
+	 * - Returns `null` if `supportingContent` is unavailable or `sublinkPosition` is `none`.
+	 * - Renders `SupportingContent` for all breakpoints if `sublinkPosition` is `outer`.
+	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` on desktop but displays it on smaller breakpoints.
+	 *
+	 */
 	const decideOuterSublinks = () => {
-		if (!supportingContent) return;
+		if (!supportingContent) return null;
+		if (sublinkPosition === 'none') return null;
 		if (sublinkPosition === 'outer') {
 			return (
 				<SupportingContent
