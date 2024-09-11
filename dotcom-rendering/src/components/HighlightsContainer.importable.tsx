@@ -161,6 +161,7 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 };
 
 export const HighlightsContainer = ({ trails }: Props) => {
+	const highlightsTrails = trails.slice(0, 5);
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -240,7 +241,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 				]}
 				data-heatphan-type="carousel"
 			>
-				{trails.map((trail) => {
+				{highlightsTrails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
