@@ -1,6 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import type { Branding } from './branding';
-import type { StarRating } from './content';
+import type { BoostLevel, StarRating } from './content';
 import type { DCRFrontImage, DCRSnapType, DCRSupportingContent } from './front';
 import type { FEFormat } from './frontend';
 import type { MainMedia } from './mainMedia';
@@ -41,6 +41,7 @@ export interface TrailType extends BaseTrailType {
 	dataLinkName: string;
 	discussionId?: string;
 	isBoosted?: boolean;
+	boostLevel?: BoostLevel;
 	image?: DCRFrontImage;
 }
 

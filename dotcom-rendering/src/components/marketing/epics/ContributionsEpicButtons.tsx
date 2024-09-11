@@ -189,11 +189,7 @@ export const ContributionsEpicButtons = ({
 	const getChoiceCardCta = (cta: Cta): Cta => {
 		if (
 			showThreeTierChoiceCards &&
-			variantOfChoiceCard &&
-			[
-				'V1_THREE_TIER_CHOICE_CARDS',
-				'V2_THREE_TIER_CHOICE_CARDS',
-			].includes(variantOfChoiceCard) &&
+			variantOfChoiceCard === 'US_THREE_TIER_CHOICE_CARDS' &&
 			!isUndefined(threeTierChoiceCardSelectedAmount)
 		) {
 			if (threeTierChoiceCardSelectedAmount === 0) {
@@ -210,6 +206,20 @@ export const ContributionsEpicButtons = ({
 				text: cta.text,
 				baseUrl: addChoiceCardsParams(
 					'https://support.theguardian.com/contribute/checkout',
+					'MONTHLY',
+					threeTierChoiceCardSelectedAmount,
+				),
+			};
+		}
+		if (
+			showChoiceCards &&
+			variantOfChoiceCard === 'THREE_TIER_CHOICE_CARDS' &&
+			!isUndefined(threeTierChoiceCardSelectedAmount)
+		) {
+			return {
+				text: cta.text,
+				baseUrl: addChoiceCardsParams(
+					cta.baseUrl,
 					'MONTHLY',
 					threeTierChoiceCardSelectedAmount,
 				),

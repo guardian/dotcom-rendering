@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source/foundations';
 import { userEvent, within } from '@storybook/test';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.importable';
+import { Dropdown } from './Dropdown.importable';
 
 const Header = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -46,24 +46,28 @@ const links: [
 		title: 'UK edition',
 		isActive: true,
 		dataLinkName: 'linkname-UK',
+		shortTitle: 'UK',
 	},
 	{
 		id: 'us',
 		url: '/preference/edition/us',
 		title: 'US edition',
 		dataLinkName: 'linkname-US',
+		shortTitle: 'US',
 	},
 	{
 		id: 'au',
 		url: '/preference/edition/au',
 		title: 'Australia edition',
 		dataLinkName: 'linkname-AU',
+		shortTitle: 'Aus',
 	},
 	{
 		id: 'int',
 		url: '/preference/edition/int',
 		title: 'International edition',
 		dataLinkName: 'linkname-INT',
+		shortTitle: 'Int',
 	},
 ];
 

@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	isUndefined,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -40,7 +35,7 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { minNavHeightPx, Nav } from '../components/Nav/Nav';
+import { minNavHeightPx } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -58,7 +53,7 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { DCRArticle } from '../types/frontend';
+import type { ArticleDeprecated } from '../types/article';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -92,7 +87,7 @@ const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.wide} {
 					grid-column-gap: 10px;
-					grid-template-columns: 219px 1px 620px 60px 320px;
+					grid-template-columns: 219px 1px 620px 80px 300px;
 					grid-template-areas:
 						'caption    border      title      . right-column'
 						'.          border      headline   . right-column'
@@ -192,7 +187,7 @@ const stretchLines = css`
 `;
 
 interface CommonProps {
-	article: DCRArticle;
+	article: ArticleDeprecated;
 	format: ArticleFormat;
 }
 
@@ -318,86 +313,37 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
-	const shouldShowTagLink =
-		isWeb &&
-		!!article.config.switches.tagLinkDesign &&
-		article.config.abTests.tagLinkDesignControl !== 'control' &&
-		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
-
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-
 	return (
 		<>
 			{isWeb && (
-				<>
-					{inUpdatedHeaderABTest ? (
-						<Masthead
-							nav={props.NAV}
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							idApiUrl={article.config.idApiUrl}
-							contributionsServiceUrl={
-								article.contributionsServiceUrl
-							}
-							showSubNav={false}
-							isImmersive={true}
-							hasPageSkin={false}
-							hasPageSkinContentSelfConstrain={false}
-						/>
-					) : (
-						<div
-							css={css`
-								${getZIndex('headerWrapper')}
-								order: 0;
-							`}
-						>
-							<Section
-								fullWidth={true}
-								showSideBorders={false}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="nav"
-							>
-								<Nav
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={props.NAV.selectedPillar}
-									nav={props.NAV}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.contribute
-									}
-									editionId={article.editionId}
-								/>
-							</Section>
-						</div>
-					)}
+				<Masthead
+					nav={props.NAV}
+					editionId={article.editionId}
+					idUrl={article.config.idUrl}
+					mmaUrl={article.config.mmaUrl}
+					discussionApiUrl={article.config.discussionApiUrl}
+					idApiUrl={article.config.idApiUrl}
+					contributionsServiceUrl={article.contributionsServiceUrl}
+					showSubNav={false}
+					showSlimNav={true}
+					hasPageSkin={false}
+					hasPageSkinContentSelfConstrain={false}
+					pageId={article.pageId}
+				/>
+			)}
 
-					{format.theme === ArticleSpecial.Labs && (
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								backgroundColour={sourcePalette.labs[400]}
-								borderColour={sourcePalette.neutral[60]}
-								sectionId="labs-header"
-							>
-								<LabsHeader editionId={editionId} />
-							</Section>
-						</Stuck>
-					)}
-				</>
+			{format.theme === ArticleSpecial.Labs && (
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={sourcePalette.labs[400]}
+						borderColour={sourcePalette.neutral[60]}
+						sectionId="labs-header"
+					>
+						<LabsHeader editionId={editionId} />
+					</Section>
+				</Stuck>
 			)}
 
 			<header
@@ -463,7 +409,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									shouldShowTagLink={false}
 								/>
 							</Section>
 							<Box>
@@ -490,10 +435,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 			</header>
 
-			<main
-				data-layout="ImmersiveLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
-			>
+			<main data-layout="ImmersiveLayout">
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -552,9 +494,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											sectionUrl={article.sectionUrl}
 											guardianBaseURL={
 												article.guardianBaseURL
-											}
-											shouldShowTagLink={
-												shouldShowTagLink
 											}
 										/>
 									</div>

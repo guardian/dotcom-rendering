@@ -1,616 +1,245 @@
-import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import type { StoryProps } from '../../.storybook/decorators/splitThemeDecorator';
-import { splitTheme } from '../../.storybook/decorators/splitThemeDecorator';
-import { getThemeNameAsString } from '../lib/format';
+import type { Meta, StoryObj } from '@storybook/react/*';
+import { leftColumnDecorator } from '../../.storybook/decorators/gridDecorators';
+import { defaultFormats } from '../../.storybook/decorators/splitThemeDecorator';
+import { allModes } from '../../.storybook/modes';
+import { getAllThemes } from '../lib/format';
 import { ArticleTitle } from './ArticleTitle';
 
-interface StoryArgs extends StoryProps {
-	theme: string;
-}
-
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			width: 200px;
-			padding: 20px;
-		`}
-	>
-		{children}
-	</div>
-);
-const FEArticle = {
-	tags: [],
-	guardianBaseURL: 'https://theguardian.com',
-	inLeftCol: true,
-	fallbackToSection: true,
-	sectionLabel: 'Section label',
-	sectionUrl: '/section_url',
-	shouldShowTagLink: false,
-};
-
-const FEBrexit = {
-	...FEArticle,
-	...{
-		sectionLabel: 'Brexit',
-		sectionUrl: '/brexit',
-		badge: {
-			href: '/politics/series/brexit-how-it-came-to-this',
-			imageSrc:
-				'https://assets.guim.co.uk/images/badges/05c6ace4e60dd0209a3f80eb03e16524/EUReferendumBadge.svg',
-		},
-	},
-};
-
-const FEBeyondTheBlade = {
-	...FEArticle,
-	...{
-		sectionLabel: 'Beyond the blade',
-		sectionUrl: '/beyond-the-blade',
-		badge: {
-			href: '/membership/series/beyond-the-blade',
-			imageSrc:
-				'https://assets.guim.co.uk/images/badges/bfc00bc58eb966845ccf1200fd8c54e0/beyondthebladebadge.svg',
-		},
-	},
-};
-
-export default {
+const meta = {
 	component: ArticleTitle,
-	title: 'Components/ArticleTitle',
-};
+	title: 'Components/Article Title',
+	decorators: [leftColumnDecorator],
+	parameters: {
+		chromatic: {
+			modes: {
+				horizontal: allModes.splitHorizontal,
+			},
+		},
+	},
+} satisfies Meta<typeof ArticleTitle>;
 
-export const defaultStory = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEBrexit}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-				}}
-			/>
-		</Wrapper>
-	);
-};
-defaultStory.storyName = 'Brexit badge';
+export default meta;
 
-export const beyondTheBlade = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEBeyondTheBlade}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-				}}
-			/>
-		</Wrapper>
-	);
-};
-beyondTheBlade.storyName = 'Beyond the blade badge';
+type Story = StoryObj<typeof meta>;
 
-export const immersiveComment = ({ theme }: StoryArgs) => {
-	return (
-		<div
-			css={css`
-				background-color: ${theme === 'light'
-					? 'lightgray'
-					: 'inherit'};
-				padding: 20px;
-			`}
-		>
-			<ArticleTitle
-				{...FEBrexit}
-				format={{
-					display: ArticleDisplay.Immersive,
-					theme: Pillar.Sport,
-					design: ArticleDesign.Comment,
-				}}
-			/>
-		</div>
-	);
-};
-immersiveComment.storyName = 'Immersive comment piece';
-immersiveComment.decorators = [
-	splitTheme([
-		{
+export const StandardDesign = {
+	args: {
+		tags: [],
+		guardianBaseURL: 'https://theguardian.com',
+		sectionLabel: 'Brexit',
+		sectionUrl: 'brexit',
+		format: {
+			display: ArticleDisplay.Standard,
+			theme: Pillar.Sport,
+			design: ArticleDesign.Standard,
+		},
+	},
+} satisfies Story;
+
+export const StandardDesignWithBlogTag = {
+	args: {
+		...StandardDesign.args,
+		tags: [
+			{
+				id: '',
+				title: 'Blog title',
+				type: 'Blog',
+			},
+		],
+	},
+	name: 'Standard Design, with blog tag',
+} satisfies Story;
+
+export const StandardDesignWithOpinionTag = {
+	args: {
+		...StandardDesign.args,
+		tags: [
+			{
+				id: '',
+				title: 'Opinion title',
+				type: 'Opinion',
+			},
+		],
+	},
+	name: 'Standard Design, with opinion tag',
+} satisfies Story;
+
+export const StandardDesignWithSeriesTag = {
+	args: {
+		...StandardDesign.args,
+		tags: [
+			{
+				id: '',
+				title: 'Series title',
+				type: 'Series',
+			},
+		],
+	},
+	name: 'Standard Design, with series tag',
+} satisfies Story;
+
+export const StandardDesignSpecialReportThemeWithSeriesTag = {
+	args: {
+		...StandardDesignWithSeriesTag.args,
+		format: {
+			...StandardDesignWithSeriesTag.args.format,
+			theme: ArticleSpecial.SpecialReport,
+		},
+	},
+	name: 'Standard Design, Special Report Theme, with series tag',
+} satisfies Story;
+
+export const StandardDesignSpecialReportAltThemeWithSeriesTag = {
+	args: {
+		...StandardDesignWithSeriesTag.args,
+		format: {
+			...StandardDesignWithSeriesTag.args.format,
+			theme: ArticleSpecial.SpecialReportAlt,
+		},
+	},
+	name: 'Standard Design, Special Report Alt Theme, with series tag',
+} satisfies Story;
+
+export const StandardDesignLabsThemeWithSeriesTag = {
+	args: {
+		...StandardDesignWithSeriesTag.args,
+		format: {
+			...StandardDesignWithSeriesTag.args.format,
+			theme: ArticleSpecial.Labs,
+		},
+	},
+	name: 'Standard Design, Labs Theme, with series tag',
+} satisfies Story;
+
+export const StandardDesignWithSeriesTagAndLongTitle = {
+	args: {
+		...StandardDesign.args,
+		tags: [
+			{
+				id: '',
+				title: "Edward Snowden's choice of Hong Kong as haven is a high-stakes gamble",
+				type: 'Series',
+			},
+		],
+	},
+	name: 'Standard Design, with series tag and long title',
+} satisfies Story;
+
+export const StandardDesignWithSeriesTagAndLongWord = {
+	args: {
+		...StandardDesign.args,
+		tags: [
+			{
+				id: '',
+				title: 'Antidisestablishmentarianism',
+				type: 'Series',
+			},
+		],
+	},
+	name: 'Standard Design, with series tag and long word',
+} satisfies Story;
+
+export const CommentDesignImmersiveDisplay = {
+	args: {
+		...StandardDesign.args,
+		format: {
 			display: ArticleDisplay.Immersive,
 			theme: Pillar.Sport,
 			design: ArticleDesign.Comment,
 		},
-	]),
-];
+	},
+	name: 'Comment Design, Immersive Display',
+} satisfies Story;
 
-export const immersiveCommentTag = ({ theme }: StoryArgs) => {
-	return (
-		<div
-			css={css`
-				background-color: ${theme === 'light'
-					? 'lightgray'
-					: 'inherit'};
-				padding: 20px;
-			`}
-		>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Immersive,
-					theme: Pillar.Sport,
-					design: ArticleDesign.Comment,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Tag title',
-						type: 'Blog',
-					},
-				]}
-			/>
-		</div>
-	);
-};
-immersiveCommentTag.storyName = 'Immersive comment piece with Blog tag';
-immersiveCommentTag.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Immersive,
-			theme: Pillar.Sport,
-			design: ArticleDesign.Comment,
-		},
-	]),
-];
+export const CommentDesignImmersiveDisplayWithBlogTag = {
+	args: {
+		...CommentDesignImmersiveDisplay.args,
+		tags: StandardDesignWithBlogTag.args.tags,
+	},
+	name: 'Comment Design, Immersive Display, with blog tag',
+} satisfies Story;
 
-export const ImmersiveSeriesTag = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Immersive,
-					theme: Pillar.Sport,
-					design: ArticleDesign.Review,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Series title with the addition of some more text to see how this wraps',
-						type: 'Series',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-ImmersiveSeriesTag.storyName = 'Immersive with a Series tag';
-ImmersiveSeriesTag.decorators = [
-	splitTheme([
-		{
+export const ReviewDesignImmersiveDisplayWithSeriesTagAndLongTitle = {
+	args: {
+		...StandardDesign.args,
+		format: {
 			display: ArticleDisplay.Immersive,
 			theme: Pillar.Sport,
 			design: ArticleDesign.Review,
 		},
-	]),
-];
+		tags: [
+			{
+				id: '',
+				title: 'Series title with the addition of some more text to see how this wraps',
+				type: 'Series',
+			},
+		],
+	},
+	name: 'Review Design, Immersive Display, with series tag and long title',
+} satisfies Story;
 
-export const ArticleBlogTag = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Blog title',
-						type: 'Blog',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-ArticleBlogTag.storyName = 'Article with a Blog tag';
-ArticleBlogTag.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Sport,
-			design: ArticleDesign.Standard,
-		},
-	]),
-];
-
-export const LiveblogTitle = ({ theme }: StoryArgs) => {
-	return (
-		<Wrapper>
-			<div
-				css={css`
-					/* stylelint-disable-next-line color-no-hex */
-					background-color: ${theme === 'light'
-						? '#005689'
-						: 'inherit'};
-				`}
-			>
-				<ArticleTitle
-					{...FEArticle}
-					format={{
-						display: ArticleDisplay.Standard,
-						theme: Pillar.Sport,
-						design: ArticleDesign.LiveBlog,
-					}}
-					tags={[
-						{
-							id: '',
-							title: 'Liveblog title',
-							type: 'Blog',
-						},
-					]}
-				/>
-			</div>
-			<div
-				css={css`
-					/* stylelint-disable-next-line color-no-hex */
-					background-color: ${theme === 'light'
-						? '#ffe500'
-						: '#f3c100'};
-				`}
-			>
-				<ArticleTitle
-					{...FEArticle}
-					format={{
-						display: ArticleDisplay.Standard,
-						theme: Pillar.Sport,
-						design: ArticleDesign.LiveBlog,
-					}}
-					tags={[
-						{
-							id: '',
-							title: 'Match liveblog title',
-							type: 'Blog',
-						},
-					]}
-					isMatch={true}
-				/>
-			</div>
-		</Wrapper>
-	);
-};
-LiveblogTitle.storyName = 'Liveblog title';
-LiveblogTitle.decorators = [
-	splitTheme([
-		{
+export const LiveBlogDesignWithBlogTag = {
+	args: {
+		...StandardDesignWithBlogTag.args,
+		format: {
 			display: ArticleDisplay.Standard,
 			theme: Pillar.Sport,
 			design: ArticleDesign.LiveBlog,
 		},
-	]),
-];
-
-export const ArticleOpinionTag = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Opinion title',
-						type: 'Opinion',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-ArticleOpinionTag.storyName = 'Article with a Opinion tag';
-ArticleOpinionTag.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Sport,
-			design: ArticleDesign.Standard,
+	},
+	parameters: {
+		colourSchemeBackground: {
+			light: '#005689',
+			dark: '#004e7c',
 		},
-	]),
-];
-
-export const ArticleSeriesTag = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Sport,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Series title',
-						type: 'Series',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-ArticleSeriesTag.storyName = 'Article with a Series tag';
-ArticleSeriesTag.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: Pillar.Sport,
-			design: ArticleDesign.Standard,
+		colourSchemeTextColour: {
+			light: '#fff',
+			dark: '#fff',
 		},
-	]),
-];
+	},
+	name: 'LiveBlog Design, with blog tag',
+} satisfies Story;
 
-export const SpecialReportTitle = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.SpecialReport,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Special',
-						type: 'Series',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-SpecialReportTitle.storyName = 'Special report';
-SpecialReportTitle.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: ArticleSpecial.SpecialReport,
-			design: ArticleDesign.Standard,
+export const LiveBlogDesignWithBlogTagAndMatch = {
+	args: {
+		...LiveBlogDesignWithBlogTag.args,
+		isMatch: true,
+	},
+	parameters: {
+		colourSchemeBackground: {
+			light: '#ffe500',
+			dark: '#f3c100',
 		},
-	]),
-];
-
-export const SpecialReportAlt = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.SpecialReportAlt,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Special Report Alt',
-						type: 'Series',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-SpecialReportAlt.storyName = 'Special report Alt';
-SpecialReportAlt.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: ArticleSpecial.SpecialReportAlt,
-			design: ArticleDesign.Standard,
+		colourSchemeTextColour: {
+			dark: '#000',
 		},
-	]),
-];
+	},
+	name: 'LiveBlog Design, with blog tag and match',
+} satisfies Story;
 
-export const ArticleNoTags = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.Culture,
-					design: ArticleDesign.Standard,
-				}}
-			/>
-		</Wrapper>
-	);
-};
-ArticleNoTags.storyName = 'Article with no tags';
-ArticleNoTags.decorators = [
-	splitTheme([
-		{
+export const DeadBlogDesignMultipleThemesWithBlogTag = {
+	args: {
+		...LiveBlogDesignWithBlogTag.args,
+	},
+	parameters: {
+		formats: getAllThemes({
+			design: ArticleDesign.DeadBlog,
 			display: ArticleDisplay.Standard,
-			theme: Pillar.Culture,
-			design: ArticleDesign.Standard,
-		},
-	]),
-];
+		}),
+	},
+	name: 'DeadBlog Design, Multiple Themes, with blog tag',
+} satisfies Story;
 
-export const LabsStory = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.Labs,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Series title',
-						type: 'Series',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-LabsStory.storyName = 'Labs';
-LabsStory.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: ArticleSpecial.Labs,
-			design: ArticleDesign.Standard,
-		},
-	]),
-];
-
-export const LongStory = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: "Edward Snowden's choice of Hong Kong as haven is a high-stakes gamble",
-						type: 'Series',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-LongStory.storyName = 'Long title';
-LongStory.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-			design: ArticleDesign.Standard,
-		},
-	]),
-];
-
-export const LongWord = () => {
-	return (
-		<Wrapper>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Antidisestablishmentarianism',
-						type: 'Series',
-					},
-				]}
-			/>
-		</Wrapper>
-	);
-};
-LongWord.storyName = 'Long word';
-LongWord.decorators = [
-	splitTheme([
-		{
-			display: ArticleDisplay.Standard,
-			theme: Pillar.News,
-			design: ArticleDesign.Standard,
-		},
-	]),
-];
-
-const themeVariations = [
-	Pillar.Sport,
-	Pillar.News,
-	Pillar.Culture,
-	Pillar.Opinion,
-	Pillar.Lifestyle,
-	ArticleSpecial.SpecialReport,
-	ArticleSpecial.SpecialReportAlt,
-	ArticleSpecial.Labs,
-];
-
-const allThemeDeadBlogVariations = themeVariations.map((theme) => ({
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.DeadBlog,
-	theme,
-}));
-
-export const ArticleDeadBlogTitle = ({ format }: StoryArgs) => {
-	return (
-		<>
-			<div key={JSON.stringify(format)}>
-				<p>{getThemeNameAsString(format)}</p>
-				<ArticleTitle
-					{...FEArticle}
-					format={format}
-					tags={[
-						{
-							id: '',
-							title: 'Deadblog title',
-							type: 'Blog',
-						},
-					]}
-				/>
-				<br />
-				<br />
-			</div>
-		</>
-	);
-};
-
-ArticleDeadBlogTitle.storyName = 'Deadblog - All pillars';
-ArticleDeadBlogTitle.decorators = [splitTheme(allThemeDeadBlogVariations)];
-
-export const ArticleTitleAll = () => {
-	return (
-		<>
-			<ArticleTitle
-				{...FEArticle}
-				format={{
-					display: ArticleDisplay.Standard,
-					theme: Pillar.News,
-					design: ArticleDesign.Standard,
-				}}
-				tags={[
-					{
-						id: '',
-						title: 'Article title',
-						type: 'Blog',
-					},
-				]}
-			/>
-		</>
-	);
-};
-
-ArticleTitleAll.storyName = 'ArticleTitleAll';
-ArticleTitleAll.decorators = [splitTheme()];
+export const MultipleFormatsWithBlogTag = {
+	...StandardDesignWithBlogTag,
+	parameters: {
+		formats: defaultFormats,
+	},
+	name: 'Multiple Formats, with blog tag',
+} satisfies Story;

@@ -11,951 +11,1338 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Video: DCRArticle = {
-	version: 3,
-	headline:
-		'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
-	standfirst:
-		'<p><a href="https://www.theguardian.com/sport/novak-djokovic">Novak Djokovic</a> defeated Jannik Sinner 6-3, 6-3 to claim his seventh ATP Finals title. Five days after Sinner played some of his best tennis to <a href="https://www.theguardian.com/sport/2023/nov/14/stefanos-tsitsipas-retire-injury-holger-rune-atp-finals-novak-djokovic-jannik-sinner-tennis">edge past Djokovic</a> after three exhausting hours in their round-robin battle, Djokovic simply elevated his level to heights that Sinner could not match.</p>\n<p></p>\n<ul>\n <li><p><a href="https://www.theguardian.com/sport/2023/nov/19/novak-djokovic-claims-seventh-atp-finals-title-with-demolition-of-sinner"><strong>Novak Djokovic claims seventh ATP Finals title with demolition of Sinner</strong></a></p></li>\n</ul>',
-	webTitle:
-		'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
-	mainMediaElements: [
-		{
-			expired: false,
-			assetId: 'i9is5y5scGU',
-			altText:
-				'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
-			posterImage: [
-				{
-					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/2000.jpg',
-					width: 2000,
-				},
-				{
-					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/1000.jpg',
-					width: 1000,
-				},
-				{
-					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/500.jpg',
-					width: 500,
-				},
-				{
-					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/140.jpg',
-					width: 140,
-				},
-				{
-					url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/6065.jpg',
-					width: 6065,
-				},
-			],
-			id: 'b71e095c-8863-4a13-a44d-47a090333c51',
-			elementId: 'cac1c8ed-e9c8-494e-b994-f857922be084',
-			overrideImage:
-				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=700&quality=85&auto=format&fit=max&s=aeafe0f7fe0353c290fceb3b73effa98',
-			duration: 106,
-			_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
-			mediaTitle:
-				'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
-			channelId: 'UCwD9E_QNwFwrQC7OnPnrg2Q',
-		},
-	],
-	main: '<figure class="element element-atom"> <gu-atom data-atom-id="b71e095c-8863-4a13-a44d-47a090333c51" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/i9is5y5scGU?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
-	filterKeyEvents: false,
-	keyEvents: [],
-	blocks: [],
-	author: {},
-	webPublicationDate: '2023-11-20T10:16:19.000Z',
-	webPublicationDateDeprecated: '2023-11-20T10:16:19.000Z',
-	webPublicationDateDisplay: 'Mon 20 Nov 2023 10.16 GMT',
-	webPublicationSecondaryDateDisplay:
-		'Last modified on Mon 20 Nov 2023 10.16 GMT',
-	editionLongForm: 'UK edition',
-	editionId: 'UK',
-	pageId: 'sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-	canonicalUrl:
-		'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-	format: {
-		design: 'VideoDesign',
-		theme: 'SportPillar',
-		display: 'StandardDisplay',
-	},
-	designType: 'Media',
-	tags: [
-		{
-			id: 'sport/novak-djokovic',
-			type: 'Keyword',
-			title: 'Novak Djokovic',
-		},
-		{
-			id: 'sport/atp-world-tour-finals',
-			type: 'Keyword',
-			title: 'ATP Finals',
-		},
-		{
-			id: 'sport/tennis',
-			type: 'Keyword',
-			title: 'Tennis',
-		},
-		{
-			id: 'sport/sport',
-			type: 'Keyword',
-			title: 'Sport',
-		},
-		{
-			id: 'tone/news',
-			type: 'Tone',
-			title: 'News',
-		},
-		{
-			id: 'type/video',
-			type: 'Type',
-			title: 'Video',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-video',
-			type: 'Tracking',
-			title: 'UK Video',
-		},
-	],
-	pillar: 'sport',
-	isLegacyInteractive: false,
-	isImmersive: false,
-	sectionLabel: 'Novak Djokovic',
-	sectionUrl: 'sport/novak-djokovic',
-	sectionName: 'sport',
-	subMetaSectionLinks: [
-		{
-			url: '/sport/novak-djokovic',
-			title: 'Novak Djokovic',
-		},
-	],
-	subMetaKeywordLinks: [
-		{
-			url: '/sport/atp-world-tour-finals',
-			title: 'ATP Finals',
-		},
-		{
-			url: '/sport/tennis',
-			title: 'Tennis',
-		},
-	],
-	shouldHideAds: false,
-	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-	linkedData: [
-		{
-			'@type': 'NewsArticle',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-			publisher: {
-				'@type': 'Organization',
-				'@context': 'https://schema.org',
-				'@id': 'https://www.theguardian.com#publisher',
-				name: 'The Guardian',
-				url: 'https://www.theguardian.com/',
-				logo: {
-					'@type': 'ImageObject',
-					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-					width: 190,
-					height: 60,
-				},
-				sameAs: [
-					'https://www.facebook.com/theguardian',
-					'https://twitter.com/guardian',
-					'https://www.youtube.com/user/TheGuardian',
-				],
-			},
-			isAccessibleForFree: true,
-			isPartOf: {
-				'@type': ['CreativeWork', 'Product'],
-				name: 'The Guardian',
-				productID: 'theguardian.com:basic',
-			},
-			image: [
-				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=068fb79aa05a766277421fbe8d2319d7',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
-				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
-			],
-			author: [
-				{
-					'@type': 'Person',
-					name: 'Guardian staff reporter',
-				},
-			],
-			datePublished: '2023-11-20T10:16:19.000Z',
-			headline:
-				'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
-			dateModified: '2023-11-20T10:16:20.000Z',
-			mainEntityOfPage:
-				'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-		},
-		{
-			'@type': 'WebPage',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-			potentialAction: {
-				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-			},
-		},
-	],
-	openGraphData: {
-		'og:url':
-			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=068fb79aa05a766277421fbe8d2319d7',
-		'al:ios:url':
-			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=applinks',
-		'og:title':
+export const Video: Article = {
+	frontendData: {
+		version: 3,
+		headline:
 			'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
-		'fb:app_id': '180444840287',
-		'og:video:url':
-			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-		'article:modified_time': '2023-11-20T10:16:20.000Z',
-		'og:video:secure_url':
-			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-		'og:image:height': '720',
-		'og:description':
-			'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'Sport',
-		'article:published_time': '2023-11-20T10:16:19.000Z',
-		'article:tag': 'Novak Djokovic,ATP Finals,Tennis,Sport',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-		'twitter:app:url:iphone':
-			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=cc616ca345f75ebcf90d7da7c1d97390',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
-	},
-	config: {
-		references: [
+		standfirst:
+			'<p><a href="https://www.theguardian.com/sport/novak-djokovic">Novak Djokovic</a> defeated Jannik Sinner 6-3, 6-3 to claim his seventh ATP Finals title. Five days after Sinner played some of his best tennis to <a href="https://www.theguardian.com/sport/2023/nov/14/stefanos-tsitsipas-retire-injury-holger-rune-atp-finals-novak-djokovic-jannik-sinner-tennis">edge past Djokovic</a> after three exhausting hours in their round-robin battle, Djokovic simply elevated his level to heights that Sinner could not match.</p>\n<p></p>\n<ul>\n <li><p><a href="https://www.theguardian.com/sport/2023/nov/19/novak-djokovic-claims-seventh-atp-finals-title-with-demolition-of-sinner"><strong>Novak Djokovic claims seventh ATP Finals title with demolition of Sinner</strong></a></p></li>\n</ul>',
+		webTitle:
+			'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
+		mainMediaElements: [
 			{
-				'rich-link':
-					'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				expired: false,
+				assetId: 'i9is5y5scGU',
+				altText:
+					'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
+				posterImage: [
+					{
+						url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/2000.jpg',
+						width: 2000,
+					},
+					{
+						url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/1000.jpg',
+						width: 1000,
+					},
+					{
+						url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/500.jpg',
+						width: 500,
+					},
+					{
+						url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/140.jpg',
+						width: 140,
+					},
+					{
+						url: 'https://media.guim.co.uk/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/127_189_6065_3410/6065.jpg',
+						width: 6065,
+					},
+				],
+				id: 'b71e095c-8863-4a13-a44d-47a090333c51',
+				elementId: 'cac1c8ed-e9c8-494e-b994-f857922be084',
+				overrideImage:
+					'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=700&quality=85&auto=format&fit=max&s=aeafe0f7fe0353c290fceb3b73effa98',
+				duration: 106,
+				_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
+				mediaTitle:
+					'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
+				channelId: 'UCwD9E_QNwFwrQC7OnPnrg2Q',
 			},
 		],
-		shortUrlId: '/p/d8ex5',
-		switches: {
-			prebidAppnexusUkRow: true,
-			clickToView: true,
-			prebidTrustx: true,
-			scAdFreeBanner: false,
-			compareVariantDecision: false,
-			enableSentryReporting: true,
-			lazyLoadContainers: true,
-			adFreeStrictExpiryEnforcement: false,
-			liveblogRendering: true,
-			remarketing: true,
-			registerWithPhone: false,
-			targeting: true,
-			extendedMostPopularFronts: true,
-			slotBodyEnd: true,
-			emailInlineInFooter: true,
-			facebookTrackingPixel: true,
-			serviceWorkerEnabled: false,
-			iasAdTargeting: true,
-			extendedMostPopular: true,
-			prebidAnalytics: true,
-			imrWorldwide: true,
-			acast: true,
-			twitterUwt: true,
-			prebidAppnexusInvcode: true,
-			prebidAppnexus: true,
-			enableDiscussionSwitch: true,
-			prebidXaxis: true,
-			interactiveFullHeaderSwitch: false,
-			discussionAllPageSize: true,
-			prebidUserSync: true,
-			audioOnwardJourneySwitch: true,
-			mobileStickyPrebid: true,
-			breakingNews: true,
-			externalVideoEmbeds: true,
-			carrotTrafficDriver: true,
-			geoMostPopular: true,
-			weAreHiring: true,
-			relatedContent: true,
-			thirdPartyEmbedTracking: true,
-			prebidOzone: true,
-			prebidAdYouLike: true,
-			mostViewedFronts: true,
-			abSignInGateMainControl: true,
-			ampPrebid: true,
-			googleSearch: true,
-			brazeSwitch: true,
-			consentManagement: true,
-			commercial: true,
-			redplanetForAus: true,
-			prebidSonobi: true,
-			idProfileNavigation: true,
-			confiantAdVerification: true,
-			discussionAllowAnonymousRecommendsSwitch: false,
-			scrollDepth: true,
-			permutive: true,
-			comscore: true,
-			webFonts: true,
-			prebidImproveDigital: true,
-			ophan: true,
-			crosswordSvgThumbnails: true,
-			prebidTriplelift: true,
-			weather: true,
-			commercialOutbrainNewids: true,
-			dotcomRendering: true,
-			abSignInGateMainVariant: true,
-			hostedVideoAutoplay: true,
-			abAdblockAsk: true,
-			prebidPubmatic: true,
-			autoRefresh: true,
-			enhanceTweets: true,
-			prebidIndexExchange: true,
-			prebidOpenx: true,
-			idCookieRefresh: true,
-			sharingComments: true,
-			abSignInGateMandatory: true,
-			discussionPageSize: true,
-			smartAppBanner: false,
-			boostGaUserTimingFidelity: false,
-			historyTags: true,
-			mobileStickyLeaderboard: true,
-			abDeeplyReadTest: false,
-			surveys: true,
-			remoteBanner: true,
-			inizio: true,
-			prebidHeaderBidding: true,
-			a9HeaderBidding: true,
-			lightbox: true,
+		main: '<figure class="element element-atom"> <gu-atom data-atom-id="b71e095c-8863-4a13-a44d-47a090333c51" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/i9is5y5scGU?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
+		filterKeyEvents: false,
+		keyEvents: [],
+		blocks: [],
+		author: {},
+		webPublicationDate: '2023-11-20T10:16:19.000Z',
+		webPublicationDateDeprecated: '2023-11-20T10:16:19.000Z',
+		webPublicationDateDisplay: 'Mon 20 Nov 2023 10.16 GMT',
+		webPublicationSecondaryDateDisplay:
+			'Last modified on Mon 20 Nov 2023 10.16 GMT',
+		editionLongForm: 'UK edition',
+		editionId: 'UK',
+		pageId: 'sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+		canonicalUrl:
+			'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+		format: {
+			design: 'VideoDesign',
+			theme: 'SportPillar',
+			display: 'StandardDisplay',
 		},
-		keywordIds:
-			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
-		sharedAdTargeting: {
-			ct: 'article',
-			co: ['jennifer-rankin'],
-			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-			su: ['0'],
-			edition: 'uk',
-			tn: ['news'],
-			p: 'ng',
-			k: [
-				'eu',
-				'flooding',
-				'world',
-				'europe-news',
-				'natural-disasters',
-				'science',
-				'environment',
-				'climate-change',
-				'wildfires',
-				'scienceofclimatechange',
-			],
-			sh: 'https://www.theguardian.com/p/d8ex5',
-		},
-		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
-		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
-		discussionApiClientHeader: 'nextgen',
-		shouldHideReaderRevenue: false,
-		sentryHost: 'app.getsentry.com/35463',
-		isPaidContent: false,
-		headline: 'Headline string',
-		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: true,
-		adUnit: '/59666047/theguardian.com/environment/article/ng',
-		videoDuration: 0,
-		stage: 'PROD',
-		isSensitive: false,
-		isDev: false,
-		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords:
-			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
-		revisionNumber: 'DEV',
-		section: 'environment',
-		isPhotoEssay: false,
-		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
-		isLive: false,
-		host: 'https://www.theguardian.com',
-		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		contentType: 'Article',
-		idUrl: 'https://profile.theguardian.com',
-		author: 'Jennifer Rankin',
-		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
-		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
-		edition: 'UK',
-		ipsosTag: 'environment',
-		isLiveBlog: false,
-		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
-		webPublicationDate: 1581314427000,
-		discussionD2Uid: 'zHoBy6HNKsk',
-		source: 'TMN',
-	},
-	guardianBaseURL: 'https://www.theguardian.com',
-	contentType: 'Video',
-	hasRelated: true,
-	hasStoryPackage: false,
-	beaconURL: '//phar.gu-web.net',
-	isCommentable: false,
-	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/pctba',
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'k',
-					value: [
-						'novak-djokovic',
-						'tennis',
-						'sport',
-						'atp-world-tour-finals',
-					],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
-				},
-				{
-					name: 'ct',
-					value: 'video',
-				},
-				{
-					name: 'url',
-					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-		US: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/pctba',
-				},
-				{
-					name: 'edition',
-					value: 'us',
-				},
-				{
-					name: 'k',
-					value: [
-						'novak-djokovic',
-						'tennis',
-						'sport',
-						'atp-world-tour-finals',
-					],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
-				},
-				{
-					name: 'ct',
-					value: 'video',
-				},
-				{
-					name: 'url',
-					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-		AU: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/pctba',
-				},
-				{
-					name: 'edition',
-					value: 'au',
-				},
-				{
-					name: 'k',
-					value: [
-						'novak-djokovic',
-						'tennis',
-						'sport',
-						'atp-world-tour-finals',
-					],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
-				},
-				{
-					name: 'ct',
-					value: 'video',
-				},
-				{
-					name: 'url',
-					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-		INT: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/pctba',
-				},
-				{
-					name: 'k',
-					value: [
-						'novak-djokovic',
-						'tennis',
-						'sport',
-						'atp-world-tour-finals',
-					],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
-				},
-				{
-					name: 'ct',
-					value: 'video',
-				},
-				{
-					name: 'url',
-					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-				},
-				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-		EUR: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/pctba',
-				},
-				{
-					name: 'k',
-					value: [
-						'novak-djokovic',
-						'tennis',
-						'sport',
-						'atp-world-tour-finals',
-					],
-				},
-				{
-					name: 'tn',
-					value: ['news'],
-				},
-				{
-					name: 'edition',
-					value: 'eur',
-				},
-				{
-					name: 'ct',
-					value: 'video',
-				},
-				{
-					name: 'url',
-					value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-	},
-	pageType: {
-		hasShowcaseMainElement: false,
-		isFront: false,
-		isLiveblog: false,
-		isMinuteArticle: false,
-		isPaidContent: false,
-		isPreview: false,
-		isSensitive: false,
-	},
-	trailText:
-		'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
-	nav: {
-		currentUrl: '/sport/tennis',
-		pillars: [
+		designType: 'Media',
+		tags: [
 			{
-				title: 'News',
-				url: '/',
-				longTitle: 'Headlines',
-				iconName: 'home',
-				children: [
-					{
-						title: 'UK',
-						url: '/uk-news',
-						longTitle: 'UK news',
-						children: [
-							{
-								title: 'UK politics',
-								url: '/politics',
-							},
-							{
-								title: 'Education',
-								url: '/education',
-								children: [
-									{
-										title: 'Schools',
-										url: '/education/schools',
-									},
-									{
-										title: 'Teachers',
-										url: '/teacher-network',
-									},
-									{
-										title: 'Universities',
-										url: '/education/universities',
-									},
-									{
-										title: 'Students',
-										url: '/education/students',
-									},
-								],
-							},
-							{
-								title: 'Media',
-								url: '/media',
-							},
-							{
-								title: 'Society',
-								url: '/society',
-							},
-							{
-								title: 'Law',
-								url: '/law',
-							},
-							{
-								title: 'Scotland',
-								url: '/uk/scotland',
-							},
-							{
-								title: 'Wales',
-								url: '/uk/wales',
-							},
-							{
-								title: 'Northern Ireland',
-								url: '/uk/northernireland',
-							},
-						],
-					},
-					{
-						title: 'World',
-						url: '/world',
-						longTitle: 'World news',
-						children: [
-							{
-								title: 'Europe',
-								url: '/world/europe-news',
-							},
-							{
-								title: 'US',
-								url: '/us-news',
-								longTitle: 'US news',
-							},
-							{
-								title: 'Americas',
-								url: '/world/americas',
-							},
-							{
-								title: 'Asia',
-								url: '/world/asia',
-							},
-							{
-								title: 'Australia',
-								url: '/australia-news',
-								longTitle: 'Australia news',
-							},
-							{
-								title: 'Middle East',
-								url: '/world/middleeast',
-							},
-							{
-								title: 'Africa',
-								url: '/world/africa',
-							},
-							{
-								title: 'Inequality',
-								url: '/inequality',
-							},
-							{
-								title: 'Global development',
-								url: '/global-development',
-							},
-						],
-					},
-					{
-						title: 'Climate crisis',
-						url: '/environment/climate-crisis',
-					},
-					{
-						title: 'Ukraine',
-						url: '/world/ukraine',
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
-					},
-					{
-						title: 'Business',
-						url: '/business',
-						children: [
-							{
-								title: 'Economics',
-								url: '/business/economics',
-							},
-							{
-								title: 'Banking',
-								url: '/business/banking',
-							},
-							{
-								title: 'Money',
-								url: '/money',
-								children: [
-									{
-										title: 'Property',
-										url: '/money/property',
-									},
-									{
-										title: 'Pensions',
-										url: '/money/pensions',
-									},
-									{
-										title: 'Savings',
-										url: '/money/savings',
-									},
-									{
-										title: 'Borrowing',
-										url: '/money/debt',
-									},
-									{
-										title: 'Careers',
-										url: '/money/work-and-careers',
-									},
-								],
-							},
-							{
-								title: 'Markets',
-								url: '/business/stock-markets',
-							},
-							{
-								title: 'Project Syndicate',
-								url: '/business/series/project-syndicate-economists',
-							},
-							{
-								title: 'B2B',
-								url: '/business-to-business',
-							},
-							{
-								title: 'Retail',
-								url: '/business/retail',
-							},
-						],
-					},
-					{
-						title: 'Environment',
-						url: '/environment',
-						children: [
-							{
-								title: 'Climate crisis',
-								url: '/environment/climate-crisis',
-							},
-							{
-								title: 'Wildlife',
-								url: '/environment/wildlife',
-							},
-							{
-								title: 'Energy',
-								url: '/environment/energy',
-							},
-							{
-								title: 'Pollution',
-								url: '/environment/pollution',
-							},
-						],
-					},
-					{
-						title: 'UK politics',
-						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
-					},
-					{
-						title: 'Society',
-						url: '/society',
-					},
-					{
-						title: 'Science',
-						url: '/science',
-					},
-					{
-						title: 'Tech',
-						url: '/technology',
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-					},
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-				],
+				id: 'sport/novak-djokovic',
+				type: 'Keyword',
+				title: 'Novak Djokovic',
 			},
 			{
-				title: 'Opinion',
-				url: '/commentisfree',
-				longTitle: 'Opinion home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'The Guardian view',
-						url: '/profile/editorial',
-					},
-					{
-						title: 'Columnists',
-						url: '/index/contributors',
-					},
-					{
-						title: 'Cartoons',
-						url: '/tone/cartoons',
-					},
-					{
-						title: 'Opinion videos',
-						url: '/type/video+tone/comment',
-					},
-					{
-						title: 'Letters',
-						url: '/tone/letters',
-					},
-				],
+				id: 'sport/atp-world-tour-finals',
+				type: 'Keyword',
+				title: 'ATP Finals',
 			},
 			{
+				id: 'sport/tennis',
+				type: 'Keyword',
+				title: 'Tennis',
+			},
+			{
+				id: 'sport/sport',
+				type: 'Keyword',
 				title: 'Sport',
-				url: '/sport',
-				longTitle: 'Sport home',
-				iconName: 'home',
-				children: [
+			},
+			{
+				id: 'tone/news',
+				type: 'Tone',
+				title: 'News',
+			},
+			{
+				id: 'type/video',
+				type: 'Type',
+				title: 'Video',
+			},
+			{
+				id: 'tracking/commissioningdesk/uk-video',
+				type: 'Tracking',
+				title: 'UK Video',
+			},
+		],
+		pillar: 'sport',
+		isLegacyInteractive: false,
+		isImmersive: false,
+		sectionLabel: 'Novak Djokovic',
+		sectionUrl: 'sport/novak-djokovic',
+		sectionName: 'sport',
+		subMetaSectionLinks: [
+			{
+				url: '/sport/novak-djokovic',
+				title: 'Novak Djokovic',
+			},
+		],
+		subMetaKeywordLinks: [
+			{
+				url: '/sport/atp-world-tour-finals',
+				title: 'ATP Finals',
+			},
+			{
+				url: '/sport/tennis',
+				title: 'Tennis',
+			},
+		],
+		shouldHideAds: false,
+		isAdFreeUser: false,
+		webURL: 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+		linkedData: [
+			{
+				'@type': 'NewsArticle',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+				publisher: {
+					'@type': 'Organization',
+					'@context': 'https://schema.org',
+					'@id': 'https://www.theguardian.com#publisher',
+					name: 'The Guardian',
+					url: 'https://www.theguardian.com/',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+						width: 190,
+						height: 60,
+					},
+					sameAs: [
+						'https://www.facebook.com/theguardian',
+						'https://twitter.com/guardian',
+						'https://www.youtube.com/user/TheGuardian',
+					],
+				},
+				isAccessibleForFree: true,
+				isPartOf: {
+					'@type': ['CreativeWork', 'Product'],
+					name: 'The Guardian',
+					productID: 'theguardian.com:basic',
+				},
+				image: [
+					'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=068fb79aa05a766277421fbe8d2319d7',
+					'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+					'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+					'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				],
+				author: [
+					{
+						'@type': 'Person',
+						name: 'Guardian staff reporter',
+					},
+				],
+				datePublished: '2023-11-20T10:16:19.000Z',
+				headline:
+					'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
+				dateModified: '2023-11-20T10:16:20.000Z',
+				mainEntityOfPage:
+					'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+			},
+			{
+				'@type': 'WebPage',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+				potentialAction: {
+					'@type': 'ViewAction',
+					target: 'android-app://com.guardian/https/www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+				},
+			},
+		],
+		openGraphData: {
+			'og:url':
+				'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+			'og:image:width': '1200',
+			'og:image':
+				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=068fb79aa05a766277421fbe8d2319d7',
+			'al:ios:url':
+				'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=applinks',
+			'og:title':
+				'ATP Finals: Djokovic beats Sinner to claim record seventh title – video',
+			'fb:app_id': '180444840287',
+			'og:video:url':
+				'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+			'article:modified_time': '2023-11-20T10:16:20.000Z',
+			'og:video:secure_url':
+				'https://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+			'og:image:height': '720',
+			'og:description':
+				'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
+			'og:type': 'article',
+			'al:ios:app_store_id': '409128287',
+			'article:section': 'Sport',
+			'article:published_time': '2023-11-20T10:16:19.000Z',
+			'article:tag': 'Novak Djokovic,ATP Finals,Tennis,Sport',
+			'al:ios:app_name': 'The Guardian',
+			'og:site_name': 'the Guardian',
+		},
+		twitterData: {
+			'twitter:app:id:iphone': '409128287',
+			'twitter:app:name:googleplay': 'The Guardian',
+			'twitter:app:name:ipad': 'The Guardian',
+			'twitter:card': 'summary_large_image',
+			'twitter:app:name:iphone': 'The Guardian',
+			'twitter:app:id:ipad': '409128287',
+			'twitter:app:id:googleplay': 'com.guardian',
+			'twitter:app:url:googleplay':
+				'guardian://www.theguardian.com/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+			'twitter:app:url:iphone':
+				'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
+			'twitter:image':
+				'https://i.guim.co.uk/img/media/b815e0c5d4fe13404597f21cf14f32728aa1f5a2/456_181_5689_3413/master/5689.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=cc616ca345f75ebcf90d7da7c1d97390',
+			'twitter:site': '@guardian',
+			'twitter:app:url:ipad':
+				'gnmguardian://sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video?contenttype=Article&source=twitter',
+		},
+		config: {
+			references: [
+				{
+					'rich-link':
+						'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				},
+			],
+			shortUrlId: '/p/d8ex5',
+			switches: {
+				prebidAppnexusUkRow: true,
+				clickToView: true,
+				prebidTrustx: true,
+				scAdFreeBanner: false,
+				compareVariantDecision: false,
+				enableSentryReporting: true,
+				lazyLoadContainers: true,
+				adFreeStrictExpiryEnforcement: false,
+				liveblogRendering: true,
+				remarketing: true,
+				registerWithPhone: false,
+				targeting: true,
+				extendedMostPopularFronts: true,
+				slotBodyEnd: true,
+				emailInlineInFooter: true,
+				facebookTrackingPixel: true,
+				serviceWorkerEnabled: false,
+				iasAdTargeting: true,
+				extendedMostPopular: true,
+				prebidAnalytics: true,
+				imrWorldwide: true,
+				acast: true,
+				twitterUwt: true,
+				prebidAppnexusInvcode: true,
+				prebidAppnexus: true,
+				enableDiscussionSwitch: true,
+				prebidXaxis: true,
+				interactiveFullHeaderSwitch: false,
+				discussionAllPageSize: true,
+				prebidUserSync: true,
+				audioOnwardJourneySwitch: true,
+				mobileStickyPrebid: true,
+				breakingNews: true,
+				externalVideoEmbeds: true,
+				carrotTrafficDriver: true,
+				geoMostPopular: true,
+				weAreHiring: true,
+				relatedContent: true,
+				thirdPartyEmbedTracking: true,
+				prebidOzone: true,
+				prebidAdYouLike: true,
+				mostViewedFronts: true,
+				abSignInGateMainControl: true,
+				ampPrebid: true,
+				googleSearch: true,
+				brazeSwitch: true,
+				consentManagement: true,
+				commercial: true,
+				redplanetForAus: true,
+				prebidSonobi: true,
+				idProfileNavigation: true,
+				confiantAdVerification: true,
+				discussionAllowAnonymousRecommendsSwitch: false,
+				scrollDepth: true,
+				permutive: true,
+				comscore: true,
+				webFonts: true,
+				prebidImproveDigital: true,
+				ophan: true,
+				crosswordSvgThumbnails: true,
+				prebidTriplelift: true,
+				weather: true,
+				commercialOutbrainNewids: true,
+				dotcomRendering: true,
+				abSignInGateMainVariant: true,
+				hostedVideoAutoplay: true,
+				abAdblockAsk: true,
+				prebidPubmatic: true,
+				autoRefresh: true,
+				enhanceTweets: true,
+				prebidIndexExchange: true,
+				prebidOpenx: true,
+				idCookieRefresh: true,
+				sharingComments: true,
+				abSignInGateMandatory: true,
+				discussionPageSize: true,
+				smartAppBanner: false,
+				boostGaUserTimingFidelity: false,
+				historyTags: true,
+				mobileStickyLeaderboard: true,
+				abDeeplyReadTest: false,
+				surveys: true,
+				remoteBanner: true,
+				inizio: true,
+				prebidHeaderBidding: true,
+				a9HeaderBidding: true,
+				lightbox: true,
+			},
+			keywordIds:
+				'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+			sharedAdTargeting: {
+				ct: 'article',
+				co: ['jennifer-rankin'],
+				url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				su: ['0'],
+				edition: 'uk',
+				tn: ['news'],
+				p: 'ng',
+				k: [
+					'eu',
+					'flooding',
+					'world',
+					'europe-news',
+					'natural-disasters',
+					'science',
+					'environment',
+					'climate-change',
+					'wildfires',
+					'scienceofclimatechange',
+				],
+				sh: 'https://www.theguardian.com/p/d8ex5',
+			},
+			toneIds: 'tone/news',
+			dcrSentryDsn:
+				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+			discussionApiUrl:
+				'https://discussion.theguardian.com/discussion-api',
+			sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+			commercialBundleUrl:
+				'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+			discussionApiClientHeader: 'nextgen',
+			shouldHideReaderRevenue: false,
+			sentryHost: 'app.getsentry.com/35463',
+			isPaidContent: false,
+			headline: 'Headline string',
+			idApiUrl: 'https://idapi.theguardian.com',
+			showRelatedContent: true,
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			videoDuration: 0,
+			stage: 'PROD',
+			isSensitive: false,
+			isDev: false,
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+			keywords:
+				'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			revisionNumber: 'DEV',
+			section: 'environment',
+			isPhotoEssay: false,
+			ampIframeUrl:
+				'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+			isLive: false,
+			host: 'https://www.theguardian.com',
+			brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+			contentType: 'Article',
+			idUrl: 'https://profile.theguardian.com',
+			author: 'Jennifer Rankin',
+			dfpAccountId: '59666047',
+			pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+			mmaUrl: 'https://manage.theguardian.com',
+			abTests: {},
+			edition: 'UK',
+			ipsosTag: 'environment',
+			isLiveBlog: false,
+			frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+			webPublicationDate: 1581314427000,
+			discussionD2Uid: 'zHoBy6HNKsk',
+			source: 'TMN',
+		},
+		guardianBaseURL: 'https://www.theguardian.com',
+		contentType: 'Video',
+		hasRelated: true,
+		hasStoryPackage: false,
+		beaconURL: '//phar.gu-web.net',
+		isCommentable: false,
+		commercialProperties: {
+			UK: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/pctba',
+					},
+					{
+						name: 'edition',
+						value: 'uk',
+					},
+					{
+						name: 'k',
+						value: [
+							'novak-djokovic',
+							'tennis',
+							'sport',
+							'atp-world-tour-finals',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['news'],
+					},
+					{
+						name: 'ct',
+						value: 'video',
+					},
+					{
+						name: 'url',
+						value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			US: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/pctba',
+					},
+					{
+						name: 'edition',
+						value: 'us',
+					},
+					{
+						name: 'k',
+						value: [
+							'novak-djokovic',
+							'tennis',
+							'sport',
+							'atp-world-tour-finals',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['news'],
+					},
+					{
+						name: 'ct',
+						value: 'video',
+					},
+					{
+						name: 'url',
+						value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			AU: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/pctba',
+					},
+					{
+						name: 'edition',
+						value: 'au',
+					},
+					{
+						name: 'k',
+						value: [
+							'novak-djokovic',
+							'tennis',
+							'sport',
+							'atp-world-tour-finals',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['news'],
+					},
+					{
+						name: 'ct',
+						value: 'video',
+					},
+					{
+						name: 'url',
+						value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			INT: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/pctba',
+					},
+					{
+						name: 'k',
+						value: [
+							'novak-djokovic',
+							'tennis',
+							'sport',
+							'atp-world-tour-finals',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['news'],
+					},
+					{
+						name: 'ct',
+						value: 'video',
+					},
+					{
+						name: 'url',
+						value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+					},
+					{
+						name: 'edition',
+						value: 'int',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			EUR: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/pctba',
+					},
+					{
+						name: 'k',
+						value: [
+							'novak-djokovic',
+							'tennis',
+							'sport',
+							'atp-world-tour-finals',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['news'],
+					},
+					{
+						name: 'edition',
+						value: 'eur',
+					},
+					{
+						name: 'ct',
+						value: 'video',
+					},
+					{
+						name: 'url',
+						value: '/sport/video/2023/nov/20/atp-finals-djokovic-beats-sinner-to-claim-record-seventh-title-video',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+		},
+		pageType: {
+			hasShowcaseMainElement: false,
+			isFront: false,
+			isLiveblog: false,
+			isMinuteArticle: false,
+			isPaidContent: false,
+			isPreview: false,
+			isSensitive: false,
+		},
+		trailText:
+			'Djokovic finishes the ATP season with seven titles and a handsome 55-6 win-loss record',
+		nav: {
+			currentUrl: '/sport/tennis',
+			pillars: [
+				{
+					title: 'News',
+					url: '/',
+					longTitle: 'Headlines',
+					iconName: 'home',
+					children: [
+						{
+							title: 'UK',
+							url: '/uk-news',
+							longTitle: 'UK news',
+							children: [
+								{
+									title: 'UK politics',
+									url: '/politics',
+								},
+								{
+									title: 'Education',
+									url: '/education',
+									children: [
+										{
+											title: 'Schools',
+											url: '/education/schools',
+										},
+										{
+											title: 'Teachers',
+											url: '/teacher-network',
+										},
+										{
+											title: 'Universities',
+											url: '/education/universities',
+										},
+										{
+											title: 'Students',
+											url: '/education/students',
+										},
+									],
+								},
+								{
+									title: 'Media',
+									url: '/media',
+								},
+								{
+									title: 'Society',
+									url: '/society',
+								},
+								{
+									title: 'Law',
+									url: '/law',
+								},
+								{
+									title: 'Scotland',
+									url: '/uk/scotland',
+								},
+								{
+									title: 'Wales',
+									url: '/uk/wales',
+								},
+								{
+									title: 'Northern Ireland',
+									url: '/uk/northernireland',
+								},
+							],
+						},
+						{
+							title: 'World',
+							url: '/world',
+							longTitle: 'World news',
+							children: [
+								{
+									title: 'Europe',
+									url: '/world/europe-news',
+								},
+								{
+									title: 'US',
+									url: '/us-news',
+									longTitle: 'US news',
+								},
+								{
+									title: 'Americas',
+									url: '/world/americas',
+								},
+								{
+									title: 'Asia',
+									url: '/world/asia',
+								},
+								{
+									title: 'Australia',
+									url: '/australia-news',
+									longTitle: 'Australia news',
+								},
+								{
+									title: 'Middle East',
+									url: '/world/middleeast',
+								},
+								{
+									title: 'Africa',
+									url: '/world/africa',
+								},
+								{
+									title: 'Inequality',
+									url: '/inequality',
+								},
+								{
+									title: 'Global development',
+									url: '/global-development',
+								},
+							],
+						},
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Ukraine',
+							url: '/world/ukraine',
+						},
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Newsletters',
+							url: '/email-newsletters',
+						},
+						{
+							title: 'Business',
+							url: '/business',
+							children: [
+								{
+									title: 'Economics',
+									url: '/business/economics',
+								},
+								{
+									title: 'Banking',
+									url: '/business/banking',
+								},
+								{
+									title: 'Money',
+									url: '/money',
+									children: [
+										{
+											title: 'Property',
+											url: '/money/property',
+										},
+										{
+											title: 'Pensions',
+											url: '/money/pensions',
+										},
+										{
+											title: 'Savings',
+											url: '/money/savings',
+										},
+										{
+											title: 'Borrowing',
+											url: '/money/debt',
+										},
+										{
+											title: 'Careers',
+											url: '/money/work-and-careers',
+										},
+									],
+								},
+								{
+									title: 'Markets',
+									url: '/business/stock-markets',
+								},
+								{
+									title: 'Project Syndicate',
+									url: '/business/series/project-syndicate-economists',
+								},
+								{
+									title: 'B2B',
+									url: '/business-to-business',
+								},
+								{
+									title: 'Retail',
+									url: '/business/retail',
+								},
+							],
+						},
+						{
+							title: 'Environment',
+							url: '/environment',
+							children: [
+								{
+									title: 'Climate crisis',
+									url: '/environment/climate-crisis',
+								},
+								{
+									title: 'Wildlife',
+									url: '/environment/wildlife',
+								},
+								{
+									title: 'Energy',
+									url: '/environment/energy',
+								},
+								{
+									title: 'Pollution',
+									url: '/environment/pollution',
+								},
+							],
+						},
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Science',
+							url: '/science',
+						},
+						{
+							title: 'Tech',
+							url: '/technology',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+					],
+				},
+				{
+					title: 'Opinion',
+					url: '/commentisfree',
+					longTitle: 'Opinion home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'The Guardian view',
+							url: '/profile/editorial',
+						},
+						{
+							title: 'Columnists',
+							url: '/index/contributors',
+						},
+						{
+							title: 'Cartoons',
+							url: '/tone/cartoons',
+						},
+						{
+							title: 'Opinion videos',
+							url: '/type/video+tone/comment',
+						},
+						{
+							title: 'Letters',
+							url: '/tone/letters',
+						},
+					],
+				},
+				{
+					title: 'Sport',
+					url: '/sport',
+					longTitle: 'Sport home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Cricket',
+							url: '/sport/cricket',
+						},
+						{
+							title: 'Rugby union',
+							url: '/sport/rugby-union',
+						},
+						{
+							title: 'Tennis',
+							url: '/sport/tennis',
+						},
+						{
+							title: 'Cycling',
+							url: '/sport/cycling',
+						},
+						{
+							title: 'F1',
+							url: '/sport/formulaone',
+						},
+						{
+							title: 'Golf',
+							url: '/sport/golf',
+						},
+						{
+							title: 'Boxing',
+							url: '/sport/boxing',
+						},
+						{
+							title: 'Rugby league',
+							url: '/sport/rugbyleague',
+						},
+						{
+							title: 'Racing',
+							url: '/sport/horse-racing',
+						},
+						{
+							title: 'US sports',
+							url: '/sport/us-sport',
+						},
+					],
+				},
+				{
+					title: 'Culture',
+					url: '/culture',
+					longTitle: 'Culture home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Film',
+							url: '/film',
+						},
+						{
+							title: 'Music',
+							url: '/music',
+						},
+						{
+							title: 'TV & radio',
+							url: '/tv-and-radio',
+						},
+						{
+							title: 'Books',
+							url: '/books',
+						},
+						{
+							title: 'Art & design',
+							url: '/artanddesign',
+						},
+						{
+							title: 'Stage',
+							url: '/stage',
+						},
+						{
+							title: 'Games',
+							url: '/games',
+						},
+						{
+							title: 'Classical',
+							url: '/music/classicalmusicandopera',
+						},
+					],
+				},
+				{
+					title: 'Lifestyle',
+					url: '/lifeandstyle',
+					longTitle: 'Lifestyle home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Fashion',
+							url: '/fashion',
+						},
+						{
+							title: 'Food',
+							url: '/food',
+						},
+						{
+							title: 'Recipes',
+							url: '/tone/recipes',
+						},
+						{
+							title: 'Travel',
+							url: '/travel',
+							children: [
+								{
+									title: 'UK',
+									url: '/travel/uk',
+								},
+								{
+									title: 'Europe',
+									url: '/travel/europe',
+								},
+								{
+									title: 'US',
+									url: '/travel/usa',
+								},
+							],
+						},
+						{
+							title: 'Health & fitness',
+							url: '/lifeandstyle/health-and-wellbeing',
+						},
+						{
+							title: 'Women',
+							url: '/lifeandstyle/women',
+						},
+						{
+							title: 'Men',
+							url: '/lifeandstyle/men',
+						},
+						{
+							title: 'Love & sex',
+							url: '/lifeandstyle/love-and-sex',
+						},
+						{
+							title: 'Beauty',
+							url: '/fashion/beauty',
+						},
+						{
+							title: 'Home & garden',
+							url: '/lifeandstyle/home-and-garden',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Cars',
+							url: '/technology/motoring',
+						},
+					],
+				},
+			],
+			otherLinks: [
+				{
+					title: 'The Guardian app',
+					url: 'https://app.adjust.com/16xt6hai',
+				},
+				{
+					title: 'Video',
+					url: '/video',
+				},
+				{
+					title: 'Podcasts',
+					url: '/podcasts',
+				},
+				{
+					title: 'Pictures',
+					url: '/inpictures',
+				},
+				{
+					title: 'Newsletters',
+					url: '/email-newsletters',
+				},
+				{
+					title: "Today's paper",
+					url: '/theguardian',
+					children: [
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+						{
+							title: 'G2',
+							url: '/theguardian/g2',
+						},
+						{
+							title: 'Journal',
+							url: '/theguardian/journal',
+						},
+						{
+							title: 'Saturday',
+							url: '/theguardian/saturday',
+						},
+					],
+				},
+				{
+					title: 'Inside the Guardian',
+					url: 'https://www.theguardian.com/membership',
+				},
+				{
+					title: 'The Observer',
+					url: '/observer',
+					children: [
+						{
+							title: 'Comment',
+							url: '/theobserver/news/comment',
+						},
+						{
+							title: 'The New Review',
+							url: '/theobserver/new-review',
+						},
+						{
+							title: 'Observer Magazine',
+							url: '/theobserver/magazine',
+						},
+						{
+							title: 'Observer Food Monthly',
+							url: '/theobserver/foodmonthly',
+						},
+					],
+				},
+				{
+					title: 'Guardian Weekly',
+					url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				},
+				{
+					title: 'Crosswords',
+					url: '/crosswords',
+					children: [
+						{
+							title: 'Blog',
+							url: '/crosswords/crossword-blog',
+						},
+						{
+							title: 'Quick',
+							url: '/crosswords/series/quick',
+						},
+						{
+							title: 'Speedy',
+							url: '/crosswords/series/speedy',
+						},
+						{
+							title: 'Quick cryptic',
+							url: '/crosswords/series/quick-cryptic',
+						},
+						{
+							title: 'Everyman',
+							url: '/crosswords/series/everyman',
+						},
+						{
+							title: 'Quiptic',
+							url: '/crosswords/series/quiptic',
+						},
+						{
+							title: 'Cryptic',
+							url: '/crosswords/series/cryptic',
+						},
+						{
+							title: 'Prize',
+							url: '/crosswords/series/prize',
+						},
+						{
+							title: 'Azed',
+							url: '/crosswords/series/azed',
+						},
+						{
+							title: 'Genius',
+							url: '/crosswords/series/genius',
+						},
+						{
+							title: 'Weekend',
+							url: '/crosswords/series/weekend-crossword',
+						},
+					],
+				},
+				{
+					title: 'Wordiply',
+					url: 'https://www.wordiply.com',
+				},
+				{
+					title: 'Corrections',
+					url: '/theguardian/series/corrections-and-clarifications',
+				},
+			],
+			brandExtensions: [
+				{
+					title: 'Search jobs',
+					url: 'https://jobs.theguardian.com',
+				},
+				{
+					title: 'Hire with Guardian Jobs',
+					url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				},
+				{
+					title: 'Holidays',
+					url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				},
+				{
+					title: 'Live events',
+					url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
+				},
+				{
+					title: 'About Us',
+					url: '/about',
+				},
+				{
+					title: 'Digital Archive',
+					url: 'https://theguardian.newspapers.com',
+				},
+				{
+					title: 'Guardian Print Shop',
+					url: '/artanddesign/series/gnm-print-sales',
+				},
+				{
+					title: 'Patrons',
+					url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+				},
+				{
+					title: 'Guardian Licensing',
+					url: 'https://licensing.theguardian.com/',
+				},
+			],
+			currentNavLinkTitle: 'Tennis',
+			currentPillarTitle: 'Sport',
+			subNavSections: {
+				links: [
 					{
 						title: 'Football',
 						url: '/football',
@@ -1034,601 +1421,218 @@ export const Video: DCRArticle = {
 					},
 				],
 			},
-			{
-				title: 'Culture',
-				url: '/culture',
-				longTitle: 'Culture home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Film',
-						url: '/film',
-					},
-					{
-						title: 'Music',
-						url: '/music',
-					},
-					{
-						title: 'TV & radio',
-						url: '/tv-and-radio',
-					},
-					{
-						title: 'Books',
-						url: '/books',
-					},
-					{
-						title: 'Art & design',
-						url: '/artanddesign',
-					},
-					{
-						title: 'Stage',
-						url: '/stage',
-					},
-					{
-						title: 'Games',
-						url: '/games',
-					},
-					{
-						title: 'Classical',
-						url: '/music/classicalmusicandopera',
-					},
-				],
-			},
-			{
-				title: 'Lifestyle',
-				url: '/lifeandstyle',
-				longTitle: 'Lifestyle home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Fashion',
-						url: '/fashion',
-					},
-					{
-						title: 'Food',
-						url: '/food',
-					},
-					{
-						title: 'Recipes',
-						url: '/tone/recipes',
-					},
-					{
-						title: 'Travel',
-						url: '/travel',
-						children: [
-							{
-								title: 'UK',
-								url: '/travel/uk',
-							},
-							{
-								title: 'Europe',
-								url: '/travel/europe',
-							},
-							{
-								title: 'US',
-								url: '/travel/usa',
-							},
-						],
-					},
-					{
-						title: 'Health & fitness',
-						url: '/lifeandstyle/health-and-wellbeing',
-					},
-					{
-						title: 'Women',
-						url: '/lifeandstyle/women',
-					},
-					{
-						title: 'Men',
-						url: '/lifeandstyle/men',
-					},
-					{
-						title: 'Love & sex',
-						url: '/lifeandstyle/love-and-sex',
-					},
-					{
-						title: 'Beauty',
-						url: '/fashion/beauty',
-					},
-					{
-						title: 'Home & garden',
-						url: '/lifeandstyle/home-and-garden',
-					},
-					{
-						title: 'Money',
-						url: '/money',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-							},
-						],
-					},
-					{
-						title: 'Cars',
-						url: '/technology/motoring',
-					},
-				],
-			},
-		],
-		otherLinks: [
-			{
-				title: 'The Guardian app',
-				url: 'https://app.adjust.com/16xt6hai',
-			},
-			{
-				title: 'Video',
-				url: '/video',
-			},
-			{
-				title: 'Podcasts',
-				url: '/podcasts',
-			},
-			{
-				title: 'Pictures',
-				url: '/inpictures',
-			},
-			{
-				title: 'Newsletters',
-				url: '/email-newsletters',
-			},
-			{
-				title: "Today's paper",
-				url: '/theguardian',
-				children: [
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-					{
-						title: 'G2',
-						url: '/theguardian/g2',
-					},
-					{
-						title: 'Journal',
-						url: '/theguardian/journal',
-					},
-					{
-						title: 'Saturday',
-						url: '/theguardian/saturday',
-					},
-				],
-			},
-			{
-				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
-			},
-			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
-				title: 'Guardian Weekly',
-				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
-			},
-			{
-				title: 'Crosswords',
-				url: '/crosswords',
-				children: [
-					{
-						title: 'Blog',
-						url: '/crosswords/crossword-blog',
-					},
-					{
-						title: 'Quick',
-						url: '/crosswords/series/quick',
-					},
-					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Quick cryptic',
-						url: '/crosswords/series/quick-cryptic',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-					},
-					{
-						title: 'Cryptic',
-						url: '/crosswords/series/cryptic',
-					},
-					{
-						title: 'Prize',
-						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
-					},
-					{
-						title: 'Genius',
-						url: '/crosswords/series/genius',
-					},
-					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-				],
-			},
-			{
-				title: 'Wordiply',
-				url: 'https://www.wordiply.com',
-			},
-			{
-				title: 'Corrections',
-				url: '/theguardian/series/corrections-and-clarifications',
-			},
-		],
-		brandExtensions: [
-			{
-				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com',
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-			},
-			{
-				title: 'Holidays',
-				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
-			},
-			{
-				title: 'Live events',
-				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
-			},
-			{
-				title: 'About Us',
-				url: '/about',
-			},
-			{
-				title: 'Digital Archive',
-				url: 'https://theguardian.newspapers.com',
-			},
-			{
-				title: 'Guardian Print Shop',
-				url: '/artanddesign/series/gnm-print-sales',
-			},
-			{
-				title: 'Patrons',
-				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
-			},
-			{
-				title: 'Guardian Licensing',
-				url: 'https://licensing.theguardian.com/',
-			},
-		],
-		currentNavLinkTitle: 'Tennis',
-		currentPillarTitle: 'Sport',
-		subNavSections: {
-			links: [
-				{
-					title: 'Football',
-					url: '/football',
-					children: [
-						{
-							title: 'Live scores',
-							url: '/football/live',
-							longTitle: 'football/live',
-						},
-						{
-							title: 'Tables',
-							url: '/football/tables',
-							longTitle: 'football/tables',
-						},
-						{
-							title: 'Fixtures',
-							url: '/football/fixtures',
-							longTitle: 'football/fixtures',
-						},
-						{
-							title: 'Results',
-							url: '/football/results',
-							longTitle: 'football/results',
-						},
-						{
-							title: 'Competitions',
-							url: '/football/competitions',
-							longTitle: 'football/competitions',
-						},
-						{
-							title: 'Clubs',
-							url: '/football/teams',
-							longTitle: 'football/teams',
-						},
-					],
+			readerRevenueLinks: {
+				header: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Cricket',
-					url: '/sport/cricket',
+				footer: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Rugby union',
-					url: '/sport/rugby-union',
+				sideMenu: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 				},
-				{
-					title: 'Tennis',
-					url: '/sport/tennis',
+				ampHeader: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Cycling',
-					url: '/sport/cycling',
+				ampFooter: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'F1',
-					url: '/sport/formulaone',
-				},
-				{
-					title: 'Golf',
-					url: '/sport/golf',
-				},
-				{
-					title: 'Boxing',
-					url: '/sport/boxing',
-				},
-				{
-					title: 'Rugby league',
-					url: '/sport/rugbyleague',
-				},
-				{
-					title: 'Racing',
-					url: '/sport/horse-racing',
-				},
-				{
-					title: 'US sports',
-					url: '/sport/us-sport',
-				},
-			],
-		},
-		readerRevenueLinks: {
-			header: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			footer: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
-			},
-			sideMenu: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
-			},
-			ampHeader: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			ampFooter: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
+		showBottomSocialButtons: false,
+		pageFooter: {
+			footerLinks: [
+				[
+					{
+						text: 'About us',
+						url: '/about',
+						dataLinkName: 'uk : footer : about us',
+						extraClasses: '',
+					},
+					{
+						text: 'Help',
+						url: '/help',
+						dataLinkName: 'uk : footer : tech feedback',
+						extraClasses: 'js-tech-feedback-report',
+					},
+					{
+						text: 'Complaints & corrections',
+						url: '/info/complaints-and-corrections',
+						dataLinkName: 'complaints',
+						extraClasses: '',
+					},
+					{
+						text: 'SecureDrop',
+						url: 'https://www.theguardian.com/securedrop',
+						dataLinkName: 'securedrop',
+						extraClasses: '',
+					},
+					{
+						text: 'Work for us',
+						url: 'https://workforus.theguardian.com',
+						dataLinkName: 'uk : footer : work for us',
+						extraClasses: '',
+					},
+					{
+						text: 'Privacy policy',
+						url: '/info/privacy',
+						dataLinkName: 'privacy',
+						extraClasses: '',
+					},
+					{
+						text: 'Cookie policy',
+						url: '/info/cookies',
+						dataLinkName: 'cookie',
+						extraClasses: '',
+					},
+					{
+						text: 'Terms & conditions',
+						url: '/help/terms-of-service',
+						dataLinkName: 'terms',
+						extraClasses: '',
+					},
+					{
+						text: 'Contact us',
+						url: '/help/contact-us',
+						dataLinkName: 'uk : footer : contact us',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'All topics',
+						url: '/index/subjects/a',
+						dataLinkName: 'uk : footer : all topics',
+						extraClasses: '',
+					},
+					{
+						text: 'All writers',
+						url: '/index/contributors',
+						dataLinkName: 'uk : footer : all contributors',
+						extraClasses: '',
+					},
+					{
+						text: 'Modern Slavery Act',
+						url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+						dataLinkName:
+							'uk : footer : modern slavery act statement',
+						extraClasses: '',
+					},
+					{
+						text: 'Digital newspaper archive',
+						url: 'https://theguardian.newspapers.com',
+						dataLinkName: 'digital newspaper archive',
+						extraClasses: '',
+					},
+					{
+						text: 'Facebook',
+						url: 'https://www.facebook.com/theguardian',
+						dataLinkName: 'uk : footer : facebook',
+						extraClasses: '',
+					},
+					{
+						text: 'YouTube',
+						url: 'https://www.youtube.com/user/TheGuardian',
+						dataLinkName: 'uk : footer : youtube',
+						extraClasses: '',
+					},
+					{
+						text: 'Instagram',
+						url: 'https://www.instagram.com/guardian',
+						dataLinkName: 'uk : footer : instagram',
+						extraClasses: '',
+					},
+					{
+						text: 'LinkedIn',
+						url: 'https://www.linkedin.com/company/theguardian',
+						dataLinkName: 'uk : footer : linkedin',
+						extraClasses: '',
+					},
+					{
+						text: 'Twitter',
+						url: 'https://twitter.com/guardian',
+						dataLinkName: 'uk: footer : twitter',
+						extraClasses: '',
+					},
+					{
+						text: 'Newsletters',
+						url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+						dataLinkName: 'uk : footer : newsletters',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'Advertise with us',
+						url: 'https://advertising.theguardian.com',
+						dataLinkName: 'uk : footer : advertise with us',
+						extraClasses: '',
+					},
+					{
+						text: 'Guardian Labs',
+						url: '/guardian-labs',
+						dataLinkName: 'uk : footer : guardian labs',
+						extraClasses: '',
+					},
+					{
+						text: 'Search jobs',
+						url: 'https://jobs.theguardian.com',
+						dataLinkName: 'uk : footer : jobs',
+						extraClasses: '',
+					},
+					{
+						text: 'Patrons',
+						url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+						dataLinkName: 'uk : footer : patrons',
+						extraClasses: '',
+					},
+				],
+			],
+		},
+		publication: 'theguardian.com',
+		shouldHideReaderRevenue: false,
+		slotMachineFlags: '',
+		contributionsServiceUrl: 'https://contributions.guardianapis.com',
+		isSpecialReport: false,
+		showTableOfContents: false,
+		lang: 'en',
+		isRightToLeftLang: false,
+		imagesForLightbox: [],
+		imagesForAppsLightbox: [],
 	},
-	showBottomSocialButtons: false,
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
-		],
-	},
-	publication: 'theguardian.com',
-	shouldHideReaderRevenue: false,
-	slotMachineFlags: '',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	isSpecialReport: false,
-	showTableOfContents: false,
-	lang: 'en',
-	isRightToLeftLang: false,
-	imagesForLightbox: [],
-	imagesForAppsLightbox: [],
 };

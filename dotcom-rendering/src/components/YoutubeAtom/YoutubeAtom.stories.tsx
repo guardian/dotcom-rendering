@@ -1,7 +1,13 @@
 import { css } from '@emotion/react';
+import type { ConsentState } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from '../Card/components/ImageWrapper';
+import type { Props } from './YoutubeAtom';
 import { YoutubeAtom } from './YoutubeAtom';
 
 const meta = {
@@ -89,48 +95,79 @@ const ScrollDown =
 		</div>
 	);
 
-export const NoConsent = {
+const disableAds = { disableAds: true } satisfies AdTargeting;
+
+const adTargeting = {
+	adUnit: 'adUnit',
+	customParams: {
+		sens: 'f',
+		urlkw: ['keyword1', 'keyword2'],
+	},
+} satisfies AdTargeting;
+
+const consentGiven = {
+	tcfv2: {
+		vendorConsents: { abc: false },
+		addtlConsent: 'xyz',
+		gdprApplies: true,
+		tcString: 'YAAA',
+		consents: { '1': true, '2': true },
+		eventStatus: 'useractioncomplete',
+	},
+	canTarget: true,
+	framework: 'tcfv2',
+} satisfies ConsentState;
+
+const consentNotGiven = {
+	canTarget: false,
+	framework: 'tcfv2',
+} satisfies ConsentState;
+
+const adTargetingAndConsentGiven = {
+	...adTargeting,
+	...consentGiven,
+} satisfies AdTargeting & ConsentState;
+
+const imagePositionOnMobile: ImagePositionType = 'none';
+const imageSize: ImageSizeType = 'large';
+
+const baseConfiguration = {
+	index: 123,
+	videoId: '-ZCvZmYlQD8',
+	alt: '',
+	eventEmitters: [
+		// eslint-disable-next-line no-console -- check event emitters are called
+		(e: unknown) => console.log(`event emitter ${String(e)} called`),
+	],
+	duration: 252,
+	format: {
+		theme: Pillar.Culture,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+	},
+	height: 450,
+	width: 800,
+	shouldStick: false,
+	isMainMedia: false,
+	abTestParticipations: {},
+	adTargeting: disableAds,
+	imagePositionOnMobile,
+	imageSize,
+	consentState: consentGiven,
+	renderingTarget: 'Web',
+} satisfies Partial<Props>;
+
+const NoConsent = {
 	args: {
-		index: 123,
-		videoId: '-ZCvZmYlQD8',
-		alt: '',
-		eventEmitters: [(e) => console.log(`analytics event ${e} called`)],
-		duration: 252,
-		format: {
-			theme: Pillar.Culture,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		},
-		height: 450,
-		width: 800,
-		shouldStick: false,
-		isMainMedia: false,
-		enableIma: false,
-		abTestParticipations: {},
-		adTargeting: {
-			disableAds: true,
-		},
-		imagePositionOnMobile: 'none',
-		imageSize: 'large',
+		...baseConfiguration,
+		consentState: consentNotGiven,
 	},
 	decorators: [Container],
 } satisfies Story;
 
 export const NoOverlay = {
 	args: {
-		...NoConsent.args,
-		consentState: {
-			tcfv2: {
-				vendorConsents: { abc: false },
-				addtlConsent: 'xyz',
-				gdprApplies: true,
-				tcString: 'YAAA',
-				consents: { '1': true, '2': true },
-				eventStatus: 'useractioncomplete',
-			},
-			canTarget: true,
-			framework: 'tcfv2',
-		},
+		...baseConfiguration,
 		title: "Rayshard Brooks: US justice system treats us like 'animals'",
 	},
 	decorators: [Container],
@@ -141,8 +178,7 @@ export const NoOverlay = {
 
 export const WithOverrideImage = {
 	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
+		...baseConfiguration,
 		videoId: '3jpXAMwRSu4',
 		alt: 'Microscopic image of COVID',
 		format: {
@@ -161,8 +197,7 @@ export const WithOverrideImage = {
 
 export const WithPosterImage = {
 	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
+		...baseConfiguration,
 		videoId: 'N9Cgy-ke5-s',
 		format: {
 			theme: Pillar.Sport,
@@ -179,8 +214,7 @@ export const WithPosterImage = {
 
 export const WithOverlayAndPosterImage = {
 	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
+		...baseConfiguration,
 		videoId: WithPosterImage.args.videoId,
 		format: {
 			theme: Pillar.Opinion,
@@ -200,7 +234,8 @@ export const WithOverlayAndPosterImage = {
 
 export const GiveConsent = {
 	args: {
-		...NoConsent.args,
+		...baseConfiguration,
+		...consentNotGiven,
 		videoId: WithOverrideImage.args.videoId,
 		alt: WithOverrideImage.args.alt,
 		format: WithOverrideImage.args.format,
@@ -212,7 +247,9 @@ export const GiveConsent = {
 
 		return (
 			<>
-				<button onClick={() => setConsented(true)}>Give consent</button>
+				<button type="button" onClick={() => setConsented(true)}>
+					Give consent
+				</button>
 				<div
 					css={css`
 						width: 800px;
@@ -221,9 +258,7 @@ export const GiveConsent = {
 				>
 					<YoutubeAtom
 						{...args}
-						consentState={
-							consented ? NoOverlay.args.consentState : undefined
-						}
+						consentState={consented ? consentGiven : undefined}
 					/>
 				</div>
 			</>
@@ -234,8 +269,7 @@ export const GiveConsent = {
 
 export const Sticky = {
 	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
+		...baseConfiguration,
 		shouldStick: true,
 		isMainMedia: true,
 		shouldPauseOutOfView: true,
@@ -246,8 +280,7 @@ export const Sticky = {
 
 export const StickyMainMedia = {
 	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
+		...baseConfiguration,
 		shouldStick: true,
 		isMainMedia: true,
 		title: NoOverlay.args.title,
@@ -262,8 +295,7 @@ export const StickyMainMedia = {
  */
 export const DuplicateVideos = {
 	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
+		...baseConfiguration,
 		shouldStick: true,
 		isMainMedia: undefined,
 	},
@@ -288,8 +320,7 @@ export const DuplicateVideos = {
  */
 export const MultipleStickyVideos = {
 	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
+		...baseConfiguration,
 		shouldStick: true,
 		isMainMedia: true,
 		title: NoOverlay.args.title,
@@ -313,8 +344,7 @@ export const MultipleStickyVideos = {
 
 export const PausesOffscreen = {
 	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
+		...baseConfiguration,
 		isMainMedia: true,
 		title: NoOverlay.args.title,
 		shouldPauseOutOfView: true,
@@ -336,99 +366,130 @@ export const PausesOffscreen = {
 	},
 } satisfies Story;
 
-export const NoConsentWithIma = {
-	...NoConsent,
+/**
+ * Duplicate YoutubeAtom tests but with ads enabled.
+ *
+ * The YouTube ads integration (IMA) only works on allow listed https domains.
+ * The tests require running:
+ * - DCR as normal on port 3030
+ * - scripts/nginx/setup.sh to setup nginx on https://r.thegulocal.com
+ *
+ * The ad enabled tests are a convenience for manual testing.
+ *
+ */
+
+export const NoConsentWithAds = {
 	args: {
 		...NoConsent.args,
-		enableIma: true,
+		adTargeting,
+	},
+	parameters: {
+		chromatic: { disableSnapshot: true },
 	},
 } satisfies Story;
 
-export const AdFreeWithIma = {
-	args: {
-		...NoConsent.args,
-		consentState: NoOverlay.args.consentState,
-		enableIma: true,
-	},
-	decorators: [Container],
-} satisfies Story;
-
-export const NoOverlayWithIma = {
+export const NoOverlayWithAds = {
 	args: {
 		...NoOverlay.args,
-		enableIma: true,
+		...adTargetingAndConsentGiven,
 	},
 	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
-export const WithOverrideImageWithIma = {
+export const WithOverrideImageWithAds = {
 	args: {
 		...WithOverrideImage.args,
+		...adTargetingAndConsentGiven,
 		overrideImage: WithOverlayAndPosterImage.args.overrideImage,
-		enableIma: true,
 	},
 	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
-export const WithPosterImageWithIma = {
+export const WithPosterImageWithAds = {
 	args: {
 		...WithPosterImage.args,
-		enableIma: true,
+		...adTargetingAndConsentGiven,
 		videoCategory: undefined,
 	},
 	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
-export const WithOverlayAndPosterImageWithIma = {
+export const WithOverlayAndPosterImageWithAds = {
 	args: {
 		...WithOverlayAndPosterImage.args,
-		enableIma: true,
+		...adTargetingAndConsentGiven,
 		videoCategory: undefined,
 		kicker: undefined,
 		showTextOverlay: undefined,
 	},
 	decorators: [Container],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
-export const GiveConsentWithIma = {
+export const GiveConsentWithAds = {
 	...GiveConsent,
 	args: {
 		...GiveConsent.args,
-		enableIma: true,
+		adTargeting,
 	},
 	decorators: [],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
-export const StickyWithIma = {
+export const StickyWithAds = {
 	args: {
 		...Sticky.args,
-		enableIma: true,
+		...adTargetingAndConsentGiven,
 		shouldPauseOutOfView: undefined,
 	},
 	decorators: [ScrollDown('arrow')],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
-export const StickyMainMediaWithIma = {
+export const StickyMainMediaWithAds = {
 	args: {
 		...StickyMainMedia.args,
-		enableIma: true,
+		...adTargetingAndConsentGiven,
 	},
 	decorators: [ScrollDown('arrow')],
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
-export const DuplicateVideosWithIma = {
+export const DuplicateVideosWithAds = {
 	...DuplicateVideos,
 	args: {
 		...DuplicateVideos.args,
-		enableIma: true,
+		...adTargetingAndConsentGiven,
 	},
-	parameters: undefined,
+	parameters: {
+		chromatic: { disableSnapshot: true },
+	},
 } satisfies Story;
 
-export const MultipleStickyVideosWithIma = {
+export const MultipleStickyVideosWithAds = {
 	...MultipleStickyVideos,
 	args: {
 		...MultipleStickyVideos.args,
-		enableIma: true,
+		...adTargetingAndConsentGiven,
+	},
+	parameters: {
+		chromatic: { disableSnapshot: true },
 	},
 } satisfies Story;

@@ -11,2066 +11,2110 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Analysis: DCRArticle = {
-	version: 3,
-	headline: 'Irish general election: who won and what happens now?',
-	standfirst:
-		'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
-	webTitle: 'Irish general election: who won and what happens now?',
-	mainMediaElements: [
-		{
-			displayCredit: true,
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			role: 'inline',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '1200',
-							width: '2000',
+export const Analysis: Article = {
+	frontendData: {
+		version: 3,
+		headline: 'Irish general election: who won and what happens now?',
+		standfirst:
+			'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
+		webTitle: 'Irish general election: who won and what happens now?',
+		mainMediaElements: [
+			{
+				displayCredit: true,
+				_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+				role: 'inline',
+				media: {
+					allImages: [
+						{
+							index: 0,
+							fields: {
+								height: '1200',
+								width: '2000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/2000.jpg',
 						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/2000.jpg',
+						{
+							index: 1,
+							fields: {
+								height: '600',
+								width: '1000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg',
+						},
+						{
+							index: 2,
+							fields: {
+								height: '300',
+								width: '500',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/500.jpg',
+						},
+						{
+							index: 3,
+							fields: {
+								height: '84',
+								width: '140',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/140.jpg',
+						},
+						{
+							index: 4,
+							fields: {
+								height: '4032',
+								width: '6720',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/6720.jpg',
+						},
+						{
+							index: 5,
+							fields: {
+								isMaster: 'true',
+								height: '4032',
+								width: '6720',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
+						},
+					],
+				},
+				elementId: 'ba766523-f78b-45bc-a098-ab5699639775',
+				imageSources: [
+					{
+						weighting: 'inline',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
+								width: 930,
+							},
+						],
 					},
 					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg',
+						weighting: 'thumbnail',
+						srcSet: [],
 					},
 					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/500.jpg',
+						weighting: 'supporting',
+						srcSet: [],
 					},
 					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/140.jpg',
+						weighting: 'showcase',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=85&auto=format&fit=max&s=c57f8ebe5a46216266ad61f68760d728',
+								width: 1020,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=4caf16ea11bc11f8cd36d708ad693fc7',
+								width: 2040,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=85&auto=format&fit=max&s=f1fe8cae541632aa81b6bf041c0f0bc8',
+								width: 940,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=2f3ac8a7d5ccde1e6bd97f274cb969e7',
+								width: 1880,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=85&auto=format&fit=max&s=b9d5bc484b3842d85a3186a1f154b737',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=c47c5613370a89200b152a2fb089a4f0',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
+								width: 930,
+							},
+						],
 					},
 					{
-						index: 4,
-						fields: {
-							height: '4032',
-							width: '6720',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/6720.jpg',
+						weighting: 'halfwidth',
+						srcSet: [],
 					},
 					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '4032',
-							width: '6720',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
+						weighting: 'immersive',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1900&quality=85&auto=format&fit=max&s=b0ae64aef784b1011e04dd6f308d8244',
+								width: 1900,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=05eab6892ebd44f37a5e32341c8275cf',
+								width: 3800,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=85&auto=format&fit=max&s=6fe8456e8f8e556969cf0e81b12519c3',
+								width: 1300,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8f1f1cd318caa33147a222f2925cffa0',
+								width: 2600,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=85&auto=format&fit=max&s=67cc1c1f38c58d7b7ca441c22f6d3e7e',
+								width: 1140,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=837af7b12f2f8f6aca7caa166623628f',
+								width: 2280,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=980&quality=85&auto=format&fit=max&s=3f1b086ce428b84de00a4b0e3f9b0869',
+								width: 980,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=959495e768104d8fb648fe8eec16f08c',
+								width: 1960,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=740&quality=85&auto=format&fit=max&s=91d116598cb707d7d642f96e4048c7cd',
+								width: 740,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=1ba9b2bb88590a28515ea576ea197df2',
+								width: 1480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=85&auto=format&fit=max&s=b9d5bc484b3842d85a3186a1f154b737',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=c47c5613370a89200b152a2fb089a4f0',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=480&quality=85&auto=format&fit=max&s=7b4cd7e2c1ccb55af1bdc47faa5ef6b4',
+								width: 480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=d38edaef1aa8039ac1304194a0c8393a',
+								width: 960,
+							},
+						],
 					},
 				],
+				data: {
+					copyright:
+						'Copyright 2020 The Associated Press. All rights reserved.',
+					alt: 'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters',
+					caption:
+						'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
+					credit: 'Photograph: Peter Morrison/AP',
+				},
+				position: 1,
 			},
-			elementId: 'ba766523-f78b-45bc-a098-ab5699639775',
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
-							width: 930,
-						},
-					],
+		],
+		main: '<figure class="element element-image" data-media-id="59ff93fd27eea2be66feecf0b9a7c0b98d12877a"> \n <img src="https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg" alt="The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters" width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.</span> <span class="element-image__credit">Photograph: Peter Morrison/AP</span> \n </figcaption> \n</figure>',
+		filterKeyEvents: false,
+		keyEvents: [],
+		blocks: [
+			{
+				id: '5e413c398f0811db2faf4cdd',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='who-won-irelands-general-election'>Who won Ireland’s general election?</h2>",
+						elementId: '35beccc1-b3cc-4d07-b199-74ceaf622bca',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
+						elementId: 'e12e527f-a35b-4b73-8dab-16d518d632fe',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
+						elementId: '3a1527a7-a9a8-48a4-9bd0-d122386b6f0b',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+						prefix: 'Related: ',
+						text: 'Ireland election: latest results',
+						elementId: '7b51a5de-be4a-4691-b847-6bb475352d31',
+						role: 'thumbnail',
+						url: 'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
+						elementId: '47dba33a-c2db-47b3-8268-9ed37301f3a5',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='was-sinn-feins-success-a-surprise'>Was Sinn Féin’s success a surprise?</h2>",
+						elementId: '281a7619-1b8a-4773-8b5f-40c91e5a05ce',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
+						elementId: '85a40252-fb30-41ef-8418-93a5db67b02c',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='is-varadkar-going-to-lose-power'>Is Varadkar going to lose power?</h2>",
+						elementId: 'eac05259-ffa4-4457-adaf-ececefbd3c1f',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
+						elementId: 'e5b20337-6458-4516-96b2-ab71f2f78198',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.QABlockElement',
+						credit: '',
+						id: '95c8ba09-ecce-4bfa-9140-a262990fbdce',
+						elementId: '4be9dd1b-2294-426e-b4ef-b97dc6063bd0',
+						title: 'What are the main political parties in Ireland?',
+						html: '<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='why-did-sinn-fein-do-so-well'>Why did Sinn Féin do so well?</h2>",
+						elementId: '26e99168-2891-4970-aa13-5173da5ce9c9',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
+						elementId: '12f880bf-9a0a-4aa6-9b50-44a9d6629987',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
+						elementId: 'eb39bc39-459f-42cf-8539-12e132f10fa0',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='what-happens-next'>What happens next?</h2>",
+						elementId: '781c6423-6ca9-45c7-8c43-0eecca03abc8',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
+						elementId: 'e09fa56c-0652-4e5f-8136-c2d0e0e7195e',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
+						elementId: '50eccdf4-9d9e-40e1-bc60-0b0770d51992',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
+						elementId: '3be4e41f-035e-4fa1-a107-c4d78c074a13',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
+						elementId: 'd525d57a-446c-49ff-aa7c-0f4e3250da91',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>One plausible outcome: deadlock, and another election.</p>',
+						elementId: 'c42364f9-5e5e-46ee-9b1c-36c594fa21eb',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p><strong>Read more</strong></p>',
+						elementId: 'cccd9737-32af-4c33-9076-b8a4cadda279',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p><a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald: Sinn Féin leader who may play Dublin kingmaker</a><br><a href="https://www.theguardian.com/world/2020/feb/08/sinn-fein-on-election-day-shane-obrien">‘It’s a sea change’: Sinn Féin dares to dream on election day</a><br><a href="https://www.theguardian.com/commentisfree/2020/jan/31/sinn-fein-ireland-left-election-ira">Opinion: Can Sinn Féin’s young voters finally pull Ireland to the left?</a><br><a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">The Varadkar paradox: feted abroad, can PM arrest polls slump in Ireland?</a></p>',
+						elementId: '5d0d1bd6-e199-4aa5-b41b-ecad6f230dfb',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
 				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=85&auto=format&fit=max&s=c57f8ebe5a46216266ad61f68760d728',
-							width: 1020,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=4caf16ea11bc11f8cd36d708ad693fc7',
-							width: 2040,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=85&auto=format&fit=max&s=f1fe8cae541632aa81b6bf041c0f0bc8',
-							width: 940,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=2f3ac8a7d5ccde1e6bd97f274cb969e7',
-							width: 1880,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=85&auto=format&fit=max&s=b9d5bc484b3842d85a3186a1f154b737',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=c47c5613370a89200b152a2fb089a4f0',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1900&quality=85&auto=format&fit=max&s=b0ae64aef784b1011e04dd6f308d8244',
-							width: 1900,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=05eab6892ebd44f37a5e32341c8275cf',
-							width: 3800,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=85&auto=format&fit=max&s=6fe8456e8f8e556969cf0e81b12519c3',
-							width: 1300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8f1f1cd318caa33147a222f2925cffa0',
-							width: 2600,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=85&auto=format&fit=max&s=67cc1c1f38c58d7b7ca441c22f6d3e7e',
-							width: 1140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=837af7b12f2f8f6aca7caa166623628f',
-							width: 2280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=980&quality=85&auto=format&fit=max&s=3f1b086ce428b84de00a4b0e3f9b0869',
-							width: 980,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=959495e768104d8fb648fe8eec16f08c',
-							width: 1960,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=740&quality=85&auto=format&fit=max&s=91d116598cb707d7d642f96e4048c7cd',
-							width: 740,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=1ba9b2bb88590a28515ea576ea197df2',
-							width: 1480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=85&auto=format&fit=max&s=b9d5bc484b3842d85a3186a1f154b737',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=c47c5613370a89200b152a2fb089a4f0',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=480&quality=85&auto=format&fit=max&s=7b4cd7e2c1ccb55af1bdc47faa5ef6b4',
-							width: 480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=d38edaef1aa8039ac1304194a0c8393a',
-							width: 960,
-						},
-					],
-				},
-			],
-			data: {
-				copyright:
-					'Copyright 2020 The Associated Press. All rights reserved.',
-				alt: 'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters',
-				caption:
-					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
-				credit: 'Photograph: Peter Morrison/AP',
+				blockCreatedOn: 1581337885000,
+				blockCreatedOnDisplay: '12.31 GMT',
+				blockLastUpdated: 1581377261000,
+				blockLastUpdatedDisplay: '23.27 GMT',
+				blockFirstPublished: 1581337885000,
+				blockFirstPublishedDisplay: '12.31 GMT',
+				blockFirstPublishedDisplayNoTimezone: '12.31',
+				contributors: [],
+				primaryDateLine: 'Mon 10 Feb 2020 12.31 GMT',
+				secondaryDateLine: 'Last modified on Thu 13 Feb 2020 10.21 GMT',
 			},
-			position: 1,
-		},
-	],
-	main: '<figure class="element element-image" data-media-id="59ff93fd27eea2be66feecf0b9a7c0b98d12877a"> \n <img src="https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg" alt="The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters" width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.</span> <span class="element-image__credit">Photograph: Peter Morrison/AP</span> \n </figcaption> \n</figure>',
-	filterKeyEvents: false,
-	keyEvents: [],
-	blocks: [
-		{
-			id: '5e413c398f0811db2faf4cdd',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: "<h2 id='who-won-irelands-general-election'>Who won Ireland’s general election?</h2>",
-					elementId: '35beccc1-b3cc-4d07-b199-74ceaf622bca',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
-					elementId: 'e12e527f-a35b-4b73-8dab-16d518d632fe',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
-					elementId: '3a1527a7-a9a8-48a4-9bd0-d122386b6f0b',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					prefix: 'Related: ',
-					text: 'Ireland election: latest results',
-					elementId: '7b51a5de-be4a-4691-b847-6bb475352d31',
-					role: 'thumbnail',
-					url: 'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
-					elementId: '47dba33a-c2db-47b3-8268-9ed37301f3a5',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: "<h2 id='was-sinn-feins-success-a-surprise'>Was Sinn Féin’s success a surprise?</h2>",
-					elementId: '281a7619-1b8a-4773-8b5f-40c91e5a05ce',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
-					elementId: '85a40252-fb30-41ef-8418-93a5db67b02c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: "<h2 id='is-varadkar-going-to-lose-power'>Is Varadkar going to lose power?</h2>",
-					elementId: 'eac05259-ffa4-4457-adaf-ececefbd3c1f',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
-					elementId: 'e5b20337-6458-4516-96b2-ab71f2f78198',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.QABlockElement',
-					credit: '',
-					id: '95c8ba09-ecce-4bfa-9140-a262990fbdce',
-					elementId: '4be9dd1b-2294-426e-b4ef-b97dc6063bd0',
-					title: 'What are the main political parties in Ireland?',
-					html: '<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: "<h2 id='why-did-sinn-fein-do-so-well'>Why did Sinn Féin do so well?</h2>",
-					elementId: '26e99168-2891-4970-aa13-5173da5ce9c9',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
-					elementId: '12f880bf-9a0a-4aa6-9b50-44a9d6629987',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
-					elementId: 'eb39bc39-459f-42cf-8539-12e132f10fa0',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: "<h2 id='what-happens-next'>What happens next?</h2>",
-					elementId: '781c6423-6ca9-45c7-8c43-0eecca03abc8',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
-					elementId: 'e09fa56c-0652-4e5f-8136-c2d0e0e7195e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
-					elementId: '50eccdf4-9d9e-40e1-bc60-0b0770d51992',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
-					elementId: '3be4e41f-035e-4fa1-a107-c4d78c074a13',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
-					elementId: 'd525d57a-446c-49ff-aa7c-0f4e3250da91',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>One plausible outcome: deadlock, and another election.</p>',
-					elementId: 'c42364f9-5e5e-46ee-9b1c-36c594fa21eb',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><strong>Read more</strong></p>',
-					elementId: 'cccd9737-32af-4c33-9076-b8a4cadda279',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald: Sinn Féin leader who may play Dublin kingmaker</a><br><a href="https://www.theguardian.com/world/2020/feb/08/sinn-fein-on-election-day-shane-obrien">‘It’s a sea change’: Sinn Féin dares to dream on election day</a><br><a href="https://www.theguardian.com/commentisfree/2020/jan/31/sinn-fein-ireland-left-election-ira">Opinion: Can Sinn Féin’s young voters finally pull Ireland to the left?</a><br><a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">The Varadkar paradox: feted abroad, can PM arrest polls slump in Ireland?</a></p>',
-					elementId: '5d0d1bd6-e199-4aa5-b41b-ecad6f230dfb',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1581337885000,
-			blockCreatedOnDisplay: '12.31 GMT',
-			blockLastUpdated: 1581377261000,
-			blockLastUpdatedDisplay: '23.27 GMT',
-			blockFirstPublished: 1581337885000,
-			blockFirstPublishedDisplay: '12.31 GMT',
-			blockFirstPublishedDisplayNoTimezone: '12.31',
-			contributors: [],
-			primaryDateLine: 'Mon 10 Feb 2020 12.31 GMT',
-			secondaryDateLine: 'Last modified on Thu 13 Feb 2020 10.21 GMT',
-		},
-	],
-	author: {
-		byline: 'Rory Carroll Ireland correspondent',
-		twitterHandle: 'rorycarroll72',
-	},
-	byline: 'Rory Carroll Ireland correspondent',
-	webPublicationDate: '2020-02-10T12:31:25.000Z',
-	webPublicationDateDeprecated: '2020-02-10T12:31:25.000Z',
-	webPublicationDateDisplay: 'Mon 10 Feb 2020 12.31 GMT',
-	webPublicationSecondaryDateDisplay:
-		'Last modified on Thu 13 Feb 2020 10.21 GMT',
-	editionLongForm: 'UK edition',
-	editionId: 'UK',
-	pageId: 'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-	canonicalUrl:
-		'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-	format: {
-		design: 'AnalysisDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
-	},
-	designType: 'Analysis',
-	tags: [
-		{
-			id: 'world/ireland',
-			type: 'Keyword',
-			title: 'Ireland',
-		},
-		{
-			id: 'politics/sinn-fein',
-			type: 'Keyword',
-			title: 'Sinn Féin',
-		},
-		{
-			id: 'world/fine-gael',
-			type: 'Keyword',
-			title: 'Fine Gael',
-		},
-		{
-			id: 'world/fianna-fail',
-			type: 'Keyword',
-			title: 'Fianna Fail',
-		},
-		{
-			id: 'world/world',
-			type: 'Keyword',
-			title: 'World news',
-		},
-		{
-			id: 'world/europe-news',
-			type: 'Keyword',
-			title: 'Europe',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'tone/explainers',
-			type: 'Tone',
-			title: 'Explainers',
-		},
-		{
-			id: 'tone/analysis',
-			type: 'Tone',
-			title: 'Analysis',
-		},
-		{
-			id: 'profile/rorycarroll',
-			type: 'Contributor',
-			title: 'Rory Carroll',
+		],
+		author: {
+			byline: 'Rory Carroll Ireland correspondent',
 			twitterHandle: 'rorycarroll72',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/contributor/2014/11/14/1415969428559/Rory-Carroll.jpg?width=300&quality=85&auto=format&fit=max&s=837a72cedb4881df331863d9fdbe9566',
-			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/10/09/Rory-Carroll,-L.png?width=300&quality=85&auto=format&fit=max&s=149d14183d07b7c04e04798e0edbc5e4',
 		},
-		{
-			id: 'publication/theguardian',
-			type: 'Publication',
-			title: 'The Guardian',
+		byline: 'Rory Carroll Ireland correspondent',
+		webPublicationDate: '2020-02-10T12:31:25.000Z',
+		webPublicationDateDeprecated: '2020-02-10T12:31:25.000Z',
+		webPublicationDateDisplay: 'Mon 10 Feb 2020 12.31 GMT',
+		webPublicationSecondaryDateDisplay:
+			'Last modified on Thu 13 Feb 2020 10.21 GMT',
+		editionLongForm: 'UK edition',
+		editionId: 'UK',
+		pageId: 'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+		canonicalUrl:
+			'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+		format: {
+			design: 'AnalysisDesign',
+			theme: 'NewsPillar',
+			display: 'StandardDisplay',
 		},
-		{
-			id: 'theguardian/mainsection',
-			type: 'NewspaperBook',
-			title: 'Main section',
-		},
-		{
-			id: 'theguardian/mainsection/uknews',
-			type: 'NewspaperBookSection',
-			title: 'UK news',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-foreign',
-			type: 'Tracking',
-			title: 'UK Foreign',
-		},
-	],
-	pillar: 'news',
-	isLegacyInteractive: false,
-	isImmersive: false,
-	sectionLabel: 'Ireland',
-	sectionUrl: 'world/ireland',
-	sectionName: 'world',
-	subMetaSectionLinks: [
-		{
-			url: '/world/ireland',
-			title: 'Ireland',
-		},
-	],
-	subMetaKeywordLinks: [
-		{
-			url: '/politics/sinn-fein',
-			title: 'Sinn Féin',
-		},
-		{
-			url: '/world/fine-gael',
-			title: 'Fine Gael',
-		},
-		{
-			url: '/world/fianna-fail',
-			title: 'Fianna Fail',
-		},
-		{
-			url: '/world/europe-news',
-			title: 'Europe',
-		},
-		{
-			url: '/tone/explainers',
-			title: 'explainers',
-		},
-	],
-	shouldHideAds: false,
-	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-	linkedData: [
-		{
-			'@type': 'NewsArticle',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-			publisher: {
-				'@type': 'Organization',
+		designType: 'Analysis',
+		tags: [
+			{
+				id: 'world/ireland',
+				type: 'Keyword',
+				title: 'Ireland',
+			},
+			{
+				id: 'politics/sinn-fein',
+				type: 'Keyword',
+				title: 'Sinn Féin',
+			},
+			{
+				id: 'world/fine-gael',
+				type: 'Keyword',
+				title: 'Fine Gael',
+			},
+			{
+				id: 'world/fianna-fail',
+				type: 'Keyword',
+				title: 'Fianna Fail',
+			},
+			{
+				id: 'world/world',
+				type: 'Keyword',
+				title: 'World news',
+			},
+			{
+				id: 'world/europe-news',
+				type: 'Keyword',
+				title: 'Europe',
+			},
+			{
+				id: 'type/article',
+				type: 'Type',
+				title: 'Article',
+			},
+			{
+				id: 'tone/explainers',
+				type: 'Tone',
+				title: 'Explainers',
+			},
+			{
+				id: 'tone/analysis',
+				type: 'Tone',
+				title: 'Analysis',
+			},
+			{
+				id: 'profile/rorycarroll',
+				type: 'Contributor',
+				title: 'Rory Carroll',
+				twitterHandle: 'rorycarroll72',
+				bylineImageUrl:
+					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/contributor/2014/11/14/1415969428559/Rory-Carroll.jpg?width=300&quality=85&auto=format&fit=max&s=837a72cedb4881df331863d9fdbe9566',
+				bylineLargeImageUrl:
+					'https://i.guim.co.uk/img/uploads/2017/10/09/Rory-Carroll,-L.png?width=300&quality=85&auto=format&fit=max&s=149d14183d07b7c04e04798e0edbc5e4',
+			},
+			{
+				id: 'publication/theguardian',
+				type: 'Publication',
+				title: 'The Guardian',
+			},
+			{
+				id: 'theguardian/mainsection',
+				type: 'NewspaperBook',
+				title: 'Main section',
+			},
+			{
+				id: 'theguardian/mainsection/uknews',
+				type: 'NewspaperBookSection',
+				title: 'UK news',
+			},
+			{
+				id: 'tracking/commissioningdesk/uk-foreign',
+				type: 'Tracking',
+				title: 'UK Foreign',
+			},
+		],
+		pillar: 'news',
+		isLegacyInteractive: false,
+		isImmersive: false,
+		sectionLabel: 'Ireland',
+		sectionUrl: 'world/ireland',
+		sectionName: 'world',
+		subMetaSectionLinks: [
+			{
+				url: '/world/ireland',
+				title: 'Ireland',
+			},
+		],
+		subMetaKeywordLinks: [
+			{
+				url: '/politics/sinn-fein',
+				title: 'Sinn Féin',
+			},
+			{
+				url: '/world/fine-gael',
+				title: 'Fine Gael',
+			},
+			{
+				url: '/world/fianna-fail',
+				title: 'Fianna Fail',
+			},
+			{
+				url: '/world/europe-news',
+				title: 'Europe',
+			},
+			{
+				url: '/tone/explainers',
+				title: 'explainers',
+			},
+		],
+		shouldHideAds: false,
+		isAdFreeUser: false,
+		webURL: 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+		linkedData: [
+			{
+				'@type': 'NewsArticle',
 				'@context': 'https://schema.org',
-				'@id': 'https://www.theguardian.com#publisher',
-				name: 'The Guardian',
-				url: 'https://www.theguardian.com/',
-				logo: {
-					'@type': 'ImageObject',
-					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-					width: 190,
-					height: 60,
+				'@id': 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				publisher: {
+					'@type': 'Organization',
+					'@context': 'https://schema.org',
+					'@id': 'https://www.theguardian.com#publisher',
+					name: 'The Guardian',
+					url: 'https://www.theguardian.com/',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+						width: 190,
+						height: 60,
+					},
+					sameAs: [
+						'https://www.facebook.com/theguardian',
+						'https://twitter.com/guardian',
+						'https://www.youtube.com/user/TheGuardian',
+					],
 				},
-				sameAs: [
-					'https://www.facebook.com/theguardian',
-					'https://twitter.com/guardian',
-					'https://www.youtube.com/user/TheGuardian',
+				isAccessibleForFree: true,
+				isPartOf: {
+					'@type': ['CreativeWork', 'Product'],
+					name: 'The Guardian',
+					productID: 'theguardian.com:basic',
+				},
+				image: [
+					'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=41bd3dbc052b31eb46a7b8b318553c85',
+					'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=ba485dba18852475fb1d5dd00b53b972',
+					'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=6af71c15d6d5a2b9786dba8fbce11dd7',
+					'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&quality=85&auto=format&fit=max&s=8bce617f8e49c9291611c693c259264c',
 				],
+				author: [
+					{
+						'@type': 'Person',
+						name: 'Rory Carroll',
+						sameAs: 'https://www.theguardian.com/profile/rorycarroll',
+					},
+				],
+				datePublished: '2020-02-10T12:31:25.000Z',
+				headline:
+					'Irish general election: who won and what happens now?',
+				dateModified: '2020-02-13T10:21:28.000Z',
+				mainEntityOfPage:
+					'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 			},
-			isAccessibleForFree: true,
-			isPartOf: {
-				'@type': ['CreativeWork', 'Product'],
-				name: 'The Guardian',
-				productID: 'theguardian.com:basic',
+			{
+				'@type': 'WebPage',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				potentialAction: {
+					'@type': 'ViewAction',
+					target: 'android-app://com.guardian/https/www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				},
 			},
-			image: [
+		],
+		openGraphData: {
+			'og:url':
+				'http://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			'article:author': 'https://www.theguardian.com/profile/rorycarroll',
+			'og:image:width': '1200',
+			'og:image':
 				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=41bd3dbc052b31eb46a7b8b318553c85',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=ba485dba18852475fb1d5dd00b53b972',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=6af71c15d6d5a2b9786dba8fbce11dd7',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&quality=85&auto=format&fit=max&s=8bce617f8e49c9291611c693c259264c',
-			],
-			author: [
+			'al:ios:url':
+				'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=applinks',
+			'article:publisher': 'https://www.facebook.com/theguardian',
+			'og:title': 'Irish general election: who won and what happens now?',
+			'fb:app_id': '180444840287',
+			'article:modified_time': '2020-02-13T10:21:28.000Z',
+			'og:image:height': '720',
+			'og:description':
+				'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
+			'og:type': 'article',
+			'al:ios:app_store_id': '409128287',
+			'article:section': 'World news',
+			'article:published_time': '2020-02-10T12:31:25.000Z',
+			'article:tag':
+				'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
+			'al:ios:app_name': 'The Guardian',
+			'og:site_name': 'the Guardian',
+		},
+		twitterData: {
+			'twitter:app:id:iphone': '409128287',
+			'twitter:app:name:googleplay': 'The Guardian',
+			'twitter:app:name:ipad': 'The Guardian',
+			'twitter:card': 'summary_large_image',
+			'twitter:app:name:iphone': 'The Guardian',
+			'twitter:creator': '@rorycarroll72',
+			'twitter:app:id:ipad': '409128287',
+			'twitter:app:id:googleplay': 'com.guardian',
+			'twitter:app:url:googleplay':
+				'guardian://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			'twitter:app:url:iphone':
+				'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
+			'twitter:image':
+				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=6956960e0ba75bbcd381dae54413a6c7',
+			'twitter:site': '@guardian',
+			'twitter:app:url:ipad':
+				'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
+		},
+		config: {
+			references: [
 				{
-					'@type': 'Person',
-					name: 'Rory Carroll',
-					sameAs: 'https://www.theguardian.com/profile/rorycarroll',
+					'rich-link':
+						'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
 				},
 			],
-			datePublished: '2020-02-10T12:31:25.000Z',
-			headline: 'Irish general election: who won and what happens now?',
-			dateModified: '2020-02-13T10:21:28.000Z',
-			mainEntityOfPage:
-				'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-		},
-		{
-			'@type': 'WebPage',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-			potentialAction: {
-				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			shortUrlId: '/p/d8ex5',
+			switches: {
+				prebidAppnexusUkRow: true,
+				clickToView: true,
+				prebidTrustx: true,
+				scAdFreeBanner: false,
+				compareVariantDecision: false,
+				enableSentryReporting: true,
+				lazyLoadContainers: true,
+				adFreeStrictExpiryEnforcement: false,
+				liveblogRendering: true,
+				remarketing: true,
+				registerWithPhone: false,
+				targeting: true,
+				extendedMostPopularFronts: true,
+				slotBodyEnd: true,
+				emailInlineInFooter: true,
+				facebookTrackingPixel: true,
+				serviceWorkerEnabled: false,
+				iasAdTargeting: true,
+				extendedMostPopular: true,
+				prebidAnalytics: true,
+				imrWorldwide: true,
+				acast: true,
+				twitterUwt: true,
+				prebidAppnexusInvcode: true,
+				prebidAppnexus: true,
+				enableDiscussionSwitch: true,
+				prebidXaxis: true,
+				interactiveFullHeaderSwitch: false,
+				discussionAllPageSize: true,
+				prebidUserSync: true,
+				audioOnwardJourneySwitch: true,
+				mobileStickyPrebid: true,
+				breakingNews: true,
+				externalVideoEmbeds: true,
+				carrotTrafficDriver: true,
+				geoMostPopular: true,
+				weAreHiring: true,
+				relatedContent: true,
+				thirdPartyEmbedTracking: true,
+				prebidOzone: true,
+				prebidAdYouLike: true,
+				mostViewedFronts: true,
+				abSignInGateMainControl: true,
+				ampPrebid: true,
+				googleSearch: true,
+				brazeSwitch: true,
+				consentManagement: true,
+				commercial: true,
+				redplanetForAus: true,
+				prebidSonobi: true,
+				idProfileNavigation: true,
+				confiantAdVerification: true,
+				discussionAllowAnonymousRecommendsSwitch: false,
+				scrollDepth: true,
+				permutive: true,
+				comscore: true,
+				webFonts: true,
+				prebidImproveDigital: true,
+				ophan: true,
+				crosswordSvgThumbnails: true,
+				prebidTriplelift: true,
+				weather: true,
+				commercialOutbrainNewids: true,
+				dotcomRendering: true,
+				abSignInGateMainVariant: true,
+				hostedVideoAutoplay: true,
+				abAdblockAsk: true,
+				prebidPubmatic: true,
+				autoRefresh: true,
+				enhanceTweets: true,
+				prebidIndexExchange: true,
+				prebidOpenx: true,
+				idCookieRefresh: true,
+				sharingComments: true,
+				abSignInGateMandatory: true,
+				discussionPageSize: true,
+				smartAppBanner: false,
+				boostGaUserTimingFidelity: false,
+				historyTags: true,
+				mobileStickyLeaderboard: true,
+				abDeeplyReadTest: false,
+				surveys: true,
+				remoteBanner: true,
+				inizio: true,
+				prebidHeaderBidding: true,
+				a9HeaderBidding: true,
+				lightbox: true,
 			},
-		},
-	],
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-		'article:author': 'https://www.theguardian.com/profile/rorycarroll',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=41bd3dbc052b31eb46a7b8b318553c85',
-		'al:ios:url':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:title': 'Irish general election: who won and what happens now?',
-		'fb:app_id': '180444840287',
-		'article:modified_time': '2020-02-13T10:21:28.000Z',
-		'og:image:height': '720',
-		'og:description':
-			'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'World news',
-		'article:published_time': '2020-02-10T12:31:25.000Z',
-		'article:tag':
-			'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:creator': '@rorycarroll72',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-		'twitter:app:url:iphone':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=6956960e0ba75bbcd381dae54413a6c7',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
-	},
-	config: {
-		references: [
-			{
-				'rich-link':
-					'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+			keywordIds:
+				'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+			sharedAdTargeting: {
+				ct: 'article',
+				co: ['jennifer-rankin'],
+				url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				su: ['0'],
+				edition: 'uk',
+				tn: ['news'],
+				p: 'ng',
+				k: [
+					'eu',
+					'flooding',
+					'world',
+					'europe-news',
+					'natural-disasters',
+					'science',
+					'environment',
+					'climate-change',
+					'wildfires',
+					'scienceofclimatechange',
+				],
+				sh: 'https://www.theguardian.com/p/d8ex5',
 			},
-		],
-		shortUrlId: '/p/d8ex5',
-		switches: {
-			prebidAppnexusUkRow: true,
-			clickToView: true,
-			prebidTrustx: true,
-			scAdFreeBanner: false,
-			compareVariantDecision: false,
-			enableSentryReporting: true,
-			lazyLoadContainers: true,
-			adFreeStrictExpiryEnforcement: false,
-			liveblogRendering: true,
-			remarketing: true,
-			registerWithPhone: false,
-			targeting: true,
-			extendedMostPopularFronts: true,
-			slotBodyEnd: true,
-			emailInlineInFooter: true,
-			facebookTrackingPixel: true,
-			serviceWorkerEnabled: false,
-			iasAdTargeting: true,
-			extendedMostPopular: true,
-			prebidAnalytics: true,
-			imrWorldwide: true,
-			acast: true,
-			twitterUwt: true,
-			prebidAppnexusInvcode: true,
-			prebidAppnexus: true,
-			enableDiscussionSwitch: true,
-			prebidXaxis: true,
-			interactiveFullHeaderSwitch: false,
-			discussionAllPageSize: true,
-			prebidUserSync: true,
-			audioOnwardJourneySwitch: true,
-			mobileStickyPrebid: true,
-			breakingNews: true,
-			externalVideoEmbeds: true,
-			carrotTrafficDriver: true,
-			geoMostPopular: true,
-			weAreHiring: true,
-			relatedContent: true,
-			thirdPartyEmbedTracking: true,
-			prebidOzone: true,
-			prebidAdYouLike: true,
-			mostViewedFronts: true,
-			abSignInGateMainControl: true,
-			ampPrebid: true,
-			googleSearch: true,
-			brazeSwitch: true,
-			consentManagement: true,
-			commercial: true,
-			redplanetForAus: true,
-			prebidSonobi: true,
-			idProfileNavigation: true,
-			confiantAdVerification: true,
-			discussionAllowAnonymousRecommendsSwitch: false,
-			scrollDepth: true,
-			permutive: true,
-			comscore: true,
-			webFonts: true,
-			prebidImproveDigital: true,
-			ophan: true,
-			crosswordSvgThumbnails: true,
-			prebidTriplelift: true,
-			weather: true,
-			commercialOutbrainNewids: true,
-			dotcomRendering: true,
-			abSignInGateMainVariant: true,
-			hostedVideoAutoplay: true,
-			abAdblockAsk: true,
-			prebidPubmatic: true,
-			autoRefresh: true,
-			enhanceTweets: true,
-			prebidIndexExchange: true,
-			prebidOpenx: true,
-			idCookieRefresh: true,
-			sharingComments: true,
-			abSignInGateMandatory: true,
-			discussionPageSize: true,
-			smartAppBanner: false,
-			boostGaUserTimingFidelity: false,
-			historyTags: true,
-			mobileStickyLeaderboard: true,
-			abDeeplyReadTest: false,
-			surveys: true,
-			remoteBanner: true,
-			inizio: true,
-			prebidHeaderBidding: true,
-			a9HeaderBidding: true,
-			lightbox: true,
+			toneIds: 'tone/news',
+			dcrSentryDsn:
+				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+			discussionApiUrl:
+				'https://discussion.theguardian.com/discussion-api',
+			sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+			commercialBundleUrl:
+				'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+			discussionApiClientHeader: 'nextgen',
+			shouldHideReaderRevenue: false,
+			sentryHost: 'app.getsentry.com/35463',
+			isPaidContent: false,
+			headline: 'Headline string',
+			idApiUrl: 'https://idapi.theguardian.com',
+			showRelatedContent: true,
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			videoDuration: 0,
+			stage: 'PROD',
+			isSensitive: false,
+			isDev: false,
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+			keywords:
+				'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			revisionNumber: 'DEV',
+			section: 'environment',
+			isPhotoEssay: false,
+			ampIframeUrl:
+				'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+			isLive: false,
+			host: 'https://www.theguardian.com',
+			brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+			contentType: 'Article',
+			idUrl: 'https://profile.theguardian.com',
+			author: 'Jennifer Rankin',
+			dfpAccountId: '59666047',
+			pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+			mmaUrl: 'https://manage.theguardian.com',
+			abTests: {},
+			edition: 'UK',
+			ipsosTag: 'environment',
+			isLiveBlog: false,
+			frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+			webPublicationDate: 1581314427000,
+			discussionD2Uid: 'zHoBy6HNKsk',
 		},
-		keywordIds:
-			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
-		sharedAdTargeting: {
-			ct: 'article',
-			co: ['jennifer-rankin'],
-			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-			su: ['0'],
-			edition: 'uk',
-			tn: ['news'],
-			p: 'ng',
-			k: [
-				'eu',
-				'flooding',
-				'world',
-				'europe-news',
-				'natural-disasters',
-				'science',
-				'environment',
-				'climate-change',
-				'wildfires',
-				'scienceofclimatechange',
-			],
-			sh: 'https://www.theguardian.com/p/d8ex5',
-		},
-		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
-		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
-		discussionApiClientHeader: 'nextgen',
-		shouldHideReaderRevenue: false,
-		sentryHost: 'app.getsentry.com/35463',
-		isPaidContent: false,
-		headline: 'Headline string',
-		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: true,
-		adUnit: '/59666047/theguardian.com/environment/article/ng',
-		videoDuration: 0,
-		stage: 'PROD',
-		isSensitive: false,
-		isDev: false,
-		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords:
-			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
-		revisionNumber: 'DEV',
-		section: 'environment',
-		isPhotoEssay: false,
-		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
-		isLive: false,
-		host: 'https://www.theguardian.com',
-		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+		guardianBaseURL: 'https://www.theguardian.com',
 		contentType: 'Article',
-		idUrl: 'https://profile.theguardian.com',
-		author: 'Jennifer Rankin',
-		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
-		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
-		edition: 'UK',
-		ipsosTag: 'environment',
-		isLiveBlog: false,
-		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
-		webPublicationDate: 1581314427000,
-		discussionD2Uid: 'zHoBy6HNKsk',
-	},
-	guardianBaseURL: 'https://www.theguardian.com',
-	contentType: 'Article',
-	hasRelated: true,
-	hasStoryPackage: true,
-	storyPackage: {
-		heading: 'More on this story',
-		trails: [
-			{
-				url: 'https://www.theguardian.com/world/2020/jun/27/micheal-martin-irish-taoiseach-coalition-fianna-fail-fine-gael',
-				linkText:
-					'Micheál Martin becomes Irish taoiseach in historic coalition',
-				showByline: false,
-				byline: 'Molly Blackall and agencies',
-				masterImage:
-					'https://media.guim.co.uk/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg',
-				image: 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
-					'460': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=460&quality=85&auto=format&fit=max&s=47e501f3f89c12283597a9b2a893cd98',
-				},
-				ageWarning: '3 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-06-27T14:53:17.000Z',
-				headline:
-					'Micheál Martin becomes Irish taoiseach in historic coalition',
-				shortUrl: 'https://www.theguardian.com/p/e79et',
-				discussion: {
-					isCommentable: false,
-					isClosedForComments: true,
-					discussionId: '/p/e79et',
-				},
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/jun/26/irish-government-to-be-formed-after-greens-vote-yes-to-coalition',
-				linkText:
-					'Ireland to form new government after Green party votes for coalition',
-				showByline: false,
-				byline: 'PA Media',
-				masterImage:
-					'https://media.guim.co.uk/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg',
-				image: 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
-					'460': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=60336706f5f85058c7b9676adf263572',
-				},
-				ageWarning: '3 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-06-26T21:03:02.000Z',
-				headline:
-					'Ireland to form new government after Green party votes for coalition',
-				shortUrl: 'https://www.theguardian.com/p/e7572',
-				discussion: {
-					isCommentable: false,
-					isClosedForComments: true,
-					discussionId: '/p/e7572',
-				},
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/jun/15/fine-gael-fianna-fail-and-greens-agree-deal-to-form-irish-coalition',
-				linkText:
-					'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				masterImage:
-					'https://media.guim.co.uk/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg',
-				image: 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
-					'460': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=8fd8c760b6624d89ccd26f9eb512fb08',
-				},
-				ageWarning: '3 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-06-15T11:59:47.000Z',
-				headline:
-					'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
-				shortUrl: 'https://www.theguardian.com/p/e49gh',
-				discussion: {
-					isCommentable: false,
-					isClosedForComments: true,
-					discussionId: '/p/e49gh',
-				},
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/may/26/irish-taoiseach-leo-varadkar-denies-picnic-with-friends-was-covid-19-rule-breach',
-				linkText:
-					'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				masterImage:
-					'https://media.guim.co.uk/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg',
-				image: 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
-					'460': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=460&quality=85&auto=format&fit=max&s=60b5912cc4074d8502b9cae4becce57c',
-				},
-				ageWarning: '3 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-05-26T05:00:11.000Z',
-				headline:
-					'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
-				shortUrl: 'https://www.theguardian.com/p/evan3',
-				discussion: {
-					isCommentable: false,
-					isClosedForComments: true,
-					discussionId: '/p/evan3',
-				},
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/apr/14/ireland-fine-gael-fianna-fail-close-forming-coalition-government',
-				linkText:
-					'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				masterImage:
-					'https://media.guim.co.uk/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg',
-				image: 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
-					'460': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=3d1f820bf4d1734bcd9b4f393fe5b8a1',
-				},
-				ageWarning: '3 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-04-14T17:25:20.000Z',
-				headline:
-					'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
-				shortUrl: 'https://www.theguardian.com/p/dk7xx',
-				discussion: {
-					isCommentable: false,
-					isClosedForComments: true,
-					discussionId: '/p/dk7xx',
-				},
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/feb/24/micheal-martin-faces-a-battle-of-conscience-to-form-irish-government',
-				linkText:
-					'Micheál Martin faces a battle of conscience to form Irish government',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				masterImage:
-					'https://media.guim.co.uk/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg',
-				image: 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
-					'460': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=37850ebf202911c3e6514774643da7f1',
-				},
-				ageWarning: '4 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Analysis',
-				format: {
-					design: 'AnalysisDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-02-24T05:00:11.000Z',
-				headline:
-					'Micheál Martin faces a battle of conscience to form Irish government',
-				shortUrl: 'https://www.theguardian.com/p/dayh8',
-				discussion: {
-					isCommentable: false,
-					isClosedForComments: true,
-					discussionId: '/p/dayh8',
-				},
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/feb/20/irish-parliament-set-for-stalemate-in-attempt-to-form-new-government',
-				linkText:
-					'Varadkar resigns as Irish government enters stalemate',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				masterImage:
-					'https://media.guim.co.uk/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg',
-				image: 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
-					'460': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=460&quality=85&auto=format&fit=max&s=a184021c28b1447a010f3067860b29fa',
-				},
-				ageWarning: '4 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-02-20T23:28:27.000Z',
-				headline:
-					'Varadkar resigns as Irish government enters stalemate',
-				shortUrl: 'https://www.theguardian.com/p/dayq6',
-				discussion: {
-					isCommentable: false,
-					isClosedForComments: true,
-					discussionId: '/p/dayq6',
-				},
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/feb/17/fine-gael-fianna-fail-coalition-unthinkable-says-sinn-fein-leader-mary-lou-mcdonald',
-				linkText:
-					'Varadkar prepares to go into opposition as deadlock continues',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				masterImage:
-					'https://media.guim.co.uk/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg',
-				image: 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
-					'460': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=46afd5a1dfecab703860022d16a77c9f',
-				},
-				ageWarning: '4 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-02-17T22:37:30.000Z',
-				headline:
-					'Varadkar prepares to go into opposition as deadlock continues',
-				shortUrl: 'https://www.theguardian.com/p/da75n',
-				discussion: {
-					isCommentable: false,
-					isClosedForComments: true,
-					discussionId: '/p/da75n',
-				},
-			},
-			{
-				url: 'https://www.theguardian.com/commentisfree/2020/feb/16/even-as-ireland-economy-booms-sinn-fein-win-is-bitter-cry-for-equality',
-				linkText:
-					'Ireland’s shock poll result was a vote against the success of globalisation | Fintan O’Toole',
-				showByline: true,
-				byline: 'Fintan O’Toole',
-				masterImage:
-					'https://media.guim.co.uk/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg',
-				image: 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
-					'460': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=460&quality=85&auto=format&fit=max&s=c82d670a83a0644d74e7e8c451095703',
-				},
-				isLiveBlog: false,
-				pillar: 'opinion',
-				designType: 'Comment',
-				format: {
-					design: 'CommentDesign',
-					theme: 'OpinionPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-02-16T07:00:22.000Z',
-				headline:
-					'Ireland’s shock poll result was a vote against the success of globalisation',
-				shortUrl: 'https://www.theguardian.com/p/d9kx7',
-				discussion: {
-					isCommentable: true,
-					isClosedForComments: true,
-					discussionId: '/p/d9kx7',
-				},
-			},
-		],
-	},
-	beaconURL: '//phar.gu-web.net',
-	isCommentable: false,
-	commercialProperties: {
-		UK: {
-			adTargeting: [
+		hasRelated: true,
+		hasStoryPackage: true,
+		storyPackage: {
+			heading: 'More on this story',
+			trails: [
 				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
+					url: 'https://www.theguardian.com/world/2020/jun/27/micheal-martin-irish-taoiseach-coalition-fianna-fail-fine-gael',
+					linkText:
+						'Micheál Martin becomes Irish taoiseach in historic coalition',
+					showByline: false,
+					byline: 'Molly Blackall and agencies',
+					masterImage:
+						'https://media.guim.co.uk/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg',
+					image: 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
+						'460': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=460&quality=85&auto=format&fit=max&s=47e501f3f89c12283597a9b2a893cd98',
+					},
+					ageWarning: '3 years',
+					isLiveBlog: false,
+					pillar: 'news',
+					designType: 'Article',
+					format: {
+						design: 'ArticleDesign',
+						theme: 'NewsPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-06-27T14:53:17.000Z',
+					headline:
+						'Micheál Martin becomes Irish taoiseach in historic coalition',
+					shortUrl: 'https://www.theguardian.com/p/e79et',
+					discussion: {
+						isCommentable: false,
+						isClosedForComments: true,
+						discussionId: '/p/e79et',
+					},
 				},
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					url: 'https://www.theguardian.com/world/2020/jun/26/irish-government-to-be-formed-after-greens-vote-yes-to-coalition',
+					linkText:
+						'Ireland to form new government after Green party votes for coalition',
+					showByline: false,
+					byline: 'PA Media',
+					masterImage:
+						'https://media.guim.co.uk/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg',
+					image: 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
+						'460': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=60336706f5f85058c7b9676adf263572',
+					},
+					ageWarning: '3 years',
+					isLiveBlog: false,
+					pillar: 'news',
+					designType: 'Article',
+					format: {
+						design: 'ArticleDesign',
+						theme: 'NewsPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-06-26T21:03:02.000Z',
+					headline:
+						'Ireland to form new government after Green party votes for coalition',
+					shortUrl: 'https://www.theguardian.com/p/e7572',
+					discussion: {
+						isCommentable: false,
+						isClosedForComments: true,
+						discussionId: '/p/e7572',
+					},
 				},
 				{
-					name: 'edition',
-					value: 'uk',
+					url: 'https://www.theguardian.com/world/2020/jun/15/fine-gael-fianna-fail-and-greens-agree-deal-to-form-irish-coalition',
+					linkText:
+						'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
+					showByline: false,
+					byline: 'Rory Carroll Ireland correspondent',
+					masterImage:
+						'https://media.guim.co.uk/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg',
+					image: 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
+						'460': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=8fd8c760b6624d89ccd26f9eb512fb08',
+					},
+					ageWarning: '3 years',
+					isLiveBlog: false,
+					pillar: 'news',
+					designType: 'Article',
+					format: {
+						design: 'ArticleDesign',
+						theme: 'NewsPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-06-15T11:59:47.000Z',
+					headline:
+						'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
+					shortUrl: 'https://www.theguardian.com/p/e49gh',
+					discussion: {
+						isCommentable: false,
+						isClosedForComments: true,
+						discussionId: '/p/e49gh',
+					},
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					url: 'https://www.theguardian.com/world/2020/may/26/irish-taoiseach-leo-varadkar-denies-picnic-with-friends-was-covid-19-rule-breach',
+					linkText:
+						'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
+					showByline: false,
+					byline: 'Rory Carroll Ireland correspondent',
+					masterImage:
+						'https://media.guim.co.uk/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg',
+					image: 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
+						'460': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=460&quality=85&auto=format&fit=max&s=60b5912cc4074d8502b9cae4becce57c',
+					},
+					ageWarning: '3 years',
+					isLiveBlog: false,
+					pillar: 'news',
+					designType: 'Article',
+					format: {
+						design: 'ArticleDesign',
+						theme: 'NewsPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-05-26T05:00:11.000Z',
+					headline:
+						'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
+					shortUrl: 'https://www.theguardian.com/p/evan3',
+					discussion: {
+						isCommentable: false,
+						isClosedForComments: true,
+						discussionId: '/p/evan3',
+					},
 				},
 				{
-					name: 'p',
-					value: 'ng',
+					url: 'https://www.theguardian.com/world/2020/apr/14/ireland-fine-gael-fianna-fail-close-forming-coalition-government',
+					linkText:
+						'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
+					showByline: false,
+					byline: 'Rory Carroll Ireland correspondent',
+					masterImage:
+						'https://media.guim.co.uk/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg',
+					image: 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
+						'460': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=3d1f820bf4d1734bcd9b4f393fe5b8a1',
+					},
+					ageWarning: '3 years',
+					isLiveBlog: false,
+					pillar: 'news',
+					designType: 'Article',
+					format: {
+						design: 'ArticleDesign',
+						theme: 'NewsPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-04-14T17:25:20.000Z',
+					headline:
+						'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
+					shortUrl: 'https://www.theguardian.com/p/dk7xx',
+					discussion: {
+						isCommentable: false,
+						isClosedForComments: true,
+						discussionId: '/p/dk7xx',
+					},
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					url: 'https://www.theguardian.com/world/2020/feb/24/micheal-martin-faces-a-battle-of-conscience-to-form-irish-government',
+					linkText:
+						'Micheál Martin faces a battle of conscience to form Irish government',
+					showByline: false,
+					byline: 'Rory Carroll Ireland correspondent',
+					masterImage:
+						'https://media.guim.co.uk/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg',
+					image: 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
+						'460': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=37850ebf202911c3e6514774643da7f1',
+					},
+					ageWarning: '4 years',
+					isLiveBlog: false,
+					pillar: 'news',
+					designType: 'Analysis',
+					format: {
+						design: 'AnalysisDesign',
+						theme: 'NewsPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-02-24T05:00:11.000Z',
+					headline:
+						'Micheál Martin faces a battle of conscience to form Irish government',
+					shortUrl: 'https://www.theguardian.com/p/dayh8',
+					discussion: {
+						isCommentable: false,
+						isClosedForComments: true,
+						discussionId: '/p/dayh8',
+					},
 				},
 				{
-					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					url: 'https://www.theguardian.com/world/2020/feb/20/irish-parliament-set-for-stalemate-in-attempt-to-form-new-government',
+					linkText:
+						'Varadkar resigns as Irish government enters stalemate',
+					showByline: false,
+					byline: 'Rory Carroll Ireland correspondent',
+					masterImage:
+						'https://media.guim.co.uk/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg',
+					image: 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
+						'460': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=460&quality=85&auto=format&fit=max&s=a184021c28b1447a010f3067860b29fa',
+					},
+					ageWarning: '4 years',
+					isLiveBlog: false,
+					pillar: 'news',
+					designType: 'Article',
+					format: {
+						design: 'ArticleDesign',
+						theme: 'NewsPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-02-20T23:28:27.000Z',
+					headline:
+						'Varadkar resigns as Irish government enters stalemate',
+					shortUrl: 'https://www.theguardian.com/p/dayq6',
+					discussion: {
+						isCommentable: false,
+						isClosedForComments: true,
+						discussionId: '/p/dayq6',
+					},
 				},
 				{
-					name: 'su',
-					value: ['0'],
+					url: 'https://www.theguardian.com/world/2020/feb/17/fine-gael-fianna-fail-coalition-unthinkable-says-sinn-fein-leader-mary-lou-mcdonald',
+					linkText:
+						'Varadkar prepares to go into opposition as deadlock continues',
+					showByline: false,
+					byline: 'Rory Carroll Ireland correspondent',
+					masterImage:
+						'https://media.guim.co.uk/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg',
+					image: 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
+						'460': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=46afd5a1dfecab703860022d16a77c9f',
+					},
+					ageWarning: '4 years',
+					isLiveBlog: false,
+					pillar: 'news',
+					designType: 'Article',
+					format: {
+						design: 'ArticleDesign',
+						theme: 'NewsPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-02-17T22:37:30.000Z',
+					headline:
+						'Varadkar prepares to go into opposition as deadlock continues',
+					shortUrl: 'https://www.theguardian.com/p/da75n',
+					discussion: {
+						isCommentable: false,
+						isClosedForComments: true,
+						discussionId: '/p/da75n',
+					},
 				},
 				{
-					name: 'co',
-					value: ['rorycarroll'],
+					url: 'https://www.theguardian.com/commentisfree/2020/feb/16/even-as-ireland-economy-booms-sinn-fein-win-is-bitter-cry-for-equality',
+					linkText:
+						'Ireland’s shock poll result was a vote against the success of globalisation | Fintan O’Toole',
+					showByline: true,
+					byline: 'Fintan O’Toole',
+					masterImage:
+						'https://media.guim.co.uk/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg',
+					image: 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
+					carouselImages: {
+						'300': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
+						'460': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=460&quality=85&auto=format&fit=max&s=c82d670a83a0644d74e7e8c451095703',
+					},
+					isLiveBlog: false,
+					pillar: 'opinion',
+					designType: 'Comment',
+					format: {
+						design: 'CommentDesign',
+						theme: 'OpinionPillar',
+						display: 'StandardDisplay',
+					},
+					webPublicationDate: '2020-02-16T07:00:22.000Z',
+					headline:
+						'Ireland’s shock poll result was a vote against the success of globalisation',
+					shortUrl: 'https://www.theguardian.com/p/d9kx7',
+					discussion: {
+						isCommentable: true,
+						isClosedForComments: true,
+						discussionId: '/p/d9kx7',
+					},
 				},
 			],
 		},
-		US: {
-			adTargeting: [
+		beaconURL: '//phar.gu-web.net',
+		isCommentable: false,
+		commercialProperties: {
+			UK: {
+				adTargeting: [
+					{
+						name: 'k',
+						value: [
+							'sinn-fein',
+							'world',
+							'europe-news',
+							'ireland',
+							'fianna-fail',
+							'fine-gael',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['analysis', 'explainers'],
+					},
+					{
+						name: 'edition',
+						value: 'uk',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/d9vgg',
+					},
+					{
+						name: 'url',
+						value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'co',
+						value: ['rorycarroll'],
+					},
+				],
+			},
+			US: {
+				adTargeting: [
+					{
+						name: 'k',
+						value: [
+							'sinn-fein',
+							'world',
+							'europe-news',
+							'ireland',
+							'fianna-fail',
+							'fine-gael',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['analysis', 'explainers'],
+					},
+					{
+						name: 'edition',
+						value: 'us',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/d9vgg',
+					},
+					{
+						name: 'url',
+						value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'co',
+						value: ['rorycarroll'],
+					},
+				],
+			},
+			AU: {
+				adTargeting: [
+					{
+						name: 'k',
+						value: [
+							'sinn-fein',
+							'world',
+							'europe-news',
+							'ireland',
+							'fianna-fail',
+							'fine-gael',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['analysis', 'explainers'],
+					},
+					{
+						name: 'edition',
+						value: 'au',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/d9vgg',
+					},
+					{
+						name: 'url',
+						value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'co',
+						value: ['rorycarroll'],
+					},
+				],
+			},
+			INT: {
+				adTargeting: [
+					{
+						name: 'k',
+						value: [
+							'sinn-fein',
+							'world',
+							'europe-news',
+							'ireland',
+							'fianna-fail',
+							'fine-gael',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['analysis', 'explainers'],
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'edition',
+						value: 'int',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/d9vgg',
+					},
+					{
+						name: 'url',
+						value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'co',
+						value: ['rorycarroll'],
+					},
+				],
+			},
+			EUR: {
+				adTargeting: [
+					{
+						name: 'k',
+						value: [
+							'sinn-fein',
+							'world',
+							'europe-news',
+							'ireland',
+							'fianna-fail',
+							'fine-gael',
+						],
+					},
+					{
+						name: 'tn',
+						value: ['analysis', 'explainers'],
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'edition',
+						value: 'eur',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/d9vgg',
+					},
+					{
+						name: 'url',
+						value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'co',
+						value: ['rorycarroll'],
+					},
+				],
+			},
+		},
+		pageType: {
+			hasShowcaseMainElement: false,
+			isFront: false,
+			isLiveblog: false,
+			isMinuteArticle: false,
+			isPaidContent: false,
+			isPreview: false,
+			isSensitive: false,
+		},
+		trailText:
+			'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
+		nav: {
+			currentUrl: '/world/europe-news',
+			pillars: [
 				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
+					title: 'News',
+					url: '/',
+					longTitle: 'Headlines',
+					iconName: 'home',
+					children: [
+						{
+							title: 'UK',
+							url: '/uk-news',
+							longTitle: 'UK news',
+							children: [
+								{
+									title: 'UK politics',
+									url: '/politics',
+								},
+								{
+									title: 'Education',
+									url: '/education',
+									children: [
+										{
+											title: 'Schools',
+											url: '/education/schools',
+										},
+										{
+											title: 'Teachers',
+											url: '/teacher-network',
+										},
+										{
+											title: 'Universities',
+											url: '/education/universities',
+										},
+										{
+											title: 'Students',
+											url: '/education/students',
+										},
+									],
+								},
+								{
+									title: 'Media',
+									url: '/media',
+								},
+								{
+									title: 'Society',
+									url: '/society',
+								},
+								{
+									title: 'Law',
+									url: '/law',
+								},
+								{
+									title: 'Scotland',
+									url: '/uk/scotland',
+								},
+								{
+									title: 'Wales',
+									url: '/uk/wales',
+								},
+								{
+									title: 'Northern Ireland',
+									url: '/uk/northernireland',
+								},
+							],
+						},
+						{
+							title: 'World',
+							url: '/world',
+							longTitle: 'World news',
+							children: [
+								{
+									title: 'Europe',
+									url: '/world/europe-news',
+								},
+								{
+									title: 'US',
+									url: '/us-news',
+									longTitle: 'US news',
+								},
+								{
+									title: 'Americas',
+									url: '/world/americas',
+								},
+								{
+									title: 'Asia',
+									url: '/world/asia',
+								},
+								{
+									title: 'Australia',
+									url: '/australia-news',
+									longTitle: 'Australia news',
+								},
+								{
+									title: 'Middle East',
+									url: '/world/middleeast',
+								},
+								{
+									title: 'Africa',
+									url: '/world/africa',
+								},
+								{
+									title: 'Inequality',
+									url: '/inequality',
+								},
+								{
+									title: 'Global development',
+									url: '/global-development',
+								},
+							],
+						},
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Ukraine',
+							url: '/world/ukraine',
+						},
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Newsletters',
+							url: '/email-newsletters',
+						},
+						{
+							title: 'Business',
+							url: '/business',
+							children: [
+								{
+									title: 'Economics',
+									url: '/business/economics',
+								},
+								{
+									title: 'Banking',
+									url: '/business/banking',
+								},
+								{
+									title: 'Money',
+									url: '/money',
+									children: [
+										{
+											title: 'Property',
+											url: '/money/property',
+										},
+										{
+											title: 'Pensions',
+											url: '/money/pensions',
+										},
+										{
+											title: 'Savings',
+											url: '/money/savings',
+										},
+										{
+											title: 'Borrowing',
+											url: '/money/debt',
+										},
+										{
+											title: 'Careers',
+											url: '/money/work-and-careers',
+										},
+									],
+								},
+								{
+									title: 'Markets',
+									url: '/business/stock-markets',
+								},
+								{
+									title: 'Project Syndicate',
+									url: '/business/series/project-syndicate-economists',
+								},
+								{
+									title: 'B2B',
+									url: '/business-to-business',
+								},
+								{
+									title: 'Retail',
+									url: '/business/retail',
+								},
+							],
+						},
+						{
+							title: 'Environment',
+							url: '/environment',
+							children: [
+								{
+									title: 'Climate crisis',
+									url: '/environment/climate-crisis',
+								},
+								{
+									title: 'Wildlife',
+									url: '/environment/wildlife',
+								},
+								{
+									title: 'Energy',
+									url: '/environment/energy',
+								},
+								{
+									title: 'Pollution',
+									url: '/environment/pollution',
+								},
+							],
+						},
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Science',
+							url: '/science',
+						},
+						{
+							title: 'Tech',
+							url: '/technology',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
 					],
 				},
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
-				},
-				{
-					name: 'edition',
-					value: 'us',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
-				},
-				{
-					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-			],
-		},
-		AU: {
-			adTargeting: [
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
+					title: 'Opinion',
+					url: '/commentisfree',
+					longTitle: 'Opinion home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'The Guardian view',
+							url: '/profile/editorial',
+						},
+						{
+							title: 'Columnists',
+							url: '/index/contributors',
+						},
+						{
+							title: 'Cartoons',
+							url: '/tone/cartoons',
+						},
+						{
+							title: 'Opinion videos',
+							url: '/type/video+tone/comment',
+						},
+						{
+							title: 'Letters',
+							url: '/tone/letters',
+						},
 					],
 				},
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
-				},
-				{
-					name: 'edition',
-					value: 'au',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
-				},
-				{
-					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-			],
-		},
-		INT: {
-			adTargeting: [
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
+					title: 'Sport',
+					url: '/sport',
+					longTitle: 'Sport home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Cricket',
+							url: '/sport/cricket',
+						},
+						{
+							title: 'Rugby union',
+							url: '/sport/rugby-union',
+						},
+						{
+							title: 'Tennis',
+							url: '/sport/tennis',
+						},
+						{
+							title: 'Cycling',
+							url: '/sport/cycling',
+						},
+						{
+							title: 'F1',
+							url: '/sport/formulaone',
+						},
+						{
+							title: 'Golf',
+							url: '/sport/golf',
+						},
+						{
+							title: 'Boxing',
+							url: '/sport/boxing',
+						},
+						{
+							title: 'Rugby league',
+							url: '/sport/rugbyleague',
+						},
+						{
+							title: 'Racing',
+							url: '/sport/horse-racing',
+						},
+						{
+							title: 'US sports',
+							url: '/sport/us-sport',
+						},
 					],
 				},
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
-				},
-				{
-					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-			],
-		},
-		EUR: {
-			adTargeting: [
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
+					title: 'Culture',
+					url: '/culture',
+					longTitle: 'Culture home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Film',
+							url: '/film',
+						},
+						{
+							title: 'Music',
+							url: '/music',
+						},
+						{
+							title: 'TV & radio',
+							url: '/tv-and-radio',
+						},
+						{
+							title: 'Books',
+							url: '/books',
+						},
+						{
+							title: 'Art & design',
+							url: '/artanddesign',
+						},
+						{
+							title: 'Stage',
+							url: '/stage',
+						},
+						{
+							title: 'Games',
+							url: '/games',
+						},
+						{
+							title: 'Classical',
+							url: '/music/classicalmusicandopera',
+						},
 					],
 				},
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'edition',
-					value: 'eur',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
-				},
-				{
-					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
+					title: 'Lifestyle',
+					url: '/lifeandstyle',
+					longTitle: 'Lifestyle home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Fashion',
+							url: '/fashion',
+						},
+						{
+							title: 'Food',
+							url: '/food',
+						},
+						{
+							title: 'Recipes',
+							url: '/tone/recipes',
+						},
+						{
+							title: 'Travel',
+							url: '/travel',
+							children: [
+								{
+									title: 'UK',
+									url: '/travel/uk',
+								},
+								{
+									title: 'Europe',
+									url: '/travel/europe',
+								},
+								{
+									title: 'US',
+									url: '/travel/usa',
+								},
+							],
+						},
+						{
+							title: 'Health & fitness',
+							url: '/lifeandstyle/health-and-wellbeing',
+						},
+						{
+							title: 'Women',
+							url: '/lifeandstyle/women',
+						},
+						{
+							title: 'Men',
+							url: '/lifeandstyle/men',
+						},
+						{
+							title: 'Love & sex',
+							url: '/lifeandstyle/love-and-sex',
+						},
+						{
+							title: 'Beauty',
+							url: '/fashion/beauty',
+						},
+						{
+							title: 'Home & garden',
+							url: '/lifeandstyle/home-and-garden',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Cars',
+							url: '/technology/motoring',
+						},
+					],
 				},
 			],
-		},
-	},
-	pageType: {
-		hasShowcaseMainElement: false,
-		isFront: false,
-		isLiveblog: false,
-		isMinuteArticle: false,
-		isPaidContent: false,
-		isPreview: false,
-		isSensitive: false,
-	},
-	trailText:
-		'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
-	nav: {
-		currentUrl: '/world/europe-news',
-		pillars: [
-			{
-				title: 'News',
-				url: '/',
-				longTitle: 'Headlines',
-				iconName: 'home',
-				children: [
-					{
-						title: 'UK',
-						url: '/uk-news',
-						longTitle: 'UK news',
-						children: [
-							{
-								title: 'UK politics',
-								url: '/politics',
-							},
-							{
-								title: 'Education',
-								url: '/education',
-								children: [
-									{
-										title: 'Schools',
-										url: '/education/schools',
-									},
-									{
-										title: 'Teachers',
-										url: '/teacher-network',
-									},
-									{
-										title: 'Universities',
-										url: '/education/universities',
-									},
-									{
-										title: 'Students',
-										url: '/education/students',
-									},
-								],
-							},
-							{
-								title: 'Media',
-								url: '/media',
-							},
-							{
-								title: 'Society',
-								url: '/society',
-							},
-							{
-								title: 'Law',
-								url: '/law',
-							},
-							{
-								title: 'Scotland',
-								url: '/uk/scotland',
-							},
-							{
-								title: 'Wales',
-								url: '/uk/wales',
-							},
-							{
-								title: 'Northern Ireland',
-								url: '/uk/northernireland',
-							},
-						],
-					},
-					{
-						title: 'World',
-						url: '/world',
-						longTitle: 'World news',
-						children: [
-							{
-								title: 'Europe',
-								url: '/world/europe-news',
-							},
-							{
-								title: 'US',
-								url: '/us-news',
-								longTitle: 'US news',
-							},
-							{
-								title: 'Americas',
-								url: '/world/americas',
-							},
-							{
-								title: 'Asia',
-								url: '/world/asia',
-							},
-							{
-								title: 'Australia',
-								url: '/australia-news',
-								longTitle: 'Australia news',
-							},
-							{
-								title: 'Middle East',
-								url: '/world/middleeast',
-							},
-							{
-								title: 'Africa',
-								url: '/world/africa',
-							},
-							{
-								title: 'Inequality',
-								url: '/inequality',
-							},
-							{
-								title: 'Global development',
-								url: '/global-development',
-							},
-						],
-					},
-					{
-						title: 'Climate crisis',
-						url: '/environment/climate-crisis',
-					},
-					{
-						title: 'Ukraine',
-						url: '/world/ukraine',
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
-					},
-					{
-						title: 'Business',
-						url: '/business',
-						children: [
-							{
-								title: 'Economics',
-								url: '/business/economics',
-							},
-							{
-								title: 'Banking',
-								url: '/business/banking',
-							},
-							{
-								title: 'Money',
-								url: '/money',
-								children: [
-									{
-										title: 'Property',
-										url: '/money/property',
-									},
-									{
-										title: 'Pensions',
-										url: '/money/pensions',
-									},
-									{
-										title: 'Savings',
-										url: '/money/savings',
-									},
-									{
-										title: 'Borrowing',
-										url: '/money/debt',
-									},
-									{
-										title: 'Careers',
-										url: '/money/work-and-careers',
-									},
-								],
-							},
-							{
-								title: 'Markets',
-								url: '/business/stock-markets',
-							},
-							{
-								title: 'Project Syndicate',
-								url: '/business/series/project-syndicate-economists',
-							},
-							{
-								title: 'B2B',
-								url: '/business-to-business',
-							},
-							{
-								title: 'Retail',
-								url: '/business/retail',
-							},
-						],
-					},
-					{
-						title: 'Environment',
-						url: '/environment',
-						children: [
-							{
-								title: 'Climate crisis',
-								url: '/environment/climate-crisis',
-							},
-							{
-								title: 'Wildlife',
-								url: '/environment/wildlife',
-							},
-							{
-								title: 'Energy',
-								url: '/environment/energy',
-							},
-							{
-								title: 'Pollution',
-								url: '/environment/pollution',
-							},
-						],
-					},
-					{
-						title: 'UK politics',
-						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
-					},
-					{
-						title: 'Society',
-						url: '/society',
-					},
-					{
-						title: 'Science',
-						url: '/science',
-					},
-					{
-						title: 'Tech',
-						url: '/technology',
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-					},
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-				],
-			},
-			{
-				title: 'Opinion',
-				url: '/commentisfree',
-				longTitle: 'Opinion home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'The Guardian view',
-						url: '/profile/editorial',
-					},
-					{
-						title: 'Columnists',
-						url: '/index/contributors',
-					},
-					{
-						title: 'Cartoons',
-						url: '/tone/cartoons',
-					},
-					{
-						title: 'Opinion videos',
-						url: '/type/video+tone/comment',
-					},
-					{
-						title: 'Letters',
-						url: '/tone/letters',
-					},
-				],
-			},
-			{
-				title: 'Sport',
-				url: '/sport',
-				longTitle: 'Sport home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
-						title: 'Cricket',
-						url: '/sport/cricket',
-					},
-					{
-						title: 'Rugby union',
-						url: '/sport/rugby-union',
-					},
-					{
-						title: 'Tennis',
-						url: '/sport/tennis',
-					},
-					{
-						title: 'Cycling',
-						url: '/sport/cycling',
-					},
-					{
-						title: 'F1',
-						url: '/sport/formulaone',
-					},
-					{
-						title: 'Golf',
-						url: '/sport/golf',
-					},
-					{
-						title: 'Boxing',
-						url: '/sport/boxing',
-					},
-					{
-						title: 'Rugby league',
-						url: '/sport/rugbyleague',
-					},
-					{
-						title: 'Racing',
-						url: '/sport/horse-racing',
-					},
-					{
-						title: 'US sports',
-						url: '/sport/us-sport',
-					},
-				],
-			},
-			{
-				title: 'Culture',
-				url: '/culture',
-				longTitle: 'Culture home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Film',
-						url: '/film',
-					},
-					{
-						title: 'Music',
-						url: '/music',
-					},
-					{
-						title: 'TV & radio',
-						url: '/tv-and-radio',
-					},
-					{
-						title: 'Books',
-						url: '/books',
-					},
-					{
-						title: 'Art & design',
-						url: '/artanddesign',
-					},
-					{
-						title: 'Stage',
-						url: '/stage',
-					},
-					{
-						title: 'Games',
-						url: '/games',
-					},
-					{
-						title: 'Classical',
-						url: '/music/classicalmusicandopera',
-					},
-				],
-			},
-			{
-				title: 'Lifestyle',
-				url: '/lifeandstyle',
-				longTitle: 'Lifestyle home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Fashion',
-						url: '/fashion',
-					},
-					{
-						title: 'Food',
-						url: '/food',
-					},
-					{
-						title: 'Recipes',
-						url: '/tone/recipes',
-					},
-					{
-						title: 'Travel',
-						url: '/travel',
-						children: [
-							{
-								title: 'UK',
-								url: '/travel/uk',
-							},
-							{
-								title: 'Europe',
-								url: '/travel/europe',
-							},
-							{
-								title: 'US',
-								url: '/travel/usa',
-							},
-						],
-					},
-					{
-						title: 'Health & fitness',
-						url: '/lifeandstyle/health-and-wellbeing',
-					},
-					{
-						title: 'Women',
-						url: '/lifeandstyle/women',
-					},
-					{
-						title: 'Men',
-						url: '/lifeandstyle/men',
-					},
-					{
-						title: 'Love & sex',
-						url: '/lifeandstyle/love-and-sex',
-					},
-					{
-						title: 'Beauty',
-						url: '/fashion/beauty',
-					},
-					{
-						title: 'Home & garden',
-						url: '/lifeandstyle/home-and-garden',
-					},
-					{
-						title: 'Money',
-						url: '/money',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-							},
-						],
-					},
-					{
-						title: 'Cars',
-						url: '/technology/motoring',
-					},
-				],
-			},
-		],
-		otherLinks: [
-			{
-				title: 'The Guardian app',
-				url: 'https://app.adjust.com/16xt6hai',
-			},
-			{
-				title: 'Video',
-				url: '/video',
-			},
-			{
-				title: 'Podcasts',
-				url: '/podcasts',
-			},
-			{
-				title: 'Pictures',
-				url: '/inpictures',
-			},
-			{
-				title: 'Newsletters',
-				url: '/email-newsletters',
-			},
-			{
-				title: "Today's paper",
-				url: '/theguardian',
-				children: [
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-					{
-						title: 'G2',
-						url: '/theguardian/g2',
-					},
-					{
-						title: 'Journal',
-						url: '/theguardian/journal',
-					},
-					{
-						title: 'Saturday',
-						url: '/theguardian/saturday',
-					},
-				],
-			},
-			{
-				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
-			},
-			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
-				title: 'Guardian Weekly',
-				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
-			},
-			{
-				title: 'Crosswords',
-				url: '/crosswords',
-				children: [
-					{
-						title: 'Blog',
-						url: '/crosswords/crossword-blog',
-					},
-					{
-						title: 'Quick',
-						url: '/crosswords/series/quick',
-					},
-					{
-						title: 'Cryptic',
-						url: '/crosswords/series/cryptic',
-					},
-					{
-						title: 'Prize',
-						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-					},
-					{
-						title: 'Genius',
-						url: '/crosswords/series/genius',
-					},
-					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
-					},
-				],
-			},
-			{
-				title: 'Wordiply',
-				url: 'https://www.wordiply.com',
-			},
-			{
-				title: 'Corrections',
-				url: '/theguardian/series/corrections-and-clarifications',
-			},
-		],
-		brandExtensions: [
-			{
-				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com',
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-			},
-			{
-				title: 'Holidays',
-				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
-			},
-			{
-				title: 'Live events',
-				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
-			},
-			{
-				title: 'About Us',
-				url: '/about',
-			},
-			{
-				title: 'Digital Archive',
-				url: 'https://theguardian.newspapers.com',
-			},
-			{
-				title: 'Guardian Print Shop',
-				url: '/artanddesign/series/gnm-print-sales',
-			},
-			{
-				title: 'Patrons',
-				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
-			},
-			{
-				title: 'Guardian Licensing',
-				url: 'https://licensing.theguardian.com/',
-			},
-		],
-		currentNavLinkTitle: 'Europe',
-		currentPillarTitle: 'News',
-		subNavSections: {
-			parent: {
-				title: 'World',
-				url: '/world',
-				longTitle: 'World news',
-				children: [
+			otherLinks: [
+				{
+					title: 'The Guardian app',
+					url: 'https://app.adjust.com/16xt6hai',
+				},
+				{
+					title: 'Video',
+					url: '/video',
+				},
+				{
+					title: 'Podcasts',
+					url: '/podcasts',
+				},
+				{
+					title: 'Pictures',
+					url: '/inpictures',
+				},
+				{
+					title: 'Newsletters',
+					url: '/email-newsletters',
+				},
+				{
+					title: "Today's paper",
+					url: '/theguardian',
+					children: [
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+						{
+							title: 'G2',
+							url: '/theguardian/g2',
+						},
+						{
+							title: 'Journal',
+							url: '/theguardian/journal',
+						},
+						{
+							title: 'Saturday',
+							url: '/theguardian/saturday',
+						},
+					],
+				},
+				{
+					title: 'Inside the Guardian',
+					url: 'https://www.theguardian.com/membership',
+				},
+				{
+					title: 'The Observer',
+					url: '/observer',
+					children: [
+						{
+							title: 'Comment',
+							url: '/theobserver/news/comment',
+						},
+						{
+							title: 'The New Review',
+							url: '/theobserver/new-review',
+						},
+						{
+							title: 'Observer Magazine',
+							url: '/theobserver/magazine',
+						},
+						{
+							title: 'Observer Food Monthly',
+							url: '/theobserver/foodmonthly',
+						},
+					],
+				},
+				{
+					title: 'Guardian Weekly',
+					url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				},
+				{
+					title: 'Crosswords',
+					url: '/crosswords',
+					children: [
+						{
+							title: 'Blog',
+							url: '/crosswords/crossword-blog',
+						},
+						{
+							title: 'Quick',
+							url: '/crosswords/series/quick',
+						},
+						{
+							title: 'Cryptic',
+							url: '/crosswords/series/cryptic',
+						},
+						{
+							title: 'Prize',
+							url: '/crosswords/series/prize',
+						},
+						{
+							title: 'Weekend',
+							url: '/crosswords/series/weekend-crossword',
+						},
+						{
+							title: 'Quiptic',
+							url: '/crosswords/series/quiptic',
+						},
+						{
+							title: 'Genius',
+							url: '/crosswords/series/genius',
+						},
+						{
+							title: 'Speedy',
+							url: '/crosswords/series/speedy',
+						},
+						{
+							title: 'Everyman',
+							url: '/crosswords/series/everyman',
+						},
+						{
+							title: 'Azed',
+							url: '/crosswords/series/azed',
+						},
+					],
+				},
+				{
+					title: 'Wordiply',
+					url: 'https://www.wordiply.com',
+				},
+				{
+					title: 'Corrections',
+					url: '/theguardian/series/corrections-and-clarifications',
+				},
+			],
+			brandExtensions: [
+				{
+					title: 'Search jobs',
+					url: 'https://jobs.theguardian.com',
+				},
+				{
+					title: 'Hire with Guardian Jobs',
+					url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				},
+				{
+					title: 'Holidays',
+					url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				},
+				{
+					title: 'Live events',
+					url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
+				},
+				{
+					title: 'About Us',
+					url: '/about',
+				},
+				{
+					title: 'Digital Archive',
+					url: 'https://theguardian.newspapers.com',
+				},
+				{
+					title: 'Guardian Print Shop',
+					url: '/artanddesign/series/gnm-print-sales',
+				},
+				{
+					title: 'Patrons',
+					url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+				},
+				{
+					title: 'Guardian Licensing',
+					url: 'https://licensing.theguardian.com/',
+				},
+			],
+			currentNavLinkTitle: 'Europe',
+			currentPillarTitle: 'News',
+			subNavSections: {
+				parent: {
+					title: 'World',
+					url: '/world',
+					longTitle: 'World news',
+					children: [
+						{
+							title: 'Europe',
+							url: '/world/europe-news',
+						},
+						{
+							title: 'US',
+							url: '/us-news',
+							longTitle: 'US news',
+						},
+						{
+							title: 'Americas',
+							url: '/world/americas',
+						},
+						{
+							title: 'Asia',
+							url: '/world/asia',
+						},
+						{
+							title: 'Australia',
+							url: '/australia-news',
+							longTitle: 'Australia news',
+						},
+						{
+							title: 'Middle East',
+							url: '/world/middleeast',
+						},
+						{
+							title: 'Africa',
+							url: '/world/africa',
+						},
+						{
+							title: 'Inequality',
+							url: '/inequality',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+					],
+				},
+				links: [
 					{
 						title: 'Europe',
 						url: '/world/europe-news',
@@ -2111,282 +2155,243 @@ export const Analysis: DCRArticle = {
 					},
 				],
 			},
-			links: [
-				{
-					title: 'Europe',
-					url: '/world/europe-news',
+			readerRevenueLinks: {
+				header: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'US',
-					url: '/us-news',
-					longTitle: 'US news',
+				footer: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Americas',
-					url: '/world/americas',
+				sideMenu: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 				},
-				{
-					title: 'Asia',
-					url: '/world/asia',
+				ampHeader: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Australia',
-					url: '/australia-news',
-					longTitle: 'Australia news',
+				ampFooter: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Middle East',
-					url: '/world/middleeast',
-				},
-				{
-					title: 'Africa',
-					url: '/world/africa',
-				},
-				{
-					title: 'Inequality',
-					url: '/inequality',
-				},
-				{
-					title: 'Global development',
-					url: '/global-development',
-				},
-			],
-		},
-		readerRevenueLinks: {
-			header: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			footer: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
-			},
-			sideMenu: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
-			},
-			ampHeader: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			ampFooter: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
-	},
-	showBottomSocialButtons: true,
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
+		showBottomSocialButtons: true,
+		pageFooter: {
+			footerLinks: [
+				[
+					{
+						text: 'About us',
+						url: '/about',
+						dataLinkName: 'uk : footer : about us',
+						extraClasses: '',
+					},
+					{
+						text: 'Help',
+						url: '/help',
+						dataLinkName: 'uk : footer : tech feedback',
+						extraClasses: 'js-tech-feedback-report',
+					},
+					{
+						text: 'Complaints & corrections',
+						url: '/info/complaints-and-corrections',
+						dataLinkName: 'complaints',
+						extraClasses: '',
+					},
+					{
+						text: 'SecureDrop',
+						url: 'https://www.theguardian.com/securedrop',
+						dataLinkName: 'securedrop',
+						extraClasses: '',
+					},
+					{
+						text: 'Work for us',
+						url: 'https://workforus.theguardian.com',
+						dataLinkName: 'uk : footer : work for us',
+						extraClasses: '',
+					},
+					{
+						text: 'Privacy policy',
+						url: '/info/privacy',
+						dataLinkName: 'privacy',
+						extraClasses: '',
+					},
+					{
+						text: 'Cookie policy',
+						url: '/info/cookies',
+						dataLinkName: 'cookie',
+						extraClasses: '',
+					},
+					{
+						text: 'Terms & conditions',
+						url: '/help/terms-of-service',
+						dataLinkName: 'terms',
+						extraClasses: '',
+					},
+					{
+						text: 'Contact us',
+						url: '/help/contact-us',
+						dataLinkName: 'uk : footer : contact us',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'All topics',
+						url: '/index/subjects/a',
+						dataLinkName: 'uk : footer : all topics',
+						extraClasses: '',
+					},
+					{
+						text: 'All writers',
+						url: '/index/contributors',
+						dataLinkName: 'uk : footer : all contributors',
+						extraClasses: '',
+					},
+					{
+						text: 'Modern Slavery Act',
+						url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+						dataLinkName:
+							'uk : footer : modern slavery act statement',
+						extraClasses: '',
+					},
+					{
+						text: 'Digital newspaper archive',
+						url: 'https://theguardian.newspapers.com',
+						dataLinkName: 'digital newspaper archive',
+						extraClasses: '',
+					},
+					{
+						text: 'Facebook',
+						url: 'https://www.facebook.com/theguardian',
+						dataLinkName: 'uk : footer : facebook',
+						extraClasses: '',
+					},
+					{
+						text: 'YouTube',
+						url: 'https://www.youtube.com/user/TheGuardian',
+						dataLinkName: 'uk : footer : youtube',
+						extraClasses: '',
+					},
+					{
+						text: 'Instagram',
+						url: 'https://www.instagram.com/guardian',
+						dataLinkName: 'uk : footer : instagram',
+						extraClasses: '',
+					},
+					{
+						text: 'LinkedIn',
+						url: 'https://www.linkedin.com/company/theguardian',
+						dataLinkName: 'uk : footer : linkedin',
+						extraClasses: '',
+					},
+					{
+						text: 'Twitter',
+						url: 'https://twitter.com/guardian',
+						dataLinkName: 'uk: footer : twitter',
+						extraClasses: '',
+					},
+					{
+						text: 'Newsletters',
+						url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+						dataLinkName: 'uk : footer : newsletters',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'Advertise with us',
+						url: 'https://advertising.theguardian.com',
+						dataLinkName: 'uk : footer : advertise with us',
+						extraClasses: '',
+					},
+					{
+						text: 'Guardian Labs',
+						url: '/guardian-labs',
+						dataLinkName: 'uk : footer : guardian labs',
+						extraClasses: '',
+					},
+					{
+						text: 'Search jobs',
+						url: 'https://jobs.theguardian.com',
+						dataLinkName: 'uk : footer : jobs',
+						extraClasses: '',
+					},
+					{
+						text: 'Patrons',
+						url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+						dataLinkName: 'uk : footer : patrons',
+						extraClasses: '',
+					},
+				],
 			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
+		},
+		publication: 'The Guardian',
+		shouldHideReaderRevenue: false,
+		slotMachineFlags: '',
+		contributionsServiceUrl: 'https://contributions.guardianapis.com',
+		isSpecialReport: false,
+		showTableOfContents: false,
+		lang: 'en',
+		isRightToLeftLang: false,
+		imagesForLightbox: [
+			{
+				masterUrl:
+					'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
+				width: 6720,
+				height: 4032,
+				elementId: 'ba766523-f78b-45bc-a098-ab5699639775',
+				displayCredit: true,
+				alt: 'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters',
+				credit: 'Photograph: Peter Morrison/AP',
+				caption:
+					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
+				position: 1,
+			},
+		],
+		imagesForAppsLightbox: [
+			{
+				width: 6720,
+				height: 4032,
+				credit: 'Photograph: Peter Morrison/AP',
+				caption:
+					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
+				masterUrl:
+					'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
+				elementId: 'ba766523-f78b-45bc-a098-ab5699639775',
+			},
 		],
 	},
-	publication: 'The Guardian',
-	shouldHideReaderRevenue: false,
-	slotMachineFlags: '',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	isSpecialReport: false,
-	showTableOfContents: false,
-	lang: 'en',
-	isRightToLeftLang: false,
-	imagesForLightbox: [
-		{
-			masterUrl:
-				'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
-			width: 6720,
-			height: 4032,
-			elementId: 'ba766523-f78b-45bc-a098-ab5699639775',
-			displayCredit: true,
-			alt: 'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters',
-			credit: 'Photograph: Peter Morrison/AP',
-			caption:
-				'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
-			position: 1,
-		},
-	],
-	imagesForAppsLightbox: [
-		{
-			width: 6720,
-			height: 4032,
-			credit: 'Photograph: Peter Morrison/AP',
-			caption:
-				'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
-			masterUrl:
-				'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
-			elementId: 'ba766523-f78b-45bc-a098-ab5699639775',
-		},
-	],
 };

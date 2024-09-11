@@ -7,7 +7,7 @@ import { expectToBeVisible } from '../lib/locators';
 
 test.describe('Embeds', () => {
 	test.describe('AMP', () => {
-		test.skip('should render the corona interactive atom embed', async ({
+		test('should render the corona interactive atom embed', async ({
 			page,
 		}) => {
 			await loadPage(
@@ -27,7 +27,7 @@ test.describe('Embeds', () => {
 			).toContainText('Daily cases');
 		});
 
-		test.skip('should render the counted interactive embed', async ({
+		test('should render the counted interactive embed', async ({
 			page,
 		}) => {
 			await loadPage(

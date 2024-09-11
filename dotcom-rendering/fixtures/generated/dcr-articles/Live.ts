@@ -11,3458 +11,4170 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Live: DCRArticle = {
-	version: 3,
-	headline:
-		'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-	standfirst:
-		'<p>Team of experts answer questions about mission following safe landing on the red planet on Thursday – follow the briefing live</p>\n<ul>\n <li><a href="https://www.theguardian.com/science/gallery/2021/feb/19/nasa-perseverance-mission-to-mars-in-pictures">In pictures: Perseverance mission to Mars</a></li>\n</ul>',
-	webTitle:
-		'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-	mainMediaElements: [
-		{
-			displayCredit: true,
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			role: 'inline',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/140.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/500.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/2000.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '1229',
-							width: '2048',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/2048.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '1229',
-							width: '2048',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg',
-					},
-				],
-			},
-			elementId: 'e2c74dad-5344-4f36-a672-edf514dea72b',
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=85&auto=format&fit=max&s=b93342a1d7d6c47eb03a861d8f9c5930',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=68e148b680a741f6a1bedf93d521f1cc',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=85&auto=format&fit=max&s=0c3b95be996a3eda5e09222c10c62d84',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3e3a43e1921bcffcb3254a32bfcf51ee',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1020&quality=85&auto=format&fit=max&s=67e9d4132782282b0aa56f9525516417',
-							width: 1020,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f9eba00816f393597284695943d112cf',
-							width: 2040,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=940&quality=85&auto=format&fit=max&s=c6bbbcc0e77dcc8a039ea6f640a4eecb',
-							width: 940,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=dad0bd0860f6b4e037cc484c30887ce6',
-							width: 1880,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=85&auto=format&fit=max&s=975c2421c807af30a12c3e6c05d65875',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=28a9f8208b4ffa31540c03131f5c8a3a',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=85&auto=format&fit=max&s=b93342a1d7d6c47eb03a861d8f9c5930',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=68e148b680a741f6a1bedf93d521f1cc',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=85&auto=format&fit=max&s=0c3b95be996a3eda5e09222c10c62d84',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3e3a43e1921bcffcb3254a32bfcf51ee',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1900&quality=85&auto=format&fit=max&s=59566055d3c420f119709f59c40c5635',
-							width: 1900,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=4262655a6ae2b41cdd2784ed334b42bb',
-							width: 3800,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1300&quality=85&auto=format&fit=max&s=9a938ed8177af5ab092504bd03d13579',
-							width: 1300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=ab736df6a83b603cdd32d3bf54b9e88b',
-							width: 2600,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1140&quality=85&auto=format&fit=max&s=06aa47685dd1df4ab8ac8629564f0b9d',
-							width: 1140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c1c563ae6a46241e682cd8bf28ada246',
-							width: 2280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=980&quality=85&auto=format&fit=max&s=1ec1f1d81333f9c2e2ac65da630b0eeb',
-							width: 980,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=259177aab6a766cd2ee81d414b35d873',
-							width: 1960,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=740&quality=85&auto=format&fit=max&s=a86504260f30dd6e0b7d00e326503ab9',
-							width: 740,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=0d6ec6efc41a8bd87b2fb0d470011cb5',
-							width: 1480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=85&auto=format&fit=max&s=975c2421c807af30a12c3e6c05d65875',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=28a9f8208b4ffa31540c03131f5c8a3a',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=480&quality=85&auto=format&fit=max&s=0eccfcaaf31c2bc0c7bafd5b8b5d6bc0',
-							width: 480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=29a9ce50ea4708671846476c613cce12',
-							width: 960,
-						},
-					],
-				},
-			],
-			data: {
-				alt: 'Perseverance rover as it touched down in the area known as Jezero crater.',
-				caption:
-					'Perseverance rover as it touched down in the area known as Jezero crater.',
-				credit: 'Photograph: NASA/Getty Images',
-			},
-			position: 1,
-		},
-	],
-	main: '<figure class="element element-image" data-media-id="2dbb8d5200a0c46420d3d9145194d7bcb9311d44"> \n <img src="https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg" alt="Perseverance rover as it touched down in the area known as Jezero crater." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Perseverance rover as it touched down in the area known as Jezero crater.</span> <span class="element-image__credit">Photograph: NASA/Getty Images</span> \n </figcaption> \n</figure>',
-	filterKeyEvents: false,
-	keyEvents: [
-		{
-			id: '60300f5f8f08ad21ea60071e',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars.</p>',
-					elementId: '9b263f1c-8909-4721-94a8-1e4d10e65781',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>To recap:</p>',
-					elementId: 'de36cbea-8822-43a1-b606-172b8a8b81bd',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<ul>\n <li>The rover is “healthy” and undergoing systems testing.</li>\n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li>\n <li>The images include the first color images beamed directly from Mars as opposed to images touched up later.</li>\n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li>\n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li>\n <li>The wheeled rover could begin to move around its new home as early as late February.</li>\n <li>The rover’s mini helicopter could launch as early as April.</li>\n <li>Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li>\n <li>The point is to determine whether there was life on Mars and subsidiary questions.</li>\n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li>\n</ul>',
-					elementId: 'c2c9f830-8147-401d-98ba-d3984081c927',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: true,
-			},
-			blockCreatedOn: 1613762399000,
-			blockCreatedOnDisplay: '19.19 GMT',
-			blockLastUpdated: 1613763519000,
-			blockLastUpdatedDisplay: '19.38 GMT',
-			blockFirstPublished: 1613763003000,
-			blockFirstPublishedDisplay: '19.30 GMT',
-			blockFirstPublishedDisplayNoTimezone: '19.30',
-			title: 'Summary',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '603001b98f08c3cb92a5ca08',
-			elements: [
-				{
-					displayCredit: true,
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					role: 'inline',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '2400',
-									width: '4000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/4000.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '2400',
-									width: '4000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1200',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/140.jpg',
-							},
-						],
-					},
-					elementId: 'bb34eff0-92f7-4464-bbb7-0c37d321cecb',
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=87c37270fb8407941d88e74c04e2762d',
-									width: 140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fb665850dd7e3efe8826797129968bb9',
-									width: 280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=8fb190de13314138fbf0ae411e9341d0',
-									width: 120,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=2a975c552341b8d95f8fffea51912917',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=dd182f8a9555434b29bb4e8292dd4a88',
-									width: 380,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=c0c4fe10071c27d5d86bc6cfb9f3370c',
-									width: 760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=221f80b8ac626ea906fed38aeb67c36d',
-									width: 300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=d7595a03c70a0734f27581c6541b9a69',
-									width: 600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=860&quality=85&auto=format&fit=max&s=7ed8ea7b1e1491b11cc8f3b7a9616778',
-									width: 860,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=8c4003f3654d0c5257ef34b54c5ee161',
-									width: 1720,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=780&quality=85&auto=format&fit=max&s=e3a2ccd43e57c00feef1743b80eca75e',
-									width: 780,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=f82d999dcacd3bfc2c8a572cc95ab1e8',
-									width: 1560,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1900&quality=85&auto=format&fit=max&s=c5607621530da68f30fff606055aabed',
-									width: 1900,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=f149f84846ee4bc34b77e5b64589f852',
-									width: 3800,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=e393f002906cb6ef2f7bbf05da8943d5',
-									width: 1300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f9860e3e3022cd91062ccc788137aa4',
-									width: 2600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=50f0853e16f19889587ea5744f28883e',
-									width: 1140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=8781d4362ead88ae16be8d30396bf695',
-									width: 2280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=980&quality=85&auto=format&fit=max&s=a37ba5e4c2361fded16fecfc2235f92e',
-									width: 980,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=8d4990f93153b4e7d0414727725c7b47',
-									width: 1960,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=740&quality=85&auto=format&fit=max&s=f5c619b67ae519b87b2f3e9f82684c75',
-									width: 740,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=9d083160ddbabadba863eeda3df4ce06',
-									width: 1480,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=978b7e2eec7178a53430971e82505e08',
-									width: 660,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=260ae4003ab109f6ac45892daf15795d',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=480&quality=85&auto=format&fit=max&s=c92cce222553e3218022c94d72ab036e',
-									width: 480,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=783c3c45a7837e1ff0704264e5bb9234',
-									width: 960,
-								},
-							],
-						},
-					],
-					data: {
-						alt: 'This photo released by NASA, shows the Perseverance rover being lowered by the Sky Crane to the surface of Mars on February 18, 2021.',
-						caption:
-							'This photo released by NASA, shows the Perseverance rover being lowered by the Sky Crane to the surface of Mars on February 18, 2021.',
-						credit: 'Photograph: NASA/AFP/Getty Images',
-					},
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: true,
-				summary: false,
-			},
-			blockCreatedOn: 1613758905000,
-			blockCreatedOnDisplay: '18.21 GMT',
-			blockLastUpdated: 1613759908000,
-			blockLastUpdatedDisplay: '18.38 GMT',
-			blockFirstPublished: 1613758917000,
-			blockFirstPublishedDisplay: '18.21 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.21',
-			title: 'New image of Perseverance shows rover being lowered to Mars surface',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '602ffd998f08c3cb92a5c9ac',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Steltzner is showing some of the most fantastic images from space explorations past, from moonshots to the Hubble telescope.</p>',
-					elementId: '388ca529-3af2-4b5d-acbc-778eac6e1c3e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>He proposes an image of the dangling Perseverance Rover taken yesterday – it looks like a futuristic marionette – as the next entry in this cosmic scrapbook. <br></p>',
-					elementId: '754e30b0-e57f-4ec7-a41e-31b4726f89b8',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: true,
-				summary: false,
-			},
-			blockCreatedOn: 1613757849000,
-			blockCreatedOnDisplay: '18.04 GMT',
-			blockLastUpdated: 1613758589000,
-			blockLastUpdatedDisplay: '18.16 GMT',
-			blockFirstPublished: 1613757946000,
-			blockFirstPublishedDisplay: '18.05 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.05',
-			title: 'Nasa scientists show new images of Perseverance rover after Mars landing',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '602fd0c48f08ad21ea600275',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Members of the National Aeronautics and <a href="https://www.theguardian.com/science/space" data-component="auto-linked-tag">Space</a> Administration (Nasa) team that put a rover on Mars on Thursday are preparing to host a news conference and answer questions about the mission.</p>',
-					elementId: 'b670eeb6-8b56-4f58-bf0a-268c5e2fb999',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The rover, called Perseverance or Percy for short, is on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> to search for signs of ancient life and collect samples to be returned by a future mission. About the size of a car, the wheeled rover is equipped with cameras, microphones, drills and even a small helicopter.</p>',
-					elementId: '5968549f-83a0-4c00-98a2-328876b57ac5',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Guardian science correspondent Natalie Grover reports of Percy’s mission:</p>',
-					elementId: 'eda40664-716c-4b3f-b1d4-e42c324bd111',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-					html: '<blockquote class="quoted">\n <p>Previous Mars missions including <a href="https://viewer.gutools.co.uk/science/2013/jul/28/curiosity-rover-descent-mars-nasa">Curiosity</a> and Opportunity have suggested Mars was once a wet planet with an environment likely to have been supportive of life billions of years ago. Astrobiologists hope this latest mission can offer some evidence to prove whether that was the case.</p>\n</blockquote>',
-					elementId: 'fcf5d03d-b3cd-45ee-99dd-8510bfc4e0da',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a> scientists appear to feel they may be tantalizingly close to a discovery that could change the way we see the universe and our home in it. Here was the scene in the control room near Los Angeles just before 1pm local time on Thursday when Percy’s safe touchdown on Mars was confirmed:<br></p>',
-					elementId: '49d89ec1-e20c-4ebc-a625-38168fd67c0b',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
-					source: 'YouTube',
-					originalUrl: 'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
-					elementId: '58ca4232-8d0b-4078-97a6-bce3da9b9517',
-					width: 460,
-					embedUrl:
-						'https://www.youtube-nocookie.com/embed/Ew24GrPKi3Y?wmode=opaque&feature=oembed',
-					role: 'inline',
-					url: 'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
-					height: 259,
-					sourceDomain: 'youtube-nocookie.com',
-					title: 'Nasa mission control erupts as Perseverance rover successfully lands on Mars',
-					isThirdPartyTracking: false,
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The robotic vehicle sailed through space for nearly seven months, covering 293m miles (472m km) before piercing the Martian atmosphere at 12,000mph (19,000km/h) to begin its approach to touchdown on the planet’s surface.</p>',
-					elementId: '49b8d121-1410-4af0-ad45-0235acd180e7',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Thank you for joining our live coverage.</p>',
-					elementId: 'd60cb3d0-d6f4-4a8d-9dea-acee3329e5a5',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: true,
-				summary: false,
-			},
-			blockCreatedOn: 1613755208000,
-			blockCreatedOnDisplay: '17.20 GMT',
-			blockLastUpdated: 1613753141000,
-			blockLastUpdatedDisplay: '16.45 GMT',
-			blockFirstPublished: 1613755208000,
-			blockFirstPublishedDisplay: '17.20 GMT',
-			blockFirstPublishedDisplayNoTimezone: '17.20',
-			title: 'Nasa to host Perseverance rover news conference',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-	],
-	mostRecentBlockId: 'block-60300f5f8f08ad21ea60071e',
-	blocks: [
-		{
-			id: '60300f5f8f08ad21ea60071e',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars.</p>',
-					elementId: 'e2a7667c-b231-4425-96ad-4501f0d507cf',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>To recap:</p>',
-					elementId: '0ed31084-c39b-4da6-827a-1df31ad0661c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<ul>\n <li>The rover is “healthy” and undergoing systems testing.</li>\n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li>\n <li>The images include the first color images beamed directly from Mars as opposed to images touched up later.</li>\n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li>\n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li>\n <li>The wheeled rover could begin to move around its new home as early as late February.</li>\n <li>The rover’s mini helicopter could launch as early as April.</li>\n <li>Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li>\n <li>The point is to determine whether there was life on Mars and subsidiary questions.</li>\n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li>\n</ul>',
-					elementId: 'bb31d01d-e3cc-4e8b-afb2-af41f63e383a',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: true,
-			},
-			blockCreatedOn: 1613762399000,
-			blockCreatedOnDisplay: '19.19 GMT',
-			blockLastUpdated: 1613763519000,
-			blockLastUpdatedDisplay: '19.38 GMT',
-			blockFirstPublished: 1613763003000,
-			blockFirstPublishedDisplay: '19.30 GMT',
-			blockFirstPublishedDisplayNoTimezone: '19.30',
-			title: 'Summary',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '60300f338f08c3cb92a5cacb',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>#TBT</p>',
-					elementId: '845b0e77-4b6c-4ed0-8650-e86012020667',
-				},
-				{
-					expired: false,
-					assetId: 'XmP56yBy-18',
-					posterImage: [
-						{
-							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/2000.jpg',
-							width: 2000,
-						},
-						{
-							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/1000.jpg',
-							width: 1000,
-						},
-						{
-							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/500.jpg',
-							width: 500,
-						},
-						{
-							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/140.jpg',
-							width: 140,
-						},
-						{
-							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/3282.jpg',
-							width: 3282,
-						},
-					],
-					id: '60606947-4f1f-4343-9bb7-000e91502129',
-					elementId: 'b1c5b1e4-2a1e-4089-b7b0-819ecb8b3233',
-					duration: 142,
-					_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
-					mediaTitle:
-						'Nasa launches Perseverance rover in mission to find evidence of life on Mars – video',
-					channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613762355000,
-			blockCreatedOnDisplay: '19.19 GMT',
-			blockLastUpdated: 1613762365000,
-			blockLastUpdatedDisplay: '19.19 GMT',
-			blockFirstPublished: 1613762366000,
-			blockFirstPublishedDisplay: '19.19 GMT',
-			blockFirstPublishedDisplayNoTimezone: '19.19',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '60300d5a8f08bdbed283be98',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>#FF</p>',
-					elementId: '0e7be1f3-b979-47a4-ac25-1bcac544f710',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
-					source: 'Twitter',
-					id: '1362831783444717568',
-					elementId: 'de2f40d8-91b0-45f3-ba9b-4c37fccf849a',
-					hasMedia: false,
-					role: 'inline',
-					url: 'https://twitter.com/NASAPersevere/status/1362831783444717568',
-					isThirdPartyTracking: false,
-					html: '<blockquote class="nojs-tweet"><p lang="en" dir="ltr">I love rocks. Look at these right next to my wheel. Are they volcanic or sedimentary? What story do they tell? Can’t wait to find out.<a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a><a href="https://t.co/7w3rbvbyoL">https://t.co/7w3rbvbyoL</a> <a href="https://t.co/H3q1M0YJAd">pic.twitter.com/H3q1M0YJAd</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362831783444717568?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
-					source: 'Twitter',
-					id: '1362839907824136193',
-					elementId: 'e756fd30-aeab-4839-937f-6e19702f02f4',
-					hasMedia: false,
-					role: 'inline',
-					url: 'https://twitter.com/NASAPersevere/status/1362839907824136193',
-					isThirdPartyTracking: false,
-					html: '<blockquote class="nojs-tweet"><p lang="en" dir="ltr">Every picture tells a story. This one captures me in midair, floating over Mars while hanging from my parachute during the final <a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a>.<br><br>Latest update and images: <a href="https://t.co/fnnEOOMWsV">https://t.co/fnnEOOMWsV</a> <a href="https://t.co/39aGp963a3">pic.twitter.com/39aGp963a3</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362839907824136193?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613761882000,
-			blockCreatedOnDisplay: '19.11 GMT',
-			blockLastUpdated: 1613761914000,
-			blockLastUpdatedDisplay: '19.11 GMT',
-			blockFirstPublished: 1613761914000,
-			blockFirstPublishedDisplay: '19.11 GMT',
-			blockFirstPublishedDisplayNoTimezone: '19.11',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '60300c878f08c3cb92a5cab0',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Have you typed “<a href="https://www.google.com/search?q=perseverance&amp;oq=pers&amp;aqs=chrome.0.69i59j69i57j0l3j46j69i60j69i61.1091j0j7&amp;sourceid=chrome&amp;ie=UTF-8">perseverance</a>” into Google today?</p>',
-					elementId: '62323cad-f3e2-4091-812a-2757cf33dd54',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613761671000,
-			blockCreatedOnDisplay: '19.07 GMT',
-			blockLastUpdated: 1613761799000,
-			blockLastUpdatedDisplay: '19.09 GMT',
-			blockFirstPublished: 1613761799000,
-			blockFirstPublishedDisplay: '19.09 GMT',
-			blockFirstPublishedDisplayNoTimezone: '19.09',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '60300aa38f08ad21ea6006e5',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun.</p>',
-					elementId: '49a4b347-4403-4182-9651-f1d2156e5dc9',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life. <br></p>',
-					elementId: '832980d5-2de8-4cc0-94b9-3429a0e012b1',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613761187000,
-			blockCreatedOnDisplay: '18.59 GMT',
-			blockLastUpdated: 1613763647000,
-			blockLastUpdatedDisplay: '19.40 GMT',
-			blockFirstPublished: 1613761199000,
-			blockFirstPublishedDisplay: '18.59 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.59',
-			contributors: [
-				{
-					name: 'Natalie Grover',
-				},
-			],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '60300a3a8f08c3cb92a5ca90',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the <a href="https://mars.nasa.gov/mars2020/">Nasa web site</a>.</p>',
-					elementId: 'a41e4bba-4bc9-4f2b-983a-bc3234f83e78',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>McGregor signs off:</p>',
-					elementId: 'c87dcc1f-2028-4240-93e7-e35fc9ee7a09',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“Everyone have a great day, on Earth and on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a>.”</p>',
-					elementId: '46112543-016e-42c8-b61a-fa2375b115e9',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613761082000,
-			blockCreatedOnDisplay: '18.58 GMT',
-			blockLastUpdated: 1613763665000,
-			blockLastUpdatedDisplay: '19.41 GMT',
-			blockFirstPublished: 1613761171000,
-			blockFirstPublishedDisplay: '18.59 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.59',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '6030096d8f08c3cb92a5ca88',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption.</p>',
-					elementId: '46eb8b83-616b-4797-a59e-2b58da8c01d9',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour! <br></p>',
-					elementId: '2a8110f3-f825-42ba-b7a7-df5eae1f8d6e',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613760877000,
-			blockCreatedOnDisplay: '18.54 GMT',
-			blockLastUpdated: 1613760893000,
-			blockLastUpdatedDisplay: '18.54 GMT',
-			blockFirstPublished: 1613760893000,
-			blockFirstPublishedDisplay: '18.54 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.54',
-			contributors: [
-				{
-					name: 'Natalie Grover',
-				},
-			],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '603008b48f08bdbed283be5f',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Next question: <strong>How did you celebrate?</strong></p>',
-					elementId: '49fbb65b-52a9-48d1-bacd-87a690d877bc',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Answers include:</p>',
-					elementId: 'ad341bd7-2022-414d-bc68-89f6491f23b3',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<ul>\n <li>Virtual happy hour</li>\n <li>“Socially distanced consumption of ice cream outdoors”</li>\n <li>“I went home and just passed out from just the excitement of the day”</li>\n <li>“In the coming days I’ll definitely be having a glass of wine”</li>\n <li>“It was super-exciting”</li>\n <li>“We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing”</li>\n <li>“Business as usual for a science team working on a <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> rover”</li>\n</ul>',
-					elementId: 'fb67447f-a15b-43b9-bc12-b267dba7416a',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613760692000,
-			blockCreatedOnDisplay: '18.51 GMT',
-			blockLastUpdated: 1613763713000,
-			blockLastUpdatedDisplay: '19.41 GMT',
-			blockFirstPublished: 1613760864000,
-			blockFirstPublishedDisplay: '18.54 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.54',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '603008388f08c3cb92a5ca7b',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Another key question: <strong>When will the rover drive? </strong></p>',
-					elementId: 'ced8f95a-37e6-4836-9247-8862bbced392',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“We’re anticipating the earliest... would be sol 8 or 9... our current best estimate.</p>',
-					elementId: '24a27e87-27ac-4aa1-b738-bb95bf9332a5',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“Maybe a short drive just to check everything out...</p>',
-					elementId: 'e9d1f65f-40e4-4965-b3fc-a96d03e87277',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“We’ll also be figuring out the route and direction we need to go.”</p>',
-					elementId: '45cbb5a5-5a5f-4afe-a7db-bfaedf3eb04d',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>That means rover could rove before February is out.</p>',
-					elementId: 'ad482687-022f-4b0f-aff5-f879cbe5a0ae',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613760568000,
-			blockCreatedOnDisplay: '18.49 GMT',
-			blockLastUpdated: 1613760679000,
-			blockLastUpdatedDisplay: '18.51 GMT',
-			blockFirstPublished: 1613760679000,
-			blockFirstPublishedDisplay: '18.51 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.51',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '603007c48f08c3cb92a5ca74',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a>. It is unknown whether the holes indicate volcanic or sedimentary rock.</p>',
-					elementId: '955e6bfc-a2b2-43d0-8474-92ece9155ca8',
-				},
-				{
-					displayCredit: true,
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					role: 'inline',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '3000',
-									width: '4000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/4000.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '3000',
-									width: '4000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1500',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '750',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '375',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '105',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/140.jpg',
-							},
-						],
-					},
-					elementId: 'b7f6f002-33b2-4ecc-b0fe-471a0777c827',
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=c0243cd0dc3451467801871faf91d37c',
-									width: 140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=90eae9662baaae39be5c932eb43db411',
-									width: 280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=f4239320fca925504ce9590b82854fc0',
-									width: 120,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=814bfbaf0ec52db9a71bbf8672a07edd',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=13713b8b02366b4beddf8e1bb3e2dede',
-									width: 380,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=71e01c69477ac4c9d4382d95b34937a2',
-									width: 760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=a784d2696e39f80be6b98e14a2b9bd67',
-									width: 300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=594bb948379cfc4801faaeaa12652748',
-									width: 600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=860&quality=85&auto=format&fit=max&s=54134bdbc365b54aae0400a4462e8033',
-									width: 860,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=222bab875209d6874760692baceb1acc',
-									width: 1720,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=780&quality=85&auto=format&fit=max&s=cbe8f5e029623642b23b34d5227bfd5b',
-									width: 780,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=9c8d7cf21a17aa032dbb14b8076dd43e',
-									width: 1560,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1900&quality=85&auto=format&fit=max&s=13c21894fee6c3632cdcbe351f95e121',
-									width: 1900,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=d690c9b9014fc64325c202e4fdf53cb2',
-									width: 3800,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=84e5f56cbbf0a210bff7adabaa4724ba',
-									width: 1300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=3525873cc7be9270f0c8c34e8eb37d8c',
-									width: 2600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=b7e0df28c44175474c01155c3cb27258',
-									width: 1140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=4278f04351c3f8b7f4f32d2857afc0f8',
-									width: 2280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=980&quality=85&auto=format&fit=max&s=fe9d440ebcb4d4d8445d6d14631b927f',
-									width: 980,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=466f3f38972bfc4e6fc1ad9b6288d383',
-									width: 1960,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=740&quality=85&auto=format&fit=max&s=2b15920d0c1ac8624d9939a36a0042b4',
-									width: 740,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=114c9eb60e41463f7907056dd8a773d3',
-									width: 1480,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=2d6ae2c6a7919e85e2b22081c46985bd',
-									width: 660,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f51da918a3e88ceae3cb1d8b59095d8a',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=480&quality=85&auto=format&fit=max&s=e03240f58152aab8d3e30e9b29e8ccbb',
-									width: 480,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=8d3dfc2a30fe49902a389550d2586236',
-									width: 960,
-								},
-							],
-						},
-					],
-					data: {
-						alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
-						caption:
-							'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
-						credit: 'Photograph: NASA/AFP/Getty Images',
-					},
-					position: 2,
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613760452000,
-			blockCreatedOnDisplay: '18.47 GMT',
-			blockLastUpdated: 1613760511000,
-			blockLastUpdatedDisplay: '18.48 GMT',
-			blockFirstPublished: 1613760512000,
-			blockFirstPublishedDisplay: '18.48 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.48',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '6030076d8f08ad21ea6006cf',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Attached to the rover’s belly is a diminutive helicopter called Ingenuity.</p>',
-					elementId: '8304e540-8b11-4643-8179-09e12b54e5a7',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity. <br></p>',
-					elementId: '57ba4ada-fc02-4acd-bb8a-26a42606076d',
-				},
-				{
-					displayCredit: true,
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					role: 'inline',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '3131',
-									width: '4696',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/4696.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '3131',
-									width: '4696',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1333',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '667',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '333',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '93',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/140.jpg',
-							},
-						],
-					},
-					elementId: '5819a5d8-d638-4da7-903f-1a7a5e2f775c',
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=140&quality=85&auto=format&fit=max&s=c8ec75c9fda9e676a5f9c22bd3bf901c',
-									width: 140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=f388fcbbf12716c29c47d90b7a88d00d',
-									width: 280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=120&quality=85&auto=format&fit=max&s=1210e28b5fbc744e22ded87b90968869',
-									width: 120,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=0b16571fc9891fd32a95e2e001089e99',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=380&quality=85&auto=format&fit=max&s=0deb295190bb8da6288d8b15629d514a',
-									width: 380,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=39b39319a4ee5770676ed699b8a50a23',
-									width: 760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=300&quality=85&auto=format&fit=max&s=f8f6722aef47ef10e446790272592de2',
-									width: 300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=16e4daf997a9fe988222a679a4b48a4e',
-									width: 600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=860&quality=85&auto=format&fit=max&s=5641123bed62366800f36b389c584d6c',
-									width: 860,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=554647fb4a731f64ecdf3fdff5f8d16b',
-									width: 1720,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=780&quality=85&auto=format&fit=max&s=6f83f1168f689c77a2db6136db37124c',
-									width: 780,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=7d9f3648bd0cf1881d7d99069824418a',
-									width: 1560,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1900&quality=85&auto=format&fit=max&s=df0f2e4860f7e21a862be68356a437f6',
-									width: 1900,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=3bf767d6c9e3035d69afd57cd725eb0d',
-									width: 3800,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1300&quality=85&auto=format&fit=max&s=b4aaa93fde52edc87f62f8c67151672a',
-									width: 1300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=553c14190a74bc2ca9decb234fd91db1',
-									width: 2600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1140&quality=85&auto=format&fit=max&s=83b02c981e25fbdf5e19a6ed9ef8fc08',
-									width: 1140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=7020cdbdb61721ac7b968471624df2de',
-									width: 2280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=980&quality=85&auto=format&fit=max&s=c5f77343aed013596b1a212ea4f28725',
-									width: 980,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=fefd3b1f66ecef9eb2992076af541095',
-									width: 1960,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=740&quality=85&auto=format&fit=max&s=6714c5981fb6fea0a38774bd9a314af7',
-									width: 740,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=1f4089b78af4e277a86355665b04d3ec',
-									width: 1480,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=660&quality=85&auto=format&fit=max&s=a50b035143395765c215b482ba82aec0',
-									width: 660,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=2a576a73c926f663af02f6b9a988405c',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=480&quality=85&auto=format&fit=max&s=3b28326ea29bbe41014ac9ab034c3c1a',
-									width: 480,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=07a991a945d2527e5d459347153c8a8d',
-									width: 960,
-								},
-							],
-						},
-					],
-					data: {
-						alt: 'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
-						caption:
-							'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
-						credit: 'Photograph: Patrick T Fallon/AFP/Getty Images',
-					},
-					position: 3,
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613760365000,
-			blockCreatedOnDisplay: '18.46 GMT',
-			blockLastUpdated: 1613760424000,
-			blockLastUpdatedDisplay: '18.47 GMT',
-			blockFirstPublished: 1613760425000,
-			blockFirstPublishedDisplay: '18.47 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.47',
-			contributors: [
-				{
-					name: 'Natalie Grover',
-				},
-			],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '603006868f08ad21ea6006c7',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Key question: <strong>how long till they fly the helicopter?</strong></p>',
-					elementId: 'dcac53ce-c765-453a-876e-7b86cb4d56a8',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario.</p>',
-					elementId: '6427e8ef-d3ba-4451-a439-fc408b17148c',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613760134000,
-			blockCreatedOnDisplay: '18.42 GMT',
-			blockLastUpdated: 1613760266000,
-			blockLastUpdatedDisplay: '18.44 GMT',
-			blockFirstPublished: 1613760266000,
-			blockFirstPublishedDisplay: '18.44 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.44',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-		{
-			id: '6030066b8f08bdbed283be4b',
-			elements: [
-				{
-					displayCredit: true,
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					role: 'inline',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '3000',
-									width: '4000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/4000.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '3000',
-									width: '4000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1500',
-									width: '2000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/2000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '750',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/1000.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '375',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/500.jpg',
-							},
-							{
-								index: 5,
-								fields: {
-									height: '105',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/140.jpg',
-							},
-						],
-					},
-					elementId: '8da0bc48-08e0-4169-903d-576e9b5bda46',
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=79b9f578604116a20becaa15616b9403',
-									width: 140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b07ed61915f695be4fd7e4bb2d0e415a',
-									width: 280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=4d164922cd857ca020ba542d6376944a',
-									width: 120,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=91a8428e9df88acee619e7879373e79b',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=9d51616fac736222b356a9e1fac28e53',
-									width: 380,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=608ac7a8755f891e2078b5c602d1a1c6',
-									width: 760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=f76acd8daad0de5bbc33bc47009a20cd',
-									width: 300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=5cbf781084463daff76c3cbb27d84ca9',
-									width: 600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=860&quality=85&auto=format&fit=max&s=be53c9a70eac45f46ee39ce2e7b195df',
-									width: 860,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=a93e212488775ecccc7eb529e53370f4',
-									width: 1720,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=780&quality=85&auto=format&fit=max&s=03a47c84f1ad313efe6c552939a9b3c0',
-									width: 780,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=835413e303e329be6e635f71825b8a51',
-									width: 1560,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1900&quality=85&auto=format&fit=max&s=583784cf3cfab33e2590806cb34f22f3',
-									width: 1900,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=3d842128332bfe5790267fd1475e1256',
-									width: 3800,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=4a046f9fba22acdff1d46130ca07dd0e',
-									width: 1300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=12ee921fc3efd02d5da9f0993e297929',
-									width: 2600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=8b8942ddd00603c9cba3bc374d9bdd1a',
-									width: 1140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=996b9b3caa45c83e28bc7d11c5ad71d4',
-									width: 2280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=980&quality=85&auto=format&fit=max&s=d0f64448826db408592ccdad0bbbbc59',
-									width: 980,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=636e62af717c87cd783fcb546677efd1',
-									width: 1960,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=740&quality=85&auto=format&fit=max&s=53458d7bd10b627057e1efba658e3a6f',
-									width: 740,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=9d13660a823e7faea398aa1829b87072',
-									width: 1480,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=0c4596cdfeb0ff395ee7f1df8b1a8e0e',
-									width: 660,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=7a6f5fdf456bca2d7bf22206eaa5293e',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=480&quality=85&auto=format&fit=max&s=c6b71c93a557880baa168d123dd8a6c2',
-									width: 480,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=4d72c94c4de2ba04ba4b10e414ce2aa4',
-									width: 960,
-								},
-							],
-						},
-					],
-					data: {
-						alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
-						caption:
-							'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
-						credit: 'Photograph: NASA/AFP/Getty Images',
-					},
-					position: 4,
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1613760107000,
-			blockCreatedOnDisplay: '18.41 GMT',
-			blockLastUpdated: 1613760121000,
-			blockLastUpdatedDisplay: '18.42 GMT',
-			blockFirstPublished: 1613760122000,
-			blockFirstPublishedDisplay: '18.42 GMT',
-			blockFirstPublishedDisplayNoTimezone: '18.42',
-			contributors: [],
-			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-		},
-	],
-	pagination: {
-		currentPage: 1,
-		totalPages: 4,
-		oldest: '?page=with:block-602fd0c48f08ad21ea600275&filterKeyEvents=false',
-		older: '?page=with:block-603006048f08c3cb92a5ca64&filterKeyEvents=false',
-	},
-	author: {
-		byline: 'Tom McCarthy and Natalie Grover',
-		twitterHandle: 'TeeMcSee',
-	},
-	byline: 'Tom McCarthy and Natalie Grover',
-	webPublicationDate: '2021-02-19T19:41:53.000Z',
-	webPublicationDateDeprecated: '2021-02-19T19:41:53.000Z',
-	webPublicationDateDisplay: 'Fri 19 Feb 2021 19.41 GMT',
-	webPublicationSecondaryDateDisplay:
-		'First published on Fri 19 Feb 2021 17.20 GMT',
-	editionLongForm: 'UK edition',
-	editionId: 'UK',
-	pageId: 'science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-	canonicalUrl:
-		'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-	format: {
-		design: 'LiveBlogDesign',
-		theme: 'NewsPillar',
-		display: 'StandardDisplay',
-	},
-	designType: 'Article',
-	tags: [
-		{
-			id: 'science/mars',
-			type: 'Keyword',
-			title: 'Mars',
-		},
-		{
-			id: 'science/nasa',
-			type: 'Keyword',
-			title: 'Nasa',
-		},
-		{
-			id: 'us-news/us-news',
-			type: 'Keyword',
-			title: 'US news',
-		},
-		{
-			id: 'science/space',
-			type: 'Keyword',
-			title: 'Space',
-		},
-		{
-			id: 'science/astronomy',
-			type: 'Keyword',
-			title: 'Astronomy',
-		},
-		{
-			id: 'world/world',
-			type: 'Keyword',
-			title: 'World news',
-		},
-		{
-			id: 'science/science',
-			type: 'Keyword',
-			title: 'Science',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'tone/minutebyminute',
-			type: 'Tone',
-			title: 'Minute by minute',
-		},
-		{
-			id: 'tone/news',
-			type: 'Tone',
-			title: 'News',
-		},
-		{
-			id: 'profile/tommccarthy',
-			type: 'Contributor',
-			title: 'Tom McCarthy',
-			twitterHandle: 'TeeMcSee',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2015/8/31/1441007677105/Tom-McCarthy.jpg?width=300&quality=85&auto=format&fit=max&s=5098d45c481ec5be0c0fb2b6bdc82b64',
-			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/10/09/Tom-McCarthy,-R.png?width=300&quality=85&auto=format&fit=max&s=daaffddc5c54f2f0f4d50ff4e26f1d34',
-		},
-		{
-			id: 'profile/natalie-grover',
-			type: 'Contributor',
-			title: 'Natalie Grover',
-			twitterHandle: 'NatalieGrover',
-		},
-		{
-			id: 'tracking/commissioningdesk/us-news',
-			type: 'Tracking',
-			title: 'US News',
-		},
-	],
-	pillar: 'news',
-	isLegacyInteractive: false,
-	isImmersive: false,
-	sectionLabel: 'Mars',
-	sectionUrl: 'science/mars',
-	sectionName: 'science',
-	subMetaSectionLinks: [
-		{
-			url: '/science/mars',
-			title: 'Mars',
-		},
-	],
-	subMetaKeywordLinks: [
-		{
-			url: '/science/nasa',
-			title: 'Nasa',
-		},
-		{
-			url: '/science/space',
-			title: 'Space',
-		},
-		{
-			url: '/science/astronomy',
-			title: 'Astronomy',
-		},
-	],
-	shouldHideAds: false,
-	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-	linkedData: [
-		{
-			'@type': 'LiveBlogPosting',
-			'@context': 'http://schema.org',
-			'@id': 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-			publisher: {
-				'@type': 'Organization',
-				'@context': 'https://schema.org',
-				'@id': 'https://www.theguardian.com#publisher',
-				name: 'The Guardian',
-				url: 'https://www.theguardian.com/',
-				logo: {
-					'@type': 'ImageObject',
-					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-					width: 190,
-					height: 60,
-				},
-				sameAs: [
-					'https://www.facebook.com/theguardian',
-					'https://twitter.com/guardian',
-					'https://www.youtube.com/user/TheGuardian',
-				],
-			},
-			isAccessibleForFree: true,
-			image: [
-				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-			],
-			author: [
-				{
-					'@type': 'Person',
-					name: 'Tom McCarthy',
-					sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-				},
-				{
-					'@type': 'Person',
-					name: 'Natalie Grover',
-					sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-				},
-			],
-			datePublished: '2021-02-19T19:41:53.000Z',
-			headline:
-				'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-			dateModified: '2021-02-19T19:47:39.000Z',
-			mainEntityOfPage:
-				'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-			coverageStartTime: '2021-02-19T19:41:53+0000',
-			coverageEndTime: '2021-02-19T19:47:39+0000',
-			liveBlogUpdate: [
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '60300f5f8f08ad21ea60071e',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'That’s it for our live coverage of Nasa’s celebratory news conference and Q&A following the successful landing of the rover Perseverance on Mars. To recap: The rover is “healthy” and undergoing systems testing. It already has beamed back stunning photos from the surface of Mars promising significant scientific discoveries ahead. The images include the first color images beamed directly from Mars as opposed to images touched up later. The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”. It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life. The wheeled rover could begin to move around its new home as early as late February. The rover’s mini helicopter could launch as early as April. Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission. The point is to determine whether there was life on Mars and sub',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '60300f338f08c3cb92a5cacb',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody: '#TBT',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '60300d5a8f08bdbed283be98',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody: '#FF',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '60300c878f08c3cb92a5cab0',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'Have you typed “perseverance” into Google today?',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '60300aa38f08ad21ea6006e5',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun. Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life.',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '60300a3a8f08c3cb92a5ca90',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the Nasa web site. McGregor signs off: “Everyone have a great day, on Earth and on Mars.”',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '6030096d8f08c3cb92a5ca88',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption. After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour!',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '603008b48f08bdbed283be5f',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'Next question: How did you celebrate? Answers include: Virtual happy hour “Socially distanced consumption of ice cream outdoors” “I went home and just passed out from just the excitement of the day” “In the coming days I’ll definitely be having a glass of wine” “It was super-exciting” “We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing” “Business as usual for a science team working on a Mars rover”',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '603008388f08c3cb92a5ca7b',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'Another key question: When will the rover drive? “We’re anticipating the earliest... would be sol 8 or 9... our current best estimate. “Maybe a short drive just to check everything out... “We’ll also be figuring out the route and direction we need to go.” That means rover could rove before February is out.',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '603007c48f08c3cb92a5ca74',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by Nasa. It is unknown whether the holes indicate volcanic or sedimentary rock.',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '6030076d8f08ad21ea6006cf',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'Attached to the rover’s belly is a diminutive helicopter called Ingenuity. The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity.',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '603006868f08ad21ea6006c7',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'Key question: how long till they fly the helicopter? “Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario.',
-				},
-				{
-					'@type': 'BlogPosting',
-					'@context': 'http://schema.org',
-					'@id': '6030066b8f08bdbed283be4b',
-					publisher: {
-						'@type': 'Organization',
-						'@context': 'https://schema.org',
-						'@id': 'https://www.theguardian.com#publisher',
-						name: 'The Guardian',
-						url: 'https://www.theguardian.com/',
-						logo: {
-							'@type': 'ImageObject',
-							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-							width: 190,
-							height: 60,
-						},
-						sameAs: [
-							'https://www.facebook.com/theguardian',
-							'https://twitter.com/guardian',
-							'https://www.youtube.com/user/TheGuardian',
-						],
-					},
-					isAccessibleForFree: true,
-					image: [
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
-						'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
-					],
-					author: [
-						{
-							'@type': 'Person',
-							name: 'Tom McCarthy',
-							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
-						},
-						{
-							'@type': 'Person',
-							name: 'Natalie Grover',
-							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
-						},
-					],
-					datePublished: '2021-02-19T19:41:53.000Z',
-					headline:
-						'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-					dateModified: '2021-02-19T19:47:39.000Z',
-					mainEntityOfPage:
-						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody: '',
-				},
-			],
-		},
-		{
-			'@type': 'WebPage',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-			potentialAction: {
-				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-			},
-		},
-	],
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-		'article:author':
-			'https://www.theguardian.com/profile/tommccarthy,https://www.theguardian.com/profile/natalie-grover',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
-		'al:ios:url':
-			'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:title':
+export const Live: Article = {
+	frontendData: {
+		version: 3,
+		headline:
 			'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
-		'fb:app_id': '180444840287',
-		'article:modified_time': '2021-02-19T19:47:39.000Z',
-		'og:image:height': '720',
-		'og:description':
-			'Team of experts answer questions about mission following safe landing on the red planet on Thursday – follow the briefing live',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'Science',
-		'article:published_time': '2021-02-19T19:41:53.000Z',
-		'article:tag': 'Mars,Nasa,US news,Space,Astronomy,World news,Science',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:creator': '@TeeMcSee',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-		'twitter:app:url:iphone':
-			'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=twitter',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&s=37ffd2c6ec44a4f5f66d88d8d3ec5e21',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=twitter',
-	},
-	config: {
-		references: [
+		standfirst:
+			'<p>Team of experts answer questions about mission following safe landing on the red planet on Thursday – follow the briefing live</p>\n<ul>\n <li><a href="https://www.theguardian.com/science/gallery/2021/feb/19/nasa-perseverance-mission-to-mars-in-pictures">In pictures: Perseverance mission to Mars</a></li>\n</ul>',
+		webTitle:
+			'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+		mainMediaElements: [
 			{
-				'rich-link':
-					'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				displayCredit: true,
+				_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+				role: 'inline',
+				media: {
+					allImages: [
+						{
+							index: 0,
+							fields: {
+								height: '84',
+								width: '140',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/140.jpg',
+						},
+						{
+							index: 1,
+							fields: {
+								height: '300',
+								width: '500',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/500.jpg',
+						},
+						{
+							index: 2,
+							fields: {
+								height: '600',
+								width: '1000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg',
+						},
+						{
+							index: 3,
+							fields: {
+								height: '1200',
+								width: '2000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/2000.jpg',
+						},
+						{
+							index: 4,
+							fields: {
+								height: '1229',
+								width: '2048',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/2048.jpg',
+						},
+						{
+							index: 5,
+							fields: {
+								isMaster: 'true',
+								height: '1229',
+								width: '2048',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg',
+						},
+					],
+				},
+				elementId: 'e2c74dad-5344-4f36-a672-edf514dea72b',
+				imageSources: [
+					{
+						weighting: 'inline',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=85&auto=format&fit=max&s=b93342a1d7d6c47eb03a861d8f9c5930',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=68e148b680a741f6a1bedf93d521f1cc',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=85&auto=format&fit=max&s=0c3b95be996a3eda5e09222c10c62d84',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3e3a43e1921bcffcb3254a32bfcf51ee',
+								width: 930,
+							},
+						],
+					},
+					{
+						weighting: 'thumbnail',
+						srcSet: [],
+					},
+					{
+						weighting: 'supporting',
+						srcSet: [],
+					},
+					{
+						weighting: 'showcase',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1020&quality=85&auto=format&fit=max&s=67e9d4132782282b0aa56f9525516417',
+								width: 1020,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f9eba00816f393597284695943d112cf',
+								width: 2040,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=940&quality=85&auto=format&fit=max&s=c6bbbcc0e77dcc8a039ea6f640a4eecb',
+								width: 940,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=dad0bd0860f6b4e037cc484c30887ce6',
+								width: 1880,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=85&auto=format&fit=max&s=975c2421c807af30a12c3e6c05d65875',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=28a9f8208b4ffa31540c03131f5c8a3a',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=85&auto=format&fit=max&s=b93342a1d7d6c47eb03a861d8f9c5930',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=68e148b680a741f6a1bedf93d521f1cc',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=85&auto=format&fit=max&s=0c3b95be996a3eda5e09222c10c62d84',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3e3a43e1921bcffcb3254a32bfcf51ee',
+								width: 930,
+							},
+						],
+					},
+					{
+						weighting: 'halfwidth',
+						srcSet: [],
+					},
+					{
+						weighting: 'immersive',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1900&quality=85&auto=format&fit=max&s=59566055d3c420f119709f59c40c5635',
+								width: 1900,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=4262655a6ae2b41cdd2784ed334b42bb',
+								width: 3800,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1300&quality=85&auto=format&fit=max&s=9a938ed8177af5ab092504bd03d13579',
+								width: 1300,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=ab736df6a83b603cdd32d3bf54b9e88b',
+								width: 2600,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1140&quality=85&auto=format&fit=max&s=06aa47685dd1df4ab8ac8629564f0b9d',
+								width: 1140,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c1c563ae6a46241e682cd8bf28ada246',
+								width: 2280,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=980&quality=85&auto=format&fit=max&s=1ec1f1d81333f9c2e2ac65da630b0eeb',
+								width: 980,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=259177aab6a766cd2ee81d414b35d873',
+								width: 1960,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=740&quality=85&auto=format&fit=max&s=a86504260f30dd6e0b7d00e326503ab9',
+								width: 740,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=0d6ec6efc41a8bd87b2fb0d470011cb5',
+								width: 1480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=85&auto=format&fit=max&s=975c2421c807af30a12c3e6c05d65875',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=28a9f8208b4ffa31540c03131f5c8a3a',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=480&quality=85&auto=format&fit=max&s=0eccfcaaf31c2bc0c7bafd5b8b5d6bc0',
+								width: 480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=29a9ce50ea4708671846476c613cce12',
+								width: 960,
+							},
+						],
+					},
+				],
+				data: {
+					alt: 'Perseverance rover as it touched down in the area known as Jezero crater.',
+					caption:
+						'Perseverance rover as it touched down in the area known as Jezero crater.',
+					credit: 'Photograph: NASA/Getty Images',
+				},
+				position: 1,
 			},
 		],
-		shortUrlId: '/p/d8ex5',
-		switches: {
-			prebidAppnexusUkRow: true,
-			clickToView: true,
-			prebidTrustx: true,
-			scAdFreeBanner: false,
-			compareVariantDecision: false,
-			enableSentryReporting: true,
-			lazyLoadContainers: true,
-			adFreeStrictExpiryEnforcement: false,
-			liveblogRendering: true,
-			remarketing: true,
-			registerWithPhone: false,
-			targeting: true,
-			extendedMostPopularFronts: true,
-			slotBodyEnd: true,
-			emailInlineInFooter: true,
-			facebookTrackingPixel: true,
-			serviceWorkerEnabled: false,
-			iasAdTargeting: true,
-			extendedMostPopular: true,
-			prebidAnalytics: true,
-			imrWorldwide: true,
-			acast: true,
-			twitterUwt: true,
-			prebidAppnexusInvcode: true,
-			prebidAppnexus: true,
-			enableDiscussionSwitch: true,
-			prebidXaxis: true,
-			interactiveFullHeaderSwitch: false,
-			discussionAllPageSize: true,
-			prebidUserSync: true,
-			audioOnwardJourneySwitch: true,
-			mobileStickyPrebid: true,
-			breakingNews: true,
-			externalVideoEmbeds: true,
-			carrotTrafficDriver: true,
-			geoMostPopular: true,
-			weAreHiring: true,
-			relatedContent: true,
-			thirdPartyEmbedTracking: true,
-			prebidOzone: true,
-			prebidAdYouLike: true,
-			mostViewedFronts: true,
-			abSignInGateMainControl: true,
-			ampPrebid: true,
-			googleSearch: true,
-			brazeSwitch: true,
-			consentManagement: true,
-			commercial: true,
-			redplanetForAus: true,
-			prebidSonobi: true,
-			idProfileNavigation: true,
-			confiantAdVerification: true,
-			discussionAllowAnonymousRecommendsSwitch: false,
-			scrollDepth: true,
-			permutive: true,
-			comscore: true,
-			webFonts: true,
-			prebidImproveDigital: true,
-			ophan: true,
-			crosswordSvgThumbnails: true,
-			prebidTriplelift: true,
-			weather: true,
-			commercialOutbrainNewids: true,
-			dotcomRendering: true,
-			abSignInGateMainVariant: true,
-			hostedVideoAutoplay: true,
-			abAdblockAsk: true,
-			prebidPubmatic: true,
-			autoRefresh: true,
-			enhanceTweets: true,
-			prebidIndexExchange: true,
-			prebidOpenx: true,
-			idCookieRefresh: true,
-			sharingComments: true,
-			abSignInGateMandatory: true,
-			discussionPageSize: true,
-			smartAppBanner: false,
-			boostGaUserTimingFidelity: false,
-			historyTags: true,
-			mobileStickyLeaderboard: true,
-			abDeeplyReadTest: false,
-			surveys: true,
-			remoteBanner: true,
-			inizio: true,
-			prebidHeaderBidding: true,
-			a9HeaderBidding: true,
-			lightbox: true,
-		},
-		keywordIds:
-			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
-		sharedAdTargeting: {
-			ct: 'article',
-			co: ['jennifer-rankin'],
-			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-			su: ['0'],
-			edition: 'uk',
-			tn: ['news'],
-			p: 'ng',
-			k: [
-				'eu',
-				'flooding',
-				'world',
-				'europe-news',
-				'natural-disasters',
-				'science',
-				'environment',
-				'climate-change',
-				'wildfires',
-				'scienceofclimatechange',
-			],
-			sh: 'https://www.theguardian.com/p/d8ex5',
-		},
-		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
-		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
-		discussionApiClientHeader: 'nextgen',
-		shouldHideReaderRevenue: false,
-		sentryHost: 'app.getsentry.com/35463',
-		isPaidContent: false,
-		headline: 'Headline string',
-		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: true,
-		adUnit: '/59666047/theguardian.com/environment/article/ng',
-		videoDuration: 0,
-		stage: 'PROD',
-		isSensitive: false,
-		isDev: false,
-		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords:
-			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
-		revisionNumber: 'DEV',
-		section: 'environment',
-		isPhotoEssay: false,
-		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
-		isLive: false,
-		host: 'https://www.theguardian.com',
-		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		contentType: 'Article',
-		idUrl: 'https://profile.theguardian.com',
-		author: 'Jennifer Rankin',
-		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
-		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
-		edition: 'UK',
-		ipsosTag: 'environment',
-		isLiveBlog: false,
-		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
-		webPublicationDate: 1581314427000,
-		discussionD2Uid: 'zHoBy6HNKsk',
-	},
-	guardianBaseURL: 'https://www.theguardian.com',
-	contentType: 'LiveBlog',
-	hasRelated: true,
-	hasStoryPackage: false,
-	beaconURL: '//phar.gu-web.net',
-	isCommentable: false,
-	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'world',
-						'astronomy',
-						'space',
-						'us-news',
-						'nasa',
-						'science',
-						'mars',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/gfc2f',
-				},
-				{
-					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'ct',
-					value: 'liveblog',
-				},
-				{
-					name: 'tn',
-					value: ['minutebyminute', 'news'],
-				},
-				{
-					name: 'co',
-					value: ['natalie-grover', 'tommccarthy'],
-				},
-			],
-		},
-		US: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'world',
-						'astronomy',
-						'space',
-						'us-news',
-						'nasa',
-						'science',
-						'mars',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'us',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/gfc2f',
-				},
-				{
-					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'ct',
-					value: 'liveblog',
-				},
-				{
-					name: 'tn',
-					value: ['minutebyminute', 'news'],
-				},
-				{
-					name: 'co',
-					value: ['natalie-grover', 'tommccarthy'],
-				},
-			],
-		},
-		AU: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'world',
-						'astronomy',
-						'space',
-						'us-news',
-						'nasa',
-						'science',
-						'mars',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'au',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/gfc2f',
-				},
-				{
-					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'ct',
-					value: 'liveblog',
-				},
-				{
-					name: 'tn',
-					value: ['minutebyminute', 'news'],
-				},
-				{
-					name: 'co',
-					value: ['natalie-grover', 'tommccarthy'],
-				},
-			],
-		},
-		INT: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'world',
-						'astronomy',
-						'space',
-						'us-news',
-						'nasa',
-						'science',
-						'mars',
-					],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/gfc2f',
-				},
-				{
-					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-				},
-				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'ct',
-					value: 'liveblog',
-				},
-				{
-					name: 'tn',
-					value: ['minutebyminute', 'news'],
-				},
-				{
-					name: 'co',
-					value: ['natalie-grover', 'tommccarthy'],
-				},
-			],
-		},
-		EUR: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'world',
-						'astronomy',
-						'space',
-						'us-news',
-						'nasa',
-						'science',
-						'mars',
-					],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/gfc2f',
-				},
-				{
-					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-				},
-				{
-					name: 'edition',
-					value: 'eur',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'ct',
-					value: 'liveblog',
-				},
-				{
-					name: 'tn',
-					value: ['minutebyminute', 'news'],
-				},
-				{
-					name: 'co',
-					value: ['natalie-grover', 'tommccarthy'],
-				},
-			],
-		},
-	},
-	pageType: {
-		hasShowcaseMainElement: false,
-		isFront: false,
-		isLiveblog: true,
-		isMinuteArticle: false,
-		isPaidContent: false,
-		isPreview: false,
-		isSensitive: false,
-	},
-	trailText:
-		'Team of experts answer questions about mission following safe landing on the red planet on Thursday – follow the briefing live',
-	nav: {
-		currentUrl: '/science',
-		pillars: [
+		main: '<figure class="element element-image" data-media-id="2dbb8d5200a0c46420d3d9145194d7bcb9311d44"> \n <img src="https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg" alt="Perseverance rover as it touched down in the area known as Jezero crater." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Perseverance rover as it touched down in the area known as Jezero crater.</span> <span class="element-image__credit">Photograph: NASA/Getty Images</span> \n </figcaption> \n</figure>',
+		filterKeyEvents: false,
+		keyEvents: [
 			{
+				id: '60300f5f8f08ad21ea60071e',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars.</p>',
+						elementId: '9b263f1c-8909-4721-94a8-1e4d10e65781',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>To recap:</p>',
+						elementId: 'de36cbea-8822-43a1-b606-172b8a8b81bd',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<ul>\n <li>The rover is “healthy” and undergoing systems testing.</li>\n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li>\n <li>The images include the first color images beamed directly from Mars as opposed to images touched up later.</li>\n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li>\n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li>\n <li>The wheeled rover could begin to move around its new home as early as late February.</li>\n <li>The rover’s mini helicopter could launch as early as April.</li>\n <li>Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li>\n <li>The point is to determine whether there was life on Mars and subsidiary questions.</li>\n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li>\n</ul>',
+						elementId: 'c2c9f830-8147-401d-98ba-d3984081c927',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: true,
+				},
+				blockCreatedOn: 1613762399000,
+				blockCreatedOnDisplay: '19.19 GMT',
+				blockLastUpdated: 1613763519000,
+				blockLastUpdatedDisplay: '19.38 GMT',
+				blockFirstPublished: 1613763003000,
+				blockFirstPublishedDisplay: '19.30 GMT',
+				blockFirstPublishedDisplayNoTimezone: '19.30',
+				title: 'Summary',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '603001b98f08c3cb92a5ca08',
+				elements: [
+					{
+						displayCredit: true,
+						_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+						role: 'inline',
+						media: {
+							allImages: [
+								{
+									index: 0,
+									fields: {
+										height: '2400',
+										width: '4000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/4000.jpg',
+								},
+								{
+									index: 1,
+									fields: {
+										isMaster: 'true',
+										height: '2400',
+										width: '4000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg',
+								},
+								{
+									index: 2,
+									fields: {
+										height: '1200',
+										width: '2000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/2000.jpg',
+								},
+								{
+									index: 3,
+									fields: {
+										height: '600',
+										width: '1000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/1000.jpg',
+								},
+								{
+									index: 4,
+									fields: {
+										height: '300',
+										width: '500',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/500.jpg',
+								},
+								{
+									index: 5,
+									fields: {
+										height: '84',
+										width: '140',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/140.jpg',
+								},
+							],
+						},
+						elementId: 'bb34eff0-92f7-4464-bbb7-0c37d321cecb',
+						imageSources: [
+							{
+								weighting: 'inline',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'thumbnail',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=87c37270fb8407941d88e74c04e2762d',
+										width: 140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fb665850dd7e3efe8826797129968bb9',
+										width: 280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=8fb190de13314138fbf0ae411e9341d0',
+										width: 120,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=2a975c552341b8d95f8fffea51912917',
+										width: 240,
+									},
+								],
+							},
+							{
+								weighting: 'supporting',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=dd182f8a9555434b29bb4e8292dd4a88',
+										width: 380,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=c0c4fe10071c27d5d86bc6cfb9f3370c',
+										width: 760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=221f80b8ac626ea906fed38aeb67c36d',
+										width: 300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=d7595a03c70a0734f27581c6541b9a69',
+										width: 600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'showcase',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=860&quality=85&auto=format&fit=max&s=7ed8ea7b1e1491b11cc8f3b7a9616778',
+										width: 860,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=8c4003f3654d0c5257ef34b54c5ee161',
+										width: 1720,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=780&quality=85&auto=format&fit=max&s=e3a2ccd43e57c00feef1743b80eca75e',
+										width: 780,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=f82d999dcacd3bfc2c8a572cc95ab1e8',
+										width: 1560,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'halfwidth',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'immersive',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1900&quality=85&auto=format&fit=max&s=c5607621530da68f30fff606055aabed',
+										width: 1900,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=f149f84846ee4bc34b77e5b64589f852',
+										width: 3800,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=e393f002906cb6ef2f7bbf05da8943d5',
+										width: 1300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f9860e3e3022cd91062ccc788137aa4',
+										width: 2600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=50f0853e16f19889587ea5744f28883e',
+										width: 1140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=8781d4362ead88ae16be8d30396bf695',
+										width: 2280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=980&quality=85&auto=format&fit=max&s=a37ba5e4c2361fded16fecfc2235f92e',
+										width: 980,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=8d4990f93153b4e7d0414727725c7b47',
+										width: 1960,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=740&quality=85&auto=format&fit=max&s=f5c619b67ae519b87b2f3e9f82684c75',
+										width: 740,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=9d083160ddbabadba863eeda3df4ce06',
+										width: 1480,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=978b7e2eec7178a53430971e82505e08',
+										width: 660,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=260ae4003ab109f6ac45892daf15795d',
+										width: 1320,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=480&quality=85&auto=format&fit=max&s=c92cce222553e3218022c94d72ab036e',
+										width: 480,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=783c3c45a7837e1ff0704264e5bb9234',
+										width: 960,
+									},
+								],
+							},
+						],
+						data: {
+							alt: 'This photo released by NASA, shows the Perseverance rover being lowered by the Sky Crane to the surface of Mars on February 18, 2021.',
+							caption:
+								'This photo released by NASA, shows the Perseverance rover being lowered by the Sky Crane to the surface of Mars on February 18, 2021.',
+							credit: 'Photograph: NASA/AFP/Getty Images',
+						},
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: true,
+					summary: false,
+				},
+				blockCreatedOn: 1613758905000,
+				blockCreatedOnDisplay: '18.21 GMT',
+				blockLastUpdated: 1613759908000,
+				blockLastUpdatedDisplay: '18.38 GMT',
+				blockFirstPublished: 1613758917000,
+				blockFirstPublishedDisplay: '18.21 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.21',
+				title: 'New image of Perseverance shows rover being lowered to Mars surface',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '602ffd998f08c3cb92a5c9ac',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Steltzner is showing some of the most fantastic images from space explorations past, from moonshots to the Hubble telescope.</p>',
+						elementId: '388ca529-3af2-4b5d-acbc-778eac6e1c3e',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>He proposes an image of the dangling Perseverance Rover taken yesterday – it looks like a futuristic marionette – as the next entry in this cosmic scrapbook. <br></p>',
+						elementId: '754e30b0-e57f-4ec7-a41e-31b4726f89b8',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: true,
+					summary: false,
+				},
+				blockCreatedOn: 1613757849000,
+				blockCreatedOnDisplay: '18.04 GMT',
+				blockLastUpdated: 1613758589000,
+				blockLastUpdatedDisplay: '18.16 GMT',
+				blockFirstPublished: 1613757946000,
+				blockFirstPublishedDisplay: '18.05 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.05',
+				title: 'Nasa scientists show new images of Perseverance rover after Mars landing',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '602fd0c48f08ad21ea600275',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Members of the National Aeronautics and <a href="https://www.theguardian.com/science/space" data-component="auto-linked-tag">Space</a> Administration (Nasa) team that put a rover on Mars on Thursday are preparing to host a news conference and answer questions about the mission.</p>',
+						elementId: 'b670eeb6-8b56-4f58-bf0a-268c5e2fb999',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The rover, called Perseverance or Percy for short, is on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> to search for signs of ancient life and collect samples to be returned by a future mission. About the size of a car, the wheeled rover is equipped with cameras, microphones, drills and even a small helicopter.</p>',
+						elementId: '5968549f-83a0-4c00-98a2-328876b57ac5',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Guardian science correspondent Natalie Grover reports of Percy’s mission:</p>',
+						elementId: 'eda40664-716c-4b3f-b1d4-e42c324bd111',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+						html: '<blockquote class="quoted">\n <p>Previous Mars missions including <a href="https://viewer.gutools.co.uk/science/2013/jul/28/curiosity-rover-descent-mars-nasa">Curiosity</a> and Opportunity have suggested Mars was once a wet planet with an environment likely to have been supportive of life billions of years ago. Astrobiologists hope this latest mission can offer some evidence to prove whether that was the case.</p>\n</blockquote>',
+						elementId: 'fcf5d03d-b3cd-45ee-99dd-8510bfc4e0da',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a> scientists appear to feel they may be tantalizingly close to a discovery that could change the way we see the universe and our home in it. Here was the scene in the control room near Los Angeles just before 1pm local time on Thursday when Percy’s safe touchdown on Mars was confirmed:<br></p>',
+						elementId: '49d89ec1-e20c-4ebc-a625-38168fd67c0b',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+						source: 'YouTube',
+						originalUrl:
+							'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
+						elementId: '58ca4232-8d0b-4078-97a6-bce3da9b9517',
+						width: 460,
+						embedUrl:
+							'https://www.youtube-nocookie.com/embed/Ew24GrPKi3Y?wmode=opaque&feature=oembed',
+						role: 'inline',
+						url: 'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
+						height: 259,
+						sourceDomain: 'youtube-nocookie.com',
+						title: 'Nasa mission control erupts as Perseverance rover successfully lands on Mars',
+						isThirdPartyTracking: false,
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The robotic vehicle sailed through space for nearly seven months, covering 293m miles (472m km) before piercing the Martian atmosphere at 12,000mph (19,000km/h) to begin its approach to touchdown on the planet’s surface.</p>',
+						elementId: '49b8d121-1410-4af0-ad45-0235acd180e7',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Thank you for joining our live coverage.</p>',
+						elementId: 'd60cb3d0-d6f4-4a8d-9dea-acee3329e5a5',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: true,
+					summary: false,
+				},
+				blockCreatedOn: 1613755208000,
+				blockCreatedOnDisplay: '17.20 GMT',
+				blockLastUpdated: 1613753141000,
+				blockLastUpdatedDisplay: '16.45 GMT',
+				blockFirstPublished: 1613755208000,
+				blockFirstPublishedDisplay: '17.20 GMT',
+				blockFirstPublishedDisplayNoTimezone: '17.20',
+				title: 'Nasa to host Perseverance rover news conference',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+		],
+		mostRecentBlockId: 'block-60300f5f8f08ad21ea60071e',
+		blocks: [
+			{
+				id: '60300f5f8f08ad21ea60071e',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars.</p>',
+						elementId: 'e2a7667c-b231-4425-96ad-4501f0d507cf',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>To recap:</p>',
+						elementId: '0ed31084-c39b-4da6-827a-1df31ad0661c',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<ul>\n <li>The rover is “healthy” and undergoing systems testing.</li>\n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li>\n <li>The images include the first color images beamed directly from Mars as opposed to images touched up later.</li>\n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li>\n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li>\n <li>The wheeled rover could begin to move around its new home as early as late February.</li>\n <li>The rover’s mini helicopter could launch as early as April.</li>\n <li>Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li>\n <li>The point is to determine whether there was life on Mars and subsidiary questions.</li>\n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li>\n</ul>',
+						elementId: 'bb31d01d-e3cc-4e8b-afb2-af41f63e383a',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: true,
+				},
+				blockCreatedOn: 1613762399000,
+				blockCreatedOnDisplay: '19.19 GMT',
+				blockLastUpdated: 1613763519000,
+				blockLastUpdatedDisplay: '19.38 GMT',
+				blockFirstPublished: 1613763003000,
+				blockFirstPublishedDisplay: '19.30 GMT',
+				blockFirstPublishedDisplayNoTimezone: '19.30',
+				title: 'Summary',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '60300f338f08c3cb92a5cacb',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>#TBT</p>',
+						elementId: '845b0e77-4b6c-4ed0-8650-e86012020667',
+					},
+					{
+						expired: false,
+						assetId: 'XmP56yBy-18',
+						posterImage: [
+							{
+								url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/2000.jpg',
+								width: 2000,
+							},
+							{
+								url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/1000.jpg',
+								width: 1000,
+							},
+							{
+								url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/500.jpg',
+								width: 500,
+							},
+							{
+								url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/140.jpg',
+								width: 140,
+							},
+							{
+								url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/3282.jpg',
+								width: 3282,
+							},
+						],
+						id: '60606947-4f1f-4343-9bb7-000e91502129',
+						elementId: 'b1c5b1e4-2a1e-4089-b7b0-819ecb8b3233',
+						duration: 142,
+						_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
+						mediaTitle:
+							'Nasa launches Perseverance rover in mission to find evidence of life on Mars – video',
+						channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613762355000,
+				blockCreatedOnDisplay: '19.19 GMT',
+				blockLastUpdated: 1613762365000,
+				blockLastUpdatedDisplay: '19.19 GMT',
+				blockFirstPublished: 1613762366000,
+				blockFirstPublishedDisplay: '19.19 GMT',
+				blockFirstPublishedDisplayNoTimezone: '19.19',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '60300d5a8f08bdbed283be98',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>#FF</p>',
+						elementId: '0e7be1f3-b979-47a4-ac25-1bcac544f710',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
+						source: 'Twitter',
+						id: '1362831783444717568',
+						elementId: 'de2f40d8-91b0-45f3-ba9b-4c37fccf849a',
+						hasMedia: false,
+						role: 'inline',
+						url: 'https://twitter.com/NASAPersevere/status/1362831783444717568',
+						isThirdPartyTracking: false,
+						html: '<blockquote class="nojs-tweet"><p lang="en" dir="ltr">I love rocks. Look at these right next to my wheel. Are they volcanic or sedimentary? What story do they tell? Can’t wait to find out.<a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a><a href="https://t.co/7w3rbvbyoL">https://t.co/7w3rbvbyoL</a> <a href="https://t.co/H3q1M0YJAd">pic.twitter.com/H3q1M0YJAd</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362831783444717568?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
+						source: 'Twitter',
+						id: '1362839907824136193',
+						elementId: 'e756fd30-aeab-4839-937f-6e19702f02f4',
+						hasMedia: false,
+						role: 'inline',
+						url: 'https://twitter.com/NASAPersevere/status/1362839907824136193',
+						isThirdPartyTracking: false,
+						html: '<blockquote class="nojs-tweet"><p lang="en" dir="ltr">Every picture tells a story. This one captures me in midair, floating over Mars while hanging from my parachute during the final <a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a>.<br><br>Latest update and images: <a href="https://t.co/fnnEOOMWsV">https://t.co/fnnEOOMWsV</a> <a href="https://t.co/39aGp963a3">pic.twitter.com/39aGp963a3</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362839907824136193?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613761882000,
+				blockCreatedOnDisplay: '19.11 GMT',
+				blockLastUpdated: 1613761914000,
+				blockLastUpdatedDisplay: '19.11 GMT',
+				blockFirstPublished: 1613761914000,
+				blockFirstPublishedDisplay: '19.11 GMT',
+				blockFirstPublishedDisplayNoTimezone: '19.11',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '60300c878f08c3cb92a5cab0',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Have you typed “<a href="https://www.google.com/search?q=perseverance&amp;oq=pers&amp;aqs=chrome.0.69i59j69i57j0l3j46j69i60j69i61.1091j0j7&amp;sourceid=chrome&amp;ie=UTF-8">perseverance</a>” into Google today?</p>',
+						elementId: '62323cad-f3e2-4091-812a-2757cf33dd54',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613761671000,
+				blockCreatedOnDisplay: '19.07 GMT',
+				blockLastUpdated: 1613761799000,
+				blockLastUpdatedDisplay: '19.09 GMT',
+				blockFirstPublished: 1613761799000,
+				blockFirstPublishedDisplay: '19.09 GMT',
+				blockFirstPublishedDisplayNoTimezone: '19.09',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '60300aa38f08ad21ea6006e5',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun.</p>',
+						elementId: '49a4b347-4403-4182-9651-f1d2156e5dc9',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life. <br></p>',
+						elementId: '832980d5-2de8-4cc0-94b9-3429a0e012b1',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613761187000,
+				blockCreatedOnDisplay: '18.59 GMT',
+				blockLastUpdated: 1613763647000,
+				blockLastUpdatedDisplay: '19.40 GMT',
+				blockFirstPublished: 1613761199000,
+				blockFirstPublishedDisplay: '18.59 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.59',
+				contributors: [
+					{
+						name: 'Natalie Grover',
+					},
+				],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '60300a3a8f08c3cb92a5ca90',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the <a href="https://mars.nasa.gov/mars2020/">Nasa web site</a>.</p>',
+						elementId: 'a41e4bba-4bc9-4f2b-983a-bc3234f83e78',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>McGregor signs off:</p>',
+						elementId: 'c87dcc1f-2028-4240-93e7-e35fc9ee7a09',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>“Everyone have a great day, on Earth and on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a>.”</p>',
+						elementId: '46112543-016e-42c8-b61a-fa2375b115e9',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613761082000,
+				blockCreatedOnDisplay: '18.58 GMT',
+				blockLastUpdated: 1613763665000,
+				blockLastUpdatedDisplay: '19.41 GMT',
+				blockFirstPublished: 1613761171000,
+				blockFirstPublishedDisplay: '18.59 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.59',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '6030096d8f08c3cb92a5ca88',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption.</p>',
+						elementId: '46eb8b83-616b-4797-a59e-2b58da8c01d9',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour! <br></p>',
+						elementId: '2a8110f3-f825-42ba-b7a7-df5eae1f8d6e',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613760877000,
+				blockCreatedOnDisplay: '18.54 GMT',
+				blockLastUpdated: 1613760893000,
+				blockLastUpdatedDisplay: '18.54 GMT',
+				blockFirstPublished: 1613760893000,
+				blockFirstPublishedDisplay: '18.54 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.54',
+				contributors: [
+					{
+						name: 'Natalie Grover',
+					},
+				],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '603008b48f08bdbed283be5f',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Next question: <strong>How did you celebrate?</strong></p>',
+						elementId: '49fbb65b-52a9-48d1-bacd-87a690d877bc',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Answers include:</p>',
+						elementId: 'ad341bd7-2022-414d-bc68-89f6491f23b3',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<ul>\n <li>Virtual happy hour</li>\n <li>“Socially distanced consumption of ice cream outdoors”</li>\n <li>“I went home and just passed out from just the excitement of the day”</li>\n <li>“In the coming days I’ll definitely be having a glass of wine”</li>\n <li>“It was super-exciting”</li>\n <li>“We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing”</li>\n <li>“Business as usual for a science team working on a <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> rover”</li>\n</ul>',
+						elementId: 'fb67447f-a15b-43b9-bc12-b267dba7416a',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613760692000,
+				blockCreatedOnDisplay: '18.51 GMT',
+				blockLastUpdated: 1613763713000,
+				blockLastUpdatedDisplay: '19.41 GMT',
+				blockFirstPublished: 1613760864000,
+				blockFirstPublishedDisplay: '18.54 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.54',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '603008388f08c3cb92a5ca7b',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Another key question: <strong>When will the rover drive? </strong></p>',
+						elementId: 'ced8f95a-37e6-4836-9247-8862bbced392',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>“We’re anticipating the earliest... would be sol 8 or 9... our current best estimate.</p>',
+						elementId: '24a27e87-27ac-4aa1-b738-bb95bf9332a5',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>“Maybe a short drive just to check everything out...</p>',
+						elementId: 'e9d1f65f-40e4-4965-b3fc-a96d03e87277',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>“We’ll also be figuring out the route and direction we need to go.”</p>',
+						elementId: '45cbb5a5-5a5f-4afe-a7db-bfaedf3eb04d',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>That means rover could rove before February is out.</p>',
+						elementId: 'ad482687-022f-4b0f-aff5-f879cbe5a0ae',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613760568000,
+				blockCreatedOnDisplay: '18.49 GMT',
+				blockLastUpdated: 1613760679000,
+				blockLastUpdatedDisplay: '18.51 GMT',
+				blockFirstPublished: 1613760679000,
+				blockFirstPublishedDisplay: '18.51 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.51',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '603007c48f08c3cb92a5ca74',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a>. It is unknown whether the holes indicate volcanic or sedimentary rock.</p>',
+						elementId: '955e6bfc-a2b2-43d0-8474-92ece9155ca8',
+					},
+					{
+						displayCredit: true,
+						_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+						role: 'inline',
+						media: {
+							allImages: [
+								{
+									index: 0,
+									fields: {
+										height: '3000',
+										width: '4000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/4000.jpg',
+								},
+								{
+									index: 1,
+									fields: {
+										isMaster: 'true',
+										height: '3000',
+										width: '4000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg',
+								},
+								{
+									index: 2,
+									fields: {
+										height: '1500',
+										width: '2000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/2000.jpg',
+								},
+								{
+									index: 3,
+									fields: {
+										height: '750',
+										width: '1000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/1000.jpg',
+								},
+								{
+									index: 4,
+									fields: {
+										height: '375',
+										width: '500',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/500.jpg',
+								},
+								{
+									index: 5,
+									fields: {
+										height: '105',
+										width: '140',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/140.jpg',
+								},
+							],
+						},
+						elementId: 'b7f6f002-33b2-4ecc-b0fe-471a0777c827',
+						imageSources: [
+							{
+								weighting: 'inline',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'thumbnail',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=c0243cd0dc3451467801871faf91d37c',
+										width: 140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=90eae9662baaae39be5c932eb43db411',
+										width: 280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=f4239320fca925504ce9590b82854fc0',
+										width: 120,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=814bfbaf0ec52db9a71bbf8672a07edd',
+										width: 240,
+									},
+								],
+							},
+							{
+								weighting: 'supporting',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=13713b8b02366b4beddf8e1bb3e2dede',
+										width: 380,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=71e01c69477ac4c9d4382d95b34937a2',
+										width: 760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=a784d2696e39f80be6b98e14a2b9bd67',
+										width: 300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=594bb948379cfc4801faaeaa12652748',
+										width: 600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'showcase',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=860&quality=85&auto=format&fit=max&s=54134bdbc365b54aae0400a4462e8033',
+										width: 860,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=222bab875209d6874760692baceb1acc',
+										width: 1720,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=780&quality=85&auto=format&fit=max&s=cbe8f5e029623642b23b34d5227bfd5b',
+										width: 780,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=9c8d7cf21a17aa032dbb14b8076dd43e',
+										width: 1560,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'halfwidth',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'immersive',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1900&quality=85&auto=format&fit=max&s=13c21894fee6c3632cdcbe351f95e121',
+										width: 1900,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=d690c9b9014fc64325c202e4fdf53cb2',
+										width: 3800,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=84e5f56cbbf0a210bff7adabaa4724ba',
+										width: 1300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=3525873cc7be9270f0c8c34e8eb37d8c',
+										width: 2600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=b7e0df28c44175474c01155c3cb27258',
+										width: 1140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=4278f04351c3f8b7f4f32d2857afc0f8',
+										width: 2280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=980&quality=85&auto=format&fit=max&s=fe9d440ebcb4d4d8445d6d14631b927f',
+										width: 980,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=466f3f38972bfc4e6fc1ad9b6288d383',
+										width: 1960,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=740&quality=85&auto=format&fit=max&s=2b15920d0c1ac8624d9939a36a0042b4',
+										width: 740,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=114c9eb60e41463f7907056dd8a773d3',
+										width: 1480,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=2d6ae2c6a7919e85e2b22081c46985bd',
+										width: 660,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f51da918a3e88ceae3cb1d8b59095d8a',
+										width: 1320,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=480&quality=85&auto=format&fit=max&s=e03240f58152aab8d3e30e9b29e8ccbb',
+										width: 480,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=8d3dfc2a30fe49902a389550d2586236',
+										width: 960,
+									},
+								],
+							},
+						],
+						data: {
+							alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
+							caption:
+								'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
+							credit: 'Photograph: NASA/AFP/Getty Images',
+						},
+						position: 2,
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613760452000,
+				blockCreatedOnDisplay: '18.47 GMT',
+				blockLastUpdated: 1613760511000,
+				blockLastUpdatedDisplay: '18.48 GMT',
+				blockFirstPublished: 1613760512000,
+				blockFirstPublishedDisplay: '18.48 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.48',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '6030076d8f08ad21ea6006cf',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Attached to the rover’s belly is a diminutive helicopter called Ingenuity.</p>',
+						elementId: '8304e540-8b11-4643-8179-09e12b54e5a7',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity. <br></p>',
+						elementId: '57ba4ada-fc02-4acd-bb8a-26a42606076d',
+					},
+					{
+						displayCredit: true,
+						_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+						role: 'inline',
+						media: {
+							allImages: [
+								{
+									index: 0,
+									fields: {
+										height: '3131',
+										width: '4696',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/4696.jpg',
+								},
+								{
+									index: 1,
+									fields: {
+										isMaster: 'true',
+										height: '3131',
+										width: '4696',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg',
+								},
+								{
+									index: 2,
+									fields: {
+										height: '1333',
+										width: '2000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/2000.jpg',
+								},
+								{
+									index: 3,
+									fields: {
+										height: '667',
+										width: '1000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/1000.jpg',
+								},
+								{
+									index: 4,
+									fields: {
+										height: '333',
+										width: '500',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/500.jpg',
+								},
+								{
+									index: 5,
+									fields: {
+										height: '93',
+										width: '140',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/140.jpg',
+								},
+							],
+						},
+						elementId: '5819a5d8-d638-4da7-903f-1a7a5e2f775c',
+						imageSources: [
+							{
+								weighting: 'inline',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'thumbnail',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=140&quality=85&auto=format&fit=max&s=c8ec75c9fda9e676a5f9c22bd3bf901c',
+										width: 140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=f388fcbbf12716c29c47d90b7a88d00d',
+										width: 280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=120&quality=85&auto=format&fit=max&s=1210e28b5fbc744e22ded87b90968869',
+										width: 120,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=0b16571fc9891fd32a95e2e001089e99',
+										width: 240,
+									},
+								],
+							},
+							{
+								weighting: 'supporting',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=380&quality=85&auto=format&fit=max&s=0deb295190bb8da6288d8b15629d514a',
+										width: 380,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=39b39319a4ee5770676ed699b8a50a23',
+										width: 760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=300&quality=85&auto=format&fit=max&s=f8f6722aef47ef10e446790272592de2',
+										width: 300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=16e4daf997a9fe988222a679a4b48a4e',
+										width: 600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'showcase',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=860&quality=85&auto=format&fit=max&s=5641123bed62366800f36b389c584d6c',
+										width: 860,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=554647fb4a731f64ecdf3fdff5f8d16b',
+										width: 1720,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=780&quality=85&auto=format&fit=max&s=6f83f1168f689c77a2db6136db37124c',
+										width: 780,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=7d9f3648bd0cf1881d7d99069824418a',
+										width: 1560,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'halfwidth',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'immersive',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1900&quality=85&auto=format&fit=max&s=df0f2e4860f7e21a862be68356a437f6',
+										width: 1900,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=3bf767d6c9e3035d69afd57cd725eb0d',
+										width: 3800,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1300&quality=85&auto=format&fit=max&s=b4aaa93fde52edc87f62f8c67151672a',
+										width: 1300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=553c14190a74bc2ca9decb234fd91db1',
+										width: 2600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1140&quality=85&auto=format&fit=max&s=83b02c981e25fbdf5e19a6ed9ef8fc08',
+										width: 1140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=7020cdbdb61721ac7b968471624df2de',
+										width: 2280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=980&quality=85&auto=format&fit=max&s=c5f77343aed013596b1a212ea4f28725',
+										width: 980,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=fefd3b1f66ecef9eb2992076af541095',
+										width: 1960,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=740&quality=85&auto=format&fit=max&s=6714c5981fb6fea0a38774bd9a314af7',
+										width: 740,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=1f4089b78af4e277a86355665b04d3ec',
+										width: 1480,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=660&quality=85&auto=format&fit=max&s=a50b035143395765c215b482ba82aec0',
+										width: 660,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=2a576a73c926f663af02f6b9a988405c',
+										width: 1320,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=480&quality=85&auto=format&fit=max&s=3b28326ea29bbe41014ac9ab034c3c1a',
+										width: 480,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=07a991a945d2527e5d459347153c8a8d',
+										width: 960,
+									},
+								],
+							},
+						],
+						data: {
+							alt: 'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
+							caption:
+								'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
+							credit: 'Photograph: Patrick T Fallon/AFP/Getty Images',
+						},
+						position: 3,
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613760365000,
+				blockCreatedOnDisplay: '18.46 GMT',
+				blockLastUpdated: 1613760424000,
+				blockLastUpdatedDisplay: '18.47 GMT',
+				blockFirstPublished: 1613760425000,
+				blockFirstPublishedDisplay: '18.47 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.47',
+				contributors: [
+					{
+						name: 'Natalie Grover',
+					},
+				],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '603006868f08ad21ea6006c7',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Key question: <strong>how long till they fly the helicopter?</strong></p>',
+						elementId: 'dcac53ce-c765-453a-876e-7b86cb4d56a8',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>“Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario.</p>',
+						elementId: '6427e8ef-d3ba-4451-a439-fc408b17148c',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613760134000,
+				blockCreatedOnDisplay: '18.42 GMT',
+				blockLastUpdated: 1613760266000,
+				blockLastUpdatedDisplay: '18.44 GMT',
+				blockFirstPublished: 1613760266000,
+				blockFirstPublishedDisplay: '18.44 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.44',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+			{
+				id: '6030066b8f08bdbed283be4b',
+				elements: [
+					{
+						displayCredit: true,
+						_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+						role: 'inline',
+						media: {
+							allImages: [
+								{
+									index: 0,
+									fields: {
+										height: '3000',
+										width: '4000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/4000.jpg',
+								},
+								{
+									index: 1,
+									fields: {
+										isMaster: 'true',
+										height: '3000',
+										width: '4000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg',
+								},
+								{
+									index: 2,
+									fields: {
+										height: '1500',
+										width: '2000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/2000.jpg',
+								},
+								{
+									index: 3,
+									fields: {
+										height: '750',
+										width: '1000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/1000.jpg',
+								},
+								{
+									index: 4,
+									fields: {
+										height: '375',
+										width: '500',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/500.jpg',
+								},
+								{
+									index: 5,
+									fields: {
+										height: '105',
+										width: '140',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/140.jpg',
+								},
+							],
+						},
+						elementId: '8da0bc48-08e0-4169-903d-576e9b5bda46',
+						imageSources: [
+							{
+								weighting: 'inline',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'thumbnail',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=79b9f578604116a20becaa15616b9403',
+										width: 140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b07ed61915f695be4fd7e4bb2d0e415a',
+										width: 280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=4d164922cd857ca020ba542d6376944a',
+										width: 120,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=91a8428e9df88acee619e7879373e79b',
+										width: 240,
+									},
+								],
+							},
+							{
+								weighting: 'supporting',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=9d51616fac736222b356a9e1fac28e53',
+										width: 380,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=608ac7a8755f891e2078b5c602d1a1c6',
+										width: 760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=f76acd8daad0de5bbc33bc47009a20cd',
+										width: 300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=5cbf781084463daff76c3cbb27d84ca9',
+										width: 600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'showcase',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=860&quality=85&auto=format&fit=max&s=be53c9a70eac45f46ee39ce2e7b195df',
+										width: 860,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=a93e212488775ecccc7eb529e53370f4',
+										width: 1720,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=780&quality=85&auto=format&fit=max&s=03a47c84f1ad313efe6c552939a9b3c0',
+										width: 780,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=835413e303e329be6e635f71825b8a51',
+										width: 1560,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'halfwidth',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'immersive',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1900&quality=85&auto=format&fit=max&s=583784cf3cfab33e2590806cb34f22f3',
+										width: 1900,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=3d842128332bfe5790267fd1475e1256',
+										width: 3800,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=4a046f9fba22acdff1d46130ca07dd0e',
+										width: 1300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=12ee921fc3efd02d5da9f0993e297929',
+										width: 2600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=8b8942ddd00603c9cba3bc374d9bdd1a',
+										width: 1140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=996b9b3caa45c83e28bc7d11c5ad71d4',
+										width: 2280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=980&quality=85&auto=format&fit=max&s=d0f64448826db408592ccdad0bbbbc59',
+										width: 980,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=636e62af717c87cd783fcb546677efd1',
+										width: 1960,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=740&quality=85&auto=format&fit=max&s=53458d7bd10b627057e1efba658e3a6f',
+										width: 740,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=9d13660a823e7faea398aa1829b87072',
+										width: 1480,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=0c4596cdfeb0ff395ee7f1df8b1a8e0e',
+										width: 660,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=7a6f5fdf456bca2d7bf22206eaa5293e',
+										width: 1320,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=480&quality=85&auto=format&fit=max&s=c6b71c93a557880baa168d123dd8a6c2',
+										width: 480,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=4d72c94c4de2ba04ba4b10e414ce2aa4',
+										width: 960,
+									},
+								],
+							},
+						],
+						data: {
+							alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
+							caption:
+								'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
+							credit: 'Photograph: NASA/AFP/Getty Images',
+						},
+						position: 4,
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1613760107000,
+				blockCreatedOnDisplay: '18.41 GMT',
+				blockLastUpdated: 1613760121000,
+				blockLastUpdatedDisplay: '18.42 GMT',
+				blockFirstPublished: 1613760122000,
+				blockFirstPublishedDisplay: '18.42 GMT',
+				blockFirstPublishedDisplayNoTimezone: '18.42',
+				contributors: [],
+				primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
+				secondaryDateLine:
+					'First published on Fri 19 Feb 2021 17.20 GMT',
+			},
+		],
+		pagination: {
+			currentPage: 1,
+			totalPages: 4,
+			oldest: '?page=with:block-602fd0c48f08ad21ea600275&filterKeyEvents=false',
+			older: '?page=with:block-603006048f08c3cb92a5ca64&filterKeyEvents=false',
+		},
+		author: {
+			byline: 'Tom McCarthy and Natalie Grover',
+			twitterHandle: 'TeeMcSee',
+		},
+		byline: 'Tom McCarthy and Natalie Grover',
+		webPublicationDate: '2021-02-19T19:41:53.000Z',
+		webPublicationDateDeprecated: '2021-02-19T19:41:53.000Z',
+		webPublicationDateDisplay: 'Fri 19 Feb 2021 19.41 GMT',
+		webPublicationSecondaryDateDisplay:
+			'First published on Fri 19 Feb 2021 17.20 GMT',
+		editionLongForm: 'UK edition',
+		editionId: 'UK',
+		pageId: 'science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+		canonicalUrl:
+			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+		format: {
+			design: 'LiveBlogDesign',
+			theme: 'NewsPillar',
+			display: 'StandardDisplay',
+		},
+		designType: 'Article',
+		tags: [
+			{
+				id: 'science/mars',
+				type: 'Keyword',
+				title: 'Mars',
+			},
+			{
+				id: 'science/nasa',
+				type: 'Keyword',
+				title: 'Nasa',
+			},
+			{
+				id: 'us-news/us-news',
+				type: 'Keyword',
+				title: 'US news',
+			},
+			{
+				id: 'science/space',
+				type: 'Keyword',
+				title: 'Space',
+			},
+			{
+				id: 'science/astronomy',
+				type: 'Keyword',
+				title: 'Astronomy',
+			},
+			{
+				id: 'world/world',
+				type: 'Keyword',
+				title: 'World news',
+			},
+			{
+				id: 'science/science',
+				type: 'Keyword',
+				title: 'Science',
+			},
+			{
+				id: 'type/article',
+				type: 'Type',
+				title: 'Article',
+			},
+			{
+				id: 'tone/minutebyminute',
+				type: 'Tone',
+				title: 'Minute by minute',
+			},
+			{
+				id: 'tone/news',
+				type: 'Tone',
 				title: 'News',
-				url: '/',
-				longTitle: 'Headlines',
-				iconName: 'home',
-				children: [
+			},
+			{
+				id: 'profile/tommccarthy',
+				type: 'Contributor',
+				title: 'Tom McCarthy',
+				twitterHandle: 'TeeMcSee',
+				bylineImageUrl:
+					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2015/8/31/1441007677105/Tom-McCarthy.jpg?width=300&quality=85&auto=format&fit=max&s=5098d45c481ec5be0c0fb2b6bdc82b64',
+				bylineLargeImageUrl:
+					'https://i.guim.co.uk/img/uploads/2017/10/09/Tom-McCarthy,-R.png?width=300&quality=85&auto=format&fit=max&s=daaffddc5c54f2f0f4d50ff4e26f1d34',
+			},
+			{
+				id: 'profile/natalie-grover',
+				type: 'Contributor',
+				title: 'Natalie Grover',
+				twitterHandle: 'NatalieGrover',
+			},
+			{
+				id: 'tracking/commissioningdesk/us-news',
+				type: 'Tracking',
+				title: 'US News',
+			},
+		],
+		pillar: 'news',
+		isLegacyInteractive: false,
+		isImmersive: false,
+		sectionLabel: 'Mars',
+		sectionUrl: 'science/mars',
+		sectionName: 'science',
+		subMetaSectionLinks: [
+			{
+				url: '/science/mars',
+				title: 'Mars',
+			},
+		],
+		subMetaKeywordLinks: [
+			{
+				url: '/science/nasa',
+				title: 'Nasa',
+			},
+			{
+				url: '/science/space',
+				title: 'Space',
+			},
+			{
+				url: '/science/astronomy',
+				title: 'Astronomy',
+			},
+		],
+		shouldHideAds: false,
+		isAdFreeUser: false,
+		webURL: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+		linkedData: [
+			{
+				'@type': 'LiveBlogPosting',
+				'@context': 'http://schema.org',
+				'@id': 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+				publisher: {
+					'@type': 'Organization',
+					'@context': 'https://schema.org',
+					'@id': 'https://www.theguardian.com#publisher',
+					name: 'The Guardian',
+					url: 'https://www.theguardian.com/',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+						width: 190,
+						height: 60,
+					},
+					sameAs: [
+						'https://www.facebook.com/theguardian',
+						'https://twitter.com/guardian',
+						'https://www.youtube.com/user/TheGuardian',
+					],
+				},
+				isAccessibleForFree: true,
+				image: [
+					'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+					'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+					'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+					'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+				],
+				author: [
+					{
+						'@type': 'Person',
+						name: 'Tom McCarthy',
+						sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+					},
+					{
+						'@type': 'Person',
+						name: 'Natalie Grover',
+						sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+					},
+				],
+				datePublished: '2021-02-19T19:41:53.000Z',
+				headline:
+					'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+				dateModified: '2021-02-19T19:47:39.000Z',
+				mainEntityOfPage:
+					'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+				coverageStartTime: '2021-02-19T19:41:53+0000',
+				coverageEndTime: '2021-02-19T19:47:39+0000',
+				liveBlogUpdate: [
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '60300f5f8f08ad21ea60071e',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'That’s it for our live coverage of Nasa’s celebratory news conference and Q&A following the successful landing of the rover Perseverance on Mars. To recap: The rover is “healthy” and undergoing systems testing. It already has beamed back stunning photos from the surface of Mars promising significant scientific discoveries ahead. The images include the first color images beamed directly from Mars as opposed to images touched up later. The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”. It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life. The wheeled rover could begin to move around its new home as early as late February. The rover’s mini helicopter could launch as early as April. Its broad mission is to stay on Mars for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission. The point is to determine whether there was life on Mars and sub',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '60300f338f08c3cb92a5cacb',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody: '#TBT',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '60300d5a8f08bdbed283be98',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody: '#FF',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '60300c878f08c3cb92a5cab0',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'Have you typed “perseverance” into Google today?',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '60300aa38f08ad21ea6006e5',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun. Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life.',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '60300a3a8f08c3cb92a5ca90',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the Nasa web site. McGregor signs off: “Everyone have a great day, on Earth and on Mars.”',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '6030096d8f08c3cb92a5ca88',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption. After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour!',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '603008b48f08bdbed283be5f',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'Next question: How did you celebrate? Answers include: Virtual happy hour “Socially distanced consumption of ice cream outdoors” “I went home and just passed out from just the excitement of the day” “In the coming days I’ll definitely be having a glass of wine” “It was super-exciting” “We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing” “Business as usual for a science team working on a Mars rover”',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '603008388f08c3cb92a5ca7b',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'Another key question: When will the rover drive? “We’re anticipating the earliest... would be sol 8 or 9... our current best estimate. “Maybe a short drive just to check everything out... “We’ll also be figuring out the route and direction we need to go.” That means rover could rove before February is out.',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '603007c48f08c3cb92a5ca74',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by Nasa. It is unknown whether the holes indicate volcanic or sedimentary rock.',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '6030076d8f08ad21ea6006cf',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'Attached to the rover’s belly is a diminutive helicopter called Ingenuity. The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity.',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '603006868f08ad21ea6006c7',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody:
+							'Key question: how long till they fly the helicopter? “Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario.',
+					},
+					{
+						'@type': 'BlogPosting',
+						'@context': 'http://schema.org',
+						'@id': '6030066b8f08bdbed283be4b',
+						publisher: {
+							'@type': 'Organization',
+							'@context': 'https://schema.org',
+							'@id': 'https://www.theguardian.com#publisher',
+							name: 'The Guardian',
+							url: 'https://www.theguardian.com/',
+							logo: {
+								'@type': 'ImageObject',
+								url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+								width: 190,
+								height: 60,
+							},
+							sameAs: [
+								'https://www.facebook.com/theguardian',
+								'https://twitter.com/guardian',
+								'https://www.youtube.com/user/TheGuardian',
+							],
+						},
+						isAccessibleForFree: true,
+						image: [
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=6e1aac192dcd5e9c82e71d74ac32bcae',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=bf68a2ca6af7a5d2b28b70e7d70d5418',
+							'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&quality=85&auto=format&fit=max&s=9e8f33797ab3259fe599aa7d928e29a8',
+						],
+						author: [
+							{
+								'@type': 'Person',
+								name: 'Tom McCarthy',
+								sameAs: 'https://www.theguardian.com/profile/tommccarthy',
+							},
+							{
+								'@type': 'Person',
+								name: 'Natalie Grover',
+								sameAs: 'https://www.theguardian.com/profile/natalie-grover',
+							},
+						],
+						datePublished: '2021-02-19T19:41:53.000Z',
+						headline:
+							'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+						dateModified: '2021-02-19T19:47:39.000Z',
+						mainEntityOfPage:
+							'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+						articleBody: '',
+					},
+				],
+			},
+			{
+				'@type': 'WebPage',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+				potentialAction: {
+					'@type': 'ViewAction',
+					target: 'android-app://com.guardian/https/www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+				},
+			},
+		],
+		openGraphData: {
+			'og:url':
+				'http://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+			'article:author':
+				'https://www.theguardian.com/profile/tommccarthy,https://www.theguardian.com/profile/natalie-grover',
+			'og:image:width': '1200',
+			'og:image':
+				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&enable=upscale&s=fe213855c620bffb195a40681e02cef3',
+			'al:ios:url':
+				'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=applinks',
+			'article:publisher': 'https://www.facebook.com/theguardian',
+			'og:title':
+				'Nasa scientists release new images of Perseverance rover on Mars at news briefing – as it happened',
+			'fb:app_id': '180444840287',
+			'article:modified_time': '2021-02-19T19:47:39.000Z',
+			'og:image:height': '720',
+			'og:description':
+				'Team of experts answer questions about mission following safe landing on the red planet on Thursday – follow the briefing live',
+			'og:type': 'article',
+			'al:ios:app_store_id': '409128287',
+			'article:section': 'Science',
+			'article:published_time': '2021-02-19T19:41:53.000Z',
+			'article:tag':
+				'Mars,Nasa,US news,Space,Astronomy,World news,Science',
+			'al:ios:app_name': 'The Guardian',
+			'og:site_name': 'the Guardian',
+		},
+		twitterData: {
+			'twitter:app:id:iphone': '409128287',
+			'twitter:app:name:googleplay': 'The Guardian',
+			'twitter:app:name:ipad': 'The Guardian',
+			'twitter:card': 'summary_large_image',
+			'twitter:app:name:iphone': 'The Guardian',
+			'twitter:creator': '@TeeMcSee',
+			'twitter:app:id:ipad': '409128287',
+			'twitter:app:id:googleplay': 'com.guardian',
+			'twitter:app:url:googleplay':
+				'guardian://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+			'twitter:app:url:iphone':
+				'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=twitter',
+			'twitter:image':
+				'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctbGl2ZS5wbmc&s=37ffd2c6ec44a4f5f66d88d8d3ec5e21',
+			'twitter:site': '@guardian',
+			'twitter:app:url:ipad':
+				'gnmguardian://science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates?contenttype=Article&source=twitter',
+		},
+		config: {
+			references: [
+				{
+					'rich-link':
+						'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				},
+			],
+			shortUrlId: '/p/d8ex5',
+			switches: {
+				prebidAppnexusUkRow: true,
+				clickToView: true,
+				prebidTrustx: true,
+				scAdFreeBanner: false,
+				compareVariantDecision: false,
+				enableSentryReporting: true,
+				lazyLoadContainers: true,
+				adFreeStrictExpiryEnforcement: false,
+				liveblogRendering: true,
+				remarketing: true,
+				registerWithPhone: false,
+				targeting: true,
+				extendedMostPopularFronts: true,
+				slotBodyEnd: true,
+				emailInlineInFooter: true,
+				facebookTrackingPixel: true,
+				serviceWorkerEnabled: false,
+				iasAdTargeting: true,
+				extendedMostPopular: true,
+				prebidAnalytics: true,
+				imrWorldwide: true,
+				acast: true,
+				twitterUwt: true,
+				prebidAppnexusInvcode: true,
+				prebidAppnexus: true,
+				enableDiscussionSwitch: true,
+				prebidXaxis: true,
+				interactiveFullHeaderSwitch: false,
+				discussionAllPageSize: true,
+				prebidUserSync: true,
+				audioOnwardJourneySwitch: true,
+				mobileStickyPrebid: true,
+				breakingNews: true,
+				externalVideoEmbeds: true,
+				carrotTrafficDriver: true,
+				geoMostPopular: true,
+				weAreHiring: true,
+				relatedContent: true,
+				thirdPartyEmbedTracking: true,
+				prebidOzone: true,
+				prebidAdYouLike: true,
+				mostViewedFronts: true,
+				abSignInGateMainControl: true,
+				ampPrebid: true,
+				googleSearch: true,
+				brazeSwitch: true,
+				consentManagement: true,
+				commercial: true,
+				redplanetForAus: true,
+				prebidSonobi: true,
+				idProfileNavigation: true,
+				confiantAdVerification: true,
+				discussionAllowAnonymousRecommendsSwitch: false,
+				scrollDepth: true,
+				permutive: true,
+				comscore: true,
+				webFonts: true,
+				prebidImproveDigital: true,
+				ophan: true,
+				crosswordSvgThumbnails: true,
+				prebidTriplelift: true,
+				weather: true,
+				commercialOutbrainNewids: true,
+				dotcomRendering: true,
+				abSignInGateMainVariant: true,
+				hostedVideoAutoplay: true,
+				abAdblockAsk: true,
+				prebidPubmatic: true,
+				autoRefresh: true,
+				enhanceTweets: true,
+				prebidIndexExchange: true,
+				prebidOpenx: true,
+				idCookieRefresh: true,
+				sharingComments: true,
+				abSignInGateMandatory: true,
+				discussionPageSize: true,
+				smartAppBanner: false,
+				boostGaUserTimingFidelity: false,
+				historyTags: true,
+				mobileStickyLeaderboard: true,
+				abDeeplyReadTest: false,
+				surveys: true,
+				remoteBanner: true,
+				inizio: true,
+				prebidHeaderBidding: true,
+				a9HeaderBidding: true,
+				lightbox: true,
+			},
+			keywordIds:
+				'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+			sharedAdTargeting: {
+				ct: 'article',
+				co: ['jennifer-rankin'],
+				url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				su: ['0'],
+				edition: 'uk',
+				tn: ['news'],
+				p: 'ng',
+				k: [
+					'eu',
+					'flooding',
+					'world',
+					'europe-news',
+					'natural-disasters',
+					'science',
+					'environment',
+					'climate-change',
+					'wildfires',
+					'scienceofclimatechange',
+				],
+				sh: 'https://www.theguardian.com/p/d8ex5',
+			},
+			toneIds: 'tone/news',
+			dcrSentryDsn:
+				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+			discussionApiUrl:
+				'https://discussion.theguardian.com/discussion-api',
+			sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+			commercialBundleUrl:
+				'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+			discussionApiClientHeader: 'nextgen',
+			shouldHideReaderRevenue: false,
+			sentryHost: 'app.getsentry.com/35463',
+			isPaidContent: false,
+			headline: 'Headline string',
+			idApiUrl: 'https://idapi.theguardian.com',
+			showRelatedContent: true,
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			videoDuration: 0,
+			stage: 'PROD',
+			isSensitive: false,
+			isDev: false,
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+			keywords:
+				'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			revisionNumber: 'DEV',
+			section: 'environment',
+			isPhotoEssay: false,
+			ampIframeUrl:
+				'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+			isLive: false,
+			host: 'https://www.theguardian.com',
+			brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+			contentType: 'Article',
+			idUrl: 'https://profile.theguardian.com',
+			author: 'Jennifer Rankin',
+			dfpAccountId: '59666047',
+			pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+			mmaUrl: 'https://manage.theguardian.com',
+			abTests: {},
+			edition: 'UK',
+			ipsosTag: 'environment',
+			isLiveBlog: false,
+			frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+			webPublicationDate: 1581314427000,
+			discussionD2Uid: 'zHoBy6HNKsk',
+		},
+		guardianBaseURL: 'https://www.theguardian.com',
+		contentType: 'LiveBlog',
+		hasRelated: true,
+		hasStoryPackage: false,
+		beaconURL: '//phar.gu-web.net',
+		isCommentable: false,
+		commercialProperties: {
+			UK: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: [
+							'world',
+							'astronomy',
+							'space',
+							'us-news',
+							'nasa',
+							'science',
+							'mars',
+						],
+					},
+					{
+						name: 'edition',
+						value: 'uk',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/gfc2f',
+					},
+					{
+						name: 'url',
+						value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'ct',
+						value: 'liveblog',
+					},
+					{
+						name: 'tn',
+						value: ['minutebyminute', 'news'],
+					},
+					{
+						name: 'co',
+						value: ['natalie-grover', 'tommccarthy'],
+					},
+				],
+			},
+			US: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: [
+							'world',
+							'astronomy',
+							'space',
+							'us-news',
+							'nasa',
+							'science',
+							'mars',
+						],
+					},
+					{
+						name: 'edition',
+						value: 'us',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/gfc2f',
+					},
+					{
+						name: 'url',
+						value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'ct',
+						value: 'liveblog',
+					},
+					{
+						name: 'tn',
+						value: ['minutebyminute', 'news'],
+					},
+					{
+						name: 'co',
+						value: ['natalie-grover', 'tommccarthy'],
+					},
+				],
+			},
+			AU: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: [
+							'world',
+							'astronomy',
+							'space',
+							'us-news',
+							'nasa',
+							'science',
+							'mars',
+						],
+					},
+					{
+						name: 'edition',
+						value: 'au',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/gfc2f',
+					},
+					{
+						name: 'url',
+						value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'ct',
+						value: 'liveblog',
+					},
+					{
+						name: 'tn',
+						value: ['minutebyminute', 'news'],
+					},
+					{
+						name: 'co',
+						value: ['natalie-grover', 'tommccarthy'],
+					},
+				],
+			},
+			INT: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: [
+							'world',
+							'astronomy',
+							'space',
+							'us-news',
+							'nasa',
+							'science',
+							'mars',
+						],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/gfc2f',
+					},
+					{
+						name: 'url',
+						value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					},
+					{
+						name: 'edition',
+						value: 'int',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'ct',
+						value: 'liveblog',
+					},
+					{
+						name: 'tn',
+						value: ['minutebyminute', 'news'],
+					},
+					{
+						name: 'co',
+						value: ['natalie-grover', 'tommccarthy'],
+					},
+				],
+			},
+			EUR: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: [
+							'world',
+							'astronomy',
+							'space',
+							'us-news',
+							'nasa',
+							'science',
+							'mars',
+						],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/gfc2f',
+					},
+					{
+						name: 'url',
+						value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					},
+					{
+						name: 'edition',
+						value: 'eur',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'ct',
+						value: 'liveblog',
+					},
+					{
+						name: 'tn',
+						value: ['minutebyminute', 'news'],
+					},
+					{
+						name: 'co',
+						value: ['natalie-grover', 'tommccarthy'],
+					},
+				],
+			},
+		},
+		pageType: {
+			hasShowcaseMainElement: false,
+			isFront: false,
+			isLiveblog: true,
+			isMinuteArticle: false,
+			isPaidContent: false,
+			isPreview: false,
+			isSensitive: false,
+		},
+		trailText:
+			'Team of experts answer questions about mission following safe landing on the red planet on Thursday – follow the briefing live',
+		nav: {
+			currentUrl: '/science',
+			pillars: [
+				{
+					title: 'News',
+					url: '/',
+					longTitle: 'Headlines',
+					iconName: 'home',
+					children: [
+						{
+							title: 'UK',
+							url: '/uk-news',
+							longTitle: 'UK news',
+							children: [
+								{
+									title: 'UK politics',
+									url: '/politics',
+								},
+								{
+									title: 'Education',
+									url: '/education',
+									children: [
+										{
+											title: 'Schools',
+											url: '/education/schools',
+										},
+										{
+											title: 'Teachers',
+											url: '/teacher-network',
+										},
+										{
+											title: 'Universities',
+											url: '/education/universities',
+										},
+										{
+											title: 'Students',
+											url: '/education/students',
+										},
+									],
+								},
+								{
+									title: 'Media',
+									url: '/media',
+								},
+								{
+									title: 'Society',
+									url: '/society',
+								},
+								{
+									title: 'Law',
+									url: '/law',
+								},
+								{
+									title: 'Scotland',
+									url: '/uk/scotland',
+								},
+								{
+									title: 'Wales',
+									url: '/uk/wales',
+								},
+								{
+									title: 'Northern Ireland',
+									url: '/uk/northernireland',
+								},
+							],
+						},
+						{
+							title: 'World',
+							url: '/world',
+							longTitle: 'World news',
+							children: [
+								{
+									title: 'Europe',
+									url: '/world/europe-news',
+								},
+								{
+									title: 'US',
+									url: '/us-news',
+									longTitle: 'US news',
+								},
+								{
+									title: 'Americas',
+									url: '/world/americas',
+								},
+								{
+									title: 'Asia',
+									url: '/world/asia',
+								},
+								{
+									title: 'Australia',
+									url: '/australia-news',
+									longTitle: 'Australia news',
+								},
+								{
+									title: 'Middle East',
+									url: '/world/middleeast',
+								},
+								{
+									title: 'Africa',
+									url: '/world/africa',
+								},
+								{
+									title: 'Inequality',
+									url: '/inequality',
+								},
+								{
+									title: 'Global development',
+									url: '/global-development',
+								},
+							],
+						},
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Ukraine',
+							url: '/world/ukraine',
+						},
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Newsletters',
+							url: '/email-newsletters',
+						},
+						{
+							title: 'Business',
+							url: '/business',
+							children: [
+								{
+									title: 'Economics',
+									url: '/business/economics',
+								},
+								{
+									title: 'Banking',
+									url: '/business/banking',
+								},
+								{
+									title: 'Money',
+									url: '/money',
+									children: [
+										{
+											title: 'Property',
+											url: '/money/property',
+										},
+										{
+											title: 'Pensions',
+											url: '/money/pensions',
+										},
+										{
+											title: 'Savings',
+											url: '/money/savings',
+										},
+										{
+											title: 'Borrowing',
+											url: '/money/debt',
+										},
+										{
+											title: 'Careers',
+											url: '/money/work-and-careers',
+										},
+									],
+								},
+								{
+									title: 'Markets',
+									url: '/business/stock-markets',
+								},
+								{
+									title: 'Project Syndicate',
+									url: '/business/series/project-syndicate-economists',
+								},
+								{
+									title: 'B2B',
+									url: '/business-to-business',
+								},
+								{
+									title: 'Retail',
+									url: '/business/retail',
+								},
+							],
+						},
+						{
+							title: 'Environment',
+							url: '/environment',
+							children: [
+								{
+									title: 'Climate crisis',
+									url: '/environment/climate-crisis',
+								},
+								{
+									title: 'Wildlife',
+									url: '/environment/wildlife',
+								},
+								{
+									title: 'Energy',
+									url: '/environment/energy',
+								},
+								{
+									title: 'Pollution',
+									url: '/environment/pollution',
+								},
+							],
+						},
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Science',
+							url: '/science',
+						},
+						{
+							title: 'Tech',
+							url: '/technology',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+					],
+				},
+				{
+					title: 'Opinion',
+					url: '/commentisfree',
+					longTitle: 'Opinion home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'The Guardian view',
+							url: '/profile/editorial',
+						},
+						{
+							title: 'Columnists',
+							url: '/index/contributors',
+						},
+						{
+							title: 'Cartoons',
+							url: '/tone/cartoons',
+						},
+						{
+							title: 'Opinion videos',
+							url: '/type/video+tone/comment',
+						},
+						{
+							title: 'Letters',
+							url: '/tone/letters',
+						},
+					],
+				},
+				{
+					title: 'Sport',
+					url: '/sport',
+					longTitle: 'Sport home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Cricket',
+							url: '/sport/cricket',
+						},
+						{
+							title: 'Rugby union',
+							url: '/sport/rugby-union',
+						},
+						{
+							title: 'Tennis',
+							url: '/sport/tennis',
+						},
+						{
+							title: 'Cycling',
+							url: '/sport/cycling',
+						},
+						{
+							title: 'F1',
+							url: '/sport/formulaone',
+						},
+						{
+							title: 'Golf',
+							url: '/sport/golf',
+						},
+						{
+							title: 'Boxing',
+							url: '/sport/boxing',
+						},
+						{
+							title: 'Rugby league',
+							url: '/sport/rugbyleague',
+						},
+						{
+							title: 'Racing',
+							url: '/sport/horse-racing',
+						},
+						{
+							title: 'US sports',
+							url: '/sport/us-sport',
+						},
+					],
+				},
+				{
+					title: 'Culture',
+					url: '/culture',
+					longTitle: 'Culture home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Film',
+							url: '/film',
+						},
+						{
+							title: 'Music',
+							url: '/music',
+						},
+						{
+							title: 'TV & radio',
+							url: '/tv-and-radio',
+						},
+						{
+							title: 'Books',
+							url: '/books',
+						},
+						{
+							title: 'Art & design',
+							url: '/artanddesign',
+						},
+						{
+							title: 'Stage',
+							url: '/stage',
+						},
+						{
+							title: 'Games',
+							url: '/games',
+						},
+						{
+							title: 'Classical',
+							url: '/music/classicalmusicandopera',
+						},
+					],
+				},
+				{
+					title: 'Lifestyle',
+					url: '/lifeandstyle',
+					longTitle: 'Lifestyle home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Fashion',
+							url: '/fashion',
+						},
+						{
+							title: 'Food',
+							url: '/food',
+						},
+						{
+							title: 'Recipes',
+							url: '/tone/recipes',
+						},
+						{
+							title: 'Travel',
+							url: '/travel',
+							children: [
+								{
+									title: 'UK',
+									url: '/travel/uk',
+								},
+								{
+									title: 'Europe',
+									url: '/travel/europe',
+								},
+								{
+									title: 'US',
+									url: '/travel/usa',
+								},
+							],
+						},
+						{
+							title: 'Health & fitness',
+							url: '/lifeandstyle/health-and-wellbeing',
+						},
+						{
+							title: 'Women',
+							url: '/lifeandstyle/women',
+						},
+						{
+							title: 'Men',
+							url: '/lifeandstyle/men',
+						},
+						{
+							title: 'Love & sex',
+							url: '/lifeandstyle/love-and-sex',
+						},
+						{
+							title: 'Beauty',
+							url: '/fashion/beauty',
+						},
+						{
+							title: 'Home & garden',
+							url: '/lifeandstyle/home-and-garden',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Cars',
+							url: '/technology/motoring',
+						},
+					],
+				},
+			],
+			otherLinks: [
+				{
+					title: 'The Guardian app',
+					url: 'https://app.adjust.com/16xt6hai',
+				},
+				{
+					title: 'Video',
+					url: '/video',
+				},
+				{
+					title: 'Podcasts',
+					url: '/podcasts',
+				},
+				{
+					title: 'Pictures',
+					url: '/inpictures',
+				},
+				{
+					title: 'Newsletters',
+					url: '/email-newsletters',
+				},
+				{
+					title: "Today's paper",
+					url: '/theguardian',
+					children: [
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+						{
+							title: 'G2',
+							url: '/theguardian/g2',
+						},
+						{
+							title: 'Journal',
+							url: '/theguardian/journal',
+						},
+						{
+							title: 'Saturday',
+							url: '/theguardian/saturday',
+						},
+					],
+				},
+				{
+					title: 'Inside the Guardian',
+					url: 'https://www.theguardian.com/membership',
+				},
+				{
+					title: 'The Observer',
+					url: '/observer',
+					children: [
+						{
+							title: 'Comment',
+							url: '/theobserver/news/comment',
+						},
+						{
+							title: 'The New Review',
+							url: '/theobserver/new-review',
+						},
+						{
+							title: 'Observer Magazine',
+							url: '/theobserver/magazine',
+						},
+						{
+							title: 'Observer Food Monthly',
+							url: '/theobserver/foodmonthly',
+						},
+					],
+				},
+				{
+					title: 'Guardian Weekly',
+					url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				},
+				{
+					title: 'Crosswords',
+					url: '/crosswords',
+					children: [
+						{
+							title: 'Blog',
+							url: '/crosswords/crossword-blog',
+						},
+						{
+							title: 'Quick',
+							url: '/crosswords/series/quick',
+						},
+						{
+							title: 'Cryptic',
+							url: '/crosswords/series/cryptic',
+						},
+						{
+							title: 'Prize',
+							url: '/crosswords/series/prize',
+						},
+						{
+							title: 'Weekend',
+							url: '/crosswords/series/weekend-crossword',
+						},
+						{
+							title: 'Quiptic',
+							url: '/crosswords/series/quiptic',
+						},
+						{
+							title: 'Genius',
+							url: '/crosswords/series/genius',
+						},
+						{
+							title: 'Speedy',
+							url: '/crosswords/series/speedy',
+						},
+						{
+							title: 'Everyman',
+							url: '/crosswords/series/everyman',
+						},
+						{
+							title: 'Azed',
+							url: '/crosswords/series/azed',
+						},
+					],
+				},
+				{
+					title: 'Wordiply',
+					url: 'https://www.wordiply.com',
+				},
+				{
+					title: 'Corrections',
+					url: '/theguardian/series/corrections-and-clarifications',
+				},
+			],
+			brandExtensions: [
+				{
+					title: 'Search jobs',
+					url: 'https://jobs.theguardian.com',
+				},
+				{
+					title: 'Hire with Guardian Jobs',
+					url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				},
+				{
+					title: 'Holidays',
+					url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				},
+				{
+					title: 'Live events',
+					url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
+				},
+				{
+					title: 'About Us',
+					url: '/about',
+				},
+				{
+					title: 'Digital Archive',
+					url: 'https://theguardian.newspapers.com',
+				},
+				{
+					title: 'Guardian Print Shop',
+					url: '/artanddesign/series/gnm-print-sales',
+				},
+				{
+					title: 'Patrons',
+					url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+				},
+				{
+					title: 'Guardian Licensing',
+					url: 'https://licensing.theguardian.com/',
+				},
+			],
+			currentNavLinkTitle: 'Science',
+			currentPillarTitle: 'News',
+			subNavSections: {
+				links: [
 					{
 						title: 'UK',
 						url: '/uk-news',
@@ -3739,1007 +4451,318 @@ export const Live: DCRArticle = {
 					},
 				],
 			},
-			{
-				title: 'Opinion',
-				url: '/commentisfree',
-				longTitle: 'Opinion home',
-				iconName: 'home',
-				children: [
+			readerRevenueLinks: {
+				header: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+				},
+				footer: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
+				},
+				sideMenu: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
+				},
+				ampHeader: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+				},
+				ampFooter: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
+				},
+			},
+		},
+		showBottomSocialButtons: true,
+		pageFooter: {
+			footerLinks: [
+				[
 					{
-						title: 'The Guardian view',
-						url: '/profile/editorial',
+						text: 'About us',
+						url: '/about',
+						dataLinkName: 'uk : footer : about us',
+						extraClasses: '',
 					},
 					{
-						title: 'Columnists',
+						text: 'Help',
+						url: '/help',
+						dataLinkName: 'uk : footer : tech feedback',
+						extraClasses: 'js-tech-feedback-report',
+					},
+					{
+						text: 'Complaints & corrections',
+						url: '/info/complaints-and-corrections',
+						dataLinkName: 'complaints',
+						extraClasses: '',
+					},
+					{
+						text: 'SecureDrop',
+						url: 'https://www.theguardian.com/securedrop',
+						dataLinkName: 'securedrop',
+						extraClasses: '',
+					},
+					{
+						text: 'Work for us',
+						url: 'https://workforus.theguardian.com',
+						dataLinkName: 'uk : footer : work for us',
+						extraClasses: '',
+					},
+					{
+						text: 'Privacy policy',
+						url: '/info/privacy',
+						dataLinkName: 'privacy',
+						extraClasses: '',
+					},
+					{
+						text: 'Cookie policy',
+						url: '/info/cookies',
+						dataLinkName: 'cookie',
+						extraClasses: '',
+					},
+					{
+						text: 'Terms & conditions',
+						url: '/help/terms-of-service',
+						dataLinkName: 'terms',
+						extraClasses: '',
+					},
+					{
+						text: 'Contact us',
+						url: '/help/contact-us',
+						dataLinkName: 'uk : footer : contact us',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'All topics',
+						url: '/index/subjects/a',
+						dataLinkName: 'uk : footer : all topics',
+						extraClasses: '',
+					},
+					{
+						text: 'All writers',
 						url: '/index/contributors',
+						dataLinkName: 'uk : footer : all contributors',
+						extraClasses: '',
 					},
 					{
-						title: 'Cartoons',
-						url: '/tone/cartoons',
+						text: 'Modern Slavery Act',
+						url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+						dataLinkName:
+							'uk : footer : modern slavery act statement',
+						extraClasses: '',
 					},
 					{
-						title: 'Opinion videos',
-						url: '/type/video+tone/comment',
+						text: 'Digital newspaper archive',
+						url: 'https://theguardian.newspapers.com',
+						dataLinkName: 'digital newspaper archive',
+						extraClasses: '',
 					},
 					{
-						title: 'Letters',
-						url: '/tone/letters',
+						text: 'Facebook',
+						url: 'https://www.facebook.com/theguardian',
+						dataLinkName: 'uk : footer : facebook',
+						extraClasses: '',
+					},
+					{
+						text: 'YouTube',
+						url: 'https://www.youtube.com/user/TheGuardian',
+						dataLinkName: 'uk : footer : youtube',
+						extraClasses: '',
+					},
+					{
+						text: 'Instagram',
+						url: 'https://www.instagram.com/guardian',
+						dataLinkName: 'uk : footer : instagram',
+						extraClasses: '',
+					},
+					{
+						text: 'LinkedIn',
+						url: 'https://www.linkedin.com/company/theguardian',
+						dataLinkName: 'uk : footer : linkedin',
+						extraClasses: '',
+					},
+					{
+						text: 'Twitter',
+						url: 'https://twitter.com/guardian',
+						dataLinkName: 'uk: footer : twitter',
+						extraClasses: '',
+					},
+					{
+						text: 'Newsletters',
+						url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+						dataLinkName: 'uk : footer : newsletters',
+						extraClasses: '',
 					},
 				],
-			},
-			{
-				title: 'Sport',
-				url: '/sport',
-				longTitle: 'Sport home',
-				iconName: 'home',
-				children: [
+				[
 					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
+						text: 'Advertise with us',
+						url: 'https://advertising.theguardian.com',
+						dataLinkName: 'uk : footer : advertise with us',
+						extraClasses: '',
 					},
 					{
-						title: 'Cricket',
-						url: '/sport/cricket',
+						text: 'Guardian Labs',
+						url: '/guardian-labs',
+						dataLinkName: 'uk : footer : guardian labs',
+						extraClasses: '',
 					},
 					{
-						title: 'Rugby union',
-						url: '/sport/rugby-union',
+						text: 'Search jobs',
+						url: 'https://jobs.theguardian.com',
+						dataLinkName: 'uk : footer : jobs',
+						extraClasses: '',
 					},
 					{
-						title: 'Tennis',
-						url: '/sport/tennis',
-					},
-					{
-						title: 'Cycling',
-						url: '/sport/cycling',
-					},
-					{
-						title: 'F1',
-						url: '/sport/formulaone',
-					},
-					{
-						title: 'Golf',
-						url: '/sport/golf',
-					},
-					{
-						title: 'Boxing',
-						url: '/sport/boxing',
-					},
-					{
-						title: 'Rugby league',
-						url: '/sport/rugbyleague',
-					},
-					{
-						title: 'Racing',
-						url: '/sport/horse-racing',
-					},
-					{
-						title: 'US sports',
-						url: '/sport/us-sport',
+						text: 'Patrons',
+						url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+						dataLinkName: 'uk : footer : patrons',
+						extraClasses: '',
 					},
 				],
-			},
-			{
-				title: 'Culture',
-				url: '/culture',
-				longTitle: 'Culture home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Film',
-						url: '/film',
-					},
-					{
-						title: 'Music',
-						url: '/music',
-					},
-					{
-						title: 'TV & radio',
-						url: '/tv-and-radio',
-					},
-					{
-						title: 'Books',
-						url: '/books',
-					},
-					{
-						title: 'Art & design',
-						url: '/artanddesign',
-					},
-					{
-						title: 'Stage',
-						url: '/stage',
-					},
-					{
-						title: 'Games',
-						url: '/games',
-					},
-					{
-						title: 'Classical',
-						url: '/music/classicalmusicandopera',
-					},
-				],
-			},
-			{
-				title: 'Lifestyle',
-				url: '/lifeandstyle',
-				longTitle: 'Lifestyle home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Fashion',
-						url: '/fashion',
-					},
-					{
-						title: 'Food',
-						url: '/food',
-					},
-					{
-						title: 'Recipes',
-						url: '/tone/recipes',
-					},
-					{
-						title: 'Travel',
-						url: '/travel',
-						children: [
-							{
-								title: 'UK',
-								url: '/travel/uk',
-							},
-							{
-								title: 'Europe',
-								url: '/travel/europe',
-							},
-							{
-								title: 'US',
-								url: '/travel/usa',
-							},
-						],
-					},
-					{
-						title: 'Health & fitness',
-						url: '/lifeandstyle/health-and-wellbeing',
-					},
-					{
-						title: 'Women',
-						url: '/lifeandstyle/women',
-					},
-					{
-						title: 'Men',
-						url: '/lifeandstyle/men',
-					},
-					{
-						title: 'Love & sex',
-						url: '/lifeandstyle/love-and-sex',
-					},
-					{
-						title: 'Beauty',
-						url: '/fashion/beauty',
-					},
-					{
-						title: 'Home & garden',
-						url: '/lifeandstyle/home-and-garden',
-					},
-					{
-						title: 'Money',
-						url: '/money',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-							},
-						],
-					},
-					{
-						title: 'Cars',
-						url: '/technology/motoring',
-					},
-				],
-			},
-		],
-		otherLinks: [
-			{
-				title: 'The Guardian app',
-				url: 'https://app.adjust.com/16xt6hai',
-			},
-			{
-				title: 'Video',
-				url: '/video',
-			},
-			{
-				title: 'Podcasts',
-				url: '/podcasts',
-			},
-			{
-				title: 'Pictures',
-				url: '/inpictures',
-			},
-			{
-				title: 'Newsletters',
-				url: '/email-newsletters',
-			},
-			{
-				title: "Today's paper",
-				url: '/theguardian',
-				children: [
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-					{
-						title: 'G2',
-						url: '/theguardian/g2',
-					},
-					{
-						title: 'Journal',
-						url: '/theguardian/journal',
-					},
-					{
-						title: 'Saturday',
-						url: '/theguardian/saturday',
-					},
-				],
-			},
-			{
-				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
-			},
-			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
-				title: 'Guardian Weekly',
-				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
-			},
-			{
-				title: 'Crosswords',
-				url: '/crosswords',
-				children: [
-					{
-						title: 'Blog',
-						url: '/crosswords/crossword-blog',
-					},
-					{
-						title: 'Quick',
-						url: '/crosswords/series/quick',
-					},
-					{
-						title: 'Cryptic',
-						url: '/crosswords/series/cryptic',
-					},
-					{
-						title: 'Prize',
-						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-					},
-					{
-						title: 'Genius',
-						url: '/crosswords/series/genius',
-					},
-					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
-					},
-				],
-			},
-			{
-				title: 'Wordiply',
-				url: 'https://www.wordiply.com',
-			},
-			{
-				title: 'Corrections',
-				url: '/theguardian/series/corrections-and-clarifications',
-			},
-		],
-		brandExtensions: [
-			{
-				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com',
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-			},
-			{
-				title: 'Holidays',
-				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
-			},
-			{
-				title: 'Live events',
-				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
-			},
-			{
-				title: 'About Us',
-				url: '/about',
-			},
-			{
-				title: 'Digital Archive',
-				url: 'https://theguardian.newspapers.com',
-			},
-			{
-				title: 'Guardian Print Shop',
-				url: '/artanddesign/series/gnm-print-sales',
-			},
-			{
-				title: 'Patrons',
-				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
-			},
-			{
-				title: 'Guardian Licensing',
-				url: 'https://licensing.theguardian.com/',
-			},
-		],
-		currentNavLinkTitle: 'Science',
-		currentPillarTitle: 'News',
-		subNavSections: {
-			links: [
-				{
-					title: 'UK',
-					url: '/uk-news',
-					longTitle: 'UK news',
-					children: [
-						{
-							title: 'UK politics',
-							url: '/politics',
-						},
-						{
-							title: 'Education',
-							url: '/education',
-							children: [
-								{
-									title: 'Schools',
-									url: '/education/schools',
-								},
-								{
-									title: 'Teachers',
-									url: '/teacher-network',
-								},
-								{
-									title: 'Universities',
-									url: '/education/universities',
-								},
-								{
-									title: 'Students',
-									url: '/education/students',
-								},
-							],
-						},
-						{
-							title: 'Media',
-							url: '/media',
-						},
-						{
-							title: 'Society',
-							url: '/society',
-						},
-						{
-							title: 'Law',
-							url: '/law',
-						},
-						{
-							title: 'Scotland',
-							url: '/uk/scotland',
-						},
-						{
-							title: 'Wales',
-							url: '/uk/wales',
-						},
-						{
-							title: 'Northern Ireland',
-							url: '/uk/northernireland',
-						},
-					],
-				},
-				{
-					title: 'World',
-					url: '/world',
-					longTitle: 'World news',
-					children: [
-						{
-							title: 'Europe',
-							url: '/world/europe-news',
-						},
-						{
-							title: 'US',
-							url: '/us-news',
-							longTitle: 'US news',
-						},
-						{
-							title: 'Americas',
-							url: '/world/americas',
-						},
-						{
-							title: 'Asia',
-							url: '/world/asia',
-						},
-						{
-							title: 'Australia',
-							url: '/australia-news',
-							longTitle: 'Australia news',
-						},
-						{
-							title: 'Middle East',
-							url: '/world/middleeast',
-						},
-						{
-							title: 'Africa',
-							url: '/world/africa',
-						},
-						{
-							title: 'Inequality',
-							url: '/inequality',
-						},
-						{
-							title: 'Global development',
-							url: '/global-development',
-						},
-					],
-				},
-				{
-					title: 'Climate crisis',
-					url: '/environment/climate-crisis',
-				},
-				{
-					title: 'Ukraine',
-					url: '/world/ukraine',
-				},
-				{
-					title: 'Football',
-					url: '/football',
-					children: [
-						{
-							title: 'Live scores',
-							url: '/football/live',
-							longTitle: 'football/live',
-						},
-						{
-							title: 'Tables',
-							url: '/football/tables',
-							longTitle: 'football/tables',
-						},
-						{
-							title: 'Fixtures',
-							url: '/football/fixtures',
-							longTitle: 'football/fixtures',
-						},
-						{
-							title: 'Results',
-							url: '/football/results',
-							longTitle: 'football/results',
-						},
-						{
-							title: 'Competitions',
-							url: '/football/competitions',
-							longTitle: 'football/competitions',
-						},
-						{
-							title: 'Clubs',
-							url: '/football/teams',
-							longTitle: 'football/teams',
-						},
-					],
-				},
-				{
-					title: 'Newsletters',
-					url: '/email-newsletters',
-				},
-				{
-					title: 'Business',
-					url: '/business',
-					children: [
-						{
-							title: 'Economics',
-							url: '/business/economics',
-						},
-						{
-							title: 'Banking',
-							url: '/business/banking',
-						},
-						{
-							title: 'Money',
-							url: '/money',
-							children: [
-								{
-									title: 'Property',
-									url: '/money/property',
-								},
-								{
-									title: 'Pensions',
-									url: '/money/pensions',
-								},
-								{
-									title: 'Savings',
-									url: '/money/savings',
-								},
-								{
-									title: 'Borrowing',
-									url: '/money/debt',
-								},
-								{
-									title: 'Careers',
-									url: '/money/work-and-careers',
-								},
-							],
-						},
-						{
-							title: 'Markets',
-							url: '/business/stock-markets',
-						},
-						{
-							title: 'Project Syndicate',
-							url: '/business/series/project-syndicate-economists',
-						},
-						{
-							title: 'B2B',
-							url: '/business-to-business',
-						},
-						{
-							title: 'Retail',
-							url: '/business/retail',
-						},
-					],
-				},
-				{
-					title: 'Environment',
-					url: '/environment',
-					children: [
-						{
-							title: 'Climate crisis',
-							url: '/environment/climate-crisis',
-						},
-						{
-							title: 'Wildlife',
-							url: '/environment/wildlife',
-						},
-						{
-							title: 'Energy',
-							url: '/environment/energy',
-						},
-						{
-							title: 'Pollution',
-							url: '/environment/pollution',
-						},
-					],
-				},
-				{
-					title: 'UK politics',
-					url: '/politics',
-				},
-				{
-					title: 'Education',
-					url: '/education',
-					children: [
-						{
-							title: 'Schools',
-							url: '/education/schools',
-						},
-						{
-							title: 'Teachers',
-							url: '/teacher-network',
-						},
-						{
-							title: 'Universities',
-							url: '/education/universities',
-						},
-						{
-							title: 'Students',
-							url: '/education/students',
-						},
-					],
-				},
-				{
-					title: 'Society',
-					url: '/society',
-				},
-				{
-					title: 'Science',
-					url: '/science',
-				},
-				{
-					title: 'Tech',
-					url: '/technology',
-				},
-				{
-					title: 'Global development',
-					url: '/global-development',
-				},
-				{
-					title: 'Obituaries',
-					url: '/obituaries',
-				},
 			],
 		},
-		readerRevenueLinks: {
-			header: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+		publication: 'theguardian.com',
+		shouldHideReaderRevenue: false,
+		slotMachineFlags: '',
+		contributionsServiceUrl: 'https://contributions.guardianapis.com',
+		isSpecialReport: false,
+		showTableOfContents: false,
+		lang: 'en',
+		isRightToLeftLang: false,
+		imagesForLightbox: [
+			{
+				masterUrl:
+					'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg',
+				width: 2048,
+				height: 1229,
+				elementId: 'e2c74dad-5344-4f36-a672-edf514dea72b',
+				displayCredit: true,
+				alt: 'Perseverance rover as it touched down in the area known as Jezero crater.',
+				credit: 'Photograph: NASA/Getty Images',
+				caption:
+					'Perseverance rover as it touched down in the area known as Jezero crater.',
+				position: 1,
 			},
-			footer: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
+			{
+				masterUrl:
+					'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg',
+				width: 4000,
+				height: 3000,
+				elementId: 'b7f6f002-33b2-4ecc-b0fe-471a0777c827',
+				displayCredit: true,
+				alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
+				credit: 'Photograph: NASA/AFP/Getty Images',
+				caption:
+					'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
+				blockId: '603007c48f08c3cb92a5ca74',
+				firstPublished: 1613760512000,
+				position: 2,
 			},
-			sideMenu: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
+			{
+				masterUrl:
+					'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg',
+				width: 4696,
+				height: 3131,
+				elementId: '5819a5d8-d638-4da7-903f-1a7a5e2f775c',
+				displayCredit: true,
+				alt: 'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
+				credit: 'Photograph: Patrick T Fallon/AFP/Getty Images',
+				caption:
+					'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
+				blockId: '6030076d8f08ad21ea6006cf',
+				firstPublished: 1613760425000,
+				position: 3,
 			},
-			ampHeader: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+			{
+				masterUrl:
+					'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg',
+				width: 4000,
+				height: 3000,
+				elementId: '8da0bc48-08e0-4169-903d-576e9b5bda46',
+				displayCredit: true,
+				alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
+				credit: 'Photograph: NASA/AFP/Getty Images',
+				caption:
+					'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
+				blockId: '6030066b8f08bdbed283be4b',
+				firstPublished: 1613760122000,
+				position: 4,
 			},
-			ampFooter: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
+		],
+		imagesForAppsLightbox: [
+			{
+				width: 2048,
+				height: 1229,
+				credit: 'Photograph: NASA/Getty Images',
+				caption:
+					'Perseverance rover as it touched down in the area known as Jezero crater.',
+				masterUrl:
+					'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg',
+				elementId: 'e2c74dad-5344-4f36-a672-edf514dea72b',
 			},
-		},
-	},
-	showBottomSocialButtons: true,
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
+			{
+				width: 4000,
+				height: 3000,
+				credit: 'Photograph: NASA/AFP/Getty Images',
+				caption:
+					'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
+				masterUrl:
+					'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg',
+				elementId: 'b7f6f002-33b2-4ecc-b0fe-471a0777c827',
+			},
+			{
+				width: 4696,
+				height: 3131,
+				credit: 'Photograph: Patrick T Fallon/AFP/Getty Images',
+				caption:
+					'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
+				masterUrl:
+					'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg',
+				elementId: '5819a5d8-d638-4da7-903f-1a7a5e2f775c',
+			},
+			{
+				width: 4000,
+				height: 3000,
+				credit: 'Photograph: NASA/AFP/Getty Images',
+				caption:
+					'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
+				masterUrl:
+					'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg',
+				elementId: '8da0bc48-08e0-4169-903d-576e9b5bda46',
+			},
 		],
 	},
-	publication: 'theguardian.com',
-	shouldHideReaderRevenue: false,
-	slotMachineFlags: '',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	isSpecialReport: false,
-	showTableOfContents: false,
-	lang: 'en',
-	isRightToLeftLang: false,
-	imagesForLightbox: [
-		{
-			masterUrl:
-				'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg',
-			width: 2048,
-			height: 1229,
-			elementId: 'e2c74dad-5344-4f36-a672-edf514dea72b',
-			displayCredit: true,
-			alt: 'Perseverance rover as it touched down in the area known as Jezero crater.',
-			credit: 'Photograph: NASA/Getty Images',
-			caption:
-				'Perseverance rover as it touched down in the area known as Jezero crater.',
-			position: 1,
-		},
-		{
-			masterUrl:
-				'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg',
-			width: 4000,
-			height: 3000,
-			elementId: 'b7f6f002-33b2-4ecc-b0fe-471a0777c827',
-			displayCredit: true,
-			alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
-			credit: 'Photograph: NASA/AFP/Getty Images',
-			caption:
-				'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
-			blockId: '603007c48f08c3cb92a5ca74',
-			firstPublished: 1613760512000,
-			position: 2,
-		},
-		{
-			masterUrl:
-				'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg',
-			width: 4696,
-			height: 3131,
-			elementId: '5819a5d8-d638-4da7-903f-1a7a5e2f775c',
-			displayCredit: true,
-			alt: 'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
-			credit: 'Photograph: Patrick T Fallon/AFP/Getty Images',
-			caption:
-				'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
-			blockId: '6030076d8f08ad21ea6006cf',
-			firstPublished: 1613760425000,
-			position: 3,
-		},
-		{
-			masterUrl:
-				'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg',
-			width: 4000,
-			height: 3000,
-			elementId: '8da0bc48-08e0-4169-903d-576e9b5bda46',
-			displayCredit: true,
-			alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
-			credit: 'Photograph: NASA/AFP/Getty Images',
-			caption:
-				'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
-			blockId: '6030066b8f08bdbed283be4b',
-			firstPublished: 1613760122000,
-			position: 4,
-		},
-	],
-	imagesForAppsLightbox: [
-		{
-			width: 2048,
-			height: 1229,
-			credit: 'Photograph: NASA/Getty Images',
-			caption:
-				'Perseverance rover as it touched down in the area known as Jezero crater.',
-			masterUrl:
-				'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg',
-			elementId: 'e2c74dad-5344-4f36-a672-edf514dea72b',
-		},
-		{
-			width: 4000,
-			height: 3000,
-			credit: 'Photograph: NASA/AFP/Getty Images',
-			caption:
-				'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
-			masterUrl:
-				'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg',
-			elementId: 'b7f6f002-33b2-4ecc-b0fe-471a0777c827',
-		},
-		{
-			width: 4696,
-			height: 3131,
-			credit: 'Photograph: Patrick T Fallon/AFP/Getty Images',
-			caption:
-				'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
-			masterUrl:
-				'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg',
-			elementId: '5819a5d8-d638-4da7-903f-1a7a5e2f775c',
-		},
-		{
-			width: 4000,
-			height: 3000,
-			credit: 'Photograph: NASA/AFP/Getty Images',
-			caption:
-				'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
-			masterUrl:
-				'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg',
-			elementId: '8da0bc48-08e0-4169-903d-576e9b5bda46',
-		},
-	],
 };

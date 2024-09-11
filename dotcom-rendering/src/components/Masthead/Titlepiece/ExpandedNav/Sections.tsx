@@ -39,12 +39,6 @@ const columnsStyle = css`
 	}
 `;
 
-const immersiveColumnStyle = css`
-	${from.desktop} {
-		border-right: none;
-	}
-`;
-
 const columnsStyleFromLeftCol = css`
 	${from.leftCol} {
 		max-width: 1140px;
@@ -109,24 +103,14 @@ const brandExtensionLinkFromWide = css`
 
 type Props = {
 	editionId: EditionId;
-	isImmersive?: boolean;
 	nav: NavType;
 	hasPageSkin?: boolean;
 };
 
-export const Sections = ({
-	isImmersive = false,
-	nav,
-	editionId,
-	hasPageSkin,
-}: Props) => {
+export const Sections = ({ nav, editionId, hasPageSkin }: Props) => {
 	return (
 		<ul
-			css={[
-				columnsStyle,
-				isImmersive && immersiveColumnStyle,
-				!hasPageSkin && columnsStyleFromLeftCol,
-			]}
+			css={[columnsStyle, !hasPageSkin && columnsStyleFromLeftCol]}
 			role="menubar"
 			data-testid="nav-menu-columns"
 		>

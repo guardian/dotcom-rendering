@@ -7,6 +7,7 @@ import type { ImageWidthType } from './Picture';
 import { generateSources, getFallbackSource } from './Picture';
 
 export type Loading = NonNullable<ImgHTMLAttributes<unknown>['loading']>;
+export type AspectRatio = '5:3' | '5:4';
 
 type Props = {
 	imageSize: ImageSizeType;
@@ -15,6 +16,7 @@ type Props = {
 	alt?: string;
 	roundedCorners?: boolean;
 	isCircular?: boolean;
+	aspectRatio?: AspectRatio;
 };
 
 /**
@@ -77,24 +79,34 @@ const decideImageWidths = (
  * as these elements are which are `inline` by default.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
+ *
+ * We also add object-fit: cover to ensure the image fills the container and maintains its own aspect ratio.
  */
 const block = css`
 	display: block;
+	object-fit: cover;
 `;
 
-/** On fronts, all images are 5:3 */
-const aspectRatio = css`
-	padding-top: ${(3 / 5) * 100}%;
-	position: relative;
-
-	& > * {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-`;
+/**
+ * On fronts, Fairground cards have an image ration of 5:4.
+ * This is due to replace the existing card ratio of 5:3
+ * For now, we are keeping both ratios.
+ */
+const decideAspectRatioStyles = (aspectRatio: AspectRatio) => {
+	return css`
+		padding-top: ${aspectRatio === '5:4'
+			? `${(4 / 5) * 100}%`
+			: `${(3 / 5) * 100}%`};
+		position: relative;
+		& > * {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	`;
+};
 
 const borderRadius = css`
 	& > * {
@@ -116,6 +128,7 @@ export const CardPicture = ({
 	loading,
 	roundedCorners,
 	isCircular,
+	aspectRatio = '5:3', // Default aspect ratio
 }: Props) => {
 	const sources = generateSources(mainImage, decideImageWidths(imageSize));
 
@@ -126,7 +139,7 @@ export const CardPicture = ({
 			data-size={imageSize}
 			css={[
 				block,
-				aspectRatio,
+				decideAspectRatioStyles(aspectRatio),
 				roundedCorners && borderRadius,
 				isCircular && circularStyles,
 			]}

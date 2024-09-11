@@ -6,14 +6,15 @@ import { Weather, WeatherPlaceholder } from './Weather';
 const appendPartnerCodeToUrl = (
 	url: string | undefined,
 ): string | undefined => {
-	if (!url || !URL.canParse(url)) {
+	if (!url) return undefined;
+
+	try {
+		const link = new URL(url);
+		link.searchParams.append('partner', 'web_guardian_adc');
+		return link.href;
+	} catch {
 		return undefined;
 	}
-
-	const link = new URL(url);
-	link.searchParams.append('partner', 'web_guardian_adc');
-
-	return link.href;
 };
 
 type Props = {

@@ -190,9 +190,6 @@
                 "edition": {
                     "type": "string"
                 },
-                "discussionFrontendUrl": {
-                    "type": "string"
-                },
                 "ipsosTag": {
                     "type": "string"
                 },
@@ -297,7 +294,6 @@
                 "discussionApiClientHeader",
                 "discussionApiUrl",
                 "discussionD2Uid",
-                "discussionFrontendUrl",
                 "edition",
                 "externalEmbedHost",
                 "facebookIaAdUnitRoot",
@@ -1055,6 +1051,9 @@
                                                 "isBoosted": {
                                                     "type": "boolean"
                                                 },
+                                                "boostLevel": {
+                                                    "$ref": "#/definitions/BoostLevel"
+                                                },
                                                 "showBoostedHeadline": {
                                                     "type": "boolean"
                                                 },
@@ -1785,6 +1784,9 @@
                                             "properties": {
                                                 "isBoosted": {
                                                     "type": "boolean"
+                                                },
+                                                "boostLevel": {
+                                                    "$ref": "#/definitions/BoostLevel"
                                                 },
                                                 "showBoostedHeadline": {
                                                     "type": "boolean"
@@ -2517,6 +2519,9 @@
                                                 "isBoosted": {
                                                     "type": "boolean"
                                                 },
+                                                "boostLevel": {
+                                                    "$ref": "#/definitions/BoostLevel"
+                                                },
                                                 "showBoostedHeadline": {
                                                     "type": "boolean"
                                                 },
@@ -3182,13 +3187,21 @@
             ],
             "type": "number"
         },
+        "BoostLevel": {
+            "enum": [
+                "boost",
+                "default",
+                "gigaboost",
+                "megaboost"
+            ],
+            "type": "string"
+        },
         "FEContainerType": {
             "enum": [
                 "dynamic/fast",
                 "dynamic/package",
                 "dynamic/slow",
                 "dynamic/slow-mpu",
-                "fixed/highlights",
                 "fixed/large/slow-XIV",
                 "fixed/medium/fast-XI",
                 "fixed/medium/fast-XII",
@@ -3205,9 +3218,11 @@
                 "fixed/thrasher",
                 "fixed/video",
                 "fixed/video/vertical",
+                "flexible/special",
                 "nav/list",
                 "nav/media-list",
-                "news/most-popular"
+                "news/most-popular",
+                "scrollable/highlights"
             ],
             "type": "string"
         },

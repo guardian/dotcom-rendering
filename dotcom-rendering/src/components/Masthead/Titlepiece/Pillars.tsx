@@ -23,7 +23,6 @@ type Props = {
 	nav: NavType;
 	dataLinkName: string;
 	selectedPillar?: Pillar;
-	isImmersive?: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -31,6 +30,8 @@ const pillarsContainer = css`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
+	width: fit-content;
+	pointer-events: auto;
 `;
 
 const pillarBlock = css`
@@ -211,14 +212,8 @@ export const Pillars = ({
 	nav,
 	selectedPillar,
 	dataLinkName,
-	isImmersive = false,
 	hasPageSkin = false,
 }: Props) => {
-	// TEMPORARY - to stop the linter freaking out
-	// TODO - handle immersive displayed articles and fronts with page skins
-	const needsAdapting = isImmersive || hasPageSkin;
-	console.log({ needsAdapting });
-
 	return (
 		<ul id="navigation" css={pillarsContainer}>
 			{nav.pillars.map((p, i) => {

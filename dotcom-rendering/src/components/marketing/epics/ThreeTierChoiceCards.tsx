@@ -20,8 +20,7 @@ import {
 import type { Dispatch, SetStateAction } from 'react';
 import {
 	ChoiceCardTestData_REGULAR,
-	ChoiceCardTestData_V1,
-	ChoiceCardTestData_V2,
+	ChoiceCardTestData_US,
 } from './ThreeTierChoiceCardData';
 import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
@@ -98,7 +97,7 @@ export type ChoiceInfo = {
 	supportTier: SupportTier;
 	label: (amount: number, currencySymbol: string) => string;
 	benefitsLabel?: string;
-	benefits: string[];
+	benefits: (currencySymbol: string) => string[];
 	recommended: boolean;
 };
 
@@ -149,12 +148,8 @@ type ThreeTierChoiceCardsProps = {
 
 export const getChoiceCardData = (variant: string): ChoiceInfo[] => {
 	switch (variant) {
-		case 'THREE_TIER_CHOICE_CARDS':
-			return ChoiceCardTestData_REGULAR;
-		case 'V1_THREE_TIER_CHOICE_CARDS':
-			return ChoiceCardTestData_V1;
-		case 'V2_THREE_TIER_CHOICE_CARDS':
-			return ChoiceCardTestData_V2;
+		case 'US_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_US;
 		default:
 			return ChoiceCardTestData_REGULAR;
 	}
@@ -217,7 +212,9 @@ export const ThreeTierChoiceCards = ({
 													benefitsLabel={
 														benefitsLabel
 													}
-													benefits={benefits}
+													benefits={benefits(
+														currencySymbol,
+													)}
 												/>
 											) : undefined
 										}

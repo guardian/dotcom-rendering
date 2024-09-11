@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import type { Participations } from '@guardian/ab-core';
-import type { AdsConfig } from '@guardian/commercial';
-import {
-	buildAdsConfigWithConsent,
-	buildImaAdTagUrl,
-	disabledAds,
-} from '@guardian/commercial';
+import { buildImaAdTagUrl } from '@guardian/commercial';
 import type { ConsentState } from '@guardian/libs';
 import { log } from '@guardian/libs';
 import {
@@ -15,17 +10,17 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { useAuthStatus } from '../../lib/useAuthStatus';
+import { getVideoClient } from '../../lib/bridgetApi';
+import { getAuthStatus } from '../../lib/identity';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { google } from './ima';
 import type { VideoEventKey } from './YoutubeAtom';
-import type { PlayerListenerName } from './YoutubePlayer';
+import type { PlayerListenerName, YouTubePlayerArgs } from './YoutubePlayer';
 import { YouTubePlayer } from './YoutubePlayer';
 
 type Props = {
 	uniqueId: string;
 	videoId: string;
-	adTargeting: AdTargeting;
-	consentState: ConsentState;
 	height: number;
 	width: number;
 	title?: string;
@@ -33,10 +28,13 @@ type Props = {
 	eventEmitters: Array<(event: VideoEventKey) => void>;
 	autoPlay: boolean;
 	onReady: () => void;
-	enableIma: boolean;
 	pauseVideo: boolean;
 	deactivateVideo: () => void;
+	enableAds: boolean;
+	adTargeting: AdTargeting;
+	consentState: ConsentState;
 	abTestParticipations: Participations;
+	renderingTarget: RenderingTarget;
 };
 
 type CustomPlayEventDetail = { uniqueId: string };
@@ -349,11 +347,27 @@ const createImaManagerListeners = (uniqueId: string) => {
 	};
 };
 
+const isSignedIn = async (): Promise<boolean> => {
+	try {
+		const authStatus = await getAuthStatus();
+		return (
+			authStatus.kind === 'SignedInWithCookies' ||
+			authStatus.kind === 'SignedInWithOkta'
+		);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			window.guardian.modules.sentry.reportError(
+				error,
+				'youtube-atom-player-is-signed-in',
+			);
+		}
+	}
+	return Promise.resolve(false);
+};
+
 export const YoutubeAtomPlayer = ({
 	uniqueId,
 	videoId,
-	adTargeting,
-	consentState,
 	height,
 	width,
 	title,
@@ -361,10 +375,13 @@ export const YoutubeAtomPlayer = ({
 	eventEmitters,
 	autoPlay,
 	onReady,
-	enableIma,
 	pauseVideo,
 	deactivateVideo,
+	enableAds,
+	adTargeting,
+	consentState,
 	abTestParticipations,
+	renderingTarget,
 }: Props): JSX.Element => {
 	/**
 	 * useRef for player and progressEvents
@@ -394,12 +411,6 @@ export const YoutubeAtomPlayer = ({
 
 	const id = `youtube-player-${uniqueId}`;
 
-	const authStatus = useAuthStatus();
-
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
-
 	/**
 	 * Initialise player useEffect
 	 */
@@ -410,28 +421,6 @@ export const YoutubeAtomPlayer = ({
 					from: 'YoutubeAtomPlayer initialise',
 					videoId,
 				});
-
-				const adsConfig: AdsConfig =
-					!!adTargeting.disableAds || enableIma
-						? disabledAds
-						: buildAdsConfigWithConsent({
-								adUnit: adTargeting.adUnit,
-								clientSideParticipations: abTestParticipations,
-								consentState,
-								customParams: adTargeting.customParams,
-								isAdFreeUser: false,
-								isSignedIn,
-						  });
-
-				const embedConfig = {
-					relatedChannels: [],
-					adsConfig,
-					enableIma,
-					/**
-					 * YouTube recommends disabling related videos when IMA is enabled
-					 */
-					disableRelatedVideos: enableIma,
-				};
 
 				const onReadyListener = createOnReadyListener(
 					videoId,
@@ -446,33 +435,78 @@ export const YoutubeAtomPlayer = ({
 					eventEmitters,
 				);
 
-				player.current = new YouTubePlayer({
+				/**
+				 * Configuration for the base YouTube player
+				 * IMA is configured separately
+				 */
+				const basePlayerConfiguration: YouTubePlayerArgs = {
 					id,
 					youtubeOptions: {
 						height: '100%',
 						width: '100%',
 						videoId,
 						playerVars: {
+							controls: 1,
+							// @ts-expect-error -- advised by YouTube for Android but does not exist in @types/youtube
+							external_fullscreen:
+								renderingTarget === 'Apps' ? 1 : 0,
+							fs: 1,
 							modestbranding: 1,
 							origin,
 							playsinline: 1,
 							rel: 0,
 						},
-						embedConfig,
+						embedConfig: {
+							relatedChannels: [],
+							// Since IMA ads the YouTube player API no longer accepts ad configuration
+							adsConfig: { disableAds: true },
+							enableIma: enableAds,
+							// YouTube recommends disabling related videos when IMA ads are enabled
+							disableRelatedVideos: enableAds,
+						},
 						events: {
 							onStateChange: onStateChangeListener,
+							onFullscreenToggled: () => {
+								if (renderingTarget === 'Apps') {
+									log('dotcom', {
+										from: 'YoutubeAtomPlayer fullscreen',
+										videoId,
+									});
+									// For Android only, iOS will stub the method
+									void getVideoClient().fullscreen();
+								}
+							},
 						},
 					},
 					onReadyListener,
-					enableIma,
-					imaAdsRequestCallback: createImaAdsRequestCallback(
-						adTargeting,
-						consentState,
-						abTestParticipations,
-						isSignedIn,
-					),
-					imaAdManagerListeners: createImaManagerListeners(uniqueId),
-				});
+					enableIma: enableAds,
+				};
+
+				if (enableAds) {
+					isSignedIn()
+						.then((signedIn) => {
+							player.current = new YouTubePlayer({
+								...basePlayerConfiguration,
+								imaAdsRequestCallback:
+									createImaAdsRequestCallback(
+										adTargeting,
+										consentState,
+										abTestParticipations,
+										signedIn,
+									),
+								imaAdManagerListeners:
+									createImaManagerListeners(uniqueId),
+							});
+						})
+						.catch((error: Error) => {
+							window.guardian.modules.sentry.reportError(
+								error,
+								'youtube-atom-player-ima',
+							);
+						});
+				} else {
+					player.current = new YouTubePlayer(basePlayerConfiguration);
+				}
 
 				/**
 				 * Pause the current video when another video is played
@@ -522,22 +556,22 @@ export const YoutubeAtomPlayer = ({
 		 * useEffect dependencies are mostly static but added to array for correctness
 		 */
 		[
+			abTestParticipations,
 			adTargeting,
 			autoPlay,
 			consentState,
+			enableAds,
 			eventEmitters,
+			deactivateVideo,
 			height,
+			id,
 			onReady,
 			origin,
+			playerReadyCallback,
+			renderingTarget,
+			uniqueId,
 			videoId,
 			width,
-			enableIma,
-			abTestParticipations,
-			uniqueId,
-			id,
-			playerReadyCallback,
-			deactivateVideo,
-			isSignedIn,
 		],
 	);
 
@@ -620,7 +654,7 @@ export const YoutubeAtomPlayer = ({
 			data-testid={id}
 			data-atom-type="youtube"
 			title={title}
-			css={enableIma && imaPlayerStyles}
+			css={enableAds && imaPlayerStyles}
 		></div>
 	);
 };

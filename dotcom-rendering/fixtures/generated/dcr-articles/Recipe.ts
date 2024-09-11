@@ -11,1586 +11,1846 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Recipe: DCRArticle = {
-	version: 3,
-	headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
-	standfirst:
-		'<p><em>Cong you bing</em> are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce</p>',
-	webTitle:
-		'Meera Sodha’s vegan recipe for spring onion pancakes | The new vegan',
-	mainMediaElements: [
-		{
-			displayCredit: true,
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			role: 'inline',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '2000',
-							width: '1702',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/1702.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '1000',
-							width: '851',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '500',
-							width: '426',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/426.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '4384',
-							width: '3731',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/3731.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							isMaster: 'true',
-							height: '4384',
-							width: '3731',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
-					},
-				],
-			},
-			elementId: '39fc41ec-eaff-469e-b669-aed9a7497161',
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=85&auto=format&fit=max&s=0f8576b561babcea6db4ac7c4c39b61d',
-							width: 1020,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f0e68993e508db8c81d513a740aae17d',
-							width: 2040,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=85&auto=format&fit=max&s=2f6f81f802ccbc45a720d702343d52bc',
-							width: 940,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=531f9cb72baad5291f6d5abd8ae6cee0',
-							width: 1880,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=85&auto=format&fit=max&s=783f5534691df8762be1335594ed34ad',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=07f6fbb711263a205caf7010f4f798d5',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1900&quality=85&auto=format&fit=max&s=59b873f3cb6ef4f5d2bbde1c900090b6',
-							width: 1900,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=50c241b6b45ca40726ee84a1a3226fde',
-							width: 3800,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=85&auto=format&fit=max&s=dc1a27541c4a1a32bc6d0fd66c7bd421',
-							width: 1300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8e1bb367a46778fe5f2a33b52ce76c00',
-							width: 2600,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=85&auto=format&fit=max&s=d4dabfc10b7bc1ff85093297a569cae4',
-							width: 1140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=1e911fff808b4df87a01d7443bfa6ed9',
-							width: 2280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=980&quality=85&auto=format&fit=max&s=5f9328607255a0d408f8c1178e1ca415',
-							width: 980,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=25dae09de370fabc585d51cd125787cc',
-							width: 1960,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=740&quality=85&auto=format&fit=max&s=f3c5c8ce6bc67b1b90fd331207eb87aa',
-							width: 740,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=71be35827d3e1a09899a8ec00b4a62a4',
-							width: 1480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=85&auto=format&fit=max&s=783f5534691df8762be1335594ed34ad',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=07f6fbb711263a205caf7010f4f798d5',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=480&quality=85&auto=format&fit=max&s=326fc90551664421090f8c155e3fd34c',
-							width: 480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=628fdf795533564589db91b76e94c039',
-							width: 960,
-						},
-					],
-				},
-			],
-			data: {
-				alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
-				caption:
-					'Meera Sodha’s spring onion pancakes with sesame sauce.',
-				credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
-			},
-			position: 1,
-		},
-	],
-	main: '<figure class="element element-image" data-media-id="e5a2cb2a63b788eae68ff654f739eff53a0cee28"> <img src="https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg" alt="Meera Sodha’s spring onion pancakes with sesame sauce" width="851" height="1000" class="gu-image" /> <figcaption> <span class="element-image__caption">Meera Sodha’s spring onion pancakes with sesame sauce.</span> <span class="element-image__credit">Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.</span> </figcaption> </figure>',
-	filterKeyEvents: false,
-	keyEvents: [],
-	blocks: [
-		{
-			id: '5ee89b118f089a4ae3aff6e7',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
-					elementId: '8cb60599-8c35-4adf-91c6-0305682fda28',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: "<h2 id='spring-onion-pancakes-with-sesame-sauce'>Spring onion pancakes with sesame sauce</h2>",
-					elementId: '14f77e05-3a07-4f71-a771-f04fc434c23a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
-					elementId: '374a68ab-7d8f-4d8c-91bd-4eb65fa35a3c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
-					elementId: '0f0b90d7-9a6e-4f2f-8e1a-9b5d3e06b5ce',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
-					elementId: 'a595f6b4-d79c-4c91-a416-60fdc1bf1e5a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
-					elementId: 'a90fdb56-986f-49f5-9f31-2204d6e700e0',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
-					elementId: '14ae357f-e67e-43c9-b136-3c4bf42f685e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
-					elementId: '40312810-d513-4888-a5dd-d44b0354620a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
-					elementId: '46e57954-429b-4d42-975f-afc475181f6c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
-					elementId: '88121a48-dc0f-4cdf-8ce6-4c511a2113c6',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
-					elementId: '0a88da72-b433-423b-b35f-20ee4fc11058',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
-					elementId: '5c7131db-bed7-4518-8b8f-ba6289e42674',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1612607438000,
-			blockCreatedOnDisplay: '10.30 GMT',
-			blockLastUpdated: 1710165471000,
-			blockLastUpdatedDisplay: '13.57 GMT',
-			blockFirstPublished: 1612607438000,
-			blockFirstPublishedDisplay: '10.30 GMT',
-			blockFirstPublishedDisplayNoTimezone: '10.30',
-			contributors: [],
-			primaryDateLine: 'Sat 6 Feb 2021 10.30 GMT',
-			secondaryDateLine: 'Last modified on Mon 11 Mar 2024 13.57 GMT',
-		},
-	],
-	author: {
-		byline: 'Meera Sodha',
-	},
-	byline: 'Meera Sodha',
-	webPublicationDate: '2021-02-06T10:30:38.000Z',
-	webPublicationDateDeprecated: '2021-02-06T10:30:38.000Z',
-	webPublicationDateDisplay: 'Sat 6 Feb 2021 10.30 GMT',
-	webPublicationSecondaryDateDisplay:
-		'Last modified on Mon 11 Mar 2024 13.57 GMT',
-	editionLongForm: 'UK edition',
-	editionId: 'UK',
-	pageId: 'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-	canonicalUrl:
-		'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-	format: {
-		design: 'RecipeDesign',
-		theme: 'LifestylePillar',
-		display: 'StandardDisplay',
-	},
-	designType: 'Recipe',
-	tags: [
-		{
-			id: 'food/series/the-new-vegan',
-			type: 'Series',
-			title: 'The new vegan',
-		},
-		{
-			id: 'food/vegan',
-			type: 'Keyword',
-			title: 'Vegan food and drink',
-		},
-		{
-			id: 'food/vegetables',
-			type: 'Keyword',
-			title: 'Vegetables',
-		},
-		{
-			id: 'food/food',
-			type: 'Keyword',
-			title: 'Food',
-		},
-		{
-			id: 'food/chinese',
-			type: 'Keyword',
-			title: 'Chinese food and drink',
-		},
-		{
-			id: 'lifeandstyle/lifeandstyle',
-			type: 'Keyword',
-			title: 'Life and style',
-		},
-		{
-			id: 'food/main-course',
-			type: 'Keyword',
-			title: 'Main course',
-		},
-		{
-			id: 'food/snacks',
-			type: 'Keyword',
-			title: 'Snacks',
-		},
-		{
-			id: 'food/starter',
-			type: 'Keyword',
-			title: 'Starter',
-		},
-		{
-			id: 'food/pancakes',
-			type: 'Keyword',
-			title: 'Pancakes',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'tone/recipes',
-			type: 'Tone',
-			title: 'Recipes',
-		},
-		{
-			id: 'tone/features',
-			type: 'Tone',
-			title: 'Features',
-		},
-		{
-			id: 'profile/meera-sodha',
-			type: 'Contributor',
-			title: 'Meera Sodha',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2018/01/29/Meera-Sodha.jpg?width=300&quality=85&auto=format&fit=max&s=6eb81b918326c680e4d6f61f75a9de4e',
-			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2018/01/29/Meera_Sodha,_L.png?width=300&quality=85&auto=format&fit=max&s=135136df516ad3a2a8ca0ccfb446a904',
-		},
-		{
-			id: 'publication/theguardian',
-			type: 'Publication',
-			title: 'The Guardian',
-		},
-		{
-			id: 'theguardian/feast',
-			type: 'NewspaperBook',
-			title: 'Feast',
-		},
-		{
-			id: 'theguardian/feast/feast',
-			type: 'NewspaperBookSection',
-			title: 'Feast',
-		},
-		{
-			id: 'tracking/commissioningdesk/feast',
-			type: 'Tracking',
-			title: 'UK Feast',
-		},
-	],
-	pillar: 'lifestyle',
-	isLegacyInteractive: false,
-	isImmersive: false,
-	sectionLabel: 'Vegan food and drink',
-	sectionUrl: 'food/vegan',
-	sectionName: 'food',
-	subMetaSectionLinks: [
-		{
-			url: '/food/vegan',
-			title: 'Vegan food and drink',
-		},
-		{
-			url: '/food/series/the-new-vegan',
-			title: 'The new vegan',
-		},
-	],
-	subMetaKeywordLinks: [
-		{
-			url: '/food/vegetables',
-			title: 'Vegetables',
-		},
-		{
-			url: '/food/food',
-			title: 'Food',
-		},
-		{
-			url: '/food/chinese',
-			title: 'Chinese food and drink',
-		},
-		{
-			url: '/food/main-course',
-			title: 'Main course',
-		},
-		{
-			url: '/food/snacks',
-			title: 'Snacks',
-		},
-		{
-			url: '/food/starter',
-			title: 'Starter',
-		},
-		{
-			url: '/tone/recipes',
-			title: 'recipes',
-		},
-	],
-	shouldHideAds: false,
-	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-	linkedData: [
-		{
-			'@type': 'NewsArticle',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-			publisher: {
-				'@type': 'Organization',
-				'@context': 'https://schema.org',
-				'@id': 'https://www.theguardian.com#publisher',
-				name: 'The Guardian',
-				url: 'https://www.theguardian.com/',
-				logo: {
-					'@type': 'ImageObject',
-					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-					width: 190,
-					height: 60,
-				},
-				sameAs: [
-					'https://www.facebook.com/theguardian',
-					'https://twitter.com/guardian',
-					'https://www.youtube.com/user/TheGuardian',
-				],
-			},
-			isAccessibleForFree: true,
-			isPartOf: {
-				'@type': ['CreativeWork', 'Product'],
-				name: 'The Guardian',
-				productID: 'theguardian.com:basic',
-			},
-			image: [
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=f29b111275893797cff74c084755aca1',
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=9dc1dcd25475025daa5c87bd12a35761',
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=5f74068db4e833bc2746941c4240a323',
-				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&quality=85&auto=format&fit=max&s=13e43d46439a7085e9731dda87d5c949',
-			],
-			author: [
-				{
-					'@type': 'Person',
-					name: 'Meera Sodha',
-					sameAs: 'https://www.theguardian.com/profile/meera-sodha',
-				},
-			],
-			datePublished: '2021-02-06T10:30:38.000Z',
-			headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
-			dateModified: '2024-03-11T13:57:51.000Z',
-			mainEntityOfPage:
-				'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-		},
-		{
-			'@type': 'WebPage',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-			potentialAction: {
-				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-			},
-		},
-		{
-			'@context': 'http://schema.org',
-			'@type': 'Recipe',
-			name: 'Spring onion pancakes with sesame sauce',
-			description:
-				'The world of pancakes is so vast, it is hard to think that on Pancake Day, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. This offering is for cong you bing, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it',
-			image: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/1702.jpg',
-			datePublished: '2021-02-06T10:30:38Z',
-			url: 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-			recipeCategory: ['Lunch'],
-			recipeCuisine: ['Chinese'],
-			recipeIngredient: [
-				'275g plain flour, plus 2 tbsp extra',
-				'Fine sea salt',
-				'Coconut oil',
-				'0.5tsp Chinese five spice powder – I like Bart Ingredients',
-				'6 spring onions, trimmed and finely sliced',
-				'30g tahini',
-				'75g sweet white miso – I like Clearspring',
-				'1tbsp toasted sesame oil',
-				'2tbsp white-wine vinegar',
-				'0.5tsp chilli oil sediment plus 1 tbsp oil – I like Lee Kum Kee',
-			],
-			recipeInstructions: [
-				{
-					'@type': 'HowToStep',
-					text: 'Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.',
-					image: [],
-				},
-				{
-					'@type': 'HowToStep',
-					text: 'While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.',
-					image: [],
-				},
-				{
-					'@type': 'HowToStep',
-					text: 'Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.',
-					image: [],
-				},
-				{
-					'@type': 'HowToStep',
-					text: 'Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.',
-					image: [],
-				},
-				{
-					'@type': 'HowToStep',
-					text: 'When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).',
-					image: [],
-				},
-				{
-					'@type': 'HowToStep',
-					text: 'Serve the pancakes hot with the sauce for dipping or drizzling over the top.',
-					image: [],
-				},
-			],
-			recipeYield: ['Makes 4 pancakes, to serve 2 for lunch'],
-			prepTime: 'PT5M',
-			cookTime: 'PT60M',
-			totalTime: 'PT95M',
-			author: {
-				'@type': 'Person',
-				name: 'Meera Sodha',
-			},
-			suitableForDiet: [
-				'https://schema.org/VeganDiet',
-				'https://schema.org/VegetarianDiet',
-				'',
-				'',
-			],
-		},
-	],
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-		'article:author': 'https://www.theguardian.com/profile/meera-sodha',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=f29b111275893797cff74c084755aca1',
-		'al:ios:url':
-			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:title':
+export const Recipe: Article = {
+	frontendData: {
+		version: 3,
+		headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
+		standfirst:
+			'<p><em>Cong you bing</em> are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce</p>',
+		webTitle:
 			'Meera Sodha’s vegan recipe for spring onion pancakes | The new vegan',
-		'fb:app_id': '180444840287',
-		'article:modified_time': '2024-03-11T13:57:51.000Z',
-		'og:image:height': '720',
-		'og:description':
-			'Cong you bing are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'Food',
-		'article:published_time': '2021-02-06T10:30:38.000Z',
-		'article:tag':
-			'Vegan food and drink,Vegetables,Food,Chinese food and drink,Life and style,Main course,Snacks,Starter,Pancakes',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-		'twitter:app:url:iphone':
-			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=twitter',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=ec72ab6b5b0af60af5e401be7fbb9b85',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=twitter',
-	},
-	config: {
-		references: [
+		mainMediaElements: [
 			{
-				'rich-link':
-					'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				displayCredit: true,
+				_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+				role: 'inline',
+				media: {
+					allImages: [
+						{
+							index: 0,
+							fields: {
+								height: '2000',
+								width: '1702',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/1702.jpg',
+						},
+						{
+							index: 1,
+							fields: {
+								height: '1000',
+								width: '851',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg',
+						},
+						{
+							index: 2,
+							fields: {
+								height: '500',
+								width: '426',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/426.jpg',
+						},
+						{
+							index: 3,
+							fields: {
+								height: '4384',
+								width: '3731',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/3731.jpg',
+						},
+						{
+							index: 4,
+							fields: {
+								isMaster: 'true',
+								height: '4384',
+								width: '3731',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
+						},
+					],
+				},
+				elementId: '39fc41ec-eaff-469e-b669-aed9a7497161',
+				imageSources: [
+					{
+						weighting: 'inline',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
+								width: 930,
+							},
+						],
+					},
+					{
+						weighting: 'thumbnail',
+						srcSet: [],
+					},
+					{
+						weighting: 'supporting',
+						srcSet: [],
+					},
+					{
+						weighting: 'showcase',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=85&auto=format&fit=max&s=0f8576b561babcea6db4ac7c4c39b61d',
+								width: 1020,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f0e68993e508db8c81d513a740aae17d',
+								width: 2040,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=85&auto=format&fit=max&s=2f6f81f802ccbc45a720d702343d52bc',
+								width: 940,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=531f9cb72baad5291f6d5abd8ae6cee0',
+								width: 1880,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=85&auto=format&fit=max&s=783f5534691df8762be1335594ed34ad',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=07f6fbb711263a205caf7010f4f798d5',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
+								width: 930,
+							},
+						],
+					},
+					{
+						weighting: 'halfwidth',
+						srcSet: [],
+					},
+					{
+						weighting: 'immersive',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1900&quality=85&auto=format&fit=max&s=59b873f3cb6ef4f5d2bbde1c900090b6',
+								width: 1900,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=50c241b6b45ca40726ee84a1a3226fde',
+								width: 3800,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=85&auto=format&fit=max&s=dc1a27541c4a1a32bc6d0fd66c7bd421',
+								width: 1300,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8e1bb367a46778fe5f2a33b52ce76c00',
+								width: 2600,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=85&auto=format&fit=max&s=d4dabfc10b7bc1ff85093297a569cae4',
+								width: 1140,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=1e911fff808b4df87a01d7443bfa6ed9',
+								width: 2280,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=980&quality=85&auto=format&fit=max&s=5f9328607255a0d408f8c1178e1ca415',
+								width: 980,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=25dae09de370fabc585d51cd125787cc',
+								width: 1960,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=740&quality=85&auto=format&fit=max&s=f3c5c8ce6bc67b1b90fd331207eb87aa',
+								width: 740,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=71be35827d3e1a09899a8ec00b4a62a4',
+								width: 1480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=85&auto=format&fit=max&s=783f5534691df8762be1335594ed34ad',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=07f6fbb711263a205caf7010f4f798d5',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=480&quality=85&auto=format&fit=max&s=326fc90551664421090f8c155e3fd34c',
+								width: 480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=628fdf795533564589db91b76e94c039',
+								width: 960,
+							},
+						],
+					},
+				],
+				data: {
+					alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
+					caption:
+						'Meera Sodha’s spring onion pancakes with sesame sauce.',
+					credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
+				},
+				position: 1,
 			},
 		],
-		shortUrlId: '/p/d8ex5',
-		switches: {
-			prebidAppnexusUkRow: true,
-			clickToView: true,
-			prebidTrustx: true,
-			scAdFreeBanner: false,
-			compareVariantDecision: false,
-			enableSentryReporting: true,
-			lazyLoadContainers: true,
-			adFreeStrictExpiryEnforcement: false,
-			liveblogRendering: true,
-			remarketing: true,
-			registerWithPhone: false,
-			targeting: true,
-			extendedMostPopularFronts: true,
-			slotBodyEnd: true,
-			emailInlineInFooter: true,
-			facebookTrackingPixel: true,
-			serviceWorkerEnabled: false,
-			iasAdTargeting: true,
-			extendedMostPopular: true,
-			prebidAnalytics: true,
-			imrWorldwide: true,
-			acast: true,
-			twitterUwt: true,
-			prebidAppnexusInvcode: true,
-			prebidAppnexus: true,
-			enableDiscussionSwitch: true,
-			prebidXaxis: true,
-			interactiveFullHeaderSwitch: false,
-			discussionAllPageSize: true,
-			prebidUserSync: true,
-			audioOnwardJourneySwitch: true,
-			mobileStickyPrebid: true,
-			breakingNews: true,
-			externalVideoEmbeds: true,
-			carrotTrafficDriver: true,
-			geoMostPopular: true,
-			weAreHiring: true,
-			relatedContent: true,
-			thirdPartyEmbedTracking: true,
-			prebidOzone: true,
-			prebidAdYouLike: true,
-			mostViewedFronts: true,
-			abSignInGateMainControl: true,
-			ampPrebid: true,
-			googleSearch: true,
-			brazeSwitch: true,
-			consentManagement: true,
-			commercial: true,
-			redplanetForAus: true,
-			prebidSonobi: true,
-			idProfileNavigation: true,
-			confiantAdVerification: true,
-			discussionAllowAnonymousRecommendsSwitch: false,
-			scrollDepth: true,
-			permutive: true,
-			comscore: true,
-			webFonts: true,
-			prebidImproveDigital: true,
-			ophan: true,
-			crosswordSvgThumbnails: true,
-			prebidTriplelift: true,
-			weather: true,
-			commercialOutbrainNewids: true,
-			dotcomRendering: true,
-			abSignInGateMainVariant: true,
-			hostedVideoAutoplay: true,
-			abAdblockAsk: true,
-			prebidPubmatic: true,
-			autoRefresh: true,
-			enhanceTweets: true,
-			prebidIndexExchange: true,
-			prebidOpenx: true,
-			idCookieRefresh: true,
-			sharingComments: true,
-			abSignInGateMandatory: true,
-			discussionPageSize: true,
-			smartAppBanner: false,
-			boostGaUserTimingFidelity: false,
-			historyTags: true,
-			mobileStickyLeaderboard: true,
-			abDeeplyReadTest: false,
-			surveys: true,
-			remoteBanner: true,
-			inizio: true,
-			prebidHeaderBidding: true,
-			a9HeaderBidding: true,
-			lightbox: true,
+		main: '<figure class="element element-image" data-media-id="e5a2cb2a63b788eae68ff654f739eff53a0cee28"> <img src="https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg" alt="Meera Sodha’s spring onion pancakes with sesame sauce" width="851" height="1000" class="gu-image" /> <figcaption> <span class="element-image__caption">Meera Sodha’s spring onion pancakes with sesame sauce.</span> <span class="element-image__credit">Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.</span> </figcaption> </figure>',
+		filterKeyEvents: false,
+		keyEvents: [],
+		blocks: [
+			{
+				id: '5ee89b118f089a4ae3aff6e7',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
+						elementId: '8cb60599-8c35-4adf-91c6-0305682fda28',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='spring-onion-pancakes-with-sesame-sauce'>Spring onion pancakes with sesame sauce</h2>",
+						elementId: '14f77e05-3a07-4f71-a771-f04fc434c23a',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
+						elementId: '374a68ab-7d8f-4d8c-91bd-4eb65fa35a3c',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
+						elementId: '0f0b90d7-9a6e-4f2f-8e1a-9b5d3e06b5ce',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
+						elementId: 'a595f6b4-d79c-4c91-a416-60fdc1bf1e5a',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
+						elementId: 'a90fdb56-986f-49f5-9f31-2204d6e700e0',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
+						elementId: '14ae357f-e67e-43c9-b136-3c4bf42f685e',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
+						elementId: '40312810-d513-4888-a5dd-d44b0354620a',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
+						elementId: '46e57954-429b-4d42-975f-afc475181f6c',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
+						elementId: '88121a48-dc0f-4cdf-8ce6-4c511a2113c6',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
+						elementId: '0a88da72-b433-423b-b35f-20ee4fc11058',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
+						elementId: '5c7131db-bed7-4518-8b8f-ba6289e42674',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1612607438000,
+				blockCreatedOnDisplay: '10.30 GMT',
+				blockLastUpdated: 1710165471000,
+				blockLastUpdatedDisplay: '13.57 GMT',
+				blockFirstPublished: 1612607438000,
+				blockFirstPublishedDisplay: '10.30 GMT',
+				blockFirstPublishedDisplayNoTimezone: '10.30',
+				contributors: [],
+				primaryDateLine: 'Sat 6 Feb 2021 10.30 GMT',
+				secondaryDateLine: 'Last modified on Mon 11 Mar 2024 13.57 GMT',
+			},
+		],
+		author: {
+			byline: 'Meera Sodha',
 		},
-		keywordIds:
-			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
-		sharedAdTargeting: {
-			ct: 'article',
-			co: ['jennifer-rankin'],
-			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-			su: ['0'],
-			edition: 'uk',
-			tn: ['news'],
-			p: 'ng',
-			k: [
-				'eu',
-				'flooding',
-				'world',
-				'europe-news',
-				'natural-disasters',
-				'science',
-				'environment',
-				'climate-change',
-				'wildfires',
-				'scienceofclimatechange',
+		byline: 'Meera Sodha',
+		webPublicationDate: '2021-02-06T10:30:38.000Z',
+		webPublicationDateDeprecated: '2021-02-06T10:30:38.000Z',
+		webPublicationDateDisplay: 'Sat 6 Feb 2021 10.30 GMT',
+		webPublicationSecondaryDateDisplay:
+			'Last modified on Mon 11 Mar 2024 13.57 GMT',
+		editionLongForm: 'UK edition',
+		editionId: 'UK',
+		pageId: 'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+		canonicalUrl:
+			'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+		format: {
+			design: 'RecipeDesign',
+			theme: 'LifestylePillar',
+			display: 'StandardDisplay',
+		},
+		designType: 'Recipe',
+		tags: [
+			{
+				id: 'food/series/the-new-vegan',
+				type: 'Series',
+				title: 'The new vegan',
+			},
+			{
+				id: 'food/vegan',
+				type: 'Keyword',
+				title: 'Vegan food and drink',
+			},
+			{
+				id: 'food/vegetables',
+				type: 'Keyword',
+				title: 'Vegetables',
+			},
+			{
+				id: 'food/food',
+				type: 'Keyword',
+				title: 'Food',
+			},
+			{
+				id: 'food/chinese',
+				type: 'Keyword',
+				title: 'Chinese food and drink',
+			},
+			{
+				id: 'lifeandstyle/lifeandstyle',
+				type: 'Keyword',
+				title: 'Life and style',
+			},
+			{
+				id: 'food/main-course',
+				type: 'Keyword',
+				title: 'Main course',
+			},
+			{
+				id: 'food/snacks',
+				type: 'Keyword',
+				title: 'Snacks',
+			},
+			{
+				id: 'food/starter',
+				type: 'Keyword',
+				title: 'Starter',
+			},
+			{
+				id: 'food/pancakes',
+				type: 'Keyword',
+				title: 'Pancakes',
+			},
+			{
+				id: 'type/article',
+				type: 'Type',
+				title: 'Article',
+			},
+			{
+				id: 'tone/recipes',
+				type: 'Tone',
+				title: 'Recipes',
+			},
+			{
+				id: 'tone/features',
+				type: 'Tone',
+				title: 'Features',
+			},
+			{
+				id: 'profile/meera-sodha',
+				type: 'Contributor',
+				title: 'Meera Sodha',
+				bylineImageUrl:
+					'https://i.guim.co.uk/img/uploads/2018/01/29/Meera-Sodha.jpg?width=300&quality=85&auto=format&fit=max&s=6eb81b918326c680e4d6f61f75a9de4e',
+				bylineLargeImageUrl:
+					'https://i.guim.co.uk/img/uploads/2018/01/29/Meera_Sodha,_L.png?width=300&quality=85&auto=format&fit=max&s=135136df516ad3a2a8ca0ccfb446a904',
+			},
+			{
+				id: 'publication/theguardian',
+				type: 'Publication',
+				title: 'The Guardian',
+			},
+			{
+				id: 'theguardian/feast',
+				type: 'NewspaperBook',
+				title: 'Feast',
+			},
+			{
+				id: 'theguardian/feast/feast',
+				type: 'NewspaperBookSection',
+				title: 'Feast',
+			},
+			{
+				id: 'tracking/commissioningdesk/feast',
+				type: 'Tracking',
+				title: 'UK Feast',
+			},
+		],
+		pillar: 'lifestyle',
+		isLegacyInteractive: false,
+		isImmersive: false,
+		sectionLabel: 'Vegan food and drink',
+		sectionUrl: 'food/vegan',
+		sectionName: 'food',
+		subMetaSectionLinks: [
+			{
+				url: '/food/vegan',
+				title: 'Vegan food and drink',
+			},
+			{
+				url: '/food/series/the-new-vegan',
+				title: 'The new vegan',
+			},
+		],
+		subMetaKeywordLinks: [
+			{
+				url: '/food/vegetables',
+				title: 'Vegetables',
+			},
+			{
+				url: '/food/food',
+				title: 'Food',
+			},
+			{
+				url: '/food/chinese',
+				title: 'Chinese food and drink',
+			},
+			{
+				url: '/food/main-course',
+				title: 'Main course',
+			},
+			{
+				url: '/food/snacks',
+				title: 'Snacks',
+			},
+			{
+				url: '/food/starter',
+				title: 'Starter',
+			},
+			{
+				url: '/tone/recipes',
+				title: 'recipes',
+			},
+		],
+		shouldHideAds: false,
+		isAdFreeUser: false,
+		webURL: 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+		linkedData: [
+			{
+				'@type': 'NewsArticle',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				publisher: {
+					'@type': 'Organization',
+					'@context': 'https://schema.org',
+					'@id': 'https://www.theguardian.com#publisher',
+					name: 'The Guardian',
+					url: 'https://www.theguardian.com/',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+						width: 190,
+						height: 60,
+					},
+					sameAs: [
+						'https://www.facebook.com/theguardian',
+						'https://twitter.com/guardian',
+						'https://www.youtube.com/user/TheGuardian',
+					],
+				},
+				isAccessibleForFree: true,
+				isPartOf: {
+					'@type': ['CreativeWork', 'Product'],
+					name: 'The Guardian',
+					productID: 'theguardian.com:basic',
+				},
+				image: [
+					'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=f29b111275893797cff74c084755aca1',
+					'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=9dc1dcd25475025daa5c87bd12a35761',
+					'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=5f74068db4e833bc2746941c4240a323',
+					'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&quality=85&auto=format&fit=max&s=13e43d46439a7085e9731dda87d5c949',
+				],
+				author: [
+					{
+						'@type': 'Person',
+						name: 'Meera Sodha',
+						sameAs: 'https://www.theguardian.com/profile/meera-sodha',
+					},
+				],
+				datePublished: '2021-02-06T10:30:38.000Z',
+				headline:
+					'Meera Sodha’s vegan recipe for spring onion pancakes',
+				dateModified: '2024-03-11T13:57:51.000Z',
+				mainEntityOfPage:
+					'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			},
+			{
+				'@type': 'WebPage',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				potentialAction: {
+					'@type': 'ViewAction',
+					target: 'android-app://com.guardian/https/www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				},
+			},
+			{
+				'@context': 'http://schema.org',
+				'@type': 'Recipe',
+				name: 'Spring onion pancakes with sesame sauce',
+				description:
+					'The world of pancakes is so vast, it is hard to think that on Pancake Day, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. This offering is for cong you bing, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it',
+				image: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/1702.jpg',
+				datePublished: '2021-02-06T10:30:38Z',
+				url: 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				recipeCategory: ['Lunch'],
+				recipeCuisine: ['Chinese'],
+				recipeIngredient: [
+					'275g plain flour, plus 2 tbsp extra',
+					'Fine sea salt',
+					'Coconut oil',
+					'0.5tsp Chinese five spice powder – I like Bart Ingredients',
+					'6 spring onions, trimmed and finely sliced',
+					'30g tahini',
+					'75g sweet white miso – I like Clearspring',
+					'1tbsp toasted sesame oil',
+					'2tbsp white-wine vinegar',
+					'0.5tsp chilli oil sediment plus 1 tbsp oil – I like Lee Kum Kee',
+				],
+				recipeInstructions: [
+					{
+						'@type': 'HowToStep',
+						text: 'Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.',
+						image: [],
+					},
+					{
+						'@type': 'HowToStep',
+						text: 'While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.',
+						image: [],
+					},
+					{
+						'@type': 'HowToStep',
+						text: 'Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.',
+						image: [],
+					},
+					{
+						'@type': 'HowToStep',
+						text: 'Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.',
+						image: [],
+					},
+					{
+						'@type': 'HowToStep',
+						text: 'When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).',
+						image: [],
+					},
+					{
+						'@type': 'HowToStep',
+						text: 'Serve the pancakes hot with the sauce for dipping or drizzling over the top.',
+						image: [],
+					},
+				],
+				recipeYield: ['Makes 4 pancakes, to serve 2 for lunch'],
+				prepTime: 'PT5M',
+				cookTime: 'PT60M',
+				totalTime: 'PT95M',
+				author: {
+					'@type': 'Person',
+					name: 'Meera Sodha',
+				},
+				suitableForDiet: [
+					'https://schema.org/VeganDiet',
+					'https://schema.org/VegetarianDiet',
+					'',
+					'',
+				],
+			},
+		],
+		openGraphData: {
+			'og:url':
+				'http://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			'article:author': 'https://www.theguardian.com/profile/meera-sodha',
+			'og:image:width': '1200',
+			'og:image':
+				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=f29b111275893797cff74c084755aca1',
+			'al:ios:url':
+				'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=applinks',
+			'article:publisher': 'https://www.facebook.com/theguardian',
+			'og:title':
+				'Meera Sodha’s vegan recipe for spring onion pancakes | The new vegan',
+			'fb:app_id': '180444840287',
+			'article:modified_time': '2024-03-11T13:57:51.000Z',
+			'og:image:height': '720',
+			'og:description':
+				'Cong you bing are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce',
+			'og:type': 'article',
+			'al:ios:app_store_id': '409128287',
+			'article:section': 'Food',
+			'article:published_time': '2021-02-06T10:30:38.000Z',
+			'article:tag':
+				'Vegan food and drink,Vegetables,Food,Chinese food and drink,Life and style,Main course,Snacks,Starter,Pancakes',
+			'al:ios:app_name': 'The Guardian',
+			'og:site_name': 'the Guardian',
+		},
+		twitterData: {
+			'twitter:app:id:iphone': '409128287',
+			'twitter:app:name:googleplay': 'The Guardian',
+			'twitter:app:name:ipad': 'The Guardian',
+			'twitter:card': 'summary_large_image',
+			'twitter:app:name:iphone': 'The Guardian',
+			'twitter:app:id:ipad': '409128287',
+			'twitter:app:id:googleplay': 'com.guardian',
+			'twitter:app:url:googleplay':
+				'guardian://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			'twitter:app:url:iphone':
+				'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=twitter',
+			'twitter:image':
+				'https://i.guim.co.uk/img/media/2b588fe2032633c03745b405a453d1ce9ea7c394/0_2279_3731_2239/master/3731.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=ec72ab6b5b0af60af5e401be7fbb9b85',
+			'twitter:site': '@guardian',
+			'twitter:app:url:ipad':
+				'gnmguardian://food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes?contenttype=Article&source=twitter',
+		},
+		config: {
+			references: [
+				{
+					'rich-link':
+						'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				},
 			],
-			sh: 'https://www.theguardian.com/p/d8ex5',
+			shortUrlId: '/p/d8ex5',
+			switches: {
+				prebidAppnexusUkRow: true,
+				clickToView: true,
+				prebidTrustx: true,
+				scAdFreeBanner: false,
+				compareVariantDecision: false,
+				enableSentryReporting: true,
+				lazyLoadContainers: true,
+				adFreeStrictExpiryEnforcement: false,
+				liveblogRendering: true,
+				remarketing: true,
+				registerWithPhone: false,
+				targeting: true,
+				extendedMostPopularFronts: true,
+				slotBodyEnd: true,
+				emailInlineInFooter: true,
+				facebookTrackingPixel: true,
+				serviceWorkerEnabled: false,
+				iasAdTargeting: true,
+				extendedMostPopular: true,
+				prebidAnalytics: true,
+				imrWorldwide: true,
+				acast: true,
+				twitterUwt: true,
+				prebidAppnexusInvcode: true,
+				prebidAppnexus: true,
+				enableDiscussionSwitch: true,
+				prebidXaxis: true,
+				interactiveFullHeaderSwitch: false,
+				discussionAllPageSize: true,
+				prebidUserSync: true,
+				audioOnwardJourneySwitch: true,
+				mobileStickyPrebid: true,
+				breakingNews: true,
+				externalVideoEmbeds: true,
+				carrotTrafficDriver: true,
+				geoMostPopular: true,
+				weAreHiring: true,
+				relatedContent: true,
+				thirdPartyEmbedTracking: true,
+				prebidOzone: true,
+				prebidAdYouLike: true,
+				mostViewedFronts: true,
+				abSignInGateMainControl: true,
+				ampPrebid: true,
+				googleSearch: true,
+				brazeSwitch: true,
+				consentManagement: true,
+				commercial: true,
+				redplanetForAus: true,
+				prebidSonobi: true,
+				idProfileNavigation: true,
+				confiantAdVerification: true,
+				discussionAllowAnonymousRecommendsSwitch: false,
+				scrollDepth: true,
+				permutive: true,
+				comscore: true,
+				webFonts: true,
+				prebidImproveDigital: true,
+				ophan: true,
+				crosswordSvgThumbnails: true,
+				prebidTriplelift: true,
+				weather: true,
+				commercialOutbrainNewids: true,
+				dotcomRendering: true,
+				abSignInGateMainVariant: true,
+				hostedVideoAutoplay: true,
+				abAdblockAsk: true,
+				prebidPubmatic: true,
+				autoRefresh: true,
+				enhanceTweets: true,
+				prebidIndexExchange: true,
+				prebidOpenx: true,
+				idCookieRefresh: true,
+				sharingComments: true,
+				abSignInGateMandatory: true,
+				discussionPageSize: true,
+				smartAppBanner: false,
+				boostGaUserTimingFidelity: false,
+				historyTags: true,
+				mobileStickyLeaderboard: true,
+				abDeeplyReadTest: false,
+				surveys: true,
+				remoteBanner: true,
+				inizio: true,
+				prebidHeaderBidding: true,
+				a9HeaderBidding: true,
+				lightbox: true,
+			},
+			keywordIds:
+				'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+			sharedAdTargeting: {
+				ct: 'article',
+				co: ['jennifer-rankin'],
+				url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				su: ['0'],
+				edition: 'uk',
+				tn: ['news'],
+				p: 'ng',
+				k: [
+					'eu',
+					'flooding',
+					'world',
+					'europe-news',
+					'natural-disasters',
+					'science',
+					'environment',
+					'climate-change',
+					'wildfires',
+					'scienceofclimatechange',
+				],
+				sh: 'https://www.theguardian.com/p/d8ex5',
+			},
+			toneIds: 'tone/news',
+			dcrSentryDsn:
+				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+			discussionApiUrl:
+				'https://discussion.theguardian.com/discussion-api',
+			sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+			commercialBundleUrl:
+				'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+			discussionApiClientHeader: 'nextgen',
+			shouldHideReaderRevenue: false,
+			sentryHost: 'app.getsentry.com/35463',
+			isPaidContent: false,
+			headline: 'Headline string',
+			idApiUrl: 'https://idapi.theguardian.com',
+			showRelatedContent: true,
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			videoDuration: 0,
+			stage: 'PROD',
+			isSensitive: false,
+			isDev: false,
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+			keywords:
+				'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			revisionNumber: 'DEV',
+			section: 'environment',
+			isPhotoEssay: false,
+			ampIframeUrl:
+				'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+			isLive: false,
+			host: 'https://www.theguardian.com',
+			brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+			contentType: 'Article',
+			idUrl: 'https://profile.theguardian.com',
+			author: 'Jennifer Rankin',
+			dfpAccountId: '59666047',
+			pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+			mmaUrl: 'https://manage.theguardian.com',
+			abTests: {},
+			edition: 'UK',
+			ipsosTag: 'environment',
+			isLiveBlog: false,
+			frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+			webPublicationDate: 1581314427000,
+			discussionD2Uid: 'zHoBy6HNKsk',
 		},
-		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
-		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
-		discussionApiClientHeader: 'nextgen',
-		shouldHideReaderRevenue: false,
-		sentryHost: 'app.getsentry.com/35463',
-		isPaidContent: false,
-		headline: 'Headline string',
-		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: true,
-		adUnit: '/59666047/theguardian.com/environment/article/ng',
-		videoDuration: 0,
-		stage: 'PROD',
-		isSensitive: false,
-		isDev: false,
-		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords:
-			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
-		revisionNumber: 'DEV',
-		section: 'environment',
-		isPhotoEssay: false,
-		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
-		isLive: false,
-		host: 'https://www.theguardian.com',
-		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+		guardianBaseURL: 'https://www.theguardian.com',
 		contentType: 'Article',
-		idUrl: 'https://profile.theguardian.com',
-		author: 'Jennifer Rankin',
-		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
-		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
-		edition: 'UK',
-		ipsosTag: 'environment',
-		isLiveBlog: false,
-		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
-		webPublicationDate: 1581314427000,
-		discussionD2Uid: 'zHoBy6HNKsk',
-	},
-	guardianBaseURL: 'https://www.theguardian.com',
-	contentType: 'Article',
-	hasRelated: true,
-	hasStoryPackage: false,
-	beaconURL: '//phar.gu-web.net',
-	isCommentable: true,
-	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'pancakes',
-						'starter',
-						'snacks',
-						'chinese',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fz7hz',
-				},
-				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
-					name: 'tn',
-					value: ['recipes', 'features'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-			],
-		},
-		US: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fz7hz',
-				},
-				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
-					name: 'tn',
-					value: ['recipes', 'features'],
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'pancakes',
-						'starter',
-						'snacks',
-						'chinese',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'us',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-			],
-		},
-		AU: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'edition',
-					value: 'au',
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'pancakes',
-						'starter',
-						'snacks',
-						'chinese',
-					],
-				},
-				{
-					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fz7hz',
-				},
-				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
-					name: 'tn',
-					value: ['recipes', 'features'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-			],
-		},
-		INT: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'pancakes',
-						'starter',
-						'snacks',
-						'chinese',
-					],
-				},
-				{
-					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fz7hz',
-				},
-				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
-					name: 'tn',
-					value: ['recipes', 'features'],
-				},
-				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-			],
-		},
-		EUR: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: [
-						'vegetables',
-						'main-course',
-						'lifeandstyle',
-						'food',
-						'vegan',
-						'pancakes',
-						'starter',
-						'snacks',
-						'chinese',
-					],
-				},
-				{
-					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fz7hz',
-				},
-				{
-					name: 'co',
-					value: ['meera-sodha'],
-				},
-				{
-					name: 'edition',
-					value: 'eur',
-				},
-				{
-					name: 'tn',
-					value: ['recipes', 'features'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'se',
-					value: ['the-new-vegan'],
-				},
-			],
-		},
-	},
-	pageType: {
-		hasShowcaseMainElement: false,
-		isFront: false,
-		isLiveblog: false,
-		isMinuteArticle: false,
-		isPaidContent: false,
-		isPreview: false,
-		isSensitive: false,
-	},
-	trailText:
-		'<em>Cong you bing</em> are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce',
-	nav: {
-		currentUrl: '/food',
-		pillars: [
-			{
-				title: 'News',
-				url: '/',
-				longTitle: 'Headlines',
-				iconName: 'home',
-				children: [
+		hasRelated: true,
+		hasStoryPackage: false,
+		beaconURL: '//phar.gu-web.net',
+		isCommentable: true,
+		commercialProperties: {
+			UK: {
+				adTargeting: [
 					{
-						title: 'UK',
-						url: '/uk-news',
-						longTitle: 'UK news',
-						children: [
-							{
-								title: 'UK politics',
-								url: '/politics',
-							},
-							{
-								title: 'Education',
-								url: '/education',
-								children: [
-									{
-										title: 'Schools',
-										url: '/education/schools',
-									},
-									{
-										title: 'Teachers',
-										url: '/teacher-network',
-									},
-									{
-										title: 'Universities',
-										url: '/education/universities',
-									},
-									{
-										title: 'Students',
-										url: '/education/students',
-									},
-								],
-							},
-							{
-								title: 'Media',
-								url: '/media',
-							},
-							{
-								title: 'Society',
-								url: '/society',
-							},
-							{
-								title: 'Law',
-								url: '/law',
-							},
-							{
-								title: 'Scotland',
-								url: '/uk/scotland',
-							},
-							{
-								title: 'Wales',
-								url: '/uk/wales',
-							},
-							{
-								title: 'Northern Ireland',
-								url: '/uk/northernireland',
-							},
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: [
+							'vegetables',
+							'main-course',
+							'lifeandstyle',
+							'food',
+							'vegan',
+							'pancakes',
+							'starter',
+							'snacks',
+							'chinese',
 						],
 					},
 					{
-						title: 'World',
-						url: '/world',
-						longTitle: 'World news',
-						children: [
-							{
-								title: 'Europe',
-								url: '/world/europe-news',
-							},
-							{
-								title: 'US',
-								url: '/us-news',
-								longTitle: 'US news',
-							},
-							{
-								title: 'Americas',
-								url: '/world/americas',
-							},
-							{
-								title: 'Asia',
-								url: '/world/asia',
-							},
-							{
-								title: 'Australia',
-								url: '/australia-news',
-								longTitle: 'Australia news',
-							},
-							{
-								title: 'Middle East',
-								url: '/world/middleeast',
-							},
-							{
-								title: 'Africa',
-								url: '/world/africa',
-							},
-							{
-								title: 'Inequality',
-								url: '/inequality',
-							},
-							{
-								title: 'Global development',
-								url: '/global-development',
-							},
-						],
+						name: 'edition',
+						value: 'uk',
 					},
 					{
-						title: 'Climate crisis',
-						url: '/environment/climate-crisis',
+						name: 'url',
+						value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 					},
 					{
-						title: 'Ukraine',
-						url: '/world/ukraine',
+						name: 'ct',
+						value: 'article',
 					},
 					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/fz7hz',
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						name: 'co',
+						value: ['meera-sodha'],
 					},
 					{
-						title: 'Business',
-						url: '/business',
-						children: [
-							{
-								title: 'Economics',
-								url: '/business/economics',
-							},
-							{
-								title: 'Banking',
-								url: '/business/banking',
-							},
-							{
-								title: 'Money',
-								url: '/money',
-								children: [
-									{
-										title: 'Property',
-										url: '/money/property',
-									},
-									{
-										title: 'Pensions',
-										url: '/money/pensions',
-									},
-									{
-										title: 'Savings',
-										url: '/money/savings',
-									},
-									{
-										title: 'Borrowing',
-										url: '/money/debt',
-									},
-									{
-										title: 'Careers',
-										url: '/money/work-and-careers',
-									},
-								],
-							},
-							{
-								title: 'Markets',
-								url: '/business/stock-markets',
-							},
-							{
-								title: 'Project Syndicate',
-								url: '/business/series/project-syndicate-economists',
-							},
-							{
-								title: 'B2B',
-								url: '/business-to-business',
-							},
-							{
-								title: 'Retail',
-								url: '/business/retail',
-							},
-						],
+						name: 'tn',
+						value: ['recipes', 'features'],
 					},
 					{
-						title: 'Environment',
-						url: '/environment',
-						children: [
-							{
-								title: 'Climate crisis',
-								url: '/environment/climate-crisis',
-							},
-							{
-								title: 'Wildlife',
-								url: '/environment/wildlife',
-							},
-							{
-								title: 'Energy',
-								url: '/environment/energy',
-							},
-							{
-								title: 'Pollution',
-								url: '/environment/pollution',
-							},
-						],
+						name: 'p',
+						value: 'ng',
 					},
 					{
-						title: 'UK politics',
-						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
-					},
-					{
-						title: 'Society',
-						url: '/society',
-					},
-					{
-						title: 'Science',
-						url: '/science',
-					},
-					{
-						title: 'Tech',
-						url: '/technology',
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-					},
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
+						name: 'se',
+						value: ['the-new-vegan'],
 					},
 				],
 			},
-			{
-				title: 'Opinion',
-				url: '/commentisfree',
-				longTitle: 'Opinion home',
-				iconName: 'home',
-				children: [
+			US: {
+				adTargeting: [
 					{
-						title: 'The Guardian view',
-						url: '/profile/editorial',
+						name: 'su',
+						value: ['0'],
 					},
 					{
-						title: 'Columnists',
-						url: '/index/contributors',
+						name: 'url',
+						value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 					},
 					{
-						title: 'Cartoons',
-						url: '/tone/cartoons',
+						name: 'ct',
+						value: 'article',
 					},
 					{
-						title: 'Opinion videos',
-						url: '/type/video+tone/comment',
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/fz7hz',
 					},
 					{
-						title: 'Letters',
-						url: '/tone/letters',
+						name: 'co',
+						value: ['meera-sodha'],
 					},
-				],
-			},
-			{
-				title: 'Sport',
-				url: '/sport',
-				longTitle: 'Sport home',
-				iconName: 'home',
-				children: [
 					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
+						name: 'tn',
+						value: ['recipes', 'features'],
+					},
+					{
+						name: 'k',
+						value: [
+							'vegetables',
+							'main-course',
+							'lifeandstyle',
+							'food',
+							'vegan',
+							'pancakes',
+							'starter',
+							'snacks',
+							'chinese',
 						],
 					},
 					{
-						title: 'Cricket',
-						url: '/sport/cricket',
+						name: 'edition',
+						value: 'us',
 					},
 					{
-						title: 'Rugby union',
-						url: '/sport/rugby-union',
+						name: 'p',
+						value: 'ng',
 					},
 					{
-						title: 'Tennis',
-						url: '/sport/tennis',
-					},
-					{
-						title: 'Cycling',
-						url: '/sport/cycling',
-					},
-					{
-						title: 'F1',
-						url: '/sport/formulaone',
-					},
-					{
-						title: 'Golf',
-						url: '/sport/golf',
-					},
-					{
-						title: 'Boxing',
-						url: '/sport/boxing',
-					},
-					{
-						title: 'Rugby league',
-						url: '/sport/rugbyleague',
-					},
-					{
-						title: 'Racing',
-						url: '/sport/horse-racing',
-					},
-					{
-						title: 'US sports',
-						url: '/sport/us-sport',
+						name: 'se',
+						value: ['the-new-vegan'],
 					},
 				],
 			},
-			{
-				title: 'Culture',
-				url: '/culture',
-				longTitle: 'Culture home',
-				iconName: 'home',
-				children: [
+			AU: {
+				adTargeting: [
 					{
-						title: 'Film',
-						url: '/film',
+						name: 'su',
+						value: ['0'],
 					},
 					{
-						title: 'Music',
-						url: '/music',
+						name: 'edition',
+						value: 'au',
 					},
 					{
-						title: 'TV & radio',
-						url: '/tv-and-radio',
+						name: 'k',
+						value: [
+							'vegetables',
+							'main-course',
+							'lifeandstyle',
+							'food',
+							'vegan',
+							'pancakes',
+							'starter',
+							'snacks',
+							'chinese',
+						],
 					},
 					{
-						title: 'Books',
-						url: '/books',
+						name: 'url',
+						value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 					},
 					{
-						title: 'Art & design',
-						url: '/artanddesign',
+						name: 'ct',
+						value: 'article',
 					},
 					{
-						title: 'Stage',
-						url: '/stage',
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/fz7hz',
 					},
 					{
-						title: 'Games',
-						url: '/games',
+						name: 'co',
+						value: ['meera-sodha'],
 					},
 					{
-						title: 'Classical',
-						url: '/music/classicalmusicandopera',
+						name: 'tn',
+						value: ['recipes', 'features'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'se',
+						value: ['the-new-vegan'],
 					},
 				],
 			},
-			{
-				title: 'Lifestyle',
-				url: '/lifeandstyle',
-				longTitle: 'Lifestyle home',
-				iconName: 'home',
-				children: [
+			INT: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: [
+							'vegetables',
+							'main-course',
+							'lifeandstyle',
+							'food',
+							'vegan',
+							'pancakes',
+							'starter',
+							'snacks',
+							'chinese',
+						],
+					},
+					{
+						name: 'url',
+						value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/fz7hz',
+					},
+					{
+						name: 'co',
+						value: ['meera-sodha'],
+					},
+					{
+						name: 'tn',
+						value: ['recipes', 'features'],
+					},
+					{
+						name: 'edition',
+						value: 'int',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'se',
+						value: ['the-new-vegan'],
+					},
+				],
+			},
+			EUR: {
+				adTargeting: [
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: [
+							'vegetables',
+							'main-course',
+							'lifeandstyle',
+							'food',
+							'vegan',
+							'pancakes',
+							'starter',
+							'snacks',
+							'chinese',
+						],
+					},
+					{
+						name: 'url',
+						value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/fz7hz',
+					},
+					{
+						name: 'co',
+						value: ['meera-sodha'],
+					},
+					{
+						name: 'edition',
+						value: 'eur',
+					},
+					{
+						name: 'tn',
+						value: ['recipes', 'features'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'se',
+						value: ['the-new-vegan'],
+					},
+				],
+			},
+		},
+		pageType: {
+			hasShowcaseMainElement: false,
+			isFront: false,
+			isLiveblog: false,
+			isMinuteArticle: false,
+			isPaidContent: false,
+			isPreview: false,
+			isSensitive: false,
+		},
+		trailText:
+			'<em>Cong you bing</em> are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce',
+		nav: {
+			currentUrl: '/food',
+			pillars: [
+				{
+					title: 'News',
+					url: '/',
+					longTitle: 'Headlines',
+					iconName: 'home',
+					children: [
+						{
+							title: 'UK',
+							url: '/uk-news',
+							longTitle: 'UK news',
+							children: [
+								{
+									title: 'UK politics',
+									url: '/politics',
+								},
+								{
+									title: 'Education',
+									url: '/education',
+									children: [
+										{
+											title: 'Schools',
+											url: '/education/schools',
+										},
+										{
+											title: 'Teachers',
+											url: '/teacher-network',
+										},
+										{
+											title: 'Universities',
+											url: '/education/universities',
+										},
+										{
+											title: 'Students',
+											url: '/education/students',
+										},
+									],
+								},
+								{
+									title: 'Media',
+									url: '/media',
+								},
+								{
+									title: 'Society',
+									url: '/society',
+								},
+								{
+									title: 'Law',
+									url: '/law',
+								},
+								{
+									title: 'Scotland',
+									url: '/uk/scotland',
+								},
+								{
+									title: 'Wales',
+									url: '/uk/wales',
+								},
+								{
+									title: 'Northern Ireland',
+									url: '/uk/northernireland',
+								},
+							],
+						},
+						{
+							title: 'World',
+							url: '/world',
+							longTitle: 'World news',
+							children: [
+								{
+									title: 'Europe',
+									url: '/world/europe-news',
+								},
+								{
+									title: 'US',
+									url: '/us-news',
+									longTitle: 'US news',
+								},
+								{
+									title: 'Americas',
+									url: '/world/americas',
+								},
+								{
+									title: 'Asia',
+									url: '/world/asia',
+								},
+								{
+									title: 'Australia',
+									url: '/australia-news',
+									longTitle: 'Australia news',
+								},
+								{
+									title: 'Middle East',
+									url: '/world/middleeast',
+								},
+								{
+									title: 'Africa',
+									url: '/world/africa',
+								},
+								{
+									title: 'Inequality',
+									url: '/inequality',
+								},
+								{
+									title: 'Global development',
+									url: '/global-development',
+								},
+							],
+						},
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Ukraine',
+							url: '/world/ukraine',
+						},
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Newsletters',
+							url: '/email-newsletters',
+						},
+						{
+							title: 'Business',
+							url: '/business',
+							children: [
+								{
+									title: 'Economics',
+									url: '/business/economics',
+								},
+								{
+									title: 'Banking',
+									url: '/business/banking',
+								},
+								{
+									title: 'Money',
+									url: '/money',
+									children: [
+										{
+											title: 'Property',
+											url: '/money/property',
+										},
+										{
+											title: 'Pensions',
+											url: '/money/pensions',
+										},
+										{
+											title: 'Savings',
+											url: '/money/savings',
+										},
+										{
+											title: 'Borrowing',
+											url: '/money/debt',
+										},
+										{
+											title: 'Careers',
+											url: '/money/work-and-careers',
+										},
+									],
+								},
+								{
+									title: 'Markets',
+									url: '/business/stock-markets',
+								},
+								{
+									title: 'Project Syndicate',
+									url: '/business/series/project-syndicate-economists',
+								},
+								{
+									title: 'B2B',
+									url: '/business-to-business',
+								},
+								{
+									title: 'Retail',
+									url: '/business/retail',
+								},
+							],
+						},
+						{
+							title: 'Environment',
+							url: '/environment',
+							children: [
+								{
+									title: 'Climate crisis',
+									url: '/environment/climate-crisis',
+								},
+								{
+									title: 'Wildlife',
+									url: '/environment/wildlife',
+								},
+								{
+									title: 'Energy',
+									url: '/environment/energy',
+								},
+								{
+									title: 'Pollution',
+									url: '/environment/pollution',
+								},
+							],
+						},
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Science',
+							url: '/science',
+						},
+						{
+							title: 'Tech',
+							url: '/technology',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+					],
+				},
+				{
+					title: 'Opinion',
+					url: '/commentisfree',
+					longTitle: 'Opinion home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'The Guardian view',
+							url: '/profile/editorial',
+						},
+						{
+							title: 'Columnists',
+							url: '/index/contributors',
+						},
+						{
+							title: 'Cartoons',
+							url: '/tone/cartoons',
+						},
+						{
+							title: 'Opinion videos',
+							url: '/type/video+tone/comment',
+						},
+						{
+							title: 'Letters',
+							url: '/tone/letters',
+						},
+					],
+				},
+				{
+					title: 'Sport',
+					url: '/sport',
+					longTitle: 'Sport home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Cricket',
+							url: '/sport/cricket',
+						},
+						{
+							title: 'Rugby union',
+							url: '/sport/rugby-union',
+						},
+						{
+							title: 'Tennis',
+							url: '/sport/tennis',
+						},
+						{
+							title: 'Cycling',
+							url: '/sport/cycling',
+						},
+						{
+							title: 'F1',
+							url: '/sport/formulaone',
+						},
+						{
+							title: 'Golf',
+							url: '/sport/golf',
+						},
+						{
+							title: 'Boxing',
+							url: '/sport/boxing',
+						},
+						{
+							title: 'Rugby league',
+							url: '/sport/rugbyleague',
+						},
+						{
+							title: 'Racing',
+							url: '/sport/horse-racing',
+						},
+						{
+							title: 'US sports',
+							url: '/sport/us-sport',
+						},
+					],
+				},
+				{
+					title: 'Culture',
+					url: '/culture',
+					longTitle: 'Culture home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Film',
+							url: '/film',
+						},
+						{
+							title: 'Music',
+							url: '/music',
+						},
+						{
+							title: 'TV & radio',
+							url: '/tv-and-radio',
+						},
+						{
+							title: 'Books',
+							url: '/books',
+						},
+						{
+							title: 'Art & design',
+							url: '/artanddesign',
+						},
+						{
+							title: 'Stage',
+							url: '/stage',
+						},
+						{
+							title: 'Games',
+							url: '/games',
+						},
+						{
+							title: 'Classical',
+							url: '/music/classicalmusicandopera',
+						},
+					],
+				},
+				{
+					title: 'Lifestyle',
+					url: '/lifeandstyle',
+					longTitle: 'Lifestyle home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Fashion',
+							url: '/fashion',
+						},
+						{
+							title: 'Food',
+							url: '/food',
+						},
+						{
+							title: 'Recipes',
+							url: '/tone/recipes',
+						},
+						{
+							title: 'Travel',
+							url: '/travel',
+							children: [
+								{
+									title: 'UK',
+									url: '/travel/uk',
+								},
+								{
+									title: 'Europe',
+									url: '/travel/europe',
+								},
+								{
+									title: 'US',
+									url: '/travel/usa',
+								},
+							],
+						},
+						{
+							title: 'Health & fitness',
+							url: '/lifeandstyle/health-and-wellbeing',
+						},
+						{
+							title: 'Women',
+							url: '/lifeandstyle/women',
+						},
+						{
+							title: 'Men',
+							url: '/lifeandstyle/men',
+						},
+						{
+							title: 'Love & sex',
+							url: '/lifeandstyle/love-and-sex',
+						},
+						{
+							title: 'Beauty',
+							url: '/fashion/beauty',
+						},
+						{
+							title: 'Home & garden',
+							url: '/lifeandstyle/home-and-garden',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Cars',
+							url: '/technology/motoring',
+						},
+					],
+				},
+			],
+			otherLinks: [
+				{
+					title: 'The Guardian app',
+					url: 'https://app.adjust.com/16xt6hai',
+				},
+				{
+					title: 'Video',
+					url: '/video',
+				},
+				{
+					title: 'Podcasts',
+					url: '/podcasts',
+				},
+				{
+					title: 'Pictures',
+					url: '/inpictures',
+				},
+				{
+					title: 'Newsletters',
+					url: '/email-newsletters',
+				},
+				{
+					title: "Today's paper",
+					url: '/theguardian',
+					children: [
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+						{
+							title: 'G2',
+							url: '/theguardian/g2',
+						},
+						{
+							title: 'Journal',
+							url: '/theguardian/journal',
+						},
+						{
+							title: 'Saturday',
+							url: '/theguardian/saturday',
+						},
+					],
+				},
+				{
+					title: 'Inside the Guardian',
+					url: 'https://www.theguardian.com/membership',
+				},
+				{
+					title: 'The Observer',
+					url: '/observer',
+					children: [
+						{
+							title: 'Comment',
+							url: '/theobserver/news/comment',
+						},
+						{
+							title: 'The New Review',
+							url: '/theobserver/new-review',
+						},
+						{
+							title: 'Observer Magazine',
+							url: '/theobserver/magazine',
+						},
+						{
+							title: 'Observer Food Monthly',
+							url: '/theobserver/foodmonthly',
+						},
+					],
+				},
+				{
+					title: 'Guardian Weekly',
+					url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				},
+				{
+					title: 'Crosswords',
+					url: '/crosswords',
+					children: [
+						{
+							title: 'Blog',
+							url: '/crosswords/crossword-blog',
+						},
+						{
+							title: 'Quick',
+							url: '/crosswords/series/quick',
+						},
+						{
+							title: 'Cryptic',
+							url: '/crosswords/series/cryptic',
+						},
+						{
+							title: 'Prize',
+							url: '/crosswords/series/prize',
+						},
+						{
+							title: 'Weekend',
+							url: '/crosswords/series/weekend-crossword',
+						},
+						{
+							title: 'Quiptic',
+							url: '/crosswords/series/quiptic',
+						},
+						{
+							title: 'Genius',
+							url: '/crosswords/series/genius',
+						},
+						{
+							title: 'Speedy',
+							url: '/crosswords/series/speedy',
+						},
+						{
+							title: 'Everyman',
+							url: '/crosswords/series/everyman',
+						},
+						{
+							title: 'Azed',
+							url: '/crosswords/series/azed',
+						},
+					],
+				},
+				{
+					title: 'Wordiply',
+					url: 'https://www.wordiply.com',
+				},
+				{
+					title: 'Corrections',
+					url: '/theguardian/series/corrections-and-clarifications',
+				},
+			],
+			brandExtensions: [
+				{
+					title: 'Search jobs',
+					url: 'https://jobs.theguardian.com',
+				},
+				{
+					title: 'Hire with Guardian Jobs',
+					url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				},
+				{
+					title: 'Holidays',
+					url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				},
+				{
+					title: 'Live events',
+					url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
+				},
+				{
+					title: 'About Us',
+					url: '/about',
+				},
+				{
+					title: 'Digital Archive',
+					url: 'https://theguardian.newspapers.com',
+				},
+				{
+					title: 'Guardian Print Shop',
+					url: '/artanddesign/series/gnm-print-sales',
+				},
+				{
+					title: 'Patrons',
+					url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+				},
+				{
+					title: 'Guardian Licensing',
+					url: 'https://licensing.theguardian.com/',
+				},
+			],
+			currentNavLinkTitle: 'Food',
+			currentPillarTitle: 'Lifestyle',
+			subNavSections: {
+				links: [
 					{
 						title: 'Fashion',
 						url: '/fashion',
@@ -1677,496 +1937,243 @@ export const Recipe: DCRArticle = {
 					},
 				],
 			},
-		],
-		otherLinks: [
-			{
-				title: 'The Guardian app',
-				url: 'https://app.adjust.com/16xt6hai',
-			},
-			{
-				title: 'Video',
-				url: '/video',
-			},
-			{
-				title: 'Podcasts',
-				url: '/podcasts',
-			},
-			{
-				title: 'Pictures',
-				url: '/inpictures',
-			},
-			{
-				title: 'Newsletters',
-				url: '/email-newsletters',
-			},
-			{
-				title: "Today's paper",
-				url: '/theguardian',
-				children: [
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-					{
-						title: 'G2',
-						url: '/theguardian/g2',
-					},
-					{
-						title: 'Journal',
-						url: '/theguardian/journal',
-					},
-					{
-						title: 'Saturday',
-						url: '/theguardian/saturday',
-					},
-				],
-			},
-			{
-				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
-			},
-			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
-				title: 'Guardian Weekly',
-				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
-			},
-			{
-				title: 'Crosswords',
-				url: '/crosswords',
-				children: [
-					{
-						title: 'Blog',
-						url: '/crosswords/crossword-blog',
-					},
-					{
-						title: 'Quick',
-						url: '/crosswords/series/quick',
-					},
-					{
-						title: 'Cryptic',
-						url: '/crosswords/series/cryptic',
-					},
-					{
-						title: 'Prize',
-						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-					},
-					{
-						title: 'Genius',
-						url: '/crosswords/series/genius',
-					},
-					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
-					},
-				],
-			},
-			{
-				title: 'Wordiply',
-				url: 'https://www.wordiply.com',
-			},
-			{
-				title: 'Corrections',
-				url: '/theguardian/series/corrections-and-clarifications',
-			},
-		],
-		brandExtensions: [
-			{
-				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com',
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-			},
-			{
-				title: 'Holidays',
-				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
-			},
-			{
-				title: 'Live events',
-				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
-			},
-			{
-				title: 'About Us',
-				url: '/about',
-			},
-			{
-				title: 'Digital Archive',
-				url: 'https://theguardian.newspapers.com',
-			},
-			{
-				title: 'Guardian Print Shop',
-				url: '/artanddesign/series/gnm-print-sales',
-			},
-			{
-				title: 'Patrons',
-				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
-			},
-			{
-				title: 'Guardian Licensing',
-				url: 'https://licensing.theguardian.com/',
-			},
-		],
-		currentNavLinkTitle: 'Food',
-		currentPillarTitle: 'Lifestyle',
-		subNavSections: {
-			links: [
-				{
-					title: 'Fashion',
-					url: '/fashion',
+			readerRevenueLinks: {
+				header: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Food',
-					url: '/food',
+				footer: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Recipes',
-					url: '/tone/recipes',
+				sideMenu: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 				},
-				{
-					title: 'Travel',
-					url: '/travel',
-					children: [
-						{
-							title: 'UK',
-							url: '/travel/uk',
-						},
-						{
-							title: 'Europe',
-							url: '/travel/europe',
-						},
-						{
-							title: 'US',
-							url: '/travel/usa',
-						},
-					],
+				ampHeader: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Health & fitness',
-					url: '/lifeandstyle/health-and-wellbeing',
+				ampFooter: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Women',
-					url: '/lifeandstyle/women',
-				},
-				{
-					title: 'Men',
-					url: '/lifeandstyle/men',
-				},
-				{
-					title: 'Love & sex',
-					url: '/lifeandstyle/love-and-sex',
-				},
-				{
-					title: 'Beauty',
-					url: '/fashion/beauty',
-				},
-				{
-					title: 'Home & garden',
-					url: '/lifeandstyle/home-and-garden',
-				},
-				{
-					title: 'Money',
-					url: '/money',
-					children: [
-						{
-							title: 'Property',
-							url: '/money/property',
-						},
-						{
-							title: 'Pensions',
-							url: '/money/pensions',
-						},
-						{
-							title: 'Savings',
-							url: '/money/savings',
-						},
-						{
-							title: 'Borrowing',
-							url: '/money/debt',
-						},
-						{
-							title: 'Careers',
-							url: '/money/work-and-careers',
-						},
-					],
-				},
-				{
-					title: 'Cars',
-					url: '/technology/motoring',
-				},
-			],
-		},
-		readerRevenueLinks: {
-			header: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			footer: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
-			},
-			sideMenu: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
-			},
-			ampHeader: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			ampFooter: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
-	},
-	showBottomSocialButtons: true,
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
+		showBottomSocialButtons: true,
+		pageFooter: {
+			footerLinks: [
+				[
+					{
+						text: 'About us',
+						url: '/about',
+						dataLinkName: 'uk : footer : about us',
+						extraClasses: '',
+					},
+					{
+						text: 'Help',
+						url: '/help',
+						dataLinkName: 'uk : footer : tech feedback',
+						extraClasses: 'js-tech-feedback-report',
+					},
+					{
+						text: 'Complaints & corrections',
+						url: '/info/complaints-and-corrections',
+						dataLinkName: 'complaints',
+						extraClasses: '',
+					},
+					{
+						text: 'SecureDrop',
+						url: 'https://www.theguardian.com/securedrop',
+						dataLinkName: 'securedrop',
+						extraClasses: '',
+					},
+					{
+						text: 'Work for us',
+						url: 'https://workforus.theguardian.com',
+						dataLinkName: 'uk : footer : work for us',
+						extraClasses: '',
+					},
+					{
+						text: 'Privacy policy',
+						url: '/info/privacy',
+						dataLinkName: 'privacy',
+						extraClasses: '',
+					},
+					{
+						text: 'Cookie policy',
+						url: '/info/cookies',
+						dataLinkName: 'cookie',
+						extraClasses: '',
+					},
+					{
+						text: 'Terms & conditions',
+						url: '/help/terms-of-service',
+						dataLinkName: 'terms',
+						extraClasses: '',
+					},
+					{
+						text: 'Contact us',
+						url: '/help/contact-us',
+						dataLinkName: 'uk : footer : contact us',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'All topics',
+						url: '/index/subjects/a',
+						dataLinkName: 'uk : footer : all topics',
+						extraClasses: '',
+					},
+					{
+						text: 'All writers',
+						url: '/index/contributors',
+						dataLinkName: 'uk : footer : all contributors',
+						extraClasses: '',
+					},
+					{
+						text: 'Modern Slavery Act',
+						url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+						dataLinkName:
+							'uk : footer : modern slavery act statement',
+						extraClasses: '',
+					},
+					{
+						text: 'Digital newspaper archive',
+						url: 'https://theguardian.newspapers.com',
+						dataLinkName: 'digital newspaper archive',
+						extraClasses: '',
+					},
+					{
+						text: 'Facebook',
+						url: 'https://www.facebook.com/theguardian',
+						dataLinkName: 'uk : footer : facebook',
+						extraClasses: '',
+					},
+					{
+						text: 'YouTube',
+						url: 'https://www.youtube.com/user/TheGuardian',
+						dataLinkName: 'uk : footer : youtube',
+						extraClasses: '',
+					},
+					{
+						text: 'Instagram',
+						url: 'https://www.instagram.com/guardian',
+						dataLinkName: 'uk : footer : instagram',
+						extraClasses: '',
+					},
+					{
+						text: 'LinkedIn',
+						url: 'https://www.linkedin.com/company/theguardian',
+						dataLinkName: 'uk : footer : linkedin',
+						extraClasses: '',
+					},
+					{
+						text: 'Twitter',
+						url: 'https://twitter.com/guardian',
+						dataLinkName: 'uk: footer : twitter',
+						extraClasses: '',
+					},
+					{
+						text: 'Newsletters',
+						url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+						dataLinkName: 'uk : footer : newsletters',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'Advertise with us',
+						url: 'https://advertising.theguardian.com',
+						dataLinkName: 'uk : footer : advertise with us',
+						extraClasses: '',
+					},
+					{
+						text: 'Guardian Labs',
+						url: '/guardian-labs',
+						dataLinkName: 'uk : footer : guardian labs',
+						extraClasses: '',
+					},
+					{
+						text: 'Search jobs',
+						url: 'https://jobs.theguardian.com',
+						dataLinkName: 'uk : footer : jobs',
+						extraClasses: '',
+					},
+					{
+						text: 'Patrons',
+						url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+						dataLinkName: 'uk : footer : patrons',
+						extraClasses: '',
+					},
+				],
 			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
+		},
+		publication: 'The Guardian',
+		shouldHideReaderRevenue: false,
+		slotMachineFlags: '',
+		contributionsServiceUrl: 'https://contributions.guardianapis.com',
+		isSpecialReport: false,
+		showTableOfContents: false,
+		lang: 'en',
+		isRightToLeftLang: false,
+		imagesForLightbox: [
+			{
+				masterUrl:
+					'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
+				width: 3731,
+				height: 4384,
+				elementId: '39fc41ec-eaff-469e-b669-aed9a7497161',
+				displayCredit: true,
+				alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
+				credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
+				caption:
+					'Meera Sodha’s spring onion pancakes with sesame sauce.',
+				position: 1,
+			},
+		],
+		imagesForAppsLightbox: [
+			{
+				width: 3731,
+				height: 4384,
+				credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
+				caption:
+					'Meera Sodha’s spring onion pancakes with sesame sauce.',
+				masterUrl:
+					'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
+				elementId: '39fc41ec-eaff-469e-b669-aed9a7497161',
+			},
 		],
 	},
-	publication: 'The Guardian',
-	shouldHideReaderRevenue: false,
-	slotMachineFlags: '',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	isSpecialReport: false,
-	showTableOfContents: false,
-	lang: 'en',
-	isRightToLeftLang: false,
-	imagesForLightbox: [
-		{
-			masterUrl:
-				'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
-			width: 3731,
-			height: 4384,
-			elementId: '39fc41ec-eaff-469e-b669-aed9a7497161',
-			displayCredit: true,
-			alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
-			credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
-			caption: 'Meera Sodha’s spring onion pancakes with sesame sauce.',
-			position: 1,
-		},
-	],
-	imagesForAppsLightbox: [
-		{
-			width: 3731,
-			height: 4384,
-			credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
-			caption: 'Meera Sodha’s spring onion pancakes with sesame sauce.',
-			masterUrl:
-				'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
-			elementId: '39fc41ec-eaff-469e-b669-aed9a7497161',
-		},
-	],
 };

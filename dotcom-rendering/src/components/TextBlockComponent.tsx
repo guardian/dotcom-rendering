@@ -15,6 +15,7 @@ import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
 import { decidePalette } from '../lib/decidePalette';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
+import { palette as themePalette } from '../palette';
 import { logger } from '../server/lib/logging';
 import { DropCap } from './DropCap';
 
@@ -162,6 +163,8 @@ const styles = (format: ArticleFormat) => css`
 	margin-bottom: ${remSpace[3]};
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans17 : article17};
+	color: ${themePalette('--textblock-text')};
+
 	strong em,
 	strong u {
 		font-weight: bold;
@@ -233,10 +236,10 @@ const styles = (format: ArticleFormat) => css`
 `;
 
 const buildElementTree =
-	(html: string, format: ArticleFormat, showDropCaps: boolean) =>
+	(format: ArticleFormat, showDropCaps: boolean) =>
 	(node: Node, key: number): ReactNode => {
 		const children = Array.from(node.childNodes).map(
-			buildElementTree(html, format, showDropCaps),
+			buildElementTree(format, showDropCaps),
 		);
 
 		switch (node.nodeName) {
@@ -365,11 +368,7 @@ export const TextBlockComponent = ({
 	const fragment = parseHtml(sanitise(html, sanitiserOptions));
 	return jsx(Fragment, {
 		children: Array.from(fragment.childNodes).map(
-			buildElementTree(
-				sanitise(html, sanitiserOptions),
-				format,
-				showDropCaps,
-			),
+			buildElementTree(format, showDropCaps),
 		),
 	});
 };

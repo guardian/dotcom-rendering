@@ -6,7 +6,7 @@ import {
 	Button,
 	LinkButton,
 	SvgCheckmark,
-	SvgShare,
+	SvgShareWeb,
 } from '@guardian/source/react-components';
 import { useEffect, useMemo, useState } from 'react';
 import { transparentColour } from '../lib/transparentColour';
@@ -38,7 +38,7 @@ const copiedButtonStyles = (sizeXSmall: boolean) => css`
 	width: ${sizeXSmall ? '101px' : '132px'};
 	padding: ${sizeXSmall ? '0 4px' : '0 10px'};
 	:hover {
-		color: inherit;
+		background-color: inherit;
 	}
 	svg {
 		fill: ${palette.success[400]};
@@ -65,15 +65,16 @@ const buttonStyles = (sizeXSmall: boolean) => css`
 
 const hoverStyles = css`
 	:hover {
-		color: ${themePalette('--share-button-liveblog-mobile')};
+		color: ${themePalette('--share-button-liveblog-mobile-meta')};
 		background-color: ${palette.neutral[100]};
+		border-color: ${palette.neutral[100]};
 		svg {
-			fill: ${themePalette('--share-button-liveblog-mobile')};
+			fill: ${themePalette('--share-button-liveblog-mobile-meta')};
 		}
 	}
 `;
 
-const liveBlogMobile = (isCopied: boolean) => css`
+const liveBlogMobileMeta = (isCopied: boolean) => css`
 	${until.desktop} {
 		color: ${palette.neutral[100]};
 		border-color: ${transparentColour(palette.neutral[100], 0.4)};
@@ -100,12 +101,12 @@ const getUrl = ({ pageId, blockId }: { pageId: string; blockId?: string }) => {
 export const CopyNativeShareButton = ({
 	onShare,
 	size,
-	isLiveBlogArticleMeta,
+	isLiveBlogMeta,
 	isCopied,
 }: {
 	onShare: () => void;
 	size?: Size;
-	isLiveBlogArticleMeta: boolean;
+	isLiveBlogMeta: boolean;
 	isCopied: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
@@ -116,13 +117,13 @@ export const CopyNativeShareButton = ({
 			type="button"
 			priority="tertiary"
 			iconSide="left"
-			icon={isCopied ? <SvgCheckmark /> : <SvgShare />}
+			icon={isCopied ? <SvgCheckmark /> : <SvgShareWeb />}
 			css={[
 				...(isCopied
 					? [copiedButtonStyles(sizeXSmall)]
 					: [buttonStyles(sizeXSmall)]),
 				sharedButtonStyles(sizeXSmall),
-				isLiveBlogArticleMeta && liveBlogMobile(isCopied),
+				isLiveBlogMeta && liveBlogMobileMeta(isCopied),
 			]}
 		>
 			{isCopied ? 'Link copied' : 'Share'}
@@ -133,11 +134,11 @@ export const CopyNativeShareButton = ({
 export const EmailLink = ({
 	href,
 	size,
-	isLiveBlogArticleMeta,
+	isLiveBlogMeta,
 }: {
 	href: string;
 	size?: Size;
-	isLiveBlogArticleMeta: boolean;
+	isLiveBlogMeta: boolean;
 }) => {
 	const sizeXSmall = size === 'xsmall';
 	return (
@@ -147,11 +148,11 @@ export const EmailLink = ({
 			type="button"
 			priority="tertiary"
 			iconSide="left"
-			icon={<SvgShare />}
+			icon={<SvgShareWeb />}
 			css={[
 				buttonStyles(sizeXSmall),
 				sharedButtonStyles(sizeXSmall),
-				isLiveBlogArticleMeta && liveBlogMobile(false),
+				isLiveBlogMeta && liveBlogMobileMeta(false),
 			]}
 		>
 			Share
@@ -185,7 +186,7 @@ export const ShareButton = ({
 	const [isCopied, setIsCopied] = useState(false);
 	const [buttonKind, setButtonKind] = useState<ButtonKind>('email');
 
-	const isLiveBlogArticleMeta =
+	const isLiveBlogMeta =
 		format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta';
 
 	const shareData = useMemo(
@@ -226,7 +227,7 @@ export const ShareButton = ({
 						navigator.share(shareData).catch(console.error);
 					}}
 					size={size}
-					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
 				/>
 			);
@@ -247,7 +248,7 @@ export const ShareButton = ({
 							.catch(console.error);
 					}}
 					size={size}
-					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+					isLiveBlogMeta={isLiveBlogMeta}
 					isCopied={isCopied}
 				/>
 			);
@@ -259,7 +260,7 @@ export const ShareButton = ({
 						blockId,
 					})}`}
 					size={size}
-					isLiveBlogArticleMeta={isLiveBlogArticleMeta}
+					isLiveBlogMeta={isLiveBlogMeta}
 				/>
 			);
 	}

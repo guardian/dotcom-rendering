@@ -21,7 +21,7 @@ export const rootStyles = (
 		${paletteDeclarations(format, 'light')}
 		body {
 			color: ${sourcePalette.neutral[7]};
-			background: ${sourcePalette.neutral[100]};
+			background: transparent;
 		}
 		/* Indicate whether UI can adapt https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme */
 		color-scheme: ${darkModeAvailable ? 'light dark' : 'light'};
@@ -33,7 +33,7 @@ export const rootStyles = (
 							${paletteDeclarations(format, 'dark')}
 							body {
 								color: ${sourcePalette.neutral[86]};
-								background: ${sourcePalette.neutral[7]};
+								background: transparent;
 							}
 						}
 					}

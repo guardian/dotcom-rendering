@@ -2,32 +2,33 @@ import { getZIndex } from './getZIndex';
 
 describe('getZIndex', () => {
 	it('gets the correct zindex for group and sibling', () => {
-		expect(getZIndex('sticky-video-button')).toBe('z-index: 31;');
-		expect(getZIndex('sticky-video')).toBe('z-index: 30;');
-		expect(getZIndex('banner')).toBe('z-index: 29;');
-		expect(getZIndex('dropdown')).toBe('z-index: 28;');
-		expect(getZIndex('mastheadMyAccountDropdown')).toBe('z-index: 27;');
-		expect(getZIndex('mastheadEditionDropdown')).toBe('z-index: 26;');
-		expect(getZIndex('burger')).toBe('z-index: 25;');
+		expect(getZIndex('sticky-video-button')).toBe('z-index: 30;');
+		expect(getZIndex('sticky-video')).toBe('z-index: 29;');
+		expect(getZIndex('banner')).toBe('z-index: 28;');
+		expect(getZIndex('dropdown')).toBe('z-index: 27;');
+		expect(getZIndex('burger')).toBe('z-index: 26;');
 		expect(getZIndex('mastheadVeggieBurgerExpandedMobile')).toBe(
-			'z-index: 24;',
+			'z-index: 25;',
 		);
-		expect(getZIndex('expanded-veggie-menu-wrapper')).toBe('z-index: 23;');
-		expect(getZIndex('expanded-veggie-menu')).toBe('z-index: 22;');
+		expect(getZIndex('expanded-veggie-menu-wrapper')).toBe('z-index: 24;');
+		expect(getZIndex('expanded-veggie-menu')).toBe('z-index: 23;');
+		expect(getZIndex('fullPageInteractiveHeaderWrapper')).toBe(
+			'z-index: 22;',
+		);
 		expect(getZIndex('mobileSticky')).toBe('z-index: 21;');
 		expect(getZIndex('stickyAdWrapperLabsHeader')).toBe('z-index: 20;');
 		expect(getZIndex('stickyAdWrapper')).toBe('z-index: 19;');
 		expect(getZIndex('stickyAdWrapperNav')).toBe('z-index: 18;');
-		expect(getZIndex('editionDropdown')).toBe('z-index: 17;');
-		expect(getZIndex('summaryDetails')).toBe('z-index: 16;');
-		expect(getZIndex('toast')).toBe('z-index: 15;');
-		expect(getZIndex('onwardsCarousel')).toBe('z-index: 14;');
-		expect(getZIndex('myAccountDropdown')).toBe('z-index: 13;');
-		expect(getZIndex('searchHeaderLink')).toBe('z-index: 12;');
-		expect(getZIndex('TheGuardian')).toBe('z-index: 11;');
-		expect(getZIndex('editionSwitcherBanner')).toBe('z-index: 10;');
-		expect(getZIndex('headerWrapper')).toBe('z-index: 9;');
-		expect(getZIndex('tagLinkOverlay')).toBe('z-index: 8;');
+		expect(getZIndex('mastheadMyAccountDropdown')).toBe('z-index: 17;');
+		expect(getZIndex('mastheadEditionDropdown')).toBe('z-index: 16;');
+		expect(getZIndex('editionDropdown')).toBe('z-index: 15;');
+		expect(getZIndex('summaryDetails')).toBe('z-index: 14;');
+		expect(getZIndex('toast')).toBe('z-index: 13;');
+		expect(getZIndex('onwardsCarousel')).toBe('z-index: 12;');
+		expect(getZIndex('myAccountDropdown')).toBe('z-index: 11;');
+		expect(getZIndex('searchHeaderLink')).toBe('z-index: 10;');
+		expect(getZIndex('TheGuardian')).toBe('z-index: 9;');
+		expect(getZIndex('editionSwitcherBanner')).toBe('z-index: 8;');
 		expect(getZIndex('articleHeadline')).toBe('z-index: 7;');
 		expect(getZIndex('immersiveBlackBox')).toBe('z-index: 6;');
 		expect(getZIndex('bodyArea')).toBe('z-index: 5;');

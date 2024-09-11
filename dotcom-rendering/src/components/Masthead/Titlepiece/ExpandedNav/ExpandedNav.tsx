@@ -3,7 +3,7 @@
  * This file was largely copied from src/components/Nav/ExpandedMenu/ExpandedMenu.tsx
  */
 import { css } from '@emotion/react';
-import { from, space, textSans20, until } from '@guardian/source/foundations';
+import { from, textSans20, until } from '@guardian/source/foundations';
 import type { EditionId } from '../../../../lib/edition';
 import { getZIndex } from '../../../../lib/getZIndex';
 import type { NavType } from '../../../../model/extract-nav';
@@ -16,8 +16,6 @@ const collapsedMenuStyles = css`
 		/* the negative translateX makes the nav hide to the side */
 		transform: translateX(-110%);
 		transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-		/** TODO - update the box shadow colour to use the themed palette */
-		box-shadow: ${space[1]}px 0 ${space[4]}px rgba(0, 0, 0, 0.4);
 		bottom: 0;
 		height: 100%;
 		overflow: auto;
@@ -61,36 +59,27 @@ const wrapperMainMenuStyles = css`
 	}
 `;
 
-const mobileBackgroundOverlay = css`
-	${until.desktop} {
-		/* TODO - use palette rather than hardcoded RGBA colour for background overlay */
-		background-color: rgba(0, 0, 0, 0.5);
-		position: fixed;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-	}
-`;
-
 const mainMenuStyles = css`
 	background-color: ${themePalette('--masthead-nav-background')};
 	${textSans20};
 	${getZIndex('expanded-veggie-menu')}
-	overflow: hidden;
-	position: fixed;
 	left: 0;
 	top: 0;
 	box-sizing: border-box;
 
+	position: absolute;
 	margin-right: 28px;
+	box-shadow: 28px 0 rgba(0, 0, 0, 0.4);
 	${from.mobileLandscape} {
 		margin-right: 40px;
+		box-shadow: 40px 0 rgba(0, 0, 0, 0.4);
 	}
 	${from.tablet} {
 		margin-right: 100px;
+		box-shadow: 100px 0 rgba(0, 0, 0, 0.4);
 	}
 	${from.desktop} {
+		box-shadow: none;
 		position: absolute;
 		padding-bottom: 0;
 		padding-top: 0;
@@ -111,7 +100,6 @@ const mainMenuStyles = css`
 type Props = {
 	editionId: EditionId;
 	nav: NavType;
-	isImmersive?: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -120,19 +108,13 @@ type Props = {
  * secondary pillar links, other Guardian links as well as
  * non journalistic links for support asks and other marketing.
  */
-export const ExpandedNav = ({
-	isImmersive,
-	nav,
-	editionId,
-	hasPageSkin,
-}: Props) => {
+export const ExpandedNav = ({ nav, editionId, hasPageSkin }: Props) => {
 	return (
 		<div
 			id={expandedMenuId}
 			data-testid="expanded-menu"
 			css={wrapperMainMenuStyles}
 		>
-			<div css={mobileBackgroundOverlay} />
 			<div
 				css={css`
 					${from.desktop} {
@@ -143,7 +125,6 @@ export const ExpandedNav = ({
 				<div css={mainMenuStyles}>
 					<Sections
 						editionId={editionId}
-						isImmersive={isImmersive}
 						nav={nav}
 						hasPageSkin={hasPageSkin}
 					/>

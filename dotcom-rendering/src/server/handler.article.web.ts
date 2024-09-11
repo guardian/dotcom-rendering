@@ -1,9 +1,9 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/fe-articles/Standard';
-import { enhanceArticleType } from '../lib/article';
 import { decideFormat } from '../lib/decideFormat';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { validateAsBlock } from '../model/validate';
+import { enhanceArticleType } from '../types/article';
 import type { FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
 import { recordTypeAndPlatform } from './lib/logging-store';
@@ -13,7 +13,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
 	const article = enhanceArticleType(body, 'Web');
 	const { html, prefetchScripts } = renderHtml({
-		article,
+		article: article.frontendData,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);
@@ -42,7 +42,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
 	const article = enhanceArticleType(body, 'Web');
 	const { html, prefetchScripts } = renderHtml({
-		article,
+		article: article.frontendData,
 	});
 
 	res.status(200).set('Link', makePrefetchHeader(prefetchScripts)).send(html);

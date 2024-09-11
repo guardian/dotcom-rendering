@@ -25,6 +25,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 
 	const isMyGuardianEnabled = useIsMyGuardianEnabled();
 	const isBridgetCompatible = useIsBridgetCompatible('2.5.0');
+
 	isBridgetCompatible && isMyGuardianEnabled && setShowFollowTagButton(true);
 
 	useEffect(() => {
@@ -152,7 +153,7 @@ export const FollowWrapper = ({ id, displayName }: Props) => {
 	return (
 		<div
 			css={css`
-				min-height: 24px;
+				min-height: ${space[6]}px;
 
 				${from.phablet} {
 					display: inline-flex;

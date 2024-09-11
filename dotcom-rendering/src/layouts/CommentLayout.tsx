@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-	isUndefined,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, isUndefined } from '@guardian/libs';
 import {
 	from,
 	palette as sourcePalette,
@@ -28,7 +23,6 @@ import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
@@ -37,7 +31,6 @@ import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd.importable';
-import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -53,9 +46,9 @@ import { decideTrail } from '../lib/decideTrail';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { DCRArticle } from '../types/frontend';
+import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
 	children,
@@ -95,7 +88,7 @@ const StandardGrid = ({
 					Right Column
 				*/
 				${from.wide} {
-					grid-template-columns: 219px 1px 620px 60px 320px;
+					grid-template-columns: 219px 1px 620px 80px 300px;
 
 					${display === ArticleDisplay.Showcase
 						? css`
@@ -266,7 +259,7 @@ const mainMediaWrapper = css`
 `;
 
 interface CommonProps {
-	article: DCRArticle;
+	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -308,16 +301,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 
 	const renderAds = isWeb && canRenderAds(article);
 
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-
 	const { absoluteServerTimes = false } = article.config.switches;
-
-	const shouldShowTagLink =
-		isWeb &&
-		!!article.config.switches.tagLinkDesign &&
-		article.config.abTests.tagLinkDesignControl !== 'control' &&
-		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
 
 	return (
 		<>
@@ -343,139 +327,24 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 							</Section>
 						</Stuck>
 					)}
-
-					{inUpdatedHeaderABTest ? (
-						<Masthead
-							nav={props.NAV}
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							idApiUrl={article.config.idApiUrl}
-							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={true}
-							isImmersive={false}
-							hasPageSkin={false}
-							hasPageSkinContentSelfConstrain={false}
-						/>
-					) : (
-						<SendToBack>
-							{format.theme !== ArticleSpecial.Labs && (
-								<Section
-									fullWidth={true}
-									shouldCenter={false}
-									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
-									backgroundColour={sourcePalette.brand[400]}
-									element="header"
-								>
-									<Header
-										editionId={article.editionId}
-										idUrl={article.config.idUrl}
-										mmaUrl={article.config.mmaUrl}
-										discussionApiUrl={
-											article.config.discussionApiUrl
-										}
-										urls={
-											article.nav.readerRevenueLinks
-												.header
-										}
-										remoteHeader={
-											!!article.config.switches
-												.remoteHeader
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										idApiUrl={article.config.idApiUrl}
-										headerTopBarSearchCapiSwitch={
-											!!article.config.switches
-												.headerTopBarSearchCapi
-										}
-									/>
-								</Section>
-							)}
-
-							<Section
-								fullWidth={true}
-								borderColour={sourcePalette.brand[600]}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="nav"
-							>
-								<Nav
-									nav={props.NAV}
-									isImmersive={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
-									displayRoundel={
-										format.display ===
-											ArticleDisplay.Immersive ||
-										format.theme === ArticleSpecial.Labs
-									}
-									selectedPillar={props.NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-								/>
-							</Section>
-
-							{props.NAV.subNavSections && (
-								<Section
-									fullWidth={true}
-									backgroundColour={themePalette(
-										'--article-background',
-									)}
-									padSides={false}
-									element="aside"
-								>
-									<Island
-										priority="enhancement"
-										defer={{ until: 'idle' }}
-									>
-										<SubNav
-											subNavSections={
-												props.NAV.subNavSections
-											}
-											currentNavLink={
-												props.NAV.currentNavLink
-											}
-											position="header"
-										/>
-									</Island>
-								</Section>
-							)}
-
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								padSides={false}
-								showTopBorder={false}
-							>
-								<StraightLines
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={themePalette('--straight-lines')}
-								/>
-							</Section>
-						</SendToBack>
-					)}
+					<Masthead
+						nav={props.NAV}
+						editionId={article.editionId}
+						idUrl={article.config.idUrl}
+						mmaUrl={article.config.mmaUrl}
+						discussionApiUrl={article.config.discussionApiUrl}
+						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={true}
+						showSlimNav={false}
+						hasPageSkin={false}
+						hasPageSkinContentSelfConstrain={false}
+						pageId={article.pageId}
+					/>
 				</div>
 			)}
 
-			<main
-				data-layout="CommentLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link-test' : ''}
-			>
+			<main data-layout="CommentLayout">
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -532,7 +401,6 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								shouldShowTagLink={shouldShowTagLink}
 							/>
 						</GridItem>
 						<GridItem area="border">

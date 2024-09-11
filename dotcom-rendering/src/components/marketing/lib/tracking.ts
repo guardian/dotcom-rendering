@@ -7,6 +7,7 @@ import type { OphanAction, OphanComponentEvent } from '@guardian/libs';
 import { isUndefined } from '@guardian/libs';
 import { addRegionIdToSupportUrl } from '@guardian/support-dotcom-components';
 import type {
+	AbandonedBasket,
 	BannerTest,
 	BannerVariant,
 	ContributionFrequency,
@@ -119,6 +120,40 @@ export const addTrackingParams = (
 	);
 	const alreadyHasQueryString = baseUrl.includes('?');
 	return `${baseUrl}${alreadyHasQueryString ? '&' : '?'}${queryString}`;
+};
+
+const addAbandonedBasketContributionParams = (
+	baseUrl: string,
+	{ region, amount, billingPeriod }: AbandonedBasket,
+): string => {
+	return `${baseUrl}/${region}/contribute/checkout?selected-amount=${amount}&selected-contribution-type=${billingPeriod}`;
+};
+
+export const addAbandonedBasketParamsToUrl = (
+	baseUrl: string,
+	abandonedBasket: AbandonedBasket,
+): string => {
+	switch (abandonedBasket.product) {
+		case 'Contribution':
+		case 'SupporterPlus':
+			return addAbandonedBasketContributionParams(
+				baseUrl,
+				abandonedBasket,
+			);
+		default:
+			return baseUrl;
+	}
+};
+
+export const addAbandonedBasketAndTrackingParamsToUrl = (
+	baseUrl: string,
+	abandonedBasket: AbandonedBasket,
+	tracking: Tracking,
+): string => {
+	return addTrackingParams(
+		addAbandonedBasketParamsToUrl(baseUrl, abandonedBasket),
+		tracking,
+	);
 };
 
 export const isSupportUrl = (baseUrl: string): boolean =>

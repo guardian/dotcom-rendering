@@ -1456,3 +1456,128 @@ export const DynamoWithSpecialPaletteVariations = () => {
 		</>
 	);
 };
+
+export const WithAFiveFourAspectRatio = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						image={{
+							src: 'https://s3-eu-west-1.amazonaws.com/media-origin.test.dev-guim.co.uk/2db0f6baf3eac423bfeb07cf04d95a7f810c2f6c/554_0_2946_2356/master/2946.jpg',
+							altText: '5:4 aspect ratio',
+						}}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: Pillar.Opinion,
+						}}
+						aspectRatio="5:4"
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+export const WithNoGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePositionOnDesktop="left"
+						isOnwardContent={true}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: Pillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithASmallGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePositionOnDesktop="left"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Gallery,
+							theme: Pillar.Sport,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithAMediumGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePositionOnDesktop="left"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: Pillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WithALargeGap = () => {
+	return (
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 280px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						containerType={'flexible/special'}
+						imagePositionOnDesktop="left"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: Pillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+};

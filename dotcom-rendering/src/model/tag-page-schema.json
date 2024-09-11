@@ -572,6 +572,9 @@
                             "isBoosted": {
                                 "type": "boolean"
                             },
+                            "boostLevel": {
+                                "$ref": "#/definitions/BoostLevel"
+                            },
                             "showBoostedHeadline": {
                                 "type": "boolean"
                             },
@@ -1046,9 +1049,6 @@
                 "edition": {
                     "type": "string"
                 },
-                "discussionFrontendUrl": {
-                    "type": "string"
-                },
                 "ipsosTag": {
                     "type": "string"
                 },
@@ -1153,7 +1153,6 @@
                 "discussionApiClientHeader",
                 "discussionApiUrl",
                 "discussionD2Uid",
-                "discussionFrontendUrl",
                 "edition",
                 "externalEmbedHost",
                 "facebookIaAdUnitRoot",
@@ -1607,6 +1606,15 @@
                 5
             ],
             "type": "number"
+        },
+        "BoostLevel": {
+            "enum": [
+                "boost",
+                "default",
+                "gigaboost",
+                "megaboost"
+            ],
+            "type": "string"
         },
         "FENavType": {
             "type": "object",

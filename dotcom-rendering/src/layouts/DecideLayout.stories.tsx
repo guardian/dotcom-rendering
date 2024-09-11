@@ -19,7 +19,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
-import type { DCRArticle } from '../types/frontend';
+import type { ArticleDeprecated } from '../types/article';
 import { DecideLayout, type Props as DecideLayoutProps } from './DecideLayout';
 
 mockRESTCalls();
@@ -113,14 +113,14 @@ const webParameters = {
 
 export const WebStandardStandardNewsLight: Story = {
 	args: {
-		article: StandardStandardNewsFixture,
+		article: StandardStandardNewsFixture.frontendData,
 	},
 	parameters: webParameters,
 };
 
 export const AppsStandardStandardNewsLight: Story = {
 	args: {
-		article: StandardStandardNewsFixture,
+		article: StandardStandardNewsFixture.frontendData,
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -128,16 +128,16 @@ export const AppsStandardStandardNewsLight: Story = {
 
 export const AppsStandardStandardNewsDark: Story = {
 	args: {
-		article: StandardStandardNewsFixture,
+		article: StandardStandardNewsFixture.frontendData,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,
 };
 
-const standardImmersiveNewsFixture: DCRArticle = {
-	...StandardStandardNewsFixture,
+const standardImmersiveNewsFixture: ArticleDeprecated = {
+	...StandardStandardNewsFixture.frontendData,
 	format: {
-		...StandardStandardNewsFixture.format,
+		...StandardStandardNewsFixture.frontendData.format,
 		display: 'ImmersiveDisplay',
 	},
 };
@@ -160,14 +160,14 @@ export const AppsStandardImmersiveNewsDark: Story = {
 
 export const WebNewsletterSignupStandardSportLight: Story = {
 	args: {
-		article: NewsletterSignupStandardSportFixture,
+		article: NewsletterSignupStandardSportFixture.frontendData,
 	},
 	parameters: webParameters,
 };
 
 export const WebPictureShowcaseOpinionLight: Story = {
 	args: {
-		article: PictureShowcaseOpinionFixture,
+		article: PictureShowcaseOpinionFixture.frontendData,
 	},
 	parameters: webParameters,
 };
@@ -175,9 +175,9 @@ export const WebPictureShowcaseOpinionLight: Story = {
 export const WebStandardLifestyleReviewLight: Story = {
 	args: {
 		article: {
-			...StandardStandardNewsFixture,
+			...StandardStandardNewsFixture.frontendData,
 			format: {
-				...StandardStandardNewsFixture.format,
+				...StandardStandardNewsFixture.frontendData.format,
 				theme: 'LifestylePillar',
 				design: 'ReviewDesign',
 			},
@@ -190,9 +190,9 @@ export const WebStandardLifestyleReviewLight: Story = {
 export const WebStandardNewsInterviewLight: Story = {
 	args: {
 		article: {
-			...StandardStandardNewsFixture,
+			...StandardStandardNewsFixture.frontendData,
 			format: {
-				...StandardStandardNewsFixture.format,
+				...StandardStandardNewsFixture.frontendData.format,
 				design: 'InterviewDesign',
 			},
 		},
@@ -202,7 +202,7 @@ export const WebStandardNewsInterviewLight: Story = {
 
 export const AppsPictureShowcaseOpinionLight: Story = {
 	args: {
-		article: PictureShowcaseOpinionFixture,
+		article: PictureShowcaseOpinionFixture.frontendData,
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -210,7 +210,7 @@ export const AppsPictureShowcaseOpinionLight: Story = {
 
 export const AppsPictureShowcaseOpinionDark: Story = {
 	args: {
-		article: PictureShowcaseOpinionFixture,
+		article: PictureShowcaseOpinionFixture.frontendData,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,
@@ -218,15 +218,15 @@ export const AppsPictureShowcaseOpinionDark: Story = {
 
 export const WebPhotoEssayImmersiveLabsLight: Story = {
 	args: {
-		article: PhotoEssayImmersiveLabsFixture,
+		article: PhotoEssayImmersiveLabsFixture.frontendData,
 	},
 	parameters: webParameters,
 };
 
-const standardStandardLabsFixture: DCRArticle = {
-	...StandardStandardNewsFixture,
+const standardStandardLabsFixture: ArticleDeprecated = {
+	...StandardStandardNewsFixture.frontendData,
 	format: {
-		...StandardStandardNewsFixture.format,
+		...StandardStandardNewsFixture.frontendData.format,
 		theme: 'Labs',
 	},
 };
@@ -257,9 +257,9 @@ export const AppsStandardStandardLabsDark: Story = {
 export const WebFeatureStandardLabsLight: Story = {
 	args: {
 		article: {
-			...FeatureStandardCultureFixture,
+			...FeatureStandardCultureFixture.frontendData,
 			format: {
-				...FeatureStandardCultureFixture.format,
+				...FeatureStandardCultureFixture.frontendData.format,
 				theme: 'Labs',
 			},
 		},
@@ -270,9 +270,9 @@ export const WebFeatureStandardLabsLight: Story = {
 export const WebRecipeStandardLabsLight: Story = {
 	args: {
 		article: {
-			...RecipeStandardLifestyleFixture,
+			...RecipeStandardLifestyleFixture.frontendData,
 			format: {
-				...RecipeStandardLifestyleFixture.format,
+				...RecipeStandardLifestyleFixture.frontendData.format,
 				theme: 'Labs',
 			},
 		},
@@ -282,7 +282,7 @@ export const WebRecipeStandardLabsLight: Story = {
 
 export const AppsRecipeStandardLifestyleLight: Story = {
 	args: {
-		article: RecipeStandardLifestyleFixture,
+		article: RecipeStandardLifestyleFixture.frontendData,
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -290,7 +290,7 @@ export const AppsRecipeStandardLifestyleLight: Story = {
 
 export const AppsRecipeStandardLifestyleDark: Story = {
 	args: {
-		article: RecipeStandardLifestyleFixture,
+		article: RecipeStandardLifestyleFixture.frontendData,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,
@@ -298,7 +298,7 @@ export const AppsRecipeStandardLifestyleDark: Story = {
 
 export const WebLiveBlogStandardNewsLight: Story = {
 	args: {
-		article: LiveBlogStandardNewsFixture,
+		article: LiveBlogStandardNewsFixture.frontendData,
 	},
 	parameters: webParameters,
 };
@@ -306,9 +306,9 @@ export const WebLiveBlogStandardNewsLight: Story = {
 export const WebLiveBlogStandardLabsLight: Story = {
 	args: {
 		article: {
-			...LiveBlogStandardNewsFixture,
+			...LiveBlogStandardNewsFixture.frontendData,
 			format: {
-				...LiveBlogStandardNewsFixture.format,
+				...LiveBlogStandardNewsFixture.frontendData.format,
 				theme: 'Labs',
 			},
 		},
@@ -318,7 +318,7 @@ export const WebLiveBlogStandardLabsLight: Story = {
 
 export const AppsLiveBlogStandardNewsLight: Story = {
 	args: {
-		article: LiveBlogStandardNewsFixture,
+		article: LiveBlogStandardNewsFixture.frontendData,
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -326,16 +326,16 @@ export const AppsLiveBlogStandardNewsLight: Story = {
 
 export const AppsLiveBlogStandardNewsDark: Story = {
 	args: {
-		article: LiveBlogStandardNewsFixture,
+		article: LiveBlogStandardNewsFixture.frontendData,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSportFixture: DCRArticle = {
-	...LiveBlogStandardNewsFixture,
+const liveBlogStandardSportFixture: ArticleDeprecated = {
+	...LiveBlogStandardNewsFixture.frontendData,
 	format: {
-		...LiveBlogStandardNewsFixture.format,
+		...LiveBlogStandardNewsFixture.frontendData.format,
 		theme: 'SportPillar',
 	},
 };
@@ -356,10 +356,10 @@ export const AppsLiveBlogStandardSportDark: Story = {
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSpecialReportFixture: DCRArticle = {
-	...LiveBlogStandardNewsFixture,
+const liveBlogStandardSpecialReportFixture: ArticleDeprecated = {
+	...LiveBlogStandardNewsFixture.frontendData,
 	format: {
-		...LiveBlogStandardNewsFixture.format,
+		...LiveBlogStandardNewsFixture.frontendData.format,
 		theme: 'SpecialReportTheme',
 	},
 };
@@ -380,10 +380,10 @@ export const AppsLiveBlogStandardSpecialReportDark: Story = {
 	parameters: appsParameters,
 };
 
-const liveBlogStandardSpecialReportAltFixture: DCRArticle = {
-	...LiveBlogStandardNewsFixture,
+const liveBlogStandardSpecialReportAltFixture: ArticleDeprecated = {
+	...LiveBlogStandardNewsFixture.frontendData,
 	format: {
-		...LiveBlogStandardNewsFixture.format,
+		...LiveBlogStandardNewsFixture.frontendData.format,
 		theme: 'SpecialReportAltTheme',
 	},
 };
@@ -406,14 +406,14 @@ export const AppsLiveBlogStandardSpecialReportAltDark: Story = {
 
 export const WebLiveblogWithNoKeyEvents: Story = {
 	args: {
-		article: { ...LiveBlogStandardNewsFixture, keyEvents: [] },
+		article: { ...LiveBlogStandardNewsFixture.frontendData, keyEvents: [] },
 	},
 	parameters: webParameters,
 };
 
 export const AppsLiveblogSingleContributorLight: Story = {
 	args: {
-		article: LiveBlogSingleContributorFixture,
+		article: LiveBlogSingleContributorFixture.frontendData,
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -421,16 +421,16 @@ export const AppsLiveblogSingleContributorLight: Story = {
 
 export const AppsLiveblogSingleContributorDark: Story = {
 	args: {
-		article: LiveBlogSingleContributorFixture,
+		article: LiveBlogSingleContributorFixture.frontendData,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,
 };
 
-const commentStandardNewsFixture: DCRArticle = {
-	...CommentStandardOpinionFixture,
+const commentStandardNewsFixture: ArticleDeprecated = {
+	...CommentStandardOpinionFixture.frontendData,
 	format: {
-		...CommentStandardOpinionFixture.format,
+		...CommentStandardOpinionFixture.frontendData.format,
 		theme: 'NewsPillar',
 	},
 };
@@ -451,10 +451,10 @@ export const AppsCommentStandardNewsDark: Story = {
 	parameters: appsParameters,
 };
 
-const interactiveStandardNewsFixture: DCRArticle = {
-	...StandardStandardNewsFixture,
+const interactiveStandardNewsFixture: ArticleDeprecated = {
+	...StandardStandardNewsFixture.frontendData,
 	format: {
-		...StandardStandardNewsFixture.format,
+		...StandardStandardNewsFixture.frontendData.format,
 		design: 'InteractiveDesign',
 	},
 };
@@ -477,7 +477,7 @@ export const AppsInteractiveStandardNewsDark: Story = {
 
 export const AppsAnalysisStandardNewsLight: Story = {
 	args: {
-		article: AnalysisStandardNewsFixture,
+		article: AnalysisStandardNewsFixture.frontendData,
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -485,16 +485,16 @@ export const AppsAnalysisStandardNewsLight: Story = {
 
 export const AppsAnalysisStandardNewsDark: Story = {
 	args: {
-		article: AnalysisStandardNewsFixture,
+		article: AnalysisStandardNewsFixture.frontendData,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,
 };
 
-const analysisStandardCultureFixture: DCRArticle = {
-	...AnalysisStandardNewsFixture,
+const analysisStandardCultureFixture: ArticleDeprecated = {
+	...AnalysisStandardNewsFixture.frontendData,
 	format: {
-		...AnalysisStandardNewsFixture.format,
+		...AnalysisStandardNewsFixture.frontendData.format,
 		theme: 'CulturePillar',
 	},
 };
@@ -517,7 +517,7 @@ export const AppsAnalysisStandardCultureDark: Story = {
 
 export const WebVideoStandardNewsLight: Story = {
 	args: {
-		article: VideoStandardNewsFixture,
+		article: VideoStandardNewsFixture.frontendData,
 	},
 	parameters: webParameters,
 };
@@ -525,9 +525,9 @@ export const WebVideoStandardNewsLight: Story = {
 export const WebVideoStandardLabsLight: Story = {
 	args: {
 		article: {
-			...VideoStandardNewsFixture,
+			...VideoStandardNewsFixture.frontendData,
 			format: {
-				...VideoStandardNewsFixture.format,
+				...VideoStandardNewsFixture.frontendData.format,
 				theme: 'Labs',
 			},
 		},
@@ -537,7 +537,7 @@ export const WebVideoStandardLabsLight: Story = {
 
 export const AppsVideoStandardNewsLight: Story = {
 	args: {
-		article: VideoStandardNewsFixture,
+		article: VideoStandardNewsFixture.frontendData,
 		colourScheme: 'light',
 	},
 	parameters: appsParameters,
@@ -545,7 +545,7 @@ export const AppsVideoStandardNewsLight: Story = {
 
 export const AppsVideoStandardNewsDark: Story = {
 	args: {
-		article: VideoStandardNewsFixture,
+		article: VideoStandardNewsFixture.frontendData,
 		colourScheme: 'dark',
 	},
 	parameters: appsParameters,

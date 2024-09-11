@@ -3,7 +3,6 @@ import {
 	background,
 	brandBackground,
 	brandBorder,
-	brandLine,
 	palette as sourcePalette,
 } from '@guardian/source/foundations';
 import { AdSlot } from '../components/AdSlot.web';
@@ -20,14 +19,11 @@ import { EditionSwitcherBanner } from '../components/EditionSwitcherBanner.impor
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
-import { FrontSubNav } from '../components/FrontSubNav.importable';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
 import { Masthead } from '../components/Masthead/Masthead';
-import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
@@ -70,7 +66,7 @@ const isNavList = (collection: DCRCollectionType) => {
 };
 
 const isHighlights = ({ collectionType }: DCRCollectionType) =>
-	collectionType === 'fixed/highlights';
+	collectionType === 'scrollable/highlights';
 
 const isToggleable = (
 	index: number,
@@ -167,21 +163,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
-	const { abTests } = front.config;
+	const { abTests, isPreview } = front.config;
 
-	const inUpdatedHeaderABTest =
-		abTests.updatedHeaderDesignVariant === 'variant';
-
+	// If viewing a front through the internal preview tool, we want to automatically opt-in to this test.
 	const inHighlightsContainerABTest =
-		abTests.mastheadWithHighlightsVariant === 'variant';
+		abTests.mastheadWithHighlightsVariant === 'variant' || isPreview;
 
 	const { absoluteServerTimes = false } = front.config.switches;
 
 	const Highlights = () => {
 		const showHighlights =
-			front.isNetworkFront &&
-			inUpdatedHeaderABTest &&
-			inHighlightsContainerABTest;
+			front.isNetworkFront && inHighlightsContainerABTest;
 
 		const highlightsCollection =
 			front.pressedPage.collections.find(isHighlights);
@@ -190,7 +182,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			showHighlights &&
 			!!highlightsCollection && (
 				<DecideContainer
-					containerType="fixed/highlights"
+					containerType={highlightsCollection.collectionType}
 					trails={[
 						...highlightsCollection.curated,
 						...highlightsCollection.backfill,
@@ -237,101 +229,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						/>
 					)}
 
-					{inUpdatedHeaderABTest ? (
-						<Masthead
-							nav={NAV}
-							highlights={<Highlights />}
-							editionId={front.editionId}
-							idUrl={front.config.idUrl}
-							mmaUrl={front.config.mmaUrl}
-							discussionApiUrl={front.config.discussionApiUrl}
-							contributionsServiceUrl={contributionsServiceUrl}
-							idApiUrl={front.config.idApiUrl}
-							showSubNav={!isPaidContent}
-							hasPageSkin={hasPageSkin}
-							hasPageSkinContentSelfConstrain={true}
-						/>
-					) : (
-						<>
-							{!isPaidContent && (
-								<Section
-									fullWidth={true}
-									shouldCenter={false}
-									showTopBorder={false}
-									showSideBorders={false}
-									padSides={false}
-									backgroundColour={brandBackground.primary}
-									element="header"
-									hasPageSkin={hasPageSkin}
-									hasPageSkinContentSelfConstrain={true}
-								>
-									<Header
-										editionId={front.editionId}
-										idUrl={front.config.idUrl}
-										mmaUrl={front.config.mmaUrl}
-										discussionApiUrl={
-											front.config.discussionApiUrl
-										}
-										urls={
-											front.nav.readerRevenueLinks.header
-										}
-										remoteHeader={
-											!!front.config.switches.remoteHeader
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										idApiUrl={front.config.idApiUrl}
-										headerTopBarSearchCapiSwitch={
-											!!front.config.switches
-												.headerTopBarSearchCapi
-										}
-										hasPageSkin={hasPageSkin}
-										pageId={pageId}
-									/>
-								</Section>
-							)}
-
-							<Section
-								fullWidth={true}
-								borderColour={brandLine.primary}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={brandBackground.primary}
-								element="nav"
-								hasPageSkin={hasPageSkin}
-								hasPageSkinContentSelfConstrain={true}
-							>
-								<Nav
-									nav={NAV}
-									subscribeUrl={
-										front.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									selectedPillar={NAV.selectedPillar}
-									editionId={front.editionId}
-									hasPageSkin={hasPageSkin}
-								/>
-							</Section>
-							{NAV.subNavSections && (
-								<Island
-									priority="enhancement"
-									defer={{ until: 'idle' }}
-								>
-									<FrontSubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										hasPageSkin={hasPageSkin}
-										pageId={pageId}
-										userEdition={editionId}
-										currentPillarTitle={
-											front.nav.currentPillarTitle
-										}
-									/>
-								</Island>
-							)}
-						</>
-					)}
+					<Masthead
+						nav={NAV}
+						highlights={<Highlights />}
+						editionId={front.editionId}
+						idUrl={front.config.idUrl}
+						mmaUrl={front.config.mmaUrl}
+						discussionApiUrl={front.config.discussionApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={front.config.idApiUrl}
+						showSubNav={!isPaidContent}
+						showSlimNav={false}
+						hasPageSkin={hasPageSkin}
+						hasPageSkinContentSelfConstrain={true}
+						pageId={pageId}
+					/>
 
 					{isPaidContent && (
 						<Section
@@ -389,7 +301,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						  }))
 						: trails;
 
-					if (collection.collectionType === 'fixed/highlights') {
+					if (collection.collectionType === 'scrollable/highlights') {
 						// Highlights are rendered in the Masthead component
 						return null;
 					}

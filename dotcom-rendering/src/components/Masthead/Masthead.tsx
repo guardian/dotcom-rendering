@@ -4,8 +4,8 @@ import type { NavType } from '../../model/extract-nav';
 import { palette as themePalette } from '../../palette';
 import { Island } from '../Island';
 import { Section } from '../Section';
+import { Titlepiece } from '../Titlepiece.importable';
 import { TopBar } from '../TopBar.importable';
-import { Titlepiece } from './Titlepiece/Titlepiece';
 
 type Props = {
 	nav: NavType;
@@ -17,9 +17,11 @@ type Props = {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	showSubNav?: boolean;
-	isImmersive?: boolean;
+	/** The slim nav is a slimmed down version of the Titlepiece usually used for Immersive articles */
+	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
+	pageId?: string;
 };
 
 /**
@@ -50,9 +52,10 @@ export const Masthead = ({
 	idApiUrl,
 	contributionsServiceUrl,
 	showSubNav = true,
-	isImmersive,
+	showSlimNav = false,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
+	pageId,
 }: Props) => (
 	<header data-component="header">
 		<Section
@@ -101,12 +104,15 @@ export const Masthead = ({
 			</Section>
 		)}
 
-		<Titlepiece
-			nav={nav}
-			editionId={editionId}
-			showSubNav={showSubNav}
-			isImmersive={isImmersive}
-			hasPageSkin={hasPageSkin}
-		/>
+		<Island priority="critical">
+			<Titlepiece
+				nav={nav}
+				editionId={editionId}
+				showSubNav={showSubNav}
+				showSlimNav={showSlimNav}
+				hasPageSkin={hasPageSkin}
+				pageId={pageId}
+			/>
+		</Island>
 	</header>
 );

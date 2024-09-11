@@ -11,1308 +11,1571 @@
  *    gen-fixtures.js directly.
  */
 
-import type { DCRArticle } from '../../../src/types/frontend';
+import type { Article } from '../../../src/types/article';
 
-export const Letter: DCRArticle = {
-	version: 3,
-	headline: 'Why is a woman’s work never done?',
-	standfirst:
-		'<p><strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939</p>',
-	webTitle: 'Why is a woman’s work never done? | Letters',
-	mainMediaElements: [
-		{
-			displayCredit: true,
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			role: 'inline',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '797',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '398',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/500.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '112',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/140.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '1569',
-							width: '1969',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1969.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							isMaster: 'true',
-							height: '1569',
-							width: '1969',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
-					},
-				],
-			},
-			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=85&auto=format&fit=max&s=12645523c60c498f296c1b0f94696459',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ab91a38b049c3661442d65bce068f763',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=85&auto=format&fit=max&s=96f5ed2e131330bc05e6ba8430582f4a',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d2027d3d7649734adac3b725ba7028ba',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1020&quality=85&auto=format&fit=max&s=01977e915850756ef009921e35451689',
-							width: 1020,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=7db29d90d0358e8a4aa7011da6547d92',
-							width: 2040,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=940&quality=85&auto=format&fit=max&s=c54597c69361d189cbea06a6b5bc5e06',
-							width: 940,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=4b92d2d3876eacf153fc898762e34892',
-							width: 1880,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=85&auto=format&fit=max&s=0e27793c5d46a0d77625b8f714dada4f',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bdd2ed73acbd2b05e31c5a46086bf6ac',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=85&auto=format&fit=max&s=12645523c60c498f296c1b0f94696459',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ab91a38b049c3661442d65bce068f763',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=85&auto=format&fit=max&s=96f5ed2e131330bc05e6ba8430582f4a',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d2027d3d7649734adac3b725ba7028ba',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1900&quality=85&auto=format&fit=max&s=0ad52cfdedaaf5a649e6324d432b0f2d',
-							width: 1900,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=e50085b73f9261aedbf0ba67be9c826b',
-							width: 3800,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1300&quality=85&auto=format&fit=max&s=ae5e780efa6b0cb123859e6ac313bdfe',
-							width: 1300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=f87640448b719826caeb1bc3309f4d3b',
-							width: 2600,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1140&quality=85&auto=format&fit=max&s=b8f9a9f85ddb9a2104e438c9a3a573dd',
-							width: 1140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=ced4a9dd31c246dc579f0ad358b8dee8',
-							width: 2280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=980&quality=85&auto=format&fit=max&s=5608ba705f3850cbdf3cbceca3475c09',
-							width: 980,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=cc6a1333940c4d5d4ef070a8c867a952',
-							width: 1960,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=740&quality=85&auto=format&fit=max&s=339af6dd6e8afc4fc573b96249f93359',
-							width: 740,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=f9a4031e030b7496600385ee34a27e04',
-							width: 1480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=85&auto=format&fit=max&s=0e27793c5d46a0d77625b8f714dada4f',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bdd2ed73acbd2b05e31c5a46086bf6ac',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=480&quality=85&auto=format&fit=max&s=364368597aa50d6b5f88c14fb97f173c',
-							width: 480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=b589361f9c52d87c1ee27781b4fee3d2',
-							width: 960,
-						},
-					],
-				},
-			],
-			data: {
-				alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
-				caption:
-					'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
-				credit: 'Photograph: taken from picture library',
-			},
-			position: 1,
-		},
-	],
-	main: '<figure class="element element-image" data-media-id="0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0"> <img src="https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg" alt="Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975." width="1000" height="797" class="gu-image" /> <figcaption> <span class="element-image__caption">Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.</span> <span class="element-image__credit">Photograph: taken from picture library</span> </figcaption> </figure>',
-	filterKeyEvents: false,
-	keyEvents: [],
-	blocks: [
-		{
-			id: '5e74b1928f089367b3d0b644',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: 'c52adb05-ed65-44c1-a62e-4a793b027137',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><span data-dcr-style="bullet"></span> In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: 'e7170df5-9abf-4fde-82b5-cd10f6b9c5ef',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<footer><p><span data-dcr-style="bullet"></span> Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p></footer>',
-					elementId: '97d6fd58-76d9-4345-b45c-c3bc0aa6f989',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1617638661000,
-			blockCreatedOnDisplay: '17.04 BST',
-			blockLastUpdated: 1617631119000,
-			blockLastUpdatedDisplay: '14.58 BST',
-			blockFirstPublished: 1617638661000,
-			blockFirstPublishedDisplay: '17.04 BST',
-			blockFirstPublishedDisplayNoTimezone: '17.04',
-			contributors: [],
-			primaryDateLine: 'Mon 5 Apr 2021 17.04 BST',
-			secondaryDateLine: 'Last modified on Mon 5 Apr 2021 18.36 BST',
-		},
-	],
-	author: {
-		byline: 'Letters',
-	},
-	byline: 'Letters',
-	webPublicationDate: '2021-04-05T16:04:21.000Z',
-	webPublicationDateDeprecated: '2021-04-05T16:04:21.000Z',
-	webPublicationDateDisplay: 'Mon 5 Apr 2021 17.04 BST',
-	webPublicationSecondaryDateDisplay:
-		'Last modified on Mon 5 Apr 2021 18.36 BST',
-	editionLongForm: 'UK edition',
-	editionId: 'UK',
-	pageId: 'world/2021/apr/05/why-is-a-womans-work-never-done',
-	canonicalUrl:
-		'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-	format: {
-		design: 'LetterDesign',
-		theme: 'OpinionPillar',
-		display: 'StandardDisplay',
-	},
-	designType: 'Comment',
-	tags: [
-		{
-			id: 'world/gender',
-			type: 'Keyword',
-			title: 'Gender',
-		},
-		{
-			id: 'lifeandstyle/women',
-			type: 'Keyword',
-			title: 'Women',
-		},
-		{
-			id: 'lifeandstyle/family',
-			type: 'Keyword',
-			title: 'Family',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'tone/letters',
-			type: 'Tone',
-			title: 'Letters',
-		},
-		{
-			id: 'publication/theguardian',
-			type: 'Publication',
-			title: 'The Guardian',
-		},
-		{
-			id: 'theguardian/journal',
-			type: 'NewspaperBook',
-			title: 'Journal',
-		},
-		{
-			id: 'theguardian/journal/letters',
-			type: 'NewspaperBookSection',
-			title: 'Letters',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-letters-and-leader-writers',
-			type: 'Tracking',
-			title: 'UK Letters and Leader Writers',
-		},
-	],
-	pillar: 'news',
-	isLegacyInteractive: false,
-	isImmersive: false,
-	sectionLabel: 'Gender',
-	sectionUrl: 'world/gender',
-	sectionName: 'world',
-	subMetaSectionLinks: [
-		{
-			url: '/world/gender',
-			title: 'Gender',
-		},
-	],
-	subMetaKeywordLinks: [
-		{
-			url: '/lifeandstyle/women',
-			title: 'Women',
-		},
-		{
-			url: '/lifeandstyle/family',
-			title: 'Family',
-		},
-		{
-			url: '/tone/letters',
-			title: 'letters',
-		},
-	],
-	shouldHideAds: false,
-	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-	linkedData: [
-		{
-			'@type': 'NewsArticle',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-			publisher: {
-				'@type': 'Organization',
-				'@context': 'https://schema.org',
-				'@id': 'https://www.theguardian.com#publisher',
-				name: 'The Guardian',
-				url: 'https://www.theguardian.com/',
-				logo: {
-					'@type': 'ImageObject',
-					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-					width: 190,
-					height: 60,
-				},
-				sameAs: [
-					'https://www.facebook.com/theguardian',
-					'https://twitter.com/guardian',
-					'https://www.youtube.com/user/TheGuardian',
-				],
-			},
-			isAccessibleForFree: true,
-			isPartOf: {
-				'@type': ['CreativeWork', 'Product'],
-				name: 'The Guardian',
-				productID: 'theguardian.com:basic',
-			},
-			image: [
-				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&enable=upscale&s=24f5cb51b1e0ca93624ca3e688dc55da',
-				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=39389ef31ece58316e6c3e82452d88f1',
-				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=fe6ceca60281b25ca63d71a1cdd110dd',
-				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&quality=85&auto=format&fit=max&s=962bb541216e2a5117b6b71475778ad8',
-			],
-			author: [
-				{
-					'@type': 'Person',
-					name: 'Guardian staff reporter',
-				},
-			],
-			datePublished: '2021-04-05T16:04:21.000Z',
-			headline: 'Why is a woman’s work never done?',
-			dateModified: '2021-04-05T17:36:25.000Z',
-			mainEntityOfPage:
-				'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-		},
-		{
-			'@type': 'WebPage',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-			potentialAction: {
-				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-			},
-		},
-	],
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-		'article:author': 'Letters',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&enable=upscale&s=24f5cb51b1e0ca93624ca3e688dc55da',
-		'al:ios:url':
-			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:title': 'Why is a woman’s work never done? | Letters',
-		'fb:app_id': '180444840287',
-		'article:modified_time': '2021-04-05T17:36:25.000Z',
-		'og:image:height': '720',
-		'og:description':
-			'Letters: Rosemary Johnson and Margaret Davis reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while Brian Saperia looks back to 1939',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'World news',
-		'article:published_time': '2021-04-05T16:04:21.000Z',
-		'article:tag': 'Gender,Women,Family',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
-		'twitter:app:url:iphone':
-			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&s=4acb3a469d3a316c67d3dbe87f92ac8e',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
-	},
-	config: {
-		references: [
+export const Letter: Article = {
+	frontendData: {
+		version: 3,
+		headline: 'Why is a woman’s work never done?',
+		standfirst:
+			'<p><strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939</p>',
+		webTitle: 'Why is a woman’s work never done? | Letters',
+		mainMediaElements: [
 			{
-				'rich-link':
-					'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				displayCredit: true,
+				_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+				role: 'inline',
+				media: {
+					allImages: [
+						{
+							index: 0,
+							fields: {
+								height: '797',
+								width: '1000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg',
+						},
+						{
+							index: 1,
+							fields: {
+								height: '398',
+								width: '500',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/500.jpg',
+						},
+						{
+							index: 2,
+							fields: {
+								height: '112',
+								width: '140',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/140.jpg',
+						},
+						{
+							index: 3,
+							fields: {
+								height: '1569',
+								width: '1969',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1969.jpg',
+						},
+						{
+							index: 4,
+							fields: {
+								isMaster: 'true',
+								height: '1569',
+								width: '1969',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
+						},
+					],
+				},
+				elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
+				imageSources: [
+					{
+						weighting: 'inline',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=85&auto=format&fit=max&s=1f3d2604f5f42157c0f835704df3df5b',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=57358d92e519b7c9465d844b8a5e78a7',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=85&auto=format&fit=max&s=12645523c60c498f296c1b0f94696459',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ab91a38b049c3661442d65bce068f763',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=85&auto=format&fit=max&s=96f5ed2e131330bc05e6ba8430582f4a',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d2027d3d7649734adac3b725ba7028ba',
+								width: 930,
+							},
+						],
+					},
+					{
+						weighting: 'thumbnail',
+						srcSet: [],
+					},
+					{
+						weighting: 'supporting',
+						srcSet: [],
+					},
+					{
+						weighting: 'showcase',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1020&quality=85&auto=format&fit=max&s=01977e915850756ef009921e35451689',
+								width: 1020,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=7db29d90d0358e8a4aa7011da6547d92',
+								width: 2040,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=940&quality=85&auto=format&fit=max&s=c54597c69361d189cbea06a6b5bc5e06',
+								width: 940,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=4b92d2d3876eacf153fc898762e34892',
+								width: 1880,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=85&auto=format&fit=max&s=305c14aa09350922fa5a797582a8aac3',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b6f129625fdc59832270453bcf3ce20a',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=85&auto=format&fit=max&s=0e27793c5d46a0d77625b8f714dada4f',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bdd2ed73acbd2b05e31c5a46086bf6ac',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=85&auto=format&fit=max&s=12645523c60c498f296c1b0f94696459',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ab91a38b049c3661442d65bce068f763',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=85&auto=format&fit=max&s=96f5ed2e131330bc05e6ba8430582f4a',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d2027d3d7649734adac3b725ba7028ba',
+								width: 930,
+							},
+						],
+					},
+					{
+						weighting: 'halfwidth',
+						srcSet: [],
+					},
+					{
+						weighting: 'immersive',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1900&quality=85&auto=format&fit=max&s=0ad52cfdedaaf5a649e6324d432b0f2d',
+								width: 1900,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=e50085b73f9261aedbf0ba67be9c826b',
+								width: 3800,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1300&quality=85&auto=format&fit=max&s=ae5e780efa6b0cb123859e6ac313bdfe',
+								width: 1300,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=f87640448b719826caeb1bc3309f4d3b',
+								width: 2600,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1140&quality=85&auto=format&fit=max&s=b8f9a9f85ddb9a2104e438c9a3a573dd',
+								width: 1140,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=ced4a9dd31c246dc579f0ad358b8dee8',
+								width: 2280,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=980&quality=85&auto=format&fit=max&s=5608ba705f3850cbdf3cbceca3475c09',
+								width: 980,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=cc6a1333940c4d5d4ef070a8c867a952',
+								width: 1960,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=740&quality=85&auto=format&fit=max&s=339af6dd6e8afc4fc573b96249f93359',
+								width: 740,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=f9a4031e030b7496600385ee34a27e04',
+								width: 1480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=85&auto=format&fit=max&s=0e27793c5d46a0d77625b8f714dada4f',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bdd2ed73acbd2b05e31c5a46086bf6ac',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=480&quality=85&auto=format&fit=max&s=364368597aa50d6b5f88c14fb97f173c',
+								width: 480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=b589361f9c52d87c1ee27781b4fee3d2',
+								width: 960,
+							},
+						],
+					},
+				],
+				data: {
+					alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
+					caption:
+						'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
+					credit: 'Photograph: taken from picture library',
+				},
+				position: 1,
 			},
 		],
-		shortUrlId: '/p/d8ex5',
-		switches: {
-			prebidAppnexusUkRow: true,
-			clickToView: true,
-			prebidTrustx: true,
-			scAdFreeBanner: false,
-			compareVariantDecision: false,
-			enableSentryReporting: true,
-			lazyLoadContainers: true,
-			adFreeStrictExpiryEnforcement: false,
-			liveblogRendering: true,
-			remarketing: true,
-			registerWithPhone: false,
-			targeting: true,
-			extendedMostPopularFronts: true,
-			slotBodyEnd: true,
-			emailInlineInFooter: true,
-			facebookTrackingPixel: true,
-			serviceWorkerEnabled: false,
-			iasAdTargeting: true,
-			extendedMostPopular: true,
-			prebidAnalytics: true,
-			imrWorldwide: true,
-			acast: true,
-			twitterUwt: true,
-			prebidAppnexusInvcode: true,
-			prebidAppnexus: true,
-			enableDiscussionSwitch: true,
-			prebidXaxis: true,
-			interactiveFullHeaderSwitch: false,
-			discussionAllPageSize: true,
-			prebidUserSync: true,
-			audioOnwardJourneySwitch: true,
-			mobileStickyPrebid: true,
-			breakingNews: true,
-			externalVideoEmbeds: true,
-			carrotTrafficDriver: true,
-			geoMostPopular: true,
-			weAreHiring: true,
-			relatedContent: true,
-			thirdPartyEmbedTracking: true,
-			prebidOzone: true,
-			prebidAdYouLike: true,
-			mostViewedFronts: true,
-			abSignInGateMainControl: true,
-			ampPrebid: true,
-			googleSearch: true,
-			brazeSwitch: true,
-			consentManagement: true,
-			commercial: true,
-			redplanetForAus: true,
-			prebidSonobi: true,
-			idProfileNavigation: true,
-			confiantAdVerification: true,
-			discussionAllowAnonymousRecommendsSwitch: false,
-			scrollDepth: true,
-			permutive: true,
-			comscore: true,
-			webFonts: true,
-			prebidImproveDigital: true,
-			ophan: true,
-			crosswordSvgThumbnails: true,
-			prebidTriplelift: true,
-			weather: true,
-			commercialOutbrainNewids: true,
-			dotcomRendering: true,
-			abSignInGateMainVariant: true,
-			hostedVideoAutoplay: true,
-			abAdblockAsk: true,
-			prebidPubmatic: true,
-			autoRefresh: true,
-			enhanceTweets: true,
-			prebidIndexExchange: true,
-			prebidOpenx: true,
-			idCookieRefresh: true,
-			sharingComments: true,
-			abSignInGateMandatory: true,
-			discussionPageSize: true,
-			smartAppBanner: false,
-			boostGaUserTimingFidelity: false,
-			historyTags: true,
-			mobileStickyLeaderboard: true,
-			abDeeplyReadTest: false,
-			surveys: true,
-			remoteBanner: true,
-			inizio: true,
-			prebidHeaderBidding: true,
-			a9HeaderBidding: true,
-			lightbox: true,
+		main: '<figure class="element element-image" data-media-id="0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0"> <img src="https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg" alt="Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975." width="1000" height="797" class="gu-image" /> <figcaption> <span class="element-image__caption">Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.</span> <span class="element-image__credit">Photograph: taken from picture library</span> </figcaption> </figure>',
+		filterKeyEvents: false,
+		keyEvents: [],
+		blocks: [
+			{
+				id: '5e74b1928f089367b3d0b644',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
+						elementId: 'c52adb05-ed65-44c1-a62e-4a793b027137',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p><span data-dcr-style="bullet"></span> In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
+						elementId: 'e7170df5-9abf-4fde-82b5-cd10f6b9c5ef',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<footer><p><span data-dcr-style="bullet"></span> Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p></footer>',
+						elementId: '97d6fd58-76d9-4345-b45c-c3bc0aa6f989',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
+				},
+				blockCreatedOn: 1617638661000,
+				blockCreatedOnDisplay: '17.04 BST',
+				blockLastUpdated: 1617631119000,
+				blockLastUpdatedDisplay: '14.58 BST',
+				blockFirstPublished: 1617638661000,
+				blockFirstPublishedDisplay: '17.04 BST',
+				blockFirstPublishedDisplayNoTimezone: '17.04',
+				contributors: [],
+				primaryDateLine: 'Mon 5 Apr 2021 17.04 BST',
+				secondaryDateLine: 'Last modified on Mon 5 Apr 2021 18.36 BST',
+			},
+		],
+		author: {
+			byline: 'Letters',
 		},
-		keywordIds:
-			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
-		sharedAdTargeting: {
-			ct: 'article',
-			co: ['jennifer-rankin'],
-			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-			su: ['0'],
-			edition: 'uk',
-			tn: ['news'],
-			p: 'ng',
-			k: [
-				'eu',
-				'flooding',
-				'world',
-				'europe-news',
-				'natural-disasters',
-				'science',
-				'environment',
-				'climate-change',
-				'wildfires',
-				'scienceofclimatechange',
+		byline: 'Letters',
+		webPublicationDate: '2021-04-05T16:04:21.000Z',
+		webPublicationDateDeprecated: '2021-04-05T16:04:21.000Z',
+		webPublicationDateDisplay: 'Mon 5 Apr 2021 17.04 BST',
+		webPublicationSecondaryDateDisplay:
+			'Last modified on Mon 5 Apr 2021 18.36 BST',
+		editionLongForm: 'UK edition',
+		editionId: 'UK',
+		pageId: 'world/2021/apr/05/why-is-a-womans-work-never-done',
+		canonicalUrl:
+			'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+		format: {
+			design: 'LetterDesign',
+			theme: 'OpinionPillar',
+			display: 'StandardDisplay',
+		},
+		designType: 'Comment',
+		tags: [
+			{
+				id: 'world/gender',
+				type: 'Keyword',
+				title: 'Gender',
+			},
+			{
+				id: 'lifeandstyle/women',
+				type: 'Keyword',
+				title: 'Women',
+			},
+			{
+				id: 'lifeandstyle/family',
+				type: 'Keyword',
+				title: 'Family',
+			},
+			{
+				id: 'type/article',
+				type: 'Type',
+				title: 'Article',
+			},
+			{
+				id: 'tone/letters',
+				type: 'Tone',
+				title: 'Letters',
+			},
+			{
+				id: 'publication/theguardian',
+				type: 'Publication',
+				title: 'The Guardian',
+			},
+			{
+				id: 'theguardian/journal',
+				type: 'NewspaperBook',
+				title: 'Journal',
+			},
+			{
+				id: 'theguardian/journal/letters',
+				type: 'NewspaperBookSection',
+				title: 'Letters',
+			},
+			{
+				id: 'tracking/commissioningdesk/uk-letters-and-leader-writers',
+				type: 'Tracking',
+				title: 'UK Letters and Leader Writers',
+			},
+		],
+		pillar: 'news',
+		isLegacyInteractive: false,
+		isImmersive: false,
+		sectionLabel: 'Gender',
+		sectionUrl: 'world/gender',
+		sectionName: 'world',
+		subMetaSectionLinks: [
+			{
+				url: '/world/gender',
+				title: 'Gender',
+			},
+		],
+		subMetaKeywordLinks: [
+			{
+				url: '/lifeandstyle/women',
+				title: 'Women',
+			},
+			{
+				url: '/lifeandstyle/family',
+				title: 'Family',
+			},
+			{
+				url: '/tone/letters',
+				title: 'letters',
+			},
+		],
+		shouldHideAds: false,
+		isAdFreeUser: false,
+		webURL: 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+		linkedData: [
+			{
+				'@type': 'NewsArticle',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+				publisher: {
+					'@type': 'Organization',
+					'@context': 'https://schema.org',
+					'@id': 'https://www.theguardian.com#publisher',
+					name: 'The Guardian',
+					url: 'https://www.theguardian.com/',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+						width: 190,
+						height: 60,
+					},
+					sameAs: [
+						'https://www.facebook.com/theguardian',
+						'https://twitter.com/guardian',
+						'https://www.youtube.com/user/TheGuardian',
+					],
+				},
+				isAccessibleForFree: true,
+				isPartOf: {
+					'@type': ['CreativeWork', 'Product'],
+					name: 'The Guardian',
+					productID: 'theguardian.com:basic',
+				},
+				image: [
+					'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&enable=upscale&s=24f5cb51b1e0ca93624ca3e688dc55da',
+					'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=39389ef31ece58316e6c3e82452d88f1',
+					'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=fe6ceca60281b25ca63d71a1cdd110dd',
+					'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&quality=85&auto=format&fit=max&s=962bb541216e2a5117b6b71475778ad8',
+				],
+				author: [
+					{
+						'@type': 'Person',
+						name: 'Guardian staff reporter',
+					},
+				],
+				datePublished: '2021-04-05T16:04:21.000Z',
+				headline: 'Why is a woman’s work never done?',
+				dateModified: '2021-04-05T17:36:25.000Z',
+				mainEntityOfPage:
+					'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+			},
+			{
+				'@type': 'WebPage',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+				potentialAction: {
+					'@type': 'ViewAction',
+					target: 'android-app://com.guardian/https/www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
+			},
+		],
+		openGraphData: {
+			'og:url':
+				'http://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+			'article:author': 'Letters',
+			'og:image:width': '1200',
+			'og:image':
+				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&enable=upscale&s=24f5cb51b1e0ca93624ca3e688dc55da',
+			'al:ios:url':
+				'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=applinks',
+			'article:publisher': 'https://www.facebook.com/theguardian',
+			'og:title': 'Why is a woman’s work never done? | Letters',
+			'fb:app_id': '180444840287',
+			'article:modified_time': '2021-04-05T17:36:25.000Z',
+			'og:image:height': '720',
+			'og:description':
+				'Letters: Rosemary Johnson and Margaret Davis reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while Brian Saperia looks back to 1939',
+			'og:type': 'article',
+			'al:ios:app_store_id': '409128287',
+			'article:section': 'World news',
+			'article:published_time': '2021-04-05T16:04:21.000Z',
+			'article:tag': 'Gender,Women,Family',
+			'al:ios:app_name': 'The Guardian',
+			'og:site_name': 'the Guardian',
+		},
+		twitterData: {
+			'twitter:app:id:iphone': '409128287',
+			'twitter:app:name:googleplay': 'The Guardian',
+			'twitter:app:name:ipad': 'The Guardian',
+			'twitter:card': 'summary_large_image',
+			'twitter:app:name:iphone': 'The Guardian',
+			'twitter:app:id:ipad': '409128287',
+			'twitter:app:id:googleplay': 'com.guardian',
+			'twitter:app:url:googleplay':
+				'guardian://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+			'twitter:app:url:iphone':
+				'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
+			'twitter:image':
+				'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjEucG5n&s=4acb3a469d3a316c67d3dbe87f92ac8e',
+			'twitter:site': '@guardian',
+			'twitter:app:url:ipad':
+				'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
+		},
+		config: {
+			references: [
+				{
+					'rich-link':
+						'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				},
 			],
-			sh: 'https://www.theguardian.com/p/d8ex5',
+			shortUrlId: '/p/d8ex5',
+			switches: {
+				prebidAppnexusUkRow: true,
+				clickToView: true,
+				prebidTrustx: true,
+				scAdFreeBanner: false,
+				compareVariantDecision: false,
+				enableSentryReporting: true,
+				lazyLoadContainers: true,
+				adFreeStrictExpiryEnforcement: false,
+				liveblogRendering: true,
+				remarketing: true,
+				registerWithPhone: false,
+				targeting: true,
+				extendedMostPopularFronts: true,
+				slotBodyEnd: true,
+				emailInlineInFooter: true,
+				facebookTrackingPixel: true,
+				serviceWorkerEnabled: false,
+				iasAdTargeting: true,
+				extendedMostPopular: true,
+				prebidAnalytics: true,
+				imrWorldwide: true,
+				acast: true,
+				twitterUwt: true,
+				prebidAppnexusInvcode: true,
+				prebidAppnexus: true,
+				enableDiscussionSwitch: true,
+				prebidXaxis: true,
+				interactiveFullHeaderSwitch: false,
+				discussionAllPageSize: true,
+				prebidUserSync: true,
+				audioOnwardJourneySwitch: true,
+				mobileStickyPrebid: true,
+				breakingNews: true,
+				externalVideoEmbeds: true,
+				carrotTrafficDriver: true,
+				geoMostPopular: true,
+				weAreHiring: true,
+				relatedContent: true,
+				thirdPartyEmbedTracking: true,
+				prebidOzone: true,
+				prebidAdYouLike: true,
+				mostViewedFronts: true,
+				abSignInGateMainControl: true,
+				ampPrebid: true,
+				googleSearch: true,
+				brazeSwitch: true,
+				consentManagement: true,
+				commercial: true,
+				redplanetForAus: true,
+				prebidSonobi: true,
+				idProfileNavigation: true,
+				confiantAdVerification: true,
+				discussionAllowAnonymousRecommendsSwitch: false,
+				scrollDepth: true,
+				permutive: true,
+				comscore: true,
+				webFonts: true,
+				prebidImproveDigital: true,
+				ophan: true,
+				crosswordSvgThumbnails: true,
+				prebidTriplelift: true,
+				weather: true,
+				commercialOutbrainNewids: true,
+				dotcomRendering: true,
+				abSignInGateMainVariant: true,
+				hostedVideoAutoplay: true,
+				abAdblockAsk: true,
+				prebidPubmatic: true,
+				autoRefresh: true,
+				enhanceTweets: true,
+				prebidIndexExchange: true,
+				prebidOpenx: true,
+				idCookieRefresh: true,
+				sharingComments: true,
+				abSignInGateMandatory: true,
+				discussionPageSize: true,
+				smartAppBanner: false,
+				boostGaUserTimingFidelity: false,
+				historyTags: true,
+				mobileStickyLeaderboard: true,
+				abDeeplyReadTest: false,
+				surveys: true,
+				remoteBanner: true,
+				inizio: true,
+				prebidHeaderBidding: true,
+				a9HeaderBidding: true,
+				lightbox: true,
+			},
+			keywordIds:
+				'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+			sharedAdTargeting: {
+				ct: 'article',
+				co: ['jennifer-rankin'],
+				url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				su: ['0'],
+				edition: 'uk',
+				tn: ['news'],
+				p: 'ng',
+				k: [
+					'eu',
+					'flooding',
+					'world',
+					'europe-news',
+					'natural-disasters',
+					'science',
+					'environment',
+					'climate-change',
+					'wildfires',
+					'scienceofclimatechange',
+				],
+				sh: 'https://www.theguardian.com/p/d8ex5',
+			},
+			toneIds: 'tone/news',
+			dcrSentryDsn:
+				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+			discussionApiUrl:
+				'https://discussion.theguardian.com/discussion-api',
+			sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+			commercialBundleUrl:
+				'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+			discussionApiClientHeader: 'nextgen',
+			shouldHideReaderRevenue: false,
+			sentryHost: 'app.getsentry.com/35463',
+			isPaidContent: false,
+			headline: 'Headline string',
+			idApiUrl: 'https://idapi.theguardian.com',
+			showRelatedContent: true,
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			videoDuration: 0,
+			stage: 'PROD',
+			isSensitive: false,
+			isDev: false,
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+			keywords:
+				'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			revisionNumber: 'DEV',
+			section: 'environment',
+			isPhotoEssay: false,
+			ampIframeUrl:
+				'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+			isLive: false,
+			host: 'https://www.theguardian.com',
+			brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+			contentType: 'Article',
+			idUrl: 'https://profile.theguardian.com',
+			author: 'Jennifer Rankin',
+			dfpAccountId: '59666047',
+			pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+			mmaUrl: 'https://manage.theguardian.com',
+			abTests: {},
+			edition: 'UK',
+			ipsosTag: 'environment',
+			isLiveBlog: false,
+			frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+			webPublicationDate: 1581314427000,
+			discussionD2Uid: 'zHoBy6HNKsk',
 		},
-		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
-		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
-		discussionApiClientHeader: 'nextgen',
-		shouldHideReaderRevenue: false,
-		sentryHost: 'app.getsentry.com/35463',
-		isPaidContent: false,
-		headline: 'Headline string',
-		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: true,
-		adUnit: '/59666047/theguardian.com/environment/article/ng',
-		videoDuration: 0,
-		stage: 'PROD',
-		isSensitive: false,
-		isDev: false,
-		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords:
-			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
-		revisionNumber: 'DEV',
-		section: 'environment',
-		isPhotoEssay: false,
-		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
-		isLive: false,
-		host: 'https://www.theguardian.com',
-		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+		guardianBaseURL: 'https://www.theguardian.com',
 		contentType: 'Article',
-		idUrl: 'https://profile.theguardian.com',
-		author: 'Jennifer Rankin',
-		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
-		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
-		edition: 'UK',
-		ipsosTag: 'environment',
-		isLiveBlog: false,
-		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
-		webPublicationDate: 1581314427000,
-		discussionD2Uid: 'zHoBy6HNKsk',
-	},
-	guardianBaseURL: 'https://www.theguardian.com',
-	contentType: 'Article',
-	hasRelated: true,
-	hasStoryPackage: false,
-	beaconURL: '//phar.gu-web.net',
-	isCommentable: false,
-	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-			],
-		},
-		US: {
-			adTargeting: [
-				{
-					name: 'edition',
-					value: 'us',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-			],
-		},
-		AU: {
-			adTargeting: [
-				{
-					name: 'edition',
-					value: 'au',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-			],
-		},
-		INT: {
-			adTargeting: [
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
-				},
-				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-			],
-		},
-		EUR: {
-			adTargeting: [
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
-				},
-				{
-					name: 'edition',
-					value: 'eur',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-			],
-		},
-	},
-	pageType: {
-		hasShowcaseMainElement: false,
-		isFront: false,
-		isLiveblog: false,
-		isMinuteArticle: false,
-		isPaidContent: false,
-		isPreview: false,
-		isSensitive: false,
-	},
-	trailText:
-		'Letters: <strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939',
-	nav: {
-		currentUrl: '/lifeandstyle/family',
-		pillars: [
-			{
-				title: 'News',
-				url: '/',
-				longTitle: 'Headlines',
-				iconName: 'home',
-				children: [
+		hasRelated: true,
+		hasStoryPackage: false,
+		beaconURL: '//phar.gu-web.net',
+		isCommentable: false,
+		commercialProperties: {
+			UK: {
+				adTargeting: [
 					{
-						title: 'UK',
-						url: '/uk-news',
-						longTitle: 'UK news',
-						children: [
-							{
-								title: 'UK politics',
-								url: '/politics',
-							},
-							{
-								title: 'Education',
-								url: '/education',
-								children: [
-									{
-										title: 'Schools',
-										url: '/education/schools',
-									},
-									{
-										title: 'Teachers',
-										url: '/teacher-network',
-									},
-									{
-										title: 'Universities',
-										url: '/education/universities',
-									},
-									{
-										title: 'Students',
-										url: '/education/students',
-									},
-								],
-							},
-							{
-								title: 'Media',
-								url: '/media',
-							},
-							{
-								title: 'Society',
-								url: '/society',
-							},
-							{
-								title: 'Law',
-								url: '/law',
-							},
-							{
-								title: 'Scotland',
-								url: '/uk/scotland',
-							},
-							{
-								title: 'Wales',
-								url: '/uk/wales',
-							},
-							{
-								title: 'Northern Ireland',
-								url: '/uk/northernireland',
-							},
-						],
+						name: 'edition',
+						value: 'uk',
 					},
 					{
-						title: 'World',
-						url: '/world',
-						longTitle: 'World news',
-						children: [
-							{
-								title: 'Europe',
-								url: '/world/europe-news',
-							},
-							{
-								title: 'US',
-								url: '/us-news',
-								longTitle: 'US news',
-							},
-							{
-								title: 'Americas',
-								url: '/world/americas',
-							},
-							{
-								title: 'Asia',
-								url: '/world/asia',
-							},
-							{
-								title: 'Australia',
-								url: '/australia-news',
-								longTitle: 'Australia news',
-							},
-							{
-								title: 'Middle East',
-								url: '/world/middleeast',
-							},
-							{
-								title: 'Africa',
-								url: '/world/africa',
-							},
-							{
-								title: 'Inequality',
-								url: '/inequality',
-							},
-							{
-								title: 'Global development',
-								url: '/global-development',
-							},
-						],
+						name: 'ct',
+						value: 'article',
 					},
 					{
-						title: 'Climate crisis',
-						url: '/environment/climate-crisis',
+						name: 'url',
+						value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
 					},
 					{
-						title: 'Ukraine',
-						url: '/world/ukraine',
+						name: 'p',
+						value: 'ng',
 					},
 					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
+						name: 'su',
+						value: ['0'],
 					},
 					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
+						name: 'k',
+						value: ['women', 'family', 'gender'],
 					},
 					{
-						title: 'Business',
-						url: '/business',
-						children: [
-							{
-								title: 'Economics',
-								url: '/business/economics',
-							},
-							{
-								title: 'Banking',
-								url: '/business/banking',
-							},
-							{
-								title: 'Money',
-								url: '/money',
-								children: [
-									{
-										title: 'Property',
-										url: '/money/property',
-									},
-									{
-										title: 'Pensions',
-										url: '/money/pensions',
-									},
-									{
-										title: 'Savings',
-										url: '/money/savings',
-									},
-									{
-										title: 'Borrowing',
-										url: '/money/debt',
-									},
-									{
-										title: 'Careers',
-										url: '/money/work-and-careers',
-									},
-								],
-							},
-							{
-								title: 'Markets',
-								url: '/business/stock-markets',
-							},
-							{
-								title: 'Project Syndicate',
-								url: '/business/series/project-syndicate-economists',
-							},
-							{
-								title: 'B2B',
-								url: '/business-to-business',
-							},
-							{
-								title: 'Retail',
-								url: '/business/retail',
-							},
-						],
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/hx6ty',
 					},
 					{
-						title: 'Environment',
-						url: '/environment',
-						children: [
-							{
-								title: 'Climate crisis',
-								url: '/environment/climate-crisis',
-							},
-							{
-								title: 'Wildlife',
-								url: '/environment/wildlife',
-							},
-							{
-								title: 'Energy',
-								url: '/environment/energy',
-							},
-							{
-								title: 'Pollution',
-								url: '/environment/pollution',
-							},
-						],
-					},
-					{
-						title: 'UK politics',
-						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
-					},
-					{
-						title: 'Society',
-						url: '/society',
-					},
-					{
-						title: 'Science',
-						url: '/science',
-					},
-					{
-						title: 'Tech',
-						url: '/technology',
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-					},
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
+						name: 'tn',
+						value: ['letters'],
 					},
 				],
 			},
-			{
-				title: 'Opinion',
-				url: '/commentisfree',
-				longTitle: 'Opinion home',
-				iconName: 'home',
-				children: [
+			US: {
+				adTargeting: [
 					{
-						title: 'The Guardian view',
-						url: '/profile/editorial',
+						name: 'edition',
+						value: 'us',
 					},
 					{
-						title: 'Columnists',
-						url: '/index/contributors',
+						name: 'ct',
+						value: 'article',
 					},
 					{
-						title: 'Cartoons',
-						url: '/tone/cartoons',
+						name: 'url',
+						value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
 					},
 					{
-						title: 'Opinion videos',
-						url: '/type/video+tone/comment',
+						name: 'p',
+						value: 'ng',
 					},
 					{
-						title: 'Letters',
-						url: '/tone/letters',
-					},
-				],
-			},
-			{
-				title: 'Sport',
-				url: '/sport',
-				longTitle: 'Sport home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
+						name: 'su',
+						value: ['0'],
 					},
 					{
-						title: 'Cricket',
-						url: '/sport/cricket',
+						name: 'k',
+						value: ['women', 'family', 'gender'],
 					},
 					{
-						title: 'Rugby union',
-						url: '/sport/rugby-union',
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/hx6ty',
 					},
 					{
-						title: 'Tennis',
-						url: '/sport/tennis',
-					},
-					{
-						title: 'Cycling',
-						url: '/sport/cycling',
-					},
-					{
-						title: 'F1',
-						url: '/sport/formulaone',
-					},
-					{
-						title: 'Golf',
-						url: '/sport/golf',
-					},
-					{
-						title: 'Boxing',
-						url: '/sport/boxing',
-					},
-					{
-						title: 'Rugby league',
-						url: '/sport/rugbyleague',
-					},
-					{
-						title: 'Racing',
-						url: '/sport/horse-racing',
-					},
-					{
-						title: 'US sports',
-						url: '/sport/us-sport',
+						name: 'tn',
+						value: ['letters'],
 					},
 				],
 			},
-			{
-				title: 'Culture',
-				url: '/culture',
-				longTitle: 'Culture home',
-				iconName: 'home',
-				children: [
+			AU: {
+				adTargeting: [
 					{
-						title: 'Film',
-						url: '/film',
+						name: 'edition',
+						value: 'au',
 					},
 					{
-						title: 'Music',
-						url: '/music',
+						name: 'ct',
+						value: 'article',
 					},
 					{
-						title: 'TV & radio',
-						url: '/tv-and-radio',
+						name: 'url',
+						value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
 					},
 					{
-						title: 'Books',
-						url: '/books',
+						name: 'p',
+						value: 'ng',
 					},
 					{
-						title: 'Art & design',
-						url: '/artanddesign',
+						name: 'su',
+						value: ['0'],
 					},
 					{
-						title: 'Stage',
-						url: '/stage',
+						name: 'k',
+						value: ['women', 'family', 'gender'],
 					},
 					{
-						title: 'Games',
-						url: '/games',
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/hx6ty',
 					},
 					{
-						title: 'Classical',
-						url: '/music/classicalmusicandopera',
+						name: 'tn',
+						value: ['letters'],
 					},
 				],
 			},
-			{
-				title: 'Lifestyle',
-				url: '/lifeandstyle',
-				longTitle: 'Lifestyle home',
-				iconName: 'home',
-				children: [
+			INT: {
+				adTargeting: [
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'url',
+						value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					},
+					{
+						name: 'edition',
+						value: 'int',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: ['women', 'family', 'gender'],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/hx6ty',
+					},
+					{
+						name: 'tn',
+						value: ['letters'],
+					},
+				],
+			},
+			EUR: {
+				adTargeting: [
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'url',
+						value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					},
+					{
+						name: 'edition',
+						value: 'eur',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'k',
+						value: ['women', 'family', 'gender'],
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/hx6ty',
+					},
+					{
+						name: 'tn',
+						value: ['letters'],
+					},
+				],
+			},
+		},
+		pageType: {
+			hasShowcaseMainElement: false,
+			isFront: false,
+			isLiveblog: false,
+			isMinuteArticle: false,
+			isPaidContent: false,
+			isPreview: false,
+			isSensitive: false,
+		},
+		trailText:
+			'Letters: <strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939',
+		nav: {
+			currentUrl: '/lifeandstyle/family',
+			pillars: [
+				{
+					title: 'News',
+					url: '/',
+					longTitle: 'Headlines',
+					iconName: 'home',
+					children: [
+						{
+							title: 'UK',
+							url: '/uk-news',
+							longTitle: 'UK news',
+							children: [
+								{
+									title: 'UK politics',
+									url: '/politics',
+								},
+								{
+									title: 'Education',
+									url: '/education',
+									children: [
+										{
+											title: 'Schools',
+											url: '/education/schools',
+										},
+										{
+											title: 'Teachers',
+											url: '/teacher-network',
+										},
+										{
+											title: 'Universities',
+											url: '/education/universities',
+										},
+										{
+											title: 'Students',
+											url: '/education/students',
+										},
+									],
+								},
+								{
+									title: 'Media',
+									url: '/media',
+								},
+								{
+									title: 'Society',
+									url: '/society',
+								},
+								{
+									title: 'Law',
+									url: '/law',
+								},
+								{
+									title: 'Scotland',
+									url: '/uk/scotland',
+								},
+								{
+									title: 'Wales',
+									url: '/uk/wales',
+								},
+								{
+									title: 'Northern Ireland',
+									url: '/uk/northernireland',
+								},
+							],
+						},
+						{
+							title: 'World',
+							url: '/world',
+							longTitle: 'World news',
+							children: [
+								{
+									title: 'Europe',
+									url: '/world/europe-news',
+								},
+								{
+									title: 'US',
+									url: '/us-news',
+									longTitle: 'US news',
+								},
+								{
+									title: 'Americas',
+									url: '/world/americas',
+								},
+								{
+									title: 'Asia',
+									url: '/world/asia',
+								},
+								{
+									title: 'Australia',
+									url: '/australia-news',
+									longTitle: 'Australia news',
+								},
+								{
+									title: 'Middle East',
+									url: '/world/middleeast',
+								},
+								{
+									title: 'Africa',
+									url: '/world/africa',
+								},
+								{
+									title: 'Inequality',
+									url: '/inequality',
+								},
+								{
+									title: 'Global development',
+									url: '/global-development',
+								},
+							],
+						},
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Ukraine',
+							url: '/world/ukraine',
+						},
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Newsletters',
+							url: '/email-newsletters',
+						},
+						{
+							title: 'Business',
+							url: '/business',
+							children: [
+								{
+									title: 'Economics',
+									url: '/business/economics',
+								},
+								{
+									title: 'Banking',
+									url: '/business/banking',
+								},
+								{
+									title: 'Money',
+									url: '/money',
+									children: [
+										{
+											title: 'Property',
+											url: '/money/property',
+										},
+										{
+											title: 'Pensions',
+											url: '/money/pensions',
+										},
+										{
+											title: 'Savings',
+											url: '/money/savings',
+										},
+										{
+											title: 'Borrowing',
+											url: '/money/debt',
+										},
+										{
+											title: 'Careers',
+											url: '/money/work-and-careers',
+										},
+									],
+								},
+								{
+									title: 'Markets',
+									url: '/business/stock-markets',
+								},
+								{
+									title: 'Project Syndicate',
+									url: '/business/series/project-syndicate-economists',
+								},
+								{
+									title: 'B2B',
+									url: '/business-to-business',
+								},
+								{
+									title: 'Retail',
+									url: '/business/retail',
+								},
+							],
+						},
+						{
+							title: 'Environment',
+							url: '/environment',
+							children: [
+								{
+									title: 'Climate crisis',
+									url: '/environment/climate-crisis',
+								},
+								{
+									title: 'Wildlife',
+									url: '/environment/wildlife',
+								},
+								{
+									title: 'Energy',
+									url: '/environment/energy',
+								},
+								{
+									title: 'Pollution',
+									url: '/environment/pollution',
+								},
+							],
+						},
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Science',
+							url: '/science',
+						},
+						{
+							title: 'Tech',
+							url: '/technology',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+					],
+				},
+				{
+					title: 'Opinion',
+					url: '/commentisfree',
+					longTitle: 'Opinion home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'The Guardian view',
+							url: '/profile/editorial',
+						},
+						{
+							title: 'Columnists',
+							url: '/index/contributors',
+						},
+						{
+							title: 'Cartoons',
+							url: '/tone/cartoons',
+						},
+						{
+							title: 'Opinion videos',
+							url: '/type/video+tone/comment',
+						},
+						{
+							title: 'Letters',
+							url: '/tone/letters',
+						},
+					],
+				},
+				{
+					title: 'Sport',
+					url: '/sport',
+					longTitle: 'Sport home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Cricket',
+							url: '/sport/cricket',
+						},
+						{
+							title: 'Rugby union',
+							url: '/sport/rugby-union',
+						},
+						{
+							title: 'Tennis',
+							url: '/sport/tennis',
+						},
+						{
+							title: 'Cycling',
+							url: '/sport/cycling',
+						},
+						{
+							title: 'F1',
+							url: '/sport/formulaone',
+						},
+						{
+							title: 'Golf',
+							url: '/sport/golf',
+						},
+						{
+							title: 'Boxing',
+							url: '/sport/boxing',
+						},
+						{
+							title: 'Rugby league',
+							url: '/sport/rugbyleague',
+						},
+						{
+							title: 'Racing',
+							url: '/sport/horse-racing',
+						},
+						{
+							title: 'US sports',
+							url: '/sport/us-sport',
+						},
+					],
+				},
+				{
+					title: 'Culture',
+					url: '/culture',
+					longTitle: 'Culture home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Film',
+							url: '/film',
+						},
+						{
+							title: 'Music',
+							url: '/music',
+						},
+						{
+							title: 'TV & radio',
+							url: '/tv-and-radio',
+						},
+						{
+							title: 'Books',
+							url: '/books',
+						},
+						{
+							title: 'Art & design',
+							url: '/artanddesign',
+						},
+						{
+							title: 'Stage',
+							url: '/stage',
+						},
+						{
+							title: 'Games',
+							url: '/games',
+						},
+						{
+							title: 'Classical',
+							url: '/music/classicalmusicandopera',
+						},
+					],
+				},
+				{
+					title: 'Lifestyle',
+					url: '/lifeandstyle',
+					longTitle: 'Lifestyle home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Fashion',
+							url: '/fashion',
+						},
+						{
+							title: 'Food',
+							url: '/food',
+						},
+						{
+							title: 'Recipes',
+							url: '/tone/recipes',
+						},
+						{
+							title: 'Travel',
+							url: '/travel',
+							children: [
+								{
+									title: 'UK',
+									url: '/travel/uk',
+								},
+								{
+									title: 'Europe',
+									url: '/travel/europe',
+								},
+								{
+									title: 'US',
+									url: '/travel/usa',
+								},
+							],
+						},
+						{
+							title: 'Health & fitness',
+							url: '/lifeandstyle/health-and-wellbeing',
+						},
+						{
+							title: 'Women',
+							url: '/lifeandstyle/women',
+						},
+						{
+							title: 'Men',
+							url: '/lifeandstyle/men',
+						},
+						{
+							title: 'Love & sex',
+							url: '/lifeandstyle/love-and-sex',
+						},
+						{
+							title: 'Beauty',
+							url: '/fashion/beauty',
+						},
+						{
+							title: 'Home & garden',
+							url: '/lifeandstyle/home-and-garden',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Cars',
+							url: '/technology/motoring',
+						},
+					],
+				},
+			],
+			otherLinks: [
+				{
+					title: 'The Guardian app',
+					url: 'https://app.adjust.com/16xt6hai',
+				},
+				{
+					title: 'Video',
+					url: '/video',
+				},
+				{
+					title: 'Podcasts',
+					url: '/podcasts',
+				},
+				{
+					title: 'Pictures',
+					url: '/inpictures',
+				},
+				{
+					title: 'Newsletters',
+					url: '/email-newsletters',
+				},
+				{
+					title: "Today's paper",
+					url: '/theguardian',
+					children: [
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+						{
+							title: 'G2',
+							url: '/theguardian/g2',
+						},
+						{
+							title: 'Journal',
+							url: '/theguardian/journal',
+						},
+						{
+							title: 'Saturday',
+							url: '/theguardian/saturday',
+						},
+					],
+				},
+				{
+					title: 'Inside the Guardian',
+					url: 'https://www.theguardian.com/membership',
+				},
+				{
+					title: 'The Observer',
+					url: '/observer',
+					children: [
+						{
+							title: 'Comment',
+							url: '/theobserver/news/comment',
+						},
+						{
+							title: 'The New Review',
+							url: '/theobserver/new-review',
+						},
+						{
+							title: 'Observer Magazine',
+							url: '/theobserver/magazine',
+						},
+						{
+							title: 'Observer Food Monthly',
+							url: '/theobserver/foodmonthly',
+						},
+					],
+				},
+				{
+					title: 'Guardian Weekly',
+					url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				},
+				{
+					title: 'Crosswords',
+					url: '/crosswords',
+					children: [
+						{
+							title: 'Blog',
+							url: '/crosswords/crossword-blog',
+						},
+						{
+							title: 'Quick',
+							url: '/crosswords/series/quick',
+						},
+						{
+							title: 'Cryptic',
+							url: '/crosswords/series/cryptic',
+						},
+						{
+							title: 'Prize',
+							url: '/crosswords/series/prize',
+						},
+						{
+							title: 'Weekend',
+							url: '/crosswords/series/weekend-crossword',
+						},
+						{
+							title: 'Quiptic',
+							url: '/crosswords/series/quiptic',
+						},
+						{
+							title: 'Genius',
+							url: '/crosswords/series/genius',
+						},
+						{
+							title: 'Speedy',
+							url: '/crosswords/series/speedy',
+						},
+						{
+							title: 'Everyman',
+							url: '/crosswords/series/everyman',
+						},
+						{
+							title: 'Azed',
+							url: '/crosswords/series/azed',
+						},
+					],
+				},
+				{
+					title: 'Wordiply',
+					url: 'https://www.wordiply.com',
+				},
+				{
+					title: 'Corrections',
+					url: '/theguardian/series/corrections-and-clarifications',
+				},
+			],
+			brandExtensions: [
+				{
+					title: 'Search jobs',
+					url: 'https://jobs.theguardian.com',
+				},
+				{
+					title: 'Hire with Guardian Jobs',
+					url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				},
+				{
+					title: 'Holidays',
+					url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				},
+				{
+					title: 'Live events',
+					url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
+				},
+				{
+					title: 'About Us',
+					url: '/about',
+				},
+				{
+					title: 'Digital Archive',
+					url: 'https://theguardian.newspapers.com',
+				},
+				{
+					title: 'Guardian Print Shop',
+					url: '/artanddesign/series/gnm-print-sales',
+				},
+				{
+					title: 'Patrons',
+					url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+				},
+				{
+					title: 'Guardian Licensing',
+					url: 'https://licensing.theguardian.com/',
+				},
+			],
+			currentNavLinkTitle: 'Family',
+			currentPillarTitle: 'Lifestyle',
+			subNavSections: {
+				links: [
+					{
+						title: 'Wellness',
+						url: '/wellness',
+					},
 					{
 						title: 'Fashion',
 						url: '/fashion',
@@ -1326,46 +1589,38 @@ export const Letter: DCRArticle = {
 						url: '/tone/recipes',
 					},
 					{
-						title: 'Travel',
-						url: '/travel',
-						children: [
-							{
-								title: 'UK',
-								url: '/travel/uk',
-							},
-							{
-								title: 'Europe',
-								url: '/travel/europe',
-							},
-							{
-								title: 'US',
-								url: '/travel/usa',
-							},
-						],
+						title: 'Love & sex',
+						url: '/lifeandstyle/love-and-sex',
+					},
+					{
+						title: 'Home & garden',
+						url: '/lifeandstyle/home-and-garden',
 					},
 					{
 						title: 'Health & fitness',
 						url: '/lifeandstyle/health-and-wellbeing',
 					},
 					{
-						title: 'Women',
-						url: '/lifeandstyle/women',
+						title: 'Family',
+						url: '/lifeandstyle/family',
 					},
 					{
-						title: 'Men',
-						url: '/lifeandstyle/men',
-					},
-					{
-						title: 'Love & sex',
-						url: '/lifeandstyle/love-and-sex',
-					},
-					{
-						title: 'Beauty',
-						url: '/fashion/beauty',
-					},
-					{
-						title: 'Home & garden',
-						url: '/lifeandstyle/home-and-garden',
+						title: 'Travel',
+						url: '/travel',
+						children: [
+							{
+								title: 'US',
+								url: '/travel/usa',
+							},
+							{
+								title: 'Europe',
+								url: '/travel/europe',
+							},
+							{
+								title: 'UK',
+								url: '/travel/uk',
+							},
+						],
 					},
 					{
 						title: 'Money',
@@ -1393,496 +1648,245 @@ export const Letter: DCRArticle = {
 							},
 						],
 					},
-					{
-						title: 'Cars',
-						url: '/technology/motoring',
-					},
 				],
 			},
-		],
-		otherLinks: [
-			{
-				title: 'The Guardian app',
-				url: 'https://app.adjust.com/16xt6hai',
-			},
-			{
-				title: 'Video',
-				url: '/video',
-			},
-			{
-				title: 'Podcasts',
-				url: '/podcasts',
-			},
-			{
-				title: 'Pictures',
-				url: '/inpictures',
-			},
-			{
-				title: 'Newsletters',
-				url: '/email-newsletters',
-			},
-			{
-				title: "Today's paper",
-				url: '/theguardian',
-				children: [
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-					{
-						title: 'G2',
-						url: '/theguardian/g2',
-					},
-					{
-						title: 'Journal',
-						url: '/theguardian/journal',
-					},
-					{
-						title: 'Saturday',
-						url: '/theguardian/saturday',
-					},
-				],
-			},
-			{
-				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
-			},
-			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
-				title: 'Guardian Weekly',
-				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
-			},
-			{
-				title: 'Crosswords',
-				url: '/crosswords',
-				children: [
-					{
-						title: 'Blog',
-						url: '/crosswords/crossword-blog',
-					},
-					{
-						title: 'Quick',
-						url: '/crosswords/series/quick',
-					},
-					{
-						title: 'Cryptic',
-						url: '/crosswords/series/cryptic',
-					},
-					{
-						title: 'Prize',
-						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-					},
-					{
-						title: 'Genius',
-						url: '/crosswords/series/genius',
-					},
-					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
-					},
-				],
-			},
-			{
-				title: 'Wordiply',
-				url: 'https://www.wordiply.com',
-			},
-			{
-				title: 'Corrections',
-				url: '/theguardian/series/corrections-and-clarifications',
-			},
-		],
-		brandExtensions: [
-			{
-				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com',
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-			},
-			{
-				title: 'Holidays',
-				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
-			},
-			{
-				title: 'Live events',
-				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
-			},
-			{
-				title: 'About Us',
-				url: '/about',
-			},
-			{
-				title: 'Digital Archive',
-				url: 'https://theguardian.newspapers.com',
-			},
-			{
-				title: 'Guardian Print Shop',
-				url: '/artanddesign/series/gnm-print-sales',
-			},
-			{
-				title: 'Patrons',
-				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
-			},
-			{
-				title: 'Guardian Licensing',
-				url: 'https://licensing.theguardian.com/',
-			},
-		],
-		currentNavLinkTitle: 'Family',
-		currentPillarTitle: 'Lifestyle',
-		subNavSections: {
-			links: [
-				{
-					title: 'Wellness',
-					url: '/wellness',
+			readerRevenueLinks: {
+				header: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Fashion',
-					url: '/fashion',
+				footer: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Food',
-					url: '/food',
+				sideMenu: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 				},
-				{
-					title: 'Recipes',
-					url: '/tone/recipes',
+				ampHeader: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Love & sex',
-					url: '/lifeandstyle/love-and-sex',
+				ampFooter: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Home & garden',
-					url: '/lifeandstyle/home-and-garden',
-				},
-				{
-					title: 'Health & fitness',
-					url: '/lifeandstyle/health-and-wellbeing',
-				},
-				{
-					title: 'Family',
-					url: '/lifeandstyle/family',
-				},
-				{
-					title: 'Travel',
-					url: '/travel',
-					children: [
-						{
-							title: 'US',
-							url: '/travel/usa',
-						},
-						{
-							title: 'Europe',
-							url: '/travel/europe',
-						},
-						{
-							title: 'UK',
-							url: '/travel/uk',
-						},
-					],
-				},
-				{
-					title: 'Money',
-					url: '/money',
-					children: [
-						{
-							title: 'Property',
-							url: '/money/property',
-						},
-						{
-							title: 'Pensions',
-							url: '/money/pensions',
-						},
-						{
-							title: 'Savings',
-							url: '/money/savings',
-						},
-						{
-							title: 'Borrowing',
-							url: '/money/debt',
-						},
-						{
-							title: 'Careers',
-							url: '/money/work-and-careers',
-						},
-					],
-				},
-			],
-		},
-		readerRevenueLinks: {
-			header: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			footer: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
-			},
-			sideMenu: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
-			},
-			ampHeader: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			ampFooter: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
-	},
-	showBottomSocialButtons: true,
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
+		showBottomSocialButtons: true,
+		pageFooter: {
+			footerLinks: [
+				[
+					{
+						text: 'About us',
+						url: '/about',
+						dataLinkName: 'uk : footer : about us',
+						extraClasses: '',
+					},
+					{
+						text: 'Help',
+						url: '/help',
+						dataLinkName: 'uk : footer : tech feedback',
+						extraClasses: 'js-tech-feedback-report',
+					},
+					{
+						text: 'Complaints & corrections',
+						url: '/info/complaints-and-corrections',
+						dataLinkName: 'complaints',
+						extraClasses: '',
+					},
+					{
+						text: 'SecureDrop',
+						url: 'https://www.theguardian.com/securedrop',
+						dataLinkName: 'securedrop',
+						extraClasses: '',
+					},
+					{
+						text: 'Work for us',
+						url: 'https://workforus.theguardian.com',
+						dataLinkName: 'uk : footer : work for us',
+						extraClasses: '',
+					},
+					{
+						text: 'Privacy policy',
+						url: '/info/privacy',
+						dataLinkName: 'privacy',
+						extraClasses: '',
+					},
+					{
+						text: 'Cookie policy',
+						url: '/info/cookies',
+						dataLinkName: 'cookie',
+						extraClasses: '',
+					},
+					{
+						text: 'Terms & conditions',
+						url: '/help/terms-of-service',
+						dataLinkName: 'terms',
+						extraClasses: '',
+					},
+					{
+						text: 'Contact us',
+						url: '/help/contact-us',
+						dataLinkName: 'uk : footer : contact us',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'All topics',
+						url: '/index/subjects/a',
+						dataLinkName: 'uk : footer : all topics',
+						extraClasses: '',
+					},
+					{
+						text: 'All writers',
+						url: '/index/contributors',
+						dataLinkName: 'uk : footer : all contributors',
+						extraClasses: '',
+					},
+					{
+						text: 'Modern Slavery Act',
+						url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+						dataLinkName:
+							'uk : footer : modern slavery act statement',
+						extraClasses: '',
+					},
+					{
+						text: 'Digital newspaper archive',
+						url: 'https://theguardian.newspapers.com',
+						dataLinkName: 'digital newspaper archive',
+						extraClasses: '',
+					},
+					{
+						text: 'Facebook',
+						url: 'https://www.facebook.com/theguardian',
+						dataLinkName: 'uk : footer : facebook',
+						extraClasses: '',
+					},
+					{
+						text: 'YouTube',
+						url: 'https://www.youtube.com/user/TheGuardian',
+						dataLinkName: 'uk : footer : youtube',
+						extraClasses: '',
+					},
+					{
+						text: 'Instagram',
+						url: 'https://www.instagram.com/guardian',
+						dataLinkName: 'uk : footer : instagram',
+						extraClasses: '',
+					},
+					{
+						text: 'LinkedIn',
+						url: 'https://www.linkedin.com/company/theguardian',
+						dataLinkName: 'uk : footer : linkedin',
+						extraClasses: '',
+					},
+					{
+						text: 'Twitter',
+						url: 'https://twitter.com/guardian',
+						dataLinkName: 'uk: footer : twitter',
+						extraClasses: '',
+					},
+					{
+						text: 'Newsletters',
+						url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+						dataLinkName: 'uk : footer : newsletters',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'Advertise with us',
+						url: 'https://advertising.theguardian.com',
+						dataLinkName: 'uk : footer : advertise with us',
+						extraClasses: '',
+					},
+					{
+						text: 'Guardian Labs',
+						url: '/guardian-labs',
+						dataLinkName: 'uk : footer : guardian labs',
+						extraClasses: '',
+					},
+					{
+						text: 'Search jobs',
+						url: 'https://jobs.theguardian.com',
+						dataLinkName: 'uk : footer : jobs',
+						extraClasses: '',
+					},
+					{
+						text: 'Patrons',
+						url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+						dataLinkName: 'uk : footer : patrons',
+						extraClasses: '',
+					},
+				],
 			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
+		},
+		publication: 'The Guardian',
+		shouldHideReaderRevenue: false,
+		slotMachineFlags: '',
+		contributionsServiceUrl: 'https://contributions.guardianapis.com',
+		isSpecialReport: false,
+		showTableOfContents: false,
+		lang: 'en',
+		isRightToLeftLang: false,
+		imagesForLightbox: [
+			{
+				masterUrl:
+					'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
+				width: 1969,
+				height: 1569,
+				elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
+				displayCredit: true,
+				alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
+				credit: 'Photograph: taken from picture library',
+				caption:
+					'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
+				position: 1,
+			},
+		],
+		imagesForAppsLightbox: [
+			{
+				width: 1969,
+				height: 1569,
+				credit: 'Photograph: taken from picture library',
+				caption:
+					'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
+				masterUrl:
+					'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
+				elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
+			},
 		],
 	},
-	publication: 'The Guardian',
-	shouldHideReaderRevenue: false,
-	slotMachineFlags: '',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	isSpecialReport: false,
-	showTableOfContents: false,
-	lang: 'en',
-	isRightToLeftLang: false,
-	imagesForLightbox: [
-		{
-			masterUrl:
-				'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
-			width: 1969,
-			height: 1569,
-			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
-			displayCredit: true,
-			alt: 'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975.',
-			credit: 'Photograph: taken from picture library',
-			caption:
-				'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
-			position: 1,
-		},
-	],
-	imagesForAppsLightbox: [
-		{
-			width: 1969,
-			height: 1569,
-			credit: 'Photograph: taken from picture library',
-			caption:
-				'Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.',
-			masterUrl:
-				'https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/master/1969.jpg',
-			elementId: '0deb7806-3d9b-4368-aa97-1ecca3b0e60a',
-		},
-	],
 };

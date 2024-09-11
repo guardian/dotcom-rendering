@@ -32,7 +32,6 @@ import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
-import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
@@ -41,7 +40,6 @@ import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
@@ -58,9 +56,9 @@ import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { DCRArticle } from '../types/frontend';
+import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
-import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -243,14 +241,8 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-const stickyTagStyles = css`
-	position: sticky;
-	top: 0;
-	${getZIndex('tagLinkOverlay')};
-`;
-
 interface BaseProps {
-	article: DCRArticle;
+	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -301,15 +293,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 
 	const showComments = article.isCommentable && !isPaidContent;
 
-	const inUpdatedHeaderABTest =
-		article.config.abTests.updatedHeaderDesignVariant === 'variant';
-
-	const shouldShowTagLink =
-		isWeb &&
-		!!article.config.switches.tagLinkDesign &&
-		article.config.abTests.tagLinkDesignControl !== 'control' &&
-		article.tags.some(({ id }) => id === 'sport/olympic-games-2024');
-
 	const { absoluteServerTimes = false } = article.config.switches;
 
 	return (
@@ -338,120 +321,20 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 						</Stuck>
 					)}
 
-					{inUpdatedHeaderABTest ? (
-						<Masthead
-							nav={props.NAV}
-							editionId={article.editionId}
-							idUrl={article.config.idUrl}
-							mmaUrl={article.config.mmaUrl}
-							discussionApiUrl={article.config.discussionApiUrl}
-							idApiUrl={article.config.idApiUrl}
-							contributionsServiceUrl={contributionsServiceUrl}
-							showSubNav={true}
-							isImmersive={false}
-							hasPageSkin={false}
-							hasPageSkinContentSelfConstrain={false}
-						/>
-					) : (
-						<SendToBack>
-							<Section
-								fullWidth={true}
-								shouldCenter={false}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="header"
-							>
-								<Header
-									editionId={article.editionId}
-									idUrl={article.config.idUrl}
-									mmaUrl={article.config.mmaUrl}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
-									urls={article.nav.readerRevenueLinks.header}
-									remoteHeader={
-										!!article.config.switches.remoteHeader
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									idApiUrl={article.config.idApiUrl}
-									headerTopBarSearchCapiSwitch={
-										!!article.config.switches
-											.headerTopBarSearchCapi
-									}
-								/>
-							</Section>
-
-							<Section
-								fullWidth={true}
-								borderColour={sourcePalette.brand[600]}
-								showTopBorder={false}
-								padSides={false}
-								backgroundColour={sourcePalette.brand[400]}
-								element="nav"
-							>
-								<Nav
-									nav={props.NAV}
-									selectedPillar={props.NAV.selectedPillar}
-									subscribeUrl={
-										article.nav.readerRevenueLinks.header
-											.subscribe
-									}
-									editionId={article.editionId}
-								/>
-							</Section>
-
-							{props.NAV.subNavSections && (
-								<Section
-									fullWidth={true}
-									backgroundColour={themePalette(
-										'--article-background',
-									)}
-									padSides={false}
-									borderColour={themePalette(
-										'--article-border',
-									)}
-									element="aside"
-								>
-									<Island
-										priority="enhancement"
-										defer={{ until: 'idle' }}
-									>
-										<SubNav
-											subNavSections={
-												props.NAV.subNavSections
-											}
-											currentNavLink={
-												props.NAV.currentNavLink
-											}
-											position="header"
-										/>
-									</Island>
-								</Section>
-							)}
-
-							<Section
-								fullWidth={true}
-								backgroundColour={themePalette(
-									'--article-background',
-								)}
-								padSides={false}
-								showTopBorder={false}
-								borderColour={themePalette('--article-border')}
-							>
-								<StraightLines
-									count={4}
-									color={themePalette('--straight-lines')}
-									cssOverrides={css`
-										display: block;
-									`}
-								/>
-							</Section>
-						</SendToBack>
-					)}
+					<Masthead
+						nav={props.NAV}
+						editionId={article.editionId}
+						idUrl={article.config.idUrl}
+						mmaUrl={article.config.mmaUrl}
+						discussionApiUrl={article.config.discussionApiUrl}
+						idApiUrl={article.config.idApiUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
+						showSubNav={true}
+						showSlimNav={false}
+						hasPageSkin={false}
+						hasPageSkinContentSelfConstrain={false}
+						pageId={article.pageId}
+					/>
 				</div>
 			)}
 			<main data-layout="LiveLayout">
@@ -499,7 +382,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								shouldShowTagLink={false}
 								isMatch={true}
 							/>
 						}
@@ -514,7 +396,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								shouldShowTagLink={false}
 								isMatch={true}
 							/>
 						</Hide>
@@ -548,7 +429,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									shouldShowTagLink={false}
 								/>
 							</GridItem>
 							<GridItem area="headline">
@@ -643,6 +523,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 											article.config.discussionApiUrl
 										}
 										shortUrlId={article.config.shortUrlId}
+										pageId={article.pageId}
+										headline={article.headline}
 									></ArticleMetaApps>
 								)}
 								{isWeb && (
@@ -805,7 +687,12 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 								{/* Lines */}
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											color={themePalette(
+												'--straight-lines',
+											)}
+										/>
 									</div>
 								</Hide>
 								{/* Meta */}
@@ -846,37 +733,8 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 												shouldHideReaderRevenueOnArticle={
 													article.shouldHideReaderRevenue
 												}
-												tags={article.tags}
 											/>
 										</Island>
-									</Hide>
-								)}
-
-								{isWeb && shouldShowTagLink && (
-									<Hide until="desktop">
-										<div
-											css={[
-												stickyTagStyles,
-												css`
-													margin: 20px 0 20px 20px;
-												`,
-											]}
-										>
-											<ArticleTitle
-												format={format}
-												tags={article.tags}
-												sectionLabel={
-													article.sectionLabel
-												}
-												sectionUrl={article.sectionUrl}
-												guardianBaseURL={
-													article.guardianBaseURL
-												}
-												shouldShowTagLink={
-													shouldShowTagLink
-												}
-											/>
-										</div>
 									</Hide>
 								)}
 
@@ -895,28 +753,6 @@ export const LiveLayout = (props: WebProps | AppsProps) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{isWeb && shouldShowTagLink && (
-										<Hide from="desktop">
-											<div css={[stickyTagStyles]}>
-												<ArticleTitle
-													format={format}
-													tags={article.tags}
-													sectionLabel={
-														article.sectionLabel
-													}
-													sectionUrl={
-														article.sectionUrl
-													}
-													guardianBaseURL={
-														article.guardianBaseURL
-													}
-													shouldShowTagLink={
-														shouldShowTagLink
-													}
-												/>
-											</div>
-										</Hide>
-									)}
 									{hasKeyEvents ? (
 										<Hide below="desktop">
 											<Island

@@ -22,7 +22,6 @@ import type { TagType } from '../types/tag';
 import { Hide } from './Hide';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
-import { TagLink } from './TagLink';
 
 type Props = {
 	format: ArticleFormat;
@@ -30,7 +29,6 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	shouldShowTagLink: boolean;
 	isMatch?: boolean;
 };
 
@@ -169,7 +167,6 @@ export const SeriesSectionLink = ({
 	sectionLabel,
 	sectionUrl,
 	guardianBaseURL,
-	shouldShowTagLink,
 	isMatch,
 }: Props) => {
 	const observerTag = tags.find(
@@ -197,17 +194,6 @@ export const SeriesSectionLink = ({
 	const titleColour = isMatch
 		? themePalette('--series-title-match-text')
 		: themePalette('--series-title-text');
-
-	if (shouldShowTagLink) {
-		return (
-			<TagLink
-				sectionUrl="sport/olympic-games-2024"
-				sectionLabel="Paris Olympic Games 2024"
-				guardianBaseURL={guardianBaseURL}
-				format={format}
-			/>
-		);
-	}
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {

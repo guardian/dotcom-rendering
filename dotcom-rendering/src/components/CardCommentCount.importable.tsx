@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	textSans12,
+	textSansBold12,
 	visuallyHidden,
 } from '@guardian/source/foundations';
 import { formatCount } from '../lib/formatCount';
@@ -35,7 +35,7 @@ const getCommentCountColour = (
 const containerStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
 	display: flex;
 	flex-direction: row;
-	${textSans12};
+	${textSansBold12};
 	/**
 	 * Typography preset styles should not be overridden.
 	 * This has been done because the styles do not directly map to the new presets.
@@ -43,8 +43,6 @@ const containerStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
 	 */
 	line-height: 1.15;
 	margin-top: -4px;
-	padding-left: 5px;
-	padding-right: 5px;
 	color: ${getCommentCountColour(isDynamo, isOnwardContent)};
 `;
 
