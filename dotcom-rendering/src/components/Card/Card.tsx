@@ -380,7 +380,7 @@ export const Card = ({
 	 * Determines how and when to render the `SupportingContent` component in the "outer" position:
 	 * - Returns `null` if `supportingContent` is unavailable or `sublinkPosition` is `none`.
 	 * - Renders `SupportingContent` for all breakpoints if `sublinkPosition` is `outer`.
-	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` on desktop but displays it on smaller breakpoints.
+	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` from tablet but displays it on smaller breakpoints.
 	 *
 	 */
 	const decideOuterSublinks = () => {
