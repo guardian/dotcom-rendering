@@ -270,7 +270,6 @@ export const LightboxImages = ({ format, images }: Props) => {
 								</Hide>
 								<LightboxCaption
 									captionText={image.caption}
-									format={format}
 									credit={image.credit}
 									displayCredit={image.displayCredit}
 								/>

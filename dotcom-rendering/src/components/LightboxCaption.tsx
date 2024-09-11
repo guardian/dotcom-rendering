@@ -1,27 +1,22 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	space,
 	palette as srcPalette,
 	textSans14,
 } from '@guardian/source/foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { palette } from '../palette';
 
 type Props = {
 	captionText?: string;
-	format: ArticleFormat;
 	credit?: string;
 	displayCredit?: boolean;
 };
 
 export const LightboxCaption = ({
 	captionText,
-	format,
 	credit,
 	displayCredit,
 }: Props) => {
-	const palette = decidePalette(format);
-
 	return (
 		<figcaption
 			css={css`
@@ -30,7 +25,7 @@ export const LightboxCaption = ({
 				overflow-wrap: break-all;
 				padding-top: ${space[2]}px;
 				padding-bottom: ${space[2]}px;
-				border-top: 3px solid ${palette.background.lightboxDivider};
+				border-top: 3px solid ${palette('--lightbox-divider')};
 			`}
 		>
 			{!!captionText && (

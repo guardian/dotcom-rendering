@@ -5591,6 +5591,34 @@ const cricketScoreboardLinkText: PaletteFunction = () => {
 	return sourcePalette.sport[300];
 };
 
+const imageTitleBackground: PaletteFunction = ({ design, theme }) => {
+	if (design === ArticleDesign.Analysis && theme === Pillar.News) {
+		return sourcePalette.news[300];
+	}
+
+	switch (theme) {
+		case Pillar.News:
+			return sourcePalette.news[400];
+		case Pillar.Opinion:
+			return sourcePalette.opinion[300];
+		case Pillar.Sport:
+			return sourcePalette.sport[400];
+		case Pillar.Culture:
+			return sourcePalette.culture[400];
+		case Pillar.Lifestyle:
+			return sourcePalette.lifestyle[400];
+		case ArticleSpecial.Labs:
+			return sourcePalette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return sourcePalette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return sourcePalette.specialReportAlt[200];
+	}
+};
+
+const lightboxDivider: PaletteFunction = (format) =>
+	imageTitleBackground(format);
+
 // ----- Palette ----- //
 
 /**
@@ -6268,6 +6296,10 @@ const paletteColours = {
 		light: highlightContainerStartFade,
 		dark: highlightContainerStartFade,
 	},
+	'--image-title-background': {
+		light: imageTitleBackground,
+		dark: imageTitleBackground,
+	},
 	'--interactive-atom-background': {
 		light: interactiveAtomBackgroundLight,
 		dark: interactiveAtomBackgroundDark,
@@ -6335,6 +6367,10 @@ const paletteColours = {
 	'--last-updated-text': {
 		light: lastUpdatedTextLight,
 		dark: lastUpdatedTextDark,
+	},
+	'--lightbox-divider': {
+		light: lightboxDivider,
+		dark: lightboxDivider,
 	},
 	'--link-kicker-text': {
 		light: linkKickerTextLight,
