@@ -103,6 +103,7 @@ const TwoCardOrFourCardLayout = ({
 							imagePositionOnDesktop={
 								hasTwoOrFewerCards ? 'left' : 'bottom'
 							}
+							supportingContent={undefined} // we don't want to support sublinks on standard cards here so we hard code to undefined.
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}

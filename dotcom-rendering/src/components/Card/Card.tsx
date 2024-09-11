@@ -6,7 +6,7 @@ import {
 	palette as sourcePalette,
 	space,
 } from '@guardian/source/foundations';
-import { Link } from '@guardian/source/react-components';
+import { Hide, Link } from '@guardian/source/react-components';
 import { isMediaCard } from '../../lib/cardHelpers';
 import { getZIndex } from '../../lib/getZIndex';
 import { DISCUSSION_ID_DATA_ATTRIBUTE } from '../../lib/useCommentCount';
@@ -376,6 +376,38 @@ export const Card = ({
 		return 'medium';
 	};
 
+	/**
+	 * Determines how and when to render the `SupportingContent` component in the "outer" position:
+	 * - Returns `null` if `supportingContent` is unavailable or `sublinkPosition` is `none`.
+	 * - Renders `SupportingContent` for all breakpoints if `sublinkPosition` is `outer`.
+	 * - If `sublinkPosition` is `inner`, hides `SupportingContent` from tablet but displays it on smaller breakpoints.
+	 *
+	 */
+	const decideOuterSublinks = () => {
+		if (!supportingContent) return null;
+		if (sublinkPosition === 'none') return null;
+		if (sublinkPosition === 'outer') {
+			return (
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+				/>
+			);
+		}
+		return (
+			<Hide from="tablet">
+				<SupportingContent
+					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					alignment={supportingContentAlignment}
+					isDynamo={isDynamo}
+				/>
+			</Hide>
+		);
+	};
+
 	return (
 		<CardWrapper
 			format={format}
@@ -430,6 +462,7 @@ export const Card = ({
 					)}
 				</div>
 			)}
+
 			<CardLayout
 				cardBackgroundColour={cardBackgroundColour}
 				imagePositionOnDesktop={imagePositionOnDesktop}
@@ -644,6 +677,9 @@ export const Card = ({
 									}
 									imageSize={imageSize}
 									imageType={media?.type}
+									shouldHide={
+										isFlexibleContainer ? false : true
+									}
 								>
 									<div
 										dangerouslySetInnerHTML={{
@@ -700,12 +736,14 @@ export const Card = ({
 							)}
 
 							{hasSublinks && sublinkPosition === 'inner' && (
-								<SupportingContent
-									supportingContent={supportingContent}
-									alignment="vertical"
-									containerPalette={containerPalette}
-									isDynamo={isDynamo}
-								/>
+								<Hide until="tablet">
+									<SupportingContent
+										supportingContent={supportingContent}
+										alignment="vertical"
+										containerPalette={containerPalette}
+										isDynamo={isDynamo}
+									/>
+								</Hide>
 							)}
 						</div>
 					</ContentWrapper>
@@ -720,14 +758,7 @@ export const Card = ({
 							: 0,
 				}}
 			>
-				{hasSublinks && sublinkPosition === 'outer' && (
-					<SupportingContent
-						supportingContent={supportingContent}
-						containerPalette={containerPalette}
-						alignment={supportingContentAlignment}
-						isDynamo={isDynamo}
-					/>
-				)}
+				{decideOuterSublinks()}
 
 				{showCommentFooter && (
 					<CardFooter
