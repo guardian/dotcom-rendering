@@ -193,8 +193,8 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 		if (getCookie({ name: 'gu-cmp-disabled', shouldMemoize: true })) {
 			resolve(true);
 		}
-		onConsentChange(({ ccpa, tcfv2, aus }) => {
-			if (ccpa ?? aus) {
+		onConsentChange(({ usnat, tcfv2, aus }) => {
+			if (usnat ?? aus) {
 				resolve(true);
 			} else if (tcfv2) {
 				const hasRequiredConsents =
