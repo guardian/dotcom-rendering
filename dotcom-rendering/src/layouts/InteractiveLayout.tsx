@@ -45,7 +45,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideTrail } from '../lib/decideTrail';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { Article } from '../types/article';
+import type { ArticleDeprecated } from '../types/article';
 import type { RenderingTarget } from '../types/renderingTarget';
 import {
 	interactiveGlobalStyles,
@@ -201,7 +201,7 @@ const starWrapper = css`
 `;
 
 interface CommonProps {
-	article: Article;
+	article: ArticleDeprecated;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }

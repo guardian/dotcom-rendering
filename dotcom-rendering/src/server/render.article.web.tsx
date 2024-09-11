@@ -22,7 +22,7 @@ import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
-import type { Article } from '../types/article';
+import type { ArticleDeprecated } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import type { FEBlocksRequest } from '../types/frontend';
@@ -30,10 +30,10 @@ import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
-	article: Article;
+	article: ArticleDeprecated;
 }
 
-const decideTitle = (article: Article): string => {
+const decideTitle = (article: ArticleDeprecated): string => {
 	if (decideTheme(article.format) === Pillar.Opinion && article.byline) {
 		return `${article.headline} | ${article.byline} | The Guardian`;
 	}
