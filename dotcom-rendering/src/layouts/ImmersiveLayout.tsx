@@ -33,9 +33,9 @@ import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
+import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { minNavHeightPx } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -270,11 +270,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	*/
 
 	const labsHeaderHeight = LABS_HEADER_HEIGHT;
-	const combinedHeight = (minNavHeightPx + labsHeaderHeight).toString();
+	const combinedHeight = (minHeaderHeightPx + labsHeaderHeight).toString();
 
 	const navAndLabsHeaderHeight = isLabs
 		? `${combinedHeight}px`
-		: `${minNavHeightPx}px`;
+		: `${minHeaderHeightPx}px`;
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
