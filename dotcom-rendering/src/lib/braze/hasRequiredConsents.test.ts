@@ -43,11 +43,12 @@ describe('hasRequiredConsents', () => {
 		});
 	});
 
-	describe('when the user is covered by ccpa and consent is given', () => {
+	describe('when the user is covered by usnat and consent is given', () => {
 		it('returns a promise which resolves with true', async () => {
 			mockOnConsentChangeResult = {
-				ccpa: {
+				usnat: {
 					doNotSell: false,
+					signalStatus: 'ready',
 				},
 			};
 
@@ -55,11 +56,12 @@ describe('hasRequiredConsents', () => {
 		});
 	});
 
-	describe('when the user is covered by ccpa and consent is not given', () => {
+	describe('when the user is covered by usnat and consent is not given', () => {
 		it('returns a promise which resolves with false', async () => {
 			mockOnConsentChangeResult = {
-				ccpa: {
+				usnat: {
 					doNotSell: true,
+					signalStatus: 'ready',
 				},
 			};
 

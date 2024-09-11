@@ -9,7 +9,7 @@ const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 	const consentState: ConsentState = await onConsent();
 
 	const consentDetails = (): {
-		consentJurisdiction: 'TCF' | 'CCPA' | 'AUS' | 'USNAT' | 'OTHER';
+		consentJurisdiction: 'TCF' | 'AUS' | 'USNAT' | 'OTHER';
 		consentUUID: string;
 		consent: string;
 	} => {
