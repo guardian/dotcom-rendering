@@ -44,9 +44,9 @@ const submitConsentEventsToOphan = (renderingTarget: RenderingTarget) =>
 					`03:${consentString}`,
 				];
 			}
-			if (consentState.ccpa) {
+			if (consentState.usnat) {
 				const usnatUUID = getCookie({ name: 'usnatUUID' }) ?? '';
-				const flag = consentState.ccpa.doNotSell ? 'true' : 'false';
+				const flag = consentState.usnat.doNotSell ? 'true' : 'false';
 				return ['01:USNAT', `04:${usnatUUID}`, `05:${flag}`];
 			}
 			if (consentState.aus) {
@@ -97,11 +97,11 @@ const submitConsentToOphan = async (renderingTarget: RenderingTarget) => {
 				consent: consentState.tcfv2.tcString,
 			};
 		}
-		if (consentState.ccpa) {
+		if (consentState.usnat) {
 			return {
 				consentJurisdiction: 'USNAT',
 				consentUUID: getCookie({ name: 'usnatUUID' }) ?? '',
-				consent: consentState.ccpa.doNotSell ? 'false' : 'true',
+				consent: consentState.usnat.doNotSell ? 'false' : 'true',
 			};
 		}
 		if (consentState.aus) {
