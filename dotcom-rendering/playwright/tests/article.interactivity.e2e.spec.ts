@@ -247,7 +247,7 @@ test.describe('Interactivity', () => {
 			});
 
 			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
-			test.skip('should transfer focus to sub menu items when tabbing from section header', async ({
+			test('should transfer focus to sub menu items when tabbing from section header', async ({
 				context,
 				page,
 			}) => {
@@ -269,7 +269,7 @@ test.describe('Interactivity', () => {
 			});
 
 			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
-			test.skip('should let reader traverse section titles using keyboard', async ({
+			test('should let reader traverse section titles using keyboard', async ({
 				context,
 				page,
 			}) => {
