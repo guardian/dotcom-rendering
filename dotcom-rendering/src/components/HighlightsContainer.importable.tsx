@@ -215,7 +215,6 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			);
 		};
 	}, []);
-
 	useEffect(() => {
 		void submitComponentEvent(
 			{
@@ -224,7 +223,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 					variant: 'inTest',
 				},
 				component: {
-					componentType: 'CONTAINER',
+					componentType: 'CAROUSEL',
 					id: 'home-highlights',
 				},
 				action: 'INSERT',
