@@ -397,7 +397,7 @@ export const Card = ({
 			);
 		}
 		return (
-			<Hide from="desktop">
+			<Hide from="tablet">
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
@@ -736,7 +736,7 @@ export const Card = ({
 							)}
 
 							{hasSublinks && sublinkPosition === 'inner' && (
-								<Hide until={'desktop'}>
+								<Hide until={'tablet'}>
 									<SupportingContent
 										supportingContent={supportingContent}
 										alignment="vertical"
