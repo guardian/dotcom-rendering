@@ -5,7 +5,7 @@
  */
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { from, space, textSans } from '@guardian/source/foundations';
+import { from, space, textSansBold15 } from '@guardian/source/foundations';
 import { TickerCountType } from '@guardian/support-dotcom-components';
 import type { TickerSettings } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
@@ -31,7 +31,7 @@ const styles = {
 		margin-bottom: ${space[1]}px;
 	`,
 	countLabelStyles: (colour: string) => css`
-		${textSans.xsmall({ fontWeight: 'bold' })};
+		${textSansBold15};
 		font-size: 13px;
 		color: ${colour};
 		line-height: 1.3;

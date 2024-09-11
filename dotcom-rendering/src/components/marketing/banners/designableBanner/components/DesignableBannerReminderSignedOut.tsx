@@ -9,7 +9,9 @@ import {
 	from,
 	neutral,
 	space,
-	textSans,
+	textSans15,
+	textSansBold15,
+	textSansBold17,
 } from '@guardian/source/foundations';
 import { Button, TextInput } from '@guardian/source/react-components';
 import { useContributionsReminderEmailForm } from '../../../hooks/useContributionsReminderEmailForm';
@@ -212,7 +214,7 @@ function Signup({
 
 const styles = {
 	headerCopy: css`
-		${textSans.medium({ fontWeight: 'bold' })};
+		${textSansBold17};
 		margin: 0;
 	`,
 	form: css`
@@ -257,12 +259,12 @@ const styles = {
 		}
 	`,
 	errorCopy: css`
-		${textSans.small({ fontWeight: 'bold' })};
+		${textSansBold15};
 		color: ${error[400]};
 		font-style: italic;
 	`,
 	infoCopy: css`
-		${textSans.small({})}
+		${textSans15}
 		font-size: 12px;
 	`,
 	privacyLink: (foreColor: string) => css`
@@ -270,13 +272,13 @@ const styles = {
 		color: ${foreColor};
 	`,
 	thankYouHeaderCopy: (foreColor: string) => css`
-		${textSans.small({ fontWeight: 'bold' })}
+		${textSansBold15}
 		margin: 0;
 		margin-bottom: ${space[3]}px;
 		color: ${foreColor};
 	`,
 	thankYouBodyCopy: (foreColor: string) => css`
-		${textSans.small()}
+		${textSans15}
 		color: ${foreColor};
 	`,
 	contactLink: (foreColor: string) => css`
