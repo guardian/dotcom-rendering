@@ -217,7 +217,7 @@ export const SignInGateMainCheckoutComplete = ({
 				<LinkButton
 					data-testid="sign-in-gate-main_register"
 					data-ignore="global-link-styling"
-					css={registerButton}
+					cssOverrides={registerButton}
 					priority="primary"
 					size="small"
 					href={personaliseSignInURl(signInUrl)}
@@ -236,7 +236,7 @@ export const SignInGateMainCheckoutComplete = ({
 					<Button
 						data-testid="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
-						css={notNowButton}
+						cssOverrides={notNowButton}
 						priority="subdued"
 						size="small"
 						onClick={() => {
