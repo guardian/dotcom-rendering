@@ -17,7 +17,7 @@ type Props = {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	showSubNav?: boolean;
-	/** The slim nav is a slimmed down version of the Titlepiece for Immersive articles */
+	/** The slim nav is a slimmed down version of the Titlepiece usually used for Immersive articles */
 	showSlimNav?: boolean;
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
@@ -52,7 +52,7 @@ export const Masthead = ({
 	idApiUrl,
 	contributionsServiceUrl,
 	showSubNav = true,
-	showSlimNav,
+	showSlimNav = false,
 	hasPageSkin = false,
 	hasPageSkinContentSelfConstrain = false,
 	pageId,
