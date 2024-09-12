@@ -341,8 +341,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.7.18)(@types/node@20.14.10)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
       '@guardian/commercial':
-        specifier: 0.0.0-beta-20240912082044
-        version: 0.0.0-beta-20240912082044(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240911151236)(@guardian/source@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: 0.0.0-beta-20240829153109
+        version: 0.0.0-beta-20240829153109(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240911151236)(@guardian/source@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 7.0.0
         version: 7.0.0(@guardian/libs@0.0.0-canary-20240911151236)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
@@ -3988,8 +3988,8 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@0.0.0-beta-20240912082044(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240911151236)(@guardian/source@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-+Bxk5e9o3kIWSB7FMd8/0TASDfjd8FZTl9vNjw4weD/LGNfsHfK2hyqkutkxykkoQwhS2MnpW/lcKA5gtuJiPg==}
+  /@guardian/commercial@0.0.0-beta-20240829153109(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240911151236)(@guardian/source@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-+BeY6z5ep9RnpZTN7FzHXDLcLi5fF0j6YsEnj+uHwv2lxljLd7k9iAgYvlusHZChQt5rW+U4zILpfepO6jQXzw==}
     peerDependencies:
       '@guardian/ab-core': ^8.0.0
       '@guardian/core-web-vitals': ^7.0.0
@@ -4005,7 +4005,7 @@ packages:
       '@guardian/identity-auth': 2.1.0(@guardian/libs@0.0.0-canary-20240911151236)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/identity-auth-frontend': 4.0.0(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240911151236)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/libs': 0.0.0-canary-20240911151236(tslib@2.6.2)(typescript@5.5.3)
-      '@guardian/prebid.js': 8.52.0-2(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/prebid.js': 8.52.0-1(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@guardian/source': 6.0.0(@emotion/react@11.11.3)(@types/react@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3)
       '@octokit/core': 6.1.2
       fastdom: 1.0.11
@@ -4015,6 +4015,7 @@ packages:
       tslib: 2.6.2
       typescript: 5.5.3
       web-vitals: 4.2.3
+      wolfy87-eventemitter: 5.2.9
     transitivePeerDependencies:
       - arc-templates
       - atpl
@@ -4286,19 +4287,6 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@guardian/libs@18.0.2(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-MX7mo/ZADgJJ9uMBHw9SoJBW1AJXB8Vg3NFUkpfJ7uwkN0LKHHxi8w2YkZDMPUDcMx5I3dpIf1LuqQQLR6RAVA==}
-    peerDependencies:
-      tslib: ^2.6.2
-      typescript: ~5.5.2
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      tslib: 2.6.2
-      typescript: 5.5.3
-    dev: false
-
   /@guardian/ophan-tracker-js@2.2.2:
     resolution: {integrity: sha512-g+Xouc0bU1fC+8qltuLexBxK67V534ZFDQ/bGWQtYDFSJJJtyPIq6ytPcn4KULNOQc+zRsUcRIfO0uRnjJScbw==}
     engines: {node: '>=16'}
@@ -4306,16 +4294,15 @@ packages:
       '@guardian/tsconfig': 1.0.0
     dev: false
 
-  /@guardian/prebid.js@8.52.0-2(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
-    resolution: {integrity: sha512-bm4Gtf+CYUdbqF/v1IVSSRj4/tq3frmMTLwgIzgrxB+vxMCgEvJcbD0ZkdS5MAno6e3BWw9ovuzVN8QC3ceSpA==}
+  /@guardian/prebid.js@8.52.0-1(react-dom@18.3.1)(react@18.3.1)(tslib@2.6.2)(typescript@5.5.3):
+    resolution: {integrity: sha512-nXEKVwJ0dGpKFZp31tiAHQ4gQAgLq6Ob/e3X6cxx1P87FeFBg7zFj3pgk6VfxySz6R6SXIL5BOts/SSTkVwlUQ==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@babel/core': 7.25.2
       '@babel/plugin-transform-runtime': 7.24.7(@babel/core@7.25.2)
       '@babel/preset-env': 7.25.3(@babel/core@7.25.2)
-      '@babel/register': 7.24.6(@babel/core@7.25.2)
       '@babel/runtime': 7.25.0
-      '@guardian/libs': 18.0.2(tslib@2.6.2)(typescript@5.5.3)
+      '@guardian/libs': 16.1.0(tslib@2.6.2)(typescript@5.5.3)
       core-js: 3.33.3
       core-js-pure: 3.35.0
       criteo-direct-rsa-validate: 1.1.0
@@ -18873,6 +18860,10 @@ packages:
       stack-trace: 0.0.10
       triple-beam: 1.4.1
       winston-transport: 4.6.0
+    dev: false
+
+  /wolfy87-eventemitter@5.2.9:
+    resolution: {integrity: sha512-P+6vtWyuDw+MB01X7UeF8TaHBvbCovf4HPEMF/SV7BdDc1SMTiBy13SRD71lQh4ExFTG1d/WNzDGDCyOKSMblw==}
     dev: false
 
   /wordwrap@1.0.0:
