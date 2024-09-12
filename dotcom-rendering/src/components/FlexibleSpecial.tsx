@@ -126,7 +126,7 @@ export const OneCardLayout = ({
 					aspectRatio="5:4"
 					kickerText={card.kickerText}
 					showLivePlayable={card.showLivePlayable}
-					isSplash={true}
+					boostedFontSizes={true}
 				/>
 			</LI>
 		</UL>

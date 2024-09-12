@@ -109,9 +109,10 @@ export type Props = {
 	pauseOffscreenVideo?: boolean;
 	showMainVideo?: boolean;
 	isTagPage?: boolean;
-	//** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
+	/** Alows the consumer to set an aspect ratio on the image of 5:3 or 5:4 */
 	aspectRatio?: AspectRatio;
-	isSplash?: boolean;
+	/** Alows the consumer to use a larger font size group for boost styling*/
+	boostedFontSizes?: boolean;
 };
 
 const starWrapper = (cardHasImage: boolean) => css`
@@ -253,7 +254,7 @@ export const Card = ({
 	absoluteServerTimes,
 	isTagPage = false,
 	aspectRatio,
-	isSplash,
+	boostedFontSizes,
 }: Props) => {
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
@@ -452,7 +453,7 @@ export const Card = ({
 						byline={byline}
 						showByline={showByline}
 						isExternalLink={isExternalLink}
-						fontRange={isSplash ? 'headline' : 'regular'}
+						boostedFontSizes={boostedFontSizes}
 					/>
 					{!isUndefined(starRating) ? (
 						<StarRatingComponent
@@ -659,9 +660,7 @@ export const Card = ({
 										byline={byline}
 										showByline={showByline}
 										isExternalLink={isExternalLink}
-										fontRange={
-											isSplash ? 'headline' : 'regular'
-										}
+										boostedFontSizes={boostedFontSizes}
 									/>
 									{!isUndefined(starRating) ? (
 										<StarRatingComponent
