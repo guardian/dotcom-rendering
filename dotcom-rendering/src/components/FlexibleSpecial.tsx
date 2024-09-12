@@ -92,10 +92,10 @@ export const OneCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 }) => {
-	if (!cards[0]) return null;
+	const card = cards[0];
+	if (!card) return null;
 
-	const longSupportingContent =
-		(cards[0]?.supportingContent?.length ?? 0) >= 3;
+	const longSupportingContent = (card?.supportingContent?.length ?? 0) >= 3;
 
 	const {
 		headlineSize,
@@ -104,12 +104,12 @@ export const OneCardLayout = ({
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
 		supportingContentAlignment,
-	} = determineCardProperties(cards[0].boostLevel, longSupportingContent);
+	} = determineCardProperties(card.boostLevel, longSupportingContent);
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
 				<FrontCard
-					trail={cards[0]}
+					trail={card}
 					containerPalette={containerPalette}
 					containerType="flexible/special"
 					showAge={showAge}
@@ -120,13 +120,13 @@ export const OneCardLayout = ({
 					imagePositionOnDesktop={imagePositionOnDesktop}
 					imagePositionOnMobile={imagePositionOnMobile}
 					imageSize="jumbo"
-					trailText={cards[0].trailText}
-					supportingContent={cards[0].supportingContent}
+					trailText={card.trailText}
+					supportingContent={card.supportingContent}
 					supportingContentAlignment={supportingContentAlignment}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
-					kickerText={cards[0].kickerText}
-					showLivePlayable={cards[0].showLivePlayable}
+					kickerText={card.kickerText}
+					showLivePlayable={card.showLivePlayable}
 					isSplash={true}
 				/>
 			</LI>
