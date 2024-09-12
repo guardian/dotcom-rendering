@@ -14,2223 +14,2258 @@
 import type { Article } from '../../../src/types/article';
 
 export const Quiz: Article = {
-	version: 3,
-	headline: 'Sports quiz: football in the 1980s',
-	standfirst:
-		'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
-	webTitle: 'Sports quiz: football in the 1980s',
-	mainMediaElements: [
-		{
-			displayCredit: true,
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			role: 'showcase',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '84',
-							width: '140',
+	frontendData: {
+		version: 3,
+		headline: 'Sports quiz: football in the 1980s',
+		standfirst:
+			'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
+		webTitle: 'Sports quiz: football in the 1980s',
+		mainMediaElements: [
+			{
+				displayCredit: true,
+				_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+				role: 'showcase',
+				media: {
+					allImages: [
+						{
+							index: 0,
+							fields: {
+								height: '84',
+								width: '140',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/140.jpg',
 						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/140.jpg',
+						{
+							index: 1,
+							fields: {
+								height: '300',
+								width: '500',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/500.jpg',
+						},
+						{
+							index: 2,
+							fields: {
+								height: '600',
+								width: '1000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg',
+						},
+						{
+							index: 3,
+							fields: {
+								height: '1200',
+								width: '2000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/2000.jpg',
+						},
+						{
+							index: 4,
+							fields: {
+								height: '1814',
+								width: '3020',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/3020.jpg',
+						},
+						{
+							index: 5,
+							fields: {
+								isMaster: 'true',
+								height: '1814',
+								width: '3020',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
+						},
+					],
+				},
+				elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
+				imageSources: [
+					{
+						weighting: 'inline',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
+								width: 930,
+							},
+						],
 					},
 					{
-						index: 1,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/500.jpg',
+						weighting: 'thumbnail',
+						srcSet: [],
 					},
 					{
-						index: 2,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg',
+						weighting: 'supporting',
+						srcSet: [],
 					},
 					{
-						index: 3,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/2000.jpg',
+						weighting: 'showcase',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1020&quality=85&auto=format&fit=max&s=d0614d6555b666d043e7d9af13ce1874',
+								width: 1020,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=03d83d28be0228cbb2f8102305c63d29',
+								width: 2040,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=940&quality=85&auto=format&fit=max&s=ff4686f3bcdbf35b62876872a1e907a9',
+								width: 940,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=9ea5f7504d3eff0e1de1358942c0a8a6',
+								width: 1880,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=85&auto=format&fit=max&s=1e11e11b4e26e9a4d2285b48bddc04c6',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ddf05ee6f3cbe8fb6ad4f9065cc4bca9',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
+								width: 930,
+							},
+						],
 					},
 					{
-						index: 4,
-						fields: {
-							height: '1814',
-							width: '3020',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/3020.jpg',
+						weighting: 'halfwidth',
+						srcSet: [],
 					},
 					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '1814',
-							width: '3020',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
+						weighting: 'immersive',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1900&quality=85&auto=format&fit=max&s=797496234e6746b413752a6bdb9ec99a',
+								width: 1900,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=dc5f48cab9881c72130bcd13ac45d586',
+								width: 3800,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=85&auto=format&fit=max&s=6942bb5fd934c057f1abd0e59cd6807a',
+								width: 1300,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f6c419830f8f0889672431013fc98f4',
+								width: 2600,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1140&quality=85&auto=format&fit=max&s=032071d334a61121147084e37af44e05',
+								width: 1140,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=50e8ab26e453e385630c7dc54455fcb4',
+								width: 2280,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=980&quality=85&auto=format&fit=max&s=0f07c8fab16cf627e3a06ae2e6f738f3',
+								width: 980,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=ef053995f1f90c5d469f88d40a924484',
+								width: 1960,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=740&quality=85&auto=format&fit=max&s=b0025a8f8e09f2e444c24c27c47a8fbd',
+								width: 740,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=6293eba2447a396b3a4cadf63f6e2889',
+								width: 1480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=85&auto=format&fit=max&s=1e11e11b4e26e9a4d2285b48bddc04c6',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ddf05ee6f3cbe8fb6ad4f9065cc4bca9',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=480&quality=85&auto=format&fit=max&s=69722aa748d9ed4df5e616e12232c908',
+								width: 480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=970f8ac70ba38f1c3f539ec570d90264',
+								width: 960,
+							},
+						],
 					},
 				],
+				data: {
+					alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+					caption:
+						'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+					credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+				},
+				position: 1,
 			},
-			elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
-							width: 930,
-						},
-					],
+		],
+		main: '<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
+		filterKeyEvents: false,
+		keyEvents: [],
+		blocks: [
+			{
+				id: '5ee1f3138f0875833522a23a',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement',
+						resultBuckets: [],
+						questions: [
+							{
+								id: 'b0342160-7678-417d-85c6-67a60ec4994b',
+								text: 'Who captained Italy to World Cup success in 1982?',
+								answers: [
+									{
+										id: 'c5c49561-d9df-4fd4-a7bb-47e7e0a88240',
+										text: 'Dino Zoff',
+										revealText:
+											'Goalkeeper Zoff is the oldest player to win the tournament. He was 40 when he lifted the trophy after Italy’s 3-1 victory over West Germanyin the final. He was 21 years and 297 days older than Giuseppe Bergomi, one of his teammates.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: '3bf94d69-9bca-465a-bf51-82d77b305ad8',
+										text: 'Claudio Gentile\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '1c3484a2-006a-461a-a737-348275cbdfbc',
+										text: 'Marco Tardelli\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '4e1062d0-8743-49a2-8420-6b21f6ffff39',
+										text: 'Antonio Cabrini',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: '1a335512-22f9-440b-8d51-e2b87d039965',
+								text: 'Which of these statements about the 1980 European Championship is true?',
+								answers: [
+									{
+										id: '0d78318b-8707-48e3-92ea-697262bdcbf7',
+										text: 'It was the first finals tournament to feature eight teams\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'eef3f58e-c436-4f66-8f55-dc2c3c5d0ad5',
+										text: 'It was the last European Championship to feature a third-fourth play-off match\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'dff2dbdf-b737-4bbb-8c76-081f915a6757',
+										text: 'The top scorer in the tournament scored all his goals in one match\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '4ddeed1e-8dcd-4a4a-8355-2e0be09ef51d',
+										text: 'All of the above',
+										revealText:
+											'The newly expanded tournament was the last to host a third-fourth play-off match, with Czechoslovakia beating hosts Italy 9-8 on penalties. Klaus Allofs scored a hat-trick for West Germany against the Netherlands in a group match and that was enough to make him the top scorer in a less than thrilling tournament.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+								],
+							},
+							{
+								id: '35176385-377b-44f7-bbac-11b01294135e',
+								text: 'Steaua Bucharest beat Barcelona on penalties in the 1986 European Cup final, making them the only Romanian club to have won the trophy. What was the score in the penalty shootout?',
+								answers: [
+									{
+										id: '28d936b1-66e1-452d-9583-a5d972b495cb',
+										text: '2-0',
+										revealText:
+											'Steaua goalkeeper Helmuth Duckadam became the Hero of Seville as he saved all four Barcelona penalties. Mind you, Steaua missed their first two spot kicks.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: '711dae9d-04e6-47cf-9275-448ed9a57124',
+										text: '3-0\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'cf9b7438-839f-4bcd-b228-1ba346ce0b80',
+										text: '3-1\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '30ce66ab-8858-49d8-9c80-7e4af2b33473',
+										text: '4-1\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: 'b4a75142-8e28-4634-b9ac-fe7556aee2cf',
+								text: 'At which stadium did Liverpool beat Everton to win the 1984 Milk Cup final – their fourth consecutive League Cup triumph?',
+								answers: [
+									{
+										id: '8c08e076-e124-4411-ac3e-669581824f4d',
+										text: 'Old Trafford\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '17a9a626-86b4-46f6-b8f2-a1b66ee6d40d',
+										text: 'Villa Park',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '76244370-f404-4ba6-b8b7-b0b660287e6c',
+										text: 'Hillsborough',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '926e7b9f-2365-4c70-9607-98f79244f2e0',
+										text: 'Maine Road',
+										revealText:
+											'After a goalless draw at Wembley, Liverpool won the replay at Maine Road thanks to a goal from Graeme Souness.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+								],
+								imageUrl:
+									'https://i.guim.co.uk/img/media/9bd896505173dcf4adadd02e5f40a03414c50bdc/172_201_2329_1397/master/2329.jpg?width=620&quality=85&auto=format&fit=max&s=133b7c6ce78a0780e99e605bb3ae7479',
+								imageAlt: '',
+							},
+							{
+								id: 'ecbbd1cb-19a0-4d93-8f4a-878e2c43f977',
+								text: 'Ipswich won the Uefa Cup in the 1980-81 season – their only European silverware (so far). Which of their players scored 14 goals in the competition that season?',
+								answers: [
+									{
+										id: '5d0fd3f6-6a34-4cb2-8d78-1ba525c19ff6',
+										text: 'John Wark',
+										revealText:
+											'Wark scored in every round, including goals in the home and away legs of the final.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: '0a909492-1d9f-41f9-ad6f-58444e32d586',
+										text: 'Alan Brazil\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '56c67b47-b1e0-455e-b764-923fbfaefa03',
+										text: 'Paul Mariner\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '977be8b2-c926-4d4c-89d3-39f2d3a25a61',
+										text: 'Eric Gates\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: 'f7ff56d4-0643-42cc-be70-27f3b6df0520',
+								text: 'Glenn Hoddle and Chris Waddle released the song Diamond Lights under the name ‘Glenn & Chris’ in 1987. Where did it peak in the UK charts?',
+								answers: [
+									{
+										id: '7e8448a6-28a0-4458-a0ed-d6d3e2e9a060',
+										text: 'No 1\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'a1b146fb-1622-40ae-b2ac-7444b467ab79',
+										text: 'No 2\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '363768d9-dc08-49b3-a77e-c686b9ea92fd',
+										text: 'No 12',
+										revealText:
+											'Their follow-up single, It’s Goodbye, did not hit the same heights. They were not able to promote the record as they would have liked given Hoddle’s transfer to Monaco and it only reached a lowly No 92.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: '8996dfe4-9f10-40ea-a168-04e31cf9c428',
+										text: 'No 89\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: '85667bd4-31aa-4ef7-8518-267415b15fb7',
+								text: 'Celtic won the double in 1987-88, their centenary season. Which team did they beat in the 1988 Scottish Cup final? Clue: they beat the same team by the same score in the final three years earlier.',
+								answers: [
+									{
+										id: '1622448a-7708-4fa1-aa2f-96958071762f',
+										text: 'Rangers',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '693439d0-4ba1-42a7-b63c-3bd871c116b4',
+										text: 'Aberdeen',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'ab4d7cc2-4b2f-4090-bf81-0bcdcc984e99',
+										text: 'Dundee United',
+										revealText:
+											'Frank McAvennie’s goal in the 90th minute sealed the double for Celtic.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: '6d136b26-d438-4647-9271-d69cfc2c8df0',
+										text: 'Hearts',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: '6b5ab29f-4bfc-4853-86cc-0b751b7855bd',
+								text: 'Arsenal pipped Liverpool to the league title in the 1988-89 season after a memorable victory at Anfield in the final match of the campaign. Which player – who was on the field that night – finished as the top scorer in the league that season?',
+								answers: [
+									{
+										id: '6ef6917d-8a69-403c-b68a-85c97066c46b',
+										text: 'John Aldridge\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '7ff95e2c-3972-4109-b232-447d40ca35ca',
+										text: 'Ian Rush\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '8345cd3d-b028-4f77-a147-5888284538d8',
+										text: 'Alan Smith',
+										revealText:
+											'Smith scored 23 goals for Arsenal, including their first in that unforgettable championship decider at Anfield on 26 May 1989.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: 'dd96bc26-c62e-4b1c-8395-3e61d5761a8d',
+										text: 'Paul Merson\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: 'c63bca8f-7f09-4a2f-88fe-4c8a2c40a25c',
+								text: 'Which two teams lost FA Cup semi-finals in the same season in the 1980s, but then contested the final 10 years later?',
+								answers: [
+									{
+										id: '00d69f0f-ebe1-415b-8158-955a4a20cbcd',
+										text: 'Manchester United and Everton\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '15ad983d-031f-4a3e-8106-47becf789962',
+										text: 'Arsenal and Sheffield Wednesday',
+										revealText:
+											'In the 1983 FA Cup semi-finals, Arsenal and Sheffield Wednesday lost 2-1 to Manchester United and Brighton, respectively. A decade later, Arsenal beat Wednesday 2-1 in a replay to win the FA Cup.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: 'e90fcedf-8e3f-4552-bf3e-b82878f40e78',
+										text: 'Nottingham Forest and Tottenham\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'c86015d2-c90a-4983-b715-8f616deee900',
+										text: 'Newcastle and Arsenal',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: '2dc74cd4-2c58-4c4d-ad85-d531eb36e815',
+								text: 'Everton won their first and, so far, only European trophy in the 1980s, when they beat Rapid Vienna in the Cup Winners’ Cup final in 1985. Who scored the last goal in the final?',
+								answers: [
+									{
+										id: 'afc609c5-8c0c-4fdf-8915-665b5348d62f',
+										text: 'Graeme Sharp\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '75f6e1a7-4770-46f0-b7f9-7dc188f41ccf',
+										text: 'Andy Gray\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '93196211-2efb-41ff-b67d-5bf04b2b4d4b',
+										text: 'Trevor Steven',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '8f6b2653-59d9-4936-835e-ce99c37e610d',
+										text: 'Kevin Sheedy',
+										revealText:
+											'Sheedy’s beautiful chip secured a 3-1 win for Everton over Rapid Vienna in Rotterdam. Andy Gray and Trevor Steven scored the other goals.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+								],
+								imageUrl:
+									'https://i.guim.co.uk/img/media/2b19ae8786af119cfbb8c92247b8c6ea6e0212be/0_0_2176_1440/master/2176.jpg?width=620&quality=85&auto=format&fit=max&s=3d51e6df23c7bb0b8032e74ff0483205',
+								imageAlt: '',
+							},
+							{
+								id: '15708aa9-4483-4b16-a32b-e5137bf5a832',
+								text: 'Which club – who were managed by Neil Warnock at the time – were promoted to the Fourth Division in 1987, becoming the first club to earn promotion by winning the Conference?',
+								answers: [
+									{
+										id: '6810575c-52e6-4c8b-b50d-e6016bb17223',
+										text: 'Boston United\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '6ba606f0-2901-4e4f-9458-4bfcdcf82054',
+										text: 'Scarborough',
+										revealText:
+											'Scarborough were the first club to gain automatic promotion to Division Four, replacing Lincoln City. ',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: 'd4642a17-2ff0-4a84-badf-fe5335249350',
+										text: 'Barnet',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '39482382-ca98-4593-a6a7-81534ababdbb',
+										text: 'Dagenham',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: '6b8d30df-c63b-4d87-ae12-d25ddd565b4c',
+								text: 'Complete the sequence of these Wembley cup winners: Chelsea, Blackburn Rovers, Reading ...',
+								answers: [
+									{
+										id: '00d1eb4a-e71b-4d7c-9f64-73d8fb45c1fb',
+										text: 'Everton\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '74891037-dcc4-4853-8de3-c4d7063f6121',
+										text: 'Nottingham Forest',
+										revealText:
+											'Nottingham Forest won the 1989 Simod Cup, beating Everton 4-3 in the final at Wembley. Chelsea had won the first edition of the tournament - initially known as the Full Members’ Cup - by beating Manchester City 5-4, with David Speedie scoring a hat trick.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: '3b0da29a-28d1-4d29-b134-e11824883cdd',
+										text: 'Crystal Palace\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '20368c43-71a6-445b-8033-72245adf31ac',
+										text: 'Chelsea',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: 'efc7a5cf-4bf7-4069-9dba-d986f269d647',
+								text: 'Who was the only footballer to finish in the top three of the BBC Sports Personality of the Year award in the 1980s?',
+								answers: [
+									{
+										id: '0aea24e9-6ab9-4a1b-9056-3492e4006f78',
+										text: 'Paul Gascoigne\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'ec5ceb85-7929-46fe-b503-1b8b4c5a54dd',
+										text: 'Gary Lineker\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '59cbb6ca-41b1-4c59-940d-5155c6c7c280',
+										text: 'Kenny Dalglish',
+										revealText:
+											'Dalglish finished third in 1986, after leading Liverpool to the league and cup double in his first season as player manager.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: 'c02c761c-14b0-4bfa-8541-e6975f053858',
+										text: 'Ian Rush',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: '3a0f2ab0-ab35-425b-8220-067f509b5573',
+								text: 'Which team won the last edition of the Anglo-Scottish Cup in the 1980-81 season?',
+								answers: [
+									{
+										id: 'bc033ca5-38bf-409e-98b3-22bcf862920b',
+										text: 'Kilmarnock\n',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'a6ddf744-c4f9-401d-b712-3d945bed6767',
+										text: 'Bury',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '2bc0c1c0-b8c9-43f9-a716-f8ef6fb33db0',
+										text: 'Chesterfield',
+										revealText:
+											'Chesterfield beat Rangers in the quarter-finals, Bury in the semi-finals and Notts County in the final.\n',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+									{
+										id: '9607ee56-b054-4186-9d45-dcdc00499b57',
+										text: 'Notts County',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+								],
+							},
+							{
+								id: '79cf8a12-fb5d-46d1-ba46-4135e5f7f6ef',
+								text: 'QPR, Luton Town, Oldham Athletic and which other club played home matches on an artificial pitch during the 1980s?',
+								answers: [
+									{
+										id: '7a0a376c-e740-470e-b48a-a7a1a1668dda',
+										text: 'Burnley',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: 'f16e61c1-e579-4f73-9a2a-a8587dcb77c9',
+										text: 'Blackpool',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '657bb0d4-1079-4708-82e6-3913604ed6fe',
+										text: 'Rochdale',
+										answerBuckets: [],
+										isCorrect: false,
+									},
+									{
+										id: '52e23c48-6bab-4966-8139-41a82da02d5b',
+										text: 'Preston North End',
+										revealText:
+											'Preston installed astroturf in 1986 and Deepdale would be the last ground to use this playing surface in the Football League, in 1994.',
+										answerBuckets: [],
+										isCorrect: true,
+									},
+								],
+							},
+						],
+						resultGroups: [
+							{
+								id: 'f878916e-08c0-4a55-9d77-8da45d37162c',
+								title: 'Flawless',
+								shareText:
+									"I scored 15/15 in the Guardian's football quiz",
+								minScore: 15,
+							},
+							{
+								id: 'a60f15e7-28cc-4000-baab-ca84014cf989',
+								title: "Don't worry. It was a long time ago",
+								shareText:
+									"I scored 0/15 in the Guardian's football quiz",
+								minScore: 0,
+							},
+							{
+								id: '5a8fa509-b8b9-4125-b6b3-2ba2431e949d',
+								title: 'A superb score',
+								shareText:
+									"I scored 14/15 in the Guardian's football quiz",
+								minScore: 14,
+							},
+							{
+								id: '797bd9e1-3891-48b9-9e3d-ceb824c1d9b9',
+								title: 'A superb score',
+								shareText:
+									"I scored 13/15 in the Guardian's football quiz",
+								minScore: 13,
+							},
+							{
+								id: '73409b4c-cff9-401a-a5b4-8beaca81b5c3',
+								title: 'A superb score',
+								shareText:
+									"I scored 12/15 in the Guardian's football quiz",
+								minScore: 12,
+							},
+							{
+								id: '4c85e76b-e33f-45e2-8652-a69aa5bf742f',
+								title: 'A superb score',
+								shareText:
+									"I scored 11/15 in the Guardian's football quiz",
+								minScore: 11,
+							},
+							{
+								id: 'f612ace8-c9cc-4811-b108-7d4a09dd1441',
+								title: 'A superb score',
+								shareText:
+									"I scored 10/15 in the Guardian's football quiz",
+								minScore: 10,
+							},
+							{
+								id: 'fd5d253e-ad07-42cc-b22d-50ec263ee724',
+								title: 'A fine score',
+								shareText:
+									"I scored 9/15 in the Guardian's football quiz",
+								minScore: 9,
+							},
+							{
+								id: 'bd399a69-50d3-491f-baa2-fb6eccdbfd6f',
+								title: 'A fine score',
+								shareText:
+									"I scored 8/15 in the Guardian's football quiz",
+								minScore: 8,
+							},
+							{
+								id: '6e52b1d3-f700-48b9-9798-00ae293d1ac0',
+								title: 'A fine score',
+								shareText:
+									"I scored 7/15 in the Guardian's football quiz",
+								minScore: 7,
+							},
+							{
+								id: 'a857f84e-8e79-4edb-a0c5-87876809bdfc',
+								title: 'Nice work',
+								shareText:
+									"I scored 6/15 in the Guardian's football quiz",
+								minScore: 6,
+							},
+							{
+								id: 'a8eee0e2-ca1f-43cb-9956-22ae666b997f',
+								title: "Don't worry. It was a long time ago",
+								shareText:
+									"I scored 5/15 in the Guardian's football quiz",
+								minScore: 5,
+							},
+							{
+								id: '5469d385-ecbd-4886-a13a-ccf04c6b4aa0',
+								title: "Don't worry. It was a long time ago",
+								shareText:
+									"I scored 4/15 in the Guardian's football quiz",
+								minScore: 4,
+							},
+							{
+								id: '3535a0f8-c7ea-4b89-82a3-84f6d0a58d09',
+								title: "Don't worry. It was a long time ago",
+								shareText:
+									"I scored 3/15 in the Guardian's football quiz",
+								minScore: 3,
+							},
+							{
+								id: '89c65806-51f1-4cc5-8069-409092ef98f2',
+								title: "Don't worry. It was a long time ago",
+								shareText:
+									"I scored 1/15 in the Guardian's football quiz",
+								minScore: 1,
+							},
+							{
+								id: 'c038ed66-a421-4eee-8f95-ce102079974c',
+								title: "Don't worry. It was a long time ago",
+								shareText:
+									"I scored 2/15 in the Guardian's football quiz",
+								minScore: 2,
+							},
+						],
+						elementId: '878e43c5-e2d8-4762-9cbc-73033c0e882d',
+						quizType: 'knowledge',
+						id: '2c6bf552-2827-4256-b3a0-f557d215c394',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
 				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1020&quality=85&auto=format&fit=max&s=d0614d6555b666d043e7d9af13ce1874',
-							width: 1020,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=03d83d28be0228cbb2f8102305c63d29',
-							width: 2040,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=940&quality=85&auto=format&fit=max&s=ff4686f3bcdbf35b62876872a1e907a9',
-							width: 940,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=9ea5f7504d3eff0e1de1358942c0a8a6',
-							width: 1880,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=85&auto=format&fit=max&s=1e11e11b4e26e9a4d2285b48bddc04c6',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ddf05ee6f3cbe8fb6ad4f9065cc4bca9',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1900&quality=85&auto=format&fit=max&s=797496234e6746b413752a6bdb9ec99a',
-							width: 1900,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=dc5f48cab9881c72130bcd13ac45d586',
-							width: 3800,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=85&auto=format&fit=max&s=6942bb5fd934c057f1abd0e59cd6807a',
-							width: 1300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f6c419830f8f0889672431013fc98f4',
-							width: 2600,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1140&quality=85&auto=format&fit=max&s=032071d334a61121147084e37af44e05',
-							width: 1140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=50e8ab26e453e385630c7dc54455fcb4',
-							width: 2280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=980&quality=85&auto=format&fit=max&s=0f07c8fab16cf627e3a06ae2e6f738f3',
-							width: 980,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=ef053995f1f90c5d469f88d40a924484',
-							width: 1960,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=740&quality=85&auto=format&fit=max&s=b0025a8f8e09f2e444c24c27c47a8fbd',
-							width: 740,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=6293eba2447a396b3a4cadf63f6e2889',
-							width: 1480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=85&auto=format&fit=max&s=1e11e11b4e26e9a4d2285b48bddc04c6',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ddf05ee6f3cbe8fb6ad4f9065cc4bca9',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=480&quality=85&auto=format&fit=max&s=69722aa748d9ed4df5e616e12232c908',
-							width: 480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=970f8ac70ba38f1c3f539ec570d90264',
-							width: 960,
-						},
-					],
-				},
-			],
-			data: {
-				alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
-				caption:
-					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
-				credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+				blockCreatedOn: 1591952964000,
+				blockCreatedOnDisplay: '10.09 BST',
+				blockLastUpdated: 1591917260000,
+				blockLastUpdatedDisplay: '00.14 BST',
+				blockFirstPublished: 1591952964000,
+				blockFirstPublishedDisplay: '10.09 BST',
+				blockFirstPublishedDisplayNoTimezone: '10.09',
+				contributors: [],
+				primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
+				secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
 			},
-			position: 1,
+		],
+		author: {
+			byline: 'Steven Pye',
 		},
-	],
-	main: '<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
-	filterKeyEvents: false,
-	keyEvents: [],
-	blocks: [
-		{
-			id: '5ee1f3138f0875833522a23a',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					resultBuckets: [],
-					questions: [
-						{
-							id: 'b0342160-7678-417d-85c6-67a60ec4994b',
-							text: 'Who captained Italy to World Cup success in 1982?',
-							answers: [
-								{
-									id: 'c5c49561-d9df-4fd4-a7bb-47e7e0a88240',
-									text: 'Dino Zoff',
-									revealText:
-										'Goalkeeper Zoff is the oldest player to win the tournament. He was 40 when he lifted the trophy after Italy’s 3-1 victory over West Germanyin the final. He was 21 years and 297 days older than Giuseppe Bergomi, one of his teammates.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: '3bf94d69-9bca-465a-bf51-82d77b305ad8',
-									text: 'Claudio Gentile\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '1c3484a2-006a-461a-a737-348275cbdfbc',
-									text: 'Marco Tardelli\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '4e1062d0-8743-49a2-8420-6b21f6ffff39',
-									text: 'Antonio Cabrini',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: '1a335512-22f9-440b-8d51-e2b87d039965',
-							text: 'Which of these statements about the 1980 European Championship is true?',
-							answers: [
-								{
-									id: '0d78318b-8707-48e3-92ea-697262bdcbf7',
-									text: 'It was the first finals tournament to feature eight teams\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'eef3f58e-c436-4f66-8f55-dc2c3c5d0ad5',
-									text: 'It was the last European Championship to feature a third-fourth play-off match\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'dff2dbdf-b737-4bbb-8c76-081f915a6757',
-									text: 'The top scorer in the tournament scored all his goals in one match\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '4ddeed1e-8dcd-4a4a-8355-2e0be09ef51d',
-									text: 'All of the above',
-									revealText:
-										'The newly expanded tournament was the last to host a third-fourth play-off match, with Czechoslovakia beating hosts Italy 9-8 on penalties. Klaus Allofs scored a hat-trick for West Germany against the Netherlands in a group match and that was enough to make him the top scorer in a less than thrilling tournament.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-							],
-						},
-						{
-							id: '35176385-377b-44f7-bbac-11b01294135e',
-							text: 'Steaua Bucharest beat Barcelona on penalties in the 1986 European Cup final, making them the only Romanian club to have won the trophy. What was the score in the penalty shootout?',
-							answers: [
-								{
-									id: '28d936b1-66e1-452d-9583-a5d972b495cb',
-									text: '2-0',
-									revealText:
-										'Steaua goalkeeper Helmuth Duckadam became the Hero of Seville as he saved all four Barcelona penalties. Mind you, Steaua missed their first two spot kicks.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: '711dae9d-04e6-47cf-9275-448ed9a57124',
-									text: '3-0\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'cf9b7438-839f-4bcd-b228-1ba346ce0b80',
-									text: '3-1\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '30ce66ab-8858-49d8-9c80-7e4af2b33473',
-									text: '4-1\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: 'b4a75142-8e28-4634-b9ac-fe7556aee2cf',
-							text: 'At which stadium did Liverpool beat Everton to win the 1984 Milk Cup final – their fourth consecutive League Cup triumph?',
-							answers: [
-								{
-									id: '8c08e076-e124-4411-ac3e-669581824f4d',
-									text: 'Old Trafford\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '17a9a626-86b4-46f6-b8f2-a1b66ee6d40d',
-									text: 'Villa Park',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '76244370-f404-4ba6-b8b7-b0b660287e6c',
-									text: 'Hillsborough',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '926e7b9f-2365-4c70-9607-98f79244f2e0',
-									text: 'Maine Road',
-									revealText:
-										'After a goalless draw at Wembley, Liverpool won the replay at Maine Road thanks to a goal from Graeme Souness.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-							],
-							imageUrl:
-								'https://i.guim.co.uk/img/media/9bd896505173dcf4adadd02e5f40a03414c50bdc/172_201_2329_1397/master/2329.jpg?width=620&quality=85&auto=format&fit=max&s=133b7c6ce78a0780e99e605bb3ae7479',
-							imageAlt: '',
-						},
-						{
-							id: 'ecbbd1cb-19a0-4d93-8f4a-878e2c43f977',
-							text: 'Ipswich won the Uefa Cup in the 1980-81 season – their only European silverware (so far). Which of their players scored 14 goals in the competition that season?',
-							answers: [
-								{
-									id: '5d0fd3f6-6a34-4cb2-8d78-1ba525c19ff6',
-									text: 'John Wark',
-									revealText:
-										'Wark scored in every round, including goals in the home and away legs of the final.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: '0a909492-1d9f-41f9-ad6f-58444e32d586',
-									text: 'Alan Brazil\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '56c67b47-b1e0-455e-b764-923fbfaefa03',
-									text: 'Paul Mariner\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '977be8b2-c926-4d4c-89d3-39f2d3a25a61',
-									text: 'Eric Gates\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: 'f7ff56d4-0643-42cc-be70-27f3b6df0520',
-							text: 'Glenn Hoddle and Chris Waddle released the song Diamond Lights under the name ‘Glenn & Chris’ in 1987. Where did it peak in the UK charts?',
-							answers: [
-								{
-									id: '7e8448a6-28a0-4458-a0ed-d6d3e2e9a060',
-									text: 'No 1\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'a1b146fb-1622-40ae-b2ac-7444b467ab79',
-									text: 'No 2\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '363768d9-dc08-49b3-a77e-c686b9ea92fd',
-									text: 'No 12',
-									revealText:
-										'Their follow-up single, It’s Goodbye, did not hit the same heights. They were not able to promote the record as they would have liked given Hoddle’s transfer to Monaco and it only reached a lowly No 92.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: '8996dfe4-9f10-40ea-a168-04e31cf9c428',
-									text: 'No 89\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: '85667bd4-31aa-4ef7-8518-267415b15fb7',
-							text: 'Celtic won the double in 1987-88, their centenary season. Which team did they beat in the 1988 Scottish Cup final? Clue: they beat the same team by the same score in the final three years earlier.',
-							answers: [
-								{
-									id: '1622448a-7708-4fa1-aa2f-96958071762f',
-									text: 'Rangers',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '693439d0-4ba1-42a7-b63c-3bd871c116b4',
-									text: 'Aberdeen',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'ab4d7cc2-4b2f-4090-bf81-0bcdcc984e99',
-									text: 'Dundee United',
-									revealText:
-										'Frank McAvennie’s goal in the 90th minute sealed the double for Celtic.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: '6d136b26-d438-4647-9271-d69cfc2c8df0',
-									text: 'Hearts',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: '6b5ab29f-4bfc-4853-86cc-0b751b7855bd',
-							text: 'Arsenal pipped Liverpool to the league title in the 1988-89 season after a memorable victory at Anfield in the final match of the campaign. Which player – who was on the field that night – finished as the top scorer in the league that season?',
-							answers: [
-								{
-									id: '6ef6917d-8a69-403c-b68a-85c97066c46b',
-									text: 'John Aldridge\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '7ff95e2c-3972-4109-b232-447d40ca35ca',
-									text: 'Ian Rush\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '8345cd3d-b028-4f77-a147-5888284538d8',
-									text: 'Alan Smith',
-									revealText:
-										'Smith scored 23 goals for Arsenal, including their first in that unforgettable championship decider at Anfield on 26 May 1989.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: 'dd96bc26-c62e-4b1c-8395-3e61d5761a8d',
-									text: 'Paul Merson\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: 'c63bca8f-7f09-4a2f-88fe-4c8a2c40a25c',
-							text: 'Which two teams lost FA Cup semi-finals in the same season in the 1980s, but then contested the final 10 years later?',
-							answers: [
-								{
-									id: '00d69f0f-ebe1-415b-8158-955a4a20cbcd',
-									text: 'Manchester United and Everton\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '15ad983d-031f-4a3e-8106-47becf789962',
-									text: 'Arsenal and Sheffield Wednesday',
-									revealText:
-										'In the 1983 FA Cup semi-finals, Arsenal and Sheffield Wednesday lost 2-1 to Manchester United and Brighton, respectively. A decade later, Arsenal beat Wednesday 2-1 in a replay to win the FA Cup.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: 'e90fcedf-8e3f-4552-bf3e-b82878f40e78',
-									text: 'Nottingham Forest and Tottenham\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'c86015d2-c90a-4983-b715-8f616deee900',
-									text: 'Newcastle and Arsenal',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: '2dc74cd4-2c58-4c4d-ad85-d531eb36e815',
-							text: 'Everton won their first and, so far, only European trophy in the 1980s, when they beat Rapid Vienna in the Cup Winners’ Cup final in 1985. Who scored the last goal in the final?',
-							answers: [
-								{
-									id: 'afc609c5-8c0c-4fdf-8915-665b5348d62f',
-									text: 'Graeme Sharp\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '75f6e1a7-4770-46f0-b7f9-7dc188f41ccf',
-									text: 'Andy Gray\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '93196211-2efb-41ff-b67d-5bf04b2b4d4b',
-									text: 'Trevor Steven',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '8f6b2653-59d9-4936-835e-ce99c37e610d',
-									text: 'Kevin Sheedy',
-									revealText:
-										'Sheedy’s beautiful chip secured a 3-1 win for Everton over Rapid Vienna in Rotterdam. Andy Gray and Trevor Steven scored the other goals.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-							],
-							imageUrl:
-								'https://i.guim.co.uk/img/media/2b19ae8786af119cfbb8c92247b8c6ea6e0212be/0_0_2176_1440/master/2176.jpg?width=620&quality=85&auto=format&fit=max&s=3d51e6df23c7bb0b8032e74ff0483205',
-							imageAlt: '',
-						},
-						{
-							id: '15708aa9-4483-4b16-a32b-e5137bf5a832',
-							text: 'Which club – who were managed by Neil Warnock at the time – were promoted to the Fourth Division in 1987, becoming the first club to earn promotion by winning the Conference?',
-							answers: [
-								{
-									id: '6810575c-52e6-4c8b-b50d-e6016bb17223',
-									text: 'Boston United\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '6ba606f0-2901-4e4f-9458-4bfcdcf82054',
-									text: 'Scarborough',
-									revealText:
-										'Scarborough were the first club to gain automatic promotion to Division Four, replacing Lincoln City. ',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: 'd4642a17-2ff0-4a84-badf-fe5335249350',
-									text: 'Barnet',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '39482382-ca98-4593-a6a7-81534ababdbb',
-									text: 'Dagenham',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: '6b8d30df-c63b-4d87-ae12-d25ddd565b4c',
-							text: 'Complete the sequence of these Wembley cup winners: Chelsea, Blackburn Rovers, Reading ...',
-							answers: [
-								{
-									id: '00d1eb4a-e71b-4d7c-9f64-73d8fb45c1fb',
-									text: 'Everton\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '74891037-dcc4-4853-8de3-c4d7063f6121',
-									text: 'Nottingham Forest',
-									revealText:
-										'Nottingham Forest won the 1989 Simod Cup, beating Everton 4-3 in the final at Wembley. Chelsea had won the first edition of the tournament - initially known as the Full Members’ Cup - by beating Manchester City 5-4, with David Speedie scoring a hat trick.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: '3b0da29a-28d1-4d29-b134-e11824883cdd',
-									text: 'Crystal Palace\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '20368c43-71a6-445b-8033-72245adf31ac',
-									text: 'Chelsea',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: 'efc7a5cf-4bf7-4069-9dba-d986f269d647',
-							text: 'Who was the only footballer to finish in the top three of the BBC Sports Personality of the Year award in the 1980s?',
-							answers: [
-								{
-									id: '0aea24e9-6ab9-4a1b-9056-3492e4006f78',
-									text: 'Paul Gascoigne\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'ec5ceb85-7929-46fe-b503-1b8b4c5a54dd',
-									text: 'Gary Lineker\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '59cbb6ca-41b1-4c59-940d-5155c6c7c280',
-									text: 'Kenny Dalglish',
-									revealText:
-										'Dalglish finished third in 1986, after leading Liverpool to the league and cup double in his first season as player manager.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: 'c02c761c-14b0-4bfa-8541-e6975f053858',
-									text: 'Ian Rush',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: '3a0f2ab0-ab35-425b-8220-067f509b5573',
-							text: 'Which team won the last edition of the Anglo-Scottish Cup in the 1980-81 season?',
-							answers: [
-								{
-									id: 'bc033ca5-38bf-409e-98b3-22bcf862920b',
-									text: 'Kilmarnock\n',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'a6ddf744-c4f9-401d-b712-3d945bed6767',
-									text: 'Bury',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '2bc0c1c0-b8c9-43f9-a716-f8ef6fb33db0',
-									text: 'Chesterfield',
-									revealText:
-										'Chesterfield beat Rangers in the quarter-finals, Bury in the semi-finals and Notts County in the final.\n',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-								{
-									id: '9607ee56-b054-4186-9d45-dcdc00499b57',
-									text: 'Notts County',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-							],
-						},
-						{
-							id: '79cf8a12-fb5d-46d1-ba46-4135e5f7f6ef',
-							text: 'QPR, Luton Town, Oldham Athletic and which other club played home matches on an artificial pitch during the 1980s?',
-							answers: [
-								{
-									id: '7a0a376c-e740-470e-b48a-a7a1a1668dda',
-									text: 'Burnley',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: 'f16e61c1-e579-4f73-9a2a-a8587dcb77c9',
-									text: 'Blackpool',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '657bb0d4-1079-4708-82e6-3913604ed6fe',
-									text: 'Rochdale',
-									answerBuckets: [],
-									isCorrect: false,
-								},
-								{
-									id: '52e23c48-6bab-4966-8139-41a82da02d5b',
-									text: 'Preston North End',
-									revealText:
-										'Preston installed astroturf in 1986 and Deepdale would be the last ground to use this playing surface in the Football League, in 1994.',
-									answerBuckets: [],
-									isCorrect: true,
-								},
-							],
-						},
-					],
-					resultGroups: [
-						{
-							id: 'f878916e-08c0-4a55-9d77-8da45d37162c',
-							title: 'Flawless',
-							shareText:
-								"I scored 15/15 in the Guardian's football quiz",
-							minScore: 15,
-						},
-						{
-							id: 'a60f15e7-28cc-4000-baab-ca84014cf989',
-							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 0/15 in the Guardian's football quiz",
-							minScore: 0,
-						},
-						{
-							id: '5a8fa509-b8b9-4125-b6b3-2ba2431e949d',
-							title: 'A superb score',
-							shareText:
-								"I scored 14/15 in the Guardian's football quiz",
-							minScore: 14,
-						},
-						{
-							id: '797bd9e1-3891-48b9-9e3d-ceb824c1d9b9',
-							title: 'A superb score',
-							shareText:
-								"I scored 13/15 in the Guardian's football quiz",
-							minScore: 13,
-						},
-						{
-							id: '73409b4c-cff9-401a-a5b4-8beaca81b5c3',
-							title: 'A superb score',
-							shareText:
-								"I scored 12/15 in the Guardian's football quiz",
-							minScore: 12,
-						},
-						{
-							id: '4c85e76b-e33f-45e2-8652-a69aa5bf742f',
-							title: 'A superb score',
-							shareText:
-								"I scored 11/15 in the Guardian's football quiz",
-							minScore: 11,
-						},
-						{
-							id: 'f612ace8-c9cc-4811-b108-7d4a09dd1441',
-							title: 'A superb score',
-							shareText:
-								"I scored 10/15 in the Guardian's football quiz",
-							minScore: 10,
-						},
-						{
-							id: 'fd5d253e-ad07-42cc-b22d-50ec263ee724',
-							title: 'A fine score',
-							shareText:
-								"I scored 9/15 in the Guardian's football quiz",
-							minScore: 9,
-						},
-						{
-							id: 'bd399a69-50d3-491f-baa2-fb6eccdbfd6f',
-							title: 'A fine score',
-							shareText:
-								"I scored 8/15 in the Guardian's football quiz",
-							minScore: 8,
-						},
-						{
-							id: '6e52b1d3-f700-48b9-9798-00ae293d1ac0',
-							title: 'A fine score',
-							shareText:
-								"I scored 7/15 in the Guardian's football quiz",
-							minScore: 7,
-						},
-						{
-							id: 'a857f84e-8e79-4edb-a0c5-87876809bdfc',
-							title: 'Nice work',
-							shareText:
-								"I scored 6/15 in the Guardian's football quiz",
-							minScore: 6,
-						},
-						{
-							id: 'a8eee0e2-ca1f-43cb-9956-22ae666b997f',
-							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 5/15 in the Guardian's football quiz",
-							minScore: 5,
-						},
-						{
-							id: '5469d385-ecbd-4886-a13a-ccf04c6b4aa0',
-							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 4/15 in the Guardian's football quiz",
-							minScore: 4,
-						},
-						{
-							id: '3535a0f8-c7ea-4b89-82a3-84f6d0a58d09',
-							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 3/15 in the Guardian's football quiz",
-							minScore: 3,
-						},
-						{
-							id: '89c65806-51f1-4cc5-8069-409092ef98f2',
-							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 1/15 in the Guardian's football quiz",
-							minScore: 1,
-						},
-						{
-							id: 'c038ed66-a421-4eee-8f95-ce102079974c',
-							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 2/15 in the Guardian's football quiz",
-							minScore: 2,
-						},
-					],
-					elementId: '878e43c5-e2d8-4762-9cbc-73033c0e882d',
-					quizType: 'knowledge',
-					id: '2c6bf552-2827-4256-b3a0-f557d215c394',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1591952964000,
-			blockCreatedOnDisplay: '10.09 BST',
-			blockLastUpdated: 1591917260000,
-			blockLastUpdatedDisplay: '00.14 BST',
-			blockFirstPublished: 1591952964000,
-			blockFirstPublishedDisplay: '10.09 BST',
-			blockFirstPublishedDisplayNoTimezone: '10.09',
-			contributors: [],
-			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
-			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
-		},
-	],
-	author: {
 		byline: 'Steven Pye',
-	},
-	byline: 'Steven Pye',
-	webPublicationDate: '2020-06-12T09:09:24.000Z',
-	webPublicationDateDeprecated: '2020-06-12T09:09:24.000Z',
-	webPublicationDateDisplay: 'Fri 12 Jun 2020 10.09 BST',
-	webPublicationSecondaryDateDisplay:
-		'Last modified on Fri 12 Jun 2020 10.09 BST',
-	editionLongForm: 'UK edition',
-	editionId: 'UK',
-	pageId: 'football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-	canonicalUrl:
-		'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-	format: {
-		design: 'QuizDesign',
-		theme: 'SportPillar',
-		display: 'ShowcaseDisplay',
-	},
-	designType: 'Quiz',
-	tags: [
-		{
-			id: 'football/football',
-			type: 'Keyword',
-			title: 'Football',
+		webPublicationDate: '2020-06-12T09:09:24.000Z',
+		webPublicationDateDeprecated: '2020-06-12T09:09:24.000Z',
+		webPublicationDateDisplay: 'Fri 12 Jun 2020 10.09 BST',
+		webPublicationSecondaryDateDisplay:
+			'Last modified on Fri 12 Jun 2020 10.09 BST',
+		editionLongForm: 'UK edition',
+		editionId: 'UK',
+		pageId: 'football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+		canonicalUrl:
+			'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+		format: {
+			design: 'QuizDesign',
+			theme: 'SportPillar',
+			display: 'ShowcaseDisplay',
 		},
-		{
-			id: 'sport/sport',
-			type: 'Keyword',
-			title: 'Sport',
-		},
-		{
-			id: 'sport/that-1980s-sports-blog',
-			type: 'Blog',
-			title: 'That 1980s sports blog',
-		},
-		{
-			id: 'sport/series/guardian-sport-network',
-			type: 'Series',
-			title: 'Guardian Sport Network',
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'tone/quizzes',
-			type: 'Tone',
-			title: 'Quizzes',
-		},
-		{
-			id: 'profile/steven-pye',
-			type: 'Contributor',
-			title: 'Steven Pye',
-			bylineImageUrl:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/1/1362132740458/Steven-Pye.jpg?width=300&quality=85&auto=format&fit=max&s=5157df1a9e8f0f416988733b4e400e8b',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-communities-and-social',
-			type: 'Tracking',
-			title: 'UK Communities and Social',
-		},
-	],
-	pillar: 'sport',
-	isLegacyInteractive: false,
-	isImmersive: false,
-	sectionLabel: 'Football',
-	sectionUrl: 'football/football',
-	sectionName: 'football',
-	subMetaSectionLinks: [
-		{
-			url: '/football/football',
-			title: 'Football',
-		},
-		{
-			url: '/sport/that-1980s-sports-blog',
-			title: 'That 1980s sports blog',
-		},
-	],
-	subMetaKeywordLinks: [
-		{
-			url: '/tone/quizzes',
-			title: 'quizzes',
-		},
-	],
-	shouldHideAds: false,
-	isAdFreeUser: false,
-	webURL: 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-	linkedData: [
-		{
-			'@type': 'NewsArticle',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-			publisher: {
-				'@type': 'Organization',
-				'@context': 'https://schema.org',
-				'@id': 'https://www.theguardian.com#publisher',
-				name: 'The Guardian',
-				url: 'https://www.theguardian.com/',
-				logo: {
-					'@type': 'ImageObject',
-					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
-					width: 190,
-					height: 60,
-				},
-				sameAs: [
-					'https://www.facebook.com/theguardian',
-					'https://twitter.com/guardian',
-					'https://www.youtube.com/user/TheGuardian',
-				],
-			},
-			isAccessibleForFree: true,
-			isPartOf: {
-				'@type': ['CreativeWork', 'Product'],
-				name: 'The Guardian',
-				productID: 'theguardian.com:basic',
-			},
-			image: [
-				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=12fbd80759f91fb562e7819bf510eece',
-				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=cc710fa17ceb3118da80de944db21d58',
-				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=d964ed03e6bac980b75f841237eea274',
-				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&quality=85&auto=format&fit=max&s=1ee3ad5bfb9fc0fbd0d3f1a6d23ee38c',
-			],
-			author: [
-				{
-					'@type': 'Person',
-					name: 'Steven Pye',
-					sameAs: 'https://www.theguardian.com/profile/steven-pye',
-				},
-			],
-			datePublished: '2020-06-12T09:09:24.000Z',
-			headline: 'Sports quiz: football in the 1980s',
-			dateModified: '2020-06-12T09:09:25.000Z',
-			mainEntityOfPage:
-				'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-		},
-		{
-			'@type': 'WebPage',
-			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-			potentialAction: {
-				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-			},
-		},
-	],
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-		'article:author': 'https://www.theguardian.com/profile/steven-pye',
-		'og:image:width': '1200',
-		'og:image':
-			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=12fbd80759f91fb562e7819bf510eece',
-		'al:ios:url':
-			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:title': 'Sports quiz: football in the 1980s',
-		'fb:app_id': '180444840287',
-		'article:modified_time': '2020-06-12T09:09:25.000Z',
-		'og:image:height': '721',
-		'og:description':
-			'Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': 'Football',
-		'article:published_time': '2020-06-12T09:09:24.000Z',
-		'article:tag': 'Football,Sport',
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-		'twitter:app:url:iphone':
-			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=88d634a0db2b368186f0b87d8ce006be',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
-	},
-	config: {
-		references: [
+		designType: 'Quiz',
+		tags: [
 			{
-				'rich-link':
-					'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
-			},
-		],
-		shortUrlId: '/p/d8ex5',
-		switches: {
-			prebidAppnexusUkRow: true,
-			clickToView: true,
-			prebidTrustx: true,
-			scAdFreeBanner: false,
-			compareVariantDecision: false,
-			enableSentryReporting: true,
-			lazyLoadContainers: true,
-			adFreeStrictExpiryEnforcement: false,
-			liveblogRendering: true,
-			remarketing: true,
-			registerWithPhone: false,
-			targeting: true,
-			extendedMostPopularFronts: true,
-			slotBodyEnd: true,
-			emailInlineInFooter: true,
-			facebookTrackingPixel: true,
-			serviceWorkerEnabled: false,
-			iasAdTargeting: true,
-			extendedMostPopular: true,
-			prebidAnalytics: true,
-			imrWorldwide: true,
-			acast: true,
-			twitterUwt: true,
-			prebidAppnexusInvcode: true,
-			prebidAppnexus: true,
-			enableDiscussionSwitch: true,
-			prebidXaxis: true,
-			interactiveFullHeaderSwitch: false,
-			discussionAllPageSize: true,
-			prebidUserSync: true,
-			audioOnwardJourneySwitch: true,
-			mobileStickyPrebid: true,
-			breakingNews: true,
-			externalVideoEmbeds: true,
-			carrotTrafficDriver: true,
-			geoMostPopular: true,
-			weAreHiring: true,
-			relatedContent: true,
-			thirdPartyEmbedTracking: true,
-			prebidOzone: true,
-			prebidAdYouLike: true,
-			mostViewedFronts: true,
-			abSignInGateMainControl: true,
-			ampPrebid: true,
-			googleSearch: true,
-			brazeSwitch: true,
-			consentManagement: true,
-			commercial: true,
-			redplanetForAus: true,
-			prebidSonobi: true,
-			idProfileNavigation: true,
-			confiantAdVerification: true,
-			discussionAllowAnonymousRecommendsSwitch: false,
-			scrollDepth: true,
-			permutive: true,
-			comscore: true,
-			webFonts: true,
-			prebidImproveDigital: true,
-			ophan: true,
-			crosswordSvgThumbnails: true,
-			prebidTriplelift: true,
-			weather: true,
-			commercialOutbrainNewids: true,
-			dotcomRendering: true,
-			abSignInGateMainVariant: true,
-			hostedVideoAutoplay: true,
-			abAdblockAsk: true,
-			prebidPubmatic: true,
-			autoRefresh: true,
-			enhanceTweets: true,
-			prebidIndexExchange: true,
-			prebidOpenx: true,
-			idCookieRefresh: true,
-			sharingComments: true,
-			abSignInGateMandatory: true,
-			discussionPageSize: true,
-			smartAppBanner: false,
-			boostGaUserTimingFidelity: false,
-			historyTags: true,
-			mobileStickyLeaderboard: true,
-			abDeeplyReadTest: false,
-			surveys: true,
-			remoteBanner: true,
-			inizio: true,
-			prebidHeaderBidding: true,
-			a9HeaderBidding: true,
-			lightbox: true,
-		},
-		keywordIds:
-			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
-		sharedAdTargeting: {
-			ct: 'article',
-			co: ['jennifer-rankin'],
-			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-			su: ['0'],
-			edition: 'uk',
-			tn: ['news'],
-			p: 'ng',
-			k: [
-				'eu',
-				'flooding',
-				'world',
-				'europe-news',
-				'natural-disasters',
-				'science',
-				'environment',
-				'climate-change',
-				'wildfires',
-				'scienceofclimatechange',
-			],
-			sh: 'https://www.theguardian.com/p/d8ex5',
-		},
-		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
-		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
-		commercialBundleUrl:
-			'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
-		discussionApiClientHeader: 'nextgen',
-		shouldHideReaderRevenue: false,
-		sentryHost: 'app.getsentry.com/35463',
-		isPaidContent: false,
-		headline: 'Headline string',
-		idApiUrl: 'https://idapi.theguardian.com',
-		showRelatedContent: true,
-		adUnit: '/59666047/theguardian.com/environment/article/ng',
-		videoDuration: 0,
-		stage: 'PROD',
-		isSensitive: false,
-		isDev: false,
-		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
-		keywords:
-			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
-		revisionNumber: 'DEV',
-		section: 'environment',
-		isPhotoEssay: false,
-		ampIframeUrl:
-			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
-		isLive: false,
-		host: 'https://www.theguardian.com',
-		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
-		contentType: 'Article',
-		idUrl: 'https://profile.theguardian.com',
-		author: 'Jennifer Rankin',
-		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
-		mmaUrl: 'https://manage.theguardian.com',
-		abTests: {},
-		edition: 'UK',
-		ipsosTag: 'environment',
-		isLiveBlog: false,
-		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
-		webPublicationDate: 1581314427000,
-		discussionD2Uid: 'zHoBy6HNKsk',
-	},
-	guardianBaseURL: 'https://www.theguardian.com',
-	contentType: 'Article',
-	hasRelated: true,
-	hasStoryPackage: false,
-	beaconURL: '//phar.gu-web.net',
-	isCommentable: false,
-	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'bl',
-					value: ['that-1980s-sports-blog'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-			],
-		},
-		US: {
-			adTargeting: [
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'bl',
-					value: ['that-1980s-sports-blog'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'edition',
-					value: 'us',
-				},
-				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-		AU: {
-			adTargeting: [
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'bl',
-					value: ['that-1980s-sports-blog'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'edition',
-					value: 'au',
-				},
-				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-		INT: {
-			adTargeting: [
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'bl',
-					value: ['that-1980s-sports-blog'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-		EUR: {
-			adTargeting: [
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'bl',
-					value: ['that-1980s-sports-blog'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football'],
-				},
-				{
-					name: 'edition',
-					value: 'eur',
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-	},
-	pageType: {
-		hasShowcaseMainElement: true,
-		isFront: false,
-		isLiveblog: false,
-		isMinuteArticle: false,
-		isPaidContent: false,
-		isPreview: false,
-		isSensitive: false,
-	},
-	trailText:
-		'Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe',
-	nav: {
-		currentUrl: '/football',
-		pillars: [
-			{
-				title: 'News',
-				url: '/',
-				longTitle: 'Headlines',
-				iconName: 'home',
-				children: [
-					{
-						title: 'UK',
-						url: '/uk-news',
-						longTitle: 'UK news',
-						children: [
-							{
-								title: 'UK politics',
-								url: '/politics',
-							},
-							{
-								title: 'Education',
-								url: '/education',
-								children: [
-									{
-										title: 'Schools',
-										url: '/education/schools',
-									},
-									{
-										title: 'Teachers',
-										url: '/teacher-network',
-									},
-									{
-										title: 'Universities',
-										url: '/education/universities',
-									},
-									{
-										title: 'Students',
-										url: '/education/students',
-									},
-								],
-							},
-							{
-								title: 'Media',
-								url: '/media',
-							},
-							{
-								title: 'Society',
-								url: '/society',
-							},
-							{
-								title: 'Law',
-								url: '/law',
-							},
-							{
-								title: 'Scotland',
-								url: '/uk/scotland',
-							},
-							{
-								title: 'Wales',
-								url: '/uk/wales',
-							},
-							{
-								title: 'Northern Ireland',
-								url: '/uk/northernireland',
-							},
-						],
-					},
-					{
-						title: 'World',
-						url: '/world',
-						longTitle: 'World news',
-						children: [
-							{
-								title: 'Europe',
-								url: '/world/europe-news',
-							},
-							{
-								title: 'US',
-								url: '/us-news',
-								longTitle: 'US news',
-							},
-							{
-								title: 'Americas',
-								url: '/world/americas',
-							},
-							{
-								title: 'Asia',
-								url: '/world/asia',
-							},
-							{
-								title: 'Australia',
-								url: '/australia-news',
-								longTitle: 'Australia news',
-							},
-							{
-								title: 'Middle East',
-								url: '/world/middleeast',
-							},
-							{
-								title: 'Africa',
-								url: '/world/africa',
-							},
-							{
-								title: 'Inequality',
-								url: '/inequality',
-							},
-							{
-								title: 'Global development',
-								url: '/global-development',
-							},
-						],
-					},
-					{
-						title: 'Climate crisis',
-						url: '/environment/climate-crisis',
-					},
-					{
-						title: 'Ukraine',
-						url: '/world/ukraine',
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
-						title: 'Newsletters',
-						url: '/email-newsletters',
-					},
-					{
-						title: 'Business',
-						url: '/business',
-						children: [
-							{
-								title: 'Economics',
-								url: '/business/economics',
-							},
-							{
-								title: 'Banking',
-								url: '/business/banking',
-							},
-							{
-								title: 'Money',
-								url: '/money',
-								children: [
-									{
-										title: 'Property',
-										url: '/money/property',
-									},
-									{
-										title: 'Pensions',
-										url: '/money/pensions',
-									},
-									{
-										title: 'Savings',
-										url: '/money/savings',
-									},
-									{
-										title: 'Borrowing',
-										url: '/money/debt',
-									},
-									{
-										title: 'Careers',
-										url: '/money/work-and-careers',
-									},
-								],
-							},
-							{
-								title: 'Markets',
-								url: '/business/stock-markets',
-							},
-							{
-								title: 'Project Syndicate',
-								url: '/business/series/project-syndicate-economists',
-							},
-							{
-								title: 'B2B',
-								url: '/business-to-business',
-							},
-							{
-								title: 'Retail',
-								url: '/business/retail',
-							},
-						],
-					},
-					{
-						title: 'Environment',
-						url: '/environment',
-						children: [
-							{
-								title: 'Climate crisis',
-								url: '/environment/climate-crisis',
-							},
-							{
-								title: 'Wildlife',
-								url: '/environment/wildlife',
-							},
-							{
-								title: 'Energy',
-								url: '/environment/energy',
-							},
-							{
-								title: 'Pollution',
-								url: '/environment/pollution',
-							},
-						],
-					},
-					{
-						title: 'UK politics',
-						url: '/politics',
-					},
-					{
-						title: 'Education',
-						url: '/education',
-						children: [
-							{
-								title: 'Schools',
-								url: '/education/schools',
-							},
-							{
-								title: 'Teachers',
-								url: '/teacher-network',
-							},
-							{
-								title: 'Universities',
-								url: '/education/universities',
-							},
-							{
-								title: 'Students',
-								url: '/education/students',
-							},
-						],
-					},
-					{
-						title: 'Society',
-						url: '/society',
-					},
-					{
-						title: 'Science',
-						url: '/science',
-					},
-					{
-						title: 'Tech',
-						url: '/technology',
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-					},
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-				],
-			},
-			{
-				title: 'Opinion',
-				url: '/commentisfree',
-				longTitle: 'Opinion home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'The Guardian view',
-						url: '/profile/editorial',
-					},
-					{
-						title: 'Columnists',
-						url: '/index/contributors',
-					},
-					{
-						title: 'Cartoons',
-						url: '/tone/cartoons',
-					},
-					{
-						title: 'Opinion videos',
-						url: '/type/video+tone/comment',
-					},
-					{
-						title: 'Letters',
-						url: '/tone/letters',
-					},
-				],
-			},
-			{
-				title: 'Sport',
-				url: '/sport',
-				longTitle: 'Sport home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
-						title: 'Cricket',
-						url: '/sport/cricket',
-					},
-					{
-						title: 'Rugby union',
-						url: '/sport/rugby-union',
-					},
-					{
-						title: 'Tennis',
-						url: '/sport/tennis',
-					},
-					{
-						title: 'Cycling',
-						url: '/sport/cycling',
-					},
-					{
-						title: 'F1',
-						url: '/sport/formulaone',
-					},
-					{
-						title: 'Golf',
-						url: '/sport/golf',
-					},
-					{
-						title: 'Boxing',
-						url: '/sport/boxing',
-					},
-					{
-						title: 'Rugby league',
-						url: '/sport/rugbyleague',
-					},
-					{
-						title: 'Racing',
-						url: '/sport/horse-racing',
-					},
-					{
-						title: 'US sports',
-						url: '/sport/us-sport',
-					},
-				],
-			},
-			{
-				title: 'Culture',
-				url: '/culture',
-				longTitle: 'Culture home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Film',
-						url: '/film',
-					},
-					{
-						title: 'Music',
-						url: '/music',
-					},
-					{
-						title: 'TV & radio',
-						url: '/tv-and-radio',
-					},
-					{
-						title: 'Books',
-						url: '/books',
-					},
-					{
-						title: 'Art & design',
-						url: '/artanddesign',
-					},
-					{
-						title: 'Stage',
-						url: '/stage',
-					},
-					{
-						title: 'Games',
-						url: '/games',
-					},
-					{
-						title: 'Classical',
-						url: '/music/classicalmusicandopera',
-					},
-				],
-			},
-			{
-				title: 'Lifestyle',
-				url: '/lifeandstyle',
-				longTitle: 'Lifestyle home',
-				iconName: 'home',
-				children: [
-					{
-						title: 'Fashion',
-						url: '/fashion',
-					},
-					{
-						title: 'Food',
-						url: '/food',
-					},
-					{
-						title: 'Recipes',
-						url: '/tone/recipes',
-					},
-					{
-						title: 'Travel',
-						url: '/travel',
-						children: [
-							{
-								title: 'UK',
-								url: '/travel/uk',
-							},
-							{
-								title: 'Europe',
-								url: '/travel/europe',
-							},
-							{
-								title: 'US',
-								url: '/travel/usa',
-							},
-						],
-					},
-					{
-						title: 'Health & fitness',
-						url: '/lifeandstyle/health-and-wellbeing',
-					},
-					{
-						title: 'Women',
-						url: '/lifeandstyle/women',
-					},
-					{
-						title: 'Men',
-						url: '/lifeandstyle/men',
-					},
-					{
-						title: 'Love & sex',
-						url: '/lifeandstyle/love-and-sex',
-					},
-					{
-						title: 'Beauty',
-						url: '/fashion/beauty',
-					},
-					{
-						title: 'Home & garden',
-						url: '/lifeandstyle/home-and-garden',
-					},
-					{
-						title: 'Money',
-						url: '/money',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-							},
-						],
-					},
-					{
-						title: 'Cars',
-						url: '/technology/motoring',
-					},
-				],
-			},
-		],
-		otherLinks: [
-			{
-				title: 'The Guardian app',
-				url: 'https://app.adjust.com/16xt6hai',
-			},
-			{
-				title: 'Video',
-				url: '/video',
-			},
-			{
-				title: 'Podcasts',
-				url: '/podcasts',
-			},
-			{
-				title: 'Pictures',
-				url: '/inpictures',
-			},
-			{
-				title: 'Newsletters',
-				url: '/email-newsletters',
-			},
-			{
-				title: "Today's paper",
-				url: '/theguardian',
-				children: [
-					{
-						title: 'Obituaries',
-						url: '/obituaries',
-					},
-					{
-						title: 'G2',
-						url: '/theguardian/g2',
-					},
-					{
-						title: 'Journal',
-						url: '/theguardian/journal',
-					},
-					{
-						title: 'Saturday',
-						url: '/theguardian/saturday',
-					},
-				],
-			},
-			{
-				title: 'Inside the Guardian',
-				url: 'https://www.theguardian.com/membership',
-			},
-			{
-				title: 'The Observer',
-				url: '/observer',
-				children: [
-					{
-						title: 'Comment',
-						url: '/theobserver/news/comment',
-					},
-					{
-						title: 'The New Review',
-						url: '/theobserver/new-review',
-					},
-					{
-						title: 'Observer Magazine',
-						url: '/theobserver/magazine',
-					},
-					{
-						title: 'Observer Food Monthly',
-						url: '/theobserver/foodmonthly',
-					},
-				],
-			},
-			{
-				title: 'Guardian Weekly',
-				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
-			},
-			{
-				title: 'Crosswords',
-				url: '/crosswords',
-				children: [
-					{
-						title: 'Blog',
-						url: '/crosswords/crossword-blog',
-					},
-					{
-						title: 'Quick',
-						url: '/crosswords/series/quick',
-					},
-					{
-						title: 'Cryptic',
-						url: '/crosswords/series/cryptic',
-					},
-					{
-						title: 'Prize',
-						url: '/crosswords/series/prize',
-					},
-					{
-						title: 'Weekend',
-						url: '/crosswords/series/weekend-crossword',
-					},
-					{
-						title: 'Quiptic',
-						url: '/crosswords/series/quiptic',
-					},
-					{
-						title: 'Genius',
-						url: '/crosswords/series/genius',
-					},
-					{
-						title: 'Speedy',
-						url: '/crosswords/series/speedy',
-					},
-					{
-						title: 'Everyman',
-						url: '/crosswords/series/everyman',
-					},
-					{
-						title: 'Azed',
-						url: '/crosswords/series/azed',
-					},
-				],
-			},
-			{
-				title: 'Wordiply',
-				url: 'https://www.wordiply.com',
-			},
-			{
-				title: 'Corrections',
-				url: '/theguardian/series/corrections-and-clarifications',
-			},
-		],
-		brandExtensions: [
-			{
-				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com',
-			},
-			{
-				title: 'Hire with Guardian Jobs',
-				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
-			},
-			{
-				title: 'Holidays',
-				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
-			},
-			{
-				title: 'Live events',
-				url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
-			},
-			{
-				title: 'About Us',
-				url: '/about',
-			},
-			{
-				title: 'Digital Archive',
-				url: 'https://theguardian.newspapers.com',
-			},
-			{
-				title: 'Guardian Print Shop',
-				url: '/artanddesign/series/gnm-print-sales',
-			},
-			{
-				title: 'Patrons',
-				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
-			},
-			{
-				title: 'Guardian Licensing',
-				url: 'https://licensing.theguardian.com/',
-			},
-		],
-		currentNavLinkTitle: 'Football',
-		currentPillarTitle: 'Sport',
-		subNavSections: {
-			parent: {
+				id: 'football/football',
+				type: 'Keyword',
 				title: 'Football',
-				url: '/football',
-				children: [
+			},
+			{
+				id: 'sport/sport',
+				type: 'Keyword',
+				title: 'Sport',
+			},
+			{
+				id: 'sport/that-1980s-sports-blog',
+				type: 'Blog',
+				title: 'That 1980s sports blog',
+			},
+			{
+				id: 'sport/series/guardian-sport-network',
+				type: 'Series',
+				title: 'Guardian Sport Network',
+			},
+			{
+				id: 'type/article',
+				type: 'Type',
+				title: 'Article',
+			},
+			{
+				id: 'tone/quizzes',
+				type: 'Tone',
+				title: 'Quizzes',
+			},
+			{
+				id: 'profile/steven-pye',
+				type: 'Contributor',
+				title: 'Steven Pye',
+				bylineImageUrl:
+					'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/1/1362132740458/Steven-Pye.jpg?width=300&quality=85&auto=format&fit=max&s=5157df1a9e8f0f416988733b4e400e8b',
+			},
+			{
+				id: 'tracking/commissioningdesk/uk-communities-and-social',
+				type: 'Tracking',
+				title: 'UK Communities and Social',
+			},
+		],
+		pillar: 'sport',
+		isLegacyInteractive: false,
+		isImmersive: false,
+		sectionLabel: 'Football',
+		sectionUrl: 'football/football',
+		sectionName: 'football',
+		subMetaSectionLinks: [
+			{
+				url: '/football/football',
+				title: 'Football',
+			},
+			{
+				url: '/sport/that-1980s-sports-blog',
+				title: 'That 1980s sports blog',
+			},
+		],
+		subMetaKeywordLinks: [
+			{
+				url: '/tone/quizzes',
+				title: 'quizzes',
+			},
+		],
+		shouldHideAds: false,
+		isAdFreeUser: false,
+		webURL: 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+		linkedData: [
+			{
+				'@type': 'NewsArticle',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				publisher: {
+					'@type': 'Organization',
+					'@context': 'https://schema.org',
+					'@id': 'https://www.theguardian.com#publisher',
+					name: 'The Guardian',
+					url: 'https://www.theguardian.com/',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+						width: 190,
+						height: 60,
+					},
+					sameAs: [
+						'https://www.facebook.com/theguardian',
+						'https://twitter.com/guardian',
+						'https://www.youtube.com/user/TheGuardian',
+					],
+				},
+				isAccessibleForFree: true,
+				isPartOf: {
+					'@type': ['CreativeWork', 'Product'],
+					name: 'The Guardian',
+					productID: 'theguardian.com:basic',
+				},
+				image: [
+					'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=12fbd80759f91fb562e7819bf510eece',
+					'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=cc710fa17ceb3118da80de944db21d58',
+					'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=d964ed03e6bac980b75f841237eea274',
+					'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&quality=85&auto=format&fit=max&s=1ee3ad5bfb9fc0fbd0d3f1a6d23ee38c',
+				],
+				author: [
+					{
+						'@type': 'Person',
+						name: 'Steven Pye',
+						sameAs: 'https://www.theguardian.com/profile/steven-pye',
+					},
+				],
+				datePublished: '2020-06-12T09:09:24.000Z',
+				headline: 'Sports quiz: football in the 1980s',
+				dateModified: '2020-06-12T09:09:25.000Z',
+				mainEntityOfPage:
+					'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			},
+			{
+				'@type': 'WebPage',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				potentialAction: {
+					'@type': 'ViewAction',
+					target: 'android-app://com.guardian/https/www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+			},
+		],
+		openGraphData: {
+			'og:url':
+				'http://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			'article:author': 'https://www.theguardian.com/profile/steven-pye',
+			'og:image:width': '1200',
+			'og:image':
+				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=12fbd80759f91fb562e7819bf510eece',
+			'al:ios:url':
+				'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=applinks',
+			'article:publisher': 'https://www.facebook.com/theguardian',
+			'og:title': 'Sports quiz: football in the 1980s',
+			'fb:app_id': '180444840287',
+			'article:modified_time': '2020-06-12T09:09:25.000Z',
+			'og:image:height': '721',
+			'og:description':
+				'Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe',
+			'og:type': 'article',
+			'al:ios:app_store_id': '409128287',
+			'article:section': 'Football',
+			'article:published_time': '2020-06-12T09:09:24.000Z',
+			'article:tag': 'Football,Sport',
+			'al:ios:app_name': 'The Guardian',
+			'og:site_name': 'the Guardian',
+		},
+		twitterData: {
+			'twitter:app:id:iphone': '409128287',
+			'twitter:app:name:googleplay': 'The Guardian',
+			'twitter:app:name:ipad': 'The Guardian',
+			'twitter:card': 'summary_large_image',
+			'twitter:app:name:iphone': 'The Guardian',
+			'twitter:app:id:ipad': '409128287',
+			'twitter:app:id:googleplay': 'com.guardian',
+			'twitter:app:url:googleplay':
+				'guardian://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			'twitter:app:url:iphone':
+				'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
+			'twitter:image':
+				'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=88d634a0db2b368186f0b87d8ce006be',
+			'twitter:site': '@guardian',
+			'twitter:app:url:ipad':
+				'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
+		},
+		config: {
+			references: [
+				{
+					'rich-link':
+						'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+				},
+			],
+			shortUrlId: '/p/d8ex5',
+			switches: {
+				prebidAppnexusUkRow: true,
+				clickToView: true,
+				prebidTrustx: true,
+				scAdFreeBanner: false,
+				compareVariantDecision: false,
+				enableSentryReporting: true,
+				lazyLoadContainers: true,
+				adFreeStrictExpiryEnforcement: false,
+				liveblogRendering: true,
+				remarketing: true,
+				registerWithPhone: false,
+				targeting: true,
+				extendedMostPopularFronts: true,
+				slotBodyEnd: true,
+				emailInlineInFooter: true,
+				facebookTrackingPixel: true,
+				serviceWorkerEnabled: false,
+				iasAdTargeting: true,
+				extendedMostPopular: true,
+				prebidAnalytics: true,
+				imrWorldwide: true,
+				acast: true,
+				twitterUwt: true,
+				prebidAppnexusInvcode: true,
+				prebidAppnexus: true,
+				enableDiscussionSwitch: true,
+				prebidXaxis: true,
+				interactiveFullHeaderSwitch: false,
+				discussionAllPageSize: true,
+				prebidUserSync: true,
+				audioOnwardJourneySwitch: true,
+				mobileStickyPrebid: true,
+				breakingNews: true,
+				externalVideoEmbeds: true,
+				carrotTrafficDriver: true,
+				geoMostPopular: true,
+				weAreHiring: true,
+				relatedContent: true,
+				thirdPartyEmbedTracking: true,
+				prebidOzone: true,
+				prebidAdYouLike: true,
+				mostViewedFronts: true,
+				abSignInGateMainControl: true,
+				ampPrebid: true,
+				googleSearch: true,
+				brazeSwitch: true,
+				consentManagement: true,
+				commercial: true,
+				redplanetForAus: true,
+				prebidSonobi: true,
+				idProfileNavigation: true,
+				confiantAdVerification: true,
+				discussionAllowAnonymousRecommendsSwitch: false,
+				scrollDepth: true,
+				permutive: true,
+				comscore: true,
+				webFonts: true,
+				prebidImproveDigital: true,
+				ophan: true,
+				crosswordSvgThumbnails: true,
+				prebidTriplelift: true,
+				weather: true,
+				commercialOutbrainNewids: true,
+				dotcomRendering: true,
+				abSignInGateMainVariant: true,
+				hostedVideoAutoplay: true,
+				abAdblockAsk: true,
+				prebidPubmatic: true,
+				autoRefresh: true,
+				enhanceTweets: true,
+				prebidIndexExchange: true,
+				prebidOpenx: true,
+				idCookieRefresh: true,
+				sharingComments: true,
+				abSignInGateMandatory: true,
+				discussionPageSize: true,
+				smartAppBanner: false,
+				boostGaUserTimingFidelity: false,
+				historyTags: true,
+				mobileStickyLeaderboard: true,
+				abDeeplyReadTest: false,
+				surveys: true,
+				remoteBanner: true,
+				inizio: true,
+				prebidHeaderBidding: true,
+				a9HeaderBidding: true,
+				lightbox: true,
+			},
+			keywordIds:
+				'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+			sharedAdTargeting: {
+				ct: 'article',
+				co: ['jennifer-rankin'],
+				url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				su: ['0'],
+				edition: 'uk',
+				tn: ['news'],
+				p: 'ng',
+				k: [
+					'eu',
+					'flooding',
+					'world',
+					'europe-news',
+					'natural-disasters',
+					'science',
+					'environment',
+					'climate-change',
+					'wildfires',
+					'scienceofclimatechange',
+				],
+				sh: 'https://www.theguardian.com/p/d8ex5',
+			},
+			toneIds: 'tone/news',
+			dcrSentryDsn:
+				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+			discussionApiUrl:
+				'https://discussion.theguardian.com/discussion-api',
+			sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+			commercialBundleUrl:
+				'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+			discussionApiClientHeader: 'nextgen',
+			shouldHideReaderRevenue: false,
+			sentryHost: 'app.getsentry.com/35463',
+			isPaidContent: false,
+			headline: 'Headline string',
+			idApiUrl: 'https://idapi.theguardian.com',
+			showRelatedContent: true,
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			videoDuration: 0,
+			stage: 'PROD',
+			isSensitive: false,
+			isDev: false,
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+			keywords:
+				'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			revisionNumber: 'DEV',
+			section: 'environment',
+			isPhotoEssay: false,
+			ampIframeUrl:
+				'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+			isLive: false,
+			host: 'https://www.theguardian.com',
+			brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+			contentType: 'Article',
+			idUrl: 'https://profile.theguardian.com',
+			author: 'Jennifer Rankin',
+			dfpAccountId: '59666047',
+			pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+			mmaUrl: 'https://manage.theguardian.com',
+			abTests: {},
+			edition: 'UK',
+			ipsosTag: 'environment',
+			isLiveBlog: false,
+			frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+			webPublicationDate: 1581314427000,
+			discussionD2Uid: 'zHoBy6HNKsk',
+		},
+		guardianBaseURL: 'https://www.theguardian.com',
+		contentType: 'Article',
+		hasRelated: true,
+		hasStoryPackage: false,
+		beaconURL: '//phar.gu-web.net',
+		isCommentable: false,
+		commercialProperties: {
+			UK: {
+				adTargeting: [
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/e3fga',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'bl',
+						value: ['that-1980s-sports-blog'],
+					},
+					{
+						name: 'tn',
+						value: ['quizzes'],
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'k',
+						value: ['sport', 'football'],
+					},
+					{
+						name: 'se',
+						value: ['guardian-sport-network'],
+					},
+					{
+						name: 'co',
+						value: ['steven-pye'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'edition',
+						value: 'uk',
+					},
+					{
+						name: 'url',
+						value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					},
+				],
+			},
+			US: {
+				adTargeting: [
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/e3fga',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'bl',
+						value: ['that-1980s-sports-blog'],
+					},
+					{
+						name: 'tn',
+						value: ['quizzes'],
+					},
+					{
+						name: 'edition',
+						value: 'us',
+					},
+					{
+						name: 'url',
+						value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'k',
+						value: ['sport', 'football'],
+					},
+					{
+						name: 'se',
+						value: ['guardian-sport-network'],
+					},
+					{
+						name: 'co',
+						value: ['steven-pye'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			AU: {
+				adTargeting: [
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/e3fga',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'bl',
+						value: ['that-1980s-sports-blog'],
+					},
+					{
+						name: 'tn',
+						value: ['quizzes'],
+					},
+					{
+						name: 'edition',
+						value: 'au',
+					},
+					{
+						name: 'url',
+						value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'k',
+						value: ['sport', 'football'],
+					},
+					{
+						name: 'se',
+						value: ['guardian-sport-network'],
+					},
+					{
+						name: 'co',
+						value: ['steven-pye'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			INT: {
+				adTargeting: [
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/e3fga',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'bl',
+						value: ['that-1980s-sports-blog'],
+					},
+					{
+						name: 'tn',
+						value: ['quizzes'],
+					},
+					{
+						name: 'url',
+						value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'k',
+						value: ['sport', 'football'],
+					},
+					{
+						name: 'se',
+						value: ['guardian-sport-network'],
+					},
+					{
+						name: 'co',
+						value: ['steven-pye'],
+					},
+					{
+						name: 'edition',
+						value: 'int',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			EUR: {
+				adTargeting: [
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/e3fga',
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'bl',
+						value: ['that-1980s-sports-blog'],
+					},
+					{
+						name: 'tn',
+						value: ['quizzes'],
+					},
+					{
+						name: 'url',
+						value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'k',
+						value: ['sport', 'football'],
+					},
+					{
+						name: 'edition',
+						value: 'eur',
+					},
+					{
+						name: 'se',
+						value: ['guardian-sport-network'],
+					},
+					{
+						name: 'co',
+						value: ['steven-pye'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+		},
+		pageType: {
+			hasShowcaseMainElement: true,
+			isFront: false,
+			isLiveblog: false,
+			isMinuteArticle: false,
+			isPaidContent: false,
+			isPreview: false,
+			isSensitive: false,
+		},
+		trailText:
+			'Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe',
+		nav: {
+			currentUrl: '/football',
+			pillars: [
+				{
+					title: 'News',
+					url: '/',
+					longTitle: 'Headlines',
+					iconName: 'home',
+					children: [
+						{
+							title: 'UK',
+							url: '/uk-news',
+							longTitle: 'UK news',
+							children: [
+								{
+									title: 'UK politics',
+									url: '/politics',
+								},
+								{
+									title: 'Education',
+									url: '/education',
+									children: [
+										{
+											title: 'Schools',
+											url: '/education/schools',
+										},
+										{
+											title: 'Teachers',
+											url: '/teacher-network',
+										},
+										{
+											title: 'Universities',
+											url: '/education/universities',
+										},
+										{
+											title: 'Students',
+											url: '/education/students',
+										},
+									],
+								},
+								{
+									title: 'Media',
+									url: '/media',
+								},
+								{
+									title: 'Society',
+									url: '/society',
+								},
+								{
+									title: 'Law',
+									url: '/law',
+								},
+								{
+									title: 'Scotland',
+									url: '/uk/scotland',
+								},
+								{
+									title: 'Wales',
+									url: '/uk/wales',
+								},
+								{
+									title: 'Northern Ireland',
+									url: '/uk/northernireland',
+								},
+							],
+						},
+						{
+							title: 'World',
+							url: '/world',
+							longTitle: 'World news',
+							children: [
+								{
+									title: 'Europe',
+									url: '/world/europe-news',
+								},
+								{
+									title: 'US',
+									url: '/us-news',
+									longTitle: 'US news',
+								},
+								{
+									title: 'Americas',
+									url: '/world/americas',
+								},
+								{
+									title: 'Asia',
+									url: '/world/asia',
+								},
+								{
+									title: 'Australia',
+									url: '/australia-news',
+									longTitle: 'Australia news',
+								},
+								{
+									title: 'Middle East',
+									url: '/world/middleeast',
+								},
+								{
+									title: 'Africa',
+									url: '/world/africa',
+								},
+								{
+									title: 'Inequality',
+									url: '/inequality',
+								},
+								{
+									title: 'Global development',
+									url: '/global-development',
+								},
+							],
+						},
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Ukraine',
+							url: '/world/ukraine',
+						},
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Newsletters',
+							url: '/email-newsletters',
+						},
+						{
+							title: 'Business',
+							url: '/business',
+							children: [
+								{
+									title: 'Economics',
+									url: '/business/economics',
+								},
+								{
+									title: 'Banking',
+									url: '/business/banking',
+								},
+								{
+									title: 'Money',
+									url: '/money',
+									children: [
+										{
+											title: 'Property',
+											url: '/money/property',
+										},
+										{
+											title: 'Pensions',
+											url: '/money/pensions',
+										},
+										{
+											title: 'Savings',
+											url: '/money/savings',
+										},
+										{
+											title: 'Borrowing',
+											url: '/money/debt',
+										},
+										{
+											title: 'Careers',
+											url: '/money/work-and-careers',
+										},
+									],
+								},
+								{
+									title: 'Markets',
+									url: '/business/stock-markets',
+								},
+								{
+									title: 'Project Syndicate',
+									url: '/business/series/project-syndicate-economists',
+								},
+								{
+									title: 'B2B',
+									url: '/business-to-business',
+								},
+								{
+									title: 'Retail',
+									url: '/business/retail',
+								},
+							],
+						},
+						{
+							title: 'Environment',
+							url: '/environment',
+							children: [
+								{
+									title: 'Climate crisis',
+									url: '/environment/climate-crisis',
+								},
+								{
+									title: 'Wildlife',
+									url: '/environment/wildlife',
+								},
+								{
+									title: 'Energy',
+									url: '/environment/energy',
+								},
+								{
+									title: 'Pollution',
+									url: '/environment/pollution',
+								},
+							],
+						},
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Science',
+							url: '/science',
+						},
+						{
+							title: 'Tech',
+							url: '/technology',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+					],
+				},
+				{
+					title: 'Opinion',
+					url: '/commentisfree',
+					longTitle: 'Opinion home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'The Guardian view',
+							url: '/profile/editorial',
+						},
+						{
+							title: 'Columnists',
+							url: '/index/contributors',
+						},
+						{
+							title: 'Cartoons',
+							url: '/tone/cartoons',
+						},
+						{
+							title: 'Opinion videos',
+							url: '/type/video+tone/comment',
+						},
+						{
+							title: 'Letters',
+							url: '/tone/letters',
+						},
+					],
+				},
+				{
+					title: 'Sport',
+					url: '/sport',
+					longTitle: 'Sport home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Cricket',
+							url: '/sport/cricket',
+						},
+						{
+							title: 'Rugby union',
+							url: '/sport/rugby-union',
+						},
+						{
+							title: 'Tennis',
+							url: '/sport/tennis',
+						},
+						{
+							title: 'Cycling',
+							url: '/sport/cycling',
+						},
+						{
+							title: 'F1',
+							url: '/sport/formulaone',
+						},
+						{
+							title: 'Golf',
+							url: '/sport/golf',
+						},
+						{
+							title: 'Boxing',
+							url: '/sport/boxing',
+						},
+						{
+							title: 'Rugby league',
+							url: '/sport/rugbyleague',
+						},
+						{
+							title: 'Racing',
+							url: '/sport/horse-racing',
+						},
+						{
+							title: 'US sports',
+							url: '/sport/us-sport',
+						},
+					],
+				},
+				{
+					title: 'Culture',
+					url: '/culture',
+					longTitle: 'Culture home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Film',
+							url: '/film',
+						},
+						{
+							title: 'Music',
+							url: '/music',
+						},
+						{
+							title: 'TV & radio',
+							url: '/tv-and-radio',
+						},
+						{
+							title: 'Books',
+							url: '/books',
+						},
+						{
+							title: 'Art & design',
+							url: '/artanddesign',
+						},
+						{
+							title: 'Stage',
+							url: '/stage',
+						},
+						{
+							title: 'Games',
+							url: '/games',
+						},
+						{
+							title: 'Classical',
+							url: '/music/classicalmusicandopera',
+						},
+					],
+				},
+				{
+					title: 'Lifestyle',
+					url: '/lifeandstyle',
+					longTitle: 'Lifestyle home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Fashion',
+							url: '/fashion',
+						},
+						{
+							title: 'Food',
+							url: '/food',
+						},
+						{
+							title: 'Recipes',
+							url: '/tone/recipes',
+						},
+						{
+							title: 'Travel',
+							url: '/travel',
+							children: [
+								{
+									title: 'UK',
+									url: '/travel/uk',
+								},
+								{
+									title: 'Europe',
+									url: '/travel/europe',
+								},
+								{
+									title: 'US',
+									url: '/travel/usa',
+								},
+							],
+						},
+						{
+							title: 'Health & fitness',
+							url: '/lifeandstyle/health-and-wellbeing',
+						},
+						{
+							title: 'Women',
+							url: '/lifeandstyle/women',
+						},
+						{
+							title: 'Men',
+							url: '/lifeandstyle/men',
+						},
+						{
+							title: 'Love & sex',
+							url: '/lifeandstyle/love-and-sex',
+						},
+						{
+							title: 'Beauty',
+							url: '/fashion/beauty',
+						},
+						{
+							title: 'Home & garden',
+							url: '/lifeandstyle/home-and-garden',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Cars',
+							url: '/technology/motoring',
+						},
+					],
+				},
+			],
+			otherLinks: [
+				{
+					title: 'The Guardian app',
+					url: 'https://app.adjust.com/16xt6hai',
+				},
+				{
+					title: 'Video',
+					url: '/video',
+				},
+				{
+					title: 'Podcasts',
+					url: '/podcasts',
+				},
+				{
+					title: 'Pictures',
+					url: '/inpictures',
+				},
+				{
+					title: 'Newsletters',
+					url: '/email-newsletters',
+				},
+				{
+					title: "Today's paper",
+					url: '/theguardian',
+					children: [
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+						{
+							title: 'G2',
+							url: '/theguardian/g2',
+						},
+						{
+							title: 'Journal',
+							url: '/theguardian/journal',
+						},
+						{
+							title: 'Saturday',
+							url: '/theguardian/saturday',
+						},
+					],
+				},
+				{
+					title: 'Inside the Guardian',
+					url: 'https://www.theguardian.com/membership',
+				},
+				{
+					title: 'The Observer',
+					url: '/observer',
+					children: [
+						{
+							title: 'Comment',
+							url: '/theobserver/news/comment',
+						},
+						{
+							title: 'The New Review',
+							url: '/theobserver/new-review',
+						},
+						{
+							title: 'Observer Magazine',
+							url: '/theobserver/magazine',
+						},
+						{
+							title: 'Observer Food Monthly',
+							url: '/theobserver/foodmonthly',
+						},
+					],
+				},
+				{
+					title: 'Guardian Weekly',
+					url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				},
+				{
+					title: 'Crosswords',
+					url: '/crosswords',
+					children: [
+						{
+							title: 'Blog',
+							url: '/crosswords/crossword-blog',
+						},
+						{
+							title: 'Quick',
+							url: '/crosswords/series/quick',
+						},
+						{
+							title: 'Cryptic',
+							url: '/crosswords/series/cryptic',
+						},
+						{
+							title: 'Prize',
+							url: '/crosswords/series/prize',
+						},
+						{
+							title: 'Weekend',
+							url: '/crosswords/series/weekend-crossword',
+						},
+						{
+							title: 'Quiptic',
+							url: '/crosswords/series/quiptic',
+						},
+						{
+							title: 'Genius',
+							url: '/crosswords/series/genius',
+						},
+						{
+							title: 'Speedy',
+							url: '/crosswords/series/speedy',
+						},
+						{
+							title: 'Everyman',
+							url: '/crosswords/series/everyman',
+						},
+						{
+							title: 'Azed',
+							url: '/crosswords/series/azed',
+						},
+					],
+				},
+				{
+					title: 'Wordiply',
+					url: 'https://www.wordiply.com',
+				},
+				{
+					title: 'Corrections',
+					url: '/theguardian/series/corrections-and-clarifications',
+				},
+			],
+			brandExtensions: [
+				{
+					title: 'Search jobs',
+					url: 'https://jobs.theguardian.com',
+				},
+				{
+					title: 'Hire with Guardian Jobs',
+					url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				},
+				{
+					title: 'Holidays',
+					url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				},
+				{
+					title: 'Live events',
+					url: 'https://www.theguardian.com/guardian-live-events?INTCMP=live_uk_header_dropdown',
+				},
+				{
+					title: 'About Us',
+					url: '/about',
+				},
+				{
+					title: 'Digital Archive',
+					url: 'https://theguardian.newspapers.com',
+				},
+				{
+					title: 'Guardian Print Shop',
+					url: '/artanddesign/series/gnm-print-sales',
+				},
+				{
+					title: 'Patrons',
+					url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+				},
+				{
+					title: 'Guardian Licensing',
+					url: 'https://licensing.theguardian.com/',
+				},
+			],
+			currentNavLinkTitle: 'Football',
+			currentPillarTitle: 'Sport',
+			subNavSections: {
+				parent: {
+					title: 'Football',
+					url: '/football',
+					children: [
+						{
+							title: 'Live scores',
+							url: '/football/live',
+							longTitle: 'football/live',
+						},
+						{
+							title: 'Tables',
+							url: '/football/tables',
+							longTitle: 'football/tables',
+						},
+						{
+							title: 'Fixtures',
+							url: '/football/fixtures',
+							longTitle: 'football/fixtures',
+						},
+						{
+							title: 'Results',
+							url: '/football/results',
+							longTitle: 'football/results',
+						},
+						{
+							title: 'Competitions',
+							url: '/football/competitions',
+							longTitle: 'football/competitions',
+						},
+						{
+							title: 'Clubs',
+							url: '/football/teams',
+							longTitle: 'football/teams',
+						},
+					],
+				},
+				links: [
 					{
 						title: 'Live scores',
 						url: '/football/live',
@@ -2263,274 +2298,243 @@ export const Quiz: Article = {
 					},
 				],
 			},
-			links: [
-				{
-					title: 'Live scores',
-					url: '/football/live',
-					longTitle: 'football/live',
+			readerRevenueLinks: {
+				header: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Tables',
-					url: '/football/tables',
-					longTitle: 'football/tables',
+				footer: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Fixtures',
-					url: '/football/fixtures',
-					longTitle: 'football/fixtures',
+				sideMenu: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 				},
-				{
-					title: 'Results',
-					url: '/football/results',
-					longTitle: 'football/results',
+				ampHeader: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
 				},
-				{
-					title: 'Competitions',
-					url: '/football/competitions',
-					longTitle: 'football/competitions',
+				ampFooter: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 				},
-				{
-					title: 'Clubs',
-					url: '/football/teams',
-					longTitle: 'football/teams',
-				},
-			],
-		},
-		readerRevenueLinks: {
-			header: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			footer: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
-			},
-			sideMenu: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
-			},
-			ampHeader: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
-			},
-			ampFooter: {
-				contribute:
-					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
-				subscribe:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
-				support:
-					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
-				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
 			},
 		},
-	},
-	showBottomSocialButtons: true,
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
+		showBottomSocialButtons: true,
+		pageFooter: {
+			footerLinks: [
+				[
+					{
+						text: 'About us',
+						url: '/about',
+						dataLinkName: 'uk : footer : about us',
+						extraClasses: '',
+					},
+					{
+						text: 'Help',
+						url: '/help',
+						dataLinkName: 'uk : footer : tech feedback',
+						extraClasses: 'js-tech-feedback-report',
+					},
+					{
+						text: 'Complaints & corrections',
+						url: '/info/complaints-and-corrections',
+						dataLinkName: 'complaints',
+						extraClasses: '',
+					},
+					{
+						text: 'SecureDrop',
+						url: 'https://www.theguardian.com/securedrop',
+						dataLinkName: 'securedrop',
+						extraClasses: '',
+					},
+					{
+						text: 'Work for us',
+						url: 'https://workforus.theguardian.com',
+						dataLinkName: 'uk : footer : work for us',
+						extraClasses: '',
+					},
+					{
+						text: 'Privacy policy',
+						url: '/info/privacy',
+						dataLinkName: 'privacy',
+						extraClasses: '',
+					},
+					{
+						text: 'Cookie policy',
+						url: '/info/cookies',
+						dataLinkName: 'cookie',
+						extraClasses: '',
+					},
+					{
+						text: 'Terms & conditions',
+						url: '/help/terms-of-service',
+						dataLinkName: 'terms',
+						extraClasses: '',
+					},
+					{
+						text: 'Contact us',
+						url: '/help/contact-us',
+						dataLinkName: 'uk : footer : contact us',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'All topics',
+						url: '/index/subjects/a',
+						dataLinkName: 'uk : footer : all topics',
+						extraClasses: '',
+					},
+					{
+						text: 'All writers',
+						url: '/index/contributors',
+						dataLinkName: 'uk : footer : all contributors',
+						extraClasses: '',
+					},
+					{
+						text: 'Modern Slavery Act',
+						url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
+						dataLinkName:
+							'uk : footer : modern slavery act statement',
+						extraClasses: '',
+					},
+					{
+						text: 'Digital newspaper archive',
+						url: 'https://theguardian.newspapers.com',
+						dataLinkName: 'digital newspaper archive',
+						extraClasses: '',
+					},
+					{
+						text: 'Facebook',
+						url: 'https://www.facebook.com/theguardian',
+						dataLinkName: 'uk : footer : facebook',
+						extraClasses: '',
+					},
+					{
+						text: 'YouTube',
+						url: 'https://www.youtube.com/user/TheGuardian',
+						dataLinkName: 'uk : footer : youtube',
+						extraClasses: '',
+					},
+					{
+						text: 'Instagram',
+						url: 'https://www.instagram.com/guardian',
+						dataLinkName: 'uk : footer : instagram',
+						extraClasses: '',
+					},
+					{
+						text: 'LinkedIn',
+						url: 'https://www.linkedin.com/company/theguardian',
+						dataLinkName: 'uk : footer : linkedin',
+						extraClasses: '',
+					},
+					{
+						text: 'Twitter',
+						url: 'https://twitter.com/guardian',
+						dataLinkName: 'uk: footer : twitter',
+						extraClasses: '',
+					},
+					{
+						text: 'Newsletters',
+						url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+						dataLinkName: 'uk : footer : newsletters',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'Advertise with us',
+						url: 'https://advertising.theguardian.com',
+						dataLinkName: 'uk : footer : advertise with us',
+						extraClasses: '',
+					},
+					{
+						text: 'Guardian Labs',
+						url: '/guardian-labs',
+						dataLinkName: 'uk : footer : guardian labs',
+						extraClasses: '',
+					},
+					{
+						text: 'Search jobs',
+						url: 'https://jobs.theguardian.com',
+						dataLinkName: 'uk : footer : jobs',
+						extraClasses: '',
+					},
+					{
+						text: 'Patrons',
+						url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+						dataLinkName: 'uk : footer : patrons',
+						extraClasses: '',
+					},
+				],
 			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
+		},
+		publication: 'theguardian.com',
+		shouldHideReaderRevenue: false,
+		slotMachineFlags: '',
+		contributionsServiceUrl: 'https://contributions.guardianapis.com',
+		isSpecialReport: false,
+		showTableOfContents: false,
+		lang: 'en',
+		isRightToLeftLang: false,
+		imagesForLightbox: [
+			{
+				masterUrl:
+					'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
+				width: 3020,
+				height: 1814,
+				elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
+				displayCredit: true,
+				alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+				credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+				caption:
+					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+				position: 1,
+			},
+		],
+		imagesForAppsLightbox: [
+			{
+				width: 3020,
+				height: 1814,
+				credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+				caption:
+					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+				masterUrl:
+					'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
+				elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
+			},
 		],
 	},
-	publication: 'theguardian.com',
-	shouldHideReaderRevenue: false,
-	slotMachineFlags: '',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	isSpecialReport: false,
-	showTableOfContents: false,
-	lang: 'en',
-	isRightToLeftLang: false,
-	imagesForLightbox: [
-		{
-			masterUrl:
-				'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
-			width: 3020,
-			height: 1814,
-			elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
-			displayCredit: true,
-			alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
-			credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
-			caption:
-				'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
-			position: 1,
-		},
-	],
-	imagesForAppsLightbox: [
-		{
-			width: 3020,
-			height: 1814,
-			credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
-			caption:
-				'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
-			masterUrl:
-				'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
-			elementId: '75f1c322-d71f-42d1-ae0c-99b0748805c3',
-		},
-	],
 };

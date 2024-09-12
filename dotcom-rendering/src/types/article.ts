@@ -13,12 +13,18 @@ import type { FEArticleType } from './frontend';
 import { type RenderingTarget } from './renderingTarget';
 
 /**
- * The `Article` type enhances `FEArticleType` type which defines the model received from Frontend
+ * The `ArticleDeprecated` type enhances `FEArticleType` type which defines the model received from Frontend.
+ *
+ * @deprecated Replaced by {@linkcode Article}.
  */
-export type Article = FEArticleType & {
+export type ArticleDeprecated = FEArticleType & {
 	imagesForLightbox: ImageForLightbox[];
 	imagesForAppsLightbox: ImageForAppsLightbox[];
 	tableOfContents?: TableOfContentsItem[];
+};
+
+export type Article = {
+	frontendData: ArticleDeprecated;
 };
 
 export interface TableOfContents {
@@ -71,22 +77,28 @@ export const enhanceArticleType = (
 	)(data.mainMediaElements);
 
 	return {
-		...data,
-		mainMediaElements,
-		blocks: enhancedBlocks,
-		pinnedPost: enhancePinnedPost(format, renderingTarget, data.pinnedPost),
-		standfirst: enhanceStandfirst(data.standfirst),
-		commercialProperties: enhanceCommercialProperties(
-			data.commercialProperties,
-		),
-		tableOfContents: data.showTableOfContents
-			? enhanceTableOfContents(enhancedBlocks)
-			: undefined,
-		/**
-		 * This function needs to run at a higher level to most other enhancers
-		 * because it needs both mainMediaElements and blocks in scope
-		 */
-		imagesForLightbox,
-		imagesForAppsLightbox: appsLightboxImages(imagesForLightbox),
+		frontendData: {
+			...data,
+			mainMediaElements,
+			blocks: enhancedBlocks,
+			pinnedPost: enhancePinnedPost(
+				format,
+				renderingTarget,
+				data.pinnedPost,
+			),
+			standfirst: enhanceStandfirst(data.standfirst),
+			commercialProperties: enhanceCommercialProperties(
+				data.commercialProperties,
+			),
+			tableOfContents: data.showTableOfContents
+				? enhanceTableOfContents(enhancedBlocks)
+				: undefined,
+			/**
+			 * This function needs to run at a higher level to most other enhancers
+			 * because it needs both mainMediaElements and blocks in scope
+			 */
+			imagesForLightbox,
+			imagesForAppsLightbox: appsLightboxImages(imagesForLightbox),
+		},
 	};
 };

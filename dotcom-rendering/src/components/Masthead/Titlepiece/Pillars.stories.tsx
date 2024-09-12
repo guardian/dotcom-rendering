@@ -17,7 +17,6 @@ const meta = {
 		nav,
 		selectedPillar: nav.pillars[0]?.pillar as Pillar,
 		dataLinkName: nestedOphanComponents('header', 'titlepiece', 'nav'),
-		isImmersive: false,
 		hasPageSkin: false,
 	},
 	render: (args) => (

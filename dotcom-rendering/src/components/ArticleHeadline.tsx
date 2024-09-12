@@ -81,7 +81,7 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			return headlineBold34;
+			return headlineMedium34;
 		}
 		default:
 			switch (format.design) {

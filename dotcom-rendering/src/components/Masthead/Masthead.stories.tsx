@@ -15,7 +15,7 @@ const meta = {
 		idApiUrl: 'https://idapi.theguardian.com',
 		contributionsServiceUrl: 'https://contributions.guardianapis.com',
 		showSubNav: false,
-		isImmersive: false,
+		showSlimNav: false,
 		hasPageSkin: false,
 		hasPageSkinContentSelfConstrain: false,
 	},
@@ -28,8 +28,8 @@ export const WithSubnav = {
 	args: { showSubNav: true },
 };
 
-export const ForImmersiveArticles = {
-	args: { isImmersive: true, displayRoundel: true },
+export const WithSlimNav = {
+	args: { showSlimNav: true, displayRoundel: true },
 };
 
 export const WithPageSkin = {

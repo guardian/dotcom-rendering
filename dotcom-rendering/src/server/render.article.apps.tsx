@@ -9,13 +9,13 @@ import {
 import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { createGuardian } from '../model/guardian';
-import type { Article } from '../types/article';
+import type { ArticleDeprecated } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
-	article: Article,
+	article: ArticleDeprecated,
 ): {
 	prefetchScripts: string[];
 	html: string;
