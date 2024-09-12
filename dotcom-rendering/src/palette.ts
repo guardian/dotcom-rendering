@@ -1916,7 +1916,6 @@ const podcastMetaButtonBackgroundLight: PaletteFunction = () =>
 	sourcePalette.neutral[20];
 const podcastMetaButtonBackgroundDark: PaletteFunction = () =>
 	sourcePalette.neutral[20];
-
 const podcastMetaButtonBackgroundHoverLight: PaletteFunction = () =>
 	sourcePalette.neutral[10];
 const podcastMetaButtonBackgroundHoverDark: PaletteFunction = () =>
