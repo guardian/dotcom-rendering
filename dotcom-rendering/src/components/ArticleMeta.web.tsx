@@ -1,20 +1,13 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import {
-	articleBold17,
-	between,
-	from,
-	space,
-	until,
-} from '@guardian/source/foundations';
-import { LinkButton } from '@guardian/source/react-components';
+import { between, from, space, until } from '@guardian/source/foundations';
 import { StraightLines } from '@guardian/source-development-kitchen/react-components';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { getSoleContributor } from '../lib/byline';
 import { palette as themePalette } from '../palette';
 import type { Branding as BrandingType } from '../types/branding';
-import type { Podcast, TagType } from '../types/tag';
+import type { TagType } from '../types/tag';
 import { Avatar } from './Avatar';
 import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
@@ -22,6 +15,7 @@ import { useConfig } from './ConfigContext';
 import { Contributor } from './Contributor';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
+import { PodcastMeta } from './PodcastMeta';
 import { ShareButton } from './ShareButton.importable';
 
 type Props = {
@@ -77,10 +71,6 @@ const meta = (format: ArticleFormat) => {
 	`;
 };
 
-const podcastStyles = css`
-	color: ${themePalette('--textblock-text')};
-	${articleBold17}
-`;
 const metaFlex = css`
 	margin-bottom: 6px;
 	display: flex;
@@ -286,26 +276,6 @@ const metaNumbersExtrasLiveBlog = css`
 	}
 `;
 
-const PodcastButton = ({ label, url }: { label: string; url: string }) => {
-	return (
-		<div>
-			<LinkButton href={url}>{label}</LinkButton>
-		</div>
-	);
-};
-
-const PodcastMeta = ({ subscriptionUrl, spotifyUrl }: Podcast) => {
-	return (
-		<div>
-			<div css={podcastStyles}>More ways to listen</div>
-			<PodcastButton label={'Apple'} url={subscriptionUrl} />
-			<PodcastButton label={'Spotify'} url={spotifyUrl} />
-			<PodcastButton label={'RSS Feed'} url={'#'} />
-			<PodcastButton label={'Download'} url={'#'} />
-		</div>
-	);
-};
-
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -330,9 +300,13 @@ export const ArticleMeta = ({
 
 	const isPictureContent = format.design === ArticleDesign.Picture;
 
+	const isAudio = format.design === ArticleDesign.Audio;
+
 	const { renderingTarget } = useConfig();
 
 	const seriesTag = tags.find((tag) => tag.type === 'Series' && tag.podcast);
+
+	const podcastTag = seriesTag?.podcast;
 
 	return (
 		<div
@@ -370,17 +344,15 @@ export const ArticleMeta = ({
 								<Avatar src={avatarUrl} alt={authorName} />
 							</MetaAvatarContainer>
 						)}
-						{format.design === ArticleDesign.Audio &&
-							seriesTag?.podcast && (
+						<div>
+							{!!isAudio && podcastTag && (
 								<PodcastMeta
-									image={seriesTag.podcast.image}
-									spotifyUrl={seriesTag.podcast.spotifyUrl}
-									subscriptionUrl={
-										seriesTag.podcast.subscriptionUrl
-									}
+									image={podcastTag.image}
+									spotifyUrl={podcastTag.spotifyUrl}
+									subscriptionUrl={podcastTag.subscriptionUrl}
 								/>
 							)}
-						<div>
+
 							{shouldShowContributor(format) && (
 								<Contributor
 									byline={byline}
@@ -394,7 +366,6 @@ export const ArticleMeta = ({
 								secondaryDateline={secondaryDateline}
 								format={format}
 							/>
-							<div style={{ color: 'white' }}>TEST</div>
 						</div>
 					</>
 				</RowBelowLeftCol>

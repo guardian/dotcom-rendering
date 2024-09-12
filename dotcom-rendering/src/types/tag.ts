@@ -37,9 +37,11 @@ export type FEPagination = {
 	totalContent: number;
 };
 export type Podcast = {
-	subscriptionUrl: string;
-	spotifyUrl: string;
-	image: string;
+	subscriptionUrl?: string;
+	spotifyUrl?: string;
+	rssFeedUrl?: string;
+	downloadUrl?: string;
+	image?: string;
 };
 
 export type TagType = {

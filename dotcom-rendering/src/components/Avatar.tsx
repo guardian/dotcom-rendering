@@ -57,6 +57,7 @@ export const Avatar = ({ src, alt, shape = 'round' }: Props) => {
 		{ breakpoint: 740, width: 140 },
 	]);
 
+	console.log(src);
 	/**
 	 * The assumption here is readers on devices that do not support srcset
 	 * are likely to be on poor network connections so we're going
