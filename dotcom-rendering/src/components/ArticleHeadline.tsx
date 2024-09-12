@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+	Pillar,
+} from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -81,7 +86,12 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			return headlineMedium34;
+			switch (format.theme) {
+				case Pillar.News:
+					return headlineMedium34;
+				default:
+					return headlineBold34;
+			}
 		}
 		default:
 			switch (format.design) {
