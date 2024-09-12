@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from, space, textSans17 } from '@guardian/source/foundations';
+import {
+	from,
+	space,
+	textSans14,
+	textSans17,
+	until,
+} from '@guardian/source/foundations';
 import type { EditionId } from '../../../lib/edition';
 import { editionList, getEditionFromId } from '../../../lib/edition';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -13,6 +19,7 @@ interface EditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
 	showCurrentEdition?: boolean;
+	showSlimNav?: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -38,8 +45,24 @@ const editionDropdownStyles = css`
 	}
 `;
 
-const dropDownOverrides = css`
-	${textSans17}
+const slimNavEditionDropdownOverrides = css`
+	${until.tablet} {
+		ul {
+			position: absolute;
+			left: 0;
+			right: unset;
+			top: ${space[6]}px;
+			max-height: unset;
+			min-width: 200px;
+		}
+	}
+`;
+
+const dropDownOverrides = (showSlimNav: boolean) => css`
+	${textSans14}
+	${from.leftCol} {
+		${textSans17}
+	}
 	color: ${themePalette('--masthead-nav-link-text')};
 	padding: 6px 0 0 0;
 	margin-top: ${space[1]}px;
@@ -48,12 +71,19 @@ const dropDownOverrides = css`
 		color: ${themePalette('--masthead-nav-link-text')};
 		text-decoration: underline;
 	}
+
+	${showSlimNav &&
+	css`
+		padding: 0;
+		margin-top: 0;
+	`}
 `;
 
 export const EditionDropdown = ({
 	editionId,
 	dataLinkName,
 	showCurrentEdition = true,
+	showSlimNav = false,
 }: EditionDropdownProps) => {
 	const editionToDropdownLink = (edition: EditionLinkType) => ({
 		id: edition.editionId,
@@ -87,13 +117,18 @@ export const EditionDropdown = ({
 		: 'Edition';
 
 	return (
-		<div css={editionDropdownStyles}>
+		<div
+			css={[
+				editionDropdownStyles,
+				showSlimNav && slimNavEditionDropdownOverrides,
+			]}
+		>
 			<Dropdown
 				label={label}
 				links={linksToDisplay}
 				id="masthead-edition"
 				dataLinkName={dataLinkName}
-				cssOverrides={dropDownOverrides}
+				cssOverrides={dropDownOverrides(showSlimNav)}
 			/>
 		</div>
 	);

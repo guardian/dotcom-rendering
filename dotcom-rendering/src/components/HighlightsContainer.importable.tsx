@@ -161,6 +161,8 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 };
 
 export const HighlightsContainer = ({ trails }: Props) => {
+	// temporary fix to only show 6 highlights, until we have a proper solution in the tools
+	const highlightsTrails = trails.slice(0, 6);
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -215,12 +217,15 @@ export const HighlightsContainer = ({ trails }: Props) => {
 			);
 		};
 	}, []);
-
 	useEffect(() => {
 		void submitComponentEvent(
 			{
+				abTest: {
+					name: 'masthead-with-highlights',
+					variant: 'inTest',
+				},
 				component: {
-					componentType: 'CONTAINER',
+					componentType: 'CAROUSEL',
 					id: 'home-highlights',
 				},
 				action: 'INSERT',
@@ -240,7 +245,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 				]}
 				data-heatphan-type="carousel"
 			>
-				{trails.map((trail) => {
+				{highlightsTrails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
