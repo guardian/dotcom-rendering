@@ -86,11 +86,18 @@ const decideHeadlineFont = (format: ArticleFormat) => {
 const decideMobileHeadlineFont = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			switch (format.theme) {
-				case Pillar.News:
-					return headlineMedium34;
-				default:
+			switch (format.design) {
+				case ArticleDesign.Obituary:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+					return headlineLight34;
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
 					return headlineBold34;
+				default:
+					return headlineMedium34;
 			}
 		}
 		default:
