@@ -33,7 +33,7 @@ type boostProperties = {
  */
 const determineCardProperties = (
 	boostLevel: BoostLevel = 'default',
-	longSupportingContent: boolean,
+	supportingContentLength: number,
 ): boostProperties => {
 	switch (boostLevel) {
 		// The default boost level is equal to no boost. It is the same as the default card layout.
@@ -44,9 +44,8 @@ const determineCardProperties = (
 				headlineSizeOnTablet: 'small',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'top',
-				supportingContentAlignment: longSupportingContent
-					? 'horizontal'
-					: 'vertical',
+				supportingContentAlignment:
+					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
 		case 'boost':
 			return {
@@ -55,9 +54,8 @@ const determineCardProperties = (
 				headlineSizeOnTablet: 'medium',
 				imagePositionOnDesktop: 'right',
 				imagePositionOnMobile: 'top',
-				supportingContentAlignment: longSupportingContent
-					? 'horizontal'
-					: 'vertical',
+				supportingContentAlignment:
+					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
 			};
 		case 'megaboost':
 			return {
@@ -95,8 +93,6 @@ export const OneCardLayout = ({
 	const card = cards[0];
 	if (!card) return null;
 
-	const longSupportingContent = (card?.supportingContent?.length ?? 0) >= 3;
-
 	const {
 		headlineSize,
 		headlineSizeOnMobile,
@@ -104,7 +100,10 @@ export const OneCardLayout = ({
 		imagePositionOnDesktop,
 		imagePositionOnMobile,
 		supportingContentAlignment,
-	} = determineCardProperties(card.boostLevel, longSupportingContent);
+	} = determineCardProperties(
+		card.boostLevel,
+		card?.supportingContent?.length ?? 0,
+	);
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
