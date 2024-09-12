@@ -21,6 +21,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import {
 	ChoiceCardTestData_REGULAR,
 	ChoiceCardTestData_US,
+	ChoiceCardTestData_VAT,
 } from './ThreeTierChoiceCardData';
 import type { SupportTier } from './utils/threeTierChoiceCardAmounts';
 import { threeTierChoiceCardAmounts } from './utils/threeTierChoiceCardAmounts';
@@ -146,10 +147,12 @@ type ThreeTierChoiceCardsProps = {
 	variantOfChoiceCard: string;
 };
 
-export const getChoiceCardData = (variant: string): ChoiceInfo[] => {
-	switch (variant) {
+const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
+	switch (choiceCardVariant) {
 		case 'US_THREE_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_US;
+		case 'VAT_THREE_TIER_CHOICE_CARDS':
+			return ChoiceCardTestData_VAT;
 		default:
 			return ChoiceCardTestData_REGULAR;
 	}

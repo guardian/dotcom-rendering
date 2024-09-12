@@ -208,6 +208,12 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 		return <></>;
 	}
 
+	const variantOfChoiceCard =
+		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE'
+			? 'VAT_THREE_TIER_CHOICE_CARDS'
+			: 'THREE_TIER_CHOICE_CARDS';
+	console.log(variantOfChoiceCard);
+
 	return (
 		<div data-testid="contributions-liveblog-epic" ref={setNode}>
 			{!!cleanHeading && (
@@ -237,7 +243,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 								setSelectedAmount={
 									setThreeTierChoiceCardSelectedAmount
 								}
-								variantOfChoiceCard="THREE_TIER_CHOICE_CARDS"
+								variantOfChoiceCard={variantOfChoiceCard}
 							/>
 						)}
 						<ContributionsEpicCtas

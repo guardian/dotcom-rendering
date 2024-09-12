@@ -312,7 +312,10 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	const variantOfChoiceCard =
 		countryCode === 'US'
 			? 'US_THREE_TIER_CHOICE_CARDS'
+			: variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE'
+			? 'VAT_THREE_TIER_CHOICE_CARDS'
 			: 'THREE_TIER_CHOICE_CARDS';
+	console.log(variantOfChoiceCard);
 
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
