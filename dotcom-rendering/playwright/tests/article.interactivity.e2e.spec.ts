@@ -163,8 +163,7 @@ test.describe('Interactivity', () => {
 	});
 
 	test.describe('Navigating the pillar menu', () => {
-		/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
-		test.skip('should expand and close the desktop pillar menu when the VeggieBurger is clicked', async ({
+		test('should expand and close the desktop pillar menu when the VeggieBurger is clicked', async ({
 			context,
 			page,
 		}) => {
@@ -232,8 +231,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
-			test.skip('should immediately focus on the News menu item when the menu first opens', async ({
+			test('should immediately focus on the News menu item when the menu first opens', async ({
 				context,
 				page,
 			}) => {
@@ -247,8 +245,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
-			test.skip('should transfer focus to sub menu items when tabbing from section header', async ({
+			test('should transfer focus to sub menu items when tabbing from section header', async ({
 				context,
 				page,
 			}) => {
@@ -269,8 +266,7 @@ test.describe('Interactivity', () => {
 				).toBeFocused();
 			});
 
-			/* TODO - @guardian/fairground-web-devs This is a bug with the new expanded menu */
-			test.skip('should let reader traverse section titles using keyboard', async ({
+			test('should let reader traverse section titles using keyboard', async ({
 				context,
 				page,
 			}) => {
