@@ -114,16 +114,17 @@ const fontStylesOnTablet = ({
 	size,
 	boostedFontSizes,
 }: {
-	size: SmallHeadlineSize;
+	size?: SmallHeadlineSize;
 	boostedFontSizes: boolean;
 }) => {
 	/* Currently, tablet-specific headline sizing only applies to boosted fonts where a tablet font size has been supplied */
-	if (size && boostedFontSizes)
+	if (size && boostedFontSizes) {
 		return css`
 			${between.tablet.and.desktop} {
 				${boostedFontStyles({ size })}
 			}
 		`;
+	}
 	return null;
 };
 
@@ -306,7 +307,10 @@ export const CardHeadline = ({
 						}),
 
 					format.theme !== ArticleSpecial.Labs &&
-						fontStylesOnTablet({ size, boostedFontSizes }),
+						fontStylesOnTablet({
+							size: sizeOnTablet,
+							boostedFontSizes,
+						}),
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
 						: fontStyles({ size, boostedFontSizes }),
