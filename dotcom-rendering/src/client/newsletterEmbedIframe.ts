@@ -16,7 +16,7 @@ export const newsletterEmbedIframe = (): Promise<void> => {
 	// Otherwise, earlier resize events might be missed
 	// So we don't have to load this script as a priority on each load
 	for (const iframe of allIframes) {
-		iframe.contentWindow?.postMessage('resize', guardianOrigin);
+		iframe.contentWindow?.postMessage(JSON.stringify('resize'), guardianOrigin);
 	}
 
 	window.addEventListener('message', (event) => {
