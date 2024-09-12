@@ -4253,7 +4253,7 @@ const linkKickerTextDark: PaletteFunction = ({ theme }) => {
 const ageWarningWrapperBackground: PaletteFunction = (format) => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
-			return articleBackgroundLight(format);
+			return 'transparent';
 		default:
 			return headlineBackgroundLight(format);
 	}
