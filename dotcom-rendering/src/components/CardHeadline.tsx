@@ -11,6 +11,7 @@ import {
 	headlineMedium34,
 	headlineMedium42,
 	headlineMedium50,
+	headlineMedium64,
 	space,
 	textSans12,
 	textSans15,
@@ -52,11 +53,7 @@ const boostedFontStyles = ({ size }: { size: SmallHeadlineSize }) => {
 		// we don't have a ginormous size in designs. For now this defaults to huge.
 		case 'ginormous':
 		case 'huge':
-			// this needs to be updated to font size 64 once this is available in source.
-			return `
-				${headlineMedium50}
-				font-size: 64px;
-			`;
+			return `${headlineMedium64}`;
 
 		case 'large':
 			return `${headlineMedium50}`;
