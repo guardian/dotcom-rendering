@@ -425,8 +425,6 @@ export const Titlepiece = ({
 						}
 					};
 
-
-
 					/**
 					 * Updates ARIA attributes and tabindex values based on whether the menu is open or closed.
 					 */
@@ -464,12 +462,10 @@ export const Titlepiece = ({
 					 *
 					 * - Toggles the menu open/close state when the menu button (veggieBurger) is clicked.
 					 */
-
 						const handleMenuClick = (e) => {
 							const menuButtonClicked = navInputCheckbox === e.target;
 							const clickInsideMenu = expandedMenu.contains(e.target);
 							const menuIsOpen = navInputCheckbox.checked
-
 							if (menuButtonClicked && !menuIsOpen) {
 						    document.body.classList.toggle('nav-is-open')
 
@@ -485,7 +481,6 @@ export const Titlepiece = ({
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','0')
                             })
-
                             focusOnFirstNavElement()
 							}
 						};
