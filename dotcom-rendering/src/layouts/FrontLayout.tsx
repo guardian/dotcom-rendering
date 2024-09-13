@@ -239,6 +239,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={front.config.idApiUrl}
 						showSubNav={!isPaidContent}
+						showSlimNav={false}
 						hasPageSkin={hasPageSkin}
 						hasPageSkinContentSelfConstrain={true}
 						pageId={pageId}

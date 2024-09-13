@@ -22,7 +22,10 @@ const loadSentryOnError = (): void => {
 		const queue: Error[] = [];
 
 		// Function that gets called when an error happens before Sentry is ready
-		const injectSentry = async (error?: Error) => {
+		const injectSentry = async (
+			error: Error | undefined,
+			feature: string,
+		) => {
 			const { endPerformanceMeasure } = startPerformanceMeasure(
 				'dotcom',
 				'sentryLoader',
@@ -63,7 +66,7 @@ const loadSentryOnError = (): void => {
 			// send any queued errors
 			while (queue.length) {
 				const queuedError = queue.shift();
-				if (queuedError) reportError(queuedError);
+				if (queuedError) reportError(queuedError, feature);
 			}
 			log('dotcom', `Injected Sentry in ${endPerformanceMeasure()}ms`);
 		};
@@ -71,12 +74,14 @@ const loadSentryOnError = (): void => {
 		// This is how we lazy load Sentry. We setup custom functions and
 		// listeners to inject Sentry when an error happens
 		window.onerror = (message, url, line, column, error) =>
-			injectSentry(error);
+			injectSentry(error, 'unknown');
 		window.onunhandledrejection = (
 			event: undefined | { reason?: unknown },
-		) => event?.reason instanceof Error && injectSentry(event.reason);
-		window.guardian.modules.sentry.reportError = (error) => {
-			injectSentry(error).catch((e) =>
+		) =>
+			event?.reason instanceof Error &&
+			injectSentry(event.reason, 'unknown');
+		window.guardian.modules.sentry.reportError = (error, feature) => {
+			injectSentry(error, feature).catch((e) =>
 				console.error(`injectSentry - error: ${String(e)}`),
 			);
 		};

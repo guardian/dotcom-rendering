@@ -33,9 +33,9 @@ import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { Masthead } from '../components/Masthead/Masthead';
+import { minHeaderHeightPx } from '../components/Masthead/Titlepiece/constants';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { minNavHeightPx } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -53,7 +53,7 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import { palette as themePalette } from '../palette';
-import type { Article } from '../types/article';
+import type { ArticleDeprecated } from '../types/article';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -187,7 +187,7 @@ const stretchLines = css`
 `;
 
 interface CommonProps {
-	article: Article;
+	article: ArticleDeprecated;
 	format: ArticleFormat;
 }
 
@@ -270,11 +270,11 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 	*/
 
 	const labsHeaderHeight = LABS_HEADER_HEIGHT;
-	const combinedHeight = (minNavHeightPx + labsHeaderHeight).toString();
+	const combinedHeight = (minHeaderHeightPx + labsHeaderHeight).toString();
 
 	const navAndLabsHeaderHeight = isLabs
 		? `${combinedHeight}px`
-		: `${minNavHeightPx}px`;
+		: `${minHeaderHeightPx}px`;
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
@@ -313,10 +313,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 
 	const { absoluteServerTimes = false } = article.config.switches;
 
-	const shouldShowTagLink =
-		isWeb &&
-		article.tags.some(({ id }) => id === 'sport/paralympic-games-2024');
-
 	return (
 		<>
 			{isWeb && (
@@ -329,7 +325,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 					idApiUrl={article.config.idApiUrl}
 					contributionsServiceUrl={article.contributionsServiceUrl}
 					showSubNav={false}
-					isImmersive={true}
+					showSlimNav={true}
 					hasPageSkin={false}
 					hasPageSkinContentSelfConstrain={false}
 					pageId={article.pageId}
@@ -413,7 +409,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									shouldShowTagLink={false}
 								/>
 							</Section>
 							<Box>
@@ -440,10 +435,7 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 				)}
 			</header>
 
-			<main
-				data-layout="ImmersiveLayout"
-				className={shouldShowTagLink ? 'sticky-tag-link' : ''}
-			>
+			<main data-layout="ImmersiveLayout">
 				{isApps && (
 					<>
 						<Island priority="critical">
@@ -502,9 +494,6 @@ export const ImmersiveLayout = (props: WebProps | AppProps) => {
 											sectionUrl={article.sectionUrl}
 											guardianBaseURL={
 												article.guardianBaseURL
-											}
-											shouldShowTagLink={
-												shouldShowTagLink
 											}
 										/>
 									</div>
