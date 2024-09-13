@@ -14,7 +14,7 @@ const wrapperStyles = css`
 const meta = {
 	title: 'Components/Masthead/Titlepiece/Pillars',
 	args: {
-		nav,
+		pillars: nav.pillars,
 		selectedPillar: nav.pillars[0]?.pillar as Pillar,
 		dataLinkName: nestedOphanComponents('header', 'titlepiece', 'nav'),
 		hasPageSkin: false,

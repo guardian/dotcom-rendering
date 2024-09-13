@@ -25,7 +25,7 @@ import { BackToTop } from './BackToTop';
 import { FooterLabel } from './FooterLabel.importable';
 import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
 import { Island } from './Island';
-import { Pillars } from './Pillars';
+import { Pillars } from './Masthead/Titlepiece/Pillars';
 import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
 
 // CSS vars
@@ -43,9 +43,13 @@ const pillarWrap = css`
 	${clearFix}
 	border-left: ${footerBorders};
 	border-right: ${footerBorders};
-	padding-bottom: 12px;
+	padding-top: ${space[2]}px;
 	position: relative;
-	height: 43px;
+
+	padding-left: 10px;
+	${from.mobileLandscape} {
+		padding-left: ${space[5]}px;
+	}
 
 	> ul {
 		clear: none;
@@ -342,7 +346,6 @@ export const Footer = ({
 			<Pillars
 				pillars={pillars}
 				selectedPillar={selectedPillar}
-				showLastPillarDivider={false}
 				dataLinkName="footer"
 				hasPageSkin={hasPageSkin}
 			/>

@@ -20,9 +20,9 @@ import { listAccessibility } from './commonStyles';
 import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
 
 type Props = {
-	nav: NavType;
-	dataLinkName: string;
+	pillars: NavType['pillars'];
 	selectedPillar?: Pillar;
+	dataLinkName: string;
 	hasPageSkin?: boolean;
 };
 
@@ -209,16 +209,16 @@ const getPillarColour = (pillar: ArticleTheme): string | undefined => {
 };
 
 export const Pillars = ({
-	nav,
+	pillars,
 	selectedPillar,
 	dataLinkName,
 	hasPageSkin = false,
 }: Props) => {
 	return (
 		<ul id="navigation" css={pillarsContainer}>
-			{nav.pillars.map((p, i) => {
+			{pillars.map((p, i) => {
 				const isSelected = p.pillar === selectedPillar;
-				const showDivider = isNotLastPillar(i, nav.pillars.length);
+				const showDivider = isNotLastPillar(i, pillars.length);
 				const pillarColour = getPillarColour(p.pillar);
 
 				return (
