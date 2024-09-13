@@ -30,6 +30,7 @@ type DefaultProps = {
 	display?: ArticleDisplay;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
+	hasShowcaseMainElement?: boolean;
 };
 
 // TODO move to commercial
@@ -489,6 +490,7 @@ export const AdSlot = ({
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
 	colourScheme = 'light',
+	hasShowcaseMainElement = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -499,11 +501,21 @@ export const AdSlot = ({
 					return (
 						<div
 							className="ad-slot-container"
-							css={adContainerStyles}
+							css={[
+								adContainerStyles,
+								hasShowcaseMainElement && 'min-height: 624px;',
+							]}
 						>
 							<div
 								id="dfp-ad--right"
-								css={rightAdStyles}
+								css={[
+									rightAdStyles,
+									hasShowcaseMainElement &&
+										css`
+											position: sticky;
+											top: 0;
+										`,
+								]}
 								className={[
 									'js-ad-slot',
 									'ad-slot',

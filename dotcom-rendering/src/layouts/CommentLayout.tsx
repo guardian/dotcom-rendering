@@ -691,6 +691,7 @@ export const CommentLayout = (props: WebProps | AppsProps) => {
 												!!article.config
 													.shouldHideReaderRevenue
 											}
+											hasShowcaseMainElement={false}
 										/>
 									</Island>
 								</RightColumn>

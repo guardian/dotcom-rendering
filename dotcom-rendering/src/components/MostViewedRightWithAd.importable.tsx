@@ -14,6 +14,7 @@ type Props = {
 	isPaidContent: boolean;
 	renderAds: boolean;
 	shouldHideReaderRevenue: boolean;
+	hasShowcaseMainElement: boolean;
 };
 
 /**
@@ -41,6 +42,7 @@ export const MostViewedRightWithAd = ({
 	isPaidContent,
 	renderAds,
 	shouldHideReaderRevenue,
+	hasShowcaseMainElement,
 }: Props) => {
 	const componentDataAttribute = 'most-viewed-right-container';
 	const { renderingTarget } = useConfig();
@@ -72,6 +74,7 @@ export const MostViewedRightWithAd = ({
 					isPaidContent={isPaidContent}
 					shouldHideReaderRevenue={shouldHideReaderRevenue}
 					colourScheme={useDarkColourScheme ? 'dark' : 'light'}
+					hasShowcaseMainElement={hasShowcaseMainElement}
 				/>
 			) : null}
 

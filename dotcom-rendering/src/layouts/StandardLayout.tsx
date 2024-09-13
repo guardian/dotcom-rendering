@@ -851,6 +851,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 												!!article.config
 													.shouldHideReaderRevenue
 											}
+											hasShowcaseMainElement={false}
 										/>
 									</Island>
 								</RightColumn>
