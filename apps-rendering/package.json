@@ -35,7 +35,7 @@
 		"@aws-sdk/client-ssm": "3.621.0",
 		"@aws-sdk/credential-providers": "3.621.0",
 		"@babel/core": "7.25.2",
-		"@babel/preset-env": "7.25.3",
+		"@babel/preset-env": "7.25.4",
 		"@creditkarma/thrift-server-core": "1.0.4",
 		"@emotion/cache": "11.11.0",
 		"@emotion/jest": "11.11.0",
