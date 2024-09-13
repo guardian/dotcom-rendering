@@ -9,7 +9,8 @@ type Props = {
 };
 
 const dropCap = css`
-	${headlineMedium14Object.fontFamily};
+	/* stylelint-disable-next-line property-disallowed-list -- we’re setting custom line height and font weight */
+	font-family: ${headlineMedium14Object.fontFamily};
 	float: left;
 	font-size: 7rem;
 	line-height: 5.75rem;

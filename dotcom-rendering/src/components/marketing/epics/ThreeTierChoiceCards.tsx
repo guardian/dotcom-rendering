@@ -35,7 +35,7 @@ const supportTierChoiceCardStyles = (selected: boolean) => css`
 	background-color: ${selected ? palette.sport[800] : palette.neutral[100]};
 	border-radius: 10px;
 	padding: ${selected
-		? `${space[4]}px ${space[5]}px ${space[2]}px ${space[5]}px`
+		? `6px ${space[5]}px 10px ${space[5]}px`
 		: `6px ${space[5]}px`};
 `;
 

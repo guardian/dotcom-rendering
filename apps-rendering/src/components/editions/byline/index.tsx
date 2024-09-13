@@ -122,29 +122,30 @@ const styles = (
 const largeTextStyles = (
 	fontStyle: 'normal' | 'italic',
 	fontWeight: 'light' | 'bold',
-	lineHeight?: 'regular',
 ): SerializedStyles => css`
 	${fontStyle === 'italic' && fontWeight === 'light'
 		? headlineLightItalic24
 		: headlineBold24};
+	line-height: 1.3;
 	${from.tablet} {
 		${fontStyle === 'italic' && fontWeight === 'light'
 			? headlineLightItalic28
 			: headlineBold28};
+		line-height: 1.3;
 	}
 	${from.desktop} {
 		${fontStyle === 'italic' && fontWeight === 'light'
 			? headlineLightItalic34
 			: headlineBold34};
+		line-height: 1.3;
 	}
-	${lineHeight === 'regular' && 'line-height: 1.3;'};
 `;
 
 const standardTextStyles = (
 	fontStyle: 'normal' | 'italic',
 	fontWeight: 'light' | 'bold',
 ): SerializedStyles => css`
-	${fontStyle === 'italic' ? textEgyptianBold17 : textEgyptianBoldItalic17};
+	${fontStyle === 'italic' ? textEgyptianBoldItalic17 : textEgyptianBold17};
 	${fontWeight === 'light' && 'font-weight: 300;'};
 `;
 
@@ -158,7 +159,7 @@ const bylinePrimaryStyles = (format: ArticleFormat): SerializedStyles => {
 	) {
 		return css`
 			color: ${color};
-			${largeTextStyles('normal', 'bold', 'regular')}
+			${largeTextStyles('normal', 'bold')}
 		`;
 	}
 

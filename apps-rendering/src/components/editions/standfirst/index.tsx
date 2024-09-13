@@ -30,10 +30,11 @@ const interviewStyles = css`
 `;
 const galleryStyles = css`
 	${textEgyptianBold17};
+	line-height: 1.15;
 	${from.mobileMedium} {
 		${textEgyptian17};
+		line-height: 1.15;
 	}
-	line-height: 1.15;
 	color: ${neutral[100]};
 `;
 

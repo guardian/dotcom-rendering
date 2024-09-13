@@ -103,13 +103,15 @@ const interviewStyles = css`
 
 const interviewFontStyles = css`
 	${headlineMedium24};
+	line-height: 1.3;
 	${from.mobileMedium} {
 		${headlineMedium28};
+		line-height: 1.3;
 	}
 	${from.tablet} {
 		${headlineMedium34};
+		line-height: 1.3;
 	}
-	line-height: 1.3;
 	background-color: ${neutral[7]};
 	color: ${neutral[100]};
 	white-space: pre-wrap;
@@ -142,17 +144,19 @@ const getFontStyles = (
 	${fontWeight === 'light' && headlineLight24};
 	${fontWeight === 'medium' && headlineMedium24};
 	${fontWeight === 'bold' && headlineBold24};
+	${lineHeight === 'regular' && 'line-height: 1.3;'};
 	${from.mobileMedium} {
 		${fontWeight === 'light' && headlineLight28};
 		${fontWeight === 'medium' && headlineMedium28};
 		${fontWeight === 'bold' && headlineBold28};
+		${lineHeight === 'regular' && 'line-height: 1.3;'};
 	}
 	${from.tablet} {
 		${fontWeight === 'light' && headlineLight34};
 		${fontWeight === 'medium' && headlineMedium34};
 		${fontWeight === 'bold' && headlineBold34};
+		${lineHeight === 'regular' && 'line-height: 1.3;'};
 	}
-	${lineHeight === 'regular' && 'line-height: 1.3;'};
 `;
 
 const getSharedStyles = (format: ArticleFormat): SerializedStyles => css`
