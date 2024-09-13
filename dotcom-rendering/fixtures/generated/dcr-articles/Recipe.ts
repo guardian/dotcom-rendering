@@ -14,6 +14,11 @@
 import type { Article } from '../../../src/types/article';
 
 export const Recipe: Article = {
+	format: {
+		display: 0,
+		theme: 4,
+		design: 13,
+	},
 	frontendData: {
 		version: 3,
 		headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',

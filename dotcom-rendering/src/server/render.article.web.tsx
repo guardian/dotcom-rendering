@@ -15,14 +15,13 @@ import {
 	getPathFromManifest,
 } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
-import { decideTheme } from '../lib/decideTheme';
 import { isEditionId } from '../lib/edition';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { createGuardian as createWindowGuardian } from '../model/guardian';
-import type { ArticleDeprecated } from '../types/article';
+import type { Article } from '../types/article';
 import type { Config } from '../types/configContext';
 import type { FEElement } from '../types/content';
 import type { FEBlocksRequest } from '../types/frontend';
@@ -30,43 +29,42 @@ import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
-	article: ArticleDeprecated;
+	article: Article;
 }
 
-const decideTitle = (article: ArticleDeprecated): string => {
-	if (decideTheme(article.format) === Pillar.Opinion && article.byline) {
-		return `${article.headline} | ${article.byline} | The Guardian`;
+const decideTitle = ({ format, frontendData }: Article): string => {
+	if (format.theme === Pillar.Opinion && frontendData.byline) {
+		return `${frontendData.headline} | ${frontendData.byline} | The Guardian`;
 	}
-	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
+	return `${frontendData.headline} | ${frontendData.sectionLabel} | The Guardian`;
 };
 
 export const renderHtml = ({
 	article,
 }: Props): { html: string; prefetchScripts: string[] } => {
+	const { format, frontendData } = article;
 	const NAV = {
-		...extractNAV(article.nav),
-		selectedPillar: getCurrentPillar(article),
+		...extractNAV(frontendData.nav),
+		selectedPillar: getCurrentPillar(frontendData),
 	};
 
 	const title = decideTitle(article);
-	const linkedData = article.linkedData;
-
-	const format: ArticleFormat = decideFormat(article.format);
+	const linkedData = frontendData.linkedData;
 
 	const renderingTarget = 'Web';
 	const config: Config = {
 		renderingTarget,
 		darkModeAvailable:
-			article.config.abTests.darkModeWebVariant === 'variant',
+			frontendData.config.abTests.darkModeWebVariant === 'variant',
 		assetOrigin: ASSET_ORIGIN,
-		editionId: article.editionId,
+		editionId: frontendData.editionId,
 	};
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ConfigProvider value={config}>
 			<ArticlePage
 				format={format}
-				article={article}
+				article={frontendData}
 				NAV={NAV}
 				renderingTarget={renderingTarget}
 			/>
@@ -75,7 +73,7 @@ export const renderHtml = ({
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const elements: FEElement[] = article.blocks
+	const elements: FEElement[] = frontendData.blocks
 		.map((block) => block.elements)
 		.flat();
 
@@ -94,8 +92,8 @@ export const renderHtml = ({
 	);
 
 	const build = getModulesBuild({
-		tests: article.config.abTests,
-		switches: article.config.switches,
+		tests: frontendData.config.abTests,
+		switches: frontendData.config.switches,
 	});
 
 	/**
@@ -109,7 +107,8 @@ export const renderHtml = ({
 		polyfillIO,
 		getPathFromManifest(build, 'frameworks.js'),
 		getPathFromManifest(build, 'index.js'),
-		process.env.COMMERCIAL_BUNDLE_URL ?? article.config.commercialBundleUrl,
+		process.env.COMMERCIAL_BUNDLE_URL ??
+			frontendData.config.commercialBundleUrl,
 		pageHasNonBootInteractiveElements &&
 			`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 	].filter(isString);
@@ -128,27 +127,27 @@ export const renderHtml = ({
 	 * is placed in a script tag on the page
 	 */
 	const guardian = createWindowGuardian({
-		editionId: article.editionId,
-		stage: article.config.stage,
-		frontendAssetsFullURL: article.config.frontendAssetsFullURL,
-		revisionNumber: article.config.revisionNumber,
-		sentryPublicApiKey: article.config.sentryPublicApiKey,
-		sentryHost: article.config.sentryHost,
-		keywordIds: article.config.keywordIds,
-		dfpAccountId: article.config.dfpAccountId,
-		adUnit: article.config.adUnit,
-		ajaxUrl: article.config.ajaxUrl,
-		googletagUrl: article.config.googletagUrl,
-		switches: article.config.switches,
-		abTests: article.config.abTests,
-		brazeApiKey: article.config.brazeApiKey,
-		isPaidContent: article.pageType.isPaidContent,
-		contentType: article.contentType,
-		shouldHideReaderRevenue: article.shouldHideReaderRevenue,
-		googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
+		editionId: frontendData.editionId,
+		stage: frontendData.config.stage,
+		frontendAssetsFullURL: frontendData.config.frontendAssetsFullURL,
+		revisionNumber: frontendData.config.revisionNumber,
+		sentryPublicApiKey: frontendData.config.sentryPublicApiKey,
+		sentryHost: frontendData.config.sentryHost,
+		keywordIds: frontendData.config.keywordIds,
+		dfpAccountId: frontendData.config.dfpAccountId,
+		adUnit: frontendData.config.adUnit,
+		ajaxUrl: frontendData.config.ajaxUrl,
+		googletagUrl: frontendData.config.googletagUrl,
+		switches: frontendData.config.switches,
+		abTests: frontendData.config.abTests,
+		brazeApiKey: frontendData.config.brazeApiKey,
+		isPaidContent: frontendData.pageType.isPaidContent,
+		contentType: frontendData.contentType,
+		shouldHideReaderRevenue: frontendData.shouldHideReaderRevenue,
+		googleRecaptchaSiteKey: frontendData.config.googleRecaptchaSiteKey,
 		// Until we understand exactly what config we need to make available client-side,
 		// add everything we haven't explicitly typed as unknown config
-		unknownConfig: article.config,
+		unknownConfig: frontendData.config,
 	});
 
 	const getAmpLink = (tags: TagType[]) => {
@@ -163,27 +162,28 @@ export const renderHtml = ({
 			!isAmpSupported({
 				format,
 				tags,
-				elements: article.blocks.flatMap((block) => block.elements),
-				switches: article.config.switches,
-				main: article.main,
+				elements: frontendData.blocks.flatMap(
+					(block) => block.elements,
+				),
+				switches: frontendData.config.switches,
+				main: frontendData.main,
 			})
 		) {
 			return undefined;
 		}
 
-		return `https://amp.theguardian.com/${article.pageId}`;
+		return `https://amp.theguardian.com/${frontendData.pageId}`;
 	};
 
 	// Only include AMP link for interactives which have the 'ampinteractive' tag
-	const ampLink = getAmpLink(article.tags);
+	const ampLink = getAmpLink(frontendData.tags);
 
-	const { openGraphData } = article;
-	const { twitterData } = article;
+	const { openGraphData, twitterData } = frontendData;
 	const keywords =
-		typeof article.config.keywords === 'undefined' ||
-		article.config.keywords === 'Network Front'
+		typeof frontendData.config.keywords === 'undefined' ||
+		frontendData.config.keywords === 'Network Front'
 			? ''
-			: article.config.keywords;
+			: frontendData.config.keywords;
 
 	const initTwitter = `
 <script>
@@ -206,7 +206,7 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 </script>`;
 
-	const { canonicalUrl } = article;
+	const { canonicalUrl } = frontendData;
 
 	const pageHtml = htmlPageTemplate({
 		linkedData,
@@ -214,7 +214,7 @@ window.twttr = (function(d, s, id) {
 		css: extractedCss,
 		html,
 		title,
-		description: article.trailText,
+		description: frontendData.trailText,
 		guardian,
 		ampLink,
 		openGraphData,
@@ -226,9 +226,9 @@ window.twttr = (function(d, s, id) {
 				: undefined,
 		canonicalUrl,
 		renderingTarget: 'Web',
-		weAreHiring: !!article.config.switches.weAreHiring,
+		weAreHiring: !!frontendData.config.switches.weAreHiring,
 		config,
-		hasLiveBlogTopAd: !!article.config.hasLiveBlogTopAd,
+		hasLiveBlogTopAd: !!frontendData.config.hasLiveBlogTopAd,
 		onlyLightColourScheme:
 			format.design === ArticleDesign.FullPageInteractive ||
 			format.design === ArticleDesign.Interactive,
