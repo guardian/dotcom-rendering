@@ -341,8 +341,8 @@ importers:
         specifier: 50.13.0
         version: 50.13.0(@swc/core@1.7.18)(@types/node@20.14.10)(aws-cdk-lib@2.100.0)(aws-cdk@2.100.0)(constructs@10.3.0)(typescript@5.5.3)
       '@guardian/commercial':
-        specifier: 0.0.0-beta-20240912111258
-        version: 0.0.0-beta-20240912111258(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240912110451)(@guardian/source@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
+        specifier: 0.0.0-beta-20240913075035
+        version: 0.0.0-beta-20240913075035(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240912110451)(@guardian/source@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3)
       '@guardian/core-web-vitals':
         specifier: 7.0.0
         version: 7.0.0(@guardian/libs@0.0.0-canary-20240912110451)(tslib@2.6.2)(typescript@5.5.3)(web-vitals@4.2.3)
@@ -3988,8 +3988,8 @@ packages:
       - typescript
     dev: false
 
-  /@guardian/commercial@0.0.0-beta-20240912111258(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240912110451)(@guardian/source@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
-    resolution: {integrity: sha512-+d40D9VVddUlVfUsZ9N0KiphP0wXwoQCsWFHJ2mcUnvc4XjmCxE7eCNKlH67DODa71DpF9TbKZkwJdRLb/Y6oQ==}
+  /@guardian/commercial@0.0.0-beta-20240913075035(@guardian/ab-core@8.0.0)(@guardian/core-web-vitals@7.0.0)(@guardian/identity-auth-frontend@4.0.0)(@guardian/identity-auth@2.1.0)(@guardian/libs@0.0.0-canary-20240912110451)(@guardian/source@6.0.0)(react-dom@18.3.1)(react@18.3.1)(typescript@5.5.3):
+    resolution: {integrity: sha512-asjRftT3ad/rvhCKssaCmutCkDpjjZshwKfUdlhJbQVkM4lQl/emxPa7iSa6V09X6+EWLwntGeT44AILp8arsA==}
     peerDependencies:
       '@guardian/ab-core': ^8.0.0
       '@guardian/core-web-vitals': ^7.0.0
