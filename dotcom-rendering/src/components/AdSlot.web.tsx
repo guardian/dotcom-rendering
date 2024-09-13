@@ -70,6 +70,7 @@ type RemainingProps = {
 type Props = DefaultProps & (RightProps | InlineProps | RemainingProps);
 
 const labelHeight = constants.AD_LABEL_HEIGHT;
+const doubleMpuHeight = 600;
 
 const individualLabelCSS = css`
 	${textSans12};
@@ -503,7 +504,11 @@ export const AdSlot = ({
 							className="ad-slot-container"
 							css={[
 								adContainerStyles,
-								hasShowcaseMainElement && 'min-height: 624px;',
+								hasShowcaseMainElement &&
+									css`
+										min-height: ${doubleMpuHeight +
+										labelHeight}px;
+									`,
 							]}
 						>
 							<div
