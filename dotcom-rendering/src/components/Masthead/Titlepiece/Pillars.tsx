@@ -24,6 +24,7 @@ type Props = {
 	selectedPillar?: Pillar;
 	dataLinkName: string;
 	hasPageSkin?: boolean;
+	isTopNav?: boolean;
 };
 
 const pillarsContainer = css`
@@ -213,9 +214,10 @@ export const Pillars = ({
 	selectedPillar,
 	dataLinkName,
 	hasPageSkin = false,
+	isTopNav = true,
 }: Props) => {
 	return (
-		<ul id="navigation" css={pillarsContainer}>
+		<ul css={pillarsContainer}>
 			{pillars.map((p, i) => {
 				const isSelected = p.pillar === selectedPillar;
 				const showDivider = isNotLastPillar(i, pillars.length);
@@ -241,6 +243,7 @@ export const Pillars = ({
 								isSelected && forceUnderline,
 							]}
 							style={{ '--pillar-underline': pillarColour }}
+							id={isTopNav && i === 0 ? 'navigation' : undefined}
 							data-link-name={nestedOphanComponents(
 								dataLinkName,
 								'primary',

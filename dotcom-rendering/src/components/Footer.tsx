@@ -348,6 +348,7 @@ export const Footer = ({
 				selectedPillar={selectedPillar}
 				dataLinkName="footer"
 				hasPageSkin={hasPageSkin}
+				isTopNav={false}
 			/>
 		</div>
 		<div css={footerGrid}>
