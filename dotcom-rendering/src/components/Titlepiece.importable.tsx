@@ -578,7 +578,7 @@ export const Titlepiece = ({
 				]}
 			>
 				<Pillars
-					nav={nav}
+					pillars={nav.pillars}
 					dataLinkName={nestedOphanComponents(
 						'header',
 						'titlepiece',
