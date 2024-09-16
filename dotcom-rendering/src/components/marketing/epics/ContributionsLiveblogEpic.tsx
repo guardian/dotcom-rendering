@@ -34,17 +34,25 @@ import { ContributionsEpicNewsletterSignup } from './ContributionsEpicNewsletter
 import { ThreeTierChoiceCards } from './ThreeTierChoiceCards';
 import { getDefaultThreeTierAmount } from './utils/threeTierChoiceCardAmounts';
 
+// Hard-coded AB TEST - picking up ab test name and variant name from the tracking object
+// then applying a different colour if it matches, or the default colour if it doesn't.
+const getBackgroundColour = (tracking: Tracking) => {
+	if (
+		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
+		tracking.abTestVariant === 'VARIANT'
+	) {
+		return palette.news[100];
+	} else {
+		return palette.neutral[100];
+	}
+};
+
 const container = (tracking: Tracking) => css`
 	padding: 6px 10px 28px 10px;
 	border-top: 1px solid ${palette.brandAlt[400]};
 	border-bottom: 1px solid ${palette.neutral[86]};
 
-	// Hard-coded AB TEST - picking up ab test name and variant name from the tracking object
-	// then applying a different colour if it matches, or the default colour if it doesn't.
-	background: ${tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
-	tracking.abTestVariant === 'VARIANT'
-		? palette.news[100]
-		: palette.neutral[100]};
+	background: ${getBackgroundColour(tracking)};
 
 	border: 1px solid ${palette.neutral[0]};
 
