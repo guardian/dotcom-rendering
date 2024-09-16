@@ -1,5 +1,5 @@
 import { BUILD_VARIANT, dcrJavascriptBundle } from '../../../webpack/bundles';
-import { loadSentryOnError, stubSentry } from './loadSentry';
+import { loadSentryOnError } from './loadSentry';
 
 type IsSentryEnabled = {
 	enableSentryReporting: boolean;
@@ -30,6 +30,14 @@ const isSentryEnabled = ({
 	// to prevent the Sentry script from ever loading.
 	if (random <= 99 / 100) return false;
 	return true;
+};
+
+/** When stubbed errors are only sent to the console */
+const stubSentry = (): void => {
+	window.guardian.modules.sentry.reportError = (error) => {
+		// eslint-disable-next-line no-console -- fallback to console.error
+		console.error(error);
+	};
 };
 
 export const sentryLoader = (): Promise<void> => {
