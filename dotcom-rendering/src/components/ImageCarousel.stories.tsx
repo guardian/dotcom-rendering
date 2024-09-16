@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints, space } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
-import type { PropsWithChildren } from 'react';
+import type { ReactNode } from 'react';
 import type { DCRSlideshowImage } from '../types/front';
 import { ImageCarousel } from './ImageCarousel';
 
@@ -52,34 +52,22 @@ const images = [
 	},
 ] as const satisfies readonly DCRSlideshowImage[];
 
-const wrapper = css`
-	margin: ${space[3]}px;
-`;
-
-const Wrapper = ({
-	children,
-	maxWidth,
-}: PropsWithChildren<{ maxWidth: number }>) => (
-	<div
-		css={[
-			wrapper,
-			css`
-				max-width: ${maxWidth}px;
-			`,
-		]}
-	>
-		{children}
-	</div>
-);
+const Wrapper = ({ children }: { children: ReactNode }) => {
+	const styles = css`
+		margin: ${space[3]}px;
+		max-width: 480px;
+	`;
+	return <div css={styles}>{children}</div>;
+};
 
 export const Default = {
 	render: (args) => (
-		<Wrapper maxWidth={480}>
+		<Wrapper>
 			<ImageCarousel {...args} />
 		</Wrapper>
 	),
 	args: {
-		images: images,
+		images,
 		imageSize: 'medium',
 	},
 } satisfies Story;

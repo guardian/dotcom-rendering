@@ -5,24 +5,23 @@ import type { DCRSlideshowImage } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { CardPicture } from './CardPicture';
 
-const carouselWrapperStyles = css`
+const carouselContainer = css`
 	display: flex;
-	aspect-ratio: 4 / 3;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 `;
 
-const imageWrapperStyles = css`
-	aspect-ratio: 4 / 3;
+const carouselItem = css`
+	position: relative;
+	flex: 1 0 100%;
 	scroll-snap-align: start;
 `;
 
-const figureStyles = css`
-	position: relative;
-`;
-
-const captionStyles = css`
+const caption = css`
 	${textSansBold12}
 	position: absolute;
 	bottom: 0;
@@ -40,37 +39,34 @@ const captionStyles = css`
 export const ImageCarousel = ({
 	images,
 	imageSize,
-	isDynamo = false,
-	display = 5,
 }: {
 	images: readonly DCRSlideshowImage[];
 	imageSize: ImageSizeType;
-	fade?: number;
-	display?: number;
-	isDynamo?: boolean;
 }) => (
-	<ul css={carouselWrapperStyles}>
-		{takeFirst(images, 10).map((slideshowImage, index, { length }) => {
-			const isNotFirst = index > 0;
-			const loading = isNotFirst ? 'lazy' : 'eager';
+	<div>
+		<ul css={carouselContainer}>
+			{takeFirst(images, 10).map((slideshowImage, index) => {
+				const loading = index > 0 ? 'lazy' : 'eager';
 
-			return (
-				<li css={imageWrapperStyles}>
-					<figure css={figureStyles} key={slideshowImage.imageSrc}>
-						<CardPicture
-							mainImage={slideshowImage.imageSrc}
-							imageSize={imageSize}
-							alt={slideshowImage.imageCaption}
-							loading={loading}
-						/>
-						{!!slideshowImage.imageCaption && (
-							<figcaption css={captionStyles}>
-								{slideshowImage.imageCaption}
-							</figcaption>
-						)}
-					</figure>
-				</li>
-			);
-		})}
-	</ul>
+				return (
+					<li css={carouselItem} key={slideshowImage.imageSrc}>
+						<figure>
+							<CardPicture
+								mainImage={slideshowImage.imageSrc}
+								imageSize={imageSize}
+								alt={slideshowImage.imageCaption}
+								loading={loading}
+							/>
+							{!!slideshowImage.imageCaption && (
+								<figcaption css={caption}>
+									{slideshowImage.imageCaption}
+								</figcaption>
+							)}
+						</figure>
+					</li>
+				);
+			})}
+		</ul>
+		<span>[1][2][3][4][5] [LEFT] [RIGHT]</span>
+	</div>
 );
