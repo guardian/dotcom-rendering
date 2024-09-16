@@ -81,39 +81,46 @@ const PodcastButton = ({ label, url, icon }: PodcastButtonProps) => (
 	</li>
 );
 
+interface PodcastMetaProps extends Podcast {
+	rssFeedUrl?: string;
+	audioDownloadUrl?: string;
+}
+
 export const PodcastMeta = ({
 	subscriptionUrl,
 	spotifyUrl,
 	rssFeedUrl,
-	downloadUrl,
-}: Podcast) => (
-	<>
-		<div css={podcastTitleStyles}>More ways to listen</div>
-		<ul css={podcastButtonListStyles}>
-			{!!subscriptionUrl && (
-				<PodcastButton
-					icon={<ApplePodcastsSvg />}
-					label={'Apple podcasts'}
-					url={subscriptionUrl}
-				/>
-			)}
-			{!!spotifyUrl && (
-				<PodcastButton
-					icon={<SvgSpotify />}
-					label={'Spotify'}
-					url={spotifyUrl}
-				/>
-			)}
-			{!!rssFeedUrl && (
-				<PodcastButton label={'RSS Feed'} url={rssFeedUrl} />
-			)}
-			{!!downloadUrl && (
-				<PodcastButton
-					icon={<SvgDownload size="small" />}
-					label={'Download'}
-					url={downloadUrl}
-				/>
-			)}
-		</ul>
-	</>
-);
+	audioDownloadUrl,
+}: PodcastMetaProps) => {
+	return (
+		<>
+			<div css={podcastTitleStyles}>More ways to listen</div>
+			<ul css={podcastButtonListStyles}>
+				{!!subscriptionUrl && (
+					<PodcastButton
+						icon={<ApplePodcastsSvg />}
+						label={'Apple podcasts'}
+						url={subscriptionUrl}
+					/>
+				)}
+				{!!spotifyUrl && (
+					<PodcastButton
+						icon={<SvgSpotify />}
+						label={'Spotify'}
+						url={spotifyUrl}
+					/>
+				)}
+				{!!rssFeedUrl && (
+					<PodcastButton label={'RSS Feed'} url={rssFeedUrl} />
+				)}
+				{!!audioDownloadUrl && (
+					<PodcastButton
+						icon={<SvgDownload size="small" />}
+						label={'Download'}
+						url={audioDownloadUrl}
+					/>
+				)}
+			</ul>
+		</>
+	);
+};

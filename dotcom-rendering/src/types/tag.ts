@@ -39,8 +39,6 @@ export type FEPagination = {
 export type Podcast = {
 	subscriptionUrl?: string;
 	spotifyUrl?: string;
-	rssFeedUrl?: string;
-	downloadUrl?: string;
 	image?: string;
 };
 

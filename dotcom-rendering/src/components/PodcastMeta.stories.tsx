@@ -20,7 +20,7 @@ export const Default = () => (
 			spotifyUrl="#"
 			subscriptionUrl="#"
 			rssFeedUrl="#"
-			downloadUrl="#"
+			audioDownloadUrl="#"
 		/>
 	</Wrapper>
 );
