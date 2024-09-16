@@ -20,10 +20,11 @@ import { listAccessibility } from './commonStyles';
 import { pillarLeftMarginPx, pillarWidthsPx } from './constants';
 
 type Props = {
-	nav: NavType;
-	dataLinkName: string;
+	pillars: NavType['pillars'];
 	selectedPillar?: Pillar;
+	dataLinkName: string;
 	hasPageSkin?: boolean;
+	isTopNav?: boolean;
 };
 
 const pillarsContainer = css`
@@ -209,16 +210,17 @@ const getPillarColour = (pillar: ArticleTheme): string | undefined => {
 };
 
 export const Pillars = ({
-	nav,
+	pillars,
 	selectedPillar,
 	dataLinkName,
 	hasPageSkin = false,
+	isTopNav = true,
 }: Props) => {
 	return (
-		<ul id="navigation" css={pillarsContainer}>
-			{nav.pillars.map((p, i) => {
+		<ul css={pillarsContainer}>
+			{pillars.map((p, i) => {
 				const isSelected = p.pillar === selectedPillar;
-				const showDivider = isNotLastPillar(i, nav.pillars.length);
+				const showDivider = isNotLastPillar(i, pillars.length);
 				const pillarColour = getPillarColour(p.pillar);
 
 				return (
@@ -241,6 +243,7 @@ export const Pillars = ({
 								isSelected && forceUnderline,
 							]}
 							style={{ '--pillar-underline': pillarColour }}
+							id={isTopNav && i === 0 ? 'navigation' : undefined}
 							data-link-name={nestedOphanComponents(
 								dataLinkName,
 								'primary',

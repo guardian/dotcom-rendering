@@ -12,7 +12,8 @@ import { decidePalette } from '../lib/decidePalette';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';
 import type { Palette } from '../types/palette';
-import { navInputCheckboxId } from './Nav/config';
+
+const navInputCheckboxId = 'top-nav-input-checkbox';
 
 // CSS Vars
 
