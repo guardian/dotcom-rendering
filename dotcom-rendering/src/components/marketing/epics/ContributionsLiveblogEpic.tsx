@@ -137,7 +137,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	onReminderOpen,
 	fetchEmail,
 }: EpicProps): JSX.Element => {
-	const { choiceCardAmounts, newsletterSignup } = variant;
+	const { newsletterSignup } = variant;
 
 	/*const [choiceCardSelection, setChoiceCardSelection] = useState<
 		ChoiceCardSelection | undefined
