@@ -3,7 +3,7 @@ import type { Pillar } from '@guardian/libs';
 import { palette as sourcePalette } from '@guardian/source/foundations';
 import type { Meta } from '@storybook/react';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
-import { nav } from '../../Nav/Nav.mock';
+import { nav } from './Nav.mock';
 import { Pillars } from './Pillars';
 
 const wrapperStyles = css`

@@ -161,8 +161,6 @@ const generateCarouselColumnStyles = (totalCards: number) => {
 };
 
 export const HighlightsContainer = ({ trails }: Props) => {
-	// temporary fix to only show 6 highlights, until we have a proper solution in the tools
-	const highlightsTrails = trails.slice(0, 6);
 	const carouselRef = useRef<HTMLOListElement | null>(null);
 	const carouselLength = trails.length;
 	const imageLoading = 'eager';
@@ -245,7 +243,7 @@ export const HighlightsContainer = ({ trails }: Props) => {
 				]}
 				data-heatphan-type="carousel"
 			>
-				{highlightsTrails.map((trail) => {
+				{trails.map((trail) => {
 					return (
 						<li
 							key={trail.url}
