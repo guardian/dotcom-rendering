@@ -5572,15 +5572,15 @@ const designTagBackground: PaletteFunction = ({ theme }) => {
 	}
 };
 
-const cricketScoreboardBorderTop = () => {
+const cricketScoreboardBorderTop: PaletteFunction = () => {
 	return sourcePalette.sport[300];
 };
 
-const cricketScoreboardDivider = () => {
+const cricketScoreboardDivider: PaletteFunction = () => {
 	return sourcePalette.neutral[86];
 };
 
-const cricketScoreboardLinkText = () => {
+const cricketScoreboardLinkText: PaletteFunction = () => {
 	return sourcePalette.sport[300];
 };
 
