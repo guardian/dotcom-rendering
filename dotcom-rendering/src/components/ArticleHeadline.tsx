@@ -763,7 +763,7 @@ export const ArticleHeadline = ({
 										css`
 											color: ${isMatch
 												? themePalette(
-														'--series-title-match-text',
+														'--headline-match-colour',
 												  )
 												: themePalette(
 														'--headline-colour',

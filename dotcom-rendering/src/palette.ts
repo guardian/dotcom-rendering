@@ -164,6 +164,13 @@ const headlineTextDark: PaletteFunction = ({ design, display, theme }) => {
 		}
 	}
 };
+
+const headlineMatchTextLight: PaletteFunction = (format) =>
+	seriesTitleMatchTextLight(format);
+
+const headlineMatchTextDark: PaletteFunction = (format) =>
+	seriesTitleMatchTextDark(format);
+
 const headlineBackgroundLight: PaletteFunction = ({
 	display,
 	design,
@@ -6228,6 +6235,10 @@ const paletteColours = {
 	'--headline-colour': {
 		light: headlineTextLight,
 		dark: headlineTextDark,
+	},
+	'--headline-match-colour': {
+		light: headlineMatchTextLight,
+		dark: headlineMatchTextDark,
 	},
 	'--highlights-card-headline': {
 		light: highlightsCardHeadline,
