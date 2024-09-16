@@ -17,7 +17,6 @@ import { DiscussionMeta } from './DiscussionMeta.importable';
 import { EnhancePinnedPost } from './EnhancePinnedPost.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { FooterReaderRevenueLinks } from './FooterReaderRevenueLinks.importable';
-import { InteractiveSupportButton } from './InteractiveSupportButton.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
 import { LightboxJavascript } from './LightboxJavascript';
@@ -36,7 +35,6 @@ import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SignInGateSelector } from './SignInGateSelector.importable';
 import { SlotBodyEnd } from './SlotBodyEnd.importable';
 import { StickyBottomBanner } from './StickyBottomBanner.importable';
-import { SupportTheG } from './SupportTheG.importable';
 
 // Type tests
 // Test that impossible prop combinations are caught by TypeScript.
@@ -180,14 +178,6 @@ describe('Island: server-side rendering', () => {
 
 	test('FocusStyles', () => {
 		expect(() => renderToString(<FocusStyles />)).not.toThrow();
-	});
-
-	test('InteractiveSupportButton', () => {
-		expect(() =>
-			renderToString(
-				<InteractiveSupportButton editionId={'UK'} subscribeUrl="" />,
-			),
-		).not.toThrow();
 	});
 
 	test('OnwardsUpper', () => {
@@ -441,27 +431,6 @@ describe('Island: server-side rendering', () => {
 						pageId=""
 						remoteBannerSwitch={true}
 						isSensitive={false}
-					/>
-				</WithConfig>,
-			),
-		).not.toThrow();
-	});
-
-	test('SupportTheG', () => {
-		expect(() =>
-			renderToString(
-				<WithConfig>
-					<SupportTheG
-						editionId={'UK'}
-						dataLinkNamePrefix={''}
-						inHeader={false}
-						remoteHeader={false}
-						contributionsServiceUrl={''}
-						urls={{
-							subscribe: '',
-							support: '',
-							contribute: '',
-						}}
 					/>
 				</WithConfig>,
 			),
