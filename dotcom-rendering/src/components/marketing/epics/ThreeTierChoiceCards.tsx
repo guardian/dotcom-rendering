@@ -146,8 +146,8 @@ type ThreeTierChoiceCardsProps = {
 	variantOfChoiceCard: string;
 };
 
-export const getChoiceCardData = (variant: string): ChoiceInfo[] => {
-	switch (variant) {
+const getChoiceCardData = (choiceCardVariant: string): ChoiceInfo[] => {
+	switch (choiceCardVariant) {
 		case 'US_THREE_TIER_CHOICE_CARDS':
 			return ChoiceCardTestData_US;
 		default:
