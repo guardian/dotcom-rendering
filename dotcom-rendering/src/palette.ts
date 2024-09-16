@@ -6653,8 +6653,8 @@ const paletteColours = {
 		dark: richLinkTextDark,
 	},
 	'--section-background': {
-		light: () => 'transparent',
-		dark: () => 'transparent',
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
 	},
 	'--section-background-left': {
 		light: () => 'transparent',
