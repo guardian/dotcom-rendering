@@ -40,7 +40,7 @@ const getBackgroundColour = (tracking: Tracking) => {
 		tracking.abTestName.includes('_LB_EPIC_BG_COLOUR') &&
 		tracking.abTestVariant === 'VARIANT'
 	) {
-		return palette.news[100];
+		return palette.neutral[100]; // COLOUR CHANGE TO GO HERE
 	} else {
 		return palette.neutral[100];
 	}
