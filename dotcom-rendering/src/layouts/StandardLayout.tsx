@@ -366,7 +366,7 @@ interface AppProps extends Props {
 export const StandardLayout = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
 	const {
-		config: { isPaidContent, host },
+		config: { isPaidContent, host, hasSurveyAd },
 		editionId,
 	} = article;
 
@@ -461,7 +461,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 				</Stuck>
 			)}
 
-			{renderAds && article.config.switches.surveys && (
+			{renderAds && article.config.switches.surveys && hasSurveyAd && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
