@@ -299,7 +299,6 @@ describe('Island: server-side rendering', () => {
 						isPaidContent={false}
 						renderAds={false}
 						shouldHideReaderRevenue={false}
-						hasShowcaseMainElement={false}
 					/>
 					,
 				</WithConfig>,

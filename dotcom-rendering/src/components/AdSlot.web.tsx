@@ -30,7 +30,6 @@ type DefaultProps = {
 	display?: ArticleDisplay;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
-	hasShowcaseMainElement?: boolean;
 };
 
 // TODO move to commercial
@@ -206,6 +205,21 @@ const fluidFullWidthAdStyles = css`
 	&.ad-slot--fluid {
 		width: 100%;
 	}
+`;
+
+/**
+ * Both Showcase and NumberedList displays have a showcase main media. Underneath this
+ * in the right column, the `right` ad slot is rendered above the MostViewed component.
+ * As MostViewed can (and often does) render first, we need to reserve space for the ad
+ * to avoid CLS.
+ */
+const showcaseRightColumnContainerStyles = css`
+	min-height: ${doubleMpuHeight + labelHeight}px;
+`;
+
+const showcaseRightColumnStyles = css`
+	position: sticky;
+	top: 0;
 `;
 
 const merchandisingAdContainerStyles = css`
@@ -491,12 +505,34 @@ export const AdSlot = ({
 	hasPageskin = false,
 	shouldHideReaderRevenue = false,
 	colourScheme = 'light',
-	hasShowcaseMainElement = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
 			switch (display) {
-				case ArticleDisplay.Immersive:
+				case ArticleDisplay.Immersive: {
+					return (
+						<div
+							className="ad-slot-container"
+							css={adContainerStyles}
+						>
+							<div
+								id="dfp-ad--right"
+								css={rightAdStyles}
+								className={[
+									'js-ad-slot',
+									'ad-slot',
+									'ad-slot--right',
+									'ad-slot--mpu-banner-ad',
+									'ad-slot--rendered',
+									'js-sticky-mpu',
+								].join(' ')}
+								data-link-name="ad slot right"
+								data-name="right"
+								aria-hidden="true"
+							/>
+						</div>
+					);
+				}
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
@@ -504,23 +540,12 @@ export const AdSlot = ({
 							className="ad-slot-container"
 							css={[
 								adContainerStyles,
-								hasShowcaseMainElement &&
-									css`
-										min-height: ${doubleMpuHeight +
-										labelHeight}px;
-									`,
+								showcaseRightColumnContainerStyles,
 							]}
 						>
 							<div
 								id="dfp-ad--right"
-								css={[
-									rightAdStyles,
-									hasShowcaseMainElement &&
-										css`
-											position: sticky;
-											top: 0;
-										`,
-								]}
+								css={[rightAdStyles, showcaseRightColumnStyles]}
 								className={[
 									'js-ad-slot',
 									'ad-slot',

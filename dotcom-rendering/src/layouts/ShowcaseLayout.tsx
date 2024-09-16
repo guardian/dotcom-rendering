@@ -222,7 +222,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 	const {
 		config: { isPaidContent, host },
 		editionId,
-		pageType: { hasShowcaseMainElement },
 	} = article;
 	const isWeb = renderingTarget === 'Web';
 	const isApps = renderingTarget === 'Apps';
@@ -667,9 +666,6 @@ export const ShowcaseLayout = (props: WebProps | AppsProps) => {
 											shouldHideReaderRevenue={
 												!!article.config
 													.shouldHideReaderRevenue
-											}
-											hasShowcaseMainElement={
-												hasShowcaseMainElement
 											}
 										/>
 									</Island>
