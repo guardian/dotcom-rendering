@@ -15,3 +15,5 @@ export const pillarWidthsPx = {
 
 export const smallMobilePageMargin = '10px';
 export const pageMargin = `${space[5]}px`;
+
+export const minHeaderHeightPx = 126;

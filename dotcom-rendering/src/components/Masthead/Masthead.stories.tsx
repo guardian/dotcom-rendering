@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
-import { nav } from '../Nav/Nav.mock';
 import { Masthead } from './Masthead';
+import { nav } from './Titlepiece/Nav.mock';
 
 const meta = {
 	component: Masthead,

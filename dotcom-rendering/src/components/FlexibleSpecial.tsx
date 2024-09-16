@@ -1,12 +1,15 @@
+import type { BoostLevel } from '../types/content';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import type { Loading } from './CardPicture';
 import { FrontCard } from './FrontCard';
+import type { Alignment } from './SupportingContent';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
@@ -16,6 +19,64 @@ type Props = {
 	absoluteServerTimes: boolean;
 };
 
+type boostProperties = {
+	headlineSize: SmallHeadlineSize;
+	headlineSizeOnMobile: SmallHeadlineSize;
+	headlineSizeOnTablet: SmallHeadlineSize;
+	imagePositionOnDesktop: ImagePositionType;
+	imagePositionOnMobile: ImagePositionType;
+	supportingContentAlignment: Alignment;
+};
+
+/**
+ * Boosting a card will affect the layout and style of the card. This function will determine the properties of the card based on the boost level.
+ */
+const determineCardProperties = (
+	boostLevel: BoostLevel = 'default',
+	supportingContentLength: number,
+): boostProperties => {
+	switch (boostLevel) {
+		// The default boost level is equal to no boost. It is the same as the default card layout.
+		case 'default':
+			return {
+				headlineSize: 'medium',
+				headlineSizeOnMobile: 'tiny',
+				headlineSizeOnTablet: 'small',
+				imagePositionOnDesktop: 'right',
+				imagePositionOnMobile: 'top',
+				supportingContentAlignment:
+					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+			};
+		case 'boost':
+			return {
+				headlineSize: 'large',
+				headlineSizeOnMobile: 'small',
+				headlineSizeOnTablet: 'medium',
+				imagePositionOnDesktop: 'right',
+				imagePositionOnMobile: 'top',
+				supportingContentAlignment:
+					supportingContentLength >= 3 ? 'horizontal' : 'vertical',
+			};
+		case 'megaboost':
+			return {
+				headlineSize: 'large',
+				headlineSizeOnMobile: 'medium',
+				headlineSizeOnTablet: 'medium',
+				imagePositionOnDesktop: 'bottom',
+				imagePositionOnMobile: 'top',
+				supportingContentAlignment: 'horizontal',
+			};
+		case 'gigaboost':
+			return {
+				headlineSize: 'huge',
+				headlineSizeOnMobile: 'large',
+				headlineSizeOnTablet: 'large',
+				imagePositionOnDesktop: 'bottom',
+				imagePositionOnMobile: 'top',
+				supportingContentAlignment: 'horizontal',
+			};
+	}
+};
 export const OneCardLayout = ({
 	cards,
 	containerPalette,
@@ -29,34 +90,43 @@ export const OneCardLayout = ({
 	showAge?: boolean;
 	absoluteServerTimes: boolean;
 }) => {
-	if (!cards[0]) return null;
+	const card = cards[0];
+	if (!card) return null;
 
+	const {
+		headlineSize,
+		headlineSizeOnMobile,
+		headlineSizeOnTablet,
+		imagePositionOnDesktop,
+		imagePositionOnMobile,
+		supportingContentAlignment,
+	} = determineCardProperties(
+		card.boostLevel,
+		card?.supportingContent?.length ?? 0,
+	);
 	return (
 		<UL padBottom={true}>
 			<LI padSides={true}>
 				<FrontCard
-					trail={cards[0]}
+					trail={card}
 					containerPalette={containerPalette}
 					containerType="flexible/special"
 					showAge={showAge}
 					absoluteServerTimes={absoluteServerTimes}
-					headlineSize="large"
-					headlineSizeOnMobile="medium"
-					imagePositionOnDesktop="right"
-					imagePositionOnMobile="top"
+					headlineSize={headlineSize}
+					headlineSizeOnMobile={headlineSizeOnMobile}
+					headlineSizeOnTablet={headlineSizeOnTablet}
+					imagePositionOnDesktop={imagePositionOnDesktop}
+					imagePositionOnMobile={imagePositionOnMobile}
 					imageSize="jumbo"
-					trailText={cards[0].trailText}
-					supportingContent={cards[0].supportingContent}
-					supportingContentAlignment={
-						cards[0].supportingContent &&
-						cards[0].supportingContent.length > 3
-							? 'horizontal'
-							: 'vertical'
-					}
+					trailText={card.trailText}
+					supportingContent={card.supportingContent}
+					supportingContentAlignment={supportingContentAlignment}
 					imageLoading={imageLoading}
 					aspectRatio="5:4"
-					kickerText={cards[0].kickerText}
-					showLivePlayable={cards[0].showLivePlayable}
+					kickerText={card.kickerText}
+					showLivePlayable={card.showLivePlayable}
+					boostedFontSizes={true}
 				/>
 			</LI>
 		</UL>
@@ -103,6 +173,7 @@ const TwoCardOrFourCardLayout = ({
 							imagePositionOnDesktop={
 								hasTwoOrFewerCards ? 'left' : 'bottom'
 							}
+							supportingContent={undefined} // we don't want to support sublinks on standard cards here so we hard code to undefined.
 							imageSize={'medium'}
 							aspectRatio="5:4"
 							kickerText={card.kickerText}

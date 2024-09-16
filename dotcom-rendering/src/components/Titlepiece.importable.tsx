@@ -463,7 +463,7 @@ export const Titlepiece = ({
 					 * - Toggles the menu open/close state when the menu button (veggieBurger) is clicked.
 					 */
 						const handleMenuClick = (e) => {
-							const menuButtonClicked = veggieBurger.contains(e.target);
+							const menuButtonClicked = navInputCheckbox === e.target;
 							const clickInsideMenu = expandedMenu.contains(e.target);
 							const menuIsOpen = navInputCheckbox.checked
 							if (menuButtonClicked && !menuIsOpen) {
