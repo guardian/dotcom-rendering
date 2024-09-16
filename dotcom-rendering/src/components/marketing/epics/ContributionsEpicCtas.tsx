@@ -15,8 +15,6 @@ interface OnReminderOpen {
 
 type ContributionsEpicCtasProps = EpicProps & {
 	showChoiceCards?: boolean;
-	//choiceCardSelection?: ChoiceCardSelection;
-	//showThreeTierChoiceCards?: boolean;
 	threeTierChoiceCardSelectedAmount?: number;
 	amountsTestName?: string;
 	amountsVariantName?: string;
@@ -34,8 +32,6 @@ export const ContributionsEpicCtas: ReactComponent<
 	onReminderOpen,
 	fetchEmail,
 	showChoiceCards,
-	//choiceCardSelection,
-	//showThreeTierChoiceCards,
 	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
@@ -84,8 +80,6 @@ export const ContributionsEpicCtas: ReactComponent<
 				isReminderActive={isReminderActive}
 				isSignedIn={Boolean(fetchedEmail)}
 				showChoiceCards={showChoiceCards}
-				//choiceCardSelection={choiceCardSelection}
-				//showThreeTierChoiceCards={showThreeTierChoiceCards}
 				threeTierChoiceCardSelectedAmount={
 					threeTierChoiceCardSelectedAmount
 				}

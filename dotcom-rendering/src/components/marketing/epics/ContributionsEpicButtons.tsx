@@ -29,8 +29,6 @@ import {
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
 } from './utils/ophan';
 
-//show choice cards amount if selected and show choice cards is true
-
 const paymentImageStyles = css`
 	display: inline-block;
 	width: auto;
@@ -143,8 +141,6 @@ interface ContributionsEpicButtonsProps {
 	showChoiceCards?: boolean;
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	//choiceCardSelection?: ChoiceCardSelection;
-	//showThreeTierChoiceCards?: boolean;
 	threeTierChoiceCardSelectedAmount?: number;
 	numArticles: number;
 	variantOfChoiceCard?: string;
@@ -159,8 +155,6 @@ export const ContributionsEpicButtons = ({
 	isReminderActive,
 	isSignedIn,
 	showChoiceCards,
-	//choiceCardSelection,
-	//showThreeTierChoiceCards,
 	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
@@ -226,16 +220,6 @@ export const ContributionsEpicButtons = ({
 				),
 			};
 		}
-		/*if (choiceCardSelection) {
-			return {
-				text: cta.text,
-				baseUrl: addChoiceCardsParams(
-					cta.baseUrl,
-					choiceCardSelection.frequency,
-					choiceCardSelection.amount,
-				),
-			};
-		}*/
 
 		return cta;
 	};

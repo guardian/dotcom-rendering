@@ -139,30 +139,11 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 }: EpicProps): JSX.Element => {
 	const { newsletterSignup } = variant;
 
-	/*const [choiceCardSelection, setChoiceCardSelection] = useState<
-		ChoiceCardSelection | undefined
-	>();*/
-
 	const isNonVatCompliantCountry =
 		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
 
 	const showChoiceCards =
 		variant.showChoiceCards && !isNonVatCompliantCountry;
-
-	/*useEffect(() => {
-		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
-			const localAmounts =
-				choiceCardAmounts.amountsCardData[
-					choiceCardAmounts.defaultContributionType
-				];
-			const defaultAmount = localAmounts.defaultAmount;
-
-			setChoiceCardSelection({
-				frequency: choiceCardAmounts.defaultContributionType,
-				amount: defaultAmount,
-			});
-		}
-	}, [showChoiceCards, choiceCardAmounts]); */
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -259,8 +240,6 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 							fetchEmail={fetchEmail}
 							submitComponentEvent={submitComponentEvent}
 							showChoiceCards={showChoiceCards}
-							//	choiceCardSelection={choiceCardSelection}
-							//	showThreeTierChoiceCards={showChoiceCards}
 							threeTierChoiceCardSelectedAmount={
 								threeTierChoiceCardSelectedAmount
 							}
