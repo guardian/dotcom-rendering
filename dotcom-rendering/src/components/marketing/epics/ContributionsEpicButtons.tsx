@@ -30,6 +30,8 @@ import {
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
 } from './utils/ophan';
 
+//show choice cards amount if selected and show choice cards is true
+
 const paymentImageStyles = css`
 	display: inline-block;
 	width: auto;
@@ -142,8 +144,8 @@ interface ContributionsEpicButtonsProps {
 	showChoiceCards?: boolean;
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	choiceCardSelection?: ChoiceCardSelection;
-	showThreeTierChoiceCards?: boolean;
+	//choiceCardSelection?: ChoiceCardSelection;
+	//showThreeTierChoiceCards?: boolean;
 	threeTierChoiceCardSelectedAmount?: number;
 	numArticles: number;
 	variantOfChoiceCard?: string;
@@ -158,8 +160,8 @@ export const ContributionsEpicButtons = ({
 	isReminderActive,
 	isSignedIn,
 	showChoiceCards,
-	choiceCardSelection,
-	showThreeTierChoiceCards,
+	//choiceCardSelection,
+	//showThreeTierChoiceCards,
 	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
@@ -188,7 +190,7 @@ export const ContributionsEpicButtons = ({
 
 	const getChoiceCardCta = (cta: Cta): Cta => {
 		if (
-			showThreeTierChoiceCards &&
+			showChoiceCards &&
 			variantOfChoiceCard === 'US_THREE_TIER_CHOICE_CARDS' &&
 			!isUndefined(threeTierChoiceCardSelectedAmount)
 		) {
@@ -225,7 +227,7 @@ export const ContributionsEpicButtons = ({
 				),
 			};
 		}
-		if (choiceCardSelection) {
+		/*if (choiceCardSelection) {
 			return {
 				text: cta.text,
 				baseUrl: addChoiceCardsParams(
@@ -234,7 +236,7 @@ export const ContributionsEpicButtons = ({
 					choiceCardSelection.amount,
 				),
 			};
-		}
+		}*/
 
 		return cta;
 	};

@@ -294,14 +294,14 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	const {
 		image,
 		tickerSettings,
-		showChoiceCards,
+		//showChoiceCards,
 		choiceCardAmounts,
 		newsletterSignup,
 	} = variant;
 
-	const [choiceCardSelection, setChoiceCardSelection] = useState<
+	/*	const [choiceCardSelection, setChoiceCardSelection] = useState<
 		ChoiceCardSelection | undefined
-	>();
+	>();*/
 
 	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
 	const [
@@ -317,7 +317,10 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	const isNonVatCompliantCountry =
 		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
 
-	useEffect(() => {
+	const showChoiceCards =
+		variant.showChoiceCards && !isNonVatCompliantCountry;
+
+	/*useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
 			const localAmounts =
 				choiceCardAmounts.amountsCardData[
@@ -330,7 +333,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				amount: defaultAmount,
 			});
 		}
-	}, [showChoiceCards, choiceCardAmounts]);
+	}, [showChoiceCards, choiceCardAmounts]);*/
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -472,7 +475,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				<BylineWithHeadshot bylineWithImage={variant.bylineWithImage} />
 			)}
 
-			{showChoiceCards && !isNonVatCompliantCountry && (
+			{showChoiceCards && (
 				<ThreeTierChoiceCards
 					countryCode={countryCode}
 					selectedAmount={threeTierChoiceCardSelectedAmount}
@@ -499,8 +502,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					showChoiceCards={showChoiceCards}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
-					choiceCardSelection={choiceCardSelection}
-					showThreeTierChoiceCards={showChoiceCards}
+					//choiceCardSelection={choiceCardSelection}
+					//showThreeTierChoiceCards={showChoiceCards}
 					threeTierChoiceCardSelectedAmount={
 						threeTierChoiceCardSelectedAmount
 					}

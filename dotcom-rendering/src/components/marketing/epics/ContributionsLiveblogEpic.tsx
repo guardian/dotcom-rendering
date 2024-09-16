@@ -138,16 +138,19 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	onReminderOpen,
 	fetchEmail,
 }: EpicProps): JSX.Element => {
-	const { showChoiceCards, choiceCardAmounts, newsletterSignup } = variant;
+	const { choiceCardAmounts, newsletterSignup } = variant;
 
-	const [choiceCardSelection, setChoiceCardSelection] = useState<
+	/*const [choiceCardSelection, setChoiceCardSelection] = useState<
 		ChoiceCardSelection | undefined
-	>();
+	>();*/
 
 	const isNonVatCompliantCountry =
 		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
 
-	useEffect(() => {
+	const showChoiceCards =
+		variant.showChoiceCards && !isNonVatCompliantCountry;
+
+	/*useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
 			const localAmounts =
 				choiceCardAmounts.amountsCardData[
@@ -160,7 +163,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 				amount: defaultAmount,
 			});
 		}
-	}, [showChoiceCards, choiceCardAmounts]);
+	}, [showChoiceCards, choiceCardAmounts]); */
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -236,7 +239,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					/>
 				) : (
 					<>
-						{showChoiceCards && !isNonVatCompliantCountry && (
+						{showChoiceCards && (
 							<ThreeTierChoiceCards
 								countryCode={countryCode}
 								selectedAmount={
@@ -257,8 +260,8 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 							fetchEmail={fetchEmail}
 							submitComponentEvent={submitComponentEvent}
 							showChoiceCards={showChoiceCards}
-							choiceCardSelection={choiceCardSelection}
-							showThreeTierChoiceCards={showChoiceCards}
+							//	choiceCardSelection={choiceCardSelection}
+							//	showThreeTierChoiceCards={showChoiceCards}
 							threeTierChoiceCardSelectedAmount={
 								threeTierChoiceCardSelectedAmount
 							}

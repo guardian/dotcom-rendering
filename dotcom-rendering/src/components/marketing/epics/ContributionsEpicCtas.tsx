@@ -35,8 +35,8 @@ export const ContributionsEpicCtas: ReactComponent<
 	onReminderOpen,
 	fetchEmail,
 	showChoiceCards,
-	choiceCardSelection,
-	showThreeTierChoiceCards,
+	//choiceCardSelection,
+	//showThreeTierChoiceCards,
 	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
@@ -85,8 +85,8 @@ export const ContributionsEpicCtas: ReactComponent<
 				isReminderActive={isReminderActive}
 				isSignedIn={Boolean(fetchedEmail)}
 				showChoiceCards={showChoiceCards}
-				choiceCardSelection={choiceCardSelection}
-				showThreeTierChoiceCards={showThreeTierChoiceCards}
+				//choiceCardSelection={choiceCardSelection}
+				//showThreeTierChoiceCards={showThreeTierChoiceCards}
 				threeTierChoiceCardSelectedAmount={
 					threeTierChoiceCardSelectedAmount
 				}
