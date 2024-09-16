@@ -68,26 +68,3 @@ export const ChoiceCardTestData_US: ChoiceInfo[] = [
 		recommended: false,
 	},
 ];
-
-export const ChoiceCardTestData_VAT: ChoiceInfo[] = [
-	{
-		supportTier: 'other',
-		label: (amount: number, currencySymbol: string): string =>
-			`Support once from just ${currencySymbol}1`,
-		benefitsLabel: undefined,
-		benefits: (currencySymbol: string) => [
-			`We welcome support of any size, any time - whether you choose to give ${currencySymbol}1 or more`,
-		],
-		recommended: false,
-	},
-	{
-		supportTier: 'support',
-		label: (amount: number, currencySymbol: string): string =>
-			`Support ${currencySymbol}${amount}/month`,
-		benefitsLabel: 'Support',
-		benefits: () => [
-			'Exclusive newsletter for supporters, sent every week from the Guardian newsroom',
-		],
-		recommended: false,
-	},
-];

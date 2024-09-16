@@ -144,6 +144,9 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 		ChoiceCardSelection | undefined
 	>();
 
+	const isNonVatCompliantCountry =
+		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
+
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
 			const localAmounts =
@@ -209,10 +212,9 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	}
 
 	const variantOfChoiceCard =
-		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE'
-			? 'VAT_THREE_TIER_CHOICE_CARDS'
+		countryCode === 'US'
+			? 'US_THREE_TIER_CHOICE_CARDS'
 			: 'THREE_TIER_CHOICE_CARDS';
-	console.log(variantOfChoiceCard);
 
 	return (
 		<div data-testid="contributions-liveblog-epic" ref={setNode}>
@@ -234,7 +236,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 					/>
 				) : (
 					<>
-						{showChoiceCards && (
+						{showChoiceCards && !isNonVatCompliantCountry && (
 							<ThreeTierChoiceCards
 								countryCode={countryCode}
 								selectedAmount={

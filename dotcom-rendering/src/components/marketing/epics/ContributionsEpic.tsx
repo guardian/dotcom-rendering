@@ -309,15 +309,13 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 		setThreeTierChoiceCardSelectedAmount,
 	] = useState<number>(defaultThreeTierAmount);
 
-	let variantOfChoiceCard: string;
+	const variantOfChoiceCard =
+		countryCode === 'US'
+			? 'US_THREE_TIER_CHOICE_CARDS'
+			: 'THREE_TIER_CHOICE_CARDS';
 
-	if (countryCode === 'US') {
-		variantOfChoiceCard = 'US_THREE_TIER_CHOICE_CARDS';
-	} else if (variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE') {
-		variantOfChoiceCard = 'VAT_THREE_TIER_CHOICE_CARDS';
-	} else {
-		variantOfChoiceCard = 'THREE_TIER_CHOICE_CARDS';
-	}
+	const isNonVatCompliantCountry =
+		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
 
 	useEffect(() => {
 		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
@@ -474,7 +472,7 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 				<BylineWithHeadshot bylineWithImage={variant.bylineWithImage} />
 			)}
 
-			{showChoiceCards && (
+			{showChoiceCards && !isNonVatCompliantCountry && (
 				<ThreeTierChoiceCards
 					countryCode={countryCode}
 					selectedAmount={threeTierChoiceCardSelectedAmount}
