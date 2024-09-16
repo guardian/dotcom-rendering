@@ -25,6 +25,7 @@ const loadSentryOnError = (): void => {
 		const injectSentry = async (
 			error: Error | undefined,
 			feature: string,
+			tags?: { [key: string]: string },
 		) => {
 			const { endPerformanceMeasure } = startPerformanceMeasure(
 				'dotcom',
@@ -80,8 +81,8 @@ const loadSentryOnError = (): void => {
 		) =>
 			event?.reason instanceof Error &&
 			injectSentry(event.reason, 'unknown');
-		window.guardian.modules.sentry.reportError = (error, feature) => {
-			injectSentry(error, feature).catch((e) =>
+		window.guardian.modules.sentry.reportError = (error, feature, tags) => {
+			injectSentry(error, feature, tags).catch((e) =>
 				console.error(`injectSentry - error: ${String(e)}`),
 			);
 		};

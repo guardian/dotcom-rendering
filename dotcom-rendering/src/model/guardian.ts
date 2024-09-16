@@ -47,7 +47,13 @@ export interface Guardian {
 	};
 	modules: {
 		sentry: {
-			reportError: (error: Error, feature: string) => void;
+			reportError: (
+				error: Error,
+				feature: string,
+				tags?: {
+					[key: string]: string;
+				},
+			) => void;
 		};
 	};
 	adBlockers: unknown;
