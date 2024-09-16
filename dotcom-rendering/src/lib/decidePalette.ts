@@ -93,10 +93,6 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 };
 
-const textCricketScoreboardLink = (): string => {
-	return sport[300];
-};
-
 const backgroundBullet = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport) {
@@ -355,14 +351,6 @@ const borderLines = (format: ArticleFormat): string => {
 	return neutral[86];
 };
 
-const borderCricketScoreboardTop = (): string => {
-	return sport[300];
-};
-
-const borderCricketScoreboardDivider = (): string => {
-	return neutral[86];
-};
-
 const borderFilterButton = (): string => neutral[60];
 
 const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
@@ -460,7 +448,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
 			disclaimerLink: textDisclaimerLink(format),
-			cricketScoreboardLink: textCricketScoreboardLink(),
 			filterButton: textFilterButton(),
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
@@ -490,8 +477,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headline: borderHeadline(format),
 			navPillar: borderNavPillar(format),
 			lines: borderLines(format),
-			cricketScoreboardTop: borderCricketScoreboardTop(),
-			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			cardSupporting: borderCardSupporting(format),
 			filterButton: borderFilterButton(),
 		},
