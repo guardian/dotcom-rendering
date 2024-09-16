@@ -24,7 +24,6 @@ import type {
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
 import { isProd } from '../lib/stage';
@@ -68,7 +67,7 @@ const wrapperStyles = css`
 `;
 
 const headingStyles = css`
-	${headlineBold20}
+	${headlineBold20};
 	margin-top: 0;
 	margin-bottom: ${space[3]}px;
 `;
@@ -291,17 +290,8 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicProps) => {
-	const {
-		image,
-		tickerSettings,
-		showChoiceCards,
-		choiceCardAmounts,
-		newsletterSignup,
-	} = variant;
-
-	const [choiceCardSelection, setChoiceCardSelection] = useState<
-		ChoiceCardSelection | undefined
-	>();
+	const { image, tickerSettings, choiceCardAmounts, newsletterSignup } =
+		variant;
 
 	const defaultThreeTierAmount = getDefaultThreeTierAmount(countryCode);
 	const [
@@ -314,20 +304,11 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 			? 'US_THREE_TIER_CHOICE_CARDS'
 			: 'THREE_TIER_CHOICE_CARDS';
 
-	useEffect(() => {
-		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
-			const localAmounts =
-				choiceCardAmounts.amountsCardData[
-					choiceCardAmounts.defaultContributionType
-				];
-			const defaultAmount = localAmounts.defaultAmount;
+	const isNonVatCompliantCountry =
+		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
 
-			setChoiceCardSelection({
-				frequency: choiceCardAmounts.defaultContributionType,
-				amount: defaultAmount,
-			});
-		}
-	}, [showChoiceCards, choiceCardAmounts]);
+	const showChoiceCards =
+		variant.showChoiceCards && !isNonVatCompliantCountry;
 
 	const { hasOptedOut, onArticleCountOptIn, onArticleCountOptOut } =
 		useArticleCountOptOut();
@@ -496,8 +477,6 @@ const ContributionsEpic: ReactComponent<EpicProps> = ({
 					showChoiceCards={showChoiceCards}
 					amountsTestName={choiceCardAmounts?.testName}
 					amountsVariantName={choiceCardAmounts?.variantName}
-					choiceCardSelection={choiceCardSelection}
-					showThreeTierChoiceCards={showChoiceCards}
 					threeTierChoiceCardSelectedAmount={
 						threeTierChoiceCardSelectedAmount
 					}

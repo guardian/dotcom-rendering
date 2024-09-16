@@ -5,7 +5,6 @@
  */
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types/props/epic';
 import { useState } from 'react';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { ContributionsEpicButtons } from './ContributionsEpicButtons';
 import { ContributionsEpicReminder } from './ContributionsEpicReminder';
@@ -16,8 +15,6 @@ interface OnReminderOpen {
 
 type ContributionsEpicCtasProps = EpicProps & {
 	showChoiceCards?: boolean;
-	choiceCardSelection?: ChoiceCardSelection;
-	showThreeTierChoiceCards?: boolean;
 	threeTierChoiceCardSelectedAmount?: number;
 	amountsTestName?: string;
 	amountsVariantName?: string;
@@ -35,8 +32,6 @@ export const ContributionsEpicCtas: ReactComponent<
 	onReminderOpen,
 	fetchEmail,
 	showChoiceCards,
-	choiceCardSelection,
-	showThreeTierChoiceCards,
 	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
@@ -85,8 +80,6 @@ export const ContributionsEpicCtas: ReactComponent<
 				isReminderActive={isReminderActive}
 				isSignedIn={Boolean(fetchedEmail)}
 				showChoiceCards={showChoiceCards}
-				choiceCardSelection={choiceCardSelection}
-				showThreeTierChoiceCards={showThreeTierChoiceCards}
 				threeTierChoiceCardSelectedAmount={
 					threeTierChoiceCardSelectedAmount
 				}
