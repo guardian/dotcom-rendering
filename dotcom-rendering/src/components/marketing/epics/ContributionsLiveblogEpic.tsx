@@ -18,7 +18,6 @@ import {
 import type { EpicProps } from '@guardian/support-dotcom-components/dist/shared/src/types';
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
 import {
@@ -138,26 +137,13 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 	onReminderOpen,
 	fetchEmail,
 }: EpicProps): JSX.Element => {
-	const { showChoiceCards, choiceCardAmounts, newsletterSignup } = variant;
+	const { newsletterSignup } = variant;
 
-	const [choiceCardSelection, setChoiceCardSelection] = useState<
-		ChoiceCardSelection | undefined
-	>();
+	const isNonVatCompliantCountry =
+		variant.choiceCardAmounts?.testName === 'VAT_COMPLIANCE';
 
-	useEffect(() => {
-		if (showChoiceCards && choiceCardAmounts?.amountsCardData) {
-			const localAmounts =
-				choiceCardAmounts.amountsCardData[
-					choiceCardAmounts.defaultContributionType
-				];
-			const defaultAmount = localAmounts.defaultAmount;
-
-			setChoiceCardSelection({
-				frequency: choiceCardAmounts.defaultContributionType,
-				amount: defaultAmount,
-			});
-		}
-	}, [showChoiceCards, choiceCardAmounts]);
+	const showChoiceCards =
+		variant.showChoiceCards && !isNonVatCompliantCountry;
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
@@ -208,6 +194,11 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 		return <></>;
 	}
 
+	const variantOfChoiceCard =
+		countryCode === 'US'
+			? 'US_THREE_TIER_CHOICE_CARDS'
+			: 'THREE_TIER_CHOICE_CARDS';
+
 	return (
 		<div data-testid="contributions-liveblog-epic" ref={setNode}>
 			{!!cleanHeading && (
@@ -237,7 +228,7 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 								setSelectedAmount={
 									setThreeTierChoiceCardSelectedAmount
 								}
-								variantOfChoiceCard="THREE_TIER_CHOICE_CARDS"
+								variantOfChoiceCard={variantOfChoiceCard}
 							/>
 						)}
 						<ContributionsEpicCtas
@@ -249,8 +240,6 @@ export const ContributionsLiveblogEpic: ReactComponent<EpicProps> = ({
 							fetchEmail={fetchEmail}
 							submitComponentEvent={submitComponentEvent}
 							showChoiceCards={showChoiceCards}
-							choiceCardSelection={choiceCardSelection}
-							showThreeTierChoiceCards={showChoiceCards}
 							threeTierChoiceCardSelectedAmount={
 								threeTierChoiceCardSelectedAmount
 							}

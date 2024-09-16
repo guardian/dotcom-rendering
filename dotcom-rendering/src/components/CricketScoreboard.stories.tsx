@@ -1,4 +1,3 @@
-import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source/foundations';
 import type { Meta, StoryObj } from '@storybook/react';
 import { match } from '../../fixtures/manual/cricket-scoreboard';
@@ -19,11 +18,6 @@ type Story = StoryObj<typeof CricketScoreboard>;
 export const defaultStory: Story = {
 	name: 'Cricket Scoreboard',
 	args: {
-		format: {
-			display: ArticleDisplay.Standard,
-			design: ArticleDesign.LiveBlog,
-			theme: Pillar.Sport,
-		},
 		match,
 		scorecardUrl: '/test',
 	},

@@ -16,7 +16,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
 import { hasSetReminder } from '../lib/reminders';
 import {
 	addChoiceCardsParams,
@@ -142,8 +141,6 @@ interface ContributionsEpicButtonsProps {
 	showChoiceCards?: boolean;
 	amountsTestName?: string;
 	amountsVariantName?: string;
-	choiceCardSelection?: ChoiceCardSelection;
-	showThreeTierChoiceCards?: boolean;
 	threeTierChoiceCardSelectedAmount?: number;
 	numArticles: number;
 	variantOfChoiceCard?: string;
@@ -158,8 +155,6 @@ export const ContributionsEpicButtons = ({
 	isReminderActive,
 	isSignedIn,
 	showChoiceCards,
-	choiceCardSelection,
-	showThreeTierChoiceCards,
 	threeTierChoiceCardSelectedAmount,
 	amountsTestName,
 	amountsVariantName,
@@ -188,7 +183,7 @@ export const ContributionsEpicButtons = ({
 
 	const getChoiceCardCta = (cta: Cta): Cta => {
 		if (
-			showThreeTierChoiceCards &&
+			showChoiceCards &&
 			variantOfChoiceCard === 'US_THREE_TIER_CHOICE_CARDS' &&
 			!isUndefined(threeTierChoiceCardSelectedAmount)
 		) {
@@ -222,16 +217,6 @@ export const ContributionsEpicButtons = ({
 					cta.baseUrl,
 					'MONTHLY',
 					threeTierChoiceCardSelectedAmount,
-				),
-			};
-		}
-		if (choiceCardSelection) {
-			return {
-				text: cta.text,
-				baseUrl: addChoiceCardsParams(
-					cta.baseUrl,
-					choiceCardSelection.frequency,
-					choiceCardSelection.amount,
 				),
 			};
 		}
