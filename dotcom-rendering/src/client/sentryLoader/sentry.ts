@@ -55,13 +55,15 @@ if (
 	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
 }
 
-export const reportError = (
+export type ReportError = (
 	error: Error,
 	feature: string,
 	tags?: {
 		[key: string]: string;
 	},
-): void => {
+) => void;
+
+export const reportError: ReportError = (error, feature, tags) => {
 	Sentry.withScope(() => {
 		Sentry.setTag('feature', feature);
 		if (tags) {

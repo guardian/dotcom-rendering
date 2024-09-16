@@ -1,6 +1,7 @@
 import { isAdBlockInUse } from '@guardian/commercial';
 import { log, startPerformanceMeasure } from '@guardian/libs';
 import '../webpackPublicPath';
+import type { ReportError } from './sentry';
 
 /** Sentry errors are only sent to the console */
 const stubSentry = (): void => {
@@ -8,6 +9,15 @@ const stubSentry = (): void => {
 		console.error(error);
 	};
 };
+
+type ReportErrorError = Parameters<ReportError>[0];
+type ReportErrorFeature = Parameters<ReportError>[1];
+type ReportErrorTags = Parameters<ReportError>[2];
+type ErrorQueue = Array<{
+	error: ReportErrorError;
+	feature: ReportErrorFeature;
+	tags?: ReportErrorTags;
+}>;
 
 /**
  * Set up error handlers to inject and call Sentry.
@@ -19,12 +29,12 @@ const loadSentryOnError = (): void => {
 		// to ensure injection only happens once and to capture any other errors that
 		// might happen while this script is loading
 		let injected = false;
-		const queue: Error[] = [];
+		const errorQueue: ErrorQueue = [];
 
 		// Function that gets called when an error happens before Sentry is ready
 		const injectSentry = async (
 			error: Error | undefined,
-			feature: string,
+			feature: string = 'unknown',
 			tags?: { [key: string]: string },
 		) => {
 			const { endPerformanceMeasure } = startPerformanceMeasure(
@@ -33,7 +43,7 @@ const loadSentryOnError = (): void => {
 				'inject',
 			);
 			// Remember this error for later
-			if (error) queue.push(error);
+			if (error) errorQueue.push({ error, feature, tags });
 
 			// Only inject once
 			if (injected) {
@@ -65,9 +75,15 @@ const loadSentryOnError = (): void => {
 
 			// Now that we have the real reportError function available,
 			// send any queued errors
-			while (queue.length) {
-				const queuedError = queue.shift();
-				if (queuedError) reportError(queuedError, feature);
+			while (errorQueue.length) {
+				const queuedError = errorQueue.shift();
+				if (queuedError) {
+					reportError(
+						queuedError.error,
+						queuedError.feature,
+						queuedError.tags,
+					);
+				}
 			}
 			log('dotcom', `Injected Sentry in ${endPerformanceMeasure()}ms`);
 		};
@@ -75,15 +91,14 @@ const loadSentryOnError = (): void => {
 		// This is how we lazy load Sentry. We setup custom functions and
 		// listeners to inject Sentry when an error happens
 		window.onerror = (message, url, line, column, error) =>
-			injectSentry(error, 'unknown');
+			injectSentry(error);
 		window.onunhandledrejection = (
 			event: undefined | { reason?: unknown },
-		) =>
-			event?.reason instanceof Error &&
-			injectSentry(event.reason, 'unknown');
+		) => event?.reason instanceof Error && injectSentry(event.reason);
 		window.guardian.modules.sentry.reportError = (error, feature, tags) => {
 			injectSentry(error, feature, tags).catch((e) =>
-				console.error(`injectSentry - error: ${String(e)}`),
+				// eslint-disable-next-line no-console -- report error in loading Sentry
+				console.error(`injectSentry error: ${String(e)}`),
 			);
 		};
 	} catch {
