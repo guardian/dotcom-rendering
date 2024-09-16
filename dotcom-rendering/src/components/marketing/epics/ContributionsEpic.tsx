@@ -24,7 +24,6 @@ import type {
 import { useEffect, useState } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
 import { useArticleCountOptOut } from '../hooks/useArticleCountOptOut';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
 import type { ReactComponent } from '../lib/ReactComponent';
 import { replaceArticleCount } from '../lib/replaceArticleCount';
 import { isProd } from '../lib/stage';

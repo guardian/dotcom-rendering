@@ -16,7 +16,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
 import { useEffect } from 'react';
 import { useIsInView } from '../../../lib/useIsInView';
-import type { ChoiceCardSelection } from '../lib/choiceCards';
 import { hasSetReminder } from '../lib/reminders';
 import {
 	addChoiceCardsParams,
