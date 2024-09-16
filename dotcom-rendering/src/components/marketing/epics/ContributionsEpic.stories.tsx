@@ -271,48 +271,6 @@ export const WithAboveArticleCountNoConsent: Story = {
 	},
 };
 
-export const WithChoiceCards: Story = {
-	name: 'ContributionsEpic with choice cards',
-	args: {
-		...meta.args,
-		variant: {
-			...props.variant,
-			secondaryCta: {
-				type: SecondaryCtaType.ContributionsReminder,
-			},
-			showReminderFields: {
-				reminderCta: 'Remind me in October',
-				reminderPeriod: '2021-10-01',
-				reminderLabel: 'October',
-			},
-			showChoiceCards: true,
-			choiceCardAmounts: {
-				testName: 'Storybook_test',
-				variantName: 'Control',
-				defaultContributionType: 'MONTHLY',
-				displayContributionType: ['ONE_OFF', 'MONTHLY', 'ANNUAL'],
-				amountsCardData: {
-					ONE_OFF: {
-						amounts: [5, 10, 15, 20],
-						defaultAmount: 5,
-						hideChooseYourAmount: false,
-					},
-					MONTHLY: {
-						amounts: [6, 12],
-						defaultAmount: 12,
-						hideChooseYourAmount: true,
-					},
-					ANNUAL: {
-						amounts: [50, 100, 150, 200],
-						defaultAmount: 100,
-						hideChooseYourAmount: true,
-					},
-				},
-			},
-		},
-	},
-};
-
 export const WithThreeTierChoiceCards: Story = {
 	name: 'ContributionsEpic with three tier choice cards',
 	args: {
