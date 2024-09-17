@@ -6205,6 +6205,10 @@ const paletteColours = {
 		light: followTextLight,
 		dark: followTextDark,
 	},
+	'--front-container-background': {
+		light: () => sourcePalette.neutral[100],
+		dark: () => sourcePalette.neutral[10],
+	},
 	'--heading-line': {
 		light: headingLineLight,
 		dark: headingLineDark,
@@ -6582,8 +6586,8 @@ const paletteColours = {
 		dark: richLinkTextDark,
 	},
 	'--section-background': {
-		light: () => sourcePalette.neutral[100],
-		dark: () => sourcePalette.neutral[7],
+		light: () => 'transparent',
+		dark: () => 'transparent',
 	},
 	'--section-background-left': {
 		light: () => 'transparent',
