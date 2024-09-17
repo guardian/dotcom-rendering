@@ -100,8 +100,6 @@ export type Props = {
 	showAge?: boolean;
 	discussionApiUrl: string;
 	discussionId?: string;
-	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
-	isDynamo?: true;
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable?: boolean;
@@ -242,7 +240,6 @@ export const Card = ({
 	showAge = true,
 	discussionApiUrl,
 	discussionId,
-	isDynamo,
 	isCrossword,
 	isOnwardContent = false,
 	isExternalLink,
@@ -489,7 +486,6 @@ export const Card = ({
 							<Slideshow
 								images={media.slideshowImages}
 								imageSize={imageSize}
-								isDynamo={isDynamo}
 							/>
 						)}
 						{media.type === 'avatar' && (
@@ -731,7 +727,6 @@ export const Card = ({
 								>
 									<LatestLinks
 										id={linkTo}
-										isDynamo={isDynamo}
 										direction={supportingContentAlignment}
 										containerPalette={containerPalette}
 										absoluteServerTimes={

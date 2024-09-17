@@ -15,24 +15,18 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	discussionApiUrl: string;
 	discussionId: string;
-	isDynamo?: true;
 	isOnwardContent?: boolean;
 };
 
-const getCommentCountColour = (
-	isDynamo?: boolean,
-	isOnwardContent?: boolean,
-) => {
-	if (isDynamo) {
-		return themePalette('--card-headline-trail-text');
-	} else if (isOnwardContent) {
+const getCommentCountColour = (isOnwardContent?: boolean) => {
+	if (isOnwardContent) {
 		return themePalette('--card-footer-onwards-content');
 	} else {
 		return themePalette('--card-footer-text');
 	}
 };
 
-const containerStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
+const containerStyles = (isOnwardContent?: boolean) => css`
 	display: flex;
 	flex-direction: row;
 	${textSansBold12};
@@ -43,16 +37,16 @@ const containerStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
 	 */
 	line-height: 1.15;
 	margin-top: -4px;
-	color: ${getCommentCountColour(isDynamo, isOnwardContent)};
+	color: ${getCommentCountColour(isOnwardContent)};
 `;
 
-const svgStyles = (isDynamo?: boolean, isOnwardContent?: boolean) => css`
+const svgStyles = (isOnwardContent?: boolean) => css`
 	svg {
 		margin-bottom: -5px;
 		height: 14px;
 		width: 14px;
 		margin-right: 2px;
-		fill: ${getCommentCountColour(isDynamo, isOnwardContent)};
+		fill: ${getCommentCountColour(isOnwardContent)};
 	}
 `;
 
@@ -76,7 +70,6 @@ export const CardCommentCount = ({
 	containerPalette,
 	discussionApiUrl,
 	discussionId,
-	isDynamo,
 	isOnwardContent,
 }: Props) => {
 	const count = useCommentCount(discussionApiUrl, discussionId);
@@ -84,8 +77,8 @@ export const CardCommentCount = ({
 	const { long, short } = formatCount(count);
 	return (
 		<ContainerOverrides containerPalette={containerPalette}>
-			<div css={containerStyles(isDynamo, isOnwardContent)}>
-				<div css={svgStyles(isDynamo, isOnwardContent)}>
+			<div css={containerStyles(isOnwardContent)}>
+				<div css={svgStyles(isOnwardContent)}>
 					<CommentIcon />
 				</div>
 				<div css={longStyles}>{long}</div>

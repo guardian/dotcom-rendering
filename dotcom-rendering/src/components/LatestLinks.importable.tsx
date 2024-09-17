@@ -17,7 +17,6 @@ type Props = {
 	id: string;
 	direction: 'horizontal' | 'vertical';
 	absoluteServerTimes: boolean;
-	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
 };
 
@@ -90,7 +89,6 @@ const extractAboutThreeLines = (text: string) =>
 export const LatestLinks = ({
 	id,
 	direction,
-	isDynamo,
 	containerPalette,
 	absoluteServerTimes,
 }: Props) => {
@@ -107,9 +105,7 @@ export const LatestLinks = ({
 	});
 
 	/** Reserve space for the latest links to avoid CLS while loading */
-	const minHeight = isDynamo
-		? `calc(${space[1]}px + 4 * ${lineHeights.regular}em);`
-		: `calc(4 * ${lineHeights.regular}em);`;
+	const minHeight = `calc(4 * ${lineHeights.regular}em);`;
 
 	const ulStyle = css`
 		display: flex;
@@ -123,9 +119,7 @@ export const LatestLinks = ({
 			css={[
 				ulStyle,
 				revealStyles,
-				!!isDynamo || direction === 'horizontal'
-					? horizontal
-					: vertical,
+				direction === 'horizontal' ? horizontal : vertical,
 				css`
 					color: ${themePalette('--card-headline-trail-text')};
 				`,

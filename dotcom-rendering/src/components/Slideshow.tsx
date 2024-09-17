@@ -93,19 +93,6 @@ const captionStyles = css`
 	padding: 60px ${space[2]}px ${space[2]}px;
 `;
 
-const additionalDynamoCaptionStyles = css`
-	${from.tablet} {
-		top: 0;
-		bottom: initial;
-		padding-top: ${space[2]}px;
-		background: linear-gradient(
-			to top,
-			rgba(0, 0, 0, 0) 0%,
-			rgba(0, 0, 0, 0.8) 100%
-		);
-	}
-`;
-
 /**
  * Slideshow
  * =========
@@ -139,7 +126,6 @@ const additionalDynamoCaptionStyles = css`
 export const Slideshow = ({
 	images,
 	imageSize,
-	isDynamo = false,
 	fade = 1,
 	display = 5,
 }: {
@@ -147,7 +133,6 @@ export const Slideshow = ({
 	imageSize: ImageSizeType;
 	fade?: number;
 	display?: number;
-	isDynamo?: boolean;
 }) => (
 	<>
 		{takeFirst(images, 10).map((slideshowImage, index, { length }) => {
@@ -188,7 +173,6 @@ export const Slideshow = ({
 						<figcaption
 							css={[
 								captionStyles,
-								isDynamo && additionalDynamoCaptionStyles,
 								// Don't show captions on mobile for small images
 								imageSize === 'small' && hideOnMobile,
 							]}

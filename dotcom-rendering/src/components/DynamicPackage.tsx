@@ -93,7 +93,6 @@ const Card100 = ({
 					imagePositionOnDesktop="bottom"
 					imagePositionOnMobile="bottom"
 					imageSize="large"
-					isDynamo={containerPalette && true}
 					supportingContent={limitSupportingContent(cards[0])}
 					supportingContentAlignment="horizontal"
 					imageLoading={imageLoading}
@@ -446,7 +445,6 @@ const Card75_ColumnOfCards25 = ({
 						imagePositionOnMobile="bottom"
 						imageSize="large"
 						supportingContent={limitSupportingContent(card)}
-						isDynamo={true}
 						imageLoading={imageLoading}
 					/>
 				</LI>
