@@ -15,19 +15,19 @@ import type {
 	Tracking,
 } from '@guardian/support-dotcom-components/dist/shared/src/types/props/shared';
 import { useEffect } from 'react';
-import { useIsInView } from '../../../lib/useIsInView';
-import { hasSetReminder } from '../lib/reminders';
+import { useIsInView } from '../../../../lib/useIsInView';
+import { hasSetReminder } from '../../lib/reminders';
 import {
 	addChoiceCardsParams,
 	addRegionIdAndTrackingParamsToSupportUrl,
 	isSupportUrl,
-} from '../lib/tracking';
-import { EpicButton } from './EpicButton';
+} from '../../lib/tracking';
 import {
 	getReminderViewEvent,
 	OPHAN_COMPONENT_EVENT_CTAS_VIEW,
 	OPHAN_COMPONENT_EVENT_REMINDER_OPEN,
-} from './utils/ophan';
+} from '../utils/ophan';
+import { EpicButton } from './EpicButton';
 
 const paymentImageStyles = css`
 	display: inline-block;

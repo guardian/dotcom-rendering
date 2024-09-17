@@ -5,14 +5,14 @@
  */
 import type { OphanComponentEvent } from '@guardian/libs';
 import type { ReminderFields } from '@guardian/support-dotcom-components/dist/shared/src/lib';
-import { useContributionsReminderSignup } from '../hooks/useContributionsReminderSignup';
-import type { ReactComponent } from '../lib/ReactComponent';
-import { ContributionsEpicReminderSignedIn } from './ContributionsEpicReminderSignedIn';
-import { ContributionsEpicReminderSignedOut } from './ContributionsEpicReminderSignedOut';
+import { useContributionsReminderSignup } from '../../hooks/useContributionsReminderSignup';
+import type { ReactComponent } from '../../lib/ReactComponent';
 import {
 	OPHAN_COMPONENT_EVENT_REMINDER_CLOSE,
 	OPHAN_COMPONENT_EVENT_REMINDER_SET,
-} from './utils/ophan';
+} from '../utils/ophan';
+import { ContributionsEpicReminderSignedIn } from './ContributionsEpicReminderSignedIn';
+import { ContributionsEpicReminderSignedOut } from './ContributionsEpicReminderSignedOut';
 
 // --- Types --- //
 
